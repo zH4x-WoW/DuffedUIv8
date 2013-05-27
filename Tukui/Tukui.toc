@@ -1,0 +1,20 @@
+﻿## Interface: 50300
+## Author: Tukz & Hydra
+## Version: 16.00
+## Title: |cffC495DDTukui|r
+## Notes: UI of awesomeness!
+## SavedVariables: TukuiData
+## SavedVariablesPerCharacter: TukuiDataPerChar
+## OptionalDeps: Clique
+## X-oUF: oUFTukui
+## Website: http://www.tukui.org
+## X-Tukui-ProjectID: -1
+## X-Tukui-ProjectFolders: Tukui
+
+Core\Init.lua
+Libs\Init.xml
+Config\Init.xml
+Medias\Medias.lua
+Locales\Init.xml
+Core\Init.xml
+Modules\Init.xml
