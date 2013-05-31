@@ -64,10 +64,11 @@
 	
 	<!-- UnitFrames -->
 	<Script file="UnitFrames\Core.lua"/>
-	<Script file="UnitFrames\Player.lua"/>
-	<Script file="UnitFrames\Target.lua"/>
-	<Script file="UnitFrames\TargetOfTarget.lua"/>
-	<Script file="UnitFrames\Pet.lua"/>
+	<Script file="UnitFrames\Tags.lua"/>
+	<Script file="UnitFrames\Units\Player.lua"/>
+	<Script file="UnitFrames\Units\Target.lua"/>
+	<Script file="UnitFrames\Units\TargetOfTarget.lua"/>
+	<Script file="UnitFrames\Units\Pet.lua"/>
 	
 	<!-- Tooltips -->
 	<Script file="Tooltips\Tooltips.lua"/>

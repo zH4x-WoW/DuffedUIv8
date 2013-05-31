@@ -124,7 +124,6 @@ L.UnitFrames.Ghost = "Ghost"
 L.ActionBars = {} -- Action Bars Locales
 ------------------------------------------------
 
--- Obviously these don't need to be localized, but they need UTF8 encoding. If you wanna put these somewhere else just move em.
 L.ActionBars.ArrowLeft = "◄"
 L.ActionBars.ArrowRight = "►"
 L.ActionBars.ArrowUp = "▲ ▲ ▲ ▲ ▲"
