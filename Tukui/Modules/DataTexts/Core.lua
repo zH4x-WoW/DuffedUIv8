@@ -7,8 +7,9 @@ local TukuiDT = CreateFrame("Frame")
 local Panels = T["Panels"]
 local DataTextLeft = Panels.DataTextLeft
 local DataTextRight = Panels.DataTextRight
-local MinimapDataTextOne = Panels.MinimapDataTextOne
-local MinimapDataTextTwo = Panels.MinimapDataTextTwo
+
+local MinimapDataTextOne
+local MinimapDataTextTwo
 
 TukuiDT.NumAnchors = 6
 TukuiDT.Font = C.Media.Font
@@ -56,13 +57,14 @@ local RemoveData = function(self)
 end
 
 function TukuiDT:CreateAnchors()
+	MinimapDataTextOne = Panels.MinimapDataTextOne
+	MinimapDataTextTwo = Panels.MinimapDataTextTwo
+
 	if (MinimapDataTextOne and MinimapDataTextTwo) then
 		self.NumAnchors = self.NumAnchors + 2
 	end
-	
-	local Num = self.NumAnchors
 
-	for i = 1, Num do
+	for i = 1, self.NumAnchors do
 		local Frame = CreateFrame("Button", nil, UIParent)
 		Frame:Size((DataTextLeft:GetWidth() / 3) - 1, DataTextLeft:GetHeight() - 2)
 		Frame:SetFrameLevel(DataTextLeft:GetFrameLevel() + 1)
@@ -82,10 +84,10 @@ function TukuiDT:CreateAnchors()
 			Frame:Point("LEFT", DataTextLeft, 1, 1)
 		elseif (i == 4) then
 			Frame:Point("LEFT", DataTextRight, 1, 1)
-		elseif (i == 7 and MinimapDataTextOne) then
+		elseif (i == 7) then
 			Frame:Point("CENTER", MinimapDataTextOne, 0, 0)
 			Frame:Size(MinimapDataTextOne:GetWidth() - 2, MinimapDataTextOne:GetHeight() - 2)
-		elseif (i == 8 and MinimapDataTextTwo) then
+		elseif (i == 8) then
 			Frame:Point("CENTER", MinimapDataTextTwo, 0, 0)
 			Frame:Size(MinimapDataTextTwo:GetWidth() - 2, MinimapDataTextTwo:GetHeight() - 2)
 		else
@@ -204,7 +206,7 @@ function TukuiDT:Load()
 	if (not TukuiDataPerChar) then
 		TukuiDataPerChar = {}
 	end
-	
+
 	if (not TukuiDataPerChar.Texts) then
 		-- defaults, Err, Gonna have to localize these.
 		TukuiDataPerChar.Texts = {}
@@ -237,10 +239,10 @@ function TukuiDT:Load()
 	end
 end
 
-TukuiDT:RegisterEvent("PLAYER_ENTERING_WORLD")
+TukuiDT:RegisterEvent("ADDON_LOADED")
 TukuiDT:RegisterEvent("PLAYER_LOGOUT")
-TukuiDT:SetScript("OnEvent", function(self, event)
-	if (event == "PLAYER_ENTERING_WORLD") then
+TukuiDT:SetScript("OnEvent", function(self, event, addon)
+	if (addon and addon == "Tukui") then
 		self:UnregisterEvent(event)
 		self:Load()
 	else

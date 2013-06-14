@@ -3,8 +3,6 @@ local T, C, L = select(2, ...):unpack()
 -- Hydra note: Since this file is going to be doing a lot of math/formatting, lets use locals for speed/cpu usage
 -- This means no calling functions as methods :P ("string"):format(...) or ("string"):gsub(...) should be format("string", ...) and gsub("string", ...) etc.
 
--- Also I think we should have seperate files for unitframe functions, and general core functions, For the sake of organization. Eclipse used to do this and I really liked how clean it was.
-
 local reverse = string.reverse
 local match = string.match
 local modf = math.modf

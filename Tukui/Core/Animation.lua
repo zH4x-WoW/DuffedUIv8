@@ -448,6 +448,12 @@ local Animation = function(self, handler, ...)
 	end
 end
 
+-- Erm, want a better way to do this =/
+-- Filter out non-objects
+local BlackList = {
+	"FontString",
+}
+
 -- Add our new methods to the Frame metatable
 local Meta = getmetatable(Frame).__index
 

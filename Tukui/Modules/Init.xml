@@ -73,4 +73,9 @@
 	<!-- Tooltips -->
 	<Script file="Tooltips\Tooltips.lua"/>
 	<Script file="Tooltips\IdAndCount.lua"/>
+	
+	<!-- Misc. -->
+	<Script file="Miscellaneous\AltPowerBar.lua"/>
+	<Script file="Miscellaneous\ThreatBar.lua"/>
+	<Script file="Miscellaneous\GarbageCollection.lua"/>
 </Ui>
