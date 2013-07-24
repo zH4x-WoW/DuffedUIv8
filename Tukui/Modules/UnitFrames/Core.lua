@@ -19,7 +19,7 @@ local UnitPlayerControlled = UnitPlayerControlled
 local UnitIsGhost = UnitIsGhost
 local UnitIsDead = UnitIsDead
 local UnitPowerType = UnitPowerType
-local Class = select(2, UnitClass("player"))
+local _, Class = UnitClass("player")
 
 TukuiUnitFrames.Units = {}
 TukuiUnitFrames.Backdrop = {
@@ -31,9 +31,9 @@ function TukuiUnitFrames:ShortValue()
 	if self <= 999 then
 		return self
 	end
-	
+
 	local Value
-	
+
 	if self >= 1000000 then
 		Value = format("%.1fm", self/1000000)
 		return Value
@@ -45,7 +45,7 @@ end
 
 function TukuiUnitFrames:UTF8Sub(i, dots)
 	if not self then return end
-	
+
 	local Bytes = self:len()
 	if (Bytes <= i) then
 		return self
@@ -77,10 +77,10 @@ end
 function TukuiUnitFrames:MouseOnPlayer()
 	local Status = self.Status
 	local MouseOver = GetMouseFocus()
-	
+
 	if (MouseOver == self) then
 		Status:Show()
-		
+
 		if (UnitIsPVP("player")) then
 			Status:SetText("PVP")
 		end
@@ -93,14 +93,14 @@ end
 function TukuiUnitFrames:UpdateClassBar(script, x, y)
 	local Frame = self:GetParent()
 	local Shadow = Frame.Shadow
-	
+
 	if (script == "OnShow") then
 		if (Shadow) then
-			Shadow:Point("TOPLEFT", -4, 12)
+			Shadow:Point("TOPLEFT", x, y)
 		end
 	else
 		if (Shadow) then
-			Shadow:Point("TOPLEFT", -4, 4)
+			Shadow:Point("TOPLEFT", x, y)
 		end
 	end
 end
@@ -123,9 +123,9 @@ function TukuiUnitFrames:CheckInterrupt(unit)
 	end
 
 	if (self.interrupt and UnitCanAttack("player", unit)) then
-		self:SetStatusBarColor(1, 0, 0, 0.5)	
+		self:SetStatusBarColor(1, 0, 0, 0.5)
 	else
-		self:SetStatusBarColor(0.31, 0.45, 0.63, 0.5)		
+		self:SetStatusBarColor(0.31, 0.45, 0.63, 0.5)
 	end
 end
 
@@ -169,7 +169,7 @@ function TukuiUnitFrames:PostUpdateHealth(unit, min, max)
 			else
 				r, g, b = 75/255,  175/255, 76/255
 				self:SetStatusBarColor(r, g, b)
-			end					
+			end
 		end
 
 		if (min ~= max) then
@@ -231,7 +231,7 @@ function TukuiUnitFrames:PostUpdatePower(unit, min, max)
 			end
 		end
 	end
-	
+
 	if (Parent.Name and unit == "target") then
 		TukuiUnitFrames.UpdateNamePosition(Parent)
 	end
@@ -240,7 +240,7 @@ end
 function TukuiUnitFrames:CreateAuraTimer(elapsed)
 	if (self.TimeLeft) then
 		self.Elapsed = (self.Elapsed or 0) + elapsed
-		
+
 		if self.Elapsed >= 0.1 then
 			if not self.First then
 				self.TimeLeft = self.TimeLeft - self.Elapsed
@@ -248,7 +248,7 @@ function TukuiUnitFrames:CreateAuraTimer(elapsed)
 				self.TimeLeft = self.TimeLeft - GetTime()
 				self.First = false
 			end
-			
+
 			if self.TimeLeft > 0 then
 				local Time = T.FormatTime(self.TimeLeft)
 				self.Remaining:SetText(Time)
@@ -262,7 +262,7 @@ function TukuiUnitFrames:CreateAuraTimer(elapsed)
 				self.Remaining:Hide()
 				self:SetScript("OnUpdate", nil)
 			end
-			
+
 			self.Elapsed = 0
 		end
 	end
@@ -270,51 +270,51 @@ end
 
 function TukuiUnitFrames:PostCreateAura(button)
 	button:SetTemplate("Default")
-	
+
 	button.Remaining = button:CreateFontString(nil, "OVERLAY")
 	button.Remaining:SetFont(C.Media.Font, 12, "THINOUTLINE")
 	button.Remaining:Point("CENTER", 1, 0)
-	
+
 	button.cd.noOCC = true
 	button.cd.noCooldownCount = true
 	button.cd:SetReverse()
 	button.cd:SetFrameLevel(button:GetFrameLevel() + 1)
 	button.cd:ClearAllPoints()
 	button.cd:SetInside()
-	
+
 	button.icon:SetInside()
 	button.icon:SetTexCoord(unpack(T.IconCoord))
 	button.icon:SetDrawLayer('ARTWORK')
-	
+
 	button.count:Point("BOTTOMRIGHT", 3, 3)
 	button.count:SetJustifyH("RIGHT")
 	button.count:SetFont(C.Media.Font, 9, "THICKOUTLINE")
 	button.count:SetTextColor(0.84, 0.75, 0.65)
-	
+
 	button.OverlayFrame = CreateFrame("Frame", nil, button, nil)
-	button.OverlayFrame:SetFrameLevel(button.cd:GetFrameLevel() + 1)	
+	button.OverlayFrame:SetFrameLevel(button.cd:GetFrameLevel() + 1)
 	button.overlay:SetParent(button.OverlayFrame)
 	button.count:SetParent(button.OverlayFrame)
 	button.Remaining:SetParent(button.OverlayFrame)
-			
+
 	button.Glow = CreateFrame("Frame", nil, button)
 	button.Glow:SetOutside()
 	button.Glow:SetFrameStrata("BACKGROUND")	
 	button.Glow:SetBackdrop{edgeFile = C.Media.Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
-	
-	button.Animation = button:CreateAnimationGroup()
-	button.Animation:SetLooping("BOUNCE")
-	button.Animation.FadeOut = Animation:CreateAnimation("Alpha")
-	button.Animation.FadeOut:SetChange(-.9)
-	button.Animation.FadeOut:SetDuration(.6)
-	button.Animation.FadeOut:SetSmoothing("IN_OUT")
+
+	--button.Animation = button:CreateAnimationGroup()
+	--button.Animation:SetLooping("BOUNCE")
+	--button.Animation.FadeOut = Animation:CreateAnimation("Alpha")
+	--button.Animation.FadeOut:SetChange(-.9)
+	--button.Animation.FadeOut:SetDuration(.6)
+	--button.Animation.FadeOut:SetSmoothing("IN_OUT")
 end
 
 function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
 	local _, _, _, _, DType, Duration, ExpirationTime, UnitCaster, IsStealable = UnitAura(unit, index, button.filter)
-	
+
 	if button then
 		if(button.filter == "HARMFUL") then
 			if(not UnitIsFriend("player", unit) and button.owner ~= "player" and button.owner ~= "vehicle") then
@@ -327,24 +327,24 @@ function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isD
 			end
 		else
 			if (IsStealable or dtype == "Magic") and not UnitIsFriend("player", unit) and not button.Animation.Playing then
-				button.Animation:Play()
-				button.Animation.Playing = true
+				--button.Animation:Play()
+				--button.Animation.Playing = true
 			else
-				button.Animation:Stop()
-				button.Animation.Playing = false
+				--button.Animation:Stop()
+				--button.Animation.Playing = false
 			end
 		end
-		
+
 		if Duration and Duration > 0 then
-			icon.Remaining:Show()
+			--icon.Remaining:Show()
 		else
-			icon.Remaining:Hide()
+			--icon.Remaining:Hide()
 		end
-	 
-		icon.Duration = duration
-		icon.TimeLeft = expirationTime
-		icon.First = true
-		icon:SetScript("OnUpdate", TukuiUnitFrames.CreateAuraTimer)
+
+		--icon.Duration = duration
+		--icon.TimeLeft = expirationTime
+		--icon.First = true
+		--icon:SetScript("OnUpdate", TukuiUnitFrames.CreateAuraTimer)
 	end
 end
 
@@ -363,8 +363,12 @@ function TukuiUnitFrames:Style(unit)
 		TukuiUnitFrames.TargetOfTarget(self)
 	elseif unit == "pet" then
 		TukuiUnitFrames.Pet(self)
+	elseif unit == "focus" then
+		TukuiUnitFrames.Focus(self)
+	elseif unit == "focustarget" then
+		TukuiUnitFrames.FocusTarget(self)
 	end
-	
+
 	return self
 end
 
@@ -372,7 +376,7 @@ function TukuiUnitFrames:CreateAnchor()
 	local Anchor = CreateFrame("Frame", nil, UIParent)
 	Anchor:SetPoint("TOPLEFT", Panels.ActionBar2)
 	Anchor:SetPoint("BOTTOMRIGHT", Panels.ActionBar3)
-	
+
 	TukuiUnitFrames.Anchor = Anchor
 end
 
@@ -381,7 +385,7 @@ function TukuiUnitFrames:CreateUnits()
 	Player:SetPoint("BOTTOMLEFT", TukuiUnitFrames.Anchor, "TOPLEFT", 0, 8)
 	Player:SetParent(Panels.PetBattleHider)
 	Player:Size(250, 57)
-	
+
 	local Target = oUF:Spawn("target")
 	Target:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 8)
 	Target:SetParent(Panels.PetBattleHider)
@@ -391,16 +395,28 @@ function TukuiUnitFrames:CreateUnits()
 	TargetOfTarget:SetPoint("BOTTOM", TukuiUnitFrames.Anchor, "TOP", 0, 8)
 	TargetOfTarget:SetParent(Panels.PetBattleHider)
 	TargetOfTarget:Size(129, 36)
-	
+
 	local Pet = oUF:Spawn("pet")
 	Pet:SetParent(Panels.PetBattleHider)
 	Pet:SetPoint("BOTTOM", TukuiUnitFrames.Anchor, "TOP", 0, 49)
 	Pet:Size(129, 36)
-	
+
+	local Focus = oUF:Spawn("focus")
+	Focus:SetPoint("BOTTOMLEFT", TukuiUnitFrames.Anchor, "TOPLEFT", 0, 300)
+	Focus:SetParent(Panels.PetBattleHider)
+	Focus:Size(200, 29)
+
+	local FocusTarget = oUF:Spawn("focustarget")
+	FocusTarget:SetPoint("BOTTOM", Focus, "TOP", 0, 35)
+	FocusTarget:SetParent(Panels.PetBattleHider)
+	FocusTarget:Size(200, 29)
+
 	TukuiUnitFrames.Units.Player = Player
 	TukuiUnitFrames.Units.Target = Target
 	TukuiUnitFrames.Units.TargetOfTarget = TargetOfTarget
 	TukuiUnitFrames.Units.Pet = Pet
+	TukuiUnitFrames.Units.Focus = Focus
+	TukuiUnitFrames.Units.FocusTarget = FocusTarget
 end
 
 TukuiUnitFrames:RegisterEvent("ADDON_LOADED")
@@ -408,7 +424,7 @@ TukuiUnitFrames:SetScript("OnEvent", function(self, event, addon)
 	if addon ~= "Tukui" then
 		return
 	end
-	
+
 	oUF:RegisterStyle("Tukui", TukuiUnitFrames.Style)
 	self:CreateAnchor()
 	self:CreateUnits()

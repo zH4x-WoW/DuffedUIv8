@@ -23,42 +23,88 @@ function TukuiUnitFrames:Target()
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
 	Health:SetStatusBarTexture(C.Media.Normal)
+
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
+
+	Health:FontString("Value", C.Media.AltFont, 12)
+	Health.Value:Point("RIGHT", Panel, "RIGHT", -4, 0)
+
 	Health.frequentUpdates = true
 	Health.colorDisconnected = true
 	Health.colorTapping = true	
 	Health.colorClass = true
 	Health.colorReaction = true	
-	Health:FontString("Value", C.Media.AltFont, 12)
-	Health.Value:Point("RIGHT", Panel, "RIGHT", -4, 0)
+
 	Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
-	
-	if C.UnitFrames.Smooth then
+
+	if (C.UnitFrames.Smooth) then
 		Health.Smooth = true
 	end
-	
+
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:Height(8)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
 	Power:SetStatusBarTexture(C.Media.Normal)
-	Power.colorPower = true
-	Power.frequentUpdates = true
-	Power.colorDisconnected = true
+
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints()
 	Power.Background:SetTexture(C.Media.Normal)
 	Power.Background.multiplier = 0.3
+
 	Power:FontString("Value", C.Media.AltFont, 12)
 	Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
+
+	Power.colorPower = true
+	Power.frequentUpdates = true
+	Power.colorDisconnected = true
+
 	Power.PostUpdate = TukuiUnitFrames.PostUpdatePower
-	
+
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:Point("LEFT", Panel, "LEFT", 4, 0)
 	Name:SetJustifyH("LEFT")
 	Name:SetFont(C.Media.AltFont, 12)
+
+	------ Special Note ------
+	-- The animation is currently broken. I tried some things out but i dont get it working at the moment.
+	-- Also the icons in PostCreateAura are not working.
+	--------------------------
+	local Buffs = CreateFrame("Frame", nil, self)
+	local Debuffs = CreateFrame("Frame", nil, self)
+
+	Buffs:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
+
+	Buffs:SetHeight(26)
+	Buffs:SetWidth(252)
+	Buffs.size = 26
+	Buffs.num = 36
+	Buffs.numRow = 9
+
+	Debuffs:SetHeight(26)
+	Debuffs:SetWidth(252)
+	Debuffs:SetPoint("BOTTOMLEFT", Buffs, "TOPLEFT", -2, 2)
+	Debuffs.size = 26
+	Debuffs.num = 36
+
+	Buffs.spacing = 2
+	Buffs.initialAnchor = "TOPLEFT"
+	Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
+	Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+	Buffs.PostUpdate = TukuiUnitFrames.UpdateTargetDebuffsHeader
+
+	Debuffs.spacing = 2
+	Debuffs.initialAnchor = "TOPRIGHT"
+	Debuffs["growth-y"] = "UP"
+	Debuffs["growth-x"] = "LEFT"
+	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
+	Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+	Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
+
+	self.Buffs = Buffs
+	self.Debuffs = Debuffs
 
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong] [Tukui:DiffColor][level] [shortclassification]")
 	self.Name = Name

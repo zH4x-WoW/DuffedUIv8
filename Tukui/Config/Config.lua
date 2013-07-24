@@ -63,4 +63,5 @@ C["UnitFrames"] = {
 	["WeakBar"] = true,
 	["HealBar"] = true,
 	["StatueBar"] = true,
+	["OnlySelfDebuffs"] = true,
 }

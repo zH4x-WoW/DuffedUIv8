@@ -4,7 +4,7 @@
 
 	<!-- Panels -->
 	<Script file="Panels\Panels.lua"/>
-	
+
 	<!-- Action Bars -->
 	<Script file="ActionBars\Core.lua"/>
 	<Script file="ActionBars\Skin.lua"/>
@@ -15,19 +15,20 @@
 	<Script file="ActionBars\Bar4.lua"/>
 	<Script file="ActionBars\Bar5.lua"/>
 	<Script file="ActionBars\BarPet.lua"/>
+	<Script file="ActionBars\BarStance.lua"/>
 	<Script file="ActionBars\Buttons.lua"/>
-	
+
 	<!-- Cooldowns -->
 	<Script file="Cooldowns\Cooldowns.lua"/>
-	
+
 	<!-- Maps -->
 	<Script file="Maps\Minimap.lua"/>
-	
+
 	<!-- Auras -->
 	<Include file="Auras\Templates.xml"/>
 	<Script file="Auras\Core.lua"/>
 	<Script file="Auras\Headers.lua"/>
-	
+
 	<!-- Data Text -->
 	<Script file="DataTexts\Core.lua"/>
 	<Script file="DataTexts\Anchors.lua"/>
@@ -54,14 +55,14 @@
 	<Script file="DataTexts\Elements\Talent.lua"/>
 	<Script file="DataTexts\Elements\Time.lua"/>
 	<Script file="DataTexts\Elements\Battleground.lua"/>
-	
+
 	<!-- ChatFrames -->
 	<Script file="ChatFrames\ChatFrames.lua"/>
 	<Script file="ChatFrames\MouseScroll.lua"/>
 	<Script file="ChatFrames\WhisperSound.lua"/>
 	<Script file="ChatFrames\CopyURL.lua"/>
 	<Script file="ChatFrames\CopyButton.lua"/>
-	
+
 	<!-- UnitFrames -->
 	<Script file="UnitFrames\Core.lua"/>
 	<Script file="UnitFrames\Tags.lua"/>
@@ -69,11 +70,13 @@
 	<Script file="UnitFrames\Units\Target.lua"/>
 	<Script file="UnitFrames\Units\TargetOfTarget.lua"/>
 	<Script file="UnitFrames\Units\Pet.lua"/>
-	
+	<Script file="UnitFrames\Units\Focus.lua"/>
+	<Script file="UnitFrames\Units\FocusTarget.lua"/>
+
 	<!-- Tooltips -->
 	<Script file="Tooltips\Tooltips.lua"/>
 	<Script file="Tooltips\IdAndCount.lua"/>
-	
+
 	<!-- Misc. -->
 	<Script file="Miscellaneous\AltPowerBar.lua"/>
 	<Script file="Miscellaneous\ThreatBar.lua"/>
