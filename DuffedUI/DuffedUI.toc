@@ -1,0 +1,17 @@
+﻿## Interface: 50300
+## Author: Merith @ Zirkel des Cenarius EU
+## Version: 8.0.0
+## Title: |cffC41F3BDuffedUI|r
+## Notes: UI of awesomeness!
+## SavedVariables: DuffedUIData
+## SavedVariablesPerCharacter: DuffedUIDataPerChar
+## X-oUF: oUFDuffedUI
+## Website: http://www.tukui.org
+
+Core\Init.lua
+Libs\Init.xml
+Config\Init.xml
+Medias\Medias.lua
+Locales\Init.xml
+Core\Init.xml
+Modules\Init.xml
