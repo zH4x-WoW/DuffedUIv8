@@ -8,9 +8,9 @@ local Spacing = C["ActionBars"].ButtonSpacing
 local MultiBarLeft = MultiBarLeft
 
 function DuffedUIActionBars:CreateBar4()
-	local ActionBar4 = D.Panels.ActionBar4
+	local ActionBar5 = D.Panels.ActionBar5
 	
-	MultiBarLeft:SetParent(ActionBar4)
+	MultiBarLeft:SetParent(ActionBar5)
 	
 	for i = 1, NUM_ACTIONBAR_BUTTONS do
 		local Button = _G["MultiBarLeftButton"..i]
@@ -22,13 +22,13 @@ function DuffedUIActionBars:CreateBar4()
 		Button:SetFrameLevel(15)
 		
 		if (i == 1) then
-			Button:SetPoint("TOPLEFT", ActionBar4, Spacing, -Spacing)
+			Button:SetPoint("TOPLEFT", ActionBar5, Spacing, -Spacing)
 		else
-			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+			Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, -Spacing)
 		end
 		
-		ActionBar4["Button"..i] = Button
+		ActionBar5["Button"..i] = Button
 	end
 	
-	RegisterStateDriver(ActionBar4, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
+	RegisterStateDriver(ActionBar5, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
 end
