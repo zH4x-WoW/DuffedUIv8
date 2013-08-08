@@ -1,12 +1,12 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DuffedUIUnitFrames = D["UnitFrames"]
+local TukuiUnitFrames = T["UnitFrames"]
 
-function DuffedUIUnitFrames:TargetOfTarget()
+function TukuiUnitFrames:TargetOfTarget()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self:SetBackdrop(DuffedUIUnitFrames.Backdrop)
+	self:SetBackdrop(TukuiUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
 
@@ -16,15 +16,15 @@ function DuffedUIUnitFrames:TargetOfTarget()
 	Panel:Point("BOTTOM", self, 0, 0)
 	Panel:SetFrameLevel(2)
 	Panel:SetFrameStrata("MEDIUM")
-	Panel:SetBackdropBorderColor(C["Media"].BorderColor[1] * 0.7, C["Media"].BorderColor[2] * 0.7, C["Media"].BorderColor[3] * 0.7)
+	Panel:SetBackdropBorderColor(C.Media.BorderColor[1] * 0.7, C.Media.BorderColor[2] * 0.7, C.Media.BorderColor[3] * 0.7)
 	
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:Height(18)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
-	Health:SetStatusBarTexture(C["Media"].Normal)
+	Health:SetStatusBarTexture(C.Media.Normal)
 	Health.frequentUpdates = true
-	Health.PostUpdate = D.PostUpdatePetColor
+	Health.PostUpdate = T.PostUpdatePetColor
 	Health.colorDisconnected = true	
 	Health.colorClass = true
 	Health.colorReaction = true	
@@ -40,10 +40,10 @@ function DuffedUIUnitFrames:TargetOfTarget()
 
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER", Panel, "CENTER", 0, 0)
-	Name:SetFont(C["Media"].AltFont, 12)
+	Name:SetFont(C.Media.AltFont, 12)
 	Name:SetJustifyH("CENTER")
 	
-	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameMedium]")
+	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameMedium]")
 	self.Panel = Panel
 	self.Health = Health
 	self.Health.bg = Health.Background

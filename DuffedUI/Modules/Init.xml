@@ -66,6 +66,17 @@
 	<!-- UnitFrames -->
 	<Script file="UnitFrames\Core.lua"/>
 	<Script file="UnitFrames\Tags.lua"/>
+	<Script file="UnitFrames\Classes\Warrior.lua"/>
+	<Script file="UnitFrames\Classes\Paladin.lua"/>
+	<Script file="UnitFrames\Classes\Hunter.lua"/>
+	<Script file="UnitFrames\Classes\Rogue.lua"/>
+	<Script file="UnitFrames\Classes\Priest.lua"/>
+	<Script file="UnitFrames\Classes\DeathKnight.lua"/>
+	<Script file="UnitFrames\Classes\Shaman.lua"/>
+	<Script file="UnitFrames\Classes\Mage.lua"/>
+	<Script file="UnitFrames\Classes\Warlock.lua"/>
+	<Script file="UnitFrames\Classes\Monk.lua"/>
+	<Script file="UnitFrames\Classes\Druid.lua"/>
 	<Script file="UnitFrames\Units\Player.lua"/>
 	<Script file="UnitFrames\Units\Target.lua"/>
 	<Script file="UnitFrames\Units\TargetOfTarget.lua"/>
