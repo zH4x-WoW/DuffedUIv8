@@ -111,12 +111,12 @@ function DuffedUIActionBars:AddPanels()
 	A3:SetFrameStrata("BACKGROUND")
 	A3:SetFrameLevel(3)
 	
-	local A4 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
+	--[[local A4 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A4:Point("BOTTOM", UIParent, "BOTTOM", 0, 14)
 	A4:SetWidth((Size * 12) + (Spacing * 13))
 	A4:SetHeight((Size * 2) + (Spacing * 3))
 	A4:SetFrameStrata("BACKGROUND")
-	A4:SetFrameLevel(2)
+	A4:SetFrameLevel(2)]]--
 	
 	local A5 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A5:SetPoint("RIGHT", UIParent, "RIGHT", -28, -14)
@@ -130,18 +130,18 @@ function DuffedUIActionBars:AddPanels()
 	A6:SetPoint("RIGHT", A5, "LEFT", -6, 0)
 	
 	if (not C["ActionBars"].HideBackdrop) then
-		A1:SetTemplate()
-		A2:SetTemplate()
-		A3:SetTemplate()
-		A4:SetTemplate()
-		A5:SetTemplate()
-		A6:SetTemplate()
+		A1:SetTemplate("Transparent")
+		A2:SetTemplate("Transparent")
+		A3:SetTemplate("Transparent")
+		--A4:SetTemplate("Transparent")
+		A5:SetTemplate("Transparent")
+		A6:SetTemplate("Transparent")
 	end
 	
 	Panels.ActionBar1 = A1
 	Panels.ActionBar2 = A2
 	Panels.ActionBar3 = A3
-	Panels.ActionBar4 = A4
+	--Panels.ActionBar4 = A4
 	Panels.ActionBar5 = A5
 	Panels.PetActionBar = A6
 end
