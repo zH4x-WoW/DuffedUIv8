@@ -1,9 +1,9 @@
-local T, C, L = select(2, ...):unpack()
+local D, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function TukuiUnitFrames:AddDeathKnightFeatures()
+function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	local RunesBar = CreateFrame("Frame", nil, self)
 	local StatueBar = self.Statue
 	local Shadow = self.Shadow
@@ -11,7 +11,7 @@ function TukuiUnitFrames:AddDeathKnightFeatures()
 	-- Runes
 	RunesBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	RunesBar:Size(250, 8)
-	RunesBar:SetBackdrop(TukuiUnitFrames.Backdrop)
+	RunesBar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	RunesBar:SetBackdropColor(0, 0, 0)
 	RunesBar:SetBackdropBorderColor(0, 0, 0)
 
@@ -30,11 +30,11 @@ function TukuiUnitFrames:AddDeathKnightFeatures()
 	end
 
 	RunesBar:SetScript("OnShow", function(self) 
-		TukuiUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
 	end)
 
 	RunesBar:SetScript("OnHide", function(self)
-		TukuiUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
 	end)
 	
 	-- Statue Bar New Position
@@ -45,11 +45,11 @@ function TukuiUnitFrames:AddDeathKnightFeatures()
 	Shadow:Point("TOPLEFT", -4, 12)
 	
 	StatueBar:SetScript("OnShow", function(self) 
-		TukuiUnitFrames.UpdateShadow(self, "OnShow", -4, 22)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 22)
 	end)
 
 	StatueBar:SetScript("OnHide", function(self)
-		TukuiUnitFrames.UpdateShadow(self, "OnHide", -4, 12)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 12)
 	end)
 	
 	-- Register

@@ -1,15 +1,15 @@
-local T, C, L = select(2, ...):unpack()
+local D, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function TukuiUnitFrames:AddMageFeatures()
+function DuffedUIUnitFrames:AddMageFeatures()
 	local ArcaneChargeBar = CreateFrame("Frame", nil, self)
 	
 	-- Arcane Charges
 	ArcaneChargeBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	ArcaneChargeBar:Size(250, 8)
-	ArcaneChargeBar:SetBackdrop(TukuiUnitFrames.Backdrop)
+	ArcaneChargeBar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	ArcaneChargeBar:SetBackdropColor(0, 0, 0)
 	ArcaneChargeBar:SetBackdropBorderColor(0, 0, 0)
 
@@ -30,11 +30,11 @@ function TukuiUnitFrames:AddMageFeatures()
 	
 	-- Shadow Effect Updates
 	ArcaneChargeBar:SetScript("OnShow", function(self) 
-		TukuiUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
 	end)
 
 	ArcaneChargeBar:SetScript("OnHide", function(self)
-		TukuiUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
 	end)
 
 	self.ArcaneChargeBar = ArcaneChargeBar

@@ -1,9 +1,9 @@
-local T, C, L = select(2, ...):unpack()
+local D, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function TukuiUnitFrames:AddShamanFeatures()
+function DuffedUIUnitFrames:AddShamanFeatures()
 	local TotemBar = {}
 	local Shadow = self.Shadow
 	
@@ -11,7 +11,7 @@ function TukuiUnitFrames:AddShamanFeatures()
 	local TotemBar = CreateFrame("Frame", nil, self)
 	TotemBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	TotemBar:Size(250, 8)
-	TotemBar:SetBackdrop(TukuiUnitFrames.Backdrop)
+	TotemBar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	TotemBar:SetBackdropColor(0, 0, 0)
 	TotemBar:SetBackdropBorderColor(0, 0, 0)
 	TotemBar.Destroy = true
@@ -43,11 +43,11 @@ function TukuiUnitFrames:AddShamanFeatures()
 	Shadow:Point("TOPLEFT", -4, 12)
 	
 	TotemBar:SetScript("OnShow", function(self) 
-		TukuiUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
 	end)
 
 	TotemBar:SetScript("OnHide", function(self)
-		TukuiUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
 	end)
 	
 	-- Register

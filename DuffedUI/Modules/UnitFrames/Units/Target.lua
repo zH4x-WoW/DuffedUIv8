@@ -1,12 +1,12 @@
-local T, C, L = select(2, ...):unpack()
+local D, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = D["UnitFrames"]
 
-function TukuiUnitFrames:Target()
+function DuffedUIUnitFrames:Target()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self:SetBackdrop(TukuiUnitFrames.Backdrop)
+	self:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
 
@@ -16,19 +16,19 @@ function TukuiUnitFrames:Target()
 	Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
 	Panel:SetFrameLevel(2)
 	Panel:SetFrameStrata("MEDIUM")
-	Panel:SetBackdropBorderColor(C.Media.BorderColor[1] * 0.7, C.Media.BorderColor[2] * 0.7, C.Media.BorderColor[3] * 0.7)
+	Panel:SetBackdropBorderColor(C["Media"].BorderColor[1] * 0.7, C["Media"].BorderColor[2] * 0.7, C["Media"].BorderColor[3] * 0.7)
 
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:Height(26)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
-	Health:SetStatusBarTexture(C.Media.Normal)
+	Health:SetStatusBarTexture(C["Media"].Normal)
 
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
 
-	Health:FontString("Value", C.Media.AltFont, 12)
+	Health:FontString("Value", C["Media"].AltFont, 12)
 	Health.Value:Point("RIGHT", Panel, "RIGHT", -4, 0)
 
 	Health.frequentUpdates = true
@@ -37,9 +37,9 @@ function TukuiUnitFrames:Target()
 	Health.colorClass = true
 	Health.colorReaction = true	
 
-	Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
+	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
 
-	if (C.UnitFrames.Smooth) then
+	if (C["UnitFrames"].Smooth) then
 		Health.Smooth = true
 	end
 
@@ -47,26 +47,26 @@ function TukuiUnitFrames:Target()
 	Power:Height(8)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
-	Power:SetStatusBarTexture(C.Media.Normal)
+	Power:SetStatusBarTexture(C["Media"].Normal)
 
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints()
-	Power.Background:SetTexture(C.Media.Normal)
+	Power.Background:SetTexture(C["Media"].Normal)
 	Power.Background.multiplier = 0.3
 
-	Power:FontString("Value", C.Media.AltFont, 12)
+	Power:FontString("Value", C["Media"].AltFont, 12)
 	Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
 
 	Power.colorPower = true
 	Power.frequentUpdates = true
 	Power.colorDisconnected = true
 
-	Power.PostUpdate = TukuiUnitFrames.PostUpdatePower
+	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
 
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:Point("LEFT", Panel, "LEFT", 4, 0)
 	Name:SetJustifyH("LEFT")
-	Name:SetFont(C.Media.AltFont, 12)
+	Name:SetFont(C["Media"].AltFont, 12)
 
 	------ Special Note ------
 	-- The animation is currently broken. I tried some things out but i dont get it working at the moment.
@@ -91,22 +91,22 @@ function TukuiUnitFrames:Target()
 
 	Buffs.spacing = 2
 	Buffs.initialAnchor = "TOPLEFT"
-	Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
-	Buffs.PostUpdate = TukuiUnitFrames.UpdateTargetDebuffsHeader
+	Buffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
+	Buffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
+	Buffs.PostUpdate = DuffedUIUnitFrames.UpdateTargetDebuffsHeader
 
 	Debuffs.spacing = 2
 	Debuffs.initialAnchor = "TOPRIGHT"
 	Debuffs["growth-y"] = "UP"
 	Debuffs["growth-x"] = "LEFT"
-	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
-	Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
+	Debuffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
+	Debuffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
+	Debuffs.onlyShowPlayer = C["UnitFrames"].OnlySelfDebuffs
 
 	self.Buffs = Buffs
 	self.Debuffs = Debuffs
 
-	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong] [Tukui:DiffColor][level] [shortclassification]")
+	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong] [DuffedUI:DiffColor][level] [shortclassification]")
 	self.Name = Name
 	self.Panel = Panel
 	self.Health = Health
