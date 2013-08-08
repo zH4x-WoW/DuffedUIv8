@@ -17,9 +17,9 @@ C["Media"] = {
 	["HoverButton"] = [[Interface\AddOns\DuffedUI\Medias\Textures\button_hover]],
 	
 	-- colors
-	["BorderColor"] = (not C["General"].InOut and { 0, 0, 0 }) or C["General"].BorderColor or { .5, .5, .5 },
-	["BackdropColor"] = C["General"].BackdropColor or { .1,.1,.1 },
-	["PrimaryDataTextColor"] = { 1, 1, 1 },
+	["BorderColor"] = (not C["General"].InOut and { .125, .125, .125 }) or C["General"].BorderColor or { .125, .125, .125 },
+	["BackdropColor"] = C["General"].BackdropColor or { .05, .05, .05 },
+	["PrimaryDataTextColor"] = { .4, .4, .4 },
 	["SecondaryDataTextColor"] = { 1, 1, 1 },
 	
 	-- sound

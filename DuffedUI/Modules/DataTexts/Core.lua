@@ -1,4 +1,4 @@
-local T, C = select(2, ...):unpack()
+local D, C = select(2, ...):unpack()
 
 local pairs = pairs
 local unpack = unpack
@@ -11,15 +11,15 @@ local DataTextRight = Panels.DataTextRight
 local MinimapDataTextOne
 local MinimapDataTextTwo
 
-DuffedUIDD.NumAnchors = 6
-DuffedUIDD.Font = C["Media"].Font
-DuffedUIDD.Size = 12
-DuffedUIDD.Flags = nil
-DuffedUIDD.Texts = {}
-DuffedUIDD.Anchors = {}
-DuffedUIDD.Menu = {}
-DuffedUIDD.NameColor = D.RGBToHex(unpack(C["Media"].PrimaryDataTextColor))
-DuffedUIDD.ValueColor = D.RGBToHex(unpack(C["Media"].SecondaryDataTextColor))
+DuffedUIDT.NumAnchors = 6
+DuffedUIDT.Font = C["Media"].Font
+DuffedUIDT.Size = 12
+DuffedUIDT.Flags = nil
+DuffedUIDT.Texts = {}
+DuffedUIDT.Anchors = {}
+DuffedUIDT.Menu = {}
+DuffedUIDT.NameColor = D.RGBToHex(unpack(C["Media"].PrimaryDataTextColor))
+DuffedUIDT.ValueColor = D.RGBToHex(unpack(C["Media"].SecondaryDataTextColor))
 
 function DuffedUIDT:AddToMenu(name, data)
 	if self["Texts"][name] then

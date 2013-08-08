@@ -29,7 +29,7 @@ local Update = function(self)
 		Value = Spell
 	end
 	
-	self.Text:SetText(format("%s: %s", DataText.NameColor .. L.DataText.Power .. "|r", DataText.ValueColor .. D.Comma(Value) .. "|r"))
+	self.Text:SetText(format(DataText.ValueColor .. D.Comma(Value) .. "|r")) -- "%s: %s", 
 end
 
 local Enable = function(self)	
