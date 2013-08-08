@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-if not C.Tooltips.Enable then
+if not C["Tooltips"].Enable then
 	return
 end
 
@@ -111,7 +111,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		return
 	end
 	
-	if (self:GetOwner() ~= UIParent and C.Tooltips.HideOnUnitFrames) then
+	if (self:GetOwner() ~= UIParent and C["Tooltips"].HideOnUnitFrames) then
 		self:Hide()
 		return
 	end
