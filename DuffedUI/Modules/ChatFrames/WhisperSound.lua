@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C.Chat.Enable and not C.Chat.WhisperSound) then
+if (not C["Chat"].Enable and not C["Chat"].WhisperSound) then
 	return
 end
 

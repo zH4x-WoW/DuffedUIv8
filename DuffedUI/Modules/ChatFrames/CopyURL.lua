@@ -1,14 +1,14 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C.Chat.Enable) then
+if (not C["Chat"].Enable) then
 	return
 end
 
 local DuffedUIChat = D["Chat"]
 local gsub = gsub
 local strsub = strsub
-local Color = D.RGBToHex(unpack(C.Chat.LinkColor)) or "FFFF00"
-local UseBracket = C.Chat.LinkBrackets
+local Color = D.RGBToHex(unpack(C["Chat"].LinkColor)) or "FFFF00"
+local UseBracket = C["Chat"].LinkBrackets
 local UseColor = true
 
 function DuffedUIChat:PrintURL(url)

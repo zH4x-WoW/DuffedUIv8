@@ -6,7 +6,7 @@ local D, C, L = select(2, ...):unpack()
 	-- PLAYER_ENTERING_WORLD event on DuffedUIChat will not be needed anymore when we will create the install process.
 	-- find the event which randomly move chat position from default and unregister it.
 
-if (not C.Chat.Enable) then
+if (not C["Chat"].Enable) then
 	return
 end
 
