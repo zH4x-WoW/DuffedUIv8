@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C.Auras.Enable) then
+if (not C["Auras"].Enable) then
 	return
 end
 
@@ -16,10 +16,10 @@ local InterfaceOptionsFrameCategoriesButton12 = InterfaceOptionsFrameCategoriesB
 local InterfaceOptionsFrameCategoriesButton12 = InterfaceOptionsFrameCategoriesButton12
 
 DuffedUIAuras.Headers = {}
-DuffedUIAuras.Filter = C.Auras.Consolidate
-DuffedUIAuras.Flash = C.Auras.Flash
+DuffedUIAuras.Filter = C["Auras"].Consolidate
+DuffedUIAuras.Flash = C["Auras"].Flash
 DuffedUIAuras.FlashTimer = 30
-DuffedUIAuras.ClassicTimer = C.Auras.ClassicTimer
+DuffedUIAuras.ClassicTimer = C["Auras"].ClassicTimer
 DuffedUIAuras.ProxyIcon = "Interface\\Icons\\misc_arrowdown"
 
 function DuffedUIAuras:DisableBlizzardAuras()
@@ -31,11 +31,11 @@ function DuffedUIAuras:DisableBlizzardAuras()
 end
 
 function DuffedUIAuras:StartOrStopFlash(timeleft)
-	if(timeleft < DuffedUIAuras.FlashTimer) then
-		if(not self:IsPlaying()) then
+	if (timeleft < DuffedUIAuras.FlashTimer) then
+		if (not self:IsPlaying()) then
 			self:Play()
 		end
-	elseif(self:IsPlaying()) then
+	elseif (self:IsPlaying()) then
 		self:Stop()
 	end
 end
@@ -43,10 +43,10 @@ end
 function DuffedUIAuras:OnUpdate(elapsed)
 	local TimeLeft
 
-	if(self.Enchant) then
+	if (self.Enchant) then
 		local Expiration = select(self.Enchant, GetWeaponEnchantInfo())
 		
-		if(Expiration) then
+		if (Expiration) then
 			TimeLeft = Expiration / 1e3
 		else
 			TimeLeft = 0
@@ -57,14 +57,14 @@ function DuffedUIAuras:OnUpdate(elapsed)
 	
 	self.TimeLeft = TimeLeft
 
-	if(TimeLeft <= 0) then
+	if (TimeLeft <= 0) then
 		self.TimeLeft = nil
 		self.Duration:SetText("")
 		
 		return self:SetScript("OnUpdate", nil)
 	else
 		local Text = D.FormatTime(TimeLeft)
-		local r, g, b = D.ColorGradient(self.TimeLeft, self.Dur, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
+		local r, g, b = D.ColorGradient(self.TimeLeft, self.Dur, .8, 0, 0, .8, .8, 0, 0, .8, 0)
 
 		self.Bar:SetValue(self.TimeLeft)
 		self.Bar:SetStatusBarColor(r, g, b)
@@ -137,20 +137,20 @@ function DuffedUIAuras:UpdateAura(index)
 			local min, max  = self.Bar:GetMinMaxValues()
 			
 			self.Bar:SetValue(max)
-			self.Bar:SetStatusBarColor(0, 0.8, 0)
+			self.Bar:SetStatusBarColor(0, .8, 0)
 			
 			if not DuffedUIAuras.ClassicTimer then
 				self.Holder:Hide()
 			end
 		end
 
-		if(Count > 1) then
+		if (Count > 1) then
 			self.Count:SetText(Count)
 		else
 			self.Count:SetText("")
 		end
 
-		if(self.Filter == "HARMFUL") then
+		if (self.Filter == "HARMFUL") then
 			local Color = DebuffTypeColor[DType or "none"]
 			self:SetBackdropBorderColor(Color.r * 3/5, Color.g * 3/5, Color.b * 3/5)
 			self.Holder:SetBackdropBorderColor(Color.r * 3/5, Color.g * 3/5, Color.b * 3/5)
