@@ -22,20 +22,11 @@ function DuffedUIActionBars:CreateBar3()
 		
 		if (i == 1) then
 			Button:SetPoint("BOTTOMLEFT", ActionBar3, Spacing, Spacing)
-		elseif (i == 7) then
-			Button:SetPoint("TOPLEFT", ActionBar3, Spacing, -Spacing)
 		else
 			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
 		end
 		
 		ActionBar3["Button"..i] = Button
-	end
-	
-	for i = 7, 12 do
-		local Button = _G["MultiBarBottomRightButton"..i]
-		local Button1 = _G["MultiBarBottomRightButton1"]
-		
-		Button:SetFrameLevel(Button1:GetFrameLevel() - 2)
 	end
 	
 	RegisterStateDriver(ActionBar3, "visibility", "[vehicleui][petbattle][overridebar] hide; show")

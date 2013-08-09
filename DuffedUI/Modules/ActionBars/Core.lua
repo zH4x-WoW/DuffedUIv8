@@ -93,30 +93,31 @@ function DuffedUIActionBars:AddPanels()
 	local A1 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A1:SetWidth((Size * 12) + (Spacing * 13))
 	A1:SetHeight((Size * 1) + (Spacing * 2))
-	A1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 14)
+	A1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 67)
 	A1:SetFrameStrata("BACKGROUND")
 	A1:SetFrameLevel(1)
 
 	local A2 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
-	A2:Point("BOTTOMRIGHT", A1, "BOTTOMLEFT", -6, 0)
-	A2:SetWidth((Size * 6) + (Spacing * 7))
-	A2:SetHeight((Size * 2) + (Spacing * 3))
+	A2:Point("BOTTOM", UIParent, "BOTTOM", -189, 29)
+	A2:SetWidth((Size * 12) + (Spacing * 13))
+	A2:SetHeight((Size * 1) + (Spacing * 2))
 	A2:SetFrameStrata("BACKGROUND")
 	A2:SetFrameLevel(3)
 
 	local A3 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
-	A3:Point("BOTTOMLEFT", A1, "BOTTOMRIGHT", 6, 0)
-	A3:SetWidth((Size * 6) + (Spacing * 7))
-	A3:SetHeight((Size * 2) + (Spacing * 3))
+	A3:Point("BOTTOM", UIParent, "BOTTOM", 189, 29)
+	A3:SetWidth((Size * 12) + (Spacing * 13))
+	A3:SetHeight((Size * 1) + (Spacing * 2))
 	A3:SetFrameStrata("BACKGROUND")
 	A3:SetFrameLevel(3)
 	
-	--[[local A4 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
+	local A4 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A4:Point("BOTTOM", UIParent, "BOTTOM", 0, 14)
 	A4:SetWidth((Size * 12) + (Spacing * 13))
 	A4:SetHeight((Size * 2) + (Spacing * 3))
 	A4:SetFrameStrata("BACKGROUND")
-	A4:SetFrameLevel(2)]]--
+	A4:SetFrameLevel(2)
+	A4:SetAlpha(0)
 	
 	local A5 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A5:SetPoint("RIGHT", UIParent, "RIGHT", -28, -14)
@@ -133,7 +134,7 @@ function DuffedUIActionBars:AddPanels()
 		A1:SetTemplate("Transparent")
 		A2:SetTemplate("Transparent")
 		A3:SetTemplate("Transparent")
-		--A4:SetTemplate("Transparent")
+		A4:SetTemplate("Transparent")
 		A5:SetTemplate("Transparent")
 		A6:SetTemplate("Transparent")
 	end
@@ -141,7 +142,7 @@ function DuffedUIActionBars:AddPanels()
 	Panels.ActionBar1 = A1
 	Panels.ActionBar2 = A2
 	Panels.ActionBar3 = A3
-	--Panels.ActionBar4 = A4
+	Panels.ActionBar4 = A4
 	Panels.ActionBar5 = A5
 	Panels.PetActionBar = A6
 end

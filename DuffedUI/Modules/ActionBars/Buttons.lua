@@ -28,7 +28,7 @@ function ActionBars:ShowAllButtons(bar, num)
 	end
 
 	if (num == 2 or num == 3) then
-		bar:Width((Size * 6) + (Spacing * 7))
+		bar:Width((Size * 12) + (Spacing * 13))
 	elseif (num == 5) then
 		bar:Height((Size * 12) + (Spacing * 13))
 	end
@@ -38,11 +38,11 @@ function ActionBars:RemoveColumn(bar, num)
 	local Data = DuffedUIDataPerChar
 
 	if (not bar.NextColumnToHide) then
-		bar.NextColumnToHide = 6
+		bar.NextColumnToHide = 12
 	end
 	
 	if (bar.NextColumnToHide <= 1) then -- Reset the count at 1 button shown
-		bar.NextColumnToHide = 6
+		bar.NextColumnToHide = 12
 		self:ShowAllButtons(bar, num)
 		Data["Bar"..num.."Buttons"] = bar.NextColumnToHide
 		
@@ -50,10 +50,10 @@ function ActionBars:RemoveColumn(bar, num)
 	end
 	
 	local Button1 = bar["Button"..bar.NextColumnToHide]
-	local Button2 = bar["Button"..bar.NextColumnToHide + 6]
+	--local Button2 = bar["Button"..bar.NextColumnToHide + 6]
 
 	Button1:Hide()
-	Button2:Hide()
+	--Button2:Hide()
 
 	--bar:Width((Size * (bar.NextColumnToHide - 1)) + (Spacing * bar.NextColumnToHide))
 	bar:Animation("Width", ((Size * (bar.NextColumnToHide - 1)) + (Spacing * bar.NextColumnToHide)), 8)
@@ -90,7 +90,7 @@ function ActionBars:RemoveButton(bar, num)
 	Data["Bar"..num.."Buttons"] = bar.NextButtonToHide
 end
 
-function ActionBars:ShowTopButtons(bar)
+--[[function ActionBars:ShowTopButtons(bar)
 	local Button
 	local Value = bar.NextColumnToHide or 6
 
@@ -99,7 +99,7 @@ function ActionBars:ShowTopButtons(bar)
 		
 		Button:Show()
 	end
-end
+end]]--
 
 -- Restore buttons to previous state on load
 function ActionBars:RestoreBarState()
