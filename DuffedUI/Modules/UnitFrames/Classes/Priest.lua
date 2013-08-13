@@ -41,8 +41,8 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 
 	if (C["UnitFrames"].WeakBar) then
 		-- Weakened Soul Bar
-		local WSBar = CreateFrame("StatusBar", nil, Power)
-		WSBar:SetAllPoints(Power)
+		local WSBar = CreateFrame("StatusBar", nil, self.Power)
+		WSBar:SetAllPoints(self.Power)
 		WSBar:SetStatusBarTexture(C.Media.Normal)
 		WSBar:GetStatusBarTexture():SetHorizTile(false)
 		WSBar:SetBackdrop(DuffedUIUnitFrames.Backdrop)

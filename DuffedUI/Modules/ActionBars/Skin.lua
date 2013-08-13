@@ -10,7 +10,7 @@ local PetSize = C["ActionBars"].PetButtonSize
 local Spacing = C["ActionBars"].ButtonSpacing
 local ActionButton_HideOverlayGlow = ActionButton_HideOverlayGlow
 local ProcBackdrop = {
-	edgeFile = C["Media"].Blank, edgeSize = D.Mult,
+	edgeFile = C["Medias"].Blank, edgeSize = D.Mult,
 	insets = {left = D.Mult, right = D.Mult, top = D.Mult, bottom = D.Mult},
 }
 
@@ -54,11 +54,11 @@ function DuffedUIActionBars:SkinButton()
 		return
 	end
 	
-	Count:SetFont(C["Media"].Font, 12, "OUTLINE")
+	Count:SetFont(C["Medias"].Font, 12, "OUTLINE")
 	
 	if (Btname) then
 		if (C["ActionBars"].Macro) then
-			Btname:SetFont(C["Media"].Font, 10)
+			Btname:SetFont(C["Medias"].Font, 10)
 			Btname:ClearAllPoints()
 			Btname:SetPoint("BOTTOM", 1, 1)
 		else
@@ -72,7 +72,7 @@ function DuffedUIActionBars:SkinButton()
 	end
  
 	if (C["ActionBars"].HotKey) then
-		HotKey:SetFont(C["Media"].Font, 10, "OUTLINE")
+		HotKey:SetFont(C["Medias"].Font, 10, "OUTLINE")
 		HotKey.ClearAllPoints = Noop
 		HotKey.SetPoint = Noop
 	else

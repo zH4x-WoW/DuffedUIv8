@@ -7,7 +7,7 @@ end
 local DuffedUIChat = D["Chat"]
 
 function DuffedUIChat:PlayWhisperSound()
-	PlaySoundFile(C["Media"].Whisper)
+	PlaySoundFile(C["Medias"].Whisper)
 end
 
 DuffedUIChat.WhisperSound = CreateFrame("Frame")

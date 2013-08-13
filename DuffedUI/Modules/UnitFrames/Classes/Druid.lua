@@ -13,7 +13,7 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 	-- Druid Mana
 	DruidMana:Size(250, 8)
 	DruidMana:Point("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, 0)
-	DruidMana:SetStatusBarTexture(C["Media"].Normal)
+	DruidMana:SetStatusBarTexture(C["Medias"].Normal)
 	DruidMana:SetStatusBarColor(.30, .52, .90)
 
 	Background:SetAllPoints(DruidMana)
@@ -34,7 +34,7 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 	for i = 1, 3 do
 		Mushrooms[i] = CreateFrame("StatusBar", nil, Mushrooms)
 		Mushrooms[i]:Height(8)
-		Mushrooms[i]:SetStatusBarTexture(C["Media"].Normal)
+		Mushrooms[i]:SetStatusBarTexture(C["Medias"].Normal)
 
 		if i == 1 then
 			Mushrooms[i]:Width((250 / 3) - 1)

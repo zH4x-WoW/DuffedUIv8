@@ -83,6 +83,8 @@
 	<Script file="UnitFrames\Units\Pet.lua"/>
 	<Script file="UnitFrames\Units\Focus.lua"/>
 	<Script file="UnitFrames\Units\FocusTarget.lua"/>
+	<Script file="UnitFrames\Units\Arena.lua"/>
+	<Script file="UnitFrames\Units\Boss.lua"/>
 
 	<!-- Tooltips -->
 	<Script file="Tooltips\Tooltips.lua"/>

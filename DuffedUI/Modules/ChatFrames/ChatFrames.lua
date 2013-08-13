@@ -28,7 +28,7 @@ function DuffedUIChat:UpdateEditBoxColor()
 			local ID = GetChannelName(EditBox:GetAttribute("channelTarget"))
 			
 			if (ID == 0) then
-				Backdrop:SetBackdropBorderColor(unpack(C["Media"].BorderColor))
+				Backdrop:SetBackdropBorderColor(unpack(C["Medias"].BorderColor))
 			else
 				Backdrop:SetBackdropBorderColor(ChatTypeInfo[ChatType..ID].r,ChatTypeInfo[ChatType..ID].g,ChatTypeInfo[ChatType..ID].b)
 			end
@@ -98,7 +98,7 @@ function DuffedUIChat:StyleFrame(frame)
 	EditBox.Backdrop:SetAllPoints(DataTextLeft)
 	EditBox.Backdrop:SetFrameStrata("LOW")
 	EditBox.Backdrop:SetFrameLevel(1)
-	EditBox.Backdrop:SetBackdropColor(unpack(C["Media"].BackdropColor))
+	EditBox.Backdrop:SetBackdropColor(unpack(C["Medias"].BackdropColor))
 	
 	-- Hide textures
 	for i = 1, #CHAT_FRAME_TEXTURES do

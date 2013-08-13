@@ -12,14 +12,14 @@ local MinimapDataTextOne
 local MinimapDataTextTwo
 
 DuffedUIDT.NumAnchors = 6
-DuffedUIDT.Font = C["Media"].Font
+DuffedUIDT.Font = C["Medias"].Font
 DuffedUIDT.Size = 12
 DuffedUIDT.Flags = nil
 DuffedUIDT.Texts = {}
 DuffedUIDT.Anchors = {}
 DuffedUIDT.Menu = {}
-DuffedUIDT.NameColor = D.RGBToHex(unpack(C["Media"].PrimaryDataTextColor))
-DuffedUIDT.ValueColor = D.RGBToHex(unpack(C["Media"].SecondaryDataTextColor))
+DuffedUIDT.NameColor = D.RGBToHex(unpack(C["Medias"].PrimaryDataTextColor))
+DuffedUIDT.ValueColor = D.RGBToHex(unpack(C["Medias"].SecondaryDataTextColor))
 
 function DuffedUIDT:AddToMenu(name, data)
 	if self["Texts"][name] then

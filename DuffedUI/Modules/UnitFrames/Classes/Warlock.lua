@@ -19,7 +19,7 @@ function DuffedUIUnitFrames:AddWarlockFeatures()
 	for i = 1, 4 do
 		Bar[i] = CreateFrame("StatusBar", nil, Bar)
 		Bar[i]:Height(8)
-		Bar[i]:SetStatusBarTexture(C["Media"].Normal)
+		Bar[i]:SetStatusBarTexture(C["Medias"].Normal)
 
 		if i == 1 then
 			Bar[i]:Width((250 / 4) - 2)

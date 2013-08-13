@@ -1,6 +1,6 @@
 local D, C = unpack(select(2, ...))
 
-C["Media"] = {
+C["Medias"] = {
 	-- Fonts (ENGLISH)
 	["Font"] = [=[Interface\Addons\DuffedUI\Medias\Fonts\normal_font.ttf]=],
 	["AltFont"] = [[Interface\AddOns\DuffedUI\Medias\Fonts\uf_font.ttf]],

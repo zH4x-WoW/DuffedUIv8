@@ -8,7 +8,7 @@ local Scale = function(x) return Mult*math.floor(x/Mult+.5) end
 local InOut = C["General"].InOut
 local floor = math.floor
 local class = select(2, UnitClass("player"))
-local texture = C["Media"].Blank
+local texture = C["Medias"].Blank
 local noop = function() return end
 
 D.Scale = Scale
@@ -65,19 +65,19 @@ local function SetTemplate(f, t, tex)
 	local balpha = 1
 	if t == "Transparent" then balpha = 0.8 end
 	
-	local borderr, borderg, borderb = unpack(C["Media"].BorderColor)
-	local backdropr, backdropg, backdropb = unpack(C["Media"].BackdropColor)
+	local borderr, borderg, borderb = unpack(C["Medias"].BorderColor)
+	local backdropr, backdropg, backdropb = unpack(C["Medias"].BackdropColor)
 	local backdropa = balpha
 	
 	if tex then 
-		texture = C["Media"].Normal 
+		texture = C["Medias"].Normal 
 	else 
-		texture = C["Media"].Blank 
+		texture = C["Medias"].Blank 
 	end
 		
 	f:SetBackdrop({
 	  bgFile = texture, 
-	  edgeFile = C["Media"].Blank, 
+	  edgeFile = C["Medias"].Blank, 
 	  tile = false, tileSize = 0, edgeSize = Mult,
 	})
 	
@@ -192,7 +192,7 @@ local function CreateShadow(f, t)
 	shadow:Point("TOPRIGHT", 3, 3)
 	shadow:Point("BOTTOMRIGHT", 3, -3)
 	shadow:SetBackdrop( { 
-		edgeFile = C["Media"].Glow, edgeSize = Scale(3),
+		edgeFile = C["Medias"].Glow, edgeSize = Scale(3),
 		insets = {left = Scale(5), right = Scale(5), top = Scale(5), bottom = Scale(5)},
 	})
 	shadow:SetBackdropColor(0, 0, 0, 0)
@@ -269,7 +269,7 @@ end
 local function HighlightUnit(f, r, g, b)
 	if f.HighlightTarget then return end
 	
-	local glowBorder = {edgeFile = C["Media"].Blank, edgeSize = 1}
+	local glowBorder = {edgeFile = C["Medias"].Blank, edgeSize = 1}
 	f.HighlightTarget = CreateFrame("Frame", nil, f)
 	f.HighlightTarget:SetOutside()
 	f.HighlightTarget:SetBackdrop(glowBorder)

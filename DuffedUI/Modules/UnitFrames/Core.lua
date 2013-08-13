@@ -23,7 +23,7 @@ local _, Class = UnitClass("player")
 
 DuffedUIUnitFrames.Units = {}
 DuffedUIUnitFrames.Backdrop = {
-	bgFile = C["Media"].Blank,
+	bgFile = C["Medias"].Blank,
 	insets = {top = -D.Mult, left = -D.Mult, bottom = -D.Mult, right = -D.Mult},
 }
 
@@ -289,7 +289,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button:SetTemplate("Default")
 
 	button.Remaining = button:CreateFontString(nil, "OVERLAY")
-	button.Remaining:SetFont(C["Media"].Font, 12, "THINOUTLINE")
+	button.Remaining:SetFont(C["Medias"].Font, 12, "THINOUTLINE")
 	button.Remaining:Point("CENTER", 1, 0)
 
 	button.cd.noOCC = true
@@ -305,7 +305,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 
 	button.count:Point("BOTTOMRIGHT", 3, 3)
 	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C["Media"].Font, 9, "THICKOUTLINE")
+	button.count:SetFont(C["Medias"].Font, 9, "THICKOUTLINE")
 	button.count:SetTextColor(0.84, 0.75, 0.65)
 
 	button.OverlayFrame = CreateFrame("Frame", nil, button, nil)
@@ -317,7 +317,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button.Glow = CreateFrame("Frame", nil, button)
 	button.Glow:SetOutside()
 	button.Glow:SetFrameStrata("BACKGROUND")	
-	button.Glow:SetBackdrop{edgeFile = C["Media"].Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
+	button.Glow:SetBackdrop{edgeFile = C["Medias"].Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
 
@@ -336,7 +336,7 @@ function DuffedUIUnitFrames:PostUpdateAura(unit, button, index, offset, filter, 
 		if(button.filter == "HARMFUL") then
 			if(not UnitIsFriend("player", unit) and button.owner ~= "player" and button.owner ~= "vehicle") then
 				button.icon:SetDesaturated(true)
-				button:SetBackdropBorderColor(unpack(C["Media"].bordercolor))
+				button:SetBackdropBorderColor(unpack(C["Medias"].bordercolor))
 			else
 				local color = DebuffTypeColor[dtype] or DebuffTypeColor.none
 				button.icon:SetDesaturated(false)
@@ -384,6 +384,10 @@ function DuffedUIUnitFrames:Style(unit)
 		DuffedUIUnitFrames.Focus(self)
 	elseif unit == "focustarget" then
 		DuffedUIUnitFrames.FocusTarget(self)
+	elseif unit:find("arena%d") then
+		DuffedUIUnitFrames.Arena(self)
+	elseif unit:find("boss%d") then
+		--DuffedUIUnitFrames.Boss(self)
 	end
 
 	return self
@@ -427,6 +431,18 @@ function DuffedUIUnitFrames:CreateUnits()
 	FocusTarget:SetPoint("BOTTOM", Focus, "TOP", 0, 35)
 	FocusTarget:SetParent(Panels.PetBattleHider)
 	FocusTarget:Size(200, 29)
+	
+	local Arena = {}
+	for i = 1, 5 do
+		Arena[i] = oUF:Spawn("arena"..i, nil)
+		Arena[i]:SetParent(Panels.PetBattleHider)
+		if i == 1 then
+			Arena[i]:SetPoint("BOTTOMRIGHT", DuffedUIUnitFrames.Anchor, "TOPRIGHT", 0, 300)
+		else
+			Arena[i]:SetPoint("BOTTOM", Arena[i-1], "TOP", 0, 35)
+		end
+		Arena[i]:Size(200, 29)
+	end
 
 	DuffedUIUnitFrames.Units.Player = Player
 	DuffedUIUnitFrames.Units.Target = Target
@@ -434,6 +450,8 @@ function DuffedUIUnitFrames:CreateUnits()
 	DuffedUIUnitFrames.Units.Pet = Pet
 	DuffedUIUnitFrames.Units.Focus = Focus
 	DuffedUIUnitFrames.Units.FocusTarget = FocusTarget
+	DuffedUIUnitFrames.Units.Arena = Arena
+	--DuffedUIUnitFrames.Units.Boss = Boss
 end
 
 DuffedUIUnitFrames:RegisterEvent("ADDON_LOADED")
