@@ -103,6 +103,38 @@ function DuffedUIUnitFrames:Target()
 	Debuffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
 	Debuffs.onlyShowPlayer = C["UnitFrames"].OnlySelfDebuffs
 
+	local ComboPoints = CreateFrame("Frame", nil, self)
+	ComboPoints:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+	ComboPoints:Width(250)
+	ComboPoints:Height(8)
+	ComboPoints:SetBackdrop(DuffedUIUnitFrames.Backdrop)
+	ComboPoints:SetBackdropColor(0, 0, 0)
+	ComboPoints:SetBackdropBorderColor(unpack(C["Media"].BorderColor))
+
+	for i = 1, 5 do
+		ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
+		ComboPoints[i]:Height(8)
+		ComboPoints[i]:SetStatusBarTexture(C["Media"].Normal)
+
+		if i == 1 then
+			ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
+			ComboPoints[i]:Width(250 / 5)
+		else
+			ComboPoints[i]:Point("LEFT", ComboPoints[i-1], "RIGHT", 1, 0)
+			ComboPoints[i]:Width(250 / 5 - 1)
+		end
+	end
+
+	ComboPoints:SetScript("OnShow", function(self)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
+		DuffedUIUnitFrames.UpdateAurasHeaderPosition(self, "OnShow", 0, 14)
+	end)
+
+	ComboPoints:SetScript("OnHide", function(self)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
+		DuffedUIUnitFrames.UpdateAurasHeaderPosition(self, "OnHide", 0, 4)
+	end)
+
 	self.Buffs = Buffs
 	self.Debuffs = Debuffs
 
@@ -113,4 +145,5 @@ function DuffedUIUnitFrames:Target()
 	self.Health.bg = Health.Background
 	self.Power = Power
 	self.Power.bg = Power.Background
+	self.ComboPointsBar = ComboPoints
 end

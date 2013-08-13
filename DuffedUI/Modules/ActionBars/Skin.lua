@@ -159,6 +159,17 @@ function DuffedUIActionBars:SkinPetButtons()
 	end
 end
 
+function DuffedUIActionBars:SkinStanceButtons()
+	for i=1, NUM_STANCE_SLOTS do
+		local Name = "StanceButton"..i
+		local Button  = _G[Name]
+		local Icon  = _G[Name.."Icon"]
+		local Normal  = _G[Name.."NormalTexture"]
+
+		DuffedUIActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, false)
+	end
+end
+
 function DuffedUIActionBars:SetupFlyoutButton()
 	for i = 1, FlyoutButtons do
 		local Button = _G["SpellFlyoutButton"..i]

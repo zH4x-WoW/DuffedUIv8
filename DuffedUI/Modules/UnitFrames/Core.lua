@@ -23,7 +23,7 @@ local _, Class = UnitClass("player")
 
 DuffedUIUnitFrames.Units = {}
 DuffedUIUnitFrames.Backdrop = {
-	bgFile = C.Media.Blank,
+	bgFile = C["Media"].Blank,
 	insets = {top = -D.Mult, left = -D.Mult, bottom = -D.Mult, right = -D.Mult},
 }
 
@@ -93,16 +93,33 @@ end
 function DuffedUIUnitFrames:UpdateShadow(script, x, y)
 	local Frame = self:GetParent()
 	local Shadow = Frame.Shadow
+	
+	if not Shadow then
+		return
+	end
 
 	if (script == "OnShow") then
-		if (Shadow) then
-			Shadow:Point("TOPLEFT", x, y)
-		end
+		Shadow:Point("TOPLEFT", x, y)
 	else
-		if (Shadow) then
-			Shadow:Point("TOPLEFT", x, y)
-		end
+		Shadow:Point("TOPLEFT", x, y)
 	end
+end
+
+function DuffedUIUnitFrames:UpdateAurasHeaderPosition(script, x, y)
+	local Frame = self:GetParent()
+	local Buffs = Frame.Buffs
+
+	if not Buffs then
+		return
+	end
+
+	if script == "OnShow" then
+		Buffs:ClearAllPoints()
+		Buffs:Point("BOTTOMLEFT", Frame, "TOPLEFT", x, y)
+	else
+		Buffs:ClearAllPoints()
+		Buffs:Point("BOTTOMLEFT", Frame, "TOPLEFT", x, y)
+ 	end
 end
 
 function DuffedUIUnitFrames:CustomCastTimeText(duration)
@@ -272,7 +289,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button:SetTemplate("Default")
 
 	button.Remaining = button:CreateFontString(nil, "OVERLAY")
-	button.Remaining:SetFont(C.Media.Font, 12, "THINOUTLINE")
+	button.Remaining:SetFont(C["Media"].Font, 12, "THINOUTLINE")
 	button.Remaining:Point("CENTER", 1, 0)
 
 	button.cd.noOCC = true
@@ -288,7 +305,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 
 	button.count:Point("BOTTOMRIGHT", 3, 3)
 	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C.Media.Font, 9, "THICKOUTLINE")
+	button.count:SetFont(C["Media"].Font, 9, "THICKOUTLINE")
 	button.count:SetTextColor(0.84, 0.75, 0.65)
 
 	button.OverlayFrame = CreateFrame("Frame", nil, button, nil)
@@ -300,16 +317,16 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button.Glow = CreateFrame("Frame", nil, button)
 	button.Glow:SetOutside()
 	button.Glow:SetFrameStrata("BACKGROUND")	
-	button.Glow:SetBackdrop{edgeFile = C.Media.Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
+	button.Glow:SetBackdrop{edgeFile = C["Media"].Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
 
-	--button.Animation = button:CreateAnimationGroup()
-	--button.Animation:SetLooping("BOUNCE")
-	--button.Animation.FadeOut = Animation:CreateAnimation("Alpha")
-	--button.Animation.FadeOut:SetChange(-.9)
-	--button.Animation.FadeOut:SetDuration(.6)
-	--button.Animation.FadeOut:SetSmoothing("IN_OUT")
+	button.Animation = button:CreateAnimationGroup()
+	button.Animation:SetLooping("BOUNCE")
+	button.Animation.FadeOut = Animation:CreateAnimation("Alpha")
+	button.Animation.FadeOut:SetChange(-.9)
+	button.Animation.FadeOut:SetDuration(.6)
+	button.Animation.FadeOut:SetSmoothing("IN_OUT")
 end
 
 function DuffedUIUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
@@ -319,7 +336,7 @@ function DuffedUIUnitFrames:PostUpdateAura(unit, button, index, offset, filter, 
 		if(button.filter == "HARMFUL") then
 			if(not UnitIsFriend("player", unit) and button.owner ~= "player" and button.owner ~= "vehicle") then
 				button.icon:SetDesaturated(true)
-				button:SetBackdropBorderColor(unpack(C.media.bordercolor))
+				button:SetBackdropBorderColor(unpack(C["Media"].bordercolor))
 			else
 				local color = DebuffTypeColor[dtype] or DebuffTypeColor.none
 				button.icon:SetDesaturated(false)
@@ -327,24 +344,24 @@ function DuffedUIUnitFrames:PostUpdateAura(unit, button, index, offset, filter, 
 			end
 		else
 			if (IsStealable or dtype == "Magic") and not UnitIsFriend("player", unit) and not button.Animation.Playing then
-				--button.Animation:Play()
-				--button.Animation.Playing = true
+				button.Animation:Play()
+				button.Animation.Playing = true
 			else
-				--button.Animation:Stop()
-				--button.Animation.Playing = false
+				button.Animation:Stop()
+				button.Animation.Playing = false
 			end
 		end
 
 		if Duration and Duration > 0 then
-			--icon.Remaining:Show()
+			icon.Remaining:Show()
 		else
-			--icon.Remaining:Hide()
+			icon.Remaining:Hide()
 		end
 
-		--icon.Duration = duration
-		--icon.TimeLeft = expirationTime
-		--icon.First = true
-		--icon:SetScript("OnUpdate", DuffedUIUnitFrames.CreateAuraTimer)
+		icon.Duration = duration
+		icon.TimeLeft = expirationTime
+		icon.First = true
+		icon:SetScript("OnUpdate", DuffedUIUnitFrames.CreateAuraTimer)
 	end
 end
 

@@ -16,6 +16,14 @@ local function UpdateMushroomTimer(self, elapsed)
 	end
 end
 
+local function Visibility(self)
+	if not self[1].Enabled and not self[2].Enabled and not self[3].Enabled then
+		self:Hide()
+	else
+		self:Show()
+	end
+end
+
 local function UpdateMushroom(self, event, slot)
 	local m = self.WildMushroom
 	local bar = m[slot]
@@ -29,11 +37,13 @@ local function UpdateMushroom(self, event, slot)
 	local up, name, start, duration, icon = GetTotemInfo(slot)
 	if (up) then
 		local timeLeft = (start+duration) - GetTime()
+		bar.Enabled = true
 		bar.duration = duration
 		bar.expirationTime = timeLeft
 		bar:SetMinMaxValues(0, duration)
 		bar:SetScript('OnUpdate', UpdateMushroomTimer)
 	else
+		bar.Enabled = false
 		bar:SetValue(0)
 		bar:SetScript("OnUpdate", nil)
 	end
@@ -57,17 +67,6 @@ local ForceUpdate = function(element)
 	return Update(element.__owner, 'ForceUpdate')
 end
 
-local function Visibility(self, event, unit)
-	local m = self.WildMushroom
-	local spec = GetSpecialization()
-	
-	if spec == 1 or spec == 4 then
-		m:Show()
-	else
-		m:Hide()
-	end
-end
-
 local function Enable(self, unit)
 	local m = self.WildMushroom
 	if m and unit == "player" then
@@ -76,11 +75,6 @@ local function Enable(self, unit)
 
 		self:RegisterEvent("PLAYER_TOTEM_UPDATE", Path, true)		
 		
-		-- why the fuck does PLAYER_TALENT_UPDATE doesnt trigger on initial login when I register to: self
-		m.Visibility = CreateFrame("Frame", nil, m)
-		m.Visibility:RegisterEvent("PLAYER_TALENT_UPDATE")
-		m.Visibility:SetScript("OnEvent", function(frame, event, unit) Visibility(self, event, unit) end)
-
 		for i = 1, 3 do
 			local Point = m[i]
 			if not Point:GetStatusBarTexture() then
@@ -99,6 +93,8 @@ local function Enable(self, unit)
 				Point.bg:SetTexture(unpack(Colors))
 			end	
 		end
+		
+		m:Hide()
 
 		return true
 	end

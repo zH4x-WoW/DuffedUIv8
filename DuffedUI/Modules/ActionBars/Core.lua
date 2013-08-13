@@ -9,6 +9,8 @@ local _G = _G
 local format = format
 local Noop = function() end
 local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
+local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
+local NUM_STANCE_SLOTS = NUM_STANCE_SLOTS
 local MainMenuBar, MainMenuBarArtFrame = MainMenuBar, MainMenuBarArtFrame
 local OverrideActionBar = OverrideActionBar
 local PossessBarFrame = PossessBarFrame
@@ -64,27 +66,32 @@ function DuffedUIActionBars:ShowGrid()
 
 		Button = _G[format("ActionButton%d", i)]
 		Button:SetAttribute("showgrid", 1)
-		Button:SetAttribute("statehidden", nil)
+		Button:SetAttribute("statehidden", true)
+		Button:Show()
 		ActionButton_ShowGrid(Button)
 		
 		Button = _G[format("MultiBarRightButton%d", i)]
 		Button:SetAttribute("showgrid", 1)
-		Button:SetAttribute("statehidden", nil)
+		Button:SetAttribute("statehidden", true)
+		Button:Show()
 		ActionButton_ShowGrid(Button)
 
 		Button = _G[format("MultiBarBottomRightButton%d", i)]
 		Button:SetAttribute("showgrid", 1)
-		Button:SetAttribute("statehidden", nil)
+		Button:SetAttribute("statehidden", true)
+		Button:Show()
 		ActionButton_ShowGrid(Button)
 		
 		Button = _G[format("MultiBarLeftButton%d", i)]
 		Button:SetAttribute("showgrid", 1)
-		Button:SetAttribute("statehidden", nil)
+		Button:SetAttribute("statehidden", true)
+		Button:Show()
 		ActionButton_ShowGrid(Button)
 		
 		Button = _G[format("MultiBarBottomLeftButton%d", i)]
 		Button:SetAttribute("showgrid", 1)
-		Button:SetAttribute("statehidden", nil)
+		Button:SetAttribute("statehidden", true)
+		Button:Show()
 		ActionButton_ShowGrid(Button)
 	end
 end
@@ -130,6 +137,15 @@ function DuffedUIActionBars:AddPanels()
 	A6:SetSize(PetSize + (Spacing * 2), (PetSize * 10) + (Spacing * 11))
 	A6:SetPoint("RIGHT", A5, "LEFT", -6, 0)
 	
+	local A7 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
+	A7:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
+	A7:SetPoint("TOPLEFT", 30, -30)
+	A7:SetFrameStrata("BACKGROUND")
+	A7:SetFrameLevel(2)
+	--A7:SetFrameStrata("MEDIUM")
+	--A7:SetMovable(true)
+	--A7:SetClampedToScreen(true)
+	
 	if (not C["ActionBars"].HideBackdrop) then
 		A1:SetTemplate("Transparent")
 		A2:SetTemplate("Transparent")
@@ -137,6 +153,7 @@ function DuffedUIActionBars:AddPanels()
 		A4:SetTemplate("Transparent")
 		A5:SetTemplate("Transparent")
 		A6:SetTemplate("Transparent")
+		A7:SetTemplate("Transparent")
 	end
 	
 	Panels.ActionBar1 = A1
@@ -145,6 +162,7 @@ function DuffedUIActionBars:AddPanels()
 	Panels.ActionBar4 = A4
 	Panels.ActionBar5 = A5
 	Panels.PetActionBar = A6
+	Panels.StanceBar = A7
 end
 
 function DuffedUIActionBars:UpdatePetBar(...)
@@ -212,6 +230,58 @@ function DuffedUIActionBars:UpdatePetBar(...)
 	end
 end
 
+function DuffedUIActionBars:UpdateStanceBar(...)
+	local NumForms = GetNumShapeshiftForms()
+	local Texture, Name, IsActive, IsCastable, Button, Icon, Cooldown, Start, Duration, Enable
+
+	if NumForms == 0 then
+		Panels.StanceBar:SetAlpha(0)
+	else
+		Panels.StanceBar:SetAlpha(1)
+		Panels.StanceBar:SetSize((PetSize * NumForms) + (Spacing * (NumForms + 1)), PetSize + (Spacing * 2))
+
+		for i = 1, NUM_STANCE_SLOTS do
+			local ButtonName = "StanceButton"..i
+
+			Button = _G[ButtonName]
+			Icon = _G[ButtonName.."Icon"]
+
+			if i <= NumForms then
+				Texture, Name, IsActive, IsCastable = GetShapeshiftFormInfo(i)
+
+				if not Icon then
+					return
+				end
+
+				Icon:SetTexture(Texture)
+				Cooldown = _G[ButtonName.."Cooldown"]
+
+				if Texture then
+					Cooldown:SetAlpha(1)
+				else
+					Cooldown:SetAlpha(0)
+				end
+
+				Start, Duration, Enable = GetShapeshiftFormCooldown(i)
+				CooldownFrame_SetTimer(Cooldown, Start, Duration, Enable)
+
+				if IsActive then
+					StanceBarFrame.lastSelected = Button:GetID()
+					Button:SetChecked(1)
+				else
+					Button:SetChecked(0)
+				end
+
+				if IsCastable then
+					Icon:SetVertexColor(1.0, 1.0, 1.0)
+				else
+					Icon:SetVertexColor(0.4, 0.4, 0.4)
+				end
+ 			end
+ 		end
+	end
+end
+
 DuffedUIActionBars:RegisterEvent("PLAYER_ENTERING_WORLD")
 DuffedUIActionBars:RegisterEvent("ADDON_LOADED")
 DuffedUIActionBars:RegisterEvent("VARIABLES_LOADED")
@@ -225,6 +295,7 @@ DuffedUIActionBars:SetScript("OnEvent", function(self, event, addon)
 		self:CreateBar4()
 		self:CreateBar5()
 		self:CreatePetBar()
+		self:CreateStanceBar()
 		self:ShowGrid()
 		self:CreateToggleButtons()
 		self:CreateVehicleButtons()

@@ -85,6 +85,7 @@ local function Visibility(self, event, unit)
 				else
 					wsb[i]:SetValue(0)
 				end
+				wsb[i]:SetAlpha(1)
 				wsb[i]:Show()
 				if wsb[i].bg then wsb[i].bg:SetAlpha(0.15) end
 			end	

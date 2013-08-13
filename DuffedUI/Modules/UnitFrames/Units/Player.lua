@@ -208,7 +208,23 @@ function DuffedUIUnitFrames:Player()
 
 		self.Statue = Bar
 	end
+	
+	self:RegisterEvent("PLAYER_ENTERING_WORLD", DuffedUIUnitFrames.Update) -- http://www.tukui.org/tickets/tukui/index.php?page=bug_show&bug_id=218
+	self:SetScript("OnEnter", DuffedUIUnitFrames.MouseOnPlayer)
+	self:SetScript("OnLeave", DuffedUIUnitFrames.MouseOnPlayer)
 
+	-- Register with oUF
+	self.Panel = Panel
+	self.Health = Health
+	self.Health.bg = Health.Background
+	self.Power = Power
+	self.Power.bg = Power.Background
+	self.Combat = Combat
+	self.Status = Status
+	self.Leader = Leader
+	self.MasterLooter = MasterLooter
+
+	-- Classes
 	if (Class == "DEATHKNIGHT") then
 		DuffedUIUnitFrames.AddDeathKnightFeatures(self)
 	elseif (Class == "DRUID") then
@@ -232,19 +248,4 @@ function DuffedUIUnitFrames:Player()
 	elseif (Class == "HUNTER") then
 		DuffedUIUnitFrames.AddHunterFeatures(self)
 	end
-
-	self:RegisterEvent("PLAYER_ENTERING_WORLD", DuffedUIUnitFrames.Update) -- http://www.tukui.org/tickets/tukui/index.php?page=bug_show&bug_id=218
-	self:SetScript("OnEnter", DuffedUIUnitFrames.MouseOnPlayer)
-	self:SetScript("OnLeave", DuffedUIUnitFrames.MouseOnPlayer)
-	
-	-- Register with oUF
-	self.Panel = Panel
-	self.Health = Health
-	self.Health.bg = Health.Background
-	self.Power = Power
-	self.Power.bg = Power.Background
-	self.Combat = Combat
-	self.Status = Status
-	self.Leader = Leader
-	self.MasterLooter = MasterLooter
 end

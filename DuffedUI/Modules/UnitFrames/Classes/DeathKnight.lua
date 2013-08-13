@@ -18,7 +18,7 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	for i = 1, 6 do
 		RunesBar[i] = CreateFrame("StatusBar", nil, RunesBar)
 		RunesBar[i]:Height(8)
-		RunesBar[i]:SetStatusBarTexture(C.Media.Normal)
+		RunesBar[i]:SetStatusBarTexture(C["Media"].Normal)
 
 		if i == 1 then
 			RunesBar[i]:Width(40)
@@ -41,7 +41,7 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	StatueBar:ClearAllPoints()
 	StatueBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
 	
-	-- Update Shadow Effect
+	-- Shadow Effect Updates
 	Shadow:Point("TOPLEFT", -4, 12)
 	
 	StatueBar:SetScript("OnShow", function(self) 
