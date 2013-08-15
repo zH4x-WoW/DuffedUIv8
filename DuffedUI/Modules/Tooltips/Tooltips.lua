@@ -137,7 +137,9 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		Color = "|CFFFFFFFF"
 	end
 
-	Line1:SetFormattedText("%s%s%s", Color, Title or Name, Realms and Realms ~= "" and " - ".. Realm .."|r" or "|r")
+	if Title or Name then
+		Line1:SetFormattedText("%s%s%s", Color, Title or Name, Realm and Realm ~= "" and " - ".. Realm .."|r" or "|r")
+	end
 
 	if (UnitIsPlayer(Unit)) then
 		if (UnitIsAFK(Unit)) then

@@ -11,15 +11,16 @@ local DataTextRight = Panels.DataTextRight
 local MinimapDataTextOne
 local MinimapDataTextTwo
 
-DuffedUIDT.NumAnchors = 6
-DuffedUIDT.Font = C["Medias"].Font
-DuffedUIDT.Size = 12
-DuffedUIDT.Flags = nil
-DuffedUIDT.Texts = {}
-DuffedUIDT.Anchors = {}
-DuffedUIDT.Menu = {}
-DuffedUIDT.NameColor = D.RGBToHex(unpack(C["Medias"].PrimaryDataTextColor))
-DuffedUIDT.ValueColor = D.RGBToHex(unpack(C["Medias"].SecondaryDataTextColor))
+DuffedUIDD.DefaultNumAnchors = 6
+DuffedUIDD.NumAnchors = DuffedUIDD.DefaultNumAnchors
+DuffedUIDD.Font = C["Medias"].Font
+DuffedUIDD.Size = 12
+DuffedUIDD.Flags = nil
+DuffedUIDD.Texts = {}
+DuffedUIDD.Anchors = {}
+DuffedUIDD.Menu = {}
+DuffedUIDD.NameColor = D.RGBToHex(unpack(C["Medias"].PrimaryDataTextColor))
+DuffedUIDD.ValueColor = D.RGBToHex(unpack(C["Medias"].SecondaryDataTextColor))
 
 function DuffedUIDT:AddToMenu(name, data)
 	if self["Texts"][name] then
@@ -45,6 +46,10 @@ local SetData = function(self, object)
 	self.Data.Text:Point("BOTTOM", self, 0, -1)
 	self.Data.Position = self.Num
 	self.Data:SetAllPoints(self.Data.Text)
+	
+	if self.Data.Position > DuffedUIDD.DefaultNumAnchors then
++		self.Data:SetParent(Panels.PetBattleHider)
++	end
 end
 
 local RemoveData = function(self)

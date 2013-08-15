@@ -197,7 +197,7 @@ function DuffedUIAuras:Skin()
 	local Proxy = self.IsProxy
 	
 	local Icon = self:CreateTexture(nil, "BORDER")
-	Icon:SetTexCoord(.07, .93, .07, .93)
+	Icon:SetTexCoord(D.IconCoord)
 	Icon:SetInside()
 	
 	local Count = self:CreateFontString(nil, "OVERLAY")

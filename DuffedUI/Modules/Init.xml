@@ -92,6 +92,16 @@
 	<!-- Tooltips -->
 	<Script file="Tooltips\Tooltips.lua"/>
 	<Script file="Tooltips\IdAndCount.lua"/>
+	
+	<!-- Quests -->
+	<Script file="Quests\Core.lua"/>
+	<Script file="Quests\WatchFrame.lua"/>
+	
+	<!-- Pet Battles -->
+	<Script file="PetBattles\Core.lua"/>
+	<Script file="PetBattles\UnitFrames.lua"/>
+	<Script file="PetBattles\Actions.lua"/>
+	<Script file="PetBattles\Others.lua"/>
 
 	<!-- Misc. -->
 	<Script file="Miscellaneous\AltPowerBar.lua"/>

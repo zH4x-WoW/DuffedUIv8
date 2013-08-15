@@ -10,6 +10,7 @@ local Update = function(self)
 	local Effective = Base + PosBuff + NegBuff
 	local RangedBase, RangedPosBuff, RangedNegBuff = UnitRangedAttackPower("player")
 	local RangedEffective = RangedBase + RangedPosBuff + RangedNegBuff
+	local Text = L.DataText.AttackPower
 
 	HealPower = GetSpellBonusHealing()
 	SpellPower = GetSpellBonusDamage(7)
@@ -27,9 +28,10 @@ local Update = function(self)
 		Value = RangedEffective
 	else
 		Value = Spell
+		Text = L.DataText.Spell
 	end
 	
-	self.Text:SetText(format(DataText.ValueColor .. D.Comma(Value) .. "|r")) -- "%s: %s", 
+	self.Text:SetText(format(DataText.NameColor .. Text .. "|r", DataText.ValueColor .. D.Comma(Value) .. "|r")) -- "%s: %s", 
 end
 
 local Enable = function(self)	

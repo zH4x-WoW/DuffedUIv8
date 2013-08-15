@@ -279,22 +279,20 @@ local function HighlightUnit(f, r, g, b)
 	f:RegisterEvent("PLAYER_TARGET_CHANGED", HighlightTarget)
 end
 
-local function StripTextures(object, kill)
-	for i=1, object:GetNumRegions() do
-		local region = select(i, object:GetRegions())
-		if region:GetObjectType() == "Texture" then
-			if kill then
-				region:Kill()
+local function StripTextures(Object, Kill)
+	for i=1, Object:GetNumRegions() do
+		local Region = select(i, Object:GetRegions())
+		if Region:GetObjectType() == "Texture" then
+			if Kill then
+				Region:Kill()
 			else
-				region:SetTexture(nil)
+				Region:SetTexture(nil)
 			end
 		end
 	end		
 end
 
 local function SkinButton(frame, strip)
-	local Frame, Strip = frame, Strip
-
 	if Frame:GetName() then
 		local Left = _G[Frame:GetName().."Left"]
 		local Middle = _G[Frame:GetName().."Middle"]
@@ -333,7 +331,23 @@ local function SkinButton(frame, strip)
 	end)
 end
 
-local function SkinEditBox(frame)
+local function SkinCloseButton(Frame, Reposition)
+	if Reposition then
+		Frame:Point("TOPRIGHT", Reposition, "TOPRIGHT", 2, 2)
+	end
+
+	Frame:SetNormalTexture("")
+	Frame:SetPushedTexture("")
+	Frame:SetHighlightTexture("")
+	Frame:SetDisabledTexture("")
+
+	Frame.Text = Frame:CreateFontString(nil, "OVERLAY")
+	Frame.Text:SetFont(C["Medias"].PixelFont, 12, "OUTLINE")
+	Frame.Text:SetPoint("CENTER", 0, 1)
+	Frame.Text:SetText("x")
+end
+
+local function SkinEditBox(Frame)
 	local Frame = frame
 	local Left, Middle, Right, Mid = _G[Frame:GetName().."Left"], _G[Frame:GetName().."Middle"], _G[Frame:GetName().."Right"], _G[Frame:GetName().."Mid"]
 
@@ -373,6 +387,7 @@ local function AddAPI(object)
 	if not object.HideInsets then mt.HideInsets = HideInsets end
 	if not object.SkinEditBox then mt.SkinEditBox = SkinEditBox end
 	if not object.SkinButton then mt.SkinButton = SkinButton end
+	if not object.SkinCloseButton then mt.SkinCloseButton = SkinCloseButton end
 end
 
 local Handled = {["Frame"] = true}

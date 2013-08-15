@@ -97,3 +97,36 @@ D.ColorGradient = function(a, b, ...)
 
 	return R1 + (R2 - R1) * RelPercent, G1 + (G2 - G1) * RelPercent, B1 + (B2 - B1) * RelPercent
 end
+
+local WaitTable = {}
+local WaitFrame
+D.Delay = function(delay, func, ...)
+	if (type(delay) ~= "number" or type(func) ~= "function") then
+		return false
+	end
+
+	if (WaitFrame == nil) then
+		WaitFrame = CreateFrame("Frame", nil, UIParent)
+		WaitFrame:SetScript("OnUpdate",function(self, elapse)
+			local Count = #WaitTable
+			local i = 1
+
+			while(i<=Count) do
+				local WaitRecord = tremove(WaitTable, i)
+				local d = tremove(WaitRecord, 1)
+				local f = tremove(WaitRecord, 1)
+				local p = tremove(WaitRecord, 1)
+				if (d > elapse) then
+				  tinsert(WaitTable, i, {d - elapse, f, p})
+				  i = i + 1
+				else
+				  Count = Count - 1
+				  f(unpack(p))
+				end
+			end
+		end)
+	end
+
+	tinsert(WaitTable, {delay,func,{...}})
+	return true
+end

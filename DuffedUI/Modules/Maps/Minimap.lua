@@ -2,6 +2,7 @@ local D, C, L = select(2, ...):unpack()
 
 local _G = _G
 local Map = _G["Minimap"]
+local Panels = D["Panels"]
 local DuffedUIMinimap = CreateFrame("Frame")
 
 function DuffedUIMinimap:DisableElements()
@@ -47,7 +48,7 @@ function DuffedUIMinimap:StyleFrame()
 end
 
 function DuffedUIMinimap:PositionFrame()
-	Map:SetParent(UIParent)
+	Map:SetParent(Panels.PetBattleHider)
 	Map:ClearAllPoints()
 	Map:Point("TOPRIGHT", -30, -30)
 end
@@ -55,13 +56,13 @@ end
 function DuffedUIMinimap:AddDataTextPanels()
 	local Panels = D["Panels"]
 	
-	local MinimapDataTextOne = CreateFrame("Frame", "DuffedUIMinimapDataTextOne", Map)
+	local MinimapDataTextOne = CreateFrame("Frame", nil, Map)
 	MinimapDataTextOne:Size(Map:GetWidth() / 2 + 2, 19)
 	MinimapDataTextOne:SetPoint("TOPLEFT", Map, "BOTTOMLEFT", -2, -3)
 	MinimapDataTextOne:SetTemplate()
 	MinimapDataTextOne:SetFrameStrata("LOW")
 
-	local MinimapDataTextTwo = CreateFrame("Frame", "DuffedUIMinimapDataTextTwo", Map)
+	local MinimapDataTextTwo = CreateFrame("Frame", nil, Map)
 	MinimapDataTextTwo:Size(Map:GetWidth() / 2 + 1, 19)
 	MinimapDataTextTwo:SetPoint("TOPRIGHT", Map, "BOTTOMRIGHT", 2, -3)
 	MinimapDataTextTwo:SetTemplate()
