@@ -36,6 +36,14 @@ C["Auras"] = {
 	["HideDebuffs"] = false,
 }
 
+C["Bags"] = {
+	["Enable"] = true,
+	["ButtonSize"] = 28,
+	["Spacing"] = 4,
+	["ItemsPerRow"] = 11,
+	["Scale"] = 1,
+}
+
 C["Chat"] = {
 	["Enable"] = true,
 	["WhisperSound"] = true,

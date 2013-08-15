@@ -4,6 +4,9 @@
 
 	<!-- Panels -->
 	<Script file="Panels\Panels.lua"/>
+	
+	<!-- Bags -->
+	<Script file="Bags\Bags.lua"/>
 
 	<!-- Action Bars -->
 	<Script file="ActionBars\Core.lua"/>

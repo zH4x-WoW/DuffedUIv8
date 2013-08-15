@@ -292,6 +292,63 @@ local function StripTextures(object, kill)
 	end		
 end
 
+local function SkinButton(frame, strip)
+	local Frame, Strip = frame, Strip
+
+	if Frame:GetName() then
+		local Left = _G[Frame:GetName().."Left"]
+		local Middle = _G[Frame:GetName().."Middle"]
+		local Right = _G[Frame:GetName().."Right"]
+
+
+		if Left then Left:SetAlpha(0) end
+		if Middle then Middle:SetAlpha(0) end
+		if Right then Right:SetAlpha(0) end
+	end
+
+	if Frame.Left then Frame.Left:SetAlpha(0) end
+	if Frame.Right then Frame.Right:SetAlpha(0) end
+	if Frame.Middle then Frame.Middle:SetAlpha(0) end
+	if Frame.SetNormalTexture then Frame:SetNormalTexture("") end
+	if Frame.SetHighlightTexture then Frame:SetHighlightTexture("") end
+	if Frame.SetPushedTexture then Frame:SetPushedTexture("") end
+	if Frame.SetDisabledTexture then Frame:SetDisabledTexture("") end
+
+	if Strip then StripTextures(Frame) end
+
+	Frame:SetTemplate()
+
+	Frame:HookScript("OnEnter", function(self)
+		local Color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
+
+		self:SetBackdropColor(Color.r * .15, Color.g * .15, Color.b * .15)
+		self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
+	end)
+
+	Frame:HookScript("OnLeave", function(self)
+		local Color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
+
+		self:SetBackdropColor(C["Medias"].BackdropColor[1], C["Medias"].BackdropColor[2], C["Medias"].BackdropColor[3])
+		self:SetBackdropBorderColor(C["Medias"].BorderColor[1], C["Medias"].BorderColor[2], C["Medias"].BorderColor[3])
+	end)
+end
+
+local function SkinEditBox(frame)
+	local Frame = frame
+	local Left, Middle, Right, Mid = _G[Frame:GetName().."Left"], _G[Frame:GetName().."Middle"], _G[Frame:GetName().."Right"], _G[Frame:GetName().."Mid"]
+
+	if Left then Left:Kill() end
+	if Middle then Middle:Kill() end
+	if Right then Right:Kill() end
+	if Mid then Mid:Kill() end
+
+	Frame:CreateBackdrop()
+
+	if Frame:GetName() and Frame:GetName():find("Silver") or Frame:GetName():find("Copper") then
+		Frame.Backdrop:Point("BOTTOMRIGHT", -12, -2)
+	end
+end
+
 ---------------------------------------------------
 -- Merge DuffedUI API with WoW API
 ---------------------------------------------------
@@ -314,6 +371,8 @@ local function AddAPI(object)
 	if not object.FontString then mt.FontString = FontString end
 	if not object.HighlightUnit then mt.HighlightUnit = HighlightUnit end
 	if not object.HideInsets then mt.HideInsets = HideInsets end
+	if not object.SkinEditBox then mt.SkinEditBox = SkinEditBox end
+	if not object.SkinButton then mt.SkinButton = SkinButton end
 end
 
 local Handled = {["Frame"] = true}

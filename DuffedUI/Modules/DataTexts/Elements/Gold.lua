@@ -89,7 +89,7 @@ local OnLeave = function()
 end
 
 local Update = function(self, event)
-	if (event == "PLAYER_ENTERING_WORLD" or event == 1) then
+	if (event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LOGOUT") then
 		OldMoney = GetMoney()
 		
 		if (not DuffedUIData) then
@@ -135,10 +135,11 @@ local Enable = function(self)
 	self:RegisterEvent("PLAYER_TRADE_MONEY")
 	self:RegisterEvent("TRADE_MONEY_CHANGED")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
+	self:RegisterEvent("PLAYER_LOGOUT")
 	self:SetScript("OnMouseDown", ToggleAllBags)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnLeave", OnLeave)
-	self:Update(1)
+	self:SetScript("OnEvent", Update)
 end
 
 local Disable = function(self)
