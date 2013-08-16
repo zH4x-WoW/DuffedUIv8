@@ -46,9 +46,13 @@ C["bags"] = {
 
 C["chat"] = {
 	["Enable"] = true,
+	["LeftBackground"] = true,
+	["RightBackground"] = true,
 	["WhisperSound"] = true,
 	["LinkColor"] = {0.08, 1, 0.36},
 	["LinkBrackets"] = true,
+	["Fading"] = true,
+	["Justify"] = "RIGHT"
 }
 
 C["cooldowns"] = {

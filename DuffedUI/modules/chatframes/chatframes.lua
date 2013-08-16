@@ -15,7 +15,9 @@ local format = format
 local Noop = function() end
 local DataTextLeft = D["Panels"].DataTextLeft
 local DataTextRight = D["Panels"].DataTextRight
-local CubeLeft = D["Panels"].CubeLeft
+local LeftChatBackground = D["Panels"].LeftChatBackground
+local RightChatBackground = D["Panels"].RightChatBackground
+local ChatCube = D["Panels"].ChatCube
 local DuffedUIChat = CreateFrame("Frame")
 
 -- Update editbox border color
@@ -74,8 +76,8 @@ function DuffedUIChat:StyleFrame(frame)
 	TabText.SetTextColor = Noop
 	
 	frame:SetClampRectInsets(0, 0, 0, 0)
-	frame:SetClampedToScreen(false)
-	frame:SetFading(false)
+	frame:SetClampedToScreen(true)
+	frame:SetFading(C["chat"].Fading)
 
 	-- Move the edit box
 	EditBox:ClearAllPoints()
@@ -182,7 +184,7 @@ function DuffedUIChat:Install()
 	FCF_UnDockFrame(ChatFrame4)
 	ChatFrame4:Show()
 	
-	local Width = DataTextLeft:GetWidth()
+	local Width = DataTextLeft:GetWidth() - 5
 
 	for i = 1, NUM_CHAT_WINDOWS do
 		local Frame = _G["ChatFrame"..i]
@@ -200,7 +202,7 @@ function DuffedUIChat:Install()
 			if (not Frame.isDocked) then
 				Frame:ClearAllPoints()
 				Frame:Point("BOTTOM", DataTextRight, "TOP", 0, 5)
-				Frame:SetJustifyH("RIGHT")
+				Frame:SetJustifyH(C["chat"].Justify)
 			end
 		end
 		
@@ -211,7 +213,6 @@ function DuffedUIChat:Install()
 		if (ID == 2) then
 			FCF_SetWindowName(Frame, "Log")
 		end
-		
 		
 		if (not Frame.isLocked) then
 			FCF_SetLocked(Frame, 1)
@@ -319,7 +320,7 @@ function DuffedUIChat:Setup()
 	ChatTypeInfo.RAID_WARNING.sticky = 1
 	ChatTypeInfo.CHANNEL.sticky = 1
 	
-	CubeLeft:SetScript("OnMouseDown", function(self, Button)
+	ChatCube:SetScript("OnMouseDown", function(self, Button)
 		local ChatMenu = ChatMenu
 
 		if Button == "LeftButton" then

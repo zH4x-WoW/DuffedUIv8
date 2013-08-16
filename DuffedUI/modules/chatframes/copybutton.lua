@@ -36,12 +36,14 @@ function DuffedUIChat:CopyText(chatframe)
 	CopyFrame:Show()
 end
 
-local OnEnter = function(self)
-	self:SetAlpha(1)
-end
+if not (C["chat"].LeftBackground and C["chat"].RightBackground) then
+	local OnEnter = function(self)
+		self:SetAlpha(1)
+	end
 
-local OnLeave = function(self)
-	self:SetAlpha(0)
+	local OnLeave = function(self)
+		self:SetAlpha(0)
+	end
 end
 
 local OnMouseUp = function(self)
@@ -96,15 +98,23 @@ function DuffedUIChat:CreateCopyButtons()
 		local Frame = _G["ChatFrame"..i]
 		
 		local Button = CreateFrame("Button", nil, Frame)
-		Button:Point("TOPRIGHT", 0, 0)
+		if not (C["chat"].LeftBackground and C["chat"].RightBackground) then
+			Button:Point("TOPRIGHT", 0, 0)
+		else
+			Button:Point("TOPRIGHT", -1, 25)
+		end
 		Button:Size(20, 20)
 		Button:SetNormalTexture(C["medias"].Copy)
-		Button:SetAlpha(0)
+		if not (C["chat"].LeftBackground and C["chat"].RightBackground) then
+			Button:SetAlpha(0)
+		end
 		Button:SetTemplate()
 		Button.ChatFrame = Frame
 
 		Button:SetScript("OnMouseUp", OnMouseUp)
-		Button:SetScript("OnEnter", OnEnter)
-		Button:SetScript("OnLeave", OnLeave)
+		if not (C["chat"].LeftBackground and C["chat"].RightBackground) then
+			Button:SetScript("OnEnter", OnEnter)
+			Button:SetScript("OnLeave", OnLeave)
+		end
 	end
 end

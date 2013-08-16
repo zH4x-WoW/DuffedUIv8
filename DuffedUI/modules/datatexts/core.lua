@@ -106,7 +106,7 @@ local GetTooltipAnchor = function(self)
 	local From
 	local Anchor = "ANCHOR_TOP"
 	local X = 0
-	local Y = T.Scale(5)
+	local Y = D.Scale(5)
 		
 	if (Position >= 1 and Position <= 3) then
 		Anchor = "ANCHOR_TOPLEFT"
