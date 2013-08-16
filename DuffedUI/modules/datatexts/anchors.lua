@@ -17,7 +17,7 @@ DuffedUIDT.Remove = function()
 end
 
 -- Add a remove button
-tinsert(Menu, {text = "|cffFF0000"..REMOVE.."|r", notCheckable = true, func = DuffedUIDD.Remove})
+tinsert(Menu, {text = "|cffFF0000"..REMOVE.."|r", notCheckable = true, func = DuffedUIDT.Remove})
 
 local OnMouseDown = function(self)
 	CurrentFrame = self

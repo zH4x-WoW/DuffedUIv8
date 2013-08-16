@@ -19,8 +19,8 @@ DuffedUIDT.Flags = nil
 DuffedUIDT.Texts = {}
 DuffedUIDT.Anchors = {}
 DuffedUIDT.Menu = {}
-DuffedUIDT.NameColor = T.RGBToHex(unpack(C["medias"].PrimaryDataTextColor))
-DuffedUIDT.ValueColor = T.RGBToHex(unpack(C["medias"].SecondaryDataTextColor))
+DuffedUIDT.NameColor = D.RGBToHex(unpack(C["medias"].PrimaryDataTextColor))
+DuffedUIDT.ValueColor = D.RGBToHex(unpack(C["medias"].SecondaryDataTextColor))
 
 function DuffedUIDT:AddToMenu(name, data)
 	if self["Texts"][name] then
