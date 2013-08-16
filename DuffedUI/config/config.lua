@@ -8,8 +8,8 @@ C["general"] = {
 	["AutoScale"] = true,
 	["MultiSampleProtection"] = true,
 	["UIScale"] = 0.71,
-	["BackdropColor"] = {0.1, 0.1, 0.1},
-	["BorderColor"] = {0.6, 0.6, 0.6},
+	["BackdropColor"] = {.05, .05, .05},
+	["BorderColor"] = {.125, .125, .125},
 	["InOut"] = true,
 }
 
