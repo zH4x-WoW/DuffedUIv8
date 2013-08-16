@@ -20,9 +20,9 @@
                        `spacing`.
  .['spacing-y']      - Vertical spacing between each icon. Takes priority over
                        `spacing`.
- .['growth-x']       - Horizontal growth direction. Defaults to RIGHD.
+ .['growth-x']       - Horizontal growth direction. Defaults to RIGHT.
  .['growth-y']       - Vertical growth direction. Defaults to UP.
- .initialAnchor      - Anchor point for the icons. Defaults to BOTTOMLEFD.
+ .initialAnchor      - Anchor point for the icons. Defaults to BOTTOMLEFT.
  .filter             - Custom filter list for auras to display. Defaults to
                        HELPFUL on buffs and HARMFUL on debuffs.
 

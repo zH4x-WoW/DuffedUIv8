@@ -26,7 +26,7 @@ local BossFrames = MAX_BOSS_FRAMES
 DuffedUIUnitFrames.Units = {}
 DuffedUIUnitFrames.Headers = {}
 DuffedUIUnitFrames.Backdrop = {
-	bgFile = C.Medias.Blank,
+	bgFile = C["medias"].Blank,
 	insets = {top = -D.Mult, left = -D.Mult, bottom = -D.Mult, right = -D.Mult},
 }
 
@@ -338,7 +338,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button:SetTemplate("Default")
 
 	button.Remaining = button:CreateFontString(nil, "OVERLAY")
-	button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
+	button.Remaining:SetFont(C["medias"].Font, 12, "THINOUTLINE")
 	button.Remaining:Point("CENTER", 1, 0)
 
 	button.cd.noOCC = true
@@ -354,7 +354,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 
 	button.count:Point("BOTTOMRIGHT", 3, 3)
 	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C.Medias.Font, 9, "THICKOUTLINE")
+	button.count:SetFont(C["medias"].Font, 9, "THICKOUTLINE")
 	button.count:SetTextColor(0.84, 0.75, 0.65)
 
 	button.OverlayFrame = CreateFrame("Frame", nil, button, nil)
@@ -366,7 +366,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button.Glow = CreateFrame("Frame", nil, button)
 	button.Glow:SetOutside()
 	button.Glow:SetFrameStrata("BACKGROUND")	
-	button.Glow:SetBackdrop{edgeFile = C.Medias.Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
+	button.Glow:SetBackdrop{edgeFile = C["medias"].Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
 	
@@ -386,7 +386,7 @@ function DuffedUIUnitFrames:PostUpdateAura(unit, button, index, offset, filter, 
 		if(button.filter == "HARMFUL") then
 			if(not UnitIsFriend("player", unit) and button.owner ~= "player" and button.owner ~= "vehicle") then
 				button.icon:SetDesaturated(true)
-				button:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+				button:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
 			else
 				local color = DebuffTypeColor[dtype] or DebuffTypeColor.none
 				button.icon:SetDesaturated(false)
@@ -412,6 +412,24 @@ function DuffedUIUnitFrames:PostUpdateAura(unit, button, index, offset, filter, 
 		button.TimeLeft = ExpirationTime
 		button.First = true
 		button:SetScript("OnUpdate", DuffedUIUnitFrames.CreateAuraTimer)
+	end
+end
+
+function DuffedUIUnitFrames:SetGridGroupRole()
+	local LFDRole = self.LFDRole
+	local Role = UnitGroupRolesAssigned(self.unit)
+
+	if Role == "TANK" then
+		LFDRole:SetTexture(67/255, 110/255, 238/255,.3)
+		LFDRole:Show()
+	elseif Role == "HEALER" then
+		LFDRole:SetTexture(130/255,  255/255, 130/255, .15)
+		LFDRole:Show()
+	elseif Role == "DAMAGER" then
+		LFDRole:SetTexture(176/255, 23/255, 31/255, .27)
+		LFDRole:Show()
+	else
+		LFDRole:Hide()
 	end
 end
 

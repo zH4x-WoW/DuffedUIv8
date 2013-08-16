@@ -26,7 +26,7 @@ function DuffedUIActionBars:RangeUpdateBackdrop(IsUsable, NotEnoughMana, OutOfRa
 	if (IsUsable and OutOfRange) or (NotEnoughMana and OutOfRange) then
 		Backdrop:SetBackdropBorderColor(1, 0, 0)
 	elseif (not HasAction(Action)) or (IsUsable) then
-		Backdrop:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+		Backdrop:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
 	elseif (NotEnoughMana) then
 		Backdrop:SetBackdropBorderColor(0.1, 0.1, 1)
 	else

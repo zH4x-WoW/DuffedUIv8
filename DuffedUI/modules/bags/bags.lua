@@ -134,7 +134,7 @@ function Bags:CreateContainer(storagetype, ...)
 	ToggleBagsContainer:EnableMouse(true)
 	ToggleBagsContainer.Text = ToggleBagsContainer:CreateFontString("button")
 	ToggleBagsContainer.Text:SetPoint("CENTER", ToggleBagsContainer, "CENTER")
-	ToggleBagsContainer.Text:SetFont(C.Medias.Font, 12, "OUTLINE")
+	ToggleBagsContainer.Text:SetFont(C["medias"].Font, 12, "OUTLINE")
 	ToggleBagsContainer.Text:SetText("X")
 	ToggleBagsContainer.Text:SetTextColor(.4, .4, .4)
 	ToggleBagsContainer:SetScript("OnMouseUp", function(self, button)
@@ -295,7 +295,7 @@ function Bags:SkinTokens()
 		Icon:SetTexCoord(unpack(D.IconCoord)) 
 		Icon:SetPoint("LEFT", Token, "RIGHT", -8, 2) 
 		
-		Count:SetFont(C.Medias.Font, 13)
+		Count:SetFont(C["medias"].Font, 13)
 	end
 end
 

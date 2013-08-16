@@ -17,7 +17,7 @@ function DuffedUIUnitFrames:AddPaladinFeatures()
 	for i = 1, 5 do
 		HPBar[i] = CreateFrame("StatusBar", nil, HPBar)
 		HPBar[i]:Height(8)
-		HPBar[i]:SetStatusBarTexture(C.Medias.Normal)
+		HPBar[i]:SetStatusBarTexture(C["medias"].Normal)
 		HPBar[i]:SetStatusBarColor(0.89, 0.88, 0.06)
 
 		if i == 1 then

@@ -241,7 +241,7 @@ function ActionBars:CreateToggleButtons()
 		
 		Button.Text = Button:CreateFontString(nil, "OVERLAY")
 		Button.Text:Point("CENTER", Button, 0, 0)
-		Button.Text:SetFont(C.Medias.ActionBarFont, 12)
+		Button.Text:SetFont(C["medias"].ActionBarFont, 12)
 		
 		if (i == 2) then
 			Button:Size(18, Height)
@@ -291,7 +291,7 @@ function ActionBars:CreateVehicleButtons()
 	VehicleLeft:SetScript("OnClick", VehicleExit)
 
 	VehicleLeft.Text = VehicleLeft:CreateFontString(nil, "OVERLAY")
-	VehicleLeft.Text:SetFont(C.Medias.Font, 12)
+	VehicleLeft.Text:SetFont(C["medias"].Font, 12)
 	VehicleLeft.Text:Point("CENTER", 0, 0)
 	VehicleLeft.Text:SetText("|cffFF0000" .. LEAVE_VEHICLE .. "|r")
 	VehicleLeft.Text:SetShadowOffset(1.25, -1.25)
@@ -305,7 +305,7 @@ function ActionBars:CreateVehicleButtons()
 	VehicleRight:SetScript("OnClick", VehicleExit)
 
 	VehicleRight.Text = VehicleRight:CreateFontString(nil, "OVERLAY")
-	VehicleRight.Text:SetFont(C.Medias.Font, 12)
+	VehicleRight.Text:SetFont(C["medias"].Font, 12)
 	VehicleRight.Text:Point("CENTER", 0, 0)
 	VehicleRight.Text:SetText("|cffFF0000" .. LEAVE_VEHICLE .. "|r")
 	VehicleRight.Text:SetShadowOffset(1.25, -1.25)

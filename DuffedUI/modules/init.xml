@@ -108,4 +108,5 @@
 	<Script file="misc\altpowerbar.lua"/>
 	<Script file="misc\threatbar.lua"/>
 	<Script file="misc\garbagecollection.lua"/>
+	<Script file="misc\dropdown.lua"/>
 </Ui>

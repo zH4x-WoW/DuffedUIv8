@@ -15,6 +15,7 @@ local format = format
 local Noop = function() end
 local DataTextLeft = D["Panels"].DataTextLeft
 local DataTextRight = D["Panels"].DataTextRight
+local CubeLeft = D["Panels"].CubeLeft
 local DuffedUIChat = CreateFrame("Frame")
 
 -- Update editbox border color
@@ -28,7 +29,7 @@ function DuffedUIChat:UpdateEditBoxColor()
 			local ID = GetChannelName(EditBox:GetAttribute("channelTarget"))
 			
 			if (ID == 0) then
-				Backdrop:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+				Backdrop:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
 			else
 				Backdrop:SetBackdropBorderColor(ChatTypeInfo[ChatType..ID].r,ChatTypeInfo[ChatType..ID].g,ChatTypeInfo[ChatType..ID].b)
 			end
@@ -98,7 +99,7 @@ function DuffedUIChat:StyleFrame(frame)
 	EditBox.Backdrop:SetAllPoints(DataTextLeft)
 	EditBox.Backdrop:SetFrameStrata("LOW")
 	EditBox.Backdrop:SetFrameLevel(1)
-	EditBox.Backdrop:SetBackdropColor(unpack(C.Medias.BackdropColor))
+	EditBox.Backdrop:SetBackdropColor(unpack(C["medias"].BackdropColor))
 	
 	-- Hide textures
 	for i = 1, #CHAT_FRAME_TEXTURES do
@@ -317,6 +318,14 @@ function DuffedUIChat:Setup()
 	ChatTypeInfo.OFFICER.sticky = 1
 	ChatTypeInfo.RAID_WARNING.sticky = 1
 	ChatTypeInfo.CHANNEL.sticky = 1
+	
+	CubeLeft:SetScript("OnMouseDown", function(self, Button)
+		local ChatMenu = ChatMenu
+
+		if Button == "LeftButton" then
+			ToggleFrame(ChatMenu)
+		end
+	end)
 end
 
 -- Kill stuff

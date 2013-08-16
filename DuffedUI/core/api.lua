@@ -8,7 +8,7 @@ local Scale = function(x) return Mult*math.floor(x/Mult+.5) end
 local InOut = C["general"].InOut
 local floor = math.floor
 local class = select(2, UnitClass("player"))
-local texture = C.Medias.Blank
+local texture = C["medias"].Blank
 local noop = function() return end
 
 D.Scale = Scale
@@ -65,19 +65,19 @@ local function SetTemplate(f, t, tex)
 	local balpha = 1
 	if t == "Transparent" then balpha = 0.8 end
 	
-	local borderr, borderg, borderb = unpack(C.Medias.BorderColor)
-	local backdropr, backdropg, backdropb = unpack(C.Medias.BackdropColor)
+	local borderr, borderg, borderb = unpack(C["medias"].BorderColor)
+	local backdropr, backdropg, backdropb = unpack(C["medias"].BackdropColor)
 	local backdropa = balpha
 	
 	if tex then 
-		texture = C.Medias.Normal 
+		texture = C["medias"].Normal 
 	else 
-		texture = C.Medias.Blank 
+		texture = C["medias"].Blank 
 	end
 		
 	f:SetBackdrop({
 	  bgFile = texture, 
-	  edgeFile = C.Medias.Blank, 
+	  edgeFile = C["medias"].Blank, 
 	  tile = false, tileSize = 0, edgeSize = Mult,
 	})
 	
@@ -192,7 +192,7 @@ local function CreateShadow(f, t)
 	shadow:Point("TOPRIGHT", 3, 3)
 	shadow:Point("BOTTOMRIGHT", 3, -3)
 	shadow:SetBackdrop( { 
-		edgeFile = C.Medias.Glow, edgeSize = Scale(3),
+		edgeFile = C["medias"].Glow, edgeSize = Scale(3),
 		insets = {left = Scale(5), right = Scale(5), top = Scale(5), bottom = Scale(5)},
 	})
 	shadow:SetBackdropColor(0, 0, 0, 0)
@@ -269,7 +269,7 @@ end
 local function HighlightUnit(f, r, g, b)
 	if f.HighlightTarget then return end
 	
-	local glowBorder = {edgeFile = C.Medias.Blank, edgeSize = 1}
+	local glowBorder = {edgeFile = C["medias"].Blank, edgeSize = 1}
 	f.HighlightTarget = CreateFrame("Frame", nil, f)
 	f.HighlightTarget:SetOutside()
 	f.HighlightTarget:SetBackdrop(glowBorder)
@@ -326,8 +326,8 @@ local function SkinButton(Frame, Strip)
 	Frame:HookScript("OnLeave", function(self)
 		local Color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
 		
-		self:SetBackdropColor(C.Medias.BackdropColor[1], C.Medias.BackdropColor[2], C.Medias.BackdropColor[3])
-		self:SetBackdropBorderColor(C.Medias.BorderColor[1], C.Medias.BorderColor[2], C.Medias.BorderColor[3])	
+		self:SetBackdropColor(C["medias"].BackdropColor[1], C["medias"].BackdropColor[2], C["medias"].BackdropColor[3])
+		self:SetBackdropBorderColor(C["medias"].BorderColor[1], C["medias"].BorderColor[2], C["medias"].BorderColor[3])	
 	end)
 end
 
@@ -342,7 +342,7 @@ local function SkinCloseButton(Frame, Reposition)
 	Frame:SetDisabledTexture("")
 
 	Frame.Text = Frame:CreateFontString(nil, "OVERLAY")
-	Frame.Text:SetFont(C.Medias.PixelFont, 12, "OUTLINE")
+	Frame.Text:SetFont(C["medias"].PixelFont, 12, "OUTLINE")
 	Frame.Text:SetPoint("CENTER", 0, 1)
 	Frame.Text:SetText("x")
 end

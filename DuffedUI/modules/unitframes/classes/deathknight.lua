@@ -18,7 +18,7 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	for i = 1, 6 do
 		RunesBar[i] = CreateFrame("StatusBar", nil, RunesBar)
 		RunesBar[i]:Height(8)
-		RunesBar[i]:SetStatusBarTexture(C.Medias.Normal)
+		RunesBar[i]:SetStatusBarTexture(C["medias"].Normal)
 
 		if i == 1 then
 			RunesBar[i]:Width(40)

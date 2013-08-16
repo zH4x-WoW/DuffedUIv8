@@ -16,7 +16,7 @@ function DuffedUIUnitFrames:AddMageFeatures()
 	for i = 1, 4 do
 		ArcaneChargeBar[i] = CreateFrame("StatusBar", nil, ArcaneChargeBar)
 		ArcaneChargeBar[i]:Height(8)
-		ArcaneChargeBar[i]:SetStatusBarTexture(C.Medias.Normal)
+		ArcaneChargeBar[i]:SetStatusBarTexture(C["medias"].Normal)
 		ArcaneChargeBar[i].bg = ArcaneChargeBar[i]:CreateTexture(nil, 'ARTWORK')
 
 		if i == 1 then

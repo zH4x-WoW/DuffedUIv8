@@ -1,4 +1,4 @@
-local T, C = select(2, ...):unpack()
+local D, C = select(2, ...):unpack()
 
 ----------------------------------------------------------------
 -- This script will adjust resolution for optimal graphic

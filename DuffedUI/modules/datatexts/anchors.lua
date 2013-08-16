@@ -1,18 +1,18 @@
-local T, C = select(2, ...):unpack()
+local D, C = select(2, ...):unpack()
 
 -- Local values
 local MenuFrame = CreateFrame("Frame", "DataTextToggleDropDown", UIParent, "UIDropDownMenuTemplate")
 local DuffedUIDT = D["DataTexts"]
-local Anchors = DuffedUIDD.Anchors
-local Menu = DuffedUIDD.Menu
+local Anchors = DuffedUIDT.Anchors
+local Menu = DuffedUIDT.Menu
 local Active = false
 local CurrentFrame
 
-DuffedUIDD.Toggle = function(self, object)
+DuffedUIDT.Toggle = function(self, object)
 	CurrentFrame:SetData(object)
 end
 
-DuffedUIDD.Remove = function()
+DuffedUIDT.Remove = function()
 	CurrentFrame:RemoveData()
 end
 
@@ -62,8 +62,8 @@ local ColorInfo1 = {}
 local ColorInfo2 = {}
 
 -- Default to the colors defined by media
-DuffedUIDD.NameColor = Hex(unpack(DataColor1))
-DuffedUIDD.ValueColor = Hex(unpack(DataColor2))
+DuffedUIDT.NameColor = Hex(unpack(DataColor1))
+DuffedUIDT.ValueColor = Hex(unpack(DataColor2))
 
 local Callback = function(cancel)
 	local R, G, B
@@ -103,7 +103,7 @@ ColorInfo1.text = COLOR .. " 1"
 ColorInfo1.func = OnClick
 ColorInfo1.arg1 = ColorInfo1
 ColorInfo1.notCheckable = true
-ColorInfo1.colorCode = DuffedUIDD.NameColor
+ColorInfo1.colorCode = DuffedUIDT.NameColor
 ColorInfo1.r = DataColor1[1]
 ColorInfo1.g = DataColor1[2]
 ColorInfo1.b = DataColor1[3]
@@ -113,7 +113,7 @@ ColorInfo2.text = COLOR .. " 2"
 ColorInfo2.func = OnClick
 ColorInfo2.arg1 = ColorInfo2
 ColorInfo2.notCheckable = true
-ColorInfo2.colorCode = DuffedUIDD.ValueColor
+ColorInfo2.colorCode = DuffedUIDT.ValueColor
 ColorInfo2.r = DataColor2[1]
 ColorInfo2.g = DataColor2[2]
 ColorInfo2.b = DataColor2[3]

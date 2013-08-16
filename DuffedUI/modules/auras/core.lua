@@ -212,11 +212,11 @@ function DuffedUIAuras:Skin()
 		
 		local Bar = CreateFrame("StatusBar", nil, Holder)
 		Bar:SetInside()
-		Bar:SetStatusBarTexture(C.Medias.Blank)
+		Bar:SetStatusBarTexture(C["medias"].Blank)
 		Bar:SetStatusBarColor(0, 0.8, 0)
 		
 		local Duration = self:CreateFontString(nil, "OVERLAY")
-		Duration:SetFont(C.Medias.Font, 12, "OUTLINE")
+		Duration:SetFont(C["medias"].Font, 12, "OUTLINE")
 		Duration:SetPoint("BOTTOM", 0, -17)
 
 		if DuffedUIAuras.Flash then

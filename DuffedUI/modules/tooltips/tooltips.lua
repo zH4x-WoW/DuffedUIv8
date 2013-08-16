@@ -53,7 +53,7 @@ function DuffedUITooltips:CreateAnchor()
 	self.Anchor:SetMovable(true)
 	self.Anchor:CreateBackdrop()
 	self.Anchor.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
-	self.Anchor.Backdrop:FontString("Text", C.Medias.AltFont, 12)
+	self.Anchor.Backdrop:FontString("Text", C["medias"].AltFont, 12)
 	self.Anchor.Backdrop.Text:SetPoint("CENTER")
 	self.Anchor.Backdrop.Text:SetText(L.Tooltips.MoveAnchor)
 	self.Anchor.Backdrop:Hide()
@@ -208,7 +208,7 @@ function DuffedUITooltips:SetColor()
 	local Dead = Unit and UnitIsDead(Unit)
 	local r, g, b
 	
-	self:SetBackdropColor(unpack(C.Medias.BackdropColor))
+	self:SetBackdropColor(unpack(C["medias"].BackdropColor))
 	self:SetBackdropBorderColor(0, 0, 0)
 	
 	if Player then
@@ -242,11 +242,11 @@ function DuffedUITooltips:SetColor()
 				self:SetBackdropBorderColor(r, g, b)
 			end
 		else
-			HealthBar:SetStatusBarColor(unpack(C.Medias.BorderColor))
+			HealthBar:SetStatusBarColor(unpack(C["medias"].BorderColor))
 			
 			if (Insets) then
-				self:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
-				HealthBar.Backdrop:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+				self:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
+				HealthBar.Backdrop:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
 			end
 		end
 	end
@@ -278,6 +278,6 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 		Tooltip:HookScript("OnShow", self.Skin)
 	end
 	
-	HealthBar:SetStatusBarTexture(C.Medias.Normal)
+	HealthBar:SetStatusBarTexture(C["medias"].Normal)
 	HealthBar:CreateBackdrop()
 end)
