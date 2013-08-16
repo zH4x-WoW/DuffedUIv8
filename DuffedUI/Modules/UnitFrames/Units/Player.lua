@@ -17,19 +17,19 @@ function DuffedUIUnitFrames:Player()
 	Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
 	Panel:SetFrameLevel(2)
 	Panel:SetFrameStrata("MEDIUM")
-	Panel:SetBackdropBorderColor(C["Medias"].BorderColor[1] * 0.7, C["Medias"].BorderColor[2] * 0.7, C["Medias"].BorderColor[3] * 0.7)
+	Panel:SetBackdropBorderColor(C.Medias.BorderColor[1] * 0.7, C.Medias.BorderColor[2] * 0.7, C.Medias.BorderColor[3] * 0.7)
 
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:Height(26)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
-	Health:SetStatusBarTexture(C["Medias"].Normal)
+	Health:SetStatusBarTexture(C.Medias.Normal)
 
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
 
-	Health:FontString("Value", C["Medias"].AltFont, 12)
+	Health:FontString("Value", C.Medias.AltFont, 12)
 	Health.Value:Point("RIGHT", Panel, "RIGHT", -4, 0)
 
 	Health.frequentUpdates = true
@@ -40,7 +40,7 @@ function DuffedUIUnitFrames:Player()
 
 	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
 
-	if (C["UnitFrames"].Smooth) then
+	if (C["unitframes"].Smooth) then
 		Health.Smooth = true
 	end
 
@@ -48,14 +48,14 @@ function DuffedUIUnitFrames:Player()
 	Power:Height(8)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
-	Power:SetStatusBarTexture(C["Medias"].Normal)
+	Power:SetStatusBarTexture(C.Medias.Normal)
 
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints()
-	Power.Background:SetTexture(C["Medias"].Normal)
+	Power.Background:SetTexture(C.Medias.Normal)
 	Power.Background.multiplier = 0.3
 
-	Power:FontString("Value", C["Medias"].AltFont, 12)
+	Power:FontString("Value", C.Medias.AltFont, 12)
 	Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
 
 	Power.colorPower = true
@@ -70,7 +70,7 @@ function DuffedUIUnitFrames:Player()
 	Combat:SetVertexColor(0.69, 0.31, 0.31)
 
 	local Status = Panel:CreateFontString(nil, "OVERLAY")
-	Status:SetFont(C["Medias"].AltFont, 12)
+	Status:SetFont(C.Medias.AltFont, 12)
 	Status:Point("CENTER", Panel, "CENTER", 0, 0)
 	Status:SetTextColor(0.69, 0.31, 0.31)
 	Status:Hide()
@@ -83,29 +83,29 @@ function DuffedUIUnitFrames:Player()
 	MasterLooter:Size(14, 14)
 	MasterLooter:Point("TOPRIGHT", -2, 8)
 
-	if (C["UnitFrames"].CastBar) then
+	if (C["unitframes"].CastBar) then
 		local CastBar = CreateFrame("StatusBar", nil, self)
-		CastBar:SetStatusBarTexture(C["Medias"].Normal)
+		CastBar:SetStatusBarTexture(C.Medias.Normal)
 		CastBar:SetFrameLevel(6)
 		CastBar:SetInside(Panel)
 
 		CastBar.Background = CastBar:CreateTexture(nil, "BORDER")
 		CastBar.Background:SetAllPoints(CastBar)
-		CastBar.Background:SetTexture(C["Medias"].Normal)
+		CastBar.Background:SetTexture(C.Medias.Normal)
 		CastBar.Background:SetVertexColor(0.15, 0.15, 0.15)
 
 		CastBar.Time = CastBar:CreateFontString(nil, "OVERLAY")
-		CastBar.Time:SetFont(C["Medias"].AltFont, 12)
+		CastBar.Time:SetFont(C.Medias.AltFont, 12)
 		CastBar.Time:Point("RIGHT", Panel, "RIGHT", -4, 0)
 		CastBar.Time:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Time:SetJustifyH("RIGHT")
 
 		CastBar.Text = CastBar:CreateFontString(nil, "OVERLAY")
-		CastBar.Text:SetFont(C["Medias"].AltFont, 12)
+		CastBar.Text:SetFont(C.Medias.AltFont, 12)
 		CastBar.Text:Point("LEFT", Panel, "LEFT", 4, 0)
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 
-		if (C["UnitFrames"].CastBarIcon) then
+		if (C["unitframes"].CastBarIcon) then
 			CastBar.Button = CreateFrame("Frame", nil, CastBar)
 			CastBar.Button:Size(26)
 			CastBar.Button:SetTemplate()
@@ -117,9 +117,9 @@ function DuffedUIUnitFrames:Player()
 			CastBar.Icon:SetTexCoord(unpack(D.IconCoord))
 		end
 
-		if (C["UnitFrames"].CastBarLatency) then
+		if (C["unitframes"].CastBarLatency) then
 			CastBar.SafeZone = CastBar:CreateTexture(nil, "ARTWORK")
-			CastBar.SafeZone:SetTexture(C["Medias"].Normal)
+			CastBar.SafeZone:SetTexture(C.Medias.Normal)
 			CastBar.SafeZone:SetVertexColor(0.69, 0.31, 0.31, 0.75)
 		end
 
@@ -131,9 +131,9 @@ function DuffedUIUnitFrames:Player()
 		self.Castbar = CastBar
 	end
 
-	if (C["UnitFrames"].CombatLog) then
+	if (C["unitframes"].CombatLog) then
 		local CombatFeedbackText = Health:CreateFontString(nil, "OVERLAY")
-		CombatFeedbackText:SetFont(C["Medias"].AltFont, 14, "OUTLINE")
+		CombatFeedbackText:SetFont(C.Medias.AltFont, 14, "OUTLINE")
 		CombatFeedbackText:SetPoint("CENTER", 0, 1)
 		CombatFeedbackText.colors = {
 			DAMAGE = {0.69, 0.31, 0.31},
@@ -155,12 +155,12 @@ function DuffedUIUnitFrames:Player()
 		self.CombatFeedbackText = CombatFeedbackText
 	end
 
-	if (C["UnitFrames"].HealBar) then
+	if (C["unitframes"].HealBar) then
 		local FirstBar = CreateFrame("StatusBar", nil, Health)
 		FirstBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		FirstBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		FirstBar:SetWidth(250)
-		FirstBar:SetStatusBarTexture(C["Medias"].Normal)
+		FirstBar:SetStatusBarTexture(C.Medias.Normal)
 		FirstBar:SetStatusBarColor(0, 0.3, 0.15, 1)
 		FirstBar:SetMinMaxValues(0,1)
 
@@ -168,14 +168,14 @@ function DuffedUIUnitFrames:Player()
 		SecondBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		SecondBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		SecondBar:SetWidth(250)
-		SecondBar:SetStatusBarTexture(C["Medias"].Normal)
+		SecondBar:SetStatusBarTexture(C.Medias.Normal)
 		SecondBar:SetStatusBarColor(0, 0.3, 0, 1)
 
 		local ThirdBar = CreateFrame("StatusBar", nil, Health)
 		ThirdBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		ThirdBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		ThirdBar:SetWidth(250)
-		ThirdBar:SetStatusBarTexture(C["Medias"].Normal)
+		ThirdBar:SetStatusBarTexture(C.Medias.Normal)
 		ThirdBar:SetStatusBarColor(0.3, 0.3, 0, 1)
 
 		SecondBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 1)
@@ -189,11 +189,11 @@ function DuffedUIUnitFrames:Player()
 		}
 	end
 
-	if (C["UnitFrames"].StatueBar) then
+	if (C["unitframes"].StatueBar) then
 		local Bar = CreateFrame("StatusBar", nil, self)
 		Bar:Size(250, 8)
 		Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-		Bar:SetStatusBarTexture(C["Medias"].Normal)
+		Bar:SetStatusBarTexture(C.Medias.Normal)
 
 		Bar.Backdrop = CreateFrame("Frame", nil, Bar)
 		Bar.Backdrop:SetAllPoints()
@@ -205,22 +205,22 @@ function DuffedUIUnitFrames:Player()
 		Bar.Background = Bar:CreateTexture(nil, "BORDER")
 		Bar.Background:SetAllPoints()
 		Bar:Hide()
-		
-		Bar:SetScript("OnShow", function(self)
+
+		Bar:SetScript("OnShow", function(self) 
 			DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
 		end)
 
 		Bar:SetScript("OnHide", function(self)
 			DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
 		end)
-
+	
 		self.Statue = Bar
 	end
-	
+
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", DuffedUIUnitFrames.Update) -- http://www.tukui.org/tickets/tukui/index.php?page=bug_show&bug_id=218
 	self:SetScript("OnEnter", DuffedUIUnitFrames.MouseOnPlayer)
 	self:SetScript("OnLeave", DuffedUIUnitFrames.MouseOnPlayer)
-
+	
 	-- Register with oUF
 	self.Panel = Panel
 	self.Health = Health
@@ -231,7 +231,7 @@ function DuffedUIUnitFrames:Player()
 	self.Status = Status
 	self.Leader = Leader
 	self.MasterLooter = MasterLooter
-
+	
 	-- Classes
 	if (Class == "DEATHKNIGHT") then
 		DuffedUIUnitFrames.AddDeathKnightFeatures(self)

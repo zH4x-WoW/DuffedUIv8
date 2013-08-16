@@ -1,4 +1,4 @@
-local D, C = select(2, ...):unpack()
+local T, C = select(2, ...):unpack()
 
 local pairs = pairs
 local unpack = unpack
@@ -13,14 +13,14 @@ local MinimapDataTextTwo
 
 DuffedUIDD.DefaultNumAnchors = 6
 DuffedUIDD.NumAnchors = DuffedUIDD.DefaultNumAnchors
-DuffedUIDD.Font = C["Medias"].Font
+DuffedUIDD.Font = C.Medias.Font
 DuffedUIDD.Size = 12
 DuffedUIDD.Flags = nil
 DuffedUIDD.Texts = {}
 DuffedUIDD.Anchors = {}
 DuffedUIDD.Menu = {}
-DuffedUIDD.NameColor = D.RGBToHex(unpack(C["Medias"].PrimaryDataTextColor))
-DuffedUIDD.ValueColor = D.RGBToHex(unpack(C["Medias"].SecondaryDataTextColor))
+DuffedUIDD.NameColor = D.RGBToHex(unpack(C.Medias.PrimaryDataTextColor))
+DuffedUIDD.ValueColor = D.RGBToHex(unpack(C.Medias.SecondaryDataTextColor))
 
 function DuffedUIDT:AddToMenu(name, data)
 	if self["Texts"][name] then
@@ -48,8 +48,8 @@ local SetData = function(self, object)
 	self.Data:SetAllPoints(self.Data.Text)
 	
 	if self.Data.Position > DuffedUIDD.DefaultNumAnchors then
-+		self.Data:SetParent(Panels.PetBattleHider)
-+	end
+		self.Data:SetParent(Panels.PetBattleHider)
+	end
 end
 
 local RemoveData = function(self)

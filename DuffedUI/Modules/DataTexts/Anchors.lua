@@ -1,23 +1,23 @@
-local D, C = select(2, ...):unpack()
+local T, C = select(2, ...):unpack()
 
 -- Local values
 local MenuFrame = CreateFrame("Frame", "DataTextToggleDropDown", UIParent, "UIDropDownMenuTemplate")
 local DuffedUIDT = D["DataTexts"]
-local Anchors = DuffedUIDT.Anchors
-local Menu = DuffedUIDT.Menu
+local Anchors = DuffedUIDD.Anchors
+local Menu = DuffedUIDD.Menu
 local Active = false
 local CurrentFrame
 
-DuffedUIDT.Toggle = function(self, object)
+DuffedUIDD.Toggle = function(self, object)
 	CurrentFrame:SetData(object)
 end
 
-DuffedUIDT.Remove = function()
+DuffedUIDD.Remove = function()
 	CurrentFrame:RemoveData()
 end
 
 -- Add a remove button
-tinsert(Menu, {text = "|cffFF0000"..REMOVE.."|r", notCheckable = true, func = DuffedUIDT.Remove})
+tinsert(Menu, {text = "|cffFF0000"..REMOVE.."|r", notCheckable = true, func = DuffedUIDD.Remove})
 
 local OnMouseDown = function(self)
 	CurrentFrame = self

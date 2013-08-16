@@ -1,13 +1,13 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C["Chat"].Enable and not C["Chat"].WhisperSound) then
+if (not C["chat"].Enable and not C["chat"].WhisperSound) then
 	return
 end
 
 local DuffedUIChat = D["Chat"]
 
 function DuffedUIChat:PlayWhisperSound()
-	PlaySoundFile(C["Medias"].Whisper)
+	PlaySoundFile(C.Medias.Whisper)
 end
 
 DuffedUIChat.WhisperSound = CreateFrame("Frame")

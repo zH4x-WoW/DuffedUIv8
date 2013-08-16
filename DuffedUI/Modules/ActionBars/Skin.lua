@@ -5,12 +5,12 @@ local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
 local Replace = string.gsub
 local SpellFlyout = SpellFlyout
 local FlyoutButtons = 0
-local Size = C["ActionBars"].NormalButtonSize
-local PetSize = C["ActionBars"].PetButtonSize
-local Spacing = C["ActionBars"].ButtonSpacing
+local Size = C["actionbars"].NormalButtonSize
+local PetSize = C["actionbars"].PetButtonSize
+local Spacing = C["actionbars"].ButtonSpacing
 local ActionButton_HideOverlayGlow = ActionButton_HideOverlayGlow
 local ProcBackdrop = {
-	edgeFile = C["Medias"].Blank, edgeSize = D.Mult,
+	edgeFile = C.Medias.Blank, edgeSize = D.Mult,
 	insets = {left = D.Mult, right = D.Mult, top = D.Mult, bottom = D.Mult},
 }
 
@@ -41,7 +41,7 @@ function DuffedUIActionBars:SkinButton()
 		Border = Noop
 	end
 	
-	if (Btname and Normal and C["ActionBars"].Macro) then
+	if (Btname and Normal and C["actionbars"].Macro) then
 		local String = GetActionText(Action)
 		
 		if String then
@@ -54,11 +54,11 @@ function DuffedUIActionBars:SkinButton()
 		return
 	end
 	
-	Count:SetFont(C["Medias"].Font, 12, "OUTLINE")
+	Count:SetFont(C.Medias.Font, 12, "OUTLINE")
 	
 	if (Btname) then
-		if (C["ActionBars"].Macro) then
-			Btname:SetFont(C["Medias"].Font, 10)
+		if (C["actionbars"].Macro) then
+			Btname:SetFont(C.Medias.Font, 10)
 			Btname:ClearAllPoints()
 			Btname:SetPoint("BOTTOM", 1, 1)
 		else
@@ -71,8 +71,8 @@ function DuffedUIActionBars:SkinButton()
 		BtnBG:Kill()
 	end
  
-	if (C["ActionBars"].HotKey) then
-		HotKey:SetFont(C["Medias"].Font, 10, "OUTLINE")
+	if (C["actionbars"].HotKey) then
+		HotKey:SetFont(C.Medias.Font, 10, "OUTLINE")
 		HotKey.ClearAllPoints = Noop
 		HotKey.SetPoint = Noop
 	else
@@ -153,7 +153,7 @@ function DuffedUIActionBars:SkinPetButtons()
 		local Name = "PetActionButton"..i
 		local Button  = _G[Name]
 		local Icon  = _G[Name.."Icon"]
-		local Normal  = _G[Name.."NormalTexture2"]
+		local Normal  = _G[Name.."NormalTexture2"] -- ?? 2
 		
 		DuffedUIActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, true)
 	end
@@ -165,7 +165,7 @@ function DuffedUIActionBars:SkinStanceButtons()
 		local Button  = _G[Name]
 		local Icon  = _G[Name.."Icon"]
 		local Normal  = _G[Name.."NormalTexture"]
-
+		
 		DuffedUIActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, false)
 	end
 end

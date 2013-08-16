@@ -4,5 +4,5 @@ local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
 function DuffedUIUnitFrames:AddRogueFeatures()
-	
+
 end

@@ -49,7 +49,7 @@ function Battle:SkinActionBar()
 	Bottom.xpBar:SetPoint("BOTTOM", Bottom.TurnTimer, "TOP", 0, 4)
 	Bottom.xpBar:SetScript("OnShow", function(self)
 		self:StripTextures()
-		self:SetStatusBarTexture(C["Medias"].Normal)
+		self:SetStatusBarTexture(C.Medias.Normal)
 	end)
 end
 

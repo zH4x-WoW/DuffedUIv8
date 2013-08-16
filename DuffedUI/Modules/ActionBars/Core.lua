@@ -16,9 +16,9 @@ local OverrideActionBar = OverrideActionBar
 local PossessBarFrame = PossessBarFrame
 local PetActionBarFrame = PetActionBarFrame
 local ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight = ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight
-local Size = C["ActionBars"].NormalButtonSize
-local PetSize = C["ActionBars"].PetButtonSize
-local Spacing = C["ActionBars"].ButtonSpacing
+local Size = C["actionbars"].NormalButtonSize
+local PetSize = C["actionbars"].PetButtonSize
+local Spacing = C["actionbars"].ButtonSpacing
 local Panels = D["Panels"]
 local Hider = Panels.Hider
 local Frames = {
@@ -100,21 +100,21 @@ function DuffedUIActionBars:AddPanels()
 	local A1 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A1:SetWidth((Size * 12) + (Spacing * 13))
 	A1:SetHeight((Size * 1) + (Spacing * 2))
-	A1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 67)
+	A1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 14)
 	A1:SetFrameStrata("BACKGROUND")
 	A1:SetFrameLevel(1)
 
 	local A2 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
-	A2:Point("BOTTOM", UIParent, "BOTTOM", -189, 29)
-	A2:SetWidth((Size * 12) + (Spacing * 13))
-	A2:SetHeight((Size * 1) + (Spacing * 2))
+	A2:Point("BOTTOMRIGHT", A1, "BOTTOMLEFT", -6, 0)
+	A2:SetWidth((Size * 6) + (Spacing * 7))
+	A2:SetHeight((Size * 2) + (Spacing * 3))
 	A2:SetFrameStrata("BACKGROUND")
 	A2:SetFrameLevel(3)
 
 	local A3 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
-	A3:Point("BOTTOM", UIParent, "BOTTOM", 189, 29)
-	A3:SetWidth((Size * 12) + (Spacing * 13))
-	A3:SetHeight((Size * 1) + (Spacing * 2))
+	A3:Point("BOTTOMLEFT", A1, "BOTTOMRIGHT", 6, 0)
+	A3:SetWidth((Size * 6) + (Spacing * 7))
+	A3:SetHeight((Size * 2) + (Spacing * 3))
 	A3:SetFrameStrata("BACKGROUND")
 	A3:SetFrameLevel(3)
 	
@@ -124,12 +124,11 @@ function DuffedUIActionBars:AddPanels()
 	A4:SetHeight((Size * 2) + (Spacing * 3))
 	A4:SetFrameStrata("BACKGROUND")
 	A4:SetFrameLevel(2)
-	A4:SetAlpha(0)
 	
 	local A5 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A5:SetPoint("RIGHT", UIParent, "RIGHT", -28, -14)
 	A5:SetHeight((Size * 12) + (Spacing * 13))
-	A5:SetWidth((Size * 2) + (Spacing * 3))
+	A5:SetWidth((Size * 1) + (Spacing * 2))
 	A5:SetFrameStrata("BACKGROUND")
 	A5:SetFrameLevel(2)
 	
@@ -146,14 +145,14 @@ function DuffedUIActionBars:AddPanels()
 	--A7:SetMovable(true)
 	--A7:SetClampedToScreen(true)
 	
-	if (not C["ActionBars"].HideBackdrop) then
-		A1:SetTemplate("Transparent")
-		A2:SetTemplate("Transparent")
-		A3:SetTemplate("Transparent")
-		A4:SetTemplate("Transparent")
-		A5:SetTemplate("Transparent")
-		A6:SetTemplate("Transparent")
-		A7:SetTemplate("Transparent")
+	if (not C["actionbars"].HideBackdrop) then
+		A1:SetTemplate()
+		A2:SetTemplate()
+		A3:SetTemplate()
+		A4:SetTemplate()
+		A5:SetTemplate()
+		A6:SetTemplate()
+		A7:SetTemplate()
 	end
 	
 	Panels.ActionBar1 = A1
@@ -233,38 +232,38 @@ end
 function DuffedUIActionBars:UpdateStanceBar(...)
 	local NumForms = GetNumShapeshiftForms()
 	local Texture, Name, IsActive, IsCastable, Button, Icon, Cooldown, Start, Duration, Enable
-
+	
 	if NumForms == 0 then
 		Panels.StanceBar:SetAlpha(0)
 	else
 		Panels.StanceBar:SetAlpha(1)
 		Panels.StanceBar:SetSize((PetSize * NumForms) + (Spacing * (NumForms + 1)), PetSize + (Spacing * 2))
-
+		
 		for i = 1, NUM_STANCE_SLOTS do
 			local ButtonName = "StanceButton"..i
-
+			
 			Button = _G[ButtonName]
 			Icon = _G[ButtonName.."Icon"]
-
+			
 			if i <= NumForms then
 				Texture, Name, IsActive, IsCastable = GetShapeshiftFormInfo(i)
-
+				
 				if not Icon then
 					return
 				end
-
+				
 				Icon:SetTexture(Texture)
 				Cooldown = _G[ButtonName.."Cooldown"]
-
+				
 				if Texture then
 					Cooldown:SetAlpha(1)
 				else
 					Cooldown:SetAlpha(0)
 				end
-
+				
 				Start, Duration, Enable = GetShapeshiftFormCooldown(i)
 				CooldownFrame_SetTimer(Cooldown, Start, Duration, Enable)
-
+				
 				if IsActive then
 					StanceBarFrame.lastSelected = Button:GetID()
 					Button:SetChecked(1)
@@ -277,9 +276,9 @@ function DuffedUIActionBars:UpdateStanceBar(...)
 				else
 					Icon:SetVertexColor(0.4, 0.4, 0.4)
 				end
- 			end
- 		end
-	end
+			end
+		end
+	end	
 end
 
 DuffedUIActionBars:RegisterEvent("PLAYER_ENTERING_WORLD")

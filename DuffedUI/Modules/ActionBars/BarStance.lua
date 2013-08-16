@@ -1,18 +1,18 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C["ActionBars"].Enable) then
+if (not C["actionbars"].Enable) then
 	return
 end
 
 local _G = _G
 local DuffedUIActionBars = D["ActionBars"]
 local Panels = D["Panels"]
-local Size = C["ActionBars"].NormalButtonSize
-local Spacing = C["ActionBars"].ButtonSpacing
+local Size = C["actionbars"].NormalButtonSize
+local Spacing = C["actionbars"].ButtonSpacing
 
 function DuffedUIActionBars:CreateStanceBar()
 	local Bar = D.Panels.StanceBar
-
+	
 	Bar:RegisterEvent("PLAYER_LOGIN")
 	Bar:RegisterEvent("PLAYER_ENTERING_WORLD")
 	Bar:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
@@ -28,21 +28,21 @@ function DuffedUIActionBars:CreateStanceBar()
 			StanceBarFrame:ClearAllPoints()
 			StanceBarFrame:SetPoint("TOPLEFT", self, "TOPLEFT", -7, 0)
 			StanceBarFrame:EnableMouse(false)
-
+			
 			for i = 1, NUM_STANCE_SLOTS do
 				local Button = _G["StanceButton"..i]
-
+				
 				Button:SetFrameStrata("LOW")
 				Button:Show()
-
+				
 				if i ~= 1 then
 					local Previous = _G["StanceButton"..i-1]
-
-					Button:ClearAllPoints()
+					
+					Button:ClearAllPoints()				
 					Button:Point("LEFT", Previous, "RIGHT", Spacing, 0)
 				end
 			end
-
+			
 			RegisterStateDriver(self, "visibility", "[vehicleui][petbattle] hide; show")
 		elseif event == "UPDATE_SHAPESHIFT_FORMS" then
 

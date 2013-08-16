@@ -48,6 +48,8 @@ local function UpdateMushroom(self, event, slot)
 		bar:SetScript("OnUpdate", nil)
 	end
 	
+	Visibility(m)
+	
 	if(m.PostUpdate) then
 		return m:PostUpdate(slot, up, name, start, duration, icon)
 	end
@@ -74,7 +76,7 @@ local function Enable(self, unit)
 		m.ForceUpdate = ForceUpdate
 
 		self:RegisterEvent("PLAYER_TOTEM_UPDATE", Path, true)		
-		
+
 		for i = 1, 3 do
 			local Point = m[i]
 			if not Point:GetStatusBarTexture() then

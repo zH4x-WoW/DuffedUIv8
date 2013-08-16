@@ -2,8 +2,8 @@ local D, C, L = select(2, ...):unpack()
 
 local DuffedUIActionBars = D["ActionBars"]
 local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
-local Size = C["ActionBars"].NormalButtonSize
-local Spacing = C["ActionBars"].ButtonSpacing
+local Size = C["actionbars"].NormalButtonSize
+local Spacing = C["actionbars"].ButtonSpacing
 local MultiBarBottomLeft = MultiBarBottomLeft
 
 function DuffedUIActionBars:CreateBar2()
@@ -22,6 +22,8 @@ function DuffedUIActionBars:CreateBar2()
 		
 		if (i == 1) then
 			Button:SetPoint("BOTTOMRIGHT", ActionBar2, -Spacing, Spacing)
+		elseif (i == 7) then
+			Button:SetPoint("TOPRIGHT", ActionBar2, -Spacing, -Spacing)
 		else
 			Button:SetPoint("RIGHT", PreviousButton, "LEFT", -Spacing, 0)
 		end
@@ -29,5 +31,12 @@ function DuffedUIActionBars:CreateBar2()
 		ActionBar2["Button"..i] = Button
 	end
 
+	for i = 7, 12 do
+		local Button = _G["MultiBarBottomLeftButton"..i]
+		local Button1 = _G["MultiBarBottomLeftButton1"]
+		
+		Button:SetFrameLevel(Button1:GetFrameLevel() - 2)
+	end
+	
 	RegisterStateDriver(ActionBar2, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
 end

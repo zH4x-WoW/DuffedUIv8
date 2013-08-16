@@ -6,7 +6,7 @@ local D, C, L = select(2, ...):unpack()
 	-- PLAYER_ENTERING_WORLD event on DuffedUIChat will not be needed anymore when we will create the install process.
 	-- find the event which randomly move chat position from default and unregister it.
 
-if (not C["Chat"].Enable) then
+if (not C["chat"].Enable) then
 	return
 end
 
@@ -28,7 +28,7 @@ function DuffedUIChat:UpdateEditBoxColor()
 			local ID = GetChannelName(EditBox:GetAttribute("channelTarget"))
 			
 			if (ID == 0) then
-				Backdrop:SetBackdropBorderColor(unpack(C["Medias"].BorderColor))
+				Backdrop:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
 			else
 				Backdrop:SetBackdropBorderColor(ChatTypeInfo[ChatType..ID].r,ChatTypeInfo[ChatType..ID].g,ChatTypeInfo[ChatType..ID].b)
 			end
@@ -98,7 +98,7 @@ function DuffedUIChat:StyleFrame(frame)
 	EditBox.Backdrop:SetAllPoints(DataTextLeft)
 	EditBox.Backdrop:SetFrameStrata("LOW")
 	EditBox.Backdrop:SetFrameLevel(1)
-	EditBox.Backdrop:SetBackdropColor(unpack(C["Medias"].BackdropColor))
+	EditBox.Backdrop:SetBackdropColor(unpack(C.Medias.BackdropColor))
 	
 	-- Hide textures
 	for i = 1, #CHAT_FRAME_TEXTURES do

@@ -3,6 +3,7 @@ local AddOn, Plugin = ...
 local oUF = Plugin.oUF or oUF
 local Panels = D["Panels"]
 local Colors = D["Colors"]
+local Noop = function() end
 local DuffedUIUnitFrames = CreateFrame("Frame")
 
 -- Lib globals
@@ -19,13 +20,61 @@ local UnitPlayerControlled = UnitPlayerControlled
 local UnitIsGhost = UnitIsGhost
 local UnitIsDead = UnitIsDead
 local UnitPowerType = UnitPowerType
-local _, Class = UnitClass("player")
+local Class = select(2, UnitClass("player"))
+local BossFrames = MAX_BOSS_FRAMES
 
 DuffedUIUnitFrames.Units = {}
+DuffedUIUnitFrames.Headers = {}
 DuffedUIUnitFrames.Backdrop = {
-	bgFile = C["Medias"].Blank,
+	bgFile = C.Medias.Blank,
 	insets = {top = -D.Mult, left = -D.Mult, bottom = -D.Mult, right = -D.Mult},
 }
+
+function DuffedUIUnitFrames:DisableBlizzard()
+	for i = 1, MAX_BOSS_FRAMES do
+		local Boss = _G["Boss"..i.."TargetFrame"]
+		local Health = _G["Boss"..i.."TargetFrame".."HealthBar"]
+		local Power = _G["Boss"..i.."TargetFrame".."ManaBar"]
+		
+		Boss:UnregisterAllEvents()
+		Boss.Show = Noop
+		Boss:Hide()
+		
+		Health:UnregisterAllEvents()
+		Power:UnregisterAllEvents()
+	end
+	
+	if C["unitframes"].Raid then
+		InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
+		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
+		
+		-- raid
+		CompactRaidFrameManager:SetParent(Panels.Hider)
+		CompactUnitFrameProfiles:UnregisterAllEvents()
+			
+		for i=1, MAX_PARTY_MEMBERS do
+			local PartyMember = _G["PartyMemberFrame" .. i]
+			local Health = _G["PartyMemberFrame" .. i .. "HealthBar"]
+			local Power = _G["PartyMemberFrame" .. i .. "ManaBar"]
+			local Pet = _G["PartyMemberFrame" .. i .."PetFrame"]
+			local PetHealth = _G["PartyMemberFrame" .. i .."PetFrame" .. "HealthBar"]
+
+			PartyMember:UnregisterAllEvents()
+			PartyMember:SetParent(Panels.Hider)
+			PartyMember:Hide()
+			Health:UnregisterAllEvents()
+			Power:UnregisterAllEvents()
+			
+			Pet:UnregisterAllEvents()
+			Pet:SetParent(Panels.Hider)
+			PetHealth:UnregisterAllEvents()
+			
+			HidePartyFrame()
+			ShowPartyFrame = Noop
+			HidePartyFrame = Noop
+		end
+	end
+end
 
 function DuffedUIUnitFrames:ShortValue()
 	if self <= 999 then
@@ -114,12 +163,12 @@ function DuffedUIUnitFrames:UpdateAurasHeaderPosition(script, x, y)
 	end
 
 	if script == "OnShow" then
-		Buffs:ClearAllPoints()
+		Buffs:ClearAllPoints() 
 		Buffs:Point("BOTTOMLEFT", Frame, "TOPLEFT", x, y)
 	else
-		Buffs:ClearAllPoints()
+		Buffs:ClearAllPoints() 
 		Buffs:Point("BOTTOMLEFT", Frame, "TOPLEFT", x, y)
- 	end
+	end
 end
 
 function DuffedUIUnitFrames:CustomCastTimeText(duration)
@@ -289,7 +338,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button:SetTemplate("Default")
 
 	button.Remaining = button:CreateFontString(nil, "OVERLAY")
-	button.Remaining:SetFont(C["Medias"].Font, 12, "THINOUTLINE")
+	button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 	button.Remaining:Point("CENTER", 1, 0)
 
 	button.cd.noOCC = true
@@ -305,7 +354,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 
 	button.count:Point("BOTTOMRIGHT", 3, 3)
 	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C["Medias"].Font, 9, "THICKOUTLINE")
+	button.count:SetFont(C.Medias.Font, 9, "THICKOUTLINE")
 	button.count:SetTextColor(0.84, 0.75, 0.65)
 
 	button.OverlayFrame = CreateFrame("Frame", nil, button, nil)
@@ -317,13 +366,14 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button.Glow = CreateFrame("Frame", nil, button)
 	button.Glow:SetOutside()
 	button.Glow:SetFrameStrata("BACKGROUND")	
-	button.Glow:SetBackdrop{edgeFile = C["Medias"].Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
+	button.Glow:SetBackdrop{edgeFile = C.Medias.Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
-
+	
 	button.Animation = button:CreateAnimationGroup()
 	button.Animation:SetLooping("BOUNCE")
-	button.Animation.FadeOut = Animation:CreateAnimation("Alpha")
+
+	button.Animation.FadeOut = button.Animation:CreateAnimation("Alpha")
 	button.Animation.FadeOut:SetChange(-.9)
 	button.Animation.FadeOut:SetDuration(.6)
 	button.Animation.FadeOut:SetSmoothing("IN_OUT")
@@ -336,7 +386,7 @@ function DuffedUIUnitFrames:PostUpdateAura(unit, button, index, offset, filter, 
 		if(button.filter == "HARMFUL") then
 			if(not UnitIsFriend("player", unit) and button.owner ~= "player" and button.owner ~= "vehicle") then
 				button.icon:SetDesaturated(true)
-				button:SetBackdropBorderColor(unpack(C["Medias"].bordercolor))
+				button:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
 			else
 				local color = DebuffTypeColor[dtype] or DebuffTypeColor.none
 				button.icon:SetDesaturated(false)
@@ -353,16 +403,23 @@ function DuffedUIUnitFrames:PostUpdateAura(unit, button, index, offset, filter, 
 		end
 
 		if Duration and Duration > 0 then
-			icon.Remaining:Show()
+			button.Remaining:Show()
 		else
-			icon.Remaining:Hide()
+			button.Remaining:Hide()
 		end
 
-		icon.Duration = duration
-		icon.TimeLeft = expirationTime
-		icon.First = true
-		icon:SetScript("OnUpdate", DuffedUIUnitFrames.CreateAuraTimer)
+		button.Duration = Duration
+		button.TimeLeft = ExpirationTime
+		button.First = true
+		button:SetScript("OnUpdate", DuffedUIUnitFrames.CreateAuraTimer)
 	end
+end
+
+function DuffedUIUnitFrames:UpdateBossAltPower(minimum, current, maximum)
+	if (not current) or (not maximum) then return end
+	
+	local r, g, b = D.ColorGradient(current, maximum, 0, .8 ,0 ,.8 ,.8 ,0 ,.8 ,0 ,0)
+	self:SetStatusBarColor(r, g, b)
 end
 
 function DuffedUIUnitFrames:Update()
@@ -371,7 +428,64 @@ function DuffedUIUnitFrames:Update()
 	end
 end
 
+function DuffedUIUnitFrames:GetRaidFramesAttributes()
+	return
+		"DuffedUIRaid", 
+		nil, 
+		"solo,party,raid",
+		"oUF-initialConfigFunction", [[
+			local header = self:GetParent()
+			self:SetWidth(header:GetAttribute("initial-width"))
+			self:SetHeight(header:GetAttribute("initial-height"))
+		]],
+		"initial-width", D.Scale(66),
+		"initial-height", D.Scale(50),
+		"showParty", true,
+		"showRaid", true,
+		"showPlayer", true,
+		"showSolo", true,
+		"xoffset", D.Scale(3),
+		"yOffset", D.Scale(-3),
+		"point", "TOP",
+		"groupFilter", "1,2,3,4,5,6,7,8",
+		"groupingOrder", "1,2,3,4,5,6,7,8",
+		"groupBy", "GROUP",
+		"maxColumns", math.ceil(40/10),
+		"unitsPerColumn", 10,
+		"columnSpacing", D.Scale(3),
+		"columnAnchorPoint", "LEFT"
+end
+
+function DuffedUIUnitFrames:GetPetRaidFramesAttributes()
+	return
+		"DuffedUIRaidPet", 
+		"SecureGroupPetHeaderTemplate", 
+		"solo,party,raid",
+		"showPlayer", true,
+		"showParty", true,
+		"showRaid", true,
+		"showSolo", true,
+		"maxColumns", math.ceil(40/10),
+		"point", "TOP",
+		"unitsPerColumn", 10,
+		"columnSpacing", D.Scale(3),
+		"columnAnchorPoint", "LEFT",
+		"yOffset", D.Scale(-3),
+		"xOffset", D.Scale(3),
+		"initial-width", D.Scale(66),
+		"initial-height", D.Scale(50),
+		"oUF-initialConfigFunction", [[
+			local header = self:GetParent()
+			self:SetWidth(header:GetAttribute("initial-width"))
+			self:SetHeight(header:GetAttribute("initial-height"))
+		]]
+end
+
 function DuffedUIUnitFrames:Style(unit)
+	if not unit then
+		return
+	end
+
 	if unit == "player" then
 		DuffedUIUnitFrames.Player(self)
 	elseif unit == "target" then
@@ -387,7 +501,9 @@ function DuffedUIUnitFrames:Style(unit)
 	elseif unit:find("arena%d") then
 		DuffedUIUnitFrames.Arena(self)
 	elseif unit:find("boss%d") then
-		--DuffedUIUnitFrames.Boss(self)
+		DuffedUIUnitFrames.Boss(self)
+	elseif unit == "raid" or unit == "raidpet" then
+		DuffedUIUnitFrames.Raid(self)
 	end
 
 	return self
@@ -436,12 +552,24 @@ function DuffedUIUnitFrames:CreateUnits()
 	for i = 1, 5 do
 		Arena[i] = oUF:Spawn("arena"..i, nil)
 		Arena[i]:SetParent(Panels.PetBattleHider)
-		if i == 1 then
+		if (i == 1) then
 			Arena[i]:SetPoint("BOTTOMRIGHT", DuffedUIUnitFrames.Anchor, "TOPRIGHT", 0, 300)
 		else
 			Arena[i]:SetPoint("BOTTOM", Arena[i-1], "TOP", 0, 35)
 		end
 		Arena[i]:Size(200, 29)
+	end
+	
+	local Boss = {}
+	for i = 1, BossFrames do
+		Boss[i] = oUF:Spawn("boss"..i, nil)
+		Boss[i]:SetParent(Panels.PetBattleHider)
+		if (i == 1) then
+			Boss[i]:SetPoint("BOTTOMRIGHT", DuffedUIUnitFrames.Anchor, "TOPRIGHT", 0, 300)
+		else
+			Boss[i]:SetPoint("BOTTOM", Boss[i-1], "TOP", 0, 35)             
+		end
+		Boss[i]:Size(200, 29)
 	end
 
 	DuffedUIUnitFrames.Units.Player = Player
@@ -451,7 +579,20 @@ function DuffedUIUnitFrames:CreateUnits()
 	DuffedUIUnitFrames.Units.Focus = Focus
 	DuffedUIUnitFrames.Units.FocusTarget = FocusTarget
 	DuffedUIUnitFrames.Units.Arena = Arena
-	--DuffedUIUnitFrames.Units.Boss = Boss
+	DuffedUIUnitFrames.Units.Boss = Boss
+	
+	if C["unitframes"].Raid then
+		local Raid = oUF:SpawnHeader(DuffedUIUnitFrames:GetRaidFramesAttributes())
+		Raid:SetParent(Panels.PetBattleHider)
+		Raid:Point("TOPLEFT", UIParent, "TOPLEFT", 18, -(D.ScreenHeight / 9))
+
+		local Pet = oUF:SpawnHeader(DuffedUIUnitFrames:GetPetRaidFramesAttributes())
+		Pet:SetParent(Panels.PetBattleHider)
+		Pet:Point("TOPLEFT", Raid, "TOPRIGHT", 3, 0)
+		
+		DuffedUIUnitFrames.Headers.Raid = Raid
+		DuffedUIUnitFrames.Headers.RaidPet = Pet
+	end
 end
 
 DuffedUIUnitFrames:RegisterEvent("ADDON_LOADED")
@@ -461,6 +602,7 @@ DuffedUIUnitFrames:SetScript("OnEvent", function(self, event, addon)
 	end
 
 	oUF:RegisterStyle("DuffedUI", DuffedUIUnitFrames.Style)
+	self:DisableBlizzard()
 	self:CreateAnchor()
 	self:CreateUnits()
 end)

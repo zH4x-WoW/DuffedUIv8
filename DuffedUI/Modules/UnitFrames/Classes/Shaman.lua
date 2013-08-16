@@ -19,7 +19,7 @@ function DuffedUIUnitFrames:AddShamanFeatures()
 	for i = 1, 4 do
 		TotemBar[i] = CreateFrame("StatusBar", nil, TotemBar)
 		TotemBar[i]:Height(8)
-		TotemBar[i]:SetStatusBarTexture(C.Media.Normal)
+		TotemBar[i]:SetStatusBarTexture(C.Medias.Normal)
 
 		if i == 1 then
 			TotemBar[i]:Width((250 / 4) - 2)
@@ -35,7 +35,7 @@ function DuffedUIUnitFrames:AddShamanFeatures()
 
 		TotemBar[i].bg = TotemBar[i]:CreateTexture(nil, "BORDER")
 		TotemBar[i].bg:SetAllPoints(TotemBar[i])
-		TotemBar[i].bg:SetTexture(C.Media.Normal)
+		TotemBar[i].bg:SetTexture(C.Medias.Normal)
 		TotemBar[i].bg.multiplier = 0.3
 	end
 	

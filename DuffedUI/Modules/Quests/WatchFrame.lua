@@ -40,6 +40,7 @@ end
 
 function Quests:PositionWatchFrame()
 	local ScreenHeight = D.ScreenHeight
+	
 	WatchFrame:Show()
 	WatchFrame:SetParent(self.WatchFrame)
 	WatchFrame:SetHeight(ScreenHeight / 1.6)
@@ -62,16 +63,17 @@ function Quests:SkinWatchFrameButton()
 end
 
 function Quests:SkinWatchFramePopup(i)
-	local frame = _G["WatchFrameAutoQuestPopUp"..i.."ScrollChild"]
-	if frame and not frame.isSkinned then
-		local parent = frame:GetParent()
-		frame:StripTextures()
-		parent:CreateBackdrop("Transparent")
-		parent.Backdrop:ClearAllPoints()
-		parent.Backdrop:SetPoint("TOPLEFT", frame, 0, 5)
-		parent.Backdrop:SetPoint("BOTTOMRIGHT", frame, 13, -5)
-		parent.Backdrop:CreateShadow()
-		frame.isSkinned = true
+	local Frame = _G["WatchFrameAutoQuestPopUp"..i.."ScrollChild"]
+	
+	if Frame and not Frame.IsSkinned then
+		local Parent = Frame:GetParent()
+		Frame:StripTextures()
+		Parent:CreateBackdrop("Transparent")
+		Parent.Backdrop:ClearAllPoints()
+		Parent.Backdrop:SetPoint("TOPLEFT", Frame, 0, 5)
+		Parent.Backdrop:SetPoint("BOTTOMRIGHT", Frame, 13, -5)
+		Parent.Backdrop:CreateShadow()
+		Frame.IsSkinned = true
 	end
 end
 

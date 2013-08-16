@@ -28,5 +28,5 @@ D.SlashHandler = function(cmd)
 	end
 end
 
-SLASH_DUFFEDUISLASHHANDLER1 = "/duffedui"
-SlashCmdList["DUFFEDUISLASHHANDLER"] = D.SlashHandler
+SLASH_TUKUISLASHHANDLER1 = "/tukui"
+SlashCmdList["TUKUISLASHHANDLER"] = D.SlashHandler

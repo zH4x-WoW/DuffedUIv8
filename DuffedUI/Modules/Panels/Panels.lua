@@ -2,7 +2,7 @@ local D, C, L = select(2, ...):unpack()
 
 local Panels = {}
 
---[[local BottomLine = CreateFrame("Frame", nil, UIParent)
+local BottomLine = CreateFrame("Frame", nil, UIParent)
 BottomLine:SetTemplate()
 BottomLine:Size(2)
 BottomLine:Point("BOTTOMLEFT", 30, 30)
@@ -36,17 +36,17 @@ CubeRight:SetTemplate()
 CubeRight:Size(10)
 CubeRight:Point("BOTTOM", RightVerticalLine, "TOP", 0, 0)
 CubeRight:EnableMouse(true)
-CubeRight:SetFrameLevel(0)]]--
+CubeRight:SetFrameLevel(0)
 
-local DataTextLeft = CreateFrame("Frame", nil, UIParent)
-DataTextLeft:Size(355, 20)
-DataTextLeft:SetPoint("BOTTOM", -187, 5)
+local DataTextLeft = CreateFrame("Frame", nil, BottomLine)
+DataTextLeft:Size(370, 23)
+DataTextLeft:SetPoint("LEFT", 17, -1)
 DataTextLeft:SetTemplate()
 DataTextLeft:SetFrameLevel(1)
 
-local DataTextRight = CreateFrame("Frame", nil, UIParent)
-DataTextRight:Size(355, 20)
-DataTextRight:SetPoint("BOTTOM", 187, 5)
+local DataTextRight = CreateFrame("Frame", nil, BottomLine)
+DataTextRight:Size(370, 23)
+DataTextRight:SetPoint("RIGHT", -17, -1)
 DataTextRight:SetTemplate()
 DataTextRight:SetFrameLevel(1)
 

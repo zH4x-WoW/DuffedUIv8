@@ -1,6 +1,6 @@
 ﻿## Interface: 50400
 ## Author: Merith @ Zirkel des Cenarius EU
-## Version: 8.0.0
+## Version: 8.00
 ## Title: |cffC41F3BDuffedUI|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: DuffedUIData
@@ -8,10 +8,10 @@
 ## X-oUF: oUFDuffedUI
 ## Website: http://www.tukui.org
 
-Core\Init.lua
-Libs\Init.xml
-Config\Init.xml
-Medias\Medias.lua
-Locales\Init.xml
-Core\Init.xml
-Modules\Init.xml
+core\init.lua
+libs\init.xml
+config\init.xml
+medias\medias.lua
+locales\init.xml
+core\init.xml
+modules\init.xml

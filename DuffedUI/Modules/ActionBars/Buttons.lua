@@ -3,8 +3,8 @@ local D, C, L = select(2, ...):unpack()
 local ActionBars = D["ActionBars"]
 local Panels = D["Panels"]
 
-local Size = C["ActionBars"].NormalButtonSize
-local Spacing = C["ActionBars"].ButtonSpacing
+local Size = C["actionbars"].NormalButtonSize
+local Spacing = C["actionbars"].ButtonSpacing
 local IsShiftKeyDown = IsShiftKeyDown
 local InCombatLockdown = InCombatLockdown
 local error = ERR_NOT_IN_COMBAT
@@ -28,7 +28,7 @@ function ActionBars:ShowAllButtons(bar, num)
 	end
 
 	if (num == 2 or num == 3) then
-		bar:Width((Size * 12) + (Spacing * 13))
+		bar:Width((Size * 6) + (Spacing * 7))
 	elseif (num == 5) then
 		bar:Height((Size * 12) + (Spacing * 13))
 	end
@@ -38,11 +38,11 @@ function ActionBars:RemoveColumn(bar, num)
 	local Data = DuffedUIDataPerChar
 
 	if (not bar.NextColumnToHide) then
-		bar.NextColumnToHide = 12
+		bar.NextColumnToHide = 6
 	end
 	
 	if (bar.NextColumnToHide <= 1) then -- Reset the count at 1 button shown
-		bar.NextColumnToHide = 12
+		bar.NextColumnToHide = 6
 		self:ShowAllButtons(bar, num)
 		Data["Bar"..num.."Buttons"] = bar.NextColumnToHide
 		
@@ -50,10 +50,10 @@ function ActionBars:RemoveColumn(bar, num)
 	end
 	
 	local Button1 = bar["Button"..bar.NextColumnToHide]
-	--local Button2 = bar["Button"..bar.NextColumnToHide + 6]
+	local Button2 = bar["Button"..bar.NextColumnToHide + 6]
 
 	Button1:Hide()
-	--Button2:Hide()
+	Button2:Hide()
 
 	--bar:Width((Size * (bar.NextColumnToHide - 1)) + (Spacing * bar.NextColumnToHide))
 	bar:Animation("Width", ((Size * (bar.NextColumnToHide - 1)) + (Spacing * bar.NextColumnToHide)), 8)
@@ -90,7 +90,7 @@ function ActionBars:RemoveButton(bar, num)
 	Data["Bar"..num.."Buttons"] = bar.NextButtonToHide
 end
 
---[[function ActionBars:ShowTopButtons(bar)
+function ActionBars:ShowTopButtons(bar)
 	local Button
 	local Value = bar.NextColumnToHide or 6
 
@@ -99,7 +99,7 @@ end
 		
 		Button:Show()
 	end
-end]]--
+end
 
 -- Restore buttons to previous state on load
 function ActionBars:RestoreBarState()
@@ -147,7 +147,7 @@ local OnClick = function(self)
 			UnregisterStateDriver(Bar, "visibility")
 			Bar:Hide()
 			
-			--[[if (Num == 4) then
+			if (Num == 4) then
 				local Bar2 = Panels["ActionBar2"]
 				local Bar3 = Panels["ActionBar3"]
 			
@@ -160,7 +160,7 @@ local OnClick = function(self)
 				Bar3:Height((Size * 1) + (Spacing * 2))
 				BarButtons[2]:Height((Size * 1) + (Spacing * 2))
 				BarButtons[3]:Height((Size * 1) + (Spacing * 2))
-			end]]--
+			end
 			
 			-- Move the button
 			self:ClearAllPoints()
@@ -171,9 +171,9 @@ local OnClick = function(self)
 			elseif (Num == 3) then
 				self:Point("LEFT", Bar, "LEFT", 0, 0)
 				Text:SetText(L.ActionBars.ArrowRight)
-			--[[elseif (Num == 4) then
+			elseif (Num == 4) then
 				self:Point("TOP", Panels.ActionBar1, "BOTTOM", 0, -3)
-				Text:SetText(L.ActionBars.ArrowUp)]]--
+				Text:SetText(L.ActionBars.ArrowUp)
 			elseif (Num == 5) then
 				self:Point("TOP", Bar, "BOTTOM", 0, -3)
 				Text:SetText(L.ActionBars.ArrowLeft)
@@ -187,7 +187,7 @@ local OnClick = function(self)
 		RegisterStateDriver(Bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
 		Bar:Show()
 		
-		--[[if (Num == 4) then
+		if (Num == 4) then
 			local Bar2 = Panels["ActionBar2"]
 			local Bar3 = Panels["ActionBar3"]
 
@@ -198,7 +198,7 @@ local OnClick = function(self)
 			Bar3:Height((Size * 2) + (Spacing * 3))
 			BarButtons[2]:Height((Size * 2) + (Spacing * 3))
 			BarButtons[3]:Height((Size * 2) + (Spacing * 3))
-		end]]--
+		end
 		
 		-- Move the button
 		self:ClearAllPoints()
@@ -209,9 +209,9 @@ local OnClick = function(self)
 		elseif (Num == 3) then
 			self:Point("LEFT", Bar, "RIGHT", 3, 0)
 			Text:SetText(L.ActionBars.ArrowLeft)
-		--[[elseif (Num == 4) then
+		elseif (Num == 4) then
 			self:Point("TOP", Panels.ActionBar1, "BOTTOM", 0, -3)
-			Text:SetText(L.ActionBars.ArrowDown)]]--
+			Text:SetText(L.ActionBars.ArrowDown)
 		elseif (Num == 5) then
 			self:Point("TOP", Bar, "BOTTOM", 0, -3)
 			Text:SetText(L.ActionBars.ArrowRight)
@@ -241,7 +241,7 @@ function ActionBars:CreateToggleButtons()
 		
 		Button.Text = Button:CreateFontString(nil, "OVERLAY")
 		Button.Text:Point("CENTER", Button, 0, 0)
-		Button.Text:SetFont(C["Medias"].ActionBarFont, 12)
+		Button.Text:SetFont(C.Medias.ActionBarFont, 12)
 		
 		if (i == 2) then
 			Button:Size(18, Height)
@@ -251,10 +251,10 @@ function ActionBars:CreateToggleButtons()
 			Button:Size(18, Height)
 			Button:Point("LEFT", Bar, "RIGHT", 3, 0)
 			Button.Text:SetText(L.ActionBars.ArrowLeft)
-		--[[elseif (i == 4) then
+		elseif (i == 4) then
 			Button:Size(Width, 12)
 			Button:Point("TOP", Panels.ActionBar1, "BOTTOM", 0, -3)
-			Button.Text:SetText(L.ActionBars.ArrowDown)]]--
+			Button.Text:SetText(L.ActionBars.ArrowDown)
 		elseif (i == 5) then
 			Button:Size(Width, 18)
 			Button:Point("TOP", Bar, "BOTTOM", 0, -3)
@@ -291,7 +291,7 @@ function ActionBars:CreateVehicleButtons()
 	VehicleLeft:SetScript("OnClick", VehicleExit)
 
 	VehicleLeft.Text = VehicleLeft:CreateFontString(nil, "OVERLAY")
-	VehicleLeft.Text:SetFont(C["Medias"].Font, 12)
+	VehicleLeft.Text:SetFont(C.Medias.Font, 12)
 	VehicleLeft.Text:Point("CENTER", 0, 0)
 	VehicleLeft.Text:SetText("|cffFF0000" .. LEAVE_VEHICLE .. "|r")
 	VehicleLeft.Text:SetShadowOffset(1.25, -1.25)
@@ -305,7 +305,7 @@ function ActionBars:CreateVehicleButtons()
 	VehicleRight:SetScript("OnClick", VehicleExit)
 
 	VehicleRight.Text = VehicleRight:CreateFontString(nil, "OVERLAY")
-	VehicleRight.Text:SetFont(C["Medias"].Font, 12)
+	VehicleRight.Text:SetFont(C.Medias.Font, 12)
 	VehicleRight.Text:Point("CENTER", 0, 0)
 	VehicleRight.Text:SetText("|cffFF0000" .. LEAVE_VEHICLE .. "|r")
 	VehicleRight.Text:SetShadowOffset(1.25, -1.25)

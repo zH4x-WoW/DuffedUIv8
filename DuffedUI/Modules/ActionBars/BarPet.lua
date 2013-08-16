@@ -1,13 +1,13 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C["ActionBars"].Enable) then
+if (not C["actionbars"].Enable) then
 	return
 end
 
 local DuffedUIActionBars = D["ActionBars"]
 local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
-local PetSize = C["ActionBars"].PetButtonSize
-local Spacing = C["ActionBars"].ButtonSpacing
+local PetSize = C["actionbars"].PetButtonSize
+local Spacing = C["actionbars"].ButtonSpacing
 local PetActionBarFrame = PetActionBarFrame
 local PetActionBar_UpdateCooldowns = PetActionBar_UpdateCooldowns
 

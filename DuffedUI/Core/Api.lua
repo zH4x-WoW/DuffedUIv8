@@ -3,12 +3,12 @@
 ----------------------------------------------------------------
 
 local D, C, L = select(2, ...):unpack()
-local Mult = 768/string.match(GetCVar("gxResolution"), "%d+x(%d+)")/C["General"].UIScale
+local Mult = 768/string.match(GetCVar("gxResolution"), "%d+x(%d+)")/C["general"].UIScale
 local Scale = function(x) return Mult*math.floor(x/Mult+.5) end
-local InOut = C["General"].InOut
+local InOut = C["general"].InOut
 local floor = math.floor
 local class = select(2, UnitClass("player"))
-local texture = C["Medias"].Blank
+local texture = C.Medias.Blank
 local noop = function() return end
 
 D.Scale = Scale
@@ -65,19 +65,19 @@ local function SetTemplate(f, t, tex)
 	local balpha = 1
 	if t == "Transparent" then balpha = 0.8 end
 	
-	local borderr, borderg, borderb = unpack(C["Medias"].BorderColor)
-	local backdropr, backdropg, backdropb = unpack(C["Medias"].BackdropColor)
+	local borderr, borderg, borderb = unpack(C.Medias.BorderColor)
+	local backdropr, backdropg, backdropb = unpack(C.Medias.BackdropColor)
 	local backdropa = balpha
 	
 	if tex then 
-		texture = C["Medias"].Normal 
+		texture = C.Medias.Normal 
 	else 
-		texture = C["Medias"].Blank 
+		texture = C.Medias.Blank 
 	end
 		
 	f:SetBackdrop({
 	  bgFile = texture, 
-	  edgeFile = C["Medias"].Blank, 
+	  edgeFile = C.Medias.Blank, 
 	  tile = false, tileSize = 0, edgeSize = Mult,
 	})
 	
@@ -192,7 +192,7 @@ local function CreateShadow(f, t)
 	shadow:Point("TOPRIGHT", 3, 3)
 	shadow:Point("BOTTOMRIGHT", 3, -3)
 	shadow:SetBackdrop( { 
-		edgeFile = C["Medias"].Glow, edgeSize = Scale(3),
+		edgeFile = C.Medias.Glow, edgeSize = Scale(3),
 		insets = {left = Scale(5), right = Scale(5), top = Scale(5), bottom = Scale(5)},
 	})
 	shadow:SetBackdropColor(0, 0, 0, 0)
@@ -269,7 +269,7 @@ end
 local function HighlightUnit(f, r, g, b)
 	if f.HighlightTarget then return end
 	
-	local glowBorder = {edgeFile = C["Medias"].Blank, edgeSize = 1}
+	local glowBorder = {edgeFile = C.Medias.Blank, edgeSize = 1}
 	f.HighlightTarget = CreateFrame("Frame", nil, f)
 	f.HighlightTarget:SetOutside()
 	f.HighlightTarget:SetBackdrop(glowBorder)
@@ -292,7 +292,7 @@ local function StripTextures(Object, Kill)
 	end		
 end
 
-local function SkinButton(frame, strip)
+local function SkinButton(Frame, Strip)
 	if Frame:GetName() then
 		local Left = _G[Frame:GetName().."Left"]
 		local Middle = _G[Frame:GetName().."Middle"]
@@ -305,59 +305,58 @@ local function SkinButton(frame, strip)
 	end
 
 	if Frame.Left then Frame.Left:SetAlpha(0) end
-	if Frame.Right then Frame.Right:SetAlpha(0) end
+	if Frame.Right then Frame.Right:SetAlpha(0) end	
 	if Frame.Middle then Frame.Middle:SetAlpha(0) end
-	if Frame.SetNormalTexture then Frame:SetNormalTexture("") end
+	if Frame.SetNormalTexture then Frame:SetNormalTexture("") end	
 	if Frame.SetHighlightTexture then Frame:SetHighlightTexture("") end
-	if Frame.SetPushedTexture then Frame:SetPushedTexture("") end
+	if Frame.SetPushedTexture then Frame:SetPushedTexture("") end	
 	if Frame.SetDisabledTexture then Frame:SetDisabledTexture("") end
-
+	
 	if Strip then StripTextures(Frame) end
-
+	
 	Frame:SetTemplate()
-
+	
 	Frame:HookScript("OnEnter", function(self)
 		local Color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
-
+		
 		self:SetBackdropColor(Color.r * .15, Color.g * .15, Color.b * .15)
-		self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
+		self:SetBackdropBorderColor(Color.r, Color.g, Color.b)	
 	end)
-
+	
 	Frame:HookScript("OnLeave", function(self)
 		local Color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
-
-		self:SetBackdropColor(C["Medias"].BackdropColor[1], C["Medias"].BackdropColor[2], C["Medias"].BackdropColor[3])
-		self:SetBackdropBorderColor(C["Medias"].BorderColor[1], C["Medias"].BorderColor[2], C["Medias"].BorderColor[3])
+		
+		self:SetBackdropColor(C.Medias.BackdropColor[1], C.Medias.BackdropColor[2], C.Medias.BackdropColor[3])
+		self:SetBackdropBorderColor(C.Medias.BorderColor[1], C.Medias.BorderColor[2], C.Medias.BorderColor[3])	
 	end)
 end
 
-local function SkinCloseButton(Frame, Reposition)
+local function SkinCloseButton(Frame, Reposition)	
 	if Reposition then
 		Frame:Point("TOPRIGHT", Reposition, "TOPRIGHT", 2, 2)
 	end
-
+	
 	Frame:SetNormalTexture("")
 	Frame:SetPushedTexture("")
 	Frame:SetHighlightTexture("")
 	Frame:SetDisabledTexture("")
 
 	Frame.Text = Frame:CreateFontString(nil, "OVERLAY")
-	Frame.Text:SetFont(C["Medias"].PixelFont, 12, "OUTLINE")
+	Frame.Text:SetFont(C.Medias.PixelFont, 12, "OUTLINE")
 	Frame.Text:SetPoint("CENTER", 0, 1)
 	Frame.Text:SetText("x")
 end
 
 local function SkinEditBox(Frame)
-	local Frame = frame
 	local Left, Middle, Right, Mid = _G[Frame:GetName().."Left"], _G[Frame:GetName().."Middle"], _G[Frame:GetName().."Right"], _G[Frame:GetName().."Mid"]
-
+	
 	if Left then Left:Kill() end
 	if Middle then Middle:Kill() end
 	if Right then Right:Kill() end
 	if Mid then Mid:Kill() end
-
+	
 	Frame:CreateBackdrop()
-
+	
 	if Frame:GetName() and Frame:GetName():find("Silver") or Frame:GetName():find("Copper") then
 		Frame.Backdrop:Point("BOTTOMRIGHT", -12, -2)
 	end

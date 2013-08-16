@@ -22,9 +22,9 @@ end
 
 function DuffedUIFonts:ChangeFonts()
 	local SetFont = self.SetFont
-	local NORMAL = C["Medias"].Font
-	local COMBAT = C["Medias"].DamageFont
-	local NUMBER = C["Medias"].Font
+	local NORMAL = C.Medias.Font
+	local COMBAT = C.Medias.DamageFont
+	local NUMBER = C.Medias.Font
 	local UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT
 	local CHAT_FONT_HEIGHTS = CHAT_FONT_HEIGHTS
 	local UNIT_NAME_FONT = UNIT_NAME_FONT

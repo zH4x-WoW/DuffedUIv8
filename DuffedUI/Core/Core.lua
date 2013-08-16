@@ -13,7 +13,7 @@ local gsub = gsub
 local ceil = ceil
 
 D.Print = function(...)
-	print("|cffC41F3BDuffedUI|r:", ...)
+	print("|cffC495DDDuffedUI|r:", ...)
 end
 
 -- Want HEX color instead of RGB?
@@ -104,13 +104,13 @@ D.Delay = function(delay, func, ...)
 	if (type(delay) ~= "number" or type(func) ~= "function") then
 		return false
 	end
-
+	
 	if (WaitFrame == nil) then
 		WaitFrame = CreateFrame("Frame", nil, UIParent)
 		WaitFrame:SetScript("OnUpdate",function(self, elapse)
 			local Count = #WaitTable
 			local i = 1
-
+			
 			while(i<=Count) do
 				local WaitRecord = tremove(WaitTable, i)
 				local d = tremove(WaitRecord, 1)
@@ -126,7 +126,7 @@ D.Delay = function(delay, func, ...)
 			end
 		end)
 	end
-
+	
 	tinsert(WaitTable, {delay,func,{...}})
 	return true
 end

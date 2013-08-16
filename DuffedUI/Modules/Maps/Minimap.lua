@@ -34,7 +34,7 @@ function DuffedUIMinimap:StyleFrame()
 	local MailBorder = _G["MiniMapMailBorder"]
 	local MailIcon = _G["MiniMapMailIcon"]
 	
-	Map:SetMaskTexture(C["Medias"].Blank)
+	Map:SetMaskTexture(C.Medias.Blank)
 	Map:CreateBackdrop()
 	Map.Backdrop:SetOutside()
 	Map.Backdrop:SetFrameLevel(Map:GetFrameLevel() + 1)
