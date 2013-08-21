@@ -5,7 +5,7 @@
 ## Notes: UI of awesomeness!
 ## SavedVariables: DuffedUIData
 ## SavedVariablesPerCharacter: DuffedUIDataPerChar
-## X-oUF: oUFDuffedUI
+## X-oUF: DuffedUIUnitFramesFramework
 ## Website: http://www.tukui.org
 
 core\init.lua

@@ -13,6 +13,8 @@ end
 local _G = _G
 local format = format
 local Noop = function() end
+local Toast = BNToastFrame
+local ToastCloseButton = BNToastFrameCloseButton
 local DataTextLeft = D["Panels"].DataTextLeft
 local DataTextRight = D["Panels"].DataTextRight
 local LeftChatBackground = D["Panels"].LeftChatBackground
@@ -162,6 +164,12 @@ function DuffedUIChat:StyleTempFrame()
 
 	-- Pass it on
 	DuffedUIChat:StyleFrame(Frame)
+end
+
+function TukuiChat:SkinToastFrame()
+	Toast:SetTemplate()
+	Toast:CreateShadow()
+	ToastCloseButton:SkinCloseButton()
 end
 
 -- Hydra Note:
@@ -344,6 +352,7 @@ DuffedUIChat:SetScript("OnEvent", function(self, event, addon)
 		self:UnregisterEvent(event)
 	elseif (addon == "Blizzard_CombatLog") then
 		self:Setup()
+		self:SkinToastFrame()
 		self:UnregisterEvent(event)
 	end
 end)

@@ -6,8 +6,6 @@ end
 
 local _G = _G
 local Noop = function() end
-local DataTextLeft = D["Panels"].DataTextLeft
-local DataTextRight = D["Panels"].DataTextRight
 local ToggleBags, ToggleBank = 0,0
 local ReplaceBags = 0
 local LastButtonBag, LastButtonBank
@@ -16,10 +14,7 @@ local NUM_CONTAINER_FRAMES = NUM_CONTAINER_FRAMES
 local NUM_BAG_FRAMES = NUM_BAG_FRAMES
 local ContainerFrame_GetOpenFrame = ContainerFrame_GetOpenFrame
 local BankFrame = BankFrame
-local Bag1 = ContainerFrame1
-local GameMenu = GameMenuFrame
-local BankSlot1 = BankFrameItem1
-local Bags = CreateFrame("Frame")
+local Bags = D["Inventory"]
 
 local Boxes = {
 	BagItemSearchBox,
@@ -516,49 +511,3 @@ function Bags:ToggleBags()
 		end
 	end
 end
-
-Bags:RegisterEvent("ADDON_LOADED")
-Bags:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= "DuffedUI" then
-		return
-	end
-	
-	self:HideBlizzard()
-	self:CreateContainer("Bag", "BOTTOMRIGHT", DataTextRight, "TOPRIGHT", 0, 6)
-	self:CreateContainer("Bank", "BOTTOMLEFT", DataTextLeft, "TOPLEFT", 0, 6)
-	self:SetBagsSearchPosition()
-	self:SetBankSearchPosition()
-	self:SkinEditBoxes()
-	self:SetTokensPosition()
-	self:SkinTokens()
-	
-	Bag1:SetScript("OnHide", function()
-		Bags.Bag:Hide()
-	end)
-
-	GameMenu:SetScript("OnShow", function() 
-		ToggleBags = 1
-		ToggleAllBags()
-	end)
-
-	BankSlot1:SetScript("OnHide", function() 
-		Bags.Bank:Hide()
-		ToggleBank = 0
-	end)
-
-	BankSlot1:SetScript("OnShow", function() 
-		Bags.Bank:Show()
-	end)
-	
-	-- Rewrite Blizzard Bags Functions
-	function UpdateContainerFrameAnchors() end
-	function ToggleBag() ToggleAllBags() end
-	function ToggleBackpack() ToggleAllBags() end
-	function OpenAllBags() ToggleAllBags() end
-	function OpenBackpack()  ToggleAllBags() end
-	function CloseBackpack() ToggleAllBags() end
-	function CloseAllBags() ToggleAllBags() end
-	function ToggleAllBags() Bags:ToggleBags() end
-end)
-
-D["Bags"] = Bags

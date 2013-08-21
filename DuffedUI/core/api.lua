@@ -279,7 +279,7 @@ local function HighlightUnit(f, r, g, b)
 	f:RegisterEvent("PLAYER_TARGET_CHANGED", HighlightTarget)
 end
 
-local function StripTextures(Object, Kill)
+local function StripTextures(Object, Kill, Text)
 	for i=1, Object:GetNumRegions() do
 		local Region = select(i, Object:GetRegions())
 		if Region:GetObjectType() == "Texture" then

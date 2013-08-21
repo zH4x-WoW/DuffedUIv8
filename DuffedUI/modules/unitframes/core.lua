@@ -25,6 +25,7 @@ local BossFrames = MAX_BOSS_FRAMES
 
 DuffedUIUnitFrames.Units = {}
 DuffedUIUnitFrames.Headers = {}
+DuffedUIUnitFrames.Framework = DuffedUIUnitFrameFramework
 DuffedUIUnitFrames.Backdrop = {
 	bgFile = C["medias"].Blank,
 	insets = {top = -D.Mult, left = -D.Mult, bottom = -D.Mult, right = -D.Mult},
@@ -388,12 +389,12 @@ function DuffedUIUnitFrames:PostUpdateAura(unit, button, index, offset, filter, 
 				button.icon:SetDesaturated(true)
 				button:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
 			else
-				local color = DebuffTypeColor[dtype] or DebuffTypeColor.none
+				local color = DebuffTypeColor[Dtype] or DebuffTypeColor.none
 				button.icon:SetDesaturated(false)
 				button:SetBackdropBorderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8)
 			end
 		else
-			if (IsStealable or dtype == "Magic") and not UnitIsFriend("player", unit) and not button.Animation.Playing then
+			if (IsStealable or Dtype == "Magic") and not UnitIsFriend("player", unit) and not button.Animation.Playing then
 				button.Animation:Play()
 				button.Animation.Playing = true
 			else

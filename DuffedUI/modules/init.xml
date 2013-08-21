@@ -6,7 +6,11 @@
 	<Script file="panels\panels.lua"/>
 	
 	<!-- Bags -->
-	<Script file="bags\bags.lua"/>
+	<Script file="inventory\core.lua"/>
+	<Script file="inventory\bags.lua"/>
+	<Script file="inventory\loots.lua"/>
+
+
 
 	<!-- Action Bars -->
 	<Script file="actionbars\core.lua"/>
@@ -21,11 +25,65 @@
 	<Script file="actionbars\barstance.lua"/>
 	<Script file="actionbars\buttons.lua"/>
 
+
 	<!-- Cooldowns -->
 	<Script file="cooldowns\cooldowns.lua"/>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<!-- Maps -->
 	<Script file="maps\minimap.lua"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<!-- Auras -->
 	<Include file="auras\templates.xml"/>
@@ -59,12 +117,94 @@
 	<Script file="datatexts\elements\time.lua"/>
 	<Script file="datatexts\elements\battleground.lua"/>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<!-- chatframes -->
 	<Script file="chatframes\chatframes.lua"/>
 	<Script file="chatframes\mousescroll.lua"/>
 	<Script file="chatframes\whispersound.lua"/>
 	<Script file="chatframes\copyURL.lua"/>
 	<Script file="chatframes\copybutton.lua"/>
+
+
+
+
+
+
+
+
+
+
 
 	<!-- unitframes -->
 	<Script file="unitframes\core.lua"/>
@@ -90,6 +230,15 @@
 	<Script file="unitframes\units\boss.lua"/>
 	<Script file="unitframes\Raid\raid.lua"/>
 
+
+
+
+
+
+
+
+
+
 	<!-- Tooltips -->
 	<Script file="tooltips\tooltips.lua"/>
 	<Script file="tooltips\idandcount.lua"/>
@@ -103,6 +252,8 @@
 	<Script file="petbattles\unitframes.lua"/>
 	<Script file="petbattles\actions.lua"/>
 	<Script file="petbattles\others.lua"/>
+
+
 
 	<!-- Misc. -->
 	<Script file="misc\altpowerbar.lua"/>
