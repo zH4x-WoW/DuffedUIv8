@@ -1,5 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Button name="DuffedUIAurasTemplate" inherits="SecureActionButtonTemplate" virtual="true">
+	<Button name="TukuiAurasTemplate" inherits="SecureActionButtonTemplate" virtual="true">
 		<Size x="30" y="30"/>
 
 		<Attributes>
@@ -8,10 +8,10 @@
 
 		<Scripts>
 			<OnLoad>
-				local D = unpack(DuffedUI)
-				local DuffedUIAuras = D["Auras"]
+				local T = unpack(Tukui)
+				local TukuiAuras = T["Auras"]
 
-				DuffedUIAuras.Skin(self)
+				TukuiAuras.Skin(self)
 
 				self:RegisterForClicks("RightButtonUp")
 			</OnLoad>
@@ -31,17 +31,17 @@
 		</Scripts>
 	</Button>
 
-	<Frame name="DuffedUIAurasProxyTemplate" inherits="SecureUnitButtonTemplate, SecureHandlerEnterLeaveTemplate" virtual="true">
+	<Frame name="TukuiAurasProxyTemplate" inherits="SecureUnitButtonTemplate, SecureHandlerEnterLeaveTemplate" virtual="true">
 		<Size x="30" y="30"/>
 
 		<Scripts>
 			<OnLoad>
-				local D = unpack(DuffedUI)
-				local DuffedUIAuras = D["Auras"]
+				local T = unpack(Tukui)
+				local TukuiAuras = T["Auras"]
 
 				self.IsProxy = true
 
-				DuffedUIAuras.Skin(self)
+				TukuiAuras.Skin(self)
 			</OnLoad>
 		</Scripts>
 	</Frame>

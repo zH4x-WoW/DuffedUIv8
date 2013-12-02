@@ -1,13 +1,15 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DuffedUIUnitFrames = D["UnitFrames"]
+local TukuiUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function DuffedUIUnitFrames:Raid()
+-- NOTE : Health.Value? Aggro? Symbols? HealComm? Raid Debuffs Plugin? Weakened Soul Bar?
+
+function TukuiUnitFrames:Raid()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self:SetBackdrop(DuffedUIUnitFrames.Backdrop)
+	self:SetBackdrop(TukuiUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
 	
@@ -15,7 +17,7 @@ function DuffedUIUnitFrames:Raid()
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
 	Health:Height(28)
-	Health:SetStatusBarTexture(C["medias"].Normal)
+	Health:SetStatusBarTexture(C.Medias.Normal)
 	Health:SetOrientation("VERTICAL")
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
@@ -24,7 +26,7 @@ function DuffedUIUnitFrames:Raid()
 	Health.colorClass = true
 	Health.colorDisconnected = true
 	Health.colorReaction = true
-	if (C["unitframes"].Smooth) then
+	if (C.UnitFrames.Smooth) then
 		Health.Smooth = true
 	end
 	
@@ -35,12 +37,12 @@ function DuffedUIUnitFrames:Raid()
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints(Power)
-	Power.Background:SetTexture(C["medias"].Normal)
+	Power.Background:SetTexture(C.Medias.Normal)
 	Power.Background.multiplier = 0.3
-	Power:SetStatusBarTexture(C["medias"].Normal)
+	Power:SetStatusBarTexture(C.Medias.Normal)
 	Power.frequentUpdates = true
 	Power.colorPower = true
-	if (C["unitframes"].Smooth) then
+	if (C.UnitFrames.Smooth) then
 		Health.Smooth = true
 	end
 	
@@ -49,11 +51,11 @@ function DuffedUIUnitFrames:Raid()
 	Panel:Point("TOPRIGHT", Power, "BOTTOMRIGHT", 0, -1)
 	Panel:SetPoint("BOTTOM", 0, 0)
 	Panel:SetTemplate()
-	Panel:SetBackdropBorderColor(C["medias"].BorderColor[1] * 0.7, C["medias"].BorderColor[2] * 0.7, C["medias"].BorderColor[3] * 0.7)
+	Panel:SetBackdropBorderColor(C.Medias.BorderColor[1] * 0.7, C.Medias.BorderColor[2] * 0.7, C.Medias.BorderColor[3] * 0.7)
 	
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER")
-	Name:SetFont(C["medias"].AltFont, 12)
+	Name:SetFont(C.Medias.AltFont, 12)
 	
 	local ReadyCheck = Power:CreateTexture(nil, "OVERLAY")
 	ReadyCheck:Height(12)
@@ -63,18 +65,18 @@ function DuffedUIUnitFrames:Raid()
 	local LFDRole = Health:CreateTexture(nil, "OVERLAY")
 	LFDRole:SetInside(Panel)
 	LFDRole:SetTexture(0, 0, 0, 0)
-	LFDRole.Override = DuffedUIUnitFrames.SetGridGroupRole
-
+	LFDRole.Override = TukuiUnitFrames.SetGridGroupRole
+	
 	local ResurrectIcon = Health:CreateTexture(nil, "OVERLAY")
 	ResurrectIcon:Size(16)
 	ResurrectIcon:SetPoint("CENTER")
-
+	
 	local Range = {
-		insideAlpha = 1,
+		insideAlpha = 1, 
 		outsideAlpha = 0.3,
 	}
-	
-	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameShort]")
+
+	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameShort]")
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Power = Power

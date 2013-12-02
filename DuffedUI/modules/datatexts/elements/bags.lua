@@ -1,6 +1,6 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local format = format
 local ToggleAllBags = ToggleAllBags
 
@@ -16,6 +16,16 @@ local Update = function(self)
 	self.Text:SetText(format("%s: %s/%s", DataText.NameColor .. L.DataText.Bags .. "|r", DataText.ValueColor .. Used, Total .. "|r"))
 end
 
+local OnMouseUp = function(self)
+	local Bank = BankFrame
+
+	if Bank:IsShown() then
+		CloseBankFrame()
+	else
+		ToggleAllBags()
+	end
+end
+
 local Enable = function(self)	
 	if (not self.Text) then
 		local Text = self:CreateFontString(nil, "OVERLAY")
@@ -27,7 +37,7 @@ local Enable = function(self)
 	self:RegisterEvent("BAG_UPDATE")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	self:SetScript("OnEvent", Update)
-	self:SetScript("OnMouseUp", ToggleAllBags)
+	self:SetScript("OnMouseUp", OnMouseUp)
 	self:Update()
 end
 

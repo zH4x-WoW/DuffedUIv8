@@ -1,17 +1,17 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-if (not C["actionbars"].Enable) then
+if (not C.ActionBars.Enable) then
 	return
 end
 
 local _G = _G
-local DuffedUIActionBars = D["ActionBars"]
-local Panels = D["Panels"]
-local Size = C["actionbars"].NormalButtonSize
-local Spacing = C["actionbars"].ButtonSpacing
+local TukuiActionBars = T["ActionBars"]
+local Panels = T["Panels"]
+local Size = C.ActionBars.NormalButtonSize
+local Spacing = C.ActionBars.ButtonSpacing
 
-function DuffedUIActionBars:CreateStanceBar()
-	local Bar = D.Panels.StanceBar
+function TukuiActionBars:CreateStanceBar()
+	local Bar = T.Panels.StanceBar
 	
 	Bar:RegisterEvent("PLAYER_LOGIN")
 	Bar:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -47,12 +47,12 @@ function DuffedUIActionBars:CreateStanceBar()
 		elseif event == "UPDATE_SHAPESHIFT_FORMS" then
 
 		elseif event == "PLAYER_ENTERING_WORLD" then
-			DuffedUIActionBars.UpdateStanceBar(self)
-			DuffedUIActionBars.SkinStanceButtons()
+			TukuiActionBars.UpdateStanceBar(self)
+			TukuiActionBars.SkinStanceButtons()
 		else
-			DuffedUIActionBars.UpdateStanceBar(self)
+			TukuiActionBars.UpdateStanceBar(self)
 		end
 	end)
 
-	RegisterStateDriver(Bar, "visibility", "[vehicleui][petbattle][overrideBar] hide; show")
+	RegisterStateDriver(Bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
 end

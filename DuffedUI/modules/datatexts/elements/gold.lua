@@ -1,6 +1,6 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local format = format
 local floor = floor
 local abs = abs
@@ -8,7 +8,6 @@ local mod = mod
 
 local Profit = 0
 local Spent = 0
-local OldMoney = 0
 local MyRealm = GetRealmName()
 local MyName = UnitName("player")
 
@@ -33,10 +32,8 @@ local FormatTooltipMoney = function(money)
 end	
 
 local OnEnter = function(self)
-	if not InCombatLockdown() then
-		local Panel, Anchor, xOff, yOff = self:GetTooltipAnchor()
-		
-		GameTooltip:SetOwner(Panel, Anchor, xOff, yOff)
+	if (not InCombatLockdown()) then
+		GameTooltip:SetOwner(self:GetTooltipAnchor())
 		GameTooltip:ClearLines()
 		GameTooltip:AddLine(L.DataText.Session)
 		GameTooltip:AddDoubleLine(L.DataText.Earned, FormatMoney(Profit), 1, 1, 1, 1, 1, 1)
@@ -53,7 +50,7 @@ local OnEnter = function(self)
 		local TotalGold = 0				
 		GameTooltip:AddLine(L.DataText.Character)			
 
-		for key, value in pairs(DuffedUIData.Gold[MyRealm]) do
+		for key, value in pairs(TukuiData.Gold[MyRealm]) do
 			GameTooltip:AddDoubleLine(key, FormatTooltipMoney(value), 1, 1, 1, 1, 1, 1)
 			TotalGold = TotalGold + value
 		end
@@ -88,37 +85,40 @@ local OnLeave = function()
 	GameTooltip:Hide()
 end
 
-local Update = function(self, event)
-	if (event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LOGOUT") then
-		OldMoney = GetMoney()
-		
-		if (not DuffedUIData) then
-			DuffedUIData = {}
-		end
-		
-		if (not DuffedUIData.Gold) then
-			DuffedUIData.Gold = {}
-		end
-		
-		if (not DuffedUIData.Gold[MyRealm]) then
-			DuffedUIData.Gold[MyRealm] = {}
-		end
-		
-		DuffedUIData.Gold[MyRealm][MyName] = GetMoney()
+local Update = function( self, event, ... )
+	if (not IsLoggedIn()) then
+		return
 	end
-	
+
 	local NewMoney = GetMoney()
-	local Change = NewMoney - OldMoney
-	
-	if OldMoney > NewMoney then
+
+	TukuiData = TukuiData or { }
+	TukuiData["Gold"] = TukuiData["Gold"] or {}
+	TukuiData["Gold"][MyRealm] = TukuiData["Gold"][MyRealm] or {}
+	TukuiData["Gold"][MyRealm][MyName] = TukuiData["Gold"][MyRealm][MyName] or NewMoney
+
+	local OldMoney = TukuiData['Gold'][MyRealm][MyName] or NewMoney
+
+	local Change = NewMoney-OldMoney
+	if (OldMoney > NewMoney) then
 		Spent = Spent - Change
 	else
 		Profit = Profit + Change
 	end
-	
+
 	self.Text:SetText(FormatMoney(NewMoney))
-	
-	OldMoney = NewMoney
+
+	TukuiData["Gold"][MyRealm][MyName] = NewMoney
+end
+
+local OnMouseDown = function(self)
+	local Bank = BankFrame
+
+	if Bank:IsShown() then
+		CloseBankFrame()
+	else
+		ToggleAllBags()
+	end
 end
 
 local Enable = function(self)
@@ -135,8 +135,7 @@ local Enable = function(self)
 	self:RegisterEvent("PLAYER_TRADE_MONEY")
 	self:RegisterEvent("TRADE_MONEY_CHANGED")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	self:RegisterEvent("PLAYER_LOGOUT")
-	self:SetScript("OnMouseDown", ToggleAllBags)
+	self:SetScript("OnMouseDown", OnMouseDown)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnLeave", OnLeave)
 	self:SetScript("OnEvent", Update)

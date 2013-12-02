@@ -1,12 +1,12 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DuffedUIUnitFrames = D["UnitFrames"]
+local TukuiUnitFrames = T["UnitFrames"]
 
-function DuffedUIUnitFrames:FocusTarget()
+function TukuiUnitFrames:FocusTarget()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self:SetBackdrop(DuffedUIUnitFrames.Backdrop)
+	self:SetBackdrop(TukuiUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
 
@@ -14,13 +14,13 @@ function DuffedUIUnitFrames:FocusTarget()
 	Health:Height(22)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
-	Health:SetStatusBarTexture(C["medias"].Normal)
+	Health:SetStatusBarTexture(C.Medias.Normal)
 
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(0.1, 0.1, 0.1)
 
-	Health:FontString("Value", C["medias"].AltFont, 12, "OUTLINE")
+	Health:FontString("Value", C.Medias.AltFont, 12, "OUTLINE")
 	Health.Value:Point("LEFT", Health, "LEFT", 2, 0)
 
 	Health.frequentUpdates = true
@@ -29,9 +29,9 @@ function DuffedUIUnitFrames:FocusTarget()
 	Health.colorClass = true
 	Health.colorReaction = true	
 
-	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
+	Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
 
-	if (C["unitframes"].Smooth) then
+	if (C.UnitFrames.Smooth) then
 		Health.Smooth = true
 	end
 
@@ -39,54 +39,54 @@ function DuffedUIUnitFrames:FocusTarget()
 	Power:Height(6)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
-	Power:SetStatusBarTexture(C["medias"].Normal)
+	Power:SetStatusBarTexture(C.Medias.Normal)
 
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints()
-	Power.Background:SetTexture(C["medias"].Normal)
+	Power.Background:SetTexture(C.Medias.Normal)
 	Power.Background.multiplier = 0.3
 
-	Power:FontString("Value", C["medias"].AltFont, 12, "OUTLINE")
+	Power:FontString("Value", C.Medias.AltFont, 12, "OUTLINE")
 	Power.Value:Point("RIGHT", Health, "RIGHT", -2, 0)
 
 	Power.colorPower = true
 	Power.frequentUpdates = true
 	Power.colorDisconnected = true
 
-	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
+	Power.PostUpdate = TukuiUnitFrames.PostUpdatePower
 
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:Point("CENTER", Health, "CENTER", 0, 0)
 	Name:SetJustifyH("CENTER")
-	Name:SetFont(C["medias"].AltFont, 12, "OUTLINE")
+	Name:SetFont(C.Medias.AltFont, 12, "OUTLINE")
 	Name:SetShadowColor(0, 0, 0)
-	Name:SetShadowOffset(D.Mult, -D.Mult)
-	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong]")
+	Name:SetShadowOffset(T.Mult, -T.Mult)
+	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong]")
 
-	if (C["unitframes"].CastBar) then
+	if (C.UnitFrames.CastBar) then
 		local CastBar = CreateFrame("StatusBar", nil, self)
 		CastBar:SetPoint("LEFT", 2, 0)
 		CastBar:SetPoint("RIGHT", -24, 0)
 		CastBar:SetPoint("BOTTOM", 0, -22)
 		CastBar:SetHeight(16)
-		CastBar:SetStatusBarTexture(C["medias"].Normal)
+		CastBar:SetStatusBarTexture(C.Medias.Normal)
 		CastBar:SetFrameLevel(6)
 
 		CastBar.Background = CreateFrame("Frame", nil, CastBar)
 		CastBar.Background:SetTemplate("Default")
-		CastBar.Background:SetBackdropBorderColor(C["medias"].BorderColor[1] * 0.7, C["medias"].BorderColor[2] * 0.7, C["medias"].BorderColor[3] * 0.7)
+		CastBar.Background:SetBackdropBorderColor(C.Medias.BorderColor[1] * 0.7, C.Medias.BorderColor[2] * 0.7, C.Medias.BorderColor[3] * 0.7)
 		CastBar.Background:Point("TOPLEFT", -2, 2)
 		CastBar.Background:Point("BOTTOMRIGHT", 2, -2)
 		CastBar.Background:SetFrameLevel(5)
 
 		CastBar.Time = CastBar:CreateFontString(nil, "OVERLAY")
-		CastBar.Time:SetFont(C["medias"].AltFont, 12)
+		CastBar.Time:SetFont(C.Medias.AltFont, 12)
 		CastBar.Time:Point("RIGHT", CastBar, "RIGHT", -4, 0)
 		CastBar.Time:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Time:SetJustifyH("RIGHT")
 
 		CastBar.Text = CastBar:CreateFontString(nil, "OVERLAY")
-		CastBar.Text:SetFont(C["medias"].AltFont, 12)
+		CastBar.Text:SetFont(C.Medias.AltFont, 12)
 		CastBar.Text:Point("LEFT", CastBar, "LEFT", 4, 0)
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 
@@ -94,15 +94,15 @@ function DuffedUIUnitFrames:FocusTarget()
 		CastBar.Button:Size(20, 20)
 		CastBar.Button:SetTemplate()
 		CastBar.Button:SetPoint("LEFT", CastBar, "RIGHT", 4, 0)
-		CastBar.Button:SetBackdropBorderColor(C["medias"].BorderColor[1] * 0.7, C["medias"].BorderColor[2] * 0.7, C["medias"].BorderColor[3] * 0.7)
+		CastBar.Button:SetBackdropBorderColor(C.Medias.BorderColor[1] * 0.7, C.Medias.BorderColor[2] * 0.7, C.Medias.BorderColor[3] * 0.7)
 		CastBar.Icon = CastBar.Button:CreateTexture(nil, "ARTWORK")
 		CastBar.Icon:SetInside()
-		CastBar.Icon:SetTexCoord(unpack(D.IconCoord))
+		CastBar.Icon:SetTexCoord(unpack(T.IconCoord))
 
-		CastBar.CustomTimeText = DuffedUIUnitFrames.CustomCastTimeText
-		CastBar.CustomDelayText = DuffedUIUnitFrames.CustomCastDelayText
-		CastBar.PostCastStart = DuffedUIUnitFrames.CheckCast
-		CastBar.PostChannelStart = DuffedUIUnitFrames.CheckChannel
+		CastBar.CustomTimeText = TukuiUnitFrames.CustomCastTimeText
+		CastBar.CustomDelayText = TukuiUnitFrames.CustomCastDelayText
+		CastBar.PostCastStart = TukuiUnitFrames.CheckCast
+		CastBar.PostChannelStart = TukuiUnitFrames.CheckChannel
 
 		self.Castbar = CastBar
 		self.Castbar.Icon = CastBar.Icon

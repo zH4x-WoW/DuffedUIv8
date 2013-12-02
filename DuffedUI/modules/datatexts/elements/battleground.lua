@@ -1,6 +1,6 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local MyName = UnitName("player")
 local format = format
 local int = 2
@@ -18,7 +18,7 @@ local TOK = 856
 local SSM = 860
 
 local BGFrame = CreateFrame("Frame", nil, UIParent)
-BGFrame:SetAllPoints(DuffedUIDataTextLeft)
+BGFrame:SetAllPoints(TukuiDataTextLeft)
 BGFrame:SetTemplate()
 BGFrame:SetFrameLevel(2)
 
@@ -51,7 +51,7 @@ function BGFrame:OnEnter()
 			local Color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
 			local ClassColor = format("|cff%.2x%.2x%.2x", Color.r * 255, Color.g * 255, Color.b * 255)
 			SetMapToCurrentZone()			
-			GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, D.Scale(4))
+			GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, T.Scale(4))
 			GameTooltip:ClearLines()
 			GameTooltip:Point("BOTTOM", self, "TOP", 0, 1)
 			GameTooltip:ClearLines()

@@ -338,9 +338,9 @@ do
 
 	function frame:VARIABLES_LOADED()
 		-- I honestly don't trust the load order of SVs.
-		if (DuffedUIDataPerChar == nil) then DuffedUIDataPerChar = {} end
-		_DB = DuffedUIDataPerChar.ufpos or {}
-		DuffedUIDataPerChar.ufpos = _DB
+		if (TukuiDataPerChar == nil) then TukuiDataPerChar = {} end
+		_DB = TukuiDataPerChar.ufpos or {}
+		TukuiDataPerChar.ufpos = _DB
 		
 		-- Got to catch them all!
 		for _, obj in next, oUF.objects do
@@ -521,13 +521,13 @@ end
 
 -- reset data
 local function RESETUF()
-	DuffedUIDataPerChar.ufpos = {}
+	TukuiDataPerChar.ufpos = {}
 	ReloadUI()
 end
 SLASH_RESETUF1 = "/resetuf"
 SlashCmdList["RESETUF"] = RESETUF
 --[[
-D.MoveUnitFrames = function(inp)
+T.MoveUnitFrames = function(inp)
 	if(InCombatLockdown()) then
 		return
 	end

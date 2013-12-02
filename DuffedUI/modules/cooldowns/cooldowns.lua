@@ -1,22 +1,22 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 local _G = _G
-local DuffedUICooldowns = CreateFrame("Frame")
+local TukuiCooldowns = CreateFrame("Frame")
 local UIParent = UIParent
 local IconSize = 36
 local Day, Hour, Minute = 86400, 3600, 60
 local Dayish, Hourish, Minuteish = 3600 * 23.5, 60 * 59.5, 59.5
 local HalfDayish, HalfHourish, HalfMinuteish = Day/2 + 0.5, Hour/2 + 0.5, Minute/2 + 0.5
-local Font = C["medias"].Font
+local Font = C.Medias.Font
 local FontSize = 20
 local MinScale = 0.5
 local MinimumDuration = 2.5
-local Notification = C["cooldowns"].Notification
-local ExpireFormat = D.RGBToHex(1, 0, 0).."%.1f|r"
-local SecondsFormat = D.RGBToHex(1, 1, 0).."%d|r"
-local MinutesFormat = D.RGBToHex(1, 1, 1).."%dm|r"
-local HoursFormat = D.RGBToHex(0.4, 1, 1).."%dh|r"
-local DaysFormat = D.RGBToHex(0.4, 0.4, 1).."%dh|r"
+local Notification = C.Cooldowns.Notification
+local ExpireFormat = T.RGBToHex(1, 0, 0).."%.1f|r"
+local SecondsFormat = T.RGBToHex(1, 1, 0).."%d|r"
+local MinutesFormat = T.RGBToHex(1, 1, 1).."%dm|r"
+local HoursFormat = T.RGBToHex(0.4, 1, 1).."%dh|r"
+local DaysFormat = T.RGBToHex(0.4, 0.4, 1).."%dh|r"
 local Active = {}
 local Hooked = {}
 local floor = math.floor
@@ -26,61 +26,61 @@ local GetActionCharges = GetActionCharges
 local GetActionCooldown = GetActionCooldown
 local ActionBarButtonEventsFrame = ActionBarButtonEventsFrame
 
-function DuffedUICooldowns:OnShow()
+function TukuiCooldowns:OnShow()
 	Active[self] = true
 end
 
-function DuffedUICooldowns:OnHide()
+function TukuiCooldowns:OnHide()
 	Active[self] = nil
 end
 
-function DuffedUICooldowns:Register()
+function TukuiCooldowns:Register()
 	local Cooldown = self.cooldown
 	if not Hooked[Cooldown] then
-		Cooldown:HookScript("OnShow", DuffedUICooldowns.OnShow)
-		Cooldown:HookScript("OnHide", DuffedUICooldowns.OnHide)
+		Cooldown:HookScript("OnShow", TukuiCooldowns.OnShow)
+		Cooldown:HookScript("OnHide", TukuiCooldowns.OnHide)
 		Hooked[Cooldown] = true
 	end
 end
 
 if ActionBarButtonEventsFrame.frames then
 	for i, Frame in pairs(ActionBarButtonEventsFrame.frames) do
-		DuffedUICooldowns.Register(Frame)
+		TukuiCooldowns.Register(Frame)
 	end
 end
 
-function DuffedUICooldowns:GetTimeText()
+function TukuiCooldowns:GetTimeText()
 	if self < Minuteish then
-		local Seconds = tonumber(D.Round(self))
+		local Seconds = tonumber(T.Round(self))
 		if Seconds > Notification then
 			return SecondsFormat, Seconds, self - (Seconds - 0.51)
 		else
 			return ExpireFormat, self, 0.051
 		end
 	elseif self < Hourish then
-		local Minutes = tonumber(D.Round(self / Minute))
+		local Minutes = tonumber(T.Round(self / Minute))
 		return MinutesFormat, Minutes, Minutes > 1 and (self - (Minutes * Minute - HalfMinuteish)) or (self - Minuteish)
 	elseif self < Dayish then
-		local Hours = tonumber(D.Round(self / Hour))
+		local Hours = tonumber(T.Round(self / Hour))
 		return HoursFormat, Hours, Hours > 1 and (self - (Hours * Hour - HalfDayish)) or (self - Hourish)
 	else
-		local Day = tonumber(D.Round(self / Day))
+		local Day = tonumber(T.Round(self / Day))
 		return DaysFormat, Days,  Days > 1 and (self - (Days * Day - HalfDayish)) or (self - Dayish)
 	end
 end
 
-function DuffedUICooldowns:StopTimer()
+function TukuiCooldowns:StopTimer()
 	self.Enabled = nil
 	self:Hide()
 end
 
-function DuffedUICooldowns:ForceTimerUpdate()
+function TukuiCooldowns:ForceTimerUpdate()
 	self.NextUpdate = 0
 	self:Show()
 end
 
-function DuffedUICooldowns:OnSizeChanged(width, height)
-	local FontScale = D.Round(width) / IconSize
+function TukuiCooldowns:OnSizeChanged(width, height)
+	local FontScale = T.Round(width) / IconSize
 
 	if FontScale == self.FontScale then
 		return
@@ -95,39 +95,39 @@ function DuffedUICooldowns:OnSizeChanged(width, height)
 		self.Text:SetShadowColor(0, 0, 0, 0.5)
 		self.Text:SetShadowOffset(2, -2)
 		if self.Enabled then
-			DuffedUICooldowns.ForceTimerUpdate(self)
+			TukuiCooldowns.ForceTimerUpdate(self)
 		end
 	end
 end
 
-function DuffedUICooldowns:OnUpdate(elapsed)
+function TukuiCooldowns:OnUpdate(elapsed)
 	if self.NextUpdate > 0 then
 		self.NextUpdate = self.NextUpdate - elapsed
 	else
 		local Remain = self.Duration - (GetTime() - self.Start)
-		if tonumber(D.Round(Remain)) > 0 then
+		if tonumber(T.Round(Remain)) > 0 then
 			if (self.FontScale * self:GetEffectiveScale() / UIParent:GetScale()) < MinScale then
 				self.Text:SetText("")
 				self.NextUpdate  = 1
 			else
-				local FormatStr, Time, NextUpdate = DuffedUICooldowns.GetTimeText(Remain)
+				local FormatStr, Time, NextUpdate = TukuiCooldowns.GetTimeText(Remain)
 				self.Text:SetFormattedText(FormatStr, Time)
 				self.NextUpdate = NextUpdate
 			end
 		else
-			DuffedUICooldowns.StopTimer(self)
+			TukuiCooldowns.StopTimer(self)
 		end
 	end
 end
 
-function DuffedUICooldowns:CreateTimer()
+function TukuiCooldowns:CreateTimer()
 	local Scaler = CreateFrame("Frame", nil, self)
 	Scaler:SetAllPoints(self)
 
 	local Timer = CreateFrame("Frame", nil, Scaler)
 	Timer:Hide()
 	Timer:SetAllPoints(Scaler)
-	Timer:SetScript("OnUpdate", DuffedUICooldowns.OnUpdate)
+	Timer:SetScript("OnUpdate", TukuiCooldowns.OnUpdate)
 	self.Timer = Timer
 
 	local Text = Timer:CreateFontString(nil, "OVERLAY")
@@ -135,21 +135,21 @@ function DuffedUICooldowns:CreateTimer()
 	Text:SetJustifyH("CENTER")
 	Timer.Text = Text
 
-	DuffedUICooldowns.OnSizeChanged(Timer, Scaler:GetSize())
+	TukuiCooldowns.OnSizeChanged(Timer, Scaler:GetSize())
 	Scaler:SetScript("OnSizeChanged", function(self, ...)
-		DuffedUICooldowns.OnSizeChanged(Timer, ...)
+		TukuiCooldowns.OnSizeChanged(Timer, ...)
 	end)
 
 	return Timer
 end
 
-function DuffedUICooldowns:TimerStart(start, duration, charges, maxcharges)
+function TukuiCooldowns:TimerStart(start, duration, charges, maxcharges)
 	if self.noOCC then
 		return
 	end
 
 	if start > 0 and duration > MinimumDuration then
-		local Timer = self.Timer or DuffedUICooldowns.CreateTimer(self)
+		local Timer = self.Timer or TukuiCooldowns.CreateTimer(self)
 		local Num = charges or 0
 
 		Timer.Start = start
@@ -165,27 +165,27 @@ function DuffedUICooldowns:TimerStart(start, duration, charges, maxcharges)
 	else
 		local Timer = self.Timer
 		if Timer then
-			DuffedUICooldowns.StopTimer(Timer)
+			TukuiCooldowns.StopTimer(Timer)
 		end
 	end
 end
 
-function DuffedUICooldowns:UpdateCooldown()
+function TukuiCooldowns:UpdateCooldown()
 	local Button = self:GetParent()
 	local Start, Duration, Enable = GetActionCooldown(Button.action)
 	local Charges, MaxCharges, ChargeStart, ChargeDuration = GetActionCharges(Button.action)
 
-	DuffedUICooldowns.TimerStart(self, Start, Duration, Charges, MaxCharges)
+	TukuiCooldowns.TimerStart(self, Start, Duration, Charges, MaxCharges)
 end
 
-DuffedUICooldowns:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN")
-DuffedUICooldowns:SetScript("OnEvent", function(self, event)
+TukuiCooldowns:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN")
+TukuiCooldowns:SetScript("OnEvent", function(self, event)
 	for Cooldown in pairs(Active) do
-		DuffedUICooldowns.UpdateCooldown(Cooldown)
+		TukuiCooldowns.UpdateCooldown(Cooldown)
 	end
 end)
 
-hooksecurefunc(getmetatable(_G["ActionButton1Cooldown"]).__index, "SetCooldown", DuffedUICooldowns.TimerStart)
-hooksecurefunc("ActionBarButtonEventsFrame_RegisterFrame", DuffedUICooldowns.Register)
+hooksecurefunc(getmetatable(_G["ActionButton1Cooldown"]).__index, "SetCooldown", TukuiCooldowns.TimerStart)
+hooksecurefunc("ActionBarButtonEventsFrame_RegisterFrame", TukuiCooldowns.Register)
 
-D["Cooldowns"] = DuffedUICooldowns
+T["Cooldowns"] = TukuiCooldowns

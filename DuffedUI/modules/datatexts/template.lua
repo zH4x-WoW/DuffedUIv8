@@ -1,7 +1,7 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 -- Standard local values
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local format = format
 
 -- This function updates the text values.

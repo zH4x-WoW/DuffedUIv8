@@ -1,32 +1,7 @@
-
-
-
-
-
-
-
-
-
-
-
 local _, ns = ...
 local oUF = ns.oUF or oUF
 
-
-
-
-
-
-
-
-
-
-
-
-
 if not oUF then return end
-
-
 
 local damage_format = "-%d"
 local heal_format = "+%d"
@@ -54,8 +29,6 @@ local colors = {
 	ENERGIZE		= { 0.41, 0.8, 0.94 },
 	CRITENERGIZE	= { 0.41, 0.8, 0.94 },
 }
-
-
 
 local function createUpdateFrame()
 	if updateFrame then return end
@@ -86,36 +59,6 @@ local function createUpdateFrame()
 end
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 local function combat(self, event, unit, eventType, flags, amount, dtype)
 	if unit ~= self.unit then return end
 	if unit == "vehicle" then return end
@@ -125,7 +68,7 @@ local function combat(self, event, unit, eventType, flags, amount, dtype)
 	if not font then font = STANDARD_TEXT_FONT end
 	if (not fontHeight) or (fontHeight <= 0) then fontHeight = 12 end
 	if not fontFlags then fontFlags = nil end
-	-- fontHeight = FeedbackText.origHeight -- always start at original height
+	--fontHeight = FeedbackText.origHeight -- always start at original height
 	local text, arg
 	color = fColors and fColors.STANDARD or colors.STANDARD
 	if eventType == "IMMUNE" and not FeedbackText.ignoreImmune then
@@ -189,12 +132,6 @@ local function combat(self, event, unit, eventType, flags, amount, dtype)
 		text = CombatFeedbackText[eventType]
 	end
 
-
-
-
-
-
-
 	if text then
 		FeedbackText:SetFont(font,fontHeight,fontFlags)
 		FeedbackText:SetFormattedText(text, arg)
@@ -206,29 +143,6 @@ local function combat(self, event, unit, eventType, flags, amount, dtype)
 	end
 end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 local function addCombat(object)
 	if not object.CombatFeedbackText then return end
 	-- store the original starting height
@@ -239,24 +153,5 @@ local function addCombat(object)
 	object:RegisterEvent("UNIT_COMBAT", combat)
 end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 for k, object in ipairs(oUF.objects) do addCombat(object) end
 oUF:RegisterInitCallback(addCombat)
-
-
-
-
-
-

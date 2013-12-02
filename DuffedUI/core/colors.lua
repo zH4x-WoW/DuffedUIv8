@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 local Framework = select(2, ...)
 local oUF = oUF or Framework.oUF
@@ -25,10 +25,17 @@ oUF.colors.power = {
 }
 
 oUF.colors.runes = {
-	[1] = {.69,.31,.31},
-	[2] = {.33,.59,.33},
-	[3] = {.31,.45,.63},
-	[4] = {.84,.75,.65},
+	[1] = {0.69, 0.31, 0.31}, -- blood
+	[2] = {0.33, 0.59, 0.33}, -- unholy
+	[3] = {0.31, 0.45, 0.63}, -- frost
+	[4] = {0.84, 0.75, 0.65}, -- death
+}
+
+oUF.colors.totems = {
+	[1] = {0.58, 0.23, 0.10}, -- fire
+	[2] = {0.23, 0.45, 0.13}, -- earth
+	[3] = {0.19, 0.48, 0.60}, -- water
+	[4] = {0.42, 0.18, 0.74}, -- air
 }
 
 oUF.colors.reaction = {
@@ -56,4 +63,4 @@ oUF.colors.class = {
 	["MONK"]        = { 0/255, 255/255, 150/255   },
 }
 
-D["Colors"] = oUF.colors
+T["Colors"] = oUF.colors

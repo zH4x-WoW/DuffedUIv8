@@ -1,9 +1,9 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DuffedUIUnitFrames = D["UnitFrames"]
+local TukuiUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function DuffedUIUnitFrames:AddWarlockFeatures()
+function TukuiUnitFrames:AddWarlockFeatures()
 	local Shadow = self.Shadow
 	local Bar = CreateFrame("Frame", nil, self)
 	
@@ -12,14 +12,14 @@ function DuffedUIUnitFrames:AddWarlockFeatures()
 	Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	Bar:SetWidth(250)
 	Bar:SetHeight(8)
-	Bar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
+	Bar:SetBackdrop(TukuiUnitFrames.Backdrop)
 	Bar:SetBackdropColor(0, 0, 0)
 	Bar:SetBackdropBorderColor(0, 0, 0)	
 	
 	for i = 1, 4 do
 		Bar[i] = CreateFrame("StatusBar", nil, Bar)
 		Bar[i]:Height(8)
-		Bar[i]:SetStatusBarTexture(C["medias"].Normal)
+		Bar[i]:SetStatusBarTexture(C.Medias.Normal)
 		
 		if i == 1 then
 			Bar[i]:Width((250 / 4) - 2)
@@ -33,11 +33,11 @@ function DuffedUIUnitFrames:AddWarlockFeatures()
 	end
 	
 	Bar:SetScript("OnShow", function(self) 
-		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
+		TukuiUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
 	end)
 
 	Bar:SetScript("OnHide", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
+		TukuiUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
 	end)
 	
 	self.WarlockSpecBars = Bar		

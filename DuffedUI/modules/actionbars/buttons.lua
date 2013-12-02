@@ -1,10 +1,10 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local ActionBars = D["ActionBars"]
-local Panels = D["Panels"]
+local ActionBars = T["ActionBars"]
+local Panels = T["Panels"]
 
-local Size = C["actionbars"].NormalButtonSize
-local Spacing = C["actionbars"].ButtonSpacing
+local Size = C.ActionBars.NormalButtonSize
+local Spacing = C.ActionBars.ButtonSpacing
 local IsShiftKeyDown = IsShiftKeyDown
 local InCombatLockdown = InCombatLockdown
 local error = ERR_NOT_IN_COMBAT
@@ -35,7 +35,7 @@ function ActionBars:ShowAllButtons(bar, num)
 end
 
 function ActionBars:RemoveColumn(bar, num)
-	local Data = DuffedUIDataPerChar
+	local Data = TukuiDataPerChar
 
 	if (not bar.NextColumnToHide) then
 		bar.NextColumnToHide = 6
@@ -64,7 +64,7 @@ function ActionBars:RemoveColumn(bar, num)
 end
 
 function ActionBars:RemoveButton(bar, num)
-	local Data = DuffedUIDataPerChar
+	local Data = TukuiDataPerChar
 
 	if (not bar.NextButtonToHide) then
 		bar.NextButtonToHide = 12
@@ -103,7 +103,7 @@ end
 
 -- Restore buttons to previous state on load
 function ActionBars:RestoreBarState()
-	local Data = DuffedUIDataPerChar
+	local Data = TukuiDataPerChar
 
 	for bar = 2, 3 do
 		if Data["Bar"..bar.."Buttons"] then
@@ -128,7 +128,7 @@ local OnClick = function(self)
 	end
 	
 	local ShiftClick = IsShiftKeyDown()
-	local Data = DuffedUIDataPerChar
+	local Data = TukuiDataPerChar
 	local Text = self.Text
 	local Bar = self.Bar
 	local Num = self.Num
@@ -175,7 +175,8 @@ local OnClick = function(self)
 				self:Point("TOP", Panels.ActionBar1, "BOTTOM", 0, -3)
 				Text:SetText(L.ActionBars.ArrowUp)
 			elseif (Num == 5) then
-				self:Point("TOP", Bar, "BOTTOM", 0, -3)
+				self:Size(Size, Bar:GetHeight() - 40)
+				self:Point("LEFT", Bar, "RIGHT", 3, 0)
 				Text:SetText(L.ActionBars.ArrowLeft)
 			end
 			
@@ -213,6 +214,7 @@ local OnClick = function(self)
 			self:Point("TOP", Panels.ActionBar1, "BOTTOM", 0, -3)
 			Text:SetText(L.ActionBars.ArrowDown)
 		elseif (Num == 5) then
+			self:Size(Bar:GetWidth(), 18)
 			self:Point("TOP", Bar, "BOTTOM", 0, -3)
 			Text:SetText(L.ActionBars.ArrowRight)
 		end
@@ -241,7 +243,7 @@ function ActionBars:CreateToggleButtons()
 		
 		Button.Text = Button:CreateFontString(nil, "OVERLAY")
 		Button.Text:Point("CENTER", Button, 0, 0)
-		Button.Text:SetFont(C["medias"].ActionBarFont, 12)
+		Button.Text:SetFont(C.Medias.ActionBarFont, 12)
 		
 		if (i == 2) then
 			Button:Size(18, Height)
@@ -266,11 +268,11 @@ function ActionBars:CreateToggleButtons()
 end
 
 function ActionBars:LoadVariables()
-	if (not DuffedUIDataPerChar) then
-		DuffedUIDataPerChar = {}
+	if (not TukuiDataPerChar) then
+		TukuiDataPerChar = {}
 	end
-		
-	local Data = DuffedUIDataPerChar
+	
+	local Data = TukuiDataPerChar
 
 	for i = 2, 5 do
 		local Button = BarButtons[i]
@@ -291,7 +293,7 @@ function ActionBars:CreateVehicleButtons()
 	VehicleLeft:SetScript("OnClick", VehicleExit)
 
 	VehicleLeft.Text = VehicleLeft:CreateFontString(nil, "OVERLAY")
-	VehicleLeft.Text:SetFont(C["medias"].Font, 12)
+	VehicleLeft.Text:SetFont(C.Medias.Font, 12)
 	VehicleLeft.Text:Point("CENTER", 0, 0)
 	VehicleLeft.Text:SetText("|cffFF0000" .. LEAVE_VEHICLE .. "|r")
 	VehicleLeft.Text:SetShadowOffset(1.25, -1.25)
@@ -305,7 +307,7 @@ function ActionBars:CreateVehicleButtons()
 	VehicleRight:SetScript("OnClick", VehicleExit)
 
 	VehicleRight.Text = VehicleRight:CreateFontString(nil, "OVERLAY")
-	VehicleRight.Text:SetFont(C["medias"].Font, 12)
+	VehicleRight.Text:SetFont(C.Medias.Font, 12)
 	VehicleRight.Text:Point("CENTER", 0, 0)
 	VehicleRight.Text:SetText("|cffFF0000" .. LEAVE_VEHICLE .. "|r")
 	VehicleRight.Text:SetShadowOffset(1.25, -1.25)

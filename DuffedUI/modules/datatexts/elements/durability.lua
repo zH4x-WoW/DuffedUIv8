@@ -1,6 +1,6 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local format = format
 
 local Update = function(self)
@@ -30,16 +30,16 @@ local Update = function(self)
 end
 
 local OnEnter = function(self)
-	if not InCombatLockdown() then
-		local panel, anchor, xoff, yoff = self:GetTooltipAnchor()
-		GameTooltip:SetOwner(panel, anchor, xoff, yoff)
+	if (not InCombatLockdown()) then
+		GameTooltip:SetOwner(self:GetTooltipAnchor())
 		GameTooltip:ClearLines()
+		
 		for i = 1, 11 do
-			if L.DataText.Slots[i][3] ~= 1000 then
-				local green, red
-				green = L.DataText.Slots[i][3]*2
-				red = 1 - green
-				GameTooltip:AddDoubleLine(L.DataText.Slots[i][2], floor(L.DataText.Slots[i][3]*100).."%",1 ,1 , 1, red + 1, green, 0)
+			if (L.DataText.Slots[i][3] ~= 1000) then
+				local Green, Red
+				Green = L.DataText.Slots[i][3] * 2
+				Red = 1 - Green
+				GameTooltip:AddDoubleLine(L.DataText.Slots[i][2], floor(L.DataText.Slots[i][3] * 100).."%", 1, 1, 1, Red + 1, Green, 0)
 			end
 		end
 		
@@ -50,7 +50,6 @@ end
 local OnLeave = function()
 	GameTooltip:Hide()
 end
-
 
 local Enable = function(self)	
 	if (not self.Text) then

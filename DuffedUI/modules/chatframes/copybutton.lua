@@ -1,12 +1,12 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 -- Gonna rewrite this entirely, it's just temp to work from
 
-local DuffedUIChat = D["Chat"]
+local TukuiChat = T["Chat"]
 local Lines = {}
 local CopyFrame
 
-function DuffedUIChat:GetLines(...)
+function TukuiChat:GetLines(...)
 	local Count = 1
 	
 	for i = select("#", ...), 1, -1 do
@@ -21,7 +21,7 @@ function DuffedUIChat:GetLines(...)
 	return Count - 1
 end
 
-function DuffedUIChat:CopyText(chatframe)
+function TukuiChat:CopyText(chatframe)
 	local _, Size = chatframe:GetFont()
 	FCF_SetChatWindowFontSize(chatframe, chatframe, 0.01)
 	local LineCount = self:GetLines(chatframe:GetRegions())
@@ -36,14 +36,12 @@ function DuffedUIChat:CopyText(chatframe)
 	CopyFrame:Show()
 end
 
-if not (C["chat"].LeftBackground and C["chat"].RightBackground) then
-	local OnEnter = function(self)
-		self:SetAlpha(1)
-	end
+local OnEnter = function(self)
+	self:SetAlpha(1)
+end
 
-	local OnLeave = function(self)
-		self:SetAlpha(0)
-	end
+local OnLeave = function(self)
+	self:SetAlpha(0)
 end
 
 local OnMouseUp = function(self)
@@ -51,10 +49,10 @@ local OnMouseUp = function(self)
 		return
 	end
 
-	DuffedUIChat:CopyText(self.ChatFrame)
+	TukuiChat:CopyText(self.ChatFrame)
 end
 
-function DuffedUIChat:CreateCopyFrame()
+function TukuiChat:CreateCopyFrame()
 	CopyFrame = CreateFrame("Frame", nil, UIParent)
 	CopyFrame:SetTemplate()
 	CopyFrame:Width(772)
@@ -65,7 +63,7 @@ function DuffedUIChat:CreateCopyFrame()
 	CopyFrame:SetFrameStrata("DIALOG")
 	CopyFrame.Minimized = true
 
-	local ScrollArea = CreateFrame("ScrollFrame", nil, CopyFrame)
+	local ScrollArea = CreateFrame("ScrollFrame", "ScrollArea", CopyFrame, "UIPanelScrollFrameTemplate")
 	ScrollArea:Point("TOPLEFT", CopyFrame, "TOPLEFT", 8, -30)
 	ScrollArea:Point("BOTTOMRIGHT", CopyFrame, "BOTTOMRIGHT", -30, 8)
 
@@ -74,7 +72,7 @@ function DuffedUIChat:CreateCopyFrame()
 	EditBox:SetMaxLetters(99999)
 	EditBox:EnableMouse(true)
 	EditBox:SetAutoFocus(false)
-	EditBox:SetFont(C["medias"].Font, 12)
+	EditBox:SetFont(C.Medias.Font, 12)
 	EditBox:Width(772)
 	EditBox:Height(250)
 	EditBox:SetScript("OnEscapePressed", function()
@@ -93,28 +91,20 @@ function DuffedUIChat:CreateCopyFrame()
 	CopyFrame.Close = Close
 end
 
-function DuffedUIChat:CreateCopyButtons()
+function TukuiChat:CreateCopyButtons()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local Frame = _G["ChatFrame"..i]
 		
 		local Button = CreateFrame("Button", nil, Frame)
-		if not (C["chat"].LeftBackground and C["chat"].RightBackground) then
-			Button:Point("TOPRIGHT", 0, 0)
-		else
-			Button:Point("TOPRIGHT", -1, 25)
-		end
+		Button:Point("TOPRIGHT", 0, 0)
 		Button:Size(20, 20)
-		Button:SetNormalTexture(C["medias"].Copy)
-		if not (C["chat"].LeftBackground and C["chat"].RightBackground) then
-			Button:SetAlpha(0)
-		end
+		Button:SetNormalTexture(C.Medias.Copy)
+		Button:SetAlpha(0)
 		Button:SetTemplate()
 		Button.ChatFrame = Frame
 
 		Button:SetScript("OnMouseUp", OnMouseUp)
-		if not (C["chat"].LeftBackground and C["chat"].RightBackground) then
-			Button:SetScript("OnEnter", OnEnter)
-			Button:SetScript("OnLeave", OnLeave)
-		end
+		Button:SetScript("OnEnter", OnEnter)
+		Button:SetScript("OnLeave", OnLeave)
 	end
 end

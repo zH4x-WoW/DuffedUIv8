@@ -7,4 +7,5 @@
 	<Script file="temp.lua"/>
 	<Script file="animation.lua"/>
 	<Script file="colors.lua"/>
+	<Script file="install.lua"/>
 </Ui>

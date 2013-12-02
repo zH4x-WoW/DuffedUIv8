@@ -1,6 +1,6 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local Battle = D["PetBattles"]
+local Battle = T["PetBattles"]
 local Bottom = PetBattleFrame.BottomFrame
 local Noop = function() end
 local NUM_BATTLE_PET_ABILITIES = NUM_BATTLE_PET_ABILITIES
@@ -49,14 +49,14 @@ function Battle:SkinActionBar()
 	Bottom.xpBar:SetPoint("BOTTOM", Bottom.TurnTimer, "TOP", 0, 4)
 	Bottom.xpBar:SetScript("OnShow", function(self)
 		self:StripTextures()
-		self:SetStatusBarTexture(C["medias"].Normal)
+		self:SetStatusBarTexture(C.Medias.Normal)
 	end)
 end
 
 function Battle:SkinPetButton()
 	self:CreateBackdrop()
 	self:SetNormalTexture("")
-	self.Icon:SetTexCoord(unpack(D.IconCoord))
+	self.Icon:SetTexCoord(unpack(T.IconCoord))
 	self:StyleButton()
 	self.SelectedHighlight:SetTexture(0.9, 0.8, 0.1, 0.3)
 	self.SelectedHighlight:SetInside(self.Backdrop)

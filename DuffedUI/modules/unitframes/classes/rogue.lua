@@ -1,8 +1,8 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DuffedUIUnitFrames = D["UnitFrames"]
+local TukuiUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function DuffedUIUnitFrames:AddRogueFeatures()
+function TukuiUnitFrames:AddRogueFeatures()
 
 end

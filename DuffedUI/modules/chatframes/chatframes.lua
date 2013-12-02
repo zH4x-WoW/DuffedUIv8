@@ -1,12 +1,12 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 -- Tukz Note from Hydra Last Commit :
 	-- I deleted FramePosition function, we will only run it once after install and will not force users to always have chat at default position.
 	-- Added a note below where the install function is located.
-	-- PLAYER_ENTERING_WORLD event on DuffedUIChat will not be needed anymore when we will create the install process.
+	-- PLAYER_ENTERING_WORLD event on TukuiChat will not be needed anymore when we will create the install process.
 	-- find the event which randomly move chat position from default and unregister it.
 
-if (not C["chat"].Enable) then
+if (not C.Chat.Enable) then
 	return
 end
 
@@ -15,35 +15,36 @@ local format = format
 local Noop = function() end
 local Toast = BNToastFrame
 local ToastCloseButton = BNToastFrameCloseButton
-local DataTextLeft = D["Panels"].DataTextLeft
-local DataTextRight = D["Panels"].DataTextRight
-local LeftChatBackground = D["Panels"].LeftChatBackground
-local RightChatBackground = D["Panels"].RightChatBackground
-local ChatCube = D["Panels"].ChatCube
-local DuffedUIChat = CreateFrame("Frame")
+local DataTextLeft = T["Panels"].DataTextLeft
+local DataTextRight = T["Panels"].DataTextRight
+local CubeLeft = T["Panels"].CubeLeft
+local TukuiChat = CreateFrame("Frame")
 
 -- Update editbox border color
-function DuffedUIChat:UpdateEditBoxColor()
+function TukuiChat:UpdateEditBoxColor()
 	local EditBox = ChatEdit_ChooseBoxForSend()	
 	local ChatType = EditBox:GetAttribute("chatType")
 	local Backdrop = EditBox.Backdrop
 
 	if Backdrop then
-		if ( ChatType == "CHANNEL" ) then
+		if (ChatType == "CHANNEL") then
 			local ID = GetChannelName(EditBox:GetAttribute("channelTarget"))
 			
 			if (ID == 0) then
-				Backdrop:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
+				--Backdrop:SetBackdropBorderColor(unpack(C.Medias.BorderColor)) -- [[ NOTE! Just leaving these here for now if you decide you don't like this feature. Will remove them up if you do. ]]
+				T.GradientFrame(Backdrop, "Border", 0, 0.5, unpack(C.Medias.BorderColor))
 			else
-				Backdrop:SetBackdropBorderColor(ChatTypeInfo[ChatType..ID].r,ChatTypeInfo[ChatType..ID].g,ChatTypeInfo[ChatType..ID].b)
+				--Backdrop:SetBackdropBorderColor(ChatTypeInfo[ChatType..ID].r,ChatTypeInfo[ChatType..ID].g,ChatTypeInfo[ChatType..ID].b)
+				T.GradientFrame(Backdrop, "Border", 0, 0.5, ChatTypeInfo[ChatType..ID].r, ChatTypeInfo[ChatType..ID].g, ChatTypeInfo[ChatType..ID].b)
 			end
 		else
-			Backdrop:SetBackdropBorderColor(ChatTypeInfo[ChatType].r,ChatTypeInfo[ChatType].g,ChatTypeInfo[ChatType].b)
-		end	
+			--Backdrop:SetBackdropBorderColor(ChatTypeInfo[ChatType].r,ChatTypeInfo[ChatType].g,ChatTypeInfo[ChatType].b)
+			T.GradientFrame(Backdrop, "Border", 0, 0.5, ChatTypeInfo[ChatType].r, ChatTypeInfo[ChatType].g, ChatTypeInfo[ChatType].b)
+		end
 	end
 end
 
-function DuffedUIChat:StyleFrame(frame)
+function TukuiChat:StyleFrame(frame)
 	if frame.IsSkinned then
 		return
 	end
@@ -58,7 +59,7 @@ function DuffedUIChat:StyleFrame(frame)
 	Tab:SetAlpha(1)
 	Tab.SetAlpha = UIFrameFadeRemoveFrame
 
-	-- bubble tex & glow killing from privates
+	-- Kill textures from PM's
 	if Tab.glow then
 		Tab.glow:Kill()
 	end
@@ -78,8 +79,8 @@ function DuffedUIChat:StyleFrame(frame)
 	TabText.SetTextColor = Noop
 	
 	frame:SetClampRectInsets(0, 0, 0, 0)
-	frame:SetClampedToScreen(true)
-	frame:SetFading(C["chat"].Fading)
+	frame:SetClampedToScreen(false)
+	frame:SetFading(false)
 
 	-- Move the edit box
 	EditBox:ClearAllPoints()
@@ -103,7 +104,7 @@ function DuffedUIChat:StyleFrame(frame)
 	EditBox.Backdrop:SetAllPoints(DataTextLeft)
 	EditBox.Backdrop:SetFrameStrata("LOW")
 	EditBox.Backdrop:SetFrameLevel(1)
-	EditBox.Backdrop:SetBackdropColor(unpack(C["medias"].BackdropColor))
+	EditBox.Backdrop:SetBackdropColor(unpack(C.Medias.BackdropColor))
 	
 	-- Hide textures
 	for i = 1, #CHAT_FRAME_TEXTURES do
@@ -146,16 +147,16 @@ function DuffedUIChat:StyleFrame(frame)
 	frame.IsSkinned = true
 end
 
-function DuffedUIChat:KillPetBattleCombatLog(Frame)
+function TukuiChat:KillPetBattleCombatLog(Frame)
 	if (_G[Frame:GetName().."Tab"]:GetText():match(PET_BATTLE_COMBAT_LOG)) then
 		return FCF_Close(Frame)
 	end
 end
 
-function DuffedUIChat:StyleTempFrame()
+function TukuiChat:StyleTempFrame()
 	local Frame = FCF_GetCurrentChatFrame()
 
-	DuffedUIChat:KillPetBattleCombatLog(Frame)
+	TukuiChat:KillPetBattleCombatLog(Frame)
 
 	-- Make sure it's not skinned already
 	if Frame.IsSkinned then
@@ -163,7 +164,7 @@ function DuffedUIChat:StyleTempFrame()
 	end
 
 	-- Pass it on
-	DuffedUIChat:StyleFrame(Frame)
+	TukuiChat:StyleFrame(Frame)
 end
 
 function TukuiChat:SkinToastFrame()
@@ -176,9 +177,9 @@ end
 -- We don't have an install process yet, so it's here for now. (Only handling position for now, not channels/groups)
 
 -- Tukz Note:
--- It's better like this anyway, because we will call DuffedUIChat:Install() in the Installation of DuffedUI. You are free to complete this function.
+-- It's better like this anyway, because we will call TukuiChat:Install() in the Installation of Tukui. You are free to complete this function.
 -- I prefer like this because I would like everything chat frames related to be include in chat module folder. Same for others modules we will write.
-function DuffedUIChat:Install()
+function TukuiChat:Install()
 	-- Create our custom chatframes	
 	FCF_ResetChatWindows()
 	FCF_SetLocked(ChatFrame1, 1)
@@ -188,11 +189,13 @@ function DuffedUIChat:Install()
 	FCF_SetLocked(ChatFrame3, 1)
 	FCF_DockFrame(ChatFrame3)
 
-	FCF_OpenNewWindow(LOOT)
-	FCF_UnDockFrame(ChatFrame4)
-	ChatFrame4:Show()
+	if C.Chat.LootFrame then
+		FCF_OpenNewWindow(LOOT)
+		FCF_UnDockFrame(ChatFrame4)
+		ChatFrame4:Show()
+	end
 	
-	local Width = DataTextLeft:GetWidth() - 5
+	local Width = DataTextLeft:GetWidth()
 
 	for i = 1, NUM_CHAT_WINDOWS do
 		local Frame = _G["ChatFrame"..i]
@@ -206,11 +209,11 @@ function DuffedUIChat:Install()
 		if (ID == 1) then
 			Frame:ClearAllPoints()
 			Frame:Point("BOTTOM", DataTextLeft, "TOP", 0, 5)
-		elseif (ID == 4) then
+		elseif (C.Chat.LootFrame and ID == 4) then
 			if (not Frame.isDocked) then
 				Frame:ClearAllPoints()
 				Frame:Point("BOTTOM", DataTextRight, "TOP", 0, 5)
-				Frame:SetJustifyH(C["chat"].Justify)
+				Frame:SetJustifyH("RIGHT")
 			end
 		end
 		
@@ -222,12 +225,13 @@ function DuffedUIChat:Install()
 			FCF_SetWindowName(Frame, "Log")
 		end
 		
+		
 		if (not Frame.isLocked) then
 			FCF_SetLocked(Frame, 1)
 		end
 		
 		-- Save chat frame settings
-		SetChatWindowSavedDimensions(ID, D.Scale(Width), D.Scale(111))
+		SetChatWindowSavedDimensions(ID, T.Scale(Width), T.Scale(111))
 		FCF_SavePositionAndDimensions(Frame)
 	end
 	
@@ -279,12 +283,14 @@ function DuffedUIChat:Install()
 	ChatFrame_AddChannel(ChatFrame3, "LookingForGroup")
 	
 	-- Setup the right chat
-	ChatFrame_RemoveAllMessageGroups(ChatFrame4)
-	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
-	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
-	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
-	ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
-	ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
+	if C.Chat.LootFrame then
+		ChatFrame_RemoveAllMessageGroups(ChatFrame4)
+		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
+		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
+		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
+		ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
+		ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
+	end
 	
 	-- Enable Classcolor
 	ToggleChatColorNamesByClassGroup(true, "SAY")
@@ -311,9 +317,15 @@ function DuffedUIChat:Install()
 	ToggleChatColorNamesByClassGroup(true, "INSTANCE_CHAT_LEADER")
 	
 	DEFAULT_CHAT_FRAME:SetUserPlaced(true)
+	
+	if (not C.Chat.LootFrame) then
+		if (FCF_GetChatWindowInfo(ChatFrame4:GetID()) == LOOT) then
+			FCF_Close(ChatFrame4)
+		end
+	end
 end
 
-function DuffedUIChat:Setup()
+function TukuiChat:Setup()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local Frame = _G["ChatFrame"..i]
 		
@@ -328,10 +340,10 @@ function DuffedUIChat:Setup()
 	ChatTypeInfo.RAID_WARNING.sticky = 1
 	ChatTypeInfo.CHANNEL.sticky = 1
 	
-	ChatCube:SetScript("OnMouseDown", function(self, Button)
+	CubeLeft:SetScript("OnMouseDown", function(self, Button)
 		local ChatMenu = ChatMenu
-
-		if Button == "LeftButton" then
+		
+		if (Button == "LeftButton") then	
 			ToggleFrame(ChatMenu)
 		end
 	end)
@@ -342,11 +354,10 @@ ChatConfigFrameDefaultButton:Kill()
 ChatFrameMenuButton:Kill()
 FriendsMicroButton:Kill()
 
-DuffedUIChat:RegisterEvent("PLAYER_ENTERING_WORLD")
-DuffedUIChat:RegisterEvent("ADDON_LOADED")
-DuffedUIChat:SetScript("OnEvent", function(self, event, addon)
+TukuiChat:RegisterEvent("PLAYER_ENTERING_WORLD")
+TukuiChat:RegisterEvent("ADDON_LOADED")
+TukuiChat:SetScript("OnEvent", function(self, event, addon)
 	if (event == "PLAYER_ENTERING_WORLD") then
-		self:Install() -- Again there's no install process, so... We'll "install" here, for now.
 		self:CreateCopyFrame()
 		self:CreateCopyButtons()
 		self:UnregisterEvent(event)
@@ -357,7 +368,7 @@ DuffedUIChat:SetScript("OnEvent", function(self, event, addon)
 	end
 end)
 
-hooksecurefunc("ChatEdit_UpdateHeader", DuffedUIChat.UpdateEditBoxColor)
-hooksecurefunc("FCF_OpenTemporaryWindow", DuffedUIChat.StyleTempFrame)
+hooksecurefunc("ChatEdit_UpdateHeader", TukuiChat.UpdateEditBoxColor)
+hooksecurefunc("FCF_OpenTemporaryWindow", TukuiChat.StyleTempFrame)
 
-D["Chat"] = DuffedUIChat
+T["Chat"] = TukuiChat

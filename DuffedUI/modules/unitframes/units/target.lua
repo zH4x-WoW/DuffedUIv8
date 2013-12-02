@@ -1,12 +1,12 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DuffedUIUnitFrames = D["UnitFrames"]
+local TukuiUnitFrames = T["UnitFrames"]
 
-function DuffedUIUnitFrames:Target()
+function TukuiUnitFrames:Target()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self:SetBackdrop(DuffedUIUnitFrames.Backdrop)
+	self:SetBackdrop(TukuiUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
 
@@ -16,19 +16,19 @@ function DuffedUIUnitFrames:Target()
 	Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
 	Panel:SetFrameLevel(2)
 	Panel:SetFrameStrata("MEDIUM")
-	Panel:SetBackdropBorderColor(C["medias"].BorderColor[1] * 0.7, C["medias"].BorderColor[2] * 0.7, C["medias"].BorderColor[3] * 0.7)
+	Panel:SetBackdropBorderColor(C.Medias.BorderColor[1] * 0.7, C.Medias.BorderColor[2] * 0.7, C.Medias.BorderColor[3] * 0.7)
 
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:Height(26)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
-	Health:SetStatusBarTexture(C["medias"].Normal)
+	Health:SetStatusBarTexture(C.Medias.Normal)
 
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
 
-	Health:FontString("Value", C["medias"].AltFont, 12)
+	Health:FontString("Value", C.Medias.AltFont, 12)
 	Health.Value:Point("RIGHT", Panel, "RIGHT", -4, 0)
 
 	Health.frequentUpdates = true
@@ -37,9 +37,9 @@ function DuffedUIUnitFrames:Target()
 	Health.colorClass = true
 	Health.colorReaction = true	
 
-	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
+	Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
 
-	if (C["unitframes"].Smooth) then
+	if (C.UnitFrames.Smooth) then
 		Health.Smooth = true
 	end
 
@@ -47,26 +47,26 @@ function DuffedUIUnitFrames:Target()
 	Power:Height(8)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
-	Power:SetStatusBarTexture(C["medias"].Normal)
+	Power:SetStatusBarTexture(C.Medias.Normal)
 
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints()
-	Power.Background:SetTexture(C["medias"].Normal)
+	Power.Background:SetTexture(C.Medias.Normal)
 	Power.Background.multiplier = 0.3
 
-	Power:FontString("Value", C["medias"].AltFont, 12)
+	Power:FontString("Value", C.Medias.AltFont, 12)
 	Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
 
 	Power.colorPower = true
 	Power.frequentUpdates = true
 	Power.colorDisconnected = true
 
-	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
+	Power.PostUpdate = TukuiUnitFrames.PostUpdatePower
 
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:Point("LEFT", Panel, "LEFT", 4, 0)
 	Name:SetJustifyH("LEFT")
-	Name:SetFont(C["medias"].AltFont, 12)
+	Name:SetFont(C.Medias.AltFont, 12)
 
 	------ Special Note ------
 	-- The animation is currently broken. I tried some things out but i dont get it working at the moment.
@@ -91,30 +91,30 @@ function DuffedUIUnitFrames:Target()
 
 	Buffs.spacing = 2
 	Buffs.initialAnchor = "TOPLEFT"
-	Buffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
-	Buffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
-	Buffs.PostUpdate = DuffedUIUnitFrames.UpdateTargetDebuffsHeader
+	Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
+	Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+	Buffs.PostUpdate = TukuiUnitFrames.UpdateTargetDebuffsHeader
 
 	Debuffs.spacing = 2
 	Debuffs.initialAnchor = "TOPRIGHT"
 	Debuffs["growth-y"] = "UP"
 	Debuffs["growth-x"] = "LEFT"
-	Debuffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
-	Debuffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
-	Debuffs.onlyShowPlayer = C["unitframes"].OnlySelfDebuffs
+	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
+	Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+	Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
 	
 	local ComboPoints = CreateFrame("Frame", nil, self)
 	ComboPoints:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	ComboPoints:Width(250)
 	ComboPoints:Height(8)
-	ComboPoints:SetBackdrop(DuffedUIUnitFrames.Backdrop)
+	ComboPoints:SetBackdrop(TukuiUnitFrames.Backdrop)
 	ComboPoints:SetBackdropColor(0, 0, 0)
-	ComboPoints:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
+	ComboPoints:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
 
 	for i = 1, 5 do
 		ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
 		ComboPoints[i]:Height(8)
-		ComboPoints[i]:SetStatusBarTexture(C["medias"].Normal)
+		ComboPoints[i]:SetStatusBarTexture(C.Medias.Normal)
 		
 		if i == 1 then
 			ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
@@ -126,19 +126,19 @@ function DuffedUIUnitFrames:Target()
 	end
 	
 	ComboPoints:SetScript("OnShow", function(self) 
-		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
-		DuffedUIUnitFrames.UpdateAurasHeaderPosition(self, "OnShow", 0, 14)
+		TukuiUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
+		TukuiUnitFrames.UpdateAurasHeaderPosition(self, "OnShow", 0, 14)
 	end)
 
 	ComboPoints:SetScript("OnHide", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
-		DuffedUIUnitFrames.UpdateAurasHeaderPosition(self, "OnHide", 0, 4)
+		TukuiUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
+		TukuiUnitFrames.UpdateAurasHeaderPosition(self, "OnHide", 0, 4)
 	end)
 
 	self.Buffs = Buffs
 	self.Debuffs = Debuffs
 
-	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong] [DuffedUI:DiffColor][level] [shortclassification]")
+	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong] [Tukui:DiffColor][level] [shortclassification]")
 	self.Name = Name
 	self.Panel = Panel
 	self.Health = Health

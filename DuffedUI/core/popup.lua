@@ -1,21 +1,21 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DuffedUIPopups = CreateFrame("Frame")
+local TukuiPopups = CreateFrame("Frame")
 local ACCEPT, CANCEL = ACCEPT, CANCEL
 local ChatFontNormal = ChatFontNormal
 
-DuffedUIPopups.Popup = {}
-DuffedUIPopups.Frames = {}
-DuffedUIPopups.Total = 4
+TukuiPopups.Popup = {}
+TukuiPopups.Frames = {}
+TukuiPopups.Total = 4
 
-function DuffedUIPopups:HidePopup()
+function TukuiPopups:HidePopup()
 	local Popup = self:GetParent()
 	Popup:Hide()
 end
 
-function DuffedUIPopups:CreatePopups()
-	for i = 1, DuffedUIPopups.Total do
-		local Frames = DuffedUIPopups.Frames
+function TukuiPopups:CreatePopups()
+	for i = 1, TukuiPopups.Total do
+		local Frames = TukuiPopups.Frames
 		
 		Frames[i] = CreateFrame("Frame", nil, UIParent)
 		Frames[i]:SetSize(400, 60)
@@ -27,7 +27,7 @@ function DuffedUIPopups:CreatePopups()
 		Frames[i].Text = CreateFrame("MessageFrame", nil, Frames[i])
 		Frames[i].Text:SetPoint("CENTER")
 		Frames[i].Text:SetSize(380, 40)
-		Frames[i].Text:SetFont(C["medias"].Font, 12)
+		Frames[i].Text:SetFont(C.Medias.Font, 12)
 		Frames[i].Text:SetInsertMode("TOP")
 		Frames[i].Text:SetFading(0)
 		Frames[i].Text:AddMessage("")
@@ -37,11 +37,11 @@ function DuffedUIPopups:CreatePopups()
 		Frames[i].Button1:SetSize(199, 23)
 		Frames[i].Button1:SetTemplate()
 		Frames[i].Button1:CreateShadow()
-		Frames[i].Button1:FontString("Text", C["medias"].Font, 12)
+		Frames[i].Button1:FontString("Text", C.Medias.Font, 12)
 		Frames[i].Button1.Text:SetPoint("CENTER")
 		Frames[i].Button1.Text:SetText(ACCEPT)
-		Frames[i].Button1:SetScript("OnClick", DuffedUIPopups.HidePopup)
-		Frames[i].Button1:HookScript("OnClick", DuffedUIPopups.HidePopup)
+		Frames[i].Button1:SetScript("OnClick", TukuiPopups.HidePopup)
+		Frames[i].Button1:HookScript("OnClick", TukuiPopups.HidePopup)
 		--Frames[i].Button1:SkinButton()
 
 		Frames[i].Button2 = CreateFrame("Button", nil, Frames[i])
@@ -49,11 +49,11 @@ function DuffedUIPopups:CreatePopups()
 		Frames[i].Button2:SetSize(199, 23)
 		Frames[i].Button2:SetTemplate("Default")
 		Frames[i].Button2:CreateShadow("Default")
-		Frames[i].Button2:FontString("Text", C["medias"].Font, 12)
+		Frames[i].Button2:FontString("Text", C.Medias.Font, 12)
 		Frames[i].Button2.Text:SetPoint("CENTER")
 		Frames[i].Button2.Text:SetText(CANCEL)
-		Frames[i].Button2:SetScript("OnClick", DuffedUIPopups.HidePopup)
-		Frames[i].Button2:HookScript("OnClick", DuffedUIPopups.HidePopup)
+		Frames[i].Button2:SetScript("OnClick", TukuiPopups.HidePopup)
+		Frames[i].Button2:HookScript("OnClick", TukuiPopups.HidePopup)
 		--Frames[i].Button2:SkinButton()
 		
 		Frames[i].EditBox = CreateFrame("EditBox", nil, Frames[i])
@@ -84,16 +84,16 @@ function DuffedUIPopups:CreatePopups()
 	end
 end
 
-function DuffedUIPopups:ShowPopup()
-	local Info = DuffedUIPopups.Popup[self]
+function TukuiPopups:ShowPopup()
+	local Info = TukuiPopups.Popup[self]
 	
 	if not Info then
 		return
 	end
 
-	local Popups = DuffedUIPopups.Frames
+	local Popups = TukuiPopups.Frames
 	local Selection = Popups[1]
-	for i = 1, DuffedUIPopups.Total - 1 do
+	for i = 1, TukuiPopups.Total - 1 do
 		if Popups[i]:IsShown() then
 			Selection = Popups[i + 1]
 		end
@@ -127,13 +127,13 @@ function DuffedUIPopups:ShowPopup()
 	if Info.Function1 then
 		Button1:SetScript("OnClick", Info.Function1)
 	else
-		Button1:SetScript("OnClick", DuffedUIPopups.HidePopup)
+		Button1:SetScript("OnClick", TukuiPopups.HidePopup)
 	end
 	
 	if Info.Function2 then
 		Button2:SetScript("OnClick", Info.Function2)
 	else
-		Button2:SetScript("OnClick", DuffedUIPopups.HidePopup)
+		Button2:SetScript("OnClick", TukuiPopups.HidePopup)
 	end
 	
 	if Info.EditBox then
@@ -142,15 +142,15 @@ function DuffedUIPopups:ShowPopup()
 		EditBox:Hide()
 	end
 	
-	Button1:HookScript("OnClick", DuffedUIPopups.HidePopup)
-	Button2:HookScript("OnClick", DuffedUIPopups.HidePopup)
+	Button1:HookScript("OnClick", TukuiPopups.HidePopup)
+	Button2:HookScript("OnClick", TukuiPopups.HidePopup)
 	
 	Popup:Show()
 end
 
-DuffedUIPopups:RegisterEvent("ADDON_LOADED")
-DuffedUIPopups:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "DuffedUI") then
+TukuiPopups:RegisterEvent("ADDON_LOADED")
+TukuiPopups:SetScript("OnEvent", function(self, event, addon)
+	if (addon ~= "Tukui") then
 		return
 	end
 	
@@ -158,4 +158,4 @@ DuffedUIPopups:SetScript("OnEvent", function(self, event, addon)
 	self:UnregisterAllEvents()
 end)
 
-D["Popups"] = DuffedUIPopups
+T["Popups"] = TukuiPopups

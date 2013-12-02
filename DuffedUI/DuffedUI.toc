@@ -1,12 +1,15 @@
 ﻿## Interface: 50400
 ## Author: Merith @ Zirkel des Cenarius EU
-## Version: 8.00
+## Version: 0
 ## Title: |cffC41F3BDuffedUI|r
 ## Notes: UI of awesomeness!
-## SavedVariables: DuffedUIData
-## SavedVariablesPerCharacter: DuffedUIDataPerChar
-## X-oUF: DuffedUIUnitFramesFramework
+## SavedVariables: TukuiData
+## SavedVariablesPerCharacter: TukuiDataPerChar
+## OptionalDeps: Clique
+## X-oUF: TukuiUnitFrameFramework
 ## Website: http://www.tukui.org
+## X-Tukui-ProjectID: -1
+## X-Tukui-ProjectFolders: Tukui
 
 core\init.lua
 libs\init.xml

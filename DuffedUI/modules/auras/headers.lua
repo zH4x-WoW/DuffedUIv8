@@ -1,19 +1,19 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-if (not C["auras"].Enable) then
+if (not C.Auras.Enable) then
 	return
 end
 
-local DuffedUIAuras = D["Auras"]
-local DuffedUIPanels = D["Panels"]
-local Headers = DuffedUIAuras.Headers
-local Parent = DuffedUIPanels.PetBattleHider
+local TukuiAuras = T["Auras"]
+local TukuiPanels = T["Panels"]
+local Headers = TukuiAuras.Headers
+local Parent = TukuiPanels.PetBattleHider
 local Insert = table.insert
 local SecureHandlerSetFrameRef = SecureHandlerSetFrameRef
 
-DuffedUIAuras.Wraps = 12
+TukuiAuras.Wraps = 12
 
-function DuffedUIAuras:CreateHeaders()
+function TukuiAuras:CreateHeaders()
 	for i = 1, 3 do
 		local Header
 		
@@ -26,7 +26,7 @@ function DuffedUIAuras:CreateHeaders()
 			Header:SetClampedToScreen(true)
 			Header:SetMovable(true)
 			Header:SetAttribute("minHeight", 30)
-			Header:SetAttribute("wrapAfter", DuffedUIAuras.Wraps)
+			Header:SetAttribute("wrapAfter", TukuiAuras.Wraps)
 			Header:SetAttribute("wrapYOffset", -73.5)
 			Header:SetAttribute("xOffset", -35)
 			Header:CreateBackdrop()
@@ -34,9 +34,9 @@ function DuffedUIAuras:CreateHeaders()
 			Header.Backdrop:Hide()
 		end
 		
-		Header:SetAttribute("minWidth", DuffedUIAuras.Wraps * 35)
-		Header:SetAttribute("template", "DuffedUIAurasTemplate")
-		Header:SetAttribute("weaponTemplate", "DuffedUIAurasTemplate")
+		Header:SetAttribute("minWidth", TukuiAuras.Wraps * 35)
+		Header:SetAttribute("template", "TukuiAurasTemplate")
+		Header:SetAttribute("weaponTemplate", "TukuiAurasTemplate")
 		Header:SetSize(30, 30)
 
 		RegisterAttributeDriver(Header, "unit", "[vehicleui] vehicle; player")
@@ -47,8 +47,8 @@ function DuffedUIAuras:CreateHeaders()
 	local Buffs = Headers[1]
 	local Debuffs = Headers[2]
 	local Consolidate = Headers[3]
-	local Filter = (C["auras"].Consolidate and 1) or 0
-	local Proxy = CreateFrame("Frame", nil, Buffs, "DuffedUIAurasProxyTemplate")
+	local Filter = (C.Auras.Consolidate and 1) or 0
+	local Proxy = CreateFrame("Frame", nil, Buffs, "TukuiAurasProxyTemplate")
 	local DropDown = CreateFrame("BUTTON", nil, Proxy, "SecureHandlerClickTemplate")
 	
 	Buffs:SetPoint("TOPRIGHT", UIParent, -184, -28)

@@ -1,21 +1,21 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 local _G = _G
 local unpack = unpack
-local DuffedUIActionBars = D["ActionBars"]
+local TukuiActionBars = T["ActionBars"]
 local IsUsableAction = IsUsableAction
 local IsActionInRange = IsActionInRange
 local HasAction = HasAction
 
-function DuffedUIActionBars:RangeOnUpdate(elapsed)
+function TukuiActionBars:RangeOnUpdate(elapsed)
 	if not self.rangeTimer then
 		return
 	end
 	
-	DuffedUIActionBars.RangeUpdate(self)
+	TukuiActionBars.RangeUpdate(self)
 end
 
-function DuffedUIActionBars:RangeUpdateBackdrop(IsUsable, NotEnoughMana, OutOfRange)
+function TukuiActionBars:RangeUpdateBackdrop(IsUsable, NotEnoughMana, OutOfRange)
 	if not self.Backdrop then
 		return
 	end
@@ -26,7 +26,7 @@ function DuffedUIActionBars:RangeUpdateBackdrop(IsUsable, NotEnoughMana, OutOfRa
 	if (IsUsable and OutOfRange) or (NotEnoughMana and OutOfRange) then
 		Backdrop:SetBackdropBorderColor(1, 0, 0)
 	elseif (not HasAction(Action)) or (IsUsable) then
-		Backdrop:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
+		Backdrop:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
 	elseif (NotEnoughMana) then
 		Backdrop:SetBackdropBorderColor(0.1, 0.1, 1)
 	else
@@ -34,7 +34,7 @@ function DuffedUIActionBars:RangeUpdateBackdrop(IsUsable, NotEnoughMana, OutOfRa
 	end
 end
 
-function DuffedUIActionBars:RangeUpdate()
+function TukuiActionBars:RangeUpdate()
 	local Name = self:GetName()
 	local Icon = _G[Name.."Icon"]
 	local Backdrop = self.Backdrop
@@ -56,16 +56,16 @@ function DuffedUIActionBars:RangeUpdate()
 		Icon:SetDesaturated(true)
 	end
 	
-	DuffedUIActionBars.RangeUpdateBackdrop(self, IsUsable, NotEnoughMana, OutOfRange)
+	TukuiActionBars.RangeUpdateBackdrop(self, IsUsable, NotEnoughMana, OutOfRange)
 end
 
 
-function DuffedUIActionBars:RangeUpdateWatchFrame(elapsed)
+function TukuiActionBars:RangeUpdateWatchFrame(elapsed)
 	-- to be completed
 end
 
 
-hooksecurefunc("ActionButton_OnUpdate", DuffedUIActionBars.RangeOnUpdate)
-hooksecurefunc("ActionButton_Update", DuffedUIActionBars.RangeUpdateBackdrop)
-hooksecurefunc("ActionButton_UpdateUsable", DuffedUIActionBars.RangeUpdate)
-hooksecurefunc("WatchFrameItem_OnUpdate", DuffedUIActionBars.RangeUpdateWatchFrame)
+hooksecurefunc("ActionButton_OnUpdate", TukuiActionBars.RangeOnUpdate)
+hooksecurefunc("ActionButton_Update", TukuiActionBars.RangeUpdateBackdrop)
+hooksecurefunc("ActionButton_UpdateUsable", TukuiActionBars.RangeUpdate)
+hooksecurefunc("WatchFrameItem_OnUpdate", TukuiActionBars.RangeUpdateWatchFrame)

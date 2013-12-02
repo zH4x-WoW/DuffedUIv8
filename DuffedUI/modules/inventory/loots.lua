@@ -1,5 +1,5 @@
-﻿local D, C, L = select(2, ...):unpack()
-local Inventory = D["Inventory"]
+﻿local T, C, L = select(2, ...):unpack()
+local Inventory = T["Inventory"]
 local LootFrame = LootFrame
 local LootFrameInset = LootFrameInset
 local LootFramePortraitOverlay = LootFramePortraitOverlay
@@ -34,15 +34,15 @@ function Inventory:SkinLootFrameButtons(i)
 		if (Button) and (not Button.IsSkinned) then
 			local Icon = _G["LootButton" .. i .. "IconTexture"]
 			local IconTexture = Icon:GetTexture()
-
+			
 			Button:StripTextures()
 			Button:CreateBackdrop()
 			Button.Backdrop:SetOutside(Icon)
-
+			
 			Icon:SetTexture(IconTexture)
 			Icon:SetTexCoord(unpack(T.IconCoord))
 			Icon:SetInside()
-
+			
 			Button.IsSkinned = true
 		end
 	end

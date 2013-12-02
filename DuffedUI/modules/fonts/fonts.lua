@@ -1,8 +1,8 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DuffedUIFonts = CreateFrame("Frame", nil, UIParent)
+local TukuiFonts = CreateFrame("Frame", nil, UIParent)
 
-function DuffedUIFonts:SetFont(font, size, style, r, g, b, sr, sg, sb, sox, soy)
+function TukuiFonts:SetFont(font, size, style, r, g, b, sr, sg, sb, sox, soy)
 	self:SetFont(font, size, style)
 	
 	if sr and sg and sb then
@@ -20,11 +20,11 @@ function DuffedUIFonts:SetFont(font, size, style, r, g, b, sr, sg, sb, sox, soy)
 	end
 end
 
-function DuffedUIFonts:ChangeFonts()
+function TukuiFonts:ChangeFonts()
 	local SetFont = self.SetFont
-	local NORMAL = C["medias"].Font
-	local COMBAT = C["medias"].DamageFont
-	local NUMBER = C["medias"].Font
+	local NORMAL = C.Medias.Font
+	local COMBAT = C.Medias.DamageFont
+	local NUMBER = C.Medias.Font
 	local UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT
 	local CHAT_FONT_HEIGHTS = CHAT_FONT_HEIGHTS
 	local UNIT_NAME_FONT = UNIT_NAME_FONT
@@ -32,7 +32,7 @@ function DuffedUIFonts:ChangeFonts()
 	local DAMAGE_TEXT_FONT = DAMAGE_TEXT_FONT
 	local STANDARD_TEXT_FONT = STANDARD_TEXT_FONT
 
-	if D.TripleMonitors then
+	if T.TripleMonitors then
 		InterfaceOptionsCombatTextPanelTargetDamage:Hide()
 		InterfaceOptionsCombatTextPanelPeriodicDamage:Hide()
 		InterfaceOptionsCombatTextPanelPetDamage:Hide()
@@ -42,7 +42,7 @@ function DuffedUIFonts:ChangeFonts()
 		SetCVar("CombatDamage",0)
 		SetCVar("CombatHealing",0)
 		
-		local INVISIBLE = [=[Interface\Addons\DuffedUI\medias\fonts\invisible_font.ttf]=]
+		local INVISIBLE = [=[Interface\Addons\Tukui\medias\fonts\invisible_font.ttf]=]
 		COMBAT = INVISIBLE
 	end
 
@@ -90,9 +90,9 @@ function DuffedUIFonts:ChangeFonts()
 	SetFont(FriendsFont_UserText, NORMAL, 11)
 end
 
-DuffedUIFonts:RegisterEvent("ADDON_LOADED")
-DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "DuffedUI") then
+TukuiFonts:RegisterEvent("ADDON_LOADED")
+TukuiFonts:SetScript("OnEvent", function(self, event, addon)
+	if (addon ~= "Tukui") then
 		return
 	end
 	
@@ -100,4 +100,4 @@ DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
 	self:UnregisterAllEvents()
 end)
 
-D["Fonts"] = DuffedUIFonts
+T["Fonts"] = TukuiFonts

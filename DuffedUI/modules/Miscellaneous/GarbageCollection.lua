@@ -1,4 +1,4 @@
-local D = select(2, ...):unpack()
+local T = select(2, ...):unpack()
 
 -- Collect garbage while player is AFK. (hooray for free memory!)
 local CollectGarbage = CreateFrame("Frame")
@@ -9,7 +9,7 @@ CollectGarbage:SetScript("OnEvent", function(self, event, unit)
 		collectgarbage("collect")
 
 		-- Just verifying that this clears the memory out :)
-		local Memory = D["DataTexts"]:GetDataText("Memory")
+		local Memory = T["DataTexts"]:GetDataText("Memory")
 		
 		if (Memory and Memory.Enabled) then
 			Memory:Update(10)

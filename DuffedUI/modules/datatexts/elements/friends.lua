@@ -1,7 +1,7 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
-local Popups = D["Popups"]
+local DataText = T["DataTexts"]
+local Popups = T["Popups"]
 local format = format
 
 local levelNameString = "|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r"
@@ -29,7 +29,7 @@ Popups.Popup["BROADCAST"] = {
 	EditBox = true,
 }
 
-local menuFrame = CreateFrame("Frame", "DuffedUIFriendRightClickMenu", UIParent, "UIDropDownMenuTemplate")
+local menuFrame = CreateFrame("Frame", "TukuiFriendRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 local menuList = {
 	{ text = OPTIONS_MENU, isTitle = true,notCheckable=true},
 	{ text = INVITE, hasArrow = true,notCheckable=true, },
@@ -235,9 +235,8 @@ local OnEnter = function(self)
 	local totalonline = totalOnline + BNTotalOnline
 	local totalfriends = #friendTable + #BNTable
 	local zonec, classc, levelc, realmc, grouped
-	if totalonline > 0 then
-		local panel, anchor, xoff, yoff = self.GetTooltipAnchor(self)
-		GameTooltip:SetOwner(panel, anchor, xoff, yoff)
+	if (totalonline > 0) then
+		GameTooltip:SetOwner(self:GetTooltipAnchor())
 		GameTooltip:ClearLines()
 		GameTooltip:AddDoubleLine(L.DataText.FriendsList, format(totalOnlineString, totalonline, totalfriends),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 		if totalOnline > 0 then

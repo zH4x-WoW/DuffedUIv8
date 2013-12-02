@@ -1,10 +1,10 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 local Battle = CreateFrame("Frame")
 local PetBattleFrame = PetBattleFrame
 
 Battle:RegisterEvent("ADDON_LOADED")
 Battle:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= "DuffedUI" then
+	if addon ~= "Tukui" then
 		return
 	end
 	
@@ -20,4 +20,4 @@ Battle:SetScript("OnEvent", function(self, event, addon)
 	self:AddActionBarHooks()
 end)
 
-D["PetBattles"] = Battle
+T["PetBattles"] = Battle

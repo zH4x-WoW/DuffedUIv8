@@ -1,10 +1,10 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 --[[
 	TODO: keybinds, disable blizzard, Bar 1 to 5, pet, shift, buttons, skinning, range, others, cooldown, extra
 --]]
 
-local DuffedUIActionBars = CreateFrame("Frame")
+local TukuiActionBars = CreateFrame("Frame")
 local _G = _G
 local format = format
 local Noop = function() end
@@ -16,10 +16,10 @@ local OverrideActionBar = OverrideActionBar
 local PossessBarFrame = PossessBarFrame
 local PetActionBarFrame = PetActionBarFrame
 local ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight = ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight
-local Size = C["actionbars"].NormalButtonSize
-local PetSize = C["actionbars"].PetButtonSize
-local Spacing = C["actionbars"].ButtonSpacing
-local Panels = D["Panels"]
+local Size = C.ActionBars.NormalButtonSize
+local PetSize = C.ActionBars.PetButtonSize
+local Spacing = C.ActionBars.ButtonSpacing
+local Panels = T["Panels"]
 local Hider = Panels.Hider
 local Frames = {
 	MainMenuBar, MainMenuBarArtFrame, OverrideActionBar,
@@ -27,7 +27,7 @@ local Frames = {
 	ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight,
 }
 
-function DuffedUIActionBars:DisableBlizzard()
+function TukuiActionBars:DisableBlizzard()
 	SetCVar("alwaysShowActionBars", 1)
 
 	for _, frame in pairs(Frames) do
@@ -60,7 +60,7 @@ function DuffedUIActionBars:DisableBlizzard()
 	end
 end
 
-function DuffedUIActionBars:ShowGrid()
+function TukuiActionBars:ShowGrid()
 	for i = 1, NUM_ACTIONBAR_BUTTONS do
 		local Button
 
@@ -96,7 +96,7 @@ function DuffedUIActionBars:ShowGrid()
 	end
 end
 
-function DuffedUIActionBars:AddPanels()
+function TukuiActionBars:AddPanels()
 	local A1 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A1:SetWidth((Size * 12) + (Spacing * 13))
 	A1:SetHeight((Size * 1) + (Spacing * 2))
@@ -145,7 +145,7 @@ function DuffedUIActionBars:AddPanels()
 	--A7:SetMovable(true)
 	--A7:SetClampedToScreen(true)
 	
-	if (not C["actionbars"].HideBackdrop) then
+	if (not C.ActionBars.HideBackdrop) then
 		A1:SetTemplate()
 		A2:SetTemplate()
 		A3:SetTemplate()
@@ -164,7 +164,7 @@ function DuffedUIActionBars:AddPanels()
 	Panels.StanceBar = A7
 end
 
-function DuffedUIActionBars:UpdatePetBar(...)
+function TukuiActionBars:UpdatePetBar(...)
 	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
 		local ButtonName = "PetActionButton" .. i
 		local PetActionButton = _G[ButtonName]
@@ -229,7 +229,7 @@ function DuffedUIActionBars:UpdatePetBar(...)
 	end
 end
 
-function DuffedUIActionBars:UpdateStanceBar(...)
+function TukuiActionBars:UpdateStanceBar(...)
 	local NumForms = GetNumShapeshiftForms()
 	local Texture, Name, IsActive, IsCastable, Button, Icon, Cooldown, Start, Duration, Enable
 	
@@ -281,11 +281,11 @@ function DuffedUIActionBars:UpdateStanceBar(...)
 	end	
 end
 
-DuffedUIActionBars:RegisterEvent("PLAYER_ENTERING_WORLD")
-DuffedUIActionBars:RegisterEvent("ADDON_LOADED")
-DuffedUIActionBars:RegisterEvent("VARIABLES_LOADED")
-DuffedUIActionBars:SetScript("OnEvent", function(self, event, addon)
-	if (event == "ADDON_LOADED" and addon == "DuffedUI") then
+TukuiActionBars:RegisterEvent("PLAYER_ENTERING_WORLD")
+TukuiActionBars:RegisterEvent("ADDON_LOADED")
+TukuiActionBars:RegisterEvent("VARIABLES_LOADED")
+TukuiActionBars:SetScript("OnEvent", function(self, event, addon)
+	if (event == "ADDON_LOADED" and addon == "Tukui") then
 		self:DisableBlizzard()
 		self:AddPanels()
 		self:CreateBar1()
@@ -305,4 +305,4 @@ DuffedUIActionBars:SetScript("OnEvent", function(self, event, addon)
 	end
 end)
 
-D["ActionBars"] = DuffedUIActionBars
+T["ActionBars"] = TukuiActionBars

@@ -1,6 +1,6 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local format = format
 local Class = select(2, UnitClass("player"))
 
@@ -31,7 +31,7 @@ local Update = function(self)
 		Text = L.DataText.Spell
 	end
 	
-	self.Text:SetText(format("%s: %s", DataText.NameColor .. Text .. "|r", DataText.ValueColor .. D.Comma(Value) .. "|r"))
+	self.Text:SetText(format("%s: %s", DataText.NameColor .. Text .. "|r", DataText.ValueColor .. T.Comma(Value) .. "|r"))
 end
 
 local Enable = function(self)	

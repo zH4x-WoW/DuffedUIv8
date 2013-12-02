@@ -1,12 +1,12 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local format = format
 
 local Update = function(self)
 	local Value = GetCombatRating(26)
 	
-	self.Text:SetText(format("%s: %s", DataText.NameColor .. L.DataText.Mastery .. "|r", DataText.ValueColor .. D.Comma(Value) .. "|r" .. "|r"))
+	self.Text:SetText(format("%s: %s", DataText.NameColor .. L.DataText.Mastery .. "|r", DataText.ValueColor .. T.Comma(Value) .. "|r" .. "|r"))
 end
 
 local Enable = function(self)	

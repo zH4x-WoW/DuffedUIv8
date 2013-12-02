@@ -1,10 +1,10 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local format = format
 
 local Update = function(self)
-	if not GetSpecialization() then
+	if (not GetSpecialization()) then
 		self.Text:SetText(L.DataText.NoTalent) 
 	else
 		local Tree = GetSpecialization()
@@ -16,6 +16,7 @@ end
 
 local OnMouseDown = function()
 	local Group = GetActiveSpecGroup(false, false)
+	
 	SetActiveSpecGroup(Group == 1 and 2 or 1)
 end
 

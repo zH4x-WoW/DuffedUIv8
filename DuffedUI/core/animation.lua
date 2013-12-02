@@ -1,4 +1,4 @@
-local D, C = select(2, ...):unpack()
+local T, C = select(2, ...):unpack()
 
 -- New Animation system ^^
 
@@ -448,10 +448,11 @@ local Animation = function(self, handler, ...)
 	end
 end
 
--- Erm, want a better way to do this =/
--- Filter out non-objects
-local BlackList = {
-	"FontString",
+-- Not yet added, but these will be the objects to add Animation() to
+local Objects = {
+	"Frame",
+	"StatusBar",
+	"EditBox",
 }
 
 -- Add our new methods to the Frame metatable
@@ -460,3 +461,121 @@ local Meta = getmetatable(Frame).__index
 Meta.Animation = Animation
 Meta.AnimCallback = AnimCallback
 Meta.AnimOnFinished = AnimOnFinished
+
+-- Sticking this here for now; Gradient Animation
+local select = select
+local unpack = unpack
+local modf = math.modf
+
+local ColorGradient = function(a, b, ...)
+	local perc
+	
+	if (b == 0) then
+		perc = 0
+	else
+		perc = a / b
+	end
+
+	if (perc >= 1) then
+		local r, g, b = select(select("#", ...) - 2, ...)
+		return r, g, b
+	elseif (perc <= 0) then
+		local r, g, b = ...
+		return r, g, b
+	end
+
+	local num = select("#", ...) / 3
+	local segment, relperc = modf(perc * (num - 1))
+	local r1, g1, b1, r2, g2, b2 = select((segment * 3) + 1, ...)
+
+	return r1 + (r2 - r1) * relperc, g1 + (g2 - g1) * relperc, b1 + (b2 - b1) * relperc
+end
+
+local GradientOnUpdate = function(self, ela)
+	self.GradientMin = self.GradientMin + ela
+	
+	local r, g, b = ColorGradient(self.GradientMin, self.GradientMax, self.GradientStart.r, self.GradientStart.g, self.GradientStart.b, self.GradientEnd.r, self.GradientEnd.g, self.GradientEnd.b)
+	
+	if (self.GradientType == "backdrop") then
+		self:SetBackdropColor(r, g, b)
+	elseif (self.GradientType == "border") then
+		self:SetBackdropBorderColor(r, g, b)
+	elseif (self.GradientType == "text") then
+		if self.CustomFunc then
+			self.Text:CustomSetTextColor(r, g, b)
+		else
+			self.Text:SetTextColor(r, g, b)
+		end
+	end
+
+	if (self.GradientMin >= self.GradientMax) then
+		self:SetScript("OnUpdate", nil)
+	end
+end
+
+-- Save memory by adjusting the table instead of creating new ones
+local SetStart = function(self, r, g, b)
+	if self.GradientStart then
+		self.GradientStart.r = r
+		self.GradientStart.g = g
+		self.GradientStart.b = b
+	else
+		self.GradientStart = {r = r, g = g, b = b}
+	end
+end
+
+local SetEnd = function(self, r, g, b)
+	if self.GradientEnd then
+		self.GradientEnd.r = r
+		self.GradientEnd.g = g
+		self.GradientEnd.b = b
+	else
+		self.GradientEnd = {r = r, g = g, b = b}
+	end
+end
+
+T.GradientFrame = function(self, part, start, finish, r, g, b, customFunc)
+	self.GradientType = string.lower(part)
+	self.GradientMin = start
+	self.GradientMax = finish
+	SetEnd(self, r, g, b)
+	local TextEnable
+	
+	if (self.GradientType == "backdrop") then
+		local r, g, b = self:GetBackdropColor()
+		
+		SetStart(self, r, g, b)
+	elseif (self.GradientType == "border") then
+		local r, g, b = self:GetBackdropBorderColor()
+		
+		SetStart(self, r, g, b)
+	elseif (self.GradientType == "statusbar") then
+		local r, g, b = self:GetStatusBarColor()
+
+		SetStart(self, r, g, b)
+	elseif (self.GradientType == "text") then
+		TextEnable = CreateFrame("Frame", nil, UIParent)
+		SetEnd(TextEnable, r, g, b)
+	
+		local r, g, b = self:GetTextColor()
+
+		TextEnable.GradientType = string.lower(part)
+		TextEnable.GradientMin = start
+		TextEnable.GradientMax = finish
+		SetStart(TextEnable, r, g, b)
+		
+		TextEnable.Text = self
+		
+		if customFunc then
+			TextEnable.Text.CustomSetTextColor = self.SetTextColor
+			TextEnable.Text.SetTextColor = function() end
+			TextEnable.CustomFunc = true
+		end
+	end
+
+	if TextEnable then
+		TextEnable:SetScript("OnUpdate", GradientOnUpdate)
+	else
+		self:SetScript("OnUpdate", GradientOnUpdate)
+	end
+end

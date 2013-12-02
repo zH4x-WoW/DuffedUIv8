@@ -1,6 +1,6 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local format = format
 
 local TankString = TANK
@@ -71,8 +71,7 @@ local Update = function(self)
 end
 
 local OnEnter = function(self)
-	local Panel, Anchor, xOff, yOff = self:GetTooltipAnchor()
-	GameTooltip:SetOwner(Panel, Anchor, xOff, yOff)
+	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 	GameTooltip:AddLine(L.DataText.CallToArms)
 	GameTooltip:AddLine(" ")

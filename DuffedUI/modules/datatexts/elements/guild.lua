@@ -1,6 +1,6 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local format = format
 
 local tthead, ttsubh, ttoff = {r=0.4, g=0.78, b=1}, {r=0.75, g=0.9, b=1}, {r=.3,g=1,b=.3}
@@ -47,7 +47,6 @@ local function UpdateGuildXP()
 	local currentXP, remainingXP = UnitGetGuildXP("player")
 	local nextLevelXP = currentXP + remainingXP
 	
-	-- prevent 4.3 division / 0
 	if nextLevelXP == 0 or maxDailyXP == 0 then return end
 	
 	local percentTotal = tostring(math.ceil((currentXP / nextLevelXP) * 100))
@@ -59,7 +58,7 @@ local function UpdateGuildMessage()
 	guildMotD = GetGuildRosterMOTD()
 end
 
-local menuFrame = CreateFrame("Frame", "DuffedUIGuildRightClickMenu", UIParent, "UIDropDownMenuTemplate")
+local menuFrame = CreateFrame("Frame", "TukuiGuildRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 local menuList = {
 	{ text = OPTIONS_MENU, isTitle = true,notCheckable=true},
 	{ text = INVITE, hasArrow = true,notCheckable=true,},
@@ -96,11 +95,12 @@ local OnMouseUp = function(self, btn)
 	local menuCountWhispers = 0
 	local menuCountInvites = 0
 
+
 	menuList[2].menuList = {}
 	menuList[3].menuList = {}
 
 	for i = 1, #guildTable do
-		if (guildTable[i][7] and guildTable[i][1] ~= D.myname) then
+		if (guildTable[i][7] and (guildTable[i][1] ~= UnitName("player") and guildTable[i][1] ~= UnitName("player").."-"..GetRealmName())) then
 			local classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[guildTable[i][9]], GetQuestDifficultyColor(guildTable[i][3])
 
 			if UnitInParty(guildTable[i][1]) or UnitInRaid(guildTable[i][1]) then
@@ -133,8 +133,7 @@ local OnEnter = function(self)
 	local GuildInfo = GetGuildInfo('player')
 	local GuildLevel = GetGuildLevel()
 
-	local panel, anchor, xoff, yoff = self.GetTooltipAnchor(self)
-	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
+	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 	if GuildInfo and GuildLevel then
 		GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo, GuildLevel), string.format(guildInfoString2, L.DataText.Guild, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
@@ -142,7 +141,7 @@ local OnEnter = function(self)
 	
 	if guildMotD ~= "" then GameTooltip:AddLine(' ') GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
 	
-	local col = D.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
+	local col = T.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
 	GameTooltip:AddLine' '
 	if GuildLevel and GuildLevel ~= 25 then
 		--UpdateGuildXP()
@@ -150,7 +149,7 @@ local OnEnter = function(self)
 		if guildXP[0] then
 			local currentXP, nextLevelXP, percentTotal = unpack(guildXP[0])
 			
-			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..D.ShortValue(currentXP), D.ShortValue(nextLevelXP), percentTotal))
+			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..T.ShortValue(currentXP), T.ShortValue(nextLevelXP), percentTotal))
 		end
 	end
 	
@@ -159,7 +158,7 @@ local OnEnter = function(self)
 		barMax = barMax - barMin
 		barValue = barValue - barMin
 		barMin = 0
-		GameTooltip:AddLine(string.format("%s:|r |cFFFFFFFF%s/%s (%s%%)",col..COMBAT_FACTION_CHANGE, D.ShortValue(barValue), D.ShortValue(barMax), math.ceil((barValue / barMax) * 100)))
+		GameTooltip:AddLine(string.format("%s:|r |cFFFFFFFF%s/%s (%s%%)",col..COMBAT_FACTION_CHANGE, T.ShortValue(barValue), T.ShortValue(barMax), math.ceil((barValue / barMax) * 100)))
 	end
 	
 	if online > 1 then
@@ -171,7 +170,8 @@ local OnEnter = function(self)
 			end
 
 			name, rank, level, zone, note, officernote, connected, status, class, isMobile = unpack(guildTable[i])
-			if connected and name ~= D.myname then
+
+			if connected and name ~= UnitName("player") then
 				if GetRealZoneText() == zone then zonec = activezone else zonec = inactivezone end
 				classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class], GetQuestDifficultyColor(level)
 				
@@ -204,16 +204,10 @@ local Update = function(self)
 		
 		return
 	end
-
-	totalOnline = 0
 	
-	for i = 1, GetNumGuildMembers() do
-		local Connected = select(9, GetGuildRosterInfo(i))
-		
-		if Connected then
-			totalOnline = totalOnline + 1
-		end
-	end
+	GuildRoster() -- Bux Fix on 5.4.
+
+	totalOnline = select(3, GetNumGuildMembers())
 	
 	self.Text:SetText(format("%s: %s", DataText.NameColor .. GUILD .. "|r", DataText.ValueColor .. totalOnline .. "|r"))
 end

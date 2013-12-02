@@ -1,7 +1,7 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 local _G = _G
-local Quests = D["Quests"]
+local Quests = T["Quests"]
 
 function Quests:CreateWatchFrameAnchor()
 	local WatchFrame = CreateFrame("Frame", nil, UIParent)
@@ -39,7 +39,7 @@ function Quests:CreateWatchFrameAnchor()
 end
 
 function Quests:PositionWatchFrame()
-	local ScreenHeight = D.ScreenHeight
+	local ScreenHeight = T.ScreenHeight
 	
 	WatchFrame:Show()
 	WatchFrame:SetParent(self.WatchFrame)
@@ -55,7 +55,7 @@ function Quests:SkinWatchFrameButton()
 		self:SkinButton()
 		self:StyleButton()
 		
-		Texture:SetTexCoord(unpack(D.IconCoord))
+		Texture:SetTexCoord(unpack(T.IconCoord))
 		Texture:SetInside()
 		
 		self.IsSkinned = true

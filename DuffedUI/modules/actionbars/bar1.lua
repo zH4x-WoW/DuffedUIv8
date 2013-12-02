@@ -1,28 +1,28 @@
-local D, C, L = select(2, ...):unpack()
-if (not C["actionbars"].Enable) then return end
+local T, C, L = select(2, ...):unpack()
+if (not C.ActionBars.Enable) then return end
 
 local _G = _G
-local DuffedUIActionBars = D["ActionBars"]
-local Panels = D["Panels"]
+local TukuiActionBars = T["ActionBars"]
+local Panels = T["Panels"]
 local Num = NUM_ACTIONBAR_BUTTONS
 local MainMenuBar_OnEvent = MainMenuBar_OnEvent
-local Size = C["actionbars"].NormalButtonSize
-local PetSize = C["actionbars"].PetButtonSize
-local Spacing = C["actionbars"].ButtonSpacing
+local Size = C.ActionBars.NormalButtonSize
+local PetSize = C.ActionBars.PetButtonSize
+local Spacing = C.ActionBars.ButtonSpacing
 
-function DuffedUIActionBars:CreateBar1()
+function TukuiActionBars:CreateBar1()
 	local ActionBar1 = Panels.ActionBar1
 	local Warrior, Rogue, Warlock = "", "", ""
 
-	if C["actionbars"].OwnWarriorStanceBar then
+	if C.ActionBars.OwnWarriorStanceBar then
 		Warrior = "[stance:1] 7; [stance:2] 8; [stance:3] 9;"
 	end
 
-	if C["actionbars"].OwnShadowDanceBar then
+	if C.ActionBars.OwnShadowDanceBar then
 		Rogue = "[stance:3] 10; "
 	end
 
-	if C["actionbars"].OwnMetamorphosisBar then
+	if C.ActionBars.OwnMetamorphosisBar then
 		Warlock = "[stance:1] 10; "
 	end
 

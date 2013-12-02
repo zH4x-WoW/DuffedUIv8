@@ -1,26 +1,27 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-if not C["tooltips"].Enable then
+if not C.Tooltips.Enable then
 	return
 end
 
 local _G = _G
 local unpack = unpack
-local Colors = D.Colors
-local DuffedUITooltips = CreateFrame("Frame")
+local Colors = T.Colors
+local TukuiTooltips = CreateFrame("Frame")
 local gsub, find, format = string.gsub, string.find, string.format
 local Noop = function() end
-local Panels = D["Panels"]
+local Panels = T["Panels"]
 local HealthBar = GameTooltipStatusBar
 local CHAT_FLAG_AFK = CHAT_FLAG_AFK
 local CHAT_FLAG_DND = CHAT_FLAG_DND
 local LEVEL = LEVEL
 local PVP_ENABLED = PVP_ENABLED
-local Insets = C["general"].InOut
+local Insets = C.General.InOut
+local BackdropColor = {0, 0, 0}
 
-DuffedUITooltips.ItemRefTooltip = ItemRefTooltip
+TukuiTooltips.ItemRefTooltip = ItemRefTooltip
 
-DuffedUITooltips.Tooltips = {
+TukuiTooltips.Tooltips = {
 	GameTooltip,
 	ItemRefShoppingTooltip1,
 	ItemRefShoppingTooltip2,
@@ -34,14 +35,14 @@ DuffedUITooltips.Tooltips = {
 	WorldMapCompareTooltip3,
 }
 
-DuffedUITooltips.Classification = {
+TukuiTooltips.Classification = {
 	WorldBoss = "|cffAF5050Boss|r",
 	RareElite = "|cffAF5050+ Rare|r",
 	Elite = "|cffAF5050+|r",
 	Rare = "|cffAF5050Rare|r",
 }
 
-function DuffedUITooltips:CreateAnchor()
+function TukuiTooltips:CreateAnchor()
 	local DataTextRight = Panels.DataTextRight
 	
 	self.Anchor = CreateFrame("Frame", nil, UIParent)
@@ -53,21 +54,21 @@ function DuffedUITooltips:CreateAnchor()
 	self.Anchor:SetMovable(true)
 	self.Anchor:CreateBackdrop()
 	self.Anchor.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
-	self.Anchor.Backdrop:FontString("Text", C["medias"].AltFont, 12)
+	self.Anchor.Backdrop:FontString("Text", C.Medias.AltFont, 12)
 	self.Anchor.Backdrop.Text:SetPoint("CENTER")
 	self.Anchor.Backdrop.Text:SetText(L.Tooltips.MoveAnchor)
 	self.Anchor.Backdrop:Hide()
 end
 
-function DuffedUITooltips:SetTooltipDefaultAnchor()
-	local Anchor = DuffedUITooltips.Anchor
+function TukuiTooltips:SetTooltipDefaultAnchor()
+	local Anchor = TukuiTooltips.Anchor
 	
 	self:SetOwner(Anchor)
 	self:SetAnchorType("ANCHOR_TOPRIGHT", 0, 20)
 end
 
 
-function DuffedUITooltips:GetColor()
+function TukuiTooltips:GetColor()
 	if not self then
 		return
 	end
@@ -80,7 +81,7 @@ function DuffedUITooltips:GetColor()
 			return
 		end
 		
-		local Hex = D.RGBToHex(unpack(Color))
+		local Hex = T.RGBToHex(unpack(Color))
 		
 		return Hex, Color.r, Color.g, Color.b	
 	else
@@ -91,13 +92,13 @@ function DuffedUITooltips:GetColor()
 			return
 		end
 		
-		local Hex = D.RGBToHex(unpack(Color))
+		local Hex = T.RGBToHex(unpack(Color))
 		
 		return Hex, Color.r, Color.g, Color.b		
 	end
 end
 
-function DuffedUITooltips:OnTooltipSetUnit()
+function TukuiTooltips:OnTooltipSetUnit()
 	local NumLines = self:NumLines()
 	local GetMouseFocus = GetMouseFocus()
 	local Unit = (select(2, self:GetUnit())) or (GetMouseFocus and GetMouseFocus:GetAttribute("unit"))
@@ -111,7 +112,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		return
 	end
 	
-	if (self:GetOwner() ~= UIParent and C["tooltips"].HideOnUnitFrames) then
+	if (self:GetOwner() ~= UIParent and C.Tooltips.HideOnUnitFrames) then
 		self:Hide()
 		return
 	end
@@ -131,7 +132,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	local Classification = UnitClassification(Unit)
 	local Title = UnitPVPName(Unit)
 	local r, g, b = GetQuestDifficultyColor(Level).r, GetQuestDifficultyColor(Level).g, GetQuestDifficultyColor(Level).b
-	local Color = DuffedUITooltips.GetColor(Unit)	
+	local Color = TukuiTooltips.GetColor(Unit)	
 	
 	if not Color then
 		Color = "|CFFFFFFFF"
@@ -169,7 +170,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 					Classification = "worldboss"
 				end
 				
-				Line:SetFormattedText("|cff%02x%02x%02x%s|r%s %s", r*255, g*255, b*255, Classification ~= "worldboss" and Level ~= 0 and Level or "", DuffedUITooltips.Classification[Classification] or "", CreatureType or "")
+				Line:SetFormattedText("|cff%02x%02x%02x%s|r%s %s", r*255, g*255, b*255, Classification ~= "worldboss" and Level ~= 0 and Level or "", TukuiTooltips.Classification[Classification] or "", CreatureType or "")
 				break
 			end
 		end
@@ -185,7 +186,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	end
 
 	if (UnitExists(Unit .. "target") and Unit ~= "player") then
-		local hex, r, g, b = DuffedUITooltips.GetColor(Unit)
+		local hex, r, g, b = TukuiTooltips.GetColor(Unit)
 		
 		if (not r) and (not g) and (not b) then
 			r, g, b = 1, 1, 1
@@ -197,7 +198,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	self.fadeOut = nil
 end
 
-function DuffedUITooltips:SetColor()
+function TukuiTooltips:SetColor()
 	local GetMouseFocus = GetMouseFocus()
 	local Unit = (select(2, self:GetUnit())) or (GetMouseFocus and GetMouseFocus:GetAttribute("unit"))
 	local Reaction = Unit and UnitReaction(Unit, "player")
@@ -208,7 +209,7 @@ function DuffedUITooltips:SetColor()
 	local Dead = Unit and UnitIsDead(Unit)
 	local r, g, b
 	
-	self:SetBackdropColor(unpack(C["medias"].BackdropColor))
+	self:SetBackdropColor(unpack(C.Medias.BackdropColor))
 	self:SetBackdropBorderColor(0, 0, 0)
 	
 	if Player then
@@ -242,42 +243,78 @@ function DuffedUITooltips:SetColor()
 				self:SetBackdropBorderColor(r, g, b)
 			end
 		else
-			HealthBar:SetStatusBarColor(unpack(C["medias"].BorderColor))
+			HealthBar:SetStatusBarColor(unpack(C.Medias.BorderColor))
 			
 			if (Insets) then
-				self:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
-				HealthBar.Backdrop:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
+				self:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+				HealthBar.Backdrop:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
 			end
 		end
 	end
 end
 
-function DuffedUITooltips:Skin()
+function TukuiTooltips:OnUpdate(elapsed)
+	local Red, Green, Blue = self:GetBackdropColor()
+	local Owner = self:GetOwner():GetName()
+	local Anchor = self:GetAnchorType()
+
+	-- This ensures that default anchored world frame tips have the proper color.
+	if (Owner == "UIParent" and Anchor == "ANCHOR_CURSOR") and (Red ~= BackdropColor[1] or Green ~= BackdropColor[2] or Blue ~= BackdropColor[3]) then
+		BackdropColor[1] = Red
+		BackdropColor[2] = Green
+		BackdropColor[3] = Blue
+		self:SetBackdropColor(unpack(C.Medias.BackdropColor))
+		self:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+	end
+end
+
+function TukuiTooltips:Skin()
 	if not self.IsSkinned then
 		self:SetTemplate()
 		self.IsSkinned = true
 	end
 
-	DuffedUITooltips.SetColor(self)
+	TukuiTooltips.SetColor(self)
 end
 
-DuffedUITooltips:RegisterEvent("ADDON_LOADED")
-DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= "DuffedUI" then
+function TukuiTooltips:OnTooltipSetItem()
+	if (IsShiftKeyDown() or IsAltKeyDown()) then
+		local Item, Link = self:GetItem()
+		local ItemCount = GetItemCount(Link)
+		local ID = "|cFFCA3C3CID|r "..Link:match(":(%w+)")
+		local Count = "|cFFCA3C3C"..TOTAL.."|r "..ItemCount
+				
+		self:AddLine(" ")
+		self:AddDoubleLine(Link and Link ~= nil and ID, ItemCount and ItemCount > 1 and Count)
+	end
+end
+
+function TukuiTooltips:OnValueChanged()
+	return
+end
+
+TukuiTooltips:RegisterEvent("ADDON_LOADED")
+TukuiTooltips:SetScript("OnEvent", function(self, event, addon)
+	if addon ~= "Tukui" then
 		return
 	end
 	
 	self:CreateAnchor()
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
 
-	for _, Tooltip in pairs(DuffedUITooltips.Tooltips) do
+	for _, Tooltip in pairs(TukuiTooltips.Tooltips) do
 		if Tooltip == GameTooltip then
-			GameTooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
+			Tooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
+			Tooltip:HookScript("OnUpdate", self.OnUpdate)
+			Tooltip:HookScript("OnTooltipSetItem", self.OnTooltipSetItem)
 		end
 		
 		Tooltip:HookScript("OnShow", self.Skin)
 	end
 	
-	HealthBar:SetStatusBarTexture(C["medias"].Normal)
+	HealthBar:SetStatusBarTexture(C.Medias.Normal)
 	HealthBar:CreateBackdrop()
+	HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
 end)
+
+T["Tooltips"] = TukuiTooltips

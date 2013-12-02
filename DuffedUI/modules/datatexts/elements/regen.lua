@@ -1,6 +1,6 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local format = format
 
 local Update = function(self)
@@ -13,7 +13,7 @@ local Update = function(self)
 		Value = floor(Base * 5)
 	end
 	
-	self.Text:SetText(format("%s: %s", DataText.NameColor .. L.DataText.Regen .. "|r", DataText.ValueColor .. D.Comma(Value) .. "|r"))
+	self.Text:SetText(format("%s: %s", DataText.NameColor .. L.DataText.Regen .. "|r", DataText.ValueColor .. T.Comma(Value) .. "|r"))
 end
 
 local Enable = function(self)	

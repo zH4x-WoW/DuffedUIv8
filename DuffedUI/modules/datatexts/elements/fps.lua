@@ -1,6 +1,6 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local GetNetStats = GetNetStats
 local GetFramerate = GetFramerate
 local format = format
@@ -28,14 +28,16 @@ local Update = function(self, t)
 end
 
 local OnEnter = function(self)
-	if InCombatLockdown() then return end
+	if InCombatLockdown() then
+		return
+	end
 	
-	local _, _, latencyHome, latencyWorld = GetNetStats()
-	local latency = format(MAINMENUBAR_LATENCY_LABEL, latencyHome, latencyWorld)
-	local panel, anchor, xoff, yoff = self:GetTooltipAnchor()
-	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
+	local _, _, HomeLatency, WorldLatency = GetNetStats()
+	local Latency = format(MAINMENUBAR_LATENCY_LABEL, HomeLatency, WorldLatency)
+	
+	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
-	GameTooltip:AddLine(latency)
+	GameTooltip:AddLine(Latency)
 	GameTooltip:Show()
 end
 

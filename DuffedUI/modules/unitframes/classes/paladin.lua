@@ -1,23 +1,23 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DuffedUIUnitFrames = D["UnitFrames"]
+local TukuiUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function DuffedUIUnitFrames:AddPaladinFeatures()
+function TukuiUnitFrames:AddPaladinFeatures()
 	local HPBar = CreateFrame("Frame", nil, self)
 	local Shadow = self.Shadow
 	
 	-- Holy Power
 	HPBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	HPBar:Size(250, 8)
-	HPBar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
+	HPBar:SetBackdrop(TukuiUnitFrames.Backdrop)
 	HPBar:SetBackdropColor(0, 0, 0)
 	HPBar:SetBackdropBorderColor(0, 0, 0)
 
 	for i = 1, 5 do
 		HPBar[i] = CreateFrame("StatusBar", nil, HPBar)
 		HPBar[i]:Height(8)
-		HPBar[i]:SetStatusBarTexture(C["medias"].Normal)
+		HPBar[i]:SetStatusBarTexture(C.Medias.Normal)
 		HPBar[i]:SetStatusBarColor(0.89, 0.88, 0.06)
 
 		if i == 1 then
@@ -33,11 +33,11 @@ function DuffedUIUnitFrames:AddPaladinFeatures()
 	Shadow:Point("TOPLEFT", -4, 12)
 	
 	HPBar:SetScript("OnShow", function(self) 
-		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
+		TukuiUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
 	end)
 
 	HPBar:SetScript("OnHide", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
+		TukuiUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
 	end)
 	
 	-- Register

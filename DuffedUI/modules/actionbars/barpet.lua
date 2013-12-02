@@ -1,18 +1,18 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-if (not C["actionbars"].Enable) then
+if (not C.ActionBars.Enable) then
 	return
 end
 
-local DuffedUIActionBars = D["ActionBars"]
+local TukuiActionBars = T["ActionBars"]
 local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
-local PetSize = C["actionbars"].PetButtonSize
-local Spacing = C["actionbars"].ButtonSpacing
+local PetSize = C.ActionBars.PetButtonSize
+local Spacing = C.ActionBars.ButtonSpacing
 local PetActionBarFrame = PetActionBarFrame
 local PetActionBar_UpdateCooldowns = PetActionBar_UpdateCooldowns
 
-function DuffedUIActionBars:CreatePetBar()
-	local Bar = D.Panels.PetActionBar
+function TukuiActionBars:CreatePetBar()
+	local Bar = T.Panels.PetActionBar
 	
 	Bar:RegisterEvent("PLAYER_LOGIN")
 	Bar:RegisterEvent("PLAYER_CONTROL_LOST")
@@ -49,7 +49,7 @@ function DuffedUIActionBars:CreatePetBar()
 				self["Button"..i] = Button
 			end
 			
-			hooksecurefunc("PetActionBar_Update", DuffedUIActionBars.UpdatePetBar)
+			hooksecurefunc("PetActionBar_Update", TukuiActionBars.UpdatePetBar)
 			
 			RegisterStateDriver(self, "visibility", "[pet,nopetbattle,novehicleui,nooverridebar,nobonusbar:5] show; hide")
 		elseif (event == "PET_BAR_UPDATE")
@@ -59,11 +59,11 @@ function DuffedUIActionBars:CreatePetBar()
 			or (event == "PLAYER_FARSIGHT_FOCUS_CHANGED")
 			or (event == "UNIT_FLAGS")
 			or (arg1 == "pet" and (event == "UNIT_AURA")) then
-				DuffedUIActionBars.UpdatePetBar()
+				TukuiActionBars.UpdatePetBar()
 		elseif event == "PET_BAR_UPDATE_COOLDOWN" then
 			PetActionBar_UpdateCooldowns()
 		else
-			DuffedUIActionBars:SkinPetButtons()
+			TukuiActionBars:SkinPetButtons()
 		end
 	end)
 end

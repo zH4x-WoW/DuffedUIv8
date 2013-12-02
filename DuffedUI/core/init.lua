@@ -1,5 +1,5 @@
 ----------------------------------------------------------------
--- Initiation of DuffedUI engine
+-- Initiation of Tukui engine
 ----------------------------------------------------------------
 
 -- [[ Build the engine ]] --
@@ -15,8 +15,9 @@ end
 engine[1].Resolution = GetCVar("gxResolution")
 engine[1].ScreenHeight = tonumber(string.match(engine[1].Resolution, "%d+x(%d+)"))
 engine[1].ScreenWidth = tonumber(string.match(engine[1].Resolution, "(%d+)x+%d"))
+engine[1].MyClass = select(2, UnitClass("Player"))
 
 SLASH_RELOADUI1 = "/rl"
 SlashCmdList.RELOADUI = ReloadUI
 
-DuffedUI = engine
+Tukui = engine

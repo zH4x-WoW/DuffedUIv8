@@ -1,6 +1,6 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local format = format
 local abs = abs
 
@@ -52,8 +52,7 @@ end
 
 local OnEnter = function(self)
 	if (not InCombatLockdown()) then
-		local Panel, Anchor, xOff, yOff = self:GetTooltipAnchor()
-		GameTooltip:SetOwner(Panel, Anchor, xOff, yOff)
+		GameTooltip:SetOwner(self:GetTooltipAnchor())
 		GameTooltip:ClearLines()
 		
 		if (TargetLevel > 1) then

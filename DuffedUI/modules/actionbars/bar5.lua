@@ -1,13 +1,13 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DuffedUIActionBars = D["ActionBars"]
+local TukuiActionBars = T["ActionBars"]
 local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
-local Size = C["actionbars"].NormalButtonSize
-local Spacing = C["actionbars"].ButtonSpacing
+local Size = C.ActionBars.NormalButtonSize
+local Spacing = C.ActionBars.ButtonSpacing
 local MultiBarRight = MultiBarRight
 
-function DuffedUIActionBars:CreateBar5()
-	local ActionBar5 = D.Panels.ActionBar5
+function TukuiActionBars:CreateBar5()
+	local ActionBar5 = T.Panels.ActionBar5
 	
 	MultiBarRight:SetParent(ActionBar5)
 	

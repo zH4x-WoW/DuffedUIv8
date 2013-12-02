@@ -1,4 +1,4 @@
-﻿local D, C, L = select(2, ...):unpack()
+﻿local T, C, L = select(2, ...):unpack()
 
 ------------------------------------------------
 L.DataText = {} -- Data Text Locales
@@ -128,3 +128,23 @@ L.ActionBars.ArrowLeft = "◄"
 L.ActionBars.ArrowRight = "►"
 L.ActionBars.ArrowUp = "▲ ▲ ▲ ▲ ▲"
 L.ActionBars.ArrowDown = "▼ ▼ ▼ ▼ ▼"
+
+------------------------------------------------
+L.Install = {} -- Installation of Tukui
+------------------------------------------------
+
+L.Install.Tutorial = "Tutorial"
+L.Install.Install = "Install"
+L.Install.InstallStep0 = "Thank you for choosing Tukui!|n|nYou will be guided through the installation process in a few simple steps.  At each step, you can decide whether or not you want to apply or skip the presented settings. You are also given the possibility to be shown a brief tutorial on some of the features of Tukui. Press the 'Tutorial' button to be guided through this small introduction, or press 'Install' to skip this step."
+L.Install.InstallStep1 = "The first step applies the essential settings. This is |cffff0000recommended|r for any user, unless you want to apply only a specific part of the settings.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
+L.Install.InstallStep2 = "The second step applies the correct chat setup. If you are a new user, this step is recommended.  If you are an existing user, you may want to skip this step.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
+L.Install.InstallStep3 = "The third and final step applies the default frame positions. This step is |cffff0000recommended|r for new users.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
+L.Install.InstallStep4 = "Installation is complete. Please click the 'Complete' button to reload the UI. Enjoy Tukui! Visit us at www.tukui.org!"
+
+------------------------------------------------
+L.Help = {} -- /tukui help
+------------------------------------------------
+
+L.Help.Title = "Tukui Commands:"
+L.Help.Datatexts = "'|cff00ff00dt|r' or '|cff00ff00datatext|r' : Enable or disable datatext configuration."
+L.Help.Install = "'|cff00ff00install|r' or '|cff00ff00reset|r' : Install or reset Tukui to default settings."

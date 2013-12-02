@@ -1,61 +1,54 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 local Panels = {}
 
-local BottomPanel = CreateFrame("Frame", nil, UIParent)
-BottomPanel:SetPoint("BOTTOM", 0, 3)
-BottomPanel:Size(500, 20)
-BottomPanel:SetTemplate()
-BottomPanel:SetFrameLevel(1)
+local BottomLine = CreateFrame("Frame", nil, UIParent)
+BottomLine:SetTemplate()
+BottomLine:Size(2)
+BottomLine:Point("BOTTOMLEFT", 30, 30)
+BottomLine:Point("BOTTOMRIGHT", -30, 30)
+BottomLine:SetFrameStrata("BACKGROUND")
+BottomLine:SetFrameLevel(0)
 
-local ChatCube = CreateFrame("Frame", nil, BottomPanel) -- temp position
-ChatCube:SetPoint("CENTER", BottomPanel, "CENTER", 0, 0) -- temp position
-ChatCube:Size(20)
-ChatCube:EnableMouse(true)
-ChatCube.Text = ChatCube:CreateFontString(nil, "OVERLAY")
-ChatCube.Text:SetFont(C["medias"].Font, 12, "THINOUTLINE")
-ChatCube.Text:SetPoint("CENTER", ChatCube, "CENTER", 1, -1)
-ChatCube.Text:SetText("E")
+local LeftVerticalLine = CreateFrame("Frame", nil, BottomLine)
+LeftVerticalLine:SetTemplate()
+LeftVerticalLine:Size(2, 130)
+LeftVerticalLine:Point("BOTTOMLEFT", 0, 0)
+LeftVerticalLine:SetFrameLevel(0)
+LeftVerticalLine:SetFrameStrata("BACKGROUND")
 
-local DataTextLeft = CreateFrame("Frame", nil, UIParent)
+local RightVerticalLine = CreateFrame("Frame", nil, BottomLine)
+RightVerticalLine:SetTemplate()
+RightVerticalLine:Size(2, 130)
+RightVerticalLine:Point("BOTTOMRIGHT", 0, 0)
+RightVerticalLine:SetFrameLevel(0)
+RightVerticalLine:SetFrameStrata("BACKGROUND")
+
+local CubeLeft = CreateFrame("Frame", nil, LeftVerticalLine)
+CubeLeft:SetTemplate()
+CubeLeft:Size(10)
+CubeLeft:Point("BOTTOM", LeftVerticalLine, "TOP", 0, 0)
+CubeLeft:EnableMouse(true)
+CubeLeft:SetFrameLevel(0)
+
+local CubeRight = CreateFrame("Frame", nil, RightVerticalLine)
+CubeRight:SetTemplate()
+CubeRight:Size(10)
+CubeRight:Point("BOTTOM", RightVerticalLine, "TOP", 0, 0)
+CubeRight:EnableMouse(true)
+CubeRight:SetFrameLevel(0)
+
+local DataTextLeft = CreateFrame("Frame", nil, BottomLine)
 DataTextLeft:Size(370, 23)
-DataTextLeft:SetPoint("BOTTOMLEFT", 5, 3)
+DataTextLeft:SetPoint("LEFT", 17, -1)
 DataTextLeft:SetTemplate()
 DataTextLeft:SetFrameLevel(1)
 
-local DataTextRight = CreateFrame("Frame", nil, UIParent)
+local DataTextRight = CreateFrame("Frame", nil, BottomLine)
 DataTextRight:Size(370, 23)
-DataTextRight:SetPoint("BOTTOMRIGHT", -5, 3)
+DataTextRight:SetPoint("RIGHT", -17, -1)
 DataTextRight:SetTemplate()
 DataTextRight:SetFrameLevel(1)
-
-if C["chat"].LeftBackground then
-	local LeftChatBackground = CreateFrame("Frame", nil, DataTextLeft)
-	LeftChatBackground:Size(370, 142)
-	LeftChatBackground:SetPoint("BOTTOMLEFT", DataTextLeft, "TOPLEFT", 0, 3)
-	LeftChatBackground:SetTemplate("Transparent")
-	LeftChatBackground:SetFrameStrata("BACKGROUND")
-	LeftChatBackground:SetFrameLevel(1)
-	
-	local LeftChatTab = CreateFrame("Frame", nil, LeftChatBackground)
-	LeftChatTab:Size(340, 20)
-	LeftChatTab:SetPoint("TOPLEFT", LeftChatBackground, "TOPLEFT", 4, -4)
-	LeftChatTab:SetTemplate()
-end
-
-if C["chat"].RightBackground then
-	local RightChatBackground = CreateFrame("Frame", nil, DataTextRight)
-	RightChatBackground:Size(370, 142)
-	RightChatBackground:SetPoint("BOTTOMRIGHT", DataTextRight, "TOPRIGHT", 0, 3)
-	RightChatBackground:SetTemplate("Transparent")
-	RightChatBackground:SetFrameStrata("BACKGROUND")
-	RightChatBackground:SetFrameLevel(1)
-	
-	local RightChatTab = CreateFrame("Frame", nil, RightChatBackground)
-	RightChatTab:Size(362, 20)
-	RightChatTab:SetPoint("TOPLEFT", RightChatBackground, "TOPLEFT", 4, -4)
-	RightChatTab:SetTemplate()
-end
 
 local Hider = CreateFrame("Frame", nil, UIParent)
 Hider:Hide()
@@ -64,15 +57,14 @@ local PetBattleHider = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTe
 PetBattleHider:SetAllPoints()
 RegisterStateDriver(PetBattleHider, "visibility", "[petbattle] hide; show")
 
-Panels.BottomPanel = BottomPanel
-Panels.ChatCube = ChatCube
+Panels.BottomLine = BottomLine
+Panels.LeftVerticalLine = LeftVerticalLine
+Panels.RightVerticalLine = RightVerticalLine
+Panels.CubeLeft = CubeLeft
+Panels.CubeRight = CubeRight
 Panels.DataTextLeft = DataTextLeft
 Panels.DataTextRight = DataTextRight
-Panels.LeftChatBackground = LeftChatBackground
-Panels.RightChatBackground = RightChatBackground
-Panels.LeftChatTab = LeftChatTab
-Panels.RightChatTab = RightChatTab
 Panels.Hider = Hider
 Panels.PetBattleHider = PetBattleHider
 
-D["Panels"] = Panels
+T["Panels"] = Panels

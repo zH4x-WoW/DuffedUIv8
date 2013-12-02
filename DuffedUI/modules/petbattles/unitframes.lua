@@ -1,5 +1,5 @@
-local D, C, L = select(2, ...):unpack()
-local Battle = D["PetBattles"]
+local T, C, L = select(2, ...):unpack()
+local Battle = T["PetBattles"]
 local PetBattles = PetBattleFrame
 
 local Pets = {
@@ -20,7 +20,7 @@ function Battle:SkinUnitFrames()
 		Pet.Border2:SetAlpha(0)
 		Pet.healthBarWidth = 300
 
-		Pet.Name:SetFont(C["medias"].Font, 12, "OUTLINE")
+		Pet.Name:SetFont(C.Medias.Font, 12, "OUTLINE")
 
 		Pet.IconBackdrop = CreateFrame("Frame", nil, Pet)
 		Pet.IconBackdrop:SetFrameLevel(Pet:GetFrameLevel() - 1)
@@ -35,14 +35,14 @@ function Battle:SkinUnitFrames()
 		Pet.HealthBarBackdrop:SetTemplate("Transparent")
 		Pet.HealthBarBackdrop:Width(Pet.healthBarWidth + 4)
 		
-		Pet.ActualHealthBar:SetTexture(C["medias"].Normal)
+		Pet.ActualHealthBar:SetTexture(C.Medias.Normal)
 
 		Pet.ActualHealthBar:ClearAllPoints()
 		Pet.Name:ClearAllPoints()
 
 		Pet.PetTypeFrame = CreateFrame("Frame", nil, Pet)
 		Pet.PetTypeFrame:Size(100, 23)
-		Pet.PetTypeFrame:FontString("Text", C["medias"].Font, 12, "OUTLINE")
+		Pet.PetTypeFrame:FontString("Text", C.Medias.Font, 12, "OUTLINE")
 		Pet.PetTypeFrame.Text:SetText("")
 		
 		Pet.SpeedIcon:SetAlpha(0)
@@ -178,7 +178,7 @@ function Battle:AddUnitFramesHooks()
 				if not Frame.IsSkinned then
 					Frame:CreateBackdrop()
 					Frame.Backdrop:SetOutside(Frame.Icon)
-					Frame.Icon:SetTexCoord(unpack(D.IconCoord))
+					Frame.Icon:SetTexCoord(unpack(T.IconCoord))
 					Frame.IsSkinned = true
 				end
 
@@ -192,7 +192,7 @@ function Battle:AddUnitFramesHooks()
 					Frame.Duration:SetText(TurnsRemaining)
 				end
 				
-				Frame.Duration:SetFont(C["medias"].Font, 14, "OUTLINE")
+				Frame.Duration:SetFont(C.Medias.Font, 14, "OUTLINE")
 				Frame.Duration:ClearAllPoints()
 				Frame.Duration:SetPoint("CENTER", Frame.Icon, "CENTER", 1, 0)
 			
@@ -203,7 +203,7 @@ function Battle:AddUnitFramesHooks()
 
 	-- PETS UNITFRAMES, ALWAYS HIDE BLIZZARD ICONS BORDER
 	hooksecurefunc("PetBattleUnitFrame_UpdateDisplay", function(self)
-		self.Icon:SetTexCoord(unpack(D.IconCoord))
+		self.Icon:SetTexCoord(unpack(T.IconCoord))
 	end)
 
 

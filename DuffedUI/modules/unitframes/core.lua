@@ -1,10 +1,10 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 local AddOn, Plugin = ...
 local oUF = Plugin.oUF or oUF
-local Panels = D["Panels"]
-local Colors = D["Colors"]
+local Panels = T["Panels"]
+local Colors = T["Colors"]
 local Noop = function() end
-local DuffedUIUnitFrames = CreateFrame("Frame")
+local TukuiUnitFrames = CreateFrame("Frame")
 
 -- Lib globals
 local strfind = strfind
@@ -23,15 +23,15 @@ local UnitPowerType = UnitPowerType
 local Class = select(2, UnitClass("player"))
 local BossFrames = MAX_BOSS_FRAMES
 
-DuffedUIUnitFrames.Units = {}
-DuffedUIUnitFrames.Headers = {}
-DuffedUIUnitFrames.Framework = DuffedUIUnitFrameFramework
-DuffedUIUnitFrames.Backdrop = {
-	bgFile = C["medias"].Blank,
-	insets = {top = -D.Mult, left = -D.Mult, bottom = -D.Mult, right = -D.Mult},
+TukuiUnitFrames.Units = {}
+TukuiUnitFrames.Headers = {}
+TukuiUnitFrames.Framework = TukuiUnitFrameFramework
+TukuiUnitFrames.Backdrop = {
+	bgFile = C.Medias.Blank,
+	insets = {top = -T.Mult, left = -T.Mult, bottom = -T.Mult, right = -T.Mult},
 }
 
-function DuffedUIUnitFrames:DisableBlizzard()
+function TukuiUnitFrames:DisableBlizzard()
 	for i = 1, MAX_BOSS_FRAMES do
 		local Boss = _G["Boss"..i.."TargetFrame"]
 		local Health = _G["Boss"..i.."TargetFrame".."HealthBar"]
@@ -45,7 +45,7 @@ function DuffedUIUnitFrames:DisableBlizzard()
 		Power:UnregisterAllEvents()
 	end
 	
-	if C["unitframes"].Raid then
+	if C.UnitFrames.Raid then
 		InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
 		
@@ -77,7 +77,7 @@ function DuffedUIUnitFrames:DisableBlizzard()
 	end
 end
 
-function DuffedUIUnitFrames:ShortValue()
+function TukuiUnitFrames:ShortValue()
 	if self <= 999 then
 		return self
 	end
@@ -93,7 +93,7 @@ function DuffedUIUnitFrames:ShortValue()
 	end
 end
 
-function DuffedUIUnitFrames:UTF8Sub(i, dots)
+function TukuiUnitFrames:UTF8Sub(i, dots)
 	if not self then return end
 
 	local Bytes = self:len()
@@ -124,7 +124,7 @@ function DuffedUIUnitFrames:UTF8Sub(i, dots)
 	end
 end
 
-function DuffedUIUnitFrames:MouseOnPlayer()
+function TukuiUnitFrames:MouseOnPlayer()
 	local Status = self.Status
 	local MouseOver = GetMouseFocus()
 
@@ -140,7 +140,7 @@ function DuffedUIUnitFrames:MouseOnPlayer()
 	end
 end
 
-function DuffedUIUnitFrames:UpdateShadow(script, x, y)
+function TukuiUnitFrames:UpdateShadow(script, x, y)
 	local Frame = self:GetParent()
 	local Shadow = Frame.Shadow
 	
@@ -155,7 +155,7 @@ function DuffedUIUnitFrames:UpdateShadow(script, x, y)
 	end
 end
 
-function DuffedUIUnitFrames:UpdateAurasHeaderPosition(script, x, y)
+function TukuiUnitFrames:UpdateAurasHeaderPosition(script, x, y)
 	local Frame = self:GetParent()
 	local Buffs = Frame.Buffs
 
@@ -172,19 +172,19 @@ function DuffedUIUnitFrames:UpdateAurasHeaderPosition(script, x, y)
 	end
 end
 
-function DuffedUIUnitFrames:CustomCastTimeText(duration)
+function TukuiUnitFrames:CustomCastTimeText(duration)
 	local Value = format("%.1f / %.1f", self.channeling and duration or self.max - duration, self.max)
 
 	self.Time:SetText(Value)
 end
 
-function DuffedUIUnitFrames:CustomCastDelayText(duration)
+function TukuiUnitFrames:CustomCastDelayText(duration)
 	local Value = format("%.1f |cffaf5050%s %.1f|r", self.channeling and duration or self.max - duration, self.channeling and "- " or "+", self.delay)
 
 	self.Time:SetText(Value)
 end
 
-function DuffedUIUnitFrames:CheckInterrupt(unit)
+function TukuiUnitFrames:CheckInterrupt(unit)
 	if (unit == "vehicle") then
 		unit = "player"
 	end
@@ -196,16 +196,16 @@ function DuffedUIUnitFrames:CheckInterrupt(unit)
 	end
 end
 
-function DuffedUIUnitFrames:CheckCast(unit, name, rank, castid)
-	DuffedUIUnitFrames.CheckInterrupt(self, unit)
+function TukuiUnitFrames:CheckCast(unit, name, rank, castid)
+	TukuiUnitFrames.CheckInterrupt(self, unit)
 end
 
 -- check if we can interrupt on channel cast
-function DuffedUIUnitFrames:CheckChannel(unit, name, rank)
-	DuffedUIUnitFrames.CheckInterrupt(self, unit)
+function TukuiUnitFrames:CheckChannel(unit, name, rank)
+	TukuiUnitFrames.CheckInterrupt(self, unit)
 end
 
-function DuffedUIUnitFrames:UpdateNamePosition()
+function TukuiUnitFrames:UpdateNamePosition()
 	if (self.Power.Value:GetText() and UnitIsEnemy("player", "target")) then
 		self.Name:ClearAllPoints()
 		self.Name:SetPoint("CENTER", self.Panel, "CENTER", 0, 0)
@@ -216,7 +216,7 @@ function DuffedUIUnitFrames:UpdateNamePosition()
 	end
 end
 
-function DuffedUIUnitFrames:PostUpdateHealth(unit, min, max)
+function TukuiUnitFrames:PostUpdateHealth(unit, min, max)
 	if (not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit)) then
 		if (not UnitIsConnected(unit)) then
 			self.Value:SetText("|cffD7BEA5"..FRIENDS_LIST_OFFLINE.."|r")
@@ -240,21 +240,21 @@ function DuffedUIUnitFrames:PostUpdateHealth(unit, min, max)
 		end
 
 		if (min ~= max) then
-			r, g, b = D.ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
+			r, g, b = T.ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
 			if (unit == "player" and self:GetAttribute("normalUnit") ~= "pet") then
 				self.Value:SetFormattedText("|cffAF5050%d|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", min, r * 255, g * 255, b * 255, floor(min / max * 100))
 			elseif (unit == "target" or (unit and strfind(unit, "boss%d"))) then
-				self.Value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", DuffedUIUnitFrames.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
+				self.Value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", TukuiUnitFrames.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
 			elseif (unit and strfind(unit, "arena%d")) or (unit == "focus") or (unit == "focustarget") then
-				self.Value:SetText("|cff559655"..DuffedUIUnitFrames.ShortValue(min).."|r")
+				self.Value:SetText("|cff559655"..TukuiUnitFrames.ShortValue(min).."|r")
 			else
-				self.Value:SetText("|cff559655-"..DuffedUIUnitFrames.ShortValue(max-min).."|r")
+				self.Value:SetText("|cff559655-"..TukuiUnitFrames.ShortValue(max-min).."|r")
 			end
 		else
 			if (unit == "player" and self:GetAttribute("normalUnit") ~= "pet") then
 				self.Value:SetText("|cff559655"..max.."|r")
 			elseif (unit == "target" or unit == "focus"  or unit == "focustarget" or (unit and strfind(unit, "arena%d"))) then
-				self.Value:SetText("|cff559655"..DuffedUIUnitFrames.ShortValue(max).."|r")
+				self.Value:SetText("|cff559655"..TukuiUnitFrames.ShortValue(max).."|r")
 			else
 				self.Value:SetText(" ")
 			end
@@ -262,7 +262,7 @@ function DuffedUIUnitFrames:PostUpdateHealth(unit, min, max)
 	end
 end
 
-function DuffedUIUnitFrames:PostUpdatePower(unit, min, max)
+function TukuiUnitFrames:PostUpdatePower(unit, min, max)
 	local Parent = self:GetParent()
 	local pType, pToken = UnitPowerType(unit)
 	local Color = Colors.power[pToken]
@@ -279,11 +279,11 @@ function DuffedUIUnitFrames:PostUpdatePower(unit, min, max)
 		if (min ~= max) then
 			if (pType == 0) then
 				if (unit == "target") then
-					self.Value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), DuffedUIUnitFrames.ShortValue(max - (max - min)))
+					self.Value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), TukuiUnitFrames.ShortValue(max - (max - min)))
 				elseif (unit == "player" and Parent:GetAttribute("normalUnit") == "pet" or unit == "pet") then
 					self.Value:SetFormattedText("%d%%", floor(min / max * 100))
 				elseif (unit and strfind(unit, "arena%d")) or unit == "focus" or unit == "focustarget" then
-					self.Value:SetText(DuffedUIUnitFrames.ShortValue(min))
+					self.Value:SetText(TukuiUnitFrames.ShortValue(min))
 				else
 					self.Value:SetFormattedText("%d%% |cffD7BEA5-|r %d", floor(min / max * 100), max - (max - min))
 				end
@@ -292,7 +292,7 @@ function DuffedUIUnitFrames:PostUpdatePower(unit, min, max)
 			end
 		else
 			if (unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and strfind(unit, "arena%d"))) then
-				self.Value:SetText(DuffedUIUnitFrames.ShortValue(min))
+				self.Value:SetText(TukuiUnitFrames.ShortValue(min))
 			else
 				self.Value:SetText(min)
 			end
@@ -300,11 +300,77 @@ function DuffedUIUnitFrames:PostUpdatePower(unit, min, max)
 	end
 
 	if (Parent.Name and unit == "target") then
-		DuffedUIUnitFrames.UpdateNamePosition(Parent)
+		TukuiUnitFrames.UpdateNamePosition(Parent)
 	end
 end
 
-function DuffedUIUnitFrames:CreateAuraTimer(elapsed)
+local function UpdateTotemTimer(self, elapsed)
+	self.timeLeft = self.timeLeft - elapsed
+
+	local timeLeft = self.timeLeft
+	if timeLeft > 0 then
+		self:SetValue(timeLeft)
+	else
+		self:SetValue(0)
+		self:SetScript("OnUpdate", nil)
+	end
+end
+
+local function hasbit(x, p)
+	return x % (p + p) >= p
+end
+
+local function setbit(x, p)
+	return hasbit(x, p) and x or x + p
+end
+
+local function clearbit(x, p)
+	return hasbit(x, p) and x - p or x
+end
+
+function TukuiUnitFrames:UpdateTotemOverride(event, slot)
+	local Bar = self.Totems
+	local priorities = Bar.__map
+
+	if Bar.PreUpdate then Bar:PreUpdate(priorities[slot]) end
+
+	local totem = Bar[priorities[slot]]
+	local haveTotem, name, start, duration, icon = GetTotemInfo(slot)
+	if haveTotem then
+		totem.timeLeft = (start + duration) - GetTime()
+		totem:SetMinMaxValues(0, duration)
+		totem:SetScript("OnUpdate", UpdateTotemTimer)
+
+		local r, g, b = unpack(Colors.totems[slot])
+		totem:SetStatusBarColor(r, g, b)
+		if totem.bg.multiplier then
+			local mu = totem.bg.multiplier
+			r, g, b = r * mu, g * mu, b * mu
+			totem.bg:SetVertexColor(r, g, b)
+		end
+
+		Bar.activeTotems = setbit(Bar.activeTotems, 2 ^ (slot - 1))
+		totem:Show()
+	else
+		totem:SetValue(0)
+		totem:SetScript("OnUpdate", nil)
+
+		Bar.activeTotems = clearbit(Bar.activeTotems, (2 ^ (slot - 1)))
+		totem:Hide()
+	end
+
+	if Bar.activeTotems > 0 then
+		Bar:Show()
+	else
+		Bar:Hide()
+	end
+
+	if Bar.PostUpdate then
+		return Bar:PostUpdate(priorities[slot], haveTotem, name, start, duration, icon)
+	end
+end
+
+function TukuiUnitFrames:CreateAuraTimer(elapsed)
 	if (self.TimeLeft) then
 		self.Elapsed = (self.Elapsed or 0) + elapsed
 
@@ -317,7 +383,7 @@ function DuffedUIUnitFrames:CreateAuraTimer(elapsed)
 			end
 
 			if self.TimeLeft > 0 then
-				local Time = D.FormatTime(self.TimeLeft)
+				local Time = T.FormatTime(self.TimeLeft)
 				self.Remaining:SetText(Time)
 				
 				if self.TimeLeft <= 5 then
@@ -335,11 +401,12 @@ function DuffedUIUnitFrames:CreateAuraTimer(elapsed)
 	end
 end
 
-function DuffedUIUnitFrames:PostCreateAura(button)
+function TukuiUnitFrames:PostCreateAura(button)
 	button:SetTemplate("Default")
+	button:CreateShadow()
 
 	button.Remaining = button:CreateFontString(nil, "OVERLAY")
-	button.Remaining:SetFont(C["medias"].Font, 12, "THINOUTLINE")
+	button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 	button.Remaining:Point("CENTER", 1, 0)
 
 	button.cd.noOCC = true
@@ -350,12 +417,12 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button.cd:SetInside()
 
 	button.icon:SetInside()
-	button.icon:SetTexCoord(unpack(D.IconCoord))
+	button.icon:SetTexCoord(unpack(T.IconCoord))
 	button.icon:SetDrawLayer('ARTWORK')
 
 	button.count:Point("BOTTOMRIGHT", 3, 3)
 	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C["medias"].Font, 9, "THICKOUTLINE")
+	button.count:SetFont(C.Medias.Font, 9, "THICKOUTLINE")
 	button.count:SetTextColor(0.84, 0.75, 0.65)
 
 	button.OverlayFrame = CreateFrame("Frame", nil, button, nil)
@@ -367,7 +434,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button.Glow = CreateFrame("Frame", nil, button)
 	button.Glow:SetOutside()
 	button.Glow:SetFrameStrata("BACKGROUND")	
-	button.Glow:SetBackdrop{edgeFile = C["medias"].Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
+	button.Glow:SetBackdrop{edgeFile = C.Medias.Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
 	
@@ -380,21 +447,21 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button.Animation.FadeOut:SetSmoothing("IN_OUT")
 end
 
-function DuffedUIUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
+function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
 	local _, _, _, _, DType, Duration, ExpirationTime, UnitCaster, IsStealable = UnitAura(unit, index, button.filter)
 
 	if button then
 		if(button.filter == "HARMFUL") then
 			if(not UnitIsFriend("player", unit) and button.owner ~= "player" and button.owner ~= "vehicle") then
 				button.icon:SetDesaturated(true)
-				button:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
+				button:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
 			else
-				local color = DebuffTypeColor[Dtype] or DebuffTypeColor.none
+				local color = DebuffTypeColor[DType] or DebuffTypeColor.none
 				button.icon:SetDesaturated(false)
 				button:SetBackdropBorderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8)
 			end
 		else
-			if (IsStealable or Dtype == "Magic") and not UnitIsFriend("player", unit) and not button.Animation.Playing then
+			if (IsStealable or DType == "Magic") and not UnitIsFriend("player", unit) and not button.Animation.Playing then
 				button.Animation:Play()
 				button.Animation.Playing = true
 			else
@@ -412,14 +479,14 @@ function DuffedUIUnitFrames:PostUpdateAura(unit, button, index, offset, filter, 
 		button.Duration = Duration
 		button.TimeLeft = ExpirationTime
 		button.First = true
-		button:SetScript("OnUpdate", DuffedUIUnitFrames.CreateAuraTimer)
+		button:SetScript("OnUpdate", TukuiUnitFrames.CreateAuraTimer)
 	end
 end
 
-function DuffedUIUnitFrames:SetGridGroupRole()
+function TukuiUnitFrames:SetGridGroupRole()
 	local LFDRole = self.LFDRole
 	local Role = UnitGroupRolesAssigned(self.unit)
-
+	
 	if Role == "TANK" then
 		LFDRole:SetTexture(67/255, 110/255, 238/255,.3)
 		LFDRole:Show()
@@ -434,65 +501,90 @@ function DuffedUIUnitFrames:SetGridGroupRole()
 	end
 end
 
-function DuffedUIUnitFrames:UpdateBossAltPower(minimum, current, maximum)
+
+function TukuiUnitFrames:UpdateBossAltPower(minimum, current, maximum)
 	if (not current) or (not maximum) then return end
 	
-	local r, g, b = D.ColorGradient(current, maximum, 0, .8 ,0 ,.8 ,.8 ,0 ,.8 ,0 ,0)
+	local r, g, b = T.ColorGradient(current, maximum, 0, .8 ,0 ,.8 ,.8 ,0 ,.8 ,0 ,0)
 	self:SetStatusBarColor(r, g, b)
 end
 
-function DuffedUIUnitFrames:Update()
+function TukuiUnitFrames:Update()
 	for _, element in ipairs(self.__elements) do
 		element(self, "UpdateElement", self.unit)
 	end
 end
 
-function DuffedUIUnitFrames:GetRaidFramesAttributes()
+function TukuiUnitFrames:GetPartyFramesAttributes()
 	return
-		"DuffedUIRaid", 
-		nil, 
-		"solo,party,raid",
+		"TukuiParty",
+		nil,
+		"custom [@raid6,exists] hide;show", 
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute("initial-width"))
 			self:SetHeight(header:GetAttribute("initial-height"))
 		]],
-		"initial-width", D.Scale(66),
-		"initial-height", D.Scale(50),
-		"showParty", true,
+		"initial-width", C.Party.Portrait and T.Scale(162) or T.Scale(206),
+		"initial-height", C.Party.Portrait and T.Scale(24) or T.Scale(40),
+		"showSolo", true, -- uncomment this for coding
+		"showParty", true, 
+		"showPlayer", true, 
+		"showRaid", true,
+		"groupFilter", "1,2,3,4,5,6,7,8", 
+		"groupingOrder", "1,2,3,4,5,6,7,8", 
+		"groupBy", "GROUP", 
+		"yOffset", T.Scale(-66)	
+end
+
+function TukuiUnitFrames:GetRaidFramesAttributes()
+	local Properties = C.Party.Enable and "custom [@raid6,exists] hide;show" or "solo, party, raid"
+	
+	return
+		"TukuiRaid", 
+		nil, 
+		Properties,
+		"oUF-initialConfigFunction", [[
+			local header = self:GetParent()
+			self:SetWidth(header:GetAttribute("initial-width"))
+			self:SetHeight(header:GetAttribute("initial-height"))
+		]],
+		"initial-width", T.Scale(66),
+		"initial-height", T.Scale(50),
+		"showParty", false,
 		"showRaid", true,
 		"showPlayer", true,
-		"showSolo", true,
-		"xoffset", D.Scale(3),
-		"yOffset", D.Scale(-3),
+		"showSolo", false,
+		"xoffset", T.Scale(3),
+		"yOffset", T.Scale(-3),
 		"point", "TOP",
 		"groupFilter", "1,2,3,4,5,6,7,8",
 		"groupingOrder", "1,2,3,4,5,6,7,8",
 		"groupBy", "GROUP",
 		"maxColumns", math.ceil(40/10),
 		"unitsPerColumn", 10,
-		"columnSpacing", D.Scale(3),
+		"columnSpacing", T.Scale(3),
 		"columnAnchorPoint", "LEFT"
 end
 
-function DuffedUIUnitFrames:GetPetRaidFramesAttributes()
+function TukuiUnitFrames:GetPetRaidFramesAttributes()
 	return
-		"DuffedUIRaidPet", 
+		"TukuiRaidPet", 
 		"SecureGroupPetHeaderTemplate", 
-		"solo,party,raid",
+		"custom [@raid6,exists] show;hide",
 		"showPlayer", true,
-		"showParty", true,
+		"showParty", false,
 		"showRaid", true,
-		"showSolo", true,
+		"showSolo", false,
 		"maxColumns", math.ceil(40/10),
 		"point", "TOP",
 		"unitsPerColumn", 10,
-		"columnSpacing", D.Scale(3),
+		"columnSpacing", T.Scale(3),
 		"columnAnchorPoint", "LEFT",
-		"yOffset", D.Scale(-3),
-		"xOffset", D.Scale(3),
-		"initial-width", D.Scale(66),
-		"initial-height", D.Scale(50),
+		"yOffset", T.Scale(-3),
+		"xOffset", T.Scale(3),
+		"initial-width", T.Scale(66),
+		"initial-height", T.Scale(50),
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute("initial-width"))
@@ -500,65 +592,71 @@ function DuffedUIUnitFrames:GetPetRaidFramesAttributes()
 		]]
 end
 
-function DuffedUIUnitFrames:Style(unit)
+function TukuiUnitFrames:Style(unit)
 	if not unit then
 		return
 	end
+	
+	local Parent = self:GetParent():GetName()
 
 	if unit == "player" then
-		DuffedUIUnitFrames.Player(self)
+		TukuiUnitFrames.Player(self)
 	elseif unit == "target" then
-		DuffedUIUnitFrames.Target(self)
+		TukuiUnitFrames.Target(self)
 	elseif unit == "targettarget" then
-		DuffedUIUnitFrames.TargetOfTarget(self)
+		TukuiUnitFrames.TargetOfTarget(self)
 	elseif unit == "pet" then
-		DuffedUIUnitFrames.Pet(self)
+		TukuiUnitFrames.Pet(self)
 	elseif unit == "focus" then
-		DuffedUIUnitFrames.Focus(self)
+		TukuiUnitFrames.Focus(self)
 	elseif unit == "focustarget" then
-		DuffedUIUnitFrames.FocusTarget(self)
+		TukuiUnitFrames.FocusTarget(self)
 	elseif unit:find("arena%d") then
-		DuffedUIUnitFrames.Arena(self)
+		TukuiUnitFrames.Arena(self)
 	elseif unit:find("boss%d") then
-		DuffedUIUnitFrames.Boss(self)
+		TukuiUnitFrames.Boss(self)
 	elseif unit == "raid" or unit == "raidpet" then
-		DuffedUIUnitFrames.Raid(self)
+		if Parent:match("Party") then
+			TukuiUnitFrames.Party(self)
+		else
+			TukuiUnitFrames.Raid(self)
+		end
 	end
 
 	return self
 end
 
-function DuffedUIUnitFrames:CreateAnchor()
+function TukuiUnitFrames:CreateAnchor()
 	local Anchor = CreateFrame("Frame", nil, UIParent)
 	Anchor:SetPoint("TOPLEFT", Panels.ActionBar2)
 	Anchor:SetPoint("BOTTOMRIGHT", Panels.ActionBar3)
 
-	DuffedUIUnitFrames.Anchor = Anchor
+	TukuiUnitFrames.Anchor = Anchor
 end
 
-function DuffedUIUnitFrames:CreateUnits()
+function TukuiUnitFrames:CreateUnits()
 	local Player = oUF:Spawn("player")
-	Player:SetPoint("BOTTOMLEFT", DuffedUIUnitFrames.Anchor, "TOPLEFT", 0, 8)
+	Player:SetPoint("BOTTOMLEFT", TukuiUnitFrames.Anchor, "TOPLEFT", 0, 8)
 	Player:SetParent(Panels.PetBattleHider)
 	Player:Size(250, 57)
 
 	local Target = oUF:Spawn("target")
-	Target:SetPoint("BOTTOMRIGHT", DuffedUIUnitFrames.Anchor, "TOPRIGHT", 0, 8)
+	Target:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 8)
 	Target:SetParent(Panels.PetBattleHider)
 	Target:Size(250, 57)
 
 	local TargetOfTarget = oUF:Spawn("targettarget")
-	TargetOfTarget:SetPoint("BOTTOM", DuffedUIUnitFrames.Anchor, "TOP", 0, 8)
+	TargetOfTarget:SetPoint("BOTTOM", TukuiUnitFrames.Anchor, "TOP", 0, 8)
 	TargetOfTarget:SetParent(Panels.PetBattleHider)
 	TargetOfTarget:Size(129, 36)
 
 	local Pet = oUF:Spawn("pet")
 	Pet:SetParent(Panels.PetBattleHider)
-	Pet:SetPoint("BOTTOM", DuffedUIUnitFrames.Anchor, "TOP", 0, 49)
+	Pet:SetPoint("BOTTOM", TukuiUnitFrames.Anchor, "TOP", 0, 49)
 	Pet:Size(129, 36)
 
 	local Focus = oUF:Spawn("focus")
-	Focus:SetPoint("BOTTOMLEFT", DuffedUIUnitFrames.Anchor, "TOPLEFT", 0, 300)
+	Focus:SetPoint("BOTTOMLEFT", TukuiUnitFrames.Anchor, "TOPLEFT", 0, 300)
 	Focus:SetParent(Panels.PetBattleHider)
 	Focus:Size(200, 29)
 
@@ -572,7 +670,7 @@ function DuffedUIUnitFrames:CreateUnits()
 		Arena[i] = oUF:Spawn("arena"..i, nil)
 		Arena[i]:SetParent(Panels.PetBattleHider)
 		if (i == 1) then
-			Arena[i]:SetPoint("BOTTOMRIGHT", DuffedUIUnitFrames.Anchor, "TOPRIGHT", 0, 300)
+			Arena[i]:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 300)
 		else
 			Arena[i]:SetPoint("BOTTOM", Arena[i-1], "TOP", 0, 35)
 		end
@@ -584,46 +682,56 @@ function DuffedUIUnitFrames:CreateUnits()
 		Boss[i] = oUF:Spawn("boss"..i, nil)
 		Boss[i]:SetParent(Panels.PetBattleHider)
 		if (i == 1) then
-			Boss[i]:SetPoint("BOTTOMRIGHT", DuffedUIUnitFrames.Anchor, "TOPRIGHT", 0, 300)
+			Boss[i]:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 300)
 		else
 			Boss[i]:SetPoint("BOTTOM", Boss[i-1], "TOP", 0, 35)             
 		end
 		Boss[i]:Size(200, 29)
 	end
 
-	DuffedUIUnitFrames.Units.Player = Player
-	DuffedUIUnitFrames.Units.Target = Target
-	DuffedUIUnitFrames.Units.TargetOfTarget = TargetOfTarget
-	DuffedUIUnitFrames.Units.Pet = Pet
-	DuffedUIUnitFrames.Units.Focus = Focus
-	DuffedUIUnitFrames.Units.FocusTarget = FocusTarget
-	DuffedUIUnitFrames.Units.Arena = Arena
-	DuffedUIUnitFrames.Units.Boss = Boss
+	TukuiUnitFrames.Units.Player = Player
+	TukuiUnitFrames.Units.Target = Target
+	TukuiUnitFrames.Units.TargetOfTarget = TargetOfTarget
+	TukuiUnitFrames.Units.Pet = Pet
+	TukuiUnitFrames.Units.Focus = Focus
+	TukuiUnitFrames.Units.FocusTarget = FocusTarget
+	TukuiUnitFrames.Units.Arena = Arena
+	TukuiUnitFrames.Units.Boss = Boss
 	
-	if C["unitframes"].Raid then
-		local Raid = oUF:SpawnHeader(DuffedUIUnitFrames:GetRaidFramesAttributes())
+	if C.Party.Enable then
+		local Gap = C.Party.Portrait and 74 or 30
+		
+		local Party = oUF:SpawnHeader(TukuiUnitFrames:GetPartyFramesAttributes())
+		Party:SetParent(Panels.PetBattleHider)
+		Party:Point("TOPLEFT", UIParent, "TOPLEFT", Gap, -(T.ScreenHeight / 4))
+		
+		TukuiUnitFrames.Headers.Party = Party
+	end
+	
+	if C.Raid.Enable then
+		local Raid = oUF:SpawnHeader(TukuiUnitFrames:GetRaidFramesAttributes())
 		Raid:SetParent(Panels.PetBattleHider)
-		Raid:Point("TOPLEFT", UIParent, "TOPLEFT", 18, -(D.ScreenHeight / 9))
+		Raid:Point("TOPLEFT", UIParent, "TOPLEFT", 18, -(T.ScreenHeight / 9))
 
-		local Pet = oUF:SpawnHeader(DuffedUIUnitFrames:GetPetRaidFramesAttributes())
+		local Pet = oUF:SpawnHeader(TukuiUnitFrames:GetPetRaidFramesAttributes())
 		Pet:SetParent(Panels.PetBattleHider)
 		Pet:Point("TOPLEFT", Raid, "TOPRIGHT", 3, 0)
 		
-		DuffedUIUnitFrames.Headers.Raid = Raid
-		DuffedUIUnitFrames.Headers.RaidPet = Pet
+		TukuiUnitFrames.Headers.Raid = Raid
+		TukuiUnitFrames.Headers.RaidPet = Pet
 	end
 end
 
-DuffedUIUnitFrames:RegisterEvent("ADDON_LOADED")
-DuffedUIUnitFrames:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= "DuffedUI" then
+TukuiUnitFrames:RegisterEvent("ADDON_LOADED")
+TukuiUnitFrames:SetScript("OnEvent", function(self, event, addon)
+	if addon ~= "Tukui" then
 		return
 	end
 
-	oUF:RegisterStyle("DuffedUI", DuffedUIUnitFrames.Style)
+	oUF:RegisterStyle("Tukui", TukuiUnitFrames.Style)
 	self:DisableBlizzard()
 	self:CreateAnchor()
 	self:CreateUnits()
 end)
 
-D["UnitFrames"] = DuffedUIUnitFrames
+T["UnitFrames"] = TukuiUnitFrames

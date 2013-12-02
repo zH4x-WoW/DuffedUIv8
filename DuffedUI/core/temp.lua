@@ -1,5 +1,5 @@
 ﻿----------------------------------------------------
--- Temporary file to build DuffedUI from a clean UI! --
+-- Temporary file to build Tukui from a clean UI! --
 ----------------------------------------------------
 
 local function HideBlizz()
@@ -13,3 +13,5 @@ end
 local Init = CreateFrame("Frame")
 Init:RegisterEvent("PLAYER_ENTERING_WORLD")
 Init:SetScript("OnEvent", HideBlizz)
+
+-- Just a test of the new git

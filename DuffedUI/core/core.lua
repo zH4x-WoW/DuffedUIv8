@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 -- Hydra note: Since this file is going to be doing a lot of math/formatting, lets use locals for speed/cpu usage
 -- This means no calling functions as methods :P ("string"):format(...) or ("string"):gsub(...) should be format("string", ...) and gsub("string", ...) etc.
@@ -12,12 +12,12 @@ local floor = floor
 local gsub = gsub
 local ceil = ceil
 
-D.Print = function(...)
-	print("|cffC495DDDuffedUI|r:", ...)
+T.Print = function(...)
+	print("|cffC495DDTukui|r:", ...)
 end
 
 -- Want HEX color instead of RGB?
-D.RGBToHex = function(r, g, b)
+T.RGBToHex = function(r, g, b)
 	r = r <= 1 and r >= 0 and r or 0
 	g = g <= 1 and g >= 0 and g or 0
 	b = b <= 1 and b >= 0 and b or 0
@@ -26,7 +26,7 @@ D.RGBToHex = function(r, g, b)
 end
 
 -- Return short value of a number!
-D.ShortValue = function(v)
+T.ShortValue = function(v)
 	if (v >= 1e6) then
 		return gsub(format("%.1fm", v / 1e6), "%.?0+([km])$", "%1")
 	elseif (v >= 1e3 or v <= -1e3) then
@@ -37,13 +37,13 @@ D.ShortValue = function(v)
 end
 
 -- Add comma's to a number
-D.Comma = function(num)
+T.Comma = function(num)
 	local Left, Number, Right = match(num, "^([^%d]*%d)(%d*)(.-)$")
 	
 	return 	Left .. reverse(gsub(reverse(Number), "(%d%d%d)", "%1,")) .. Right
 end
 
-D.Round = function(number, decimals)
+T.Round = function(number, decimals)
 	if (not decimals) then
 		decimals = 0
 	end
@@ -52,7 +52,7 @@ D.Round = function(number, decimals)
 end
 
 -- Format seconds to min/hour/day
-D.FormatTime = function(s)
+T.FormatTime = function(s)
 	local Day, Hour, Minute = 86400, 3600, 60
 	
 	if (s >= Day) then
@@ -69,10 +69,10 @@ D.FormatTime = function(s)
 end
 
 -- Icon coordinates template
-D.IconCoord = {0.08, 0.92, 0.08, 0.92}
+T.IconCoord = {0.08, 0.92, 0.08, 0.92}
 
 -- Color Gradient
-D.ColorGradient = function(a, b, ...)
+T.ColorGradient = function(a, b, ...)
 	local Percent
 	
 	if(b == 0) then
@@ -100,7 +100,7 @@ end
 
 local WaitTable = {}
 local WaitFrame
-D.Delay = function(delay, func, ...)
+T.Delay = function(delay, func, ...)
 	if (type(delay) ~= "number" or type(func) ~= "function") then
 		return false
 	end

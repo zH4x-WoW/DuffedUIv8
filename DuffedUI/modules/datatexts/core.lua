@@ -1,28 +1,28 @@
-local D, C = select(2, ...):unpack()
+local T, C = select(2, ...):unpack()
 
 local pairs = pairs
 local unpack = unpack
 local CreateFrame = CreateFrame
-local DuffedUIDT = CreateFrame("Frame")
-local Panels = D["Panels"]
+local TukuiDT = CreateFrame("Frame")
+local Panels = T["Panels"]
 local DataTextLeft = Panels.DataTextLeft
 local DataTextRight = Panels.DataTextRight
 
 local MinimapDataTextOne
 local MinimapDataTextTwo
 
-DuffedUIDT.DefaultNumAnchors = 6
-DuffedUIDT.NumAnchors = DuffedUIDT.DefaultNumAnchors
-DuffedUIDT.Font = C["medias"].Font
-DuffedUIDT.Size = 12
-DuffedUIDT.Flags = nil
-DuffedUIDT.Texts = {}
-DuffedUIDT.Anchors = {}
-DuffedUIDT.Menu = {}
-DuffedUIDT.NameColor = D.RGBToHex(unpack(C["medias"].PrimaryDataTextColor))
-DuffedUIDT.ValueColor = D.RGBToHex(unpack(C["medias"].SecondaryDataTextColor))
+TukuiDT.DefaultNumAnchors = 6
+TukuiDT.NumAnchors = TukuiDT.DefaultNumAnchors
+TukuiDT.Font = C.Medias.Font
+TukuiDT.Size = 12
+TukuiDT.Flags = nil
+TukuiDT.Texts = {}
+TukuiDT.Anchors = {}
+TukuiDT.Menu = {}
+TukuiDT.NameColor = T.RGBToHex(unpack(C.Medias.PrimaryDataTextColor))
+TukuiDT.ValueColor = T.RGBToHex(unpack(C.Medias.SecondaryDataTextColor))
 
-function DuffedUIDT:AddToMenu(name, data)
+function TukuiDT:AddToMenu(name, data)
 	if self["Texts"][name] then
 		return
 	end
@@ -47,7 +47,7 @@ local SetData = function(self, object)
 	self.Data.Position = self.Num
 	self.Data:SetAllPoints(self.Data.Text)
 	
-	if self.Data.Position > DuffedUIDT.DefaultNumAnchors then
+	if self.Data.Position > TukuiDT.DefaultNumAnchors then
 		self.Data:SetParent(Panels.PetBattleHider)
 	end
 end
@@ -61,7 +61,7 @@ local RemoveData = function(self)
 	self.Data = nil
 end
 
-function DuffedUIDT:CreateAnchors()
+function TukuiDT:CreateAnchors()
 	MinimapDataTextOne = Panels.MinimapDataTextOne
 	MinimapDataTextTwo = Panels.MinimapDataTextTwo
 
@@ -106,7 +106,7 @@ local GetTooltipAnchor = function(self)
 	local From
 	local Anchor = "ANCHOR_TOP"
 	local X = 0
-	local Y = D.Scale(5)
+	local Y = T.Scale(5)
 		
 	if (Position >= 1 and Position <= 3) then
 		Anchor = "ANCHOR_TOPLEFT"
@@ -128,7 +128,7 @@ local GetTooltipAnchor = function(self)
 	return From, Anchor, X, Y
 end
 
-function DuffedUIDT:GetDataText(name)
+function TukuiDT:GetDataText(name)
 	return self["Texts"][name]
 end
 
@@ -142,7 +142,7 @@ local OnDisable = function(self)
 	self.Enabled = false
 end
 
-function DuffedUIDT:Register(name, enable, disable, update)
+function TukuiDT:Register(name, enable, disable, update)
 	local Data = CreateFrame("Frame", nil, UIParent)
 	Data:EnableMouse(true)
 	Data:SetFrameStrata("MEDIUM")
@@ -158,7 +158,7 @@ function DuffedUIDT:Register(name, enable, disable, update)
 	self:AddToMenu(name, Data)
 end
 
-function DuffedUIDT:ForceUpdate()
+function TukuiDT:ForceUpdate()
 	for _, data in pairs(self.Texts) do
 		if data.Enabled then
 			data:Update(1)
@@ -166,21 +166,21 @@ function DuffedUIDT:ForceUpdate()
 	end
 end
 
-function DuffedUIDT:ResetGold()
+function TukuiDT:ResetGold()
 	local Realm = GetRealmName()
 	local Name = UnitName("player")
 
-	DuffedUIData.Gold = {}
-	DuffedUIData.Gold[Realm] = {}
-	DuffedUIData.Gold[Realm][Name] = GetMoney()
+	TukuiData.Gold = {}
+	TukuiData.Gold[Realm] = {}
+	TukuiData.Gold[Realm][Name] = GetMoney()
 end
 
-function DuffedUIDT:Save()
-	if (not DuffedUIDataPerChar) then
-		DuffedUIDataPerChar = {}
+function TukuiDT:Save()
+	if (not TukuiDataPerChar) then
+		TukuiDataPerChar = {}
 	end
 	
-	local Data = DuffedUIDataPerChar
+	local Data = TukuiDataPerChar
 	
 	if (not Data.Texts) then
 		Data.Texts = {}
@@ -191,42 +191,45 @@ function DuffedUIDT:Save()
 			Data.Texts[name] = {data.Enabled, data.Position}
 		end
 	end
+	
+	Data.DTNameColor = TukuiDT.NameColor
+	Data.DTValueColor = TukuiDT.ValueColor
 end
 
-function DuffedUIDT:Reset()
+function TukuiDT:Reset()
 	for _, data in pairs(self.Texts) do
 		if data.Enabled then
 			data:Disable()
 		end
 	end
 	
-	if (DuffedUIDataPerChar and DuffedUIDataPerChar.Texts) then
-		DuffedUIDataPerChar.Texts = {}
+	if (TukuiDataPerChar and TukuiDataPerChar.Texts) then
+		TukuiDataPerChar.Texts = {}
 	end
 end
 
-function DuffedUIDT:Load()
+function TukuiDT:Load()
 	self:CreateAnchors()
 	
-	if (not DuffedUIDataPerChar) then
-		DuffedUIDataPerChar = {}
+	if (not TukuiDataPerChar) then
+		TukuiDataPerChar = {}
 	end
 
-	if (not DuffedUIDataPerChar.Texts) then
+	if (not TukuiDataPerChar.Texts) then
 		-- defaults, Err, Gonna have to localize these.
-		DuffedUIDataPerChar.Texts = {}
-		DuffedUIDataPerChar.Texts["Guild"] = {true, 1}
-		DuffedUIDataPerChar.Texts["Durability"] = {true, 2}
-		DuffedUIDataPerChar.Texts["Friends"] = {true, 3}
-		DuffedUIDataPerChar.Texts["FPS & MS"] = {true, 4}
-		DuffedUIDataPerChar.Texts["Memory"] = {true, 5}
-		DuffedUIDataPerChar.Texts["Gold"] = {true, 6}
-		DuffedUIDataPerChar.Texts["Power"] = {true, 7}
-		DuffedUIDataPerChar.Texts["Time"] = {true, 8}
+		TukuiDataPerChar.Texts = {}
+		TukuiDataPerChar.Texts["Guild"] = {true, 1}
+		TukuiDataPerChar.Texts["Durability"] = {true, 2}
+		TukuiDataPerChar.Texts["Friends"] = {true, 3}
+		TukuiDataPerChar.Texts["FPS & MS"] = {true, 4}
+		TukuiDataPerChar.Texts["Memory"] = {true, 5}
+		TukuiDataPerChar.Texts["Gold"] = {true, 6}
+		TukuiDataPerChar.Texts["Power"] = {true, 7}
+		TukuiDataPerChar.Texts["Time"] = {true, 8}
 	end
 
-	if (DuffedUIDataPerChar and DuffedUIDataPerChar.Texts) then
-		for name, info in pairs(DuffedUIDataPerChar.Texts) do
+	if (TukuiDataPerChar and TukuiDataPerChar.Texts) then
+		for name, info in pairs(TukuiDataPerChar.Texts) do
 			local Enabled, Num = unpack(info)
 
 			if (Enabled and (Num and Num > 0)) then
@@ -237,17 +240,17 @@ function DuffedUIDT:Load()
 					self.Anchors[Num]:SetData(Object)
 				else
 					T.Print("DataText '" .. name .. "' not found. Removing from cache.")
-					DuffedUIDataPerChar.Texts[name] = {false, 0}
+					TukuiDataPerChar.Texts[name] = {false, 0}
 				end
 			end
 		end
 	end
 end
 
-DuffedUIDT:RegisterEvent("ADDON_LOADED")
-DuffedUIDT:RegisterEvent("PLAYER_LOGOUT")
-DuffedUIDT:SetScript("OnEvent", function(self, event, addon)
-	if (addon and addon == "DuffedUI") then
+TukuiDT:RegisterEvent("ADDON_LOADED")
+TukuiDT:RegisterEvent("PLAYER_LOGOUT")
+TukuiDT:SetScript("OnEvent", function(self, event, addon)
+	if (addon and addon == "Tukui") then
 		self:UnregisterEvent(event)
 		self:Load()
 	else
@@ -255,4 +258,4 @@ DuffedUIDT:SetScript("OnEvent", function(self, event, addon)
 	end
 end)
 
-D["DataTexts"] = DuffedUIDT
+T["DataTexts"] = TukuiDT

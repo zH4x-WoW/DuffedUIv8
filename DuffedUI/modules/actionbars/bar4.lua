@@ -1,14 +1,14 @@
-local D, C, L = select(2, ...):unpack()
-if (not C["actionbars"].Enable) then return end
+local T, C, L = select(2, ...):unpack()
+if (not C.ActionBars.Enable) then return end
 
-local DuffedUIActionBars = D["ActionBars"]
+local TukuiActionBars = T["ActionBars"]
 local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
-local Size = C["actionbars"].NormalButtonSize
-local Spacing = C["actionbars"].ButtonSpacing
+local Size = C.ActionBars.NormalButtonSize
+local Spacing = C.ActionBars.ButtonSpacing
 local MultiBarLeft = MultiBarLeft
 
-function DuffedUIActionBars:CreateBar4()
-	local ActionBar4 = D.Panels.ActionBar4
+function TukuiActionBars:CreateBar4()
+	local ActionBar4 = T.Panels.ActionBar4
 	
 	MultiBarLeft:SetParent(ActionBar4)
 	

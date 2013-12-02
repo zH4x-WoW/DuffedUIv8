@@ -1,18 +1,18 @@
 ----------------------------------------------------------------
--- API of DuffedUI
+-- API of Tukui
 ----------------------------------------------------------------
 
-local D, C, L = select(2, ...):unpack()
-local Mult = 768/string.match(GetCVar("gxResolution"), "%d+x(%d+)")/C["general"].UIScale
+local T, C, L = select(2, ...):unpack()
+local Mult = 768/string.match(GetCVar("gxResolution"), "%d+x(%d+)")/C.General.UIScale
 local Scale = function(x) return Mult*math.floor(x/Mult+.5) end
-local InOut = C["general"].InOut
+local InOut = C.General.InOut
 local floor = math.floor
 local class = select(2, UnitClass("player"))
-local texture = C["medias"].Blank
-local noop = function() return end
+local texture = C.Medias.Blank
+local Noop = function() return end
 
-D.Scale = Scale
-D.Mult = Mult
+T.Scale = Scale
+T.Mult = Mult
 
 -- [[ API FUNCTIONS ]] --
 
@@ -65,19 +65,19 @@ local function SetTemplate(f, t, tex)
 	local balpha = 1
 	if t == "Transparent" then balpha = 0.8 end
 	
-	local borderr, borderg, borderb = unpack(C["medias"].BorderColor)
-	local backdropr, backdropg, backdropb = unpack(C["medias"].BackdropColor)
+	local borderr, borderg, borderb = unpack(C.Medias.BorderColor)
+	local backdropr, backdropg, backdropb = unpack(C.Medias.BackdropColor)
 	local backdropa = balpha
 	
 	if tex then 
-		texture = C["medias"].Normal 
+		texture = C.Medias.Normal 
 	else 
-		texture = C["medias"].Blank 
+		texture = C.Medias.Blank 
 	end
 		
 	f:SetBackdrop({
 	  bgFile = texture, 
-	  edgeFile = C["medias"].Blank, 
+	  edgeFile = C.Medias.Blank, 
 	  tile = false, tileSize = 0, edgeSize = Mult,
 	})
 	
@@ -192,7 +192,7 @@ local function CreateShadow(f, t)
 	shadow:Point("TOPRIGHT", 3, 3)
 	shadow:Point("BOTTOMRIGHT", 3, -3)
 	shadow:SetBackdrop( { 
-		edgeFile = C["medias"].Glow, edgeSize = Scale(3),
+		edgeFile = C.Medias.Glow, edgeSize = Scale(3),
 		insets = {left = Scale(5), right = Scale(5), top = Scale(5), bottom = Scale(5)},
 	})
 	shadow:SetBackdropColor(0, 0, 0, 0)
@@ -204,7 +204,7 @@ local function Kill(object)
 	if object.UnregisterAllEvents then
 		object:UnregisterAllEvents()
 	end
-	object.Show = noop
+	object.Show = Noop
 	object:Hide()
 end
 
@@ -269,7 +269,7 @@ end
 local function HighlightUnit(f, r, g, b)
 	if f.HighlightTarget then return end
 	
-	local glowBorder = {edgeFile = C["medias"].Blank, edgeSize = 1}
+	local glowBorder = {edgeFile = C.Medias.Blank, edgeSize = 1}
 	f.HighlightTarget = CreateFrame("Frame", nil, f)
 	f.HighlightTarget:SetOutside()
 	f.HighlightTarget:SetBackdrop(glowBorder)
@@ -326,8 +326,8 @@ local function SkinButton(Frame, Strip)
 	Frame:HookScript("OnLeave", function(self)
 		local Color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
 		
-		self:SetBackdropColor(C["medias"].BackdropColor[1], C["medias"].BackdropColor[2], C["medias"].BackdropColor[3])
-		self:SetBackdropBorderColor(C["medias"].BorderColor[1], C["medias"].BorderColor[2], C["medias"].BorderColor[3])	
+		self:SetBackdropColor(C.Medias.BackdropColor[1], C.Medias.BackdropColor[2], C.Medias.BackdropColor[3])
+		self:SetBackdropBorderColor(C.Medias.BorderColor[1], C.Medias.BorderColor[2], C.Medias.BorderColor[3])	
 	end)
 end
 
@@ -342,9 +342,10 @@ local function SkinCloseButton(Frame, Reposition)
 	Frame:SetDisabledTexture("")
 
 	Frame.Text = Frame:CreateFontString(nil, "OVERLAY")
-	Frame.Text:SetFont(C["medias"].PixelFont, 12, "OUTLINE")
+	Frame.Text:SetFont(C.Medias.Font, 12, "OUTLINE")
 	Frame.Text:SetPoint("CENTER", 0, 1)
-	Frame.Text:SetText("x")
+	Frame.Text:SetText("X")
+	Frame.Text:SetTextColor(.5, .5, .5)
 end
 
 local function SkinEditBox(Frame)
@@ -362,8 +363,93 @@ local function SkinEditBox(Frame)
 	end
 end
 
+local function SkinArrowButton(Button, Vertical)
+	Button:SetTemplate()
+	Button:Size(Button:GetWidth() - 7, Button:GetHeight() - 7)
+	
+	if Vertical then
+		Button:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.72, 0.65, 0.29, 0.65, 0.72)
+		Button:GetPushedTexture():SetTexCoord(0.3, 0.35, 0.3, 0.8, 0.65, 0.35, 0.65, 0.8)
+		Button:GetDisabledTexture():SetTexCoord(0.3, 0.29, 0.3, 0.75, 0.65, 0.29, 0.65, 0.75)	
+	else
+		Button:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.81, 0.65, 0.29, 0.65, 0.81)
+		
+		if Button:GetPushedTexture() then
+			Button:GetPushedTexture():SetTexCoord(0.3, 0.35, 0.3, 0.81, 0.65, 0.35, 0.65, 0.81)
+		end
+		
+		if Button:GetDisabledTexture() then
+			Button:GetDisabledTexture():SetTexCoord(0.3, 0.29, 0.3, 0.75, 0.65, 0.29, 0.65, 0.75)
+		end
+	end
+	
+	Button:GetNormalTexture():ClearAllPoints()
+	Button:GetNormalTexture():SetInside()
+
+	if Button:GetDisabledTexture() then
+		Button:GetDisabledTexture():SetAllPoints(Button:GetNormalTexture())
+	end
+	
+	if Button:GetPushedTexture() then
+		Button:GetPushedTexture():SetAllPoints(Button:GetNormalTexture())
+	end
+	
+	Button:GetHighlightTexture():SetTexture(1, 1, 1, 0.3)
+	Button:GetHighlightTexture():SetAllPoints(Button:GetNormalTexture())
+end
+
+local function SkinDropDown(Frame, Width)
+	local Button = _G[Frame:GetName().."Button"]
+	local Text = _G[Frame:GetName().."Text"]
+
+	Frame:StripTextures()
+	Frame:Width(Width or 155)
+	
+	Text:ClearAllPoints()
+	Text:Point("RIGHT", Button, "LEFT", -2, 0)
+	
+	Button:ClearAllPoints()
+	Button:Point("RIGHT", Frame, "RIGHT", -10, 3)
+	Button.SetPoint = Noop
+	
+	Button:SkinArrowButton(true)
+	
+	Frame:CreateBackdrop()
+	Frame.Backdrop:Point("TOPLEFT", 20, -2)
+	Frame.Backdrop:Point("BOTTOMRIGHT", Button, "BOTTOMRIGHT", 2, -2)
+end
+
+local function SkinCheckBox(Frame)
+	Frame:StripTextures()
+	Frame:CreateBackdrop()
+	Frame.Backdrop:SetInside(Frame, 4, 4)
+
+	if Frame.SetCheckedTexture then
+		Frame:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
+	end
+	
+	if Frame.SetDisabledCheckedTexture then
+		Frame:SetDisabledCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
+	end
+	
+	-- why does the disabled texture is always displayed as checked ?
+	Frame:HookScript("OnDisable", function(self)
+		if not self.SetDisabledTexture then return end
+		
+		if self:GetChecked() then
+			self:SetDisabledTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
+		else
+			self:SetDisabledTexture("")
+		end
+	end)
+	
+	Frame.SetNormalTexture = Noop
+	Frame.SetPushedTexture = Noop
+	Frame.SetHighlightTexture = Noop
+end
+
 ---------------------------------------------------
--- Merge DuffedUI API with WoW API
+-- Merge Tukui API with WoW API
 ---------------------------------------------------
 
 local function AddAPI(object)
@@ -387,7 +473,11 @@ local function AddAPI(object)
 	if not object.SkinEditBox then mt.SkinEditBox = SkinEditBox end
 	if not object.SkinButton then mt.SkinButton = SkinButton end
 	if not object.SkinCloseButton then mt.SkinCloseButton = SkinCloseButton end
+	if not object.SkinArrowButton then mt.SkinArrowButton = SkinArrowButton end
+	if not object.SkinDropDown then mt.SkinDropDown = SkinDropDown end
+	if not object.SkinCheckBox then mt.SkinCheckBox = SkinCheckBox end
 end
+
 
 local Handled = {["Frame"] = true}
 

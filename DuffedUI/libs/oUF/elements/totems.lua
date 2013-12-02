@@ -67,10 +67,6 @@ if(select(2, UnitClass'player') == 'SHAMAN') then
 	priorities = SHAMAN_TOTEM_PRIORITIES
 end
 
-local OnClick = function(self)
-	DestroyTotem(self:GetID())
-end
-
 local UpdateTooltip = function(self)
 	GameTooltip:SetTotem(self:GetID())
 end
@@ -131,16 +127,13 @@ local Enable = function(self)
 
 	if(totems) then
 		totems.__owner = self
+		totems.__map = priorities
 		totems.ForceUpdate = ForceUpdate
 
 		for i = 1, MAX_TOTEMS do
 			local totem = totems[i]
 
 			totem:SetID(priorities[i])
-
-			if(totem:HasScript'OnClick') then
-				totem:SetScript('OnClick', OnClick)
-			end
 
 			if(totem:IsMouseEnabled()) then
 				totem:SetScript('OnEnter', OnEnter)
@@ -152,12 +145,23 @@ local Enable = function(self)
 			end
 		end
 
+		hooksecurefunc("TotemButton_Update", function(btot)
+			if(btot.slot > 0) then
+				local tot = totems[priorities[btot.slot]]
+				btot:ClearAllPoints()
+				btot:SetParent(tot)
+				btot:SetAllPoints(tot)
+				btot:SetFrameStrata(tot:GetFrameStrata())
+				btot:SetFrameLevel(tot:GetFrameLevel() + 1)
+				btot:SetAlpha(0)
+			end
+		end)
+
 		self:RegisterEvent('PLAYER_TOTEM_UPDATE', Path, true)
 
 		TotemFrame.Show = TotemFrame.Hide
 		TotemFrame:Hide()
 
-		TotemFrame:UnregisterEvent"PLAYER_TOTEM_UPDATE"
 		TotemFrame:UnregisterEvent"PLAYER_ENTERING_WORLD"
 		TotemFrame:UnregisterEvent"UPDATE_SHAPESHIFT_FORM"
 		TotemFrame:UnregisterEvent"PLAYER_TALENT_UPDATE"

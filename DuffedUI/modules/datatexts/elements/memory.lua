@@ -1,6 +1,6 @@
-local D, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
-local DataText = D["DataTexts"]
+local DataText = T["DataTexts"]
 local format = format
 local int = 1
 local MemoryTable = {}
@@ -67,9 +67,8 @@ local Update = function(self, second)
 end
 
 local OnEnter = function(self)
-	if not InCombatLockdown() then
-		local Panel, Anchor, xOff, yOff = self:GetTooltipAnchor()
-		GameTooltip:SetOwner(Panel, Anchor, xOff, yOff)
+	if (not InCombatLockdown()) then
+		GameTooltip:SetOwner(self:GetTooltipAnchor())
 		GameTooltip:ClearLines()
 
 		local Bandwidth = GetAvailableBandwidth()
