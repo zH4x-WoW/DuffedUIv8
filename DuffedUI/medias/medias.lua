@@ -16,6 +16,7 @@ C["medias"] = {
 	["Blank"] = [[Interface\AddOns\DuffedUI\medias\textures\blank]],
 	["HoverButton"] = [[Interface\AddOns\DuffedUI\medias\textures\button_hover]],
 	["Logo"] = [[Interface\AddOns\DuffedUI\medias\textures\logo]],
+	["Duffed"] =  [[Interface\AddOns\DuffedUI\medias\textures\duffed]],
 	
 	-- colors
 	["BorderColor"] = (not C["general"].InOut and { 0, 0, 0 }) or C["general"].BorderColor or { .5, .5, .5 },
