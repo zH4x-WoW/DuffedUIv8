@@ -1,4 +1,4 @@
-local T, C, L = select(2, ...):unpack()
+local D, C, L = select(2, ...):unpack()
 
 if (not C.Chat.Enable) then
 	return

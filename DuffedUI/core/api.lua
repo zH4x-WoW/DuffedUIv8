@@ -2,7 +2,7 @@
 -- API of DuffedUI
 ----------------------------------------------------------------
 
-local T, C, L = select(2, ...):unpack()
+local D, C, L = select(2, ...):unpack()
 local Mult = 768/string.match(GetCVar("gxResolution"), "%d+x(%d+)")/C.General.UIScale
 local Scale = function(x) return Mult*math.floor(x/Mult+.5) end
 local InOut = C.General.InOut

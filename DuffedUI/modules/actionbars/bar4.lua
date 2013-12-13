@@ -1,4 +1,4 @@
-local T, C, L = select(2, ...):unpack()
+local D, C, L = select(2, ...):unpack()
 if (not C.ActionBars.Enable) then return end
 
 local DuffedUIActionBars = T["ActionBars"]

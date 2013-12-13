@@ -1,4 +1,4 @@
-local T, C, L = select(2, ...):unpack()
+local D, C, L = select(2, ...):unpack()
 
 --[[
 	TODO: keybinds, disable blizzard, Bar 1 to 5, pet, shift, buttons, skinning, range, others, cooldown, extra

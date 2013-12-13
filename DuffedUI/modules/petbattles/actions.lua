@@ -1,4 +1,4 @@
-local T, C, L = select(2, ...):unpack()
+local D, C, L = select(2, ...):unpack()
 
 local Battle = T["PetBattles"]
 local Bottom = PetBattleFrame.BottomFrame

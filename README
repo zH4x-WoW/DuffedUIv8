@@ -1,5 +1,7 @@
 => DuffedUI v8 <=
 
-13.12.2013 => 	Added DuffedUI-Logo and avatar
-				Replaced Tukui with DuffedUI to match the entire UI
-				Starting to build DuffedUI v8 based on Tukui T16
+13.12.2013 => 	
+	Changed "local T, C, L = select(2, ...):unpack()" to "local D, C, L = select(2, ...):unpack()"
+	Added DuffedUI-Logo and avatar
+	Replaced Tukui with DuffedUI to match the entire UI
+	Starting to build DuffedUI v8 based on Tukui T16

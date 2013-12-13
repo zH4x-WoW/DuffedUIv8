@@ -1,4 +1,4 @@
-local T, C, L = select(2, ...):unpack()
+local D, C, L = select(2, ...):unpack()
 local Quests = CreateFrame("Frame")
 
 Quests:RegisterEvent("PLAYER_ENTERING_WORLD")
