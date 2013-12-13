@@ -13,7 +13,7 @@ local gsub = gsub
 local ceil = ceil
 
 T.Print = function(...)
-	print("|cffC495DDTukui|r:", ...)
+	print("|cffC495DDDuffedUI|r:", ...)
 end
 
 -- Want HEX color instead of RGB?

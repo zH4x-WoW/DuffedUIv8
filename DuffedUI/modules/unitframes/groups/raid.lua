@@ -1,15 +1,15 @@
 local T, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
 -- NOTE : Health.Value? Aggro? Symbols? HealComm? Raid Debuffs Plugin? Weakened Soul Bar?
 
-function TukuiUnitFrames:Raid()
+function DuffedUIUnitFrames:Raid()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self:SetBackdrop(TukuiUnitFrames.Backdrop)
+	self:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
 	
@@ -65,7 +65,7 @@ function TukuiUnitFrames:Raid()
 	local LFDRole = Health:CreateTexture(nil, "OVERLAY")
 	LFDRole:SetInside(Panel)
 	LFDRole:SetTexture(0, 0, 0, 0)
-	LFDRole.Override = TukuiUnitFrames.SetGridGroupRole
+	LFDRole.Override = DuffedUIUnitFrames.SetGridGroupRole
 	
 	local ResurrectIcon = Health:CreateTexture(nil, "OVERLAY")
 	ResurrectIcon:Size(16)
@@ -76,7 +76,7 @@ function TukuiUnitFrames:Raid()
 		outsideAlpha = 0.3,
 	}
 
-	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameShort]")
+	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameShort]")
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Power = Power

@@ -70,7 +70,7 @@ function Install:PrintStep(number)
 		self:Hide()
 		
 		if (number > self.MaxStepNumber) then
-			TukuiDataPerChar.InstallDone = true
+			DuffedUIDataPerChar.InstallDone = true
 			ReloadUI()
 		end
 		
@@ -208,17 +208,17 @@ end
 
 Install:RegisterEvent("ADDON_LOADED")
 Install:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "Tukui") then
+	if (addon ~= "DuffedUI") then
 		return
 	end
 
 	self:UnregisterAllEvents()
 	
-	if (not TukuiDataPerChar) then
-		TukuiDataPerChar = {}
+	if (not DuffedUIDataPerChar) then
+		DuffedUIDataPerChar = {}
 	end
 	
-	if (not TukuiDataPerChar.InstallDone) then
+	if (not DuffedUIDataPerChar.InstallDone) then
 		self:Launch()
 	end
 end)

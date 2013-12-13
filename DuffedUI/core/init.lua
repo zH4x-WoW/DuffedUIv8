@@ -1,5 +1,5 @@
 ----------------------------------------------------------------
--- Initiation of Tukui engine
+-- Initiation of DuffedUI engine
 ----------------------------------------------------------------
 
 -- [[ Build the engine ]] --
@@ -20,4 +20,4 @@ engine[1].MyClass = select(2, UnitClass("Player"))
 SLASH_RELOADUI1 = "/rl"
 SlashCmdList.RELOADUI = ReloadUI
 
-Tukui = engine
+DuffedUI = engine

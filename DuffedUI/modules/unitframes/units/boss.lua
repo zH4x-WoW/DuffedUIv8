@@ -1,12 +1,12 @@
 local T, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = T["UnitFrames"]
 
-function TukuiUnitFrames:Boss()
+function DuffedUIUnitFrames:Boss()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self:SetBackdrop(TukuiUnitFrames.Backdrop)
+	self:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
 	self:SetAttribute("type2", "focus")
@@ -21,7 +21,7 @@ function TukuiUnitFrames:Boss()
 	Health.Background:SetTexture(.1, .1, .1)
 	Health:FontString("Value", C.Medias.AltFont, 12, "OUTLINE")
 	Health.Value:Point("LEFT", 2, 0)
-	Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
+	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
 	Health.frequentUpdates = true
 	Health.colorClass = true
 	Health.colorDisconnected = true
@@ -42,7 +42,7 @@ function TukuiUnitFrames:Boss()
 	Power:SetStatusBarTexture(C.Medias.Normal)
 	Power:FontString("Value", C.Medias.AltFont, 12, "OUTLINE")
 	Power.Value:Point("RIGHT", -2, 0)
-	Power.PostUpdate = TukuiUnitFrames.PostUpdatePower
+	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
 	Power.frequentUpdates = true
 	Power.colorPower = true
 	if (C.UnitFrames.Smooth) then
@@ -66,8 +66,8 @@ function TukuiUnitFrames:Boss()
 	Buffs.spacing = 2
 	Buffs.initialAnchor = "RIGHT"
 	Buffs["growth-x"] = "LEFT"
-	Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+	Buffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
+	Buffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
 
 	local Debuffs = CreateFrame("Frame", nil, self)
 	Debuffs:SetHeight(26)
@@ -78,8 +78,8 @@ function TukuiUnitFrames:Boss()
 	Debuffs.spacing = 2
 	Debuffs.initialAnchor = "LEFT"
 	Debuffs["growth-x"] = "RIGHT"
-	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+	Debuffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
+	Debuffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
 	
 	if (C.UnitFrames.CastBar) then
 		local CastBar = CreateFrame("StatusBar", nil, self)
@@ -101,16 +101,16 @@ function TukuiUnitFrames:Boss()
 		CastBar.Time:Point("RIGHT", CastBar, "RIGHT", -4, 0)
 		CastBar.Time:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Time:SetJustifyH("RIGHT")
-		CastBar.CustomTimeText = TukuiUnitFrames.CustomCastTimeText
+		CastBar.CustomTimeText = DuffedUIUnitFrames.CustomCastTimeText
 
 		CastBar.Text = CastBar:CreateFontString(nil, "OVERLAY")
 		CastBar.Text:SetFont(C.Medias.AltFont, 12)
 		CastBar.Text:Point("LEFT", CastBar, "LEFT", 4, 0)
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 		
-		CastBar.CustomDelayText = TukuiUnitFrames.CustomCastDelayText
-		CastBar.PostCastStart = TukuiUnitFrames.CheckCast
-		CastBar.PostChannelStart = TukuiUnitFrames.CheckChannel
+		CastBar.CustomDelayText = DuffedUIUnitFrames.CustomCastDelayText
+		CastBar.PostCastStart = DuffedUIUnitFrames.CheckCast
+		CastBar.PostChannelStart = DuffedUIUnitFrames.CheckChannel
 								
 		CastBar.Button = CreateFrame("Frame", nil, CastBar)
 		CastBar.Button:Height(CastBar:GetHeight() + 4)
@@ -146,9 +146,9 @@ function TukuiUnitFrames:Boss()
 	})
 	AltPowerBar:SetBackdropColor(0, 0, 0)
 	AltPowerBar:SetBackdropBorderColor(0, 0, 0)
-	AltPowerBar.PostUpdate = TukuiUnitFrames.UpdateBossAltPower
+	AltPowerBar.PostUpdate = DuffedUIUnitFrames.UpdateBossAltPower
 
-	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong]")
+	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong]")
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Power = Power

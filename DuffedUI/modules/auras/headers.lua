@@ -4,16 +4,16 @@ if (not C.Auras.Enable) then
 	return
 end
 
-local TukuiAuras = T["Auras"]
-local TukuiPanels = T["Panels"]
-local Headers = TukuiAuras.Headers
-local Parent = TukuiPanels.PetBattleHider
+local DuffedUIAuras = T["Auras"]
+local DuffedUIPanels = T["Panels"]
+local Headers = DuffedUIAuras.Headers
+local Parent = DuffedUIPanels.PetBattleHider
 local Insert = table.insert
 local SecureHandlerSetFrameRef = SecureHandlerSetFrameRef
 
-TukuiAuras.Wraps = 12
+DuffedUIAuras.Wraps = 12
 
-function TukuiAuras:CreateHeaders()
+function DuffedUIAuras:CreateHeaders()
 	for i = 1, 3 do
 		local Header
 		
@@ -26,7 +26,7 @@ function TukuiAuras:CreateHeaders()
 			Header:SetClampedToScreen(true)
 			Header:SetMovable(true)
 			Header:SetAttribute("minHeight", 30)
-			Header:SetAttribute("wrapAfter", TukuiAuras.Wraps)
+			Header:SetAttribute("wrapAfter", DuffedUIAuras.Wraps)
 			Header:SetAttribute("wrapYOffset", -73.5)
 			Header:SetAttribute("xOffset", -35)
 			Header:CreateBackdrop()
@@ -34,9 +34,9 @@ function TukuiAuras:CreateHeaders()
 			Header.Backdrop:Hide()
 		end
 		
-		Header:SetAttribute("minWidth", TukuiAuras.Wraps * 35)
-		Header:SetAttribute("template", "TukuiAurasTemplate")
-		Header:SetAttribute("weaponTemplate", "TukuiAurasTemplate")
+		Header:SetAttribute("minWidth", DuffedUIAuras.Wraps * 35)
+		Header:SetAttribute("template", "DuffedUIAurasTemplate")
+		Header:SetAttribute("weaponTemplate", "DuffedUIAurasTemplate")
 		Header:SetSize(30, 30)
 
 		RegisterAttributeDriver(Header, "unit", "[vehicleui] vehicle; player")
@@ -48,7 +48,7 @@ function TukuiAuras:CreateHeaders()
 	local Debuffs = Headers[2]
 	local Consolidate = Headers[3]
 	local Filter = (C.Auras.Consolidate and 1) or 0
-	local Proxy = CreateFrame("Frame", nil, Buffs, "TukuiAurasProxyTemplate")
+	local Proxy = CreateFrame("Frame", nil, Buffs, "DuffedUIAurasProxyTemplate")
 	local DropDown = CreateFrame("BUTTON", nil, Proxy, "SecureHandlerClickTemplate")
 	
 	Buffs:SetPoint("TOPRIGHT", UIParent, -184, -28)

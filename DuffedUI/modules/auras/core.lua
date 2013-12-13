@@ -4,7 +4,7 @@ if (not C.Auras.Enable) then
 	return
 end
 
-local TukuiAuras = CreateFrame("Frame")
+local DuffedUIAuras = CreateFrame("Frame")
 local unpack = unpack
 local GetTime = GetTime
 local DebuffTypeColor = DebuffTypeColor
@@ -15,14 +15,14 @@ local ConsolidatedBuffs = ConsolidatedBuffs
 local InterfaceOptionsFrameCategoriesButton12 = InterfaceOptionsFrameCategoriesButton12
 local InterfaceOptionsFrameCategoriesButton12 = InterfaceOptionsFrameCategoriesButton12
 
-TukuiAuras.Headers = {}
-TukuiAuras.Filter = C.Auras.Consolidate
-TukuiAuras.Flash = C.Auras.Flash
-TukuiAuras.FlashTimer = 30
-TukuiAuras.ClassicTimer = C.Auras.ClassicTimer
-TukuiAuras.ProxyIcon = "Interface\\Icons\\misc_arrowdown"
+DuffedUIAuras.Headers = {}
+DuffedUIAuras.Filter = C.Auras.Consolidate
+DuffedUIAuras.Flash = C.Auras.Flash
+DuffedUIAuras.FlashTimer = 30
+DuffedUIAuras.ClassicTimer = C.Auras.ClassicTimer
+DuffedUIAuras.ProxyIcon = "Interface\\Icons\\misc_arrowdown"
 
-function TukuiAuras:DisableBlizzardAuras()
+function DuffedUIAuras:DisableBlizzardAuras()
 	BuffFrame:Kill()
 	TemporaryEnchantFrame:Kill()
 	ConsolidatedBuffs:Kill()
@@ -30,8 +30,8 @@ function TukuiAuras:DisableBlizzardAuras()
 	InterfaceOptionsFrameCategoriesButton12:SetAlpha(0)
 end
 
-function TukuiAuras:StartOrStopFlash(timeleft)
-	if(timeleft < TukuiAuras.FlashTimer) then
+function DuffedUIAuras:StartOrStopFlash(timeleft)
+	if(timeleft < DuffedUIAuras.FlashTimer) then
 		if(not self:IsPlaying()) then
 			self:Play()
 		end
@@ -40,7 +40,7 @@ function TukuiAuras:StartOrStopFlash(timeleft)
 	end
 end
 
-function TukuiAuras:OnUpdate(elapsed)
+function DuffedUIAuras:OnUpdate(elapsed)
 	local TimeLeft
 
 	if(self.Enchant) then
@@ -70,8 +70,8 @@ function TukuiAuras:OnUpdate(elapsed)
 		self.Bar:SetStatusBarColor(r, g, b)
 		
 		if(TimeLeft < 60.5) then
-			if TukuiAuras.Flash then
-				TukuiAuras.StartOrStopFlash(self.Animation, TimeLeft)
+			if DuffedUIAuras.Flash then
+				DuffedUIAuras.StartOrStopFlash(self.Animation, TimeLeft)
 			end
 			
 			if(TimeLeft < 5) then
@@ -91,15 +91,15 @@ function TukuiAuras:OnUpdate(elapsed)
 	end
 end
 
-function TukuiAuras:UpdateAura(index)
+function DuffedUIAuras:UpdateAura(index)
 	local Name, Rank, Texture, Count, DType, Duration, ExpirationTime, Caster, IsStealable, ShouldConsolidate, SpellID, CanApplyAura, IsBossDebuff = UnitAura(self:GetParent():GetAttribute("unit"), index, self.Filter)
 	
 	if (Name) then
-		if (not TukuiAuras.Filter) then
+		if (not DuffedUIAuras.Filter) then
 			ShouldConsolidate = false
 		end
 		
-		if (ShouldConsolidate or TukuiAuras.ClassicTimer) then
+		if (ShouldConsolidate or DuffedUIAuras.ClassicTimer) then
 			self.Holder:Hide()
 		else
 			self.Duration:Hide()
@@ -109,24 +109,24 @@ function TukuiAuras:UpdateAura(index)
 			local TimeLeft = ExpirationTime - GetTime()
 			if (not self.TimeLeft) then
 				self.TimeLeft = TimeLeft
-				self:SetScript("OnUpdate", TukuiAuras.OnUpdate)
+				self:SetScript("OnUpdate", DuffedUIAuras.OnUpdate)
 			else
 				self.TimeLeft = TimeLeft
 			end
 			
 			self.Dur = Duration
 
-			if TukuiAuras.Flash then
-				TukuiAuras.StartOrStopFlash(self.Animation, TimeLeft)
+			if DuffedUIAuras.Flash then
+				DuffedUIAuras.StartOrStopFlash(self.Animation, TimeLeft)
 			end
 			
 			self.Bar:SetMinMaxValues(0, Duration)
 			
-			if not TukuiAuras.ClassicTimer then
+			if not DuffedUIAuras.ClassicTimer then
 				self.Holder:Show()
 			end
 		else
-			if TukuiAuras.Flash then
+			if DuffedUIAuras.Flash then
 				self.Animation:Stop()
 			end
 			
@@ -139,7 +139,7 @@ function TukuiAuras:UpdateAura(index)
 			self.Bar:SetValue(max)
 			self.Bar:SetStatusBarColor(0, 0.8, 0)
 			
-			if not TukuiAuras.ClassicTimer then
+			if not DuffedUIAuras.ClassicTimer then
 				self.Holder:Hide()
 			end
 		end
@@ -160,11 +160,11 @@ function TukuiAuras:UpdateAura(index)
 	end
 end
 
-function TukuiAuras:UpdateTempEnchant(slot)
+function DuffedUIAuras:UpdateTempEnchant(slot)
 	local Enchant = (slot == 16 and 2) or 5
 	local Expiration = select(Enchant, GetWeaponEnchantInfo())
 	
-	if (TukuiAuras.ClassicTimer) then
+	if (DuffedUIAuras.ClassicTimer) then
 		self.Holder:Hide()
 	else
 		self.Duration:Hide()
@@ -173,7 +173,7 @@ function TukuiAuras:UpdateTempEnchant(slot)
 	if (Expiration) then
 		self.Dur = 3600
 		self.Enchant = Enchant
-		self:SetScript("OnUpdate", TukuiAuras.OnUpdate)
+		self:SetScript("OnUpdate", DuffedUIAuras.OnUpdate)
 	else
 		self.Enchant = nil
 		self.TimeLeft = nil
@@ -183,17 +183,17 @@ function TukuiAuras:UpdateTempEnchant(slot)
 	self.Icon:SetTexture(GetInventoryItemTexture("player", slot))
 end
 
-function TukuiAuras:OnAttributeChanged(attribute, value)
+function DuffedUIAuras:OnAttributeChanged(attribute, value)
 	if (attribute == "index") then
-		return TukuiAuras.UpdateAura(self, value)
+		return DuffedUIAuras.UpdateAura(self, value)
 	elseif(attribute == "target-slot") then
 		self.Bar:SetMinMaxValues(0, 3600)
 		
-		return TukuiAuras.UpdateTempEnchant(self, value)
+		return DuffedUIAuras.UpdateTempEnchant(self, value)
 	end
 end
 
-function TukuiAuras:Skin()
+function DuffedUIAuras:Skin()
 	local Proxy = self.IsProxy
 	
 	local Icon = self:CreateTexture(nil, "BORDER")
@@ -219,7 +219,7 @@ function TukuiAuras:Skin()
 		Duration:SetFont(C.Medias.Font, 12, "OUTLINE")
 		Duration:SetPoint("BOTTOM", 0, -17)
 
-		if TukuiAuras.Flash then
+		if DuffedUIAuras.Flash then
 			local Animation = self:CreateAnimationGroup()
 			Animation:SetLooping("BOUNCE")
 
@@ -266,13 +266,13 @@ function TukuiAuras:Skin()
 		self.Holder = Holder
 		self.Filter = self:GetParent():GetAttribute("filter")
 		
-		self:SetScript("OnAttributeChanged", TukuiAuras.OnAttributeChanged)
+		self:SetScript("OnAttributeChanged", DuffedUIAuras.OnAttributeChanged)
 	else
 		local x = self:GetWidth()
 		local y = self:GetHeight()
 		
 		local Overlay = self:CreateTexture(nil, "OVERLAY")
-		Overlay:SetTexture(TukuiAuras.ProxyIcon)
+		Overlay:SetTexture(DuffedUIAuras.ProxyIcon)
 		Overlay:SetInside()
 		Overlay:SetTexCoord(unpack(T.IconCoord))
 		
@@ -284,12 +284,12 @@ function TukuiAuras:Skin()
 	self:SetTemplate("Default")
 end
 
-function TukuiAuras:OnEnterWorld()
-	for _, Header in next, TukuiAuras.Headers do
+function DuffedUIAuras:OnEnterWorld()
+	for _, Header in next, DuffedUIAuras.Headers do
 		local Child = Header:GetAttribute("child1")
 		local i = 1
 		while(Child) do
-			TukuiAuras.UpdateAura(Child, Child:GetID())
+			DuffedUIAuras.UpdateAura(Child, Child:GetID())
 
 			i = i + 1
 			Child = Header:GetAttribute("child" .. i)
@@ -297,8 +297,8 @@ function TukuiAuras:OnEnterWorld()
 	end
 end
 
-function TukuiAuras:LoadVariables() -- to be completed
-	local Headers = TukuiAuras.Headers
+function DuffedUIAuras:LoadVariables() -- to be completed
+	local Headers = DuffedUIAuras.Headers
 	local Buffs = Headers[1]
 	local Debuffs = Headers[2]
 	local Position = Buffs:GetPoint()
@@ -311,10 +311,10 @@ function TukuiAuras:LoadVariables() -- to be completed
 	end
 end
 
-TukuiAuras:RegisterEvent("PLAYER_ENTERING_WORLD")
---TukuiAuras:RegisterEvent("VARIABLES_LOADED")
-TukuiAuras:RegisterEvent("ADDON_LOADED")
-TukuiAuras:SetScript("OnEvent", function(self, event, ...)
+DuffedUIAuras:RegisterEvent("PLAYER_ENTERING_WORLD")
+--DuffedUIAuras:RegisterEvent("VARIABLES_LOADED")
+DuffedUIAuras:RegisterEvent("ADDON_LOADED")
+DuffedUIAuras:SetScript("OnEvent", function(self, event, ...)
 	if (event == "PLAYER_ENTERING_WORLD") then
 		self.OnEnterWorld()
 	elseif (event == "VARIABLES_LOADED") then
@@ -322,7 +322,7 @@ TukuiAuras:SetScript("OnEvent", function(self, event, ...)
 	else
 		local addon = ...
 
-		if (addon ~= "Tukui") then
+		if (addon ~= "DuffedUI") then
 			return
 		end
 		
@@ -331,4 +331,4 @@ TukuiAuras:SetScript("OnEvent", function(self, event, ...)
 	end
 end)
 
-T["Auras"] = TukuiAuras
+T["Auras"] = DuffedUIAuras

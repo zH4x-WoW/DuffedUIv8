@@ -1,5 +1,5 @@
 ﻿----------------------------------------------------
--- Temporary file to build Tukui from a clean UI! --
+-- Temporary file to build DuffedUI from a clean UI! --
 ----------------------------------------------------
 
 local function HideBlizz()

@@ -4,7 +4,7 @@ local PetBattleFrame = PetBattleFrame
 
 Battle:RegisterEvent("ADDON_LOADED")
 Battle:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= "Tukui" then
+	if addon ~= "DuffedUI" then
 		return
 	end
 	

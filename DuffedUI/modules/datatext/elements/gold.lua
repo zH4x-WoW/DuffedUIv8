@@ -50,7 +50,7 @@ local OnEnter = function(self)
 		local TotalGold = 0				
 		GameTooltip:AddLine(L.DataText.Character)			
 
-		for key, value in pairs(TukuiData.Gold[MyRealm]) do
+		for key, value in pairs(DuffedUIData.Gold[MyRealm]) do
 			GameTooltip:AddDoubleLine(key, FormatTooltipMoney(value), 1, 1, 1, 1, 1, 1)
 			TotalGold = TotalGold + value
 		end
@@ -92,12 +92,12 @@ local Update = function( self, event, ... )
 
 	local NewMoney = GetMoney()
 
-	TukuiData = TukuiData or { }
-	TukuiData["Gold"] = TukuiData["Gold"] or {}
-	TukuiData["Gold"][MyRealm] = TukuiData["Gold"][MyRealm] or {}
-	TukuiData["Gold"][MyRealm][MyName] = TukuiData["Gold"][MyRealm][MyName] or NewMoney
+	DuffedUIData = DuffedUIData or { }
+	DuffedUIData["Gold"] = DuffedUIData["Gold"] or {}
+	DuffedUIData["Gold"][MyRealm] = DuffedUIData["Gold"][MyRealm] or {}
+	DuffedUIData["Gold"][MyRealm][MyName] = DuffedUIData["Gold"][MyRealm][MyName] or NewMoney
 
-	local OldMoney = TukuiData['Gold'][MyRealm][MyName] or NewMoney
+	local OldMoney = DuffedUIData['Gold'][MyRealm][MyName] or NewMoney
 
 	local Change = NewMoney-OldMoney
 	if (OldMoney > NewMoney) then
@@ -108,7 +108,7 @@ local Update = function( self, event, ... )
 
 	self.Text:SetText(FormatMoney(NewMoney))
 
-	TukuiData["Gold"][MyRealm][MyName] = NewMoney
+	DuffedUIData["Gold"][MyRealm][MyName] = NewMoney
 end
 
 local OnMouseDown = function(self)

@@ -1,9 +1,9 @@
 local T, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function TukuiUnitFrames:AddMonkFeatures()
+function DuffedUIUnitFrames:AddMonkFeatures()
 	local TotemBar = self.Totems
 	local Shadow = self.Shadow
 
@@ -24,18 +24,18 @@ function TukuiUnitFrames:AddMonkFeatures()
 	end
 
 	TotemBar:SetScript("OnShow", function(self) 
-		TukuiUnitFrames.UpdateShadow(self, "OnShow", -4, 22)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 22)
 	end)
 
 	TotemBar:SetScript("OnHide", function(self)
-		TukuiUnitFrames.UpdateShadow(self, "OnHide", -4, 12)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 12)
 	end)
 
 	-- Harmony Bar
 	local Harmony = CreateFrame("Frame", nil, self)
 	Harmony:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	Harmony:Size(250, 8)
-	Harmony:SetBackdrop(TukuiUnitFrames.Backdrop)
+	Harmony:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	Harmony:SetBackdropColor(0, 0, 0)
 	Harmony:SetBackdropBorderColor(0, 0, 0)	
 

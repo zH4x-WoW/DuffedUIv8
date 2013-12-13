@@ -1,9 +1,9 @@
 local T, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function TukuiUnitFrames:AddDruidFeatures()
+function DuffedUIUnitFrames:AddDruidFeatures()
 	local TotemBar = self.Totems
 
 	-- Druid Mana
@@ -13,7 +13,7 @@ function TukuiUnitFrames:AddDruidFeatures()
 	DruidMana:SetStatusBarTexture(C.Medias.Normal)
 	DruidMana:SetStatusBarColor(0.30, 0.52, 0.90)
 
-	DruidMana:SetBackdrop(TukuiUnitFrames.Backdrop)
+	DruidMana:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	DruidMana:SetBackdropColor(0, 0, 0)
 	DruidMana:SetBackdropBorderColor(0, 0, 0)
 

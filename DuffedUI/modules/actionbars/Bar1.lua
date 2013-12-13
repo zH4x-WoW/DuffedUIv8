@@ -2,7 +2,7 @@ local T, C, L = select(2, ...):unpack()
 if (not C.ActionBars.Enable) then return end
 
 local _G = _G
-local TukuiActionBars = T["ActionBars"]
+local DuffedUIActionBars = T["ActionBars"]
 local Panels = T["Panels"]
 local Num = NUM_ACTIONBAR_BUTTONS
 local MainMenuBar_OnEvent = MainMenuBar_OnEvent
@@ -10,7 +10,7 @@ local Size = C.ActionBars.NormalButtonSize
 local PetSize = C.ActionBars.PetButtonSize
 local Spacing = C.ActionBars.ButtonSpacing
 
-function TukuiActionBars:CreateBar1()
+function DuffedUIActionBars:CreateBar1()
 	local ActionBar1 = Panels.ActionBar1
 	local Warrior, Rogue, Warlock = "", "", ""
 

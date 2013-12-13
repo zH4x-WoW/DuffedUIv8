@@ -1,9 +1,9 @@
 local T, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function TukuiUnitFrames:AddPriestFeatures()
+function DuffedUIUnitFrames:AddPriestFeatures()
 	local TotemBar = self.Totems
 	local SOBar = CreateFrame("Frame", nil, self)
 	local Shadow = self.Shadow
@@ -20,7 +20,7 @@ function TukuiUnitFrames:AddPriestFeatures()
 	
 	SOBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	SOBar:Size(250, 8)
-	SOBar:SetBackdrop(TukuiUnitFrames.Backdrop)
+	SOBar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	SOBar:SetBackdropColor(0, 0, 0)
 	SOBar:SetBackdropBorderColor(0, 0, 0)
 
@@ -40,11 +40,11 @@ function TukuiUnitFrames:AddPriestFeatures()
 	
 	-- Shadow Effect Updates
 	SOBar:SetScript("OnShow", function(self) 
-		TukuiUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
 	end)
 
 	SOBar:SetScript("OnHide", function(self)
-		TukuiUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
 	end)
 	
 	-- Register
@@ -56,7 +56,7 @@ function TukuiUnitFrames:AddPriestFeatures()
 		WSBar:SetAllPoints(self.Power)
 		WSBar:SetStatusBarTexture(C.Medias.Normal)
 		WSBar:GetStatusBarTexture():SetHorizTile(false)
-		WSBar:SetBackdrop(TukuiUnitFrames.Backdrop)
+		WSBar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 		WSBar:SetBackdropColor(unpack(C.Medias.BackdropColor))
 		WSBar:SetStatusBarColor(0.75, 0.04, 0.04)
 		

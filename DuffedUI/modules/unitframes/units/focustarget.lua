@@ -1,12 +1,12 @@
 local T, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = T["UnitFrames"]
 
-function TukuiUnitFrames:FocusTarget()
+function DuffedUIUnitFrames:FocusTarget()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self:SetBackdrop(TukuiUnitFrames.Backdrop)
+	self:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
 
@@ -29,7 +29,7 @@ function TukuiUnitFrames:FocusTarget()
 	Health.colorClass = true
 	Health.colorReaction = true	
 
-	Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
+	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
 
 	if (C.UnitFrames.Smooth) then
 		Health.Smooth = true
@@ -53,7 +53,7 @@ function TukuiUnitFrames:FocusTarget()
 	Power.frequentUpdates = true
 	Power.colorDisconnected = true
 
-	Power.PostUpdate = TukuiUnitFrames.PostUpdatePower
+	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
 
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:Point("CENTER", Health, "CENTER", 0, 0)
@@ -61,7 +61,7 @@ function TukuiUnitFrames:FocusTarget()
 	Name:SetFont(C.Medias.AltFont, 12, "OUTLINE")
 	Name:SetShadowColor(0, 0, 0)
 	Name:SetShadowOffset(T.Mult, -T.Mult)
-	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong]")
+	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong]")
 
 	if (C.UnitFrames.CastBar) then
 		local CastBar = CreateFrame("StatusBar", nil, self)
@@ -99,10 +99,10 @@ function TukuiUnitFrames:FocusTarget()
 		CastBar.Icon:SetInside()
 		CastBar.Icon:SetTexCoord(unpack(T.IconCoord))
 
-		CastBar.CustomTimeText = TukuiUnitFrames.CustomCastTimeText
-		CastBar.CustomDelayText = TukuiUnitFrames.CustomCastDelayText
-		CastBar.PostCastStart = TukuiUnitFrames.CheckCast
-		CastBar.PostChannelStart = TukuiUnitFrames.CheckChannel
+		CastBar.CustomTimeText = DuffedUIUnitFrames.CustomCastTimeText
+		CastBar.CustomDelayText = DuffedUIUnitFrames.CustomCastDelayText
+		CastBar.PostCastStart = DuffedUIUnitFrames.CheckCast
+		CastBar.PostChannelStart = DuffedUIUnitFrames.CheckChannel
 
 		self.Castbar = CastBar
 		self.Castbar.Icon = CastBar.Icon

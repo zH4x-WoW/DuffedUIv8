@@ -18,7 +18,7 @@ local TOK = 856
 local SSM = 860
 
 local BGFrame = CreateFrame("Frame", nil, UIParent)
-BGFrame:SetAllPoints(TukuiDataTextLeft)
+BGFrame:SetAllPoints(DuffedUIDataTextLeft)
 BGFrame:SetTemplate()
 BGFrame:SetFrameLevel(2)
 

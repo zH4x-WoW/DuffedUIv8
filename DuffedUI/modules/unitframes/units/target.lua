@@ -1,12 +1,12 @@
 local T, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = T["UnitFrames"]
 
-function TukuiUnitFrames:Target()
+function DuffedUIUnitFrames:Target()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self:SetBackdrop(TukuiUnitFrames.Backdrop)
+	self:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
 
@@ -37,7 +37,7 @@ function TukuiUnitFrames:Target()
 	Health.colorClass = true
 	Health.colorReaction = true	
 
-	Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
+	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
 
 	if (C.UnitFrames.Smooth) then
 		Health.Smooth = true
@@ -61,7 +61,7 @@ function TukuiUnitFrames:Target()
 	Power.frequentUpdates = true
 	Power.colorDisconnected = true
 
-	Power.PostUpdate = TukuiUnitFrames.PostUpdatePower
+	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
 
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:Point("LEFT", Panel, "LEFT", 4, 0)
@@ -91,23 +91,23 @@ function TukuiUnitFrames:Target()
 
 	Buffs.spacing = 2
 	Buffs.initialAnchor = "TOPLEFT"
-	Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
-	Buffs.PostUpdate = TukuiUnitFrames.UpdateTargetDebuffsHeader
+	Buffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
+	Buffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
+	Buffs.PostUpdate = DuffedUIUnitFrames.UpdateTargetDebuffsHeader
 
 	Debuffs.spacing = 2
 	Debuffs.initialAnchor = "TOPRIGHT"
 	Debuffs["growth-y"] = "UP"
 	Debuffs["growth-x"] = "LEFT"
-	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+	Debuffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
+	Debuffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
 	Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
 	
 	local ComboPoints = CreateFrame("Frame", nil, self)
 	ComboPoints:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	ComboPoints:Width(250)
 	ComboPoints:Height(8)
-	ComboPoints:SetBackdrop(TukuiUnitFrames.Backdrop)
+	ComboPoints:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	ComboPoints:SetBackdropColor(0, 0, 0)
 	ComboPoints:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
 
@@ -126,19 +126,19 @@ function TukuiUnitFrames:Target()
 	end
 	
 	ComboPoints:SetScript("OnShow", function(self) 
-		TukuiUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
-		TukuiUnitFrames.UpdateAurasHeaderPosition(self, "OnShow", 0, 14)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
+		DuffedUIUnitFrames.UpdateAurasHeaderPosition(self, "OnShow", 0, 14)
 	end)
 
 	ComboPoints:SetScript("OnHide", function(self)
-		TukuiUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
-		TukuiUnitFrames.UpdateAurasHeaderPosition(self, "OnHide", 0, 4)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
+		DuffedUIUnitFrames.UpdateAurasHeaderPosition(self, "OnHide", 0, 4)
 	end)
 
 	self.Buffs = Buffs
 	self.Debuffs = Debuffs
 
-	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong] [Tukui:DiffColor][level] [shortclassification]")
+	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong] [DuffedUI:DiffColor][level] [shortclassification]")
 	self.Name = Name
 	self.Panel = Panel
 	self.Health = Health

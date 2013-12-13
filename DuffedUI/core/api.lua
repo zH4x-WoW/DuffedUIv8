@@ -1,5 +1,5 @@
 ----------------------------------------------------------------
--- API of Tukui
+-- API of DuffedUI
 ----------------------------------------------------------------
 
 local T, C, L = select(2, ...):unpack()
@@ -449,7 +449,7 @@ local function SkinCheckBox(Frame)
 end
 
 ---------------------------------------------------
--- Merge Tukui API with WoW API
+-- Merge DuffedUI API with WoW API
 ---------------------------------------------------
 
 local function AddAPI(object)

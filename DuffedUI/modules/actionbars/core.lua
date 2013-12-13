@@ -4,7 +4,7 @@ local T, C, L = select(2, ...):unpack()
 	TODO: keybinds, disable blizzard, Bar 1 to 5, pet, shift, buttons, skinning, range, others, cooldown, extra
 --]]
 
-local TukuiActionBars = CreateFrame("Frame")
+local DuffedUIActionBars = CreateFrame("Frame")
 local _G = _G
 local format = format
 local Noop = function() end
@@ -27,7 +27,7 @@ local Frames = {
 	ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight,
 }
 
-function TukuiActionBars:DisableBlizzard()
+function DuffedUIActionBars:DisableBlizzard()
 	SetCVar("alwaysShowActionBars", 1)
 
 	for _, frame in pairs(Frames) do
@@ -60,7 +60,7 @@ function TukuiActionBars:DisableBlizzard()
 	end
 end
 
-function TukuiActionBars:ShowGrid()
+function DuffedUIActionBars:ShowGrid()
 	for i = 1, NUM_ACTIONBAR_BUTTONS do
 		local Button
 
@@ -96,7 +96,7 @@ function TukuiActionBars:ShowGrid()
 	end
 end
 
-function TukuiActionBars:AddPanels()
+function DuffedUIActionBars:AddPanels()
 	local A1 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A1:SetWidth((Size * 12) + (Spacing * 13))
 	A1:SetHeight((Size * 1) + (Spacing * 2))
@@ -164,7 +164,7 @@ function TukuiActionBars:AddPanels()
 	Panels.StanceBar = A7
 end
 
-function TukuiActionBars:UpdatePetBar(...)
+function DuffedUIActionBars:UpdatePetBar(...)
 	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
 		local ButtonName = "PetActionButton" .. i
 		local PetActionButton = _G[ButtonName]
@@ -229,7 +229,7 @@ function TukuiActionBars:UpdatePetBar(...)
 	end
 end
 
-function TukuiActionBars:UpdateStanceBar(...)
+function DuffedUIActionBars:UpdateStanceBar(...)
 	local NumForms = GetNumShapeshiftForms()
 	local Texture, Name, IsActive, IsCastable, Button, Icon, Cooldown, Start, Duration, Enable
 	
@@ -281,11 +281,11 @@ function TukuiActionBars:UpdateStanceBar(...)
 	end	
 end
 
-TukuiActionBars:RegisterEvent("PLAYER_ENTERING_WORLD")
-TukuiActionBars:RegisterEvent("ADDON_LOADED")
-TukuiActionBars:RegisterEvent("VARIABLES_LOADED")
-TukuiActionBars:SetScript("OnEvent", function(self, event, addon)
-	if (event == "ADDON_LOADED" and addon == "Tukui") then
+DuffedUIActionBars:RegisterEvent("PLAYER_ENTERING_WORLD")
+DuffedUIActionBars:RegisterEvent("ADDON_LOADED")
+DuffedUIActionBars:RegisterEvent("VARIABLES_LOADED")
+DuffedUIActionBars:SetScript("OnEvent", function(self, event, addon)
+	if (event == "ADDON_LOADED" and addon == "DuffedUI") then
 		self:DisableBlizzard()
 		self:AddPanels()
 		self:CreateBar1()
@@ -305,4 +305,4 @@ TukuiActionBars:SetScript("OnEvent", function(self, event, addon)
 	end
 end)
 
-T["ActionBars"] = TukuiActionBars
+T["ActionBars"] = DuffedUIActionBars

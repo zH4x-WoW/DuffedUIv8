@@ -46,7 +46,7 @@ end
 
 DropDown:RegisterEvent("ADDON_LOADED")
 DropDown:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= "Tukui" then
+	if addon ~= "DuffedUI" then
 		return
 	end
 	

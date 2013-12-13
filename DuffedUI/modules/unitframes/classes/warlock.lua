@@ -1,9 +1,9 @@
 local T, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function TukuiUnitFrames:AddWarlockFeatures()
+function DuffedUIUnitFrames:AddWarlockFeatures()
 	local Shadow = self.Shadow
 	local Bar = CreateFrame("Frame", nil, self)
 	
@@ -12,7 +12,7 @@ function TukuiUnitFrames:AddWarlockFeatures()
 	Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	Bar:SetWidth(250)
 	Bar:SetHeight(8)
-	Bar:SetBackdrop(TukuiUnitFrames.Backdrop)
+	Bar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	Bar:SetBackdropColor(0, 0, 0)
 	Bar:SetBackdropBorderColor(0, 0, 0)	
 	
@@ -33,11 +33,11 @@ function TukuiUnitFrames:AddWarlockFeatures()
 	end
 	
 	Bar:SetScript("OnShow", function(self) 
-		TukuiUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
 	end)
 
 	Bar:SetScript("OnHide", function(self)
-		TukuiUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
+		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
 	end)
 	
 	self.WarlockSpecBars = Bar		

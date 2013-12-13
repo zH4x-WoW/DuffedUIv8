@@ -1,13 +1,13 @@
 local T, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function TukuiUnitFrames:Player()
+function DuffedUIUnitFrames:Player()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self:SetBackdrop(TukuiUnitFrames.Backdrop)
+	self:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
 
@@ -38,7 +38,7 @@ function TukuiUnitFrames:Player()
 	Health.colorClass = true
 	Health.colorReaction = true	
 
-	Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
+	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
 
 	if (C.UnitFrames.Smooth) then
 		Health.Smooth = true
@@ -62,7 +62,7 @@ function TukuiUnitFrames:Player()
 	Power.frequentUpdates = true
 	Power.colorDisconnected = true
 
-	Power.PostUpdate = TukuiUnitFrames.PostUpdatePower
+	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
 
 	local Combat = Health:CreateTexture(nil, "OVERLAY")
 	Combat:Size(19, 19)
@@ -123,10 +123,10 @@ function TukuiUnitFrames:Player()
 			CastBar.SafeZone:SetVertexColor(0.69, 0.31, 0.31, 0.75)
 		end
 
-		CastBar.CustomTimeText = TukuiUnitFrames.CustomCastTimeText
-		CastBar.CustomDelayText = TukuiUnitFrames.CustomCastDelayText
-		CastBar.PostCastStart = TukuiUnitFrames.CheckCast
-		CastBar.PostChannelStart = TukuiUnitFrames.CheckChannel
+		CastBar.CustomTimeText = DuffedUIUnitFrames.CustomCastTimeText
+		CastBar.CustomDelayText = DuffedUIUnitFrames.CustomCastDelayText
+		CastBar.PostCastStart = DuffedUIUnitFrames.CheckCast
+		CastBar.PostChannelStart = DuffedUIUnitFrames.CheckChannel
 
 		self.Castbar = CastBar
 	end
@@ -195,19 +195,19 @@ function TukuiUnitFrames:Player()
 		Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 		Bar:Size(250, 8)
 
-		Bar:SetBackdrop(TukuiUnitFrames.Backdrop)
+		Bar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 		Bar:SetBackdropColor(0, 0, 0)
 		Bar:SetBackdropBorderColor(0, 0, 0)
 
 		Bar.activeTotems = 0
-		Bar.Override = TukuiUnitFrames.UpdateTotemOverride
+		Bar.Override = DuffedUIUnitFrames.UpdateTotemOverride
 
 		Bar:SetScript("OnShow", function(self) 
-			TukuiUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
+			DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
 		end)
 
 		Bar:SetScript("OnHide", function(self)
-			TukuiUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
+			DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
 		end)
 		
 		-- Totem Bar
@@ -225,7 +225,7 @@ function TukuiUnitFrames:Player()
 				Bar[i]:Point("LEFT", Bar[i-1], "RIGHT", 1, 0)
 			end
 
-			Bar[i]:SetBackdrop(TukuiUnitFrames.Backdrop)
+			Bar[i]:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 			Bar[i]:SetBackdropColor(0, 0, 0)
 			Bar[i]:SetMinMaxValues(0, 1)
 
@@ -238,9 +238,9 @@ function TukuiUnitFrames:Player()
 		self.Totems = Bar
 	end
 
-	self:RegisterEvent("PLAYER_ENTERING_WORLD", TukuiUnitFrames.Update) -- http://www.tukui.org/tickets/tukui/index.php?page=bug_show&bug_id=218
-	self:SetScript("OnEnter", TukuiUnitFrames.MouseOnPlayer)
-	self:SetScript("OnLeave", TukuiUnitFrames.MouseOnPlayer)
+	self:RegisterEvent("PLAYER_ENTERING_WORLD", DuffedUIUnitFrames.Update) -- http://www.tukui.org/tickets/tukui/index.php?page=bug_show&bug_id=218
+	self:SetScript("OnEnter", DuffedUIUnitFrames.MouseOnPlayer)
+	self:SetScript("OnLeave", DuffedUIUnitFrames.MouseOnPlayer)
 	
 	-- Register with oUF
 	self.Panel = Panel
@@ -255,26 +255,26 @@ function TukuiUnitFrames:Player()
 	
 	-- Classes
 	if (Class == "DEATHKNIGHT") then
-		TukuiUnitFrames.AddDeathKnightFeatures(self)
+		DuffedUIUnitFrames.AddDeathKnightFeatures(self)
 	elseif (Class == "DRUID") then
-		TukuiUnitFrames.AddDruidFeatures(self)
+		DuffedUIUnitFrames.AddDruidFeatures(self)
 	elseif (Class == "WARRIOR") then
-		TukuiUnitFrames.AddWarriorFeatures(self)
+		DuffedUIUnitFrames.AddWarriorFeatures(self)
 	elseif (Class == "MAGE") then
-		TukuiUnitFrames.AddMageFeatures(self)
+		DuffedUIUnitFrames.AddMageFeatures(self)
 	elseif (Class == "MONK") then
-		TukuiUnitFrames.AddMonkFeatures(self)
+		DuffedUIUnitFrames.AddMonkFeatures(self)
 	elseif (Class == "PALADIN") then
-		TukuiUnitFrames.AddPaladinFeatures(self)
+		DuffedUIUnitFrames.AddPaladinFeatures(self)
 	elseif (Class == "PRIEST") then
-		TukuiUnitFrames.AddPriestFeatures(self)
+		DuffedUIUnitFrames.AddPriestFeatures(self)
 	elseif (Class == "ROGUE") then
-		TukuiUnitFrames.AddRogueFeatures(self)
+		DuffedUIUnitFrames.AddRogueFeatures(self)
 	elseif (Class == "SHAMAN") then
-		TukuiUnitFrames.AddShamanFeatures(self)
+		DuffedUIUnitFrames.AddShamanFeatures(self)
 	elseif (Class == "WARLOCK") then
-		TukuiUnitFrames.AddWarlockFeatures(self)
+		DuffedUIUnitFrames.AddWarlockFeatures(self)
 	elseif (Class == "HUNTER") then
-		TukuiUnitFrames.AddHunterFeatures(self)
+		DuffedUIUnitFrames.AddHunterFeatures(self)
 	end
 end

@@ -2,20 +2,20 @@ local T, C, L = select(2, ...):unpack()
 
 local _G = _G
 local unpack = unpack
-local TukuiActionBars = T["ActionBars"]
+local DuffedUIActionBars = T["ActionBars"]
 local IsUsableAction = IsUsableAction
 local IsActionInRange = IsActionInRange
 local HasAction = HasAction
 
-function TukuiActionBars:RangeOnUpdate(elapsed)
+function DuffedUIActionBars:RangeOnUpdate(elapsed)
 	if not self.rangeTimer then
 		return
 	end
 	
-	TukuiActionBars.RangeUpdate(self)
+	DuffedUIActionBars.RangeUpdate(self)
 end
 
-function TukuiActionBars:RangeUpdateBackdrop(IsUsable, NotEnoughMana, OutOfRange)
+function DuffedUIActionBars:RangeUpdateBackdrop(IsUsable, NotEnoughMana, OutOfRange)
 	if not self.Backdrop then
 		return
 	end
@@ -34,7 +34,7 @@ function TukuiActionBars:RangeUpdateBackdrop(IsUsable, NotEnoughMana, OutOfRange
 	end
 end
 
-function TukuiActionBars:RangeUpdate()
+function DuffedUIActionBars:RangeUpdate()
 	local Name = self:GetName()
 	local Icon = _G[Name.."Icon"]
 	local Backdrop = self.Backdrop
@@ -56,16 +56,16 @@ function TukuiActionBars:RangeUpdate()
 		Icon:SetDesaturated(true)
 	end
 	
-	TukuiActionBars.RangeUpdateBackdrop(self, IsUsable, NotEnoughMana, OutOfRange)
+	DuffedUIActionBars.RangeUpdateBackdrop(self, IsUsable, NotEnoughMana, OutOfRange)
 end
 
 
-function TukuiActionBars:RangeUpdateWatchFrame(elapsed)
+function DuffedUIActionBars:RangeUpdateWatchFrame(elapsed)
 	-- to be completed
 end
 
 
-hooksecurefunc("ActionButton_OnUpdate", TukuiActionBars.RangeOnUpdate)
-hooksecurefunc("ActionButton_Update", TukuiActionBars.RangeUpdateBackdrop)
-hooksecurefunc("ActionButton_UpdateUsable", TukuiActionBars.RangeUpdate)
-hooksecurefunc("WatchFrameItem_OnUpdate", TukuiActionBars.RangeUpdateWatchFrame)
+hooksecurefunc("ActionButton_OnUpdate", DuffedUIActionBars.RangeOnUpdate)
+hooksecurefunc("ActionButton_Update", DuffedUIActionBars.RangeUpdateBackdrop)
+hooksecurefunc("ActionButton_UpdateUsable", DuffedUIActionBars.RangeUpdate)
+hooksecurefunc("WatchFrameItem_OnUpdate", DuffedUIActionBars.RangeUpdateWatchFrame)

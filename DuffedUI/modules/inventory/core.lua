@@ -3,7 +3,7 @@ local Inventory = CreateFrame("Frame")
 
 Inventory:RegisterEvent("ADDON_LOADED")
 Inventory:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "Tukui") then
+	if (addon ~= "DuffedUI") then
 		return
 	end
 	

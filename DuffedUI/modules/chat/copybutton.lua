@@ -2,11 +2,11 @@ local T, C, L = select(2, ...):unpack()
 
 -- Gonna rewrite this entirely, it's just temp to work from
 
-local TukuiChat = T["Chat"]
+local DuffedUIChat = T["Chat"]
 local Lines = {}
 local CopyFrame
 
-function TukuiChat:GetLines(...)
+function DuffedUIChat:GetLines(...)
 	local Count = 1
 	
 	for i = select("#", ...), 1, -1 do
@@ -21,7 +21,7 @@ function TukuiChat:GetLines(...)
 	return Count - 1
 end
 
-function TukuiChat:CopyText(chatframe)
+function DuffedUIChat:CopyText(chatframe)
 	local _, Size = chatframe:GetFont()
 	FCF_SetChatWindowFontSize(chatframe, chatframe, 0.01)
 	local LineCount = self:GetLines(chatframe:GetRegions())
@@ -49,10 +49,10 @@ local OnMouseUp = function(self)
 		return
 	end
 
-	TukuiChat:CopyText(self.ChatFrame)
+	DuffedUIChat:CopyText(self.ChatFrame)
 end
 
-function TukuiChat:CreateCopyFrame()
+function DuffedUIChat:CreateCopyFrame()
 	CopyFrame = CreateFrame("Frame", nil, UIParent)
 	CopyFrame:SetTemplate()
 	CopyFrame:Width(772)
@@ -91,7 +91,7 @@ function TukuiChat:CreateCopyFrame()
 	CopyFrame.Close = Close
 end
 
-function TukuiChat:CreateCopyButtons()
+function DuffedUIChat:CreateCopyButtons()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local Frame = _G["ChatFrame"..i]
 		

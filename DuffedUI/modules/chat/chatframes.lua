@@ -3,7 +3,7 @@ local T, C, L = select(2, ...):unpack()
 -- Tukz Note from Hydra Last Commit :
 	-- I deleted FramePosition function, we will only run it once after install and will not force users to always have chat at default position.
 	-- Added a note below where the install function is located.
-	-- PLAYER_ENTERING_WORLD event on TukuiChat will not be needed anymore when we will create the install process.
+	-- PLAYER_ENTERING_WORLD event on DuffedUIChat will not be needed anymore when we will create the install process.
 	-- find the event which randomly move chat position from default and unregister it.
 
 if (not C.Chat.Enable) then
@@ -18,10 +18,10 @@ local ToastCloseButton = BNToastFrameCloseButton
 local DataTextLeft = T["Panels"].DataTextLeft
 local DataTextRight = T["Panels"].DataTextRight
 local CubeLeft = T["Panels"].CubeLeft
-local TukuiChat = CreateFrame("Frame")
+local DuffedUIChat = CreateFrame("Frame")
 
 -- Update editbox border color
-function TukuiChat:UpdateEditBoxColor()
+function DuffedUIChat:UpdateEditBoxColor()
 	local EditBox = ChatEdit_ChooseBoxForSend()	
 	local ChatType = EditBox:GetAttribute("chatType")
 	local Backdrop = EditBox.Backdrop
@@ -44,7 +44,7 @@ function TukuiChat:UpdateEditBoxColor()
 	end
 end
 
-function TukuiChat:StyleFrame(frame)
+function DuffedUIChat:StyleFrame(frame)
 	if frame.IsSkinned then
 		return
 	end
@@ -147,16 +147,16 @@ function TukuiChat:StyleFrame(frame)
 	frame.IsSkinned = true
 end
 
-function TukuiChat:KillPetBattleCombatLog(Frame)
+function DuffedUIChat:KillPetBattleCombatLog(Frame)
 	if (_G[Frame:GetName().."Tab"]:GetText():match(PET_BATTLE_COMBAT_LOG)) then
 		return FCF_Close(Frame)
 	end
 end
 
-function TukuiChat:StyleTempFrame()
+function DuffedUIChat:StyleTempFrame()
 	local Frame = FCF_GetCurrentChatFrame()
 
-	TukuiChat:KillPetBattleCombatLog(Frame)
+	DuffedUIChat:KillPetBattleCombatLog(Frame)
 
 	-- Make sure it's not skinned already
 	if Frame.IsSkinned then
@@ -164,10 +164,10 @@ function TukuiChat:StyleTempFrame()
 	end
 
 	-- Pass it on
-	TukuiChat:StyleFrame(Frame)
+	DuffedUIChat:StyleFrame(Frame)
 end
 
-function TukuiChat:SkinToastFrame()
+function DuffedUIChat:SkinToastFrame()
 	Toast:SetTemplate()
 	Toast:CreateShadow()
 	ToastCloseButton:SkinCloseButton()
@@ -177,9 +177,9 @@ end
 -- We don't have an install process yet, so it's here for now. (Only handling position for now, not channels/groups)
 
 -- Tukz Note:
--- It's better like this anyway, because we will call TukuiChat:Install() in the Installation of Tukui. You are free to complete this function.
+-- It's better like this anyway, because we will call DuffedUIChat:Install() in the Installation of DuffedUI. You are free to complete this function.
 -- I prefer like this because I would like everything chat frames related to be include in chat module folder. Same for others modules we will write.
-function TukuiChat:Install()
+function DuffedUIChat:Install()
 	-- Create our custom chatframes	
 	FCF_ResetChatWindows()
 	FCF_SetLocked(ChatFrame1, 1)
@@ -325,7 +325,7 @@ function TukuiChat:Install()
 	end
 end
 
-function TukuiChat:Setup()
+function DuffedUIChat:Setup()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local Frame = _G["ChatFrame"..i]
 		
@@ -354,9 +354,9 @@ ChatConfigFrameDefaultButton:Kill()
 ChatFrameMenuButton:Kill()
 FriendsMicroButton:Kill()
 
-TukuiChat:RegisterEvent("PLAYER_ENTERING_WORLD")
-TukuiChat:RegisterEvent("ADDON_LOADED")
-TukuiChat:SetScript("OnEvent", function(self, event, addon)
+DuffedUIChat:RegisterEvent("PLAYER_ENTERING_WORLD")
+DuffedUIChat:RegisterEvent("ADDON_LOADED")
+DuffedUIChat:SetScript("OnEvent", function(self, event, addon)
 	if (event == "PLAYER_ENTERING_WORLD") then
 		self:CreateCopyFrame()
 		self:CreateCopyButtons()
@@ -368,7 +368,7 @@ TukuiChat:SetScript("OnEvent", function(self, event, addon)
 	end
 end)
 
-hooksecurefunc("ChatEdit_UpdateHeader", TukuiChat.UpdateEditBoxColor)
-hooksecurefunc("FCF_OpenTemporaryWindow", TukuiChat.StyleTempFrame)
+hooksecurefunc("ChatEdit_UpdateHeader", DuffedUIChat.UpdateEditBoxColor)
+hooksecurefunc("FCF_OpenTemporaryWindow", DuffedUIChat.StyleTempFrame)
 
-T["Chat"] = TukuiChat
+T["Chat"] = DuffedUIChat

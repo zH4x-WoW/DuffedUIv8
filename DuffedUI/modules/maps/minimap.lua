@@ -44,7 +44,7 @@ function Maps:StyleMinimap()
 	Mail:Point("TOPRIGHT", 3, 3)
 	Mail:SetFrameLevel(Map:GetFrameLevel() + 2)
 	MailBorder:Hide()
-	MailIcon:SetTexture("Interface\\AddOns\\Tukui\\Medias\\Textures\\mail")
+	MailIcon:SetTexture("Interface\\AddOns\\DuffedUI\\Medias\\Textures\\mail")
 end
 
 function Maps:PositionMinimap()

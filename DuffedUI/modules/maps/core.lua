@@ -10,7 +10,7 @@ Maps:SetScript("OnEvent", function(self, event, addon)
 		local Time = _G["TimeManagerClockButton"]
 
 		Time:Kill()
-	elseif (addon == "Tukui") then
+	elseif (addon == "DuffedUI") then
 		-- Minimap
 		self:DisableMinimapElements()
 		self:StyleMinimap()

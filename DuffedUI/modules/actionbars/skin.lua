@@ -1,6 +1,6 @@
 local T, C, L = select(2, ...):unpack()
 
-local TukuiActionBars = T["ActionBars"]
+local DuffedUIActionBars = T["ActionBars"]
 local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
 local Replace = string.gsub
 local SpellFlyout = SpellFlyout
@@ -14,7 +14,7 @@ local ProcBackdrop = {
 	insets = {left = T.Mult, right = T.Mult, top = T.Mult, bottom = T.Mult},
 }
 
-function TukuiActionBars:SkinButton()
+function DuffedUIActionBars:SkinButton()
 	local Name = self:GetName()
 	local Action = self.action
 	local Button = self
@@ -108,7 +108,7 @@ function TukuiActionBars:SkinButton()
 	Button.isSkinned = true
 end
 
-function TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
+function DuffedUIActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	if Button.isSkinned then return end
 	
 	Button:SetWidth(PetSize)
@@ -148,34 +148,34 @@ function TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	Button.isSkinned = true
 end
 
-function TukuiActionBars:SkinPetButtons()
+function DuffedUIActionBars:SkinPetButtons()
 	for i = 1, NUM_PET_ACTION_SLOTS do
 		local Name = "PetActionButton"..i
 		local Button  = _G[Name]
 		local Icon  = _G[Name.."Icon"]
 		local Normal  = _G[Name.."NormalTexture2"] -- ?? 2
 		
-		TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, true)
+		DuffedUIActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, true)
 	end
 end
 
-function TukuiActionBars:SkinStanceButtons()
+function DuffedUIActionBars:SkinStanceButtons()
 	for i=1, NUM_STANCE_SLOTS do
 		local Name = "StanceButton"..i
 		local Button  = _G[Name]
 		local Icon  = _G[Name.."Icon"]
 		local Normal  = _G[Name.."NormalTexture"]
 		
-		TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, false)
+		DuffedUIActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, false)
 	end
 end
 
-function TukuiActionBars:SetupFlyoutButton()
+function DuffedUIActionBars:SetupFlyoutButton()
 	for i = 1, FlyoutButtons do
 		local Button = _G["SpellFlyoutButton"..i]
 		
 		if Button then
-			TukuiActionBars.SkinButton(Button)
+			DuffedUIActionBars.SkinButton(Button)
 			
 			if Button:GetChecked() then
 				Button:SetChecked(nil)
@@ -183,9 +183,9 @@ function TukuiActionBars:SetupFlyoutButton()
 		end
 	end
 end
-SpellFlyout:HookScript("OnShow", TukuiActionBars.SetupFlyoutButton)
+SpellFlyout:HookScript("OnShow", DuffedUIActionBars.SetupFlyoutButton)
 
-function TukuiActionBars:StyleFlyout()
+function DuffedUIActionBars:StyleFlyout()
 	if not self.FlyoutArrow then return end
 	
 	local HB = SpellFlyoutHorizontalBackground
@@ -242,7 +242,7 @@ function TukuiActionBars:StyleFlyout()
 end
 
 -- NOTE: Try to find a better animation for this.
-function TukuiActionBars:StartButtonHighlight()
+function DuffedUIActionBars:StartButtonHighlight()
 	if self.overlay then
 		self.overlay:Hide()
 		ActionButton_HideOverlayGlow(self)
@@ -273,14 +273,14 @@ function TukuiActionBars:StartButtonHighlight()
 	end
 end
 
-function TukuiActionBars:StopButtonHighlight()
+function DuffedUIActionBars:StopButtonHighlight()
 	if self.Animation and self.Animation:IsPlaying() then
 		self.Animation:Stop()
 		self.NewProc:Hide()
 	end
 end
 
-function TukuiActionBars:UpdateHotKey(btype)
+function DuffedUIActionBars:UpdateHotKey(btype)
 	local HotKey = _G[self:GetName() .. "HotKey"]
 	local Text = HotKey:GetText()
 	local Indicator = _G["RANGE_INDICATOR"]
@@ -307,8 +307,8 @@ function TukuiActionBars:UpdateHotKey(btype)
 	end
 end
 
-hooksecurefunc("ActionButton_Update", TukuiActionBars.SkinButton)
-hooksecurefunc("ActionButton_UpdateFlyout", TukuiActionBars.StyleFlyout)
-hooksecurefunc("ActionButton_ShowOverlayGlow", TukuiActionBars.StartButtonHighlight)
-hooksecurefunc("ActionButton_HideOverlayGlow", TukuiActionBars.StopButtonHighlight)
-hooksecurefunc("ActionButton_UpdateHotkeys", TukuiActionBars.UpdateHotKey)
+hooksecurefunc("ActionButton_Update", DuffedUIActionBars.SkinButton)
+hooksecurefunc("ActionButton_UpdateFlyout", DuffedUIActionBars.StyleFlyout)
+hooksecurefunc("ActionButton_ShowOverlayGlow", DuffedUIActionBars.StartButtonHighlight)
+hooksecurefunc("ActionButton_HideOverlayGlow", DuffedUIActionBars.StopButtonHighlight)
+hooksecurefunc("ActionButton_UpdateHotkeys", DuffedUIActionBars.UpdateHotKey)

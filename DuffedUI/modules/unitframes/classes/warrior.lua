@@ -1,9 +1,9 @@
 local T, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function TukuiUnitFrames:AddWarriorFeatures()
+function DuffedUIUnitFrames:AddWarriorFeatures()
 	local TotemBar = self.Totems
 	T["Colors"].totems[1] = { 205/255, 92/255, 92/255 }
 	

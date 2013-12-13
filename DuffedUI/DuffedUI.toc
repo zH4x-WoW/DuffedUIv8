@@ -3,10 +3,10 @@
 ## Version: 0
 ## Title: |cffC41F3BDuffedUI|r
 ## Notes: UI of awesomeness!
-## SavedVariables: TukuiData
-## SavedVariablesPerCharacter: TukuiDataPerChar
+## SavedVariables: DuffedUIData
+## SavedVariablesPerCharacter: DuffedUIDataPerChar
 ## OptionalDeps: Clique
-## X-oUF: TukuiUnitFrameFramework
+## X-oUF: DuffedUIUnitFrameFramework
 ## Website: http://www.tukui.org
 
 core\init.lua

@@ -35,7 +35,7 @@ function ActionBars:ShowAllButtons(bar, num)
 end
 
 function ActionBars:RemoveColumn(bar, num)
-	local Data = TukuiDataPerChar
+	local Data = DuffedUIDataPerChar
 
 	if (not bar.NextColumnToHide) then
 		bar.NextColumnToHide = 6
@@ -64,7 +64,7 @@ function ActionBars:RemoveColumn(bar, num)
 end
 
 function ActionBars:RemoveButton(bar, num)
-	local Data = TukuiDataPerChar
+	local Data = DuffedUIDataPerChar
 
 	if (not bar.NextButtonToHide) then
 		bar.NextButtonToHide = 12
@@ -103,7 +103,7 @@ end
 
 -- Restore buttons to previous state on load
 function ActionBars:RestoreBarState()
-	local Data = TukuiDataPerChar
+	local Data = DuffedUIDataPerChar
 
 	for bar = 2, 3 do
 		if Data["Bar"..bar.."Buttons"] then
@@ -128,7 +128,7 @@ local OnClick = function(self)
 	end
 	
 	local ShiftClick = IsShiftKeyDown()
-	local Data = TukuiDataPerChar
+	local Data = DuffedUIDataPerChar
 	local Text = self.Text
 	local Bar = self.Bar
 	local Num = self.Num
@@ -268,11 +268,11 @@ function ActionBars:CreateToggleButtons()
 end
 
 function ActionBars:LoadVariables()
-	if (not TukuiDataPerChar) then
-		TukuiDataPerChar = {}
+	if (not DuffedUIDataPerChar) then
+		DuffedUIDataPerChar = {}
 	end
 	
-	local Data = TukuiDataPerChar
+	local Data = DuffedUIDataPerChar
 
 	for i = 2, 5 do
 		local Button = BarButtons[i]

@@ -11,29 +11,29 @@ local format = string.format
 local floor = math.floor
 local UnitName = UnitName
 
-local TukuiThreatBar = CreateFrame("StatusBar", nil, DataTextRight)
-TukuiThreatBar:Point("TOPLEFT", 2, -2)
-TukuiThreatBar:Point("BOTTOMRIGHT", -2, 2)
-TukuiThreatBar:SetFrameLevel(DataTextRight:GetFrameLevel() + 2)
-TukuiThreatBar:SetFrameStrata("HIGH")
-TukuiThreatBar:SetStatusBarTexture(C.Medias.Normal)
-TukuiThreatBar:SetMinMaxValues(0, 100)
+local DuffedUIThreatBar = CreateFrame("StatusBar", nil, DataTextRight)
+DuffedUIThreatBar:Point("TOPLEFT", 2, -2)
+DuffedUIThreatBar:Point("BOTTOMRIGHT", -2, 2)
+DuffedUIThreatBar:SetFrameLevel(DataTextRight:GetFrameLevel() + 2)
+DuffedUIThreatBar:SetFrameStrata("HIGH")
+DuffedUIThreatBar:SetStatusBarTexture(C.Medias.Normal)
+DuffedUIThreatBar:SetMinMaxValues(0, 100)
 
-TukuiThreatBar.Text = TukuiThreatBar:CreateFontString(nil, "OVERLAY")
-TukuiThreatBar.Text:SetFont(C.Medias.Font, 12)
-TukuiThreatBar.Text:Point("RIGHT", TukuiThreatBar, -30, 0)
-TukuiThreatBar.Text:SetShadowColor(0, 0, 0)
-TukuiThreatBar.Text:SetShadowOffset(1.25, -1.25)
+DuffedUIThreatBar.Text = DuffedUIThreatBar:CreateFontString(nil, "OVERLAY")
+DuffedUIThreatBar.Text:SetFont(C.Medias.Font, 12)
+DuffedUIThreatBar.Text:Point("RIGHT", DuffedUIThreatBar, -30, 0)
+DuffedUIThreatBar.Text:SetShadowColor(0, 0, 0)
+DuffedUIThreatBar.Text:SetShadowOffset(1.25, -1.25)
 
-TukuiThreatBar.Title = TukuiThreatBar:CreateFontString(nil, "OVERLAY")
-TukuiThreatBar.Title:SetFont(C.Medias.Font, 12)
-TukuiThreatBar.Title:Point("LEFT", TukuiThreatBar, 30, 0)
-TukuiThreatBar.Title:SetShadowColor(0, 0, 0)
-TukuiThreatBar.Title:SetShadowOffset(1.25, -1.25)
+DuffedUIThreatBar.Title = DuffedUIThreatBar:CreateFontString(nil, "OVERLAY")
+DuffedUIThreatBar.Title:SetFont(C.Medias.Font, 12)
+DuffedUIThreatBar.Title:Point("LEFT", DuffedUIThreatBar, 30, 0)
+DuffedUIThreatBar.Title:SetShadowColor(0, 0, 0)
+DuffedUIThreatBar.Title:SetShadowOffset(1.25, -1.25)
 
-local ThreatBG = TukuiThreatBar:CreateTexture(nil, "BORDER")
-ThreatBG:Point("TOPLEFT", TukuiThreatBar, 0, 0)
-ThreatBG:Point("BOTTOMRIGHT", TukuiThreatBar, 0, 0)
+local ThreatBG = DuffedUIThreatBar:CreateTexture(nil, "BORDER")
+ThreatBG:Point("TOPLEFT", DuffedUIThreatBar, 0, 0)
+ThreatBG:Point("BOTTOMRIGHT", DuffedUIThreatBar, 0, 0)
 ThreatBG:SetTexture(0.15, 0.15, 0.15)
 
 local OnEvent = function(self, event)
@@ -81,18 +81,18 @@ local OnUpdate = function(self)
 	end
 end
 
-TukuiThreatBar:SetScript("OnShow", function(self)
+DuffedUIThreatBar:SetScript("OnShow", function(self)
 	self:SetScript("OnUpdate", OnUpdate)
 end)
 
-TukuiThreatBar:SetScript("OnHide", function(self)
+DuffedUIThreatBar:SetScript("OnHide", function(self)
 	self:SetScript("OnUpdate", nil)
 end)
 
-TukuiThreatBar:RegisterEvent("PLAYER_ENTERING_WORLD")
-TukuiThreatBar:RegisterEvent("PLAYER_REGEN_ENABLED")
-TukuiThreatBar:RegisterEvent("PLAYER_REGEN_DISABLED")
-TukuiThreatBar:SetScript("OnEvent", OnEvent)
-TukuiThreatBar.unit = "player"
-TukuiThreatBar.tar = TukuiThreatBar.unit.."target"
-TukuiThreatBar:SetAlpha(0)
+DuffedUIThreatBar:RegisterEvent("PLAYER_ENTERING_WORLD")
+DuffedUIThreatBar:RegisterEvent("PLAYER_REGEN_ENABLED")
+DuffedUIThreatBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+DuffedUIThreatBar:SetScript("OnEvent", OnEvent)
+DuffedUIThreatBar.unit = "player"
+DuffedUIThreatBar.tar = DuffedUIThreatBar.unit.."target"
+DuffedUIThreatBar:SetAlpha(0)

@@ -5,12 +5,12 @@ if (not C.ActionBars.Enable) then
 end
 
 local _G = _G
-local TukuiActionBars = T["ActionBars"]
+local DuffedUIActionBars = T["ActionBars"]
 local Panels = T["Panels"]
 local Size = C.ActionBars.NormalButtonSize
 local Spacing = C.ActionBars.ButtonSpacing
 
-function TukuiActionBars:CreateStanceBar()
+function DuffedUIActionBars:CreateStanceBar()
 	local Bar = T.Panels.StanceBar
 	
 	Bar:RegisterEvent("PLAYER_LOGIN")
@@ -47,10 +47,10 @@ function TukuiActionBars:CreateStanceBar()
 		elseif event == "UPDATE_SHAPESHIFT_FORMS" then
 
 		elseif event == "PLAYER_ENTERING_WORLD" then
-			TukuiActionBars.UpdateStanceBar(self)
-			TukuiActionBars.SkinStanceButtons()
+			DuffedUIActionBars.UpdateStanceBar(self)
+			DuffedUIActionBars.SkinStanceButtons()
 		else
-			TukuiActionBars.UpdateStanceBar(self)
+			DuffedUIActionBars.UpdateStanceBar(self)
 		end
 	end)
 

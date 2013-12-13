@@ -1,13 +1,13 @@
 local T, C, L = select(2, ...):unpack()
 
-local TukuiUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-function TukuiUnitFrames:Party()
+function DuffedUIUnitFrames:Party()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self:SetBackdrop(TukuiUnitFrames.Backdrop)
+	self:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
 	
@@ -55,7 +55,7 @@ function TukuiUnitFrames:Party()
 		local Portrait = CreateFrame("Frame", nil, self)
 		Portrait:Size(40)
 		Portrait:SetPoint("BOTTOMRIGHT", self, "BOTTOMLEFT", -4,0)
-		Portrait:SetBackdrop(TukuiUnitFrames.Backdrop)
+		Portrait:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 		Portrait:SetBackdropColor(0, 0, 0)
 		Portrait:CreateShadow()
 		
@@ -74,8 +74,8 @@ function TukuiUnitFrames:Party()
 	Buffs.numRow = 1
 	Buffs.spacing = 2
 	Buffs.initialAnchor = "TOPLEFT"
-	Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+	Buffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
+	Buffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
 	
 	local Debuffs = CreateFrame("Frame", nil, self)
 	Debuffs:Point("LEFT", self, "RIGHT", 6, 0)
@@ -85,8 +85,8 @@ function TukuiUnitFrames:Party()
 	Debuffs.num = 6
 	Debuffs.spacing = 2
 	Debuffs.initialAnchor = "TOPLEFT"
-	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+	Debuffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
+	Debuffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
 	
 	local Leader = self:CreateTexture(nil, "OVERLAY")
 	Leader:SetSize(16, 16)
@@ -110,6 +110,6 @@ function TukuiUnitFrames:Party()
 	self.Leader = Leader
 	self.MasterLooter = MasterLooter
 	self.ReadyCheck = ReadyCheck
-	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong]")
-	self:Tag(Role, "[Tukui:Role]")
+	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong]")
+	self:Tag(Role, "[DuffedUI:Role]")
 end

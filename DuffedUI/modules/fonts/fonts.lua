@@ -1,8 +1,8 @@
 local T, C, L = select(2, ...):unpack()
 
-local TukuiFonts = CreateFrame("Frame", nil, UIParent)
+local DuffedUIFonts = CreateFrame("Frame", nil, UIParent)
 
-function TukuiFonts:SetFont(font, size, style, r, g, b, sr, sg, sb, sox, soy)
+function DuffedUIFonts:SetFont(font, size, style, r, g, b, sr, sg, sb, sox, soy)
 	self:SetFont(font, size, style)
 	
 	if sr and sg and sb then
@@ -20,7 +20,7 @@ function TukuiFonts:SetFont(font, size, style, r, g, b, sr, sg, sb, sox, soy)
 	end
 end
 
-function TukuiFonts:ChangeFonts()
+function DuffedUIFonts:ChangeFonts()
 	local SetFont = self.SetFont
 	local NORMAL = C.Medias.Font
 	local COMBAT = C.Medias.DamageFont
@@ -42,7 +42,7 @@ function TukuiFonts:ChangeFonts()
 		SetCVar("CombatDamage",0)
 		SetCVar("CombatHealing",0)
 		
-		local INVISIBLE = [=[Interface\Addons\Tukui\medias\fonts\invisible_font.ttf]=]
+		local INVISIBLE = [=[Interface\Addons\DuffedUI\medias\fonts\invisible_font.ttf]=]
 		COMBAT = INVISIBLE
 	end
 
@@ -90,9 +90,9 @@ function TukuiFonts:ChangeFonts()
 	SetFont(FriendsFont_UserText, NORMAL, 11)
 end
 
-TukuiFonts:RegisterEvent("ADDON_LOADED")
-TukuiFonts:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "Tukui") then
+DuffedUIFonts:RegisterEvent("ADDON_LOADED")
+DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
+	if (addon ~= "DuffedUI") then
 		return
 	end
 	
@@ -100,4 +100,4 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	self:UnregisterAllEvents()
 end)
 
-T["Fonts"] = TukuiFonts
+T["Fonts"] = DuffedUIFonts

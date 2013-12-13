@@ -203,7 +203,7 @@ function Plates:Skin(obj)
 	Plate.Cast:HookScript("OnShow", self.CastOnShow)
 	self.OnShow(Plate)
 
-	-- Tell Tukui that X nameplate is Skinned
+	-- Tell DuffedUI that X nameplate is Skinned
 	Plate.IsSkinned = true
 end
 
@@ -258,7 +258,7 @@ end
 
 Plates:RegisterEvent("ADDON_LOADED")
 Plates:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= "Tukui" then
+	if addon ~= "DuffedUI" then
 		return
 	end
 	

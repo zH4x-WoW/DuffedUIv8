@@ -1,7 +1,7 @@
 local T, C, L = select(2, ...):unpack()
 
 ----------------------------------------------------------------
--- Default settings of Tukui
+-- Default settings of DuffedUI
 ----------------------------------------------------------------
 
 C["general"] = {
