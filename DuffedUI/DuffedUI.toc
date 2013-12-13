@@ -1,0 +1,18 @@
+﻿## Interface: 50400
+## Author: Merith @ Zirkel des Cenarius EU
+## Version: 0
+## Title: |cffC41F3BDuffedUI|r
+## Notes: UI of awesomeness!
+## SavedVariables: TukuiData
+## SavedVariablesPerCharacter: TukuiDataPerChar
+## OptionalDeps: Clique
+## X-oUF: TukuiUnitFrameFramework
+## Website: http://www.tukui.org
+
+core\init.lua
+libs\init.xml
+config\init.xml
+medias\medias.lua
+locales\init.xml
+core\init.xml
+modules\init.xml
