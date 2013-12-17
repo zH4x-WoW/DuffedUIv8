@@ -1,5 +1,9 @@
 => DuffedUI v8 <=
 
+17.12.2013 =>
+	Changed global T to global D
+	Added fonts and textures
+	
 13.12.2013 => 	
 	Changed "local T, C, L = select(2, ...):unpack()" to "local D, C, L = select(2, ...):unpack()"
 	Added DuffedUI-Logo and avatar
