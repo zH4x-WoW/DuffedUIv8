@@ -100,4 +100,4 @@ DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
 	self:UnregisterAllEvents()
 end)
 
-T["Fonts"] = DuffedUIFonts
+D["Fonts"] = DuffedUIFonts

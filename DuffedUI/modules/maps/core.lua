@@ -23,4 +23,4 @@ Maps:SetScript("OnEvent", function(self, event, addon)
 	end
 end)
 
-T["Maps"] = Maps
+D["Maps"] = Maps

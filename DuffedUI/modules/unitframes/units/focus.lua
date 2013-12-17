@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-local DuffedUIUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = D["UnitFrames"]
 local _, Class = UnitClass("player")
 
 function DuffedUIUnitFrames:Focus()

@@ -20,4 +20,4 @@ Battle:SetScript("OnEvent", function(self, event, addon)
 	self:AddActionBarHooks()
 end)
 
-T["PetBattles"] = Battle
+D["PetBattles"] = Battle

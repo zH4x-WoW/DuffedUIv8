@@ -9,7 +9,7 @@ CollectGarbage:SetScript("OnEvent", function(self, event, unit)
 		collectgarbage("collect")
 
 		-- Just verifying that this clears the memory out :)
-		local Memory = T["DataTexts"]:GetDataText("Memory")
+		local Memory = D["DataTexts"]:GetDataText("Memory")
 		
 		if (Memory and Memory.Enabled) then
 			Memory:Update(10)

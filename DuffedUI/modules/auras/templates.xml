@@ -9,7 +9,7 @@
 		<Scripts>
 			<OnLoad>
 				local T = unpack(DuffedUI)
-				local DuffedUIAuras = T["Auras"]
+				local DuffedUIAuras = D["Auras"]
 
 				DuffedUIAuras.Skin(self)
 
@@ -37,7 +37,7 @@
 		<Scripts>
 			<OnLoad>
 				local T = unpack(DuffedUI)
-				local DuffedUIAuras = T["Auras"]
+				local DuffedUIAuras = D["Auras"]
 
 				self.IsProxy = true
 

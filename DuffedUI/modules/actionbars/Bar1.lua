@@ -2,8 +2,8 @@ local D, C, L = select(2, ...):unpack()
 if (not C.ActionBars.Enable) then return end
 
 local _G = _G
-local DuffedUIActionBars = T["ActionBars"]
-local Panels = T["Panels"]
+local DuffedUIActionBars = D["ActionBars"]
+local Panels = D["Panels"]
 local Num = NUM_ACTIONBAR_BUTTONS
 local MainMenuBar_OnEvent = MainMenuBar_OnEvent
 local Size = C.ActionBars.NormalButtonSize

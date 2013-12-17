@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-local DuffedUIUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
 function DuffedUIUnitFrames:AddDeathKnightFeatures()
@@ -33,7 +33,7 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	Shadow:Point("TOPLEFT", -4, 12)
 	
 	-- Totem Colors
-	T["Colors"].totems = {
+	D["Colors"].totems = {
 		[1] = {0.60, 0.40, 0},
 	}
 

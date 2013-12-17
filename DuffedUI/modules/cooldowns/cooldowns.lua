@@ -188,4 +188,4 @@ end)
 hooksecurefunc(getmetatable(_G["ActionButton1Cooldown"]).__index, "SetCooldown", DuffedUICooldowns.TimerStart)
 hooksecurefunc("ActionBarButtonEventsFrame_RegisterFrame", DuffedUICooldowns.Register)
 
-T["Cooldowns"] = DuffedUICooldowns
+D["Cooldowns"] = DuffedUICooldowns

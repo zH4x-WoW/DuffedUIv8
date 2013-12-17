@@ -14,7 +14,7 @@ D.SlashHandler = function(cmd)
 	local arg1, arg2 = strlower(Split(cmd))
 
 	if (arg1 == "dt" or arg1 == "datatext") then
-		local DataText = T["DataTexts"]
+		local DataText = D["DataTexts"]
 		
 		if arg2 then
 			if (arg2 == "reset") then
@@ -26,7 +26,7 @@ D.SlashHandler = function(cmd)
 			DataText:ToggleDataPositions()
 		end
 	elseif (arg1 == "install" or arg1 == "reset") then
-		local Install = T["Install"]
+		local Install = D["Install"]
 		
 		Install:Launch()
 	elseif (arg1 == "help") then

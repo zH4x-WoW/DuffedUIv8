@@ -1,7 +1,7 @@
 local D, C, L = select(2, ...):unpack()
 local AddOn, Plugin = ...
 local oUF = Plugin.oUF or oUF
-local DuffedUIUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = D["UnitFrames"]
 local DEAD = DEAD
 local CHAT_FLAG_AFK = CHAT_FLAG_AFK
 

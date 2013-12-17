@@ -13,7 +13,7 @@ local NUM_CONTAINER_FRAMES = NUM_CONTAINER_FRAMES
 local NUM_BAG_FRAMES = NUM_BAG_FRAMES
 local ContainerFrame_GetOpenFrame = ContainerFrame_GetOpenFrame
 local BankFrame = BankFrame
-local Bags = T["Inventory"]
+local Bags = D["Inventory"]
 
 local Boxes = {
 	BagItemSearchBox,

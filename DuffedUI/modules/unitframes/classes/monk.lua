@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-local DuffedUIUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
 function DuffedUIUnitFrames:AddMonkFeatures()
@@ -8,7 +8,7 @@ function DuffedUIUnitFrames:AddMonkFeatures()
 	local Shadow = self.Shadow
 
 	-- Totem Colors
-	T["Colors"].totems = {
+	D["Colors"].totems = {
 		[1] = { 95/255, 222/255, 95/255 },
 	}
 

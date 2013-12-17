@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-local DuffedUIUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
 function DuffedUIUnitFrames:AddPriestFeatures()
@@ -9,7 +9,7 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 	local Shadow = self.Shadow
 	
 	-- Totem Bar (Lightwell)
-	T["Colors"].totems[1] = { 238/255, 221/255,  130/255 }
+	D["Colors"].totems[1] = { 238/255, 221/255,  130/255 }
 
 	TotemBar[1]:ClearAllPoints()
 	TotemBar[1]:SetAllPoints()

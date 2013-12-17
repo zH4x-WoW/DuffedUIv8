@@ -4,7 +4,7 @@ if (not C["Misc"].AltPowerBarEnable) then
 	return
 end
 
-local Panels = T["Panels"]
+local Panels = D["Panels"]
 local DataTextRight = Panels.DataTextRight
 local TimeSinceLastUpdate = 1
 

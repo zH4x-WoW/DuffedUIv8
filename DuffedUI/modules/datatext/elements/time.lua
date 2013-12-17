@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-local DataText = T["DataTexts"]
+local DataText = D["DataTexts"]
 local tonumber = tonumber
 local format = format
 local date = date

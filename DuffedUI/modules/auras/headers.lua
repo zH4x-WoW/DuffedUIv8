@@ -4,8 +4,8 @@ if (not C.Auras.Enable) then
 	return
 end
 
-local DuffedUIAuras = T["Auras"]
-local DuffedUIPanels = T["Panels"]
+local DuffedUIAuras = D["Auras"]
+local DuffedUIPanels = D["Panels"]
 local Headers = DuffedUIAuras.Headers
 local Parent = DuffedUIPanels.PetBattleHider
 local Insert = table.insert

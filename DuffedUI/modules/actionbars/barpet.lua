@@ -4,7 +4,7 @@ if (not C.ActionBars.Enable) then
 	return
 end
 
-local DuffedUIActionBars = T["ActionBars"]
+local DuffedUIActionBars = D["ActionBars"]
 local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
 local PetSize = C.ActionBars.PetButtonSize
 local Spacing = C.ActionBars.ButtonSpacing

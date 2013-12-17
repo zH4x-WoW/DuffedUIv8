@@ -4,7 +4,7 @@ if (not C.Chat.Enable and not C.Chat.WhisperSound) then
 	return
 end
 
-local DuffedUIChat = T["Chat"]
+local DuffedUIChat = D["Chat"]
 
 function DuffedUIChat:PlayWhisperSound()
 	PlaySoundFile(C.Medias.Whisper)

@@ -67,4 +67,4 @@ Panels.DataTextRight = DataTextRight
 Panels.Hider = Hider
 Panels.PetBattleHider = PetBattleHider
 
-T["Panels"] = Panels
+D["Panels"] = Panels

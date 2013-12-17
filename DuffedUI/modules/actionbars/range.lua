@@ -2,7 +2,7 @@ local D, C, L = select(2, ...):unpack()
 
 local _G = _G
 local unpack = unpack
-local DuffedUIActionBars = T["ActionBars"]
+local DuffedUIActionBars = D["ActionBars"]
 local IsUsableAction = IsUsableAction
 local IsActionInRange = IsActionInRange
 local HasAction = HasAction

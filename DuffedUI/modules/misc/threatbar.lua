@@ -4,7 +4,7 @@ if (not C["Misc"].ThreatBarEnable) then
 	return
 end
 
-local Panels = T["Panels"]
+local Panels = D["Panels"]
 local DataTextRight = Panels.DataTextRight
 
 local format = string.format

@@ -1,5 +1,5 @@
 local D, C, L = select(2, ...):unpack()
-local Battle = T["PetBattles"]
+local Battle = D["PetBattles"]
 local PetBattles = PetBattleFrame
 
 local Pets = {

@@ -7,10 +7,10 @@ end
 local _G = _G
 local unpack = unpack
 local find, match = find, match
-local Hider = T["Panels"].Hider
+local Hider = D["Panels"].Hider
 local WorldFrame = WorldFrame
 local RAID_CLASS_COLORS = RAID_CLASS_COLORS
-local Colors = T["Colors"]
+local Colors = D["Colors"]
 local Convert = D.RGBToHex
 local Scale = D.Scale
 local FrameNumber = 0
@@ -278,4 +278,4 @@ Plates:SetScript("OnEvent", function(self, event, addon)
 	}
 end)
 
-T["NamePlates"] = Plates
+D["NamePlates"] = Plates

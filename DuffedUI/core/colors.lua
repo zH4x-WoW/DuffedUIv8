@@ -63,4 +63,4 @@ oUF.colors.class = {
 	["MONK"]        = { 0/255, 255/255, 150/255   },
 }
 
-T["Colors"] = oUF.colors
+D["Colors"] = oUF.colors

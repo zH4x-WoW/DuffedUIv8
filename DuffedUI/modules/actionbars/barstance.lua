@@ -5,8 +5,8 @@ if (not C.ActionBars.Enable) then
 end
 
 local _G = _G
-local DuffedUIActionBars = T["ActionBars"]
-local Panels = T["Panels"]
+local DuffedUIActionBars = D["ActionBars"]
+local Panels = D["Panels"]
 local Size = C.ActionBars.NormalButtonSize
 local Spacing = C.ActionBars.ButtonSpacing
 

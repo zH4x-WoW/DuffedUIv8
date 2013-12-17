@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-local DataText = T["DataTexts"]
+local DataText = D["DataTexts"]
 local MyName = UnitName("player")
 local format = format
 local int = 2

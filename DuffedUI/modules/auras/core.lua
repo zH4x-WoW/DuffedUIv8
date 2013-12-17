@@ -331,4 +331,4 @@ DuffedUIAuras:SetScript("OnEvent", function(self, event, ...)
 	end
 end)
 
-T["Auras"] = DuffedUIAuras
+D["Auras"] = DuffedUIAuras

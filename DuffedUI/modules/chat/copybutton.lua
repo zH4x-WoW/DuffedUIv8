@@ -2,7 +2,7 @@ local D, C, L = select(2, ...):unpack()
 
 -- Gonna rewrite this entirely, it's just temp to work from
 
-local DuffedUIChat = T["Chat"]
+local DuffedUIChat = D["Chat"]
 local Lines = {}
 local CopyFrame
 

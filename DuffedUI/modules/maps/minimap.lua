@@ -2,8 +2,8 @@ local D, C, L = select(2, ...):unpack()
 
 local _G = _G
 local Map = _G["Minimap"]
-local Panels = T["Panels"]
-local Maps = T["Maps"]
+local Panels = D["Panels"]
+local Maps = D["Maps"]
 
 function Maps:DisableMinimapElements()
 	local North = _G["MinimapNorthTag"]

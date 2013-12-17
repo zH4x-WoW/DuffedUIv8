@@ -1,8 +1,8 @@
 local D, C, L = select(2, ...):unpack()
 local AddOn, Plugin = ...
 local oUF = Plugin.oUF or oUF
-local Panels = T["Panels"]
-local Colors = T["Colors"]
+local Panels = D["Panels"]
+local Colors = D["Colors"]
 local Noop = function() end
 local DuffedUIUnitFrames = CreateFrame("Frame")
 
@@ -734,4 +734,4 @@ DuffedUIUnitFrames:SetScript("OnEvent", function(self, event, addon)
 	self:CreateUnits()
 end)
 
-T["UnitFrames"] = DuffedUIUnitFrames
+D["UnitFrames"] = DuffedUIUnitFrames

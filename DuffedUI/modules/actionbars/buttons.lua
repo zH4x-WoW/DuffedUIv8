@@ -1,7 +1,7 @@
 local D, C, L = select(2, ...):unpack()
 
-local ActionBars = T["ActionBars"]
-local Panels = T["Panels"]
+local ActionBars = D["ActionBars"]
+local Panels = D["Panels"]
 
 local Size = C.ActionBars.NormalButtonSize
 local Spacing = C.ActionBars.ButtonSpacing

@@ -2,7 +2,7 @@
 
 local D, C, L = select(2, ...):unpack()
 
-local DuffedUIUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
 function DuffedUIUnitFrames:AddMageFeatures()
@@ -10,7 +10,7 @@ function DuffedUIUnitFrames:AddMageFeatures()
 	local ArcaneChargeBar = CreateFrame("Frame", nil, self)
 	
 	-- Totem Colors
-	T["Colors"].totems = {
+	D["Colors"].totems = {
 		[1] = { 132/255, 112/255, 255/255 },
 		[2] = { 132/255, 112/255, 255/255 },
 	}

@@ -19,7 +19,7 @@ local ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight = ShapeshiftBar
 local Size = C.ActionBars.NormalButtonSize
 local PetSize = C.ActionBars.PetButtonSize
 local Spacing = C.ActionBars.ButtonSpacing
-local Panels = T["Panels"]
+local Panels = D["Panels"]
 local Hider = Panels.Hider
 local Frames = {
 	MainMenuBar, MainMenuBarArtFrame, OverrideActionBar,
@@ -305,4 +305,4 @@ DuffedUIActionBars:SetScript("OnEvent", function(self, event, addon)
 	end
 end)
 
-T["ActionBars"] = DuffedUIActionBars
+D["ActionBars"] = DuffedUIActionBars

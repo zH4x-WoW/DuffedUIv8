@@ -2,7 +2,7 @@ local T, C = select(2, ...):unpack()
 
 -- Local values
 local MenuFrame = CreateFrame("Frame", "DataTextToggleDropDown", UIParent, "UIDropDownMenuTemplate")
-local DuffedUIDT = T["DataTexts"]
+local DuffedUIDT = D["DataTexts"]
 local Anchors = DuffedUIDD.Anchors
 local Menu = DuffedUIDD.Menu
 local Active = false
@@ -78,7 +78,7 @@ local Callback = function(cancel)
 		R, G, B = ColorPickerFrame:GetColorRGB()
 	end
 
-	DuffedUIDT[Color] = Hex(R, G, B)
+	DuffedUIDD[Color] = Hex(R, G, B)
 	ActiveInfo.colorCode = Hex(R, G, B)
 	ActiveInfo.r = R
 	ActiveInfo.g = G

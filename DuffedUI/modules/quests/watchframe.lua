@@ -1,7 +1,7 @@
 local D, C, L = select(2, ...):unpack()
 
 local _G = _G
-local Quests = T["Quests"]
+local Quests = D["Quests"]
 
 function Quests:CreateWatchFrameAnchor()
 	local WatchFrame = CreateFrame("Frame", nil, UIParent)

@@ -11,4 +11,4 @@ Quests:SetScript("OnEvent", function(self, event)
 	end)
 end)
 
-T["Quests"] = Quests
+D["Quests"] = Quests

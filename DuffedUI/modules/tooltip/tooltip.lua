@@ -10,7 +10,7 @@ local Colors = D.Colors
 local DuffedUITooltips = CreateFrame("Frame")
 local gsub, find, format = string.gsub, string.find, string.format
 local Noop = function() end
-local Panels = T["Panels"]
+local Panels = D["Panels"]
 local HealthBar = GameTooltipStatusBar
 local CHAT_FLAG_AFK = CHAT_FLAG_AFK
 local CHAT_FLAG_DND = CHAT_FLAG_DND
@@ -317,4 +317,4 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 	HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
 end)
 
-T["Tooltips"] = DuffedUITooltips
+D["Tooltips"] = DuffedUITooltips

@@ -1,8 +1,8 @@
 local D, C, L = select(2, ...):unpack()
 
 local PetBattles = PetBattleFrame
-local Panels = T["Panels"]
-local Battle = T["PetBattles"]
+local Panels = D["Panels"]
+local Battle = D["PetBattles"]
 
 function Battle:SkinTooltips()
 	local Tooltips = {

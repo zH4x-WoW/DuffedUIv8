@@ -1,5 +1,5 @@
 ﻿local D, C, L = select(2, ...):unpack()
-local Inventory = T["Inventory"]
+local Inventory = D["Inventory"]
 local LootFrame = LootFrame
 local LootFrameInset = LootFrameInset
 local LootFramePortraitOverlay = LootFramePortraitOverlay

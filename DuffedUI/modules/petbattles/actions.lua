@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-local Battle = T["PetBattles"]
+local Battle = D["PetBattles"]
 local Bottom = PetBattleFrame.BottomFrame
 local Noop = function() end
 local NUM_BATTLE_PET_ABILITIES = NUM_BATTLE_PET_ABILITIES

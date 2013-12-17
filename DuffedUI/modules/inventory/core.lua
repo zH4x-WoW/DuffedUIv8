@@ -11,8 +11,8 @@ Inventory:SetScript("OnEvent", function(self, event, addon)
 	local Bag = ContainerFrame1
 	local GameMenu = GameMenuFrame
 	local Bank = BankFrameItem1
-	local DataTextLeft = T["Panels"].DataTextLeft
-	local DataTextRight = T["Panels"].DataTextRight
+	local DataTextLeft = D["Panels"].DataTextLeft
+	local DataTextRight = D["Panels"].DataTextRight
 	
 	self:HideBlizzard()
 	self:CreateContainer("Bag", "BOTTOMRIGHT", DataTextRight, "TOPRIGHT", 0, 6)
@@ -44,4 +44,4 @@ Inventory:SetScript("OnEvent", function(self, event, addon)
 	self:AddLootFrameHooks()
 end)
 
-T["Inventory"] = Inventory
+D["Inventory"] = Inventory

@@ -4,7 +4,7 @@ if (not C.Chat.Enable) then
 	return
 end
 
-local DuffedUIChat = T["Chat"]
+local DuffedUIChat = D["Chat"]
 local gsub = gsub
 local strsub = strsub
 local Color = D.RGBToHex(unpack(C.Chat.LinkColor)) or "FFFF00"

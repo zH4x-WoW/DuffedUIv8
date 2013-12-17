@@ -15,9 +15,9 @@ local format = format
 local Noop = function() end
 local Toast = BNToastFrame
 local ToastCloseButton = BNToastFrameCloseButton
-local DataTextLeft = T["Panels"].DataTextLeft
-local DataTextRight = T["Panels"].DataTextRight
-local CubeLeft = T["Panels"].CubeLeft
+local DataTextLeft = D["Panels"].DataTextLeft
+local DataTextRight = D["Panels"].DataTextRight
+local CubeLeft = D["Panels"].CubeLeft
 local DuffedUIChat = CreateFrame("Frame")
 
 -- Update editbox border color
@@ -371,4 +371,4 @@ end)
 hooksecurefunc("ChatEdit_UpdateHeader", DuffedUIChat.UpdateEditBoxColor)
 hooksecurefunc("FCF_OpenTemporaryWindow", DuffedUIChat.StyleTempFrame)
 
-T["Chat"] = DuffedUIChat
+D["Chat"] = DuffedUIChat

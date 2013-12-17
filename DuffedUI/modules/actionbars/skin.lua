@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-local DuffedUIActionBars = T["ActionBars"]
+local DuffedUIActionBars = D["ActionBars"]
 local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
 local Replace = string.gsub
 local SpellFlyout = SpellFlyout

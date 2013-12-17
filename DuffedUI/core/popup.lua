@@ -158,4 +158,4 @@ DuffedUIPopups:SetScript("OnEvent", function(self, event, addon)
 	self:UnregisterAllEvents()
 end)
 
-T["Popups"] = DuffedUIPopups
+D["Popups"] = DuffedUIPopups

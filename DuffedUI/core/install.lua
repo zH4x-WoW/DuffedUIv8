@@ -44,7 +44,7 @@ function Install:Step1()
 end
 
 function Install:Step2()
-	local Chat = T["Chat"]
+	local Chat = D["Chat"]
 	
 	if (not Chat) then
 		return
@@ -223,4 +223,4 @@ Install:SetScript("OnEvent", function(self, event, addon)
 	end
 end)
 
-T["Install"] = Install
+D["Install"] = Install

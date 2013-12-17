@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-local DuffedUIUnitFrames = T["UnitFrames"]
+local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
 function DuffedUIUnitFrames:AddDruidFeatures()
@@ -22,7 +22,7 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 	DruidMana.Background:SetTexture(0.30, 0.52, 0.90, 0.2)
 
 	-- Totem Colors
-	T["Colors"].totems = {
+	D["Colors"].totems = {
 		[1] = { 95/255, 222/255, 95/255 },
 		[2] = { 95/255, 222/255, 95/255 },
 		[3] = { 95/255, 222/255, 95/255 },

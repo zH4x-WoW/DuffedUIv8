@@ -1,7 +1,7 @@
 local D, C, L = select(2, ...):unpack()
 
-local DataText = T["DataTexts"]
-local Popups = T["Popups"]
+local DataText = D["DataTexts"]
+local Popups = D["Popups"]
 local format = format
 
 local levelNameString = "|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r"

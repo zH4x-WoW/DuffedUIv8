@@ -4,7 +4,7 @@ local pairs = pairs
 local unpack = unpack
 local CreateFrame = CreateFrame
 local DuffedUIDT = CreateFrame("Frame")
-local Panels = T["Panels"]
+local Panels = D["Panels"]
 local DataTextLeft = Panels.DataTextLeft
 local DataTextRight = Panels.DataTextRight
 
@@ -258,4 +258,4 @@ DuffedUIDT:SetScript("OnEvent", function(self, event, addon)
 	end
 end)
 
-T["DataTexts"] = DuffedUIDT
+D["DataTexts"] = DuffedUIDT
