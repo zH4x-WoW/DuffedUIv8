@@ -16,19 +16,19 @@ function DuffedUIUnitFrames:Target()
 	Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
 	Panel:SetFrameLevel(2)
 	Panel:SetFrameStrata("MEDIUM")
-	Panel:SetBackdropBorderColor(C.Medias.BorderColor[1] * 0.7, C.Medias.BorderColor[2] * 0.7, C.Medias.BorderColor[3] * 0.7)
+	Panel:SetBackdropBorderColor(C["medias"].BorderColor[1] * 0.7, C["medias"].BorderColor[2] * 0.7, C["medias"].BorderColor[3] * 0.7)
 
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:Height(26)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
-	Health:SetStatusBarTexture(C.Medias.Normal)
+	Health:SetStatusBarTexture(C["medias"].Normal)
 
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
 
-	Health:FontString("Value", C.Medias.AltFont, 12)
+	Health:FontString("Value", C["medias"].AltFont, 12)
 	Health.Value:Point("RIGHT", Panel, "RIGHT", -4, 0)
 
 	Health.frequentUpdates = true
@@ -39,7 +39,7 @@ function DuffedUIUnitFrames:Target()
 
 	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
 
-	if (C.UnitFrames.Smooth) then
+	if (C["unitframes"].Smooth) then
 		Health.Smooth = true
 	end
 
@@ -47,14 +47,14 @@ function DuffedUIUnitFrames:Target()
 	Power:Height(8)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
-	Power:SetStatusBarTexture(C.Medias.Normal)
+	Power:SetStatusBarTexture(C["medias"].Normal)
 
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints()
-	Power.Background:SetTexture(C.Medias.Normal)
+	Power.Background:SetTexture(C["medias"].Normal)
 	Power.Background.multiplier = 0.3
 
-	Power:FontString("Value", C.Medias.AltFont, 12)
+	Power:FontString("Value", C["medias"].AltFont, 12)
 	Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
 
 	Power.colorPower = true
@@ -66,7 +66,7 @@ function DuffedUIUnitFrames:Target()
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:Point("LEFT", Panel, "LEFT", 4, 0)
 	Name:SetJustifyH("LEFT")
-	Name:SetFont(C.Medias.AltFont, 12)
+	Name:SetFont(C["medias"].AltFont, 12)
 
 	------ Special Note ------
 	-- The animation is currently broken. I tried some things out but i dont get it working at the moment.
@@ -101,7 +101,7 @@ function DuffedUIUnitFrames:Target()
 	Debuffs["growth-x"] = "LEFT"
 	Debuffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
 	Debuffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
-	Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
+	Debuffs.onlyShowPlayer = C["unitframes"].OnlySelfDebuffs
 	
 	local ComboPoints = CreateFrame("Frame", nil, self)
 	ComboPoints:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
@@ -109,12 +109,12 @@ function DuffedUIUnitFrames:Target()
 	ComboPoints:Height(8)
 	ComboPoints:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	ComboPoints:SetBackdropColor(0, 0, 0)
-	ComboPoints:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+	ComboPoints:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
 
 	for i = 1, 5 do
 		ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
 		ComboPoints[i]:Height(8)
-		ComboPoints[i]:SetStatusBarTexture(C.Medias.Normal)
+		ComboPoints[i]:SetStatusBarTexture(C["medias"].Normal)
 		
 		if i == 1 then
 			ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)

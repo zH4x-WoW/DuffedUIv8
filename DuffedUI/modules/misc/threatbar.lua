@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C["Misc"].ThreatBarEnable) then
+if (not C["misc"].ThreatBarEnable) then
 	return
 end
 
@@ -16,17 +16,17 @@ DuffedUIThreatBar:Point("TOPLEFT", 2, -2)
 DuffedUIThreatBar:Point("BOTTOMRIGHT", -2, 2)
 DuffedUIThreatBar:SetFrameLevel(DataTextRight:GetFrameLevel() + 2)
 DuffedUIThreatBar:SetFrameStrata("HIGH")
-DuffedUIThreatBar:SetStatusBarTexture(C.Medias.Normal)
+DuffedUIThreatBar:SetStatusBarTexture(C["medias"].Normal)
 DuffedUIThreatBar:SetMinMaxValues(0, 100)
 
 DuffedUIThreatBar.Text = DuffedUIThreatBar:CreateFontString(nil, "OVERLAY")
-DuffedUIThreatBar.Text:SetFont(C.Medias.Font, 12)
+DuffedUIThreatBar.Text:SetFont(C["medias"].Font, 12)
 DuffedUIThreatBar.Text:Point("RIGHT", DuffedUIThreatBar, -30, 0)
 DuffedUIThreatBar.Text:SetShadowColor(0, 0, 0)
 DuffedUIThreatBar.Text:SetShadowOffset(1.25, -1.25)
 
 DuffedUIThreatBar.Title = DuffedUIThreatBar:CreateFontString(nil, "OVERLAY")
-DuffedUIThreatBar.Title:SetFont(C.Medias.Font, 12)
+DuffedUIThreatBar.Title:SetFont(C["medias"].Font, 12)
 DuffedUIThreatBar.Title:Point("LEFT", DuffedUIThreatBar, 30, 0)
 DuffedUIThreatBar.Title:SetShadowColor(0, 0, 0)
 DuffedUIThreatBar.Title:SetShadowOffset(1.25, -1.25)

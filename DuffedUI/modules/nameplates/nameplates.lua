@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-if not C.NamePlates.Enable then
+if not C["nameplates"].Enable then
 	return
 end
 
@@ -142,7 +142,7 @@ function Plates:Skin(obj)
 	-- New Health
 	Plate.Health.NewTexture = Plate.Health:CreateTexture(nil, "ARTWORK", nil, -6)
 	Plate.Health.NewTexture:SetAllPoints(Plate.Health.Texture)
-	Plate.Health.NewTexture:SetTexture(C.Medias.Normal)
+	Plate.Health.NewTexture:SetTexture(C["medias"].Normal)
 	Plate.Health.NewTexture:SetVertexColor(0, 1, 0)
 
 	-- Health Backdrop
@@ -161,7 +161,7 @@ function Plates:Skin(obj)
 
 	-- Casting
 	Plate.Cast:SetParent(NewPlate)
-	Plate.Cast:SetStatusBarTexture(C.Medias.Normal)
+	Plate.Cast:SetStatusBarTexture(C["medias"].Normal)
 	Plate.Cast:CreateShadow()
 	
 	Plate.Cast.Background = Plate.Cast:CreateTexture(nil, "BACKGROUND")
@@ -184,7 +184,7 @@ function Plates:Skin(obj)
 	Plate.Cast.Name:Point("BOTTOM", Plate.Cast, 0, -7)
 	Plate.Cast.Name:Point("LEFT", Plate.Cast, 7, 0)
 	Plate.Cast.Name:Point("RIGHT", Plate.Cast, -7, 0)
-	Plate.Cast.Name:SetFont(C.Medias.Font, 8, "THINOUTLINE")
+	Plate.Cast.Name:SetFont(C["medias"].Font, 8, "THINOUTLINE")
 	Plate.Cast.Name:SetShadowColor(0,0,0,0)
 
 	-- Level
@@ -196,7 +196,7 @@ function Plates:Skin(obj)
 	Plate.NewName:SetPoint("BOTTOM", NewPlate, "TOP", 0, 2)
 	Plate.NewName:SetPoint("LEFT", NewPlate, -2, 0)
 	Plate.NewName:SetPoint("RIGHT", NewPlate, 2, 0)
-	Plate.NewName:SetFont(C.Medias.Font, 10, "THINOUTLINE")
+	Plate.NewName:SetFont(C["medias"].Font, 10, "THINOUTLINE")
 	
 	-- OnShow Execution
 	Plate:HookScript("OnShow", self.OnShow)
@@ -243,7 +243,7 @@ function Plates:Position()
 		NewPlate:Hide()
 		if Plate:IsShown() then
 			NewPlate:SetPoint("CENTER", WorldFrame, "BOTTOMLEFT", Plate:GetCenter())
-			NewPlate:SetAlpha(C.NamePlates.UntargetAlpha)
+			NewPlate:SetAlpha(C["nameplates"].UntargetAlpha)
 			NewPlate:Show()
 		end
 	end
@@ -268,12 +268,12 @@ Plates:SetScript("OnEvent", function(self, event, addon)
 	self:SetAllPoints()
 	self.Container = {}
 	self:SetScript("OnUpdate", self.OnUpdate)
-	self.PlateWidth = C.NamePlates.Width
-	self.PlateHeight = C.NamePlates.Height
-	self.PlateCastHeight = C.NamePlates.CastHeight
-	self.PlateSpacing = C.NamePlates.Spacing
+	self.PlateWidth = C["nameplates"].Width
+	self.PlateHeight = C["nameplates"].Height
+	self.PlateCastHeight = C["nameplates"].CastHeight
+	self.PlateSpacing = C["nameplates"].Spacing
 	self.Backdrop = {
-		bgFile = C.Medias.Blank,
+		bgFile = C["medias"].Blank,
 		insets = {top = -D.Mult, left = -D.Mult, bottom = -D.Mult, right = -D.Mult},
 	}
 end)

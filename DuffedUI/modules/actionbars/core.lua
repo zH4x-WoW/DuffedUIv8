@@ -16,9 +16,9 @@ local OverrideActionBar = OverrideActionBar
 local PossessBarFrame = PossessBarFrame
 local PetActionBarFrame = PetActionBarFrame
 local ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight = ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight
-local Size = C.ActionBars.NormalButtonSize
-local PetSize = C.ActionBars.PetButtonSize
-local Spacing = C.ActionBars.ButtonSpacing
+local Size = C["actionbars"].NormalButtonSize
+local PetSize = C["actionbars"].PetButtonSize
+local Spacing = C["actionbars"].ButtonSpacing
 local Panels = D["Panels"]
 local Hider = Panels.Hider
 local Frames = {
@@ -145,7 +145,7 @@ function DuffedUIActionBars:AddPanels()
 	--A7:SetMovable(true)
 	--A7:SetClampedToScreen(true)
 	
-	if (not C.ActionBars.HideBackdrop) then
+	if (not C["actionbars"].HideBackdrop) then
 		A1:SetTemplate()
 		A2:SetTemplate()
 		A3:SetTemplate()

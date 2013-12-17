@@ -1,4 +1,4 @@
-local T, C = unpack(select(2, ...))
+local D, C = unpack(select(2, ...))
 
 C["medias"] = {
 	-- fonts (ENGLISH)

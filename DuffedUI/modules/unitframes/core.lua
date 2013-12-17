@@ -27,7 +27,7 @@ DuffedUIUnitFrames.Units = {}
 DuffedUIUnitFrames.Headers = {}
 DuffedUIUnitFrames.Framework = DuffedUIUnitFrameFramework
 DuffedUIUnitFrames.Backdrop = {
-	bgFile = C.Medias.Blank,
+	bgFile = C["medias"].Blank,
 	insets = {top = -D.Mult, left = -D.Mult, bottom = -D.Mult, right = -D.Mult},
 }
 
@@ -45,7 +45,7 @@ function DuffedUIUnitFrames:DisableBlizzard()
 		Power:UnregisterAllEvents()
 	end
 	
-	if C.UnitFrames.Raid then
+	if C["unitframes"].Raid then
 		InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
 		
@@ -406,7 +406,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button:CreateShadow()
 
 	button.Remaining = button:CreateFontString(nil, "OVERLAY")
-	button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
+	button.Remaining:SetFont(C["medias"].Font, 12, "THINOUTLINE")
 	button.Remaining:Point("CENTER", 1, 0)
 
 	button.cd.noOCC = true
@@ -422,7 +422,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 
 	button.count:Point("BOTTOMRIGHT", 3, 3)
 	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C.Medias.Font, 9, "THICKOUTLINE")
+	button.count:SetFont(C["medias"].Font, 9, "THICKOUTLINE")
 	button.count:SetTextColor(0.84, 0.75, 0.65)
 
 	button.OverlayFrame = CreateFrame("Frame", nil, button, nil)
@@ -434,7 +434,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button.Glow = CreateFrame("Frame", nil, button)
 	button.Glow:SetOutside()
 	button.Glow:SetFrameStrata("BACKGROUND")	
-	button.Glow:SetBackdrop{edgeFile = C.Medias.Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
+	button.Glow:SetBackdrop{edgeFile = C["medias"].Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
 	
@@ -454,7 +454,7 @@ function DuffedUIUnitFrames:PostUpdateAura(unit, button, index, offset, filter, 
 		if(button.filter == "HARMFUL") then
 			if(not UnitIsFriend("player", unit) and button.owner ~= "player" and button.owner ~= "vehicle") then
 				button.icon:SetDesaturated(true)
-				button:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+				button:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
 			else
 				local color = DebuffTypeColor[DType] or DebuffTypeColor.none
 				button.icon:SetDesaturated(false)
@@ -525,8 +525,8 @@ function DuffedUIUnitFrames:GetPartyFramesAttributes()
 			self:SetWidth(header:GetAttribute("initial-width"))
 			self:SetHeight(header:GetAttribute("initial-height"))
 		]],
-		"initial-width", C.Party.Portrait and D.Scale(162) or D.Scale(206),
-		"initial-height", C.Party.Portrait and D.Scale(24) or D.Scale(40),
+		"initial-width", C["party"].Portrait and D.Scale(162) or D.Scale(206),
+		"initial-height", C["party"].Portrait and D.Scale(24) or D.Scale(40),
 		"showSolo", true, -- uncomment this for coding
 		"showParty", true, 
 		"showPlayer", true, 
@@ -538,7 +538,7 @@ function DuffedUIUnitFrames:GetPartyFramesAttributes()
 end
 
 function DuffedUIUnitFrames:GetRaidFramesAttributes()
-	local Properties = C.Party.Enable and "custom [@raid6,exists] hide;show" or "solo, party, raid"
+	local Properties = C["party"].Enable and "custom [@raid6,exists] hide;show" or "solo, party, raid"
 	
 	return
 		"DuffedUIRaid", 
@@ -698,8 +698,8 @@ function DuffedUIUnitFrames:CreateUnits()
 	DuffedUIUnitFrames.Units.Arena = Arena
 	DuffedUIUnitFrames.Units.Boss = Boss
 	
-	if C.Party.Enable then
-		local Gap = C.Party.Portrait and 74 or 30
+	if C["party"].Enable then
+		local Gap = C["party"].Portrait and 74 or 30
 		
 		local Party = oUF:SpawnHeader(DuffedUIUnitFrames:GetPartyFramesAttributes())
 		Party:SetParent(Panels.PetBattleHider)
@@ -708,7 +708,7 @@ function DuffedUIUnitFrames:CreateUnits()
 		DuffedUIUnitFrames.Headers.Party = Party
 	end
 	
-	if C.Raid.Enable then
+	if C["raid"].Enable then
 		local Raid = oUF:SpawnHeader(DuffedUIUnitFrames:GetRaidFramesAttributes())
 		Raid:SetParent(Panels.PetBattleHider)
 		Raid:Point("TOPLEFT", UIParent, "TOPLEFT", 18, -(D.ScreenHeight / 9))

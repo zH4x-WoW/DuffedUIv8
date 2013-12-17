@@ -10,7 +10,7 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 	local DruidMana = CreateFrame("StatusBar", nil, self.Health)
 	DruidMana:Size(250, 8)
 	DruidMana:Point("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, 0)
-	DruidMana:SetStatusBarTexture(C.Medias.Normal)
+	DruidMana:SetStatusBarTexture(C["medias"].Normal)
 	DruidMana:SetStatusBarColor(0.30, 0.52, 0.90)
 
 	DruidMana:SetBackdrop(DuffedUIUnitFrames.Backdrop)

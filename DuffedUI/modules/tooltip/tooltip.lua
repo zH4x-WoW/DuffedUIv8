@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-if not C.Tooltips.Enable then
+if not C["tooltips"].Enable then
 	return
 end
 
@@ -16,7 +16,7 @@ local CHAT_FLAG_AFK = CHAT_FLAG_AFK
 local CHAT_FLAG_DND = CHAT_FLAG_DND
 local LEVEL = LEVEL
 local PVP_ENABLED = PVP_ENABLED
-local Insets = C.General.InOut
+local Insets = C["general"].InOut
 local BackdropColor = {0, 0, 0}
 
 DuffedUITooltips.ItemRefTooltip = ItemRefTooltip
@@ -54,7 +54,7 @@ function DuffedUITooltips:CreateAnchor()
 	self.Anchor:SetMovable(true)
 	self.Anchor:CreateBackdrop()
 	self.Anchor.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
-	self.Anchor.Backdrop:FontString("Text", C.Medias.AltFont, 12)
+	self.Anchor.Backdrop:FontString("Text", C["medias"].AltFont, 12)
 	self.Anchor.Backdrop.Text:SetPoint("CENTER")
 	self.Anchor.Backdrop.Text:SetText(L.Tooltips.MoveAnchor)
 	self.Anchor.Backdrop:Hide()
@@ -112,7 +112,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		return
 	end
 	
-	if (self:GetOwner() ~= UIParent and C.Tooltips.HideOnUnitFrames) then
+	if (self:GetOwner() ~= UIParent and C["tooltips"].HideOnUnitFrames) then
 		self:Hide()
 		return
 	end
@@ -209,7 +209,7 @@ function DuffedUITooltips:SetColor()
 	local Dead = Unit and UnitIsDead(Unit)
 	local r, g, b
 	
-	self:SetBackdropColor(unpack(C.Medias.BackdropColor))
+	self:SetBackdropColor(unpack(C["medias"].BackdropColor))
 	self:SetBackdropBorderColor(0, 0, 0)
 	
 	if Player then
@@ -243,11 +243,11 @@ function DuffedUITooltips:SetColor()
 				self:SetBackdropBorderColor(r, g, b)
 			end
 		else
-			HealthBar:SetStatusBarColor(unpack(C.Medias.BorderColor))
+			HealthBar:SetStatusBarColor(unpack(C["medias"].BorderColor))
 			
 			if (Insets) then
-				self:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
-				HealthBar.Backdrop:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+				self:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
+				HealthBar.Backdrop:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
 			end
 		end
 	end
@@ -263,8 +263,8 @@ function DuffedUITooltips:OnUpdate(elapsed)
 		BackdropColor[1] = Red
 		BackdropColor[2] = Green
 		BackdropColor[3] = Blue
-		self:SetBackdropColor(unpack(C.Medias.BackdropColor))
-		self:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+		self:SetBackdropColor(unpack(C["medias"].BackdropColor))
+		self:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
 	end
 end
 
@@ -312,7 +312,7 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 		Tooltip:HookScript("OnShow", self.Skin)
 	end
 	
-	HealthBar:SetStatusBarTexture(C.Medias.Normal)
+	HealthBar:SetStatusBarTexture(C["medias"].Normal)
 	HealthBar:CreateBackdrop()
 	HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
 end)

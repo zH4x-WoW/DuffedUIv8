@@ -1,12 +1,12 @@
-local T, C = select(2, ...):unpack()
+local D, C = select(2, ...):unpack()
 
 ----------------------------------------------------------------
 -- This script will adjust resolution for optimal graphic
 ----------------------------------------------------------------
 
 -- [[ Auto Scaling ]] --
-if C.General.AutoScale == true then
-	C.General.UIScale = min(2, max(.64, 768/string.match(D.Resolution, "%d+x(%d+)")))
+if C["general"].AutoScale == true then
+	C["general"].UIScale = min(2, max(.64, 768/string.match(D.Resolution, "%d+x(%d+)")))
 end
 
 -- [[ ReloadUI need to be done even if we keep aspect ratio ]] --
@@ -33,22 +33,22 @@ Graphic:SetScript("OnEvent", function(self, event)
 	end
 
 	local gxMultisample = GetCVar("gxMultisample")
-	if C.General.MultiSampleProtection and gxMultisample ~= "1" then
+	if C["general"].MultiSampleProtection and gxMultisample ~= "1" then
 		SetMultisampleFormat(1)
 	end
 
-	if C.General.UIScale > 1.1 then C.General.UIScale = 1.1 end
-	if C.General.UIScale < 0.64 then C.General.UIScale = 0.64 end
+	if C["general"].UIScale > 1.1 then C["general"].UIScale = 1.1 end
+	if C["general"].UIScale < 0.64 then C["general"].UIScale = 0.64 end
 
-	if format("%.2f", GetCVar("uiScale")) ~= format("%.2f", C.General.UIScale) then
-		SetCVar("uiScale", C.General.UIScale)
+	if format("%.2f", GetCVar("uiScale")) ~= format("%.2f", C["general"].UIScale) then
+		SetCVar("uiScale", C["general"].UIScale)
 	end
 
 	if D.TripleMonitors then
 		local width = D.TripleMonitors
 		local height = D.ScreenHeight
 		
-		if not C.General.AutoScale or height > 1200 then
+		if not C["general"].AutoScale or height > 1200 then
 			local h = UIParent:GetHeight()
 			local ratio = D.ScreenHeight / h
 			local w = D.TripleMonitors / ratio

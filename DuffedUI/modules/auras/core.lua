@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C.Auras.Enable) then
+if (not C["auras"].Enable) then
 	return
 end
 
@@ -16,10 +16,10 @@ local InterfaceOptionsFrameCategoriesButton12 = InterfaceOptionsFrameCategoriesB
 local InterfaceOptionsFrameCategoriesButton12 = InterfaceOptionsFrameCategoriesButton12
 
 DuffedUIAuras.Headers = {}
-DuffedUIAuras.Filter = C.Auras.Consolidate
-DuffedUIAuras.Flash = C.Auras.Flash
+DuffedUIAuras.Filter = C["auras"].Consolidate
+DuffedUIAuras.Flash = C["auras"].Flash
 DuffedUIAuras.FlashTimer = 30
-DuffedUIAuras.ClassicTimer = C.Auras.ClassicTimer
+DuffedUIAuras.ClassicTimer = C["auras"].ClassicTimer
 DuffedUIAuras.ProxyIcon = "Interface\\Icons\\misc_arrowdown"
 
 function DuffedUIAuras:DisableBlizzardAuras()
@@ -212,11 +212,11 @@ function DuffedUIAuras:Skin()
 		
 		local Bar = CreateFrame("StatusBar", nil, Holder)
 		Bar:SetInside()
-		Bar:SetStatusBarTexture(C.Medias.Blank)
+		Bar:SetStatusBarTexture(C["medias"].Blank)
 		Bar:SetStatusBarColor(0, 0.8, 0)
 		
 		local Duration = self:CreateFontString(nil, "OVERLAY")
-		Duration:SetFont(C.Medias.Font, 12, "OUTLINE")
+		Duration:SetFont(C["medias"].Font, 12, "OUTLINE")
 		Duration:SetPoint("BOTTOM", 0, -17)
 
 		if DuffedUIAuras.Flash then

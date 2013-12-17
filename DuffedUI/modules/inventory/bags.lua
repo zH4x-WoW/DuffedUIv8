@@ -1,6 +1,6 @@
 ﻿local D, C, L = select(2, ...):unpack()
 
-if (not C.Bags.Enable) then
+if (not C["bags"].Enable) then
 	return
 end
 
@@ -96,8 +96,8 @@ end
 
 function Bags:CreateContainer(storagetype, ...)
 	local Container = CreateFrame("Frame", nil, UIParent)
-	Container:SetScale(C.Bags.Scale)
-	Container:SetWidth(((C.Bags.ButtonSize + C.Bags.Spacing) * C.Bags.ItemsPerRow) + 22 - C.Bags.Spacing)
+	Container:SetScale(C["bags"].Scale)
+	Container:SetWidth(((C["bags"].ButtonSize + C["bags"].Spacing) * C["bags"].ItemsPerRow) + 22 - C["bags"].Spacing)
 	Container:SetPoint(...)
 	Container:SetFrameStrata("HIGH")
 	Container:SetFrameLevel(1)
@@ -128,7 +128,7 @@ function Bags:CreateContainer(storagetype, ...)
 	ToggleBagsContainer:EnableMouse(true)
 	ToggleBagsContainer.Text = ToggleBagsContainer:CreateFontString("button")
 	ToggleBagsContainer.Text:SetPoint("CENTER", ToggleBagsContainer, "CENTER")
-	ToggleBagsContainer.Text:SetFont(C.Medias.Font, 12, "OUTLINE")
+	ToggleBagsContainer.Text:SetFont(C["medias"].Font, 12, "OUTLINE")
 	ToggleBagsContainer.Text:SetText("X")
 	ToggleBagsContainer.Text:SetTextColor(.5, .5, .5)
 	ToggleBagsContainer:SetScript("OnMouseUp", function(self, button)
@@ -176,7 +176,7 @@ function Bags:CreateContainer(storagetype, ...)
 			Button:SetTemplate()
 			
 			if LastButtonBag then
-				Button:SetPoint("LEFT", LastButtonBag, "RIGHT", C.Bags.Spacing, 0)
+				Button:SetPoint("LEFT", LastButtonBag, "RIGHT", C["bags"].Spacing, 0)
 			else
 				Button:SetPoint("TOPLEFT", BagsContainer, "TOPLEFT", 8, -8)
 			end
@@ -188,7 +188,7 @@ function Bags:CreateContainer(storagetype, ...)
 			Icon:SetInside()
 
 			LastButtonBag = Button
-			BagsContainer:SetWidth((24 + C.Bags.Spacing) * (getn(BlizzardBags)) + 14)
+			BagsContainer:SetWidth((24 + C["bags"].Spacing) * (getn(BlizzardBags)) + 14)
 			BagsContainer:SetHeight(40)
 		end
 	else
@@ -211,7 +211,7 @@ function Bags:CreateContainer(storagetype, ...)
 			Button:SetTemplate()
 			
 			if LastButtonBank then
-				Button:SetPoint("LEFT", LastButtonBank, "RIGHT", C.Bags.Spacing, 0)
+				Button:SetPoint("LEFT", LastButtonBank, "RIGHT", C["bags"].Spacing, 0)
 			else
 				Button:SetPoint("TOPLEFT", BagsContainer, "TOPLEFT", 8, -8)
 			end
@@ -222,7 +222,7 @@ function Bags:CreateContainer(storagetype, ...)
 			Icon:SetTexCoord(unpack(D.IconCoord))
 
 			LastButtonBank = Button
-			BagsContainer:SetWidth((24 + C.Bags.Spacing) * (getn(BlizzardBank)) + 14)
+			BagsContainer:SetWidth((24 + C["bags"].Spacing) * (getn(BlizzardBank)) + 14)
 			BagsContainer:SetHeight(40)
 		end
 		
@@ -285,7 +285,7 @@ function Bags:SkinTokens()
 		
 		Token:SetFrameStrata("HIGH")
 		Token:SetFrameLevel(5)
-		Token:SetScale(C.Bags.Scale)
+		Token:SetScale(C["bags"].Scale)
 		Token:CreateBackdrop()
 		Token.Backdrop:SetOutside(Icon)
 		
@@ -293,7 +293,7 @@ function Bags:SkinTokens()
 		Icon:SetTexCoord(unpack(D.IconCoord)) 
 		Icon:SetPoint("LEFT", Token, "RIGHT", -8, 2) 
 		
-		Count:SetFont(C.Medias.Font, 13)
+		Count:SetFont(C["medias"].Font, 13)
 	end
 end
 
@@ -328,9 +328,9 @@ function Bags:Update(size, id)
 				local Money = ContainerFrame1MoneyFrame
 				
 				Button:ClearAllPoints()
-				Button:SetWidth(C.Bags.ButtonSize)
-				Button:SetHeight(C.Bags.ButtonSize)
-				Button:SetScale(C.Bags.Scale)
+				Button:SetWidth(C["bags"].ButtonSize)
+				Button:SetHeight(C["bags"].ButtonSize)
+				Button:SetScale(C["bags"].Scale)
 				Button:SetFrameStrata("HIGH")
 				Button:SetFrameLevel(2)
 				
@@ -339,21 +339,21 @@ function Bags:Update(size, id)
 				Money:SetPoint("TOPLEFT", Bags.Bag, "TOPLEFT", 8, -10)
 				Money:SetFrameStrata("HIGH")
 				Money:SetFrameLevel(2)
-				Money:SetScale(C.Bags.Scale)
+				Money:SetScale(C["bags"].Scale)
 				
 				if (Bag == 1 and Item == 16) then
 					Button:SetPoint("TOPLEFT", Bags.Bag, "TOPLEFT", 10, -40)
 					LastRowButton = Button
 					LastButton = Button
-				elseif (NumButtons == C.Bags.ItemsPerRow) then
-					Button:SetPoint("TOPRIGHT", LastRowButton, "TOPRIGHT", 0, -(C.Bags.Spacing + C.Bags.ButtonSize))
-					Button:SetPoint("BOTTOMLEFT", LastRowButton, "BOTTOMLEFT", 0, -(C.Bags.Spacing + C.Bags.ButtonSize))
+				elseif (NumButtons == C["bags"].ItemsPerRow) then
+					Button:SetPoint("TOPRIGHT", LastRowButton, "TOPRIGHT", 0, -(C["bags"].Spacing + C["bags"].ButtonSize))
+					Button:SetPoint("BOTTOMLEFT", LastRowButton, "BOTTOMLEFT", 0, -(C["bags"].Spacing + C["bags"].ButtonSize))
 					LastRowButton = Button
 					NumRows = NumRows + 1
 					NumButtons = 1
 				else
-					Button:SetPoint("TOPRIGHT", LastButton, "TOPRIGHT", (C.Bags.Spacing + C.Bags.ButtonSize), 0)
-					Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (C.Bags.Spacing + C.Bags.ButtonSize), 0)
+					Button:SetPoint("TOPRIGHT", LastButton, "TOPRIGHT", (C["bags"].Spacing + C["bags"].ButtonSize), 0)
+					Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (C["bags"].Spacing + C["bags"].ButtonSize), 0)
 					NumButtons = NumButtons + 1
 				end
 				
@@ -363,9 +363,9 @@ function Bags:Update(size, id)
 		end
 		
 		if (Token1:IsShown()) then
-			Bags.Bag:SetHeight(((C.Bags.ButtonSize + C.Bags.Spacing) * (NumRows + 1) + 76) - C.Bags.Spacing)
+			Bags.Bag:SetHeight(((C["bags"].ButtonSize + C["bags"].Spacing) * (NumRows + 1) + 76) - C["bags"].Spacing)
 		else
-			Bags.Bag:SetHeight(((C.Bags.ButtonSize + C.Bags.Spacing) * (NumRows + 1) + 54) - C.Bags.Spacing)
+			Bags.Bag:SetHeight(((C["bags"].ButtonSize + C["bags"].Spacing) * (NumRows + 1) + 54) - C["bags"].Spacing)
 		end
 	else
 		local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
@@ -376,11 +376,11 @@ function Bags:Update(size, id)
 			local BankFrameMoneyFrame = BankFrameMoneyFrame
 			
 			Button:ClearAllPoints()
-			Button:SetWidth(C.Bags.ButtonSize)
-			Button:SetHeight(C.Bags.ButtonSize)
+			Button:SetWidth(C["bags"].ButtonSize)
+			Button:SetHeight(C["bags"].ButtonSize)
 			Button:SetFrameStrata("HIGH")
 			Button:SetFrameLevel(2)
-			Button:SetScale(C.Bags.Scale)
+			Button:SetScale(C["bags"].Scale)
 			
 			Money:Show()
 			Money:ClearAllPoints()
@@ -388,7 +388,7 @@ function Bags:Update(size, id)
 			Money:SetFrameStrata("HIGH")
 			Money:SetFrameLevel(2)
 			Money:SetParent(Bags.Bank)
-			Money:SetScale(C.Bags.Scale)
+			Money:SetScale(C["bags"].Scale)
 			
 			BankFrameMoneyFrame:Hide()
 			
@@ -396,15 +396,15 @@ function Bags:Update(size, id)
 				Button:SetPoint("TOPLEFT", Bags.Bank, "TOPLEFT", 10, -40)
 				LastRowButton = Button
 				LastButton = Button
-			elseif (NumButtons == C.Bags.ItemsPerRow) then
-				Button:SetPoint("TOPRIGHT", LastRowButton, "TOPRIGHT", 0, -(C.Bags.Spacing + C.Bags.ButtonSize))
-				Button:SetPoint("BOTTOMLEFT", LastRowButton, "BOTTOMLEFT", 0, -(C.Bags.Spacing + C.Bags.ButtonSize))
+			elseif (NumButtons == C["bags"].ItemsPerRow) then
+				Button:SetPoint("TOPRIGHT", LastRowButton, "TOPRIGHT", 0, -(C["bags"].Spacing + C["bags"].ButtonSize))
+				Button:SetPoint("BOTTOMLEFT", LastRowButton, "BOTTOMLEFT", 0, -(C["bags"].Spacing + C["bags"].ButtonSize))
 				LastRowButton = Button
 				NumRows = NumRows + 1
 				NumButtons = 1
 			else
-				Button:SetPoint("TOPRIGHT", LastButton, "TOPRIGHT", (C.Bags.Spacing + C.Bags.ButtonSize), 0)
-				Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (C.Bags.Spacing + C.Bags.ButtonSize), 0)
+				Button:SetPoint("TOPRIGHT", LastButton, "TOPRIGHT", (C["bags"].Spacing + C["bags"].ButtonSize), 0)
+				Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (C["bags"].Spacing + C["bags"].ButtonSize), 0)
 				NumButtons = NumButtons + 1
 			end
 			Bags.SkinBagButton(Button)
@@ -418,21 +418,21 @@ function Bags:Update(size, id)
 				local Button = _G["ContainerFrame"..Bag.."Item"..Item]
 				
 				Button:ClearAllPoints()
-				Button:SetWidth(C.Bags.ButtonSize)
-				Button:SetHeight(C.Bags.ButtonSize)
+				Button:SetWidth(C["bags"].ButtonSize)
+				Button:SetHeight(C["bags"].ButtonSize)
 				Button:SetFrameStrata("HIGH")
 				Button:SetFrameLevel(2)
-				Button:SetScale(C.Bags.Scale)
+				Button:SetScale(C["bags"].Scale)
 				
-				if (NumButtons == C.Bags.ItemsPerRow) then
-					Button:SetPoint("TOPRIGHT", LastRowButton, "TOPRIGHT", 0, -(C.Bags.Spacing + C.Bags.ButtonSize))
-					Button:SetPoint("BOTTOMLEFT", LastRowButton, "BOTTOMLEFT", 0, -(C.Bags.Spacing + C.Bags.ButtonSize))
+				if (NumButtons == C["bags"].ItemsPerRow) then
+					Button:SetPoint("TOPRIGHT", LastRowButton, "TOPRIGHT", 0, -(C["bags"].Spacing + C["bags"].ButtonSize))
+					Button:SetPoint("BOTTOMLEFT", LastRowButton, "BOTTOMLEFT", 0, -(C["bags"].Spacing + C["bags"].ButtonSize))
 					LastRowButton = Button
 					NumRows = NumRows + 1
 					NumButtons = 1
 				else
-					Button:SetPoint("TOPRIGHT", LastButton, "TOPRIGHT", (C.Bags.Spacing+C.Bags.ButtonSize), 0)
-					Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (C.Bags.Spacing+C.Bags.ButtonSize), 0)
+					Button:SetPoint("TOPRIGHT", LastButton, "TOPRIGHT", (C["bags"].Spacing+C["bags"].ButtonSize), 0)
+					Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (C["bags"].Spacing+C["bags"].ButtonSize), 0)
 					NumButtons = NumButtons + 1
 				end
 				
@@ -441,7 +441,7 @@ function Bags:Update(size, id)
 			end
 		end
 		
-		Bags.Bank:SetHeight(((C.Bags.ButtonSize + C.Bags.Spacing) * (NumRows + 1) + 52) - C.Bags.Spacing)
+		Bags.Bank:SetHeight(((C["bags"].ButtonSize + C["bags"].Spacing) * (NumRows + 1) + 52) - C["bags"].Spacing)
 	end
 end
 

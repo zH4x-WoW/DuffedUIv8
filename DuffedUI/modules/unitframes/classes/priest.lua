@@ -27,7 +27,7 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 	for i = 1, 3 do
 		SOBar[i] = CreateFrame("StatusBar", nil, SOBar)
 		SOBar[i]:Height(8)
-		SOBar[i]:SetStatusBarTexture(C.Medias.Normal)
+		SOBar[i]:SetStatusBarTexture(C["medias"].Normal)
 
 		if i == 1 then
 			SOBar[i]:Width((250 / 3) - 1)
@@ -50,14 +50,14 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 	-- Register
 	self.ShadowOrbsBar = SOBar
 
-	if (C.UnitFrames.WeakBar) then
+	if (C["unitframes"].WeakBar) then
 		-- Weakened Soul Bar
 		local WSBar = CreateFrame("StatusBar", nil, self.Power)
 		WSBar:SetAllPoints(self.Power)
-		WSBar:SetStatusBarTexture(C.Medias.Normal)
+		WSBar:SetStatusBarTexture(C["medias"].Normal)
 		WSBar:GetStatusBarTexture():SetHorizTile(false)
 		WSBar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
-		WSBar:SetBackdropColor(unpack(C.Medias.BackdropColor))
+		WSBar:SetBackdropColor(unpack(C["medias"].BackdropColor))
 		WSBar:SetStatusBarColor(0.75, 0.04, 0.04)
 		
 		-- Register

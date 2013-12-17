@@ -17,7 +17,7 @@ function DuffedUIUnitFrames:Raid()
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
 	Health:Height(28)
-	Health:SetStatusBarTexture(C.Medias.Normal)
+	Health:SetStatusBarTexture(C["medias"].Normal)
 	Health:SetOrientation("VERTICAL")
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
@@ -26,7 +26,7 @@ function DuffedUIUnitFrames:Raid()
 	Health.colorClass = true
 	Health.colorDisconnected = true
 	Health.colorReaction = true
-	if (C.UnitFrames.Smooth) then
+	if (C["unitframes"].Smooth) then
 		Health.Smooth = true
 	end
 	
@@ -37,12 +37,12 @@ function DuffedUIUnitFrames:Raid()
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints(Power)
-	Power.Background:SetTexture(C.Medias.Normal)
+	Power.Background:SetTexture(C["medias"].Normal)
 	Power.Background.multiplier = 0.3
-	Power:SetStatusBarTexture(C.Medias.Normal)
+	Power:SetStatusBarTexture(C["medias"].Normal)
 	Power.frequentUpdates = true
 	Power.colorPower = true
-	if (C.UnitFrames.Smooth) then
+	if (C["unitframes"].Smooth) then
 		Health.Smooth = true
 	end
 	
@@ -51,11 +51,11 @@ function DuffedUIUnitFrames:Raid()
 	Panel:Point("TOPRIGHT", Power, "BOTTOMRIGHT", 0, -1)
 	Panel:SetPoint("BOTTOM", 0, 0)
 	Panel:SetTemplate()
-	Panel:SetBackdropBorderColor(C.Medias.BorderColor[1] * 0.7, C.Medias.BorderColor[2] * 0.7, C.Medias.BorderColor[3] * 0.7)
+	Panel:SetBackdropBorderColor(C["medias"].BorderColor[1] * 0.7, C["medias"].BorderColor[2] * 0.7, C["medias"].BorderColor[3] * 0.7)
 	
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER")
-	Name:SetFont(C.Medias.AltFont, 12)
+	Name:SetFont(C["medias"].AltFont, 12)
 	
 	local ReadyCheck = Power:CreateTexture(nil, "OVERLAY")
 	ReadyCheck:Height(12)

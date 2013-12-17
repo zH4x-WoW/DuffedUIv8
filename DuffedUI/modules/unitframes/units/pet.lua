@@ -16,13 +16,13 @@ function DuffedUIUnitFrames:Pet()
 	Panel:Point("BOTTOM", self, 0, 0)
 	Panel:SetFrameLevel(2)
 	Panel:SetFrameStrata("MEDIUM")
-	Panel:SetBackdropBorderColor(C.Medias.BorderColor[1] * 0.7, C.Medias.BorderColor[2] * 0.7, C.Medias.BorderColor[3] * 0.7)
+	Panel:SetBackdropBorderColor(C["medias"].BorderColor[1] * 0.7, C["medias"].BorderColor[2] * 0.7, C["medias"].BorderColor[3] * 0.7)
 	
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:Height(13)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
-	Health:SetStatusBarTexture(C.Medias.Normal)
+	Health:SetStatusBarTexture(C["medias"].Normal)
 	Health.frequentUpdates = true
 	Health.PostUpdate = D.PostUpdatePetColor
 	Health.colorDisconnected = true	
@@ -34,7 +34,7 @@ function DuffedUIUnitFrames:Pet()
 	Health.Background:Point("BOTTOMRIGHT", Health, 1, -1)
 	Health.Background:SetTexture(0, 0, 0)
 	
-	if C.UnitFrames.Smooth then
+	if C["unitframes"].Smooth then
 		Health.Smooth = true
 	end
 	
@@ -42,7 +42,7 @@ function DuffedUIUnitFrames:Pet()
 	Power:Height(4)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
-	Power:SetStatusBarTexture(C.Medias.Normal)
+	Power:SetStatusBarTexture(C["medias"].Normal)
 	Power.frequentUpdates = true
 	Power.colorPower = true
 	
@@ -51,13 +51,13 @@ function DuffedUIUnitFrames:Pet()
 	Power.Background:Point("BOTTOMRIGHT", Power, 1, -1)
 	Power.Background:SetTexture(0, 0, 0)
 	
-	if C.UnitFrames.Smooth then
+	if C["unitframes"].Smooth then
 		Power.Smooth = true
 	end
 
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER", Panel, "CENTER", 0, 0)
-	Name:SetFont(C.Medias.AltFont, 12)
+	Name:SetFont(C["medias"].AltFont, 12)
 	Name:SetJustifyH("CENTER")
 	
 	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameMedium] [DuffedUI:DiffColor][level]")

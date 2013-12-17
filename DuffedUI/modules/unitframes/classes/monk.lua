@@ -42,7 +42,7 @@ function DuffedUIUnitFrames:AddMonkFeatures()
 	for i = 1, 5 do
 		Harmony[i] = CreateFrame("StatusBar", nil, Harmony)
 		Harmony[i]:Height(8)
-		Harmony[i]:SetStatusBarTexture(C.Medias.Normal)
+		Harmony[i]:SetStatusBarTexture(C["medias"].Normal)
 
 		if i == 1 then
 			Harmony[i]:Width(250 / 5)

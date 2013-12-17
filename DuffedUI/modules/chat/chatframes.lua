@@ -6,7 +6,7 @@ local D, C, L = select(2, ...):unpack()
 	-- PLAYER_ENTERING_WORLD event on DuffedUIChat will not be needed anymore when we will create the install process.
 	-- find the event which randomly move chat position from default and unregister it.
 
-if (not C.Chat.Enable) then
+if (not C["chat"].Enable) then
 	return
 end
 
@@ -31,8 +31,8 @@ function DuffedUIChat:UpdateEditBoxColor()
 			local ID = GetChannelName(EditBox:GetAttribute("channelTarget"))
 			
 			if (ID == 0) then
-				--Backdrop:SetBackdropBorderColor(unpack(C.Medias.BorderColor)) -- [[ NOTE! Just leaving these here for now if you decide you don't like this feature. Will remove them up if you do. ]]
-				D.GradientFrame(Backdrop, "Border", 0, 0.5, unpack(C.Medias.BorderColor))
+				--Backdrop:SetBackdropBorderColor(unpack(C["medias"].BorderColor)) -- [[ NOTE! Just leaving these here for now if you decide you don't like this feature. Will remove them up if you do. ]]
+				D.GradientFrame(Backdrop, "Border", 0, 0.5, unpack(C["medias"].BorderColor))
 			else
 				--Backdrop:SetBackdropBorderColor(ChatTypeInfo[ChatType..ID].r,ChatTypeInfo[ChatType..ID].g,ChatTypeInfo[ChatType..ID].b)
 				D.GradientFrame(Backdrop, "Border", 0, 0.5, ChatTypeInfo[ChatType..ID].r, ChatTypeInfo[ChatType..ID].g, ChatTypeInfo[ChatType..ID].b)
@@ -104,7 +104,7 @@ function DuffedUIChat:StyleFrame(frame)
 	EditBox.Backdrop:SetAllPoints(DataTextLeft)
 	EditBox.Backdrop:SetFrameStrata("LOW")
 	EditBox.Backdrop:SetFrameLevel(1)
-	EditBox.Backdrop:SetBackdropColor(unpack(C.Medias.BackdropColor))
+	EditBox.Backdrop:SetBackdropColor(unpack(C["medias"].BackdropColor))
 	
 	-- Hide textures
 	for i = 1, #CHAT_FRAME_TEXTURES do
@@ -189,7 +189,7 @@ function DuffedUIChat:Install()
 	FCF_SetLocked(ChatFrame3, 1)
 	FCF_DockFrame(ChatFrame3)
 
-	if C.Chat.LootFrame then
+	if C["chat"].LootFrame then
 		FCF_OpenNewWindow(LOOT)
 		FCF_UnDockFrame(ChatFrame4)
 		ChatFrame4:Show()
@@ -209,7 +209,7 @@ function DuffedUIChat:Install()
 		if (ID == 1) then
 			Frame:ClearAllPoints()
 			Frame:Point("BOTTOM", DataTextLeft, "TOP", 0, 5)
-		elseif (C.Chat.LootFrame and ID == 4) then
+		elseif (C["chat"].LootFrame and ID == 4) then
 			if (not Frame.isDocked) then
 				Frame:ClearAllPoints()
 				Frame:Point("BOTTOM", DataTextRight, "TOP", 0, 5)
@@ -283,7 +283,7 @@ function DuffedUIChat:Install()
 	ChatFrame_AddChannel(ChatFrame3, "LookingForGroup")
 	
 	-- Setup the right chat
-	if C.Chat.LootFrame then
+	if C["chat"].LootFrame then
 		ChatFrame_RemoveAllMessageGroups(ChatFrame4)
 		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
 		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
@@ -318,7 +318,7 @@ function DuffedUIChat:Install()
 	
 	DEFAULT_CHAT_FRAME:SetUserPlaced(true)
 	
-	if (not C.Chat.LootFrame) then
+	if (not C["chat"].LootFrame) then
 		if (FCF_GetChatWindowInfo(ChatFrame4:GetID()) == LOOT) then
 			FCF_Close(ChatFrame4)
 		end

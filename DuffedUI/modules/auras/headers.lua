@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C.Auras.Enable) then
+if (not C["auras"].Enable) then
 	return
 end
 
@@ -47,7 +47,7 @@ function DuffedUIAuras:CreateHeaders()
 	local Buffs = Headers[1]
 	local Debuffs = Headers[2]
 	local Consolidate = Headers[3]
-	local Filter = (C.Auras.Consolidate and 1) or 0
+	local Filter = (C["auras"].Consolidate and 1) or 0
 	local Proxy = CreateFrame("Frame", nil, Buffs, "DuffedUIAurasProxyTemplate")
 	local DropDown = CreateFrame("BUTTON", nil, Proxy, "SecureHandlerClickTemplate")
 	
