@@ -12,7 +12,7 @@ local PetActionBarFrame = PetActionBarFrame
 local PetActionBar_UpdateCooldowns = PetActionBar_UpdateCooldowns
 
 function DuffedUIActionBars:CreatePetBar()
-	local Bar = T.Panels.PetActionBar
+	local Bar = D.Panels.PetActionBar
 	
 	Bar:RegisterEvent("PLAYER_LOGIN")
 	Bar:RegisterEvent("PLAYER_CONTROL_LOST")

@@ -534,7 +534,7 @@ local SetEnd = function(self, r, g, b)
 	end
 end
 
-T.GradientFrame = function(self, part, start, finish, r, g, b, customFunc)
+D.GradientFrame = function(self, part, start, finish, r, g, b, customFunc)
 	self.GradientType = string.lower(part)
 	self.GradientMin = start
 	self.GradientMax = finish

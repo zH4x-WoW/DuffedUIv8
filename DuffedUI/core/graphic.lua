@@ -6,16 +6,16 @@ local T, C = select(2, ...):unpack()
 
 -- [[ Auto Scaling ]] --
 if C.General.AutoScale == true then
-	C.General.UIScale = min(2, max(.64, 768/string.match(T.Resolution, "%d+x(%d+)")))
+	C.General.UIScale = min(2, max(.64, 768/string.match(D.Resolution, "%d+x(%d+)")))
 end
 
 -- [[ ReloadUI need to be done even if we keep aspect ratio ]] --
 local function NeedReloadUI()
 	local resolution = Graphics_ResolutionDropDown
 	local x, y = resolution:getValues()
-	local oldratio = T.ScreenWidth / T.ScreenHeight
+	local oldratio = D.ScreenWidth / D.ScreenHeight
 	local newratio = x / y
-	local oldreso = T.Resolution
+	local oldreso = D.Resolution
 	local newreso = x.."x"..y
 	
 	if (oldratio == newratio) and (oldreso ~= newreso) then
@@ -44,14 +44,14 @@ Graphic:SetScript("OnEvent", function(self, event)
 		SetCVar("uiScale", C.General.UIScale)
 	end
 
-	if T.TripleMonitors then
-		local width = T.TripleMonitors
-		local height = T.ScreenHeight
+	if D.TripleMonitors then
+		local width = D.TripleMonitors
+		local height = D.ScreenHeight
 		
 		if not C.General.AutoScale or height > 1200 then
 			local h = UIParent:GetHeight()
-			local ratio = T.ScreenHeight / h
-			local w = T.TripleMonitors / ratio
+			local ratio = D.ScreenHeight / h
+			local w = D.TripleMonitors / ratio
 			
 			width = w
 			height = h			

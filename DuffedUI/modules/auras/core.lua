@@ -63,8 +63,8 @@ function DuffedUIAuras:OnUpdate(elapsed)
 		
 		return self:SetScript("OnUpdate", nil)
 	else
-		local Text = T.FormatTime(TimeLeft)
-		local r, g, b = T.ColorGradient(self.TimeLeft, self.Dur, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
+		local Text = D.FormatTime(TimeLeft)
+		local r, g, b = D.ColorGradient(self.TimeLeft, self.Dur, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
 
 		self.Bar:SetValue(self.TimeLeft)
 		self.Bar:SetStatusBarColor(r, g, b)
@@ -197,7 +197,7 @@ function DuffedUIAuras:Skin()
 	local Proxy = self.IsProxy
 	
 	local Icon = self:CreateTexture(nil, "BORDER")
-	Icon:SetTexCoord(unpack(T.IconCoord))
+	Icon:SetTexCoord(unpack(D.IconCoord))
 	Icon:SetInside()
 	
 	local Count = self:CreateFontString(nil, "OVERLAY")
@@ -274,7 +274,7 @@ function DuffedUIAuras:Skin()
 		local Overlay = self:CreateTexture(nil, "OVERLAY")
 		Overlay:SetTexture(DuffedUIAuras.ProxyIcon)
 		Overlay:SetInside()
-		Overlay:SetTexCoord(unpack(T.IconCoord))
+		Overlay:SetTexCoord(unpack(D.IconCoord))
 		
 		self.Overlay = Overlay
 	end

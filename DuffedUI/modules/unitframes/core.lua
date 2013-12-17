@@ -28,7 +28,7 @@ DuffedUIUnitFrames.Headers = {}
 DuffedUIUnitFrames.Framework = DuffedUIUnitFrameFramework
 DuffedUIUnitFrames.Backdrop = {
 	bgFile = C.Medias.Blank,
-	insets = {top = -T.Mult, left = -T.Mult, bottom = -T.Mult, right = -T.Mult},
+	insets = {top = -D.Mult, left = -D.Mult, bottom = -D.Mult, right = -D.Mult},
 }
 
 function DuffedUIUnitFrames:DisableBlizzard()
@@ -240,7 +240,7 @@ function DuffedUIUnitFrames:PostUpdateHealth(unit, min, max)
 		end
 
 		if (min ~= max) then
-			r, g, b = T.ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
+			r, g, b = D.ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
 			if (unit == "player" and self:GetAttribute("normalUnit") ~= "pet") then
 				self.Value:SetFormattedText("|cffAF5050%d|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", min, r * 255, g * 255, b * 255, floor(min / max * 100))
 			elseif (unit == "target" or (unit and strfind(unit, "boss%d"))) then
@@ -383,7 +383,7 @@ function DuffedUIUnitFrames:CreateAuraTimer(elapsed)
 			end
 
 			if self.TimeLeft > 0 then
-				local Time = T.FormatTime(self.TimeLeft)
+				local Time = D.FormatTime(self.TimeLeft)
 				self.Remaining:SetText(Time)
 				
 				if self.TimeLeft <= 5 then
@@ -417,7 +417,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button.cd:SetInside()
 
 	button.icon:SetInside()
-	button.icon:SetTexCoord(unpack(T.IconCoord))
+	button.icon:SetTexCoord(unpack(D.IconCoord))
 	button.icon:SetDrawLayer('ARTWORK')
 
 	button.count:Point("BOTTOMRIGHT", 3, 3)
@@ -505,7 +505,7 @@ end
 function DuffedUIUnitFrames:UpdateBossAltPower(minimum, current, maximum)
 	if (not current) or (not maximum) then return end
 	
-	local r, g, b = T.ColorGradient(current, maximum, 0, .8 ,0 ,.8 ,.8 ,0 ,.8 ,0 ,0)
+	local r, g, b = D.ColorGradient(current, maximum, 0, .8 ,0 ,.8 ,.8 ,0 ,.8 ,0 ,0)
 	self:SetStatusBarColor(r, g, b)
 end
 
@@ -525,8 +525,8 @@ function DuffedUIUnitFrames:GetPartyFramesAttributes()
 			self:SetWidth(header:GetAttribute("initial-width"))
 			self:SetHeight(header:GetAttribute("initial-height"))
 		]],
-		"initial-width", C.Party.Portrait and T.Scale(162) or T.Scale(206),
-		"initial-height", C.Party.Portrait and T.Scale(24) or T.Scale(40),
+		"initial-width", C.Party.Portrait and D.Scale(162) or D.Scale(206),
+		"initial-height", C.Party.Portrait and D.Scale(24) or D.Scale(40),
 		"showSolo", true, -- uncomment this for coding
 		"showParty", true, 
 		"showPlayer", true, 
@@ -534,7 +534,7 @@ function DuffedUIUnitFrames:GetPartyFramesAttributes()
 		"groupFilter", "1,2,3,4,5,6,7,8", 
 		"groupingOrder", "1,2,3,4,5,6,7,8", 
 		"groupBy", "GROUP", 
-		"yOffset", T.Scale(-66)	
+		"yOffset", D.Scale(-66)	
 end
 
 function DuffedUIUnitFrames:GetRaidFramesAttributes()
@@ -549,21 +549,21 @@ function DuffedUIUnitFrames:GetRaidFramesAttributes()
 			self:SetWidth(header:GetAttribute("initial-width"))
 			self:SetHeight(header:GetAttribute("initial-height"))
 		]],
-		"initial-width", T.Scale(66),
-		"initial-height", T.Scale(50),
+		"initial-width", D.Scale(66),
+		"initial-height", D.Scale(50),
 		"showParty", false,
 		"showRaid", true,
 		"showPlayer", true,
 		"showSolo", false,
-		"xoffset", T.Scale(3),
-		"yOffset", T.Scale(-3),
+		"xoffset", D.Scale(3),
+		"yOffset", D.Scale(-3),
 		"point", "TOP",
 		"groupFilter", "1,2,3,4,5,6,7,8",
 		"groupingOrder", "1,2,3,4,5,6,7,8",
 		"groupBy", "GROUP",
 		"maxColumns", math.ceil(40/10),
 		"unitsPerColumn", 10,
-		"columnSpacing", T.Scale(3),
+		"columnSpacing", D.Scale(3),
 		"columnAnchorPoint", "LEFT"
 end
 
@@ -579,12 +579,12 @@ function DuffedUIUnitFrames:GetPetRaidFramesAttributes()
 		"maxColumns", math.ceil(40/10),
 		"point", "TOP",
 		"unitsPerColumn", 10,
-		"columnSpacing", T.Scale(3),
+		"columnSpacing", D.Scale(3),
 		"columnAnchorPoint", "LEFT",
-		"yOffset", T.Scale(-3),
-		"xOffset", T.Scale(3),
-		"initial-width", T.Scale(66),
-		"initial-height", T.Scale(50),
+		"yOffset", D.Scale(-3),
+		"xOffset", D.Scale(3),
+		"initial-width", D.Scale(66),
+		"initial-height", D.Scale(50),
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute("initial-width"))
@@ -703,7 +703,7 @@ function DuffedUIUnitFrames:CreateUnits()
 		
 		local Party = oUF:SpawnHeader(DuffedUIUnitFrames:GetPartyFramesAttributes())
 		Party:SetParent(Panels.PetBattleHider)
-		Party:Point("TOPLEFT", UIParent, "TOPLEFT", Gap, -(T.ScreenHeight / 4))
+		Party:Point("TOPLEFT", UIParent, "TOPLEFT", Gap, -(D.ScreenHeight / 4))
 		
 		DuffedUIUnitFrames.Headers.Party = Party
 	end
@@ -711,7 +711,7 @@ function DuffedUIUnitFrames:CreateUnits()
 	if C.Raid.Enable then
 		local Raid = oUF:SpawnHeader(DuffedUIUnitFrames:GetRaidFramesAttributes())
 		Raid:SetParent(Panels.PetBattleHider)
-		Raid:Point("TOPLEFT", UIParent, "TOPLEFT", 18, -(T.ScreenHeight / 9))
+		Raid:Point("TOPLEFT", UIParent, "TOPLEFT", 18, -(D.ScreenHeight / 9))
 
 		local Pet = oUF:SpawnHeader(DuffedUIUnitFrames:GetPetRaidFramesAttributes())
 		Pet:SetParent(Panels.PetBattleHider)

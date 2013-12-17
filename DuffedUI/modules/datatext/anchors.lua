@@ -3,21 +3,21 @@ local T, C = select(2, ...):unpack()
 -- Local values
 local MenuFrame = CreateFrame("Frame", "DataTextToggleDropDown", UIParent, "UIDropDownMenuTemplate")
 local DuffedUIDT = T["DataTexts"]
-local Anchors = DuffedUIDT.Anchors
-local Menu = DuffedUIDT.Menu
+local Anchors = DuffedUIDD.Anchors
+local Menu = DuffedUIDD.Menu
 local Active = false
 local CurrentFrame
 
-DuffedUIDT.Toggle = function(self, object)
+DuffedUIDD.Toggle = function(self, object)
 	CurrentFrame:SetData(object)
 end
 
-DuffedUIDT.Remove = function()
+DuffedUIDD.Remove = function()
 	CurrentFrame:RemoveData()
 end
 
 -- Add a remove button
-tinsert(Menu, {text = "|cffFF0000"..REMOVE.."|r", notCheckable = true, func = DuffedUIDT.Remove})
+tinsert(Menu, {text = "|cffFF0000"..REMOVE.."|r", notCheckable = true, func = DuffedUIDD.Remove})
 
 local OnMouseDown = function(self)
 	CurrentFrame = self
@@ -49,18 +49,18 @@ end
 
 -- Color stuff, move me later
 local DataColor1, DataColor2
-local Hex = T.RGBToHex
+local Hex = D.RGBToHex
 
 if DuffedUIDataPerChar then
-	DuffedUIDT.NameColor = DuffedUIDataPerChar.DTNameColor
-	DuffedUIDT.ValueColor = DuffedUIDataPerChar.DTValueColor
+	DuffedUIDD.NameColor = DuffedUIDataPerChar.DTNameColor
+	DuffedUIDD.ValueColor = DuffedUIDataPerChar.DTValueColor
 else
 	-- Default to the colors defined by media
 	DataColor1 = C["Medias"].PrimaryDataTextColor or {1, 1, 1}
 	DataColor2 = C["Medias"].SecondaryDataTextColor or {1, 1, 1}
 	
-	DuffedUIDT.NameColor = Hex(unpack(DataColor1))
-	DuffedUIDT.ValueColor = Hex(unpack(DataColor2))
+	DuffedUIDD.NameColor = Hex(unpack(DataColor1))
+	DuffedUIDD.ValueColor = Hex(unpack(DataColor2))
 end
 
 local Color -- Not sure if this is needed, should be able to get around it
@@ -107,7 +107,7 @@ ColorInfo1.text = COLOR .. " 1"
 ColorInfo1.func = OnClick
 ColorInfo1.arg1 = ColorInfo1
 ColorInfo1.notCheckable = true
-ColorInfo1.colorCode = DuffedUIDT.NameColor
+ColorInfo1.colorCode = DuffedUIDD.NameColor
 ColorInfo1.r = DataColor1[1]
 ColorInfo1.g = DataColor1[2]
 ColorInfo1.b = DataColor1[3]
@@ -117,7 +117,7 @@ ColorInfo2.text = COLOR .. " 2"
 ColorInfo2.func = OnClick
 ColorInfo2.arg1 = ColorInfo2
 ColorInfo2.notCheckable = true
-ColorInfo2.colorCode = DuffedUIDT.ValueColor
+ColorInfo2.colorCode = DuffedUIDD.ValueColor
 ColorInfo2.r = DataColor2[1]
 ColorInfo2.g = DataColor2[2]
 ColorInfo2.b = DataColor2[3]

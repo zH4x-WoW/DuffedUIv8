@@ -43,7 +43,7 @@ function Bags:SkinBagButton()
 	end
 	
 	local Icon = _G[self:GetName().."IconTexture"]
-	Icon:SetTexCoord(unpack(T.IconCoord))
+	Icon:SetTexCoord(unpack(D.IconCoord))
 	Icon:SetInside(self)
 	
 	self:SetNormalTexture("")
@@ -184,7 +184,7 @@ function Bags:CreateContainer(storagetype, ...)
 			Count.Show = Noop
 			Count:Hide()
 
-			Icon:SetTexCoord(unpack(T.IconCoord))
+			Icon:SetTexCoord(unpack(D.IconCoord))
 			Icon:SetInside()
 
 			LastButtonBag = Button
@@ -219,7 +219,7 @@ function Bags:CreateContainer(storagetype, ...)
 			Count.Show = Noop
 			Count:Hide()
 
-			Icon:SetTexCoord(unpack(T.IconCoord))
+			Icon:SetTexCoord(unpack(D.IconCoord))
 
 			LastButtonBank = Button
 			BagsContainer:SetWidth((24 + C.Bags.Spacing) * (getn(BlizzardBank)) + 14)
@@ -290,7 +290,7 @@ function Bags:SkinTokens()
 		Token.Backdrop:SetOutside(Icon)
 		
 		Icon:SetSize(12,12) 
-		Icon:SetTexCoord(unpack(T.IconCoord)) 
+		Icon:SetTexCoord(unpack(D.IconCoord)) 
 		Icon:SetPoint("LEFT", Token, "RIGHT", -8, 2) 
 		
 		Count:SetFont(C.Medias.Font, 13)

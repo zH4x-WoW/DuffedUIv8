@@ -6,7 +6,7 @@ end
 
 local _G = _G
 local unpack = unpack
-local Colors = T.Colors
+local Colors = D.Colors
 local DuffedUITooltips = CreateFrame("Frame")
 local gsub, find, format = string.gsub, string.find, string.format
 local Noop = function() end
@@ -81,7 +81,7 @@ function DuffedUITooltips:GetColor()
 			return
 		end
 		
-		local Hex = T.RGBToHex(unpack(Color))
+		local Hex = D.RGBToHex(unpack(Color))
 		
 		return Hex, Color.r, Color.g, Color.b	
 	else
@@ -92,7 +92,7 @@ function DuffedUITooltips:GetColor()
 			return
 		end
 		
-		local Hex = T.RGBToHex(unpack(Color))
+		local Hex = D.RGBToHex(unpack(Color))
 		
 		return Hex, Color.r, Color.g, Color.b		
 	end

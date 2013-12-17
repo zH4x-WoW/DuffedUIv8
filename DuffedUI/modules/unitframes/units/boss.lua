@@ -122,7 +122,7 @@ function DuffedUIUnitFrames:Boss()
 		CastBar.Icon = CastBar.Button:CreateTexture(nil, "ARTWORK")
 		CastBar.Icon:Point("TOPLEFT", CastBar.Button, 2, -2)
 		CastBar.Icon:Point("BOTTOMRIGHT", CastBar.Button, -2, 2)
-		CastBar.Icon:SetTexCoord(unpack(T.IconCoord))
+		CastBar.Icon:SetTexCoord(unpack(D.IconCoord))
 
 		self.Castbar = CastBar
 		self.Castbar.Time = CastBar.Time
@@ -141,8 +141,8 @@ function DuffedUIUnitFrames:Boss()
 	AltPowerBar:SetBackdrop({
 		bgFile = C.Medias.Blank, 
 		edgeFile = C.Medias.Blank, 
-		tile = false, tileSize = 0, edgeSize = T.Scale(1), 
-		insets = { left = 0, right = 0, top = 0, bottom = T.Scale(-1)}
+		tile = false, tileSize = 0, edgeSize = D.Scale(1), 
+		insets = { left = 0, right = 0, top = 0, bottom = D.Scale(-1)}
 	})
 	AltPowerBar:SetBackdropColor(0, 0, 0)
 	AltPowerBar:SetBackdropBorderColor(0, 0, 0)

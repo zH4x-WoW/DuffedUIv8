@@ -114,7 +114,7 @@ function DuffedUIUnitFrames:Player()
 
 			CastBar.Icon = CastBar.Button:CreateTexture(nil, "ARTWORK")
 			CastBar.Icon:SetInside()
-			CastBar.Icon:SetTexCoord(unpack(T.IconCoord))
+			CastBar.Icon:SetTexCoord(unpack(D.IconCoord))
 		end
 
 		if (C.UnitFrames.CastBarLatency) then

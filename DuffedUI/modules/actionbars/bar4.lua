@@ -8,7 +8,7 @@ local Spacing = C.ActionBars.ButtonSpacing
 local MultiBarLeft = MultiBarLeft
 
 function DuffedUIActionBars:CreateBar4()
-	local ActionBar4 = T.Panels.ActionBar4
+	local ActionBar4 = D.Panels.ActionBar4
 	
 	MultiBarLeft:SetParent(ActionBar4)
 	

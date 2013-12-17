@@ -12,11 +12,11 @@ local FontSize = 20
 local MinScale = 0.5
 local MinimumDuration = 2.5
 local Notification = C.Cooldowns.Notification
-local ExpireFormat = T.RGBToHex(1, 0, 0).."%.1f|r"
-local SecondsFormat = T.RGBToHex(1, 1, 0).."%d|r"
-local MinutesFormat = T.RGBToHex(1, 1, 1).."%dm|r"
-local HoursFormat = T.RGBToHex(0.4, 1, 1).."%dh|r"
-local DaysFormat = T.RGBToHex(0.4, 0.4, 1).."%dh|r"
+local ExpireFormat = D.RGBToHex(1, 0, 0).."%.1f|r"
+local SecondsFormat = D.RGBToHex(1, 1, 0).."%d|r"
+local MinutesFormat = D.RGBToHex(1, 1, 1).."%dm|r"
+local HoursFormat = D.RGBToHex(0.4, 1, 1).."%dh|r"
+local DaysFormat = D.RGBToHex(0.4, 0.4, 1).."%dh|r"
 local Active = {}
 local Hooked = {}
 local floor = math.floor
@@ -51,20 +51,20 @@ end
 
 function DuffedUICooldowns:GetTimeText()
 	if self < Minuteish then
-		local Seconds = tonumber(T.Round(self))
+		local Seconds = tonumber(D.Round(self))
 		if Seconds > Notification then
 			return SecondsFormat, Seconds, self - (Seconds - 0.51)
 		else
 			return ExpireFormat, self, 0.051
 		end
 	elseif self < Hourish then
-		local Minutes = tonumber(T.Round(self / Minute))
+		local Minutes = tonumber(D.Round(self / Minute))
 		return MinutesFormat, Minutes, Minutes > 1 and (self - (Minutes * Minute - HalfMinuteish)) or (self - Minuteish)
 	elseif self < Dayish then
-		local Hours = tonumber(T.Round(self / Hour))
+		local Hours = tonumber(D.Round(self / Hour))
 		return HoursFormat, Hours, Hours > 1 and (self - (Hours * Hour - HalfDayish)) or (self - Hourish)
 	else
-		local Day = tonumber(T.Round(self / Day))
+		local Day = tonumber(D.Round(self / Day))
 		return DaysFormat, Days,  Days > 1 and (self - (Days * Day - HalfDayish)) or (self - Dayish)
 	end
 end
@@ -80,7 +80,7 @@ function DuffedUICooldowns:ForceTimerUpdate()
 end
 
 function DuffedUICooldowns:OnSizeChanged(width, height)
-	local FontScale = T.Round(width) / IconSize
+	local FontScale = D.Round(width) / IconSize
 
 	if FontScale == self.FontScale then
 		return
@@ -105,7 +105,7 @@ function DuffedUICooldowns:OnUpdate(elapsed)
 		self.NextUpdate = self.NextUpdate - elapsed
 	else
 		local Remain = self.Duration - (GetTime() - self.Start)
-		if tonumber(T.Round(Remain)) > 0 then
+		if tonumber(D.Round(Remain)) > 0 then
 			if (self.FontScale * self:GetEffectiveScale() / UIParent:GetScale()) < MinScale then
 				self.Text:SetText("")
 				self.NextUpdate  = 1

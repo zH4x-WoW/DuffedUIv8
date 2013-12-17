@@ -32,7 +32,7 @@ function DuffedUIFonts:ChangeFonts()
 	local DAMAGE_TEXT_FONT = DAMAGE_TEXT_FONT
 	local STANDARD_TEXT_FONT = STANDARD_TEXT_FONT
 
-	if T.TripleMonitors then
+	if D.TripleMonitors then
 		InterfaceOptionsCombatTextPanelTargetDamage:Hide()
 		InterfaceOptionsCombatTextPanelPeriodicDamage:Hide()
 		InterfaceOptionsCombatTextPanelPetDamage:Hide()

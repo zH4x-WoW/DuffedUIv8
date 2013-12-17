@@ -11,8 +11,8 @@ local Hider = T["Panels"].Hider
 local WorldFrame = WorldFrame
 local RAID_CLASS_COLORS = RAID_CLASS_COLORS
 local Colors = T["Colors"]
-local Convert = T.RGBToHex
-local Scale = T.Scale
+local Convert = D.RGBToHex
+local Scale = D.Scale
 local FrameNumber = 0
 
 local Plates = CreateFrame("Frame", nil, WorldFrame)
@@ -169,7 +169,7 @@ function Plates:Skin(obj)
 
 	Plate.Cast.Border:SetTexture(nil)
 
-	Plate.Cast.Icon:SetTexCoord(unpack(T.IconCoord))
+	Plate.Cast.Icon:SetTexCoord(unpack(D.IconCoord))
 	Plate.Cast.Icon:Size(self.PlateHeight + self.PlateCastHeight + self.PlateSpacing)
 	
 	Plate.Cast.Icon.Backdrop = CreateFrame("Frame", nil, Plate.Cast)
@@ -274,7 +274,7 @@ Plates:SetScript("OnEvent", function(self, event, addon)
 	self.PlateSpacing = C.NamePlates.Spacing
 	self.Backdrop = {
 		bgFile = C.Medias.Blank,
-		insets = {top = -T.Mult, left = -T.Mult, bottom = -T.Mult, right = -T.Mult},
+		insets = {top = -D.Mult, left = -D.Mult, bottom = -D.Mult, right = -D.Mult},
 	}
 end)
 

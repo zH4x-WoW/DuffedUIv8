@@ -64,7 +64,7 @@ end
 function Install:PrintStep(number)
 	local ExecuteScript = self["Step" .. number]
 	local Text = L.Install["InstallStep" .. number]
-	local r, g, b = T.ColorGradient(number, self.MaxStepNumber, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
+	local r, g, b = D.ColorGradient(number, self.MaxStepNumber, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
 	
 	if (not Text) then
 		self:Hide()
@@ -117,7 +117,7 @@ end
 local StyleClick = function(self)
 	self.Text:SetTextColor(0, 1, 0)
 	
-	T.GradientFrame(self.Text, "Text", 0, 0.5, 1, 1, 1)
+	D.GradientFrame(self.Text, "Text", 0, 0.5, 1, 1, 1)
 end
 
 function Install:Launch()
@@ -126,7 +126,7 @@ function Install:Launch()
 		return
 	end
 	
-	local r, g, b = T.ColorGradient(0, self.MaxStepNumber, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
+	local r, g, b = D.ColorGradient(0, self.MaxStepNumber, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
 	
 	self.Description = CreateFrame("Frame", nil, self)
 	self.Description:Size(self.Width, self.Height)

@@ -7,7 +7,7 @@ end
 local DuffedUIChat = T["Chat"]
 local gsub = gsub
 local strsub = strsub
-local Color = T.RGBToHex(unpack(C.Chat.LinkColor)) or "FFFF00"
+local Color = D.RGBToHex(unpack(C.Chat.LinkColor)) or "FFFF00"
 local UseBracket = C.Chat.LinkBrackets
 local UseColor = true
 

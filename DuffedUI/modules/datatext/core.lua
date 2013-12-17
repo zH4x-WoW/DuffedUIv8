@@ -11,16 +11,16 @@ local DataTextRight = Panels.DataTextRight
 local MinimapDataTextOne
 local MinimapDataTextTwo
 
-DuffedUIDT.DefaultNumAnchors = 6
-DuffedUIDT.NumAnchors = DuffedUIDT.DefaultNumAnchors
-DuffedUIDT.Font = C.Medias.Font
-DuffedUIDT.Size = 12
-DuffedUIDT.Flags = nil
-DuffedUIDT.Texts = {}
-DuffedUIDT.Anchors = {}
-DuffedUIDT.Menu = {}
-DuffedUIDT.NameColor = T.RGBToHex(unpack(C.Medias.PrimaryDataTextColor))
-DuffedUIDT.ValueColor = T.RGBToHex(unpack(C.Medias.SecondaryDataTextColor))
+DuffedUIDD.DefaultNumAnchors = 6
+DuffedUIDD.NumAnchors = DuffedUIDD.DefaultNumAnchors
+DuffedUIDD.Font = C.Medias.Font
+DuffedUIDD.Size = 12
+DuffedUIDD.Flags = nil
+DuffedUIDD.Texts = {}
+DuffedUIDD.Anchors = {}
+DuffedUIDD.Menu = {}
+DuffedUIDD.NameColor = D.RGBToHex(unpack(C.Medias.PrimaryDataTextColor))
+DuffedUIDD.ValueColor = D.RGBToHex(unpack(C.Medias.SecondaryDataTextColor))
 
 function DuffedUIDT:AddToMenu(name, data)
 	if self["Texts"][name] then
@@ -47,7 +47,7 @@ local SetData = function(self, object)
 	self.Data.Position = self.Num
 	self.Data:SetAllPoints(self.Data.Text)
 	
-	if self.Data.Position > DuffedUIDT.DefaultNumAnchors then
+	if self.Data.Position > DuffedUIDD.DefaultNumAnchors then
 		self.Data:SetParent(Panels.PetBattleHider)
 	end
 end
@@ -106,7 +106,7 @@ local GetTooltipAnchor = function(self)
 	local From
 	local Anchor = "ANCHOR_TOP"
 	local X = 0
-	local Y = T.Scale(5)
+	local Y = D.Scale(5)
 		
 	if (Position >= 1 and Position <= 3) then
 		Anchor = "ANCHOR_TOPLEFT"
@@ -116,7 +116,7 @@ local GetTooltipAnchor = function(self)
 		From = DataTextRight
 	elseif (Position == 7 and MinimapDataTextOne) or (Position == 8 and MinimapDataTextTwo) then
 		Anchor = "ANCHOR_BOTTOMLEFT"
-		Y = T.Scale(-5)
+		Y = D.Scale(-5)
 		
 		if (Position == 7) then
 			From = MinimapDataTextOne
@@ -192,8 +192,8 @@ function DuffedUIDT:Save()
 		end
 	end
 	
-	Data.DTNameColor = DuffedUIDT.NameColor
-	Data.DTValueColor = DuffedUIDT.ValueColor
+	Data.DTNameColor = DuffedUIDD.NameColor
+	Data.DTValueColor = DuffedUIDD.ValueColor
 end
 
 function DuffedUIDT:Reset()
@@ -239,7 +239,7 @@ function DuffedUIDT:Load()
 					Object:Enable()
 					self.Anchors[Num]:SetData(Object)
 				else
-					T.Print("DataText '" .. name .. "' not found. Removing from cache.")
+					D.Print("DataText '" .. name .. "' not found. Removing from cache.")
 					DuffedUIDataPerChar.Texts[name] = {false, 0}
 				end
 			end

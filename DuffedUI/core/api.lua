@@ -11,8 +11,8 @@ local class = select(2, UnitClass("player"))
 local texture = C.Medias.Blank
 local Noop = function() return end
 
-T.Scale = Scale
-T.Mult = Mult
+D.Scale = Scale
+D.Mult = Mult
 
 -- [[ API FUNCTIONS ]] --
 

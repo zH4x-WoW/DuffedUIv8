@@ -40,7 +40,7 @@ function Inventory:SkinLootFrameButtons(i)
 			Button.Backdrop:SetOutside(Icon)
 			
 			Icon:SetTexture(IconTexture)
-			Icon:SetTexCoord(unpack(T.IconCoord))
+			Icon:SetTexCoord(unpack(D.IconCoord))
 			Icon:SetInside()
 			
 			Button.IsSkinned = true

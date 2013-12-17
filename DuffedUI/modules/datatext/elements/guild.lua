@@ -141,7 +141,7 @@ local OnEnter = function(self)
 	
 	if guildMotD ~= "" then GameTooltip:AddLine(' ') GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
 	
-	local col = T.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
+	local col = D.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
 	GameTooltip:AddLine' '
 	if GuildLevel and GuildLevel ~= 25 then
 		--UpdateGuildXP()
@@ -149,7 +149,7 @@ local OnEnter = function(self)
 		if guildXP[0] then
 			local currentXP, nextLevelXP, percentTotal = unpack(guildXP[0])
 			
-			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..T.ShortValue(currentXP), T.ShortValue(nextLevelXP), percentTotal))
+			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..D.ShortValue(currentXP), D.ShortValue(nextLevelXP), percentTotal))
 		end
 	end
 	
@@ -158,7 +158,7 @@ local OnEnter = function(self)
 		barMax = barMax - barMin
 		barValue = barValue - barMin
 		barMin = 0
-		GameTooltip:AddLine(string.format("%s:|r |cFFFFFFFF%s/%s (%s%%)",col..COMBAT_FACTION_CHANGE, T.ShortValue(barValue), T.ShortValue(barMax), math.ceil((barValue / barMax) * 100)))
+		GameTooltip:AddLine(string.format("%s:|r |cFFFFFFFF%s/%s (%s%%)",col..COMBAT_FACTION_CHANGE, D.ShortValue(barValue), D.ShortValue(barMax), math.ceil((barValue / barMax) * 100)))
 	end
 	
 	if online > 1 then

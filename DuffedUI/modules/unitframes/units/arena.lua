@@ -122,7 +122,7 @@ function DuffedUIUnitFrames:Arena()
 		CastBar.Icon = CastBar.Button:CreateTexture(nil, "ARTWORK")
 		CastBar.Icon:Point("TOPLEFT", CastBar.Button, 2, -2)
 		CastBar.Icon:Point("BOTTOMRIGHT", CastBar.Button, -2, 2)
-		CastBar.Icon:SetTexCoord(unpack(T.IconCoord))
+		CastBar.Icon:SetTexCoord(unpack(D.IconCoord))
 
 		self.Castbar = CastBar
 		self.Castbar.Time = CastBar.Time

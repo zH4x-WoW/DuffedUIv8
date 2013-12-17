@@ -18,7 +18,7 @@ local OnUpdate = function(self, elapsed)
 	if (TimeSinceLastUpdate >= 1) then
 		local Power = UnitPower("player", ALTERNATE_POWER_INDEX)
 		local MaxPower = UnitPowerMax("player", ALTERNATE_POWER_INDEX)
-		local R, G, B = T.ColorGradient(Power,MaxPower, 0,.8,0,.8,.8,0,.8,0,0)
+		local R, G, B = D.ColorGradient(Power,MaxPower, 0,.8,0,.8,.8,0,.8,0,0)
 	
 		self.Text:SetText(Power.." / "..MaxPower)
 		self.Status:SetMinMaxValues(0, UnitPowerMax("player", ALTERNATE_POWER_INDEX))

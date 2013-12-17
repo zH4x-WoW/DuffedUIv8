@@ -6,7 +6,7 @@ Quests:SetScript("OnEvent", function(self, event)
 	self:CreateWatchFrameAnchor()
 	self:AddWatchFrameHooks()
 
-	T.Delay(1, function()
+	D.Delay(1, function()
 		self:PositionWatchFrame()
 	end)
 end)

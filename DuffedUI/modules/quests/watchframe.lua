@@ -39,7 +39,7 @@ function Quests:CreateWatchFrameAnchor()
 end
 
 function Quests:PositionWatchFrame()
-	local ScreenHeight = T.ScreenHeight
+	local ScreenHeight = D.ScreenHeight
 	
 	WatchFrame:Show()
 	WatchFrame:SetParent(self.WatchFrame)
@@ -55,7 +55,7 @@ function Quests:SkinWatchFrameButton()
 		self:SkinButton()
 		self:StyleButton()
 		
-		Texture:SetTexCoord(unpack(T.IconCoord))
+		Texture:SetTexCoord(unpack(D.IconCoord))
 		Texture:SetInside()
 		
 		self.IsSkinned = true

@@ -178,7 +178,7 @@ function Battle:AddUnitFramesHooks()
 				if not Frame.IsSkinned then
 					Frame:CreateBackdrop()
 					Frame.Backdrop:SetOutside(Frame.Icon)
-					Frame.Icon:SetTexCoord(unpack(T.IconCoord))
+					Frame.Icon:SetTexCoord(unpack(D.IconCoord))
 					Frame.IsSkinned = true
 				end
 
@@ -203,7 +203,7 @@ function Battle:AddUnitFramesHooks()
 
 	-- PETS UNITFRAMES, ALWAYS HIDE BLIZZARD ICONS BORDER
 	hooksecurefunc("PetBattleUnitFrame_UpdateDisplay", function(self)
-		self.Icon:SetTexCoord(unpack(T.IconCoord))
+		self.Icon:SetTexCoord(unpack(D.IconCoord))
 	end)
 
 

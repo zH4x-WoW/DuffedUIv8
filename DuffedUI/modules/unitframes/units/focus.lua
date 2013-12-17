@@ -61,7 +61,7 @@ function DuffedUIUnitFrames:Focus()
 	Name:SetJustifyH("CENTER")
 	Name:SetFont(C.Medias.AltFont, 12, "OUTLINE")
 	Name:SetShadowColor(0, 0, 0)
-	Name:SetShadowOffset(T.Mult, -T.Mult)
+	Name:SetShadowOffset(D.Mult, -D.Mult)
 	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong]")
 
 	if (C.UnitFrames.CastBar) then
@@ -98,7 +98,7 @@ function DuffedUIUnitFrames:Focus()
 		CastBar.Button:SetBackdropBorderColor(C.Medias.BorderColor[1] * 0.7, C.Medias.BorderColor[2] * 0.7, C.Medias.BorderColor[3] * 0.7)
 		CastBar.Icon = CastBar.Button:CreateTexture(nil, "ARTWORK")
 		CastBar.Icon:SetInside()
-		CastBar.Icon:SetTexCoord(unpack(T.IconCoord))
+		CastBar.Icon:SetTexCoord(unpack(D.IconCoord))
 
 		CastBar.CustomTimeText = DuffedUIUnitFrames.CustomCastTimeText
 		CastBar.CustomDelayText = DuffedUIUnitFrames.CustomCastDelayText

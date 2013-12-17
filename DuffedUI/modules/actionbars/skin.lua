@@ -10,8 +10,8 @@ local PetSize = C.ActionBars.PetButtonSize
 local Spacing = C.ActionBars.ButtonSpacing
 local ActionButton_HideOverlayGlow = ActionButton_HideOverlayGlow
 local ProcBackdrop = {
-	edgeFile = C.Medias.Blank, edgeSize = T.Mult,
-	insets = {left = T.Mult, right = T.Mult, top = T.Mult, bottom = T.Mult},
+	edgeFile = C.Medias.Blank, edgeSize = D.Mult,
+	insets = {left = D.Mult, right = D.Mult, top = D.Mult, bottom = D.Mult},
 }
 
 function DuffedUIActionBars:SkinButton()
@@ -91,7 +91,7 @@ function DuffedUIActionBars:SkinButton()
 		Button:UnregisterEvent("ACTIONBAR_HIDEGRID")			
 	end
 	
-	Icon:SetTexCoord(unpack(T.IconCoord))
+	Icon:SetTexCoord(unpack(D.IconCoord))
 	Icon:SetInside()
 	
 	if (Normal) then
@@ -116,7 +116,7 @@ function DuffedUIActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pe
 	Button:CreateBackdrop()
 	Button.Backdrop:SetOutside(Button, 0, 0)
 	
-	Icon:SetTexCoord(unpack(T.IconCoord))
+	Icon:SetTexCoord(unpack(D.IconCoord))
 	Icon:ClearAllPoints()
 	Icon:SetInside()
 	

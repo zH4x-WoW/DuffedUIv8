@@ -12,7 +12,7 @@ oUF.Tags.Methods['DuffedUI:GetNameColor'] = function(unit)
 	if (UnitIsPlayer(unit)) then
 		return _TAGS['raidcolor'](unit)
 	elseif (Reaction) then
-		local c = T.Colors.reaction[Reaction]
+		local c = D.Colors.reaction[Reaction]
 		return string.format('|cff%02x%02x%02x', c[1] * 255, c[2] * 255, c[3] * 255)
 	else
 		return string.format('|cff%02x%02x%02x', .84 * 255, .75 * 255, .65 * 255)

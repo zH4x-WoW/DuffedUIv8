@@ -70,7 +70,7 @@ local OnUpdate = function(self)
 		self.Text:SetText(floor(ThreatValue) .. "%")
 		self.Title:SetText((UnitName("target") and UnitName("target") .. ":") or nil)
 
-		local R, G, B = T.ColorGradient(ThreatValue, 100, 0,.8,0,.8,.8,0,.8,0,0)
+		local R, G, B = D.ColorGradient(ThreatValue, 100, 0,.8,0,.8,.8,0,.8,0,0)
 		self:SetStatusBarColor(R, G, B)
 
 		if (ThreatValue > 0) then

@@ -148,7 +148,7 @@ local function UpdateDebuff(self, name, icon, count, debuffType, duration, endTi
 			end
 		end
 		
-		if spellId and T.ReverseTimer[spellId] then
+		if spellId and D.ReverseTimer[spellId] then
 			f.reverse = true
 		else
 			f.reverse = nil

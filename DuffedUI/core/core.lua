@@ -12,12 +12,12 @@ local floor = floor
 local gsub = gsub
 local ceil = ceil
 
-T.Print = function(...)
+D.Print = function(...)
 	print("|cffC495DDDuffedUI|r:", ...)
 end
 
 -- Want HEX color instead of RGB?
-T.RGBToHex = function(r, g, b)
+D.RGBToHex = function(r, g, b)
 	r = r <= 1 and r >= 0 and r or 0
 	g = g <= 1 and g >= 0 and g or 0
 	b = b <= 1 and b >= 0 and b or 0
@@ -26,7 +26,7 @@ T.RGBToHex = function(r, g, b)
 end
 
 -- Return short value of a number!
-T.ShortValue = function(v)
+D.ShortValue = function(v)
 	if (v >= 1e6) then
 		return gsub(format("%.1fm", v / 1e6), "%.?0+([km])$", "%1")
 	elseif (v >= 1e3 or v <= -1e3) then
@@ -37,13 +37,13 @@ T.ShortValue = function(v)
 end
 
 -- Add comma's to a number
-T.Comma = function(num)
+D.Comma = function(num)
 	local Left, Number, Right = match(num, "^([^%d]*%d)(%d*)(.-)$")
 	
 	return 	Left .. reverse(gsub(reverse(Number), "(%d%d%d)", "%1,")) .. Right
 end
 
-T.Round = function(number, decimals)
+D.Round = function(number, decimals)
 	if (not decimals) then
 		decimals = 0
 	end
@@ -52,7 +52,7 @@ T.Round = function(number, decimals)
 end
 
 -- Format seconds to min/hour/day
-T.FormatTime = function(s)
+D.FormatTime = function(s)
 	local Day, Hour, Minute = 86400, 3600, 60
 	
 	if (s >= Day) then
@@ -69,10 +69,10 @@ T.FormatTime = function(s)
 end
 
 -- Icon coordinates template
-T.IconCoord = {0.08, 0.92, 0.08, 0.92}
+D.IconCoord = {0.08, 0.92, 0.08, 0.92}
 
 -- Color Gradient
-T.ColorGradient = function(a, b, ...)
+D.ColorGradient = function(a, b, ...)
 	local Percent
 	
 	if(b == 0) then
@@ -100,7 +100,7 @@ end
 
 local WaitTable = {}
 local WaitFrame
-T.Delay = function(delay, func, ...)
+D.Delay = function(delay, func, ...)
 	if (type(delay) ~= "number" or type(func) ~= "function") then
 		return false
 	end

@@ -56,7 +56,7 @@ end
 function Battle:SkinPetButton()
 	self:CreateBackdrop()
 	self:SetNormalTexture("")
-	self.Icon:SetTexCoord(unpack(T.IconCoord))
+	self.Icon:SetTexCoord(unpack(D.IconCoord))
 	self:StyleButton()
 	self.SelectedHighlight:SetTexture(0.9, 0.8, 0.1, 0.3)
 	self.SelectedHighlight:SetInside(self.Backdrop)

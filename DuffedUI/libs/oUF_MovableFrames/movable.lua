@@ -527,7 +527,7 @@ end
 SLASH_RESETUF1 = "/resetuf"
 SlashCmdList["RESETUF"] = RESETUF
 --[[
-T.MoveUnitFrames = function(inp)
+D.MoveUnitFrames = function(inp)
 	if(InCombatLockdown()) then
 		return
 	end

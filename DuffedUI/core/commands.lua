@@ -10,7 +10,7 @@ local Split = function(cmd)
 	end
 end
 
-T.SlashHandler = function(cmd)
+D.SlashHandler = function(cmd)
 	local arg1, arg2 = strlower(Split(cmd))
 
 	if (arg1 == "dt" or arg1 == "datatext") then
@@ -39,4 +39,4 @@ T.SlashHandler = function(cmd)
 end
 
 SLASH_TUKUISLASHHANDLER1 = "/tukui"
-SlashCmdList["TUKUISLASHHANDLER"] = T.SlashHandler
+SlashCmdList["TUKUISLASHHANDLER"] = D.SlashHandler

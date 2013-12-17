@@ -11,7 +11,7 @@ local Size = C.ActionBars.NormalButtonSize
 local Spacing = C.ActionBars.ButtonSpacing
 
 function DuffedUIActionBars:CreateStanceBar()
-	local Bar = T.Panels.StanceBar
+	local Bar = D.Panels.StanceBar
 	
 	Bar:RegisterEvent("PLAYER_LOGIN")
 	Bar:RegisterEvent("PLAYER_ENTERING_WORLD")

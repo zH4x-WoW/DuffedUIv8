@@ -24,7 +24,7 @@ function DuffedUIUnitFrames:Pet()
 	Health:SetPoint("TOPRIGHT")
 	Health:SetStatusBarTexture(C.Medias.Normal)
 	Health.frequentUpdates = true
-	Health.PostUpdate = T.PostUpdatePetColor
+	Health.PostUpdate = D.PostUpdatePetColor
 	Health.colorDisconnected = true	
 	Health.colorClass = true
 	Health.colorReaction = true	

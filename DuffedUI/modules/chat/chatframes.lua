@@ -32,14 +32,14 @@ function DuffedUIChat:UpdateEditBoxColor()
 			
 			if (ID == 0) then
 				--Backdrop:SetBackdropBorderColor(unpack(C.Medias.BorderColor)) -- [[ NOTE! Just leaving these here for now if you decide you don't like this feature. Will remove them up if you do. ]]
-				T.GradientFrame(Backdrop, "Border", 0, 0.5, unpack(C.Medias.BorderColor))
+				D.GradientFrame(Backdrop, "Border", 0, 0.5, unpack(C.Medias.BorderColor))
 			else
 				--Backdrop:SetBackdropBorderColor(ChatTypeInfo[ChatType..ID].r,ChatTypeInfo[ChatType..ID].g,ChatTypeInfo[ChatType..ID].b)
-				T.GradientFrame(Backdrop, "Border", 0, 0.5, ChatTypeInfo[ChatType..ID].r, ChatTypeInfo[ChatType..ID].g, ChatTypeInfo[ChatType..ID].b)
+				D.GradientFrame(Backdrop, "Border", 0, 0.5, ChatTypeInfo[ChatType..ID].r, ChatTypeInfo[ChatType..ID].g, ChatTypeInfo[ChatType..ID].b)
 			end
 		else
 			--Backdrop:SetBackdropBorderColor(ChatTypeInfo[ChatType].r,ChatTypeInfo[ChatType].g,ChatTypeInfo[ChatType].b)
-			T.GradientFrame(Backdrop, "Border", 0, 0.5, ChatTypeInfo[ChatType].r, ChatTypeInfo[ChatType].g, ChatTypeInfo[ChatType].b)
+			D.GradientFrame(Backdrop, "Border", 0, 0.5, ChatTypeInfo[ChatType].r, ChatTypeInfo[ChatType].g, ChatTypeInfo[ChatType].b)
 		end
 	end
 end
@@ -231,7 +231,7 @@ function DuffedUIChat:Install()
 		end
 		
 		-- Save chat frame settings
-		SetChatWindowSavedDimensions(ID, T.Scale(Width), T.Scale(111))
+		SetChatWindowSavedDimensions(ID, D.Scale(Width), D.Scale(111))
 		FCF_SavePositionAndDimensions(Frame)
 	end
 	
