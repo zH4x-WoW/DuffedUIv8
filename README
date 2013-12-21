@@ -1,5 +1,9 @@
 => DuffedUI v8 <=
 
+21.12.2013 =>
+	First running version
+	Fixed locales and a global for auras
+	
 17.12.2013 =>
 	Update options, functions and stuff
 	Changed global T to global D
