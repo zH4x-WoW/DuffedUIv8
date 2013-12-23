@@ -57,6 +57,7 @@ C["chat"] = {
 	["lBackground"] = true,
 	["rBackground"] = true,
 	["Fade"] = true,
+	["JustifyLoot"] = true,
 }
 
 C["cooldowns"] = {

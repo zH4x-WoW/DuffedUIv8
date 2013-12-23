@@ -96,10 +96,10 @@ function DuffedUIChat:CreateCopyButtons()
 		local Frame = _G["ChatFrame"..i]
 		
 		local Button = CreateFrame("Button", nil, Frame)
-		Button:Point("TOPRIGHT", 0, 0)
+		if (C["chat"].lBackground and C["chat"].rBackground) then Button:Point("TOPRIGHT", 5, 25) else Button:Point("TOPRIGHT", 0, 0) end
 		Button:Size(20, 20)
 		Button:SetNormalTexture(C["medias"].Copy)
-		Button:SetAlpha(0)
+		if (C["chat"].lBackground and C["chat"].rBackground) then Button:SetAlpha(1) else Button:SetAlpha(0) end
 		Button:SetTemplate()
 		Button.ChatFrame = Frame
 

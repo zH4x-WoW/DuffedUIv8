@@ -16,7 +16,8 @@ local Noop = function() end
 local Toast = BNToastFrame
 local ToastCloseButton = BNToastFrameCloseButton
 local DataTextLeft = D["Panels"].DataTextLeft
-local DataTextRight = D["Panels"].DataTextRight
+local LeftChatBackground = D["Panels"].LeftChatBackground
+local RightChatBackground = D["Panels"].RightChatBackground
 local CubeLeft = D["Panels"].CubeLeft
 local DuffedUIChat = CreateFrame("Frame")
 
@@ -84,8 +85,8 @@ function DuffedUIChat:StyleFrame(frame)
 
 	-- Move the edit box
 	EditBox:ClearAllPoints()
-	EditBox:Point("TOPLEFT", DataTextLeft, 2, -2)
-	EditBox:Point("BOTTOMRIGHT", DataTextLeft, -2, 2)
+	EditBox:Point("TOPLEFT", LeftChatBackground or DataTextLeft, 2, -2)
+	EditBox:Point("BOTTOMRIGHT", LeftChatBackground or DataTextLeft, -2, 2)
 	
 	-- Disable alt key usage
 	EditBox:SetAltArrowKeyMode(false)
@@ -203,16 +204,24 @@ function DuffedUIChat:Install()
 		
 		-- Set font size and chat frame size
 		FCF_SetChatWindowFontSize(nil, Frame, 12)
-		Frame:Size(Width, 111)
+		Frame:Size(Width, 116)
 		
 		-- Set default chat frame position
 		if (ID == 1) then
 			Frame:ClearAllPoints()
-			Frame:Point("BOTTOM", DataTextLeft, "TOP", 0, 5)
+			if C["chat"].lBackground then
+				Frame:Point("BOTTOMLEFT", LeftChatBackground, "BOTTOMLEFT", 7, 9)
+			else
+				Frame:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 5)
+			end
 		elseif (C["chat"].LootFrame and ID == 4) then
 			if (not Frame.isDocked) then
 				Frame:ClearAllPoints()
-				Frame:Point("BOTTOM", DataTextRight, "TOP", 0, 5)
+				if C["chat"].rBackground then
+					Frame:Point("BOTTOMRIGHT", RightChatBackground, "BOTTOMRIGHT", -13, 9)
+				else
+					Frame:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 5)
+				end
 				Frame:SetJustifyH("RIGHT")
 			end
 		end
@@ -225,6 +234,9 @@ function DuffedUIChat:Install()
 			FCF_SetWindowName(Frame, "Log")
 		end
 		
+		if (ID == 3) then
+			FCF_SetWindowName(Frame, "Whisper")
+		end		
 		
 		if (not Frame.isLocked) then
 			FCF_SetLocked(Frame, 1)

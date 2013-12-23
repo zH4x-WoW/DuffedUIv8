@@ -35,12 +35,14 @@ if C["chat"].lBackground then
 	LeftChatBackground:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 5)
 	LeftChatBackground:SetTemplate("Transparent")
 	LeftChatBackground:SetFrameLevel(1)
+	LeftChatBackground:SetFrameStrata("BACKGROUND")
 	
 	local LeftChatTab = CreateFrame("Frame", "LeftChatTab", LeftChatBackground)
 	LeftChatTab:Size(330, 20)
 	LeftChatTab:SetPoint("TOPLEFT", LeftChatBackground, "TOPLEFT", 4, -4)
 	LeftChatTab:SetTemplate()
 	LeftChatTab:SetFrameLevel(2)
+	LeftChatTab:SetFrameStrata("BACKGROUND")
 end
 
 if C["chat"].rBackground then
@@ -49,12 +51,14 @@ if C["chat"].rBackground then
 	RightChatBackground:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 5)
 	RightChatBackground:SetTemplate("Transparent")
 	RightChatBackground:SetFrameLevel(1)
+	RightChatBackground:SetFrameStrata("BACKGROUND")
 	
 	local RightChatTab = CreateFrame("Frame", nil, RightChatBackground)
 	RightChatTab:Size(183, 20)
 	RightChatTab:SetPoint("TOPLEFT", RightChatBackground, "TOPLEFT", 4, -4)
 	RightChatTab:SetTemplate()
 	RightChatTab:SetFrameLevel(2)
+	RightChatTab:SetFrameStrata("BACKGROUND")
 end
 
 local CubeLeft = CreateFrame("Frame", nil, UIParent)
@@ -64,7 +68,7 @@ if C["chat"].lBackground then CubeLeft:Point("LEFT", LeftChatTab, "RIGHT", 2, 0)
 CubeLeft:EnableMouse(true)
 CubeLeft:SetFrameLevel(2)
 CubeLeft.text = D.SetFontString(CubeLeft, C["medias"].Font, C["fonts"].Buttons, "THINOUTLINE")
-CubeLeft.text:SetPoint("CENTER", 1, -1)
+CubeLeft.text:SetPoint("CENTER", 1, 0)
 CubeLeft.text:SetText("E") -- D.panelcolor .. 
 
 local Hider = CreateFrame("Frame", nil, UIParent)
