@@ -19,8 +19,8 @@ C["medias"] = {
 	["Duffed"] =  [[Interface\AddOns\DuffedUI\medias\textures\duffed]],
 	
 	-- colors
-	["BorderColor"] = (not C["general"].InOut and { 0, 0, 0 }) or C["general"].BorderColor or { .5, .5, .5 },
-	["BackdropColor"] = C["general"].BackdropColor or { .1,.1,.1 },
+	["BorderColor"] = (not C["general"].InOut and { .125, .125, .125 }) or C["general"].BorderColor or { .125, .125, .125 },
+	["BackdropColor"] = C["general"].BackdropColor or { .05,.05,.05 },
 	["PrimaryDataTextColor"] = { 1, 1, 1 },
 	["SecondaryDataTextColor"] = { 1, 1, 1 },
 	
