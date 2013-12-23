@@ -1,4 +1,5 @@
 local D, C, L = select(2, ...):unpack()
+if not D.Client == "deDE" then return end
 
 ------------------------------------------------
 L.DataText = {} -- Data Text Locales

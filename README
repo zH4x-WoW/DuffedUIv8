@@ -1,5 +1,8 @@
 => DuffedUI v8 <=
 
+23.12.2013 =>
+	Added D.Client to support different languages
+	
 21.12.2013 =>
 	First running version
 	Fixed locales and a global for auras

@@ -12,6 +12,8 @@ local floor = floor
 local gsub = gsub
 local ceil = ceil
 
+D.Client = GetLocale() 
+
 D.Print = function(...)
 	print("|cffC495DDDuffedUI|r:", ...)
 end
