@@ -80,7 +80,7 @@ function DuffedUIChat:StyleFrame(frame)
 	
 	frame:SetClampRectInsets(0, 0, 0, 0)
 	frame:SetClampedToScreen(false)
-	frame:SetFading(false)
+	frame:SetFading(C["chat"].Fade)
 
 	-- Move the edit box
 	EditBox:ClearAllPoints()

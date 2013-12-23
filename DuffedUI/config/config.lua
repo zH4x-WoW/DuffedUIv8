@@ -13,6 +13,10 @@ C["general"] = {
 	["InOut"] = true,
 }
 
+C["fonts"] = {
+	["Buttons"] = 12,
+}
+
 C["actionbars"] = {
 	["Enable"] = true,
 	["HotKey"] = true,
@@ -50,6 +54,9 @@ C["chat"] = {
 	["LinkColor"] = {0.08, 1, 0.36},
 	["LinkBrackets"] = true,
 	["LootFrame"] = true,
+	["lBackground"] = true,
+	["rBackground"] = true,
+	["Fade"] = true,
 }
 
 C["cooldowns"] = {

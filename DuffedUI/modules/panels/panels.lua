@@ -17,27 +17,6 @@ LeftVerticalLine:Point("BOTTOMLEFT", 0, 0)
 LeftVerticalLine:SetFrameLevel(0)
 LeftVerticalLine:SetFrameStrata("BACKGROUND")
 
-local RightVerticalLine = CreateFrame("Frame", nil, BottomLine)
-RightVerticalLine:SetTemplate()
-RightVerticalLine:Size(2, 130)
-RightVerticalLine:Point("BOTTOMRIGHT", 0, 0)
-RightVerticalLine:SetFrameLevel(0)
-RightVerticalLine:SetFrameStrata("BACKGROUND")
-
-local CubeLeft = CreateFrame("Frame", nil, LeftVerticalLine)
-CubeLeft:SetTemplate()
-CubeLeft:Size(10)
-CubeLeft:Point("BOTTOM", LeftVerticalLine, "TOP", 0, 0)
-CubeLeft:EnableMouse(true)
-CubeLeft:SetFrameLevel(0)
-
-local CubeRight = CreateFrame("Frame", nil, RightVerticalLine)
-CubeRight:SetTemplate()
-CubeRight:Size(10)
-CubeRight:Point("BOTTOM", RightVerticalLine, "TOP", 0, 0)
-CubeRight:EnableMouse(true)
-CubeRight:SetFrameLevel(0)
-
 local DataTextLeft = CreateFrame("Frame", nil, BottomLine)
 DataTextLeft:Size(370, 23)
 DataTextLeft:SetPoint("LEFT", 17, -1)
@@ -50,6 +29,44 @@ DataTextRight:SetPoint("RIGHT", -17, -1)
 DataTextRight:SetTemplate()
 DataTextRight:SetFrameLevel(1)
 
+if C["chat"].lBackground then
+	local LeftChatBackground = CreateFrame("Frame", nil, UIParent)
+	LeftChatBackground:Size(382, 149)
+	LeftChatBackground:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 5)
+	LeftChatBackground:SetTemplate("Transparent")
+	LeftChatBackground:SetFrameLevel(1)
+	
+	local LeftChatTab = CreateFrame("Frame", "LeftChatTab", LeftChatBackground)
+	LeftChatTab:Size(330, 20)
+	LeftChatTab:SetPoint("TOPLEFT", LeftChatBackground, "TOPLEFT", 4, -4)
+	LeftChatTab:SetTemplate()
+	LeftChatTab:SetFrameLevel(2)
+end
+
+if C["chat"].rBackground then
+	local RightChatBackground = CreateFrame("Frame", nil, UIParent)
+	RightChatBackground:Size(382, 149)
+	RightChatBackground:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 5)
+	RightChatBackground:SetTemplate("Transparent")
+	RightChatBackground:SetFrameLevel(1)
+	
+	local RightChatTab = CreateFrame("Frame", nil, RightChatBackground)
+	RightChatTab:Size(183, 20)
+	RightChatTab:SetPoint("TOPLEFT", RightChatBackground, "TOPLEFT", 4, -4)
+	RightChatTab:SetTemplate()
+	RightChatTab:SetFrameLevel(2)
+end
+
+local CubeLeft = CreateFrame("Frame", nil, UIParent)
+CubeLeft:SetTemplate()
+CubeLeft:Size(20, 20)
+if C["chat"].lBackground then CubeLeft:Point("LEFT", LeftChatTab, "RIGHT", 2, 0) else CubeLeft:Point("BOTTOM", LeftVerticalLine, "TOP", 0, 0) end
+CubeLeft:EnableMouse(true)
+CubeLeft:SetFrameLevel(2)
+CubeLeft.text = D.SetFontString(CubeLeft, C["medias"].Font, C["fonts"].Buttons, "THINOUTLINE")
+CubeLeft.text:SetPoint("CENTER", 1, -1)
+CubeLeft.text:SetText("E") -- D.panelcolor .. 
+
 local Hider = CreateFrame("Frame", nil, UIParent)
 Hider:Hide()
 
@@ -59,11 +76,13 @@ RegisterStateDriver(PetBattleHider, "visibility", "[petbattle] hide; show")
 
 Panels.BottomLine = BottomLine
 Panels.LeftVerticalLine = LeftVerticalLine
-Panels.RightVerticalLine = RightVerticalLine
-Panels.CubeLeft = CubeLeft
-Panels.CubeRight = CubeRight
 Panels.DataTextLeft = DataTextLeft
 Panels.DataTextRight = DataTextRight
+Panels.LeftChatBackground = LeftChatBackground
+Panels.RightChatBackground = RightChatBackground
+Panels.LeftChatTab = LeftChatTab
+Panels.RightChatTab = RightChatTab
+Panels.CubeLeft = CubeLeft
 Panels.Hider = Hider
 Panels.PetBattleHider = PetBattleHider
 

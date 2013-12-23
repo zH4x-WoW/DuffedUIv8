@@ -18,6 +18,16 @@ D.Print = function(...)
 	print("|cffC495DDDuffedUI|r:", ...)
 end
 
+-- Create our font strings
+D.SetFontString = function(parent, fontName, fontHeight, fontStyle)
+	local fs = parent:CreateFontString(nil, "OVERLAY")
+	fs:SetFont(fontName, fontHeight, fontStyle)
+	fs:SetJustifyH("LEFT")
+	fs:SetShadowColor(0, 0, 0)
+	fs:SetShadowOffset(1.25, -1.25)
+	return fs
+end
+
 -- Want HEX color instead of RGB?
 D.RGBToHex = function(r, g, b)
 	r = r <= 1 and r >= 0 and r or 0
