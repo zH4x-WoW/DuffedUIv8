@@ -53,7 +53,6 @@ C["chat"] = {
 	["WhisperSound"] = true,
 	["LinkColor"] = {0.08, 1, 0.36},
 	["LinkBrackets"] = true,
-	["LootFrame"] = true,
 	["lBackground"] = true,
 	["rBackground"] = true,
 	["Fade"] = true,

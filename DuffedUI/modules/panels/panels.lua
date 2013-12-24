@@ -2,30 +2,15 @@ local D, C, L = select(2, ...):unpack()
 
 local Panels = {}
 
-local BottomLine = CreateFrame("Frame", nil, UIParent)
-BottomLine:SetTemplate()
-BottomLine:Size(2)
-BottomLine:Point("BOTTOMLEFT", 30, 30)
-BottomLine:Point("BOTTOMRIGHT", -30, 30)
-BottomLine:SetFrameStrata("BACKGROUND")
-BottomLine:SetFrameLevel(0)
-
-local LeftVerticalLine = CreateFrame("Frame", nil, BottomLine)
-LeftVerticalLine:SetTemplate()
-LeftVerticalLine:Size(2, 130)
-LeftVerticalLine:Point("BOTTOMLEFT", 0, 0)
-LeftVerticalLine:SetFrameLevel(0)
-LeftVerticalLine:SetFrameStrata("BACKGROUND")
-
-local DataTextLeft = CreateFrame("Frame", nil, BottomLine)
-DataTextLeft:Size(370, 23)
-DataTextLeft:SetPoint("LEFT", 17, -1)
+local DataTextLeft = CreateFrame("Frame", nil, UIParent)
+DataTextLeft:Size(370, 20)
+DataTextLeft:SetPoint("BOTTOM", -197, 5)
 DataTextLeft:SetTemplate()
 DataTextLeft:SetFrameLevel(1)
 
-local DataTextRight = CreateFrame("Frame", nil, BottomLine)
-DataTextRight:Size(370, 23)
-DataTextRight:SetPoint("RIGHT", -17, -1)
+local DataTextRight = CreateFrame("Frame", nil, UIParent)
+DataTextRight:Size(370, 20)
+DataTextRight:SetPoint("BOTTOM", 197, 5)
 DataTextRight:SetTemplate()
 DataTextRight:SetFrameLevel(1)
 
@@ -64,7 +49,7 @@ end
 local CubeLeft = CreateFrame("Frame", nil, UIParent)
 CubeLeft:SetTemplate()
 CubeLeft:Size(20, 20)
-if C["chat"].lBackground then CubeLeft:Point("LEFT", LeftChatTab, "RIGHT", 2, 0) else CubeLeft:Point("BOTTOM", LeftVerticalLine, "TOP", 0, 0) end
+if C["chat"].lBackground then CubeLeft:Point("LEFT", LeftChatTab, "RIGHT", 2, 0) else CubeLeft:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, 0) end
 CubeLeft:EnableMouse(true)
 CubeLeft:SetFrameLevel(2)
 CubeLeft.text = D.SetFontString(CubeLeft, C["medias"].Font, C["fonts"].Buttons, "THINOUTLINE")
@@ -78,8 +63,6 @@ local PetBattleHider = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTe
 PetBattleHider:SetAllPoints()
 RegisterStateDriver(PetBattleHider, "visibility", "[petbattle] hide; show")
 
-Panels.BottomLine = BottomLine
-Panels.LeftVerticalLine = LeftVerticalLine
 Panels.DataTextLeft = DataTextLeft
 Panels.DataTextRight = DataTextRight
 Panels.LeftChatBackground = LeftChatBackground

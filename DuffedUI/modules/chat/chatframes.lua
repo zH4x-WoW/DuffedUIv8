@@ -60,11 +60,6 @@ function DuffedUIChat:StyleFrame(frame)
 	Tab:SetAlpha(1)
 	Tab.SetAlpha = UIFrameFadeRemoveFrame
 
-	-- Kill textures from PM's
-	if Tab.glow then
-		Tab.glow:Kill()
-	end
-	
 	if Tab.conversationIcon then
 		Tab.conversationIcon:Kill()
 	end
@@ -169,7 +164,9 @@ function DuffedUIChat:StyleTempFrame()
 end
 
 function DuffedUIChat:SkinToastFrame()
-	Toast:SetTemplate()
+	Toast:ClearAllPoints()
+	Toast:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 3, -3)
+	Toast:SetTemplate("Transparent")
 	Toast:CreateShadow()
 	ToastCloseButton:SkinCloseButton()
 end
@@ -255,18 +252,9 @@ function DuffedUIChat:Install()
 	ChatFrame_RemoveChannel(ChatFrame1, "GuildRecruitment")
 	ChatFrame_RemoveChannel(ChatFrame1, "LookingForGroup")
 	ChatFrame_AddMessageGroup(ChatFrame1, "SAY")
-	ChatFrame_AddMessageGroup(ChatFrame1, "EMOTE")
-	ChatFrame_AddMessageGroup(ChatFrame1, "YELL")
 	ChatFrame_AddMessageGroup(ChatFrame1, "GUILD")
 	ChatFrame_AddMessageGroup(ChatFrame1, "OFFICER")
 	ChatFrame_AddMessageGroup(ChatFrame1, "GUILD_ACHIEVEMENT")
-	ChatFrame_AddMessageGroup(ChatFrame1, "WHISPER")
-	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_SAY")
-	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_EMOTE")
-	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_YELL")
-	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_WHISPER")
-	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_BOSS_EMOTE")
-	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_BOSS_WHISPER")
 	ChatFrame_AddMessageGroup(ChatFrame1, "PARTY")
 	ChatFrame_AddMessageGroup(ChatFrame1, "PARTY_LEADER")
 	ChatFrame_AddMessageGroup(ChatFrame1, "RAID")
@@ -277,32 +265,39 @@ function DuffedUIChat:Install()
 	ChatFrame_AddMessageGroup(ChatFrame1, "BG_HORDE")
 	ChatFrame_AddMessageGroup(ChatFrame1, "BG_ALLIANCE")
 	ChatFrame_AddMessageGroup(ChatFrame1, "BG_NEUTRAL")
-	ChatFrame_AddMessageGroup(ChatFrame1, "SYSTEM")
-	ChatFrame_AddMessageGroup(ChatFrame1, "ERRORS")
 	ChatFrame_AddMessageGroup(ChatFrame1, "AFK")
 	ChatFrame_AddMessageGroup(ChatFrame1, "DND")
-	ChatFrame_AddMessageGroup(ChatFrame1, "IGNORED")
 	ChatFrame_AddMessageGroup(ChatFrame1, "ACHIEVEMENT")
-	ChatFrame_AddMessageGroup(ChatFrame1, "BN_WHISPER")
-	ChatFrame_AddMessageGroup(ChatFrame1, "BN_CONVERSATION")
 	
-	-- Setup the spam chat frame
+	-- Setup the whisper chat frame
 	ChatFrame_RemoveAllMessageGroups(ChatFrame3)
-	ChatFrame_AddChannel(ChatFrame3, TRADE)
-	ChatFrame_AddChannel(ChatFrame3, GENERAL)
-	ChatFrame_AddChannel(ChatFrame3, "LocalDefense") -- Don't forget to localize me
-	ChatFrame_AddChannel(ChatFrame3, "GuildRecruitment")
-	ChatFrame_AddChannel(ChatFrame3, "LookingForGroup")
+	ChatFrame_AddMessageGroup(ChatFrame3, "WHISPER")
+	ChatFrame_AddMessageGroup(ChatFrame3, "BN_WHISPER")
+	ChatFrame_AddMessageGroup(ChatFrame3, "BN_CONVERSATION")
 	
 	-- Setup the right chat
-	if C["chat"].LootFrame then
-		ChatFrame_RemoveAllMessageGroups(ChatFrame4)
-		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
-		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
-		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
-		ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
-		ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
-	end
+	ChatFrame_RemoveAllMessageGroups(ChatFrame4)
+	ChatFrame_AddChannel(ChatFrame4, TRADE)
+	ChatFrame_AddChannel(ChatFrame4, GENERAL)
+	ChatFrame_AddChannel(ChatFrame4, "LocalDefense") -- Don't forget to localize me
+	ChatFrame_AddChannel(ChatFrame4, "GuildRecruitment")
+	ChatFrame_AddChannel(ChatFrame4, "LookingForGroup")
+	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
+	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
+	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
+	ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
+	ChatFrame_AddMessageGroup(ChatFrame4, "EMOTE")
+	ChatFrame_AddMessageGroup(ChatFrame4, "YELL")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONSTER_SAY")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONSTER_EMOTE")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONSTER_YELL")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONSTER_WHISPER")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONSTER_BOSS_EMOTE")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONSTER_BOSS_WHISPER")
+	ChatFrame_AddMessageGroup(ChatFrame4, "SYSTEM")
+	ChatFrame_AddMessageGroup(ChatFrame4, "ERRORS")
+	ChatFrame_AddMessageGroup(ChatFrame4, "IGNORED")
 	
 	-- Enable Classcolor
 	ToggleChatColorNamesByClassGroup(true, "SAY")
