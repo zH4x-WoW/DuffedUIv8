@@ -1,8 +1,5 @@
 local D, C, L = select(2, ...):unpack()
-
-if not C["tooltips"].Enable then
-	return
-end
+if not C["tooltips"].Enable then return end
 
 local _G = _G
 local unpack = unpack
@@ -44,13 +41,14 @@ DuffedUITooltips.Classification = {
 
 function DuffedUITooltips:CreateAnchor()
 	local DataTextRight = Panels.DataTextRight
+	local RightChatBackground = Panels.RightChatBackground
 	
 	self.Anchor = CreateFrame("Frame", nil, UIParent)
 	self.Anchor:Size(200, DataTextRight:GetHeight() - 4)
 	self.Anchor:SetFrameStrata("TOOLTIP")
 	self.Anchor:SetFrameLevel(20)
 	self.Anchor:SetClampedToScreen(true)
-	self.Anchor:SetPoint("BOTTOMRIGHT", DataTextRight, 0, 2)
+	if C["chat"].rBackground then self.Anchor:SetPoint("TOPRIGHT", RightChatBackground, 0, -15) else self.Anchor:SetPoint("BOTTOMRIGHT", DataTextRight, 0, 2) end
 	self.Anchor:SetMovable(true)
 	self.Anchor:CreateBackdrop()
 	self.Anchor.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
@@ -66,7 +64,6 @@ function DuffedUITooltips:SetTooltipDefaultAnchor()
 	self:SetOwner(Anchor)
 	self:SetAnchorType("ANCHOR_TOPRIGHT", 0, 20)
 end
-
 
 function DuffedUITooltips:GetColor()
 	if not self then
@@ -270,7 +267,7 @@ end
 
 function DuffedUITooltips:Skin()
 	if not self.IsSkinned then
-		self:SetTemplate()
+		self:SetTemplate("Transparent")
 		self.IsSkinned = true
 	end
 
@@ -315,6 +312,9 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 	HealthBar:SetStatusBarTexture(C["medias"].Normal)
 	HealthBar:CreateBackdrop()
 	HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
+	HealthBar:ClearAllPoints()
+	HealthBar:Point("BOTTOMLEFT", HealthBar:GetParent(), "TOPLEFT", 2, 5)
+	HealthBar:Point("BOTTOMRIGHT", HealthBar:GetParent(), "TOPRIGHT", -2, 5)
 end)
 
 D["Tooltips"] = DuffedUITooltips
