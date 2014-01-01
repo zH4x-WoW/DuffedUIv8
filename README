@@ -1,6 +1,7 @@
 => DuffedUI v8 <=
 
 01.01.2014 =>
+	First adjustments to show / hide the actionbars via buttons
 	Actionbars positions
 	Work on Tooltip (additonal Infos are still missing)
 	

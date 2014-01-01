@@ -1,4 +1,5 @@
 local D, C, L = select(2, ...):unpack()
+if (not C["actionbars"].Enable) then return end
 
 local DuffedUIActionBars = D["ActionBars"]
 local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
@@ -7,7 +8,7 @@ local Spacing = C["actionbars"].ButtonSpacing
 local MultiBarRight = MultiBarRight
 
 function DuffedUIActionBars:CreateBar5()
-	local ActionBar5 = D.Panels.ActionBar5
+	local ActionBar5 = D.Panels.ActionBar4
 	
 	MultiBarRight:SetParent(ActionBar5)
 	

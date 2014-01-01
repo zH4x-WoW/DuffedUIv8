@@ -119,31 +119,24 @@ function DuffedUIActionBars:AddPanels()
 	A3:SetFrameLevel(1)
 	
 	local A4 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
-	A4:Point("CENTER", UIParent, "CENTER", 0, 100)
-	A4:SetWidth((Size * 12) + (Spacing * 13))
-	A4:SetHeight((Size * 1) + (Spacing * 2))
+	A4:Point("RIGHT", UIParent, "RIGHT", -5, -14)
+	A4:SetHeight((Size * 12) + (Spacing * 13))
+	A4:SetWidth((Size * 2) + (Spacing * 3))
 	A4:SetFrameStrata("BACKGROUND")
 	A4:SetFrameLevel(2)
 	
 	local A5 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
-	A5:SetPoint("RIGHT", UIParent, "RIGHT", -28, -14)
-	A5:SetHeight((Size * 12) + (Spacing * 13))
-	A5:SetWidth((Size * 1) + (Spacing * 2))
-	A5:SetFrameStrata("BACKGROUND")
-	A5:SetFrameLevel(2)
+	A5:SetSize(PetSize + (Spacing * 2), (PetSize * 10) + (Spacing * 11))
+	A5:SetPoint("RIGHT", A4, "LEFT", -6, 0)
 	
 	local A6 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
-	A6:SetSize(PetSize + (Spacing * 2), (PetSize * 10) + (Spacing * 11))
-	A6:SetPoint("RIGHT", A5, "LEFT", -6, 0)
-	
-	local A7 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
-	A7:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
-	A7:SetPoint("TOPLEFT", 30, -30)
-	A7:SetFrameStrata("BACKGROUND")
-	A7:SetFrameLevel(2)
-	--A7:SetFrameStrata("MEDIUM")
-	--A7:SetMovable(true)
-	--A7:SetClampedToScreen(true)
+	A6:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
+	A6:SetPoint("TOPLEFT", 30, -30)
+	A6:SetFrameStrata("BACKGROUND")
+	A6:SetFrameLevel(2)
+	--A6:SetFrameStrata("MEDIUM")
+	--A6:SetMovable(true)
+	--A6:SetClampedToScreen(true)
 	
 	A1:SetTemplate("Transparent")
 	A2:SetTemplate("Transparent")
@@ -151,15 +144,13 @@ function DuffedUIActionBars:AddPanels()
 	A4:SetTemplate("Transparent")
 	A5:SetTemplate("Transparent")
 	A6:SetTemplate("Transparent")
-	A7:SetTemplate("Transparent")
 	
 	Panels.ActionBar1 = A1
 	Panels.ActionBar2 = A2
 	Panels.ActionBar3 = A3
 	Panels.ActionBar4 = A4
-	Panels.ActionBar5 = A5
-	Panels.PetActionBar = A6
-	Panels.StanceBar = A7
+	Panels.PetActionBar = A5
+	Panels.StanceBar = A6
 end
 
 function DuffedUIActionBars:UpdatePetBar(...)

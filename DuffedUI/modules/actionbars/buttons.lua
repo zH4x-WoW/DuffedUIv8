@@ -225,7 +225,7 @@ local OnClick = function(self)
 end
 
 function ActionBars:CreateToggleButtons()
-	for i = 2, 5  do
+	for i = 2, 4  do
 		local Bar = Panels["ActionBar" .. i]
 		local Width = Bar:GetWidth()
 		local Height = Bar:GetHeight()
@@ -255,12 +255,12 @@ function ActionBars:CreateToggleButtons()
 			Button.Text:SetText(L.ActionBars.ArrowLeft)
 		elseif (i == 4) then
 			Button:Size(Width, 12)
-			Button:Point("TOP", Panels.ActionBar1, "BOTTOM", 0, -3)
+			Button:Point("TOP", Panels.ActionBar4, "BOTTOM", 0, -3)
 			Button.Text:SetText(L.ActionBars.ArrowDown)
-		elseif (i == 5) then
+		--[[elseif (i == 5) then
 			Button:Size(Width, 18)
 			Button:Point("TOP", Bar, "BOTTOM", 0, -3)
-			Button.Text:SetText(L.ActionBars.ArrowRight)
+			Button.Text:SetText(L.ActionBars.ArrowRight)]]--
 		end
 		
 		BarButtons[i] = Button

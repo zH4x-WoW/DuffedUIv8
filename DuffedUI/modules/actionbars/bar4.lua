@@ -24,7 +24,7 @@ function DuffedUIActionBars:CreateBar4()
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", ActionBar4, Spacing, -Spacing)
 		else
-			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+			Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, -Spacing)
 		end
 		
 		ActionBar4["Button"..i] = Button
