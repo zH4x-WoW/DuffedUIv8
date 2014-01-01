@@ -80,8 +80,8 @@ function DuffedUIChat:StyleFrame(frame)
 
 	-- Move the edit box
 	EditBox:ClearAllPoints()
-	EditBox:Point("TOPLEFT", LeftChatBackground or DataTextLeft, 2, -2)
-	EditBox:Point("BOTTOMRIGHT", LeftChatBackground or DataTextLeft, -2, 2)
+	EditBox:Point("TOPLEFT", LeftChatTab or DataTextLeft, 2, -2)
+	EditBox:Point("BOTTOMRIGHT", LeftChatTab or DataTextLeft, -2, 2)
 	
 	-- Disable alt key usage
 	EditBox:SetAltArrowKeyMode(false)
@@ -97,7 +97,7 @@ function DuffedUIChat:StyleFrame(frame)
 	-- create our own texture for edit box
 	EditBox:CreateBackdrop()
 	EditBox.Backdrop:ClearAllPoints()
-	EditBox.Backdrop:SetAllPoints(DataTextLeft)
+	if C["chat"].lBackground then EditBox.Backdrop:SetAllPoints(LeftChatTab) else EditBox.Backdrop:SetAllPoints(DataTextLeft) end
 	EditBox.Backdrop:SetFrameStrata("LOW")
 	EditBox.Backdrop:SetFrameLevel(1)
 	EditBox.Backdrop:SetBackdropColor(unpack(C["medias"].BackdropColor))
@@ -165,7 +165,7 @@ end
 
 function DuffedUIChat:SkinToastFrame()
 	Toast:ClearAllPoints()
-	Toast:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 3, -3)
+	Toast:SetPoint("TOPLEFT", UIParent, 3, -3)
 	Toast:SetTemplate("Transparent")
 	Toast:CreateShadow()
 	ToastCloseButton:SkinCloseButton()

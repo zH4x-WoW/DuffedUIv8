@@ -3,14 +3,14 @@ local D, C, L = select(2, ...):unpack()
 local Panels = {}
 
 local DataTextLeft = CreateFrame("Frame", nil, UIParent)
-DataTextLeft:Size(370, 20)
-DataTextLeft:SetPoint("BOTTOM", -197, 5)
+DataTextLeft:Size(350, 20)
+DataTextLeft:SetPoint("BOTTOM", -(DataTextLeft:GetWidth() / 2) - 12, 5)
 DataTextLeft:SetTemplate()
 DataTextLeft:SetFrameLevel(1)
 
 local DataTextRight = CreateFrame("Frame", nil, UIParent)
-DataTextRight:Size(370, 20)
-DataTextRight:SetPoint("BOTTOM", 197, 5)
+DataTextRight:Size(350, 20)
+DataTextRight:SetPoint("BOTTOM", (DataTextRight:GetWidth() / 2) + 12, 5)
 DataTextRight:SetTemplate()
 DataTextRight:SetFrameLevel(1)
 
