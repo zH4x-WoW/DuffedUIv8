@@ -8,35 +8,25 @@ local Panels = D["Panels"]
 local DataTextRight = Panels.DataTextRight
 local TimeSinceLastUpdate = 1
 
-local OnUpdate = function(self, elapsed)
-	if (not self:IsShown()) then
-		return
-	end
+local StatusBarEvent = function(self)
+	if not self:IsShown() then return end
+	local Power = UnitPower("player", ALTERNATE_POWER_INDEX)
+	local MaxPower = UnitPowerMax("player", ALTERNATE_POWER_INDEX)
+	local R, G, B = D.ColorGradient(Power,MaxPower, 0,.8,0,.8,.8,0,.8,0,0)
 	
-	TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed
-	
-	if (TimeSinceLastUpdate >= 1) then
-		local Power = UnitPower("player", ALTERNATE_POWER_INDEX)
-		local MaxPower = UnitPowerMax("player", ALTERNATE_POWER_INDEX)
-		local R, G, B = D.ColorGradient(Power,MaxPower, 0,.8,0,.8,.8,0,.8,0,0)
-	
-		self.Text:SetText(Power.." / "..MaxPower)
-		self.Status:SetMinMaxValues(0, UnitPowerMax("player", ALTERNATE_POWER_INDEX))
-		self.Status:SetValue(Power)
-		self.Status:SetStatusBarColor(R, G, B)
-		TimeSinceLastUpdate = 0
-	end
+	self.Text:SetText(Power.." / "..MaxPower)
+	self:SetMinMaxValues(0, UnitPowerMax("player", ALTERNATE_POWER_INDEX))
+	self:SetValue(Power)
+	self:SetStatusBarColor(R, G, B)
 end
 
-local OnEvent = function(self)
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	
-	if UnitAlternatePowerInfo("player") then
+local OnEvent = function(self, event)
+	if event == 'PLAYER_ENTERING_WORLD' then self:UnregisterEvent(event) end
+
+	if event == 'UNIT_POWER_BAR_SHOW' or UnitAlternatePowerInfo("player") then
 		self:Show()
-		self:SetScript("OnUpdate", OnUpdate)
 	else
 		self:Hide()
-		self:SetScript("OnUpdate", nil)
 	end
 end
 
@@ -46,9 +36,9 @@ PlayerPowerBarAlt:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 local AltPowerBar = CreateFrame("Frame", nil, DataTextRight)
 AltPowerBar:SetAllPoints()
+AltPowerBar:SetTemplate()
 AltPowerBar:SetFrameStrata("MEDIUM")
 AltPowerBar:SetFrameLevel(DataTextRight:GetFrameLevel() + 1)
-AltPowerBar:RegisterEvent("UNIT_POWER")
 AltPowerBar:RegisterEvent("UNIT_POWER_BAR_SHOW")
 AltPowerBar:RegisterEvent("UNIT_POWER_BAR_HIDE")
 AltPowerBar:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -61,10 +51,14 @@ AltPowerBar.Status:SetMinMaxValues(0, 100)
 AltPowerBar.Status:Point("TOPLEFT", DataTextRight, "TOPLEFT", 1, -1)
 AltPowerBar.Status:Point("BOTTOMRIGHT", DataTextRight, "BOTTOMRIGHT", -1, 1)
 
-AltPowerBar.Text = AltPowerBar.Status:CreateFontString(nil, "OVERLAY")
-AltPowerBar.Text:SetFont(C["medias"].Font, 12)
-AltPowerBar.Text:Point("CENTER", AltPowerBar, "CENTER", 0, 0)
-AltPowerBar.Text:SetShadowColor(0, 0, 0)
-AltPowerBar.Text:SetShadowOffset(1.25, -1.25)
+AltPowerBar.Status.Text = AltPowerBar.Status:CreateFontString(nil, "OVERLAY")
+AltPowerBar.Status.Text:SetFont(C["medias"].Font, 12)
+AltPowerBar.Status.Text:Point("CENTER", AltPowerBar, "CENTER", 0, 0)
+AltPowerBar.Status.Text:SetShadowColor(0, 0, 0)
+AltPowerBar.Status.Text:SetShadowOffset(1.25, -1.25)
+
+AltPowerBar.Status:RegisterUnitEvent("UNIT_POWER", 'player')
+AltPowerBar.Status:RegisterUnitEvent("UNIT_POWER_FREQUENT", 'player')
+AltPowerBar.Status:SetScript('OnEvent', StatusBarEvent)
 
 Panels.AltPowerBar = AltPowerBar
