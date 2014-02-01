@@ -36,7 +36,7 @@ function DuffedUIUnitFrames:AddPaladinFeatures()
 	-- Shadow Effect Updates
 	Shadow:Point("TOPLEFT", -4, 12)
 	
-	HPBar:SetScript("OnShow", function(self) 
+	HPBar:SetScript("OnShow", function(self)
 		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
 	end)
 

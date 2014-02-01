@@ -8,10 +8,9 @@ if (Class ~= "DRUID") then
 end
 
 function DuffedUIUnitFrames:AddDruidFeatures()
-	local TotemBar = self.Totems
+	local DruidMana = CreateFrame("StatusBar", nil, self.Health)
 
 	-- Druid Mana
-	local DruidMana = CreateFrame("StatusBar", nil, self.Health)
 	DruidMana:Size(250, 8)
 	DruidMana:Point("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, 0)
 	DruidMana:SetStatusBarTexture(C["medias"].Normal)
@@ -25,28 +24,30 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 	DruidMana.Background:SetAllPoints()
 	DruidMana.Background:SetTexture(0.30, 0.52, 0.90, 0.2)
 
-	-- Totem Colors
-	D["Colors"].totems = {
-		[1] = { 95/255, 222/255, 95/255 },
-		[2] = { 95/255, 222/255, 95/255 },
-		[3] = { 95/255, 222/255, 95/255 },
-	}
+	-- Totem Bar (Wild Mushrooms)
+	if C["unitframes"].TotemBar) then
+		D["Colors"].totems = {
+			[1] = { 95/255, 222/255, 95/255 },
+			[2] = { 95/255, 222/255, 95/255 },
+			[3] = { 95/255, 222/255, 95/255 },
+		}
 
-	-- Totem Bar (Druid - Wild Mushrooms)
-	for i = 1, 3 do
-		TotemBar[i]:ClearAllPoints()
-		TotemBar[i]:Height(8)
+		local TotemBar = self.Totems
+		for i = 1, 3 do
+			TotemBar[i]:ClearAllPoints()
+			TotemBar[i]:Height(8)
 
-		if i == 1 then
-			TotemBar[i]:Width((250 / 3) - 1)
-			TotemBar[i]:SetPoint("LEFT", TotemBar, "LEFT", 0, 0)
-		else
-			TotemBar[i]:Width(250 / 3)
-			TotemBar[i]:SetPoint("LEFT", TotemBar[i-1], "RIGHT", 1, 0)
-		end
+			if i == 1 then
+				TotemBar[i]:Width((250 / 3) - 1)
+				TotemBar[i]:SetPoint("LEFT", TotemBar, "LEFT", 0, 0)
+			else
+				TotemBar[i]:Width(250 / 3)
+				TotemBar[i]:SetPoint("LEFT", TotemBar[i-1], "RIGHT", 1, 0)
+			end
+ 		end
+		
+		TotemBar[4]:Hide()
 	end
-
-	TotemBar[4]:Hide()
 
 	-- Register
 	self.DruidMana = DruidMana

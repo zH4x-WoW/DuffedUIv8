@@ -8,40 +8,15 @@ if (Class ~= "MONK") then
 end
 
 function DuffedUIUnitFrames:AddMonkFeatures()
-	local TotemBar = self.Totems
+	local Harmony = CreateFrame("Frame", nil, self)
 	local Shadow = self.Shadow
 
-	-- Totem Colors
-	D["Colors"].totems = {
-		[1] = { 95/255, 222/255, 95/255 },
-	}
-
-	-- Totem Bar (Monk Black Ox / Jade Serpent Statues)
-	TotemBar:ClearAllPoints()
-	TotemBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
-
-	TotemBar[1]:ClearAllPoints()
-	TotemBar[1]:SetAllPoints()
-
-	for i = 2, MAX_TOTEMS do
-		TotemBar[i]:Hide()
-	end
-
-	TotemBar:SetScript("OnShow", function(self) 
-		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 22)
-	end)
-
-	TotemBar:SetScript("OnHide", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 12)
-	end)
-
 	-- Harmony Bar
-	local Harmony = CreateFrame("Frame", nil, self)
 	Harmony:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	Harmony:Size(250, 8)
 	Harmony:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	Harmony:SetBackdropColor(0, 0, 0)
-	Harmony:SetBackdropBorderColor(0, 0, 0)	
+	Harmony:SetBackdropBorderColor(0, 0, 0)
 
 	for i = 1, 5 do
 		Harmony[i] = CreateFrame("StatusBar", nil, Harmony)
@@ -59,6 +34,30 @@ function DuffedUIUnitFrames:AddMonkFeatures()
 
 	-- Shadow Effect Updates
 	Shadow:Point("TOPLEFT", -4, 12)
+
+	-- Totem Bar (Black Ox / Jade Serpent Statue)
+	if C["unitframes"].TotemBar then
+		D["Colors"].totems[1] = { 95/255, 222/255, 95/255 }
+
+		local TotemBar = self.Totems
+		TotemBar:ClearAllPoints()
+		TotemBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
+
+		TotemBar[1]:ClearAllPoints()
+		TotemBar[1]:SetAllPoints()
+
+		for i = 2, MAX_TOTEMS do
+			TotemBar[i]:Hide()
+		end
+
+		TotemBar:SetScript("OnShow", function(self)
+			DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 22)
+		end)
+
+		TotemBar:SetScript("OnHide", function(self)
+			DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 12)
+		end)
+	end
 
 	-- Register
 	self.HarmonyBar = Harmony

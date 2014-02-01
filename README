@@ -1,6 +1,7 @@
 => DuffedUI v8 <=
 
 01.02.2014 =>
+	Only update totems if TotemBar is enabled
 	Add Class-Feature if class
 	Cosmetic change UpdateTotemOverride
 	Frienddatatext fixed

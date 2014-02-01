@@ -8,20 +8,10 @@ if (Class ~= "PRIEST") then
 end
 
 function DuffedUIUnitFrames:AddPriestFeatures()
-	local TotemBar = self.Totems
 	local SOBar = CreateFrame("Frame", nil, self)
 	local Shadow = self.Shadow
 	
-	-- Totem Bar (Lightwell)
-	D["Colors"].totems[1] = { 238/255, 221/255,  130/255 }
-
-	TotemBar[1]:ClearAllPoints()
-	TotemBar[1]:SetAllPoints()
-
-	for i = 2, MAX_TOTEMS do
-		TotemBar[i]:Hide()
-	end
-	
+	-- Shadow Orbs Bar
 	SOBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	SOBar:Size(250, 8)
 	SOBar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
@@ -43,7 +33,7 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 	end
 	
 	-- Shadow Effect Updates
-	SOBar:SetScript("OnShow", function(self) 
+	SOBar:SetScript("OnShow", function(self)
 		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
 	end)
 
@@ -66,5 +56,26 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 		
 		-- Register
 		self.WeakenedSoul = WSBar
+	end
+	
+	-- Totem Bar (Lightwell)
+	if C["unitframes"].TotemBar then
+		D["Colors"].totems[1] = { 238/255, 221/255,  130/255 }
+
+		local TotemBar = self.Totems
+		TotemBar[1]:ClearAllPoints()
+		TotemBar[1]:SetAllPoints()
+
+		for i = 2, MAX_TOTEMS do
+			TotemBar[i]:Hide()
+		end
+
+		TotemBar:SetScript("OnShow", function(self)
+			DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 22)
+		end)
+
+		TotemBar:SetScript("OnHide", function(self)
+			DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 12)
+		end)
 	end
 end

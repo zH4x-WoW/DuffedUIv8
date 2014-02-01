@@ -1,4 +1,4 @@
-+ DeathKnight - Ghoul (Risen Ally)
++ DeathKnight - Risen Ally (Raise Dead)
 D["Colors"].totems = {
 	[1] = {0.60, 0.40, 0},
 }
@@ -8,7 +8,7 @@ D["Colors"].totems = {
 	[1] = { 95/255, 222/255, 95/255 },
 }
 
-+ Priest - ?x?
++ Priest - Lightwell
 D["Colors"].totems = {
 	[1] = { 238/255, 221/255, 130/255 },
 }

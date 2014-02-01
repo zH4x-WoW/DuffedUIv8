@@ -10,7 +10,6 @@ end
 function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	local RunesBar = CreateFrame("Frame", nil, self)
 	local TotemBar = self.Totems
-	local Shadow = self.Shadow
 
 	-- Runes
 	RunesBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
@@ -36,29 +35,29 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	-- Shadow Effect Updates
 	Shadow:Point("TOPLEFT", -4, 12)
 	
-	-- Totem Colors
-	D["Colors"].totems = {
-		[1] = {0.60, 0.40, 0},
-	}
+	-- Totem Bar (Risen Ally - Raise Dead)
+	if (C["unitframes"].TotemBar) then
+		D["Colors"].totems[1] = {0.60, 0.40, 0}
+		
+		local TotemBar = self.Totems
+		TotemBar:ClearAllPoints()
+		TotemBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
+		
+		TotemBar[1]:ClearAllPoints()
+		TotemBar[1]:SetAllPoints()
 
-	-- Totem Bar (Deathknight Ghoul)
-	TotemBar:ClearAllPoints()
-	TotemBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
-
-	TotemBar[1]:ClearAllPoints()
-	TotemBar[1]:SetAllPoints()
-
-	for i = 2, MAX_TOTEMS do
-		TotemBar[i]:Hide()
+		for i = 2, MAX_TOTEMS do
+			TotemBar[i]:Hide()
+		end
+		
+		TotemBar:SetScript("OnShow", function(self)
+			DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 22)
+		end)
+		
+		TotemBar:SetScript("OnHide", function(self)
+			DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 12)
+		end)
 	end
-
-	TotemBar:SetScript("OnShow", function(self) 
-		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 22)
-	end)
-
-	TotemBar:SetScript("OnHide", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 12)
-	end)
 
 	-- Register
 	self.Runes = RunesBar

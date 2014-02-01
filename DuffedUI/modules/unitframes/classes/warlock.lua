@@ -8,16 +8,17 @@ if (Class ~= "WARLOCK") then
 end
 
 function DuffedUIUnitFrames:AddWarlockFeatures()
-	local Shadow = self.Shadow
 	local Bar = CreateFrame("Frame", nil, self)
 	
-	Shadow:Point("TOPLEFT", -4, 12)
-	
+	local Shadow = self.Shadow
+
+	-- Warlock Class Bar
 	Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	Bar:SetWidth(250)
 	Bar:SetHeight(8)
 	Bar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 	Bar:SetBackdropColor(0, 0, 0)
+	
 	Bar:SetBackdropBorderColor(0, 0, 0)	
 	
 	for i = 1, 4 do
@@ -36,7 +37,10 @@ function DuffedUIUnitFrames:AddWarlockFeatures()
 		Bar[i].bg = Bar[i]:CreateTexture(nil, 'ARTWORK')
 	end
 	
-	Bar:SetScript("OnShow", function(self) 
+	-- Shadow Effect Updates
+	Shadow:Point("TOPLEFT", -4, 12)
+	
+	Bar:SetScript("OnShow", function(self)
 		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
 	end)
 
@@ -44,5 +48,6 @@ function DuffedUIUnitFrames:AddWarlockFeatures()
 		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
 	end)
 	
+	-- Register
 	self.WarlockSpecBars = Bar		
 end
