@@ -264,6 +264,8 @@ function ActionBars:CreateToggleButtons()
 		end
 		
 		BarButtons[i] = Button
+		
+		Panels["ActionBar" .. i .. "ToggleButton"] = Button
 	end
 end
 
