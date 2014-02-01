@@ -1,6 +1,7 @@
 => DuffedUI v8 <=
 
 01.02.2014 =>
+	Shadow bug fix for priests
 	Only update totems if TotemBar is enabled
 	Add Class-Feature if class
 	Cosmetic change UpdateTotemOverride
