@@ -3,6 +3,10 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
+if (Class ~= "WARLOCK") then
+	return
+end
+
 function DuffedUIUnitFrames:AddWarlockFeatures()
 	local Shadow = self.Shadow
 	local Bar = CreateFrame("Frame", nil, self)

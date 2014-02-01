@@ -3,6 +3,10 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
+if (Class ~= "PRIEST") then
+	return
+end
+
 function DuffedUIUnitFrames:AddPriestFeatures()
 	local TotemBar = self.Totems
 	local SOBar = CreateFrame("Frame", nil, self)

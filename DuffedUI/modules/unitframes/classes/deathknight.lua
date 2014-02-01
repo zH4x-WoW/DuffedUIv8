@@ -3,6 +3,10 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
+if (Class ~= "DEATHKNIGHT") then
+	return
+end
+
 function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	local RunesBar = CreateFrame("Frame", nil, self)
 	local TotemBar = self.Totems
