@@ -50,15 +50,12 @@ function DuffedUIChat:StyleFrame(frame)
 		return
 	end
 	
+	local Frame = frame
 	local ID = frame:GetID()
 	local FrameName = frame:GetName()
 	local Tab = _G[FrameName.."Tab"]
 	local TabText = _G[FrameName.."TabText"]
 	local EditBox = _G[FrameName.."EditBox"]
-
-	-- Force alpha
-	Tab:SetAlpha(1)
-	Tab.SetAlpha = UIFrameFadeRemoveFrame
 
 	if Tab.conversationIcon then
 		Tab.conversationIcon:Kill()
@@ -72,11 +69,10 @@ function DuffedUIChat:StyleFrame(frame)
 	-- Change tab font
 	TabText:SetShadowColor(0, 0, 0)
 	TabText:SetShadowOffset(1.25, -1.25)
-	TabText.SetTextColor = Noop
 	
-	frame:SetClampRectInsets(0, 0, 0, 0)
-	frame:SetClampedToScreen(false)
-	frame:SetFading(C["chat"].Fade)
+	Frame:SetClampRectInsets(0, 0, 0, 0)
+	Frame:SetClampedToScreen(false)
+	Frame:SetFading(C["chat"].Fade)
 
 	-- Move the edit box
 	EditBox:ClearAllPoints()
@@ -140,7 +136,7 @@ function DuffedUIChat:StyleFrame(frame)
 	B:Kill()
 	C:Kill()
 
-	frame.IsSkinned = true
+	Frame.IsSkinned = true
 end
 
 function DuffedUIChat:KillPetBattleCombatLog(Frame)
@@ -181,7 +177,6 @@ function DuffedUIChat:SetDefaultChatFramesPositions()
 		local ID = Frame:GetID()
 		
 		-- Set font size and chat frame size
-		-- FCF_SetChatWindowFontSize(nil, Frame, 12)
 		Frame:Size(Width, 116)
 		
 		-- Set default chat frame position
@@ -221,9 +216,6 @@ function DuffedUIChat:SetDefaultChatFramesPositions()
 		end
 		
 		-- Save chat frame settings
-		-- SetChatWindowSavedDimensions(ID, D.Scale(Width), D.Scale(111))
-		-- FCF_SavePositionAndDimensions(Frame)
-		
 		local a1, p, a2, x, y = Frame:GetPoint()
 		DuffedUIDataPerChar.Chat["Frame" .. i] = {a1, a2, x, y, Width, 111}
 	end
@@ -374,6 +366,20 @@ function DuffedUIChat:Setup()
 	ChatTypeInfo.OFFICER.sticky = 1
 	ChatTypeInfo.RAID_WARNING.sticky = 1
 	ChatTypeInfo.CHANNEL.sticky = 1
+	
+	-- Tabs Alpha Settings
+	CHAT_TAB_SHOW_DELAY = 0.2
+	CHAT_TAB_HIDE_DELAY = 2
+	CHAT_FRAME_FADE_TIME = 0.15
+	CHAT_FRAME_FADE_OUT_TIME = 2.0
+	CHAT_FRAME_BUTTON_FRAME_MIN_ALPHA = 0.2
+
+	CHAT_FRAME_TAB_SELECTED_MOUSEOVER_ALPHA = 1.0
+	CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA = 0
+	CHAT_FRAME_TAB_ALERTING_MOUSEOVER_ALPHA = 1.0
+	CHAT_FRAME_TAB_ALERTING_NOMOUSE_ALPHA = 1.0
+	CHAT_FRAME_TAB_NORMAL_MOUSEOVER_ALPHA = 0.4
+	CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = 0
 	
 	CubeLeft:SetScript("OnMouseDown", function(self, Button)
 		local ChatMenu = ChatMenu
