@@ -168,7 +168,7 @@ end
 
 local OnFinishedHeight = function(self)
 	self:SetScript("OnUpdate", nil)
-	self.HeightSizing = false
+	--self.HeightSizing = false
 	self:Height(self.EndHeight)
 	self:AnimCallback("height", self.EndHeight, self.HeightSpeed)
 end
@@ -201,9 +201,9 @@ end
 
 -- Height
 local Height = function(self, height, speed)
-	if self.HeightSizing then
+	--[[if self.HeightSizing then
 		return
-	end
+	end]]--
 
 	self.EndHeight = height or GetHeight(self) + 100
 	self.HeightSpeed = speed or 4
@@ -215,12 +215,12 @@ local Height = function(self, height, speed)
 	end
 
 	self:SetScript("OnUpdate", OnUpdateHeight)
-	self.HeightSizing = true
+	--self.HeightSizing = true
 end
 
 local OnFinishedWidth = function(self)
 	self:SetScript("OnUpdate", nil)
-	self.WidthSizing = false
+	--self.WidthSizing = false
 	self:Width(self.EndWidth)
 	self:AnimCallback("width", self.EndWidth, self.WidthSpeed)
 end
@@ -253,9 +253,9 @@ end
 
 -- Width
 local Width = function(self, width, speed)
-	if self.WidthSizing then
+	--[[if self.WidthSizing then
 		return
-	end
+	end]]--
 
 	self.EndWidth = width or GetWidth(self) + 100 
 	self.WidthSpeed = speed or 4
@@ -273,7 +273,7 @@ end
 -- Expand/Collapse frames (if I split this into 2 options it'd be easier to control)
 local OnExpandFinished = function(self)
 	self:SetScript("OnUpdate", nil)
-	self.ExpandSizing = false
+	--self.ExpandSizing = false
 	self:Height(self.ExpandEndHeight)
 	self:Width(self.ExpandEndWidth)
 	self:AnimCallback("expand", self.ExpandEndWidth, self.ExpandEndHeight, self.ExpandSpeed)
@@ -332,14 +332,14 @@ local ExpandCollapse = function(self)
 end
 
 local ExpandFrame = function(self, width, height, speed)
-	if self.ExpandSizing then
+	--[[if self.ExpandSizing then
 		return
-	end
+	end]]--
 
 	self.ExpandEndWidth = width or GetWidth(self) + 100
 	self.ExpandEndHeight = height or GetHeight(self) + 100
 	self.ExpandSpeed = speed or 8
-	self.ExpandSizing = true
+	--self.ExpandSizing = true
 	
 	if (self.ExpandEndWidth > GetWidth(self) or self.ExpandEndHeight > GetHeight(self)) then
 		self:SetScript("OnUpdate", ExpandOpen)
