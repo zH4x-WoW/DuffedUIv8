@@ -6,7 +6,7 @@ local D, C = select(2, ...):unpack()
 
 -- [[ Auto Scaling ]] --
 if C["general"].AutoScale == true then
-	C["general"].UIScale = min(2, max(.64, 768/string.match(D.Resolution, "%d+x(%d+)")))
+	C["general"].UIScale = min(2, max(.32, 768/string.match(D.Resolution, "%d+x(%d+)")))
 end
 
 -- [[ ReloadUI need to be done even if we keep aspect ratio ]] --
@@ -37,8 +37,8 @@ Graphic:SetScript("OnEvent", function(self, event)
 		SetMultisampleFormat(1)
 	end
 
-	if C["general"].UIScale > 1.1 then C["general"].UIScale = 1.1 end
-	if C["general"].UIScale < 0.64 then C["general"].UIScale = 0.64 end
+	-- Allow 4K and WQHD Resolution to have an UIScale lower than 0.64, which is the lowest value of UIParent scale by default
+	if C["general"].UIScale < 0.64 then UIParent:SetScale(C["general"].UIScale) end
 
 	if format("%.2f", GetCVar("uiScale")) ~= format("%.2f", C["general"].UIScale) then
 		SetCVar("uiScale", C["general"].UIScale)
