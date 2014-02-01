@@ -25,13 +25,7 @@ function DuffedUIFonts:ChangeFonts()
 	local NORMAL = C["medias"].Font
 	local COMBAT = C["medias"].DamageFont
 	local NUMBER = C["medias"].Font
-	local UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT
-	local CHAT_FONT_HEIGHTS = CHAT_FONT_HEIGHTS
-	local UNIT_NAME_FONT = UNIT_NAME_FONT
-	local NAMEPLATE_FONT = NAMEPLATE_FONT
-	local DAMAGE_TEXT_FONT = DAMAGE_TEXT_FONT
-	local STANDARD_TEXT_FONT = STANDARD_TEXT_FONT
-
+	
 	if D.TripleMonitors then
 		InterfaceOptionsCombatTextPanelTargetDamage:Hide()
 		InterfaceOptionsCombatTextPanelPeriodicDamage:Hide()
