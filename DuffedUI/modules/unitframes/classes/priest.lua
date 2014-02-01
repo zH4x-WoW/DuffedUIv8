@@ -71,13 +71,13 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 		end
 
 		TotemBar:SetScript("OnShow", function(self)
-			local y = SOBar:IsShown() and 22 or 12
-			DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, y)
+			local height = SOBar:IsShown() and 22 or 12
+			DuffedUIUnitFrames.UpdateShadow(self, height)
 		end)
 
 		TotemBar:SetScript("OnHide", function(self)
-			local y = SOBar:IsShown() and 12 or 4
-			DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, y)
+			local height = SOBar:IsShown() and 12 or 4
+			DuffedUIUnitFrames.UpdateShadow(self, height)
 		end)
 	end
 end

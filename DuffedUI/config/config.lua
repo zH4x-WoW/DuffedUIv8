@@ -37,6 +37,7 @@ C["auras"] = {
 	["ClassicTimer"] = false,
 	["HideBuffs"] = false,
 	["HideDebuffs"] = false,
+	["Animation"] = true,
 }
 
 C["bags"] = {

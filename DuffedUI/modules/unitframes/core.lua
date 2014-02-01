@@ -140,7 +140,7 @@ function DuffedUIUnitFrames:MouseOnPlayer()
 	end
 end
 
-function DuffedUIUnitFrames:UpdateShadow(script, x, y)
+function DuffedUIUnitFrames:UpdateShadow(height)
 	local Frame = self:GetParent()
 	local Shadow = Frame.Shadow
 	
@@ -148,11 +148,7 @@ function DuffedUIUnitFrames:UpdateShadow(script, x, y)
 		return
 	end
 
-	if (script == "OnShow") then
-		Shadow:Point("TOPLEFT", x, y)
-	else
-		Shadow:Point("TOPLEFT", x, y)
-	end
+	Shadow:Point("TOPLEFT", -4, height)
 end
 
 function DuffedUIUnitFrames:UpdateAurasHeaderPosition(script, x, y)
@@ -163,13 +159,8 @@ function DuffedUIUnitFrames:UpdateAurasHeaderPosition(script, x, y)
 		return
 	end
 
-	if script == "OnShow" then
-		Buffs:ClearAllPoints() 
-		Buffs:Point("BOTTOMLEFT", Frame, "TOPLEFT", x, y)
-	else
-		Buffs:ClearAllPoints() 
-		Buffs:Point("BOTTOMLEFT", Frame, "TOPLEFT", x, y)
-	end
+	Buffs:ClearAllPoints()
+	Buffs:Point("BOTTOMLEFT", Frame, "TOPLEFT", 0, height)
 end
 
 function DuffedUIUnitFrames:CustomCastTimeText(duration)

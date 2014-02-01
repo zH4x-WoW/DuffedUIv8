@@ -126,13 +126,13 @@ function DuffedUIUnitFrames:Target()
 	end
 	
 	ComboPoints:SetScript("OnShow", function(self) 
-		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
-		DuffedUIUnitFrames.UpdateAurasHeaderPosition(self, "OnShow", 0, 14)
+		DuffedUIUnitFrames.UpdateShadow(self, 12)
+		DuffedUIUnitFrames.UpdateAurasHeaderPosition(self, 14)
 	end)
 
 	ComboPoints:SetScript("OnHide", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
-		DuffedUIUnitFrames.UpdateAurasHeaderPosition(self, "OnHide", 0, 4)
+		DuffedUIUnitFrames.UpdateShadow(self, 4)
+		DuffedUIUnitFrames.UpdateAurasHeaderPosition(self, 4)
 	end)
 
 	self.Buffs = Buffs

@@ -231,7 +231,7 @@ function DuffedUIAuras:Skin()
 			self.Animation = Animation
 		end
 
-		if (not self.AuraGrowth) then
+		if (C["auras"].Animation and not self.AuraGrowth) then
 			local AuraGrowth = self:CreateAnimationGroup()
 		
 			local Grow = AuraGrowth:CreateAnimation("Scale")

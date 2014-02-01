@@ -51,11 +51,11 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 		end
 		
 		TotemBar:SetScript("OnShow", function(self)
-			DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 22)
+			DuffedUIUnitFrames.UpdateShadow(self, 22)
 		end)
 		
 		TotemBar:SetScript("OnHide", function(self)
-			DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 12)
+			DuffedUIUnitFrames.UpdateShadow(self, 12)
 		end)
 	end
 

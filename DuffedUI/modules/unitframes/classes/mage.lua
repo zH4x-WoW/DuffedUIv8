@@ -36,11 +36,11 @@ function DuffedUIUnitFrames:AddMageFeatures()
 	
 	-- Shadow Effect Updates
 	ArcaneChargeBar:SetScript("OnShow", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
+		DuffedUIUnitFrames.UpdateShadow(self, 12)
 	end)
 
 	ArcaneChargeBar:SetScript("OnHide", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
+		DuffedUIUnitFrames.UpdateShadow(self, 4)
 	end)
 	
 	-- Totem Bar (Rune of Power)
