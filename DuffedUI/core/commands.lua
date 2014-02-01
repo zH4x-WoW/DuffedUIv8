@@ -29,7 +29,7 @@ D.SlashHandler = function(cmd)
 		local Install = D["Install"]
 		
 		Install:Launch()
-	elseif (arg1 == "help") then
+	elseif (arg1 == "" or arg1 == "help") then
 		print(" ")
 		print("|cffff0000".. L.Help.Title .."|r")
 		print(L.Help.Install)
