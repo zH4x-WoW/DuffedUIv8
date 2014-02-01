@@ -247,11 +247,10 @@ function DuffedUIDT:Load()
 	end
 end
 
-DuffedUIDT:RegisterEvent("ADDON_LOADED")
+DuffedUIDT:RegisterEvent("PLAYER_LOGIN")
 DuffedUIDT:RegisterEvent("PLAYER_LOGOUT")
 DuffedUIDT:SetScript("OnEvent", function(self, event, addon)
-	if (addon and addon == "DuffedUI") then
-		self:UnregisterEvent(event)
+	if event == "PLAYER_LOGIN" then
 		self:Load()
 	else
 		self:Save()
