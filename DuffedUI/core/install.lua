@@ -8,9 +8,15 @@ Install.Height = 150
 
 function Install:Requirement()
 	local ActionBars = C["actionbars"].Enable
+	local Chat = D["Chat"]
+	local IsInstalled = DuffedUIDataPerChar.InstallDone
 
 	if ActionBars then
 		SetActionBarToggles(1, 1, 1, 1)
+	end
+	
+	if not IsInstalled and Chat then
+		Chat:SetDefaultChatFramePositions()
 	end
 end
 
@@ -212,15 +218,17 @@ Install:SetScript("OnEvent", function(self, event, addon)
 		return
 	end
 
-	self:UnregisterAllEvents()
-	
 	if (not DuffedUIDataPerChar) then
 		DuffedUIDataPerChar = {}
 	end
 	
-	if (not DuffedUIDataPerChar.InstallDone) then
+	local IsInstalled = DuffedUIDataPerChar.InstallDone
+	
+	if (not IsInstalled) then
 		self:Launch()
 	end
+	
+	self:UnregisterAllEvents()
 end)
 
 D["Install"] = Install

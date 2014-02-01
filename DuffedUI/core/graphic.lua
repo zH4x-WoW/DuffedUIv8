@@ -37,12 +37,12 @@ Graphic:SetScript("OnEvent", function(self, event)
 		SetMultisampleFormat(1)
 	end
 
-	-- Allow 4K and WQHD Resolution to have an UIScale lower than 0.64, which is the lowest value of UIParent scale by default
-	if C["general"].UIScale < 0.64 then UIParent:SetScale(C["general"].UIScale) end
-
 	if format("%.2f", GetCVar("uiScale")) ~= format("%.2f", C["general"].UIScale) then
 		SetCVar("uiScale", C["general"].UIScale)
 	end
+	
+	-- Allow 4K and WQHD Resolution to have an UIScale lower than 0.64, which is the lowest value of UIParent scale by default
+	if C["general"].UIScale < 0.64 then UIParent:SetScale(C["general"].UIScale) end
 
 	if D.TripleMonitors then
 		local width = D.TripleMonitors

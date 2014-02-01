@@ -1,6 +1,9 @@
 local D, C, L = select(2, ...):unpack()
 
 -- Gonna rewrite this entirely, it's just temp to work from
+if (not C["chat"].Enable) then
+	return
+end
 
 local DuffedUIChat = D["Chat"]
 local Lines = {}

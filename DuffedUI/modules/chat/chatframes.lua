@@ -171,27 +171,8 @@ function DuffedUIChat:SkinToastFrame()
 	ToastCloseButton:SkinCloseButton()
 end
 
--- Hydra Note:
--- We don't have an install process yet, so it's here for now. (Only handling position for now, not channels/groups)
-
--- Tukz Note:
--- It's better like this anyway, because we will call DuffedUIChat:Install() in the Installation of DuffedUI. You are free to complete this function.
--- I prefer like this because I would like everything chat frames related to be include in chat module folder. Same for others modules we will write.
-function DuffedUIChat:Install()
-	-- Create our custom chatframes	
-	FCF_ResetChatWindows()
-	FCF_SetLocked(ChatFrame1, 1)
-	FCF_DockFrame(ChatFrame2)
-	FCF_SetLocked(ChatFrame2, 1)
-	FCF_OpenNewWindow(GENERAL)
-	FCF_SetLocked(ChatFrame3, 1)
-	FCF_DockFrame(ChatFrame3)
-
-	if C["chat"].LootFrame then
-		FCF_OpenNewWindow(LOOT)
-		FCF_UnDockFrame(ChatFrame4)
-		ChatFrame4:Show()
-	end
+function DuffedUIChat:SetDefaultChatFramesPositions()
+	if not DuffedUIDataPerChar.Chat then DuffedUIDataPerChar.Chat = {} end
 	
 	local Width = DataTextLeft:GetWidth()
 
@@ -200,7 +181,7 @@ function DuffedUIChat:Install()
 		local ID = Frame:GetID()
 		
 		-- Set font size and chat frame size
-		FCF_SetChatWindowFontSize(nil, Frame, 12)
+		-- FCF_SetChatWindowFontSize(nil, Frame, 12)
 		Frame:Size(Width, 116)
 		
 		-- Set default chat frame position
@@ -240,8 +221,53 @@ function DuffedUIChat:Install()
 		end
 		
 		-- Save chat frame settings
-		SetChatWindowSavedDimensions(ID, D.Scale(Width), D.Scale(111))
-		FCF_SavePositionAndDimensions(Frame)
+		-- SetChatWindowSavedDimensions(ID, D.Scale(Width), D.Scale(111))
+		-- FCF_SavePositionAndDimensions(Frame)
+		
+		local a1, p, a2, x, y = Frame:GetPoint()
+		DuffedUIDataPerChar.Chat["Frame" .. i] = {a1, a2, x, y, Width, 111}
+	end
+end
+
+function DuffedUIChat:SetChatFramePosition()
+	if not DuffedUIDataPerChar.Chat then
+		return
+	end
+
+	local Frame = self
+	local ID = self:GetID()
+	local Settings = DuffedUIDataPerChar.Chat["Frame" .. ID]
+	
+	if Settings then
+		local a1, a2, x, y, w, h = unpack(Settings)
+
+		Frame:SetUserPlaced(true)
+		Frame:ClearAllPoints()
+		Frame:SetPoint(a1, UIParent, a2, x, y)
+		Frame:SetSize(w, h)
+	end
+end
+
+-- Hydra Note:
+-- We don't have an install process yet, so it's here for now. (Only handling position for now, not channels/groups)
+
+-- Tukz Note:
+-- It's better like this anyway, because we will call TukuiChat:Install() in the Installation of Tukui. You are free to complete this function.
+-- I prefer like this because I would like everything chat frames related to be include in chat module folder. Same for others modules we will write.
+function DuffedUIChat:Install()
+	-- Create our custom chatframes
+	FCF_ResetChatWindows()
+	FCF_SetLocked(ChatFrame1, 1)
+	FCF_DockFrame(ChatFrame2)
+	FCF_SetLocked(ChatFrame2, 1)
+	FCF_OpenNewWindow(GENERAL)
+	FCF_SetLocked(ChatFrame3, 1)
+	FCF_DockFrame(ChatFrame3)
+
+	if C["chat"].LootFrame then
+		FCF_OpenNewWindow(LOOT)
+		FCF_UnDockFrame(ChatFrame4)
+		ChatFrame4:Show()
 	end
 	
 	-- Set more chat groups
@@ -330,6 +356,8 @@ function DuffedUIChat:Install()
 			FCF_Close(ChatFrame4)
 		end
 	end
+	
+	self:SetDefaultChatFramesPositions()
 end
 
 function DuffedUIChat:Setup()
@@ -377,5 +405,6 @@ end)
 
 hooksecurefunc("ChatEdit_UpdateHeader", DuffedUIChat.UpdateEditBoxColor)
 hooksecurefunc("FCF_OpenTemporaryWindow", DuffedUIChat.StyleTempFrame)
+hooksecurefunc("FCF_RestorePositionAndDimensions", DuffedUIChat.SetChatFramePosition)
 
 D["Chat"] = DuffedUIChat
