@@ -1,6 +1,7 @@
 => DuffedUI v8 <=
 
 01.02.2014 =>
+	JustifyH = RIGHT for the Lootframe works
 	Revert some former chat changes
 	Merge "LoadVariables" and "RestoreBarState"
 	Fixed actionbars "On Load Parameters"

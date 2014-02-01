@@ -180,7 +180,11 @@ function DuffedUIChat:SetDefaultChatFramesPositions()
 				else
 					Frame:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 5)
 				end
-				Frame:SetJustifyH("RIGHT")
+				if C["chat"].JustifyLoot then
+					Frame:SetJustifyH("RIGHT")
+				else
+					Frame:SetJustifyH("LEFT")
+				end
 			end
 		end
 		
@@ -214,6 +218,13 @@ function DuffedUIChat:SetChatFramePosition()
 		Frame:ClearAllPoints()
 		Frame:SetPoint(a1, UIParent, a2, x, y)
 		Frame:SetSize(w, h)
+	end
+	if (ID == 4) then
+		if C["chat"].JustifyLoot then
+			Frame:SetJustifyH("RIGHT")
+		else
+			Frame:SetJustifyH("LEFT")
+		end
 	end
 end
 
