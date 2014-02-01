@@ -1,6 +1,7 @@
 => DuffedUI v8 <=
 
 01.02.2014 =>
+	Merge "LoadVariables" and "RestoreBarState"
 	Fixed actionbars "On Load Parameters"
 	Disabled animationlock for testing
 	Empty string for /duffedui to display help

@@ -101,27 +101,6 @@ function ActionBars:ShowTopButtons(bar)
 	end
 end
 
--- Restore buttons to previous state on load
-function ActionBars:RestoreBarState()
-	local Data = DuffedUIDataPerChar
-
-	for bar = 2, 3 do
-		if Data["Bar"..bar.."Buttons"] then
-			for button = 1, (6 - Data["Bar"..bar.."Buttons"]) do
-				self:RemoveColumn(Panels["ActionBar"..bar], bar)
-			end
-		end
-	end
-	
-	for bar = 4, 5 do
-		if Data["Bar"..bar.."Buttons"] then
-			for button = 1, (6 - Data["Bar"..bar.."Buttons"]) do
-				self:RemoveButton(Panels["ActionBar"..bar], bar)
-			end
-		end
-	end
-end
-
 local OnClick = function(self, button)
 	if InCombatLockdown() then
 		return print(error)
@@ -133,7 +112,7 @@ local OnClick = function(self, button)
 	local Bar = self.Bar
 	local Num = self.Num
 
-	if (button == "LoadVars") or (Bar:IsVisible()) then
+	if (Bar:IsVisible()) then
 		if (ShiftClick and Num ~= 4) then -- Handle shift-clicks on the button
 			if (Num == 2 or Num ==  3) then	
 				ActionBars:RemoveColumn(Bar, Num)
@@ -276,11 +255,29 @@ function ActionBars:LoadVariables()
 	
 	local Data = DuffedUIDataPerChar
 
+	-- Hide Buttons
+	for bar = 2, 3 do
+		if Data["Bar"..bar.."Buttons"] then
+			for button = 1, (6 - Data["Bar"..bar.."Buttons"]) do
+				self:RemoveColumn(Panels["ActionBar"..bar], bar)
+			end
+		end
+	end
+
+	for bar = 4, 5 do
+		if Data["Bar"..bar.."Buttons"] then
+			for button = 1, (6 - Data["Bar"..bar.."Buttons"]) do
+				self:RemoveButton(Panels["ActionBar"..bar], bar)
+			end
+		end
+	end
+
+	-- Hide Bars
 	for i = 2, 5 do
 		local Button = BarButtons[i]
 		
 		if Data["HideBar"..i] then
-			OnClick(Button, "LoadVars")
+			OnClick(Button)
 		end
 	end
 end

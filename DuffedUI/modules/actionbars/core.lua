@@ -270,7 +270,6 @@ function DuffedUIActionBars:UpdateStanceBar(...)
 	end	
 end
 
-DuffedUIActionBars:RegisterEvent("PLAYER_ENTERING_WORLD")
 DuffedUIActionBars:RegisterEvent("ADDON_LOADED")
 DuffedUIActionBars:RegisterEvent("VARIABLES_LOADED")
 DuffedUIActionBars:SetScript("OnEvent", function(self, event, addon)
@@ -287,10 +286,10 @@ DuffedUIActionBars:SetScript("OnEvent", function(self, event, addon)
 		self:ShowGrid()
 		self:CreateToggleButtons()
 		self:CreateVehicleButtons()
-	elseif (event == "PLAYER_ENTERING_WORLD") then
-		self:RestoreBarState()
-	else
-		self:LoadVariables()
+		self:UnregisterEvent("ADDON_LOADED")
+	elseif (event == "VARIABLES_LOADED") then
+ 		self:LoadVariables()
+		self:UnregisterEvent("VARIABLES_LOADED")
 	end
 end)
 
