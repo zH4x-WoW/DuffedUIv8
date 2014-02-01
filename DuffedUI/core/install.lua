@@ -52,10 +52,7 @@ end
 function Install:Step2()
 	local Chat = D["Chat"]
 	
-	if (not Chat) then
-		return
-	end
-	
+	if (not Chat) then return end
 	Chat:Install()
 end
 

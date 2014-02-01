@@ -25,7 +25,7 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 	DruidMana.Background:SetTexture(0.30, 0.52, 0.90, 0.2)
 
 	-- Totem Bar (Wild Mushrooms)
-	if C["unitframes"].TotemBar) then
+	if C["unitframes"].TotemBar then
 		D["Colors"].totems = {
 			[1] = { 95/255, 222/255, 95/255 },
 			[2] = { 95/255, 222/255, 95/255 },

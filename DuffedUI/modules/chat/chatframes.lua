@@ -6,9 +6,7 @@ local D, C, L = select(2, ...):unpack()
 	-- PLAYER_ENTERING_WORLD event on DuffedUIChat will not be needed anymore when we will create the install process.
 	-- find the event which randomly move chat position from default and unregister it.
 
-if (not C["chat"].Enable) then
-	return
-end
+if (not C["chat"].Enable) then return end
 
 local _G = _G
 local format = format
@@ -20,7 +18,6 @@ local LeftChatBackground = D["Panels"].LeftChatBackground
 local RightChatBackground = D["Panels"].RightChatBackground
 local CubeLeft = D["Panels"].CubeLeft
 local DuffedUIChat = CreateFrame("Frame")
-local UIFrameFadeRemoveFrame = UIFrameFadeRemoveFrame
 
 -- Update editbox border color
 function DuffedUIChat:UpdateEditBoxColor()
@@ -33,34 +30,18 @@ function DuffedUIChat:UpdateEditBoxColor()
 			local ID = GetChannelName(EditBox:GetAttribute("channelTarget"))
 			
 			if (ID == 0) then
-				--Backdrop:SetBackdropBorderColor(unpack(C["medias"].BorderColor)) -- [[ NOTE! Just leaving these here for now if you decide you don't like this feature. Will remove them up if you do. ]]
 				D.GradientFrame(Backdrop, "Border", 0, 0.5, unpack(C["medias"].BorderColor))
 			else
-				--Backdrop:SetBackdropBorderColor(ChatTypeInfo[ChatType..ID].r,ChatTypeInfo[ChatType..ID].g,ChatTypeInfo[ChatType..ID].b)
 				D.GradientFrame(Backdrop, "Border", 0, 0.5, ChatTypeInfo[ChatType..ID].r, ChatTypeInfo[ChatType..ID].g, ChatTypeInfo[ChatType..ID].b)
 			end
 		else
-			--Backdrop:SetBackdropBorderColor(ChatTypeInfo[ChatType].r,ChatTypeInfo[ChatType].g,ChatTypeInfo[ChatType].b)
-			D.GradientFrame(Backdrop, "Border", 0, 0.5, ChatTypeInfo[ChatType].r, ChatTypeInfo[ChatType].g, ChatTypeInfo[ChatType].b)
+		D.GradientFrame(Backdrop, "Border", 0, 0.5, ChatTypeInfo[ChatType].r, ChatTypeInfo[ChatType].g, ChatTypeInfo[ChatType].b)
 		end
 	end
 end
 
-function DuffedUIChat:NoMouseAlpha()
-	local Frame = self:GetName()
-	local Tab = _G[Frame .. "Tab"]
-
-	if (Tab.noMouseAlpha == 0.4) or (Tab.noMouseAlpha == 0.2) then
-		--UIFrameFadeRemoveFrame(Tab)
-		Tab:SetAlpha(0)
-		Tab.noMouseAlpha = 0
-	end
-end
-
 function DuffedUIChat:StyleFrame(frame)
-	if frame.IsSkinned then
-		return
-	end
+	if frame.IsSkinned then return end
 	
 	local Frame = frame
 	local ID = frame:GetID()
@@ -69,14 +50,14 @@ function DuffedUIChat:StyleFrame(frame)
 	local TabText = _G[FrameName.."TabText"]
 	local EditBox = _G[FrameName.."EditBox"]
 
-	if Tab.conversationIcon then
-		Tab.conversationIcon:Kill()
-	end
+	if Tab.conversationIcon then Tab.conversationIcon:Kill() end
+	
+	-- always set alpha to 1, don"t fade it anymore
+	Tab:SetAlpha(1)
+	Tab.SetAlpha = UIFrameFadeRemoveFrame
 	
 	-- Hide editbox every time we click on a tab
-	Tab:HookScript("OnClick", function()
-		EditBox:Hide()
-	end)
+	Tab:HookScript("OnClick", function() EditBox:Hide() end)
 
 	-- Change tab font
 	TabText:SetShadowColor(0, 0, 0)
@@ -98,9 +79,7 @@ function DuffedUIChat:StyleFrame(frame)
 	EditBox:Hide()
 	
 	-- Hide editbox instead of fading
-	EditBox:HookScript("OnEditFocusLost", function(self)
-		self:Hide()
-	end)
+	EditBox:HookScript("OnEditFocusLost", function(self) self:Hide() end)
 	
 	-- create our own texture for edit box
 	EditBox:CreateBackdrop()
@@ -111,9 +90,7 @@ function DuffedUIChat:StyleFrame(frame)
 	EditBox.Backdrop:SetBackdropColor(unpack(C["medias"].BackdropColor))
 	
 	-- Hide textures
-	for i = 1, #CHAT_FRAME_TEXTURES do
-		_G[FrameName..CHAT_FRAME_TEXTURES[i]]:SetTexture(nil)
-	end
+	for i = 1, #CHAT_FRAME_TEXTURES do _G[FrameName..CHAT_FRAME_TEXTURES[i]]:SetTexture(nil) end
 
 	-- Remove default chatframe tab textures				
 	_G[format("ChatFrame%sTabLeft", ID)]:Kill()
@@ -152,9 +129,7 @@ function DuffedUIChat:StyleFrame(frame)
 end
 
 function DuffedUIChat:KillPetBattleCombatLog(Frame)
-	if (_G[Frame:GetName().."Tab"]:GetText():match(PET_BATTLE_COMBAT_LOG)) then
-		return FCF_Close(Frame)
-	end
+	if (_G[Frame:GetName().."Tab"]:GetText():match(PET_BATTLE_COMBAT_LOG)) then return FCF_Close(Frame) end
 end
 
 function DuffedUIChat:StyleTempFrame()
@@ -163,9 +138,7 @@ function DuffedUIChat:StyleTempFrame()
 	DuffedUIChat:KillPetBattleCombatLog(Frame)
 
 	-- Make sure it's not skinned already
-	if Frame.IsSkinned then
-		return
-	end
+	if Frame.IsSkinned then return end
 
 	-- Pass it on
 	DuffedUIChat:StyleFrame(Frame)
@@ -189,7 +162,7 @@ function DuffedUIChat:SetDefaultChatFramesPositions()
 		local ID = Frame:GetID()
 		
 		-- Set font size and chat frame size
-		Frame:Size(Width, 116)
+		Frame:Size(Width + 21, 121)
 		
 		-- Set default chat frame position
 		if (ID == 1) then
@@ -199,7 +172,7 @@ function DuffedUIChat:SetDefaultChatFramesPositions()
 			else
 				Frame:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 5)
 			end
-		elseif (C["chat"].LootFrame and ID == 4) then
+		elseif (ID == 4) then
 			if (not Frame.isDocked) then
 				Frame:ClearAllPoints()
 				if C["chat"].rBackground then
@@ -211,32 +184,24 @@ function DuffedUIChat:SetDefaultChatFramesPositions()
 			end
 		end
 		
-		if (ID == 1) then
-			FCF_SetWindowName(Frame, "G, S & W")
-		end
+		if (ID == 1) then FCF_SetWindowName(Frame, "G, S & W") end
 		
-		if (ID == 2) then
-			FCF_SetWindowName(Frame, "Log")
-		end
+		if (ID == 2) then FCF_SetWindowName(Frame, "Log") end
 		
-		if (ID == 3) then
-			FCF_SetWindowName(Frame, "Whisper")
-		end		
+		if (ID == 3) then FCF_SetWindowName(Frame, "Whisper") end
+
+		if (ID == 4) then FCF_SetWindowName(Frame, "Loot") end
 		
-		if (not Frame.isLocked) then
-			FCF_SetLocked(Frame, 1)
-		end
+		if (not Frame.isLocked) then FCF_SetLocked(Frame, 1) end
 		
 		-- Save chat frame settings
 		local a1, p, a2, x, y = Frame:GetPoint()
-		DuffedUIDataPerChar.Chat["Frame" .. i] = {a1, a2, x, y, Width, 111}
+		DuffedUIDataPerChar.Chat["Frame" .. i] = {a1, a2, x, y, Width + 21, 116}
 	end
 end
 
 function DuffedUIChat:SetChatFramePosition()
-	if not DuffedUIDataPerChar.Chat then
-		return
-	end
+	if not DuffedUIDataPerChar.Chat then return end
 
 	local Frame = self
 	local ID = self:GetID()
@@ -268,11 +233,9 @@ function DuffedUIChat:Install()
 	FCF_SetLocked(ChatFrame3, 1)
 	FCF_DockFrame(ChatFrame3)
 
-	if C["chat"].LootFrame then
-		FCF_OpenNewWindow(LOOT)
-		FCF_UnDockFrame(ChatFrame4)
-		ChatFrame4:Show()
-	end
+	FCF_OpenNewWindow(LOOT)
+	FCF_UnDockFrame(ChatFrame4)
+	ChatFrame4:Show()
 	
 	-- Set more chat groups
 	ChatFrame_RemoveAllMessageGroups(ChatFrame1)
@@ -355,21 +318,13 @@ function DuffedUIChat:Install()
 	
 	DEFAULT_CHAT_FRAME:SetUserPlaced(true)
 	
-	if (not C["chat"].LootFrame) then
-		if (FCF_GetChatWindowInfo(ChatFrame4:GetID()) == LOOT) then
-			FCF_Close(ChatFrame4)
-		end
-	end
-	
 	self:SetDefaultChatFramesPositions()
 end
 
 function DuffedUIChat:Setup()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local Frame = _G["ChatFrame"..i]
-		
 		self:StyleFrame(Frame)
-		FCFTab_UpdateAlpha(Frame)
 	end
 	
 	-- Remember last channel
@@ -382,9 +337,7 @@ function DuffedUIChat:Setup()
 	CubeLeft:SetScript("OnMouseDown", function(self, Button)
 		local ChatMenu = ChatMenu
 		
-		if (Button == "LeftButton") then	
-			ToggleFrame(ChatMenu)
-		end
+		if (Button == "LeftButton") then ToggleFrame(ChatMenu) end
 	end)
 end
 
@@ -410,8 +363,5 @@ end)
 hooksecurefunc("ChatEdit_UpdateHeader", DuffedUIChat.UpdateEditBoxColor)
 hooksecurefunc("FCF_OpenTemporaryWindow", DuffedUIChat.StyleTempFrame)
 hooksecurefunc("FCF_RestorePositionAndDimensions", DuffedUIChat.SetChatFramePosition)
---hooksecurefunc("FCF_FadeInChatFrame", DuffedUIChat.NoMouseAlpha)
---hooksecurefunc("FCF_FadeOutChatFrame", DuffedUIChat.NoMouseAlpha)
-hooksecurefunc("FCFTab_UpdateAlpha", DuffedUIChat.NoMouseAlpha)
 
 D["Chat"] = DuffedUIChat
