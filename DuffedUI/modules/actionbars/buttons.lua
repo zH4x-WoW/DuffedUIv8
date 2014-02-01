@@ -122,7 +122,7 @@ function ActionBars:RestoreBarState()
 	end
 end
 
-local OnClick = function(self)
+local OnClick = function(self, button)
 	if InCombatLockdown() then
 		return print(error)
 	end
@@ -133,7 +133,7 @@ local OnClick = function(self)
 	local Bar = self.Bar
 	local Num = self.Num
 
-	if Bar:IsVisible() then
+	if (button == "LoadVars") or (Bar:IsVisible()) then
 		if (ShiftClick and Num ~= 4) then -- Handle shift-clicks on the button
 			if (Num == 2 or Num ==  3) then	
 				ActionBars:RemoveColumn(Bar, Num)
@@ -280,7 +280,7 @@ function ActionBars:LoadVariables()
 		local Button = BarButtons[i]
 		
 		if Data["HideBar"..i] then
-			OnClick(Button)
+			OnClick(Button, "LoadVars")
 		end
 	end
 end
