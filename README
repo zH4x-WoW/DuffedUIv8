@@ -1,6 +1,7 @@
 => DuffedUI v8 <=
 
 01.02.2014 =>
+	Better way to change alpha for chat tabs
 	Testing of new chat tab alpha
 	Chat frame positions now use own SavedVar instead of Blizzard
 	Allow 4k and WQHD Resolution if lower than 0.64

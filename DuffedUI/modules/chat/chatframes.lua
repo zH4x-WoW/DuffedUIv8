@@ -20,6 +20,7 @@ local LeftChatBackground = D["Panels"].LeftChatBackground
 local RightChatBackground = D["Panels"].RightChatBackground
 local CubeLeft = D["Panels"].CubeLeft
 local DuffedUIChat = CreateFrame("Frame")
+local UIFrameFadeRemoveFrame = UIFrameFadeRemoveFrame
 
 -- Update editbox border color
 function DuffedUIChat:UpdateEditBoxColor()
@@ -42,6 +43,17 @@ function DuffedUIChat:UpdateEditBoxColor()
 			--Backdrop:SetBackdropBorderColor(ChatTypeInfo[ChatType].r,ChatTypeInfo[ChatType].g,ChatTypeInfo[ChatType].b)
 			D.GradientFrame(Backdrop, "Border", 0, 0.5, ChatTypeInfo[ChatType].r, ChatTypeInfo[ChatType].g, ChatTypeInfo[ChatType].b)
 		end
+	end
+end
+
+function DuffedUIChat:NoMouseAlpha()
+	local Frame = self:GetName()
+	local Tab = _G[Frame .. "Tab"]
+
+	if (Tab.noMouseAlpha == 0.4) or (Tab.noMouseAlpha == 0.2) then
+		--UIFrameFadeRemoveFrame(Tab)
+		Tab:SetAlpha(0)
+		Tab.noMouseAlpha = 0
 	end
 end
 
@@ -367,20 +379,6 @@ function DuffedUIChat:Setup()
 	ChatTypeInfo.RAID_WARNING.sticky = 1
 	ChatTypeInfo.CHANNEL.sticky = 1
 	
-	-- Tabs Alpha Settings
-	CHAT_TAB_SHOW_DELAY = 0.2
-	CHAT_TAB_HIDE_DELAY = 2
-	CHAT_FRAME_FADE_TIME = 0.15
-	CHAT_FRAME_FADE_OUT_TIME = 2.0
-	CHAT_FRAME_BUTTON_FRAME_MIN_ALPHA = 0.2
-
-	CHAT_FRAME_TAB_SELECTED_MOUSEOVER_ALPHA = 1.0
-	CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA = 0
-	CHAT_FRAME_TAB_ALERTING_MOUSEOVER_ALPHA = 1.0
-	CHAT_FRAME_TAB_ALERTING_NOMOUSE_ALPHA = 1.0
-	CHAT_FRAME_TAB_NORMAL_MOUSEOVER_ALPHA = 0.4
-	CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = 0
-	
 	CubeLeft:SetScript("OnMouseDown", function(self, Button)
 		local ChatMenu = ChatMenu
 		
@@ -412,5 +410,8 @@ end)
 hooksecurefunc("ChatEdit_UpdateHeader", DuffedUIChat.UpdateEditBoxColor)
 hooksecurefunc("FCF_OpenTemporaryWindow", DuffedUIChat.StyleTempFrame)
 hooksecurefunc("FCF_RestorePositionAndDimensions", DuffedUIChat.SetChatFramePosition)
+--hooksecurefunc("FCF_FadeInChatFrame", DuffedUIChat.NoMouseAlpha)
+--hooksecurefunc("FCF_FadeOutChatFrame", DuffedUIChat.NoMouseAlpha)
+hooksecurefunc("FCFTab_UpdateAlpha", DuffedUIChat.NoMouseAlpha)
 
 D["Chat"] = DuffedUIChat
