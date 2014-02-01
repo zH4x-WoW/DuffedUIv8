@@ -343,8 +343,8 @@ function DuffedUIUnitFrames:UpdateTotemOverride(event, slot)
 
 		local r, g, b = unpack(Colors.totems[slot])
 		totem:SetStatusBarColor(r, g, b)
-		if totem.bg.multiplier then
-			local mu = totem.bg.multiplier
+		if totem.bg then
+			local mu = totem.bg.multiplier or 1
 			r, g, b = r * mu, g * mu, b * mu
 			totem.bg:SetVertexColor(r, g, b)
 		end
@@ -355,7 +355,7 @@ function DuffedUIUnitFrames:UpdateTotemOverride(event, slot)
 		totem:SetValue(0)
 		totem:SetScript("OnUpdate", nil)
 
-		Bar.activeTotems = clearbit(Bar.activeTotems, (2 ^ (slot - 1)))
+		Bar.activeTotems = clearbit(Bar.activeTotems, 2 ^ (slot - 1))
 		totem:Hide()
 	end
 

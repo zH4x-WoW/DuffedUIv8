@@ -222,7 +222,7 @@ local OnMouseUp = function(self, btn)
 end
 
 local OnMouseDown = function(self, btn)
-	if btn == "LeftButton" then ToggleFriendsFrame(1) end
+	if btn == "LeftButton" then ToggleFriendsFrame() end
 end
 
 local OnLeave = function()
