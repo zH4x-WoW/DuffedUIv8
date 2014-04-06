@@ -162,23 +162,23 @@ function DuffedUIChat:SetDefaultChatFramesPositions()
 		local ID = Frame:GetID()
 		
 		-- Set font size and chat frame size
-		Frame:Size(Width + 21, 121)
+		Frame:Size(Width - 11, 120)
 		
 		-- Set default chat frame position
 		if (ID == 1) then
 			Frame:ClearAllPoints()
 			if C["chat"].lBackground then
-				Frame:Point("BOTTOMLEFT", LeftChatBackground, "BOTTOMLEFT", 7, 9)
+				Frame:Point("BOTTOMLEFT", LeftChatBackground, "BOTTOMLEFT", 7, 32)
 			else
-				Frame:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 5)
+				Frame:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 28)
 			end
 		elseif (ID == 4) then
 			if (not Frame.isDocked) then
 				Frame:ClearAllPoints()
 				if C["chat"].rBackground then
-					Frame:Point("BOTTOMRIGHT", RightChatBackground, "BOTTOMRIGHT", -13, 9)
+					Frame:Point("BOTTOMRIGHT", RightChatBackground, "BOTTOMRIGHT", -13, 32)
 				else
-					Frame:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 5)
+					Frame:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 28)
 				end
 				if C["chat"].JustifyLoot then
 					Frame:SetJustifyH("RIGHT")
@@ -200,7 +200,7 @@ function DuffedUIChat:SetDefaultChatFramesPositions()
 		
 		-- Save chat frame settings
 		local a1, p, a2, x, y = Frame:GetPoint()
-		DuffedUIDataPerChar.Chat["Frame" .. i] = {a1, a2, x, y, Width + 21, 116}
+		DuffedUIDataPerChar.Chat["Frame" .. i] = {a1, a2, x, y, Width - 11, 116}
 	end
 end
 

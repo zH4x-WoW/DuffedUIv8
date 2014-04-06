@@ -3,21 +3,21 @@ local D, C, L = select(2, ...):unpack()
 local Panels = {}
 
 local DataTextLeft = CreateFrame("Frame", nil, UIParent)
-DataTextLeft:Size(350, 20)
-DataTextLeft:SetPoint("BOTTOM", -(DataTextLeft:GetWidth() / 2) - 12, 5)
+DataTextLeft:Size(382, 20)
+DataTextLeft:SetPoint("BOTTOMLEFT", 5, 5)
 DataTextLeft:SetTemplate()
 DataTextLeft:SetFrameLevel(1)
 
 local DataTextRight = CreateFrame("Frame", nil, UIParent)
-DataTextRight:Size(350, 20)
-DataTextRight:SetPoint("BOTTOM", (DataTextRight:GetWidth() / 2) + 12, 5)
+DataTextRight:Size(382, 20)
+DataTextRight:SetPoint("BOTTOMRIGHT", -5, 5)
 DataTextRight:SetTemplate()
 DataTextRight:SetFrameLevel(1)
 
 local LeftChatBackground = CreateFrame("Frame", nil, UIParent)
 if C["chat"].lBackground then
 	LeftChatBackground:Size(382, 149)
-	LeftChatBackground:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 5)
+	LeftChatBackground:SetPoint("BOTTOMLEFT", DataTextLeft, "TOPLEFT", 0, 3)
 	LeftChatBackground:SetTemplate("Transparent")
 	LeftChatBackground:SetFrameLevel(1)
 	LeftChatBackground:SetFrameStrata("BACKGROUND")
@@ -33,7 +33,7 @@ end
 local RightChatBackground = CreateFrame("Frame", nil, UIParent)
 if C["chat"].rBackground then
 	RightChatBackground:Size(382, 149)
-	RightChatBackground:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 5)
+	RightChatBackground:SetPoint("BOTTOMRIGHT", DataTextRight, "TOPRIGHT", 0, 3)
 	RightChatBackground:SetTemplate("Transparent")
 	RightChatBackground:SetFrameLevel(1)
 	RightChatBackground:SetFrameStrata("BACKGROUND")
