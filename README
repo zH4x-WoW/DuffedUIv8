@@ -1,5 +1,8 @@
 => DuffedUI v8 <=
 
+06.04.2014 =>
+	Changed *.tga to *.blp
+	
 01.02.2014 =>
 	JustifyH = RIGHT for the Lootframe works
 	Revert some former chat changes
