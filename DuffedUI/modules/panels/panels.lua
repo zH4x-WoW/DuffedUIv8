@@ -16,14 +16,14 @@ DataTextRight:SetFrameLevel(1)
 
 local LeftChatBackground = CreateFrame("Frame", nil, UIParent)
 if C["chat"].lBackground then
-	LeftChatBackground:Size(382, 149)
+	LeftChatBackground:Size(404, 149)
 	LeftChatBackground:SetPoint("BOTTOMLEFT", DataTextLeft, "TOPLEFT", 0, 2)
 	LeftChatBackground:SetTemplate("Transparent")
 	LeftChatBackground:SetFrameLevel(1)
 	LeftChatBackground:SetFrameStrata("BACKGROUND")
 	
 	local LeftChatTab = CreateFrame("Frame", "LeftChatTab", LeftChatBackground)
-	LeftChatTab:Size(330, 20)
+	LeftChatTab:Size(353, 20)
 	LeftChatTab:SetPoint("TOPLEFT", LeftChatBackground, "TOPLEFT", 4, -4)
 	LeftChatTab:SetTemplate()
 	LeftChatTab:SetFrameLevel(2)
@@ -32,14 +32,14 @@ end
 
 local RightChatBackground = CreateFrame("Frame", nil, UIParent)
 if C["chat"].rBackground then
-	RightChatBackground:Size(382, 149)
+	RightChatBackground:Size(404, 149)
 	RightChatBackground:SetPoint("BOTTOMRIGHT", DataTextRight, "TOPRIGHT", 0, 2)
 	RightChatBackground:SetTemplate("Transparent")
 	RightChatBackground:SetFrameLevel(1)
 	RightChatBackground:SetFrameStrata("BACKGROUND")
 	
 	local RightChatTab = CreateFrame("Frame", nil, RightChatBackground)
-	RightChatTab:Size(183, 20)
+	RightChatTab:Size(206, 20)
 	RightChatTab:SetPoint("TOPLEFT", RightChatBackground, "TOPLEFT", 4, -4)
 	RightChatTab:SetTemplate()
 	RightChatTab:SetFrameLevel(2)

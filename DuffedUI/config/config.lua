@@ -28,6 +28,8 @@ C["actionbars"] = {
 	["OwnShadowDanceBar"] = false,
 	["OwnMetamorphosisBar"] = true,
 	["OwnWarriorStanceBar"] = false,
+	["rightbarsmouseover"] = true,
+	["petbaralwaysvisible"] = true,
 }
 
 C["auras"] = {

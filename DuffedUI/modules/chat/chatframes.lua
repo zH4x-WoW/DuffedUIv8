@@ -163,7 +163,7 @@ function DuffedUIChat:SetDefaultChatFramesPositions()
 		local ID = Frame:GetID()
 		
 		-- Set font size and chat frame size
-		Frame:Size(Width - 11, 120)
+		Frame:Size(Width + 12, 120)
 		
 		-- Set default chat frame position
 		if (ID == 1) then
@@ -201,7 +201,7 @@ function DuffedUIChat:SetDefaultChatFramesPositions()
 		
 		-- Save chat frame settings
 		local a1, p, a2, x, y = Frame:GetPoint()
-		DuffedUIDataPerChar.Chat["Frame" .. i] = {a1, a2, x, y, Width - 11, 116}
+		DuffedUIDataPerChar.Chat["Frame" .. i] = {a1, a2, x, y, Width + 12, 116}
 	end
 end
 
