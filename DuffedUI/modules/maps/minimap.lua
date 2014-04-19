@@ -50,7 +50,7 @@ end
 function Maps:PositionMinimap()
 	Map:SetParent(Panels.PetBattleHider)
 	Map:ClearAllPoints()
-	Map:Point("TOPRIGHT", -30, -30)
+	Map:Point("TOPRIGHT", -5, -5)
 end
 
 function Maps:AddMinimapDataTexts()
