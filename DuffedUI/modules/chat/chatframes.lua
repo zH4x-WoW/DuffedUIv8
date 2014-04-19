@@ -14,6 +14,7 @@ local Noop = function() end
 local Toast = BNToastFrame
 local ToastCloseButton = BNToastFrameCloseButton
 local DataTextLeft = D["Panels"].DataTextLeft
+local DataTextRight = D["Panels"].DataTextRight
 local LeftChatBackground = D["Panels"].LeftChatBackground
 local RightChatBackground = D["Panels"].RightChatBackground
 local CubeLeft = D["Panels"].CubeLeft
@@ -168,17 +169,17 @@ function DuffedUIChat:SetDefaultChatFramesPositions()
 		if (ID == 1) then
 			Frame:ClearAllPoints()
 			if C["chat"].lBackground then
-				Frame:Point("BOTTOMLEFT", LeftChatBackground, "BOTTOMLEFT", 7, 32)
+				Frame:Point("BOTTOMLEFT", LeftChatBackground, "BOTTOMLEFT", 7, 28)
 			else
-				Frame:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 28)
+				Frame:Point("BOTTOMLEFT", DataTextLeft, "TOPLEFT", 5, 5)
 			end
 		elseif (ID == 4) then
 			if (not Frame.isDocked) then
 				Frame:ClearAllPoints()
 				if C["chat"].rBackground then
-					Frame:Point("BOTTOMRIGHT", RightChatBackground, "BOTTOMRIGHT", -13, 32)
+					Frame:Point("BOTTOMRIGHT", RightChatBackground, "BOTTOMRIGHT", -13, 28)
 				else
-					Frame:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 28)
+					Frame:Point("BOTTOMRIGHT", DataTextRight, "TOPRIGHT", -5, 5)
 				end
 				if C["chat"].JustifyLoot then
 					Frame:SetJustifyH("RIGHT")

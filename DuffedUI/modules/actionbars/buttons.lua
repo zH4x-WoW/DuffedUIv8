@@ -11,13 +11,13 @@ local error = ERR_NOT_IN_COMBAT
 
 local BarButtons = {}
 
-local OnEnter = function(self)
+--[[local OnEnter = function(self)
 	self:SetAlpha(1)
 end
 
 local OnLeave = function(self)
 	self:SetAlpha(0)
-end
+end]]--
 
 function ActionBars:ShowAllButtons(bar, num)
 	local Button
