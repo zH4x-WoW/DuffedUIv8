@@ -98,45 +98,52 @@ end
 
 function DuffedUIActionBars:AddPanels()
 	local A1 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
+	A1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 30)
 	A1:SetWidth((Size * 12) + (Spacing * 13))
 	A1:SetHeight((Size * 1) + (Spacing * 2))
-	A1:SetPoint("BOTTOM", UIParent, "BOTTOM", -(A1:GetWidth() / 2), 30)
 	A1:SetFrameStrata("BACKGROUND")
 	A1:SetFrameLevel(1)
 
 	local A2 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
+	A2:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 66)
 	A2:SetWidth((Size * 12) + (Spacing * 13))
 	A2:SetHeight((Size * 1) + (Spacing * 2))
-	A2:SetPoint("BOTTOM", UIParent, "BOTTOM", (A2:GetWidth() / 2), 30)
 	A2:SetFrameStrata("BACKGROUND")
 	A2:SetFrameLevel(1)
 
 	local A3 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
+	A3:SetPoint("BOTTOMLEFT", D["Panels"].LeftChatBackground, "TOPLEFT", 0, 2)
 	A3:SetWidth((Size * 12) + (Spacing * 13))
 	A3:SetHeight((Size * 1) + (Spacing * 2))
-	A3:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 68)
 	A3:SetFrameStrata("BACKGROUND")
 	A3:SetFrameLevel(1)
 	
 	local A4 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A4:Point("RIGHT", UIParent, "RIGHT", -5, -14)
 	A4:SetHeight((Size * 12) + (Spacing * 13))
-	A4:SetWidth((Size * 2) + (Spacing * 3))
+	A4:SetWidth((Size * 1) + (Spacing * 2))
 	A4:SetFrameStrata("BACKGROUND")
 	A4:SetFrameLevel(2)
-	
+
 	local A5 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
-	A5:SetSize(PetSize + (Spacing * 2), (PetSize * 10) + (Spacing * 11))
-	A5:SetPoint("RIGHT", A4, "LEFT", -6, 0)
+	A5:SetPoint("BOTTOMRIGHT", D["Panels"].RightChatBackground, "TOPRIGHT", 0, 2)
+	A5:SetWidth((Size * 12) + (Spacing * 13))
+	A5:SetHeight((Size * 1) + (Spacing * 2))
+	A5:SetFrameStrata("BACKGROUND")
+	A5:SetFrameLevel(1)
 	
 	local A6 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
-	A6:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
-	A6:SetPoint("TOPLEFT", 30, -30)
-	A6:SetFrameStrata("BACKGROUND")
-	A6:SetFrameLevel(2)
-	--A6:SetFrameStrata("MEDIUM")
-	--A6:SetMovable(true)
-	--A6:SetClampedToScreen(true)
+	A6:SetSize(PetSize + (Spacing * 2), (PetSize * 10) + (Spacing * 11))
+	A6:SetPoint("RIGHT", A4, "LEFT", -6, 0)
+	
+	local A7 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
+	A7:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
+	A7:SetPoint("TOPLEFT", 30, -30)
+	A7:SetFrameStrata("BACKGROUND")
+	A7:SetFrameLevel(2)
+	--A7:SetFrameStrata("MEDIUM")
+	--A7:SetMovable(true)
+	--A7:SetClampedToScreen(true)
 	
 	A1:SetTemplate("Transparent")
 	A2:SetTemplate("Transparent")
@@ -144,13 +151,15 @@ function DuffedUIActionBars:AddPanels()
 	A4:SetTemplate("Transparent")
 	A5:SetTemplate("Transparent")
 	A6:SetTemplate("Transparent")
+	A7:SetTemplate("Transparent")
 	
 	Panels.ActionBar1 = A1
 	Panels.ActionBar2 = A2
 	Panels.ActionBar3 = A3
 	Panels.ActionBar4 = A4
-	Panels.PetActionBar = A5
-	Panels.StanceBar = A6
+	Panels.ActionBar5 = A5
+	Panels.PetActionBar = A6
+	Panels.StanceBar = A7
 end
 
 function DuffedUIActionBars:UpdatePetBar(...)

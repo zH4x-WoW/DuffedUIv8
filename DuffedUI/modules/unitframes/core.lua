@@ -619,8 +619,8 @@ end
 
 function DuffedUIUnitFrames:CreateAnchor()
 	local Anchor = CreateFrame("Frame", nil, UIParent)
-	Anchor:SetPoint("TOPLEFT", Panels.ActionBar1)
-	Anchor:SetPoint("BOTTOMRIGHT", Panels.ActionBar2)
+	Anchor:SetPoint("TOPRIGHT", Panels.LeftChatBackground)
+	Anchor:SetPoint("BOTTOMLEFT", Panels.RightChatBackground)
 
 	DuffedUIUnitFrames.Anchor = Anchor
 end

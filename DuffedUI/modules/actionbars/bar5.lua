@@ -8,7 +8,7 @@ local Spacing = C["actionbars"].ButtonSpacing
 local MultiBarRight = MultiBarRight
 
 function DuffedUIActionBars:CreateBar5()
-	local ActionBar5 = D.Panels.ActionBar4
+	local ActionBar5 = D.Panels.ActionBar5
 	
 	MultiBarRight:SetParent(ActionBar5)
 	
@@ -22,9 +22,9 @@ function DuffedUIActionBars:CreateBar5()
 		Button:SetFrameLevel(15)
 
 		if (i == 1) then
-			Button:SetPoint("TOPRIGHT", ActionBar5, -Spacing, -Spacing)
+			Button:SetPoint("TOPLEFT", ActionBar5, Spacing, -Spacing)
 		else
-			Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, -Spacing)
+			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
 		end
 
 		ActionBar5["Button"..i] = Button
