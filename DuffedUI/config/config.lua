@@ -49,6 +49,7 @@ C["bags"] = {
 	["Spacing"] = 4,
 	["ItemsPerRow"] = 11,
 	["Scale"] = 1,
+	["Moveable"] = false,
 }
 
 C["merchant"] = {

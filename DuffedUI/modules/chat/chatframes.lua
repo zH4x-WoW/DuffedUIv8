@@ -147,7 +147,7 @@ end
 
 function DuffedUIChat:SkinToastFrame()
 	Toast:ClearAllPoints()
-	Toast:SetPoint("TOPLEFT", UIParent, 3, -3)
+	Toast:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 3, -3)
 	Toast:SetTemplate("Transparent")
 	Toast:CreateShadow()
 	ToastCloseButton:SkinCloseButton()
@@ -189,13 +189,13 @@ function DuffedUIChat:SetDefaultChatFramesPositions()
 			end
 		end
 		
-		if (ID == 1) then FCF_SetWindowName(Frame, "G, S & W") end
+		if (ID == 1) then FCF_SetWindowName(Frame, "G, S & C") end
 		
 		if (ID == 2) then FCF_SetWindowName(Frame, "Log") end
 		
 		if (ID == 3) then FCF_SetWindowName(Frame, "Whisper") end
 
-		if (ID == 4) then FCF_SetWindowName(Frame, "Loot") end
+		if (ID == 4) then FCF_SetWindowName(Frame, "Loot & Spam") end
 		
 		if (not Frame.isLocked) then FCF_SetLocked(Frame, 1) end
 		
