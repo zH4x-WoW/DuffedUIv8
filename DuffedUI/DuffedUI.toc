@@ -16,3 +16,4 @@ medias\medias.lua
 locales\init.xml
 core\init.xml
 modules\init.xml
+modules\plugins\init.xml

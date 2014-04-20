@@ -617,42 +617,34 @@ function DuffedUIUnitFrames:Style(unit)
 	return self
 end
 
-function DuffedUIUnitFrames:CreateAnchor()
-	local Anchor = CreateFrame("Frame", nil, UIParent)
-	Anchor:SetPoint("TOPRIGHT", Panels.LeftChatBackground)
-	Anchor:SetPoint("BOTTOMLEFT", Panels.RightChatBackground)
-
-	DuffedUIUnitFrames.Anchor = Anchor
-end
-
 function DuffedUIUnitFrames:CreateUnits()
 	local Player = oUF:Spawn("player")
-	Player:SetPoint("BOTTOMLEFT", DuffedUIUnitFrames.Anchor, "TOPLEFT", 0, 108)
+	Player:SetPoint("BOTTOM", UIParent, -350, 250)
 	Player:SetParent(Panels.PetBattleHider)
 	Player:Size(250, 57)
 
 	local Target = oUF:Spawn("target")
-	Target:SetPoint("BOTTOMRIGHT", DuffedUIUnitFrames.Anchor, "TOPRIGHT", 0, 108)
+	Target:SetPoint("BOTTOM", UIParent, 350, 250)
 	Target:SetParent(Panels.PetBattleHider)
 	Target:Size(250, 57)
 
 	local TargetOfTarget = oUF:Spawn("targettarget")
-	TargetOfTarget:SetPoint("BOTTOM", DuffedUIUnitFrames.Anchor, "TOP", 0, 108)
+	TargetOfTarget:SetPoint("TOPLEFT", Target, "BOTTOMLEFT", -129, -10)
 	TargetOfTarget:SetParent(Panels.PetBattleHider)
 	TargetOfTarget:Size(129, 36)
 
 	local Pet = oUF:Spawn("pet")
 	Pet:SetParent(Panels.PetBattleHider)
-	Pet:SetPoint("BOTTOM", DuffedUIUnitFrames.Anchor, "TOP", 0, 149)
+	Pet:SetPoint("TOPRIGHT", Player, "BOTTOMRIGHT", 129, -10)
 	Pet:Size(129, 36)
 
 	local Focus = oUF:Spawn("focus")
-	Focus:SetPoint("BOTTOMLEFT", DuffedUIUnitFrames.Anchor, "TOPLEFT", 0, 300)
+	Focus:SetPoint("RIGHT", UIParent, -450, 0)
 	Focus:SetParent(Panels.PetBattleHider)
 	Focus:Size(200, 29)
 
 	local FocusTarget = oUF:Spawn("focustarget")
-	FocusTarget:SetPoint("BOTTOM", Focus, "TOP", 0, 35)
+	FocusTarget:SetPoint("BOTTOM", Focus, "TOP", 0, 15)
 	FocusTarget:SetParent(Panels.PetBattleHider)
 	FocusTarget:Size(200, 29)
 	
@@ -721,7 +713,6 @@ DuffedUIUnitFrames:SetScript("OnEvent", function(self, event, addon)
 
 	oUF:RegisterStyle("DuffedUI", DuffedUIUnitFrames.Style)
 	self:DisableBlizzard()
-	self:CreateAnchor()
 	self:CreateUnits()
 end)
 

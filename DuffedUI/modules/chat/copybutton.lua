@@ -39,14 +39,6 @@ function DuffedUIChat:CopyText(chatframe)
 	CopyFrame:Show()
 end
 
-local OnEnter = function(self)
-	self:SetAlpha(1)
-end
-
-local OnLeave = function(self)
-	self:SetAlpha(0)
-end
-
 local OnMouseUp = function(self)
 	if InCombatLockdown() then
 		return
@@ -107,7 +99,5 @@ function DuffedUIChat:CreateCopyButtons()
 		Button.ChatFrame = Frame
 
 		Button:SetScript("OnMouseUp", OnMouseUp)
-		Button:SetScript("OnEnter", OnEnter)
-		Button:SetScript("OnLeave", OnLeave)
 	end
 end

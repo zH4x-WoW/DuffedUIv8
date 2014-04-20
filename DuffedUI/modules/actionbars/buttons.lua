@@ -31,13 +31,13 @@ local OnClick = function(self, button)
 		
 		if (Num == 3) then
 			self:Point("LEFT", D["Panels"].DataTextLeft, "RIGHT", 2, 0)
-			Text:SetText(">")
+			Text:SetText("+")
 		elseif (Num == 4) then
 			self:Point("LEFT", Bar, "RIGHT", 2, 0)
 			Text:SetText(">")
 		elseif (Num == 5) then
 			self:Point("RIGHT", D["Panels"].DataTextRight, "LEFT", -2, 0)
-			Text:SetText("<")
+			Text:SetText("+")
 		end
 		
 		-- Set value
@@ -52,13 +52,13 @@ local OnClick = function(self, button)
 
 		if (Num == 3) then
 			self:Point("LEFT", D["Panels"].DataTextLeft, "RIGHT", 2, 0)
-			Text:SetText("<")
+			Text:SetText("-")
 		elseif (Num == 4) then
 			self:Point("LEFT", Bar, "RIGHT", 2, 0)
 			Text:SetText("<")
 		elseif (Num == 5) then
 			self:Point("RIGHT", D["Panels"].DataTextRight, "LEFT", -2, 0)
-			Text:SetText(">")
+			Text:SetText("-")
 		end
 		
 		-- Set value
@@ -77,8 +77,6 @@ function ActionBars:CreateToggleButtons()
 		Button.Num = i
 		
 		Button:SetScript("OnClick", OnClick)
-		Button:SetScript("OnEnter", OnEnter)
-		Button:SetScript("OnLeave", OnLeave)
 		
 		Button.Text = Button:CreateFontString(nil, "OVERLAY")
 		Button.Text:Point("CENTER", Button, -1, 1)
@@ -87,15 +85,20 @@ function ActionBars:CreateToggleButtons()
 		if (i == 3) then
 			Button:Size(20)
 			Button:Point("LEFT", D["Panels"].DataTextLeft, "RIGHT", 2, 0)
-			Button.Text:SetText("<")
+			Button.Text:SetText("-")
 		elseif (i == 4) then
 			Button:Size(15, 150)
 			Button:Point("LEFT", Panels.ActionBar4, "RIGHT", 2, 0)
 			Button.Text:SetText(">")
+			if C["actionbars"].Rightbutton then
+				Button:SetAlpha(0)
+				Button:SetScript("OnEnter", function() Button:SetAlpha(1) end)
+				Button:SetScript("OnLeave", function() Button:SetAlpha(0) end)
+			end
 		elseif (i == 5) then
 			Button:Size(20)
 			Button:Point("RIGHT", D["Panels"].DataTextRight, "LEFT", -2, 0)
-			Button.Text:SetText(">")
+			Button.Text:SetText("-")
 		end
 		
 		BarButtons[i] = Button

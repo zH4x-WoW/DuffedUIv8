@@ -28,8 +28,9 @@ C["actionbars"] = {
 	["OwnShadowDanceBar"] = false,
 	["OwnMetamorphosisBar"] = true,
 	["OwnWarriorStanceBar"] = false,
-	["rightbarsmouseover"] = true,
-	["petbaralwaysvisible"] = true,
+	["RightbarsMouseover"] = false,
+	["PetbarAlwaysVisible"] = false,
+	["Rightbutton"] = true,
 }
 
 C["auras"] = {
@@ -48,6 +49,10 @@ C["bags"] = {
 	["Spacing"] = 4,
 	["ItemsPerRow"] = 11,
 	["Scale"] = 1,
+}
+
+C["merchant"] = {
+	["vendorlist"] = true,
 }
 
 C["chat"] = {
