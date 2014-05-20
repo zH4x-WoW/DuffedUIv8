@@ -3,7 +3,7 @@ if (not C["actionbars"].Enable) then return end
 
 local DuffedUIActionBars = D["ActionBars"]
 local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
-local Size = C["actionbars"].NormalButtonSize
+local Size = C["actionbars"].NormalButtonSize - 4
 local Spacing = C["actionbars"].ButtonSpacing
 local MultiBarBottomRight = MultiBarBottomRight
 
@@ -23,8 +23,10 @@ function DuffedUIActionBars:CreateBar3()
 		
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", ActionBar3, Spacing, -Spacing)
+		elseif (i == 7) then
+			Button:SetPoint("TOPRIGHT", ActionBar3, -Spacing, -Spacing)
 		else
-			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+			Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, -Spacing)
 		end
 		
 		ActionBar3["Button"..i] = Button
