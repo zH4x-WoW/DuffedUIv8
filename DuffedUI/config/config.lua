@@ -11,6 +11,7 @@ C["general"] = {
 	["BackdropColor"] = {0.05, 0.05, 0.05},
 	["BorderColor"] = {0.125, 0.125, 0.125},
 	["InOut"] = true,
+	["HideShadow"] = false,
 }
 
 C["fonts"] = {
@@ -35,7 +36,7 @@ C["actionbars"] = {
 
 C["auras"] = {
 	["Enable"] = true,
-	["Consolidate"] = true,
+	["Consolidate"] = false,
 	["Flash"] = true,
 	["ClassicTimer"] = false,
 	["HideBuffs"] = false,

@@ -127,3 +127,19 @@ ColorInfo2.Name = "ValueColor"
 tinsert(Menu, {text = "", notCheckable = true})
 tinsert(Menu, ColorInfo1)
 tinsert(Menu, ColorInfo2)
+
+function DuffedUIDT:ResetColors()
+	DataColor1 = C["medias"].PrimaryDataTextColor or {1, 1, 1}
+	DataColor2 = C["medias"].SecondaryDataTextColor or {1, 1, 1}
+
+	DuffedUIDT.NameColor = Hex(unpack(DataColor1))
+	DuffedUIDT.ValueColor = Hex(unpack(DataColor2))
+
+	DuffedUIDataPerChar.DTNameColor = TukuiDT.NameColor
+	DuffedUIDataPerChar.DTValueColor = TukuiDT.ValueColor
+
+	DuffedUIDT:ForceUpdate()
+end
+
+-- Reset colors
+tinsert(Menu, {text = "Reset colors", notCheckable = true, func = DuffedUIDT.ResetColors})

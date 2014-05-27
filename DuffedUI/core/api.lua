@@ -191,10 +191,19 @@ local function CreateShadow(f, t)
 	shadow:Point("BOTTOMLEFT", -3, -3)
 	shadow:Point("TOPRIGHT", 3, 3)
 	shadow:Point("BOTTOMRIGHT", 3, -3)
-	shadow:SetBackdrop( { 
-		edgeFile = C["medias"].Glow, edgeSize = Scale(3),
-		insets = {left = Scale(5), right = Scale(5), top = Scale(5), bottom = Scale(5)},
-	})
+
+	if C["general"].HideShadows then
+		shadow:SetBackdrop( {
+			edgeFile = nil, edgeSize = 0,
+			insets = {left = 0, right = 0, top = 0, bottom = 0},
+		})
+	else
+		shadow:SetBackdrop( {
+			edgeFile = C.Medias.Glow, edgeSize = Scale(3),
+			insets = {left = Scale(5), right = Scale(5), top = Scale(5), bottom = Scale(5)},
+		})
+	end
+	
 	shadow:SetBackdropColor(0, 0, 0, 0)
 	shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
 	f.Shadow = shadow

@@ -37,6 +37,9 @@ local D, C = select(2, ...):unpack()
 
 local Frame = CreateFrame("Frame")
 local strlower = string.lower
+local select = select
+local unpack = unpack
+local modf = math.modf
 local UIFrameFadeIn = UIFrameFadeIn
 local UIFrameFadeOut = UIFrameFadeOut
 
@@ -404,69 +407,7 @@ local FadeOut = function(self, fadeTime, startAlpha, endAlpha)
 	end
 end
 
-local Functions = {
-	["fadein"] = FadeIn,
-	["fadeout"] = FadeOut,
-	["move"] = MoveFrame,
-	["expand"] = ExpandFrame,
-	["width"] = Width,
-	["height"] = Height,
-}
-
-local Callbacks = {
-	["fadein"] = {},
-	["fadeout"] = {},
-	["move"] = {},
-	["expand"] = {},
-	["width"] = {},
-	["height"] = {},
-}
-
-local AnimCallback = function(self, handler, ...)
-	local Function = Callbacks[handler][self]
-	
-	if Function then
-		Function(self, ...)
-	end
-end
-
-local AnimOnFinished = function(self, handler, func)
-	if (type(handler) ~= "string" or type(func) ~= "function") then
-		return
-	end
-
-	Callbacks[strlower(handler)][self] = func
-end
-
-local Animation = function(self, handler, ...)
-	local Function = Functions[strlower(handler)]
-
-	if Function then
-		Function(self, ...)
-	else
-		return print("Invalid handler: " .. handler)
-	end
-end
-
--- Not yet added, but these will be the objects to add Animation() to
-local Objects = {
-	"Frame",
-	"StatusBar",
-	"EditBox",
-}
-
--- Add our new methods to the Frame metatable
-local Meta = getmetatable(Frame).__index
-
-Meta.Animation = Animation
-Meta.AnimCallback = AnimCallback
-Meta.AnimOnFinished = AnimOnFinished
-
--- Sticking this here for now; Gradient Animation
-local select = select
-local unpack = unpack
-local modf = math.modf
-
+-- Gradient Animation
 local ColorGradient = function(a, b, ...)
 	local perc
 	
@@ -510,6 +451,7 @@ local GradientOnUpdate = function(self, ela)
 
 	if (self.GradientMin >= self.GradientMax) then
 		self:SetScript("OnUpdate", nil)
+		self:AnimCallback("gradient", self.GradientType, self.GradientMin, self.GradientMax, self.GradientEnd.r, self.GradientEnd.g, self.GradientEnd.b)
 	end
 end
 
@@ -534,7 +476,7 @@ local SetEnd = function(self, r, g, b)
 	end
 end
 
-D.GradientFrame = function(self, part, start, finish, r, g, b, customFunc)
+local Gradient = function(self, part, start, finish, r, g, b, customFunc)
 	self.GradientType = string.lower(part)
 	self.GradientMin = start
 	self.GradientMax = finish
@@ -579,3 +521,66 @@ D.GradientFrame = function(self, part, start, finish, r, g, b, customFunc)
 		self:SetScript("OnUpdate", GradientOnUpdate)
 	end
 end
+
+-- This is temporary, remove after implemented fully
+D.GradientFrame = Gradient
+
+local Functions = {
+	["fadein"] = FadeIn,
+	["fadeout"] = FadeOut,
+	["move"] = MoveFrame,
+	["expand"] = ExpandFrame,
+	["width"] = Width,
+	["height"] = Height,
+	["gradient"] = Gradient,
+}
+
+local Callbacks = {
+	["fadein"] = {},
+	["fadeout"] = {},
+	["move"] = {},
+	["expand"] = {},
+	["width"] = {},
+	["height"] = {},
+	["gradient"] = {},
+}
+
+local AnimCallback = function(self, handler, ...)
+	local Function = Callbacks[handler][self]
+
+	if Function then
+		Function(self, ...)
+	end
+end
+
+local AnimOnFinished = function(self, handler, func)
+	if (type(handler) ~= "string" or type(func) ~= "function") then
+		return
+	end
+
+	Callbacks[strlower(handler)][self] = func
+end
+
+local Animation = function(self, handler, ...)
+	local Function = Functions[strlower(handler)]
+
+	if Function then
+		Function(self, ...)
+	else
+		return print("Invalid handler: " .. handler)
+	end
+end
+
+-- Not yet added, but these will be the objects to add Animation() to
+local Objects = {
+	"Frame",
+	"StatusBar",
+	"EditBox",
+}
+
+-- Add our new methods to the Frame metatable
+local Meta = getmetatable(Frame).__index
+
+Meta.Animation = Animation
+Meta.AnimCallback = AnimCallback
+Meta.AnimOnFinished = AnimOnFinished

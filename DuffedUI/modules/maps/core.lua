@@ -16,6 +16,7 @@ Maps:SetScript("OnEvent", function(self, event, addon)
 		self:StyleMinimap()
 		self:PositionMinimap()
 		self:AddMinimapDataTexts()
+		self:AddZoneAndCoords()
 		
 		-- Worldmap
 		self:SetWorldmap()

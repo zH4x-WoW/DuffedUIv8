@@ -249,8 +249,8 @@ end
 
 DuffedUIDT:RegisterEvent("PLAYER_LOGIN")
 DuffedUIDT:RegisterEvent("PLAYER_LOGOUT")
-DuffedUIDT:SetScript("OnEvent", function(self, event, addon)
-	if event == "PLAYER_LOGIN" then
+DuffedUIDT:SetScript("OnEvent", function(self, event)
+	if (event == "PLAYER_LOGIN") then
 		self:Load()
 	else
 		self:Save()

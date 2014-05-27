@@ -4,6 +4,15 @@ local _G = _G
 local Map = _G["Minimap"]
 local Panels = D["Panels"]
 local Maps = D["Maps"]
+local Elapsed = 0
+
+Maps.ZoneColors = {
+	["friendly"] = {.1, 1, .1},
+	["sanctuary"] = {.41, .8, .94},
+	["arena"] = {1, .1,  .1},
+	["hostile"] = {1, .1, .1},
+	["contested"] = {1, .7, 0},
+}
 
 function Maps:DisableMinimapElements()
 	local North = _G["MinimapNorthTag"]
@@ -72,4 +81,123 @@ end
 
 function GetMinimapShape() 
 	return "SQUARE"
+end
+
+----------------------------------------------------------------------------------------
+-- Mouseover map, displaying zone and coords
+----------------------------------------------------------------------------------------
+
+function Maps:AddZoneAndCoords()
+	local MinimapZone = CreateFrame("Frame", "DuffedUIMinimapZone", Map)
+	MinimapZone:SetTemplate("Transparent")
+	MinimapZone:Size(Map:GetWidth() + 4, 1)
+	MinimapZone:Point("TOP", Map, 0, 2)
+	MinimapZone:SetFrameStrata(Minimap:GetFrameStrata())
+
+	MinimapZone.Text = MinimapZone:CreateFontString("DuffedUIMinimapZoneText", "OVERLAY")
+	MinimapZone.Text:SetFont(C["medias"].Font, 12)
+	MinimapZone.Text:Point("TOP", 0, -1)
+	MinimapZone.Text:SetPoint("BOTTOM")
+	MinimapZone.Text:Height(12)
+	MinimapZone.Text:Width(MinimapZone:GetWidth() - 6)
+	MinimapZone.Text:SetAlpha(0)
+
+	local MinimapCoords = CreateFrame("Frame", "DuffedUIMinimapCoord", Map)
+	MinimapCoords:SetTemplate("Transparent")
+	MinimapCoords:Size(1, 20)
+	MinimapCoords:Point("BOTTOMLEFT", Map, "BOTTOMLEFT", -2, -2)
+	MinimapCoords:SetFrameStrata(Minimap:GetFrameStrata())
+
+	MinimapCoords.Text = MinimapCoords:CreateFontString("DuffedUIMinimapCoordText", "OVERLAY")
+	MinimapCoords.Text:SetFont(C["medias"].Font, 12)
+	MinimapCoords.Text:Point("Center", 0, -1)
+	MinimapCoords.Text:SetAlpha(0)
+	MinimapCoords.Text:SetText("0, 0")
+
+	-- Update zone text
+	MinimapZone:RegisterEvent("PLAYER_ENTERING_WORLD")
+	MinimapZone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+	MinimapZone:RegisterEvent("ZONE_CHANGED")
+	MinimapZone:RegisterEvent("ZONE_CHANGED_INDOORS")
+	MinimapZone:SetScript("OnEvent", Maps.UpdateZone)
+
+	-- Update coordinates
+	MinimapCoords:SetScript("OnUpdate", Maps.UpdateCoords)
+
+	-- Animation hooks
+	MinimapZone:AnimOnFinished("Height", function(self, h)
+		if (h == 20) then
+			UIFrameFadeIn(MinimapZone.Text, 0.3, 0, 1)
+		end
+	end)
+
+	MinimapCoords:AnimOnFinished("Width", function(self, w)
+		if (w == 40) then
+			UIFrameFadeIn(MinimapCoords.Text, 0.3, 0, 1)
+		end
+	end)
+
+	Maps.MinimapZone = MinimapZone
+	Maps.MinimapCoords = MinimapCoords
+end
+
+Minimap:SetScript("OnEnter", function()
+	Maps.MinimapZone:Animation("Height", 20, 5)
+	Maps.MinimapCoords:Animation("Width", 40, 5)
+end)
+
+Minimap:SetScript("OnLeave", function()
+	Maps.MinimapZone:Animation("Height", 1, 5)
+	Maps.MinimapCoords:Animation("Width", 1, 5)
+
+	Maps.MinimapZone.Text:SetAlpha(0)
+	Maps.MinimapCoords.Text:SetAlpha(0)
+end)
+
+function Maps:UpdateCoords(t)
+	Elapsed = Elapsed - t
+
+	if (Elapsed > 0) then
+		return
+	end
+
+	local x, y = GetPlayerMapPosition("player")
+	local xt, yt
+
+	x = math.floor(100 * x)
+	y = math.floor(100 * y)
+
+	if (x == 0 and y == 0) then
+		Maps.MinimapCoords.Text:SetText("x, x")
+	else
+		if (x < 10) then
+			xt = "0"..x
+		else
+			xt = x
+		end
+
+		if (y < 10) then
+			yt = "0"..y
+		else
+			yt = y
+		end
+
+		Maps.MinimapCoords.Text:SetText(xt..", "..yt)
+	end
+
+	Elapsed = .2
+end
+
+function Maps:UpdateZone()
+	local Info = GetZonePVPInfo()
+
+	if Maps.ZoneColors[Info] then
+		local Color = Maps.ZoneColors[Info]
+
+		Maps.MinimapZone.Text:SetTextColor(Color[1], Color[2], Color[3])
+	else
+		Maps.MinimapZone.Text:SetTextColor(1.0, 1.0, 1.0)
+	end
+
+	Maps.MinimapZone.Text:SetText(GetMinimapZoneText())
 end
