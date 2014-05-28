@@ -199,7 +199,7 @@ local function CreateShadow(f, t)
 		})
 	else
 		shadow:SetBackdrop( {
-			edgeFile = C.Medias.Glow, edgeSize = Scale(3),
+			edgeFile = C.medias.Glow, edgeSize = Scale(3),
 			insets = {left = Scale(5), right = Scale(5), top = Scale(5), bottom = Scale(5)},
 		})
 	end

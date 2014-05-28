@@ -34,7 +34,7 @@ local OnClick = function(self, button)
 			Text:SetText("+")
 		elseif (Num == 4) then
 			self:Point("LEFT", Bar, "RIGHT", 2, 0)
-			Text:SetText(">")
+			Text:SetText("<")
 		elseif (Num == 5) then
 			self:Point("RIGHT", D["Panels"].DataTextRight, "LEFT", -2, 0)
 			Text:SetText("+")
@@ -55,7 +55,7 @@ local OnClick = function(self, button)
 			Text:SetText("-")
 		elseif (Num == 4) then
 			self:Point("LEFT", Bar, "RIGHT", 2, 0)
-			Text:SetText("<")
+			Text:SetText(">")
 		elseif (Num == 5) then
 			self:Point("RIGHT", D["Panels"].DataTextRight, "LEFT", -2, 0)
 			Text:SetText("-")
