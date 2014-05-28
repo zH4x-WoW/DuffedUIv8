@@ -644,9 +644,9 @@ function DuffedUIUnitFrames:CreateUnits()
 	Focus:Size(200, 29)
 
 	local FocusTarget = oUF:Spawn("focustarget")
-	FocusTarget:SetPoint("BOTTOM", Focus, "TOP", 0, 15)
+	FocusTarget:SetPoint("TOPRIGHT", Focus, "BOTTOMLEFT", 0, -2)
 	FocusTarget:SetParent(Panels.PetBattleHider)
-	FocusTarget:Size(200, 29)
+	FocusTarget:Size(75, 10)
 	
 	local Arena = {}
 	for i = 1, 5 do

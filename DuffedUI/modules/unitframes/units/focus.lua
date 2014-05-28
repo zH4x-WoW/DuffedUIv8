@@ -7,28 +7,28 @@ function DuffedUIUnitFrames:Focus()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self:SetBackdrop(DuffedUIUnitFrames.Backdrop)
-	self:SetBackdropColor(0, 0, 0)
-	self:CreateShadow()
 
 	local Health = CreateFrame("StatusBar", nil, self)
-	Health:Height(22)
+	Health:Height(18)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
 	Health:SetStatusBarTexture(C["medias"].Normal)
-
-	Health.Background = Health:CreateTexture(nil, "BORDER")
-	Health.Background:SetAllPoints()
-	Health.Background:SetTexture(0.1, 0.1, 0.1)
+	Health:CreateBackdrop()
 
 	Health:FontString("Value", C["medias"].AltFont, 12, "OUTLINE")
-	Health.Value:Point("LEFT", Health, "LEFT", 2, 0)
+	Health.Value:Point("RIGHT", Health, "RIGHT", -2, 0)
 
 	Health.frequentUpdates = true
-	Health.colorDisconnected = true
-	Health.colorTapping = true	
-	Health.colorClass = true
-	Health.colorReaction = true	
+	if C["unitframes"].UniColor then
+		Health.colorDisconnected = false
+		Health.colorClass = false
+		Health:SetStatusBarColor(unpack(C["unitframes"].HealthBarColor))
+	else
+		Health.colorDisconnected = true
+		Health.colorClass = true
+		Health.colorReaction = true
+	end
+	Health.colorTapping = true
 
 	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
 
@@ -37,29 +37,26 @@ function DuffedUIUnitFrames:Focus()
 	end
 
 	local Power = CreateFrame("StatusBar", nil, self)
-	Power:Height(6)
-	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
-	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
+	Power:Height(3)
+	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 85, -1)
+	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", -9, -1)
 	Power:SetStatusBarTexture(C["medias"].Normal)
-
-	Power.Background = Power:CreateTexture(nil, "BORDER")
-	Power.Background:SetAllPoints()
-	Power.Background:SetTexture(C["medias"].Normal)
-	Power.Background.multiplier = 0.3
+	Power:SetFrameLevel(Health:GetFrameLevel() + 2)
+	Power:CreateBackdrop()
 
 	Power:FontString("Value", C["medias"].AltFont, 12, "OUTLINE")
 	Power.Value:Point("RIGHT", Health, "RIGHT", -2, 0)
+	Power.Value:SetAlpha(0)
 
 	Power.colorPower = true
 	Power.frequentUpdates = true
-	Power.colorDisconnected = true
 
 	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
 
 	local Name = Health:CreateFontString(nil, "OVERLAY")
-	Name:Point("CENTER", Health, "CENTER", 0, 0)
-	Name:SetJustifyH("CENTER")
-	Name:SetFont(C["medias"].AltFont, 12, "OUTLINE")
+	Name:Point("LEFT", Health, "LEFT", 2, 0)
+	Name:SetJustifyH("LEFT")
+	Name:SetFont(C["medias"].AltFont, 11, "THINOUTLINE")
 	Name:SetShadowColor(0, 0, 0)
 	Name:SetShadowOffset(D.Mult, -D.Mult)
 	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong]")
@@ -110,8 +107,6 @@ function DuffedUIUnitFrames:Focus()
 	end
 
 	self.Health = Health
-	self.Health.bg = Health.Background
 	self.Power = Power
-	self.Power.bg = Power.Background
 	self.Name = Name
 end

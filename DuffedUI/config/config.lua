@@ -112,4 +112,7 @@ C["unitframes"] = {
 	["HealBar"] = true,
 	["TotemBar"] = true,
 	["OnlySelfDebuffs"] = false,
+	["UniColor"] = true,
+	["HealthBarColor"] = {.125, .125, .125},
+	["DeficitColor"] = {0, 0, 0},
 }
