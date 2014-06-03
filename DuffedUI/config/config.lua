@@ -55,6 +55,10 @@ C["bags"] = {
 
 C["merchant"] = {
 	["vendorlist"] = true,
+	["AutoSellGrays"] = true,
+	["AutoRepair"] = true,
+	["SellMisc"] = true,
+	["UseGuildRepair"] = true,
 }
 
 C["chat"] = {

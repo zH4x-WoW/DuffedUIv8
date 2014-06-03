@@ -22,6 +22,7 @@
 	<Script file="actionbars\barPet.lua"/>
 	<Script file="actionbars\barStance.lua"/>
 	<Script file="actionbars\buttons.lua"/>
+	<Script file="actionbars\extra.lua"/>
 
 	<!-- Cooldowns -->
 	<Script file="cooldowns\cooldowns.lua"/>
@@ -31,6 +32,9 @@
 	<Script file="maps\worldmap.lua"/>
 	<Script file="maps\zonemap.lua"/>
 	<Script file="maps\minimap.lua"/>
+
+	<!-- Merchant -->
+	<Script file="loot\merchant.lua"/>
 
 	<!-- auras -->
 	<Include file="auras\templates.xml"/>

@@ -27,13 +27,6 @@ local OnMouseUp = function(self)
 end
 
 local Enable = function(self)	
-	if (not self.Text) then
-		local Text = self:CreateFontString(nil, "OVERLAY")
-		Text:SetFont(DataText.Font, DataText.Size, DataText.Flags)
-		
-		self.Text = Text
-	end
-
 	self:RegisterEvent("BAG_UPDATE")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	self:SetScript("OnEvent", Update)

@@ -126,13 +126,6 @@ local OnMouseDown = function()
 end
 
 local Enable = function(self)	
-	if (not self.Text) then
-		local Text = self:CreateFontString(nil, "OVERLAY")
-		Text:SetFont(DataText.Font, DataText.Size, DataText.Flags)
-		
-		self.Text = Text
-	end
-
 	self:RegisterEvent("LFG_UPDATE_RANDOM_INFO")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	self:SetScript("OnEvent", OnEvent)

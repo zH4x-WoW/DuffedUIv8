@@ -66,7 +66,7 @@ function DuffedUITooltips:SetTooltipDefaultAnchor()
 end
 
 function DuffedUITooltips:GetColor()
-	if not self then
+	if (not self) then
 		return
 	end
 
@@ -74,7 +74,7 @@ function DuffedUITooltips:GetColor()
 		local Class = select(2, UnitClass(self))
 		local Color = Colors.class[Class]
 		
-		if not Color then
+		if (not Color) then
 			return
 		end
 		
@@ -128,10 +128,10 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	local CreatureType = UnitCreatureType(Unit)
 	local Classification = UnitClassification(Unit)
 	local Title = UnitPVPName(Unit)
-	local r, g, b = GetQuestDifficultyColor(Level).r, GetQuestDifficultyColor(Level).g, GetQuestDifficultyColor(Level).b
+	local R, G, B = GetQuestDifficultyColor(Level).r, GetQuestDifficultyColor(Level).g, GetQuestDifficultyColor(Level).b
 	local Color = DuffedUITooltips.GetColor(Unit)	
 	
-	if not Color then
+	if (not Color) then
 		Color = "|CFFFFFFFF"
 	end
 	
@@ -155,7 +155,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		for i = Offset, NumLines do
 			local Line = _G["GameTooltipTextLeft"..i]
 			if (Line:GetText():find("^" .. LEVEL)) then
-				Line:SetFormattedText("|cff%02x%02x%02x%s|r %s %s%s", r*255, g*255, b*255, Level > 0 and Level or "??", Race, Color, Class .."|r")
+				Line:SetFormattedText("|cff%02x%02x%02x%s|r %s %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Race, Color, Class .."|r")
 				break
 			end
 		end
@@ -167,7 +167,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 					Classification = "worldboss"
 				end
 				
-				Line:SetFormattedText("|cff%02x%02x%02x%s|r%s %s", r*255, g*255, b*255, Classification ~= "worldboss" and Level ~= 0 and Level or "", DuffedUITooltips.Classification[Classification] or "", CreatureType or "")
+				Line:SetFormattedText("|cff%02x%02x%02x%s|r%s %s", R * 255, G * 255, B * 255, Classification ~= "worldboss" and Level ~= 0 and Level or "", DuffedUITooltips.Classification[Classification] or "", CreatureType or "")
 				break
 			end
 		end
@@ -176,20 +176,20 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	for i = 1, NumLines do
 		local Line = _G["GameTooltipTextLeft"..i]
 		local Text = Line:GetText()
-		if Text and Text == PVP_ENABLED then
+		if (Text and Text == PVP_ENABLED) then
 			Line:SetText()
 			break
 		end
 	end
 
 	if (UnitExists(Unit .. "target") and Unit ~= "player") then
-		local hex, r, g, b = DuffedUITooltips.GetColor(Unit)
+		local hex, R, G, B = DuffedUITooltips.GetColor(Unit)
 		
-		if (not r) and (not g) and (not b) then
-			r, g, b = 1, 1, 1
+		if (not R) and (not G) and (not B) then
+			R, G, B = 1, 1, 1
 		end
 		
-		GameTooltip:AddLine(UnitName(Unit .. "target"), r, g, b)
+		GameTooltip:AddLine(UnitName(Unit .. "target"), R, G, B)
 	end
 	
 	self.fadeOut = nil
@@ -204,7 +204,7 @@ function DuffedUITooltips:SetColor()
 	local PlayerTapped = Unit and UnitIsTappedByPlayer(Unit)
 	local Connected = Unit and UnitIsConnected(Unit)
 	local Dead = Unit and UnitIsDead(Unit)
-	local r, g, b
+	local R, G, B
 	
 	self:SetBackdropColor(unpack(C["medias"].BackdropColor))
 	self:SetBackdropBorderColor(0, 0, 0)
@@ -212,37 +212,37 @@ function DuffedUITooltips:SetColor()
 	if Player then
 		local Class = select(2, UnitClass(Unit))
 		local Color = Colors.class[Class]
-		r, g, b = Color[1], Color[2], Color[3]
+		R, G, B = Color[1], Color[2], Color[3]
 		
-		HealthBar:SetStatusBarColor(r, g, b)
+		HealthBar:SetStatusBarColor(R, G, B)
 
 		if (Insets) then
-			self:SetBackdropBorderColor(r, g, b)
-			HealthBar.Backdrop:SetBackdropBorderColor(r, g, b)
+			self:SetBackdropBorderColor(R, G, B)
+			HealthBar.Backdrop:SetBackdropBorderColor(R, G, B)
 		end
 	elseif Reaction then
 		local Color = Colors.reaction[Reaction]
-		r, g, b = Color[1], Color[2], Color[3]
+		R, G, B = Color[1], Color[2], Color[3]
 		
-		HealthBar:SetStatusBarColor(r, g, b)
+		HealthBar:SetStatusBarColor(R, G, B)
 		
 		if (Insets) then
-			self:SetBackdropBorderColor(r, g, b)
-			HealthBar.Backdrop:SetBackdropBorderColor(r, g, b)
+			self:SetBackdropBorderColor(R, G, B)
+			HealthBar.Backdrop:SetBackdropBorderColor(R, G, B)
 		end
 	else
 		local Link = select(2, self:GetItem())
 		local Quality = Link and select(3, GetItemInfo(Link))
-		if Quality and Quality >= 2 then
-			r, g, b = GetItemQualityColor(Quality)
+		if (Quality and Quality >= 2) then
+			R, G, B = GetItemQualityColor(Quality)
 			
-			if (Insets) then
-				self:SetBackdropBorderColor(r, g, b)
+			if Insets then
+				self:SetBackdropBorderColor(R, G, B)
 			end
 		else
 			HealthBar:SetStatusBarColor(unpack(C["medias"].BorderColor))
 			
-			if (Insets) then
+			if Insets then
 				self:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
 				HealthBar.Backdrop:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
 			end
@@ -292,7 +292,7 @@ end
 
 DuffedUITooltips:RegisterEvent("ADDON_LOADED")
 DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= "DuffedUI" then
+	if (addon ~= "DuffedUI") then
 		return
 	end
 	

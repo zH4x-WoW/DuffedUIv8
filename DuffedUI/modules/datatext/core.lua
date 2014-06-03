@@ -146,6 +146,10 @@ function DuffedUIDT:Register(name, enable, disable, update)
 	local Data = CreateFrame("Frame", nil, UIParent)
 	Data:EnableMouse(true)
 	Data:SetFrameStrata("MEDIUM")
+
+	Data.Text = Data:CreateFontString(nil, "OVERLAY")
+	Data.Text:SetFont(self.Font, self.Size, self.Flags)
+	
 	Data.Enabled = false
 	Data.GetTooltipAnchor = GetTooltipAnchor
 	Data.Enable = enable
@@ -186,9 +190,9 @@ function DuffedUIDT:Save()
 		Data.Texts = {}
 	end
 
-	for name, data in pairs(self.Texts) do
-		if data.Position then
-			Data.Texts[name] = {data.Enabled, data.Position}
+	for Name, DataText in pairs(self.Texts) do
+		if DataText.Position then
+			Data.Texts[Name] = {DataText.Enabled, DataText.Position}
 		end
 	end
 	
@@ -197,9 +201,9 @@ function DuffedUIDT:Save()
 end
 
 function DuffedUIDT:Reset()
-	for _, data in pairs(self.Texts) do
-		if data.Enabled then
-			data:Disable()
+	for _, Data in pairs(self.Texts) do
+		if Data.Enabled then
+			Data:Disable()
 		end
 	end
 	
@@ -228,19 +232,24 @@ function DuffedUIDT:Load()
 		DuffedUIDataPerChar.Texts["Time"] = {true, 8}
 	end
 
+	if DuffedUIDataPerChar.DTNameColor then
+		DuffedUIDT.NameColor = DuffedUIDataPerChar.DTNameColor
+		DuffedUIDT.ValueColor = DuffedUIDataPerChar.DTValueColor
+	end
+
 	if (DuffedUIDataPerChar and DuffedUIDataPerChar.Texts) then
-		for name, info in pairs(DuffedUIDataPerChar.Texts) do
-			local Enabled, Num = unpack(info)
+		for Name, Info in pairs(DuffedUIDataPerChar.Texts) do
+			local Enabled, Num = Info[1], Info[2]
 
 			if (Enabled and (Num and Num > 0)) then
-				local Object = self:GetDataText(name)
+				local Object = self:GetDataText(Name)
 				
 				if Object then
 					Object:Enable()
 					self.Anchors[Num]:SetData(Object)
 				else
-					D.Print("DataText '" .. name .. "' not found. Removing from cache.")
-					DuffedUIDataPerChar.Texts[name] = {false, 0}
+					D.Print("DataText '" .. Name .. "' not found. Removing from cache.")
+					DuffedUIDataPerChar.Texts[Name] = {false, 0}
 				end
 			end
 		end

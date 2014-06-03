@@ -21,13 +21,6 @@ local OnMouseDown = function()
 end
 
 local Enable = function(self)	
-	if (not self.Text) then
-		local Text = self:CreateFontString(nil, "OVERLAY")
-		Text:SetFont(DataText.Font, DataText.Size, DataText.Flags)
-		
-		self.Text = Text
-	end
-
 	self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	self:RegisterEvent("CONFIRM_TALENT_WIPE")
 	self:RegisterEvent("PLAYER_TALENT_UPDATE")
