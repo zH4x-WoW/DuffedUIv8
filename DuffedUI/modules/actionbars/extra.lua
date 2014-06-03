@@ -15,7 +15,7 @@ function DuffedUIActionBars:SetUpExtraActionButton()
 	Holder:SetBackdropBorderColor(1,0,0)
 	Holder:SetAlpha(0)
 
-	Holder.Text = D.SetFontString(Holder, C["media"].uffont, 12)
+	Holder.Text = D.SetFontString(Holder, C["medias"].Font, 12)
 	Holder.Text:SetPoint("CENTER")
 	Holder.Text:SetText(L.move_extrabutton)
 	Holder.Text:Hide()

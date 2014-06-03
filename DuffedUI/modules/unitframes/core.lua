@@ -203,7 +203,7 @@ function DuffedUIUnitFrames:UpdateNamePosition()
 	else
 		self.Name:ClearAllPoints()
 		self.Power.Value:SetAlpha(0)
-		self.Name:SetPoint("LEFT", self.Panel, "LEFT", 4, 0)
+		self.Name:SetPoint("TOPLEFT", self.Health, "TOPLEFT", 4, 17)
 	end
 end
 
@@ -394,7 +394,7 @@ end
 
 function DuffedUIUnitFrames:PostCreateAura(button)
 	button:SetTemplate("Default")
-	button:CreateShadow()
+	--button:CreateShadow()
 
 	button.Remaining = button:CreateFontString(nil, "OVERLAY")
 	button.Remaining:SetFont(C["medias"].Font, 12, "THINOUTLINE")
@@ -413,7 +413,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 
 	button.count:Point("BOTTOMRIGHT", 3, 3)
 	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C["medias"].Font, 9, "THICKOUTLINE")
+	button.count:SetFont(C["medias"].Font, 9, "THINOUTLINE")
 	button.count:SetTextColor(0.84, 0.75, 0.65)
 
 	button.OverlayFrame = CreateFrame("Frame", nil, button, nil)
@@ -621,12 +621,12 @@ function DuffedUIUnitFrames:CreateUnits()
 	local Player = oUF:Spawn("player")
 	Player:SetPoint("BOTTOM", UIParent, -350, 250)
 	Player:SetParent(Panels.PetBattleHider)
-	Player:Size(250, 57)
+	Player:Size(218, 43)
 
 	local Target = oUF:Spawn("target")
 	Target:SetPoint("BOTTOM", UIParent, 350, 250)
 	Target:SetParent(Panels.PetBattleHider)
-	Target:Size(250, 57)
+	Target:Size(218, 43)
 
 	local TargetOfTarget = oUF:Spawn("targettarget")
 	TargetOfTarget:SetPoint("TOPLEFT", Target, "BOTTOMLEFT", -129, -10)

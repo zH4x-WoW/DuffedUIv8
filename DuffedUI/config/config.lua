@@ -107,9 +107,6 @@ C["tooltips"] = {
 
 C["unitframes"] = {
 	["Enable"] = true,
-	["CastBar"] = true,
-	["CastBarIcon"] = true,
-	["CastBarLatency"] = true,
 	["Smooth"] = true,
 	["CombatLog"] = true,
 	["WeakBar"] = true,
@@ -118,5 +115,12 @@ C["unitframes"] = {
 	["OnlySelfDebuffs"] = false,
 	["UniColor"] = true,
 	["HealthBarColor"] = {.125, .125, .125},
-	["DeficitColor"] = {0, 0, 0},
+	["HealthBGColor"] = {0, 0, 0},
+	["CharPortrait"] = true,
+}
+
+C["castbar"] = {
+	["CastBar"] = true,
+	["CastBarIcon"] = true,
+	["CastBarLatency"] = true,
 }
