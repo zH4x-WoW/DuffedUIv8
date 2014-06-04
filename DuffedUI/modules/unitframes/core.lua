@@ -394,7 +394,6 @@ end
 
 function DuffedUIUnitFrames:PostCreateAura(button)
 	button:SetTemplate("Default")
-	--button:CreateShadow()
 
 	button.Remaining = button:CreateFontString(nil, "OVERLAY")
 	button.Remaining:SetFont(C["medias"].Font, 12, "THINOUTLINE")
@@ -629,13 +628,13 @@ function DuffedUIUnitFrames:CreateUnits()
 	Target:Size(218, 43)
 
 	local TargetOfTarget = oUF:Spawn("targettarget")
-	TargetOfTarget:SetPoint("TOPLEFT", Target, "BOTTOMLEFT", -129, -10)
+	TargetOfTarget:SetPoint("TOPRIGHT", Target, "BOTTOMRIGHT", 0, -7)
 	TargetOfTarget:SetParent(Panels.PetBattleHider)
 	TargetOfTarget:Size(129, 36)
 
 	local Pet = oUF:Spawn("pet")
 	Pet:SetParent(Panels.PetBattleHider)
-	Pet:SetPoint("TOPRIGHT", Player, "BOTTOMRIGHT", 129, -10)
+	Pet:SetPoint("TOPLEFT", Player, "BOTTOMLEFT", 0, -7)
 	Pet:Size(129, 36)
 
 	local Focus = oUF:Spawn("focus")
@@ -653,7 +652,7 @@ function DuffedUIUnitFrames:CreateUnits()
 		Arena[i] = oUF:Spawn("arena"..i, nil)
 		Arena[i]:SetParent(Panels.PetBattleHider)
 		if (i == 1) then
-			Arena[i]:SetPoint("BOTTOMRIGHT", DuffedUIUnitFrames.Anchor, "TOPRIGHT", 0, 300)
+			Arena[i]:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -200, 300)
 		else
 			Arena[i]:SetPoint("BOTTOM", Arena[i-1], "TOP", 0, 35)
 		end
@@ -665,7 +664,7 @@ function DuffedUIUnitFrames:CreateUnits()
 		Boss[i] = oUF:Spawn("boss"..i, nil)
 		Boss[i]:SetParent(Panels.PetBattleHider)
 		if (i == 1) then
-			Boss[i]:SetPoint("BOTTOMRIGHT", DuffedUIUnitFrames.Anchor, "TOPRIGHT", 0, 300)
+			Boss[i]:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -200, 300)
 		else
 			Boss[i]:SetPoint("BOTTOM", Boss[i-1], "TOP", 0, 35)             
 		end

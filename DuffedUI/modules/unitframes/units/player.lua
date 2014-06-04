@@ -39,12 +39,9 @@ function DuffedUIUnitFrames:Player()
 	if C["unitframes"].UniColor == true then
 		Health.colorDisconnected = false
 		Health.colorClass = false
+		Health.colorReaction = false
 		Health:SetStatusBarColor(unpack(C["unitframes"].HealthBarColor))
 		Health.Background:SetVertexColor(unpack(C["unitframes"].HealthBGColor))
-		--[[if C["unitframes"].ColorGradient then
-			Health.colorSmooth = true
-			Health.Background:SetTexture(0, 0, 0)
-		end]]--
 	else
 		Health.colorDisconnected = true
 		Health.colorClass = true
@@ -55,9 +52,7 @@ function DuffedUIUnitFrames:Player()
 
 	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
 
-	if (C["unitframes"].Smooth) then
-		Health.Smooth = true
-	end
+	if (C["unitframes"].Smooth) then Health.Smooth = true end
 
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:Height(2)
