@@ -202,7 +202,6 @@ function DuffedUIUnitFrames:UpdateNamePosition()
 		self.Name:SetPoint("CENTER", self.Panel, "CENTER", 0, 0)
 	else
 		self.Name:ClearAllPoints()
-		self.Power.Value:SetAlpha(0)
 		self.Name:SetPoint("TOPLEFT", self.Health, "TOPLEFT", 4, 17)
 	end
 end

@@ -16,15 +16,19 @@ function DuffedUIUnitFrames:Boss()
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
+
 	local HealthBorder = CreateFrame("Frame", nil, Health)
 	HealthBorder:SetPoint("TOPLEFT", Health, "TOPLEFT", D.Scale(-2), D.Scale(2))
 	HealthBorder:SetPoint("BOTTOMRIGHT", Health, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 	HealthBorder:SetTemplate("Default")
 	HealthBorder:CreateShadow("Default")
 	HealthBorder:SetFrameLevel(2)
+
 	Health:FontString("Value", C["medias"].Font, 12, "OUTLINE")
 	Health.Value:Point("LEFT", 2, 0)
+
 	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
+
 	Health.frequentUpdates = true
 	if C["unitframes"].UniColor == true then
 		Health.colorDisconnected = false
@@ -43,23 +47,28 @@ function DuffedUIUnitFrames:Boss()
 	-- Power
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:Height(3)
-	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 96, 0)
-	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", -10, 0)
+	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 85, 0)
+	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", -9, -3)
+	Power:SetStatusBarTexture(C["medias"].Normal)
+	Power:SetFrameLevel(Health:GetFrameLevel() + 1)
+
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints(Power)
 	Power.Background:SetTexture(C["medias"].Normal)
 	Power.Background.multiplier = 0.3
-	Power:SetStatusBarTexture(C["medias"].Normal)
-	Power:SetFrameLevel(Health:GetFrameLevel() + 1)
+
 	local PowerBorder = CreateFrame("Frame", nil, Power)
 	PowerBorder:SetPoint("TOPLEFT", Power, "TOPLEFT", D.Scale(-2), D.Scale(2))
 	PowerBorder:SetPoint("BOTTOMRIGHT", Power, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 	PowerBorder:SetTemplate("Default")
 	PowerBorder:CreateShadow("Default")
 	PowerBorder:SetFrameLevel(Health:GetFrameLevel() + 1)
+
 	Power:FontString("Value", C["medias"].Font, 12, "OUTLINE")
 	Power.Value:Point("RIGHT", -2, 0)
+
 	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
+	
 	Power.frequentUpdates = true
 	Power.colorPower = true
 	if (C["unitframes"].Smooth) then Health.Smooth = true end
@@ -109,6 +118,7 @@ function DuffedUIUnitFrames:Boss()
 	CastBar.Background:Point("TOPLEFT", -2, 2)
 	CastBar.Background:Point("BOTTOMRIGHT", 2, -2)
 	CastBar.Background:SetFrameLevel(5)
+	
 	local CastBarBorder = CreateFrame("Frame", nil, CastBar)
 	CastBarBorder:SetPoint("TOPLEFT", CastBar, "TOPLEFT", D.Scale(-2), D.Scale(2))
 	CastBarBorder:SetPoint("BOTTOMRIGHT", CastBar, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))

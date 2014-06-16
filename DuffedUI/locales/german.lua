@@ -125,10 +125,7 @@ L.UnitFrames.Ghost = "Ghost"
 L.ActionBars = {} -- Action Bars Locales
 ------------------------------------------------
 
-L.ActionBars.ArrowLeft = "◄"
-L.ActionBars.ArrowRight = "►"
-L.ActionBars.ArrowUp = "▲ ▲ ▲ ▲ ▲"
-L.ActionBars.ArrowDown = "▼ ▼ ▼ ▼ ▼"
+L.ActionBars.Extrabutton = "Move Extrabutton"
 
 ------------------------------------------------
 L.Install = {} -- Installation of DuffedUI
