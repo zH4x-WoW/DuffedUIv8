@@ -218,13 +218,10 @@ function DuffedUIUnitFrames:PostUpdateHealth(unit, min, max)
 	else
 		local r, g, b
 
-		if (unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
-			local Color = Colors.reaction[UnitReaction(unit, "player")]
-			if (Color) then 
+		if not C["unitframes"].UniColor then
+			if (unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
+				local Color = Colors.reaction[UnitReaction(unit, "player")]
 				r, g, b = Color[1], Color[2], Color[3]
-				self:SetStatusBarColor(r, g, b)
-			else
-				r, g, b = 75/255,  175/255, 76/255
 				self:SetStatusBarColor(r, g, b)
 			end
 		end
@@ -619,12 +616,12 @@ function DuffedUIUnitFrames:CreateUnits()
 	local Player = oUF:Spawn("player")
 	Player:SetPoint("BOTTOM", UIParent, -350, 250)
 	Player:SetParent(Panels.PetBattleHider)
-	Player:Size(218, 43)
+	Player:Size(217, 43)
 
 	local Target = oUF:Spawn("target")
 	Target:SetPoint("BOTTOM", UIParent, 350, 250)
 	Target:SetParent(Panels.PetBattleHider)
-	Target:Size(218, 43)
+	Target:Size(217, 43)
 
 	local TargetOfTarget = oUF:Spawn("targettarget")
 	TargetOfTarget:SetPoint("TOPRIGHT", Target, "BOTTOMRIGHT", 0, -7)

@@ -3,15 +3,13 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-if (Class ~= "DRUID") then
-	return
-end
+if (Class ~= "DRUID") then return end
 
 function DuffedUIUnitFrames:AddDruidFeatures()
 	local DruidMana = CreateFrame("StatusBar", nil, self.Health)
 
 	-- Druid Mana
-	DruidMana:Size(250, 8)
+	DruidMana:Size(216, 8)
 	DruidMana:Point("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, 0)
 	DruidMana:SetStatusBarTexture(C["medias"].Normal)
 	DruidMana:SetStatusBarColor(0.30, 0.52, 0.90)

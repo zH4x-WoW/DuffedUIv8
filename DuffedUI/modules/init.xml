@@ -117,8 +117,8 @@
 	<Script file="petbattles\others.lua"/>
 
 	<!-- Misc. -->
-	<Script file="Miscellaneous\altpowerbar.lua"/>
-	<Script file="Miscellaneous\threatbar.lua"/>
-	<Script file="Miscellaneous\garbagecollection.lua"/>
-	<Script file="Miscellaneous\dropdown.lua"/>
+	<Script file="misc\altpowerbar.lua"/>
+	<Script file="misc\threatbar.lua"/>
+	<Script file="misc\garbagecollection.lua"/>
+	<Script file="misc\dropdown.lua"/>
 </Ui>

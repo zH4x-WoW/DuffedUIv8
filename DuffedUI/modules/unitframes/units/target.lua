@@ -51,9 +51,7 @@ function DuffedUIUnitFrames:Target()
 
 	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
 
-	if (C["unitframes"].Smooth) then
-		Health.Smooth = true
-	end
+	if (C["unitframes"].Smooth) then Health.Smooth = true end
 
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:Height(2)
