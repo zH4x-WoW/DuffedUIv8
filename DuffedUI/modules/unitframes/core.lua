@@ -308,6 +308,12 @@ function DuffedUIUnitFrames:PostUpdatePower(unit, min, max)
 	end
 end
 
+function DuffedUIUnitFrames:UpdateReputationColor(event, unit, bar)
+	local _, ID = GetWatchedFactionInfo()
+
+	bar:SetStatusBarColor(FACTION_BAR_COLORS[ID].r, FACTION_BAR_COLORS[ID].g, FACTION_BAR_COLORS[ID].b)
+end
+
 local function UpdateTotemTimer(self, elapsed)
 	self.timeLeft = self.timeLeft - elapsed
 

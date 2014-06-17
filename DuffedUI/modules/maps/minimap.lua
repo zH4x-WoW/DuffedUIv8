@@ -90,9 +90,10 @@ end
 function Maps:AddZoneAndCoords()
 	local MinimapZone = CreateFrame("Frame", "DuffedUIMinimapZone", Map)
 	MinimapZone:SetTemplate("Transparent")
-	MinimapZone:Size(Map:GetWidth() + 4, 1)
+	MinimapZone:Size(Map:GetWidth() + 4, 22)
 	MinimapZone:Point("TOP", Map, 0, 2)
 	MinimapZone:SetFrameStrata(Minimap:GetFrameStrata())
+	MinimapZone:SetAlpha(0)
 
 	MinimapZone.Text = MinimapZone:CreateFontString("DuffedUIMinimapZoneText", "OVERLAY")
 	MinimapZone.Text:SetFont(C["medias"].Font, 12)
@@ -100,18 +101,18 @@ function Maps:AddZoneAndCoords()
 	MinimapZone.Text:SetPoint("BOTTOM")
 	MinimapZone.Text:Height(12)
 	MinimapZone.Text:Width(MinimapZone:GetWidth() - 6)
-	MinimapZone.Text:SetAlpha(0)
 
 	local MinimapCoords = CreateFrame("Frame", "DuffedUIMinimapCoord", Map)
 	MinimapCoords:SetTemplate("Transparent")
-	MinimapCoords:Size(1, 20)
+	MinimapCoords:Size(40, 22)
 	MinimapCoords:Point("BOTTOMLEFT", Map, "BOTTOMLEFT", -2, -2)
 	MinimapCoords:SetFrameStrata(Minimap:GetFrameStrata())
+
+	MinimapCoords:SetAlpha(0)
 
 	MinimapCoords.Text = MinimapCoords:CreateFontString("DuffedUIMinimapCoordText", "OVERLAY")
 	MinimapCoords.Text:SetFont(C["medias"].Font, 12)
 	MinimapCoords.Text:Point("Center", 0, -1)
-	MinimapCoords.Text:SetAlpha(0)
 	MinimapCoords.Text:SetText("0, 0")
 
 	-- Update zone text
@@ -124,34 +125,18 @@ function Maps:AddZoneAndCoords()
 	-- Update coordinates
 	MinimapCoords:SetScript("OnUpdate", Maps.UpdateCoords)
 
-	-- Animation hooks
-	MinimapZone:AnimOnFinished("Height", function(self, h)
-		if (h == 20) then
-			UIFrameFadeIn(MinimapZone.Text, 0.3, 0, 1)
-		end
-	end)
-
-	MinimapCoords:AnimOnFinished("Width", function(self, w)
-		if (w == 40) then
-			UIFrameFadeIn(MinimapCoords.Text, 0.3, 0, 1)
-		end
-	end)
-
 	Maps.MinimapZone = MinimapZone
 	Maps.MinimapCoords = MinimapCoords
 end
 
 Minimap:SetScript("OnEnter", function()
-	Maps.MinimapZone:Animation("Height", 20, 5)
-	Maps.MinimapCoords:Animation("Width", 40, 5)
+	Maps.MinimapZone:Animation("FadeIn", 0.3)
+	Maps.MinimapCoords:Animation("FadeIn", 0.3)
 end)
 
 Minimap:SetScript("OnLeave", function()
-	Maps.MinimapZone:Animation("Height", 1, 5)
-	Maps.MinimapCoords:Animation("Width", 1, 5)
-
-	Maps.MinimapZone.Text:SetAlpha(0)
-	Maps.MinimapCoords.Text:SetAlpha(0)
+	Maps.MinimapZone:Animation("FadeOut", 0.3)
+	Maps.MinimapCoords:Animation("FadeOut", 0.3)
 end)
 
 function Maps:UpdateCoords(t)

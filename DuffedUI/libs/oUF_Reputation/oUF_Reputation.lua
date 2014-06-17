@@ -53,6 +53,7 @@ local function enable(self, unit)
 		end
 
 		self:RegisterEvent('UPDATE_FACTION', update)
+		self:RegisterEvent('PLAYER_ENTERING_WORLD', update)
 
 		if(bar.Tooltip) then
 			bar:EnableMouse()

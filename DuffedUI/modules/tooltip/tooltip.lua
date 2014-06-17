@@ -4,6 +4,7 @@ if not C["tooltips"].Enable then return end
 local _G = _G
 local unpack = unpack
 local Colors = D.Colors
+local RaidColors = RAID_CLASS_COLORS
 local DuffedUITooltips = CreateFrame("Frame")
 local gsub, find, format = string.gsub, string.find, string.format
 local Noop = function() end
@@ -65,24 +66,22 @@ function DuffedUITooltips:SetTooltipDefaultAnchor()
 	self:SetAnchorType("ANCHOR_TOPRIGHT", 0, 20)
 end
 
-function DuffedUITooltips:GetColor()
-	if (not self) then
+function DuffedUITooltips:GetColor(unit)
+	if (not unit) then
 		return
 	end
 
-	if (UnitIsPlayer(self) and not UnitHasVehicleUI(self)) then
-		local Class = select(2, UnitClass(self))
-		local Color = Colors.class[Class]
+	if (UnitIsPlayer(unit) and not UnitHasVehicleUI(unit)) then
+		local Class = select(2, UnitClass(unit))
+		local Color = RaidColors[Class]
 		
 		if (not Color) then
 			return
 		end
 		
-		local Hex = D.RGBToHex(unpack(Color))
-		
-		return Hex, Color.r, Color.g, Color.b	
+		return "|c"..Color.colorStr, Color.r, Color.g, Color.b	
 	else
-		local Reaction = UnitReaction(self, "player")
+		local Reaction = UnitReaction(unit, "player")
 		local Color = Colors.reaction[Reaction]
 		
 		if not Color then
@@ -129,7 +128,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	local Classification = UnitClassification(Unit)
 	local Title = UnitPVPName(Unit)
 	local R, G, B = GetQuestDifficultyColor(Level).r, GetQuestDifficultyColor(Level).g, GetQuestDifficultyColor(Level).b
-	local Color = DuffedUITooltips.GetColor(Unit)	
+	local Color = DuffedUITooltips:GetColor(Unit)	
 	
 	if (not Color) then
 		Color = "|CFFFFFFFF"
@@ -183,7 +182,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	end
 
 	if (UnitExists(Unit .. "target") and Unit ~= "player") then
-		local hex, R, G, B = DuffedUITooltips.GetColor(Unit)
+		local hex, R, G, B = DuffedUITooltips:GetColor(Unit)
 		
 		if (not R) and (not G) and (not B) then
 			R, G, B = 1, 1, 1

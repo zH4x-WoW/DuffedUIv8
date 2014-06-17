@@ -85,7 +85,7 @@ local OnLeave = function()
 	GameTooltip:Hide()
 end
 
-local Update = function( self, event, ... )
+local Update = function(self, event)
 	if (not IsLoggedIn()) then
 		return
 	end
@@ -99,7 +99,7 @@ local Update = function( self, event, ... )
 
 	local OldMoney = DuffedUIData['Gold'][MyRealm][MyName] or NewMoney
 
-	local Change = NewMoney-OldMoney
+	local Change = NewMoney - OldMoney
 	if (OldMoney > NewMoney) then
 		Spent = Spent - Change
 	else
@@ -112,9 +112,7 @@ local Update = function( self, event, ... )
 end
 
 local OnMouseDown = function(self)
-	local Bank = BankFrame
-
-	if Bank:IsShown() then
+	if BankFrame:IsShown() then
 		CloseBankFrame()
 	else
 		ToggleAllBags()
@@ -141,6 +139,7 @@ local Disable = function(self)
 	self:SetScript("OnMouseDown", nil)
 	self:SetScript("OnEnter", nil)
 	self:SetScript("OnLeave", nil)
+	self:Update()
 end
 
 DataText:Register("Gold", Enable, Disable, Update) -- Localize me

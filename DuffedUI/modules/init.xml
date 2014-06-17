@@ -8,7 +8,7 @@
 	<!-- inventory -->
 	<Script file="inventory\core.lua"/>
 	<Script file="inventory\bags.lua"/>
-	<Script file="inventory\loots.lua"/>
+	<Script file="inventory\loot.lua"/>
 
 	<!-- Action Bars -->
 	<Script file="actionbars\core.lua"/>

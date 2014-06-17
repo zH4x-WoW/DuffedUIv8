@@ -15,7 +15,8 @@ end
 engine[1].Resolution = GetCVar("gxResolution")
 engine[1].ScreenHeight = tonumber(string.match(engine[1].Resolution, "%d+x(%d+)"))
 engine[1].ScreenWidth = tonumber(string.match(engine[1].Resolution, "(%d+)x+%d"))
-engine[1].MyClass = select(2, UnitClass("Player"))
+engine[1].MyClass = select(2, UnitClass("player"))
+engine[1].MyLevel = UnitLevel("player")
 
 SLASH_RELOADUI1 = "/rl"
 SlashCmdList.RELOADUI = ReloadUI

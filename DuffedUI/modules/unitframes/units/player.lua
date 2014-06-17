@@ -289,9 +289,65 @@ function DuffedUIUnitFrames:Player()
 		self.Totems = Bar
 	end
 
+	-- Experience bar
+	if (D.MyLevel ~= MAX_PLAYER_LEVEL) then
+		local Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
+		Experience:SetStatusBarTexture(C["medias"].Normal)
+		Experience:SetStatusBarColor(0, 0.4, 1)
+		Experience:Point("TOPLEFT", Panel, 2, -2)
+		Experience:Point("BOTTOMRIGHT", Panel, -2, 2)
+		Experience:SetFrameLevel(10)
+		Experience:HookScript("OnEnter", function(self) self:SetAlpha(1) end)
+		Experience:HookScript("OnLeave", function(self) self:SetAlpha(0) end)
+		Experience:SetAlpha(0)
+
+		Experience.Tooltip = true
+
+		Experience.Backdrop = Experience:CreateTexture(nil, "BORDER")
+		Experience.Backdrop:SetAllPoints(Experience)
+		Experience.Backdrop:SetTexture(0, 0, 0)
+
+		Experience.Rested = CreateFrame("StatusBar", nil, self)
+		Experience.Rested:SetParent(Experience)
+		Experience.Rested:SetAllPoints(Experience)
+		Experience.Rested:SetStatusBarTexture(C["medias"].Normal)
+		Experience.Rested:SetStatusBarColor(1, 0, 1, 0.3)
+
+		local Resting = Experience:CreateTexture(nil, "OVERLAY")
+		Resting:SetHeight(28)
+		Resting:SetWidth(28)
+		Resting:SetPoint("LEFT", -18, 76)
+		Resting:SetTexture([=[Interface\CharacterFrame\UI-StateIcon]=])
+		Resting:SetTexCoord(0, 0.5, 0, 0.421875)
+		self.Resting = Resting
+		self.Experience = Experience
+	end
+
+	-- Reputation bar
+	if (D.MyLevel == MAX_PLAYER_LEVEL) then
+		local Reputation = CreateFrame("StatusBar", self:GetName().."_Reputation", self)
+		Reputation:SetStatusBarTexture(C["medias"].Normal)
+		Reputation:Point("TOPLEFT", Panel, 2, -2)
+		Reputation:Point("BOTTOMRIGHT", Panel, -2, 2)
+		Reputation:SetFrameLevel(10)
+		Reputation:SetAlpha(0)
+
+		Reputation:HookScript("OnEnter", function(self) self:SetAlpha(1) end)
+		Reputation:HookScript("OnLeave", function(self) self:SetAlpha(0) end)
+
+		Reputation.PostUpdate = DuffedUIUnitFrames.UpdateReputationColor
+		Reputation.Tooltip = true
+
+		Reputation.Backdrop = Reputation:CreateTexture(nil, "BORDER")
+		Reputation.Backdrop:SetAllPoints(Reputation)
+		Reputation.Backdrop:SetTexture(0, 0, 0)
+
+		self.Reputation = Reputation
+	end
+
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", DuffedUIUnitFrames.Update) -- http://www.tukui.org/tickets/tukui/index.php?page=bug_show&bug_id=218
-	self:SetScript("OnEnter", DuffedUIUnitFrames.MouseOnPlayer)
-	self:SetScript("OnLeave", DuffedUIUnitFrames.MouseOnPlayer)
+	self:HookScript("OnEnter", DuffedUIUnitFrames.MouseOnPlayer)
+	self:HookScript("OnLeave", DuffedUIUnitFrames.MouseOnPlayer)
 	
 	-- Register with oUF
 	self.Panel = Panel

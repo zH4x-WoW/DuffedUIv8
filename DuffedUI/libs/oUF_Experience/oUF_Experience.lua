@@ -104,6 +104,7 @@ local function Enable(self, unit)
 		self:RegisterEvent('PLAYER_XP_UPDATE', Update)
 		self:RegisterEvent('PLAYER_LEVEL_UP', Update)
 		self:RegisterEvent('UNIT_PET', Update)
+		self:RegisterEvent('PLAYER_ENTERING_WORLD', Update)
 
 		if(experience.Rested) then
 			self:RegisterEvent('UPDATE_EXHAUSTION', Update)
