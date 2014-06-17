@@ -81,7 +81,7 @@
 	<Script file="unitframes\classes\warrior.lua"/>
 	<Script file="unitframes\classes\paladin.lua"/>
 	<Script file="unitframes\classes\hunter.lua"/>
-	<Script file="unitframes\classes\rogue.lua"/>
+	<Script file="unitframes\classes\combo.lua"/>
 	<Script file="unitframes\classes\priest.lua"/>
 	<Script file="unitframes\classes\deathknight.lua"/>
 	<Script file="unitframes\classes\shaman.lua"/>

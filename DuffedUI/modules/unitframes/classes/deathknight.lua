@@ -13,29 +13,11 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 		{ 0.84, 0.75, 0.65 }, -- death
 		{ 0, 0.82, 1 }, -- runic power
 	}
-	local movable = false
 	local runes = {}
 	local runemap = { 1, 2, 3, 4, 5, 6 }
 
-	local RunesAnchorFrame = CreateFrame("Frame", "RunesAnchorFrame", UIParent)
-	RunesAnchorFrame:Size(100, 15)
-	RunesAnchorFrame:SetPoint("CENTER", UIParent, "CENTER", 0, -200)
-	RunesAnchorFrame:SetFrameStrata("TOOLTIP")
-	RunesAnchorFrame:SetFrameLevel(20)
-	RunesAnchorFrame:SetTemplate("Default")
-	RunesAnchorFrame:SetBackdropColor(0, 0, 0)
-	RunesAnchorFrame:SetBackdropBorderColor(1, 0, 0)
-	RunesAnchorFrame.Text = D.SetFontString(RunesAnchorFrame, C["medias"].Font, 12)
-	RunesAnchorFrame.Text:SetText("Move Runes")
-	RunesAnchorFrame.Text:SetPoint("CENTER")
-	RunesAnchorFrame:SetMovable(true)
-	RunesAnchorFrame:SetUserPlaced(true)
-	RunesAnchorFrame:SetClampedToScreen(true)
-	RunesAnchorFrame:Hide()
-	--tinsert(D.AllowFrameMoving, RunesAnchorFrame)
-
 	Runes = CreateFrame("Frame", "Runes", UIParent)
-	Runes:SetPoint("BOTTOM", RunesAnchorFrame, "TOP", 0, 3)
+	Runes:SetPoint("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
 	Runes:SetSize((40 * 6) + 9, 9)
 	Runes:SetTemplate("Transparent")
 	Runes:CreateShadow("Default")

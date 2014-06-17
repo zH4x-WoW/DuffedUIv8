@@ -122,10 +122,11 @@ L.UnitFrames = {} -- Unit Frames Locales
 L.UnitFrames.Ghost = "Ghost"
 
 ------------------------------------------------
-L.ActionBars = {} -- Action Bars Locales
+L.Movers = {} -- Action Bars Locales
 ------------------------------------------------
 
-L.ActionBars.Extrabutton = "Move Extrabutton"
+L.Movers.Extrabutton = "Move Extrabutton"
+L.Movers.Ressources = "Move Ressourcebar"
 
 ------------------------------------------------
 L.Install = {} -- Installation of DuffedUI

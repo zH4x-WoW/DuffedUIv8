@@ -18,7 +18,7 @@ function DuffedUIActionBars:SetUpExtraActionButton()
 	Holder.Text = Holder:CreateFontString(nil, "OVERLAY")
 	Holder.Text:SetFont(C["medias"].Font, 12)
 	Holder.Text:SetPoint("CENTER")
-	Holder.Text:SetText(L.ActionBars.Extrabutton)
+	Holder.Text:SetText(L.Movers.Extrabutton)
 	Holder.Text:Hide()
 
 	ExtraActionBarFrame:SetParent(UIParent)
