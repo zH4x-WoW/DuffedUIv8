@@ -3,7 +3,7 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-if (Class ~= "ROGUE") or (Class ~= "DRUID") then return end
+if (Class ~= "ROGUE") then return end
 
 function DuffedUIUnitFrames:AddRogueFeatures()
 	local colors = {
@@ -12,33 +12,32 @@ function DuffedUIUnitFrames:AddRogueFeatures()
 		[3] = {0.60, 0.60, 0, 1},
 		[4] = {0.30, 0.60, 0, 1},
 		[5] = {0, 0.60, 0, 1},
-	},
+	}
 
 	local Combo = CreateFrame("Frame", "Combo", UIParent)
+	Combo:SetPoint("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
+	Combo:SetSize((40 * 5) + 9, 9)
+	Combo:SetTemplate("Transparent")
+	Combo:CreateShadow("Default")
+
 	for i = 1, 5 do
-		Combo[i] = CreateFrame("Frame", "Combo"..i, UIParent)
-		Combo[i]:Size(D.Scale(40), D.Scale(11))
+		Combo[i] = CreateFrame("StatusBar", "Combo"..i, Combo)
+		Combo[i]:Size(D.Scale(40), D.Scale(5))
 		Combo[i]:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-		Combo[i].text = Combo[i]:CreateFontString(nil, "OVERLAY")
-		Combo[i].text:SetFont(C["medias"].Font, 12)
-		Combo[i].text:SetPoint("CENTER")
-		Combo[i].text:SetText(i)
 			
 		if i == 1 then
-			Combo[i]:Point("TOPLEFT", AnchorFrameRessources, "BOTTOMLEFT", 0, -3)
+			Combo[i]:Point("LEFT", Combo, "LEFT", 2, 0)
 		else
-			Combo[i]:Point("LEFT", Combo[i-1], "RIGHT", D.Scale(3), 0)
+			Combo[i]:Point("LEFT", Combo[i - 1], "RIGHT", 1, 0)
 		end
 		
-		Combo[i]:SetTemplate("Default")
-		Combo[i]:CreateShadow("Default")
-		Combo[i]:CreateBackdrop()
-		Combo[i]:SetBackdropBorderColor(unpack(colors[i]))
+		Combo[i]:SetStatusBarTexture(C["medias"].Normal)
+		Combo[i]:SetStatusBarColor(unpack(colors[i]))
 		Combo[i]:RegisterEvent("PLAYER_ENTERING_WORLD")
 		Combo[i]:RegisterEvent("UNIT_COMBO_POINTS")
 		Combo[i]:RegisterEvent("PLAYER_TARGET_CHANGED")
 		Combo[i]:SetScript("OnEvent", function(self, event)
-		local points, pt = 0, GetComboPoints("player", "target")
+			local points, pt = 0, GetComboPoints("player", "target")
 			if pt == points then
 				Combo[i]:Hide()
 			elseif pt > points then
@@ -54,13 +53,13 @@ function DuffedUIUnitFrames:AddRogueFeatures()
 		end)
 	end
 
-	local PowerBG = CreateFrame("Frame", "PowerBG", oUF_DuffedUITarget)
+	local PowerBG = CreateFrame("Frame", "PowerBG", Combo)
 	PowerBG:Size((D.Scale(40) * 5) + (D.Scale(3) * 5) - D.Scale(3), D.Scale(11))
 	PowerBG:SetPoint("TOPLEFT", AnchorFrame, "BOTTOMLEFT", 0, -(D.Scale(11) + 6))
 	PowerBG:SetTemplate("Transparent")
 	PowerBG:CreateShadow("Default")
 
-	local PowerStatus = CreateFrame("StatusBar", "PowerStatus", DuffedUITarget)
+	local PowerStatus = CreateFrame("StatusBar", "PowerStatus", PowerBG)
 	PowerStatus:SetStatusBarTexture(C["medias"].Normal)
 	PowerStatus:SetFrameLevel(6)
 	PowerStatus:Point("TOPLEFT", PowerBG, "TOPLEFT", 2, -2)
@@ -72,7 +71,7 @@ function DuffedUIUnitFrames:AddRogueFeatures()
 	PowerStatus.t:SetShadowOffset(0.5, -0.5)
 	PowerStatus.t:SetShadowColor(0,0,0)
 
-	local color = RAID_CLASS_COLORS[D.myclass]
+	local color = RAID_CLASS_COLORS[D.MyClass]
 	PowerStatus:SetStatusBarColor(color.r, color.g, color.b)
 
 	local t = 0
@@ -87,7 +86,7 @@ function DuffedUIUnitFrames:AddRogueFeatures()
 	end)
 
 	PowerBG:RegisterEvent("PLAYER_ENTERING_WORLD")
-	--PowerBG:RegisterEvent("UNIT_DISPLAYPOWER")
+	PowerBG:RegisterEvent("UNIT_DISPLAYPOWER")
 	PowerBG:RegisterEvent("PLAYER_REGEN_ENABLED")
 	PowerBG:RegisterEvent("PLAYER_REGEN_DISABLED")
 	PowerBG:SetScript("OnEvent", function(self, event)

@@ -5,7 +5,7 @@ if (not C["misc"].AltPowerBarEnable) then
 end
 
 local Panels = D["Panels"]
-local DataTextRight = Panels.DataTextRight
+local DataTextLeft = Panels.DataTextLeft
 local TimeSinceLastUpdate = 1
 
 local StatusBarEvent = function(self)
@@ -34,11 +34,11 @@ PlayerPowerBarAlt:UnregisterEvent("UNIT_POWER_BAR_SHOW")
 PlayerPowerBarAlt:UnregisterEvent("UNIT_POWER_BAR_HIDE")
 PlayerPowerBarAlt:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
-local AltPowerBar = CreateFrame("Frame", nil, DataTextRight)
+local AltPowerBar = CreateFrame("Frame", nil, DataTextLeft)
 AltPowerBar:SetAllPoints()
 AltPowerBar:SetTemplate()
 AltPowerBar:SetFrameStrata("MEDIUM")
-AltPowerBar:SetFrameLevel(DataTextRight:GetFrameLevel() + 1)
+AltPowerBar:SetFrameLevel(DataTextLeft:GetFrameLevel() + 1)
 AltPowerBar:RegisterEvent("UNIT_POWER_BAR_SHOW")
 AltPowerBar:RegisterEvent("UNIT_POWER_BAR_HIDE")
 AltPowerBar:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -48,8 +48,8 @@ AltPowerBar.Status = CreateFrame("StatusBar", nil, AltPowerBar)
 AltPowerBar.Status:SetFrameLevel(AltPowerBar:GetFrameLevel() + 1)
 AltPowerBar.Status:SetStatusBarTexture(C["medias"].Normal)
 AltPowerBar.Status:SetMinMaxValues(0, 100)
-AltPowerBar.Status:Point("TOPLEFT", DataTextRight, "TOPLEFT", 1, -1)
-AltPowerBar.Status:Point("BOTTOMRIGHT", DataTextRight, "BOTTOMRIGHT", -1, 1)
+AltPowerBar.Status:Point("TOPLEFT", DataTextLeft, "TOPLEFT", 1, -1)
+AltPowerBar.Status:Point("BOTTOMRIGHT", DataTextLeft, "BOTTOMRIGHT", -1, 1)
 
 AltPowerBar.Status.Text = AltPowerBar.Status:CreateFontString(nil, "OVERLAY")
 AltPowerBar.Status.Text:SetFont(C["medias"].Font, 12)

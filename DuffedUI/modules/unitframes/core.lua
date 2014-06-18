@@ -440,13 +440,6 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button.count:SetParent(button.OverlayFrame)
 	button.Remaining:SetParent(button.OverlayFrame)
 
-	button.Glow = CreateFrame("Frame", nil, button)
-	button.Glow:SetOutside()
-	button.Glow:SetFrameStrata("BACKGROUND")	
-	button.Glow:SetBackdrop{edgeFile = C["medias"].Glow, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
-	button.Glow:SetBackdropColor(0, 0, 0, 0)
-	button.Glow:SetBackdropBorderColor(0, 0, 0)
-	
 	button.Animation = button:CreateAnimationGroup()
 	button.Animation:SetLooping("BOUNCE")
 

@@ -51,7 +51,7 @@ function DuffedUIAuras:CreateHeaders()
 	local Proxy = CreateFrame("Frame", nil, Buffs, "DuffedUIAurasProxyTemplate")
 	local DropDown = CreateFrame("BUTTON", nil, Proxy, "SecureHandlerClickTemplate")
 	
-	Buffs:SetPoint("TOPRIGHT", Minimap, "TOPLEFT", -6, 2)
+	Buffs:SetPoint("TOPRIGHT", Minimap, "TOPLEFT", -17, 2)
 	Buffs:SetAttribute("filter", "HELPFUL")
 	Buffs:SetAttribute("consolidateProxy", Proxy)
 	Buffs:SetAttribute("consolidateHeader", Consolidate)

@@ -242,7 +242,9 @@ function DuffedUIActionBars:UpdateStanceBar(...)
 		Panels.StanceBar:SetAlpha(0)
 	else
 		Panels.StanceBar:SetAlpha(1)
-		Panels.StanceBar:SetSize((PetSize * NumForms) + (Spacing * (NumForms + 1)), PetSize + (Spacing * 2))
+		if (not UnitAffectingCombat("player")) then
+			Panels.StanceBar:SetSize((PetSize * NumForms) + (Spacing * (NumForms + 1)), PetSize + (Spacing * 2))
+		end
 		
 		for i = 1, NUM_STANCE_SLOTS do
 			local ButtonName = "StanceButton"..i

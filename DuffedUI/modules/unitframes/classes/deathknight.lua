@@ -18,7 +18,7 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 
 	Runes = CreateFrame("Frame", "Runes", UIParent)
 	Runes:SetPoint("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
-	Runes:SetSize((40 * 6) + 9, 9)
+	Runes:SetSize((36 * 6) + 9, 9)
 	Runes:SetTemplate("Transparent")
 	Runes:CreateShadow("Default")
 
@@ -31,7 +31,7 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 		rune:SetHeight(5)
 
 		if i == 1 then
-			rune:SetWidth(40)
+			rune:SetWidth(36)
 			rune:SetPoint("LEFT", Runes, "LEFT", 2, 0)
 		else
 			rune:SetWidth(runes[1]:GetWidth())

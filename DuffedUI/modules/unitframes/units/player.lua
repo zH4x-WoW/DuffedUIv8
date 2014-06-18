@@ -294,24 +294,26 @@ function DuffedUIUnitFrames:Player()
 		local Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
 		Experience:SetStatusBarTexture(C["medias"].Normal)
 		Experience:SetStatusBarColor(0, 0.4, 1)
-		Experience:Point("TOPLEFT", Panel, 2, -2)
-		Experience:Point("BOTTOMRIGHT", Panel, -2, 2)
-		Experience:SetFrameLevel(10)
-		Experience:HookScript("OnEnter", function(self) self:SetAlpha(1) end)
-		Experience:HookScript("OnLeave", function(self) self:SetAlpha(0) end)
-		Experience:SetAlpha(0)
+		Experience:SetOrientation("VERTICAL")
+		Experience:Size(5, Minimap:GetHeight() + 20)
+		Experience:Point("TOPLEFT", Minimap, "TOPLEFT", -12, 0)
+		Experience:SetFrameLevel(2)
 
 		Experience.Tooltip = true
-
-		Experience.Backdrop = Experience:CreateTexture(nil, "BORDER")
-		Experience.Backdrop:SetAllPoints(Experience)
-		Experience.Backdrop:SetTexture(0, 0, 0)
 
 		Experience.Rested = CreateFrame("StatusBar", nil, self)
 		Experience.Rested:SetParent(Experience)
 		Experience.Rested:SetAllPoints(Experience)
 		Experience.Rested:SetStatusBarTexture(C["medias"].Normal)
+		Experience.Rested:SetOrientation("VERTICAL")
 		Experience.Rested:SetStatusBarColor(1, 0, 1, 0.3)
+
+		-- Border for the experience bar
+		local ExperienceBorder = CreateFrame("Frame", nil, Experience)
+		ExperienceBorder:SetPoint("TOPLEFT", Experience, "TOPLEFT", D.Scale(-2), D.Scale(2))
+		ExperienceBorder:SetPoint("BOTTOMRIGHT", Experience, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
+		ExperienceBorder:SetTemplate("Default")
+		ExperienceBorder:SetFrameLevel(2)
 
 		local Resting = Experience:CreateTexture(nil, "OVERLAY")
 		Resting:SetHeight(28)
@@ -319,6 +321,7 @@ function DuffedUIUnitFrames:Player()
 		Resting:SetPoint("LEFT", -18, 76)
 		Resting:SetTexture([=[Interface\CharacterFrame\UI-StateIcon]=])
 		Resting:SetTexCoord(0, 0.5, 0, 0.421875)
+
 		self.Resting = Resting
 		self.Experience = Experience
 	end
@@ -327,21 +330,20 @@ function DuffedUIUnitFrames:Player()
 	if (D.MyLevel == MAX_PLAYER_LEVEL) then
 		local Reputation = CreateFrame("StatusBar", self:GetName().."_Reputation", self)
 		Reputation:SetStatusBarTexture(C["medias"].Normal)
-		Reputation:Point("TOPLEFT", Panel, 2, -2)
-		Reputation:Point("BOTTOMRIGHT", Panel, -2, 2)
-		Reputation:SetFrameLevel(10)
-		Reputation:SetAlpha(0)
+		Reputation:SetOrientation("VERTICAL")
+		Reputation:Size(5, Minimap:GetHeight() + 20)
+		Reputation:Point("TOPLEFT", Minimap, "TOPLEFT", -12, 0)
+		Reputation:SetFrameLevel(2)
 
-		Reputation:HookScript("OnEnter", function(self) self:SetAlpha(1) end)
-		Reputation:HookScript("OnLeave", function(self) self:SetAlpha(0) end)
+		-- Border for the experience bar
+		local ReputationBorder = CreateFrame("Frame", nil, Reputation)
+		ReputationBorder:SetPoint("TOPLEFT", Reputation, "TOPLEFT", D.Scale(-2), D.Scale(2))
+		ReputationBorder:SetPoint("BOTTOMRIGHT", Reputation, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
+		ReputationBorder:SetTemplate("Default")
+		ReputationBorder:SetFrameLevel(2)
 
 		Reputation.PostUpdate = DuffedUIUnitFrames.UpdateReputationColor
 		Reputation.Tooltip = true
-
-		Reputation.Backdrop = Reputation:CreateTexture(nil, "BORDER")
-		Reputation.Backdrop:SetAllPoints(Reputation)
-		Reputation.Backdrop:SetTexture(0, 0, 0)
-
 		self.Reputation = Reputation
 	end
 
