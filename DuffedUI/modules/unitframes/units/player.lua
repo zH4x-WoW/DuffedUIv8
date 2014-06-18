@@ -244,11 +244,18 @@ function DuffedUIUnitFrames:Player()
 		-- Default layout of Totems match Shaman class.
 		local Bar = CreateFrame("Frame", nil, self)
 		Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-		Bar:Size(250, 8)
+		Bar:Size(250, 6)
 
 		Bar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 		Bar:SetBackdropColor(0, 0, 0)
 		Bar:SetBackdropBorderColor(0, 0, 0)
+
+		-- Border for TotemBar
+		local TotemBorder = CreateFrame("Frame", nil, Power)
+		TotemBorder:SetPoint("TOPLEFT", Bar, "TOPLEFT", D.Scale(-2), D.Scale(2))
+		TotemBorder:SetPoint("BOTTOMRIGHT", Bar, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
+		TotemBorder:SetTemplate("Default")
+		TotemBorder:SetFrameLevel(2)
 
 		Bar.activeTotems = 0
 		Bar.Override = DuffedUIUnitFrames.UpdateTotemOverride
@@ -264,7 +271,7 @@ function DuffedUIUnitFrames:Player()
 		-- Totem Bar
 		for i = 1, MAX_TOTEMS do
 			Bar[i] = CreateFrame("StatusBar", nil, Bar)
-			Bar[i]:Height(8)
+			Bar[i]:Height(6)
 			Bar[i]:SetStatusBarTexture(C["medias"].Normal)
 			Bar[i]:EnableMouse(true)
 

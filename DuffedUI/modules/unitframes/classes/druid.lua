@@ -90,15 +90,6 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 		self:SetBackdropBorderColor(unpack(BorderColor))
 	end
 
-	local GetAnticipation = function()
-		local Name = GetSpellInfo(115189)
-		local Count = select(4, UnitAura("player", Name))
-		
-		if (Count and Count > 0) then
-			return Count
-		end
-	end
-
 	local OnUpdate = function(self)
 		local min = UnitPower("player")
 		
@@ -133,16 +124,6 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 			self[event](self, arg1)
 		end)
 		
-		ComboPoints["UNIT_AURA"] = function(self, unit)
-			if (unit ~= "player") then
-				return
-			end
-			
-			local Count = GetAnticipation()
-			
-			self.Anticipation:SetText(Count and Count or "")
-		end
-
 		ComboPoints["UNIT_COMBO_POINTS"] = function(self)
 			SetComboPoints(self)
 		end
@@ -152,10 +133,8 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 		end
 		
 		ComboPoints["PLAYER_ENTERING_WORLD"] = function(self)
-			if (not tCombo.Options.ComboHideOOC) then
-				self:UnregisterEvent("PLAYER_REGEN_DISABLED")
-				self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-			end
+			self:UnregisterEvent("PLAYER_REGEN_DISABLED")
+			self:UnregisterEvent("PLAYER_REGEN_ENABLED")
 			
 			self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 		end
@@ -180,12 +159,6 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 			self:Show()
 		end
 
-		ComboPoints.Anticipation = ComboPoints:CreateFontString(nil, "OVERLAY")
-		ComboPoints.Anticipation:SetFont(Font, 12)
-		ComboPoints.Anticipation:SetPoint("BOTTOM", ComboPoints, "TOP", 0, 1)
-		ComboPoints.Anticipation:SetShadowColor(0, 0, 0)
-		ComboPoints.Anticipation:SetShadowOffset(1.25, -1.25)
-		
 		local Width = (200 / 5) - 2
 
 		for i = 1, NumPoints do

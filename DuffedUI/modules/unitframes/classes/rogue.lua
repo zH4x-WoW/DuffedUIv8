@@ -107,10 +107,8 @@ function DuffedUIUnitFrames:AddRogueFeatures()
 		end
 		
 		ComboPoints["PLAYER_ENTERING_WORLD"] = function(self)
-			if (not tCombo.Options.ComboHideOOC) then
-				self:UnregisterEvent("PLAYER_REGEN_DISABLED")
-				self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-			end
+			self:UnregisterEvent("PLAYER_REGEN_DISABLED")
+			self:UnregisterEvent("PLAYER_REGEN_ENABLED")
 			
 			self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 		end

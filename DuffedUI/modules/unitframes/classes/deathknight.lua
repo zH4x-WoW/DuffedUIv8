@@ -22,7 +22,6 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	Runes:SetPoint("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
 	Runes:SetSize((36 * 6) + 9, 9)
 	Runes:SetTemplate("Transparent")
-	Runes:CreateShadow("Default")
 
 	for i = 1, 6 do
 		local rune = CreateFrame("StatusBar", "RunesRune"..i, Runes)
@@ -47,7 +46,6 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	rpbarbg:SetPoint("TOPLEFT", Runes, "BOTTOMLEFT", 0, -1)
 	rpbarbg:SetPoint("TOPRIGHT", Runes, "BOTTOMRIGHT", 0, -1)
 	rpbarbg:SetHeight(7)
-	rpbarbg:CreateShadow("Default")
 	rpbarbg:SetTemplate("Transparent")
 
 	local rpbar = CreateFrame("StatusBar", nil, rpbarbg)
@@ -58,7 +56,7 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	rpbar:SetPoint("BOTTOMRIGHT", rpbarbg, "BOTTOMRIGHT", -2, 2)
 
 	rpbar.text = rpbar:CreateFontString(nil, "ARTWORK")
-	rpbar.text:SetFont(Font, 12, "THINOUTLINE")
+	rpbar.text:SetFont(Font, 16, "THINOUTLINE")
 	rpbar.text:SetPoint("LEFT",RunesRunicPower, "RIGHT", 3, 0)
 	rpbar.text:SetTextColor(unpack(colors[5]))
 
