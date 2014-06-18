@@ -134,8 +134,12 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		Color = "|CFFFFFFFF"
 	end
 	
-	if Title or Name then
-		Line1:SetFormattedText("%s%s%s", Color, Title or Name, Realm and Realm ~= "" and " - ".. Realm .."|r" or "|r")
+	if (Title or Name) then
+		if Realm then
+			Line1:SetFormattedText("%s%s%s", Color, (Title or Name), Realm and Realm ~= "" and " - ".. Realm .."|r" or "|r")
+		else
+			Line1:SetFormattedText("%s%s%s", Color, (Title or Name), "|r")
+		end
 	end
 
 	if (UnitIsPlayer(Unit)) then
@@ -154,7 +158,11 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		for i = Offset, NumLines do
 			local Line = _G["GameTooltipTextLeft"..i]
 			if (Line:GetText():find("^" .. LEVEL)) then
-				Line:SetFormattedText("|cff%02x%02x%02x%s|r %s %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Race, Color, Class .."|r")
+				if Race then
+					Line:SetFormattedText("|cff%02x%02x%02x%s|r %s %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Race, Color, Class .."|r")
+				else
+					Line:SetFormattedText("|cff%02x%02x%02x%s|r %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Color, Class .."|r")
+				end
 				break
 			end
 		end

@@ -62,15 +62,14 @@ function DuffedUIUnitFrames:DisableBlizzard()
 		Power:UnregisterAllEvents()
 	end
 	
-	if C["unitframes"].Raid then
+	if C["raid"].Enable then
 		InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
 		
-		-- raid
 		CompactRaidFrameManager:SetParent(Panels.Hider)
 		CompactUnitFrameProfiles:UnregisterAllEvents()
 			
-		for i=1, MAX_PARTY_MEMBERS do
+		for i = 1, MAX_PARTY_MEMBERS do
 			local PartyMember = _G["PartyMemberFrame" .. i]
 			local Health = _G["PartyMemberFrame" .. i .. "HealthBar"]
 			local Power = _G["PartyMemberFrame" .. i .. "ManaBar"]
@@ -519,105 +518,105 @@ end
 
 function DuffedUIUnitFrames:GetPartyFramesAttributes()
 	return
-		"DuffedUIParty",
-		nil,
-		"custom [@raid6,exists] hide;show", 
-		"oUF-initialConfigFunction", [[
-			local header = self:GetParent()
-			self:SetWidth(header:GetAttribute("initial-width"))
-			self:SetHeight(header:GetAttribute("initial-height"))
-		]],
-		"initial-width", C["party"].Portrait and D.Scale(162) or D.Scale(206),
-		"initial-height", C["party"].Portrait and D.Scale(24) or D.Scale(40),
-		"showSolo", true, -- uncomment this for coding
-		"showParty", true, 
-		"showPlayer", true, 
-		"showRaid", true,
-		"groupFilter", "1,2,3,4,5,6,7,8", 
-		"groupingOrder", "1,2,3,4,5,6,7,8", 
-		"groupBy", "GROUP", 
-		"yOffset", D.Scale(-66)	
+	"DuffedUIParty",
+	nil,
+	"custom [@raid6,exists] hide;show", 
+	"oUF-initialConfigFunction", [[
+		local header = self:GetParent()
+		self:SetWidth(header:GetAttribute("initial-width"))
+		self:SetHeight(header:GetAttribute("initial-height"))
+	]],
+	"initial-width", C["party"].Portrait and D.Scale(162) or D.Scale(206),
+	"initial-height", C["party"].Portrait and D.Scale(24) or D.Scale(40),
+	"showSolo", true, -- uncomment this for coding
+	"showParty", true, 
+	"showPlayer", true, 
+	"showRaid", true,
+	"groupFilter", "1,2,3,4,5,6,7,8", 
+	"groupingOrder", "1,2,3,4,5,6,7,8", 
+	"groupBy", "GROUP", 
+	"yOffset", D.Scale(-66)	
 end
 
 function DuffedUIUnitFrames:GetRaidFramesAttributes()
 	local Properties = C["party"].Enable and "custom [@raid6,exists] hide;show" or "solo, party, raid"
 	
 	return
-		"DuffedUIRaid", 
-		nil, 
-		Properties,
-		"oUF-initialConfigFunction", [[
-			local header = self:GetParent()
-			self:SetWidth(header:GetAttribute("initial-width"))
-			self:SetHeight(header:GetAttribute("initial-height"))
-		]],
-		"initial-width", D.Scale(66),
-		"initial-height", D.Scale(50),
-		"showParty", false,
-		"showRaid", true,
-		"showPlayer", true,
-		"showSolo", false,
-		"xoffset", D.Scale(3),
-		"yOffset", D.Scale(-3),
-		"point", "TOP",
-		"groupFilter", "1,2,3,4,5,6,7,8",
-		"groupingOrder", "1,2,3,4,5,6,7,8",
-		"groupBy", "GROUP",
-		"maxColumns", math.ceil(40/10),
-		"unitsPerColumn", 10,
-		"columnSpacing", D.Scale(3),
-		"columnAnchorPoint", "LEFT"
+	"DuffedUIRaid", 
+	nil, 
+	Properties,
+	"oUF-initialConfigFunction", [[
+		local header = self:GetParent()
+		self:SetWidth(header:GetAttribute("initial-width"))
+		self:SetHeight(header:GetAttribute("initial-height"))
+	]],
+	"initial-width", D.Scale(66),
+	"initial-height", D.Scale(50),
+	"showParty", false,
+	"showRaid", true,
+	"showPlayer", true,
+	"showSolo", false,
+	"xoffset", D.Scale(3),
+	"yOffset", D.Scale(-3),
+	"point", "TOP",
+	"groupFilter", "1,2,3,4,5,6,7,8",
+	"groupingOrder", "1,2,3,4,5,6,7,8",
+	"groupBy", "GROUP",
+	"maxColumns", math.ceil(40/10),
+	"unitsPerColumn", 10,
+	"columnSpacing", D.Scale(3),
+	"columnAnchorPoint", "LEFT"
 end
 
 function DuffedUIUnitFrames:GetPetRaidFramesAttributes()
 	return
-		"DuffedUIRaidPet", 
-		"SecureGroupPetHeaderTemplate", 
-		"custom [@raid6,exists] show;hide",
-		"showPlayer", true,
-		"showParty", false,
-		"showRaid", true,
-		"showSolo", false,
-		"maxColumns", math.ceil(40/10),
-		"point", "TOP",
-		"unitsPerColumn", 10,
-		"columnSpacing", D.Scale(3),
-		"columnAnchorPoint", "LEFT",
-		"yOffset", D.Scale(-3),
-		"xOffset", D.Scale(3),
-		"initial-width", D.Scale(66),
-		"initial-height", D.Scale(50),
-		"oUF-initialConfigFunction", [[
-			local header = self:GetParent()
-			self:SetWidth(header:GetAttribute("initial-width"))
-			self:SetHeight(header:GetAttribute("initial-height"))
-		]]
+	"DuffedUIRaidPet", 
+	"SecureGroupPetHeaderTemplate", 
+	"custom [@raid6,exists] show;hide",
+	"showPlayer", true,
+	"showParty", false,
+	"showRaid", true,
+	"showSolo", false,
+	"maxColumns", math.ceil(40/10),
+	"point", "TOP",
+	"unitsPerColumn", 10,
+	"columnSpacing", D.Scale(4),
+	"columnAnchorPoint", "LEFT",
+	"yOffset", D.Scale(-4),
+	"xOffset", D.Scale(4),
+	"initial-width", D.Scale(66),
+	"initial-height", D.Scale(50),
+	"oUF-initialConfigFunction", [[
+		local header = self:GetParent()
+		self:SetWidth(header:GetAttribute("initial-width"))
+		self:SetHeight(header:GetAttribute("initial-height"))
+	]]
 end
 
 function DuffedUIUnitFrames:Style(unit)
-	if not unit then
+	if (not unit) then
 		return
 	end
 	
 	local Parent = self:GetParent():GetName()
 
-	if unit == "player" then
+	if (unit == "player") then
 		DuffedUIUnitFrames.Player(self)
-	elseif unit == "target" then
+	elseif (unit == "target") then
 		DuffedUIUnitFrames.Target(self)
-	elseif unit == "targettarget" then
+	elseif (unit == "targettarget") then
 		DuffedUIUnitFrames.TargetOfTarget(self)
-	elseif unit == "pet" then
+	elseif (unit == "pet") then
 		DuffedUIUnitFrames.Pet(self)
-	elseif unit == "focus" then
+	elseif (unit == "focus") then
 		DuffedUIUnitFrames.Focus(self)
-	elseif unit == "focustarget" then
+	elseif (unit == "focustarget") then
 		DuffedUIUnitFrames.FocusTarget(self)
-	elseif unit:find("arena%d") then
+	elseif (unit:find("arena%d")) then
 		DuffedUIUnitFrames.Arena(self)
-	elseif unit:find("boss%d") then
+	elseif (unit:find("boss%d")) then
 		DuffedUIUnitFrames.Boss(self)
-	elseif unit == "raid" or unit == "raidpet" then
+	elseif (unit:find("raid") or (unit:find("raidpet")) then
 		if Parent:match("Party") then
 			DuffedUIUnitFrames.Party(self)
 		else
@@ -660,6 +659,7 @@ function DuffedUIUnitFrames:CreateUnits()
 	FocusTarget:Size(75, 10)
 	
 	local Arena = {}
+
 	for i = 1, 5 do
 		Arena[i] = oUF:Spawn("arena"..i, nil)
 		Arena[i]:SetParent(Panels.PetBattleHider)
@@ -672,6 +672,7 @@ function DuffedUIUnitFrames:CreateUnits()
 	end
 	
 	local Boss = {}
+	
 	for i = 1, BossFrames do
 		Boss[i] = oUF:Spawn("boss"..i, nil)
 		Boss[i]:SetParent(Panels.PetBattleHider)
