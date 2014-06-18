@@ -296,7 +296,7 @@ function DuffedUIUnitFrames:Player()
 		Experience:SetStatusBarColor(0, 0.4, 1)
 		Experience:SetOrientation("VERTICAL")
 		Experience:Size(5, Minimap:GetHeight() + 20)
-		Experience:Point("TOPLEFT", Minimap, "TOPLEFT", -12, 0)
+		Experience:Point("TOPLEFT", Minimap, "TOPLEFT", -11, 0)
 		Experience:SetFrameLevel(2)
 
 		Experience.Tooltip = true

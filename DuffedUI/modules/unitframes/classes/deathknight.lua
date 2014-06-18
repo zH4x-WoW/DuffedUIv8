@@ -15,6 +15,8 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	}
 	local runes = {}
 	local runemap = { 1, 2, 3, 4, 5, 6 }
+	local Font = C["medias"].Font
+	local Texture = C["medias"].Normal
 
 	Runes = CreateFrame("Frame", "Runes", UIParent)
 	Runes:SetPoint("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
@@ -24,7 +26,7 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 
 	for i = 1, 6 do
 		local rune = CreateFrame("StatusBar", "RunesRune"..i, Runes)
-		rune:SetStatusBarTexture(C["medias"].Normal)
+		rune:SetStatusBarTexture(Texture)
 		rune:SetStatusBarColor(unpack(colors[math.ceil(runemap[i] / 2) ]))
 		rune:SetMinMaxValues(0, 10)
 
@@ -49,15 +51,15 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	rpbarbg:SetTemplate("Transparent")
 
 	local rpbar = CreateFrame("StatusBar", nil, rpbarbg)
-	rpbar:SetStatusBarTexture(C["medias"].Normal)
+	rpbar:SetStatusBarTexture(Texture)
 	rpbar:SetStatusBarColor(unpack(colors[5]))
 	rpbar:SetMinMaxValues(0, 100)
 	rpbar:SetPoint("TOPLEFT", rpbarbg, "TOPLEFT", 2, -2)
 	rpbar:SetPoint("BOTTOMRIGHT", rpbarbg, "BOTTOMRIGHT", -2, 2)
 
 	rpbar.text = rpbar:CreateFontString(nil, "ARTWORK")
-	rpbar.text:SetFont(C["medias"].Font, 16, "THINOUTLINE")
-	rpbar.text:SetPoint("RIGHT",RunesRunicPower, "LEFT", -1, 1)
+	rpbar.text:SetFont(Font, 12, "THINOUTLINE")
+	rpbar.text:SetPoint("LEFT",RunesRunicPower, "RIGHT", 3, 0)
 	rpbar.text:SetTextColor(unpack(colors[5]))
 
 	rpbar.TimeSinceLastUpdate = 0

@@ -616,7 +616,7 @@ function DuffedUIUnitFrames:Style(unit)
 		DuffedUIUnitFrames.Arena(self)
 	elseif (unit:find("boss%d")) then
 		DuffedUIUnitFrames.Boss(self)
-	elseif (unit:find("raid") or (unit:find("raidpet")) then
+	elseif (unit:find("raid") or unit:find("raidpet")) then
 		if Parent:match("Party") then
 			DuffedUIUnitFrames.Party(self)
 		else
