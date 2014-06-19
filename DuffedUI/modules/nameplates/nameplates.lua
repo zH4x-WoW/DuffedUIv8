@@ -243,7 +243,7 @@ function Plates:Position()
 		NewPlate:Hide()
 		if Plate:IsShown() then
 			NewPlate:SetPoint("CENTER", WorldFrame, "BOTTOMLEFT", Plate:GetCenter())
-			NewPlate:SetAlpha(C["nameplates"].UntargetAlpha)
+			NewPlate:SetAlpha(C["nameplates"].NontargetAlpha)
 			NewPlate:Show()
 		end
 	end

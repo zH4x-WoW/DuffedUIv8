@@ -19,4 +19,5 @@
 	<Script file="oUF_ArcaneCharge\oUF_ArcaneCharge.lua"/>
 	<Script file="oUF_PVPSpecIcons\oUF_PVPSpecIcons.lua"/>
 	<Script file="oUF_HolyPowerBar\oUF_HolyPowerBar.lua"/>
+	<Script file="oUF_Statue\oUF_Statue.lua"/>
 </Ui>

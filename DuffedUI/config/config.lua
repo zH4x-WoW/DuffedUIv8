@@ -88,7 +88,7 @@ C["nameplates"] = {
 	["Height"] = 8,
 	["CastHeight"] = 5,
 	["Spacing"] = 4,
-	["UntargetAlpha"] = 1,
+	["NontargetAlpha"] = 1,
 }
 
 C["party"] = {
