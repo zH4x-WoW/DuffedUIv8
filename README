@@ -1,6 +1,7 @@
 => DuffedUI v8 <=
 
 19.06.2014 =>
+	Adding StatueBar to all neccessary classes and move TotemBar
 	Adding oUF_Statue for summonable pets i.g. Raise Dead
 	Chibar for Monks finished
 	Adjustments at combopoints for Druid

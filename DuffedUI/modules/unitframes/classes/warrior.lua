@@ -3,21 +3,26 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-if (Class ~= "WARRIOR") then
-	return
-end
+if (Class ~= "WARRIOR") then return end
 
 function DuffedUIUnitFrames:AddWarriorFeatures()
 	-- Totem Bar (Demoralizing / Mocking / Skull Banner)
-	if C["unitFrames"].TotemBar then
-		D["Colors"].totems[1] = { 205/255, 92/255, 92/255 }
-		
-		local TotemBar = self.Totems
-		TotemBar[1]:ClearAllPoints()
-		TotemBar[1]:SetAllPoints()
+	local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
+	bar:SetWidth(5)
+	bar:SetHeight(28)
+	bar:Point("BOTTOMLEFT", oUF_DuffedUIPlayer, "BOTTOMRIGHT", 6, -1)
+	bar:SetStatusBarTexture(Texture)
+	bar:SetOrientation("VERTICAL")
+	bar.bg = bar:CreateTexture(nil, 'ARTWORK')
+	
+	bar.background = CreateFrame("Frame", "DuffedUIStatue", bar)
+	bar.background:SetAllPoints()
+	bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
+	bar.background:SetBackdrop(backdrop)
+	bar.background:SetBackdropColor(0, 0, 0)
+	bar.background:SetBackdropBorderColor(0,0,0)
+	bar:CreateBackdrop()
 
-		for i = 2, MAX_TOTEMS do
-			TotemBar[i]:Hide()
-		end
-	end
+	-- Register
+	self.Statue = bar
 end

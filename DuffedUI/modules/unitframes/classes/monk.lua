@@ -3,9 +3,7 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-if (Class ~= "MONK") then
-	return
-end
+if (Class ~= "MONK") then return end
 
 function DuffedUIUnitFrames:AddMonkFeatures()
 	local Texture = C["medias"].Normal
@@ -82,30 +80,23 @@ function DuffedUIUnitFrames:AddMonkFeatures()
 	end)
 
 	-- Totem Bar (Black Ox / Jade Serpent Statue)
-	if C["unitframes"].TotemBar then
-		D["Colors"].totems[1] = { 95/255, 222/255, 95/255 }
-
-		local TotemBar = self.Totems
-		TotemBar:ClearAllPoints()
-		TotemBar:SetWidth(204)
-		TotemBar:Point("TOP", Harmony, "BOTTOM", 0, -11)
-
-		TotemBar[1]:ClearAllPoints()
-		TotemBar[1]:SetAllPoints()
-
-		for i = 2, MAX_TOTEMS do
-			TotemBar[i]:Hide()
-		end
-
-		TotemBar:SetScript("OnShow", function(self)
-			DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 22)
-		end)
-
-		TotemBar:SetScript("OnHide", function(self)
-			DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 12)
-		end)
-	end
+	local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
+	bar:SetWidth(5)
+	bar:SetHeight(28)
+	bar:Point("BOTTOMLEFT", oUF_DuffedUIPlayer, "BOTTOMRIGHT", 6, -1)
+	bar:SetStatusBarTexture(Texture)
+	bar:SetOrientation("VERTICAL")
+	bar.bg = bar:CreateTexture(nil, 'ARTWORK')
+	
+	bar.background = CreateFrame("Frame", "DuffedUIStatue", bar)
+	bar.background:SetAllPoints()
+	bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
+	bar.background:SetBackdrop(backdrop)
+	bar.background:SetBackdropColor(0, 0, 0)
+	bar.background:SetBackdropBorderColor(0,0,0)
+	bar:CreateBackdrop()
 
 	-- Register
 	self.HarmonyBar = Harmony
+	self.Statue = bar
 end

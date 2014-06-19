@@ -3,9 +3,7 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-if (Class ~= "PRIEST") then
-	return
-end
+if (Class ~= "PRIEST") then return end
 
 function DuffedUIUnitFrames:AddPriestFeatures()
 	local SOBar = CreateFrame("Frame", nil, self)
@@ -41,9 +39,6 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
 	end)
 	
-	-- Register
-	self.ShadowOrbsBar = SOBar
-
 	if (C["unitframes"].WeakBar) then
 		-- Weakened Soul Bar
 		local WSBar = CreateFrame("StatusBar", nil, self.Power)
@@ -59,25 +54,23 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 	end
 	
 	-- Totem Bar (Lightwell)
-	if C["unitframes"].TotemBar then
-		D["Colors"].totems[1] = { 238/255, 221/255,  130/255 }
+	local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
+	bar:SetWidth(5)
+	bar:SetHeight(28)
+	bar:Point("BOTTOMLEFT", oUF_DuffedUIPlayer, "BOTTOMRIGHT", 6, -1)
+	bar:SetStatusBarTexture(Texture)
+	bar:SetOrientation("VERTICAL")
+	bar.bg = bar:CreateTexture(nil, 'ARTWORK')
+	
+	bar.background = CreateFrame("Frame", "DuffedUIStatue", bar)
+	bar.background:SetAllPoints()
+	bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
+	bar.background:SetBackdrop(backdrop)
+	bar.background:SetBackdropColor(0, 0, 0)
+	bar.background:SetBackdropBorderColor(0,0,0)
+	bar:CreateBackdrop()
 
-		local TotemBar = self.Totems
-		TotemBar[1]:ClearAllPoints()
-		TotemBar[1]:SetAllPoints()
-
-		for i = 2, MAX_TOTEMS do
-			TotemBar[i]:Hide()
-		end
-
-		TotemBar:SetScript("OnShow", function(self)
-			local height = SOBar:IsShown() and 22 or 12
-			DuffedUIUnitFrames.UpdateShadow(self, height)
-		end)
-
-		TotemBar:SetScript("OnHide", function(self)
-			local height = SOBar:IsShown() and 12 or 4
-			DuffedUIUnitFrames.UpdateShadow(self, height)
-		end)
-	end
+	-- Register
+	self.ShadowOrbsBar = SOBar
+	self.Statue = bar
 end
