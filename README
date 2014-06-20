@@ -1,5 +1,10 @@
 => DuffedUI v8 <=
 
+20.06.2014 =>
+	Classbars for all classes finished (Mage and Priest needs some tweaks)
+	Adjustments to pet-, player- and targetframe
+	New position for rested icon
+	
 19.06.2014 =>
 	Adding StatueBar to all neccessary classes and move TotemBar
 	Adding oUF_Statue for summonable pets i.g. Raise Dead

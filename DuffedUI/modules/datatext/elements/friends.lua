@@ -247,13 +247,6 @@ local OnEnter = function(self)
 					if GetRealZoneText() == friendTable[i][4] then zonec = activezone else zonec = inactivezone end
 					classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[friendTable[i][3]], GetQuestDifficultyColor(friendTable[i][2])
 					if classc == nil then classc = GetQuestDifficultyColor(friendTable[i][2]) end
-
-					if friendTable[i][2] ~= '' then
-						levelc = GetQuestDifficultyColor(friendTable[i][2])
-					else
-						levelc = RAID_CLASS_COLORS["PRIEST"]
-						classc = RAID_CLASS_COLORS["PRIEST"]
-					end
 					
 					if UnitInParty(friendTable[i][1]) or UnitInRaid(friendTable[i][1]) then grouped = 1 else grouped = 2 end
 					GameTooltip:AddDoubleLine(format(levelNameClassString,levelc.r*255,levelc.g*255,levelc.b*255,friendTable[i][2],friendTable[i][1],groupedTable[grouped]," "..friendTable[i][6]),friendTable[i][4],classc.r,classc.g,classc.b,zonec.r,zonec.g,zonec.b)
@@ -270,15 +263,18 @@ local OnEnter = function(self)
 					if BNTable[i][6] == wowString then
 						if (BNTable[i][8] == true) then status = 1 elseif (BNTable[i][9] == true) then status = 2 else status = 3 end
 	
-						classc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[BNTable[i][14]]
-						if classc == nil then 
-							classc = RAID_CLASS_COLORS["PRIEST"]
-						end
-						
-						if BNTable[i][16] ~= '' then
-							levelc = GetQuestDifficultyColor(BNTable[i][16])
+						-- challengeLevel bug (Problem with b.net app?)
+						if (type(BNTable[i][16]) == "string") then
+							classc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[BNTable[i][14]]
+							levelc = {r=1, g=1, b=1}
 						else
-							levelc = RAID_CLASS_COLORS["PRIEST"]
+							classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[BNTable[i][14]], GetQuestDifficultyColor(BNTable[i][16])
+							if classc == nil then classc = GetQuestDifficultyColor(BNTable[i][16]) end
+
+						end
+
+						if not classc then
+							classc = {r=1, g=1, b=1}
 						end
 						
 						if UnitInParty(BNTable[i][4]) or UnitInRaid(BNTable[i][4]) then grouped = 1 else grouped = 2 end

@@ -20,5 +20,5 @@
 	<Script file="oUF_PVPSpecIcons\oUF_PVPSpecIcons.lua"/>
 	<Script file="oUF_HolyPowerBar\oUF_HolyPowerBar.lua"/>
 	<Script file="oUF_Statue\oUF_Statue.lua"/>
-	<Script file="oUF_TotemBar\oUF_TotemBar.lua"/>
+	<!-- <Script file="oUF_TotemBar\oUF_TotemBar.lua"/> -->
 </Ui>

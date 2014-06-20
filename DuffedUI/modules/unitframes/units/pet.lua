@@ -66,8 +66,6 @@ function DuffedUIUnitFrames:Pet()
 	PortraitBorder:SetTemplate("Default")
 	PortraitBorder:CreateShadow("Default")
 	PortraitBorder:SetFrameLevel(2)
-	
-	self.Portrait = Portrait.Model
 
 	Line1 = CreateFrame("Frame", nil, Health)
 	Line1:SetTemplate("Default")
@@ -78,10 +76,25 @@ function DuffedUIUnitFrames:Pet()
 	Line2:SetTemplate("Default")
 	Line2:Size(2, 12)
 	Line2:Point("BOTTOM", Line1, "RIGHT", 0, -1)
-	
+
+	if (C["castbar"].CastBar) then
+		local CastBar = CreateFrame("StatusBar", nil, self)
+		CastBar:SetStatusBarTexture(C["medias"].Normal)
+		CastBar:SetWidth(129)
+		CastBar:SetHeight(3)
+		CastBar:Point("CENTER", Health, "CENTER", 0, -6)
+		CastBar:SetFrameLevel(Health:GetFrameLevel() + 1)
+
+		CastBar.PostCastStart = DuffedUIUnitFrames.CheckCast
+		CastBar.PostChannelStart = DuffedUIUnitFrames.CheckChannel
+
+		self.Castbar = CastBar
+	end
+
 	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameMedium] [DuffedUI:DiffColor][level]")
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.HealthBorder = HealthBorder
 	self.Name = Name
+	self.Portrait = Portrait.Model
 end

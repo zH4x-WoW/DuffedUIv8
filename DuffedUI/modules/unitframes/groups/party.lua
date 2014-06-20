@@ -11,7 +11,7 @@ function DuffedUIUnitFrames:Party()
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
-	Health:Height(self:GetHeight() - 5)
+	Health:Height(self:GetHeight() - 10)
 	Health:SetStatusBarTexture(C["medias"].Normal)
 
 	Health.Background = Health:CreateTexture(nil, "BORDER")
@@ -76,7 +76,7 @@ function DuffedUIUnitFrames:Party()
 	
 	if (C["party"].Portrait) then
 		local Portrait = CreateFrame("Frame", nil, self)
-		Portrait:Size(35)
+		Portrait:Size(30)
 		Portrait:SetPoint("BOTTOMRIGHT", Health, "BOTTOMLEFT", -6, 0)
 		Portrait:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 		Portrait:SetBackdropColor(0, 0, 0)
@@ -96,7 +96,7 @@ function DuffedUIUnitFrames:Party()
 	end
 	
 	local Buffs = CreateFrame("Frame", nil, self)
-	Buffs:Point("TOPLEFT", C["party"].Portrait and self.Portrait:GetParent() or self, "BOTTOMLEFT", -2, -5)
+	Buffs:Point("TOPLEFT", C["party"].Portrait and self.Portrait:GetParent() or self, "BOTTOMLEFT", -2, -7)
 	Buffs:SetHeight(24)
 	Buffs:SetWidth(250)
 	Buffs.size = 24
@@ -108,7 +108,7 @@ function DuffedUIUnitFrames:Party()
 	Buffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
 	
 	local Debuffs = CreateFrame("Frame", nil, self)
-	Debuffs:Point("LEFT", self, "RIGHT", 6, 0)
+	Debuffs:Point("LEFT", self, "RIGHT", 6, 2)
 	Debuffs:SetHeight(self:GetHeight())
 	Debuffs:SetWidth(250)
 	Debuffs.size = self:GetHeight()

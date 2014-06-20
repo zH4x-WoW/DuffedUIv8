@@ -3,51 +3,85 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-if (Class ~= "WARLOCK") then
-	return
-end
+if (Class ~= "WARLOCK") then return end
 
 function DuffedUIUnitFrames:AddWarlockFeatures()
-	local Bar = CreateFrame("Frame", nil, self)
-	
-	local Shadow = self.Shadow
+	local Texture = C["medias"].Normal
+	local Font = C["medias"].Font
+	local Color = RAID_CLASS_COLORS[Class]	
 
-	-- Warlock Class Bar
-	Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-	Bar:SetWidth(250)
-	Bar:SetHeight(8)
-	Bar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
-	Bar:SetBackdropColor(0, 0, 0)
-	
-	Bar:SetBackdropBorderColor(0, 0, 0)	
+	-- Warlock Class Shards
+	local Shards = CreateFrame("Frame", nil, self)
+	Shards:Point("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
+	Shards:Size((50 * 4) + 9, 10)
+	Shards:SetTemplate("Transparent")
 	
 	for i = 1, 4 do
-		Bar[i] = CreateFrame("StatusBar", nil, Bar)
-		Bar[i]:Height(8)
-		Bar[i]:SetStatusBarTexture(C["medias"].Normal)
+		Shards[i] = CreateFrame("StatusBar", nil, Shards)
+		Shards[i]:Height(6)
+		Shards[i]:SetStatusBarTexture(Texture)
 		
 		if i == 1 then
-			Bar[i]:Width((250 / 4) - 2)
-			Bar[i]:SetPoint("LEFT", Bar, "LEFT", 0, 0)
+			Shards[i]:Width(50)
+			Shards[i]:SetPoint("LEFT", Shards, "LEFT", 2, 0)
 		else
-			Bar[i]:Width((250 / 4) - 1)
-			Bar[i]:SetPoint("LEFT", Bar[i-1], "RIGHT", 1, 0)
+			Shards[i]:Width(50)
+			Shards[i]:SetPoint("LEFT", Shards[i-1], "RIGHT", 1, 0)
 		end
 		
-		Bar[i].bg = Bar[i]:CreateTexture(nil, 'ARTWORK')
+		--Shards[i].bg = Shards[i]:CreateTexture(nil, 'ARTWORK')
+		--Shards[i].bg:Width(50)
 	end
-	
-	-- Shadow Effect Updates
-	Shadow:Point("TOPLEFT", -4, 12)
-	
-	Bar:SetScript("OnShow", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, 12)
+
+	-- Energy Bar
+	local EnergyBarBG = CreateFrame("Frame", "EnergyBarBG", Shards)
+	EnergyBarBG:SetPoint("TOPLEFT", Shards, "BOTTOMLEFT", 0, -1)
+	EnergyBarBG:SetPoint("TOPRIGHT", Shards, "BOTTOMRIGHT", 0, -1)
+	EnergyBarBG:SetHeight(7)
+	EnergyBarBG:SetTemplate("Transparent")
+
+	local EnergyBar = CreateFrame("StatusBar", nil, EnergyBarBG)
+	EnergyBar:SetStatusBarTexture(Texture)
+	EnergyBar:SetStatusBarColor(Color.r, Color.g, Color.b)
+	EnergyBar:SetMinMaxValues(0, 100)
+	EnergyBar:SetPoint("TOPLEFT", EnergyBarBG, "TOPLEFT", 2, -2)
+	EnergyBar:SetPoint("BOTTOMRIGHT", EnergyBarBG, "BOTTOMRIGHT", -2, 2)
+
+	EnergyBar.text = EnergyBar:CreateFontString(nil, "ARTWORK")
+	EnergyBar.text:SetFont(Font, 16, "THINOUTLINE")
+	EnergyBar.text:SetPoint("LEFT", EnergyBarBG, "RIGHT", 3, 0)
+	EnergyBar.text:SetTextColor(Color.r, Color.g, Color.b)
+
+	EnergyBar.TimeSinceLastUpdate = 0
+	EnergyBar:SetScript("OnUpdate", function(self, elapsed)
+		self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + elapsed 
+
+		if self.TimeSinceLastUpdate > 0.07 then
+			self:SetMinMaxValues(0, UnitPowerMax("player"))
+			local power = UnitPower("player")
+			self:SetValue(power)
+			if self.text then
+				self.text:SetText(power)
+			end
+			self.TimeSinceLastUpdate = 0
+		end
 	end)
 
-	Bar:SetScript("OnHide", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, 4)
+	Shards:RegisterEvent("PLAYER_REGEN_DISABLED")
+	Shards:RegisterEvent("PLAYER_REGEN_ENABLED")
+	Shards:RegisterEvent("PLAYER_ENTERING_WORLD")
+	Shards:SetScript("OnEvent", function(self, event)
+		if event == "PLAYER_REGEN_DISABLED" then
+			UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+		elseif event == "PLAYER_REGEN_ENABLED" then
+			UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+		elseif event == "PLAYER_ENTERING_WORLD" then
+			if not InCombatLockdown() then
+				Shards:SetAlpha(0)
+			end
+		end
 	end)
 	
 	-- Register
-	self.WarlockSpecBars = Bar		
+	self.WarlockSpecBars = Shards		
 end

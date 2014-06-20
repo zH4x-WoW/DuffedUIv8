@@ -20,7 +20,7 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 
 	Runes = CreateFrame("Frame", "Runes", UIParent)
 	Runes:SetPoint("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
-	Runes:SetSize((36 * 6) + 9, 9)
+	Runes:SetSize((33 * 6) + 9, 10)
 	Runes:SetTemplate("Transparent")
 
 	for i = 1, 6 do

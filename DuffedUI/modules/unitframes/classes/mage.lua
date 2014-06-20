@@ -5,44 +5,107 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-if (Class ~= "MAGE") then
-	return
-end
+if (Class ~= "MAGE") then return end
 
 function DuffedUIUnitFrames:AddMageFeatures()
-	local ArcaneChargeBar = CreateFrame("Frame", nil, self)
-	
+	local Texture = C["medias"].Normal
+	local Font = C["medias"].Font
+	local Color = RAID_CLASS_COLORS[Class]
+
 	-- Arcane Charges
-	ArcaneChargeBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-	ArcaneChargeBar:Size(250, 8)
-	ArcaneChargeBar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
-	ArcaneChargeBar:SetBackdropColor(0, 0, 0)
-	ArcaneChargeBar:SetBackdropBorderColor(0, 0, 0)
+	local ArcaneChargeBar = CreateFrame("Frame", nil, self)
+	ArcaneChargeBar:Point("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
+	ArcaneChargeBar:Size((50 * 4) + 7, 10)
+	ArcaneChargeBar:SetTemplate("Transparent")
 
 	for i = 1, 4 do
 		ArcaneChargeBar[i] = CreateFrame("StatusBar", nil, ArcaneChargeBar)
-		ArcaneChargeBar[i]:Height(8)
-		ArcaneChargeBar[i]:SetStatusBarTexture(C["medias"].Normal)
+		ArcaneChargeBar[i]:Height(6)
+		ArcaneChargeBar[i]:SetStatusBarTexture(Texture)
 		ArcaneChargeBar[i].bg = ArcaneChargeBar[i]:CreateTexture(nil, 'ARTWORK')
 
 		if i == 1 then
-			ArcaneChargeBar[i]:Width((250 / 4) - 2)
-			ArcaneChargeBar[i]:Point("LEFT", ArcaneChargeBar, "LEFT", 0, 0)
+			ArcaneChargeBar[i]:Width(50)
+			ArcaneChargeBar[i]:Point("LEFT", ArcaneChargeBar, "LEFT", 2, 0)
 		else
-			ArcaneChargeBar[i]:Width((250 / 4 - 1))
+			ArcaneChargeBar[i]:Width(50)
 			ArcaneChargeBar[i]:Point("LEFT", ArcaneChargeBar[i-1], "RIGHT", 1, 0)
 		end
 	end
+
+	for i = 1, 40 do
+		local _, _, _, _, _, _, _, spellID = select(4, UnitDebuff("player", i))
+		if spellID == 36032 then
+			ArcaneChargeBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+			ArcaneChargeBar:RegisterEvent("PLAYER_REGEN_ENABLED")
+			ArcaneChargeBar:RegisterEvent("PLAYER_ENTERING_WORLD")
+			ArcaneChargeBar:SetScript("OnEvent", function(self, event)
+				if event == "PLAYER_REGEN_DISABLED" then
+					UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+				elseif event == "PLAYER_REGEN_ENABLED" then
+					UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+				elseif event == "PLAYER_ENTERING_WORLD" then
+					if not InCombatLockdown() then
+						ArcaneChargeBar:SetAlpha(0)
+					end
+				end
+			end)
+		end
+	end
 	
-	-- Shadow Effect Updates
-	ArcaneChargeBar:SetScript("OnShow", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, 12)
+	-- Energy Bar
+	local EnergyBar = CreateFrame("StatusBar", nil, self)
+	EnergyBar:Point("CENTER", AnchorFrameRessources, "CENTER", 0, 1)
+	EnergyBar:Size(203, 8)
+	EnergyBar:SetStatusBarTexture(Texture)
+	EnergyBar:SetStatusBarColor(Color.r, Color.g, Color.b)
+	EnergyBar:SetMinMaxValues(0, 100)
+
+	-- Border for EnergyBarBar
+	local EnergyBarBorder = CreateFrame("Frame", nil, EnergyBar)
+	EnergyBarBorder:SetPoint("TOPLEFT", EnergyBar, "TOPLEFT", D.Scale(-2), D.Scale(2))
+	EnergyBarBorder:SetPoint("BOTTOMRIGHT", EnergyBar, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
+	EnergyBarBorder:SetTemplate("Default")
+	EnergyBarBorder:SetFrameLevel(2)
+
+	EnergyBar.text = EnergyBar:CreateFontString(nil, "ARTWORK")
+	EnergyBar.text:SetFont(Font, 16, "THINOUTLINE")
+	EnergyBar.text:SetPoint("LEFT", EnergyBar, "RIGHT", 3, -1)
+	EnergyBar.text:SetTextColor(Color.r, Color.g, Color.b)
+
+	EnergyBar.TimeSinceLastUpdate = 0
+	EnergyBar:SetScript("OnUpdate", function(self, elapsed)
+		self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + elapsed 
+
+		if self.TimeSinceLastUpdate > 0.07 then
+			self:SetMinMaxValues(0, UnitPowerMax("player"))
+			local power = UnitPower("player")
+			self:SetValue(power)
+			if self.text then
+				self.text:SetText(power)
+			end
+			self.TimeSinceLastUpdate = 0
+		end
 	end)
 
-	ArcaneChargeBar:SetScript("OnHide", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, 4)
+	EnergyBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+	EnergyBar:RegisterEvent("PLAYER_REGEN_ENABLED")
+	EnergyBar:RegisterEvent("PLAYER_ENTERING_WORLD")
+	EnergyBar:SetScript("OnEvent", function(self, event)
+		if event == "PLAYER_REGEN_DISABLED" then
+			UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+		elseif event == "PLAYER_REGEN_ENABLED" then
+			UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+		elseif event == "PLAYER_ENTERING_WORLD" then
+			if not InCombatLockdown() then
+				EnergyBar:SetAlpha(0)
+			end
+		end
 	end)
-	
+
+	-- Register
+	self.ArcaneChargeBar = ArcaneChargeBar
+
 	-- Totem Bar (Rune of Power)
 	if C["unitframes"].TotemBar then
 		D["Colors"].totems = {
@@ -53,13 +116,13 @@ function DuffedUIUnitFrames:AddMageFeatures()
 		local TotemBar = self.Totems
 		for i = 1, 2 do
 			TotemBar[i]:ClearAllPoints()
-			TotemBar[i]:Height(8)
+			TotemBar[i]:Height(6)
 
 			if i == 1 then
-				TotemBar[i]:Width((250 / 2) - 1)
-				TotemBar[i]:SetPoint("LEFT", TotemBar, "LEFT", 0, 0)
+				TotemBar[i]:Width(100)
+				TotemBar[i]:SetPoint("LEFT", TotemBar, "LEFT", 1, 0)
 			else
-				TotemBar[i]:Width(250 / 2)
+				TotemBar[i]:Width(100)
 				TotemBar[i]:SetPoint("LEFT", TotemBar[i-1], "RIGHT", 1, 0)
 			end
 		end
@@ -67,7 +130,4 @@ function DuffedUIUnitFrames:AddMageFeatures()
 		TotemBar[3]:Hide()
 		TotemBar[4]:Hide()
 	end
-	
-	-- Register
-	self.ArcaneChargeBar = ArcaneChargeBar
 end

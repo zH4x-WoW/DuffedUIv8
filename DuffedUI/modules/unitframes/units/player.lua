@@ -240,6 +240,73 @@ function DuffedUIUnitFrames:Player()
 		}
 	end
 
+	if (C["unitframes"].TotemBar) then
+		-- Default layout of Totems match Shaman class.
+		local Bar = CreateFrame("Frame", nil, self)
+		Bar:Point("TOP", AnchorFrameRessources, "BOTTOM", 0, -2)
+		Bar:Size(202, 8)
+
+		-- Border for the experience bar
+		local TotemBorder = CreateFrame("Frame", nil, Bar)
+		TotemBorder:SetPoint("TOPLEFT", Bar, "TOPLEFT", D.Scale(-2), D.Scale(2))
+		TotemBorder:SetPoint("BOTTOMRIGHT", Bar, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
+		TotemBorder:SetTemplate("Default")
+		TotemBorder:SetFrameLevel(2)
+
+		Bar.activeTotems = 0
+		Bar.Override = DuffedUIUnitFrames.UpdateTotemOverride
+
+		Bar:SetScript("OnShow", function(self) 
+			DuffedUIUnitFrames.UpdateShadow(self, 12)
+		end)
+
+		Bar:SetScript("OnHide", function(self)
+			DuffedUIUnitFrames.UpdateShadow(self, 4)
+		end)
+		
+		-- Totem Bar
+		for i = 1, MAX_TOTEMS do
+			Bar[i] = CreateFrame("StatusBar", nil, Bar)
+			Bar[i]:Height(8)
+			Bar[i]:SetStatusBarTexture(C["medias"].Normal)
+			Bar[i]:EnableMouse(true)
+
+			if i == 1 then
+				Bar[i]:Width((250 / 4) - 2)
+				Bar[i]:Point("LEFT", Bar, "LEFT", 0, 0)
+			else
+				Bar[i]:Width((250 / 4) - 1)
+				Bar[i]:Point("LEFT", Bar[i-1], "RIGHT", 1, 0)
+			end
+
+			Bar[i]:SetBackdrop(DuffedUIUnitFrames.Backdrop)
+			Bar[i]:SetBackdropColor(0, 0, 0)
+			Bar[i]:SetMinMaxValues(0, 1)
+
+			Bar[i].bg = Bar[i]:CreateTexture(nil, "BORDER")
+			Bar[i].bg:SetAllPoints()
+			Bar[i].bg:SetTexture(C["medias"].Normal)
+			Bar[i].bg.multiplier = 0.3
+		end
+
+		Bar:RegisterEvent("PLAYER_REGEN_DISABLED")
+		Bar:RegisterEvent("PLAYER_REGEN_ENABLED")
+		Bar:RegisterEvent("PLAYER_ENTERING_WORLD")
+		Bar:SetScript("OnEvent", function(self, event)
+			if event == "PLAYER_REGEN_DISABLED" then
+				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+			elseif event == "PLAYER_REGEN_ENABLED" then
+				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+			elseif event == "PLAYER_ENTERING_WORLD" then
+				if not InCombatLockdown() then
+					Bar:SetAlpha(0)
+				end
+			end
+		end)
+	
+		self.Totems = Bar
+	end
+
 	-- Experience bar
 	if (D.MyLevel ~= MAX_PLAYER_LEVEL) then
 		local Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
@@ -267,9 +334,9 @@ function DuffedUIUnitFrames:Player()
 		ExperienceBorder:SetFrameLevel(2)
 
 		local Resting = Experience:CreateTexture(nil, "OVERLAY")
-		Resting:SetHeight(28)
-		Resting:SetWidth(28)
-		Resting:SetPoint("LEFT", -18, 76)
+		Resting:SetHeight(20)
+		Resting:SetWidth(20)
+		Resting:SetPoint("LEFT", Health, "LEFT", 2, 2)
 		Resting:SetTexture([=[Interface\CharacterFrame\UI-StateIcon]=])
 		Resting:SetTexCoord(0, 0.5, 0, 0.421875)
 

@@ -17,6 +17,7 @@ local WorldMapFrameSizeUpButton = WorldMapFrameSizeUpButton
 function Maps:WorldMapOnOpen()
 	WorldMapLevelDropDown:ClearAllPoints()
 	WorldMapLevelDropDown:SetPoint("TOPRIGHT", WorldMapShowDropDown, "BOTTOMRIGHT", 0, 6)
+	WorldMapLevelDropDown:SetTemplate("Transparent")
 	
 	WorldMapTrackQuest:SkinCheckBox()
 	WorldMapTrackQuest:ClearAllPoints()
@@ -43,13 +44,13 @@ function Maps:SkinWorldmap()
 	WorldMapFrame.Header:Size(WorldMapFrame.Backdrop:GetWidth(), 24)
 	WorldMapFrame.Header:Point("BOTTOM", WorldMapFrame, "TOP", 1, -18)
 	WorldMapFrame.Header:SetFrameLevel(WorldMapFrame:GetFrameLevel())
-	WorldMapFrame.Header:SetTemplate()
+	WorldMapFrame.Header:SetTemplate("Transparent")
 	
 	WorldMapShowDropDown:SkinDropDown()
 	WorldMapShowDropDown:ClearAllPoints()
 	WorldMapShowDropDown:SetPoint("TOPRIGHT", WorldMapFrame.Backdrop, "TOPRIGHT", 0, -6)
 	WorldMapShowDropDown:SetFrameLevel(WorldMapLevelDropDown:GetFrameLevel())
-	
+
 	WorldMapLevelDropDown:SkinDropDown()
 	
 	WorldMapFrameSizeUpButton:Kill()

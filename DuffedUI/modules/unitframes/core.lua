@@ -33,7 +33,7 @@ DuffedUIUnitFrames.Backdrop = {
 
 local AnchorFrameRessources = CreateFrame("Frame", "AnchorFrameRessources", UIParent)
 AnchorFrameRessources:Size(100, 15)
-AnchorFrameRessources:SetPoint("CENTER", UIParent, "CENTER", 0, -200)
+AnchorFrameRessources:SetPoint("CENTER", UIParent, "CENTER", 0, -220)
 AnchorFrameRessources:SetFrameStrata("TOOLTIP")
 AnchorFrameRessources:SetFrameLevel(20)
 AnchorFrameRessources:SetTemplate("Default")
@@ -379,6 +379,17 @@ function DuffedUIUnitFrames:UpdateTotemOverride(event, slot)
 	end
 end
 
+--[[D.UpdateMageClassBarVisibility = function(self)
+	local p = self:GetParent()
+	local a = p.ArcaneChargeBar
+	local r = p.RunePower
+
+	if (a and a:IsShown()) and (r and r:IsShown()) then
+		r:ClearAllPoints()
+		r:Point("BOTTOM", p, "TOP", 0, 3)
+	end
+end]]--
+
 function DuffedUIUnitFrames:CreateAuraTimer(elapsed)
 	if (self.TimeLeft) then
 		self.Elapsed = (self.Elapsed or 0) + elapsed
@@ -528,7 +539,7 @@ function DuffedUIUnitFrames:GetPartyFramesAttributes()
 	]],
 	"initial-width", C["party"].Portrait and D.Scale(162) or D.Scale(206),
 	"initial-height", C["party"].Portrait and D.Scale(24) or D.Scale(40),
-	"showSolo", true, -- uncomment this for coding
+	"showSolo", false, -- uncomment this for coding
 	"showParty", true, 
 	"showPlayer", true, 
 	"showRaid", true,
@@ -629,12 +640,12 @@ end
 
 function DuffedUIUnitFrames:CreateUnits()
 	local Player = oUF:Spawn("player")
-	Player:SetPoint("BOTTOM", UIParent, -350, 250)
+	Player:SetPoint("BOTTOM", UIParent, -300, 250)
 	Player:SetParent(Panels.PetBattleHider)
 	Player:Size(217, 43)
 
 	local Target = oUF:Spawn("target")
-	Target:SetPoint("BOTTOM", UIParent, 350, 250)
+	Target:SetPoint("BOTTOM", UIParent, 300, 250)
 	Target:SetParent(Panels.PetBattleHider)
 	Target:Size(217, 43)
 

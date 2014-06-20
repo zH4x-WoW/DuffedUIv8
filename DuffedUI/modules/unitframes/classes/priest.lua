@@ -6,37 +6,98 @@ local Class = select(2, UnitClass("player"))
 if (Class ~= "PRIEST") then return end
 
 function DuffedUIUnitFrames:AddPriestFeatures()
-	local SOBar = CreateFrame("Frame", nil, self)
-	local Shadow = self.Shadow
+	local Texture = C["medias"].Normal
+	local Font = C["medias"].Font
+	local Color = RAID_CLASS_COLORS[Class]
 	
 	-- Shadow Orbs Bar
-	SOBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-	SOBar:Size(250, 8)
-	SOBar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
-	SOBar:SetBackdropColor(0, 0, 0)
-	SOBar:SetBackdropBorderColor(0, 0, 0)
+	local SOBar = CreateFrame("Frame", nil, self)
+	SOBar:Point("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
+	SOBar:Size((66 * 3) + 7 , 10)
+	SOBar:SetTemplate("Transparent")
 
 	for i = 1, 3 do
 		SOBar[i] = CreateFrame("StatusBar", nil, SOBar)
-		SOBar[i]:Height(8)
-		SOBar[i]:SetStatusBarTexture(C["medias"].Normal)
+		SOBar[i]:Height(6)
+		SOBar[i]:SetStatusBarTexture(Texture)
 
 		if i == 1 then
-			SOBar[i]:Width((250 / 3) - 1)
-			SOBar[i]:Point("LEFT", SOBar, "LEFT", 0, 0)
+			SOBar[i]:Width(66)
+			SOBar[i]:Point("LEFT", SOBar, "LEFT", 2, 0)
 		else
-			SOBar[i]:Width((250 / 3))
+			SOBar[i]:Width(66)
 			SOBar[i]:Point("LEFT", SOBar[i-1], "RIGHT", 1, 0)
 		end
 	end
-	
-	-- Shadow Effect Updates
-	SOBar:SetScript("OnShow", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, "OnShow", -4, 12)
+
+	for i = 1, 80 do
+		local _, _, _, _, _, _, _, spellID = select(4, UnitAura("player", i))
+		if spellID == 77487 then
+			SOBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+			SOBar:RegisterEvent("PLAYER_REGEN_ENABLED")
+			SOBar:RegisterEvent("PLAYER_ENTERING_WORLD")
+			SOBar:SetScript("OnEvent", function(self, event)
+				if event == "PLAYER_REGEN_DISABLED" then
+					UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+				elseif event == "PLAYER_REGEN_ENABLED" then
+					UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+				elseif event == "PLAYER_ENTERING_WORLD" then
+					if not InCombatLockdown() then
+						SOBar:SetAlpha(0)
+					end
+				end
+			end)
+		end
+	end
+
+	-- Energy Bar
+	local EnergyBar = CreateFrame("StatusBar", nil, self)
+	EnergyBar:Point("CENTER", AnchorFrameRessources, "CENTER", 0, 3)
+	EnergyBar:Size(201, 8)
+	EnergyBar:SetStatusBarTexture(Texture)
+	EnergyBar:SetStatusBarColor(Color.r, Color.g, Color.b)
+	EnergyBar:SetMinMaxValues(0, 100)
+
+	-- Border for EnergyBarBar
+	local EnergyBarBorder = CreateFrame("Frame", nil, EnergyBar)
+	EnergyBarBorder:SetPoint("TOPLEFT", EnergyBar, "TOPLEFT", D.Scale(-2), D.Scale(2))
+	EnergyBarBorder:SetPoint("BOTTOMRIGHT", EnergyBar, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
+	EnergyBarBorder:SetTemplate("Default")
+	EnergyBarBorder:SetFrameLevel(2)
+
+	EnergyBar.text = EnergyBar:CreateFontString(nil, "ARTWORK")
+	EnergyBar.text:SetFont(Font, 16, "THINOUTLINE")
+	EnergyBar.text:SetPoint("LEFT", EnergyBar, "RIGHT", 3, 0)
+	EnergyBar.text:SetTextColor(Color.r, Color.g, Color.b)
+
+	EnergyBar.TimeSinceLastUpdate = 0
+	EnergyBar:SetScript("OnUpdate", function(self, elapsed)
+		self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + elapsed 
+
+		if self.TimeSinceLastUpdate > 0.07 then
+			self:SetMinMaxValues(0, UnitPowerMax("player"))
+			local power = UnitPower("player")
+			self:SetValue(power)
+			if self.text then
+				self.text:SetText(power)
+			end
+			self.TimeSinceLastUpdate = 0
+		end
 	end)
 
-	SOBar:SetScript("OnHide", function(self)
-		DuffedUIUnitFrames.UpdateShadow(self, "OnHide", -4, 4)
+	EnergyBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+	EnergyBar:RegisterEvent("PLAYER_REGEN_ENABLED")
+	EnergyBar:RegisterEvent("PLAYER_ENTERING_WORLD")
+	EnergyBar:SetScript("OnEvent", function(self, event)
+		if event == "PLAYER_REGEN_DISABLED" then
+			UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+		elseif event == "PLAYER_REGEN_ENABLED" then
+			UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+		elseif event == "PLAYER_ENTERING_WORLD" then
+			if not InCombatLockdown() then
+				EnergyBar:SetAlpha(0)
+			end
+		end
 	end)
 	
 	if (C["unitframes"].WeakBar) then
