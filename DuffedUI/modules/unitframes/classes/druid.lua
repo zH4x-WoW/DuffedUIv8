@@ -67,10 +67,10 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 			TotemBar[i]:Height(8)
 
 			if i == 1 then
-				TotemBar[i]:Width((250 / 3) - 1)
+				TotemBar[i]:Width(66)
 				TotemBar[i]:SetPoint("LEFT", TotemBar, "LEFT", 0, 0)
 			else
-				TotemBar[i]:Width(250 / 3)
+				TotemBar[i]:Width(66)
 				TotemBar[i]:SetPoint("LEFT", TotemBar[i-1], "RIGHT", 1, 0)
 			end
  		end

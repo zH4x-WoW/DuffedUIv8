@@ -121,28 +121,23 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 		self:Hide()
 	end)
 
-	local TotemBar = self.Totems
 	-- Totem Bar (Risen Ally - Raise Dead)
-	if (C["unitframes"].TotemBar) then
-		D["Colors"].totems[1] = {0.60, 0.40, 0}
-		
-		local TotemBar = self.Totems
-		TotemBar:ClearAllPoints()
-		TotemBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
-		
-		TotemBar[1]:ClearAllPoints()
-		TotemBar[1]:SetAllPoints()
+	local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
+	bar:SetWidth(5)
+	bar:SetHeight(28)
+	bar:Point("BOTTOMLEFT", oUF_DuffedUIPlayer, "BOTTOMRIGHT", 6, -1)
+	bar:SetStatusBarTexture(Texture)
+	bar:SetOrientation("VERTICAL")
+	bar.bg = bar:CreateTexture(nil, 'ARTWORK')
+	
+	bar.background = CreateFrame("Frame", "DuffedUIStatue", bar)
+	bar.background:SetAllPoints()
+	bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
+	bar.background:SetBackdrop(backdrop)
+	bar.background:SetBackdropColor(0, 0, 0)
+	bar.background:SetBackdropBorderColor(0,0,0)
+	bar:CreateBackdrop()
 
-		for i = 2, MAX_TOTEMS do
-			TotemBar[i]:Hide()
-		end
-		
-		TotemBar:SetScript("OnShow", function(self)
-			DuffedUIUnitFrames.UpdateShadow(self, 22)
-		end)
-		
-		TotemBar:SetScript("OnHide", function(self)
-			DuffedUIUnitFrames.UpdateShadow(self, 12)
-		end)
-	end
+	-- Register
+	self.Statue = bar
 end
