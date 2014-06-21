@@ -106,6 +106,7 @@ C["tooltips"] = {
 }
 
 C["unitframes"] = {
+	["Layout"] = 2,
 	["Enable"] = true,
 	["Smooth"] = true,
 	["CombatLog"] = true,

@@ -22,6 +22,7 @@ local UnitIsDead = UnitIsDead
 local UnitPowerType = UnitPowerType
 local Class = select(2, UnitClass("player"))
 local BossFrames = MAX_BOSS_FRAMES
+local Layout = C["unitframes"].Layout
 
 DuffedUIUnitFrames.Units = {}
 DuffedUIUnitFrames.Headers = {}
@@ -212,16 +213,6 @@ function DuffedUIUnitFrames:CheckChannel(unit, name, rank)
 	DuffedUIUnitFrames.CheckInterrupt(self, unit)
 end
 
-function DuffedUIUnitFrames:UpdateNamePosition()
-	if (self.Power.Value:GetText() and UnitIsEnemy("player", "target")) then
-		self.Name:ClearAllPoints()
-		self.Name:SetPoint("CENTER", self.Panel, "CENTER", 0, 0)
-	else
-		self.Name:ClearAllPoints()
-		self.Name:SetPoint("TOPLEFT", self.Health, "TOPLEFT", 4, 17)
-	end
-end
-
 function DuffedUIUnitFrames:PostUpdateHealth(unit, min, max)
 	if (not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit)) then
 		if (not UnitIsConnected(unit)) then
@@ -301,10 +292,6 @@ function DuffedUIUnitFrames:PostUpdatePower(unit, min, max)
 			end
 		end
 	end
-
-	if (Parent.Name and unit == "target") then
-		DuffedUIUnitFrames.UpdateNamePosition(Parent)
-	end
 end
 
 function DuffedUIUnitFrames:UpdateReputationColor(event, unit, bar)
@@ -378,17 +365,6 @@ function DuffedUIUnitFrames:UpdateTotemOverride(event, slot)
 		return Bar:PostUpdate(priorities[slot], haveTotem, name, start, duration, icon)
 	end
 end
-
---[[D.UpdateMageClassBarVisibility = function(self)
-	local p = self:GetParent()
-	local a = p.ArcaneChargeBar
-	local r = p.RunePower
-
-	if (a and a:IsShown()) and (r and r:IsShown()) then
-		r:ClearAllPoints()
-		r:Point("BOTTOM", p, "TOP", 0, 3)
-	end
-end]]--
 
 function DuffedUIUnitFrames:CreateAuraTimer(elapsed)
 	if (self.TimeLeft) then
@@ -650,14 +626,28 @@ function DuffedUIUnitFrames:CreateUnits()
 	Target:Size(217, 43)
 
 	local TargetOfTarget = oUF:Spawn("targettarget")
-	TargetOfTarget:SetPoint("TOPRIGHT", Target, "BOTTOMRIGHT", 0, -7)
 	TargetOfTarget:SetParent(Panels.PetBattleHider)
-	TargetOfTarget:Size(129, 36)
+	if (Layout == 1) then
+		TargetOfTarget:SetPoint("TOPRIGHT", Target, "BOTTOMRIGHT", 0, -7)
+		TargetOfTarget:Size(129, 36)
+	elseif (Layout == 2) then
+		TargetOfTarget:SetPoint("TOPLEFT", Target, "BOTTOMLEFT", 0, -16)
+		TargetOfTarget:Size(144, 16)
+	elseif (Layout == 3) then
+
+	end
 
 	local Pet = oUF:Spawn("pet")
 	Pet:SetParent(Panels.PetBattleHider)
-	Pet:SetPoint("TOPLEFT", Player, "BOTTOMLEFT", 0, -7)
-	Pet:Size(129, 36)
+	if (Layout == 1) then
+		Pet:SetPoint("TOPLEFT", Player, "BOTTOMLEFT", 0, -7)
+		Pet:Size(129, 36)
+	elseif (Layout == 2) then
+		Pet:SetPoint("TOPRIGHT", Player, "BOTTOMRIGHT", 0, -16)
+		Pet:Size(144, 16)
+	elseif (Layout == 3) then
+
+	end
 
 	local Focus = oUF:Spawn("focus")
 	Focus:SetPoint("RIGHT", UIParent, -450, 0)
@@ -677,7 +667,7 @@ function DuffedUIUnitFrames:CreateUnits()
 		if (i == 1) then
 			Arena[i]:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -200, 300)
 		else
-			Arena[i]:SetPoint("BOTTOM", Arena[i-1], "TOP", 0, 35)
+			Arena[i]:SetPoint("BOTTOM", Arena[i - 1], "TOP", 0, 35)
 		end
 		Arena[i]:Size(200, 29)
 	end
@@ -690,7 +680,7 @@ function DuffedUIUnitFrames:CreateUnits()
 		if (i == 1) then
 			Boss[i]:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -200, 300)
 		else
-			Boss[i]:SetPoint("BOTTOM", Boss[i-1], "TOP", 0, 35)             
+			Boss[i]:SetPoint("BOTTOM", Boss[i - 1], "TOP", 0, 35)             
 		end
 		Boss[i]:Size(200, 29)
 	end

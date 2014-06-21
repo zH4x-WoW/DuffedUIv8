@@ -3,6 +3,9 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Panels = D["Panels"]
 local Class = select(2, UnitClass("player"))
+local Layout = C["unitframes"].Layout
+local Texture = C["medias"].Normal
+local Font = C["medias"].Font
 
 function DuffedUIUnitFrames:Player()
 	self:RegisterForClicks("AnyUp")
@@ -10,15 +13,31 @@ function DuffedUIUnitFrames:Player()
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 
 	local Panel = CreateFrame("Frame", nil, self)
-	Panel:Height(17)
-	Panel:SetFrameLevel(2)
-	Panel:SetFrameStrata("MEDIUM")
+	if (Layout == (1 or 3)) then
+		Panel:Height(17)
+	elseif (Layout == 2) then
+		Panel:Size(217, 13)
+		Panel:SetTemplate("Default")
+		Panel:Point("BOTTOMLEFT", self, "BOTTOMLEFT", 0, 0)
+		Panel:SetFrameLevel(2)
+		Panel:SetFrameStrata("MEDIUM")
+	end
 
 	local Health = CreateFrame("StatusBar", nil, self)
-	Health:Height(23)
-	Health:SetPoint("TOPLEFT", 0, -16)
-	Health:SetPoint("TOPRIGHT", 0, -16)
-	Health:SetStatusBarTexture(C["medias"].Normal)
+	if (Layout == 1) then
+		Health:Height(23)
+		Health:SetPoint("TOPLEFT", 0, -16)
+		Health:SetPoint("TOPRIGHT", 0, -16)
+	elseif (Layout == 2) then
+		Health:Height(22)
+		Health:SetPoint("BOTTOMLEFT", Panel, "TOPLEFT", 2, 5)
+		Health:SetPoint("BOTTOMRIGHT", Panel, "TOPRIGHT", -2, 5)
+	elseif (Layout == 3) then
+		Health:Height(20)
+		Health:SetPoint("TOPLEFT")
+		Health:SetPoint("TOPRIGHT")
+	end
+	Health:SetStatusBarTexture(Texture)
 
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
@@ -32,7 +51,7 @@ function DuffedUIUnitFrames:Player()
 	HealthBorder:CreateShadow("Default")
 	HealthBorder:SetFrameLevel(2)
 
-	Health:FontString("Value", C["medias"].Font, 12, "THINOUTLINE")
+	Health:FontString("Value", Font, 12, "THINOUTLINE")
 	Health.Value:Point("RIGHT", Health, "RIGHT", -4, 0)
 
 	Health.frequentUpdates = true
@@ -55,14 +74,21 @@ function DuffedUIUnitFrames:Player()
 	if (C["unitframes"].Smooth) then Health.Smooth = true end
 
 	local Power = CreateFrame("StatusBar", nil, self)
-	Power:Height(2)
-	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -3)
-	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -3)
-	Power:SetStatusBarTexture(C["medias"].Normal)
+	if (Layout == 1) then
+		Power:Height(2)
+		Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -3)
+		Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -3)
+	elseif (Layout == 2) then
+		Power:Size(140, 5)
+		Power:Point("TOPRIGHT", Panel, "BOTTOMRIGHT", -2, -5)
+	elseif (Layout == 3) then
+
+	end
+	Power:SetStatusBarTexture(Texture)
 
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints()
-	Power.Background:SetTexture(C["medias"].Normal)
+	Power.Background:SetTexture(Texture)
 	Power.Background.multiplier = 0.3
 
 	-- Border for PowerBar
@@ -73,8 +99,27 @@ function DuffedUIUnitFrames:Player()
 	PowerBorder:CreateShadow("Default")
 	PowerBorder:SetFrameLevel(2)
 
-	Power:FontString("Value", C["medias"].Font, 12, "THINOUTLINE")
-	Power.Value:Point("TOPLEFT", Health, "TOPLEFT", 4, 17)
+	if (Layout == 2) then
+		local L1 = CreateFrame("Frame", nil, Power)
+		local L2 = CreateFrame("Frame", nil, L1)
+
+		L1:SetTemplate("Default")
+		L1:Size(9, 2)
+		L1:Point("RIGHT", Power, "LEFT", -3, 0)
+		L2:SetTemplate("Default")
+		L2:Size(2, 8)
+		L2:Point("BOTTOM", L1, "LEFT", 0, -1)
+	end
+
+	if (Layout == 1) then
+		Power:FontString("Value", Font, 12, "THINOUTLINE")
+		Power.Value:Point("TOPLEFT", Health, "TOPLEFT", 4, 17)
+	elseif (Layout == 2) then
+		Power:FontString("Value", Font, 10, "THINOUTLINE")
+		Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
+	elseif (Layout == 3) then
+
+	end
 
 	Power.colorPower = true
 	Power.frequentUpdates = true
@@ -88,7 +133,7 @@ function DuffedUIUnitFrames:Player()
 	Combat:SetVertexColor(0.69, 0.31, 0.31)
 
 	local Status = Health:CreateFontString(nil, "OVERLAY")
-	Status:SetFont(C["medias"].Font, 12)
+	Status:SetFont(Font, 12)
 	Status:Point("CENTER", Health, "CENTER", 0, 0)
 	Status:SetTextColor(0.69, 0.31, 0.31)
 	Status:Hide()
@@ -103,7 +148,7 @@ function DuffedUIUnitFrames:Player()
 
 	if (C["castbar"].CastBar) then
 		local CastBar = CreateFrame("StatusBar", nil, self)
-		CastBar:SetStatusBarTexture(C["medias"].Normal)
+		CastBar:SetStatusBarTexture(Texture)
 		CastBar:SetHeight(21)
 		if C["castbar"].CastBarIcon then CastBar:SetWidth(Panels.ActionBar1:GetWidth() - 32) else CastBar:SetWidth(Panels.ActionBar1:GetWidth()) end
 		CastBar:SetFrameLevel(6)
@@ -111,7 +156,7 @@ function DuffedUIUnitFrames:Player()
 
 		CastBar.Background = CastBar:CreateTexture(nil, "BORDER")
 		CastBar.Background:SetAllPoints(CastBar)
-		CastBar.Background:SetTexture(C["medias"].Normal)
+		CastBar.Background:SetTexture(Texture)
 		CastBar.Background:SetVertexColor(0.15, 0.15, 0.15)
 
 		-- Border for CastBar
@@ -123,13 +168,13 @@ function DuffedUIUnitFrames:Player()
 		CastBorder:SetFrameLevel(2)
 
 		CastBar.Time = CastBar:CreateFontString(nil, "OVERLAY")
-		CastBar.Time:SetFont(C["medias"].Font, 12, "THINOUTLINE")
+		CastBar.Time:SetFont(Font, 12, "THINOUTLINE")
 		CastBar.Time:Point("RIGHT", CastBar, "RIGHT", -4, 0)
 		CastBar.Time:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Time:SetJustifyH("RIGHT")
 
 		CastBar.Text = CastBar:CreateFontString(nil, "OVERLAY")
-		CastBar.Text:SetFont(C["medias"].Font, 12, "THINOUTLINE")
+		CastBar.Text:SetFont(Font, 12, "THINOUTLINE")
 		CastBar.Text:Point("LEFT", CastBar, "LEFT", 4, 0)
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 
@@ -147,7 +192,7 @@ function DuffedUIUnitFrames:Player()
 
 		if (C["castbar"].CastBarLatency) then
 			CastBar.SafeZone = CastBar:CreateTexture(nil, "ARTWORK")
-			CastBar.SafeZone:SetTexture(C["medias"].Normal)
+			CastBar.SafeZone:SetTexture(Texture)
 			CastBar.SafeZone:SetVertexColor(0.69, 0.31, 0.31, 0.75)
 		end
 
@@ -162,8 +207,16 @@ function DuffedUIUnitFrames:Player()
 	-- portraits
 	if C["unitframes"].CharPortrait == true then
 		local Portrait = CreateFrame("Frame", nil, self)
-		Portrait:Size(45)
-		Portrait:SetPoint("BOTTOMRIGHT", PowerBorder, "BOTTOMLEFT", -4, 2)
+		if (Layout == 1) then
+			Portrait:Size(45)
+			Portrait:SetPoint("BOTTOMRIGHT", PowerBorder, "BOTTOMLEFT", -4, 2)
+		elseif (Layout == 2) then
+			Portrait:Size(38)
+			Portrait:SetPoint("BOTTOMRIGHT", Panel, "BOTTOMLEFT", -5, 2)
+		elseif (Layout == 3) then
+			Portrait:Size()
+			Portrait:SetPoint()
+		end
 		Portrait:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 		Portrait:SetBackdropColor(0, 0, 0)
 		Portrait:CreateShadow()
@@ -184,7 +237,7 @@ function DuffedUIUnitFrames:Player()
 
 	if (C["unitframes"].CombatLog) then
 		local CombatFeedbackText = Health:CreateFontString(nil, "OVERLAY")
-		CombatFeedbackText:SetFont(C["medias"].Font, 14, "OUTLINE")
+		CombatFeedbackText:SetFont(Font, 12, "OUTLINE")
 		CombatFeedbackText:SetPoint("CENTER", 0, 1)
 		CombatFeedbackText.colors = {
 			DAMAGE = {0.69, 0.31, 0.31},
@@ -211,7 +264,7 @@ function DuffedUIUnitFrames:Player()
 		FirstBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		FirstBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		FirstBar:SetWidth(250)
-		FirstBar:SetStatusBarTexture(C["medias"].Normal)
+		FirstBar:SetStatusBarTexture(Texture)
 		FirstBar:SetStatusBarColor(0, 0.3, 0.15, 1)
 		FirstBar:SetMinMaxValues(0,1)
 
@@ -219,14 +272,14 @@ function DuffedUIUnitFrames:Player()
 		SecondBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		SecondBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		SecondBar:SetWidth(250)
-		SecondBar:SetStatusBarTexture(C["medias"].Normal)
+		SecondBar:SetStatusBarTexture(Texture)
 		SecondBar:SetStatusBarColor(0, 0.3, 0, 1)
 
 		local ThirdBar = CreateFrame("StatusBar", nil, Health)
 		ThirdBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		ThirdBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		ThirdBar:SetWidth(250)
-		ThirdBar:SetStatusBarTexture(C["medias"].Normal)
+		ThirdBar:SetStatusBarTexture(Texture)
 		ThirdBar:SetStatusBarColor(0.3, 0.3, 0, 1)
 
 		SecondBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 1)
@@ -268,7 +321,7 @@ function DuffedUIUnitFrames:Player()
 		for i = 1, MAX_TOTEMS do
 			Bar[i] = CreateFrame("StatusBar", nil, Bar)
 			Bar[i]:Height(8)
-			Bar[i]:SetStatusBarTexture(C["medias"].Normal)
+			Bar[i]:SetStatusBarTexture(Texture)
 			Bar[i]:EnableMouse(true)
 
 			if i == 1 then
@@ -285,7 +338,7 @@ function DuffedUIUnitFrames:Player()
 
 			Bar[i].bg = Bar[i]:CreateTexture(nil, "BORDER")
 			Bar[i].bg:SetAllPoints()
-			Bar[i].bg:SetTexture(C["medias"].Normal)
+			Bar[i].bg:SetTexture(Texture)
 			Bar[i].bg.multiplier = 0.3
 		end
 
@@ -310,11 +363,11 @@ function DuffedUIUnitFrames:Player()
 	-- Experience bar
 	if (D.MyLevel ~= MAX_PLAYER_LEVEL) then
 		local Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
-		Experience:SetStatusBarTexture(C["medias"].Normal)
+		Experience:SetStatusBarTexture(Texture)
 		Experience:SetStatusBarColor(0, 0.4, 1)
 		Experience:SetOrientation("VERTICAL")
 		Experience:Size(5, Minimap:GetHeight() + 20)
-		Experience:Point("TOPLEFT", Minimap, "TOPLEFT", -11, 0)
+		Experience:Point("TOPLEFT", Minimap, "TOPLEFT", -10, 0)
 		Experience:SetFrameLevel(2)
 
 		Experience.Tooltip = true
@@ -322,7 +375,7 @@ function DuffedUIUnitFrames:Player()
 		Experience.Rested = CreateFrame("StatusBar", nil, self)
 		Experience.Rested:SetParent(Experience)
 		Experience.Rested:SetAllPoints(Experience)
-		Experience.Rested:SetStatusBarTexture(C["medias"].Normal)
+		Experience.Rested:SetStatusBarTexture(Texture)
 		Experience.Rested:SetOrientation("VERTICAL")
 		Experience.Rested:SetStatusBarColor(1, 0, 1, 0.3)
 
@@ -347,10 +400,10 @@ function DuffedUIUnitFrames:Player()
 	-- Reputation bar
 	if (D.MyLevel == MAX_PLAYER_LEVEL) then
 		local Reputation = CreateFrame("StatusBar", self:GetName().."_Reputation", self)
-		Reputation:SetStatusBarTexture(C["medias"].Normal)
+		Reputation:SetStatusBarTexture(Texture)
 		Reputation:SetOrientation("VERTICAL")
 		Reputation:Size(5, Minimap:GetHeight() + 20)
-		Reputation:Point("TOPLEFT", Minimap, "TOPLEFT", -12, 0)
+		Reputation:Point("TOPLEFT", Minimap, "TOPLEFT", -10, 0)
 		Reputation:SetFrameLevel(2)
 
 		-- Border for the experience bar

@@ -1,6 +1,9 @@
 local D, C, L = select(2, ...):unpack()
 
 local DuffedUIUnitFrames = D["UnitFrames"]
+local Layout = C["unitframes"].Layout
+local Texture = C["medias"].Normal
+local Font = C["medias"].Font
 
 function DuffedUIUnitFrames:TargetOfTarget()
 	self:RegisterForClicks("AnyUp")
@@ -8,10 +11,17 @@ function DuffedUIUnitFrames:TargetOfTarget()
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 	
 	local Health = CreateFrame("StatusBar", nil, self)
-	Health:Height(16)
-	Health:SetPoint("TOPLEFT")
-	Health:SetPoint("TOPRIGHT")
-	Health:SetStatusBarTexture(C["medias"].Normal)
+	if (Layout == 1) then
+		Health:Height(16)
+		Health:SetPoint("TOPLEFT")
+		Health:SetPoint("TOPRIGHT")
+	elseif (Layout == 2) then
+		Health:SetPoint("TOPLEFT", 2, -2)
+		Health:SetPoint("BOTTOMRIGHT", -2, 2)
+	elseif (Layout == 3) then
+
+	end
+	Health:SetStatusBarTexture(Texture)
 	
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:Point("TOPLEFT", Health, -1, 1)
@@ -45,39 +55,42 @@ function DuffedUIUnitFrames:TargetOfTarget()
 	
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER", Health, "CENTER", 0, 0)
-	Name:SetFont(C["medias"].Font, 12, "THINOUTLINE")
+	Name:SetFont(Font, 12, "THINOUTLINE")
 	Name:SetJustifyH("CENTER")
 
-	-- portraits
-	local Portrait = CreateFrame("Frame", nil, self)
-	Portrait:Size(16)
-	Portrait:SetPoint("BOTTOMLEFT", HealthBorder, "BOTTOMRIGHT", 4, 2)
-	Portrait:SetBackdrop(DuffedUIUnitFrames.Backdrop)
-	Portrait:SetBackdropColor(0, 0, 0)
-	Portrait:CreateShadow()
-	
-	Portrait.Model = CreateFrame("PlayerModel", nil, Portrait)
-	Portrait.Model:SetInside(Portrait, 1, 1)
+	if (Layout == 1) then
+		-- Portraits
+		local Portrait = CreateFrame("Frame", nil, self)
+		Portrait:Size(16)
+		Portrait:SetPoint("BOTTOMLEFT", HealthBorder, "BOTTOMRIGHT", 4, 2)
+		Portrait:SetBackdrop(DuffedUIUnitFrames.Backdrop)
+		Portrait:SetBackdropColor(0, 0, 0)
+		Portrait:CreateShadow()
+		
+		Portrait.Model = CreateFrame("PlayerModel", nil, Portrait)
+		Portrait.Model:SetInside(Portrait, 1, 1)
 
-	-- Border for Portrait
-	local PortraitBorder = CreateFrame("Frame", nil, Portrait)
-	PortraitBorder:SetPoint("TOPLEFT", Portrait, "TOPLEFT", D.Scale(-2), D.Scale(2))
-	PortraitBorder:SetPoint("BOTTOMRIGHT", Portrait, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
-	PortraitBorder:SetTemplate("Default")
-	PortraitBorder:CreateShadow("Default")
-	PortraitBorder:SetFrameLevel(2)
-	
-	self.Portrait = Portrait.Model
+		-- Border for Portrait
+		local PortraitBorder = CreateFrame("Frame", nil, Portrait)
+		PortraitBorder:SetPoint("TOPLEFT", Portrait, "TOPLEFT", D.Scale(-2), D.Scale(2))
+		PortraitBorder:SetPoint("BOTTOMRIGHT", Portrait, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
+		PortraitBorder:SetTemplate("Default")
+		PortraitBorder:CreateShadow("Default")
+		PortraitBorder:SetFrameLevel(2)
+		
+		self.Portrait = Portrait.Model
 
-	Line1 = CreateFrame("Frame", nil, Health)
-	Line1:SetTemplate("Default")
-	Line1:Size(13, 2)
-	Line1:Point("RIGHT", Health, "LEFT", -3, 0)
-	
-	Line2 = CreateFrame("Frame", nil, Health)
-	Line2:SetTemplate("Default")
-	Line2:Size(2, 12)
-	Line2:Point("BOTTOM", Line1, "LEFT", 0, -1)
+		-- Lines
+		Line1 = CreateFrame("Frame", nil, Health)
+		Line1:SetTemplate("Default")
+		Line1:Size(13, 2)
+		Line1:Point("RIGHT", Health, "LEFT", -3, 0)
+		
+		Line2 = CreateFrame("Frame", nil, Health)
+		Line2:SetTemplate("Default")
+		Line2:Size(2, 12)
+		Line2:Point("BOTTOM", Line1, "LEFT", 0, -1)
+	end
 	
 	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameMedium] [DuffedUI:DiffColor][level]")
 	self.Health = Health
