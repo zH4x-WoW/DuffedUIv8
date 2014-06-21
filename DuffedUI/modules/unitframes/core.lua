@@ -527,6 +527,12 @@ end
 
 function DuffedUIUnitFrames:GetRaidFramesAttributes()
 	local Properties = C["party"].Enable and "custom [@raid6,exists] hide;show" or "solo, party, raid"
+	local pointG = "LEFT"
+	local capG = "BOTTOM"
+	if C["raid"].GridVertical then
+		pointG = "BOTTOM"
+		capG = "LEFT"
+	end
 	
 	return
 	"DuffedUIRaid", 
@@ -537,25 +543,32 @@ function DuffedUIUnitFrames:GetRaidFramesAttributes()
 		self:SetWidth(header:GetAttribute("initial-width"))
 		self:SetHeight(header:GetAttribute("initial-height"))
 	]],
-	"initial-width", D.Scale(66),
-	"initial-height", D.Scale(50),
+	"initial-width", D.Scale(C["raid"].FrameWidth * C["raid"].GridScale),
+	"initial-height", D.Scale(C["raid"].FrameHeight * C["raid"].GridScale),
 	"showParty", false,
 	"showRaid", true,
 	"showPlayer", true,
-	"showSolo", false,
-	"xoffset", D.Scale(3),
-	"yOffset", D.Scale(-3),
-	"point", "TOP",
+	"showSolo", true,
+	"xoffset", D.Scale(8),
+	"yOffset", D.Scale(1),
 	"groupFilter", "1,2,3,4,5,6,7,8",
 	"groupingOrder", "1,2,3,4,5,6,7,8",
 	"groupBy", "GROUP",
-	"maxColumns", math.ceil(40/10),
-	"unitsPerColumn", 10,
-	"columnSpacing", D.Scale(3),
-	"columnAnchorPoint", "LEFT"
+	"maxColumns", 8,
+	"unitsPerColumn", 5,
+	"columnSpacing", D.Scale(C["raid"].ColumnSpacing),
+	"point", pointG,
+	"columnAnchorPoint", capG
 end
 
 function DuffedUIUnitFrames:GetPetRaidFramesAttributes()
+	local pointG = "LEFT"
+	local capG = "BOTTOM"
+	if C["raid"].GridVertical then
+		pointG = "BOTTOM"
+		capG = "LEFT"
+	end
+
 	return
 	"DuffedUIRaidPet", 
 	"SecureGroupPetHeaderTemplate", 
@@ -564,15 +577,15 @@ function DuffedUIUnitFrames:GetPetRaidFramesAttributes()
 	"showParty", false,
 	"showRaid", true,
 	"showSolo", false,
-	"maxColumns", math.ceil(40/10),
-	"point", "TOP",
-	"unitsPerColumn", 10,
-	"columnSpacing", D.Scale(4),
-	"columnAnchorPoint", "LEFT",
-	"yOffset", D.Scale(-4),
-	"xOffset", D.Scale(4),
-	"initial-width", D.Scale(66),
-	"initial-height", D.Scale(50),
+	"maxColumns", 8,
+	"point", pointG,
+	"unitsPerColumn", 5,
+	"columnSpacing", D.Scale(C["raid"].ColumnSpacing),
+	"columnAnchorPoint", capG,
+	"yOffset", D.Scale(8),
+	"xOffset", D.Scale(1),
+	"initial-width", D.Scale(C["raid"].FrameWidth),
+	"initial-height", D.Scale(C["raid"].FrameHeight),
 	"oUF-initialConfigFunction", [[
 		local header = self:GetParent()
 		self:SetWidth(header:GetAttribute("initial-width"))
@@ -709,11 +722,17 @@ function DuffedUIUnitFrames:CreateUnits()
 	if C["raid"].Enable then
 		local Raid = oUF:SpawnHeader(DuffedUIUnitFrames:GetRaidFramesAttributes())
 		Raid:SetParent(Panels.PetBattleHider)
-		Raid:Point("TOPLEFT", UIParent, "TOPLEFT", 18, -(D.ScreenHeight / 9))
+		if C["chat"].lBackground then
+			Raid:Point("BOTTOMLEFT", Panels.LeftChatBackground, "TOPLEFT", 2, 0)
+		else
+			Raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 23)
+		end
 
-		local Pet = oUF:SpawnHeader(DuffedUIUnitFrames:GetPetRaidFramesAttributes())
-		Pet:SetParent(Panels.PetBattleHider)
-		Pet:Point("TOPLEFT", Raid, "TOPRIGHT", 3, 0)
+		if C["raid"].RaidPets then
+			local Pet = oUF:SpawnHeader(DuffedUIUnitFrames:GetPetRaidFramesAttributes())
+			Pet:SetParent(Panels.PetBattleHider)
+			Pet:Point("TOPLEFT", Raid, "TOPRIGHT", 3, 0)
+		end
 		
 		DuffedUIUnitFrames.Headers.Raid = Raid
 		DuffedUIUnitFrames.Headers.RaidPet = Pet

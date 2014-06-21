@@ -98,6 +98,12 @@ C["party"] = {
 
 C["raid"] = {
 	["Enable"] = true,
+	["RaidPets"] = true,
+	["GridVertical"] = false,
+	["ColumnSpacing"] = 1,
+	["FrameWidth"] = 65,
+	["FrameHeight"] = 42,
+	["GridScale"] = 1,
 }
 
 C["tooltips"] = {

@@ -9,26 +9,38 @@ function DuffedUIUnitFrames:Raid()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self:SetBackdrop(DuffedUIUnitFrames.Backdrop)
-	self:SetBackdropColor(0, 0, 0)
-	self:CreateShadow()
-	
+
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
-	Health:Height(28)
+	Health:Height(30 * C["raid"].GridScale)
 	Health:SetStatusBarTexture(C["medias"].Normal)
 	Health:SetOrientation("VERTICAL")
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
+
 	Health.frequentUpdates = true
-	Health.colorClass = true
-	Health.colorDisconnected = true
-	Health.colorReaction = true
-	if (C["unitframes"].Smooth) then
-		Health.Smooth = true
+	if C["unitframes"].UniColor then
+		Health.colorClass = false
+		Health.colorDisconnected = false
+		Health.colorReaction = false
+		Health:SetStatusBarColor(unpack(C["unitframes"].HealthBarColor))
+		Health.Background:SetVertexColor(unpack(C["unitframes"].HealthBGColor))
+	else
+		Health.colorClass = true
+		Health.colorDisconnected = true
+		Health.colorReaction = true
 	end
+	if (C["unitframes"].Smooth) then Health.Smooth = true end
+
+	-- Border for HealthBar
+	local HealthBorder = CreateFrame("Frame", nil, Health)
+	HealthBorder:SetPoint("TOPLEFT", Health, "TOPLEFT", D.Scale(-2), D.Scale(2))
+	HealthBorder:SetPoint("BOTTOMRIGHT", Health, "BOTTOMRIGHT", D.Scale(2), D.Scale(-6))
+	HealthBorder:SetTemplate("Default")
+	HealthBorder:CreateShadow("Default")
+	HealthBorder:SetFrameLevel(2)
 	
 	-- Power
 	local Power = CreateFrame("StatusBar", nil, self)
@@ -41,21 +53,12 @@ function DuffedUIUnitFrames:Raid()
 	Power.Background.multiplier = 0.3
 	Power:SetStatusBarTexture(C["medias"].Normal)
 	Power.frequentUpdates = true
-	Power.colorPower = true
-	if (C["unitframes"].Smooth) then
-		Health.Smooth = true
-	end
+	if C["unitframes"].UnitColor then Power.colorClass = true else Power.colorPower = true end
+	if (C["unitframes"].Smooth) then Health.Smooth = true end
 	
-	local Panel = CreateFrame("Frame", nil, self)
-	Panel:Point("TOPLEFT", Power, "BOTTOMLEFT", 0, -1)
-	Panel:Point("TOPRIGHT", Power, "BOTTOMRIGHT", 0, -1)
-	Panel:SetPoint("BOTTOM", 0, 0)
-	Panel:SetTemplate()
-	Panel:SetBackdropBorderColor(C["medias"].BorderColor[1] * 0.7, C["medias"].BorderColor[2] * 0.7, C["medias"].BorderColor[3] * 0.7)
-	
-	local Name = Panel:CreateFontString(nil, "OVERLAY")
+	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER")
-	Name:SetFont(C["medias"].AltFont, 12)
+	Name:SetFont(C["medias"].Font, 12)
 	
 	local ReadyCheck = Power:CreateTexture(nil, "OVERLAY")
 	ReadyCheck:Height(12)
@@ -79,6 +82,7 @@ function DuffedUIUnitFrames:Raid()
 	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameShort]")
 	self.Health = Health
 	self.Health.bg = Health.Background
+	self.HealthBorder = HealthBorder
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.Panel = Panel
