@@ -634,7 +634,8 @@ function DuffedUIUnitFrames:CreateUnits()
 		TargetOfTarget:SetPoint("TOPLEFT", Target, "BOTTOMLEFT", 0, -16)
 		TargetOfTarget:Size(144, 16)
 	elseif (Layout == 3) then
-
+		TargetOfTarget:SetPoint("TOPRIGHT", Target, "BOTTOMLEFT", 0, -2)
+		TargetOfTarget:Size(129, 36)
 	end
 
 	local Pet = oUF:Spawn("pet")
@@ -646,7 +647,8 @@ function DuffedUIUnitFrames:CreateUnits()
 		Pet:SetPoint("TOPRIGHT", Player, "BOTTOMRIGHT", 0, -16)
 		Pet:Size(144, 16)
 	elseif (Layout == 3) then
-
+		Pet:SetPoint("TOPLEFT", Player, "BOTTOMRIGHT", 0, -2)
+		Pet:Size(129, 36)
 	end
 
 	local Focus = oUF:Spawn("focus")

@@ -12,7 +12,7 @@ function DuffedUIUnitFrames:Target()
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 
 	local Panel = CreateFrame("Frame", nil, self)
-	if (Layout == (1 or 3)) then
+	if (Layout == 1) then
 		Panel:Height(17)
 	elseif (Layout == 2) then
 		Panel:Size(217, 13)
@@ -20,6 +20,11 @@ function DuffedUIUnitFrames:Target()
 		Panel:Point("BOTTOMLEFT", self, "BOTTOMLEFT", 0, 0)
 		Panel:SetFrameLevel(2)
 		Panel:SetFrameStrata("MEDIUM")
+	elseif (Layout == 3) then
+		Panel:SetTemplate("Default")
+		Panel:Size(217, 21)
+		Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
+		Panel:SetAlpha(0)
 	end
 
 	local Health = CreateFrame("StatusBar", nil, self)
@@ -51,7 +56,11 @@ function DuffedUIUnitFrames:Target()
 	HealthBorder:SetFrameLevel(2)
 
 	Health:FontString("Value", Font, 12, "THINOUTLINE")
-	Health.Value:Point("LEFT", Health, "LEFT", 4, 0)
+	if (Layout == (1 or 2)) then
+		Health.Value:Point("LEFT", Health, "LEFT", 4, 0)
+	elseif (Layout == 3) then
+		Health.Value:Point("RIGHT", Health, "RIGHT", -4, 0)
+	end
 
 	Health.frequentUpdates = true
 	if C["unitframes"].UniColor == true then
@@ -72,6 +81,15 @@ function DuffedUIUnitFrames:Target()
 
 	if (C["unitframes"].Smooth) then Health.Smooth = true end
 
+	if C["unitframes"].Percent then
+		local percHP
+		percHP = D.SetFontString(Health, Font, 20, "THINOUTLINE")
+		percHP:SetTextColor(unpack(C["medias"].PrimaryDataTextColor))
+		percHP:SetPoint("RIGHT", Health, "LEFT", -25, -10)
+		self:Tag(percHP, "[DuffedUI:perchp]")
+		self.percHP = percHP
+	end
+
 	local Power = CreateFrame("StatusBar", nil, self)
 	if (Layout == 1) then
 		Power:Height(2)
@@ -81,7 +99,12 @@ function DuffedUIUnitFrames:Target()
 		Power:Size(140, 5)
 		Power:Point("TOPLEFT", Panel, "BOTTOMLEFT", 2, -5)
 	elseif (Layout == 3) then
-
+		Power:Size(228, 18)
+		Power:Point("TOP", Health, "BOTTOM", 2, 9)
+		Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 5, -2)
+		Power:SetStatusBarTexture(Texture)
+		Power:SetFrameLevel(Health:GetFrameLevel() + 2)
+		Power:SetFrameStrata("BACKGROUND")
 	end
 	Power:SetStatusBarTexture(Texture)
 
@@ -112,9 +135,15 @@ function DuffedUIUnitFrames:Target()
 
 	Power:FontString("Value", Font, 12, "THINOUTLINE")
 	Power.Value:Point("RIGHT", Health, "RIGHT", -4, 0)
+	if (Layout == 3) then Power.Value:Hide() end
 
-	Power.colorPower = true
 	Power.frequentUpdates = true
+	if C["unitframes"].UniColor then
+		Power.colorTapping = true
+		Power.colorClass = true
+	else
+		Power.colorPower = true
+	end
 	Power.colorDisconnected = true
 
 	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
@@ -125,7 +154,7 @@ function DuffedUIUnitFrames:Target()
 	Combat:SetVertexColor(0.69, 0.31, 0.31)
 
 	local Status = Health:CreateFontString(nil, "OVERLAY")
-	Status:SetFont(C["medias"].AltFont, 12)
+	Status:SetFont(Font, 12)
 	Status:Point("CENTER", Health, "CENTER", 0, 0)
 	Status:SetTextColor(0.69, 0.31, 0.31)
 	Status:Hide()
@@ -200,8 +229,9 @@ function DuffedUIUnitFrames:Target()
 			Portrait:Size(38)
 			Portrait:SetPoint("BOTTOMLEFT", Panel, "BOTTOMRIGHT", 5, 2)
 		elseif (Layout == 3) then
-			Portrait:Size()
-			Portrait:SetPoint()
+			Portrait:SetFrameLevel(Health:GetFrameLevel())
+			Portrait:SetAlpha(0.15)
+			Portrait:SetAllPoints(Health)
 		end
 		Portrait:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 		Portrait:SetBackdropColor(0, 0, 0)
@@ -223,7 +253,7 @@ function DuffedUIUnitFrames:Target()
 
 	if (C["unitframes"].CombatLog) then
 		local CombatFeedbackText = Health:CreateFontString(nil, "OVERLAY")
-		CombatFeedbackText:SetFont(C["medias"].AltFont, 12, "OUTLINE")
+		CombatFeedbackText:SetFont(Font, 12, "OUTLINE")
 		CombatFeedbackText:SetPoint("CENTER", 0, 1)
 		CombatFeedbackText.colors = {
 			DAMAGE = {0.69, 0.31, 0.31},
@@ -253,7 +283,8 @@ function DuffedUIUnitFrames:Target()
 		Name:Point("TOPLEFT", Panel, "TOPLEFT", 4, -1)
 		Name:SetFont(Font, 10, "THINOUTLINE")
 	elseif (Layout == 3) then
-
+		Name:Point("LEFT", Health, "LEFT", 4, 0)
+		Name:SetFont(Font, 12, "THINOUTLINE")
 	end
 	Name:SetJustifyH("LEFT")
 

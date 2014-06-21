@@ -5,6 +5,16 @@ local DuffedUIUnitFrames = D["UnitFrames"]
 local DEAD = DEAD
 local CHAT_FLAG_AFK = CHAT_FLAG_AFK
 
+oUF.Tags.Events['DuffedUI:perchp'] = 'UNIT_HEALTH'
+oUF.Tags.Methods['DuffedUI:perchp'] = function(unit)
+	local m = UnitHealthMax(unit)
+	if(m == 0) then
+		return 0
+	else
+		return math.floor(UnitHealth(unit) / m * 100 + .5).."%" -- D.panelcolor..
+	end
+end
+
 oUF.Tags.Events['DuffedUI:GetNameColor'] = 'UNIT_POWER'
 oUF.Tags.Methods['DuffedUI:GetNameColor'] = function(unit)
 	local Reaction = UnitReaction(unit, 'player')

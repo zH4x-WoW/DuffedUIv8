@@ -11,15 +11,13 @@ function DuffedUIUnitFrames:Pet()
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 	
 	local Health = CreateFrame("StatusBar", nil, self)
-	if (Layout == 1) then
+	if (Layout == 1) or (Layout == 3) then
 		Health:Height(16)
 		Health:SetPoint("TOPLEFT")
 		Health:SetPoint("TOPRIGHT")
 	elseif (Layout == 2) then
 		Health:SetPoint("TOPLEFT", 2, -2)
 		Health:SetPoint("BOTTOMRIGHT", -2, 2)
-	elseif (Layout == 3) then
-
 	end
 	Health:SetStatusBarTexture(Texture)
 	

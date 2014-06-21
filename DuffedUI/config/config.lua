@@ -106,7 +106,7 @@ C["tooltips"] = {
 }
 
 C["unitframes"] = {
-	["Layout"] = 2,
+	["Layout"] = 3,
 	["Enable"] = true,
 	["Smooth"] = true,
 	["CombatLog"] = true,
@@ -118,6 +118,7 @@ C["unitframes"] = {
 	["HealthBarColor"] = {.125, .125, .125},
 	["HealthBGColor"] = {0, 0, 0},
 	["CharPortrait"] = true,
+	["Percent"] = true,
 }
 
 C["castbar"] = {

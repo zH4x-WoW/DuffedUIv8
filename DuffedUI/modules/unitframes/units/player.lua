@@ -13,7 +13,7 @@ function DuffedUIUnitFrames:Player()
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 
 	local Panel = CreateFrame("Frame", nil, self)
-	if (Layout == (1 or 3)) then
+	if (Layout == 1) then
 		Panel:Height(17)
 	elseif (Layout == 2) then
 		Panel:Size(217, 13)
@@ -21,6 +21,11 @@ function DuffedUIUnitFrames:Player()
 		Panel:Point("BOTTOMLEFT", self, "BOTTOMLEFT", 0, 0)
 		Panel:SetFrameLevel(2)
 		Panel:SetFrameStrata("MEDIUM")
+	elseif (Layout == 3) then
+		Panel:SetTemplate("Default")
+		Panel:Size(217, 21)
+		Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
+		Panel:SetAlpha(0)
 	end
 
 	local Health = CreateFrame("StatusBar", nil, self)
@@ -73,6 +78,18 @@ function DuffedUIUnitFrames:Player()
 
 	if (C["unitframes"].Smooth) then Health.Smooth = true end
 
+	if C["unitframes"].Percent then
+		local percHP
+		percHP = D.SetFontString(Health, Font, 20, "THINOUTLINE")
+		percHP:SetTextColor(unpack(C["medias"].PrimaryDataTextColor))
+		percHP:SetPoint("LEFT", Health, "RIGHT", 25, -10)
+		--[[elseif unit == "target" then
+			percHP:SetPoint("RIGHT", health, "LEFT", -25, -10)
+		end]]--
+		self:Tag(percHP, "[DuffedUI:perchp]")
+		self.percHP = percHP
+	end
+
 	local Power = CreateFrame("StatusBar", nil, self)
 	if (Layout == 1) then
 		Power:Height(2)
@@ -82,7 +99,12 @@ function DuffedUIUnitFrames:Player()
 		Power:Size(140, 5)
 		Power:Point("TOPRIGHT", Panel, "BOTTOMRIGHT", -2, -5)
 	elseif (Layout == 3) then
-
+		Power:Size(228, 18)
+		Power:Point("TOP", Health, "BOTTOM", 2, 9)
+		Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 5, -2)
+		Power:SetStatusBarTexture(Texture)
+		Power:SetFrameLevel(Health:GetFrameLevel() + 2)
+		Power:SetFrameStrata("BACKGROUND")
 	end
 	Power:SetStatusBarTexture(Texture)
 
@@ -118,18 +140,24 @@ function DuffedUIUnitFrames:Player()
 		Power:FontString("Value", Font, 10, "THINOUTLINE")
 		Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
 	elseif (Layout == 3) then
-
+		Power:FontString("Value", Font, 12, "THINOUTLINE")
+		Power.Value:Point("LEFT", Health, "LEFT", 4, 0)
 	end
 
-	Power.colorPower = true
 	Power.frequentUpdates = true
+	if C["unitframes"].UniColor then
+		Power.colorClass = true
+	else
+		Power.colorPower = true
+	end
+	
 	Power.colorDisconnected = true
 
 	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
 
 	local Combat = Health:CreateTexture(nil, "OVERLAY")
 	Combat:Size(19, 19)
-	Combat:Point("TOPRIGHT",-4,18)
+	Combat:Point("TOP", Health, "TOPRIGHT", 0, 12)
 	Combat:SetVertexColor(0.69, 0.31, 0.31)
 
 	local Status = Health:CreateFontString(nil, "OVERLAY")
@@ -144,7 +172,7 @@ function DuffedUIUnitFrames:Player()
 
 	local MasterLooter = Health:CreateTexture(nil, "OVERLAY")
 	MasterLooter:Size(14, 14)
-	MasterLooter:Point("TOPRIGHT", -2, 8)
+	MasterLooter:Point("TOPLEFT", 18, 8)
 
 	if (C["castbar"].CastBar) then
 		local CastBar = CreateFrame("StatusBar", nil, self)
@@ -214,8 +242,9 @@ function DuffedUIUnitFrames:Player()
 			Portrait:Size(38)
 			Portrait:SetPoint("BOTTOMRIGHT", Panel, "BOTTOMLEFT", -5, 2)
 		elseif (Layout == 3) then
-			Portrait:Size()
-			Portrait:SetPoint()
+			Portrait:SetFrameLevel(Health:GetFrameLevel())
+			Portrait:SetAlpha(0.15)
+			Portrait:SetAllPoints(Health)
 		end
 		Portrait:SetBackdrop(DuffedUIUnitFrames.Backdrop)
 		Portrait:SetBackdropColor(0, 0, 0)
@@ -293,73 +322,6 @@ function DuffedUIUnitFrames:Player()
 		}
 	end
 
-	if (C["unitframes"].TotemBar) then
-		-- Default layout of Totems match Shaman class.
-		local Bar = CreateFrame("Frame", nil, self)
-		Bar:Point("TOP", AnchorFrameRessources, "BOTTOM", 0, -2)
-		Bar:Size(202, 8)
-
-		-- Border for the experience bar
-		local TotemBorder = CreateFrame("Frame", nil, Bar)
-		TotemBorder:SetPoint("TOPLEFT", Bar, "TOPLEFT", D.Scale(-2), D.Scale(2))
-		TotemBorder:SetPoint("BOTTOMRIGHT", Bar, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
-		TotemBorder:SetTemplate("Default")
-		TotemBorder:SetFrameLevel(2)
-
-		Bar.activeTotems = 0
-		Bar.Override = DuffedUIUnitFrames.UpdateTotemOverride
-
-		Bar:SetScript("OnShow", function(self) 
-			DuffedUIUnitFrames.UpdateShadow(self, 12)
-		end)
-
-		Bar:SetScript("OnHide", function(self)
-			DuffedUIUnitFrames.UpdateShadow(self, 4)
-		end)
-		
-		-- Totem Bar
-		for i = 1, MAX_TOTEMS do
-			Bar[i] = CreateFrame("StatusBar", nil, Bar)
-			Bar[i]:Height(8)
-			Bar[i]:SetStatusBarTexture(Texture)
-			Bar[i]:EnableMouse(true)
-
-			if i == 1 then
-				Bar[i]:Width((250 / 4) - 2)
-				Bar[i]:Point("LEFT", Bar, "LEFT", 0, 0)
-			else
-				Bar[i]:Width((250 / 4) - 1)
-				Bar[i]:Point("LEFT", Bar[i-1], "RIGHT", 1, 0)
-			end
-
-			Bar[i]:SetBackdrop(DuffedUIUnitFrames.Backdrop)
-			Bar[i]:SetBackdropColor(0, 0, 0)
-			Bar[i]:SetMinMaxValues(0, 1)
-
-			Bar[i].bg = Bar[i]:CreateTexture(nil, "BORDER")
-			Bar[i].bg:SetAllPoints()
-			Bar[i].bg:SetTexture(Texture)
-			Bar[i].bg.multiplier = 0.3
-		end
-
-		Bar:RegisterEvent("PLAYER_REGEN_DISABLED")
-		Bar:RegisterEvent("PLAYER_REGEN_ENABLED")
-		Bar:RegisterEvent("PLAYER_ENTERING_WORLD")
-		Bar:SetScript("OnEvent", function(self, event)
-			if event == "PLAYER_REGEN_DISABLED" then
-				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
-			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then
-					Bar:SetAlpha(0)
-				end
-			end
-		end)
-	
-		self.Totems = Bar
-	end
-
 	-- Experience bar
 	if (D.MyLevel ~= MAX_PLAYER_LEVEL) then
 		local Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
@@ -389,7 +351,11 @@ function DuffedUIUnitFrames:Player()
 		local Resting = Experience:CreateTexture(nil, "OVERLAY")
 		Resting:SetHeight(20)
 		Resting:SetWidth(20)
-		Resting:SetPoint("LEFT", Health, "LEFT", 2, 2)
+		if (Layout == 3) then
+			Resting:SetPoint("Right", Health, "LEFT", -10, 0)
+		else
+			Resting:SetPoint("LEFT", Health, "LEFT", 2, 2)
+		end
 		Resting:SetTexture([=[Interface\CharacterFrame\UI-StateIcon]=])
 		Resting:SetTexCoord(0, 0.5, 0, 0.421875)
 
