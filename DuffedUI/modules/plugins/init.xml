@@ -6,5 +6,6 @@
 	<Script file="vendor\vendor.lua"/>
 
 	<!-- Talents -->
+	<Script file="talents\classtimer.lua"/>
 	<Script file="talents\ses.lua"/>
 </Ui>

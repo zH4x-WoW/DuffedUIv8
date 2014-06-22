@@ -548,7 +548,7 @@ function DuffedUIUnitFrames:GetRaidFramesAttributes()
 	"showParty", false,
 	"showRaid", true,
 	"showPlayer", true,
-	"showSolo", true,
+	"showSolo", false,
 	"xoffset", D.Scale(8),
 	"yOffset", D.Scale(1),
 	"groupFilter", "1,2,3,4,5,6,7,8",

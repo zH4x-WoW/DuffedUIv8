@@ -38,7 +38,7 @@ C["auras"] = {
 	["Enable"] = true,
 	["Consolidate"] = false,
 	["Flash"] = true,
-	["ClassicTimer"] = false,
+	["ClassicTimer"] = true,
 	["HideBuffs"] = false,
 	["HideDebuffs"] = false,
 	["Animation"] = true,
@@ -112,7 +112,6 @@ C["tooltips"] = {
 }
 
 C["unitframes"] = {
-	["Layout"] = 3,
 	["Enable"] = true,
 	["Smooth"] = true,
 	["CombatLog"] = true,
@@ -124,6 +123,7 @@ C["unitframes"] = {
 	["HealthBarColor"] = {.125, .125, .125},
 	["HealthBGColor"] = {0, 0, 0},
 	["CharPortrait"] = true,
+	["Layout"] = 3,
 	["Percent"] = true,
 }
 
@@ -139,4 +139,18 @@ C["talent"] = {
 	["SESGearSwap"] = true,
 	["SESSet1"] = 1,
 	["SESSet2"] = 2,
+}
+
+C["classtimer"] = {
+	["Enable"] = true,
+	["TargetDebuffs"] = false,
+	["Height"] = 15,
+	["Spacing"] = 1,
+	["Spark"] = true,
+	["Separator"] = true,
+	["SeparatorColor"] = { 0, 0, 0, .5 },
+	["PlayerColor"] = {.2, .2, .2, 1 },
+	["TargetBuffColor"] = { 70/255, 150/255, 70/255, 1 },
+	["TargetDebuffColor"] = { 150/255, 30/255, 30/255, 1 },
+	["TrinketColor"] = {75/255, 75/255, 75/255, 1 },
 }
