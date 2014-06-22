@@ -4,4 +4,7 @@
 	<Script file="vendor\scan.lua"/>
 	<Script file="vendor\scroll.lua"/>
 	<Script file="vendor\vendor.lua"/>
+
+	<!-- Talents -->
+	<Script file="talents\ses.lua"/>
 </Ui>

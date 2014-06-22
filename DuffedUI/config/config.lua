@@ -132,3 +132,11 @@ C["castbar"] = {
 	["CastBarIcon"] = true,
 	["CastBarLatency"] = true,
 }
+
+C["talent"] = {
+	["SESEnable"] = true,
+	["SESEnableGear"] = true,
+	["SESGearSwap"] = true,
+	["SESSet1"] = 1,
+	["SESSet2"] = 2,
+}

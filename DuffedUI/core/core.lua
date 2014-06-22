@@ -142,3 +142,26 @@ D.Delay = function(delay, func, ...)
 	tinsert(WaitTable, {delay,func,{...}})
 	return true
 end
+
+D.CreateBtn = function(name, parent, w, h, tt_txt, txt)
+	local b = CreateFrame("Button", name, parent, "SecureActionButtonTemplate")
+	b:Width(w)
+	b:Height(h)
+	b:SetTemplate("Default")
+
+	b:SetScript("OnEnter", function(self)
+		GameTooltip:SetOwner(self, "ANCHOR_LEFT")
+		GameTooltip:AddLine(tt_txt, 1, 1, 1, 1, 1, 1)
+		GameTooltip:Show()
+	end)
+	b:SetScript("OnLeave", function(self)
+		GameTooltip:Hide()
+	end)
+
+	b.text = D.SetFontString(b, C["medias"].Font, 10, "THINOUTLINE")
+	b.text:SetText(txt) --D.panelcolor..
+	b.text:SetPoint("CENTER", b, "CENTER", 1, 0)
+	b.text:SetJustifyH("CENTER")
+	
+	b:SetAttribute("type1", "macro")
+end

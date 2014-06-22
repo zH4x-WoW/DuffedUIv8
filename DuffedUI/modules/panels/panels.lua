@@ -40,7 +40,7 @@ if C["chat"].rBackground then
 	RightChatBackground:SetFrameStrata("BACKGROUND")
 	RightChatBackground:CreateShadow()
 	
-	local RightChatTab = CreateFrame("Frame", nil, RightChatBackground)
+	local RightChatTab = CreateFrame("Frame", "RightChatTab", RightChatBackground)
 	RightChatTab:Size(206, 20)
 	RightChatTab:SetPoint("TOPLEFT", RightChatBackground, "TOPLEFT", 4, -4)
 	RightChatTab:SetTemplate()
