@@ -52,3 +52,16 @@ if C["classtimer"].TargetDebuffs then
 	ClassTimerDebuff:SetAlpha(0)
 	--tinsert(D.AllowFrameMoving, AnchorFrameClassTimerDebuff)
 end
+
+local BattleNet = CreateFrame("Frame", "AnchorFrameBNetHolder", UIParent)
+BattleNet:SetTemplate("Default")
+BattleNet:Size(BNToastFrame:GetWidth(), BNToastFrame:GetHeight())
+BattleNet:Point("TOPLEFT", UIParent, "TOPLEFT", 3, -3)
+BattleNet:SetClampedToScreen(true)
+BattleNet:SetMovable(true)
+BattleNet:SetBackdropBorderColor(1, 0, 0)
+BattleNet.text = D.SetFontString(BattleNet, C["medias"].Font, 12)
+BattleNet.text:SetPoint("CENTER")
+BattleNet.text:SetText(L.Movers.BattleNet)
+BattleNet:Hide()
+--tinsert(D.AllowFrameMoving, BattleNet)

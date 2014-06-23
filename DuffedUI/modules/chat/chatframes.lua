@@ -147,11 +147,16 @@ end
 
 function DuffedUIChat:SkinToastFrame()
 	Toast:ClearAllPoints()
-	Toast:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 3, -3)
+	Toast:SetPoint("TOPLEFT", AnchorFrameBNetHolder, "TOPLEFT", 3, -3)
 	Toast:SetTemplate("Transparent")
 	Toast:CreateShadow()
 	ToastCloseButton:SkinCloseButton()
 end
+
+BNToastFrame:HookScript("OnShow", function(self)
+	self:ClearAllPoints()
+	self:Point("TOPLEFT", AnchorFrameBNetHolder, "TOPLEFT", 3, -3)
+end)
 
 function DuffedUIChat:SetDefaultChatFramesPositions()
 	if not DuffedUIDataPerChar.Chat then DuffedUIDataPerChar.Chat = {} end

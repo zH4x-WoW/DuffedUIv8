@@ -1162,8 +1162,8 @@ local xOffset = 0
 
 local playerFrame = CreateAuraBarFrame(playerDataSource,  UIParent)
 playerFrame:SetHiddenHeight(-yOffset)
-playerFrame:Point("BOTTOMLEFT", AnchorFrameClassTimer, "TOPLEFT", 2, 4)
-playerFrame:Point("BOTTOMRIGHT", AnchorFrameClassTimer, "TOPRIGHT", -2, 4)
+playerFrame:Point("BOTTOMLEFT", AnchorFrameClassTimer, "TOPLEFT", 2, 5)
+playerFrame:Point("BOTTOMRIGHT", AnchorFrameClassTimer, "TOPRIGHT", -2, 5)
 
 local trinketFrame = CreateAuraBarFrame(trinketDataSource,  UIParent)
 trinketFrame:SetHiddenHeight(-yOffset)
