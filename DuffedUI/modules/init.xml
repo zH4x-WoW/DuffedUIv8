@@ -4,6 +4,7 @@
 
 	<!-- panels -->
 	<Script file="panels\panels.lua"/>
+	<Script file="panels\anchorframes.lua"/>
 
 	<!-- inventory -->
 	<Script file="inventory\core.lua"/>
@@ -121,4 +122,14 @@
 	<Script file="misc\threatbar.lua"/>
 	<Script file="misc\garbagecollection.lua"/>
 	<Script file="misc\dropdown.lua"/>
+
+	<!-- Vendor-Script -->
+	<Script file="plugins\vendor\gsc.lua"/>
+	<Script file="plugins\vendor\scan.lua"/>
+	<Script file="plugins\vendor\scroll.lua"/>
+	<Script file="plugins\vendor\vendor.lua"/>
+
+	<!-- Talents -->
+	<Script file="plugins\talents\classtimer.lua"/>
+	<Script file="plugins\talents\ses.lua"/>
 </Ui>

@@ -13,8 +13,6 @@ local CreateSpellEntry = function(id, castByAnyone, color, unitType, castSpellId
 	return { id = id, castByAnyone = castByAnyone, color = color, unitType = unitType or 0, castSpellId = castSpellId };
 end
 
-local Panels = D["Panels"]
-
 -- Configuration starts here:
 local targetdebuffs = C["classtimer"].targetdebuffs
 local BAR_HEIGHT = C["classtimer"].Height
@@ -512,7 +510,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(108359), -- Dark Regeneration
 			CreateSpellEntry(34936), -- Backlash
 			-- Testbuff
-			CreateSpellEntry(130609, true), --buff for testing
+			-- CreateSpellEntry(130609, true), --buff for testing
 		},
 		procs = {
 			CreateSpellEntry(86121), CreateSpellEntry(86211), -- Soul Swap
@@ -929,7 +927,7 @@ do
 			iconAnchor2 = "TOPLEFT";
 			iconOffset = -1;	
 			
-			icon:Point(iconAnchor1, result, iconAnchor2, iconOffset * -4, 3)
+			icon:Point(iconAnchor1, result, iconAnchor2, iconOffset * -5, 3)
 			icon:SetWidth(BAR_HEIGHT + 6);
 			icon:SetHeight(BAR_HEIGHT + 6);	
 
@@ -1089,7 +1087,7 @@ do
 
 	-- constructor
 	CreateAuraBarFrame = function(dataSource, parent)
-		local result = CreateFrame("Frame", nil, parent, nil);
+		local result = CreateFrame("Frame", nil, parent);
 		local unit = dataSource:GetUnit();
 		
 		result.unit = unit;
@@ -1162,24 +1160,24 @@ trinketDataSource:AddFilter(TRINKET_FILTER, TRINKET_BAR_COLOR)
 local yOffset = 7
 local xOffset = 0
 
-local playerFrame = CreateAuraBarFrame(playerDataSource, UIParent)
---playerFrame:SetHiddenHeight(-yOffset)
-playerFrame:Point("BOTTOMLEFT", oUF_DuffedUIPlayer, "TOPLEFT", 2, 7)
-playerFrame:Point("BOTTOMRIGHT", oUF_DuffedUIPlayer, "TOPRIGHT", -2, 7)
+local playerFrame = CreateAuraBarFrame(playerDataSource,  UIParent)
+playerFrame:SetHiddenHeight(-yOffset)
+playerFrame:Point("BOTTOMLEFT", AnchorFrameClassTimer, "TOPLEFT", 2, 4)
+playerFrame:Point("BOTTOMRIGHT", AnchorFrameClassTimer, "TOPRIGHT", -2, 4)
 
-local trinketFrame = CreateAuraBarFrame(trinketDataSource, UIParent)
---trinketFrame:SetHiddenHeight(-yOffset)
+local trinketFrame = CreateAuraBarFrame(trinketDataSource,  UIParent)
+trinketFrame:SetHiddenHeight(-yOffset)
 trinketFrame:Point("BOTTOMLEFT", playerFrame, "TOPLEFT", 0, yOffset)
 trinketFrame:Point("BOTTOMRIGHT", playerFrame, "TOPRIGHT", 0, yOffset)
 	
 if not targetdebuffs then
-	local targetFrame = CreateAuraBarFrame(targetDataSource, UIParent)
+	local targetFrame = CreateAuraBarFrame(targetDataSource,  UIParent)
 	targetFrame:SetHiddenHeight(-yOffset)
 	targetFrame:Point("BOTTOMLEFT", trinketFrame, "TOPLEFT", 0, yOffset)
 	targetFrame:Point("BOTTOMRIGHT", trinketFrame, "TOPRIGHT", 0, yOffset)
 else
 	local targetFrame = CreateAuraBarFrame(targetDataSource, UIParent)
 	targetFrame:SetHiddenHeight(-yOffset)
-	targetFrame:Point("BOTTOMLEFT", oUF_DuffedUITarget, "TOPLEFT", 0, 0)
-	targetFrame:Point("BOTTOMRIGHT", oUF_DuffedUITarget, "TOPRIGHT", 0, 20)
+	targetFrame:Point("BOTTOMLEFT", AnchorFrameClassTimerDebuff, "TOPLEFT", 0, 4)
+	targetFrame:Point("BOTTOMRIGHT", AnchorFrameClassTimerDebuff, "TOPRIGHT", 0, 4)
 end

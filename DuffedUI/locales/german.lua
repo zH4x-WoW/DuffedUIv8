@@ -127,6 +127,8 @@ L.Movers = {} -- Action Bars Locales
 
 L.Movers.Extrabutton = "Move Extrabutton"
 L.Movers.Ressources = "Move Ressourcebar"
+L.Movers.ClassTimer = "Move ClassTimer"
+L.Movers.ClassTimerDebuff = "Move Target Debuffs"
 
 ------------------------------------------------
 L.Install = {} -- Installation of DuffedUI

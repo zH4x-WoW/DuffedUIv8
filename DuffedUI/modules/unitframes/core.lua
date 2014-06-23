@@ -32,23 +32,6 @@ DuffedUIUnitFrames.Backdrop = {
 	insets = {top = -D.Mult, left = -D.Mult, bottom = -D.Mult, right = -D.Mult},
 }
 
-local AnchorFrameRessources = CreateFrame("Frame", "AnchorFrameRessources", UIParent)
-AnchorFrameRessources:Size(100, 15)
-AnchorFrameRessources:SetPoint("CENTER", UIParent, "CENTER", 0, -220)
-AnchorFrameRessources:SetFrameStrata("TOOLTIP")
-AnchorFrameRessources:SetFrameLevel(20)
-AnchorFrameRessources:SetTemplate("Default")
-AnchorFrameRessources:SetBackdropColor(0, 0, 0)
-AnchorFrameRessources:SetBackdropBorderColor(1, 0, 0)
-AnchorFrameRessources.Text = D.SetFontString(AnchorFrameRessources, C["medias"].Font, 12)
-AnchorFrameRessources.Text:SetText(L.Movers.Ressources)
-AnchorFrameRessources.Text:SetPoint("CENTER")
-AnchorFrameRessources:SetMovable(true)
-AnchorFrameRessources:SetUserPlaced(true)
-AnchorFrameRessources:SetClampedToScreen(true)
-AnchorFrameRessources:Hide()
---tinsert(D.AllowFrameMoving, AnchorFrameRessources)
-
 function DuffedUIUnitFrames:DisableBlizzard()
 	for i = 1, MAX_BOSS_FRAMES do
 		local Boss = _G["Boss"..i.."TargetFrame"]
