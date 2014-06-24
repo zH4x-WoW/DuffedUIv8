@@ -1,6 +1,8 @@
 local D, C, L = select(2, ...):unpack()
 
 local DuffedUIUnitFrames = D["UnitFrames"]
+local Texture = C["medias"].Normal
+local Font = C["medias"].Font
 
 function DuffedUIUnitFrames:Arena()
 	self:RegisterForClicks("AnyUp")
@@ -12,7 +14,7 @@ function DuffedUIUnitFrames:Arena()
 	Health:Height(22)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
-	Health:SetStatusBarTexture(C["medias"].Normal)
+	Health:SetStatusBarTexture(Texture)
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
@@ -24,7 +26,7 @@ function DuffedUIUnitFrames:Arena()
 	HealthBorder:CreateShadow("Default")
 	HealthBorder:SetFrameLevel(2)
 
-	Health:FontString("Value", C["medias"].Font, 12, "OUTLINE")
+	Health:FontString("Value", Font, 12, "OUTLINE")
 	Health.Value:Point("LEFT", 2, 0)
 
 	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
@@ -49,12 +51,12 @@ function DuffedUIUnitFrames:Arena()
 	Power:Height(3)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 85, 0)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", -9, -3)
-	Power:SetStatusBarTexture(C["medias"].Normal)
+	Power:SetStatusBarTexture(Texture)
 	Power:SetFrameLevel(Health:GetFrameLevel() + 1)
 
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints(Power)
-	Power.Background:SetTexture(C["medias"].Normal)
+	Power.Background:SetTexture(Texture)
 	Power.Background.multiplier = 0.3
 	
 	local PowerBorder = CreateFrame("Frame", nil, Power)
@@ -64,7 +66,7 @@ function DuffedUIUnitFrames:Arena()
 	PowerBorder:CreateShadow("Default")
 	PowerBorder:SetFrameLevel(Health:GetFrameLevel() + 1)
 
-	Power:FontString("Value", C["medias"].Font, 12, "OUTLINE")
+	Power:FontString("Value", Font, 12, "OUTLINE")
 	Power.Value:Point("RIGHT", -2, 0)
 
 	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
@@ -76,7 +78,7 @@ function DuffedUIUnitFrames:Arena()
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER", Health, "CENTER", 0, 0)
 	Name:SetJustifyH("CENTER")
-	Name:SetFont(C["medias"].Font, 12, "OUTLINE")
+	Name:SetFont(Font, 12, "OUTLINE")
 	Name:SetShadowColor(0, 0, 0)
 	Name:SetShadowOffset(1.25, -1.25)
 	Name.frequentUpdates = 0.2
@@ -110,37 +112,32 @@ function DuffedUIUnitFrames:Arena()
 	CastBar:SetPoint("RIGHT", -2, 0)
 	CastBar:SetPoint("BOTTOM", 0, -22)
 	CastBar:SetHeight(10)
-	CastBar:SetStatusBarTexture(C["medias"].Normal)
+	CastBar:SetStatusBarTexture(Texture)
 	CastBar:SetFrameLevel(6)
-	CastBar.Background = CreateFrame("Frame", nil, CastBar)
-	CastBar.Background:SetTemplate("Default")
-	CastBar.Background:SetBackdropBorderColor(C["medias"].BorderColor[1] * 0.7, C["medias"].BorderColor[2] * 0.7, C["medias"].BorderColor[3] * 0.7)
-	CastBar.Background:Point("TOPLEFT", -2, 2)
-	CastBar.Background:Point("BOTTOMRIGHT", 2, -2)
-	CastBar.Background:SetFrameLevel(5)
+	
+	CastBar.Background = CastBar:CreateTexture(nil, "BORDER")
+	CastBar.Background:SetAllPoints(CastBar)
+	CastBar.Background:SetTexture(Texture)
+	CastBar.Background:SetVertexColor(0.15, 0.15, 0.15)
 	
 	local CastBarBorder = CreateFrame("Frame", nil, CastBar)
 	CastBarBorder:SetPoint("TOPLEFT", CastBar, "TOPLEFT", D.Scale(-2), D.Scale(2))
 	CastBarBorder:SetPoint("BOTTOMRIGHT", CastBar, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 	CastBarBorder:SetTemplate("Default")
 	CastBarBorder:CreateShadow("Default")
+	CastBarBorder:SetFrameLevel(CastBar:GetFrameLevel() - 1)
 	
 	CastBar.Time = CastBar:CreateFontString(nil, "OVERLAY")
-	CastBar.Time:SetFont(C["medias"].Font, 12)
+	CastBar.Time:SetFont(Font, 12)
 	CastBar.Time:Point("RIGHT", CastBar, "RIGHT", -4, 0)
 	CastBar.Time:SetTextColor(0.84, 0.75, 0.65)
 	CastBar.Time:SetJustifyH("RIGHT")
-	CastBar.CustomTimeText = DuffedUIUnitFrames.CustomCastTimeText
 
 	CastBar.Text = CastBar:CreateFontString(nil, "OVERLAY")
-	CastBar.Text:SetFont(C["medias"].Font, 12)
+	CastBar.Text:SetFont(Font, 12)
 	CastBar.Text:Point("LEFT", CastBar, "LEFT", 4, 0)
 	CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 	
-	CastBar.CustomDelayText = DuffedUIUnitFrames.CustomCastDelayText
-	CastBar.PostCastStart = DuffedUIUnitFrames.CheckCast
-	CastBar.PostChannelStart = DuffedUIUnitFrames.CheckChannel
-							
 	CastBar.Button = CreateFrame("Frame", nil, CastBar)
 	CastBar.Button:Height(CastBar:GetHeight() + 4)
 	CastBar.Button:Width(CastBar:GetHeight() + 4)
@@ -152,6 +149,11 @@ function DuffedUIUnitFrames:Arena()
 	CastBar.Icon:Point("TOPLEFT", CastBar.Button, 2, -2)
 	CastBar.Icon:Point("BOTTOMRIGHT", CastBar.Button, -2, 2)
 	CastBar.Icon:SetTexCoord(unpack(D.IconCoord))
+	
+	CastBar.CustomTimeText = DuffedUIUnitFrames.CustomCastTimeText
+	CastBar.CustomDelayText = DuffedUIUnitFrames.CustomCastDelayText
+	CastBar.PostCastStart = DuffedUIUnitFrames.CheckCast
+	CastBar.PostChannelStart = DuffedUIUnitFrames.CheckChannel
 	
 	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong]")
 	self.Health = Health

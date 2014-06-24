@@ -94,6 +94,7 @@ C["nameplates"] = {
 C["party"] = {
 	["Enable"] = true,
 	["Portrait"] = true,
+	["BuffsEnable"] = false,
 }
 
 C["raid"] = {

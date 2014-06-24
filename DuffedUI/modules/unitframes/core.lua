@@ -487,6 +487,9 @@ function DuffedUIUnitFrames:Update()
 end
 
 function DuffedUIUnitFrames:GetPartyFramesAttributes()
+	local Offset = -46
+	if not C["party"].BuffsEnable then Offset = -13 end
+	
 	return
 	"DuffedUIParty",
 	nil,
@@ -496,16 +499,16 @@ function DuffedUIUnitFrames:GetPartyFramesAttributes()
 		self:SetWidth(header:GetAttribute("initial-width"))
 		self:SetHeight(header:GetAttribute("initial-height"))
 	]],
-	"initial-width", C["party"].Portrait and D.Scale(162) or D.Scale(206),
-	"initial-height", C["party"].Portrait and D.Scale(24) or D.Scale(40),
-	"showSolo", false, -- uncomment this for coding
+	"initial-width", D.Scale(162),
+	"initial-height", D.Scale(24),
+	--"showSolo", true, -- uncomment this for coding
 	"showParty", true, 
 	"showPlayer", true, 
 	"showRaid", true,
 	"groupFilter", "1,2,3,4,5,6,7,8", 
 	"groupingOrder", "1,2,3,4,5,6,7,8", 
 	"groupBy", "GROUP", 
-	"yOffset", D.Scale(-66)	
+	"yOffset", Offset	
 end
 
 function DuffedUIUnitFrames:GetRaidFramesAttributes()
@@ -693,11 +696,9 @@ function DuffedUIUnitFrames:CreateUnits()
 	DuffedUIUnitFrames.Units.Boss = Boss
 	
 	if C["party"].Enable then
-		local Gap = C["party"].Portrait and 74 or 30
-		
 		local Party = oUF:SpawnHeader(DuffedUIUnitFrames:GetPartyFramesAttributes())
 		Party:SetParent(Panels.PetBattleHider)
-		Party:Point("TOPLEFT", UIParent, "TOPLEFT", Gap, -(D.ScreenHeight / 4))
+		Party:Point("TOPLEFT", UIParent, "TOPLEFT", 30, -(D.ScreenHeight / 4))
 		
 		DuffedUIUnitFrames.Headers.Party = Party
 	end

@@ -47,7 +47,7 @@ function DuffedUIUnitFrames:Party()
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 75, 0)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", -9, -3)
 	Power:SetStatusBarTexture(C["medias"].Normal)
-	Power:SetFrameLevel(Health:GetFrameLevel() + 1)
+	Power:SetFrameLevel(Health:GetFrameLevel() + 2)
 
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints(Power)
@@ -60,55 +60,48 @@ function DuffedUIUnitFrames:Party()
 	PowerBorder:SetPoint("BOTTOMRIGHT", Power, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 	PowerBorder:SetTemplate("Default")
 	PowerBorder:CreateShadow("Default")
-	PowerBorder:SetFrameLevel(Health:GetFrameLevel() + 1)
+	PowerBorder:SetFrameLevel(Health:GetFrameLevel() + 2)
 	
 	Power.frequentUpdates = true
 	Power.colorPower = true
 	if (C["unitframes"].Smooth) then Health.Smooth = true end
 	
 	local Name = Health:CreateFontString(nil, "OVERLAY")
-	Name:SetPoint("TOPLEFT", -1, 18)
-	Name:SetFont(C["medias"].Font, 14, "THINOUTLINE")
+	Name:SetPoint("LEFT", Health, "LEFT", 4, -1)
+	Name:SetFont(C["medias"].Font, 12, "THINOUTLINE")
 	
 	local Role = Health:CreateFontString(nil, "OVERLAY")
-	Role:SetPoint("TOPRIGHT", 3, 18)
-	Role:SetFont(C["medias"].Font, 14, "THINOUTLINE")
+	Role:SetPoint("RIGHT", Health, "RIGHT", -4, 0)
+	Role:SetFont(C["medias"].Font, 12, "THINOUTLINE")
 	
 	if (C["party"].Portrait) then
 		local Portrait = CreateFrame("Frame", nil, self)
-		Portrait:Size(30)
-		Portrait:SetPoint("BOTTOMRIGHT", Health, "BOTTOMLEFT", -6, 0)
-		Portrait:SetBackdrop(DuffedUIUnitFrames.Backdrop)
-		Portrait:SetBackdropColor(0, 0, 0)
+		Portrait:SetFrameLevel(Health:GetFrameLevel())
+		Portrait:SetAlpha(0.15)
+		Portrait:SetAllPoints(Health)
 		
 		Portrait.Model = CreateFrame("PlayerModel", nil, Portrait)
 		Portrait.Model:SetInside(Portrait, 1, 1)
 
-		-- Border for Portrait
-		local PortraitBorder = CreateFrame("Frame", nil, Portrait)
-		PortraitBorder:SetPoint("TOPLEFT", Portrait, "TOPLEFT", D.Scale(-2), D.Scale(2))
-		PortraitBorder:SetPoint("BOTTOMRIGHT", Portrait, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
-		PortraitBorder:SetTemplate("Default")
-		PortraitBorder:CreateShadow("Default")
-		PortraitBorder:SetFrameLevel(2)
-		
 		self.Portrait = Portrait.Model
 	end
 	
 	local Buffs = CreateFrame("Frame", nil, self)
-	Buffs:Point("TOPLEFT", C["party"].Portrait and self.Portrait:GetParent() or self, "BOTTOMLEFT", -2, -7)
-	Buffs:SetHeight(24)
-	Buffs:SetWidth(250)
-	Buffs.size = 24
-	Buffs.num = 8
-	Buffs.numRow = 1
-	Buffs.spacing = 2
-	Buffs.initialAnchor = "TOPLEFT"
-	Buffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
-	Buffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
+	if C["party"].BuffsEnable then
+		Buffs:Point("TOPLEFT", self, "BOTTOMLEFT", -2, 0)
+		Buffs:SetHeight(24)
+		Buffs:SetWidth(250)
+		Buffs.size = 24
+		Buffs.num = 8
+		Buffs.numRow = 1
+		Buffs.spacing = 2
+		Buffs.initialAnchor = "TOPLEFT"
+		Buffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
+		Buffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
+	end
 	
 	local Debuffs = CreateFrame("Frame", nil, self)
-	Debuffs:Point("LEFT", self, "RIGHT", 6, 2)
+	Debuffs:Point("LEFT", self, "RIGHT", 6, 5)
 	Debuffs:SetHeight(self:GetHeight())
 	Debuffs:SetWidth(250)
 	Debuffs.size = self:GetHeight()
@@ -120,11 +113,11 @@ function DuffedUIUnitFrames:Party()
 	
 	local Leader = self:CreateTexture(nil, "OVERLAY")
 	Leader:SetSize(16, 16)
-	Leader:SetPoint("TOPRIGHT", C["party"].Portrait and self.Portrait or self, "TOPLEFT", -4, 0)
+	Leader:SetPoint("TOPLEFT", Health, 2, 10)
 	
 	local MasterLooter = self:CreateTexture(nil, "OVERLAY")
 	MasterLooter:SetSize(16, 16)
-	MasterLooter:SetPoint("TOPRIGHT", C["party"].Portrait and self.Portrait or self, "TOPLEFT", -4.5, -20)
+	MasterLooter:SetPoint("TOPLEFT", Health, 18, 10)
 	
 	local ReadyCheck = Health:CreateTexture(nil, "OVERLAY")
 	ReadyCheck:SetPoint("CENTER", Health, "CENTER")

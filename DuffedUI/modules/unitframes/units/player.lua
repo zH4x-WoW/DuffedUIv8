@@ -141,7 +141,7 @@ function DuffedUIUnitFrames:Player()
 		Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
 	elseif (Layout == 3) then
 		Power:FontString("Value", Font, 12, "THINOUTLINE")
-		Power.Value:Point("LEFT", Health, "LEFT", 4, 0)
+		Power.Value:Point("TOPLEFT", Health, "TOPLEFT", 4, 0)
 	end
 
 	Power.frequentUpdates = true
