@@ -164,6 +164,10 @@ D.CreateBtn("MB_binds", MB_reload, 19, 19, "Keybinds", "K")
 MB_binds:Point("LEFT", MB_mui, "RIGHT", 2, 0)
 MB_binds:SetAttribute("macrotext1", "/kb")
 
+D.CreateBtn("MB_datatext", MB_reload, 19, 19, "Edit DataText", "DT")
+MB_datatext:Point("LEFT", MB_binds, "RIGHT", 2, 0)
+MB_datatext:SetAttribute("macrotext1", "/duffed dt")
+
 if Enablegear == true then
 	local gearSets = CreateFrame("Frame", nil, MB_reload)	
 	for i = 1, 10 do

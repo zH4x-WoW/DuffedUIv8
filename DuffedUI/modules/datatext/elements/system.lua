@@ -2,13 +2,20 @@ local D, C, L = select(2, ...):unpack()
 
 local DataText = D["DataTexts"]
 local format = format
+local floor = floor
+local select = select
 local int = 1
+local tslu = 1
+local Mult = 10^1
 local MemoryTable = {}
 local KilobyteString = "%d ".. DataText.ValueColor .."kb".."|r"
 local MegabyteString = "%.2f ".. DataText.ValueColor .."mb".."|r"
-local Mult = 10^1
 local bandwidthString = "%.2f Mbps"
 local percentageString = "%.2f%%"
+local GetNetStats = GetNetStats
+local GetFramerate = GetFramerate
+--local MAINMENUBAR_LATENCY_LABEL = MAINMENUBAR_LATENCY_LABEL
+
 
 local FormatMemory = function(memory)
 	if (memory > 999) then
@@ -54,35 +61,32 @@ local RebuildAddonList = function(self)
 	end
 end
 
-local Update = function(self, second)
-	int = int - second
-	
+local Update = function(self, t)
+	int = int - t
 	if (int < 0) then
 		RebuildAddonList(self)
 		local Total = UpdateMemory()
-		
-		self.Text:SetText(DataText.ValueColor .. FormatMemory(Total) .. "|r")
 		int = 10
 	end
+	
+	tslu = tslu - t
+	if (tslu > 0) then return end
+	local MS = select(3, GetNetStats())
+	local Rate = floor(GetFramerate())
+	if (MS == 0) then MS = "0" end
+
+	self.Text:SetText(format("%s %s %s %s", DataText.ValueColor .. Rate .. "|r", DataText.NameColor .. L.DataText.FPS .. "|r", DataText.ValueColor .. MS .. "|r", DataText.NameColor .. L.DataText.MS .. "|r"))
+	tslu = 1
 end
 
 local OnEnter = function(self)
 	if (not InCombatLockdown()) then
 		GameTooltip:SetOwner(self:GetTooltipAnchor())
 		GameTooltip:ClearLines()
-
-		local Bandwidth = GetAvailableBandwidth()
-		
-		if (Bandwidth ~= 0) then
-			GameTooltip:AddDoubleLine(L.DataText.Bandwidth , string.format(bandwidthString, Bandwidth),0.69, 0.31, 0.31,0.84, 0.75, 0.65)
-			GameTooltip:AddDoubleLine(L.DataText.Download , string.format(percentageString, GetDownloadedPercentage() * 100), 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
-			GameTooltip:AddLine(" ")
-		end
 		
 		local TotalMemory = UpdateMemory()
 		GameTooltip:AddDoubleLine(L.DataText.TotalMemory, FormatMemory(TotalMemory), 0.69, 0.31, 0.31,0.84, 0.75, 0.65)
 		GameTooltip:AddLine(" ")
-		
 		for i = 1, #MemoryTable do
 			if (MemoryTable[i][4]) then
 				local Red = MemoryTable[i][3] / TotalMemory
@@ -91,18 +95,39 @@ local OnEnter = function(self)
 				GameTooltip:AddDoubleLine(MemoryTable[i][2], FormatMemory(MemoryTable[i][3]), 1, 1, 1, Red, Green + .5, 0)
 			end						
 		end
+		GameTooltip:AddLine(" ")
 		
-		self.Text:SetText(DataText.ValueColor..FormatMemory(TotalMemory).."|r")
+		local Bandwidth = GetAvailableBandwidth()
+		if (Bandwidth ~= 0) then
+			GameTooltip:AddDoubleLine(L.DataText.Bandwidth , string.format(bandwidthString, Bandwidth),0.69, 0.31, 0.31,0.84, 0.75, 0.65)
+			GameTooltip:AddDoubleLine(L.DataText.Download , string.format(percentageString, GetDownloadedPercentage() * 100), 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+		end
+		GameTooltip:AddLine(" ")
+		
+		local BW_In, BW_Out, HomeLatency, WorldLatency = GetNetStats()
+		local Latency = HomeLatency + WorldLatency
+		GameTooltip:AddDoubleLine(L.DataText.Home, HomeLatency .." ".. MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+		GameTooltip:AddDoubleLine(L.DataText.World, WorldLatency .." ".. MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+		GameTooltip:AddDoubleLine(L.DataText.Global, Latency .." ".. MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+		GameTooltip:AddLine(" ")
+		GameTooltip:AddDoubleLine(L.DataText.Inc, string.format( "%.4f", BW_In ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+		GameTooltip:AddDoubleLine(L.DataText.Out, string.format( "%.4f", BW_Out ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+		
 		GameTooltip:Show()
 	end
 end
 
-local OnLeave = function()
-	GameTooltip:Hide()
-end
+local OnLeave = function() GameTooltip:Hide() end
 
-local OnMouseUp = function()
-	collectgarbage("collect")
+local OnMouseUp = function(self, btn)
+	if (btn == "LeftButton") then
+		if not PVPUIFrame then
+			PVP_LoadUI()
+		end
+		ToggleFrame(PVPUIFrame)
+	else
+		collectgarbage("collect")
+	end
 end
 
 local Enable = function(self)	
@@ -120,5 +145,4 @@ local Disable = function(self)
 	self:SetScript("OnLeave", nil)
 	self:SetScript("OnMouseUp", nil)
 end
-
-DataText:Register("Memory", Enable, Disable, Update)
+DataText:Register("System", Enable, Disable, Update)

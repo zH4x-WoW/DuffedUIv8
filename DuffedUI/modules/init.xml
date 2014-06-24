@@ -53,7 +53,6 @@
 	<Script file="datatext\elements\currency.lua"/>
 	<Script file="datatext\elements\dps.lua"/>
 	<Script file="datatext\elements\durability.lua"/>
-	<Script file="datatext\elements\fps.lua"/>
 	<Script file="datatext\elements\friends.lua"/>
 	<Script file="datatext\elements\gold.lua"/>
 	<Script file="datatext\elements\guild.lua"/>
@@ -61,7 +60,7 @@
 	<Script file="datatext\elements\hit.lua"/>
 	<Script file="datatext\elements\hps.lua"/>
 	<Script file="datatext\elements\mastery.lua"/>
-	<Script file="datatext\elements\memory.lua"/>
+	<Script file="datatext\elements\system.lua"/>
     <!-- <Script file="datatext\elements\micromenu.lua"/> -->
 	<Script file="datatext\elements\power.lua"/>
 	<Script file="datatext\elements\regen.lua"/>
