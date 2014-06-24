@@ -17,6 +17,7 @@ engine[1].ScreenHeight = tonumber(string.match(engine[1].Resolution, "%d+x(%d+)"
 engine[1].ScreenWidth = tonumber(string.match(engine[1].Resolution, "(%d+)x+%d"))
 engine[1].MyClass = select(2, UnitClass("player"))
 engine[1].MyLevel = UnitLevel("player")
+engine[1].MyName = select(1, UnitName("player"))
 
 SLASH_RELOADUI1 = "/rl"
 SlashCmdList.RELOADUI = ReloadUI

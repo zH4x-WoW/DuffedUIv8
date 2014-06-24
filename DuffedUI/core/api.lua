@@ -275,6 +275,18 @@ local function HighlightTarget(self, event, unit)
 	end
 end
 
+local function CreateOverlay(frame)
+	if frame.overlay then return end
+
+	local overlay = frame:CreateTexture(frame:GetName() and frame:GetName() .. "Overlay" or nil, "BORDER", frame)
+	overlay:ClearAllPoints()
+	overlay:Point("TOPLEFT", 2, -2)
+	overlay:Point("BOTTOMRIGHT", -2, 2)
+	overlay:SetTexture(C["medias"].Normal)
+	overlay:SetVertexColor(0.05, 0.05, 0.05)
+	frame.overlay = overlay
+end
+
 local function HighlightUnit(f, r, g, b)
 	if f.HighlightTarget then return end
 	
@@ -477,6 +489,7 @@ local function AddAPI(object)
 	if not object.Width then mt.Width = Width end
 	if not object.Height then mt.Height = Height end
 	if not object.FontString then mt.FontString = FontString end
+	if not object.CreateOverlay then mt.CreateOverlay = CreateOverlay end
 	if not object.HighlightUnit then mt.HighlightUnit = HighlightUnit end
 	if not object.HideInsets then mt.HideInsets = HideInsets end
 	if not object.SkinEditBox then mt.SkinEditBox = SkinEditBox end

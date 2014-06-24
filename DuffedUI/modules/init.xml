@@ -123,17 +123,17 @@
 	<Script file="misc\garbagecollection.lua"/>
 	<Script file="misc\dropdown.lua"/>
 
-	<!-- Vendor-Script -->
+	<!-- Plugins -->
+	<Script file="plugins\flightpoint\flightpoint.lua"/>
+	<Include file="plugins\flightpoint\flightpoint.xml"/>
+	<Script file="plugins\misc\addonmanager.lua"/>
+	<Script file="plugins\misc\combat.lua"/>
+	<Script file="plugins\talents\buffnotice.lua"/>
+	<Script file="plugins\talents\bufftracker.lua"/>
+	<Script file="plugins\talents\classtimer.lua"/>
+	<Script file="plugins\talents\ses.lua"/>
 	<Script file="plugins\vendor\gsc.lua"/>
 	<Script file="plugins\vendor\scan.lua"/>
 	<Script file="plugins\vendor\scroll.lua"/>
 	<Script file="plugins\vendor\vendor.lua"/>
-
-	<!-- Talents -->
-	<Script file="plugins\talents\classtimer.lua"/>
-	<Script file="plugins\talents\ses.lua"/>
-	
-	<!-- Flightpoints -->
-	<Script file="plugins\flightpoint\flightpoint.lua"/>
-	<Include file="plugins\flightpoint\flightpoint.xml"/>
 </Ui>

@@ -42,6 +42,9 @@ C["auras"] = {
 	["HideBuffs"] = false,
 	["HideDebuffs"] = false,
 	["Animation"] = true,
+	["BuffNotice"] = true,
+	["Warning"] = true,
+	["BuffTracker"] = true,
 }
 
 C["bags"] = {
@@ -81,6 +84,7 @@ C["misc"] = {
 	["ThreatBarEnable"] = true,
 	["AltPowerBarEnable"] = true,
 	["FlightPoint"] = true,
+	["CombatAnimation"] = true,
 }
 
 C["nameplates"] = {

@@ -165,3 +165,13 @@ D.CreateBtn = function(name, parent, w, h, tt_txt, txt)
 	
 	b:SetAttribute("type1", "macro")
 end
+
+function D.SetModifiedBackdrop(self)
+	local color = RAID_CLASS_COLORS[D.MyClass]
+	self:SetBackdropColor(color.r*.15, color.g*.15, color.b*.15)
+	self:SetBackdropBorderColor(color.r, color.g, color.b)
+end
+
+function D.SetOriginalBackdrop(self)
+	self:SetTemplate("Default")
+end

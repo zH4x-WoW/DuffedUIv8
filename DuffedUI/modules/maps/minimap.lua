@@ -59,7 +59,7 @@ end
 function Maps:PositionMinimap()
 	Map:SetParent(Panels.PetBattleHider)
 	Map:ClearAllPoints()
-	Map:Point("TOPRIGHT", -5, -5)
+	if C["auras"].BuffTracker then Map:Point("TOPRIGHT", -38, -5) else Map:Point("TOPRIGHT", -5, -5) end
 end
 
 function Maps:AddMinimapDataTexts()

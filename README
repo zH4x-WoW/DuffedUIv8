@@ -1,6 +1,10 @@
 => DuffedUI v8 <=
 
 24.06.2014 =>
+	Adding plugin => AddonManager
+	Adding plugin => BuffNotice
+	Adding plugin => BuffTracker
+	Adding plugin => CombatAnimation
 	Adding plugin => Flightpointlist
 	Adjustments for UnitFrames
 	
