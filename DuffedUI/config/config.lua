@@ -80,6 +80,7 @@ C["cooldowns"] = {
 C["misc"] = {
 	["ThreatBarEnable"] = true,
 	["AltPowerBarEnable"] = true,
+	["FlightPoint"] = true,
 }
 
 C["nameplates"] = {

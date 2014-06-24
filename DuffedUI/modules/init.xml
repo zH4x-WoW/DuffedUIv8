@@ -132,4 +132,8 @@
 	<!-- Talents -->
 	<Script file="plugins\talents\classtimer.lua"/>
 	<Script file="plugins\talents\ses.lua"/>
+	
+	<!-- Flightpoints -->
+	<Script file="plugins\flightpoint\flightpoint.lua"/>
+	<Include file="plugins\flightpoint\flightpoint.xml"/>
 </Ui>
