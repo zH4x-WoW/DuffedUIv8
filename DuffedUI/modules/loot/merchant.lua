@@ -56,18 +56,24 @@ Merchant:SetScript("OnEvent", function()
 
 	if (not IsShiftKeyDown()) then
 		if (CanMerchantRepair() and C["merchant"].AutoRepair) then
+			guildRepairFlag = 0
 			local Cost, Possible = GetRepairAllCost()
-
-			if (Cost > 0) then
-				if Possible then
-					local GuildRepair = ((C["merchant"].UseGuildRepair == true and 1) or 0)
-
-					RepairAllItems(GuildRepair)
-
-					local Copper = Cost % 100
-					local Silver = math.floor((Cost % 10000) / 100)
+			if IsInGuild() and CanGuildBankRepair() and C["merchant"].UseGuildRepair then
+				if Cost <= GetGuildBankWithdrawMoney() then
+					guildRepairFlag = 1
+				end
+			end
+			if Cost > 0 then
+				if Possible or guildRepairFlag then
+					RepairAllItems(guildRepairFlag)
+					local Copper = Cost%100
+					local Silver = math.floor((Cost%10000) / 100)
 					local Gold = math.floor(Cost / 10000)
-					DEFAULT_CHAT_FRAME:AddMessage(L.Merchant.RepairCost.." |cffffffff"..Gold..L.DataText.GoldShort.." |cffffffff"..Silver..L.DataText.SilverShort.." |cffffffff"..Copper..L.DataText.CopperShort..".", 255, 55, 0)
+					if guildRepairFlag == 1 then
+						DEFAULT_CHAT_FRAME:AddMessage(L.Merchant.RepairCost.." ("..L.DataText.Guild..") |cffffffff"..Gold..L.DataText.GoldShort.." |cffffffff"..Silver..L.DataText.SilverShort.." |cffffffff"..Copper..L.DataText.CopperShort..".", 255, 255, 0)
+					else
+						DEFAULT_CHAT_FRAME:AddMessage(L.Merchant.RepairCost.." |cffffffff"..Gold..L.DataText.GoldShort.." |cffffffff"..Silver..L.DataText.SilverShort.." |cffffffff"..Copper..L.DataText.CopperShort..".", 255, 255, 0)
+					end
 				else
 					DEFAULT_CHAT_FRAME:AddMessage(L.Merchant.NotEnoughMoney, 255, 0, 0)
 				end

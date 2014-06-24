@@ -1,6 +1,7 @@
 => DuffedUI v8 <=
 
 24.06.2014 =>
+	Fixed autorepair
 	Adding plugin => AddonManager
 	Adding plugin => BuffNotice
 	Adding plugin => BuffTracker

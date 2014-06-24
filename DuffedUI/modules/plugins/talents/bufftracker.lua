@@ -174,7 +174,7 @@ local bufftracker = CreateFrame("Frame", "BuffTracker", Minimap)
 bufftracker:SetTemplate("TRansparent")
 bufftracker:Width(btWidth + 2)
 bufftracker:Height(btHeight)
-bufftracker:SetPoint("TOPLEFT", Minimap, "TOPRIGHT", 5, 0)
+bufftracker:SetPoint("TOPLEFT", Minimap, "TOPRIGHT", 4, 0)
 bufftracker:CreateShadow("Default")
 
 bufftracker:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
