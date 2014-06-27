@@ -114,6 +114,17 @@ L.DataText.Slots = {
 }
 
 ------------------------------------------------
+L.Bind = {} -- Bind Locales
+------------------------------------------------
+
+L.Bind.Combat = "You can't bind keys in combat."
+L.Bind.Instruct = "Hover your mouse over any actionbutton to bind it. Press the escape key or right click to clear the current actionbuttons keybinding."
+L.Bind.Save = "Save bindings"
+L.Bind.DiscardBind = "Discard bindings"
+L.Bind.Saved = "All keybindings have been saved."
+L.Bind.Discard = "All newly set keybindings have been discarded."
+
+------------------------------------------------
 L.Tooltips = {} -- Tooltips Locales
 ------------------------------------------------
 

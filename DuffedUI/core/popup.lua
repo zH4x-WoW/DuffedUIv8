@@ -21,7 +21,7 @@ function DuffedUIPopups:CreatePopups()
 		Frames[i]:SetSize(400, 60)
 		Frames[i]:SetFrameLevel(3)
 		Frames[i]:CreateShadow()
-		Frames[i]:SetTemplate()
+		Frames[i]:SetTemplate("Transparent")
 		Frames[i]:Hide()
 
 		Frames[i].Text = CreateFrame("MessageFrame", nil, Frames[i])
@@ -35,7 +35,7 @@ function DuffedUIPopups:CreatePopups()
 		Frames[i].Button1 = CreateFrame("Button", nil, Frames[i])
 		Frames[i].Button1:SetPoint("TOPLEFT", Frames[i], "BOTTOMLEFT", 0, -2)
 		Frames[i].Button1:SetSize(199, 23)
-		Frames[i].Button1:SetTemplate()
+		Frames[i].Button1:SetTemplate("Transparent")
 		Frames[i].Button1:CreateShadow()
 		Frames[i].Button1:FontString("Text", C["medias"].Font, 12)
 		Frames[i].Button1.Text:SetPoint("CENTER")
@@ -47,7 +47,7 @@ function DuffedUIPopups:CreatePopups()
 		Frames[i].Button2 = CreateFrame("Button", nil, Frames[i])
 		Frames[i].Button2:SetPoint("TOPRIGHT", Frames[i], "BOTTOMRIGHT", 0, -2)
 		Frames[i].Button2:SetSize(199, 23)
-		Frames[i].Button2:SetTemplate("Default")
+		Frames[i].Button2:SetTemplate("Transparent")
 		Frames[i].Button2:CreateShadow("Default")
 		Frames[i].Button2:FontString("Text", C["medias"].Font, 12)
 		Frames[i].Button2.Text:SetPoint("CENTER")
@@ -87,9 +87,7 @@ end
 function DuffedUIPopups:ShowPopup()
 	local Info = DuffedUIPopups.Popup[self]
 	
-	if not Info then
-		return
-	end
+	if not Info then return end
 
 	local Popups = DuffedUIPopups.Frames
 	local Selection = Popups[1]
@@ -108,39 +106,17 @@ function DuffedUIPopups:ShowPopup()
 	Question:Clear()
 	EditBox:SetText("")
 	
-	if Info.Question then
-		Question:AddMessage(Info.Question)
-	end
+	if Info.Question then Question:AddMessage(Info.Question) end
 	
-	if Info.Answer1 then
-		Button1.Text:SetText(Info.Answer1)
-	else
-		Button1.Text:SetText(ACCEPT)
-	end
+	if Info.Answer1 then Button1.Text:SetText(Info.Answer1) else Button1.Text:SetText(ACCEPT) end
 	
-	if Info.Answer2 then
-		Button2.Text:SetText(Info.Answer2)
-	else
-		Button2.Text:SetText(CANCEL)
-	end
+	if Info.Answer2 then Button2.Text:SetText(Info.Answer2) else Button2.Text:SetText(CANCEL) end
 	
-	if Info.Function1 then
-		Button1:SetScript("OnClick", Info.Function1)
-	else
-		Button1:SetScript("OnClick", DuffedUIPopups.HidePopup)
-	end
+	if Info.Function1 then Button1:SetScript("OnClick", Info.Function1) else Button1:SetScript("OnClick", DuffedUIPopups.HidePopup) end
 	
-	if Info.Function2 then
-		Button2:SetScript("OnClick", Info.Function2)
-	else
-		Button2:SetScript("OnClick", DuffedUIPopups.HidePopup)
-	end
+	if Info.Function2 then Button2:SetScript("OnClick", Info.Function2) else Button2:SetScript("OnClick", DuffedUIPopups.HidePopup) end
 	
-	if Info.EditBox then
-		EditBox:Show()
-	else
-		EditBox:Hide()
-	end
+	if Info.EditBox then EditBox:Show() else EditBox:Hide() end
 	
 	Button1:HookScript("OnClick", DuffedUIPopups.HidePopup)
 	Button2:HookScript("OnClick", DuffedUIPopups.HidePopup)
@@ -150,9 +126,7 @@ end
 
 DuffedUIPopups:RegisterEvent("ADDON_LOADED")
 DuffedUIPopups:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "DuffedUI") then
-		return
-	end
+	if (addon ~= "DuffedUI") then return end
 	
 	self:CreatePopups()
 	self:UnregisterAllEvents()

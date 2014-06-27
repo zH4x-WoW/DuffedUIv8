@@ -24,6 +24,7 @@
 	<Script file="actionbars\barStance.lua"/>
 	<Script file="actionbars\buttons.lua"/>
 	<Script file="actionbars\extra.lua"/>
+	<Script file="actionbars\bind.lua"/>
 
 	<!-- Cooldowns -->
 	<Script file="cooldowns\cooldowns.lua"/>

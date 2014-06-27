@@ -12,6 +12,8 @@ C["general"] = {
 	["BorderColor"] = {0.125, 0.125, 0.125},
 	["InOut"] = true,
 	["HideShadow"] = false,
+	["Use24Hour"] = true,
+	["UseLocalTime"] = true,
 }
 
 C["fonts"] = {

@@ -130,6 +130,7 @@ function DuffedUIUnitFrames:Party()
 	self.Power.bg = Power.Background
 	self.PowerBorder = PowerBorder
 	self.Name = Name
+	self.Role = Role
 	self.Buffs = Buffs
 	self.Debuffs = Debuffs
 	self.Leader = Leader

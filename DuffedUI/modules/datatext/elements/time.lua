@@ -18,8 +18,8 @@ local AMPM = {
 }
 
 -- Temp! Config me later :)
-local Use24Hour = false
-local UseLocalTime = true
+local Use24Hour = C["general"].Use24Hour
+local UseLocalTime = C["general"].UseLocalTime
 
 local GetFormattedTime = function()
 	local Hour, Minute, AmPm
@@ -79,9 +79,9 @@ local Update = function(self, t)
 	end
 	
 	if (AmPm == -1) then
-		self.Text:SetText(format(EuropeString, DataText.NameColor, Hour, DataText.NameColor, Minute))
+		self.Text:SetText(format(EuropeString, DataText.ValueColor, Hour, DataText.ValueColor, Minute))
 	else
-		self.Text:SetText(format(UKString, DataText.NameColor, Hour, DataText.NameColor, Minute, DataText.ValueColor, AMPM[AmPm]))
+		self.Text:SetText(format(UKString, DataText.ValueColor, Hour, DataText.ValueColor, Minute, DataText.NameColor, AMPM[AmPm]))
 	end
 	
 	CurrentHour = Hour
