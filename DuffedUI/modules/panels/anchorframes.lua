@@ -19,7 +19,7 @@ Ressources:Hide()
 
 local ClassTimer = CreateFrame("Frame", "AnchorFrameClassTimer", UIParent)
 ClassTimer:Size(222, 15)
-ClassTimer:Point("BOTTOM", UIParent, "BOTTOM", -300, 277)
+ClassTimer:Point("BOTTOM", UIParent, "BOTTOM", -300, 299)
 ClassTimer:SetFrameStrata("TOOLTIP")
 ClassTimer:SetFrameLevel(20)
 ClassTimer:SetTemplate("Default")
@@ -34,8 +34,8 @@ ClassTimer:SetClampedToScreen(true)
 ClassTimer:SetAlpha(0)
 --tinsert(D.AllowFrameMoving, AnchorFrameClassTimer)
 
+local ClassTimerDebuff = CreateFrame("Frame", "AnchorFrameClassTimerDebuff", UIParent)
 if C["classtimer"].TargetDebuffs then
-	local ClassTimerDebuff = CreateFrame("Frame", "AnchorFrameClassTimerDebuff", UIParent)
 	ClassTimerDebuff:Size(222, 15)
 	ClassTimerDebuff:Point("BOTTOM", UIParent, "BOTTOM", 300, 360)
 	ClassTimerDebuff:SetFrameStrata("TOOLTIP")

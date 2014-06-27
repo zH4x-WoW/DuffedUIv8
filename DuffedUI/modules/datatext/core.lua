@@ -225,8 +225,8 @@ function DuffedUIDT:Load()
 		DuffedUIDataPerChar.Texts["Guild"] = {true, 1}
 		DuffedUIDataPerChar.Texts["Durability"] = {true, 2}
 		DuffedUIDataPerChar.Texts["Friends"] = {true, 3}
-		DuffedUIDataPerChar.Texts["FPS & MS"] = {true, 4}
-		DuffedUIDataPerChar.Texts["Memory"] = {true, 5}
+		DuffedUIDataPerChar.Texts["System"] = {true, 4}
+		DuffedUIDataPerChar.Texts["Bag Slots"] = {true, 5}
 		DuffedUIDataPerChar.Texts["Gold"] = {true, 6}
 		DuffedUIDataPerChar.Texts["Power"] = {true, 7}
 		DuffedUIDataPerChar.Texts["Time"] = {true, 8}

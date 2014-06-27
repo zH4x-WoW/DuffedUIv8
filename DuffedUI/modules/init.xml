@@ -118,10 +118,12 @@
 	<Script file="petbattles\others.lua"/>
 
 	<!-- Misc. -->
+	<Script file="misc\core.lua"/>
 	<Script file="misc\altpowerbar.lua"/>
 	<Script file="misc\threatbar.lua"/>
 	<Script file="misc\garbagecollection.lua"/>
 	<Script file="misc\dropdown.lua"/>
+	<Script file="misc\mirrortimers.lua"/>
 
 	<!-- Plugins -->
 	<Script file="plugins\flightpoint\flightpoint.lua"/>

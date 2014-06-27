@@ -510,7 +510,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(108359), -- Dark Regeneration
 			CreateSpellEntry(34936), -- Backlash
 			-- Testbuff
-			-- CreateSpellEntry(130609, true), --buff for testing
+			--CreateSpellEntry(130609, true), --buff for testing
 		},
 		procs = {
 			CreateSpellEntry(86121), CreateSpellEntry(86211), -- Soul Swap
@@ -1162,8 +1162,8 @@ local xOffset = 0
 
 local playerFrame = CreateAuraBarFrame(playerDataSource,  UIParent)
 playerFrame:SetHiddenHeight(-yOffset)
-playerFrame:Point("BOTTOMLEFT", AnchorFrameClassTimer, "TOPLEFT", 2, 5)
-playerFrame:Point("BOTTOMRIGHT", AnchorFrameClassTimer, "TOPRIGHT", -2, 5)
+playerFrame:Point("BOTTOMLEFT", AnchorFrameClassTimer, "BOTTOMLEFT", 2, 0)
+playerFrame:Point("BOTTOMRIGHT", AnchorFrameClassTimer, "BOTTOMRIGHT", -2, 0)
 
 local trinketFrame = CreateAuraBarFrame(trinketDataSource,  UIParent)
 trinketFrame:SetHiddenHeight(-yOffset)
