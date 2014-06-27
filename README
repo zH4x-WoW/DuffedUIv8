@@ -1,5 +1,8 @@
 => DuffedUI v8 <=
 
+27.06.2014 =>
+	Adding plugin => HoverKeybinds
+	
 24.06.2014 =>
 	Merged Memory- & FPS-Datatext (no need for two seperate datatext), Adding configbutton for datatexts on SpecSwitcher
 	Fixed autorepair
