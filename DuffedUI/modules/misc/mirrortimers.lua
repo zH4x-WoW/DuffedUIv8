@@ -30,6 +30,6 @@ function MirrorTimers:Update()
 	end
 end
 
-function MirrorTimers:Create() hooksecurefunc("MirrorTimer_Show", MirrorTimers.Update) end
+function MirrorTimers:Enable() hooksecurefunc("MirrorTimer_Show", MirrorTimers.Update) end
 
 Panels.MirrorTimers = MirrorTimers

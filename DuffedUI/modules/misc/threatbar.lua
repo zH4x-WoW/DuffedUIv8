@@ -55,7 +55,7 @@ function ThreatBar:OnUpdate()
 	end
 end
 
-function ThreatBar:Create()
+function ThreatBar:Enable()
 	self.StatusBar = CreateFrame("StatusBar", nil, DataTextRight)
 	self.StatusBar:Point("TOPLEFT", 2, -2)
 	self.StatusBar:Point("BOTTOMRIGHT", -2, 2)

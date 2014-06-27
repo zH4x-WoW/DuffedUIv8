@@ -1,5 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 local Levels = UIDROPDOWNMENU_MAXLEVELS
+local Miscellaneous = D["Miscellaneous"]
 local Noop = function() end
 local UIDropDownMenu_CreateFrames = UIDropDownMenu_CreateFrames
 local DropDown = CreateFrame("Frame")
@@ -31,7 +32,7 @@ function DropDown:Skin(...)
 	end
 end
 
-function DropDown:EnableSkin()
+function DropDown:Enable()
 	local Menu
 	
 	for i = 1, getn(self.ChatMenus) do
@@ -44,12 +45,4 @@ function DropDown:EnableSkin()
 	hooksecurefunc("UIDropDownMenu_CreateFrames", self.Skin)
 end
 
-DropDown:RegisterEvent("ADDON_LOADED")
-DropDown:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= "DuffedUI" then
-		return
-	end
-	
-	self:UnregisterEvent("ADDON_LOADED")
-	self:EnableSkin()
-end)
+Miscellaneous.DropDown = DropDown

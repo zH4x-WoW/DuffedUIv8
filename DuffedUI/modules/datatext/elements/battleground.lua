@@ -1,6 +1,7 @@
 local D, C, L = select(2, ...):unpack()
 
 local DataText = D["DataTexts"]
+local DataTextLeft = D["Panels"].DataTextLeft
 local MyName = UnitName("player")
 local format = format
 local int = 2
@@ -18,7 +19,7 @@ local TOK = 856
 local SSM = 860
 
 local BGFrame = CreateFrame("Frame", nil, UIParent)
-BGFrame:SetAllPoints(DuffedUIDataTextLeft)
+BGFrame:SetAllPoints(DataTextLeft)
 BGFrame:SetTemplate()
 BGFrame:SetFrameLevel(2)
 
