@@ -3,10 +3,9 @@ local Miscellaneous = CreateFrame("Frame")
 
 Miscellaneous:RegisterEvent("ADDON_LOADED")
 Miscellaneous:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "DuffedUI") then
-		return
-	end
+	if (addon ~= "DuffedUI") then return end
 
+	self.ThreatBar:Create()
 	self.MirrorTimers:Load()
 end)
 
