@@ -1,9 +1,9 @@
 local D = select(2, ...):unpack()
 
 -- Collect garbage while player is AFK. (hooray for free memory!)
-local CollectGarbage = CreateFrame("Frame")
 local Miscellaneous = D["Miscellaneous"]
 
+local CollectGarbage = CreateFrame("Frame")
 function CollectGarbage:OnEvent(event, unit)
 	if (event == "PLAYER_ENTERING_WORLD") then
 		collectgarbage("collect")

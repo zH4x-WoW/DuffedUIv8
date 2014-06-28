@@ -469,5 +469,27 @@ function DuffedUIUnitFrames:Player()
 	self.MasterLooter = MasterLooter
 	
 	-- Classes
-	DuffedUIUnitFrames.AddClassFeatures[Class](self)
+	if (Class == "DEATHKNIGHT") then
+		DuffedUIUnitFrames.AddDeathKnightFeatures(self)
+	elseif (Class == "DRUID") then
+		DuffedUIUnitFrames.AddDruidFeatures(self)
+	elseif (Class == "WARRIOR") then
+		DuffedUIUnitFrames.AddWarriorFeatures(self)
+	elseif (Class == "MAGE") then
+		DuffedUIUnitFrames.AddMageFeatures(self)
+	elseif (Class == "MONK") then
+		DuffedUIUnitFrames.AddMonkFeatures(self)
+	elseif (Class == "PALADIN") then
+		DuffedUIUnitFrames.AddPaladinFeatures(self)
+	elseif (Class == "PRIEST") then
+		DuffedUIUnitFrames.AddPriestFeatures(self)
+	elseif (Class == "ROGUE") then
+		DuffedUIUnitFrames.AddRogueFeatures(self)
+	elseif (Class == "SHAMAN") then
+		DuffedUIUnitFrames.AddShamanFeatures(self)
+	elseif (Class == "WARLOCK") then
+		DuffedUIUnitFrames.AddWarlockFeatures(self)
+	elseif (Class == "HUNTER") then
+		DuffedUIUnitFrames.AddHunterFeatures(self)
+	end
 end

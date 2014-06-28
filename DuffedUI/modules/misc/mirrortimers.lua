@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-local Panels = D["Panels"]
+local Miscellaneous = D["Miscellaneous"]
 local Total = MIRRORTIMER_NUMTIMERS
 
 local MirrorTimers = CreateFrame("Frame")
@@ -32,4 +32,4 @@ end
 
 function MirrorTimers:Enable() hooksecurefunc("MirrorTimer_Show", MirrorTimers.Update) end
 
-Panels.MirrorTimers = MirrorTimers
+Miscellaneous.MirrorTimers = MirrorTimers

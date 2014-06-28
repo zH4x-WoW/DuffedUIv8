@@ -7,6 +7,8 @@ local DataTextRight = D["Panels"].DataTextRight
 local format = string.format
 local floor = math.floor
 local UnitName = UnitName
+local ThreatBar = CreateFrame("Frame")
+local GetColor = D.ColorGradient
 
 ThreatBar:RegisterEvent("PLAYER_ENTERING_WORLD")
 ThreatBar:RegisterEvent("PLAYER_REGEN_ENABLED")
@@ -17,7 +19,7 @@ function ThreatBar:OnEvent(event)
 	local Party = GetNumGroupMembers()
 	local Raid = GetNumGroupMembers()
 	local Pet = HasPetUI()
-	
+
 	if (event == "PLAYER_REGEN_ENABLED") then
 		self:Hide()
 	elseif (event == "PLAYER_REGEN_DISABLED") then
@@ -28,6 +30,7 @@ function ThreatBar:OnEvent(event)
 		end
 	else
 		self:Hide()
+
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end
 end
@@ -39,7 +42,7 @@ function ThreatBar:OnUpdate()
 		local StatusBar = self.StatusBar
 		local Text = self.Text
 		local Title = self.Title
-		
+
 		StatusBar:SetValue(ThreatValue)
 		Text:SetText(floor(ThreatValue) .. "%")
 		Title:SetText((UnitName("target") and UnitName("target") .. ":") or nil)
@@ -51,11 +54,11 @@ function ThreatBar:OnUpdate()
 			StatusBar:SetAlpha(1)
 		else
 			StatusBar:SetAlpha(0)
-		end		
+		end
 	end
 end
 
-function ThreatBar:Enable()
+function ThreatBar:Create()
 	self.StatusBar = CreateFrame("StatusBar", nil, DataTextRight)
 	self.StatusBar:Point("TOPLEFT", 2, -2)
 	self.StatusBar:Point("BOTTOMRIGHT", -2, 2)
@@ -66,10 +69,11 @@ function ThreatBar:Enable()
 	self.StatusBar:SetAlpha(0)
 
 	self.Text = self.StatusBar:CreateFontString(nil, "OVERLAY")
-	self.Text:SetFont(C.Medias.Font, 12)
+	self.Text:SetFont(C["medias"].Font, 12)
 	self.Text:Point("RIGHT", self.StatusBar, -30, 0)
 	self.Text:SetShadowColor(0, 0, 0)
 	self.Text:SetShadowOffset(1.25, -1.25)
+
 	self.Title = self.StatusBar:CreateFontString(nil, "OVERLAY")
 	self.Title:SetFont(C["medias"].Font, 12)
 	self.Title:Point("LEFT", self.StatusBar, 30, 0)
@@ -81,11 +85,17 @@ function ThreatBar:Enable()
 	self.Background:Point("BOTTOMRIGHT", self.StatusBar, 0, 0)
 	self.Background:SetTexture(0.15, 0.15, 0.15)
 
-	self:SetScript("OnShow", function(self) self:SetScript("OnUpdate", self.OnUpdate) end)
+	self:SetScript("OnShow", function(self)
+		self:SetScript("OnUpdate", self.OnUpdate)
+	end)
 
-	self:SetScript("OnHide", function(self) self:SetScript("OnUpdate", nil) end)
+	self:SetScript("OnHide", function(self)
+		self:SetScript("OnUpdate", nil)
+	end)
 
 	self:SetScript("OnEvent", self.OnEvent)
 end
+
+function ThreatBar:Enable() self:Create() end
 
 Miscellaneous.ThreatBar = ThreatBar

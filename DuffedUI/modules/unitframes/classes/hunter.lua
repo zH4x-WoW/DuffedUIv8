@@ -5,6 +5,6 @@ local Class = select(2, UnitClass("player"))
 
 if (Class ~= "HUNTER") then return end
 
-DuffedUIUnitFrames.AddClassFeatures["HUNTER"] = function(self)
+function DuffedUIUnitFrames:AddHunterFeatures()
 
 end

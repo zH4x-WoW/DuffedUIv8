@@ -7,7 +7,7 @@ local Class = select(2, UnitClass("player"))
 
 if (Class ~= "MAGE") then return end
 
-DuffedUIUnitFrames.AddClassFeatures["MAGE"] = function(self)
+function DuffedUIUnitFrames:AddMageFeatures()
 	local Texture = C["medias"].Normal
 	local Font = C["medias"].Font
 	local Color = RAID_CLASS_COLORS[Class]

@@ -5,7 +5,7 @@ local Class = select(2, UnitClass("player"))
 
 if (Class ~= "MONK") then return end
 
-DuffedUIUnitFrames.AddClassFeatures["MONK"] = function(self)
+function DuffedUIUnitFrames:AddMonkFeatures()
 	local Texture = C["medias"].Normal
 	local Font = C["medias"].Font
 	local Color = RAID_CLASS_COLORS[Class]

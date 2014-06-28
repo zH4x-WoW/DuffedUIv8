@@ -5,7 +5,7 @@ local Class = select(2, UnitClass("player"))
 
 if (Class ~= "DEATHKNIGHT") then return end
 
-DuffedUIUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
+function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	local colors = {
 		{ 0.69, 0.31, 0.31 }, -- blood
 		{ 0.33, 0.59, 0.33 }, -- unholy

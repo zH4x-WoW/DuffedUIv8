@@ -1,6 +1,7 @@
 => DuffedUI v8 <=
 
 28.06.2014 =>
+	Revert some changes
 	HealBar for Party & Raidframes
 	Classfeatures call directly in Player.lua
 	

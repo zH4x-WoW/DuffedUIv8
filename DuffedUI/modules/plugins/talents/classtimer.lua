@@ -510,7 +510,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(108359), -- Dark Regeneration
 			CreateSpellEntry(34936), -- Backlash
 			-- Testbuff
-			--CreateSpellEntry(130609, true), --buff for testing
+			-- CreateSpellEntry(130609, true), --buff for testing
 		},
 		procs = {
 			CreateSpellEntry(86121), CreateSpellEntry(86211), -- Soul Swap
