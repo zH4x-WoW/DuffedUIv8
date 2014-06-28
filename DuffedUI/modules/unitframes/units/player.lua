@@ -266,7 +266,7 @@ function DuffedUIUnitFrames:Player()
 
 	if (C["unitframes"].CombatLog) then
 		local CombatFeedbackText = Health:CreateFontString(nil, "OVERLAY")
-		CombatFeedbackText:SetFont(Font, 12, "OUTLINE")
+		CombatFeedbackText:SetFont(Font, 10, "OUTLINE")
 		CombatFeedbackText:SetPoint("CENTER", 0, 1)
 		CombatFeedbackText.colors = {
 			DAMAGE = {0.69, 0.31, 0.31},
@@ -469,27 +469,5 @@ function DuffedUIUnitFrames:Player()
 	self.MasterLooter = MasterLooter
 	
 	-- Classes
-	if (Class == "DEATHKNIGHT") then
-		DuffedUIUnitFrames.AddDeathKnightFeatures(self)
-	elseif (Class == "DRUID") then
-		DuffedUIUnitFrames.AddDruidFeatures(self)
-	elseif (Class == "WARRIOR") then
-		DuffedUIUnitFrames.AddWarriorFeatures(self)
-	elseif (Class == "MAGE") then
-		DuffedUIUnitFrames.AddMageFeatures(self)
-	elseif (Class == "MONK") then
-		DuffedUIUnitFrames.AddMonkFeatures(self)
-	elseif (Class == "PALADIN") then
-		DuffedUIUnitFrames.AddPaladinFeatures(self)
-	elseif (Class == "PRIEST") then
-		DuffedUIUnitFrames.AddPriestFeatures(self)
-	elseif (Class == "ROGUE") then
-		DuffedUIUnitFrames.AddRogueFeatures(self)
-	elseif (Class == "SHAMAN") then
-		DuffedUIUnitFrames.AddShamanFeatures(self)
-	elseif (Class == "WARLOCK") then
-		DuffedUIUnitFrames.AddWarlockFeatures(self)
-	elseif (Class == "HUNTER") then
-		DuffedUIUnitFrames.AddHunterFeatures(self)
-	end
+	DuffedUIUnitFrames.AddClassFeatures[Class](self)
 end

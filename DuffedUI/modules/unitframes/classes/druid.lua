@@ -5,7 +5,7 @@ local Class = select(2, UnitClass("player"))
 
 if (Class ~= "DRUID") then return end
 
-function DuffedUIUnitFrames:AddDruidFeatures()
+DuffedUIUnitFrames.AddClassFeatures["DRUID"] = function(self)
 	local DruidMana = CreateFrame("StatusBar", nil, self.Health)
 	local Color = RAID_CLASS_COLORS[Class]
 	local NumPoints = MAX_COMBO_POINTS

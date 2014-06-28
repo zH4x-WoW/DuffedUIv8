@@ -1,5 +1,9 @@
 => DuffedUI v8 <=
 
+28.06.2014 =>
+	HealBar for Party & Raidframes
+	Classfeatures call directly in Player.lua
+	
 27.06.2014 =>
 	Adjustments to some misc features
 	New ThreatBar and changes on MirrorTimers

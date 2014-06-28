@@ -5,7 +5,7 @@ local Class = select(2, UnitClass("player"))
 
 if (Class ~= "WARRIOR") then return end
 
-function DuffedUIUnitFrames:AddWarriorFeatures()
+DuffedUIUnitFrames.AddClassFeatures["WARRIOR"] = function(self)
 	-- Totem Bar (Demoralizing / Mocking / Skull Banner)
 	local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
 	bar:SetWidth(5)

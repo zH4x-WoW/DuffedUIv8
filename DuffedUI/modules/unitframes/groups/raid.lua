@@ -78,6 +78,40 @@ function DuffedUIUnitFrames:Raid()
 		insideAlpha = 1, 
 		outsideAlpha = 0.3,
 	}
+	
+	if (C["raid"].HealBar) then
+		local FirstBar = CreateFrame("StatusBar", nil, Health)
+		FirstBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		FirstBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+		FirstBar:Width(66)
+		FirstBar:SetStatusBarTexture(C["medias"].Normal)
+		FirstBar:SetStatusBarColor(0, 0.3, 0.15, 1)
+		FirstBar:SetMinMaxValues(0,1)
+
+		local SecondBar = CreateFrame("StatusBar", nil, Health)
+		SecondBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		SecondBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+		SecondBar:Width(66)
+		SecondBar:SetStatusBarTexture(C["medias"].Normal)
+		SecondBar:SetStatusBarColor(0, 0.3, 0, 1)
+
+		local ThirdBar = CreateFrame("StatusBar", nil, Health)
+		ThirdBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		ThirdBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+		ThirdBar:Width(66)
+		ThirdBar:SetStatusBarTexture(C["medias"].Normal)
+		ThirdBar:SetStatusBarColor(0.3, 0.3, 0, 1)
+
+		SecondBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 1)
+		FirstBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 2)
+
+		self.HealPrediction = {
+			myBar = FirstBar,
+			otherBar = SecondBar,
+			absBar = ThirdBar,
+			maxOverflow = 1,
+		}
+	end
 
 	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameShort]")
 	self.Health = Health

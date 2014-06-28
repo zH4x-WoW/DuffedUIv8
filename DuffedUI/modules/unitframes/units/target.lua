@@ -166,6 +166,40 @@ function DuffedUIUnitFrames:Target()
 	local MasterLooter = Health:CreateTexture(nil, "OVERLAY")
 	MasterLooter:Size(14, 14)
 	MasterLooter:Point("TOPRIGHT", -2, 8)
+	
+	if (C["unitframes"].HealBar) then
+		local FirstBar = CreateFrame("StatusBar", nil, Health)
+		FirstBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		FirstBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+		FirstBar:SetWidth(250)
+		FirstBar:SetStatusBarTexture(C["medias"].Normal)
+		FirstBar:SetStatusBarColor(0, 0.3, 0.15, 1)
+		FirstBar:SetMinMaxValues(0,1)
+
+		local SecondBar = CreateFrame("StatusBar", nil, Health)
+		SecondBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		SecondBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+		SecondBar:SetWidth(250)
+		SecondBar:SetStatusBarTexture(C["medias"].Normal)
+		SecondBar:SetStatusBarColor(0, 0.3, 0, 1)
+
+		local ThirdBar = CreateFrame("StatusBar", nil, Health)
+		ThirdBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		ThirdBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+		ThirdBar:SetWidth(250)
+		ThirdBar:SetStatusBarTexture(C["medias"].Normal)
+		ThirdBar:SetStatusBarColor(0.3, 0.3, 0, 1)
+
+		SecondBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 1)
+		FirstBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 2)
+
+		self.HealPrediction = {
+			myBar = FirstBar,
+			otherBar = SecondBar,
+			absBar = ThirdBar,
+			maxOverflow = 1,
+		}
+	end
 
 	if (C["castbar"].CastBar) then
 		local CastBar = CreateFrame("StatusBar", nil, self)
@@ -253,7 +287,7 @@ function DuffedUIUnitFrames:Target()
 
 	if (C["unitframes"].CombatLog) then
 		local CombatFeedbackText = Health:CreateFontString(nil, "OVERLAY")
-		CombatFeedbackText:SetFont(Font, 12, "OUTLINE")
+		CombatFeedbackText:SetFont(Font, 10, "OUTLINE")
 		CombatFeedbackText:SetPoint("CENTER", 0, 1)
 		CombatFeedbackText.colors = {
 			DAMAGE = {0.69, 0.31, 0.31},

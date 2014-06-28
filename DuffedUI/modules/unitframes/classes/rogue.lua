@@ -5,7 +5,7 @@ local Class = select(2, UnitClass("player"))
 
 if (Class ~= "ROGUE") then return end
 
-function DuffedUIUnitFrames:AddRogueFeatures()
+DuffedUIUnitFrames.AddClassFeatures["ROGUE"] = function(self)
 	local Color = RAID_CLASS_COLORS[Class]
 	local NumPoints = MAX_COMBO_POINTS
 	local Texture = C["medias"].Normal

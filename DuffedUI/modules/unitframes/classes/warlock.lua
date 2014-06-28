@@ -5,7 +5,7 @@ local Class = select(2, UnitClass("player"))
 
 if (Class ~= "WARLOCK") then return end
 
-function DuffedUIUnitFrames:AddWarlockFeatures()
+DuffedUIUnitFrames.AddClassFeatures["WARLOCK"] = function(self)
 	local Texture = C["medias"].Normal
 	local Font = C["medias"].Font
 	local Color = RAID_CLASS_COLORS[Class]	

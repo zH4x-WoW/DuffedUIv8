@@ -102,6 +102,7 @@ C["party"] = {
 	["Enable"] = true,
 	["Portrait"] = true,
 	["BuffsEnable"] = false,
+	["HealBar"] = true,
 }
 
 C["raid"] = {
@@ -112,6 +113,7 @@ C["raid"] = {
 	["FrameWidth"] = 65,
 	["FrameHeight"] = 42,
 	["GridScale"] = 1,
+	["HealBar"] = true,
 }
 
 C["tooltips"] = {
