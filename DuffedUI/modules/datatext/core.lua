@@ -31,10 +31,20 @@ function DuffedUIDT:AddToMenu(name, data)
 	tinsert(self.Menu, {text = name, notCheckable = true, func = self.Toggle, arg1 = data})
 end
 
+local RemoveData = function(self)
+	if self.Data then
+		self.Data.Position = 0
+		self.Data:Disable()
+	end
+
+	self.Data = nil
+end
+
 local SetData = function(self, object)
 	-- Disable the old data text in use
 	if self.Data then
-		self.Data:Disable()
+		--self.Data:Disable()
+		RemoveData(self)
 	end
 	
 	-- Set the new data text
@@ -47,27 +57,16 @@ local SetData = function(self, object)
 	self.Data.Position = self.Num
 	self.Data:SetAllPoints(self.Data.Text)
 	
-	if self.Data.Position > DuffedUIDT.DefaultNumAnchors then
+	if (self.Data.Position > DuffedUIDT.DefaultNumAnchors) then
 		self.Data:SetParent(Panels.PetBattleHider)
 	end
-end
-
-local RemoveData = function(self)
-	if self.Data then
-		self.Data.Position = 0
-		self.Data:Disable()
-	end
-	
-	self.Data = nil
 end
 
 function DuffedUIDT:CreateAnchors()
 	MinimapDataTextOne = Panels.MinimapDataTextOne
 	MinimapDataTextTwo = Panels.MinimapDataTextTwo
 
-	if (MinimapDataTextOne and MinimapDataTextTwo) then
-		self.NumAnchors = self.NumAnchors + 2
-	end
+	if (MinimapDataTextOne and MinimapDataTextTwo) then self.NumAnchors = self.NumAnchors + 2 end
 
 	for i = 1, self.NumAnchors do
 		local Frame = CreateFrame("Button", nil, UIParent)

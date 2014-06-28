@@ -297,11 +297,64 @@ function DuffedUITooltips:OnValueChanged()
 	return
 end
 
+local hex = function(color)
+	return (color.r and format('|cff%02x%02x%02x', color.r * 255, color.g * 255, color.b * 255)) or "|cffFFFFFF"
+end
+
+local nilcolor = { r=1, g=1, b=1 }
+local tapped = { r=.6, g=.6, b=.6 }
+
+local function unitColor(unit)
+	if (not unit) then unit = "mouseover" end
+
+	local color
+	if UnitIsPlayer(unit) then
+		local _, class = UnitClass(unit)
+		color = RAID_CLASS_COLORS[class]
+	elseif (UnitIsTapped(unit) and not UnitIsTappedByPlayer(unit)) then
+		color = tapped
+	else
+		local reaction = UnitReaction(unit, "player")
+		if reaction then
+			color = FACTION_BAR_COLORS[reaction]
+		end
+	end
+
+	return (color or nilcolor)
+end
+
+local function addAuraInfo(self, caster, spellID)
+	if (C["tooltips"].EnableCaster and caster) then
+		local color = unitColor(caster)
+		if color then
+			color = hex(color)
+		else
+			color = ""
+		end
+
+		GameTooltip:AddLine("Applied by "..color..UnitName(caster))
+		GameTooltip:Show()
+	end
+end
+
+hooksecurefunc(GameTooltip, "SetUnitAura", function(self,...)
+	local _,_,_,_,_,_,_, caster,_,_, spellID = UnitAura(...)
+	addAuraInfo(self, caster, spellID)
+end)
+
+hooksecurefunc(GameTooltip, "SetUnitBuff", function(self,...)
+	local _,_,_,_,_,_,_, caster,_,_, spellID = UnitBuff(...)
+	addAuraInfo(self, caster, spellID)
+end)
+
+hooksecurefunc(GameTooltip, "SetUnitDebuff", function(self,...)
+	local _,_,_,_,_,_,_, caster,_,_, spellID = UnitDebuff(...)
+	addAuraInfo(self, caster, spellID)
+end)
+
 DuffedUITooltips:RegisterEvent("ADDON_LOADED")
 DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "DuffedUI") then
-		return
-	end
+	if (addon ~= "DuffedUI") then return end
 	
 	self:CreateAnchor()
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)

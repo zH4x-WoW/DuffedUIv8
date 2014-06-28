@@ -13,8 +13,8 @@ function DuffedUIUnitFrames:AddWarlockFeatures()
 	-- Warlock Class Shards
 	local Shards = CreateFrame("Frame", nil, self)
 	Shards:Point("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
-	Shards:Size((50 * 4) + 9, 10)
-	Shards:SetTemplate("Transparent")
+	Shards:Size((50 * 4) + 9, 6)
+	Shards:CreateBackdrop()
 	
 	for i = 1, 4 do
 		Shards[i] = CreateFrame("StatusBar", nil, Shards)
@@ -22,21 +22,18 @@ function DuffedUIUnitFrames:AddWarlockFeatures()
 		Shards[i]:SetStatusBarTexture(Texture)
 		
 		if i == 1 then
-			Shards[i]:Width(50)
-			Shards[i]:SetPoint("LEFT", Shards, "LEFT", 2, 0)
+			Shards[i]:Width(48)
+			Shards[i]:SetPoint("LEFT", Shards, "LEFT", 0, 0)
 		else
-			Shards[i]:Width(50)
-			Shards[i]:SetPoint("LEFT", Shards[i-1], "RIGHT", 1, 0)
+			Shards[i]:Width(49)
+			Shards[i]:SetPoint("LEFT", Shards[i - 1], "RIGHT", 1, 0)
 		end
-		
-		--Shards[i].bg = Shards[i]:CreateTexture(nil, 'ARTWORK')
-		--Shards[i].bg:Width(50)
 	end
 
 	-- Energy Bar
 	local EnergyBarBG = CreateFrame("Frame", "EnergyBarBG", Shards)
-	EnergyBarBG:SetPoint("TOPLEFT", Shards, "BOTTOMLEFT", 0, -1)
-	EnergyBarBG:SetPoint("TOPRIGHT", Shards, "BOTTOMRIGHT", 0, -1)
+	EnergyBarBG:SetPoint("TOPLEFT", Shards, "BOTTOMLEFT", -2, -3)
+	EnergyBarBG:SetPoint("TOPRIGHT", Shards, "BOTTOMRIGHT", 2, -3)
 	EnergyBarBG:SetHeight(7)
 	EnergyBarBG:SetTemplate("Transparent")
 

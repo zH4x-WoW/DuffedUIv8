@@ -9,6 +9,7 @@ Miscellaneous:SetScript("OnEvent", function(self, event, addon)
 	self.MirrorTimers:Enable()
 	self.DropDown:Enable()
 	self.CollectGarbage:Enable()
+	self.AltPowerBar:Enable()
 	
 	self:UnregisterEvent("ADDON_LOADED")
 end)

@@ -119,6 +119,7 @@ C["raid"] = {
 C["tooltips"] = {
 	["Enable"] = true,
 	["HideOnUnitFrames"] = false,
+	["EnableCaster"] = true,
 }
 
 C["unitframes"] = {
