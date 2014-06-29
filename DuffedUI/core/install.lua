@@ -16,7 +16,7 @@ function Install:Requirement()
 	end
 	
 	if not IsInstalled and Chat then
-		Chat:SetDefaultChatFramePositions()
+		Chat:SetDefaultChatFramesPositions()
 	end
 end
 

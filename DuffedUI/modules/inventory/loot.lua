@@ -48,6 +48,7 @@ function Inventory:SkinLootFrameButtons(i)
 	end
 end
 
-function Inventory:AddLootFrameHooks()
+function Inventory:EnableLootFrame()
+	self:SkinLootFrame()
 	hooksecurefunc("LootFrame_UpdateButton", self.SkinLootFrameButtons)
 end

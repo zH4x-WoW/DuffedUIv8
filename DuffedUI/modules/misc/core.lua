@@ -10,6 +10,7 @@ Miscellaneous:SetScript("OnEvent", function(self, event, addon)
 	self.DropDown:Enable()
 	self.CollectGarbage:Enable()
 	self.AltPowerBar:Enable()
+	self.GameMenu:Enable()
 	
 	self:UnregisterEvent("ADDON_LOADED")
 end)

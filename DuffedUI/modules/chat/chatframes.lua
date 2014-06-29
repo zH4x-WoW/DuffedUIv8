@@ -125,6 +125,11 @@ function DuffedUIChat:StyleFrame(frame)
 	A:Kill()
 	B:Kill()
 	C:Kill()
+	
+	-- Justify loot frame text at the right
+	if (not Frame.isDocked and ID == 4 and TabText:GetText() == LOOT) then
+		Frame:SetJustifyH("RIGHT")
+	end
 
 	Frame.IsSkinned = true
 end
@@ -185,11 +190,6 @@ function DuffedUIChat:SetDefaultChatFramesPositions()
 					Frame:Point("BOTTOMRIGHT", RightChatBackground, "BOTTOMRIGHT", -13, 28)
 				else
 					Frame:Point("BOTTOMRIGHT", DataTextRight, "TOPRIGHT", -5, 5)
-				end
-				if C["chat"].JustifyLoot then
-					Frame:SetJustifyH("RIGHT")
-				else
-					Frame:SetJustifyH("LEFT")
 				end
 			end
 		end

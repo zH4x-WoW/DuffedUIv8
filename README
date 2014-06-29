@@ -1,5 +1,14 @@
 => DuffedUI v8 <=
 
+29.06.2014 =>
+	Added GameMenu
+	Actionbarsbackdrop now unique frame
+	Fix taint for Stance Bar
+	HealComm for raid
+	Update Merchant
+	Update Bags
+	Better way do set justify for loot chat
+	
 28.06.2014 =>
 	AltPowerBar => Need testing
 	Some Fixes

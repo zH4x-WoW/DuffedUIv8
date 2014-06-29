@@ -10,6 +10,7 @@
 	<Script file="inventory\core.lua"/>
 	<Script file="inventory\bags.lua"/>
 	<Script file="inventory\loot.lua"/>
+	<Script file="inventory\merchant.lua"/>
 
 	<!-- Action Bars -->
 	<Script file="actionbars\core.lua"/>
@@ -34,9 +35,6 @@
 	<Script file="maps\worldmap.lua"/>
 	<Script file="maps\zonemap.lua"/>
 	<Script file="maps\minimap.lua"/>
-
-	<!-- Merchant -->
-	<Script file="loot\merchant.lua"/>
 
 	<!-- auras -->
 	<Include file="auras\templates.xml"/>
@@ -124,6 +122,7 @@
 	<Script file="misc\garbagecollection.lua"/>
 	<Script file="misc\dropdown.lua"/>
 	<Script file="misc\mirrortimers.lua"/>
+	<Script file="misc\gamemenu.lua"/>
 
 	<!-- Plugins -->
 	<Script file="plugins\flightpoint\flightpoint.lua"/>

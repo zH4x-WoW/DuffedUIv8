@@ -40,7 +40,7 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 	}
 
 	-- Druid Mana
-	DruidMana:Size(216, 8)
+	DruidMana:Size(216, 3)
 	DruidMana:Point("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, 0)
 	DruidMana:SetStatusBarTexture(Texture)
 	DruidMana:SetStatusBarColor(0.30, 0.52, 0.90)
@@ -132,33 +132,6 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 			SetComboPoints(self)
 		end
 		
-		ComboPoints["PLAYER_ENTERING_WORLD"] = function(self)
-			self:UnregisterEvent("PLAYER_REGEN_DISABLED")
-			self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-			
-			self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-		end
-		
-		ComboPoints["PLAYER_REGEN_DISABLED"] = function(self)
-			UIFrameFadeIn(self, 0.6, 0, 1)
-		end
-		
-		ComboPoints["PLAYER_REGEN_ENABLED"] = function(self)
-			UIFrameFadeOut(self, 0.6, 1, 0)
-		end
-		
-		ComboPoints.Enable = function(self)
-			self:RegisterEvent("PLAYER_REGEN_ENABLED")
-			self:RegisterEvent("PLAYER_REGEN_DISABLED")
-			self:Hide()
-		end
-		
-		ComboPoints.Disable = function(self)
-			self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-			self:UnregisterEvent("PLAYER_REGEN_DISABLED")
-			self:Show()
-		end
-
 		local Width = (200 / 5) - 2
 
 		for i = 1, NumPoints do

@@ -1,6 +1,9 @@
 local D, C, L = select(2, ...):unpack()
 
-local Filter = {
+local Inventory = D["Inventory"]
+local BlizzardMerchantClick = MerchantItemButton_OnModifiedClick
+
+Inventory.MerchantFilter = {
 	[6289]  = true, -- Raw Longjaw Mud Snapper
 	[6291]  = true, -- Raw Brilliant Smallfish
 	[6308]  = true, -- Raw Bristle Whisker Catfish
@@ -14,9 +17,7 @@ local Filter = {
 	[43572] = true, -- Magic Eater
 }
 
-local Merchant = CreateFrame("Frame", "DuffedUIMerchant")
-Merchant:RegisterEvent("MERCHANT_SHOW")
-Merchant:SetScript("OnEvent", function()
+function Inventory:MerchantOnEvent()
 	if C["merchant"].AutoSellGrays or C["merchant"].SellMisc then
 		local Cost = 0
 
@@ -38,7 +39,7 @@ Merchant:SetScript("OnEvent", function()
 						Cost = Cost + Price
 					end
 
-					if C["merchant"].SellMisc and Filter[ID] then
+					if C["merchant"].SellMisc and self.MerchantFilter[ID] then
 						UseContainerItem(Bag, Slot)
 						PickupMerchantItem()
 						Cost = Cost + Price
@@ -80,10 +81,9 @@ Merchant:SetScript("OnEvent", function()
 			end
 		end
 	end
-end)
+end
 
-local OriginalMerchantItemButton_OnModifiedClick = MerchantItemButton_OnModifiedClick
-function MerchantItemButton_OnModifiedClick(self, ...)
+function Inventory:MerchantClick(...)
 	if (IsAltKeyDown()) then
 		local MaxStack = select(8, GetItemInfo(GetMerchantItemLink(self:GetID())))
 
@@ -92,7 +92,17 @@ function MerchantItemButton_OnModifiedClick(self, ...)
 		end
 	end
 
-	OriginalMerchantItemButton_OnModifiedClick(self, ...)
+	BlizzardMerchantClick(self, ...)
 end
 
-D["Merchant"] = Merchant
+function Inventory:EnableMerchant()
+	self:RegisterEvent("MERCHANT_SHOW")
+
+	MerchantItemButton_OnModifiedClick = self.MerchantClick
+end
+
+function Inventory:DisableMerchant()
+	self:UnregisterEvent("MERCHANT_SHOW")
+
+	MerchantItemButton_OnModifiedClick = BlizzardMerchantClick
+end
