@@ -18,12 +18,11 @@
 	Better way do set justify for loot chat
 	
 28.06.2014 =>
-	AltPowerBar => Need testing
+	AltPowerBar
 	Some Fixes
 	Added CasterName for Buffs
 	Revert some changes
 	HealBar for Party & Raidframes
-	Classfeatures call directly in Player.lua
 	
 27.06.2014 =>
 	Adjustments to some misc features
