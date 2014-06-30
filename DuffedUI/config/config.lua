@@ -35,6 +35,7 @@ C["actionbars"] = {
 	["PetbarAlwaysVisible"] = false,
 	["Rightbutton"] = true,
 	["HideBackdrop"] = false,
+	["HideRightBar"] = false,
 }
 
 C["auras"] = {

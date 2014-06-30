@@ -125,13 +125,15 @@ function DuffedUIActionBars:AddPanels()
 	A3.Backdrop:SetAllPoints()
 	
 	local A4 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
-	A4:Point("RIGHT", UIParent, "RIGHT", -15, -14)
-	A4:SetHeight((Size * 12) + (Spacing * 13))
-	A4:SetWidth((Size * 1) + (Spacing * 2))
-	A4:SetFrameStrata("BACKGROUND")
-	A4:SetFrameLevel(2)
-	A4.Backdrop = CreateFrame("Frame", nil, A4)
-	A4.Backdrop:SetAllPoints()
+	if (C["actionbars"].HideRightBar == false) then
+		A4:Point("RIGHT", UIParent, "RIGHT", -15, -14)
+		A4:SetHeight((Size * 12) + (Spacing * 13))
+		A4:SetWidth((Size * 1) + (Spacing * 2))
+		A4:SetFrameStrata("BACKGROUND")
+		A4:SetFrameLevel(2)
+		A4.Backdrop = CreateFrame("Frame", nil, A4)
+		A4.Backdrop:SetAllPoints()
+	end
 
 	local A5 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A5:SetPoint("BOTTOMRIGHT", Panels.DataTextRight, "BOTTOMLEFT", -24, 2)
@@ -144,7 +146,11 @@ function DuffedUIActionBars:AddPanels()
 	
 	local A6 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A6:SetSize(PetSize + (Spacing * 2), (PetSize * 10) + (Spacing * 11))
-	A6:SetPoint("RIGHT", A4, "LEFT", -6, 0)
+	if C["actionbars"].HideRightBar then
+		A6:Point("RIGHT", UIParent, "RIGHT", -15, -14)
+	else
+		A6:SetPoint("RIGHT", A4, "LEFT", -6, 0)
+	end
 	
 	local A7 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A7:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
@@ -157,7 +163,7 @@ function DuffedUIActionBars:AddPanels()
 		A1.Backdrop:SetTemplate("Transparent")
 		A2.Backdrop:SetTemplate("Transparent")
 		A3.Backdrop:SetTemplate("Transparent")
-		A4.Backdrop:SetTemplate("Transparent")
+		if (C["actionbars"].HideRightBar == false) then A4.Backdrop:SetTemplate("Transparent") end
 		A5.Backdrop:SetTemplate("Transparent")
 		A6:SetTemplate("Transparent")
 		A7.Backdrop:SetTemplate("Transparent")
@@ -166,7 +172,7 @@ function DuffedUIActionBars:AddPanels()
 	Panels.ActionBar1 = A1
 	Panels.ActionBar2 = A2
 	Panels.ActionBar3 = A3
-	Panels.ActionBar4 = A4
+	if (C["actionbars"].HideRightBar == false) then Panels.ActionBar4 = A4 end
 	Panels.ActionBar5 = A5
 	Panels.PetActionBar = A6
 	Panels.StanceBar = A7
@@ -299,7 +305,7 @@ DuffedUIActionBars:SetScript("OnEvent", function(self, event, addon)
 		self:CreateBar1()
 		self:CreateBar2()
 		self:CreateBar3()
-		self:CreateBar4()
+		if (C["actionbars"].HideRightBar == false) then self:CreateBar4() end
 		self:CreateBar5()
 		self:CreatePetBar()
 		self:CreateStanceBar()

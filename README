@@ -1,6 +1,7 @@
 => DuffedUI v8 <=
 
 30.06.2014 =>
+	Added option to hide Right ActionBar
 	Fixed PetBar-Backdrop
 	Fixed BuffTracker
 	
@@ -98,7 +99,7 @@
 	Stuff, Minimap Zonetext & Coords, Gradientstuff
 	
 20.05.2014 =>
-	Adjust Actionar 3 & 5, new position
+	Adjust ActionBar 3 & 5, new position
 	
 20.04.2014 =>
 	Adjust chat again

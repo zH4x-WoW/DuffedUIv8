@@ -1,5 +1,5 @@
 local D, C, L = select(2, ...):unpack()
-if (not C["actionbars"].Enable) then return end
+if (not C["actionbars"].Enable) or (C["actionbars"].HideRightBar == true) then return end
 
 local DuffedUIActionBars = D["ActionBars"]
 local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
