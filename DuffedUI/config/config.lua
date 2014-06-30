@@ -89,6 +89,7 @@ C["misc"] = {
 	["AltPowerBarEnable"] = true,
 	["FlightPoint"] = true,
 	["CombatAnimation"] = true,
+	["Click2Cast"] = true,
 }
 
 C["nameplates"] = {

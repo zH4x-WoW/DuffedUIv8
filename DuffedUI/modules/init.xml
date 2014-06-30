@@ -30,6 +30,16 @@
 	<!-- Cooldowns -->
 	<Script file="cooldowns\cooldowns.lua"/>
 
+	<!-- Misc. -->
+	<Script file="misc\core.lua"/>
+	<Script file="misc\altpowerbar.lua"/>
+	<Script file="misc\threatbar.lua"/>
+	<Script file="misc\garbagecollection.lua"/>
+	<Script file="misc\dropdown.lua"/>
+	<Script file="misc\mirrortimers.lua"/>
+	<Script file="misc\gamemenu.lua"/>
+	<Script file="misc\micromenu.lua"/>
+	
 	<!-- maps -->
 	<Script file="maps\core.lua"/>
 	<Script file="maps\worldmap.lua"/>
@@ -59,7 +69,6 @@
 	<Script file="datatext\elements\hps.lua"/>
 	<Script file="datatext\elements\mastery.lua"/>
 	<Script file="datatext\elements\system.lua"/>
-    <!-- <Script file="datatext\elements\micromenu.lua"/> -->
 	<Script file="datatext\elements\power.lua"/>
 	<Script file="datatext\elements\regen.lua"/>
 	<Script file="datatext\elements\talent.lua"/>
@@ -114,23 +123,16 @@
 	<Script file="petbattles\actions.lua"/>
 	<Script file="petbattles\others.lua"/>
 
-	<!-- Misc. -->
-	<Script file="misc\core.lua"/>
-	<Script file="misc\altpowerbar.lua"/>
-	<Script file="misc\threatbar.lua"/>
-	<Script file="misc\garbagecollection.lua"/>
-	<Script file="misc\dropdown.lua"/>
-	<Script file="misc\mirrortimers.lua"/>
-	<Script file="misc\gamemenu.lua"/>
-
 	<!-- Plugins -->
 	<Script file="plugins\flightpoint\flightpoint.lua"/>
 	<Include file="plugins\flightpoint\flightpoint.xml"/>
 	<Script file="plugins\misc\addonmanager.lua"/>
 	<Script file="plugins\misc\combat.lua"/>
+	<Script file="plugins\misc\efl.lua"/>
 	<Script file="plugins\talents\buffnotice.lua"/>
 	<Script file="plugins\talents\bufftracker.lua"/>
 	<Script file="plugins\talents\classtimer.lua"/>
+	<Script file="plugins\talents\clickcast.lua"/>
 	<Script file="plugins\talents\ses.lua"/>
 	<Script file="plugins\vendor\gsc.lua"/>
 	<Script file="plugins\vendor\scan.lua"/>

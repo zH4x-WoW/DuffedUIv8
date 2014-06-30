@@ -3,6 +3,7 @@ local D, C, L = select(2, ...):unpack()
 local _G = _G
 local Map = _G["Minimap"]
 local Panels = D["Panels"]
+local Miscellaneous = D["Miscellaneous"]
 local Maps = D["Maps"]
 local Elapsed = 0
 
@@ -53,7 +54,17 @@ function Maps:StyleMinimap()
 	Mail:Point("TOPRIGHT", 3, 3)
 	Mail:SetFrameLevel(Map:GetFrameLevel() + 2)
 	MailBorder:Hide()
-	MailIcon:SetTexture("Interface\\AddOns\\DuffedUI\\Medias\\Textures\\mail")
+	MailIcon:SetTexture(C["medias"].Mail)
+	
+	Map:SetScript("OnMouseUp", function(self, button)
+		if (button == "RightButton") then
+			ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, Map, 0, D.Scale(-3))
+		elseif (button == "MiddleButton") then
+			EasyMenu(Miscellaneous.MicroMenu, Miscellaneous.MicroMenuFrame, "cursor", D.Scale(-160), 0, "MENU", 2)
+		else
+			Minimap_OnClick(self)
+		end
+	end)
 end
 
 function Maps:PositionMinimap()

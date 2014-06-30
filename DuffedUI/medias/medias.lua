@@ -17,6 +17,11 @@ C["medias"] = {
 	["HoverButton"] = [[Interface\AddOns\DuffedUI\medias\textures\button_hover]],
 	["Logo"] = [[Interface\AddOns\DuffedUI\medias\textures\logo]],
 	["Duffed"] =  [[Interface\AddOns\DuffedUI\medias\textures\duffed]],
+	["Mail"] = [[Interface\AddOns\DuffedUI\medias\textures\mail]],
+	["alliance"] = [[Interface\AddOns\DuffedUI\medias\textures\alliance]],
+	["horde"] = [[Interface\AddOns\DuffedUI\medias\textures\horde]],
+	["d3"] = [[Interface\AddOns\DuffedUI\medias\textures\d3]],
+	["sc2"] = [[Interface\AddOns\DuffedUI\medias\textures\sc2]],
 	
 	-- colors
 	["BorderColor"] = (not C["general"].InOut and { .125, .125, .125 }) or C["general"].BorderColor or { .125, .125, .125 },

@@ -1,6 +1,9 @@
 => DuffedUI v8 <=
 
 30.06.2014 =>
+	Added plugin => EnhancedFriendsList
+	Added plugin => Click2Cast
+	Added MinimapMenu
 	Fixed Combopoints
 	Adding Enhanced Gold-Datatext, removed Currency-Datatext (no longer needed)
 	Correct Fix for PetBar-Backdrop

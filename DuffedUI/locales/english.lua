@@ -127,6 +127,12 @@ L.BuffTracker.sai = "+5% Strength, Agility, Intellect"
 L.BuffTracker.st = "+10% Stamina"
 L.BuffTracker.error = "ERROR"
 
+-----------------
+L.Plugins = {} --
+-----------------
+
+L.Plugins.Click2CastTitle = "Mouse Bindings"
+
 --------------
 L.Bind = {} --
 --------------
