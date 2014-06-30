@@ -1,6 +1,7 @@
 => DuffedUI v8 <=
 
 30.06.2014 =>
+	Correct Fix for PetBar-Backdrop
 	Added option to hide Right ActionBar
 	Fixed PetBar-Backdrop
 	Fixed BuffTracker

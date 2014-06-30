@@ -151,6 +151,10 @@ function DuffedUIActionBars:AddPanels()
 	else
 		A6:SetPoint("RIGHT", A4, "LEFT", -6, 0)
 	end
+	A6.Backdrop = CreateFrame("Frame", nil, A6)
+	A6.Backdrop:SetAllPoints()
+	A6.Backdrop:SetFrameStrata("BACKGROUND")
+	A6.Backdrop:SetFrameLevel(1)
 	
 	local A7 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A7:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
@@ -165,7 +169,7 @@ function DuffedUIActionBars:AddPanels()
 		A3.Backdrop:SetTemplate("Transparent")
 		if (C["actionbars"].HideRightBar == false) then A4.Backdrop:SetTemplate("Transparent") end
 		A5.Backdrop:SetTemplate("Transparent")
-		A6:SetTemplate("Transparent")
+		A6.Backdrop:SetTemplate("Transparent")
 		A7.Backdrop:SetTemplate("Transparent")
 	end
 	
