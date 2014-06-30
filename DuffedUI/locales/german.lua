@@ -114,6 +114,20 @@ L.DataText.Slots = {
 	[11] = {18, "Ranged", 1000}
 }
 
+---------------------
+L.BuffTracker = {} --
+---------------------
+
+L.BuffTracker.ap = "+10% Attack Power"
+L.BuffTracker.as = "+10% Melee & Ranged Attack Speed"
+L.BuffTracker.sp = "+10% Spell Power"
+L.BuffTracker.sh = "+5% Spell Haste"
+L.BuffTracker.csc = "+5% Critical Strike Chance"
+L.BuffTracker.kmr = "+3000 Mastery Rating"
+L.BuffTracker.sai = "+5% Strength, Agility, Intellect"
+L.BuffTracker.st = "+10% Stamina"
+L.BuffTracker.error = "ERROR"
+
 ------------------------------------------------
 L.Bind = {} -- Bind Locales
 ------------------------------------------------

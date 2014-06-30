@@ -171,11 +171,10 @@ local btWidth = ((Minimap:GetWidth() - 6) / 6) + 4
 local btHeight = Minimap:GetWidth() + 10
 
 local bufftracker = CreateFrame("Frame", "BuffTracker", Minimap)
-bufftracker:SetTemplate("TRansparent")
+bufftracker:SetTemplate("Transparent")
 bufftracker:Width(btWidth + 2)
 bufftracker:Height(btHeight)
 bufftracker:SetPoint("TOPLEFT", Minimap, "TOPRIGHT", 4, 0)
-bufftracker:CreateShadow("Default")
 
 bufftracker:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 bufftracker:RegisterEvent("UNIT_INVENTORY_CHANGED")
@@ -273,23 +272,23 @@ local AllBuffs = {
 
 local function LabelType(bufftype)
 	if bufftype == "10ap" then
-		return L.bufftracker_10ap
+		return L.BuffTracker.ap
 	elseif bufftype == "10as" then
-		return L.bufftracker_10as
+		return L.BuffTracker.as
 	elseif bufftype == "10sp" then
-		return L.bufftracker_10sp
+		return L.BuffTracker.sp
 	elseif bufftype == "5sh" then
-		return L.bufftracker_5sh
+		return L.BuffTracker.sh
 	elseif bufftype == "5csc" then
-		return L.bufftracker_5csc
+		return L.BuffTracker.csc
 	elseif bufftype == "3kmr" then
-		return L.bufftracker_3kmr
+		return L.BuffTracker.kmr
 	elseif bufftype == "5sai" then
-		return L.bufftracker_5sai
+		return L.BuffTracker.sai
 	elseif bufftype == "10s" then
-		return L.bufftracker_10s
+		return L.BuffTracker.st
 	else
-		return L.bufftracker_error
+		return L.BuffTracker.error
 	end
 end
 -------------------------
@@ -400,8 +399,8 @@ local function CreateBuffArea(bufftype, relativeTo, column)
 	end
 	
 	bigButton.text = bigButton:CreateFontString(nil, "OVERLAY")
-	bigButton.text:SetPoint("TOPLEFT", bigButton, "TOPRIGHT", 3, -1)
-	bigButton.text:SetFont(C["medias"].Font, 13)
+	bigButton.text:Point("TOPLEFT", bigButton, "TOPRIGHT", 3, -1)
+	bigButton.text:SetFont(C["medias"].Font, 13, "THINOUTLINE")
 	bigButton.text:SetText(LabelType(bufftype))
 	
 	bigButton:EnableMouse(true)
@@ -424,12 +423,11 @@ bufftrackersummary:Hide()
 local bufftracker_toggle = CreateFrame("Frame", "BuffTrackerToggle", bufftracker)
 bufftracker_toggle:SetPoint("TOP", bufftracker, "BOTTOM", 0, -2)
 bufftracker_toggle:SetTemplate("Default")
-bufftracker_toggle:Size(bufftracker:GetWidth(), 9)
+bufftracker_toggle:Size(bufftracker:GetWidth(), 10)
 bufftracker_toggle.text = bufftracker_toggle:CreateFontString(nil, "OVERLAY")
 bufftracker_toggle.text:SetFont(C["medias"].Font, 12, "THINOUTLINE")
 bufftracker_toggle.text:SetText("|cff319f1b+|r")
 bufftracker_toggle.text:SetPoint("CENTER")
-bufftracker_toggle:CreateShadow("Default")
 
 -- Fix design bug for mini-button with 1280/1600 res and uiscale 1.0
 if ((D.screenwidth == 1280 or D.screenwidth == 1600) and C["general"].UIScale == 1) then
