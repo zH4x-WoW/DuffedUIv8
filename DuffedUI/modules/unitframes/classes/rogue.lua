@@ -55,10 +55,7 @@ function DuffedUIUnitFrames:AddRogueFeatures()
 	end
 
 	local OnUpdate = function(self)
-		local min = UnitPower("player")
-		
-		self.Bar:SetValue(min)
-		self.Text:SetText(min .. " / " .. self.max)
+		self.Text:SetText(self.max)
 	end
 
 	local SetComboPoints = function(self)
@@ -183,8 +180,9 @@ function DuffedUIUnitFrames:AddRogueFeatures()
 		EnergyBar.Bar:SetPoint("BOTTOMRIGHT", -2, 2)
 
 		EnergyBar.Text = EnergyBar:CreateFontString(nil, "OVERLAY")
-		EnergyBar.Text:SetFont(Font, 12, "THINOUTLINE")
+		EnergyBar.Text:SetFont(Font, 16, "THINOUTLINE")
 		EnergyBar.Text:SetPoint("LEFT", EnergyBar, "RIGHT", 3, 0)
+		EnergyBar.Text:SetTextColor(Color.r, Color.g, Color.b)
 		EnergyBar.Text:SetShadowColor(0, 0, 0)
 		EnergyBar.Text:SetShadowOffset(1.25, -1.25)
 		

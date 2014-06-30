@@ -7,7 +7,7 @@ if (Class ~= "DRUID") then return end
 
 function DuffedUIUnitFrames:AddDruidFeatures()
 	local DruidMana = CreateFrame("StatusBar", nil, self.Health)
-	local Color = RAID_CLASS_COLORS[Class]
+local Color = RAID_CLASS_COLORS[Class]
 	local NumPoints = MAX_COMBO_POINTS
 	local Texture = C["medias"].Normal
 	local Blank = C["medias"].Blank
@@ -30,13 +30,6 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 		[3] = {0.60, 0.60, 0.30},
 		[4] = {0.40, 0.70, 0.30},
 		[5] = {0.30, 0.70, 0.30},
-	}
-
-	local Backdrop = {
-		bgFile = Blank, 
-		edgeFile = Blank, 
-		tile = false, tileSize = 0, edgeSize = 1,
-		insets = {left = -1, right = -1, top = -1, bottom = -1}
 	}
 
 	-- Druid Mana
@@ -81,20 +74,32 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 	-- Register
 	self.DruidMana = DruidMana
 	self.DruidMana.bg = DruidMana.Background
+	
+	local Backdrop = {
+		bgFile = Blank, 
+		edgeFile = Blank, 
+		tile = false, tileSize = 0, edgeSize = 1,
+		insets = {left = -1, right = -1, top = -1, bottom = -1}
+	}
 
-
-	-- Combopoints
+	-- Functions
 	local StyleFrame = function(self)
 		self:SetBackdrop(Backdrop)
 		self:SetBackdropColor(unpack(BackdropColor))
 		self:SetBackdropBorderColor(unpack(BorderColor))
 	end
 
-	local OnUpdate = function(self)
-		local min = UnitPower("player")
+	local GetAnticipation = function()
+		local Name = GetSpellInfo(115189)
+		local Count = select(4, UnitAura("player", Name))
 		
-		self.Bar:SetValue(min)
-		self.Text:SetText(min .. " / " .. self.max)
+		if (Count and Count > 0) then
+			return Count
+		end
+	end
+
+	local OnUpdate = function(self)
+		self.Text:SetText(self.max)
 	end
 
 	local SetComboPoints = function(self)
@@ -124,6 +129,16 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 			self[event](self, arg1)
 		end)
 		
+		ComboPoints["UNIT_AURA"] = function(self, unit)
+			if (unit ~= "player") then
+				return
+			end
+			
+			local Count = GetAnticipation()
+			
+			self.Anticipation:SetText(Count and Count or "")
+		end
+
 		ComboPoints["UNIT_COMBO_POINTS"] = function(self)
 			SetComboPoints(self)
 		end
@@ -131,6 +146,39 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 		ComboPoints["PLAYER_TARGET_CHANGED"] = function(self)
 			SetComboPoints(self)
 		end
+		
+		ComboPoints["PLAYER_ENTERING_WORLD"] = function(self)
+			self:UnregisterEvent("PLAYER_REGEN_DISABLED")
+			self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+			
+			self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+		end
+		
+		ComboPoints["PLAYER_REGEN_DISABLED"] = function(self)
+			UIFrameFadeIn(self, 0.6, 0, 1)
+		end
+		
+		ComboPoints["PLAYER_REGEN_ENABLED"] = function(self)
+			UIFrameFadeOut(self, 0.6, 1, 0)
+		end
+		
+		ComboPoints.Enable = function(self)
+			self:RegisterEvent("PLAYER_REGEN_ENABLED")
+			self:RegisterEvent("PLAYER_REGEN_DISABLED")
+			self:Hide()
+		end
+		
+		ComboPoints.Disable = function(self)
+			self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+			self:UnregisterEvent("PLAYER_REGEN_DISABLED")
+			self:Show()
+		end
+
+		ComboPoints.Anticipation = ComboPoints:CreateFontString(nil, "OVERLAY")
+		ComboPoints.Anticipation:SetFont(Font, 12)
+		ComboPoints.Anticipation:SetPoint("BOTTOM", ComboPoints, "TOP", 0, 1)
+		ComboPoints.Anticipation:SetShadowColor(0, 0, 0)
+		ComboPoints.Anticipation:SetShadowOffset(1.25, -1.25)
 		
 		local Width = (200 / 5) - 2
 
@@ -176,8 +224,9 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 		EnergyBar.Bar:SetPoint("BOTTOMRIGHT", -2, 2)
 
 		EnergyBar.Text = EnergyBar:CreateFontString(nil, "OVERLAY")
-		EnergyBar.Text:SetFont(Font, 12, "THINOUTLINE")
+		EnergyBar.Text:SetFont(Font, 16, "THINOUTLINE")
 		EnergyBar.Text:SetPoint("LEFT", EnergyBar, "RIGHT", 3, 0)
+		EnergyBar.Text:SetTextColor(Color.r, Color.g, Color.b)
 		EnergyBar.Text:SetShadowColor(0, 0, 0)
 		EnergyBar.Text:SetShadowOffset(1.25, -1.25)
 		

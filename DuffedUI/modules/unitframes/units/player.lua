@@ -328,13 +328,6 @@ function DuffedUIUnitFrames:Player()
 		Bar:Point("TOP", AnchorFrameRessources, "BOTTOM", 0, -2)
 		Bar:Size(202, 8)
 
-		-- Border for the experience bar
-		local TotemBorder = CreateFrame("Frame", nil, Bar)
-		TotemBorder:SetPoint("TOPLEFT", Bar, "TOPLEFT", D.Scale(-2), D.Scale(2))
-		TotemBorder:SetPoint("BOTTOMRIGHT", Bar, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
-		TotemBorder:SetTemplate("Default")
-		TotemBorder:SetFrameLevel(2)
-
 		Bar.activeTotems = 0
 		Bar.Override = DuffedUIUnitFrames.UpdateTotemOverride
 
