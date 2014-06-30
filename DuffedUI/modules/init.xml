@@ -49,7 +49,6 @@
 	<Script file="datatext\elements\bags.lua"/>
 	<Script file="datatext\elements\calltoarms.lua"/>
 	<Script file="datatext\elements\crit.lua"/>
-	<Script file="datatext\elements\currency.lua"/>
 	<Script file="datatext\elements\dps.lua"/>
 	<Script file="datatext\elements\durability.lua"/>
 	<Script file="datatext\elements\friends.lua"/>

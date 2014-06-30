@@ -1,9 +1,9 @@
 local D, C, L = select(2, ...):unpack()
 if not D.Client == "deDE" then return end
 
-------------------------------------------------
-L.DataText = {} -- Data Text Locales
-------------------------------------------------
+------------------
+L.DataText = {} --
+------------------
 
 -- There's globalstrings for most of these datatexts btw, We shouldn't need to localize most of them
 -- Something we could do is a "Global" locale file, for stuff we don't need localized by users. Just an idea.
@@ -64,7 +64,7 @@ L.DataText.Character = "Character: "
 L.DataText.Server = "Server: "
 L.DataText.Total = "Total: "
 L.DataText.SavedRaid = "Saved Raid(s)"
-L.DataText.Currency = "Currency"
+L.DataText.currencyWeekly = "Weekly: "
 L.DataText.FPS = " fps & "
 L.DataText.MS = " ms"
 L.DataText.Critical = " crit"
@@ -128,27 +128,36 @@ L.BuffTracker.sai = "+5% Strength, Agility, Intellect"
 L.BuffTracker.st = "+10% Stamina"
 L.BuffTracker.error = "ERROR"
 
-------------------------------------------------
-L.Bind = {} -- Bind Locales
-------------------------------------------------
+--------------
+L.Bind = {} --
+--------------
 
 L.Bind.Combat = "You can't bind keys in combat."
+L.Bind.Instruct = "Hover your mouse over any actionbutton to bind it. Press the escape key or right click to clear the current actionbuttons keybinding."
+L.Bind.Save = "Save bindings"
+L.Bind.DiscardBind = "Discard bindings"
+L.Bind.Saved = "All keybindings have been saved."
+L.Bind.Discard = "All newly set keybindings have been discarded."
 
-------------------------------------------------
-L.Tooltips = {} -- Tooltips Locales
-------------------------------------------------
+------------------
+L.Tooltips = {} --
+------------------
 
 L.Tooltips.MoveAnchor = "Move Game Tooltip"
+L.Tooltips.gold_a = "Archaeology: "
+L.Tooltips.gold_c = "Cooking: "
+L.Tooltips.gold_jc = "Jewelcrafting: "
+L.Tooltips.gold_dr = "Dungeon & Raids: "
 
-------------------------------------------------
-L.UnitFrames = {} -- Unit Frames Locales
-------------------------------------------------
+--------------------
+L.UnitFrames = {} --
+--------------------
 
 L.UnitFrames.Ghost = "Ghost"
 
-------------------------------------------------
-L.Movers = {} -- Action Bars Locales
-------------------------------------------------
+----------------
+L.Movers = {} --
+----------------
 
 L.Movers.Extrabutton = "Move Extrabutton"
 L.Movers.Ressources = "Move Ressourcebar"
@@ -156,9 +165,9 @@ L.Movers.ClassTimer = "Move ClassTimer"
 L.Movers.ClassTimerDebuff = "Move Target Debuffs"
 L.Movers.BattleNet = "Move BattleNetFrame"
 
-------------------------------------------------
-L.Install = {} -- Installation of DuffedUI
-------------------------------------------------
+-----------------
+L.Install = {} --
+-----------------
 
 L.Install.Tutorial = "Tutorial"
 L.Install.Install = "Install"
@@ -168,10 +177,18 @@ L.Install.InstallStep2 = "The second step applies the correct chat setup. If you
 L.Install.InstallStep3 = "The third and final step applies the default frame positions. This step is |cffff0000recommended|r for new users.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
 L.Install.InstallStep4 = "Installation is complete. Please click the 'Complete' button to reload the UI. Enjoy DuffedUI! Visit us at www.tukui.org!"
 
-------------------------------------------------
-L.Help = {} -- /tukui help
-------------------------------------------------
+--------------
+L.Help = {} --
+--------------
 
 L.Help.Title = "DuffedUI Commands:"
 L.Help.Datatexts = "'|cff00ff00dt|r' or '|cff00ff00datatext|r' : Enable or disable datatext configuration."
 L.Help.Install = "'|cff00ff00install|r' or '|cff00ff00reset|r' : Install or reset DuffedUI to default settings."
+
+------------------
+L.Merchant = {} --
+------------------
+
+L.Merchant.NotEnoughMoney = "You don't have enough money to repair!"
+L.Merchant.RepairCost = "Your items have been repaired for"
+L.Merchant.SoldTrash = "Your vendor trash has been sold and you earned"

@@ -63,7 +63,7 @@ L.DataText.Character = "Character: "
 L.DataText.Server = "Server: "
 L.DataText.Total = "Total: "
 L.DataText.SavedRaid = "Saved Raid(s)"
-L.DataText.Currency = "Currency"
+L.DataText.currencyWeekly = "Weekly: "
 L.DataText.FPS = " fps & "
 L.DataText.MS = " ms"
 L.DataText.Critical = " crit"
@@ -143,6 +143,10 @@ L.Tooltips = {} --
 ------------------
 
 L.Tooltips.MoveAnchor = "Move Game Tooltip"
+L.Tooltips.gold_a = "Archaeology: "
+L.Tooltips.gold_c = "Cooking: "
+L.Tooltips.gold_jc = "Jewelcrafting: "
+L.Tooltips.gold_dr = "Dungeon & Raids: "
 
 --------------------
 L.UnitFrames = {} --
