@@ -190,6 +190,7 @@ L.Help = {} --
 L.Help.Title = "DuffedUI Commands:"
 L.Help.Datatexts = "'|cff00ff00dt|r' or '|cff00ff00datatext|r' : Enable or disable datatext configuration."
 L.Help.Install = "'|cff00ff00install|r' or '|cff00ff00reset|r' : Install or reset DuffedUI to default settings."
+L.Help.Outdated = "Your version of DuffedUI is out of date. You can download the latest version from www.tukui.org"
 
 ------------------
 L.Merchant = {} --

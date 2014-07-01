@@ -8,4 +8,5 @@
 	<Script file="animation.lua"/>
 	<Script file="colors.lua"/>
 	<Script file="install.lua"/>
+	<Script file="versioncheck.lua"/>
 </Ui>

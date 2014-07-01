@@ -512,7 +512,7 @@ function DuffedUIUnitFrames:GetPartyFramesAttributes()
 end
 
 function DuffedUIUnitFrames:GetRaidFramesAttributes()
-	local Properties = C["party"].Enable and "custom [@raid6,exists] hide;show" or "solo, party, raid"
+	local Properties = C["party"].Enable and "custom [@raid6,exists] show;hide" or "solo, party, raid"
 	local pointG = "LEFT"
 	local capG = "BOTTOM"
 	if C["raid"].GridVertical then
