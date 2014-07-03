@@ -1,5 +1,5 @@
 local D, C, L = select(2, ...):unpack()
-if C["misc"].Click2Cast ~= true then return end
+if C["talent"].Click2Cast ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Simple click2cast spell binder(sBinder by Fernir)

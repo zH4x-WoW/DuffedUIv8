@@ -128,6 +128,9 @@
 	<!-- Plugins -->
 	<Script file="plugins\flightpoint\flightpoint.lua"/>
 	<Include file="plugins\flightpoint\flightpoint.xml"/>
+	<Script file="plugins\items\ilevel.lua"/>
+	<Script file="plugins\items\ilvlr.lua"/>
+	<Script file="plugins\items\itemcooldowns.lua"/>
 	<Script file="plugins\misc\addonmanager.lua"/>
 	<Script file="plugins\misc\combat.lua"/>
 	<Script file="plugins\misc\efl.lua"/>

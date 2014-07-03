@@ -6,6 +6,9 @@
 	Added TellTarget
 	Removed DataTexts => HPS, DPS, Regen
 	Added DataTexts => Block, Dodge, Parry
+	Added plugin => ItemLevel on ToolTip
+	Added plugin => ItemLevel on Charscreen
+	Added plugin => ItemCooldowns
 	
 01.07.2014 =>
 	Added VersionCheck

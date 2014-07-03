@@ -89,7 +89,6 @@ C["misc"] = {
 	["AltPowerBarEnable"] = true,
 	["FlightPoint"] = true,
 	["CombatAnimation"] = true,
-	["Click2Cast"] = true,
 }
 
 C["nameplates"] = {
@@ -126,6 +125,7 @@ C["tooltips"] = {
 	["Enable"] = true,
 	["HideOnUnitFrames"] = false,
 	["EnableCaster"] = true,
+	["ItemLevel"] = true,
 }
 
 C["unitframes"] = {
@@ -151,6 +151,7 @@ C["castbar"] = {
 }
 
 C["talent"] = {
+	["Click2Cast"] = true,
 	["SESEnable"] = true,
 	["SESEnableGear"] = true,
 	["SESGearSwap"] = true,
@@ -170,4 +171,9 @@ C["classtimer"] = {
 	["TargetBuffColor"] = { 70/255, 150/255, 70/255, 1 },
 	["TargetDebuffColor"] = { 150/255, 30/255, 30/255, 1 },
 	["TrinketColor"] = {75/255, 75/255, 75/255, 1 },
+}
+
+C["plugins"] = {
+	["ItemCooldowns"] = true,
+	["ItemLevelCharacter"] = true,
 }
