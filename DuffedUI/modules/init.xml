@@ -111,6 +111,7 @@
 
 	<!-- tooltip -->
 	<Script file="tooltip\tooltip.lua"/>
+	<Script file="tooltip\itemidcount.lua"/>
 	
 	<!-- nameplates -->
 	<Script file="nameplates\nameplates.lua"/>
@@ -134,7 +135,6 @@
 	<Script file="plugins\misc\addonmanager.lua"/>
 	<Script file="plugins\misc\combat.lua"/>
 	<Script file="plugins\misc\HatTrick.lua"/>
-	<Script file="plugins\misc\location.lua"/>
 	<Script file="plugins\misc\mage.lua"/>
 	<Script file="plugins\misc\mail.lua"/>
 	<Script file="plugins\misc\misc.lua"/>
@@ -143,7 +143,11 @@
 	<Script file="plugins\talents\bufftracker.lua"/>
 	<Script file="plugins\talents\classtimer.lua"/>
 	<Script file="plugins\talents\clickcast.lua"/>
+	<Script file="plugins\talents\raidcooldowns.lua"/>
 	<Script file="plugins\talents\ses.lua"/>
+	<Script file="plugins\talents\spellalert.lua"/>
+	<script file="plugins\talents\spellcooldowns.lua"/>
+	<Script file="plugins\talents\spellID.lua"/>
 	<Script file="plugins\vendor\gsc.lua"/>
 	<Script file="plugins\vendor\scan.lua"/>
 	<Script file="plugins\vendor\scroll.lua"/>

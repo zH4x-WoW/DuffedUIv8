@@ -153,7 +153,7 @@ SpellBinder.makeFramesList = function(self)
 	for frame, value in pairs(ClickCastFrames) do
 		local v
 		if frame and type(frame) == "table" then v = frame:GetName() end
-		if C["talents"].Click2Cast_Filter then
+		if C["talent"].Click2Cast_Filter then
 			if v ~= "oUF_DuffedUITarget" and v ~= "oUF_DuffedUIPlayer" then DB.frames[frame] = DB.frames[frame] or true end
 		else
 			if v then DB.frames[frame] = DB.frames[frame] or true end

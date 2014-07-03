@@ -151,6 +151,7 @@ L.Tooltips.gold_a = "Archaeology: "
 L.Tooltips.gold_c = "Cooking: "
 L.Tooltips.gold_jc = "Jewelcrafting: "
 L.Tooltips.gold_dr = "Dungeon & Raids: "
+L.Tooltips.Count = "Count"
 
 --------------------
 L.UnitFrames = {} --

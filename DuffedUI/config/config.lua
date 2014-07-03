@@ -126,6 +126,7 @@ C["tooltips"] = {
 	["HideOnUnitFrames"] = false,
 	["EnableCaster"] = true,
 	["ItemLevel"] = true,
+	["ID"] = true,
 }
 
 C["unitframes"] = {
@@ -158,6 +159,10 @@ C["talent"] = {
 	["SESGearSwap"] = true,
 	["SESSet1"] = 1,
 	["SESSet2"] = 2,
+	["RCDEnable"] = true,
+	["RCDRaid"] = true,
+	["RCDParty"] = false,
+	["RCDArena"] = false,
 }
 
 C["classtimer"] = {
@@ -181,7 +186,6 @@ C["plugins"] = {
 	["FocusButton"] = true,
 	["ACMScreen"] = true,
 	["Gold"] = true,
-	["Location"] = true,
 }
 
 C["duffed"] = {
@@ -189,4 +193,15 @@ C["duffed"] = {
 	["DrinkAnnouncement"] = false,
 	["SayInterrupt"] = true,
 	["AnnounceChannel"] = "SAY",
+	["SpellAnnounce"] = true,
+}
+
+C["scd"] = {
+	["Enable"] = true,
+	["FSize"] = 12,
+	["Size"] = 28,
+	["Spacing"] = 10,
+	["Fade"] = 0,
+	["Direction"] = "HORIZONTAL",
+	["Display"] = "STATUSBAR",
 }

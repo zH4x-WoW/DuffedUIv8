@@ -17,6 +17,12 @@
 	Added plugin => HatTrick for Cloak & Helm
 	Fixed a bug on SpecSwitcher (Thx Rav)
 	Added ban for Player and Target to Click2Cast (again Thx Rav)
+	Added ItemIDCount
+	Added plugin => RaidCooldowns
+	Added plugin => SpellAlert
+	Added plugin => SpellCooldowns
+	Added plugin => spellID
+	Removed plugin => LocationPanel
 	
 01.07.2014 =>
 	Added VersionCheck
