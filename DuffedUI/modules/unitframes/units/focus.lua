@@ -140,6 +140,26 @@ function DuffedUIUnitFrames:Focus()
 	self.Castbar = CastBar
 	self.Castbar.Icon = CastBar.Icon
 	self.CastBarBorder = CastBarBorder
+	
+	if C["plugins"].FocusButton then
+		local Focus = CreateFrame("Button", nil, self, "SecureActionButtonTemplate")
+		Focus:Size(50, 10)
+		Focus:SetTemplate("Default")
+		Focus:EnableMouse(true)
+		Focus:RegisterForClicks("AnyUp")
+		Focus:StripTextures()
+		
+		Focus:SetPoint("TOP", Health, "TOPRIGHT", -25, 15)
+		Focus:SetAttribute("type1", "macro")
+		Focus:SetAttribute("macrotext1", "/clearfocus")
+		Focus:SetFrameLevel(Health:GetFrameLevel() + 2)
+		
+		Focus.Text = Focus:CreateFontString(nil, "OVERLAY")
+		Focus.Text:SetFont(C["medias"].Font, 12, "THINOUTLINE")
+		Focus.Text:SetShadowOffset(0, 0)
+		Focus.Text:SetPoint("CENTER")
+		Focus.Text:SetText("Clear Focus") -- D.panelcolor..
+	end
 
 	self.Health = Health
 	self.Health.bg = Health.Background

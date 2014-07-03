@@ -258,7 +258,7 @@ function DuffedUIUnitFrames:Target()
 		local Portrait = CreateFrame("Frame", nil, self)
 		if (Layout == 1) then
 			Portrait:Size(45)
-			Portrait:SetPoint("BOTTOMRIGHT", PowerBorder, "BOTTOMLEFT", -4, 2)
+			Portrait:SetPoint("BOTTOMLEFT", PowerBorder, "BOTTOMRIGHT", 4, 2)
 		elseif (Layout == 2) then
 			Portrait:Size(38)
 			Portrait:SetPoint("BOTTOMLEFT", Panel, "BOTTOMRIGHT", 5, 2)
@@ -359,6 +359,32 @@ function DuffedUIUnitFrames:Target()
 
 	self.Buffs = Buffs
 	self.Debuffs = Debuffs
+	
+	if C["plugins"].FocusButton then
+		local Focus = CreateFrame("Button", nil, self, "SecureActionButtonTemplate")
+		Focus:Size(50, 10)
+		Focus:SetTemplate("Default")
+		Focus:EnableMouse(true)
+		Focus:RegisterForClicks("AnyUp")
+		Focus:StripTextures()
+		
+		if (Layout == 1) then
+			Focus:SetPoint("BOTTOMLEFT", Power, "BOTTOMLEFT", -13, -15)
+		elseif (Layout == 2) then
+			Focus:SetPoint("BOTTOMRIGHT", Panel, "BOTTOMRIGHT", 12, -13)
+		elseif (Layout == 3) then
+			Focus:SetPoint("BOTTOMRIGHT", Power, "BOTTOMRIGHT", 16, -15)
+		end
+		Focus:SetAttribute("type1", "macro")
+		Focus:SetAttribute("macrotext1", "/focus")
+		Focus:SetFrameLevel(Power:GetFrameLevel() + 2)
+		
+		Focus.Text = Focus:CreateFontString(nil, "OVERLAY")
+		Focus.Text:SetFont(C["medias"].Font, 12, "THINOUTLINE")
+		Focus.Text:SetShadowOffset(0, 0)
+		Focus.Text:SetPoint("CENTER")
+		Focus.Text:SetText("Focus") -- D.panelcolor..
+	end
 
 	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong] [DuffedUI:DiffColor][level] [shortclassification]")
 	self.Name = Name

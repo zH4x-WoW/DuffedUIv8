@@ -152,6 +152,7 @@ C["castbar"] = {
 
 C["talent"] = {
 	["Click2Cast"] = true,
+	["Click2Cast_Filter"] = true,
 	["SESEnable"] = true,
 	["SESEnableGear"] = true,
 	["SESGearSwap"] = true,
@@ -176,4 +177,16 @@ C["classtimer"] = {
 C["plugins"] = {
 	["ItemCooldowns"] = true,
 	["ItemLevelCharacter"] = true,
+	["VendorValue"] = true,
+	["FocusButton"] = true,
+	["ACMScreen"] = true,
+	["Gold"] = true,
+	["Location"] = true,
+}
+
+C["duffed"] = {
+	["DispelAnnouncement"] = false,
+	["DrinkAnnouncement"] = false,
+	["SayInterrupt"] = true,
+	["AnnounceChannel"] = "SAY",
 }

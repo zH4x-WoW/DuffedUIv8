@@ -261,9 +261,9 @@ toggle:SetScript("OnMouseDown", function(self)
 
 	if MB_reload:IsShown() then	
 		MB_reload:Hide()
-		toggle:SetText(cp.."+|r")
+		toggle.t:SetText(cp.."+|r")
 	else
 		MB_reload:Show()
-		toggle:SetText(cm.."-|r")
+		toggle.t:SetText(cm.."-|r")
 	end
 end)

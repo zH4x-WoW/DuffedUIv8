@@ -9,6 +9,14 @@
 	Added plugin => ItemLevel on ToolTip
 	Added plugin => ItemLevel on Charscreen
 	Added plugin => ItemCooldowns
+	Added plugin => DuffedUI
+	Added plugin => Misc Stuff
+	Added plugin => Mail Stuff
+	Added plugin => MagePortal-Menu on Minimap-Datatext
+	Added plugin => LocationPanel
+	Added plugin => HatTrick for Cloak & Helm
+	Fixed a bug on SpecSwitcher (Thx Rav)
+	Added ban for Player and Target to Click2Cast (again Thx Rav)
 	
 01.07.2014 =>
 	Added VersionCheck

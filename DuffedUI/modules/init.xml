@@ -133,6 +133,11 @@
 	<Script file="plugins\items\itemcooldowns.lua"/>
 	<Script file="plugins\misc\addonmanager.lua"/>
 	<Script file="plugins\misc\combat.lua"/>
+	<Script file="plugins\misc\HatTrick.lua"/>
+	<Script file="plugins\misc\location.lua"/>
+	<Script file="plugins\misc\mage.lua"/>
+	<Script file="plugins\misc\mail.lua"/>
+	<Script file="plugins\misc\misc.lua"/>
 	<Script file="plugins\misc\efl.lua"/>
 	<Script file="plugins\talents\buffnotice.lua"/>
 	<Script file="plugins\talents\bufftracker.lua"/>
