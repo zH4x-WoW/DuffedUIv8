@@ -57,20 +57,21 @@
 	<Script file="datatext\elements\armor.lua"/>
 	<Script file="datatext\elements\avoidance.lua"/>
 	<Script file="datatext\elements\bags.lua"/>
+	<Script file="datatext\elements\block.lua"/>
 	<Script file="datatext\elements\calltoarms.lua"/>
 	<Script file="datatext\elements\crit.lua"/>
-	<Script file="datatext\elements\dps.lua"/>
+	<Script file="datatext\elements\dodge.lua"/>
 	<Script file="datatext\elements\durability.lua"/>
 	<Script file="datatext\elements\friends.lua"/>
 	<Script file="datatext\elements\gold.lua"/>
 	<Script file="datatext\elements\guild.lua"/>
 	<Script file="datatext\elements\haste.lua"/>
 	<Script file="datatext\elements\hit.lua"/>
-	<Script file="datatext\elements\hps.lua"/>
 	<Script file="datatext\elements\mastery.lua"/>
+	<!-- <Script file="datatext\elements\misc.lua"/> -->
+	<Script file="datatext\elements\parry.lua"/>
 	<Script file="datatext\elements\system.lua"/>
 	<Script file="datatext\elements\power.lua"/>
-	<Script file="datatext\elements\regen.lua"/>
 	<Script file="datatext\elements\talent.lua"/>
 	<Script file="datatext\elements\time.lua"/>
 	<Script file="datatext\elements\battleground.lua"/>
@@ -81,6 +82,7 @@
 	<Script file="chat\whispersound.lua"/>
 	<Script file="chat\copyURL.lua"/>
 	<Script file="chat\copybutton.lua"/>
+	<Script file="chat\telltarget.lua"/>
 
 	<!-- unitframes -->
 	<Script file="unitframes\core.lua"/>

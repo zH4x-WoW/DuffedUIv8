@@ -472,6 +472,362 @@ function DuffedUIUnitFrames:SetGridGroupRole()
 	end
 end
 
+DuffedUIUnitFrames.CountOffsets = {
+	TOPLEFT = {6, 1},
+	TOPRIGHT = {-6, 1},
+	BOTTOMLEFT = {6, 1},
+	BOTTOMRIGHT = {-6, 1},
+	LEFT = {6, 1},
+	RIGHT = {-6, 1},
+	TOP = {0, 0},
+	BOTTOM = {0, 0},
+}
+
+-- skin the icon
+function DuffedUIUnitFrames:CreateAuraWatchIcon(icon)
+	icon:SetTemplate()
+	icon.icon:Point("TOPLEFT", 1, -1)
+	icon.icon:Point("BOTTOMRIGHT", -1, 1)
+	icon.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+	icon.icon:SetDrawLayer("ARTWORK")
+
+	if (icon.cd) then
+		icon.cd:SetReverse()
+	end
+
+	icon.overlay:SetTexture()
+end
+
+-- create the icon
+function DuffedUIUnitFrames:CreateAuraWatch(frame)
+	local Auras = CreateFrame("Frame", nil, frame)
+	Auras:SetPoint("TOPLEFT", frame.Health, 2, -2)
+	Auras:SetPoint("BOTTOMRIGHT", frame.Health, -2, 2)
+	Auras.presentAlpha = 1
+	Auras.missingAlpha = 0
+	Auras.icons = {}
+	Auras.PostCreateIcon = DuffedUIUnitFrames.CreateAuraWatchIcon
+
+	if (not C["raid"].AuraWatchTimers) then
+		Auras.hideCooldown = true
+	end
+
+	local buffs = {}
+
+	if (DuffedUIUnitFrames.BuffIDs["ALL"]) then
+		for key, value in pairs(DuffedUIUnitFrames.BuffIDs["ALL"]) do
+			tinsert(buffs, value)
+		end
+	end
+
+	if (DuffedUIUnitFrames.BuffIDs[Class]) then
+		for key, value in pairs(DuffedUIUnitFrames.BuffIDs[Class]) do
+			tinsert(buffs, value)
+		end
+	end
+
+	-- Cornerbuffs
+	if buffs then
+		for key, spell in pairs(buffs) do
+			local Icon = CreateFrame("Frame", nil, Auras)
+			Icon.spellID = spell[1]
+			Icon.anyUnit = spell[4]
+			Icon:Width(6)
+			Icon:Height(6)
+			Icon:SetPoint(spell[2], 0, 0)
+
+			local Texture = Icon:CreateTexture(nil, "OVERLAY")
+			Texture:SetAllPoints(Icon)
+			Texture:SetTexture(C["medias"].Blank)
+
+			if (spell[3]) then
+				Texture:SetVertexColor(unpack(spell[3]))
+			else
+				Texture:SetVertexColor(0.8, 0.8, 0.8)
+			end
+
+			local Count = Icon:CreateFontString(nil, "OVERLAY")
+			Count:SetFont(C["medias"].Font, 8, "THINOUTLINE")
+			Count:SetPoint("CENTER", unpack(DuffedUIUnitFrames.CountOffsets[spell[2]]))
+			Icon.count = Count
+
+			Auras.icons[spell[1]] = Icon
+		end
+	end
+
+	frame.AuraWatch = Auras
+end
+
+-- Class buffs { spell ID, position [, {r,g,b,a}][, anyUnit] }
+-- It use oUF_AuraWatch lib, for grid indicator
+if C["raid"].AuraWatch then
+	do
+		DuffedUIUnitFrames.BuffIDs = {
+			PRIEST = {
+				{6788, "TOPRIGHT", {1, 0, 0}, true},	  -- Weakened Soul
+				{33076, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},  -- Prayer of Mending
+				{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}},     -- Renew
+				{17, "TOPLEFT", {0.81, 0.85, 0.1}, true}, -- Power Word: Shield
+			},
+			DRUID = {
+				{774, "TOPLEFT", {0.8, 0.4, 0.8}},      -- Rejuvenation
+				{8936, "TOPRIGHT", {0.2, 0.8, 0.2}},    -- Regrowth
+				{33763, "BOTTOMLEFT", {0.4, 0.8, 0.2}}, -- Lifebloom
+				{48438, "BOTTOMRIGHT", {0.8, 0.4, 0}},  -- Wild Growth
+			},
+			PALADIN = {
+				{53563, "TOPRIGHT", {0.7, 0.3, 0.7}},	        -- Beacon of Light
+				{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true}, 	-- Hand of Protection
+				{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},	-- Hand of Freedom
+				{1038, "BOTTOMRIGHT", {0.93, 0.75, 0}, true},	-- Hand of Salvation
+				{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},	-- Hand of Sacrifice
+				{114163, "TOPLEFT", {0.81, 0.85, 0.1}, true},	-- Eternal Flame
+				{20925, "TOPLEFT", {0.81, 0.85, 0.1}, true},	-- Sacred Shield
+			},
+			SHAMAN = {
+				{61295, "TOPLEFT", {0.7, 0.3, 0.7}},       -- Riptide
+				{51945, "TOPRIGHT", {0.2, 0.7, 0.2}},      -- Earthliving
+				{974, "BOTTOMRIGHT", {0.7, 0.4, 0}, true}, -- Earth Shield
+			},
+			MONK = {
+				{119611, "TOPLEFT", {0.8, 0.4, 0.8}},	 --Renewing Mist
+				{116849, "TOPRIGHT", {0.2, 0.8, 0.2}},	 -- Life Cocoon
+				{124682, "BOTTOMLEFT", {0.4, 0.8, 0.2}}, -- Enveloping Mist
+				{124081, "BOTTOMRIGHT", {0.7, 0.4, 0}},  -- Zen Sphere
+			},
+			ALL = {
+				{14253, "RIGHT", {0, 1, 0}}, -- Abolish Poison
+			},
+		}
+	end
+end
+
+-- Dispellable & Important Raid Debuffs we want to show on Grid!
+-- It use oUF_RaidDebuffs lib for tracking dispellable / important
+if C["raid"].DebuffWatch then
+	do
+		local RaidDebuff = oUF_RaidDebuffs
+
+		if (not RaidDebuff) then
+			return
+		end
+
+		RaidDebuff.ShowDispelableDebuff = true
+		RaidDebuff.FilterDispellableDebuff = true
+		RaidDebuff.MatchBySpellName = true
+		RaidDebuff.DeepCorruption = true
+
+		local SpellName = function(id)
+			local Name = select(1, GetSpellInfo(id))
+
+			return Name
+		end
+
+		-- Important Raid Debuffs we want to show on Grid!
+		-- Mists of Pandaria debuff list created by prophet
+		-- http://www.tukui.org/code/view.php?id=PROPHET170812083424
+		DuffedUIUnitFrames.DebuffIDs = {
+			-----------------------------------------------------------------
+			-- Mogu'shan Vaults
+			-----------------------------------------------------------------
+			-- The Stone Guard
+			SpellName(116281),	-- Cobalt Mine Blast
+
+			-- Feng the Accursed
+			SpellName(116784),	-- Wildfire Spark
+			SpellName(116417),	-- Arcane Resonance
+			SpellName(116942),	-- Flaming Spear
+
+			-- Gara'jal the Spiritbinder
+			SpellName(116161),	-- Crossed Over
+			SpellName(122151),	-- Voodoo Dolls
+
+			-- The Spirit Kings
+			SpellName(117708),	-- Maddening Shout
+			SpellName(118303),	-- Fixate
+			SpellName(118048),	-- Pillaged
+			SpellName(118135),	-- Pinned Down
+
+			-- Elegon
+			SpellName(117878),	-- Overcharged
+			SpellName(117949),	-- Closed Circuit
+
+			-- Will of the Emperor
+			SpellName(116835),	-- Devastating Arc
+			SpellName(116778),	-- Focused Defense
+			SpellName(116525),	-- Focused Assault
+
+			-----------------------------------------------------------------
+			-- Heart of Fear
+			-----------------------------------------------------------------
+			-- Imperial Vizier Zor'lok
+			SpellName(122761),	-- Exhale
+			SpellName(122760), -- Exhale
+			SpellName(122740),	-- Convert
+			SpellName(123812),	-- Pheromones of Zeal
+
+			-- Blade Lord Ta'yak
+			SpellName(123180),	-- Wind Step
+			SpellName(123474),	-- Overwhelming Assault
+
+			-- Garalon
+			SpellName(122835),	-- Pheromones
+			SpellName(123081),	-- Pungency
+
+			-- Wind Lord Mel'jarak
+			SpellName(122125),	-- Corrosive Resin Pool
+			SpellName(121885), 	-- Amber Prison
+
+			-- Amber-Shaper Un'sok
+			SpellName(121949),	-- Parasitic Growth
+
+			-----------------------------------------------------------------
+			-- Terrace of Endless Spring
+			-----------------------------------------------------------------
+			-- Protectors of the Endless
+			SpellName(117436),	-- Lightning Prison
+			SpellName(118091),	-- Defiled Ground
+			SpellName(117519),	-- Touch of Sha
+
+			-- Tsulong
+			SpellName(122752),	-- Shadow Breath
+			SpellName(123011),	-- Terrorize
+			SpellName(116161),	-- Crossed Over
+
+			-- Lei Shi
+			SpellName(123121),	-- Spray
+
+			-- Sha of Fear
+			SpellName(119985),	-- Dread Spray
+			SpellName(119086),	-- Penetrating Bolt
+			SpellName(119775),	-- Reaching Attack
+
+
+			-----------------------------------------------------------------
+			-- Throne of Thunder
+			-----------------------------------------------------------------
+			--Trash
+			SpellName(138349), -- Static Wound
+			SpellName(137371), -- Thundering Throw
+
+			--Horridon
+			SpellName(136767), --Triple Puncture
+
+			--Council of Elders
+			SpellName(137641), --Soul Fragment
+			SpellName(137359), --Shadowed Loa Spirit Fixate
+			SpellName(137972), --Twisted Fate
+
+			--Tortos
+			SpellName(136753), --Slashing Talons
+			SpellName(137633), --Crystal Shell
+
+			--Megaera
+			SpellName(137731), --Ignite Flesh
+
+			--Ji-Kun
+			SpellName(138309), --Slimed
+
+			--Durumu the Forgotten
+			SpellName(133767), --Serious Wound
+			SpellName(133768), --Arterial Cut
+
+			--Primordius
+			SpellName(136050), --Malformed Blood
+
+			--Dark Animus
+			SpellName(138569), --Explosive Slam
+
+			--Iron Qon
+			SpellName(134691), --Impale
+
+			--Twin Consorts
+			SpellName(137440), --Icy Shadows
+			SpellName(137408), --Fan of Flames
+			SpellName(137360), --Corrupted Healing
+
+			--Lei Shen
+			SpellName(135000), --Decapitate
+
+			-----------------------------------------------------------------
+			-- Siege of Orgrimmar
+			-----------------------------------------------------------------
+			-- Immerseus
+			SpellName(143436),	-- Corrosive Blast
+			SpellName(143459),	-- Sha Residue
+
+			-- The Fallen Protectors
+			SpellName(143198),	-- Garrote
+			SpellName(143434),	-- Shadow Word: Bane
+			SpellName(147383),	-- Debilitation
+
+			-- Norushen
+			SpellName(146124),	-- Self Doubt
+			SpellName(144514),	-- Lingering Corruption
+
+			-- Sha of Pride
+			SpellName(144358),	-- Wounded Pride
+			SpellName(144351),	-- Mark of Arrogance
+			SpellName(146594),	-- Gift of the Titans
+			SpellName(147207),	-- Weakened Resolve
+
+			-- Galakras
+			SpellName(146765),	-- Flame Arrows
+			SpellName(146902),	-- Poison-Tipped Blades
+
+			-- Iron Juggernaut
+			SpellName(144467),	-- Ignite Armor
+			SpellName(144459),	-- Laser Burn
+
+			-- Kor'kron Dark Shaman
+			SpellName(144215),	-- Froststorm Strike
+			SpellName(144089),	-- Toxic Mist
+			SpellName(144330),	-- Iron Prison
+
+			-- General Nazgrim
+			SpellName(143494),	-- Sundering Blow
+			SpellName(143638),	-- Bonecracker
+			SpellName(143431),	-- Magistrike
+
+			-- Malkorok
+			SpellName(142990),	-- Fatal Strike
+			SpellName(142913),	-- Displaced Energy
+
+			-- Spoils of Pandaria
+			SpellName(145218),	-- Harden Flesh
+			SpellName(146235),	-- Breath of Fire
+
+			-- Thok the Bloodthirsty
+			SpellName(143766),	-- Panic
+			SpellName(143780),	-- Acid Breath
+			SpellName(143773),	-- Freezing Breath
+			SpellName(143800),	-- Icy Blood
+			SpellName(143767),	-- Scorching Breath
+			SpellName(143791),	-- Corrosive Blood
+
+			-- Siegecrafter Blackfuse
+			SpellName(143385),	-- Electrostatic Charge
+			SpellName(144236),	-- Pattern Recognition
+
+			-- Paragons of the Klaxxi
+			SpellName(142929),	-- Tenderizing Strikes
+			SpellName(143275),	-- Hewn
+			SpellName(143279),	-- Genetic Alteration
+			SpellName(143974),	-- Shield Bash
+			SpellName(142948),	-- Aim
+
+			-- Garrosh Hellscream
+			SpellName(145183),	-- Gripping Despair
+			SpellName(145195),	-- Empowered Gripping Despair
+		}
+
+		DuffedUIUnitFrames.ReverseTimer = {
+
+		},
+
+		RaidDebuff:RegisterDebuffs(DuffedUIUnitFrames.DebuffIDs)
+	end
+end
 
 function DuffedUIUnitFrames:UpdateBossAltPower(minimum, current, maximum)
 	if (not current) or (not maximum) then return end

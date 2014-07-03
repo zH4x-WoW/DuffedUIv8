@@ -1,6 +1,7 @@
 local _, ns = ...
 local oUF = ns.oUF or oUF
 local Plugin = CreateFrame("Frame")
+local DuffedUIUnitFrames
 
 local addon = {}
 ns.oUF_RaidDebuffs = addon
@@ -148,7 +149,7 @@ local function UpdateDebuff(self, name, icon, count, debuffType, duration, endTi
 			end
 		end
 		
-		if spellId and D.ReverseTimer[spellId] then
+		if spellId and DuffedUIUnitFrames.ReverseTimer[spellId] then
 			f.reverse = true
 		else
 			f.reverse = nil
@@ -233,6 +234,10 @@ end
 local function Disable(self)
 	local rd = self.RaidDebuffs
 	if rd then
+		if (not DuffedUIUnitFrames) then
+			DuffedUIUnitFrames = DuffedUI[1]["UnitFrames"]
+		end
+		
 		self:UnregisterEvent('UNIT_AURA', Update)
 	end
 end

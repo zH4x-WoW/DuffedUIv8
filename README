@@ -1,5 +1,12 @@
 => DuffedUI v8 <=
 
+03.07.2014 =>
+	Added RaidDebuffs
+	Adjust locales
+	Added TellTarget
+	Removed DataTexts => HPS, DPS, Regen
+	Added DataTexts => Block, Dodge, Parry
+	
 01.07.2014 =>
 	Added VersionCheck
 	

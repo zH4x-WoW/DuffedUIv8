@@ -33,6 +33,7 @@ function DuffedUIUnitFrames:Raid()
 		Health.colorReaction = true
 	end
 	if (C["unitframes"].Smooth) then Health.Smooth = true end
+	self.Health = Health
 
 	-- Border for HealthBar
 	local HealthBorder = CreateFrame("Frame", nil, Health)
@@ -115,9 +116,46 @@ function DuffedUIUnitFrames:Raid()
 			maxOverflow = 1,
 		}
 	end
+	
+	-- AuraWatch (corner icon)
+	if C["raid"].AuraWatch then
+		DuffedUIUnitFrames:CreateAuraWatch(self)
+
+		-- Raid Debuffs (big middle icon)
+		local RaidDebuffs = CreateFrame("Frame", nil, self)
+		RaidDebuffs:Height(24)
+		RaidDebuffs:Width(24)
+		RaidDebuffs:Point("CENTER", Health, 1, 0)
+		RaidDebuffs:SetFrameStrata(Health:GetFrameStrata())
+		RaidDebuffs:SetFrameLevel(Health:GetFrameLevel() + 2)
+
+		RaidDebuffs:SetTemplate("Default")
+
+		RaidDebuffs.icon = RaidDebuffs:CreateTexture(nil, "OVERLAY")
+		RaidDebuffs.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		RaidDebuffs.icon:Point("TOPLEFT", 2, -2)
+		RaidDebuffs.icon:Point("BOTTOMRIGHT", -2, 2)
+
+		if C["Raid"].AuraWatchTimers then
+			RaidDebuffs.cd = CreateFrame("Cooldown", nil, RaidDebuffs)
+			RaidDebuffs.cd:Point("TOPLEFT", 2, -2)
+			RaidDebuffs.cd:Point("BOTTOMRIGHT", -2, 2)
+			RaidDebuffs.cd.noOCC = true -- remove this line if you want cooldown number on it
+		end
+
+		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, "OVERLAY")
+		RaidDebuffs.count:SetFont(C["medias"].Font, 9, "THINOUTLINE")
+		RaidDebuffs.count:SetPoint("BOTTOMRIGHT", RaidDebuffs, "BOTTOMRIGHT", 0, 2)
+		RaidDebuffs.count:SetTextColor(1, .9, 0)
+
+		RaidDebuffs:FontString("time", C["medias"].Font, 9, "THINOUTLINE")
+		RaidDebuffs.time:SetPoint("CENTER")
+		RaidDebuffs.time:SetTextColor(1, .9, 0)
+
+		self.RaidDebuffs = RaidDebuffs
+	end
 
 	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameShort]")
-	self.Health = Health
 	self.Health.bg = Health.Background
 	self.HealthBorder = HealthBorder
 	self.Power = Power

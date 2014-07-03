@@ -7,7 +7,7 @@ if (Class ~= "DRUID") then return end
 
 function DuffedUIUnitFrames:AddDruidFeatures()
 	local DruidMana = CreateFrame("StatusBar", nil, self.Health)
-local Color = RAID_CLASS_COLORS[Class]
+	local Color = RAID_CLASS_COLORS[Class]
 	local NumPoints = MAX_COMBO_POINTS
 	local Texture = C["medias"].Normal
 	local Blank = C["medias"].Blank

@@ -117,6 +117,9 @@ C["raid"] = {
 	["FrameHeight"] = 42,
 	["GridScale"] = 1,
 	["HealBar"] = true,
+	["AuraWatch"] = true,
+	["AuraWatchTimers"] = true,
+	["DebuffWatch"] = true,
 }
 
 C["tooltips"] = {
