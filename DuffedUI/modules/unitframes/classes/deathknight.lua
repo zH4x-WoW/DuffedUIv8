@@ -32,10 +32,10 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 		rune:SetHeight(5)
 
 		if i == 1 then
-			rune:SetWidth(36)
+			rune:SetWidth(33)
 			rune:SetPoint("LEFT", Runes, "LEFT", 2, 0)
 		else
-			rune:SetWidth(runes[1]:GetWidth())
+			rune:SetWidth(33)
 			rune:SetPoint("LEFT", runes[i - 1], "RIGHT", 1, 0)
 		end
 

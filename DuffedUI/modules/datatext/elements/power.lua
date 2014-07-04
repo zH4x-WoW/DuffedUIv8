@@ -31,7 +31,7 @@ local Update = function(self)
 		Text = L.DataText.Spell
 	end
 	
-	self.Text:SetText(format("%s: %s", DataText.NameColor .. Text .. "|r", DataText.ValueColor .. D.Comma(Value) .. "|r"))
+	self.Text:SetText(format("%s %s", DataText.ValueColor .. D.Comma(Value) .. "|r", DataText.NameColor .. Text .. "|r"))
 end
 
 local Enable = function(self)	

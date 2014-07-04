@@ -1,15 +1,13 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C["actionbars"].Enable) then
-	return
-end
+if (not C["actionbars"].Enable) then return end
 
 local DuffedUIActionBars = D["ActionBars"]
 
 function DuffedUIActionBars:SetUpExtraActionButton()
 	local Holder = CreateFrame("Frame", "DuffedUIExtraActionBarFrameHolder", UIParent)
 	Holder:Size(160, 80)
-	Holder:SetPoint("BOTTOM", 0, 250)
+	Holder:SetPoint("BOTTOM", 0, 240)
 	Holder:SetMovable(true)
 	Holder:SetTemplate("Default")
 	Holder:SetBackdropBorderColor(1,0,0)

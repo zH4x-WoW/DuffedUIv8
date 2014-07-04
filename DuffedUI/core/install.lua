@@ -211,21 +211,22 @@ end
 
 Install:RegisterEvent("ADDON_LOADED")
 Install:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "DuffedUI") then
-		return
-	end
+	if (addon ~= "DuffedUI") then return end
 
-	if (not DuffedUIDataPerChar) then
-		DuffedUIDataPerChar = {}
-	end
+	if (not DuffedUIDataPerChar) then DuffedUIDataPerChar = {} end
 	
 	local IsInstalled = DuffedUIDataPerChar.InstallDone
 	
-	if (not IsInstalled) then
-		self:Launch()
-	end
+	if (not IsInstalled) then self:Launch() end
 	
 	self:UnregisterAllEvents()
 end)
 
 D["Install"] = Install
+
+local OnLogon = CreateFrame("Frame")
+OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
+OnLogon:SetScript("OnEvent", function(self, event)
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	print(L.Welcome.Message)
+end)

@@ -207,7 +207,7 @@ function DuffedUIUnitFrames:Target()
 		CastBar:SetHeight(18)
 		CastBar:SetWidth(225)
 		CastBar:SetFrameLevel(6)
-		CastBar:Point("BOTTOM", Panels.ActionBar1, "TOP", 0, 250)
+		CastBar:Point("BOTTOM", Panels.ActionBar1, "TOP", 0, 260)
 
 		CastBar.Background = CastBar:CreateTexture(nil, "BORDER")
 		CastBar.Background:SetAllPoints(CastBar)

@@ -289,7 +289,6 @@ function DuffedUIChat:Install()
 	ChatFrame_RemoveAllMessageGroups(ChatFrame4)
 	ChatFrame_AddChannel(ChatFrame4, TRADE)
 	ChatFrame_AddChannel(ChatFrame4, GENERAL)
-	ChatFrame_AddChannel(ChatFrame4, "LocalDefense") -- Don't forget to localize me
 	ChatFrame_AddChannel(ChatFrame4, "GuildRecruitment")
 	ChatFrame_AddChannel(ChatFrame4, "LookingForGroup")
 	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
@@ -382,3 +381,12 @@ hooksecurefunc("FCF_OpenTemporaryWindow", DuffedUIChat.StyleTempFrame)
 hooksecurefunc("FCF_RestorePositionAndDimensions", DuffedUIChat.SetChatFramePosition)
 
 D["Chat"] = DuffedUIChat
+
+local function RemoveCurrentRealmName(self, event, msg, author, ...)
+	local realmName = string.gsub(GetRealmName(), " ", "")
+
+	if msg:find("-" .. realmName) then
+		return false, gsub(msg, "%-"..realmName, ""), author, ...
+	end
+end
+ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", RemoveCurrentRealmName)

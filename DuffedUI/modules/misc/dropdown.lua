@@ -18,14 +18,14 @@ function DropDown:Skin(...)
 		
 		Backdrop = _G["DropDownList"..i.."MenuBackdrop"]
 		if Backdrop and not Backdrop.IsSkinned then
-			Backdrop:SetTemplate("Default")
+			Backdrop:SetTemplate("Transparent")
 			Backdrop:CreateShadow()
 			Backdrop.IsSkinned = true
 		end
 		
 		Backdrop = _G["DropDownList"..i.."Backdrop"]
 		if Backdrop and not Backdrop.IsSkinned then
-			Backdrop:SetTemplate("Default")
+			Backdrop:SetTemplate("Transparent")
 			Backdrop:CreateShadow()
 			Backdrop.IsSkinned = true
 		end
@@ -37,7 +37,7 @@ function DropDown:Enable()
 	
 	for i = 1, getn(self.ChatMenus) do
 		Menu = _G[self.ChatMenus[i]]
-		Menu:SetTemplate()
+		Menu:SetTemplate("Transparent")
 		Menu:CreateShadow()
 		Menu.SetBackdropColor = Noop
 	end

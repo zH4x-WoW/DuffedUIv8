@@ -136,7 +136,7 @@ function DuffedUIUnitFrames:Raid()
 		RaidDebuffs.icon:Point("TOPLEFT", 2, -2)
 		RaidDebuffs.icon:Point("BOTTOMRIGHT", -2, 2)
 
-		if C["Raid"].AuraWatchTimers then
+		if C["raid"].AuraWatchTimers then
 			RaidDebuffs.cd = CreateFrame("Cooldown", nil, RaidDebuffs)
 			RaidDebuffs.cd:Point("TOPLEFT", 2, -2)
 			RaidDebuffs.cd:Point("BOTTOMRIGHT", -2, 2)

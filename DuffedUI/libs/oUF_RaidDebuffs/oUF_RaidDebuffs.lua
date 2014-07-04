@@ -12,11 +12,9 @@ end
 local debuff_data = {}
 addon.DebuffData = debuff_data
 
-
 addon.ShowDispelableDebuff = true
 addon.FilterDispellableDebuff = true
 addon.MatchBySpellName = true
-
 
 addon.priority = 10
 

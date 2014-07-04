@@ -31,7 +31,7 @@ D.SlashHandler = function(cmd)
 		Install:Launch()
 	elseif (arg1 == "" or arg1 == "help") then
 		print(" ")
-		print("|cffff0000".. L.Help.Title .."|r")
+		print("|cffC41F3B".. L.Help.Title .."|r")
 		print(L.Help.Install)
 		print(L.Help.Datatexts)
 		print(" ")

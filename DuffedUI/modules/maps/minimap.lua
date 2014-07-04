@@ -43,6 +43,9 @@ function Maps:StyleMinimap()
 	local Mail = _G["MiniMapMailFrame"]
 	local MailBorder = _G["MiniMapMailBorder"]
 	local MailIcon = _G["MiniMapMailIcon"]
+	local LFG = _G["QueueStatusMinimapButton"]
+	local LFGBorder = _G["QueueStatusMinimapButtonBorder"]
+	local LFGStatus = _G["QueueStatusFrame"]
 	
 	Map:SetMaskTexture(C["medias"].Blank)
 	Map:CreateBackdrop()
@@ -55,6 +58,29 @@ function Maps:StyleMinimap()
 	Mail:SetFrameLevel(Map:GetFrameLevel() + 2)
 	MailBorder:Hide()
 	MailIcon:SetTexture(C["medias"].Mail)
+	
+	LFG:SetParent(Minimap)
+	LFG:ClearAllPoints()
+	LFG:SetPoint("BOTTOMRIGHT", 0, 0)
+	LFGBorder:Kill()
+	LFGStatus:StripTextures()
+	LFGStatus:SetTemplate("Transparent")
+	LFGStatus:SetFrameStrata("HIGH")
+	
+	local function UpdateLFGTooltip()
+		local position = Minimap:GetPoint()
+		LFGStatus:ClearAllPoints()
+		if position:match("BOTTOMRIGHT") then
+			LFGStatus:SetPoint("BOTTOMRIGHT", LFG, "BOTTOMLEFT", 0, 0)
+		elseif position:match("BOTTOM") then
+			LFGStatus:SetPoint("BOTTOMLEFT", LFG, "BOTTOMRIGHT", 4, 0)
+		elseif position:match("LEFT") then		
+			LFGStatus:SetPoint("TOPLEFT", LFG, "TOPRIGHT", 4, 0)
+		else
+			LFGStatus:SetPoint("TOPRIGHT", LFG, "TOPLEFT", 0, 0)	
+		end
+	end
+	LFGStatus:HookScript("OnShow", UpdateLFGTooltip)
 	
 	Map:SetScript("OnMouseUp", function(self, button)
 		if (button == "RightButton") then

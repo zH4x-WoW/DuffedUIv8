@@ -123,6 +123,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	local Class = UnitClass(Unit)
 	local Level = UnitLevel(Unit)
 	local Guild = GetGuildInfo(Unit)
+	--local guildRankName = GetGuildInfo(unit)
 	local Name, Realm = UnitName(Unit)
 	local CreatureType = UnitCreatureType(Unit)
 	local Classification = UnitClassification(Unit)
@@ -151,7 +152,8 @@ function DuffedUITooltips:OnTooltipSetUnit()
 
 		local Offset = 2
 		if Guild then
-			Line2:SetFormattedText("%s", IsInGuild() and GetGuildInfo("player") == Guild and "|cff0090ff".. Guild .."|r" or "|cff00ff10".. Guild .."|r")
+			--local GuildName, GuildRankName, GuildRankIndex = GetGuildInfo(unit)
+			Line2:SetFormattedText("%s", IsInGuild() and GetGuildInfo("player") == Guild and "|cff0090ff".. Guild .."|r" or "|cff00ff10".. Guild .."|r") -- , "|cffFFD700"..guildRankName.."|r"
 			Offset = Offset + 1
 		end
 
