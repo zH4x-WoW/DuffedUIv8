@@ -54,6 +54,25 @@ function D.HyperlinkMouseover()
 end
 D.HyperlinkMouseover()
 
+D.UpdateThreat = function(self, event, unit)
+	if (self.unit ~= unit) or (unit == "target" or unit == "pet" or unit == "focus" or unit == "focustarget" or unit == "targettarget") then return end
+	local threat = UnitThreatSituation(self.unit)
+	if (threat == 3) then
+		if self.HealthBorder then
+			self.HealthBorder:SetBackdropBorderColor(.69, .31, .31, 1)
+		else
+			self.Name:SetTextColor(1,.1, .1)
+		end
+	else
+		if self.HealthBorder then
+			local r, g, b = unpack(C["medias"].BorderColor)
+			self.HealthBorder:SetBackdropBorderColor(r * .7, g * .7, b * .7)
+		else
+			self.Name:SetTextColor(1, 1, 1)
+		end
+	end 
+end
+
 -- Create our font strings
 D.SetFontString = function(parent, fontName, fontHeight, fontStyle)
 	local fs = parent:CreateFontString(nil, "OVERLAY")

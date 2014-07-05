@@ -33,7 +33,6 @@ function DuffedUIUnitFrames:Raid()
 		Health.colorReaction = true
 	end
 	if (C["unitframes"].Smooth) then Health.Smooth = true end
-	self.Health = Health
 
 	-- Border for HealthBar
 	local HealthBorder = CreateFrame("Frame", nil, Health)
@@ -42,6 +41,10 @@ function DuffedUIUnitFrames:Raid()
 	HealthBorder:SetTemplate("Default")
 	HealthBorder:CreateShadow("Default")
 	HealthBorder:SetFrameLevel(2)
+	
+	self.Health = Health
+	self.Health.bg = Health.Background
+	self.HealthBorder = HealthBorder
 	
 	-- Power
 	local Power = CreateFrame("StatusBar", nil, self)
@@ -65,10 +68,28 @@ function DuffedUIUnitFrames:Raid()
 	ReadyCheck:Height(12)
 	ReadyCheck:Width(12)
 	ReadyCheck:SetPoint("CENTER")
+	
+	if C["raid"].Aggro then
+		table.insert(self.__elements, D.UpdateThreat)
+		self:RegisterEvent('PLAYER_TARGET_CHANGED', D.UpdateThreat)
+		self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', D.UpdateThreat)
+		self:RegisterEvent('UNIT_THREAT_SITUATION_UPDATE', D.UpdateThreat)
+	end
+	
+	if C["raid"].ShowSymbols then
+		local RaidIcon = Health:CreateTexture(nil, 'OVERLAY')
+		RaidIcon:Height(D.Scale(18))
+		RaidIcon:Width(D.Scale(18))
+		RaidIcon:SetPoint('CENTER', self, 'TOP')
+		RaidIcon:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\raidicons.blp") -- thx hankthetank for texture
+		self.RaidIcon = RaidIcon
+	end
 
 	local LFDRole = Health:CreateTexture(nil, "OVERLAY")
-	LFDRole:SetInside(Panel)
-	LFDRole:SetTexture(0, 0, 0, 0)
+    LFDRole:Height(D.Scale(6))
+    LFDRole:Width(D.Scale(6))
+	LFDRole:Point("TOPRIGHT", -2, -2)
+	LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons.blp")
 	LFDRole.Override = DuffedUIUnitFrames.SetGridGroupRole
 	
 	local ResurrectIcon = Health:CreateTexture(nil, "OVERLAY")
@@ -136,13 +157,6 @@ function DuffedUIUnitFrames:Raid()
 		RaidDebuffs.icon:Point("TOPLEFT", 2, -2)
 		RaidDebuffs.icon:Point("BOTTOMRIGHT", -2, 2)
 
-		if C["raid"].AuraWatchTimers then
-			RaidDebuffs.cd = CreateFrame("Cooldown", nil, RaidDebuffs)
-			RaidDebuffs.cd:Point("TOPLEFT", 2, -2)
-			RaidDebuffs.cd:Point("BOTTOMRIGHT", -2, 2)
-			RaidDebuffs.cd.noOCC = true -- remove this line if you want cooldown number on it
-		end
-
 		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, "OVERLAY")
 		RaidDebuffs.count:SetFont(C["medias"].Font, 9, "THINOUTLINE")
 		RaidDebuffs.count:SetPoint("BOTTOMRIGHT", RaidDebuffs, "BOTTOMRIGHT", 0, 2)
@@ -155,9 +169,7 @@ function DuffedUIUnitFrames:Raid()
 		self.RaidDebuffs = RaidDebuffs
 	end
 
-	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameShort]")
-	self.Health.bg = Health.Background
-	self.HealthBorder = HealthBorder
+	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameShort][DuffedUI:Dead]")
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.Panel = Panel

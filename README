@@ -1,5 +1,10 @@
 => DuffedUI v8 <=
 
+05.07.2014 =>
+	Added plugin => AFKCamera (Thx @Rav)
+	Added plugin => QuestLevel (Thx @Rav)
+	Bugfixes
+	
 03.07.2014 =>
 	Added RaidDebuffs
 	Adjust locales

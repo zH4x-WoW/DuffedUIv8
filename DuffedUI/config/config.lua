@@ -55,13 +55,12 @@ C["bags"] = {
 	["Enable"] = true,
 	["ButtonSize"] = 28,
 	["Spacing"] = 4,
-	["ItemsPerRow"] = 11,
+	["ItemsPerRow"] = 10,
 	["Scale"] = 1,
 	["Moveable"] = false,
 }
 
 C["merchant"] = {
-	["vendorlist"] = true,
 	["AutoSellGrays"] = true,
 	["AutoRepair"] = true,
 	["SellMisc"] = true,
@@ -109,16 +108,17 @@ C["party"] = {
 
 C["raid"] = {
 	["Enable"] = true,
-	["RaidPets"] = true,
+	["RaidPets"] = false,
 	["GridVertical"] = false,
-	["ColumnSpacing"] = 1,
-	["FrameWidth"] = 65,
-	["FrameHeight"] = 42,
+	["ColumnSpacing"] = -2,
+	["FrameWidth"] = 66,
+	["FrameHeight"] = 45,
 	["GridScale"] = 1,
 	["HealBar"] = true,
 	["AuraWatch"] = true,
-	["AuraWatchTimers"] = true,
-	["DebuffWatch"] = true,
+	["DebuffWatch"] = false,
+	["Aggro"] = true,
+	["ShowSymbols"] = true,
 }
 
 C["tooltips"] = {
@@ -186,6 +186,8 @@ C["plugins"] = {
 	["FocusButton"] = true,
 	["ACMScreen"] = true,
 	["Gold"] = true,
+	["AFKCamera"] = true,
+	["QuestLevel"] = true,
 }
 
 C["duffed"] = {

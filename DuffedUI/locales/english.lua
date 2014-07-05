@@ -117,6 +117,14 @@ L.Welcome = {} --
 
 L.Welcome.Message = "Hello |cffc41f3b".. D.MyName.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.Version.."|r. For detailed Information visit |cffc41f3bhttp://www.tukui.org|r."
 
+------------------
+L.AFKText = {} --
+------------------
+
+L.AFKText.Text1 = "Mouseover minimap shors coords and locations"
+L.AFKText.Text2 = "Middle click the minimap for micromenu"
+L.AFKText.Text3 = "Right click the minimap for gatheringmenu"
+
 ---------------------
 L.BuffTracker = {} --
 ---------------------

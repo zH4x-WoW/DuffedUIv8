@@ -11,7 +11,7 @@ local Parent = DuffedUIPanels.PetBattleHider
 local Insert = table.insert
 local SecureHandlerSetFrameRef = SecureHandlerSetFrameRef
 
-DuffedUIAuras.Wraps = 12
+DuffedUIAuras.Wraps = 18
 
 function DuffedUIAuras:CreateHeaders()
 	for i = 1, 3 do
@@ -27,7 +27,7 @@ function DuffedUIAuras:CreateHeaders()
 			Header:SetMovable(true)
 			Header:SetAttribute("minHeight", 30)
 			Header:SetAttribute("wrapAfter", DuffedUIAuras.Wraps)
-			Header:SetAttribute("wrapYOffset", -73.5)
+			Header:SetAttribute("wrapYOffset", -55)
 			Header:SetAttribute("xOffset", -35)
 			Header:CreateBackdrop()
 			Header.Backdrop:SetBackdropBorderColor(1, 0, 0)
@@ -100,7 +100,7 @@ function DuffedUIAuras:CreateHeaders()
 	Consolidate:Hide()
 	SecureHandlerSetFrameRef(Proxy, "header", Consolidate)
 	
-	Debuffs:SetPoint("TOP", Buffs, "BOTTOM", 0, -97)
+	Debuffs:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -17, -15)
 	Debuffs:SetAttribute("filter", "HARMFUL")
 	Debuffs:Show()
 	

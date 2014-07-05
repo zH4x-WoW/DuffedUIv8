@@ -2,6 +2,7 @@ local D, C, L = select(2, ...):unpack()
 
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
+local Layout = C["unitframes"].Layout
 
 if (Class ~= "DEATHKNIGHT") then return end
 
@@ -124,8 +125,14 @@ function DuffedUIUnitFrames:AddDeathKnightFeatures()
 	-- Totem Bar (Risen Ally - Raise Dead)
 	local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
 	bar:SetWidth(5)
-	bar:SetHeight(28)
-	bar:Point("BOTTOMLEFT", oUF_DuffedUIPlayer, "BOTTOMRIGHT", 6, -1)
+	if (Layout ~= 2) then bar:SetHeight(28) else bar:SetHeight(38) end
+	if (Layout == 1) then
+		bar:Point("RIGHT", oUF_DuffedUIPlayer, 12, -8)
+	elseif (Layout == 2) then
+		bar:Point("RIGHT", oUF_DuffedUIPlayer, 10, 0)
+	elseif (Layout == 3) then
+		bar:Point("RIGHT", oUF_DuffedUIPlayer, 17, 7)
+	end
 	bar:SetStatusBarTexture(Texture)
 	bar:SetOrientation("VERTICAL")
 	bar.bg = bar:CreateTexture(nil, 'ARTWORK')
