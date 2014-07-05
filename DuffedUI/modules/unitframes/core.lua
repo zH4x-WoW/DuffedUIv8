@@ -821,7 +821,7 @@ if C["raid"].DebuffWatch then
 			SpellName(145195),	-- Empowered Gripping Despair
 		}
 
-		DuffedUIUnitFrames.ReverseTimer = {
+		D.ReverseTimer = {
 
 		},
 

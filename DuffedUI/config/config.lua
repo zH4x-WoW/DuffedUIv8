@@ -116,7 +116,7 @@ C["raid"] = {
 	["GridScale"] = 1,
 	["HealBar"] = true,
 	["AuraWatch"] = true,
-	["DebuffWatch"] = false,
+	["DebuffWatch"] = true,
 	["Aggro"] = true,
 	["ShowSymbols"] = true,
 }

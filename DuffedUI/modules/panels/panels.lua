@@ -21,7 +21,6 @@ if C["chat"].lBackground then
 	LeftChatBackground:SetTemplate("Transparent")
 	LeftChatBackground:SetFrameLevel(1)
 	LeftChatBackground:SetFrameStrata("BACKGROUND")
-	LeftChatBackground:CreateShadow()
 	
 	local LeftChatTab = CreateFrame("Frame", "LeftChatTab", LeftChatBackground)
 	LeftChatTab:Size(353, 20)
@@ -38,7 +37,6 @@ if C["chat"].rBackground then
 	RightChatBackground:SetTemplate("Transparent")
 	RightChatBackground:SetFrameLevel(1)
 	RightChatBackground:SetFrameStrata("BACKGROUND")
-	RightChatBackground:CreateShadow()
 	
 	local RightChatTab = CreateFrame("Frame", "RightChatTab", RightChatBackground)
 	RightChatTab:Size(206, 20)

@@ -19,7 +19,7 @@ function DuffedUIUnitFrames:Raid()
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
-
+	
 	Health.frequentUpdates = true
 	if C["unitframes"].UniColor then
 		Health.colorClass = false
@@ -107,7 +107,7 @@ function DuffedUIUnitFrames:Raid()
 		FirstBar:Width(D.Scale(C["raid"].FrameWidth))
 		FirstBar:Height(D.Scale(C["raid"].FrameHeight))
 		FirstBar:SetStatusBarTexture(C["medias"].Normal)
-		FirstBar:SetStatusBarColor(0, 0.3, 0.15, 1)
+		FirstBar:SetStatusBarColor(0, 0.3, 0.15, .7)
 		FirstBar:SetMinMaxValues(0, 1)
 		FirstBar:SetOrientation("VERTICAL")
 
@@ -116,7 +116,7 @@ function DuffedUIUnitFrames:Raid()
 		SecondBar:Width(D.Scale(C["raid"].FrameWidth))
 		SecondBar:Height(D.Scale(C["raid"].FrameHeight))
 		SecondBar:SetStatusBarTexture(C["medias"].Normal)
-		SecondBar:SetStatusBarColor(0, 0.3, 0, 1)
+		SecondBar:SetStatusBarColor(0, 0.3, 0, .7)
 		SecondBar:SetOrientation("VERTICAL")
 
 		local ThirdBar = CreateFrame("StatusBar", nil, Health)
@@ -124,7 +124,7 @@ function DuffedUIUnitFrames:Raid()
 		ThirdBar:Width(D.Scale(C["raid"].FrameWidth))
 		ThirdBar:Height(D.Scale(C["raid"].FrameHeight))
 		ThirdBar:SetStatusBarTexture(C["medias"].Normal)
-		ThirdBar:SetStatusBarColor(0.3, 0.3, 0, 1)
+		ThirdBar:SetStatusBarColor(0.3, 0.3, 0, .7)
 		ThirdBar:SetOrientation("VERTICAL")
 
 		SecondBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 1)
@@ -169,7 +169,7 @@ function DuffedUIUnitFrames:Raid()
 		self.RaidDebuffs = RaidDebuffs
 	end
 
-	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameShort][DuffedUI:Dead]")
+	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameShort]")
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.Panel = Panel
