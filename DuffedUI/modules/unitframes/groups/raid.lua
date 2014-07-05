@@ -20,6 +20,9 @@ function DuffedUIUnitFrames:Raid()
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
 	
+	Health:FontString("Value", C["medias"].Font, 12, "THINOUTLINE")
+	Health.Value:Point("CENTER", Health, 0, -6)
+	
 	Health.frequentUpdates = true
 	if C["unitframes"].UniColor then
 		Health.colorClass = false
@@ -33,6 +36,7 @@ function DuffedUIUnitFrames:Raid()
 		Health.colorReaction = true
 	end
 	if (C["unitframes"].Smooth) then Health.Smooth = true end
+	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealthRaid
 
 	-- Border for HealthBar
 	local HealthBorder = CreateFrame("Frame", nil, Health)
@@ -61,7 +65,7 @@ function DuffedUIUnitFrames:Raid()
 	if (C["unitframes"].Smooth) then Health.Smooth = true end
 	
 	local Name = Health:CreateFontString(nil, "OVERLAY")
-	Name:SetPoint("CENTER")
+	Name:SetPoint("CENTER", Health, "TOP", 0, -7)
 	Name:SetFont(C["medias"].Font, 12)
 	
 	local ReadyCheck = Power:CreateTexture(nil, "OVERLAY")

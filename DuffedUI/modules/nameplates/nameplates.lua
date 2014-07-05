@@ -14,7 +14,6 @@ local Colors = D["Colors"]
 local Convert = D.RGBToHex
 local Scale = D.Scale
 local FrameNumber = 0
-local NoScaleMult = D.Mult * C["general"].UIScale
 
 local Plates = CreateFrame("Frame", nil, WorldFrame)
 

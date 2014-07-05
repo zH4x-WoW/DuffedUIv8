@@ -143,6 +143,7 @@ C["unitframes"] = {
 	["CharPortrait"] = true,
 	["Layout"] = 3,
 	["Percent"] = true,
+	["ShowTotalHP"] = false,
 }
 
 C["castbar"] = {

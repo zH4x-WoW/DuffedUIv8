@@ -219,22 +219,69 @@ function DuffedUIUnitFrames:PostUpdateHealth(unit, min, max)
 		if (min ~= max) then
 			r, g, b = D.ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
 			if (unit == "player" and self:GetAttribute("normalUnit") ~= "pet") then
-				self.Value:SetFormattedText("|cffAF5050%d|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", min, r * 255, g * 255, b * 255, floor(min / max * 100))
+				if C["unitframes"].ShowTotalHP then
+					self.Value:SetFormattedText("|cff559655%s|r |cffD7BEA5|||r |cff559655%s|r", DuffedUIUnitFrames.ShortValue(min), DuffedUIUnitFrames.ShortValue(max))
+				else
+					self.Value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", DuffedUIUnitFrames.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
+				end
 			elseif (unit == "target" or (unit and strfind(unit, "boss%d"))) then
-				self.Value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", DuffedUIUnitFrames.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
+				if C["unitframes"].ShowTotalHP then
+					self.Value:SetFormattedText("|cff559655%s|r |cffD7BEA5|||r |cff559655%s|r", DuffedUIUnitFrames.ShortValue(min), DuffedUIUnitFrames.ShortValue(max))
+				else
+					self.Value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", DuffedUIUnitFrames.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
+				end
 			elseif (unit and strfind(unit, "arena%d")) or (unit == "focus") or (unit == "focustarget") then
-				self.Value:SetText("|cff559655"..DuffedUIUnitFrames.ShortValue(min).."|r")
+				if C["unitframes"].ShowTotalHP then
+					self.Value:SetFormattedText("|cff559655%s|r |cffD7BEA5|||r |cff559655%s|r", DuffedUIUnitFrames.ShortValue(min), DuffedUIUnitFrames.ShortValue(max))
+				else
+					self.Value:SetText("|cff559655"..DuffedUIUnitFrames.ShortValue(min).."|r")
+				end
 			else
 				self.Value:SetText("|cff559655-"..DuffedUIUnitFrames.ShortValue(max-min).."|r")
 			end
 		else
 			if (unit == "player" and self:GetAttribute("normalUnit") ~= "pet") then
-				self.Value:SetText("|cff559655"..max.."|r")
+				self.Value:SetText("|cff559655"..DuffedUIUnitFrames.ShortValue(max).."|r")
 			elseif (unit == "target" or unit == "focus"  or unit == "focustarget" or (unit and strfind(unit, "arena%d"))) then
 				self.Value:SetText("|cff559655"..DuffedUIUnitFrames.ShortValue(max).."|r")
 			else
 				self.Value:SetText(" ")
 			end
+		end
+	end
+end
+
+function DuffedUIUnitFrames:PostUpdateHealthRaid(unit, min, max)
+	if (not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit)) then
+		if (not UnitIsConnected(unit)) then
+			self.Value:SetText("|cffD7BEA5"..FRIENDS_LIST_OFFLINE.."|r")
+		elseif (UnitIsDead(unit)) then
+			self.Value:SetText("|cffD7BEA5"..DEAD.."|r")
+		elseif (UnitIsGhost(unit)) then
+			self.Value:SetText("|cffD7BEA5"..L.UnitFrames.Ghost.."|r")
+		end
+	else
+		local r, g, b
+		
+		if not C["unitframes"].UniColor then
+			if (unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
+				local Color = Colors.reaction[UnitReaction(unit, "player")]
+				r, g, b = Color[1], Color[2], Color[3]
+				self:SetStatusBarColor(r, g, b)
+			end
+		end
+
+		if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C["unitframes"].UniColor ~= true then
+			local Color = Colors.reaction[5]
+			local r, g, b = Color[1], Color[2], Color[3]
+			self:SetStatusBarColor(r, g, b)
+			self.bg:SetTexture(.1, .1, .1)
+		end
+		
+		if min ~= max then
+			self.Value:SetText("|cff559655-"..DuffedUIUnitFrames.ShortValue(max-min).."|r")
+		else
+			self.Value:SetText(" ")
 		end
 	end
 end
@@ -857,7 +904,7 @@ function DuffedUIUnitFrames:GetPartyFramesAttributes()
 	]],
 	"initial-width", D.Scale(162),
 	"initial-height", D.Scale(24),
-	--"showSolo", true, -- uncomment this for coding
+	"showSolo", false, -- uncomment this for coding
 	"showParty", true, 
 	"showPlayer", true, 
 	"showRaid", true,
