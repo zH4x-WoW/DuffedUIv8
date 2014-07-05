@@ -287,7 +287,7 @@ function DuffedUIUnitFrames:Target()
 
 	if (C["unitframes"].CombatLog) then
 		local CombatFeedbackText = Health:CreateFontString(nil, "OVERLAY")
-		CombatFeedbackText:SetFont(Font, 10, "OUTLINE")
+		CombatFeedbackText:SetFont(Font, 12, "OUTLINE")
 		CombatFeedbackText:SetPoint("CENTER", 0, 1)
 		CombatFeedbackText.colors = {
 			DAMAGE = {0.69, 0.31, 0.31},

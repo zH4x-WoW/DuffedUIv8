@@ -144,6 +144,7 @@ C["unitframes"] = {
 	["Layout"] = 3,
 	["Percent"] = true,
 	["ShowTotalHP"] = false,
+	["ColorGradient"] = true,
 }
 
 C["castbar"] = {
@@ -200,7 +201,7 @@ C["duffed"] = {
 }
 
 C["scd"] = {
-	["Enable"] = true,
+	["Enable"] = false,
 	["FSize"] = 12,
 	["Size"] = 28,
 	["Spacing"] = 10,

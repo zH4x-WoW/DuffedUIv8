@@ -215,6 +215,11 @@ function DuffedUIUnitFrames:PostUpdateHealth(unit, min, max)
 				self:SetStatusBarColor(r, g, b)
 			end
 		end
+		
+		if C["unitframes"].ColorGradient and C["unitframes"].UniColor then
+			local r, g, b = D.ColorGradient(min, max, 0, 0, 0, .6, .2, .2, .125, .125, .125)
+			self:SetStatusBarColor(r, g, b)
+		end
 
 		if (min ~= max) then
 			r, g, b = D.ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
@@ -262,6 +267,11 @@ function DuffedUIUnitFrames:PostUpdateHealthRaid(unit, min, max)
 		end
 	else
 		local r, g, b
+		
+		if C["unitframes"].ColorGradient and C["unitframes"].UniColor then
+			local r, g, b = D.ColorGradient(min, max, 0, 0, 0, .6, .2, .2, .125, .125, .125)
+			self:SetStatusBarColor(r, g, b)
+		end
 		
 		if not C["unitframes"].UniColor then
 			if (unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then

@@ -1,5 +1,6 @@
-if (select(2, UnitClass("player")) ~= "MAGE") or not DuffedUIMinimapStatsLeft then return end
-local D, C, L = select(2, ...):unpack()
+--[[local D, C, L = select(2, ...):unpack()
+
+if (select(2, UnitClass("player")) ~= "MAGE") then return end
 
 local spells = (UnitFactionGroup("player") == "Horde") and {
 	--  Tepelort id, Portal id
@@ -23,17 +24,16 @@ local spells = (UnitFactionGroup("player") == "Horde") and {
 	[8] = {88342,88345}, -- Tol Barad
 	[9] = {132621,132620}, -- Vale of Eternal Blossoms
 };
-local Panels = D["Panels"]
 
 local abbrev = function(name)
 	local newname = (string.len(name) > 12) and string.gsub(name, "%s?(.[\128-\191]*)%S+%s", "%1. ") or name
 	return D.UTF(newname, 12, false)
 end
  
-local f = CreateFrame("Frame", "DuffedUITeleportMenu", UIParent)
+local f = CreateFrame("Frame", "DuffedUITeleportMenu", Minimap)
 f:Size(Minimap:GetWidth(),(#spells + 1) * 21 + 3)
-f:SetPoint("TOPLEFT", Panels.MinimapDataTextOne, "BOTTOMLEFT", 0, -3)
-f:SetFrameStrata("HIGH")
+f:SetPoint("TOPLEFT", MinimapDataTextOne, "BOTTOMLEFT", 0, -3)
+--f:SetFrameStrata("HIGH")
 f:CreateShadow("Default")
 f:SetTemplate("Transparent")
 f:CreateBackdrop()
@@ -44,13 +44,13 @@ r:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
 local l = r:CreateFontString("Title", "OVERLAY")
 l:SetFont(C["medias"].Font, 12, "THINOUTLINE")
 l:SetPoint("CENTER", r, "CENTER")
-r:SetFrameStrata("HIGH")
+--r:SetFrameStrata("HIGH")
  
 for i, spell in pairs(spells) do
 	local b = CreateFrame("Button", nil, f, "SecureActionButtonTemplate")
 	b:Size(Minimap:GetWidth() - 4, 20)
 	b:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -(i * 21) - 2)
-	b:SetFrameStrata("HIGH")
+	--b:SetFrameStrata("HIGH")
 	b:SetTemplate("Transparent")
 	b:CreateBackdrop()
  
@@ -66,9 +66,9 @@ for i, spell in pairs(spells) do
 	b:SetAttribute("spell2", GetSpellInfo(spell[2]))
 	
 	b:HookScript("OnEnter", function(self)
-		local r,g,b = unpack(C["medias"].PrimaryDataTextColor)
-		self:SetBackdropColor(r,g,b, 0.15)
-		self:SetBackdropBorderColor(r,g,b)
+		local r, g, b = unpack(C["medias"].PrimaryDataTextColor)
+		self:SetBackdropColor(r, g, b, 0.15)
+		self:SetBackdropBorderColor(r, g, b)
 	end)
 
 	b:HookScript("OnLeave", function(self)
@@ -76,15 +76,15 @@ for i, spell in pairs(spells) do
 		self:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
 	end)
 end
-f:Hide()
+--f:Hide()
  
-local b = CreateFrame("Button", nil, Panels.MinimapDataTextOne)
-b:SetAllPoints(Panels.MinimapDataTextOne)
+local b = CreateFrame("Button", nil, Minimap)
+b:SetAllPoints(MinimapDataTextOne)
 b:SetScript("OnClick", function(self)
 	if DuffedUITeleportMenu:IsShown() then
 		DuffedUITeleportMenu:Hide()
 	else
-		Title:SetText(D.panelcolor.."Portal / Teleportlist")
+		Title:SetText("Portal / Teleportlist") -- D.panelcolor..
 		DuffedUITeleportMenu:Show()
 	end
 end)
@@ -95,4 +95,4 @@ f:SetScript("OnEvent",
 	if self:IsShown() then
 		self:Hide()
 	end
-end)
+end)]]--

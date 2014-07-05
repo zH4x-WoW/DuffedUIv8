@@ -100,13 +100,13 @@ function Maps:PositionMinimap()
 end
 
 function Maps:AddMinimapDataTexts()
-	local MinimapDataTextOne = CreateFrame("Frame", nil, Map)
+	local MinimapDataTextOne = CreateFrame("Frame", "MinimapDataTextOne", Map)
 	MinimapDataTextOne:Size(Map:GetWidth() / 2 + 2, 19)
 	MinimapDataTextOne:SetPoint("TOPLEFT", Map, "BOTTOMLEFT", -2, -3)
 	MinimapDataTextOne:SetTemplate()
 	MinimapDataTextOne:SetFrameStrata("LOW")
 
-	local MinimapDataTextTwo = CreateFrame("Frame", nil, Map)
+	local MinimapDataTextTwo = CreateFrame("Frame", "MinimapDataTextTwo", Map)
 	MinimapDataTextTwo:Size(Map:GetWidth() / 2 + 1, 19)
 	MinimapDataTextTwo:SetPoint("TOPRIGHT", Map, "BOTTOMRIGHT", 2, -3)
 	MinimapDataTextTwo:SetTemplate()

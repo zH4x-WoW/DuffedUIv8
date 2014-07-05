@@ -258,7 +258,7 @@ function DuffedUIChat:Install()
 	ChatFrame_RemoveAllMessageGroups(ChatFrame1)
 	ChatFrame_RemoveChannel(ChatFrame1, TRADE)
 	ChatFrame_RemoveChannel(ChatFrame1, GENERAL)
-	ChatFrame_RemoveChannel(ChatFrame1, "LocalDefense") -- Don't forget to localize me, There's no global strings for these but i'll keep looking for another method maybe.
+	LeaveChannelByName("LocalDefense") -- Don't forget to localize me, There's no global strings for these but i'll keep looking for another method maybe.
 	ChatFrame_RemoveChannel(ChatFrame1, "GuildRecruitment")
 	ChatFrame_RemoveChannel(ChatFrame1, "LookingForGroup")
 	ChatFrame_AddMessageGroup(ChatFrame1, "SAY")

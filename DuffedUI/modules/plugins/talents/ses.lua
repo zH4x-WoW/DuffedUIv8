@@ -82,11 +82,12 @@ function DisableSpecSwitcherSpamFilter()
 end
 
 -- Spec
-local spec = CreateFrame("Button", "DuffedUI_Spechelper", UIParent)
+local spec = CreateFrame("Button", "DuffedUI_Spechelper", RightChatTab)
 spec:SetTemplate("Default")
 if C["chat"].rBackground then
 	spec:Size(Minimap:GetWidth() + 5, 20)
 	spec:SetPoint("LEFT", Panel.RightChatTab, "RIGHT", 2, 0)
+	spec:SetFrameLevel(Panel.RightChatTab:GetFrameLevel() - 1)
 else
 	spec:Size(Minimap:GetWidth(), 20)
 	spec:SetPoint("TOPLEFT", MinimapDataTextOne, "BOTTOMLEFT", 0, -2)

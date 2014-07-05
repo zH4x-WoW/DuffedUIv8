@@ -66,7 +66,7 @@ function DuffedUIUnitFrames:Raid()
 	
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER", Health, "TOP", 0, -7)
-	Name:SetFont(C["medias"].Font, 12)
+	Name:SetFont(C["medias"].Font, 11)
 	
 	local ReadyCheck = Power:CreateTexture(nil, "OVERLAY")
 	ReadyCheck:Height(12)
