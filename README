@@ -8,6 +8,7 @@
 	Extended Time DataText
 	Fixed Power DataText for other locales
 	Removed TokenFrame from Bags (no need for it)
+	Adding wowhead-option to watchframe
 	
 05.07.2014 =>
 	Tweaks

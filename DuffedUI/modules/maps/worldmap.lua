@@ -17,7 +17,7 @@ local WorldMapFrameSizeUpButton = WorldMapFrameSizeUpButton
 function Maps:WorldMapOnOpen()
 	WorldMapLevelDropDown:ClearAllPoints()
 	WorldMapLevelDropDown:SetPoint("TOPRIGHT", WorldMapShowDropDown, "BOTTOMRIGHT", 0, 6)
-	WorldMapLevelDropDown:SetTemplate("Transparent")
+	WorldMapLevelDropDown:SetTemplate()
 	
 	WorldMapTrackQuest:SkinCheckBox()
 	WorldMapTrackQuest:ClearAllPoints()

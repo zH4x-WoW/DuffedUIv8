@@ -19,7 +19,8 @@ end
 D.AFK_LIST = {
 	L.AFKText.Text1,
 	L.AFKText.Text2,
-	L.AFKText.Text3;
+	L.AFKText.Text3,
+	L.AFKText.Text4,
 }
 
 local DuffedUIAFKPanel = CreateFrame( "Frame", "DuffedUIAFKPanel", nil )

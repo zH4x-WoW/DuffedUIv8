@@ -145,6 +145,7 @@ L.AFKText = {} --
 L.AFKText.Text1 = "Mouseover minimap shows coords and locations"
 L.AFKText.Text2 = "Middle click the minimap for micromenu"
 L.AFKText.Text3 = "Right click the minimap for gatheringmenu"
+L.AFKText.Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
 
 ---------------------
 L.BuffTracker = {} --
