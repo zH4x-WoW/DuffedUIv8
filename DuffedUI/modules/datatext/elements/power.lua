@@ -1,7 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
 local DataText = D["DataTexts"]
---local Panels = D["Panels"]
 local format = format
 local Class = select(2, UnitClass("player"))
 
