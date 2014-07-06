@@ -7,6 +7,7 @@
 	Starting Moving-Script
 	Extended Time DataText
 	Fixed Power DataText for other locales
+	Removed TokenFrame from Bags (no need for it)
 	
 05.07.2014 =>
 	Tweaks

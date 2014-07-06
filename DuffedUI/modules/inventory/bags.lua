@@ -6,7 +6,6 @@ local _G = _G
 local Noop = function() end
 local ReplaceBags = 0
 local LastButtonBag, LastButtonBank
-local Token1, Token2, Token3 = BackpackTokenFrameToken1, BackpackTokenFrameToken2, BackpackTokenFrameToken3
 local NUM_CONTAINER_FRAMES = NUM_CONTAINER_FRAMES
 local NUM_BAG_FRAMES = NUM_BAG_FRAMES
 local ContainerFrame_GetOpenFrame = ContainerFrame_GetOpenFrame
@@ -52,14 +51,12 @@ function Bags:SkinBagButton()
 end
 
 function Bags:HideBlizzard()
-	local TokenFrame = _G["BackpackTokenFrame"]
 	local Inset = _G["BankFrameMoneyFrameInset"]
 	local Border = _G["BankFrameMoneyFrameBorder"]
 	local BankClose = _G["BankFrameCloseButton"]
 	local BankFrame = _G["BankFrame"]
 	local BankPortraitTexture = _G["BankPortraitTexture"]
 	
-	TokenFrame:GetRegions():SetAlpha(0)
 	Inset:Hide()
 	Border:Hide()
 	BankClose:Hide()
@@ -267,36 +264,6 @@ function Bags:SetBankSearchPosition()
 	BankItemSearchBox.SetPoint = Noop
 end
 
-function Bags:SetTokensPosition()
-	Token3:ClearAllPoints()
-	Token3:SetPoint("BOTTOMRIGHT", self.Bag, "BOTTOMRIGHT", -16, 8)
-	Token2:ClearAllPoints()
-	Token2:SetPoint("RIGHT", Token3, "LEFT", -10, 0)
-	Token1:ClearAllPoints()
-	Token1:SetPoint("RIGHT", Token2, "LEFT", -10, 0)
-end
-
-function Bags:SkinTokens()
-	for i = 1, 3 do
-		local Token = _G["BackpackTokenFrameToken"..i]
-		local Icon = _G["BackpackTokenFrameToken"..i.."Icon"]
-		local Count = _G["BackpackTokenFrameToken"..i.."Count"]
-		local PreviousToken = _G["BackpackTokenFrameToken"..(i - 1)]
-		
-		Token:SetFrameStrata("HIGH")
-		Token:SetFrameLevel(5)
-		Token:SetScale(C["bags"].Scale)
-		Token:CreateBackdrop()
-		Token.Backdrop:SetOutside(Icon)
-		
-		Icon:SetSize(12,12) 
-		Icon:SetTexCoord(unpack(D.IconCoord)) 
-		Icon:SetPoint("LEFT", Token, "RIGHT", -8, 2) 
-		
-		Count:SetFont(C["medias"].Font, 13)
-	end
-end
-
 function Bags:SkinEditBoxes()
 	for _, Frame in pairs(Boxes) do
 		Frame:SkinEditBox()
@@ -362,11 +329,7 @@ function Bags:Update(size, id)
 			end
 		end
 		
-		if (Token1:IsShown()) then
-			Bags.Bag:SetHeight(((C["bags"].ButtonSize + C["bags"].Spacing) * (NumRows + 1) + 76) - C["bags"].Spacing)
-		else
-			Bags.Bag:SetHeight(((C["bags"].ButtonSize + C["bags"].Spacing) * (NumRows + 1) + 54) - C["bags"].Spacing)
-		end
+		Bags.Bag:SetHeight(((C["bags"].ButtonSize + C["bags"].Spacing) * (NumRows + 1) + 54) - C["bags"].Spacing)
 	else
 		local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
 		
@@ -529,8 +492,6 @@ function Bags:EnableBags()
 	self:SetBagsSearchPosition()
 	self:SetBankSearchPosition()
 	self:SkinEditBoxes()
-	self:SetTokensPosition()
-	self:SkinTokens()
 
 	Bag:SetScript("OnHide", function()
 		self.Bag:Hide()

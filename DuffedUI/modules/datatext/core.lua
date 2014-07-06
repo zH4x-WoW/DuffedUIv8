@@ -227,7 +227,7 @@ function DuffedUIDT:Load()
 		DuffedUIDataPerChar.Texts["System"] = {true, 4}
 		DuffedUIDataPerChar.Texts["Bag Slots"] = {true, 5}
 		DuffedUIDataPerChar.Texts["Gold"] = {true, 6}
-		DuffedUIDataPerChar.Texts["Power"] = {true, 7}
+		DuffedUIDataPerChar.Texts[L.DataText.Power] = {true, 7}
 		DuffedUIDataPerChar.Texts["Time"] = {true, 8}
 	end
 
