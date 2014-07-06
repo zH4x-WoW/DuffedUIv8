@@ -112,6 +112,20 @@ L.DataText.Slots = {
 	[11] = {18, "Ranged", 1000}
 }
 
+-------------------
+L.Worldboss = {} --
+-------------------
+
+L.Worldboss.Title = "World Boss(s):"
+L.Worldboss.Galleon = "Galleon"
+L.Worldboss.Sha = "Sha of Anger"
+L.Worldboss.Oondasta = "Oondasta"
+L.Worldboss.Nalak = "Nalak"
+L.Worldboss.Celestials = "Celestials"
+L.Worldboss.Ordos = "Ordos"
+L.Worldboss.Defeated = "Defeated"
+L.Worldboss.Undefeated = "Undefeated"
+
 -----------------
 L.Welcome = {} --
 -----------------

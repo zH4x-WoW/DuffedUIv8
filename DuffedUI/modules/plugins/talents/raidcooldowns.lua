@@ -4,7 +4,7 @@ if C["talent"].RCDEnable ~= true then return end
 
 -- Config start
 local anchor = "TOPLEFT"
-local x, y = 150, -150
+local x, y = 5, -150
 local width, height = 200, 15
 local spacing = -5
 local icon_size = 15

@@ -158,7 +158,7 @@ function DuffedUIActionBars:AddPanels()
 	
 	local A7 = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	A7:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
-	A7:SetPoint("TOPLEFT", 30, -30)
+	A7:SetPoint("TOP", (A7:GetWidth() / 2), -30)
 	A7:SetFrameStrata("BACKGROUND")
 	A7:SetFrameLevel(2)
 	A7.Backdrop = CreateFrame("Frame", nil, A7)
