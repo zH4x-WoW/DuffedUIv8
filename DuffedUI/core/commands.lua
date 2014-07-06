@@ -1,6 +1,7 @@
 local D, C, L = select(2, ...):unpack()
 
 local strlower = strlower
+local Popups = D["Popups"]
 
 local Split = function(cmd)
 	if cmd:find("%s") then
@@ -64,3 +65,33 @@ local TestUI = function(msg)
 end
 SlashCmdList.TestUI = TestUI
 SLASH_TestUI1 = "/testui"
+
+-- disband party/raid
+local function DisbandRaidGroup()
+	if InCombatLockdown() then return end
+	
+	if UnitInRaid("player") then
+		SendChatMessage(ERR_GROUP_DISBANDED, "RAID")
+		for i = 1, GetNumGroupMembers() do
+			local name, _, _, _, _, _, _, online = GetRaidRosterInfo(i)
+			if online and name ~= D.myname then
+				UninviteUnit(name)
+			end
+		end
+	else
+		SendChatMessage(ERR_GROUP_DISBANDED, "PARTY")
+		for i = MAX_PARTY_MEMBERS, 1, -1 do
+			if GetNumGroupMembers(i) then
+				UninviteUnit(UnitName("party"..i))
+			end
+		end
+	end
+	LeaveParty()
+end
+
+Popups.Popup["DUFFEDUIDISBAND_RAID"] = {
+	question = L.Disband.Text,
+	answer1 = ACCEPT,
+	answer2 = CANCEL,
+	function1 = DisbandRaidGroup,
+}

@@ -9,4 +9,5 @@
 	<Script file="colors.lua"/>
 	<Script file="install.lua"/>
 	<Script file="versioncheck.lua"/>
+	<Script file="move.lua"/>
 </Ui>

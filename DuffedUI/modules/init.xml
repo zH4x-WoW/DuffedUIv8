@@ -39,6 +39,8 @@
 	<Script file="misc\mirrortimers.lua"/>
 	<Script file="misc\gamemenu.lua"/>
 	<Script file="misc\micromenu.lua"/>
+	<Script file="misc\raidutilities.lua"/>
+	<Script file="misc\error.lua"/>
 	
 	<!-- maps -->
 	<Script file="maps\core.lua"/>
