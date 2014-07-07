@@ -43,7 +43,6 @@ end
 local SetData = function(self, object)
 	-- Disable the old data text in use
 	if self.Data then
-		--self.Data:Disable()
 		RemoveData(self)
 	end
 	
@@ -151,9 +150,9 @@ function DuffedUIDT:Register(name, enable, disable, update)
 	
 	Data.Enabled = false
 	Data.GetTooltipAnchor = GetTooltipAnchor
-	Data.Enable = enable
-	Data.Disable = disable
-	Data.Update = update
+	Data.Enable = enable or function() end
+	Data.Disable = disable or function() end
+	Data.Update = update or function() end
 	
 	hooksecurefunc(Data, "Enable", OnEnable)
 	hooksecurefunc(Data, "Disable", OnDisable)

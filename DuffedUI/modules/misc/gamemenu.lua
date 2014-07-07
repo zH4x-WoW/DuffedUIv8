@@ -22,6 +22,38 @@ GameMenu.Buttons = {
 }
 
 function GameMenu:Enable()
+	local menu = GameMenuFrame
+	local menuy = menu:GetHeight()
+	local quit = GameMenuButtonQuit
+	local continue = GameMenuButtonContinue
+	local continuex = continue:GetWidth()
+	local continuey = continue:GetHeight()
+	local Config = D["Config"]
+	local interface = GameMenuButtonUIOptions
+	local keybinds = GameMenuButtonKeybindings
+
+	menu:SetHeight(menuy + continuey)
+
+	local button = CreateFrame("BUTTON", "GameMenuDuffedUIButtonOptions", menu, "GameMenuButtonTemplate")
+	button:SetSize(continuex, continuey)
+	button:Point("TOP", interface, "BOTTOM", 0, -1)
+	button:SetText("DuffedUI")
+
+	button:SkinButton()
+
+	button:SetScript("OnClick", function(self)
+		if (not DuffedUIConfigFrame) then
+			Config:CreateConfigWindow()
+		end
+
+		if DuffedUIConfigFrame:IsVisible() then
+			DuffedUIConfigFrame:Hide()
+		else
+			DuffedUIConfigFrame:Show()
+			HideUIPanel(menu)
+		end
+	end)
+	
 	Header:SetTexture("")
 	Header:ClearAllPoints()
 	Header:SetPoint("TOP", Menu, 0, 7)
@@ -34,6 +66,11 @@ function GameMenu:Enable()
 		if (Button) then
 			Button:SkinButton()
 		end
+	end
+	if GameMenuFrame_UpdateVisibleButtons then
+		hooksecurefunc("GameMenuFrame_UpdateVisibleButtons", function()
+			GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + GameMenuButtonStore:GetHeight() + 25)
+		end)
 	end
 end
 

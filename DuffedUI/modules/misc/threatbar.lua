@@ -20,25 +20,7 @@ function ThreatBar:OnEvent(event)
 	local Raid = GetNumGroupMembers()
 	local Pet = HasPetUI()
 
-	if event == "PLAYER_ENTERING_WORLD" then
-		self:Hide()
-		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	elseif event == "PLAYER_REGEN_ENABLED" then
-		self:Hide()
-	elseif event == "PLAYER_REGEN_DISABLED" then
-		if Party > 0 or Raid > 0 or Pet == 1 then
-			self:Show()
-		else
-			self:Hide()
-		end
-	else
-		if (InCombatLockdown()) and (Party > 0 or Raid > 0 or Pet == 1) then
-			self:Show()
-		else
-			self:Hide()
-		end
-	end
-	--[[if (event == "PLAYER_REGEN_ENABLED") then
+	if (event == "PLAYER_REGEN_ENABLED") then
 		self:Hide()
 	elseif (event == "PLAYER_REGEN_DISABLED") then
 		if (Party > 0 or Raid > 0 or Pet == 1) then
@@ -50,7 +32,7 @@ function ThreatBar:OnEvent(event)
 		self:Hide()
 
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	end]]--
+	end
 end
 
 function ThreatBar:OnUpdate()

@@ -36,6 +36,17 @@ D.SlashHandler = function(cmd)
 		print(L.Help.Install)
 		print(L.Help.Datatexts)
 		print(" ")
+	elseif (arg1 == "config") then
+		local Config = D["Config"]
+		if (not DuffedUIConfigFrame) then
+			Config:CreateConfigWindow()
+		end
+
+		if DuffedUIConfigFrame:IsVisible() then
+			DuffedUIConfigFrame:Hide()
+		else
+			DuffedUIConfigFrame:Show()
+		end
 	end
 end
 

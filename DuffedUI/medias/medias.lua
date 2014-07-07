@@ -1,4 +1,4 @@
-local D, C = unpack(select(2, ...))
+local D, C, L  = select(2, ...):unpack()
 
 C["medias"] = {
 	-- fonts (ENGLISH)

@@ -1,4 +1,17 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="english.lua"/>
-	<!-- <Script file="german.lua"/> -->
+	<Script file="german.lua"/>
+	
+	<!-- config -->
+	<Script file="config\deDE.lua"/>
+	<Script file="config\enGB.lua"/>
+	<Script file="config\enUS.lua"/>
+	<Script file="config\esES.lua"/>
+	<Script file="config\esMX.lua"/>
+	<Script file="config\frFR.lua"/>
+	<Script file="config\koKR.lua"/>
+	<Script file="config\ptBR.lua"/>
+	<Script file="config\ruRU.lua"/>
+	<Script file="config\zhCN.lua"/>
+	<Script file="config\zhTW.lua"/>
 </Ui>

@@ -167,13 +167,13 @@ function Maps:AddZoneAndCoords()
 end
 
 Minimap:SetScript("OnEnter", function()
-	Maps.MinimapZone:Animation("FadeIn", 0.3)
-	Maps.MinimapCoords:Animation("FadeIn", 0.3)
+	Maps.MinimapZone:SetAnimation("FadeIn", 0.3)
+	Maps.MinimapCoords:SetAnimation("FadeIn", 0.3)
 end)
 
 Minimap:SetScript("OnLeave", function()
-	Maps.MinimapZone:Animation("FadeOut", 0.3)
-	Maps.MinimapCoords:Animation("FadeOut", 0.3)
+	Maps.MinimapZone:SetAnimation("FadeOut", 0.3)
+	Maps.MinimapCoords:SetAnimation("FadeOut", 0.3)
 end)
 
 function Maps:UpdateCoords(t)

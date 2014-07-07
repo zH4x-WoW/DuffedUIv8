@@ -4,7 +4,7 @@ local D, C = select(2, ...):unpack()
 
 --[[
 	Execute an animation;
-		frame:Animation("AnimType", ...)
+		frame:SetAnimation("AnimType", ...)
 	
 	Set a callback function when the animation is done;
 		frame:AnimOnFinished("AnimType", function(self, ...)
@@ -447,6 +447,8 @@ local GradientOnUpdate = function(self, ela)
 		else
 			self.Text:SetTextColor(r, g, b)
 		end
+	elseif (self.GradientType == "texture") then
+		self.Texture:SetTexture(r, g, b)
 	end
 
 	if (self.GradientMin >= self.GradientMax) then
@@ -476,12 +478,13 @@ local SetEnd = function(self, r, g, b)
 	end
 end
 
-local Gradient = function(self, part, start, finish, r, g, b, customFunc)
+local Gradient = function(self, part, start, finish, r, g, b, customFunc, r2,g2, b2)
 	self.GradientType = string.lower(part)
 	self.GradientMin = start
 	self.GradientMax = finish
 	SetEnd(self, r, g, b)
 	local TextEnable
+	local TextureEnable
 	
 	if (self.GradientType == "backdrop") then
 		local r, g, b = self:GetBackdropColor()
@@ -513,10 +516,26 @@ local Gradient = function(self, part, start, finish, r, g, b, customFunc)
 			TextEnable.Text.SetTextColor = function() end
 			TextEnable.CustomFunc = true
 		end
+	elseif (self.GradientType == "texture") then
+		if (not r2) then
+			return
+		end
+
+		TextureEnable = CreateFrame("Frame", nil, UIParent)
+		SetEnd(TextureEnable, r, g, b)
+
+		TextureEnable.GradientType = string.lower(part)
+		TextureEnable.GradientMin = start
+		TextureEnable.GradientMax = finish
+		SetStart(TextureEnable, r2, g2, b2)
+
+		TextureEnable.Texture = self
 	end
 
 	if TextEnable then
 		TextEnable:SetScript("OnUpdate", GradientOnUpdate)
+	elseif TextureEnable then
+		TextureEnable:SetScript("OnUpdate", GradientOnUpdate)
 	else
 		self:SetScript("OnUpdate", GradientOnUpdate)
 	end
@@ -561,26 +580,37 @@ local AnimOnFinished = function(self, handler, func)
 	Callbacks[strlower(handler)][self] = func
 end
 
-local Animation = function(self, handler, ...)
+local SetAnimation = function(self, handler, ...)
 	local Function = Functions[strlower(handler)]
 
 	if Function then
 		Function(self, ...)
 	else
-		return print("Invalid handler: " .. handler)
+		return D.Print("Invalid handler: " .. handler)
 	end
 end
 
--- Not yet added, but these will be the objects to add Animation() to
-local Objects = {
-	"Frame",
-	"StatusBar",
-	"EditBox",
-}
+local AddAPI = function(object)
+	local MetaTable = getmetatable(object).__index
 
--- Add our new methods to the Frame metatable
-local Meta = getmetatable(Frame).__index
+	if not object.SetAnimation then MetaTable.SetAnimation = SetAnimation end
+	if not object.AnimCallback then MetaTable.AnimCallback = AnimCallback end
+	if not object.AnimOnFinished then MetaTable.AnimOnFinished = AnimOnFinished end
+end
 
-Meta.Animation = Animation
-Meta.AnimCallback = AnimCallback
-Meta.AnimOnFinished = AnimOnFinished
+local Handled = {["Frame"] = true}
+local Object = CreateFrame("Frame")
+
+AddAPI(Object)
+AddAPI(Object:CreateTexture())
+AddAPI(Object:CreateFontString())
+
+Object = EnumerateFrames()
+
+while Object do
+	if (not Handled[Object:GetObjectType()]) then
+		AddAPI(Object)
+		Handled[Object:GetObjectType()] = true
+	end
+	Object = EnumerateFrames(Object)
+end

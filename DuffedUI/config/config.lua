@@ -31,10 +31,10 @@ C["actionbars"] = {
 	["OwnShadowDanceBar"] = false,
 	["OwnMetamorphosisBar"] = true,
 	["OwnWarriorStanceBar"] = false,
+	["HideBackdrop"] = false,
 	["RightbarsMouseover"] = false,
 	["PetbarAlwaysVisible"] = false,
 	["Rightbutton"] = true,
-	["HideBackdrop"] = false,
 	["HideRightBar"] = false,
 }
 
@@ -102,8 +102,8 @@ C["nameplates"] = {
 C["party"] = {
 	["Enable"] = true,
 	["Portrait"] = true,
-	["BuffsEnable"] = false,
 	["HealBar"] = true,
+	["BuffsEnable"] = false,
 }
 
 C["raid"] = {
@@ -175,10 +175,10 @@ C["classtimer"] = {
 	["Spark"] = true,
 	["Separator"] = true,
 	["SeparatorColor"] = { 0, 0, 0, .5 },
-	["PlayerColor"] = {.2, .2, .2, 1 },
+	["PlayerColor"] = { .2, .2, .2, 1 },
 	["TargetBuffColor"] = { 70/255, 150/255, 70/255, 1 },
 	["TargetDebuffColor"] = { 150/255, 30/255, 30/255, 1 },
-	["TrinketColor"] = {75/255, 75/255, 75/255, 1 },
+	["TrinketColor"] = { 75/255, 75/255, 75/255, 1 },
 }
 
 C["plugins"] = {

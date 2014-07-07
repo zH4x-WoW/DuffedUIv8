@@ -19,6 +19,7 @@ engine[1].MyClass = select(2, UnitClass("player"))
 engine[1].MyLevel = UnitLevel("player")
 engine[1].MyName = select(1, UnitName("player"))
 engine[1].Version = GetAddOnMetadata("DuffedUI", "Version")
+engine[1].VersionNumber = tonumber(engine[1].Version)
 
 SLASH_RELOADUI1 = "/rl"
 SlashCmdList.RELOADUI = ReloadUI

@@ -70,7 +70,6 @@
 	<Script file="datatext\elements\haste.lua"/>
 	<Script file="datatext\elements\hit.lua"/>
 	<Script file="datatext\elements\mastery.lua"/>
-	<!-- <Script file="datatext\elements\misc.lua"/> -->
 	<Script file="datatext\elements\parry.lua"/>
 	<Script file="datatext\elements\system.lua"/>
 	<Script file="datatext\elements\power.lua"/>
