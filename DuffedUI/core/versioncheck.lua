@@ -7,15 +7,15 @@ local tonumber = tonumber
 
 local Outdated = L.Help.Outdated
 
-local CheckVersion = function(self, eversionent, prefix, message, channel, sender)
-	if (eversionent == "CHAT_MSG_ADDON") then
+local CheckVersion = function(self, event, prefix, message, channel, sender)
+	if (event == "CHAT_MSG_ADDON") then
 		if (prefix ~= "DuffedUIVersion") or (sender == D.MyName) then
 			return
 		end
 
-		if (tonumber(message) > Version) then -- We recieversioned a higher versionersion, we're outdated. :(
+		if (tonumber(message) > Version) then -- We recieved a higher version, we're outdated. :(
 			print("|cffffff00"..Outdated.."|r")
-			self:UnregisterEversionent("CHAT_MSG_ADDON")
+			self:UnregisterEvent("CHAT_MSG_ADDON")
 		end
 	else
 		-- Tell eversioneryone what versionersion we use.

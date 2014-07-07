@@ -282,6 +282,10 @@ DuffedUIConfig["enUS"] = {
 			["Name"] = "Enable ErrorFilter",
 			["Desc"] = "Disable the red error message on the top of the screen",
 		},
+		["AutoInvite"] = {
+			["Name"] = "Enables AutoInvite",
+			["Desc"] = "Allows to accept invites automatically from guild, friendslist and BattleNet-Friends",
+		},
 	},
 	
 	["nameplates"] = {

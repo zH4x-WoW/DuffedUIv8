@@ -226,6 +226,9 @@ L.Help.Datatexts = "'|cffC41F3Bdt|r' or '|cffC41F3Bdatatext|r' : Enable or disab
 L.Help.Install = "'|cffC41F3Binstall|r' or '|cffC41F3Breset|r' : Install or reset DuffedUI to default settings."
 L.Help.Outdated = "Your version of DuffedUI is out of date. You can download the latest version from www.tukui.org"
 L.Help.NoError = "No error yet."
+L.Help.AutoInviteEnable = "Autoinvite ON: invite"
+L.Help.AutoInviteDisable = "Autoinvite OFF"
+L.Help.AutoInviteAlt = "Autoinvite ON: "
 
 ------------------
 L.Merchant = {} --

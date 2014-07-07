@@ -90,6 +90,7 @@ C["misc"] = {
 	["FlightPoint"] = true,
 	["CombatAnimation"] = true,
 	["ErrorFilter"] = true,
+	["AutoInvite"] = true,
 }
 
 C["nameplates"] = {

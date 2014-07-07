@@ -41,6 +41,7 @@
 	<Script file="misc\micromenu.lua"/>
 	<Script file="misc\raidutilities.lua"/>
 	<Script file="misc\error.lua"/>
+	<Script file="misc\invite.lua"/>
 	
 	<!-- maps -->
 	<Script file="maps\core.lua"/>

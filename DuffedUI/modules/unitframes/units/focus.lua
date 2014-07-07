@@ -88,12 +88,24 @@ function DuffedUIUnitFrames:Focus()
 	Name:SetShadowColor(0, 0, 0)
 	Name:SetShadowOffset(D.Mult, -D.Mult)
 	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong]")
+	
+	local Debuffs = CreateFrame("Frame", nil, self)
+	Debuffs:Point("RIGHT", self, "LEFT", -4, 10)
+	Debuffs:SetHeight(30)
+	Debuffs:SetWidth(200)
+	Debuffs.size = 28
+	Debuffs.num = 3
+	Debuffs.spacing = 2
+	Debuffs.initialAnchor = "RIGHT"
+	Debuffs["growth-x"] = "LEFT"
+	Debuffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
+	Debuffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
 
 	local CastBar = CreateFrame("StatusBar", nil, self)
 	CastBar:SetPoint("LEFT", 2, 0)
 	CastBar:SetPoint("RIGHT", -24, 0)
 	CastBar:SetPoint("BOTTOM", 0, -22)
-	CastBar:SetHeight(16)
+	CastBar:SetHeight(10)
 	CastBar:SetStatusBarTexture(C["medias"].Normal)
 	CastBar:SetFrameLevel(6)
 
@@ -168,4 +180,5 @@ function DuffedUIUnitFrames:Focus()
 	self.Power.bg = Power.Background
 	self.PowerBorder = PowerBorder
 	self.Name = Name
+	self.Debuffs = Debuffs
 end

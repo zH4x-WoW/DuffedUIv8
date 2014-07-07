@@ -442,7 +442,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 
 	button.Remaining = button:CreateFontString(nil, "OVERLAY")
 	button.Remaining:SetFont(C["medias"].Font, 12, "THINOUTLINE")
-	button.Remaining:Point("CENTER", 1, 0)
+	button.Remaining:Point("TOPLEFT", 1, -3)
 
 	button.cd.noOCC = true
 	button.cd.noCooldownCount = true
@@ -455,7 +455,7 @@ function DuffedUIUnitFrames:PostCreateAura(button)
 	button.icon:SetTexCoord(unpack(D.IconCoord))
 	button.icon:SetDrawLayer('ARTWORK')
 
-	button.count:Point("BOTTOMRIGHT", 3, 3)
+	button.count:Point("BOTTOMRIGHT", 1, 1)
 	button.count:SetJustifyH("RIGHT")
 	button.count:SetFont(C["medias"].Font, 9, "THINOUTLINE")
 	button.count:SetTextColor(0.84, 0.75, 0.65)
