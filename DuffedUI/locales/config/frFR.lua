@@ -14,39 +14,39 @@ local PerformanceSlight = "\n|cffFF0000Disabling this may slightly increase perf
 
 DuffedUIConfig["frFR"] = {
 	["general"] = {
-		["AutoScale"] = {
+		["AutoScale"] = { --
 			["Name"] = "Auto Scale",
 			["Desc"] = "Automatically detect the best scale for your resolution",
 		},
-		["MultiSampleProtection"] = {
+		["MultiSampleProtection"] = { --
 			["Name"] = "Multisample Protection",
 			["Desc"] = "Disable multisampling, this keeps DuffedUI's frames pixel perfect",
 		},
-		["UIScale"] = {
+		["UIScale"] = { --
 			["Name"] = "UI Scale",
 			["Desc"] = "Set a custom UI scale",
 		},
-		["BackdropColor"] = {
+		["BackdropColor"] = { --
 			["Name"] = "Backdrop Color",
 			["Desc"] = "Set the backdrop color for all DuffedUI frames",
 		},
-		["BorderColor"] = {
+		["BorderColor"] = { --
 			["Name"] = "Border Color",
 			["Desc"] = "Set the border color for all DuffedUI frames",
 		},
-		["InOut"] = {
+		["InOut"] = { --
 			["Name"] = "Border Style",
 			["Desc"] = "Use the standard border on DuffedUI frames, or 1 pixel style",
 		},
-		["HideShadows"] = {
+		["HideShadow"] = { 
 			["Name"] = "Hide Shadows",
 			["Desc"] = "Display or hide shadows on certain DuffedUI frames",
 		},
-		["Use24Hour"] = {
+		["Use24Hour"] = { --
 			["Name"] = "Time Format",
 			["Desc"] = "Switch between 24-Hour- and 12-Hour-Format",
 		},
-		["UseLocalTime"] = {
+		["UseLocalTime"] = { --
 			["Name"] = "Local Time",
 			["Desc"] = "Switch between local and server time",
 		},
@@ -105,7 +105,7 @@ DuffedUIConfig["frFR"] = {
 			["Desc"] = "Disable the backdrop on action bars",
 		},
 		["RightbarsMouseover"] = {
-			["Name"] = "Rightbar Mouseover",
+			["Name"] = "Mouseover for Rightbar",
 			["Desc"] = "needs description",
 		},
 		["PetbarAlwaysVisible"] = {
@@ -113,12 +113,16 @@ DuffedUIConfig["frFR"] = {
 			["Desc"] = "needs description",
 		},
 		["Rightbutton"] = {
-			["Name"] = "?",
+			["Name"] = "Mouseover for Right Button",
 			["Desc"] = "needs description",
 		},
 		["HideRightBar"] = {
 			["Name"] = "Rightbar Visibility",
 			["Desc"] = "needs description",
+		},
+		["BorderHighlight"] = {
+			["Name"] = "Enable Prochighlight",
+			["Desc"] = "Enables a small border instead of the Blizzard ProcHighlight"
 		},
 	},
 	
@@ -274,6 +278,10 @@ DuffedUIConfig["frFR"] = {
 			["Name"] = "Combat Animation",
 			["Desc"] = "needs description",
 		},
+		["ErrorFilter"] = {
+			["Name"] = "Enable ErrorFilter",
+			["Desc"] = "Disable the red error message on the top of the screen",
+		},
 	},
 	
 	["nameplates"] = {
@@ -297,7 +305,7 @@ DuffedUIConfig["frFR"] = {
 			["Name"] = "Spacing",
 			["Desc"] = "Set the spacing between NamePlates and cast bar",
 		},
-		["NonTargetAlpha"] = {
+		["NontargetAlpha"] = {
 			["Name"] = "Non-Target Alpha",
 			["Desc"] = "The alpha of NamePlates that we're not targetting",
 		},
@@ -323,52 +331,52 @@ DuffedUIConfig["frFR"] = {
 	},
 	
 	["raid"] = {
-		["Enable"] = {
+		["Enable"] = { --
 			["Name"] = "Enable Raid Frames",
 			["Desc"] = "Derp",
 		},
-		["HealBar"] = {
+		["HealBar"] = { --
 			["Name"] = "HealComm",
 			["Desc"] = "Display a bar showing incoming heals & absorbs",
 		},
-		["RaidPets"] = {
+		["RaidPets"] = { --
 			["Name"] = "Enable Raid Pets",
 			["Desc"] = "needs description",
 		},
-		["AuraWatch"] = {
+		["AuraWatch"] = { --
 			["Name"] = "Aura Watch",
 			["Desc"] = "Display timers for class specific buffs in the corners of the raid frames",
 		},
-		["GridVertical"] = {
+		["GridVertical"] = { --
 			["Name"] = "Gridalignment",
 			["Desc"] = "needs description",
 		},
-		["DebuffWatch"] = {
+		["DebuffWatch"] = { --
 			["Name"] = "Debuff Watch",
 			["Desc"] = "Display a big icon on the raid frames when a player has an important debuff",
 		},
-		["ColumnSpacing"] = {
+		["ColumnSpacing"] = { --
 			["Name"] = "Spacing between columns",
 			["Desc"] = "needs description",
 		},
-		["FrameWidth"] = {
+		["FrameWidth"] = { --
 			["Name"] = "Framewidth",
 			["Desc"] = "needs description",
 		},
-		["FrameHeight"] = {
+		["FrameHeight"] = { --
 			["Name"] = "Frameheight",
 			["Desc"] = "needs description",
 		},
-		["GridScale"] = {
+		["GridScale"] = { --
 			["Name"] = "Scaling of Grid",
 			["Desc"] = "needs description",
 		},
-		["HealBar"] = {
-			["Name"] = "Enable HealBar",
+		["Aggro"] = { --
+			["Name"] = "Aggrodisplay",
 			["Desc"] = "needs description",
 		},
-		["Aggro"] = {
-			["Name"] = "Aggrodisplay",
+		["ShowSymbols"] = { --
+			["Name"] = "Enable Raidsymbols",
 			["Desc"] = "needs description",
 		},
 	},
@@ -521,24 +529,71 @@ DuffedUIConfig["frFR"] = {
 		},
 	},
 	
+	["classtimer"] = {
+		["Enable"] = {
+			["Name"] = "Enable ClassTimer",
+			["Desc"] = "needs description",
+		},
+		["TargetDebuffs"] = {
+			["Name"] = "Enable TargetDebuffs",
+			["Desc"] = "needs description",
+		},
+		["Height"] = {
+			["Name"] = "Set Height",
+			["Desc"] = "needs description",
+		},
+		["Spacing"] = {
+			["Name"] = "Set Spacing",
+			["Desc"] = "needs description",
+		},
+		["Spark"] = {
+			["Name"] = "Enable Spark",
+			["Desc"] = "needs description",
+		},
+		["Separator"] = {
+			["Name"] = "Enable Separator",
+			["Desc"] = "needs description",
+		},
+		["SeparatorColor"] = {
+			["Name"] = "Set SeparatorColor",
+			["Desc"] = "needs description",
+		},
+		["PlayerColor"] = {
+			["Name"] = "Set PlayerColor",
+			["Desc"] = "needs description",
+		},
+		["TargetBuffColor"] = {
+			["Name"] = "Set TargetBuffColor",
+			["Desc"] = "needs description",
+		},
+		["TargetDebuffColor"] = {
+			["Name"] = "Set TargetDebuffColor",
+			["Desc"] = "needs description",
+		},
+		["TrinketColor"] = {
+			["Name"] = "Set TrinketColor",
+			["Desc"] = "needs description",
+		},
+	},
+	
 	["plugins"] = {
-		["ItemCooldowns"] = {
+		["ItemCooldowns"] = { --
 			["Name"] = "Enable ItemCooldowns",
 			["Desc"] = "needs description",
 		},
-		["ItemLevelCharacter"] = {
+		["ItemLevelCharacter"] = { --
 			["Name"] = "Enable ItemLevel",
 			["Desc"] = "needs description",
 		},
-		["VendorValue"] = {
+		["VendorValue"] = { --
 			["Name"] = "Enable VendorValue",
 			["Desc"] = "needs description",
 		},
-		["FocusButton"] = {
+		["FocusButton"] = { --
 			["Name"] = "Enable FocusButton",
 			["Desc"] = "needs description",
 		},
-		["ACMScreen"] = {
+		["ACMScreen"] = { --
 			["Name"] = "Enable AchievmentScreenshot",
 			["Desc"] = "needs description",
 		},
@@ -546,11 +601,11 @@ DuffedUIConfig["frFR"] = {
 			["Name"] = "Enable shorter Gold",
 			["Desc"] = "needs description",
 		},
-		["AFKCamera"] = {
+		["AFKCamera"] = { --
 			["Name"] = "Enable AFK Camera",
 			["Desc"] = "needs description",
 		},
-		["Questlevel"] = {
+		["QuestLevel"] = { --
 			["Name"] = "Enable Questlevel",
 			["Desc"] = "needs description",
 		},
@@ -570,11 +625,11 @@ DuffedUIConfig["frFR"] = {
 			["Desc"] = "needs description",
 		},
 		["AnnounceChannel"] = {
-			["Name"] = "Set AnnounceChannel",
-			["Desc"] = "needs description",
+			["Name"] = "Set Announce Channel",
+			["Desc"] = "Values: SAY, PARTY or RAID",
 		},
 		["SpellAnnounce"] = {
-			["Name"] = "Enable SpellAnnounce",
+			["Name"] = "Enable Spell Announce",
 			["Desc"] = "needs description",
 		},
 	},
@@ -582,38 +637,31 @@ DuffedUIConfig["frFR"] = {
 	["scd"] = {
 		["Enable"] = {
 			["Name"] = "Enable SpellCooldowns",
-			["Desc"] = "needs description",
+			["Desc"] = "Enable the SpellCooldown-Plugin",
 		},
 		["FSize"] = {
-			["Name"] = "Set Fonsize",
-			["Desc"] = "needs description",
+			["Name"] = "Set Fontsize",
+			["Desc"] = "Size for timer",
 		},
 		["Size"] = {
 			["Name"] = "Set ButtonSize",
-			["Desc"] = "needs description",
+			["Desc"] = "Size of the Cooldownbuttons (default = 28)",
 		},
 		["Spacing"] = {
 			["Name"] = "Set Spacing",
-			["Desc"] = "needs description",
+			["Desc"] = "Spacing between buttons (default = 10)",
 		},
 		["Fade"] = {
 			["Name"] = "Set Fading",
-			["Desc"] = "needs description",
+			["Desc"] = "Values: 0 one color, 1 green to red, 2 red to green",
 		},
 		["Direction"] = {
 			["Name"] = "Set Direction",
-			["Desc"] = "needs description",
+			["Desc"] = "Values: HORIZONTAL or VERTICAL, default = HORIZONTAL",
 		},
 		["Display"] = {
 			["Name"] = "Set Display",
-			["Desc"] = "needs description",
-		},
-	},
-	
-	["error"] = {
-		["Enable"] = {
-			["Name"] = "Enable ErrorFilter",
-			["Desc"] = "needs description",
+			["Desc"] = "Values: SPIRAL or STATUSBAR, default = STATUSBAR",
 		},
 	},
 }

@@ -49,6 +49,49 @@ local Credits = {
 	"Azilroka",
 }
 
+local GetOrderedIndex = function(t)
+    local OrderedIndex = {}
+
+    for key in pairs(t) do
+        table.insert(OrderedIndex, key)
+    end
+
+    table.sort(OrderedIndex)
+
+    return OrderedIndex
+end
+
+local OrderedNext = function(t, state)
+	local Key
+
+    if (state == nil) then
+        t.OrderedIndex = GetOrderedIndex(t)
+        Key = t.OrderedIndex[1]
+
+        return Key, t[Key]
+    end
+
+    Key = nil
+
+    for i = 1, #t.OrderedIndex do
+        if (t.OrderedIndex[i] == state) then
+            Key = t.OrderedIndex[i + 1]
+        end
+    end
+
+    if Key then
+        return Key, t[Key]
+    end
+
+    t.OrderedIndex = nil
+
+    return
+end
+
+local PairsByKeys = function(t)
+    return OrderedNext, t, nil
+end
+
 -- Create custom controls for options.
 local ControlOnEnter = function(self)
 	GameTooltip:ClearLines()
@@ -268,37 +311,23 @@ end
 -- Create the config window
 function DuffedUIConfig:CreateConfigWindow()
 	local ConfigFrame = CreateFrame("Frame", "DuffedUIConfigFrame", UIParent)
-	ConfigFrame:Size(647, 512)
+	ConfigFrame:Size(647, 492)
 	ConfigFrame:Point("CENTER")
 	ConfigFrame:SetFrameStrata("HIGH")
 		
 	local LeftWindow = CreateFrame("Frame", "DuffedUIConfigFrameLeft", ConfigFrame)
 	LeftWindow:SetTemplate()
-	LeftWindow:Size(164, 512)
+	LeftWindow:Size(164, 492)
 	LeftWindow:Point("LEFT", ConfigFrame)
 	LeftWindow:SetTemplate("Transparent")
 	LeftWindow:EnableMouse(true)
 	
 	local RightWindow = CreateFrame("Frame", "DuffedUIConfigFrameRight", ConfigFrame)
 	RightWindow:SetTemplate()
-	RightWindow:Size(480, 512)
+	RightWindow:Size(480, 492)
 	RightWindow:Point("RIGHT", ConfigFrame)
 	RightWindow:SetTemplate("Transparent")
 	RightWindow:EnableMouse(true)
-	
-	local CloseButton = CreateFrame("Button", nil, ConfigFrame)
-	CloseButton:Size(132, 20)
-	CloseButton:SetTemplate("Transparent")
-	CloseButton:SetScript("OnClick", function() ConfigFrame:Hide() end)
-	CloseButton:StyleButton()
-	CloseButton:SetFrameLevel(LeftWindow:GetFrameLevel() + 1)
-	CloseButton:SetPoint("TOPLEFT", RightWindow, "TOPRIGHT", 3, 0)
-	
-	CloseButton.Text = CloseButton:CreateFontString(nil, "OVERLAY")
-	CloseButton.Text:SetFont(C["medias"].Font, 12)
-	CloseButton.Text:Point("CENTER", CloseButton)
-	CloseButton.Text:SetTextColor(1, 0, 0)
-	CloseButton.Text:SetText(CLOSE)
 	
 	local TitleFrame = CreateFrame("Frame", "DuffedUIConfigFrameTitle", ConfigFrame)
 	TitleFrame:Size(614, 30)
@@ -321,10 +350,36 @@ function DuffedUIConfig:CreateConfigWindow()
 	TitleIcon.bg:Point("BOTTOMRIGHT", -2, 2)
 	TitleIcon.bg:SetTexture(C["medias"].Duffed)
 	
+	local CloseButton = CreateFrame("Button", nil, ConfigFrame)
+	CloseButton:Size(132, 20)
+	CloseButton:SetTemplate("Transparent")
+	CloseButton:SetScript("OnClick", function() ConfigFrame:Hide() end)
+	CloseButton:StyleButton()
+	CloseButton:SetFrameLevel(LeftWindow:GetFrameLevel() + 1)
+	CloseButton:SetPoint("TOPLEFT", RightWindow, "TOPRIGHT", 3, 0)
+	
+	CloseButton.Text = CloseButton:CreateFontString(nil, "OVERLAY")
+	CloseButton.Text:SetFont(C["medias"].Font, 12)
+	CloseButton.Text:Point("CENTER", CloseButton)
+	CloseButton.Text:SetText(CLOSE)
+	
+	local ReloadButton = CreateFrame("Button", nil, ConfigFrame)
+	ReloadButton:Size(132, 20)
+	ReloadButton:SetTemplate("Transparent")
+	ReloadButton:SetScript("OnClick", function() ReloadUI() end)
+	ReloadButton:StyleButton()
+	ReloadButton:SetFrameLevel(LeftWindow:GetFrameLevel() + 1)
+	ReloadButton:SetPoint("TOP", CloseButton, "BOTTOM", 0, -4)
+
+	ReloadButton.Text = ReloadButton:CreateFontString(nil, "OVERLAY")
+	ReloadButton.Text:SetFont(C["medias"].Font, 12)
+	ReloadButton.Text:Point("CENTER", ReloadButton)
+	ReloadButton.Text:SetText("Reload UI")
+	
 	local LastButton
 	local ButtonCount = 0
 	
-	for Group, Table in pairs(C) do
+	for Group, Table in PairsByKeys(C) do
 		if (not Filter[Group]) then
 			local GroupPage = CreateFrame("Frame", nil, ConfigFrame)
 			GroupPage:SetTemplate("Transparent")

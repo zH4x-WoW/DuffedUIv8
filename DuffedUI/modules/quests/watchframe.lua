@@ -36,7 +36,7 @@ function Quests:CreateWatchFrameAnchor()
 	WatchFrameLines:StripTextures()
 	
 	-- Quest / achievement link URLs
-	local lST = "Wowhead"
+	--[[local lST = "Wowhead"
 	local lQ = "http://www.wowhead.com/quest=%d"
 	local lA = "http://www.wowhead.com/achievement=%d"
 	
@@ -82,7 +82,7 @@ function Quests:CreateWatchFrameAnchor()
 			UIDropDownMenu_AddButton(tblDropDown, UIDROPDOWN_MENU_LEVEL)
 		end
 	end)
-	UIDropDownMenu_Initialize(WatchFrameDropDown, WatchFrameDropDown_Initialize, "MENU")
+	UIDropDownMenu_Initialize(WatchFrameDropDown, WatchFrameDropDown_Initialize, "MENU")]]--
 	
 	self.WatchFrame = WatchFrame
 end

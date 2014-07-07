@@ -120,6 +120,10 @@ DuffedUIConfig["enUS"] = {
 			["Name"] = "Rightbar Visibility",
 			["Desc"] = "needs description",
 		},
+		["BorderHighlight"] = {
+			["Name"] = "Enable Prochighlight",
+			["Desc"] = "Enables a small border instead of the Blizzard ProcHighlight"
+		},
 	},
 	
 	["auras"] = {
@@ -273,6 +277,10 @@ DuffedUIConfig["enUS"] = {
 		["CombatAnimation"] = {
 			["Name"] = "Combat Animation",
 			["Desc"] = "needs description",
+		},
+		["ErrorFilter"] = {
+			["Name"] = "Enable ErrorFilter",
+			["Desc"] = "Disable the red error message on the top of the screen",
 		},
 	},
 	
@@ -654,13 +662,6 @@ DuffedUIConfig["enUS"] = {
 		["Display"] = {
 			["Name"] = "Set Display",
 			["Desc"] = "Values: SPIRAL or STATUSBAR, default = STATUSBAR",
-		},
-	},
-	
-	["error"] = {
-		["Enable"] = {
-			["Name"] = "Enable ErrorFilter",
-			["Desc"] = "needs description",
 		},
 	},
 }

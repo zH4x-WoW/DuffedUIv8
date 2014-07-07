@@ -36,6 +36,7 @@ C["actionbars"] = {
 	["PetbarAlwaysVisible"] = false,
 	["Rightbutton"] = true,
 	["HideRightBar"] = false,
+	["BorderHighlight"] = false,
 }
 
 C["auras"] = {
@@ -88,6 +89,7 @@ C["misc"] = {
 	["AltPowerBarEnable"] = true,
 	["FlightPoint"] = true,
 	["CombatAnimation"] = true,
+	["ErrorFilter"] = true,
 }
 
 C["nameplates"] = {
@@ -208,18 +210,4 @@ C["scd"] = {
 	["Fade"] = 0,
 	["Direction"] = "HORIZONTAL",
 	["Display"] = "STATUSBAR",
-}
-
-C["error"] = {
-	["Enable"] = true,
-	Filter = {
-		[INVENTORY_FULL] = true,
-		[ERR_PARTY_LFG_BOOT_COOLDOWN_S] = true,
-		[ERR_PARTY_LFG_BOOT_LIMIT] = true,
-		[ERR_PETBATTLE_NOT_HERE] = true,
-		[ERR_PETBATTLE_NOT_WHILE_IN_COMBAT] = true,
-		[ERR_CANT_USE_ITEM] = true,
-		[CANT_USE_ITEM] = true,
-		[SPELL_FAILED_NOT_FISHABLE] = true,
-	},
 }
