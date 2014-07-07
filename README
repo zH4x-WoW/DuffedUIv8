@@ -1,6 +1,11 @@
 => DuffedUI v8 <=
 
 07.07.2014 =>
+	HP-Value on tooltip
+	Guildrank on tooltip
+	ClassColor for textelements
+	Locales again
+	Configstuff
 	Adding debuffs to focus
 	Bugfixes
 	Locales

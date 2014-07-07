@@ -86,6 +86,7 @@ function ActionBars:CreateToggleButtons()
 			Button:Size(20)
 			Button:Point("LEFT", D["Panels"].DataTextLeft, "RIGHT", 2, 0)
 			Button.Text:SetText("-")
+			Button.Text:SetPoint("CENTER", 0, -1)
 		elseif (i == 4) then
 			Button:Size(15, 150)
 			Button:Point("LEFT", Panels.ActionBar4, "RIGHT", 2, 0)
@@ -99,6 +100,7 @@ function ActionBars:CreateToggleButtons()
 			Button:Size(20)
 			Button:Point("RIGHT", D["Panels"].DataTextRight, "LEFT", -2, 0)
 			Button.Text:SetText("-")
+			Button.Text:SetPoint("CENTER", 0, -1)
 		end
 		
 		BarButtons[i] = Button

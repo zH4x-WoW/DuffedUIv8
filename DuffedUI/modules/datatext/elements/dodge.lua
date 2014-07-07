@@ -9,7 +9,7 @@ local displayRating = string.join("", "%d (|cff00ff00+%.2f|r)")
 local Update = function(self)
 	local Value = GetDodgeChance()
 	
-	self.Text:SetText(format(displayFloat, STAT_DODGE..": ", Value))
+	self.Text:SetText(format(displayFloat, D.PanelColor..STAT_DODGE..": ", Value))
 end
 
 local OnEnter = function(self)

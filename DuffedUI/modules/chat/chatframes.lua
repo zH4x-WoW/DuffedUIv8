@@ -57,6 +57,15 @@ function DuffedUIChat:StyleFrame(frame)
 	Tab:SetAlpha(1)
 	Tab.SetAlpha = UIFrameFadeRemoveFrame
 	
+	if not C["chat"].lBackground and C["chat"].rBackground then
+		-- hide text when setting chat
+		TabText:Hide()
+		
+		-- now show text if mouse is found over tab.
+		Tab:HookScript("OnEnter", function() TabText:Show() end)
+		Tab:HookScript("OnLeave", function() TabText:Hide() end)
+	end
+	
 	-- Hide editbox every time we click on a tab
 	Tab:HookScript("OnClick", function() EditBox:Hide() end)
 

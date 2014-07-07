@@ -6,7 +6,7 @@ local format = format
 local Update = function(self)
 	local Value = select(2, UnitArmor("player"))
 	
-	self.Text:SetText(format("%s: %s", DataText.NameColor .. L.DataText.Armor .. "|r", DataText.ValueColor .. D.Comma(Value) .. "|r"))
+	self.Text:SetText(format("%s: %s", D.PanelColor .. L.DataText.Armor .. "|r", DataText.ValueColor .. D.Comma(Value) .. "|r"))
 end
 
 local Enable = function(self)	

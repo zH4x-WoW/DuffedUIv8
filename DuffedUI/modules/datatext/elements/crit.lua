@@ -18,7 +18,7 @@ local Update = function(self)
 		Value = Melee
 	end
 	
-	self.Text:SetText(format("%s: %s%.2f%%", DataText.NameColor .. L.DataText.Crit .. "|r", DataText.ValueColor, Value))
+	self.Text:SetText(format("%s: %s%.2f%%", D.PanelColor .. L.DataText.Crit .. "|r", DataText.ValueColor, Value))
 end
 
 local Enable = function(self)	

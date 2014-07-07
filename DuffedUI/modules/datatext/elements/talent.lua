@@ -10,7 +10,7 @@ local Update = function(self)
 		local Tree = GetSpecialization()
 		local Spec = select(2, GetSpecializationInfo(Tree)) or ""
 		
-		self.Text:SetText(DataText.NameColor.."S:|r "..DataText.ValueColor..Spec.."|r")
+		self.Text:SetText(D.PanelColor.."S:|r "..DataText.ValueColor..Spec.."|r")
 	end
 end
 

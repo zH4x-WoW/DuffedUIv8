@@ -50,9 +50,9 @@ DuffedUIConfig["esES"] = {
 			["Name"] = "Local Time",
 			["Desc"] = "Switch between local and server time",
 		},
-		["AutoInvite"] = {
-			["Name"] = "Enables AutoInvite",
-			["Desc"] = "Allows to accept invites automatically from guild, friendslist and BattleNet-Friends",
+		["ClassColor"] = {
+			["Name"] = "Enable ClassColor",
+			["Desc"] = "Enable classcolor for text elements"
 		},
 	},
 	

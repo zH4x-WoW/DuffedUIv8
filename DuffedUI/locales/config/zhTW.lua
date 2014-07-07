@@ -50,6 +50,10 @@ DuffedUIConfig["zhTW"] = {
 			["Name"] = "Local Time",
 			["Desc"] = "Switch between local and server time",
 		},
+		["ClassColor"] = {
+			["Name"] = "Enable ClassColor",
+			["Desc"] = "Enable classcolor for text elements"
+		},
 	},
 	
 	["fonts"] = {

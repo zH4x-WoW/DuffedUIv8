@@ -25,6 +25,8 @@ local function BuildGuildTable()
 	for i = 1, GetNumGuildMembers() do
 		name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, isMobile = GetGuildRosterInfo(i)
 		
+		name = string.gsub(name, "-.*", "")
+		
 		if status == 1 then
 			status = "|cffff0000["..AFK.."]|r"
 		elseif status == 2 then
@@ -200,7 +202,7 @@ end
 
 local Update = function(self)
 	if (not IsInGuild()) then
-		self.Text:SetText(DataText.NameColor .. L.DataText.NoGuild .. "|r") -- I need a string :(
+		self.Text:SetText(D.PanelColor .. L.DataText.NoGuild .. "|r") -- I need a string :(
 		
 		return
 	end
@@ -209,7 +211,7 @@ local Update = function(self)
 
 	totalOnline = select(3, GetNumGuildMembers())
 	
-	self.Text:SetText(format("%s: %s", DataText.NameColor .. GUILD .. "|r", DataText.ValueColor .. totalOnline .. "|r"))
+	self.Text:SetText(format("%s: %s", D.PanelColor .. GUILD .. "|r", DataText.ValueColor .. totalOnline .. "|r"))
 end
 
 local Enable = function(self)	

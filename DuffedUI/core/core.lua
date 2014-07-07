@@ -12,6 +12,20 @@ local floor = floor
 local gsub = gsub
 local ceil = ceil
 
+local Class = {
+	["DEATHKNIGHT"] = { 196/255,  30/255,  60/255 },
+	["DRUID"]       = { 255/255, 125/255,  10/255 },
+	["HUNTER"]      = { 171/255, 214/255, 116/255 },
+	["MAGE"]        = { 104/255, 205/255, 255/255 },
+	["PALADIN"]     = { 245/255, 140/255, 186/255 },
+	["PRIEST"]      = { 212/255, 212/255, 212/255 },
+	["ROGUE"]       = { 255/255, 243/255,  82/255 },
+	["SHAMAN"]      = {  41/255,  79/255, 155/255 },
+	["WARLOCK"]     = { 148/255, 130/255, 201/255 },
+	["WARRIOR"]     = { 199/255, 156/255, 110/255 },
+	["MONK"]        = { 0/255, 255/255, 150/255   },
+}
+
 D.Client = GetLocale() 
 
 D.Print = function(...)
@@ -91,6 +105,11 @@ D.RGBToHex = function(r, g, b)
 	
 	return format("|cff%02x%02x%02x", r * 255, g * 255, b * 255)
 end
+
+if C["general"].ClassColor then
+	C["medias"].PrimaryDataTextColor = Class[select(2, UnitClass("player"))]
+end
+D.PanelColor = D.RGBToHex(unpack(C["medias"].PrimaryDataTextColor))
 
 -- Return short value of a number!
 D.ShortValue = function(v)

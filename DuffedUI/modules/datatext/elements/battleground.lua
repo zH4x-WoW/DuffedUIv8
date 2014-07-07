@@ -110,15 +110,15 @@ function BGFrame:OnUpdate(t)
 			local Name, KillingBlows, _, _, HonorGained, _, _, _, _, DamageDone, HealingDone = GetBattlefieldScore(i)
 			
 			if (HealingDone > DamageDone) then
-				Amount = (DataText.NameColor..L.DataText.Healing.."|r"..DataText.ValueColor..HealingDone.."|r")
+				Amount = (D.PanelColor..L.DataText.Healing.."|r"..DataText.ValueColor..HealingDone.."|r")
 			else
-				Amount = (DataText.NameColor..L.DataText.Damage.."|r"..DataText.ValueColor..DamageDone.."|r")
+				Amount = (D.PanelColor..L.DataText.Damage.."|r"..DataText.ValueColor..DamageDone.."|r")
 			end
 			
 			if (Name and Name == MyName) then
 				self.Text1:SetText(Amount)
-				self.Text2:SetText(DataText.NameColor..L.DataText.Honor.."|r"..DataText.ValueColor..format("%d", HonorGained).."|r")
-				self.Text3:SetText(DataText.NameColor..L.DataText.KillingBlow.."|r"..DataText.ValueColor..KillingBlows.."|r")
+				self.Text2:SetText(D.PanelColor..L.DataText.Honor.."|r"..DataText.ValueColor..format("%d", HonorGained).."|r")
+				self.Text3:SetText(D.PanelColor..L.DataText.KillingBlow.."|r"..DataText.ValueColor..KillingBlows.."|r")
 			end   
 		end
 		

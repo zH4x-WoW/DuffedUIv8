@@ -482,11 +482,13 @@ function DuffedUIConfig:CreateConfigWindow()
 end
 
 function DuffedUIConfig:Load()
-	if (DuffedUIData == nil) then
-		DuffedUIData = {["Settings"] = C}
+	if (DuffedUIData and DuffedUIData.Settings) then
+		for group, table in pairs(DuffedUIData.Settings) do
+			for option, value in pairs(table) do
+				C[group][option] = value
+			end
+		end
 	end
-	
-	C = DuffedUIData.Settings
 end
 
 function DuffedUIConfig:Save()

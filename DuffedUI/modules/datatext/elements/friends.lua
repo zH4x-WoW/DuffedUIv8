@@ -316,7 +316,7 @@ local Update = function(self, event)
 		end
 	end
 
-	self.Text:SetFormattedText(format("%s: %s%s", DataText.NameColor .. FRIENDS .. "|r", DataText.ValueColor, totalOnline + BNTotalOnline))
+	self.Text:SetFormattedText(format("%s: %s%s", D.PanelColor .. FRIENDS .. "|r", DataText.ValueColor, totalOnline + BNTotalOnline))
 end
 
 local Enable = function(self)	

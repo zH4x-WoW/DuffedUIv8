@@ -9,7 +9,7 @@ local displayRating = string.join("", "%d (|cff00ff00+%.2f|r)")
 local Update = function(self)
 	local Value = GetParryChance()
 	
-	self.Text:SetText(format(displayFloat, STAT_PARRY..": ", Value))
+	self.Text:SetText(format(displayFloat, D.PanelColor..STAT_PARRY..": ", Value))
 end
 
 local OnEnter = function(self)

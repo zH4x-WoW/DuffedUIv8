@@ -123,7 +123,6 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	local Class = UnitClass(Unit)
 	local Level = UnitLevel(Unit)
 	local Guild = GetGuildInfo(Unit)
-	--local guildRankName = GetGuildInfo(unit)
 	local Name, Realm = UnitName(Unit)
 	local CreatureType = UnitCreatureType(Unit)
 	local Classification = UnitClassification(Unit)
@@ -152,8 +151,8 @@ function DuffedUITooltips:OnTooltipSetUnit()
 
 		local Offset = 2
 		if Guild then
-			--local GuildName, GuildRankName, GuildRankIndex = GetGuildInfo(unit)
-			Line2:SetFormattedText("%s", IsInGuild() and GetGuildInfo("player") == Guild and "|cff0090ff".. Guild .."|r" or "|cff00ff10".. Guild .."|r") -- , "|cffFFD700"..guildRankName.."|r"
+			local guildName, guildRankName, guildRankIndex = GetGuildInfo(Unit)
+			Line2:SetFormattedText("%s [%s]", IsInGuild() and GetGuildInfo("player") == Guild and "|cff0090ff".. Guild .."|r" or "|cff00ff10".. Guild .."|r", "|cffFFD700"..guildRankName.."|r") 
 			Offset = Offset + 1
 		end
 
@@ -283,20 +282,59 @@ function DuffedUITooltips:Skin()
 	DuffedUITooltips.SetColor(self)
 end
 
-function DuffedUITooltips:OnTooltipSetItem()
-	if (IsShiftKeyDown() or IsAltKeyDown()) then
-		local Item, Link = self:GetItem()
-		local ItemCount = GetItemCount(Link)
-		local ID = "|cFFCA3C3CID|r "..Link:match(":(%w+)")
-		local Count = "|cFFCA3C3C"..TOTAL.."|r "..ItemCount
-				
-		self:AddLine(" ")
-		self:AddDoubleLine(Link and Link ~= nil and ID, ItemCount and ItemCount > 1 and Count)
-	end
-end
-
 function DuffedUITooltips:OnValueChanged()
 	return
+end
+
+function DuffedUITooltips:StatusBarOnValueChanged(value)
+	if not value then
+		return
+	end
+	local min, max = self:GetMinMaxValues()
+	
+	if (value < min) or (value > max) then
+		return
+	end
+	local _, unit = GameTooltip:GetUnit()
+	
+	-- fix target of target returning nil
+	if not unit then
+		local GMF = GetMouseFocus()
+		unit = GMF and GMF:GetAttribute("unit")
+	end
+
+	if not self.text then
+		self.text = self:CreateFontString(nil, "OVERLAY")
+		self.text:Point("CENTER", GameTooltipStatusBar, 0, 6)
+		self.text:SetFont(C["medias"].Font, 12, "THINOUTLINE")
+		self.text:Show()
+		if unit then
+			min, max = UnitHealth(unit), UnitHealthMax(unit)
+			local hp = D.ShortValue(min).." / "..D.ShortValue(max)
+			if UnitIsGhost(unit) then
+				self.text:SetText(L.UnitFrames.Ghost)
+			elseif min == 0 or UnitIsDead(unit) or UnitIsGhost(unit) then
+				self.text:SetText(DEAD)
+			else
+				self.text:SetText(hp)
+			end
+		end
+	else
+		if unit then
+			min, max = UnitHealth(unit), UnitHealthMax(unit)
+			self.text:Show()
+			local hp = D.ShortValue(min).." / "..D.ShortValue(max)
+			if UnitIsGhost(unit) then
+				self.text:SetText(L.UnitFrames.Ghost)
+			elseif min == 0 or UnitIsDead(unit) or UnitIsGhost(unit) then
+				self.text:SetText(DEAD)
+			else
+				self.text:SetText(hp)
+			end
+		else
+			self.text:Hide()
+		end
+	end
 end
 
 local hex = function(color)
@@ -365,7 +403,6 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 		if Tooltip == GameTooltip then
 			Tooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
 			Tooltip:HookScript("OnUpdate", self.OnUpdate)
-			Tooltip:HookScript("OnTooltipSetItem", self.OnTooltipSetItem)
 		end
 		
 		Tooltip:HookScript("OnShow", self.Skin)
@@ -374,6 +411,7 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 	HealthBar:SetStatusBarTexture(C["medias"].Normal)
 	HealthBar:CreateBackdrop()
 	HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
+	HealthBar:SetScript("OnValueChanged", self.StatusBarOnValueChanged)
 	HealthBar:ClearAllPoints()
 	HealthBar:Point("BOTTOMLEFT", HealthBar:GetParent(), "TOPLEFT", 2, 5)
 	HealthBar:Point("BOTTOMRIGHT", HealthBar:GetParent(), "TOPRIGHT", -2, 5)

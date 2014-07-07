@@ -427,7 +427,7 @@ bufftracker_toggle:Size(bufftracker:GetWidth(), 10)
 bufftracker_toggle.text = bufftracker_toggle:CreateFontString(nil, "OVERLAY")
 bufftracker_toggle.text:SetFont(C["medias"].Font, 12, "THINOUTLINE")
 bufftracker_toggle.text:SetText("|cff319f1b+|r")
-bufftracker_toggle.text:SetPoint("CENTER")
+bufftracker_toggle.text:SetPoint("CENTER", 0, -1)
 
 -- Fix design bug for mini-button with 1280/1600 res and uiscale 1.0
 if ((D.screenwidth == 1280 or D.screenwidth == 1600) and C["general"].UIScale == 1) then

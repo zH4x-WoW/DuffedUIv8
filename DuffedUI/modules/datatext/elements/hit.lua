@@ -20,7 +20,7 @@ local Update = function(self)
 		Value = GetCombatRatingBonus(8) + SpellMod
 	end
 
-	self.Text:SetText(format("%s: %s%.2f%%%s", DataText.NameColor .. L.DataText.Hit .. "|r", DataText.ValueColor, Value, "|r"))
+	self.Text:SetText(format("%s: %s%.2f%%%s", D.PanelColor .. L.DataText.Hit .. "|r", DataText.ValueColor, Value, "|r"))
 end
 
 local Enable = function(self)	

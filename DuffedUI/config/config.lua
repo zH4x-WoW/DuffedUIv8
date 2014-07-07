@@ -14,6 +14,7 @@ C["general"] = {
 	["HideShadow"] = false,
 	["Use24Hour"] = true,
 	["UseLocalTime"] = true,
+	["ClassColor"] = true,
 }
 
 C["fonts"] = {

@@ -39,14 +39,14 @@ local Update = function(self)
 		Block = (GetBlockChance() - LevelDifference * 0.2)
 		Avoidance = (Dodge + Parry + Block)
 		
-		self.Text:SetText(DataText.NameColor..L.DataText.AvoidanceShort.."|r"..DataText.ValueColor..format("%.2f", Avoidance).."|r")
+		self.Text:SetText(D.PanelColor..L.DataText.AvoidanceShort.."|r"..DataText.ValueColor..format("%.2f", Avoidance).."|r")
 	else
 		Dodge = (GetDodgeChance() + abs(LevelDifference * 0.2))
 		Parry = (GetParryChance() + abs(LevelDifference * 0.2))
 		Block = (GetBlockChance() + abs(LevelDifference * 0.2))
 		Avoidance = (Dodge + Parry + Block)
 		
-		self.Text:SetText(DataText.NameColor..L.DataText.AvoidanceShort.."|r"..DataText.ValueColor..format("%.2f", Avoidance).."|r")
+		self.Text:SetText(D.PanelColor..L.DataText.AvoidanceShort.."|r"..DataText.ValueColor..format("%.2f", Avoidance).."|r")
 	end
 end
 

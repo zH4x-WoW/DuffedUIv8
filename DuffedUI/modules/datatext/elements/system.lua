@@ -75,7 +75,7 @@ local Update = function(self, t)
 	local Rate = floor(GetFramerate())
 	if (MS == 0) then MS = "0" end
 
-	self.Text:SetText(format("%s %s %s %s", DataText.ValueColor .. Rate .. "|r", DataText.NameColor .. L.DataText.FPS .. "|r", DataText.ValueColor .. MS .. "|r", DataText.NameColor .. L.DataText.MS .. "|r"))
+	self.Text:SetText(format("%s %s %s %s", DataText.ValueColor .. Rate .. "|r", D.PanelColor .. L.DataText.FPS .. "|r", DataText.ValueColor .. MS .. "|r", D.PanelColor .. L.DataText.MS .. "|r")) --DataText.NameColor .. 
 	tslu = 1
 end
 
