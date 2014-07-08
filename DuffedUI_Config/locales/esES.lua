@@ -1,10 +1,7 @@
-local D, C, L = select(2, ...):unpack()
-
-local DuffedUIConfig = D["Config"]
 local Locale = GetLocale()
 
--- French Locale
-if (Locale ~= "frFR") then
+-- Spanish Locale
+if (Locale ~= "esES") then
 	return
 end
 
@@ -12,7 +9,7 @@ end
 local Performance = "\n|cffFF0000Disabling this may increase performance|r"
 local PerformanceSlight = "\n|cffFF0000Disabling this may slightly increase performance|r"
 
-DuffedUIConfig["frFR"] = {
+DuffedUIConfig["esES"] = {
 	["general"] = {
 		["AutoScale"] = { --
 			["Name"] = "Auto Scale",
@@ -285,10 +282,6 @@ DuffedUIConfig["frFR"] = {
 		["ErrorFilter"] = {
 			["Name"] = "Enable ErrorFilter",
 			["Desc"] = "Disable the red error message on the top of the screen",
-		},
-		["AutoInvite"] = {
-			["Name"] = "Enables AutoInvite",
-			["Desc"] = "Allows to accept invites automatically from guild, friendslist and BattleNet-Friends",
 		},
 	},
 	

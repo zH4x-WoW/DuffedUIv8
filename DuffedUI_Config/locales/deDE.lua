@@ -1,6 +1,3 @@
-local D, C, L = select(2, ...):unpack()
-
-local DuffedUIConfig = D["Config"]
 local Locale = GetLocale()
 
 -- German Locale

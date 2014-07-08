@@ -1,11 +1,11 @@
-local D, C, L = DuffedUI:unpack()
-
-local DuffedUIConfig = CreateFrame("Frame")
+local DuffedUIConfig = CreateFrame("Frame", "DuffedUIConfig", UIParent)
 DuffedUIConfig.Functions = {}
 local GroupPages = {}
 local Locale = GetLocale()
 
 function DuffedUIConfig:SetOption(group, option, value)
+	local C = DuffedUIConfigShared
+	
 	C[group][option] = value -- Save our setting
 	
 	if (not self.Functions[group]) then
@@ -128,6 +128,10 @@ local EditBoxOnMouseDown = function(self)
 	self:SetAutoFocus(true)
 end
 
+local EditBoxOnEditFocusLost = function(self)
+	self:SetAutoFocus(false)
+end
+
 local EditBoxOnEnterPressed = function(self)
 	self:SetAutoFocus(false)
 	self:ClearFocus()
@@ -194,6 +198,8 @@ local ColorPickerOnClick = function(self)
 end
 
 local CreateConfigButton = function(parent, group, option, value)
+	local C = select(2, DuffedUI:unpack())
+	
 	local Button = CreateFrame("Button", nil, parent)
 	Button:SetTemplate()
 	Button:SetSize(20, 20)
@@ -228,6 +234,8 @@ local CreateConfigButton = function(parent, group, option, value)
 end
 
 local CreateConfigEditBox = function(parent, group, option, value)
+	local C = select(2, DuffedUI:unpack())
+	
 	local EditBox = CreateFrame("Frame", nil, parent)
 	EditBox:SetSize(150, 20)
 	EditBox:SetTemplate()
@@ -237,13 +245,14 @@ local CreateConfigEditBox = function(parent, group, option, value)
 	EditBox.Box:SetFont(C["medias"].Font, 12)
 	EditBox.Box:SetPoint("TOPLEFT", EditBox, 4, -2)
 	EditBox.Box:SetPoint("BOTTOMRIGHT", EditBox, -4, 2)
-	EditBox.Box:SetMaxLetters(4)
+	EditBox.Box:SetMaxLetters(20)
 	EditBox.Box:SetAutoFocus(false)
 	EditBox.Box:EnableKeyboard(true)
 	EditBox.Box:EnableMouse(true)
 	EditBox.Box:SetScript("OnMouseDown", EditBoxOnMouseDown)
 	EditBox.Box:SetScript("OnEscapePressed", EditBoxOnEnterPressed)
 	EditBox.Box:SetScript("OnEnterPressed", EditBoxOnEnterPressed)
+	EditBox.Box:SetScript("OnEditFocusLost", EditBoxOnEditFocusLost)
 	EditBox.Box:SetText(value)
 	
 	EditBox.Label = EditBox:CreateFontString(nil, "OVERLAY")
@@ -260,6 +269,8 @@ local CreateConfigEditBox = function(parent, group, option, value)
 end
 
 local CreateConfigColorPicker = function(parent, group, option, value)
+	local C = select(2, DuffedUI:unpack())
+	
 	local Button = CreateFrame("Button", nil, parent)
 	Button:SetTemplate()
 	Button:SetSize(50, 20)
@@ -310,6 +321,13 @@ end
 
 -- Create the config window
 function DuffedUIConfig:CreateConfigWindow()
+	local C = select(2, DuffedUI:unpack())
+	
+	if (not DuffedUIConfigShared) then
+		-- create a default Saved Variables file with default settings.
+		DuffedUIConfigShared = C
+	end
+	
 	local ConfigFrame = CreateFrame("Frame", "DuffedUIConfigFrame", UIParent)
 	ConfigFrame:Size(647, 492)
 	ConfigFrame:Point("CENTER")
@@ -480,29 +498,3 @@ function DuffedUIConfig:CreateConfigWindow()
 	
 	ConfigFrame:Hide()
 end
-
-function DuffedUIConfig:Load()
-	if (DuffedUIData and DuffedUIData.Settings) then
-		for group, table in pairs(DuffedUIData.Settings) do
-			for option, value in pairs(table) do
-				C[group][option] = value
-			end
-		end
-	end
-end
-
-function DuffedUIConfig:Save()
-	DuffedUIData.Settings = C
-end
-
-DuffedUIConfig:RegisterEvent("ADDON_LOADED")
-DuffedUIConfig:RegisterEvent("PLAYER_LOGOUT")
-DuffedUIConfig:SetScript("OnEvent", function(self, event, addon)
-	if (event == "ADDON_LOADED" and addon == "DuffedUI") then
-		self:Load()
-	elseif (event == "PLAYER_LOGOUT") then
-		self:Save()
-	end
-end)
-
-D["Config"] = DuffedUIConfig

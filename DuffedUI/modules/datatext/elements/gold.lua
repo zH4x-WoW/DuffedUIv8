@@ -19,11 +19,11 @@ local FormatMoney = function(money)
 	local Copper = mod(floor(abs(money)), 100)
 	
 	if (Gold ~= 0) then
-		return format(DataText.NameColor.."%s|r"..L.DataText.GoldShort..DataText.NameColor.." %s|r"..L.DataText.SilverShort..DataText.NameColor.." %s|r"..L.DataText.CopperShort, Gold, Silver, Copper)
+		return format(DataText.ValueColor.."%s|r"..L.DataText.GoldShort..DataText.ValueColor.." %s|r"..L.DataText.SilverShort..DataText.ValueColor.." %s|r"..L.DataText.CopperShort, Gold, Silver, Copper)
 	elseif (Silver ~= 0) then
-		return format(DataText.NameColor.."%s|r"..L.DataText.SilverShort..DataText.NameColor.." %s|r"..L.DataText.CopperShort, Silver, Copper)
+		return format(DataText.ValueColor.."%s|r"..L.DataText.SilverShort..DataText.ValueColor.." %s|r"..L.DataText.CopperShort, Silver, Copper)
 	else
-		return format(DataText.NameColor.."%s|r"..L.DataText.CopperShort, Copper)
+		return format(DataText.ValueColor.."%s|r"..L.DataText.CopperShort, Copper)
 	end
 end
 

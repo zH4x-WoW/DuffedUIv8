@@ -1,10 +1,7 @@
-local D, C, L = select(2, ...):unpack()
-
-local DuffedUIConfig = D["Config"]
 local Locale = GetLocale()
 
--- Russian Locale
-if (Locale ~= "ruRU") then
+-- Brasil Locale
+if (Locale ~= "ptBR") then
 	return
 end
 
@@ -12,7 +9,7 @@ end
 local Performance = "\n|cffFF0000Disabling this may increase performance|r"
 local PerformanceSlight = "\n|cffFF0000Disabling this may slightly increase performance|r"
 
-DuffedUIConfig["ruRU"] = {
+DuffedUIConfig["ptBR"] = {
 	["general"] = {
 		["AutoScale"] = { --
 			["Name"] = "Auto Scale",

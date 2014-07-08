@@ -1,0 +1,20 @@
+## Interface: 50400
+## Title: |cffC41F3BDuffedUI|r Config
+## Notes: In game Config GUI for DuffedUI!
+## Author: Tukz, Hydra
+## SavedVariables: DuffedUIConfigShared
+## SavedVariablesPerCharacter: DuffedUIConfigNotShared
+## RequiredDeps: DuffedUI
+
+DuffedUI_Config.lua
+locales\deDE.lua
+locales\enGB.lua
+locales\enUS.lua
+locales\esES.lua
+locales\esMX.lua
+locales\frFR.lua
+locales\koKR.lua
+locales\ptBR.lua
+locales\ruRU.lua
+locales\zhCN.lua
+locales\zhTW.lua

@@ -37,7 +37,13 @@ D.SlashHandler = function(cmd)
 		print(L.Help.Datatexts)
 		print(" ")
 	elseif (arg1 == "config") then
-		local Config = D["Config"]
+		local Config = DuffedUIConfig
+		
+		if (not DuffedUIConfig) then
+			-- print something whew it say ... not enabled.
+			return
+		end
+		
 		if (not DuffedUIConfigFrame) then
 			Config:CreateConfigWindow()
 		end

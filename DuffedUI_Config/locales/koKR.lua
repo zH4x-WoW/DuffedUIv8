@@ -1,10 +1,7 @@
-local D, C, L = select(2, ...):unpack()
-
-local DuffedUIConfig = D["Config"]
 local Locale = GetLocale()
 
--- Spansih Locale
-if (Locale ~= "esMX") then
+-- Korean Locale
+if (Locale ~= "koKR") then
 	return
 end
 
@@ -12,7 +9,7 @@ end
 local Performance = "\n|cffFF0000Disabling this may increase performance|r"
 local PerformanceSlight = "\n|cffFF0000Disabling this may slightly increase performance|r"
 
-DuffedUIConfig["esMX"] = {
+DuffedUIConfig["koKR"] = {
 	["general"] = {
 		["AutoScale"] = { --
 			["Name"] = "Auto Scale",

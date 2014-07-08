@@ -5,13 +5,13 @@
 ## Notes: UI of awesomeness!
 ## SavedVariables: DuffedUIData
 ## SavedVariablesPerCharacter: DuffedUIDataPerChar, ClickCast, ImprovedCurrency
-## OptionalDeps: Clique
+## OptionalDeps: DuffedUI_Config, Clique
 ## X-oUF: DuffedUIUnitFrameFramework
 ## Website: http://www.tukui.org
 
 core\init.lua
-libs\init.xml
 config\init.xml
+libs\init.xml
 medias\medias.lua
 locales\init.xml
 core\init.xml

@@ -28,9 +28,9 @@ function GameMenu:Enable()
 	local continue = GameMenuButtonContinue
 	local continuex = continue:GetWidth()
 	local continuey = continue:GetHeight()
-	local Config = D["Config"]
 	local interface = GameMenuButtonUIOptions
 	local keybinds = GameMenuButtonKeybindings
+	local Config = DuffedUIConfig
 
 	menu:SetHeight(menuy + continuey)
 
