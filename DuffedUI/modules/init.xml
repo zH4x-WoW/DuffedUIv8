@@ -42,6 +42,7 @@
 	<Script file="misc\raidutilities.lua"/>
 	<Script file="misc\error.lua"/>
 	<Script file="misc\invite.lua"/>
+	<Script file="misc\vehicle.lua"/>
 	
 	<!-- maps -->
 	<Script file="maps\core.lua"/>

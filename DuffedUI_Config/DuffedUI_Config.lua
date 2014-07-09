@@ -30,6 +30,14 @@ local Filter = {
 	["medias"] = true,
 }
 
+local DuffedUICredits = {
+	"Shaney",
+	"Juhawny",
+	"Rav",
+	"loki",
+	"Sinaris",
+}
+
 local Credits = {
 	"Elv",
 	"Hydra",
@@ -105,6 +113,14 @@ local ControlOnLeave = function(self)
 end
 
 local SetControlInformation = function(control, group, option)
+	if (not DuffedUIConfig[Locale]) then
+		return
+	end
+	
+	if (not DuffedUIConfig[Locale][group]) then
+		return
+	end
+	
 	local Info = DuffedUIConfig[Locale][group][option]
 	
 	if (not Info) then
@@ -493,6 +509,92 @@ function DuffedUIConfig:CreateConfigWindow()
 			end
 		end
 	end
+	
+	-- Credits for DuffedUI
+	local DuffedUICreditFrame = CreateFrame("Frame", "DuffedUIFrameCredit", ConfigFrame)
+	DuffedUICreditFrame:SetTemplate()
+	DuffedUICreditFrame:Size(647, 22)
+	DuffedUICreditFrame:Point("TOP", ConfigFrame, "BOTTOM", 0, -3)
+
+	local DuffedUIScrollFrame = CreateFrame("ScrollFrame", nil, ConfigFrame)
+	DuffedUIScrollFrame:SetAllPoints(DuffedUICreditFrame)
+
+	local DuffedUIScrollable = CreateFrame("Frame", nil, DuffedUIScrollFrame)
+	DuffedUIScrollable:SetWidth(639)
+	DuffedUIScrollable:SetHeight(22)
+	DuffedUIScrollable:SetPoint("CENTER", DuffedUICreditFrame)
+
+	DuffedUIScrollFrame:SetScrollChild(DuffedUIScrollable)
+
+	local DuffedUICreditString = "Special thanks for my Tester: "
+
+	for i = 1, #DuffedUICredits do
+		if (i ~= 1) then
+			DuffedUICreditString = DuffedUICreditString .. ", " .. "|cffC41F3B" .. DuffedUICredits[i] .. "|r"
+		else
+			DuffedUICreditString = DuffedUICreditString .. "|cffC41F3B" .. DuffedUICredits[i] .. "|r"
+		end
+	end
+
+	local DuffedUICreditText = DuffedUIScrollable:CreateFontString(nil, "OVERLAY")
+	DuffedUICreditText:SetFont(C["medias"].Font, 14)
+	DuffedUICreditText:SetText(DuffedUICreditString)
+	DuffedUICreditText:Point("LEFT", DuffedUIScrollable, "RIGHT", 4, 0)
+
+	DuffedUIScrollable:SetAnimation("Move", "Horizontal", -1250, 0.5)
+
+	DuffedUIScrollable:AnimOnFinished("Move", function(self)
+		if (not ConfigFrame:IsVisible()) then
+			return
+		end
+
+		self:ClearAllPoints()
+		self:SetPoint("CENTER", DuffedUICreditFrame)
+		self:SetAnimation("Move", "Horizontal", -1250, 0.5)
+	end)
+	
+	-- Credits for Tukui
+	local CreditFrame = CreateFrame("Frame", "TukuiFrameCredit", ConfigFrame)
+	CreditFrame:SetTemplate()
+	CreditFrame:Size(647, 22)
+	CreditFrame:Point("TOP", DuffedUIFrameCredit, "BOTTOM", 0, -3)
+
+	local ScrollFrame = CreateFrame("ScrollFrame", nil, ConfigFrame)
+	ScrollFrame:SetAllPoints(CreditFrame)
+
+	local Scrollable = CreateFrame("Frame", nil, ScrollFrame)
+	Scrollable:SetWidth(639)
+	Scrollable:SetHeight(22)
+	Scrollable:SetPoint("CENTER", CreditFrame)
+
+	ScrollFrame:SetScrollChild(Scrollable)
+
+	local CreditString = "Special thanks to: "
+
+	for i = 1, #Credits do
+		if (i ~= 1) then
+			CreditString = CreditString .. ", " .. Credits[i]
+		else
+			CreditString = CreditString .. Credits[i]
+		end
+	end
+
+	local CreditText = Scrollable:CreateFontString(nil, "OVERLAY")
+	CreditText:SetFont(C["medias"].Font, 14)
+	CreditText:SetText(CreditString)
+	CreditText:Point("LEFT", Scrollable, "RIGHT", 4, 0)
+
+	Scrollable:SetAnimation("Move", "Horizontal", -1250, 0.5)
+
+	Scrollable:AnimOnFinished("Move", function(self)
+		if (not ConfigFrame:IsVisible()) then
+			return
+		end
+
+		self:ClearAllPoints()
+		self:SetPoint("CENTER", CreditFrame)
+		self:SetAnimation("Move", "Horizontal", -1250, 0.5)
+	end)
 	
 	ShowGroup("general") -- Show General options by default
 	

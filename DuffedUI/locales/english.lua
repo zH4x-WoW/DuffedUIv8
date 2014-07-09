@@ -203,6 +203,8 @@ L.Movers.Ressources = "Move Ressourcebar"
 L.Movers.ClassTimer = "Move ClassTimer"
 L.Movers.ClassTimerDebuff = "Move Target Debuffs"
 L.Movers.BattleNet = "Move BattleNetFrame"
+L.Movers.Vehicle = "Move Vehicleindicator"
+L.Movers.Watchframe = "Move Objective Tracker"
 
 -----------------
 L.Install = {} --
