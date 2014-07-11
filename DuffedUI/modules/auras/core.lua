@@ -5,6 +5,7 @@ if (not C["auras"].Enable) then
 end
 
 local DuffedUIAuras = CreateFrame("Frame")
+local Font = D.GetFont(C["auras"].Font)
 local unpack = unpack
 local GetTime = GetTime
 local DebuffTypeColor = DebuffTypeColor
@@ -201,7 +202,7 @@ function DuffedUIAuras:Skin()
 	Icon:SetInside()
 	
 	local Count = self:CreateFontString(nil, "OVERLAY")
-	Count:SetFontObject(NumberFontNormal)
+	Count:SetFontObject(Font)
 	Count:SetPoint("TOP", self, 1, -4)
 
 	if (not Proxy) then

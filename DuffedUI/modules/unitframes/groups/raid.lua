@@ -2,6 +2,7 @@ local D, C, L = select(2, ...):unpack()
 
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
+local Font = D.GetFont(C["unitframes"].Font)
 
 -- NOTE : Health.Value? Aggro? Symbols? HealComm? Raid Debuffs Plugin? Weakened Soul Bar?
 
@@ -16,11 +17,13 @@ function DuffedUIUnitFrames:Raid()
 	Health:Height(30 * C["raid"].GridScale)
 	Health:SetStatusBarTexture(C["medias"].Normal)
 	Health:SetOrientation("VERTICAL")
+	
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
 	
-	Health:FontString("Value", C["medias"].Font, 12, "THINOUTLINE")
+	Health.Value = CreateFontString(nil, "OVERLAY")
+	Health:SetFontObject(Font)
 	Health.Value:Point("CENTER", Health, 0, -6)
 	
 	Health.frequentUpdates = true
@@ -55,18 +58,20 @@ function DuffedUIUnitFrames:Raid()
 	Power:Height(3)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
+	
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints(Power)
 	Power.Background:SetTexture(C["medias"].Normal)
 	Power.Background.multiplier = 0.3
 	Power:SetStatusBarTexture(C["medias"].Normal)
+	
 	Power.frequentUpdates = true
 	if C["unitframes"].UnitColor then Power.colorClass = true else Power.colorPower = true end
 	if (C["unitframes"].Smooth) then Health.Smooth = true end
 	
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER", Health, "TOP", 0, -7)
-	Name:SetFont(C["medias"].Font, 11)
+	Name:SetFontObject(Font)
 	
 	local ReadyCheck = Power:CreateTexture(nil, "OVERLAY")
 	ReadyCheck:Height(12)

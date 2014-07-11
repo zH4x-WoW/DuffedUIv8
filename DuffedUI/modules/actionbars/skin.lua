@@ -1,6 +1,7 @@
 local D, C, L = select(2, ...):unpack()
 
 local DuffedUIActionBars = D["ActionBars"]
+local Font = D.GetFont(C["actionbars"].Font)
 local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
 local Replace = string.gsub
 local SpellFlyout = SpellFlyout
@@ -54,11 +55,11 @@ function DuffedUIActionBars:SkinButton()
 		return
 	end
 	
-	Count:SetFont(C["medias"].Font, 12, "OUTLINE")
+	Count:SetFontObject(Font)
 	
 	if (Btname) then
 		if (C["actionbars"].Macro) then
-			Btname:SetFont(C["medias"].Font, 10)
+			Btname:SetFontObject(Font)
 			Btname:ClearAllPoints()
 			Btname:SetPoint("BOTTOM", 1, 1)
 		else
@@ -72,7 +73,7 @@ function DuffedUIActionBars:SkinButton()
 	end
  
 	if (C["actionbars"].HotKey) then
-		HotKey:SetFont(C["medias"].Font, 10, "OUTLINE")
+		HotKey:SetFontObject(Font)
 		HotKey.ClearAllPoints = Noop
 		HotKey.SetPoint = Noop
 	else

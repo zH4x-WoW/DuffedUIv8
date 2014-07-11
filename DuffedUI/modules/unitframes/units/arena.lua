@@ -2,7 +2,7 @@ local D, C, L = select(2, ...):unpack()
 
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Texture = C["medias"].Normal
-local Font = C["medias"].Font
+local Font = D.GetFont(C["unitframes"].Font)
 
 function DuffedUIUnitFrames:Arena()
 	self:RegisterForClicks("AnyUp")
@@ -26,7 +26,8 @@ function DuffedUIUnitFrames:Arena()
 	HealthBorder:CreateShadow("Default")
 	HealthBorder:SetFrameLevel(2)
 
-	Health:FontString("Value", Font, 12, "OUTLINE")
+	Health.Value = Health:CreateFontString(nil, "OVERLAY")
+	Health.Value:SetFontObject(Font)
 	Health.Value:Point("LEFT", 2, 0)
 
 	Health.PostUpdate = DuffedUIUnitFrames.PostUpdateHealth
@@ -66,7 +67,8 @@ function DuffedUIUnitFrames:Arena()
 	PowerBorder:CreateShadow("Default")
 	PowerBorder:SetFrameLevel(Health:GetFrameLevel() + 1)
 
-	Power:FontString("Value", Font, 12, "OUTLINE")
+	Power.Value = Power:CreateFontString(nil, "OVERLAY")
+	Power.Value:SetFontObject(Font)
 	Power.Value:Point("RIGHT", -2, 0)
 
 	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
@@ -78,9 +80,7 @@ function DuffedUIUnitFrames:Arena()
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER", Health, "CENTER", 0, 0)
 	Name:SetJustifyH("CENTER")
-	Name:SetFont(Font, 12, "OUTLINE")
-	Name:SetShadowColor(0, 0, 0)
-	Name:SetShadowOffset(1.25, -1.25)
+	Name:SetFontObject(Font)
 	Name.frequentUpdates = 0.2
 
 	local Debuffs = CreateFrame("Frame", nil, self)
@@ -128,13 +128,13 @@ function DuffedUIUnitFrames:Arena()
 	CastBarBorder:SetFrameLevel(CastBar:GetFrameLevel() - 1)
 	
 	CastBar.Time = CastBar:CreateFontString(nil, "OVERLAY")
-	CastBar.Time:SetFont(Font, 12)
+	CastBar.Time:SetFontObject(Font)
 	CastBar.Time:Point("RIGHT", CastBar, "RIGHT", -4, 0)
 	CastBar.Time:SetTextColor(0.84, 0.75, 0.65)
 	CastBar.Time:SetJustifyH("RIGHT")
 
 	CastBar.Text = CastBar:CreateFontString(nil, "OVERLAY")
-	CastBar.Text:SetFont(Font, 12)
+	CastBar.Text:SetFontObject(Font)
 	CastBar.Text:Point("LEFT", CastBar, "LEFT", 4, 0)
 	CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 	

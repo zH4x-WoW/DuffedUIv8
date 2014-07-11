@@ -1,9 +1,5 @@
 local Locale = GetLocale()
-
--- Chinese Locale
-if (Locale ~= "zhCN") then
-	return
-end
+if (Locale ~= "zhCN") then return end
 
 -- Some options aren't CPU friendly, like smooth bars and animations, let the users know.
 local Performance = "\n|cffFF0000Disabling this may increase performance|r"
@@ -125,6 +121,10 @@ DuffedUIConfig["zhCN"] = {
 			["Name"] = "Enable Prochighlight",
 			["Desc"] = "Enables a small border instead of the Blizzard ProcHighlight"
 		},
+		["Font"] = {
+			["Name"] = "Actionbar font",
+			["Desc"] = "Set a font for the actionbar",
+		},
 	},
 	
 	["auras"] = {
@@ -168,6 +168,10 @@ DuffedUIConfig["zhCN"] = {
 			["Name"] = "BuffTracker",
 			["Desc"] = "needs description",
 		},
+		["Font"] = {
+			["Name"] = "Aura font",
+			["Desc"] = "Set a font for auras",
+		},
 	},
 	
 	["bags"] = {
@@ -194,6 +198,10 @@ DuffedUIConfig["zhCN"] = {
 		["Moveable"] = {
 			["Name"] = "Moving Bags",
 			["Desc"] = "needs description",
+		},
+		["Font"] = {
+			["Name"] = "Bag font",
+			["Desc"] = "Set a font for bags",
 		},
 	},
 	
@@ -333,6 +341,10 @@ DuffedUIConfig["zhCN"] = {
 			["Name"] = "Enable Buffs",
 			["Desc"] = "needs description",
 		},
+		["Font"] = {
+			["Name"] = "Party frame font",
+			["Desc"] = "Set a font for the party frame",
+		},
 	},
 	
 	["raid"] = {
@@ -383,6 +395,10 @@ DuffedUIConfig["zhCN"] = {
 		["ShowSymbols"] = { --
 			["Name"] = "Enable Raidsymbols",
 			["Desc"] = "needs description",
+		},
+		["Font"] = {
+			["Name"] = "Raid font",
+			["Desc"] = "Set a font for the raid frame",
 		},
 	},
 	
@@ -469,6 +485,10 @@ DuffedUIConfig["zhCN"] = {
 		["ColorGradient"] = {
 			["Name"] = "Enable ColorGradient",
 			["Desc"] = "needs description",
+		},
+		["Font"] = {
+			["Name"] = "Unitframe font",
+			["Desc"] = "Set a font for unitframes",
 		},
 	},
 	

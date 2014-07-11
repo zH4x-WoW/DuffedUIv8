@@ -4,6 +4,7 @@ if (not C["bags"].Enable) then return end
 
 local _G = _G
 local Noop = function() end
+local Font = D.GetFont(C["bags"].Font)
 local ReplaceBags = 0
 local LastButtonBag, LastButtonBank
 local NUM_CONTAINER_FRAMES = NUM_CONTAINER_FRAMES
@@ -124,7 +125,7 @@ function Bags:CreateContainer(storagetype, ...)
 	ToggleBagsContainer:EnableMouse(true)
 	ToggleBagsContainer.Text = ToggleBagsContainer:CreateFontString("button")
 	ToggleBagsContainer.Text:SetPoint("CENTER", ToggleBagsContainer, "CENTER")
-	ToggleBagsContainer.Text:SetFont(C["medias"].Font, 12, "OUTLINE")
+	ToggleBagsContainer.Text:SetFontObject(Font)
 	ToggleBagsContainer.Text:SetText("X")
 	ToggleBagsContainer.Text:SetTextColor(.5, .5, .5)
 	ToggleBagsContainer:SetScript("OnMouseUp", function(self, button)

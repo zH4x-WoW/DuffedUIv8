@@ -1,6 +1,7 @@
 local D, C, L = select(2, ...):unpack()
 
 local DuffedUIUnitFrames = D["UnitFrames"]
+local Font = D.GetFont(C["unitframes"].Font)
 
 function DuffedUIUnitFrames:FocusTarget()
 	self:RegisterForClicks("AnyUp")
@@ -25,7 +26,8 @@ function DuffedUIUnitFrames:FocusTarget()
 	HealthBorder:CreateShadow("Default")
 	HealthBorder:SetFrameLevel(2)
 
-	Health:FontString("Value", C["medias"].Font, 12, "THINOUTLINE")
+	Health.Value = Health:CreateFontString(nil, "OVERLAY")
+	Health.Value:SetFontObject(Font)
 	Health.Value:Point("LEFT", Health, "LEFT", 2, 0)
 	Health.Value:Hide()
 
@@ -52,7 +54,7 @@ function DuffedUIUnitFrames:FocusTarget()
 	Name:SetFont(C["medias"].Font, 12, "THINOUTLINE")
 	Name:SetShadowColor(0, 0, 0)
 	Name:SetShadowOffset(D.Mult, -D.Mult)
-	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong]")
+	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameShort]")
 
 	self.Health = Health
 	self.Health.bg = Health.Background

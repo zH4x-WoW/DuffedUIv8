@@ -4,7 +4,7 @@ local DuffedUIUnitFrames = D["UnitFrames"]
 local Panels = D["Panels"]
 local Layout = C["unitframes"].Layout
 local Texture = C["medias"].Normal
-local Font = C["medias"].Font
+local Font = D.GetFont(C["unitframes"].Font)
 
 function DuffedUIUnitFrames:Target()
 	self:RegisterForClicks("AnyUp")
@@ -55,7 +55,8 @@ function DuffedUIUnitFrames:Target()
 	HealthBorder:CreateShadow("Default")
 	HealthBorder:SetFrameLevel(2)
 
-	Health:FontString("Value", Font, 12, "THINOUTLINE")
+	Health.Value = Health:CreateFontString(nil, "OVERLAY")
+	Health.Value:SetFontObject(Font)
 	if (Layout == (1 or 2)) then
 		Health.Value:Point("LEFT", Health, "LEFT", 4, 0)
 	elseif (Layout == 3) then
@@ -83,7 +84,7 @@ function DuffedUIUnitFrames:Target()
 
 	if C["unitframes"].Percent then
 		local percHP
-		percHP = D.SetFontString(Health, Font, 20, "THINOUTLINE")
+		percHP = D.SetFontString(Health, C["medias"].Font, 20, "THINOUTLINE")
 		percHP:SetTextColor(unpack(C["medias"].PrimaryDataTextColor))
 		percHP:SetPoint("RIGHT", Health, "LEFT", -25, -10)
 		self:Tag(percHP, "[DuffedUI:perchp]")
@@ -133,7 +134,8 @@ function DuffedUIUnitFrames:Target()
 		L2:Point("BOTTOM", L1, "RIGHT", 0, -1)
 	end
 
-	Power:FontString("Value", Font, 12, "THINOUTLINE")
+	Power.Value = Power:CreateFontString(nil, "OVERLAY")
+	Power.Value:SetFontObject(Font)
 	Power.Value:Point("RIGHT", Health, "RIGHT", -4, 0)
 	if (Layout == 3) then Power.Value:Hide() end
 
@@ -154,7 +156,7 @@ function DuffedUIUnitFrames:Target()
 	Combat:SetVertexColor(0.69, 0.31, 0.31)
 
 	local Status = Health:CreateFontString(nil, "OVERLAY")
-	Status:SetFont(Font, 12)
+	Status:SetFontObject(Font)
 	Status:Point("CENTER", Health, "CENTER", 0, 0)
 	Status:SetTextColor(0.69, 0.31, 0.31)
 	Status:Hide()
@@ -223,13 +225,13 @@ function DuffedUIUnitFrames:Target()
 		CastBorder:SetFrameLevel(2)
 
 		CastBar.Time = CastBar:CreateFontString(nil, "OVERLAY")
-		CastBar.Time:SetFont(Font, 12, "THINOUTLINE")
+		CastBar.Time:SetFontObject(Font)
 		CastBar.Time:Point("RIGHT", CastBar, "RIGHT", -4, 0)
 		CastBar.Time:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Time:SetJustifyH("RIGHT")
 
 		CastBar.Text = CastBar:CreateFontString(nil, "OVERLAY")
-		CastBar.Text:SetFont(Font, 12, "THINOUTLINE")
+		CastBar.Text:SetFontObject(Font)
 		CastBar.Text:Point("LEFT", CastBar, "LEFT", 4, 0)
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 
@@ -287,7 +289,7 @@ function DuffedUIUnitFrames:Target()
 
 	if (C["unitframes"].CombatLog) then
 		local CombatFeedbackText = Health:CreateFontString(nil, "OVERLAY")
-		CombatFeedbackText:SetFont(Font, 12, "OUTLINE")
+		CombatFeedbackText:SetFontObject(Font)
 		CombatFeedbackText:SetPoint("CENTER", 0, 1)
 		CombatFeedbackText.colors = {
 			DAMAGE = {0.69, 0.31, 0.31},
@@ -312,13 +314,13 @@ function DuffedUIUnitFrames:Target()
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	if (Layout == 1) then
 		Name:Point("TOPLEFT", Health, "TOPLEFT", 4, 17)
-		Name:SetFont(Font, 12, "THINOUTLINE")
+		Name:SetFontObject(Font)
 	elseif (Layout == 2) then
 		Name:Point("TOPLEFT", Panel, "TOPLEFT", 4, -1)
-		Name:SetFont(Font, 10, "THINOUTLINE")
+		Name:SetFontObject(Font)
 	elseif (Layout == 3) then
 		Name:Point("LEFT", Health, "LEFT", 4, 0)
-		Name:SetFont(Font, 12, "THINOUTLINE")
+		Name:SetFontObject(Font)
 	end
 	Name:SetJustifyH("LEFT")
 

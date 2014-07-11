@@ -98,6 +98,8 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	local NumLines = self:NumLines()
 	local GetMouseFocus = GetMouseFocus()
 	local Unit = (select(2, self:GetUnit())) or (GetMouseFocus and GetMouseFocus:GetAttribute("unit"))
+	local Health = UnitHealth(Unit)
+	local MaxHealth = UnitHealth(Unit)
 	
 	if (not Unit) and (UnitExists("mouseover")) then
 		Unit = "mouseover"
@@ -200,6 +202,8 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		GameTooltip:AddLine(UnitName(Unit .. "target"), R, G, B)
 	end
 	
+	HealthBar.Text:SetText(D.ShortValue(Health) .. " / " .. D.ShortValue(MaxHealth))
+	
 	self.fadeOut = nil
 end
 
@@ -283,58 +287,12 @@ function DuffedUITooltips:Skin()
 end
 
 function DuffedUITooltips:OnValueChanged()
+	local _, max = HealthBar:GetMinMaxValues()
+	local value = HealthBar:GetValue()
+
+	self.Text:SetText(D.ShortValue(value) .. " / " .. D.ShortValue(max))
+
 	return
-end
-
-function DuffedUITooltips:StatusBarOnValueChanged(value)
-	if not value then
-		return
-	end
-	local min, max = self:GetMinMaxValues()
-	
-	if (value < min) or (value > max) then
-		return
-	end
-	local _, unit = GameTooltip:GetUnit()
-	
-	-- fix target of target returning nil
-	if not unit then
-		local GMF = GetMouseFocus()
-		unit = GMF and GMF:GetAttribute("unit")
-	end
-
-	if not self.text then
-		self.text = self:CreateFontString(nil, "OVERLAY")
-		self.text:Point("CENTER", GameTooltipStatusBar, 0, 6)
-		self.text:SetFont(C["medias"].Font, 12, "THINOUTLINE")
-		self.text:Show()
-		if unit then
-			min, max = UnitHealth(unit), UnitHealthMax(unit)
-			local hp = D.ShortValue(min).." / "..D.ShortValue(max)
-			if UnitIsGhost(unit) then
-				self.text:SetText(L.UnitFrames.Ghost)
-			elseif min == 0 or UnitIsDead(unit) or UnitIsGhost(unit) then
-				self.text:SetText(DEAD)
-			else
-				self.text:SetText(hp)
-			end
-		end
-	else
-		if unit then
-			min, max = UnitHealth(unit), UnitHealthMax(unit)
-			self.text:Show()
-			local hp = D.ShortValue(min).." / "..D.ShortValue(max)
-			if UnitIsGhost(unit) then
-				self.text:SetText(L.UnitFrames.Ghost)
-			elseif min == 0 or UnitIsDead(unit) or UnitIsGhost(unit) then
-				self.text:SetText(DEAD)
-			else
-				self.text:SetText(hp)
-			end
-		else
-			self.text:Hide()
-		end
-	end
 end
 
 local hex = function(color)
@@ -411,7 +369,11 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 	HealthBar:SetStatusBarTexture(C["medias"].Normal)
 	HealthBar:CreateBackdrop()
 	HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
-	HealthBar:SetScript("OnValueChanged", self.StatusBarOnValueChanged)
+	HealthBar.Text = HealthBar:CreateFontString(nil, "OVERLAY")
+	HealthBar.Text:SetFont(C["medias"].Font, 12, "THINOULINE")
+	HealthBar.Text:SetShadowColor(0, 0, 0)
+	HealthBar.Text:SetShadowOffset(1.25, -1.25)
+	HealthBar.Text:Point("CENTER", HealthBar, 0, 6)
 	HealthBar:ClearAllPoints()
 	HealthBar:Point("BOTTOMLEFT", HealthBar:GetParent(), "TOPLEFT", 2, 5)
 	HealthBar:Point("BOTTOMRIGHT", HealthBar:GetParent(), "TOPRIGHT", -2, 5)

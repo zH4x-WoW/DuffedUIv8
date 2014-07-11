@@ -231,6 +231,7 @@ L.Help.NoError = "No error yet."
 L.Help.AutoInviteEnable = "Autoinvite ON: invite"
 L.Help.AutoInviteDisable = "Autoinvite OFF"
 L.Help.AutoInviteAlt = "Autoinvite ON: "
+L.Help.Config = "Config not loaded."
 
 ------------------
 L.Merchant = {} --

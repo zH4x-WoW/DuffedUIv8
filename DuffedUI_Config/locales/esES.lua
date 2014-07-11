@@ -1,9 +1,5 @@
 local Locale = GetLocale()
-
--- Spanish Locale
-if (Locale ~= "esES") then
-	return
-end
+if (Locale ~= "esES") then return end
 
 -- Some options aren't CPU friendly, like smooth bars and animations, let the users know.
 local Performance = "\n|cffFF0000Disabling this may increase performance|r"
@@ -125,6 +121,10 @@ DuffedUIConfig["esES"] = {
 			["Name"] = "Enable Prochighlight",
 			["Desc"] = "Enables a small border instead of the Blizzard ProcHighlight"
 		},
+		["Font"] = {
+			["Name"] = "Actionbar font",
+			["Desc"] = "Set a font for the actionbar",
+		},
 	},
 	
 	["auras"] = {
@@ -168,6 +168,10 @@ DuffedUIConfig["esES"] = {
 			["Name"] = "BuffTracker",
 			["Desc"] = "needs description",
 		},
+		["Font"] = {
+			["Name"] = "Aura font",
+			["Desc"] = "Set a font for auras",
+		},
 	},
 	
 	["bags"] = {
@@ -194,6 +198,10 @@ DuffedUIConfig["esES"] = {
 		["Moveable"] = {
 			["Name"] = "Moving Bags",
 			["Desc"] = "needs description",
+		},
+		["Font"] = {
+			["Name"] = "Bag font",
+			["Desc"] = "Set a font for bags",
 		},
 	},
 	
@@ -283,6 +291,10 @@ DuffedUIConfig["esES"] = {
 			["Name"] = "Enable ErrorFilter",
 			["Desc"] = "Disable the red error message on the top of the screen",
 		},
+		["AutoInvite"] = {
+			["Name"] = "Enables AutoInvite",
+			["Desc"] = "Allows to accept invites automatically from guild, friendslist and BattleNet-Friends",
+		},
 	},
 	
 	["nameplates"] = {
@@ -328,6 +340,10 @@ DuffedUIConfig["esES"] = {
 		["BuffsEnable"] = {
 			["Name"] = "Enable Buffs",
 			["Desc"] = "needs description",
+		},
+		["Font"] = {
+			["Name"] = "Party frame font",
+			["Desc"] = "Set a font for the party frame",
 		},
 	},
 	
@@ -379,6 +395,10 @@ DuffedUIConfig["esES"] = {
 		["ShowSymbols"] = { --
 			["Name"] = "Enable Raidsymbols",
 			["Desc"] = "needs description",
+		},
+		["Font"] = {
+			["Name"] = "Raid font",
+			["Desc"] = "Set a font for the raid frame",
 		},
 	},
 	
@@ -465,6 +485,10 @@ DuffedUIConfig["esES"] = {
 		["ColorGradient"] = {
 			["Name"] = "Enable ColorGradient",
 			["Desc"] = "needs description",
+		},
+		["Font"] = {
+			["Name"] = "Unitframe font",
+			["Desc"] = "Set a font for unitframes",
 		},
 	},
 	

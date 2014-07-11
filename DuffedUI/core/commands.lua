@@ -40,8 +40,7 @@ D.SlashHandler = function(cmd)
 		local Config = DuffedUIConfig
 		
 		if (not DuffedUIConfig) then
-			-- print something whew it say ... not enabled.
-			return
+			D.Print(L.Help.Config)
 		end
 		
 		if (not DuffedUIConfigFrame) then

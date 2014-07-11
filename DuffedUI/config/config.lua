@@ -38,6 +38,7 @@ C["actionbars"] = {
 	["Rightbutton"] = true,
 	["HideRightBar"] = false,
 	["BorderHighlight"] = false,
+	["Font"] = "DuffedUI2"
 }
 
 C["auras"] = {
@@ -51,6 +52,7 @@ C["auras"] = {
 	["BuffNotice"] = true,
 	["Warning"] = true,
 	["BuffTracker"] = true,
+	["Font"] = "DuffedUI2"
 }
 
 C["bags"] = {
@@ -60,6 +62,7 @@ C["bags"] = {
 	["ItemsPerRow"] = 10,
 	["Scale"] = 1,
 	["Moveable"] = false,
+	["Font"] = "DuffedUI2"
 }
 
 C["merchant"] = {
@@ -108,6 +111,7 @@ C["party"] = {
 	["Portrait"] = true,
 	["HealBar"] = true,
 	["BuffsEnable"] = false,
+	["Font"] = "DuffedUI2"
 }
 
 C["raid"] = {
@@ -123,6 +127,7 @@ C["raid"] = {
 	["DebuffWatch"] = true,
 	["Aggro"] = true,
 	["ShowSymbols"] = true,
+	["Font"] = "DuffedUI2"
 }
 
 C["tooltips"] = {
@@ -149,6 +154,7 @@ C["unitframes"] = {
 	["Percent"] = true,
 	["ShowTotalHP"] = false,
 	["ColorGradient"] = true,
+	["Font"] = "DuffedUI2"
 }
 
 C["castbar"] = {

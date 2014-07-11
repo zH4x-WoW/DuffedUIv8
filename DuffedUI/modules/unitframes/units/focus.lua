@@ -2,6 +2,7 @@ local D, C, L = select(2, ...):unpack()
 
 local DuffedUIUnitFrames = D["UnitFrames"]
 local _, Class = UnitClass("player")
+local Font = D.GetFont(C["unitframes"].Font)
 
 function DuffedUIUnitFrames:Focus()
 	self:RegisterForClicks("AnyUp")
@@ -26,7 +27,8 @@ function DuffedUIUnitFrames:Focus()
 	HealthBorder:CreateShadow("Default")
 	HealthBorder:SetFrameLevel(2)
 
-	Health:FontString("Value", C["medias"].Font, 12, "THINOUTLINE")
+	Health.Value = Health:CreateFontString(nil, "OVERLAY")
+	Health.Value:SetFontObject(Font)
 	Health.Value:Point("RIGHT", Health, "RIGHT", 0, 1)
 
 	Health.frequentUpdates = true
@@ -71,7 +73,8 @@ function DuffedUIUnitFrames:Focus()
 	PowerBorder:CreateShadow("Default")
 	PowerBorder:SetFrameLevel(Health:GetFrameLevel() + 1)
 
-	Power:FontString("Value", C["medias"].Font, 12, "THINOUTLINE")
+	Power.Value = Power:CreateFontString(nil, "OVERLAY")
+	Power.Value:SetFontObject(Font)
 	Power.Value:Point("RIGHT", Health, "RIGHT", -2, 0)
 	Power.Value:Hide()
 
@@ -84,9 +87,7 @@ function DuffedUIUnitFrames:Focus()
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:Point("LEFT", Health, "LEFT", 2, 1)
 	Name:SetJustifyH("CENTER")
-	Name:SetFont(C["medias"].Font, 12, "THINOUTLINE")
-	Name:SetShadowColor(0, 0, 0)
-	Name:SetShadowOffset(D.Mult, -D.Mult)
+	Name:SetFontObject(Font)
 	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong]")
 	
 	local Debuffs = CreateFrame("Frame", nil, self)
@@ -125,13 +126,13 @@ function DuffedUIUnitFrames:Focus()
 	CastBarBorder:SetFrameLevel(2)
 
 	CastBar.Time = CastBar:CreateFontString(nil, "OVERLAY")
-	CastBar.Time:SetFont(C["medias"].Font, 12)
+	CastBar.Time:SetFontObject(Font)
 	CastBar.Time:Point("RIGHT", CastBar, "RIGHT", -4, 0)
 	CastBar.Time:SetTextColor(0.84, 0.75, 0.65)
 	CastBar.Time:SetJustifyH("RIGHT")
 
 	CastBar.Text = CastBar:CreateFontString(nil, "OVERLAY")
-	CastBar.Text:SetFont(C["medias"].Font, 12)
+	CastBar.Text:SetFontObject(Font)
 	CastBar.Text:Point("LEFT", CastBar, "LEFT", 4, 0)
 	CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 

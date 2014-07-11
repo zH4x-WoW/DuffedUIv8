@@ -2,6 +2,7 @@ local D, C, L = select(2, ...):unpack()
 
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
+local Font = D.GetFont(C["unitframes"].Font)
 
 function DuffedUIUnitFrames:Party()
 	self:RegisterForClicks("AnyUp")
@@ -68,7 +69,7 @@ function DuffedUIUnitFrames:Party()
 	
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("LEFT", Health, "LEFT", 4, -1)
-	Name:SetFont(C["medias"].Font, 12, "THINOUTLINE")
+	Name:SetFontObject(Font)
 	
 	local Role = Health:CreateFontString(nil, "OVERLAY")
 	Role:SetPoint("RIGHT", Health, "RIGHT", -4, 0)

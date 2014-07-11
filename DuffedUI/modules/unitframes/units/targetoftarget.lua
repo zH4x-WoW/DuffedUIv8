@@ -3,7 +3,7 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Layout = C["unitframes"].Layout
 local Texture = C["medias"].Normal
-local Font = C["medias"].Font
+local Font = D.GetFont(C["unitframes"].Font)
 
 function DuffedUIUnitFrames:TargetOfTarget()
 	self:RegisterForClicks("AnyUp")
@@ -53,7 +53,7 @@ function DuffedUIUnitFrames:TargetOfTarget()
 	
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER", Health, "CENTER", 0, 0)
-	Name:SetFont(Font, 12, "THINOUTLINE")
+	Name:SetFontObject(Font)
 	Name:SetJustifyH("CENTER")
 
 	if (Layout == 1) then

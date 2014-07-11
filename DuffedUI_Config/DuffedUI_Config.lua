@@ -101,6 +101,20 @@ local PairsByKeys = function(t)
 end
 
 -- Create custom controls for options.
+local Fonts = {
+	["Pixel"] = "DuffedUIPixelFont",
+	["DuffedUI"] = "DuffedUIFont",
+	["DuffedUI2"] = "DuffedUIFontOutline",
+	["DuffedUI3"] = "DuffedUIUFFont",
+}
+
+local SortedFonts = {
+	"DuffedUI",
+	"DuffedUI2",
+	"DuffedUI3",
+	"Pixel",
+}
+
 local ControlOnEnter = function(self)
 	GameTooltip:ClearLines()
 	GameTooltip:SetOwner(self, "ANCHOR_TOP", 0, 2)
@@ -181,6 +195,26 @@ end
 local ButtonUncheck = function(self)
 	self.Toggled = true
 	ButtonOnClick(self)
+end
+
+local DropDownOnClick = function(self, arg1)
+	UIDropDownMenu_SetSelectedID(arg1, self:GetID())
+
+	DuffedUIConfig:SetOption(arg1.Group, arg1.Option, self.value)
+end
+
+local DropDownInitialize = function(self, level)
+	local Info = UIDropDownMenu_CreateInfo()
+
+	for i = 1, #SortedFonts do
+		Info = UIDropDownMenu_CreateInfo()
+		Info.text = SortedFonts[i]
+		Info.value = SortedFonts[i]
+		Info.func = DropDownOnClick
+		Info.arg1 = self
+		Info.fontObject = Fonts[SortedFonts[i]]
+		UIDropDownMenu_AddButton(Info, level)
+	end
 end
 
 local Callback = function(cancel)
@@ -318,6 +352,31 @@ local CreateConfigColorPicker = function(parent, group, option, value)
 	return Button
 end
 
+local CreateConfigDropDown = function(parent, group, option, value)
+	local C = select(2, DuffedUI:unpack())
+
+	local DropDown = CreateFrame("Button", "DropDownMenu" .. group .. option, parent, "UIDropDownMenuTemplate")
+	DropDown.Group = group
+	DropDown.Option = option
+	DropDown.Type = "DropDown"
+
+	UIDropDownMenu_Initialize(DropDown, DropDownInitialize)
+	UIDropDownMenu_SetWidth(DropDown, 90)
+	UIDropDownMenu_SetButtonWidth(DropDown, 24)
+	UIDropDownMenu_SetSelectedName(DropDown, value) -- need to figure out defaults for this to work.
+
+	DropDown:SkinDropDown(90)
+	DropDown:Show()
+
+	DropDown.Label = DropDown:CreateFontString(nil, "OVERLAY")
+	DropDown.Label:SetFont(C["medias"].Font, 12)
+	DropDown.Label:SetPoint("LEFT", DropDown, "RIGHT", -2, 4)
+	DropDown.Label:SetShadowColor(0, 0, 0)
+	DropDown.Label:SetShadowOffset(1.25, -1.25)
+
+	return DropDown
+end
+
 local ShowGroup = function(group)
 	if (not GroupPages[group]) then
 		return
@@ -419,7 +478,7 @@ function DuffedUIConfig:CreateConfigWindow()
 			GroupPage:SetTemplate("Transparent")
 			GroupPage:SetAllPoints(RightWindow)
 			
-			GroupPage.Controls = {["EditBox"] = {}, ["Color"] = {}, ["Button"] = {}}
+			GroupPage.Controls = {["EditBox"] = {}, ["Color"] = {}, ["Button"] = {}, ["DropDown"] = {}}
 			GroupPages[Group] = GroupPage
 		
 			local Button = CreateFrame("Button", nil, ConfigFrame)
@@ -451,10 +510,12 @@ function DuffedUIConfig:CreateConfigWindow()
 			for Option, Value in pairs(Table) do
 				if (type(Value) == "boolean") then -- Button
 					Control = CreateConfigButton(GroupPage, Group, Option, Value)
-				elseif (type(Value) == "string" or type(Value) == "number") then -- EditBox
+				elseif (type(Value) == "number") then -- EditBox
 					Control = CreateConfigEditBox(GroupPage, Group, Option, Value)
 				elseif (type(Value) == "table") then -- Color Picker
 					Control = CreateConfigColorPicker(GroupPage, Group, Option, Value)
+				elseif (type(Value) == "string") then -- DropDown
+					Control = CreateConfigDropDown(GroupPage, Group, Option, Value)
 				end
 				
 				SetControlInformation(Control, Group, Option) -- Set the label and tooltip
@@ -465,6 +526,7 @@ function DuffedUIConfig:CreateConfigWindow()
 			local Buttons = GroupPage.Controls["Button"]
 			local EditBoxes = GroupPage.Controls["EditBox"]
 			local ColorPickers = GroupPage.Controls["Color"]
+			local DropDowns = GroupPage.Controls["DropDown"]
 			
 			for i = 1, #Buttons do
 				if (i == 1) then
@@ -506,6 +568,20 @@ function DuffedUIConfig:CreateConfigWindow()
 				end
 				
 				LastControl = ColorPickers[i]
+			end
+			
+			for i = 1, #DropDowns do -- We shouldn't need more than one, but i'll leave this here for now.
+				if (i == 1) then
+					if LastControl then
+						DropDowns[i]:Point("TOPLEFT", LastControl, "BOTTOMLEFT", -20, -2)
+					else
+						DropDowns[i]:Point("TOPLEFT", GroupPage, 8, -8)
+					end
+				else
+					DropDowns[i]:Point("TOPLEFT", LastControl, "BOTTOMLEFT", 0, -4)
+				end
+
+				LastControl = DropDowns[i]
 			end
 		end
 	end
