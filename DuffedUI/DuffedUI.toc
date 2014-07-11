@@ -7,7 +7,7 @@
 ## SavedVariablesPerCharacter: DuffedUIDataPerChar, ClickCast, ImprovedCurrency
 ## OptionalDeps: DuffedUI_Config, Clique
 ## X-oUF: DuffedUIUnitFrameFramework
-## Website: http://www.tukui.org
+## Website: http://www.duffed.net
 
 core\init.lua
 config\init.xml

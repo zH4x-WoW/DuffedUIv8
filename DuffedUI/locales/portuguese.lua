@@ -130,7 +130,7 @@ L.Worldboss.Undefeated = "Undefeated"
 L.Welcome = {} --
 -----------------
 
-L.Welcome.Message = "Hello |cffc41f3b".. D.MyName.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.Version.."|r. For detailed Information visit |cffc41f3bhttp://www.tukui.org|r."
+L.Welcome.Message = "Hello |cffc41f3b".. D.MyName.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.Version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
 
 -----------------
 L.Disband = {} --
@@ -217,7 +217,7 @@ L.Install.InstallStep0 = "Thank you for choosing DuffedUI!|n|nYou will be guided
 L.Install.InstallStep1 = "The first step applies the essential settings. This is |cffff0000recommended|r for any user, unless you want to apply only a specific part of the settings.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
 L.Install.InstallStep2 = "The second step applies the correct chat setup. If you are a new user, this step is recommended.  If you are an existing user, you may want to skip this step.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
 L.Install.InstallStep3 = "The third and final step applies the default frame positions. This step is |cffff0000recommended|r for new users.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
-L.Install.InstallStep4 = "Installation is complete. Please click the 'Complete' button to reload the UI. Enjoy DuffedUI! Visit us at www.tukui.org!"
+L.Install.InstallStep4 = "Installation is complete. Please click the 'Complete' button to reload the UI. Enjoy DuffedUI! Visit us at www.duffed.net!"
 
 --------------
 L.Help = {} --
@@ -226,7 +226,7 @@ L.Help = {} --
 L.Help.Title = "DuffedUI Commands:"
 L.Help.Datatexts = "'|cffC41F3Bdt|r' or '|cffC41F3Bdatatext|r' : Enable or disable datatext configuration."
 L.Help.Install = "'|cffC41F3Binstall|r' or '|cffC41F3Breset|r' : Install or reset DuffedUI to default settings."
-L.Help.Outdated = "Your version of DuffedUI is out of date. You can download the latest version from www.tukui.org"
+L.Help.Outdated = "Your version of DuffedUI is out of date. You can download the latest version from www.duffed.net"
 L.Help.NoError = "No error yet."
 L.Help.AutoInviteEnable = "Autoinvite ON: invite"
 L.Help.AutoInviteDisable = "Autoinvite OFF"

@@ -444,7 +444,7 @@ function DuffedUIUnitFrames:Player()
 		self.Reputation = Reputation
 	end
 
-	self:RegisterEvent("PLAYER_ENTERING_WORLD", DuffedUIUnitFrames.Update) -- http://www.tukui.org/tickets/tukui/index.php?page=bug_show&bug_id=218
+	self:RegisterEvent("PLAYER_ENTERING_WORLD", DuffedUIUnitFrames.Update)
 	self:HookScript("OnEnter", DuffedUIUnitFrames.MouseOnPlayer)
 	self:HookScript("OnLeave", DuffedUIUnitFrames.MouseOnPlayer)
 	
