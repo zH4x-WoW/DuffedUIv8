@@ -142,11 +142,11 @@ D.FormatTime = function(s)
 	local Day, Hour, Minute = 86400, 3600, 60
 	
 	if (s >= Day) then
-		return format("%dd", ceil(s / Day))
+		return format("%d" .. D.PanelColor .. "d", ceil(s / Day))
 	elseif (s >= Hour) then
-		return format("%dh", ceil(s / Hour))
+		return format("%d" .. D.PanelColor .. "h", ceil(s / Hour))
 	elseif (s >= Minute) then
-		return format("%dm", ceil(s / Minute))
+		return format("%d" .. D.PanelColor .. "m", ceil(s / Minute))
 	elseif (s >= Minute / 12) then
 		return floor(s)
 	end

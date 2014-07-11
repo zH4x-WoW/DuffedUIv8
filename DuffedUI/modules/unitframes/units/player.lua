@@ -134,14 +134,14 @@ function DuffedUIUnitFrames:Player()
 		L2:Point("BOTTOM", L1, "LEFT", 0, -1)
 	end
 
-	Power.Value = Power:CreateFontString(nil, "OVERLAY")
+	Power.Value = Health:CreateFontString(nil, "OVERLAY")
 	Power.Value:SetFontObject(Font)
 	if (Layout == 1) then
 		Power.Value:Point("TOPLEFT", Health, "TOPLEFT", 4, 17)
 	elseif (Layout == 2) then
 		Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
 	elseif (Layout == 3) then
-		Power.Value:Point("TOPLEFT", Health, "TOPLEFT", 4, 0)
+		Power.Value:Point("LEFT", Health, "LEFT", 4, 0)
 	end
 
 	Power.frequentUpdates = true

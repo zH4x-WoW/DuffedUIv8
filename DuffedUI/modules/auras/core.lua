@@ -1,8 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C["auras"].Enable) then
-	return
-end
+if (not C["auras"].Enable) then return end
 
 local DuffedUIAuras = CreateFrame("Frame")
 local Font = D.GetFont(C["auras"].Font)
@@ -58,7 +56,7 @@ function DuffedUIAuras:OnUpdate(elapsed)
 	
 	self.TimeLeft = TimeLeft
 
-	if(TimeLeft <= 0) then
+	if (TimeLeft <= 0) then
 		self.TimeLeft = nil
 		self.Duration:SetText("")
 		
@@ -70,7 +68,7 @@ function DuffedUIAuras:OnUpdate(elapsed)
 		self.Bar:SetValue(self.TimeLeft)
 		self.Bar:SetStatusBarColor(r, g, b)
 		
-		if(TimeLeft < 60.5) then
+		if (TimeLeft < 60.5) then
 			if DuffedUIAuras.Flash then
 				DuffedUIAuras.StartOrStopFlash(self.Animation, TimeLeft)
 			end
@@ -217,8 +215,8 @@ function DuffedUIAuras:Skin()
 		Bar:SetStatusBarColor(0, 0.8, 0)
 		
 		local Duration = self:CreateFontString(nil, "OVERLAY")
-		Duration:SetFont(C["medias"].Font, 12, "OUTLINE")
-		Duration:SetPoint("BOTTOM", 0, -17)
+		Duration:SetFontObject(Font)
+		Duration:SetPoint("BOTTOM", 0, -15)
 
 		if DuffedUIAuras.Flash then
 			local Animation = self:CreateAnimationGroup()
