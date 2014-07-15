@@ -6,21 +6,15 @@ local Locale = GetLocale()
 function DuffedUIConfig:SetOption(group, option, value)
 	local C = DuffedUIConfigShared
 	
-	C[group][option] = value -- Save our setting
+	C[group][option] = value
 	
-	if (not self.Functions[group]) then
-		return
-	end
+	if (not self.Functions[group]) then return end
 	
-	if self.Functions[group][option] then
-		self.Functions[group][option](value) -- Run the associated function
-	end
+	if self.Functions[group][option] then self.Functions[group][option](value) end
 end
 
 function DuffedUIConfig:SetCallback(group, option, func)
-	if (not self.Functions[group]) then
-		self.Functions[group] = {}
-	end
+	if (not self.Functions[group]) then self.Functions[group] = {} end
 	
 	self.Functions[group][option] = func -- Set a function to call
 end
@@ -60,9 +54,7 @@ local Credits = {
 local GetOrderedIndex = function(t)
     local OrderedIndex = {}
 
-    for key in pairs(t) do
-        table.insert(OrderedIndex, key)
-    end
+    for key in pairs(t) do table.insert(OrderedIndex, key) end
 
     table.sort(OrderedIndex)
 
@@ -83,22 +75,18 @@ local OrderedNext = function(t, state)
 
     for i = 1, #t.OrderedIndex do
         if (t.OrderedIndex[i] == state) then
-            Key = t.OrderedIndex[i + 1]
-        end
+			Key = t.OrderedIndex[i + 1]
+		end
     end
 
-    if Key then
-        return Key, t[Key]
-    end
+    if Key then return Key, t[Key] end
 
     t.OrderedIndex = nil
 
     return
 end
 
-local PairsByKeys = function(t)
-    return OrderedNext, t, nil
-end
+local PairsByKeys = function(t) return OrderedNext, t, nil end
 
 -- Create custom controls for options.
 local Fonts = {
@@ -122,24 +110,16 @@ local ControlOnEnter = function(self)
 	GameTooltip:Show()
 end
 
-local ControlOnLeave = function(self)
-	GameTooltip:Hide()
-end
+local ControlOnLeave = function(self) GameTooltip:Hide() end
 
 local SetControlInformation = function(control, group, option)
-	if (not DuffedUIConfig[Locale]) then
-		return
-	end
+	if (not DuffedUIConfig[Locale]) then return end
 	
-	if (not DuffedUIConfig[Locale][group]) then
-		return
-	end
+	if (not DuffedUIConfig[Locale][group]) then return end
 	
 	local Info = DuffedUIConfig[Locale][group][option]
 	
-	if (not Info) then
-		return
-	end
+	if (not Info) then return end
 	
 	control.Label:SetText(Info.Name)
 	
@@ -154,13 +134,9 @@ local SetControlInformation = function(control, group, option)
 	end
 end
 
-local EditBoxOnMouseDown = function(self)
-	self:SetAutoFocus(true)
-end
+local EditBoxOnMouseDown = function(self) self:SetAutoFocus(true) end
 
-local EditBoxOnEditFocusLost = function(self)
-	self:SetAutoFocus(false)
-end
+local EditBoxOnEditFocusLost = function(self) self:SetAutoFocus(false) end
 
 local EditBoxOnEnterPressed = function(self)
 	self:SetAutoFocus(false)
@@ -168,9 +144,7 @@ local EditBoxOnEnterPressed = function(self)
 	
 	local Value = self:GetText()
 	
-	if (type(tonumber(Value)) == "number") then -- Assume we want a number, not a string
-		Value = tonumber(Value)
-	end
+	if (type(tonumber(Value)) == "number") then Value = tonumber(Value) end
 	
 	DuffedUIConfig:SetOption(self.Group, self.Option, Value)
 end
@@ -199,7 +173,6 @@ end
 
 local DropDownOnClick = function(self, arg1)
 	UIDropDownMenu_SetSelectedID(arg1, self:GetID())
-
 	DuffedUIConfig:SetOption(arg1.Group, arg1.Option, self.value)
 end
 
@@ -243,9 +216,7 @@ local InitColorPicker = function(self, r, g, b)
 	ColorPickerFrame:Show()
 end
 
-local ColorPickerOnClick = function(self)
-	InitColorPicker(self, unpack(self.Colors))
-end
+local ColorPickerOnClick = function(self) InitColorPicker(self, unpack(self.Colors)) end
 
 local CreateConfigButton = function(parent, group, option, value)
 	local C = select(2, DuffedUI:unpack())
@@ -378,30 +349,21 @@ local CreateConfigDropDown = function(parent, group, option, value)
 end
 
 local ShowGroup = function(group)
-	if (not GroupPages[group]) then
-		return
-	end
+	if (not GroupPages[group]) then return end
 
-	for group, page in pairs(GroupPages) do
-		page:Hide()
-	end
+	for group, page in pairs(GroupPages) do page:Hide() end
 	
 	GroupPages[group]:Show()
 	DuffedUIConfigFrameTitle.Text:SetText(group)
 end
 
-local GroupButtonOnClick = function(self)
-	ShowGroup(self.Group)
-end
+local GroupButtonOnClick = function(self) ShowGroup(self.Group) end
 
 -- Create the config window
 function DuffedUIConfig:CreateConfigWindow()
 	local C = select(2, DuffedUI:unpack())
 	
-	if (not DuffedUIConfigShared) then
-		-- create a default Saved Variables file with default settings.
-		DuffedUIConfigShared = C
-	end
+	if (not DuffedUIConfigShared) then DuffedUIConfigShared = C end
 	
 	local ConfigFrame = CreateFrame("Frame", "DuffedUIConfigFrame", UIParent)
 	ConfigFrame:Size(647, 492)
@@ -444,7 +406,7 @@ function DuffedUIConfig:CreateConfigWindow()
 	TitleIcon.bg:SetTexture(C["medias"].Duffed)
 	
 	local CloseButton = CreateFrame("Button", nil, ConfigFrame)
-	CloseButton:Size(132, 20)
+	CloseButton:Size(100, 20)
 	CloseButton:SetTemplate("Transparent")
 	CloseButton:SetScript("OnClick", function() ConfigFrame:Hide() end)
 	CloseButton:StyleButton()
@@ -457,7 +419,7 @@ function DuffedUIConfig:CreateConfigWindow()
 	CloseButton.Text:SetText(CLOSE)
 	
 	local ReloadButton = CreateFrame("Button", nil, ConfigFrame)
-	ReloadButton:Size(132, 20)
+	ReloadButton:Size(100, 20)
 	ReloadButton:SetTemplate("Transparent")
 	ReloadButton:SetScript("OnClick", function() ReloadUI() end)
 	ReloadButton:StyleButton()
@@ -620,9 +582,7 @@ function DuffedUIConfig:CreateConfigWindow()
 	DuffedUIScrollable:SetAnimation("Move", "Horizontal", -1250, 0.5)
 
 	DuffedUIScrollable:AnimOnFinished("Move", function(self)
-		if (not ConfigFrame:IsVisible()) then
-			return
-		end
+		if (not ConfigFrame:IsVisible()) then return end
 
 		self:ClearAllPoints()
 		self:SetPoint("CENTER", DuffedUICreditFrame)
@@ -663,9 +623,7 @@ function DuffedUIConfig:CreateConfigWindow()
 	Scrollable:SetAnimation("Move", "Horizontal", -1250, 0.5)
 
 	Scrollable:AnimOnFinished("Move", function(self)
-		if (not ConfigFrame:IsVisible()) then
-			return
-		end
+		if (not ConfigFrame:IsVisible()) then return end
 
 		self:ClearAllPoints()
 		self:SetPoint("CENTER", CreditFrame)

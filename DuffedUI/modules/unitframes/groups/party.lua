@@ -73,7 +73,7 @@ function DuffedUIUnitFrames:Party()
 	
 	local Role = Health:CreateFontString(nil, "OVERLAY")
 	Role:SetPoint("RIGHT", Health, "RIGHT", -4, 0)
-	Role:SetFont(C["medias"].Font, 12, "THINOUTLINE")
+	Role:SetFontObject(Font)
 	
 	if (C["party"].Portrait) then
 		local Portrait = CreateFrame("Frame", nil, self)

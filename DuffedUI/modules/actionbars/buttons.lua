@@ -8,6 +8,8 @@ local Spacing = C["actionbars"].ButtonSpacing
 local IsShiftKeyDown = IsShiftKeyDown
 local InCombatLockdown = InCombatLockdown
 local error = ERR_NOT_IN_COMBAT
+local Green = "|cff319f1b"
+local Red = "|cff9a1212"
 
 local BarButtons = {}
 
@@ -31,13 +33,13 @@ local OnClick = function(self, button)
 		
 		if (Num == 3) then
 			self:Point("LEFT", D["Panels"].DataTextLeft, "RIGHT", 2, 0)
-			Text:SetText("+")
+			Text:SetText(Green .. "+|r")
 		elseif (Num == 4) then
 			self:Point("LEFT", Bar, "RIGHT", 2, 0)
-			Text:SetText("<")
+			Text:SetText(Green .. "<|r")
 		elseif (Num == 5) then
 			self:Point("RIGHT", D["Panels"].DataTextRight, "LEFT", -2, 0)
-			Text:SetText("+")
+			Text:SetText(Green .. "+|r")
 		end
 		
 		-- Set value
@@ -52,13 +54,13 @@ local OnClick = function(self, button)
 
 		if (Num == 3) then
 			self:Point("LEFT", D["Panels"].DataTextLeft, "RIGHT", 2, 0)
-			Text:SetText("-")
+			Text:SetText(Red .. "-|r")
 		elseif (Num == 4) then
 			self:Point("LEFT", Bar, "RIGHT", 2, 0)
-			Text:SetText(">")
+			Text:SetText(Red .. ">|r")
 		elseif (Num == 5) then
 			self:Point("RIGHT", D["Panels"].DataTextRight, "LEFT", -2, 0)
-			Text:SetText("-")
+			Text:SetText(Red .. "-|r")
 		end
 		
 		-- Set value
@@ -85,12 +87,12 @@ function ActionBars:CreateToggleButtons()
 		if (i == 3) then
 			Button:Size(20)
 			Button:Point("LEFT", D["Panels"].DataTextLeft, "RIGHT", 2, 0)
-			Button.Text:SetText("-")
+			Button.Text:SetText(Red .. "-|r")
 			Button.Text:SetPoint("CENTER", 0, -1)
 		elseif (i == 4) then
 			Button:Size(15, 150)
 			Button:Point("LEFT", Panels.ActionBar4, "RIGHT", 2, 0)
-			Button.Text:SetText(">")
+			Button.Text:SetText(Red .. ">|r")
 			if C["actionbars"].Rightbutton then
 				Button:SetAlpha(0)
 				Button:SetScript("OnEnter", function() Button:SetAlpha(1) end)
@@ -99,7 +101,7 @@ function ActionBars:CreateToggleButtons()
 		elseif (i == 5) then
 			Button:Size(20)
 			Button:Point("RIGHT", D["Panels"].DataTextRight, "LEFT", -2, 0)
-			Button.Text:SetText("-")
+			Button.Text:SetText(Red .. "-|r")
 			Button.Text:SetPoint("CENTER", 0, -1)
 		end
 		

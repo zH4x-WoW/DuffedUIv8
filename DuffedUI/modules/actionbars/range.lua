@@ -60,12 +60,11 @@ function DuffedUIActionBars:RangeUpdate()
 end
 
 
-function DuffedUIActionBars:RangeUpdateWatchFrame(elapsed)
+--[[function DuffedUIActionBars:RangeUpdateWatchFrame(elapsed)
 	-- to be completed
-end
-
+end]]--
 
 hooksecurefunc("ActionButton_OnUpdate", DuffedUIActionBars.RangeOnUpdate)
 hooksecurefunc("ActionButton_Update", DuffedUIActionBars.RangeUpdateBackdrop)
 hooksecurefunc("ActionButton_UpdateUsable", DuffedUIActionBars.RangeUpdate)
-hooksecurefunc("WatchFrameItem_OnUpdate", DuffedUIActionBars.RangeUpdateWatchFrame)
+--hooksecurefunc("WatchFrameItem_OnUpdate", DuffedUIActionBars.RangeUpdateWatchFrame)

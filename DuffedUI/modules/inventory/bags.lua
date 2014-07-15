@@ -1,4 +1,5 @@
-﻿local D, C, L = select(2, ...):unpack()
+﻿-- Broken at patch 6.0.1, needs fix
+local D, C, L = select(2, ...):unpack()
 
 if (not C["bags"].Enable) then return end
 
@@ -57,6 +58,7 @@ function Bags:HideBlizzard()
 	local BankClose = _G["BankFrameCloseButton"]
 	local BankFrame = _G["BankFrame"]
 	local BankPortraitTexture = _G["BankPortraitTexture"]
+	if D.TocVersion == 60000 then local BankSlotsFrame = _G["BankSlotsFrame"] end
 	
 	Inset:Hide()
 	Border:Hide()
@@ -74,19 +76,43 @@ function Bags:HideBlizzard()
 		end
 	end
 	
-	for i = 1, 80 do
-		local Region = select(i, BankFrame:GetRegions())
-		
-		if (not Region) then
-			break
-		else
+	if D.TocVersion == 60000 then
+		-- Hide Bank Frame Textures
+		for i = 1, BankFrame:GetNumRegions() do
+			local Region = select(i, BankFrame:GetRegions())
+			
 			Region:SetAlpha(0)
+		end
+	else
+		for i = 1, 80 do
+			local Region = select(i, BankFrame:GetRegions())
+			
+			if (not Region) then
+				break
+			else
+				Region:SetAlpha(0)
+			end
 		end
 	end
 	
-	for i = 1, 7 do
-		local BankBag = _G["BankFrameBag"..i]
-		BankBag:Hide()
+	if D.TocVersion == 60000 then
+		-- Hide BankSlotsFrame Textures and Fonts
+		for i = 1, BankSlotsFrame:GetNumRegions() do
+			local Region = select(i, BankSlotsFrame:GetRegions())
+
+			Region:Hide()
+		end
+
+		for i = 1, 2 do
+			local Tab = _G["BankFrameTab"..i]
+
+			Tab:Hide()
+		end
+	else
+		for i = 1, 7 do
+			local BankBag = _G["BankFrameBag"..i]
+			BankBag:Hide()
+		end
 	end
 end
 
@@ -239,6 +265,26 @@ function Bags:CreateContainer(storagetype, ...)
 		PurchaseButton:SkinButton()
 	end
 	
+	if D.TocVersion == 60000 then
+		local SwitchBankButton = CreateFrame("Button", nil, Container)
+		SwitchBankButton:Size((Container:GetWidth() / 2) - 1, 23)
+		SwitchBankButton:SkinButton()
+		SwitchBankButton:Point("BOTTOMLEFT", Container, "TOPLEFT", 0, 2)
+		SwitchBankButton:SetScript("OnClick", function(self) BankFrame_ShowPanel(BANK_PANELS[1].name) end)
+		SwitchBankButton:FontString(Text, C["medias"].Font, 12)
+		SwitchBankButton.Text:SetPoint("CENTER")
+		SwitchBankButton.Text:SetText(BANK)
+
+		local SwitchReagentButton = CreateFrame("Button", nil, Container)
+		SwitchReagentButton:Size((Container:GetWidth() / 2) - 1, 23)
+		SwitchReagentButton:SkinButton()
+		SwitchReagentButton:Point("LEFT", SwitchBankButton, "RIGHT", 2, 0)
+		SwitchReagentButton:SetScript("OnClick", function(self) BankFrame_ShowPanel(BANK_PANELS[2].name) end)
+		SwitchReagentButton:FontString(Text, C["medias"].Font, 12)
+		SwitchReagentButton.Text:SetPoint("CENTER")
+		SwitchReagentButton.Text:SetText(REAGENT_BANK)
+	end
+
 	self[storagetype] = Container
 end
 
@@ -486,9 +532,9 @@ function Bags:EnableBags()
 	local LeftBackground = D["Panels"].LeftChatBackground
 	local RightBackground = D["Panels"].RightChatBackground
 
-	self:HideBlizzard()
 	if C["chat"].rBackground then self:CreateContainer("Bag", "BOTTOMRIGHT", RightBackground, "TOPRIGHT", 0, 3) else self:CreateContainer("Bag", "BOTTOMRIGHT", DataTextRight, "TOPRIGHT", 0, 3) end
 	if C["chat"].lBackground then self:CreateContainer("Bank", "BOTTOMLEFT", LeftBackground, "TOPLEFT", 0, 3) else self:CreateContainer("Bank", "BOTTOMLEFT", DataTextLeft, "TOPLEFT", 0, 3) end
+	self:HideBlizzard()
 	self:SetBagsSearchPosition()
 	self:SetBankSearchPosition()
 	self:SkinEditBoxes()

@@ -67,6 +67,14 @@ function Maps:StyleMinimap()
 	LFGStatus:SetTemplate("Transparent")
 	LFGStatus:SetFrameStrata("HIGH")
 	
+	MiniMapInstanceDifficulty:ClearAllPoints()
+	MiniMapInstanceDifficulty:SetParent(Minimap)
+	MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+
+	GuildInstanceDifficulty:ClearAllPoints()
+	GuildInstanceDifficulty:SetParent(Minimap)
+	GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+	
 	local function UpdateLFGTooltip()
 		local position = Minimap:GetPoint()
 		LFGStatus:ClearAllPoints()

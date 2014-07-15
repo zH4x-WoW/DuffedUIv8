@@ -1,8 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-if not C["nameplates"].Enable then
-	return
-end
+if not C["nameplates"].Enable then return end
 
 local _G = _G
 local unpack = unpack
@@ -258,9 +256,7 @@ end
 
 Plates:RegisterEvent("ADDON_LOADED")
 Plates:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= "DuffedUI" then
-		return
-	end
+	if addon ~= "DuffedUI" then return end
 	
 	SetCVar("bloatnameplates",0)
 	SetCVar("bloatthreat",0)
