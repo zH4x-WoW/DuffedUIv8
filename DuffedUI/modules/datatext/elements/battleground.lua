@@ -24,19 +24,19 @@ BGFrame:SetTemplate()
 BGFrame:SetFrameLevel(2)
 
 local Text1 = BGFrame:CreateFontString(nil, "OVERLAY")
-Text1:SetFont(DataText.Font, DataText.Size, DataText.Flags)
+Text1:SetFontObject(DataText.Font)
 Text1:SetPoint("LEFT", 30, 0.5)
 Text1:SetHeight(BGFrame:GetHeight())
 BGFrame.Text1 = Text1
 
 local Text2 = BGFrame:CreateFontString(nil, "OVERLAY")
-Text2:SetFont(DataText.Font, DataText.Size, DataText.Flags)
+Text2:SetFontObject(DataText.Font)
 Text2:SetPoint("CENTER", 0, 0.5)
 Text2:SetHeight(BGFrame:GetHeight())
 BGFrame.Text2 = Text2
 
 local Text3 = BGFrame:CreateFontString(nil, "OVERLAY")
-Text3:SetFont(DataText.Font, DataText.Size, DataText.Flags)
+Text3:SetFontObject(DataText.Font)
 Text3:SetPoint("RIGHT", -30, 0.5)
 Text3:SetHeight(BGFrame:GetHeight())
 BGFrame.Text3 = Text3

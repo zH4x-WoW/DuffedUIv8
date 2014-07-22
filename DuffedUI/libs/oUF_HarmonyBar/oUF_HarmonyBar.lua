@@ -12,16 +12,36 @@ local Colors = {
 	[3] = {.65, .63, .35, 1},
 	[4] = {.46, .63, .35, 1},
 	[5] = {.33, .63, .33, 1},
+	[6] = {.20, .63, .33, 1},
 }
+
+local function UpdateEnergy(Bar, Max)
+	local Width = floor(Bar:GetWidth() / Max)
+
+	for i = 1, Max do
+		Bar[i]:ClearAllPoints()
+
+		if i == Max then
+			Bar[i]:SetPoint("RIGHT", Bar, "RIGHT", 0, 0)
+			Bar[i]:SetPoint("LEFT", Bar[i-1], "RIGHT", 1, 0)
+		else
+			Bar[i]:Width(Width)
+			Bar[i]:SetPoint("LEFT", Bar[i-1], "RIGHT", 1, 0)
+		end
+	end
+end
 
 local function Update(self, event, unit, powerType)
 	if(self.unit ~= unit and (powerType and (powerType ~= 'CHI' and powerType ~= 'DARK_FORCE'))) then return end
 	
-	local hb = self.HarmonyBar
+	local Bar = self.HarmonyBar
 	
-	if(hb.PreUpdate) then
-		hb:PreUpdate(unit)
+	if(Bar.PreUpdate) then
+		Bar:PreUpdate(unit)
 	end
+	
+	local Current = UnitPower("player", SPELL_POWER_CHI)
+	local Max = UnitPowerMax("player", SPELL_POWER_CHI)
 	
 	local spacing = select(4, hb[4]:GetPoint())
 	local w = hb:GetWidth()
@@ -29,11 +49,17 @@ local function Update(self, event, unit, powerType)
 	local light = UnitPower("player", SPELL_POWER_CHI)
 	local maxChi = UnitPowerMax("player", SPELL_POWER_CHI)
 	
-	if hb.maxChi ~= maxChi then
-		if maxChi == 4 then
-			hb[5]:Hide()			
+	-- Update Max Power
+	if Bar.MaxChi ~= Max then
+		if Max == 4 then
+			Bar[6]:Hide()
+			Bar[5]:Hide()
+		elseif Max == 5 then
+			Bar[5]:Show()
+			Bar[6]:Hide()		
 		else
-			hb[5]:Show()
+			Bar[6]:Show()
+			Bar[5]:Show()
 		end
 		
 		for i = 1, maxChi do
@@ -45,19 +71,21 @@ local function Update(self, event, unit, powerType)
 			end
 		end
 		
-		hb.maxChi = maxChi
+		UpdateEnergy(Bar, Max)
+		Bar.MaxChi = Max
 	end
 
-	for i = 1, maxChi do
-		if i <= light then
-			hb[i]:SetAlpha(1)
+	-- Set Energy
+	for i = 1, Max do
+		if i <= Current then
+			Bar[i]:SetAlpha(1)
 		else
-			hb[i]:SetAlpha(.2)
+			Bar[i]:SetAlpha(.2)
 		end
 	end
 	
-	if(hb.PostUpdate) then
-		return hb:PostUpdate(light)
+	if(Bar.PostUpdate) then
+		return Bar:PostUpdate(Current)
 	end
 end
 
@@ -77,8 +105,9 @@ local function Enable(self, unit)
 		
 		self:RegisterEvent("UNIT_POWER", Path)
 		self:RegisterEvent("UNIT_DISPLAYPOWER", Path)
+		self:RegisterEvent("UNIT_MAXPOWER", Path)
 		
-		for i = 1, 5 do
+		for i = 1, 6 do
 			local Point = hb[i]
 			if not Point:GetStatusBarTexture() then
 				Point:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])
@@ -87,9 +116,10 @@ local function Enable(self, unit)
 			Point:SetStatusBarColor(unpack(Colors[i]))
 			Point:SetFrameLevel(hb:GetFrameLevel() + 1)
 			Point:GetStatusBarTexture():SetHorizTile(false)
+			Point.OriginalWidth = Point:GetWidth()
 		end
 		
-		hb.maxChi = 5
+		hb.maxChi = 0
 		
 		return true
 	end

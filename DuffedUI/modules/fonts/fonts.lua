@@ -26,20 +26,6 @@ function DuffedUIFonts:ChangeFonts()
 	local COMBAT = C["medias"].DamageFont
 	local NUMBER = C["medias"].Font
 	
-	if D.TripleMonitors then
-		InterfaceOptionsCombatTextPanelTargetDamage:Hide()
-		InterfaceOptionsCombatTextPanelPeriodicDamage:Hide()
-		InterfaceOptionsCombatTextPanelPetDamage:Hide()
-		InterfaceOptionsCombatTextPanelHealing:Hide()
-		SetCVar("CombatLogPeriodicSpells",0)
-		SetCVar("PetMeleeDamage",0)
-		SetCVar("CombatDamage",0)
-		SetCVar("CombatHealing",0)
-		
-		local INVISIBLE = [=[Interface\Addons\DuffedUI\medias\fonts\invisible_font.ttf]=]
-		COMBAT = INVISIBLE
-	end
-
 	UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 12
 	CHAT_FONT_HEIGHTS = {12, 13, 14, 15, 16, 17, 18, 19, 20}
 

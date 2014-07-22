@@ -13,14 +13,12 @@ local MinimapDataTextTwo
 
 DuffedUIDT.DefaultNumAnchors = 6
 DuffedUIDT.NumAnchors = DuffedUIDT.DefaultNumAnchors
-DuffedUIDT.Font = C["medias"].Font
-DuffedUIDT.Size = 12
-DuffedUIDT.Flags = nil
+DuffedUIDT.Font = D.GetFont(C["datatexts"].Font)
 DuffedUIDT.Texts = {}
 DuffedUIDT.Anchors = {}
 DuffedUIDT.Menu = {}
-DuffedUIDT.NameColor = D.RGBToHex(unpack(C["medias"].PrimaryDataTextColor))
-DuffedUIDT.ValueColor = D.RGBToHex(unpack(C["medias"].SecondaryDataTextColor))
+DuffedUIDT.NameColor = D.RGBToHex(unpack(C["datatexts"].NameColor))
+DuffedUIDT.ValueColor = D.RGBToHex(unpack(C["datatexts"].ValueColor))
 
 function DuffedUIDT:AddToMenu(name, data)
 	if self["Texts"][name] then
@@ -133,11 +131,15 @@ end
 local OnEnable = function(self)
 	self:Show()
 	self.Enabled = true
+	
+	DuffedUIDT:Save()
 end
 
 local OnDisable = function(self)
 	self:Hide()
 	self.Enabled = false
+	
+	DuffedUIDT:Save()
 end
 
 function DuffedUIDT:Register(name, enable, disable, update)
@@ -146,7 +148,8 @@ function DuffedUIDT:Register(name, enable, disable, update)
 	Data:SetFrameStrata("MEDIUM")
 
 	Data.Text = Data:CreateFontString(nil, "OVERLAY")
-	Data.Text:SetFont(self.Font, self.Size, self.Flags)
+	--Data.Text:SetFont(self.Font, self.Size, self.Flags)
+	Data.Text:SetFontObject(self.Font)
 	
 	Data.Enabled = false
 	Data.GetTooltipAnchor = GetTooltipAnchor
@@ -193,20 +196,26 @@ function DuffedUIDT:Save()
 			Data.Texts[Name] = {DataText.Enabled, DataText.Position}
 		end
 	end
-	
-	Data.DTNameColor = DuffedUIDT.NameColor
-	Data.DTValueColor = DuffedUIDT.ValueColor
 end
 
-function DuffedUIDT:Reset()
+function DuffedUIDT:AddDefaults()
+	DuffedUIDataPerChar.Texts = {}
+	
+	DuffedUIDataPerChar.Texts["Guild"] = {true, 1}
+	DuffedUIDataPerChar.Texts["Durability"] = {true, 2}
+	DuffedUIDataPerChar.Texts["Friends"] = {true, 3}
+	DuffedUIDataPerChar.Texts["System"] = {true, 4}
+	DuffedUIDataPerChar.Texts["Bag Slots"] = {true, 5}
+	DuffedUIDataPerChar.Texts["Gold"] = {true, 6}
+	DuffedUIDataPerChar.Texts[L.DataText.Power] = {true, 7}
+	DuffedUIDataPerChar.Texts["Time"] = {true, 8}
+end
+
+function DuffedUIDT:Clean()
 	for _, Data in pairs(self.Texts) do
 		if Data.Enabled then
 			Data:Disable()
 		end
-	end
-	
-	if (DuffedUIDataPerChar and DuffedUIDataPerChar.Texts) then
-		DuffedUIDataPerChar.Texts = {}
 	end
 end
 
@@ -218,21 +227,7 @@ function DuffedUIDT:Load()
 	end
 
 	if (not DuffedUIDataPerChar.Texts) then
-		-- defaults, Err, Gonna have to localize these.
-		DuffedUIDataPerChar.Texts = {}
-		DuffedUIDataPerChar.Texts["Guild"] = {true, 1}
-		DuffedUIDataPerChar.Texts["Durability"] = {true, 2}
-		DuffedUIDataPerChar.Texts["Friends"] = {true, 3}
-		DuffedUIDataPerChar.Texts["System"] = {true, 4}
-		DuffedUIDataPerChar.Texts["Bag Slots"] = {true, 5}
-		DuffedUIDataPerChar.Texts["Gold"] = {true, 6}
-		DuffedUIDataPerChar.Texts[L.DataText.Power] = {true, 7}
-		DuffedUIDataPerChar.Texts["Time"] = {true, 8}
-	end
-
-	if DuffedUIDataPerChar.DTNameColor then
-		DuffedUIDT.NameColor = DuffedUIDataPerChar.DTNameColor
-		DuffedUIDT.ValueColor = DuffedUIDataPerChar.DTValueColor
+		DuffedUIDT:AddDefaults()
 	end
 
 	if (DuffedUIDataPerChar and DuffedUIDataPerChar.Texts) then
@@ -255,12 +250,10 @@ function DuffedUIDT:Load()
 end
 
 DuffedUIDT:RegisterEvent("PLAYER_LOGIN")
-DuffedUIDT:RegisterEvent("PLAYER_LOGOUT")
 DuffedUIDT:SetScript("OnEvent", function(self, event)
 	if (event == "PLAYER_LOGIN") then
 		self:Load()
-	else
-		self:Save()
+		self:AddRemove()
 	end
 end)
 

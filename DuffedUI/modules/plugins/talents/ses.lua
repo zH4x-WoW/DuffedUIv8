@@ -213,7 +213,7 @@ if Enablegear == true then
 			
 			gearSets[i]:SetScript("OnClick", function(self) UseEquipmentSet(GetEquipmentSetInfo(i)) end)
 			gearSets[i]:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(hoverovercolor)) end)
-			gearSets[i]:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["medias"].BorderColor)) end)
+			gearSets[i]:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
 			
 			if Autogearswap == true then
 				gearSets[1]:SetBackdropBorderColor(0, 1, 0)

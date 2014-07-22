@@ -1,6 +1,8 @@
 local D, C, L = select(2, ...):unpack()
 
-if not C["nameplates"].Enable then return end
+if not C["nameplates"].Enable then
+	return
+end
 
 local _G = _G
 local unpack = unpack
@@ -12,6 +14,7 @@ local Colors = D["Colors"]
 local Convert = D.RGBToHex
 local Scale = D.Scale
 local FrameNumber = 0
+local Texture = D.GetTexture(C["nameplates"].Texture)
 
 local Plates = CreateFrame("Frame", nil, WorldFrame)
 
@@ -140,7 +143,7 @@ function Plates:Skin(obj)
 	-- New Health
 	Plate.Health.NewTexture = Plate.Health:CreateTexture(nil, "ARTWORK", nil, -6)
 	Plate.Health.NewTexture:SetAllPoints(Plate.Health.Texture)
-	Plate.Health.NewTexture:SetTexture(C["medias"].Normal)
+	Plate.Health.NewTexture:SetTexture(Texture)
 	Plate.Health.NewTexture:SetVertexColor(0, 1, 0)
 
 	-- Health Backdrop
@@ -184,6 +187,8 @@ function Plates:Skin(obj)
 	Plate.Cast.Name:Point("RIGHT", Plate.Cast, -7, 0)
 	Plate.Cast.Name:SetFont(C["medias"].Font, 8, "THINOUTLINE")
 	Plate.Cast.Name:SetShadowColor(0,0,0,0)
+	
+	Plate.Cast.Shield:SetTexture(nil) -- DON'T FORGET TO ADD "CHANGE COLOR" WHEN SHOW
 
 	-- Level
 	Plate.Level:SetParent(Hider)
@@ -256,7 +261,9 @@ end
 
 Plates:RegisterEvent("ADDON_LOADED")
 Plates:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= "DuffedUI" then return end
+	if addon ~= "DuffedUI" then
+		return
+	end
 	
 	SetCVar("bloatnameplates",0)
 	SetCVar("bloatthreat",0)

@@ -1,9 +1,5 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C["actionbars"].Enable) then
-	return
-end
-
 local DuffedUIActionBars = D["ActionBars"]
 local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
 local PetSize = C["actionbars"].PetButtonSize
@@ -59,7 +55,7 @@ function DuffedUIActionBars:CreatePetBar()
 			or (event == "PLAYER_FARSIGHT_FOCUS_CHANGED")
 			or (event == "UNIT_FLAGS")
 			or (arg1 == "pet" and (event == "UNIT_AURA")) then
-				DuffedUIActionBars.UpdatePetBar()
+				DuffedUIActionBars:UpdatePetBar()
 		elseif event == "PET_BAR_UPDATE_COOLDOWN" then
 			PetActionBar_UpdateCooldowns()
 		else

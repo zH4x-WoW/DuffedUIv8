@@ -75,9 +75,12 @@ local function SetTemplate(f, t, tex)
 		texture = C["medias"].Blank 
 	end
 		
-	f:SetBackdrop({
-	  bgFile = texture, 
-	  edgeFile = C["medias"].Blank, 
+	-- 6.0 FIX ME when textures aren't broken
+ 	f:SetBackdrop({
+	  --bgFile = texture,
+	  bgFile = "Interface\\BUTTONS\\WHITE8X8",
+	  --edgeFile = C.Medias.Blank,
+	  edgeFile = "Interface\\BUTTONS\\WHITE8X8",
 	  tile = false, tileSize = 0, edgeSize = Mult,
 	})
 	
@@ -469,40 +472,6 @@ local function SkinCheckBox(Frame)
 	Frame.SetHighlightTexture = Noop
 end
 
-local Tabs = {
-	"LeftDisabled",
-	"MiddleDisabled",
-	"RightDisabled",
-	"Left",
-	"Middle",
-	"Right",
-}
-
-local function SkinTab(tab)
-	if (not tab) then
-		return
-	end
-
-	for _, object in pairs(Tabs) do
-		local Texture = _G[tab:GetName()..object]
-		if (Texture) then
-			Texture:SetTexture(nil)
-		end
-	end
-
-	if tab.GetHighlightTexture and tab:GetHighlightTexture() then
-		tab:GetHighlightTexture():SetTexture(nil)
-	else
-		tab:StripTextures()
-	end
-
-	tab.Backdrop = CreateFrame("Frame", nil, tab)
-	tab.Backdrop:SetTemplate()
-	tab.Backdrop:SetFrameLevel(tab:GetFrameLevel() - 1)
-	tab.Backdrop:Point("TOPLEFT", 10, -3)
-	tab.Backdrop:Point("BOTTOMRIGHT", -10, 3)
-end
-
 ---------------------------------------------------
 -- Merge DuffedUI API with WoW API
 ---------------------------------------------------
@@ -532,7 +501,6 @@ local function AddAPI(object)
 	if not object.SkinArrowButton then mt.SkinArrowButton = SkinArrowButton end
 	if not object.SkinDropDown then mt.SkinDropDown = SkinDropDown end
 	if not object.SkinCheckBox then mt.SkinCheckBox = SkinCheckBox end
-	if not object.SkinTab then mt.SkinTab = SkinTab end
 end
 
 

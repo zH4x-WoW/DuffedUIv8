@@ -13,19 +13,19 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 	-- Shadow Orbs Bar
 	local SOBar = CreateFrame("Frame", nil, self)
 	SOBar:Point("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
-	SOBar:Size((66 * 3) + 7 , 10)
+	SOBar:Size((40 * 5) + 7 , 10)
 	SOBar:SetTemplate("Transparent")
 
-	for i = 1, 3 do
+	for i = 1, 5 do
 		SOBar[i] = CreateFrame("StatusBar", nil, SOBar)
 		SOBar[i]:Height(6)
 		SOBar[i]:SetStatusBarTexture(Texture)
 
 		if i == 1 then
-			SOBar[i]:Width(66)
+			SOBar[i]:Width(40)
 			SOBar[i]:Point("LEFT", SOBar, "LEFT", 2, 0)
 		else
-			SOBar[i]:Width(66)
+			SOBar[i]:Width(40)
 			SOBar[i]:Point("LEFT", SOBar[i-1], "RIGHT", 1, 0)
 		end
 	end

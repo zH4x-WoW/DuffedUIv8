@@ -1,4 +1,5 @@
 local D, C, L = select(2, ...):unpack()
+if (not C["actionbars"].Enable) then return end
 
 -- keybind feature
 local Popups = D["Popups"]

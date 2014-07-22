@@ -3,6 +3,11 @@ local D, C, L = select(2, ...):unpack()
 -- Hydra note: Since this file is going to be doing a lot of math/formatting, lets use locals for speed/cpu usage
 -- This means no calling functions as methods :P ("string"):format(...) or ("string"):gsub(...) should be format("string", ...) and gsub("string", ...) etc.
 
+-- BROKEN 6.0 <-- Just a flag so we know to remove when textures are fixed.
+C["medias"].Normal = "Interface\\BUTTONS\\WHITE8X8"
+C["medias"].Blank = "Interface\\BUTTONS\\WHITE8X8"
+C["medias"].HoverButton = "Interface\\BUTTONS\\WHITE8X8"
+C["medias"].Glow = nil
 local reverse = string.reverse
 local match = string.match
 local modf = math.modf

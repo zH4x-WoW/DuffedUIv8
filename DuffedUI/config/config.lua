@@ -25,7 +25,7 @@ C["actionbars"] = {
 	["Enable"] = true,
 	["HotKey"] = true,
 	["Macro"] = false,
-	["ShapeShift"] = false,
+	["ShapeShift"] = true,
 	["NormalButtonSize"] = 27,
 	["PetButtonSize"] = 25,
 	["ButtonSpacing"] = 4,
@@ -38,7 +38,7 @@ C["actionbars"] = {
 	["Rightbutton"] = true,
 	["HideRightBar"] = false,
 	["BorderHighlight"] = false,
-	["Font"] = "DuffedUI2"
+	["Font"] = "DuffedUI Outline",
 }
 
 C["auras"] = {
@@ -52,7 +52,7 @@ C["auras"] = {
 	["BuffNotice"] = true,
 	["Warning"] = true,
 	["BuffTracker"] = true,
-	["Font"] = "DuffedUI2"
+	["Font"] = "DuffedUI Outline",
 }
 
 C["bags"] = {
@@ -62,7 +62,8 @@ C["bags"] = {
 	["ItemsPerRow"] = 10,
 	["Scale"] = 1,
 	["Moveable"] = false,
-	["Font"] = "DuffedUI2"
+	["Font"] = "DuffedUI Outline",
+	["BagFilter"] = false,
 }
 
 C["merchant"] = {
@@ -88,6 +89,14 @@ C["cooldowns"] = {
 	["Notification"] = 8,
 }
 
+C["datatexts"] = {
+	["Battleground"] = true,
+	["LocalTime"] = true,
+	["NameColor"] = {1, 1, 1},
+	["ValueColor"] = {1, 1, 1},
+	["Font"] = "DuffedUI",
+}
+
 C["misc"] = {
 	["ThreatBarEnable"] = true,
 	["AltPowerBarEnable"] = true,
@@ -104,6 +113,7 @@ C["nameplates"] = {
 	["CastHeight"] = 5,
 	["Spacing"] = 4,
 	["NontargetAlpha"] = 1,
+	["Texture"] = "Blank",
 }
 
 C["party"] = {
@@ -111,7 +121,9 @@ C["party"] = {
 	["Portrait"] = true,
 	["HealBar"] = true,
 	["BuffsEnable"] = false,
-	["Font"] = "DuffedUI2"
+	["Font"] = "DuffedUI Outline",
+	["PowerTexture"] = "Blank",
+	["HealthTexture"] = "Blank",
 }
 
 C["raid"] = {
@@ -127,7 +139,9 @@ C["raid"] = {
 	["DebuffWatch"] = true,
 	["Aggro"] = true,
 	["ShowSymbols"] = true,
-	["Font"] = "DuffedUI2"
+	["Font"] = "DuffedUI Outline",
+	["PowerTexture"] = "Blank",
+	["HealthTexture"] = "Blank",
 }
 
 C["tooltips"] = {
@@ -136,6 +150,8 @@ C["tooltips"] = {
 	["EnableCaster"] = true,
 	["ItemLevel"] = true,
 	["ID"] = true,
+	["PowerTexture"] = "Blank",
+	["HealthTexture"] = "Blank",
 }
 
 C["unitframes"] = {
@@ -154,7 +170,7 @@ C["unitframes"] = {
 	["Percent"] = true,
 	["ShowTotalHP"] = false,
 	["ColorGradient"] = true,
-	["Font"] = "DuffedUI2"
+	["Font"] = "DuffedUI Outline",
 }
 
 C["castbar"] = {

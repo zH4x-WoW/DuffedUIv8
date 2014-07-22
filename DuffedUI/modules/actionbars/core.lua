@@ -25,6 +25,7 @@ local Frames = {
 	MainMenuBar, MainMenuBarArtFrame, OverrideActionBar,
 	PossessBarFrame, PetActionBarFrame, IconIntroTracker,
 	ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight,
+	TalentMicroButtonAlert,
 }
 
 function DuffedUIActionBars:DisableBlizzard()
@@ -304,6 +305,8 @@ DuffedUIActionBars:RegisterEvent("ADDON_LOADED")
 DuffedUIActionBars:RegisterEvent("VARIABLES_LOADED")
 DuffedUIActionBars:SetScript("OnEvent", function(self, event, addon)
 	if (event == "ADDON_LOADED" and addon == "DuffedUI") then
+		if (not C["actionbars"].Enable) then return end
+		
 		self:DisableBlizzard()
 		self:AddPanels()
 		self:CreateBar1()
@@ -317,6 +320,12 @@ DuffedUIActionBars:SetScript("OnEvent", function(self, event, addon)
 		self:CreateToggleButtons()
 		self:CreateVehicleButtons()
 		self:UnregisterEvent("ADDON_LOADED")
+		
+		hooksecurefunc("ActionButton_Update", self.SkinButton)
+		--hooksecurefunc("ActionButton_UpdateFlyout", self.StyleFlyout) -- BROKEN 6.0
+		hooksecurefunc("ActionButton_ShowOverlayGlow", self.StartButtonHighlight)
+		hooksecurefunc("ActionButton_HideOverlayGlow", self.StopButtonHighlight)
+		hooksecurefunc("ActionButton_UpdateHotkeys", self.UpdateHotKey)
 	elseif (event == "VARIABLES_LOADED") then
  		self:LoadVariables()
 		self:UnregisterEvent("VARIABLES_LOADED")

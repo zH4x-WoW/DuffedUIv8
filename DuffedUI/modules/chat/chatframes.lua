@@ -19,6 +19,8 @@ local LeftChatBackground = D["Panels"].LeftChatBackground
 local RightChatBackground = D["Panels"].RightChatBackground
 local CubeLeft = D["Panels"].CubeLeft
 local DuffedUIChat = CreateFrame("Frame")
+local UIFrameFadeRemoveFrame = UIFrameFadeRemoveFrame
+local Font = D.GetFont(C["chat"].TabFont)
 
 -- Update editbox border color
 function DuffedUIChat:UpdateEditBoxColor()
@@ -69,18 +71,13 @@ function DuffedUIChat:StyleFrame(frame)
 	-- Hide editbox every time we click on a tab
 	Tab:HookScript("OnClick", function() EditBox:Hide() end)
 
-	-- Change tab font
-	TabText:SetShadowColor(0, 0, 0)
-	TabText:SetShadowOffset(1.25, -1.25)
-	
 	Frame:SetClampRectInsets(0, 0, 0, 0)
 	Frame:SetClampedToScreen(false)
 	Frame:SetFading(C["chat"].Fade)
 
 	-- Move the edit box
 	EditBox:ClearAllPoints()
-	EditBox:Point("TOPLEFT", LeftChatTab or DataTextLeft, 2, -2)
-	EditBox:Point("BOTTOMRIGHT", LeftChatTab or DataTextLeft, -2, 2)
+	EditBox:SetInside(DataTextLeft)
 	
 	-- Disable alt key usage
 	EditBox:SetAltArrowKeyMode(false)
@@ -94,7 +91,7 @@ function DuffedUIChat:StyleFrame(frame)
 	-- create our own texture for edit box
 	EditBox:CreateBackdrop()
 	EditBox.Backdrop:ClearAllPoints()
-	if C["chat"].lBackground then EditBox.Backdrop:SetAllPoints(LeftChatTab) else EditBox.Backdrop:SetAllPoints(DataTextLeft) end
+	EditBox.Backdrop:SetAllPoints(DataTextLeft)
 	EditBox.Backdrop:SetFrameStrata("LOW")
 	EditBox.Backdrop:SetFrameLevel(1)
 	EditBox.Backdrop:SetBackdropColor(unpack(C["medias"].BackdropColor))
@@ -247,7 +244,7 @@ end
 -- We don't have an install process yet, so it's here for now. (Only handling position for now, not channels/groups)
 
 -- Tukz Note:
--- It's better like this anyway, because we will call TukuiChat:Install() in the Installation of Tukui. You are free to complete this function.
+-- It's better like this anyway, because we will call DuffedUIChat:Install() in the Installation of DuffedUI. You are free to complete this function.
 -- I prefer like this because I would like everything chat frames related to be include in chat module folder. Same for others modules we will write.
 function DuffedUIChat:Install()
 	-- Create our custom chatframes
@@ -366,6 +363,16 @@ function DuffedUIChat:Setup()
 	end)
 end
 
+function DuffedUIChat:AddHooks()
+	hooksecurefunc("ChatEdit_UpdateHeader", DuffedUIChat.UpdateEditBoxColor)
+	hooksecurefunc("FCF_OpenTemporaryWindow", DuffedUIChat.StyleTempFrame)
+	hooksecurefunc("FCF_RestorePositionAndDimensions", DuffedUIChat.SetChatFramePosition)
+
+	if (not C["chat"].rBackground and C["chat"].lBackground) then
+		hooksecurefunc("FCFTab_UpdateAlpha", DuffedUIChat.NoMouseAlpha)
+	end
+end
+
 -- Kill stuff
 ChatConfigFrameDefaultButton:Kill()
 ChatFrameMenuButton:Kill()
@@ -385,9 +392,7 @@ DuffedUIChat:SetScript("OnEvent", function(self, event, addon)
 	end
 end)
 
-hooksecurefunc("ChatEdit_UpdateHeader", DuffedUIChat.UpdateEditBoxColor)
-hooksecurefunc("FCF_OpenTemporaryWindow", DuffedUIChat.StyleTempFrame)
-hooksecurefunc("FCF_RestorePositionAndDimensions", DuffedUIChat.SetChatFramePosition)
+DuffedUIChat:AddHooks()
 
 D["Chat"] = DuffedUIChat
 

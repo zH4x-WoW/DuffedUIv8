@@ -363,9 +363,3 @@ function DuffedUIActionBars:UpdateHotKey(btype)
 		HotKey:SetText(Text)
 	end
 end
-
-hooksecurefunc("ActionButton_Update", DuffedUIActionBars.SkinButton)
-hooksecurefunc("ActionButton_UpdateFlyout", DuffedUIActionBars.StyleFlyout)
-hooksecurefunc("ActionButton_ShowOverlayGlow", DuffedUIActionBars.StartButtonHighlight)
-hooksecurefunc("ActionButton_HideOverlayGlow", DuffedUIActionBars.StopButtonHighlight)
-hooksecurefunc("ActionButton_UpdateHotkeys", DuffedUIActionBars.UpdateHotKey)

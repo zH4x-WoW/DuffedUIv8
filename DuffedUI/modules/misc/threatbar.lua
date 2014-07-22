@@ -10,10 +10,6 @@ local UnitName = UnitName
 local ThreatBar = CreateFrame("Frame")
 local GetColor = D.ColorGradient
 
-ThreatBar:RegisterEvent("PLAYER_ENTERING_WORLD")
-ThreatBar:RegisterEvent("PLAYER_REGEN_ENABLED")
-ThreatBar:RegisterEvent("PLAYER_REGEN_DISABLED")
-
 function ThreatBar:OnEvent(event)
 	local StatusBar = self.StatusBar
 	local Party = GetNumGroupMembers()
@@ -30,8 +26,6 @@ function ThreatBar:OnEvent(event)
 		end
 	else
 		self:Hide()
-
-		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end
 end
 
@@ -93,6 +87,9 @@ function ThreatBar:Create()
 		self:SetScript("OnUpdate", nil)
 	end)
 
+	self:RegisterEvent("PLAYER_ENTERING_WORLD")
+	self:RegisterEvent("PLAYER_REGEN_ENABLED")
+	self:RegisterEvent("PLAYER_REGEN_DISABLED")
 	self:SetScript("OnEvent", self.OnEvent)
 end
 

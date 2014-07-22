@@ -85,10 +85,8 @@ local function Enable(self, unit)
 		
 		self:RegisterEvent("UNIT_AURA", Path)
 		
-		-- why the fuck does PLAYER_TALENT_UPDATE doesnt trigger on initial login when I register to: self or self.PluginName
-		bar.Visibility = CreateFrame("Frame", nil, bar)
-		bar.Visibility:RegisterEvent("PLAYER_TALENT_UPDATE")
-		bar.Visibility:SetScript("OnEvent", function(frame, event, unit) Visibility(self, event, unit) end)
+		self:RegisterEvent("PLAYER_TALENT_UPDATE", Visibility)
+		self:RegisterEvent("PLAYER_ENTERING_WORLD", Visibility)
 
 		for i = 1, 4 do
 			if not bar[i]:GetStatusBarTexture() then

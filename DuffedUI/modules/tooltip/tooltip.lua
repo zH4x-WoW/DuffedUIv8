@@ -16,7 +16,6 @@ local LEVEL = LEVEL
 local PVP_ENABLED = PVP_ENABLED
 local Insets = C["general"].InOut
 local BackdropColor = {0, 0, 0}
-local Font = D.GetFont(C["unitframes"].Font)
 
 DuffedUITooltips.ItemRefTooltip = ItemRefTooltip
 
@@ -68,20 +67,26 @@ function DuffedUITooltips:SetTooltipDefaultAnchor()
 end
 
 function DuffedUITooltips:GetColor(unit)
-	if (not unit) then return end
+	if (not unit) then
+		return
+	end
 
 	if (UnitIsPlayer(unit) and not UnitHasVehicleUI(unit)) then
 		local Class = select(2, UnitClass(unit))
 		local Color = RaidColors[Class]
 		
-		if (not Color) then return end
+		if (not Color) then
+			return
+		end
 		
 		return "|c"..Color.colorStr, Color.r, Color.g, Color.b	
 	else
 		local Reaction = UnitReaction(unit, "player")
 		local Color = Colors.reaction[Reaction]
 		
-		if not Color then return end
+		if not Color then
+			return
+		end
 		
 		local Hex = D.RGBToHex(unpack(Color))
 		
@@ -93,8 +98,12 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	local NumLines = self:NumLines()
 	local GetMouseFocus = GetMouseFocus()
 	local Unit = (select(2, self:GetUnit())) or (GetMouseFocus and GetMouseFocus:GetAttribute("unit"))
+	local Health = UnitHealth(Unit)
+	local MaxHealth = UnitHealth(Unit)
 	
-	if (not Unit) and (UnitExists("mouseover")) then Unit = "mouseover" end
+	if (not Unit) and (UnitExists("mouseover")) then
+		Unit = "mouseover"
+	end
 	
 	if (not Unit) then 
 		self:Hide() 
@@ -106,7 +115,9 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		return
 	end
 	
-	if (UnitIsUnit(Unit, "mouseover")) then Unit = "mouseover" end
+	if (UnitIsUnit(Unit, "mouseover")) then
+		Unit = "mouseover"
+	end
 
 	local Line1 = GameTooltipTextLeft1
 	local Line2 = GameTooltipTextLeft2
@@ -121,7 +132,9 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	local R, G, B = GetQuestDifficultyColor(Level).r, GetQuestDifficultyColor(Level).g, GetQuestDifficultyColor(Level).b
 	local Color = DuffedUITooltips:GetColor(Unit)	
 	
-	if (not Color) then Color = "|CFFFFFFFF" end
+	if (not Color) then
+		Color = "|CFFFFFFFF"
+	end
 	
 	if (Title or Name) then
 		if Realm then
@@ -182,10 +195,14 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	if (UnitExists(Unit .. "target") and Unit ~= "player") then
 		local hex, R, G, B = DuffedUITooltips:GetColor(Unit)
 		
-		if (not R) and (not G) and (not B) then R, G, B = 1, 1, 1 end
+		if (not R) and (not G) and (not B) then
+			R, G, B = 1, 1, 1
+		end
 		
 		GameTooltip:AddLine(UnitName(Unit .. "target"), R, G, B)
 	end
+	
+	HealthBar.Text:SetText(D.ShortValue(Health) .. " / " .. D.ShortValue(MaxHealth))
 	
 	self.fadeOut = nil
 end
@@ -231,7 +248,9 @@ function DuffedUITooltips:SetColor()
 		if (Quality and Quality >= 2) then
 			R, G, B = GetItemQualityColor(Quality)
 			
-			if Insets then self:SetBackdropBorderColor(R, G, B) end
+			if Insets then
+				self:SetBackdropBorderColor(R, G, B)
+			end
 		else
 			HealthBar:SetStatusBarColor(unpack(C["medias"].BorderColor))
 			
@@ -267,55 +286,13 @@ function DuffedUITooltips:Skin()
 	DuffedUITooltips.SetColor(self)
 end
 
-function DuffedUITooltips:OnValueChanged(value)
-	if not value then
-		return
-	end
-	local min, max = self:GetMinMaxValues()
-	
-	if (value < min) or (value > max) then
-		return
-	end
-	local _, unit = GameTooltip:GetUnit()
-	
-	-- fix target of target returning nil
-	if not unit then
-		local GMF = GetMouseFocus()
-		unit = GMF and GMF:GetAttribute("unit")
-	end
-  
-	if not self.text then
-		self.text = self:CreateFontString(nil, "OVERLAY")
-		self.text:Point("CENTER", GameTooltipStatusBar, 0, 6)
-		self.text:SetFontObject(Font)
-		self.text:Show()
-		if unit then
-			min, max = UnitHealth(unit), UnitHealthMax(unit)
-			local hp = D.ShortValue(min).." / "..D.ShortValue(max)
-			if UnitIsGhost(unit) then
-				self.text:SetText(L.UnitFrames.Ghost)
-			elseif min == 0 or UnitIsDead(unit) or UnitIsGhost(unit) then
-				self.text:SetText(DEAD)
-			else
-				self.text:SetText(hp)
-			end
-		end
-	else
-		if unit then
-			min, max = UnitHealth(unit), UnitHealthMax(unit)
-			self.text:Show()
-			local hp = D.ShortValue(min).." / "..D.ShortValue(max)
-			if UnitIsGhost(unit) then
-				self.text:SetText(L.UnitFrames.Ghost)
-			elseif min == 0 or UnitIsDead(unit) or UnitIsGhost(unit) then
-				self.text:SetText(DEAD)
-			else
-				self.text:SetText(hp)
-			end
-		else
-			self.text:Hide()
-		end
-	end
+function DuffedUITooltips:OnValueChanged()
+	local _, max = HealthBar:GetMinMaxValues()
+	local value = HealthBar:GetValue()
+
+	self.Text:SetText(D.ShortValue(value) .. " / " .. D.ShortValue(max))
+
+	return
 end
 
 local hex = function(color)
@@ -392,6 +369,11 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 	HealthBar:SetStatusBarTexture(C["medias"].Normal)
 	HealthBar:CreateBackdrop()
 	HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
+	HealthBar.Text = HealthBar:CreateFontString(nil, "OVERLAY")
+	HealthBar.Text:SetFont(C["medias"].Font, 12, "THINOULINE")
+	HealthBar.Text:SetShadowColor(0, 0, 0)
+	HealthBar.Text:SetShadowOffset(1.25, -1.25)
+	HealthBar.Text:Point("CENTER", HealthBar, 0, 6)
 	HealthBar:ClearAllPoints()
 	HealthBar:Point("BOTTOMLEFT", HealthBar:GetParent(), "TOPLEFT", 2, 5)
 	HealthBar:Point("BOTTOMRIGHT", HealthBar:GetParent(), "TOPRIGHT", -2, 5)

@@ -1,8 +1,9 @@
 local D, C, L = select(2, ...):unpack()
 
 local DuffedUIUnitFrames = D["UnitFrames"]
-local Texture = C["medias"].Normal
 local Font = D.GetFont(C["unitframes"].Font)
+local HealthTexture = D.GetTexture(C["unitframes"].HealthTexture)
+local PowerTexture = D.GetTexture(C["unitframes"].PowerTexture)
 
 function DuffedUIUnitFrames:Arena()
 	self:RegisterForClicks("AnyUp")
@@ -14,7 +15,7 @@ function DuffedUIUnitFrames:Arena()
 	Health:Height(22)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
-	Health:SetStatusBarTexture(Texture)
+	Health:SetStatusBarTexture(HealthTexture)
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
@@ -52,12 +53,12 @@ function DuffedUIUnitFrames:Arena()
 	Power:Height(3)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 85, 0)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", -9, -3)
-	Power:SetStatusBarTexture(Texture)
+	Power:SetStatusBarTexture(PowerTexture)
 	Power:SetFrameLevel(Health:GetFrameLevel() + 1)
 
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints(Power)
-	Power.Background:SetTexture(Texture)
+	Power.Background:SetTexture(.1, .1, .1)
 	Power.Background.multiplier = 0.3
 	
 	local PowerBorder = CreateFrame("Frame", nil, Power)
@@ -75,7 +76,7 @@ function DuffedUIUnitFrames:Arena()
 
 	Power.frequentUpdates = true
 	Power.colorPower = true
-	if (C["unitframes"].Smooth) then Health.Smooth = true end
+	if (C["unitframes"].Smooth) then Power.Smooth = true end
 			
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER", Health, "CENTER", 0, 0)

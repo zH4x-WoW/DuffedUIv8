@@ -14,7 +14,7 @@ local CheckVersion = function(self, event, prefix, message, channel, sender)
 		end
 
 		if (tonumber(message) > Version) then -- We recieved a higher version, we're outdated. :(
-			print("|cffffff00"..Outdated.."|r")
+			print(Outdated)
 			self:UnregisterEvent("CHAT_MSG_ADDON")
 		end
 	else

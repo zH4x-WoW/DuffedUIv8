@@ -1,6 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="config.lua"/>
-	<Script file="font.lua"/>
+	<Script file="media.lua"/>
 	<Script file="graphic.lua"/>
 	<Script file="api.lua"/>
 	<Script file="popup.lua"/>

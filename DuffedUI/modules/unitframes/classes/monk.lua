@@ -13,19 +13,19 @@ function DuffedUIUnitFrames:AddMonkFeatures()
 	-- Harmony Bar
 	local Harmony = CreateFrame("Frame", nil, self)
 	Harmony:Point("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
-	Harmony:Size((40 * 5) + 8, 10)
+	Harmony:Size((33 * 6) + 8, 10)
 	Harmony:SetTemplate("Transparent")
 
-	for i = 1, 5 do
+	for i = 1, 6 do
 		Harmony[i] = CreateFrame("StatusBar", nil, Harmony)
 		Harmony[i]:Height(6)
 		Harmony[i]:SetStatusBarTexture(Texture)
 
 		if i == 1 then
-			Harmony[i]:Width(40)
+			Harmony[i]:Width(33)
 			Harmony[i]:SetPoint("LEFT", Harmony, "LEFT", 2, 0)
 		else
-			Harmony[i]:Width(40)
+			Harmony[i]:Width(33)
 			Harmony[i]:SetPoint("LEFT", Harmony[i - 1], "RIGHT", 1, 0)
 		end
 	end

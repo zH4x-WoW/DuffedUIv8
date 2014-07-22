@@ -2,8 +2,8 @@ local D, C, L = select(2, ...):unpack()
 
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Layout = C["unitframes"].Layout
-local Texture = C["medias"].Normal
 local Font = D.GetFont(C["unitframes"].Font)
+local HealthTexture = D.GetTexture(C["unitframes"].HealthTexture)
 
 function DuffedUIUnitFrames:TargetOfTarget()
 	self:RegisterForClicks("AnyUp")
@@ -19,7 +19,7 @@ function DuffedUIUnitFrames:TargetOfTarget()
 		Health:SetPoint("TOPLEFT", 2, -2)
 		Health:SetPoint("BOTTOMRIGHT", -2, 2)
 	end
-	Health:SetStatusBarTexture(Texture)
+	Health:SetStatusBarTexture(HealthTexture)
 	
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:Point("TOPLEFT", Health, -1, 1)

@@ -16,9 +16,6 @@ DuffedUIDT.Remove = function()
 	CurrentFrame:RemoveData()
 end
 
--- Add a remove button
-tinsert(Menu, {text = "|cffFF0000"..REMOVE.."|r", notCheckable = true, func = DuffedUIDT.Remove})
-
 local OnMouseDown = function(self)
 	CurrentFrame = self
 	EasyMenu(Menu, DataTextToggleDropDown, "cursor", 0, 5, "MENU", 2)
@@ -47,99 +44,6 @@ function DuffedUIDT:ToggleDataPositions()
 	end
 end
 
--- Color stuff, move me later
-local DataColor1, DataColor2
-local Hex = D.RGBToHex
-
-if DuffedUIDataPerChar then
-	DuffedUIDT.NameColor = DuffedUIDataPerChar.DTNameColor
-	DuffedUIDT.ValueColor = DuffedUIDataPerChar.DTValueColor
-else
-	-- Default to the colors defined by media
-	DataColor1 = C["medias"].PrimaryDataTextColor or {1, 1, 1}
-	DataColor2 = C["medias"].SecondaryDataTextColor or {1, 1, 1}
-	
-	DuffedUIDT.NameColor = Hex(unpack(DataColor1))
-	DuffedUIDT.ValueColor = Hex(unpack(DataColor2))
+function DuffedUIDT:AddRemove()	-- Add a remove button
+	tinsert(Menu, {text = "", notCheckable = true})
 end
-
-local Color -- Not sure if this is needed, should be able to get around it
-local ActiveInfo
-
-local ColorInfo1 = {}
-local ColorInfo2 = {}
-
-local Callback = function(cancel)
-	local R, G, B
-	
-	if cancel then
-		R, G, B = unpack(cancel)
-	else
-		R, G, B = ColorPickerFrame:GetColorRGB()
-	end
-
-	DuffedUIDT[Color] = Hex(R, G, B)
-	ActiveInfo.colorCode = Hex(R, G, B)
-	ActiveInfo.r = R
-	ActiveInfo.g = G
-	ActiveInfo.b = B
-	
-	DuffedUIDT:ForceUpdate()
-end
-
-local InitColorPicker = function(r, g, b)
-	ColorPickerFrame:SetColorRGB(r, g, b)
-	ColorPickerFrame.previousValues = {r, g, b}
-	ColorPickerFrame.func = Callback
-	ColorPickerFrame.cancelFunc = Callback
-	ColorPickerFrame:Hide()
-	ColorPickerFrame:Show()
-end
-
-local OnClick = function(self, info)
-	Color = info.Name
-	ActiveInfo = info
-	InitColorPicker(info.r, info.g, info.b)
-end
-
--- Color table properties
-ColorInfo1.text = COLOR .. " 1"
-ColorInfo1.func = OnClick
-ColorInfo1.arg1 = ColorInfo1
-ColorInfo1.notCheckable = true
-ColorInfo1.colorCode = DuffedUIDT.NameColor
-ColorInfo1.r = DataColor1[1]
-ColorInfo1.g = DataColor1[2]
-ColorInfo1.b = DataColor1[3]
-ColorInfo1.Name = "NameColor"
-
-ColorInfo2.text = COLOR .. " 2"
-ColorInfo2.func = OnClick
-ColorInfo2.arg1 = ColorInfo2
-ColorInfo2.notCheckable = true
-ColorInfo2.colorCode = DuffedUIDT.ValueColor
-ColorInfo2.r = DataColor2[1]
-ColorInfo2.g = DataColor2[2]
-ColorInfo2.b = DataColor2[3]
-ColorInfo2.Name = "ValueColor"
-
--- Insert them into the menu
-tinsert(Menu, {text = "", notCheckable = true})
-tinsert(Menu, ColorInfo1)
-tinsert(Menu, ColorInfo2)
-
-function DuffedUIDT:ResetColors()
-	DataColor1 = C["medias"].PrimaryDataTextColor or {1, 1, 1}
-	DataColor2 = C["medias"].SecondaryDataTextColor or {1, 1, 1}
-
-	DuffedUIDT.NameColor = Hex(unpack(DataColor1))
-	DuffedUIDT.ValueColor = Hex(unpack(DataColor2))
-
-	DuffedUIDataPerChar.DTNameColor = TukuiDT.NameColor
-	DuffedUIDataPerChar.DTValueColor = TukuiDT.ValueColor
-
-	DuffedUIDT:ForceUpdate()
-end
-
--- Reset colors
-tinsert(Menu, {text = "Reset colors", notCheckable = true, func = DuffedUIDT.ResetColors})

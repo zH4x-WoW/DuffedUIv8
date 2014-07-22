@@ -3,6 +3,8 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local _, Class = UnitClass("player")
 local Font = D.GetFont(C["unitframes"].Font)
+local HealthTexture = D.GetTexture(C["unitframes"].HealthTexture)
+local PowerTexture = D.GetTexture(C["unitframes"].PowerTexture)
 
 function DuffedUIUnitFrames:Focus()
 	self:RegisterForClicks("AnyUp")
@@ -13,7 +15,7 @@ function DuffedUIUnitFrames:Focus()
 	Health:Height(17)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
-	Health:SetStatusBarTexture(C["medias"].Normal)
+	Health:SetStatusBarTexture(HealthTexture)
 
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
@@ -57,12 +59,12 @@ function DuffedUIUnitFrames:Focus()
 	Power:Height(3)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 85, 0)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", -9, -3)
-	Power:SetStatusBarTexture(C["medias"].Normal)
+	Power:SetStatusBarTexture(PowerTexture)
 	Power:SetFrameLevel(Health:GetFrameLevel() + 2)
 
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints()
-	Power.Background:SetTexture(C["medias"].Normal)
+	Power.Background:SetTexture(.1, .1, .1)
 	Power.Background.multiplier = 0.3
 
 	-- Border for Power
@@ -81,6 +83,7 @@ function DuffedUIUnitFrames:Focus()
 	Power.colorPower = true
 	Power.frequentUpdates = true
 	Power.colorDisconnected = true
+	if (C["unitframes"].Smooth) then Power.Smooth = true end
 
 	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
 

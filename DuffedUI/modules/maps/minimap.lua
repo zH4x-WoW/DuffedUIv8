@@ -29,11 +29,16 @@ function Maps:DisableMinimapElements()
 		"MiniMapTracking",
 		"GameTimeFrame",
 		"MiniMapWorldMapButton",
+		"GarrisonLandingPageMinimapButton",
 	}
 	
-	for i, Frame in pairs(HiddenFrames) do
-		local f = _G[Frame]
-		f:Hide()
+	for i, FrameName in pairs(HiddenFrames) do
+		local Frame = _G[FrameName]
+		Frame:Hide()
+
+		if Frame.UnregisterAllEvents then
+			Frame:UnregisterAllEvents()
+		end
 	end
 	
 	North:SetTexture(nil)
@@ -67,14 +72,6 @@ function Maps:StyleMinimap()
 	LFGStatus:SetTemplate("Transparent")
 	LFGStatus:SetFrameStrata("HIGH")
 	
-	MiniMapInstanceDifficulty:ClearAllPoints()
-	MiniMapInstanceDifficulty:SetParent(Minimap)
-	MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
-
-	GuildInstanceDifficulty:ClearAllPoints()
-	GuildInstanceDifficulty:SetParent(Minimap)
-	GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
-	
 	local function UpdateLFGTooltip()
 		local position = Minimap:GetPoint()
 		LFGStatus:ClearAllPoints()
@@ -94,7 +91,7 @@ function Maps:StyleMinimap()
 		if (button == "RightButton") then
 			ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, Map, 0, D.Scale(-3))
 		elseif (button == "MiddleButton") then
-			EasyMenu(Miscellaneous.MicroMenu, Miscellaneous.MicroMenuFrame, "cursor", D.Scale(-160), 0, "MENU", 2)
+			EasyMenu(Miscellaneous.MicroMenu.Buttons, Miscellaneous.MicroMenu, "cursor", D.Scale(-160), 0, "MENU", 2)
 		else
 			Minimap_OnClick(self)
 		end

@@ -3,8 +3,9 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Panels = D["Panels"]
 local Layout = C["unitframes"].Layout
-local Texture = C["medias"].Normal
 local Font = D.GetFont(C["unitframes"].Font)
+local HealthTexture = D.GetTexture(C["unitframes"].HealthTexture)
+local PowerTexture = D.GetTexture(C["unitframes"].PowerTexture)
 
 function DuffedUIUnitFrames:Target()
 	self:RegisterForClicks("AnyUp")
@@ -41,7 +42,7 @@ function DuffedUIUnitFrames:Target()
 		Health:SetPoint("TOPLEFT")
 		Health:SetPoint("TOPRIGHT")
 	end
-	Health:SetStatusBarTexture(Texture)
+	Health:SetStatusBarTexture(HealthTexture)
 
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
@@ -107,11 +108,11 @@ function DuffedUIUnitFrames:Target()
 		Power:SetFrameLevel(Health:GetFrameLevel() + 2)
 		Power:SetFrameStrata("BACKGROUND")
 	end
-	Power:SetStatusBarTexture(Texture)
+	Power:SetStatusBarTexture(PowerTexture)
 
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints()
-	Power.Background:SetTexture(Texture)
+	Power.Background:SetTexture(.1, .1, .1)
 	Power.Background.multiplier = 0.3
 
 	-- Border for PowerBar
@@ -147,6 +148,7 @@ function DuffedUIUnitFrames:Target()
 		Power.colorPower = true
 	end
 	Power.colorDisconnected = true
+	if (C["unitframes"].Smooth) then Power.Smooth = true end
 
 	Power.PostUpdate = DuffedUIUnitFrames.PostUpdatePower
 

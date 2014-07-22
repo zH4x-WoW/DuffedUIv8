@@ -11,6 +11,7 @@
 	<Script file="inventory\bags.lua"/>
 	<Script file="inventory\loot.lua"/>
 	<Script file="inventory\merchant.lua"/>
+	<Script file="inventory\bagfilter.lua"/>
 
 	<!-- Action Bars -->
 	<Script file="actionbars\core.lua"/>
@@ -43,6 +44,9 @@
 	<Script file="misc\error.lua"/>
 	<Script file="misc\invite.lua"/>
 	<Script file="misc\vehicle.lua"/>
+	<Script file="misc\objectivetracker.lua"/>
+	<Script file="misc\losscontrol.lua"/>
+	<Script file="misc\staticpopup.lua"/>
 	
 	<!-- maps -->
 	<Script file="maps\core.lua"/>
@@ -78,6 +82,9 @@
 	<Script file="datatext\elements\talent.lua"/>
 	<Script file="datatext\elements\time.lua"/>
 	<Script file="datatext\elements\battleground.lua"/>
+	<Script file="datatext\elements\leech.lua"/>
+	<Script file="datatext\elements\multistrike.lua"/>
+	<Script file="datatext\elements\versatility.lua"/>
 
 	<!-- chat -->
 	<Script file="chat\chatframes.lua"/>
@@ -118,10 +125,6 @@
 	
 	<!-- nameplates -->
 	<Script file="nameplates\nameplates.lua"/>
-	
-	<!-- quests -->
-	<Script file="quests\core.lua"/>
-	<Script file="quests\watchframe.lua"/>
 	
 	<!-- Pet Battles -->
 	<Script file="petbattles\core.lua"/>

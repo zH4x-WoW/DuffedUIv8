@@ -7,6 +7,7 @@ if (Class ~= "DRUID") then return end
 
 function DuffedUIUnitFrames:AddDruidFeatures()
 	local DruidMana = CreateFrame("StatusBar", nil, self.Health)
+	local EclipseBar = CreateFrame("Frame", nil, self)
 	local Color = RAID_CLASS_COLORS[Class]
 	local NumPoints = MAX_COMBO_POINTS
 	local Texture = C["medias"].Normal
@@ -70,10 +71,38 @@ function DuffedUIUnitFrames:AddDruidFeatures()
 		
 		TotemBar[4]:Hide()
 	end
+	
+	EclipseBar:Point("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
+	EclipseBar:SetFrameStrata("MEDIUM")
+	EclipseBar:SetFrameLevel(8)
+	EclipseBar:Size(200, 8)
+	EclipseBar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
+	EclipseBar:SetBackdropColor(0, 0, 0)
+	EclipseBar:SetBackdropBorderColor(0, 0, 0, 0)
+
+	EclipseBar.LunarBar = CreateFrame("StatusBar", nil, EclipseBar)
+	EclipseBar.LunarBar:SetPoint("LEFT", EclipseBar, "LEFT", 0, 0)
+	EclipseBar.LunarBar:SetSize(EclipseBar:GetWidth(), EclipseBar:GetHeight())
+	EclipseBar.LunarBar:SetStatusBarTexture(C["medias"].Normal)
+	EclipseBar.LunarBar:SetStatusBarColor(.50, .52, .70)
+
+	EclipseBar.SolarBar = CreateFrame("StatusBar", nil, EclipseBar)
+	EclipseBar.SolarBar:SetPoint("LEFT", EclipseBar.LunarBar:GetStatusBarTexture(), "RIGHT", 0, 0)
+	EclipseBar.SolarBar:SetSize(EclipseBar:GetWidth(), EclipseBar:GetHeight())
+	EclipseBar.SolarBar:SetStatusBarTexture(C["medias"].Normal)
+	EclipseBar.SolarBar:SetStatusBarColor(.80, .82,  .60)
+
+	EclipseBar.Text = EclipseBar:CreateFontString(nil, "OVERLAY")
+	EclipseBar.Text:SetPoint("TOP", EclipseBar)
+	EclipseBar.Text:SetPoint("BOTTOM", EclipseBar)
+	EclipseBar.Text:SetFont(C["medias"].Font, 12)
+
+	EclipseBar.PostUpdatePower = DuffedUIUnitFrames.EclipseDirection
 
 	-- Register
 	self.DruidMana = DruidMana
 	self.DruidMana.bg = DruidMana.Background
+	self.EclipseBar = EclipseBar
 	
 	local Backdrop = {
 		bgFile = Blank, 

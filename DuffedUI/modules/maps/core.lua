@@ -19,8 +19,8 @@ Maps:SetScript("OnEvent", function(self, event, addon)
 		self:AddZoneAndCoords()
 		
 		-- Worldmap
-		self:SetWorldmap()
-		self:SkinWorldmap()
+		--self:SetWorldmap()
+		--self:SkinWorldmap()
 	end
 end)
 

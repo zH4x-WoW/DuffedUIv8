@@ -154,10 +154,8 @@ local function Enable(self)
 		self:RegisterEvent("UNIT_POWER", Path)
 		self:RegisterEvent("UNIT_DISPLAYPOWER", Path)
 
-		-- why the fuck does PLAYER_TALENT_UPDATE doesnt trigger on initial login if we register to: self or self.PluginName
-		wsb.Visibility = CreateFrame("Frame", nil, wsb)
-		wsb.Visibility:RegisterEvent("PLAYER_TALENT_UPDATE")
-		wsb.Visibility:SetScript("OnEvent", function(frame, event, unit) Visibility(self, event, unit) end)
+		self:RegisterEvent("PLAYER_TALENT_UPDATE", Visibility)
+		self:RegisterEvent("PLAYER_ENTERING_WORLD", Visibility)
 
 		for i = 1, 4 do
 			local Point = wsb[i]

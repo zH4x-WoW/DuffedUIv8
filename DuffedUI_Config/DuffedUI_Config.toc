@@ -1,7 +1,8 @@
-## Interface: 50400
+## Interface: 60000
 ## Title: |cffC41F3BDuffedUI|r Config
-## Notes: In game Config GUI for DuffedUI!
-## Author: Tukz, Hydra
+## Version: 8.0001
+## Notes: DuffedUI Config UI
+## Author: Hydra
 ## SavedVariables: DuffedUIConfigShared
 ## SavedVariablesPerCharacter: DuffedUIConfigNotShared
 ## RequiredDeps: DuffedUI

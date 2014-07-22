@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack()
+--[[local D, C, L = select(2, ...):unpack()
 if C["plugins"].QuestLevel ~= true then return end
 
 local questtags, tags = {}, {
@@ -97,4 +97,4 @@ local function GossipUpdate()
 	helper(true, GetGossipActiveQuests())
 end
 hooksecurefunc("GossipFrameUpdate", GossipUpdate)
-if GossipFrame:IsShown() then GossipUpdate() end
+if GossipFrame:IsShown() then GossipUpdate() end]]--

@@ -228,7 +228,12 @@ local OnFinishedWidth = function(self)
 	self:AnimCallback("width", self.EndWidth, self.WidthSpeed)
 end
 
-local OnUpdateWidth = function(self)
+local OnUpdateWidth = function(self) -- BROKEN, SEE NOTE BELOW
+	-- This is tainting when we /rl and when we are in combat
+	if InCombatLockdown() then
+		return
+	end
+
 	local Width = GetWidth(self)
 	
 	if (self.WidthType == "Negative") then

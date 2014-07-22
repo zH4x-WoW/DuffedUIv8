@@ -3,6 +3,8 @@ local D, C, L = select(2, ...):unpack()
 local DuffedUIUnitFrames = D["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 local Font = D.GetFont(C["unitframes"].Font)
+local HealthTexture = D.GetTexture(C["party"].HealthTexture)
+local PowerTexture = D.GetTexture(C["party"].PowerTexture)
 
 function DuffedUIUnitFrames:Party()
 	self:RegisterForClicks("AnyUp")
@@ -13,7 +15,7 @@ function DuffedUIUnitFrames:Party()
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
 	Health:Height(self:GetHeight() - 10)
-	Health:SetStatusBarTexture(C["medias"].Normal)
+	Health:SetStatusBarTexture(HealthTexture)
 
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
@@ -47,12 +49,12 @@ function DuffedUIUnitFrames:Party()
 	Power:Height(3)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 75, 0)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", -9, -3)
-	Power:SetStatusBarTexture(C["medias"].Normal)
+	Power:SetStatusBarTexture(PowerTexture)
 	Power:SetFrameLevel(Health:GetFrameLevel() + 2)
 
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints(Power)
-	Power.Background:SetTexture(C["medias"].Normal)
+	Power.Background:SetTexture(.1, .1, .1)
 	Power.Background.multiplier = 0.3
 
 	-- Border for Power
@@ -73,7 +75,7 @@ function DuffedUIUnitFrames:Party()
 	
 	local Role = Health:CreateFontString(nil, "OVERLAY")
 	Role:SetPoint("RIGHT", Health, "RIGHT", -4, 0)
-	Role:SetFontObject(Font)
+	Role:SetFont(C["medias"].Font, 12, "THINOUTLINE")
 	
 	if (C["party"].Portrait) then
 		local Portrait = CreateFrame("Frame", nil, self)

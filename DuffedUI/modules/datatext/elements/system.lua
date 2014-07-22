@@ -8,8 +8,8 @@ local int = 1
 local tslu = 1
 local Mult = 10^1
 local MemoryTable = {}
-local KilobyteString = "%d ".. DataText.ValueColor .."kb".."|r"
-local MegabyteString = "%.2f ".. DataText.ValueColor .."mb".."|r"
+local KilobyteString = "%d ".. DataText.NameColor .."kb".."|r"
+local MegabyteString = "%.2f ".. DataText.NameColor .."mb".."|r"
 local bandwidthString = "%.2f Mbps"
 local percentageString = "%.2f%%"
 local GetNetStats = GetNetStats
@@ -135,7 +135,7 @@ local Enable = function(self)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnLeave", OnLeave)
 	self:SetScript("OnMouseUp", OnMouseUp)
-	self:Update(1)
+	self:Update(10)
 end
 
 local Disable = function(self)

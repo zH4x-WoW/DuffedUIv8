@@ -4,8 +4,9 @@ if (Locale ~= "koKR") then return end
 -- Some options aren't CPU friendly, like smooth bars and animations, let the users know.
 local Performance = "\n|cffFF0000Disabling this may increase performance|r"
 local PerformanceSlight = "\n|cffFF0000Disabling this may slightly increase performance|r"
+local RestoreDefault = "\n|cffFFFF00Right-click to restore to default|r" -- For color pickers, Not yet implemented
 
-DuffedUIConfig["koKR"] = {
+DuffedUIConfig["zhTW"] = {
 	["general"] = {
 		["AutoScale"] = { --
 			["Name"] = "Auto Scale",
@@ -21,11 +22,11 @@ DuffedUIConfig["koKR"] = {
 		},
 		["BackdropColor"] = { --
 			["Name"] = "Backdrop Color",
-			["Desc"] = "Set the backdrop color for all DuffedUI frames",
+			["Desc"] = "Set the backdrop color for all DuffedUI frames"..RestoreDefault,
 		},
 		["BorderColor"] = { --
 			["Name"] = "Border Color",
-			["Desc"] = "Set the border color for all DuffedUI frames",
+			["Desc"] = "Set the border color for all DuffedUI frames"..RestoreDefault,
 		},
 		["InOut"] = { --
 			["Name"] = "Border Style",
@@ -203,6 +204,10 @@ DuffedUIConfig["koKR"] = {
 			["Name"] = "Bag font",
 			["Desc"] = "Set a font for bags",
 		},
+		["BagFilter"] = {
+			["Name"] = "Enable Bag filter",
+			["Desc"] = "Automatically deletes useless items from your bags when looted",
+		},
 	},
 	
 	["chat"] = {
@@ -216,7 +221,7 @@ DuffedUIConfig["koKR"] = {
 		},
 		["LinkColor"] = {
 			["Name"] = "Link Color",
-			["Desc"] = "Set a color to display links in",
+			["Desc"] = "Set a color to display links in"..RestoreDefault,
 		},
 		["LinkBrackets"] = {
 			["Name"] = "Link Brackets",
@@ -238,6 +243,10 @@ DuffedUIConfig["koKR"] = {
 			["Name"] = "Text justify",
 			["Desc"] = "needs description",
 		},
+		["TabFont"] = {
+			["Name"] = "Chat Tab Font",
+			["Desc"] = "Set a font to be used by chat tabs",
+		},
 	},
 	
 	["cooldowns"] = {
@@ -250,6 +259,32 @@ DuffedUIConfig["koKR"] = {
 			["Desc"] = "Display cooldown time in red below 8 seconds.",
 		},
 	},
+	
+	["datatexts"] = {
+		["Battleground"] = {
+			["Name"] = "Enable Battleground",
+			["Desc"] = "Enable data texts displaying battleground information",
+		},
+
+		["LocalTime"] = {
+			["Name"] = "Local Time",
+			["Desc"] = "Use local time in the Time data text, rather than realm time",
+		},
+
+		["NameColor"] = {
+			["Name"] = "Label Color",
+			["Desc"] = "Set a color for the label of a data text, usually the name"..RestoreDefault,
+		},
+
+		["ValueColor"] = {
+			["Name"] = "Value Color",
+			["Desc"] = "Set a color for the value of a data text, usually a number"..RestoreDefault,
+ 		},
+		["Font"] = {
+			["Name"] = "Data Text Font",
+			["Desc"] = "Set a font to be used by the data texts",
+		},
+ 	},
 	
 	["merchant"] = {
 		["AutoSellGrays"] = {
@@ -322,6 +357,10 @@ DuffedUIConfig["koKR"] = {
 			["Name"] = "Non-Target Alpha",
 			["Desc"] = "The alpha of NamePlates that we're not targetting",
 		},
+		["Texture"] = {
+			["Name"] = "NamePlates Texture",
+			["Desc"] = "Set a texture for nameplates",
+		},
 	},
 	
 	["party"] = {
@@ -342,8 +381,16 @@ DuffedUIConfig["koKR"] = {
 			["Desc"] = "needs description",
 		},
 		["Font"] = {
-			["Name"] = "Party frame font",
+			["Name"] = "Party Frame Font",
 			["Desc"] = "Set a font for the party frame",
+		},
+		["PowerTexture"] = {
+			["Name"] = "Power Bar Texture",
+			["Desc"] = "Set a texture for power bars",
+		},
+		["HealthTexture"] = {
+			["Name"] = "Health Bar Texture",
+			["Desc"] = "Set a texture for health bars",
 		},
 	},
 	
@@ -397,8 +444,16 @@ DuffedUIConfig["koKR"] = {
 			["Desc"] = "needs description",
 		},
 		["Font"] = {
-			["Name"] = "Raid font",
+			["Name"] = "Raid Frame Font",
 			["Desc"] = "Set a font for the raid frame",
+		},
+		["PowerTexture"] = {
+			["Name"] = "Power Bar Texture",
+			["Desc"] = "Set a texture for power bars",
+		},
+		["HealthTexture"] = {
+			["Name"] = "Health Bar Texture",
+			["Desc"] = "Set a texture for health bars",
 		},
 	},
 	
@@ -410,6 +465,10 @@ DuffedUIConfig["koKR"] = {
 		["HideOnUnitFrames"] = {
 			["Name"] = "Hide on Unit Frames",
 			["Desc"] = "Don't display Tooltips on unit frames",
+		},
+		["UnitHealthText"] = {
+			["Name"] = "Display health text",
+			["Desc"] = "Display health text on the tooltip health bar",
 		},
 		["EnableCaster"] = {
 			["Name"] = "Display Caster",
@@ -487,8 +546,16 @@ DuffedUIConfig["koKR"] = {
 			["Desc"] = "needs description",
 		},
 		["Font"] = {
-			["Name"] = "Unitframe font",
-			["Desc"] = "Set a font for unitframes",
+			["Name"] = "Unit Frame Font",
+			["Desc"] = "Set a font for unit frames",
+		},
+		["PowerTexture"] = {
+			["Name"] = "Power Bar Texture",
+			["Desc"] = "Set a texture for power bars",
+		},
+		["HealthTexture"] = {
+			["Name"] = "Health Bar Texture",
+			["Desc"] = "Set a texture for health bars",
 		},
 	},
 	

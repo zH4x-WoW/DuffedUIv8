@@ -1,7 +1,7 @@
 ﻿local D, C, L = select(2, ...):unpack()
 
 ------------------
-L.DataText = {} -- 
+L.DataText = {} --
 ------------------
 
 -- There's globalstrings for most of these datatexts btw, We shouldn't need to localize most of them
@@ -111,6 +111,59 @@ L.DataText.Slots = {
 	[11] = {18, "Ranged", 1000}
 }
 
+--------------------
+L.ActionBars = {} --
+--------------------
+
+L.ActionBars.ActionButton1 = "Main Bar: Bottom Center BottomRow Action Button 1"
+L.ActionBars.ActionButton2 = "Main Bar: Bottom Center BottomRow Action Button 2"
+L.ActionBars.ActionButton3 = "Main Bar: Bottom Center BottomRow Action Button 3"
+L.ActionBars.ActionButton4 = "Main Bar: Bottom Center BottomRow Action Button 4"
+L.ActionBars.ActionButton5 = "Main Bar: Bottom Center BottomRow Action Button 5"
+L.ActionBars.ActionButton6 = "Main Bar: Bottom Center BottomRow Action Button 6"
+L.ActionBars.ActionButton7 = "Main Bar: Bottom Center BottomRow Action Button 7"
+L.ActionBars.ActionButton8 = "Main Bar: Bottom Center BottomRow Action Button 8"
+L.ActionBars.ActionButton9 = "Main Bar: Bottom Center BottomRow Action Button 9"
+L.ActionBars.ActionButton10 = "Main Bar: Bottom Center BottomRow Action Button 10"
+L.ActionBars.ActionButton11 = "Main Bar: Bottom Center BottomRow Action Button 11"
+L.ActionBars.ActionButton12 = "Main Bar: Bottom Center BottomRow Action Button 12"
+L.ActionBars.MultiActionBar1Button1 = "BottomLeft BottomRow Action Button 6"
+L.ActionBars.MultiActionBar1Button2 = "BottomLeft BottomRow Action Button 5"
+L.ActionBars.MultiActionBar1Button3 = "BottomLeft BottomRow Action Button 4"
+L.ActionBars.MultiActionBar1Button4 = "BottomLeft BottomRow Action Button 3"
+L.ActionBars.MultiActionBar1Button5 = "BottomLeft BottomRow Action Button 2"
+L.ActionBars.MultiActionBar1Button6 = "BottomLeft BottomRow Action Button 1"
+L.ActionBars.MultiActionBar1Button7 = "BottomLeft TopRow Action Button 6"
+L.ActionBars.MultiActionBar1Button8 = "BottomLeft TopRow Action Button 5"
+L.ActionBars.MultiActionBar1Button9 = "BottomLeft TopRow Action Button 4"
+L.ActionBars.MultiActionBar1Button10 = "BottomLeft TopRow Action Button 3"
+L.ActionBars.MultiActionBar1Button11 = "BottomLeft TopRow Action Button 2"
+L.ActionBars.MultiActionBar1Button12 = "BottomLeft TopRow Action Button 1"
+L.ActionBars.MultiActionBar2Button1 = "BottomRight BottomRow Action Button 1"
+L.ActionBars.MultiActionBar2Button2 = "BottomRight BottomRow Action Button 2"
+L.ActionBars.MultiActionBar2Button3 = "BottomRight BottomRow Action Button 3"
+L.ActionBars.MultiActionBar2Button4 = "BottomRight BottomRow Action Button 4"
+L.ActionBars.MultiActionBar2Button5 = "BottomRight BottomRow Action Button 5"
+L.ActionBars.MultiActionBar2Button6 = "BottomRight BottomRow Action Button 6"
+L.ActionBars.MultiActionBar2Button7 = "BottomRight TopRow Action Button 1"
+L.ActionBars.MultiActionBar2Button8 = "BottomRight TopRow Action Button 2"
+L.ActionBars.MultiActionBar2Button9 = "BottomRight TopRow Action Button 3"
+L.ActionBars.MultiActionBar2Button10 = "BottomRight TopRow Action Button 4"
+L.ActionBars.MultiActionBar2Button11 = "BottomRight TopRow Action Button 5"
+L.ActionBars.MultiActionBar2Button12 = "BottomRight TopRow Action Button 6"
+L.ActionBars.MultiActionBar4Button1 = "Bottom Center TopRow Action Button 1"
+L.ActionBars.MultiActionBar4Button2 = "Bottom Center TopRow Action Button 2"
+L.ActionBars.MultiActionBar4Button3 = "Bottom Center TopRow Action Button 3"
+L.ActionBars.MultiActionBar4Button4 = "Bottom Center TopRow Action Button 4"
+L.ActionBars.MultiActionBar4Button5 = "Bottom Center TopRow Action Button 5"
+L.ActionBars.MultiActionBar4Button6 = "Bottom Center TopRow Action Button 6"
+L.ActionBars.MultiActionBar4Button7 = "Bottom Center TopRow Action Button 7"
+L.ActionBars.MultiActionBar4Button8 = "Bottom Center TopRow Action Button 8"
+L.ActionBars.MultiActionBar4Button9 = "Bottom Center TopRow Action Button 9"
+L.ActionBars.MultiActionBar4Button10 = "Bottom Center TopRow Action Button 10"
+L.ActionBars.MultiActionBar4Button11 = "Bottom Center TopRow Action Button 11"
+L.ActionBars.MultiActionBar4Button12 = "Bottom Center TopRow Action Button 12"
+
 -------------------
 L.Worldboss = {} --
 -------------------
@@ -193,6 +246,8 @@ L.UnitFrames = {} --
 --------------------
 
 L.UnitFrames.Ghost = "Ghost"
+L.UnitFrames.Wrath = "Wrath"
+L.UnitFrames.Starfire = "Starfire"
 
 ----------------
 L.Movers = {} --
@@ -212,7 +267,7 @@ L.Install = {} --
 
 L.Install.Tutorial = "Tutorial"
 L.Install.Install = "Install"
-L.Install.InstallStep0 = "Thank you for choosing DuffedUI!|n|nYou will be guided through the installation process in a few simple steps.  At each step, you can decide whether or not you want to apply or skip the presented settings. You are also given the possibility to be shown a brief tutorial on some of the features of DuffedUI. Press the 'Tutorial' button to be guided through this small introduction, or press 'Install' to skip this step."
+L.Install.InstallStep0 = "Thank you for choosing DuffedUI!|n|nYou will be guided through the installation process in a few simple steps.  At each step, you can decide whether or not you want to apply or skip the presented settings. You are also given the possibility to be shown a brief tutorial on some of the features of DuffedUI. Press the 'Tutorial' button to be guided through this small introduction, or press 'Install' to skip this step.|n|n|cffff0000ATTENTION! By clicking 'Install / Reset', it will immediately erase all your settings!|r"L.Install.InstallStep1 = "The first step applies the essential settings. This is |cffff0000recommended|r for any user, unless you want to apply only a specific part of the settings.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
 L.Install.InstallStep1 = "The first step applies the essential settings. This is |cffff0000recommended|r for any user, unless you want to apply only a specific part of the settings.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
 L.Install.InstallStep2 = "The second step applies the correct chat setup. If you are a new user, this step is recommended.  If you are an existing user, you may want to skip this step.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
 L.Install.InstallStep3 = "The third and final step applies the default frame positions. This step is |cffff0000recommended|r for new users.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
@@ -225,6 +280,7 @@ L.Help = {} --
 L.Help.Title = "DuffedUI Commands:"
 L.Help.Datatexts = "'|cffC41F3Bdt|r' or '|cffC41F3Bdatatext|r' : Enable or disable datatext configuration."
 L.Help.Install = "'|cffC41F3Binstall|r' or '|cffC41F3Breset|r' : Install or reset DuffedUI to default settings."
+L.Help.Config = "'|cff00ff00config|r' : Display in-game configuration window."
 L.Help.Outdated = "Your version of DuffedUI is out of date. You can download the latest version from www.duffed.net"
 L.Help.NoError = "No error yet."
 L.Help.AutoInviteEnable = "Autoinvite ON: invite"

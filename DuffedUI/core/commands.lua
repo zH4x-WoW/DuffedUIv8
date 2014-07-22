@@ -18,8 +18,8 @@ D.SlashHandler = function(cmd)
 		local DataText = D["DataTexts"]
 		
 		if arg2 then
-			if (arg2 == "reset") then
-				DataText:Reset()
+			if (arg2 == "clean") then
+				DataText:Clean()
 			elseif (arg2 == "resetgold") then
 				DataText:ResetGold()
 			end
@@ -35,6 +35,7 @@ D.SlashHandler = function(cmd)
 		print("|cffC41F3B".. L.Help.Title .."|r")
 		print(L.Help.Install)
 		print(L.Help.Datatexts)
+		print(L.Help.Config)
 		print(" ")
 	elseif (arg1 == "config") then
 		local Config = DuffedUIConfig

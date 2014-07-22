@@ -1,7 +1,5 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C["actionbars"].Enable) then return end
-
 local DuffedUIActionBars = D["ActionBars"]
 
 function DuffedUIActionBars:SetUpExtraActionButton()

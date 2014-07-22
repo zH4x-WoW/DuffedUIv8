@@ -1,9 +1,5 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C["actionbars"].Enable) then
-	return
-end
-
 local _G = _G
 local DuffedUIActionBars = D["ActionBars"]
 local Panels = D["Panels"]
@@ -12,6 +8,8 @@ local Spacing = C["actionbars"].ButtonSpacing
 
 function DuffedUIActionBars:CreateStanceBar()
 	local Bar = D.Panels.StanceBar
+	
+	if (not C["actionbars"].ShapeShift) then return end
 	
 	Bar:RegisterEvent("PLAYER_LOGIN")
 	Bar:RegisterEvent("PLAYER_ENTERING_WORLD")

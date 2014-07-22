@@ -4,6 +4,8 @@ local Miscellaneous = D["Miscellaneous"]
 local GameMenu = CreateFrame("Frame")
 local Menu = GameMenuFrame
 local Header = GameMenuFrameHeader
+local Logout = GameMenuButtonLogout
+local Addons = GameMenuButtonAddons
 
 GameMenu.Buttons = {
 	"Options",
@@ -19,58 +21,60 @@ GameMenu.Buttons = {
 	"MacOptions",
 	"Help",
 	"Store",
+	"WhatsNew",
+	"Addons"
 }
 
-function GameMenu:Enable()
-	local menu = GameMenuFrame
-	local menuy = menu:GetHeight()
-	local quit = GameMenuButtonQuit
-	local continue = GameMenuButtonContinue
-	local continuex = continue:GetWidth()
-	local continuey = continue:GetHeight()
-	local interface = GameMenuButtonUIOptions
-	local keybinds = GameMenuButtonKeybindings
-	local Config = DuffedUIConfig
+function GameMenu:AddHooks()
+	Menu:HookScript("OnShow", function(self)
+		self:SetHeight(self:GetHeight() + Addons:GetHeight() - 4)
+	end)
+end
 
-	menu:SetHeight(menuy + continuey)
-
-	local button = CreateFrame("BUTTON", "GameMenuDuffedUIButtonOptions", menu, "GameMenuButtonTemplate")
-	button:SetSize(continuex, continuey)
-	button:Point("TOP", interface, "BOTTOM", 0, -1)
-	button:SetText("DuffedUI")
-
-	button:SkinButton()
-
-	button:SetScript("OnClick", function(self)
+function GameMenu:EnableDuffedUIConfig()
+	local DuffedUI = CreateFrame("Button", nil, Menu, "GameMenuButtonTemplate")
+	DuffedUI:Size(Logout:GetWidth(), Logout:GetHeight())
+	DuffedUI:SkinButton()
+	DuffedUI:Point("TOPLEFT", GameMenuButtonAddons, "BOTTOMLEFT", 0, -2)
+	DuffedUI:SetText("DuffedUI")
+	DuffedUI:SetScript("OnClick", function(self)
 		if (not DuffedUIConfigFrame) then
-			Config:CreateConfigWindow()
+			DuffedUIConfig:CreateConfigWindow()
 		end
 
 		if DuffedUIConfigFrame:IsVisible() then
 			DuffedUIConfigFrame:Hide()
 		else
 			DuffedUIConfigFrame:Show()
-			HideUIPanel(menu)
 		end
+
+		HideUIPanel(Menu)
 	end)
-	
+
+	Logout:ClearAllPoints()
+	Logout:Point("TOPLEFT", DuffedUI, "BOTTOMLEFT", 0, -2)
+
+	self:AddHooks()
+	self.DuffedUI = DuffedUI
+end
+
+function GameMenu:Enable()
 	Header:SetTexture("")
 	Header:ClearAllPoints()
 	Header:SetPoint("TOP", Menu, 0, 7)
 
 	Menu:SetTemplate("Transparent")
 	Menu:CreateShadow()
-
+	
 	for i = 1, #self.Buttons do
 		local Button = _G["GameMenuButton"..self.Buttons[i]]
 		if (Button) then
 			Button:SkinButton()
 		end
 	end
-	if GameMenuFrame_UpdateVisibleButtons then
-		hooksecurefunc("GameMenuFrame_UpdateVisibleButtons", function()
-			GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + GameMenuButtonStore:GetHeight() + 25)
-		end)
+
+	if DuffedUIConfig then
+		self:EnableDuffedUIConfig()
 	end
 end
 

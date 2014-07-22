@@ -615,6 +615,16 @@ function DuffedUIUnitFrames:CreateAuraWatch(frame)
 	frame.AuraWatch = Auras
 end
 
+function DuffedUIUnitFrames:EclipseDirection()
+	if (GetEclipseDirection() == "sun") then
+			self.Text:SetText("|cffE5994C"..L.UnitFrames.Starfire.."|r")
+	elseif (GetEclipseDirection() == "moon") then
+			self.Text:SetText("|cff4478BC"..L.UnitFrames.Wrath.."|r")
+	else
+			self.Text:SetText("")
+	end
+end
+
 -- Class buffs { spell ID, position [, {r,g,b,a}][, anyUnit] }
 -- It use oUF_AuraWatch lib, for grid indicator
 if C["raid"].AuraWatch then

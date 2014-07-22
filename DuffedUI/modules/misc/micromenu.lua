@@ -1,8 +1,8 @@
 local D, C, L = select(2, ...):unpack()
 local Miscellaneous = D["Miscellaneous"]
-local MenuFrame = CreateFrame("Frame", "DuffedUIMicroButtonsDropDown", UIParent, "UIDropDownMenuTemplate")
+local MicroMenu = CreateFrame("Frame", "DuffedUIMicroButtonsDropDown", UIParent, "UIDropDownMenuTemplate")
 
-local MicroMenu = {
+MicroMenu.Buttons = {
 	{text = CHARACTER_BUTTON,
 	func = function() ToggleCharacter("PaperDollFrame") end},
 	{text = SPELLBOOK_ABILITIES_BUTTON,
@@ -23,16 +23,8 @@ local MicroMenu = {
 	func = function() TogglePetJournal() end},
 	{text = SOCIAL_BUTTON,
 	func = function() ToggleFriendsFrame(1) end},
-	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVE,
+	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVE.." / "..COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVP,
 	func = function() PVEFrame_ToggleFrame() end},
-	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVP,
-	func = function()
-		if (not PVPUIFrame) then
-			PVP_LoadUI()
-		end
-
-		PVPUIFrame_ToggleFrame()
-	end},
 	{text = ACHIEVEMENTS_GUILD_TAB,
 	func = function()
 		if IsInGuild() then
@@ -60,16 +52,16 @@ local MicroMenu = {
 		Calendar_Toggle()
 	end},
 	{text = ENCOUNTER_JOURNAL, func = function() ToggleEncounterJournal() end},
+	{text = GARRISON_LANDING_PAGE_TITLE, func = function() GarrisonLandingPageMinimapButton_OnClick() end},
 }
 
-local TaintFix = CreateFrame("Frame")
+--[[local TaintFix = CreateFrame("Frame")
 TaintFix:RegisterEvent("ADDON_LOADED")
 TaintFix:SetScript("OnEvent", function(self, event, addon)
 	if (addon ~= "DuffedUI") then return end
 
 	ToggleFrame(SpellBookFrame)
 	PetJournal_LoadUI()
-end)
+end)]]--
 
 Miscellaneous.MicroMenu = MicroMenu
-Miscellaneous.MicroMenuFrame = MenuFrame

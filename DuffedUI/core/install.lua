@@ -4,20 +4,24 @@ local Install = CreateFrame("Frame", nil, UIParent)
 Install.MaxStepNumber = 4
 Install.CurrentStep = 0
 Install.Width = 500
-Install.Height = 150
+Install.Height = 200
 
-function Install:Requirement()
+function Install:ResetData()
 	local ActionBars = C["actionbars"].Enable
 	local Chat = D["Chat"]
-	local IsInstalled = DuffedUIDataPerChar.InstallDone
+	local DataTexts = D["DataTexts"]
+
+ 	if (DuffedUIConfigNotShared) then
+		DuffedUIConfigNotShared = {}
+	end
+
+	if (DuffedUIDataPerChar) then
+		DuffedUIDataPerChar = {}
+	end
 
 	if ActionBars then
 		SetActionBarToggles(1, 1, 1, 1)
-	end
-	
-	if not IsInstalled and Chat then
-		Chat:SetDefaultChatFramesPositions()
-	end
+ 	end
 end
 
 function Install:Step1()
@@ -54,6 +58,7 @@ function Install:Step2()
 	
 	if (not Chat) then return end
 	Chat:Install()
+	Chat:SetDefaultChatFramesPositions()
 end
 
 function Install:Step3()
@@ -85,8 +90,8 @@ function Install:PrintStep(number)
 	if (number == 0) then
 		self.LeftButton.Text:SetText(L.Install.Tutorial)
 		self.LeftButton:SetScript("OnClick", function() print("tuto") end)
-		self.RightButton.Text:SetText(L.Install.Install)
-		self.RightButton:SetScript("OnClick", function() self.PrintStep(self, self.CurrentStep + 1) end)
+		self.RightButton.Text:SetText(L.Install.Install.." / "..RESET)
+		self.RightButton:SetScript("OnClick", function() self.ResetData() self.PrintStep(self, self.CurrentStep + 1) end)
 		self.CloseButton:Show()
 	else
 		self.LeftButton:SetScript("OnClick", function() self.PrintStep(self, self.CurrentStep - 1) end)
@@ -174,8 +179,8 @@ function Install:Launch()
 	self.RightButton:CreateShadow()
 	self.RightButton:FontString("Text", C["medias"].Font, 12)
 	self.RightButton.Text:SetPoint("CENTER")
-	self.RightButton.Text:SetText(L.Install.Install)
-	self.RightButton:SetScript("OnClick", function() self.PrintStep(self, self.CurrentStep + 1) end)
+	self.RightButton.Text:SetText(L.Install.Install.." / "..RESET)
+	self.RightButton:SetScript("OnClick", function() self.ResetData() self.PrintStep(self, self.CurrentStep + 1) end)
 	
 	self.MiddleButton = CreateFrame("Button", nil, self)
 	self.MiddleButton:Point("TOPLEFT", self.LeftButton, "TOPRIGHT", 4, 0)
@@ -206,7 +211,6 @@ function Install:Launch()
 	self.Text:SetText(L.Install.InstallStep0)
 	
 	self:SetAllPoints(UIParent)
-	self:Requirement() 
 end
 
 Install:RegisterEvent("ADDON_LOADED")

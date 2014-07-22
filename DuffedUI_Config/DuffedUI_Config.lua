@@ -2,22 +2,45 @@ local DuffedUIConfig = CreateFrame("Frame", "DuffedUIConfig", UIParent)
 DuffedUIConfig.Functions = {}
 local GroupPages = {}
 local Locale = GetLocale()
+local Colors = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
 
 function DuffedUIConfig:SetOption(group, option, value)
-	local C = DuffedUIConfigShared
+	local C = DuffedUIConfigNotShared
 	
-	C[group][option] = value
+	C[group][option] = value -- Save our setting
 	
-	if (not self.Functions[group]) then return end
+	if (not self.Functions[group]) then
+		return
+	end
 	
-	if self.Functions[group][option] then self.Functions[group][option](value) end
+	if self.Functions[group][option] then
+		self.Functions[group][option](value) -- Run the associated function
+	end
 end
 
 function DuffedUIConfig:SetCallback(group, option, func)
-	if (not self.Functions[group]) then self.Functions[group] = {} end
+	if (not self.Functions[group]) then
+		self.Functions[group] = {}
+	end
 	
 	self.Functions[group][option] = func -- Set a function to call
 end
+
+DuffedUIConfig.ColorDefaults = {
+	["Chat"] = {
+		["LinkColor"] = {0.08, 1, 0.36},
+	},
+
+	["DataTexts"] = {
+		["NameColor"] = {1, 1, 1},
+		["ValueColor"] = {1, 1, 1},
+	},
+
+	["General"] = {
+		["BackdropColor"] = {.05,.05,.05},
+		["BorderColor"] = {.125, .125, .125},
+	},
+}
 
 -- Filter unwanted groups
 local Filter = {
@@ -54,7 +77,9 @@ local Credits = {
 local GetOrderedIndex = function(t)
     local OrderedIndex = {}
 
-    for key in pairs(t) do table.insert(OrderedIndex, key) end
+    for key in pairs(t) do
+        table.insert(OrderedIndex, key)
+    end
 
     table.sort(OrderedIndex)
 
@@ -75,34 +100,24 @@ local OrderedNext = function(t, state)
 
     for i = 1, #t.OrderedIndex do
         if (t.OrderedIndex[i] == state) then
-			Key = t.OrderedIndex[i + 1]
-		end
+            Key = t.OrderedIndex[i + 1]
+        end
     end
 
-    if Key then return Key, t[Key] end
+    if Key then
+        return Key, t[Key]
+    end
 
     t.OrderedIndex = nil
 
     return
 end
 
-local PairsByKeys = function(t) return OrderedNext, t, nil end
+local PairsByKeys = function(t)
+    return OrderedNext, t, nil
+end
 
 -- Create custom controls for options.
-local Fonts = {
-	["Pixel"] = "DuffedUIPixelFont",
-	["DuffedUI"] = "DuffedUIFont",
-	["DuffedUI2"] = "DuffedUIFontOutline",
-	["DuffedUI3"] = "DuffedUIUFFont",
-}
-
-local SortedFonts = {
-	"DuffedUI",
-	"DuffedUI2",
-	"DuffedUI3",
-	"Pixel",
-}
-
 local ControlOnEnter = function(self)
 	GameTooltip:ClearLines()
 	GameTooltip:SetOwner(self, "ANCHOR_TOP", 0, 2)
@@ -110,16 +125,26 @@ local ControlOnEnter = function(self)
 	GameTooltip:Show()
 end
 
-local ControlOnLeave = function(self) GameTooltip:Hide() end
+local ControlOnLeave = function(self)
+	GameTooltip:Hide()
+end
 
 local SetControlInformation = function(control, group, option)
-	if (not DuffedUIConfig[Locale]) then return end
+	if (not DuffedUIConfig[Locale] or not DuffedUIConfig[Locale][group]) then
+		control.Label:SetText(option) -- Set what info we can for it
+		
+		return
+	end
 	
-	if (not DuffedUIConfig[Locale][group]) then return end
+	if (not DuffedUIConfig[Locale][group][option]) then
+		control.Label:SetText(option) -- Set what info we can for it
+	end
 	
 	local Info = DuffedUIConfig[Locale][group][option]
 	
-	if (not Info) then return end
+	if (not Info) then
+		return
+	end
 	
 	control.Label:SetText(Info.Name)
 	
@@ -134,9 +159,13 @@ local SetControlInformation = function(control, group, option)
 	end
 end
 
-local EditBoxOnMouseDown = function(self) self:SetAutoFocus(true) end
+local EditBoxOnMouseDown = function(self)
+	self:SetAutoFocus(true)
+end
 
-local EditBoxOnEditFocusLost = function(self) self:SetAutoFocus(false) end
+local EditBoxOnEditFocusLost = function(self)
+	self:SetAutoFocus(false)
+end
 
 local EditBoxOnEnterPressed = function(self)
 	self:SetAutoFocus(false)
@@ -144,7 +173,9 @@ local EditBoxOnEnterPressed = function(self)
 	
 	local Value = self:GetText()
 	
-	if (type(tonumber(Value)) == "number") then Value = tonumber(Value) end
+	if (type(tonumber(Value)) == "number") then -- Assume we want a number, not a string
+		Value = tonumber(Value)
+	end
 	
 	DuffedUIConfig:SetOption(self.Group, self.Option, Value)
 end
@@ -171,52 +202,156 @@ local ButtonUncheck = function(self)
 	ButtonOnClick(self)
 end
 
-local DropDownOnClick = function(self, arg1)
-	UIDropDownMenu_SetSelectedID(arg1, self:GetID())
-	DuffedUIConfig:SetOption(arg1.Group, arg1.Option, self.value)
-end
+local ResetColor = function(self)
+	local Defaults = DuffedUIConfig.ColorDefaults
 
-local DropDownInitialize = function(self, level)
-	local Info = UIDropDownMenu_CreateInfo()
+	if (Defaults[self.Group] and Defaults[self.Group][self.Option]) then
+		local Default = Defaults[self.Group][self.Option]
 
-	for i = 1, #SortedFonts do
-		Info = UIDropDownMenu_CreateInfo()
-		Info.text = SortedFonts[i]
-		Info.value = SortedFonts[i]
-		Info.func = DropDownOnClick
-		Info.arg1 = self
-		Info.fontObject = Fonts[SortedFonts[i]]
-		UIDropDownMenu_AddButton(Info, level)
+		self.Color:SetTexture(Default[1], Default[2], Default[3])
+		DuffedUIConfig:SetOption(self.Group, self.Option, {Default[1], Default[2], Default[3]})
 	end
 end
 
-local Callback = function(cancel)
-	local R, G, B
-	
-	if cancel then
-		R, G, B = unpack(cancel)
+local SetSelectedValue = function(dropdown, value)
+	if dropdown[value] then
+		if (dropdown.Data == "Textures") then
+			dropdown.CurrentTex:SetTexture(dropdown[value])
+		else
+			dropdown.Current:SetFontObject(dropdown[value])
+		end
+
+		dropdown.Current:SetText(value)
+	end
+end
+
+local SetIconUp = function(self)
+	self:ClearAllPoints()
+	self:Point("CENTER", self.Owner, 1, -4)
+	self:SetTexture("Interface\\BUTTONS\\Arrow-Down-Up")
+end
+
+local SetIconDown = function(self)
+	self:ClearAllPoints()
+	self:Point("CENTER", self.Owner, 1, 1)
+	self:SetTexture("Interface\\BUTTONS\\Arrow-Up-Up")
+end
+
+local ListItemOnClick = function(self)
+	local List = self.Owner
+	local DropDown = List.Owner
+
+	if (DropDown.Data == "Textures") then
+		DropDown.CurrentTex:SetTexture(self.Value)
 	else
-		R, G, B = ColorPickerFrame:GetColorRGB()
+		DropDown.Current:SetFontObject(self.Value)
 	end
-	
-	local Current = ColorPickerFrame.Current
-	Current.Color:SetTexture(R, G, B)
-	
-	DuffedUIConfig:SetOption(Current.Group, Current.Option, {R, G, B})
+
+	DropDown.Current:SetText(self.Name)
+
+	SetIconUp(DropDown.Button.Tex)
+	List:Hide()
+
+	if (DropDown.Data == "Textures") then
+		DuffedUIConfig:SetOption(DropDown.Group, DropDown.Option, self.Name)
+	else
+		DuffedUIConfig:SetOption(DropDown.Group, DropDown.Option, self.Name)
+	end
 end
 
-local InitColorPicker = function(self, r, g, b)
-	ColorPickerFrame:SetColorRGB(r, g, b)
-	ColorPickerFrame.previousValues = {r, g, b}
-	ColorPickerFrame.func = Callback
-	ColorPickerFrame.cancelFunc = Callback
-	ColorPickerFrame.Current = self
-	
-	ColorPickerFrame:Hide()
-	ColorPickerFrame:Show()
+local ListItemOnEnter = function(self)
+	self.Hover:SetTexture(0.2, 1, 0.2, 0.5)
 end
 
-local ColorPickerOnClick = function(self) InitColorPicker(self, unpack(self.Colors)) end
+local ListItemOnLeave = function(self)
+	self.Hover:SetTexture(0.2, 1, 0.2, 0)
+end
+
+local AddListItems = function(self, info)
+	local Height = 3
+	local LastItem
+
+	for Name, Value in pairs(info) do
+		local Button = CreateFrame("Button", nil, self)
+		Button:Size(self:GetWidth() - 4, 18)
+
+		local Text = Button:CreateFontString(nil, "OVERLAY")
+		Text:Point("LEFT", Button, 4, 0)
+
+		if (self.Owner.Data == "Textures") then
+			local C = DuffedUI[2]
+
+			Text:SetFont(C["medias"].Font, 12)
+			Text:SetShadowColor(0, 0, 0)
+			Text:SetShadowOffset(1.25, -1.25)
+		else
+			Text:SetFontObject(Value)
+		end
+
+		Text:SetText(Name)
+
+		if (self.Owner.Data == "Textures") then
+			local Bar = self:CreateTexture(nil, "ARTWORK")
+			Bar:SetAllPoints(Button)
+			Bar:SetTexture(Value)
+			Bar:SetVertexColor(Colors.r, Colors.g, Colors.b)
+
+			Button.Bar = Bar
+		end
+
+		local Hover = Button:CreateTexture(nil, "OVERLAY")
+		Hover:SetAllPoints()
+
+		Button.Owner = self
+		Button.Name = Name
+		Button.Text = Text
+		Button.Value = Value
+		Button.Hover = Hover
+
+		Button:SetScript("OnClick", ListItemOnClick)
+		Button:SetScript("OnEnter", ListItemOnEnter)
+		Button:SetScript("OnLeave", ListItemOnLeave)
+
+		if (not LastItem) then
+			Button:Point("TOP", self, 0, -2)
+		else
+			Button:Point("TOP", LastItem, "BOTTOM", 0, -1)
+		end
+
+		self.Owner[Name] = Value
+
+		LastItem = Button
+		Height = Height + 19
+	end
+
+	self:Height(Height)
+end
+
+local DropDownButtonOnClick = function(self)
+	local DropDown = self.Owner
+	local Texture = self.Tex
+
+	if DropDown.List then
+		local List = DropDown.List
+
+		if List:IsVisible() then
+			DropDown.List:Hide()
+			SetIconUp(Texture)
+		else
+			DropDown.List:Show()
+			SetIconDown(Texture)
+		end
+	end
+end
+
+local SliderOnValueChanged = function(self, value)
+	if (not self.ScrollFrame.Set) and (self.ScrollFrame:GetVerticalScrollRange() ~= 0) then
+		self:SetMinMaxValues(0, floor(self.ScrollFrame:GetVerticalScrollRange()) - 1)
+		self.ScrollFrame.Set = true
+	end
+
+	self.ScrollFrame:SetVerticalScroll(value)
+end
 
 local CreateConfigButton = function(parent, group, option, value)
 	local C = select(2, DuffedUI:unpack())
@@ -254,7 +389,7 @@ local CreateConfigButton = function(parent, group, option, value)
 	return Button
 end
 
-local CreateConfigEditBox = function(parent, group, option, value)
+local CreateConfigEditBox = function(parent, group, option, value, max)
 	local C = select(2, DuffedUI:unpack())
 	
 	local EditBox = CreateFrame("Frame", nil, parent)
@@ -266,7 +401,7 @@ local CreateConfigEditBox = function(parent, group, option, value)
 	EditBox.Box:SetFont(C["medias"].Font, 12)
 	EditBox.Box:SetPoint("TOPLEFT", EditBox, 4, -2)
 	EditBox.Box:SetPoint("BOTTOMRIGHT", EditBox, -4, 2)
-	EditBox.Box:SetMaxLetters(20)
+	EditBox.Box:SetMaxLetters(max or 4)
 	EditBox.Box:SetAutoFocus(false)
 	EditBox.Box:EnableKeyboard(true)
 	EditBox.Box:EnableMouse(true)
@@ -296,11 +431,52 @@ local CreateConfigColorPicker = function(parent, group, option, value)
 	Button:SetTemplate()
 	Button:SetSize(50, 20)
 	Button.Colors = value
-	Button:SetScript("OnClick", ColorPickerOnClick)
 	Button.Type = "Color"
 	
 	Button.Group = group
 	Button.Option = option
+	
+	Button:RegisterForClicks("AnyUp")
+	Button:SetScript("OnClick", function(self, button)
+		if (button == "RightButton") then
+			ResetColor(self)
+		else
+			if ColorPickerFrame:IsShown() then  return end
+
+			local OldR, OldG, OldB, OldA = unpack(value)
+
+			local ShowColorPicker = function(r, g, b, a, changedCallback, sameCallback)
+				HideUIPanel(ColorPickerFrame)
+				ColorPickerFrame.button = self
+				ColorPickerFrame:SetColorRGB(r, g, b)
+				ColorPickerFrame.hasOpacity = (a ~= nil and a < 1)
+				ColorPickerFrame.opacity = a
+				ColorPickerFrame.previousValues = {OldR, OldG, OldB, OldA}
+				ColorPickerFrame.func, ColorPickerFrame.opacityFunc, ColorPickerFrame.cancelFunc = changedCallback, changedCallback, sameCallback
+				ShowUIPanel(ColorPickerFrame)
+			end
+
+			local ColorCallback = function(restore)
+				if (restore ~= nil or self ~= ColorPickerFrame.button) then
+					return
+				end
+
+				local NewA, NewR, NewG, NewB = OpacitySliderFrame:GetValue(), ColorPickerFrame:GetColorRGB()
+
+				value = {NewR, NewG, NewB, NewA}
+				DuffedUIConfig:SetOption(group, option, value)
+				self.Color:SetTexture(NewR, NewG, NewB, NewA)
+			end
+
+			local SameColorCallback = function()
+				value = {OldR, OldG, OldB, OldA}
+				DuffedUIConfig:SetOption(group, option, value)
+				self.Color:SetTexture(OldR, OldG, OldB, OldA)
+			end
+
+			ShowColorPicker(OldR, OldG, OldB, OldA, ColorCallback, SameColorCallback)
+		end
+	end)
 	
 	Button.Name = Button:CreateFontString(nil, "OVERLAY")
 	Button.Name:SetFont(C["medias"].Font, 12)
@@ -323,64 +499,139 @@ local CreateConfigColorPicker = function(parent, group, option, value)
 	return Button
 end
 
-local CreateConfigDropDown = function(parent, group, option, value)
-	local C = select(2, DuffedUI:unpack())
+local CreateConfigDropDown = function(parent, group, option, value, type)
+	local D, C = DuffedUI:unpack()
 
-	local DropDown = CreateFrame("Button", "DropDownMenu" .. group .. option, parent, "UIDropDownMenuTemplate")
+	local DropDown = CreateFrame("Button", nil, parent) -- Change UIParent to parent
+	DropDown:Size(100, 20)
+	DropDown:SetTemplate()
+	DropDown.Type = "DropDown"
 	DropDown.Group = group
 	DropDown.Option = option
-	DropDown.Type = "DropDown"
+	DropDown.Data = type
+	local Info
 
-	UIDropDownMenu_Initialize(DropDown, DropDownInitialize)
-	UIDropDownMenu_SetWidth(DropDown, 90)
-	UIDropDownMenu_SetButtonWidth(DropDown, 24)
-	UIDropDownMenu_SetSelectedName(DropDown, value) -- need to figure out defaults for this to work.
+	if (type == "Fonts") then
+		Info = D.FontTable
+	else
+		Info = D.TextureTable
+	end
 
-	DropDown:SkinDropDown(90)
-	DropDown:Show()
+	local Current = DropDown:CreateFontString(nil, "OVERLAY")
+	Current:SetPoint("LEFT", DropDown, 6, -0.5)
 
-	DropDown.Label = DropDown:CreateFontString(nil, "OVERLAY")
-	DropDown.Label:SetFont(C["medias"].Font, 12)
-	DropDown.Label:SetPoint("LEFT", DropDown, "RIGHT", -2, 4)
-	DropDown.Label:SetShadowColor(0, 0, 0)
-	DropDown.Label:SetShadowOffset(1.25, -1.25)
+	if (type == "Textures") then
+		local CurrentTex = DropDown:CreateTexture(nil, "ARTWORK")
+		CurrentTex:Size(DropDown:GetWidth() - 4, 16)
+		CurrentTex:Point("LEFT", DropDown, 2, 0)
+		CurrentTex:SetVertexColor(Colors.r, Colors.g, Colors.b)
+		DropDown.CurrentTex = CurrentTex
+
+		Current:SetFont(C["medias"].Font, 12)
+		Current:SetShadowColor(0, 0, 0)
+		Current:SetShadowOffset(1.25, -1.25)
+	end
+
+	local Button = CreateFrame("Button", nil, DropDown)
+	Button:Size(16, 16)
+	Button:SetTemplate()
+	Button:Point("RIGHT", DropDown, -2, 0)
+	Button.Owner = DropDown
+
+	local ButtonTex = Button:CreateTexture(nil, "OVERLAY")
+	ButtonTex:Size(14, 14)
+	ButtonTex:Point("CENTER", Button, 1, -4)
+	ButtonTex:SetTexture("Interface\\BUTTONS\\Arrow-Down-Up")
+	ButtonTex.Owner = Button
+
+	local Label = DropDown:CreateFontString(nil, "OVERLAY")
+	Label:SetFont(C["medias"].Font, 12)
+	Label:SetShadowColor(0, 0, 0)
+	Label:SetShadowOffset(1.25, -1.25)
+	Label:SetPoint("LEFT", DropDown, "RIGHT", 5, 0)
+
+	local List = CreateFrame("Frame", nil, DropDown)
+	List:Point("TOPLEFT", DropDown, "BOTTOMLEFT", 0, -3)
+	List:SetTemplate()
+	List:Hide()
+	List:Width(100)
+	List:SetFrameLevel(DropDown:GetFrameLevel() + 3)
+	List.Owner = DropDown
+	AddListItems(List, Info)
+
+	DropDown.Label = Label
+	DropDown.Button = Button
+	DropDown.Current = Current
+	DropDown.List = List
+
+	Button.Tex = ButtonTex
+	Button:SetScript("OnClick", DropDownButtonOnClick)
+
+	SetSelectedValue(DropDown, value)
 
 	return DropDown
 end
 
 local ShowGroup = function(group)
-	if (not GroupPages[group]) then return end
+	if (not GroupPages[group]) then
+		return
+	end
 
-	for group, page in pairs(GroupPages) do page:Hide() end
+	for group, page in pairs(GroupPages) do
+		page:Hide()
+		
+		if page.Slider then
+			page.Slider:Hide()
+		end
+	end
 	
 	GroupPages[group]:Show()
 	DuffedUIConfigFrameTitle.Text:SetText(group)
+	
+	if GroupPages[group].Slider then
+		GroupPages[group].Slider:Show()
+	end
 end
 
-local GroupButtonOnClick = function(self) ShowGroup(self.Group) end
+local GroupButtonOnClick = function(self)
+	ShowGroup(self.Group)
+end
 
 -- Create the config window
 function DuffedUIConfig:CreateConfigWindow()
 	local C = select(2, DuffedUI:unpack())
 	
-	if (not DuffedUIConfigShared) then DuffedUIConfigShared = C end
+	-- Dynamic sizing
+	local NumGroups = 0
+
+	for Group in pairs(C) do
+		if (not Filter[Group]) then
+			NumGroups = NumGroups + 1
+		end
+	end
+	
+	NumGroups = NumGroups + 2 -- Reload & Close buttons
+
+	local Height = (12 + (NumGroups * 20) + ((NumGroups - 1) * 4)) -- Padding + (NumButtons * ButtonSize) + ((NumButtons - 1) * ButtonSpacing)
+
+	DuffedUIConfigNotShared = C
 	
 	local ConfigFrame = CreateFrame("Frame", "DuffedUIConfigFrame", UIParent)
-	ConfigFrame:Size(647, 492)
+	ConfigFrame:Size(647, Height)
 	ConfigFrame:Point("CENTER")
 	ConfigFrame:SetFrameStrata("HIGH")
 		
 	local LeftWindow = CreateFrame("Frame", "DuffedUIConfigFrameLeft", ConfigFrame)
 	LeftWindow:SetTemplate()
-	LeftWindow:Size(164, 492)
+	LeftWindow:Size(164, Height)
 	LeftWindow:Point("LEFT", ConfigFrame)
 	LeftWindow:SetTemplate("Transparent")
 	LeftWindow:EnableMouse(true)
 	
 	local RightWindow = CreateFrame("Frame", "DuffedUIConfigFrameRight", ConfigFrame)
 	RightWindow:SetTemplate()
-	RightWindow:Size(480, 492)
-	RightWindow:Point("RIGHT", ConfigFrame)
+	RightWindow:Size(480, Height)
+	RightWindow:Point("Right", ConfigFrame)
 	RightWindow:SetTemplate("Transparent")
 	RightWindow:EnableMouse(true)
 	
@@ -406,7 +657,7 @@ function DuffedUIConfig:CreateConfigWindow()
 	TitleIcon.bg:SetTexture(C["medias"].Duffed)
 	
 	local CloseButton = CreateFrame("Button", nil, ConfigFrame)
-	CloseButton:Size(100, 20)
+	CloseButton:Size(132, 20)
 	CloseButton:SetTemplate("Transparent")
 	CloseButton:SetScript("OnClick", function() ConfigFrame:Hide() end)
 	CloseButton:StyleButton()
@@ -419,7 +670,7 @@ function DuffedUIConfig:CreateConfigWindow()
 	CloseButton.Text:SetText(CLOSE)
 	
 	local ReloadButton = CreateFrame("Button", nil, ConfigFrame)
-	ReloadButton:Size(100, 20)
+	ReloadButton:Size(132, 20)
 	ReloadButton:SetTemplate("Transparent")
 	ReloadButton:SetScript("OnClick", function() ReloadUI() end)
 	ReloadButton:StyleButton()
@@ -436,11 +687,55 @@ function DuffedUIConfig:CreateConfigWindow()
 	
 	for Group, Table in PairsByKeys(C) do
 		if (not Filter[Group]) then
+			local NumOptions = 0
+
+			for Key in pairs(Table) do
+				NumOptions = NumOptions + 1
+			end
+
+			local GroupHeight = 8 + (NumOptions * 24)
+
 			local GroupPage = CreateFrame("Frame", nil, ConfigFrame)
 			GroupPage:SetTemplate("Transparent")
-			GroupPage:SetAllPoints(RightWindow)
+			GroupPage:Size(300, Height)
+			GroupPage:Point("TOPRIGHT", ConfigFrame)
 			
 			GroupPage.Controls = {["EditBox"] = {}, ["Color"] = {}, ["Button"] = {}, ["DropDown"] = {}}
+			
+			if (GroupHeight > Height) then
+				GroupPage:Size(300, GroupHeight)
+
+				local ScrollFrame = CreateFrame("ScrollFrame", nil, ConfigFrame)
+				ScrollFrame:Size(300, Height)
+				ScrollFrame:Point("TOPRIGHT", ConfigFrame)
+				ScrollFrame:SetScrollChild(GroupPage)
+
+				local Slider = CreateFrame("Slider", nil, ScrollFrame)
+				Slider:SetPoint("RIGHT", 0, 0)
+				Slider:SetWidth(12)
+				Slider:SetHeight(Height)
+				Slider:SetThumbTexture(C["medias"].Blank)
+				Slider:SetOrientation("VERTICAL")
+				Slider:SetValueStep(1)
+				Slider:SetTemplate()
+				Slider:SetMinMaxValues(0, 1)
+				Slider:SetValue(0)
+				Slider.ScrollFrame = ScrollFrame
+				Slider:SetScript("OnValueChanged", SliderOnValueChanged)
+
+				Slider:SetValue(10) -- You have to invoke movement to call GetVerticalScrollRange -.-
+				Slider:SetValue(0)
+
+				local Thumb = Slider:GetThumbTexture()
+				Thumb:Width(12)
+				Thumb:Height(18)
+				Thumb:SetVertexColor(0.6, 0.6, 0.6, 1)
+
+				Slider:Show()
+
+				GroupPage.Slider = Slider
+			end
+			
 			GroupPages[Group] = GroupPage
 		
 			local Button = CreateFrame("Button", nil, ConfigFrame)
@@ -473,11 +768,17 @@ function DuffedUIConfig:CreateConfigWindow()
 				if (type(Value) == "boolean") then -- Button
 					Control = CreateConfigButton(GroupPage, Group, Option, Value)
 				elseif (type(Value) == "number") then -- EditBox
-					Control = CreateConfigEditBox(GroupPage, Group, Option, Value)
+					Control = CreateConfigEditBox(GroupPage, Group, Option, Value, 155)
 				elseif (type(Value) == "table") then -- Color Picker
 					Control = CreateConfigColorPicker(GroupPage, Group, Option, Value)
-				elseif (type(Value) == "string") then -- DropDown
-					Control = CreateConfigDropDown(GroupPage, Group, Option, Value)
+				elseif (type(Value) == "string") then -- DropDown / EditBox
+					if strfind(strlower(Option), "font") then
+						Control = CreateConfigDropDown(GroupPage, Group, Option, Value, "Fonts")
+					elseif strfind(strlower(Option), "texture") then
+						Control = CreateConfigDropDown(GroupPage, Group, Option, Value, "Textures")
+					else
+						Control = CreateConfigEditBox(GroupPage, Group, Option, Value)
+					end
 				end
 				
 				SetControlInformation(Control, Group, Option) -- Set the label and tooltip
@@ -495,7 +796,7 @@ function DuffedUIConfig:CreateConfigWindow()
 					if LastControl then
 						Buttons[i]:Point("TOPLEFT", LastControl, "BOTTOMLEFT", 0, -4)
 					else
-						Buttons[i]:Point("TOPLEFT", GroupPage, 8, -8)
+						Buttons[i]:Point("TOPLEFT", GroupPage, 6, -6)
 					end
 				else
 					Buttons[i]:Point("TOPLEFT", LastControl, "BOTTOMLEFT", 0, -4)
@@ -509,7 +810,7 @@ function DuffedUIConfig:CreateConfigWindow()
 					if LastControl then
 						EditBoxes[i]:Point("TOPLEFT", LastControl, "BOTTOMLEFT", 0, -4)
 					else
-						EditBoxes[i]:Point("TOPLEFT", GroupPage, 8, -8)
+						EditBoxes[i]:Point("TOPLEFT", GroupPage, 6, -6)
 					end
 				else
 					EditBoxes[i]:Point("TOPLEFT", LastControl, "BOTTOMLEFT", 0, -4)
@@ -523,7 +824,7 @@ function DuffedUIConfig:CreateConfigWindow()
 					if LastControl then
 						ColorPickers[i]:Point("TOPLEFT", LastControl, "BOTTOMLEFT", 0, -4)
 					else
-						ColorPickers[i]:Point("TOPLEFT", GroupPage, 8, -8)
+						ColorPickers[i]:Point("TOPLEFT", GroupPage, 6, -6)
 					end
 				else
 					ColorPickers[i]:Point("TOPLEFT", LastControl, "BOTTOMLEFT", 0, -4)
@@ -535,9 +836,9 @@ function DuffedUIConfig:CreateConfigWindow()
 			for i = 1, #DropDowns do -- We shouldn't need more than one, but i'll leave this here for now.
 				if (i == 1) then
 					if LastControl then
-						DropDowns[i]:Point("TOPLEFT", LastControl, "BOTTOMLEFT", -20, -2)
+						DropDowns[i]:Point("TOPLEFT", LastControl, "BOTTOMLEFT", 0, -4)
 					else
-						DropDowns[i]:Point("TOPLEFT", GroupPage, 8, -8)
+						DropDowns[i]:Point("TOPLEFT", GroupPage, 6, -6)
 					end
 				else
 					DropDowns[i]:Point("TOPLEFT", LastControl, "BOTTOMLEFT", 0, -4)
@@ -555,11 +856,11 @@ function DuffedUIConfig:CreateConfigWindow()
 	DuffedUICreditFrame:Point("TOP", ConfigFrame, "BOTTOM", 0, -3)
 
 	local DuffedUIScrollFrame = CreateFrame("ScrollFrame", nil, ConfigFrame)
-	DuffedUIScrollFrame:SetAllPoints(DuffedUICreditFrame)
+	DuffedUIScrollFrame:Size(647, 22)
+	DuffedUIScrollFrame:Point("CENTER", DuffedUICreditFrame, 0, 0)
 
 	local DuffedUIScrollable = CreateFrame("Frame", nil, DuffedUIScrollFrame)
-	DuffedUIScrollable:SetWidth(639)
-	DuffedUIScrollable:SetHeight(22)
+	DuffedUIScrollable:Size(639, 22)
 	DuffedUIScrollable:SetPoint("CENTER", DuffedUICreditFrame)
 
 	DuffedUIScrollFrame:SetScrollChild(DuffedUIScrollable)
@@ -582,25 +883,27 @@ function DuffedUIConfig:CreateConfigWindow()
 	DuffedUIScrollable:SetAnimation("Move", "Horizontal", -1250, 0.5)
 
 	DuffedUIScrollable:AnimOnFinished("Move", function(self)
-		if (not ConfigFrame:IsVisible()) then return end
+		if (not ConfigFrame:IsVisible()) then
+			return
+		end
 
 		self:ClearAllPoints()
 		self:SetPoint("CENTER", DuffedUICreditFrame)
 		self:SetAnimation("Move", "Horizontal", -1250, 0.5)
 	end)
 	
-	-- Credits for Tukui
-	local CreditFrame = CreateFrame("Frame", "TukuiFrameCredit", ConfigFrame)
+	-- Credits for DuffedUI
+	local CreditFrame = CreateFrame("Frame", "DuffedUIFrameCredit", ConfigFrame)
 	CreditFrame:SetTemplate()
 	CreditFrame:Size(647, 22)
 	CreditFrame:Point("TOP", DuffedUIFrameCredit, "BOTTOM", 0, -3)
 
 	local ScrollFrame = CreateFrame("ScrollFrame", nil, ConfigFrame)
-	ScrollFrame:SetAllPoints(CreditFrame)
+	ScrollFrame:Size(647, 22)
+	ScrollFrame:Point("CENTER", CreditFrame, 0, 0)
 
 	local Scrollable = CreateFrame("Frame", nil, ScrollFrame)
-	Scrollable:SetWidth(639)
-	Scrollable:SetHeight(22)
+	Scrollable:Size(639, 22)
 	Scrollable:SetPoint("CENTER", CreditFrame)
 
 	ScrollFrame:SetScrollChild(Scrollable)
@@ -623,7 +926,9 @@ function DuffedUIConfig:CreateConfigWindow()
 	Scrollable:SetAnimation("Move", "Horizontal", -1250, 0.5)
 
 	Scrollable:AnimOnFinished("Move", function(self)
-		if (not ConfigFrame:IsVisible()) then return end
+		if (not ConfigFrame:IsVisible()) then
+			return
+		end
 
 		self:ClearAllPoints()
 		self:SetPoint("CENTER", CreditFrame)
