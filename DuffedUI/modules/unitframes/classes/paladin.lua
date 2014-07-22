@@ -65,7 +65,7 @@ function DuffedUIUnitFrames:AddPaladinFeatures()
 		end
 	end)
 
-	--[[HPBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+	HPBar:RegisterEvent("PLAYER_REGEN_DISABLED")
 	HPBar:RegisterEvent("PLAYER_REGEN_ENABLED")
 	HPBar:RegisterEvent("PLAYER_ENTERING_WORLD")
 	HPBar:SetScript("OnEvent", function(self, event)
@@ -78,7 +78,7 @@ function DuffedUIUnitFrames:AddPaladinFeatures()
 				HPBar:SetAlpha(0)
 			end
 		end
-	end)]]--
+	end)
 	
 	-- Register
 	self.HolyPower = HPBar

@@ -13,8 +13,8 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 	-- Shadow Orbs Bar
 	local SOBar = CreateFrame("Frame", nil, self)
 	SOBar:Point("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
-	SOBar:Size((40 * 5) + 7 , 10)
-	SOBar:SetTemplate("Transparent")
+	SOBar:Size((40 * 5) + 6, 6)
+	SOBar:CreateBackdrop()
 
 	for i = 1, 5 do
 		SOBar[i] = CreateFrame("StatusBar", nil, SOBar)
@@ -22,38 +22,33 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 		SOBar[i]:SetStatusBarTexture(Texture)
 
 		if i == 1 then
-			SOBar[i]:Width(40)
+			SOBar[i]:Width(30)
 			SOBar[i]:Point("LEFT", SOBar, "LEFT", 2, 0)
 		else
-			SOBar[i]:Width(40)
-			SOBar[i]:Point("LEFT", SOBar[i-1], "RIGHT", 1, 0)
+			SOBar[i]:Width(30)
+			SOBar[i]:Point("LEFT", SOBar[i - 1], "RIGHT", 1, 0)
 		end
 	end
 
-	for i = 1, 80 do
-		local _, _, _, _, _, _, _, spellID = select(4, UnitAura("player", i))
-		if spellID == 77487 then
-			SOBar:RegisterEvent("PLAYER_REGEN_DISABLED")
-			SOBar:RegisterEvent("PLAYER_REGEN_ENABLED")
-			SOBar:RegisterEvent("PLAYER_ENTERING_WORLD")
-			SOBar:SetScript("OnEvent", function(self, event)
-				if event == "PLAYER_REGEN_DISABLED" then
-					UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-				elseif event == "PLAYER_REGEN_ENABLED" then
-					UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
-				elseif event == "PLAYER_ENTERING_WORLD" then
-					if not InCombatLockdown() then
-						SOBar:SetAlpha(0)
-					end
-				end
-			end)
+	SOBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+	SOBar:RegisterEvent("PLAYER_REGEN_ENABLED")
+	SOBar:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SOBar:SetScript("OnEvent", function(self, event)
+		if event == "PLAYER_REGEN_DISABLED" then
+			UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+		elseif event == "PLAYER_REGEN_ENABLED" then
+			UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+		elseif event == "PLAYER_ENTERING_WORLD" then
+			if not InCombatLockdown() then
+				SOBar:SetAlpha(0)
+			end
 		end
-	end
+	end)
 
 	-- Energy Bar
 	local EnergyBar = CreateFrame("StatusBar", nil, self)
-	EnergyBar:Point("CENTER", AnchorFrameRessources, "CENTER", 0, 3)
-	EnergyBar:Size(201, 8)
+	EnergyBar:Point("CENTER", AnchorFrameRessources, "CENTER", 0, 2)
+	EnergyBar:Size(206, 6)
 	EnergyBar:SetStatusBarTexture(Texture)
 	EnergyBar:SetStatusBarColor(Color.r, Color.g, Color.b)
 	EnergyBar:SetMinMaxValues(0, 100)
@@ -79,7 +74,7 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 			local power = UnitPower("player")
 			self:SetValue(power)
 			if self.text then
-				self.text:SetText(power)
+				self.text:SetText(D.ShortValue(power))
 			end
 			self.TimeSinceLastUpdate = 0
 		end
