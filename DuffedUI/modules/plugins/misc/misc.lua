@@ -1,7 +1,7 @@
 local D, C, L, G = unpack(select(2, ...))
 
 -- Vendorprice for questitems
-if C["plugins"].VendorValue then
+--[[if C["plugins"].VendorValue then
 	local VendorValue,vv = ...;
 
 	local GetItemInfo = GetItemInfo;
@@ -34,7 +34,7 @@ if C["plugins"].VendorValue then
 			QuestInfoItem_OnClick(_G["QuestInfoItem"..id]);
 		end
 	end
-end
+end]]--
 
 -- Remove PVPBank.com spam from friends request
 local function RemoveSpam()

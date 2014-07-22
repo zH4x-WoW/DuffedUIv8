@@ -13,9 +13,9 @@ end
 local function NeedReloadUI()
 	local ResolutionDropDown = Display_ResolutionDropDown
 	local X, Y = ResolutionDropDown:getValues()
-	local OldRatio = T.ScreenWidth / T.ScreenHeight
+	local OldRatio = D.ScreenWidth / D.ScreenHeight
 	local NewRatio = X / Y
-	local OldReso = T.Resolution
+	local OldReso = D.Resolution
 	local NewReso = X.."x"..Y
 	
 	if (OldRatio == NewRatio) and (OldReso ~= NewReso) then
@@ -39,7 +39,7 @@ Graphic:SetScript("OnEvent", function(self, event)
 	-- Allow 4K and WQHD Resolution to have an UIScale lower than 0.64, which is
 	-- the lowest value of UIParent scale by default
 	if C["general"].UIScale < 0.64 then
-		UIParent:SetScale(C.General.UIScale)	
+		UIParent:SetScale(C["general"].UIScale)	
 	end
 
 	VideoOptionsFrameOkay:HookScript("OnClick", NeedReloadUI)
