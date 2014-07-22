@@ -1,8 +1,5 @@
 local D, C, L = select(2, ...):unpack()
 
--- Per-char isn't added yet.
-local Realm = GetRealmName()
-local Name = UnitName("player")
 local Settings = DuffedUIConfigNotShared
 
 if (Settings) then

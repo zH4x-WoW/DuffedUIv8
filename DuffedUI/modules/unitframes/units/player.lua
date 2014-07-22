@@ -383,68 +383,6 @@ function DuffedUIUnitFrames:Player()
 		self.Totems = Bar
 	end
 
-	-- Experience bar
-	if (D.MyLevel ~= MAX_PLAYER_LEVEL) then
-		local Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
-		Experience:SetStatusBarTexture(Texture)
-		Experience:SetStatusBarColor(0, 0.4, 1)
-		Experience:SetOrientation("VERTICAL")
-		Experience:Size(5, Minimap:GetHeight() + 20)
-		Experience:Point("TOPLEFT", Minimap, "TOPLEFT", -10, 0)
-		Experience:SetFrameLevel(2)
-
-		Experience.Tooltip = true
-
-		Experience.Rested = CreateFrame("StatusBar", nil, self)
-		Experience.Rested:SetParent(Experience)
-		Experience.Rested:SetAllPoints(Experience)
-		Experience.Rested:SetStatusBarTexture(Texture)
-		Experience.Rested:SetOrientation("VERTICAL")
-		Experience.Rested:SetStatusBarColor(1, 0, 1, 0.3)
-
-		-- Border for the experience bar
-		local ExperienceBorder = CreateFrame("Frame", nil, Experience)
-		ExperienceBorder:SetPoint("TOPLEFT", Experience, "TOPLEFT", D.Scale(-2), D.Scale(2))
-		ExperienceBorder:SetPoint("BOTTOMRIGHT", Experience, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
-		ExperienceBorder:SetTemplate("Default")
-		ExperienceBorder:SetFrameLevel(2)
-
-		local Resting = Experience:CreateTexture(nil, "OVERLAY")
-		Resting:SetHeight(20)
-		Resting:SetWidth(20)
-		if (Layout == 3) then
-			Resting:SetPoint("Right", Health, "LEFT", -10, 0)
-		else
-			Resting:SetPoint("LEFT", Health, "LEFT", 2, 2)
-		end
-		Resting:SetTexture([=[Interface\CharacterFrame\UI-StateIcon]=])
-		Resting:SetTexCoord(0, 0.5, 0, 0.421875)
-
-		self.Resting = Resting
-		self.Experience = Experience
-	end
-
-	-- Reputation bar
-	if (D.MyLevel == MAX_PLAYER_LEVEL) then
-		local Reputation = CreateFrame("StatusBar", self:GetName().."_Reputation", self)
-		Reputation:SetStatusBarTexture(Texture)
-		Reputation:SetOrientation("VERTICAL")
-		Reputation:Size(5, Minimap:GetHeight() + 20)
-		Reputation:Point("TOPLEFT", Minimap, "TOPLEFT", -10, 0)
-		Reputation:SetFrameLevel(2)
-
-		-- Border for the experience bar
-		local ReputationBorder = CreateFrame("Frame", nil, Reputation)
-		ReputationBorder:SetPoint("TOPLEFT", Reputation, "TOPLEFT", D.Scale(-2), D.Scale(2))
-		ReputationBorder:SetPoint("BOTTOMRIGHT", Reputation, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
-		ReputationBorder:SetTemplate("Default")
-		ReputationBorder:SetFrameLevel(2)
-
-		Reputation.PostUpdate = DuffedUIUnitFrames.UpdateReputationColor
-		Reputation.Tooltip = true
-		self.Reputation = Reputation
-	end
-
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", DuffedUIUnitFrames.Update)
 	self:HookScript("OnEnter", DuffedUIUnitFrames.MouseOnPlayer)
 	self:HookScript("OnLeave", DuffedUIUnitFrames.MouseOnPlayer)

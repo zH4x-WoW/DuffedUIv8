@@ -104,6 +104,8 @@ C["misc"] = {
 	["CombatAnimation"] = true,
 	["ErrorFilter"] = true,
 	["AutoInvite"] = true,
+	["ExperienceEnable"] = true,
+	["ReputationEnable"] = true,
 }
 
 C["nameplates"] = {

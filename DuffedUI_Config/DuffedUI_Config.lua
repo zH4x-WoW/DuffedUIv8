@@ -736,7 +736,7 @@ function DuffedUIConfig:CreateConfigWindow()
 				Slider.ScrollFrame = ScrollFrame
 				Slider:SetScript("OnValueChanged", SliderOnValueChanged)
 
-				Slider:SetValue(10) -- You have to invoke movement to call GetVerticalScrollRange -.-
+				Slider:SetValue(10)
 				Slider:SetValue(0)
 
 				local Thumb = Slider:GetThumbTexture()

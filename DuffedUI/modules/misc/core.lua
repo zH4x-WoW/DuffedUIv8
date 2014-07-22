@@ -7,6 +7,8 @@ Miscellaneous:SetScript("OnEvent", function(self, event, addon)
 
  	if C["misc"].ThreatBarEnable then self.ThreatBar:Enable() end
 	if C["misc"].AltPowerBarEnable then self.AltPowerBar:Enable() end
+	if C["misc"].ExperienceEnable then self.Experience:Enable() end
+	if C["misc"].ReputationEnable then self.Reputation:Enable() end
 	self.MirrorTimers:Enable()
 	self.DropDown:Enable()
 	self.CollectGarbage:Enable()
