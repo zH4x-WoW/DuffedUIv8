@@ -12,7 +12,7 @@ function DuffedUIUnitFrames:AddPaladinFeatures()
 	
 	-- Holy Power
 	local HPBar = CreateFrame("Frame", nil, self)
-	HPBar:Point("BOTTOMLEFT", AnchorFrameRessources, "TOPLEFT", 0, 3)
+	HPBar:Point("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
 	HPBar:Size((40 * 5) + 8, 10)
 	HPBar:SetTemplate("Transparent")
 
@@ -59,13 +59,13 @@ function DuffedUIUnitFrames:AddPaladinFeatures()
 			local power = UnitPower("player")
 			self:SetValue(power)
 			if self.text then
-				self.text:SetText(power)
+				self.text:SetText(D.ShortValue(power))
 			end
 			self.TimeSinceLastUpdate = 0
 		end
 	end)
 
-	HPBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+	--[[HPBar:RegisterEvent("PLAYER_REGEN_DISABLED")
 	HPBar:RegisterEvent("PLAYER_REGEN_ENABLED")
 	HPBar:RegisterEvent("PLAYER_ENTERING_WORLD")
 	HPBar:SetScript("OnEvent", function(self, event)
@@ -78,7 +78,7 @@ function DuffedUIUnitFrames:AddPaladinFeatures()
 				HPBar:SetAlpha(0)
 			end
 		end
-	end)
+	end)]]--
 	
 	-- Register
 	self.HolyPower = HPBar

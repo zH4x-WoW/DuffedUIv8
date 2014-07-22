@@ -1,6 +1,8 @@
 => DuffedUI v8 <=
 
 22.07.2014 =>
+	Bugfixes
+	Adjust HolyPower-Bar
 	Some fixes
 	Removed AddonManager => become unnecessary
 	Too much for Readme or commit

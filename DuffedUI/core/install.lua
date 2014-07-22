@@ -125,7 +125,8 @@ end
 local StyleClick = function(self)
 	self.Text:SetTextColor(0, 1, 0)
 	
-	D.GradientFrame(self.Text, "Text", 0, 0.5, 1, 1, 1)
+	--D.GradientFrame(self.Text, "Text", 0, 0.5, 1, 1, 1)
+	self.Text:SetAnimation("Gradient", "Text", 0, 0.5, 1, 1, 1)
 end
 
 function Install:Launch()
@@ -134,7 +135,8 @@ function Install:Launch()
 		return
 	end
 	
-	local r, g, b = D.ColorGradient(0, self.MaxStepNumber, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
+	--local r, g, b = D.ColorGradient(0, self.MaxStepNumber, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
+	local R, G, B = D.ColorGradient(0, self.MaxStepNumber, 1, 0.2, 0.2, 1, 1, 0, 0.2, 1, 0.2)
 	
 	self.Description = CreateFrame("Frame", nil, self)
 	self.Description:Size(self.Width, self.Height)
@@ -149,13 +151,13 @@ function Install:Launch()
 	self.StatusBar:Width(self.Description:GetWidth() - 4)
 	self.StatusBar:CreateBackdrop()
 	self.StatusBar.Backdrop:CreateShadow()
-	self.StatusBar:SetStatusBarColor(r, g, b)
+	self.StatusBar:SetStatusBarColor(R, G, B)
 	self.StatusBar:SetMinMaxValues(0, self.MaxStepNumber)
 	self.StatusBar:SetValue(0)
 	self.StatusBar.Background = self.StatusBar:CreateTexture(nil, "ARTWORK")
 	self.StatusBar.Background:SetAllPoints()
 	self.StatusBar.Background:SetAlpha(.15)
-	self.StatusBar.Background:SetTexture(r, g, b)
+	self.StatusBar.Background:SetTexture(R, G, B)
 	
 	self.Logo = self.StatusBar:CreateTexture(nil, "OVERLAY")
 	self.Logo:Size(256, 128)

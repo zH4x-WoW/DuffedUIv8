@@ -380,7 +380,6 @@ function DuffedUIUnitFrames:Player()
 			end
 		end)
 
-		self.Shadow:Point("TOPLEFT", -4, 12)
 		self.Totems = Bar
 	end
 

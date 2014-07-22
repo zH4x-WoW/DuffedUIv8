@@ -1,7 +1,5 @@
 local D, C = select(2, ...):unpack()
 
--- New Animation system ^^
-
 --[[
 	Execute an animation;
 		frame:SetAnimation("AnimType", ...)
@@ -11,7 +9,7 @@ local D, C = select(2, ...):unpack()
 			
 		end)
 		
-		returns; self, and all the args fed into the "Animation" function for the frame
+		arguments; self, and all the args fed into the "Animation" function for the frame
 	
 	Animation types;
 	
@@ -66,7 +64,7 @@ local OnUpdateVerticalMove = function(self)
 			self:Point(Point, RelativeTo, RelativePoint, XOfs, self.EndY)
 			self.IsMoving = false
 
-			self:AnimCallback("move", self.MoveDirection, self.EndY, self.MoveSpeed)
+			self:AnimCallback("move", self.MoveDirection, self.ValueY, self.MoveSpeed)
 		end
 	else
 		if (YOfs - self.MoveSpeed < self.EndY) then
@@ -80,7 +78,7 @@ local OnUpdateVerticalMove = function(self)
 			self:Point(Point, RelativeTo, RelativePoint, XOfs, self.EndY)
 			self.IsMoving = false
 
-			self:AnimCallback("move", self.MoveDirection, self.EndY, self.MoveSpeed)
+			self:AnimCallback("move", self.MoveDirection, self.ValueY, self.MoveSpeed)
 		end
 	end
 end
@@ -101,7 +99,7 @@ local OnUpdateHorizontalMove = function(self)
 			self:Point(Point, RelativeTo, RelativePoint, self.EndX, YOfs)
 			self.IsMoving = false
 			
-			self:AnimCallback("move", self.MoveDirection, self.EndX, self.MoveSpeed)
+			self:AnimCallback("move", self.MoveDirection, self.ValueX, self.MoveSpeed)
 		end
 	else
 		if (XOfs - self.MoveSpeed < self.EndX) then
@@ -115,7 +113,7 @@ local OnUpdateHorizontalMove = function(self)
 			self:Point(Point, RelativeTo, RelativePoint, self.EndX, YOfs)
 			self.IsMoving = false
 			
-			self:AnimCallback("move", self.MoveDirection, self.EndX, self.MoveSpeed)
+			self:AnimCallback("move", self.MoveDirection, self.ValueX, self.MoveSpeed)
 		end
 	end
 end
@@ -133,6 +131,7 @@ local MoveFrameVertical = function(self, y, speed)
 		self.MoveType = "Positive"
 	end
 	
+	self.ValueY = y
 	self.EndY = select(5, GetPoint(self)) + y
 	self:SetScript("OnUpdate", OnUpdateVerticalMove)
 end
@@ -150,6 +149,7 @@ local MoveFrameHorizontal = function(self, x, speed)
 		self.MoveType = "Positive"
 	end
 
+	self.ValueX = x
 	self.EndX = select(4, GetPoint(self)) + x
 	self:SetScript("OnUpdate", OnUpdateHorizontalMove)
 end
@@ -173,7 +173,7 @@ local OnFinishedHeight = function(self)
 	self:SetScript("OnUpdate", nil)
 	--self.HeightSizing = false
 	self:Height(self.EndHeight)
-	self:AnimCallback("height", self.EndHeight, self.HeightSpeed)
+	self:AnimCallback("height", self.HeightValue, self.HeightSpeed)
 end
 
 local OnUpdateHeight = function(self)
@@ -208,6 +208,7 @@ local Height = function(self, height, speed)
 		return
 	end]]--
 
+	self.HeightValue = height
 	self.EndHeight = height or GetHeight(self) + 100
 	self.HeightSpeed = speed or 4
 	
@@ -225,7 +226,7 @@ local OnFinishedWidth = function(self)
 	self:SetScript("OnUpdate", nil)
 	--self.WidthSizing = false
 	self:Width(self.EndWidth)
-	self:AnimCallback("width", self.EndWidth, self.WidthSpeed)
+	self:AnimCallback("width", self.WidthValue, self.WidthSpeed)
 end
 
 local OnUpdateWidth = function(self) -- BROKEN, SEE NOTE BELOW
@@ -265,6 +266,7 @@ local Width = function(self, width, speed)
 		return
 	end]]--
 
+	self.WidthValue = width
 	self.EndWidth = width or GetWidth(self) + 100 
 	self.WidthSpeed = speed or 4
 	
@@ -278,16 +280,16 @@ local Width = function(self, width, speed)
 	self.WidthSizing = true
 end
 
--- Expand/Collapse frames (if I split this into 2 options it'd be easier to control)
+-- Expand/Collapse frames
 local OnExpandFinished = function(self)
 	self:SetScript("OnUpdate", nil)
 	--self.ExpandSizing = false
 	self:Height(self.ExpandEndHeight)
 	self:Width(self.ExpandEndWidth)
-	self:AnimCallback("expand", self.ExpandEndWidth, self.ExpandEndHeight, self.ExpandSpeed)
+	self:AnimCallback("expand", self.WidthValue, self.HeightValue, self.ExpandSpeed)
 end
 
-local ExpandOpen = function(self)
+local Expand = function(self)
 	local CurHeight = GetHeight(self)
 	local MaxHeight = self.ExpandEndHeight
 	
@@ -313,7 +315,7 @@ local ExpandOpen = function(self)
 	end
 end
 
-local ExpandCollapse = function(self)
+local Collapse = function(self)
 	local CurHeight = GetHeight(self)
 	local MaxHeight = self.ExpandEndHeight
 	
@@ -344,15 +346,17 @@ local ExpandFrame = function(self, width, height, speed)
 		return
 	end]]--
 
+	self.WidthValue = width
+	self.HeightValue = height
 	self.ExpandEndWidth = width or GetWidth(self) + 100
 	self.ExpandEndHeight = height or GetHeight(self) + 100
 	self.ExpandSpeed = speed or 8
 	--self.ExpandSizing = true
 	
 	if (self.ExpandEndWidth > GetWidth(self) or self.ExpandEndHeight > GetHeight(self)) then
-		self:SetScript("OnUpdate", ExpandOpen)
+		self:SetScript("OnUpdate", Expand)
 	else
-		self:SetScript("OnUpdate", ExpandCollapse)
+		self:SetScript("OnUpdate", Collapse)
 	end
 end
 
@@ -545,9 +549,6 @@ local Gradient = function(self, part, start, finish, r, g, b, customFunc, r2,g2,
 		self:SetScript("OnUpdate", GradientOnUpdate)
 	end
 end
-
--- This is temporary, remove after implemented fully
-D.GradientFrame = Gradient
 
 local Functions = {
 	["fadein"] = FadeIn,

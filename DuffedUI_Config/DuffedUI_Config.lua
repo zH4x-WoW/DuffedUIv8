@@ -3,6 +3,7 @@ DuffedUIConfig.Functions = {}
 local GroupPages = {}
 local Locale = GetLocale()
 local Colors = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
+local DropDownMenus = {}
 
 function DuffedUIConfig:SetOption(group, option, value)
 	local C = DuffedUIConfigNotShared
@@ -252,11 +253,7 @@ local ListItemOnClick = function(self)
 	SetIconUp(DropDown.Button.Tex)
 	List:Hide()
 
-	if (DropDown.Data == "Textures") then
-		DuffedUIConfig:SetOption(DropDown.Group, DropDown.Option, self.Name)
-	else
-		DuffedUIConfig:SetOption(DropDown.Group, DropDown.Option, self.Name)
-	end
+	DuffedUIConfig:SetOption(DropDown.Group, DropDown.Option, self.Name)
 end
 
 local ListItemOnEnter = function(self)
@@ -327,12 +324,26 @@ local AddListItems = function(self, info)
 	self:Height(Height)
 end
 
+local CloseOtherLists = function(self)
+	for i = 1, #DropDownMenus do
+		local Menu = DropDownMenus[i]
+		local List = Menu.List
+
+		if (self ~= Menu and List:IsVisible()) then
+			List:Hide()
+			SetIconUp(Menu.Button.Tex)
+		end
+	end
+end
+
 local DropDownButtonOnClick = function(self)
 	local DropDown = self.Owner
 	local Texture = self.Tex
 
 	if DropDown.List then
 		local List = DropDown.List
+		
+		CloseOtherLists(DropDown)
 
 		if List:IsVisible() then
 			DropDown.List:Hide()
@@ -502,7 +513,7 @@ end
 local CreateConfigDropDown = function(parent, group, option, value, type)
 	local D, C = DuffedUI:unpack()
 
-	local DropDown = CreateFrame("Button", nil, parent) -- Change UIParent to parent
+	local DropDown = CreateFrame("Button", nil, parent)
 	DropDown:Size(100, 20)
 	DropDown:SetTemplate()
 	DropDown.Type = "DropDown"
@@ -556,6 +567,7 @@ local CreateConfigDropDown = function(parent, group, option, value, type)
 	List:Hide()
 	List:Width(100)
 	List:SetFrameLevel(DropDown:GetFrameLevel() + 3)
+	List:EnableMouse(true)
 	List.Owner = DropDown
 	AddListItems(List, Info)
 
@@ -568,6 +580,7 @@ local CreateConfigDropDown = function(parent, group, option, value, type)
 	Button:SetScript("OnClick", DropDownButtonOnClick)
 
 	SetSelectedValue(DropDown, value)
+	tinsert(DropDownMenus, DropDown)
 
 	return DropDown
 end

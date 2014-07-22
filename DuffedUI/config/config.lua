@@ -142,6 +142,7 @@ C["raid"] = {
 	["Font"] = "DuffedUI Outline",
 	["PowerTexture"] = "Blank",
 	["HealthTexture"] = "Blank",
+	["RangeAlpha"] = 0.3,
 }
 
 C["tooltips"] = {

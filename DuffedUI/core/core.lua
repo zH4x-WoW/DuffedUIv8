@@ -198,27 +198,28 @@ D.Delay = function(delay, func, ...)
 	
 	if (WaitFrame == nil) then
 		WaitFrame = CreateFrame("Frame", nil, UIParent)
-		WaitFrame:SetScript("OnUpdate",function(self, elapse)
+		WaitFrame:SetScript("OnUpdate", function(self, elapsed)
 			local Count = #WaitTable
 			local i = 1
 			
-			while(i<=Count) do
+			while(i <= Count) do
 				local WaitRecord = tremove(WaitTable, i)
-				local d = tremove(WaitRecord, 1)
-				local f = tremove(WaitRecord, 1)
-				local p = tremove(WaitRecord, 1)
-				if (d > elapse) then
-				  tinsert(WaitTable, i, {d - elapse, f, p})
-				  i = i + 1
+				local Delay = tremove(WaitRecord, 1)
+				local Func = tremove(WaitRecord, 1)
+				local Args = tremove(WaitRecord, 1)
+
+				if (Delay > elapsed) then
+					tinsert(WaitTable, i, {Delay - elapsed, Func, Args})
+					i = i + 1
 				else
-				  Count = Count - 1
-				  f(unpack(p))
+					Count = Count - 1
+					Func(unpack(Args))
 				end
 			end
 		end)
 	end
 	
-	tinsert(WaitTable, {delay,func,{...}})
+	tinsert(WaitTable, {delay, func, {...}})
 	return true
 end
 

@@ -109,7 +109,7 @@ function DuffedUIUnitFrames:Raid()
 	
 	local Range = {
 		insideAlpha = 1, 
-		outsideAlpha = 0.3,
+		outsideAlpha = C["raid"].RangeAlpha,
 	}
 	
 	if (C["raid"].HealBar) then
