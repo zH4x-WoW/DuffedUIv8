@@ -58,7 +58,7 @@ function Merchant:OnEvent()
 
 	if (not IsShiftKeyDown()) then
 		if (CanMerchantRepair() and C["merchant"].AutoRepair) then
-			guildRepairFlag = 0
+			local guildRepairFlag = 0
 			local Cost, Possible = GetRepairAllCost()
 			if IsInGuild() and CanGuildBankRepair() and C["merchant"].UseGuildRepair then
 				if Cost <= GetGuildBankWithdrawMoney() then

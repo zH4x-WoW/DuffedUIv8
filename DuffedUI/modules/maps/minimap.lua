@@ -5,9 +5,10 @@ local Map = _G["Minimap"]
 local Panels = D["Panels"]
 local Miscellaneous = D["Miscellaneous"]
 local Maps = D["Maps"]
+local Minimap = CreateFrame("Frame")
 local Elapsed = 0
 
-Maps.ZoneColors = {
+Minimap.ZoneColors = {
 	["friendly"] = {.1, 1, .1},
 	["sanctuary"] = {.41, .8, .94},
 	["arena"] = {1, .1,  .1},
@@ -15,7 +16,7 @@ Maps.ZoneColors = {
 	["contested"] = {1, .7, 0},
 }
 
-function Maps:DisableMinimapElements()
+function Minimap:DisableMinimapElements()
 	local North = _G["MinimapNorthTag"]
 	local HiddenFrames = {
 		"MinimapCluster",
@@ -44,7 +45,7 @@ function Maps:DisableMinimapElements()
 	North:SetTexture(nil)
 end
 
-function Maps:StyleMinimap()
+function Minimap:StyleMinimap()
 	local Mail = _G["MiniMapMailFrame"]
 	local MailBorder = _G["MiniMapMailBorder"]
 	local MailIcon = _G["MiniMapMailIcon"]
@@ -98,13 +99,13 @@ function Maps:StyleMinimap()
 	end)
 end
 
-function Maps:PositionMinimap()
+function Minimap:PositionMinimap()
 	Map:SetParent(Panels.PetBattleHider)
 	Map:ClearAllPoints()
 	if C["auras"].BuffTracker then Map:Point("TOPRIGHT", -37, -5) else Map:Point("TOPRIGHT", -5, -5) end
 end
 
-function Maps:AddMinimapDataTexts()
+function Minimap:AddMinimapDataTexts()
 	local MinimapDataTextOne = CreateFrame("Frame", "MinimapDataTextOne", Map)
 	MinimapDataTextOne:Size(Map:GetWidth() / 2 + 2, 19)
 	MinimapDataTextOne:SetPoint("TOPLEFT", Map, "BOTTOMLEFT", -2, -3)
@@ -129,7 +130,7 @@ end
 -- Mouseover map, displaying zone and coords
 ----------------------------------------------------------------------------------------
 
-function Maps:AddZoneAndCoords()
+function Minimap:AddZoneAndCoords()
 	local MinimapZone = CreateFrame("Frame", "DuffedUIMinimapZone", Map)
 	MinimapZone:SetTemplate("Transparent")
 	MinimapZone:Size(Map:GetWidth() + 4, 22)
@@ -162,26 +163,16 @@ function Maps:AddZoneAndCoords()
 	MinimapZone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 	MinimapZone:RegisterEvent("ZONE_CHANGED")
 	MinimapZone:RegisterEvent("ZONE_CHANGED_INDOORS")
-	MinimapZone:SetScript("OnEvent", Maps.UpdateZone)
+	MinimapZone:SetScript("OnEvent", Minimap.UpdateZone)
 
 	-- Update coordinates
-	MinimapCoords:SetScript("OnUpdate", Maps.UpdateCoords)
+	MinimapCoords:SetScript("OnUpdate", Minimap.UpdateCoords)
 
-	Maps.MinimapZone = MinimapZone
-	Maps.MinimapCoords = MinimapCoords
+	Minimap.MinimapZone = MinimapZone
+	Minimap.MinimapCoords = MinimapCoords
 end
 
-Minimap:SetScript("OnEnter", function()
-	Maps.MinimapZone:SetAnimation("FadeIn", 0.3)
-	Maps.MinimapCoords:SetAnimation("FadeIn", 0.3)
-end)
-
-Minimap:SetScript("OnLeave", function()
-	Maps.MinimapZone:SetAnimation("FadeOut", 0.3)
-	Maps.MinimapCoords:SetAnimation("FadeOut", 0.3)
-end)
-
-function Maps:UpdateCoords(t)
+function Minimap:UpdateCoords(t)
 	Elapsed = Elapsed - t
 
 	if (Elapsed > 0) then
@@ -195,7 +186,7 @@ function Maps:UpdateCoords(t)
 	y = math.floor(100 * y)
 
 	if (x == 0 and y == 0) then
-		Maps.MinimapCoords.Text:SetText("x, x")
+		Minimap.MinimapCoords.Text:SetText("x, x")
 	else
 		if (x < 10) then
 			xt = "0"..x
@@ -209,22 +200,46 @@ function Maps:UpdateCoords(t)
 			yt = y
 		end
 
-		Maps.MinimapCoords.Text:SetText(xt..", "..yt)
+		Minimap.MinimapCoords.Text:SetText(xt..", "..yt)
 	end
 
 	Elapsed = .2
 end
 
-function Maps:UpdateZone()
+function Minimap:UpdateZone()
 	local Info = GetZonePVPInfo()
 
-	if Maps.ZoneColors[Info] then
-		local Color = Maps.ZoneColors[Info]
+	if Minimap.ZoneColors[Info] then
+		local Color = Minimap.ZoneColors[Info]
 
-		Maps.MinimapZone.Text:SetTextColor(Color[1], Color[2], Color[3])
+	
+		Minimap.MinimapZone.Text:SetTextColor(Color[1], Color[2], Color[3])
 	else
-		Maps.MinimapZone.Text:SetTextColor(1.0, 1.0, 1.0)
+		Minimap.MinimapZone.Text:SetTextColor(1.0, 1.0, 1.0)
 	end
-
-	Maps.MinimapZone.Text:SetText(GetMinimapZoneText())
+	
+	Minimap.MinimapZone.Text:SetText(GetMinimapZoneText())
 end
+
+function Minimap:EnableMouseOver()
+	Map:SetScript("OnEnter", function()
+		Minimap.MinimapZone:SetAnimation("FadeIn", 0.3)
+		Minimap.MinimapCoords:SetAnimation("FadeIn", 0.3)
+	end)
+
+	Map:SetScript("OnLeave", function()
+		Minimap.MinimapZone:SetAnimation("FadeOut", 0.3)
+		Minimap.MinimapCoords:SetAnimation("FadeOut", 0.3)
+	end)
+end
+
+function Minimap:Enable()
+	self:DisableMinimapElements()
+	self:StyleMinimap()
+	self:PositionMinimap()
+	self:AddMinimapDataTexts()
+	self:AddZoneAndCoords()
+	self:EnableMouseOver()
+end
+
+Maps.Minimap = Minimap

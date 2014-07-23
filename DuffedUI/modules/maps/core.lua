@@ -15,12 +15,7 @@ Maps:SetScript("OnEvent", function(self, event, addon)
 
 			Time:Kill()
 		elseif (addon == "DuffedUI") then
-			-- Minimap
-			self:DisableMinimapElements()
-			self:StyleMinimap()
-			self:PositionMinimap()
-			self:AddMinimapDataTexts()
-			self:AddZoneAndCoords()
+			self.Minimap:Enable()
 		end
 	end
 end)

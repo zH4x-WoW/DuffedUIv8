@@ -1,6 +1,9 @@
 => DuffedUI v8 <=
 
-23.07.2014 => 
+23.07.2014 =>
+	Licensestuff (Shut the fuck up Hydra)
+	Fixed locales
+	Minimapstuff
 	Fixed reset for datatexts
 	Worldmap
 	Attempt to fix partybuffs

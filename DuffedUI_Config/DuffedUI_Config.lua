@@ -57,8 +57,9 @@ local DuffedUICredits = {
 }
 
 local Credits = {
+	"duffed",
+	"Tukz",
 	"Elv",
-	"Hydra",
 	"Haste",
 	"Nightcracker",
 	"Haleth",
@@ -73,6 +74,7 @@ local Credits = {
 	"Ishtara",
 	"Caith",
 	"Azilroka",
+	"Hydra",
 }
 
 local GetOrderedIndex = function(t)

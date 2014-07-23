@@ -73,6 +73,8 @@ function DuffedUIActionBars:SkinButton()
 	end
  
 	if (C["actionbars"].HotKey) then
+		ActionButton_UpdateHotkeys(self, self.buttonType)
+		
 		HotKey:SetFontObject(Font)
 		HotKey.ClearAllPoints = Noop
 		HotKey.SetPoint = Noop

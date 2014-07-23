@@ -6,7 +6,7 @@ local Performance = "\n|cffFF0000Disabling this may increase performance|r"
 local PerformanceSlight = "\n|cffFF0000Disabling this may slightly increase performance|r"
 local RestoreDefault = "\n|cffFFFF00Right-click to restore to default|r" -- For color pickers, Not yet implemented
 
-DuffedUIConfig["zhTW"] = {
+DuffedUIConfig["zhCN"] = {
 	["general"] = {
 		["AutoScale"] = { --
 			["Name"] = "Auto Scale",
