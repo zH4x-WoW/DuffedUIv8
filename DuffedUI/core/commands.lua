@@ -1,25 +1,24 @@
 local D, C, L = select(2, ...):unpack()
 
-local strlower = strlower
 local Popups = D["Popups"]
 
 local Split = function(cmd)
 	if cmd:find("%s") then
-		return strsplit(" ", cmd)
+		return strsplit(" ", strlower(cmd))
 	else
 		return cmd
 	end
 end
 
 D.SlashHandler = function(cmd)
-	local arg1, arg2 = strlower(Split(cmd))
+	local arg1, arg2 = Split(cmd)
 
 	if (arg1 == "dt" or arg1 == "datatext") then
 		local DataText = D["DataTexts"]
 		
 		if arg2 then
-			if (arg2 == "clean") then
-				DataText:Clean()
+			if (arg2 == "reset") then
+				DataText:Reset()
 			elseif (arg2 == "resetgold") then
 				DataText:ResetGold()
 			end

@@ -472,6 +472,114 @@ local function SkinCheckBox(Frame)
 	Frame.SetHighlightTexture = Noop
 end
 
+local Tabs = {
+	"LeftDisabled",
+	"MiddleDisabled",
+	"RightDisabled",
+	"Left",
+	"Middle",
+	"Right",
+}
+
+local function SkinTab(tab)
+	if (not tab) then
+		return
+	end
+
+	for _, object in pairs(Tabs) do
+		local Texture = _G[tab:GetName()..object]
+		if (Texture) then
+			Texture:SetTexture(nil)
+		end
+	end
+
+	if tab.GetHighlightTexture and tab:GetHighlightTexture() then
+		tab:GetHighlightTexture():SetTexture(nil)
+	else
+		tab:StripTextures()
+	end
+
+	tab.Backdrop = CreateFrame("Frame", nil, tab)
+	tab.Backdrop:SetTemplate()
+	tab.Backdrop:SetFrameLevel(tab:GetFrameLevel() - 1)
+	tab.Backdrop:Point("TOPLEFT", 10, -3)
+	tab.Backdrop:Point("BOTTOMRIGHT", -10, 3)
+end
+
+local function SkinScrollBar(frame)
+	local ScrollUpButton = _G[frame:GetName().."ScrollUpButton"]
+	local ScrollDownButton = _G[frame:GetName().."ScrollDownButton"]
+	if _G[frame:GetName().."BG"] then
+		_G[frame:GetName().."BG"]:SetTexture(nil)
+	end
+
+	if _G[frame:GetName().."Track"] then
+		_G[frame:GetName().."Track"]:SetTexture(nil)
+	end
+
+	if _G[frame:GetName().."Top"] then
+		_G[frame:GetName().."Top"]:SetTexture(nil)
+	end
+
+	if _G[frame:GetName().."Bottom"] then
+		_G[frame:GetName().."Bottom"]:SetTexture(nil)
+	end
+
+	if _G[frame:GetName().."Middle"] then
+		_G[frame:GetName().."Middle"]:SetTexture(nil)
+	end
+
+	if ScrollUpButton and ScrollDownButton then
+		ScrollUpButton:StripTextures()
+		ScrollUpButton:SetTemplate("Default", true)
+
+		if not ScrollUpButton.texture then
+			ScrollUpButton.texture = ScrollUpButton:CreateTexture(nil, "OVERLAY")
+			Point(ScrollUpButton.texture, "TOPLEFT", 2, -2)
+			Point(ScrollUpButton.texture, "BOTTOMRIGHT", -2, 2)
+			ScrollUpButton.texture:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\arrowup.tga]])
+			ScrollUpButton.texture:SetVertexColor(unpack(C.Medias.BorderColor))
+		end
+
+		ScrollDownButton:StripTextures()
+		ScrollDownButton:SetTemplate("Default", true)
+
+		if not ScrollDownButton.texture then
+			ScrollDownButton.texture = ScrollDownButton:CreateTexture(nil, "OVERLAY")
+			ScrollDownButton.texture:SetTexture([[Interface\AddOns\DuffedUI\medias\textures\arrowdown.tga]])
+			ScrollDownButton.texture:SetVertexColor(unpack(C["medias"].BorderColor))
+			ScrollDownButton.texture:Point("TOPLEFT", 2, -2)
+			ScrollDownButton.texture:Point("BOTTOMRIGHT", -2, 2)
+		end
+
+		if not frame.trackbg then
+			frame.trackbg = CreateFrame("Frame", nil, frame)
+			Point(frame.trackbg, "TOPLEFT", ScrollUpButton, "BOTTOMLEFT", 0, -1)
+			Point(frame.trackbg, "BOTTOMRIGHT", ScrollDownButton, "TOPRIGHT", 0, 1)
+			SetTemplate(frame.trackbg, "Transparent")
+		end
+
+		if frame:GetThumbTexture() then
+			if not thumbTrim then
+				thumbTrim = 3
+			end
+
+			frame:GetThumbTexture():SetTexture(nil)
+
+			if not frame.thumbbg then
+				frame.thumbbg = CreateFrame("Frame", nil, frame)
+				frame.thumbbg:Point("TOPLEFT", frame:GetThumbTexture(), "TOPLEFT", 2, -thumbTrim)
+				frame.thumbbg:Point("BOTTOMRIGHT", frame:GetThumbTexture(), "BOTTOMRIGHT", -2, thumbTrim)
+				frame.thumbbg:SetTemplate("Default", true)
+
+				if frame.trackbg then
+					frame.thumbbg:SetFrameLevel(frame.trackbg:GetFrameLevel())
+				end
+			end
+		end
+	end
+end
+
 ---------------------------------------------------
 -- Merge DuffedUI API with WoW API
 ---------------------------------------------------
@@ -501,6 +609,8 @@ local function AddAPI(object)
 	if not object.SkinArrowButton then mt.SkinArrowButton = SkinArrowButton end
 	if not object.SkinDropDown then mt.SkinDropDown = SkinDropDown end
 	if not object.SkinCheckBox then mt.SkinCheckBox = SkinCheckBox end
+	if not object.SkinTab then mt.SkinTab = SkinTab end
+	if not object.SkinScrollBar then mt.SkinScrollBar = SkinScrollBar end
 end
 
 

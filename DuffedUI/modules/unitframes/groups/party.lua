@@ -111,6 +111,7 @@ function DuffedUIUnitFrames:Party()
 	Debuffs.num = 6
 	Debuffs.spacing = 2
 	Debuffs.initialAnchor = "TOPLEFT"
+	Debuffs["growth-x"] = "RIGHT"
 	Debuffs.PostCreateIcon = DuffedUIUnitFrames.PostCreateAura
 	Debuffs.PostUpdateIcon = DuffedUIUnitFrames.PostUpdateAura
 	

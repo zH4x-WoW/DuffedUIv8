@@ -211,10 +211,34 @@ function DuffedUIDT:AddDefaults()
 	DuffedUIDataPerChar.Texts["Time"] = {true, 8}
 end
 
-function DuffedUIDT:Clean()
+function DuffedUIDT:Reset()
+	for i = 1, self.NumAnchors do
+		RemoveData(self.Anchors[i])
+	end
+
 	for _, Data in pairs(self.Texts) do
 		if Data.Enabled then
 			Data:Disable()
+		end
+	end
+	
+	self:AddDefaults()
+
+	if (DuffedUIDataPerChar and DuffedUIDataPerChar.Texts) then
+		for Name, Info in pairs(DuffedUIDataPerChar.Texts) do
+			local Enabled, Num = Info[1], Info[2]
+
+			if (Enabled and (Num and Num > 0)) then
+				local Object = self:GetDataText(Name)
+
+				if Object then
+					Object:Enable()
+					self.Anchors[Num]:SetData(Object)
+				else
+					D.Print("DataText '" .. Name .. "' not found. Removing from cache.")
+					DuffedUIDataPerChar.Texts[Name] = {false, 0}
+				end
+			end
 		end
 	end
 end

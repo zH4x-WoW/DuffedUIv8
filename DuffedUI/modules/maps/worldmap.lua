@@ -3,63 +3,214 @@ local D, C, L = select(2, ...):unpack()
 local _G = _G
 local Maps = D["Maps"]
 local Noop = function() end
-local WorldMapFrame = WorldMapFrame
-local WorldMapDetailFrame = WorldMapDetailFrame
-local WorldMapLevelDropDown = WorldMapLevelDropDown
-local WorldMapShowDropDown = WorldMapShowDropDown
-local WorldMapPositioningGuide = WorldMapPositioningGuide
-local WorldMapTrackQuest = WorldMapTrackQuest
-local WorldMapTrackQuestText = WorldMapTrackQuestText
-local WorldMapFrameSizeUpButton = WorldMapFrameSizeUpButton
-local WorldMapFrameCloseButton = WorldMapFrameCloseButton
-local WorldMapFrameSizeUpButton = WorldMapFrameSizeUpButton
+local WorldMap = CreateFrame("Frame")
 
-function Maps:WorldMapOnOpen()
-	WorldMapLevelDropDown:ClearAllPoints()
-	WorldMapLevelDropDown:SetPoint("TOPRIGHT", WorldMapShowDropDown, "BOTTOMRIGHT", 0, 6)
-	WorldMapLevelDropDown:SetTemplate()
+WorldMap.QuestTexts = {
+	QuestInfoTitleHeader,
+	QuestInfoDescriptionHeader,
+	QuestInfoObjectivesHeader,
+	QuestInfoRewardsFrame.Header,
+	QuestInfoDescriptionText,
+	QuestInfoObjectivesText,
+	QuestInfoGroupSize,
+	QuestInfoRewardText,
+	QuestInfoRewardsFrame.ItemChooseText,
+	QuestInfoRewardsFrame.ItemReceiveText,
+	QuestInfoRewardsFrame.SpellLearnText,
+	QuestInfoRewardsFrame.PlayerTitleText,
+	QuestInfoRewardsFrame.XPFrame.ReceiveText,
+}
+
+function WorldMap:ColorQuestText()
+	for _, Text in pairs(WorldMap.QuestTexts) do
+		Text:SetTextColor(1, 1, 1)
+	end
 	
-	WorldMapTrackQuest:SkinCheckBox()
-	WorldMapTrackQuest:ClearAllPoints()
-	WorldMapTrackQuest:Point("LEFT", WorldMapFrame.Header, "LEFT", 0, 0)
-	WorldMapTrackQuest:SetFrameLevel(WorldMapFrame:GetFrameLevel() + 2)
+	local Objectives = QuestInfoObjectivesFrame.Objectives
 	
-	WorldMapTrackQuestText:ClearAllPoints()
-	WorldMapTrackQuestText:Point("LEFT", WorldMapTrackQuest, "RIGHT", 2, 0)
-	
-	WorldMapFrameTitle:ClearAllPoints()
-	WorldMapFrameTitle:Point("CENTER", WorldMapFrame.Header, 0, -1)
-	
-	WorldMapFrameCloseButton:SkinCloseButton()
-	WorldMapFrameCloseButton:ClearAllPoints()
-	WorldMapFrameCloseButton:Point("LEFT", WorldMapFrame.Header, "RIGHT", -24, -2)
+	for i = 1, #Objectives do
+		local Objective = _G["QuestInfoObjective"..i]
+		
+		Objective:SetTextColor(1, 1, 1)
+	end
 end
 
-function Maps:SkinWorldmap()
-	WorldMapFrame:StripTextures()
-	WorldMapFrame:CreateBackdrop()
-	WorldMapFrame.Backdrop:SetOutside(WorldMapDetailFrame, 2, 2)
+function WorldMap:SkinReward(i)
+	local Reward = _G[self:GetName().."QuestInfoItem"..i]
+	local Texture = Reward.Icon:GetTexture()
 	
-	WorldMapFrame.Header = CreateFrame("Frame", nil, WorldMapFrame)
-	WorldMapFrame.Header:Size(WorldMapFrame.Backdrop:GetWidth(), 24)
-	WorldMapFrame.Header:Point("BOTTOM", WorldMapFrame, "TOP", 1, -18)
-	WorldMapFrame.Header:SetFrameLevel(WorldMapFrame:GetFrameLevel())
-	WorldMapFrame.Header:SetTemplate("Transparent")
-	
-	WorldMapShowDropDown:SkinDropDown()
-	WorldMapShowDropDown:ClearAllPoints()
-	WorldMapShowDropDown:SetPoint("TOPRIGHT", WorldMapFrame.Backdrop, "TOPRIGHT", 0, -6)
-	WorldMapShowDropDown:SetFrameLevel(WorldMapLevelDropDown:GetFrameLevel())
-
-	WorldMapLevelDropDown:SkinDropDown()
-	
-	WorldMapFrameSizeUpButton:Kill()
+	Reward:StripTextures()
+	Reward:CreateBackdrop()
+	Reward.Icon:SetTexture(Texture)
+	Reward.Backdrop:ClearAllPoints()
+	Reward.Backdrop:SetOutside(Reward.Icon)
+	Reward.Icon:SetTexCoord(unpack(D.IconCoord))
 end
 
-function Maps:SetWorldmap()
-	WorldMap_ToggleSizeDown()
-	WorldMap_ToggleSizeUp = Noop
+function WorldMap:Skin()
+	local Map = WorldMapFrame
+	local MapScroll = WorldMapScrollFrame
+	local MapBorder = WorldMapFrame.BorderFrame
+	local MapBorderInset = WorldMapFrame.BorderFrame.Inset
+	local QuestScroll = QuestScrollFrame
+	local Quest = QuestMapFrame
+	local Details = QuestMapFrame.DetailsFrame
+	local Rewards = QuestMapFrame.DetailsFrame.RewardsFrame
+	local Navigation = WorldMapFrameNavBar
+	local TutorialButton = WorldMapFrameTutorialButton
+	local TitleButton = WorldMapTitleButton
+	local ViewAllButton = QuestScrollFrame.ViewAll
+	local BackButton = QuestMapFrame.DetailsFrame.BackButton
+	local AbandonButton = QuestMapFrame.DetailsFrame.AbandonButton
+	local ShareButton = QuestMapFrame.DetailsFrame.ShareButton
+	local TrackButton = QuestMapFrame.DetailsFrame.TrackButton
+	local ScrollBar = QuestScrollFrame.ScrollBar
+	local Title = WorldMapFrame.BorderFrame.TitleText
+	local CloseButton = WorldMapFrameCloseButton
+	local SizeButton = WorldMapFrameSizeUpButton
+	local RewardsInfo = MapQuestInfoRewardsFrame
+	local Money = MapQuestInfoRewardsFrame.MoneyFrame
+	local XP = MapQuestInfoRewardsFrame.XPFrame
+	local StoryHeader = QuestScrollFrame.Contents.StoryHeader
+	local QuestBackground = QuestScrollFrame.Background
+	local StoryTooltip = QuestScrollFrame.StoryTooltip
+	local MapDetails = WorldMapDetailFrame
+	local TrackingMenuButton = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button
+	local TrackingMenuBackground = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Background
+	local DetailsScroll = QuestMapDetailsScrollFrame
+	
+	Map:StripTextures()
+	Map:CreateBackdrop()
+	Map:CreateShadow()
+	Map.Backdrop:ClearAllPoints()
+	Map.Backdrop:Size(701, 470)
+	Map.Backdrop:Point("TOPLEFT", 0, -66)
+	Map.Header = CreateFrame("Frame", nil, Map)
+	Map.Header:Size(Map.Backdrop:GetWidth(), 23)
+	Map.Header:SetPoint("BOTTOMLEFT", Map.Backdrop, "TOPLEFT", 0, 2)
+	Map.Header:SetTemplate()
+	
+	MapBorder:StripTextures()
+	MapBorderInset:StripTextures()
+	Details:StripTextures()
+	Rewards:StripTextures()
+	StoryHeader:StripTextures()
+	Quest:StripTextures()
+	
+	StoryTooltip:StripTextures()
+	StoryTooltip:SetTemplate()
+	
+	QuestBackground:SetAlpha(0)
 
-	WorldMapFrame:HookScript("OnShow", self.WorldMapOnOpen)
+	TutorialButton:Kill()
+
+	TrackingMenuButton:SetAlpha(0)
+	TrackingMenuBackground:SetAlpha(0)
+	
+	QuestScroll:CreateBackdrop()
+	QuestScroll.Backdrop:ClearAllPoints()
+	QuestScroll.Backdrop:SetPoint("LEFT", 1, 0)
+	QuestScroll.Backdrop:SetPoint("RIGHT", 30, 0)
+	QuestScroll.Backdrop:SetPoint("TOP", 0, 3)
+	QuestScroll.Backdrop:SetPoint("BOTTOM", 0, -5)
+	
+	DetailsScroll:CreateBackdrop()
+	DetailsScroll.Backdrop:SetAllPoints(QuestScroll.Backdrop)
+	
+	ViewAllButton:SkinButton()
+	ViewAllButton:ClearAllPoints()
+	ViewAllButton:SetPoint("LEFT", Map.Header, "RIGHT", 2, 0)
+	ViewAllButton:Size(288, 23)
+	
+	BackButton:SkinButton()
+	BackButton:ClearAllPoints()
+	BackButton:SetPoint("LEFT", Map.Header, "RIGHT", 2, 0)
+	BackButton:Size(288, 23)
+	
+	AbandonButton:StripTextures()
+	AbandonButton:SkinButton()
+	AbandonButton:Size(QuestMapFrame.DetailsFrame.AbandonButton:GetWidth() - 4, QuestMapFrame.DetailsFrame.AbandonButton:GetHeight() - 4)
+	AbandonButton:ClearAllPoints()
+	AbandonButton:SetPoint("BOTTOMLEFT", Details, "BOTTOMLEFT", 3, -2)
+
+	ShareButton:StripTextures()
+	ShareButton:SkinButton()
+	ShareButton:Size(ShareButton:GetWidth() - 4, ShareButton:GetHeight() - 4)
+	ShareButton:ClearAllPoints()
+	ShareButton:SetPoint("LEFT", AbandonButton, "RIGHT", 2, 0)	
+	
+	TrackButton:StripTextures()
+	TrackButton:SkinButton()
+	TrackButton:Size(TrackButton:GetWidth() - 4, TrackButton:GetHeight() - 4)
+	TrackButton:ClearAllPoints()
+	TrackButton:SetPoint("LEFT", ShareButton, "RIGHT", 2, 0)
+	
+	-- Quests Buttons
+	for i = 1, 2 do
+		local Button = i == 1 and WorldMapFrame.UIElementsFrame.OpenQuestPanelButton or WorldMapFrame.UIElementsFrame.CloseQuestPanelButton
+		local Text = (i == 1 and QUESTS_LABEL.." -->") or ("<-- "..QUESTS_LABEL)
+		
+		Button:ClearAllPoints()
+		Button:SetPoint("BOTTOMRIGHT", -2, 3)
+		Button:Size(100, 23)
+		Button:StripTextures()
+		Button:SkinButton()
+		Button:FontString("Text", C.Medias.Font, 12)
+		Button.Text:SetPoint("CENTER")
+		Button.Text:SetText(Text)
+	end
+
+	Navigation:Hide()
+	
+	TitleButton:ClearAllPoints()
+	TitleButton:SetAllPoints(Map.Header)
+	
+	Title:ClearAllPoints()
+	Title:SetPoint("CENTER", Map.Header)
+
+	CloseButton:StripTextures()
+	CloseButton:ClearAllPoints()
+	CloseButton:SetPoint("RIGHT", Map.Header, "RIGHT", 8, -1)
+	CloseButton:SkinCloseButton()
+	
+	SizeButton:Kill()
+	
+	ScrollBar:Hide()
+	
+	Money:StripTextures()
+	Money:CreateBackdrop()
+	Money.Icon:SetTexture("Interface\\Icons\\inv_misc_coin_01")
+	Money.Icon:SetTexCoord(unpack(T.IconCoord))
+	Money.Backdrop:ClearAllPoints()
+	Money.Backdrop:SetOutside(Money.Icon)
+	
+	XP:StripTextures()
+	XP:CreateBackdrop()
+	XP.Icon:SetTexture("Interface\\Icons\\XP_Icon")
+	XP.Icon:SetTexCoord(unpack(D.IconCoord))
+	XP.Backdrop:ClearAllPoints()
+	XP.Backdrop:SetOutside(XP.Icon)
 end
+
+function WorldMap:AddHooks()
+	hooksecurefunc("QuestInfo_Display", self.ColorQuestText)
+	hooksecurefunc("QuestInfo_GetRewardButton", self.SkinReward)
+end
+
+function WorldMap:Enable()
+	local SmallerMap = GetCVarBool("miniWorldMap")
+	
+	if not SmallerMap then
+		ToggleWorldMap()
+		WorldMapFrameSizeUpButton:Click()
+		ToggleWorldMap()
+	end
+
+	self:Skin()
+	self:AddHooks()
+end
+
+Maps.WorldMap = WorldMap
+
+
 
