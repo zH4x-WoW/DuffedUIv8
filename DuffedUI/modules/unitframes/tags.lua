@@ -11,7 +11,7 @@ oUF.Tags.Methods['DuffedUI:perchp'] = function(unit)
 	if(m == 0) then
 		return 0
 	else
-		return math.floor(UnitHealth(unit) / m * 100 + .5).."%" -- D.panelcolor..
+		return math.floor(UnitHealth(unit) / m * 100 + .5).."%"
 	end
 end
 

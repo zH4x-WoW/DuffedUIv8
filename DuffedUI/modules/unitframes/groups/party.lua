@@ -89,8 +89,8 @@ function DuffedUIUnitFrames:Party()
 		self.Portrait = Portrait.Model
 	end
 	
-	local Buffs = CreateFrame("Frame", nil, self)
 	if C["party"].BuffsEnable then
+		local Buffs = CreateFrame("Frame", nil, self)
 		Buffs:Point("TOPLEFT", self, "BOTTOMLEFT", -2, 0)
 		Buffs:SetHeight(24)
 		Buffs:SetWidth(250)

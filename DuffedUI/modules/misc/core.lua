@@ -15,6 +15,8 @@ Miscellaneous:SetScript("OnEvent", function(self, event, addon)
 	self.GameMenu:Enable()
 	self.LossControl:Enable()
 	self.StaticPopups:Enable()
+	--self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	--self.ObjectiveTracker:WOWHead()
 	
 	-- Need a little delay for Objective Tracker
 	D.Delay(1, function()
