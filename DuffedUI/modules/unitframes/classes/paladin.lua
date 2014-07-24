@@ -13,12 +13,12 @@ function DuffedUIUnitFrames:AddPaladinFeatures()
 	-- Holy Power
 	local HPBar = CreateFrame("Frame", nil, self)
 	HPBar:Point("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
-	HPBar:Size((40 * 5) + 8, 10)
+	HPBar:Size((40 * 5) + 8, 9)
 	HPBar:SetTemplate("Transparent")
 
 	for i = 1, 5 do
 		HPBar[i] = CreateFrame("StatusBar", nil, HPBar)
-		HPBar[i]:Height(6)
+		HPBar[i]:Height(5)
 		HPBar[i]:SetStatusBarTexture(Texture)
 		HPBar[i]:SetStatusBarColor(0.89, 0.88, 0.06)
 
@@ -27,14 +27,14 @@ function DuffedUIUnitFrames:AddPaladinFeatures()
 			HPBar[i]:Point("LEFT", HPBar, "LEFT", 2, 0)
 		else
 			HPBar[i]:Width(40)
-			HPBar[i]:Point("LEFT", HPBar[i-1], "RIGHT", 1, 0)
+			HPBar[i]:Point("LEFT", HPBar[i - 1], "RIGHT", 1, 0)
 		end
 	end
 
 	-- Energy Bar
 	local EnergyBarBG = CreateFrame("Frame", "EnergyBarBG", HPBar)
-	EnergyBarBG:SetPoint("TOPLEFT", HPBar, "BOTTOMLEFT", 0, -1)
-	EnergyBarBG:SetPoint("TOPRIGHT", HPBar, "BOTTOMRIGHT", 0, -1)
+	EnergyBarBG:SetPoint("TOPLEFT", HPBar, "BOTTOMLEFT", 0, -2)
+	EnergyBarBG:SetPoint("TOPRIGHT", HPBar, "BOTTOMRIGHT", 0, -2)
 	EnergyBarBG:SetHeight(7)
 	EnergyBarBG:SetTemplate("Transparent")
 
