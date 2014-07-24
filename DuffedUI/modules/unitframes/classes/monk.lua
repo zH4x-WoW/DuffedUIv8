@@ -13,8 +13,8 @@ function DuffedUIUnitFrames:AddMonkFeatures()
 	-- Harmony Bar
 	local Harmony = CreateFrame("Frame", nil, self)
 	Harmony:Point("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
-	Harmony:Size((33 * 6) + 8, 10)
-	Harmony:SetTemplate("Transparent")
+	Harmony:Size((33 * 6) + 8, 6)
+	Harmony:CreateBackdrop()
 
 	for i = 1, 6 do
 		Harmony[i] = CreateFrame("StatusBar", nil, Harmony)
@@ -25,16 +25,16 @@ function DuffedUIUnitFrames:AddMonkFeatures()
 			Harmony[i]:Width(33)
 			Harmony[i]:SetPoint("LEFT", Harmony, "LEFT", 2, 0)
 		else
-			Harmony[i]:Width(33)
+			Harmony[i]:Width(32)
 			Harmony[i]:SetPoint("LEFT", Harmony[i - 1], "RIGHT", 1, 0)
 		end
 	end
 
 	-- Energy Bar
 	local EnergyBarBG = CreateFrame("Frame", "EnergyBarBG", Harmony)
-	EnergyBarBG:SetPoint("TOPLEFT", Harmony, "BOTTOMLEFT", 0, -1)
-	EnergyBarBG:SetPoint("TOPRIGHT", Harmony, "BOTTOMRIGHT", 0, -1)
-	EnergyBarBG:SetHeight(7)
+	EnergyBarBG:SetPoint("TOPLEFT", Harmony, "BOTTOMLEFT", -2, -3)
+	EnergyBarBG:SetPoint("TOPRIGHT", Harmony, "BOTTOMRIGHT", 2, -3)
+	EnergyBarBG:SetHeight(8)
 	EnergyBarBG:SetTemplate("Transparent")
 
 	local EnergyBar = CreateFrame("StatusBar", nil, EnergyBarBG)

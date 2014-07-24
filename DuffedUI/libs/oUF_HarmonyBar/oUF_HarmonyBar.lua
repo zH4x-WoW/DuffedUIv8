@@ -43,8 +43,8 @@ local function Update(self, event, unit, powerType)
 	local Current = UnitPower("player", SPELL_POWER_CHI)
 	local Max = UnitPowerMax("player", SPELL_POWER_CHI)
 	
-	local spacing = select(4, hb[4]:GetPoint())
-	local w = hb:GetWidth()
+	local spacing = select(4, Bar[4]:GetPoint())
+	local w = Bar:GetWidth()
 	local s = 0
 	local light = UnitPower("player", SPELL_POWER_CHI)
 	local maxChi = UnitPowerMax("player", SPELL_POWER_CHI)
@@ -64,10 +64,10 @@ local function Update(self, event, unit, powerType)
 		
 		for i = 1, maxChi do
 			if i ~= maxChi then
-				hb[i]:SetWidth(w / maxChi - spacing)
+				Bar[i]:SetWidth(w / maxChi - spacing)
 				s = s + (w / maxChi)
 			else
-				hb[i]:SetWidth(w - s)
+				Bar[i]:SetWidth(w - s)
 			end
 		end
 		
@@ -98,28 +98,28 @@ local ForceUpdate = function(element)
 end
 
 local function Enable(self, unit)
-	local hb = self.HarmonyBar
-	if hb and unit == "player" then
-		hb.__owner = self
-		hb.ForceUpdate = ForceUpdate
+	local Bar = self.HarmonyBar
+	if Bar and unit == "player" then
+		Bar.__owner = self
+		Bar.ForceUpdate = ForceUpdate
 		
 		self:RegisterEvent("UNIT_POWER", Path)
 		self:RegisterEvent("UNIT_DISPLAYPOWER", Path)
 		self:RegisterEvent("UNIT_MAXPOWER", Path)
 		
 		for i = 1, 6 do
-			local Point = hb[i]
+			local Point = Bar[i]
 			if not Point:GetStatusBarTexture() then
 				Point:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])
 			end
 			
 			Point:SetStatusBarColor(unpack(Colors[i]))
-			Point:SetFrameLevel(hb:GetFrameLevel() + 1)
+			Point:SetFrameLevel(Bar:GetFrameLevel() + 1)
 			Point:GetStatusBarTexture():SetHorizTile(false)
 			Point.OriginalWidth = Point:GetWidth()
 		end
 		
-		hb.maxChi = 0
+		Bar.maxChi = 0
 		
 		return true
 	end

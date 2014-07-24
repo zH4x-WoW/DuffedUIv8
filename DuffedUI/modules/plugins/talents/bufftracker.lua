@@ -16,7 +16,7 @@ local function SetCasterOnlyBuffs()
 	Spell3Buff = {
 		1126, -- Mark of the Wild
 		20217, -- Blessing of Kings
-		117667, -- Legacy of the Emperor
+		115921, -- Legacy of the Emperor
 	}
 	Spell4Buff = {
 		469, -- Commanding Shout
@@ -54,7 +54,7 @@ local function SetBuffs()
 	Spell3Buff = {
 		1126, -- Mark of the Wild
 		20217, -- Blessing of Kings
-		117667, -- Legacy of the Emperor
+		115921, -- Legacy of the Emperor
 	}
 	Spell4Buff = {
 		469, -- Commanding Shout
