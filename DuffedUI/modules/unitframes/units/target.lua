@@ -389,6 +389,25 @@ function DuffedUIUnitFrames:Target()
 		Focus.Text:SetPoint("CENTER")
 		Focus.Text:SetText("Focus") -- D.panelcolor..
 	end
+	
+	local ComboPoints = CreateFrame("Frame", nil, self)
+	ComboPoints:Point("CENTER", AnchorFrameRessources, "CENTER", 0, 1)
+	ComboPoints:Size(200, 6)
+	ComboPoints:CreateBackdrop()
+
+	for i = 1, 5 do
+		ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
+		ComboPoints[i]:Height(6)
+		ComboPoints[i]:SetStatusBarTexture(HealthTexture)
+
+		if i == 1 then
+			ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
+			ComboPoints[i]:Width(40)
+		else
+			ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
+			ComboPoints[i]:Width(39)
+		end
+	end
 
 	self:Tag(Name, "[DuffedUI:GetNameColor][DuffedUI:NameLong] [DuffedUI:DiffColor][level] [shortclassification]")
 	self.Name = Name
@@ -399,4 +418,5 @@ function DuffedUIUnitFrames:Target()
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.PowerBorder = PowerBorder
+	self.ComboPointsBar = ComboPoints
 end
