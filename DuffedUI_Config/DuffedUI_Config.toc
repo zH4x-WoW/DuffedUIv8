@@ -1,6 +1,6 @@
 ## Interface: 60000
 ## Title: |cffC41F3BDuffedUI|r Config
-## Version: 8.0004
+## Version: 8.0005
 ## Notes: DuffedUI Config UI
 ## Author: Hydra
 ## SavedVariables: DuffedUIConfigShared

@@ -1,6 +1,6 @@
 ﻿## Interface: 60000
 ## Author: Merith @ ZdC EU, Tukz, Hydra
-## Version: 8.0004
+## Version: 8.0005
 ## Title: |cffC41F3BDuffedUI|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: DuffedUIData
