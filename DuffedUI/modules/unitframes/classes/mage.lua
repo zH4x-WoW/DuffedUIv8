@@ -29,7 +29,7 @@ function DuffedUIUnitFrames:AddMageFeatures()
 			ArcaneChargeBar[i]:Point("LEFT", ArcaneChargeBar, "LEFT", 2, 0)
 		else
 			ArcaneChargeBar[i]:Width(50)
-			ArcaneChargeBar[i]:Point("LEFT", ArcaneChargeBar[i-1], "RIGHT", 1, 0)
+			ArcaneChargeBar[i]:Point("LEFT", ArcaneChargeBar[i - 1], "RIGHT", 1, 0)
 		end
 	end
 
@@ -56,17 +56,11 @@ function DuffedUIUnitFrames:AddMageFeatures()
 	-- Energy Bar
 	local EnergyBar = CreateFrame("StatusBar", nil, self)
 	EnergyBar:Point("CENTER", AnchorFrameRessources, "CENTER", 0, 1)
-	EnergyBar:Size(203, 8)
+	EnergyBar:Size(203, 6)
 	EnergyBar:SetStatusBarTexture(Texture)
 	EnergyBar:SetStatusBarColor(Color.r, Color.g, Color.b)
 	EnergyBar:SetMinMaxValues(0, 100)
-
-	-- Border for EnergyBarBar
-	local EnergyBarBorder = CreateFrame("Frame", nil, EnergyBar)
-	EnergyBarBorder:SetPoint("TOPLEFT", EnergyBar, "TOPLEFT", D.Scale(-2), D.Scale(2))
-	EnergyBarBorder:SetPoint("BOTTOMRIGHT", EnergyBar, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
-	EnergyBarBorder:SetTemplate("Default")
-	EnergyBarBorder:SetFrameLevel(2)
+	EnergyBar:CreateBackdrop()
 
 	EnergyBar.text = EnergyBar:CreateFontString(nil, "ARTWORK")
 	EnergyBar.text:SetFont(Font, 16, "THINOUTLINE")
@@ -82,7 +76,7 @@ function DuffedUIUnitFrames:AddMageFeatures()
 			local power = UnitPower("player")
 			self:SetValue(power)
 			if self.text then
-				self.text:SetText(power)
+				self.text:SetText(D.ShortValue(power))
 			end
 			self.TimeSinceLastUpdate = 0
 		end
@@ -119,11 +113,11 @@ function DuffedUIUnitFrames:AddMageFeatures()
 			TotemBar[i]:Height(6)
 
 			if i == 1 then
-				TotemBar[i]:Width(100)
-				TotemBar[i]:SetPoint("LEFT", TotemBar, "LEFT", 1, 0)
+				TotemBar[i]:Width(101)
+				TotemBar[i]:SetPoint("LEFT", TotemBar, "LEFT", 0, 0)
 			else
-				TotemBar[i]:Width(100)
-				TotemBar[i]:SetPoint("LEFT", TotemBar[i-1], "RIGHT", 1, 0)
+				TotemBar[i]:Width(101)
+				TotemBar[i]:SetPoint("LEFT", TotemBar[i - 1], "RIGHT", 1, 0)
 			end
 		end
 
