@@ -25,6 +25,8 @@ local BuffReminder1 = {
 		109260, -- Aspect of the Iron Hawk
 	},
 	['MAGE'] = {
+		1459, -- Arcane Brilliance
+		61316, -- Dalaran Brilliance
 		109773, -- Dark Intent
 	},
 	['MONK'] = {
@@ -42,9 +44,12 @@ local BuffReminder1 = {
 		117666, -- Legacy of the Emperor
 	},
 	['PRIEST'] = {
+		21562, -- PW: Fortitude
+		109773, -- Dark Intent
 	},
 	['ROGUE'] = {
 		2823, -- Deadly Poison
+		3408, -- Crippling Poison
 		8679, -- Wound Poison
 	},
 	['SHAMAN'] = {
@@ -71,21 +76,6 @@ local BuffReminder2 = {
 		48263, -- Blood Presence
 		48265, -- Unholy Presence
 		48266, -- Frost Presence
-	},
-	['MAGE'] = {
-		1459, -- Arcane Brilliance
-		61316, -- Dalaran Brilliance
-		109773, -- Dark Intent
-	},
-	['PRIEST'] = {
-		21562, -- PW: Fortitude
-		109773, -- Dark Intent
-	},
-	['ROGUE'] = {
-		3408, -- Crippling Poison
-		5761, -- Mind-numbing Poison
-		108211, -- Leeching Poison
-		108215, -- Paralytic Poison
 	},
 }
 

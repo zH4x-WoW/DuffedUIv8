@@ -9,9 +9,9 @@ local function SetCasterOnlyBuffs()
 		109773, -- Dark Intent
 	}
 	Spell2Buff = {
-		24907, -- Moonkin Aura
+		--24907, -- Moonkin Aura
 		49868, -- Mind Quickening
-		51470, -- Elemental Oath
+		--51470, -- Elemental Oath
 	}
 	Spell3Buff = {
 		1126, -- Mark of the Wild
@@ -38,7 +38,7 @@ end
 
 local function SetBuffs()
 	Spell1Buff = {
-		30809, -- Unleashed Rage
+		--30809, -- Unleashed Rage
 		55610, -- Unholy Aura
 		113742, -- Swiftblade's Cunning
 		128432, -- Cackling Howl
@@ -174,7 +174,7 @@ local bufftracker = CreateFrame("Frame", "BuffTracker", Minimap)
 bufftracker:SetTemplate("Transparent")
 bufftracker:Width(btWidth + 2)
 bufftracker:Height(btHeight)
-bufftracker:SetPoint("TOPLEFT", Minimap, "TOPRIGHT", 4, 0)
+bufftracker:SetPoint("TOPLEFT", Minimap, "TOPRIGHT", 4, 2)
 
 bufftracker:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 bufftracker:RegisterEvent("UNIT_INVENTORY_CHANGED")
@@ -224,7 +224,6 @@ local AllBuffs = {
 		57330,						-- Horn of Winter
 	},
 	["10as"] = {
-		30809,						-- Unleashed Rage
 		55610,						-- Unholy Aura
 		113742,						-- Swiftblade's Cunning
 		128432,						-- Cackling Howl (Hunterpet)
@@ -239,7 +238,6 @@ local AllBuffs = {
 	["5sh"] = {
 		24907,						-- Moonkin Aura
 		49868,						-- Mind Quickening
-		51470,						-- Elemental Oath
 		135678,						-- Energizing Spores
 	},
 	["5csc"] = {
@@ -423,7 +421,7 @@ bufftrackersummary:Hide()
 local bufftracker_toggle = CreateFrame("Frame", "BuffTrackerToggle", bufftracker)
 bufftracker_toggle:SetPoint("TOP", bufftracker, "BOTTOM", 0, -2)
 bufftracker_toggle:SetTemplate("Default")
-bufftracker_toggle:Size(bufftracker:GetWidth(), 10)
+bufftracker_toggle:Size(bufftracker:GetWidth(), 12)
 bufftracker_toggle.text = bufftracker_toggle:CreateFontString(nil, "OVERLAY")
 bufftracker_toggle.text:SetFont(C["medias"].Font, 12, "THINOUTLINE")
 bufftracker_toggle.text:SetText("|cff319f1b+|r")
