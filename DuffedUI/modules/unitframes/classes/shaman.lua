@@ -13,7 +13,7 @@ function DuffedUIUnitFrames:AddShamanFeatures()
 	-- Energy Bar
 	local EnergyBar = CreateFrame("StatusBar", nil, self)
 	EnergyBar:Point("CENTER", AnchorFrameRessources, "CENTER", 0, 1)
-	EnergyBar:Size(202, 8)
+	EnergyBar:Size(204, 6)
 	EnergyBar:SetStatusBarTexture(Texture)
 	EnergyBar:SetStatusBarColor(Color.r, Color.g, Color.b)
 	EnergyBar:SetMinMaxValues(0, 100)
@@ -39,7 +39,7 @@ function DuffedUIUnitFrames:AddShamanFeatures()
 			local power = UnitPower("player")
 			self:SetValue(power)
 			if self.text then
-				self.text:SetText(power)
+				self.text:SetText(D.ShortValue(power))
 			end
 			self.TimeSinceLastUpdate = 0
 		end
@@ -59,23 +59,4 @@ function DuffedUIUnitFrames:AddShamanFeatures()
 			end
 		end
 	end)
-
-	local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
-	bar:SetWidth(5)
-	bar:SetHeight(28)
-	bar:Point("BOTTOMLEFT", oUF_DuffedUIPlayer, "BOTTOMRIGHT", 6, -1)
-	bar:SetStatusBarTexture(Texture)
-	bar:SetOrientation("VERTICAL")
-	bar.bg = bar:CreateTexture(nil, 'ARTWORK')
-	
-	bar.background = CreateFrame("Frame", "DuffedUIStatue", bar)
-	bar.background:SetAllPoints()
-	bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
-	bar.background:SetBackdrop(backdrop)
-	bar.background:SetBackdropColor(0, 0, 0)
-	bar.background:SetBackdropBorderColor(0,0,0)
-	bar:CreateBackdrop()
-
-	-- Register
-	self.Statue = bar
 end

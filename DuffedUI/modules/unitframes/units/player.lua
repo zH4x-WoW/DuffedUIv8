@@ -326,8 +326,8 @@ function DuffedUIUnitFrames:Player()
 	if (D.MyClass == "SHAMAN") or (D.MyClass == "MAGE") or (D.MyClass == "DRUID") then
 		-- Default layout of Totems match Shaman class.
 		local Bar = CreateFrame("Frame", nil, self)
-		Bar:Point("TOP", AnchorFrameRessources, "BOTTOM", 0, -2)
-		Bar:Size(202, 8)
+		Bar:Point("TOP", AnchorFrameRessources, "BOTTOM", -1, -2)
+		Bar:Size(202, 6)
 
 		Bar.activeTotems = 0
 		Bar.Override = DuffedUIUnitFrames.UpdateTotemOverride
@@ -343,16 +343,17 @@ function DuffedUIUnitFrames:Player()
 		-- Totem Bar
 		for i = 1, MAX_TOTEMS do
 			Bar[i] = CreateFrame("StatusBar", nil, Bar)
-			Bar[i]:Height(8)
-			Bar[i]:SetStatusBarTexture(Texture)
+			Bar[i]:Height(6)
+			Bar[i]:SetStatusBarTexture(HealthTexture)
 			Bar[i]:EnableMouse(true)
+			Bar[i]:CreateBackdrop()
 
 			if i == 1 then
 				Bar[i]:Width((200 / 4) - 2)
 				Bar[i]:Point("LEFT", Bar, "LEFT", 0, 0)
 			else
-				Bar[i]:Width((200 / 4) - 1)
-				Bar[i]:Point("LEFT", Bar[i-1], "RIGHT", 1, 0)
+				Bar[i]:Width((200 / 4))
+				Bar[i]:Point("LEFT", Bar[i-1], "RIGHT", 2, 0)
 			end
 
 			Bar[i]:SetBackdrop(DuffedUIUnitFrames.Backdrop)
@@ -361,7 +362,7 @@ function DuffedUIUnitFrames:Player()
 
 			Bar[i].bg = Bar[i]:CreateTexture(nil, "BORDER")
 			Bar[i].bg:SetAllPoints()
-			Bar[i].bg:SetTexture(Texture)
+			Bar[i].bg:SetTexture(HealthTexture)
 			Bar[i].bg.multiplier = 0.3
 		end
 
