@@ -13,12 +13,12 @@ function DuffedUIUnitFrames:AddWarlockFeatures()
 	-- Warlock Class Shards
 	local Shards = CreateFrame("Frame", nil, self)
 	Shards:Point("BOTTOM", AnchorFrameRessources, "TOP", 0, 3)
-	Shards:Size((50 * 4) + 9, 6)
+	Shards:Size((50 * 4) + 9, 5)
 	Shards:CreateBackdrop()
 	
 	for i = 1, 4 do
 		Shards[i] = CreateFrame("StatusBar", nil, Shards)
-		Shards[i]:Height(6)
+		Shards[i]:Height(5)
 		Shards[i]:SetStatusBarTexture(Texture)
 		
 		if i == 1 then
@@ -58,7 +58,7 @@ function DuffedUIUnitFrames:AddWarlockFeatures()
 			local power = UnitPower("player")
 			self:SetValue(power)
 			if self.text then
-				self.text:SetText(power)
+				self.text:SetText(D.ShortValue(power))
 			end
 			self.TimeSinceLastUpdate = 0
 		end
