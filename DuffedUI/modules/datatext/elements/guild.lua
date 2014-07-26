@@ -45,17 +45,6 @@ local function BuildGuildTable()
 	end)
 end
 
-local function UpdateGuildXP()
-	local currentXP, remainingXP = UnitGetGuildXP("player")
-	local nextLevelXP = currentXP + remainingXP
-	
-	if nextLevelXP == 0 or maxDailyXP == 0 then return end
-	
-	local percentTotal = tostring(math.ceil((currentXP / nextLevelXP) * 100))
-	
-	guildXP[0] = { currentXP, nextLevelXP, percentTotal }
-end
-
 local function UpdateGuildMessage()
 	guildMotD = GetGuildRosterMOTD()
 end
@@ -133,30 +122,20 @@ local OnEnter = function(self)
 	local zonec, classc, levelc
 	local online = totalOnline
 	local GuildInfo = GetGuildInfo('player')
-	local GuildLevel = GetGuildLevel()
 
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
-	if GuildInfo and GuildLevel then
-		GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo, GuildLevel), string.format(guildInfoString2, L.DataText.Guild, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
+	if GuildInfo then
+		GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo), string.format(guildInfoString2, L.DataText.Guild, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 	end
 	
 	if guildMotD ~= "" then GameTooltip:AddLine(' ') GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
 	
 	local col = D.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
 	GameTooltip:AddLine' '
-	if GuildLevel and GuildLevel ~= 25 then
-		--UpdateGuildXP()
-		
-		if guildXP[0] then
-			local currentXP, nextLevelXP, percentTotal = unpack(guildXP[0])
-			
-			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..D.ShortValue(currentXP), D.ShortValue(nextLevelXP), percentTotal))
-		end
-	end
 	
 	local _, _, standingID, barMin, barMax, barValue = GetGuildFactionInfo()
-	if standingID ~= 8 then -- Not Max Rep
+	if standingID ~= 8 then
 		barMax = barMax - barMin
 		barValue = barValue - barMin
 		barMin = 0
@@ -202,12 +181,12 @@ end
 
 local Update = function(self)
 	if (not IsInGuild()) then
-		self.Text:SetText(D.PanelColor .. L.DataText.NoGuild .. "|r") -- I need a string :(
+		self.Text:SetText(D.PanelColor .. L.DataText.NoGuild .. "|r")
 		
 		return
 	end
 	
-	GuildRoster() -- Bux Fix on 5.4.
+	GuildRoster()
 
 	totalOnline = select(3, GetNumGuildMembers())
 	

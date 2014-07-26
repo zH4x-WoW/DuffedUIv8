@@ -31,6 +31,7 @@ DuffedUITooltips.Tooltips = {
 	WorldMapCompareTooltip1,
 	WorldMapCompareTooltip2,
 	WorldMapCompareTooltip3,
+	ItemRefTooltip,
 }
 
 DuffedUITooltips.Classification = {

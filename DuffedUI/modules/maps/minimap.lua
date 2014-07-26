@@ -65,7 +65,8 @@ function Minimap:StyleMinimap()
 	MailBorder:Hide()
 	MailIcon:SetTexture(C["medias"].Mail)
 	
-	LFG:SetParent(Minimap)
+	-- broken
+	--[[LFG:SetParent(Minimap)
 	LFG:ClearAllPoints()
 	LFG:SetPoint("BOTTOMRIGHT", 0, 0)
 	LFGBorder:Kill()
@@ -86,7 +87,7 @@ function Minimap:StyleMinimap()
 			LFGStatus:SetPoint("TOPRIGHT", LFG, "TOPLEFT", 0, 0)	
 		end
 	end
-	LFGStatus:HookScript("OnShow", UpdateLFGTooltip)
+	LFGStatus:HookScript("OnShow", UpdateLFGTooltip)]]--
 	
 	Map:SetScript("OnMouseUp", function(self, button)
 		if (button == "RightButton") then
