@@ -761,9 +761,7 @@ do
 				self.time:SetText("")
 				
 				local spark = self.spark
-				if (spark) then			
-					spark:Hide()
-				end
+				if (spark) then spark:Hide() end
 			else
 				local remaining = self.expirationTime - time
 				self.bar:SetValue(remaining)
@@ -1065,27 +1063,17 @@ if classFilter then
 end
 trinketDataSource:AddFilter(TRINKET_FILTER, TRINKET_BAR_COLOR)
 
-local yOffset = 7
-local xOffset = 0
+local Panel = D["Panels"]
+local yOffset = 5
 
-local playerFrame = CreateAuraBarFrame(playerDataSource,  UIParent)
-playerFrame:SetHiddenHeight(-yOffset)
+local playerFrame = CreateAuraBarFrame(playerDataSource, Panel.LeftChatTab)
 playerFrame:Point("BOTTOMLEFT", AnchorFrameClassTimer, "BOTTOMLEFT", 2, 0)
-playerFrame:Point("BOTTOMRIGHT", AnchorFrameClassTimer, "BOTTOMRIGHT", -2, 0)
+playerFrame:Point("BOTTOMRIGHT", AnchorFrameClassTimer, "BOTTOMRIGHT", -3, 0)
 
-local trinketFrame = CreateAuraBarFrame(trinketDataSource,  UIParent)
-trinketFrame:SetHiddenHeight(-yOffset)
-trinketFrame:Point("BOTTOMLEFT", playerFrame, "TOPLEFT", 0, yOffset)
-trinketFrame:Point("BOTTOMRIGHT", playerFrame, "TOPRIGHT", 0, yOffset)
+local trinketFrame = CreateAuraBarFrame(trinketDataSource, Panel.LeftChatTab)
+trinketFrame:Point("BOTTOMLEFT", playerFrame, "TOPLEFT", 0, 6)
+trinketFrame:Point("BOTTOMRIGHT", playerFrame, "TOPRIGHT", 0, 6)
 	
-if not targetdebuffs then
-	local targetFrame = CreateAuraBarFrame(targetDataSource,  UIParent)
-	targetFrame:SetHiddenHeight(-yOffset)
-	targetFrame:Point("BOTTOMLEFT", trinketFrame, "TOPLEFT", 0, yOffset)
-	targetFrame:Point("BOTTOMRIGHT", trinketFrame, "TOPRIGHT", 0, yOffset)
-else
-	local targetFrame = CreateAuraBarFrame(targetDataSource, UIParent)
-	targetFrame:SetHiddenHeight(-yOffset)
-	targetFrame:Point("BOTTOMLEFT", AnchorFrameClassTimerDebuff, "TOPLEFT", 0, 4)
-	targetFrame:Point("BOTTOMRIGHT", AnchorFrameClassTimerDebuff, "TOPRIGHT", 0, 4)
-end
+local targetFrame = CreateAuraBarFrame(targetDataSource, Panel.LeftChatTab)
+targetFrame:Point("BOTTOMLEFT", trinketFrame, "TOPLEFT", 0, 6)
+targetFrame:Point("BOTTOMRIGHT", trinketFrame, "TOPRIGHT", 0, 6)
