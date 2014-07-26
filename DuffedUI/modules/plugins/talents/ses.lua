@@ -153,12 +153,8 @@ MB_reload:Point("TOPLEFT", spec, "BOTTOMLEFT", 0, -2)
 MB_reload:SetAttribute("macrotext1", "/rl")
 MB_reload:Hide()
 
-D.CreateBtn("MB_am", MB_reload, 19, 19, "Addonmanager", "A")
-MB_am:Point("LEFT", MB_reload, "RIGHT", 2, 0)
-MB_am:SetAttribute("macrotext1", "/am")
-
 D.CreateBtn("MB_mui", MB_reload, 19, 19, "MoveUI", "M")
-MB_mui:Point("LEFT", MB_am, "RIGHT", 2, 0)
+MB_mui:Point("LEFT", MB_reload, "RIGHT", 2, 0)
 MB_mui:SetAttribute("macrotext1", "/moveui")
 
 D.CreateBtn("MB_binds", MB_reload, 19, 19, "Keybinds", "K")
