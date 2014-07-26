@@ -1,6 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C["misc"].ExperienceEnable) then return end
+if (not C["misc"].ReputationEnable) then return end
 
 local Miscellaneous = D["Miscellaneous"]
 local MaxLevel = MAX_PLAYER_LEVEL
