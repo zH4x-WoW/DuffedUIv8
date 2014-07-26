@@ -99,8 +99,6 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	local NumLines = self:NumLines()
 	local GetMouseFocus = GetMouseFocus()
 	local Unit = (select(2, self:GetUnit())) or (GetMouseFocus and GetMouseFocus:GetAttribute("unit"))
-	local Health = UnitHealth(Unit)
-	local MaxHealth = UnitHealth(Unit)
 	
 	if (not Unit) and (UnitExists("mouseover")) then
 		Unit = "mouseover"
@@ -131,7 +129,9 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	local Classification = UnitClassification(Unit)
 	local Title = UnitPVPName(Unit)
 	local R, G, B = GetQuestDifficultyColor(Level).r, GetQuestDifficultyColor(Level).g, GetQuestDifficultyColor(Level).b
-	local Color = DuffedUITooltips:GetColor(Unit)	
+	local Color = DuffedUITooltips:GetColor(Unit)
+	local Health = UnitHealth(Unit)
+	local MaxHealth = UnitHealth(Unit)
 	
 	if (not Color) then
 		Color = "|CFFFFFFFF"
