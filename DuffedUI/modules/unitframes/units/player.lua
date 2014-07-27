@@ -422,7 +422,5 @@ function DuffedUIUnitFrames:Player()
 		DuffedUIUnitFrames.AddShamanFeatures(self)
 	elseif (Class == "WARLOCK") then
 		DuffedUIUnitFrames.AddWarlockFeatures(self)
-	elseif (Class == "HUNTER") then
-		DuffedUIUnitFrames.AddHunterFeatures(self)
 	end
 end

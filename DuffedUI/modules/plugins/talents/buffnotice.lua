@@ -20,7 +20,6 @@ local BuffReminder1 = {
 		5118, -- Aspect of the Cheetah
 		6673, -- Battle Shout
 		13159, -- Aspect of the Pack
-		13165, -- Aspect of the Hawk
 		57330, -- Horn of Winter
 		109260, -- Aspect of the Iron Hawk
 	},

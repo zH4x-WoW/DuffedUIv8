@@ -1,8 +1,6 @@
 local D, C, L = select(2, ...):unpack()
 
-if (not C["auras"].Enable) then
-	return
-end
+if (not C["auras"].Enable) then return end
 
 local DuffedUIAuras = D["Auras"]
 local DuffedUIPanels = D["Panels"]
