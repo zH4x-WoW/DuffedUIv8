@@ -26,12 +26,17 @@ function WorldMap:ColorQuestText()
 		Text:SetTextColor(1, 1, 1)
 	end
 	
-	local Objectives = QuestInfoObjectivesFrame.Objectives
+	local Objectives = GetNumQuestLeaderBoards()
 	
-	for i = 1, #Objectives do
+	for i = 1, Objectives do
 		local Objective = _G["QuestInfoObjective"..i]
+		local Completed = select(3, GetQuestLogLeaderBoard(i))
 		
-		Objective:SetTextColor(1, 1, 1)
+		if Completed then
+			Objective:SetTextColor(0, 1, 0)
+		else
+			Objective:SetTextColor(1, 0, 0)
+		end
 	end
 end
 
@@ -78,6 +83,7 @@ function WorldMap:Skin()
 	local TrackingMenuButton = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button
 	local TrackingMenuBackground = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Background
 	local DetailsScroll = QuestMapDetailsScrollFrame
+	local WMDropDown = WorldMapLevelDropDown
 	
 	Map:StripTextures()
 	Map:CreateBackdrop()
@@ -154,7 +160,7 @@ function WorldMap:Skin()
 		local Text = (i == 1 and QUESTS_LABEL.." -->") or ("<-- "..QUESTS_LABEL)
 		
 		Button:ClearAllPoints()
-		Button:SetPoint("BOTTOMRIGHT", -2, 3)
+		Button:SetPoint("BOTTOMRIGHT", -3, 3)
 		Button:Size(100, 23)
 		Button:StripTextures()
 		Button:SkinButton()
@@ -193,6 +199,10 @@ function WorldMap:Skin()
 	XP.Icon:SetTexCoord(unpack(D.IconCoord))
 	XP.Backdrop:ClearAllPoints()
 	XP.Backdrop:SetOutside(XP.Icon)
+	
+	WMDropDown:SkinDropDown()
+	WMDropDown:ClearAllPoints()
+	WMDropDown:SetPoint("TOPLEFT", -18, -2)
 end
 
 function WorldMap:AddHooks()

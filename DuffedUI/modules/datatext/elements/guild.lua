@@ -45,6 +45,17 @@ local function BuildGuildTable()
 	end)
 end
 
+local function UpdateGuildXP()
+	local currentXP, remainingXP = UnitGetGuildXP("player")
+	local nextLevelXP = currentXP + remainingXP
+	
+	if nextLevelXP == 0 or maxDailyXP == 0 then return end
+	
+	local percentTotal = tostring(math.ceil((currentXP / nextLevelXP) * 100))
+	
+	guildXP[0] = { currentXP, nextLevelXP, percentTotal }
+end
+
 local function UpdateGuildMessage()
 	guildMotD = GetGuildRosterMOTD()
 end
@@ -121,18 +132,27 @@ local OnEnter = function(self)
 	local name, rank, level, zone, note, officernote, connected, status, class, isMobile
 	local zonec, classc, levelc
 	local online = totalOnline
-	local GuildInfo = GetGuildInfo('player')
+	local GuildInfo, GuildRank, GuildLevel = GetGuildInfo("player")
 
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
-	if GuildInfo then
-		GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo), string.format(guildInfoString2, L.DataText.Guild, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
+	if GuildInfo and GuildLevel then
+		GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo, GuildLevel), string.format(guildInfoString2, L.DataText.Guild, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 	end
 	
 	if guildMotD ~= "" then GameTooltip:AddLine(' ') GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
 	
 	local col = D.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
 	GameTooltip:AddLine' '
+	if GuildLevel and GuildLevel ~= 25 then
+		--UpdateGuildXP()
+		
+		if guildXP[0] then
+			local currentXP, nextLevelXP, percentTotal = unpack(guildXP[0])
+			
+			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..T.ShortValue(currentXP), T.ShortValue(nextLevelXP), percentTotal))
+		end
+	end
 	
 	local _, _, standingID, barMin, barMax, barValue = GetGuildFactionInfo()
 	if standingID ~= 8 then
@@ -145,6 +165,13 @@ local OnEnter = function(self)
 	if online > 1 then
 		GameTooltip:AddLine(' ')
 		for i = 1, #guildTable do
+			if i > ((D.ScreenHeight / 10)) then
+				GameTooltip:AddDoubleLine("...", "...")
+				GameTooltip:AddDoubleLine(" ", " ")
+
+				break
+			end
+
 			if online <= 1 then
 				if online > 1 then GameTooltip:AddLine(format("+ %d More...", online - modules.Guild.maxguild),ttsubh.r,ttsubh.g,ttsubh.b) end
 				break

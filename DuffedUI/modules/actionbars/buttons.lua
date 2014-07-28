@@ -13,7 +13,7 @@ local BarButtons = {}
 
 local OnClick = function(self, button)
 	if InCombatLockdown() then
-		return print(error)
+		return D.print(error)
 	end
 	
 	local Data = DuffedUIDataPerChar

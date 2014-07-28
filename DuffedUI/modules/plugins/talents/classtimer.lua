@@ -184,6 +184,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(114866), -- Soul Reaper (Blood)
 			CreateSpellEntry(130735), -- Soul Reaper (Frost)
 			CreateSpellEntry(108194), -- Asphyxiate
+			CreateSpellEntry(155159), -- Necrotic Plague
 		},
 		player = {
 			CreateSpellEntry(59052), -- Freezing Fog

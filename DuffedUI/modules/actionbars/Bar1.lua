@@ -63,7 +63,6 @@ function DuffedUIActionBars:CreateBar1()
 			for i = 1, Num do
 				Button = _G["ActionButton"..i]
 				self:SetFrameRef("ActionButton"..i, Button)
-				self["Button"..i] = Button
 			end	
 
 			self:Execute([[
@@ -109,4 +108,8 @@ function DuffedUIActionBars:CreateBar1()
 			MainMenuBar_OnEvent(self, event, ...)
 		end
 	end)
+	for i = 1, Num do
+		local Button = _G["ActionButton"..i]
+		ActionBar1["Button"..i] = Button
+	end
 end

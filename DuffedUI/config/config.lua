@@ -82,6 +82,7 @@ C["chat"] = {
 	["rBackground"] = true,
 	["Fade"] = true,
 	["JustifyLoot"] = true,
+	["Font"] = "DuffedUI Outline",
 }
 
 C["cooldowns"] = {

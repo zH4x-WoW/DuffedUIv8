@@ -20,7 +20,8 @@ local RightChatBackground = D["Panels"].RightChatBackground
 local CubeLeft = D["Panels"].CubeLeft
 local DuffedUIChat = CreateFrame("Frame")
 local UIFrameFadeRemoveFrame = UIFrameFadeRemoveFrame
-local Font = D.GetFont(C["chat"].TabFont)
+local Font = D.GetFont(C["chat"].Font)
+local Font, FontSize, FontFlags = _G[Font]:GetFont()
 
 -- Update editbox border color
 function DuffedUIChat:UpdateEditBoxColor()
@@ -55,9 +56,11 @@ function DuffedUIChat:StyleFrame(frame)
 
 	if Tab.conversationIcon then Tab.conversationIcon:Kill() end
 	
-	-- always set alpha to 1, don"t fade it anymore
 	Tab:SetAlpha(1)
 	Tab.SetAlpha = UIFrameFadeRemoveFrame
+	
+	TabText:SetFont(Font, FontSize, FontFlags)
+	TabText.SetFont = Noop
 	
 	if not C["chat"].lBackground and C["chat"].rBackground then
 		-- hide text when setting chat

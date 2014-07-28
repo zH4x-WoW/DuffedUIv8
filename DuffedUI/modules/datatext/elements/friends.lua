@@ -243,6 +243,13 @@ local OnEnter = function(self)
 			GameTooltip:AddLine(' ')
 			GameTooltip:AddLine(worldOfWarcraftString)
 			for i = 1, #friendTable do
+				if i > ((D.ScreenHeight / 10) / 2) then
+					GameTooltip:AddDoubleLine("...", "...")
+					GameTooltip:AddDoubleLine(" ", " ")
+
+					break
+				end
+
 				if friendTable[i][5] then
 					if GetRealZoneText() == friendTable[i][4] then zonec = activezone else zonec = inactivezone end
 					classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[friendTable[i][3]], GetQuestDifficultyColor(friendTable[i][2])
@@ -260,6 +267,13 @@ local OnEnter = function(self)
 			local status = 0
 			for i = 1, #BNTable do
 				if BNTable[i][7] then
+					if i > ((T.ScreenHeight / 10) / 2) then
+						GameTooltip:AddDoubleLine("...", "...")
+						GameTooltip:AddDoubleLine(" ", " ")
+
+						break
+					end
+
 					if BNTable[i][6] == wowString then
 						if (BNTable[i][8] == true) then status = 1 elseif (BNTable[i][9] == true) then status = 2 else status = 3 end
 	
