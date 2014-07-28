@@ -24,8 +24,8 @@ function DuffedUIUnitFrames:Raid()
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
 	
-	Health.Value = CreateFontString(nil, "OVERLAY")
-	Health:SetFontObject(Font)
+	Health.Value = Health:CreateFontString(nil, "OVERLAY")
+	Health.Value:SetFont(C["medias"].Font, 12, "THINOUTLINE")
 	Health.Value:Point("CENTER", Health, 0, -6)
 	
 	Health.frequentUpdates = true

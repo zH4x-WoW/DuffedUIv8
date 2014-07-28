@@ -97,7 +97,7 @@ function DuffedUIChat:StyleFrame(frame)
 	EditBox.Backdrop:SetAllPoints(DataTextLeft)
 	EditBox.Backdrop:SetFrameStrata("LOW")
 	EditBox.Backdrop:SetFrameLevel(1)
-	EditBox.Backdrop:SetBackdropColor(unpack(C["medias"].BackdropColor))
+	EditBox.Backdrop:SetBackdropColor(unpack(C["general"].BackdropColor))
 	
 	-- Hide textures
 	for i = 1, #CHAT_FRAME_TEXTURES do _G[FrameName..CHAT_FRAME_TEXTURES[i]]:SetTexture(nil) end

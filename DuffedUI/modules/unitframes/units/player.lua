@@ -85,9 +85,6 @@ function DuffedUIUnitFrames:Player()
 		percHP = D.SetFontString(Health, C["medias"].Font, 20, "THINOUTLINE")
 		percHP:SetTextColor(unpack(C["medias"].PrimaryDataTextColor))
 		percHP:SetPoint("LEFT", Health, "RIGHT", 25, -10)
-		--[[elseif unit == "target" then
-			percHP:SetPoint("RIGHT", health, "LEFT", -25, -10)
-		end]]--
 		self:Tag(percHP, "[DuffedUI:perchp]")
 		self.percHP = percHP
 	end

@@ -129,7 +129,6 @@ function WorldMap:Skin()
 	ViewAllButton:ClearAllPoints()
 	ViewAllButton:SetPoint("LEFT", Map.Header, "RIGHT", 2, 0)
 	ViewAllButton:Size(288, 23)
-	ViewAllButton:SetTemplate("Transparent")
 	
 	BackButton:SkinButton()
 	BackButton:ClearAllPoints()

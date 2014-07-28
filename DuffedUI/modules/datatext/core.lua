@@ -17,8 +17,8 @@ DuffedUIDT.Font = D.GetFont(C["datatexts"].Font)
 DuffedUIDT.Texts = {}
 DuffedUIDT.Anchors = {}
 DuffedUIDT.Menu = {}
-DuffedUIDT.NameColor = D.RGBToHex(unpack(C["datatexts"].NameColor))
-DuffedUIDT.ValueColor = D.RGBToHex(unpack(C["datatexts"].ValueColor))
+DuffedUIDT.NameColor = D.RGBToHex(unpack(C["medias"].PrimaryDataTextColor))
+DuffedUIDT.ValueColor = D.RGBToHex(unpack(C["medias"].SecondaryDataTextColor))
 
 function DuffedUIDT:AddToMenu(name, data)
 	if self["Texts"][name] then

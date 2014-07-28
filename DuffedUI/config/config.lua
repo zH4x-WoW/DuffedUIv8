@@ -93,8 +93,6 @@ C["cooldowns"] = {
 C["datatexts"] = {
 	["Battleground"] = true,
 	["LocalTime"] = true,
-	["NameColor"] = {1, 1, 1},
-	["ValueColor"] = {1, 1, 1},
 	["Font"] = "DuffedUI",
 }
 

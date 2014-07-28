@@ -8,6 +8,8 @@ local DropDownMenus = {}
 function DuffedUIConfig:SetOption(group, option, value)
 	local C = DuffedUIConfigNotShared
 	
+	if (not C[group]) then C[group] = {} end
+	
 	C[group][option] = value -- Save our setting
 	
 	if (not self.Functions[group]) then return end
@@ -18,7 +20,7 @@ end
 function DuffedUIConfig:SetCallback(group, option, func)
 	if (not self.Functions[group]) then self.Functions[group] = {} end
 	
-	self.Functions[group][option] = func -- Set a function to call
+	self.Functions[group][option] = func
 end
 
 DuffedUIConfig.ColorDefaults = {
@@ -181,7 +183,7 @@ end
 
 local ButtonOnClick = function(self)
 	if self.Toggled then
-		self.Tex:SetTexture(" ")
+		self.Tex:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\Blank")
 		self.Toggled = false
 	else
 		self.Tex:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
@@ -365,6 +367,8 @@ local CreateConfigButton = function(parent, group, option, value)
 	
 	local Button = CreateFrame("Button", nil, parent)
 	Button:SetTemplate()
+	Button:SkinCheckBox()
+	Button.Backdrop:SetBackdropColor( 0, 0, 0, 0 )
 	Button:SetSize(20, 20)
 	Button.Toggled = false
 	Button:SetScript("OnClick", ButtonOnClick)
@@ -582,29 +586,21 @@ local CreateConfigDropDown = function(parent, group, option, value, type)
 end
 
 local ShowGroup = function(group)
-	if (not GroupPages[group]) then
-		return
-	end
+	if (not GroupPages[group]) then return end
 
 	for group, page in pairs(GroupPages) do
 		page:Hide()
 		
-		if page.Slider then
-			page.Slider:Hide()
-		end
+		if page.Slider then page.Slider:Hide() end
 	end
 	
 	GroupPages[group]:Show()
 	DuffedUIConfigFrameTitle.Text:SetText(group)
 	
-	if GroupPages[group].Slider then
-		GroupPages[group].Slider:Show()
-	end
+	if GroupPages[group].Slider then GroupPages[group].Slider:Show() end
 end
 
-local GroupButtonOnClick = function(self)
-	ShowGroup(self.Group)
-end
+local GroupButtonOnClick = function(self) ShowGroup(self.Group) end
 
 -- Create the config window
 function DuffedUIConfig:CreateConfigWindow()
@@ -621,8 +617,6 @@ function DuffedUIConfig:CreateConfigWindow()
 		end
 	end
 	
-	--NumGroups = NumGroups + 2 -- Reload & Close buttons
-
 	local Height = (12 + (NumGroups * 20) + ((NumGroups - 1) * 4))
 
 	DuffedUIConfigNotShared = C

@@ -203,6 +203,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(108200), -- Remorseless Winter
 			CreateSpellEntry(51460), -- Runic Corruption
 			CreateSpellEntry(49039), -- Lichborne
+			CreateSpellEntry(164047), -- Shadow of Death
 		},
 		procs = {
 			CreateSpellEntry(53365), -- Unholy Strength
