@@ -219,7 +219,7 @@ function DuffedUITooltips:SetColor()
 	local Dead = Unit and UnitIsDead(Unit)
 	local R, G, B
 	
-	self:SetBackdropColor(unpack(C["medias"].BackdropColor))
+	self:SetBackdropColor(unpack(C["general"].BackdropColor))
 	self:SetBackdropBorderColor(0, 0, 0)
 	
 	if Player then
@@ -253,11 +253,11 @@ function DuffedUITooltips:SetColor()
 				self:SetBackdropBorderColor(R, G, B)
 			end
 		else
-			HealthBar:SetStatusBarColor(unpack(C["medias"].BorderColor))
+			HealthBar:SetStatusBarColor(unpack(C["general"].BorderColor))
 			
 			if Insets then
-				self:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
-				HealthBar.Backdrop:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
+				self:SetBackdropBorderColor(unpack(C["general"].BorderColor))
+				HealthBar.Backdrop:SetBackdropBorderColor(unpack(C["general"].BorderColor))
 			end
 		end
 	end
@@ -273,8 +273,8 @@ function DuffedUITooltips:OnUpdate(elapsed)
 		BackdropColor[1] = Red
 		BackdropColor[2] = Green
 		BackdropColor[3] = Blue
-		self:SetBackdropColor(unpack(C["medias"].BackdropColor))
-		self:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
+		self:SetBackdropColor(unpack(C["general"].BackdropColor))
+		self:SetBackdropBorderColor(unpack(C["general"].BorderColor))
 	end
 end
 

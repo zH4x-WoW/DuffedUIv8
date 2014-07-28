@@ -10,19 +10,13 @@ function DuffedUIConfig:SetOption(group, option, value)
 	
 	C[group][option] = value -- Save our setting
 	
-	if (not self.Functions[group]) then
-		return
-	end
+	if (not self.Functions[group]) then return end
 	
-	if self.Functions[group][option] then
-		self.Functions[group][option](value) -- Run the associated function
-	end
+	if self.Functions[group][option] then self.Functions[group][option](value) end
 end
 
 function DuffedUIConfig:SetCallback(group, option, func)
-	if (not self.Functions[group]) then
-		self.Functions[group] = {}
-	end
+	if (not self.Functions[group]) then self.Functions[group] = {} end
 	
 	self.Functions[group][option] = func -- Set a function to call
 end
@@ -43,9 +37,22 @@ DuffedUIConfig.ColorDefaults = {
 	},
 }
 
+function DuffedUIConfig:UpdateColorDefaults()
+	local C = DuffedUI[2]
+
+	if C["general"].InOut then
+		self.ColorDefaults["General"]["BorderColor"] = {0.6, 0.6, 0.6}
+		self.ColorDefaults["General"]["BackdropColor"] = {0.1, 0.1, 0.1}
+	else
+		self.ColorDefaults["General"]["BorderColor"] = {.05, .05, .05}
+		self.ColorDefaults["General"]["BackdropColor"] = {0.125, 0.125, 0.125}
+	end
+end
+
 -- Filter unwanted groups
 local Filter = {
 	["medias"] = true,
+	["OrderedIndex"] = true,
 }
 
 local DuffedUICredits = {
@@ -54,6 +61,7 @@ local DuffedUICredits = {
 	"Rav",
 	"loki",
 	"Sinaris",
+	"Digawen",
 }
 
 local Credits = {
@@ -116,9 +124,7 @@ local OrderedNext = function(t, state)
     return
 end
 
-local PairsByKeys = function(t)
-    return OrderedNext, t, nil
-end
+local PairsByKeys = function(t) return OrderedNext, t, nil end
 
 -- Create custom controls for options.
 local ControlOnEnter = function(self)
@@ -128,9 +134,7 @@ local ControlOnEnter = function(self)
 	GameTooltip:Show()
 end
 
-local ControlOnLeave = function(self)
-	GameTooltip:Hide()
-end
+local ControlOnLeave = function(self) GameTooltip:Hide() end
 
 local SetControlInformation = function(control, group, option)
 	if (not DuffedUIConfig[Locale] or not DuffedUIConfig[Locale][group]) then
@@ -145,9 +149,7 @@ local SetControlInformation = function(control, group, option)
 	
 	local Info = DuffedUIConfig[Locale][group][option]
 	
-	if (not Info) then
-		return
-	end
+	if (not Info) then return end
 	
 	control.Label:SetText(Info.Name)
 	
@@ -162,13 +164,9 @@ local SetControlInformation = function(control, group, option)
 	end
 end
 
-local EditBoxOnMouseDown = function(self)
-	self:SetAutoFocus(true)
-end
+local EditBoxOnMouseDown = function(self) self:SetAutoFocus(true) end
 
-local EditBoxOnEditFocusLost = function(self)
-	self:SetAutoFocus(false)
-end
+local EditBoxOnEditFocusLost = function(self) self:SetAutoFocus(false) end
 
 local EditBoxOnEnterPressed = function(self)
 	self:SetAutoFocus(false)
@@ -176,19 +174,17 @@ local EditBoxOnEnterPressed = function(self)
 	
 	local Value = self:GetText()
 	
-	if (type(tonumber(Value)) == "number") then -- Assume we want a number, not a string
-		Value = tonumber(Value)
-	end
+	if (type(tonumber(Value)) == "number") then Value = tonumber(Value) end
 	
 	DuffedUIConfig:SetOption(self.Group, self.Option, Value)
 end
 
 local ButtonOnClick = function(self)
 	if self.Toggled then
-		self.Tex:SetAnimation("Gradient", "texture", 0, 0.3, 1, 0, 0, nil, 0, 1, 0)
+		self.Tex:SetTexture(" ")
 		self.Toggled = false
 	else
-		self.Tex:SetAnimation("Gradient", "texture", 0, 0.3, 0, 1, 0, nil, 1, 0, 0)
+		self.Tex:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
 		self.Toggled = true
 	end
 	
@@ -258,9 +254,7 @@ local ListItemOnClick = function(self)
 	DuffedUIConfig:SetOption(DropDown.Group, DropDown.Option, self.Name)
 end
 
-local ListItemOnEnter = function(self)
-	self.Hover:SetTexture(0.2, 1, 0.2, 0.5)
-end
+local ListItemOnEnter = function(self) self.Hover:SetTexture(0.2, 1, 0.2, 0.5) end
 
 local ListItemOnLeave = function(self)
 	self.Hover:SetTexture(0.2, 1, 0.2, 0)
@@ -379,7 +373,7 @@ local CreateConfigButton = function(parent, group, option, value)
 	Button.Tex = Button:CreateTexture(nil, "OVERLAY")
 	Button.Tex:SetPoint("TOPLEFT", 2, -2)
 	Button.Tex:SetPoint("BOTTOMRIGHT", -2, 2)
-	Button.Tex:SetTexture(1, 0, 0)
+	Button.Tex:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
 	
 	Button.Check = ButtonCheck
 	Button.Uncheck = ButtonUncheck
@@ -616,6 +610,8 @@ end
 function DuffedUIConfig:CreateConfigWindow()
 	local C = select(2, DuffedUI:unpack())
 	
+	self:UpdateColorDefaults()
+	
 	-- Dynamic sizing
 	local NumGroups = 0
 
@@ -625,9 +621,9 @@ function DuffedUIConfig:CreateConfigWindow()
 		end
 	end
 	
-	NumGroups = NumGroups + 2 -- Reload & Close buttons
+	--NumGroups = NumGroups + 2 -- Reload & Close buttons
 
-	local Height = (12 + (NumGroups * 20) + ((NumGroups - 1) * 4)) -- Padding + (NumButtons * ButtonSize) + ((NumButtons - 1) * ButtonSpacing)
+	local Height = (12 + (NumGroups * 20) + ((NumGroups - 1) * 4))
 
 	DuffedUIConfigNotShared = C
 	
@@ -672,30 +668,32 @@ function DuffedUIConfig:CreateConfigWindow()
 	TitleIcon.bg:SetTexture(C["medias"].Duffed)
 	
 	local CloseButton = CreateFrame("Button", nil, ConfigFrame)
-	CloseButton:Size(132, 20)
+	CloseButton:Size(((ConfigFrame:GetWidth() / 2) - 2), 20)
 	CloseButton:SetTemplate("Transparent")
 	CloseButton:SetScript("OnClick", function() ConfigFrame:Hide() end)
 	CloseButton:StyleButton()
 	CloseButton:SetFrameLevel(LeftWindow:GetFrameLevel() + 1)
-	CloseButton:SetPoint("TOPLEFT", RightWindow, "TOPRIGHT", 3, 0)
+	CloseButton:SetPoint("TOPLEFT", ConfigFrame, "BOTTOMLEFT", 0, -3)
 	
 	CloseButton.Text = CloseButton:CreateFontString(nil, "OVERLAY")
 	CloseButton.Text:SetFont(C["medias"].Font, 12)
 	CloseButton.Text:Point("CENTER", CloseButton)
 	CloseButton.Text:SetText(CLOSE)
+	CloseButton.Text:SetTextColor(Colors.r, Colors.b, Colors.g)
 	
 	local ReloadButton = CreateFrame("Button", nil, ConfigFrame)
-	ReloadButton:Size(132, 20)
+	ReloadButton:Size(((ConfigFrame:GetWidth() / 2) - 2), 20)
 	ReloadButton:SetTemplate("Transparent")
 	ReloadButton:SetScript("OnClick", function() ReloadUI() end)
 	ReloadButton:StyleButton()
 	ReloadButton:SetFrameLevel(LeftWindow:GetFrameLevel() + 1)
-	ReloadButton:SetPoint("TOP", CloseButton, "BOTTOM", 0, -4)
+	ReloadButton:SetPoint("TOPRIGHT", ConfigFrame, "BOTTOMRIGHT", 0, -3)
 
 	ReloadButton.Text = ReloadButton:CreateFontString(nil, "OVERLAY")
 	ReloadButton.Text:SetFont(C["medias"].Font, 12)
 	ReloadButton.Text:Point("CENTER", ReloadButton)
 	ReloadButton.Text:SetText("Reload UI")
+	ReloadButton.Text:SetTextColor(Colors.r, Colors.b, Colors.g)
 	
 	local LastButton
 	local ButtonCount = 0
@@ -712,16 +710,16 @@ function DuffedUIConfig:CreateConfigWindow()
 
 			local GroupPage = CreateFrame("Frame", nil, ConfigFrame)
 			GroupPage:SetTemplate("Transparent")
-			GroupPage:Size(300, Height)
+			GroupPage:Size(480, Height)
 			GroupPage:Point("TOPRIGHT", ConfigFrame)
 			
 			GroupPage.Controls = {["EditBox"] = {}, ["Color"] = {}, ["Button"] = {}, ["DropDown"] = {}}
 			
 			if (GroupHeight > Height) then
-				GroupPage:Size(300, GroupHeight)
+				GroupPage:Size(480, GroupHeight)
 
 				local ScrollFrame = CreateFrame("ScrollFrame", nil, ConfigFrame)
-				ScrollFrame:Size(300, Height)
+				ScrollFrame:Size(480, Height)
 				ScrollFrame:Point("TOPRIGHT", ConfigFrame)
 				ScrollFrame:SetScrollChild(GroupPage)
 
@@ -866,12 +864,12 @@ function DuffedUIConfig:CreateConfigWindow()
 	
 	-- Credits for DuffedUI
 	local DuffedUICreditFrame = CreateFrame("Frame", "DuffedUIFrameCredit", ConfigFrame)
-	DuffedUICreditFrame:SetTemplate()
+	DuffedUICreditFrame:SetTemplate("Transparent")
 	DuffedUICreditFrame:Size(647, 22)
-	DuffedUICreditFrame:Point("TOP", ConfigFrame, "BOTTOM", 0, -3)
+	DuffedUICreditFrame:Point("TOP", ConfigFrame, "BOTTOM", 0, -26)
 
 	local DuffedUIScrollFrame = CreateFrame("ScrollFrame", nil, ConfigFrame)
-	DuffedUIScrollFrame:Size(647, 22)
+	DuffedUIScrollFrame:Size(643, 22)
 	DuffedUIScrollFrame:Point("CENTER", DuffedUICreditFrame, 0, 0)
 
 	local DuffedUIScrollable = CreateFrame("Frame", nil, DuffedUIScrollFrame)
@@ -907,14 +905,14 @@ function DuffedUIConfig:CreateConfigWindow()
 		self:SetAnimation("Move", "Horizontal", -1250, 0.5)
 	end)
 	
-	-- Credits for DuffedUI
+	-- Credits for Tukui
 	local CreditFrame = CreateFrame("Frame", "DuffedUIFrameCredit", ConfigFrame)
-	CreditFrame:SetTemplate()
+	CreditFrame:SetTemplate("Transparent")
 	CreditFrame:Size(647, 22)
 	CreditFrame:Point("TOP", DuffedUIFrameCredit, "BOTTOM", 0, -3)
 
 	local ScrollFrame = CreateFrame("ScrollFrame", nil, ConfigFrame)
-	ScrollFrame:Size(647, 22)
+	ScrollFrame:Size(643, 22)
 	ScrollFrame:Point("CENTER", CreditFrame, 0, 0)
 
 	local Scrollable = CreateFrame("Frame", nil, ScrollFrame)

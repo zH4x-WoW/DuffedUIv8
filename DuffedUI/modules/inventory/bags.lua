@@ -539,10 +539,10 @@ function Bags:SlotUpdate(id, button)
 		if not Lock and Rarity and Rarity > 1 then
 			button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
 		else
-			button:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
+			button:SetBackdropBorderColor(unpack(C["general"].BorderColor))
 		end
 	else
-		button:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
+		button:SetBackdropBorderColor(unpack(C["general"].BorderColor))
 	end
 end
 

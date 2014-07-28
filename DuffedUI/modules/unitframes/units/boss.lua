@@ -144,7 +144,7 @@ function DuffedUIUnitFrames:Boss()
 	CastBar.Button:Width(CastBar:GetHeight() + 4)
 	CastBar.Button:Point("RIGHT", CastBar, "LEFT", -4, 0)
 	CastBar.Button:SetTemplate()
-	CastBar.Button:SetBackdropBorderColor(C["medias"].BorderColor[1] * 0.7, C["medias"].BorderColor[2] * 0.7, C["medias"].BorderColor[3] * 0.7)
+	CastBar.Button:SetBackdropBorderColor(C["general"].BorderColor[1] * 0.7, C["general"].BorderColor[2] * 0.7, C["general"].BorderColor[3] * 0.7)
 	
 	CastBar.Icon = CastBar.Button:CreateTexture(nil, "ARTWORK")
 	CastBar.Icon:Point("TOPLEFT", CastBar.Button, 2, -2)

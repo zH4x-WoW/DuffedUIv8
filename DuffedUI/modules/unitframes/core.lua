@@ -482,7 +482,7 @@ function DuffedUIUnitFrames:PostUpdateAura(unit, button, index, offset, filter, 
 		if(button.filter == "HARMFUL") then
 			if(not UnitIsFriend("player", unit) and button.owner ~= "player" and button.owner ~= "vehicle") then
 				button.icon:SetDesaturated(true)
-				button:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
+				button:SetBackdropBorderColor(unpack(C["general"].BorderColor))
 			else
 				local color = DebuffTypeColor[DType] or DebuffTypeColor.none
 				button.icon:SetDesaturated(false)

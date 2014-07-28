@@ -65,8 +65,8 @@ local function SetTemplate(f, t, tex)
 	local balpha = 1
 	if t == "Transparent" then balpha = 0.8 end
 	
-	local borderr, borderg, borderb = unpack(C["medias"].BorderColor)
-	local backdropr, backdropg, backdropb = unpack(C["medias"].BackdropColor)
+	local borderr, borderg, borderb = unpack(C["general"].BorderColor)
+	local backdropr, backdropg, backdropb = unpack(C["general"].BackdropColor)
 	local backdropa = balpha
 	
 	if tex then 
@@ -350,8 +350,8 @@ local function SkinButton(Frame, Strip)
 	Frame:HookScript("OnLeave", function(self)
 		local Color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
 		
-		self:SetBackdropColor(C["medias"].BackdropColor[1], C["medias"].BackdropColor[2], C["medias"].BackdropColor[3])
-		self:SetBackdropBorderColor(C["medias"].BorderColor[1], C["medias"].BorderColor[2], C["medias"].BorderColor[3])	
+		self:SetBackdropColor(C["general"].BackdropColor[1], C["general"].BackdropColor[2], C["general"].BackdropColor[3])
+		self:SetBackdropBorderColor(C["general"].BorderColor[1], C["general"].BorderColor[2], C["general"].BorderColor[3])	
 	end)
 end
 
@@ -537,8 +537,8 @@ local function SkinScrollBar(frame)
 			ScrollUpButton.texture = ScrollUpButton:CreateTexture(nil, "OVERLAY")
 			Point(ScrollUpButton.texture, "TOPLEFT", 2, -2)
 			Point(ScrollUpButton.texture, "BOTTOMRIGHT", -2, 2)
-			ScrollUpButton.texture:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\arrowup.tga]])
-			ScrollUpButton.texture:SetVertexColor(unpack(C.Medias.BorderColor))
+			ScrollUpButton.texture:SetTexture([[Interface\AddOns\DuffedUI\medias\textures\arrowup.tga]])
+			ScrollUpButton.texture:SetVertexColor(unpack(C["general"].BorderColor))
 		end
 
 		ScrollDownButton:StripTextures()
@@ -547,7 +547,7 @@ local function SkinScrollBar(frame)
 		if not ScrollDownButton.texture then
 			ScrollDownButton.texture = ScrollDownButton:CreateTexture(nil, "OVERLAY")
 			ScrollDownButton.texture:SetTexture([[Interface\AddOns\DuffedUI\medias\textures\arrowdown.tga]])
-			ScrollDownButton.texture:SetVertexColor(unpack(C["medias"].BorderColor))
+			ScrollDownButton.texture:SetVertexColor(unpack(C["general"].BorderColor))
 			ScrollDownButton.texture:Point("TOPLEFT", 2, -2)
 			ScrollDownButton.texture:Point("BOTTOMRIGHT", -2, 2)
 		end

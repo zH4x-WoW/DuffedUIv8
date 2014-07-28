@@ -34,7 +34,7 @@ function DuffedUIChat:UpdateEditBoxColor()
 			local ID = GetChannelName(EditBox:GetAttribute("channelTarget"))
 			
 			if (ID == 0) then
-				Backdrop:SetAnimation("Gradient", "Border", 0, 0.5, unpack(C["medias"].BorderColor))
+				Backdrop:SetAnimation("Gradient", "Border", 0, 0.5, unpack(C["general"].BorderColor))
 			else
 				Backdrop:SetAnimation("Gradient", "Border", 0, 0.5, ChatTypeInfo[ChatType..ID].r, ChatTypeInfo[ChatType..ID].g, ChatTypeInfo[ChatType..ID].b)
 			end

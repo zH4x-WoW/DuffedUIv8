@@ -51,9 +51,7 @@ function DuffedUIActionBars:SkinButton()
 		end
 	end
 	
-	if (Button.isSkinned) then
-		return
-	end
+	if (Button.isSkinned) then return end
 	
 	Count:SetFontObject(Font)
 	
@@ -68,9 +66,7 @@ function DuffedUIActionBars:SkinButton()
 		end
 	end
 	
-	if (BtnBG) then
-		BtnBG:Kill()
-	end
+	if (BtnBG) then BtnBG:Kill() end
  
 	if (C["actionbars"].HotKey) then
 		ActionButton_UpdateHotkeys(self, self.buttonType)
@@ -102,9 +98,7 @@ function DuffedUIActionBars:SkinButton()
 		Normal:SetPoint("TOPLEFT")
 		Normal:SetPoint("BOTTOMRIGHT")
 		
-		if (Button:GetChecked()) then
-			ActionButton_UpdateState(Button)
-		end
+		if (Button:GetChecked()) then ActionButton_UpdateState(Button) end
 	end
 	
 	Button:StyleButton()
@@ -180,9 +174,7 @@ function DuffedUIActionBars:SetupFlyoutButton()
 		if Button then
 			DuffedUIActionBars.SkinButton(Button)
 			
-			if Button:GetChecked() then
-				Button:SetChecked(nil)
-			end
+			if Button:GetChecked() then Button:SetChecked(nil) end
 		end
 	end
 end
@@ -219,9 +211,7 @@ function DuffedUIActionBars:StyleFlyout()
 		arrowDistance = 2
 	end
 	
-	if self:GetParent():GetParent():GetName() == "SpellBookSpellIconsFrame" then
-		return
-	end
+	if self:GetParent():GetParent():GetName() == "SpellBookSpellIconsFrame" then return end
 	
 	if self:GetAttribute("flyoutDirection") ~= nil then
 		local point, _, _, _, _ = self:GetParent():GetParent():GetPoint()
@@ -230,16 +220,12 @@ function DuffedUIActionBars:StyleFlyout()
 			self.FlyoutArrow:ClearAllPoints()
 			self.FlyoutArrow:SetPoint("TOP", self, "TOP", 0, arrowDistance)
 			SetClampedTextureRotation(self.FlyoutArrow, 0)
-			if not InCombatLockdown() then
-				self:SetAttribute("flyoutDirection", "UP")
-			end
+			if not InCombatLockdown() then self:SetAttribute("flyoutDirection", "UP") end
 		else
 			self.FlyoutArrow:ClearAllPoints()
 			self.FlyoutArrow:SetPoint("LEFT", self, "LEFT", -arrowDistance, 0)
 			SetClampedTextureRotation(self.FlyoutArrow, 270)
-			if not InCombatLockdown() then
-				self:SetAttribute("flyoutDirection", "LEFT")
-			end
+			if not InCombatLockdown() then self:SetAttribute("flyoutDirection", "LEFT") end
 		end
 	end
 end
@@ -269,9 +255,7 @@ end
  
 local HideOverlayGlow = function(self)
     if self.overlay then
-        if self.overlay.animIn:IsPlaying() then
-            self.overlay.animIn:Stop()
-        end
+        if self.overlay.animIn:IsPlaying() then self.overlay.animIn:Stop() end
         if self:IsVisible() then
             self.overlay.animOut:Play()
         else
