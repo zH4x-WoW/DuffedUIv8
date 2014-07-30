@@ -43,7 +43,7 @@ local playerFaction = select(1, UnitFactionGroup("player")) == 'Horde' and 1 or 
 local playerGUID = UnitGUID("player")
 local mult = 768/match(GetCVar('gxResolution'), '%d+x(%d+)')
 
-local ScheduleFrame = CreateFrame('frame', 'ScheduleFrame', UIParent)
+local ScheduleFrame = CreateFrame("Frame", 'ScheduleFrame', UIParent)
 local ScheduleFrameActive = false
 local timeToUpdate = 0
 
@@ -201,9 +201,9 @@ local UpdateCastbarColor = function(self)
 	if self.castbar == nil then return end
 	if self.castbar.shield == nil then return end
 	if self.castbar.shield:IsShown() then
-		self.castbar:SetStatusBarColor(0.78, 0.25, 0.25, 1)
+		self.castbar:SetStatusBarColor(.78, .25, .25, 1)
 	else 
-		self.castbar:SetStatusBarColor(1, 208/255, 0)
+		self.castbar:SetStatusBarColor(1, .82, 0)
 	end
 end
 
@@ -603,7 +603,7 @@ local CastBar_OnShow = function(self)
 	if self.castbar.shield:IsShown() then 
 		self.castbar:SetStatusBarColor(.78, .25, .25, 1) 
 	else 
-		self.castbar:SetStatusBarColor(1, 208/255, 0) 
+		self.castbar:SetStatusBarColor(1, .82, 0) 
 	end
 	
 	self.castbar.icon:SetSize(C["nameplates"].CastHeight + mult * 9 + C["nameplates"].Height, C["nameplates"].CastHeight + mult * 9 + C["nameplates"].Height)
@@ -632,7 +632,7 @@ end
 local RepositePlate = function(self)
 	if self.plate and self.health then
 		self.plate:Hide()
-		self.plate:SetPoint("CENTER", WorldFrame, 'BOTTOMLEFT', self:GetCenter())
+		self.plate:SetPoint("CENTER", WorldFrame, "BOTTOMLEFT", self:GetCenter())
 		self.plate:Show()
 	end
 end
@@ -656,7 +656,7 @@ local StylePlate = function(self)
 	self.old_threat = old_threat
 	
 	if self.plate == nil then
-		self.plate = CreateFrame('frame', nil, WorldFrame)
+		self.plate = CreateFrame("Frame", nil, WorldFrame)
 		self.plate:SetFrameStrata("BACKGROUND")
 		self.plate:Hide()
 		self.plate:SetSize(C["nameplates"].Width, C["nameplates"].Height)
@@ -712,7 +712,7 @@ local StylePlate = function(self)
 	
 	if self.health.name == nil then
 		self.health.name = self.health:CreateFontString('$parentHealth', "OVERLAY")
-		self.health.name:SetPoint('BOTTOMLEFT', self.health, "TOPLEFT", 0, 3)
+		self.health.name:SetPoint("BOTTOMLEFT", self.health, "TOPLEFT", 0, 3)
 		self.health.name:SetSize(C["nameplates"].Width, C["nameplates"].Height)
 		self.health.name:SetFontObject(Font)
 	end
@@ -762,10 +762,6 @@ local StylePlate = function(self)
 		self.castbar.name = self.castbar:CreateFontString(nil, "OVERLAY")
 		self.castbar.name:SetPoint("TOP", self.castbar, "BOTTOM", -3, 0)
 		self.castbar.name:SetFontObject(Font)
-		--[[self.castbar.name.bg = self.castbar:CreateTexture(nil, "BACKGROUND")
-		self.castbar.name.bg:SetTexture('Interface\\Common\\NameShadow')
-		self.castbar.name.bg:SetSize(C["nameplates"].Width, C["nameplates"].CastHeight)
-		self.castbar.name.bg:SetPoint("TOP", self.castbar, "BOTTOM", -3, 0)]]--
 	end
 	
 	if self.raidicon == nil then
@@ -800,7 +796,7 @@ local StylePlate = function(self)
 	
 	if C["nameplates"].ShowDebuffs then
 		if self.AuraWidget == nil then
-			self.AuraWidget = CreateFrame('frame', nil, self.plate)
+			self.AuraWidget = CreateFrame("Frame", nil, self.plate)
 			self.AuraWidget:SetHeight(32) 
 			self.AuraWidget:Show()
 			self.AuraWidget:SetSize(C["nameplates"].Width, C["nameplates"].Height)

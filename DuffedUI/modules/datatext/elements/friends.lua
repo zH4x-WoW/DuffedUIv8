@@ -267,7 +267,7 @@ local OnEnter = function(self)
 			local status = 0
 			for i = 1, #BNTable do
 				if BNTable[i][7] then
-					if i > ((T.ScreenHeight / 10) / 2) then
+					if i > ((D.ScreenHeight / 10) / 2) then
 						GameTooltip:AddDoubleLine("...", "...")
 						GameTooltip:AddDoubleLine(" ", " ")
 
