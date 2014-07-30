@@ -328,13 +328,13 @@ local CreateAuraIcon = function(parent)
 	button.border:SetSize(20 - mult * 2, 15 - mult * 2)
 	button.border:SetPoint("CENTER")
 	
-	button.icon = button:CreateTexture(nil, 'BORDER')
+	button.icon = button:CreateTexture(nil, "BORDER")
 	button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	button.icon:SetSize(20 - mult * 4, 15 - mult * 4)
 	button.icon:SetPoint("CENTER")
 	
 	button.expired = button:CreateFontString(nil, "OVERLAY")
-	button.expired:SetPoint("TOP", 1, 4)
+	button.expired:SetPoint("TOP", 1, 3)
 	button.expired:SetJustifyH("CENTER")	
 	button.expired:SetFontObject(Font_Debuff)
 	
@@ -657,7 +657,6 @@ local StylePlate = function(self)
 	
 	if self.plate == nil then
 		self.plate = CreateFrame('frame', nil, WorldFrame)
-		self.plate:EnableMouse(false)
 		self.plate:SetFrameStrata("BACKGROUND")
 		self.plate:Hide()
 		self.plate:SetSize(C["nameplates"].Width, C["nameplates"].Height)
@@ -666,55 +665,54 @@ local StylePlate = function(self)
 	
 	if self.health == nil then
 		self.health = CreateFrame("StatusBar", nil, self.plate)
-		self.health:EnableMouse(false)
 		self.health:SetStatusBarTexture(Texture)
 		self.health:SetSize(C["nameplates"].Width, C["nameplates"].Height)
 		self.health:SetPoint("BOTTOM", self, "BOTTOM", 0, 5)
 
-		self.health.bg = self.health:CreateTexture(nil, 'BORDER')
+		self.health.bg = self.health:CreateTexture(nil, "BORDER")
 		self.health.bg:SetTexture(.1, .1, .1)
 		self.health.bg:SetAllPoints()
-		self.health:GetStatusBarTexture():SetDrawLayer('BORDER', 0)
-		self.health.bg:SetDrawLayer('BORDER', -1)
+		self.health:GetStatusBarTexture():SetDrawLayer("BORDER", 0)
+		self.health.bg:SetDrawLayer("BORDER", -1)
 	end
 
 	if self.border == nil then
-		self.border = self.health:CreateTexture(nil, 'BORDER')
-		self.border:SetPoint('TOPLEFT', -mult, mult)
-		self.border:SetPoint('BOTTOMRIGHT', mult, -mult)
+		self.border = self.health:CreateTexture(nil, "BORDER")
+		self.border:SetPoint("TOPLEFT", -mult, mult)
+		self.border:SetPoint("BOTTOMRIGHT", mult, -mult)
 		self.border:SetTexture(unpack(C["medias"].BorderColor))
-		self.border:SetDrawLayer('BORDER', -2)
+		self.border:SetDrawLayer("BORDER", -2)
 	end
 
 	if self.threat == nil then
-		self.threat = self.health:CreateTexture(nil, 'BORDER')
-		self.threat:SetPoint('TOPLEFT', -mult*2, mult*2)
-		self.threat:SetPoint('BOTTOMRIGHT', mult*2, -mult*2)
+		self.threat = self.health:CreateTexture(nil, "BORDER")
+		self.threat:SetPoint("TOPLEFT", -mult*2, mult*2)
+		self.threat:SetPoint("BOTTOMRIGHT", mult*2, -mult*2)
 		self.threat:SetTexture(1, 1, 1)
-		self.threat:SetDrawLayer('BORDER', -3)
+		self.threat:SetDrawLayer("BORDER", -3)
 	end
 
 	if self.rare == nil then
-		self.rare = self.health:CreateTexture(nil, 'BORDER')
-		self.rare:SetPoint('TOPLEFT', -mult*3, mult*3)
-		self.rare:SetPoint('BOTTOMRIGHT', mult*3, -mult*3)
+		self.rare = self.health:CreateTexture(nil, "BORDER")
+		self.rare:SetPoint("TOPLEFT", -mult*3, mult*3)
+		self.rare:SetPoint("BOTTOMRIGHT", mult*3, -mult*3)
 		self.rare:SetTexture(1, 1, 1)
 		self.rare:SetGradientAlpha('HORIZONTAL', 1, .4, 0, 1, 0, 0, 0, 0)
-		self.rare:SetDrawLayer('BORDER', -4)
+		self.rare:SetDrawLayer("BORDER", -4)
 	end
 
 	if self.tar == nil then
-		self.tar = self.health:CreateTexture(nil, 'BORDER')
-		self.tar:SetPoint('TOPLEFT', -mult*3, mult*3)
-		self.tar:SetPoint('BOTTOMRIGHT', mult*3, -mult*3)
+		self.tar = self.health:CreateTexture(nil, "BORDER")
+		self.tar:SetPoint("TOPLEFT", -mult*3, mult*3)
+		self.tar:SetPoint("BOTTOMRIGHT", mult*3, -mult*3)
 		self.tar:SetTexture(1, 1, 1)
 		self.tar:SetGradientAlpha('HORIZONTAL', 0, 0, 0, 0, .4, 1, 0, 1)
-		self.tar:SetDrawLayer('BORDER', -5)
+		self.tar:SetDrawLayer("BORDER", -5)
 	end
 	
 	if self.health.name == nil then
 		self.health.name = self.health:CreateFontString('$parentHealth', "OVERLAY")
-		self.health.name:SetPoint('BOTTOMLEFT', self.health, 'TOPLEFT', 0, 3)
+		self.health.name:SetPoint('BOTTOMLEFT', self.health, "TOPLEFT", 0, 3)
 		self.health.name:SetSize(C["nameplates"].Width, C["nameplates"].Height)
 		self.health.name:SetFontObject(Font)
 	end
@@ -735,14 +733,14 @@ local StylePlate = function(self)
 		self.castbar:SetFrameLevel(self.old_castbar:GetFrameLevel())
 		self.castbar:SetFrameStrata(self.old_castbar:GetFrameStrata())
 		
-		self.castbar.bg = self.castbar:CreateTexture(nil, 'BORDER')
-		self.castbar.bg:SetPoint('TOPLEFT', self.castbar, -mult, mult)
-		self.castbar.bg:SetPoint('BOTTOMRIGHT', self.castbar, mult, -mult)
+		self.castbar.bg = self.castbar:CreateTexture(nil, "BORDER")
+		self.castbar.bg:SetPoint("TOPLEFT", self.castbar, -mult, mult)
+		self.castbar.bg:SetPoint("BOTTOMRIGHT", self.castbar, mult, -mult)
 		self.castbar.bg:SetTexture(unpack(C["medias"].BackdropColor))
-		self.castbar.bg:SetDrawLayer('BORDER', -8)
+		self.castbar.bg:SetDrawLayer("BORDER", -8)
 		
 		self.castbar:SetSize(C["nameplates"].Width + 3, C["nameplates"].CastHeight)
-		self.castbar:SetPoint('TOP', self.health, "BOTTOM", 0, -5)
+		self.castbar:SetPoint("TOP", self.health, "BOTTOM", 0, -5)
 		self.castbar:SetStatusBarTexture(Texture)
 		self.castbar:GetStatusBarTexture():SetHorizTile(true)
 		self.castbar:Hide()
@@ -750,29 +748,29 @@ local StylePlate = function(self)
 	
 	if self.castbar.icon == nil then
 		self.castbar.icon = self.castbar:CreateTexture('$parentIcon', "OVERLAY")
-		self.castbar.icon:SetPoint('TOPRIGHT', self.health, 'TOPLEFT', -5, 2)		
+		self.castbar.icon:SetPoint("TOPRIGHT", self.health, "TOPLEFT", -5, 1)		
 		self.castbar.icon:SetTexCoord(.1, .9, .1, .9)
 		self.castbar.shield = old_cbshield
 		
-		self.castbar.icon.bg = self.castbar:CreateTexture(nil, 'BORDER')
-		self.castbar.icon.bg:SetPoint('TOPLEFT', self.castbar.icon, -mult, mult)
-		self.castbar.icon.bg:SetPoint('BOTTOMRIGHT', self.castbar.icon, mult, -mult)
+		self.castbar.icon.bg = self.castbar:CreateTexture(nil, "BORDER")
+		self.castbar.icon.bg:SetPoint("TOPLEFT", self.castbar.icon, -mult, mult)
+		self.castbar.icon.bg:SetPoint("BOTTOMRIGHT", self.castbar.icon, mult, -mult)
 		self.castbar.icon.bg:SetTexture(unpack(C["medias"].BackdropColor))
 	end
 	
 	if self.castbar.name == nil then
 		self.castbar.name = self.castbar:CreateFontString(nil, "OVERLAY")
-		self.castbar.name:SetPoint('TOP', self.castbar, "BOTTOM", -3, 0)
+		self.castbar.name:SetPoint("TOP", self.castbar, "BOTTOM", -3, 0)
 		self.castbar.name:SetFontObject(Font)
-		self.castbar.name.bg = self.castbar:CreateTexture(nil, "BACKGROUND")
+		--[[self.castbar.name.bg = self.castbar:CreateTexture(nil, "BACKGROUND")
 		self.castbar.name.bg:SetTexture('Interface\\Common\\NameShadow')
 		self.castbar.name.bg:SetSize(C["nameplates"].Width, C["nameplates"].CastHeight)
-		self.castbar.name.bg:SetPoint('TOP', self.castbar, "BOTTOM", -3, 0)
+		self.castbar.name.bg:SetPoint("TOP", self.castbar, "BOTTOM", -3, 0)]]--
 	end
 	
 	if self.raidicon == nil then
 		raidicon:ClearAllPoints()
-		raidicon:SetPoint("BOTTOM", self.health, 'TOP', 0, 16)
+		raidicon:SetPoint("BOTTOM", self.health, "TOP", 0, 16)
 		raidicon:SetSize(35, 35)
 		raidicon:SetTexture('Interface\\TargetingFrame\\UI-RaidTargetingIcons')
 		self.raidicon = raidicon
@@ -806,7 +804,7 @@ local StylePlate = function(self)
 			self.AuraWidget:SetHeight(32) 
 			self.AuraWidget:Show()
 			self.AuraWidget:SetSize(C["nameplates"].Width, C["nameplates"].Height)
-			self.AuraWidget:SetPoint("BOTTOM", self.health, 'TOP', 0, 16)
+			self.AuraWidget:SetPoint("BOTTOM", self.health, "TOP", 0, 16)
 			
 			self.AuraWidget.PollFunction = function(self, elapsed)
 				local timeleft = ceil(elapsed-GetTime())
