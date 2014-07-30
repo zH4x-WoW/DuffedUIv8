@@ -794,36 +794,34 @@ local StylePlate = function(self)
 		end
 	end
 	
-	if C["nameplates"].ShowDebuffs then
-		if self.AuraWidget == nil then
-			self.AuraWidget = CreateFrame("Frame", nil, self.plate)
-			self.AuraWidget:SetHeight(32) 
-			self.AuraWidget:Show()
-			self.AuraWidget:SetSize(C["nameplates"].Width, C["nameplates"].Height)
-			self.AuraWidget:SetPoint("BOTTOM", self.health, "TOP", 0, 16)
-			
-			self.AuraWidget.PollFunction = function(self, elapsed)
-				local timeleft = ceil(elapsed-GetTime())
-				if timeleft > 60 then self.expired:SetText(ceil(timeleft/60)..'m') else self.expired:SetText(ceil(timeleft)) end
-			end
-			self.AuraWidget.AuraIconFrames = {}
-			local AuraIconFrames = self.AuraWidget.AuraIconFrames
-			for index = 1, C["nameplates"].MaxDebuffs do 
-				AuraIconFrames[index] = CreateAuraIcon(self.AuraWidget)
-			end
-			local FirstRowCount = min(C["nameplates"].MaxDebuffs/2)
-			
-			AuraIconFrames[1]:SetPoint('RIGHT', self.AuraWidget, -1, 0)
-			for index = 2, C["nameplates"].MaxDebuffs do AuraIconFrames[index]:SetPoint('RIGHT', AuraIconFrames[index-1], 'LEFT', -3, 0) end		
-			
-			self.AuraWidget._Hide = self.AuraWidget.Hide
-			self.AuraWidget.Hide = function() if self.AuraWidget.guidcache then self.AuraWidget.unit = nil end self.AuraWidget:_Hide() end
-			self.AuraWidget:SetScript("OnHide", function() 
-				for index = 1, C["nameplates"].MaxDebuffs do 
-					ScheduleHide(AuraIconFrames[index], 0) 
-				end 
-			end)	
+	if self.AuraWidget == nil then
+		self.AuraWidget = CreateFrame("Frame", nil, self.plate)
+		self.AuraWidget:SetHeight(32) 
+		self.AuraWidget:Show()
+		self.AuraWidget:SetSize(C["nameplates"].Width, C["nameplates"].Height)
+		self.AuraWidget:SetPoint("BOTTOM", self.health, "TOP", 0, 16)
+		
+		self.AuraWidget.PollFunction = function(self, elapsed)
+			local timeleft = ceil(elapsed-GetTime())
+			if timeleft > 60 then self.expired:SetText(ceil(timeleft/60)..'m') else self.expired:SetText(ceil(timeleft)) end
 		end
+		self.AuraWidget.AuraIconFrames = {}
+		local AuraIconFrames = self.AuraWidget.AuraIconFrames
+		for index = 1, C["nameplates"].MaxDebuffs do 
+			AuraIconFrames[index] = CreateAuraIcon(self.AuraWidget)
+		end
+		local FirstRowCount = min(C["nameplates"].MaxDebuffs/2)
+		
+		AuraIconFrames[1]:SetPoint('RIGHT', self.AuraWidget, -1, 0)
+		for index = 2, C["nameplates"].MaxDebuffs do AuraIconFrames[index]:SetPoint('RIGHT', AuraIconFrames[index-1], 'LEFT', -3, 0) end		
+		
+		self.AuraWidget._Hide = self.AuraWidget.Hide
+		self.AuraWidget.Hide = function() if self.AuraWidget.guidcache then self.AuraWidget.unit = nil end self.AuraWidget:_Hide() end
+		self.AuraWidget:SetScript("OnHide", function() 
+			for index = 1, C["nameplates"].MaxDebuffs do 
+				ScheduleHide(AuraIconFrames[index], 0) 
+			end 
+		end)	
 	end
 		
 	Schedule(self, self.oldhealth)
@@ -943,8 +941,8 @@ Plates.updateAll = function(self)
 	self:RegisterEvent('UPDATE_MOUSEOVER_UNIT')
 	self:RegisterEvent('PLAYER_TARGET_CHANGED')
 	self:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
-	self:RegisterEvent('UNIT_TARGET')
-	self:RegisterEvent('UNIT_AURA')
+	self:RegisterEvent("UNIT_TARGET")
+	self:RegisterEvent("UNIT_AURA")
 	self:RegisterEvent("UNIT_COMBO_POINTS")
 end
 
@@ -1062,17 +1060,18 @@ Plates:SetScript('OnEvent', function(self, event, ...)
 			end
 		end
 		
-	elseif event == 'PLAYER_ENTERING_WORLD' then
+	elseif event == "PLAYER_ENTERING_WORLD" then
 		Plates.updateAll(self)
-		self:UnregisterEvent('PLAYER_ENTERING_WORLD')
-	elseif event == 'UNIT_TARGET' then
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	elseif event == "UNIT_TARGET" then
 		GroupTargetList = wipe(GroupTargetList)
 		for name, unitid in pairs(GroupMembersList) do if UnitExists(unitid.."target") then GroupTargetList[UnitGUID(unitid.."target")] = unitid.."target" end end
-	elseif event == 'UNIT_AURA' then
+	elseif event == "UNIT_AURA" then
 		local unit = ...
 		if unit == "target" or unit == "focus" then UpdateAurasByUnit(unit) end
 	end
 end)
 
-Plates:RegisterEvent('PLAYER_LOGIN')
+Plates:RegisterEvent("PLAYER_LOGIN")
+Plates:RegisterEvent("PLAYER_ENTERING_WORLD")
 Plates.updateAll(Plates)

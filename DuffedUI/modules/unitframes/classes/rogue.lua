@@ -91,9 +91,7 @@ function DuffedUIUnitFrames:AddRogueFeatures()
 		end)
 		
 		ComboPoints["UNIT_AURA"] = function(self, unit)
-			if (unit ~= "player") then
-				return
-			end
+			if (unit ~= "player") then return end
 			
 			local Count = GetAnticipation()
 			
@@ -136,13 +134,13 @@ function DuffedUIUnitFrames:AddRogueFeatures()
 		end
 
 		ComboPoints.Anticipation = ComboPoints:CreateFontString(nil, "OVERLAY")
-		ComboPoints.Anticipation:SetFont(Font, 12)
-		ComboPoints.Anticipation:SetPoint("BOTTOM", ComboPoints, "TOP", 0, 1)
+		ComboPoints.Anticipation:SetFont(Font, 16, "THINOUTLINE")
+		ComboPoints.Anticipation:SetPoint("RIGHT", ComboPoints, "LEFT", 0, -3)
 		ComboPoints.Anticipation:SetShadowColor(0, 0, 0)
 		ComboPoints.Anticipation:SetShadowOffset(1.25, -1.25)
 		
-		local Width = (200 / 5) - 2
-
+		local Width = 38
+		
 		for i = 1, NumPoints do
 			ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
 			ComboPoints[i]:SetStatusBarTexture(Texture)
