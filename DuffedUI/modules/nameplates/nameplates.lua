@@ -11,13 +11,9 @@ local MAX_DISPLAYABLE_DEBUFFS = 5
 local NATIVE_PLATE_WIDTH, NATIVE_PLATE_HEIGHT, NATIVE_CASTBAR_HEIGHT = C["nameplates"].Width, C["nameplates"].Height, C["nameplates"].CastHeight
 local NATIVE_FONT = CreateFont('NATIVE_FONT')
 NATIVE_FONT:SetFont(C["medias"].Font, 11, 'THINOUTLINE')
-NATIVE_FONT:SetShadowColor(0, 0, 0)
-NATIVE_FONT:SetShadowOffset(0, 0)
 local NATIVE_FONT_Debuff = CreateFont('NATIVE_FONT_Debuff')
 NATIVE_FONT_Debuff:SetFont(C["medias"].Font, 9, 'THINOUTLINE')
 NATIVE_FONT_Debuff:SetTextColor(1.00,0.96,0.41)
-NATIVE_FONT_Debuff:SetShadowColor(0, 0, 0)
-NATIVE_FONT_Debuff:SetShadowOffset(0, 0)
 local filter_by_health = true
 -- spell filter (for resto druid) - modify it or change empty table ()
 local FilterSpellsCashe = {}
@@ -627,7 +623,7 @@ local CastBar_OnShow = function(self)
 		self.castbar:SetStatusBarColor(1, 208/255, 0) 
 	end
 	
-	self.castbar.icon:SetSize(NATIVE_CASTBAR_HEIGHT + mult*3 + NATIVE_PLATE_HEIGHT, NATIVE_CASTBAR_HEIGHT + mult*3 + NATIVE_PLATE_HEIGHT)
+	self.castbar.icon:SetSize(NATIVE_CASTBAR_HEIGHT + mult * 9 + NATIVE_PLATE_HEIGHT, NATIVE_CASTBAR_HEIGHT + mult * 9 + NATIVE_PLATE_HEIGHT)
 	
 	self.castbar:Hide()
 	HideQueque(self)
@@ -738,13 +734,6 @@ local StylePlate = function(self)
 		self.health.name:SetPoint('BOTTOMLEFT', self.health, 'TOPLEFT', 0, 3)
 		self.health.name:SetSize(NATIVE_PLATE_WIDTH, NATIVE_PLATE_HEIGHT)
 		self.health.name:SetFontObject(NATIVE_FONT)
-	
-		self.health.name.bg = self.health:CreateTexture(nil, 'BORDER')
-		self.health.name.bg:SetSize(NATIVE_PLATE_WIDTH, NATIVE_PLATE_HEIGHT*2)
-		self.health.name.bg:SetPoint('BOTTOM', self.health, 'TOP', 0, 0)
-		self.health.name.bg:SetTexture('Interface\\Common\\NameShadow')
-		self.health.name.bg:SetTexCoord(0, 1, 1, 0)
-		self.health.name.bg:SetAlpha(.7)
 	end
 
 	if self.health.perc == nil then
@@ -760,7 +749,7 @@ local StylePlate = function(self)
 	
 	if self.castbar == nil then
 		self.castbar = CreateFrame('Statusbar', nil, self.plate)
-		self.castbar:EnableMouse(false)
+		--self.castbar:EnableMouse(false)
 		self.castbar:SetFrameLevel(self.old_castbar:GetFrameLevel())
 		self.castbar:SetFrameStrata(self.old_castbar:GetFrameStrata())
 		
@@ -770,8 +759,8 @@ local StylePlate = function(self)
 		self.castbar.bg:SetTexture(unpack(C["medias"].BackdropColor))
 		self.castbar.bg:SetDrawLayer('BORDER', -8)
 		
-		self.castbar:SetSize(NATIVE_PLATE_WIDTH, NATIVE_CASTBAR_HEIGHT)
-		self.castbar:SetPoint('TOP', self.health, 'BOTTOM', 0, -3)
+		self.castbar:SetSize(NATIVE_PLATE_WIDTH + 3, NATIVE_CASTBAR_HEIGHT)
+		self.castbar:SetPoint('TOP', self.health, 'BOTTOM', 0, -5)
 		self.castbar:SetStatusBarTexture(Texture)
 		self.castbar:GetStatusBarTexture():SetHorizTile(true)
 		self.castbar:Hide()
@@ -779,8 +768,7 @@ local StylePlate = function(self)
 	
 	if self.castbar.icon == nil then
 		self.castbar.icon = self.castbar:CreateTexture('$parentIcon', 'OVERLAY')
-		self.castbar.icon:SetSize(NATIVE_CASTBAR_HEIGHT + mult*3 + NATIVE_PLATE_HEIGHT, NATIVE_CASTBAR_HEIGHT + mult*3 + NATIVE_PLATE_HEIGHT)
-		self.castbar.icon:SetPoint('TOPRIGHT', self.health, 'TOPLEFT', -4, 0)		
+		self.castbar.icon:SetPoint('TOPRIGHT', self.health, 'TOPLEFT', -5, 2)		
 		self.castbar.icon:SetTexCoord(.1, .9, .1, .9)
 		self.castbar.shield = old_cbshield
 		

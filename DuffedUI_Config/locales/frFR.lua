@@ -207,6 +207,7 @@ DuffedUIConfig["frFR"] = {
 		["BagFilter"] = {
 			["Name"] = "Enable Bag filter",
 			["Desc"] = "Automatically deletes useless items from your bags when looted",
+			["Default"] = "Automatically deletes useless items from your bags when looted",
 		},
 	},
 	

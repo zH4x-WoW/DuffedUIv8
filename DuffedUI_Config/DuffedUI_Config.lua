@@ -514,7 +514,7 @@ local CreateConfigDropDown = function(parent, group, option, value, type)
 	local D, C = DuffedUI:unpack()
 
 	local DropDown = CreateFrame("Button", nil, parent)
-	DropDown:Size(100, 20)
+	DropDown:Size(120, 20)
 	DropDown:SetTemplate()
 	DropDown.Type = "DropDown"
 	DropDown.Group = group

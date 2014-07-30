@@ -5,6 +5,7 @@ local Inventory = D["Inventory"]
 local BagFilter = CreateFrame("Frame")
 local Count
 local Link
+local TrashList = "\n\nTrash List:\n" -- 6.0 localize me
 
 BagFilter.Trash = {
 	32902, -- Bottled Nethergon Energy
@@ -32,15 +33,15 @@ function BagFilter:OnEvent(event)
 	end
 end
 
-function BagFilter:AddItemsToDescription()
+function BagFilter:UpdateConfigDescription()
 	if (not IsAddOnLoaded("DuffedUI_Config")) then return end
 
 	local Locale = GetLocale()
 	local Group = DuffedUIConfig[Locale]["Bags"]["BagFilter"]
 
 	if Group then
-		local Desc = Group.Desc
-		local Items = Desc .. "\n\nTrash List:\n"
+		local Desc = Group.Default
+		local Items = Desc .. TrashList -- 6.0 localize me
 
 		for i = 1, #self.Trash do
 			local Name, Link = GetItemInfo(self.Trash[i])
@@ -54,6 +55,23 @@ function BagFilter:AddItemsToDescription()
 			end
 		end
 		DuffedUIConfig[Locale]["bags"]["BagFilter"]["Desc"] = Items
+	end
+end
+
+function BagFilter:AddItem(id)
+	tinsert(self.Trash, id)
+
+	self:UpdateConfigDescription()
+end
+
+function BagFilter:RemoveItem(id)
+	for i = 1, #self.Trash do
+		if (self.Trash[i] == id) then
+			tremove(self.Trash, i)
+			self:UpdateConfigDescription()
+
+			break
+		end
 	end
 end
 
