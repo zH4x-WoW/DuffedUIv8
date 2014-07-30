@@ -139,7 +139,7 @@ function DuffedUIChat:StyleFrame(frame)
 	if (not Frame.isDocked and ID == 4 and TabText:GetText() == LOOT) then
 		Frame:SetJustifyH("RIGHT")
 	end
-
+	
 	Frame.IsSkinned = true
 end
 

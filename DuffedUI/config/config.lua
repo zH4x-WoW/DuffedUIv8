@@ -1,8 +1,8 @@
 local D, C, L = select(2, ...):unpack()
 
-----------------------------------------------------------------
--- Default settings of DuffedUI
-----------------------------------------------------------------
+----------------------------------
+-- Default settings of DuffedUI --
+----------------------------------
 
 C["general"] = {
 	["AutoScale"] = true,
@@ -112,7 +112,7 @@ C["nameplates"] = {
 	["Width"] = 120,
 	["Height"] = 8,
 	["CastHeight"] = 5,
-	["Spacing"] = 4,
+	["Spacing"] = 6,
 	["NontargetAlpha"] = 1,
 	["Texture"] = "Blank",
 }

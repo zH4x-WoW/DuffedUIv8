@@ -22,13 +22,11 @@ WorldMap.QuestTexts = {
 }
 
 function WorldMap:ColorQuestText()
-	for _, Text in pairs(WorldMap.QuestTexts) do
-		Text:SetTextColor(1, 1, 1)
-	end
+	for _, Text in pairs(WorldMap.QuestTexts) do Text:SetTextColor(1, 1, 1) end
 	
-	local Objectives = GetNumQuestLeaderBoards()
+	local Objectives = QuestInfoObjectivesFrame.Objectives
 	
-	for i = 1, Objectives do
+	for i = 1, #Objectives do
 		local Objective = _G["QuestInfoObjective"..i]
 		local Completed = select(3, GetQuestLogLeaderBoard(i))
 		
@@ -94,7 +92,7 @@ function WorldMap:Skin()
 	Map.Header = CreateFrame("Frame", nil, Map)
 	Map.Header:Size(Map.Backdrop:GetWidth(), 23)
 	Map.Header:SetPoint("BOTTOMLEFT", Map.Backdrop, "TOPLEFT", 0, 2)
-	Map.Header:SetTemplate("Transparent")
+	Map.Header:SetTemplate()
 	
 	MapBorder:StripTextures()
 	MapBorderInset:StripTextures()

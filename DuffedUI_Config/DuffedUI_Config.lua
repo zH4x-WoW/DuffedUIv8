@@ -619,8 +619,6 @@ function DuffedUIConfig:CreateConfigWindow()
 	
 	local Height = (12 + (NumGroups * 20) + ((NumGroups - 1) * 4))
 
-	DuffedUIConfigNotShared = C
-	
 	local ConfigFrame = CreateFrame("Frame", "DuffedUIConfigFrame", UIParent)
 	ConfigFrame:Size(647, Height)
 	ConfigFrame:Point("CENTER")

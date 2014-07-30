@@ -163,23 +163,23 @@ local OnEnter = function(self)
 	end
 	
 	if online > 1 then
+		local Count = 0
+
 		GameTooltip:AddLine(' ')
 		for i = 1, #guildTable do
-			if i > ((D.ScreenHeight / 10)) then
-				GameTooltip:AddDoubleLine("...", "...")
-				GameTooltip:AddDoubleLine(" ", " ")
-
-				break
-			end
-
 			if online <= 1 then
-				if online > 1 then GameTooltip:AddLine(format("+ %d More...", online - modules.Guild.maxguild),ttsubh.r,ttsubh.g,ttsubh.b) end
 				break
 			end
 
 			name, rank, level, zone, note, officernote, connected, status, class, isMobile = unpack(guildTable[i])
 
 			if connected and name ~= UnitName("player") then
+				if Count > ((D.ScreenHeight / 10) / 2) then
+					GameTooltip:AddLine(" ")
+					GameTooltip:AddLine(format("+ "..INSPECT_GUILD_NUM_MEMBERS, online - Count),ttsubh.r,ttsubh.g,ttsubh.b)
+					break
+				end
+
 				if GetRealZoneText() == zone then zonec = activezone else zonec = inactivezone end
 				classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class], GetQuestDifficultyColor(level)
 				
@@ -192,6 +192,8 @@ local OnEnter = function(self)
 				else
 					GameTooltip:AddDoubleLine(string.format(levelNameStatusString, levelc.r*255, levelc.g*255, levelc.b*255, level, name, status), zone, classc.r,classc.g,classc.b, zonec.r,zonec.g,zonec.b)
 				end
+				
+				Count = Count + 1
 			end
 		end
 	end

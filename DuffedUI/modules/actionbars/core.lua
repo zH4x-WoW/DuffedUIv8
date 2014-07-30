@@ -322,7 +322,7 @@ DuffedUIActionBars:SetScript("OnEvent", function(self, event, addon)
 		self:UnregisterEvent("ADDON_LOADED")
 		
 		hooksecurefunc("ActionButton_Update", self.SkinButton)
-		--hooksecurefunc("ActionButton_UpdateFlyout", self.StyleFlyout) -- BROKEN 6.0
+		hooksecurefunc("ActionButton_UpdateFlyout", self.StyleFlyout) -- BROKEN 6.0
 		hooksecurefunc("ActionButton_ShowOverlayGlow", self.StartButtonHighlight)
 		hooksecurefunc("ActionButton_HideOverlayGlow", self.StopButtonHighlight)
 		hooksecurefunc("ActionButton_UpdateHotkeys", self.UpdateHotKey)

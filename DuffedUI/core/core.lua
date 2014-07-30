@@ -189,6 +189,48 @@ D.ColorGradient = function(a, b, ...)
 	return R1 + (R2 - R1) * RelPercent, G1 + (G2 - G1) * RelPercent, B1 + (B2 - B1) * RelPercent
 end
 
+-- used to return role
+D.CheckRole = function()
+	local role = ""
+	local tree = GetSpecialization()
+	
+	if tree then
+		role = select(6, GetSpecializationInfo(tree))
+	end
+
+	return role
+end
+
+local function CheckRole(self, event, unit)
+	local tree = GetSpecialization()
+	local role = tree and select(6, GetSpecializationInfo(tree))
+
+	if role == "TANK" then
+		D.Role = "Tank"
+	elseif role == "HEALER" then
+		D.Role = "Healer"
+	elseif role == "DAMAGER" then
+		local playerint = select(2, UnitStat("player", 4))
+		local playeragi = select(2, UnitStat("player", 2))
+		local base, posBuff, negBuff = UnitAttackPower("player")
+		local playerap = base + posBuff + negBuff
+
+		if (playerap > playerint) or (playeragi > playerint) then
+			D.Role = "Melee"
+		else
+			D.Role = "Caster"
+		end
+	end
+end
+local RoleUpdater = CreateFrame("Frame")
+RoleUpdater:RegisterEvent("PLAYER_ENTERING_WORLD")
+RoleUpdater:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+RoleUpdater:RegisterEvent("PLAYER_TALENT_UPDATE")
+RoleUpdater:RegisterEvent("CHARACTER_POINTS_CHANGED")
+RoleUpdater:RegisterEvent("UNIT_INVENTORY_CHANGED")
+RoleUpdater:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
+RoleUpdater:SetScript("OnEvent", CheckRole)
+
 local WaitTable = {}
 local WaitFrame
 D.Delay = function(delay, func, ...)

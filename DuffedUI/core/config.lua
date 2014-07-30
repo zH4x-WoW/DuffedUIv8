@@ -1,19 +1,26 @@
 local D, C, L = select(2, ...):unpack()
 
+if (not DuffedUIConfigNotShared) then DuffedUIConfigNotShared = {} end
+
 local Settings = DuffedUIConfigNotShared
 
-if (Settings) then
-	for group, table in pairs(Settings) do
-		if (not table) then
-			return
-		end
-		
-		for option, value in pairs(table) do
-			if (not C[group]) then
-				Settings[group] = nil
-			else
-				C[group][option] = value
+for group, options in pairs(Settings) do
+	if C[group] then
+		local Count = 0
+
+		for option, value in pairs(options) do
+			if (C[group][option] ~= nil) then
+				if (C[group][option] == value) then
+					Settings[group][option] = nil
+				else
+					Count = Count + 1
+					C[group][option] = value
+				end
 			end
 		end
-	end
-end
+
+		if (Count == 0) then Settings[group] = nil end
+	else
+		Settings[group] = nil
+ 	end
+ end

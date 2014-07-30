@@ -31,9 +31,7 @@ end
 
 function DuffedUIAuras:StartOrStopFlash(timeleft)
 	if(timeleft < DuffedUIAuras.FlashTimer) then
-		if(not self:IsPlaying()) then
-			self:Play()
-		end
+		if(not self:IsPlaying()) then self:Play() end
 	elseif(self:IsPlaying()) then
 		self:Stop()
 	end
@@ -41,10 +39,9 @@ end
 
 function DuffedUIAuras:OnUpdate(elapsed)
 	local TimeLeft
-
+	
 	if(self.Enchant) then
 		local Expiration = select(self.Enchant, GetWeaponEnchantInfo())
-		
 		if(Expiration) then
 			TimeLeft = Expiration / 1e3
 		else
@@ -53,39 +50,29 @@ function DuffedUIAuras:OnUpdate(elapsed)
 	else
 		TimeLeft = self.TimeLeft - elapsed		
 	end
-	
 	self.TimeLeft = TimeLeft
 
 	if (TimeLeft <= 0) then
 		self.TimeLeft = nil
 		self.Duration:SetText("")
-		
 		return self:SetScript("OnUpdate", nil)
 	else
 		local Text = D.FormatTime(TimeLeft)
 		local r, g, b = D.ColorGradient(self.TimeLeft, self.Dur, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
-
 		self.Bar:SetValue(self.TimeLeft)
 		self.Bar:SetStatusBarColor(r, g, b)
 		
 		if (TimeLeft < 60.5) then
-			if DuffedUIAuras.Flash then
-				DuffedUIAuras.StartOrStopFlash(self.Animation, TimeLeft)
-			end
-			
+			if DuffedUIAuras.Flash then DuffedUIAuras.StartOrStopFlash(self.Animation, TimeLeft) end
 			if(TimeLeft < 5) then
 				self.Duration:SetTextColor(255/255, 20/255, 20/255)	
 			else
 				self.Duration:SetTextColor(255/255, 165/255, 0/255)
 			end
 		else
-			if self.Animation and self.Animation:IsPlaying() then
-				self.Animation:Stop()
-			end
-			
+			if self.Animation and self.Animation:IsPlaying() then self.Animation:Stop() end
 			self.Duration:SetTextColor(.9, .9, .9)
 		end
-		
 		self.Duration:SetText(Text)
 	end
 end
@@ -94,16 +81,12 @@ function DuffedUIAuras:UpdateAura(index)
 	local Name, Rank, Texture, Count, DType, Duration, ExpirationTime, Caster, IsStealable, ShouldConsolidate, SpellID, CanApplyAura, IsBossDebuff = UnitAura(self:GetParent():GetAttribute("unit"), index, self.Filter)
 	
 	if (Name) then
-		if (not DuffedUIAuras.Filter) then
-			ShouldConsolidate = false
-		end
-		
+		if (not DuffedUIAuras.Filter) then ShouldConsolidate = false end
 		if (ShouldConsolidate or DuffedUIAuras.ClassicTimer) then
 			self.Holder:Hide()
 		else
 			self.Duration:Hide()
 		end
-		
 		if (Duration > 0 and ExpirationTime and not ShouldConsolidate) then
 			local TimeLeft = ExpirationTime - GetTime()
 			if (not self.TimeLeft) then
@@ -115,19 +98,13 @@ function DuffedUIAuras:UpdateAura(index)
 			
 			self.Dur = Duration
 
-			if DuffedUIAuras.Flash then
-				DuffedUIAuras.StartOrStopFlash(self.Animation, TimeLeft)
-			end
+			if DuffedUIAuras.Flash then DuffedUIAuras.StartOrStopFlash(self.Animation, TimeLeft) end
 			
 			self.Bar:SetMinMaxValues(0, Duration)
 			
-			if not DuffedUIAuras.ClassicTimer then
-				self.Holder:Show()
-			end
+			if not DuffedUIAuras.ClassicTimer then self.Holder:Show() end
 		else
-			if DuffedUIAuras.Flash then
-				self.Animation:Stop()
-			end
+			if DuffedUIAuras.Flash then self.Animation:Stop() end
 			
 			self.TimeLeft = nil
 			self.Duration:SetText("")
@@ -138,16 +115,10 @@ function DuffedUIAuras:UpdateAura(index)
 			self.Bar:SetValue(max)
 			self.Bar:SetStatusBarColor(0, 0.8, 0)
 			
-			if not DuffedUIAuras.ClassicTimer then
-				self.Holder:Hide()
-			end
+			if not DuffedUIAuras.ClassicTimer then self.Holder:Hide() end
 		end
 
-		if(Count > 1) then
-			self.Count:SetText(Count)
-		else
-			self.Count:SetText("")
-		end
+		if(Count > 1) then self.Count:SetText(Count) else self.Count:SetText("") end
 
 		if(self.Filter == "HARMFUL") then
 			local Color = DebuffTypeColor[DType or "none"]
@@ -168,7 +139,6 @@ function DuffedUIAuras:UpdateTempEnchant(slot)
 	else
 		self.Duration:Hide()
 	end
-	
 	if (Expiration) then
 		self.Dur = 3600
 		self.Enchant = Enchant
@@ -187,7 +157,6 @@ function DuffedUIAuras:OnAttributeChanged(attribute, value)
 		return DuffedUIAuras.UpdateAura(self, value)
 	elseif(attribute == "target-slot") then
 		self.Bar:SetMinMaxValues(0, 3600)
-		
 		return DuffedUIAuras.UpdateTempEnchant(self, value)
 	end
 end
@@ -246,17 +215,9 @@ function DuffedUIAuras:Skin()
 			self.AuraGrowth = AuraGrowth
 			
 			self:SetScript("OnShow", function(self)
-				self.Count:SetParent(UIParent) -- Janky fix for font scaling issue. (It distorts and shifts position)
-				self.Duration:SetParent(UIParent)
-			
 				if self.AuraGrowth then
 					self.AuraGrowth:Play()
 				end
-			end)
-			
-			AuraGrowth:SetScript("OnFinished", function()
-				self.Count:SetParent(self)
-				self.Duration:SetParent(self)
 			end)
 		end
 		
@@ -289,7 +250,6 @@ function DuffedUIAuras:OnEnterWorld()
 		local i = 1
 		while(Child) do
 			DuffedUIAuras.UpdateAura(Child, Child:GetID())
-
 			i = i + 1
 			Child = Header:GetAttribute("child" .. i)
 		end
@@ -317,13 +277,11 @@ DuffedUIAuras:SetScript("OnEvent", function(self, event, ...)
 	if (event == "PLAYER_ENTERING_WORLD") then
 		self.OnEnterWorld()
 	elseif (event == "VARIABLES_LOADED") then
-		
+	
 	else
 		local addon = ...
 
-		if (addon ~= "DuffedUI") then
-			return
-		end
+		if (addon ~= "DuffedUI") then return end
 		
 		self.DisableBlizzardAuras()
 		self.CreateHeaders()
