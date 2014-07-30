@@ -52,7 +52,7 @@ DuffedUIAFKPanelTopIcon.Texture:SetTexture( C["medias"]["Duffed"] )
 DuffedUIAFKPanelTop.DuffedUIText = DuffedUIAFKPanelTop:CreateFontString( nil, "OVERLAY" )
 DuffedUIAFKPanelTop.DuffedUIText:SetPoint( "CENTER", DuffedUIAFKPanelTop, "CENTER", 0, 0 )
 DuffedUIAFKPanelTop.DuffedUIText:SetFont( C["medias"].Font, 40, "OUTLINE" )
-DuffedUIAFKPanelTop.DuffedUIText:SetText( "|cffc41f3bDuffedUI " .. Version .. " Alpha 1|r" )
+DuffedUIAFKPanelTop.DuffedUIText:SetText( "|cffc41f3bDuffedUI " .. Version .. " Beta|r" )
 
 DuffedUIAFKPanelTop.DateText = DuffedUIAFKPanelTop:CreateFontString( nil, "OVERLAY" )
 DuffedUIAFKPanelTop.DateText:SetPoint( "BOTTOMLEFT", DuffedUIAFKPanelTop, "BOTTOMRIGHT", -100, 44 )

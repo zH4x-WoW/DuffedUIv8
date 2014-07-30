@@ -19,6 +19,17 @@ DuffedUIUFFont:SetShadowOffset(1.25, -1.25)
 local PixelFont = CreateFont("DuffedUIPixelFont")
 PixelFont:SetFont(C["medias"].PixelFont, 12, "MONOCHROMEOUTLINE")
 
+local DuffedUIFont = CreateFont("DuffedUIFontNP")
+DuffedUIFont:SetFont(C["medias"].Font, 11, "THINOUTLINE")
+DuffedUIFont:SetShadowColor(0, 0, 0)
+DuffedUIFont:SetShadowOffset(1.25, -1.25)
+
+local DuffedUIFont = CreateFont("DuffedUIFontNPDebuffs")
+DuffedUIFont:SetFont(C["medias"].Font, 9, "THINOUTLINE")
+DuffedUIFont:SetTextColor(.85, .89, .25)
+DuffedUIFont:SetShadowColor(0, 0, 0)
+DuffedUIFont:SetShadowOffset(1.25, -1.25)
+
 local TextureTable = {
 	["Blank"] = "Interface\\BUTTONS\\WHITE8X8.tga",
 	["Raid"] = "Interface\\RAIDFRAME\\Raid-Bar-Hp-Fill.tga",
@@ -34,13 +45,15 @@ local FontTable = {
 	["Highlight"] = "GameFontHighlight",
 	["Combat Log"] = "CombatLogFont",
 	["Game Font"] = "GameFontWhite",
+	["DuffedUI Nameplates"] = "DuffedUIFontNP",
+	["DuffedUI NP Debuff"] = "DuffedUIFontNPDebuffs",
 }
 
 D.GetFont = function(font)
 	if FontTable[font] then
 		return FontTable[font]
 	else
-		return FontTable["DuffedUI"] -- Return something to prevent errors
+		return FontTable["DuffedUI"]
 	end
 end
 

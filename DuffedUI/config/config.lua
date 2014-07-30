@@ -112,9 +112,12 @@ C["nameplates"] = {
 	["Width"] = 120,
 	["Height"] = 8,
 	["CastHeight"] = 5,
-	["Spacing"] = 6,
-	["NontargetAlpha"] = 1,
 	["Texture"] = "Blank",
+	["Font"] = "DuffedUI Nameplates",
+	["ShowDebuffs"] = true,
+	["Font_Debuff"] = "DuffedUI NP Debuff",
+	["MaxDebuffs"] = 5,
+	["ShowComboPoints"] = true,
 }
 
 C["party"] = {

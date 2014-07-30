@@ -1,24 +1,12 @@
 local D, C, L = select(2, ...):unpack()
 if not C["nameplates"].Enable then return end
 
-local Plates = CreateFrame("Frame", "DPlates", UIParent)
+local Plates = CreateFrame("Frame", "Plates", UIParent)
 
--- config --
-local show_hp_value = false
-local show_level = true
-local show_healer_icon = true
-local MAX_DISPLAYABLE_DEBUFFS = 5
-local NATIVE_PLATE_WIDTH, NATIVE_PLATE_HEIGHT, NATIVE_CASTBAR_HEIGHT = C["nameplates"].Width, C["nameplates"].Height, C["nameplates"].CastHeight
-local NATIVE_FONT = CreateFont('NATIVE_FONT')
-NATIVE_FONT:SetFont(C["medias"].Font, 11, 'THINOUTLINE')
-local NATIVE_FONT_Debuff = CreateFont('NATIVE_FONT_Debuff')
-NATIVE_FONT_Debuff:SetFont(C["medias"].Font, 9, 'THINOUTLINE')
-NATIVE_FONT_Debuff:SetTextColor(1.00,0.96,0.41)
+local Font = D.GetFont(C["nameplates"].Font)
+local Font_Debuff = D.GetFont(C["nameplates"].Font_Debuff)
+local Texture = D.GetTexture(C["nameplates"].Texture)
 local filter_by_health = true
--- spell filter (for resto druid) - modify it or change empty table ()
-local FilterSpellsCashe = {}
-
--- locals
 local _G = _G
 local UnitGUID = UnitGUID
 local GetTime = GetTime
@@ -47,14 +35,12 @@ local GetSpellTexture = GetSpellTexture
 local IsInInstance = IsInInstance
 local select = select
 local nop = function() end
-local Texture = D.GetTexture(C["nameplates"].Texture)
 
 local RAID_CLASS_COLORS = RAID_CLASS_COLORS
 local FACTION_BAR_COLORS = FACTION_BAR_COLORS
 
--- defined locals
-local playerFaction = select(1, UnitFactionGroup('player')) == 'Horde' and 1 or 0
-local playerGUID = UnitGUID('player')
+local playerFaction = select(1, UnitFactionGroup("player")) == 'Horde' and 1 or 0
+local playerGUID = UnitGUID("player")
 local mult = 768/match(GetCVar('gxResolution'), '%d+x(%d+)')
 
 local ScheduleFrame = CreateFrame('frame', 'ScheduleFrame', UIParent)
@@ -74,8 +60,8 @@ local fixvalue = function(val)
 	end
 end
 
+local FilterSpellsCashe = {}
 local NamePlateList = {}
-local BGHealersList = {}
 local GroupMembersList = {}
 local AuraDurationsCache = {}
 local DebuffCache = {}
@@ -157,7 +143,7 @@ local HideComboPoints = function(self)
 end
 
 local UpdateComboPoints = function(self, isMouseover)
-	local unit = isMouseover and 'mouseover' or 'target'
+	local unit = isMouseover and "mouseover" or "target"
 	if self.cpoints == nil then return end
 
 	if type(self) ~= "table" then
@@ -172,10 +158,10 @@ local UpdateComboPoints = function(self, isMouseover)
 	if not self then return end
 
 	local cp
-	if UnitHasVehicleUI('player') then
-		cp = GetComboPoints('vehicle', unit)
+	if UnitHasVehicleUI("player") then
+		cp = GetComboPoints("vehicle", unit)
 	else
-		cp = GetComboPoints('player', unit)
+		cp = GetComboPoints("player", unit)
 	end
 
 	for i=1, MAX_COMBO_POINTS do
@@ -195,22 +181,20 @@ local UpdateLevel = function(self)
 	if self.health == nil then return end
 	if self.health.name == nil then return end
 	
-	local level, elite, mylevel = tonumber(self.oldlevel:GetText()), self.oldelite:IsShown(), UnitLevel('player')
+	local level, elite, mylevel = tonumber(self.oldlevel:GetText()), self.oldelite:IsShown(), UnitLevel("player")
 	
-	if show_level then
-		if self.oldboss:IsShown() then
-			self.rare:Show()
-		elseif elite then
-			self.rare:Show()
-		elseif not elite and level == mylevel then
-			self.rare:Hide()
-			return
-		elseif level then
-			self.rare:Hide()
-			local colr = GetQuestDifficultyColor(level)
-			self.health.name:SetText(D.RGBToHex(colr.r, colr.g, colr.b)..level..(elite and '+' or '')..'|r '..self.oldname:GetText())
-		end	
-	end
+	if self.oldboss:IsShown() then
+		self.rare:Show()
+	elseif elite then
+		self.rare:Show()
+	elseif not elite and level == mylevel then
+		self.rare:Hide()
+		return
+	elseif level then
+		self.rare:Hide()
+		local colr = GetQuestDifficultyColor(level)
+		self.health.name:SetText(D.RGBToHex(colr.r, colr.g, colr.b)..level..(elite and '+' or '')..'|r '..self.oldname:GetText())
+	end	
 end
 
 local UpdateCastbarColor = function(self)
@@ -318,45 +302,45 @@ function Plates:UpdateAuraWidget(self, guid)
 				UpdateIcon(AuraIconFrames[AuraSlotIndex], cachedaura.texture, cachedaura.expiration, cachedaura.stacks) 
 				AuraSlotIndex = AuraSlotIndex + 1
 			end
-			if AuraSlotIndex > MAX_DISPLAYABLE_DEBUFFS then break end
+			if AuraSlotIndex > C["nameplates"].MaxDebuffs then break end
 		end
 	end
 	
-	for AuraSlotIndex = AuraSlotIndex, MAX_DISPLAYABLE_DEBUFFS do UpdateIcon(AuraIconFrames[AuraSlotIndex]) end
+	for AuraSlotIndex = AuraSlotIndex, C["nameplates"].MaxDebuffs do UpdateIcon(AuraIconFrames[AuraSlotIndex]) end
 	
 	DebuffCache = wipe(DebuffCache)
 end
 
 local CreateAuraIcon = function(parent)
-	local button = CreateFrame('Frame', nil, parent)
+	local button = CreateFrame("Frame", nil, parent)
 	button:Hide()
 	
 	button:SetSize(20, 15)
-	button:SetScript('OnHide', function() if parent.guid then Plates:UpdateAuraWidget(parent, parent.guid) end end)
+	button:SetScript("OnHide", function() if parent.guid then Plates:UpdateAuraWidget(parent, parent.guid) end end)
 	
-	button.bg = button:CreateTexture(nil, 'BACKGROUND')
+	button.bg = button:CreateTexture(nil, "BACKGROUND")
 	button.bg:SetTexture(unpack(C["medias"].BackdropColor))
 	button.bg:SetAllPoints(button)
 	
-	button.border = button:CreateTexture(nil, 'BACKGROUND')
-	button.border:SetDrawLayer('BACKGROUND', 2)
+	button.border = button:CreateTexture(nil, "BACKGROUND")
+	button.border:SetDrawLayer("BACKGROUND", 2)
 	button.border:SetTexture(unpack(C["medias"].BorderColor))
 	button.border:SetSize(20 - mult * 2, 15 - mult * 2)
-	button.border:SetPoint('CENTER')
+	button.border:SetPoint("CENTER")
 	
 	button.icon = button:CreateTexture(nil, 'BORDER')
 	button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	button.icon:SetSize(20 - mult * 4, 15 - mult * 4)
-	button.icon:SetPoint('CENTER')
+	button.icon:SetPoint("CENTER")
 	
-	button.expired = button:CreateFontString(nil, 'OVERLAY')
-	button.expired:SetPoint("TOP", 0, 0)
-	button.expired:SetJustifyH('CENTER')	
-	button.expired:SetFontObject(NATIVE_FONT_Debuff)
+	button.expired = button:CreateFontString(nil, "OVERLAY")
+	button.expired:SetPoint("TOP", 1, 4)
+	button.expired:SetJustifyH("CENTER")	
+	button.expired:SetFontObject(Font_Debuff)
 	
-	button.stack = button:CreateFontString(nil,'OVERLAY')
-	button.stack:SetFontObject(NATIVE_FONT_Debuff)
-	button.stack:SetPoint('BOTTOM', button, 'BOTTOM', 0, 0)
+	button.stack = button:CreateFontString(nil,"OVERLAY")
+	button.stack:SetFontObject(Font_Debuff)
+	button.stack:SetPoint("BOTTOM", button, "BOTTOM", 1, -3)
 	
 	button.Poll = parent.PollFunction
 	
@@ -370,7 +354,7 @@ local VirtualSetAura = function(guid, spellid, expiration, stacks, caster, durat
 	if filter ~= true then return end
 
 	if guid and spellid and caster and texture then
-		local aura_id = spellid..(tostring(caster or 'UNKNOWN_CASTER'))
+		local aura_id = spellid..(tostring(caster or "UNKNOWN_CASTER"))
 		local aura_instance_id = guid..aura_id
 		AuraList[guid] = AuraList[guid] or {}
 		AuraList[guid][aura_id] = aura_instance_id
@@ -385,7 +369,7 @@ end
 
 local SearchNameplate = function(guid, raidIcon, sourceName, raidIconFlags, castStart)
 	local frame
-	if raidIconFlags and type(raidIconFlags) == 'number' then
+	if raidIconFlags and type(raidIconFlags) == "number" then
 		local UnitIcon
 		for iconname, bitmask in pairs(RaidTargetMask) do if band(raidIconFlags, bitmask) > 0  then UnitIcon = iconname break end end	
 		for frame, _ in pairs(NamePlateList) do
@@ -430,7 +414,7 @@ local UpdateDebuffs = function(self)
 end
 
 local UpdateAurasByUnit = function(unit)
-	if UnitIsFriend('player', unit) then return end
+	if UnitIsFriend("player", unit) then return end
 	local guid = UnitGUID(unit)
 	
 	if guid and AuraList[guid] then
@@ -462,26 +446,26 @@ local UpdateAurasByUnit = function(unit)
 end
 
 local UpdateAuraByLookup = function(guid)
-	local IsArena = (select(2, IsInInstance()) == 'arena')
+	local IsArena = (select(2, IsInInstance()) == "arena")
 
- 	if guid == UnitGUID("target") and UnitIsEnemy('target', 'player') then
+ 	if guid == UnitGUID("target") and UnitIsEnemy("target", "player") then
 		UpdateAurasByUnit("target")
-	elseif guid == UnitGUID("mouseover") and UnitIsEnemy('mouseover', 'player') then
+	elseif guid == UnitGUID("mouseover") and UnitIsEnemy("mouseover", "player") then
 		UpdateAurasByUnit("mouseover")
-	elseif guid == UnitGUID("focus") and UnitIsEnemy('focus', 'player') then
+	elseif guid == UnitGUID("focus") and UnitIsEnemy("focus", "player") then
 		UpdateAurasByUnit("focus")
 	elseif GroupTargetList[guid] then
 		local unit = GroupTargetList[guid]
 		if unit then
 			local unittarget = UnitGUID(unit.."target")
-			if guid == unittarget and UnitIsEnemy(unittarget, 'player') then 
+			if guid == unittarget and UnitIsEnemy(unittarget, "player") then 
 				UpdateAurasByUnit(unittarget)
 			end
 		end
 	elseif IsArena then
 		for i=1,5 do
-			if UnitGUID('arena'..i) == guid then
-				UpdateAurasByUnit('arena'..i)
+			if UnitGUID("arena"..i) == guid then
+				UpdateAurasByUnit("arena"..i)
 				return
 			end
 		end
@@ -501,8 +485,7 @@ local GetFilter = function(self, ...)
 	if self.highlight == nil then return end
 	local name = self.oldname:GetText()
 	self.health:Show()
-	self.highlight:SetTexture(1, 1, 1, 0.15)	
-	if BGHealersList[name] and show_healer_icon then self.healerIcon:Show() else self.healerIcon:Hide() end
+	self.highlight:SetTexture(1, 1, 1, .15)	
 end
 
 local ForEachFrame = function(...)
@@ -528,23 +511,23 @@ end
 
 local GetGUID = function(self)
 	if self.oldname == nil then return end
-	if UnitExists('target') and self:GetAlpha() == 1 and UnitName('target') == self.oldname:GetText() then
-		self.guid = UnitGUID('target')
+	if UnitExists("target") and self:GetAlpha() == 1 and UnitName("target") == self.oldname:GetText() then
+		self.guid = UnitGUID("target")
 		NameGUID[self.oldname:GetText()] = self.guid
-		self.unit = 'target'
-		UpdateAurasByUnit('target')
+		self.unit = "target"
+		UpdateAurasByUnit("target")
 		UpdateComboPoints(self)
-		if UnitIsPlayer('target') then
-			NameClasses[self.oldname:GetText()] = select(2, UnitClass('target'))
+		if UnitIsPlayer("target") then
+			NameClasses[self.oldname:GetText()] = select(2, UnitClass("target"))
 		end
-	elseif self.highlight and self.highlight:IsShown() and UnitExists('mouseover') and UnitName('mouseover') == self.oldname:GetText() then
-		self.guid = UnitGUID('mouseover')
-		self.unit = 'mouseover'
-		UpdateAurasByUnit('mouseover')
+	elseif self.highlight and self.highlight:IsShown() and UnitExists("mouseover") and UnitName("mouseover") == self.oldname:GetText() then
+		self.guid = UnitGUID("mouseover")
+		self.unit = "mouseover"
+		UpdateAurasByUnit("mouseover")
 		NameGUID[self.oldname:GetText()] = self.guid
 		UpdateComboPoints(self, true)
-		if UnitIsPlayer('mouseover') then
-			NameClasses[self.oldname:GetText()] = select(2, UnitClass('mouseover'))
+		if UnitIsPlayer("mouseover") then
+			NameClasses[self.oldname:GetText()] = select(2, UnitClass("mouseover"))
 		end
 	else
 		self.unit = nil
@@ -565,7 +548,7 @@ local UpdateThreat = function(self)
 		self.threat:SetVertexColor(unpack(C["medias"].BackdropColor))
 	end
 	
-	if self.unit == 'target' then
+	if self.unit == "target" then
 		self.health.name:SetTextColor(1, 1, 0)
 		self.tar:Show()
 	else
@@ -582,9 +565,9 @@ local HideQueque = function(self)
 			object.OldTexture = object:GetTexture()
 			object:SetTexture("")
 			object:SetTexCoord(0, 0, 0, 0)
-		elseif objectType == 'FontString' then
+		elseif objectType == "FontString" then
 			object:SetTextHeight(.001)
-		elseif objectType == 'StatusBar' then
+		elseif objectType == "StatusBar" then
 			object:SetStatusBarTexture("")
 		else
 			object:Hide()
@@ -605,9 +588,9 @@ local CastBar_OnValue = function(self, value)
 	castbar:SetMinMaxValues(self:GetMinMaxValues())  
 	castbar:SetValue(value) 
 	if castbar.shield:IsShown() then
-		castbar:SetStatusBarColor(0.78, 0.25, 0.25, 1)
+		castbar:SetStatusBarColor(.78, .25, .25, 1)
 	else 
-		castbar:SetStatusBarColor(1, 208/255, 0)
+		castbar:SetStatusBarColor(1, .82, 0)
 	end
 end
 
@@ -618,12 +601,12 @@ local CastBar_OnShow = function(self)
 	self.castbar.name:SetText(self.oldcbname:GetText())
 	
 	if self.castbar.shield:IsShown() then 
-		self.castbar:SetStatusBarColor(0.78, 0.25, 0.25, 1) 
+		self.castbar:SetStatusBarColor(.78, .25, .25, 1) 
 	else 
 		self.castbar:SetStatusBarColor(1, 208/255, 0) 
 	end
 	
-	self.castbar.icon:SetSize(NATIVE_CASTBAR_HEIGHT + mult * 9 + NATIVE_PLATE_HEIGHT, NATIVE_CASTBAR_HEIGHT + mult * 9 + NATIVE_PLATE_HEIGHT)
+	self.castbar.icon:SetSize(C["nameplates"].CastHeight + mult * 9 + C["nameplates"].Height, C["nameplates"].CastHeight + mult * 9 + C["nameplates"].Height)
 	
 	self.castbar:Hide()
 	HideQueque(self)
@@ -649,7 +632,7 @@ end
 local RepositePlate = function(self)
 	if self.plate and self.health then
 		self.plate:Hide()
-		self.plate:SetPoint('CENTER', WorldFrame, 'BOTTOMLEFT', self:GetCenter())
+		self.plate:SetPoint("CENTER", WorldFrame, 'BOTTOMLEFT', self:GetCenter())
 		self.plate:Show()
 	end
 end
@@ -675,18 +658,18 @@ local StylePlate = function(self)
 	if self.plate == nil then
 		self.plate = CreateFrame('frame', nil, WorldFrame)
 		self.plate:EnableMouse(false)
-		self.plate:SetFrameStrata('BACKGROUND')
+		self.plate:SetFrameStrata("BACKGROUND")
 		self.plate:Hide()
-		self.plate:SetSize(NATIVE_PLATE_WIDTH, NATIVE_PLATE_HEIGHT)
+		self.plate:SetSize(C["nameplates"].Width, C["nameplates"].Height)
 		self.plate.parent = self
 	end
 	
 	if self.health == nil then
-		self.health = CreateFrame('StatusBar', nil, self.plate)
+		self.health = CreateFrame("StatusBar", nil, self.plate)
 		self.health:EnableMouse(false)
 		self.health:SetStatusBarTexture(Texture)
-		self.health:SetSize(NATIVE_PLATE_WIDTH, NATIVE_PLATE_HEIGHT)
-		self.health:SetPoint('BOTTOM', self, 'BOTTOM', 0, 5)
+		self.health:SetSize(C["nameplates"].Width, C["nameplates"].Height)
+		self.health:SetPoint("BOTTOM", self, "BOTTOM", 0, 5)
 
 		self.health.bg = self.health:CreateTexture(nil, 'BORDER')
 		self.health.bg:SetTexture(.1, .1, .1)
@@ -730,16 +713,16 @@ local StylePlate = function(self)
 	end
 	
 	if self.health.name == nil then
-		self.health.name = self.health:CreateFontString('$parentHealth', 'OVERLAY')
+		self.health.name = self.health:CreateFontString('$parentHealth', "OVERLAY")
 		self.health.name:SetPoint('BOTTOMLEFT', self.health, 'TOPLEFT', 0, 3)
-		self.health.name:SetSize(NATIVE_PLATE_WIDTH, NATIVE_PLATE_HEIGHT)
-		self.health.name:SetFontObject(NATIVE_FONT)
+		self.health.name:SetSize(C["nameplates"].Width, C["nameplates"].Height)
+		self.health.name:SetFontObject(Font)
 	end
 
 	if self.health.perc == nil then
-		self.health.perc = self.health:CreateFontString('$parentHealthPercent', 'OVERLAY')
+		self.health.perc = self.health:CreateFontString('$parentHealthPercent', "OVERLAY")
 		self.health.perc:SetPoint('LEFT', self.health, 'RIGHT', 4, 0)
-		self.health.perc:SetFontObject(NATIVE_FONT)
+		self.health.perc:SetFontObject(Font)
 	end
 	
 	if self.highlight == nil then
@@ -749,7 +732,6 @@ local StylePlate = function(self)
 	
 	if self.castbar == nil then
 		self.castbar = CreateFrame('Statusbar', nil, self.plate)
-		--self.castbar:EnableMouse(false)
 		self.castbar:SetFrameLevel(self.old_castbar:GetFrameLevel())
 		self.castbar:SetFrameStrata(self.old_castbar:GetFrameStrata())
 		
@@ -759,15 +741,15 @@ local StylePlate = function(self)
 		self.castbar.bg:SetTexture(unpack(C["medias"].BackdropColor))
 		self.castbar.bg:SetDrawLayer('BORDER', -8)
 		
-		self.castbar:SetSize(NATIVE_PLATE_WIDTH + 3, NATIVE_CASTBAR_HEIGHT)
-		self.castbar:SetPoint('TOP', self.health, 'BOTTOM', 0, -5)
+		self.castbar:SetSize(C["nameplates"].Width + 3, C["nameplates"].CastHeight)
+		self.castbar:SetPoint('TOP', self.health, "BOTTOM", 0, -5)
 		self.castbar:SetStatusBarTexture(Texture)
 		self.castbar:GetStatusBarTexture():SetHorizTile(true)
 		self.castbar:Hide()
 	end
 	
 	if self.castbar.icon == nil then
-		self.castbar.icon = self.castbar:CreateTexture('$parentIcon', 'OVERLAY')
+		self.castbar.icon = self.castbar:CreateTexture('$parentIcon', "OVERLAY")
 		self.castbar.icon:SetPoint('TOPRIGHT', self.health, 'TOPLEFT', -5, 2)		
 		self.castbar.icon:SetTexCoord(.1, .9, .1, .9)
 		self.castbar.shield = old_cbshield
@@ -779,79 +761,75 @@ local StylePlate = function(self)
 	end
 	
 	if self.castbar.name == nil then
-		self.castbar.name = self.castbar:CreateFontString(nil, 'OVERLAY')
-		self.castbar.name:SetPoint('TOP', self.castbar, 'BOTTOM', -3, 0)
-		self.castbar.name:SetFontObject(NATIVE_FONT)
-		self.castbar.name.bg = self.castbar:CreateTexture(nil, 'BACKGROUND')
+		self.castbar.name = self.castbar:CreateFontString(nil, "OVERLAY")
+		self.castbar.name:SetPoint('TOP', self.castbar, "BOTTOM", -3, 0)
+		self.castbar.name:SetFontObject(Font)
+		self.castbar.name.bg = self.castbar:CreateTexture(nil, "BACKGROUND")
 		self.castbar.name.bg:SetTexture('Interface\\Common\\NameShadow')
-		self.castbar.name.bg:SetSize(NATIVE_PLATE_WIDTH, NATIVE_CASTBAR_HEIGHT)
-		self.castbar.name.bg:SetPoint('TOP', self.castbar, 'BOTTOM', -3, 0)
+		self.castbar.name.bg:SetSize(C["nameplates"].Width, C["nameplates"].CastHeight)
+		self.castbar.name.bg:SetPoint('TOP', self.castbar, "BOTTOM", -3, 0)
 	end
 	
 	if self.raidicon == nil then
 		raidicon:ClearAllPoints()
-		raidicon:SetPoint('BOTTOM', self.health, 'TOP', 0, 16)
+		raidicon:SetPoint("BOTTOM", self.health, 'TOP', 0, 16)
 		raidicon:SetSize(35, 35)
 		raidicon:SetTexture('Interface\\TargetingFrame\\UI-RaidTargetingIcons')
 		self.raidicon = raidicon
 	end	
 	
-	if self.healerIcon == nil then
-		self.healerIcon = self.plate:CreateTexture(nil, 'ARTWORK')
-		self.healerIcon:SetPoint('BOTTOM', self.health, 'TOP', 0, 16)
-		self.healerIcon:SetSize(35, 35)
-		self.healerIcon:SetTexture('Interface\\LFGFrame\\UI-LFG-ICON-RoleS')
-		self.healerIcon:SetTexCoord(0.26171875, 0.5234375, 0, 0.26171875)
-	end	
-	
-	if self.cpoints == nil then
-		self.cpoints = CreateFrame("Frame", nil, self.health)
-		self.cpoints:SetSize((16*UIParent:GetScale())*5, 1)
-		self.cpoints:SetPoint("CENTER", self.health, "BOTTOM")
-		
-		for i=1, MAX_COMBO_POINTS do
-			self.cpoints[i] = self.cpoints:CreateTexture(nil, 'OVERLAY')
-			self.cpoints[i]:SetTexture('Interface\\FriendsFrame\\StatusIcon-Offline')
-			self.cpoints[i]:SetSize(16*UIParent:GetScale(), 16*UIParent:GetScale())
+	if C["nameplates"].ShowComboPoints then
+		if self.cpoints == nil then
+			self.cpoints = CreateFrame("Frame", nil, self.health)
+			self.cpoints:SetSize((16*UIParent:GetScale())*5, 1)
+			self.cpoints:SetPoint("CENTER", self.health, "BOTTOM")
 			
-			if i == 1 then
-				self.cpoints[i]:SetPoint("LEFT", self.cpoints, "TOPLEFT")
-			else
-				self.cpoints[i]:SetPoint("LEFT", self.cpoints[i-1], "RIGHT", 0, 0)
+			for i=1, MAX_COMBO_POINTS do
+				self.cpoints[i] = self.cpoints:CreateTexture(nil, "OVERLAY")
+				self.cpoints[i]:SetTexture('Interface\\FriendsFrame\\StatusIcon-Offline')
+				self.cpoints[i]:SetSize(16*UIParent:GetScale(), 16*UIParent:GetScale())
+				
+				if i == 1 then
+					self.cpoints[i]:SetPoint("LEFT", self.cpoints, "TOPLEFT")
+				else
+					self.cpoints[i]:SetPoint("LEFT", self.cpoints[i-1], "RIGHT", 0, 0)
+				end
+				
+				self.cpoints[i]:Hide()
 			end
-			
-			self.cpoints[i]:Hide()
 		end
 	end
 	
-	if self.AuraWidget == nil then
-		self.AuraWidget = CreateFrame('frame', nil, self.plate)
-		self.AuraWidget:SetHeight(32) 
-		self.AuraWidget:Show()
-		self.AuraWidget:SetSize(NATIVE_PLATE_WIDTH, NATIVE_PLATE_HEIGHT)
-		self.AuraWidget:SetPoint('BOTTOM', self.health, 'TOP', 0, 16)
-		
-		self.AuraWidget.PollFunction = function(self, elapsed)
-			local timeleft = ceil(elapsed-GetTime())
-			if timeleft > 60 then self.expired:SetText(ceil(timeleft/60)..'m') else self.expired:SetText(ceil(timeleft)) end
+	if C["nameplates"].ShowDebuffs then
+		if self.AuraWidget == nil then
+			self.AuraWidget = CreateFrame('frame', nil, self.plate)
+			self.AuraWidget:SetHeight(32) 
+			self.AuraWidget:Show()
+			self.AuraWidget:SetSize(C["nameplates"].Width, C["nameplates"].Height)
+			self.AuraWidget:SetPoint("BOTTOM", self.health, 'TOP', 0, 16)
+			
+			self.AuraWidget.PollFunction = function(self, elapsed)
+				local timeleft = ceil(elapsed-GetTime())
+				if timeleft > 60 then self.expired:SetText(ceil(timeleft/60)..'m') else self.expired:SetText(ceil(timeleft)) end
+			end
+			self.AuraWidget.AuraIconFrames = {}
+			local AuraIconFrames = self.AuraWidget.AuraIconFrames
+			for index = 1, C["nameplates"].MaxDebuffs do 
+				AuraIconFrames[index] = CreateAuraIcon(self.AuraWidget)
+			end
+			local FirstRowCount = min(C["nameplates"].MaxDebuffs/2)
+			
+			AuraIconFrames[1]:SetPoint('RIGHT', self.AuraWidget, -1, 0)
+			for index = 2, C["nameplates"].MaxDebuffs do AuraIconFrames[index]:SetPoint('RIGHT', AuraIconFrames[index-1], 'LEFT', -3, 0) end		
+			
+			self.AuraWidget._Hide = self.AuraWidget.Hide
+			self.AuraWidget.Hide = function() if self.AuraWidget.guidcache then self.AuraWidget.unit = nil end self.AuraWidget:_Hide() end
+			self.AuraWidget:SetScript("OnHide", function() 
+				for index = 1, C["nameplates"].MaxDebuffs do 
+					ScheduleHide(AuraIconFrames[index], 0) 
+				end 
+			end)	
 		end
-		self.AuraWidget.AuraIconFrames = {}
-		local AuraIconFrames = self.AuraWidget.AuraIconFrames
-		for index = 1, MAX_DISPLAYABLE_DEBUFFS do 
-			AuraIconFrames[index] = CreateAuraIcon(self.AuraWidget)
-		end
-		local FirstRowCount = min(MAX_DISPLAYABLE_DEBUFFS/2)
-		
-		AuraIconFrames[1]:SetPoint('RIGHT', self.AuraWidget, -1, 0)
-		for index = 2, MAX_DISPLAYABLE_DEBUFFS do AuraIconFrames[index]:SetPoint('RIGHT', AuraIconFrames[index-1], 'LEFT', -3, 0) end		
-		
-		self.AuraWidget._Hide = self.AuraWidget.Hide
-		self.AuraWidget.Hide = function() if self.AuraWidget.guidcache then self.AuraWidget.unit = nil end self.AuraWidget:_Hide() end
-		self.AuraWidget:SetScript('OnHide', function() 
-			for index = 1, MAX_DISPLAYABLE_DEBUFFS do 
-				ScheduleHide(AuraIconFrames[index], 0) 
-			end 
-		end)	
 	end
 		
 	Schedule(self, self.oldhealth)
@@ -871,7 +849,7 @@ local StylePlate = function(self)
 	
 	HealthBar_OnShow(self)
 	self:HookScript('OnShow', HealthBar_OnShow)
-	self:HookScript('OnHide', function(self)
+	self:HookScript("OnHide", function(self)
 		if not self.health then return end
 		self.plate:Hide()
 		self.highlight:Hide()
@@ -889,25 +867,11 @@ local StylePlate = function(self)
 	self.old_castbar.parent = self
 	self.oldhealth:HookScript('OnValueChanged', HealthBar_OnValue)
 	self.old_castbar:HookScript('OnShow', CastBar_OnShow)
-	self.old_castbar:HookScript('OnHide', function(self) self.parent.castbar:Hide() end)
+	self.old_castbar:HookScript("OnHide", function(self) self.parent.castbar:Hide() end)
 	self.old_castbar:HookScript('OnValueChanged', CastBar_OnValue)
 	
 	fadeIn(self.plate)
 	NamePlateList[self] = true
-end
-
-local CheckHealersList = function()
-	for i = 1, GetNumBattlefieldScores() do
-		local name, _, _, _, _, faction, _, _, class, damageDone, healingDone, _, _, _, _, talentSpec = GetBattlefieldScore(i)
-		if name then
-			name = name:match('(.+)%-.+') or name
-			if damageDone < healingDone and playerFaction == faction then
-				BGHealersList[name] = true
-			else
-				BGHealersList[name] = nil
-			end
-		end
-	end
 end
 
 local UpdateRoster = function()
@@ -936,11 +900,11 @@ local UpdateRoster = function()
 	end	
 end
 
-DPlates.updateAll = function(self)
-	playerFaction = select(1, UnitFactionGroup('player')) == 'Horde' and 1 or 0
-	playerGUID = UnitGUID('player')
+Plates.updateAll = function(self)
+	playerFaction = select(1, UnitFactionGroup("player")) == 'Horde' and 1 or 0
+	playerGUID = UnitGUID("player")
 
-	for _, v in pairs({NamePlateList, BGHealersList, GroupMembersList, AuraDurationsCache, DebuffCache, GroupTargetList, RaidIconGUID, NameGUID,
+	for _, v in pairs({NamePlateList, GroupMembersList, AuraDurationsCache, DebuffCache, GroupTargetList, RaidIconGUID, NameGUID,
 	AuraList, Aura_Spellid, Aura_Expiration, Aura_Stacks, Aura_Caster, Aura_Duration, Aura_Texture, IconFrameList, GUIDIgnoreCast, NameClasses}) do v = {} end
 	
 	timeToUpdate = 0
@@ -979,23 +943,6 @@ DPlates.updateAll = function(self)
 	end
 	self:SetScript('OnUpdate', self.onupdate)
 	
-	if self.CheckHealerTimer == nil then
-		self.CheckHealerTimer = CreateFrame('frame', 'CheckHealerTimer')
-		self.CheckHealerTimer.onupdate = function(self, elapsed)
-			if self.st == nil then self.st = 0 end
-			self.st = self.st + elapsed
-			if self.st > 1 then self.st = 0 CheckHealersList() end
-		end
-	end
-	
-	local inInstance, instanceType = IsInInstance()
-	if inInstance and instanceType == 'pvp' then
-		self.CheckHealerTimer:SetScript('OnUpdate', self.CheckHealerTimer.onupdate)
-		CheckHealersList()
-	else
-		self.CheckHealerTimer:SetScript('OnUpdate', nil)
-	end
-	
 	self:RegisterEvent('CHAT_MSG_CHANNEL')
 	self:RegisterEvent('GROUP_ROSTER_UPDATE')
 	self:RegisterEvent('PARTY_CONVERTED_TO_RAID')
@@ -1033,8 +980,8 @@ Plates:SetScript('OnEvent', function(self, event, ...)
 		
 		if band(sourceFlags, COMBATLOG_OBJECT_FOCUS) then
 			foundPlate = SearchNameplate(_,_,sourceName)
-			if foundPlate and foundPlate:IsShown() and foundPlate.unit ~= 'target' then 
-				foundPlate.unit = 'focus'
+			if foundPlate and foundPlate:IsShown() and foundPlate.unit ~= "target" then 
+				foundPlate.unit = "focus"
 			end
 		end
 		
@@ -1063,8 +1010,8 @@ Plates:SetScript('OnEvent', function(self, event, ...)
 			VirtualSetAura(destGUID, spellid, GetTime() + (duration or 0), stackCount, sourceGUID, duration, texture)
 		elseif subEvent == 'SPELL_AURA_BROKEN' or subEvent == 'SPELL_AURA_BROKEN_SPELL' or subEvent == 'SPELL_AURA_REMOVED' then
 			if destGUID and spellid and AuraList[destGUID] then
-				local aura_instance_id = tostring(destGUID)..tostring(spellid)..(tostring(caster or 'UNKNOWN_CASTER'))
-				local aura_id = spellid..(tostring(caster or 'UNKNOWN_CASTER'))
+				local aura_instance_id = tostring(destGUID)..tostring(spellid)..(tostring(caster or "UNKNOWN_CASTER"))
+				local aura_id = spellid..(tostring(caster or "UNKNOWN_CASTER"))
 				if AuraList[destGUID][aura_id] then
 					Aura_Spellid[aura_instance_id] = nil
 					Aura_Expiration[aura_instance_id] = nil
@@ -1092,7 +1039,7 @@ Plates:SetScript('OnEvent', function(self, event, ...)
 				return 
 			end	
 			
-			if foundPlate and foundPlate:IsShown() and foundPlate.unit ~= 'target' then 
+			if foundPlate and foundPlate:IsShown() and foundPlate.unit ~= "target" then 
 				foundPlate.guid = sourceGUID
 			end
 		end
@@ -1122,16 +1069,16 @@ Plates:SetScript('OnEvent', function(self, event, ...)
 		end
 		
 	elseif event == 'PLAYER_ENTERING_WORLD' then
-		DPlates.updateAll(self)
+		Plates.updateAll(self)
 		self:UnregisterEvent('PLAYER_ENTERING_WORLD')
 	elseif event == 'UNIT_TARGET' then
 		GroupTargetList = wipe(GroupTargetList)
-		for name, unitid in pairs(GroupMembersList) do if UnitExists(unitid..'target') then GroupTargetList[UnitGUID(unitid..'target')] = unitid..'target' end end
+		for name, unitid in pairs(GroupMembersList) do if UnitExists(unitid.."target") then GroupTargetList[UnitGUID(unitid.."target")] = unitid.."target" end end
 	elseif event == 'UNIT_AURA' then
 		local unit = ...
-		if unit == 'target' or unit == 'focus' then UpdateAurasByUnit(unit) end
+		if unit == "target" or unit == "focus" then UpdateAurasByUnit(unit) end
 	end
 end)
 
 Plates:RegisterEvent('PLAYER_LOGIN')
-DPlates.updateAll(DPlates)
+Plates.updateAll(Plates)
