@@ -935,25 +935,25 @@ Plates.updateAll = function(self)
 	end
 	self:SetScript('OnUpdate', self.onupdate)
 	
-	self:RegisterEvent('CHAT_MSG_CHANNEL')
-	self:RegisterEvent('GROUP_ROSTER_UPDATE')
-	self:RegisterEvent('PARTY_CONVERTED_TO_RAID')
-	self:RegisterEvent('UPDATE_MOUSEOVER_UNIT')
-	self:RegisterEvent('PLAYER_TARGET_CHANGED')
-	self:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
+	self:RegisterEvent("CHAT_MSG_CHANNEL")
+	self:RegisterEvent("GROUP_ROSTER_UPDATE")
+	self:RegisterEvent("PARTY_CONVERTED_TO_RAID")
+	self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
+	self:RegisterEvent("PLAYER_TARGET_CHANGED")
+	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	self:RegisterEvent("UNIT_TARGET")
 	self:RegisterEvent("UNIT_AURA")
 	self:RegisterEvent("UNIT_COMBO_POINTS")
 end
 
-Plates:SetScript('OnEvent', function(self, event, ...)
+Plates:SetScript("OnEvent", function(self, event, ...)
 	local foundPlate = nil
 	
-	if event == 'GROUP_ROSTER_UPDATE' or event == 'PARTY_CONVERTED_TO_RAID' then
+	if event == "GROUP_ROSTER_UPDATE" or event == "PARTY_CONVERTED_TO_RAID" then
 		UpdateRoster()
-	elseif event == 'UNIT_COMBO_POINTS' then
+	elseif event == "UNIT_COMBO_POINTS" then
 		UpdateComboPoints(self)
-	elseif event == 'CHAT_MSG_CHANNEL' then
+	elseif event == "CHAT_MSG_CHANNEL" then
 		local guid = select(12, ...)
 		if guid and band(guid, COMBATLOG_OBJECT_TYPE_PLAYER) > 0 then 
 			if guid then
@@ -967,7 +967,7 @@ Plates:SetScript('OnEvent', function(self, event, ...)
 				end
 			end
 		end		
-	elseif event == 'COMBAT_LOG_EVENT_UNFILTERED' then
+	elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
 		local _, subEvent, _, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, spellid, spellName, _, auraType, stackCount  = ...
 		
 		if band(sourceFlags, COMBATLOG_OBJECT_FOCUS) then
@@ -990,17 +990,17 @@ Plates:SetScript('OnEvent', function(self, event, ...)
 			end
 		end
 
-		if event == 'SPELL_AURA_APPLIED' or event == 'SPELL_HEAL' or event == 'SPELL_DAMAGE' or event == 'SPELL_MISS' then GUIDIgnoreCast[sourceGUID] = spellName end
+		if event == "SPELL_AURA_APPLIED" or event == "SPELL_HEAL" or event == "SPELL_DAMAGE" or event == "SPELL_MISS" then GUIDIgnoreCast[sourceGUID] = spellName end
 		
-		if subEvent == 'SPELL_AURA_APPLIED' or subEvent == 'SPELL_AURA_REFRESH' then
+		if subEvent == "SPELL_AURA_APPLIED" or subEvent == "SPELL_AURA_REFRESH" then
 			local duration = AuraDurationsCache[spellid]
 			local texture = GetSpellTexture(spellid)
 			VirtualSetAura(destGUID, spellid, GetTime() + (duration or 0), 1, sourceGUID, duration, texture)
-		elseif subEvent == 'SPELL_AURA_APPLIED_DOSE' or subEvent == 'SPELL_AURA_REMOVED_DOSE' then
+		elseif subEvent == "SPELL_AURA_APPLIED_DOSE" or subEvent == "SPELL_AURA_REMOVED_DOSE" then
 			local duration = AuraDurationsCache[spellid]
 			local texture = GetSpellTexture(spellid)
 			VirtualSetAura(destGUID, spellid, GetTime() + (duration or 0), stackCount, sourceGUID, duration, texture)
-		elseif subEvent == 'SPELL_AURA_BROKEN' or subEvent == 'SPELL_AURA_BROKEN_SPELL' or subEvent == 'SPELL_AURA_REMOVED' then
+		elseif subEvent == "SPELL_AURA_BROKEN" or subEvent == "SPELL_AURA_BROKEN_SPELL" or subEvent == "SPELL_AURA_REMOVED" then
 			if destGUID and spellid and AuraList[destGUID] then
 				local aura_instance_id = tostring(destGUID)..tostring(spellid)..(tostring(caster or "UNKNOWN_CASTER"))
 				local aura_id = spellid..(tostring(caster or "UNKNOWN_CASTER"))
@@ -1014,8 +1014,8 @@ Plates:SetScript('OnEvent', function(self, event, ...)
 					AuraList[destGUID][aura_id] = nil
 				end
 			end
-		elseif subEvent == 'SPELL_CAST_START' then
-			local spell, _, icon, _, _, _, castTime, _, _ = GetSpellInfo(spellid)
+		elseif subEvent == "SPELL_CAST_START" then
+			local spell, _, icon, castTime, _, _ = GetSpellInfo(spellid)
 			if not (castTime > 0) then return end
 			foundPlate = SearchNameplate(_,_,_,_,true)
 		else

@@ -85,7 +85,6 @@ function WorldMap:Skin()
 	
 	Map:StripTextures()
 	Map:CreateBackdrop()
-	Map:CreateShadow()
 	Map.Backdrop:ClearAllPoints()
 	Map.Backdrop:Size(701, 470)
 	Map.Backdrop:Point("TOPLEFT", 0, -66)
@@ -118,10 +117,12 @@ function WorldMap:Skin()
 	QuestScroll.Backdrop:SetPoint("RIGHT", 30, 0)
 	QuestScroll.Backdrop:SetPoint("TOP", 0, 3)
 	QuestScroll.Backdrop:SetPoint("BOTTOM", 0, -5)
+	QuestScrollFrameScrollBar:SkinScrollBar()
 	
 	DetailsScroll:CreateBackdrop()
 	DetailsScroll.Backdrop:SetAllPoints(QuestScroll.Backdrop)
 	DetailsScroll.Backdrop:SetTemplate("Transparent")
+	QuestMapDetailsScrollFrameScrollBar:SkinScrollBar()
 	
 	ViewAllButton:SkinButton()
 	ViewAllButton:ClearAllPoints()
@@ -221,6 +222,3 @@ function WorldMap:Enable()
 end
 
 Maps.WorldMap = WorldMap
-
-
-
