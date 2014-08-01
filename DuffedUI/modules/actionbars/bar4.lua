@@ -35,6 +35,7 @@ end
 ---------------
 -- Mouseover --
 ---------------
+--[[
 if C["actionbars"].RightbarsMouseover == true then
 	-- Frame i created cause mouseover rightbars sux if it fades out when ur mouse is behind (right) of them ..
 	local rbmoh = CreateFrame("Frame", nil, D["Panels"].ActionBar4)
@@ -76,3 +77,4 @@ if C["actionbars"].RightbarsMouseover == true then
 		mouseover(D["Panels"].PetActionBar)
 	end
 end
+]]--
