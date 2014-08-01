@@ -322,11 +322,7 @@ local CreateAuraIcon = function(parent)
 	button.bg:SetTexture(unpack(C["medias"].BackdropColor))
 	button.bg:SetAllPoints(button)
 	
-	button.border = button:CreateTexture(nil, "BACKGROUND")
-	button.border:SetDrawLayer("BACKGROUND", 2)
-	button.border:SetTexture(unpack(C["medias"].BorderColor))
-	button.border:SetSize(20 - mult * 2, 15 - mult * 2)
-	button.border:SetPoint("CENTER")
+	button:SetTemplate()
 	
 	button.icon = button:CreateTexture(nil, "BORDER")
 	button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
@@ -668,6 +664,7 @@ local StylePlate = function(self)
 		self.health:SetStatusBarTexture(Texture)
 		self.health:SetSize(C["nameplates"].Width, C["nameplates"].Height)
 		self.health:SetPoint("BOTTOM", self, "BOTTOM", 0, 5)
+		self.health:SetTemplate()
 
 		self.health.bg = self.health:CreateTexture(nil, "BORDER")
 		self.health.bg:SetTexture(.1, .1, .1)
@@ -712,7 +709,7 @@ local StylePlate = function(self)
 	
 	if self.health.name == nil then
 		self.health.name = self.health:CreateFontString('$parentHealth', "OVERLAY")
-		self.health.name:SetPoint("BOTTOMLEFT", self.health, "TOPLEFT", 0, 3)
+		self.health.name:SetPoint("BOTTOMLEFT", self.health, "TOPLEFT", 0, 5)
 		self.health.name:SetSize(C["nameplates"].Width, C["nameplates"].Height)
 		self.health.name:SetFontObject(Font)
 	end
@@ -799,7 +796,7 @@ local StylePlate = function(self)
 		self.AuraWidget:SetHeight(32) 
 		self.AuraWidget:Show()
 		self.AuraWidget:SetSize(C["nameplates"].Width, C["nameplates"].Height)
-		self.AuraWidget:SetPoint("BOTTOM", self.health, "TOP", 0, 16)
+		self.AuraWidget:SetPoint("BOTTOM", self.health, "TOP", 0, 20)
 		
 		self.AuraWidget.PollFunction = function(self, elapsed)
 			local timeleft = ceil(elapsed-GetTime())
