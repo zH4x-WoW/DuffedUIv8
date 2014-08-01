@@ -30,51 +30,49 @@ function DuffedUIActionBars:CreateBar4()
 	end
 	
 	RegisterStateDriver(ActionBar4, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
-end
+	
+	---------------
+	-- Mouseover --
+	---------------
+	if C["actionbars"].RightbarsMouseover == true then
+		-- Frame i created cause mouseover rightbars sux if it fades out when ur mouse is behind (right) of them ..
+		local rbmoh = CreateFrame("Frame", nil, D["Panels"].ActionBar4)
+		rbmoh:Point("RIGHT", UIParent, "RIGHT", 0, -14)
+		rbmoh:SetSize(24, (Size * 12) + (Spacing * 13))
 
----------------
--- Mouseover --
----------------
---[[
-if C["actionbars"].RightbarsMouseover == true then
-	-- Frame i created cause mouseover rightbars sux if it fades out when ur mouse is behind (right) of them ..
-	local rbmoh = CreateFrame("Frame", nil, D["Panels"].ActionBar4)
-	rbmoh:Point("RIGHT", UIParent, "RIGHT", 0, -14)
-	rbmoh:SetSize(24, (Size * 12) + (Spacing * 13))
-
-	function DuffedUIRightBarsMouseover(alpha)
-		D["Panels"].ActionBar4:SetAlpha(alpha)
-		MultiBarLeft:SetAlpha(alpha)
-		if C["actionbars"].PetbarAlwaysVisible ~= true then
-			D["Panels"].PetActionBar:SetAlpha(alpha)
-			for i=1, NUM_PET_ACTION_SLOTS do
-				_G["PetActionButton"..i]:SetAlpha(alpha)
+		function DuffedUIRightBarsMouseover(alpha)
+			D["Panels"].ActionBar4:SetAlpha(alpha)
+			MultiBarLeft:SetAlpha(alpha)
+			if C["actionbars"].PetbarAlwaysVisible ~= true then
+				D["Panels"].PetActionBar:SetAlpha(alpha)
+				for i=1, NUM_PET_ACTION_SLOTS do
+					_G["PetActionButton"..i]:SetAlpha(alpha)
+				end
 			end
 		end
-	end
 
-	local function mouseover(frame)
-		frame:EnableMouse(true)
-		frame:SetAlpha(0)
-		frame:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
-		frame:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
-	end
-	mouseover(D["Panels"].ActionBar4)
-	mouseover(rbmoh)
-
-	for i = 1, 12 do
-		_G["MultiBarLeftButton"..i]:EnableMouse(true)
-		_G["MultiBarLeftButton"..i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
-		_G["MultiBarLeftButton"..i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
-	end
-
-	if C["actionbars"].PetbarAlwaysVisible ~= true then
-		for i = 1, NUM_PET_ACTION_SLOTS do
-			_G["PetActionButton"..i]:EnableMouse(true)
-			_G["PetActionButton"..i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
-			_G["PetActionButton"..i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
+		local function mouseover(frame)
+			frame:EnableMouse(true)
+			frame:SetAlpha(0)
+			frame:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
+			frame:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
 		end
-		mouseover(D["Panels"].PetActionBar)
+		mouseover(D["Panels"].ActionBar4)
+		mouseover(rbmoh)
+
+		for i = 1, 12 do
+			_G["MultiBarLeftButton"..i]:EnableMouse(true)
+			_G["MultiBarLeftButton"..i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
+			_G["MultiBarLeftButton"..i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
+		end
+
+		if C["actionbars"].PetbarAlwaysVisible ~= true then
+			for i = 1, NUM_PET_ACTION_SLOTS do
+				_G["PetActionButton"..i]:EnableMouse(true)
+				_G["PetActionButton"..i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
+				_G["PetActionButton"..i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
+			end
+			mouseover(D["Panels"].PetActionBar)
+		end
 	end
 end
-]]--
