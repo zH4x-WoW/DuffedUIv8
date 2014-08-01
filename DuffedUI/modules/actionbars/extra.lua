@@ -21,18 +21,9 @@ function DuffedUIActionBars:SetUpExtraActionButton()
 	ExtraActionBarFrame:ClearAllPoints()
 	ExtraActionBarFrame:SetPoint("CENTER", Holder, "CENTER", 0, 0)
 	ExtraActionBarFrame.ignoreFramePositionManager = true
+
+	ExtraActionButton1.style:SetTexture(nil)
+	ExtraActionButton1.style.SetTexture = function() end
 end
-
-local Button = ExtraActionButton1
-local Texture = Button.style
-Texture:SetTexture("")
-
-local DisableTexture = function(style, texture)
-	if (string.sub(texture, 1, 9) == "Interface" or string.sub(texture, 1, 9) == "INTERFACE") then
-		style:SetTexture("")
-	end
-end
-
-hooksecurefunc(Texture, "SetTexture", DisableTexture)
 
 DuffedUIActionBars:SetUpExtraActionButton()

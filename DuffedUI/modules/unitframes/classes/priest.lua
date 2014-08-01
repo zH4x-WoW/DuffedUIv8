@@ -102,7 +102,7 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 		WSBar:SetStatusBarTexture(C["medias"].Normal)
 		WSBar:GetStatusBarTexture():SetHorizTile(false)
 		WSBar:SetBackdrop(DuffedUIUnitFrames.Backdrop)
-		WSBar:SetBackdropColor(unpack(C["medias"].BackdropColor))
+		WSBar:SetBackdropColor(unpack(C["general"].BackdropColor))
 		WSBar:SetStatusBarColor(0.75, 0.04, 0.04)
 		
 		-- Register

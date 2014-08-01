@@ -7,7 +7,7 @@ local DataTextRight = D["Panels"].DataTextRight
 local format = string.format
 local floor = math.floor
 local UnitName = UnitName
-local ThreatBar = CreateFrame("Frame")
+local ThreatBar = CreateFrame("StatusBar", nil, DataTextRight)
 local GetColor = D.ColorGradient
 
 function ThreatBar:OnEvent(event)
@@ -15,9 +15,8 @@ function ThreatBar:OnEvent(event)
 	local Raid = GetNumGroupMembers()
 	local Pet = HasPetUI()
 
-	if (event == "PLAYER_ENTERING_WORLD") then
+	if (event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_DEAD") then
 		self:Hide()
-		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	elseif (event == "PLAYER_REGEN_ENABLED") then
 		self:Hide()
 	elseif (event == "PLAYER_REGEN_DISABLED") then
@@ -27,7 +26,11 @@ function ThreatBar:OnEvent(event)
 			self:Hide()
 		end
 	else
-		self:Hide()
+		if (InCombatLockdown()) and (Party > 0 or Raid > 0 or Pet) then
+			self:Show()
+		else
+			self:Hide()
+		end
 	end
 end
 
@@ -35,50 +38,51 @@ function ThreatBar:OnUpdate()
 	if UnitAffectingCombat("player") then
 		local _, _, ThreatPercent = UnitDetailedThreatSituation("player", "target")
 		local ThreatValue = ThreatPercent or 0
-		local StatusBar = self.StatusBar
 		local Text = self.Text
 		local Title = self.Title
+		local Dead = UnitIsDead("player")
 
 		StatusBar:SetValue(ThreatValue)
 		Text:SetText(floor(ThreatValue) .. "%")
 		Title:SetText((UnitName("target") and UnitName("target") .. ":") or "")
 
 		local R, G, B = GetColor(ThreatValue, 100, 0,.8,0,.8,.8,0,.8,0,0)
-		StatusBar:SetStatusBarColor(R, G, B)
+		self:SetStatusBarColor(R, G, B)
 
-		if (ThreatValue > 0) then
-			StatusBar:SetAlpha(1)
+		if Dead then
+			self:SetAlpha(0)
+		elseif (ThreatValue > 0) then
+			self:SetAlpha(1)
 		else
-			StatusBar:SetAlpha(0)
+			self:SetAlpha(0)
 		end
 	end
 end
 
 function ThreatBar:Create()
-	self.StatusBar = CreateFrame("StatusBar", nil, DataTextRight)
-	self.StatusBar:Point("TOPLEFT", 2, -2)
-	self.StatusBar:Point("BOTTOMRIGHT", -2, 2)
-	self.StatusBar:SetFrameLevel(DataTextRight:GetFrameLevel() + 2)
-	self.StatusBar:SetFrameStrata("HIGH")
-	self.StatusBar:SetStatusBarTexture(C["medias"].Normal)
-	self.StatusBar:SetMinMaxValues(0, 100)
-	self.StatusBar:SetAlpha(0)
+	self:Point("TOPLEFT", 2, -2)
+	self:Point("BOTTOMRIGHT", -2, 2)
+	self:SetFrameLevel(DataTextRight:GetFrameLevel() + 2)
+	self:SetFrameStrata("HIGH")
+	self:SetStatusBarTexture(C.Medias.Normal)
+	self:SetMinMaxValues(0, 100)
+	self:SetAlpha(0)
 
-	self.Text = self.StatusBar:CreateFontString(nil, "OVERLAY")
-	self.Text:SetFont(C["medias"].Font, 12)
-	self.Text:Point("RIGHT", self.StatusBar, -30, 0)
-	self.Text:SetShadowColor(0, 0, 0)
-	self.Text:SetShadowOffset(1.25, -1.25)
+	self.Text = self:CreateFontString(nil, "OVERLAY")
+ 	self.Text:SetFont(C["medias"].Font, 12)
+	self.Text:Point("RIGHT", self, -30, 0)
+ 	self.Text:SetShadowColor(0, 0, 0)
+ 	self.Text:SetShadowOffset(1.25, -1.25)
 
-	self.Title = self.StatusBar:CreateFontString(nil, "OVERLAY")
-	self.Title:SetFont(C["medias"].Font, 12)
-	self.Title:Point("LEFT", self.StatusBar, 30, 0)
-	self.Title:SetShadowColor(0, 0, 0)
-	self.Title:SetShadowOffset(1.25, -1.25)
+	self.Title = self:CreateFontString(nil, "OVERLAY")
+ 	self.Title:SetFont(C["medias"].Font, 12)
+	self.Title:Point("LEFT", self, 30, 0)
+ 	self.Title:SetShadowColor(0, 0, 0)
+ 	self.Title:SetShadowOffset(1.25, -1.25)
 
-	self.Background = self.StatusBar:CreateTexture(nil, "BORDER")
-	self.Background:Point("TOPLEFT", self.StatusBar, 0, 0)
-	self.Background:Point("BOTTOMRIGHT", self.StatusBar, 0, 0)
+	self.Background = self:CreateTexture(nil, "BORDER")
+	self.Background:Point("TOPLEFT", self, 0, 0)
+	self.Background:Point("BOTTOMRIGHT", self, 0, 0)
 	self.Background:SetTexture(0.15, 0.15, 0.15)
 
 	self:SetScript("OnShow", function(self)
@@ -89,6 +93,7 @@ function ThreatBar:Create()
 		self:SetScript("OnUpdate", nil)
 	end)
 
+	self:RegisterEvent("PLAYER_DEAD")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED")
