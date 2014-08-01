@@ -16,13 +16,8 @@ local BuffReminder1 = {
 		90363, -- Embrace of the Shale Spider
 		117666, -- Legacy of the Emperor
 	},
-	['HUNTER'] = {
-		--[[5118, -- Aspect of the Cheetah
-		6673, -- Battle Shout
-		13159, -- Aspect of the Pack
-		57330, -- Horn of Winter
-		109260, -- Aspect of the Iron Hawk]]--
-	},
+
+
 	['MAGE'] = {
 		1459, -- Arcane Brilliance
 		61316, -- Dalaran Brilliance

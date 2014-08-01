@@ -11,7 +11,6 @@ local function SetCasterOnlyBuffs()
 	Spell2Buff = {
 		--24907, -- Moonkin Aura
 		49868, -- Mind Quickening
-		--51470, -- Elemental Oath
 	}
 	Spell3Buff = {
 		1126, -- Mark of the Wild
@@ -38,7 +37,6 @@ end
 
 local function SetBuffs()
 	Spell1Buff = {
-		--30809, -- Unleashed Rage
 		55610, -- Unholy Aura
 		113742, -- Swiftblade's Cunning
 		128432, -- Cackling Howl
@@ -47,7 +45,6 @@ local function SetBuffs()
 		1459, -- Arcane Brilliance
 		24932, -- Leader of the Pack
 		61316, -- Dalaran Brilliance
-		77747,	-- Burning Wrath
 		109773, -- Dark Intent
 		116781, -- Legacy of the White Tiger
 	}

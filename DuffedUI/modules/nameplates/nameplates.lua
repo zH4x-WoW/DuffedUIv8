@@ -538,7 +538,7 @@ local UpdateThreat = function(self)
 		if val > .7 then
 			self.threat:SetVertexColor(1, .5, 0)
 		else
-			self.threat:SetVertexColor(1, 0, 0)
+			self.threat:SetVertexColor(.77, .12, .23)
 		end
 	else
 		self.threat:SetVertexColor(unpack(C["medias"].BackdropColor))
@@ -546,10 +546,8 @@ local UpdateThreat = function(self)
 	
 	if self.unit == "target" then
 		self.health.name:SetTextColor(1, 1, 0)
-		self.tar:Show()
 	else
 		self.health.name:SetTextColor(1, 1, 1)
-		self.tar:Hide()
 	end
 end
 
@@ -698,18 +696,9 @@ local StylePlate = function(self)
 		self.rare:SetDrawLayer("BORDER", -4)
 	end
 
-	if self.tar == nil then
-		self.tar = self.health:CreateTexture(nil, "BORDER")
-		self.tar:SetPoint("TOPLEFT", -mult*3, mult*3)
-		self.tar:SetPoint("BOTTOMRIGHT", mult*3, -mult*3)
-		self.tar:SetTexture(1, 1, 1)
-		self.tar:SetGradientAlpha('HORIZONTAL', 0, 0, 0, 0, .4, 1, 0, 1)
-		self.tar:SetDrawLayer("BORDER", -5)
-	end
-	
 	if self.health.name == nil then
 		self.health.name = self.health:CreateFontString('$parentHealth', "OVERLAY")
-		self.health.name:SetPoint("BOTTOMLEFT", self.health, "TOPLEFT", 0, 5)
+		self.health.name:SetPoint("BOTTOMLEFT", self.health, "TOPLEFT", 0, 4)
 		self.health.name:SetSize(C["nameplates"].Width, C["nameplates"].Height)
 		self.health.name:SetFontObject(Font)
 	end
@@ -791,34 +780,36 @@ local StylePlate = function(self)
 		end
 	end
 	
-	if self.AuraWidget == nil then
-		self.AuraWidget = CreateFrame("Frame", nil, self.plate)
-		self.AuraWidget:SetHeight(32) 
-		self.AuraWidget:Show()
-		self.AuraWidget:SetSize(C["nameplates"].Width, C["nameplates"].Height)
-		self.AuraWidget:SetPoint("BOTTOM", self.health, "TOP", 0, 20)
-		
-		self.AuraWidget.PollFunction = function(self, elapsed)
-			local timeleft = ceil(elapsed-GetTime())
-			if timeleft > 60 then self.expired:SetText(ceil(timeleft/60)..'m') else self.expired:SetText(ceil(timeleft)) end
-		end
-		self.AuraWidget.AuraIconFrames = {}
-		local AuraIconFrames = self.AuraWidget.AuraIconFrames
-		for index = 1, C["nameplates"].MaxDebuffs do 
-			AuraIconFrames[index] = CreateAuraIcon(self.AuraWidget)
-		end
-		local FirstRowCount = min(C["nameplates"].MaxDebuffs/2)
-		
-		AuraIconFrames[1]:SetPoint('RIGHT', self.AuraWidget, -1, 0)
-		for index = 2, C["nameplates"].MaxDebuffs do AuraIconFrames[index]:SetPoint('RIGHT', AuraIconFrames[index-1], 'LEFT', -3, 0) end		
-		
-		self.AuraWidget._Hide = self.AuraWidget.Hide
-		self.AuraWidget.Hide = function() if self.AuraWidget.guidcache then self.AuraWidget.unit = nil end self.AuraWidget:_Hide() end
-		self.AuraWidget:SetScript("OnHide", function() 
+	if C["nameplates"].ShowDebuffs then
+		if self.AuraWidget == nil then
+			self.AuraWidget = CreateFrame("Frame", nil, self.plate)
+			self.AuraWidget:SetHeight(32) 
+			self.AuraWidget:Show()
+			self.AuraWidget:SetSize(C["nameplates"].Width, C["nameplates"].Height)
+			self.AuraWidget:SetPoint("BOTTOM", self.health, "TOP", 0, 20)
+			
+			self.AuraWidget.PollFunction = function(self, elapsed)
+				local timeleft = ceil(elapsed-GetTime())
+				if timeleft > 60 then self.expired:SetText(ceil(timeleft/60)..'m') else self.expired:SetText(ceil(timeleft)) end
+			end
+			self.AuraWidget.AuraIconFrames = {}
+			local AuraIconFrames = self.AuraWidget.AuraIconFrames
 			for index = 1, C["nameplates"].MaxDebuffs do 
-				ScheduleHide(AuraIconFrames[index], 0) 
-			end 
-		end)	
+				AuraIconFrames[index] = CreateAuraIcon(self.AuraWidget)
+			end
+			local FirstRowCount = min(C["nameplates"].MaxDebuffs/2)
+			
+			AuraIconFrames[1]:SetPoint('RIGHT', self.AuraWidget, -1, 0)
+			for index = 2, C["nameplates"].MaxDebuffs do AuraIconFrames[index]:SetPoint('RIGHT', AuraIconFrames[index-1], 'LEFT', -3, 0) end		
+			
+			self.AuraWidget._Hide = self.AuraWidget.Hide
+			self.AuraWidget.Hide = function() if self.AuraWidget.guidcache then self.AuraWidget.unit = nil end self.AuraWidget:_Hide() end
+			self.AuraWidget:SetScript("OnHide", function() 
+				for index = 1, C["nameplates"].MaxDebuffs do 
+					ScheduleHide(AuraIconFrames[index], 0) 
+				end 
+			end)	
+		end
 	end
 		
 	Schedule(self, self.oldhealth)
