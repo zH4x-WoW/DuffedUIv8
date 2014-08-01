@@ -12,10 +12,6 @@ DuffedUIConfig["ruRU"] = {
 			["Name"] = "Auto Scale",
 			["Desc"] = "Automatically detect the best scale for your resolution",
 		},
-		["MultiSampleProtection"] = { --
-			["Name"] = "Multisample Protection",
-			["Desc"] = "Disable multisampling, this keeps DuffedUI's frames pixel perfect",
-		},
 		["UIScale"] = { --
 			["Name"] = "UI Scale",
 			["Desc"] = "Set a custom UI scale",

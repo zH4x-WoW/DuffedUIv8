@@ -22,10 +22,10 @@ function DuffedUIUnitFrames:AddPriestFeatures()
 		SOBar[i]:SetStatusBarTexture(Texture)
 
 		if i == 1 then
-			SOBar[i]:Width(40)
+			SOBar[i]:Width(200 / 5)
 			SOBar[i]:Point("LEFT", SOBar, "LEFT", 2, 0)
 		else
-			SOBar[i]:Width(40)
+			SOBar[i]:Width(200 / 5)
 			SOBar[i]:Point("LEFT", SOBar[i - 1], "RIGHT", 1, 0)
 		end
 	end

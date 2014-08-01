@@ -11,15 +11,17 @@ local ThreatBar = CreateFrame("Frame")
 local GetColor = D.ColorGradient
 
 function ThreatBar:OnEvent(event)
-	local StatusBar = self.StatusBar
 	local Party = GetNumGroupMembers()
 	local Raid = GetNumGroupMembers()
 	local Pet = HasPetUI()
 
-	if (event == "PLAYER_REGEN_ENABLED") then
+	if (event == "PLAYER_ENTERING_WORLD") then
+		self:Hide()
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	elseif (event == "PLAYER_REGEN_ENABLED") then
 		self:Hide()
 	elseif (event == "PLAYER_REGEN_DISABLED") then
-		if (Party > 0 or Raid > 0 or Pet == 1) then
+		if (Party > 0 or Raid > 0 or Pet) then
 			self:Show()
 		else
 			self:Hide()
@@ -39,7 +41,7 @@ function ThreatBar:OnUpdate()
 
 		StatusBar:SetValue(ThreatValue)
 		Text:SetText(floor(ThreatValue) .. "%")
-		Title:SetText((UnitName("target") and UnitName("target") .. ":") or nil)
+		Title:SetText((UnitName("target") and UnitName("target") .. ":") or "")
 
 		local R, G, B = GetColor(ThreatValue, 100, 0,.8,0,.8,.8,0,.8,0,0)
 		StatusBar:SetStatusBarColor(R, G, B)

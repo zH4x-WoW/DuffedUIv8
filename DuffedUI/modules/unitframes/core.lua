@@ -334,12 +334,6 @@ function DuffedUIUnitFrames:PostUpdatePower(unit, min, max)
 	end
 end
 
-function DuffedUIUnitFrames:UpdateReputationColor(event, unit, bar)
-	local _, ID = GetWatchedFactionInfo()
-
-	bar:SetStatusBarColor(FACTION_BAR_COLORS[ID].r, FACTION_BAR_COLORS[ID].g, FACTION_BAR_COLORS[ID].b)
-end
-
 local function UpdateTotemTimer(self, elapsed)
 	self.timeLeft = self.timeLeft - elapsed
 
@@ -924,7 +918,7 @@ function DuffedUIUnitFrames:GetPartyFramesAttributes()
 	]],
 	"initial-width", D.Scale(162),
 	"initial-height", D.Scale(24),
-	"showSolo", false, -- uncomment this for coding
+	"showSolo", false,
 	"showParty", true, 
 	"showPlayer", true, 
 	"showRaid", true,
@@ -946,7 +940,7 @@ function DuffedUIUnitFrames:GetRaidFramesAttributes()
 	return
 	"DuffedUIRaid", 
 	nil, 
-	Properties,
+	--Properties,
 	"oUF-initialConfigFunction", [[
 		local header = self:GetParent()
 		self:SetWidth(header:GetAttribute("initial-width"))
@@ -1148,9 +1142,7 @@ end
 
 DuffedUIUnitFrames:RegisterEvent("ADDON_LOADED")
 DuffedUIUnitFrames:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= "DuffedUI" then
-		return
-	end
+	if addon ~= "DuffedUI" then return end
 
 	oUF:RegisterStyle("DuffedUI", DuffedUIUnitFrames.Style)
 	self:DisableBlizzard()
