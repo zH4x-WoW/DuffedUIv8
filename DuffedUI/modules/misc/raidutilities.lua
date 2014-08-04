@@ -3,41 +3,40 @@
 		All others raid frames mods or default Blizzard should have already this feature
 --]]
 
-local D, C, L = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 local panel_height = ((D.Scale(5) * 4) + (D.Scale(22) * 4))
-local r, g, b = C["medias"].BackdropColor
-local Popups = D["Popups"]
+local r,g,b = C["media"].backdropcolor
 
 local function CreateUtilities(self, event, addon)
-	if addon == "DuffedUI" then
+	if addon == "DuffedUI_Raid_Healing" or addon == "DuffedUI_Raid" then
 		-- it need the DuffedUI minimap
-		if not Minimap then return end
+		if not DuffedUIMinimap then return end
 		
 		-- Anchor
 		local anchor = CreateFrame("Frame", "DuffedUIRaidUtilityAnchor", UIParent)
 		anchor:SetMovable(true)
 		anchor:SetTemplate("Default")
-		anchor:Size(Minimap:GetWidth(), 21)
-		anchor:Point("TOP", UIParent, "TOP", -400, 0)
+		anchor:Size(DuffedUIMinimap:GetWidth(), 21)
+		anchor:Point("TOP", UIParent, "TOP", -200, 0)
 		anchor:SetScript("OnMouseDown", function() anchor:StartMoving() end)
 		anchor:SetScript("OnMouseUp", function() anchor:StopMovingOrSizing() end)
-		anchor:SetBackdropBorderColor(1, 0, 0)
+		anchor:SetBackdropBorderColor(1,0,0)
 		anchor:CreateShadow("")
 		anchor:SetFrameStrata("HIGH")
 		anchor:SetUserPlaced(true)
 		anchor:SetClampedToScreen(true)
 		anchor:Hide()
-		--tinsert(D.AllowFrameMoving, DuffedUIRaidUtilityAnchor)
+		tinsert(D.AllowFrameMoving, DuffedUIRaidUtilityAnchor)
 		
 		anchor.text = anchor:CreateFontString(nil, "OVERLAY")
-		anchor.text:SetFont(C["medias"].Font, 12)
+		anchor.text:SetFont(C["media"].font, C["datatext"].fontsize)
 		anchor.text:SetPoint("CENTER")
 		anchor.text:SetText("Move RaidUtility")
 
 		--Create main frame
-		local DuffedUIRaidUtility = CreateFrame("Frame", "DuffedUIRaidUtility", Minimap)
+		local DuffedUIRaidUtility = CreateFrame("Frame", "DuffedUIRaidUtility", DuffedUIMinimap)
 		DuffedUIRaidUtility:SetTemplate()
-		DuffedUIRaidUtility:Size(Minimap:GetWidth(), panel_height)
+		DuffedUIRaidUtility:Size(DuffedUIMinimap:GetWidth(), panel_height)
 		DuffedUIRaidUtility:Point("TOPLEFT", anchor, "TOPLEFT", 0, 0)
 		DuffedUIRaidUtility:Hide()
 		DuffedUIRaidUtility:SetFrameLevel(10)
@@ -55,13 +54,13 @@ local function CreateUtilities(self, event, addon)
 
 		--Change border when mouse is inside the button
 		local function ButtonEnter(self)
-			local color = RAID_CLASS_COLORS[D.MyClass]
+			local color = RAID_CLASS_COLORS[D.myclass]
 			self:SetBackdropBorderColor(color.r, color.g, color.b)
 		end
 
 		--Change border back to normal when mouse leaves button
 		local function ButtonLeave(self)
-			self:SetBackdropBorderColor(unpack(C["medias"].BorderColor))
+			self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 		end
 
 		-- Function to create buttons in this module
@@ -76,28 +75,28 @@ local function CreateUtilities(self, event, addon)
 			b:SetTemplate("Default")
 			if text then
 				local t = b:CreateFontString(nil,"OVERLAY",b)
-				t:SetFont(C["medias"].Font,12)
+				t:SetFont(C["media"].font,12)
 				t:SetPoint("CENTER")
 				t:SetJustifyH("CENTER")
 				t:SetText(text)
 				b:SetFontString(t)
 			elseif texture then
 				local t = b:CreateTexture(nil,"OVERLAY",nil)
-				t:SetTexture(C["medias"].Normal)
-				t:SetPoint("TOPLEFT", b, "TOPLEFT", D.Mult, -D.Mult)
-				t:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", -D.Mult, D.Mult)
+				t:SetTexture(normTex)
+				t:SetPoint("TOPLEFT", b, "TOPLEFT", D.mult, -D.mult)
+				t:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", -D.mult, D.mult)
 			end
 		end
 
 		--Show Button
-		CreateButton("DuffedUIRaidUtilityShowButton", Minimap, "UIMenuButtonStretchTemplate, SecureHandlerClickTemplate", Minimap:GetWidth(), 21, "TOPLEFT", anchor, "TOPLEFT", 0, 0, RAID_ASSISTANT, nil)
+		CreateButton("DuffedUIRaidUtilityShowButton", DuffedUIMinimap, "UIMenuButtonStretchTemplate, SecureHandlerClickTemplate", DuffedUIMinimap:GetWidth(), 21, "TOPLEFT", anchor, "TOPLEFT", 0, 0, RAID_ASSISTANT, nil)
 		DuffedUIRaidUtilityShowButton:SetFrameRef("DuffedUIRaidUtility", DuffedUIRaidUtility)
 		DuffedUIRaidUtilityShowButton:SetAttribute("_onclick", [=[self:Hide(); self:GetFrameRef("DuffedUIRaidUtility"):Show();]=])
 		DuffedUIRaidUtilityShowButton:SetScript("OnMouseUp", function(self) DuffedUIRaidUtility.toggled = true end)
 		DuffedUIRaidUtilityShowButton:Hide()
 
 		--Close Button
-		CreateButton("DuffedUIRaidUtilityCloseButton", DuffedUIRaidUtility, "UIMenuButtonStretchTemplate, SecureHandlerClickTemplate", Minimap:GetWidth(), 21, "TOP", DuffedUIRaidUtility, "BOTTOM", 0, -2, CLOSE, nil)
+		CreateButton("DuffedUIRaidUtilityCloseButton", DuffedUIRaidUtility, "UIMenuButtonStretchTemplate, SecureHandlerClickTemplate", DuffedUIMinimap:GetWidth(), 21, "TOP", DuffedUIRaidUtility, "BOTTOM", 0, -2, CLOSE, nil)
 		DuffedUIRaidUtilityCloseButton:SetFrameRef("DuffedUIRaidUtilityShowButton", DuffedUIRaidUtilityShowButton)
 		DuffedUIRaidUtilityCloseButton:SetAttribute("_onclick", [=[self:GetParent():Hide(); self:GetFrameRef("DuffedUIRaidUtilityShowButton"):Show();]=])
 		DuffedUIRaidUtilityCloseButton:SetScript("OnMouseUp", function(self) DuffedUIRaidUtility.toggled = false end)
@@ -106,7 +105,7 @@ local function CreateUtilities(self, event, addon)
 		CreateButton("DuffedUIRaidUtilityDisbandRaidButton", DuffedUIRaidUtility, "UIMenuButtonStretchTemplate", DuffedUIRaidUtility:GetWidth() * .95, D.Scale(21), "TOP", DuffedUIRaidUtility, "TOP", 0, D.Scale(-5), "Disband Group", nil)
 		DuffedUIRaidUtilityDisbandRaidButton:SetScript("OnMouseUp", function(self)
 			if CheckRaidStatus() then
-				Popups.ShowPopup("DUFFEDUIDISBAND_RAID")
+				D.ShowPopup("DUFFEDUIDISBAND_RAID")
 			end
 		end)
 

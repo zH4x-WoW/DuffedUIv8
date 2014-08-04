@@ -1,26 +1,48 @@
-local D, C, L = select(2, ...):unpack()
+------------------------------------------------------------------
+-- This Module loads new user settings if in-game config is loaded
+------------------------------------------------------------------
 
-if (not DuffedUIConfigNotShared) then DuffedUIConfigNotShared = {} end
+local D, C, L, G = unpack(select(2, ...))
 
-local Settings = DuffedUIConfigNotShared
+local myPlayerRealm = D.myrealm
+local myPlayerName  = UnitName("player")
 
-for group, options in pairs(Settings) do
+if not IsAddOnLoaded("DuffedUI_ConfigUI") then return end
+if not DuffedUIConfigAll then DuffedUIConfigAll = {} end
+
+local tca = DuffedUIConfigAll
+local private = DuffedUIConfigPrivate
+local public = DuffedUIConfigPublic
+		
+if not tca[myPlayerRealm] then tca[myPlayerRealm] = {} end
+if not tca[myPlayerRealm][myPlayerName] then tca[myPlayerRealm][myPlayerName] = false end
+
+if tca[myPlayerRealm][myPlayerName] == true and not private then return end
+if tca[myPlayerRealm][myPlayerName] == false and not public then return end
+
+local setting
+if tca[myPlayerRealm][myPlayerName] == true then
+	setting = private
+else
+	setting = public
+end
+
+for group,options in pairs(setting) do
 	if C[group] then
-		local Count = 0
-
-		for option, value in pairs(options) do
-			if (C[group][option] ~= nil) then
-				if (C[group][option] == value) then
-					Settings[group][option] = nil
+		local count = 0
+		for option,value in pairs(options) do
+			if C[group][option] ~= nil then
+				if C[group][option] == value then
+					setting[group][option] = nil	
 				else
-					Count = Count + 1
+					count = count + 1
 					C[group][option] = value
 				end
 			end
 		end
-
-		if (Count == 0) then Settings[group] = nil end
+		-- keeps DuffedUIConfig clean and small
+		if count == 0 then setting[group] = nil end
 	else
-		Settings[group] = nil
- 	end
- end
+		setting[group] = nil
+	end
+end

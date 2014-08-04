@@ -1,32 +1,69 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
+if IsAddOnLoaded("Omen") or not DuffedUIInfoRight or not oUFDuffedUI then return end
 
-if (not C["misc"].ThreatBarEnable) then return end
+local aggroColors = {
+	[1] = {12 / 255, 151 / 255,  15 / 255},
+	[2] = {166 / 255, 171 / 255,  26 / 255},
+	[3] = {163 / 255,  24 / 255,  24 / 255},
+}
 
-local Miscellaneous = D["Miscellaneous"]
-local DataTextRight = D["Panels"].DataTextRight
-local format = string.format
-local floor = math.floor
-local UnitName = UnitName
-local ThreatBar = CreateFrame("StatusBar", nil, DataTextRight)
-local GetColor = D.ColorGradient
+local DuffedUIThreatBar = CreateFrame("StatusBar", "DuffedUIThreatBar", DuffedUIInfoRight)
+if (C["misc"].exp_rep and D.level == MAX_PLAYER_LEVEL) then
+	DuffedUIThreatBar:Point("TOPLEFT", DuffedUIExperience, 0, 0)
+	DuffedUIThreatBar:Point("BOTTOMRIGHT", DuffedUIExperience, 0, 0)
+	DuffedUIThreatBar:SetFrameLevel(DuffedUIExperience:GetFrameLevel() + 1)
+	DuffedUIThreatBar:SetFrameStrata("HIGH")
+else
+	DuffedUIThreatBar:Point("TOPLEFT", 2, -2)
+	DuffedUIThreatBar:Point("BOTTOMRIGHT", -2, 2)
+	DuffedUIThreatBar:SetFrameLevel(0)
+	DuffedUIThreatBar:SetFrameStrata("MEDIUM")
+end
+G.Misc.ThreatBar = DuffedUIThreatBar
 
-function ThreatBar:OnEvent(event)
-	local Party = GetNumGroupMembers()
-	local Raid = GetNumGroupMembers()
-	local Pet = HasPetUI()
+DuffedUIThreatBar:SetStatusBarTexture(C["media"].normTex)
+DuffedUIThreatBar:GetStatusBarTexture():SetHorizTile(false)
+DuffedUIThreatBar:SetBackdrop({bgFile = C["media"].blank})
+if not (C["misc"].exp_rep and D.level == MAX_PLAYER_LEVEL) then DuffedUIThreatBar:SetBackdropColor(0, 0, 0, 0) end
+DuffedUIThreatBar:SetMinMaxValues(0, 100)
 
-	if (event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_DEAD") then
+DuffedUIThreatBar.text = D.SetFontString(DuffedUIThreatBar, C["media"].font, 12)
+if (C["misc"].exp_rep and D.level == MAX_PLAYER_LEVEL) then
+	DuffedUIThreatBar.text:Point("RIGHT", DuffedUIThreatBar, "RIGHT", -10, 0)
+else
+	DuffedUIThreatBar.text:Point("RIGHT", DuffedUIThreatBar, "RIGHT", -30, 0)
+end
+
+DuffedUIThreatBar.Title = D.SetFontString(DuffedUIThreatBar, C["media"].font, 12)
+if (C["misc"].exp_rep and D.level == MAX_PLAYER_LEVEL) then
+	DuffedUIThreatBar.Title:SetText(L.unitframes_ouf_threattext2)
+	DuffedUIThreatBar.Title:SetPoint("LEFT", DuffedUIThreatBar, "LEFT", D.Scale(10), 0)
+else
+	DuffedUIThreatBar.Title:SetText(L.unitframes_ouf_threattext)
+	DuffedUIThreatBar.Title:SetPoint("LEFT", DuffedUIThreatBar, "LEFT", D.Scale(30), 0)
+end
+	  
+DuffedUIThreatBar.bg = DuffedUIThreatBar:CreateTexture(nil, 'BORDER')
+DuffedUIThreatBar.bg:SetAllPoints(DuffedUIThreatBar)
+DuffedUIThreatBar.bg:SetTexture(.1, .1, .1)
+
+local function OnEvent(self, event, ...)
+	local party = GetNumGroupMembers()
+	local raid = GetNumGroupMembers()
+	local pet = select(1, HasPetUI())
+	if event == "PLAYER_ENTERING_WORLD" then
 		self:Hide()
-	elseif (event == "PLAYER_REGEN_ENABLED") then
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	elseif event == "PLAYER_REGEN_ENABLED" then
 		self:Hide()
-	elseif (event == "PLAYER_REGEN_DISABLED") then
-		if (Party > 0 or Raid > 0 or Pet) then
+	elseif event == "PLAYER_REGEN_DISABLED" then
+		if party > 0 or raid > 0 or pet == 1 then
 			self:Show()
 		else
 			self:Hide()
 		end
 	else
-		if (InCombatLockdown()) and (Party > 0 or Raid > 0 or Pet) then
+		if (InCombatLockdown()) and (party > 0 or raid > 0 or pet == 1) then
 			self:Show()
 		else
 			self:Hide()
@@ -34,72 +71,31 @@ function ThreatBar:OnEvent(event)
 	end
 end
 
-function ThreatBar:OnUpdate()
-	if UnitAffectingCombat("player") then
-		local _, _, ThreatPercent = UnitDetailedThreatSituation("player", "target")
-		local ThreatValue = ThreatPercent or 0
-		local Text = self.Text
-		local Title = self.Title
-		local Dead = UnitIsDead("player")
+local function OnUpdate(self, event, unit)
+	if UnitAffectingCombat(self.unit) then
+		local _, _, threatpct, rawthreatpct, _ = UnitDetailedThreatSituation(self.unit, self.tar)
+		local threatval = threatpct or 0
+		
+		self:SetValue(threatval)
+		self.text:SetFormattedText("%3.1f", threatval)
+		
+		local r, g, b = oUFDuffedUI.ColorGradient(threatval, 100, 0, .8, 0, .8, .8, 0, .8, 0, 0)
+		self:SetStatusBarColor(r, g, b)
 
-		StatusBar:SetValue(ThreatValue)
-		Text:SetText(floor(ThreatValue) .. "%")
-		Title:SetText((UnitName("target") and UnitName("target") .. ":") or "")
-
-		local R, G, B = GetColor(ThreatValue, 100, 0,.8,0,.8,.8,0,.8,0,0)
-		self:SetStatusBarColor(R, G, B)
-
-		if Dead then
-			self:SetAlpha(0)
-		elseif (ThreatValue > 0) then
+		if threatval > 0 then
 			self:SetAlpha(1)
 		else
 			self:SetAlpha(0)
-		end
+		end		
 	end
 end
 
-function ThreatBar:Create()
-	self:Point("TOPLEFT", 2, -2)
-	self:Point("BOTTOMRIGHT", -2, 2)
-	self:SetFrameLevel(DataTextRight:GetFrameLevel() + 2)
-	self:SetFrameStrata("HIGH")
-	self:SetStatusBarTexture(C.Medias.Normal)
-	self:SetMinMaxValues(0, 100)
-	self:SetAlpha(0)
-
-	self.Text = self:CreateFontString(nil, "OVERLAY")
- 	self.Text:SetFont(C["medias"].Font, 12)
-	self.Text:Point("RIGHT", self, -30, 0)
- 	self.Text:SetShadowColor(0, 0, 0)
- 	self.Text:SetShadowOffset(1.25, -1.25)
-
-	self.Title = self:CreateFontString(nil, "OVERLAY")
- 	self.Title:SetFont(C["medias"].Font, 12)
-	self.Title:Point("LEFT", self, 30, 0)
- 	self.Title:SetShadowColor(0, 0, 0)
- 	self.Title:SetShadowOffset(1.25, -1.25)
-
-	self.Background = self:CreateTexture(nil, "BORDER")
-	self.Background:Point("TOPLEFT", self, 0, 0)
-	self.Background:Point("BOTTOMRIGHT", self, 0, 0)
-	self.Background:SetTexture(0.15, 0.15, 0.15)
-
-	self:SetScript("OnShow", function(self)
-		self:SetScript("OnUpdate", self.OnUpdate)
-	end)
-
-	self:SetScript("OnHide", function(self)
-		self:SetScript("OnUpdate", nil)
-	end)
-
-	self:RegisterEvent("PLAYER_DEAD")
-	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	self:RegisterEvent("PLAYER_REGEN_ENABLED")
-	self:RegisterEvent("PLAYER_REGEN_DISABLED")
-	self:SetScript("OnEvent", self.OnEvent)
-end
-
-function ThreatBar:Enable() self:Create() end
-
-Miscellaneous.ThreatBar = ThreatBar
+DuffedUIThreatBar:RegisterEvent("PLAYER_ENTERING_WORLD")
+DuffedUIThreatBar:RegisterEvent("PLAYER_REGEN_ENABLED")
+DuffedUIThreatBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+DuffedUIThreatBar:SetScript("OnEvent", OnEvent)
+DuffedUIThreatBar:SetScript("OnUpdate", OnUpdate)
+DuffedUIThreatBar.unit = "player"
+DuffedUIThreatBar.tar = DuffedUIThreatBar.unit.."target"
+DuffedUIThreatBar.Colors = aggroColors
+DuffedUIThreatBar:SetAlpha(0)

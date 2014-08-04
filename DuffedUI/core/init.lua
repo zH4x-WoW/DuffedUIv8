@@ -1,28 +1,109 @@
-----------------------------------------------------------------
--- Initiation of DuffedUI engine
-----------------------------------------------------------------
+-----------------------------------
+-- Initiation of DuffedUI engine --
+-----------------------------------
 
--- [[ Build the engine ]] --
 local addon, engine = ...
 engine[1] = {}
 engine[2] = {}
 engine[3] = {}
+engine[4] = {}
 
-function engine:unpack()
-	return self[1], self[2], self[3]
-end
+DuffedUI = engine -- Allow other addons to use Engine
 
-engine[1].Resolution = GetCVar("gxResolution")
-engine[1].ScreenHeight = tonumber(string.match(engine[1].Resolution, "%d+x(%d+)"))
-engine[1].ScreenWidth = tonumber(string.match(engine[1].Resolution, "(%d+)x+%d"))
-engine[1].MyClass = select(2, UnitClass("player"))
-engine[1].MyLevel = UnitLevel("player")
-engine[1].MyName = select(1, UnitName("player"))
-engine[1].Version = GetAddOnMetadata("DuffedUI", "Version")
-engine[1].VersionNumber = tonumber(engine[1].Version)
-engine[1].Dummy = function() return end
+--------------------------------------------------
+-- We need this as soon we begin loading DuffedUI
+--------------------------------------------------
+
+local D, C, L, G = unpack(select(2, ...))
+
+-- functions, constants, variables
+D.dummy = function() return end
+D.myname = select(1, UnitName("player"))
+D.myclass = select(2, UnitClass("player"))
+D.myrace = select(2, UnitRace("player"))
+D.myfaction = UnitFactionGroup("player")
+D.client = GetLocale() 
+D.resolution = GetCVar("gxResolution")
+D.screenheight = tonumber(string.match(D.resolution, "%d+x(%d+)"))
+D.screenwidth = tonumber(string.match(D.resolution, "(%d+)x+%d"))
+D.version = GetAddOnMetadata("DuffedUI", "Version")
+D.versionnumber = tonumber(D.version)
+D.incombat = UnitAffectingCombat("player")
+D.patch, D.buildtext, D.releasedate, D.toc = GetBuildInfo()
+D.build = tonumber(D.buildtext)
+D.level = UnitLevel("player")
+D.myrealm = GetRealmName()
+D.InfoLeftRightWidth = 370
 
 SLASH_RELOADUI1 = "/rl"
 SlashCmdList.RELOADUI = ReloadUI
 
-DuffedUI = engine
+-- Modules
+G.ActionBars = {}
+G.Bags = {}
+G.Auras = {}
+G.Chat = {}
+G.DataText = {}
+G.Loot = {}
+G.Maps = {}
+G.Misc = {}
+G.NamePlates = {}
+G.Panels = {}
+G.Skins = {}
+G.Tooltips = {}
+G.UnitFrames = {}
+G.Install = {}
+
+-- Hider
+local UIHider = CreateFrame("Frame", "DuffedUIUIHider", UIParent)
+UIHider:Hide()
+G.Misc.UIHider = UIHider
+
+-- Hider Secure (mostly used to hide stuff while in pet battle)
+local PetBattleHider = CreateFrame("Frame", "DuffedUIPetBattleHider", UIParent, "SecureHandlerStateTemplate");
+PetBattleHider:SetAllPoints(UIParent)
+RegisterStateDriver(PetBattleHider, "visibility", "[petbattle] hide; show")
+
+-- Credits is important! (please do not edit this, thank you!)
+D.Credits = {
+	"Azilroka",
+	"Caith",
+	"Ishtara",
+	"Hungtar",
+	"Tulla",
+	"P3lim",
+	"Alza",
+	"Roth",
+	"Tekkub",
+	"Shestak",
+	"Caellian",
+	"Haleth",
+	"Nightcracker",
+	"Haste",
+	"Hydra",
+	"Elv",
+	"Tukz",
+}
+
+D.DuffedCredits = {
+	"jones7",
+	"Waffurizzle",
+	"Carbonium",
+	"Optional",
+	"Pixelfcuk",
+	"Shera",
+	"lefirez",
+	"PATix",
+	"macgee",
+	"Roglash",
+	"loveran",
+	"transform",
+	"Kanestorm",
+	"Sinaris",
+	"Juhawny",
+	"Elenarda",
+	"Zenglao",
+	"loki",
+}
+
+ERR_NOT_IN_RAID = "";

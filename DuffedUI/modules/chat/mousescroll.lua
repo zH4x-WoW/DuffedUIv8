@@ -1,25 +1,25 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...)) 
+if C["chat"].enable ~= true then return end
 
-if (not C["chat"].Enable) then
-	return
-end
+------------------------------------------------------------------------
+--	Enhance/rewrite a Blizzard feature, chatframe mousewheel.
+------------------------------------------------------------------------
 
-local NumLines = 3
-
+local numlines = 3
 function FloatingChatFrame_OnMouseScroll(self, delta)
-	if (delta < 0) then
+	if delta < 0 then
 		if IsShiftKeyDown() then
 			self:ScrollToBottom()
 		else
-			for i = 1, NumLines do
+			for i=1, numlines do
 				self:ScrollDown()
 			end
 		end
-	elseif (delta > 0) then
+	elseif delta > 0 then
 		if IsShiftKeyDown() then
 			self:ScrollToTop()
 		else
-			for i = 1, NumLines do
+			for i = 1, numlines do
 				self:ScrollUp()
 			end
 		end

@@ -1,298 +1,353 @@
-local D, C, L = select(2, ...):unpack()
-if not D.Client == ("esES" or "esMX")  then return end
+local D, C, L, G = unpack(select(2, ...))
 
-------------------
-L.DataText = {} --
-------------------
+if D.client == "esES" or D.client == "esMX" then
+	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
+	L.AFKText_Text2 = "Middle click the minimap for micromenu"
+	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
+	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
 
--- There's globalstrings for most of these datatexts btw, We shouldn't need to localize most of them
--- Something we could do is a "Global" locale file, for stuff we don't need localized by users. Just an idea.
+	L.UI_Outdated = "Tu versión de DuffedUI no está actualizada. Puedes descargar la última versión de www.tukui.org"
+	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
+	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.tukui.org|r."
+	
+	-- Bufftracker
+	L.bufftracker_10ap = "+10% Attack Power"
+	L.bufftracker_10as = "+10% Melee & Ranged Attack Speed"
+	L.bufftracker_10sp = "+10% Spell Power"
+	L.bufftracker_5sh = "+5% Spell Haste"
+	L.bufftracker_5csc = "+5% Critical Strike Chance"
+	L.bufftracker_3kmr = "+3000 Mastery Rating"
+	L.bufftracker_5sai = "+5% Strength, Agility, Intellect"
+	L.bufftracker_10s = "+10% Stamina"
+	L.bufftracker_error = "ERROR"
 
-L.DataText.AvoidanceBreakdown = "Avoidance Breakdown"
-L.DataText.Level = LEVEL_ABBR
-L.DataText.Boss = BOSS
-L.DataText.Miss = COMBAT_TEXT_MISS
-L.DataText.Dodge = DODGE
-L.DataText.Block = BLOCK
-L.DataText.Parry = PARRY
-L.DataText.Avoidance = "Avoidance"
-L.DataText.AvoidanceShort = "avd: "
-L.DataText.Hit = HIT
-L.DataText.Power = "Power"
-L.DataText.Mastery = ITEM_MOD_MASTERY_RATING_SHORT
-L.DataText.Crit = COMBAT_RATING_NAME10
-L.DataText.Regen = MANA_REGEN_ABBR
-L.DataText.Session = "Session: "
-L.DataText.Earned = "Earned:"
-L.DataText.Spent = "Spent:"
-L.DataText.Deficit = "Deficit:"
-L.DataText.Profit = "Profit:"
-L.DataText.Character = "Character: "
-L.DataText.Server = "Server: "
-L.DataText.TotalGold = "Total: "
-L.DataText.GoldShort = "|cffffd700g|r"
-L.DataText.SilverShort = "|cffc7c7cfs|r"
-L.DataText.CopperShort = "|cffeda55fc|r"
-L.DataText.Talents = TALENTS
-L.DataText.NoTalent = "No Talents"
-L.DataText.Inc = "Incoming:"
-L.DataText.Out = "Outgoing:"
-L.DataText.Home = "Home Latency:"
-L.DataText.World = "World Latency:"
-L.DataText.Global = "Global Latency:"
-L.DataText.Download = "Download: "
-L.DataText.Bandwidth = "Bandwidth: "
-L.DataText.Guild = "guild"
-L.DataText.NoGuild = "no guild"
-L.DataText.Bags = "bags: "
-L.DataText.Friends = "friends"
-L.DataText.Online = "Online: "
-L.DataText.Armor = "armor"
-L.DataText.Earned = "Earned:"
-L.DataText.Spent = "Spent:"
-L.DataText.Deficit = "Deficit:"
-L.DataText.Profit = "Profit:"
-L.DataText.TimeTo = "Time to"
-L.DataText.FriendsList = "Friends list:"
-L.DataText.Spell = "sp"
-L.DataText.AttackPower = "ap"
-L.DataText.Haste = "haste"
-L.DataText.Session = "Session: "
-L.DataText.Character = "Character: "
-L.DataText.Server = "Server: "
-L.DataText.Total = "Total: "
-L.DataText.SavedRaid = "Saved Raid(s)"
-L.DataText.currencyWeekly = "Weekly: "
-L.DataText.FPS = " fps & "
-L.DataText.MS = " ms"
-L.DataText.Critical = " crit"
-L.DataText.Heal = " heal"
-L.DataText.ServerTime = "Server Time: "
-L.DataText.LocalTime = "Local Time: "
-L.DataText.Mitigation = "Mitigation By Level: "
-L.DataText.Healing = "Healing: "
-L.DataText.Damage = "Damage: "
-L.DataText.Honor = "Honor: "
-L.DataText.KillingBlow = "Killing Blows: "
-L.DataText.StatsFor = "Stats for "
-L.DataText.HonorableKill = "Honorable Kills:"
-L.DataText.Death = "Deaths:"
-L.DataText.HonorGained = "Honor Gained:"
-L.DataText.DamageDone = "Damage Done:"
-L.DataText.HealingDone = "Healing Done:"
-L.DataText.BaseAssault = "Bases Assaulted:"
-L.DataText.BaseDefend = "Bases Defended:"
-L.DataText.TowerAssault = "Towers Assaulted:"
-L.DataText.TowerDefend = "Towers Defended:"
-L.DataText.FlagCapture = "Flags Captured:"
-L.DataText.FlagReturn = "Flags Returned:"
-L.DataText.GraveyardAssault = "Graveyards Assaulted:"
-L.DataText.GraveyardDefend = "Graveyards Defended:"
-L.DataText.DemolisherDestroy = "Demolishers Destroyed:"
-L.DataText.GateDestroy = "Gates Destroyed:"
-L.DataText.TotalMemory = "Total Memory Usage:"
-L.DataText.ControlBy = "Controlled by:"
-L.DataText.CallToArms = BATTLEGROUND_HOLIDAY 
-L.DataText.ArmError = "Could not get Call To Arms information."
-L.DataText.NoDungeonArm = "No dungeons are currently offering a Call To Arms."
-L.DataText.CartControl = "Carts Controlled:"
-L.DataText.VictoryPts = "Victory Points:"
-L.DataText.OrbPossession = "Orb Possessions:"
-L.DataText.Slots = {
-	[1] = {1, "Head", 1000},
-	[2] = {3, "Shoulder", 1000},
-	[3] = {5, "Chest", 1000},
-	[4] = {6, "Waist", 1000},
-	[5] = {9, "Wrist", 1000},
-	[6] = {10, "Hands", 1000},
-	[7] = {7, "Legs", 1000},
-	[8] = {8, "Feet", 1000},
-	[9] = {16, "Main Hand", 1000},
-	[10] = {17, "Off Hand", 1000},
-	[11] = {18, "Ranged", 1000}
-}
+	-- Click2Cast
+	L.click2cast_title = "Mouse Bindings"
+	
+	-- worldboss
+	L.worldboss_title = "World Boss(s):"
+	L.worldboss_galleon = "Galeón"
+	L.worldboss_sha = "Sha de la Ira"
+	L.worldboss_oondasta = "Oondasta"
+	L.worldboss_nalak = "Nalak"
+	L.worldboss_celestials = "Celestials"
+	L.worldboss_ordos = "Ordos"
+	L.worldboss_defeated = "Derrotado"
+	L.worldboss_undefeated = "No derrotado"
+	
+	-- specswitcher buttons
+	L.sesbutton_reload = "Reloads the entire UI"
+	L.sesbutton_heal = "Switch to heal-layout"
+	L.sesbutton_dps = "Switch to dps-layout"
+	L.sesbutton_am = "Open Addonmanager"
+	L.sesbutton_move = "Move the frames"
+	L.sesbutton_kb = "Set your keybindings"
 
---------------------
-L.ActionBars = {} --
---------------------
+	-- chat
+	L.chat_INSTANCE_CHAT = "I"
+	L.chat_INSTANCE_CHAT_LEADER = "IL"
+	L.chat_BN_WHISPER_GET = "De"
+	L.chat_GUILD_GET = "G"
+	L.chat_OFFICER_GET = "O"
+	L.chat_PARTY_GET = "P"
+	L.chat_PARTY_GUIDE_GET = "P"
+	L.chat_PARTY_LEADER_GET = "P"
+	L.chat_RAID_GET = "R"
+	L.chat_RAID_LEADER_GET = "R"
+	L.chat_RAID_WARNING_GET = "RW"
+	L.chat_WHISPER_GET = "De"
+	L.chat_FLAG_AFK = "[AUS]"
+	L.chat_FLAG_DND = "[DND]"
+	L.chat_FLAG_GM = "[GM]"
+	L.chat_ERR_FRIEND_ONLINE_SS = "is now |cff298F00online|r"
+	L.chat_ERR_FRIEND_OFFLINE_S = "is now |cffff0000offline|r"
+	L.chat_PET_BATTLE_COMBAT_LOG = "Pet Battle"
+	
+	L.chat_general = "General"
+	L.chat_trade = "Comercio"
+	L.chat_defense = "DefensaLocal"
+	L.chat_recrutment = "ReclutamientoHermandad"
+	L.chat_lfg = "BuscandoGrupo"
+	
+	L.disband = "¿Deshacer grupo?"
 
-L.ActionBars.ActionButton1 = "Main Bar: Bottom Center BottomRow Action Button 1"
-L.ActionBars.ActionButton2 = "Main Bar: Bottom Center BottomRow Action Button 2"
-L.ActionBars.ActionButton3 = "Main Bar: Bottom Center BottomRow Action Button 3"
-L.ActionBars.ActionButton4 = "Main Bar: Bottom Center BottomRow Action Button 4"
-L.ActionBars.ActionButton5 = "Main Bar: Bottom Center BottomRow Action Button 5"
-L.ActionBars.ActionButton6 = "Main Bar: Bottom Center BottomRow Action Button 6"
-L.ActionBars.ActionButton7 = "Main Bar: Bottom Center BottomRow Action Button 7"
-L.ActionBars.ActionButton8 = "Main Bar: Bottom Center BottomRow Action Button 8"
-L.ActionBars.ActionButton9 = "Main Bar: Bottom Center BottomRow Action Button 9"
-L.ActionBars.ActionButton10 = "Main Bar: Bottom Center BottomRow Action Button 10"
-L.ActionBars.ActionButton11 = "Main Bar: Bottom Center BottomRow Action Button 11"
-L.ActionBars.ActionButton12 = "Main Bar: Bottom Center BottomRow Action Button 12"
-L.ActionBars.MultiActionBar1Button1 = "BottomLeft BottomRow Action Button 6"
-L.ActionBars.MultiActionBar1Button2 = "BottomLeft BottomRow Action Button 5"
-L.ActionBars.MultiActionBar1Button3 = "BottomLeft BottomRow Action Button 4"
-L.ActionBars.MultiActionBar1Button4 = "BottomLeft BottomRow Action Button 3"
-L.ActionBars.MultiActionBar1Button5 = "BottomLeft BottomRow Action Button 2"
-L.ActionBars.MultiActionBar1Button6 = "BottomLeft BottomRow Action Button 1"
-L.ActionBars.MultiActionBar1Button7 = "BottomLeft TopRow Action Button 6"
-L.ActionBars.MultiActionBar1Button8 = "BottomLeft TopRow Action Button 5"
-L.ActionBars.MultiActionBar1Button9 = "BottomLeft TopRow Action Button 4"
-L.ActionBars.MultiActionBar1Button10 = "BottomLeft TopRow Action Button 3"
-L.ActionBars.MultiActionBar1Button11 = "BottomLeft TopRow Action Button 2"
-L.ActionBars.MultiActionBar1Button12 = "BottomLeft TopRow Action Button 1"
-L.ActionBars.MultiActionBar2Button1 = "BottomRight BottomRow Action Button 1"
-L.ActionBars.MultiActionBar2Button2 = "BottomRight BottomRow Action Button 2"
-L.ActionBars.MultiActionBar2Button3 = "BottomRight BottomRow Action Button 3"
-L.ActionBars.MultiActionBar2Button4 = "BottomRight BottomRow Action Button 4"
-L.ActionBars.MultiActionBar2Button5 = "BottomRight BottomRow Action Button 5"
-L.ActionBars.MultiActionBar2Button6 = "BottomRight BottomRow Action Button 6"
-L.ActionBars.MultiActionBar2Button7 = "BottomRight TopRow Action Button 1"
-L.ActionBars.MultiActionBar2Button8 = "BottomRight TopRow Action Button 2"
-L.ActionBars.MultiActionBar2Button9 = "BottomRight TopRow Action Button 3"
-L.ActionBars.MultiActionBar2Button10 = "BottomRight TopRow Action Button 4"
-L.ActionBars.MultiActionBar2Button11 = "BottomRight TopRow Action Button 5"
-L.ActionBars.MultiActionBar2Button12 = "BottomRight TopRow Action Button 6"
-L.ActionBars.MultiActionBar4Button1 = "Bottom Center TopRow Action Button 1"
-L.ActionBars.MultiActionBar4Button2 = "Bottom Center TopRow Action Button 2"
-L.ActionBars.MultiActionBar4Button3 = "Bottom Center TopRow Action Button 3"
-L.ActionBars.MultiActionBar4Button4 = "Bottom Center TopRow Action Button 4"
-L.ActionBars.MultiActionBar4Button5 = "Bottom Center TopRow Action Button 5"
-L.ActionBars.MultiActionBar4Button6 = "Bottom Center TopRow Action Button 6"
-L.ActionBars.MultiActionBar4Button7 = "Bottom Center TopRow Action Button 7"
-L.ActionBars.MultiActionBar4Button8 = "Bottom Center TopRow Action Button 8"
-L.ActionBars.MultiActionBar4Button9 = "Bottom Center TopRow Action Button 9"
-L.ActionBars.MultiActionBar4Button10 = "Bottom Center TopRow Action Button 10"
-L.ActionBars.MultiActionBar4Button11 = "Bottom Center TopRow Action Button 11"
-L.ActionBars.MultiActionBar4Button12 = "Bottom Center TopRow Action Button 12"
-
--------------------
-L.Worldboss = {} --
--------------------
-
-L.Worldboss.Title = "World Boss(s):"
-L.Worldboss.Galleon = "Galleon"
-L.Worldboss.Sha = "Sha of Anger"
-L.Worldboss.Oondasta = "Oondasta"
-L.Worldboss.Nalak = "Nalak"
-L.Worldboss.Celestials = "Celestials"
-L.Worldboss.Ordos = "Ordos"
-L.Worldboss.Defeated = "Defeated"
-L.Worldboss.Undefeated = "Undefeated"
-
------------------
-L.Welcome = {} --
------------------
-
-L.Welcome.Message = "Hello |cffc41f3b".. D.MyName.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.Version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
-
------------------
-L.Disband = {} --
------------------
-
-L.Disband.Text = "Disbanding group ?"
-
------------------
-L.AFKText = {} --
------------------
-
-L.AFKText.Text1 = "Mouseover minimap shows coords and locations"
-L.AFKText.Text2 = "Middle click the minimap for micromenu"
-L.AFKText.Text3 = "Right click the minimap for gatheringmenu"
-L.AFKText.Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
-
----------------------
-L.BuffTracker = {} --
----------------------
-
-L.BuffTracker.ap = "+10% Attack Power"
-L.BuffTracker.as = "+10% Melee & Ranged Attack Speed"
-L.BuffTracker.sp = "+10% Spell Power"
-L.BuffTracker.sh = "+5% Spell Haste"
-L.BuffTracker.csc = "+5% Critical Strike Chance"
-L.BuffTracker.kmr = "+3000 Mastery Rating"
-L.BuffTracker.sai = "+5% Strength, Agility, Intellect"
-L.BuffTracker.st = "+10% Stamina"
-L.BuffTracker.error = "ERROR"
-
------------------
-L.Plugins = {} --
------------------
-
-L.Plugins.Click2CastTitle = "Mouse Bindings"
-
---------------
-L.Bind = {} --
---------------
-
-L.Bind.Combat = "You can't bind keys in combat."
-L.Bind.Instruct = "Hover your mouse over any actionbutton to bind it. Press the escape key or right click to clear the current actionbuttons keybinding."
-L.Bind.Save = "Save bindings"
-L.Bind.DiscardBind = "Discard bindings"
-L.Bind.Saved = "All keybindings have been saved."
-L.Bind.Discard = "All newly set keybindings have been discarded."
-
-------------------
-L.Tooltips = {} --
-------------------
-
-L.Tooltips.MoveAnchor = "Move Game Tooltip"
-L.Tooltips.gold_a = "Archaeology: "
-L.Tooltips.gold_c = "Cooking: "
-L.Tooltips.gold_jc = "Jewelcrafting: "
-L.Tooltips.gold_dr = "Dungeon & Raids: "
-L.Tooltips.Count = "Count"
-
---------------------
-L.UnitFrames = {} --
---------------------
-
-L.UnitFrames.Ghost = "Ghost"
-L.UnitFrames.Wrath = "Wrath"
-L.UnitFrames.Starfire = "Starfire"
-
-----------------
-L.Movers = {} --
-----------------
-
-L.Movers.Extrabutton = "Move Extrabutton"
-L.Movers.Ressources = "Move Ressourcebar"
-L.Movers.ClassTimer = "Move ClassTimer"
-L.Movers.ClassTimerDebuff = "Move Target Debuffs"
-L.Movers.BattleNet = "Move BattleNetFrame"
-L.Movers.Vehicle = "Move Vehicleindicator"
-L.Movers.Watchframe = "Move Objective Tracker"
-
------------------
-L.Install = {} --
------------------
-
-L.Install.Tutorial = "Tutorial"
-L.Install.Install = "Install"
-L.Install.InstallStep0 = "Thank you for choosing DuffedUI!|n|nYou will be guided through the installation process in a few simple steps.  At each step, you can decide whether or not you want to apply or skip the presented settings. You are also given the possibility to be shown a brief tutorial on some of the features of DuffedUI. Press the 'Tutorial' button to be guided through this small introduction, or press 'Install' to skip this step.|n|n|cffff0000ATTENTION! By clicking 'Install / Reset', it will immediately erase all your settings!|r"L.Install.InstallStep1 = "The first step applies the essential settings. This is |cffff0000recommended|r for any user, unless you want to apply only a specific part of the settings.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
-L.Install.InstallStep1 = "The first step applies the essential settings. This is |cffff0000recommended|r for any user, unless you want to apply only a specific part of the settings.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
-L.Install.InstallStep2 = "The second step applies the correct chat setup. If you are a new user, this step is recommended.  If you are an existing user, you may want to skip this step.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
-L.Install.InstallStep3 = "The third and final step applies the default frame positions. This step is |cffff0000recommended|r for new users.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
-L.Install.InstallStep4 = "Installation is complete. Please click the 'Complete' button to reload the UI. Enjoy DuffedUI! Visit us at www.duffed.net!"
-
---------------
-L.Help = {} --
---------------
-
-L.Help.Title = "DuffedUI Commands:"
-L.Help.Datatexts = "'|cffC41F3Bdt|r' or '|cffC41F3Bdatatext|r' : Enable or disable datatext configuration."
-L.Help.Install = "'|cffC41F3Binstall|r' or '|cffC41F3Breset|r' : Install or reset DuffedUI to default settings."
-L.Help.Config = "'|cff00ff00config|r' : Display in-game configuration window."
-L.Help.Outdated = "Your version of DuffedUI is out of date. You can download the latest version from www.duffed.net"
-L.Help.NoError = "No error yet."
-L.Help.AutoInviteEnable = "Autoinvite ON: invite"
-L.Help.AutoInviteDisable = "Autoinvite OFF"
-L.Help.AutoInviteAlt = "Autoinvite ON: "
-L.Help.Config = "Config not loaded."
-
-------------------
-L.Merchant = {} --
-------------------
-
-L.Merchant.NotEnoughMoney = "You don't have enough money to repair!"
-L.Merchant.RepairCost = "Your items have been repaired for"
-L.Merchant.SoldTrash = "Your vendor trash has been sold and you earned"
+	L.datatext_notalents ="Sin Talentos"
+	L.datatext_download = "Descarga: "
+	L.datatext_bandwidth = "Ancho de banda: "
+	L.datatext_inc = "Incoming"
+	L.datatext_out = "Outgoing"
+	L.datatext_home = "Home Latency:"
+	L.datatext_world = "World Latency:"
+	L.datatext_global = "Global Latency:"
+	L.datatext_guild = "Hermandad"
+	L.datatext_noguild = "Sin Hermandad"
+	L.datatext_bags = "Mochila: "
+	L.datatext_friends = "Amigos"
+	L.datatext_online = "Conectados: "
+	L.datatext_armor = "Armadura"
+	L.datatext_earned = "Ganado:"
+	L.datatext_spent = "Gastado:"
+	L.datatext_deficit = "Balance:"
+	L.datatext_profit = "Beneficios:"
+	L.datatext_timeto = "Tiempo para:"
+	L.datatext_friendlist = "Lista de Amigos:"
+	L.datatext_playersp = "PH"
+	L.datatext_playerap = "PA"
+	L.datatext_playerhaste = "Celeridad"
+	L.datatext_dps = "Dps"
+	L.datatext_hps = "Sps"
+	L.datatext_playerarp = "ArP"
+	L.datatext_session = "Sesión: "
+	L.datatext_character = "Personaje: "
+	L.datatext_server = "Reino: "
+	L.datatext_totalgold = "Total: "
+	L.gametooltip_gold_a = "Archaeology: "
+	L.gametooltip_gold_c = "Cooking: "
+	L.gametooltip_gold_jc = "Jewelcrafting: "
+	L.gametooltip_gold_dr = "Dungeon & Raids: "
+	L.currencyWeekly = "Semanal: "
+	L.datatext_savedraid = "Mazmorras Registradas"
+	L.datatext_currency = "Monedas:"
+	L.datatext_fps = " fps & "
+	L.datatext_ms = " ms"
+	L.datatext_playercrit = " crit"
+	L.datatext_playerheal = " Sanación"
+	L.datatext_avoidancebreakdown = "Desglose de Evasión"
+	L.datatext_lvl = "nivel"
+	L.datatext_boss = "Jefe"
+	L.datatext_miss = "Fallo"
+	L.datatext_dodge = "Esquiva"
+	L.datatext_block = "Bloqueo"
+	L.datatext_parry = "Parada"
+	L.datatext_playeravd = "avd: "
+	L.datatext_servertime = "Hora del servidor: "
+	L.datatext_localtime = "Hora Local: "
+	L.datatext_mitigation = "Mitigación por Nivel: "
+	L.datatext_healing = "Sanación : "
+	L.datatext_damage = "Daño : "
+	L.datatext_honor = "Honor : "
+	L.datatext_killingblows = "Golpes de Gracia: "
+	L.datatext_ttstatsfor = "Estadísticas para "
+	L.datatext_ttkillingblows = "Golpes de Gracia:"
+	L.datatext_tthonorkills = "Golpes de Gracia con Honor:"
+	L.datatext_ttdeaths = "Muertes :"
+	L.datatext_tthonorgain = "Honor Ganado:"
+	L.datatext_ttdmgdone = "Daño Realizado:"
+	L.datatext_tthealdone = "Sanación Realizada :"
+	L.datatext_basesassaulted = "Bases Asaltadas:"
+	L.datatext_basesdefended = "Bases Defendidas:"
+	L.datatext_towersassaulted = "Torres Asaltadas:"
+	L.datatext_towersdefended = "Torres Defendidas:"
+	L.datatext_flagscaptured = "Banderas Capturadas:"
+	L.datatext_flagsreturned = "Banderas Devueltas:"
+	L.datatext_graveyardsassaulted = "Cementerios Asaltados:"
+	L.datatext_graveyardsdefended = "Cementerios Defendidos:"
+	L.datatext_demolishersdestroyed = "Catapultas Destruidas:"
+	L.datatext_gatesdestroyed = "Puertas Destruidas:"
+	L.datatext_totalmemusage = "Total de Memoria Usada:"
+	L.datatext_control = "Controlado por:"
+	L.datatext_cta_allunavailable = "No se puede obtener información del Llamamiento a las Armas."
+	L.datatext_cta_nodungeons = "Actualmente no hay mazmorras ofreciendo el Llamamiento a las Armas."
+	L.datatext_carts_controlled = "Vagonetas Controladas:"
+	L.datatext_victory_points = "Puntos de Victoria:"
+	L.datatext_orb_possessions = "Orbes en Posesión:"
+ 
+	L.Slots = {
+		[1] = {1, "Cabeza", 1000},
+		[2] = {3, "Hombro", 1000},
+		[3] = {5, "Pecho", 1000},
+		[4] = {6, "Cintura", 1000},
+		[5] = {9, "Muñeca", 1000},
+		[6] = {10, "Manos", 1000},
+		[7] = {7, "Piernas", 1000},
+		[8] = {8, "Pies", 1000},
+		[9] = {16, "Mano Derecha", 1000},
+		[10] = {17, "Mano Izquierda", 1000},
+		[11] = {18, "A Distancia", 1000}
+	}
+ 
+	L.popup_disableui = "DuffedUI no funciona con esta resolución, ¿Quieres desactivar DuffedUI? (Pulsa cancelar si quieres probar otra resolución)"
+	L.popup_install = "Es la primera vez que usas DuffedUI V14 con este personaje. Debes recargar la Interfaz para ajustar las barras de acción, las variables y los marcos de chat."
+	L.popup_2raidactive = "Hay dos entornos disponibles para bandas, por favor selecciona uno."
+	L.popup_reset = "¡Cuidado! Esto reiniciará DuffedUI por completo. ¿Quieres continuar?"
+	L.popup_install_yes = "¡Sí! (¡recomendado!)"
+	L.popup_install_no = "No, ¡realmente apesta!"
+	L.popup_reset_yes = "¡Oh, si nena!"
+	L.popup_reset_no = "No, ¡preguntare en los foros!"
+	L.popup_fix_ab = "Algo anda mal con tu barra de acción. ¿Quieres recargar la IU para arreglarlo?"
+ 
+	L.merchant_repairnomoney = "¡No tienes suficiente dinero para reparar!"
+	L.merchant_repaircost = "Tus objetos han sido reparados por: "
+	L.merchant_trashsell = "Has vendido toda la basura a cambio de: "
+ 
+	L.goldabbrev = "|cffffd700g|r"
+	L.silverabbrev = "|cffc7c7cfs|r"
+	L.copperabbrev = "|cffeda55fc|r"
+ 
+	L.error_noerror = "Aún sin errores."
+ 
+	L.unitframes_ouf_offline = "Desconectado"
+	L.unitframes_ouf_dead = "Muerto"
+	L.unitframes_ouf_ghost = "Fantasma"
+	L.unitframes_ouf_lowmana = "Mana Bajo"
+	L.unitframes_ouf_threattext = "Amenaza en el objetivo:"
+	L.unitframes_ouf_threattext2 = "Threat"
+	L.unitframes_ouf_offlinedps = "Desconectado"
+	L.unitframes_ouf_deaddps = "|cffff0000[Muerto]|r"
+	L.unitframes_ouf_ghostheal = "FANTASMA"
+	L.unitframes_ouf_deadheal = "MUERTO"
+	L.unitframes_ouf_gohawk = "HALCÓN YA!"
+	L.unitframes_ouf_goviper = "VÍBORA YA!"
+	L.unitframes_disconnected = "D/C"
+	L.unitframes_ouf_wrathspell = "Cólera"
+	L.unitframes_ouf_starfirespell = "Fuego Estelar"
+ 
+	L.tooltip_count = "Count"
+ 
+	L.bags_noslots = "¡no puedes comprar más espacios!"
+	L.bags_costs = "Costo: %.2f oro"
+	L.bags_buyslots = "Compra un nuevo espacio mediante '/bags purchase yes'"
+	L.bags_openbank = "Necesitas abrir el banco primero."
+	L.bags_sort = "Ordena tu bolsa, o tu banco si está abierto."
+	L.bags_stack = "Llena los montones incompletos en tu bolsa, o en tu banco si está abierto"
+	L.bags_buybankslot = "Compra un espacio en el banco. (Necesitas tener el banco abierto)"
+	L.bags_search = "Buscar"
+	L.bags_sortmenu = "Ordenar"
+	L.bags_sortspecial = "Ordenar Especial"
+	L.bags_stackmenu = "Amontonar"
+	L.bags_stackspecial = "Amontonar Especial"
+	L.bags_showbags = "Mostrar Bolsas"
+	L.bags_sortingbags = "Se ha acabado de ordenar."
+	L.bags_nothingsort= "No hay nada que ordenar."
+	L.bags_bids = "Usando las bolsas: "
+	L.bags_stackend = "Se ha acabado de amontonar."
+	L.bags_rightclick_search = "Click derecho para buscar."
+	
+	L.loot_fish = "Botín de Pesca"
+	L.loot_empty = "Espacio Vacío"
+	L.loot_randomplayer = "Random Player"
+	L.loot_self = "Self Loot"
+ 
+	L.chat_invalidtarget = "Objetivo Invalido"
+ 
+	L.mount_wintergrasp = "Conquista De Invierno"
+ 
+	L.core_autoinv_enable = "Auto Invitar ON: invite"
+	L.core_autoinv_enable_c = "Auto Invitar ON: "
+	L.core_autoinv_disable = "Auto Invitar OFF"
+	L.core_wf_unlock = "Registro de Misiones Desbloqueado"
+	L.core_wf_lock = "Registro de Misiones Bloqueado"
+	L.core_welcome1 = "Bienvenido a |cffC495DDDuffedUI|r versión "
+	L.core_welcome2 = "Escribe |cff00FFFF/uihelp|r para más información o visita |cff00FFFFwww.tukui.org|r"
+ 
+	L.core_uihelp1 = "|cff00ff00Comandos Generales|r"
+	L.core_uihelp2 = "|cffFF0000/moveui|r - Desbloquea y mueve elementos por la pantalla."
+	L.core_uihelp3 = "|cffFF0000/rl|r - Recarga la interfaz del usuario."
+	L.core_uihelp4 = "|cffFF0000/gm|r - Envia un ticket a un MJ o muestra la ayuda en juego del WoW."
+	L.core_uihelp5 = "|cffFF0000/frame|r - Detecta el nombre del marco sobre el que tienes el cursor. (muy util para editores de lua)"
+	L.core_uihelp6 = "|cffFF0000/heal|r - Activa el perfil de banda de sanación."
+	L.core_uihelp7 = "|cffFF0000/dps|r - Activa el perfil de banda de Dps/Tanque."
+	L.core_uihelp8 = "|cffFF0000/bags|r - Para buscar, comprar un hueco del banco o amontonar objetos en tus bolsas."
+	L.core_uihelp9 = "|cffFF0000/reset|r - Resetea DuffedUI por completo."
+	L.core_uihelp10 = "|cffFF0000/rd|r - Deshacer banda."
+	L.core_uihelp11 = "|cffFF0000/ainv|r - Activa el autoinvitar via palabra clave en susurro. Puedes escoger la palabra clave escribiendo `/ainv palabraclave`"
+	L.core_uihelp100 = "(Sube el chat para ver mas comandos ...)"
+ 
+	L.symbol_CLEAR = "Nada"
+	L.symbol_SKULL = "Calavera"
+	L.symbol_CROSS = "Cruz"
+	L.symbol_SQUARE = "Cuadrado"
+	L.symbol_MOON = "Luna"
+	L.symbol_TRIANGLE = "Triangulo"
+	L.symbol_DIAMOND = "Diamante"
+	L.symbol_CIRCLE = "Circulo"
+	L.symbol_STAR = "Estrella"
+ 
+	L.bind_combat = "No puedes asignar teclas en combate."
+	L.bind_saved = "La configuración de las teclas ha sido guardada."
+	L.bind_discard = "Se han descartado los cambios en la configuración de las teclas."
+	L.bind_instruct = "Coloca el cursor encima de cualquier botón para asignar una tecla. Presiona la tecla ESC o el botón derecho del ratón para quitar la asignación actual."
+	L.bind_save = "Guardar los cambios"
+	L.bind_discardbind = "Descartar los cambios"
+ 
+	L.hunter_unhappy = "Tu mascota está descontenta!"
+	L.hunter_content = "Tu mascota está contenta!"
+	L.hunter_happy = "Tu mascota está feliz!"
+	
+	L.move_tooltip = "Mover Descripción"
+	L.move_minimap = "Mover Minimapa"
+	L.move_watchframe = "Mover Misiones"
+	L.move_gmframe = "Mover Ticket"
+	L.move_buffs = "Mover Beneficios del Jugador"
+	L.move_debuffs = "Mover Perjuicios del Jugador"
+	L.move_shapeshift = "Mover Barra de cambio de forma/Totems"
+	L.move_achievements = "Mover Logros"
+	L.move_roll = "Mover Marco de Lanzamiento de Dados por Botín"
+	L.move_vehicle = "Mover Asiento del vehiculo"
+	L.move_extrabutton = "Botón Extra"
+	
+	-- tuto and install
+	L.install_header_1 = "Bienvenido/a"
+	L.install_header_2 = "1. Esencial"
+	L.install_header_3 = "2. Marcos de Unidad"
+	L.install_header_4 = "3. Características"
+	L.install_header_5 = "4. ¡Cosas que deberías saber!"
+	L.install_header_6 = "5. Comandos"
+	L.install_header_7 = "6. Finalizado"
+	L.install_header_8 = "1. Configuración esencial"
+	L.install_header_9 = "2. Social"
+	L.install_header_10= "3. Marcos"
+	L.install_header_11= "4. ¡Listo!"
+	L.install_init_line_1 = "¡Gracias por escoger DuffedUI!"
+	L.install_init_line_2 = "Se te guiará a través de un proceso de instalación en simples pasos. En cada uno de ellos podrás decidir qué quieres y que no quieres aplicar o saltar ese paso."
+	L.install_init_line_3 = "También se te da la posibilidad de mostrarte un breve tutorial con algunas de las características de DuffedUI."
+	L.install_init_line_4 = "Pulsa el botón 'Tutorial' para ser guiado/a a través de esta pequeña introducción, o pulsa 'Instalar' para saltar este paso."
+	L.tutorial_step_1_line_1 = "Este rápido tutorial te mostrara algunas de las características de DuffedUI."
+	L.tutorial_step_1_line_2 = "Primero, lo más básico que debes conocer antes de poder jugar usando esta UI."
+	L.tutorial_step_1_line_3 = "Este instalador es parcialmente específico para cada clase. Algunas de las opciones son aplicadas a todos tus personajes pero necesitaras usar el script de instalación en cada nuevo personaje que utilice DuffedUI. El script se muestra automáticamente en cada personaje nuevo que se conecta por primera vez con DuffedUI. Además, las opciones se pueden encontrar en /DuffedUI/config/config.lua para usuarios avanzados escribiendo /duffedui  en el chat del juego para usuarios casuales."
+	L.tutorial_step_1_line_4 = "Un usuario avanzado es un usuario de un ordenador que tiene la habilidad de usar características avanzadas (ej: edición de Lua) las cuales están por encima de las habilidades de los usuarios comunes. Un usuario casual es un usuario normal y no necesariamente capaz de programar. Se recomienda para ellos que usen nuestra herramienta de configuración en el juego (/duffedui) para configurar DuffedUI a su gusto."
+	L.tutorial_step_2_line_1 = "DuffedUI incluye una versión incrustada de oUF creada por Trond (Haste) A Ejseth. Esto se encarga de manejar todos los marcos de unidad, los beneficios y perjuicios y los elementos específicos de clase."
+	L.tutorial_step_2_line_2 = "Puedes visitar wowinterface.com y buscar oUF para obtener más información a cerca de esta herramienta."
+	L.tutorial_step_2_line_3 = "Si juegas como sanador o sanador de banda, puedes activar los marcos de unidad de sanador. Estos muestran más información acerca de tu banda. (/heal) Un dps o tanque debería usar nuestra interfaz simple de banda. (/dps) Si no quieres usar ninguna de las dos o usar otra diferente, puedes desactivarlo en el administrador de addons en la pantalla de selección de personajes."
+	L.tutorial_step_2_line_4 = "Para cambiar fácilmente la posición de los marcos de unidad, escribe simplemente /moveui."
+	L.tutorial_step_3_line_1 = "DuffedUI es un rediseño de la interfaz de Blizzard. Nada menos, ni nada más. Aproximadamente todas las características que puedes ver en la interfaz por defecto las puedes encontrar en DuffedUI. Las únicas características no disponibles en la interfaz por defecto son aquellas automatizadas que no son realmente visibles en pantalla, como por ejemplo vender automáticamente los objetos grises al visitar a un vendedor o, otro ejemplo, ordenar automáticamente tus objetos en las bolsas."
+	L.tutorial_step_3_line_2 = "Porque no a todo el mundo le gustan cosas como los medidores de DPS, mods de Jefes, medidores de Amenaza, etc, nosotros juzgamos que es la mejor cosa que hacer. DuffedUI esta hecha con la idea de encajar al máximo con todas las clases, roles, funciones, tipos de juego, gustos de usuarios, etc. Es por eso que DuffedUI es una de las UIs más populares en este momento. Se ajusta al juego de todos y es extremadamente configurable. Esta también diseñada para ser un buen comienzo para todos los que quieran hacerse su propia UI sin depender de addons. Montones de usuarios desde 2009 esta usando DuffedUI como base para su propia UI. ¡Hecha un vistazo dentro de nuestra sección `Editet Packages` en nuestro sitio web!"
+	L.tutorial_step_3_line_3 = "Los usuarios quizá quieran visitar nuestra sección de modificaciones extra (AddOns) en nuestra web o visitando http://www.wowinterface.com para instalar características adicionales o mods."
+	L.tutorial_step_3_line_4 = ""
+	L.tutorial_step_4_line_1 = "Para determinar cuantas barras quieres, pasa el ratón sobre la derecha o izquierda del fondo de la barra de acción de abajo. Haz lo mismo en la derecha a través de los botones de arriba y abajo. Para copiar texto del chat, haz click en el botón mostrar pasando el ratón por la esquina derecha del chat."
+	L.tutorial_step_4_line_2 = "El borde del Mini mapa cambia de color. Se pone verde cuando tienes un nuevo correo, rojo cuando tienes una invitación nueva en el calendario, y naranja cuando tienes ambas."
+	L.tutorial_step_4_line_3 = "Puedes hacer click izquierdo en un 80% de los textos de datos para mostrar varios paneles de Blizzard. Los de Amigos y Hermandad tienen funciones con click derecho también."
+	L.tutorial_step_4_line_4 = "Hay un menú desplegable disponible. Haciendo click derecho en el botón [X] (Cerrar) de la bolsa abrirá un menú desplegable para mostrar las bolsas, organizar objetos, mostrar llavero, etc. Haciendo click con la rueda del ratón en el Mini mapa mostrará el micro menú."
+	L.tutorial_step_5_line_1 = "Finalmente, DuffedUI incluye diversos comandos utiles. Debajo hay una lista."
+	L.tutorial_step_5_line_2 = "/moveui te permite mover un montón de marcos por toda la pantalla. /enable y /disable se usan para activar o desactivar rápidamente los addons. /rl recarga la interfaz. /heal activa los marcos de banda de sanador y /dps activa los de dps/tanque."
+	L.tutorial_step_5_line_3 = "/tt te permite susurrar a tu objetivo. /rc inicia una comprobación de disponibilidad (Listos). /rd deshace el grupo o banda. /bags muestra algunas de las caracteristicas disponibles a través de línea de comandos. /ainv activa la invitación automática cuando te susurren. (/ainv off) lo desactiva."
+	L.tutorial_step_5_line_4 = "/gm muestra el marco de Ayuda. /install, /reset o /tutorial cargan el instalador. /frame escribe el nombre y anclaje del marco bajo el cursor con información adicional."
+	L.tutorial_step_6_line_1 = "Se ha completado el tutorial. Puedes escoger consultarlo de nuevo en cualquier momento escribiendo /tutorial."
+	L.tutorial_step_6_line_2 = "Sugiero que eches un vistazo en config/config.lua o escribas /duffedui para adaptar la interfaz a tus necesidades."
+	L.tutorial_step_6_line_3 = "¡Puedes continuar instalando la IU si aún no está hecho o si quieres déjala como viene por defecto!"
+	L.tutorial_step_6_line_4 = ""
+	L.install_step_1_line_1 = "Estos pasos aplicaran la correcta configuración de CVar para DuffedUI."
+	L.install_step_1_line_2 = "El primer paso aplica la configuración primordial."
+	L.install_step_1_line_3 = "Esto se recomienda para cualquier usuario, a menos que desees aplicar únicamente una parte de la configuración."
+	L.install_step_1_line_4 = "Haz click en 'Continuar' para aplicar la configuración, o haz click en 'Saltar' si quieres saltar este paso."
+	L.install_step_2_line_0 = "Se ha encontrado otro addon para el chat. Ignoraremos este paso. Por favor pulsa saltar para continuar la instalación."
+	L.install_step_2_line_1 = "El segundo paso aplica la correcta configuración del chat."
+	L.install_step_2_line_2 = "Si eres un usuario nuevo, se recomienda este paso. Si ya eres un usuario de DuffedUI, quizá quieras saltar este paso."
+	L.install_step_2_line_3 = "Es normal que la fuente del chat aparezca demasiado grande al aplicar esta configuración. Volverá a ser normal al final de la instalación."
+	L.install_step_2_line_4 = "Haz click en 'Continuar' para aplicar la configuración, o haz click en 'Saltar' si quieres saltar este paso."
+	L.install_step_3_line_1 = "El tercero y final paso aplica la posición por defecto de los marcos."
+	L.install_step_3_line_2 = "Este paso se recomienda para cualquier usuario nuevo."
+	L.install_step_3_line_3 = ""
+	L.install_step_3_line_4 = "Haz click en 'Continuar' para aplicar la configuración, o haz click en 'Saltar' si quieres saltar este paso."
+	L.install_step_4_line_1 = "Se ha completado la instalación"
+	L.install_step_4_line_2 = "Por favor, haz click en 'Finalizar' para recargar la IU."
+	L.install_step_4_line_3 = ""
+	L.install_step_4_line_4 = "¡Disfruta de DuffedUI! ¡Visítanos en http://www.tukui.org!"
+	L.install_button_tutorial = "Tutorial"
+	L.install_button_install = "Instalar"
+	L.install_button_next = "Siguiente"
+	L.install_button_skip = "Saltar"
+	L.install_button_continue = "Continuar"
+	L.install_button_finish = "Finalizar"
+	L.install_button_close = "Cerrar"
+end

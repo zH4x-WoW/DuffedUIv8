@@ -1,297 +1,380 @@
-local D, C, L = select(2, ...):unpack()
-if not D.Client == "zhCN"  then return end
+local D, C, L, G = unpack(select(2, ...))
 
-------------------
-L.DataText = {} --
-------------------
+if D.client == "zhCN" then
+	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
+	L.AFKText_Text2 = "Middle click the minimap for micromenu"
+	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
+	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
 
--- There's globalstrings for most of these datatexts btw, We shouldn't need to localize most of them
--- Something we could do is a "Global" locale file, for stuff we don't need localized by users. Just an idea.
+	L.UI_Outdated = "DuffedUI 版本已过期，请至 www.tukui.org 下载最新版"
+	L.UI_Talent_Change_Bug = "一个由暴雪产生的故障已阻止你改变你当前的天赋,这发生在你使用观察功能查看其他玩家角色装备时.不幸的是在这个魔兽补丁中我们对修正它无能为力,请/reload你的插件界面并且再次尝试."
+	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."感谢您使用|cffc41f3bDuffedUI "..D.version.."|r. 详细信息请访问 |cffc41f3bhttp://www.tukui.org|r."
+	
+	-- Bufftracker
+	L.bufftracker_10ap = "+10% Attack Power"
+	L.bufftracker_10as = "+10% Melee & Ranged Attack Speed"
+	L.bufftracker_10sp = "+10% Spell Power"
+	L.bufftracker_5sh = "+5% Spell Haste"
+	L.bufftracker_5csc = "+5% Critical Strike Chance"
+	L.bufftracker_3kmr = "+3000 Mastery Rating"
+	L.bufftracker_5sai = "+5% Strength, Agility, Intellect"
+	L.bufftracker_10s = "+10% Stamina"
+	L.bufftracker_error = "ERROR"
 
-L.DataText.AvoidanceBreakdown = "Avoidance Breakdown"
-L.DataText.Level = LEVEL_ABBR
-L.DataText.Boss = BOSS
-L.DataText.Miss = COMBAT_TEXT_MISS
-L.DataText.Dodge = DODGE
-L.DataText.Block = BLOCK
-L.DataText.Parry = PARRY
-L.DataText.Avoidance = "Avoidance"
-L.DataText.AvoidanceShort = "avd: "
-L.DataText.Hit = HIT
-L.DataText.Power = "Power"
-L.DataText.Mastery = ITEM_MOD_MASTERY_RATING_SHORT
-L.DataText.Crit = COMBAT_RATING_NAME10
-L.DataText.Regen = MANA_REGEN_ABBR
-L.DataText.Session = "Session: "
-L.DataText.Earned = "Earned:"
-L.DataText.Spent = "Spent:"
-L.DataText.Deficit = "Deficit:"
-L.DataText.Profit = "Profit:"
-L.DataText.Character = "Character: "
-L.DataText.Server = "Server: "
-L.DataText.TotalGold = "Total: "
-L.DataText.GoldShort = "|cffffd700g|r"
-L.DataText.SilverShort = "|cffc7c7cfs|r"
-L.DataText.CopperShort = "|cffeda55fc|r"
-L.DataText.Talents = TALENTS
-L.DataText.NoTalent = "No Talents"
-L.DataText.Inc = "Incoming:"
-L.DataText.Out = "Outgoing:"
-L.DataText.Home = "Home Latency:"
-L.DataText.World = "World Latency:"
-L.DataText.Global = "Global Latency:"
-L.DataText.Download = "Download: "
-L.DataText.Bandwidth = "Bandwidth: "
-L.DataText.Guild = "guild"
-L.DataText.NoGuild = "no guild"
-L.DataText.Bags = "bags: "
-L.DataText.Friends = "friends"
-L.DataText.Online = "Online: "
-L.DataText.Armor = "armor"
-L.DataText.Earned = "Earned:"
-L.DataText.Spent = "Spent:"
-L.DataText.Deficit = "Deficit:"
-L.DataText.Profit = "Profit:"
-L.DataText.TimeTo = "Time to"
-L.DataText.FriendsList = "Friends list:"
-L.DataText.Spell = "sp"
-L.DataText.AttackPower = "ap"
-L.DataText.Haste = "haste"
-L.DataText.Session = "Session: "
-L.DataText.Character = "Character: "
-L.DataText.Server = "Server: "
-L.DataText.Total = "Total: "
-L.DataText.SavedRaid = "Saved Raid(s)"
-L.DataText.currencyWeekly = "Weekly: "
-L.DataText.FPS = " fps & "
-L.DataText.MS = " ms"
-L.DataText.Critical = " crit"
-L.DataText.Heal = " heal"
-L.DataText.ServerTime = "Server Time: "
-L.DataText.LocalTime = "Local Time: "
-L.DataText.Mitigation = "Mitigation By Level: "
-L.DataText.Healing = "Healing: "
-L.DataText.Damage = "Damage: "
-L.DataText.Honor = "Honor: "
-L.DataText.KillingBlow = "Killing Blows: "
-L.DataText.StatsFor = "Stats for "
-L.DataText.HonorableKill = "Honorable Kills:"
-L.DataText.Death = "Deaths:"
-L.DataText.HonorGained = "Honor Gained:"
-L.DataText.DamageDone = "Damage Done:"
-L.DataText.HealingDone = "Healing Done:"
-L.DataText.BaseAssault = "Bases Assaulted:"
-L.DataText.BaseDefend = "Bases Defended:"
-L.DataText.TowerAssault = "Towers Assaulted:"
-L.DataText.TowerDefend = "Towers Defended:"
-L.DataText.FlagCapture = "Flags Captured:"
-L.DataText.FlagReturn = "Flags Returned:"
-L.DataText.GraveyardAssault = "Graveyards Assaulted:"
-L.DataText.GraveyardDefend = "Graveyards Defended:"
-L.DataText.DemolisherDestroy = "Demolishers Destroyed:"
-L.DataText.GateDestroy = "Gates Destroyed:"
-L.DataText.TotalMemory = "Total Memory Usage:"
-L.DataText.ControlBy = "Controlled by:"
-L.DataText.CallToArms = BATTLEGROUND_HOLIDAY 
-L.DataText.ArmError = "Could not get Call To Arms information."
-L.DataText.NoDungeonArm = "No dungeons are currently offering a Call To Arms."
-L.DataText.CartControl = "Carts Controlled:"
-L.DataText.VictoryPts = "Victory Points:"
-L.DataText.OrbPossession = "Orb Possessions:"
-L.DataText.Slots = {
-	[1] = {1, "Head", 1000},
-	[2] = {3, "Shoulder", 1000},
-	[3] = {5, "Chest", 1000},
-	[4] = {6, "Waist", 1000},
-	[5] = {9, "Wrist", 1000},
-	[6] = {10, "Hands", 1000},
-	[7] = {7, "Legs", 1000},
-	[8] = {8, "Feet", 1000},
-	[9] = {16, "Main Hand", 1000},
-	[10] = {17, "Off Hand", 1000},
-	[11] = {18, "Ranged", 1000}
-}
+	-- Click2Cast
+	L.click2cast_title = "Mouse Bindings"
+	
+	-- worldboss 世界Boss
+	L.worldboss_title = "世界Boss:"
+	L.worldboss_galleon = "炮舰"
+	L.worldboss_sha = "怒之煞"
+	L.worldboss_oondasta = "乌达斯塔"
+	L.worldboss_nalak = "暴风领主纳拉克"
+	L.worldboss_celestials = "Celestials"
+	L.worldboss_ordos = "Ordos"
+	L.worldboss_defeated = "已击杀"
+	L.worldboss_undefeated = "未击杀"
+	
+	-- specswitcher buttons
+	L.sesbutton_reload = "重新载入Ui界面"
+	L.sesbutton_heal = "切换到治疗布局"
+	L.sesbutton_dps = "切换到Dps输出布局"
+	L.sesbutton_am = "打开插件管理器 Addonmanager"
+	L.sesbutton_move = "移动框体"
+	L.sesbutton_kb = "设置你的按键绑定"
+	
+	-- localization for zhCN  by 风吹那啥凉（Popptise @DuffedUI forums)	
+	L.chat_INSTANCE_CHAT = "I"
+	L.chat_INSTANCE_CHAT_LEADER = "IL"
+	L.chat_BN_WHISPER_GET = "密语"
+	L.chat_GUILD_GET = "公"
+	L.chat_OFFICER_GET = "官"
+	L.chat_PARTY_GET = "队"
+	L.chat_PARTY_GUIDE_GET = "地下城向导"
+	L.chat_PARTY_LEADER_GET = "队长"
+	L.chat_RAID_GET = "团"
+	L.chat_RAID_LEADER_GET = "团长"
+	L.chat_RAID_WARNING_GET = "团队警告"
+	L.chat_WHISPER_GET = "密语"
+	L.chat_FLAG_AFK = "[AFK]"
+	L.chat_FLAG_DND = "[DND]"
+	L.chat_FLAG_GM = "[GM]"
+	L.chat_ERR_FRIEND_ONLINE_SS = "|cff05e9FF上线了|r"  
+	L.chat_ERR_FRIEND_OFFLINE_S = "|cffff0000下线了|r"
+	L.chat_PET_BATTLE_COMBAT_LOG = "Pet Battle"
+	
+	-- 请不要缩写下列频道名称 这是用来帮助设置归类频道的
+	L.chat_general = "综合"
+	L.chat_trade = "交易"
+	L.chat_defense = "本地防务"
+	L.chat_recrutment = "公会招募"
+	L.chat_lfg = "寻求组队"
 
---------------------
-L.ActionBars = {} --
---------------------
+	L.disband = "正在解散团队"
 
-L.ActionBars.ActionButton1 = "Main Bar: Bottom Center BottomRow Action Button 1"
-L.ActionBars.ActionButton2 = "Main Bar: Bottom Center BottomRow Action Button 2"
-L.ActionBars.ActionButton3 = "Main Bar: Bottom Center BottomRow Action Button 3"
-L.ActionBars.ActionButton4 = "Main Bar: Bottom Center BottomRow Action Button 4"
-L.ActionBars.ActionButton5 = "Main Bar: Bottom Center BottomRow Action Button 5"
-L.ActionBars.ActionButton6 = "Main Bar: Bottom Center BottomRow Action Button 6"
-L.ActionBars.ActionButton7 = "Main Bar: Bottom Center BottomRow Action Button 7"
-L.ActionBars.ActionButton8 = "Main Bar: Bottom Center BottomRow Action Button 8"
-L.ActionBars.ActionButton9 = "Main Bar: Bottom Center BottomRow Action Button 9"
-L.ActionBars.ActionButton10 = "Main Bar: Bottom Center BottomRow Action Button 10"
-L.ActionBars.ActionButton11 = "Main Bar: Bottom Center BottomRow Action Button 11"
-L.ActionBars.ActionButton12 = "Main Bar: Bottom Center BottomRow Action Button 12"
-L.ActionBars.MultiActionBar1Button1 = "BottomLeft BottomRow Action Button 6"
-L.ActionBars.MultiActionBar1Button2 = "BottomLeft BottomRow Action Button 5"
-L.ActionBars.MultiActionBar1Button3 = "BottomLeft BottomRow Action Button 4"
-L.ActionBars.MultiActionBar1Button4 = "BottomLeft BottomRow Action Button 3"
-L.ActionBars.MultiActionBar1Button5 = "BottomLeft BottomRow Action Button 2"
-L.ActionBars.MultiActionBar1Button6 = "BottomLeft BottomRow Action Button 1"
-L.ActionBars.MultiActionBar1Button7 = "BottomLeft TopRow Action Button 6"
-L.ActionBars.MultiActionBar1Button8 = "BottomLeft TopRow Action Button 5"
-L.ActionBars.MultiActionBar1Button9 = "BottomLeft TopRow Action Button 4"
-L.ActionBars.MultiActionBar1Button10 = "BottomLeft TopRow Action Button 3"
-L.ActionBars.MultiActionBar1Button11 = "BottomLeft TopRow Action Button 2"
-L.ActionBars.MultiActionBar1Button12 = "BottomLeft TopRow Action Button 1"
-L.ActionBars.MultiActionBar2Button1 = "BottomRight BottomRow Action Button 1"
-L.ActionBars.MultiActionBar2Button2 = "BottomRight BottomRow Action Button 2"
-L.ActionBars.MultiActionBar2Button3 = "BottomRight BottomRow Action Button 3"
-L.ActionBars.MultiActionBar2Button4 = "BottomRight BottomRow Action Button 4"
-L.ActionBars.MultiActionBar2Button5 = "BottomRight BottomRow Action Button 5"
-L.ActionBars.MultiActionBar2Button6 = "BottomRight BottomRow Action Button 6"
-L.ActionBars.MultiActionBar2Button7 = "BottomRight TopRow Action Button 1"
-L.ActionBars.MultiActionBar2Button8 = "BottomRight TopRow Action Button 2"
-L.ActionBars.MultiActionBar2Button9 = "BottomRight TopRow Action Button 3"
-L.ActionBars.MultiActionBar2Button10 = "BottomRight TopRow Action Button 4"
-L.ActionBars.MultiActionBar2Button11 = "BottomRight TopRow Action Button 5"
-L.ActionBars.MultiActionBar2Button12 = "BottomRight TopRow Action Button 6"
-L.ActionBars.MultiActionBar4Button1 = "Bottom Center TopRow Action Button 1"
-L.ActionBars.MultiActionBar4Button2 = "Bottom Center TopRow Action Button 2"
-L.ActionBars.MultiActionBar4Button3 = "Bottom Center TopRow Action Button 3"
-L.ActionBars.MultiActionBar4Button4 = "Bottom Center TopRow Action Button 4"
-L.ActionBars.MultiActionBar4Button5 = "Bottom Center TopRow Action Button 5"
-L.ActionBars.MultiActionBar4Button6 = "Bottom Center TopRow Action Button 6"
-L.ActionBars.MultiActionBar4Button7 = "Bottom Center TopRow Action Button 7"
-L.ActionBars.MultiActionBar4Button8 = "Bottom Center TopRow Action Button 8"
-L.ActionBars.MultiActionBar4Button9 = "Bottom Center TopRow Action Button 9"
-L.ActionBars.MultiActionBar4Button10 = "Bottom Center TopRow Action Button 10"
-L.ActionBars.MultiActionBar4Button11 = "Bottom Center TopRow Action Button 11"
-L.ActionBars.MultiActionBar4Button12 = "Bottom Center TopRow Action Button 12"
+	L.datatext_download = "下载： "
+	L.datatext_bandwidth = "带宽："
+	L.datatext_inc = "接收"
+	L.datatext_out = "发送"
+	L.datatext_home = "本地延迟:"
+	L.datatext_world = "世界延迟:"
+	L.datatext_global = "全局延迟:"
+	L.datatext_guild = "公会"
+	L.datatext_noguild = "没有公会"
+	L.datatext_bags = "背包 "
+	L.datatext_friends = "好友"
+	L.datatext_online = "在线："
+	L.datatext_armor = "耐久度"
+	L.datatext_earned = "赚取："
+	L.datatext_spent = "花费："
+	L.datatext_deficit = "赤字："
+	L.datatext_profit = "利润："
+	L.datatext_timeto = "时间至："
+	L.datatext_friendlist = "好友列表："
+	L.datatext_playersp = "法伤"
+	L.datatext_playerap = "攻强"
+	L.datatext_playerhaste = "急速"
+	L.datatext_dps = "dps"
+	L.datatext_hps = "hps"
+	L.datatext_playerarp = "护甲穿透"
+	L.datatext_session = "本次概况："
+	L.datatext_character = "角色："
+	L.datatext_server = "服务器："
+	L.datatext_totalgold = "总共："
+	L.gametooltip_gold_a = "考古学: "
+	L.gametooltip_gold_c = "烹饪: "
+	L.gametooltip_gold_jc = "珠宝: "
+	L.gametooltip_gold_dr = "地城 & 团队: "
+	L.currencyWeekly = "每周: "
+	L.datatext_savedraid = "已保存进度的团队副本"
+	L.datatext_currency = "兑换通货："
+	L.datatext_fps = " 帧数 & "
+	L.datatext_ms = " 延时"
+	L.datatext_playercrit = " 爆击"
+	L.datatext_playerheal = " 治疗"
+	L.datatext_avoidancebreakdown = "伤害减免"
+	L.datatext_lvl = "等级"
+	L.datatext_boss = "首领"
+	L.datatext_miss = "未命中"
+	L.datatext_dodge = "躲闪"
+	L.datatext_block = "格挡"
+	L.datatext_parry = "招架"
+	L.datatext_playeravd = "免伤： "
+	L.datatext_servertime = "服务器时间： "
+	L.datatext_localtime = "本地时间： "
+	L.datatext_mitigation = "等级缓和： "
+	L.datatext_healing = "治疗： "
+	L.datatext_damage = "伤害： "
+	L.datatext_honor = "荣誉： "
+	L.datatext_killingblows = "击杀： "
+	L.datatext_ttstatsfor = "状态 "
+	L.datatext_ttkillingblows = "击杀："
+	L.datatext_tthonorkills = "荣誉击杀"
+	L.datatext_ttdeaths = "死亡："
+	L.datatext_tthonorgain = "获得荣誉："
+	L.datatext_ttdmgdone = "伤害输出："
+	L.datatext_tthealdone = "治疗输出："
+	L.datatext_basesassaulted = "突袭基地："
+	L.datatext_basesdefended = "防守基地："
+	L.datatext_towersassaulted = "突袭哨塔："
+	L.datatext_towersdefended = "防守哨塔："
+	L.datatext_flagscaptured = "夺取旗帜："
+	L.datatext_flagsreturned = "交换旗帜："
+	L.datatext_graveyardsassaulted = "突袭墓地："
+	L.datatext_graveyardsdefended = "防守墓地："
+	L.datatext_demolishersdestroyed = "摧毁投石车："
+	L.datatext_gatesdestroyed = "摧毁大门："
+	L.datatext_totalmemusage = "总内存占用："
+	L.datatext_control = "控制方："
+	L.datatext_cta_allunavailable = "无法获取战斗的召唤信息."
+	L.datatext_cta_nodungeons = "目前没有可用的战斗的召唤地下城."
+	L.datatext_carts_controlled = "矿车控制:"
+	L.datatext_victory_points = "胜利点数:"
+	L.datatext_orb_possessions = "能量宝珠点数:"
 
--------------------
-L.Worldboss = {} --
--------------------
+	L.Slots = {
+		[1] = {1, "头部", 1000},
+		[2] = {3, "肩部", 1000},
+		[3] = {5, "胸部", 1000},
+		[4] = {6, "腰部", 1000},
+		[5] = {9, "手腕", 1000},
+		[6] = {10, "手", 1000},
+		[7] = {7, "腿部", 1000},
+		[8] = {8, "脚", 1000},
+		[9] = {16, "主手", 1000},
+		[10] = {17, "副手", 1000},
+		[11] = {18, "远程", 1000}
+	}
 
-L.Worldboss.Title = "World Boss(s):"
-L.Worldboss.Galleon = "Galleon"
-L.Worldboss.Sha = "Sha of Anger"
-L.Worldboss.Oondasta = "Oondasta"
-L.Worldboss.Nalak = "Nalak"
-L.Worldboss.Celestials = "Celestials"
-L.Worldboss.Ordos = "Ordos"
-L.Worldboss.Defeated = "Defeated"
-L.Worldboss.Undefeated = "Undefeated"
+	L.popup_disableui = "DuffedUI不支持当前分辨率，想要禁用DuffedUI吗？（如果你想尝试其他分辨率就点击取消）"
+	L.popup_install = "当前角色第一次使用DuffedUI，你必须重载插件以完成配置。"
+	L.popup_reset = "注意！当前操作将还原DuffedUI至默认设置，你是否决定继续？"
+	L.popup_2raidactive = "当前两种团队样式被激活，请选择其中之一。"
+	L.popup_install_yes = "当然！（建议！）"
+	L.popup_install_no = "不，这个UI太难用了！"
+	L.popup_reset_yes = "当然勒~还是预设的好~"
+	L.popup_reset_no = "不了，否则我会在论坛发帖抱怨的！"
+	L.popup_fix_ab = "你的动作条存在一些问题。你想重载插件修复它么?"
 
------------------
-L.Welcome = {} --
------------------
+	L.merchant_repairnomoney = "您没有足够的金币以完成修理！"
+	L.merchant_repaircost = "您修理装备花费了："
+	L.merchant_trashsell = "您包里的垃圾被卖出去了，您赚取了："
 
-L.Welcome.Message = "Hello |cffc41f3b".. D.MyName.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.Version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
+	L.goldabbrev = "|cffffd700g|r"
+	L.silverabbrev = "|cffc7c7cfs|r"
+	L.copperabbrev = "|cffeda55fc|r"
 
------------------
-L.Disband = {} --
------------------
+	L.error_noerror = "没有错误。"
 
-L.Disband.Text = "Disbanding group ?"
+	L.unitframes_ouf_offline = "离线"
+	L.unitframes_ouf_dead = "死亡"
+	L.unitframes_ouf_ghost = "灵魂"
+	L.unitframes_ouf_lowmana = "低法力值"
+	L.unitframes_ouf_threattext = "当前目标仇恨："
+	L.unitframes_ouf_threattext2 = "Threat"
+	L.unitframes_ouf_offlinedps = "离线"
+	L.unitframes_ouf_deaddps = "|cffff0000[死亡]|r"
+	L.unitframes_ouf_ghostheal = "灵魂"
+	L.unitframes_ouf_deadheal = "死亡"
+	L.unitframes_ouf_gohawk = "切换为雄鹰守护"
+	L.unitframes_ouf_goviper = "切换为蝰蛇守护"
+	L.unitframes_disconnected = "断线"
+	L.unitframes_ouf_wrathspell = "愤怒"
+	L.unitframes_ouf_starfirespell = "星火术"
 
------------------
-L.AFKText = {} --
------------------
+	L.tooltip_count = "数量"
 
-L.AFKText.Text1 = "Mouseover minimap shows coords and locations"
-L.AFKText.Text2 = "Middle click the minimap for micromenu"
-L.AFKText.Text3 = "Right click the minimap for gatheringmenu"
-L.AFKText.Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
+	L.bags_noslots = "不能再购买更多的栏位了！"
+	L.bags_costs = "花费： %.2f G"
+	L.bags_buyslots = "输入 /bags purchase yes 以购买新的栏位！"
+	L.bags_openbank = "您必须先打开您的银行！"
+	L.bags_sort = "当背包或者银行打开的时候，整理和排序其中的物品！"
+	L.bags_stack = "当背包或者银行打开的时候，对其中不完整的物品进行堆叠！"
+	L.bags_buybankslot = "购买银行栏位(必须保持银行打开)"
+	L.bags_search = "查找"
+	L.bags_sortmenu = "整理"
+	L.bags_sortspecial = "整理特殊物品"
+	L.bags_stackmenu = "堆叠"
+	L.bags_stackspecial = "堆叠特殊物品"
+	L.bags_showbags = "显示背包"
+	L.bags_sortingbags = "整理完成。"
+	L.bags_nothingsort= "不需要整理。"
+	L.bags_bids = "使用背包： "
+	L.bags_stackend = "重新堆叠完成。"
+	L.bags_rightclick_search = "右击开始查找。"
+	
+	L.loot_fish = "渔获" -- not sure for this now
+	L.loot_empty = "无战利品" -- not sure for this now
+	L.loot_randomplayer = "随机队伍玩家Random Player"
+	L.loot_self = "自我获取"
 
----------------------
-L.BuffTracker = {} --
----------------------
+	L.chat_invalidtarget = "无效的目标"
 
-L.BuffTracker.ap = "+10% Attack Power"
-L.BuffTracker.as = "+10% Melee & Ranged Attack Speed"
-L.BuffTracker.sp = "+10% Spell Power"
-L.BuffTracker.sh = "+5% Spell Haste"
-L.BuffTracker.csc = "+5% Critical Strike Chance"
-L.BuffTracker.kmr = "+3000 Mastery Rating"
-L.BuffTracker.sai = "+5% Strength, Agility, Intellect"
-L.BuffTracker.st = "+10% Stamina"
-L.BuffTracker.error = "ERROR"
+	L.mount_wintergrasp = "冬拥湖"
 
------------------
-L.Plugins = {} --
------------------
+	L.core_autoinv_enable = "自动邀请开启：invite"
+	L.core_autoinv_enable_c = "自动邀请已开启"
+	L.core_autoinv_disable = "自动邀请已关闭"
+	L.core_wf_unlock = "任务追踪已解锁"
+	L.core_wf_lock = "任务追踪已锁定"
+	L.core_welcome1 = "欢迎使用 |cffC495DDDuffedUI|r, 版本 "
+	L.core_welcome2 = "输入 |cff00FFFF/uihelp|r 以获取更多信息或者访问 www.tukui.org"
 
-L.Plugins.Click2CastTitle = "Mouse Bindings"
+	L.core_uihelp1 = "|cff00ff00General 通用指令|r"
+	L.core_uihelp2 = "|cffFF0000/moveui|r - 解锁和移动屏幕中的框架。"
+	L.core_uihelp3 = "|cffFF0000/rl|r - 重载你的插件。"
+	L.core_uihelp4 = "|cffFF0000/gm|r - 向G M发送帮助请求或者打开游戏内帮助。"
+	L.core_uihelp5 = "|cffFF0000/frame|r - 侦测当前鼠标所在框体的名称。(对lua编辑者来说非常有用) "
+	L.core_uihelp6 = "|cffFF0000/heal|r - 启用团队治疗框体样式。"
+	L.core_uihelp7 = "|cffFF0000/dps|r - 启用Dps/Tank 团队样式。"
+	L.core_uihelp8 = "|cffFF0000/bags|r - 整理背包，购买银行栏位或者购买物品。"
+	L.core_uihelp9 = "|cffFF0000/reset|r - 重置所有框体配置文件至原始的DuffedUI。"
+	L.core_uihelp10 = "|cffFF0000/rd|r - 解散团队。"
+	L.core_uihelp11 = "|cffFF0000/ainv|r - 通过M语关键词启用自动邀请。你可以通过在聊天框输入“/ainv 你的关键词”来设置你自己的关键词。"
+	L.core_uihelp100 = "（向下滚动以获取更多的指令。）"
 
---------------
-L.Bind = {} --
---------------
+	L.symbol_CLEAR = "取消标记"
+	L.symbol_SKULL = "骷髅"
+	L.symbol_CROSS = "十字"
+	L.symbol_SQUARE = "方形"
+	L.symbol_MOON = "月亮"
+	L.symbol_TRIANGLE = "三角形"
+	L.symbol_DIAMOND = "钻石"
+	L.symbol_CIRCLE = "大饼"
+	L.symbol_STAR = "星星"
 
-L.Bind.Combat = "You can't bind keys in combat."
-L.Bind.Instruct = "Hover your mouse over any actionbutton to bind it. Press the escape key or right click to clear the current actionbuttons keybinding."
-L.Bind.Save = "Save bindings"
-L.Bind.DiscardBind = "Discard bindings"
-L.Bind.Saved = "All keybindings have been saved."
-L.Bind.Discard = "All newly set keybindings have been discarded."
+	L.bind_combat = "您不能在战斗中绑定快捷键。"
+	L.bind_saved = "所有绑定的快捷键已经被保存。"
+	L.bind_discard = "所有新设定的快捷键已经呗取消。"
+	L.bind_instruct = "移动鼠标至动作条按钮上来绑定，按ESC键或者右击取消绑定。"
+	L.bind_save = "保存绑定"
+	L.bind_discardbind = "取消绑定"
 
-------------------
-L.Tooltips = {} --
-------------------
+	L.hunter_unhappy = "你的宠物感到不高兴了！"
+	L.hunter_content = "你的宠物感到很满足！"
+	L.hunter_happy = "你的宠物很开心"
 
-L.Tooltips.MoveAnchor = "Move Game Tooltip"
-L.Tooltips.gold_a = "Archaeology: "
-L.Tooltips.gold_c = "Cooking: "
-L.Tooltips.gold_jc = "Jewelcrafting: "
-L.Tooltips.gold_dr = "Dungeon & Raids: "
-L.Tooltips.Count = "Count"
+	L.move_tooltip = "移动鼠标提示"
+	L.move_minimap = "移动小地图"
+	L.move_watchframe = "移动任务追踪"
+	L.move_gmframe = "移动G M对话框"
+	L.move_buffs = "移动玩家增益效果"
+	L.move_debuffs = "移动玩家减益效果"
+	L.move_shapeshift = "移动姿态或图腾条"
+	L.move_achievements = "移动成就框体"
+	L.move_roll = "移动拾取R点框体"
+	L.move_vehicle = "移动载具界面"
 
---------------------
-L.UnitFrames = {} --
---------------------
+	-------------------------------------------------
+	-- INSTALLATION
+	-------------------------------------------------
 
-L.UnitFrames.Ghost = "Ghost"
-L.UnitFrames.Wrath = "Wrath"
-L.UnitFrames.Starfire = "Starfire"
+	-- headers
+	L.install_header_1 = "欢迎"
+	L.install_header_2 = "1. 要点"
+	L.install_header_3 = "2. 单位框架"
+	L.install_header_4 = "3. 特性"
+	L.install_header_5 = "4. 您应该知道的东西"
+	L.install_header_6 = "5. 命令"
+	L.install_header_7 = "6. 完成"
+	L.install_header_8 = "1. 必要的设定"
+	L.install_header_9 = "2. 社交"
+	L.install_header_10= "3. 框架"
+	L.install_header_11= "4. 成功！"
 
-----------------
-L.Movers = {} --
-----------------
+	-- install
+	L.install_init_line_1 = "感谢您选择DuffedUI。"
+	L.install_init_line_2 = "几个小步骤将引导你安装DuffedUI. 在每一步中， 你可以选择应用或者跳过当前的设定。"
+	L.install_init_line_3 = "你也可以选择查看我们提供给您的关于DuffedUI一些特性的小提示。"
+	L.install_init_line_4 = "按下教程按键开始查看教程，或者点击安装跳过这一步。"
 
-L.Movers.Extrabutton = "Move Extrabutton"
-L.Movers.Ressources = "Move Ressourcebar"
-L.Movers.ClassTimer = "Move ClassTimer"
-L.Movers.ClassTimerDebuff = "Move Target Debuffs"
-L.Movers.BattleNet = "Move BattleNetFrame"
-L.Movers.Vehicle = "Move Vehicleindicator"
-L.Movers.Watchframe = "Move Objective Tracker"
+	-- tutorial 1
+	L.tutorial_step_1_line_1 = "这个快速的小教程将给您展示一些DuffedUI的特性。"
+	L.tutorial_step_1_line_2 = "首先，将告知你一些使用DuffedUI前该知道的要点。"
+	L.tutorial_step_1_line_3 = "安装程序是按照每个角色来设定的。当然一些设定将在整个帐号下适用，您必须要为每一个使用DuffedUI的角色运行一遍安装程序。程序将在您每个角色第一次运行DuffedUI时自动显示。 当然, 高阶用户可以在 /DuffedUI/config/config.lua 中发现这些选项， 新手在游戏中输入/duffedui 也可以找到。"
+	L.tutorial_step_1_line_4 = "高阶用户是指相比于普通的用户他们有能力使用一些新的特新(比如编辑LUA脚本)。新手是指没有编程能力的用户。那么我们建议他们使用游戏内设置面板来设定DuffedUI至他们想要的样式。"
 
------------------
-L.Install = {} --
------------------
+	-- tutorial 2
+	L.tutorial_step_2_line_1 = "DuffedUI包含了一个由Haste编写的oUF的内建版本. 由它来构建整个屏幕上的各种单位框体，玩家的BUFF/DEBUFF和职业特定的BUFF/DEBUFF."
+	L.tutorial_step_2_line_2 = "你可以在Wowinterface上搜索oUF来获取更多关于这个工具的信息。"
+	L.tutorial_step_2_line_3 = "如果你是一个治疗者或者团队领袖，那么你可能需要启用治疗框体。 它显示了更多的raid信息(/heal)。DPS和坦克需要一个相对简单的团队框架(/dps)。如果你不想使用它们中的任何一个，你可以在人物选择界面中的插件列表里禁用它们。"
+	L.tutorial_step_2_line_4 = "你只需要输入/moveui,，既可以简单的移动单位框架。"
 
-L.Install.Tutorial = "Tutorial"
-L.Install.Install = "Install"
-L.Install.InstallStep0 = "Thank you for choosing DuffedUI!|n|nYou will be guided through the installation process in a few simple steps.  At each step, you can decide whether or not you want to apply or skip the presented settings. You are also given the possibility to be shown a brief tutorial on some of the features of DuffedUI. Press the 'Tutorial' button to be guided through this small introduction, or press 'Install' to skip this step.|n|n|cffff0000ATTENTION! By clicking 'Install / Reset', it will immediately erase all your settings!|r"L.Install.InstallStep1 = "The first step applies the essential settings. This is |cffff0000recommended|r for any user, unless you want to apply only a specific part of the settings.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
-L.Install.InstallStep2 = "The second step applies the correct chat setup. If you are a new user, this step is recommended.  If you are an existing user, you may want to skip this step.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
-L.Install.InstallStep3 = "The third and final step applies the default frame positions. This step is |cffff0000recommended|r for new users.|n|nClick 'Apply' to apply the settings and 'Next' to continue the install process. If you wish to skip this step, just press 'Next'."
-L.Install.InstallStep4 = "Installation is complete. Please click the 'Complete' button to reload the UI. Enjoy DuffedUI! Visit us at www.duffed.net!"
+	-- tutorial 3
+	L.tutorial_step_3_line_1 = "DuffedUI是一个重新设计过的暴雪用户界面。不多不少，大概所有的原始特性你都可以在DuffedUI中体验到。 有些仅有的原始界面不能实现的功能在屏幕中是看不到的， 比如说当你访问商人的时候自动售卖灰色的物品，又或者自动整理背包内的物品。"
+	L.tutorial_step_3_line_2 = "因为并不是所有人都喜欢诸如：伤害统计, 首领模块, 仇恨统计, 等等这些模块, 但我们认为这是非常好的事. DuffedUI是为不同职业，不同口味，不同爱好，不同天赋等等最大化的玩家群体所编写的。 这就是为什么DuffedUI是当前最火的UI。 它满足了每一个人的游戏体验并且完全可供编辑。 它也被设计于为那些想要打造自己特性的UI的初学者们提供了一个很好的开端而无需专注于插件本身的构造。 从2009年开始，许多用户使用DuffedUI作为基本架构来制作他们自己的插件。 你可以到我们的网站上看看那些DuffedUI改版！"
+	L.tutorial_step_3_line_3 = "用户们可以到我们官方网站的DuffedUI配套插件区或者访问 www.wowinterface.com 来获取安装更多有额外特性的插件。"
+	L.tutorial_step_3_line_4 = ""
 
---------------
-L.Help = {} --
---------------
+	-- tutorial 4
+	L.tutorial_step_4_line_1 = "想要设置动作条的数目, 移动鼠标至左/右动作条的底部背景框架。可以使用相同的方法设定右边的动作条，点击顶部或底部。 想要从聊天框内复制文字， 鼠标点击在聊天框右上角出现的小按钮即可。"
+	L.tutorial_step_4_line_2 = "小地图的边框可以改变颜色。绿色的时候说明你有未读邮件，红色表明你有新的行事历邀请 ，橙色表明你两者都有。"
+	L.tutorial_step_4_line_3 = "你可以点击80%的信息栏来打开更多的BLZ面板。 好友和公会信息也具有右键特性。"
+	L.tutorial_step_4_line_4 = "这里有一些下拉菜单可以使用。 右键[X] (关闭) 背包按钮 将会显示下拉菜单比如：显示背包，整理背包，显示钥匙扣等等。 鼠标中间点击小地图将会显示宏命令按钮。"
 
-L.Help.Title = "DuffedUI Commands:"
-L.Help.Datatexts = "'|cffC41F3Bdt|r' or '|cffC41F3Bdatatext|r' : Enable or disable datatext configuration."
-L.Help.Install = "'|cffC41F3Binstall|r' or '|cffC41F3Breset|r' : Install or reset DuffedUI to default settings."
-L.Help.Config = "'|cff00ff00config|r' : Display in-game configuration window."
-L.Help.Outdated = "Your version of DuffedUI is out of date. You can download the latest version from www.duffed.net"
-L.Help.NoError = "No error yet."
-L.Help.AutoInviteEnable = "Autoinvite ON: invite"
-L.Help.AutoInviteDisable = "Autoinvite OFF"
-L.Help.AutoInviteAlt = "Autoinvite ON: "
-L.Help.Config = "Config not loaded."
+	-- tutorial 5
+	L.tutorial_step_5_line_1 = "最后，DuffedUI有一些实用的命令，下面是列表"
+	L.tutorial_step_5_line_2 = "/moveui 允许你移动屏幕上的大多数框体至任何地方。 /enable 和 /disable 被用于快速开启或关闭大多数插件。 /rl 重载插件。 /heal 启用治疗团队框架。/dps 启用坦克/输出团队框架。"
+	L.tutorial_step_5_line_3 = "/tt 让你M语你的目标 /rc 立即进行团队就绪检查 /rd 解散团队或小队 /bags 通过命令行来显示一些可用信息 /ainv 通过M语你来启用自动邀请 (/ainv off) 关闭自动邀请。"
+	L.tutorial_step_5_line_4 = "/gm 打开帮助面板 /install, /reset or /tutorial 载入安装程序 /frame 在聊天框里输入当前鼠标下框体的一些额外的信息。"
 
-------------------
-L.Merchant = {} --
-------------------
+	-- tutorial 6
+	L.tutorial_step_6_line_1 = "教程结束了。你可以在任何时候输入/tutorial来重新参看教程。"
+	L.tutorial_step_6_line_2 = "我建议你仔细的看一下config/config.lua 或者输入 /duffedui 来设置你所需要的属性。"
+	L.tutorial_step_6_line_3 = "你可以继续安装，如果安装已经完成你可以重置插件。"
+	L.tutorial_step_6_line_4 = ""
 
-L.Merchant.NotEnoughMoney = "You don't have enough money to repair!"
-L.Merchant.RepairCost = "Your items have been repaired for"
-L.Merchant.SoldTrash = "Your vendor trash has been sold and you earned"
+	-- install step 1
+	L.install_step_1_line_1 = "这些步骤将会为DuffedUI设置正确的环境变量。"
+	L.install_step_1_line_2 = "第一步将会应用一些比较重要的设置。"
+	L.install_step_1_line_3 = "这一步 |cffff0000推荐|r 所有的用户应用, 除非你只想应用一些特殊的设定。"
+	L.install_step_1_line_4 = "点击继续来应用这些设定，或者如果你想要跳过这些步骤点击跳过。"
+
+	-- install step 2
+	L.install_step_2_line_0 = "发现另外的聊天插件。我们将略过这一步。请按跳过继续安装。"
+	L.install_step_2_line_1 = "第二步应用了正确的聊天设定。"
+	L.install_step_2_line_2 = "如果你是一个新用户，那么非常建议你应用这一步。 如果您已经在使用，那么可以跳过这一步。"
+	L.install_step_2_line_3 = "由于应用这些设定，聊天字体过大是正常的。 当安装完成之后它会恢复正常。"
+	L.install_step_2_line_4 = "点击继续来继续安装，或者点击跳过，如果你想跳过这一步骤。"
+
+	-- install step 3
+	L.install_step_3_line_1 = "第三步且是最后一步将会设定原始框体的位置。"
+	L.install_step_3_line_2 = "非常 |cffff0000推荐|r 新手应用这一步。"
+	L.install_step_3_line_3 = ""
+	L.install_step_3_line_4 = "点击继续来继续安装，或者点击跳过，如果你想跳过这一步骤。"
+
+	-- install step 4
+	L.install_step_4_line_1 = "安装完成~"
+	L.install_step_4_line_2 = "请点击”完成“按钮重载插件。"
+	L.install_step_4_line_3 = ""
+	L.install_step_4_line_4 = "享受DuffedUI吧! 访问我们： www.tukui.org!"
+
+	-- buttons
+	L.install_button_tutorial = "教程"
+	L.install_button_install = "安装"
+	L.install_button_next = "下一步"
+	L.install_button_skip = "跳过"
+	L.install_button_continue = "继续"
+	L.install_button_finish = "完成"
+	L.install_button_close = "关闭"
+end

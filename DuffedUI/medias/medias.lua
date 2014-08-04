@@ -1,35 +1,80 @@
-local D, C, L  = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
-C["medias"] = {
-	-- fonts (ENGLISH)
-	["Font"] = [=[Interface\Addons\DuffedUI\medias\fonts\normal_font.ttf]=],
-	["AltFont"] = [[Interface\AddOns\DuffedUI\medias\fonts\uf_font.ttf]],
-	["DamageFont"] = [[Interface\AddOns\DuffedUI\medias\fonts\combat_font.ttf]],
-	["PixelFont"] = [=[Interface\Addons\DuffedUI\medias\fonts\pixel_font.ttf]=],
-	["ActionBarFont"] = [=[Interface\Addons\DuffedUI\medias\fonts\actionbar_font.ttf]=],
-
+C["media"] = {
+	-- fonts (ENGLISH, SPANISH)
+	["font"] = [=[Interface\Addons\DuffedUI\medias\fonts\normal_font.ttf]=], -- general font of DuffedUI
+	["uffont"] = [[Interface\AddOns\DuffedUI\medias\fonts\uf_font.ttf]], -- general font of unitframes
+	["calibri"] = [=[Interface\Addons\DuffedUI\medias\fonts\normal_font2.ttf]=], -- general2 font of DuffedUI
+	["ufcalibri"] = [[Interface\AddOns\DuffedUI\medias\fonts\uf_font2.ttf]], -- general2 font of unitframes
+	["dmgfont"] = [[Interface\AddOns\DuffedUI\medias\fonts\combat_font.ttf]], -- general font of dmg / sct
+	["pixelfont"] = [=[Interface\Addons\DuffedUI\medias\fonts\normal_font.ttf]=],
+	
+	-- fonts (DEUTSCH)
+	["de_font"] = [=[Interface\Addons\DuffedUI\medias\fonts\normal_font.ttf]=], -- general font of DuffedUI
+	["de_uffont"] = [[Interface\AddOns\DuffedUI\medias\fonts\uf_font.ttf]], -- general font of unitframes
+	["de_dmgfont"] = [[Interface\AddOns\DuffedUI\medias\fonts\combat_font.ttf]], -- general font of dmg / sct
+	
+	-- fonts (FRENCH)
+	["fr_font"] = [=[Interface\Addons\DuffedUI\medias\fonts\normal_font.ttf]=], -- general font of DuffedUI
+	["fr_uffont"] = [[Interface\AddOns\DuffedUI\medias\fonts\uf_font.ttf]], -- general font of unitframes
+	["fr_dmgfont"] = [=[Interface\AddOns\DuffedUI\medias\fonts\combat_font.ttf]=], -- general font of dmg / sct
+	
+	-- fonts (RUSSIAN)
+	["ru_font"] = [=[Interface\Addons\DuffedUI\medias\fonts\normal_font.ttf]=], -- general font of DuffedUI
+	["ru_uffont"] = [[Fonts\ARIALN.TTF]], -- general font of unitframes
+	["ru_dmgfont"] = [[Interface\AddOns\DuffedUI\medias\fonts\combat_font_rus.ttf]], -- general font of dmg / sct
+	
+	-- fonts (TAIWAN ONLY)
+	["tw_font"] = [=[Fonts\bLEI00D.ttf]=], -- general font of DuffedUI
+	["tw_uffont"] = [[Fonts\bLEI00D.ttf]], -- general font of unitframes
+	["tw_dmgfont"] = [[Fonts\bLEI00D.ttf]], -- general font of dmg / sct
+	
+	-- fonts (KOREAN ONLY)
+	["kr_font"] = [=[Fonts\2002.TTF]=], -- general font of DuffedUI
+	["kr_uffont"] = [[Fonts\2002.TTF]], -- general font of unitframes
+	["kr_dmgfont"] = [[Fonts\2002.TTF]], -- general font of dmg / sct
+	
+	-- fonts (China ONLY)
+	["cn_font"] = [=[Fonts\ARKai_T.TTF]=], -- general font of DuffedUI
+	["cn_uffont"] = [[Fonts\ARHei.TTF]], -- general font of unitframes
+	["cn_dmgfont"] = [[Fonts\ARKai_C.TTF]], -- general font of dmg / sct
+	
 	-- textures
-	["Normal"] = [[Interface\AddOns\DuffedUI\medias\textures\normTex]],
-	["Glow"] = [[Interface\AddOns\DuffedUI\medias\textures\glowTex]],
-	["Bubble"] = [[Interface\AddOns\DuffedUI\medias\textures\bubbleTex]],
-	["Copy"] = [[Interface\AddOns\DuffedUI\medias\textures\copy]],
-	["Blank"] = [[Interface\AddOns\DuffedUI\medias\textures\blank]],
-	["HoverButton"] = [[Interface\AddOns\DuffedUI\medias\textures\button_hover]],
-	["Logo"] = [[Interface\AddOns\DuffedUI\medias\textures\logo]],
-	["Duffed"] =  [[Interface\AddOns\DuffedUI\medias\textures\duffed]],
-	["Mail"] = [[Interface\AddOns\DuffedUI\medias\textures\mail]],
+	["normTex"] = [[Interface\AddOns\DuffedUI\medias\textures\normTex]], -- texture used for DuffedUI healthbar/powerbar/etc
+	["glowTex"] = [[Interface\AddOns\DuffedUI\medias\textures\glowTex]], -- the glow text around some frame.
+	["bubbleTex"] = [[Interface\AddOns\DuffedUI\medias\textures\bubbleTex]], -- unitframes combo points
+	["copyicon"] = [[Interface\AddOns\DuffedUI\medias\textures\copy]], -- copy icon
+	["blank"] = [[Interface\AddOns\DuffedUI\medias\textures\blank]], -- the main texture for all borders/panels
+	["buttonhover"] = [[Interface\AddOns\DuffedUI\medias\textures\button_hover]],
+	["duffed"] = [[Interface\AddOns\DuffedUI\medias\textures\duffed]],
 	["alliance"] = [[Interface\AddOns\DuffedUI\medias\textures\alliance]],
-	["horde"] = [[Interface\AddOns\DuffedUI\medias\textures\horde]],
 	["d3"] = [[Interface\AddOns\DuffedUI\medias\textures\d3]],
+	["horde"] = [[Interface\AddOns\DuffedUI\medias\textures\horde]],
+	["neutral"] = [[Interface\AddOns\DuffedUI\medias\textures\neutral]],
 	["sc2"] = [[Interface\AddOns\DuffedUI\medias\textures\sc2]],
+	["pointer"] = [[Interface\AddOns\DuffedUI\medias\textures\arrow]],
 	
 	-- colors
-	["BorderColor"] = (not C["general"].InOut and { .125, .125, .125 }) or C["general"].BorderColor or { .125, .125, .125 },
-	["BackdropColor"] = C["general"].BackdropColor or { .05,.05,.05 },
-	["PrimaryDataTextColor"] = { 1, 1, 1 },
-	["SecondaryDataTextColor"] = { 1, 1, 1 },
+	["bordercolor"] = C["general"].bordercolor or { .125, .125, .125 }, -- border color of DuffedUI panels
+	["backdropcolor"] = C["general"].backdropcolor or { .05, .05, .05 }, -- background color of DuffedUI panels
+	["datatextcolor1"] = { .4, .4, .4 }, -- color of datatext title
+	["datatextcolor2"] = { 1, 1, 1 }, -- color of datatext result
 	
 	-- sound
-	["Whisper"] = [[Interface\AddOns\DuffedUI\medias\sounds\whisper.mp3]],
-	["Warning"] = [[Interface\AddOns\DuffedUI\medias\sounds\warning.mp3]],
+	["whisper"] = [[Interface\AddOns\DuffedUI\medias\sounds\whisper.mp3]],
+	["warning"] = [[Interface\AddOns\DuffedUI\medias\sounds\warning.mp3]],
 }
+
+-------------------------------------------------------------------
+-- Used to overwrite default medias outside DuffedUI
+-------------------------------------------------------------------
+
+local settings = DuffedUIEditedDefaultConfig
+if settings then
+	local media = settings.media
+	if media then
+		for option, value in pairs(media) do
+			C.media[option] = value
+		end
+	end
+end

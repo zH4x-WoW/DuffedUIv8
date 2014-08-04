@@ -1,31 +1,110 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
-local Install = CreateFrame("Frame", nil, UIParent)
-Install.MaxStepNumber = 4
-Install.CurrentStep = 0
-Install.Width = 500
-Install.Height = 200
+D.ChatSetup = function()
+	FCF_ResetChatWindows()
+	FCF_SetLocked(ChatFrame1, 1)
+	FCF_DockFrame(ChatFrame2)
+	FCF_SetLocked(ChatFrame2, 1)
+	FCF_OpenNewWindow(GENERAL)
+	FCF_SetLocked(ChatFrame3, 1)
+	FCF_DockFrame(ChatFrame3)
 
-function Install:ResetData()
-	local ActionBars = C["actionbars"].Enable
-	local Chat = D["Chat"]
-	local DataTexts = D["DataTexts"]
+	FCF_OpenNewWindow(LOOT)
+	FCF_UnDockFrame(ChatFrame4)
+	FCF_SetLocked(ChatFrame4, 1)
+	ChatFrame4:Show()
 
- 	if (DuffedUIConfigNotShared) then
-		DuffedUIConfigNotShared = {}
+	for i = 1, NUM_CHAT_WINDOWS do
+		local frame = _G[format("ChatFrame%s", i)]
+		local id = frame:GetID()
+		FCF_SetChatWindowFontSize(nil, frame, 12)
+		frame:Size(D.InfoLeftRightWidth + 1, 114)
+		SetChatWindowSavedDimensions(id, D.Scale(D.InfoLeftRightWidth + 1), D.Scale(114))
+		FCF_SavePositionAndDimensions(frame)
+		if i == 1 then FCF_SetWindowName(frame, "G, S & W") end
+		if i == 2 then FCF_SetWindowName(frame, "Log") end
+		if i == 3 then FCF_SetWindowName(frame, "Whisper") end
+		--if i == 4 then FCF_SetWindowName(frame, "Loot & Spam") end
+		D.SetDefaultChatPosition(frame)
 	end
 
-	if (DuffedUIDataPerChar) then
-		DuffedUIDataPerChar = {}
-	end
+	ChatFrame_RemoveAllMessageGroups(ChatFrame1)
+	ChatFrame_RemoveChannel(ChatFrame1, TRADE)
+	ChatFrame_RemoveChannel(ChatFrame1, GENERAL)
+	ChatFrame_RemoveChannel(ChatFrame1, L.chat_defense)
+	ChatFrame_RemoveChannel(ChatFrame1, L.chat_recrutment)
+	ChatFrame_RemoveChannel(ChatFrame1, L.chat_lfg)
+	ChatFrame_AddMessageGroup(ChatFrame1, "SAY")
+	ChatFrame_AddMessageGroup(ChatFrame1, "GUILD")
+	ChatFrame_AddMessageGroup(ChatFrame1, "OFFICER")
+	ChatFrame_AddMessageGroup(ChatFrame1, "GUILD_ACHIEVEMENT")
+	ChatFrame_AddMessageGroup(ChatFrame1, "PARTY")
+	ChatFrame_AddMessageGroup(ChatFrame1, "PARTY_LEADER")
+	ChatFrame_AddMessageGroup(ChatFrame1, "RAID")
+	ChatFrame_AddMessageGroup(ChatFrame1, "RAID_LEADER")
+	ChatFrame_AddMessageGroup(ChatFrame1, "RAID_WARNING")
+	ChatFrame_AddMessageGroup(ChatFrame1, "INSTANCE_CHAT")
+	ChatFrame_AddMessageGroup(ChatFrame1, "INSTANCE_CHAT_LEADER")
+	ChatFrame_AddMessageGroup(ChatFrame1, "BG_HORDE")
+	ChatFrame_AddMessageGroup(ChatFrame1, "BG_ALLIANCE")
+	ChatFrame_AddMessageGroup(ChatFrame1, "BG_NEUTRAL")
+	ChatFrame_AddMessageGroup(ChatFrame1, "AFK")
+	ChatFrame_AddMessageGroup(ChatFrame1, "DND")
+	ChatFrame_AddMessageGroup(ChatFrame1, "ACHIEVEMENT")
 
-	if ActionBars then
-		SetActionBarToggles(1, 1, 1, 1)
- 	end
+	ChatFrame_RemoveAllMessageGroups(ChatFrame3)
+	ChatFrame_AddMessageGroup(ChatFrame3, "WHISPER")
+	ChatFrame_AddMessageGroup(ChatFrame3, "BN_WHISPER")
+	ChatFrame_AddMessageGroup(ChatFrame3, "BN_CONVERSATION")
+
+	ChatFrame_RemoveAllMessageGroups(ChatFrame4)
+	ChatFrame_AddChannel(ChatFrame4, TRADE)
+	ChatFrame_AddChannel(ChatFrame4, GENERAL)
+	ChatFrame_AddChannel(ChatFrame4, L.chat_defense)
+	ChatFrame_AddChannel(ChatFrame4, L.chat_recrutment)
+	ChatFrame_AddChannel(ChatFrame4, L.chat_lfg)
+	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
+	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
+	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
+	ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
+	ChatFrame_AddMessageGroup(ChatFrame4, "EMOTE")
+	ChatFrame_AddMessageGroup(ChatFrame4, "YELL")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONSTER_SAY")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONSTER_EMOTE")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONSTER_YELL")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONSTER_WHISPER")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONSTER_BOSS_EMOTE")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONSTER_BOSS_WHISPER")
+	ChatFrame_AddMessageGroup(ChatFrame4, "SYSTEM")
+	ChatFrame_AddMessageGroup(ChatFrame4, "ERRORS")
+	ChatFrame_AddMessageGroup(ChatFrame4, "IGNORED")
+
+	ToggleChatColorNamesByClassGroup(true, "SAY")
+	ToggleChatColorNamesByClassGroup(true, "EMOTE")
+	ToggleChatColorNamesByClassGroup(true, "YELL")
+	ToggleChatColorNamesByClassGroup(true, "GUILD")
+	ToggleChatColorNamesByClassGroup(true, "OFFICER")
+	ToggleChatColorNamesByClassGroup(true, "GUILD_ACHIEVEMENT")
+	ToggleChatColorNamesByClassGroup(true, "ACHIEVEMENT")
+	ToggleChatColorNamesByClassGroup(true, "WHISPER")
+	ToggleChatColorNamesByClassGroup(true, "PARTY")
+	ToggleChatColorNamesByClassGroup(true, "PARTY_LEADER")
+	ToggleChatColorNamesByClassGroup(true, "RAID")
+	ToggleChatColorNamesByClassGroup(true, "RAID_LEADER")
+	ToggleChatColorNamesByClassGroup(true, "RAID_WARNING")
+	ToggleChatColorNamesByClassGroup(true, "BATTLEGROUND")
+	ToggleChatColorNamesByClassGroup(true, "BATTLEGROUND_LEADER")	
+	ToggleChatColorNamesByClassGroup(true, "CHANNEL1")
+	ToggleChatColorNamesByClassGroup(true, "CHANNEL2")
+	ToggleChatColorNamesByClassGroup(true, "CHANNEL3")
+	ToggleChatColorNamesByClassGroup(true, "CHANNEL4")
+	ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
+	ToggleChatColorNamesByClassGroup(true, "INSTANCE_CHAT")
+	ToggleChatColorNamesByClassGroup(true, "INSTANCE_CHAT_LEADER")
 end
 
-function Install:Step1()
-	-- CVars
+local function cvarsetup()
 	SetCVar("buffDurations", 1)
 	SetCVar("consolidateBuffs", 0)
 	SetCVar("mapQuestDifficulty", 1)
@@ -53,186 +132,430 @@ function Install:Step1()
 	SetCVar("violenceLevel", 5)
 end
 
-function Install:Step2()
-	local Chat = D["Chat"]
-	
-	if (not Chat) then return end
-	Chat:Install()
-	Chat:SetDefaultChatFramesPositions()
-end
-
-function Install:Step3()
-
-end
-
-function Install:Step4()
-
-end
-
-function Install:PrintStep(number)
-	local ExecuteScript = self["Step" .. number]
-	local Text = L.Install["InstallStep" .. number]
-	local r, g, b = D.ColorGradient(number, self.MaxStepNumber, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
-	
-	if (not Text) then
-		self:Hide()
-		
-		if (number > self.MaxStepNumber) then
-			DuffedUIDataPerChar.InstallDone = true
-			ReloadUI()
-		end
-		
-		return
-	end
-	
-	self.CurrentStep = number
-	
-	if (number == 0) then
-		self.LeftButton.Text:SetText(L.Install.Tutorial)
-		self.LeftButton:SetScript("OnClick", function() print("tuto") end)
-		self.RightButton.Text:SetText(L.Install.Install.." / "..RESET)
-		self.RightButton:SetScript("OnClick", function() self.ResetData() self.PrintStep(self, self.CurrentStep + 1) end)
-		self.CloseButton:Show()
-	else
-		self.LeftButton:SetScript("OnClick", function() self.PrintStep(self, self.CurrentStep - 1) end)
-		self.LeftButton.Text:SetText(PREVIOUS)
-		self.RightButton:SetScript("OnClick", function() self.PrintStep(self, self.CurrentStep + 1) end)
-		
-		if (number == Install.MaxStepNumber) then
-			self.RightButton.Text:SetText(COMPLETE)
-			self.CloseButton:Hide()
-		else
-			self.RightButton.Text:SetText(NEXT)
-			self.CloseButton:Show()
-		end
-	end
-	
-	self.Text:SetText(Text)
-
-	if (ExecuteScript and number < self.MaxStepNumber) then
-		self.MiddleButton:Show()
-		self.MiddleButton:SetScript("OnClick", ExecuteScript)
-	else
-		self.MiddleButton:Hide()
-		self.MiddleButton:SetScript("OnClick", nil)
-	end
-	
-	self.StatusBar:SetValue(number)
-	self.StatusBar:SetStatusBarColor(r, g, b)
-	self.StatusBar.Background:SetTexture(r, g, b)
-end
-
-local StyleClick = function(self)
-	self.Text:SetTextColor(0, 1, 0)
-	
-	--D.GradientFrame(self.Text, "Text", 0, 0.5, 1, 1, 1)
-	self.Text:SetAnimation("Gradient", "Text", 0, 0.5, 1, 1, 1)
-end
-
-function Install:Launch()
-	if (self.Description) then
-		self:Show()
-		return
-	end
-	
-	--local r, g, b = D.ColorGradient(0, self.MaxStepNumber, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
-	local R, G, B = D.ColorGradient(0, self.MaxStepNumber, 1, 0.2, 0.2, 1, 1, 0, 0.2, 1, 0.2)
-	
-	self.Description = CreateFrame("Frame", nil, self)
-	self.Description:Size(self.Width, self.Height)
-	self.Description:Point("CENTER", self, "CENTER")
-	self.Description:SetTemplate("Transparent")
-	self.Description:CreateShadow()
-
-	self.StatusBar = CreateFrame("StatusBar", nil, self)
-	self.StatusBar:SetStatusBarTexture(C["medias"].Normal)
-	self.StatusBar:Point("BOTTOM", self.Description, "TOP", 0, 8)
-	self.StatusBar:Height(20)
-	self.StatusBar:Width(self.Description:GetWidth() - 4)
-	self.StatusBar:CreateBackdrop()
-	self.StatusBar.Backdrop:CreateShadow()
-	self.StatusBar:SetStatusBarColor(R, G, B)
-	self.StatusBar:SetMinMaxValues(0, self.MaxStepNumber)
-	self.StatusBar:SetValue(0)
-	self.StatusBar.Background = self.StatusBar:CreateTexture(nil, "ARTWORK")
-	self.StatusBar.Background:SetAllPoints()
-	self.StatusBar.Background:SetAlpha(.15)
-	self.StatusBar.Background:SetTexture(R, G, B)
-	
-	self.Logo = self.StatusBar:CreateTexture(nil, "OVERLAY")
-	self.Logo:Size(256, 128)
-	self.Logo:SetTexture(C["medias"].Logo)
-	self.Logo:Point("TOP", self.Description, "TOP", -8, 88)
-
-	self.LeftButton = CreateFrame("Button", nil, self)
-	self.LeftButton:Point("TOPLEFT", self.Description, "BOTTOMLEFT", 0, -6)
-	self.LeftButton:Size(128, 25)
-	self.LeftButton:SetTemplate("Transparent")
-	self.LeftButton:CreateShadow()
-	self.LeftButton:FontString("Text", C["medias"].Font, 12)
-	self.LeftButton.Text:SetPoint("CENTER")
-	self.LeftButton.Text:SetText(L.Install.Tutorial)
-	self.LeftButton:SetScript("OnClick", function() print("tuto") end)
-
-	self.RightButton = CreateFrame("Button", nil, self)
-	self.RightButton:Point("TOPRIGHT", self.Description, "BOTTOMRIGHT", 0, -6)
-	self.RightButton:Size(128, 25)
-	self.RightButton:SetTemplate("Transparent")
-	self.RightButton:CreateShadow()
-	self.RightButton:FontString("Text", C["medias"].Font, 12)
-	self.RightButton.Text:SetPoint("CENTER")
-	self.RightButton.Text:SetText(L.Install.Install.." / "..RESET)
-	self.RightButton:SetScript("OnClick", function() self.ResetData() self.PrintStep(self, self.CurrentStep + 1) end)
-	
-	self.MiddleButton = CreateFrame("Button", nil, self)
-	self.MiddleButton:Point("TOPLEFT", self.LeftButton, "TOPRIGHT", 4, 0)
-	self.MiddleButton:Point("BOTTOMRIGHT", self.RightButton, "BOTTOMLEFT", -4, 0)
-	self.MiddleButton:SetTemplate("Transparent")
-	self.MiddleButton:CreateShadow()
-	self.MiddleButton:FontString("Text", C["medias"].Font, 12)
-	self.MiddleButton.Text:SetPoint("CENTER")
-	self.MiddleButton.Text:SetText(APPLY)
-	self.MiddleButton:Hide()
-	
-	self.MiddleButton:SetScript("OnMouseUp", StyleClick)
-	
-	self.CloseButton = CreateFrame("Button", nil, self)
-	self.CloseButton:Point("TOPRIGHT", self.Description, "TOPRIGHT", -6, -12)
-	self.CloseButton:Size(12)
-	self.CloseButton:FontString("Text", C["medias"].Font, 12)
-	self.CloseButton.Text:SetPoint("CENTER")
-	self.CloseButton.Text:SetText("X")
-	self.CloseButton:SetScript("OnClick", function() self:Hide() end)
-
-	self.Text = self.Description:CreateFontString(nil, "OVERLAY")
-	self.Text:Size(self.Description:GetWidth() - 40, self.Description:GetHeight() - 60)
-	self.Text:SetJustifyH("LEFT")
-	self.Text:SetJustifyV("TOP")
-	self.Text:SetFont(C["medias"].Font, 12)
-	self.Text:SetPoint("TOPLEFT", 20, -40)
-	self.Text:SetText(L.Install.InstallStep0)
-	
-	self:SetAllPoints(UIParent)
-end
-
-Install:RegisterEvent("ADDON_LOADED")
-Install:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "DuffedUI") then return end
-
-	if (not DuffedUIDataPerChar) then DuffedUIDataPerChar = {} end
-	
-	local IsInstalled = DuffedUIDataPerChar.InstallDone
-	
-	if (not IsInstalled) then self:Launch() end
-	
-	self:UnregisterAllEvents()
-end)
-
-D["Install"] = Install
-
 local OnLogon = CreateFrame("Frame")
 OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 OnLogon:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	print(L.Welcome.Message)
+	print(L.welcome_1)
 end)
+
+local function positionsetup()
+	-- reset saved variables on char
+	DuffedUIDataPerChar = {}
+	
+	-- reset movable stuff into original position
+	for i = 1, getn(D.AllowFrameMoving) do
+		if D.AllowFrameMoving[i] then D.AllowFrameMoving[i]:SetUserPlaced(false) end
+	end
+end
+
+local v = CreateFrame("Button", "DuffedUIVersionFrame", UIParent)
+v:SetSize(300, 66)
+v:SetPoint("CENTER")
+v:SetTemplate("Transparent")
+v:CreateShadow("Default")
+v:FontString("text", C["media"].font, 20)
+v:FontString("text2", C["media"].font, 12)
+v.text:SetPoint("CENTER")
+v.text:SetText("|cffC41F3BDuffedUI|r ".. D.version)
+v.text2:SetPoint("BOTTOM", 0, 2)
+v.text2:SetText("by |cffC41F3BMerith - liquidbase|r, website at |cffC41F3Bwww.tukui.org|r")
+v:SetScript("OnClick", function()
+	v:Hide()
+end)
+v:Hide()
+G.Install.Version = v
+
+local vicon = CreateFrame("Frame", "DuffedVersion", v)
+vicon:Size(66, 66)
+vicon:SetTemplate()
+vicon:SetPoint("RIGHT", v, "LEFT", -2, 0)
+vicon:SetFrameStrata("HIGH")
+vicon:CreateShadow("Default")
+
+vicon.bg = vicon:CreateTexture(nil, "ARTWORK")
+vicon.bg:Point("TOPLEFT", 2, -2)
+vicon.bg:Point("BOTTOMRIGHT", -2, 2)
+vicon.bg:SetTexture(C["media"].duffed)
+
+local f = CreateFrame("Frame", "DuffedUIInstallFrame", UIParent)
+f:SetSize(400, 400)
+f:SetPoint("CENTER")
+f:SetTemplate("Transparent")
+f:CreateShadow("Default")
+f:SetFrameStrata("HIGH")
+f:Hide()
+G.Install.Frame = f
+
+local viconl = CreateFrame("Frame", "DuffedVersion", f)
+viconl:SetTemplate()
+viconl:Size(64, 64)
+viconl:SetPoint("BOTTOMRIGHT", f, "TOPRIGHT", 0, 2)
+viconl:SetFrameStrata("HIGH")
+viconl:CreateShadow("Default")
+
+viconl.bg = viconl:CreateTexture(nil, "ARTWORK")
+viconl.bg:Point("TOPLEFT", 2, -2)
+viconl.bg:Point("BOTTOMRIGHT", -2, 2)
+viconl.bg:SetTexture(C["media"].duffed)
+
+local viconr = CreateFrame("Frame", "DuffedVersion", f)
+viconr:SetTemplate()
+viconr:Size(64, 64)
+viconr:SetPoint("BOTTOMLEFT", f, "TOPLEFT", 0, 2)
+viconr:SetFrameStrata("HIGH")
+viconr:CreateShadow("Default")
+
+viconr.bg = viconr:CreateTexture(nil, "ARTWORK")
+viconr.bg:Point("TOPLEFT", 2, -2)
+viconr.bg:Point("BOTTOMRIGHT", -2, 2)
+viconr.bg:SetTexture(C["media"].duffed)
+
+local title = CreateFrame("Frame", "DuffedUIInstallTitle", f)
+title:SetTemplate("Transparent")
+title:Size(f:GetWidth() - 130, 30)
+title:SetPoint("BOTTOM", f, "TOP", 0, 2)
+title:SetFrameStrata("HIGH")
+title:CreateShadow("Default")
+
+local name = title:CreateFontString(nil, "OVERLAY")
+name:SetFont( C["media"].font, 16)
+name:SetPoint("CENTER", title, 0, 0)
+name:SetText("|cffc41f3bDuffedUI|r " .. D.version)
+
+local sb = CreateFrame("StatusBar", nil, f)
+sb:SetStatusBarTexture(C["media"].normTex)
+sb:SetPoint("BOTTOM", f, "BOTTOM", 0, 60)
+sb:SetHeight(20)
+sb:SetWidth(f:GetWidth() - 44)
+sb:SetFrameStrata("HIGH")
+sb:SetFrameLevel(6)
+sb:Hide()
+G.Install.StatusBar = sb
+
+local sbd = CreateFrame("Frame", nil, sb)
+sbd:SetTemplate("Default")
+sbd:SetPoint("TOPLEFT", sb, -2, 2)
+sbd:SetPoint("BOTTOMRIGHT", sb, 2, -2)
+sbd:SetFrameStrata("HIGH")
+sbd:SetFrameLevel(5)
+G.Install.StatusBar.Backdrop = sdb
+
+local header = f:CreateFontString(nil, "OVERLAY")
+header:SetFont(C["media"].font, 16, "THINOUTLINE")
+header:SetPoint("TOP", f, "TOP", 0, -20)
+G.Install.Frame.Header = header
+
+local text1 = f:CreateFontString(nil, "OVERLAY")
+text1:SetJustifyH("LEFT")
+text1:SetFont(C["media"].font, 12)
+text1:SetWidth(f:GetWidth()-40)
+text1:SetPoint("TOPLEFT", f, "TOPLEFT", 20, -60)
+G.Install.Frame.Text1 = text1
+
+local text2 = f:CreateFontString(nil, "OVERLAY")
+text2:SetJustifyH("LEFT")
+text2:SetFont(C["media"].font, 12)
+text2:SetWidth(f:GetWidth()-40)
+text2:SetPoint("TOPLEFT", text1, "BOTTOMLEFT", 0, -20)
+G.Install.Frame.Text2 = text2
+
+local text3 = f:CreateFontString(nil, "OVERLAY")
+text3:SetJustifyH("LEFT")
+text3:SetFont(C["media"].font, 12)
+text3:SetWidth(f:GetWidth()-40)
+text3:SetPoint("TOPLEFT", text2, "BOTTOMLEFT", 0, -20)
+G.Install.Frame.Text3 = text3
+
+local text4 = f:CreateFontString(nil, "OVERLAY")
+text4:SetJustifyH("LEFT")
+text4:SetFont(C["media"].font, 12)
+text4:SetWidth(f:GetWidth()-40)
+text4:SetPoint("TOPLEFT", text3, "BOTTOMLEFT", 0, -20)
+G.Install.Frame.Text4 = text4
+
+local credits = f:CreateFontString(nil, "OVERLAY")
+credits:SetFont(C["media"].font, 12, "THINOUTLINE")
+credits:SetText("")
+credits:SetPoint("BOTTOM", f, "BOTTOM", 0, 4)
+G.Install.Frame.Credits = credits
+
+local sbt = sb:CreateFontString(nil, "OVERLAY")
+sbt:SetFont(C["media"].font, 13, "THINOUTLINE")
+sbt:SetPoint("CENTER", sb)
+G.Install.StatusBar.Text = sbt
+
+local option1 = CreateFrame("Button", "DuffedUIInstallOption1", f)
+option1:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 20, 20)
+option1:SetSize(128, 25)
+option1:SetTemplate("Default")
+option1:FontString("Text", C["media"].font, 12)
+option1.Text:SetPoint("CENTER")
+G.Install.Option1 = option1
+
+local option2 = CreateFrame("Button", "DuffedUIInstallOption2", f)
+option2:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -20, 20)
+option2:SetSize(128, 25)
+option2:SetTemplate("Default")
+option2:FontString("Text", C["media"].font, 12)
+option2.Text:SetPoint("CENTER")
+G.Install.Option2 = option2
+
+local close = CreateFrame("Button", "DuffedUIInstallCloseButton", f, "UIPanelCloseButton")
+close:SetPoint("TOPRIGHT", f, "TOPRIGHT")
+close:SkinCloseButton()
+close:SetScript("OnClick", function()
+	f:Hide()
+end)
+G.Install.Close = close
+
+local step4 = function()
+	DuffedUIDataPerChar.install = true
+	sb:SetValue(4)
+	PlaySoundFile("Sound\\interface\\LevelUp.wav")
+	header:SetText(L.install_header_11)
+	text1:SetText(L.install_step_4_line_1)
+	text2:SetText(L.install_step_4_line_2)
+	text3:SetText(L.install_step_4_line_3)
+	text4:SetText(L.install_step_4_line_4)
+	sbt:SetText("4/4")
+	option1:Hide()
+	option2.Text:SetText(L.install_button_finish)
+	option2:SetScript("OnClick", function()
+		ReloadUI()
+	end)
+end
+
+local step3 = function()
+	if not option2:IsShown() then option2:Show() end	
+	sb:SetValue(3)
+	header:SetText(L.install_header_10)
+	text1:SetText(L.install_step_3_line_1)
+	text2:SetText(L.install_step_3_line_2)
+	text3:SetText(L.install_step_3_line_3)
+	text4:SetText(L.install_step_3_line_4)
+	sbt:SetText("3/4")
+	option1:SetScript("OnClick", step4)
+	option2:SetScript("OnClick", function()
+		positionsetup()
+		step4()
+	end)
+end
+
+local step2 = function()
+	sb:SetValue(2)
+	header:SetText(L.install_header_9)
+	sbt:SetText("2/4")
+	if IsAddOnLoaded("Prat") or IsAddOnLoaded("Chatter") then 
+		text1:SetText(L.install_step_2_line_0)
+		text2:SetText("")
+		text3:SetText("")
+		text4:SetText("")
+		option2:Hide()
+	else
+		text1:SetText(L.install_step_2_line_1)
+		text2:SetText(L.install_step_2_line_2)
+		text3:SetText(L.install_step_2_line_3)
+		text4:SetText(L.install_step_2_line_4)
+		option2:SetScript("OnClick", function()
+			D.ChatSetup()
+			step3()
+		end)
+	end	
+	option1:SetScript("OnClick", step3)
+end
+
+local step1 = function()
+	close:Hide()
+	sb:SetMinMaxValues(0, 4)
+	sb:Show()
+	sb:SetValue(1)
+	sb:SetStatusBarColor(.26, 1, .22)
+	header:SetText(L.install_header_8)
+	text1:SetText(L.install_step_1_line_1)
+	text2:SetText(L.install_step_1_line_2)
+	text3:SetText(L.install_step_1_line_3)
+	text4:SetText(L.install_step_1_line_4)
+	sbt:SetText("1/4")
+
+	option1:Show()
+
+	option1.Text:SetText(L.install_button_skip)
+	option2.Text:SetText(L.install_button_continue)
+
+	option1:SetScript("OnClick", step2)
+	option2:SetScript("OnClick", function()
+		cvarsetup()
+		step2()
+	end)
+	
+	-- this is really essential, whatever if skipped or not
+	SetActionBarToggles(1, 1, 1, 1, 0)
+	SetCVar("alwaysShowActionBars", 0)
+end
+
+local tut6 = function()
+	sb:SetValue(6)
+	header:SetText(L.install_header_7)
+	text1:SetText(L.tutorial_step_6_line_1)
+	text2:SetText(L.tutorial_step_6_line_2)
+	text3:SetText(L.tutorial_step_6_line_3)
+	text4:SetText(L.tutorial_step_6_line_4)
+
+	sbt:SetText("6/6")
+
+	option1:Show()
+
+	option1.Text:SetText(L.install_button_close)
+	option2.Text:SetText(L.install_button_install)
+
+	option1:SetScript("OnClick", function()
+		f:Hide()
+	end)
+	option2:SetScript("OnClick", step1)
+end
+
+local tut5 = function()
+	sb:SetValue(5)
+	header:SetText(L.install_header_6)
+	text1:SetText(L.tutorial_step_5_line_1)
+	text2:SetText(L.tutorial_step_5_line_2)
+	text3:SetText(L.tutorial_step_5_line_3)
+	text4:SetText(L.tutorial_step_5_line_4)
+
+	sbt:SetText("5/6")
+
+	option2:SetScript("OnClick", tut6)
+end
+
+local tut4 = function()
+	sb:SetValue(4)
+	header:SetText(L.install_header_5)
+	text1:SetText(L.tutorial_step_4_line_1)
+	text2:SetText(L.tutorial_step_4_line_2)
+	text3:SetText(L.tutorial_step_4_line_3)
+	text4:SetText(L.tutorial_step_4_line_4)
+
+	sbt:SetText("4/6")
+
+	option2:SetScript("OnClick", tut5)
+end
+
+local tut3 = function()
+	sb:SetValue(3)
+	header:SetText(L.install_header_4)
+	text1:SetText(L.tutorial_step_3_line_1)
+	text2:SetText(L.tutorial_step_3_line_2)
+	text3:SetText(L.tutorial_step_3_line_3)
+	text4:SetText(L.tutorial_step_3_line_4)
+
+	sbt:SetText("3/6")
+
+	option2:SetScript("OnClick", tut4)
+end
+
+local tut2 = function()
+	sb:SetValue(2)
+	header:SetText(L.install_header_3)
+	text1:SetText(L.tutorial_step_2_line_1)
+	text2:SetText(L.tutorial_step_2_line_2)
+	text3:SetText(L.tutorial_step_2_line_3)
+	text4:SetText(L.tutorial_step_2_line_4)
+
+	sbt:SetText("2/6")
+
+	option2:SetScript("OnClick", tut3)
+end
+
+local tut1 = function()
+	sb:SetMinMaxValues(0, 6)
+	sb:Show()
+	close:Show()
+	sb:SetValue(1)
+	sb:SetStatusBarColor(0, 0.76, 1)
+	header:SetText(L.install_header_2)
+	text1:SetText(L.tutorial_step_1_line_1)
+	text2:SetText(L.tutorial_step_1_line_2)
+	text3:SetText(L.tutorial_step_1_line_3)
+	text4:SetText(L.tutorial_step_1_line_4)
+	sbt:SetText("1/6")
+	option1:Hide()
+	option2.Text:SetText(L.install_button_next)
+	option2:SetScript("OnClick", tut2)
+end
+
+-- this install DuffedUI with default settings.
+local function install()
+	f:Show()
+	sb:Hide()
+	option1:Show()
+	option2:Show()
+	close:Show()
+	header:SetText(L.install_header_1)
+	text1:SetText(L.install_init_line_1)
+	text2:SetText(L.install_init_line_2)
+	text3:SetText(L.install_init_line_3)
+	text4:SetText(L.install_init_line_4)
+
+	option1.Text:SetText(L.install_button_tutorial)
+	option2.Text:SetText(L.install_button_install)
+
+	option1:SetScript("OnClick", tut1)
+	option2:SetScript("OnClick", step1)			
+end
+
+------------------------------------------------------------------------
+--	On login function, look for some infos!
+------------------------------------------------------------------------
+
+local DuffedUIOnLogon = CreateFrame("Frame")
+DuffedUIOnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
+DuffedUIOnLogon:SetScript("OnEvent", function(self, event)
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	
+	-- create empty saved vars if they doesn't exist.
+	if (DuffedUIData == nil) then DuffedUIData = {} end
+	if (DuffedUIDataPerChar == nil) then DuffedUIDataPerChar = {} end
+
+	if D.screenwidth < 1200 then
+			SetCVar("useUiScale", 0)
+			D.ShowPopup("DUFFEDUIDISABLE_UI")
+	else		
+		-- install default if we never ran DuffedUI on this character.
+		if not DuffedUIDataPerChar.install then			
+			install()
+		end
+	end
+	
+	if (IsAddOnLoaded("DuffedUI_Raid") and IsAddOnLoaded("DuffedUI_Raid_Healing")) then
+		D.ShowPopup("DUFFEDUIDISABLE_RAID")
+	end
+end)
+
+SLASH_TUTORIAL1 = "/uihelp"
+SLASH_TUTORIAL2 = "/tutorial"
+SlashCmdList.TUTORIAL = function() f:Show() tut1() end
+
+SLASH_VERSION1 = "/version"
+SlashCmdList.VERSION = function() if v:IsShown() then v:Hide() else v:Show() end end
+
+SLASH_CONFIGURE1 = "/install"
+SlashCmdList.CONFIGURE = install
+
+SLASH_RESETUI1 = "/reset"
+SlashCmdList.RESETUI = function() f:Show() step1() end
+
+D.CreatePopup["DUFFEDUIDISABLE_UI"] = {
+	question = L.popup_disableui,
+	answer1 = ACCEPT,
+	answer2 = CANCEL,
+	function1 = function() DisableAddOn("DuffedUI") ReloadUI() end,
+}
+
+D.CreatePopup["DUFFEDUIDISABLE_RAID"] = {
+	question = "Choose your favorite Raidlayout:",
+	answer1 = "DPS, Tank",
+	answer2 = "Healing",
+	function1 = function() DisableAddOn("DuffedUI_Raid_Healing") EnableAddOn("DuffedUI_Raid") ReloadUI() end,
+	function2 = function() EnableAddOn("DuffedUI_Raid_Healing") DisableAddOn("DuffedUI_Raid") ReloadUI() end,
+}

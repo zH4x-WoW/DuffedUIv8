@@ -1,13 +1,10 @@
-local D, C, L = select(2, ...):unpack()
-if (not C["actionbars"].Enable) then return end
-
+local D, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 -- keybind feature
-local Popups = D["Popups"]
 local bind = CreateFrame("Frame", "DuffedUIHoverBind", UIParent)
 
 -- SLASH COMMAND
 SlashCmdList.MOUSEOVERBIND = function()
-	if InCombatLockdown() then print(L.Bind.Combat) return end
+	if InCombatLockdown() then print(L.bind_combat) return end
 	if not bind.loaded then
 		local find = string.find
 		local _G = getfenv(0)
@@ -221,22 +218,22 @@ SlashCmdList.MOUSEOVERBIND = function()
 		function bind:Deactivate(save)
 			if save then
 				SaveBindings(2)
-				print(L.Bind.Saved)
+				print(L.bind_saved)
 			else
 				LoadBindings(2)
-				print(L.Bind.Discard)
+				print(L.bind_discard)
 			end
 			self.enabled = false
 			self:HideFrame()
 			self:UnregisterEvent("PLAYER_REGEN_DISABLED")
 		end
 
-		Popups.Popup["DUFFEDUI_KEYBIND_MODE"] = {
-			Question = L.Bind.Instruct,
-			Answer1 = L.Bind.Save,
-			Answer2 = L.Bind.DiscardBind,
-			Function1 = function() bind:Deactivate(true) end,
-			Function2 = function() bind:Deactivate(false) end,
+		D.CreatePopup["DUFFEDUI_KEYBIND_MODE"] = {
+			question = L.bind_instruct,
+			answer1 = L.bind_save,
+			answer2 = L.bind_discardbind,
+			function1 = function() bind:Deactivate(true) end,
+			function2 = function() bind:Deactivate(false) end,
 		}
 
 		-- REGISTERING
@@ -288,8 +285,8 @@ SlashCmdList.MOUSEOVERBIND = function()
 	end
 	if not bind.enabled then
 		bind:Activate()
-		Popups.ShowPopup("DUFFEDUI_KEYBIND_MODE")
+		D.ShowPopup("DUFFEDUI_KEYBIND_MODE")
 	end
 end
 SLASH_MOUSEOVERBIND1 = "/bindkey"
-SLASH_MOUSEOVERBIND2 = "/kb"
+if IsAddOnLoaded("FriendsMenuXP") then SLASH_MOUSEOVERBIND2 = "/hb" else SLASH_MOUSEOVERBIND2 = "/kb" end

@@ -1,115 +1,115 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...)) 
+if not C["actionbar"].enable == true then return end
 
-local _G = _G
-local DuffedUIActionBars = D["ActionBars"]
-local Panels = D["Panels"]
-local Num = NUM_ACTIONBAR_BUTTONS
-local MainMenuBar_OnEvent = MainMenuBar_OnEvent
-local Size = C["actionbars"].NormalButtonSize
-local PetSize = C["actionbars"].PetButtonSize
-local Spacing = C["actionbars"].ButtonSpacing
+---------------------------------------------------------------------------
+-- Setup Main Action Bar.
+-- Now used for stances, Bonus, Vehicle at the same time.
+-- Since t12, it's also working for druid cat stealth. (a lot requested)
+---------------------------------------------------------------------------
 
-function DuffedUIActionBars:CreateBar1()
-	local ActionBar1 = Panels.ActionBar1
-	local Warrior, Rogue, Warlock = "", "", ""
+local bar = DuffedUIBar1
 
-	if C["actionbars"].OwnWarriorStanceBar then
-		Warrior = "[stance:1] 7; [stance:2] 8; [stance:3] 9;"
+-- warrior custom paging
+local warrior = ""
+if C["actionbar"].ownwarstancebar then warrior = "[stance:1] 7; [stance:2] 8; [stance:3] 9;" end
+
+-- rogue custom paging
+local rogue = ""
+if C["actionbar"].ownshdbar then rogue = "[stance:3] 10; " end
+
+-- warlock custom paging
+local warlock = ""
+if C["actionbar"].ownmetabar then warlock = "[stance:1] 10; " end
+
+local Page = {
+	["DRUID"] = "[bonusbar:1,nostealth] 7; [bonusbar:1,stealth] 8; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;",
+	["WARRIOR"] = warrior,
+	["PRIEST"] = "[bonusbar:1] 7;",
+	["ROGUE"] = rogue.."[bonusbar:1] 7;",
+	["WARLOCK"] = warlock,
+	["MONK"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;",
+	["DEFAULT"] = "[vehicleui:12] 12; [possessbar] 12; [overridebar] 14; [shapeshift] 13; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6;",
+}
+
+local function GetBar()
+	local condition = Page["DEFAULT"]
+	local class = D.myclass
+	local page = Page[class]
+	if page then
+		condition = condition.." "..page
 	end
 
-	if C["actionbars"].OwnShadowDanceBar then
-		Rogue = "[stance:3] 10; "
-	end
+	condition = condition.." [form] 1; 1"
 
-	if C["actionbars"].OwnMetamorphosisBar then
-		Warlock = "[stance:1] 10; "
-	end
+	return condition
+end
 
-	ActionBar1.Page = {
-		["DRUID"] = "[bonusbar:1,nostealth] 7; [bonusbar:1,stealth] 8; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;",
-		["WARRIOR"] = Warrior,
-		["PRIEST"] = "[bonusbar:1] 7;",
-		["ROGUE"] = Rogue .. "[bonusbar:1] 7;",
-		["WARLOCK"] = Warlock,
-		["MONK"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;",
-		["DEFAULT"] = "[vehicleui:12] 12; [possessbar] 12; [overridebar] 14; [shapeshift] 13; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6;",
-	}
+bar:RegisterEvent("PLAYER_LOGIN")
+bar:RegisterEvent("PLAYER_ENTERING_WORLD")
+bar:RegisterEvent("KNOWN_CURRENCY_TYPES_UPDATE")
+bar:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
+bar:RegisterEvent("BAG_UPDATE")
+bar:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
+bar:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
+bar:SetScript("OnEvent", function(self, event, unit, ...)
+	if event == "PLAYER_LOGIN" or event == "ACTIVE_TALENT_GROUP_CHANGED" then
+		local button
+		for i = 1, NUM_ACTIONBAR_BUTTONS do
+			button = _G["ActionButton"..i]
+			self:SetFrameRef("ActionButton"..i, button)
+		end	
 
-	function ActionBar1:GetBar()
-		local Condition = ActionBar1.Page["DEFAULT"]
-		local Class = select(2, UnitClass("player"))
-		local Page = ActionBar1.Page[Class]
-		
-		if Page then
-			Condition = Condition .. " " .. Page
-		end
-		
-		Condition = Condition .. " [form] 1; 1"
-
-		return Condition
-	end
-
-	ActionBar1:RegisterEvent("PLAYER_LOGIN")
-	ActionBar1:RegisterEvent("PLAYER_ENTERING_WORLD")
-	ActionBar1:RegisterEvent("KNOWN_CURRENCY_TYPES_UPDATE")
-	ActionBar1:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
-	ActionBar1:RegisterEvent("BAG_UPDATE")
-	ActionBar1:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
-	ActionBar1:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
-	ActionBar1:SetScript("OnEvent", function(self, event, unit, ...)
-		local Button
-			
-		if (event == "PLAYER_LOGIN" or event == "ACTIVE_TALENT_GROUP_CHANGED") then		
-			for i = 1, Num do
-				Button = _G["ActionButton"..i]
-				self:SetFrameRef("ActionButton"..i, Button)
-			end	
-
-			self:Execute([[
-				Button = table.new()
-				for i = 1, 12 do
-					table.insert(Button, self:GetFrameRef("ActionButton"..i))
-				end
-			]])
-
-			self:SetAttribute("_onstate-page", [[ 
-				if HasTempShapeshiftActionBar() then
-					newstate = GetTempShapeshiftBarIndex() or newstate
-				end
-				
-				for i, Button in ipairs(Button) do
-					Button:SetAttribute("actionpage", tonumber(newstate))
-				end
-			]])
-			
-			RegisterStateDriver(self, "page", self.GetBar())	
-		elseif (event == "PLAYER_ENTERING_WORLD") then
-			for i = 1, Num do
-				Button = _G["ActionButton"..i]
-				Button:Size(Size)
-				Button:ClearAllPoints()
-				Button:SetParent(self)
-				Button:SetFrameStrata("BACKGROUND")
-				Button:SetFrameLevel(15)
-				if (i == 1) then
-					Button:SetPoint("BOTTOMLEFT", Spacing, Spacing)
-				else
-					local Previous = _G["ActionButton"..i-1]
-					Button:SetPoint("LEFT", Previous, "RIGHT", Spacing, 0)
-				end
+		self:Execute([[
+			buttons = table.new()
+			for i = 1, 12 do
+				table.insert(buttons, self:GetFrameRef("ActionButton"..i))
 			end
-		elseif (event == "UPDATE_VEHICLE_ACTIONBAR" or event == "UPDATE_OVERRIDE_ACTIONBAR") then
-			if HasVehicleActionBar() or HasOverrideActionBar() then
+		]])
 
+		self:SetAttribute("_onstate-page", [[
+			if HasTempShapeshiftActionBar() then
+				newstate = GetTempShapeshiftBarIndex() or newstate
+			end
+
+			for i, button in ipairs(buttons) do
+				button:SetAttribute("actionpage", tonumber(newstate))
+			end
+		]])
+		
+		RegisterStateDriver(self, "page", GetBar())	
+	elseif event == "PLAYER_ENTERING_WORLD" then
+		local button
+		for i = 1, 12 do
+			button = _G["ActionButton"..i]
+			button:SetSize(D.buttonsize, D.buttonsize)
+			button:ClearAllPoints()
+			button:SetParent(bar)
+			button:SetFrameStrata("BACKGROUND")
+			button:SetFrameLevel(15)
+			if i == 1 then
+				button:SetPoint("BOTTOMLEFT", D.buttonspacing, D.buttonspacing)
 			else
-
+				local previous = _G["ActionButton"..i-1]
+				button:SetPoint("LEFT", previous, "RIGHT", D.buttonspacing, 0)
+			end
+		end
+	elseif event == "UPDATE_VEHICLE_ACTIONBAR" or event == "UPDATE_OVERRIDE_ACTIONBAR" then
+		if HasVehicleActionBar() or HasOverrideActionBar() then
+			if not self.inVehicle then
+				DuffedUIBar2Button:Hide()
+				DuffedUIBar3Button:Hide()
+				DuffedUIBar3Button2:Hide()
+				self.inVehicle = true
 			end
 		else
-			MainMenuBar_OnEvent(self, event, ...)
+			if self.inVehicle then
+				DuffedUIBar2Button:Show()
+				DuffedUIBar3Button:Show()
+				DuffedUIBar3Button2:Show()
+				self.inVehicle = false
+			end
 		end
-	end)
-	for i = 1, Num do
-		local Button = _G["ActionButton"..i]
-		ActionBar1["Button"..i] = Button
+	else
+		MainMenuBar_OnEvent(self, event, ...)
 	end
-end
+end)

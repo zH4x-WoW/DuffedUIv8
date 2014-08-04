@@ -1,5 +1,5 @@
-local D, C, L = select(2, ...):unpack()
-if C["tooltips"].Enable ~= true then return end
+local D, C, L, G = unpack(select(2, ...)) 
+if C["tooltip"].enable ~= true then return end
 
 local function ClearItemID(self)
 	self.DuffedUIItemTooltip = nil
@@ -18,7 +18,7 @@ local function ShowItemID(self)
 		end
 		
 		if DuffedUIItemTooltip.count and num > 1 then
-			right = "|cFFCA3C3C"..L.Tooltips.Count.."|r "..num
+			right = "|cFFCA3C3C"..L.tooltip_count.."|r "..num
 		end
 				
 		self:AddLine(" ")

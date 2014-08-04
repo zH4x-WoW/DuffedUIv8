@@ -1,29 +1,38 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
+if not C["actionbar"].enable then return end
 
-local DuffedUIActionBars = D["ActionBars"]
+-- create the holder to allow moving extra button
+local holder = CreateFrame("Frame", "DuffedUIExtraActionBarFrameHolder", UIParent)
+holder:Size(160, 80)
+holder:SetPoint("BOTTOM", 0, 250)
+holder:SetMovable(true)
+holder:SetTemplate("Default")
+holder:SetBackdropBorderColor(1, 0, 0)
+holder:SetAlpha(0)
+holder.text = D.SetFontString(holder, C["media"].uffont, 12)
+holder.text:SetPoint("CENTER")
+holder.text:SetText(L.move_extrabutton)
+holder.text:Hide()
+tinsert(D.AllowFrameMoving, DuffedUIExtraActionBarFrameHolder)
 
-function DuffedUIActionBars:SetUpExtraActionButton()
-	local Holder = CreateFrame("Frame", "DuffedUIExtraActionBarFrameHolder", UIParent)
-	Holder:Size(160, 80)
-	Holder:SetPoint("BOTTOM", 0, 240)
-	Holder:SetMovable(true)
-	Holder:SetTemplate("Default")
-	Holder:SetBackdropBorderColor(1,0,0)
-	Holder:SetAlpha(0)
+ExtraActionBarFrame:SetParent(UIParent)
+ExtraActionBarFrame:ClearAllPoints()
+ExtraActionBarFrame:SetPoint("CENTER", holder, "CENTER", 0, 0)
+ExtraActionBarFrame.ignoreFramePositionManager = true
 
-	Holder.Text = Holder:CreateFontString(nil, "OVERLAY")
-	Holder.Text:SetFont(C["medias"].Font, 12)
-	Holder.Text:SetPoint("CENTER")
-	Holder.Text:SetText(L.Movers.Extrabutton)
-	Holder.Text:Hide()
+G.ActionBars.BarExtra = ExtraActionBarFrame
+G.ActionBars.BarExtra.Button1 = ExtraActionButton1
+G.ActionBars.BarExtra.Holder = holder
 
-	ExtraActionBarFrame:SetParent(UIParent)
-	ExtraActionBarFrame:ClearAllPoints()
-	ExtraActionBarFrame:SetPoint("CENTER", Holder, "CENTER", 0, 0)
-	ExtraActionBarFrame.ignoreFramePositionManager = true
-
-	ExtraActionButton1.style:SetTexture(nil)
-	ExtraActionButton1.style.SetTexture = function() end
+-- hook the texture, idea by roth via WoWInterface forums
+local button = ExtraActionButton1
+local icon = button.icon
+local texture = button.style
+local disableTexture = function(style, texture)
+	-- look like sometime the texture path is set to capital letter instead of lower-case
+	if string.sub(texture, 1, 9) == "Interface" or string.sub(texture, 1, 9) == "INTERFACE" then
+		style:SetTexture("")
+	end
 end
-
-DuffedUIActionBars:SetUpExtraActionButton()
+button.style:SetTexture("")
+hooksecurefunc(texture, "SetTexture", disableTexture)

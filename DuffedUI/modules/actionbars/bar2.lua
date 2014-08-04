@@ -1,33 +1,21 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...)) 
+if not C["actionbar"].enable == true then return end
 
-local DuffedUIActionBars = D["ActionBars"]
-local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
-local Size = C["actionbars"].NormalButtonSize
-local Spacing = C["actionbars"].ButtonSpacing
-local MultiBarBottomLeft = MultiBarBottomLeft
+local bar = DuffedUIBar2
+MultiBarBottomLeft:SetParent(bar)
 
-function DuffedUIActionBars:CreateBar2()
-	local ActionBar2 = D.Panels.ActionBar2
+-- setup the bar
+for i = 1, 12 do
+	local b = _G["MultiBarBottomLeftButton" .. i]
+	local b2 = _G["MultiBarBottomLeftButton" .. i - 1]
+	b:SetSize(D.buttonsize, D.buttonsize)
+	b:ClearAllPoints()
+	b:SetFrameStrata("BACKGROUND")
+	b:SetFrameLevel(15)
 	
-	MultiBarBottomLeft:SetParent(ActionBar2)
-	
-	for i = 1, NUM_ACTIONBAR_BUTTONS do
-		local Button = _G["MultiBarBottomLeftButton"..i]
-		local PreviousButton = _G["MultiBarBottomLeftButton"..i-1]
-		
-		Button:Size(Size)
-		Button:ClearAllPoints()
-		Button:SetFrameStrata("BACKGROUND")
-		Button:SetFrameLevel(15)
-		
-		if (i == 1) then
-			Button:SetPoint("TOPLEFT", ActionBar2, Spacing, -Spacing)
-		else
-			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
-		end
-		
-		ActionBar2["Button"..i] = Button
+	if i == 1 then
+		b:SetPoint("BOTTOMLEFT", bar, D.buttonspacing, D.buttonspacing)
+	else
+		b:SetPoint("LEFT", b2, "RIGHT", D.buttonspacing, 0)
 	end
-
-	RegisterStateDriver(ActionBar2, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
 end

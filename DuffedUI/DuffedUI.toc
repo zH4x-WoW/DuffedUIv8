@@ -1,19 +1,17 @@
-﻿## Interface: 60000
-## Author: Merith @ ZdC EU, Tukz, Hydra
-## Version: 8.0010
+## Interface: 60000
+## Author: Merith @ Zirkel des Cenarius EU
+## Version: 8.0011
 ## Title: |cffC41F3BDuffedUI|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: DuffedUIData
 ## SavedVariablesPerCharacter: DuffedUIDataPerChar, ClickCast, ImprovedCurrency
-## OptionalDeps: DuffedUI_Config, Clique
-## X-oUF: DuffedUIUnitFrameFramework
-## Website: http://www.duffed.net
+## OptionalDeps: DuffedUI_ConfigUI
+## X-oUF: oUFDuffedUI
+## Website: http://www.tukui.org
+## X-Tukui-Project-Folders: DuffedUI, DuffedUI_ConfigUI, DuffedUI_Raid, DuffedUI_Raid_Healing
 
-core\init.lua
-config\init.xml
-libs\init.xml
-medias\medias.lua
-locales\init.xml
-core\init.xml
-modules\init.xml
-modules\plugins\init.xml
+DuffedUI.xml
+ 
+ 
+## X-Tukui-ProjectID: 114
+## X-Tukui-ProjectFolders: DuffedUI_Raid, DuffedUI_Raid_Healing, DuffedUI_ConfigUI, DuffedUI

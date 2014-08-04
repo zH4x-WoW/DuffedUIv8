@@ -1,9 +1,9 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...)) 
 ------------------------------------------------------------------------
 -- Auto accept invite
 ------------------------------------------------------------------------
 
-if C["misc"].AutoInvite then
+if C["invite"].autoaccept then
 	local CheckFriend = function(name)
 		for i = 1, GetNumFriends() do
 			if GetFriendInfo(i) == name then
@@ -72,18 +72,19 @@ autoinvite:SetScript("OnEvent", function(self, event, arg1, arg2, ...)
 		end
 	end
 end)
+G.Misc.AutoInvite = autoinvite
 
 function SlashCmdList.AUTOINVITE(msg, editbox)
 	if msg == "off" then
 		ainvenabled = false
-		print(L.Help.AutoInviteDisable)
+		print(L.core_autoinv_disable)
 	elseif msg == "" then
 		ainvenabled = true
-		print(L.Help.AutoInviteEnable)
+		print(L.core_autoinv_enable)
 		ainvkeyword = "invite"
 	else
 		ainvenabled = true
-		print(L.Help.AutoInviteAlt .. msg)
+		print(L.core_autoinv_enable_c .. msg)
 		ainvkeyword = msg
 	end
 end

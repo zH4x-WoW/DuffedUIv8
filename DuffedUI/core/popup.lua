@@ -1,135 +1,153 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
-local DuffedUIPopups = CreateFrame("Frame")
-local ACCEPT, CANCEL = ACCEPT, CANCEL
-local ChatFontNormal = ChatFontNormal
+D.CreatePopup = {}
+local frame = {}
+local total = 4
 
-DuffedUIPopups.Popup = {}
-DuffedUIPopups.Frames = {}
-DuffedUIPopups.Total = 4
-
-function DuffedUIPopups:HidePopup()
-	local Popup = self:GetParent()
-	Popup:Hide()
+local function Hide(self)
+	local popup = self:GetParent()
+	popup:Hide()
 end
 
-function DuffedUIPopups:CreatePopups()
-	for i = 1, DuffedUIPopups.Total do
-		local Frames = DuffedUIPopups.Frames
-		
-		Frames[i] = CreateFrame("Frame", nil, UIParent)
-		Frames[i]:SetSize(400, 60)
-		Frames[i]:SetFrameLevel(3)
-		Frames[i]:CreateShadow()
-		Frames[i]:SetTemplate("Transparent")
-		Frames[i]:Hide()
+-- Create the popups
+for i = 1, total do
+	frame[i] = CreateFrame("Frame", "DuffedUIPopupDialog"..i, UIParent)
+	frame[i]:SetSize(400, 60)
+	frame[i]:SetFrameLevel(3)
+	frame[i]:CreateShadow("Default")
+	frame[i]:SetTemplate("Default")
+	frame[i]:Hide()
 
-		Frames[i].Text = CreateFrame("MessageFrame", nil, Frames[i])
-		Frames[i].Text:SetPoint("CENTER")
-		Frames[i].Text:SetSize(380, 40)
-		Frames[i].Text:SetFont(C["medias"].Font, 12)
-		Frames[i].Text:SetInsertMode("TOP")
-		Frames[i].Text:SetFading(0)
-		Frames[i].Text:AddMessage("")
+	frame[i].Text = CreateFrame("MessageFrame", nil, frame[i])
+	frame[i].Text:SetPoint("CENTER")
+	frame[i].Text:SetSize(380, 40)
+	frame[i].Text:SetFont(C["media"].font, 12)
+	frame[i].Text:SetInsertMode("TOP")
+	frame[i].Text:SetFading(0)
+	frame[i].Text:AddMessage("")
 
-		Frames[i].Button1 = CreateFrame("Button", nil, Frames[i])
-		Frames[i].Button1:SetPoint("TOPLEFT", Frames[i], "BOTTOMLEFT", 0, -2)
-		Frames[i].Button1:SetSize(199, 23)
-		Frames[i].Button1:SetTemplate("Transparent")
-		Frames[i].Button1:CreateShadow()
-		Frames[i].Button1:FontString("Text", C["medias"].Font, 12)
-		Frames[i].Button1.Text:SetPoint("CENTER")
-		Frames[i].Button1.Text:SetText(ACCEPT)
-		Frames[i].Button1:SetScript("OnClick", DuffedUIPopups.HidePopup)
-		Frames[i].Button1:HookScript("OnClick", DuffedUIPopups.HidePopup)
-		--Frames[i].Button1:SkinButton()
+	frame[i].button1 = CreateFrame("Button", "DuffedUIPopupDialogButtonAccept"..i, frame[i])
+	frame[i].button1:SetPoint("TOPLEFT", frame[i], "BOTTOMLEFT", 0, -2)
+	frame[i].button1:SetSize(199, 23)
+	frame[i].button1:SetTemplate("Default")
+	frame[i].button1:CreateShadow("Default")
+	frame[i].button1:FontString("Text", C["media"].font, 12)
+	frame[i].button1.Text:SetPoint("CENTER")
+	frame[i].button1.Text:SetText(ACCEPT)
+	frame[i].button1:SetScript("OnClick", Hide)
+	frame[i].button1:HookScript("OnClick", Hide)
+	frame[i].button1:SkinButton()
 
-		Frames[i].Button2 = CreateFrame("Button", nil, Frames[i])
-		Frames[i].Button2:SetPoint("TOPRIGHT", Frames[i], "BOTTOMRIGHT", 0, -2)
-		Frames[i].Button2:SetSize(199, 23)
-		Frames[i].Button2:SetTemplate("Transparent")
-		Frames[i].Button2:CreateShadow("Default")
-		Frames[i].Button2:FontString("Text", C["medias"].Font, 12)
-		Frames[i].Button2.Text:SetPoint("CENTER")
-		Frames[i].Button2.Text:SetText(CANCEL)
-		Frames[i].Button2:SetScript("OnClick", DuffedUIPopups.HidePopup)
-		Frames[i].Button2:HookScript("OnClick", DuffedUIPopups.HidePopup)
-		--Frames[i].Button2:SkinButton()
-		
-		Frames[i].EditBox = CreateFrame("EditBox", nil, Frames[i])
-		Frames[i].EditBox:SetMultiLine(false)
-		Frames[i].EditBox:EnableMouse(true)
-		Frames[i].EditBox:SetAutoFocus(true)
-		Frames[i].EditBox:SetFontObject(ChatFontNormal)
-		Frames[i].EditBox:Width(380)
-		Frames[i].EditBox:Height(16)
-		Frames[i].EditBox:SetPoint("BOTTOM", Frames[i], 0, 12)
-		Frames[i].EditBox:SetScript("OnEscapePressed", function() Frames[i]:Hide() end)
-		Frames[i].EditBox:CreateBackdrop()
-		Frames[i].EditBox.Backdrop:SetPoint("TOPLEFT", -4, 4)
-		Frames[i].EditBox.Backdrop:SetPoint("BOTTOMRIGHT", 4, -4)
-		Frames[i].EditBox:Hide()
-		
-		if (i == 1) then
-			Frames[i].Anchor = CreateFrame("Frame", nil, Frames[i])
-			Frames[i].Anchor:SetSize(360, 30)
-			Frames[i].Anchor:SetPoint("BOTTOM", Frames[i], "TOP", 0, -2)
-			Frames[i].Anchor:SetTemplate("Transparent")
-			Frames[i].Anchor:SetFrameLevel(Frames[i]:GetFrameLevel() - 2)
-			Frames[i]:SetPoint("TOP", UIParent, "TOP", 0, -10)
-		else
-			local Previous = Frames[i-1]
-			Frames[i]:SetPoint("TOP", Previous, "BOTTOM", 0, -Frames[i].Button1:GetHeight() - 4)
-		end
-	end
-end
-
-function DuffedUIPopups:ShowPopup()
-	local Info = DuffedUIPopups.Popup[self]
+	frame[i].button2 = CreateFrame("Button", "DuffedUIPopupDialogButtonCancel"..i, frame[i])
+	frame[i].button2:SetPoint("TOPRIGHT", frame[i], "BOTTOMRIGHT", 0, -2)
+	frame[i].button2:SetSize(199, 23)
+	frame[i].button2:SetTemplate("Default")
+	frame[i].button2:CreateShadow("Default")
+	frame[i].button2:FontString("Text", C["media"].font, 12)
+	frame[i].button2.Text:SetPoint("CENTER")
+	frame[i].button2.Text:SetText(CANCEL)
+	frame[i].button2:SetScript("OnClick", Hide)
+	frame[i].button2:HookScript("OnClick", Hide)
+	frame[i].button2:SkinButton()
 	
-	if not Info then return end
+	frame[i].EditBox = CreateFrame("EditBox", "DuffedUIPopupDialogEditBox"..i, frame[i])
+	frame[i].EditBox:SetMultiLine(false)
+	frame[i].EditBox:EnableMouse(true)
+	frame[i].EditBox:SetAutoFocus(true)
+	frame[i].EditBox:SetFontObject(ChatFontNormal)
+	frame[i].EditBox:Width(380)
+	frame[i].EditBox:Height(16)
+	frame[i].EditBox:SetPoint("BOTTOM", frame[i], 0, 12)
+	frame[i].EditBox:SetScript("OnEscapePressed", function() frame[i]:Hide() end)
+	frame[i].EditBox:CreateBackdrop()
+	frame[i].EditBox.backdrop:SetPoint("TOPLEFT", -4, 4)
+	frame[i].EditBox.backdrop:SetPoint("BOTTOMRIGHT", 4, -4)
+	frame[i].EditBox:Hide()
+	
+	-- default position
+	if i == 1 then
+		-- create a panel which anchor popup #1 to top screen
+		frame[i].Anchor = CreateFrame("Frame", nil, frame[i])
+		frame[i].Anchor:SetSize(360, 30)
+		frame[i].Anchor:SetPoint("BOTTOM", frame[i], "TOP", 0, -2)
+		frame[i].Anchor:SetTemplate("Transparent")
+		frame[i].Anchor:SetFrameLevel(frame[i]:GetFrameLevel() - 2)
+		
+		-- position popup #1
+		frame[i]:SetPoint("TOP", UIParent, "TOP", 0, -10)
+	else
+		local previous = frame[i-1]
+		frame[i]:SetPoint("TOP", previous, "BOTTOM", 0, -frame[i].button1:GetHeight() - 4)
+	end	
+end
 
-	local Popups = DuffedUIPopups.Frames
-	local Selection = Popups[1]
-	for i = 1, DuffedUIPopups.Total - 1 do
-		if Popups[i]:IsShown() then
-			Selection = Popups[i + 1]
+D.ShowPopup = function(self)
+	local info = D.CreatePopup[self]
+	if not info then return end
+	
+	-- choose popup to show
+	local selection = _G["DuffedUIPopupDialog1"]
+	for i = 1, total - 1 do
+		if frame[i]:IsShown() then
+			selection = _G["DuffedUIPopupDialog"..i+1]
 		end
 	end
 
-	local Popup = Selection
-	local Question = Popup.Text
-	local Button1 = Popup.Button1
-	local Button2 = Popup.Button2
-	local EditBox = Popup.EditBox
+	local popup = selection
+	local question = popup.Text
+	local btn1 = popup.button1
+	local btn2 = popup.button2
+	local eb = popup.EditBox
 	
-	Question:Clear()
-	EditBox:SetText("")
+	-- clear the question
+	question:Clear()
 	
-	if Info.Question then Question:AddMessage(Info.Question) end
+	-- clear the editbox
+	eb:SetText("")
 	
-	if Info.Answer1 then Button1.Text:SetText(Info.Answer1) else Button1.Text:SetText(ACCEPT) end
+	-- add the question asked if found
+	if info.question then
+		question:AddMessage(info.question)
+	end
 	
-	if Info.Answer2 then Button2.Text:SetText(Info.Answer2) else Button2.Text:SetText(CANCEL) end
+	-- insert wanted text into left button
+	if info.answer1 then
+		btn1.Text:SetText(info.answer1)
+	else
+		btn1.Text:SetText(ACCEPT)
+	end
 	
-	if Info.Function1 then Button1:SetScript("OnClick", Info.Function1) else Button1:SetScript("OnClick", DuffedUIPopups.HidePopup) end
+	-- insert wanted text into right button
+	if info.answer2 then
+		btn2.Text:SetText(info.answer2)
+	else
+		btn2.Text:SetText(CANCEL)
+	end
 	
-	if Info.Function2 then Button2:SetScript("OnClick", Info.Function2) else Button2:SetScript("OnClick", DuffedUIPopups.HidePopup) end
+	-- execute a function on button 1 if defined by the coder
+	if info.function1 then
+		btn1:SetScript("OnClick", info.function1)
+	else
+		btn1:SetScript("OnClick", Hide)
+	end
 	
-	if Info.EditBox then EditBox:Show() else EditBox:Hide() end
+	-- execute a function on button 2 if defined by the coder
+	if info.function2 then
+		btn2:SetScript("OnClick", info.function2)
+	else
+		btn2:SetScript("OnClick", Hide)
+	end
 	
-	Button1:HookScript("OnClick", DuffedUIPopups.HidePopup)
-	Button2:HookScript("OnClick", DuffedUIPopups.HidePopup)
+	if info.editbox then
+		eb:Show()
+	else
+		eb:Hide()
+	end
 	
-	Popup:Show()
+	-- always hide the popup after a click
+	btn1:HookScript("OnClick", Hide)
+	btn2:HookScript("OnClick", Hide)
+	
+	-- show it when we ask for it
+	popup:Show()
 end
-
-DuffedUIPopups:RegisterEvent("ADDON_LOADED")
-DuffedUIPopups:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "DuffedUI") then return end
-	
-	self:CreatePopups()
-	self:UnregisterAllEvents()
-end)
-
-D["Popups"] = DuffedUIPopups

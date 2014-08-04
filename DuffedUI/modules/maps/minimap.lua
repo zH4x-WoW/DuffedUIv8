@@ -1,246 +1,271 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L = unpack(select(2, ...))
 
-local _G = _G
-local Map = _G["Minimap"]
-local Panels = D["Panels"]
-local Miscellaneous = D["Miscellaneous"]
-local Maps = D["Maps"]
-local Minimap = CreateFrame("Frame")
-local Elapsed = 0
+--------------------------------------------------------------------
+-- DuffedUI Minimap Script
+--------------------------------------------------------------------
 
-Minimap.ZoneColors = {
-	["friendly"] = {.1, 1, .1},
-	["sanctuary"] = {.41, .8, .94},
-	["arena"] = {1, .1,  .1},
-	["hostile"] = {1, .1, .1},
-	["contested"] = {1, .7, 0},
-}
+-- shitty map addon that a lot of peoples use.
+if IsAddOnLoaded("SexyMap") then return end
 
-function Minimap:DisableMinimapElements()
-	local North = _G["MinimapNorthTag"]
-	local HiddenFrames = {
-		"MinimapCluster",
-		"MinimapBorder",
-		"MinimapBorderTop",
-		"MinimapZoomIn",
-		"MinimapZoomOut",
-		"MiniMapVoiceChatFrame",
-		"MinimapNorthTag",
-		"MinimapZoneTextButton",
-		"MiniMapTracking",
-		"GameTimeFrame",
-		"MiniMapWorldMapButton",
-		"GarrisonLandingPageMinimapButton",
-	}
-	
-	for i, FrameName in pairs(HiddenFrames) do
-		local Frame = _G[FrameName]
-		Frame:Hide()
+local DuffedUIMinimap = CreateFrame("Frame", "DuffedUIMinimap", DuffedUIPetBattleHider)
+DuffedUIMinimap:SetTemplate()
+DuffedUIMinimap:RegisterEvent("ADDON_LOADED")
+if C["auras"].bufftracker then
+	DuffedUIMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -35, -5)
+else
+	DuffedUIMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -5, -5)
+end
+DuffedUIMinimap:Size(144)
+DuffedUIMinimap:SetClampedToScreen(true)
+DuffedUIMinimap:SetMovable(true)
+DuffedUIMinimap.text = D.SetFontString(DuffedUIMinimap, C["media"].uffont, 12)
+DuffedUIMinimap.text:SetPoint("CENTER")
+DuffedUIMinimap.text:SetText(L.move_minimap)
+DuffedUIMinimap:CreateShadow()
+tinsert(D.AllowFrameMoving, DuffedUIMinimap)
 
-		if Frame.UnregisterAllEvents then
-			Frame:UnregisterAllEvents()
-		end
+-- kill the minimap cluster
+MinimapCluster:Kill()
+
+-- Parent Minimap into our Map frame.
+Minimap:SetParent(DuffedUIMinimap)
+Minimap:ClearAllPoints()
+Minimap:Point("TOPLEFT", 2, -2)
+Minimap:Point("BOTTOMRIGHT", -2, 2)
+
+-- Hide Garrisonbutton
+GarrisonLandingPageMinimapButton:Kill()
+
+-- Hide Border
+MinimapBorder:Hide()
+MinimapBorderTop:Hide()
+
+-- Hide Zoom Buttons
+MinimapZoomIn:Hide()
+MinimapZoomOut:Hide()
+
+-- Hide Voice Chat Frame
+MiniMapVoiceChatFrame:Hide()
+
+-- Hide North texture at top
+MinimapNorthTag:SetTexture(nil)
+
+-- Hide Zone Frame
+MinimapZoneTextButton:Hide()
+
+-- Hide Tracking Button
+MiniMapTracking:Hide()
+
+-- Hide Calendar Button
+GameTimeFrame:Hide()
+
+-- Hide Mail Button
+MiniMapMailFrame:ClearAllPoints()
+MiniMapMailFrame:Point("TOPRIGHT", Minimap, 3, 3)
+MiniMapMailFrame:SetFrameLevel(Minimap:GetFrameLevel() + 1)
+MiniMapMailFrame:SetFrameStrata(Minimap:GetFrameStrata())
+MiniMapMailBorder:Hide()
+MiniMapMailIcon:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\mail")
+
+-- Ticket Frame
+local DuffedUITicket = CreateFrame("Frame", "DuffedUITicket", DuffedUIMinimap)
+DuffedUITicket:SetTemplate()
+DuffedUITicket:Size(DuffedUIMinimap:GetWidth() - 4, 24)
+DuffedUITicket:SetFrameLevel(Minimap:GetFrameLevel() + 4)
+DuffedUITicket:SetFrameStrata(Minimap:GetFrameStrata())
+DuffedUITicket:Point("TOP", 0, -2)
+DuffedUITicket:FontString("Text", C["media"].font, 12)
+DuffedUITicket.Text:SetPoint("CENTER")
+DuffedUITicket.Text:SetText(HELP_TICKET_EDIT)
+DuffedUITicket:SetBackdropBorderColor(255/255, 243/255,  82/255)
+DuffedUITicket.Text:SetTextColor(255/255, 243/255,  82/255)
+DuffedUITicket:SetAlpha(0)
+
+HelpOpenTicketButton:SetParent(DuffedUITicket)
+HelpOpenTicketButton:SetFrameLevel(DuffedUITicket:GetFrameLevel() + 1)
+HelpOpenTicketButton:SetFrameStrata(DuffedUITicket:GetFrameStrata())
+HelpOpenTicketButton:ClearAllPoints()
+HelpOpenTicketButton:SetAllPoints()
+HelpOpenTicketButton:SetHighlightTexture(nil)
+HelpOpenTicketButton:SetAlpha(0)
+HelpOpenTicketButton:HookScript("OnShow", function(self) DuffedUITicket:SetAlpha(1) end)
+HelpOpenTicketButton:HookScript("OnHide", function(self) DuffedUITicket:SetAlpha(0) end)
+
+-- Hide world map button
+MiniMapWorldMapButton:Hide()
+
+-- shitty 3.3 flag to move
+MiniMapInstanceDifficulty:ClearAllPoints()
+MiniMapInstanceDifficulty:SetParent(Minimap)
+MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+
+-- 4.0.6 Guild instance difficulty
+GuildInstanceDifficulty:ClearAllPoints()
+GuildInstanceDifficulty:SetParent(Minimap)
+GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+
+-- Queue Button and Tooltip
+QueueStatusMinimapButton:SetParent(Minimap)
+QueueStatusMinimapButton:ClearAllPoints()
+QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", 0, 0)
+QueueStatusMinimapButtonBorder:Kill()
+QueueStatusFrame:StripTextures()
+QueueStatusFrame:SetTemplate("Default")
+QueueStatusFrame:SetFrameStrata("HIGH")
+
+local function UpdateLFGTooltip()
+	local position = DuffedUIMinimap:GetPoint()
+	QueueStatusFrame:ClearAllPoints()
+	if position:match("BOTTOMRIGHT") then
+		QueueStatusFrame:SetPoint("BOTTOMRIGHT", QueueStatusMinimapButton, "BOTTOMLEFT", 0, 0)
+	elseif position:match("BOTTOM") then
+		QueueStatusFrame:SetPoint("BOTTOMLEFT", QueueStatusMinimapButton, "BOTTOMRIGHT", 4, 0)
+	elseif position:match("LEFT") then		
+		QueueStatusFrame:SetPoint("TOPLEFT", QueueStatusMinimapButton, "TOPRIGHT", 4, 0)
+	else
+		QueueStatusFrame:SetPoint("TOPRIGHT", QueueStatusMinimapButton, "TOPLEFT", 0, 0)	
 	end
-	
-	North:SetTexture(nil)
 end
+QueueStatusFrame:HookScript("OnShow", UpdateLFGTooltip)
 
-function Minimap:StyleMinimap()
-	local Mail = _G["MiniMapMailFrame"]
-	local MailBorder = _G["MiniMapMailBorder"]
-	local MailIcon = _G["MiniMapMailIcon"]
-	local LFG = _G["QueueStatusMinimapButton"]
-	local LFGBorder = _G["QueueStatusMinimapButtonBorder"]
-	local LFGStatus = _G["QueueStatusFrame"]
-	
-	Map:SetMaskTexture(C["medias"].Blank)
-	Map:CreateBackdrop()
-	Map.Backdrop:SetOutside()
-	Map.Backdrop:SetFrameLevel(Map:GetFrameLevel() + 1)
-	Map.Backdrop:SetBackdropColor(0, 0, 0, 0)
-	
-	Mail:ClearAllPoints()
-	Mail:Point("TOPRIGHT", 3, 3)
-	Mail:SetFrameLevel(Map:GetFrameLevel() + 2)
-	MailBorder:Hide()
-	MailIcon:SetTexture(C["medias"].Mail)
-	
-	-- broken
-	--[[LFG:SetParent(Minimap)
-	LFG:ClearAllPoints()
-	LFG:SetPoint("BOTTOMRIGHT", 0, 0)
-	LFGBorder:Kill()
-	LFGStatus:StripTextures()
-	LFGStatus:SetTemplate("Transparent")
-	LFGStatus:SetFrameStrata("HIGH")
-	
-	local function UpdateLFGTooltip()
-		local position = Minimap:GetPoint()
-		LFGStatus:ClearAllPoints()
-		if position:match("BOTTOMRIGHT") then
-			LFGStatus:SetPoint("BOTTOMRIGHT", LFG, "BOTTOMLEFT", 0, 0)
-		elseif position:match("BOTTOM") then
-			LFGStatus:SetPoint("BOTTOMLEFT", LFG, "BOTTOMRIGHT", 4, 0)
-		elseif position:match("LEFT") then		
-			LFGStatus:SetPoint("TOPLEFT", LFG, "TOPRIGHT", 4, 0)
-		else
-			LFGStatus:SetPoint("TOPRIGHT", LFG, "TOPLEFT", 0, 0)	
-		end
+-- Enable mouse scrolling
+Minimap:EnableMouseWheel(true)
+Minimap:SetScript("OnMouseWheel", function(self, d)
+	if d > 0 then
+		_G.MinimapZoomIn:Click()
+	elseif d < 0 then
+		_G.MinimapZoomOut:Click()
 	end
-	LFGStatus:HookScript("OnShow", UpdateLFGTooltip)]]--
+end)
+
+-- Set Square Map Mask
+Minimap:SetMaskTexture(C["media"].blank)
+
+-- For others mods with a minimap button, set minimap buttons position in square mode.
+function GetMinimapShape() return "SQUARE" end
+
+-- do some stuff on addon loaded or player login event
+DuffedUIMinimap:SetScript("OnEvent", function(self, event, addon)
+	if addon == "Blizzard_TimeManager" then
+		-- Hide Game Time
+		TimeManagerClockButton:Kill()
+	end
+end)
+
+----------------------------------------------------------------------------------------
+-- Map menus, right/middle click
+----------------------------------------------------------------------------------------
+
+Minimap:SetScript("OnMouseUp", function(self, btn)
+	local xoff = 0
+	local position = DuffedUIMinimap:GetPoint()
 	
-	Map:SetScript("OnMouseUp", function(self, button)
-		if (button == "RightButton") then
-			ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, Map, 0, D.Scale(-3))
-		elseif (button == "MiddleButton") then
-			EasyMenu(Miscellaneous.MicroMenu.Buttons, Miscellaneous.MicroMenu, "cursor", D.Scale(-160), 0, "MENU", 2)
-		else
-			Minimap_OnClick(self)
-		end
-	end)
-end
-
-function Minimap:PositionMinimap()
-	Map:SetParent(Panels.PetBattleHider)
-	Map:ClearAllPoints()
-	if C["auras"].BuffTracker then Map:Point("TOPRIGHT", -37, -5) else Map:Point("TOPRIGHT", -5, -5) end
-end
-
-function Minimap:AddMinimapDataTexts()
-	local MinimapDataTextOne = CreateFrame("Frame", "MinimapDataTextOne", Map)
-	MinimapDataTextOne:Size(Map:GetWidth() / 2 + 2, 19)
-	MinimapDataTextOne:SetPoint("TOPLEFT", Map, "BOTTOMLEFT", -2, -3)
-	MinimapDataTextOne:SetTemplate()
-	MinimapDataTextOne:SetFrameStrata("LOW")
-
-	local MinimapDataTextTwo = CreateFrame("Frame", "MinimapDataTextTwo", Map)
-	MinimapDataTextTwo:Size(Map:GetWidth() / 2 + 1, 19)
-	MinimapDataTextTwo:SetPoint("TOPRIGHT", Map, "BOTTOMRIGHT", 2, -3)
-	MinimapDataTextTwo:SetTemplate()
-	MinimapDataTextTwo:SetFrameStrata("LOW")
-
-	Panels.MinimapDataTextOne = MinimapDataTextOne
-	Panels.MinimapDataTextTwo = MinimapDataTextTwo
-end
-
-function GetMinimapShape() 
-	return "SQUARE"
-end
+	if btn == "RightButton" then	
+		if position:match("RIGHT") then xoff = D.Scale(-8) end
+		ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, DuffedUIMinimap, xoff, D.Scale(-2))
+	elseif btn == "MiddleButton" then
+		if not DuffedUIMicroButtonsDropDown then return end
+		if position:match("RIGHT") then xoff = D.Scale(-160) end
+		EasyMenu(D.MicroMenu, DuffedUIMicroButtonsDropDown, "cursor", xoff, 0, "MENU", 2)
+	else
+		Minimap_OnClick(self)
+	end
+end)
 
 ----------------------------------------------------------------------------------------
 -- Mouseover map, displaying zone and coords
 ----------------------------------------------------------------------------------------
 
-function Minimap:AddZoneAndCoords()
-	local MinimapZone = CreateFrame("Frame", "DuffedUIMinimapZone", Map)
-	MinimapZone:SetTemplate("Transparent")
-	MinimapZone:Size(Map:GetWidth() + 4, 22)
-	MinimapZone:Point("TOP", Map, 0, 2)
-	MinimapZone:SetFrameStrata(Minimap:GetFrameStrata())
-	MinimapZone:SetAlpha(0)
+local m_zone = CreateFrame("Frame", "DuffedUIMinimapZone", DuffedUIMinimap)
+m_zone:SetTemplate()
+m_zone:Size(0,20)
+m_zone:Point("TOPLEFT", DuffedUIMinimap, "TOPLEFT", 2,-2)
+m_zone:SetFrameLevel(Minimap:GetFrameLevel() + 3)
+m_zone:SetFrameStrata(Minimap:GetFrameStrata())
+m_zone:Point("TOPRIGHT",DuffedUIMinimap,-2,-2)
+m_zone:SetAlpha(0)
 
-	MinimapZone.Text = MinimapZone:CreateFontString("DuffedUIMinimapZoneText", "OVERLAY")
-	MinimapZone.Text:SetFont(C["medias"].Font, 12)
-	MinimapZone.Text:Point("TOP", 0, -1)
-	MinimapZone.Text:SetPoint("BOTTOM")
-	MinimapZone.Text:Height(12)
-	MinimapZone.Text:Width(MinimapZone:GetWidth() - 6)
+local m_zone_text = m_zone:CreateFontString("DuffedUIMinimapZoneText", "Overlay")
+m_zone_text:SetFont(C["media"].font,12)
+m_zone_text:Point("TOP", 0, -1)
+m_zone_text:SetPoint("BOTTOM")
+m_zone_text:Height(12)
+m_zone_text:Width(m_zone:GetWidth()-6)
+m_zone_text:SetAlpha(0)
 
-	local MinimapCoords = CreateFrame("Frame", "DuffedUIMinimapCoord", Map)
-	MinimapCoords:SetTemplate("Transparent")
-	MinimapCoords:Size(40, 22)
-	MinimapCoords:Point("BOTTOMLEFT", Map, "BOTTOMLEFT", -2, -2)
-	MinimapCoords:SetFrameStrata(Minimap:GetFrameStrata())
+local m_coord = CreateFrame("Frame", "DuffedUIMinimapCoord", DuffedUIMinimap)
+m_coord:SetTemplate()
+m_coord:Size(40,20)
+m_coord:Point("BOTTOMLEFT", DuffedUIMinimap, "BOTTOMLEFT", 2,2)
+m_coord:SetFrameLevel(Minimap:GetFrameLevel() + 3)
+m_coord:SetFrameStrata(Minimap:GetFrameStrata())
+m_coord:SetAlpha(0)
 
-	MinimapCoords:SetAlpha(0)
+local m_coord_text = m_coord:CreateFontString("DuffedUIMinimapCoordText", "Overlay")
+m_coord_text:SetFont(C["media"].font,12)
+m_coord_text:Point("Center", -1, 0)
+m_coord_text:SetAlpha(0)
+m_coord_text:SetText("00,00")
 
-	MinimapCoords.Text = MinimapCoords:CreateFontString("DuffedUIMinimapCoordText", "OVERLAY")
-	MinimapCoords.Text:SetFont(C["medias"].Font, 12)
-	MinimapCoords.Text:Point("Center", 0, -1)
-	MinimapCoords.Text:SetText("0, 0")
+Minimap:SetScript("OnEnter", function()
+	m_zone:SetAlpha(1)
+	m_zone_text:SetAlpha(1)
+	m_coord:SetAlpha(1)
+	m_coord_text:SetAlpha(1)
+end)
 
-	-- Update zone text
-	MinimapZone:RegisterEvent("PLAYER_ENTERING_WORLD")
-	MinimapZone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-	MinimapZone:RegisterEvent("ZONE_CHANGED")
-	MinimapZone:RegisterEvent("ZONE_CHANGED_INDOORS")
-	MinimapZone:SetScript("OnEvent", Minimap.UpdateZone)
-
-	-- Update coordinates
-	MinimapCoords:SetScript("OnUpdate", Minimap.UpdateCoords)
-
-	Minimap.MinimapZone = MinimapZone
-	Minimap.MinimapCoords = MinimapCoords
-end
-
-function Minimap:UpdateCoords(t)
-	Elapsed = Elapsed - t
-
-	if (Elapsed > 0) then
-		return
-	end
-
+Minimap:SetScript("OnLeave", function()
+	m_zone:SetAlpha(0)
+	m_zone_text:SetAlpha(0)
+	m_coord:SetAlpha(0)
+	m_coord_text:SetAlpha(0)
+end)
+ 
+local ela = 0
+local coord_Update = function(self, t)
+	ela = ela - t
+	if ela > 0 then return end
 	local x, y = GetPlayerMapPosition("player")
 	local xt, yt
-
 	x = math.floor(100 * x)
 	y = math.floor(100 * y)
-
-	if (x == 0 and y == 0) then
-		Minimap.MinimapCoords.Text:SetText("x, x")
+	if x == 0 and y == 0 then
+		m_coord_text:SetText("X _ X")
 	else
-		if (x < 10) then
+		if x < 10 then
 			xt = "0"..x
 		else
 			xt = x
 		end
-
-		if (y < 10) then
+		if y < 10 then
 			yt = "0"..y
 		else
 			yt = y
 		end
-
-		Minimap.MinimapCoords.Text:SetText(xt..", "..yt)
+		m_coord_text:SetText(xt..","..yt)
 	end
-
-	Elapsed = .2
+	ela = .2
 end
-
-function Minimap:UpdateZone()
-	local Info = GetZonePVPInfo()
-
-	if Minimap.ZoneColors[Info] then
-		local Color = Minimap.ZoneColors[Info]
-
-	
-		Minimap.MinimapZone.Text:SetTextColor(Color[1], Color[2], Color[3])
+m_coord:SetScript("OnUpdate",coord_Update)
+ 
+local zone_Update = function()
+	local pvp = GetZonePVPInfo()
+	m_zone_text:SetText(GetMinimapZoneText())
+	if pvp == "friendly" then
+		m_zone_text:SetTextColor(.1, 1, .1)
+	elseif pvp == "sanctuary" then
+		m_zone_text:SetTextColor(.41, .8, .94)
+	elseif pvp == "arena" or pvp == "hostile" then
+		m_zone_text:SetTextColor(1, .1, .1)
+	elseif pvp == "contested" then
+		m_zone_text:SetTextColor(1, .7, 0)
 	else
-		Minimap.MinimapZone.Text:SetTextColor(1.0, 1.0, 1.0)
+		m_zone_text:SetTextColor(1, 1, 1)
 	end
-	
-	Minimap.MinimapZone.Text:SetText(GetMinimapZoneText())
 end
-
-function Minimap:EnableMouseOver()
-	Map:SetScript("OnEnter", function()
-		Minimap.MinimapZone:SetAnimation("FadeIn", 0.3)
-		Minimap.MinimapCoords:SetAnimation("FadeIn", 0.3)
-	end)
-
-	Map:SetScript("OnLeave", function()
-		Minimap.MinimapZone:SetAnimation("FadeOut", 0.3)
-		Minimap.MinimapCoords:SetAnimation("FadeOut", 0.3)
-	end)
-end
-
-function Minimap:Enable()
-	self:DisableMinimapElements()
-	self:StyleMinimap()
-	self:PositionMinimap()
-	self:AddMinimapDataTexts()
-	self:AddZoneAndCoords()
-	self:EnableMouseOver()
-end
-
-Maps.Minimap = Minimap
+ 
+m_zone:RegisterEvent("PLAYER_ENTERING_WORLD")
+m_zone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+m_zone:RegisterEvent("ZONE_CHANGED")
+m_zone:RegisterEvent("ZONE_CHANGED_INDOORS")
+m_zone:SetScript("OnEvent",zone_Update)
