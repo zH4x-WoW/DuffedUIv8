@@ -104,7 +104,8 @@ C["auras"] = {
 }
 
 C["actionbar"] = {
-	["enable"] = true,                                  		-- enable tukui action bars
+	["enable"] = true,
+	["hidebackdrop"] = false,
 	["hotkey"] = true,                                  		-- enable hotkey display because it was a lot requested
 	["macro"] = false,                                  		-- enable macro display because it was a lot requested
 	["hideshapeshift"] = false,                         		-- hide shapeshift or totembar because it was a lot requested.
@@ -121,7 +122,6 @@ C["actionbar"] = {
 	["shapeshiftborder"] = true,								-- enable stancebarborder
 	["verticalshapeshift"] = false,								-- enable vertical stancebar
 	["shapeshiftmouseover"] = false,							-- enable mouseover on stancebar
-	["swap"] = false,											-- enable actionbar swap
 	["borderhighlight"] = false,								-- enable prochighlight on iconborder
 }
 
