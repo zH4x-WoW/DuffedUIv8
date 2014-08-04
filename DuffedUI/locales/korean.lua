@@ -8,7 +8,7 @@ if D.client == "koKR" then
 
 	L.UI_Outdated = "당신의 DuffedUI 버전이 구버전입니다. 당신은 www.tukui.org에서 최신 버전을 다운로드하실 수 있습니다."
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
-	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.tukui.org|r."
+	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
 	
 	-- Bufftracker
 	L.bufftracker_10ap = "+10% Attack Power"
@@ -360,7 +360,7 @@ if D.client == "koKR" then
 	L.install_step_4_line_1 = "설치가 완료되었습니다."
 	L.install_step_4_line_2 = "UI를 다시 불러오시려면 '마침' 버튼을 눌러주세요."
 	L.install_step_4_line_3 = ""
-	L.install_step_4_line_4 = "DuffedUI를 즐기세요! http://www.tukui.org를 통해 방문하실수 있습니다.!"
+	L.install_step_4_line_4 = "DuffedUI를 즐기세요! http://www.duffed.net를 통해 방문하실수 있습니다.!"
 
 	L.install_button_tutorial = "지침서"
 	L.install_button_install = "설치"

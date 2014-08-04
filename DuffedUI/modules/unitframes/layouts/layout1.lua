@@ -18,6 +18,14 @@ local backdrop = {
 	insets = {top = -D.mult, left = -D.mult, bottom = -D.mult, right = -D.mult},
 }
 
+cpcolors = {
+	[1] = {0.60, 0, 0, 1},
+	[2] = {0.60, 0.30, 0, 1},
+	[3] = {0.60, 0.60, 0, 1},
+	[4] = {0.30, 0.60, 0, 1},
+	[5] = {0, 0.60, 0, 1},
+}
+
 --	Layout
 local function Shared(self, unit)
 	self.colors = D.UnitColor
@@ -335,11 +343,11 @@ local function Shared(self, unit)
 				if D.myclass == "MAGE" then
 					local mb = CreateFrame("Frame", "DuffedUIArcaneBar", self)
 					if C["unitframes"].movableclassbar then
-						mb:Point("BOTTOMLEFT", CBAnchor, "TOPLEFT", 2, 0)
+						mb:Point("BOTTOMLEFT", CBAnchor, "TOPLEFT", 0, 0)
 					else
-						mb:Point("TOP", power, "BOTTOM", -47, -1)
+						mb:Point("TOP", power, "BOTTOM", -9, -1)
 					end
-					mb:Size(100, 5)
+					mb:Size(200, 5)
 					mb:SetBackdrop(backdrop)
 					mb:SetBackdropColor(0, 0, 0)
 					mb:SetBackdropBorderColor(0, 0, 0)
@@ -349,23 +357,25 @@ local function Shared(self, unit)
 						mb[i]:Height(5)
 						mb[i]:SetStatusBarTexture(C["media"].normTex)
 						if i == 1 then
-							mb[i]:Width(176 / 4)
+							mb[i]:Width(200 / 4)
 							mb[i]:SetPoint("LEFT", mb, "LEFT", 0, 0)
 							mb[i]:CreateBackdrop()
 						else
-							mb[i]:Width(176 / 4)
+							mb[i]:Width(200 / 4)
 							mb[i]:SetPoint("LEFT", mb[i-1], "RIGHT", 6, 0)
 							mb[i]:CreateBackdrop()
 						end
 						mb[i].bg = mb[i]:CreateTexture(nil, 'ARTWORK')
 					end
-					mb:SetScript("OnShow", D.UpdateMageClassBarVisibility)
-					mb:SetScript("OnHide", D.UpdateMageClassBarVisibility)
 					self.ArcaneChargeBar = mb
 
 					if C["unitframes"].runeofpower then
 						local rp = CreateFrame("Frame", "DuffedUIRunePower", self)
-						rp:Point("TOP", power, "BOTTOM", -50, -1)
+						if C["unitframes"].movableclassbar then
+							rp:Point("TOPLEFT", CBAnchor, "BOTTOMLEFT", 7, 0)
+						else
+							rp:Point("TOP", power, "BOTTOM", -53, -12)
+						end
 						rp:SetWidth(100)
 						rp:SetHeight(5)
 						rp:SetBackdrop(backdrop)
@@ -376,19 +386,17 @@ local function Shared(self, unit)
 							rp[i]:Height(5)
 							rp[i]:SetStatusBarTexture(C.media.normTex)
 							if i == 1 then
-								rp[i]:Width(198 / 2)
+								rp[i]:Width(200 / 2)
 								rp[i]:SetPoint("LEFT", rp, "LEFT", 0, 0)
 								rp[i]:CreateBackdrop()
 							else
-								rp[i]:Width(198 / 2)
+								rp[i]:Width(200 / 2)
 								rp[i]:SetPoint("LEFT", rp[i - 1], "RIGHT", 6, 0)
 								rp[i]:CreateBackdrop()
 							end
 							rp[i].bg = rp[i]:CreateTexture(nil, 'ARTWORK')
 						end
 						rp:CreateBackdrop()
-						rp:SetScript("OnShow", D.UpdateMageClassBarVisibility)
-						rp:SetScript("OnHide", D.UpdateMageClassBarVisibility)
 						self.RunePower = rp
 					end
 				end
@@ -396,9 +404,9 @@ local function Shared(self, unit)
 				if D.myclass == "DRUID" then
 					local DruidManaBackground = CreateFrame("Frame", nil, self)
 					if C["unitframes"].movableclassbar then
-						DruidManaBackground:Point("BOTTOMLEFT", CBAnchor, "TOPLEFT", 2, 0)
+						DruidManaBackground:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
 					else
-						DruidManaBackground:Point("TOP", power, "BOTTOM", 0, -2)
+						DruidManaBackground:Point("TOP", power, "BOTTOM", 0, -12)
 					end
 					DruidManaBackground:Size(176, 2)
 					DruidManaBackground:SetFrameStrata("MEDIUM")
@@ -460,56 +468,29 @@ local function Shared(self, unit)
 					eclipseBar.FrameBackdrop:SetPoint("TOPLEFT", D.Scale(-2), D.Scale(2))
 					eclipseBar.FrameBackdrop:SetPoint("BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 					eclipseBar.FrameBackdrop:SetFrameLevel(eclipseBar:GetFrameLevel() - 1)
-
-					if C["unitframes"].druidmushroombar then
-						local m = CreateFrame("Frame", "DuffedUIWildMushroomBar", self)
-						m:Point("TOPLEFT", self, "BOTTOMLEFT", 0, 1)
-						m:SetWidth(218)
-						m:SetHeight(5)
-						m:SetBackdrop(backdrop)
-						m:SetBackdropColor(0, 0, 0)
-						m:SetBackdropBorderColor(0, 0, 0)
-						for i = 1, 3 do
-							m[i] = CreateFrame("StatusBar", "DuffedUIWildMushroomBar"..i, m)
-							m[i]:Height(5)
-							m[i]:SetStatusBarTexture(C["media"].normTex)
-							if i == 1 then
-								m[i]:Width((218 / 3) - 1)
-								m[i]:SetPoint("LEFT", m, "LEFT", 0, 0)
-							else
-								m[i]:Width((218 / 3) - 1)
-								m[i]:SetPoint("LEFT", m[i-1], "RIGHT", 1, 0)
-							end
-							m[i].bg = m[i]:CreateTexture(nil, 'ARTWORK')
-						end
-						m:SetScript("OnShow", D.UpdateMushroomVisibility)
-						m:SetScript("OnHide", D.UpdateMushroomVisibility)
-						m:CreateBackdrop()
-						self.WildMushroom = m
-					end
 				end
 
 				if D.myclass == "WARLOCK" then
 					local wb = CreateFrame("Frame", "DuffedUIWarlockSpecBars", self)
 					if C["unitframes"].movableclassbar then
-						wb:Point("BOTTOMLEFT", CBAnchor, "TOPLEFT", 2, 0)
+						wb:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
 					else
 						wb:Point("TOP", power, "BOTTOM", 0, -1)
 					end
-					wb:Size(150, 5)
+					wb:Size(200, 5)
 					wb:SetBackdrop(backdrop)
 					wb:SetBackdropColor(0, 0, 0)
-					wb:SetBackdropBorderColor(0, 0, 0)	
+					wb:SetBackdropBorderColor(0, 0, 0)
 					for i = 1, 4 do
 						wb[i] = CreateFrame("StatusBar", "DuffedUIWarlockSpecBars"..i, wb)
 						wb[i]:Height(5)
 						wb[i]:SetStatusBarTexture(C["media"].normTex)
 						if i == 1 then
-							wb[i]:Width((150 / 4) - 2)
+							wb[i]:Width(200 / 4)
 							wb[i]:SetPoint("LEFT", wb, "LEFT", 0, 0)
 							wb[i]:CreateBackdrop()
 						else
-							wb[i]:Width((150 / 4) - 1)
+							wb[i]:Width(200 / 4)
 							wb[i]:SetPoint("LEFT", wb[i - 1], "RIGHT", 6, 0)
 							wb[i]:CreateBackdrop()
 						end
@@ -521,30 +502,29 @@ local function Shared(self, unit)
 				if D.myclass == "PALADIN" then
 					local bars = CreateFrame("Frame", nil, self)
 					if C["unitframes"].movableclassbar then
-						bars:Point("BOTTOMLEFT", CBAnchor, "TOPLEFT", 2, 0)
+						bars:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
 					else
 						bars:SetPoint("TOP", power, "BOTTOM", 0, -1)
 					end
-					bars:Width(158)
-					bars:Height(5)
+					bars:Size(214, 5)
 					bars:SetBackdrop(backdrop)
 					bars:SetBackdropColor(0, 0, 0)
-					bars:SetBackdropBorderColor(0,0,0,0)
+					bars:SetBackdropBorderColor(0, 0, 0, 0)
 					for i = 1, 5 do
 						bars[i]=CreateFrame("StatusBar", self:GetName().."_HolyPower"..i, bars)
 						bars[i]:Height(5)
 						bars[i]:SetStatusBarTexture(normTex)
 						bars[i]:GetStatusBarTexture():SetHorizTile(false)
-						bars[i]:SetStatusBarColor(228/255,225/255,16/255)
+						bars[i]:SetStatusBarColor(228/255, 225/255, 16/255)
 						bars[i].bg = bars[i]:CreateTexture(nil, "BORDER")
-						bars[i].bg:SetTexture(228/255,225/255,16/255)
+						bars[i].bg:SetTexture(228/255, 225/255, 16/255)
 						if i == 1 then
 							bars[i]:SetPoint("LEFT", bars)
-							bars[i]:Width(30)
+							bars[i]:Width(42)
 							bars[i].bg:SetAllPoints(bars[i])
 						else
 							bars[i]:Point("LEFT", bars[i-1], "RIGHT", 2, 0)
-							bars[i]:Width(150 / 5)
+							bars[i]:Width(205 / 5)
 							bars[i].bg:SetAllPoints(bars[i])
 						end
 						bars[i].bg:SetTexture(normTex)
@@ -587,7 +567,7 @@ local function Shared(self, unit)
 						Runes[i].border:SetPoint("TOPLEFT", Runes[i], "TOPLEFT", D.Scale(-2), D.Scale(2))
 						Runes[i].border:SetPoint("BOTTOMRIGHT", Runes[i], "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 						Runes[i].border:SetFrameStrata("MEDIUM")
-						Runes[i].border:SetFrameLevel(4)					
+						Runes[i].border:SetFrameLevel(4)
 						Runes[i].border:SetTemplate("Default")
 					end
 					self.Runes = Runes
@@ -596,11 +576,11 @@ local function Shared(self, unit)
 				if D.myclass == "MONK" then
 					local Bar = CreateFrame("Frame", "DuffedUIHarmony", health)
 					if C["unitframes"].movableclassbar then
-						Bar:Point("BOTTOMLEFT", CBAnchor, "TOPLEFT", 2, 0)
+						Bar:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
 					else
 						Bar:Point("TOP", power, "BOTTOM", 0, -1)
 					end
-					Bar:Size(155, 5)
+					Bar:Size(214, 5)
 					Bar:SetBackdrop(backdrop)
 					Bar:SetBackdropColor(0, 0, 0)
 					Bar:SetBackdropBorderColor(0, 0, 0)	
@@ -609,10 +589,10 @@ local function Shared(self, unit)
 						Bar[i]:Height(5)
 						Bar[i]:SetStatusBarTexture(C["media"].normTex)
 						if i == 1 then
-							Bar[i]:Width(155 / 5)
+							Bar[i]:Width(204 / 6)
 							Bar[i]:SetPoint("LEFT", Bar, "LEFT", 0, 0)
 						else
-							Bar[i]:Width((150 / 5))
+							Bar[i]:Width(204 / 6)
 							Bar[i]:SetPoint("LEFT", Bar[i - 1], "RIGHT", 2, 0)
 						end
 					end
@@ -623,23 +603,23 @@ local function Shared(self, unit)
 				if D.myclass == "PRIEST" then
 					local pb = CreateFrame("Frame", "DuffedUIShadowOrbsBar", self)
 					if C["unitframes"].movableclassbar then
-						pb:Point("BOTTOMLEFT", CBAnchor, "TOPLEFT", 2, 0)
+						pb:Point("BOTTOM", CBAnchor, "TOP", 2, 0)
 					else
 						pb:Point("TOP", power, "BOTTOM", 0, -1)
 					end
-					pb:Size(150, 5)
+					pb:Size(208, 5)
 					pb:SetBackdrop(backdrop)
 					pb:SetBackdropColor(0, 0, 0)
 					pb:SetBackdropBorderColor(0, 0, 0)	
-					for i = 1, 3 do
+					for i = 1, 5 do
 						pb[i] = CreateFrame("StatusBar", "DuffedUIShadowOrbsBar"..i, pb)
 						pb[i]:Height(5)
 						pb[i]:SetStatusBarTexture(C["media"].normTex)
 						if i == 1 then
-							pb[i]:Width((150 / 3) - 2)
+							pb[i]:Width(200 / 5)
 							pb[i]:SetPoint("LEFT", pb, "LEFT", 0, 0)
 						else
-							pb[i]:Width((150 / 3) - 1)
+							pb[i]:Width(200 / 5)
 							pb[i]:SetPoint("LEFT", pb[i - 1], "RIGHT", 2, 0)
 						end
 					end
@@ -655,16 +635,16 @@ local function Shared(self, unit)
 						TotemBar[i]:SetFrameLevel(self:GetFrameLevel() + 3)
 						if i == 1 then
 							if C["unitframes"].movableclassbar then
-								TotemBar:Point("BOTTOMLEFT", CBAnchor, "TOPLEFT", 2, 0)
+								TotemBar:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
 							else
-								TotemBar[i]:Point("LEFT", power, "BOTTOMLEFT", 30, -3)
+								TotemBar[i]:Point("TOP", power, "BOTTOM", -84, -1)
 							end
 						else
 							TotemBar[i]:SetPoint("TOPLEFT", TotemBar[i - 1], "TOPRIGHT", D.Scale(6), 0)
 						end
 						TotemBar[i]:SetStatusBarTexture(normTex)
 						TotemBar[i]:SetHeight(D.Scale(5))
-						TotemBar[i]:SetWidth(D.Scale(150) / 4)
+						TotemBar[i]:SetWidth(D.Scale(200) / 4)
 						TotemBar[i]:SetFrameLevel(4)
 						TotemBar[i]:SetBackdrop(backdrop)
 						TotemBar[i]:SetBackdropColor(0, 0, 0, 1)
@@ -683,7 +663,45 @@ local function Shared(self, unit)
 					end
 					self.TotemBar = TotemBar
 				end
-			end	
+			end
+
+			local ComboPoints = CreateFrame("Frame", "ComboPoints", UIParent)
+			for i = 1, 5 do
+				ComboPoints[i] = CreateFrame("Frame", "ComboPoints" .. i, UIParent)
+				ComboPoints[i]:Size(41, 6)
+				ComboPoints[i]:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+				if i == 1 then
+					if C["unitframes"].movableclassbar then
+						ComboPoints[i]:Point("BOTTOMLEFT", CBAnchor, "TOPLEFT", 2, 8)
+					else
+						ComboPoints[i]:Point("TOP", power, "BOTTOM", -87, 0)
+					end
+				else
+					ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 3, 0)
+				end
+				ComboPoints[i]:SetTemplate("Default")
+				ComboPoints[i]:CreateShadow("Default")
+				ComboPoints[i]:CreateBackdrop()
+				ComboPoints[i]:SetBackdropBorderColor(unpack(cpcolors[i]))
+				ComboPoints[i]:RegisterEvent("PLAYER_ENTERING_WORLD")
+				ComboPoints[i]:RegisterEvent("UNIT_COMBO_POINTS")
+				ComboPoints[i]:RegisterEvent("PLAYER_TARGET_CHANGED")
+				ComboPoints[i]:SetScript("OnEvent", function(self, event)
+				local points, pt = 0, GetComboPoints("player", "target")
+					if pt == points then
+						ComboPoints[i]:Hide()
+					elseif pt > points then
+						for i = points + 1, pt do
+							ComboPoints[i]:Show()
+						end
+					else
+						for i = pt + 1, points do
+							ComboPoints[i]:Hide()
+						end
+					end
+					points = pt	
+				end)
+			end
 
 			self:SetScript("OnEnter", function(self)
 				if self.EclipseBar and self.EclipseBar:IsShown() then 
@@ -717,6 +735,7 @@ local function Shared(self, unit)
 
 			buffs:SetHeight(20)
 			buffs:SetWidth(218)
+			buffs:SetPoint("TOPLEFT", self, "TOPLEFT", -2, 25)
 			buffs.size = 20
 			buffs.num = 9
 

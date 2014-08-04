@@ -882,24 +882,24 @@ end
 -- create a skin for all unitframes buffs/debuffs
 D.PostCreateAura = function(self, button)
 	button:SetTemplate("Default")
-	
+
 	button.remaining = D.SetFontString(button, C["media"].font, 11, "THINOUTLINE")
 	button.remaining:Point("TOPLEFT", 0, -3)
-	
+
 	button.cd.noOCC = true -- hide OmniCC CDs, because we  create our own cd with CreateAuraTimer()
 	button.cd.noCooldownCount = true -- hide CDC CDs, because we create our own cd with CreateAuraTimer()
-	
+
 	button.cd:SetReverse()
 	button.icon:Point("TOPLEFT", 2, -2)
 	button.icon:Point("BOTTOMRIGHT", -2, 2)
 	button.icon:SetTexCoord(.08, .92, .08, .92)
 	button.icon:SetDrawLayer('ARTWORK')
-	
+
 	button.count:Point("BOTTOMRIGHT", 1, 1)
 	button.count:SetJustifyH("RIGHT")
 	button.count:SetFont(C["media"].font, 10, "THINOUTLINE")
 	button.count:SetTextColor(.84, .75, .65)
-	
+
 	button.overlayFrame = CreateFrame("frame", nil, button, nil)
 	button.cd:SetFrameLevel(button:GetFrameLevel() + 1)
 	button.cd:ClearAllPoints()
@@ -909,7 +909,7 @@ D.PostCreateAura = function(self, button)
 	button.overlay:SetParent(button.overlayFrame)
 	button.count:SetParent(button.overlayFrame)
 	button.remaining:SetParent(button.overlayFrame)
-			
+
 	button.Glow = CreateFrame("Frame", nil, button)
 	button.Glow:Point("TOPLEFT", button, "TOPLEFT", -3, 3)
 	button.Glow:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 3, -3)
@@ -917,7 +917,7 @@ D.PostCreateAura = function(self, button)
 	button.Glow:SetBackdrop{edgeFile = C["media"].glowTex, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
-	
+
 	local Animation = button:CreateAnimationGroup()
 	Animation:SetLooping("BOUNCE")
 
@@ -1150,36 +1150,6 @@ D.EclipseDirection = function(self)
 		self.Text:SetText("|cff4478BC"..L.unitframes_ouf_wrathspell.."|r")
 	else
 		self.Text:SetText("")
-	end
-end
-
--- update some elements
-D.ComboPointsBarUpdate = function(self, parent, points)
-	local s = parent.shadow
-	local b = parent.Buffs
-		
-	if D.myclass == "ROGUE" and C["unitframes"].movecombobar then
-		-- always show we this option enabled
-		s:Point("TOPLEFT", -4, 12)
-		self:Show()
-	else
-		if points > 0 then
-			if s then
-				s:Point("TOPLEFT", -4, 12)
-			end
-			if b then 
-				b:ClearAllPoints() 
-				b:SetPoint("BOTTOMLEFT", parent, "TOPLEFT", 0, 14)
-			end
-		else
-			if s then
-				s:Point("TOPLEFT", -4, 4)
-			end
-			if b then 
-				b:ClearAllPoints() 
-				b:SetPoint("BOTTOMLEFT", parent, "TOPLEFT", 0, 4)
-			end
-		end
 	end
 end
 
@@ -1563,7 +1533,7 @@ if C["raid"].raidunitdebuffwatch == true then
 			
 		-- Important Raid Debuffs we want to show on Grid!
 		-- Mists of Pandaria debuff list created by prophet
-		-- http://www.tukui.org/code/view.php?id=PROPHET170812083424
+		-- http://www.duffed.net/code/view.php?id=PROPHET170812083424
 		D.debuffids = {			
 			----------------------
 			-- Mogu'shan Vaults --

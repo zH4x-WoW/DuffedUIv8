@@ -104,6 +104,8 @@ local function LoadSkin()
 		"MacOptions",
 		"Store",
 		"Help",
+		"WhatsNew",
+		"Addons"
 	}
 
 	for i = 1, getn(BlizzardMenuButtons) do

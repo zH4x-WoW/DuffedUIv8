@@ -7,7 +7,7 @@
 ## SavedVariablesPerCharacter: DuffedUIDataPerChar, ClickCast, ImprovedCurrency
 ## OptionalDeps: DuffedUI_ConfigUI
 ## X-oUF: oUFDuffedUI
-## Website: http://www.tukui.org
+## Website: http://www.duffed.net
 ## X-Tukui-Project-Folders: DuffedUI, DuffedUI_ConfigUI, DuffedUI_Raid, DuffedUI_Raid_Healing
 
 DuffedUI.xml

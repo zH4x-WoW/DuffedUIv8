@@ -9,7 +9,7 @@ if D.client == "zhTW" then
 	L.UI_Outdated = "DuffedUI 版本已過期，請至 www.tukui.org 下載最新版"
 	L.UI_Talent_Change_Bug = "一個由暴雪產生的故障已阻止你改變你當前的天賦,這發生在你使用觀察功能查看其他玩家角色裝備時.不幸的是在這個魔獸補丁中我們對修正它無能為力,請/reload你的Ui程式介面並且再次嘗試."
 
-	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."感謝您使用|cffc41f3bDuffedUI "..D.version.."|r. 詳細資訊請訪問 |cffc41f3bhttp://www.tukui.org|r."
+	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."感謝您使用|cffc41f3bDuffedUI "..D.version.."|r. 詳細資訊請訪問 |cffc41f3bhttp://www.duffed.net|r."
 	
 	-- Bufftracker
 	L.bufftracker_10ap = "+10% Attack Power"
@@ -354,7 +354,7 @@ if D.client == "zhTW" then
 	L.install_step_4_line_1 = "安裝完成。"
 	L.install_step_4_line_2 = "請點擊'完成'以重新載入UI。"
 	L.install_step_4_line_3 = ""
-	L.install_step_4_line_4 = "享受DuffedUI吧! 拜訪我們 http://www.tukui.org!"
+	L.install_step_4_line_4 = "享受DuffedUI吧! 拜訪我們 http://www.duffed.net!"
 
 	L.install_button_tutorial = "指南"
 	L.install_button_install = "安裝"

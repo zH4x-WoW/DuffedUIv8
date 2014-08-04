@@ -8,7 +8,7 @@ if D.client == "zhCN" then
 
 	L.UI_Outdated = "DuffedUI 版本已过期，请至 www.tukui.org 下载最新版"
 	L.UI_Talent_Change_Bug = "一个由暴雪产生的故障已阻止你改变你当前的天赋,这发生在你使用观察功能查看其他玩家角色装备时.不幸的是在这个魔兽补丁中我们对修正它无能为力,请/reload你的插件界面并且再次尝试."
-	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."感谢您使用|cffc41f3bDuffedUI "..D.version.."|r. 详细信息请访问 |cffc41f3bhttp://www.tukui.org|r."
+	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."感谢您使用|cffc41f3bDuffedUI "..D.version.."|r. 详细信息请访问 |cffc41f3bhttp://www.duffed.net|r."
 	
 	-- Bufftracker
 	L.bufftracker_10ap = "+10% Attack Power"

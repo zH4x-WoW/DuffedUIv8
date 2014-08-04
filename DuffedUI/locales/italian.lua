@@ -1,5 +1,5 @@
--- localization for italian made by Iceky (http://www.tukui.org/forums/profile.php?id=42201)
--- updated version by Namaless (http://www.tukui.org/forums/profile.php?id=151969)
+-- localization for italian made by Iceky (http://www.duffed.net/forums/profile.php?id=42201)
+-- updated version by Namaless (http://www.duffed.net/forums/profile.php?id=151969)
 local D, C, L, G = unpack(select(2, ...))
 
 if D.client == "itIT" then
@@ -10,7 +10,7 @@ if D.client == "itIT" then
 
 	L.UI_Outdated = "La tua versione di DuffedUI non è aggiornata. Puoi scaricare l'ultima versione da www.tukui.org"
 	L.UI_Talent_Change_Bug = "Un bug della Blizzard sta impedendo il cambio dei talenti, questo succede quando si ispeziona qualcuno. Sfortunatamente non si può fare nulla per sistemare il problema, ricaricate la propria ui e riprovate."
-	L.welcome_1 = "Ciao |cffc41f3b".. D.myname.."!|r".."\n".."Grazie per utilizzare |cffc41f3bDuffedUI "..D.version.."|r. Per maggiori informazioni visita |cffc41f3bhttp://www.tukui.org|r."
+	L.welcome_1 = "Ciao |cffc41f3b".. D.myname.."!|r".."\n".."Grazie per utilizzare |cffc41f3bDuffedUI "..D.version.."|r. Per maggiori informazioni visita |cffc41f3bhttp://www.duffed.net|r."
 	
 	-- Bufftracker
 	L.bufftracker_10ap = "Potenza Attacco +10%"

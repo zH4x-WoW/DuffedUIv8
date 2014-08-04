@@ -8,7 +8,7 @@ L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective t
 
 L.UI_Outdated = "Your version of DuffedUI is out of date. You can download the latest version from www.tukui.org"
 L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
-L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.tukui.org|r."
+L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
 
 -- Bufftracker
 L.bufftracker_10ap = "+10% Attack Power"

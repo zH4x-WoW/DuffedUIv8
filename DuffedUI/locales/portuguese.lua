@@ -9,7 +9,7 @@ if D.client == "ptBR" then
 
 	L.UI_Outdated = "A sua versão da DuffedUI está desactualizada. Pode baixar a versão mais recente no site www.tukui.org"
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
-	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.tukui.org|r."
+	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
 
 	-- Bufftracker
 	L.bufftracker_10ap = "+10% Attack Power"

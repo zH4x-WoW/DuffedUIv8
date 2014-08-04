@@ -43,7 +43,7 @@
 	<Script file="modules\maps\worldmap.lua" />
 	<Script file="modules\panels\panels.lua" />
 	<Include file="modules\datatext\load_dt.xml" />
-	<Include file="modules\actionbars\load_ab.xml" />	
+	<Include file="modules\actionbars\load_ab.xml" />
 	<Script file="modules\chat\chatframes.lua" />
 	<Script file="modules\chat\telltarget.lua" />
 	<Script file="modules\chat\copychat.lua" />

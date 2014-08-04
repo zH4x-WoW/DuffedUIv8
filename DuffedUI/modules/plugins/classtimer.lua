@@ -1173,9 +1173,6 @@ elseif C["unitframes"].layout == 2 then
 	if C["unitframes"].movableclassbar then
 		playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 2, 3)
 		playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", -2, 3)
-	elseif C["unitframes"].druidmushroombar then
-		playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 2, 14)
-		playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", -2, 14)
 	else
 		playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 2, 14)
 		playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", -2, 14)
@@ -1184,9 +1181,6 @@ elseif C["unitframes"].layout == 3 then
 	if C["unitframes"].movableclassbar then
 		playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 1, 4)
 		playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", -1, 4)
-	elseif C["unitframes"].druidmushroombar then
-		playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 1, 14)
-		playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", -1, 14)
 	else
 		playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 1, 16)
 		playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", -1, 16)

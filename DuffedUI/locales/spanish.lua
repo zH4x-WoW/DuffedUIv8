@@ -8,7 +8,7 @@ if D.client == "esES" or D.client == "esMX" then
 
 	L.UI_Outdated = "Tu versión de DuffedUI no está actualizada. Puedes descargar la última versión de www.tukui.org"
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
-	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.tukui.org|r."
+	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
 	
 	-- Bufftracker
 	L.bufftracker_10ap = "+10% Attack Power"
@@ -342,7 +342,7 @@ if D.client == "esES" or D.client == "esMX" then
 	L.install_step_4_line_1 = "Se ha completado la instalación"
 	L.install_step_4_line_2 = "Por favor, haz click en 'Finalizar' para recargar la IU."
 	L.install_step_4_line_3 = ""
-	L.install_step_4_line_4 = "¡Disfruta de DuffedUI! ¡Visítanos en http://www.tukui.org!"
+	L.install_step_4_line_4 = "¡Disfruta de DuffedUI! ¡Visítanos en http://www.duffed.net!"
 	L.install_button_tutorial = "Tutorial"
 	L.install_button_install = "Instalar"
 	L.install_button_next = "Siguiente"
