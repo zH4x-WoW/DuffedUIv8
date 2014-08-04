@@ -1,16 +1,33 @@
 local D, C, L, G = unpack(select(2, ...)) 
 
--- all the frame we want to move
--- all our frames that we want being movable.
 D.AllowFrameMoving = {}
 
--- used to exec various code if we enable or disable moving
 local function exec(self, enable)
 	if self == DuffedUIGMFrameAnchor or self == CBAnchor or self == TCBanchor or self == FCBanchor or self == RCDAnchor or self == DebuffAnchor or self == SpellCooldownsFrameAnchor or self == DuffedUIBnetHolder or self == dRunesAnchorFrame or self == sCombosAnchor then
 		if enable then
 			self:Show()
 		else
 			self:Hide()
+		end
+	end
+
+	if self == DuffedUIBar1 then
+		if enable then 
+			MainMenuBar:Hide()
+			self:SetBackdropBorderColor(1, 0, 0, 1)
+		else 
+			MainMenuBar:Show()
+			self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+		end
+	end
+
+	if self == DuffedUIBar2 then
+		if enable then 
+			MultiBarBottomLeft:Hide()
+			self:SetBackdropBorderColor(1, 0, 0, 1)
+		else 
+			MultiBarBottomLeft:Show()
+			self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 		end
 	end
 

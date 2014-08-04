@@ -1445,12 +1445,12 @@ oUF:RegisterStyle('DuffedUI', Shared)
 
 local player = oUF:Spawn('player', "DuffedUIPlayer")
 player:SetParent(DuffedUIPetBattleHider)
-player:Point("BOTTOMLEFT", DuffedUIBar1, "TOPLEFT", -200, 80)
+player:Point("BOTTOM", UIParent, "BOTTOM", -340, 240)
 player:Size(218, 44)
 
 local target = oUF:Spawn('target', "DuffedUITarget")
 target:SetParent(DuffedUIPetBattleHider)
-target:Point("BOTTOMRIGHT", DuffedUIBar1, "TOPRIGHT", 200, 80)
+target:Point("BOTTOM", UIParent, "BOTTOM", 340, 240)
 target:Size(218, 44)
 
 local tot = oUF:Spawn('targettarget', "DuffedUITargetTarget")

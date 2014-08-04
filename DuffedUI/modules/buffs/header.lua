@@ -107,11 +107,7 @@ consolidate:Hide()
 SecureHandlerSetFrameRef(proxy, "header", consolidate)
 
 -- set our debuff header
-if C["misc"].exp_rep == false then
-	debuffs:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -17, -5)
-else
-	debuffs:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -7, -5)
-end
+debuffs:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -17, -5)
 debuffs:SetAttribute("filter", "HARMFUL")
 debuffs:Show()
 tinsert(D.AllowFrameMoving, DuffedUIAurasPlayerDebuffs)
