@@ -1,13 +1,19 @@
--- Initiation of DuffedUI engine
+-----------------------------------
+-- Initiation of DuffedUI engine --
+-----------------------------------
+
 local addon, engine = ...
 engine[1] = {}
 engine[2] = {}
 engine[3] = {}
 engine[4] = {}
 
-DuffedUI = engine
+DuffedUI = engine -- Allow other addons to use Engine
 
+--------------------------------------------------
 -- We need this as soon we begin loading DuffedUI
+--------------------------------------------------
+
 local D, C, L, G = unpack(select(2, ...))
 
 -- functions, constants, variables
@@ -34,23 +40,70 @@ SlashCmdList.RELOADUI = ReloadUI
 
 -- Modules
 G.ActionBars = {}
+G.Bags = {}
 G.Auras = {}
 G.Chat = {}
 G.DataText = {}
 G.Loot = {}
 G.Maps = {}
 G.Misc = {}
+G.NamePlates = {}
+G.Panels = {}
 G.Skins = {}
 G.Tooltips = {}
 G.UnitFrames = {}
+G.Install = {}
 
 -- Hider
 local UIHider = CreateFrame("Frame", "DuffedUIUIHider", UIParent)
 UIHider:Hide()
+G.Misc.UIHider = UIHider
 
 -- Hider Secure (mostly used to hide stuff while in pet battle)
 local PetBattleHider = CreateFrame("Frame", "DuffedUIPetBattleHider", UIParent, "SecureHandlerStateTemplate");
 PetBattleHider:SetAllPoints(UIParent)
 RegisterStateDriver(PetBattleHider, "visibility", "[petbattle] hide; show")
+
+-- Credits is important! (please do not edit this, thank you!)
+D.Credits = {
+	"Azilroka",
+	"Caith",
+	"Ishtara",
+	"Hungtar",
+	"Tulla",
+	"P3lim",
+	"Alza",
+	"Roth",
+	"Tekkub",
+	"Shestak",
+	"Caellian",
+	"Haleth",
+	"Nightcracker",
+	"Haste",
+	"Hydra",
+	"Elv",
+	"Tukz",
+}
+
+D.DuffedCredits = {
+	"jones7",
+	"Waffurizzle",
+	"Carbonium",
+	"Optional",
+	"Pixelfcuk",
+	"Shera",
+	"lefirez",
+	"PATix",
+	"macgee",
+	"Roglash",
+	"loveran",
+	"transform",
+	"Kanestorm",
+	"Sinaris",
+	"Juhawny",
+	"Elenarda",
+	"Zenglao",
+	"loki",
+}
 
 ERR_NOT_IN_RAID = "";
