@@ -27,7 +27,6 @@ local ALLOWED_GROUPS = {
 	["rcd"] = 1,
 	["scd"] = 1,
 	["raid"] = 1,
-	["runes"] = 1,
 }
 
 if DuffedUIEditedDefaultConfig then

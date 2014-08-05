@@ -54,8 +54,6 @@ C["raid"] = {
 	["showraidpets"] = true,                            		-- show pets in raid unit frames
 	["showgroupresurrect"] = false,                     		-- show ressurect icon on raid frames
 	["showplayerinparty"] = false,								-- show player in party
-	
-	
 	["framewidth"] = 65,										-- framewidth for raidframe
 	["frameheight"] = 42,										-- frameheight for raidframe
 	["columnSpacing"] = 1,
