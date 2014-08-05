@@ -1,9 +1,5 @@
 local D, C, L, G = unpack(select(2, ...))
 
-C["media"].normTex = "Interface\\BUTTONS\\WHITE8X8"
-C["media"].blank = "Interface\\BUTTONS\\WHITE8X8"
-C["media"].buttonhover = "Interface\\BUTTONS\\WHITE8X8"
-C["media"].glowTex = nil
 -- Define action bar default buttons size
 D.buttonsize = D.Scale(C["actionbar"].buttonsize)
 D.buttonspacing = D.Scale(C["actionbar"].buttonspacing)
