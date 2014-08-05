@@ -13,10 +13,8 @@ local function exec(self, enable)
 
 	if self == DuffedUIBar1 then
 		if enable then 
-			MainMenuBar:Hide()
 			self:SetBackdropBorderColor(1, 0, 0, 1)
 		else 
-			MainMenuBar:Show()
 			self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 		end
 	end

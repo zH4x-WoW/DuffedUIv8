@@ -28,6 +28,7 @@
 	<!-- modules -->
 	<Script file="modules\plugins\spellalert.lua" />
 	<Include file="modules\blizzard\load_blizzard.xml" />
+	<Script file="modules\misc\experience.lua" />
 	<Script file="modules\misc\commands.lua" />
 	<Script file="modules\misc\micromenu.lua" />
 	<Script file="modules\misc\invite.lua" />

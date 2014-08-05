@@ -1,5 +1,10 @@
 => DuffedUI v8 <=
 
+05.08.2014 =>
+	New ExperienceBar
+	Fixed RangeCheck
+	Fixed crash on current build
+
 04.08.2014 =>
 	Rebuild the entire Interface on v7-Sources
 
@@ -10,33 +15,33 @@
 	Nameplates 5th
 	Disabled mouseover for Rightbar (temporarily)
 	Fixed ShadowOrbs-Bar
-	
+
 01.08.2014 =>
 	Fixed AutoRepair
 	Fixed Nameplates
-	
+
 30.07.2014 =>
 	ComboPoints for Rogue again
 	Nameplates 4th
 	Nameplates 3rd
 	Nameplates 2nd
 	ComboPoints for Rogue
-	
+
 29.07.2014 => 
 	Auras
 	Nameplates
-	
+
 28.07.2014 =>
 	Config- & Colorstuff
 	Fixed Raidframes
-	
+
 26.07.2014 =>
 	Fixed ClassTimer (temporarily)
 	Fixed Experience- and Reputationbar
 	Fixed Tooltip
 	Removed AddonManager-Button on SpecSwitcher
 	Fixed Guild-DataText (GetGuildLevel removed)
-	
+
 24.07.2014 =>
 	Shamanstuff
 	Magestuff
@@ -47,7 +52,7 @@
 	Roguestuff
 	Monkstuff
 	Warriorstuff
-	
+
 23.07.2014 =>
 	Licensestuff (Shut the fuck up Hydra)
 	Fixed locales
@@ -55,7 +60,7 @@
 	Fixed reset for datatexts
 	Worldmap
 	Attempt to fix partybuffs
-	
+
 22.07.2014 =>
 	Fixed some classbars before server go offline
 	Experience- and Reputationbar
@@ -65,20 +70,20 @@
 	Removed AddonManager => become unnecessary
 	Too much for Readme or commit
 	Fixes all bugs on beta server
-	
+
 11.07.2014 =>
 	Better HatTrick
 	Added font option for several frames
 	Changed websiteaddress
-	
+
 10.07.2014 =>
 	Config
 	Locales
 	Anchor for VehicleIndicator
-	
+
 08.07.2014 =>
 	Moved Config GUI to own folder
-	
+
 07.07.2014 =>
 	HP-Value on tooltip
 	Guildrank on tooltip
@@ -90,7 +95,7 @@
 	Locales
 	Add sorting for config
 	Setup Configdialog
-	
+
 06.07.2014 =>
 	Added ErrorFilter
 	Fixed ThreatBar
@@ -100,7 +105,7 @@
 	Fixed Power DataText for other locales
 	Removed TokenFrame from Bags (no need for it)
 	Adding wowhead-option to watchframe
-	
+
 05.07.2014 =>
 	Tweaks
 	ColorGradient for UFs
@@ -109,7 +114,7 @@
 	Bugfixes
 	Typo & Adjustments
 	PostUpdateHealth & PostUpdateHealthRaid adjusted
-	
+
 03.07.2014 =>
 	Added RaidDebuffs
 	Adjust locales
@@ -133,10 +138,10 @@
 	Added plugin => SpellCooldowns
 	Added plugin => spellID
 	Removed plugin => LocationPanel
-	
+
 01.07.2014 =>
 	Added VersionCheck
-	
+
 30.06.2014 =>
 	Added plugin => EnhancedFriendsList
 	Added plugin => Click2Cast
@@ -147,7 +152,7 @@
 	Added option to hide Right ActionBar
 	Fixed PetBar-Backdrop
 	Fixed BuffTracker
-	
+
 29.06.2014 =>
 	Added GameMenu
 	Actionbarsbackdrop now unique frame
@@ -156,20 +161,20 @@
 	Update Merchant
 	Update Bags
 	Better way do set justify for loot chat
-	
+
 28.06.2014 =>
 	AltPowerBar
 	Some Fixes
 	Added CasterName for Buffs
 	Revert some changes
 	HealBar for Party & Raidframes
-	
+
 27.06.2014 =>
 	Adjustments to some misc features
 	New ThreatBar and changes on MirrorTimers
 	Added MirrorTimers
 	Adding plugin => HoverKeybinds
-	
+
 24.06.2014 =>
 	Merged Memory- & FPS-Datatext (no need for two seperate datatext), Adding configbutton for datatexts on SpecSwitcher
 	Fixed autorepair
@@ -179,70 +184,70 @@
 	Adding plugin => CombatAnimation
 	Adding plugin => Flightpointlist
 	Adjustments for UnitFrames
-	
+
 23.06.2014 =>
 	New Position for BNToastFrame
 	Finished ClassTimer
-	
+
 22.06.2014 =>
 	Adding plugin => ClassTimer (needs correct anchor)
 	Adding plugin => SpecSwitcher
-	
+
 21.06.2014 =>
 	Finished UF-Layout 2
 	Finished UF-Layout 3 (needs some tweaks)
 	Correct position for TotemBar (This bar is crap like hell)
 	Raidframes
-	
+
 20.06.2014 =>
 	Classbars for all classes finished (Mage and Priest needs some tweaks)
 	Adjustments to pet-, player- and targetframe
 	New position for rested icon
-	
+
 19.06.2014 =>
 	Adding StatueBar to all neccessary classes and move TotemBar
 	Adding oUF_Statue for summonable pets i.g. Raise Dead
 	Chibar for Monks finished
 	Adjustments at combopoints for Druid
-	
+
 18.06.2014 =>
 	Combopoints for rogue & druid finished
 	Minor Fixes
-	
+
 17.06.2014 =>
 	Additional Adjustments
 	Fixes & Adjustments
 	Combopoints for druid & rogue
-	
+
 16.06.2014 =>
 	Classbar DK finished
 	Adjust position from buffs
 	Partyframe finished
 	Adjustments, Focus & Focustarget finished
-	
+
 05.06.2014 =>
 	Boss & Arenaframe finished
-	
+
 04.06.2014 =>
 	Pet & TargetOfTarget for UF-Layout 1 finished
-	
+
 03.06.2014 =>
 	Player & Target for UF-Layout 1 finished
 	DT-Stuff, Tooltip, ExtraActionButton, Merchantstuff
-	
+
 29.05.2014 =>
 	Starting Unit Frames => Focus & Focustarget
 	Adjustment to UF-Core
-	
+
 28.05.2014 =>
 	Typos
-	
+
 27.05.2014 =>
 	Stuff, Minimap Zonetext & Coords, Gradientstuff
-	
+
 20.05.2014 =>
 	Adjust ActionBar 3 & 5, new position
-	
+
 20.04.2014 =>
 	Adjust chat again
 	Settings for bags
@@ -258,7 +263,7 @@
 06.04.2014 =>
 	Adjust Datatextpanels, Datatextpanelspositions and Chatframes
 	Changed *.tga to *.blp
-	
+
 01.02.2014 =>
 	JustifyH = RIGHT for the Lootframe works
 	Revert some former chat changes
@@ -281,32 +286,32 @@
 	Datatext system fix
 	Optimization for AltPowerBar
 	Toggle-Button on actionbars
-	
+
 01.01.2014 =>
 	First adjustments to show / hide the actionbars via buttons
 	Actionbars positions
 	Work on Tooltip (additonal Infos are still missing)
-	
+
 24.12.2013 =>
 	Chatsettings for setup adjusted
 	Datatextpanels adjusted
 	Setup adjusted
-	
+
 23.12.2013 =>
 	Chatframes and positions adjusted
 	Panelstuff
 	Added D.Client to support different languages
-	
+
 21.12.2013 =>
 	First running version
 	Fixed locales and a global for auras
-	
+
 17.12.2013 =>
 	Update options, functions and stuff
 	Changed global T to global D
 	Added fonts and textures
-	
-13.12.2013 => 	
+
+13.12.2013 =>
 	Changed "local T, C, L = select(2, ...):unpack()" to "local D, C, L = select(2, ...):unpack()"
 	Added DuffedUI-Logo and avatar
 	Replaced Tukui with DuffedUI to match the entire UI

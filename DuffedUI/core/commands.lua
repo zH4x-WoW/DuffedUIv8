@@ -1,8 +1,7 @@
--- enable lua error by command
+
 function SlashCmdList.LUAERROR(msg, editbox)
 	if (msg == 'on') then
 		SetCVar("scriptErrors", 1)
-		-- because sometime we need to /rl to show an error on login.
 		ReloadUI()
 	elseif (msg == 'off') then
 		SetCVar("scriptErrors", 0)

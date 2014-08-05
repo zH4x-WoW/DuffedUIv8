@@ -14,7 +14,7 @@ for _, frame in next, {
 	
 	local wrap
 	wrap = C["auras"].wrap
-	
+
 	if frame == "DuffedUIAurasPlayerConsolidate" then
 		header = CreateFrame("Frame", frame, DuffedUIPetBattleHider, "SecureFrameTemplate")
 		header:SetAttribute("wrapAfter", 1)
@@ -29,7 +29,7 @@ for _, frame in next, {
 		header:SetAttribute("xOffset", -35)
 		header:CreateBackdrop()
 		header.backdrop:SetBackdropBorderColor(1, 0, 0)
-		header.backdrop:FontString("text", C["media"].uffont, 12)
+		header.backdrop:FontString("text", C["media"].font, 12)
 		header.backdrop.text:SetPoint("CENTER")
 		header.backdrop.text:SetText(L.move_buffs)
 		header.backdrop:SetAlpha(0)
@@ -39,7 +39,6 @@ for _, frame in next, {
 	header:SetAttribute("weaponTemplate", "DuffedUIAurasAuraTemplate")
 	header:SetSize(30, 30)
 
-	-- Swap the unit to vehicle when we enter a vehicle *gasp*.
 	RegisterAttributeDriver(header, "unit", "[vehicleui] vehicle; player")
 
 	table.insert(content, header)
@@ -54,8 +53,7 @@ if C["auras"].consolidate then
 	filter = 1
 end
 
--- set our buff header
-buffs:SetPoint("TOPRIGHT", Minimap, "TOPLEFT", -17, 2)
+buffs:SetPoint("TOPRIGHT", Minimap, "TOPLEFT", -7, 2)
 buffs:SetAttribute("filter", "HELPFUL")
 buffs:SetAttribute("consolidateProxy", CreateFrame("Frame", buffs:GetName() .. "ProxyButton", buffs, "DuffedUIAurasProxyTemplate"))
 buffs:SetAttribute("consolidateHeader", consolidate)
@@ -65,11 +63,9 @@ buffs:SetAttribute("consolidateDuration", -1)
 buffs:Show()
 tinsert(D.AllowFrameMoving, DuffedUIAurasPlayerBuffs)
 
--- create the consolidated button
 local proxy = buffs:GetAttribute("consolidateProxy")
 proxy:HookScript("OnShow", function(self) if consolidate:IsShown() then consolidate:Hide() end end) -- kind of bug fix for secure aura header
 
--- create the dropdown and register click
 local dropdown = CreateFrame("BUTTON", "DuffedUIAurasPlayerConsolidateDropdownButton", proxy, "SecureHandlerClickTemplate")
 dropdown:SetAllPoints()
 dropdown:RegisterForClicks("AnyUp")
@@ -96,7 +92,6 @@ dropdown:SetAttribute("_onclick", [=[
 	end
 ]=]);
 
--- set our consolidate header
 consolidate:SetAttribute("point", "RIGHT")
 consolidate:SetAttribute("minHeight", nil)
 consolidate:SetAttribute("minWidth", nil)
@@ -106,8 +101,7 @@ consolidate:SetPoint("CENTER", proxy, "CENTER", 0, -35)
 consolidate:Hide()
 SecureHandlerSetFrameRef(proxy, "header", consolidate)
 
--- set our debuff header
-debuffs:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -17, -5)
+debuffs:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -7, -5)
 debuffs:SetAttribute("filter", "HARMFUL")
 debuffs:Show()
 tinsert(D.AllowFrameMoving, DuffedUIAurasPlayerDebuffs)
