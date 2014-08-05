@@ -135,7 +135,7 @@ function boaILVL(level, itemLink)
 end
 
 --- PVP Item Detect ---
-local function IsPVPItem(link)
+--[[local function IsPVPItem(link)
 	local itemStats = GetItemStats(link)
 
 	for stat in pairs(itemStats) do
@@ -145,7 +145,7 @@ local function IsPVPItem(link)
 	end
 
 	return false
-end
+end]]--
 
 --- Unit Gear Info ---
 local function UnitGear(unit)
@@ -177,9 +177,9 @@ local function UnitGear(unit)
 							boa = boa + 1
 							total = total + boaILVL(ulvl, itemLink)
 						else
-							if IsPVPItem(itemLink) then
+							--[[if IsPVPItem(itemLink) then
 								pvp = pvp + 1
-							end
+							end]]--
 
 							if (level >= 458) then
 								local uid = tonumber(strmatch(itemLink, '.+:(%d+)'))

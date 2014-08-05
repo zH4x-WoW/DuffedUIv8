@@ -1,9 +1,5 @@
 local D, C, L, G = unpack(select(2, ...))
 
-C["media"].normTex = "Interface\\BUTTONS\\WHITE8X8"
-C["media"].blank = "Interface\\BUTTONS\\WHITE8X8"
-C["media"].buttonhover = "Interface\\BUTTONS\\WHITE8X8"
-C["media"].glowTex = nil
 -- Define action bar default buttons size
 D.buttonsize = D.Scale(C["actionbar"].buttonsize)
 D.buttonspacing = D.Scale(C["actionbar"].buttonspacing)
@@ -1153,25 +1149,21 @@ D.EclipseDirection = function(self)
 	end
 end
 
--- show the druid bar mana or eclipse if form is moonkin/cat/bear.
 D.DruidBarDisplay = function(self, login)
 	local eb = self.EclipseBar
-	local m = self.WildMushroom
 	local dm = self.DruidMana
 	local bg = self.DruidManaBackground
 	local flash = self.FlashInfo
 
-	if login then
-		dm:SetScript("OnUpdate", nil)
-	end
-	
+	if login then dm:SetScript("OnUpdate", nil) end
+
 	if dm and dm:IsShown() then
 		bg:SetAlpha(1)
 	else
 		flash:Show()
 		if bg then bg:SetAlpha(0) end
 	end
-		
+
 	if (eb and eb:IsShown()) or (dm and dm:IsShown()) then
 		if eb and eb:IsShown() then
 			local txt = self.EclipseBar.Text
@@ -1179,20 +1171,6 @@ D.DruidBarDisplay = function(self, login)
 			flash:Hide()
 		end
 		if bg then bg:SetAlpha(1) end
-		
-		-- mushroom
-		if m and m:IsShown() then
-			if C["unitframes"].layout == 1 then
-				m:ClearAllPoints()
-				m:Point("TOPLEFT", self, "BOTTOMLEFT", 0, -15)
-			elseif C["unitframes"].layout == 2 then
-				m:ClearAllPoints()
-				m:Point("BOTTOMLEFT", self, "TOPLEFT", 2, 13)
-			elseif C["unitframes"].layout == 3 then
-				m:ClearAllPoints()
-				m:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 5)
-			end
-		end
 	else
 		if eb then
 			local txt = self.EclipseBar.Text
@@ -1200,67 +1178,6 @@ D.DruidBarDisplay = function(self, login)
 		end
 		flash:Show()
 		if bg then bg:SetAlpha(0) end
-		
-		-- mushroom
-		if m and m:IsShown() then
-			if C["unitframes"].layout == 1 then
-				m:ClearAllPoints()
-				m:Point("TOPLEFT", self, "BOTTOMLEFT", 0, -5)
-			elseif C["unitframes"].layout == 2 then
-				m:ClearAllPoints()
-				m:Point("BOTTOMLEFT", self, "TOPLEFT", 2, 3)
-			elseif C["unitframes"].layout == 3 then
-				m:ClearAllPoints()
-				m:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 5)
-			end
-		end
-	end
-end
-
-D.UpdateMageClassBarVisibility = function(self)
-	local p = self:GetParent()
-	local a = p.ArcaneChargeBar
-	local r = p.RunePower
-
-	if C["unitframes"].layout == 1 then
-		if (a and a:IsShown()) and (r and r:IsShown()) then
-			r:ClearAllPoints()
-			r:Point("TOPLEFT", p, "BOTTOMLEFT", 0, -16)
-		elseif (a and a:IsShown()) or (r and r:IsShown()) then
-			r:ClearAllPoints()
-			r:Point("TOPLEFT", p, "BOTTOMLEFT", 0, -6)
-		end
-	elseif C["unitframes"].layout == 2 then
-		if (a and a:IsShown()) and (r and r:IsShown()) then
-			r:ClearAllPoints()
-			r:Point("BOTTOMLEFT", p, "TOPLEFT", 2, 12)
-		elseif (a and a:IsShown()) or (r and r:IsShown()) then
-			r:ClearAllPoints()
-			r:Point("BOTTOMLEFT", p, "TOPLEFT", 2, 2)
-		end
-	elseif C["unitframes"].layout == 3 then
-		if (a and a:IsShown()) and (r and r:IsShown()) then
-			r:ClearAllPoints()
-			r:Point("TOPLEFT", p, "BOTTOMLEFT", 7, 3)
-		elseif (a and a:IsShown()) or (r and r:IsShown()) then
-			r:ClearAllPoints()
-			r:Point("TOPLEFT", p, "BOTTOMLEFT", 7, 15)
-		end
-	end
-end
-
-D.UpdateMushroomVisibility = function(self)
-	local p = self:GetParent()
-	local eb = p.EclipseBar
-	local dm = p.DruidMana
-	local m = p.WildMushroom
-	
-	if (eb and eb:IsShown()) or (dm and dm:IsShown()) then
-		m:ClearAllPoints()
-		m:Point("TOPLEFT", p, "BOTTOMLEFT", 0, -1)
-	elseif m:IsShown() then
-		m:ClearAllPoints()
-		m:Point("TOPLEFT", p, "BOTTOMLEFT", 0, 1)
 	end
 end
 

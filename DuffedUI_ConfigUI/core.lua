@@ -1,8 +1,38 @@
--- This will filter everythin NON user config data out of DuffedUIDB
-
 local D, C, L
 local myPlayerRealm = GetRealmName()
 local myPlayerName  = UnitName("player")
+
+Credits = {
+	"duffed",
+	"Tukz",
+	"Hydra",
+	"Elv",
+	"Haste",
+	"Nightcracker",
+	"Haleth",
+	"Caellian",
+	"Shestak",
+	"Tekkub",
+	"Roth",
+	"Alza",
+	"P3lim",
+	"Tulla",
+	"Hungtar",
+	"Ishtara",
+	"Caith",
+	"Azilroka",
+}
+
+DuffedCredits = {
+	"Shaney",
+	"Juhawny",
+	"Rav",
+	"loki",
+	"Sinaris",
+	"Digawen",
+	"macgee",
+	"Roglash",
+}
 
 local ALLOWED_GROUPS = {
 	["general"] = 1,
@@ -597,8 +627,7 @@ function CreateDuffedUIConfigUI()
 
 	ShowGroup("general")
 
-	-- credits
-	local credits = D.Credits
+	-- Credits for DuffedUI
 	local interval = #credits
 	local f = CreateFrame("ScrollingMessageFrame", "DuffedUIConfigUICredits", DuffedUIConfigUI)
 	f:SetSize(DuffedUIConfigUITitleBox:GetWidth(), UIParent:GetHeight())
@@ -618,9 +647,9 @@ function CreateDuffedUIConfigUI()
 	f:SetFrameStrata("BACKGROUND")
 	f:SetScript("OnUpdate", function(self, time)
 		interval = interval - time
-		for index, name in pairs(D.Credits) do
+		for index, name in pairs(Credits) do
 			if interval < index then 
-				f:AddMessage(D.Credits[index], 1, 1, 1)
+				f:AddMessage(Credits[index], 1, 1, 1)
 				tremove(credits, index)
 			end
 		end
@@ -649,9 +678,9 @@ function CreateDuffedUIConfigUI()
 	d:SetFrameStrata("BACKGROUND")
 	d:SetScript("OnUpdate", function(self, time)
 		interval = interval - time
-		for index, name in pairs(D.DuffedCredits) do
+		for index, name in pairs(DuffedCredits) do
 			if interval < index then 
-				d:AddMessage(D.DuffedCredits[index], .77, .12, .23)
+				d:AddMessage(DuffedCredits[index], .77, .12, .23)
 				tremove(dcredits, index)
 			end
 		end
