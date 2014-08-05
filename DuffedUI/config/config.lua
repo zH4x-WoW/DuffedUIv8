@@ -164,8 +164,8 @@ C["loot"] = {
 }
 
 C["cooldown"] = {
-	["enable"] = true,                                  		-- do i really need to explain this?
-	["treshold"] = 8,                                   		-- show decimal under X seconds and text turn red
+	["enable"] = true,
+	["treshold"] = 8,
 }
 
 C["rcd"] = {
@@ -176,13 +176,13 @@ C["rcd"] = {
 }
 
 C["scd"] = {
-	["enable"] = true,											-- enable spellcooldowns
-	["fsize"] = 12,												-- fonsize spellcooldowns
-	["size"] = 36,												-- iconsize spellcooldowns
-	["spacing"] = 10,											-- spacing spellcooldowns
-	["fade"] = 0,												-- fading spellcooldowns
-	["direction"] = "HORIZONTAL",								-- direction spellcooldowns
-	["display"] = "STATUSBAR",									-- statusbar spellcooldowns
+	["enable"] = true,
+	["fsize"] = 12,
+	["size"] = 28,
+	["spacing"] = 10,
+	["fade"] = 0,
+	["direction"] = "HORIZONTAL", -- needs update
+	["display"] = "STATUSBAR",
 }
 
 C["icd"] = {

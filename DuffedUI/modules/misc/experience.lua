@@ -6,6 +6,8 @@ local mouseoverText = false
 local font, fontsize, flags = C["media"].font, 11, "THINOUTLINE"
 local barTex = C["media"].normTex
 local flatTex = C["media"].normTex
+local class = D.myclass
+local color = RAID_CLASS_COLORS[class]
 local FactionInfo = {
 	[1] = {{ 170/255, 70/255,  70/255 }, "Hated", "FFaa4646"},
 	[2] = {{ 170/255, 70/255,  70/255 }, "Hostile", "FFaa4646"},
@@ -55,8 +57,8 @@ local xpBar = CreateFrame("StatusBar",  "Experience_xpBar", backdrop, "TextStatu
 xpBar:SetWidth(barWidth)
 xpBar:SetHeight(GetWatchedFactionInfo() and (barHeight) or barHeight)
 xpBar:SetPoint("TOP", backdrop,"TOP", 0, 0)
-xpBar:SetStatusBarTexture(barTex)local _, class = UnitClass("player") local color = RAID_CLASS_COLORS[class] local r, g, b = color.r, color.g, color.b 
-xpBar:SetStatusBarColor(r, g, b)
+xpBar:SetStatusBarTexture(barTex)
+if C["general"].classcolor then xpBar:SetStatusBarColor(color.r, color.g, color.b) else xpBar:SetStatusBarColor(31/255, 41/255, 130/255) end
 
 local restedxpBar = CreateFrame("StatusBar", "Experience_restedxpBar", backdrop, "TextStatusBar")
 restedxpBar:SetHeight(GetWatchedFactionInfo() and (barHeight) or barHeight)

@@ -1,6 +1,7 @@
 => DuffedUI v8 <=
 
 05.08.2014 =>
+	Update ExperienceBar
 	New ExperienceBar
 	Fixed RangeCheck
 	Fixed crash on current build
