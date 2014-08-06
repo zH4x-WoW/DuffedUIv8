@@ -37,6 +37,36 @@ C["unitframes"] = {
 	["showtotalhpmp"] = false,
 }
 
+C["chat"] = {
+	["enable"] = true,
+	["whispersound"] = true,
+	["lbackground"] = true,
+	["rbackground"] = true,
+	["textright"] = true,
+	["fading"] = true,
+}
+
+C["actionbar"] = {
+	["enable"] = true,
+	["rightbarvertical"] = false,
+	["rightbarsmouseover"] = false,
+	["petbarhorizontal"] = false,
+	["petbaralwaysvisible"] = true,
+	["hotkey"] = true,                                  		-- enable hotkey display because it was a lot requested
+	["macro"] = false,                                  		-- enable macro display because it was a lot requested
+	["hideshapeshift"] = false,                         		-- hide shapeshift or totembar because it was a lot requested.
+	["buttonsize"] = 27,                                		-- normal buttons size
+	["petbuttonsize"] = 29,                             		-- pet & stance buttons size
+	["buttonspacing"] = 4,                              		-- buttons spacing
+	["ownshdbar"] = false,                              		-- use a complete new stance bar for shadow dance (rogue only)
+	["ownmetabar"] = true,                              		-- use a complete new stance bar for metamorphosis (warlock only)
+	["ownwarstancebar"] = false,                        		-- use a different bar for every warrior stance like it was in previous xpac (warrior only)
+	["shapeshiftborder"] = true,								-- enable stancebarborder
+	["verticalshapeshift"] = false,								-- enable vertical stancebar
+	["shapeshiftmouseover"] = false,							-- enable mouseover on stancebar
+	["borderhighlight"] = false,								-- enable prochighlight on iconborder
+}
+
 C["raid"] = {
 	["enable"] = true,
 	["showboss"] = true,
@@ -99,28 +129,6 @@ C["auras"] = {
 	["buffnotice"] = true,										-- enable buffnotice
 	["warning"] = true,											-- enable warning sound
 	["wrap"] = 18,												-- set wrap of buffs
-}
-
-C["actionbar"] = {
-	["enable"] = true,
-	["hidebackdrop"] = false,
-	["hotkey"] = true,                                  		-- enable hotkey display because it was a lot requested
-	["macro"] = false,                                  		-- enable macro display because it was a lot requested
-	["hideshapeshift"] = false,                         		-- hide shapeshift or totembar because it was a lot requested.
-	["buttonsize"] = 27,                                		-- normal buttons size
-	["petbuttonsize"] = 29,                             		-- pet & stance buttons size
-	["buttonspacing"] = 4,                              		-- buttons spacing
-	["ownshdbar"] = false,                              		-- use a complete new stance bar for shadow dance (rogue only)
-	["ownmetabar"] = true,                              		-- use a complete new stance bar for metamorphosis (warlock only)
-	["ownwarstancebar"] = false,                        		-- use a different bar for every warrior stance like it was in previous xpac (warrior only)
-	["button2"] = false,										-- hiding button between datatetxt
-	["petbaralwaysvisible"] = true,								-- visiblity petbar
-	["rightbarsmouseover"] = false,								-- rightbars on mouseover
-	["petbarhorizontal"] = false,								-- horizontal petbar
-	["shapeshiftborder"] = true,								-- enable stancebarborder
-	["verticalshapeshift"] = false,								-- enable vertical stancebar
-	["shapeshiftmouseover"] = false,							-- enable mouseover on stancebar
-	["borderhighlight"] = false,								-- enable prochighlight on iconborder
 }
 
 C["bags"] = {
@@ -219,16 +227,6 @@ C["datatext"] = {
 	["localtime"] = false,                              		-- set time to local time instead of server time.
 	["fontsize"] = 12,                                  		-- font size for panels.
 }
-
-C["chat"] = {
-	["enable"] = true,                                  		-- blah
-	["whispersound"] = true,                            		-- play a sound when receiving whisper
-	["lbackground"] = true,										-- enable left chatbackground
-	["rbackground"] = true,										-- enable right chatbackground
-	["textright"] = true,										-- set textjustify to right
-	["fading"] = true,											-- enables fading
-}
-
 
 C["nameplate"] = {
 	["enable"] = true,

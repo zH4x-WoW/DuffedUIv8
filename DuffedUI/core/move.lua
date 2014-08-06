@@ -21,6 +21,16 @@ local function exec(self, enable)
 		end
 	end
 
+	if self == DuffedUIBar5 then
+		if enable then 
+			MultiBarRight:Hide()
+			self:SetBackdropBorderColor(1, 0, 0, 1)
+		else 
+			MultiBarRight:Show()
+			self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+		end
+	end
+
 	if self == DuffedUIMinimap then
 		if enable then 
 			Minimap:Hide()

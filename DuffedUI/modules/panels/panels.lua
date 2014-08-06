@@ -16,7 +16,41 @@ iright:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 3)
 iright:SetFrameLevel(2)
 iright:SetFrameStrata("BACKGROUND")
 
-if not C["actionbar"].hidebackdrop then
+if C["chat"].lbackground then
+	-- CHAT BG LEFT
+	local chatleftbg = CreateFrame("Frame", "DuffedUIChatBackgroundLeft", DuffedUIInfoLeft)
+	chatleftbg:SetTemplate("Transparent")
+	chatleftbg:Size(D.InfoLeftRightWidth + 12, 149)
+	chatleftbg:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 24)
+	chatleftbg:SetFrameLevel(1)
+
+	-- LEFT TAB PANEL
+	local tabsbgleft = CreateFrame("Frame", "DuffedUITabsLeftBackground", UIParent)
+	tabsbgleft:SetTemplate()
+	tabsbgleft:Size((D.InfoLeftRightWidth - 40), 20)
+	tabsbgleft:Point("TOPLEFT", chatleftbg, "TOPLEFT", 4, -4)
+	tabsbgleft:SetFrameLevel(2)
+	tabsbgleft:SetFrameStrata("BACKGROUND")
+end
+
+if C["chat"].rbackground then
+	-- CHAT BG RIGHT
+	local chatrightbg = CreateFrame("Frame", "DuffedUIChatBackgroundRight", DuffedUIInfoRight)
+	chatrightbg:SetTemplate("Transparent")
+	chatrightbg:Size(D.InfoLeftRightWidth + 12, 149)
+	chatrightbg:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 24)
+	chatrightbg:SetFrameLevel(1)
+		
+	-- RIGHT TAB PANEL
+	local tabsbgright = CreateFrame("Frame", "DuffedUITabsRightBackground", UIParent)
+	tabsbgright:SetTemplate()
+	tabsbgright:Size((D.InfoLeftRightWidth - 187), 20)
+	tabsbgright:Point("TOPLEFT", chatrightbg, "TOPLEFT", 4, -4)
+	tabsbgright:SetFrameLevel(2)
+	tabsbgright:SetFrameStrata("BACKGROUND")
+end
+
+if not C["actionbar"].enable ~= true then
 	DuffedUIBar1Mover = CreateFrame("Frame", "DuffedUIBar1Mover", UIParent)
 	DuffedUIBar1Mover:SetTemplate("Transparent")
 	DuffedUIBar1Mover:SetSize((D.buttonsize * 12) + (D.buttonspacing * 13), (D.buttonsize * 1) + (D.buttonspacing * 2))
@@ -66,54 +100,35 @@ if not C["actionbar"].hidebackdrop then
 
 	local DuffedUIBar5 = CreateFrame("Frame", "DuffedUIBar5", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar5:SetTemplate("Transparent")
-	DuffedUIBar5:Point("RIGHT", UIParent, "RIGHT", -13, -14)
-	DuffedUIBar5:SetSize((D.buttonsize * 1) + (D.buttonspacing * 2), (D.buttonsize * 12) + (D.buttonspacing * 13))
+	if C["actionbar"].rightbarvertical then
+		DuffedUIBar5:SetSize((D.buttonsize * 12) + (D.buttonspacing * 13), (D.buttonsize * 1) + (D.buttonspacing * 2))
+		DuffedUIBar5:Point("BOTTOM", UIParent, "BOTTOM", 0, 56)
+	else
+		DuffedUIBar5:SetSize((D.buttonsize * 1) + (D.buttonspacing * 2), (D.buttonsize * 12) + (D.buttonspacing * 13))
+		DuffedUIBar5:Point("RIGHT", UIParent, "RIGHT", -13, -14)
+	end
 	DuffedUIBar5:SetFrameStrata("BACKGROUND")
 	DuffedUIBar5:SetFrameLevel(3)
-end
+	DuffedUIBar5:SetClampedToScreen(true)
+	DuffedUIBar5:SetMovable(true)
+	DuffedUIBar5.text = D.SetFontString(DuffedUIBar5, C["media"].font, 12)
+	DuffedUIBar5.text:SetPoint("CENTER")
+	if C["actionbar"].rightbarvertical then DuffedUIBar5.text:SetText("Move Bar5") else DuffedUIBar5.text:SetText("Move\nBar5") end
+	tinsert(D.AllowFrameMoving, DuffedUIBar5)
 
-local petbg = CreateFrame("Frame", "DuffedUIPetBar", UIParent, "SecureHandlerStateTemplate")
-petbg:SetTemplate("Transparent")
-if C["actionbar"].petbarhorizontal ~= true then
-	petbg:SetSize(D.petbuttonsize + (D.petbuttonspacing * 2), (D.petbuttonsize * 10) + (D.petbuttonspacing * 11))
-	petbg:SetPoint("RIGHT", DuffedUIBar3, "LEFT", -6, 0)
-else
-	petbg:SetSize((D.petbuttonsize * 10) + (D.petbuttonspacing * 11), D.petbuttonsize + (D.petbuttonspacing * 2))
-	petbg:SetPoint("BOTTOM", DuffedUIBar1, "TOP", 0, 3)
-end
-
-if C["chat"].lbackground then
-	-- CHAT BG LEFT
-	local chatleftbg = CreateFrame("Frame", "DuffedUIChatBackgroundLeft", DuffedUIInfoLeft)
-	chatleftbg:SetTemplate("Transparent")
-	chatleftbg:Size(D.InfoLeftRightWidth + 12, 149)
-	chatleftbg:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 24)
-	chatleftbg:SetFrameLevel(1)
-
-	-- LEFT TAB PANEL
-	local tabsbgleft = CreateFrame("Frame", "DuffedUITabsLeftBackground", UIParent)
-	tabsbgleft:SetTemplate()
-	tabsbgleft:Size((D.InfoLeftRightWidth - 40), 20)
-	tabsbgleft:Point("TOPLEFT", chatleftbg, "TOPLEFT", 4, -4)
-	tabsbgleft:SetFrameLevel(2)
-	tabsbgleft:SetFrameStrata("BACKGROUND")
-end
-
-if C["chat"].rbackground then
-	-- CHAT BG RIGHT
-	local chatrightbg = CreateFrame("Frame", "DuffedUIChatBackgroundRight", DuffedUIInfoRight)
-	chatrightbg:SetTemplate("Transparent")
-	chatrightbg:Size(D.InfoLeftRightWidth + 12, 149)
-	chatrightbg:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 24)
-	chatrightbg:SetFrameLevel(1)
-		
-	-- RIGHT TAB PANEL
-	local tabsbgright = CreateFrame("Frame", "DuffedUITabsRightBackground", UIParent)
-	tabsbgright:SetTemplate()
-	tabsbgright:Size((D.InfoLeftRightWidth - 187), 20)
-	tabsbgright:Point("TOPLEFT", chatrightbg, "TOPLEFT", 4, -4)
-	tabsbgright:SetFrameLevel(2)
-	tabsbgright:SetFrameStrata("BACKGROUND")
+	local petbg = CreateFrame("Frame", "DuffedUIPetBar", UIParent, "SecureHandlerStateTemplate")
+	petbg:SetTemplate("Transparent")
+	if C["actionbar"].petbarhorizontal ~= true then
+		petbg:SetSize(D.petbuttonsize + (D.petbuttonspacing * 2), (D.petbuttonsize * 10) + (D.petbuttonspacing * 11))
+		petbg:SetPoint("RIGHT", DuffedUIBar5, "LEFT", -6, 0)
+	else
+		petbg:SetSize((D.petbuttonsize * 10) + (D.petbuttonspacing * 11), D.petbuttonsize + (D.petbuttonspacing * 2))
+		if C["chat"].rbackground then
+			petbg:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 3)
+		else
+			petbg:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 176)
+		end
+	end
 end
 
 local chatmenu = CreateFrame("Frame", "DuffedUIChatMenu", UIParent)

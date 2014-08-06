@@ -247,7 +247,7 @@ D.SetDefaultChatPosition = function(frame)
 			if C["chat"].lbackground then
 				frame:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "BOTTOMLEFT", 3, 6)
 			else
-				frame:Point("BOTTOMLEFT", DuffedUIInfoLeft, "BOTTOMLEFT", 3, 6)
+				frame:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 24)
 			end
 		elseif id == 4 and name == LOOT then
 			if not frame.isDocked then
@@ -255,7 +255,7 @@ D.SetDefaultChatPosition = function(frame)
 				if C["chat"].rbackground then
 					frame:Point("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "BOTTOMRIGHT", -9, 6)
 				else
-					frame:Point("BOTTOMRIGHT", DuffedUIInfoRight, "BOTTOMRIGHT", -9, 6)
+					frame:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 24)
 				end
 				if C["chat"].textright then
 					frame:SetJustifyH("RIGHT")

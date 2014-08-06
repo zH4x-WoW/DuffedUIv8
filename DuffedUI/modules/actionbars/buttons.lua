@@ -1,10 +1,10 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 local cp = "|cff319f1b" -- +
 local cm = "|cff9a1212" -- -
 local function ShowOrHideBar(bar, button)
 	local db = DuffedUIDataPerChar
-	
+
 	if bar:IsShown() then
 		if bar == DuffedUIBar3 then
 			if button == DuffedUIBar3Button then
@@ -13,7 +13,7 @@ local function ShowOrHideBar(bar, button)
 				db.bar3 = true
 			end
 		end
-		
+
 		if bar == DuffedUIBar4 then
 			if button == DuffedUIBar4Button then
 				UnregisterStateDriver(bar, "visibility")
@@ -21,7 +21,7 @@ local function ShowOrHideBar(bar, button)
 				db.bar4 = true
 			end
 		end
-		
+
 		if bar == DuffedUIBar5 then
 			if button == DuffedUIBar5Button then
 				UnregisterStateDriver(bar, "visibility")
@@ -34,12 +34,12 @@ local function ShowOrHideBar(bar, button)
 			db.bar3 = false
 			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] hide; show")
 		end
-		
+
 		if bar == DuffedUIBar4 then
 			db.bar4 = false
 			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] hide; show")
 		end
-		
+
 		if bar == DuffedUIBar5 then
 			db.bar5 = false
 			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] hide; show")
@@ -49,7 +49,7 @@ end
 
 local function MoveButtonBar(button, bar)
 	local db = DuffedUIDataPerChar
-	
+
 	if button == DuffedUIBar3Button then
 		if bar:IsShown() then
 			button.text:SetText(cm.."-|r")
@@ -57,7 +57,7 @@ local function MoveButtonBar(button, bar)
 			button.text:SetText(cp.."+|r")
 		end
 	end
-	
+
 	if button == DuffedUIBar4Button then
 		if bar:IsShown() then
 			button.text:SetText(cm.."-|r")
@@ -65,7 +65,7 @@ local function MoveButtonBar(button, bar)
 			button.text:SetText(cp.."+|r")
 		end
 	end
-	
+
 	if button == DuffedUIBar5Button then
 		if bar:IsShown() then
 			button.text:SetText(cm..">|r")
@@ -78,7 +78,7 @@ end
 local function UpdateBar(self, bar)
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 	local button = self
-	
+
 	ShowOrHideBar(bar, button)
 	MoveButtonBar(button, bar)
 end
@@ -155,7 +155,6 @@ vehicleleft:FontString("text", C["media"].font, 12)
 vehicleleft.text:Point("CENTER", 0, 0)
 vehicleleft.text:SetText("|cff4BAF4C"..string.upper(LEAVE_VEHICLE).."|r")
 RegisterStateDriver(vehicleleft, "visibility", "[target=vehicle,exists] show;hide")
-G.ActionBars.ExitVehicleLeft = vehicleleft
 
 -- exit vehicle button on right side of bottom action bar
 local vehicleright = CreateFrame("Button", "DuffedUIExitVehicleButtonRight", UIParent, "SecureHandlerClickTemplate")
@@ -170,26 +169,25 @@ vehicleright:FontString("text", C["media"].font, 12)
 vehicleright.text:Point("CENTER", 0, 0)
 vehicleright.text:SetText("|cff4BAF4C"..string.upper(LEAVE_VEHICLE).."|r")
 RegisterStateDriver(vehicleright, "visibility", "[target=vehicle,exists] show;hide")
-G.ActionBars.ExitVehicleRight = vehicleright
 
 local init = CreateFrame("Frame")
 init:RegisterEvent("VARIABLES_LOADED")
 init:SetScript("OnEvent", function(self, event)
 	if not DuffedUIDataPerChar then DuffedUIDataPerChar = {} end
 	local db = DuffedUIDataPerChar
-	
+
 	D.cbSize()
 	D.cbPosition()
-	
+
 	-- Third Bar at the bottom
 	if db.bar3 then
 		UpdateBar(DuffedUIBar3Button, DuffedUIBar3)
 	end
-	
+
 	if db.bar4 then
 		UpdateBar(DuffedUIBar4Button, DuffedUIBar4)
 	end
-	
+
 	if db.bar5 then
 		UpdateBar(DuffedUIBar5Button, DuffedUIBar5)
 	end

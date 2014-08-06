@@ -162,9 +162,9 @@ function D.UpdateActionBarHotKey(self, actionButtonType)
 	local hotkey = _G[self:GetName() .. 'HotKey']
 	local text = hotkey:GetText()
 	
-	text = replace(text, '(s%-)', 'S')
-	text = replace(text, '(a%-)', 'A')
-	text = replace(text, '(c%-)', 'C')
+	text = replace(text, '(s%)', 'S')
+	text = replace(text, '(a%)', 'A')
+	text = replace(text, '(c%)', 'C')
 	text = replace(text, '(Mouse Button )', 'M')
 	text = replace(text, '(Middle Mouse)', 'M3')
 	text = replace(text, '(Mouse Wheel Up)', 'MU')

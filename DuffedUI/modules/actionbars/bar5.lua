@@ -10,31 +10,33 @@ for i= 1, 12 do
 	b:ClearAllPoints()
 	b:SetFrameStrata("BACKGROUND")
 	b:SetFrameLevel(15)
-	
-	if i == 1 then
-		b:SetPoint("TOPRIGHT", bar, -D.buttonspacing, -D.buttonspacing)
+
+	if C["actionbar"].rightbarvertical then
+		if i == 1 then
+			b:SetPoint("BOTTOMLEFT", bar, D.buttonspacing, D.buttonspacing)
+		else
+			b:SetPoint("LEFT", b2, "RIGHT", D.buttonspacing, 0)
+		end
 	else
-		b:SetPoint("TOP", b2, "BOTTOM", 0, -D.buttonspacing)
-	end	
+		if i == 1 then
+			b:SetPoint("TOPRIGHT", bar, -D.buttonspacing, -D.buttonspacing)
+		else
+			b:SetPoint("TOP", b2, "BOTTOM", 0, -D.buttonspacing)
+		end
+	end
 end
 RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
 
----------------
--- Mouseover --
----------------
-if C["actionbar"].rightbarsmouseover ~= true then return end
-
--- Frame i created cause mouseover rightbars sux if it fades out when ur mouse is behind (right) of them ..
+-- mouseover
+if C["actionbar"].rightbarsmouseover ~= true and not C["actionbar"].rightbarvertical then return end
 local rbmoh = CreateFrame("Frame", nil, DuffedUIBar3)
 rbmoh:Point("RIGHT", UIParent, "RIGHT", 0, -14)
 rbmoh:SetSize(24, (D.buttonsize * 12) + (D.buttonspacing * 13))
 
 function DuffedUIRightBarsMouseover(alpha)
-	DuffedUIBar3:SetAlpha(alpha)
-	DuffedUIBar3Button2:SetAlpha(alpha)
-	DuffedUIBar3Button:SetAlpha(alpha)
+	DuffedUIBar5:SetAlpha(alpha)
+	DuffedUIBar5Button:SetAlpha(alpha)
 	MultiBarRight:SetAlpha(alpha)
-	MultiBarLeft:SetAlpha(alpha)
 	if C["actionbar"].petbaralwaysvisible ~= true then
 		DuffedUIPetBar:SetAlpha(alpha)
 		for i=1, NUM_PET_ACTION_SLOTS do
@@ -49,17 +51,13 @@ local function mouseover(f)
 	f:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
 	f:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
 end
-mouseover(DuffedUIBar3)
+mouseover(DuffedUIBar5)
 mouseover(rbmoh)
 
 for i = 1, 12 do
 	_G["MultiBarRightButton"..i]:EnableMouse(true)
 	_G["MultiBarRightButton"..i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
 	_G["MultiBarRightButton"..i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
-
-	_G["MultiBarLeftButton"..i]:EnableMouse(true)
-	_G["MultiBarLeftButton"..i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
-	_G["MultiBarLeftButton"..i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
 end
 
 if C["actionbar"].petbaralwaysvisible ~= true then

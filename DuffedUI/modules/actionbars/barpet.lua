@@ -1,12 +1,7 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true then return end
 
----------------------------------------------------------------------------
--- setup PetActionBar
----------------------------------------------------------------------------
-
 local bar = DuffedUIPetBar
-	
 bar:RegisterEvent("PLAYER_LOGIN")
 bar:RegisterEvent("PLAYER_CONTROL_LOST")
 bar:RegisterEvent("PLAYER_CONTROL_GAINED")
@@ -20,12 +15,12 @@ bar:RegisterEvent("UNIT_PET")
 bar:RegisterEvent("UNIT_FLAGS")
 bar:RegisterEvent("UNIT_AURA")
 bar:SetScript("OnEvent", function(self, event, arg1)
-	if event == "PLAYER_LOGIN" then	
+	if event == "PLAYER_LOGIN" then
 		PetActionBarFrame:UnregisterEvent("PET_BAR_SHOWGRID")
 		PetActionBarFrame:UnregisterEvent("PET_BAR_HIDEGRID")
 		PetActionBarFrame.showgrid = 1
-		
-		local button		
+
+		local button
 		for i = 1, 10 do
 			button = _G["PetActionButton"..i]
 			button:ClearAllPoints()

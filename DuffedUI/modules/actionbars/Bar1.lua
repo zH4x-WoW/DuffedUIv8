@@ -1,11 +1,5 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true then return end
-
----------------------------------------------------------------------------
--- Setup Main Action Bar.
--- Now used for stances, Bonus, Vehicle at the same time.
--- Since t12, it's also working for druid cat stealth. (a lot requested)
----------------------------------------------------------------------------
 
 local bar = DuffedUIBar1
 
@@ -75,7 +69,7 @@ bar:SetScript("OnEvent", function(self, event, unit, ...)
 				button:SetAttribute("actionpage", tonumber(newstate))
 			end
 		]])
-		
+
 		RegisterStateDriver(self, "page", GetBar())	
 	elseif event == "PLAYER_ENTERING_WORLD" then
 		local button
