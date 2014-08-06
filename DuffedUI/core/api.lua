@@ -236,28 +236,8 @@ local function CreateBorder(f, n, p)
 	border:Size( 1, 1)
 	border:Point("TOPLEFT", f, "TOPLEFT", -2, 2)
 	border:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", 2, -2)
-	border:CreateShadow("")
 	
 	f.border = border
-end
-
-local function CreateShadow(f, t)
-	if f.shadow then return end
-			
-	local shadow = CreateFrame("Frame", nil, f)
-	shadow:SetFrameLevel(1)
-	shadow:SetFrameStrata(f:GetFrameStrata())
-	shadow:Point("TOPLEFT", -3, 3)
-	shadow:Point("BOTTOMLEFT", -3, -3)
-	shadow:Point("TOPRIGHT", 3, 3)
-	shadow:Point("BOTTOMRIGHT", 3, -3)
-	shadow:SetBackdrop( { 
-		edgeFile = C["media"].glowTex, edgeSize = D.Scale(3),
-		insets = {left = D.Scale(5), right = D.Scale(5), top = D.Scale(5), bottom = D.Scale(5)},
-	})
-	shadow:SetBackdropColor(0, 0, 0, 0)
-	shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
-	f.shadow = shadow
 end
 
 local function CreateOverlay(frame)
@@ -708,7 +688,6 @@ local function addapi(object)
 	if not object.SetTemplate then mt.SetTemplate = SetTemplate end
 	if not object.CreateBackdrop then mt.CreateBackdrop = CreateBackdrop end
 	if not object.StripTextures then mt.StripTextures = StripTextures end
-	if not object.CreateShadow then mt.CreateShadow = CreateShadow end
 	if not object.Kill then mt.Kill = Kill end
 	if not object.StyleButton then mt.StyleButton = StyleButton end
 	if not object.Width then mt.Width = Width end

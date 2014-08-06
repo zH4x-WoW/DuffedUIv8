@@ -377,7 +377,6 @@ local function SkinObjects(frame, nameFrame)
 	hp:SetFrameLevel(oldhp:GetFrameLevel())
 	hp:SetFrameStrata(oldhp:GetFrameStrata())
 	hp:SetStatusBarTexture(C["media"].normTex)
-	hp:CreateShadow("Default")
 	CreateVirtualFrame(hp)
 
 

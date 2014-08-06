@@ -6,7 +6,6 @@ local function LoadSkin()
 
 	frame:StripTextures()
 	frame:SetTemplate("Transparent")
-	frame:CreateShadow()
 
 	MissingLootFramePassButton:SkinCloseButton()
 	
@@ -40,7 +39,6 @@ local function LoadSkin()
 	LootHistoryFrame.CloseButton:SkinCloseButton()
 	LootHistoryFrame:StripTextures()
 	LootHistoryFrame:SetTemplate("Transparent")
-	LootHistoryFrame:CreateShadow("Default")
 	LootHistoryFrame.ResizeButton:SkinCloseButton()
 	LootHistoryFrame.ResizeButton.t:SetText("v v v v")
 	LootHistoryFrame.ResizeButton:SetTemplate()
@@ -79,7 +77,6 @@ local function LoadSkin()
 	-- master loot frame
 	MasterLooterFrame:StripTextures()
 	MasterLooterFrame:SetTemplate("Transparent")
-	MasterLooterFrame:CreateShadow("Default")
 	
 	hooksecurefunc("MasterLooterFrame_Show", function()
 		local b = MasterLooterFrame.Item

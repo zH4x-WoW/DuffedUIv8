@@ -37,7 +37,6 @@ local function LoadSkin()
 
 	BarberShopFrame:StripTextures()
 	BarberShopFrame:SetTemplate("Transparent")
-	BarberShopFrame:CreateShadow("Default")
 	BarberShopFrame:Size(BarberShopFrame:GetWidth() - 30, BarberShopFrame:GetHeight() - 56)
 
 	BarberShopFrameMoneyFrame:StripTextures()

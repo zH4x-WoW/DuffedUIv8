@@ -3,7 +3,6 @@ local D, C, L, G = unpack(select(2, ...))
 local function LoadSkin()
 	MerchantFrame:StripTextures(true)
 	MerchantFrame:SetTemplate("Transparent")
-	MerchantFrame:CreateShadow("Default")
 
 	MerchantFrameInset:StripTextures()
 	MerchantMoneyBg:StripTextures()

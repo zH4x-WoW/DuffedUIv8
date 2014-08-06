@@ -27,14 +27,12 @@ local DuffedUIAFKPanel = CreateFrame( "Frame", "DuffedUIAFKPanel", nil )
 DuffedUIAFKPanel:SetPoint( "BOTTOMLEFT", UIParent, "BOTTOMLEFT", -2, -2 )
 DuffedUIAFKPanel:SetPoint( "TOPRIGHT", UIParent, "BOTTOMRIGHT", 2, 150 )
 DuffedUIAFKPanel:SetTemplate("Transparent")
-DuffedUIAFKPanel:CreateShadow("Default")
 DuffedUIAFKPanel:Hide()
 
 local DuffedUIAFKPanelTop = CreateFrame( "Frame", "DuffedUIAFKPanelTop", nil )
 DuffedUIAFKPanelTop:SetPoint( "TOPLEFT", UIParent, "TOPLEFT",-2, 2 )
 DuffedUIAFKPanelTop:SetPoint( "BOTTOMRIGHT", UIParent, "TOPRIGHT", 2, -80 )
 DuffedUIAFKPanelTop:SetTemplate("Transparent")
-DuffedUIAFKPanelTop:CreateShadow("Default")
 DuffedUIAFKPanelTop:SetFrameStrata("FULLSCREEN")
 DuffedUIAFKPanelTop:Hide()
 
@@ -42,7 +40,6 @@ local DuffedUIAFKPanelTopIcon = CreateFrame( "Frame", "DuffedUIAFKPanelTopIcon",
 DuffedUIAFKPanelTopIcon:Size( 48 )
 DuffedUIAFKPanelTopIcon:Point( "CENTER", DuffedUIAFKPanelTop, "BOTTOM", 0, 0 )
 DuffedUIAFKPanelTopIcon:SetTemplate("Default")
-DuffedUIAFKPanelTopIcon:CreateShadow("Default")
 
 DuffedUIAFKPanelTopIcon.Texture = DuffedUIAFKPanelTopIcon:CreateTexture( nil, "ARTWORK" )
 DuffedUIAFKPanelTopIcon.Texture:Point( "TOPLEFT", 2, -2 )

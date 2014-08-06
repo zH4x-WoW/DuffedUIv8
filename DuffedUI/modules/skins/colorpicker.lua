@@ -6,7 +6,6 @@ ColorPickerFrame:SetScale(C["general"].uiscale)
 
 local function LoadSkin()
 	ColorPickerFrame:SetTemplate("Transparent")
-	ColorPickerFrame:CreateShadow("Default")
 	ColorPickerOkayButton:SkinButton()
 	ColorPickerCancelButton:SkinButton()
 	ColorPickerOkayButton:ClearAllPoints()

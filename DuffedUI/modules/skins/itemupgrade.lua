@@ -3,7 +3,6 @@ local D, C, L, G = unpack(select(2, ...))
 local function LoadSkin()
 	ItemUpgradeFrame:StripTextures()
 	ItemUpgradeFrame:SetTemplate("Transparent")
-	ItemUpgradeFrame:CreateShadow("Default")
 	ItemUpgradeFrameCloseButton:SkinCloseButton()
 	
 	ItemUpgradeFrame.ItemButton:StripTextures()

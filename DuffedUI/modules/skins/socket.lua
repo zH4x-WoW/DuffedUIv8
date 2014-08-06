@@ -3,7 +3,6 @@ local D, C, L, G = unpack(select(2, ...))
 local function LoadSkin()
 	ItemSocketingFrame:StripTextures()
 	ItemSocketingFrame:SetTemplate("Transparent")
-	ItemSocketingFrame:CreateShadow("Default")
 	ItemSocketingScrollFrame:StripTextures()
 
 	for i = 1, MAX_NUM_SOCKETS  do

@@ -86,7 +86,6 @@ end
 -- +/-
 local DuffedUIBar3Button = CreateFrame("Button", "DuffedUIBar3Button", UIParent)
 DuffedUIBar3Button:SetTemplate("Default")
-DuffedUIBar3Button:CreateShadow("Default")
 DuffedUIBar3Button:RegisterForClicks("AnyUp")
 DuffedUIBar3Button.text = D.SetFontString(DuffedUIBar3Button, C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
 DuffedUIBar3Button:SetScript("OnClick", function(self, btn)
@@ -107,7 +106,6 @@ DuffedUIBar3Button.text:SetText(cm.."-|r")
 
 local DuffedUIBar4Button = CreateFrame("Button", "DuffedUIBar4Button", UIParent)
 DuffedUIBar4Button:SetTemplate("Default")
-DuffedUIBar4Button:CreateShadow("Default")
 DuffedUIBar4Button:RegisterForClicks("AnyUp")
 DuffedUIBar4Button.text = D.SetFontString(DuffedUIBar4Button, C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
 DuffedUIBar4Button:SetScript("OnClick", function(self, btn)

@@ -7,7 +7,6 @@ GhostFrame:SetBackdropBorderColor(0, 0, 0, 0)
 GhostFrame.SetBackdropColor = D.dummy
 GhostFrame.SetBackdropBorderColor = D.dummy
 GhostFrameContentsFrame:SetTemplate("Default")
-GhostFrameContentsFrame:CreateShadow()
 GhostFrameContentsFrameIcon:SetTexture(nil)
 GhostFrameContentsFrame:Width(148)
 GhostFrameContentsFrame:ClearAllPoints()

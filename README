@@ -1,6 +1,7 @@
 => DuffedUI v8 <=
 
 06.08.2014 =>
+	Removed CreateShadow
 	Added Mover for Playercastbar
 	Added Mover for Petbar
 	Added Mover for RightBar

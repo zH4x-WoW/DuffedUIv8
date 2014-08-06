@@ -3,7 +3,6 @@ local D, C, L, G = unpack(select(2, ...))
 local function LoadSkin()
 	GuildBankFrame:StripTextures()
 	GuildBankFrame:SetTemplate("Transparent")
-	GuildBankFrame:CreateShadow("Default")
 	GuildBankEmblemFrame:StripTextures(true)
 	
 	--Close button doesn't have a fucking name, extreme hackage

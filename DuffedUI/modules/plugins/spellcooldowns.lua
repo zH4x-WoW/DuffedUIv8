@@ -650,7 +650,6 @@ local function createCooldownFrame(spell)
 	-- Background
 	local frame = CreateFrame("Frame", nil, UIParent)
 	frame:CreateBackdrop("Transparent")
-	--frame:CreateShadow()
 	frame:SetHeight(height)
 	frame:SetWidth(width)
 	frame:SetFrameStrata("MEDIUM")

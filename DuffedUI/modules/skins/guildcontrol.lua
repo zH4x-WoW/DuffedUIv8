@@ -4,7 +4,6 @@ local function LoadSkin()
 	GuildControlUI:StripTextures()
 	GuildControlUIHbar:StripTextures()
 	GuildControlUI:SetTemplate("Transparent")
-	GuildControlUI:CreateShadow("Default")
 	
 	local function SkinGuildRanks()
 		for i=1, GuildControlGetNumRanks() do

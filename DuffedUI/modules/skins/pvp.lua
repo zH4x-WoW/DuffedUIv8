@@ -20,7 +20,6 @@ local function LoadSkin()
 		button.Icon:SetParent(button.backdrop)
 		button:StyleButton()
 
-		button:CreateShadow("Default")
 
 		if i == 1 then button.shadow:SetAlpha(1) else button.shadow:SetAlpha(0) end
 

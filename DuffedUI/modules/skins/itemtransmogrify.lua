@@ -7,7 +7,6 @@ local D, C, L, G = unpack(select(2, ...))
 local function LoadSkin()
 	TransmogrifyArtFrame:StripTextures()
 	TransmogrifyArtFrame:SetTemplate("Transparent")
-	TransmogrifyArtFrame:CreateShadow("Default")
 	TransmogrifyModelFrame:SetFrameLevel(TransmogrifyArtFrame:GetFrameLevel() + 2)
 
 	local KillTextures = {

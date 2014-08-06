@@ -18,7 +18,6 @@ local function LoadSkin()
 	KeyBindingFrameHeaderText:Point("TOP", KeyBindingFrame, "TOP", 0, -4)
 	KeyBindingFrame:StripTextures()
 	KeyBindingFrame:SetTemplate("Transparent")
-	KeyBindingFrame:CreateShadow("Default")
 	
 	for i = 1, KEY_BINDINGS_DISPLAYED  do
 		local button1 = _G["KeyBindingFrameBinding"..i.."Key1Button"]

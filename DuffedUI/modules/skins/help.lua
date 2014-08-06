@@ -25,7 +25,6 @@ local function LoadSkin()
 	for i = 1, #frames do
 		_G[frames[i]]:StripTextures(true)
 		_G[frames[i]]:CreateBackdrop("Default")
-		_G[frames[i]]:CreateShadow("Default")
 	end
 
 	HelpFrameHeader:SetFrameLevel(HelpFrameHeader:GetFrameLevel() + 2)

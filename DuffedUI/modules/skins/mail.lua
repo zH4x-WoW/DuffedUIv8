@@ -3,8 +3,6 @@
 local function LoadSkin()
 	MailFrame:StripTextures(true)
 	MailFrame:SetTemplate("Transparent")
-	MailFrame:CreateShadow("Default")
-	MailFrame:CreateShadow()
 	MailFrame:SetWidth(360)
 	MailFrameCloseButton:SkinCloseButton()
 	MailFrameInset:StripTextures()

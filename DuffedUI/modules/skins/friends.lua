@@ -134,7 +134,6 @@ local function LoadSkin()
 
 	AddFriendNameEditBox:SkinEditBox()
 	AddFriendFrame:SetTemplate("Transparent")			
-	AddFriendFrame:CreateShadow("Default")
 
 	--Who Frame
 	local function UpdateWhoSkins()
@@ -180,7 +179,6 @@ local function LoadSkin()
 
 	RecruitAFriendFrame:StripTextures()
 	RecruitAFriendFrame:SetTemplate("Transparent")
-	RecruitAFriendFrame:CreateShadow("Default")
 	RecruitAFriendFrameCloseButton:SkinCloseButton()
 	RecruitAFriendNameEditBox:SkinEditBox()
 	RecruitAFriendNoteFrame:StripTextures()
@@ -266,7 +264,6 @@ local function LoadSkin()
 	BNetReportFrameCancelButton:SkinButton()
 	
 	FriendsFrame:SetTemplate("Transparent")
-	FriendsFrame:CreateShadow("Default")
 end
 
 tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)

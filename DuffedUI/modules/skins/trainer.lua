@@ -51,7 +51,6 @@ local function LoadSkin()
 	end
 	
 	ClassTrainerFrame:SetTemplate("Transparent")
-	ClassTrainerFrame:CreateShadow("Default")
 	
 	ClassTrainerFrameFilterDropDown:SkinDropDownBox(155)
 	ClassTrainerFrameFilterDropDown:ClearAllPoints()

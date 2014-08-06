@@ -171,7 +171,7 @@ addon:SetFrameStrata("HIGH")
 addon:SetToplevel(true)
 
 addon.slots = {}
-addon.LOOT_OPENED = function(self, event, autoloot)
+addon.LOOT_OPENED = function(self, event, autoLoot)
 	self:Show()
 
 	if not self:IsShown() then

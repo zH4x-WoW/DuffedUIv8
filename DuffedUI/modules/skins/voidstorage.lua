@@ -20,9 +20,7 @@ local function LoadSkin()
 	end
 
 	VoidStorageFrame:SetTemplate("Transparent")
-	VoidStorageFrame:CreateShadow()
 	VoidStoragePurchaseFrame:SetTemplate("Transparent")
-	VoidStoragePurchaseFrame:CreateShadow("Default")
 	VoidStorageFrameMarbleBg:Kill()
 	VoidStorageFrameLines:Kill()
 	select(2, VoidStorageFrame:GetRegions()):Kill()
@@ -80,7 +78,6 @@ local function LoadSkin()
 	-- dress
 	SideDressUpFrame:StripTextures(true)
 	SideDressUpFrame:CreateBackdrop()
-	SideDressUpFrame.backdrop:CreateShadow()
 
 	SideDressUpModelResetButton:SkinButton()
 	SideDressUpModelCloseButton:StripTextures()

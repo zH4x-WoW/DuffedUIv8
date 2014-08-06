@@ -3,7 +3,6 @@ local D, C, L, G = unpack(select(2, ...))
 local function LoadSkin()
 	-- Glyph Tab
 	GlyphFrame:CreateBackdrop("Transparent")
-	GlyphFrame.backdrop:CreateShadow("Default")
 	GlyphFrame.backdrop:Point("TOPLEFT", GlyphFrame, "TOPLEFT", 3, 2)
 	GlyphFrame.backdrop:Point("BOTTOMRIGHT", GlyphFrame, "BOTTOMRIGHT", -3, 0)
 	GlyphFrameSearchBox:SkinEditBox()

@@ -3,7 +3,6 @@ local D, C, L, G = unpack(select(2, ...))
 local function LoadSkin()
 	DressUpFrame:StripTextures(true)
 	DressUpFrame:CreateBackdrop("Transparent")
-	DressUpFrame.backdrop:CreateShadow("Default")
 	DressUpFrame.backdrop:Point("TOPLEFT", 6, 0)
 	DressUpFrame.backdrop:Point("BOTTOMRIGHT", -32, 70)
 

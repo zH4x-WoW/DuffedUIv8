@@ -5,7 +5,6 @@ local function LoadSkin()
 	TabardFrame:CreateBackdrop("Transparent")
 	TabardFrame.backdrop:Point("TOPLEFT", 0, 0)
 	TabardFrame.backdrop:Point("BOTTOMRIGHT", 0, 0)
-	TabardFrame.backdrop:CreateShadow("Default")
 
 	TabardFrameInset:StripTextures()
 	TabardFramePortrait:Kill()

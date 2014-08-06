@@ -4,7 +4,6 @@ local function LoadSkin()
 	InspectFrame:StripTextures(true)
 	InspectFrameInset:StripTextures(true)
 	InspectFrame:CreateBackdrop("Transparent")
-	InspectFrame.backdrop:CreateShadow("Default")
 	InspectFrame.backdrop:SetAllPoints()
 	InspectFrameCloseButton:SkinCloseButton()
 	

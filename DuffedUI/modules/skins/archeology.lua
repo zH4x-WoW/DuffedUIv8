@@ -4,7 +4,6 @@ local function LoadSkin()
 	ArchaeologyFrame:StripTextures(true)
 	ArchaeologyFrameInset:StripTextures(true)
 	ArchaeologyFrame:SetTemplate("Transparent")
-	ArchaeologyFrame:CreateShadow("Default")
 	
 	ArchaeologyFrameArtifactPageSolveFrameSolveButton:SkinButton(true)
 	ArchaeologyFrameRaceFilter:SkinDropDownBox(125)

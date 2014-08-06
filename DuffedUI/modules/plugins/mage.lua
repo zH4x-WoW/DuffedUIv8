@@ -33,7 +33,6 @@ local f = CreateFrame("Frame", "DuffedUITeleportMenu", UIParent)
 f:Size(DuffedUIMinimap:GetWidth(),(#spells + 1) * 21 + 3)
 f:SetPoint("TOPLEFT", DuffedUIMinimapStatsLeft, "BOTTOMLEFT", 0, -3)
 f:SetFrameStrata("HIGH")
-f:CreateShadow("Default")
 f:SetTemplate("Transparent")
 f:CreateBackdrop()
  

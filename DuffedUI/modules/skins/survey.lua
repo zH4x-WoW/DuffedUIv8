@@ -4,7 +4,6 @@ local function LoadSkin()
 	GMSurveyHeader:StripTextures()
 	GMSurveyFrame:StripTextures()
 	GMSurveyFrame:CreateBackdrop("Transparent")
-	GMSurveyFrame.backdrop:CreateShadow("Default")
 	GMSurveyFrame.backdrop:Point("TOPLEFT", 0, 0)
 	GMSurveyFrame.backdrop:Point("BOTTOMRIGHT", -44, 10)
 

@@ -3,7 +3,6 @@ local D, C, L, G = unpack(select(2, ...))
 local function LoadSkin()
 	TimeManagerFrame:StripTextures()
 	TimeManagerFrame:SetTemplate("Transparent")
-	TimeManagerFrame:CreateShadow("Default")
 	TimeManagerFrameInset:StripTextures()
 
 	TimeManagerFrameCloseButton:SkinCloseButton()

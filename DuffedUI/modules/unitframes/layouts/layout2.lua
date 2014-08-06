@@ -139,8 +139,6 @@ local function Shared(self, unit)
 		PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", D.Scale(-2), D.Scale(2))
 		PowerBorder:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 		PowerBorder:SetTemplate("Default")
-		PowerBorder:CreateShadow("Default")
-		PowerBorder.shadow:Point("TOPLEFT", -3, 0)
 		PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
 		self.PowerBorder = PowerBorder
 
@@ -412,7 +410,6 @@ local function Shared(self, unit)
 					self.EclipseBar.Text = eclipseBarText
 					eclipseBar.FrameBackdrop = CreateFrame("Frame", nil, eclipseBar)
 					eclipseBar.FrameBackdrop:SetTemplate("Default")
-					eclipseBar.FrameBackdrop:CreateShadow("Default")
 					eclipseBar.FrameBackdrop:SetPoint("TOPLEFT", D.Scale(-2), D.Scale(2))
 					eclipseBar.FrameBackdrop:SetPoint("BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 					eclipseBar.FrameBackdrop:SetFrameLevel(eclipseBar:GetFrameLevel() - 1)
@@ -606,7 +603,6 @@ local function Shared(self, unit)
 						TotemBar[i].border:SetPoint("BOTTOMRIGHT", TotemBar[i], "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 						TotemBar[i].border:SetFrameStrata("MEDIUM")
 						TotemBar[i].border:SetFrameLevel(4)
-						TotemBar[i].border:CreateShadow("Default")
 						TotemBar[i].border:SetTemplate("Default")
 					end
 					self.TotemBar = TotemBar
@@ -889,7 +885,6 @@ local function Shared(self, unit)
 		HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", D.Scale(-2), D.Scale(2))
 		HealthBorder:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 		HealthBorder:SetTemplate("Default")
-		HealthBorder:CreateShadow("Default")
 		HealthBorder:SetFrameLevel(2)
 		self.HealthBorder = HealthBorder
 
@@ -981,7 +976,6 @@ local function Shared(self, unit)
 		HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", D.Scale(-2), D.Scale(2))
 		HealthBorder:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 		HealthBorder:SetTemplate("Default")
-		HealthBorder:CreateShadow("Default")
 		HealthBorder:SetFrameLevel(2)
 		self.HealthBorder = HealthBorder
 
@@ -1029,7 +1023,6 @@ local function Shared(self, unit)
 		PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", D.Scale(-2), D.Scale(2))
 		PowerBorder:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 		PowerBorder:SetTemplate("Default")
-		PowerBorder:CreateShadow("Default")
 		PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
 		self.PowerBorder = PowerBorder
 
@@ -1120,7 +1113,6 @@ local function Shared(self, unit)
 		HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", D.Scale(-2), D.Scale(2))
 		HealthBorder:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 		HealthBorder:SetTemplate("Default")
-		HealthBorder:CreateShadow("Default")
 		HealthBorder:SetFrameLevel(2)
 		self.HealthBorder = HealthBorder
 
@@ -1181,7 +1173,6 @@ local function Shared(self, unit)
 		HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", D.Scale(-2), D.Scale(2))
 		HealthBorder:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 		HealthBorder:SetTemplate("Default")
-		HealthBorder:CreateShadow("Default")
 		HealthBorder:SetFrameLevel(2)
 		self.HealthBorder = HealthBorder
 
@@ -1231,7 +1222,6 @@ local function Shared(self, unit)
 		PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", D.Scale(-2), D.Scale(2))
 		PowerBorder:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 		PowerBorder:SetTemplate("Default")
-		PowerBorder:CreateShadow("Default")
 		PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
 		self.PowerBorder = PowerBorder
 
@@ -1374,7 +1364,6 @@ local function Shared(self, unit)
 		HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", D.Scale(-2), D.Scale(2))
 		HealthBorder:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 		HealthBorder:SetTemplate("Default")
-		HealthBorder:CreateShadow("Default")
 		HealthBorder:SetFrameLevel(2)
 		self.HealthBorder = HealthBorder
 
@@ -1465,7 +1454,6 @@ if C["raid"].arena then
 		DuffedUIPrepArena[i]:SetAllPoints(arena[i])
 		DuffedUIPrepArena[i]:SetBackdrop(backdrop)
 		DuffedUIPrepArena[i]:SetBackdropColor(0,0,0)
-		DuffedUIPrepArena[i]:CreateShadow()
 		DuffedUIPrepArena[i].Health = CreateFrame("StatusBar", nil, DuffedUIPrepArena[i])
 		DuffedUIPrepArena[i].Health:SetAllPoints()
 		DuffedUIPrepArena[i].Health:SetStatusBarTexture(normTex)

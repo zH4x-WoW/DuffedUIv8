@@ -7,25 +7,23 @@
 	<Include file="locales\load_locales.xml" />
 	<Script file="config\config.lua" />
 	<Script file="config\profiles.lua" />
-	<Script file="core\customconfig.lua" />
 	<Script file="core\config.lua" />
 	<Script file="medias\medias.lua" />
 	<Include file="modules\unitframes\core\oUF\oUF.xml" />
 	<Include file="modules\unitframes\plugins\load_oUFPlugins.xml" />
 	<Script file="modules\unitframes\templates\colors.lua" />
 	<Script file="core\video.lua" />
-	<Script file="core\deprecated.lua" />
 	<Script file="core\api.lua" />
 	<Script file="core\move.lua" />
 	<Script file="core\functions.lua" />
 	<Script file="core\fonts.lua" />
-	<Script file="core\protection.lua" />
 	<Script file="core\popup.lua" />
 	<Script file="core\install.lua" />
-	<Script file="core\filters\f_buffnotice.lua" />
 	<Script file="core\filters\f_cbticks.lua" />
 
 	<!-- modules -->
+	<Script file="modules\maps\minimap.lua" />
+	<Script file="modules\panels\panels.lua" />
 	<Script file="modules\plugins\spellalert.lua" />
 	<Include file="modules\misc\load_misc.xml" />
 	<Script file="modules\loot\merchant.lua" />
@@ -35,9 +33,7 @@
 	<Include file="modules\buffs\template.xml" />
 	<Script file="modules\buffs\buffs.lua" />
 	<Script file="modules\buffs\header.lua" />
-	<Script file="modules\maps\minimap.lua" />
 	<Script file="modules\maps\worldmap.lua" />
-	<Script file="modules\panels\panels.lua" />
 	<Include file="modules\datatext\load_dt.xml" />
 	<Include file="modules\actionbars\load_ab.xml" />
 	<Script file="modules\chat\chatframes.lua" />

@@ -219,7 +219,6 @@ for i=1, BNToastFrame:GetNumRegions() do
 	end
 end	
 BNToastFrame:SetTemplate("Transparent")
-BNToastFrame:CreateShadow("Default")
 
 BNToastFrame:HookScript("OnShow", function(self)
 	self:ClearAllPoints()

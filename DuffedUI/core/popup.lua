@@ -14,7 +14,6 @@ for i = 1, total do
 	frame[i] = CreateFrame("Frame", "DuffedUIPopupDialog"..i, UIParent)
 	frame[i]:SetSize(400, 60)
 	frame[i]:SetFrameLevel(3)
-	frame[i]:CreateShadow("Default")
 	frame[i]:SetTemplate("Default")
 	frame[i]:Hide()
 
@@ -30,7 +29,6 @@ for i = 1, total do
 	frame[i].button1:SetPoint("TOPLEFT", frame[i], "BOTTOMLEFT", 0, -2)
 	frame[i].button1:SetSize(199, 23)
 	frame[i].button1:SetTemplate("Default")
-	frame[i].button1:CreateShadow("Default")
 	frame[i].button1:FontString("Text", C["media"].font, 12)
 	frame[i].button1.Text:SetPoint("CENTER")
 	frame[i].button1.Text:SetText(ACCEPT)
@@ -42,7 +40,6 @@ for i = 1, total do
 	frame[i].button2:SetPoint("TOPRIGHT", frame[i], "BOTTOMRIGHT", 0, -2)
 	frame[i].button2:SetSize(199, 23)
 	frame[i].button2:SetTemplate("Default")
-	frame[i].button2:CreateShadow("Default")
 	frame[i].button2:FontString("Text", C["media"].font, 12)
 	frame[i].button2.Text:SetPoint("CENTER")
 	frame[i].button2.Text:SetText(CANCEL)

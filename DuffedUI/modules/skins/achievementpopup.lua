@@ -11,7 +11,6 @@ local function LoadSkin()
 
 				if not frame.backdrop then
 					frame:CreateBackdrop("Transparent")
-					frame.backdrop:CreateShadow("Default")
 					frame.backdrop:Point("TOPLEFT", frame, "TOPLEFT", -2, -6)
 					frame.backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
 				end

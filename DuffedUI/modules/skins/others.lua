@@ -25,9 +25,6 @@ local function LoadSkin()
 	for i = 1, getn(skins) do
 		if _G[skins[i]] then
 			_G[skins[i]]:SetTemplate("Transparent")
-			if _G[skins[i]] ~= _G["AutoCompleteBox"] then -- frame to blacklist from create shadow function
-				_G[skins[i]]:CreateShadow("Default")
-			end
 		end
 	end
 	
@@ -45,7 +42,6 @@ local function LoadSkin()
 
 	-- Cinematic popup
 	CinematicFrameCloseDialog:SetTemplate("Transparent")
-	CinematicFrameCloseDialog:CreateShadow("Default")
 	CinematicFrameCloseDialog:SetScale(C["general"].uiscale)
 	CinematicFrameCloseDialogConfirmButton:SkinButton()
 	CinematicFrameCloseDialogResumeButton:SkinButton()
@@ -53,7 +49,6 @@ local function LoadSkin()
 	-- Report Cheats
 	ReportCheatingDialog:StripTextures()
 	ReportCheatingDialog:SetTemplate("Transparent")
-	ReportCheatingDialog:CreateShadow("Default")
 	ReportCheatingDialogReportButton:SkinButton()
 	ReportCheatingDialogCancelButton:SkinButton()
 	ReportCheatingDialogCommentFrame:StripTextures()
@@ -62,7 +57,6 @@ local function LoadSkin()
 	-- Report Name
 	ReportPlayerNameDialog:StripTextures()
 	ReportPlayerNameDialog:SetTemplate("Transparent")
-	ReportPlayerNameDialog:CreateShadow("Default")
 	ReportPlayerNameDialogReportButton:SkinButton()
 	ReportPlayerNameDialogCancelButton:SkinButton()
 	ReportPlayerNameDialogCommentFrame:StripTextures()
@@ -200,12 +194,10 @@ local function LoadSkin()
 	_G["GeneralDockManagerOverflowButtonList"]:SetTemplate()
 
 	RolePollPopup:SetTemplate("Default")
-	RolePollPopup:CreateShadow("Default")
 	RolePollPopupCloseButton:SkinCloseButton()
 	
 	BasicScriptErrors:StripTextures()
 	BasicScriptErrors:SetTemplate()
-	BasicScriptErrors:CreateShadow()
 	BasicScriptErrorsButton:SkinButton()
 	BasicScriptErrors:SetScale(C["general"].uiscale)
 	

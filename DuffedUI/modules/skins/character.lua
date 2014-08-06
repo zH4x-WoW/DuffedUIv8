@@ -109,7 +109,6 @@ local function LoadSkin()
 		end
 	end
 	CharacterFrame:SetTemplate("Transparent")
-	CharacterFrame:CreateShadow("Default")
 
 	--Titles
 	PaperDollTitlesPane:HookScript("OnShow", function(self)
@@ -144,7 +143,6 @@ local function LoadSkin()
 		end
 		GearManagerDialogPopup:StripTextures()
 		GearManagerDialogPopup:SetTemplate("Transparent")
-		GearManagerDialogPopup:CreateShadow("Default")
 		GearManagerDialogPopup:Point("LEFT", PaperDollFrame, "RIGHT", 4, 0)
 		GearManagerDialogPopupScrollFrame:StripTextures()
 		GearManagerDialogPopupEditBox:StripTextures()
@@ -240,7 +238,6 @@ local function LoadSkin()
 		ReputationFrame:StripTextures(true)
 		ReputationDetailFrame:StripTextures()
 		ReputationDetailFrame:SetTemplate("Transparent")
-		ReputationDetailFrame:CreateShadow("Default")
 		ReputationDetailFrame:Point("TOPLEFT", ReputationFrame, "TOPRIGHT", 4, -28)
 	end	
 	ReputationFrame:HookScript("OnShow", UpdateFactionSkins)
@@ -293,7 +290,6 @@ local function LoadSkin()
 		end
 		TokenFramePopup:StripTextures()
 		TokenFramePopup:SetTemplate("Transparent")
-		TokenFramePopup:CreateShadow("Default")
 		TokenFramePopup:Point("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)				
 	end)
 	TokenFrameContainerScrollBar:SkinScrollBar()

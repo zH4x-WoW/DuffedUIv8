@@ -133,7 +133,6 @@ if C["actionbar"].shapeshiftborder ~= true then
 	ssborder:SetAlpha(0)
 else
 	ssborder:SetTemplate("Transparent")
-	ssborder:CreateShadow("Default")
 end
 ssborder:SetFrameLevel(1)
 ssborder:SetFrameStrata("BACKGROUND")

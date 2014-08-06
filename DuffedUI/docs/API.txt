@@ -28,10 +28,6 @@ Now the functions:
 		Exactly the same as its little brother SetHeight, but every offset
 		is scaled to absolute (pixel perfect) pixel amounts.
 
-	frame:CreateShadow("Template")
-		Create shadow effect on the edge of the frame according to which template
-		we choose. If "" is empty, it will use "Default" template by default.
-
 	frame:Kill()
 		Unregister all events from this frame and kill its process for ever.
 

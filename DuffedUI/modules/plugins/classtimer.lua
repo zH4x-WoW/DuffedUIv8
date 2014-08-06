@@ -1099,7 +1099,6 @@ do
 		background:Point("TOPLEFT", result, "TOPLEFT", 20, 2);
 		background:Point("BOTTOMRIGHT", result, "BOTTOMRIGHT", 2, -2);
 		background:SetTemplate("Transparent")
-		background:CreateShadow("Default")
 		result.background = background;
 		
 		local border = CreateFrame("Frame", nil, result, nil);
@@ -1120,7 +1119,6 @@ do
 		iconborder:Size(1,1)
 		iconborder:Point("TOPLEFT", result, "TOPLEFT", -2, 2)
 		iconborder:Point("BOTTOMRIGHT", result, "BOTTOMLEFT", BAR_HEIGHT+2, -2)
-		iconborder:CreateShadow("Default")
 		
 		
 		result:RegisterEvent("PLAYER_ENTERING_WORLD");

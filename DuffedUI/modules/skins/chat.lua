@@ -25,7 +25,6 @@ local function LoadSkin()
 	end
 	
 	ChatConfigFrame:SetTemplate("Transparent")
-	ChatConfigFrame:CreateShadow("Default")
 	ChatConfigChatSettingsClassColorLegend:StripTextures()
 	ChatConfigChannelSettingsClassColorLegend:StripTextures()
 	ChatConfigChatSettingsLeft:StripTextures()

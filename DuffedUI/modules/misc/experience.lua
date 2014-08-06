@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-local barHeight, barWidth = 10, 250
+local barHeight, barWidth = 10, (DuffedUIChatBackgroundLeft:GetWidth() - 4)
 local font, fontsize, flags = C["media"].font, 11, "THINOUTLINE"
 local barTex = C["media"].normTex
 local flatTex = C["media"].normTex
@@ -40,7 +40,7 @@ end
 
 local backdrop = CreateFrame("Frame", "Experience_Backdrop", UIParent)
 backdrop:Size(barWidth, barHeight)
-backdrop:SetPoint("TOP", UIParent, "TOP", -0, -32)
+backdrop:SetPoint("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 5)
 backdrop:SetBackdropColor(C["general"].backdropcolor)
 backdrop:SetBackdropBorderColor(C["general"].backdropcolor)
 backdrop:CreateBackdrop()
@@ -130,11 +130,11 @@ local function updateStatus()
 		repBar:SetMinMaxValues(minRep, maxRep)
 		repBar:SetValue(value)
 		repBar:SetStatusBarColor(unpack(FactionInfo[rank][1]))
-		Text:SetText(format("%d / %d (%d%%)", value-minRep, maxRep-minRep, (value - minRep)/(maxRep - minRep) * 100))
+		Text:SetText(format("%d / %d (%d%%)", value - minRep, maxRep - minRep, (value - minRep)/(maxRep - minRep) * 100))
 	end
 
 	mouseFrame:SetScript("OnEnter", function()
-		GameTooltip:SetOwner(mouseFrame, "ANCHOR_BOTTOMLEFT", -3, barHeight)
+		GameTooltip:SetOwner(mouseFrame, "ANCHOR_TOPLEFT", -2, 5)
 		GameTooltip:ClearLines()
 		if not IsMaxLevel() then
 			GameTooltip:AddLine("Experience:")

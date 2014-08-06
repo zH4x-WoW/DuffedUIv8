@@ -38,7 +38,6 @@ local function LoadSkin()
 	end
 
 	PVEFrame:CreateBackdrop("Transparent")
-	PVEFrame:CreateShadow("Default")
 	PVEFrameTab1:SkinTab()
 	PVEFrameTab2:SkinTab()
 	PVEFrameCloseButton:SkinCloseButton()
@@ -313,7 +312,6 @@ local function LoadSkin()
 	LFDQueueFrameSpecificListScrollFrameScrollBar:SkinScrollBar()
 	
 	LFGDungeonReadyPopup:SetTemplate("Transparent")
-	LFGDungeonReadyPopup:CreateShadow("Default")
 	LFGDungeonReadyDialog.SetBackdrop = D.dummy
 	LFGDungeonReadyDialog.filigree:SetAlpha(0)
 	LFGDungeonReadyDialog.bottomArt:SetAlpha(0)
