@@ -8,7 +8,6 @@ D.petbuttonspacing = D.Scale(C["actionbar"].buttonspacing)
 
 local orig1, orig2 = {}, {}
 local GameTooltip = GameTooltip
-
 local linktypes = {item = true, enchant = true, spell = true, quest = true, unit = true, talent = true, achievement = true, glyph = true}
 
 local function OnHyperlinkEnter(frame, link, ...)
@@ -986,27 +985,22 @@ D.HidePortrait = function(self, unit)
 			self.Portrait:SetAlpha(1)
 		end
 	end
-	-- weird bug, need to set level everytime to fix a portrait issue on dx9. :X
 	self.Portrait:SetFrameLevel(4)
 end
 
 -- This is mostly just a fix for worgen male portrait because of a bug found in default Blizzard UI.
 D.PortraitUpdate = function(self, unit)
-	--Fucking Furries
 	if self:GetModel() and self:GetModel().find and self:GetModel():find("worgenmale") then
 		self:SetCamera(1)
 	end
 end
 
--------------
--- castbar --
--------------
--- used to check if a spell is interruptable
+-- castbar
 local CheckInterrupt = function(self, unit)
 	if unit == "vehicle" then unit = "player" end
 
 	if self.interrupt and UnitCanAttack("player", unit) then
-		self:SetStatusBarColor(1, 0, 0, .5)	
+		self:SetStatusBarColor(1, 0, 0, .5)
 	else
 		if C["castbar"].classcolor then
 			self:SetStatusBarColor(unpack(D.UnitColor.class[D.myclass]))
@@ -1047,23 +1041,20 @@ function D.setcastticks(frame, numTicks)
 	end
 end
 
--- display casting time
 D.CustomCastTime = function(self, duration)
 	self.Time:SetText(("%.1f / %.1f"):format(self.channeling and duration or self.max - duration, self.max))
 end
 
--- display delay in casting time
 D.CustomCastDelayText = function(self, duration)
 	self.Time:SetText(("%.1f |cffaf5050%s %.1f|r"):format(self.channeling and duration or self.max - duration, self.channeling and "- " or "+", self.delay))
 end
 
--- check if we can interrupt on cast
 D.castbar = function(self, unit, name, rank, castid)
 	CheckInterrupt(self, unit)
 
 	local color
 	self.unit = unit
-	
+
 	if C["castbar"].cbticks == true and unit == "player" then
 		local baseTicks = D.channelticks[name]
 		if baseTicks and D.hasteticks[name] then
@@ -1094,28 +1085,6 @@ D.castbar = function(self, unit, name, rank, castid)
 	end
 end
 
--- Castbar Size
-D.cbSize = function()
-	if C["unitframes"].enable ~= true or C["castbar"].enable ~= true then return end
-
-	local x = 4
-	if C["castbar"].cbicons then x = 32 end
-	DuffedUIPlayerCastBar:Width((DuffedUIBar1:GetWidth() + 1) - x)
-end
-
--- Castbar Position
-D.cbPosition = function()
-	if C["unitframes"].enable ~= true or C["castbar"].enable ~= true then return end
-
-	D.cbSize()
-	local x = 0
-	local y = 5
-	if C["castbar"].cbicons then x = 14 end
-	DuffedUIPlayerCastBar:ClearAllPoints()
-	DuffedUIPlayerCastBar:Point("BOTTOM", DuffedUIBar1, "TOP", x, y)
-end
-
--- update the warlock shard
 D.UpdateShards = function(self, event, unit, powerType)
 	if self.unit ~= unit or (powerType and powerType ~= 'SOUL_SHARDS') then return end
 	local num = UnitPower(unit, SPELL_POWER_SOUL_SHARDS)
@@ -1134,8 +1103,6 @@ D.Phasing = function(self, event)
 	local picon = self.PhaseIcon
 
 	if not UnitIsPlayer(self.unit) then picon:Hide() return end
-
-	-- TO BE COMPLETED
 end
 
 -- druid eclipse bar direction :P

@@ -733,10 +733,30 @@ local function Shared(self, unit)
 			tcb:Hide()
 			tinsert(D.AllowFrameMoving, TCBanchor)
 
+			local pcb = CreateFrame("Frame", "PCBanchor", UIParent)
+			pcb:SetTemplate("Default")
+			pcb:Size(DuffedUIBar1:GetWidth(), 21)
+			pcb:Point("BOTTOM", DuffedUIBar1, "TOP", 0, 5)
+			pcb:SetClampedToScreen(true)
+			pcb:SetMovable(true)
+			pcb:SetBackdropColor(0, 0, 0)
+			pcb:SetBackdropBorderColor(1, 0, 0)
+			pcb.text = D.SetFontString(pcb, C["media"].font, 12)
+			pcb.text:SetPoint("CENTER")
+			pcb.text:SetText("Move Playercastbar")
+			pcb:Hide()
+			tinsert(D.AllowFrameMoving, PCBanchor)
+
 			local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 			castbar:SetStatusBarTexture(normTex)
 			if unit == "player" then
 				castbar:Height(21)
+				if C["castbar"].cbicons then
+					castbar:Width(C["castbar"].playerwidth - 31)
+				else
+					castbar:Width(C["castbar"].playerwidth)
+				end
+				castbar:Point("RIGHT", PCBanchor, "RIGHT", -2, 0)
 			elseif unit == "target" then
 				castbar:Width(225)
 				castbar:Height(18)
@@ -1409,12 +1429,12 @@ target:Point("BOTTOM", UIParent, "BOTTOM", 340, 240)
 target:Size(218, 44)
 
 local tot = oUF:Spawn('targettarget', "DuffedUITargetTarget")
-tot:SetPoint("TOPLEFT", DuffedUITarget, "BOTTOMLEFT", 0, -15)
+tot:SetPoint("TOPLEFT", DuffedUITarget, "BOTTOMLEFT", 0, -16)
 tot:Size(142, 16)
 
 local pet = oUF:Spawn('pet', "DuffedUIPet")
 pet:SetParent(DuffedUIPetBattleHider)
-pet:SetPoint("TOPRIGHT", DuffedUIPlayer, "BOTTOMRIGHT", 0, -15)
+pet:SetPoint("TOPRIGHT", DuffedUIPlayer, "BOTTOMRIGHT", 0, -16)
 pet:Size(142, 16)
 
 local focus = oUF:Spawn('focus', "DuffedUIFocus")

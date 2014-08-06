@@ -46,6 +46,18 @@ C["chat"] = {
 	["fading"] = true,
 }
 
+C["castbar"] = {
+	["enable"] = true,
+	["petenable"] = true,
+	["cblatency"] = false,
+	["cbicons"] = true,
+	["spark"] = true,
+	["classcolor"] = false,
+	["color"] = { .31, .45, .63, .5 },
+	["cbticks"] = true,
+	["playerwidth"] = 376,
+}
+
 C["actionbar"] = {
 	["enable"] = true,
 	["rightbarvertical"] = false,
@@ -107,17 +119,6 @@ C["classtimer"] = {
 	["separator"] = true,										-- enable cast separator
 	["separatorcolor"] = { 0, 0, 0, .5 },						-- color of separator
 	["targetdebuffsenable"] = true,								-- enable debuffbars
-}
-
-C["castbar"] = {
-	["enable"] = true,											-- enable castbar
-	["petenable"] = true,										-- enable petcastbar
-	["cblatency"] = false,                              		-- enable castbar latency
-	["cbicons"] = true,                                 		-- enable icons on castbar
-	["spark"] = true,											-- enable spark
-	["classcolor"] = false,										-- enable classcolor for castbar
-	["color"] = { .31, .45, .63, .5 },							-- castbar color
-	["cbticks"] = true,											-- enable castbar ticks
 }
 
 C["auras"] = {

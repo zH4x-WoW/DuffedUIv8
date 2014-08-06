@@ -142,7 +142,6 @@ DuffedUIBar5Button.text = D.SetFontString(DuffedUIBar5Button, C["media"].font, 1
 DuffedUIBar5Button.text:Point("CENTER", 0, 0)
 DuffedUIBar5Button.text:SetText(cm..">|r")
 
--- exit vehicle button on left side of bottom action bar
 local vehicleleft = CreateFrame("Button", "DuffedUIExitVehicleButtonLeft", UIParent, "SecureHandlerClickTemplate")
 vehicleleft:SetAllPoints(DuffedUIInfoLeft)
 vehicleleft:SetFrameStrata("LOW")
@@ -156,7 +155,6 @@ vehicleleft.text:Point("CENTER", 0, 0)
 vehicleleft.text:SetText("|cff4BAF4C"..string.upper(LEAVE_VEHICLE).."|r")
 RegisterStateDriver(vehicleleft, "visibility", "[target=vehicle,exists] show;hide")
 
--- exit vehicle button on right side of bottom action bar
 local vehicleright = CreateFrame("Button", "DuffedUIExitVehicleButtonRight", UIParent, "SecureHandlerClickTemplate")
 vehicleright:SetAllPoints(DuffedUIInfoRight)
 vehicleright:SetTemplate("Default")
@@ -176,10 +174,6 @@ init:SetScript("OnEvent", function(self, event)
 	if not DuffedUIDataPerChar then DuffedUIDataPerChar = {} end
 	local db = DuffedUIDataPerChar
 
-	D.cbSize()
-	D.cbPosition()
-
-	-- Third Bar at the bottom
 	if db.bar3 then
 		UpdateBar(DuffedUIBar3Button, DuffedUIBar3)
 	end

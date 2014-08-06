@@ -64,7 +64,7 @@ if not C["actionbar"].enable ~= true then
 	DuffedUIBar1Mover:SetBackdropBorderColor(1, 0, 0, 1)
 	DuffedUIBar1Mover:Hide()
 	tinsert(D.AllowFrameMoving, DuffedUIBar1Mover)
-	
+
 	local DuffedUIBar1 = CreateFrame("Frame", "DuffedUIBar1", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar1:SetTemplate("Transparent")
 	DuffedUIBar1:SetAllPoints(DuffedUIBar1Mover)
