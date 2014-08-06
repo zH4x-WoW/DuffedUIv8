@@ -4,11 +4,8 @@ local D, C, L, G = unpack(select(2, ...))
 if not C["tooltip"].enable then return end
 
 local DuffedUITooltip = CreateFrame("Frame", "DuffedUITooltip", UIParent)
-
 local _G = getfenv(0)
-
 local GameTooltip, GameTooltipStatusBar = _G["GameTooltip"], _G["GameTooltipStatusBar"]
-
 local gsub, find, format = string.gsub, string.find, string.format
 local Tooltips = {GameTooltip,ItemRefShoppingTooltip1,ItemRefShoppingTooltip2,ItemRefShoppingTooltip3,ShoppingTooltip1,ShoppingTooltip2,ShoppingTooltip3,WorldMapTooltip,WorldMapCompareTooltip1,WorldMapCompareTooltip2,WorldMapCompareTooltip3}
 local ItemRefTooltip = ItemRefTooltip
@@ -41,11 +38,7 @@ anchor:SetFrameLevel(20)
 anchor:SetClampedToScreen(true)
 anchor:SetAlpha(0)
 if C["chat"].rbackground and DuffedUIChatBackgroundRight then
-	if C["actionbar"].petbarhorizontal then
-		anchor:SetPoint("BOTTOMRIGHT", DuffedUIPetBar, "TOPRIGHT", 0, -DuffedUIInfoRight:GetHeight())
-	else	
-		anchor:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, -DuffedUIInfoRight:GetHeight())
-	end
+	anchor:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, -DuffedUIInfoRight:GetHeight())
 else
 	anchor:SetPoint("BOTTOMRIGHT", UIParent, 0, 110)
 end

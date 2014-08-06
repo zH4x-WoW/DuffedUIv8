@@ -116,19 +116,32 @@ if not C["actionbar"].enable ~= true then
 	if C["actionbar"].rightbarvertical then DuffedUIBar5.text:SetText("Move Bar5") else DuffedUIBar5.text:SetText("Move\nBar5") end
 	tinsert(D.AllowFrameMoving, DuffedUIBar5)
 
-	local petbg = CreateFrame("Frame", "DuffedUIPetBar", UIParent, "SecureHandlerStateTemplate")
-	petbg:SetTemplate("Transparent")
+	DuffedUIPetBarMover = CreateFrame("Frame", "DuffedUIPetBarMover", UIParent)
+	DuffedUIPetBarMover:SetTemplate("Transparent")
 	if C["actionbar"].petbarhorizontal ~= true then
-		petbg:SetSize(D.petbuttonsize + (D.petbuttonspacing * 2), (D.petbuttonsize * 10) + (D.petbuttonspacing * 11))
-		petbg:SetPoint("RIGHT", DuffedUIBar5, "LEFT", -6, 0)
+		DuffedUIPetBarMover:SetSize(D.petbuttonsize + (D.petbuttonspacing * 2), (D.petbuttonsize * 10) + (D.petbuttonspacing * 11))
+		DuffedUIPetBarMover:SetPoint("RIGHT", DuffedUIBar5, "LEFT", -6, 0)
 	else
-		petbg:SetSize((D.petbuttonsize * 10) + (D.petbuttonspacing * 11), D.petbuttonsize + (D.petbuttonspacing * 2))
+		DuffedUIPetBarMover:SetSize((D.petbuttonsize * 10) + (D.petbuttonspacing * 11), D.petbuttonsize + (D.petbuttonspacing * 2))
 		if C["chat"].rbackground then
-			petbg:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 3)
+			DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 3)
 		else
-			petbg:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 176)
+			DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 176)
 		end
 	end
+	DuffedUIPetBarMover:SetFrameLevel(6)
+	DuffedUIPetBarMover:SetClampedToScreen(true)
+	DuffedUIPetBarMover:SetMovable(true)
+	DuffedUIPetBarMover.text = D.SetFontString(DuffedUIPetBarMover, C["media"].font, 12)
+	DuffedUIPetBarMover.text:SetPoint("CENTER")
+	DuffedUIPetBarMover.text:SetText("Move\nPet")
+	DuffedUIPetBarMover:SetBackdropBorderColor(1, 0, 0, 1)
+	DuffedUIPetBarMover:Hide()
+	tinsert(D.AllowFrameMoving, DuffedUIPetBarMover)
+
+	local petbg = CreateFrame("Frame", "DuffedUIPetBar", UIParent, "SecureHandlerStateTemplate")
+	petbg:SetTemplate("Transparent")
+	petbg:SetAllPoints(DuffedUIPetBarMover)
 end
 
 local chatmenu = CreateFrame("Frame", "DuffedUIChatMenu", UIParent)
