@@ -24,7 +24,6 @@ D.ChatSetup = function()
 		if i == 1 then FCF_SetWindowName(frame, "G, S & W") end
 		if i == 2 then FCF_SetWindowName(frame, "Log") end
 		if i == 3 then FCF_SetWindowName(frame, "Whisper") end
-		--if i == 4 then FCF_SetWindowName(frame, "Loot & Spam") end
 		D.SetDefaultChatPosition(frame)
 	end
 
@@ -107,7 +106,6 @@ end
 local function cvarsetup()
 	SetCVar("buffDurations", 1)
 	SetCVar("consolidateBuffs", 0)
-	SetCVar("mapQuestDifficulty", 1)
 	SetCVar("scriptErrors", 1)
 	SetCVar("ShowClassColorInNameplate", 1)
 	SetCVar("screenshotQuality", 8)
