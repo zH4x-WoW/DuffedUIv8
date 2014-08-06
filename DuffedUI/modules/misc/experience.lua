@@ -90,10 +90,14 @@ repBar:SetFrameLevel(2)
 xpBar:SetFrameLevel(2)
 mouseFrame:SetFrameLevel(3)
 
+local function GetPlayerXP()
+	return UnitXP("player"), UnitXPMax("player")
+end
+
 local function updateStatus()
-	local XP, maxXP = UnitXP("player"), UnitXPMax("player")
+	local XP, maxXP = GetPlayerXP()
 	local restXP = GetXPExhaustion()
-	local percXP = floor(XP / maxXP * 100)
+	local percXP = XP / maxXP * 100
 
 	if IsMaxLevel() then
 		xpBar:Hide()
@@ -109,9 +113,10 @@ local function updateStatus()
 		xpBar:SetValue(XP)
 
 		if restXP then
-			Text:SetText(format("%s/%s (%s%%|cffb3e1ff+%d%%|r)", D.ShortValue(XP), D.ShortValue(maxXP), percXP, restXP / maxXP * 100))
+			Text:SetText(format("%s/%s (%.1f%%|cffb3e1ff+%d%%|r)", D.ShortValue(XP), D.ShortValue(maxXP), percXP, restXP / maxXP * 100))
 			restedxpBar:Show()
-		local _, class = UnitClass("player") local color = RAID_CLASS_COLORS[class] local r, g, b = color.r, color.g, color.b	restedxpBar:SetStatusBarColor(r, g, b, .40)
+		local _, class = UnitClass("player") local color = RAID_CLASS_COLORS[class] local r, g, b = color.r, color.g, color.b
+			restedxpBar:SetStatusBarColor(r, g, b, .40)
 			restedxpBar:SetMinMaxValues(min(0, XP), maxXP)
 			restedxpBar:SetValue(XP + restXP)
 		else

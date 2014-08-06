@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+--[[local D, C, L, G = unpack(select(2, ...))
 
 local function LoadSkin()
 	MailFrame:StripTextures(true)
@@ -136,4 +136,4 @@ local function LoadSkin()
 	SendMailMailButton:Point("RIGHT", SendMailCancelButton, "LEFT", -2, 0)
 end
 
-tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
+tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)]]--

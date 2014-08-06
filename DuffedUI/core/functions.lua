@@ -1295,7 +1295,7 @@ D.UpdateManaLevel = function(self, elapsed)
 
 	local percMana = mana / maxmana * 100
 
-	if percMana <= C["unitframes"].lowThreshold then
+	if percMana == 20 then
 		self.ManaLevel:SetText("|cffaf5050"..L.unitframes_ouf_lowmana.."|r")
 		Flash(self, .3)
 	else

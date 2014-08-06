@@ -81,7 +81,7 @@ function WorldMap:Skin()
 	local TrackingMenuBackground = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Background
 	local DetailsScroll = QuestMapDetailsScrollFrame
 	local WMDropDown = WorldMapLevelDropDown
-	
+
 	Map:StripTextures()
 	Map:CreateBackdrop()
 	Map.backdrop:ClearAllPoints()
@@ -91,71 +91,77 @@ function WorldMap:Skin()
 	Map.Header:Size(Map.backdrop:GetWidth(), 23)
 	Map.Header:SetPoint("BOTTOMLEFT", Map.backdrop, "TOPLEFT", 0, 2)
 	Map.Header:SetTemplate()
-	
+
 	MapBorder:StripTextures()
 	MapBorderInset:StripTextures()
 	Details:StripTextures()
 	Rewards:StripTextures()
 	StoryHeader:StripTextures()
 	Quest:StripTextures()
-	
+
 	StoryTooltip:StripTextures()
 	StoryTooltip:SetTemplate("Transparent")
-	
+
 	QuestBackground:SetAlpha(0)
 
 	TutorialButton:Kill()
 
 	TrackingMenuButton:SetAlpha(0)
 	TrackingMenuBackground:SetAlpha(0)
-	
+
 	QuestScroll:CreateBackdrop()
 	QuestScroll.backdrop:ClearAllPoints()
 	QuestScroll.backdrop:SetTemplate("Transparent")
-	QuestScroll.backdrop:SetPoint("LEFT", 1, 0)
-	QuestScroll.backdrop:SetPoint("RIGHT", 30, 0)
-	QuestScroll.backdrop:SetPoint("TOP", 0, 3)
-	QuestScroll.backdrop:SetPoint("BOTTOM", 0, -5)
+	QuestScroll.backdrop:Size(299, 470)
+	QuestScroll.backdrop:SetPoint("LEFT", Map.backdrop, "RIGHT", 2, 0)
 	QuestScrollFrameScrollBar:SkinScrollBar()
-	
+
 	DetailsScroll:CreateBackdrop()
 	DetailsScroll.backdrop:SetAllPoints(QuestScroll.Backdrop)
 	DetailsScroll.backdrop:SetTemplate("Transparent")
+	DetailsScroll.backdrop:ClearAllPoints()
+	DetailsScroll.backdrop:Size(299, 470)
+	DetailsScroll.backdrop:SetPoint("LEFT", Map.backdrop, "RIGHT", 2, 0)
 	QuestMapDetailsScrollFrameScrollBar:SkinScrollBar()
-	
+
 	ViewAllButton:SkinButton()
 	ViewAllButton:ClearAllPoints()
 	ViewAllButton:SetPoint("LEFT", Map.Header, "RIGHT", 2, 0)
-	ViewAllButton:Size(288, 23)
-	
+	ViewAllButton:Size(299, 23)
+
 	BackButton:SkinButton()
 	BackButton:ClearAllPoints()
 	BackButton:SetPoint("LEFT", Map.Header, "RIGHT", 2, 0)
-	BackButton:Size(288, 23)
-	
+	BackButton:Size(299, 23)
+
 	AbandonButton:StripTextures()
 	AbandonButton:SkinButton()
-	AbandonButton:Size(QuestMapFrame.DetailsFrame.AbandonButton:GetWidth() - 4, QuestMapFrame.DetailsFrame.AbandonButton:GetHeight() - 4)
 	AbandonButton:ClearAllPoints()
-	AbandonButton:SetPoint("BOTTOMLEFT", Details, "BOTTOMLEFT", 3, -2)
+	AbandonButton:SetPoint("BOTTOMLEFT", QuestScroll.backdrop, "BOTTOMLEFT", 3, 3)
 
 	ShareButton:StripTextures()
 	ShareButton:SkinButton()
-	ShareButton:Size(ShareButton:GetWidth() - 4, ShareButton:GetHeight() - 4)
-	ShareButton:ClearAllPoints()
-	ShareButton:SetPoint("LEFT", AbandonButton, "RIGHT", 2, 0)	
-	
+
 	TrackButton:StripTextures()
 	TrackButton:SkinButton()
-	TrackButton:Size(TrackButton:GetWidth() - 4, TrackButton:GetHeight() - 4)
-	TrackButton:ClearAllPoints()
-	TrackButton:SetPoint("LEFT", ShareButton, "RIGHT", 2, 0)
-	
+
+	QuestNPCModel:StripTextures()
+	QuestNPCModel:CreateBackdrop("Transparent")
+	QuestNPCModel:ClearAllPoints()
+	QuestNPCModel:Point("TOPLEFT", BackButton, "TOPRIGHT", 2, -2)
+	QuestNPCModelTextFrame:StripTextures()
+	QuestNPCModelTextFrame:CreateBackdrop("Default")
+	QuestNPCModelTextFrame.backdrop:Point("TOPLEFT", QuestNPCModel.backdrop, "BOTTOMLEFT", 0, -2)
+	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(parentFrame, portrait, text, name, x, y)
+		QuestNPCModel:ClearAllPoints()
+		QuestNPCModel:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x + 16, y)
+	end)
+
 	-- Quests Buttons
 	for i = 1, 2 do
 		local Button = i == 1 and WorldMapFrame.UIElementsFrame.OpenQuestPanelButton or WorldMapFrame.UIElementsFrame.CloseQuestPanelButton
 		local Text = (i == 1 and QUESTS_LABEL.." -->") or ("<-- "..QUESTS_LABEL)
-		
+
 		Button:ClearAllPoints()
 		Button:SetPoint("BOTTOMRIGHT", -3, 3)
 		Button:Size(100, 23)
@@ -167,7 +173,7 @@ function WorldMap:Skin()
 	end
 
 	Navigation:Hide()
-	
+
 	TitleButton:ClearAllPoints()
 	TitleButton:SetAllPoints(Map.Header)
 	
@@ -178,25 +184,25 @@ function WorldMap:Skin()
 	CloseButton:ClearAllPoints()
 	CloseButton:SetPoint("RIGHT", Map.Header, "RIGHT", 8, -1)
 	CloseButton:SkinCloseButton()
-	
+
 	SizeButton:Kill()
-	
+
 	ScrollBar:Hide()
-	
+
 	Money:StripTextures()
 	Money:CreateBackdrop()
 	Money.Icon:SetTexture("Interface\\Icons\\inv_misc_coin_01")
 	Money.Icon:SetTexCoord(unpack(D.IconCoord))
 	Money.backdrop:ClearAllPoints()
 	Money.backdrop:SetOutside(Money.Icon)
-	
+
 	XP:StripTextures()
 	XP:CreateBackdrop()
 	XP.Icon:SetTexture("Interface\\Icons\\XP_Icon")
 	XP.Icon:SetTexCoord(unpack(D.IconCoord))
 	XP.backdrop:ClearAllPoints()
 	XP.backdrop:SetOutside(XP.Icon)
-	
+
 	WMDropDown:SkinDropDownBox()
 	WMDropDown:ClearAllPoints()
 	WMDropDown:SetPoint("TOPLEFT", -18, -2)

@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local D, C, L = unpack(select(2, ...))
 -- keybind feature
 local bind = CreateFrame("Frame", "DuffedUIHoverBind", UIParent)
 
@@ -187,9 +187,10 @@ SlashCmdList.MOUSEOVERBIND = function()
 			or key == "RALT"
 			or key == "UNKNOWN"
 			or key == "LeftButton"
+			or key == "MiddleButton"
 			then return end
 			
-			if key == "MiddleButton" then key = "BUTTON3" end
+			--if key == "MiddleButton" then key = "BUTTON3" end
 			if key == "Button4" then key = "BUTTON4" end
 			if key == "Button5" then key = "BUTTON5" end
 			
@@ -270,6 +271,8 @@ SlashCmdList.MOUSEOVERBIND = function()
 				local b = _G["MacroButton"..i]
 				b:HookScript("OnEnter", function(self) bind:Update(self, "MACRO") end)
 			end
+			MacroFrameTab1:HookScript("OnMouseUp", function() localmacros = 0 end)
+			MacroFrameTab2:HookScript("OnMouseUp", function() localmacros = 1 end)
 		end
 		
 		if not IsAddOnLoaded("Blizzard_MacroUI") then
