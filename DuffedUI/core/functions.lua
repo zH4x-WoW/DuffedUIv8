@@ -41,6 +41,17 @@ function D.HyperlinkMouseover()
 end
 D.HyperlinkMouseover()
 
+D.CommaValue = function (amount)
+	local formatted = amount
+	while true do  
+		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
+		if (k==0) then
+			break
+		end
+	end
+	return formatted
+end
+
 -- just for creating text
 D.SetFontString = function(parent, fontName, fontHeight, fontStyle)
 	local fs = parent:CreateFontString(nil, "OVERLAY")

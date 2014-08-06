@@ -84,7 +84,6 @@ local function Shared(self, unit)
 	panel:Size(1, 1)
 	panel:Point("TOPLEFT", health, "TOPLEFT", -2, 2)
 	if unit:find("partypet") then panel:Point("BOTTOMRIGHT", health, "BOTTOMRIGHT", 2, -2) else panel:Point("BOTTOMRIGHT", power, "BOTTOMRIGHT", 2, -2) end
-	panel:CreateShadow("Default")
 	self.panel = panel
 	
 	if not unit:find("partypet") then

@@ -17,17 +17,6 @@ local FactionInfo = {
 	[8] = {{ 155/255,  255/255, 155/255 }, "Exalted","FF9bff9b"},
 }
 
-function CommaValue(amount)
-	local formatted = amount
-	while true do  
-		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
-		if (k==0) then
-			break
-		end
-	end
-	return formatted
-end
-
 function colorize(r)
 	return FactionInfo[r][3]
 end
@@ -138,10 +127,10 @@ local function updateStatus()
 		GameTooltip:ClearLines()
 		if not IsMaxLevel() then
 			GameTooltip:AddLine("Experience:")
-			GameTooltip:AddLine(string.format('XP: %s/%s (%d%%)', CommaValue(XP), CommaValue(maxXP), (XP / maxXP) * 100))
-			GameTooltip:AddLine(string.format('Remaining: %s', CommaValue(maxXP - XP)))
+			GameTooltip:AddLine(string.format('XP: %s/%s (%d%%)', D.CommaValue(XP), D.CommaValue(maxXP), (XP / maxXP) * 100))
+			GameTooltip:AddLine(string.format('Remaining: %s', D.CommaValue(maxXP - XP)))
 			if restXP then
-				GameTooltip:AddLine(string.format('|cffb3e1ffRested: %s (%d%%)', CommaValue(restXP), restXP / maxXP * 100))
+				GameTooltip:AddLine(string.format('|cffb3e1ffRested: %s (%d%%)', D.CommaValue(restXP), restXP / maxXP * 100))
 			end
 		end
 		if GetWatchedFactionInfo() then
@@ -149,8 +138,8 @@ local function updateStatus()
 			if not IsMaxLevel() then GameTooltip:AddLine(" ") end
 			GameTooltip:AddLine(string.format('Reputation: %s', name))
 			GameTooltip:AddLine(string.format('Standing: |c'..colorize(rank)..'%s|r', FactionInfo[rank][2]))
-			GameTooltip:AddLine(string.format('Rep: %s/%s (%d%%)', CommaValue(value - min), CommaValue(max - min), (value - min)/(max - min) * 100))
-			GameTooltip:AddLine(string.format('Remaining: %s', CommaValue(max - value)))
+			GameTooltip:AddLine(string.format('Rep: %s/%s (%d%%)', D.CommaValue(value - min), D.CommaValue(max - min), (value - min)/(max - min) * 100))
+			GameTooltip:AddLine(string.format('Remaining: %s', D.CommaValue(max - value)))
 		end
 		GameTooltip:Show()
 	end)
