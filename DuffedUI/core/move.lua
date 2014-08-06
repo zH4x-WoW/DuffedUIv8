@@ -3,19 +3,11 @@ local D, C, L, G = unpack(select(2, ...))
 D.AllowFrameMoving = {}
 
 local function exec(self, enable)
-	if self == DuffedUIGMFrameAnchor or self == CBAnchor or self == TCBanchor or self == FCBanchor or self == RCDAnchor or self == DebuffAnchor or self == SpellCooldownsFrameAnchor or self == DuffedUIBnetHolder or self == dRunesAnchorFrame or self == sCombosAnchor then
+	if self == DuffedUIBar1Mover or self == DuffedUIGMFrameAnchor or self == CBAnchor or self == TCBanchor or self == FCBanchor or self == RCDAnchor or self == DebuffAnchor or self == SpellCooldownsFrameAnchor or self == DuffedUIBnetHolder or self == dRunesAnchorFrame or self == sCombosAnchor then
 		if enable then
 			self:Show()
 		else
 			self:Hide()
-		end
-	end
-
-	if self == DuffedUIBar1 then
-		if enable then 
-			self:SetBackdropBorderColor(1, 0, 0, 1)
-		else 
-			self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 		end
 	end
 
