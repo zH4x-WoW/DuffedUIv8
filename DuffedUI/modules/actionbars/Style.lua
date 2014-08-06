@@ -101,7 +101,7 @@ end
 
 function D.StyleActionBarPetAndShiftButton(normal, button, icon, name, pet)
 	if button.isSkinned then return end
-	
+
 	button:SetWidth(D.petbuttonsize)
 	button:SetHeight(D.petbuttonsize)
 	button:CreateBackdrop()
@@ -109,7 +109,7 @@ function D.StyleActionBarPetAndShiftButton(normal, button, icon, name, pet)
 	icon:SetTexCoord(.08, .92, .08, .92)
 	icon:ClearAllPoints()
 	icon:SetInside()
-	if pet then			
+	if pet then
 		if D.petbuttonsize < 30 then
 			local autocast = _G[name.."AutoCastable"]
 			autocast:SetAlpha(0)
@@ -118,22 +118,20 @@ function D.StyleActionBarPetAndShiftButton(normal, button, icon, name, pet)
 		shine:Size(D.petbuttonsize, D.petbuttonsize)
 		shine:ClearAllPoints()
 		shine:SetPoint("CENTER", button, 0, 0)
-		icon:Point("TOPLEFT", button, 2, -2)
-		icon:Point("BOTTOMRIGHT", button, -2, 2)
 	end
-	
+
 	button:SetNormalTexture("")
 	button.SetNormalTexture = D.dummy
-	
+
 	local Flash	 = _G[name.."Flash"]
 	Flash:SetTexture("")
-	
+
 	if normal then
 		normal:ClearAllPoints()
 		normal:SetPoint("TOPLEFT")
 		normal:SetPoint("BOTTOMRIGHT")
 	end
-	
+
 	button:StyleButton()
 	button.isSkinned = true
 end
@@ -144,7 +142,7 @@ function D.StyleShift()
 		local button  = _G[name]
 		local icon  = _G[name.."Icon"]
 		local normal  = _G[name.."NormalTexture"]
-		D.StyleActionBarPetAndShiftButton(normal, button, icon, name)
+		D.StyleActionBarPetAndShiftButton(normal, button, icon, name, false)
 	end
 end
 
@@ -158,7 +156,7 @@ function D.StylePet()
 	end
 end
 
-function D.UpdateActionBarHotKey(self, actionButtonType)
+function D.UpdateActionBarHotKey(btype)
 	local hotkey = _G[self:GetName() .. 'HotKey']
 	local text = hotkey:GetText()
 	
@@ -288,7 +286,6 @@ local HideOverlayGlow = function(self)
 end
 
 D.ShowHighlightActionButton = function(self)
-	-- hide ugly blizzard proc highlight
 	if C["actionbar"].borderhighlight then
 		if self.overlay then
 			self.overlay:Hide()
@@ -320,7 +317,7 @@ D.ShowHighlightActionButton = function(self)
 			if self.NewProc then
 				self.NewProc:Hide()
 			end
-			
+
 			self.overlay:Show()
 			ShowOverlayGlow(self)
 		else

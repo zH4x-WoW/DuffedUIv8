@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true then return end
 
 ---------------------------------------------------------------------------
@@ -13,7 +13,6 @@ bar:SetHeight(10)
 bar:SetFrameStrata("MEDIUM")
 bar:SetMovable(true)
 bar:SetClampedToScreen(true)
-G.ActionBars.Stance = bar
 
 -- shapeshift command to move totem or shapeshift in-game
 local ssmover = CreateFrame("Frame", "DuffedUIStanceHolder", UIParent)
@@ -25,7 +24,6 @@ ssmover:SetAlpha(0)
 ssmover.text = D.SetFontString(ssmover, C["media"].uffont, 12)
 ssmover.text:SetPoint("CENTER")
 ssmover.text:SetText(L.move_shapeshift)
-G.ActionBars.Stance.Holder = ssmover
 tinsert(D.AllowFrameMoving, DuffedUIStance)
 
 -- hide it if not needed and stop executing code
@@ -63,7 +61,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 			local button = _G["StanceButton"..i]
 			button:SetFrameStrata("LOW")
 			if i ~= 1 then
-				button:ClearAllPoints()				
+				button:ClearAllPoints()
 				local previous = _G["StanceButton"..i-1]
 				if C["actionbar"].verticalshapeshift then
 					button:Point("TOP", previous, "BOTTOM", 0, -D.buttonspacing)
@@ -77,8 +75,6 @@ bar:SetScript("OnEvent", function(self, event, ...)
 			else
 				button:Hide()
 			end
-			
-			G.ActionBars.Stance["Button"..i] = button
 		end
 		RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] hide; show")
 	elseif event == "UPDATE_SHAPESHIFT_FORMS" then

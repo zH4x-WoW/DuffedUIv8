@@ -209,7 +209,7 @@ D.PetBarUpdate = function(self, event)
 		petAutoCastableTexture = _G[buttonName.."AutoCastable"]
 		petAutoCastShine = _G[buttonName.."Shine"]
 		local name, subtext, texture, isToken, isActive, autoCastAllowed, autoCastEnabled = GetPetActionInfo(i)
-		
+
 		if not isToken then
 			petActionIcon:SetTexture(texture)
 			petActionButton.tooltipName = name
@@ -217,7 +217,7 @@ D.PetBarUpdate = function(self, event)
 			petActionIcon:SetTexture(_G[texture])
 			petActionButton.tooltipName = _G[name]
 		end
-		
+
 		petActionButton.isToken = isToken
 		petActionButton.tooltipSubtext = subtext
 
@@ -230,21 +230,21 @@ D.PetBarUpdate = function(self, event)
 			petActionButton:SetChecked(0)
 			if IsPetAttackAction(i) then
 				PetActionButton_StopFlash(petActionButton)
-			end			
+			end
 		end
-		
+
 		if autoCastAllowed then
 			petAutoCastableTexture:Show()
 		else
 			petAutoCastableTexture:Hide()
 		end
-		
+
 		if autoCastEnabled then
 			AutoCastShine_AutoCastStart(petAutoCastShine)
 		else
 			AutoCastShine_AutoCastStop(petAutoCastShine)
 		end
-		
+
 		if texture then
 			if GetPetActionSlotUsable(i) then
 				SetDesaturation(petActionIcon, nil)
@@ -255,10 +255,7 @@ D.PetBarUpdate = function(self, event)
 		else
 			petActionIcon:Hide()
 		end
-		
-		-- between level 1 and 10 on cata, we don't have any control on Pet. (I lol'ed so hard)
-		-- Setting desaturation on button to true until you learn the control on class trainer.
-		-- you can at least control "follow" button.
+
 		if not PetHasActionBar() and texture and name ~= "PET_ACTION_FOLLOW" then
 			PetActionButton_StopFlash(petActionButton)
 			SetDesaturation(petActionIcon, 1)
@@ -267,18 +264,6 @@ D.PetBarUpdate = function(self, event)
 	end
 end
 
-D.petBarPosition = function()
-	if C["actionbar"].petbarhorizontal ~= true or InCombatLockdown() then return end
-
-	DuffedUIPetBar:ClearAllPoints()
-	if C["chat"].rbackground then
-		DuffedUIPetBar:Point("BOTTOM", DuffedUIChatBackgroundRight, "TOP", 24, 3)
-	else
-		DuffedUIPetBar:Point("BOTTOM", ChatFrame4, "TOP", 0, 10)
-	end
-end
-
--- remove decimal from a number
 D.Round = function(number, decimals)
 	if not decimals then decimals = 0 end
     return (("%%.%df"):format(decimals)):format(number)

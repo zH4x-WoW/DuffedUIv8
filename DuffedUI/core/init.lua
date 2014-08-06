@@ -86,24 +86,13 @@ D.Credits = {
 }
 
 D.DuffedCredits = {
-	"jones7",
-	"Waffurizzle",
-	"Carbonium",
-	"Optional",
-	"Pixelfcuk",
-	"Shera",
-	"lefirez",
-	"PATix",
-	"macgee",
-	"Roglash",
-	"loveran",
-	"transform",
-	"Kanestorm",
-	"Sinaris",
+	"Shaney",
 	"Juhawny",
-	"Elenarda",
-	"Zenglao",
+	"Rav",
 	"loki",
+	"Sinaris",
+	"Digawen",
+	"Zenglao",
 }
 
 ERR_NOT_IN_RAID = "";
