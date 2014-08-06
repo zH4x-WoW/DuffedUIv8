@@ -1,6 +1,6 @@
 ## Interface: 60000
 ## Author: Merith @ Zirkel des Cenarius EU
-## Version: 8.0011
+## Version: 8.0012
 ## Title: |cffC41F3BDuffedUI|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: DuffedUIData
@@ -8,10 +8,5 @@
 ## OptionalDeps: DuffedUI_ConfigUI
 ## X-oUF: oUFDuffedUI
 ## Website: http://www.duffed.net
-## X-Tukui-Project-Folders: DuffedUI, DuffedUI_ConfigUI, DuffedUI_Raid, DuffedUI_Raid_Healing
 
 DuffedUI.xml
- 
- 
-## X-Tukui-ProjectID: 114
-## X-Tukui-ProjectFolders: DuffedUI_Raid, DuffedUI_Raid_Healing, DuffedUI_ConfigUI, DuffedUI

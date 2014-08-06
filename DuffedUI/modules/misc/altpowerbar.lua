@@ -1,5 +1,5 @@
-local D, C, L, G = unpack(select(2, ...))
-if IsAddOnLoaded("SmellyPowerBar") then return end
+local D, C, L = unpack(select(2, ...))
+if not DuffedUIInfoLeft then return end
 
 local PowerTextures = {
 	["INTERFACE\\UNITPOWERBARALT\\STONEGUARDJASPER_HORIZONTAL_FILL.BLP"] = {r = 1, g = 0.4, b = 0},
@@ -12,14 +12,13 @@ local PowerTextures = {
 PlayerPowerBarAlt:UnregisterEvent("UNIT_POWER_BAR_SHOW")
 PlayerPowerBarAlt:UnregisterEvent("UNIT_POWER_BAR_HIDE")
 PlayerPowerBarAlt:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	
+
 local AltPowerBar = CreateFrame("Frame", "DuffedUIAltPowerBar", DuffedUIInfoLeft)
 AltPowerBar:SetAllPoints()
 AltPowerBar:SetFrameStrata("MEDIUM")
 AltPowerBar:SetFrameLevel(0)
 AltPowerBar:EnableMouse(true)
-AltPowerBar:SetTemplate("Default")
-G.Misc.AltPowerBar = AltPowerBar
+AltPowerBar:SetTemplate()
 
 local AltPowerBarStatus = CreateFrame("StatusBar", "DuffedUIAltPowerBarStatus", AltPowerBar)
 AltPowerBarStatus:SetFrameLevel(AltPowerBar:GetFrameLevel() + 1)
@@ -27,14 +26,12 @@ AltPowerBarStatus:SetStatusBarTexture(C["media"].normTex)
 AltPowerBarStatus:SetMinMaxValues(0, 100)
 AltPowerBarStatus:Point("TOPLEFT", DuffedUIInfoLeft, "TOPLEFT", 2, -2)
 AltPowerBarStatus:Point("BOTTOMRIGHT", DuffedUIInfoLeft, "BOTTOMRIGHT", -2, 2)
-G.Misc.AltPowerBar.Status = AltPowerBarStatus
 
 local AltPowerText = AltPowerBarStatus:CreateFontString("DuffedUIAltPowerBarText", "OVERLAY")
 AltPowerText:SetFont(C["media"].font, 12)
 AltPowerText:Point("CENTER", AltPowerBar, "CENTER", 0, 0)
 AltPowerText:SetShadowColor(0, 0, 0)
 AltPowerText:SetShadowOffset(1.25, -1.25)
-G.Misc.AltPowerBar.Text = AltPowerText
 
 AltPowerBar:RegisterEvent("UNIT_POWER")
 AltPowerBar:RegisterEvent("UNIT_POWER_BAR_SHOW")

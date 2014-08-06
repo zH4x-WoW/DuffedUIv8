@@ -1,12 +1,10 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 -- credits : Haste
 
 if not C["loot"].lootframe == true then return end
 
 local addon = CreateFrame("Button", "DuffedUILootFrame")
-G.Loot.Frame = addon
 local title = addon:CreateFontString(nil, "OVERLAY")
-G.Loot.Frame.title = title
 
 local iconSize = 30
 local frameScale = 1

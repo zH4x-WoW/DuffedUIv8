@@ -1,8 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-local barHeight, barWidth = 10, 275
-local showText = true
-local mouseoverText = false
+local barHeight, barWidth = 10, 250
 local font, fontsize, flags = C["media"].font, 11, "THINOUTLINE"
 local barTex = C["media"].normTex
 local flatTex = C["media"].normTex
@@ -41,14 +39,8 @@ local function IsMaxLevel()
 end
 
 local backdrop = CreateFrame("Frame", "Experience_Backdrop", UIParent)
-backdrop:Size(275, 10)
+backdrop:Size(barWidth, barHeight)
 backdrop:SetPoint("TOP", UIParent, "TOP", -0, -32)
-backdrop:SetBackdrop({
-	bgFile = barTex, 
-	edgeFile = barTex, 
-	tile = false, tileSize = 0, edgeSize = 1, 
-	insets = { left = -1, right = -1, top = -1, bottom = -1}
-})
 backdrop:SetBackdropColor(C["general"].backdropcolor)
 backdrop:SetBackdropBorderColor(C["general"].backdropcolor)
 backdrop:CreateBackdrop()
@@ -80,9 +72,6 @@ mouseFrame:EnableMouse(true)
 local Text = mouseFrame:CreateFontString("mouseFrame_Text", "OVERLAY")
 Text:SetFont(font, fontsize, flags)
 Text:SetPoint("CENTER", mouseFrame, "CENTER", 0, 0)
-if mouseoverText == true then
-	Text:SetAlpha(0)
-end
 
 backdrop:SetFrameLevel(0)
 restedxpBar:SetFrameLevel(1)
@@ -97,7 +86,7 @@ end
 local function updateStatus()
 	local XP, maxXP = GetPlayerXP()
 	local restXP = GetXPExhaustion()
-	local percXP = XP / maxXP * 100
+	local percXP = floor(XP / maxXP * 100)
 
 	if IsMaxLevel() then
 		xpBar:Hide()
@@ -113,9 +102,9 @@ local function updateStatus()
 		xpBar:SetValue(XP)
 
 		if restXP then
-			Text:SetText(format("%s/%s (%.1f%%|cffb3e1ff+%d%%|r)", D.ShortValue(XP), D.ShortValue(maxXP), percXP, restXP / maxXP * 100))
+			Text:SetText(format("%s/%s (%s%%|cffb3e1ff+%d%%|r)", D.ShortValue(XP), D.ShortValue(maxXP), percXP, restXP / maxXP * 100))
 			restedxpBar:Show()
-		local _, class = UnitClass("player") local color = RAID_CLASS_COLORS[class] local r, g, b = color.r, color.g, color.b
+			local r, g, b = color.r, color.g, color.b
 			restedxpBar:SetStatusBarColor(r, g, b, .40)
 			restedxpBar:SetMinMaxValues(min(0, XP), maxXP)
 			restedxpBar:SetValue(XP + restXP)
@@ -145,9 +134,6 @@ local function updateStatus()
 	end
 
 	mouseFrame:SetScript("OnEnter", function()
-		if mouseoverText == true then
-			Text:SetAlpha(1)
-		end
 		GameTooltip:SetOwner(mouseFrame, "ANCHOR_BOTTOMLEFT", -3, barHeight)
 		GameTooltip:ClearLines()
 		if not IsMaxLevel() then
@@ -170,9 +156,6 @@ local function updateStatus()
 	end)
 	mouseFrame:SetScript("OnLeave", function()
 		GameTooltip:Hide()
-		if mouseoverText == true then
-			Text:SetAlpha(0)
-		end
 	end)
 end
 
