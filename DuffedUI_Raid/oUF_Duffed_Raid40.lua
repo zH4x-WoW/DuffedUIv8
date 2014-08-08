@@ -5,7 +5,7 @@ assert(oUF, "DuffedUI was unable to locate oUF install.")
 ns._Objects = {}
 ns._Headers = {}
 
-local D, C, L, G = unpack(DuffedUI)
+local D, C, L, G = DuffedUI:unpack()
 if not C["raid"].enable == true then return end
 
 local backdrop = {

@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...))
+local D, C, L = select(2, ...):unpack()
 
 --------------------------------------------------------------------
 -- DuffedUI Minimap Script
@@ -18,7 +18,7 @@ end
 DuffedUIMinimap:Size(144)
 DuffedUIMinimap:SetClampedToScreen(true)
 DuffedUIMinimap:SetMovable(true)
-DuffedUIMinimap.text = D.SetFontString(DuffedUIMinimap, C["media"].uffont, 12)
+DuffedUIMinimap.text = D.SetFontString(DuffedUIMinimap, C["media"].font, 12)
 DuffedUIMinimap.text:SetPoint("CENTER")
 DuffedUIMinimap.text:SetText(L.move_minimap)
 tinsert(D.AllowFrameMoving, DuffedUIMinimap)

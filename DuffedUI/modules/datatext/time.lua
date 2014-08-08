@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local D, C, L, G = select(2, ...):unpack() -- Import: T - functions, constants, variables; C - config; L - locales
 --------------------------------------------------------------------
 -- TIME
 --------------------------------------------------------------------

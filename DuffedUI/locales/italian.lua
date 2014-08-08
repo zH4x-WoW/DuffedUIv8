@@ -1,6 +1,6 @@
 -- localization for italian made by Iceky (http://www.duffed.net/forums/profile.php?id=42201)
 -- updated version by Namaless (http://www.duffed.net/forums/profile.php?id=151969)
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 
 if D.client == "itIT" then
 	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"

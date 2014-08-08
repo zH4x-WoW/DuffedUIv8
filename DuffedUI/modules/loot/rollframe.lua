@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L, G = select(2, ...):unpack() 
 --[[
 		this is an edited version of teksloot
 		all credits of this mod goes to tekhub
@@ -17,7 +17,7 @@ anchor:Height(22)
 anchor:SetBackdrop(backdrop)
 anchor:SetBackdropColor(.25, .25, .25, 1)
 local label = anchor:CreateFontString(nil, "ARTWORK")
-label:SetFont(C["media"].uffont, 12, "OUTLINE")
+label:SetFont(C["media"].font, 12, "OUTLINE")
 label:SetAllPoints(anchor)
 label:SetText(L.move_roll)
 anchor:SetMovable(true)
@@ -177,11 +177,11 @@ local function CreateRollFrame()
 
 	local bind = frame:CreateFontString()
 	bind:SetPoint("LEFT", pass, "RIGHT", 3, 1)
-	bind:SetFont(C["media"].uffont, 12, "OUTLINE")
+	bind:SetFont(C["media"].font, 12, "OUTLINE")
 	frame.fsbind = bind
 
 	local loot = frame:CreateFontString(nil, "ARTWORK")
-	loot:SetFont(C["media"].uffont, 12, "OUTLINE")
+	loot:SetFont(C["media"].font, 12, "OUTLINE")
 	loot:SetPoint("LEFT", bind, "RIGHT", 0, 0)
 	loot:SetPoint("RIGHT", frame, "RIGHT", -5, 0)
 	loot:SetSize(200, 10)

@@ -2,7 +2,7 @@
 -- Credits for this script goes to Azilroka --
 ----------------------------------------------
 
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 
 function ColoringFriendsList()
 	local friendOffset = HybridScrollFrame_GetOffset(FriendsFrameFriendsScrollFrame)

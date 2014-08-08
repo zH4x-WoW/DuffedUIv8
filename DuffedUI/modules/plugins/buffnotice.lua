@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 if C["auras"].buffnotice ~= true then return end
 
 local MyClass = select(2, UnitClass('player'))
@@ -62,6 +62,8 @@ local BuffReminder1 = {
 		57330, -- Horn of Winter
 		21562, -- PW: Fortitude
 	},
+	["HUNTER"] = {
+	},
 }
 
 local BuffReminder2 = {
@@ -97,7 +99,7 @@ local function PositionFrames(self, event)
 	local Width = 40
 	BuffsWarning1:SetPoint('LEFT', BuffsWarningFrame, 'LEFT', 0, 0)
 	BuffsWarning2:SetPoint('LEFT', BuffsWarningFrame, 'LEFT', BuffsWarning1:IsShown() and 48 or 0, 0)
-	if BuffsWarning1:IsShown() and (BuffsWarning2:IsShown() or WeaponBuffs:IsShown()) then Width = 88 end
+	if BuffsWarning1:IsShown() and BuffsWarning2:IsShown() then Width = 88 end
 	BuffsWarningFrame:SetWidth(Width)
 	BuffsWarningFrame:SetPoint('CENTER', UIParent, 'CENTER', 0, 100)
 end

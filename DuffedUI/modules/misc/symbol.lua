@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 
 local menuFrame = CreateFrame("Frame", "DuffedUIMarkingFrame", UIParent, "UIDropDownMenuTemplate")
 G.Misc.SymbolDropDown = menuFrame

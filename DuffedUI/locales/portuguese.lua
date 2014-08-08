@@ -1,5 +1,5 @@
 -- localization for enUS and enGB
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 
 if D.client == "ptBR" then
 	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"

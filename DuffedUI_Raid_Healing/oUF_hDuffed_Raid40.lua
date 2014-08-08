@@ -5,7 +5,7 @@ assert(oUF, "DuffedUI was unable to locate oUF install.")
 ns._Objects = {}
 ns._Headers = {}
 
-local D, C, L, G = unpack(DuffedUI)
+local D, C, L, G = DuffedUI:unpack()
 if not C["raid"].enable == true then return end
 
 local normTex = C["media"].normTex
@@ -218,7 +218,7 @@ local function Shared(self, unit)
 		}
 	end
 	
-	if D.myclass == "PRIEST" and C["unitframes"].weakenedsoulbar then
+	if D.Class == "PRIEST" and C["unitframes"].weakenedsoulbar then
 		local ws = CreateFrame("StatusBar", self:GetName().."_WeakenedSoul", power)
 		ws:SetAllPoints(power)
 		ws:SetStatusBarTexture(C["media"].normTex)
@@ -254,7 +254,7 @@ local function Shared(self, unit)
 		RaidDebuffs.time:SetTextColor(1, .9, 0)
 		
 		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, 'OVERLAY')
-		RaidDebuffs.count:SetFont(C["media"].uffont, 9 * C["raid"].gridscale, "THINOUTLINE")
+		RaidDebuffs.count:SetFont(C["media"].font, 9 * C["raid"].gridscale, "THINOUTLINE")
 		RaidDebuffs.count:Point('BOTTOMRIGHT', RaidDebuffs, 'BOTTOMRIGHT', 0, 2)
 		RaidDebuffs.count:SetTextColor(1, .9, 0)
 		
@@ -267,7 +267,7 @@ end
 oUF:RegisterStyle('DuffedUIHealR25R40', Shared)
 oUF:Factory(function(self)
 	oUF:SetActiveStyle("DuffedUIHealR25R40")
-	
+
 	local spawnG = "solo,raid,party"
 	local pointG = "LEFT"
 	local capG = "BOTTOM"
@@ -299,7 +299,7 @@ oUF:Factory(function(self)
 		
 	)
 	if DuffedUIChatBackgroundLeft then
-		raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 6)
+		raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 16)
 	else
 		raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 23)
 	end

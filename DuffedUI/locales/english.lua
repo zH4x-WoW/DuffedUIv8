@@ -1,5 +1,5 @@
 -- localization for enUS and enGB
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 
 L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
 L.AFKText_Text2 = "Middle click the minimap for micromenu"

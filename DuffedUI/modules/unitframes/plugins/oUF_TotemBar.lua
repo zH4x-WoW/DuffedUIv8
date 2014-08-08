@@ -1,5 +1,5 @@
-local D, C, L, G = unpack(select(2, ...)) 
-if C["unitframes"].enable ~= true or D.myclass ~= "SHAMAN" then return end
+local D, C, L, G = select(2, ...):unpack() 
+if C["unitframes"].enable ~= true or D.Class ~= "SHAMAN" then return end
 --[[
 	Documentation:
 	

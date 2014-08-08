@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...)) 
+local D, C, L = select(2, ...):unpack() 
 if not C["actionbar"].enable == true then return end
 
 ---------------------------------------------------------------------------
@@ -21,7 +21,7 @@ ssmover:SetTemplate("Default")
 ssmover:SetFrameStrata("HIGH")
 ssmover:SetBackdropBorderColor(1,0,0)
 ssmover:SetAlpha(0)
-ssmover.text = D.SetFontString(ssmover, C["media"].uffont, 12)
+ssmover.text = D.SetFontString(ssmover, C["media"].font, 12)
 ssmover.text:SetPoint("CENTER")
 ssmover.text:SetText(L.move_shapeshift)
 tinsert(D.AllowFrameMoving, DuffedUIStance)
@@ -78,9 +78,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 		end
 		RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] hide; show")
 	elseif event == "UPDATE_SHAPESHIFT_FORMS" then
-		-- Update Stance Bar Button Visibility
-		-- I seriously don't know if it's the best way to do it on spec changes or when we learn a new stance.
-		if InCombatLockdown() then return end -- > just to be safe ;p
+		if InCombatLockdown() then return end
 		for i = 1, NUM_STANCE_SLOTS do
 			local button = _G["StanceButton"..i]
 			local _, name = GetShapeshiftFormInfo(i)

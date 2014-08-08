@@ -1,10 +1,10 @@
-local D, C, L = unpack(select(2, ...))
+local D, C, L = select(2, ...):unpack()
 
 local barHeight, barWidth = 10, (DuffedUIChatBackgroundLeft:GetWidth() - 4)
 local font, fontsize, flags = C["media"].font, 11, "THINOUTLINE"
 local barTex = C["media"].normTex
 local flatTex = C["media"].normTex
-local class = D.myclass
+local class = D.Class
 local color = RAID_CLASS_COLORS[class]
 local FactionInfo = {
 	[1] = {{ 170/255, 70/255,  70/255 }, "Hated", "FFaa4646"},

@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...))
+local D, C, L = select(2, ...):unpack()
 
 local _G = _G
 local Noop = function() end
@@ -42,10 +42,11 @@ function WorldMap:SkinReward(i)
 	local Texture = Reward.Icon:GetTexture()
 	
 	Reward:StripTextures()
+	Reward:StyleButton()
 	Reward:CreateBackdrop()
 	Reward.Icon:SetTexture(Texture)
-	Reward.Backdrop:ClearAllPoints()
-	Reward.Backdrop:SetOutside(Reward.Icon)
+	Reward.backdrop:ClearAllPoints()
+	Reward.backdrop:SetOutside(Reward.Icon)
 	Reward.Icon:SetTexCoord(unpack(D.IconCoord))
 end
 

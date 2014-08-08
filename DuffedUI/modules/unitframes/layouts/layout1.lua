@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 if not C["unitframes"].enable or C["unitframes"].layout ~= 1 then return end
 
 local ADDON_NAME, ns = ...
@@ -182,7 +182,7 @@ local function Shared(self, unit)
 			self.Portrait = portrait
 		end
 
-		if D.myclass == "PRIEST" and C["unitframes"].weakenedsoulbar then
+		if D.Class == "PRIEST" and C["unitframes"].weakenedsoulbar then
 			local ws = CreateFrame("StatusBar", self:GetName().."_WeakenedSoul", power)
 			ws:SetAllPoints(power)
 			ws:SetStatusBarTexture(C["media"].normTex)
@@ -250,7 +250,7 @@ local function Shared(self, unit)
 			self:RegisterEvent("PARTY_LEADER_CHANGED", D.MLAnchorUpdate)
 			self:RegisterEvent("PARTY_MEMBERS_CHANGED", D.MLAnchorUpdate)
 
-			if D.myclass == "DRUID" then
+			if D.Class == "DRUID" then
 				local DruidManaUpdate = CreateFrame("Frame")
 				DruidManaUpdate:SetScript("OnUpdate", function() D.UpdateDruidManaText(self) end)
 				local DruidManaText = D.SetFontString(health, C["media"].font, 12, "THINOUTLINE")
@@ -258,7 +258,7 @@ local function Shared(self, unit)
 				self.DruidManaText = DruidManaText
 			end
 
-			if (D.myclass == "WARRIOR" or D.myclass == "DEATHKNIGHT" or D.myclass == "MONK" or D.myclass == "PRIEST") and C["unitframes"].showstatuebar then
+			if (D.Class == "WARRIOR" or D.Class == "DEATHKNIGHT" or D.Class == "MONK" or D.Class == "PRIEST") and C["unitframes"].showstatuebar then
 				local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
 				bar:SetWidth(5)
 				bar:SetHeight(29)
@@ -293,7 +293,7 @@ local function Shared(self, unit)
 			end
 
 			if C["unitframes"].classbar then
-				if D.myclass == "MAGE" then
+				if D.Class == "MAGE" then
 					local mb = CreateFrame("Frame", "DuffedUIArcaneBar", self)
 					if C["unitframes"].movableclassbar then
 						mb:Point("BOTTOMLEFT", CBAnchor, "TOPLEFT", 0, 0)
@@ -354,7 +354,7 @@ local function Shared(self, unit)
 					end
 				end
 
-				if D.myclass == "DRUID" then
+				if D.Class == "DRUID" then
 					local DruidManaBackground = CreateFrame("Frame", nil, self)
 					if C["unitframes"].movableclassbar then
 						DruidManaBackground:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
@@ -422,7 +422,7 @@ local function Shared(self, unit)
 					eclipseBar.FrameBackdrop:SetFrameLevel(eclipseBar:GetFrameLevel() - 1)
 				end
 
-				if D.myclass == "WARLOCK" then
+				if D.Class == "WARLOCK" then
 					local wb = CreateFrame("Frame", "DuffedUIWarlockSpecBars", self)
 					if C["unitframes"].movableclassbar then
 						wb:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
@@ -451,7 +451,7 @@ local function Shared(self, unit)
 					self.WarlockSpecBars = wb
 				end
 
-				if D.myclass == "PALADIN" then
+				if D.Class == "PALADIN" then
 					local bars = CreateFrame("Frame", nil, self)
 					if C["unitframes"].movableclassbar then
 						bars:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
@@ -486,7 +486,7 @@ local function Shared(self, unit)
 					self.HolyPower = bars
 				end
 
-				if D.myclass == "DEATHKNIGHT" then
+				if D.Class == "DEATHKNIGHT" then
 					local Runes = CreateFrame("Frame", nil, self)
 					Runes:Size(100, 5)
 					if C["unitframes"].movableclassbar then
@@ -525,7 +525,7 @@ local function Shared(self, unit)
 					self.Runes = Runes
 				end
 
-				if D.myclass == "MONK" then
+				if D.Class == "MONK" then
 					local Bar = CreateFrame("Frame", "DuffedUIHarmony", health)
 					if C["unitframes"].movableclassbar then
 						Bar:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
@@ -552,7 +552,7 @@ local function Shared(self, unit)
 					self.HarmonyBar = Bar
 				end
 
-				if D.myclass == "PRIEST" then
+				if D.Class == "PRIEST" then
 					local pb = CreateFrame("Frame", "DuffedUIShadowOrbsBar", self)
 					if C["unitframes"].movableclassbar then
 						pb:Point("BOTTOM", CBAnchor, "TOP", 2, 0)
@@ -579,7 +579,7 @@ local function Shared(self, unit)
 					self.ShadowOrbsBar = pb
 				end
 
-				if D.myclass == "SHAMAN" then
+				if D.Class == "SHAMAN" then
 					local TotemBar = {}
 					TotemBar.Destroy = true
 					for i = 1, 4 do
@@ -1505,7 +1505,7 @@ if C["raid"].arena then
 		DuffedUIPrepArena[i].Health:SetStatusBarTexture(normTex)
 		DuffedUIPrepArena[i].Health:SetStatusBarColor(.3, .3, .3, 1)
 		DuffedUIPrepArena[i].SpecClass = DuffedUIPrepArena[i].Health:CreateFontString(nil, "OVERLAY")
-		DuffedUIPrepArena[i].SpecClass:SetFont(C["media"].uffont, 12, "OUTLINE")
+		DuffedUIPrepArena[i].SpecClass:SetFont(C["media"].font, 12, "OUTLINE")
 		DuffedUIPrepArena[i].SpecClass:SetPoint("CENTER")
 		DuffedUIPrepArena[i]:Hide()
 	end

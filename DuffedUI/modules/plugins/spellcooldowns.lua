@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 if C["scd"].enable ~= true then return end
 
 local font = C["media"].font
@@ -14,7 +14,7 @@ local direction = C["scd"].direction
 local mode = "HIDE"
 local displayMode = C["scd"].display
 
-if D.myclass == "WARRIOR" or D.myclass == "HUNTER" or D.myclass == "DEATHKNIGHT" or D.myclass == "ROGUE" then
+if D.Class == "WARRIOR" or D.Class == "HUNTER" or D.Class == "DEATHKNIGHT" or D.Class == "ROGUE" then
 	mode = "HIDE"
 end
 
@@ -556,14 +556,14 @@ local function positionHide()
 		local frame = frames[k]
 		
 		-- Check if the spell is in the spellbook. E.G. will of the forsaken will show as a black icon if you're not a Forsaken, when using a PvP trinket, as it has 45s shared cooldown.
-		if GetSpellTexture(GetSpellInfo(frame.spell)) or D.myclass == "PRIEST"then
+		if GetSpellTexture(GetSpellInfo(frame.spell)) or D.Class == "PRIEST"then
 			local start, duration = GetSpellCooldown(frame.spell)
 			frame.start = start
 			frame.duration = duration
 			if duration and duration > 1.5 then
 				-- fix for setting textures again when respecced. lol.
 				-- Holy Word: ... Chakra state spell textures fix, sets all Holy Word: something textures to Holy Word: Chastise
-				if D.myclass == "PRIEST" and frame.spell == 88682 or frame.spell == 88684 or frame.spell == 88685 then
+				if D.Class == "PRIEST" and frame.spell == 88682 or frame.spell == 88684 or frame.spell == 88685 then
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(88625)))
 				else
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(frame.spell)))
@@ -600,14 +600,14 @@ local function positionDim()
 		local frame = frames[k]
 		
 		-- Check if the spell is in the spellbook. E.G. will of the forsaken will show as a black icon if you're not a Forsaken, when using a PvP trinket, as it has 45s shared cooldown.
-		if GetSpellTexture(GetSpellInfo(frame.spell)) or D.myclass == "PRIEST"then
+		if GetSpellTexture(GetSpellInfo(frame.spell)) or D.Class == "PRIEST"then
 			local start, duration, enable = GetSpellCooldown(frame.spell)
 			frame.start = start
 			frame.duration = duration
 			if duration and duration > 1.5 then
 				-- fix for setting textures again when respecced. lol.
 				-- Holy Word: ... Chakra state spell textures fix, sets all Holy Word: something textures to Holy Word: Chastise
-				if D.myclass == "PRIEST" and frame.spell == 88682 or frame.spell == 88684 or frame.spell == 88685 then
+				if D.Class == "PRIEST" and frame.spell == 88682 or frame.spell == 88684 or frame.spell == 88685 then
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(88625)))
 				else
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(frame.spell)))
@@ -661,7 +661,7 @@ local function createCooldownFrame(spell)
 	local texture = GetSpellTexture(spellInfo)
 	icon:SetAllPoints(frame)
 	-- Holy Word: ... Chakra state spell textures fix, sets all Holy Word: something textures to Holy Word: Chastise
-	if D.myclass == "PRIEST" and spell == 88682 or spell == 88684 or spell == 88685 then
+	if D.Class == "PRIEST" and spell == 88682 or spell == 88684 or spell == 88685 then
 		texture = GetSpellTexture(GetSpellInfo(88625))
 	end
 	if not texture then return nil end
@@ -731,7 +731,7 @@ end
 
 -- And Pet, if you have one
 local _, pra = UnitRace("player")
-if D.myclass == "WARLOCK" or D.myclass == "HUNTER" then
+if D.Class == "WARLOCK" or D.Class == "HUNTER" then
 	for i = 1, table.getn(spellCooldowns["PET"]) do
 		table.insert(spells, spellCooldowns["PET"][i])
 	end

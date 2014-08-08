@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 
 local function LoadSkin()
 	local buttons = {
@@ -31,7 +31,7 @@ local function LoadSkin()
 
 	PlayerTalentFrameCloseButton:SkinCloseButton()
 
-	for i = 1, 6 do
+	for i = 1, 5 do
 		select(i, PlayerTalentFrameSpecialization:GetRegions()):Hide()
 	end
 
@@ -49,7 +49,7 @@ local function LoadSkin()
 	PlayerTalentFrameSpecializationSpellScrollFrameScrollChild.Seperator:SetTexture(1, 1, 1)
 	PlayerTalentFrameSpecializationSpellScrollFrameScrollChild.Seperator:SetAlpha(0.2)
 
-	if D.myclass == "HUNTER" then
+	if D.Class == "HUNTER" then
 		for i = 1, 6 do
 			select(i, PlayerTalentFramePetSpecialization:GetRegions()):Hide()
 		end
@@ -177,7 +177,7 @@ local function LoadSkin()
 		end
 	end
 
-	for i = 1, MAX_NUM_TALENT_TIERS do
+	for i = 1, 7 do
 		local row = _G["PlayerTalentFrameTalentsTalentRow"..i]
 		_G["PlayerTalentFrameTalentsTalentRow"..i.."Bg"]:Hide()
 		row:DisableDrawLayer("BORDER")
@@ -208,7 +208,7 @@ local function LoadSkin()
 	end
 
 	hooksecurefunc("TalentFrame_Update", function()
-		for i = 1, MAX_NUM_TALENT_TIERS do
+		for i = 1, 7 do
 			for j = 1, NUM_TALENT_COLUMNS do
 				local bu = _G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j]
 				if bu.knownSelection:IsShown() then

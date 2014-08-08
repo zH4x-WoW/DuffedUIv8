@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...)) 
+local D, C, L = select(2, ...):unpack() 
 
 local filter = {
 	[6289]  = true, -- Raw Longjaw Mud Snapper

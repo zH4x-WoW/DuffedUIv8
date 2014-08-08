@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 
 -- Define action bar default buttons size
 D.buttonsize = D.Scale(C["actionbar"].buttonsize)
@@ -63,21 +63,6 @@ D.SetFontString = function(parent, fontName, fontHeight, fontStyle)
 end
 
 D.IconCoord = {0.08, 0.92, 0.08, 0.92}
-
-function D.SetModifiedBackdrop(self)
-	local color = RAID_CLASS_COLORS[D.myclass]
-	self:SetBackdropColor(color.r*.15, color.g*.15, color.b*.15)
-	self:SetBackdropBorderColor(color.r, color.g, color.b)
-end
-
-function D.SetOriginalBackdrop(self)
-	local color = RAID_CLASS_COLORS[D.myclass]
-	if C["general"].classcolortheme == true then
-		self:SetBackdropBorderColor(color.r, color.g, color.b)
-	else
-		self:SetTemplate("Default")
-	end
-end
 
 -- datatext panel position
 D.DataTextPosition = function(p, obj)
@@ -196,9 +181,9 @@ D.ShiftBarUpdate = function(self)
 			
 			if isActive then
 				StanceBarFrame.lastSelected = button:GetID()
-				button:SetChecked(1)
+				button:GetCheckedTexture():SetTexture(0, 1, 0, .3)
 			else
-				button:SetChecked(0)
+				button:SetCheckedTexture(0, 0, 0, 0)
 			end
 
 			if isCastable then
@@ -232,12 +217,12 @@ D.PetBarUpdate = function(...)
 		petActionButton.tooltipSubtext = subtext
 
 		if isActive then
-			petActionButton:SetChecked(1)
+			petActionButton:GetCheckedTexture():SetTexture(0, 1, 0, .3)
 			if IsPetAttackAction(i) then
 				PetActionButton_StartFlash(petActionButton)
 			end
 		else
-			petActionButton:SetChecked(0)
+			petActionButton:SetCheckedTexture(0, 0, 0, 0)
 			if IsPetAttackAction(i) then
 				PetActionButton_StopFlash(petActionButton)
 			end
@@ -288,7 +273,7 @@ D.RGBToHex = function(r, g, b)
 end
 
 if C["general"].classcolor then
-	C["media"].datatextcolor1 = D.UnitColor.class[D.myclass]
+	C["media"].datatextcolor1 = D.UnitColor.class[D.Class]
 end
 D.panelcolor = D.RGBToHex(unpack(C["media"].datatextcolor1))
 
@@ -684,35 +669,6 @@ D.PostUpdatePetColor = function(health, unit, min, max)
 	end
 end
 
--- a function to move name of current target unit if enemy or friendly
-D.PostNamePosition = function(self)
-	if C["unitframes"].layout == 3 then
-		self.Name:ClearAllPoints()
-		if (self.Power.value:GetText() and UnitIsEnemy("player", "target") and C["unitframes"].targetpowerpvponly == true) or (self.Power.value:GetText() and C["unitframes"].targetpowerpvponly == false) then
-			self.Name:SetPoint("LEFT", self.panel, "LEFT", 4, 0)
-		else
-			self.Power.value:SetAlpha(0)
-			self.Name:SetPoint("LEFT", self.panel, "LEFT", 4, 0)
-		end
-	elseif C["unitframes"].layout == 2 then
-		self.Name:ClearAllPoints()
-		if (self.Power.value:GetText() and UnitIsEnemy("player", "target") and C["unitframes"].targetpowerpvponly == true) or (self.Power.value:GetText() and C["unitframes"].targetpowerpvponly == false) then
-			self.Name:SetPoint("CENTER", self.panel, "CENTER", 0, 0)
-		else
-			self.Power.value:SetAlpha(0)
-			self.Name:SetPoint("LEFT", self.panel, "LEFT", 4, 0)
-		end
-	elseif C["unitframes"].layout == 1 then
-		self.Name:ClearAllPoints()
-		if (self.Power.value:GetText() and UnitIsEnemy("player", "target") and C["unitframes"].targetpowerpvponly == true) or (self.Power.value:GetText() and C["unitframes"].targetpowerpvponly == false) then
-			self.Name:SetPoint("LEFT", self.Health, "LEFT", 4, 0)
-		else
-			self.Power.value:SetAlpha(0)
-			self.Name:SetPoint("LEFT", self.Health, "LEFT", 4, 0)
-		end
-	end
-end
-
 -- color the power bar according to class / vehicle / etc.
 D.PreUpdatePower = function(power, unit)
 	local pType = select(2, UnitPowerType(unit))
@@ -771,9 +727,6 @@ D.PostUpdatePower = function(power, unit, min, max)
 				power.value:SetText(min)
 			end
 		end
-	end
-	if self.Name then
-		if unit == "target" then D.PostNamePosition(self, power) end
 	end
 end
 
@@ -933,7 +886,7 @@ D.PostUpdateAura = function(self, unit, icon, index, offset, filter, isDebuff, d
 				icon:SetBackdropBorderColor(color.r * .8, color.g * .8, color.b * .8)
 			end
 		else
-			if isStealable or ((D.myclass == "MAGE" or D.myclass == "PRIEST" or D.myclass == "SHAMAN") and dtype == "Magic") and not UnitIsFriend("player", unit) then
+			if isStealable or ((D.Class == "MAGE" or D.Class == "PRIEST" or D.Class == "SHAMAN") and dtype == "Magic") and not UnitIsFriend("player", unit) then
 				if not icon.Animation:IsPlaying() then
 					icon.Animation:Play()
 				end
@@ -998,7 +951,7 @@ local CheckInterrupt = function(self, unit)
 		self:SetStatusBarColor(1, 0, 0, .5)
 	else
 		if C["castbar"].classcolor then
-			self:SetStatusBarColor(unpack(D.UnitColor.class[D.myclass]))
+			self:SetStatusBarColor(unpack(D.UnitColor.class[D.Class]))
 		else
 			self:SetStatusBarColor(unpack(C["castbar"].color))
 		end
@@ -1092,14 +1045,6 @@ D.UpdateShards = function(self, event, unit, powerType)
 	end
 end
 
--- phasing detection on party/raid
-D.Phasing = function(self, event)
-	local inPhase = UnitInPhase(self.unit)
-	local picon = self.PhaseIcon
-
-	if not UnitIsPlayer(self.unit) then picon:Hide() return end
-end
-
 -- druid eclipse bar direction :P
 D.EclipseDirection = function(self)
 	if GetEclipseDirection() == "sun" then
@@ -1172,53 +1117,6 @@ D.DruidBarDisplay = function(self, login)
 				m:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 5)
 			end
 		end
-	end
-end
-
-D.UpdateMageClassBarVisibility = function(self)
-	local p = self:GetParent()
-	local a = p.ArcaneChargeBar
-	local r = p.RunePower
-
-	if C["unitframes"].layout == 1 then
-		if (a and a:IsShown()) and (r and r:IsShown()) then
-			r:ClearAllPoints()
-			r:Point("TOPLEFT", p, "BOTTOMLEFT", 0, -16)
-		elseif (a and a:IsShown()) or (r and r:IsShown()) then
-			r:ClearAllPoints()
-			r:Point("TOPLEFT", p, "BOTTOMLEFT", 0, -6)
-		end
-	elseif C["unitframes"].layout == 2 then
-		if (a and a:IsShown()) and (r and r:IsShown()) then
-			r:ClearAllPoints()
-			r:Point("BOTTOMLEFT", p, "TOPLEFT", 2, 12)
-		elseif (a and a:IsShown()) or (r and r:IsShown()) then
-			r:ClearAllPoints()
-			r:Point("BOTTOMLEFT", p, "TOPLEFT", 2, 2)
-		end
-	elseif C["unitframes"].layout == 3 then
-		if (a and a:IsShown()) and (r and r:IsShown()) then
-			r:ClearAllPoints()
-			r:Point("TOPLEFT", p, "BOTTOMLEFT", 7, 3)
-		elseif (a and a:IsShown()) or (r and r:IsShown()) then
-			r:ClearAllPoints()
-			r:Point("TOPLEFT", p, "BOTTOMLEFT", 7, 15)
-		end
-	end
-end
-
-D.UpdateMushroomVisibility = function(self)
-	local p = self:GetParent()
-	local eb = p.EclipseBar
-	local dm = p.DruidMana
-	local m = p.WildMushroom
-	
-	if (eb and eb:IsShown()) or (dm and dm:IsShown()) then
-		m:ClearAllPoints()
-		m:Point("TOPLEFT", p, "BOTTOMLEFT", 0, -1)
-	elseif m:IsShown() then
-		m:ClearAllPoints()
-		m:Point("TOPLEFT", p, "BOTTOMLEFT", 0, 1)
 	end
 end
 
@@ -1388,8 +1286,8 @@ D.createAuraWatch = function(self, unit)
 		end
 	end
 
-	if (D.buffids[D.myclass]) then
-		for key, value in pairs(D.buffids[D.myclass]) do
+	if (D.buffids[D.Class]) then
+		for key, value in pairs(D.buffids[D.Class]) do
 			tinsert(buffs, value)
 		end
 	end
@@ -1414,7 +1312,7 @@ D.createAuraWatch = function(self, unit)
 			end
 
 			local count = icon:CreateFontString(nil, "OVERLAY")
-			count:SetFont(C["media"].uffont, 8 * C["raid"].gridscale, "THINOUTLINE")
+			count:SetFont(C["media"].font, 8 * C["raid"].gridscale, "THINOUTLINE")
 			count:SetPoint("CENTER", unpack(D.countOffsets[spell[2]]))
 			icon.count = count
 

@@ -1,33 +1,18 @@
-local D, C, L = unpack(select(2, ...)) 
+local D, C, L = select(2, ...):unpack() 
 if not C["actionbar"].enable == true then return end
 
 local bar = DuffedUIBar1
-
--- warrior custom paging
-local warrior = ""
-if C["actionbar"].ownwarstancebar then warrior = "[stance:1] 7; [stance:2] 8; [stance:3] 9;" end
-
--- rogue custom paging
-local rogue = ""
-if C["actionbar"].ownshdbar then rogue = "[stance:3] 10; " end
-
--- warlock custom paging
-local warlock = ""
-if C["actionbar"].ownmetabar then warlock = "[stance:1] 10; " end
-
 local Page = {
 	["DRUID"] = "[bonusbar:1,nostealth] 7; [bonusbar:1,stealth] 8; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;",
-	["WARRIOR"] = warrior,
 	["PRIEST"] = "[bonusbar:1] 7;",
-	["ROGUE"] = rogue.."[bonusbar:1] 7;",
-	["WARLOCK"] = warlock,
+	["WARLOCK"] = "[stance:1] 10; ",
 	["MONK"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;",
 	["DEFAULT"] = "[vehicleui:12] 12; [possessbar] 12; [overridebar] 14; [shapeshift] 13; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6;",
 }
 
 local function GetBar()
 	local condition = Page["DEFAULT"]
-	local class = D.myclass
+	local class = D.Class
 	local page = Page[class]
 	if page then
 		condition = condition.." "..page
@@ -90,16 +75,16 @@ bar:SetScript("OnEvent", function(self, event, unit, ...)
 	elseif event == "UPDATE_VEHICLE_ACTIONBAR" or event == "UPDATE_OVERRIDE_ACTIONBAR" then
 		if HasVehicleActionBar() or HasOverrideActionBar() then
 			if not self.inVehicle then
-				DuffedUIBar2Button:Hide()
 				DuffedUIBar3Button:Hide()
-				DuffedUIBar3Button2:Hide()
+				DuffedUIBar4Button:Hide()
+				DuffedUIBar5Button:Hide()
 				self.inVehicle = true
 			end
 		else
 			if self.inVehicle then
-				DuffedUIBar2Button:Show()
 				DuffedUIBar3Button:Show()
-				DuffedUIBar3Button2:Show()
+				DuffedUIBar4Button:Show()
+				DuffedUIBar5Button:Show()
 				self.inVehicle = false
 			end
 		end

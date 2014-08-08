@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 
 -- THE FUCKING PET JOURNAL NEED TO BE COMPLETE WHEN PET BATTLE WILL BE AVAILABLE FOR TESTING
 

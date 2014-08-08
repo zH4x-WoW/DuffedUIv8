@@ -1,10 +1,7 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L, G = select(2, ...):unpack() 
 if not C["actionbar"].enable == true then return end
 
 local _G = _G
-local media = C["media"]
-local securehandler = CreateFrame("Frame", nil, nil, "SecureHandlerBaseTemplate")
-local replace = string.gsub
 
 function D.StyleActionBarButton(self)
 	local name = self:GetName()
@@ -24,10 +21,32 @@ function D.StyleActionBarButton(self)
  
 	Count:ClearAllPoints()
 	Count:Point("BOTTOMRIGHT", 0, 2)
-	
+
 	HotKey:ClearAllPoints()
 	HotKey:Point("TOPRIGHT", 0, -3)
-	
+	local text = HotKey:GetText()
+	if text then
+		text = string.gsub(text, "(s-%)", "S")
+		text = string.gsub(text, "(a-%)", "A")
+		text = string.gsub(text, "(c-%)", "C")
+		text = string.gsub(text, "(Mouse Button )", "M")
+		text = string.gsub(text, "(Middle Mouse)", "M3")
+		text = string.gsub(text, "(Mouse Wheel Up)", "MU")
+		text = string.gsub(text, "(Mouse Wheel Down)", "MD")
+		text = string.gsub(text, "(Maustaste )", "M") 
+		text = string.gsub(text, "(Mittlere Maustaste)", "M3") 
+		text = string.gsub(text, "(Mausrad nach oben)", "MU") 
+		text = string.gsub(text, "(Mausrad nach unten)", "MD")
+		text = string.gsub(text, "(Num Pad )", "N")
+		text = string.gsub(text, "(Page Up)", "PU")
+		text = string.gsub(text, "(Page Down)", "PD")
+		text = string.gsub(text, "(Spacebar)", "SpB")
+		text = string.gsub(text, "(Insert)", "Ins")
+		text = string.gsub(text, "(Home)", "Hm")
+		text = string.gsub(text, "(Delete)", "Del")
+	end
+	if HotKey:GetText() == _G["RANGE_INDICATOR"] then HotKey:SetText("") else HotKey:SetText(text) end
+
 	if Border and Border:IsShown() then
 		Border:Hide()
 		Border = D.dummy
@@ -64,27 +83,22 @@ function D.StyleActionBarButton(self)
 	if not C["actionbar"].hotkey == true then
 		HotKey:SetText("")
 		HotKey:Kill()
-	else
-		HotKey:SetFont(C["media"].font, 10, "OUTLINE")
-		HotKey.ClearAllPoints = D.dummy
-		HotKey.SetPoint = D.dummy
 	end
-	
+
 	if name:match("Extra") then
 		Button:SetTemplate()
 		Button.pushed = true
 		Icon:SetDrawLayer('ARTWORK')
 	else
 		Button:CreateBackdrop()
-		Button.backdrop:SetOutside(Button, 0, 0)	
+		Button.backdrop:SetOutside(Button, 0, 0)
 		Button:UnregisterEvent("ACTIONBAR_SHOWGRID")
-		Button:UnregisterEvent("ACTIONBAR_HIDEGRID")			
+		Button:UnregisterEvent("ACTIONBAR_HIDEGRID")
 	end
-	
+
 	Icon:SetTexCoord(.08, .92, .08, .92)
 	Icon:SetInside()
-	
-	-- bug, some buttons are checked in a /rl or login, even if they shouldn`t be, double check
+
 	if normal and Button:GetChecked() then
 		ActionButton_UpdateState(Button)
 	end
@@ -105,7 +119,7 @@ function D.StyleActionBarPetAndShiftButton(normal, button, icon, name, pet)
 	button:SetWidth(D.petbuttonsize)
 	button:SetHeight(D.petbuttonsize)
 	button:CreateBackdrop()
-	button.backdrop:SetOutside(button, 0, 0)
+	button.backdrop:SetInside(button, 0, 0)
 	icon:SetTexCoord(.08, .92, .08, .92)
 	icon:ClearAllPoints()
 	icon:SetInside()
@@ -156,35 +170,34 @@ function D.StylePet()
 	end
 end
 
-function D.UpdateActionBarHotKey(btype)
-	local hotkey = _G[self:GetName() .. 'HotKey']
+--[[function D.KeybindText(self)
+	local button = self:GetName()
+	local hotkey = _G[button .. "HotKey"]
 	local text = hotkey:GetText()
-	
-	text = replace(text, '(s%)', 'S')
-	text = replace(text, '(a%)', 'A')
-	text = replace(text, '(c%)', 'C')
-	text = replace(text, '(Mouse Button )', 'M')
-	text = replace(text, '(Middle Mouse)', 'M3')
-	text = replace(text, '(Mouse Wheel Up)', 'MU')
-	text = replace(text, '(Mouse Wheel Down)', 'MD')
-	text = replace(text, '(Maustaste )', 'M') 
-	text = replace(text, '(Mittlere Maustaste)', 'M3') 
-	text = replace(text, '(Mausrad nach oben)', 'MU') 
-	text = replace(text, '(Mausrad nach unten)', 'MD')
-	text = replace(text, '(Num Pad )', 'N')
-	text = replace(text, '(Page Up)', 'PU')
-	text = replace(text, '(Page Down)', 'PD')
-	text = replace(text, '(Spacebar)', 'SpB')
-	text = replace(text, '(Insert)', 'Ins')
-	text = replace(text, '(Home)', 'Hm')
-	text = replace(text, '(Delete)', 'Del')
-	
-	if hotkey:GetText() == _G['RANGE_INDICATOR'] then
-		hotkey:SetText('')
-	else
-		hotkey:SetText(text)
+
+	if text then
+		text = string.gsub(text, "(s-%)", "S")
+		text = string.gsub(text, "(a-%)", "A")
+		text = string.gsub(text, "(c-%)", "C")
+		text = string.gsub(text, "(Mouse Button )", "M")
+		text = string.gsub(text, "(Middle Mouse)", "M3")
+		text = string.gsub(text, "(Mouse Wheel Up)", "MU")
+		text = string.gsub(text, "(Mouse Wheel Down)", "MD")
+		text = string.gsub(text, "(Maustaste )", "M") 
+		text = string.gsub(text, "(Mittlere Maustaste)", "M3") 
+		text = string.gsub(text, "(Mausrad nach oben)", "MU") 
+		text = string.gsub(text, "(Mausrad nach unten)", "MD")
+		text = string.gsub(text, "(Num Pad )", "N")
+		text = string.gsub(text, "(Page Up)", "PU")
+		text = string.gsub(text, "(Page Down)", "PD")
+		text = string.gsub(text, "(Spacebar)", "SpB")
+		text = string.gsub(text, "(Insert)", "Ins")
+		text = string.gsub(text, "(Home)", "Hm")
+		text = string.gsub(text, "(Delete)", "Del")
 	end
-end
+
+	hotkey:SetText(text)
+end]]--
 
 local buttons = 0
 local function SetupFlyoutButton()
@@ -192,7 +205,7 @@ local function SetupFlyoutButton()
 		--prevent error if you don't have max ammount of buttons
 		if _G["SpellFlyoutButton"..i] then
 			D.StyleActionBarButton(_G["SpellFlyoutButton"..i])
-					
+
 			if _G["SpellFlyoutButton"..i]:GetChecked() then
 				_G["SpellFlyoutButton"..i]:SetChecked(nil)
 			end
@@ -340,5 +353,5 @@ end
 hooksecurefunc("ActionButton_ShowOverlayGlow", D.ShowHighlightActionButton)
 hooksecurefunc("ActionButton_HideOverlayGlow", D.HideHighlightActionButton)
 hooksecurefunc("ActionButton_Update", D.StyleActionBarButton)
-hooksecurefunc("ActionButton_UpdateHotkeys", D.UpdateActionBarHotKey)
-hooksecurefunc("ActionButton_UpdateFlyout", D.StyleActionBarFlyout)
+--hooksecurefunc("ActionButton_UpdateHotkeys", D.KeybindText)
+--hooksecurefunc("ActionButton_UpdateFlyout", D.StyleActionBarFlyout)

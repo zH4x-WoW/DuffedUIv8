@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 
 local function LoadSkin()
 	local groups = {
@@ -30,7 +30,7 @@ end
 
 D.SkinFuncs["Blizzard_RaidUI"] = LoadSkin
 
-local D, C, L = unpack(select(2, ...))
+local D, C, L = select(2, ...):unpack()
 
 local function LoadSecondarySkin()
 	local StripAllTextures = {

@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...)) 
+local D, C, L = select(2, ...):unpack() 
 if not C["actionbar"].enable == true then return end
 
 local bar = DuffedUIPetBar

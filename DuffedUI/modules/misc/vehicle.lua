@@ -1,17 +1,17 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L, G = select(2, ...):unpack() 
 --------------------------------------------------------------------------
 -- move vehicle indicator
 --------------------------------------------------------------------------
 
 local anchor = CreateFrame("Frame", "DuffedUIVehicleAnchor", UIParent)
-anchor:Point("BOTTOM", UIParent, "BOTTOM", 0, 208)
+anchor:Point("TOPRIGHT", UIParent, "TOPRIGHT", -45, -315)
 anchor:Size(120, 20)
 anchor:SetMovable(true)
 anchor:SetClampedToScreen(true)
 anchor:SetTemplate("Default")
 anchor:SetBackdropBorderColor(1, 0, 0)
 anchor:SetAlpha(0)
-anchor.text = D.SetFontString(anchor, C["media"].uffont, 12)
+anchor.text = D.SetFontString(anchor, C["media"].font, 12)
 anchor.text:SetPoint("CENTER")
 anchor.text:SetText(L.move_vehicle)
 G.Misc.VehicleAnchor = anchor

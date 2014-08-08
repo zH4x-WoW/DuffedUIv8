@@ -1,11 +1,11 @@
 -- DuffedUI API, see DOCS/API.txt for more informations
 -- Feel free to send us API suggestion at www.tukui.org/tickets
 
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 
 local noop = D.dummy
 local floor = math.floor
-local class = D.myclass
+local class = D.Class
 local texture = C["media"].blank
 local backdropr, backdropg, backdropb = unpack(C["media"].backdropcolor)
 local borderr, borderg, borderb = unpack(C["media"].bordercolor)
@@ -14,15 +14,6 @@ local bordera = 1
 local template
 local inset = 0
 local noinset = C["media"].noinset
-
--- pixel perfect script of custom ui Scale.
-local mult = 768 / string.match(GetCVar("gxResolution"), "%d+x(%d+)")/C["general"].uiscale
-local Scale = function(x)
-    return mult*math.floor(x / mult + .5)
-end
-
-D.Scale = function(x) return Scale(x) end
-D.mult = mult
 
 if noinset then inset = mult end
 
@@ -54,28 +45,27 @@ local function UpdateColor(t)
 end
 
 ---------------------------------------------------
--- TUKUI API START HERE
+-- DuffedUI API START HERE
 ---------------------------------------------------
 
 local function Size(frame, width, height)
-	frame:SetSize(Scale(width), Scale(height or width))
+	frame:SetSize(D.Scale(width), D.Scale(height or width))
 end
 
 local function Width(frame, width)
-	frame:SetWidth(Scale(width))
+	frame:SetWidth(D.Scale(width))
 end
 
 local function Height(frame, height)
-	frame:SetHeight(Scale(height))
+	frame:SetHeight(D.Scale(height))
 end
 
 local function Point(obj, arg1, arg2, arg3, arg4, arg5)
-	-- anyone has a more elegant way for this?
-	if type(arg1)=="number" then arg1 = Scale(arg1) end
-	if type(arg2)=="number" then arg2 = Scale(arg2) end
-	if type(arg3)=="number" then arg3 = Scale(arg3) end
-	if type(arg4)=="number" then arg4 = Scale(arg4) end
-	if type(arg5)=="number" then arg5 = Scale(arg5) end
+	if type(arg1)=="number" then arg1 = D.Scale(arg1) end
+	if type(arg2)=="number" then arg2 = D.Scale(arg2) end
+	if type(arg3)=="number" then arg3 = D.Scale(arg3) end
+	if type(arg4)=="number" then arg4 = D.Scale(arg4) end
+	if type(arg5)=="number" then arg5 = D.Scale(arg5) end
 
 	obj:SetPoint(arg1, arg2, arg3, arg4, arg5)
 end
@@ -114,7 +104,7 @@ local function SetTemplate(f, t, tex)
 	f:SetBackdrop({
 	  bgFile = texture, 
 	  edgeFile = C["media"].blank, 
-	  tile = false, tileSize = 0, edgeSize = mult,
+	  tile = false, tileSize = 0, edgeSize = D.mult,
 	})
 	
 	if not noinset and not f.isInsetDone then
@@ -219,8 +209,8 @@ local function CreateBackdrop(f, t, tex)
 end
 
 local function CreateLine(f, w, h)
-	f:SetHeight(Scale(h))
-	f:SetWidth(Scale(w))
+	f:SetHeight(D.Scale(h))
+	f:SetWidth(D.Scale(w))
 	f:SetFrameLevel(2)
 	f:SetFrameStrata("BACKGROUND")
 
@@ -279,7 +269,7 @@ local function StyleButton(button)
 
 	if button.SetCheckedTexture and not button.checked then
 		local checked = button:CreateTexture("frame", nil, self)
-		checked:SetTexture(0,1,0,.3)
+		checked:SetTexture(0, 1, 0,.3)
 		checked:SetInside()
 		button.checked = checked
 		button:SetCheckedTexture(checked)
@@ -297,7 +287,7 @@ local function FontString(parent, name, fontName, fontHeight, fontStyle)
 	fs:SetFont(fontName, fontHeight, fontStyle)
 	fs:SetJustifyH("LEFT")
 	fs:SetShadowColor(0, 0, 0)
-	fs:SetShadowOffset(mult, -mult)
+	fs:SetShadowOffset(D.mult, -D.mult)
 	
 	if not name then
 		parent.text = fs
@@ -348,13 +338,13 @@ end
 -----------------------------------------------------------
 
 local function SetModifiedBackdrop(self)
-	local color = RAID_CLASS_COLORS[D.myclass]
+	local color = RAID_CLASS_COLORS[D.Class]
 	self:SetBackdropColor(color.r * .15, color.g * .15, color.b * .15)
 	self:SetBackdropBorderColor(color.r, color.g, color.b)
 end
 
 local function SetOriginalBackdrop(self)
-	local color = RAID_CLASS_COLORS[D.myclass]
+	local color = RAID_CLASS_COLORS[D.Class]
 	if C["general"].classcolortheme == true then
 		self:SetBackdropBorderColor(color.r, color.g, color.b)
 	else

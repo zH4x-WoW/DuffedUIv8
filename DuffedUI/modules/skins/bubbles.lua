@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 if (IsAddOnLoaded("BossEncounter2")) then return end --> i don't know wtf this addon is doing but it broke my bubble script.
 
 local chatbubblehook = CreateFrame("Frame", nil, UIParent)

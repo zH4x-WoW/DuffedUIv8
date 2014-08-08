@@ -1,4 +1,4 @@
-﻿local D, C, L, G = unpack(select(2, ...))
+﻿local D, C, L, G = select(2, ...):unpack()
 
 ---------------------------------------------------------------------------
 -- Per Class Config (overwrite general)
@@ -8,7 +8,7 @@
 -- A full configuration list can be found in /DuffedUI/config/config.lua
 ---------------------------------------------------------------------------
 
-if D.myclass == "WIZARD" then
+if D.Class == "WIZARD" then
 	C["actionbar"].hotkey = false
 	C["actionbar"].hideshapeshift = true
 	C["unitframes"].enemyhcolor = true

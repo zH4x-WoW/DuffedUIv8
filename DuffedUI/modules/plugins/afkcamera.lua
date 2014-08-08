@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...))
+local D, C, L = select(2, ...):unpack()
 if C["misc"].AFKCamera ~= true then return end
 
 local PName = UnitName( "player" )
@@ -6,7 +6,7 @@ local PLevel = UnitLevel( "player" )
 local PClass = UnitClass( "player" )
 local PRace = UnitRace( "player" )
 local PFaction = UnitFactionGroup( "player" )
-local color = RAID_CLASS_COLORS[D.myclass]
+local color = RAID_CLASS_COLORS[D.Class]
 local Version = tonumber(GetAddOnMetadata("DuffedUI", "Version"))
 
 local PGuild

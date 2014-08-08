@@ -2,7 +2,7 @@
 -- Master Loot (special thanks to Ammo) --
 ------------------------------------------
 
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L, G = select(2, ...):unpack() 
 
 if not C["loot"].lootframe == true then return end
 

@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...))
+local D, C, L = select(2, ...):unpack()
 
 local cp = "|cff319f1b" -- +
 local cm = "|cff9a1212" -- -
@@ -83,11 +83,10 @@ local function UpdateBar(self, bar)
 	MoveButtonBar(button, bar)
 end
 
--- +/-
 local DuffedUIBar3Button = CreateFrame("Button", "DuffedUIBar3Button", UIParent)
 DuffedUIBar3Button:SetTemplate("Default")
 DuffedUIBar3Button:RegisterForClicks("AnyUp")
-DuffedUIBar3Button.text = D.SetFontString(DuffedUIBar3Button, C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
+DuffedUIBar3Button.text = D.SetFontString(DuffedUIBar3Button, C["media"].font, 12, "THINOUTLINE")
 DuffedUIBar3Button:SetScript("OnClick", function(self, btn)
 	if btn == "RightButton" then
 		if DuffedUIInfoLeftBattleGround and UnitInBattleground("player") then
@@ -107,10 +106,8 @@ DuffedUIBar3Button.text:SetText(cm.."-|r")
 local DuffedUIBar4Button = CreateFrame("Button", "DuffedUIBar4Button", UIParent)
 DuffedUIBar4Button:SetTemplate("Default")
 DuffedUIBar4Button:RegisterForClicks("AnyUp")
-DuffedUIBar4Button.text = D.SetFontString(DuffedUIBar4Button, C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
-DuffedUIBar4Button:SetScript("OnClick", function(self, btn)
-	UpdateBar(self, DuffedUIBar4)
-end)
+DuffedUIBar4Button.text = D.SetFontString(DuffedUIBar4Button, C["media"].font, 12, "THINOUTLINE")
+DuffedUIBar4Button:SetScript("OnClick", function(self, btn) UpdateBar(self, DuffedUIBar4) end)
 DuffedUIBar4Button:Size(DuffedUIInfoLeft:GetHeight())
 DuffedUIBar4Button:Point("RIGHT", DuffedUIInfoRight, "LEFT", -2, 0)
 DuffedUIBar4Button.text:Point("CENTER", 2, -1)
@@ -118,23 +115,19 @@ DuffedUIBar4Button:SetScript("OnEnter", function(self) self:SetBackdropBorderCol
 DuffedUIBar4Button:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
 DuffedUIBar4Button.text:SetText(cm.."-|r")
 
--- >/< 1
 local DuffedUIBar5Button = CreateFrame("Button", "DuffedUIBar5Button", UIParent)
-DuffedUIBar5Button:Width(12)
-DuffedUIBar5Button:Height(130)
+DuffedUIBar5Button:Size(12, 130)
 DuffedUIBar5Button:Point("RIGHT", UIParent, "RIGHT", 1, -14)
 DuffedUIBar5Button:SetTemplate("Default")
 DuffedUIBar5Button:RegisterForClicks("AnyUp")
 DuffedUIBar5Button:SetAlpha(0)
-DuffedUIBar5Button:SetScript("OnClick", function(self, btn)
-	UpdateBar(self, DuffedUIBar5)
-end)
+DuffedUIBar5Button:SetScript("OnClick", function(self, btn) UpdateBar(self, DuffedUIBar5) end)
 if C["actionbar"].rightbarsmouseover == true then
 	DuffedUIBar5Button:SetScript("OnEnter", function(self) DuffedUIRightBarsMouseover(1) end)
 	DuffedUIBar5Button:SetScript("OnLeave", function(self) DuffedUIRightBarsMouseover(0) end)
 else
-	DuffedUIBar5Button:SetScript("OnEnter", function(self) self:SetAlpha(1) DuffedUIBar5Button2:SetAlpha(1) end)
-	DuffedUIBar5Button:SetScript("OnLeave", function(self) self:SetAlpha(0) DuffedUIBar5Button2:SetAlpha(0) end)
+	DuffedUIBar5Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
+	DuffedUIBar5Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 end
 DuffedUIBar5Button.text = D.SetFontString(DuffedUIBar5Button, C["media"].font, 14)
 DuffedUIBar5Button.text:Point("CENTER", 0, 0)
@@ -172,15 +165,9 @@ init:SetScript("OnEvent", function(self, event)
 	if not DuffedUIDataPerChar then DuffedUIDataPerChar = {} end
 	local db = DuffedUIDataPerChar
 
-	if db.bar3 then
-		UpdateBar(DuffedUIBar3Button, DuffedUIBar3)
-	end
+	if db.bar3 then UpdateBar(DuffedUIBar3Button, DuffedUIBar3) end
 
-	if db.bar4 then
-		UpdateBar(DuffedUIBar4Button, DuffedUIBar4)
-	end
+	if db.bar4 then UpdateBar(DuffedUIBar4Button, DuffedUIBar4) end
 
-	if db.bar5 then
-		UpdateBar(DuffedUIBar5Button, DuffedUIBar5)
-	end
+	if db.bar5 then UpdateBar(DuffedUIBar5Button, DuffedUIBar5) end
 end)

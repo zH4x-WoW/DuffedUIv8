@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L, G = select(2, ...):unpack() 
 -- here we kill all shit stuff on default UI that we don't need!
 
 local Kill = CreateFrame("Frame")

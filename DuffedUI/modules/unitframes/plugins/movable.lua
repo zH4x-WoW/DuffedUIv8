@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L, G = select(2, ...):unpack() 
 
 if C["unitframes"].enable ~= true then return end
 
@@ -460,7 +460,7 @@ do
 		local name = backdrop:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 		name:SetPoint("CENTER")
 		name:SetJustifyH("CENTER")
-		name:SetFont(C["media"].uffont, 12)
+		name:SetFont(C["media"].font, 12)
 		name:SetTextColor(1, 1, 1)
 
 		local scale = CreateFrame('Button', nil, backdrop)

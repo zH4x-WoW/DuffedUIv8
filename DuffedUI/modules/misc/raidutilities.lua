@@ -3,7 +3,7 @@
 		All others raid frames mods or default Blizzard should have already this feature
 --]]
 
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 local panel_height = ((D.Scale(5) * 4) + (D.Scale(22) * 4))
 local r,g,b = C["media"].backdropcolor
 
@@ -53,7 +53,7 @@ local function CreateUtilities(self, event, addon)
 
 		--Change border when mouse is inside the button
 		local function ButtonEnter(self)
-			local color = RAID_CLASS_COLORS[D.myclass]
+			local color = RAID_CLASS_COLORS[D.Class]
 			self:SetBackdropBorderColor(color.r, color.g, color.b)
 		end
 

@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 
 --[[ This is a forked file by Haste, rewrite by Tukz for DuffedUI. ]]--
 

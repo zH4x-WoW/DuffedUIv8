@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = select(2, ...):unpack()
 
 D.ChatSetup = function()
 	FCF_ResetChatWindows()
@@ -156,12 +156,11 @@ v:FontString("text2", C["media"].font, 12)
 v.text:SetPoint("CENTER")
 v.text:SetText("|cffC41F3BDuffedUI|r ".. D.version)
 v.text2:SetPoint("BOTTOM", 0, 2)
-v.text2:SetText("by |cffC41F3BMerith - liquidbase|r, website at |cffC41F3Bwww.tukui.org|r")
+v.text2:SetText("by |cffC41F3BMerith - liquidbase|r, website at |cffC41F3Bwww.duffedui.net|r")
 v:SetScript("OnClick", function()
 	v:Hide()
 end)
 v:Hide()
-G.Install.Version = v
 
 local vicon = CreateFrame("Frame", "DuffedVersion", v)
 vicon:Size(66, 66)
@@ -180,7 +179,6 @@ f:SetPoint("CENTER")
 f:SetTemplate("Transparent")
 f:SetFrameStrata("HIGH")
 f:Hide()
-G.Install.Frame = f
 
 local viconl = CreateFrame("Frame", "DuffedVersion", f)
 viconl:SetTemplate()
@@ -223,7 +221,6 @@ sb:SetWidth(f:GetWidth() - 44)
 sb:SetFrameStrata("HIGH")
 sb:SetFrameLevel(6)
 sb:Hide()
-G.Install.StatusBar = sb
 
 local sbd = CreateFrame("Frame", nil, sb)
 sbd:SetTemplate("Default")
@@ -231,51 +228,43 @@ sbd:SetPoint("TOPLEFT", sb, -2, 2)
 sbd:SetPoint("BOTTOMRIGHT", sb, 2, -2)
 sbd:SetFrameStrata("HIGH")
 sbd:SetFrameLevel(5)
-G.Install.StatusBar.Backdrop = sdb
 
 local header = f:CreateFontString(nil, "OVERLAY")
 header:SetFont(C["media"].font, 16, "THINOUTLINE")
 header:SetPoint("TOP", f, "TOP", 0, -20)
-G.Install.Frame.Header = header
 
 local text1 = f:CreateFontString(nil, "OVERLAY")
 text1:SetJustifyH("LEFT")
 text1:SetFont(C["media"].font, 12)
 text1:SetWidth(f:GetWidth()-40)
 text1:SetPoint("TOPLEFT", f, "TOPLEFT", 20, -60)
-G.Install.Frame.Text1 = text1
 
 local text2 = f:CreateFontString(nil, "OVERLAY")
 text2:SetJustifyH("LEFT")
 text2:SetFont(C["media"].font, 12)
 text2:SetWidth(f:GetWidth()-40)
 text2:SetPoint("TOPLEFT", text1, "BOTTOMLEFT", 0, -20)
-G.Install.Frame.Text2 = text2
 
 local text3 = f:CreateFontString(nil, "OVERLAY")
 text3:SetJustifyH("LEFT")
 text3:SetFont(C["media"].font, 12)
 text3:SetWidth(f:GetWidth()-40)
 text3:SetPoint("TOPLEFT", text2, "BOTTOMLEFT", 0, -20)
-G.Install.Frame.Text3 = text3
 
 local text4 = f:CreateFontString(nil, "OVERLAY")
 text4:SetJustifyH("LEFT")
 text4:SetFont(C["media"].font, 12)
 text4:SetWidth(f:GetWidth()-40)
 text4:SetPoint("TOPLEFT", text3, "BOTTOMLEFT", 0, -20)
-G.Install.Frame.Text4 = text4
 
 local credits = f:CreateFontString(nil, "OVERLAY")
 credits:SetFont(C["media"].font, 12, "THINOUTLINE")
 credits:SetText("")
 credits:SetPoint("BOTTOM", f, "BOTTOM", 0, 4)
-G.Install.Frame.Credits = credits
 
 local sbt = sb:CreateFontString(nil, "OVERLAY")
 sbt:SetFont(C["media"].font, 13, "THINOUTLINE")
 sbt:SetPoint("CENTER", sb)
-G.Install.StatusBar.Text = sbt
 
 local option1 = CreateFrame("Button", "DuffedUIInstallOption1", f)
 option1:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 20, 20)
@@ -283,7 +272,6 @@ option1:SetSize(128, 25)
 option1:SetTemplate("Default")
 option1:FontString("Text", C["media"].font, 12)
 option1.Text:SetPoint("CENTER")
-G.Install.Option1 = option1
 
 local option2 = CreateFrame("Button", "DuffedUIInstallOption2", f)
 option2:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -20, 20)
@@ -291,7 +279,6 @@ option2:SetSize(128, 25)
 option2:SetTemplate("Default")
 option2:FontString("Text", C["media"].font, 12)
 option2.Text:SetPoint("CENTER")
-G.Install.Option2 = option2
 
 local close = CreateFrame("Button", "DuffedUIInstallCloseButton", f, "UIPanelCloseButton")
 close:SetPoint("TOPRIGHT", f, "TOPRIGHT")
@@ -299,7 +286,6 @@ close:SkinCloseButton()
 close:SetScript("OnClick", function()
 	f:Hide()
 end)
-G.Install.Close = close
 
 local step4 = function()
 	DuffedUIDataPerChar.install = true
@@ -493,32 +479,27 @@ local function install()
 	option2.Text:SetText(L.install_button_install)
 
 	option1:SetScript("OnClick", tut1)
-	option2:SetScript("OnClick", step1)			
+	option2:SetScript("OnClick", step1)
 end
 
-------------------------------------------------------------------------
---	On login function, look for some infos!
-------------------------------------------------------------------------
-
+-- On login function, look for some infos!
 local DuffedUIOnLogon = CreateFrame("Frame")
 DuffedUIOnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 DuffedUIOnLogon:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	
-	-- create empty saved vars if they doesn't exist.
+
 	if (DuffedUIData == nil) then DuffedUIData = {} end
 	if (DuffedUIDataPerChar == nil) then DuffedUIDataPerChar = {} end
 
 	if D.screenwidth < 1200 then
 			SetCVar("useUiScale", 0)
 			D.ShowPopup("DUFFEDUIDISABLE_UI")
-	else		
-		-- install default if we never ran DuffedUI on this character.
-		if not DuffedUIDataPerChar.install then			
+	else
+		if not DuffedUIDataPerChar.install then
 			install()
 		end
 	end
-	
+
 	if (IsAddOnLoaded("DuffedUI_Raid") and IsAddOnLoaded("DuffedUI_Raid_Healing")) then
 		D.ShowPopup("DUFFEDUIDISABLE_RAID")
 	end

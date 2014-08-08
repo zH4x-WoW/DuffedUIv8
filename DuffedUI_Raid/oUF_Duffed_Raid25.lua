@@ -5,7 +5,7 @@ assert(oUF, "DuffedUI was unable to locate oUF install.")
 ns._Objects = {}
 ns._Headers = {}
 
-local D, C, L, G = unpack(DuffedUI)
+local D, C, L, G = DuffedUI:unpack()
 if not C["raid"].enable == true then return end
 
 local backdrop = {
@@ -143,18 +143,18 @@ local function Shared(self, unit)
 	self.MasterLooter = MasterLooter
 	self:RegisterEvent("PARTY_LEADER_CHANGED", D.MLAnchorUpdate)
 	self:RegisterEvent("PARTY_MEMBERS_CHANGED", D.MLAnchorUpdate)
-	
+
 	self.DebuffHighlightAlpha = 1
 	self.DebuffHighlightBackdrop = false
 	self.DebuffHighlightFilter = true
 
 	if C["unitframes"].showsmooth == true then health.Smooth = true end
-	
+
 	if C["raid"].showrange == true then
 		local range = {insideAlpha = 1, outsideAlpha = C["raid"].raidalphaoor}
 		self.Range = range
 	end
-	
+
 	return self
 end
 
@@ -174,7 +174,7 @@ oUF:Factory(function(self)
 		"showParty", true, 
 		"showPlayer", C["raid"].showplayerinparty, 
 		"showRaid", true,
-		--"showSolo", true, -- only for dev
+		--"showSolo", true,
 		"groupFilter", "1,2,3,4,5,6,7,8", 
 		"groupingOrder", "1,2,3,4,5,6,7,8", 
 		"groupBy", "GROUP", 
@@ -182,7 +182,7 @@ oUF:Factory(function(self)
 		"point", "BOTTOM"
 	)
 	if DuffedUIChatBackgroundLeft then
-		raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 3)
+		raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 19)
 	else
 		raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 20)
 	end

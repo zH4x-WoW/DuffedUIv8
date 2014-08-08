@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 if C["unitframes"].enable ~= true or C["classtimer"].enable ~= true then return end
 --[[ Configuration functions - DO NOT TOUCH
 	id - spell id

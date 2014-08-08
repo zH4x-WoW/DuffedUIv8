@@ -1,5 +1,14 @@
 => DuffedUI v8 <=
 
+08.08.2014 =>
+	Added Nameplates-Script of previous version
+	Changed unpack-Method
+	Changed PixelPerfect-Method
+	Removed some functions
+	Fixed green overlay on stancebar and petbar
+	Code-Cleanup
+	Removed some files
+
 06.08.2014 =>
 	Removed CreateShadow
 	Added Mover for Playercastbar

@@ -55,7 +55,7 @@ local function Local(o)
 end
 
 local NewButton = function(text, parent)
-	local D, C, L = unpack(DuffedUI)
+	local D, C, L = DuffedUI:unpack()
 
 	local result = CreateFrame("Button", nil, parent)
 	local label = result:CreateFontString(nil, "OVERLAY", nil)
@@ -70,26 +70,20 @@ local NewButton = function(text, parent)
 end
 
 local function SetValue(group, option, value)
-	--Determine if we should be copying our default settings to our player settings, this only happens if we're not using player settings by default
 	local mergesettings
-	if DuffedUIConfigPrivate == DuffedUIConfigPublic then
-		mergesettings = true
-	else
-		mergesettings = false
-	end
+	if DuffedUIConfigPrivate == DuffedUIConfigPublic then mergesettings = true else mergesettings = false end
 
 	if DuffedUIConfigAll[myPlayerRealm][myPlayerName] == true then
 		if not DuffedUIConfigPrivate then DuffedUIConfigPrivate = {} end	
 		if not DuffedUIConfigPrivate[group] then DuffedUIConfigPrivate[group] = {} end
 		DuffedUIConfigPrivate[group][option] = value
 	else
-		--Set PerChar settings to the same as our settings if theres no per char settings
 		if mergesettings == true then
 			if not DuffedUIConfigPrivate then DuffedUIConfigPrivate = {} end	
 			if not DuffedUIConfigPrivate[group] then DuffedUIConfigPrivate[group] = {} end
 			DuffedUIConfigPrivate[group][option] = value
 		end
-		
+
 		if not DuffedUIConfigPublic then DuffedUIConfigPublic = {} end
 		if not DuffedUIConfigPublic[group] then DuffedUIConfigPublic[group] = {} end
 		DuffedUIConfigPublic[group][option] = value
@@ -98,7 +92,7 @@ end
 
 local VISIBLE_GROUP = nil
 local function ShowGroup(group)
-	local D, C, L = unpack(DuffedUI)
+	local D, C, L = DuffedUI:unpack()
 
 	if VISIBLE_GROUP then
 		_G["DuffedUIConfigUI"..VISIBLE_GROUP]:Hide()
@@ -684,7 +678,7 @@ do
 	local loaded = CreateFrame("Frame")
 	loaded:RegisterEvent("PLAYER_LOGIN")
 	loaded:SetScript("OnEvent", function(self, event, addon)
-		D, C, L = unpack(DuffedUI)
+		D, C, L = DuffedUI:unpack()
 
 		local menu = GameMenuFrame
 		local menuy = menu:GetHeight()

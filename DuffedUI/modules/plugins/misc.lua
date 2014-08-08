@@ -1,38 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
-
--- Vendorprice for questitems
-local VendorValue,vv = ...;
-
-local GetItemInfo = GetItemInfo;
-local GetNumQuestChoices = GetNumQuestChoices;
-local GetQuestItemLink = GetQuestItemLink;
-local select = select;
-
-vv.frame = CreateFrame("Frame");
-vv.frame:SetScript("OnEvent",function(self,event,...)
-	if QuestFrameRewardPanel:IsShown() then
-		vv.reward();
-	end
-end);
-vv.frame:RegisterEvent("QUEST_COMPLETE");
-vv.frame:RegisterEvent("QUEST_ITEM_UPDATE");
-
-function vv.reward()
-	local price,id;
-	for i=1,GetNumQuestChoices() do
-		local link = GetQuestItemLink("choice",i);
-		if link then
-			local item = select(11,GetItemInfo(link)) or 0;
-			if (not price) or (item > price) then
-				price = item;
-				id = i;
-			end
-		end
-	end
-	if id then
-		QuestInfoItem_OnClick(_G["QuestInfoItem"..id]);
-	end
-end
+local D, C, L, G = select(2, ...):unpack()
 
 -- Remove PVPBank.com spam from friends request
 local function RemoveSpam()

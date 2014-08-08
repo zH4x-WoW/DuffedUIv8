@@ -1,4 +1,4 @@
-﻿local D, C, L = unpack(select(2, ...))
+﻿local D, C, L = select(2, ...):unpack()
 
 C["general"] = {
 	["autoscale"] = true,
@@ -58,6 +58,18 @@ C["castbar"] = {
 	["playerwidth"] = 376,
 }
 
+C["nameplate"] = {
+	["enable"] = true,
+	["debuffs"] = true,
+	["width"] = 110,
+	["height"] = 7,
+	["auraswidth"] = 20,
+	["aurasheight"] = 15,
+	["MaxDebuffs"] = 5,
+	["CastHeight"] = 5,
+	["ShowComboPoints"] = true,
+}
+
 C["actionbar"] = {
 	["enable"] = true,
 	["rightbarvertical"] = false,
@@ -70,9 +82,6 @@ C["actionbar"] = {
 	["buttonsize"] = 27,                                		-- normal buttons size
 	["petbuttonsize"] = 29,                             		-- pet & stance buttons size
 	["buttonspacing"] = 4,                              		-- buttons spacing
-	["ownshdbar"] = false,                              		-- use a complete new stance bar for shadow dance (rogue only)
-	["ownmetabar"] = true,                              		-- use a complete new stance bar for metamorphosis (warlock only)
-	["ownwarstancebar"] = false,                        		-- use a different bar for every warrior stance like it was in previous xpac (warrior only)
 	["shapeshiftborder"] = true,								-- enable stancebarborder
 	["verticalshapeshift"] = false,								-- enable vertical stancebar
 	["shapeshiftmouseover"] = false,							-- enable mouseover on stancebar
@@ -227,23 +236,6 @@ C["datatext"] = {
 	["time24"] = true,                                  		-- set time to 24h format.
 	["localtime"] = false,                              		-- set time to local time instead of server time.
 	["fontsize"] = 12,                                  		-- font size for panels.
-}
-
-C["nameplate"] = {
-	["enable"] = true,
-	["showhealth"] = false,
-	["enhancethreat"] = false,
-	["combat"] = false,
-	["goodcolor"] = {75/255,  175/255, 76/255},
-	["badcolor"] = {0.78, 0.25, 0.25},
-	["transitioncolor"] = {218/255, 197/255, 92/255},
-	["debuffs"] = true,
-	["width"] = 110,
-	["height"] = 7,
-	["nameabbrev"] = false,
-	["auraswidth"] = 20,
-	["aurasheight"] = 15,
-	["showcastbarname"] = false,
 }
 
 C["tooltip"] = {

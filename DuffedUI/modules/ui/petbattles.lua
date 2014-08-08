@@ -10,7 +10,7 @@
 -- Pet Battles UI ----------------------------
 ----------------------------------------------
 
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L, G = select(2, ...):unpack() 
 local f = PetBattleFrame
 local bf = f.BottomFrame
 local pets = {

@@ -1,5 +1,5 @@
 if (select(2, UnitClass("player")) ~= "MAGE") or not DuffedUIMinimapStatsLeft then return end
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 
 local spells = (UnitFactionGroup("player") == "Horde") and {
 	--  Tepelort id, Portal id

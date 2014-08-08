@@ -1,4 +1,4 @@
-﻿local D, C, L, G = unpack(select(2, ...))
+﻿local D, C, L, G = select(2, ...):unpack()
 
 if C["datatext"].talent and C["datatext"].talent > 0 then
 	local Stat = CreateFrame("Frame", "DuffedUIStatTalent")

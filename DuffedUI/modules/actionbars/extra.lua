@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 if not C["actionbar"].enable then return end
 
 -- create the holder to allow moving extra button
@@ -9,7 +9,7 @@ holder:SetMovable(true)
 holder:SetTemplate("Default")
 holder:SetBackdropBorderColor(1, 0, 0)
 holder:SetAlpha(0)
-holder.text = D.SetFontString(holder, C["media"].uffont, 12)
+holder.text = D.SetFontString(holder, C["media"].font, 12)
 holder.text:SetPoint("CENTER")
 holder.text:SetText(L.move_extrabutton)
 holder.text:Hide()

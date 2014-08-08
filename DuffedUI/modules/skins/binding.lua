@@ -1,27 +1,34 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 
 local function LoadSkin()
 	local buttons = {
-		"KeyBindingFrameDefaultButton",
-		"KeyBindingFrameUnbindButton",
-		"KeyBindingFrameOkayButton",
-		"KeyBindingFrameCancelButton",
+		"defaultsButton",
+		"unbindButton",
+		"okayButton",
+		"cancelButton",
 	}
-	
+
 	for _, v in pairs(buttons) do
-		_G[v]:StripTextures()
-		_G[v]:SkinButton()
+		KeyBindingFrame[v]:StripTextures()
+		KeyBindingFrame[v]:SkinButton()
 	end
-	
-	KeyBindingFrameCharacterButton:SkinCheckBox()
-	KeyBindingFrameHeaderText:ClearAllPoints()
-	KeyBindingFrameHeaderText:Point("TOP", KeyBindingFrame, "TOP", 0, -4)
+
 	KeyBindingFrame:StripTextures()
 	KeyBindingFrame:SetTemplate("Transparent")
-	
+	KeyBindingFrameScrollFrameScrollBar:SkinScrollBar()
+	KeyBindingFrameScrollFrameScrollBarBG:SetTexture(nil)
+	KeyBindingFrameCategoryList:StripTextures()
+	KeyBindingFrameCategoryList:SetTemplate("Default")
+	KeyBindingFrame.bindingsContainer:StripTextures()
+	KeyBindingFrame.bindingsContainer:SetTemplate("Default")
+	KeyBindingFrame.header:StripTextures()
+	KeyBindingFrame.characterSpecificButton:SkinCheckBox()
+	KeyBindingFrame.header:ClearAllPoints()
+	KeyBindingFrame.header:Point("TOP", KeyBindingFrame, "TOP", 0, -4)
+
 	for i = 1, KEY_BINDINGS_DISPLAYED  do
-		local button1 = _G["KeyBindingFrameBinding"..i.."Key1Button"]
-		local button2 = _G["KeyBindingFrameBinding"..i.."Key2Button"]
+		local button1 = _G["KeyBindingFrameKeyBinding"..i.."Key1Button"]
+		local button2 = _G["KeyBindingFrameKeyBinding"..i.."Key2Button"]
 		button1:StripTextures(true)
 		button1:StyleButton(false)
 		button1:SetTemplate("Default", true)
@@ -29,11 +36,6 @@ local function LoadSkin()
 		button2:StyleButton(false)
 		button2:SetTemplate("Default", true)
 	end
-	
-	KeyBindingFrameUnbindButton:Point("RIGHT", KeyBindingFrameOkayButton, "LEFT", -3, 0)
-	KeyBindingFrameOkayButton:Point("RIGHT", KeyBindingFrameCancelButton, "LEFT", -3, 0)
-	
-	KeyBindingFrameScrollFrameScrollBar:SkinScrollBar()
 end
 
 D.SkinFuncs["Blizzard_BindingUI"] = LoadSkin

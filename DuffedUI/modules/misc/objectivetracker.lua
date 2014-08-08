@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...))
+local D, C, L = select(2, ...):unpack()
 
 local ObjectiveTracker = CreateFrame("Frame", "ObjectiveTracker", UIParent)
 local Noop = function() end
@@ -31,8 +31,8 @@ function ObjectiveTracker:UpdatePopup()
 			if not ScrollChild.IsSkinned then
 				ScrollChild:StripTextures()
 				ScrollChild:CreateBackdrop("Transparent")
-				ScrollChild.Backdrop:Point("TOPLEFT", ScrollChild, "TOPLEFT", 48, -2)
-				ScrollChild.Backdrop:Point("BOTTOMRIGHT", ScrollChild, "BOTTOMRIGHT", -1, 2)
+				ScrollChild.backdrop:Point("TOPLEFT", ScrollChild, "TOPLEFT", 48, -2)
+				ScrollChild.backdrop:Point("BOTTOMRIGHT", ScrollChild, "BOTTOMRIGHT", -1, 2)
 				ScrollChild.FlashFrame.IconFlash:Kill()
 				ScrollChild.IsSkinned = true
 			end

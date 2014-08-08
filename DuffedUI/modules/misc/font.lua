@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L, G = select(2, ...):unpack() 
 local DuffedUIFonts = CreateFrame("Frame", "DuffedUIFonts", UIParent)
 
 local SetFont = function(obj, font, size, style, r, g, b, sr, sg, sb, sox, soy)
@@ -18,7 +18,6 @@ DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
 	local NUMBER     = C["media"].font
 
 	if D.eyefinity then
-		-- damage are huge on eyefinity, so we disable it
 		InterfaceOptionsCombatTextPanelTargetDamage:Hide()
 		InterfaceOptionsCombatTextPanelPeriodicDamage:Hide()
 		InterfaceOptionsCombatTextPanelPetDamage:Hide()
@@ -27,7 +26,7 @@ DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
 		SetCVar("PetMeleeDamage",0)
 		SetCVar("CombatDamage",0)
 		SetCVar("CombatHealing",0)
-		
+
 		-- set an invisible font for xp, honor kill, etc
 		local INVISIBLE = [=[Interface\Addons\DuffedUI\medias\fonts\invisible_font.ttf]=]
 		COMBAT = INVISIBLE

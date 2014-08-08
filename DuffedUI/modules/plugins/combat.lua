@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = select(2, ...):unpack()
 if not C["misc"].combatanimation then return end
 
 local speed = .041 -- how fast the text appears
