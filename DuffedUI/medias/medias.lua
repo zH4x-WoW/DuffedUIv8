@@ -44,45 +44,14 @@ C["media"] = {
 	["neutral"] = [[Interface\AddOns\DuffedUI\medias\textures\neutral]],
 	["sc2"] = [[Interface\AddOns\DuffedUI\medias\textures\sc2]],
 	["pointer"] = [[Interface\AddOns\DuffedUI\medias\textures\arrow]],
-	
+
 	-- colors
 	["bordercolor"] = C["general"].bordercolor or { .125, .125, .125 },
 	["backdropcolor"] = C["general"].backdropcolor or { .05, .05, .05 },
 	["datatextcolor1"] = { .4, .4, .4 }, -- color of datatext title
 	["datatextcolor2"] = { 1, 1, 1 }, -- color of datatext result
-	
+
 	-- sound
 	["whisper"] = [[Interface\AddOns\DuffedUI\medias\sounds\whisper.mp3]],
 	["warning"] = [[Interface\AddOns\DuffedUI\medias\sounds\warning.mp3]],
 }
-
-local frames = {PetBarFrame,StanceBarFrame}
- 
-local function CheckForTextures(f)
-  for _, child in pairs({ f:GetChildren() }) do
-    CheckForTextures(child)
-  end
-  for _, region in pairs({ f:GetRegions() }) do
-    if region:GetObjectType() == "Texture" then
-      print("region",region:GetName(),region:GetTexture())
-    end  
-  end
-end
- 
-for k, v in pairs(frames) do
-  CheckForTextures(v)
-end
-
--------------------------------------------------------------------
--- Used to overwrite default medias outside DuffedUI
--------------------------------------------------------------------
-
---[[local settings = DuffedUIEditedDefaultConfig
-if settings then
-	local media = settings.media
-	if media then
-		for option, value in pairs(media) do
-			C.media[option] = value
-		end
-	end
-end]]--
