@@ -344,12 +344,7 @@ local function SetModifiedBackdrop(self)
 end
 
 local function SetOriginalBackdrop(self)
-	local color = RAID_CLASS_COLORS[D.Class]
-	if C["general"].classcolortheme == true then
-		self:SetBackdropBorderColor(color.r, color.g, color.b)
-	else
-		self:SetTemplate()
-	end
+	self:SetTemplate()
 end
 
 local function SkinButton(f, strip)
@@ -357,7 +352,6 @@ local function SkinButton(f, strip)
 		local l = _G[f:GetName().."Left"]
 		local m = _G[f:GetName().."Middle"]
 		local r = _G[f:GetName().."Right"]
-
 
 		if l then l:SetAlpha(0) end
 		if m then m:SetAlpha(0) end
@@ -367,10 +361,10 @@ local function SkinButton(f, strip)
 	if f.Left then f.Left:SetAlpha(0) end
 	if f.Right then f.Right:SetAlpha(0) end	
 	if f.Middle then f.Middle:SetAlpha(0) end
-	if f.SetNormalTexture then f:SetNormalTexture("") end	
+	if f.SetNormalTexture then f:SetNormalTexture("") end
 	if f.SetHighlightTexture then f:SetHighlightTexture("") end
-	if f.SetPushedTexture then f:SetPushedTexture("") end	
-	if f.SetDisabledTexture then f:SetDisabledTexture("") end	
+	if f.SetPushedTexture then f:SetPushedTexture("") end
+	if f.SetDisabledTexture then f:SetDisabledTexture("") end
 	if strip then StripTextures(f) end
 	
 	SetTemplate(f, "Default")

@@ -17,6 +17,10 @@ local FactionInfo = {
 	[8] = {{ 155/255,  255/255, 155/255 }, "Exalted","FF9bff9b"},
 }
 
+local function GetPlayerXP()
+	return UnitXP("player"), UnitXPMax("player"), GetXPExhaustion()
+end
+
 function colorize(r)
 	return FactionInfo[r][3]
 end
@@ -68,30 +72,21 @@ repBar:SetFrameLevel(2)
 xpBar:SetFrameLevel(2)
 mouseFrame:SetFrameLevel(3)
 
-local function GetPlayerXP()
-	return UnitXP("player"), UnitXPMax("player")
-end
-
 local function updateStatus()
-	local XP, maxXP = GetPlayerXP()
-	local restXP = GetXPExhaustion()
-	local percXP = floor(XP / maxXP * 100)
+	local XP, maxXP, restXP = GetPlayerXP()
+	local percXP = (XP == 0) and 0 or math.floor((XP / maxXP) * 100)
 
 	if IsMaxLevel() then
 		xpBar:Hide()
 		restedxpBar:Hide()
 		repBar:SetHeight(barHeight)
-		if not GetWatchedFactionInfo() then
-			backdrop:Hide()
-		else
-			backdrop:Show()
-		end
+		if not GetWatchedFactionInfo() then backdrop:Hide() else backdrop:Show() end
 	else
 		xpBar:SetMinMaxValues(min(0, XP), maxXP)
 		xpBar:SetValue(XP)
 
 		if restXP then
-			Text:SetText(format("%s/%s (%s%%|cffb3e1ff+%d%%|r)", D.ShortValue(XP), D.ShortValue(maxXP), percXP, restXP / maxXP * 100))
+			Text:SetText(format("%s / %s (%s%%|cffb3e1ff +%d%%|r)", D.ShortValue(XP), D.ShortValue(maxXP), percXP, restXP / maxXP * 100))
 			restedxpBar:Show()
 			local r, g, b = color.r, color.g, color.b
 			restedxpBar:SetStatusBarColor(r, g, b, .40)
