@@ -1,5 +1,4 @@
-local D, C, L, G = select(2, ...):unpack() 
--- here we kill all shit stuff on default UI that we don't need!
+local D, C, L = select(2, ...):unpack() 
 
 local Kill = CreateFrame("Frame")
 Kill:RegisterEvent("ADDON_LOADED")
@@ -11,10 +10,8 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 	end
 
 	if addon ~= "DuffedUI" then return end
-	
-	-- disable Blizzard party & raid frame if our Raid Frames are loaded
-	if C["raid"].enable == true then
-		if addon == "DuffedUI_Raid" or addon == "DuffedUI_Raid_Heal" or addon == "DuffedUI" then
+	if C["raid"].enable then
+		if addon == "DuffedUI" then
 			InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
 			InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
 			
@@ -93,13 +90,6 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		InterfaceOptionsNamesPanelUnitNameplatesNameplateClassColors:Kill()
 	end
 
-	-- I'm seriously tired of this Blizzard taint, little hack, we don't care about SearchLFGLeave()
-	-- This taint is blaming every addon even if we are not calling SearchLFGLeave() function in our addon ...
-	--[[ TAINT LOG
-			10/18 21:46:01.774  An action was blocked because of taint from DuffedUI - SearchLFGLeave()
-			10/18 21:46:01.774      Interface\FrameXML\LFRFrame.lua:395 LFRBrowseFrame_OnUpdateAlways()
-			10/18 21:46:01.774      UIParent:OnUpdate()
-	--]]
 	local TaintFix = CreateFrame("Frame")
 	TaintFix:SetScript("OnUpdate", function(self, elapsed)
 		if LFRBrowseFrame.timeToClear then
@@ -107,4 +97,3 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		end 
 	end)
 end)
-G.Misc.Kill = Kill

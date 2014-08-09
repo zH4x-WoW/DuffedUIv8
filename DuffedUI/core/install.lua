@@ -482,7 +482,6 @@ local function install()
 	option2:SetScript("OnClick", step1)
 end
 
--- On login function, look for some infos!
 local DuffedUIOnLogon = CreateFrame("Frame")
 DuffedUIOnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 DuffedUIOnLogon:SetScript("OnEvent", function(self, event)
@@ -492,16 +491,12 @@ DuffedUIOnLogon:SetScript("OnEvent", function(self, event)
 	if (DuffedUIDataPerChar == nil) then DuffedUIDataPerChar = {} end
 
 	if D.screenwidth < 1200 then
-			SetCVar("useUiScale", 0)
-			D.ShowPopup("DUFFEDUIDISABLE_UI")
+		SetCVar("useUiScale", 0)
+		D.ShowPopup("DUFFEDUIDISABLE_UI")
 	else
 		if not DuffedUIDataPerChar.install then
 			install()
 		end
-	end
-
-	if (IsAddOnLoaded("DuffedUI_Raid") and IsAddOnLoaded("DuffedUI_Raid_Healing")) then
-		D.ShowPopup("DUFFEDUIDISABLE_RAID")
 	end
 end)
 
@@ -523,12 +518,4 @@ D.CreatePopup["DUFFEDUIDISABLE_UI"] = {
 	answer1 = ACCEPT,
 	answer2 = CANCEL,
 	function1 = function() DisableAddOn("DuffedUI") ReloadUI() end,
-}
-
-D.CreatePopup["DUFFEDUIDISABLE_RAID"] = {
-	question = "Choose your favorite Raidlayout:",
-	answer1 = "DPS, Tank",
-	answer2 = "Healing",
-	function1 = function() DisableAddOn("DuffedUI_Raid_Healing") EnableAddOn("DuffedUI_Raid") ReloadUI() end,
-	function2 = function() EnableAddOn("DuffedUI_Raid_Healing") DisableAddOn("DuffedUI_Raid") ReloadUI() end,
 }

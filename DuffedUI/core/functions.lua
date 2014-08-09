@@ -1245,12 +1245,12 @@ end
 
 -- position of indicators
 D.countOffsets = {
-	TOPLEFT = {6 * C["raid"].gridscale, 1},
-	TOPRIGHT = {-6 * C["raid"].gridscale, 1},
-	BOTTOMLEFT = {6 * C["raid"].gridscale, 1},
-	BOTTOMRIGHT = {-6 * C["raid"].gridscale, 1},
-	LEFT = {6 * C["raid"].gridscale, 1},
-	RIGHT = {-6 * C["raid"].gridscale, 1},
+	TOPLEFT = {6 * D.raidscale, 1},
+	TOPRIGHT = {-6 * D.raidscale, 1},
+	BOTTOMLEFT = {6 * D.raidscale, 1},
+	BOTTOMRIGHT = {-6 * D.raidscale, 1},
+	LEFT = {6 * D.raidscale, 1},
+	RIGHT = {-6 * D.raidscale, 1},
 	TOP = {0, 0},
 	BOTTOM = {0, 0},
 }
@@ -1298,8 +1298,8 @@ D.createAuraWatch = function(self, unit)
 			local icon = CreateFrame("Frame", nil, auras)
 			icon.spellID = spell[1]
 			icon.anyUnit = spell[4]
-			icon:Width(6 * C["raid"].gridscale)
-			icon:Height(6 * C["raid"].gridscale)
+			icon:Width(6 * D.raidscale)
+			icon:Height(6 * D.raidscale)
 			icon:SetPoint(spell[2], 0, 0)
 
 			local tex = icon:CreateTexture(nil, "OVERLAY")
@@ -1312,7 +1312,7 @@ D.createAuraWatch = function(self, unit)
 			end
 
 			local count = icon:CreateFontString(nil, "OVERLAY")
-			count:SetFont(C["media"].font, 8 * C["raid"].gridscale, "THINOUTLINE")
+			count:SetFont(C["media"].font, 8 * D.raidscale, "THINOUTLINE")
 			count:SetPoint("CENTER", unpack(D.countOffsets[spell[2]]))
 			icon.count = count
 

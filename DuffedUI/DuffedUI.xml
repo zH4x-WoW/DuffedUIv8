@@ -55,6 +55,7 @@
 	<Script file="modules\unitframes\layouts\layout1.lua" />
 	<Script file="modules\unitframes\layouts\layout2.lua" />
 	<Script file="modules\unitframes\layouts\layout3.lua" />
+	<Script file="modules\unitframes\groups\raid_heal40.lua" />
 	<Script file="modules\misc\altpowerbar.lua" />
 	<Script file="modules\misc\threatbar.lua" />
 	<Script file="modules\blizzard\achievements.lua" />

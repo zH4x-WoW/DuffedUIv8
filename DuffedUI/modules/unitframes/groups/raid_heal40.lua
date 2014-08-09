@@ -1,12 +1,12 @@
+local D, C, L = select(2, ...):unpack()
+if C["raid"].enable ~= true then return end
+
 local ADDON_NAME, ns = ...
 local oUF = oUFDuffedUI or oUF
 assert(oUF, "DuffedUI was unable to locate oUF install.")
 
 ns._Objects = {}
 ns._Headers = {}
-
-local D, C, L, G = DuffedUI:unpack()
-if not C["raid"].enable == true then return end
 
 local normTex = C["media"].normTex
 local backdrop = {
@@ -23,11 +23,11 @@ local function Shared(self, unit)
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	if unit:find("partypet") then health:Height(18) else health:Height(30 * C["raid"].gridscale * D.raidscale) end
+	if unit:find("partypet") then health:Height(18) else health:Height(30 * D.raidscale) end
 	health:SetStatusBarTexture(normTex)
 	health:CreateBackdrop()
 	self.Health = health
-	if C["raid"].gridhealthvertical == true then health:SetOrientation('VERTICAL') end
+	health:SetOrientation('VERTICAL')
 	health.bg = health:CreateTexture(nil, 'BORDER')
 	health.bg:SetAllPoints(health)
 	health.bg:SetTexture(normTex)
@@ -45,7 +45,7 @@ local function Shared(self, unit)
 		health.colorDisconnected = false
 		health.colorClass = false
 		health:SetStatusBarColor(unpack(C["unitframes"].healthbarcolor))
-		health.bg:SetVertexColor(unpack(C["unitframes"].deficitcolor))	
+		health.bg:SetVertexColor(unpack(C["unitframes"].deficitcolor))
 		health.bg:SetTexture(.6, .6, .6)
 		if C["unitframes"].ColorGradient then
 			health.colorSmooth = true
@@ -130,9 +130,9 @@ local function Shared(self, unit)
 	self.ResurrectIcon = ResurrectIcon
 
 	local ReadyCheck = power:CreateTexture(nil, "OVERLAY")
-	ReadyCheck:Height(12 * C["raid"].gridscale * D.raidscale)
-	ReadyCheck:Width(12 * C["raid"].gridscale * D.raidscale)
-	ReadyCheck:SetPoint('CENTER') 	
+	ReadyCheck:Height(12 * D.raidscale)
+	ReadyCheck:Width(12 * D.raidscale)
+	ReadyCheck:SetPoint('CENTER')
 	self.ReadyCheck = ReadyCheck
 
 	local leader = health:CreateTexture(nil, "OVERLAY")
@@ -166,44 +166,26 @@ local function Shared(self, unit)
 
 	if C["unitframes"].healcomm then
 		local mhpb = CreateFrame('StatusBar', nil, self.Health)
-		if C["raid"].gridhealthvertical then
-			mhpb:SetOrientation("VERTICAL")
-			mhpb:SetPoint('BOTTOM', self.Health:GetStatusBarTexture(), 'TOP', 0, 0)
-			mhpb:Width(68 * C["raid"].gridscale * D.raidscale)
-			mhpb:Height(31 * C["raid"].gridscale * D.raidscale)
-		else
-			mhpb:SetPoint('TOPLEFT', self.Health:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
-			mhpb:SetPoint('BOTTOMLEFT', self.Health:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
-			mhpb:Width(68 * C["raid"].gridscale * D.raidscale)
-		end
+		mhpb:SetOrientation("VERTICAL")
+		mhpb:SetPoint('BOTTOM', self.Health:GetStatusBarTexture(), 'TOP', 0, 0)
+		mhpb:Width(68 * D.raidscale)
+		mhpb:Height(31 * D.raidscale)
 		mhpb:SetStatusBarTexture(normTex)
 		mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
 
 		local ohpb = CreateFrame('StatusBar', nil, self.Health)
-		if C["raid"].gridhealthvertical then
-			ohpb:SetOrientation("VERTICAL")
-			ohpb:SetPoint('BOTTOM', mhpb:GetStatusBarTexture(), 'TOP', 0, 0)
-			ohpb:Width(68 * C["raid"].gridscale * D.raidscale)
-			ohpb:Height(31 * C["raid"].gridscale * D.raidscale)
-		else
-			ohpb:SetPoint('TOPLEFT', mhpb:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
-			ohpb:SetPoint('BOTTOMLEFT', mhpb:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
-			ohpb:Width(68 * C["raid"].gridscale * D.raidscale)
-		end
+		ohpb:SetOrientation("VERTICAL")
+		ohpb:SetPoint('BOTTOM', mhpb:GetStatusBarTexture(), 'TOP', 0, 0)
+		ohpb:Width(68 * D.raidscale)
+		ohpb:Height(31 * D.raidscale)
 		ohpb:SetStatusBarTexture(normTex)
 		ohpb:SetStatusBarColor(0, 1, 0, 0.25)
 
 		local absb = CreateFrame("StatusBar", nil, self.Health)
-		if C["raid"].gridhealthvertical then
-			absb:SetOrientation("VERTICAL")
-			absb:SetPoint("BOTTOM", ohpb:GetStatusBarTexture(), "TOP", 0, 0)
-			absb:Width(68 * C["raid"].gridscale * D.raidscale)
-			absb:Height(31 * C["raid"].gridscale * D.raidscale)
-		else
-			absb:SetPoint("TOPLEFT", ohpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-			absb:SetPoint("BOTTOMLEFT", ohpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
-			absb:SetWidth(68 * C["raid"].gridscale * D.raidscale)
-		end
+		absb:SetOrientation("VERTICAL")
+		absb:SetPoint("BOTTOM", ohpb:GetStatusBarTexture(), "TOP", 0, 0)
+		absb:Width(68 * D.raidscale)
+		absb:Height(31 * D.raidscale)
 		absb:SetStatusBarTexture(normTex)
 		absb:SetStatusBarColor(1, 1, 0, 0.25)
 
@@ -227,13 +209,12 @@ local function Shared(self, unit)
 	end
 
 	if C["raid"].raidunitdebuffwatch == true then
-		-- AuraWatch (corner icon)
 		D.createAuraWatch(self,unit)
 
 		-- Raid Debuffs (big middle icon)
 		local RaidDebuffs = CreateFrame('Frame', nil, self)
-		RaidDebuffs:Height(24 * C["raid"].gridscale)
-		RaidDebuffs:Width(24 * C["raid"].gridscale)
+		RaidDebuffs:Height(24 * D.raidscale)
+		RaidDebuffs:Width(24 * D.raidscale)
 		RaidDebuffs:Point('CENTER', health, 1,0)
 		RaidDebuffs:SetFrameStrata(health:GetFrameStrata())
 		RaidDebuffs:SetFrameLevel(health:GetFrameLevel() + 2)
@@ -246,7 +227,7 @@ local function Shared(self, unit)
 		RaidDebuffs.time:Point('CENTER', 1, 0)
 		RaidDebuffs.time:SetTextColor(1, .9, 0)
 		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, 'OVERLAY')
-		RaidDebuffs.count:SetFont(C["media"].font, 9 * C["raid"].gridscale, "THINOUTLINE")
+		RaidDebuffs.count:SetFont(C["media"].font, 9 * D.raidscale, "THINOUTLINE")
 		RaidDebuffs.count:Point('BOTTOMRIGHT', RaidDebuffs, 'BOTTOMRIGHT', 0, 2)
 		RaidDebuffs.count:SetTextColor(1, .9, 0)
 		self.RaidDebuffs = RaidDebuffs
@@ -260,21 +241,16 @@ oUF:Factory(function(self)
 	oUF:SetActiveStyle("DuffedUIHealR25R40")
 
 	local spawnG = "solo,raid,party"
-	local pointG = "LEFT"
-	local capG = "BOTTOM"
-	if C["raid"].gridvertical then pointG = "BOTTOM" end
-	if C["raid"].gridvertical then capG = "LEFT" end
-
 	local raid = self:SpawnHeader("DuffedUIGrid", nil, spawnG,
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute('initial-width'))
 			self:SetHeight(header:GetAttribute('initial-height'))
 		]],
-		"initial-width", D.Scale(C["raid"].framewidth * C["raid"].gridscale * D.raidscale),
-		"initial-height", D.Scale(C["raid"].frameheight * C["raid"].gridscale * D.raidscale),
-		"showParty", C["raid"].showplayerinparty,
-		"showPlayer", true,
+		"initial-width", D.Scale(C["raid"].framewidth * D.raidscale),
+		"initial-height", D.Scale(C["raid"].frameheight * D.raidscale),
+		"showParty", true,
+		"showPlayer", C["raid"].showplayerinparty,
 		--"showSolo", true,
 		"showRaid", true, 
 		"xoffset", D.Scale(8),
@@ -284,9 +260,9 @@ oUF:Factory(function(self)
 		"groupBy", "GROUP",
 		"maxColumns", 8,
 		"unitsPerColumn", 5,
-		"columnSpacing", D.Scale(C["raid"].columnSpacing),
-		"point", pointG,
-		"columnAnchorPoint", capG
+		"columnSpacing", D.Scale(1),
+		"point", "LEFT",
+		"columnAnchorPoint", "BOTTOM"
 	)
 	if DuffedUIChatBackgroundLeft then
 		raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 16)
@@ -298,11 +274,11 @@ oUF:Factory(function(self)
 		local pets = {} 
 			pets[1] = oUF:Spawn('partypet1', 'oUF_DuffedUIPartyPet1') 
 			pets[1]:Point('BOTTOMLEFT', raid, 'TOPLEFT', 0, 8)
-			pets[1]:Size(C["raid"].framewidth * C["raid"].gridscale * D.raidscale, 18 * C["raid"].gridscale * D.raidscale)
+			pets[1]:Size(C["raid"].framewidth * D.raidscale, 18 * D.raidscale)
 		for i =2, 4 do 
 			pets[i] = oUF:Spawn('partypet'..i, 'oUF_DuffedUIPartyPet'..i) 
 			pets[i]:Point('LEFT', pets[i-1], 'RIGHT', 8, 0)
-			pets[i]:Size(C["raid"].framewidth * C["raid"].gridscale * D.raidscale, 18 * C["raid"].gridscale * D.raidscale)
+			pets[i]:Size(C["raid"].framewidth * D.raidscale, 18 * D.raidscale)
 		end
 
 		local ShowPet = CreateFrame("Frame")

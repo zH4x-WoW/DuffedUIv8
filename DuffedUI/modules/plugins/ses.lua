@@ -147,16 +147,8 @@ MB_reload:Point("TOPLEFT", spec, "BOTTOMLEFT", 0, -2)
 MB_reload:SetAttribute("macrotext1", "/rl")
 MB_reload:Hide()
 
-D.CreateBtn("MB_heal", MB_reload, 19, 19, L.sesbutton_heal, "H")
-MB_heal:Point("LEFT", MB_reload, "RIGHT", 2, 0)
-MB_heal:SetAttribute("macrotext1", "/heal")
-
-D.CreateBtn("MB_dps", MB_reload, 19, 19, L.sesbutton_dps, "D")
-MB_dps:Point("LEFT", MB_heal, "RIGHT", 2, 0)
-MB_dps:SetAttribute("macrotext1", "/dps")
-
 D.CreateBtn("MB_mui", MB_reload, 19, 19, L.sesbutton_move, "M")
-MB_mui:Point("LEFT", MB_dps, "RIGHT", 2, 0)
+MB_mui:Point("LEFT", MB_reload, "RIGHT", 2, 0)
 MB_mui:SetAttribute("macrotext1", "/moveui")
 
 D.CreateBtn("MB_binds", MB_reload, 19, 19, L.sesbutton_kb, "K")
