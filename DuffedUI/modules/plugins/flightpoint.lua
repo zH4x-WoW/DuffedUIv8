@@ -1,5 +1,5 @@
 local D, C, L, G = unpack(select(2, ...))
-if not C["misc"].flightpoint then return end
+if C["misc"].flightpoint ~= true then return end
 
 local taxinodeinfos = {}
 local firstshow = false
@@ -81,13 +81,8 @@ function FlightPointsTaxiChoiceContainer_Update()
 				button.categoryMiddle:Show()
 				button.expandIcon:Show()
 
-				if isExpanded then
-					hidebuttons = false
-					button.expandIcon:SetTexCoord(.5625, 1, 0, .4375)
-				else
-					hidebuttons = true;
-					button.expandIcon:SetTexCoord(0, .4375, 0, .4375)
-				end
+				hidebuttons = false
+				button.expandIcon:SetTexCoord(.5625, 1, 0, .4375)
 
 				button.highlight:SetTexture("Interface\\TokenFrame\\UI-TokenFrame-CategoryButton")
 				button.highlight:SetPoint("TOPLEFT", button, "TOPLEFT", 3, -2)
@@ -131,11 +126,6 @@ end
 
 function FlightPointsTaxiChoiceButton_OnClick(self, button, down)
 	if self.isHeader then
-		if self.isExpanded then
-			FlightPoints_Config.notexpanded[self.flightpathname] = true
-		else
-			FlightPoints_Config.notexpanded[self.flightpathname] = nil
-		end
 		FlightPoints_CreateFlyPathTable()
 		FlightPointsTaxiChoiceContainer_Update()
 	else
@@ -190,22 +180,14 @@ function FlightPoints_CreateFlyPathTable()
 		tmptaxinode[runs].name = key
 		tmptaxinode[runs].isheader = true
 		tmptaxinode[runs].flightid = 0
-		if not FlightPoints_Config.notexpanded[key] and FlightPoints_Config.alwayscollapse == nil or firstshow == false then
+		tmptaxinode[runs].isexpanded = true
+		runs = runs + 1
+		for key2, val2 in pairsByKeys(val) do
+			tmptaxinode[runs] = {}
+			tmptaxinode[runs].name = key2
+			tmptaxinode[runs].isheader = false
+			tmptaxinode[runs].flightid = val2
 			tmptaxinode[runs].isexpanded = true
-			runs = runs + 1
-			for key2, val2 in pairsByKeys(val) do
-				tmptaxinode[runs] = {}
-				tmptaxinode[runs].name = key2
-				tmptaxinode[runs].isheader = false
-				tmptaxinode[runs].flightid = val2
-				tmptaxinode[runs].isexpanded = true
-				runs = runs + 1
-			end
-		else
-			if FlightPoints_Config.alwayscollapse == 1 then
-				FlightPoints_Config.notexpanded[key] = true
-			end
-			tmptaxinode[runs].isexpanded = false
 			runs = runs + 1
 		end
 	end
@@ -229,11 +211,5 @@ function FlightPoints_OnEvent(self, event, ...)
 	elseif event == "TAXIMAP_CLOSED" then
 		FlightPointsTaxiChoice:Hide()
 		taxinodeinfos = {}
-	elseif event == "ADDON_LOADED" then
-		local arg1 = ...
-		if arg1 == "FlightPoints" then
-			FlightPointsTaxiChoiceCollapseOnShow:SetChecked(FlightPoints_Config.alwayscollapse)
-			self:UnregisterEvent("ADDON_LOADED")
-		end	
 	end
 end

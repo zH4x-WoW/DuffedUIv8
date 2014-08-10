@@ -102,46 +102,12 @@
 		</HighlightTexture>
 	</Button>
 	<Frame name="FlightPointsTaxiChoice" parent="UIParent" inherits="BasicFrameTemplateWithInset" hidden="true">
-		
 		<Scripts>
 			<OnLoad function="FlightPoints_OnLoad"/>
 			<OnEvent function="FlightPoints_OnEvent"/>
 			<OnShow function="FlightPoints_Show"/>
 		</Scripts>	
 		 <Frames>
-			<CheckButton name="$parentCollapseOnShow" inherits="OptionsSmallCheckButtonTemplate" >
-				<Size>
-					<AbsDimension x="32" y="22"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="FlightPointsTaxiChoice" relativePoint="TOPLEFT">
-						<Offset x="0" y="0"/>
-					</Anchor>
-				</Anchors>
-				<Layers>
-					<Layer level="ARTWORK">
-						<FontString name="$parentText" inherits="GameFontNormalSmall" text="Always collapse on show">
-							<Anchors>
-								<Anchor point="LEFT" relativePoint="RIGHT"/>
-							</Anchors>
-							
-						</FontString>
-					</Layer>
-				</Layers>
-				<Scripts>
-					<OnClick>
-						FlightPoints_Config.alwayscollapse = self:GetChecked();
-						if not (FlightPoints_Config.alwayscollapse) then
-							FlightPoints_Config.notexpanded = {};
-						end
-					</OnClick>
-					<OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-						GameTooltip:SetText("If checked every time the Flight Map is opened all zones will be collapsed", nil, nil, nil, nil, 1);
-					</OnEnter>
-					<OnLeave function="GameTooltip_Hide"/>
-				</Scripts>
-			</CheckButton>			
 			<ScrollFrame name="$parentContainer" inherits="HybridScrollFrameTemplate">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="FlightPointsTaxiChoice" x="4" y="-25"/>

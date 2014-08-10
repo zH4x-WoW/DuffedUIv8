@@ -1,6 +1,8 @@
 => DuffedUI v8 <=
 
 10.08.2014 =>
+	Fixed EncounterJournal
+	FlightPoint-List adjusted
 	Fixed issue with SavedVars
 	Fixed issue with stance for rogue
 
