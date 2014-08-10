@@ -1,5 +1,4 @@
--- broken
---[[local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = unpack(select(2, ...))
 
 local function LoadSkin()
 	QuestFrame:StripTextures(true)
@@ -18,7 +17,6 @@ local function LoadSkin()
 	QuestFrameGoodbyeButton:SkinButton(true)
 	QuestFrameCompleteQuestButton:SkinButton(true)
 	QuestFrameCloseButton:SkinCloseButton(QuestFrame.backdrop)
-	QuestLogScrollFrameScrollBar:SkinScrollBar()
 	QuestDetailScrollFrameScrollBar:SkinScrollBar()
 	QuestRewardScrollFrameScrollBar:SkinScrollBar()
 
@@ -34,7 +32,7 @@ local function LoadSkin()
 		texture:Point("TOPLEFT", 2, -2)
 		texture:Size(texture:GetWidth() - 2, texture:GetHeight() - 2)
 		_G["QuestProgressItem"..i.."Count"]:SetDrawLayer("OVERLAY")
-		button:SetTemplate("Default")				
+		button:SetTemplate("Default")
 	end
 
 	hooksecurefunc("QuestFrameProgressItems_Update", function()
@@ -43,7 +41,7 @@ local function LoadSkin()
 		QuestProgressRequiredItemsText:SetTextColor(1, 1, 0)
 		QuestProgressRequiredMoneyText:SetTextColor(1, 1, 0)
 	end)
-	
+
 	QuestNPCModelTextScrollFrameScrollBar:SkinScrollBar()
 	QuestGreetingScrollFrameScrollBar:SkinScrollBar()
 	QuestProgressScrollFrameScrollBar:SkinScrollBar()
@@ -54,15 +52,11 @@ local function LoadSkin()
 	QuestNPCModelTextFrame:StripTextures()
 	QuestNPCModelTextFrame:CreateBackdrop("Default")
 	QuestNPCModelTextFrame.backdrop:Point("TOPLEFT", QuestNPCModel.backdrop, "BOTTOMLEFT", 0, -2)
-	QuestLogDetailFrame:StripTextures()
-	QuestLogDetailFrame:SetTemplate("Transparent")
-	QuestLogDetailScrollFrame:StripTextures()
-	QuestLogDetailFrameCloseButton:SkinCloseButton()
 
 	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(parentFrame, portrait, text, name, x, y)
-		QuestNPCModel:ClearAllPoints();
-		QuestNPCModel:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x + 18, y);			
+		QuestNPCModel:ClearAllPoints()
+		QuestNPCModel:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x + 18, y)
 	end)
 end
 
-tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)]]--
+tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
