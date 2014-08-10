@@ -1,11 +1,9 @@
 local D, C, L = unpack(select(2, ...))
 
-local barHeight, barWidth = 10, (DuffedUIChatBackgroundLeft:GetWidth() - 4)
+local barHeight, barWidth = 10, 378
 local font, fontsize, flags = C["media"].font, 11, "THINOUTLINE"
-local barTex = C["media"].normTex
-local flatTex = C["media"].normTex
-local class = D.Class
-local color = RAID_CLASS_COLORS[class]
+local barTex, flatTex = C["media"].normTex
+local color = RAID_CLASS_COLORS[D.Class]
 local FactionInfo = {
 	[1] = {{ 170/255, 70/255,  70/255 }, "Hated", "FFaa4646"},
 	[2] = {{ 170/255, 70/255,  70/255 }, "Hostile", "FFaa4646"},
@@ -17,9 +15,7 @@ local FactionInfo = {
 	[8] = {{ 155/255,  255/255, 155/255 }, "Exalted","FF9bff9b"},
 }
 
-function colorize(r)
-	return FactionInfo[r][3]
-end
+function colorize(r) return FactionInfo[r][3] end
 
 local function IsMaxLevel()
 	if UnitLevel("player") == MAX_PLAYER_LEVEL then
@@ -70,17 +66,13 @@ mouseFrame:SetFrameLevel(3)
 
 local function updateStatus()
 	local XP, maxXP, restXP = UnitXP("player"), UnitXPMax("player"), GetXPExhaustion()
-	local percXP = (XP == 0) and 0 or math.floor((XP / maxXP) * 100)
+	local percXP = ((XP == 0) and 0) or (math.floor((XP / maxXP) * 100))
 
 	if IsMaxLevel() then
 		xpBar:Hide()
 		restedxpBar:Hide()
 		repBar:SetHeight(barHeight)
-		if not GetWatchedFactionInfo() then
-			backdrop:Hide()
-		else
-			backdrop:Show()
-		end
+		if not GetWatchedFactionInfo() then backdrop:Hide() else backdrop:Show() end
 	else
 		xpBar:SetMinMaxValues(min(0, XP), maxXP)
 		xpBar:SetValue(XP)
@@ -114,7 +106,7 @@ local function updateStatus()
 		repBar:SetMinMaxValues(minRep, maxRep)
 		repBar:SetValue(value)
 		repBar:SetStatusBarColor(unpack(FactionInfo[rank][1]))
-		Text:SetText(format("%d / %d (%d%%)", value-minRep, maxRep-minRep, (value - minRep)/(maxRep - minRep) * 100))
+		Text:SetText(format("%d / %d (%d%%)", value - minRep, maxRep - minRep, (value - minRep) / (maxRep - minRep) * 100))
 	end
 
 	mouseFrame:SetScript("OnEnter", function()
@@ -122,25 +114,21 @@ local function updateStatus()
 		GameTooltip:ClearLines()
 		if not IsMaxLevel() then
 			GameTooltip:AddLine("Experience:")
-			GameTooltip:AddLine(string.format('XP: %s/%s (%d%%)', D.CommaValue(XP), D.CommaValue(maxXP), (XP / maxXP) * 100))
-			GameTooltip:AddLine(string.format('Remaining: %s', D.CommaValue(maxXP - XP)))
-			if restXP then
-				GameTooltip:AddLine(string.format('|cffb3e1ffRested: %s (%d%%)', D.CommaValue(restXP), restXP / maxXP * 100))
-			end
+			GameTooltip:AddLine(string.format("XP: %s/%s (%d%%)", D.CommaValue(XP), D.CommaValue(maxXP), (XP / maxXP) * 100))
+			GameTooltip:AddLine(string.format("Remaining: %s", D.CommaValue(maxXP - XP)))
+			if restXP then GameTooltip:AddLine(string.format("|cffb3e1ffRested: %s (%d%%)", D.CommaValue(restXP), restXP / maxXP * 100)) end
 		end
 		if GetWatchedFactionInfo() then
 			local name, rank, min, max, value = GetWatchedFactionInfo()
 			if not IsMaxLevel() then GameTooltip:AddLine(" ") end
-			GameTooltip:AddLine(string.format('Reputation: %s', name))
-			GameTooltip:AddLine(string.format('Standing: |c'..colorize(rank)..'%s|r', FactionInfo[rank][2]))
-			GameTooltip:AddLine(string.format('Rep: %s/%s (%d%%)', D.CommaValue(value - min), D.CommaValue(max - min), (value - min)/(max - min) * 100))
-			GameTooltip:AddLine(string.format('Remaining: %s', D.CommaValue(max - value)))
+			GameTooltip:AddLine(string.format("Reputation: %s", name))
+			GameTooltip:AddLine(string.format("Standing: |c"..colorize(rank) .. "%s|r", FactionInfo[rank][2]))
+			GameTooltip:AddLine(string.format("Rep: %s/%s (%d%%)", D.CommaValue(value - min), D.CommaValue(max - min), (value - min)/(max - min) * 100))
+			GameTooltip:AddLine(string.format("Remaining: %s", D.CommaValue(max - value)))
 		end
 		GameTooltip:Show()
 	end)
-	mouseFrame:SetScript("OnLeave", function()
-		GameTooltip:Hide()
-	end)
+	mouseFrame:SetScript("OnLeave", function() GameTooltip:Hide() end)
 end
 
 local frame = CreateFrame("Frame",nil,UIParent)
