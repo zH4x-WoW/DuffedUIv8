@@ -1,5 +1,3 @@
--- This will filter everythin NON user config data out of DuffedUIDB
-
 local D, C, L
 local myPlayerRealm = GetRealmName()
 local myPlayerName  = UnitName("player")
@@ -218,14 +216,12 @@ function CreateDuffedUIConfigUI()
 	DuffedUIConfigUIBG:SetPoint("TOPLEFT", -10, 10)
 	DuffedUIConfigUIBG:SetPoint("BOTTOMRIGHT", 10, -10)
 	DuffedUIConfigUIBG:SetTemplate("Transparent")
-	DuffedUIConfigUIBG:CreateShadow("Default")
 
 	-- title
 	local DuffedUIConfigUITitleBox = CreateFrame("Frame", "DuffedUIConfigUI", DuffedUIConfigUI)
 	DuffedUIConfigUITitleBox:Size(DuffedUIConfigUIBG:GetWidth() - 33, 30)
 	DuffedUIConfigUITitleBox:SetPoint("BOTTOMLEFT", DuffedUIConfigUIBG, "TOPLEFT", 0, 3)
 	DuffedUIConfigUITitleBox:SetTemplate("Transparent")
-	DuffedUIConfigUITitleBox:CreateShadow("Default")
 	
 	local DuffedUIConfigUITitle = DuffedUIConfigUITitleBox:CreateFontString("DuffedUIConfigUITitle", "OVERLAY")
 	DuffedUIConfigUITitle:SetFont(C["media"].font, 12, "THINOUTLINE")
@@ -236,7 +232,6 @@ function CreateDuffedUIConfigUI()
 	DuffedUIConfigUIIcon:Size(30, 30)
 	DuffedUIConfigUIIcon:SetPoint("LEFT", DuffedUIConfigUITitleBox, "RIGHT", 3, 0)
 	DuffedUIConfigUIIcon:SetTemplate("Transparent")
-	DuffedUIConfigUIIcon:CreateShadow("Default")
 
 	DuffedUIConfigUIIcon.bg = DuffedUIConfigUIIcon:CreateTexture(nil, "ARTWORK")
 	DuffedUIConfigUIIcon.bg:Point("TOPLEFT", 2, -2)
@@ -531,11 +526,9 @@ function CreateDuffedUIConfigUI()
 
 					ShowColorPicker(oldr, oldg, oldb, olda, ColorCallback, SameColorCallback)
 				end)
-
 				offset = offset+25
 			end
 		end
-
 		frame:SetHeight(offset)
 		frame:Hide()
 	end
@@ -553,25 +546,18 @@ function CreateDuffedUIConfigUI()
 		DuffedUIConfigUI:Hide()
 	end)
 	reset:SetTemplate("Transparent")
-	reset:CreateShadow("Default")
 
 	local close = NewButton(DuffedUIConfigUILocalization.option_button_close, DuffedUIConfigUI)
 	close:Size(100, 20)
 	close:SetPoint("TOPRIGHT", DuffedUIConfigUIBG, "TOPRIGHT", 103, -23)
-	close:SetScript("OnClick", function(self)
-		DuffedUIConfigUI:Hide()
-	end)
+	close:SetScript("OnClick", function(self) DuffedUIConfigUI:Hide() end)
 	close:SetTemplate("Transparent")
-	close:CreateShadow("Default")
 
 	local load = NewButton(DuffedUIConfigUILocalization.option_button_load, DuffedUIConfigUI)
 	load:Size(100, 20)
 	load:SetPoint("TOPRIGHT", DuffedUIConfigUIBG, "TOPRIGHT", 103, -46)
-	load:SetScript("OnClick", function(self)
-		ReloadUI()
-	end)
+	load:SetScript("OnClick", function(self) ReloadUI() end)
 	load:SetTemplate("Transparent")
-	load:CreateShadow("Default")
 
 	if DuffedUIConfigAll then
 		local button = CreateFrame("CheckButton", "DuffedUIConfigAllCharacters", DuffedUIConfigUITitleBox, "InterfaceOptionsCheckButtonTemplate")
