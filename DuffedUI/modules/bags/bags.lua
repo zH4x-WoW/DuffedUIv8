@@ -127,7 +127,7 @@ function Bags:CreateReagentContainer()
 	local Deposit = ReagentBankFrame.DespositButton
 	
 	Reagent:SetWidth(((ButtonSize + ButtonSpacing) * ItemsPerRow) + 22 - ButtonSpacing)
-	if C["chat"].lBackground then Reagent:SetPoint("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 0, 6) else Reagent:SetPoint("BOTTOMLEFT", DuffedUIInfoLeft, "TOPLEFT", 0, 6) end
+	if C["chat"].lbackground then Reagent:SetPoint("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 0, 6) else Reagent:SetPoint("BOTTOMLEFT", DuffedUIInfoLeft, "TOPLEFT", 0, 6) end
 	Reagent:SetTemplate("Transparent")
 	Reagent:SetFrameStrata(self.Bank:GetFrameStrata())
 	Reagent:SetFrameLevel(self.Bank:GetFrameLevel())
@@ -360,7 +360,7 @@ function Bags:CreateContainer(storagetype, ...)
 		SwitchReagentButton.Text:SetText("Switch to: "..REAGENT_BANK)
 		SwitchReagentButton:SetScript("OnClick", function()
 			BankFrame_ShowPanel(BANK_PANELS[2].name)
-			
+			BankFrame:Hide()
 			if (not ReagentBankFrame.isMade) then
 				self:CreateReagentContainer()
 				ReagentBankFrame.isMade = true
