@@ -75,30 +75,29 @@ local function Shared(self, unit)
 	power.bg:SetTexture(normTex)
 	power.bg:SetAlpha(1)
 	power.bg.multiplier = .3
-	
+
 	if C["unitframes"].powerClasscolored then power.colorClass = true else power.colorPower = true end
 
-	-- border
 	local panel = CreateFrame("Frame", nil, self)
 	panel:SetTemplate("Default")
 	panel:Size(1, 1)
 	panel:Point("TOPLEFT", health, "TOPLEFT", -2, 2)
 	if unit:find("partypet") then panel:Point("BOTTOMRIGHT", health, "BOTTOMRIGHT", 2, -2) else panel:Point("BOTTOMRIGHT", power, "BOTTOMRIGHT", 2, -2) end
 	self.panel = panel
-	
+
 	if not unit:find("partypet") then
 		local ppanel = CreateFrame("Frame", nil, self)
 		ppanel:Point("BOTTOMLEFT", -1, 4)
 		ppanel:Point("BOTTOMRIGHT", 1, 4)
 		self.panel2 = ppanel
 	end
-	
+
 	local name = health:CreateFontString(nil, "OVERLAY")
 	local name = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
 	if unit:find("partypet") then name:SetPoint("CENTER") else name:Point("CENTER", health, "TOP", 0, -7) end
 	self:Tag(name, "[DuffedUI:getnamecolor][DuffedUI:nameshort]")
 	self.Name = name
-	
+
 	if C["raid"].aggro then
 		table.insert(self.__elements, D.UpdateThreat)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', D.UpdateThreat)
@@ -122,7 +121,6 @@ local function Shared(self, unit)
 	LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons.blp")
 	self.LFDRole = LFDRole
 
-	--Resurrect Indicator
 	local Resurrect = CreateFrame('Frame', nil, self)
 	Resurrect:SetFrameLevel(20)
 	local ResurrectIcon = Resurrect:CreateTexture(nil, "OVERLAY")
@@ -161,10 +159,8 @@ local function Shared(self, unit)
 		self.Range = range
 	end
 
-	if C["unitframes"].showsmooth == true then
-		health.Smooth = true
-		power.Smooth = true
-	end
+	health.Smooth = true
+	power.Smooth = true
 
 	if C["unitframes"].healcomm then
 		local mhpb = CreateFrame('StatusBar', nil, self.Health)
@@ -198,7 +194,7 @@ local function Shared(self, unit)
 			maxOverflow = 1,
 		}
 	end
-	
+
 	if D.myclass == "PRIEST" and C["unitframes"].weakenedsoulbar then
 		local ws = CreateFrame("StatusBar", self:GetName().."_WeakenedSoul", power)
 		ws:SetAllPoints(power)
@@ -206,11 +202,10 @@ local function Shared(self, unit)
 		ws:GetStatusBarTexture():SetHorizTile(false)
 		ws:SetBackdrop(backdrop)
 		ws:SetBackdropColor(unpack(C["media"].backdropcolor))
-		ws:SetStatusBarColor(191/255, 10/255, 10/255)
-    
+		ws:SetStatusBarColor(191/255, 10/255, 10/255)   
 		self.WeakenedSoul = ws
 	end
-	
+
 	if C["raid"].raidunitdebuffwatch == true then
 		D.createAuraWatch(self,unit)
 
@@ -220,7 +215,6 @@ local function Shared(self, unit)
 		RaidDebuffs:Point('CENTER', health, 1,0)
 		RaidDebuffs:SetFrameStrata(health:GetFrameStrata())
 		RaidDebuffs:SetFrameLevel(health:GetFrameLevel() + 2)
-
 		RaidDebuffs:SetTemplate("Default")
 
 		RaidDebuffs.icon = RaidDebuffs:CreateTexture(nil, 'OVERLAY')
@@ -236,10 +230,9 @@ local function Shared(self, unit)
 		RaidDebuffs.count:SetFont(C["media"].font, 9 * D.raidscale, "THINOUTLINE")
 		RaidDebuffs.count:Point('BOTTOMRIGHT', RaidDebuffs, 'BOTTOMRIGHT', 0, 2)
 		RaidDebuffs.count:SetTextColor(1, .9, 0)
-		
 		self.RaidDebuffs = RaidDebuffs
 	end
-	
+
 	return self
 end
 
@@ -256,10 +249,10 @@ oUF:Factory(function(self)
 		]],
 		"initial-width", D.Scale(C["raid"].framewidth * D.raidscale),
 		"initial-height", D.Scale(C["raid"].frameheight * D.raidscale),
-		"showParty", true,
 		"showPlayer", C["raid"].showplayerinparty,
-		"showSolo", true,
+		"showParty", true,
 		"showRaid", true, 
+		--"showSolo", true,
 		"xoffset", D.Scale(8),
 		"yOffset", D.Scale(1),
 		"groupFilter", "1,2,3,4,5,6,7,8",
@@ -270,14 +263,14 @@ oUF:Factory(function(self)
 		"columnSpacing", D.Scale(1),
 		"point", "LEFT",
 		"columnAnchorPoint", "BOTTOM"
-		
 	)
+
 	if DuffedUIChatBackgroundLeft then
 		raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 16)
 	else
 		raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33)
 	end
-	
+
 	if C["raid"].showraidpets then
 		local pets = {} 
 			pets[1] = oUF:Spawn('partypet1', 'oUF_DuffedUIPartyPet1') 
@@ -288,7 +281,7 @@ oUF:Factory(function(self)
 			pets[i]:Point('LEFT', pets[i-1], 'RIGHT', 8, 0)
 			pets[i]:Size(C["raid"].framewidth * D.raidscale, 18 * D.raidscale)
 		end
-		
+
 		local ShowPet = CreateFrame("Frame")
 		ShowPet:RegisterEvent("PLAYER_ENTERING_WORLD")
 		ShowPet:RegisterEvent("RAID_ROSTER_UPDATE")
@@ -311,7 +304,6 @@ oUF:Factory(function(self)
 	end
 end)
 
--- only show 5 groups in raid (25 mans raid)
 local MaxGroup = CreateFrame("Frame")
 MaxGroup:RegisterEvent("PLAYER_ENTERING_WORLD")
 MaxGroup:RegisterEvent("ZONE_CHANGED_NEW_AREA")

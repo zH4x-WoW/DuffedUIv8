@@ -76,14 +76,13 @@ C["actionbar"] = {
 	["rightbarsmouseover"] = false,
 	["petbarhorizontal"] = false,
 	["petbaralwaysvisible"] = true,
+	["verticalshapeshift"] = true,
 	["hotkey"] = true,                                  		-- enable hotkey display because it was a lot requested
 	["macro"] = false,                                  		-- enable macro display because it was a lot requested
-	["hideshapeshift"] = false,                         		-- hide shapeshift or totembar because it was a lot requested.
 	["buttonsize"] = 27,                                		-- normal buttons size
 	["petbuttonsize"] = 29,                             		-- pet & stance buttons size
 	["buttonspacing"] = 4,                              		-- buttons spacing
 	["shapeshiftborder"] = true,								-- enable stancebarborder
-	["verticalshapeshift"] = false,								-- enable vertical stancebar
 	["shapeshiftmouseover"] = false,							-- enable mouseover on stancebar
 	["borderhighlight"] = false,								-- enable prochighlight on iconborder
 }

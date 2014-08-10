@@ -1,33 +1,24 @@
 local D, C, L = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true then return end
 
----------------------------------------------------------------------------
--- Setup Stance Bar
----------------------------------------------------------------------------
-
--- create the shapeshift bar if we enabled it
 local bar = CreateFrame("Frame", "DuffedUIStance", UIParent, "SecureHandlerStateTemplate")
-bar:SetPoint("TOPLEFT", 4, -46)
-bar:SetWidth((D.petbuttonsize * 5) + (D.petbuttonsize * 4))
-bar:SetHeight(10)
+bar:SetPoint("TOPLEFT", 4, -200)
+bar:SetWidth((D.petbuttonsize * 4) + (D.petbuttonsize * 3))
+bar:SetHeight(15)
 bar:SetFrameStrata("MEDIUM")
 bar:SetMovable(true)
 bar:SetClampedToScreen(true)
 
--- shapeshift command to move totem or shapeshift in-game
 local ssmover = CreateFrame("Frame", "DuffedUIStanceHolder", UIParent)
 ssmover:SetAllPoints(DuffedUIStance)
 ssmover:SetTemplate("Default")
 ssmover:SetFrameStrata("HIGH")
-ssmover:SetBackdropBorderColor(1,0,0)
+ssmover:SetBackdropBorderColor(1, 0, 0)
 ssmover:SetAlpha(0)
 ssmover.text = D.SetFontString(ssmover, C["media"].font, 12)
 ssmover.text:SetPoint("CENTER")
 ssmover.text:SetText(L.move_shapeshift)
 tinsert(D.AllowFrameMoving, DuffedUIStance)
-
--- hide it if not needed and stop executing code
-if C["actionbar"].hideshapeshift then DuffedUIStance:Hide() return end
 
 local States = {
 	["DRUID"] = "show",
@@ -56,39 +47,25 @@ bar:SetScript("OnEvent", function(self, event, ...)
 		StanceBarFrame:ClearAllPoints()
 		StanceBarFrame:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", -11, 4)
 		StanceBarFrame:EnableMouse(false)
-		
+
 		for i = 1, NUM_STANCE_SLOTS do
 			local button = _G["StanceButton"..i]
 			button:SetFrameStrata("LOW")
 			if i ~= 1 then
 				button:ClearAllPoints()
 				local previous = _G["StanceButton"..i-1]
-				if C["actionbar"].verticalshapeshift then
-					button:Point("TOP", previous, "BOTTOM", 0, -D.buttonspacing)
-				else
-					button:Point("LEFT", previous, "RIGHT", D.buttonspacing, 0)
-				end
+				if C["actionbar"].verticalshapeshift then button:Point("TOP", previous, "BOTTOM", 0, -D.buttonspacing) else button:Point("LEFT", previous, "RIGHT", D.buttonspacing, 0) end
 			end
 			local _, name = GetShapeshiftFormInfo(i)
-			if name then
-				button:Show()
-			else
-				button:Hide()
-			end
+			if name then button:Show() else button:Hide() end
 		end
 		RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] hide; show")
 	elseif event == "UPDATE_SHAPESHIFT_FORMS" then
-		-- Update Stance Bar Button Visibility
-		-- I seriously don't know if it's the best way to do it on spec changes or when we learn a new stance.
-		if InCombatLockdown() then return end -- > just to be safe ;p
+		if InCombatLockdown() then return end
 		for i = 1, NUM_STANCE_SLOTS do
 			local button = _G["StanceButton"..i]
 			local _, name = GetShapeshiftFormInfo(i)
-			if name then
-				button:Show()
-			else
-				button:Hide()
-			end
+			if name then button:Show() else button:Hide() end
 		end
 		if C["actionbar"].verticalshapeshift then
 			ShapeShiftBorder:Size(((StanceButton1:GetWidth() + D.buttonspacing)) + D.buttonspacing, StanceButton1:GetHeight() * GetNumShapeshiftForms()+ (GetNumShapeshiftForms() + 1) * D.buttonspacing)
@@ -103,8 +80,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 		else
 			ShapeShiftBorder:Size(((StanceButton1:GetWidth() + D.buttonspacing) * GetNumShapeshiftForms()) + D.buttonspacing, StanceButton1:GetHeight()+ 2 * D.buttonspacing)
 		end
-		
-		-- Mouseover
+
 		if C["actionbar"].shapeshiftmouseover == true then
 			local function mouseover(alpha)
 				for i = 1, NUM_STANCE_SLOTS do
@@ -112,8 +88,8 @@ bar:SetScript("OnEvent", function(self, event, ...)
 					sb:SetAlpha(alpha)
 				end
 			end
-			
-			for i = 1, NUM_STANCE_SLOTS do		
+
+			for i = 1, NUM_STANCE_SLOTS do
 				_G["StanceButton"..i]:SetAlpha(0)
 				_G["StanceButton"..i]:HookScript("OnEnter", function(self) mouseover(1) end)
 				_G["StanceButton"..i]:HookScript("OnLeave", function(self) mouseover(0) end)
@@ -127,18 +103,9 @@ bar:SetScript("OnEvent", function(self, event, ...)
 	end
 end)
 
--- border
 local ssborder = CreateFrame("Frame", "ShapeShiftBorder", StanceButton1)
-if C["actionbar"].shapeshiftborder ~= true then
-	ssborder:SetAlpha(0)
-else
-	ssborder:SetTemplate("Transparent")
-end
+if C["actionbar"].shapeshiftborder ~= true then ssborder:SetAlpha(0) else ssborder:SetTemplate("Transparent") end
 ssborder:SetFrameLevel(1)
 ssborder:SetFrameStrata("BACKGROUND")
-if C["actionbar"].verticalshapeshift then
-	ssborder:Point("TOP", 0, D.buttonspacing)
-else
-	ssborder:Point("LEFT", -D.buttonspacing, 0)
-end
+if C["actionbar"].verticalshapeshift then ssborder:Point("TOP", 0, D.buttonspacing) else ssborder:Point("LEFT", -D.buttonspacing, 0) end
 RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
