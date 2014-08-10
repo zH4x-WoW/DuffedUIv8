@@ -1,11 +1,13 @@
-local D, C, L = select(2, ...):unpack() 
+local D, C, L = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true then return end
 
 local bar = DuffedUIBar1
+
 local Page = {
 	["DRUID"] = "[bonusbar:1,nostealth] 7; [bonusbar:1,stealth] 8; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;",
 	["PRIEST"] = "[bonusbar:1] 7;",
-	["WARLOCK"] = "[stance:1] 10; ",
+	["ROGUE"] = "[bonusbar:1] 7;",
+	["WARLOCK"] = "[Nstance:1] 10;",
 	["MONK"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;",
 	["DEFAULT"] = "[vehicleui:12] 12; [possessbar] 12; [overridebar] 14; [shapeshift] 13; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6;",
 }
@@ -75,16 +77,10 @@ bar:SetScript("OnEvent", function(self, event, unit, ...)
 	elseif event == "UPDATE_VEHICLE_ACTIONBAR" or event == "UPDATE_OVERRIDE_ACTIONBAR" then
 		if HasVehicleActionBar() or HasOverrideActionBar() then
 			if not self.inVehicle then
-				DuffedUIBar3Button:Hide()
-				DuffedUIBar4Button:Hide()
-				DuffedUIBar5Button:Hide()
 				self.inVehicle = true
 			end
 		else
 			if self.inVehicle then
-				DuffedUIBar3Button:Show()
-				DuffedUIBar4Button:Show()
-				DuffedUIBar5Button:Show()
 				self.inVehicle = false
 			end
 		end

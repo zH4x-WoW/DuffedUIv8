@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L = unpack(select(2, ...))
 
 local barHeight, barWidth = 10, (DuffedUIChatBackgroundLeft:GetWidth() - 4)
 local font, fontsize, flags = C["media"].font, 11, "THINOUTLINE"
@@ -17,10 +17,6 @@ local FactionInfo = {
 	[8] = {{ 155/255,  255/255, 155/255 }, "Exalted","FF9bff9b"},
 }
 
-local function GetPlayerXP()
-	return UnitXP("player"), UnitXPMax("player"), GetXPExhaustion()
-end
-
 function colorize(r)
 	return FactionInfo[r][3]
 end
@@ -33,7 +29,7 @@ end
 
 local backdrop = CreateFrame("Frame", "Experience_Backdrop", UIParent)
 backdrop:Size(barWidth, barHeight)
-backdrop:SetPoint("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 5)
+backdrop:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 7, 178)
 backdrop:SetBackdropColor(C["general"].backdropcolor)
 backdrop:SetBackdropBorderColor(C["general"].backdropcolor)
 backdrop:CreateBackdrop()
@@ -73,20 +69,24 @@ xpBar:SetFrameLevel(2)
 mouseFrame:SetFrameLevel(3)
 
 local function updateStatus()
-	local XP, maxXP, restXP = GetPlayerXP()
+	local XP, maxXP, restXP = UnitXP("player"), UnitXPMax("player"), GetXPExhaustion()
 	local percXP = (XP == 0) and 0 or math.floor((XP / maxXP) * 100)
 
 	if IsMaxLevel() then
 		xpBar:Hide()
 		restedxpBar:Hide()
 		repBar:SetHeight(barHeight)
-		if not GetWatchedFactionInfo() then backdrop:Hide() else backdrop:Show() end
+		if not GetWatchedFactionInfo() then
+			backdrop:Hide()
+		else
+			backdrop:Show()
+		end
 	else
 		xpBar:SetMinMaxValues(min(0, XP), maxXP)
 		xpBar:SetValue(XP)
 
 		if restXP then
-			Text:SetText(format("%s / %s (%s%%|cffb3e1ff +%d%%|r)", D.ShortValue(XP), D.ShortValue(maxXP), percXP, restXP / maxXP * 100))
+			Text:SetText(format("%s/%s (%s%%|cffb3e1ff+%d%%|r)", D.ShortValue(XP), D.ShortValue(maxXP), percXP, restXP / maxXP * 100))
 			restedxpBar:Show()
 			local r, g, b = color.r, color.g, color.b
 			restedxpBar:SetStatusBarColor(r, g, b, .40)
@@ -114,11 +114,11 @@ local function updateStatus()
 		repBar:SetMinMaxValues(minRep, maxRep)
 		repBar:SetValue(value)
 		repBar:SetStatusBarColor(unpack(FactionInfo[rank][1]))
-		Text:SetText(format("%d / %d (%d%%)", value - minRep, maxRep - minRep, (value - minRep)/(maxRep - minRep) * 100))
+		Text:SetText(format("%d / %d (%d%%)", value-minRep, maxRep-minRep, (value - minRep)/(maxRep - minRep) * 100))
 	end
 
 	mouseFrame:SetScript("OnEnter", function()
-		GameTooltip:SetOwner(mouseFrame, "ANCHOR_TOPLEFT", -2, 5)
+		GameTooltip:SetOwner(mouseFrame, "ANCHOR_BOTTOMLEFT", -3, barHeight)
 		GameTooltip:ClearLines()
 		if not IsMaxLevel() then
 			GameTooltip:AddLine("Experience:")

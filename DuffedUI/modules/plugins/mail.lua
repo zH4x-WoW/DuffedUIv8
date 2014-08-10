@@ -1,4 +1,4 @@
-﻿local D, C, L, G = select(2, ...):unpack()
+﻿local D, C, L, G = unpack(select(2, ...))
 
 local L_MAIL_STOPPED = ERR_INV_FULL
 local L_MAIL_COMPLETE = DONE

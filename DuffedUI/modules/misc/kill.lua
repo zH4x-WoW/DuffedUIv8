@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack() 
+local D, C, L = unpack(select(2, ...)) 
 
 local Kill = CreateFrame("Frame")
 Kill:RegisterEvent("ADDON_LOADED")
@@ -10,44 +10,42 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 	end
 
 	if addon ~= "DuffedUI" then return end
-	if C["raid"].enable then
-		if addon == "DuffedUI" then
-			InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
-			InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
+	if C["raid"].enable == true then
+		InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
+		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
+		
+		-- raid
+		CompactRaidFrameManager:SetParent(DuffedUIUIHider)
+		CompactUnitFrameProfiles:UnregisterAllEvents()
 			
-			-- raid
-			CompactRaidFrameManager:SetParent(DuffedUIUIHider)
-			CompactUnitFrameProfiles:UnregisterAllEvents()
-				
-			for i = 1, MAX_PARTY_MEMBERS do
-				local member = "PartyMemberFrame"..i
-				
-				_G[member]:UnregisterAllEvents()
-				_G[member]:SetParent(DuffedUIUIHider)
-				_G[member]:Hide()
-				_G[member.."HealthBar"]:UnregisterAllEvents()
-				_G[member.."ManaBar"]:UnregisterAllEvents()
+		for i = 1, MAX_PARTY_MEMBERS do
+			local member = "PartyMemberFrame"..i
+			
+			_G[member]:UnregisterAllEvents()
+			_G[member]:SetParent(DuffedUIUIHider)
+			_G[member]:Hide()
+			_G[member.."HealthBar"]:UnregisterAllEvents()
+			_G[member.."ManaBar"]:UnregisterAllEvents()
 
-				local pet = member.."PetFrame"
+			local pet = member.."PetFrame"
 
-				_G[pet]:UnregisterAllEvents()
-				_G[pet]:SetParent(DuffedUIUIHider)
-				_G[pet.."HealthBar"]:UnregisterAllEvents()
-	
-				HidePartyFrame()
-				ShowPartyFrame = function() return end
-				HidePartyFrame = function() return end
-			end
+			_G[pet]:UnregisterAllEvents()
+			_G[pet]:SetParent(DuffedUIUIHider)
+			_G[pet.."HealthBar"]:UnregisterAllEvents()
+
+			HidePartyFrame()
+			ShowPartyFrame = function() return end
+			HidePartyFrame = function() return end
 		end
 	end
-		
+
 	StreamingIcon:Kill()
 	Advanced_UseUIScale:Kill()
 	Advanced_UIScaleSlider:Kill()
 	PartyMemberBackground:Kill()
 	TutorialFrameAlertButton:Kill()
 	GuildChallengeAlertFrame:Kill()
-	
+
 	if C["auras"].player then
 		BuffFrame:Kill()
 		TemporaryEnchantFrame:Kill()
@@ -56,9 +54,7 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		InterfaceOptionsFrameCategoriesButton12:SetAlpha(0)	
 	end
 
-	-- make sure boss or arena frame is always disabled when running DuffedUI
 	SetCVar("showArenaEnemyFrames", 0)
-	
 	if C["raid"].arena then
 		InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton10:SetAlpha(0) 
@@ -66,18 +62,18 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		InterfaceOptionsUnitFramePanelArenaEnemyCastBar:Kill()
 		InterfaceOptionsUnitFramePanelArenaEnemyPets:Kill()
 	end
-	
+
 	if C["chat"].enable then
 		SetCVar("WholeChatWindowClickable", 0)
 		InterfaceOptionsSocialPanelWholeChatWindowClickable:Kill()
 	end
-	
+
 	if C["unitframes"].enable then
 		PlayerFrame:SetParent(DuffedUIUIHider) -- Just to be sure we are safe
 		InterfaceOptionsFrameCategoriesButton9:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton9:SetAlpha(0)	
 	end
-	
+
 	if C["actionbar"].enable then
 		InterfaceOptionsActionBarsPanelBottomLeft:Kill()
 		InterfaceOptionsActionBarsPanelBottomRight:Kill()
@@ -85,7 +81,7 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		InterfaceOptionsActionBarsPanelRightTwo:Kill()
 		InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Kill()
 	end
-	
+
 	if C["nameplate"].enable then
 		InterfaceOptionsNamesPanelUnitNameplatesNameplateClassColors:Kill()
 	end

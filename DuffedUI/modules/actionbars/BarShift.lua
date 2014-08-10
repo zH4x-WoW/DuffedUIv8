@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack() 
+local D, C, L = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true then return end
 
 ---------------------------------------------------------------------------
@@ -78,7 +78,9 @@ bar:SetScript("OnEvent", function(self, event, ...)
 		end
 		RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] hide; show")
 	elseif event == "UPDATE_SHAPESHIFT_FORMS" then
-		if InCombatLockdown() then return end
+		-- Update Stance Bar Button Visibility
+		-- I seriously don't know if it's the best way to do it on spec changes or when we learn a new stance.
+		if InCombatLockdown() then return end -- > just to be safe ;p
 		for i = 1, NUM_STANCE_SLOTS do
 			local button = _G["StanceButton"..i]
 			local _, name = GetShapeshiftFormInfo(i)

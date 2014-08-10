@@ -1,5 +1,5 @@
 -- broken
---[[local D, C, L, G = select(2, ...):unpack()
+--[[local D, C, L, G = unpack(select(2, ...))
 
 local function LoadSkin()
 	QuestFrame:StripTextures(true)

@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 if D.client == "frFR" then
 	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
@@ -6,7 +6,7 @@ if D.client == "frFR" then
 	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
 	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
 
-	L.UI_Outdated = "Une version plus récente de DuffedUI est disponible. Vous pouvez télécharger la dernière version sur www.tukui.org"
+	L.UI_Outdated = "Une version plus récente de DuffedUI est disponible. Vous pouvez télécharger la dernière version sur www.duffed.net"
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
 	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
 	
@@ -239,7 +239,7 @@ if D.client == "frFR" then
 	L.core_wf_unlock = "Fenêtre de suivi des quêtes déverrouillée"
 	L.core_wf_lock = "Fenêtre de suivi des quêtes verrouillée"
 	L.core_welcome1 = "Bienvenue sur |cffC495DDDuffedUI|r, version "
-	L.core_welcome2 = "Tapez |cff00FFFF/uihelp|r pour plus de détails ou visitez www.tukui.org"
+	L.core_welcome2 = "Tapez |cff00FFFF/uihelp|r pour plus de détails ou visitez www.duffed.net"
 
 	L.core_uihelp1 = "|cff00ff00Commandes générales|r"
 	L.core_uihelp2 = "|cffFF0000/moveui|r - Débloque et bouge les éléments affichés à l'écran."

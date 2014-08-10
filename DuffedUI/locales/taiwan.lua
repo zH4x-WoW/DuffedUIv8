@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 if D.client == "zhTW" then
 	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
@@ -6,7 +6,7 @@ if D.client == "zhTW" then
 	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
 	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
 
-	L.UI_Outdated = "DuffedUI 版本已過期，請至 www.tukui.org 下載最新版"
+	L.UI_Outdated = "DuffedUI 版本已過期，請至 www.duffed.net 下載最新版"
 	L.UI_Talent_Change_Bug = "一個由暴雪產生的故障已阻止你改變你當前的天賦,這發生在你使用觀察功能查看其他玩家角色裝備時.不幸的是在這個魔獸補丁中我們對修正它無能為力,請/reload你的Ui程式介面並且再次嘗試."
 
 	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."感謝您使用|cffc41f3bDuffedUI "..D.version.."|r. 詳細資訊請訪問 |cffc41f3bhttp://www.duffed.net|r."

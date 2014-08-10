@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 if D.client == "zhCN" then
 	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
@@ -6,7 +6,7 @@ if D.client == "zhCN" then
 	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
 	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
 
-	L.UI_Outdated = "DuffedUI 版本已过期，请至 www.tukui.org 下载最新版"
+	L.UI_Outdated = "DuffedUI 版本已过期，请至 www.duffed.net 下载最新版"
 	L.UI_Talent_Change_Bug = "一个由暴雪产生的故障已阻止你改变你当前的天赋,这发生在你使用观察功能查看其他玩家角色装备时.不幸的是在这个魔兽补丁中我们对修正它无能为力,请/reload你的插件界面并且再次尝试."
 	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."感谢您使用|cffc41f3bDuffedUI "..D.version.."|r. 详细信息请访问 |cffc41f3bhttp://www.duffed.net|r."
 	
@@ -238,7 +238,7 @@ if D.client == "zhCN" then
 	L.core_wf_unlock = "任务追踪已解锁"
 	L.core_wf_lock = "任务追踪已锁定"
 	L.core_welcome1 = "欢迎使用 |cffC495DDDuffedUI|r, 版本 "
-	L.core_welcome2 = "输入 |cff00FFFF/uihelp|r 以获取更多信息或者访问 www.tukui.org"
+	L.core_welcome2 = "输入 |cff00FFFF/uihelp|r 以获取更多信息或者访问 www.duffed.net"
 
 	L.core_uihelp1 = "|cff00ff00General 通用指令|r"
 	L.core_uihelp2 = "|cffFF0000/moveui|r - 解锁和移动屏幕中的框架。"
@@ -367,7 +367,7 @@ if D.client == "zhCN" then
 	L.install_step_4_line_1 = "安装完成~"
 	L.install_step_4_line_2 = "请点击”完成“按钮重载插件。"
 	L.install_step_4_line_3 = ""
-	L.install_step_4_line_4 = "享受DuffedUI吧! 访问我们： www.tukui.org!"
+	L.install_step_4_line_4 = "享受DuffedUI吧! 访问我们： www.duffed.net!"
 
 	-- buttons
 	L.install_button_tutorial = "教程"

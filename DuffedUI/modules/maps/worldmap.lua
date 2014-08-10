@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L = unpack(select(2, ...))
 
 local _G = _G
 local Noop = function() end
@@ -118,7 +118,7 @@ function WorldMap:Skin()
 	QuestScrollFrameScrollBar:SkinScrollBar()
 
 	DetailsScroll:CreateBackdrop()
-	DetailsScroll.backdrop:SetAllPoints(QuestScroll.Backdrop)
+	DetailsScroll.backdrop:SetAllPoints(QuestScroll.backdrop)
 	DetailsScroll.backdrop:SetTemplate("Transparent")
 	DetailsScroll.backdrop:ClearAllPoints()
 	DetailsScroll.backdrop:Size(299, 470)

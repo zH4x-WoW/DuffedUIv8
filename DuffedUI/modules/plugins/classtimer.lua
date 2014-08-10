@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 if C["unitframes"].enable ~= true or C["classtimer"].enable ~= true then return end
 --[[ Configuration functions - DO NOT TOUCH
 	id - spell id
@@ -1120,7 +1120,6 @@ do
 		iconborder:Size(1,1)
 		iconborder:Point("TOPLEFT", result, "TOPLEFT", -2, 2)
 		iconborder:Point("BOTTOMRIGHT", result, "BOTTOMLEFT", BAR_HEIGHT+2, -2)
-		
 		
 		result:RegisterEvent("PLAYER_ENTERING_WORLD");
 		result:RegisterEvent("UNIT_AURA");

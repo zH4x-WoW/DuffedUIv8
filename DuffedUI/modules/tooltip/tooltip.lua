@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack() 
+local D, C, L = unpack(select(2, ...)) 
 -- credits : Aezay (TipTac) and Caellian for some parts of code.
 
 if not C["tooltip"].enable then return end

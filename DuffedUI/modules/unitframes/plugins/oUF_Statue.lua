@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack() 
+local D, C, L, G = unpack(select(2, ...)) 
 local class = select(2, UnitClass('player'))
 if class ~= "MONK" and class ~= "PRIEST" and class ~= "WARRIOR" and class ~= "DEATHKNIGHT" then return end
 

@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack() 
+local D, C, L = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true then return end
 
 local bar = DuffedUIPetBar
@@ -25,6 +25,7 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 			button = _G["PetActionButton"..i]
 			button:ClearAllPoints()
 			button:SetParent(DuffedUIPetBar)
+
 			button:SetSize(D.petbuttonsize, D.petbuttonsize)
 			if C["actionbar"].petbarhorizontal == true then
 				if i == 1 then

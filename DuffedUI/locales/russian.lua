@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 if D.client == "ruRU" then
 	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
@@ -6,7 +6,7 @@ if D.client == "ruRU" then
 	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
 	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
 
-	L.UI_Outdated = "Ваша версия DuffedUI устарела. Вы можете скачать последнюю версию на www.tukui.org"
+	L.UI_Outdated = "Ваша версия DuffedUI устарела. Вы можете скачать последнюю версию на www.duffed.net"
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
 	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
 	

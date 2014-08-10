@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 if not C["actionbar"].enable then return end
 
 -- create the holder to allow moving extra button

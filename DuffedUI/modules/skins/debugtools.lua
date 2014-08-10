@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 local function LoadSkin()
 	-- always scale it at the same value as UIParent
@@ -16,7 +16,7 @@ local function LoadSkin()
 	ScriptErrorsFrame:SetBackdropColor(unpack(C["media"].backdropcolor))
 	ScriptErrorsFrame:SetBackdropBorderColor(unpack(C["media"].bordercolor))	
 
-	--EventTraceFrame:SetTemplate("Default")
+	EventTraceFrame:SetTemplate("Default")
 	
 	local texs = {
 		"TopLeft",
@@ -33,7 +33,7 @@ local function LoadSkin()
 	
 	for i=1, #texs do
 		_G["ScriptErrorsFrame"..texs[i]]:SetTexture(nil)
-		--_G["EventTraceFrame"..texs[i]]:SetTexture(nil)
+		_G["EventTraceFrame"..texs[i]]:SetTexture(nil)
 	end
 	
 	local bg = {
@@ -56,11 +56,11 @@ local function LoadSkin()
 	
 	ScriptErrorsFrameClose:SkinCloseButton()
 	ScriptErrorsFrameScrollFrameScrollBar:SkinScrollBar()
-	--EventTraceFrameScrollBG:SetTexture(nil)
+	EventTraceFrameScrollBG:SetTexture(nil)
 	ScriptErrorsFrameScrollFrameScrollBar:ClearAllPoints()
 	ScriptErrorsFrameScrollFrameScrollBar:SetPoint("TOPRIGHT", 50, 14)
 	ScriptErrorsFrameScrollFrameScrollBar:SetPoint("BOTTOMRIGHT", 50, -20)
-	--EventTraceFrameCloseButton:SkinCloseButton()
+	EventTraceFrameCloseButton:SkinCloseButton()
 end
 
 D.SkinFuncs["Blizzard_DebugTools"] = LoadSkin

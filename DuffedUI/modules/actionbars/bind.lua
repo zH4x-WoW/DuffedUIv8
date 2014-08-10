@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L = unpack(select(2, ...))
 -- keybind feature
 local bind = CreateFrame("Frame", "DuffedUIHoverBind", UIParent)
 

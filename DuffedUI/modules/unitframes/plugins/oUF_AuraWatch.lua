@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack() 
+local D, C, L, G = unpack(select(2, ...)) 
 if C["unitframes"].enable ~= true or C["raid"].raidunitdebuffwatch ~= true then return end
 
 local _, ns = ...

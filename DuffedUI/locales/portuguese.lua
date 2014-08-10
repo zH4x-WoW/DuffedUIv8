@@ -1,5 +1,5 @@
 -- localization for enUS and enGB
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 if D.client == "ptBR" then
 	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
@@ -7,7 +7,7 @@ if D.client == "ptBR" then
 	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
 	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
 
-	L.UI_Outdated = "A sua versão da DuffedUI está desactualizada. Pode baixar a versão mais recente no site www.tukui.org"
+	L.UI_Outdated = "A sua versão da DuffedUI está desactualizada. Pode baixar a versão mais recente no site www.duffed.net"
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
 	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
 
@@ -239,7 +239,7 @@ if D.client == "ptBR" then
 	L.core_wf_unlock = "Desbloquear o Quadro de Objectivos"
 	L.core_wf_lock = "Bloquear o Quadro de Objectivos"
 	L.core_welcome1 = "Bem vindo à versão |cffC495DDDuffedUI|r,"
-	L.core_welcome2 = "Escreva |cff00FFFF/uihelp|r para mais informação ou visite o site www.tukui.org"
+	L.core_welcome2 = "Escreva |cff00FFFF/uihelp|r para mais informação ou visite o site www.duffed.net"
 
 	L.core_uihelp1 = "|cff00ff00Comandos Gerais Slash|r"
 	L.core_uihelp2 = "|cffFF0000/moveui|r - Desbloqueia e permite mover os elementos pelo ecrã."
@@ -369,7 +369,7 @@ if D.client == "ptBR" then
 	L.install_step_4_line_1 = "Installation is complete. Instalação Completada."
 	L.install_step_4_line_2 = "Please click the 'Finish' button to reload the UI. Por favor clique 'Acabar' para recarregar a UI."
 	L.install_step_4_line_3 = ""
-	L.install_step_4_line_4 = "Desfrute da DuffedUI! Visite o nosso site www.tukui.org!"
+	L.install_step_4_line_4 = "Desfrute da DuffedUI! Visite o nosso site www.duffed.net!"
 
 	-- buttons
 	L.install_button_tutorial = "Tutorial"

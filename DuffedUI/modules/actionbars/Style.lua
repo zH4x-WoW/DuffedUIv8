@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack() 
+local D, C, L, G = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true then return end
 
 local _G = _G
@@ -21,7 +21,7 @@ function D.StyleActionBarButton(self)
  
 	Count:ClearAllPoints()
 	Count:Point("BOTTOMRIGHT", 0, 2)
-
+	
 	HotKey:ClearAllPoints()
 	HotKey:Point("TOPRIGHT", 0, -3)
 	local text = HotKey:GetText()
@@ -84,21 +84,22 @@ function D.StyleActionBarButton(self)
 		HotKey:SetText("")
 		HotKey:Kill()
 	end
-
+	
 	if name:match("Extra") then
 		Button:SetTemplate()
 		Button.pushed = true
 		Icon:SetDrawLayer('ARTWORK')
 	else
 		Button:CreateBackdrop()
-		Button.backdrop:SetOutside(Button, 0, 0)
+		Button.backdrop:SetOutside(Button, 0, 0)	
 		Button:UnregisterEvent("ACTIONBAR_SHOWGRID")
-		Button:UnregisterEvent("ACTIONBAR_HIDEGRID")
+		Button:UnregisterEvent("ACTIONBAR_HIDEGRID")			
 	end
-
+	
 	Icon:SetTexCoord(.08, .92, .08, .92)
 	Icon:SetInside()
-
+	
+	-- bug, some buttons are checked in a /rl or login, even if they shouldn`t be, double check
 	if normal and Button:GetChecked() then
 		ActionButton_UpdateState(Button)
 	end
@@ -174,7 +175,7 @@ end
 	local button = self:GetName()
 	local hotkey = _G[button .. "HotKey"]
 	local text = hotkey:GetText()
-
+	
 	if text then
 		text = string.gsub(text, "(s-%)", "S")
 		text = string.gsub(text, "(a-%)", "A")
@@ -195,9 +196,9 @@ end
 		text = string.gsub(text, "(Home)", "Hm")
 		text = string.gsub(text, "(Delete)", "Del")
 	end
-
+	
 	hotkey:SetText(text)
-end]]--
+end]]
 
 local buttons = 0
 local function SetupFlyoutButton()
@@ -205,7 +206,7 @@ local function SetupFlyoutButton()
 		--prevent error if you don't have max ammount of buttons
 		if _G["SpellFlyoutButton"..i] then
 			D.StyleActionBarButton(_G["SpellFlyoutButton"..i])
-
+					
 			if _G["SpellFlyoutButton"..i]:GetChecked() then
 				_G["SpellFlyoutButton"..i]:SetChecked(nil)
 			end

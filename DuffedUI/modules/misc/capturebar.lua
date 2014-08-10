@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack() 
+local D, C, L, G = unpack(select(2, ...)) 
 -- reposition capture bar to top/center of the screen
 
 local function CaptureUpdate()

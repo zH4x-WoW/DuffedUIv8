@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 local function LoadSkin()
 	-- Others Blizzard frame we want to reskin
@@ -25,6 +25,7 @@ local function LoadSkin()
 	for i = 1, getn(skins) do
 		if _G[skins[i]] then
 			_G[skins[i]]:SetTemplate("Transparent")
+			end
 		end
 	end
 	

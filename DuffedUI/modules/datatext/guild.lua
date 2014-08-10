@@ -1,7 +1,7 @@
 --------------------------------------------------------------------
 -- GUILD ROSTER
 --------------------------------------------------------------------
-local D, C, L, G = select(2, ...):unpack() 
+local D, C, L, G = unpack(select(2, ...)) 
 
 if not C["datatext"].guild or C["datatext"].guild == 0 then return end
 

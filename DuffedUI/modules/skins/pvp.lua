@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 local function LoadSkin()
 	PVPUIFrame:StripTextures()
@@ -19,7 +19,6 @@ local function LoadSkin()
 		button.backdrop:SetFrameLevel(button:GetFrameLevel())
 		button.Icon:SetParent(button.backdrop)
 		button:StyleButton()
-
 
 		if i == 1 then button.shadow:SetAlpha(1) else button.shadow:SetAlpha(0) end
 

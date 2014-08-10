@@ -1,7 +1,7 @@
 -- DuffedUI API, see DOCS/API.txt for more informations
--- Feel free to send us API suggestion at www.tukui.org/tickets
+-- Feel free to send us API suggestion at www.duffed.net/tickets
 
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 local noop = D.dummy
 local floor = math.floor
@@ -15,7 +15,7 @@ local template
 local inset = 0
 local noinset = C["media"].noinset
 
-if noinset then inset = mult end
+if noinset then inset = D.mult end
 
 local function FadeIn(f)
 	UIFrameFadeIn(f, .4, f:GetAlpha(), 1)
@@ -61,6 +61,7 @@ local function Height(frame, height)
 end
 
 local function Point(obj, arg1, arg2, arg3, arg4, arg5)
+	-- anyone has a more elegant way for this?
 	if type(arg1)=="number" then arg1 = D.Scale(arg1) end
 	if type(arg2)=="number" then arg2 = D.Scale(arg2) end
 	if type(arg3)=="number" then arg3 = D.Scale(arg3) end
@@ -208,16 +209,6 @@ local function CreateBackdrop(f, t, tex)
 	f.backdrop = b
 end
 
-local function CreateLine(f, w, h)
-	f:SetHeight(D.Scale(h))
-	f:SetWidth(D.Scale(w))
-	f:SetFrameLevel(2)
-	f:SetFrameStrata("BACKGROUND")
-
-	f:SetBackdrop({ bgFile = C["media"].blank })
-	f:SetBackdropColor(unpack(C["media"].bordercolor))
-end
-
 local function CreateBorder(f, n, p)
 	if f.border then return end
 
@@ -226,7 +217,6 @@ local function CreateBorder(f, n, p)
 	border:Size( 1, 1)
 	border:Point("TOPLEFT", f, "TOPLEFT", -2, 2)
 	border:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", 2, -2)
-	
 	f.border = border
 end
 
@@ -269,7 +259,7 @@ local function StyleButton(button)
 
 	if button.SetCheckedTexture and not button.checked then
 		local checked = button:CreateTexture("frame", nil, self)
-		checked:SetTexture(0, 1, 0,.3)
+		checked:SetTexture(0,1,0,.3)
 		checked:SetInside()
 		button.checked = checked
 		button:SetCheckedTexture(checked)
@@ -672,6 +662,7 @@ local function addapi(object)
 	if not object.SetTemplate then mt.SetTemplate = SetTemplate end
 	if not object.CreateBackdrop then mt.CreateBackdrop = CreateBackdrop end
 	if not object.StripTextures then mt.StripTextures = StripTextures end
+	if not object.CreateShadow then mt.CreateShadow = CreateShadow end
 	if not object.Kill then mt.Kill = Kill end
 	if not object.StyleButton then mt.StyleButton = StyleButton end
 	if not object.Width then mt.Width = Width end
@@ -690,7 +681,6 @@ local function addapi(object)
 	if not object.SkinCloseButton then mt.SkinCloseButton = SkinCloseButton end
 	if not object.SkinSlideBar then mt.SkinSlideBar = SkinSlideBar end
 	if not object.HideInsets then mt.HideInsets = HideInsets end
-	if not object.CreateLine then mt.CreateLine = CreateLine end
 	if not object.CreateOverlay then mt.CreateOverlay = CreateOverlay end
 	if not object.CreateBorder then mt.CreateBorder = CreateBorder end
 	if not object.FadeIn then mt.FadeIn = FadeIn end

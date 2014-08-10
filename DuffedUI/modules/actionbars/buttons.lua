@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L = unpack(select(2, ...))
 
 local cp = "|cff319f1b" -- +
 local cm = "|cff9a1212" -- -
@@ -116,7 +116,8 @@ DuffedUIBar4Button:SetScript("OnLeave", function(self) self:SetBackdropBorderCol
 DuffedUIBar4Button.text:SetText(cm.."-|r")
 
 local DuffedUIBar5Button = CreateFrame("Button", "DuffedUIBar5Button", UIParent)
-DuffedUIBar5Button:Size(12, 130)
+DuffedUIBar5Button:Width(12)
+DuffedUIBar5Button:Height(130)
 DuffedUIBar5Button:Point("RIGHT", UIParent, "RIGHT", 1, -14)
 DuffedUIBar5Button:SetTemplate("Default")
 DuffedUIBar5Button:RegisterForClicks("AnyUp")

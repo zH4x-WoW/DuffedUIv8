@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack() 
+local D, C, L, G = unpack(select(2, ...)) 
 
 -- NOTE : I seriously dont know what is avoidance and how the fuck it work in MoP
 -- If someone can look and update this datatext if value in game are not ok, it will be awesome!

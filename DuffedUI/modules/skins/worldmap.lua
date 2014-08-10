@@ -1,10 +1,9 @@
---[[local D, C, L, G = select(2, ...):unpack()
+--[[local D, C, L, G = unpack(select(2, ...))
 
 local Taint = D.FullMapQuestTaintFix
 
 local function LoadSkin()
 	WorldMapFrame:CreateBackdrop("Transparent")
-	WorldMapFrame.backdrop:CreateShadow("Default")
 	WorldMapFrame.backdrop:EnableMouse(true)
 	
 	WorldMapDetailFrame.backdrop = CreateFrame("Frame", nil, WorldMapFrame)

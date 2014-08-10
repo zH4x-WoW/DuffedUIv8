@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 D.UIScale = function()
 	if C["general"].autoscale == true then

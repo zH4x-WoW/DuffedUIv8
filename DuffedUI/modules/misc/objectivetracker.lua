@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L = unpack(select(2, ...))
 
 local ObjectiveTracker = CreateFrame("Frame", "ObjectiveTracker", UIParent)
 local Noop = function() end
@@ -123,7 +123,7 @@ function ObjectiveTracker:Enable()
 	ObjectiveTracker:AddHooks()
 end
 
-ObjectiveTracker:RegisterEvent("ADDON_LOADED")
+--ObjectiveTracker:RegisterEvent("ADDON_LOADED")
 ObjectiveTracker:RegisterEvent("PLAYER_ENTERING_WORLD")
 ObjectiveTracker:SetScript("OnEvent", function(self, event, ...)
 	D.Delay(1, function()

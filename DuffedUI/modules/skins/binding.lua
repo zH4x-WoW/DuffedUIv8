@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 local function LoadSkin()
 	local buttons = {
@@ -7,12 +7,12 @@ local function LoadSkin()
 		"okayButton",
 		"cancelButton",
 	}
-
+	
 	for _, v in pairs(buttons) do
 		KeyBindingFrame[v]:StripTextures()
 		KeyBindingFrame[v]:SkinButton()
 	end
-
+	
 	KeyBindingFrame:StripTextures()
 	KeyBindingFrame:SetTemplate("Transparent")
 	KeyBindingFrameScrollFrameScrollBar:SkinScrollBar()
@@ -24,7 +24,7 @@ local function LoadSkin()
 	KeyBindingFrame.characterSpecificButton:SkinCheckBox()
 	KeyBindingFrame.header:ClearAllPoints()
 	KeyBindingFrame.header:Point("TOP", KeyBindingFrame, "TOP", 0, -4)
-
+	
 	for i = 1, KEY_BINDINGS_DISPLAYED  do
 		local button1 = _G["KeyBindingFrameKeyBinding"..i.."Key1Button"]
 		local button2 = _G["KeyBindingFrameKeyBinding"..i.."Key2Button"]

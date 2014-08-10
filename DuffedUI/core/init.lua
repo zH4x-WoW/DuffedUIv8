@@ -8,17 +8,13 @@ engine[2] = {}
 engine[3] = {}
 engine[4] = {}
 
-function engine:unpack()
-	return self[1], self[2], self[3], self[4]
-end
-
 DuffedUI = engine -- Allow other addons to use Engine
 
 --------------------------------------------------
 -- We need this as soon we begin loading DuffedUI
 --------------------------------------------------
 
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 -- functions, constants, variables
 D.dummy = function() return end

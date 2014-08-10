@@ -2,7 +2,7 @@ local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF
 assert(oUF, "DuffedUI was unable to locate oUF install.")
 
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 ------------------------------------------------------------------------
 --	Colors

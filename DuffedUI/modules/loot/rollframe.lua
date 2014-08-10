@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack() 
+local D, C, L, G = unpack(select(2, ...)) 
 --[[
 		this is an edited version of teksloot
 		all credits of this mod goes to tekhub

@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 -- Define action bar default buttons size
 D.buttonsize = D.Scale(C["actionbar"].buttonsize)
@@ -196,13 +196,14 @@ D.ShiftBarUpdate = function(self)
 end
 
 -- used to update pet bar buttons
-D.PetBarUpdate = function(...)
+D.PetBarUpdate = function(self, event)
+	local petActionButton, petActionIcon, petAutoCastableTexture, petAutoCastShine
 	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
 		local buttonName = "PetActionButton" .. i
-		local petActionButton = _G[buttonName]
-		local petActionIcon = _G[buttonName.."Icon"]
-		local petAutoCastableTexture = _G[buttonName.."AutoCastable"]
-		local petAutoCastShine = _G[buttonName.."Shine"]
+		petActionButton = _G[buttonName]
+		petActionIcon = _G[buttonName.."Icon"]
+		petAutoCastableTexture = _G[buttonName.."AutoCastable"]
+		petAutoCastShine = _G[buttonName.."Shine"]
 		local name, subtext, texture, isToken, isActive, autoCastAllowed, autoCastEnabled = GetPetActionInfo(i)
 
 		if not isToken then
@@ -216,13 +217,13 @@ D.PetBarUpdate = function(...)
 		petActionButton.isToken = isToken
 		petActionButton.tooltipSubtext = subtext
 
-		if isActive then
-			petActionButton:GetCheckedTexture():SetTexture(0, 1, 0, .3)
+		if isActive and name ~= "PET_ACTION_FOLLOW" then
+			petActionButton:SetChecked(1)
 			if IsPetAttackAction(i) then
 				PetActionButton_StartFlash(petActionButton)
 			end
 		else
-			petActionButton:SetCheckedTexture(0, 0, 0, 0)
+			petActionButton:SetChecked(0)
 			if IsPetAttackAction(i) then
 				PetActionButton_StopFlash(petActionButton)
 			end

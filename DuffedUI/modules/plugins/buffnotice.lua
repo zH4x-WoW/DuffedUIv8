@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 if C["auras"].buffnotice ~= true then return end
 
 local MyClass = select(2, UnitClass('player'))
@@ -62,8 +62,7 @@ local BuffReminder1 = {
 		57330, -- Horn of Winter
 		21562, -- PW: Fortitude
 	},
-	["HUNTER"] = {
-	},
+	["HUNTER"] = {},
 }
 
 local BuffReminder2 = {

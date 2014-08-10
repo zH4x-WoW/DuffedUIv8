@@ -1,4 +1,4 @@
-local D, C, L = select(2, ...):unpack()
+local D, C, L = unpack(select(2, ...))
 
 D.ChatSetup = function()
 	FCF_ResetChatWindows()
@@ -138,10 +138,7 @@ OnLogon:SetScript("OnEvent", function(self, event)
 end)
 
 local function positionsetup()
-	-- reset saved variables on char
 	DuffedUIDataPerChar = {}
-	
-	-- reset movable stuff into original position
 	for i = 1, getn(D.AllowFrameMoving) do
 		if D.AllowFrameMoving[i] then D.AllowFrameMoving[i]:SetUserPlaced(false) end
 	end
@@ -156,7 +153,7 @@ v:FontString("text2", C["media"].font, 12)
 v.text:SetPoint("CENTER")
 v.text:SetText("|cffC41F3BDuffedUI|r ".. D.version)
 v.text2:SetPoint("BOTTOM", 0, 2)
-v.text2:SetText("by |cffC41F3BMerith - liquidbase|r, website at |cffC41F3Bwww.duffedui.net|r")
+v.text2:SetText("by |cffC41F3BMerith - liquidbase|r, website at |cffC41F3Bwww.duffed.net|r")
 v:SetScript("OnClick", function()
 	v:Hide()
 end)
@@ -367,7 +364,6 @@ local step1 = function()
 		step2()
 	end)
 	
-	-- this is really essential, whatever if skipped or not
 	SetActionBarToggles(1, 1, 1, 1, 0)
 	SetCVar("alwaysShowActionBars", 0)
 end
@@ -462,7 +458,6 @@ local tut1 = function()
 	option2:SetScript("OnClick", tut2)
 end
 
--- this install DuffedUI with default settings.
 local function install()
 	f:Show()
 	sb:Hide()
@@ -494,9 +489,7 @@ DuffedUIOnLogon:SetScript("OnEvent", function(self, event)
 		SetCVar("useUiScale", 0)
 		D.ShowPopup("DUFFEDUIDISABLE_UI")
 	else
-		if not DuffedUIDataPerChar.install then
-			install()
-		end
+		if not DuffedUIDataPerChar.install then install() end
 	end
 end)
 

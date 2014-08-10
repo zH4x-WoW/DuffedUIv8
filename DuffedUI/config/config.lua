@@ -1,4 +1,4 @@
-﻿local D, C, L = select(2, ...):unpack()
+﻿local D, C, L = unpack(select(2, ...))
 
 C["general"] = {
 	["autoscale"] = true,
@@ -53,7 +53,7 @@ C["castbar"] = {
 	["cbicons"] = true,
 	["spark"] = true,
 	["classcolor"] = false,
-	["color"] = { .31, .45, .63, .5 },
+	["color"] = {.31, .45, .63, .5},
 	["cbticks"] = true,
 	["playerwidth"] = 376,
 }

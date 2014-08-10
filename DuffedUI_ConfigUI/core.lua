@@ -55,7 +55,7 @@ local function Local(o)
 end
 
 local NewButton = function(text, parent)
-	local D, C, L = DuffedUI:unpack()
+	local D, C, L = unpack(DuffedUI)
 
 	local result = CreateFrame("Button", nil, parent)
 	local label = result:CreateFontString(nil, "OVERLAY", nil)
@@ -70,20 +70,26 @@ local NewButton = function(text, parent)
 end
 
 local function SetValue(group, option, value)
+	--Determine if we should be copying our default settings to our player settings, this only happens if we're not using player settings by default
 	local mergesettings
-	if DuffedUIConfigPrivate == DuffedUIConfigPublic then mergesettings = true else mergesettings = false end
+	if DuffedUIConfigPrivate == DuffedUIConfigPublic then
+		mergesettings = true
+	else
+		mergesettings = false
+	end
 
 	if DuffedUIConfigAll[myPlayerRealm][myPlayerName] == true then
 		if not DuffedUIConfigPrivate then DuffedUIConfigPrivate = {} end	
 		if not DuffedUIConfigPrivate[group] then DuffedUIConfigPrivate[group] = {} end
 		DuffedUIConfigPrivate[group][option] = value
 	else
+		--Set PerChar settings to the same as our settings if theres no per char settings
 		if mergesettings == true then
 			if not DuffedUIConfigPrivate then DuffedUIConfigPrivate = {} end	
 			if not DuffedUIConfigPrivate[group] then DuffedUIConfigPrivate[group] = {} end
 			DuffedUIConfigPrivate[group][option] = value
 		end
-
+		
 		if not DuffedUIConfigPublic then DuffedUIConfigPublic = {} end
 		if not DuffedUIConfigPublic[group] then DuffedUIConfigPublic[group] = {} end
 		DuffedUIConfigPublic[group][option] = value
@@ -92,7 +98,7 @@ end
 
 local VISIBLE_GROUP = nil
 local function ShowGroup(group)
-	local D, C, L = DuffedUI:unpack()
+	local D, C, L = unpack(DuffedUI)
 
 	if VISIBLE_GROUP then
 		_G["DuffedUIConfigUI"..VISIBLE_GROUP]:Hide()
@@ -212,12 +218,14 @@ function CreateDuffedUIConfigUI()
 	DuffedUIConfigUIBG:SetPoint("TOPLEFT", -10, 10)
 	DuffedUIConfigUIBG:SetPoint("BOTTOMRIGHT", 10, -10)
 	DuffedUIConfigUIBG:SetTemplate("Transparent")
+	DuffedUIConfigUIBG:CreateShadow("Default")
 
 	-- title
 	local DuffedUIConfigUITitleBox = CreateFrame("Frame", "DuffedUIConfigUI", DuffedUIConfigUI)
 	DuffedUIConfigUITitleBox:Size(DuffedUIConfigUIBG:GetWidth() - 33, 30)
 	DuffedUIConfigUITitleBox:SetPoint("BOTTOMLEFT", DuffedUIConfigUIBG, "TOPLEFT", 0, 3)
 	DuffedUIConfigUITitleBox:SetTemplate("Transparent")
+	DuffedUIConfigUITitleBox:CreateShadow("Default")
 	
 	local DuffedUIConfigUITitle = DuffedUIConfigUITitleBox:CreateFontString("DuffedUIConfigUITitle", "OVERLAY")
 	DuffedUIConfigUITitle:SetFont(C["media"].font, 12, "THINOUTLINE")
@@ -228,6 +236,7 @@ function CreateDuffedUIConfigUI()
 	DuffedUIConfigUIIcon:Size(30, 30)
 	DuffedUIConfigUIIcon:SetPoint("LEFT", DuffedUIConfigUITitleBox, "RIGHT", 3, 0)
 	DuffedUIConfigUIIcon:SetTemplate("Transparent")
+	DuffedUIConfigUIIcon:CreateShadow("Default")
 
 	DuffedUIConfigUIIcon.bg = DuffedUIConfigUIIcon:CreateTexture(nil, "ARTWORK")
 	DuffedUIConfigUIIcon.bg:Point("TOPLEFT", 2, -2)
@@ -544,6 +553,7 @@ function CreateDuffedUIConfigUI()
 		DuffedUIConfigUI:Hide()
 	end)
 	reset:SetTemplate("Transparent")
+	reset:CreateShadow("Default")
 
 	local close = NewButton(DuffedUIConfigUILocalization.option_button_close, DuffedUIConfigUI)
 	close:Size(100, 20)
@@ -552,6 +562,7 @@ function CreateDuffedUIConfigUI()
 		DuffedUIConfigUI:Hide()
 	end)
 	close:SetTemplate("Transparent")
+	close:CreateShadow("Default")
 
 	local load = NewButton(DuffedUIConfigUILocalization.option_button_load, DuffedUIConfigUI)
 	load:Size(100, 20)
@@ -560,6 +571,7 @@ function CreateDuffedUIConfigUI()
 		ReloadUI()
 	end)
 	load:SetTemplate("Transparent")
+	load:CreateShadow("Default")
 
 	if DuffedUIConfigAll then
 		local button = CreateFrame("CheckButton", "DuffedUIConfigAllCharacters", DuffedUIConfigUITitleBox, "InterfaceOptionsCheckButtonTemplate")
@@ -678,7 +690,7 @@ do
 	local loaded = CreateFrame("Frame")
 	loaded:RegisterEvent("PLAYER_LOGIN")
 	loaded:SetScript("OnEvent", function(self, event, addon)
-		D, C, L = DuffedUI:unpack()
+		D, C, L = unpack(DuffedUI)
 
 		local menu = GameMenuFrame
 		local menuy = menu:GetHeight()

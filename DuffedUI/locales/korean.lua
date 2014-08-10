@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 if D.client == "koKR" then
 	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
@@ -6,7 +6,7 @@ if D.client == "koKR" then
 	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
 	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
 
-	L.UI_Outdated = "당신의 DuffedUI 버전이 구버전입니다. 당신은 www.tukui.org에서 최신 버전을 다운로드하실 수 있습니다."
+	L.UI_Outdated = "당신의 DuffedUI 버전이 구버전입니다. 당신은 www.duffed.net에서 최신 버전을 다운로드하실 수 있습니다."
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
 	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
 	
@@ -245,7 +245,7 @@ if D.client == "koKR" then
 	L.core_wf_unlock = "임무 추적창 잠금 해제"
 	L.core_wf_lock = "임무 추적창 잠금"
 	L.core_welcome1 = "|cffC495DDDuffedUI|r를 사용해주셔서 감사합니다. 버전 "
-	L.core_welcome2 = "자세한 사항은 |cff00FFFF/uihelp|r를 입력하거나 www.tukui.org 에 방문하시면 확인 가능합니다."
+	L.core_welcome2 = "자세한 사항은 |cff00FFFF/uihelp|r를 입력하거나 www.duffed.net 에 방문하시면 확인 가능합니다."
  
 	L.core_uihelp1 = "|cff00ff00일반적인 명령어|r"
 	L.core_uihelp2 = "|cffFF0000/moveui|r - 화면 주위 요소들을 잠금해제하고 이동합니다."

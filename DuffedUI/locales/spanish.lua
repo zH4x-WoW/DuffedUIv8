@@ -1,4 +1,4 @@
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 if D.client == "esES" or D.client == "esMX" then
 	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
@@ -6,7 +6,7 @@ if D.client == "esES" or D.client == "esMX" then
 	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
 	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
 
-	L.UI_Outdated = "Tu versión de DuffedUI no está actualizada. Puedes descargar la última versión de www.tukui.org"
+	L.UI_Outdated = "Tu versión de DuffedUI no está actualizada. Puedes descargar la última versión de www.duffed.net"
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
 	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
 	
@@ -238,7 +238,7 @@ if D.client == "esES" or D.client == "esMX" then
 	L.core_wf_unlock = "Registro de Misiones Desbloqueado"
 	L.core_wf_lock = "Registro de Misiones Bloqueado"
 	L.core_welcome1 = "Bienvenido a |cffC495DDDuffedUI|r versión "
-	L.core_welcome2 = "Escribe |cff00FFFF/uihelp|r para más información o visita |cff00FFFFwww.tukui.org|r"
+	L.core_welcome2 = "Escribe |cff00FFFF/uihelp|r para más información o visita |cff00FFFFwww.duffed.net|r"
  
 	L.core_uihelp1 = "|cff00ff00Comandos Generales|r"
 	L.core_uihelp2 = "|cffFF0000/moveui|r - Desbloquea y mueve elementos por la pantalla."

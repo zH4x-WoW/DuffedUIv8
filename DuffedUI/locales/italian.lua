@@ -1,6 +1,6 @@
 -- localization for italian made by Iceky (http://www.duffed.net/forums/profile.php?id=42201)
 -- updated version by Namaless (http://www.duffed.net/forums/profile.php?id=151969)
-local D, C, L, G = select(2, ...):unpack()
+local D, C, L, G = unpack(select(2, ...))
 
 if D.client == "itIT" then
 	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
@@ -8,7 +8,7 @@ if D.client == "itIT" then
 	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
 	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
 
-	L.UI_Outdated = "La tua versione di DuffedUI non è aggiornata. Puoi scaricare l'ultima versione da www.tukui.org"
+	L.UI_Outdated = "La tua versione di DuffedUI non è aggiornata. Puoi scaricare l'ultima versione da www.duffed.net"
 	L.UI_Talent_Change_Bug = "Un bug della Blizzard sta impedendo il cambio dei talenti, questo succede quando si ispeziona qualcuno. Sfortunatamente non si può fare nulla per sistemare il problema, ricaricate la propria ui e riprovate."
 	L.welcome_1 = "Ciao |cffc41f3b".. D.myname.."!|r".."\n".."Grazie per utilizzare |cffc41f3bDuffedUI "..D.version.."|r. Per maggiori informazioni visita |cffc41f3bhttp://www.duffed.net|r."
 	
@@ -240,7 +240,7 @@ if D.client == "itIT" then
 	L.core_wf_unlock = "WatchFrame unlock"
 	L.core_wf_lock = "WatchFrame lock"
 	L.core_welcome1 = "Benvenuto in |cffC495DDDuffedUI|r, versione "
-	L.core_welcome2 = "Digita |cff00FFFF/uihelp|r per maggiori informazione o visita www.tukui.org"
+	L.core_welcome2 = "Digita |cff00FFFF/uihelp|r per maggiori informazione o visita www.duffed.net"
 
 	L.core_uihelp1 = "|cff00ff00Comandi Generali|r"
 	L.core_uihelp2 = "|cffFF0000/moveui|r - Sblocca e muove gli elementi attorno allo schermo."
@@ -366,7 +366,7 @@ if D.client == "itIT" then
 	L.install_step_4_line_1 = "L'installazione è completata."
 	L.install_step_4_line_2 = "Premete su 'Finito' per ricaricare la UI."
 	L.install_step_4_line_3 = ""
-	L.install_step_4_line_4 = "Goditi DuffedUI! Visita www.tukui.org!"
+	L.install_step_4_line_4 = "Goditi DuffedUI! Visita www.duffed.net!"
 
 	-- buttons
 	L.install_button_tutorial = "Tutorial"

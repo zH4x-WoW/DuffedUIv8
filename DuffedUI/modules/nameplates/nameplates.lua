@@ -1,4 +1,4 @@
-﻿local D, C, L  = unpack(select(2, ...))
+﻿local D, C, L = unpack(select(2, ...))
 if C["nameplate"].enable ~= true then return end
 
 local Plates = CreateFrame("Frame", "Plates", UIParent)
