@@ -1,22 +1,13 @@
------------------------------------
--- Initiation of DuffedUI engine --
------------------------------------
-
 local addon, engine = ...
 engine[1] = {}
 engine[2] = {}
 engine[3] = {}
 engine[4] = {}
 
-DuffedUI = engine -- Allow other addons to use Engine
-
---------------------------------------------------
--- We need this as soon we begin loading DuffedUI
---------------------------------------------------
+DuffedUI = engine
 
 local D, C, L, G = unpack(select(2, ...))
 
--- functions, constants, variables
 D.dummy = function() return end
 D.myname = select(1, UnitName("player"))
 D.Class = select(2, UnitClass("player"))
@@ -38,9 +29,7 @@ D.InfoLeftRightWidth = 370
 SLASH_RELOADUI1 = "/rl"
 SlashCmdList.RELOADUI = ReloadUI
 
--- Modules
 G.ActionBars = {}
-G.Bags = {}
 G.Auras = {}
 G.Chat = {}
 G.DataText = {}
@@ -54,17 +43,13 @@ G.Tooltips = {}
 G.UnitFrames = {}
 G.Install = {}
 
--- Hider
 local UIHider = CreateFrame("Frame", "DuffedUIUIHider", UIParent)
 UIHider:Hide()
-G.Misc.UIHider = UIHider
 
--- Hider Secure (mostly used to hide stuff while in pet battle)
 local PetBattleHider = CreateFrame("Frame", "DuffedUIPetBattleHider", UIParent, "SecureHandlerStateTemplate");
 PetBattleHider:SetAllPoints(UIParent)
 RegisterStateDriver(PetBattleHider, "visibility", "[petbattle] hide; show")
 
--- Credits is important! (please do not edit this, thank you!)
 D.Credits = {
 	"Azilroka",
 	"Caith",
@@ -93,6 +78,7 @@ D.DuffedCredits = {
 	"Sinaris",
 	"Digawen",
 	"Zenglao",
+	"devel1988",
 }
 
 ERR_NOT_IN_RAID = "";
