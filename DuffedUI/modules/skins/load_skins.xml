@@ -5,7 +5,7 @@
 	<Script file="auction.lua" />
 	<Script file="bags.lua" />
 	<Script file="barbershop.lua" />
-	<Script file="bgscore.lua" />	
+	<Script file="bgscore.lua" />
 	<Script file="binding.lua" />
 	<Script file="bubbles.lua" />
 	<Script file="calendar.lua" />
@@ -43,7 +43,6 @@
 	<Script file="quest.lua" />
 	<Script file="questlog.lua" />
 	<Script file="raid.lua" />
-	<Script file="reforging.lua" />
 	<Script file="shop.lua" />
 	<Script file="socket.lua" />
 	<Script file="spellbook.lua" />
@@ -57,5 +56,4 @@
 	<Script file="trainer.lua" />
 	<Script file="tutorial.lua" />
 	<Script file="voidstorage.lua" />
-	<Script file="worldmap.lua" />
 </Ui>
