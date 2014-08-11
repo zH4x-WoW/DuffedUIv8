@@ -22,7 +22,7 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 
 		local button
 		for i = 1, 10 do
-			button = _G["PetActionButton"..i]
+			button = _G["PetActionButton" .. i]
 			button:ClearAllPoints()
 			button:SetParent(DuffedUIPetBar)
 
@@ -31,13 +31,13 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 				if i == 1 then
 					button:SetPoint("TOPLEFT", D.buttonspacing, -D.buttonspacing)
 				else
-					button:SetPoint("LEFT", _G["PetActionButton"..(i - 1)], "RIGHT", D.buttonspacing, 0)
+					button:SetPoint("LEFT", _G["PetActionButton" .. (i - 1)], "RIGHT", D.buttonspacing, 0)
 				end
 			else
 				if i == 1 then
 					button:SetPoint("TOPLEFT", D.buttonspacing, -D.buttonspacing)
 				else
-					button:SetPoint("TOP", _G["PetActionButton"..(i - 1)], "BOTTOM", 0, -D.buttonspacing)
+					button:SetPoint("TOP", _G["PetActionButton" .. (i - 1)], "BOTTOM", 0, -D.buttonspacing)
 				end
 			end
 			button:Show()

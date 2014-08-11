@@ -1,7 +1,6 @@
 local D, C, L, G = unpack(select(2, ...))
 
---[[ This is a forked file by Haste, rewrite by Tukz for DuffedUI. ]]--
-
+--[[ This is a forked file by Haste ]]--
 local frame = CreateFrame("Frame", "DuffedUIAuras")
 frame.content = {}
 
@@ -44,7 +43,7 @@ end
 
 local OnUpdate = function(self, elapsed)
 	local timeLeft
-	
+
 	-- Handle refreshing of temporary enchants.
 	if self.offset then
 		local expiration = select(self.offset, GetWeaponEnchantInfo())
@@ -54,9 +53,9 @@ local OnUpdate = function(self, elapsed)
 			timeLeft = 0
 		end
 	else
-		timeLeft = self.timeLeft - elapsed		
+		timeLeft = self.timeLeft - elapsed
 	end
-	
+
 	self.timeLeft = timeLeft
 
 	if timeLeft <= 0 then
@@ -71,7 +70,7 @@ local OnUpdate = function(self, elapsed)
 
 		self.Bar:SetValue(self.timeLeft)
 		self.Bar:SetStatusBarColor(r, g, b)
-		
+
 		if timeLeft < 60.5 then
 			if flash then
 				StartStopFlash(self.Animation, timeLeft)
@@ -86,7 +85,7 @@ local OnUpdate = function(self, elapsed)
 			if self.Animation and self.Animation:IsPlaying() then self.Animation:Stop() end
 			self.Duration:SetTextColor(.9, .9, .9)
 		end
-		
+
 		self.Duration:SetText(text)
 	end
 end
@@ -103,25 +102,20 @@ local UpdateAura = function(self, index)
 			else
 				self.timeLeft = timeLeft
 			end
-			
 			self.Dur = duration
 
 			-- We do the check here as well, that way we don't have to check on
 			-- every single OnUpdate call.
-			if flash then
-				StartStopFlash(self.Animation, timeLeft)
-			end
-			
+			if flash then StartStopFlash(self.Animation, timeLeft) end
+
 			self.Bar:SetMinMaxValues(0, duration)
 			if not C["auras"].classictimer then self.Holder:Show() end
 		else
-			if flash then
-				self.Animation:Stop()
-			end
+			if flash then self.Animation:Stop() end
 			self.timeLeft = nil
 			self.Duration:SetText("")
 			self:SetScript("OnUpdate", nil)
-			
+
 			local min, max  = self.Bar:GetMinMaxValues()
 			self.Bar:SetValue(max)
 			self.Bar:SetStatusBarColor(0, .8, 0)
@@ -147,19 +141,15 @@ end
 local UpdateTempEnchant = function(self, slot)
 	-- set the icon
 	self.Icon:SetTexture(GetInventoryItemTexture("player", slot))
-	
+
 	-- time left
 	local offset
 	local weapon = self:GetName():sub(-1)
-	
-	if weapon:match("1") then
-		offset = 2
-	elseif weapon:match("2") then
-		offset = 5
-	end
-	
+
+	if weapon:match("1") then offset = 2 elseif weapon:match("2") then offset = 5 end
+
 	local expiration = select(offset, GetWeaponEnchantInfo())
-	
+
 	if expiration then
 		self.Dur = 3600
 		self.offset = offset
@@ -173,13 +163,9 @@ end
 
 local OnAttributeChanged = function(self, attribute, value)
 	local consolidate = self:GetName():match("Consolidate")
-	
-	if consolidate or C["auras"].classictimer then
-		self.Holder:Hide()
-	else
-		self.Duration:Hide()
-	end
-	
+
+	if consolidate or C["auras"].classictimer then self.Holder:Hide() else self.Duration:Hide() end
+
 	if attribute == "index" then
 		-- look if the current buff is consolidated
 		if filter then
@@ -187,7 +173,6 @@ local OnAttributeChanged = function(self, attribute, value)
 				self.consolidate = true
 			end
 		end
-		
 		return UpdateAura(self, value)
 	elseif attribute == "target-slot" then
 		self.Bar:SetMinMaxValues(0, 3600)
@@ -214,19 +199,19 @@ local Skin = function(self)
 		Holder:SetPoint("TOP", self, "BOTTOM", 0, -1)
 		Holder:SetTemplate("Transparent")
 		self.Holder = Holder
-		
+
 		local Bar = CreateFrame("StatusBar", nil, Holder)
 		Bar:SetInside()
 		Bar:SetStatusBarTexture(C["media"].blank)
 		Bar:SetStatusBarColor(0, .8, 0)
 		self.Bar = Bar
-		
+
 		local Duration = self:CreateFontString(nil, "OVERLAY")
 		local font, size, flags = C["media"].font, 12, "OUTLINE"
 		Duration:SetFont(font, size, flags)
 		Duration:SetPoint("BOTTOM", 0, -17)
 		self.Duration = Duration
-		
+
 		if flash then
 			local Animation = self:CreateAnimationGroup()
 			Animation:SetLooping"BOUNCE"
@@ -239,7 +224,6 @@ local Skin = function(self)
 			self.Animation = Animation
 		end
 
-		-- Kinda meh way to piggyback on the secure aura headers update loop.
 		self:SetScript("OnAttributeChanged", OnAttributeChanged)
 
 		self.filter = self:GetParent():GetAttribute"filter"
@@ -253,14 +237,12 @@ local Skin = function(self)
 		Overlay:SetTexCoord(.07, .93, .07, .93)
 		self.Overlay = Overlay
 	end
-	
+
 	-- Set a template
 	self:SetTemplate("Default")
 end
 
-frame:SetScript("OnEvent", function(self, event, ...)
-	self[event](self, event, ...)
-end)
+frame:SetScript("OnEvent", function(self, event, ...) self[event](self, event, ...) end)
 
 function frame:PLAYER_ENTERING_WORLD()
 	for _, header in next, frame.content do
@@ -293,7 +275,6 @@ function frame:VARIABLES_LOADED()
 end
 frame:RegisterEvent("VARIABLES_LOADED")
 
--- Expose ourselves:
 for frame, func in next, {
 	Skin = Skin,
 	Update = Update,

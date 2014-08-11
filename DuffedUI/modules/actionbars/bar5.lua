@@ -4,8 +4,8 @@ local bar = DuffedUIBar5
 MultiBarRight:SetParent(bar)
 
 for i= 1, 12 do
-	local b = _G["MultiBarRightButton"..i]
-	local b2 = _G["MultiBarRightButton"..i-1]
+	local b = _G["MultiBarRightButton" .. i]
+	local b2 = _G["MultiBarRightButton" .. i - 1]
 	b:SetSize(D.buttonsize, D.buttonsize)
 	b:ClearAllPoints()
 	b:SetFrameStrata("BACKGROUND")
@@ -40,7 +40,7 @@ function DuffedUIRightBarsMouseover(alpha)
 	if C["actionbar"].petbaralwaysvisible ~= true then
 		DuffedUIPetBar:SetAlpha(alpha)
 		for i=1, NUM_PET_ACTION_SLOTS do
-			_G["PetActionButton"..i]:SetAlpha(alpha)
+			_G["PetActionButton" .. i]:SetAlpha(alpha)
 		end
 	end
 end
@@ -55,16 +55,16 @@ mouseover(DuffedUIBar5)
 mouseover(rbmoh)
 
 for i = 1, 12 do
-	_G["MultiBarRightButton"..i]:EnableMouse(true)
-	_G["MultiBarRightButton"..i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
-	_G["MultiBarRightButton"..i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
+	_G["MultiBarRightButton" .. i]:EnableMouse(true)
+	_G["MultiBarRightButton" .. i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
+	_G["MultiBarRightButton" .. i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
 end
 
 if C["actionbar"].petbaralwaysvisible ~= true then
 	for i = 1, NUM_PET_ACTION_SLOTS do
-		_G["PetActionButton"..i]:EnableMouse(true)
-		_G["PetActionButton"..i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
-		_G["PetActionButton"..i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
+		_G["PetActionButton" .. i]:EnableMouse(true)
+		_G["PetActionButton" .. i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
+		_G["PetActionButton" .. i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
 	end
 	mouseover(DuffedUIPetBar)
 end

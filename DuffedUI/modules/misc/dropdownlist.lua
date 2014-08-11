@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 -- Skin all DropDownList[i]
 local function SkinDropDownList(level, index)

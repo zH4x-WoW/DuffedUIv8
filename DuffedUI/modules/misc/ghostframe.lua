@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 -- GhostFrame at top
 GhostFrame:SetTemplate("Default")
@@ -22,7 +22,3 @@ else
 end
 GhostFrameContentsFrameText:ClearAllPoints()
 GhostFrameContentsFrameText:Point("BOTTOM", 0, 5)
-
-G.Skins.GhostFrame = GhostFrame
-G.Skins.GhostFrame.Content = GhostFrameContentsFrame
-G.Skins.GhostFrame.Text = GhostFrameContentsFrameText

@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 
 -------------------------------------------------------------
 -- DAMAGE / HEAL DISPLAY REPLACEMENT FOR EYEFINITY
@@ -63,7 +63,6 @@ f:SetFadeDuration(.5)
 f:SetTimeVisible(1)
 f:SetMaxLines(64)
 f:SetSpacing(2)
-G.Misc.EyeFinityDamage = f
 
 local o = CreateFrame("Frame")
 o:RegisterEvent("CVAR_UPDATE")
@@ -92,7 +91,6 @@ o:SetScript("OnEvent", function(self, event, cvar, value)
 		end
 	end
 end)
-G.Misc.EyeFinityDamageOption = o
 
 -- kill
 InterfaceOptionsCombatTextPanelPetDamage:Kill()

@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 D.CreatePopup = {}
 local frame = {}
@@ -9,9 +9,8 @@ local function Hide(self)
 	popup:Hide()
 end
 
--- Create the popups
 for i = 1, total do
-	frame[i] = CreateFrame("Frame", "DuffedUIPopupDialog"..i, UIParent)
+	frame[i] = CreateFrame("Frame", "DuffedUIPopupDialog" .. i, UIParent)
 	frame[i]:SetSize(400, 60)
 	frame[i]:SetFrameLevel(3)
 	frame[i]:SetTemplate("Default")
@@ -25,7 +24,7 @@ for i = 1, total do
 	frame[i].Text:SetFading(0)
 	frame[i].Text:AddMessage("")
 
-	frame[i].button1 = CreateFrame("Button", "DuffedUIPopupDialogButtonAccept"..i, frame[i])
+	frame[i].button1 = CreateFrame("Button", "DuffedUIPopupDialogButtonAccept" .. i, frame[i])
 	frame[i].button1:SetPoint("TOPLEFT", frame[i], "BOTTOMLEFT", 0, -2)
 	frame[i].button1:SetSize(199, 23)
 	frame[i].button1:SetTemplate("Default")
@@ -36,7 +35,7 @@ for i = 1, total do
 	frame[i].button1:HookScript("OnClick", Hide)
 	frame[i].button1:SkinButton()
 
-	frame[i].button2 = CreateFrame("Button", "DuffedUIPopupDialogButtonCancel"..i, frame[i])
+	frame[i].button2 = CreateFrame("Button", "DuffedUIPopupDialogButtonCancel" .. i, frame[i])
 	frame[i].button2:SetPoint("TOPRIGHT", frame[i], "BOTTOMRIGHT", 0, -2)
 	frame[i].button2:SetSize(199, 23)
 	frame[i].button2:SetTemplate("Default")
@@ -46,8 +45,8 @@ for i = 1, total do
 	frame[i].button2:SetScript("OnClick", Hide)
 	frame[i].button2:HookScript("OnClick", Hide)
 	frame[i].button2:SkinButton()
-	
-	frame[i].EditBox = CreateFrame("EditBox", "DuffedUIPopupDialogEditBox"..i, frame[i])
+
+	frame[i].EditBox = CreateFrame("EditBox", "DuffedUIPopupDialogEditBox" .. i, frame[i])
 	frame[i].EditBox:SetMultiLine(false)
 	frame[i].EditBox:EnableMouse(true)
 	frame[i].EditBox:SetAutoFocus(true)
@@ -60,34 +59,27 @@ for i = 1, total do
 	frame[i].EditBox.backdrop:SetPoint("TOPLEFT", -4, 4)
 	frame[i].EditBox.backdrop:SetPoint("BOTTOMRIGHT", 4, -4)
 	frame[i].EditBox:Hide()
-	
-	-- default position
+
 	if i == 1 then
-		-- create a panel which anchor popup #1 to top screen
 		frame[i].Anchor = CreateFrame("Frame", nil, frame[i])
 		frame[i].Anchor:SetSize(360, 30)
 		frame[i].Anchor:SetPoint("BOTTOM", frame[i], "TOP", 0, -2)
 		frame[i].Anchor:SetTemplate("Transparent")
 		frame[i].Anchor:SetFrameLevel(frame[i]:GetFrameLevel() - 2)
-		
-		-- position popup #1
 		frame[i]:SetPoint("TOP", UIParent, "TOP", 0, -10)
 	else
-		local previous = frame[i-1]
+		local previous = frame[i - 1]
 		frame[i]:SetPoint("TOP", previous, "BOTTOM", 0, -frame[i].button1:GetHeight() - 4)
-	end	
+	end
 end
 
 D.ShowPopup = function(self)
 	local info = D.CreatePopup[self]
 	if not info then return end
-	
-	-- choose popup to show
+
 	local selection = _G["DuffedUIPopupDialog1"]
 	for i = 1, total - 1 do
-		if frame[i]:IsShown() then
-			selection = _G["DuffedUIPopupDialog"..i+1]
-		end
+		if frame[i]:IsShown() then selection = _G["DuffedUIPopupDialog" .. i + 1] end
 	end
 
 	local popup = selection
@@ -95,56 +87,25 @@ D.ShowPopup = function(self)
 	local btn1 = popup.button1
 	local btn2 = popup.button2
 	local eb = popup.EditBox
-	
-	-- clear the question
+
 	question:Clear()
-	
-	-- clear the editbox
+
 	eb:SetText("")
-	
-	-- add the question asked if found
-	if info.question then
-		question:AddMessage(info.question)
-	end
-	
-	-- insert wanted text into left button
-	if info.answer1 then
-		btn1.Text:SetText(info.answer1)
-	else
-		btn1.Text:SetText(ACCEPT)
-	end
-	
-	-- insert wanted text into right button
-	if info.answer2 then
-		btn2.Text:SetText(info.answer2)
-	else
-		btn2.Text:SetText(CANCEL)
-	end
-	
-	-- execute a function on button 1 if defined by the coder
-	if info.function1 then
-		btn1:SetScript("OnClick", info.function1)
-	else
-		btn1:SetScript("OnClick", Hide)
-	end
-	
-	-- execute a function on button 2 if defined by the coder
-	if info.function2 then
-		btn2:SetScript("OnClick", info.function2)
-	else
-		btn2:SetScript("OnClick", Hide)
-	end
-	
-	if info.editbox then
-		eb:Show()
-	else
-		eb:Hide()
-	end
-	
-	-- always hide the popup after a click
+
+	if info.question then question:AddMessage(info.question) end
+
+	if info.answer1 then btn1.Text:SetText(info.answer1) else btn1.Text:SetText(ACCEPT) end
+
+	if info.answer2 then btn2.Text:SetText(info.answer2) else btn2.Text:SetText(CANCEL) end
+
+	if info.function1 then btn1:SetScript("OnClick", info.function1) else btn1:SetScript("OnClick", Hide) end
+
+	if info.function2 then btn2:SetScript("OnClick", info.function2) else btn2:SetScript("OnClick", Hide) end
+
+	if info.editbox then eb:Show() else eb:Hide() end
+
 	btn1:HookScript("OnClick", Hide)
 	btn2:HookScript("OnClick", Hide)
-	
-	-- show it when we ask for it
+
 	popup:Show()
 end

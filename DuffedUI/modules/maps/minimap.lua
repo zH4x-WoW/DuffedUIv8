@@ -1,20 +1,10 @@
 local D, C, L = unpack(select(2, ...))
-
---------------------------------------------------------------------
--- DuffedUI Minimap Script
---------------------------------------------------------------------
-
--- shitty map addon that a lot of peoples use.
 if IsAddOnLoaded("SexyMap") then return end
 
 local DuffedUIMinimap = CreateFrame("Frame", "DuffedUIMinimap", DuffedUIPetBattleHider)
 DuffedUIMinimap:SetTemplate()
 DuffedUIMinimap:RegisterEvent("ADDON_LOADED")
-if C["auras"].bufftracker then
-	DuffedUIMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -35, -5)
-else
-	DuffedUIMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -5, -5)
-end
+if C["auras"].bufftracker then DuffedUIMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -35, -5) else DuffedUIMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -5, -5) end
 DuffedUIMinimap:Size(144)
 DuffedUIMinimap:SetClampedToScreen(true)
 DuffedUIMinimap:SetMovable(true)
@@ -23,42 +13,22 @@ DuffedUIMinimap.text:SetPoint("CENTER")
 DuffedUIMinimap.text:SetText(L.move_minimap)
 tinsert(D.AllowFrameMoving, DuffedUIMinimap)
 
--- kill the minimap cluster
 MinimapCluster:Kill()
-
--- Parent Minimap into our Map frame.
 Minimap:SetParent(DuffedUIMinimap)
 Minimap:ClearAllPoints()
 Minimap:Point("TOPLEFT", 2, -2)
 Minimap:Point("BOTTOMRIGHT", -2, 2)
-
--- Hide Garrisonbutton
 GarrisonLandingPageMinimapButton:Kill()
-
--- Hide Border
 MinimapBorder:Hide()
 MinimapBorderTop:Hide()
-
--- Hide Zoom Buttons
 MinimapZoomIn:Hide()
 MinimapZoomOut:Hide()
-
--- Hide Voice Chat Frame
 MiniMapVoiceChatFrame:Hide()
-
--- Hide North texture at top
 MinimapNorthTag:SetTexture(nil)
-
--- Hide Zone Frame
 MinimapZoneTextButton:Hide()
-
--- Hide Tracking Button
 MiniMapTracking:Hide()
-
--- Hide Calendar Button
 GameTimeFrame:Hide()
 
--- Hide Mail Button
 MiniMapMailFrame:ClearAllPoints()
 MiniMapMailFrame:Point("TOPRIGHT", Minimap, 3, 3)
 MiniMapMailFrame:SetFrameLevel(Minimap:GetFrameLevel() + 1)
@@ -66,7 +36,6 @@ MiniMapMailFrame:SetFrameStrata(Minimap:GetFrameStrata())
 MiniMapMailBorder:Hide()
 MiniMapMailIcon:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\mail")
 
--- Ticket Frame
 local DuffedUITicket = CreateFrame("Frame", "DuffedUITicket", DuffedUIMinimap)
 DuffedUITicket:SetTemplate()
 DuffedUITicket:Size(DuffedUIMinimap:GetWidth() - 4, 24)
@@ -90,20 +59,13 @@ HelpOpenTicketButton:SetAlpha(0)
 HelpOpenTicketButton:HookScript("OnShow", function(self) DuffedUITicket:SetAlpha(1) end)
 HelpOpenTicketButton:HookScript("OnHide", function(self) DuffedUITicket:SetAlpha(0) end)
 
--- Hide world map button
 MiniMapWorldMapButton:Hide()
-
--- shitty 3.3 flag to move
 MiniMapInstanceDifficulty:ClearAllPoints()
 MiniMapInstanceDifficulty:SetParent(Minimap)
 MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
-
--- 4.0.6 Guild instance difficulty
 GuildInstanceDifficulty:ClearAllPoints()
 GuildInstanceDifficulty:SetParent(Minimap)
 GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
-
--- Queue Button and Tooltip
 QueueStatusMinimapButton:SetParent(Minimap)
 QueueStatusMinimapButton:ClearAllPoints()
 QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", 0, 0)
@@ -127,7 +89,6 @@ local function UpdateLFGTooltip()
 end
 QueueStatusFrame:HookScript("OnShow", UpdateLFGTooltip)
 
--- Enable mouse scrolling
 Minimap:EnableMouseWheel(true)
 Minimap:SetScript("OnMouseWheel", function(self, d)
 	if d > 0 then
@@ -137,29 +98,19 @@ Minimap:SetScript("OnMouseWheel", function(self, d)
 	end
 end)
 
--- Set Square Map Mask
 Minimap:SetMaskTexture(C["media"].blank)
-
--- For others mods with a minimap button, set minimap buttons position in square mode.
 function GetMinimapShape() return "SQUARE" end
-
--- do some stuff on addon loaded or player login event
 DuffedUIMinimap:SetScript("OnEvent", function(self, event, addon)
 	if addon == "Blizzard_TimeManager" then
-		-- Hide Game Time
 		TimeManagerClockButton:Kill()
 	end
 end)
-
-----------------------------------------------------------------------------------------
--- Map menus, right/middle click
-----------------------------------------------------------------------------------------
 
 Minimap:SetScript("OnMouseUp", function(self, btn)
 	local xoff = 0
 	local position = DuffedUIMinimap:GetPoint()
 	
-	if btn == "RightButton" then	
+	if btn == "RightButton" then
 		if position:match("RIGHT") then xoff = D.Scale(-8) end
 		ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, DuffedUIMinimap, xoff, D.Scale(-2))
 	elseif btn == "MiddleButton" then
@@ -171,10 +122,7 @@ Minimap:SetScript("OnMouseUp", function(self, btn)
 	end
 end)
 
-----------------------------------------------------------------------------------------
 -- Mouseover map, displaying zone and coords
-----------------------------------------------------------------------------------------
-
 local m_zone = CreateFrame("Frame", "DuffedUIMinimapZone", DuffedUIMinimap)
 m_zone:SetTemplate()
 m_zone:Size(0,20)

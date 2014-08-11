@@ -1,7 +1,5 @@
 local D, C, L, G = unpack(select(2, ...))
 
--- THE FUCKING PET JOURNAL NEED TO BE COMPLETE WHEN PET BATTLE WILL BE AVAILABLE FOR TESTING
-
 local function LoadSkin()
 	-- global
 	PetJournalParent:StripTextures()

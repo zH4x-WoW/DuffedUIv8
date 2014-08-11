@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true then return end
 
 local bar = DuffedUIBar3
@@ -11,7 +11,7 @@ for i = 1, 12 do
 	b:ClearAllPoints()
 	b:SetFrameStrata("BACKGROUND")
 	b:SetFrameLevel(15)
-	
+
 	if i == 1 then
 		b:SetPoint("TOPLEFT", bar, D.buttonspacing, -D.buttonspacing)
 	elseif i == 7 then

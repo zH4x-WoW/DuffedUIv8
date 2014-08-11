@@ -1,8 +1,4 @@
-------------------------------------------------------------------
--- This Module loads new user settings if in-game config is loaded
-------------------------------------------------------------------
-
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 local myPlayerRealm = D.myrealm
 local myPlayerName  = UnitName("player")
@@ -40,7 +36,6 @@ for group,options in pairs(setting) do
 				end
 			end
 		end
-		-- keeps DuffedUIConfig clean and small
 		if count == 0 then setting[group] = nil end
 	else
 		setting[group] = nil

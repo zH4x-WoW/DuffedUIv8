@@ -1,7 +1,6 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 local menuFrame = CreateFrame("Frame", "DuffedUIMarkingFrame", UIParent, "UIDropDownMenuTemplate")
-G.Misc.SymbolDropDown = menuFrame
 
 local menuList = {
     {text = L.symbol_CLEAR,

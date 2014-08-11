@@ -1,8 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
-
--------------------------------------------------------------------------
--- adjust defualt fonts according to which client we are currently using.
--------------------------------------------------------------------------
+local D, C, L = unpack(select(2, ...))
 
 if D.client == "ruRU" then
 	C["media"].font = C["media"].ru_font
@@ -16,9 +12,6 @@ elseif D.client == "koKR" then
 elseif D.client == "frFR" then
 	C["media"].font = C["media"].fr_font
 	C["media"].dmgfont = C["media"].fr_dmgfont
-elseif D.client == "deDE" then
-	C["media"].font = C["media"].de_font
-	C["media"].dmgfont = C["media"].de_dmgfont
 elseif D.client == "zhCN" then
 	C["media"].font = C["media"].cn_font
 	C["media"].dmgfont = C["media"].cn_dmgfont

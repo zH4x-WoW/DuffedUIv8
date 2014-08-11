@@ -1,8 +1,8 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 if C["castbar"].cbticks ~= true then return end
 
-D.channelticks = {
+D.ChannelTicks = {
 	[GetSpellInfo( 10 )] = 8,
 	[GetSpellInfo( 689 )] = 6,
 	[GetSpellInfo( 755 )] = 6,
@@ -24,7 +24,7 @@ D.channelticks = {
 	[GetSpellInfo( 115175 )] = 9,
 }
 
-D.hasteticks = {
+D.HasteTicks = {
 	[GetSpellInfo( 1120 )] = true,
 	[GetSpellInfo( 64843 )] = true,
 	[GetSpellInfo( 64901 )] = true,

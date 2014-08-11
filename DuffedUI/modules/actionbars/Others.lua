@@ -1,13 +1,9 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 if not C["actionbar"].enable == true then
 	DuffedUIPetBar:Hide()
 	return
 end
-
----------------------------------------------------------------------------
--- Manage all others stuff for actionbars
----------------------------------------------------------------------------
 
 D.CreatePopup["DUFFEDUI_FIX_AB"] = {
 	question = L.popup_fix_ab,
@@ -20,9 +16,7 @@ local DuffedUIOnLogon = CreateFrame("Frame")
 DuffedUIOnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 DuffedUIOnLogon:SetScript("OnEvent", function(self, event)	
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	
-	-- look if our 4 bars are enabled because some people disable them with others UI 
-	-- even if DuffedUI have been already installed and they don't know how to restore them.
+
 	local installed = DuffedUIDataPerChar.install
 	if installed then
 		local b1, b2, b3, b4 = GetActionBarToggles()
@@ -31,14 +25,14 @@ DuffedUIOnLogon:SetScript("OnEvent", function(self, event)
 			D.ShowPopup("DUFFEDUI_FIX_AB")
 		end
 	end
-	
+
 	for i = 1, 12 do
 		local button = _G[format("ActionButton%d", i)]
 		button:SetAttribute("showgrid", 1)
 		button:SetAttribute("statehidden", true)
 		button:Show()
 		ActionButton_ShowGrid(button)
-		
+
 		button = _G[format("MultiBarRightButton%d", i)]
 		button:SetAttribute("showgrid", 1)
 		button:SetAttribute("statehidden", true)
@@ -50,13 +44,13 @@ DuffedUIOnLogon:SetScript("OnEvent", function(self, event)
 		button:SetAttribute("statehidden", true)
 		button:Show()
 		ActionButton_ShowGrid(button)
-		
+
 		button = _G[format("MultiBarLeftButton%d", i)]
 		button:SetAttribute("showgrid", 1)
 		button:SetAttribute("statehidden", true)
 		button:Show()
 		ActionButton_ShowGrid(button)
-		
+
 		button = _G[format("MultiBarBottomLeftButton%d", i)]
 		button:SetAttribute("showgrid", 1)
 		button:SetAttribute("statehidden", true)
@@ -64,4 +58,3 @@ DuffedUIOnLogon:SetScript("OnEvent", function(self, event)
 		ActionButton_ShowGrid(button)
 	end
 end)
-G.ActionBars.EnterWorld = DuffedUIOnLogon

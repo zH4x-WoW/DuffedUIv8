@@ -2,21 +2,23 @@
 	<!-- engine -->
 	<Script file="core\commands.lua" />
 	<Script file="core\init.lua" />
+	<Script file="core\constants.lua" />
 
 	<!-- core -->
 	<Include file="locales\load_locales.xml" />
 	<Script file="config\config.lua" />
-	<Script file="config\profiles.lua" />
 	<Script file="core\customconfig.lua" />
 	<Script file="core\config.lua" />
 	<Script file="medias\medias.lua" />
-	<Include file="modules\unitframes\core\oUF\oUF.xml" />
-	<Include file="modules\unitframes\plugins\load_oUFPlugins.xml" />
-	<Script file="modules\unitframes\templates\colors.lua" />
+	<Include file="libs\oUF\oUF.xml" />
+	<Include file="libs\plugins\load_oUFPlugins.xml" />
+	<Script file="libs\templates\colors.lua" />
 	<Script file="core\video.lua" />
 	<Script file="core\api.lua" />
 	<Script file="core\move.lua" />
-	<Script file="core\functions.lua" />
+	<Script file="core\func_Core.lua" />
+	<Script file="core\func_UF.lua" />
+	<Script file="core\func_Skins.lua" />
 	<Script file="core\fonts.lua" />
 	<Script file="core\popup.lua" />
 	<Script file="core\install.lua" />
@@ -51,7 +53,7 @@
 	<Script file="modules\maps\zonemap.lua" />
 
 	<!-- unitframes -->
-	<Include file="modules\unitframes\templates\tankassist.xml" />
+	<Include file="libs\templates\tankassist.xml" />
 	<Script file="modules\unitframes\tags\tags.lua" />
 	<Script file="modules\unitframes\layouts\layout1.lua" />
 	<Script file="modules\unitframes\layouts\layout2.lua" />

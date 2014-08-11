@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 --[[
         An edited lightweight OmniCC for Tukui
                 A featureless, 'pure' version of OmniCC.

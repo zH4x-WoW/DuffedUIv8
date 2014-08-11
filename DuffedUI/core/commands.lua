@@ -1,4 +1,3 @@
-
 function SlashCmdList.LUAERROR(msg, editbox)
 	if (msg == 'on') then
 		SetCVar("scriptErrors", 1)

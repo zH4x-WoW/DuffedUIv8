@@ -1,9 +1,5 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 if C["chat"].enable ~= true then return end
-
-------------------------------------------------------------------------
---	Play sound files system
-------------------------------------------------------------------------
 
 if C["chat"].whispersound then
 	local SoundSys = CreateFrame("Frame")

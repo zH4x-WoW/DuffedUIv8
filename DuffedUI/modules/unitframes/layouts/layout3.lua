@@ -753,10 +753,10 @@ local function Shared(self, unit)
 				castbar:Point("LEFT", TCBanchor, "LEFT", 0, 0)
 			end
 
-			castbar.CustomTimeText = D.CustomCastTime
-			castbar.CustomDelayText = D.CustomCastDelayText
-			castbar.PostCastStart = D.castbar
-			castbar.PostChannelStart = D.castbar
+			castbar.CustomTimeText = D.CastBar
+			castbar.CustomDelayText = D.CastBar
+			castbar.PostCastStart = D.CastBar
+			castbar.PostChannelStart = D.CastBar
 
 			castbar.time = D.SetFontString(castbar, C["media"].font, 12, "THINOUTLINE")
 			castbar.time:Point("RIGHT", castbar, "RIGHT", -5, 0)
@@ -993,10 +993,10 @@ local function Shared(self, unit)
 			castbar.Text:Point("LEFT", castbar, "LEFT", 6, 0)
 			castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 
-			castbar.CustomTimeText = D.CustomCastTime
-			castbar.CustomDelayText = D.CustomCastDelayText
-			castbar.PostCastStart = D.castbar
-			castbar.PostChannelStart = D.castbar
+			castbar.CustomTimeText = D.CastBar
+			castbar.CustomDelayText = D.CastBar
+			castbar.PostCastStart = D.CastBar
+			castbar.PostChannelStart = D.CastBar
 
 			self.Castbar.Time = castbar.time
 		end
@@ -1119,15 +1119,15 @@ local function Shared(self, unit)
 		castbar.time:Point("RIGHT", castbar, "RIGHT", -4, 0)
 		castbar.time:SetTextColor(0.84, 0.75, 0.65)
 		castbar.time:SetJustifyH("RIGHT")
-		castbar.CustomTimeText = D.CustomCastTime
+		castbar.CustomTimeText = D.CastBar
 
 		castbar.Text = D.SetFontString(castbar, C["media"].font, 12, "THINOUTLINE")
 		castbar.Text:SetPoint("LEFT", castbar, "LEFT", 4, 0)
 		castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 
-		castbar.CustomDelayText = D.CustomCastDelayText
-		castbar.PostCastStart = D.castbar
-		castbar.PostChannelStart = D.castbar
+		castbar.CustomDelayText = D.CastBar
+		castbar.PostCastStart = D.CastBar
+		castbar.PostChannelStart = D.CastBar
 
 		castbar.button = CreateFrame("Frame", nil, castbar)
 		castbar.button:Height(castbar:GetHeight()+4)
@@ -1369,11 +1369,11 @@ local function Shared(self, unit)
 		castbar.time:Point("RIGHT", castbar, "RIGHT", -4, 0)
 		castbar.time:SetTextColor(0.84, 0.75, 0.65)
 		castbar.time:SetJustifyH("RIGHT")
-		castbar.CustomTimeText = D.CustomCastTime
+		castbar.CustomTimeText = D.CastBar
 
-		castbar.CustomDelayText = D.CustomCastDelayText
-		castbar.PostCastStart = D.castbar
-		castbar.PostChannelStart = D.castbar
+		castbar.CustomDelayText = D.CastBar
+		castbar.PostCastStart = D.CastBar
+		castbar.PostChannelStart = D.CastBar
 
 		castbar.button = CreateFrame("Frame", nil, castbar)
 		castbar.button:SetTemplate("Default")

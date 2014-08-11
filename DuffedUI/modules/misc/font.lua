@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 local DuffedUIFonts = CreateFrame("Frame", "DuffedUIFonts", UIParent)
 
 local SetFont = function(obj, font, size, style, r, g, b, sr, sg, sb, sox, soy)
@@ -81,5 +81,3 @@ DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
 	self:UnregisterAllEvents()
 	self = nil
 end)
-
-G.Misc.Fonts = DuffedUIFonts

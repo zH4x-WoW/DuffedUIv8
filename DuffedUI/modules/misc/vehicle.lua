@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...))
 --------------------------------------------------------------------------
 -- move vehicle indicator
 --------------------------------------------------------------------------
@@ -14,7 +14,6 @@ anchor:SetAlpha(0)
 anchor.text = D.SetFontString(anchor, C["media"].font, 12)
 anchor.text:SetPoint("CENTER")
 anchor.text:SetText(L.move_vehicle)
-G.Misc.VehicleAnchor = anchor
 tinsert(D.AllowFrameMoving, DuffedUIVehicleAnchor)
 
 hooksecurefunc(VehicleSeatIndicator,"SetPoint",function(_,_,parent) -- vehicle seat indicator

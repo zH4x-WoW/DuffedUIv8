@@ -1,7 +1,7 @@
 -- DuffedUI API, see DOCS/API.txt for more informations
 -- Feel free to send us API suggestion at www.duffed.net/tickets
 
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 local noop = D.dummy
 local floor = math.floor

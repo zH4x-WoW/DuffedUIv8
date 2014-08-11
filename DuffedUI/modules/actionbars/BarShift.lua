@@ -49,11 +49,11 @@ bar:SetScript("OnEvent", function(self, event, ...)
 		StanceBarFrame:EnableMouse(false)
 
 		for i = 1, NUM_STANCE_SLOTS do
-			local button = _G["StanceButton"..i]
+			local button = _G["StanceButton" .. i]
 			button:SetFrameStrata("LOW")
 			if i ~= 1 then
 				button:ClearAllPoints()
-				local previous = _G["StanceButton"..i-1]
+				local previous = _G["StanceButton" .. i - 1]
 				if C["actionbar"].verticalshapeshift then button:Point("TOP", previous, "BOTTOM", 0, -D.buttonspacing) else button:Point("LEFT", previous, "RIGHT", D.buttonspacing, 0) end
 			end
 			local _, name = GetShapeshiftFormInfo(i)
@@ -63,7 +63,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 	elseif event == "UPDATE_SHAPESHIFT_FORMS" then
 		if InCombatLockdown() then return end
 		for i = 1, NUM_STANCE_SLOTS do
-			local button = _G["StanceButton"..i]
+			local button = _G["StanceButton" .. i]
 			local _, name = GetShapeshiftFormInfo(i)
 			if name then button:Show() else button:Hide() end
 		end
@@ -84,15 +84,15 @@ bar:SetScript("OnEvent", function(self, event, ...)
 		if C["actionbar"].shapeshiftmouseover == true then
 			local function mouseover(alpha)
 				for i = 1, NUM_STANCE_SLOTS do
-					local sb = _G["StanceButton"..i]
+					local sb = _G["StanceButton" .. i]
 					sb:SetAlpha(alpha)
 				end
 			end
 
 			for i = 1, NUM_STANCE_SLOTS do
-				_G["StanceButton"..i]:SetAlpha(0)
-				_G["StanceButton"..i]:HookScript("OnEnter", function(self) mouseover(1) end)
-				_G["StanceButton"..i]:HookScript("OnLeave", function(self) mouseover(0) end)
+				_G["StanceButton" .. i]:SetAlpha(0)
+				_G["StanceButton" .. i]:HookScript("OnEnter", function(self) mouseover(1) end)
+				_G["StanceButton" .. i]:HookScript("OnLeave", function(self) mouseover(0) end)
 			end
 			ShapeShiftBorder:EnableMouse(true)
 			ShapeShiftBorder:HookScript("OnEnter", function(self) mouseover(1) end)

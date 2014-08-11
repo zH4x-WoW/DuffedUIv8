@@ -11,7 +11,7 @@ local filter = {
 	[42337] = true, -- Sun Rock Ring
 	[43244] = true, -- Crystal Citrine Necklace
 	[43571] = true, -- Sewer Carp
-	[43572] = true, -- Magic Eater		
+	[43572] = true, -- Magic Eater
 }
 
 local f = CreateFrame("Frame", "DuffedUIMerchant")
@@ -40,20 +40,20 @@ f:SetScript("OnEvent", function()
 		end
 		if c > 0 then
 			local g, s, c = math.floor(c / 10000) or 0, math.floor((c%10000) / 100) or 0, c%100
-			DEFAULT_CHAT_FRAME:AddMessage(L.merchant_trashsell.." |cffffffff"..g..L.goldabbrev.." |cffffffff"..s..L.silverabbrev.." |cffffffff"..c..L.copperabbrev..".", 255, 255, 0)
+			DEFAULT_CHAT_FRAME:AddMessage(L.merchant_trashsell .. " |cffffffff" .. g .. L.goldabbrev.." |cffffffff" .. s .. L.silverabbrev .. " |cffffffff" .. c .. L.copperabbrev .. ".", 255, 255, 0)
 		end
 	end
 	if CanMerchantRepair() and C["merchant"].autorepair then
 		local Cost = GetRepairAllCost()
-		local Copper = Cost%100
-		local Silver = math.floor((Cost%10000) / 100)
-		local Gold = math.floor(Cost / 10000)
+		local c = Cost%100
+		local s = math.floor((Cost%10000) / 100)
+		local g = math.floor(Cost / 10000)
 		if GetGuildBankWithdrawMoney() >= Cost and C["merchant"].autoguildrepair then
 			RepairAllItems(1)
-			DEFAULT_CHAT_FRAME:AddMessage(L.merchant_repaircost.." ("..L.datatext_guild..") |cffffffff"..Gold..L.goldabbrev.." |cffffffff"..Silver..L.silverabbrev.." |cffffffff"..Copper..L.copperabbrev..".", 255, 255, 0)
+			DEFAULT_CHAT_FRAME:AddMessage(L.merchant_repaircost .. " (" .. L.datatext_guild .. ") |cffffffff" .. g .. L.goldabbrev .. " |cffffffff" .. s .. L.silverabbrev .. " |cffffffff" .. c .. L.copperabbrev .. ".", 255, 255, 0)
 		elseif GetMoney() >= Cost then
 			RepairAllItems()
-			DEFAULT_CHAT_FRAME:AddMessage(L.merchant_repaircost.." |cffffffff"..Gold..L.goldabbrev.." |cffffffff"..Silver..L.silverabbrev.." |cffffffff"..Copper..L.copperabbrev..".", 255, 255, 0)
+			DEFAULT_CHAT_FRAME:AddMessage(L.merchant_repaircost .. " |cffffffff" .. g .. L.goldabbrev .. " |cffffffff" .. s .. L.silverabbrev .. " |cffffffff" .. c .. L.copperabbrev .. ".", 255, 255, 0)
 		else
 			DEFAULT_CHAT_FRAME:AddMessage(L.merchant_repairnomoney, 255, 0, 0)
 		end
@@ -61,7 +61,6 @@ f:SetScript("OnEvent", function()
 end)
 f:RegisterEvent("MERCHANT_SHOW")
 
--- buy max number value with alt
 local savedMerchantItemButton_OnModifiedClick = MerchantItemButton_OnModifiedClick
 function MerchantItemButton_OnModifiedClick(self, ...)
 	if IsAltKeyDown() then

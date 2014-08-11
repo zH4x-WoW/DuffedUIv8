@@ -1,10 +1,9 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true then return end
 
 local bar = DuffedUIBar2
 MultiBarBottomLeft:SetParent(bar)
 
--- setup the bar
 for i = 1, 12 do
 	local b = _G["MultiBarBottomLeftButton" .. i]
 	local b2 = _G["MultiBarBottomLeftButton" .. i - 1]
@@ -12,7 +11,7 @@ for i = 1, 12 do
 	b:ClearAllPoints()
 	b:SetFrameStrata("BACKGROUND")
 	b:SetFrameLevel(15)
-	
+
 	if i == 1 then
 		b:SetPoint("BOTTOMLEFT", bar, D.buttonspacing, D.buttonspacing)
 	else

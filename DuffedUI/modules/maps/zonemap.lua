@@ -1,9 +1,6 @@
 local D, C, L, G = unpack(select(2, ...)) 
-
--- don't use our zonemap script if capping is used.
 if IsAddOnLoaded("Capping") then return end
 
--- BG TINY MAP (BG, mining, etc)
 local tinymap = CreateFrame("Frame", "DuffedUIZoneMap", UIParent)
 tinymap:SetPoint("CENTER")
 tinymap:SetSize(223, 150)
@@ -13,9 +10,7 @@ tinymap:RegisterEvent("ADDON_LOADED")
 tinymap:SetPoint("CENTER", UIParent, 0, 0)
 tinymap:SetFrameLevel(7)
 tinymap:Hide()
-G.Maps.Zonemap = tinymap
 
--- create minimap background
 local tinymapbg = CreateFrame("Frame", nil, tinymap)
 tinymapbg:SetAllPoints()
 tinymapbg:SetFrameLevel(0)
@@ -25,7 +20,7 @@ tinymap:SetScript("OnEvent", function(self, event, addon)
 	if addon ~= "Blizzard_BattlefieldMinimap" then return end
 
 	BattlefieldMinimap:SetScript("OnShow", function(self)
-		tinymap:Show()		
+		tinymap:Show()
 		BattlefieldMinimapCorner:Kill()
 		BattlefieldMinimapBackground:Kill()
 		BattlefieldMinimapTab:Kill()
@@ -42,8 +37,7 @@ tinymap:SetScript("OnEvent", function(self, event, addon)
 		tinymap:SetScale(1)
 		tinymap:SetAlpha(1)
 		BattlefieldMinimapCloseButton:SkinCloseButton()
-		
-		BattlefieldMinimap_Update() --BugFix map not update on initial show
+		BattlefieldMinimap_Update()
 	end)
 
 	BattlefieldMinimap:SetScript("OnHide", function(self)
@@ -54,10 +48,10 @@ tinymap:SetScript("OnEvent", function(self, event, addon)
 	self:SetScript("OnMouseUp", function(self, btn)
 		if btn == "LeftButton" then
 			self:StopMovingOrSizing()
-			if OpacityFrame:IsShown() then OpacityFrame:Hide() end -- seem to be a bug with default ui in 4.0, we hide it on next click
+			if OpacityFrame:IsShown() then OpacityFrame:Hide() end
 		elseif btn == "RightButton" then
 			ToggleDropDownMenu(nil, nil, BattlefieldMinimapTabDropDown, self:GetName(), 0, -4)
-			if OpacityFrame:IsShown() then OpacityFrame:Hide() end -- seem to be a bug with default ui in 4.0, we hide it on next click
+			if OpacityFrame:IsShown() then OpacityFrame:Hide() end
 		end
 	end)
 

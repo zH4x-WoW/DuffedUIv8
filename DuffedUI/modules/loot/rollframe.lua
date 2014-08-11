@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 --[[
 		this is an edited version of teksloot
 		all credits of this mod goes to tekhub
@@ -25,12 +25,9 @@ anchor:EnableMouse(false)
 anchor:SetTemplate("Default")
 anchor:SetAlpha(0)
 anchor:SetBackdropBorderColor(1, 0, 0, 1)
-G.Loot.RollAnchor = anchor
 tinsert(D.AllowFrameMoving, DuffedUIRollAnchor)
 
-local function ClickRoll(frame)
-	RollOnLoot(frame.parent.rollID, frame.rolltype)
-end
+local function ClickRoll(frame) RollOnLoot(frame.parent.rollID, frame.rolltype) end
 
 local function HideTip() GameTooltip:Hide() end
 local function HideTip2() GameTooltip:Hide() ResetCursor() end
@@ -38,9 +35,7 @@ local function HideTip2() GameTooltip:Hide() ResetCursor() end
 local function SetTip(frame)
 	GameTooltip:SetOwner(frame, "ANCHOR_TOPLEFT")
 	GameTooltip:SetText(frame.tiptext)
-	if not frame:IsEnabled() then
-		GameTooltip:AddLine(frame.errtext, 1, 0.2, 0.2, 1)
-	end
+	if not frame:IsEnabled() then GameTooltip:AddLine(frame.errtext, 1, .2, .2, 1) end
 	for name, roll in pairs(frame.parent.rolls) do if roll == rolltypes[frame.rolltype] then GameTooltip:AddLine(name, 1, 1, 1) end end
 	GameTooltip:Show()
 end
@@ -62,11 +57,7 @@ local function ItemOnUpdate(frame)
 			ShoppingTooltip2:Hide()
 		end
 
-		if IsControlKeyDown() then
-			ShowInspectCursor()
-		else
-			ResetCursor()
-		end
+		if IsControlKeyDown() then ShowInspectCursor() else ResetCursor() end
 	end
 end
 

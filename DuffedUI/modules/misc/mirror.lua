@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 local total = MIRRORTIMER_NUMTIMERS
 
 local function Skin(timer, value, maxvalue, scale, paused, label)

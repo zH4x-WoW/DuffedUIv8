@@ -1,9 +1,8 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 if C["chat"].enable ~= true then return end
 
--- /tt - tell your current target.
 for i = 1, NUM_CHAT_WINDOWS do
-	local editbox = _G["ChatFrame"..i.."EditBox"]
+	local editbox = _G["ChatFrame" .. i .. "EditBox"]
 	editbox:HookScript("OnTextChanged", function(self)
 		local text = self:GetText()
 		if text:len() < 5 then
@@ -22,10 +21,6 @@ for i = 1, NUM_CHAT_WINDOWS do
 	end)
 end
 
--- slash command for macro's
-
 SLASH_TELLTARGET1 = "/tt"
 SLASH_TELLTARGET2 = "/telltarget"
-SlashCmdList.TELLTARGET = function(msg)
-	SendChatMessage(msg, "WHISPER")
-end
+SlashCmdList.TELLTARGET = function(msg) SendChatMessage(msg, "WHISPER") end

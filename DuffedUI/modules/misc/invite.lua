@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 ------------------------------------------------------------------------
 -- Auto accept invite
 ------------------------------------------------------------------------
@@ -72,7 +72,6 @@ autoinvite:SetScript("OnEvent", function(self, event, arg1, arg2, ...)
 		end
 	end
 end)
-G.Misc.AutoInvite = autoinvite
 
 function SlashCmdList.AUTOINVITE(msg, editbox)
 	if msg == "off" then

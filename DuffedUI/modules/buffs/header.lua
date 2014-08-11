@@ -49,9 +49,7 @@ local debuffs = DuffedUIAurasPlayerDebuffs
 local consolidate = DuffedUIAurasPlayerConsolidate
 
 local filter = 0
-if C["auras"].consolidate then
-	filter = 1
-end
+if C["auras"].consolidate then filter = 1 end
 
 buffs:SetPoint("TOPRIGHT", Minimap, "TOPLEFT", -7, 2)
 buffs:SetAttribute("filter", "HELPFUL")

@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 local function SkinIt(bar)	
 	local _, originalPoint, _, _, _ = bar:GetPoint()

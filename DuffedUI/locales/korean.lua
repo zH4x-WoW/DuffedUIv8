@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 if D.client == "koKR" then
 	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"

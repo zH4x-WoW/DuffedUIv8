@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 if not C["actionbar"].enable then return end
 
 -- create the holder to allow moving extra button
@@ -20,16 +20,11 @@ ExtraActionBarFrame:ClearAllPoints()
 ExtraActionBarFrame:SetPoint("CENTER", holder, "CENTER", 0, 0)
 ExtraActionBarFrame.ignoreFramePositionManager = true
 
-G.ActionBars.BarExtra = ExtraActionBarFrame
-G.ActionBars.BarExtra.Button1 = ExtraActionButton1
-G.ActionBars.BarExtra.Holder = holder
-
 -- hook the texture, idea by roth via WoWInterface forums
 local button = ExtraActionButton1
 local icon = button.icon
 local texture = button.style
 local disableTexture = function(style, texture)
-	-- look like sometime the texture path is set to capital letter instead of lower-case
 	if string.sub(texture, 1, 9) == "Interface" or string.sub(texture, 1, 9) == "INTERFACE" then
 		style:SetTexture("")
 	end
