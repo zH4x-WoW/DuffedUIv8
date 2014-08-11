@@ -1,5 +1,5 @@
 -- broken
---[[local D, C, L, G = unpack(select(2, ...))
+local D, C, L, G = unpack(select(2, ...))
 
 local function LoadSkin()
 	PVEFrame:StripTextures()
@@ -16,15 +16,12 @@ local function LoadSkin()
 	PVEFrame.shadows:Hide()
 
 	for i = 1, 4 do
-		local bu = GroupFinderFrame["groupButton"..i]
-
+		local bu = GroupFinderFrame["groupButton" .. i]
 		bu.ring:Hide()
 		bu.bg:SetTexture("")
 		bu.bg:SetAllPoints()
-
 		bu:CreateBackdrop()
 		bu:StyleButton()
-
 		bu.icon:SetTexCoord(.08, .92, .08, .92)
 		bu.icon:SetPoint("LEFT", bu, "LEFT")
 		bu.icon:SetDrawLayer("OVERLAY")
@@ -40,26 +37,25 @@ local function LoadSkin()
 	PVEFrame:CreateBackdrop("Transparent")
 	PVEFrameTab1:SkinTab()
 	PVEFrameTab2:SkinTab()
+	PVEFrameTab3:SkinTab()
 	PVEFrameCloseButton:SkinCloseButton()
-	
+
 	-- Dungeon finder
 	LFDQueueFrameFindGroupButton:StripTextures()
 	LFDQueueFrameFindGroupButton:SkinButton()
-				
 	LFDParentFrame:StripTextures()
 	LFDParentFrameInset:StripTextures()
 	local function ReskinRewards()
 		LFDQueueFrame:StripTextures()
-		
 		for i = 1, LFD_MAX_REWARDS do
-			local button = _G["LFDQueueFrameRandomScrollFrameChildFrameItem"..i]
-			local icon = _G["LFDQueueFrameRandomScrollFrameChildFrameItem"..i.."IconTexture"]
+			local button = _G["LFDQueueFrameRandomScrollFrameChildFrameItem" .. i]
+			local icon = _G["LFDQueueFrameRandomScrollFrameChildFrameItem" .. i .. "IconTexture"]
 
 			if button then
-				if not button.reskinned then				
-					local cta = _G["LFDQueueFrameRandomScrollFrameChildFrameItem"..i.."ShortageBorder"]
-					local count = _G["LFDQueueFrameRandomScrollFrameChildFrameItem"..i.."Count"]
-					local na = _G["LFDQueueFrameRandomScrollFrameChildFrameItem"..i.."NameFrame"]
+				if not button.reskinned then
+					local cta = _G["LFDQueueFrameRandomScrollFrameChildFrameItem" .. i .. "ShortageBorder"]
+					local count = _G["LFDQueueFrameRandomScrollFrameChildFrameItem" .. i .. "Count"]
+					local na = _G["LFDQueueFrameRandomScrollFrameChildFrameItem" .. i .. "NameFrame"]
 
 					icon:SetTexCoord(.08, .92, .08, .92)
 					icon:SetDrawLayer("OVERLAY")
@@ -67,9 +63,9 @@ local function LoadSkin()
 					na:SetTexture(0, 0, 0, .25)
 					na:SetSize(118, 39)
 					cta:SetAlpha(0)
-					
+
 					button:StripTextures()
-					
+
 					button.border = CreateFrame("Frame", nil, button)
 					button.border:CreateBackdrop("Default")
 					button.border.backdrop:Point("TOPLEFT", icon, -2, 2)
@@ -84,9 +80,7 @@ local function LoadSkin()
 
 	hooksecurefunc("LFDQueueFrameRandom_UpdateFrame", ReskinRewards)
 
-	for i = 1, NUM_LFD_CHOICE_BUTTONS do
-		_G["LFDQueueFrameSpecificListButton"..i].enableButton:SkinCheckBox()
-	end	
+	for i = 1, NUM_LFD_CHOICE_BUTTONS do _G["LFDQueueFrameSpecificListButton"..i].enableButton:SkinCheckBox() end
 
 	for i = 1, NUM_LFR_CHOICE_BUTTONS do
 		local bu = _G["LFRQueueFrameSpecificListButton"..i].enableButton
@@ -94,7 +88,7 @@ local function LoadSkin()
 		bu.SetNormalTexture = D.dummy
 		bu.SetPushedTexture = D.dummy
 	end
-	
+
 	LFDQueueFrameTypeDropDown:SkinDropDownBox()
 	LFDQueueFrameRandomScrollFrameChildFrameBonusRepFrame.ChooseButton:SkinButton()
 
@@ -114,14 +108,14 @@ local function LoadSkin()
 	RaidFinderQueueFramePartyBackfillNoBackfillButton:SkinButton()
 
 	for i = 1, LFD_MAX_REWARDS do
-		local button = _G["RaidFinderQueueFrameScrollFrameChildFrameItem"..i]
-		local icon = _G["RaidFinderQueueFrameScrollFrameChildFrameItem"..i.."IconTexture"]
+		local button = _G["RaidFinderQueueFrameScrollFrameChildFrameItem" .. i]
+		local icon = _G["RaidFinderQueueFrameScrollFrameChildFrameItem" .. i .. "IconTexture"]
 
 		if button then
 			if not button.reskinned then
-				local cta = _G["RaidFinderQueueFrameScrollFrameChildFrameItem"..i.."ShortageBorder"]
-				local count = _G["RaidFinderQueueFrameScrollFrameChildFrameItem"..i.."Count"]
-				local na = _G["RaidFinderQueueFrameScrollFrameChildFrameItem"..i.."NameFrame"]
+				local cta = _G["RaidFinderQueueFrameScrollFrameChildFrameItem" .. i .. "ShortageBorder"]
+				local count = _G["RaidFinderQueueFrameScrollFrameChildFrameItem" .. i .. "Count"]
+				local na = _G["RaidFinderQueueFrameScrollFrameChildFrameItem" .. i .. "NameFrame"]
 
 				icon:SetTexCoord(.08, .92, .08, .92)
 				icon:SetDrawLayer("OVERLAY")
@@ -129,9 +123,9 @@ local function LoadSkin()
 				na:SetTexture(0, 0, 0, .25)
 				na:SetSize(118, 39)
 				cta:SetAlpha(0)
-				
+
 				button:StripTextures()
-				
+
 				button.border = CreateFrame("Frame", nil, button)
 				button.border:CreateBackdrop("Default")
 				button.border.backdrop:Point("TOPLEFT", icon, -2, 2)
@@ -150,18 +144,18 @@ local function LoadSkin()
 	ScenarioFinderFrameButtonBottomBorder:Hide()
 	ScenarioQueueFrame.Bg:Hide()
 	ScenarioFinderFrameInset:GetRegions():Hide()
-	
+
 	ScenarioQueueFrameFindGroupButton:StripTextures()
 	ScenarioQueueFrameFindGroupButton:SkinButton()
 	ScenarioQueueFrameTypeDropDown:SkinDropDownBox()
 	ScenarioQueueFrameSpecificScrollFrameScrollBackgroundTopLeft:Hide()
 	ScenarioQueueFrameSpecificScrollFrameScrollBackgroundBottomRight:Hide()
 	ScenarioQueueFrameSpecificScrollFrameScrollBar:SkinScrollBar()
-	
+
 	local function SkinScenarioCheckBox()
 		if NUM_SCENARIO_CHOICE_BUTTONS then
 			for i = 1, NUM_SCENARIO_CHOICE_BUTTONS do
-				local button = _G["ScenarioQueueFrameSpecificButton"..i]
+				local button = _G["ScenarioQueueFrameSpecificButton" .. i]
 				if button and not button.isSkinned then
 					button.enableButton:SkinCheckBox()
 					button.isSkinned = true
@@ -170,19 +164,19 @@ local function LoadSkin()
 		end
 	end
 	hooksecurefunc("ScenarioQueueFrameSpecific_Update", SkinScenarioCheckBox)
-	
+
 	local function SkinScenarioRewards()
 		for i = 1, 4 do
-			local b = _G["ScenarioQueueFrameRandomScrollFrameChildFrameItem"..i]
+			local b = _G["ScenarioQueueFrameRandomScrollFrameChildFrameItem" .. i]
 			if b and not b.isSkinned then
 				local icon = b.icon
 				local icontexture = icon:GetTexture()
-				icon:SetTexCoord(.1,.9,.1,.9)
+				icon:SetTexCoord(.1, .9, .1, .9)
 				icon:SetDrawLayer("OVERLAY")
 				b:StripTextures()
 				icon:SetTexture(icontexture)
 				b.isSkinned = true
-				
+
 				b.border = CreateFrame("Frame", nil, b)
 				b.border:SetOutside(icon)
 				b.border:SetTemplate()
@@ -204,9 +198,7 @@ local function LoadSkin()
 	LFRBrowseFrameRoleInsetBg:Hide()
 
 	for i = 1, 14 do
-		if i ~= 6 and i ~= 8 then
-			select(i, RaidBrowserFrame:GetRegions()):Hide()
-		end
+		if i ~= 6 and i ~= 8 then select(i, RaidBrowserFrame:GetRegions()):Hide() end
 	end
 
 	RaidBrowserFrame:CreateBackdrop("Transparent")
@@ -216,12 +208,12 @@ local function LoadSkin()
 	LFRQueueFrameCommentScrollFrameScrollBar:SkinScrollBar()
 	LFRQueueFrameFindGroupButton:SkinButton()
 	LFRQueueFrameAcceptCommentButton:SkinButton()
-	
+
 	for i = 1, 2 do
-		local tab = _G["LFRParentFrameSideTab"..i]		
+		local tab = _G["LFRParentFrameSideTab" .. i]
 		select(1, tab:GetRegions()):Hide()
 
-		tab:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		tab:GetNormalTexture():SetTexCoord(.1, .9, .1, .9)
 		tab:GetNormalTexture():ClearAllPoints()
 		tab:GetNormalTexture():Point("TOPLEFT", 2, -2)
 		tab:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
@@ -229,13 +221,11 @@ local function LoadSkin()
 		tab:CreateBackdrop("Default")
 		tab.backdrop:SetAllPoints()
 		tab:StyleButton()
-		
+
 		local point, relatedTo, point2, x, y = tab:GetPoint()
-		if i == 1 then
-			tab:Point(point, relatedTo, point2, 3, 2)
-		end
+		if i == 1 then tab:Point(point, relatedTo, point2, 3, 2) end
 	end
-	
+
 	for i = 1, 7 do
 		local h = _G["LFRBrowseFrameColumnHeader"..i]
 		select(1, h:GetRegions()):Hide()
@@ -243,7 +233,7 @@ local function LoadSkin()
 		select(3, h:GetRegions()):Hide()
 		h:StyleButton()
 	end
-	
+
 	LFRBrowseFrameListScrollFrameScrollBar:SkinScrollBar()
 	LFRBrowseFrameListScrollFrame:StripTextures()
 	LFRBrowseFrame:StripTextures()
@@ -267,7 +257,7 @@ local function LoadSkin()
 		"LFDDungeonReadyDialogBackground",
 		"LFGDungeonReadyDialogBackground",
 	}
-	
+
 	local buttons = {
 		"LFDQueueFramePartyBackfillBackfillButton",
 		"LFDQueueFramePartyBackfillNoBackfillButton",
@@ -289,7 +279,7 @@ local function LoadSkin()
 		_G[object]:GetChildren():SkinCheckBox()
 	end
 
-	for _, object in pairs(StripAllTextures) do
+	for _, object in pairs(StripAllTextures) do 
 		if _G[object] then _G[object]:StripTextures() end
 	end
 
@@ -297,10 +287,10 @@ local function LoadSkin()
 		if _G[texture] then _G[texture]:Kill() end
 	end
 
-	for i = 1, #buttons do]]--
-		--_G[buttons[i]]:StripTextures()
-		--_G[buttons[i]]:SkinButton()
-	--[[end	
+	for i = 1, #buttons do
+		_G[buttons[i]]:StripTextures()
+		_G[buttons[i]]:SkinButton()
+	end	
 
 	for i= 1,15 do
 		_G["LFDQueueFrameSpecificListButton"..i.."EnableButton"]:SkinCheckBox()
@@ -310,7 +300,7 @@ local function LoadSkin()
 	LFDQueueFrameSpecificListScrollFrame:Height(LFDQueueFrameSpecificListScrollFrame:GetHeight() - 8)
 	LFDQueueFrameTypeDropDown:Point("RIGHT",-10,0)
 	LFDQueueFrameSpecificListScrollFrameScrollBar:SkinScrollBar()
-	
+
 	LFGDungeonReadyPopup:SetTemplate("Transparent")
 	LFGDungeonReadyDialog.SetBackdrop = D.dummy
 	LFGDungeonReadyDialog.filigree:SetAlpha(0)
@@ -331,15 +321,15 @@ local function LoadSkin()
 	ScenarioQueueFrameRandomScrollFrameChildFrameBonusRepFrame.ChooseButton:SkinButton()
 	LFDQueueFrameRandomScrollFrameScrollBar:StripTextures()
 	LFDQueueFrameRandomScrollFrameScrollBar:SkinScrollBar()
-	
-	FlexRaidFrame:StripTextures()
+
+	--[[FlexRaidFrame:StripTextures()
 	FlexRaidFrameStartRaidButton:StripTextures()
 	FlexRaidFrameStartRaidButton:SkinButton()
 	FlexRaidFrameBottomInset:StripTextures()
 	FlexRaidFrameScrollFrame:StripTextures()
 	FlexRaidFrameScrollFrameScrollBar:StripTextures()
 	FlexRaidFrameScrollFrameScrollBar:SkinScrollBar()
-	FlexRaidFrameSelectionDropDown:SkinDropDownBox()
+	FlexRaidFrameSelectionDropDown:SkinDropDownBox()]]--
 end
 
 tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
@@ -356,14 +346,26 @@ local function LoadSecondarySkin()
 	select(11, ChallengesFrameDetails:GetRegions()):Hide()
 	ChallengesFrameDungeonButton1:SetPoint("TOPLEFT", ChallengesFrame, "TOPLEFT", 8, -83)
 
-	for i = 1, 9 do
-		local bu = ChallengesFrame["button"..i]
-		bu:SkinButton()
-		bu:StyleButton()
-		bu:SetHighlightTexture("")
-		bu.selectedTex:SetAlpha(.2)
-		bu.selectedTex:SetPoint("TOPLEFT", 1, -1)
-		bu.selectedTex:SetPoint("BOTTOMRIGHT", -1, 1)
+	if D.toc == 60000 then
+		for i = 1, 8 do
+			local bu = ChallengesFrame["button"..i]
+			bu:SkinButton()
+			bu:StyleButton()
+			bu:SetHighlightTexture("")
+			bu.selectedTex:SetAlpha(.2)
+			bu.selectedTex:SetPoint("TOPLEFT", 1, -1)
+			bu.selectedTex:SetPoint("BOTTOMRIGHT", -1, 1)
+		end
+	else
+		for i = 1, 9 do
+			local bu = ChallengesFrame["button"..i]
+			bu:SkinButton()
+			bu:StyleButton()
+			bu:SetHighlightTexture("")
+			bu.selectedTex:SetAlpha(.2)
+			bu.selectedTex:SetPoint("TOPLEFT", 1, -1)
+			bu.selectedTex:SetPoint("BOTTOMRIGHT", -1, 1)
+		end
 	end
 
 	for i = 1, 3 do
@@ -376,4 +378,4 @@ local function LoadSecondarySkin()
 	end
 end
 
-D.SkinFuncs["Blizzard_ChallengesUI"] = LoadSecondarySkin]]--
+D.SkinFuncs["Blizzard_ChallengesUI"] = LoadSecondarySkin
