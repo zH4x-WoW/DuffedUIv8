@@ -76,7 +76,7 @@ local function Shared(self, unit)
 	power.bg:SetAlpha(1)
 	power.bg.multiplier = .3
 
-	if C["unitframes"].powerClasscolored then power.colorClass = true else power.colorPower = true end
+	power.colorClass = true
 
 	local panel = CreateFrame("Frame", nil, self)
 	panel:SetTemplate("Default")

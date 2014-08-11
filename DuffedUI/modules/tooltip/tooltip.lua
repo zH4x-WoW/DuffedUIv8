@@ -1,16 +1,37 @@
-local D, C, L = unpack(select(2, ...)) 
--- credits : Aezay (TipTac) and Caellian for some parts of code.
-
+local D, C, L, G = unpack(select(2, ...))
 if not C["tooltip"].enable then return end
+-- credits : Aezay (TipTac) and Caellian for some parts of code.
 
 local DuffedUITooltip = CreateFrame("Frame", "DuffedUITooltip", UIParent)
 local _G = getfenv(0)
 local GameTooltip, GameTooltipStatusBar = _G["GameTooltip"], _G["GameTooltipStatusBar"]
 local gsub, find, format = string.gsub, string.find, string.format
-local Tooltips = {GameTooltip,ItemRefShoppingTooltip1,ItemRefShoppingTooltip2,ItemRefShoppingTooltip3,ShoppingTooltip1,ShoppingTooltip2,ShoppingTooltip3,WorldMapTooltip,WorldMapCompareTooltip1,WorldMapCompareTooltip2,WorldMapCompareTooltip3}
 local ItemRefTooltip = ItemRefTooltip
+local NeedBackdropBorderRefresh = true
+local linkTypes = {
+	item = true,
+	enchant = true,
+	spell = true,
+	quest = true,
+	unit = true,
+	talent = true,
+	achievement = true,
+	glyph = true,
+}
 
-local linkTypes = {item = true, enchant = true, spell = true, quest = true, unit = true, talent = true, achievement = true, glyph = true}
+local Tooltips = {
+	GameTooltip,
+	ItemRefShoppingTooltip1,
+	ItemRefShoppingTooltip2,
+	ItemRefShoppingTooltip3,
+	ShoppingTooltip1,
+	ShoppingTooltip2,
+	ShoppingTooltip3,
+	WorldMapTooltip,
+	WorldMapCompareTooltip1,
+	WorldMapCompareTooltip2,
+	WorldMapCompareTooltip3,
+}
 
 local classification = {
 	worldboss = "|cffAF5050Boss|r",
@@ -18,8 +39,6 @@ local classification = {
 	elite = "|cffAF5050+|r",
 	rare = "|cffAF5050Rare|r",
 }
-
-local NeedBackdropBorderRefresh = true
 
 local anchor = CreateFrame("Frame", "DuffedUITooltipAnchor", UIParent)
 anchor:SetSize(200, DuffedUIInfoRight:GetHeight())
@@ -44,7 +63,6 @@ local function UpdateTooltip(self)
 	local owner = self:GetOwner()
 	if not owner then return end
 	local name = owner:GetName()
-
 	local x = D.Scale(5)
 
 	if self:GetAnchorType() == "ANCHOR_CURSOR" then
@@ -52,9 +70,7 @@ local function UpdateTooltip(self)
 			self:ClearAllPoints()
 			NeedBackdropBorderRefresh = false
 			self:SetBackdropColor(unpack(C["media"].backdropcolor))
-			if not C["tooltip"].cursor then
-				self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-			end
+			if not C["tooltip"].cursor then self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end
 		end
 	elseif self:GetAnchorType() == "ANCHOR_NONE" and InCombatLockdown() and C["tooltip"].hidecombat == true then
 		self:Hide()
@@ -68,9 +84,7 @@ local function UpdateTooltip(self)
 	end
 
 	if (owner == MiniMapBattlefieldFrame or owner == MiniMapMailFrame) and DuffedUIMinimap then
-		if DuffedUIMinimap:GetPoint():match("LEFT") then 
-			self:SetAnchorType("ANCHOR_TOPRIGHT", x, -x)
-		end
+		if DuffedUIMinimap:GetPoint():match("LEFT") then self:SetAnchorType("ANCHOR_TOPRIGHT", x, -x) end
 	end
 
 	if self:GetAnchorType() == "ANCHOR_NONE" and DuffedUITooltipAnchor then
@@ -104,65 +118,48 @@ end
 
 local function SetTooltipDefaultAnchor(self, parent)
 	if C["tooltip"].cursor == true then
-		if parent ~= UIParent then
-			self:SetOwner(parent, "ANCHOR_NONE")
-		else
-			self:SetOwner(parent, "ANCHOR_CURSOR")
-		end
+		if parent ~= UIParent then self:SetOwner(parent, "ANCHOR_NONE") else self:SetOwner(parent, "ANCHOR_CURSOR") end
 	else
 		self:SetOwner(parent, "ANCHOR_NONE")
 	end
-	
 	self:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", -111111, -111111)
 end
 hooksecurefunc("GameTooltip_SetDefaultAnchor", SetTooltipDefaultAnchor)
 
 GameTooltip:HookScript("OnUpdate", function(self, ...) UpdateTooltip(self) end)
 
-local function Hex(color)
-	return string.format('|cff%02x%02x%02x', color.r * 255, color.g * 255, color.b * 255)
-end
+local function Hex(color) return string.format('|cff%02x%02x%02x', color.r * 255, color.g * 255, color.b * 255) end
 
 local function GetColor(unit)
 	if (UnitIsPlayer(unit) and not UnitHasVehicleUI(unit)) then
-		local _, class = UnitClass(unit)
+		local class = UnitClass(unit)
 		local color = RAID_CLASS_COLORS[class]
 		if not color then return end
-		local r,g,b = color.r, color.g, color.b
+		local r, g, b = color.r, color.g, color.b
 		return Hex(color), r, g, b
 	else
 		local color = FACTION_BAR_COLORS[UnitReaction(unit, "player")]
 		if not color then return end
-		local r,g,b = color.r, color.g, color.b
+		local r, g, b = color.r, color.g, color.b
 		return Hex(color), r, g, b
 	end
 end
 
 local function StatusBarOnValueChanged(self, value)
-	if not value then
-		return
-	end
+	if not value then return end
 	local min, max = self:GetMinMaxValues()
-
-	if (value < min) or (value > max) then
-		return
-	end
+	if (value < min) or (value > max) then return end
 	local _, unit = GameTooltip:GetUnit()
 
 	if not unit then
-		local GMF = GetMouseFocus()
-		unit = GMF and GMF:GetAttribute("unit")
+		unit = GetMouseFocus() and GetMouseFocus():GetAttribute("unit")
 	end
 
 	if not self.text then
 		self.text = self:CreateFontString(nil, "OVERLAY")
 		local position = DuffedUITooltipAnchor:GetPoint()
-		if position:match("TOP") then
-			self.text:Point("CENTER", GameTooltipStatusBar, 0, -6)
-		else
-			self.text:Point("CENTER", GameTooltipStatusBar, 0, 6)
-		end
-
+		if position:match("TOP") then self.text:Point("CENTER", GameTooltipStatusBar, 0, -6) else self.text:Point("CENTER", GameTooltipStatusBar, 0, 6) end
+		
 		self.text:SetFont(C["media"].font, 12, "THINOUTLINE")
 		self.text:Show()
 		if unit then
@@ -210,21 +207,11 @@ healthBarBG:SetTemplate("Default")
 
 local function OnTooltipSetUnit(self)
 	local lines = self:NumLines()
-	local GMF = GetMouseFocus()
-	local unit = (select(2, self:GetUnit())) or (GMF and GMF:GetAttribute("unit"))
-
-	if not unit and UnitExists("mouseover") then
-		unit = "mouseover"
-	end
-
+	local unit = (select(2, self:GetUnit())) or (GetMouseFocus() and GetMouseFocus():GetAttribute("unit"))
+	if not unit and UnitExists("mouseover") then unit = "mouseover" end
 	if not unit then self:Hide() return end
-
 	if (self:GetOwner() ~= UIParent and C["tooltip"].hideuf) then self:Hide() return end
-
-	if (UnitIsUnit(unit,"mouseover")) then
-		unit = "mouseover"
-	end
-
+	if (UnitIsUnit(unit,"mouseover")) then unit = "mouseover" end
 	local race = UnitRace(unit)
 	local class = UnitClass(unit)
 	local level = UnitLevel(unit)
@@ -239,9 +226,7 @@ local function OnTooltipSetUnit(self)
 	if not color then color = "|CFFFFFFFF" end
 	if not realm then realm = "" end
 
-	if title or name then
-		_G["GameTooltipTextLeft1"]:SetFormattedText("%s%s%s", color, title or name, realm and realm ~= "" and " - "..realm.."|r" or "|r")
-	end
+	if title or name then _G["GameTooltipTextLeft1"]:SetFormattedText("%s%s%s", color, title or name, realm and realm ~= "" and " - "..realm.."|r" or "|r") end
 
 	if(UnitIsPlayer(unit)) then
 		if UnitIsAFK(unit) then
@@ -288,15 +273,12 @@ local function OnTooltipSetUnit(self)
 		if not r and not g and not b then r, g, b = 1, 1, 1 end
 		GameTooltip:AddLine(UnitName(unit.."target"), r, g, b)
 	end
-
 	self.fadeOut = nil
 end
 GameTooltip:HookScript("OnTooltipSetUnit", OnTooltipSetUnit)
 
 local BorderColor = function(self)
-	local GMF = GetMouseFocus()
-	local unit = (select(2, self:GetUnit())) or (GMF and GMF:GetAttribute("unit"))
-
+	local unit = (select(2, self:GetUnit())) or (GetMouseFocus() and GetMouseFocus():GetAttribute("unit"))
 	local reaction = unit and UnitReaction(unit, "player")
 	local player = unit and UnitIsPlayer(unit)
 	local tapped = unit and UnitIsTapped(unit)
@@ -309,15 +291,15 @@ local BorderColor = function(self)
 		local class = select(2, UnitClass(unit))
 		local c = D.UnitColor.class[class]
 		r, g, b = c[1], c[2], c[3]
-		self:SetBackdropBorderColor(r, g, b)
-		healthBarBG:SetBackdropBorderColor(r, g, b)
 		healthBar:SetStatusBarColor(r, g, b)
+		healthBarBG:SetBackdropBorderColor(r, g, b)
+		self:SetBackdropBorderColor(r, g, b)
 	elseif reaction then
 		local c = D.UnitColor.reaction[reaction]
 		r, g, b = c[1], c[2], c[3]
-		self:SetBackdropBorderColor(r, g, b)
-		healthBarBG:SetBackdropBorderColor(r, g, b)
 		healthBar:SetStatusBarColor(r, g, b)
+		healthBarBG:SetBackdropBorderColor(r, g, b)
+		self:SetBackdropBorderColor(r, g, b)
 	else
 		local _, link = self:GetItem()
 		local quality = link and select(3, GetItemInfo(link))
@@ -325,12 +307,11 @@ local BorderColor = function(self)
 			local r, g, b = GetItemQualityColor(quality)
 			self:SetBackdropBorderColor(r, g, b)
 		else
-			self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-			healthBarBG:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 			healthBar:SetStatusBarColor(unpack(C["media"].bordercolor))
+			healthBarBG:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+			self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 		end
 	end
-
 	NeedBackdropBorderRefresh = true
 end
 
@@ -339,27 +320,20 @@ local SetStyle = function(self)
 	BorderColor(self)
 end
 
-local hex = function(color)
-	return (color.r and format('|cff%02x%02x%02x', color.r * 255, color.g * 255, color.b * 255)) or "|cffFFFFFF"
-end
-
-local nilcolor = { r=1, g=1, b=1 }
-local tapped = { r=.6, g=.6, b=.6 }
+local nilcolor = {1, 1, 1 }
+local tapped = {.6, .6, .6 }
 
 local function unitColor(unit)
 	if(not unit) then unit = "mouseover" end
 
 	local color
 	if(UnitIsPlayer(unit)) then
-		local _, class = UnitClass(unit)
-		color = RAID_CLASS_COLORS[class]
+		color = RAID_CLASS_COLORS[D.Class]
 	elseif(UnitIsTapped(unit) and not UnitIsTappedByPlayer(unit)) then
 		color = tapped
 	else
 		local reaction = UnitReaction(unit, "player")
-		if(reaction) then
-			color = FACTION_BAR_COLORS[reaction]
-		end
+		if(reaction) then color = FACTION_BAR_COLORS[reaction] end
 	end
 
 	return (color or nilcolor)
@@ -368,11 +342,7 @@ end
 local function addAuraInfo(self, caster, spellID)
 	if (C["tooltip"].enablecaster and caster) then
 		local color = unitColor(caster)
-		if color then
-			color = hex(color)
-		else
-			color = ""
-		end
+		if color then color = Hex(color) else color = "" end
 
 		GameTooltip:AddLine("Applied by "..color..UnitName(caster))
 		GameTooltip:Show()
@@ -398,9 +368,7 @@ DuffedUITooltip:RegisterEvent("PLAYER_ENTERING_WORLD")
 DuffedUITooltip:RegisterEvent("ADDON_LOADED")
 DuffedUITooltip:SetScript("OnEvent", function(self, event, addon)
 	if event == "PLAYER_ENTERING_WORLD" then
-		for _, tt in pairs(Tooltips) do
-			tt:HookScript("OnShow", SetStyle)
-		end
+		for _, tt in pairs(Tooltips) do tt:HookScript("OnShow", SetStyle) end
 
 		ItemRefTooltip:HookScript("OnTooltipSetItem", SetStyle)
 		ItemRefTooltip:HookScript("OnShow", SetStyle)	
@@ -432,12 +400,9 @@ DuffedUITooltip:SetScript("OnEvent", function(self, event, addon)
 
 		if FrameStackTooltip then
 			FrameStackTooltip:SetScale(C["general"].uiscale)
-
 			FrameStackTooltip:HookScript("OnShow", function(self) self:SetTemplate("Default") end)
 		end
 
-		if EventTraceTooltip then
-			EventTraceTooltip:HookScript("OnShow", function(self) self:SetTemplate("Default") end)
-		end
+		if EventTraceTooltip then EventTraceTooltip:HookScript("OnShow", function(self) self:SetTemplate("Default") end) end
 	end
 end)

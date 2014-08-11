@@ -66,7 +66,8 @@ mouseFrame:SetFrameLevel(3)
 
 local function updateStatus()
 	local XP, maxXP, restXP = UnitXP("player"), UnitXPMax("player"), GetXPExhaustion()
-	local percXP = ((XP == 0) and 0) or (math.floor((XP / maxXP) * 100))
+	if not maxXP or maxXP == 0 then return end
+	local percXP = math.floor((XP / maxXP) * 100)
 
 	if IsMaxLevel() then
 		xpBar:Hide()
