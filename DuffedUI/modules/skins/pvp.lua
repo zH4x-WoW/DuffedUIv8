@@ -3,12 +3,10 @@ local D, C, L, G = unpack(select(2, ...))
 local function LoadSkin()
 	PVPUIFrame:StripTextures()
 	PVPUIFrame:SetTemplate("Transparent")
-	PVPUIFrame.LeftInset:StripTextures()
 	PVPUIFrame.Shadows:StripTextures()
-	PVPUIFrameCloseButton:SkinCloseButton()
 
-	for i = 1, 3 do
-		local button = _G["PVPQueueFrameCategoryButton"..i]
+	for i = 1, 4 do
+		local button = _G["PVPQueueFrameCategoryButton" .. i]
 		button:SetTemplate()
 		button.Background:Kill()
 		button.Ring:Kill()
@@ -19,19 +17,6 @@ local function LoadSkin()
 		button.backdrop:SetFrameLevel(button:GetFrameLevel())
 		button.Icon:SetParent(button.backdrop)
 		button:StyleButton()
-
-		if i == 1 then button.shadow:SetAlpha(1) else button.shadow:SetAlpha(0) end
-
-		button:HookScript("OnClick", function(self)
-			for j=1, 3 do
-				local b = _G["PVPQueueFrameCategoryButton"..j]
-				if self:GetID() == b:GetID() then
-					b.shadow:SetAlpha(1)
-				else
-					b.shadow:SetAlpha(0)
-				end
-			end
-		end)
 	end
 
 	-- HONOR FRAME
@@ -46,13 +31,9 @@ local function LoadSkin()
 	HonorFrame.BonusFrame.RandomBGButton:SkinButton()
 	HonorFrame.BonusFrame.RandomBGButton.SelectedTexture:ClearAllPoints()
 	HonorFrame.BonusFrame.RandomBGButton.SelectedTexture:SetAllPoints()
-	HonorFrame.BonusFrame.RandomBGButton.SelectedTexture:SetTexture(0, 1, 0, 0.1)
-	HonorFrame.BonusFrame.CallToArmsButton:StripTextures()
-	HonorFrame.BonusFrame.CallToArmsButton:SkinButton()
-	HonorFrame.BonusFrame.CallToArmsButton.SelectedTexture:ClearAllPoints()
-	HonorFrame.BonusFrame.CallToArmsButton.SelectedTexture:SetAllPoints()
-	HonorFrame.BonusFrame.CallToArmsButton.SelectedTexture:SetTexture(0, 1, 0, 0.1)
-	
+	HonorFrame.BonusFrame.RandomBGButton.SelectedTexture:SetTexture(0, 1, 0, .1)
+	HonorFrame.BonusFrame.DiceButton:SkinButton()
+
 	HonorFrame.RoleInset:StripTextures()
 	HonorFrame.RoleInset.DPSIcon.checkButton:SkinCheckBox()
 	HonorFrame.RoleInset.DPSIcon.checkButton:SetFrameLevel(HonorFrame.RoleInset.DPSIcon:GetFrameLevel() + 2)
@@ -62,14 +43,14 @@ local function LoadSkin()
 	HonorFrame.RoleInset.HealerIcon.checkButton:SetFrameLevel(HonorFrame.RoleInset.HealerIcon:GetFrameLevel() + 2)
 
 	for i = 1, 2 do
-		local b = HonorFrame.BonusFrame["WorldPVP"..i.."Button"]
+		local b = HonorFrame.BonusFrame["Arena" .. i.. "Button"]
 		b:StripTextures()
 		b:SkinButton()
 		b.SelectedTexture:ClearAllPoints()
 		b.SelectedTexture:SetAllPoints()
-		b.SelectedTexture:SetTexture(0, 1, 0, 0.1)
+		b.SelectedTexture:SetTexture(0, 1, 0, .1)
 	end
-	
+
 	-- CONQUEST FRAME
 	ConquestFrame.Inset:StripTextures()
 	ConquestPointsBarLeft:Kill()
@@ -82,13 +63,20 @@ local function LoadSkin()
 	ConquestPointsBar.backdrop:SetOutside(ConquestPointsBar, nil, -D.mult)
 	ConquestFrame:StripTextures()
 	ConquestFrame.ShadowOverlay:StripTextures()
-	ConquestFrame.RatedBG:StripTextures()
-	ConquestFrame.RatedBG:SkinButton()
-	ConquestFrame.RatedBG.SelectedTexture:ClearAllPoints()
-	ConquestFrame.RatedBG.SelectedTexture:SetAllPoints()
-	ConquestFrame.RatedBG.SelectedTexture:SetTexture(0, 1, 0, 0.1)
+
+	local function SkinRated(button)
+		button:StripTextures()
+		button:SkinButton()
+		button.SelectedTexture:ClearAllPoints()
+		button.SelectedTexture:SetAllPoints()
+		button.SelectedTexture:SetTexture(0, 1, 0, .1)
+	end
+	SkinRated(ConquestFrame.RatedBG)
+	SkinRated(ConquestFrame.Arena2v2)
+	SkinRated(ConquestFrame.Arena3v3)
+	SkinRated(ConquestFrame.Arena5v5)
 	ConquestJoinButton:SkinButton(true)
-	
+
 	-- PvP Ready Dialog
 	PVPReadyDialog:StripTextures()
 	PVPReadyDialog:SetTemplate("Transparent")
@@ -106,9 +94,9 @@ local function LoadSkin()
 	WarGameStartButton:SkinButton(true)
 	WarGamesFrameScrollFrameScrollBar:SkinScrollBar()
 	WarGamesFrame.HorizontalBar:StripTextures()
-	
 	WarGameStartButton:StripTextures()
 	WarGameStartButton:SkinButton()
+	WarGameTournamentModeCheckButton:SkinCheckBox()
 end
 
 D.SkinFuncs["Blizzard_PVPUI"] = LoadSkin

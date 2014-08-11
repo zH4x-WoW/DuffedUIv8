@@ -39,7 +39,6 @@ G.Misc = {}
 G.NamePlates = {}
 G.Panels = {}
 G.Skins = {}
-G.Tooltips = {}
 G.UnitFrames = {}
 G.Install = {}
 
