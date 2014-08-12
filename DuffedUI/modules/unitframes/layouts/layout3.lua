@@ -250,7 +250,8 @@ local function Shared(self, unit)
 				local DruidManaUpdate = CreateFrame("Frame")
 				DruidManaUpdate:SetScript("OnUpdate", function() D.UpdateDruidManaText(self) end)
 				local DruidManaText = D.SetFontString(health, C["media"].font, 12, "THINOUTLINE")
-				DruidManaText:SetTextColor( 1, 0.49, 0.04 )
+				DruidManaText:Point("LEFT", power.value, "RIGHT", 5, 0)
+				DruidManaText:SetTextColor( 1, .49, .04 )
 				self.DruidManaText = DruidManaText
 			end
 
