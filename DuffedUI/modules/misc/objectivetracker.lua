@@ -45,7 +45,7 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc(AUTO_QUEST_POPUP_TRACKER_MODULE, "Update", self.UpdatePopup)
 end
 
---[[function ObjectiveTracker:WOWHead()
+function ObjectiveTracker:WOWHead()
 	-- Quest / achievement link URLs
 	local lST = "Wowhead"
 	local lQ = "http://www.wowhead.com/quest=%d"
@@ -63,38 +63,41 @@ end
 		EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
 	}
 	
-	local tblDropDown = {}
-	hooksecurefunc("WatchFrameDropDown_Initialize", function(self)
-		if self.type == "QUEST" then
-			tblDropDown = {
-				text = lST .. " link",
-				notCheckable = true,
-				arg1 = self.index,
-				func = function(_, watchId)
-					local logId = GetQuestIndexForWatch(watchId)
-					local _, _, _, _, _, _, _, _, questId = GetQuestLogTitle(logId)
-					local inputBox = StaticPopup_Show("WATCHFRAME_URL")
-					inputBox.editBox:SetText(lQ:format(questId))
-					inputBox.editBox:HighlightText()
-				end
-			}
-			UIDropDownMenu_AddButton(tblDropDown, UIDROPDOWN_MENU_LEVEL)
-		elseif self.type == "ACHIEVEMENT" then
-			tblDropDown = {
-				text = lST .. " link",
-				notCheckable = true,
-				arg1 = self.index,
-				func = function(_, id)
-					local inputBox = StaticPopup_Show("WATCHFRAME_URL")
-					inputBox.editBox:SetText(lA:format(id))
-					inputBox.editBox:HighlightText()
-				end
-			}
-			UIDropDownMenu_AddButton(tblDropDown, UIDROPDOWN_MENU_LEVEL)
-		end
+	hooksecurefunc("QuestObjectiveTracker_OnOpenDropDown", function(self)
+		--if self.type == "QUEST" then
+			local _, b, i, info, questID
+			b = self.activeFrame
+			i = b.questLogIndex
+			_, _, _, _, _, _, _, questID = GetQuestLogTitle(i)
+			info = UIDropDownMenu_CreateInfo()
+			info.text = lST .. "-Link"
+			info.func = function(id)
+				local inputBox = StaticPopup_Show("WATCHFRAME_URL")
+				inputBox.editBox:SetText(lQ:format(questID))
+				inputBox.editBox:HighlightText()
+			end
+			info.arg1 = questID
+			info.noClickSound = 1
+			info.checked = false
+			UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
+		--[[elseif self.type == "ACHIEVMENT" then
+			local _, b, info, ID
+			b = self.activeFrame
+			ID, _, _, _, _, _, _, _, _, _ = GetAchievementInfo(block.id)
+			info = UIDropDownMenu_CreateInfo()
+			info.text = lST .. "-Link"
+			info.func = function(ID)
+				local inputBox = StaticPopup_Show("WATCHFRAME_URL")
+				inputBox.editBox:SetText(lA:format(ID))
+				inputBox.editBox:HighlightText()
+			end
+			info.arg1 = ID
+			info.noClickSound = 1
+			info.checked = false
+			UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
+		end]]--
 	end)
-	UIDropDownMenu_Initialize(WatchFrameDropDown, WatchFrameDropDown_Initialize, "MENU")
-end]]--
+end
 
 function ObjectiveTracker:Enable()
 	local Frame = ObjectiveTrackerFrame
@@ -119,11 +122,10 @@ function ObjectiveTracker:Enable()
 			Header:Show()
 		end
 	end
-	
+	ObjectiveTracker:WOWHead()
 	ObjectiveTracker:AddHooks()
 end
 
---ObjectiveTracker:RegisterEvent("ADDON_LOADED")
 ObjectiveTracker:RegisterEvent("PLAYER_ENTERING_WORLD")
 ObjectiveTracker:SetScript("OnEvent", function(self, event, ...)
 	D.Delay(1, function()

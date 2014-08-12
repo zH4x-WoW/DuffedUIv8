@@ -27,7 +27,7 @@ D.MicroMenu = {
 	{text = "Raid Browser", func = function() ToggleFrame(RaidBrowserFrame) end},
 	{text = GARRISON_LANDING_PAGE_TITLE, func = function() GarrisonLandingPageMinimapButton_OnClick() end},
 }
-	
+
 -- need to be opened at least one time before logging in, or big chance of taint later ...
 local taint = CreateFrame("Frame")
 taint:RegisterEvent("ADDON_LOADED")

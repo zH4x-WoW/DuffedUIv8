@@ -31,6 +31,7 @@ local Tooltips = {
 	WorldMapCompareTooltip1,
 	WorldMapCompareTooltip2,
 	WorldMapCompareTooltip3,
+	FloatingGarrisonMissionTooltip,
 }
 
 local classification = {

@@ -7,12 +7,10 @@ local function LoadSkin()
 	PetJournalParentPortrait:Hide()
 	PetJournalParentTab1:SkinTab()
 	PetJournalParentTab2:SkinTab()
+	PetJournalParentTab3:SkinTab()
 	PetJournalParentCloseButton:SkinCloseButton()
 
-	-------------------------------
 	--[[ mount journal (tab 1) ]]--
-	-------------------------------
-
 	MountJournal:StripTextures()
 	MountJournal.LeftInset:StripTextures()
 	MountJournal.RightInset:StripTextures()
@@ -25,13 +23,16 @@ local function LoadSkin()
 	MountJournal.MountDisplay.ModelFrame.RotateRightButton:SkinCloseButton()
 	MountJournal.MountDisplay.ModelFrame.RotateLeftButton.t:SetText("<")
 	MountJournal.MountDisplay.ModelFrame.RotateRightButton.t:SetText(">")
+	MountJournalSearchBox:StripTextures()
 	MountJournalSearchBox:SkinEditBox()
-	
+	MountJournalFilterButton:SkinButton()
+	MountJournalFilterButton:ClearAllPoints()
+	MountJournalFilterButton:Point("LEFT", MountJournalSearchBox, "RIGHT", 5, 0)
+
 	for i = 1, #MountJournal.ListScrollFrame.buttons do
-		local b = _G["MountJournalListScrollFrameButton"..i]
-		local z = _G["PetJournalListScrollFrameButton"..i.."LevelBG"]
+		local b = _G["MountJournalListScrollFrameButton" .. i]
+		local z = _G["PetJournalListScrollFrameButton" .. i .. "LevelBG"]
 		if not b.isSkinned then
-			-- reskin mounts icons
 			b:StripTextures()
 			b:SetTemplate()
 			b:StyleButton()
@@ -41,13 +42,12 @@ local function LoadSkin()
 			b.DragButton:StyleButton()
 			b.DragButton.hover:SetAllPoints(b.DragButton)
 			b.DragButton.ActiveTexture:SetAlpha(0)
-			
-			-- create a backdrop around the icon
+
 			b:CreateBackdrop("Default")
 			b.backdrop:Point("TOPLEFT", b.icon, -2, 2)
 			b.backdrop:Point("BOTTOMRIGHT", b.icon, 2, -2)
 			b.backdrop:SetBackdropColor(0, 0, 0, 0)
-			
+
 			z:SetTexture(nil)
 			b.isSkinned = true
 		end
@@ -56,8 +56,8 @@ local function LoadSkin()
 	-- Color in green icon border on selected mount
 	local function ColorSelectedMount()
 		for i = 1, #MountJournal.ListScrollFrame.buttons do
-			local b = _G["MountJournalListScrollFrameButton"..i]
-			local t = _G["MountJournalListScrollFrameButton"..i.."Name"]
+			local b = _G["MountJournalListScrollFrameButton" .. i]
+			local t = _G["MountJournalListScrollFrameButton" .. i .. "Name"]
 			if b.DragButton.ActiveTexture:IsShown() then
 				t:SetTextColor(1,1,0)
 				b.backdrop:SetBackdropBorderColor(1, 1, 0)
@@ -73,10 +73,7 @@ local function LoadSkin()
 	MountJournalListScrollFrame:HookScript("OnVerticalScroll", ColorSelectedMount)
 	MountJournalListScrollFrame:HookScript("OnMouseWheel", ColorSelectedMount)
 
-	-----------------------------
 	--[[ pet journal (tab 2) ]]--
-	-----------------------------
-
 	PetJournalSummonButton:StripTextures()
 	PetJournalFindBattle:StripTextures()
 	PetJournalSummonButton:SkinButton()
@@ -90,11 +87,10 @@ local function LoadSkin()
 	PetJournalFilterButton:SkinButton()
 	PetJournalListScrollFrame:StripTextures()
 	PetJournalListScrollFrameScrollBar:SkinScrollBar()
-	
+
 	for i = 1, #PetJournal.listScroll.buttons do
-		local b = _G["PetJournalListScrollFrameButton"..i]
+		local b = _G["PetJournalListScrollFrameButton" .. i]
 		if not b.isSkinned then
-			-- reskin mounts icons
 			b:StripTextures()
 			b:SetTemplate()
 			b:StyleButton()
@@ -104,8 +100,7 @@ local function LoadSkin()
 			b.dragButton:StyleButton()
 			b.dragButton.hover:SetAllPoints(b.dragButton)
 			b.dragButton.ActiveTexture:SetAlpha(0)
-			
-			-- create a backdrop around the icon
+
 			b:CreateBackdrop("Default")
 			b.backdrop:Point("TOPLEFT", b.icon, -2, 2)
 			b.backdrop:Point("BOTTOMRIGHT", b.icon, 2, -2)
@@ -120,7 +115,7 @@ local function LoadSkin()
 			local speciesID, customName, level, xp, maxXp, displayID, name, icon, petType, creatureID, sourceText, description, isWild, canBattle, tradable = C_PetJournal.GetPetInfoByPetID(PetJournalPetCard.petID)
 			if canBattle then
 				local health, maxHealth, power, speed, rarity = C_PetJournal.GetPetStats(PetJournalPetCard.petID)
-				PetJournalPetCard.QualityFrame.quality:SetText(_G["BATTLE_PET_BREED_QUALITY"..rarity])
+				PetJournalPetCard.QualityFrame.quality:SetText(_G["BATTLE_PET_BREED_QUALITY" .. rarity])
 				local color = ITEM_QUALITY_COLORS[rarity-1]
 				PetJournalPetCard.QualityFrame.quality:SetVertexColor(color.r, color.g, color.b)
 				PetJournalPetCard.QualityFrame:Show()
@@ -137,21 +132,17 @@ local function LoadSkin()
 			for i = 1, #petButtons do
 				local index = petButtons[i].index
 				if index then
-					local b = _G["PetJournalListScrollFrameButton"..i]
-					local t = _G["PetJournalListScrollFrameButton"..i.."Name"]
+					local b = _G["PetJournalListScrollFrameButton" .. i]
+					local t = _G["PetJournalListScrollFrameButton" .. i .. "Name"]
 					local petID, speciesID, isOwned, customName, level, favorite, isRevoked, name, icon, petType, creatureID, sourceText, description, isWildPet, canBattle = C_PetJournal.GetPetInfoByIndex(index)
-					
+
 					if petID then
 						local health, maxHealth, attack, speed, rarity = C_PetJournal.GetPetStats(petID)
-						
-						if b.dragButton.ActiveTexture:IsShown() then
-							t:SetTextColor(1,1,0)
-						else
-							t:SetTextColor(1, 1, 1)
-						end
-						
+
+						if b.dragButton.ActiveTexture:IsShown() then t:SetTextColor(1, 1, 0) else t:SetTextColor(1, 1, 1) end
+
 						if rarity then
-							local color = ITEM_QUALITY_COLORS[rarity-1]
+							local color = ITEM_QUALITY_COLORS[rarity - 1]
 							b.backdrop:SetBackdropBorderColor(color.r, color.g, color.b)
 						else
 							b.backdrop:SetBackdropBorderColor(1, 1, 0)
@@ -173,43 +164,43 @@ local function LoadSkin()
 	PetJournalHealPetButton.texture:SetTexture([[Interface\Icons\spell_magic_polymorphrabbit]])
 	PetJournalHealPetButton.texture:SetTexCoord(.08, .88, .08, .88)
 	PetJournalLoadoutBorder:StripTextures()
-	for i=1, 3 do
-		_G["PetJournalLoadoutPet"..i.."HelpFrame"]:StripTextures()
-		_G["PetJournalLoadoutPet"..i]:StripTextures()
-		_G["PetJournalLoadoutPet"..i]:CreateBackdrop()
-		_G["PetJournalLoadoutPet"..i].backdrop:SetAllPoints()
-		_G["PetJournalLoadoutPet"..i].petTypeIcon:SetPoint("BOTTOMLEFT", 2, 2)
-		_G["PetJournalLoadoutPet"..i]:StyleButton()
+	for i = 1, 3 do
+		_G["PetJournalLoadoutPet" .. i .. "HelpFrame"]:StripTextures()
+		_G["PetJournalLoadoutPet" .. i]:StripTextures()
+		_G["PetJournalLoadoutPet" .. i]:CreateBackdrop()
+		_G["PetJournalLoadoutPet" .. i].backdrop:SetAllPoints()
+		_G["PetJournalLoadoutPet" .. i].petTypeIcon:SetPoint("BOTTOMLEFT", 2, 2)
+		_G["PetJournalLoadoutPet" .. i]:StyleButton()
 
-		_G["PetJournalLoadoutPet"..i].dragButton:StyleButton()
-		_G["PetJournalLoadoutPet"..i].dragButton:SetOutside(_G["PetJournalLoadoutPet"..i.."Icon"])
-		_G["PetJournalLoadoutPet"..i].dragButton:SetFrameLevel(_G["PetJournalLoadoutPet"..i].dragButton:GetFrameLevel() + 1)
-		_G["PetJournalLoadoutPet"..i]:SkinIconButton()
-		_G["PetJournalLoadoutPet"..i].backdrop:SetFrameLevel(_G["PetJournalLoadoutPet"..i].backdrop:GetFrameLevel() + 1)
+		_G["PetJournalLoadoutPet" .. i].dragButton:StyleButton()
+		_G["PetJournalLoadoutPet" .. i].dragButton:SetOutside(_G["PetJournalLoadoutPet" .. i .. "Icon"])
+		_G["PetJournalLoadoutPet" .. i].dragButton:SetFrameLevel(_G["PetJournalLoadoutPet" .. i].dragButton:GetFrameLevel() + 1)
+		_G["PetJournalLoadoutPet" .. i]:SkinIconButton()
+		_G["PetJournalLoadoutPet" .. i].backdrop:SetFrameLevel(_G["PetJournalLoadoutPet" .. i].backdrop:GetFrameLevel() + 1)
 
-		_G["PetJournalLoadoutPet"..i].setButton:StripTextures()
-		_G["PetJournalLoadoutPet"..i.."HealthFrame"].healthBar:StripTextures()
-		_G["PetJournalLoadoutPet"..i.."HealthFrame"].healthBar:CreateBackdrop("Default")
-		_G["PetJournalLoadoutPet"..i.."HealthFrame"].healthBar:SetStatusBarTexture(C["media"].normTex)
-		_G["PetJournalLoadoutPet"..i.."XPBar"]:StripTextures()
-		_G["PetJournalLoadoutPet"..i.."XPBar"]:CreateBackdrop("Default")
-		_G["PetJournalLoadoutPet"..i.."XPBar"]:SetStatusBarTexture(C["media"].normTex)
-		_G["PetJournalLoadoutPet"..i.."XPBar"]:SetFrameLevel(_G["PetJournalLoadoutPet"..i.."XPBar"]:GetFrameLevel() + 2)
+		_G["PetJournalLoadoutPet" .. i].setButton:StripTextures()
+		_G["PetJournalLoadoutPet" .. i .. "HealthFrame"].healthBar:StripTextures()
+		_G["PetJournalLoadoutPet" .. i .. "HealthFrame"].healthBar:CreateBackdrop("Default")
+		_G["PetJournalLoadoutPet" .. i .. "HealthFrame"].healthBar:SetStatusBarTexture(C["media"].normTex)
+		_G["PetJournalLoadoutPet" .. i .. "XPBar"]:StripTextures()
+		_G["PetJournalLoadoutPet" .. i .. "XPBar"]:CreateBackdrop("Default")
+		_G["PetJournalLoadoutPet" .. i .. "XPBar"]:SetStatusBarTexture(C["media"].normTex)
+		_G["PetJournalLoadoutPet" .. i .. "XPBar"]:SetFrameLevel(_G["PetJournalLoadoutPet" .. i .. "XPBar"]:GetFrameLevel() + 2)
 
 		for index = 1, 3 do
-			local f = _G["PetJournalLoadoutPet"..i.."Spell"..index]
+			local f = _G["PetJournalLoadoutPet" .. i .. "Spell" .. index]
 			f:SkinIconButton()
 			f.FlyoutArrow:SetTexture([[Interface\Buttons\ActionBarFlyoutButton]])
-			_G["PetJournalLoadoutPet"..i.."Spell"..index.."Icon"]:SetInside(f)
+			_G["PetJournalLoadoutPet" .. i .. "Spell" .. index .. "Icon"]:SetInside(f)
 		end
 	end
 
 	PetJournalSpellSelect:StripTextures()
-	for i=1, 2 do
+	for i = 1, 2 do
 		local btn = _G["PetJournalSpellSelectSpell"..i]
 		btn:SkinButton()
-		_G["PetJournalSpellSelectSpell"..i.."Icon"]:SetInside(btn)
-		_G["PetJournalSpellSelectSpell"..i.."Icon"]:SetDrawLayer("BORDER")
+		_G["PetJournalSpellSelectSpell" .. i .. "Icon"]:SetInside(btn)
+		_G["PetJournalSpellSelectSpell" .. i .. "Icon"]:SetDrawLayer("BORDER")
 	end
 
 	PetJournalPetCard:StripTextures()
@@ -220,7 +211,7 @@ local function LoadSkin()
 	PetJournalTutorialButton:SetPoint("TOPLEFT", PetJournalParent, 0, 0)
 
 	PetJournalPetCardPetInfo.levelBG:SetTexture(nil)
-	PetJournalPetCardPetInfoIcon:SetTexCoord(.1,.9,.1,.9)
+	PetJournalPetCardPetInfoIcon:SetTexCoord(.1, .9, .1, .9)
 	PetJournalPetCardPetInfo:CreateBackdrop()
 	PetJournalPetCardPetInfo.backdrop:SetOutside(PetJournalPetCardPetInfoIcon)
 	PetJournalPetCardPetInfoIcon:SetParent(PetJournalPetCardPetInfo.backdrop)
@@ -241,15 +232,15 @@ local function LoadSkin()
 	tt.BorderBottom:SetTexture(nil)
 	tt.BorderBottomRight:SetTexture(nil)
 	tt.BorderBottomLeft:SetTexture(nil)
-		tt:SetTemplate("Transparent")
+	tt:SetTemplate("Transparent")
 
-	for i=1, 6 do
-		local frame = _G["PetJournalPetCardSpell"..i]
+	for i = 1, 6 do
+		local frame = _G["PetJournalPetCardSpell" .. i]
 		frame:SetFrameLevel(frame:GetFrameLevel() + 2)
 		frame:DisableDrawLayer("BACKGROUND")
 		frame:CreateBackdrop("Default")
 		frame.backdrop:SetAllPoints()
-		frame.icon:SetTexCoord(.1,.9,.1,.9)
+		frame.icon:SetTexCoord(.1, .9, .1, .9)
 		frame.icon:SetInside(frame.backdrop)
 	end
 
@@ -260,6 +251,37 @@ local function LoadSkin()
 	PetJournalPetCardXPBar:CreateBackdrop("Default")
 	PetJournalPetCardXPBar:SetStatusBarTexture(C["media"].normTex)
 	PetJournalLoadoutBorder:Height(350)
+
+	--[[ toy box (tab 3) ]]--
+	ToyBoxProgressBar:StripTextures()
+	ToyBoxProgressBar:SetStatusBarTexture(C["media"].normTex)
+	ToyBoxProgressBar:CreateBackdrop()
+	ToyBoxSearchBox:StripTextures()
+	ToyBoxSearchBox:SkinEditBox()
+	ToyBoxFilterButton:SkinButton()
+	ToyBoxFilterButton:ClearAllPoints()
+	ToyBoxFilterButton:Point("LEFT", ToyBoxSearchBox, "RIGHT", 5, 0)
+
+	ToyBoxIconsFrame:StripTextures()
+
+	local function SkinToyButtons(self)
+		local num = C_ToyBox.GetNumTotalDisplayedToys()
+		for i = 1, num do
+			_G["ToySpellButton" .. i]:SkinButton()
+			_G["ToySpellButton" .. i .. "IconTexture"]:SetInside()
+			_G["ToySpellButton" .. i .. "IconTextureUncollected"]:SetInside()
+			_G["ToySpellButton" .. i .. "ToyName"]:SetTextColor(1, 1, 1, 1)
+			_G["ToySpellButton" .. i .. "SlotFrameCollected"]:Hide()
+			_G["ToySpellButton" .. i .. "SlotFrameUncollected"]:Hide()
+			_G["ToySpellButton" .. i .. "SlotFrameUncollectedInnerGlow"]:Hide()
+		end
+	end
+	hooksecurefunc("ToySpellButton_UpdateButton", SkinToyButtons)
+
+	ToyBoxPrevPageButton:SkinCloseButton()
+	ToyBoxNextPageButton:SkinCloseButton()
+	ToyBoxPrevPageButton.t:SetText("<")
+	ToyBoxNextPageButton.t:SetText(">")
 end
 
 if PetJournalParent then tinsert(D.SkinFuncs["DuffedUI"], LoadSkin) else D.SkinFuncs["Blizzard_PetJournal"] = LoadSkin end
@@ -275,14 +297,14 @@ local function LoadPetStableSkin()
 	PetStableNextPageButton:SkinNextPrevButton()
 	
 	for i = 1, 5 do
-		local b = _G["PetStableActivePet"..i]
+		local b = _G["PetStableActivePet" .. i]
 		b.Border:Hide()
 		b.Background:Hide()
 		b:SkinButton()
 	end
 	
 	for i = 1, 10 do
-		local b = _G["PetStableStabledPet"..i]
+		local b = _G["PetStableStabledPet" .. i]
 		b.Background:Hide()
 		b:SkinButton()
 		b:StyleButton()
