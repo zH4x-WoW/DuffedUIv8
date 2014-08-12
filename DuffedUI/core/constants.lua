@@ -18,5 +18,36 @@ D.level = UnitLevel("player")
 D.myrealm = GetRealmName()
 D.InfoLeftRightWidth = 370
 
+D.Credits = {
+	"Azilroka",
+	"Caith",
+	"Ishtara",
+	"Hungtar",
+	"Tulla",
+	"P3lim",
+	"Alza",
+	"Roth",
+	"Tekkub",
+	"Shestak",
+	"Caellian",
+	"Haleth",
+	"Nightcracker",
+	"Haste",
+	"Hydra",
+	"Elv",
+	"Tukz",
+}
+
+D.DuffedCredits = {
+	"Shaney",
+	"Juhawny",
+	"Rav",
+	"loki",
+	"Sinaris",
+	"Digawen",
+	"Zenglao",
+	"devel1988",
+}
+
 G.Chat = {}
 G.DataText = {}

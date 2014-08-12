@@ -17,34 +17,3 @@ UIHider:Hide()
 local PetBattleHider = CreateFrame("Frame", "DuffedUIPetBattleHider", UIParent, "SecureHandlerStateTemplate");
 PetBattleHider:SetAllPoints(UIParent)
 RegisterStateDriver(PetBattleHider, "visibility", "[petbattle] hide; show")
-
-D.Credits = {
-	"Azilroka",
-	"Caith",
-	"Ishtara",
-	"Hungtar",
-	"Tulla",
-	"P3lim",
-	"Alza",
-	"Roth",
-	"Tekkub",
-	"Shestak",
-	"Caellian",
-	"Haleth",
-	"Nightcracker",
-	"Haste",
-	"Hydra",
-	"Elv",
-	"Tukz",
-}
-
-D.DuffedCredits = {
-	"Shaney",
-	"Juhawny",
-	"Rav",
-	"loki",
-	"Sinaris",
-	"Digawen",
-	"Zenglao",
-	"devel1988",
-}

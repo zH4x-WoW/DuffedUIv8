@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-local function LoadPremadeSkin
+local function LoadPremadeSkin()
 
 end
 
