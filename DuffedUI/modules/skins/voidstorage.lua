@@ -1,8 +1,5 @@
-local D, C, L, G = unpack(select(2, ...))
-
-----------------------------------------------------------------------------------------
+local D, C, L = unpack(select(2, ...))
 --	Void Storage skin (written by shestak)
-----------------------------------------------------------------------------------------
 
 local function LoadSkin()
 	local StripAllTextures = {
@@ -19,16 +16,21 @@ local function LoadSkin()
 		_G[object]:StripTextures()
 	end
 
-	VoidStorageFrame.Page1:StripTextures()
-	VoidStorageFrame.Page1:SetTemplate()
-	VoidStorageFrame.Page1:StyleButton()
+	local page = {
+		"Page1",
+		"Page2",
+	}
+
+	for _, v in pairs(page) do
+		VoidStorageFrame[v]:StripTextures()
+		VoidStorageFrame[v]:SetTemplate()
+		VoidStorageFrame[v]:StyleButton()
+		VoidStorageFrame[v]:Point("LEFT", VoidStorageFrame, "RIGHT", 3, 150)
+	end
 	VoidStorageFrame.Page1.texture = VoidStorageFrame.Page1:CreateTexture(nil, "OVERLAY")
 	VoidStorageFrame.Page1.texture:SetTexture([[Interface\Icons\INV_Enchant_EssenceCosmicGreater]])
 	VoidStorageFrame.Page1.texture:SetTexCoord(unpack(D.IconCoord))
 	VoidStorageFrame.Page1.texture:SetInside()
-	VoidStorageFrame.Page2:StripTextures()
-	VoidStorageFrame.Page2:SetTemplate()
-	VoidStorageFrame.Page2:StyleButton()
 	VoidStorageFrame.Page2.texture = VoidStorageFrame.Page2:CreateTexture(nil, "OVERLAY")
 	VoidStorageFrame.Page2.texture:SetTexture([[Interface\Icons\INV_Enchant_EssenceArcaneLarge]])
 	VoidStorageFrame.Page2.texture:SetTexCoord(unpack(D.IconCoord))
@@ -50,13 +52,13 @@ local function LoadSkin()
 	VoidItemSearchBox.backdrop:Point("BOTTOMRIGHT", 4, 1)
 
 	for i = 1, 9 do
-		local button_d = _G["VoidStorageDepositButton"..i]
-		local button_w = _G["VoidStorageWithdrawButton"..i]
-		local icon_d = _G["VoidStorageDepositButton"..i.."IconTexture"]
-		local icon_w = _G["VoidStorageWithdrawButton"..i.."IconTexture"]
+		local button_d = _G["VoidStorageDepositButton" .. i]
+		local button_w = _G["VoidStorageWithdrawButton" .. i]
+		local icon_d = _G["VoidStorageDepositButton" .. i .. "IconTexture"]
+		local icon_w = _G["VoidStorageWithdrawButton" .. i .. "IconTexture"]
 
-		_G["VoidStorageDepositButton"..i.."Bg"]:Hide()
-		_G["VoidStorageWithdrawButton"..i.."Bg"]:Hide()
+		_G["VoidStorageDepositButton" .. i .. "Bg"]:Hide()
+		_G["VoidStorageWithdrawButton" .. i .. "Bg"]:Hide()
 
 		button_d:StyleButton()
 		button_d:SetTemplate()
@@ -76,15 +78,15 @@ local function LoadSkin()
 	end
 
 	for i = 1, 80 do
-		local button = _G["VoidStorageStorageButton"..i]
-		local icon = _G["VoidStorageStorageButton"..i.."IconTexture"]
+		local button = _G["VoidStorageStorageButton" .. i]
+		local icon = _G["VoidStorageStorageButton" .. i .. "IconTexture"]
 
 		_G["VoidStorageStorageButton"..i.."Bg"]:Hide()
 
 		button:StyleButton()
 		button:SetTemplate()
 
-		icon:SetTexCoord(unpack(D.IconCoord))
+		icon:SetTexCoord(.1, .9, .1, .9)
 		icon:ClearAllPoints()
 		icon:Point("TOPLEFT", 2, -2)
 		icon:Point("BOTTOMRIGHT", -2, 2)
