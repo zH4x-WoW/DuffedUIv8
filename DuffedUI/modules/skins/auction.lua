@@ -4,18 +4,19 @@ local function LoadSkin()
 	AuctionFrameCloseButton:SkinCloseButton()
 	AuctionFrame:StripTextures(true)
 	AuctionFrame:SetTemplate("Transparent")
-	
+
 	BrowseFilterScrollFrame:StripTextures()
 	BrowseScrollFrame:StripTextures()
 	AuctionsScrollFrame:StripTextures()
 	BidScrollFrame:StripTextures()
-	
+
 	BrowseDropDown:SkinDropDownBox()
 	PriceDropDown:SkinDropDownBox()
 	DurationDropDown:SkinDropDownBox()
-	
+
 	IsUsableCheckButton:SkinCheckBox()
 	ShowOnPlayerCheckButton:SkinCheckBox()
+	ExactMatchCheckButton:SkinCheckBox()
 
 	-- Dress Frame
 	do
@@ -24,7 +25,7 @@ local function LoadSkin()
 		local close = _G["SideDressUpModelCloseButton"]
 		local left = _G["SideDressUpFrameModelRotateLeftButton"]
 		local right = _G["SideDressUpFrameModelRotateRightButton"]
-		
+	
 		frame:HookScript("OnShow", function(self) self:StripTextures() frame:SetTemplate("Default") end)
 		frame:Point("TOPLEFT", AuctionFrame, "TOPRIGHT", 16, 0)
 		reset:SkinButton()
@@ -36,7 +37,7 @@ local function LoadSkin()
 			right:Point("TOPLEFT", left, "TOPRIGHT", 4, 0)
 		end
 	end
-	
+
 	--Progress Frame
 	AuctionProgressFrame:StripTextures()
 	AuctionProgressFrame:SetTemplate("Default")
@@ -46,29 +47,28 @@ local function LoadSkin()
 	AuctionProgressFrameCancelButton:GetNormalTexture():ClearAllPoints()
 	AuctionProgressFrameCancelButton:GetNormalTexture():Point("TOPLEFT", 2, -2)
 	AuctionProgressFrameCancelButton:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
-	AuctionProgressFrameCancelButton:GetNormalTexture():SetTexCoord(0.67, 0.37, 0.61, 0.26)
+	AuctionProgressFrameCancelButton:GetNormalTexture():SetTexCoord(.67, .37, .61, .26)
 	AuctionProgressFrameCancelButton:Size(28, 28)
 	AuctionProgressFrameCancelButton:Point("LEFT", AuctionProgressBar, "RIGHT", 8, 0)
-	
-	AuctionProgressBarIcon:SetTexCoord(0.67, 0.37, 0.61, 0.26)
-	
+	AuctionProgressBarIcon:SetTexCoord(.67, .37, .61, .26)
+
 	local backdrop = CreateFrame("Frame", nil, AuctionProgressBarIcon:GetParent())
 	backdrop:Point("TOPLEFT", AuctionProgressBarIcon, "TOPLEFT", -2, 2)
 	backdrop:Point("BOTTOMRIGHT", AuctionProgressBarIcon, "BOTTOMRIGHT", 2, -2)
 	backdrop:SetTemplate("Default")
 	AuctionProgressBarIcon:SetParent(backdrop)
-	
+
 	AuctionProgressBarText:ClearAllPoints()
 	AuctionProgressBarText:SetPoint("CENTER")
-	
+
 	AuctionProgressBar:StripTextures()
 	AuctionProgressBar:CreateBackdrop("Default")
 	AuctionProgressBar:SetStatusBarTexture(C["media"].normTex)
 	AuctionProgressBar:SetStatusBarColor(1, 1, 0)
-	
+
 	BrowseNextPageButton:SkinNextPrevButton()
 	BrowsePrevPageButton:SkinNextPrevButton()
-	
+
 	local buttons = {
 		"BrowseBidButton",
 		"BidBidButton",
@@ -84,24 +84,22 @@ local function LoadSkin()
 		"AuctionsStackSizeMaxButton",
 		"AuctionsNumStacksMaxButton",
 	}
-	
-	for _, button in pairs(buttons) do
-		_G[button]:SkinButton()
-	end
-	
+
+	for _, button in pairs(buttons) do _G[button]:SkinButton() end
+
 	--Fix Button Positions
 	AuctionsCloseButton:Point("BOTTOMRIGHT", AuctionFrameAuctions, "BOTTOMRIGHT", 66, 10)
 	AuctionsCancelAuctionButton:Point("RIGHT", AuctionsCloseButton, "LEFT", -4, 0)
 	BidBuyoutButton:Point("RIGHT", BidCloseButton, "LEFT", -4, 0)
 	BidBidButton:Point("RIGHT", BidBuyoutButton, "LEFT", -4, 0)
 	BrowseBuyoutButton:Point("RIGHT", BrowseCloseButton, "LEFT", -4, 0)
-	BrowseBidButton:Point("RIGHT", BrowseBuyoutButton, "LEFT", -4, 0)		
+	BrowseBidButton:Point("RIGHT", BrowseBuyoutButton, "LEFT", -4, 0)
 	AuctionsItemButton:StripTextures()
 	AuctionsItemButton:StyleButton()
 	AuctionsItemButton:SetTemplate("Default", true)
-	BrowseResetButton:Point("TOPLEFT", AuctionFrameBrowse, "TOPLEFT", 81, -74)
+	BrowseResetButton:Point("TOPRIGHT", AuctionFrameBrowse, "TOPRIGHT", 25, -74)
 	BrowseSearchButton:Point("TOPRIGHT", AuctionFrameBrowse, "TOPRIGHT", 25, -34)
-	
+
 	AuctionsItemButton:SetScript("OnUpdate", function()
 		if AuctionsItemButton:GetNormalTexture() then
 			AuctionsItemButton:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
@@ -110,7 +108,7 @@ local function LoadSkin()
 			AuctionsItemButton:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
 		end
 	end)
-	
+
 	local sorttabs = {
 		"BrowseQualitySort",
 		"BrowseLevelSort",
@@ -128,26 +126,26 @@ local function LoadSkin()
 		"AuctionsHighBidderSort",
 		"AuctionsBidSort",
 	}
-	
+
 	for _, sorttab in pairs(sorttabs) do
-		_G[sorttab.."Left"]:Kill()
-		_G[sorttab.."Middle"]:Kill()
-		_G[sorttab.."Right"]:Kill()
+		_G[sorttab .. "Left"]:Kill()
+		_G[sorttab .. "Middle"]:Kill()
+		_G[sorttab .. "Right"]:Kill()
 	end
 
 	AuctionFrameTab1:ClearAllPoints()
 	AuctionFrameTab1:Point("TOPLEFT", AuctionFrame, "BOTTOMLEFT", -5, 2)
-	
-	for i=1, AuctionFrame.numTabs do
-		_G["AuctionFrameTab"..i]:SkinTab()
+
+	for i = 1, AuctionFrame.numTabs do
+		_G["AuctionFrameTab" .. i]:SkinTab()
 	end
-	
-	for i=1, NUM_FILTERS_TO_DISPLAY do
-		local tab = _G["AuctionFilterButton"..i]
+
+	for i = 1, NUM_FILTERS_TO_DISPLAY do
+		local tab = _G["AuctionFilterButton" .. i]
 		tab:StripTextures()
 		tab:StyleButton()
 	end
-	
+
 	local editboxs = {
 		"BrowseName",
 		"BrowseMinLevel",
@@ -165,10 +163,11 @@ local function LoadSkin()
 		"StartPriceCopper",
 		"BuyoutPriceGold",
 		"BuyoutPriceSilver",
-		"BuyoutPriceCopper"			
+		"BuyoutPriceCopper"
 	}
-	
+
 	for _, editbox in pairs(editboxs) do
+		_G[editbox]:StripTextures()
 		_G[editbox]:SkinEditBox()
 		_G[editbox]:SetTextInsets(1, 1, -1, 1)
 	end
