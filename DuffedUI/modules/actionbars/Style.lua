@@ -171,33 +171,33 @@ function D.StylePet()
 	end
 end
 
---[[function D.KeybindText(self)
-	local button = self:GetName()
-	local hotkey = _G[button .. "HotKey"]
-	local text = hotkey:GetText()
+--[[function D.FixKeybindText(button)
+	local hotkey = _G[button:GetName()..'HotKey'];
+	local text = hotkey:GetText();
 	
 	if text then
-		text = string.gsub(text, "(s-%)", "S")
-		text = string.gsub(text, "(a-%)", "A")
-		text = string.gsub(text, "(c-%)", "C")
-		text = string.gsub(text, "(Mouse Button )", "M")
-		text = string.gsub(text, "(Middle Mouse)", "M3")
-		text = string.gsub(text, "(Mouse Wheel Up)", "MU")
-		text = string.gsub(text, "(Mouse Wheel Down)", "MD")
-		text = string.gsub(text, "(Maustaste )", "M") 
-		text = string.gsub(text, "(Mittlere Maustaste)", "M3") 
-		text = string.gsub(text, "(Mausrad nach oben)", "MU") 
-		text = string.gsub(text, "(Mausrad nach unten)", "MD")
-		text = string.gsub(text, "(Num Pad )", "N")
-		text = string.gsub(text, "(Page Up)", "PU")
-		text = string.gsub(text, "(Page Down)", "PD")
-		text = string.gsub(text, "(Spacebar)", "SpB")
-		text = string.gsub(text, "(Insert)", "Ins")
-		text = string.gsub(text, "(Home)", "Hm")
-		text = string.gsub(text, "(Delete)", "Del")
+		text = gsub(text, 'SHIFT%-', "S");
+		text = gsub(text, 'ALT%-', "A");
+		text = gsub(text, 'CTRL%-', "C");
+		text = gsub(text, 'BUTTON', "M");
+		text = gsub(text, 'MOUSEWHEELUP', "MU");
+		text = gsub(text, 'MOUSEWHEELDOWN', "MD");
+		text = gsub(text, 'NUMPAD', "N");
+		text = gsub(text, 'PAGEUP', "PU");
+		text = gsub(text, 'PAGEDOWN', "PD");
+		text = gsub(text, 'SPACE', "SpB");
+		text = gsub(text, 'INSERT', "Ins");
+		text = gsub(text, 'HOME', "H");
+		text = gsub(text, 'DELETE', "Del");
+		text = gsub(text, 'NMULTIPLY', "*");
+		text = gsub(text, 'NMINUS', "N-");
+		text = gsub(text, 'NPLUS', "N+");
+		
+		hotkey:SetText(text);
 	end
 	
-	hotkey:SetText(text)
+	hotkey:ClearAllPoints()
+	hotkey:Point("TOPRIGHT", 0, -3);  
 end]]
 
 local buttons = 0
@@ -216,18 +216,21 @@ end
 SpellFlyout:HookScript("OnShow", SetupFlyoutButton)
 
  
---Hide the Mouseover texture and attempt to find the ammount of buttons to be skinned
-function D.StyleActionBarFlyout(self)
-	if not self.FlyoutArrow then return end
-	
-	self.FlyoutBorder:SetAlpha(0)
-	self.FlyoutBorderShadow:SetAlpha(0)
-	
+--written by Elv
+function D.StyleActionBarFlyout(button)
+	if(not button.FlyoutArrow or not button.FlyoutArrow:IsShown()) then return end
+
+	if not button.FlyoutBorder then return end
+	local combat = InCombatLockdown()
+
+	button.FlyoutBorder:SetAlpha(0)
+	button.FlyoutBorderShadow:SetAlpha(0)
+
 	SpellFlyoutHorizontalBackground:SetAlpha(0)
 	SpellFlyoutVerticalBackground:SetAlpha(0)
 	SpellFlyoutBackgroundEnd:SetAlpha(0)
-	
-	for i = 1, GetNumFlyouts() do
+
+	for i=1, GetNumFlyouts() do
 		local x = GetFlyoutID(i)
 		local _, _, numSlots, isKnown = GetFlyoutInfo(x)
 		if isKnown then
@@ -235,30 +238,43 @@ function D.StyleActionBarFlyout(self)
 			break
 		end
 	end
-	
+
 	--Change arrow direction depending on what bar the button is on
 	local arrowDistance
-	if ((SpellFlyout and SpellFlyout:IsShown() and SpellFlyout:GetParent() == self) or GetMouseFocus() == self) then
+	if ((SpellFlyout:IsShown() and SpellFlyout:GetParent() == button) or GetMouseFocus() == button) then
 		arrowDistance = 5
 	else
 		arrowDistance = 2
 	end
-	
-	if self:GetParent():GetParent():GetName() == "SpellBookSpellIconsFrame" then return end
-	
-	if self:GetAttribute("flyoutDirection") ~= nil then
-		local point, _, _, _, _ = self:GetParent():GetParent():GetPoint()
-		
-		if strfind(point, "BOTTOM") then
-			self.FlyoutArrow:ClearAllPoints()
-			self.FlyoutArrow:SetPoint("TOP", self, "TOP", 0, arrowDistance)
-			SetClampedTextureRotation(self.FlyoutArrow, 0)
-			if not InCombatLockdown() then self:SetAttribute("flyoutDirection", "UP") end
-		else
-			self.FlyoutArrow:ClearAllPoints()
-			self.FlyoutArrow:SetPoint("LEFT", self, "LEFT", -arrowDistance, 0)
-			SetClampedTextureRotation(self.FlyoutArrow, 270)
-			if not InCombatLockdown() then self:SetAttribute("flyoutDirection", "LEFT") end
+
+	if button:GetParent() and button:GetParent():GetParent() and button:GetParent():GetParent():GetName() and button:GetParent():GetParent():GetName() == "SpellBookSpellIconsFrame" then 
+		return 
+	end
+
+	if button:GetParent() then
+		local point, _, _, _, _ = button:GetParent():GetParent():GetPoint()
+		if point == "UNKNOWN" then return end
+
+		if strfind(point, "TOP") then
+			button.FlyoutArrow:ClearAllPoints()
+			button.FlyoutArrow:SetPoint("BOTTOM", button, "BOTTOM", 0, -arrowDistance)
+			SetClampedTextureRotation(button.FlyoutArrow, 180)
+			if not combat then button:SetAttribute("flyoutDirection", "DOWN") end
+		elseif point == "RIGHT" then
+			button.FlyoutArrow:ClearAllPoints()
+			button.FlyoutArrow:SetPoint("LEFT", button, "LEFT", -arrowDistance, 0)
+			SetClampedTextureRotation(button.FlyoutArrow, 270)
+			if not combat then button:SetAttribute("flyoutDirection", "LEFT") end
+		elseif point == "LEFT" then
+			button.FlyoutArrow:ClearAllPoints()
+			button.FlyoutArrow:SetPoint("RIGHT", button, "RIGHT", arrowDistance, 0)
+			SetClampedTextureRotation(button.FlyoutArrow, 90)
+			if not combat then button:SetAttribute("flyoutDirection", "RIGHT") end
+		elseif point == "CENTER" or strfind(point, "BOTTOM") then
+			button.FlyoutArrow:ClearAllPoints()
+			button.FlyoutArrow:SetPoint("TOP", button, "TOP", 0, arrowDistance)
+			SetClampedTextureRotation(button.FlyoutArrow, 0)
+			if not combat then button:SetAttribute("flyoutDirection", "UP") end
 		end
 	end
 end
@@ -354,5 +370,5 @@ end
 hooksecurefunc("ActionButton_ShowOverlayGlow", D.ShowHighlightActionButton)
 hooksecurefunc("ActionButton_HideOverlayGlow", D.HideHighlightActionButton)
 hooksecurefunc("ActionButton_Update", D.StyleActionBarButton)
---hooksecurefunc("ActionButton_UpdateHotkeys", D.KeybindText)
---hooksecurefunc("ActionButton_UpdateFlyout", D.StyleActionBarFlyout)
+--hooksecurefunc("ActionButton_UpdateHotkeys", D.FixKeybindText)
+hooksecurefunc("ActionButton_UpdateFlyout", D.StyleActionBarFlyout)
