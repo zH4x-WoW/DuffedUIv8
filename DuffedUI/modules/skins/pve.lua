@@ -321,15 +321,6 @@ local function LoadSkin()
 	ScenarioQueueFrameRandomScrollFrameChildFrameBonusRepFrame.ChooseButton:SkinButton()
 	LFDQueueFrameRandomScrollFrameScrollBar:StripTextures()
 	LFDQueueFrameRandomScrollFrameScrollBar:SkinScrollBar()
-
-	--[[FlexRaidFrame:StripTextures()
-	FlexRaidFrameStartRaidButton:StripTextures()
-	FlexRaidFrameStartRaidButton:SkinButton()
-	FlexRaidFrameBottomInset:StripTextures()
-	FlexRaidFrameScrollFrame:StripTextures()
-	FlexRaidFrameScrollFrameScrollBar:StripTextures()
-	FlexRaidFrameScrollFrameScrollBar:SkinScrollBar()
-	FlexRaidFrameSelectionDropDown:SkinDropDownBox()]]--
 end
 
 tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)

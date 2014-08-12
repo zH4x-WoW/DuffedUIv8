@@ -323,10 +323,7 @@ local function StripTextures(object, kill)
 	end		
 end
 
------------------------------------------------------------
 -- Skinning
------------------------------------------------------------
-
 local function SetModifiedBackdrop(self)
 	local color = RAID_CLASS_COLORS[D.Class]
 	self:SetBackdropColor(color.r * .15, color.g * .15, color.b * .15)
@@ -361,7 +358,6 @@ local function SkinButton(f, strip)
 	f:HookScript("OnEnter", SetModifiedBackdrop)
 	f:HookScript("OnLeave", SetOriginalBackdrop)
 end
-D.SkinButton = SkinButton -- for t14 and less addons/plugins
 
 local function SkinIconButton(b, shrinkIcon)
 	if b.isSkinned then return end
@@ -379,9 +375,6 @@ local function SkinIconButton(b, shrinkIcon)
 
 	if icon then
 		icon:SetTexCoord(.08, .88, .08, .88)
-
-		-- create a backdrop around the icon
-
 		if shrinkIcon then
 			b.backdrop:SetAllPoints()
 			icon:SetInside(b)
@@ -453,7 +446,6 @@ local function SkinScrollBar(frame)
 		end	
 	end	
 end
-D.SkinScrollBar = SkinScrollBar -- for t14 and less addons/plugins
 
 --Tab Regions
 local tabs = {
@@ -486,7 +478,6 @@ local function SkinTab(tab)
 	Point(tab.backdrop, "TOPLEFT", 10, -3)
 	Point(tab.backdrop, "BOTTOMRIGHT", -10, 3)				
 end
-D.SkinTab = SkinTab -- for t14 and less addons/plugins
 
 local function SkinNextPrevButton(btn, horizonal)
 	SetTemplate(btn, "Default")
@@ -518,7 +509,6 @@ local function SkinNextPrevButton(btn, horizonal)
 	btn:GetHighlightTexture():SetTexture(1, 1, 1, 0.3)
 	btn:GetHighlightTexture():SetAllPoints(btn:GetNormalTexture())
 end
-D.SkinNextPrevButton = SkinNextPrevButton -- for t14 and less addons/plugins
 
 local function SkinRotateButton(btn)
 	SetTemplate(btn, "Default")
@@ -535,7 +525,6 @@ local function SkinRotateButton(btn)
 	btn:GetPushedTexture():SetAllPoints(btn:GetNormalTexture())	
 	btn:GetHighlightTexture():SetAllPoints(btn:GetNormalTexture())
 end
-D.SkinRotateButton = SkinRotateButton -- for t14 and less addons/plugins
 
 local function SkinEditBox(frame)
 	if _G[frame:GetName().."Left"] then Kill(_G[frame:GetName().."Left"]) end
@@ -548,7 +537,6 @@ local function SkinEditBox(frame)
 		Point(frame.backdrop, "BOTTOMRIGHT", -12, -2)
 	end
 end
-D.SkinEditBox = SkinEditBox -- for t14 and less addons/plugins
 
 local function SkinDropDownBox(frame, width)
 	local button = _G[frame:GetName().."Button"]
@@ -570,7 +558,25 @@ local function SkinDropDownBox(frame, width)
 	Point(frame.backdrop, "TOPLEFT", 20, -2)
 	Point(frame.backdrop, "BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
 end
-D.SkinDropDownBox = SkinDropDownBox -- for t14 and less addons/plugins
+
+local function SkinDropDownBoxLong(frame, width)
+	local button = _G[frame:GetName().."Button"]
+	
+	StripTextures(frame)
+	
+	_G[frame:GetName().."Text"]:ClearAllPoints()
+	Point(_G[frame:GetName().."Text"], "RIGHT", button, "LEFT", -2, 0)
+
+	button:ClearAllPoints()
+	Point(button, "RIGHT", frame, "RIGHT", -10, 3)
+	button.SetPoint = D.dummy
+	
+	SkinNextPrevButton(button, true)
+	
+	CreateBackdrop(frame, "Default")
+	Point(frame.backdrop, "TOPLEFT", 20, -2)
+	Point(frame.backdrop, "BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
+end
 
 local function SkinCheckBox(frame)
 	StripTextures(frame)
@@ -600,9 +606,8 @@ local function SkinCheckBox(frame)
 	frame.SetPushedTexture = D.dummy
 	frame.SetHighlightTexture = D.dummy
 end
-D.SkinCheckBox = SkinCheckBox -- for t14 and less addons/plugins
 
-local function SkinCloseButton(f, point)	
+local function SkinCloseButton(f, point)
 	if point then
 		Point(f, "TOPRIGHT", point, "TOPRIGHT", 2, 2)
 	end
@@ -617,7 +622,6 @@ local function SkinCloseButton(f, point)
 	f.t:SetPoint("CENTER", 0, 1)
 	f.t:SetText("x")
 end
-D.SkinCloseButton = SkinCloseButton -- for t14 and less addons/plugins
 
 local function SkinSlideBar(frame, height, movetext)
 	frame:SetTemplate( "Default" )
@@ -643,16 +647,8 @@ local function SkinSlideBar(frame, height, movetext)
 		_G[frame:GetName()]:GetThumbTexture():Size(height + 4, height)
 	end
 end
-D.SkinSlideBar = SkinSlideBar -- for t14 and less addons/plugins
 
----------------------------------------------------
--- DuffedUI API STOP HERE
----------------------------------------------------
-
----------------------------------------------------
--- MERGE DuffedUI API WITH WOW API
----------------------------------------------------
-
+-- merge api
 local function addapi(object)
 	local mt = getmetatable(object).__index
 	if not object.Size then mt.Size = Size end
@@ -662,7 +658,6 @@ local function addapi(object)
 	if not object.SetTemplate then mt.SetTemplate = SetTemplate end
 	if not object.CreateBackdrop then mt.CreateBackdrop = CreateBackdrop end
 	if not object.StripTextures then mt.StripTextures = StripTextures end
-	if not object.CreateShadow then mt.CreateShadow = CreateShadow end
 	if not object.Kill then mt.Kill = Kill end
 	if not object.StyleButton then mt.StyleButton = StyleButton end
 	if not object.Width then mt.Width = Width end
@@ -677,6 +672,7 @@ local function addapi(object)
 	if not object.SkinRotateButton then mt.SkinRotateButton = SkinRotateButton end
 	if not object.SkinEditBox then mt.SkinEditBox = SkinEditBox end
 	if not object.SkinDropDownBox then mt.SkinDropDownBox = SkinDropDownBox end
+	if not object.SkinDropDownBoxLong then mt.SkinDropDownBoxLong = SkinDropDownBoxLong end
 	if not object.SkinCheckBox then mt.SkinCheckBox = SkinCheckBox end
 	if not object.SkinCloseButton then mt.SkinCloseButton = SkinCloseButton end
 	if not object.SkinSlideBar then mt.SkinSlideBar = SkinSlideBar end
