@@ -445,17 +445,15 @@ local SetCastTicks = function(frame, numTicks)
 	end
 end
 
-local CustomCastTime = function(self, duration)
+D.CustomCastTime = function(self, duration)
 	self.Time:SetText(("%.1f / %.1f"):format(self.channeling and duration or self.max - duration, self.max))
 end
 
-local CustomCastDelayText = function(self, duration)
+D.CustomCastDelayText = function(self, duration)
 	self.Time:SetText(("%.1f |cffaf5050%s %.1f|r"):format(self.channeling and duration or self.max - duration, self.channeling and "- " or "+", self.delay))
 end
 
 D.CastBar = function(self, unit, name, rank, castid)
-	CustomCastTime(self, duration)
-	CustomCastDelayText(self, duration)
 	CheckInterrupt(self, unit)
 
 	local color
