@@ -19,6 +19,21 @@ local function LoadSkin()
 		_G[object]:StripTextures()
 	end
 
+	VoidStorageFrame.Page1:StripTextures()
+	VoidStorageFrame.Page1:SetTemplate()
+	VoidStorageFrame.Page1:StyleButton()
+	VoidStorageFrame.Page1.texture = VoidStorageFrame.Page1:CreateTexture(nil, "OVERLAY")
+	VoidStorageFrame.Page1.texture:SetTexture([[Interface\Icons\INV_Enchant_EssenceCosmicGreater]])
+	VoidStorageFrame.Page1.texture:SetTexCoord(unpack(D.IconCoord))
+	VoidStorageFrame.Page1.texture:SetInside()
+	VoidStorageFrame.Page2:StripTextures()
+	VoidStorageFrame.Page2:SetTemplate()
+	VoidStorageFrame.Page2:StyleButton()
+	VoidStorageFrame.Page2.texture = VoidStorageFrame.Page2:CreateTexture(nil, "OVERLAY")
+	VoidStorageFrame.Page2.texture:SetTexture([[Interface\Icons\INV_Enchant_EssenceArcaneLarge]])
+	VoidStorageFrame.Page2.texture:SetTexCoord(unpack(D.IconCoord))
+	VoidStorageFrame.Page2.texture:SetInside()
+
 	VoidStorageFrame:SetTemplate("Transparent")
 	VoidStoragePurchaseFrame:SetTemplate("Transparent")
 	VoidStorageFrameMarbleBg:Kill()
@@ -49,12 +64,12 @@ local function LoadSkin()
 		button_w:StyleButton()
 		button_w:SetTemplate()
 
-		icon_d:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		icon_d:SetTexCoord(.1, .9, .1, .9)
 		icon_d:ClearAllPoints()
 		icon_d:Point("TOPLEFT", 2, -2)
 		icon_d:Point("BOTTOMRIGHT", -2, 2)
 
-		icon_w:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		icon_w:SetTexCoord(.1, .9, .1, .9)
 		icon_w:ClearAllPoints()
 		icon_w:Point("TOPLEFT", 2, -2)
 		icon_w:Point("BOTTOMRIGHT", -2, 2)
@@ -69,12 +84,12 @@ local function LoadSkin()
 		button:StyleButton()
 		button:SetTemplate()
 
-		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		icon:SetTexCoord(unpack(D.IconCoord))
 		icon:ClearAllPoints()
 		icon:Point("TOPLEFT", 2, -2)
 		icon:Point("BOTTOMRIGHT", -2, 2)
 	end
-	
+
 	-- dress
 	SideDressUpFrame:StripTextures(true)
 	SideDressUpFrame:CreateBackdrop()
