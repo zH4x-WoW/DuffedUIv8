@@ -317,7 +317,7 @@ local BorderColor = function(self)
 end
 
 local SetStyle = function(self)
-	self:SetTemplate("Default")
+	self:SetTemplate("Transparent")
 	BorderColor(self)
 end
 
