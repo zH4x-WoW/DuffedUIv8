@@ -1,4 +1,4 @@
---[[local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	MailFrame:StripTextures(true)
@@ -101,7 +101,7 @@ local function LoadSkin()
 	OpenMailLetterButton:StripTextures()
 	OpenMailLetterButton:SetTemplate("Default", true)
 	OpenMailLetterButton:StyleButton()
-	OpenMailLetterButtonIconTexture:SetTexCoord(.08, .92, .08, .92)						
+	OpenMailLetterButtonIconTexture:SetTexCoord(.08, .92, .08, .92)
 	OpenMailLetterButtonIconTexture:ClearAllPoints()
 	OpenMailLetterButtonIconTexture:Point("TOPLEFT", 2, -2)
 	OpenMailLetterButtonIconTexture:Point("BOTTOMRIGHT", -2, 2)
@@ -109,12 +109,12 @@ local function LoadSkin()
 	OpenMailMoneyButton:StripTextures()
 	OpenMailMoneyButton:SetTemplate("Default", true)
 	OpenMailMoneyButton:StyleButton()
-	OpenMailMoneyButtonIconTexture:SetTexCoord(.08, .92, .08, .92)						
+	OpenMailMoneyButtonIconTexture:SetTexCoord(.08, .92, .08, .92)
 	OpenMailMoneyButtonIconTexture:ClearAllPoints()
 	OpenMailMoneyButtonIconTexture:Point("TOPLEFT", 2, -2)
 	OpenMailMoneyButtonIconTexture:Point("BOTTOMRIGHT", -2, 2)
 
-	for i = 1, ATTACHMENTS_MAX_SEND do				
+	for i = 1, ATTACHMENTS_MAX_SEND do
 		local b = _G["OpenMailAttachmentButton"..i]
 		b:StripTextures()
 		b:SetTemplate("Default", true)
@@ -126,7 +126,7 @@ local function LoadSkin()
 			t:ClearAllPoints()
 			t:Point("TOPLEFT", 2, -2)
 			t:Point("BOTTOMRIGHT", -2, 2)
-		end				
+		end
 	end
 
 	OpenMailReplyButton:Point("RIGHT", OpenMailDeleteButton, "LEFT", -2, 0)
@@ -134,4 +134,4 @@ local function LoadSkin()
 	SendMailMailButton:Point("RIGHT", SendMailCancelButton, "LEFT", -2, 0)
 end
 
-tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)]]--
+tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
