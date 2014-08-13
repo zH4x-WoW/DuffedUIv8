@@ -1511,5 +1511,4 @@ if C["raid"].mainassist == true then
 		assist:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	end
 end
-
 local party = oUF:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)

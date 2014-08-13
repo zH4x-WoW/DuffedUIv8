@@ -485,14 +485,6 @@ D.CastBar = function(self, unit, name, rank, castid)
 	end
 end
 
-D.UpdateShards = function(self, event, unit, powerType)
-	if self.unit ~= unit or (powerType and powerType ~= 'SOUL_SHARDS') then return end
-	local num = UnitPower(unit, SPELL_POWER_SOUL_SHARDS)
-	for i = 1, SHARD_BAR_NUM_SHARDS do
-		if i <= num then self.SoulShards[i]:SetAlpha(1) else self.SoulShards[i]:SetAlpha(.2) end
-	end
-end
-
 D.EclipseDirection = function(self)
 	if GetEclipseDirection() == "sun" then
 		self.Text:SetText("|cffE5994C" .. L.unitframes_ouf_starfirespell .. "|r")

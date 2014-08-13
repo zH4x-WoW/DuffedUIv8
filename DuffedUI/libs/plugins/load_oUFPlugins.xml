@@ -4,7 +4,6 @@
 	<Script file="oUF_DebuffHighlight.lua" />
 	<Script file="oUF_Fader.lua" />
 	<Script file="movable.lua" />
-	<Script file="oUF_Reputation.lua" />
 	<Script file="oUF_Smooth.lua" />
 	<Script file="oUF_TotemBar.lua" />
 	<Script file="oUF_Trinkets.lua" />
