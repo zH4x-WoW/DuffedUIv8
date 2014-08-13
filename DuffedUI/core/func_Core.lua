@@ -41,7 +41,7 @@ function D.HyperlinkMouseover()
 end
 D.HyperlinkMouseover()
 
-D.CommaValue = function (amount)
+D.CommaValue = function(amount)
 	local formatted = amount
 	while true do  
 		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
@@ -270,17 +270,6 @@ D.ShortValue = function(v)
 		return v
 	end
 end
-
---[[D.CheckRole = function()
-	local role = ""
-	local tree = GetSpecialization()
-	
-	if tree then
-		role = select(6, GetSpecializationInfo(tree))
-	end
-
-	return role
-end]]
 
 local function CheckRole(self, event, unit)
 	local tree = GetSpecialization()

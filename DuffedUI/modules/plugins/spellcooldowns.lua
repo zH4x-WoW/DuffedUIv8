@@ -7,7 +7,7 @@ local fontStyle = "THINOUTLINE"
 local texture = C["media"].normTex
 local size = D.Scale(C["scd"].size)
 local spacing = D.Scale(C["scd"].spacing)
-local anchor = {"BOTTOM", UIParent, "BOTTOM", 0, D.Scale(350)}
+local anchor = {"BOTTOM", UIParent, "BOTTOM", 0, D.Scale(358)}
 local color = {1, 1, 0, 1}
 local fade = C["scd"].fade
 local direction = C["scd"].direction
@@ -495,7 +495,7 @@ local onUpdate
 local scfa = CreateFrame("Frame", "SpellCooldownsFrameAnchor", UIParent)
 scfa:SetTemplate("Default")
 scfa:Size(120, 17)
-scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 350)
+scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 358)
 scfa:SetClampedToScreen(true)
 scfa:SetMovable(true)
 scfa:SetBackdropColor(0, 0, 0)

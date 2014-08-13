@@ -255,40 +255,6 @@ local function Shared(self, unit)
 				self.DruidManaText = DruidManaText
 			end
 
-			if (D.Class == "WARRIOR" or D.Class == "DEATHKNIGHT" or D.Class == "MONK" or D.Class == "PRIEST") and C["unitframes"].showstatuebar then
-				local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
-				bar:SetWidth(5)
-				bar:SetHeight(29)
-				bar:Point("LEFT", power, "RIGHT", 7, 5)
-				bar:SetStatusBarTexture(C["media"].normTex)
-				bar:SetOrientation("VERTICAL")
-				bar.bg = bar:CreateTexture(nil, 'ARTWORK')
-				bar.background = CreateFrame("Frame", "DuffedUIStatue", bar)
-				bar.background:SetAllPoints()
-				bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
-				bar.background:SetBackdrop(backdrop)
-				bar.background:SetBackdropColor(0, 0, 0)
-				bar.background:SetBackdropBorderColor(0,0,0)
-				bar:CreateBackdrop()
-				self.Statue = bar
-			end
-
-			if C["unitframes"].movableclassbar then
-				local cba = CreateFrame("Frame", "CBAnchor", UIParent)
-				cba:SetTemplate("Default")
-				cba:Size(218, 15)
-				cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 300)
-				cba:SetClampedToScreen(true)
-				cba:SetMovable(true)
-				cba:SetBackdropColor(0, 0, 0)
-				cba:SetBackdropBorderColor(1, 0, 0)
-				cba.text = D.SetFontString(cba, C["media"].font, 11)
-				cba.text:SetPoint("CENTER")
-				cba.text:SetText("Move Classbar")
-				cba:Hide()
-				tinsert(D.AllowFrameMoving, CBAnchor)
-			end
-
 			if C["unitframes"].classbar then
 				if D.Class == "MAGE" then
 					local mb = CreateFrame("Frame", "DuffedUIArcaneBar", self)
@@ -479,45 +445,6 @@ local function Shared(self, unit)
 					end
 					bars:CreateBackdrop()
 					self.HolyPower = bars
-				end
-
-				if D.Class == "DEATHKNIGHT" then
-					local Runes = CreateFrame("Frame", nil, self)
-					if C["unitframes"].movableclassbar then
-						Runes:Point("BOTTOMLEFT", CBAnchor, "TOPLEFT", 2, 0)
-					else
-						Runes:Point("BOTTOMLEFT", panel, "TOPLEFT", 2, 1)
-					end
-					Runes:Size(100, 5)
-					Runes:SetFrameLevel(self:GetFrameLevel() + 3)
-					Runes:SetFrameStrata("MEDIUM")
-					for i = 1, 6 do
-						Runes[i] = CreateFrame("StatusBar", self:GetName().."_Runes"..i, self)
-						Runes[i]:SetHeight(D.Scale(5))
-						if i == 1 then
-							Runes[i]:SetPoint("LEFT", Runes, "LEFT", 0, 0)
-							Runes[i]:SetWidth(D.Scale((180 /6) + 3))
-						else
-							Runes[i]:SetPoint("LEFT", Runes[i-1], "RIGHT", D.Scale(5), 0)
-							Runes[i]:SetWidth(D.Scale((180 /6) + 2))
-						end
-						Runes[i]:SetStatusBarTexture(normTex)
-						Runes[i]:GetStatusBarTexture():SetHorizTile(false)
-						Runes[i]:SetBackdrop(backdrop)
-						Runes[i]:SetBackdropColor(0,0,0)
-						Runes[i]:SetFrameLevel(4)
-						Runes[i].bg = Runes[i]:CreateTexture(nil, "BORDER")
-						Runes[i].bg:SetAllPoints(Runes[i])
-						Runes[i].bg:SetTexture(normTex)
-						Runes[i].bg.multiplier = 0.3
-						Runes[i].border = CreateFrame("Frame", nil, Runes[i])
-						Runes[i].border:SetPoint("TOPLEFT", Runes[i], "TOPLEFT", D.Scale(-2), D.Scale(2))
-						Runes[i].border:SetPoint("BOTTOMRIGHT", Runes[i], "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
-						Runes[i].border:SetFrameStrata("MEDIUM")
-						Runes[i].border:SetFrameLevel(4)
-						Runes[i].border:SetTemplate("Default")
-					end
-					self.Runes = Runes
 				end
 
 				if D.Class == "MONK" then
