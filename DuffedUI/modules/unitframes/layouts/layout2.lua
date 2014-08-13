@@ -537,49 +537,6 @@ local function Shared(self, unit)
 				end
 			end
 
-			local ComboPoints = CreateFrame("Frame", "ComboPoints", UIParent)
-			for i = 1, 5 do
-				ComboPoints[i] = CreateFrame("Frame", "ComboPoints" .. i, UIParent)
-				if C["unitframes"].movableclassbar then ComboPoints[i]:Size(38, 6) else ComboPoints[i]:Size(40, 6) end
-				ComboPoints[i]:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-				if i == 1 then
-					if C["unitframes"].movableclassbar then
-						ComboPoints[i]:Point("BOTTOMLEFT", CBAnchor, "TOPLEFT", 2, 8)
-					else
-						ComboPoints[i]:Point("LEFT", panel, "LEFT", 3, 0)
-						ComboPoints[i]:SetFrameLevel(panel:GetFrameLevel() + 1)
-					end
-				else
-					if C["unitframes"].movableclassbar then
-						ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 6, 0)
-					else
-						ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 3, 0)
-						ComboPoints[i]:SetFrameLevel(panel:GetFrameLevel() + 1)
-					end
-				end
-				ComboPoints[i]:SetTemplate("Default")
-				ComboPoints[i]:CreateBackdrop()
-				ComboPoints[i]:SetBackdropBorderColor(unpack(cpcolors[i]))
-				ComboPoints[i]:RegisterEvent("PLAYER_ENTERING_WORLD")
-				ComboPoints[i]:RegisterEvent("UNIT_COMBO_POINTS")
-				ComboPoints[i]:RegisterEvent("PLAYER_TARGET_CHANGED")
-				ComboPoints[i]:SetScript("OnEvent", function(self, event)
-				local points, pt = 0, GetComboPoints("player", "target")
-					if pt == points then
-						ComboPoints[i]:Hide()
-					elseif pt > points then
-						for i = points + 1, pt do
-							ComboPoints[i]:Show()
-						end
-					else
-						for i = pt + 1, points do
-							ComboPoints[i]:Hide()
-						end
-					end
-					points = pt
-				end)
-			end
-
 			self:SetScript("OnEnter", function(self)
 				if self.EclipseBar and self.EclipseBar:IsShown() then 
 					self.EclipseBar.Text:Hide()

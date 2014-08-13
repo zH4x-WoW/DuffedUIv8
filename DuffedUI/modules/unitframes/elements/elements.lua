@@ -29,7 +29,7 @@ D.ConstructEnergy = function(name, width, height)
 
 	eb.text = eb:CreateFontString(nil, "ARTWORK")
 	eb.text:SetFont(font, 16, fontflag)
-	eb.text:SetPoint("LEFT",eb, "RIGHT", 4, 1)
+	eb.text:SetPoint("LEFT", eb, "RIGHT", 4, 1)
 	eb.text:SetTextColor(Color.r, Color.g, Color.b)
 
 	eb.TimeSinceLastUpdate = 0
