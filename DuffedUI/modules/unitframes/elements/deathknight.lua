@@ -72,7 +72,7 @@ Runes:SetScript("OnEvent", function(self, event)
 	if event == "PLAYER_REGEN_DISABLED" then
 		OnUpdate:SetScript("OnUpdate", updateFunc)
 	elseif event == "PLAYER_REGEN_ENABLED" then
-		OnUpdate:SetScript("OnUpdate", nil)
+		OnUpdate:SetScript("OnUpdate", updateFunc)
 	elseif event == "PLAYER_ENTERING_WORLD" then
 		RuneFrame:ClearAllPoints()
 	end

@@ -69,6 +69,12 @@ local function LoadSkin()
 	end
 	hooksecurefunc("MountJournal_UpdateMountList", ColorSelectedMount)
 
+	MountJournalSummonRandomFavoriteButton:StripTextures()
+	MountJournalSummonRandomFavoriteButton:CreateBackdrop()
+	MountJournalSummonRandomFavoriteButton:StyleButton()
+	MountJournalSummonRandomFavoriteButton.texture:SetTexture([[Interface/ICONS/ACHIEVEMENT_GUILDPERK_MOUNTUP]])
+	MountJournalSummonRandomFavoriteButton.texture:SetTexCoord(.08, .88, .08, .88)
+
 	-- bug fix when we scroll
 	MountJournalListScrollFrame:HookScript("OnVerticalScroll", ColorSelectedMount)
 	MountJournalListScrollFrame:HookScript("OnMouseWheel", ColorSelectedMount)
@@ -82,9 +88,12 @@ local function LoadSkin()
 	PetJournalLeftInset:StripTextures()
 
 	PetJournal.PetCount:StripTextures()
+	PetJournalSearchBox:StripTextures()
 	PetJournalSearchBox:SkinEditBox()
 	PetJournalFilterButton:StripTextures(true)
 	PetJournalFilterButton:SkinButton()
+	PetJournalFilterButton:ClearAllPoints()
+	PetJournalFilterButton:Point("LEFT", PetJournalSearchBox, "RIGHT", 5, 0)
 	PetJournalListScrollFrame:StripTextures()
 	PetJournalListScrollFrameScrollBar:SkinScrollBar()
 
