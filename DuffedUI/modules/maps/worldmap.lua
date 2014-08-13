@@ -1,5 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 
+-- Modified Script from Tukui T16
+-- Credits got to Tukz & Hydra
 local _G = _G
 local Noop = function() end
 local WorldMap = CreateFrame("Frame")

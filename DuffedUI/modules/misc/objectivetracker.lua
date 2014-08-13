@@ -1,7 +1,24 @@
 local D, C, L = unpack(select(2, ...))
 
+-- Modified Script from Tukui T16
+-- Credits got to Tukz & Hydra
 local ObjectiveTracker = CreateFrame("Frame", "ObjectiveTracker", UIParent)
 local Noop = function() end
+local lST = "Wowhead"
+local lQ = "http://www.wowhead.com/quest=%d"
+local lA = "http://www.wowhead.com/achievement=%d"
+
+_G.StaticPopupDialogs["WATCHFRAME_URL"] = {
+	text = lST .. " link",
+	button1 = OKAY,
+	timeout = 0,
+	whileDead = true,
+	hasEditBox = true,
+	editBoxWidth = 350,
+	OnShow = function(self, ...) self.editBox:SetFocus() end,
+	EditBoxOnEnterPressed = function(self) self:GetParent():Hide() end,
+	EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
+}
 
 function ObjectiveTracker:SetQuestItemButton(block)
 	local Button = block.itemButton
@@ -45,57 +62,42 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc(AUTO_QUEST_POPUP_TRACKER_MODULE, "Update", self.UpdatePopup)
 end
 
-function ObjectiveTracker:WOWHead()
-	-- Quest / achievement link URLs
-	local lST = "Wowhead"
-	local lQ = "http://www.wowhead.com/quest=%d"
-	local lA = "http://www.wowhead.com/achievement=%d"
-	
-	_G.StaticPopupDialogs["WATCHFRAME_URL"] = {
-		text = lST .. " link",
-		button1 = OKAY,
-		timeout = 0,
-		whileDead = true,
-		hasEditBox = true,
-		editBoxWidth = 350,
-		OnShow = function(self, ...) self.editBox:SetFocus() end,
-		EditBoxOnEnterPressed = function(self) self:GetParent():Hide() end,
-		EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
-	}
-	
+function ObjectiveTracker:WOWHead_Quest()
 	hooksecurefunc("QuestObjectiveTracker_OnOpenDropDown", function(self)
-		--if self.type == "QUEST" then
-			local _, b, i, info, questID
-			b = self.activeFrame
-			i = b.questLogIndex
-			_, _, _, _, _, _, _, questID = GetQuestLogTitle(i)
-			info = UIDropDownMenu_CreateInfo()
-			info.text = lST .. "-Link"
-			info.func = function(id)
-				local inputBox = StaticPopup_Show("WATCHFRAME_URL")
-				inputBox.editBox:SetText(lQ:format(questID))
-				inputBox.editBox:HighlightText()
-			end
-			info.arg1 = questID
-			info.noClickSound = 1
-			info.checked = false
-			UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
-		--[[elseif self.type == "ACHIEVMENT" then
-			local _, b, info, ID
-			b = self.activeFrame
-			ID, _, _, _, _, _, _, _, _, _ = GetAchievementInfo(block.id)
-			info = UIDropDownMenu_CreateInfo()
-			info.text = lST .. "-Link"
-			info.func = function(ID)
-				local inputBox = StaticPopup_Show("WATCHFRAME_URL")
-				inputBox.editBox:SetText(lA:format(ID))
-				inputBox.editBox:HighlightText()
-			end
-			info.arg1 = ID
-			info.noClickSound = 1
-			info.checked = false
-			UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
-		end]]--
+		local _, b, i, info, questID
+		b = self.activeFrame
+		i = b.questLogIndex
+		_, _, _, _, _, _, _, questID = GetQuestLogTitle(i)
+		info = UIDropDownMenu_CreateInfo()
+		info.text = lST .. "-Link"
+		info.func = function(id)
+			local inputBox = StaticPopup_Show("WATCHFRAME_URL")
+			inputBox.editBox:SetText(lQ:format(questID))
+			inputBox.editBox:HighlightText()
+		end
+		info.arg1 = questID
+		info.noClickSound = 1
+		info.checked = false
+		UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
+	end)
+end
+
+function ObjectiveTracker:WOWHead_Achievement()
+	hooksecurefunc("AchievementObjectiveTracker_OnOpenDropDown", function(self)
+		local _, b, i, info
+		b = self.activeFrame
+		i = b.id
+		info = UIDropDownMenu_CreateInfo()
+		info.text = lST .. "-Link"
+		info.func = function(_, i)
+			local inputBox = StaticPopup_Show("WATCHFRAME_URL")
+			inputBox.editBox:SetText(lA:format(i))
+			inputBox.editBox:HighlightText()
+		end
+		info.arg1 = i
+		info.noClickSound = 1
+		info.checked = false
+		UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
 	end)
 end
 
@@ -122,7 +124,10 @@ function ObjectiveTracker:Enable()
 			Header:Show()
 		end
 	end
-	ObjectiveTracker:WOWHead()
+	Minimize:SkinCloseButton()
+
+	ObjectiveTracker:WOWHead_Quest()
+	ObjectiveTracker:WOWHead_Achievement()
 	ObjectiveTracker:AddHooks()
 end
 

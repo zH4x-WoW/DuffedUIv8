@@ -1,10 +1,10 @@
 local D, C, L, G = unpack(select(2, ...))
-
 if not C["bags"].enable == true then return end
 
+-- Modified Script from Tukui T16
+-- Credits got to Tukz & Hydra
 local _G = _G
 local Noop = function() end
---local Font = D.GetFont(C["bags"].font)
 local ReplaceBags = 0
 local LastButtonBag, LastButtonBank, LastButtonReagent
 local Token1, Token2, Token3 = BackpackTokenFrameToken1, BackpackTokenFrameToken2, BackpackTokenFrameToken3
