@@ -126,12 +126,12 @@ function Bags:CreateReagentContainer()
 	Reagent:SetFrameStrata(self.Bank:GetFrameStrata())
 	Reagent:SetFrameLevel(self.Bank:GetFrameLevel())
 
-	SwitchBankButton:Size((Reagent:GetWidth() / 2) - 1, 23)
+	SwitchBankButton:Size(75, 23)
 	SwitchBankButton:SkinButton()
-	SwitchBankButton:Point("BOTTOMLEFT", Reagent, "TOPLEFT", 0, 2)
+	SwitchBankButton:Point("BOTTOMLEFT", Reagent, "BOTTOMLEFT", 10, 7)
 	SwitchBankButton:FontString("Text", C["media"].font, 12)
 	SwitchBankButton.Text:SetPoint("CENTER")
-	SwitchBankButton.Text:SetText("Switch to: " .. BANK)
+	SwitchBankButton.Text:SetText(BANK)
 	SwitchBankButton:SetScript("OnClick", function()
 		Reagent:Hide()
 		self.Bank:Show()
@@ -143,12 +143,12 @@ function Bags:CreateReagentContainer()
 
 	Deposit:SetParent(Reagent)
 	Deposit:ClearAllPoints()
-	Deposit:Size(Reagent:GetWidth(), 23)
-	Deposit:Point("BOTTOMLEFT", SwitchBankButton, "TOPLEFT", 0, 2)
+	Deposit:Size(120, 23)
+	Deposit:Point("BOTTOM", Reagent, "BOTTOM", 0, 7)
 	Deposit:SkinButton()
 
-	SortButton:Size((Reagent:GetWidth() / 2) - 1, 23)
-	SortButton:SetPoint("LEFT", SwitchBankButton, "RIGHT", 2, 0)
+	SortButton:Size(75, 23)
+	SortButton:SetPoint("BOTTOMRIGHT", Reagent, "BOTTOMRIGHT", -10, 7)
 	SortButton:SkinButton()
 	SortButton:FontString("Text", C["media"].font, 12)
 	SortButton.Text:SetPoint("CENTER")
@@ -193,7 +193,7 @@ function Bags:CreateReagentContainer()
 		Icon:SetInside()
 		LastButton = Button
 	end
-	Reagent:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 20) - ButtonSpacing)
+	Reagent:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)
 
 	-- Unlock window
 	local Unlock = ReagentBankFrameUnlockInfo
@@ -228,9 +228,9 @@ function Bags:CreateContainer(storagetype, ...)
 		BagsContainer:Hide()
 		BagsContainer:SetTemplate()
 
-		Sort:Size(Container:GetWidth(), 23)
+		Sort:Size(75, 23)
 		Sort:ClearAllPoints()
-		Sort:SetPoint("BOTTOMLEFT", Container, "TOPLEFT", 0, 2)
+		Sort:SetPoint("BOTTOMLEFT", Container, "BOTTOMLEFT", 10, 7)
 		Sort:SetFrameLevel(Container:GetFrameLevel())
 		Sort:SetFrameStrata(Container:GetFrameStrata())
 		Sort:StripTextures()
@@ -331,12 +331,12 @@ function Bags:CreateContainer(storagetype, ...)
 		BankItemAutoSortButton:Hide()
 
 		local SwitchReagentButton = CreateFrame("Button", nil, Container)
-		SwitchReagentButton:Size((Container:GetWidth() / 2) - 1, 23)
+		SwitchReagentButton:Size(75, 23)
 		SwitchReagentButton:SkinButton()
-		SwitchReagentButton:Point("BOTTOMLEFT", Container, "TOPLEFT", 0, 2)
+		SwitchReagentButton:Point("BOTTOMLEFT", Container, "BOTTOMLEFT", 10, 7)
 		SwitchReagentButton:FontString("Text", C["media"].font, 12)
 		SwitchReagentButton.Text:SetPoint("CENTER")
-		SwitchReagentButton.Text:SetText("Switch to: " .. REAGENT_BANK)
+		SwitchReagentButton.Text:SetText(REAGENT_BANK)
 		SwitchReagentButton:SetScript("OnClick", function()
 			BankFrame_ShowPanel(BANK_PANELS[2].name)
 			if (not ReagentBankFrame.isMade) then
@@ -348,8 +348,8 @@ function Bags:CreateContainer(storagetype, ...)
 			for i = 5, 11 do self:CloseBag(i) end
 		end)
 
-		SortButton:Size((Container:GetWidth() / 2) - 1, 23)
-		SortButton:SetPoint("LEFT", SwitchReagentButton, "RIGHT", 2, 0)
+		SortButton:Size(75, 23)
+		SortButton:SetPoint("BOTTOMRIGHT", Container, "BOTTOMRIGHT", -10, 7)
 		SortButton:SkinButton()
 		SortButton:FontString("Text", C["media"].font, 12)
 		SortButton.Text:SetPoint("CENTER")
@@ -547,7 +547,7 @@ function Bags:UpdateAllBags()
 		Bags:BagUpdate(ID)
 	end
 
-	if (Token1:IsShown()) then Bags.Bag:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 76) - ButtonSpacing) else Bags.Bag:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 54) - ButtonSpacing) end
+	Bags.Bag:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 76) - ButtonSpacing)
 end
 
 function Bags:UpdateAllBankBags()
@@ -614,7 +614,7 @@ function Bags:UpdateAllBankBags()
 			LastButton = Button
 		end
 	end
-	Bags.Bank:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 20) - ButtonSpacing)
+	Bags.Bank:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)
 end
 
 function Bags:OpenBag(id)
@@ -724,7 +724,6 @@ function Bags:Enable()
 
 	Bank:SetScript("OnHide", function() self.Bank:Hide() end)
 
-	-- Rewrite Blizzard Bags Functions
 	function UpdateContainerFrameAnchors() end
 	function ToggleBag() ToggleAllBags() end
 	function ToggleBackpack() ToggleAllBags() end
@@ -732,11 +731,13 @@ function Bags:Enable()
 	function OpenBackpack()  ToggleAllBags() end
 	function ToggleAllBags() self:ToggleBags() end
 
-	-- Register Events for Updates
 	self:RegisterEvent("BAG_UPDATE")
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
 	self:RegisterEvent("BAG_UPDATE_COOLDOWN")
 	self:RegisterEvent("ITEM_LOCK_CHANGED")
+	self:RegisterEvent("BANKFRAME_OPENED")
+	self:RegisterEvent("BANKFRAME_CLOSED")
+	self:RegisterEvent("BAG_CLOSED")
 	self:SetScript("OnEvent", self.OnEvent)
 end
 
