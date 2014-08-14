@@ -111,7 +111,7 @@ local function updateStatus()
 	end
 
 	mouseFrame:SetScript("OnEnter", function()
-		GameTooltip:SetOwner(mouseFrame, "ANCHOR_BOTTOMLEFT", -3, barHeight)
+		GameTooltip:SetOwner(mouseFrame, "ANCHOR_TOPLEFT", -2, 5)
 		GameTooltip:ClearLines()
 		if not IsMaxLevel() then
 			GameTooltip:AddLine("Experience:")

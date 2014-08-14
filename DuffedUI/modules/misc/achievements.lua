@@ -3,7 +3,7 @@ local D, C, L = unpack(select(2, ...))
 local AchievementHolder = CreateFrame("Frame", "DuffedUIAchievementHolder", UIParent)
 AchievementHolder:Width(180)
 AchievementHolder:Height(20)
-AchievementHolder:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 176)
+AchievementHolder:SetPoint("LEFT", UIParent, "LEFT", 312, 25)
 AchievementHolder:SetTemplate("Default")
 AchievementHolder:SetBackdropBorderColor(1, 0, 0)
 AchievementHolder:SetClampedToScreen(true)
@@ -34,4 +34,4 @@ AlertFrame:SetPoint("TOP", AchievementHolder, 0, -30)
 	LootWonAlertFrame_ShowAlert(itemLink, -1, 1, 1)
 	AlertFrame_FixAnchors()
 end
-SLASH_TEST_ACHIEVEMENT1 = "/testalerts"]]--
+SLASH_TEST_ACHIEVEMENT1 = "/testalerts"]]

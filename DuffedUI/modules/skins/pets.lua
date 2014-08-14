@@ -272,12 +272,13 @@ local function LoadSkin()
 	ToyBoxFilterButton:Point("LEFT", ToyBoxSearchBox, "RIGHT", 5, 0)
 
 	ToyBoxIconsFrame:StripTextures()
-
 	local function SkinToyButtons(self)
 		local num = C_ToyBox.GetNumTotalDisplayedToys()
 		for i = 1, num do
 			_G["ToySpellButton" .. i]:SkinButton()
+			_G["ToySpellButton" .. i .. "IconTexture"]:SetTexCoord(.1, .9, .1, .9)
 			_G["ToySpellButton" .. i .. "IconTexture"]:SetInside()
+			_G["ToySpellButton" .. i .. "IconTextureUncollected"]:SetTexCoord(.1, .9, .1, .9)
 			_G["ToySpellButton" .. i .. "IconTextureUncollected"]:SetInside()
 			_G["ToySpellButton" .. i .. "ToyName"]:SetTextColor(1, 1, 1, 1)
 			_G["ToySpellButton" .. i .. "SlotFrameCollected"]:Hide()

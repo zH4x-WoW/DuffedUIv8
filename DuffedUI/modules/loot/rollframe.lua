@@ -12,8 +12,7 @@ local cancelled_rolls = {}
 local rolltypes = {"need", "greed", "disenchant", [0] = "pass"}
 
 local anchor = CreateFrame("Button", "DuffedUIRollAnchor", UIParent)
-anchor:Width(300) 
-anchor:Height(22)
+anchor:Size(300, 22) 
 anchor:SetBackdrop(backdrop)
 anchor:SetBackdropColor(.25, .25, .25, 1)
 local label = anchor:CreateFontString(nil, "ARTWORK")
@@ -316,5 +315,5 @@ anchor:SetScript("OnEvent", function(frame, event, addon)
 		end
 	end)
 
-	anchor:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 350)
+	anchor:SetPoint("LEFT", UIParent, "LEFT", 250, 0)
 end)
