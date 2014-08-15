@@ -208,7 +208,8 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(77535), -- Blood Shield
 			CreateSpellEntry(81340), -- Sudden Doom
 			CreateSpellEntry(50421), -- Scent of Blood
-		}		
+			CreateSpellEntry(164047), -- Shadow of Death
+		}
 	},
 	DRUID = { 
 		target = { 

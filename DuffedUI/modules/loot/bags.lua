@@ -738,6 +738,8 @@ function Bags:Enable()
 	self:RegisterEvent("BANKFRAME_OPENED")
 	self:RegisterEvent("BANKFRAME_CLOSED")
 	self:RegisterEvent("BAG_CLOSED")
+	self:RegisterEvent("REAGENTBANK_UPDATE")
+	self:RegisterEvent("BANK_BAG_SLOT_FLAGS_UPDATED")
 	self:SetScript("OnEvent", self.OnEvent)
 end
 

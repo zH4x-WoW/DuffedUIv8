@@ -115,7 +115,7 @@ Stat:SetScript("OnEnter", function(self)
 	if InCombatLockdown() then return end
 	if ImprovedCurrency["Archaeology"] == nil then ImprovedCurrency["Archaeology"] = true end
 	if ImprovedCurrency["Cooking"] == nil then ImprovedCurrency["Cooking"] = true end
-	if ImprovedCurrency["Jewelcrafting"] == nil then ImprovedCurrency["Jewelcrafting"] = true end
+	if ImprovedCurrency["Professions"] == nil then ImprovedCurrency["Professions"] = true end
 	if ImprovedCurrency["Miscellaneous"] == nil then ImprovedCurrency["Miscellaneous"] = true end
 	if ImprovedCurrency["PvP"] == nil then ImprovedCurrency["PvP"] = true end
 	if ImprovedCurrency["Raid"] == nil then ImprovedCurrency["Raid"] = true end
@@ -165,6 +165,13 @@ Stat:SetScript("OnEnter", function(self)
 		Currency(401)
 		Currency(385)
 		Currency(399)
+		Currency(829)
+		Currency(944)
+		Currency(810)
+		Currency(821)
+		Currency(754)
+		Currency(677)
+		Currency(676)
 	end
 
 	if cooking and ImprovedCurrency["Cooking"] then
@@ -174,12 +181,17 @@ Stat:SetScript("OnEnter", function(self)
 		Currency(402)
 	end
 
-	if (prof1 == 9 or prof2 == 9) and ImprovedCurrency["Jewelcrafting"] then
+	if ImprovedCurrency["Professions"] then
 		GameTooltip:AddLine(" ")
-		GameTooltip:AddLine(L.gametooltip_gold_jc)
+		GameTooltip:AddLine("Profession Token")
 		Currency(61)
 		Currency(361)
 		Currency(698)
+		Currency(910)
+		Currency(1020)
+		Currency(1008)
+		Currency(1017)
+		Currency(999)
 	end
 
 	if ImprovedCurrency["Raid"] then
@@ -193,6 +205,7 @@ Stat:SetScript("OnEnter", function(self)
 		Currency(614)
 		Currency(395, false, true)
 		Currency(396, false, true)
+		Currency(823)
 	end
 
 	if ImprovedCurrency["PvP"] then
@@ -232,11 +245,11 @@ local RightClickMenu = {
 			ImprovedCurrency["Archaeology"] = true
 		end
 	end	},
-	{ text = "Show Jewelcrafting Tokens", checked = function() return ImprovedCurrency["Jewelcrafting"] end, func = function()
-		if ImprovedCurrency["Jewelcrafting"] then
-			ImprovedCurrency["Jewelcrafting"] = false
+	{ text = "Show Profession Tokens", checked = function() return ImprovedCurrency["Professions"] end, func = function()
+		if ImprovedCurrency["Professions"] then
+			ImprovedCurrency["Professions"] = false
 		else
-			ImprovedCurrency["Jewelcrafting"] = true
+			ImprovedCurrency["Professions"] = true
 		end
 	end	},
 	{ text = "Show Player vs Player Currency", checked = function() return ImprovedCurrency["PvP"] end, func = function()

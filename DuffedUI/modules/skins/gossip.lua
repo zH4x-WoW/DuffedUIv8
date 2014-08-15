@@ -3,7 +3,7 @@ local D, C, L, G = unpack(select(2, ...))
 local function LoadSkin()
 	local StripAllTextures = {
 		"GossipFrameGreetingPanel",
-	}			
+	}
 
 	for _, object in pairs(StripAllTextures) do
 		_G[object]:StripTextures()

@@ -19,11 +19,11 @@ local backdrop = {
 }
 
 cpcolors = {
-	[1] = {0.60, 0, 0, 1},
-	[2] = {0.60, 0.30, 0, 1},
-	[3] = {0.60, 0.60, 0, 1},
-	[4] = {0.30, 0.60, 0, 1},
-	[5] = {0, 0.60, 0, 1},
+	[1] = {.70, .30, .30},
+	[2] = {.70, .40, .30},
+	[3] = {.60, .60, .30},
+	[4] = {.40, .70, .30},
+	[5] = {.30, .70, .30},
 }
 
 --	Layout
@@ -259,6 +259,40 @@ local function Shared(self, unit)
 				self.DruidManaText = DruidManaText
 			end
 
+			if (D.Class == "WARRIOR" or D.Class == "DEATHKNIGHT" or D.Class == "MONK" or D.Class == "PRIEST") and C["unitframes"].showstatuebar then
+				local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
+				bar:SetWidth(5)
+				bar:SetHeight(29)
+				bar:Point("LEFT", power, "RIGHT", 7, 5)
+				bar:SetStatusBarTexture(C["media"].normTex)
+				bar:SetOrientation("VERTICAL")
+				bar.bg = bar:CreateTexture(nil, 'ARTWORK')
+				bar.background = CreateFrame("Frame", "DuffedUIStatue", bar)
+				bar.background:SetAllPoints()
+				bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
+				bar.background:SetBackdrop(backdrop)
+				bar.background:SetBackdropColor(0, 0, 0)
+				bar.background:SetBackdropBorderColor(0,0,0)
+				bar:CreateBackdrop()
+				self.Statue = bar
+			end
+
+			if C["unitframes"].movableclassbar then
+				local cba = CreateFrame("Frame", "CBAnchor", UIParent)
+				cba:SetTemplate("Default")
+				cba:Size(218, 15)
+				cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 300)
+				cba:SetClampedToScreen(true)
+				cba:SetMovable(true)
+				cba:SetBackdropColor(0, 0, 0)
+				cba:SetBackdropBorderColor(1, 0, 0)
+				cba.text = D.SetFontString(cba, C["media"].font, 11)
+				cba.text:SetPoint("CENTER")
+				cba.text:SetText("Move Classbar")
+				cba:Hide()
+				tinsert(D.AllowFrameMoving, CBAnchor)
+			end
+
 			if C["unitframes"].classbar then
 				if D.Class == "MAGE" then
 					local mb = CreateFrame("Frame", "DuffedUIArcaneBar", self)
@@ -387,6 +421,48 @@ local function Shared(self, unit)
 					eclipseBar.FrameBackdrop:SetPoint("TOPLEFT", D.Scale(-2), D.Scale(2))
 					eclipseBar.FrameBackdrop:SetPoint("BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
 					eclipseBar.FrameBackdrop:SetFrameLevel(eclipseBar:GetFrameLevel() - 1)
+
+					local ComboPoints = CreateFrame("Frame", "ComboPoints", UIParent)
+					if C["unitframes"].movableclassbar then
+						ComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
+					else
+						ComboPoints:SetPoint("TOP", power, "BOTTOM", 0, -1)
+					end
+					ComboPoints:SetSize((43 * 5) + 1, 5)
+					ComboPoints:CreateBackdrop()
+
+					for i = 1, 5 do
+						ComboPoints[i] = CreateFrame("StatusBar", "ComboPoints"..i, ComboPoints)
+						ComboPoints[i]:SetHeight(5)
+						ComboPoints[i]:SetStatusBarTexture(normTex)
+						ComboPoints[i]:SetStatusBarColor(unpack(Colors[i]))
+						if i == 1 then
+							ComboPoints[i]:SetWidth(40)
+							ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
+						else
+							ComboPoints[i]:SetWidth(43)
+							ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
+						end
+						ComboPoints[i]:SetBackdropColor(unpack(Colors[i]))
+						ComboPoints[i]:RegisterEvent("PLAYER_ENTERING_WORLD")
+						ComboPoints[i]:RegisterEvent("UNIT_COMBO_POINTS")
+						ComboPoints[i]:RegisterEvent("PLAYER_TARGET_CHANGED")
+						ComboPoints[i]:SetScript("OnEvent", function(self, event)
+							local points, pt = 0, GetComboPoints("player", "target")
+							if pt == points then
+								ComboPoints[i]:Hide()
+							elseif pt > points then
+								for i = points + 1, pt do
+									ComboPoints[i]:Show()
+								end
+							else
+								for i = pt + 1, points do
+									ComboPoints[i]:Hide()
+								end
+							end
+							points = pt
+						end)
+					end
 				end
 
 				if D.Class == "WARLOCK" then
@@ -1511,4 +1587,5 @@ if C["raid"].mainassist == true then
 		assist:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	end
 end
+
 local party = oUF:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)

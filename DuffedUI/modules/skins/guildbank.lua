@@ -84,7 +84,8 @@ local function LoadSkin()
 		icon:Point("BOTTOMRIGHT", -2, 2)
 		icon:SetTexCoord(.08, .92, .08, .92)
 	end
-	
+
+	GuildItemSearchBox:StripTextures()
 	GuildItemSearchBox:SkinEditBox()
 	GuildBankMoneyFrameBackground:StripTextures()
 	GuildBankInfoScrollFrameScrollBar:SkinScrollBar()
