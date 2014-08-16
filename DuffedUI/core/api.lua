@@ -359,6 +359,14 @@ local function SkinButton(f, strip)
 	f:HookScript("OnLeave", SetOriginalBackdrop)
 end
 
+local function SkinButton2(f, strip)
+	if strip then StripTextures(f) end
+
+	SetTemplate(f, "Default")
+	f:HookScript("OnEnter", SetModifiedBackdrop)
+	f:HookScript("OnLeave", SetOriginalBackdrop)
+end
+
 local function SkinIconButton(b, shrinkIcon)
 	if b.isSkinned then return end
 
@@ -665,6 +673,7 @@ local function addapi(object)
 	if not object.FontString then mt.FontString = FontString end
 	if not object.HighlightUnit then mt.HighlightUnit = HighlightUnit end
 	if not object.SkinButton then mt.SkinButton = SkinButton end
+	if not object.SkinButton2 then mt.SkinButton2 = SkinButton2 end
 	if not object.SkinIconButton then mt.SkinIconButton = SkinIconButton end
 	if not object.SkinScrollBar then mt.SkinScrollBar = SkinScrollBar end
 	if not object.SkinTab then mt.SkinTab = SkinTab end
