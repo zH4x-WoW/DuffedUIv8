@@ -284,7 +284,7 @@ local function LoadSkin()
 			_G["ToySpellButton" .. i .. "SlotFrameUncollectedInnerGlow"]:Hide()
 			_G["ToySpellButton" .. i .. "Cooldown"]:SetAllPoints(_G["ToySpellButton" .. i .. "IconTexture"])
 		end
-		if (PlayerHasToy(self.itemID)) then _G[self:GetName().."ToyName"]:SetTextColor(1, 1, 1) else _G[self:GetName().."ToyName"]:SetTextColor(.6, .6, .6) end
+		if PlayerHasToy(self.itemID) then _G[self:GetName().."ToyName"]:SetTextColor(1, 1, 1) else _G[self:GetName().."ToyName"]:SetTextColor(.6, .6, .6) end
 	end
 	hooksecurefunc("ToySpellButton_UpdateButton", SkinToyButtons)
 
