@@ -20,6 +20,7 @@ Runes = CreateFrame("Frame", "Runes", UIParent)
 Runes:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
 Runes:SetSize((35 * 6) + 6, 5)
 Runes:CreateBackdrop()
+Runes:SetParent(DuffedUIPetBattleHider)
 
 for i = 1, 6 do
 	local rune = CreateFrame("StatusBar", "Rune"..i, Runes)

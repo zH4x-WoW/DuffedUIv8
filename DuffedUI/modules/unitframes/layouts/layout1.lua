@@ -18,7 +18,7 @@ local backdrop = {
 	insets = {top = -D.mult, left = -D.mult, bottom = -D.mult, right = -D.mult},
 }
 
-cpcolors = {
+Colors = {
 	[1] = {.70, .30, .30},
 	[2] = {.70, .40, .30},
 	[3] = {.60, .60, .30},
@@ -259,7 +259,7 @@ local function Shared(self, unit)
 				self.DruidManaText = DruidManaText
 			end
 
-			if (D.Class == "WARRIOR" or D.Class == "DEATHKNIGHT" or D.Class == "MONK" or D.Class == "PRIEST") and C["unitframes"].showstatuebar then
+			if (D.Class == "WARRIOR" or D.Class == "MONK" or D.Class == "PRIEST") and C["unitframes"].showstatuebar then
 				local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
 				bar:SetWidth(5)
 				bar:SetHeight(29)
@@ -355,6 +355,7 @@ local function Shared(self, unit)
 					end
 				end
 
+				--D.ConstructRessources("Druid", 216, 5)
 				if D.Class == "DRUID" then
 					local DruidManaBackground = CreateFrame("Frame", nil, self)
 					if C["unitframes"].movableclassbar then
@@ -443,7 +444,6 @@ local function Shared(self, unit)
 							ComboPoints[i]:SetWidth(43)
 							ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
 						end
-						ComboPoints[i]:SetBackdropColor(unpack(Colors[i]))
 						ComboPoints[i]:RegisterEvent("PLAYER_ENTERING_WORLD")
 						ComboPoints[i]:RegisterEvent("UNIT_COMBO_POINTS")
 						ComboPoints[i]:RegisterEvent("PLAYER_TARGET_CHANGED")

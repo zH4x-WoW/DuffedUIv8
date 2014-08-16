@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-local Texture = C["media"].normTex
+local texture = C["media"].normTex
 local font, fontsize, fontflag = C["media"].font, 11, "THINOUTLINE"
 local Color = RAID_CLASS_COLORS[D.Class]
 
@@ -22,10 +22,11 @@ D.ConstructEnergy = function(name, width, height)
 	local eb = CreateFrame("StatusBar", name, UIParent)
 	eb:SetPoint("TOP", CBAnchor, "BOTTOM", 0, 5)
 	eb:Size(D.Scale(width), D.Scale(height))
-	eb:SetStatusBarTexture(Texture)
+	eb:SetStatusBarTexture(texture)
 	eb:SetStatusBarColor(Color.r, Color.g, Color.b)
 	eb:SetMinMaxValues(0, 100)
 	eb:CreateBackdrop()
+	eb:SetParent(DuffedUIPetBattleHider)
 
 	eb.text = eb:CreateFontString(nil, "ARTWORK")
 	eb.text:SetFont(font, 16, fontflag)

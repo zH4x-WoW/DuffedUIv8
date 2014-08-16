@@ -76,8 +76,8 @@ local function LoadSkin()
 				end
 			end
 		end
+		LFDQueueFrameRandomScrollFrameChildFrameMoneyReward:StripTextures()
 	end
-
 	hooksecurefunc("LFDQueueFrameRandom_UpdateFrame", ReskinRewards)
 
 	for i = 1, NUM_LFD_CHOICE_BUTTONS do _G["LFDQueueFrameSpecificListButton"..i].enableButton:SkinCheckBox() end
@@ -135,6 +135,7 @@ local function LoadSkin()
 				button.reskinned = true
 			end
 		end
+		RaidFinderQueueFrameScrollFrameChildFrameMoneyReward:StripTextures()
 	end
 
 	-- Scenario finder
@@ -148,6 +149,8 @@ local function LoadSkin()
 	ScenarioQueueFrameFindGroupButton:StripTextures()
 	ScenarioQueueFrameFindGroupButton:SkinButton()
 	ScenarioQueueFrameTypeDropDown:SkinDropDownBox()
+	ScenarioQueueFrameTypeDropDown:ClearAllPoints()
+	ScenarioQueueFrameTypeDropDown:Point("TOPRIGHT", -5, -40)
 	ScenarioQueueFrameSpecificScrollFrameScrollBackgroundTopLeft:Hide()
 	ScenarioQueueFrameSpecificScrollFrameScrollBackgroundBottomRight:Hide()
 	ScenarioQueueFrameSpecificScrollFrameScrollBar:SkinScrollBar()
@@ -168,13 +171,11 @@ local function LoadSkin()
 	local function SkinScenarioRewards()
 		for i = 1, 4 do
 			local b = _G["ScenarioQueueFrameRandomScrollFrameChildFrameItem" .. i]
+			local icon = _G["ScenarioQueueFrameRandomScrollFrameChildFrameItem" .. i .. "IconTexture"]
 			if b and not b.isSkinned then
-				local icon = b.icon
-				local icontexture = icon:GetTexture()
 				icon:SetTexCoord(.1, .9, .1, .9)
 				icon:SetDrawLayer("OVERLAY")
 				b:StripTextures()
-				icon:SetTexture(icontexture)
 				b.isSkinned = true
 
 				b.border = CreateFrame("Frame", nil, b)
@@ -183,6 +184,7 @@ local function LoadSkin()
 				b.border:SetBackdropColor(0,0,0,0)
 			end
 		end
+		ScenarioQueueFrameRandomScrollFrameChildFrameMoneyReward:StripTextures()
 	end
 	hooksecurefunc("ScenarioQueueFrameRandom_UpdateFrame", SkinScenarioRewards)
 

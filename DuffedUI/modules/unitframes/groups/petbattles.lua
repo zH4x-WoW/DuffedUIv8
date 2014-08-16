@@ -278,7 +278,7 @@ local bar = CreateFrame("Frame", "DuffedUIPetBattleActionBar", UIParent, "Secure
 bar:SetSize (52 * 6 + 7 * 10, 52 * 1 + 10 * 2)
 bar:EnableMouse(true)
 bar:SetTemplate()
-bar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 25)
+bar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 50)
 bar:Hide()
 
 RegisterStateDriver(bar, "visibility", "[petbattle] show; hide")

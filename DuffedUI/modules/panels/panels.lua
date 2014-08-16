@@ -58,6 +58,7 @@ if not C["actionbar"].enable ~= true then
 	DuffedUIBar1Mover:SetFrameLevel(6)
 	DuffedUIBar1Mover:SetClampedToScreen(true)
 	DuffedUIBar1Mover:SetMovable(true)
+	--DuffedUIBar1Mover:SetParent(DuffedUIPetBattleHider)
 	DuffedUIBar1Mover.text = D.SetFontString(DuffedUIBar1Mover, C["media"].font, 12)
 	DuffedUIBar1Mover.text:SetPoint("CENTER")
 	DuffedUIBar1Mover.text:SetText("Move Bar1")
