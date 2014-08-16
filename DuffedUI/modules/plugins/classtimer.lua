@@ -384,7 +384,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(33206), -- Pain Suppression
 			CreateSpellEntry(34914, false, nil, nil, 34914), -- Vampiric Touch
 			CreateSpellEntry(589), -- Shadow Word: Pain
-			CreateSpellEntry(2944), -- Devouring Plague
+			CreateSpellEntry(158831), -- Devouring Plague
 			CreateSpellEntry(47788), -- Guardian Spirit
 		},
 		player = {

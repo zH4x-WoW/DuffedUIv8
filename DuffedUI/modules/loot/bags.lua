@@ -2,7 +2,6 @@ local D, C, L, G = unpack(select(2,  ...))
 if not C["bags"].enable == true then return end
 
 -- Modified Script from Tukui T16
--- Credits got to Tukz & Hydra
 local _G = _G
 local Noop = function() end
 local ReplaceBags = 0
@@ -157,7 +156,7 @@ function Bags:CreateReagentContainer()
 
 	for i = 1, 98 do
 		local Button = _G["ReagentBankFrameItem" .. i]
-		local Count = _G[Button:GetName() .. "Count"]
+		--local Count = _G[Button:GetName() .. "Count"]
 		local Icon = _G[Button:GetName() .. "IconTexture"]
 
 		ReagentBankFrame:SetParent(Reagent)
@@ -188,7 +187,6 @@ function Bags:CreateReagentContainer()
 			Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (ButtonSpacing + ButtonSize), 0)
 			NumButtons = NumButtons + 1
 		end
-		Count.Show = Noop
 		Icon:SetTexCoord(unpack(D.IconCoord))
 		Icon:SetInside()
 		LastButton = Button
@@ -284,7 +282,6 @@ function Bags:CreateContainer(storagetype, ...)
 		end)
 
 		for _, Button in pairs(BlizzardBags) do
-			local Count = _G[Button:GetName() .. "Count"]
 			local Icon = _G[Button:GetName() .. "IconTexture"]
 
 			Button:SetParent(BagsContainer)
@@ -301,8 +298,6 @@ function Bags:CreateContainer(storagetype, ...)
 			Button:SkinButton()
 			if LastButtonBag then Button:SetPoint("LEFT", LastButtonBag, "RIGHT", 4, 0) else Button:SetPoint("TOPLEFT", BagsContainer, "TOPLEFT", 4, -4) end
 
-			Count.Show = Noop
-			Count:Hide()
 			Icon:SetTexCoord(unpack(D.IconCoord))
 			Icon:SetInside()
 			LastButtonBag = Button
@@ -428,7 +423,6 @@ function Bags:SkinTokens()
 	for i = 1, 3 do
 		local Token = _G["BackpackTokenFrameToken"  ..  i]
 		local Icon = _G["BackpackTokenFrameToken"  ..  i  ..  "Icon"]
-		local Count = _G["BackpackTokenFrameToken"  ..  i  ..  "Count"]
 		local PreviousToken = _G["BackpackTokenFrameToken"  ..  (i - 1)]
 
 		Token:SetFrameStrata("HIGH")
@@ -439,8 +433,6 @@ function Bags:SkinTokens()
 		Icon:SetSize(12,12) 
 		Icon:SetTexCoord(unpack(D.IconCoord)) 
 		Icon:SetPoint("LEFT", Token, "RIGHT", -8, 2) 
-
-		Count:SetFontObject(Font)
 	end
 end
 
