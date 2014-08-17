@@ -6,7 +6,6 @@ local _G = _G
 local Noop = function() end
 local ReplaceBags = 0
 local LastButtonBag, LastButtonBank, LastButtonReagent
-local Token1, Token2, Token3 = BackpackTokenFrameToken1, BackpackTokenFrameToken2, BackpackTokenFrameToken3
 local NUM_CONTAINER_FRAMES = NUM_CONTAINER_FRAMES
 local NUM_BAG_FRAMES = NUM_BAG_FRAMES
 local ContainerFrame_GetOpenFrame = ContainerFrame_GetOpenFrame
@@ -90,19 +89,16 @@ function Bags:HideBlizzard()
 		end
 	end
 
-	-- Hide Bank Frame Textures
 	for i = 1, BankFrame:GetNumRegions() do
 		local Region = select(i, BankFrame:GetRegions())
 		Region:SetAlpha(0)
 	end
 
-	-- Hide BankSlotsFrame Textures and Fonts
 	for i = 1, BankSlotsFrame:GetNumRegions() do
 		local Region = select(i, BankSlotsFrame:GetRegions())
 		Region:SetAlpha(0)
 	end
 
-	-- Hide Tabs, we will create our tabs
 	for i = 1, 2 do
 		local Tab = _G["BankFrameTab" .. i]
 		Tab:Hide()
@@ -156,7 +152,6 @@ function Bags:CreateReagentContainer()
 
 	for i = 1, 98 do
 		local Button = _G["ReagentBankFrameItem" .. i]
-		--local Count = _G[Button:GetName() .. "Count"]
 		local Icon = _G[Button:GetName() .. "IconTexture"]
 
 		ReagentBankFrame:SetParent(Reagent)
@@ -193,7 +188,6 @@ function Bags:CreateReagentContainer()
 	end
 	Reagent:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)
 
-	-- Unlock window
 	local Unlock = ReagentBankFrameUnlockInfo
 	local UnlockButton = ReagentBankFrameUnlockInfoPurchaseButton
 	Unlock:StripTextures()
@@ -410,32 +404,6 @@ function Bags:SetBagsSearchPosition()
 	BankItemSearchBox:Hide()
 end
 
-function Bags:SetTokensPosition()
-	Token3:ClearAllPoints()
-	Token3:SetPoint("BOTTOMRIGHT", self.Bag, "BOTTOMRIGHT", -16, 8)
-	Token2:ClearAllPoints()
-	Token2:SetPoint("RIGHT", Token3, "LEFT", -10, 0)
-	Token1:ClearAllPoints()
-	Token1:SetPoint("RIGHT", Token2, "LEFT", -10, 0)
-end
-
-function Bags:SkinTokens()
-	for i = 1, 3 do
-		local Token = _G["BackpackTokenFrameToken"  ..  i]
-		local Icon = _G["BackpackTokenFrameToken"  ..  i  ..  "Icon"]
-		local PreviousToken = _G["BackpackTokenFrameToken"  ..  (i - 1)]
-
-		Token:SetFrameStrata("HIGH")
-		Token:SetFrameLevel(5)
-		Token:SetScale(C["bags"].scale)
-		Token:CreateBackdrop()
-		Token.backdrop:SetOutside(Icon)
-		Icon:SetSize(12,12) 
-		Icon:SetTexCoord(unpack(D.IconCoord)) 
-		Icon:SetPoint("LEFT", Token, "RIGHT", -8, 2) 
-	end
-end
-
 function Bags:SkinEditBoxes()
 	for _, Frame in pairs(Boxes) do
 		Frame:SkinEditBox()
@@ -645,7 +613,6 @@ function Bags:ToggleBags()
 	local Bag = ContainerFrame1
 	local Bank = BankFrame
 
-	-- Bags Toggle
 	if Bag:IsShown() then
 		if not Bank:IsShown() then
 			self.Bag:Hide()
@@ -658,7 +625,6 @@ function Bags:ToggleBags()
 		for i = 1, 4 do self:OpenBag(i, 1) end
 	end
 
-	-- Bank Toggle
 	if Bank:IsShown() then
 		self.Bank:Show()
 		for i = 5, 11 do
@@ -706,8 +672,6 @@ function Bags:Enable()
 	self:HideBlizzard()
 	self:SetBagsSearchPosition()
 	self:SkinEditBoxes()
-	self:SetTokensPosition()
-	self:SkinTokens()
 
 	Bag:SetScript("OnHide", function()
 		self.Bag:Hide()
