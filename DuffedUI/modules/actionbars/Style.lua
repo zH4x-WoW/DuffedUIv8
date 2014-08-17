@@ -2,6 +2,7 @@ local D, C, L = unpack(select(2, ...))
 if not C["actionbar"].enable == true then return end
 
 local _G = _G
+local sub, replace = string.sub, string.gsub
 
 function D.StyleActionBarButton(self)
 	local name = self:GetName()
@@ -14,7 +15,7 @@ function D.StyleActionBarButton(self)
 	local Border  = _G[name.."Border"]
 	local Btname = _G[name.."Name"]
 	local normal  = _G[name.."NormalTexture"]
-	local BtnBG = _G[name..'FloatingBG']
+	local BtnBG = _G[name.."FloatingBG"]
  
 	Flash:SetTexture("")
 	Button:SetNormalTexture("")
@@ -24,28 +25,6 @@ function D.StyleActionBarButton(self)
 	
 	HotKey:ClearAllPoints()
 	HotKey:Point("TOPRIGHT", 0, -3)
-	local text = HotKey:GetText()
-	if text then
-		text = string.gsub(text, "(s-%)", "S")
-		text = string.gsub(text, "(a-%)", "A")
-		text = string.gsub(text, "(c-%)", "C")
-		text = string.gsub(text, "(Mouse Button )", "M")
-		text = string.gsub(text, "(Middle Mouse)", "M3")
-		text = string.gsub(text, "(Mouse Wheel Up)", "MU")
-		text = string.gsub(text, "(Mouse Wheel Down)", "MD")
-		text = string.gsub(text, "(Maustaste )", "M") 
-		text = string.gsub(text, "(Mittlere Maustaste)", "M3") 
-		text = string.gsub(text, "(Mausrad nach oben)", "MU") 
-		text = string.gsub(text, "(Mausrad nach unten)", "MD")
-		text = string.gsub(text, "(Num Pad )", "N")
-		text = string.gsub(text, "(Page Up)", "PU")
-		text = string.gsub(text, "(Page Down)", "PD")
-		text = string.gsub(text, "(Spacebar)", "SpB")
-		text = string.gsub(text, "(Insert)", "Ins")
-		text = string.gsub(text, "(Home)", "Hm")
-		text = string.gsub(text, "(Delete)", "Del")
-	end
-	if HotKey:GetText() == _G["RANGE_INDICATOR"] then HotKey:SetText("") else HotKey:SetText(text) end
 
 	if Border and Border:IsShown() then
 		Border:Hide()
@@ -60,7 +39,6 @@ function D.StyleActionBarButton(self)
 		end
 	end
 	
-	-- the remaining stuff need to be applied only 1 time.
 	if Button.isSkinned then return end
 	
 	Count:SetFont(C["media"].font, 12, "OUTLINE")
@@ -80,7 +58,12 @@ function D.StyleActionBarButton(self)
 		BtnBG:Kill()
 	end
  
-	if not C["actionbar"].hotkey == true then
+	if C["actionbar"].hotkey then
+		HotKey:SetFont(C["media"].font, 12, "THINOUTLINE")
+		HotKey:SetShadowOffset(0, 0)
+		HotKey.ClearAllPoints = D.dummy
+		HotKey.SetPoint = D.dummy
+	else
 		HotKey:SetText("")
 		HotKey:Kill()
 	end
@@ -88,7 +71,7 @@ function D.StyleActionBarButton(self)
 	if name:match("Extra") then
 		Button:SetTemplate()
 		Button.pushed = true
-		Icon:SetDrawLayer('ARTWORK')
+		Icon:SetDrawLayer("ARTWORK")
 	else
 		Button:CreateBackdrop()
 		Button.backdrop:SetOutside(Button, 0, 0)
@@ -171,39 +154,42 @@ function D.StylePet()
 	end
 end
 
---[[function D.FixKeybindText(button)
-	local hotkey = _G[button:GetName()..'HotKey'];
-	local text = hotkey:GetText();
+Keybind = function(self, actionButtonType)
+	local HotKey = _G[self:GetName().."HotKey"]
+	local Text = HotKey:GetText()
+
+	Text = replace(Text, "(s%-)", "S")
+	Text = replace(Text, "(a%-)", "A")
+	Text = replace(Text, "(c%-)", "C")
+	Text = replace(Text, "(Mouse Button )", "M")
+	Text = replace(Text, KEY_BUTTON3, "M3")
+	Text = replace(Text, KEY_PAGEUP, "PU")
+	Text = replace(Text, KEY_PAGEDOWN, "PD")
+	Text = replace(Text, KEY_SPACE, "SpB")
+	Text = replace(Text, KEY_INSERT, "Ins")
+	Text = replace(Text, KEY_HOME, "Hm")
+	Text = replace(Text, KEY_DELETE, "Del")
+	Text = replace(Text, KEY_NUMPADDECIMAL, "Nu.")
+	Text = replace(Text, KEY_NUMPADDIVIDE, "Nu/")
+	Text = replace(Text, KEY_NUMPADMINUS, "Nu-")
+	Text = replace(Text, KEY_NUMPADMULTIPLY, "Nu*")
+	Text = replace(Text, KEY_NUMPADPLUS, "Nu+")
+	Text = replace(Text, KEY_NUMLOCK, "NuL")
+	Text = replace(Text, KEY_MOUSEWHEELDOWN, "MWD")
+	Text = replace(Text, KEY_MOUSEWHEELUP, "MWU")
 	
-	if text then
-		text = gsub(text, 'SHIFT%-', "S");
-		text = gsub(text, 'ALT%-', "A");
-		text = gsub(text, 'CTRL%-', "C");
-		text = gsub(text, 'BUTTON', "M");
-		text = gsub(text, 'MOUSEWHEELUP', "MU");
-		text = gsub(text, 'MOUSEWHEELDOWN', "MD");
-		text = gsub(text, 'NUMPAD', "N");
-		text = gsub(text, 'PAGEUP', "PU");
-		text = gsub(text, 'PAGEDOWN', "PD");
-		text = gsub(text, 'SPACE', "SpB");
-		text = gsub(text, 'INSERT', "Ins");
-		text = gsub(text, 'HOME', "H");
-		text = gsub(text, 'DELETE', "Del");
-		text = gsub(text, 'NMULTIPLY', "*");
-		text = gsub(text, 'NMINUS', "N-");
-		text = gsub(text, 'NPLUS', "N+");
-		
-		hotkey:SetText(text);
+	if HotKey:GetText() == _G["RANGE_INDICATOR"] then
+		HotKey:SetText("")
+	else
+		HotKey:SetText(Text)
 	end
-	
-	hotkey:ClearAllPoints()
-	hotkey:Point("TOPRIGHT", 0, -3);  
-end]]
+end
+hooksecurefunc("ActionButton_UpdateHotkeys", Keybind)
 
 local buttons = 0
 local function SetupFlyoutButton()
 	for i = 1, buttons do
-		--prevent error if you don't have max ammount of buttons
+		--prevent error if you don"t have max ammount of buttons
 		if _G["SpellFlyoutButton"..i] then
 			D.StyleActionBarButton(_G["SpellFlyoutButton"..i])
 					
@@ -370,5 +356,4 @@ end
 hooksecurefunc("ActionButton_ShowOverlayGlow", D.ShowHighlightActionButton)
 hooksecurefunc("ActionButton_HideOverlayGlow", D.HideHighlightActionButton)
 hooksecurefunc("ActionButton_Update", D.StyleActionBarButton)
---hooksecurefunc("ActionButton_UpdateHotkeys", D.FixKeybindText)
 hooksecurefunc("ActionButton_UpdateFlyout", D.StyleActionBarFlyout)
