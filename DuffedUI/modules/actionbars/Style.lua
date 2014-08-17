@@ -22,15 +22,40 @@ function D.StyleActionBarButton(self)
  
 	Count:ClearAllPoints()
 	Count:Point("BOTTOMRIGHT", 0, 2)
-	
+
 	HotKey:ClearAllPoints()
 	HotKey:Point("TOPRIGHT", 0, -3)
+
+	local Text = HotKey:GetText()
+	if Text then
+		Text = replace(Text, "(s%-)", "S")
+		Text = replace(Text, "(a%-)", "A")
+		Text = replace(Text, "(c%-)", "C")
+		Text = replace(Text, "(Mouse Button )", "M")
+		Text = replace(Text, KEY_BUTTON3, "M3")
+		Text = replace(Text, KEY_PAGEUP, "PU")
+		Text = replace(Text, KEY_PAGEDOWN, "PD")
+		Text = replace(Text, KEY_SPACE, "SpB")
+		Text = replace(Text, KEY_INSERT, "Ins")
+		Text = replace(Text, KEY_HOME, "Hm")
+		Text = replace(Text, KEY_DELETE, "Del")
+		Text = replace(Text, KEY_NUMPADDECIMAL, "Nu.")
+		Text = replace(Text, KEY_NUMPADDIVIDE, "Nu/")
+		Text = replace(Text, KEY_NUMPADMINUS, "Nu-")
+		Text = replace(Text, KEY_NUMPADMULTIPLY, "Nu*")
+		Text = replace(Text, KEY_NUMPADPLUS, "Nu+")
+		Text = replace(Text, KEY_NUMLOCK, "NuL")
+		Text = replace(Text, KEY_MOUSEWHEELDOWN, "MWD")
+		Text = replace(Text, KEY_MOUSEWHEELUP, "MWU")
+	end
+
+	if HotKey:GetText() == _G["RANGE_INDICATOR"] then HotKey:SetText("") else HotKey:SetText(Text) end
 
 	if Border and Border:IsShown() then
 		Border:Hide()
 		Border = D.dummy
 	end
-	
+
 	if Btname and normal and C["actionbar"].macro then
 		local query = GetActionText(action)
 		if query then
@@ -38,11 +63,11 @@ function D.StyleActionBarButton(self)
 			Btname:SetText(text)
 		end
 	end
-	
+
 	if Button.isSkinned then return end
-	
+
 	Count:SetFont(C["media"].font, 12, "OUTLINE")
-	
+
 	if Btname then
 		if C["actionbar"].macro then
 			Btname:SetFont(C["media"].font, 10)
@@ -53,10 +78,8 @@ function D.StyleActionBarButton(self)
 			Btname:Kill()
 		end
 	end
-	
-	if BtnBG then
-		BtnBG:Kill()
-	end
+
+	if BtnBG then BtnBG:Kill() end
  
 	if C["actionbar"].hotkey then
 		HotKey:SetFont(C["media"].font, 12, "THINOUTLINE")
@@ -67,7 +90,7 @@ function D.StyleActionBarButton(self)
 		HotKey:SetText("")
 		HotKey:Kill()
 	end
-	
+
 	if name:match("Extra") then
 		Button:SetTemplate()
 		Button.pushed = true
@@ -78,21 +101,18 @@ function D.StyleActionBarButton(self)
 		Button:UnregisterEvent("ACTIONBAR_SHOWGRID")
 		Button:UnregisterEvent("ACTIONBAR_HIDEGRID")
 	end
-	
+
 	Icon:SetTexCoord(.08, .92, .08, .92)
 	Icon:SetInside()
-	
-	-- bug, some buttons are checked in a /rl or login, even if they shouldn`t be, double check
-	if normal and Button:GetChecked() then
-		ActionButton_UpdateState(Button)
-	end
-	
+
+	if normal and Button:GetChecked() then ActionButton_UpdateState(Button) end
+
 	if normal then
 		normal:ClearAllPoints()
 		normal:SetPoint("TOPLEFT")
 		normal:SetPoint("BOTTOMRIGHT")
 	end
-	
+
 	Button:StyleButton()
 	Button.isSkinned = true
 end
@@ -154,7 +174,7 @@ function D.StylePet()
 	end
 end
 
-Keybind = function(self, actionButtonType)
+--[[D.Keybind = function(self, actionButtonType)
 	local HotKey = _G[self:GetName().."HotKey"]
 	local Text = HotKey:GetText()
 
@@ -184,15 +204,14 @@ Keybind = function(self, actionButtonType)
 		HotKey:SetText(Text)
 	end
 end
-hooksecurefunc("ActionButton_UpdateHotkeys", Keybind)
+hooksecurefunc("ActionButton_UpdateHotkeys", D.Keybind)]]
 
 local buttons = 0
 local function SetupFlyoutButton()
 	for i = 1, buttons do
-		--prevent error if you don"t have max ammount of buttons
 		if _G["SpellFlyoutButton"..i] then
 			D.StyleActionBarButton(_G["SpellFlyoutButton"..i])
-					
+
 			if _G["SpellFlyoutButton"..i]:GetChecked() then
 				_G["SpellFlyoutButton"..i]:SetChecked(nil)
 			end
@@ -200,7 +219,6 @@ local function SetupFlyoutButton()
 	end
 end
 SpellFlyout:HookScript("OnShow", SetupFlyoutButton)
-
  
 --written by Elv
 function D.StyleActionBarFlyout(button)
@@ -290,9 +308,7 @@ end
  
 local HideOverlayGlow = function(self)
     if self.overlay then
-        if self.overlay.animIn:IsPlaying() then
-            self.overlay.animIn:Stop()
-        end
+        if self.overlay.animIn:IsPlaying() then self.overlay.animIn:Stop() end
         if self:IsVisible() then
             self.overlay.animOut:Play()
         else
@@ -313,7 +329,6 @@ D.ShowHighlightActionButton = function(self)
 			NewProc:SetBackdrop(ProcBackdrop)
 			NewProc:SetBackdropBorderColor(1, 1, 0)
 			NewProc:SetAllPoints(self)
-
 			self.NewProc = NewProc
 
 			local Animation = self.NewProc:CreateAnimationGroup()
@@ -326,14 +341,10 @@ D.ShowHighlightActionButton = function(self)
 
 			self.Animation = Animation
 		end
-
 		if not self.Animation:IsPlaying() then self.Animation:Play() self.NewProc:Show() end
 	else
 		if self.overlay then
-			if self.NewProc then
-				self.NewProc:Hide()
-			end
-
+			if self.NewProc then self.NewProc:Hide() end
 			self.overlay:Show()
 			ShowOverlayGlow(self)
 		else
