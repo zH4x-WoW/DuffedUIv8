@@ -571,6 +571,7 @@ function Bags:UpdateAllBankBags()
 				NumButtons = NumButtons + 1
 			end
 			Bags.SkinBagButton(Button)
+			Bags.SlotUpdate(self, Bag - 1, Button)
 			LastButton = Button
 		end
 	end
