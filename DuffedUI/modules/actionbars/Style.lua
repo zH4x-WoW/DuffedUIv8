@@ -26,31 +26,6 @@ function D.StyleActionBarButton(self)
 	HotKey:ClearAllPoints()
 	HotKey:Point("TOPRIGHT", 0, -3)
 
-	local Text = HotKey:GetText()
-	if Text then
-		Text = replace(Text, "(s%-)", "S")
-		Text = replace(Text, "(a%-)", "A")
-		Text = replace(Text, "(c%-)", "C")
-		Text = replace(Text, "(Mouse Button )", "M")
-		Text = replace(Text, KEY_BUTTON3, "M3")
-		Text = replace(Text, KEY_PAGEUP, "PU")
-		Text = replace(Text, KEY_PAGEDOWN, "PD")
-		Text = replace(Text, KEY_SPACE, "SpB")
-		Text = replace(Text, KEY_INSERT, "Ins")
-		Text = replace(Text, KEY_HOME, "Hm")
-		Text = replace(Text, KEY_DELETE, "Del")
-		Text = replace(Text, KEY_NUMPADDECIMAL, "Nu.")
-		Text = replace(Text, KEY_NUMPADDIVIDE, "Nu/")
-		Text = replace(Text, KEY_NUMPADMINUS, "Nu-")
-		Text = replace(Text, KEY_NUMPADMULTIPLY, "Nu*")
-		Text = replace(Text, KEY_NUMPADPLUS, "Nu+")
-		Text = replace(Text, KEY_NUMLOCK, "NuL")
-		Text = replace(Text, KEY_MOUSEWHEELDOWN, "MWD")
-		Text = replace(Text, KEY_MOUSEWHEELUP, "MWU")
-	end
-
-	if HotKey:GetText() == _G["RANGE_INDICATOR"] then HotKey:SetText("") else HotKey:SetText(Text) end
-
 	if Border and Border:IsShown() then
 		Border:Hide()
 		Border = D.dummy
@@ -174,7 +149,7 @@ function D.StylePet()
 	end
 end
 
---[[D.Keybind = function(self, actionButtonType)
+D.UpdateKeybind = function(self, actionButtonType)
 	local HotKey = _G[self:GetName().."HotKey"]
 	local Text = HotKey:GetText()
 
@@ -204,7 +179,7 @@ end
 		HotKey:SetText(Text)
 	end
 end
-hooksecurefunc("ActionButton_UpdateHotkeys", D.Keybind)]]
+hooksecurefunc("ActionButton_OnEvent", function(self, event, ...) if event == "PLAYER_ENTERING_WORLD" then ActionButton_UpdateHotkeys(self, self.buttonType) end end)
 
 local buttons = 0
 local function SetupFlyoutButton()
@@ -367,4 +342,5 @@ end
 hooksecurefunc("ActionButton_ShowOverlayGlow", D.ShowHighlightActionButton)
 hooksecurefunc("ActionButton_HideOverlayGlow", D.HideHighlightActionButton)
 hooksecurefunc("ActionButton_Update", D.StyleActionBarButton)
+hooksecurefunc("ActionButton_UpdateHotkeys", D.UpdateKeybind)
 hooksecurefunc("ActionButton_UpdateFlyout", D.StyleActionBarFlyout)
