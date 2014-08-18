@@ -15,7 +15,6 @@ local BagHelpBox = BagHelpBox
 local ButtonSize = C["bags"].buttonsize
 local ButtonSpacing = C["bags"].spacing
 local ItemsPerRow = C["bags"].bpr
-local Bags = CreateFrame("Frame")
 
 local Boxes = {
 	BagItemSearchBox,
@@ -39,32 +38,32 @@ local BlizzardBank = {
 	BankFrameBag7,
 }
 
-function Bags:SkinBagButton()
-	if self.IsSkinned then return end
+function SkinBagButton(Button)
+	if Button.IsSkinned then return end
 
-	local Icon = _G[self:GetName()  ..  "IconTexture"]
-	local Quest = _G[self:GetName()  ..  "IconQuestTexture"]
-	local JunkIcon = self.JunkIcon
-	local Border = self.IconBorder
-	local BattlePay = self.BattlepayItemTexture
+	local Icon = _G[Button:GetName()  ..  "IconTexture"]
+	local Quest = _G[Button:GetName()  ..  "IconQuestTexture"]
+	local JunkIcon = Button.JunkIcon
+	local Border = Button.IconBorder
+	local BattlePay = Button.BattlepayItemTexture
 
 	Border:SetAlpha(0)
 
 	Icon:SetTexCoord(unpack(D.IconCoord))
-	Icon:SetInside(self)
+	Icon:SetInside(Button)
 	if Quest then Quest:SetAlpha(0) end
 	if JunkIcon then JunkIcon:SetAlpha(0) end
 	if BattlePay then BattlePay:SetAlpha(0) end
 
-	self:SetNormalTexture("")
-	self:SetPushedTexture("")
-	self:SetTemplate()
-	self:StyleButton()
+	Button:SetNormalTexture("")
+	Button:SetPushedTexture("")
+	Button:SetTemplate()
+	Button:StyleButton()
 
-	self.IsSkinned = true
+	Button.IsSkinned = true
 end
 
-function Bags:HideBlizzard()
+function HideBlizzard()
 	local TokenFrame = _G["BackpackTokenFrame"]
 	local Inset = _G["BankFrameMoneyFrameInset"]
 	local Border = _G["BankFrameMoneyFrameBorder"]
@@ -105,7 +104,7 @@ function Bags:HideBlizzard()
 	end
 end
 
-function Bags:CreateReagentContainer()
+function CreateReagentContainer()
 	ReagentBankFrame:StripTextures()
 
 	local Reagent = CreateFrame("Frame", nil, UIParent)
@@ -118,8 +117,8 @@ function Bags:CreateReagentContainer()
 	Reagent:SetWidth(((ButtonSize + ButtonSpacing) * ItemsPerRow) + 22 - ButtonSpacing)
 	if C["chat"].lbackground then Reagent:SetPoint("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 0, 6) else Reagent:SetPoint("BOTTOMLEFT", DuffedUIInfoLeft, "TOPLEFT", 0, 6) end
 	Reagent:SetTemplate("Transparent")
-	Reagent:SetFrameStrata(self.Bank:GetFrameStrata())
-	Reagent:SetFrameLevel(self.Bank:GetFrameLevel())
+	Reagent:SetFrameStrata(_G["DuffedUI_Bank"]:GetFrameStrata())
+	Reagent:SetFrameLevel(_G["DuffedUI_Bank"]:GetFrameLevel())
 
 	SwitchBankButton:Size(75, 23)
 	SwitchBankButton:SkinButton()
@@ -129,7 +128,7 @@ function Bags:CreateReagentContainer()
 	SwitchBankButton.Text:SetText(BANK)
 	SwitchBankButton:SetScript("OnClick", function()
 		Reagent:Hide()
-		self.Bank:Show()
+		_G["DuffedUI_Bank"]:Show()
 		BankFrame_ShowPanel(BANK_PANELS[1].name)
 		for i = 5, 11 do
 			if (not IsBagOpen(i)) then self:OpenBag(i, 1) end
@@ -159,8 +158,7 @@ function Bags:CreateReagentContainer()
 		ReagentBankFrame:SetAllPoints()
 
 		Button:ClearAllPoints()
-		Button:SetWidth(ButtonSize)
-		Button:SetHeight(ButtonSize)
+		Button:Size(ButtonSize, ButtonSize)
 		Button:SetNormalTexture("")
 		Button:SetPushedTexture("")
 		Button:SetHighlightTexture("")
@@ -197,8 +195,8 @@ function Bags:CreateReagentContainer()
 	self.Reagent = Reagent
 end
 
-function Bags:CreateContainer(storagetype, ...)
-	local Container = CreateFrame("Frame", nil, UIParent)
+function CreateContainer(storagetype, ...)
+	local Container = CreateFrame("Frame", "DuffedUI_" .. storagetype, UIParent)
 	Container:SetScale(C["bags"].scale)
 	Container:SetWidth(((ButtonSize + ButtonSpacing) * ItemsPerRow) + 22 - ButtonSpacing)
 	Container:SetPoint(...)
@@ -378,23 +376,21 @@ function Bags:CreateContainer(storagetype, ...)
 
 		BankFrame:EnableMouse(false)
 
-		Container.BagsContainer = BankBagsContainer
-		Container.ReagentButton = SwitchReagentButton
+		_G["DuffedUI_Bank"].BagsContainer = BankBagsContainer
+		_G["DuffedUI_Bank"].ReagentButton = SwitchReagentButton
 		Container.SortButton = SortButton
 	end
-
-	self[storagetype] = Container
 end
 
-function Bags:SetBagsSearchPosition()
+function SetBagsSearchPosition()
 	local BagItemSearchBox = BagItemSearchBox
 	local BankItemSearchBox = BankItemSearchBox
 
-	BagItemSearchBox:SetParent(self.Bag)
-	BagItemSearchBox:SetFrameLevel(self.Bag:GetFrameLevel() + 2)
-	BagItemSearchBox:SetFrameStrata(self.Bag:GetFrameStrata())
+	BagItemSearchBox:SetParent(_G["DuffedUI_Bag"])
+	BagItemSearchBox:SetFrameLevel(_G["DuffedUI_Bag"]:GetFrameLevel() + 2)
+	BagItemSearchBox:SetFrameStrata(_G["DuffedUI_Bag"]:GetFrameStrata())
 	BagItemSearchBox:ClearAllPoints()
-	BagItemSearchBox:SetPoint("TOPRIGHT", self.Bag, "TOPRIGHT", -28, -6)
+	BagItemSearchBox:SetPoint("TOPRIGHT", _G["DuffedUI_Bag"], "TOPRIGHT", -28, -6)
 	BagItemSearchBox:StripTextures()
 	BagItemSearchBox:SetTemplate()
 	BagItemSearchBox.SetParent = Noop
@@ -404,14 +400,14 @@ function Bags:SetBagsSearchPosition()
 	BankItemSearchBox:Hide()
 end
 
-function Bags:SkinEditBoxes()
+function SkinEditBoxes()
 	for _, Frame in pairs(Boxes) do
 		Frame:SkinEditBox()
 		Frame.backdrop:StripTextures()
 	end
 end
 
-function Bags:SlotUpdate(id, button)
+function SlotUpdate(id, button)
 	local ItemLink = GetContainerItemLink(id, button:GetID())
 	local Texture, Count, Lock = GetContainerItemInfo(id, button:GetID())
 	local IsQuestItem, QuestId, IsActive = GetContainerItemQuestInfo(id, button:GetID())
@@ -451,15 +447,15 @@ function Bags:SlotUpdate(id, button)
 	end
 end
 
-function Bags:BagUpdate(id)
+function BagUpdate(id)
 	local Size = GetContainerNumSlots(id)
 	for Slot = 1, Size do
 		local Button = _G["ContainerFrame" .. (id + 1) .. "Item" .. Slot]
-		self:SlotUpdate(id, Button)
+		SlotUpdate(id, Button)
 	end
 end
 
-function Bags:UpdateAllBags()
+function UpdateAllBags()
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
 
 	for Bag = 1, 5 do
@@ -470,8 +466,7 @@ function Bags:UpdateAllBags()
 			local Money = ContainerFrame1MoneyFrame
 
 			Button:ClearAllPoints()
-			Button:SetWidth(ButtonSize)
-			Button:SetHeight(ButtonSize)
+			Button:Size(ButtonSize, ButtonSize)
 			Button:SetScale(C["bags"].scale)
 			Button:SetFrameStrata("HIGH")
 			Button:SetFrameLevel(2)
@@ -482,12 +477,12 @@ function Bags:UpdateAllBags()
 
 			Money:ClearAllPoints()
 			Money:Show()
-			Money:SetPoint("TOPLEFT", Bags.Bag, "TOPLEFT", 8, -10)
+			Money:SetPoint("TOPLEFT", _G["DuffedUI_Bag"], "TOPLEFT", 8, -10)
 			Money:SetFrameStrata("HIGH")
 			Money:SetFrameLevel(2)
 			Money:SetScale(C["bags"].scale)
 			if (Bag == 1 and Item == 16) then
-				Button:SetPoint("TOPLEFT", Bags.Bag, "TOPLEFT", 10, -40)
+				Button:SetPoint("TOPLEFT", _G["DuffedUI_Bag"], "TOPLEFT", 10, -40)
 				LastRowButton = Button
 				LastButton = Button
 			elseif (NumButtons == ItemsPerRow) then
@@ -501,16 +496,16 @@ function Bags:UpdateAllBags()
 				Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (ButtonSpacing + ButtonSize), 0)
 				NumButtons = NumButtons + 1
 			end
-			Bags.SkinBagButton(Button)
+			SkinBagButton(Button)
 			LastButton = Button
 		end
-		Bags:BagUpdate(ID)
+		BagUpdate(ID)
 	end
 
-	Bags.Bag:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 76) - ButtonSpacing)
+	_G["DuffedUI_Bag"]:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 76) - ButtonSpacing)
 end
 
-function Bags:UpdateAllBankBags()
+function UpdateAllBankBags()
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
 
 	for Bank = 1, 28 do
@@ -519,8 +514,7 @@ function Bags:UpdateAllBankBags()
 		local BankFrameMoneyFrame = BankFrameMoneyFrame
 
 		Button:ClearAllPoints()
-		Button:SetWidth(ButtonSize)
-		Button:SetHeight(ButtonSize)
+		Button:Size(ButtonSize, ButtonSize)
 		Button:SetFrameStrata("HIGH")
 		Button:SetFrameLevel(2)
 		Button:SetScale(C["bags"].scale)
@@ -528,7 +522,7 @@ function Bags:UpdateAllBankBags()
 
 		BankFrameMoneyFrame:Hide()
 		if (Bank == 1) then
-			Button:SetPoint("TOPLEFT", Bags.Bank, "TOPLEFT", 10, -10)
+			Button:SetPoint("TOPLEFT", _G["DuffedUI_Bank"], "TOPLEFT", 10, -10)
 			LastRowButton = Button
 			LastButton = Button
 		elseif (NumButtons == ItemsPerRow) then
@@ -542,8 +536,8 @@ function Bags:UpdateAllBankBags()
 			Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (ButtonSpacing + ButtonSize), 0)
 			NumButtons = NumButtons + 1
 		end
-		Bags.SkinBagButton(Button)
-		Bags.SlotUpdate(self, -1, Button)
+		SkinBagButton(Button)
+		SlotUpdate(-1, Button)
 		LastButton = Button
 	end
 
@@ -553,8 +547,7 @@ function Bags:UpdateAllBankBags()
 		for Item = Slots, 1, -1 do
 			local Button = _G["ContainerFrame"  ..  Bag  ..  "Item" .. Item]
 			Button:ClearAllPoints()
-			Button:SetWidth(ButtonSize)
-			Button:SetHeight(ButtonSize)
+			Button:SetWidth(ButtonSize, ButtonSize)
 			Button:SetFrameStrata("HIGH")
 			Button:SetFrameLevel(2)
 			Button:SetScale(C["bags"].scale)
@@ -570,15 +563,28 @@ function Bags:UpdateAllBankBags()
 				Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (ButtonSpacing+ButtonSize), 0)
 				NumButtons = NumButtons + 1
 			end
-			Bags.SkinBagButton(Button)
-			Bags.SlotUpdate(self, Bag - 1, Button)
+			SkinBagButton(Button)
+			SlotUpdate(Bag - 1, Button)
 			LastButton = Button
 		end
 	end
-	Bags.Bank:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)
+	_G["DuffedUI_Bank"]:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)
 end
 
-function Bags:OpenBag(id)
+ContainerFrame1Item1:SetScript("OnHide", function() _G["DuffedUI_Bag"]:Hide() end)
+
+BankFrameItem1:SetScript("OnHide", function() _G["DuffedUI_Bank"]:Hide() end)
+
+BankFrameItem1:SetScript("OnShow", function() _G["DuffedUI_Bank"]:Show() end)
+
+if C["chat"].rbackground then CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 6) else CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIInfoRight, "TOPRIGHT", 0, 6) end
+if C["chat"].lbackground then CreateContainer("Bank", "BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 0, 6) else CreateContainer("Bank", "BOTTOMLEFT", DuffedUIInfoLeft, "TOPLEFT", 0, 6) end
+
+HideBlizzard()
+SetBagsSearchPosition()
+SkinEditBoxes()
+
+function OpenBag(id, IsBank)
 	if (not CanOpenPanels()) then
 		if (UnitIsDead("player")) then NotWhileDeadError() end
 		return
@@ -590,7 +596,6 @@ function Bags:OpenBag(id)
 	if OpenFrame.size and OpenFrame.size ~= Size then
 		for i = 1, OpenFrame.size do
 			local Button = _G[OpenFrame:GetName() .. "Item" .. i]
-			
 			Button:Hide()
 		end
 	end
@@ -605,103 +610,62 @@ function Bags:OpenBag(id)
 	OpenFrame:SetID(id)
 	OpenFrame:Show()
 
-	if (id == 4) then Bags:UpdateAllBags() elseif (id == 11) then Bags:UpdateAllBankBags() end
+	if (id == 4) then UpdateAllBags() elseif (id == 11) then UpdateAllBankBags() end
 end
 
-function Bags:CloseBag(id) CloseBag(id) end
-
-function Bags:ToggleBags()
-	local Bag = ContainerFrame1
-	local Bank = BankFrame
-
-	if Bag:IsShown() then
-		if not Bank:IsShown() then
-			self.Bag:Hide()
-			self:CloseBag(0)
-			for i = 1, 4 do self:CloseBag(i) end
+function UpdateContainerFrameAnchors() end
+function ToggleBag() ToggleAllBags() end
+function ToggleBackpack() ToggleAllBags() end
+function OpenAllBags() ToggleAllBags() end
+function OpenBackpack() ToggleAllBags() end
+function ToggleAllBags()
+	if ContainerFrame1:IsShown() then
+		if not BankFrame:IsShown() then
+			_G["DuffedUI_Bag"]:Hide()
+			CloseBag(0)
+			for i = 1, 4 do CloseBag(i) end
 		end
 	else
-		self.Bag:Show()
-		self:OpenBag(0, 1)
-		for i = 1, 4 do self:OpenBag(i, 1) end
+		_G["DuffedUI_Bag"]:Show()
+		OpenBag(0, 1)
+		for i = 1, 4 do OpenBag(i, 1) end
 	end
 
-	if Bank:IsShown() then
-		self.Bank:Show()
+	if BankFrame:IsShown() then
+		_G["DuffedUI_Bank"]:Show()
 		for i = 5, 11 do
-			if (not IsBagOpen(i)) then self:OpenBag(i, 1) end
+			if not IsBagOpen(i) then OpenBag(i, 1) end
 		end
 	else
-		self.Bank:Hide()
-		for i = 5, 11 do self:CloseBag(i) end
+		_G["DuffedUI_Bank"]:Hide()
+		for i = 5, 11 do CloseBag(i) end
 	end
 end
 
-function Bags:OnEvent(event, ...)
-	if (event == "BAG_UPDATE") then
-		self:BagUpdate(...)
-	elseif (event == "PLAYERBANKSLOTS_CHANGED") then
-		local ID =  ...
+local EventFrame = CreateFrame("Frame")
+EventFrame:RegisterEvent("BAG_UPDATE")
+EventFrame:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
+EventFrame:RegisterEvent("BAG_UPDATE_COOLDOWN")
+EventFrame:RegisterEvent("ITEM_LOCK_CHANGED")
+EventFrame:RegisterEvent("BANKFRAME_OPENED")
+EventFrame:RegisterEvent("BANKFRAME_CLOSED")
+EventFrame:RegisterEvent("BAG_CLOSED")
+EventFrame:RegisterEvent("REAGENTBANK_UPDATE")
+EventFrame:RegisterEvent("BANK_BAG_SLOT_FLAGS_UPDATED")
+EventFrame:SetScript("OnEvent", function(self, event, ...)
+	if event == "BAG_UPDATE" then
+		BagUpdate(...)
+	elseif event == "PLAYERBANKSLOTS_CHANGED" then
+		local ID = ...
 		if ID <= 28 then
 			local Button = _G["BankFrameItem" .. ID]
-			self:SlotUpdate(-1, Button)
+			SlotUpdate(-1, Button)
 		else
 			CloseBankFrame()
 		end
-	elseif (event == "BAG_UPDATE_COOLDOWN") then
-		-- Cooldown Update Codes  ...
-	elseif (event == "ITEM_LOCK_CHANGED") then
-		-- Lock!
+	elseif event == "BAG_UPDATE_COOLDOWN" then
+
+	elseif event == "ITEM_LOCK_CHANGED" then
+
 	end
-end
-
-function Bags:Enable()
-	local Bag = ContainerFrame1
-	local GameMenu = GameMenuFrame
-	local Bank = BankFrameItem1
-
-	if C["chat"].rbackground then 
-		self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 6)
-	else
-		self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIInfoRight, "TOPRIGHT", 0, 6)
-	end
-	if C["chat"].lbackground then
-		self:CreateContainer("Bank", "BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 0, 6)
-	else
-		self:CreateContainer("Bank", "BOTTOMLEFT", DuffedUIInfoLeft, "TOPLEFT", 0, 6)
-	end
-	self:HideBlizzard()
-	self:SetBagsSearchPosition()
-	self:SkinEditBoxes()
-
-	Bag:SetScript("OnHide", function()
-		self.Bag:Hide()
-		if self.Reagent and self.Reagent:IsShown() then self.Reagent:Hide() end
-	end)
-
-	Bank:SetScript("OnHide", function() self.Bank:Hide() end)
-
-	function UpdateContainerFrameAnchors() end
-	function ToggleBag() ToggleAllBags() end
-	function ToggleBackpack() ToggleAllBags() end
-	function OpenAllBags() ToggleAllBags() end
-	function OpenBackpack()  ToggleAllBags() end
-	function ToggleAllBags() self:ToggleBags() end
-
-	self:RegisterEvent("BAG_UPDATE")
-	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
-	self:RegisterEvent("BAG_UPDATE_COOLDOWN")
-	self:RegisterEvent("ITEM_LOCK_CHANGED")
-	self:RegisterEvent("BANKFRAME_OPENED")
-	self:RegisterEvent("BANKFRAME_CLOSED")
-	self:RegisterEvent("BAG_CLOSED")
-	self:RegisterEvent("REAGENTBANK_UPDATE")
-	self:RegisterEvent("BANK_BAG_SLOT_FLAGS_UPDATED")
-	self:SetScript("OnEvent", self.OnEvent)
-end
-
-Bags:RegisterEvent("ADDON_LOADED")
-Bags:RegisterEvent("PLAYER_ENTERING_WORLD")
-Bags:SetScript("OnEvent", function(self, event,  ...)
-	Bags:Enable()
 end)
