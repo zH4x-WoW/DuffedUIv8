@@ -150,9 +150,9 @@ local function LoadSkin()
 			local icon = _G["LootButton" .. i .. "IconTexture"]
 			_G["LootButton" .. i .. "NameFrame"]:Hide()
 			button:SkinButton()
-			icon:SetTexCoord(.1,.9,.1,.9)
+			icon:SetTexCoord(.1, .9, .1, .9)
 			icon:SetInside()
-			--_G["LootButton" .. i .. "IconQuestTexture"]:Hide()
+			_G["LootButton" .. i .. "IconQuestTexture"]:Hide()
 
 			local point, attachTo, point2, x, y = button:GetPoint()
 			button:ClearAllPoints()
@@ -217,8 +217,6 @@ local function LoadSkin()
 
 		LootFrameDownButton:SkinNextPrevButton()
 		LootFrameUpButton:SkinNextPrevButton()
-		--SquareButton_SetIcon(LootFrameUpButton, 'UP')
-		--SquareButton_SetIcon(LootFrameDownButton, 'DOWN')
 	end
 end
 

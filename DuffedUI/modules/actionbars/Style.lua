@@ -200,8 +200,6 @@ function D.StyleActionBarFlyout(button)
 	if(not button.FlyoutArrow or not button.FlyoutArrow:IsShown()) then return end
 
 	if not button.FlyoutBorder then return end
-	local combat = InCombatLockdown()
-
 	button.FlyoutBorder:SetAlpha(0)
 	button.FlyoutBorderShadow:SetAlpha(0)
 
@@ -234,26 +232,14 @@ function D.StyleActionBarFlyout(button)
 		local point, _, _, _, _ = button:GetParent():GetParent():GetPoint()
 		if point == "UNKNOWN" then return end
 
-		if strfind(point, "TOP") then
+		if strfind == "TOP" then
 			button.FlyoutArrow:ClearAllPoints()
-			button.FlyoutArrow:SetPoint("BOTTOM", button, "BOTTOM", 0, -arrowDistance)
-			SetClampedTextureRotation(button.FlyoutArrow, 180)
-			if not combat then button:SetAttribute("flyoutDirection", "DOWN") end
+			button.FlyoutArrow:SetPoint("TOP", button, "TOP", 0, arrowDistance)
+			SetClampedTextureRotation(button.FlyoutArrow, 0)
 		elseif point == "RIGHT" then
 			button.FlyoutArrow:ClearAllPoints()
 			button.FlyoutArrow:SetPoint("LEFT", button, "LEFT", -arrowDistance, 0)
 			SetClampedTextureRotation(button.FlyoutArrow, 270)
-			if not combat then button:SetAttribute("flyoutDirection", "LEFT") end
-		elseif point == "LEFT" then
-			button.FlyoutArrow:ClearAllPoints()
-			button.FlyoutArrow:SetPoint("RIGHT", button, "RIGHT", arrowDistance, 0)
-			SetClampedTextureRotation(button.FlyoutArrow, 90)
-			if not combat then button:SetAttribute("flyoutDirection", "RIGHT") end
-		elseif point == "CENTER" or strfind(point, "BOTTOM") then
-			button.FlyoutArrow:ClearAllPoints()
-			button.FlyoutArrow:SetPoint("TOP", button, "TOP", 0, arrowDistance)
-			SetClampedTextureRotation(button.FlyoutArrow, 0)
-			if not combat then button:SetAttribute("flyoutDirection", "UP") end
 		end
 	end
 end
