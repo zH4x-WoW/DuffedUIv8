@@ -153,7 +153,7 @@ MB_mui:SetAttribute("macrotext1", "/moveui")
 
 D.CreateBtn("MB_binds", MB_reload, 19, 19, L.sesbutton_kb, "K")
 MB_binds:Point("LEFT", MB_mui, "RIGHT", 2, 0)
-if IsAddOnLoaded("FriendsMenuXP") then MB_binds:SetAttribute("macrotext1", "/hb") else  MB_binds:SetAttribute("macrotext1", "/kb") end
+MB_binds:SetAttribute("macrotext1", "/kb")
 
 if Enablegear == true then
 	local gearSets = CreateFrame("Frame", nil, MB_reload)	

@@ -114,9 +114,9 @@ local function exec(self, enable)
 	
 	if self == DuffedUIWatchFrameAnchor or self == DuffedUIExtraActionBarFrameHolder then
 		if enable then
-			self:SetAlpha(1)		
+			self:SetAlpha(1)
 		else
-			self:SetAlpha(0)		
+			self:SetAlpha(0)
 		end
 	end
 	
@@ -195,7 +195,7 @@ D.MoveUIElements = function()
 					self.moving = false 
 					self:StopMovingOrSizing() 
 				end)			
-				exec(D.AllowFrameMoving[i], enable)			
+				exec(D.AllowFrameMoving[i], enable)
 				if D.AllowFrameMoving[i].text then 
 					D.AllowFrameMoving[i].text:Show() 
 				end

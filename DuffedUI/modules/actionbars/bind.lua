@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 -- keybind feature
 local bind = CreateFrame("Frame", "DuffedUIHoverBind", UIParent)
 
@@ -15,7 +15,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 		bind:EnableMouseWheel(true)
 		bind.texture = bind:CreateTexture()
 		bind.texture:SetAllPoints(bind)
-		bind.texture:SetTexture(0, 0, 0, .25)
+		bind.texture:SetTexture(0, 0, 0, .5)
 		bind:Hide()
 
 		local elapsed = 0
@@ -58,7 +58,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 				GameTooltip:AddLine("Trigger")
 				GameTooltip:Show()
 				GameTooltip:SetScript("OnHide", function(self)
-					self:SetOwner(bind, "ANCHOR_NONE")
+					self:SetOwner(bind, "ANCHOR_TOP")
 					self:SetPoint("BOTTOM", bind, "TOP", 0, 1)
 					self:AddLine(bind.button.name, 1, 1, 1)
 					bind.button.bindings = {GetBindingKey(spellmacro.." "..bind.button.name)}
@@ -80,7 +80,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 				
 				self.button.name = GetMacroInfo(self.button.id)
 				
-				GameTooltip:SetOwner(bind, "ANCHOR_NONE")
+				GameTooltip:SetOwner(bind, "ANCHOR_TOP")
 				GameTooltip:SetPoint("BOTTOM", bind, "TOP", 0, 1)
 				GameTooltip:AddLine(bind.button.name, 1, 1, 1)
 				
@@ -109,7 +109,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 				GameTooltip:AddLine("Trigger")
 				GameTooltip:Show()
 				GameTooltip:SetScript("OnHide", function(self)
-					self:SetOwner(bind, "ANCHOR_NONE")
+					self:SetOwner(bind, "ANCHOR_TOP")
 					self:SetPoint("BOTTOM", bind, "TOP", 0, 1)
 					self:AddLine(bind.button.name, 1, 1, 1)
 					bind.button.bindings = {GetBindingKey(bind.button.bindstring)}
@@ -130,8 +130,10 @@ SlashCmdList.MOUSEOVERBIND = function()
 				
 				if not self.button.name then return end
 				
-				if not self.button.action or self.button.action < 1 or self.button.action > 132 then
+				if not self.button.action or self.button.action < 1 or self.button.action > 132 and not self.button.keyBoundTarget then
 					self.button.bindstring = "CLICK "..self.button.name..":LeftButton"
+				elseif self.button.keyBoundTarget then
+					self.button.bindstring = self.button.keyBoundTarget
 				else
 					local modact = 1+(self.button.action-1)%12
 					if self.button.action < 25 or self.button.action > 72 then
@@ -150,7 +152,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 				GameTooltip:AddLine("Trigger")
 				GameTooltip:Show()
 				GameTooltip:SetScript("OnHide", function(self)
-					self:SetOwner(bind, "ANCHOR_NONE")
+					self:SetOwner(bind, "ANCHOR_TOP")
 					self:SetPoint("BOTTOM", bind, "TOP", 0, 1)
 					self:AddLine(bind.button.name, 1, 1, 1)
 					bind.button.bindings = {GetBindingKey(bind.button.bindstring)}
@@ -187,10 +189,9 @@ SlashCmdList.MOUSEOVERBIND = function()
 			or key == "RALT"
 			or key == "UNKNOWN"
 			or key == "LeftButton"
-			or key == "MiddleButton"
 			then return end
 			
-			--if key == "MiddleButton" then key = "BUTTON3" end
+			if key == "MiddleButton" then key = "BUTTON3" end
 			if key == "Button4" then key = "BUTTON4" end
 			if key == "Button5" then key = "BUTTON5" end
 			
@@ -242,10 +243,10 @@ SlashCmdList.MOUSEOVERBIND = function()
 		local pet = PetActionButton1:GetScript("OnClick")
 		local button = SecureActionButton_OnClick
 
-		local function register(val)
+		local function register(val, override)
 			if val.IsProtected and val.GetObjectType and val.GetScript and val:GetObjectType() == "CheckButton" and val:IsProtected() then
 				local script = val:GetScript("OnClick")
-				if script == button then
+				if script == button or override then
 					val:HookScript("OnEnter", function(self) bind:Update(self) end)
 				elseif script == stance then
 					val:HookScript("OnEnter", function(self) bind:Update(self, "STANCE") end)
@@ -271,8 +272,6 @@ SlashCmdList.MOUSEOVERBIND = function()
 				local b = _G["MacroButton"..i]
 				b:HookScript("OnEnter", function(self) bind:Update(self, "MACRO") end)
 			end
-			MacroFrameTab1:HookScript("OnMouseUp", function() localmacros = 0 end)
-			MacroFrameTab2:HookScript("OnMouseUp", function() localmacros = 1 end)
 		end
 		
 		if not IsAddOnLoaded("Blizzard_MacroUI") then
@@ -291,5 +290,4 @@ SlashCmdList.MOUSEOVERBIND = function()
 		D.ShowPopup("DUFFEDUI_KEYBIND_MODE")
 	end
 end
-SLASH_MOUSEOVERBIND1 = "/bindkey"
-if IsAddOnLoaded("FriendsMenuXP") then SLASH_MOUSEOVERBIND2 = "/hb" else SLASH_MOUSEOVERBIND2 = "/kb" end
+SLASH_MOUSEOVERBIND1 = "/kb"
