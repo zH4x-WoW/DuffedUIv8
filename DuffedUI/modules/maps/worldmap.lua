@@ -3,7 +3,6 @@ local D, C, L = unpack(select(2, ...))
 -- Modified Script from Tukui T16
 -- Credits got to Tukz & Hydra
 local _G = _G
-local Noop = function() end
 local WorldMap = CreateFrame("Frame")
 
 WorldMap.QuestTexts = {
@@ -131,20 +130,16 @@ function WorldMap:Skin()
 	ViewAllButton:ClearAllPoints()
 	ViewAllButton:SetPoint("LEFT", Map.Header, "RIGHT", 2, 0)
 	ViewAllButton:Size(299, 23)
-
 	BackButton:SkinButton()
 	BackButton:ClearAllPoints()
 	BackButton:SetPoint("LEFT", Map.Header, "RIGHT", 2, 0)
 	BackButton:Size(299, 23)
-
 	AbandonButton:StripTextures()
 	AbandonButton:SkinButton()
 	AbandonButton:ClearAllPoints()
 	AbandonButton:SetPoint("BOTTOMLEFT", QuestScroll.backdrop, "BOTTOMLEFT", 3, 3)
-
 	ShareButton:StripTextures()
 	ShareButton:SkinButton()
-
 	TrackButton:StripTextures()
 	TrackButton:SkinButton()
 
@@ -163,7 +158,7 @@ function WorldMap:Skin()
 	-- Quests Buttons
 	for i = 1, 2 do
 		local Button = i == 1 and WorldMapFrame.UIElementsFrame.OpenQuestPanelButton or WorldMapFrame.UIElementsFrame.CloseQuestPanelButton
-		local Text = (i == 1 and QUESTS_LABEL.." -->") or ("<-- "..QUESTS_LABEL)
+		local Text = (i == 1 and QUESTS_LABEL.." =>") or ("<= "..QUESTS_LABEL)
 
 		Button:ClearAllPoints()
 		Button:SetPoint("BOTTOMRIGHT", -3, 3)
@@ -176,10 +171,8 @@ function WorldMap:Skin()
 	end
 
 	Navigation:Hide()
-
 	TitleButton:ClearAllPoints()
 	TitleButton:SetAllPoints(Map.Header)
-	
 	Title:ClearAllPoints()
 	Title:SetPoint("CENTER", Map.Header)
 
@@ -189,7 +182,6 @@ function WorldMap:Skin()
 	CloseButton:SkinCloseButton()
 
 	SizeButton:Kill()
-
 	ScrollBar:Hide()
 
 	Money:StripTextures()

@@ -85,7 +85,7 @@ if C["datatext"].smf and C["datatext"].smf > 0 then
 	end
 
 	Stat:SetScript("OnEnter", function(self)
-		--if not InCombatLockdown() then
+		if not InCombatLockdown() then
 			self.tooltip = true
 			local bandwidth = GetAvailableBandwidth()
 			local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
@@ -120,15 +120,15 @@ if C["datatext"].smf and C["datatext"].smf > 0 then
 			GameTooltip:AddDoubleLine(L.datatext_inc, string.format( "%.4f", bw_in ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
 			GameTooltip:AddDoubleLine(L.datatext_out, string.format( "%.4f", bw_out ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
 			GameTooltip:Show()
-		--end
+		end
 	end)
 
 	Stat:SetScript("OnMouseDown", function(self, btn)
 		if (btn == "LeftButton") then
-			if not PVPUIFrame then
-				PVP_LoadUI()
+			if not PVEFrame then
+				PVEFrame_ToggleFrame()
 			end
-			ToggleFrame(PVPUIFrame)
+			PVEFrame_ToggleFrame()
 		else
 			collectgarbage("collect")
 		end

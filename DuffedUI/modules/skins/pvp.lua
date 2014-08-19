@@ -3,7 +3,6 @@ local D, C, L, G = unpack(select(2, ...))
 local function LoadSkin()
 	PVPUIFrame:StripTextures()
 	PVPUIFrame:SetTemplate("Transparent")
-	PVPUIFrame.Shadows:StripTextures()
 
 	for i = 1, 4 do
 		local button = _G["PVPQueueFrameCategoryButton" .. i]

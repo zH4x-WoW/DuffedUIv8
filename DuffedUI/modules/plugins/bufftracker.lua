@@ -5,7 +5,6 @@ local function SetCasterOnlyBuffs()
 	Spell1Buff = {
 		1459, -- Arcane Brilliance
 		61316, -- Dalaran Brilliance
-		77747,	-- Burning Wrath
 		109773, -- Dark Intent
 	}
 	Spell2Buff = {
@@ -15,7 +14,7 @@ local function SetCasterOnlyBuffs()
 	Spell3Buff = {
 		1126, -- Mark of the Wild
 		20217, -- Blessing of Kings
-		117667, -- Legacy of the Emperor
+		115921, -- Legacy of the Emperor
 	}
 	Spell4Buff = {
 		469, -- Commanding Shout

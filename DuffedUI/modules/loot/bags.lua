@@ -212,7 +212,7 @@ function CreateContainer(storagetype, ...)
 		BagsContainer:SetParent(Container)
 		BagsContainer:SetWidth(10)
 		BagsContainer:SetHeight(10)
-		BagsContainer:SetPoint("BOTTOMRIGHT", Container, "TOPRIGHT", 0, 27)
+		BagsContainer:SetPoint("BOTTOMRIGHT", Container, "TOPRIGHT", 0, 3)
 		BagsContainer:Hide()
 		BagsContainer:SetTemplate()
 
@@ -242,9 +242,9 @@ function CreateContainer(storagetype, ...)
 		ToggleBagsContainer:SetScript("OnMouseUp", function(self, button)
 			local Purchase = BankFramePurchaseInfo
 			if (button == "RightButton") then
-				local BanksContainer = Bags.Bank.BagsContainer
+				local BanksContainer = _G["DuffedUI_Bank"].BagsContainer
 				local Purchase = BankFramePurchaseInfo
-				local ReagentButton = Bags.Bank.ReagentButton
+				local ReagentButton = _G["DuffedUI_Bank"].ReagentButton
 				if (ReplaceBags == 0) then
 					ReplaceBags = 1
 					BagsContainer:Show()
