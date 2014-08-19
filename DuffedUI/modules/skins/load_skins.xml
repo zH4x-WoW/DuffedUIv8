@@ -1,6 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="achievement.lua" />
 	<Script file="achievementpopup.lua" />
+	<Script file="addon_manager.lua" />
 	<Script file="archeology.lua" />
 	<Script file="auction.lua" />
 	<Script file="bags.lua" />
