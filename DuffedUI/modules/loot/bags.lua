@@ -1,7 +1,6 @@
 local D, C, L, G = unpack(select(2,  ...))
 if not C["bags"].enable == true then return end
 
--- Modified Script from Tukui T16
 local _G = _G
 local Noop = function() end
 local ReplaceBags = 0
@@ -107,7 +106,7 @@ end
 function CreateReagentContainer()
 	ReagentBankFrame:StripTextures()
 
-	local Reagent = CreateFrame("Frame", nil, UIParent)
+	local Reagent = CreateFrame("Frame", "DuffedUI_Reagent", UIParent)
 	local SwitchBankButton = CreateFrame("Button", nil, Reagent)
 	local SortButton = CreateFrame("Button", nil, Reagent)
 	local NumButtons = ReagentBankFrame.size
@@ -131,7 +130,7 @@ function CreateReagentContainer()
 		_G["DuffedUI_Bank"]:Show()
 		BankFrame_ShowPanel(BANK_PANELS[1].name)
 		for i = 5, 11 do
-			if (not IsBagOpen(i)) then self:OpenBag(i, 1) end
+			if (not IsBagOpen(i)) then OpenBag(i, 1) end
 		end
 	end)
 
@@ -192,7 +191,6 @@ function CreateReagentContainer()
 	Unlock:SetAllPoints(Reagent)
 	Unlock:SetTemplate()
 	UnlockButton:SkinButton()
-	self.Reagent = Reagent
 end
 
 function CreateContainer(storagetype, ...)
@@ -327,12 +325,12 @@ function CreateContainer(storagetype, ...)
 		SwitchReagentButton:SetScript("OnClick", function()
 			BankFrame_ShowPanel(BANK_PANELS[2].name)
 			if (not ReagentBankFrame.isMade) then
-				self:CreateReagentContainer()
+				CreateReagentContainer()
 				ReagentBankFrame.isMade = true
 			else
-				self.Reagent:Show()
+				_G["DuffedUI_Reagent"]:Show()
 			end
-			for i = 5, 11 do self:CloseBag(i) end
+			for i = 5, 11 do CloseBag(i) end
 		end)
 
 		SortButton:Size(75, 23)
@@ -457,7 +455,6 @@ end
 
 function UpdateAllBags()
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
-
 	for Bag = 1, 5 do
 		local ID = Bag - 1
 		local Slots = GetContainerNumSlots(ID)
@@ -501,13 +498,11 @@ function UpdateAllBags()
 		end
 		BagUpdate(ID)
 	end
-
 	_G["DuffedUI_Bag"]:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 76) - ButtonSpacing)
 end
 
 function UpdateAllBankBags()
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
-
 	for Bank = 1, 28 do
 		local Button = _G["BankFrameItem" .. Bank]
 		local Money = ContainerFrame2MoneyFrame
@@ -543,7 +538,6 @@ function UpdateAllBankBags()
 
 	for Bag = 6, 12 do
 		local Slots = GetContainerNumSlots(Bag - 1)
-
 		for Item = Slots, 1, -1 do
 			local Button = _G["ContainerFrame"  ..  Bag  ..  "Item" .. Item]
 			Button:ClearAllPoints()
