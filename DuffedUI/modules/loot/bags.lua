@@ -565,7 +565,12 @@ function UpdateAllBankBags()
 	_G["DuffedUI_Bank"]:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)
 end
 
-ContainerFrame1Item1:SetScript("OnHide", function() _G["DuffedUI_Bag"]:Hide() end)
+ContainerFrame1Item1:SetScript("OnHide", function()
+	_G["DuffedUI_Bag"]:Hide()
+	if _G["DuffedUI_Reagent"] and _G["DuffedUI_Reagent"]:IsShown() then
+		_G["DuffedUI_Reagent"]:Hide()
+	end
+end)
 
 BankFrameItem1:SetScript("OnHide", function() _G["DuffedUI_Bank"]:Hide() end)
 
