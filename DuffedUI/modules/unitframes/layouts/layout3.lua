@@ -435,37 +435,7 @@ local function Shared(self, unit)
 				end
 
 				if D.Class == "PALADIN" then
-					local bars = CreateFrame("Frame", nil, self)
-					if C["unitframes"].movableclassbar then
-						bars:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
-					else
-						bars:Point("BOTTOMLEFT", panel, "TOPLEFT", 2, 1)
-					end
-					bars:Size(218, 5)
-					bars:SetBackdrop(backdrop)
-					bars:SetBackdropColor(0, 0, 0)
-					bars:SetBackdropBorderColor(0, 0, 0, 0)
-					for i = 1, 5 do
-						bars[i]=CreateFrame("StatusBar", self:GetName().."_HolyPower"..i, bars)
-						bars[i]:Height(5)
-						bars[i]:SetStatusBarTexture(normTex)
-						bars[i]:GetStatusBarTexture():SetHorizTile(false)
-						bars[i]:SetStatusBarColor(228/255, 225/255, 16/255)
-						bars[i].bg = bars[i]:CreateTexture(nil, "BORDER")
-						bars[i].bg:SetTexture(228/255, 225/255, 16/255)
-						if i == 1 then
-							bars[i]:SetPoint("LEFT", bars)
-							bars[i]:Width(38)
-							bars[i].bg:SetAllPoints(bars[i])
-						else
-							bars[i]:Point("LEFT", bars[i - 1], "RIGHT", 2, 0)
-							bars[i]:Width((218 / 5) - 1)
-							bars[i].bg:SetAllPoints(bars[i])
-						end
-						bars[i].bg:SetTexture(normTex)
-						bars[i].bg:SetAlpha(.15)
-					end
-					bars:CreateBackdrop()
+					D.ConstructRessources("bars", 216, 5)
 					self.HolyPower = bars
 				end
 
