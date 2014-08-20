@@ -235,8 +235,8 @@ D.SetDefaultChatPosition = function(frame)
 		local name = FCF_GetChatWindowInfo(id)
 		local fontSize = select(2, frame:GetFont())
 
-		if fontSize < 12 then
-			FCF_SetChatWindowFontSize(nil, frame, 12)
+		if fontSize < 11 then
+			FCF_SetChatWindowFontSize(nil, frame, 11)
 		else
 			FCF_SetChatWindowFontSize(nil, frame, fontSize)
 		end

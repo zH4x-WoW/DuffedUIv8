@@ -1,8 +1,7 @@
 ## Interface: 60000
 ## Author: Merith @ Zirkel des Cenarius EU
-## Version: 8.0019
+## Version: 8.0020
 ## Title: |cffC41F3BDuffedUI|r
-## Notes: UI of awesomeness!
 ## SavedVariables: DuffedUIData
 ## SavedVariablesPerCharacter: DuffedUIDataPerChar, ClickCast, ImprovedCurrency
 ## OptionalDeps: DuffedUI_ConfigUI

@@ -300,8 +300,8 @@ local function Shared(self, unit)
 					self.RunePower = rp
 				end
 
-				--D.ConstructRessources("Druid", 216, 5)
 				if D.Class == "DRUID" then
+					--D.ConstructRessources(216, 5)
 					local DruidManaBackground = CreateFrame("Frame", nil, self)
 					if C["unitframes"].movableclassbar then
 						DruidManaBackground:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
@@ -389,6 +389,7 @@ local function Shared(self, unit)
 							ComboPoints[i]:SetWidth(43)
 							ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
 						end
+						ComboPoints[i].bg = ComboPoints[i]:CreateTexture(nil, "ARTWORK")
 						ComboPoints[i]:RegisterEvent("PLAYER_ENTERING_WORLD")
 						ComboPoints[i]:RegisterEvent("UNIT_COMBO_POINTS")
 						ComboPoints[i]:RegisterEvent("PLAYER_TARGET_CHANGED")
@@ -553,7 +554,7 @@ local function Shared(self, unit)
 			castbar.time:SetTextColor(0.84, 0.75, 0.65)
 			castbar.time:SetJustifyH("RIGHT")
 
-			castbar.Text = D.SetFontString(castbar, C["media"].font, 12, "THINOUTLINE")
+			castbar.Text = D.SetFontString(castbar, C["media"].font, 11, "THINOUTLINE")
 			castbar.Text:Point("LEFT", castbar, "LEFT", 6, 0)
 			castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 			castbar:CreateBackdrop()

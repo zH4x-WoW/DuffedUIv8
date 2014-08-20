@@ -17,7 +17,7 @@ D.ChatSetup = function()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local frame = _G[format("ChatFrame%s", i)]
 		local id = frame:GetID()
-		FCF_SetChatWindowFontSize(nil, frame, 12)
+		FCF_SetChatWindowFontSize(nil, frame, 11)
 		frame:Size(D.InfoLeftRightWidth + 1, 114)
 		SetChatWindowSavedDimensions(id, D.Scale(D.InfoLeftRightWidth + 1), D.Scale(114))
 		FCF_SavePositionAndDimensions(frame)

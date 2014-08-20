@@ -383,6 +383,7 @@ local function Shared(self, unit)
 							ComboPoints[i]:SetWidth(43)
 							ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
 						end
+						ComboPoints[i].bg = ComboPoints[i]:CreateTexture(nil, "ARTWORK")
 						ComboPoints[i]:SetBackdropColor(unpack(Colors[i]))
 						ComboPoints[i]:RegisterEvent("PLAYER_ENTERING_WORLD")
 						ComboPoints[i]:RegisterEvent("UNIT_COMBO_POINTS")

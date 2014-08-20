@@ -14,15 +14,46 @@ Colors = {
 	[6] = {0, 0, 1},
 }
 
-D.ConstructEnergy("Energy", 216, 5)
+--D.ConstructEnergy("Energy", 216, 5)
 
-D.ConstructRessources = function(name, width, height)
-	local DruidMana = CreateFrame("StatusBar", name .. "ManaDisplay", UIParent)
-	DruidMana:Size(width, height)
-	DruidMana:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
-	DruidMana:SetStatusBarTexture(texture)
-	DruidMana:SetStatusBarColor(.30, .52, .90)
-	DruidMana:CreateBackdrop()
+D.ConstructRessources = function(width, height)
+	local eclipseBar = CreateFrame('Frame', nil, UIParent)
+	eclipseBar:Point("LEFT", DruidManaBackground, "LEFT", 0, 0)
+	eclipseBar:Size(width, height)
+	eclipseBar:SetFrameStrata("MEDIUM")
+	eclipseBar:SetFrameLevel(8)
+	eclipseBar:SetBackdropBorderColor(0,0,0,0)
+
+	local lunarBar = CreateFrame("StatusBar", nil, eclipseBar)
+	lunarBar:SetPoint('LEFT', eclipseBar, 'LEFT', 0, 0)
+	lunarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
+	lunarBar:SetStatusBarTexture(normTex)
+	lunarBar:SetStatusBarColor(.30, .52, .90)
+	eclipseBar.LunarBar = lunarBar
+
+	local solarBar = CreateFrame("StatusBar", nil, eclipseBar)
+	solarBar:SetPoint('LEFT', lunarBar:GetStatusBarTexture(), 'RIGHT', 0, 0)
+	solarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
+	solarBar:SetStatusBarTexture(normTex)
+	solarBar:SetStatusBarColor(.80, .82,  .60)
+	eclipseBar.SolarBar = solarBar
+
+	local eclipseBarText = eclipseBar:CreateFontString(nil, 'OVERLAY')
+	eclipseBarText:SetPoint('TOP', eclipseBar, 0, 25)
+	eclipseBarText:SetPoint('BOTTOM', eclipseBar)
+	eclipseBarText:SetFont(C["media"].font, 12, "THINOUTLINE")
+	eclipseBarText:SetShadowOffset(D.mult, -D.mult)
+	eclipseBarText:SetShadowColor(0, 0, 0, 0.4)
+	eclipseBar.PostUpdatePower = D.EclipseDirection
+
+	if eclipseBar and eclipseBar:IsShown() then FlashInfo.ManaLevel:SetAlpha(0) end
+	EclipseBar = eclipseBar
+	EclipseBar.Text = eclipseBarText
+	eclipseBar.FrameBackdrop = CreateFrame("Frame", nil, eclipseBar)
+	eclipseBar.FrameBackdrop:SetTemplate("Default")
+	eclipseBar.FrameBackdrop:SetPoint("TOPLEFT", D.Scale(-2), D.Scale(2))
+	eclipseBar.FrameBackdrop:SetPoint("BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
+	eclipseBar.FrameBackdrop:SetFrameLevel(eclipseBar:GetFrameLevel() - 1)
 
 	local ComboPoints = CreateFrame("Frame", "ComboPoints", UIParent)
 	ComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
@@ -30,7 +61,7 @@ D.ConstructRessources = function(name, width, height)
 	ComboPoints:CreateBackdrop()
 
 	for i = 1, 5 do
-		ComboPoints[i] = CreateFrame("StatusBar", name .. "ComboPoints"..i, ComboPoints)
+		ComboPoints[i] = CreateFrame("StatusBar", "ComboPoints"..i, ComboPoints)
 		ComboPoints[i]:SetHeight(height)
 		ComboPoints[i]:SetStatusBarTexture(normTex)
 		ComboPoints[i]:SetStatusBarColor(unpack(Colors[i]))
@@ -61,6 +92,4 @@ D.ConstructRessources = function(name, width, height)
 			points = pt
 		end)
 	end
-
-	self.DruidMana = DruidMana
 end
