@@ -203,6 +203,55 @@ function WorldMap:Skin()
 	WMDropDown:SetPoint("TOPLEFT", -18, -2)
 end
 
+function WorldMap:Coords()
+	local coords = CreateFrame("Frame", "CoordsFrame", WorldMapFrame)
+	local fontheight = 12 * 1.1
+	coords:SetFrameLevel(90)
+	coords:FontString("PlayerText", C["media"].font, fontheight, "THINOUTLINE")
+	coords:FontString("MouseText", C["media"].font, fontheight, "THINOUTLINE")
+	coords.PlayerText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
+	coords.MouseText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
+	coords.PlayerText:SetPoint("BOTTOMLEFT", WorldMapDetailFrame, "BOTTOMLEFT", 5, 5)
+	coords.PlayerText:SetText("Player:   0, 0")
+	coords.MouseText:SetPoint("BOTTOMLEFT", coords.PlayerText, "TOPLEFT", 0, 5)
+	coords.MouseText:SetText("Mouse:   0, 0")
+	local int = 0
+	
+	WorldMapFrame:HookScript("OnUpdate", function(self, elapsed)
+		int = int + 1
+
+		if int >= 3 then
+			local inInstance, _ = IsInInstance()
+			local x,y = GetPlayerMapPosition("player")
+			x = math.floor(100 * x)
+			y = math.floor(100 * y)
+			if x ~= 0 and y ~= 0 then
+				coords.PlayerText:SetText(PLAYER..":   "..x..", "..y)
+			else
+				coords.PlayerText:SetText(" ")
+			end
+
+			local scale = WorldMapDetailFrame:GetEffectiveScale()
+			local width = WorldMapDetailFrame:GetWidth()
+			local height = WorldMapDetailFrame:GetHeight()
+			local centerX, centerY = WorldMapDetailFrame:GetCenter()
+			local x, y = GetCursorPosition()
+			local adjustedX = (x / scale - (centerX - (width/2))) / width
+			local adjustedY = (centerY + (height/2) - y / scale) / height	
+
+			if (adjustedX >= 0  and adjustedY >= 0 and adjustedX <= 1 and adjustedY <= 1) then
+				adjustedX = math.floor(100 * adjustedX)
+				adjustedY = math.floor(100 * adjustedY)
+				coords.MouseText:SetText(MOUSE_LABEL..":   "..adjustedX..", "..adjustedY)
+			else
+				coords.MouseText:SetText(" ")
+			end
+
+			int = 0
+		end
+	end)
+end
+
 function WorldMap:AddHooks()
 	hooksecurefunc("QuestInfo_Display", self.ColorQuestText)
 	hooksecurefunc("QuestInfo_GetRewardButton", self.SkinReward)
@@ -218,6 +267,7 @@ function WorldMap:Enable()
 	end
 
 	self:Skin()
+	self:Coords()
 	self:AddHooks()
 end
 
