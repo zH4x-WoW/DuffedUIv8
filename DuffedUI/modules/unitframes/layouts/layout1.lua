@@ -411,7 +411,8 @@ local function Shared(self, unit)
 				end
 
 				if D.Class == "WARLOCK" then
-					local wb = CreateFrame("Frame", "DuffedUIWarlockSpecBars", self)
+					D.ConstructRessources("wb", 216, 5)
+					--[[local wb = CreateFrame("Frame", "DuffedUIWarlockSpecBars", self)
 					if C["unitframes"].movableclassbar then
 						wb:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
 					else
@@ -435,7 +436,7 @@ local function Shared(self, unit)
 							wb[i]:CreateBackdrop()
 						end
 						wb[i].bg = wb[i]:CreateTexture(nil, 'ARTWORK')
-					end
+					end]]
 					self.WarlockSpecBars = wb
 				end
 
