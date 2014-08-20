@@ -289,63 +289,9 @@ local function Shared(self, unit)
 
 			if C["unitframes"].classbar then
 				if D.Class == "MAGE" then
-					local mb = CreateFrame("Frame", "DuffedUIArcaneBar", self)
-					if C["unitframes"].movableclassbar then
-						mb:Point("BOTTOMLEFT", CBAnchor, "TOPLEFT", 0, 0)
-					else
-						mb:Point("BOTTOMLEFT", health, "TOPLEFT", 0, 6)
-					end
-					mb:Size(195, 5)
-					mb:SetBackdrop(backdrop)
-					mb:SetBackdropColor(0, 0, 0)
-					mb:SetBackdropBorderColor(0, 0, 0)
-
-					for i = 1, 4 do
-						mb[i] = CreateFrame("StatusBar", "DuffedUIArcaneBar"..i, mb)
-						mb[i]:Height(5)
-						mb[i]:SetStatusBarTexture(C["media"].normTex)
-						if i == 1 then
-							mb[i]:Width(195 / 4)
-							mb[i]:SetPoint("LEFT", mb, "LEFT", 0, 0)
-							mb[i]:CreateBackdrop()
-						else
-							mb[i]:Width(195 / 4)
-							mb[i]:SetPoint("LEFT", mb[i-1], "RIGHT", 6, 0)
-							mb[i]:CreateBackdrop()
-						end
-						mb[i].bg = mb[i]:CreateTexture(nil, 'ARTWORK')
-					end
+					D.ConstructRessources("mb", "rp", 216, 5)
 					self.ArcaneChargeBar = mb
-
-					if C["unitframes"].runeofpower then
-						local rp = CreateFrame("Frame", "DuffedUIRunePower", self)
-						if C["unitframes"].movableclassbar then
-							rp:Point("TOPLEFT", CBAnchor, "BOTTOMLEFT", 7, 0)
-						else
-							rp:Point("LEFT", panel, "LEFT", 4, 0)
-						end
-						rp:Size(100, 8)
-						rp:SetBackdrop(backdrop)
-						rp:SetBackdropColor(0, 0, 0)
-						rp:SetBackdropBorderColor(0, 0, 0)
-						for i = 1, 2 do
-							rp[i] = CreateFrame("StatusBar", "DuffedUIRunePower"..i, rp)
-							rp[i]:Height(5)
-							rp[i]:SetStatusBarTexture(C.media.normTex)
-							if i == 1 then
-								rp[i]:Width(204 / 2)
-								rp[i]:SetPoint("LEFT", rp, "LEFT", 0, 0)
-								rp[i]:CreateBackdrop()
-							else
-								rp[i]:Width(204 / 2)
-								rp[i]:SetPoint("LEFT", rp[i - 1], "RIGHT", 6, 0)
-								rp[i]:CreateBackdrop()
-							end
-							rp[i].bg = rp[i]:CreateTexture(nil, 'ARTWORK')
-						end
-						rp:CreateBackdrop()
-						self.RunePower = rp
-					end
+					self.RunePower = rp
 				end
 
 				if D.Class == "DRUID" then
