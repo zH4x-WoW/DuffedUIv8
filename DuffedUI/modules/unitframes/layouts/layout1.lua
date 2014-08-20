@@ -557,30 +557,8 @@ local function Shared(self, unit)
 				end
 
 				if D.Class == "PRIEST" then
-					local pb = CreateFrame("Frame", "DuffedUIShadowOrbsBar", self)
-					if C["unitframes"].movableclassbar then
-						pb:Point("BOTTOM", CBAnchor, "TOP", 2, 0)
-					else
-						pb:Point("TOP", power, "BOTTOM", 0, -1)
-					end
-					pb:Size(208, 5)
-					pb:SetBackdrop(backdrop)
-					pb:SetBackdropColor(0, 0, 0)
-					pb:SetBackdropBorderColor(0, 0, 0)	
-					for i = 1, 5 do
-						pb[i] = CreateFrame("StatusBar", "DuffedUIShadowOrbsBar"..i, pb)
-						pb[i]:Height(5)
-						pb[i]:SetStatusBarTexture(C["media"].normTex)
-						if i == 1 then
-							pb[i]:Width(200 / 5)
-							pb[i]:SetPoint("LEFT", pb, "LEFT", 0, 0)
-						else
-							pb[i]:Width(200 / 5)
-							pb[i]:SetPoint("LEFT", pb[i - 1], "RIGHT", 2, 0)
-						end
-					end
-					pb:CreateBackdrop()
-					self.ShadowOrbsBar = pb
+					D.ConstructRessources("ShadowOrbsBar", 216, 5)
+					self.ShadowOrbsBar = ShadowOrbsBar
 				end
 
 				if D.Class == "SHAMAN" then

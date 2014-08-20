@@ -1,5 +1,6 @@
-local D, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local D, C, L = unpack(select(2, ...))
 -- keybind feature
+
 local bind = CreateFrame("Frame", "DuffedUIHoverBind", UIParent)
 
 -- SLASH COMMAND
@@ -192,8 +193,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 			then return end
 			
 			if key == "MiddleButton" then key = "BUTTON3" end
-			if key == "Button4" then key = "BUTTON4" end
-			if key == "Button5" then key = "BUTTON5" end
+			if key:find('Button%d') then key = key:upper() end
 			
 			local alt = IsAltKeyDown() and "ALT-" or ""
 			local ctrl = IsControlKeyDown() and "CTRL-" or ""

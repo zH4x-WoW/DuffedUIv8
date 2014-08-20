@@ -42,7 +42,7 @@ D.ConstructEnergy = function(name, width, height)
 			local power = UnitPower("player")
 			self:SetValue(power)
 			if self.text then
-				self.text:SetText(power)
+				self.text:SetText(D.ShortValue(power))
 			end
 			self.TimeSinceLastUpdate = 0
 		end
