@@ -470,29 +470,7 @@ local function Shared(self, unit)
 				end
 
 				if D.Class == "MONK" then
-					local Bar = CreateFrame("Frame", "DuffedUIHarmony", health)
-					if C["unitframes"].movableclassbar then
-						Bar:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
-					else
-						Bar:Point("BOTTOMLEFT", health, "TOPLEFT", 0, 6)
-					end
-					Bar:Size(214, 5)
-					Bar:SetBackdrop(backdrop)
-					Bar:SetBackdropColor(0, 0, 0)
-					Bar:SetBackdropBorderColor(0, 0, 0)	
-					for i = 1, 6 do
-						Bar[i] = CreateFrame("StatusBar", "DuffedUIHarmonyBar" .. i, Bar)
-						Bar[i]:Height(5)
-						Bar[i]:SetStatusBarTexture(C["media"].normTex)
-						if i == 1 then
-							Bar[i]:Width(214 / 5)
-							Bar[i]:SetPoint("LEFT", Bar, "LEFT", 0, 0)
-						else
-							Bar[i]:Width(214 / 5)
-							Bar[i]:SetPoint("LEFT", Bar[i - 1], "RIGHT", 2, 0)
-						end
-					end
-					Bar:CreateBackdrop()
+					D.ConstructRessources("Bar", 216, 5)
 					self.HarmonyBar = Bar
 				end
 

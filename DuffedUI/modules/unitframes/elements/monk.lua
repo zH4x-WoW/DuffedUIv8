@@ -5,10 +5,10 @@ local texture = C["media"].normTex
 local layout = C["unitframes"].layout
 local font, fonsize, fontflag = C["media"].font, 12, "THINOUTLINE"
 
---[[D.ConstructEnergy("Energy", 216, 5)
+D.ConstructEnergy("Energy", 216, 5)
 
 D.ConstructRessources = function(name, width, height)
-	local Bar = CreateFrame("Frame", name, health)
+	local Bar = CreateFrame("Frame", name, UIParent)
 	Bar:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
 	Bar:Size(width, height)
 	Bar:SetBackdrop(backdrop)
@@ -29,4 +29,4 @@ D.ConstructRessources = function(name, width, height)
 	end
 
 	Bar:CreateBackdrop()
-end]]
+end
