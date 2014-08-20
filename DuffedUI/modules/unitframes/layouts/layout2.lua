@@ -426,38 +426,7 @@ local function Shared(self, unit)
 				end
 
 				if D.Class == "SHAMAN" then
-					local TotemBar = {}
-					TotemBar.Destroy = true
-					for i = 1, 4 do
-						TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_TotemBar"..i, self)
-						TotemBar[i]:SetFrameLevel(self:GetFrameLevel() + 3)
-						if i == 1 then
-							if C["unitframes"].movableclassbar then
-								TotemBar[i]:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
-							else
-								TotemBar[i]:Point("BOTTOMLEFT", health, "TOPLEFT", 0, 6)
-							end
-						else
-							TotemBar[i]:SetPoint("TOPLEFT", TotemBar[i - 1], "TOPRIGHT", D.Scale(6), 0)
-						end
-						TotemBar[i]:SetStatusBarTexture(normTex)
-						TotemBar[i]:SetHeight(D.Scale(5))
-						TotemBar[i]:SetWidth(D.Scale(196) / 4)
-						TotemBar[i]:SetFrameLevel(4)
-						TotemBar[i]:SetBackdrop(backdrop)
-						TotemBar[i]:SetBackdropColor(0, 0, 0, 1)
-						TotemBar[i]:SetMinMaxValues(0, 1)
-						TotemBar[i].bg = TotemBar[i]:CreateTexture(nil, "BORDER")
-						TotemBar[i].bg:SetAllPoints(TotemBar[i])
-						TotemBar[i].bg:SetTexture(normTex)
-						TotemBar[i].bg.multiplier = 0.2
-						TotemBar[i].border = CreateFrame("Frame", nil, TotemBar[i])
-						TotemBar[i].border:SetPoint("TOPLEFT", TotemBar[i], "TOPLEFT", D.Scale(-2), D.Scale(2))
-						TotemBar[i].border:SetPoint("BOTTOMRIGHT", TotemBar[i], "BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
-						TotemBar[i].border:SetFrameStrata("MEDIUM")
-						TotemBar[i].border:SetFrameLevel(4)
-						TotemBar[i].border:SetTemplate("Default")
-					end
+					D.ConstructRessources("TotemBar", 216, 5)
 					self.TotemBar = TotemBar
 				end
 			end

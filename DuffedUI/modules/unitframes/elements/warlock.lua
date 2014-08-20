@@ -26,7 +26,7 @@ D.ConstructRessources = function(name, width, height)
 			wb[i]:Width(width / 4)
 			wb[i]:SetPoint("LEFT", wb[i - 1], "RIGHT", 1, 0)
 		end
-		wb[i].bg = wb[i]:CreateTexture(nil, 'ARTWORK')
+		wb[i].bg = wb[i]:CreateTexture(nil, "ARTWORK")
 	end
 	wb:CreateBackdrop()
 end

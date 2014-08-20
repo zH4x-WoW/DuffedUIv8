@@ -711,7 +711,6 @@ if C["raid"].raidunitdebuffwatch == true then
 			},
 			SHAMAN = {
 				{61295, "TOPLEFT", {0.7, 0.3, 0.7}}, -- Riptide 
-				{51945, "TOPRIGHT", {0.2, 0.7, 0.2}}, -- Earthliving
 				{974, "BOTTOMRIGHT", {0.7, 0.4, 0}, true}, -- Earth Shield
 			},
 			MONK = {
