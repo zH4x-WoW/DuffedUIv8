@@ -27,6 +27,5 @@ D.ConstructRessources = function(name, width, height)
 			pb[i]:SetPoint("LEFT", pb[i - 1], "RIGHT", 1, 0)
 		end
 	end
-
 	pb:CreateBackdrop()
 end
