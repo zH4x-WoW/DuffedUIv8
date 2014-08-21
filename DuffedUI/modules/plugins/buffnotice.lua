@@ -1,13 +1,11 @@
 local D, C, L, G = unpack(select(2, ...))
 if C["auras"].buffnotice ~= true then return end
 
-local MyClass = select(2, UnitClass('player'))
 local WarningSound = C["media"].warning
 
 local BuffReminder1 = {
 	['DEATHKNIGHT'] = {
 		6673, -- Battle Shout
-		19506, -- Trueshot Aura
 		57330, -- Horn of Winter
 		93435, -- Roar of Courage (Hunter Pet)
 	},
@@ -15,7 +13,7 @@ local BuffReminder1 = {
 		1126, -- Mark of the Wild
 		20217, -- Blessing of Kings
 		90363, -- Embrace of the Shale Spider
-		117666, -- Legacy of the Emperor
+		115921, -- Legacy of the Emperor
 	},
 	['MAGE'] = {
 		1459, -- Arcane Brilliance
@@ -27,7 +25,7 @@ local BuffReminder1 = {
 		20217, -- Blessing of Kings
 		90363, -- Embrace of the Shale Spider
 		116781, -- Legacy of the White Tiger
-		117666, -- Legacy of the Emperor
+		115921, -- Legacy of the Emperor
 	},
 	['PALADIN'] = {
 		1126, -- Mark of the Wild
@@ -47,7 +45,6 @@ local BuffReminder1 = {
 	},
 	['SHAMAN'] = {
 		324, -- Lightning Shield
-		974, -- Earth Shield
 		52127, -- Water Shield
 	},
 	['WARLOCK'] = {
@@ -57,7 +54,6 @@ local BuffReminder1 = {
 	['WARRIOR'] = {
 		469, -- Commanding Shout
 		6673, -- Battle Shout
-		19506, -- Trueshot Aura
 		93435, -- Roar of Courage (Hunter Pet)
 		57330, -- Horn of Winter
 		21562, -- PW: Fortitude
@@ -98,7 +94,6 @@ local function PositionFrames(self, event)
 	local Width = 40
 	BuffsWarning1:SetPoint('LEFT', BuffsWarningFrame, 'LEFT', 0, 0)
 	BuffsWarning2:SetPoint('LEFT', BuffsWarningFrame, 'LEFT', BuffsWarning1:IsShown() and 48 or 0, 0)
-	if BuffsWarning1:IsShown() and BuffsWarning2:IsShown() then Width = 88 end
 	BuffsWarningFrame:SetWidth(Width)
 	BuffsWarningFrame:SetPoint('CENTER', UIParent, 'CENTER', 0, 100)
 end
@@ -157,11 +152,11 @@ local function SoundThrottle(self, elapsed)
 end
 
 local BuffsWarning1 = CreateWarningFrame('BuffsWarning1')
-BuffsWarning1.Buffs = BuffReminder1[MyClass]
+BuffsWarning1.Buffs = BuffReminder1[D.Class] or {}
 BuffsWarning1:SetScript('OnEvent', OnEvent)
 
 local BuffsWarning2 = CreateWarningFrame('BuffsWarning2')
-BuffsWarning2.Buffs = BuffReminder2[MyClass] or {}
+BuffsWarning2.Buffs = BuffReminder2[D.Class] or {}
 BuffsWarning2:SetScript('OnEvent', OnEvent)
 
 local BuffsWarningFrame = CreateFrame('Frame', 'BuffsWarningFrame', UIParent)

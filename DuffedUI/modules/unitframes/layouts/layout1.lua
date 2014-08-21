@@ -18,14 +18,6 @@ local backdrop = {
 	insets = {top = -D.mult, left = -D.mult, bottom = -D.mult, right = -D.mult},
 }
 
-Colors = {
-	[1] = {.70, .30, .30},
-	[2] = {.70, .40, .30},
-	[3] = {.60, .60, .30},
-	[4] = {.40, .70, .30},
-	[5] = {.30, .70, .30},
-}
-
 --	Layout
 local function Shared(self, unit)
 	self.colors = D.UnitColor
@@ -277,22 +269,6 @@ local function Shared(self, unit)
 				self.Statue = bar
 			end
 
-			if C["unitframes"].movableclassbar then
-				local cba = CreateFrame("Frame", "CBAnchor", UIParent)
-				cba:SetTemplate("Default")
-				cba:Size(218, 15)
-				cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 300)
-				cba:SetClampedToScreen(true)
-				cba:SetMovable(true)
-				cba:SetBackdropColor(0, 0, 0)
-				cba:SetBackdropBorderColor(1, 0, 0)
-				cba.text = D.SetFontString(cba, C["media"].font, 11)
-				cba.text:SetPoint("CENTER")
-				cba.text:SetText("Move Classbar")
-				cba:Hide()
-				tinsert(D.AllowFrameMoving, CBAnchor)
-			end
-
 			if C["unitframes"].classbar then
 				if D.Class == "MAGE" then
 					D.ConstructRessources("mb", "rp", 216, 5)
@@ -301,114 +277,11 @@ local function Shared(self, unit)
 				end
 
 				if D.Class == "DRUID" then
-					--D.ConstructRessources(216, 5)
-					local DruidManaBackground = CreateFrame("Frame", nil, self)
-					if C["unitframes"].movableclassbar then
-						DruidManaBackground:Point("BOTTOM", CBAnchor, "TOP", 0, 0)
-					else
-						DruidManaBackground:Point("TOP", power, "BOTTOM", 0, -12)
-					end
-					DruidManaBackground:Size(176, 2)
-					DruidManaBackground:SetFrameStrata("MEDIUM")
-					DruidManaBackground:SetFrameLevel(8)
-					DruidManaBackground:SetTemplate("Default")
-					DruidManaBackground:SetBackdropBorderColor(0, 0, 0, 0)
-
-					local DruidManaBarStatus = CreateFrame("StatusBar", nil, DruidManaBackground)
-					DruidManaBarStatus:SetPoint("LEFT", DruidManaBackground, "LEFT", 0, 0)
-					DruidManaBarStatus:SetSize(DruidManaBackground:GetWidth(), DruidManaBackground:GetHeight())
-					DruidManaBarStatus:SetStatusBarTexture(normTex)
-					DruidManaBarStatus:SetStatusBarColor(.30, .52, .90)
-					self.DruidManaBackground = DruidManaBackground
-					self.DruidMana = DruidManaBarStatus
-					DruidManaBackground.FrameBackdrop = CreateFrame("Frame", nil, DruidManaBackground)
-					DruidManaBackground.FrameBackdrop:SetTemplate("Default")
-					DruidManaBackground.FrameBackdrop:SetPoint("TOPLEFT", -2, 2)
-					DruidManaBackground.FrameBackdrop:SetPoint("BOTTOMRIGHT", 2, -2)
-					DruidManaBackground.FrameBackdrop:SetFrameLevel(DruidManaBackground:GetFrameLevel() - 1)
-					DruidManaBackground:SetScript("OnShow", function() D.DruidBarDisplay(self, false) end)
-					DruidManaBackground:SetScript("OnUpdate", function() D.DruidBarDisplay(self, true) end)
-					DruidManaBackground:SetScript("OnHide", function() D.DruidBarDisplay(self, false) end)
-
-					local eclipseBar = CreateFrame('Frame', nil, self)
-					eclipseBar:Point("LEFT", DruidManaBackground, "LEFT", 0, 0)
-					eclipseBar:Size(176, 5)
-					eclipseBar:SetFrameStrata("MEDIUM")
-					eclipseBar:SetFrameLevel(8)
-					eclipseBar:SetBackdropBorderColor(0,0,0,0)
-
-					local lunarBar = CreateFrame("StatusBar", nil, eclipseBar)
-					lunarBar:SetPoint('LEFT', eclipseBar, 'LEFT', 0, 0)
-					lunarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
-					lunarBar:SetStatusBarTexture(normTex)
-					lunarBar:SetStatusBarColor(.30, .52, .90)
-					eclipseBar.LunarBar = lunarBar
-
-					local solarBar = CreateFrame("StatusBar", nil, eclipseBar)
-					solarBar:SetPoint('LEFT', lunarBar:GetStatusBarTexture(), 'RIGHT', 0, 0)
-					solarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
-					solarBar:SetStatusBarTexture(normTex)
-					solarBar:SetStatusBarColor(.80, .82,  .60)
-					eclipseBar.SolarBar = solarBar
-
-					local eclipseBarText = eclipseBar:CreateFontString(nil, 'OVERLAY')
-					eclipseBarText:SetPoint('TOP', eclipseBar, 0, 25)
-					eclipseBarText:SetPoint('BOTTOM', eclipseBar)
-					eclipseBarText:SetFont(C["media"].font, 12, "THINOUTLINE")
-					eclipseBarText:SetShadowOffset(D.mult, -D.mult)
-					eclipseBarText:SetShadowColor(0, 0, 0, 0.4)
-					eclipseBar.PostUpdatePower = D.EclipseDirection
-
-					if eclipseBar and eclipseBar:IsShown() then FlashInfo.ManaLevel:SetAlpha(0) end
-					self.EclipseBar = eclipseBar
-					self.EclipseBar.Text = eclipseBarText
-					eclipseBar.FrameBackdrop = CreateFrame("Frame", nil, eclipseBar)
-					eclipseBar.FrameBackdrop:SetTemplate("Default")
-					eclipseBar.FrameBackdrop:SetPoint("TOPLEFT", D.Scale(-2), D.Scale(2))
-					eclipseBar.FrameBackdrop:SetPoint("BOTTOMRIGHT", D.Scale(2), D.Scale(-2))
-					eclipseBar.FrameBackdrop:SetFrameLevel(eclipseBar:GetFrameLevel() - 1)
-
-					local ComboPoints = CreateFrame("Frame", "ComboPoints", UIParent)
-					if C["unitframes"].movableclassbar then
-						ComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
-					else
-						ComboPoints:SetPoint("TOP", power, "BOTTOM", 0, -1)
-					end
-					ComboPoints:SetSize((43 * 5) + 1, 5)
-					ComboPoints:CreateBackdrop()
-
-					for i = 1, 5 do
-						ComboPoints[i] = CreateFrame("StatusBar", "ComboPoints"..i, ComboPoints)
-						ComboPoints[i]:SetHeight(5)
-						ComboPoints[i]:SetStatusBarTexture(normTex)
-						ComboPoints[i]:SetStatusBarColor(unpack(Colors[i]))
-						if i == 1 then
-							ComboPoints[i]:SetWidth(40)
-							ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
-						else
-							ComboPoints[i]:SetWidth(43)
-							ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
-						end
-						ComboPoints[i].bg = ComboPoints[i]:CreateTexture(nil, "ARTWORK")
-						ComboPoints[i]:RegisterEvent("PLAYER_ENTERING_WORLD")
-						ComboPoints[i]:RegisterEvent("UNIT_COMBO_POINTS")
-						ComboPoints[i]:RegisterEvent("PLAYER_TARGET_CHANGED")
-						ComboPoints[i]:SetScript("OnEvent", function(self, event)
-							local points, pt = 0, GetComboPoints("player", "target")
-							if pt == points then
-								ComboPoints[i]:Hide()
-							elseif pt > points then
-								for i = points + 1, pt do
-									ComboPoints[i]:Show()
-								end
-							else
-								for i = pt + 1, points do
-									ComboPoints[i]:Hide()
-								end
-							end
-							points = pt
-						end)
-					end
+					D.ConstructRessources("Druid", 216, 5)
+					self.DruidMana = DruidMana
+					self.DruidMana.bg = DruidMana.Background
+					self.EclipseBar = DruidEclipseBar
+					self.WildMushroom = DruidWildMushroom
 				end
 
 				if D.Class == "WARLOCK" then
