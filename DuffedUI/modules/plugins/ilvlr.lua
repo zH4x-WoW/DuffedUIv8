@@ -29,10 +29,8 @@ local iEqAvg, iAvg
 local function CreateButtonsText(frame)
 	for _, slot in pairs(slots) do
 		local button = _G[frame .. slot]
-
 		button.text = button:CreateFontString(nil, "ARTWORK")
-		button.text:SetFont(C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
-
+		button.text:SetFont(C["media"].font, 11, "THINOUTLINE")
 		if slot == "HeadSlot" or slot == "NeckSlot" or slot == "ShoulderSlot" or slot == "BackSlot" or slot == "ChestSlot" or slot == "WristSlot" or slot == "ShirtSlot" or slot == "TabardSlot" then
 			button.text:SetPoint("CENTER", button, "CENTER", 42, 0)
 		elseif slot == "HandsSlot" or slot == "WaistSlot" or slot == "LegsSlot" or slot == "FeetSlot" or slot == "Finger0Slot" or slot == "Finger1Slot" or slot == "Trinket0Slot" or slot == "Trinket1Slot" then
@@ -40,7 +38,6 @@ local function CreateButtonsText(frame)
 		elseif slot == "MainHandSlot" or slot == "SecondaryHandSlot" or slot == "RangedSlot" then
 			button.text:SetPoint("CENTER", button, "CENTER", 0, 42)
 		end
-
 		button.text:SetText("")
 	end
 end
@@ -52,20 +49,13 @@ local function UpdateButtonsText(frame)
 		local id = GetInventorySlotInfo(slot)
 		local item
 		local text = _G[frame .. slot].text
-
-		if frame == "Inspect" then
-			item = GetInventoryItemLink("target", id)
-		else
-			item = GetInventoryItemLink("player", id)
-		end
-
+		if frame == "Inspect" then item = GetInventoryItemLink("target", id) else item = GetInventoryItemLink("player", id) end
 		if slot == "ShirtSlot" or slot == "TabardSlot" then
 			text:SetText("")
 		elseif item then
 			local oldilevel = text:GetText()
 			local ilevel = select(4, GetItemInfo(item))
 			local heirloom = select(3, GetItemInfo(item))
-
 			if ilevel then
 				if ilevel ~= oldilevel then
 					if heirloom == 7 then
@@ -75,18 +65,15 @@ local function UpdateButtonsText(frame)
 							local itemDurability, itemMaxDurability = GetInventoryItemDurability(id)
 							local ilevelcolor, duracolor
 							iEqAvg, iAvg = GetAverageItemLevel()
-
-							if ilevel <= (floor(iEqAvg) - 10) then
+							if ilevel <= (floor(iEqAvg) - 10) then 
 								ilevelcolor = "|cFFFF0000"
 							elseif ilevel >= (floor(iEqAvg) + 10) then
 								ilevelcolor = "|cFF00FF00"
 							else
 								ilevelcolor = "|cFFFFFFFF"
 							end
-
 							if itemDurability then
 								local itemDurabilityPercentage = (itemDurability / itemMaxDurability) * 100
-
 								if itemDurabilityPercentage > 25 then
 									duracolor = "|cFF00FF00"
 								elseif itemDurabilityPercentage > 0 and itemDurabilityPercentage <= 25 then
@@ -94,7 +81,6 @@ local function UpdateButtonsText(frame)
 								elseif itemDurabilityPercentage == 0 then
 									duracolor = "|cFFFF0000"
 								end
-
 								text:SetText(ilevelcolor..ilevel.."\n"..duracolor..D.Round(itemDurabilityPercentage).."%|r")
 							else
 								text:SetText(ilevelcolor..ilevel)
@@ -147,10 +133,8 @@ OnLoad:SetScript("OnEvent", function(self, event, addon)
 		InspectFrame:HookScript("OnShow", function(self)
 			UpdateButtonsText("Inspect")
 		end)
-
 		OnEvent:RegisterEvent("PLAYER_TARGET_CHANGED")
 		OnEvent:RegisterEvent("INSPECT_READY")
-
 		self:UnregisterEvent("ADDON_LOADED")
 	end
 end)

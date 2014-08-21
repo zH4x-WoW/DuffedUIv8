@@ -45,7 +45,6 @@ local function CreateCopyFrame()
 end
 
 local function GetLines(...)
-	--[[		Grab all those lines		]]--
 	local ct = 1
 	for i = select("#", ...), 1, -1 do
 		local region = select(i, ...)
