@@ -93,9 +93,11 @@ local function Enable(self, unit)
 
 		self:RegisterEvent("UNIT_POWER", Path)
 		self:RegisterEvent("UNIT_DISPLAYPOWER", Path)
-		self:RegisterEvent("PLAYER_ENTERING_WORLD", Visibility)
-		self:RegisterEvent("PLAYER_TALENT_UPDATE", Visibility)
-		self:RegisterEvent("PLAYER_LEVEL_UP", Visibility)
+
+		-- why the fuck does PLAYER_TALENT_UPDATE doesnt trigger on initial login when I register to: self
+		pb.Visibility = CreateFrame("Frame", nil, pb)
+		pb.Visibility:RegisterEvent("PLAYER_TALENT_UPDATE")
+		pb.Visibility:SetScript("OnEvent", function(frame, event, unit) Visibility(self, event, unit) end)
 
 		for i = 1, 5 do
 			local Point = pb[i]

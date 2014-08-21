@@ -30,13 +30,11 @@ local ALLOWED_GROUPS = {
 if DuffedUIEditedDefaultConfig then
 	for group, value in pairs(DuffedUIEditedDefaultConfig) do
 		if group ~= "media" and not ALLOWED_GROUPS[group] then
-			-- add a new group from edited default
 			ALLOWED_GROUPS[group] = 1
 		end
 	end
 end
 
---list of "table names" that we do not want to show in the config
 local TableFilter = {
 	["filter"] = 1,
 }
@@ -44,50 +42,38 @@ local TableFilter = {
 local function Local(o)
 	local string = o
 	for option, value in pairs(DuffedUIConfigUILocalization) do
-		if option == o then
-			string = value
-		end
+		if option == o then string = value end
 	end
-	
 	return string
 end
 
 local NewButton = function(text, parent)
 	local D, C, L = unpack(DuffedUI)
-
 	local result = CreateFrame("Button", nil, parent)
 	local label = result:CreateFontString(nil, "OVERLAY", nil)
 
-	label:SetFont(C["media"].font, 12, "THINOUTLINE")
+	label:SetFont(C["media"].font, 11, "THINOUTLINE")
 	label:SetText(text)
 	result:SetWidth(label:GetWidth())
 	result:SetHeight(label:GetHeight())
 	result:SetFontString(label)
-
 	return result
 end
 
 local function SetValue(group, option, value)
-	--Determine if we should be copying our default settings to our player settings, this only happens if we're not using player settings by default
 	local mergesettings
-	if DuffedUIConfigPrivate == DuffedUIConfigPublic then
-		mergesettings = true
-	else
-		mergesettings = false
-	end
+	if DuffedUIConfigPrivate == DuffedUIConfigPublic then mergesettings = true else mergesettings = false end
 
 	if DuffedUIConfigAll[myPlayerRealm][myPlayerName] == true then
-		if not DuffedUIConfigPrivate then DuffedUIConfigPrivate = {} end	
+		if not DuffedUIConfigPrivate then DuffedUIConfigPrivate = {} end
 		if not DuffedUIConfigPrivate[group] then DuffedUIConfigPrivate[group] = {} end
 		DuffedUIConfigPrivate[group][option] = value
 	else
-		--Set PerChar settings to the same as our settings if theres no per char settings
 		if mergesettings == true then
-			if not DuffedUIConfigPrivate then DuffedUIConfigPrivate = {} end	
+			if not DuffedUIConfigPrivate then DuffedUIConfigPrivate = {} end
 			if not DuffedUIConfigPrivate[group] then DuffedUIConfigPrivate[group] = {} end
 			DuffedUIConfigPrivate[group][option] = value
 		end
-		
 		if not DuffedUIConfigPublic then DuffedUIConfigPublic = {} end
 		if not DuffedUIConfigPublic[group] then DuffedUIConfigPublic[group] = {} end
 		DuffedUIConfigPublic[group][option] = value
@@ -98,23 +84,18 @@ local VISIBLE_GROUP = nil
 local function ShowGroup(group)
 	local D, C, L = unpack(DuffedUI)
 
-	if VISIBLE_GROUP then
-		_G["DuffedUIConfigUI"..VISIBLE_GROUP]:Hide()
-	end
+	if VISIBLE_GROUP then _G["DuffedUIConfigUI"..VISIBLE_GROUP]:Hide() end
 
 	if _G["DuffedUIConfigUI"..group] then
 		local o = "DuffedUIConfigUI"..group
 		local translate = Local(group)
 
 		_G["DuffedUIConfigUITitle"]:SetText(translate)
-
 		local height = _G["DuffedUIConfigUI"..group]:GetHeight()
 		_G["DuffedUIConfigUI"..group]:Show()
-
 		local scrollamntmax = 305
 		local scrollamntmin = scrollamntmax - 10
 		local max = height > scrollamntmax and height-scrollamntmin or 1
-
 		if max == 1 then
 			_G["DuffedUIConfigUIGroupSlider"]:SetValue(1)
 			_G["DuffedUIConfigUIGroupSlider"]:Hide()
@@ -150,7 +131,6 @@ function CreateDuffedUIConfigUI()
 	if DuffedUIConfigUI then
 		ShowGroup("general")
 		DuffedUIConfigUI:Show()
-
 		return
 	end
 
@@ -205,7 +185,6 @@ function CreateDuffedUIConfigUI()
 		answer2 = CANCEL,
 	}
 
-	-- main frame
 	local DuffedUIConfigUI = CreateFrame("Frame", "DuffedUIConfigUI", UIParent)
 	DuffedUIConfigUI:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	DuffedUIConfigUI:SetWidth(750)
@@ -217,7 +196,6 @@ function CreateDuffedUIConfigUI()
 	DuffedUIConfigUIBG:SetPoint("BOTTOMRIGHT", 10, -10)
 	DuffedUIConfigUIBG:SetTemplate("Transparent")
 
-	-- title
 	local DuffedUIConfigUITitleBox = CreateFrame("Frame", "DuffedUIConfigUI", DuffedUIConfigUI)
 	DuffedUIConfigUITitleBox:Size(DuffedUIConfigUIBG:GetWidth() - 33, 30)
 	DuffedUIConfigUITitleBox:SetPoint("BOTTOMLEFT", DuffedUIConfigUIBG, "TOPLEFT", 0, 3)
@@ -227,7 +205,6 @@ function CreateDuffedUIConfigUI()
 	DuffedUIConfigUITitle:SetFont(C["media"].font, 12, "THINOUTLINE")
 	DuffedUIConfigUITitle:SetPoint("LEFT", DuffedUIConfigUITitleBox, "LEFT", 10, 0)
 
-	-- icon
 	local DuffedUIConfigUIIcon = CreateFrame("Frame", "DuffedUIConfigUITitle", DuffedUIConfigUI)
 	DuffedUIConfigUIIcon:Size(30, 30)
 	DuffedUIConfigUIIcon:SetPoint("LEFT", DuffedUIConfigUITitleBox, "RIGHT", 3, 0)
@@ -238,7 +215,6 @@ function CreateDuffedUIConfigUI()
 	DuffedUIConfigUIIcon.bg:Point("BOTTOMRIGHT", -2, 2)
 	DuffedUIConfigUIIcon.bg:SetTexture(C["media"].duffed)
 
-	-- left groups
 	local groups = CreateFrame("ScrollFrame", "DuffedUICatagoryGroup", DuffedUIConfigUI)
 	groups:SetPoint("TOPLEFT", 10, -10)
 	groups:SetWidth(150)
@@ -283,19 +259,15 @@ function CreateDuffedUIConfigUI()
 		button:SetHeight(16)
 		button:SetWidth(125)
 		button:SetPoint("TOPLEFT", 5, -(offset))
-
 		button:SetScript("OnEnter", function(self)
 			self:SetText(D.panelcolor..translate)
 		end)
-
 		button:SetScript("OnLeave", function(self)
 			self:SetText("|cffffffff"..translate.."|r")
 		end)
-
 		button:SetScript("OnClick", function(self)
 			ShowGroup(group)
 		end)
-
 		offset = offset + 20
 	end
 
@@ -319,7 +291,6 @@ function CreateDuffedUIConfigUI()
 		end
 	end)
 
-	-- group frame (right side)
 	local group = CreateFrame("ScrollFrame", "DuffedUIConfigUIGroup", DuffedUIConfigUI)
 	group:SetPoint("TOPRIGHT", -10, -10)
 	group:SetWidth(550)
@@ -350,7 +321,6 @@ function CreateDuffedUIConfigUI()
 		local offset = 5
 
 		if type(C[group]) ~= "table" then error(group.." GroupName not found in config table.") return end
-
 		for option, value in pairs(C[group]) do
 			if type(value) == "boolean" then
 				local button = CreateFrame("CheckButton", "DuffedUIConfigUI"..group..option, frame, "InterfaceOptionsCheckButtonTemplate")
@@ -358,7 +328,7 @@ function CreateDuffedUIConfigUI()
 				local translate = Local(group..option)
 
 				_G["DuffedUIConfigUI" .. group..option.."Text"]:SetText(translate)
-				_G["DuffedUIConfigUI" .. group..option.."Text"]:SetFont(C["media"].font, 12, "")
+				_G["DuffedUIConfigUI" .. group..option.."Text"]:SetFont(C["media"].font, 11, "")
 				button:SetChecked(value)
 				button:SkinCheckBox()
                 button.backdrop:SetBackdropColor( 0, 0, 0, 0 )
@@ -370,8 +340,7 @@ function CreateDuffedUIConfigUI()
 				offset = offset + 25
 			elseif type(value) == "number" or type(value) == "string" then
 				local label = frame:CreateFontString(nil, "OVERLAY", nil)
-				label:SetFont(C["media"].font, 12, "")
-
+				label:SetFont(C["media"].font, 11, "")
 				local o = "DuffedUIConfigUI"..group..option
 				local translate = Local(group..option)
 
@@ -406,7 +375,7 @@ function CreateDuffedUIConfigUI()
 				okbutton:SetPoint("LEFT", editbox, "RIGHT", 3, 0)
 
 				local oktext = okbutton:CreateFontString(nil, "OVERLAY", nil)
-				oktext:SetFont(C["media"].font, 12, "")
+				oktext:SetFont(C["media"].font, 11, "")
 				oktext:SetText("OK")
 				oktext:SetPoint("CENTER", D.Scale(1), 0)
 				oktext:SetJustifyH("CENTER")
@@ -418,17 +387,14 @@ function CreateDuffedUIConfigUI()
 						self:ClearFocus()
 						self:SetText(value)
 					end)
-
 					editbox:SetScript("OnChar", function(self)
 						okbutton:Show()
 					end)
-
 					editbox:SetScript("OnEnterPressed", function(self)
 						okbutton:Hide()
 						self:ClearFocus()
 						SetValue(group, option, tonumber(self:GetText()))
 					end)
-
 					okbutton:SetScript("OnMouseDown", function(self)
 						editbox:ClearFocus()
 						self:Hide()
@@ -440,29 +406,24 @@ function CreateDuffedUIConfigUI()
 						self:ClearFocus()
 						self:SetText(value)
 					end)
-
 					editbox:SetScript("OnChar", function(self)
 						okbutton:Show()
 					end)
-
 					editbox:SetScript("OnEnterPressed", function(self)
 						okbutton:Hide()
 						self:ClearFocus()
 						SetValue(group, option, tostring(self:GetText()))
 					end)
-
 					okbutton:SetScript("OnMouseDown", function(self)
 						editbox:ClearFocus()
 						self:Hide()
 						SetValue(group, option, tostring(editbox:GetText()))
 					end)
 				end
-
 				offset = offset + 45
 			elseif type(value) == "table" and not TableFilter[option] then
 				local label = frame:CreateFontString(nil, "OVERLAY", nil)
-				label:SetFont(C["media"].font, 12, "")
-
+				label:SetFont(C["media"].font, 11, "")
 				local o = "DuffedUIConfigUI"..group..option
 				local translate = Local(group .. option)
 
@@ -486,15 +447,11 @@ function CreateDuffedUIConfigUI()
 				colortext:SetPoint("CENTER")
 				colortext:SetJustifyH("CENTER")
 
-				local function round(number, decimal)
-					return (("%%.%df"):format(decimal)):format(number)
-				end
-
+				local function round(number, decimal) return (("%%.%df"):format(decimal)):format(number) end
 				colorbutton:SetScript("OnMouseDown", function(button)
 					if ColorPickerFrame:IsShown() then return end
 
 					local oldr, oldg, oldb, olda = unpack(value)
-
 					local function ShowColorPicker(r, g, b, a, changedCallback, sameCallback)
 						HideUIPanel(ColorPickerFrame)
 						ColorPickerFrame.button = button
@@ -510,9 +467,7 @@ function CreateDuffedUIConfigUI()
 
 					local function ColorCallback(restore)
 						if restore ~= nil or button ~= ColorPickerFrame.button then return end
-
 						local newA, newR, newG, newB = OpacitySliderFrame:GetValue(), ColorPickerFrame:GetColorRGB()
-
 						value = { newR, newG, newB, newA }
 						SetValue(group, option, (value)) 
 						button:SetBackdropBorderColor(newR, newG, newB, newA)
@@ -523,7 +478,6 @@ function CreateDuffedUIConfigUI()
 						SetValue(group, option, (value))
 						button:SetBackdropBorderColor(oldr, oldg, oldb, olda)
 					end
-
 					ShowColorPicker(oldr, oldg, oldb, olda, ColorCallback, SameColorCallback)
 				end)
 				offset = offset+25
@@ -538,11 +492,7 @@ function CreateDuffedUIConfigUI()
 	reset:SetPoint("TOPRIGHT", DuffedUIConfigUIBG, "TOPRIGHT", 103, 0)
 	reset:SetScript("OnClick", function(self)
 		DuffedUIConfigCover:Show()
-		if DuffedUIConfigAll[myPlayerRealm][myPlayerName] == true then
-			D.ShowPopup("RESET_PERCHAR")
-		else
-			D.ShowPopup("RESET_ALL")
-		end
+		if DuffedUIConfigAll[myPlayerRealm][myPlayerName] == true then D.ShowPopup("RESET_PERCHAR") else D.ShowPopup("RESET_ALL") end
 		DuffedUIConfigUI:Hide()
 	end)
 	reset:SetTemplate("Transparent")
@@ -566,17 +516,11 @@ function CreateDuffedUIConfigUI()
 			DuffedUIConfigUI:Hide()
 		end)
 		button:SetPoint("RIGHT", DuffedUIConfigUITitleBox, "RIGHT", -3, 0)
-
 		local label = DuffedUIConfigAllCharacters:CreateFontString(nil, "OVERLAY", nil)
-		label:SetFont(C["media"].font, 12)
+		label:SetFont(C["media"].font, 11)
 		label:SetText(DuffedUIConfigUILocalization.option_setsavedsetttings)
 		label:SetPoint("RIGHT", button, "LEFT")
-
-		if DuffedUIConfigAll[myPlayerRealm][myPlayerName] == true then
-			button:SetChecked(true)
-		else
-			button:SetChecked(false)
-		end
+		if DuffedUIConfigAll[myPlayerRealm][myPlayerName] == true then button:SetChecked(true) else button:SetChecked(false) end
 		button:SkinCheckBox()
 	end
 
@@ -595,7 +539,7 @@ function CreateDuffedUIConfigUI()
 	f:SetTimeVisible(1)
 	f:SetMaxLines(64)
 	f:SetSpacing(2)
-	f:AddMessage("DuffedUI "..D.version, 222/255, 95/255, 95/255)
+	f:AddMessage("DuffedUI " .. D.version, 222/255, 95/255, 95/255)
 	f:AddMessage(" ")
 	f:AddMessage("SPECIAL THANKS TO:", 75/255, 175/255, 76/255)
 	f:AddMessage(" ")
@@ -609,8 +553,6 @@ function CreateDuffedUIConfigUI()
 				tremove(credits, index)
 			end
 		end
-		
-		-- stop!
 		if interval < 0 then self:SetScript("OnUpdate", nil) end
 	end)
 	
@@ -640,11 +582,8 @@ function CreateDuffedUIConfigUI()
 				tremove(dcredits, index)
 			end
 		end
-		
-		-- stop!
 		if interval < 0 then self:SetScript("OnUpdate", nil) end
 	end)
-
 	tinsert(UISpecialFrames, "DuffedUIConfigUI")
 end
 
@@ -652,32 +591,19 @@ do
 	SLASH_CONFIG1 = "/duffedui"
 	SLASH_CONFIG2 = "/dc"
 	function SlashCmdList.CONFIG(msg, editbox)
-		if not DuffedUIConfigUI or not DuffedUIConfigUI:IsShown() then
-			CreateDuffedUIConfigUI()
-		else
-			DuffedUIConfigUI:Hide()
-		end
+		if not DuffedUIConfigUI or not DuffedUIConfigUI:IsShown() then CreateDuffedUIConfigUI() else DuffedUIConfigUI:Hide() end
 	end
 
 	SLASH_RESETCONFIG1 = "/resetui"
 	function SlashCmdList.RESETCONFIG()
-		if DuffedUIConfigUI and DuffedUIConfigUI:IsShown() then
-			DuffedUIConfigCover:Show()
-		end
-
-		if DuffedUIConfigAll[myPlayerRealm][myPlayerName] == true then
-			D.ShowPopup("RESET_PERCHAR")
-		else
-			D.ShowPopup("RESET_ALL")
-		end
+		if DuffedUIConfigUI and DuffedUIConfigUI:IsShown() then DuffedUIConfigCover:Show() end
+		if DuffedUIConfigAll[myPlayerRealm][myPlayerName] == true then D.ShowPopup("RESET_PERCHAR") else D.ShowPopup("RESET_ALL") end
 	end
 
-	-- ESC button
 	local loaded = CreateFrame("Frame")
 	loaded:RegisterEvent("PLAYER_LOGIN")
 	loaded:SetScript("OnEvent", function(self, event, addon)
 		D, C, L = unpack(DuffedUI)
-
 		local menu = GameMenuFrame
 		local menuy = menu:GetHeight()
 		local quit = GameMenuButtonQuit
@@ -694,11 +620,7 @@ do
 		button:SetSize(continuex, continuey)
 		button:Point("TOP", interface, "BOTTOM", 0, -1)
 		button:SetText("DuffedUI")
-
-		if C["skins"].blizzardreskin then
-			button:SkinButton()
-		end
-
+		if C["skins"].blizzardreskin then button:SkinButton() end
 		button:SetScript("OnClick", function(self)
 			local config = DuffedUIConfigUI
 			if config and config:IsShown() then
@@ -708,7 +630,6 @@ do
 				HideUIPanel(menu)
 			end
 		end)
-
 		keybinds:ClearAllPoints()
 		keybinds:Point("TOP", button, "BOTTOM", 0, -1)
 	end)
