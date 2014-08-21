@@ -296,8 +296,8 @@ local function Shared(self, unit)
 				end
 
 				if D.Class == "PRIEST" then
-					D.ConstructRessources("ShadowOrbsBar", 216, 5)
-					self.ShadowOrbsBar = ShadowOrbsBar
+					D.ConstructRessources("pb", 216, 5)
+					self.ShadowOrbsBar = pb
 				end
 
 				if D.Class == "SHAMAN" then
