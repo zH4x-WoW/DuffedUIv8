@@ -55,7 +55,7 @@ end
 anchor:SetTemplate("Transparent")
 anchor:SetBackdropBorderColor(1, 0, 0, 1)
 anchor:SetMovable(true)
-anchor.text = D.SetFontString(anchor, C["media"].font, 12)
+anchor.text = D.SetFontString(anchor, C["media"].font, 11)
 anchor.text:SetPoint("CENTER")
 anchor.text:SetText(L.move_tooltip)
 tinsert(D.AllowFrameMoving, DuffedUITooltipAnchor)
@@ -152,16 +152,12 @@ local function StatusBarOnValueChanged(self, value)
 	if (value < min) or (value > max) then return end
 	local _, unit = GameTooltip:GetUnit()
 
-	if not unit then
-		unit = GetMouseFocus() and GetMouseFocus():GetAttribute("unit")
-	end
-
+	if not unit then unit = GetMouseFocus() and GetMouseFocus():GetAttribute("unit") end
 	if not self.text then
 		self.text = self:CreateFontString(nil, "OVERLAY")
 		local position = DuffedUITooltipAnchor:GetPoint()
 		if position:match("TOP") then self.text:Point("CENTER", GameTooltipStatusBar, 0, -6) else self.text:Point("CENTER", GameTooltipStatusBar, 0, 6) end
-		
-		self.text:SetFont(C["media"].font, 12, "THINOUTLINE")
+		self.text:SetFont(C["media"].font, 11, "THINOUTLINE")
 		self.text:Show()
 		if unit then
 			min, max = UnitHealth(unit), UnitHealthMax(unit)
@@ -222,38 +218,32 @@ local function OnTooltipSetUnit(self)
 	local classif = UnitClassification(unit)
 	local title = UnitPVPName(unit)
 	local r, g, b = GetQuestDifficultyColor(level).r, GetQuestDifficultyColor(level).g, GetQuestDifficultyColor(level).b
-
 	local color = GetColor(unit)
 	if not color then color = "|CFFFFFFFF" end
 	if not realm then realm = "" end
 
 	if title or name then _G["GameTooltipTextLeft1"]:SetFormattedText("%s%s%s", color, title or name, realm and realm ~= "" and " - "..realm.."|r" or "|r") end
-
 	if(UnitIsPlayer(unit)) then
-		if UnitIsAFK(unit) then
-			self:AppendText((" %s"):format(CHAT_FLAG_AFK))
-		elseif UnitIsDND(unit) then 
-			self:AppendText((" %s"):format(CHAT_FLAG_DND))
-		end
+		if UnitIsAFK(unit) then self:AppendText((" %s"):format(CHAT_FLAG_AFK)) elseif UnitIsDND(unit) then  self:AppendText((" %s"):format(CHAT_FLAG_DND)) end
 
 		local offset = 2
 		if guild then
 			local guildName, guildRankName, guildRankIndex = GetGuildInfo(unit)
-			_G["GameTooltipTextLeft2"]:SetFormattedText("%s [%s]", IsInGuild() and GetGuildInfo("player") == guild and "|cff0090ff"..guild.."|r" or "|cff00ff10"..guild.."|r", "|cffFFD700"..guildRankName.."|r")
+			_G["GameTooltipTextLeft2"]:SetFormattedText("%s [%s]", IsInGuild() and GetGuildInfo("player") == guild and "|cff0090ff" .. guild .. "|r" or "|cff00ff10" .. guild .. "|r", "|cffFFD700" .. guildRankName .. "|r")
 			offset = offset + 1
 		end
 
 		for i= offset, lines do
-			if(_G["GameTooltipTextLeft"..i]:GetText():find("^"..LEVEL)) then
-				_G["GameTooltipTextLeft"..i]:SetFormattedText("|cff%02x%02x%02x%s|r %s %s%s", r*255, g*255, b*255, level > 0 and level or "??", race or "", color or "", class or "".."|r")
+			if(_G["GameTooltipTextLeft" .. i]:GetText():find("^" .. LEVEL)) then
+				_G["GameTooltipTextLeft" .. i]:SetFormattedText("|cff%02x%02x%02x%s|r %s %s%s", r * 255, g * 255, b * 255, level > 0 and level or "??", race or "", color or "", class or "" .. "|r")
 				break
 			end
 		end
 	else
 		for i = 2, lines do
-			if((_G["GameTooltipTextLeft"..i]:GetText():find("^"..LEVEL)) or (crtype and _G["GameTooltipTextLeft"..i]:GetText():find("^"..crtype))) then
+			if((_G["GameTooltipTextLeft" .. i]:GetText():find("^" .. LEVEL)) or (crtype and _G["GameTooltipTextLeft" .. i]:GetText():find("^" .. crtype))) then
 				if level == -1 and classif == "elite" then classif = "worldboss" end
-				_G["GameTooltipTextLeft"..i]:SetFormattedText("|cff%02x%02x%02x%s|r%s %s", r*255, g*255, b*255, classif ~= "worldboss" and level ~= 0 and level or "", classification[classif] or "", crtype or "")
+				_G["GameTooltipTextLeft" .. i]:SetFormattedText("|cff%02x%02x%02x%s|r%s %s", r * 255, g * 255, b * 255, classif ~= "worldboss" and level ~= 0 and level or "", classification[classif] or "", crtype or "")
 				break
 			end
 		end
@@ -261,18 +251,18 @@ local function OnTooltipSetUnit(self)
 
 	local pvpLine
 	for i = 1, lines do
-		local text = _G["GameTooltipTextLeft"..i]:GetText()
+		local text = _G["GameTooltipTextLeft" .. i]:GetText()
 		if text and text == PVP_ENABLED then
-			pvpLine = _G["GameTooltipTextLeft"..i]
+			pvpLine = _G["GameTooltipTextLeft" .. i]
 			pvpLine:SetText()
 			break
 		end
 	end
 
-	if UnitExists(unit.."target") and unit ~= "player" then
-		local hex, r, g, b = GetColor(unit.."target")
+	if UnitExists(unit .. "target") and unit ~= "player" then
+		local hex, r, g, b = GetColor(unit .. "target")
 		if not r and not g and not b then r, g, b = 1, 1, 1 end
-		GameTooltip:AddLine(UnitName(unit.."target"), r, g, b)
+		GameTooltip:AddLine(UnitName(unit .. "target"), r, g, b)
 	end
 	self.fadeOut = nil
 end
@@ -336,7 +326,6 @@ local function unitColor(unit)
 		local reaction = UnitReaction(unit, "player")
 		if(reaction) then color = FACTION_BAR_COLORS[reaction] end
 	end
-
 	return (color or nilcolor)
 end
 
@@ -344,24 +333,23 @@ local function addAuraInfo(self, caster, spellID)
 	if (C["tooltip"].enablecaster and caster) then
 		local color = unitColor(caster)
 		if color then color = Hex(color) else color = "" end
-
-		GameTooltip:AddLine("Applied by "..color..UnitName(caster))
+		GameTooltip:AddLine("Applied by " .. color .. UnitName(caster))
 		GameTooltip:Show()
 	end
 end
 
-hooksecurefunc(GameTooltip, "SetUnitAura", function(self,...)
-	local _,_,_,_,_,_,_, caster,_,_, spellID = UnitAura(...)
+hooksecurefunc(GameTooltip, "SetUnitAura", function(self, ...)
+	local _, _, _, _, _, _, _, caster, _, _, spellID = UnitAura(...)
 	addAuraInfo(self, caster, spellID)
 end)
 
-hooksecurefunc(GameTooltip, "SetUnitBuff", function(self,...)
-	local _,_,_,_,_,_,_, caster,_,_, spellID = UnitBuff(...)
+hooksecurefunc(GameTooltip, "SetUnitBuff", function(self, ...)
+	local _, _, _, _, _, _, _, caster, _, _, spellID = UnitBuff(...)
 	addAuraInfo(self, caster, spellID)
 end)
 
-hooksecurefunc(GameTooltip, "SetUnitDebuff", function(self,...)
-	local _,_,_,_,_,_,_, caster,_,_, spellID = UnitDebuff(...)
+hooksecurefunc(GameTooltip, "SetUnitDebuff", function(self, ...)
+	local _, _, _, _, _, _, _, caster, _, _, spellID = UnitDebuff(...)
 	addAuraInfo(self, caster, spellID)
 end)
 
@@ -372,10 +360,9 @@ DuffedUITooltip:SetScript("OnEvent", function(self, event, addon)
 		for _, tt in pairs(Tooltips) do tt:HookScript("OnShow", SetStyle) end
 
 		ItemRefTooltip:HookScript("OnTooltipSetItem", SetStyle)
-		ItemRefTooltip:HookScript("OnShow", SetStyle)	
+		ItemRefTooltip:HookScript("OnShow", SetStyle)
 		FriendsTooltip:SetTemplate("Default")
 		ItemRefCloseButton:SkinCloseButton()
-
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 		local position = DuffedUITooltipAnchor:GetPoint()
@@ -391,19 +378,16 @@ DuffedUITooltip:SetScript("OnEvent", function(self, event, addon)
 					self:Hide()
 				end
 			end
-
 			hooksecurefunc(GameTooltip, "SetAction", CombatHideActionButtonsTooltip)
 			hooksecurefunc(GameTooltip, "SetPetAction", CombatHideActionButtonsTooltip)
 			hooksecurefunc(GameTooltip, "SetShapeshift", CombatHideActionButtonsTooltip)
 		end
 	else
 		if addon ~= "Blizzard_DebugTools" then return end
-
 		if FrameStackTooltip then
 			FrameStackTooltip:SetScale(C["general"].uiscale)
 			FrameStackTooltip:HookScript("OnShow", function(self) self:SetTemplate("Default") end)
 		end
-
 		if EventTraceTooltip then EventTraceTooltip:HookScript("OnShow", function(self) self:SetTemplate("Default") end) end
 	end
 end)

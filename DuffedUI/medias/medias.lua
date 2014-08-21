@@ -28,6 +28,7 @@ C["media"] = {
 	["blank"] = [[Interface\AddOns\DuffedUI\medias\textures\blank]],
 	["buttonhover"] = [[Interface\AddOns\DuffedUI\medias\textures\button_hover]],
 	["duffed"] = [[Interface\AddOns\DuffedUI\medias\textures\duffed]],
+	["duffed_logo"] = [[Interface\AddOns\DuffedUI\medias\textures\logo]],
 	["alliance"] = [[Interface\AddOns\DuffedUI\medias\textures\alliance]],
 	["d3"] = [[Interface\AddOns\DuffedUI\medias\textures\d3]],
 	["horde"] = [[Interface\AddOns\DuffedUI\medias\textures\horde]],
