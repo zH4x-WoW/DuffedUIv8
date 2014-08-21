@@ -4,6 +4,7 @@ local D, C, L = unpack(select(2, ...))
 -- Credits got to Tukz & Hydra
 local _G = _G
 local WorldMap = CreateFrame("Frame")
+local fontflag = "THINOUTLINE"
 
 WorldMap.QuestTexts = {
 	QuestInfoTitleHeader,
@@ -158,14 +159,14 @@ function WorldMap:Skin()
 	-- Quests Buttons
 	for i = 1, 2 do
 		local Button = i == 1 and WorldMapFrame.UIElementsFrame.OpenQuestPanelButton or WorldMapFrame.UIElementsFrame.CloseQuestPanelButton
-		local Text = (i == 1 and QUESTS_LABEL.." =>") or ("<= "..QUESTS_LABEL)
+		local Text = (i == 1 and QUESTS_LABEL.." ->") or ("<- "..QUESTS_LABEL)
 
 		Button:ClearAllPoints()
 		Button:SetPoint("BOTTOMRIGHT", -3, 3)
 		Button:Size(100, 23)
 		Button:StripTextures()
 		Button:SkinButton()
-		Button:FontString("Text", C["media"].font, 12)
+		Button:FontString("Text", C["media"].font, 11, fontflag)
 		Button.Text:SetPoint("CENTER")
 		Button.Text:SetText(Text)
 	end
@@ -205,10 +206,10 @@ end
 
 function WorldMap:Coords()
 	local coords = CreateFrame("Frame", "CoordsFrame", WorldMapFrame)
-	local fontheight = 12 * 1.1
+	local fontheight = 11 * 1.1
 	coords:SetFrameLevel(90)
-	coords:FontString("PlayerText", C["media"].font, fontheight, "THINOUTLINE")
-	coords:FontString("MouseText", C["media"].font, fontheight, "THINOUTLINE")
+	coords:FontString("PlayerText", C["media"].font, fontheight, fontflag)
+	coords:FontString("MouseText", C["media"].font, fontheight, fontflag)
 	coords.PlayerText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
 	coords.MouseText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
 	coords.PlayerText:SetPoint("BOTTOMLEFT", WorldMapDetailFrame, "BOTTOMLEFT", 5, 5)

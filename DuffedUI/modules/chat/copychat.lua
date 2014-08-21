@@ -13,7 +13,7 @@ local isf = nil
 local function CreateCopyFrame()
 	frame = CreateFrame("Frame", "DuffedUIChatCopyFrame", UIParent)
 	frame:SetTemplate("Transparent")
-	frame:Width(DuffedUIBar1:GetWidth())
+	frame:Width(600)
 	frame:Height(250)
 	frame:SetScale(1)
 	frame:Point("BOTTOM", UIParent, "BOTTOM", 0, 10)
