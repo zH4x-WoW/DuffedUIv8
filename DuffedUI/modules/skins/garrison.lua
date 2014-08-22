@@ -1,3 +1,4 @@
+--[[ BROKEN @ Blizzard_GarrisonUI
 local D, C, L = unpack(select(2, ...))
 
 local function LoadGarrisonSkin()
@@ -36,4 +37,4 @@ local function LoadGarrisonSkin()
 	end
 end
 D.SkinFuncs["Blizzard_GarrisonUI"] = LoadGarrisonSkin
-
+]]
