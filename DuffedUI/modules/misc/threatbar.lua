@@ -19,10 +19,10 @@ DuffedUIThreatBar:SetBackdrop({bgFile = C["media"].blank})
 DuffedUIThreatBar:SetBackdropColor(0, 0, 0, 0)
 DuffedUIThreatBar:SetMinMaxValues(0, 100)
 
-DuffedUIThreatBar.text = D.SetFontString(DuffedUIThreatBar, C["media"].font, 12)
+DuffedUIThreatBar.text = D.SetFontString(DuffedUIThreatBar, C["media"].font, 11)
 DuffedUIThreatBar.text:Point("RIGHT", DuffedUIThreatBar, "RIGHT", -30, 0)
 
-DuffedUIThreatBar.Title = D.SetFontString(DuffedUIThreatBar, C["media"].font, 12)
+DuffedUIThreatBar.Title = D.SetFontString(DuffedUIThreatBar, C["media"].font, 11)
 DuffedUIThreatBar.Title:SetText(L.unitframes_ouf_threattext)
 DuffedUIThreatBar.Title:SetPoint("LEFT", DuffedUIThreatBar, "LEFT", D.Scale(30), 0)
   

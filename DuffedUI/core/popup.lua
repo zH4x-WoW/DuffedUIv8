@@ -40,7 +40,7 @@ for i = 1, total do
 	frame[i].button2:SetPoint("BOTTOMRIGHT", frame[i], "BOTTOMRIGHT", -7, 7)
 	frame[i].button2:SetSize(100, 20)
 	frame[i].button2:SetTemplate("Default")
-	frame[i].button2:FontString("Text", C["media"].font, 12)
+	frame[i].button2:FontString("Text", C["media"].font, 11)
 	frame[i].button2.Text:SetPoint("CENTER")
 	frame[i].button2.Text:SetText(CANCEL)
 	frame[i].button2:SetScript("OnClick", Hide)

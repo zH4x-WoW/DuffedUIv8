@@ -207,7 +207,7 @@ local Skin = function(self)
 		self.Bar = Bar
 
 		local Duration = self:CreateFontString(nil, "OVERLAY")
-		local font, size, flags = C["media"].font, 12, "OUTLINE"
+		local font, size, flags = C["media"].font, 11, "OUTLINE"
 		Duration:SetFont(font, size, flags)
 		Duration:SetPoint("BOTTOM", 0, -17)
 		self.Duration = Duration
