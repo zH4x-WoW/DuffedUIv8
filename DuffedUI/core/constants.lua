@@ -48,6 +48,3 @@ D.DuffedCredits = {
 	"Zenglao",
 	"devel1988",
 }
-
-G.Chat = {}
-G.DataText = {}

@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 if not C["datatext"].profession or C["datatext"].profession == 0 then return end
 
@@ -6,7 +6,7 @@ local Stat = CreateFrame("Frame", "DuffedUIStatProfession")
 Stat:EnableMouse(true)
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
-	
+
 local Text = Stat:CreateFontString("DuffedUIStatProfessionText", "OVERLAY")
 Text:SetFont(C["media"].font, C["datatext"].fontsize)
 D.DataTextPosition(C["datatext"].profession, Text)

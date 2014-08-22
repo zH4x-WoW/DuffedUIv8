@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 --------------------------------------------------------------------
 -- DURABILITY
 --------------------------------------------------------------------
@@ -11,12 +11,10 @@ if C["datatext"].dur and C["datatext"].dur > 0 then
 	Stat.Option = C["datatext"].dur
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
-	G.DataText.Durability = Stat
 
 	local Text  = Stat:CreateFontString("DuffedUIStatDurabilityText", "OVERLAY")
 	Text:SetFont(C["media"].font, C["datatext"].fontsize)
 	D.DataTextPosition(C["datatext"].dur, Text)
-	G.DataText.Durability.Text = Text
 
 	local function OnEvent(self)
 		local Total = 0

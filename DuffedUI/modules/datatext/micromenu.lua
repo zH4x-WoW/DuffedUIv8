@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 -----------------------------------------
 -- DuffedUI Micro Menu
 --
@@ -20,12 +20,10 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 	Stat.Option = C["datatext"].micromenu
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
-	G.DataText.MicroMenu = Stat
 
 	local Text  = Stat:CreateFontString("DuffedUIStatMicroMenuText", "OVERLAY")
 	Text:SetFont(C["media"].font, C["datatext"].fontsize)
 	D.DataTextPosition(C["datatext"].micromenu, Text)
-	G.DataText.MicroMenu.Text = Text
 
 	local function OnEvent(self, event, ...)
 		Text:SetText(Stat.Color2..MAINMENU_BUTTON.."|r")

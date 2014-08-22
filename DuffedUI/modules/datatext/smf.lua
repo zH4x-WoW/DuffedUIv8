@@ -1,5 +1,5 @@
 -- Combined datatext for system, memory and fps --
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 --------------------------------------------------------------------
 -- FPS
 --------------------------------------------------------------------

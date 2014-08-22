@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 --------------------------------------------------------------------
  -- BAGS
 --------------------------------------------------------------------
@@ -11,12 +11,10 @@ if C["datatext"].bags and C["datatext"].bags > 0 then
 	Stat.Option = C["datatext"].bags
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
-	G.DataText.Bags = Stat
 
 	local Text  = Stat:CreateFontString("DuffedUIStatBagsText", "OVERLAY")
 	Text:SetFont(C["media"].font, C["datatext"].fontsize)
 	D.DataTextPosition(C["datatext"].bags, Text)
-	G.DataText.Bags.Text = Text
 
 	local function OnEvent(self, event, ...)
 		local free, total,used = 0, 0, 0

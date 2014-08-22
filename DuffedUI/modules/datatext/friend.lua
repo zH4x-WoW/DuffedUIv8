@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 --------------------------------------------------------------------
 -- FRIEND
@@ -22,13 +22,11 @@ Stat:SetFrameLevel(3)
 Stat.Option = C["datatext"].friends
 Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
-G.DataText.Friends = Stat
 
 local Text  = Stat:CreateFontString("DuffedUIStatFriendsText", "OVERLAY")
 Text:SetFont(C["media"].font, C["datatext"].fontsize)
 Text:SetShadowOffset(D.mult, -D.mult)
 D.DataTextPosition(C["datatext"].friends, Text)
-G.DataText.Friends.Text = Text
 
 local menuFrame = CreateFrame("Frame", "DuffedUIFriendRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 local menuList = {

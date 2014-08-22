@@ -13,7 +13,6 @@
 	<Script file="gold.lua" />
 	<Script file="guild.lua" />
 	<Script file="haste.lua" />
-	<Script file="hit.lua" />
 	<Script file="mastery.lua" />
 	<Script file="micromenu.lua" />
 	<Script file="misc.lua" />

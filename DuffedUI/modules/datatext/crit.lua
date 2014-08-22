@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 --------------------------------------------------------------------
 -- Crit (Spell or Melee.. or ranged)
 --------------------------------------------------------------------
@@ -10,12 +10,10 @@ if C["datatext"].crit and C["datatext"].crit > 0 then
 	Stat.Option = C["datatext"].crit
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
-	G.DataText.Crit = Stat
 
 	local Text  = Stat:CreateFontString("DuffedUIStatCritText", "OVERLAY")
 	Text:SetFont(C["media"].font, C["datatext"].fontsize)
 	D.DataTextPosition(C["datatext"].crit, Text)
-	G.DataText.Crit.Text = Text
 
 	local int = 1
 

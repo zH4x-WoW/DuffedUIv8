@@ -1,12 +1,7 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 if C["chat"].enable ~= true then return end
 
 local DuffedUIChat = CreateFrame("Frame", "DuffedUIChat")
-G.Chat.Chat = DuffedUIChat
-for i = 1, NUM_CHAT_WINDOWS do
-	G.Chat["ChatFrame"..i] = _G["ChatFrame"..i]
-end
-
 local tabalpha = 1
 local tabnoalpha = 0
 local _G = _G
@@ -80,8 +75,6 @@ local function SetChatStyle(frame)
 	local id = frame:GetID()
 	local chat = frame:GetName()
 	local tab = _G[chat.."Tab"]
-	G.Chat[chat] = _G[chat]
-	G.Chat[tab] = tab
 
 	tab:SetAlpha(1)
 	tab.SetAlpha = UIFrameFadeRemoveFrame
@@ -104,7 +97,6 @@ local function SetChatStyle(frame)
 	_G[chat]:SetMinResize(371, 114)
 	_G[chat]:SetMinResize(D.InfoLeftRightWidth + 1, 114)
 
-	G.Chat.EditBox = _G[chat.."EditBox"]
 	_G[chat.."EditBox"]:ClearAllPoints()
 	_G[chat.."EditBox"]:Point("TOPLEFT", DuffedUIInfoLeft, 2, -2)
 	_G[chat.."EditBox"]:Point("BOTTOMRIGHT", DuffedUIInfoLeft, -2, 2)

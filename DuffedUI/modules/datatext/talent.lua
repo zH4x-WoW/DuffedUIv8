@@ -1,4 +1,4 @@
-﻿local D, C, L, G = unpack(select(2, ...))
+﻿local D, C, L = unpack(select(2, ...))
 
 if C["datatext"].talent and C["datatext"].talent > 0 then
 	local Stat = CreateFrame("Frame", "DuffedUIStatTalent")
@@ -8,12 +8,10 @@ if C["datatext"].talent and C["datatext"].talent > 0 then
 	Stat.Option = C.datatext.talent
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
-	G.DataText.Talent = Stat
  
 	local Text = Stat:CreateFontString("DuffedUIStatTalentText", "OVERLAY")
 	Text:SetFont(C["media"].font, C["datatext"].fontsize)
 	D.DataTextPosition(C.datatext.talent, Text)
-	G.DataText.Talent.Text = Text
  
 	local function Update(self)
 		if not GetSpecialization() then

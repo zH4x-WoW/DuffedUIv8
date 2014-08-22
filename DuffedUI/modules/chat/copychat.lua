@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 -----------------------------------------------------------------------------
 -- Copy on chatframes feature
 -----------------------------------------------------------------------------
@@ -87,8 +87,6 @@ for i = 1, NUM_CHAT_WINDOWS do
 		end)
 		button:SetScript("OnLeave", function() button:SetAlpha(0) end)
 	end
-	
-	G.Chat["ChatFrame"..i].Copy = button
 end
 
 -- little fix for RealID text copy/paste (real name bug)

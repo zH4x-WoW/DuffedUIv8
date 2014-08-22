@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 --------------------------------------------------------------------
 -- GOLD
 --------------------------------------------------------------------
@@ -229,7 +229,7 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:AddLine("|cffC41F3BReset Data: Hold Shift + Right Click|r")
 
 	GameTooltip:Show()
-	GameTooltip:SetTemplate("Default")
+	GameTooltip:SetTemplate("Transparent")
 end)
 
 Stat:SetScript("OnLeave", function()
@@ -237,7 +237,7 @@ Stat:SetScript("OnLeave", function()
 end)
 
 local RightClickMenu = {
-	{ text = "Tukui Improved Currency Options", isTitle = true , notCheckable = true },
+	{ text = "DuffedUI Improved Currency Options", isTitle = true , notCheckable = true },
 	{ text = "Show Archaeology Fragments", checked = function() return ImprovedCurrency["Archaeology"] end, func = function()
 		if ImprovedCurrency["Archaeology"] then
 			ImprovedCurrency["Archaeology"] = false
@@ -289,7 +289,8 @@ local RightClickMenu = {
 	end	},
 }
 
-local TukuiImprovedCurrencyDropDown = CreateFrame("Frame", "TukuiImprovedCurrencyDropDown", UIParent, "UIDropDownMenuTemplate")
+local DuffedUIImprovedCurrencyDropDown = CreateFrame("Frame", "DuffedUIImprovedCurrencyDropDown", UIParent, "UIDropDownMenuTemplate")
+DuffedUIImprovedCurrencyDropDown:SetTemplate("Transparent")
 
 local function RESETGOLD()
 	local myPlayerRealm = D.myrealm
