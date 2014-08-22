@@ -10,7 +10,7 @@
 -- Pet Battles UI ----------------------------
 ----------------------------------------------
 
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 local f = PetBattleFrame
 local bf = f.BottomFrame
 local pets = {
@@ -391,16 +391,3 @@ hooksecurefunc("PetBattleFrame_UpdateActionBarLayout", function(self)
 	bf.ForfeitButton:SetPoint("LEFT", bf.CatchButton, "RIGHT", 10, 0)
 	SkinPetButton(bf.ForfeitButton)
 end)
-
-G.PetBattle = {}
-G.PetBattle.TopFrame = f
-G.PetBattle.BottomFrame = bf
-G.PetBattle.Ally = f.ActiveAlly
-G.PetBattle.Enemy = f.ActiveEnemy
-G.PetBattle.AbilityTooltip = PetBattlePrimaryAbilityTooltip
-G.PetBattle.UnitTooltip = PetBattlePrimaryUnitTooltip
-G.PetBattle.FloatingTooltip = FloatingBattlePetTooltip
-G.PetBattle.PetTooltip = BattlePetTooltip
-G.PetBattle.BottomFrame = bf
-G.PetBattle.ActionBar = bar
-G.PetBattle.ActionBar.Buttons = {bf.abilityButtons[1], bf.abilityButtons[2], bf.abilityButtons[3], bf.SwitchPetButton, bf.CatchButton, bf.ForfeitButton}

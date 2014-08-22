@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 if IsAddOnLoaded("Capping") then return end
 
 local tinymap = CreateFrame("Frame", "DuffedUIZoneMap", UIParent)

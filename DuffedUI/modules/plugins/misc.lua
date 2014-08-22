@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 -- Remove PVPBank.com spam from friends request
 local function RemoveSpam()

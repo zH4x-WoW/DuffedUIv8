@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 if C["unitframes"].enable ~= true or D.Class ~= "SHAMAN" then return end
 --[[
 	Documentation:

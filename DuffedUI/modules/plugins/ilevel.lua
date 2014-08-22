@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 if C["tooltip"].enable ~= true or C["tooltip"].ilvl ~= true then return end
 

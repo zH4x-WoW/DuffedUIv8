@@ -61,8 +61,6 @@ D.SetFontString = function(parent, fontName, fontHeight, fontStyle)
 	return fs
 end
 
-D.IconCoord = {.08, .92, .08, .92}
-
 D.DataTextPosition = function(p, obj)
 	local left = DuffedUIInfoLeft
 	local right = DuffedUIInfoRight

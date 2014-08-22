@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 -- Allow the use of color picker with DuffedUI Config.
 ColorPickerFrame:SetParent(nil)

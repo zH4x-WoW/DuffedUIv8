@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 --[[ This is a forked file by Haste ]]--
 local frame = CreateFrame("Frame", "DuffedUIAuras")

@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 if not C["unitframes"].enable or C["unitframes"].layout ~= 3 then return end
 
 local ADDON_NAME, ns = ...
