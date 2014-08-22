@@ -30,9 +30,10 @@ local function LoadGarrisonSkin()
 	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.ShipmentIconFrame.Icon:SetTexCoord(.08, .92, .08, .92)
 	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.ShipmentIconFrame.Icon:SetInside()
 
-	for i = 1, 2 do
+	for i = 1, #GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.Reagents do
 		GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.Reagents[i]:StripTextures()
 		GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.Reagents[i].Icon:SetTexCoord(.08, .92, .08, .92)
 	end
 end
 D.SkinFuncs["Blizzard_GarrisonUI"] = LoadGarrisonSkin
+
