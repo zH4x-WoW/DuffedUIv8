@@ -48,4 +48,5 @@ D.DuffedCredits = {
 	"Digawen",
 	"Zenglao",
 	"devel1988",
+	"Hizuro",
 }
