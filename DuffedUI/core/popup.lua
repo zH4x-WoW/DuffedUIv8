@@ -11,24 +11,25 @@ end
 
 for i = 1, total do
 	frame[i] = CreateFrame("Frame", "DuffedUIPopupDialog" .. i, UIParent)
-	frame[i]:SetSize(400, 60)
+	frame[i]:SetSize(250, 80)
 	frame[i]:SetFrameLevel(3)
-	frame[i]:SetTemplate("Default")
+	frame[i]:SetTemplate("Transparent")
+	frame[i]:SetPoint("TOP", UIParent, "TOP", 0, -150)
 	frame[i]:Hide()
 
 	frame[i].Text = CreateFrame("MessageFrame", nil, frame[i])
 	frame[i].Text:SetPoint("CENTER")
-	frame[i].Text:SetSize(380, 40)
-	frame[i].Text:SetFont(C["media"].font, 12)
+	frame[i].Text:SetSize(230, 60)
+	frame[i].Text:SetFont(C["media"].font, 11)
 	frame[i].Text:SetInsertMode("TOP")
-	frame[i].Text:SetFading(0)
+	frame[i].Text:SetFading(false)
 	frame[i].Text:AddMessage("")
 
 	frame[i].button1 = CreateFrame("Button", "DuffedUIPopupDialogButtonAccept" .. i, frame[i])
-	frame[i].button1:SetPoint("TOPLEFT", frame[i], "BOTTOMLEFT", 0, -2)
-	frame[i].button1:SetSize(199, 23)
+	frame[i].button1:SetPoint("BOTTOMLEFT", frame[i], "BOTTOMLEFT", 7, 7)
+	frame[i].button1:SetSize(100, 20)
 	frame[i].button1:SetTemplate("Default")
-	frame[i].button1:FontString("Text", C["media"].font, 12)
+	frame[i].button1:FontString("Text", C["media"].font, 11)
 	frame[i].button1.Text:SetPoint("CENTER")
 	frame[i].button1.Text:SetText(ACCEPT)
 	frame[i].button1:SetScript("OnClick", Hide)
@@ -36,8 +37,8 @@ for i = 1, total do
 	frame[i].button1:SkinButton()
 
 	frame[i].button2 = CreateFrame("Button", "DuffedUIPopupDialogButtonCancel" .. i, frame[i])
-	frame[i].button2:SetPoint("TOPRIGHT", frame[i], "BOTTOMRIGHT", 0, -2)
-	frame[i].button2:SetSize(199, 23)
+	frame[i].button2:SetPoint("BOTTOMRIGHT", frame[i], "BOTTOMRIGHT", -7, 7)
+	frame[i].button2:SetSize(100, 20)
 	frame[i].button2:SetTemplate("Default")
 	frame[i].button2:FontString("Text", C["media"].font, 12)
 	frame[i].button2.Text:SetPoint("CENTER")
@@ -59,18 +60,6 @@ for i = 1, total do
 	frame[i].EditBox.backdrop:SetPoint("TOPLEFT", -4, 4)
 	frame[i].EditBox.backdrop:SetPoint("BOTTOMRIGHT", 4, -4)
 	frame[i].EditBox:Hide()
-
-	if i == 1 then
-		frame[i].Anchor = CreateFrame("Frame", nil, frame[i])
-		frame[i].Anchor:SetSize(360, 30)
-		frame[i].Anchor:SetPoint("BOTTOM", frame[i], "TOP", 0, -2)
-		frame[i].Anchor:SetTemplate("Transparent")
-		frame[i].Anchor:SetFrameLevel(frame[i]:GetFrameLevel() - 2)
-		frame[i]:SetPoint("TOP", UIParent, "TOP", 0, -10)
-	else
-		local previous = frame[i - 1]
-		frame[i]:SetPoint("TOP", previous, "BOTTOM", 0, -frame[i].button1:GetHeight() - 4)
-	end
 end
 
 D.ShowPopup = function(self)

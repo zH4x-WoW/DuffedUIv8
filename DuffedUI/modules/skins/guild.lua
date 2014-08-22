@@ -96,10 +96,9 @@ local function LoadSkin()
 	GuildFactionBar.backdrop:Point("BOTTOMRIGHT", GuildFactionBar, "BOTTOMRIGHT", -2, 0)
 	
 	--Guild Perk buttons list
-	for i=1, 8 do
+	for i = 1, 8 do
 		local button = _G["GuildPerksContainerButton"..i]
 		button:StripTextures()
-		
 		if button.icon then
 			button.icon:SetTexCoord(.08, .92, .08, .92)
 			button.icon:ClearAllPoints()
@@ -114,18 +113,10 @@ local function LoadSkin()
 	--Roster
 	GuildRosterContainerScrollBar:SkinScrollBar()
 	GuildRosterShowOfflineButton:SkinCheckBox()
-	
-	
-	for i=1, 4 do
-		_G["GuildRosterColumnButton"..i]:StripTextures(true)
-	end
-	
+	for i=1, 4 do _G["GuildRosterColumnButton"..i]:StripTextures(true) end
 	GuildRosterViewDropdown:SkinDropDownBox(200)
-	
-	for i=1, 14 do
-		_G["GuildRosterContainerButton"..i.."HeaderButton"]:SkinButton(true)
-	end
-	
+	for i=1, 14 do _G["GuildRosterContainerButton"..i.."HeaderButton"]:SkinButton(true) end 
+
 	--Detail Frame
 	GuildMemberDetailFrame:SetTemplate("Transparent")
 	GuildMemberNoteBackground:SetTemplate("Default")
@@ -135,18 +126,10 @@ local function LoadSkin()
 
 	--News
 	GuildNewsFrame:StripTextures()
-	for i=1, 17 do
-		_G["GuildNewsContainerButton"..i].header:Kill()
-	end
-	
+	for i=1, 17 do _G["GuildNewsContainerButton"..i].header:Kill() end
 	GuildNewsFiltersFrame:StripTextures()
 	GuildNewsFiltersFrame:SetTemplate("Default")
 	GuildNewsFiltersFrameCloseButton:SkinCloseButton()
-	
-	for i=1, 7 do
-		_G["GuildNewsFilterButton"..i]:SkinCheckBox()
-	end
-	
 	GuildNewsFiltersFrame:Point("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -20)
 	GuildNewsContainerScrollBar:SkinScrollBar()
 	
@@ -154,10 +137,7 @@ local function LoadSkin()
 	GuildInfoDetailsFrameScrollBar:SkinScrollBar()
 	GuildInfoFrameApplicantsContainerScrollBar:SkinScrollBar()
 	GuildInfoFrameInfoMOTDScrollFrameScrollBar:SkinScrollBar()
-	
-	for i=1, 3 do
-		_G["GuildInfoFrameTab"..i]:StripTextures()
-	end
+	for i=1, 3 do _G["GuildInfoFrameTab"..i]:StripTextures() end
 		
 	GuildRecruitmentCommentInputFrame:SetTemplate("Default")
 	

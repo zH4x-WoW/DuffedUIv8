@@ -1,7 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 -- keybind feature
 
-local bind = CreateFrame("Frame", "DuffedUIHoverBind", UIParent)
+local bind, localmacros = CreateFrame("Frame", "DuffedUIHoverBind", UIParent), 0
 
 -- SLASH COMMAND
 SlashCmdList.MOUSEOVERBIND = function()
@@ -77,7 +77,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 			elseif spellmacro == "MACRO" then
 				self.button.id = self.button:GetID()
 				
-				if floor(.5+select(2,MacroFrameTab1Text:GetTextColor())*10)/10==.8 then self.button.id = self.button.id + 36 end
+				if localmacros==1 then self.button.id = self.button.id + 36 end
 				
 				self.button.name = GetMacroInfo(self.button.id)
 				
