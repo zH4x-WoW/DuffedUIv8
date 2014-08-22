@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	local tabs = {
@@ -201,7 +201,7 @@ local function LoadSkin()
 				button:StripTextures()
 				button:SetHighlightTexture("Interface\\PaperDollInfoFrame\\UI-Character-Tab-Highlight")
 				
-				_G["ChannelButton"..i.."Text"]:SetFont(C["media"].font, 12)
+				_G["ChannelButton"..i.."Text"]:SetFont(C["media"].font, 11)
 			end
 		end
 	end

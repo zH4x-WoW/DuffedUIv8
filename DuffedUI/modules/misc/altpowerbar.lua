@@ -28,7 +28,7 @@ AltPowerBarStatus:Point("TOPLEFT", DuffedUIInfoLeft, "TOPLEFT", 2, -2)
 AltPowerBarStatus:Point("BOTTOMRIGHT", DuffedUIInfoLeft, "BOTTOMRIGHT", -2, 2)
 
 local AltPowerText = AltPowerBarStatus:CreateFontString("DuffedUIAltPowerBarText", "OVERLAY")
-AltPowerText:SetFont(C["media"].font, 12)
+AltPowerText:SetFont(C["media"].font, 11)
 AltPowerText:Point("CENTER", AltPowerBar, "CENTER", 0, 0)
 AltPowerText:SetShadowColor(0, 0, 0)
 AltPowerText:SetShadowOffset(1.25, -1.25)

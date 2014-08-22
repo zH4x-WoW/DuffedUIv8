@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 --------------------------------------------------------------------
  -- Call To Arms -- Elv22
@@ -12,7 +12,6 @@ if C["datatext"].calltoarms and C["datatext"].calltoarms > 0 then
 	Stat.Option = C["datatext"].calltoarms
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
-	G.DataText.CallToArm = Stat
 
 	local Text  = Stat:CreateFontString("DuffedUIStatCallToArmsText", "OVERLAY")
 	Text:SetFont(C["media"].font, C["datatext"].fontsize)
@@ -20,7 +19,6 @@ if C["datatext"].calltoarms and C["datatext"].calltoarms > 0 then
 	Text:SetShadowColor(0, 0, 0, 0.4)
 	D.DataTextPosition(C["datatext"].calltoarms, Text)
 	Stat:SetParent(Text:GetParent())
-	G.DataText.CallToArm.Text = Text
 	
 	local TANK_STRING = TANK
 	local HEALER_STRING = HEALER

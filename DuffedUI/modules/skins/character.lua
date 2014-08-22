@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	CharacterFrameCloseButton:SkinCloseButton()
@@ -118,7 +118,7 @@ local function LoadSkin()
 			object.BgMiddle:SetTexture(nil)
 
 			object.Check:SetTexture(nil)
-			object.text:SetFont(C["media"].font,12)
+			object.text:SetFont(C["media"].font, 11)
 			object.text.SetFont = D.dummy
 		end
 	end)

@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 -- Remove PVPBank.com spam from friends request
 local function RemoveSpam()
@@ -91,7 +91,7 @@ if C["unitframes"].focusbutton then
 		Focus[i]:RegisterForClicks("AnyUp")
 		Focus[i]:StripTextures()
 		Focus[i].Text = Focus[i]:CreateFontString(nil, "OVERLAY")
-		Focus[i].Text:SetFont(C["media"].font, 12, "THINOUTLINE")
+		Focus[i].Text:SetFont(C["media"].font, 11, "THINOUTLINE")
 		Focus[i].Text:SetShadowOffset(0, 0)
 		Focus[i].Text:SetPoint("CENTER")
 		if i == 1 then

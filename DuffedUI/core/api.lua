@@ -618,7 +618,7 @@ local function SkinCloseButton(f, point)
 	f:SetDisabledTexture("")
 
 	f.t = f:CreateFontString(nil, "OVERLAY")
-	f.t:SetFont(C["media"].font, 12, "OUTLINE")
+	f.t:SetFont(C["media"].font, 11, "OUTLINE")
 	f.t:SetPoint("CENTER", 0, 1)
 	f.t:SetText("x")
 end

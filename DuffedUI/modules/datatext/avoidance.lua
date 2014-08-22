@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 
 -- NOTE : I seriously dont know what is avoidance and how the fuck it work in MoP
 -- If someone can look and update this datatext if value in game are not ok, it will be awesome!
@@ -15,12 +15,10 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 	Stat.Option = C["datatext"].avd
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
-	G.DataText.Avoidance = Stat
 
 	local Text  = Stat:CreateFontString("DuffedUIStatAvoidanceText", "OVERLAY")
 	Text:SetFont(C["media"].font, C["datatext"].fontsize)
 	D.DataTextPosition(C["datatext"].avd, Text)
-	G.DataText.Avoidance.Text = Text
 	
 	local targetlv, playerlv
 

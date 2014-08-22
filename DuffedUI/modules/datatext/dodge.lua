@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 if not C["datatext"].dodge or C["datatext"].dodge == 0 then return end
 

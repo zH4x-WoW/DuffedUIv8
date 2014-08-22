@@ -13,7 +13,6 @@ for i = 1, NUM_CHAT_WINDOWS do
 					if unitname and not UnitIsSameServer("player", "target") then
 						unitname = unitname .. "-" .. gsub(realm, " ", "")
 					end
-					
 					ChatFrame_SendTell((unitname), ChatFrame1)
 				end
 			end

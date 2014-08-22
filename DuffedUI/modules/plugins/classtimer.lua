@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 if C["unitframes"].enable ~= true or C["classtimer"].enable ~= true then return end
 --[[ Configuration functions - DO NOT TOUCH
 	id - spell id
@@ -1079,7 +1079,7 @@ if C["classtimer"].targetdebuffsenable ~= false then
 		debuffMover:SetClampedToScreen(true)
 		debuffMover:SetMovable(true)
 		debuffMover:SetBackdropBorderColor(1,0,0)
-		debuffMover.text = D.SetFontString(debuffMover, C["media"].font, 12)
+		debuffMover.text = D.SetFontString(debuffMover, C["media"].font, 11)
 		debuffMover.text:SetPoint("CENTER")
 		debuffMover.text:SetText("Move Debuffs")
 		debuffMover:SetFrameLevel(10)

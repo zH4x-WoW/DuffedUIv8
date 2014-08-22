@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 if C["auras"].bufftracker ~= true then return end
 
 local function SetCasterOnlyBuffs()

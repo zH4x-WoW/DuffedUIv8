@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 if C["scd"].enable ~= true then return end
 
 local font = C["media"].font
@@ -500,7 +500,7 @@ scfa:SetClampedToScreen(true)
 scfa:SetMovable(true)
 scfa:SetBackdropColor(0, 0, 0)
 scfa:SetBackdropBorderColor(1, 0, 0)
-scfa.text = D.SetFontString(scfa, C["media"].font, 12)
+scfa.text = D.SetFontString(scfa, C["media"].font, 11)
 scfa.text:SetPoint("CENTER")
 scfa.text:SetText("Move SpellCooldowns")
 scfa:Hide()

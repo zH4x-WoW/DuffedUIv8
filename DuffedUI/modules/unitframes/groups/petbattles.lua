@@ -10,7 +10,7 @@
 -- Pet Battles UI ----------------------------
 ----------------------------------------------
 
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 local f = PetBattleFrame
 local bf = f.BottomFrame
 local pets = {
@@ -27,7 +27,7 @@ for i, pet in pairs(pets) do
 	pet.Border2:SetAlpha(0)
 	pet.healthBarWidth = 300
 
-	pet.Name:SetFont(C["media"].font, 12, "OUTLINE")
+	pet.Name:SetFont(C["media"].font, 11, "OUTLINE")
 
 	pet.IconBackdrop = CreateFrame("Frame", nil, pet)
 	pet.IconBackdrop:SetFrameLevel(pet:GetFrameLevel() - 1)
@@ -47,7 +47,7 @@ for i, pet in pairs(pets) do
 
 	pet.PetTypeFrame = CreateFrame("Frame", nil, pet)
 	pet.PetTypeFrame:Size(100, 23)
-	pet.PetTypeFrame:FontString("text", C["media"].font, 12, "OUTLINE")
+	pet.PetTypeFrame:FontString("text", C["media"].font, 11, "OUTLINE")
 	pet.PetTypeFrame.text:SetText("")
 
 	-- hide original speed icon, create our after
@@ -391,16 +391,3 @@ hooksecurefunc("PetBattleFrame_UpdateActionBarLayout", function(self)
 	bf.ForfeitButton:SetPoint("LEFT", bf.CatchButton, "RIGHT", 10, 0)
 	SkinPetButton(bf.ForfeitButton)
 end)
-
-G.PetBattle = {}
-G.PetBattle.TopFrame = f
-G.PetBattle.BottomFrame = bf
-G.PetBattle.Ally = f.ActiveAlly
-G.PetBattle.Enemy = f.ActiveEnemy
-G.PetBattle.AbilityTooltip = PetBattlePrimaryAbilityTooltip
-G.PetBattle.UnitTooltip = PetBattlePrimaryUnitTooltip
-G.PetBattle.FloatingTooltip = FloatingBattlePetTooltip
-G.PetBattle.PetTooltip = BattlePetTooltip
-G.PetBattle.BottomFrame = bf
-G.PetBattle.ActionBar = bar
-G.PetBattle.ActionBar.Buttons = {bf.abilityButtons[1], bf.abilityButtons[2], bf.abilityButtons[3], bf.SwitchPetButton, bf.CatchButton, bf.ForfeitButton}

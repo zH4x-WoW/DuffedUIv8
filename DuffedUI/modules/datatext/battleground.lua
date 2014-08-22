@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 
 if not C["datatext"].battleground then return end
 
@@ -72,25 +72,21 @@ Stat:EnableMouse(true)
 Stat.Option = C["datatext"].battleground
 Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
-G.DataText.Battleground = Stat
 
 local Text1  = DuffedUIInfoLeftBattleGround:CreateFontString("DuffedUIStatBattleGroundText1", "OVERLAY")
 Text1:SetFont(C["media"].font, C["datatext"].fontsize)
 Text1:SetPoint("LEFT", 30, 0.5)
 Text1:SetHeight(DuffedUIInfoLeft:GetHeight())
-G.DataText.Battleground.Text1 = Text1
 
 local Text2  = DuffedUIInfoLeftBattleGround:CreateFontString("DuffedUIStatBattleGroundText2", "OVERLAY")
 Text2:SetFont(C["media"].font, C["datatext"].fontsize)
 Text2:SetPoint("CENTER", 0, 0.5)
 Text2:SetHeight(DuffedUIInfoLeft:GetHeight())
-G.DataText.Battleground.Text2 = Text2
 
 local Text3  = DuffedUIInfoLeftBattleGround:CreateFontString("DuffedUIStatBattleGroundText3", "OVERLAY")
 Text3:SetFont(C["media"].font, C["datatext"].fontsize)
 Text3:SetPoint("RIGHT", -30, 0.5)
 Text3:SetHeight(DuffedUIInfoLeft:GetHeight())
-G.DataText.Battleground.Text3 = Text3
 
 local int = 2
 local function Update(self, t)

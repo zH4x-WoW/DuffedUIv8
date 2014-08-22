@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 if C["rcd"].enable ~= true then return end
 
@@ -9,7 +9,7 @@ local width, height = 200, 15
 local spacing = -5
 local icon_size = 15
 local font = C["media"].font
-local font_size = 12
+local font_size = 11
 local font_style = "OUTLINE"
 local show_icon = true
 local texture = C["media"].normTex

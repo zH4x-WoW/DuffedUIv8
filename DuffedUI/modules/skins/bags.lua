@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 -- Bags & Bank
 if C["bags"].enable == true then return end	

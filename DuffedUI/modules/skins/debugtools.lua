@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	-- always scale it at the same value as UIParent

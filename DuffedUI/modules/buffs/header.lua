@@ -29,7 +29,7 @@ for _, frame in next, {
 		header:SetAttribute("xOffset", -35)
 		header:CreateBackdrop()
 		header.backdrop:SetBackdropBorderColor(1, 0, 0)
-		header.backdrop:FontString("text", C["media"].font, 12)
+		header.backdrop:FontString("text", C["media"].font, 11)
 		header.backdrop.text:SetPoint("CENTER")
 		header.backdrop.text:SetText(L.move_buffs)
 		header.backdrop:SetAlpha(0)

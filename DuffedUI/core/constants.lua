@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...))
 
 D.dummy = function() return end
 D.myname = select(1, UnitName("player"))
@@ -17,6 +17,7 @@ D.build = tonumber(D.buildtext)
 D.level = UnitLevel("player")
 D.myrealm = GetRealmName()
 D.InfoLeftRightWidth = 370
+D.IconCoord = {.08, .92, .08, .92}
 
 D.Credits = {
 	"Azilroka",
@@ -48,6 +49,3 @@ D.DuffedCredits = {
 	"Zenglao",
 	"devel1988",
 }
-
-G.Chat = {}
-G.DataText = {}

@@ -294,7 +294,7 @@ end
 D.PostCreateAura = function(self, button)
 	button:SetTemplate("Default")
 
-	button.remaining = D.SetFontString(button, C["media"].font, 11, "THINOUTLINE")
+	button.remaining = D.SetFontString(button, C["media"].font, 10, "THINOUTLINE")
 	button.remaining:Point("TOPLEFT", 0, -3)
 
 	button.cd.noOCC = true
@@ -308,7 +308,7 @@ D.PostCreateAura = function(self, button)
 
 	button.count:Point("BOTTOMRIGHT", 1, 1)
 	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C["media"].font, 10, "THINOUTLINE")
+	button.count:SetFont(C["media"].font, 9, "THINOUTLINE")
 	button.count:SetTextColor(.84, .75, .65)
 
 	button.overlayFrame = CreateFrame("frame", nil, button, nil)

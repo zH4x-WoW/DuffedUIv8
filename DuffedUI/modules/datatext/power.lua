@@ -1,4 +1,4 @@
-local D, C, L, G = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...)) 
 
 --------------------------------------------------------------------
 -- player power (attackpower or power depending on what you have more of)
@@ -11,15 +11,12 @@ if C["datatext"].power and C["datatext"].power > 0 then
 	Stat.Option = C["datatext"].power
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
-	G.DataText.Power = Stat
 
 	local Text  = Stat:CreateFontString("DuffedUIStatPowerText", "OVERLAY")
 	Text:SetFont(C["media"].font, C["datatext"].fontsize)
 	D.DataTextPosition(C["datatext"].power, Text)
-	G.DataText.Power.Text = Text
 
 	local int = 1
-
 	local function Update(self, t)
 		int = int - t
 		if int < 0 then

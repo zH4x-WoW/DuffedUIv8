@@ -41,7 +41,7 @@ function D.StyleActionBarButton(self)
 
 	if Button.isSkinned then return end
 
-	Count:SetFont(C["media"].font, 12, "OUTLINE")
+	Count:SetFont(C["media"].font, 11, "OUTLINE")
 
 	if Btname then
 		if C["actionbar"].macro then
@@ -57,7 +57,7 @@ function D.StyleActionBarButton(self)
 	if BtnBG then BtnBG:Kill() end
  
 	if C["actionbar"].hotkey then
-		HotKey:SetFont(C["media"].font, 12, "THINOUTLINE")
+		HotKey:SetFont(C["media"].font, 11, "THINOUTLINE")
 		HotKey:SetShadowOffset(0, 0)
 		HotKey.ClearAllPoints = D.dummy
 		HotKey.SetPoint = D.dummy
