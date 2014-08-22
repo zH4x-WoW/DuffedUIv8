@@ -11,15 +11,15 @@ if D.client == "deDE" then
 	L.welcome_1 = "Hallo |cffc41f3b".. D.myname.."!|r".."\n".."Danke das du |cffc41f3bDuffedUI "..D.version.."|r benutzt. Fuer detailierte Informationen besuche doch |cffc41f3bhttp://www.duffed.net|r."
 	
 	-- Bufftracker
-	L.bufftracker_10ap = "+10% Attack Power"
-	L.bufftracker_10as = "+10% Melee & Ranged Attack Speed"
-	L.bufftracker_10sp = "+10% Spell Power"
-	L.bufftracker_5sh = "+5% Spell Haste"
-	L.bufftracker_5csc = "+5% Critical Strike Chance"
-	L.bufftracker_3kmr = "+3000 Mastery Rating"
-	L.bufftracker_5sai = "+5% Strength, Agility, Intellect"
-	L.bufftracker_10s = "+10% Stamina"
-	L.bufftracker_error = "ERROR"
+	L.bufftracker_10ap = "+10% Angriffskraft"
+	L.bufftracker_10as = "+10% Nah & Fernkampftempo"
+	L.bufftracker_10sp = "+10% Zaubermacht"
+	L.bufftracker_5sh = "+5% Zaubertempo"
+	L.bufftracker_5csc = "+5% Kritische Trefferchance"
+	L.bufftracker_3kmr = "+3000 Meisterschaft"
+	L.bufftracker_5sai = "+5% Stärke, Beweglichkeit, Intelligenz"
+	L.bufftracker_10s = "+10% Ausdauer"
+	L.bufftracker_error = "Fehler"
 
 	-- Click2Cast
 	L.click2cast_title = "Mausbelegung"
