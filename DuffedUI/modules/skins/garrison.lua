@@ -32,8 +32,16 @@ local function LoadGarrisonSkin()
 
 	local function Reagents()
 		for i, v in ipairs(GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.Reagents) do
+			local Texture = v.Icon:GetTexture()
+
+			v:StripTextures()
+			v:StyleButton()
+			v:CreateBackdrop()
+			v.Icon:SetTexture(Texture)
+			v.backdrop:ClearAllPoints()
+			v.backdrop:SetOutside(v.Icon)
+			v.Icon:SetTexCoord(unpack(D.IconCoord))
 			v.NameFrame:Hide()
-			v.Icon:SetTexCoord(.08, .92, .08, .92)
 		end
 	end
 	hooksecurefunc("GarrisonCapacitiveDisplayFrame_Update", Reagents)
