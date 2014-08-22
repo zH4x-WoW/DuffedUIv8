@@ -27,7 +27,7 @@ local function LoadGarrisonSkin()
 	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay:StripTextures()
 	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay:SetTemplate()
 	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.ShipmentIconFrame:SetTemplate()
-	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.ShipmentIconFrame.Icon:SetTexCoord(.08, .92, .08, .92)
+	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.ShipmentIconFrame.Icon:SetTexCoord(unpack(D.IconCoord))
 	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.ShipmentIconFrame.Icon:SetInside()
 
 	local function Reagents()
