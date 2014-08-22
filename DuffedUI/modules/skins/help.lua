@@ -123,32 +123,6 @@ local function LoadSkin()
 	HelpFrameCharacterStuckHearthstone.IconTexture:Point("BOTTOMRIGHT", -2, 2)
 	HelpFrameCharacterStuckHearthstone.IconTexture:SetTexCoord(.08, .92, .08, .92)
 
-	local function navButtonFrameLevel(self)
-		for i=1, #self.navList do
-			local navButton = self.navList[i]
-			local lastNav = self.navList[i-1]
-			if navButton and lastNav then
-				navButton:SetFrameLevel(lastNav:GetFrameLevel() - 2)
-			end
-		end			
-	end
-
-	hooksecurefunc("NavBar_AddButton", function(self, buttonData)
-		local navButton = self.navList[#self.navList]
-		
-		
-		if not navButton.skinned then
-			navButton:SkinButton(true)
-			navButton.skinned = true
-			
-			navButton:HookScript("OnClick", function()
-				navButtonFrameLevel(self)
-			end)
-		end
-		
-		navButtonFrameLevel(self)
-	end)
-	
 	HelpFrameGM_ResponseScrollFrame2ScrollBar:SkinScrollBar()
 	HelpFrameGM_ResponseScrollFrame1ScrollBar:SkinScrollBar()
 	HelpFrameGM_ResponseNeedMoreHelp:SkinButton()
