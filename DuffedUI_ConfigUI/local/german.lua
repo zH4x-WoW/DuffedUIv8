@@ -93,7 +93,7 @@
 	DuffedUIConfigUILocalization.nameplateaurassize = "Setze Auragr\195\182\195\159e (Standard = 20)"
 
 	-- merchant
-	DuffedUIConfigUILocalization.merchant = "H\195\164ndler"
+	DuffedUIConfigUILocalization.merchant = "H ändler"
 	DuffedUIConfigUILocalization.merchantsellgrays = "Verkaufe automatisch graue Gegenst\195\164nde"
 	DuffedUIConfigUILocalization.merchantautorepair = "Repariere automatisch besch\195\164digte R\195\188stung"
 	DuffedUIConfigUILocalization.merchantsellmisc = "Verkaufe automatisch vordefinierte Gegenst\195\164nde (M\195\188ll, NICHT grau)"

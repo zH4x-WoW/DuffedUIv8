@@ -47,33 +47,6 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(104993, true), -- Jade Spirit
 	CreateSpellEntry(116660, true), -- River's Song
 
-	-- Dungeon-, Valor- & Darkmoontrinkets
-	CreateSpellEntry(126519), -- Lessons of the Darkmaster
-	CreateSpellEntry(126236), -- Iron Protector Talisman
-	CreateSpellEntry(126606), -- Scroll of Revered Ancestors
-	CreateSpellEntry(126597), -- Lao-Chin's Liquid Courage
-	CreateSpellEntry(128987), -- Relic of Chi Ji
-	CreateSpellEntry(128984), -- Relic of Xuen - Agi
-	CreateSpellEntry(128986), -- Relic of Xuen - Str
-	CreateSpellEntry(128988), -- Relic of Niuzao
-	CreateSpellEntry(128985), -- Relic of Yu'lon
-	CreateSpellEntry(129812), -- Iron Belly Wok
-	CreateSpellEntry(138699), -- Superluminal
-
-	-- Mogu'Shan Vaults
-	CreateSpellEntry(126582), -- Lei Shin's Final Orders
-	CreateSpellEntry(126577), -- Light of the Cosmos
-	CreateSpellEntry(126534), -- Vial of the Dragon's Blood
-	CreateSpellEntry(126554), -- Bottle of Infinite Stars
-	CreateSpellEntry(126599), -- Jade Charioteer Figurine
-
-	-- Terrace of Endless Spring
-	CreateSpellEntry(126646), -- Stuff of Nightmares
-	CreateSpellEntry(126649), -- Terror in the Mists
-	CreateSpellEntry(126640), -- Spirits of the Sun
-	CreateSpellEntry(126657), -- Darkmist Vortex
-	CreateSpellEntry(126659), -- Essence of Terror
-
 	-- Throne of Thunder
 	CreateSpellEntry(138938), -- JuJu Madness
 	CreateSpellEntry(138898), -- Breath of Many Minds
@@ -147,7 +120,6 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(115175), -- Soothing Mist
 			CreateSpellEntry(116095), -- Disable
 			CreateSpellEntry(115078), -- Paralysis
-			CreateSpellEntry(56092), -- Engulfing Flames (Malygos)
 		},
 		player = {
 			CreateSpellEntry(124081), -- Zensphere
@@ -182,6 +154,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(81130), -- Scarlet Fever
 			CreateSpellEntry(114866), -- Soul Reaper (Blood)
 			CreateSpellEntry(130735), -- Soul Reaper (Frost)
+			CreateSpellEntry(130736), -- Soul Reaper (Unholy)
 			CreateSpellEntry(108194), -- Asphyxiate
 			CreateSpellEntry(155159), -- Necrotic Plague
 		},
@@ -202,6 +175,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(108200), -- Remorseless Winter
 			CreateSpellEntry(51460), -- Runic Corruption
 			CreateSpellEntry(49039), -- Lichborne
+			CreateSpellEntry(171049), -- Rune Tap
 		},
 		procs = {
 			CreateSpellEntry(53365), -- Unholy Strength
