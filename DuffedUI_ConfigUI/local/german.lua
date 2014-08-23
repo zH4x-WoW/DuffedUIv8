@@ -17,6 +17,7 @@
 	DuffedUIConfigUILocalization.castbarcolor = "Wähle Farbe der Zauberleiste"
 	DuffedUIConfigUILocalization.castbarclasscolor = "Aktiviere Klassenfarben f\195\188r die Zauberleiste"
 	DuffedUIConfigUILocalization.castbarcbticks = "Aktiviere Ticks f\195\188r kanalisierte Zauber."
+	DuffedUIConfigUILocalization.castbarplayerwidth = "Setze Breite der Zauberleiste (Standard 376)"
 
 	-- misc
 	DuffedUIConfigUILocalization.misc = "Diverses"
@@ -35,6 +36,8 @@
 	DuffedUIConfigUILocalization.miscexp_rep = "Zeige Erfahrungs / XP-Panel an dem unteren Panel"
 	DuffedUIConfigUILocalization.miscacm_screen = "Aktiviere automatische Screenshots bei Achievments"
 	DuffedUIConfigUILocalization.miscclickcast = "Aktiviere Click2Cast-Plugin"
+	DuffedUIConfigUILocalization.miscClick2Cast_Filter = "Aktiviere Click2Cast Filter für Spieler- und Zielfenster"
+	DuffedUIConfigUILocalization.miscAFKCamera = "Aktiviere die AFK Kamera"
 
 	-- skins
 	DuffedUIConfigUILocalization.skins = "AddOn-Skins"
@@ -77,7 +80,7 @@
 	DuffedUIConfigUILocalization.runesgrowthdirection = "Setze Wachstumsrichtung der Runen (VERTICAL or HORIZONTAL)"
 
 	-- nameplate
-	DuffedUIConfigUILocalization.nameplate = "Namensplakette"
+	DuffedUIConfigUILocalization.nameplate = "Namensplaketten"
 	DuffedUIConfigUILocalization.nameplateenable = "Aktiviere Namensplaketten"
 	DuffedUIConfigUILocalization.nameplateenhancethreat = "Aktiviere Bedrohungs-Feature, wechselt automatisch je nach Rolle"
 	DuffedUIConfigUILocalization.nameplateshowhealth = "Aktiviere Anzeige der Lebenspunkte in der Namensplakette"
@@ -91,22 +94,27 @@
 	DuffedUIConfigUILocalization.nameplateshowcastbarname = "Zeige zus\195\164tzlich den gewirkten Zauber unter der Namensplakette"
 	DuffedUIConfigUILocalization.nameplatenameabbrev = "Zeige abgek\195\188rzte Namen"
 	DuffedUIConfigUILocalization.nameplateaurassize = "Setze Auragr\195\182\195\159e (Standard = 20)"
+	DuffedUIConfigUILocalization.nameplateCastHeight = "Setze Höhe der Zauberleiste (Standard = 5)"
+	DuffedUIConfigUILocalization.nameplateShowComboPoints = "Zeige Kombopunkte"
+	DuffedUIConfigUILocalization.nameplateauraswidth = "Setze Aurabreite (Standard = 20)"
+	DuffedUIConfigUILocalization.nameplateaurasheight = "Setze Aurahöhe (Standard = 15)"
+	DuffedUIConfigUILocalization.nameplateMaxDebuffs = "Setze Anzahl der angezeigten Debuffs"
 
 	-- merchant
-	DuffedUIConfigUILocalization.merchant = "H ändler"
-	DuffedUIConfigUILocalization.merchantsellgrays = "Verkaufe automatisch graue Gegenst\195\164nde"
-	DuffedUIConfigUILocalization.merchantautorepair = "Repariere automatisch besch\195\164digte R\195\188stung"
-	DuffedUIConfigUILocalization.merchantsellmisc = "Verkaufe automatisch vordefinierte Gegenst\195\164nde (M\195\188ll, NICHT grau)"
-	DuffedUIConfigUILocalization.merchantautoguildrepair = "Aktiviere Reperatur \195\188ber die Gildenbank"
+	DuffedUIConfigUILocalization.merchant = "H\195\164ndler"
+	DuffedUIConfigUILocalization.merchantsellgrays = "Verkaufe graue Gegenst\195\164nde automatisch"
+	DuffedUIConfigUILocalization.merchantautorepair = "Repariere besch\195\164digte R\195\188stung automatisch"
+	DuffedUIConfigUILocalization.merchantsellmisc = "Verkaufe vordefinierte Gegenst\195\164nde automatisch (M\195\188ll, NICHT grau)"
+	DuffedUIConfigUILocalization.merchantautoguildrepair = "Aktiviere Reparatur \195\188ber die Gildenbank"
 
 	-- bags
 	DuffedUIConfigUILocalization.bags = "Taschen"
-	DuffedUIConfigUILocalization.bagsenable = "Aktiviere alle-in-einer Ansicht"
-	DuffedUIConfigUILocalization.bagsbpr = "Setze Schaltfl\195\164chen pro Reihe"
-	DuffedUIConfigUILocalization.bagsmoveable = "Aktiviere bewegbare Taschen"
-	DuffedUIConfigUILocalization.bagsscale = "Sklaierung für Bank und Taschen"
-	DuffedUIConfigUILocalization.bagsspacing = "Zwischenraum zwischen Taschenslots"
-	DuffedUIConfigUILocalization.bagsbuttonsize = "Größe der Slots"
+	DuffedUIConfigUILocalization.bagsenable = "Aktiviere die 'Alles in einer Tasche' Ansicht"
+	DuffedUIConfigUILocalization.bagsbpr = "Taschenplatzanzahl pro Reihe"
+	DuffedUIConfigUILocalization.bagsmoveable = "Aktiviere bewegliche Taschen"
+	DuffedUIConfigUILocalization.bagsscale = "Sklalierung für Bank und Taschen"
+	DuffedUIConfigUILocalization.bagsspacing = "Zwischenraum zwischen den Taschenslots"
+	DuffedUIConfigUILocalization.bagsbuttonsize = "Größe der Taschenplätze"
 	 
 	-- datatext
 	DuffedUIConfigUILocalization.datatext = "Data Text"
@@ -265,6 +273,7 @@
 	DuffedUIConfigUILocalization.actionbarborderhighlight = "Aktiviere Proc-Hervorhebung von DuffedUI (Standard = disabled)"
 	DuffedUIConfigUILocalization.actionbarlayout = "W\195\164hle Aktionsleistenlayout (1 oder 2, Standard = 1)"
 	DuffedUIConfigUILocalization.actionbarpetbarhorizontal = "Setze Haustierleiste horizontal"
+	DuffedUIConfigUILocalization.actionbarrightbarvertical = "Setze vertikale Seitenleiste"
 	 
 	-- cooldowns
 	DuffedUIConfigUILocalization.cooldown = "Abklingzeit"
