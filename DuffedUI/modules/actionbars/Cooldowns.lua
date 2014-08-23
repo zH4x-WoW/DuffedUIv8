@@ -138,7 +138,7 @@ end
 --hook the SetCooldown method of all cooldown frames
 --ActionButton1Cooldown is used here since its likely to always exist
 --and I'd rather not create my own cooldown frame to preserve a tiny bit of memory
-local function Timer_Start(self, start, duration) --, charges, maxCharges
+local function Timer_Start(self, start, duration, charges, maxCharges)
 	if self.noOCC then return end
 
 	--start timer

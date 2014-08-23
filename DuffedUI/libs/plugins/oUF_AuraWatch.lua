@@ -151,7 +151,6 @@ do
 	end
 end
 
-
 local function resetIcon(icon, frame, count, duration, remaining)
 	if icon.onlyShowMissing then
 		icon:Hide()

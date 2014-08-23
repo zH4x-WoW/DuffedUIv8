@@ -637,7 +637,7 @@ D.CreateAuraWatchIcon = function(self, icon)
 	icon.icon:Point("BOTTOMRIGHT", -1, 1)
 	icon.icon:SetTexCoord(.08, .92, .08, .92)
 	icon.icon:SetDrawLayer("ARTWORK")
-	if (icon.cd) then
+	if icon.cd then
 		icon.cd:SetReverse()
 	end
 	icon.overlay:SetTexture()
@@ -649,7 +649,7 @@ D.createAuraWatch = function(self, unit)
 	auras:SetPoint("BOTTOMRIGHT", self.Health, -2, 2)
 	auras.presentAlpha = 1
 	auras.missingAlpha = 0
-	auras.hideCooldown = false
+	auras.displayText = true
 	auras.icons = {}
 	auras.PostCreateIcon = D.CreateAuraWatchIcon
 
