@@ -189,6 +189,8 @@ local CLASS_FILTERS = {
 		target = { 
 			CreateSpellEntry(48438), -- Wild Growth
 			CreateSpellEntry(774), -- Rejuvenation
+			CreateSpellEntry(155777), -- Germination
+			CreateSpellEntry(162359), -- Genesis
 			CreateSpellEntry(8936, false, nil, nil, 8936), -- Regrowth
 			CreateSpellEntry(33763), -- Lifebloom
 			CreateSpellEntry(8921), -- Moonfire
@@ -224,6 +226,8 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(61336), -- Survival Instincts
 			CreateSpellEntry(48438), -- Wild Growth
 			CreateSpellEntry(774), -- Rejuvenation
+			CreateSpellEntry(155777), -- Germination
+			CreateSpellEntry(162359), -- Genesis
 			CreateSpellEntry(8936, false, nil, nil, 8936), -- Regrowth
 			CreateSpellEntry(33763), -- Lifebloom
 			CreateSpellEntry(16870), -- Clearcasting

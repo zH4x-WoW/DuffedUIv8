@@ -621,23 +621,28 @@ end
 
 -- Grid
 D.countOffsets = {
-	TOPLEFT = {6 * D.raidscale, 1},
-	TOPRIGHT = {-6 * D.raidscale, 1},
-	BOTTOMLEFT = {6 * D.raidscale, 1},
-	BOTTOMRIGHT = {-6 * D.raidscale, 1},
-	LEFT = {6 * D.raidscale, 1},
-	RIGHT = {-6 * D.raidscale, 1},
+	TOPLEFT = {6, 1},
+	TOPRIGHT = {-6, 1},
+	BOTTOMLEFT = {6, 1},
+	BOTTOMRIGHT = {-6, 1},
+	LEFT = {6, 1},
+	RIGHT = {-6, 1},
 	TOP = {0, 0},
 	BOTTOM = {0, 0},
 }
 
 D.CreateAuraWatchIcon = function(self, icon)
-	icon:SetTemplate("Default")
+	icon:SetTemplate()
 	icon.icon:Point("TOPLEFT", 1, -1)
 	icon.icon:Point("BOTTOMRIGHT", -1, 1)
 	icon.icon:SetTexCoord(.08, .92, .08, .92)
 	icon.icon:SetDrawLayer("ARTWORK")
-	if (icon.cd) then icon.cd:SetReverse() end
+	if icon.cd then
+		local cooldown = icon:CreateFontString(nil, "OVERLAY")
+			cooldown:SetFont(C["media"].font, 8, "THINOUTLINE")
+			cooldown:SetAllPoints(icon)
+			--icon.cd = cooldown
+	end
 	icon.overlay:SetTexture()
 end
 
@@ -664,20 +669,25 @@ D.createAuraWatch = function(self, unit)
 		for key, spell in pairs(buffs) do
 			local icon = CreateFrame("Frame", nil, auras)
 			icon.spellID = spell[1]
-			icon.anyUnit = spell[4]
-			icon:Width(6 * D.raidscale)
-			icon:Height(6 * D.raidscale)
-			icon:SetPoint(spell[2], 0, 0)
+			icon.anyUnit = spell[5]
+			icon:Width(6)
+			icon:Height(6)
+			icon:SetPoint(spell[2], unpack(spell[3]))
 
 			local tex = icon:CreateTexture(nil, "OVERLAY")
 			tex:SetAllPoints(icon)
 			tex:SetTexture(C["media"].blank)
-			if (spell[3]) then tex:SetVertexColor(unpack(spell[3])) else tex:SetVertexColor(.8, .8, .8) end
+			if (spell[4]) then tex:SetVertexColor(unpack(spell[4])) else tex:SetVertexColor(.8, .8, .8) end
 
 			local count = icon:CreateFontString(nil, "OVERLAY")
-			count:SetFont(C["media"].font, 8 * D.raidscale, "THINOUTLINE")
+			count:SetFont(C["media"].font, 8, "THINOUTLINE")
 			count:SetPoint("CENTER", unpack(D.countOffsets[spell[2]]))
 			icon.count = count
+
+			--[[local cooldown = icon:CreateFontString(nil, "OVERLAY")
+			cooldown:SetFont(C["media"].font, 8, "THINOUTLINE")
+			cooldown:SetAllPoints(icon)
+			icon.cd = cooldown]]
 
 			auras.icons[spell[1]] = icon
 		end
@@ -689,38 +699,40 @@ if C["raid"].raidunitdebuffwatch == true then
 	do
 		D.buffids = {
 			PRIEST = {
-				{6788, "TOPRIGHT", {1, 0, 0}, true}, -- Weakened Soul
-				{33076, "BOTTOMRIGHT", {0.2, 0.7, 0.2}}, -- Prayer of Mending
-				{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}}, -- Renew
-				{17, "TOPLEFT", {0.81, 0.85, 0.1}, true}, -- Power Word: Shield
+				{6788, "TOPRIGHT", {0, 0}, {1, 0, 0}, true}, -- Weakened Soul
+				{33076, "BOTTOMRIGHT", {0, 0}, {.2, .7, .2}}, -- Prayer of Mending
+				{139, "BOTTOMLEFT", {0, 0}, {.4, .7, .2}}, -- Renew
+				{17, "TOPLEFT", {0, 0}, {.81, .85, .1}, true}, -- Power Word: Shield
 			},
 			DRUID = {
-				{774, "TOPLEFT", {0.8, 0.4, 0.8}}, -- Rejuvenation
-				{8936, "TOPRIGHT", {0.2, 0.8, 0.2}}, -- Regrowth
-				{33763, "BOTTOMLEFT", {0.4, 0.8, 0.2}}, -- Lifebloom
-				{48438, "BOTTOMRIGHT", {0.8, 0.4, 0}}, -- Wild Growth
+				{774, "TOPLEFT", {0, 0}, {.8, .4, .8}}, -- Rejuvenation
+				{162359, "TOPLEFT", {0, 0}, {.1, .3, .8}}, -- Genesis
+				{155777, "TOPLEFT", {0, -8}, {.3, .3, .8}}, -- Germination
+				{8936, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, -- Regrowth
+				{33763, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, -- Lifebloom
+				{48438, "BOTTOMRIGHT", {0, 0}, {.8, .4, 0}}, -- Wild Growth
 			},
 			PALADIN = {
-				{53563, "TOPRIGHT", {0.7, 0.3, 0.7}}, -- Beacon of Light
-				{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true}, -- Hand of Protection
-				{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true}, -- Hand of Freedom
-				{1038, "BOTTOMRIGHT", {0.93, 0.75, 0}, true}, -- Hand of Salvation
-				{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true}, -- Hand of Sacrifice
-				{114163, "BOTTOMLEFT", {0.89, 0.1, 0.1}, true}, -- Eternal Flame
-				{20925, "TOPLEFT", {0.81, 0.85, 0.1}, true}, -- Sacred Shield
+				{53563, "TOPRIGHT", {0, 0}, {.7, .3, .7}}, -- Beacon of Light
+				{1022, "BOTTOMRIGHT", {0, 0}, {.2, .2, 1}, true}, -- Hand of Protection
+				{1044, "BOTTOMRIGHT", {0, 0}, {.89, .45, 0}, true}, -- Hand of Freedom
+				{1038, "BOTTOMRIGHT", {0, 0}, {.93, .75, 0}, true}, -- Hand of Salvation
+				{6940, "BOTTOMRIGHT", {0, 0}, {.89, .1, .1}, true}, -- Hand of Sacrifice
+				{114163, "BOTTOMLEFT", {0, 0}, {.89, .1, .1}, true}, -- Eternal Flame
+				{20925, "TOPLEFT", {0, 0}, {.81, .85, .1}, true}, -- Sacred Shield
 			},
 			SHAMAN = {
-				{61295, "TOPLEFT", {0.7, 0.3, 0.7}}, -- Riptide 
-				{974, "BOTTOMRIGHT", {0.7, 0.4, 0}, true}, -- Earth Shield
+				{61295, "TOPLEFT", {0, 0}, {.7, .3, .7}}, -- Riptide 
+				{974, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}, true}, -- Earth Shield
 			},
 			MONK = {
-				{119611, "TOPLEFT", {0.8, 0.4, 0.8}}, --Renewing Mist
-				{116849, "TOPRIGHT", {0.2, 0.8, 0.2}}, -- Life Cocoon
-				{124682, "BOTTOMLEFT", {0.4, 0.8, 0.2}}, -- Enveloping Mist
-				{124081, "BOTTOMRIGHT", {0.7, 0.4, 0}}, -- Zen Sphere
+				{119611, "TOPLEFT", {0, 0}, {.8, .4, .8}}, --Renewing Mist
+				{116849, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, -- Life Cocoon
+				{124682, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, -- Enveloping Mist
+				{124081, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}}, -- Zen Sphere
 			},
 			ALL = {
-				{14253, "RIGHT", {0, 1, 0}}, -- Abolish Poison
+				{14253, "RIGHT", {0, 0}, {0, 1, 0}}, -- Abolish Poison
 			},
 		}
 	end

@@ -1,6 +1,3 @@
-local D, C, L = unpack(select(2, ...)) 
-if C["unitframes"].enable ~= true or C["raid"].raidunitdebuffwatch ~= true then return end
-
 local _, ns = ...
 local oUF = ns.oUF or oUF
 

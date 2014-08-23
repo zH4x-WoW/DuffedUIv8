@@ -3,6 +3,7 @@ if not C["actionbar"].enable == true then return end
 
 local _G = _G
 local sub, replace = string.sub, string.gsub
+--local font = D.Font(C["actionbar"].font)
 
 function D.StyleActionBarButton(self)
 	local name = self:GetName()
