@@ -315,11 +315,7 @@ local function AnotherOnAuraChange(self, event, arg1, unit)
 end
 
 local bufftrackersummary = CreateFrame("Frame", "BuffTrackerSummary", UIParent)
-if D.client == "deDE" then
-	BuffTrackerSummary:Size( 565, 250 )
-else
-	bufftrackersummary:Size(500, 250)
-end
+if D.client == "deDE" then BuffTrackerSummary:Size(565, 250) else bufftrackersummary:Size(500, 250) end
 bufftrackersummary:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 bufftrackersummary:SetTemplate("Transparent")
 bufftrackersummary:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")

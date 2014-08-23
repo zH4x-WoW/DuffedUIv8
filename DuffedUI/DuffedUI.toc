@@ -1,6 +1,6 @@
 ## Interface: 60000
 ## Author: Merith @ Zirkel des Cenarius EU
-## Version: 8.0020
+## Version: 8.0021
 ## Title: |cffC41F3BDuffedUI|r
 ## SavedVariables: DuffedUIData
 ## SavedVariablesPerCharacter: DuffedUIDataPerChar, ClickCast, ImprovedCurrency

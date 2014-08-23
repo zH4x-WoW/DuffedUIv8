@@ -253,7 +253,7 @@ oUF:Factory(function(self)
 		"showPlayer", C["raid"].showplayerinparty,
 		"showParty", true,
 		"showRaid", true, 
-		--"showSolo", true,
+		"showSolo", true,
 		"xoffset", D.Scale(8),
 		"yOffset", D.Scale(1),
 		"groupFilter", "1,2,3,4,5,6,7,8",

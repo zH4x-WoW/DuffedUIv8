@@ -77,14 +77,15 @@ C["actionbar"] = {
 	["petbarhorizontal"] = false,
 	["petbaralwaysvisible"] = true,
 	["verticalshapeshift"] = true,
-	["hotkey"] = true,                                  		-- enable hotkey display because it was a lot requested
-	["macro"] = false,                                  		-- enable macro display because it was a lot requested
-	["buttonsize"] = 27,                                		-- normal buttons size
-	["petbuttonsize"] = 29,                             		-- pet & stance buttons size
-	["buttonspacing"] = 4,                              		-- buttons spacing
-	["shapeshiftborder"] = true,								-- enable stancebarborder
-	["shapeshiftmouseover"] = false,							-- enable mouseover on stancebar
-	["borderhighlight"] = false,								-- enable prochighlight on iconborder
+	["hotkey"] = true,
+	["macro"] = false,
+	["buttonsize"] = 27,
+	["petbuttonsize"] = 29,
+	["buttonspacing"] = 4,
+	["shapeshiftborder"] = true,
+	["shapeshiftmouseover"] = false,
+	["borderhighlight"] = false,
+	--["font"] = "DuffedUI",
 }
 
 C["raid"] = {
