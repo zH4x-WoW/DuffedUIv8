@@ -316,7 +316,7 @@ D.PostCreateAura = function(self, button)
 	button.cd:ClearAllPoints()
 	button.cd:Point("TOPLEFT", button, "TOPLEFT", 2, -2)
 	button.cd:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
-	button.overlayFrame:SetFrameLevel(button.cd:GetFrameLevel() + 1)	   
+	button.overlayFrame:SetFrameLevel(button.cd:GetFrameLevel() + 1)
 	button.overlay:SetParent(button.overlayFrame)
 	button.count:SetParent(button.overlayFrame)
 	button.remaining:SetParent(button.overlayFrame)
@@ -637,7 +637,7 @@ D.CreateAuraWatchIcon = function(self, icon)
 	icon.icon:Point("BOTTOMRIGHT", -1, 1)
 	icon.icon:SetTexCoord(.08, .92, .08, .92)
 	icon.icon:SetDrawLayer("ARTWORK")
-	if icon.cd then
+	if (icon.cd) then
 		icon.cd:SetReverse()
 	end
 	icon.overlay:SetTexture()
@@ -649,6 +649,7 @@ D.createAuraWatch = function(self, unit)
 	auras:SetPoint("BOTTOMRIGHT", self.Health, -2, 2)
 	auras.presentAlpha = 1
 	auras.missingAlpha = 0
+	auras.hideCooldown = false
 	auras.icons = {}
 	auras.PostCreateIcon = D.CreateAuraWatchIcon
 
@@ -678,7 +679,11 @@ D.createAuraWatch = function(self, unit)
 			local tex = icon:CreateTexture(nil, "OVERLAY")
 			tex:SetAllPoints(icon)
 			tex:SetTexture(C["media"].blank)
-			if (spell[4]) then tex:SetVertexColor(unpack(spell[4])) else tex:SetVertexColor(.8, .8, .8) end
+			if (spell[4]) then
+				tex:SetVertexColor(unpack(spell[4]))
+			else
+				tex:SetVertexColor(.8, .8, .8)
+			end
 
 			local count = icon:CreateFontString(nil, "OVERLAY")
 			count:SetFont(C["media"].font, 8, "THINOUTLINE")
