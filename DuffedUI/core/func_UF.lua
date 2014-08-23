@@ -638,10 +638,7 @@ D.CreateAuraWatchIcon = function(self, icon)
 	icon.icon:SetTexCoord(.08, .92, .08, .92)
 	icon.icon:SetDrawLayer("ARTWORK")
 	if icon.cd then
-		local cooldown = icon:CreateFontString(nil, "OVERLAY")
-			cooldown:SetFont(C["media"].font, 8, "THINOUTLINE")
-			cooldown:SetAllPoints(icon)
-			--icon.cd = cooldown
+		icon.cd:SetReverse()
 	end
 	icon.overlay:SetTexture()
 end
@@ -658,11 +655,15 @@ D.createAuraWatch = function(self, unit)
 	local buffs = {}
 
 	if D.buffids["ALL"] then
-		for key, value in pairs(D.buffids["ALL"]) do tinsert(buffs, value) end
+		for key, value in pairs(D.buffids["ALL"]) do
+			tinsert(buffs, value)
+		end
 	end
 
 	if (D.buffids[D.Class]) then
-		for key, value in pairs(D.buffids[D.Class]) do tinsert(buffs, value) end
+		for key, value in pairs(D.buffids[D.Class]) do
+			tinsert(buffs, value)
+		end
 	end
 
 	if (buffs) then
@@ -683,11 +684,6 @@ D.createAuraWatch = function(self, unit)
 			count:SetFont(C["media"].font, 8, "THINOUTLINE")
 			count:SetPoint("CENTER", unpack(D.countOffsets[spell[2]]))
 			icon.count = count
-
-			--[[local cooldown = icon:CreateFontString(nil, "OVERLAY")
-			cooldown:SetFont(C["media"].font, 8, "THINOUTLINE")
-			cooldown:SetAllPoints(icon)
-			icon.cd = cooldown]]
 
 			auras.icons[spell[1]] = icon
 		end
