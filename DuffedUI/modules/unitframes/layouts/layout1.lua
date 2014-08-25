@@ -288,6 +288,15 @@ local function Shared(self, unit)
 						DruidWildMushroom:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
 						DruidComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
 					end
+					local spec = GetSpecialization()
+					DruidComboPoints.Visibility = CreateFrame("Frame", nil, DruidComboPoints)
+					DruidComboPoints.Visibility:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
+					DruidComboPoints.Visibility:RegisterEvent("PLAYER_TALENT_UPDATE")
+					DruidComboPoints.Visibility:SetScript("OnEvent", function()
+						if spec == 2 then DruidComboPoints:Show() else DruidComboPoints:Hide() end
+						DruidComboPoints.Visibility:UnregisterEvent("PLAYER_SPECIALIZATION_CHANGED")
+						DruidComboPoints.Visibility:UnregisterEvent("PLAYER_TALENT_UPDATE")
+					end)
 					self.DruidMana = DruidMana
 					self.DruidMana.bg = DruidMana.Background
 					self.EclipseBar = DruidEclipseBar

@@ -647,14 +647,9 @@ D.createAuraWatch = function(self, unit)
 			icon.icon:SetTexCoord(.08, .92, .08, .92)
 			icon.icon:SetDrawLayer("ARTWORK")
 		end
-		
-		if icon.cd then
-			icon.cd:SetReverse()
-		end
-		
-		if icon.overlay then
-			icon.overlay:SetTexture()
-		end
+
+		if icon.cd then icon.cd:SetReverse() end
+		if icon.overlay then icon.overlay:SetTexture() end
 	end
 
 	local buffs = {}
