@@ -312,6 +312,6 @@ Stat:SetScript("OnMouseDown", function(self, btn)
 		DuffedUIData.gold[myPlayerRealm] = {}
 		DuffedUIData.gold[myPlayerRealm][myPlayerName] = GetMoney()
 	else
-		EasyMenu(RightClickMenu, TukuiImprovedCurrencyDropDown, "cursor", 0, 0, "MENU", 2)
+		EasyMenu(RightClickMenu, DuffedUIImprovedCurrencyDropDown, "cursor", 0, 0, "MENU", 2)
 	end
 end)
