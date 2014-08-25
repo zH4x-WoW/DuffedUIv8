@@ -713,7 +713,7 @@ if C["raid"].raidunitdebuffwatch == true then
 			PRIEST = {
 				{6788, "TOPRIGHT", {0, 0}, {1, 0, 0}, {"CENTER", 0, 0}, "LEFT", true}, -- Weakened Soul
 				{33076, "BOTTOMRIGHT", {0, 0}, {.2, .7, .2}, {"CENTER", 0, 0}, "LEFT"}, -- Prayer of Mending
-				{139, "BOTTOMLEFT", {0, 0}, {.4, .7, .2}, {"CENTER", 0, 0}, "LEFT"}, -- Renew
+				{139, "BOTTOMLEFT", {0, 0}, {.4, .7, .2}, {"LEFT", 0, 0}, "LEFT"}, -- Renew
 				{17, "TOPLEFT", {0, 0}, {.81, .85, .1}, {"CENTER", 0, 0}, "LEFT", true}, -- Power Word: Shield
 			},
 			DRUID = {

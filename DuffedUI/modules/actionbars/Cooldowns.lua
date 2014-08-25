@@ -27,11 +27,6 @@ local SECONDS_FORMAT = D.RGBToHex(1, 1, 0)..'%d|r' --format for timers that have
 local MINUTES_FORMAT = D.RGBToHex(1, 1, 1)..'%dm|r' --format for timers that have minutes remaining
 local HOURS_FORMAT = D.RGBToHex(0.4, 1, 1)..'%dh|r' --format for timers that have hours remaining
 local DAYS_FORMAT = D.RGBToHex(0.4, 0.4, 1)..'%dh|r' --format for timers that have days remaining
-local UNCOLORED_EXPIRING_FORMAT = '%.1f' --format for timers that are soon to expire
-local UNCOLORED_SECONDS_FORMAT = '%d' --format for timers that have seconds remaining
-local UNCOLORED_MINUTES_FORMAT = '%dm' --format for timers that have minutes remaining
-local UNCOLORED_HOURS_FORMAT = '%dh' --format for timers that have hours remaining
-local UNCOLORED_DAYS_FORMAT = '%dh' --format for timers that have days remaining
 
 --local bindings!
 local floor = math.floor
@@ -63,29 +58,6 @@ local function getTimeText(s)
 	end
 end
 
-local function getUncoloredTimeText(s)
-	--format text as seconds when below a minute
-	if s < MINUTEISH then
-		local seconds = tonumber(D.Round(s))
-		if seconds > EXPIRING_DURATION then
-			return UNCOLORED_SECONDS_FORMAT, seconds, s - (seconds - 0.51)
-		else
-			return UNCOLORED_EXPIRING_FORMAT, s, 0.051
-		end
-	--format text as minutes when below an hour
-	elseif s < HOURISH then
-		local minutes = tonumber(D.Round(s/MINUTE))
-		return UNCOLORED_MINUTES_FORMAT, minutes, minutes > 1 and (s - (minutes*MINUTE - HALFMINUTEISH)) or (s - MINUTEISH)
-	--format text as hours when below a day
-	elseif s < DAYISH then
-		local hours = tonumber(D.Round(s/HOUR))
-		return UNCOLORED_HOURS_FORMAT, hours, hours > 1 and (s - (hours*HOUR - HALFHOURISH)) or (s - HOURISH)
-	--format text as days
-	else
-		local days = tonumber(D.Round(s/DAY))
-		return UNCOLORED_DAYS_FORMAT, days,  days > 1 and (s - (days*DAY - HALFDAYISH)) or (s - DAYISH)
-	end
-end
 --stops the timer
 local function Timer_Stop(self)
 	self.enabled = nil
@@ -126,8 +98,6 @@ local function Timer_OnSizeChanged(self, width, height)
 		end
 	elseif self.forceOCC then
 		self.text:SetFont(D.SetDefaultActionButtonCooldownFont, fontScale * FORCEFONT_SIZE, "THINOUTLINE")
-		--self.text:SetShadowColor(0, 0, 0, .5)
-		--self.text:SetShadowOffset(2, -2)
 		if self.enabled then
 			Timer_ForceUpdate(self)
 		end
@@ -153,7 +123,7 @@ local function Timer_OnUpdate(self, elapsed)
 				self.text:SetText('')
 				self.nextUpdate  = 1
 			elseif self:GetParent():GetParent():GetParent().stackColors then -- timer is child of scaler is child of of cd is child of iconframe 
-				local  formatStr,time, nextUpdate = getUncoloredTimeText(remain)
+				local  formatStr,time, nextUpdate = getTimeText(remain)
 				self.text:SetFormattedText(formatStr, time)
 				self.nextUpdate = nextUpdate
 			else
@@ -174,18 +144,19 @@ local function Timer_Create(self)
 	local scaler = CreateFrame('Frame', nil, self)
 	scaler:SetAllPoints(self)
 
-	local timer = CreateFrame('Frame', nil, scaler); timer:Hide()
+	local timer = CreateFrame('Frame', nil, scaler)
+	timer:Hide()
 	timer:SetAllPoints(scaler)
 	timer:SetScript('OnUpdate', Timer_OnUpdate)
 
-	local text = self:GetParent():CreateFontString(nil, 'OVERLAY') -- self:GetParent <-> timer?
-	if self.textPoint then
+	local text = timer:CreateFontString(nil, 'OVERLAY') -- self:GetParent() <-> timer?
+	if timer.textPoint then
 		text:Point(unpack(self.textPoint))
 	else
 		text:Point("CENTER", 2, 0)
 	end
 	
-	if self.textJustH then
+	if timer.textJustH then
 		text:SetJustifyH(self.textJustH)
 	else
 		text:SetJustifyH("CENTER")
@@ -203,7 +174,6 @@ local function Timer_Create(self)
 	Timer_OnSizeChanged(timer, scaler:GetSize())
 	scaler:SetScript('OnSizeChanged', function(self, ...) Timer_OnSizeChanged(timer, ...) end)
 
-	--self.timer = timer
 	return timer
 end
 
