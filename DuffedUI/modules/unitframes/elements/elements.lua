@@ -2,6 +2,7 @@ local D, C, L = unpack(select(2, ...))
 
 local texture = C["media"].normTex
 local font, fontsize, fontflag = C["media"].font, 11, "THINOUTLINE"
+local layout = C["unitframes"].layout
 local Color = RAID_CLASS_COLORS[D.Class]
 
 local cba = CreateFrame("Frame", "CBAnchor", UIParent)

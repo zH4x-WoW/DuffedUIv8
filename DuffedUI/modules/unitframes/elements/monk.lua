@@ -3,13 +3,13 @@ if D.Class ~= "MONK" then return end
 
 local texture = C["media"].normTex
 local layout = C["unitframes"].layout
-local font, fonsize, fontflag = C["media"].font, 12, "THINOUTLINE"
 
-D.ConstructEnergy("Energy", 216, 5)
+if not C["unitframes"].attached then
+	D.ConstructEnergy("Energy", 216, 5)
+end
 
 D.ConstructRessources = function(name, width, height)
 	local Bar = CreateFrame("Frame", name, UIParent)
-	Bar:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
 	Bar:Size(width, height)
 	Bar:SetBackdrop(backdrop)
 	Bar:SetBackdropColor(0, 0, 0)

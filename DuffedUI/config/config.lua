@@ -35,6 +35,7 @@ C["unitframes"] = {
 	["focusdebuffs"] = true,
 	["focusbutton"] = true,
 	["showtotalhpmp"] = false,
+	["attached"] = true,
 }
 
 C["chat"] = {

@@ -2,14 +2,14 @@ local D, C, L = unpack(select(2, ...))
 if D.Class ~= "SHAMAN" then return end
 
 local texture = C["media"].normTex
-local layout = C["unitframes"].layout
 local font, fonsize, fontflag = C["media"].font, 12, "THINOUTLINE"
 
-D.ConstructEnergy("Energy", 216, 5)
+if not C["unitframes"].attached then
+	D.ConstructEnergy("Energy", 216, 5)
+end
 
 D.ConstructRessources = function(name, width, height)
 	local TotemBar = CreateFrame("Frame", name, UIParent)
-	TotemBar:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
 	TotemBar:Size(width, height)
 	TotemBar:SetBackdrop(backdrop)
 	TotemBar:SetBackdropColor(0, 0, 0)
