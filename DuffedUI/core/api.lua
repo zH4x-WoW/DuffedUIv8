@@ -536,6 +536,9 @@ local function SkinEditBox(frame)
 	if frame:GetName() and frame:GetName():find("Silver") or frame:GetName():find("Copper") then
 		Point(frame.backdrop, "BOTTOMRIGHT", -12, -2)
 	end
+	if(frame.Left) then frame.Left:Kill() end
+	if(frame.Right) then frame.Right:Kill() end
+	if(frame.Middle) then frame.Middle:Kill() end
 end
 
 local function SkinDropDownBox(frame, width)

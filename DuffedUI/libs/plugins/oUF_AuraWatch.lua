@@ -54,6 +54,21 @@ you can specify, as explained below.
 		A function to call when an icon is created to modify it, such as adding
 		a border or repositioning the count fontstring. Leave as nil to ignore.
 		The arguements are: AuraWatch table, icon, auraSpellID, auraName, unitFrame
+	PostResetIcon
+		Default nil
+		A function to call when an icon is reset, that is an aura has been applied
+		or refreshed. This is passed the AuraWatch frame, the icon, aura stack count,
+		duration, and remaining time, as per a UnitAura call.
+	PostExpireIcon
+		Default nil
+		A function to call when an icon is expired, that is an aura has disappeared.
+		This is passed the AuraWatch frame and the icon.
+	OverrideResetIcon
+		Default nil
+		Provide this function to handle the ResetIcon process yourself.
+	OverrideExpireIcon
+		Default nil
+		Provide this function to handle the ExpireIcon process yourself.
 
 Below are options set on a per icon basis. Set these as fields in the icon frames.
 
@@ -131,9 +146,7 @@ do
 	frame:SetScript("OnEvent", function(self, event)
 		for k,t in pairs(GUIDs) do
 			GUIDs[k] = nil
-			for a in pairs(t) do
-				t[a] = nil
-			end
+			wipe(t)
 			cache[t] = true
 		end
 	end)
@@ -165,12 +178,33 @@ local function resetIcon(icon, frame, count, duration, remaining)
 			end
 		end
 		if icon.count then
-			icon.count:SetText((count > 1 and count))
+			icon.count:SetText(count > 1 and count)
 		end
+		
+		if count and icon.stackColors and icon.extraTex then
+			icon.extraTex:SetVertexColor(unpack(icon.stackColors[count]))
+		end
+		
+		if count and icon.stackColors and icon.cd and icon.cd.timer then
+			icon.cd.timer.text:SetTextColor(unpack(icon.stackColors[count]))
+		end
+		
 		if icon.overlay then
 			icon.overlay:Hide()
 		end
 		icon:SetAlpha(frame.presentAlpha)
+		icon:Show()
+		
+		if icon.timers and icon.extraTex and (not icon.groupsStarted or abs(icon.groupsStarted - remaining + duration) > 0.2) then
+			for k = 1, #icon.timers do
+				icon.timerGroups[k]:Stop()
+				icon.timerGroups[k].animation:SetDuration(duration - icon.timers[k][1])
+				icon.timerGroups[k]:Play()
+			end
+			
+			icon.groupsStarted = GetTime()
+			icon.extraTex:SetVertexColor(unpack(icon.extraTexColor))
+		end
 	end
 end
 
@@ -178,8 +212,12 @@ local function expireIcon(icon, frame)
 	if icon.onlyShowPresent then
 		icon:Hide()
 	else
-		if (icon.cd) then icon.cd:Hide() end
-		if (icon.count) then icon.count:SetText() end
+		if icon.cd then 
+			icon.cd:Hide()
+		end
+		if icon.count then
+			icon.count:SetText()
+		end
 		icon:SetAlpha(frame.missingAlpha)
 		if icon.overlay then
 			icon.overlay:Show()
@@ -256,10 +294,19 @@ local function setupIcons(self)
 		if not icon.cd and not (watch.hideCooldown or icon.hideCooldown) then
 			local cd = CreateFrame("Cooldown", nil, icon)
 			cd:SetAllPoints(icon)
+			cd.forceOCC = icon.forceOCC or false
+			cd.hideIcon = icon.hideIcon or false
+			cd.fullDur = icon.fullDur or false
+			cd.textPoint = icon.textPoint or nil
+			cd.textJustH = icon.textJustH or nil
 			icon.cd = cd
 		end
+		
+		if icon.cd and icon.hideIcon then
+			icon.cd:SetAlpha(0)
+		end
 
-		if not icon.icon then
+		if not icon.icon and not icon.hideIcon then
 			local tex = icon:CreateTexture(nil, "BACKGROUND")
 			tex:SetAllPoints(icon)
 			tex:SetTexture(image)
@@ -294,6 +341,18 @@ local function setupIcons(self)
 			icon.anyUnit = watch.anyUnit
 		end
 		
+		if icon.timers and icon.extraTex then
+			icon.timerGroups = {}
+			for k = 1,#icon.timers do
+				icon.timerGroups[k] = icon:CreateAnimationGroup()
+			
+				icon.timerGroups[k].animation = icon.timerGroups[k]:CreateAnimation("Alpha")
+				icon.timerGroups[k].animation:SetScript("OnFinished",function()
+							icon.extraTex:SetVertexColor(unpack(icon.timers[k][2]))
+						end)
+			end
+		end
+		
 		if watch.strictMatching then
 			watch.watched[icon.spellID] = icon
 		else
@@ -304,8 +363,15 @@ local function setupIcons(self)
 	end
 end
 
+local function ForceUpdate(element)
+	return Update(element.__owner, 'ForceUpdate', element.__owner.unit)
+end
+
 local function Enable(self)
 	if self.AuraWatch then
+		self.AuraWatch.__owner = self
+		self.AuraWatch.ForceUpdate = ForceUpdate
+		
 		self:RegisterEvent("UNIT_AURA", Update)
 		setupIcons(self)
 		return true

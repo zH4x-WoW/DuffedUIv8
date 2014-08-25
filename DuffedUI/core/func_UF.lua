@@ -631,18 +631,6 @@ D.countOffsets = {
 	BOTTOM = {0, 0},
 }
 
-D.CreateAuraWatchIcon = function(self, icon)
-	icon:SetTemplate()
-	icon.icon:Point("TOPLEFT", 1, -1)
-	icon.icon:Point("BOTTOMRIGHT", -1, 1)
-	icon.icon:SetTexCoord(.08, .92, .08, .92)
-	icon.icon:SetDrawLayer("ARTWORK")
-	if icon.cd then
-		icon.cd:SetReverse()
-	end
-	icon.overlay:SetTexture()
-end
-
 D.createAuraWatch = function(self, unit)
 	local auras = CreateFrame("Frame", nil, self)
 	auras:SetPoint("TOPLEFT", self.Health, 2, -2)
@@ -651,7 +639,23 @@ D.createAuraWatch = function(self, unit)
 	auras.missingAlpha = 0
 	auras.displayText = true
 	auras.icons = {}
-	auras.PostCreateIcon = D.CreateAuraWatchIcon
+	auras.PostCreateIcon = function(self, icon)
+		if icon.icon and not icon.hideIcon then
+			icon:SetTemplate()
+			icon.icon:Point("TOPLEFT", 1, -1)
+			icon.icon:Point("BOTTOMRIGHT", -1, 1)
+			icon.icon:SetTexCoord(.08, .92, .08, .92)
+			icon.icon:SetDrawLayer("ARTWORK")
+		end
+		
+		if icon.cd then
+			icon.cd:SetReverse()
+		end
+		
+		if icon.overlay then
+			icon.overlay:SetTexture()
+		end
+	end
 
 	local buffs = {}
 
@@ -671,8 +675,13 @@ D.createAuraWatch = function(self, unit)
 		for key, spell in pairs(buffs) do
 			local icon = CreateFrame("Frame", nil, auras)
 			icon.spellID = spell[1]
-			icon.anyUnit = spell[5]
-			icon:Width(6)
+			icon.anyUnit = spell[7]
+			icon.timers = true
+			icon.forceOCC = true
+			icon.fullDur = true
+			icon.textPoint = spell[5]
+			icon.textJustH = spell[6]
+			icon:Width(10)
 			icon:Height(6)
 			icon:SetPoint(spell[2], unpack(spell[3]))
 
@@ -685,10 +694,12 @@ D.createAuraWatch = function(self, unit)
 				tex:SetVertexColor(.8, .8, .8)
 			end
 
-			local count = icon:CreateFontString(nil, "OVERLAY")
-			count:SetFont(C["media"].font, 8, "THINOUTLINE")
-			count:SetPoint("CENTER", unpack(D.countOffsets[spell[2]]))
-			icon.count = count
+			if not icon.hideCount then
+				local count = icon:CreateFontString(nil, "OVERLAY")
+				count:SetFont(C["media"].font, 8, "THINOUTLINE")
+				count:SetPoint("CENTER", unpack(D.countOffsets[spell[2]]))
+				icon.count = count
+			end
 
 			auras.icons[spell[1]] = icon
 		end
@@ -700,40 +711,40 @@ if C["raid"].raidunitdebuffwatch == true then
 	do
 		D.buffids = {
 			PRIEST = {
-				{6788, "TOPRIGHT", {0, 0}, {1, 0, 0}, true}, -- Weakened Soul
-				{33076, "BOTTOMRIGHT", {0, 0}, {.2, .7, .2}}, -- Prayer of Mending
-				{139, "BOTTOMLEFT", {0, 0}, {.4, .7, .2}}, -- Renew
-				{17, "TOPLEFT", {0, 0}, {.81, .85, .1}, true}, -- Power Word: Shield
+				{6788, "TOPRIGHT", {0, 0}, {1, 0, 0}, {"CENTER", 0, 0}, "LEFT", true}, -- Weakened Soul
+				{33076, "BOTTOMRIGHT", {0, 0}, {.2, .7, .2}, {"CENTER", 0, 0}, "LEFT"}, -- Prayer of Mending
+				{139, "BOTTOMLEFT", {0, 0}, {.4, .7, .2}, {"CENTER", 0, 0}, "LEFT"}, -- Renew
+				{17, "TOPLEFT", {0, 0}, {.81, .85, .1}, {"CENTER", 0, 0}, "LEFT", true}, -- Power Word: Shield
 			},
 			DRUID = {
-				{774, "TOPLEFT", {0, 0}, {.8, .4, .8}}, -- Rejuvenation
-				{162359, "TOPLEFT", {0, 0}, {.1, .3, .8}}, -- Genesis
-				{155777, "TOPLEFT", {0, -8}, {.3, .3, .8}}, -- Germination
-				{8936, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, -- Regrowth
-				{33763, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, -- Lifebloom
-				{48438, "BOTTOMRIGHT", {0, 0}, {.8, .4, 0}}, -- Wild Growth
+				{774, "TOPLEFT", {0, 0}, {.8, .4, .8}, {"CENTER", 0, 0}, "LEFT"}, -- Rejuvenation
+				{162359, "TOPLEFT", {0, 0}, {.1, .3, .8}, {"CENTER", 0, 0}, "LEFT"}, -- Genesis
+				{155777, "TOPLEFT", {0, -8}, {.3, .3, .8}, {"CENTER", 0, 0}, "LEFT"}, -- Germination
+				{8936, "TOPRIGHT", {0, 0}, {.2, .8, .2}, {"CENTER", 0, 0}, "LEFT"}, -- Regrowth
+				{33763, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}, {"CENTER", 0, 0}, "LEFT"}, -- Lifebloom
+				{48438, "BOTTOMRIGHT", {0, 0}, {.8, .4, 0}, {"CENTER", 0, 0}, "LEFT"}, -- Wild Growth
 			},
 			PALADIN = {
-				{53563, "TOPRIGHT", {0, 0}, {.7, .3, .7}}, -- Beacon of Light
-				{1022, "BOTTOMRIGHT", {0, 0}, {.2, .2, 1}, true}, -- Hand of Protection
-				{1044, "BOTTOMRIGHT", {0, 0}, {.89, .45, 0}, true}, -- Hand of Freedom
-				{1038, "BOTTOMRIGHT", {0, 0}, {.93, .75, 0}, true}, -- Hand of Salvation
-				{6940, "BOTTOMRIGHT", {0, 0}, {.89, .1, .1}, true}, -- Hand of Sacrifice
-				{114163, "BOTTOMLEFT", {0, 0}, {.89, .1, .1}, true}, -- Eternal Flame
-				{20925, "TOPLEFT", {0, 0}, {.81, .85, .1}, true}, -- Sacred Shield
+				{53563, "TOPRIGHT", {0, 0}, {.7, .3, .7}, {"CENTER", 0, 0}, "LEFT"}, -- Beacon of Light
+				{1022, "BOTTOMRIGHT", {0, 0}, {.2, .2, 1}, {"CENTER", 0, 0}, "LEFT", true}, -- Hand of Protection
+				{1044, "BOTTOMRIGHT", {0, 0}, {.89, .45, 0}, {"CENTER", 0, 0}, "LEFT", true}, -- Hand of Freedom
+				{1038, "BOTTOMRIGHT", {0, 0}, {.93, .75, 0}, {"CENTER", 0, 0}, "LEFT", true}, -- Hand of Salvation
+				{6940, "BOTTOMRIGHT", {0, 0}, {.89, .1, .1}, {"CENTER", 0, 0}, "LEFT", true}, -- Hand of Sacrifice
+				{114163, "BOTTOMLEFT", {0, 0}, {.89, .1, .1}, {"CENTER", 0, 0}, "LEFT", true}, -- Eternal Flame
+				{20925, "TOPLEFT", {0, 0}, {.81, .85, .1}, {"CENTER", 0, 0}, "LEFT", true}, -- Sacred Shield
 			},
 			SHAMAN = {
-				{61295, "TOPLEFT", {0, 0}, {.7, .3, .7}}, -- Riptide 
-				{974, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}, true}, -- Earth Shield
+				{61295, "TOPLEFT", {0, 0}, {.7, .3, .7}, {"CENTER", 0, 0}, "LEFT"}, -- Riptide 
+				{974, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}, {"CENTER", 0, 0}, "LEFT", true}, -- Earth Shield
 			},
 			MONK = {
-				{119611, "TOPLEFT", {0, 0}, {.8, .4, .8}}, --Renewing Mist
-				{116849, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, -- Life Cocoon
-				{124682, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, -- Enveloping Mist
-				{124081, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}}, -- Zen Sphere
+				{119611, "TOPLEFT", {0, 0}, {.8, .4, .8}, {"CENTER", 0, 0}, "LEFT"}, --Renewing Mist
+				{116849, "TOPRIGHT", {0, 0}, {.2, .8, .2}, {"CENTER", 0, 0}, "LEFT"}, -- Life Cocoon
+				{124682, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}, {"CENTER", 0, 0}, "LEFT"}, -- Enveloping Mist
+				{124081, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}, {"CENTER", 0, 0}, "LEFT"}, -- Zen Sphere
 			},
 			ALL = {
-				{14253, "RIGHT", {0, 0}, {0, 1, 0}}, -- Abolish Poison
+				{14253, "RIGHT", {0, 0}, {0, 1, 0}, {"CENTER", 0, 0}, "LEFT"}, -- Abolish Poison
 			},
 		}
 	end
