@@ -242,15 +242,6 @@ local function Shared(self, unit)
 			self:RegisterEvent("PARTY_LEADER_CHANGED", D.MLAnchorUpdate)
 			self:RegisterEvent("PARTY_MEMBERS_CHANGED", D.MLAnchorUpdate)
 
-			if D.Class == "DRUID" then
-				local DruidManaUpdate = CreateFrame("Frame")
-				DruidManaUpdate:SetScript("OnUpdate", function() D.UpdateDruidManaText(self) end)
-				local DruidManaText = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
-				DruidManaText:Point("LEFT", power.value, "RIGHT", 5, 0)
-				DruidManaText:SetTextColor( 1, .49, .04 )
-				self.DruidManaText = DruidManaText
-			end
-
 			if (D.Class == "WARRIOR" or D.Class == "MONK" or D.Class == "PRIEST") and C["unitframes"].showstatuebar then
 				local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
 				bar:SetWidth(5)
@@ -276,6 +267,13 @@ local function Shared(self, unit)
 				end
 
 				if D.Class == "DRUID" then
+					local DruidManaUpdate = CreateFrame("Frame")
+					DruidManaUpdate:SetScript("OnUpdate", function() D.UpdateDruidManaText(self) end)
+					local DruidManaText = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
+					DruidManaText:Point("LEFT", power.value, "RIGHT", 5, 0)
+					DruidManaText:SetTextColor( 1, .49, .04 )
+					self.DruidManaText = DruidManaText
+
 					D.ConstructRessources("Druid", 216, 5)
 					if C["unitframes"].attached then
 						DruidMana:Point("TOP", power, "BOTTOM", 0, -8)
@@ -288,15 +286,6 @@ local function Shared(self, unit)
 						DruidWildMushroom:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
 						DruidComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
 					end
-					local spec = GetSpecialization()
-					DruidComboPoints.Visibility = CreateFrame("Frame", nil, DruidComboPoints)
-					DruidComboPoints.Visibility:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
-					DruidComboPoints.Visibility:RegisterEvent("PLAYER_TALENT_UPDATE")
-					DruidComboPoints.Visibility:SetScript("OnEvent", function()
-						if spec == 2 then DruidComboPoints:Show() else DruidComboPoints:Hide() end
-						DruidComboPoints.Visibility:UnregisterEvent("PLAYER_SPECIALIZATION_CHANGED")
-						DruidComboPoints.Visibility:UnregisterEvent("PLAYER_TALENT_UPDATE")
-					end)
 					self.DruidMana = DruidMana
 					self.DruidMana.bg = DruidMana.Background
 					self.EclipseBar = DruidEclipseBar

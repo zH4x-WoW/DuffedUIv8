@@ -20,6 +20,8 @@ D.InfoLeftRightWidth = 370
 D.IconCoord = {.08, .92, .08, .92}
 
 D.Credits = {
+	"humfras aka Shinizu",
+	"Hizuro",
 	"Azilroka",
 	"Caith",
 	"Ishtara",
@@ -48,5 +50,4 @@ D.DuffedCredits = {
 	"Digawen",
 	"Zenglao",
 	"devel1988",
-	"Hizuro",
 }

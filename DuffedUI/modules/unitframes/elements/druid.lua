@@ -116,4 +116,12 @@ D.ConstructRessources = function(name, width, height)
 			ComboPoints[i]:SetPoint("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
 		end
 	end
+
+	ComboPoints.Visibility = CreateFrame("Frame", nil, ComboPoints)
+	ComboPoints.Visibility:RegisterEvent("UNIT_DISPLAYPOWER", "player")
+	ComboPoints.Visibility:RegisterEvent("PLAYER_LOGIN")
+	ComboPoints.Visibility:SetScript("OnEvent", function()
+		local powerType, powerToken = UnitPowerType("player")
+		if powerToken == "ENERGY" then ComboPoints:Show() else ComboPoints:Hide() end
+	end)
 end
