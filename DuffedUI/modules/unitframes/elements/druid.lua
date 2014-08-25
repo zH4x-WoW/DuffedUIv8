@@ -13,12 +13,13 @@ Colors = {
 	[5] = {.30, .70, .30},
 }
 
-D.ConstructEnergy("Energy", 216, 5)
+if not C["unitframes"].attached then
+	D.ConstructEnergy("Energy", 216, 5)
+end
 
 D.ConstructRessources = function(name, width, height)
 	local DruidMana = CreateFrame("StatusBar", name .. "Mana", UIParent)
 	DruidMana:Size(width, 2)
-	DruidMana:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
 	DruidMana:SetStatusBarTexture(texture)
 	DruidMana:SetStatusBarColor(.30, .52, .90)
 	DruidMana:CreateBackdrop()
@@ -32,7 +33,6 @@ D.ConstructRessources = function(name, width, height)
 	DruidMana.Background:SetTexture(.30, .52, .90, .2)
 
 	local EclipseBar = CreateFrame("Frame", name .. "EclipseBar", UIParent)
-	EclipseBar:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
 	EclipseBar:SetFrameStrata("MEDIUM")
 	EclipseBar:SetFrameLevel(8)
 	EclipseBar:Size(width, height)
@@ -58,7 +58,6 @@ D.ConstructRessources = function(name, width, height)
 	EclipseBar.PostUpdatePower = D.EclipseDirection
 
 	local WildMushroom = CreateFrame("Frame", name .. "WildMushroom", UIParent)
-	WildMushroom:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
 	WildMushroom:SetSize(width, height)
 	WildMushroom:SetBackdrop(backdrop)
 	WildMushroom:SetBackdropColor(0, 0, 0)
@@ -94,24 +93,14 @@ D.ConstructRessources = function(name, width, height)
 	local ComboPoints = CreateFrame("Frame", name .. "ComboPoints", UIParent)
 	ComboPoints:CreateBackdrop()
 	ComboPoints:SetSize(width, height)
-	ComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
 	ComboPoints:RegisterEvent("UNIT_COMBO_POINTS")
 	ComboPoints:RegisterEvent("PLAYER_TARGET_CHANGED")
-	ComboPoints:RegisterEvent("PLAYER_ENTERING_WORLD")
-	ComboPoints:RegisterEvent("PLAYER_REGEN_DISABLED")
-	ComboPoints:RegisterEvent("PLAYER_REGEN_ENABLED")
-	--ComboPoints:RegisterEvent("UNIT_AURA")
 	ComboPoints:SetScript("OnEvent", function(self, event, arg1)
 		self[event](self, arg1)
 	end)
 
 	ComboPoints["UNIT_COMBO_POINTS"] = function(self) SetComboPoints(self) end
 	ComboPoints["PLAYER_TARGET_CHANGED"] = function(self) SetComboPoints(self) end
-	ComboPoints["PLAYER_ENTERING_WORLD"] = function(self)
-		self:UnregisterEvent("PLAYER_REGEN_DISABLED")
-		self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	end
 
 	for i = 1, NumPoints do
 		ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)

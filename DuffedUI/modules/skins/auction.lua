@@ -85,7 +85,9 @@ local function LoadSkin()
 		"AuctionsNumStacksMaxButton",
 	}
 
-	for _, button in pairs(buttons) do _G[button]:SkinButton() end
+	for _, button in pairs(buttons) do
+		_G[button]:SkinButton()
+	end
 
 	--Fix Button Positions
 	AuctionsCloseButton:Point("BOTTOMRIGHT", AuctionFrameAuctions, "BOTTOMRIGHT", 66, 10)
@@ -97,7 +99,7 @@ local function LoadSkin()
 	AuctionsItemButton:StripTextures()
 	AuctionsItemButton:StyleButton()
 	AuctionsItemButton:SetTemplate("Default", true)
-	BrowseResetButton:Point("TOPRIGHT", AuctionFrameBrowse, "TOPRIGHT", 25, -74)
+	BrowseResetButton:Point("TOPLEFT", AuctionFrameBrowse, "TOPLEFT", 81, -74)
 	BrowseSearchButton:Point("TOPRIGHT", AuctionFrameBrowse, "TOPRIGHT", 25, -34)
 
 	AuctionsItemButton:SetScript("OnUpdate", function()
@@ -167,7 +169,6 @@ local function LoadSkin()
 	}
 
 	for _, editbox in pairs(editboxs) do
-		_G[editbox]:StripTextures()
 		_G[editbox]:SkinEditBox()
 		_G[editbox]:SetTextInsets(1, 1, -1, 1)
 	end
@@ -187,6 +188,7 @@ local function LoadSkin()
 		end
 		
 		if icon then
+			icon:StripTextures()
 			icon:StyleButton()
 			--TODO: Find a better method to ensure that the icon:GetNormalTexture doesn't return after clicking
 			icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)

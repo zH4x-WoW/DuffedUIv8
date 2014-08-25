@@ -1,5 +1,4 @@
 local D, C, L = unpack(select(2, ...))
-if IsAddOnLoaded("SexyMap") then return end
 
 local DuffedUIMinimap = CreateFrame("Frame", "DuffedUIMinimap", DuffedUIPetBattleHider)
 DuffedUIMinimap:SetTemplate()

@@ -2,14 +2,14 @@ local D, C, L = unpack(select(2, ...))
 if D.Class ~= "PRIEST" then return end
 
 local texture = C["media"].normTex
-local layout = C["unitframes"].layout
 local font, fonsize, fontflag = C["media"].font, 12, "THINOUTLINE"
 
-D.ConstructEnergy("Mana", 216, 5)
+if not C["unitframes"].attached then
+	D.ConstructEnergy("Mana", 216, 5)
+end
 
 D.ConstructRessources = function(name, width, height)
 	local pb = CreateFrame("Frame", name, UIParent)
-	pb:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
 	pb:Size(width, height)
 	pb:SetBackdrop(backdrop)
 	pb:SetBackdropColor(0, 0, 0)

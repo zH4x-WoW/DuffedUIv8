@@ -79,12 +79,13 @@ end
 
 -- Spec
 local spec = CreateFrame("Button", "DuffedUI_Spechelper", DuffedUIInfoLeft)
-spec:Size(DuffedUIMinimap:GetWidth(), 20)
 spec:SetTemplate("Default")
 if C["chat"].rbackground then
 	spec:SetPoint("LEFT", DuffedUITabsRightBackground, "RIGHT", 2, 0)
+	spec:Size(DuffedUIMinimap:GetWidth(), 20)
 else
 	spec:SetPoint("TOPLEFT", DuffedUIMinimapStatsLeft, "BOTTOMLEFT", 0, -2)
+	spec:Size(DuffedUIMinimap:GetWidth() + 9, 20)
 	spec:SetParent(DuffedUIPetBattleHider)
 end
 

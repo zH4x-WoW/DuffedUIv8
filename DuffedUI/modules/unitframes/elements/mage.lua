@@ -3,13 +3,13 @@ if D.Class ~= "MAGE" then return end
 
 local texture = C["media"].normTex
 local font, fontheight, fontflag = C["media"].font, 12, "THINOUTLINE"
-local layout = C["unitframes"].layout
 
-D.ConstructEnergy("Mana", 216, 5)
+if not C["unitframes"].attached then
+	D.ConstructEnergy("Mana", 216, 5)
+end
 
 D.ConstructRessources = function(name, name2, width, height)
 	local mb = CreateFrame("Frame", name, UIParent)
-	mb:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
 	mb:Size(width, height)
 	mb:SetBackdrop(backdrop)
 	mb:SetBackdropColor(0, 0, 0)
@@ -32,7 +32,6 @@ D.ConstructRessources = function(name, name2, width, height)
 
 	if C["unitframes"].runeofpower then
 		local rp = CreateFrame("Frame", name2, UIParent)
-		rp:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
 		rp:Size(width, height)
 		rp:SetBackdrop(backdrop)
 		rp:SetBackdropColor(0, 0, 0)

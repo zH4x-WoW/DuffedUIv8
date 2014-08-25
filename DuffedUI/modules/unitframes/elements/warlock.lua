@@ -2,14 +2,14 @@ local D, C, L = unpack(select(2, ...))
 if D.Class ~= "WARLOCK" then return end
 
 local texture = C["media"].normTex
-local layout = C["unitframes"].layout
 local font, fonsize, fontflag = C["media"].font, 12, "THINOUTLINE"
 
-D.ConstructEnergy("Energy", 216, 5)
+if not C["unitframes"].attached then
+	D.ConstructEnergy("Energy", 216, 5)
+end
 
 D.ConstructRessources = function(name, width, height)
 	local wb = CreateFrame("Frame", name, UIParent)
-	wb:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
 	wb:Size(width, height)
 	wb:SetBackdrop(backdrop)
 	wb:SetBackdropColor(0, 0, 0)

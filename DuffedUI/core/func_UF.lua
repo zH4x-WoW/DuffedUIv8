@@ -316,7 +316,7 @@ D.PostCreateAura = function(self, button)
 	button.cd:ClearAllPoints()
 	button.cd:Point("TOPLEFT", button, "TOPLEFT", 2, -2)
 	button.cd:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
-	button.overlayFrame:SetFrameLevel(button.cd:GetFrameLevel() + 1)	   
+	button.overlayFrame:SetFrameLevel(button.cd:GetFrameLevel() + 1)
 	button.overlay:SetParent(button.overlayFrame)
 	button.count:SetParent(button.overlayFrame)
 	button.remaining:SetParent(button.overlayFrame)
@@ -631,26 +631,31 @@ D.countOffsets = {
 	BOTTOM = {0, 0},
 }
 
-D.CreateAuraWatchIcon = function(self, icon)
-	icon:SetTemplate()
-	icon.icon:Point("TOPLEFT", 1, -1)
-	icon.icon:Point("BOTTOMRIGHT", -1, 1)
-	icon.icon:SetTexCoord(.08, .92, .08, .92)
-	icon.icon:SetDrawLayer("ARTWORK")
-	if icon.cd then
-		icon.cd:SetReverse()
-	end
-	icon.overlay:SetTexture()
-end
-
 D.createAuraWatch = function(self, unit)
 	local auras = CreateFrame("Frame", nil, self)
 	auras:SetPoint("TOPLEFT", self.Health, 2, -2)
 	auras:SetPoint("BOTTOMRIGHT", self.Health, -2, 2)
 	auras.presentAlpha = 1
 	auras.missingAlpha = 0
+	auras.displayText = true
 	auras.icons = {}
-	auras.PostCreateIcon = D.CreateAuraWatchIcon
+	auras.PostCreateIcon = function(self, icon)
+		if icon.icon and not icon.hideIcon then
+			icon:SetTemplate()
+			icon.icon:Point("TOPLEFT", 1, -1)
+			icon.icon:Point("BOTTOMRIGHT", -1, 1)
+			icon.icon:SetTexCoord(.08, .92, .08, .92)
+			icon.icon:SetDrawLayer("ARTWORK")
+		end
+		
+		if icon.cd then
+			icon.cd:SetReverse()
+		end
+		
+		if icon.overlay then
+			icon.overlay:SetTexture()
+		end
+	end
 
 	local buffs = {}
 
@@ -678,7 +683,11 @@ D.createAuraWatch = function(self, unit)
 			local tex = icon:CreateTexture(nil, "OVERLAY")
 			tex:SetAllPoints(icon)
 			tex:SetTexture(C["media"].blank)
-			if (spell[4]) then tex:SetVertexColor(unpack(spell[4])) else tex:SetVertexColor(.8, .8, .8) end
+			if (spell[4]) then
+				tex:SetVertexColor(unpack(spell[4]))
+			else
+				tex:SetVertexColor(.8, .8, .8)
+			end
 
 			local count = icon:CreateFontString(nil, "OVERLAY")
 			count:SetFont(C["media"].font, 8, "THINOUTLINE")
@@ -719,7 +728,7 @@ if C["raid"].raidunitdebuffwatch == true then
 			},
 			SHAMAN = {
 				{61295, "TOPLEFT", {0, 0}, {.7, .3, .7}}, -- Riptide 
-				{974, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}, true}, -- Earth Shield
+				{974, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}}, -- Earth Shield
 			},
 			MONK = {
 				{119611, "TOPLEFT", {0, 0}, {.8, .4, .8}}, --Renewing Mist

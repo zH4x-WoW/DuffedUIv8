@@ -3,13 +3,13 @@ if D.Class ~= "PALADIN" then return end
 
 local texture = C["media"].normTex
 local font, fontheight, fontflag = C["media"].font, 12, "THINOUTLINE"
-local layout = C["unitframes"].layout
 
-D.ConstructEnergy("Mana", 216, 5)
+if not C["unitframes"].attached then
+	D.ConstructEnergy("Mana", 216, 5)
+end
 
 D.ConstructRessources = function(name, width, height)
 	local bars = CreateFrame("Frame", name, UIParent)
-	bars:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
 	bars:Size(width, height)
 	bars:SetBackdrop(backdrop)
 	bars:SetBackdropColor(0, 0, 0)

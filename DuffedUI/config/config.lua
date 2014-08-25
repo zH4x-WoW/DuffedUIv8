@@ -35,6 +35,7 @@ C["unitframes"] = {
 	["focusdebuffs"] = true,
 	["focusbutton"] = true,
 	["showtotalhpmp"] = false,
+	["attached"] = true,
 }
 
 C["chat"] = {
@@ -101,8 +102,8 @@ C["raid"] = {
 	["raidunitdebuffwatch"] = true,
 	["showraidpets"] = false,
 	["showplayerinparty"] = true,
-	["framewidth"] = 65,
-	["frameheight"] = 42,
+	["framewidth"] = 68,
+	["frameheight"] = 45,
 	["pointer"] = false,
 }
 

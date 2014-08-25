@@ -1,6 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="oUF_AuraWatch.lua" />
 	<Script file="oUF_CombatFeedback.lua" />
+	<Script file="oUF_ComboPointsBar.lua" />
 	<Script file="oUF_DebuffHighlight.lua" />
 	<Script file="oUF_Fader.lua" />
 	<Script file="movable.lua" />
