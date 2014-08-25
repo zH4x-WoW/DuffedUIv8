@@ -17,7 +17,6 @@ local HALFDAYISH, HALFHOURISH, HALFMINUTEISH = DAY/2 + 0.5, HOUR/2 + 0.5, MINUTE
 --configuration settings
 D.SetDefaultActionButtonCooldownFont = C["media"].font --what font to use
 D.SetDefaultActionButtonCooldownFontSize = 20 --the base font size to use at a scale of 1
-local FORCEFONT_SIZE = 36 --same for the forcefont
 D.SetDefaultActionButtonCooldownMinScale = 0.5 --the minimum scale we want to show cooldown counts at, anything below this will be hidden
 D.SetDefaultActionButtonCooldownMinDuration = 2.5 --the minimum duration to show cooldown text for
 local EXPIRING_DURATION = C["cooldown"].treshold --the minimum number of seconds a cooldown must be to use to display in the expiring format
@@ -62,21 +61,12 @@ end
 local function Timer_Stop(self)
 	self.enabled = nil
 	self:Hide()
-	if self.text then
-		self.text:Hide()
-		if self.text:GetFont() then
-			self.text:SetText('')
-		end
-	end
 end
 
 --forces the given timer to update on the next frame
 local function Timer_ForceUpdate(self)
 	self.nextUpdate = 0
 	self:Show()
-	if self.text then
-		self.text:Show()
-	end
 end
 
 --adjust font size whenever the timer's parent size changes
@@ -88,22 +78,11 @@ local function Timer_OnSizeChanged(self, width, height)
 	end
 
 	self.fontScale = fontScale
-	if fontScale < D.SetDefaultActionButtonCooldownMinScale and not self.forceOCC then
+	if fontScale < D.SetDefaultActionButtonCooldownMinScale then
 		self:Hide()
-		if self.text then
-			self.text:Hide()
-			if self.text:GetFont() then
-				self.text:SetText('')
-			end
-		end
-	elseif self.forceOCC then
-		self.text:SetFont(D.SetDefaultActionButtonCooldownFont, fontScale * FORCEFONT_SIZE, "THINOUTLINE")
-		if self.enabled then
-			Timer_ForceUpdate(self)
-		end
 	else
-		self.text:SetFont(D.SetDefaultActionButtonCooldownFont, fontScale * D.SetDefaultActionButtonCooldownFontSize, "THINOUTLINE")
-		self.text:SetShadowColor(0, 0, 0, .5)
+		self.text:SetFont(D.SetDefaultActionButtonCooldownFont, fontScale * D.SetDefaultActionButtonCooldownFontSize, 'OUTLINE')
+		self.text:SetShadowColor(0, 0, 0, 0.5)
 		self.text:SetShadowOffset(2, -2)
 		if self.enabled then
 			Timer_ForceUpdate(self)
@@ -118,14 +97,10 @@ local function Timer_OnUpdate(self, elapsed)
 		self.nextUpdate = self.nextUpdate - elapsed
 	else
 		local remain = self.duration - (GetTime() - self.start)
-		if (tonumber(D.Round(remain)) > 0) or (remain > 0 and self.fullDur) then
-			if (self.fontScale * self:GetEffectiveScale() / UIParent:GetScale()) < D.SetDefaultActionButtonCooldownMinScale and not self.forceOCC then
+		if tonumber(D.Round(remain)) > 0 then
+			if (self.fontScale * self:GetEffectiveScale() / UIParent:GetScale()) < D.SetDefaultActionButtonCooldownMinScale then
 				self.text:SetText('')
 				self.nextUpdate  = 1
-			elseif self:GetParent():GetParent():GetParent().stackColors then -- timer is child of scaler is child of of cd is child of iconframe 
-				local  formatStr,time, nextUpdate = getTimeText(remain)
-				self.text:SetFormattedText(formatStr, time)
-				self.nextUpdate = nextUpdate
 			else
 				local formatStr, time, nextUpdate = getTimeText(remain)
 				self.text:SetFormattedText(formatStr, time)
@@ -144,43 +119,26 @@ local function Timer_Create(self)
 	local scaler = CreateFrame('Frame', nil, self)
 	scaler:SetAllPoints(self)
 
-	local timer = CreateFrame('Frame', nil, scaler)
-	timer:Hide()
+	local timer = CreateFrame('Frame', nil, scaler); timer:Hide()
 	timer:SetAllPoints(scaler)
 	timer:SetScript('OnUpdate', Timer_OnUpdate)
 
-	local text = timer:CreateFontString(nil, 'OVERLAY') -- self:GetParent() <-> timer?
-	if timer.textPoint then
-		text:Point(unpack(self.textPoint))
-	else
-		text:Point("CENTER", 2, 0)
-	end
-	
-	if timer.textJustH then
-		text:SetJustifyH(self.textJustH)
-	else
-		text:SetJustifyH("CENTER")
-	end
+	local text = timer:CreateFontString(nil, 'OVERLAY')
+	text:Point("CENTER", 2, 0)
+	text:SetJustifyH("CENTER")
 	timer.text = text
-	self.timer = timer
-	hooksecurefunc(self,'Hide', function() self.timer.text:Hide() end)
-	hooksecurefunc(self,'Show',function() self.timer.text:Show() end)
-	hooksecurefunc(self.timer,'Hide', function() self.timer.text:Hide() end)
-	hooksecurefunc(self.timer,'Show',function() self.timer.text:Show() end)
-	timer.forceOCC = self.forceOCC or false
-	timer.hideIcon = self.hideIcon or false
-	timer.fullDur = self.fullDur or false
 
 	Timer_OnSizeChanged(timer, scaler:GetSize())
 	scaler:SetScript('OnSizeChanged', function(self, ...) Timer_OnSizeChanged(timer, ...) end)
 
+	self.timer = timer
 	return timer
 end
 
 --hook the SetCooldown method of all cooldown frames
 --ActionButton1Cooldown is used here since its likely to always exist
 --and I'd rather not create my own cooldown frame to preserve a tiny bit of memory
-local function Timer_Start(self, start, duration, charges, maxCharges)
+local function Timer_Start(self, start, duration) --, charges, maxCharges
 	if self.noOCC then return end
 
 	--start timer
@@ -193,12 +151,7 @@ local function Timer_Start(self, start, duration, charges, maxCharges)
 		timer.maxCharges = maxCharges
 		timer.enabled = true
 		timer.nextUpdate = 0
-		if (timer.fontScale >= D.SetDefaultActionButtonCooldownMinScale or self.forceOCC) and timer.charges < 1 then
-			timer:Show()
-			if timer.text then
-				timer.text:Show()
-			end
-		end
+		if timer.fontScale >= D.SetDefaultActionButtonCooldownMinScale and timer.charges < 1 then timer:Show() end
 	--stop timer
 	else
 		local timer = self.timer
