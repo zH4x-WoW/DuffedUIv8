@@ -63,8 +63,8 @@ local function Shared(self, unit)
 
 		local health = CreateFrame("StatusBar", nil, self)
 		health:Height(23)
-		health:SetPoint("TOPLEFT", 0, -16)
-		health:SetPoint("TOPRIGHT", 0, -16)
+		health:SetPoint("TOPLEFT", 1, -16)
+		health:SetPoint("TOPRIGHT", -1, -16)
 		health:SetStatusBarTexture(normTex)
 
 		local HealthBorder = CreateFrame("Frame", nil, health)
@@ -121,8 +121,8 @@ local function Shared(self, unit)
 
 		local power = CreateFrame('StatusBar', nil, self)
 		power:Height(2)
-		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -3)
-		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -3)
+		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -5)
+		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -5)
 		power:SetStatusBarTexture(normTex)
 
 		local PowerBorder = CreateFrame("Frame", nil, power)
@@ -163,7 +163,7 @@ local function Shared(self, unit)
 
 		if C["unitframes"].charportrait == true then
 			local portrait = CreateFrame("PlayerModel", nil, self)
-			portrait:Size(42)
+			portrait:Size(48)
 			if unit == "player" then portrait:SetPoint("BOTTOMRIGHT", power, "BOTTOMLEFT", -6, 0) else portrait:SetPoint("BOTTOMLEFT", power, "BOTTOMRIGHT", 6, 0) end
 			portrait:CreateBackdrop()
 			portrait.PostUpdate = D.PortraitUpdate 
@@ -266,43 +266,83 @@ local function Shared(self, unit)
 			end
 
 			if C["unitframes"].classbar then
-				if D.Class == "MAGE" then
-					D.ConstructRessources("mb", "rp", 216, 5)
-					self.ArcaneChargeBar = mb
-					self.RunePower = rp
+				if D.Class == "DEATHKNIGHT" then
+					D.ConstructRessources("Runes", 216, 5)
+					if C["unitframes"].attached then Runes:SetPoint("CENTER", panel, "CENTER", 0, 5) else Runes:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
 				end
 
 				if D.Class == "DRUID" then
+					local DruidManaUpdate = CreateFrame("Frame")
+					DruidManaUpdate:SetScript("OnUpdate", function() D.UpdateDruidManaText(self) end)
+					local DruidManaText = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
+					DruidManaText:Point("LEFT", power.value, "RIGHT", 5, 0)
+					DruidManaText:SetTextColor( 1, .49, .04 )
+					self.DruidManaText = DruidManaText
+
 					D.ConstructRessources("Druid", 216, 5)
+					if C["unitframes"].attached then
+						DruidMana:Point("CENTER", panel, "CENTER", 0, -3)
+						DruidEclipseBar:Point("CENTER", panel, "CENTER", 0, 5)
+						DruidWildMushroom:Point("CENTER", panel, "CENTER", 0, -3)
+						DruidComboPoints:SetPoint("CENTER", panel, "CENTER", 0, 5)
+					else
+						DruidMana:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
+						DruidEclipseBar:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
+						DruidWildMushroom:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
+						DruidComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
+					end
 					self.DruidMana = DruidMana
 					self.DruidMana.bg = DruidMana.Background
 					self.EclipseBar = DruidEclipseBar
 					self.WildMushroom = DruidWildMushroom
 				end
 
-				if D.Class == "WARLOCK" then
-					D.ConstructRessources("wb", 216, 5)
-					self.WarlockSpecBars = wb
-				end
-
-				if D.Class == "PALADIN" then
-					D.ConstructRessources("bars", 216, 5)
-					self.HolyPower = bars
+				if D.Class == "MAGE" then
+					D.ConstructRessources("mb", "rp", 216, 5)
+					if C["unitframes"].attached then
+						mb:SetPoint("CENTER", panel, "CENTER", 0, 5)
+						rp:Point("CENTER", panel, "CENTER", 0, -3)
+					else
+						mb:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
+						rp:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
+					end
+					self.ArcaneChargeBar = mb
+					self.RunePower = rp
 				end
 
 				if D.Class == "MONK" then
 					D.ConstructRessources("Bar", 216, 5)
+					if C["unitframes"].attached then Bar:SetPoint("CENTER", panel, "CENTER", 0, 5) else Bar:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
 					self.HarmonyBar = Bar
+				end
+
+				if D.Class == "PALADIN" then
+					D.ConstructRessources("bars", 216, 5)
+					if C["unitframes"].attached then bars:SetPoint("CENTER", panel, "CENTER", 0, 5) else bars:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					self.HolyPower = bars
 				end
 
 				if D.Class == "PRIEST" then
 					D.ConstructRessources("pb", 216, 5)
+					if C["unitframes"].attached then pb:SetPoint("CENTER", panel, "CENTER", 0, 5) else pb:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
 					self.ShadowOrbsBar = pb
+				end
+
+				if D.Class == "ROGUE" then
+					D.ConstructRessources("ComboPoints", 216, 5)
+					if C["unitframes"].attached then ComboPoints:SetPoint("CENTER", panel, "CENTER", 0, 5) else ComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
 				end
 
 				if D.Class == "SHAMAN" then
 					D.ConstructRessources("TotemBar", 216, 5)
+					if C["unitframes"].attached then TotemBar:SetPoint("CENTER", panel, "CENTER", 0, 5) else TotemBar:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
 					self.TotemBar = TotemBar
+				end
+
+				if D.Class == "WARLOCK" then
+					D.ConstructRessources("wb", 216, 5)
+					if C["unitframes"].attached then wb:SetPoint("CENTER", panel, "CENTER", 0, 5) else wb:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					self.WarlockSpecBars = wb
 				end
 			end
 

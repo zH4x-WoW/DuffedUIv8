@@ -39,6 +39,7 @@ D.ConstructRessources = function(name, width, height)
 	EclipseBar:SetBackdrop(backdrop)
 	EclipseBar:SetBackdropColor(0, 0, 0)
 	EclipseBar:SetBackdropBorderColor(0, 0, 0, 0)
+	EclipseBar:CreateBackdrop()
 
 	EclipseBar.LunarBar = CreateFrame("StatusBar", nil, EclipseBar)
 	EclipseBar.LunarBar:SetPoint("LEFT", EclipseBar, "LEFT", 0, 0)
@@ -53,7 +54,7 @@ D.ConstructRessources = function(name, width, height)
 	EclipseBar.SolarBar:SetStatusBarColor(.80, .82,  .60)
 
 	EclipseBar.Text = EclipseBar:CreateFontString(nil, "OVERLAY")
-	EclipseBar.Text:SetPoint("BOTTOM", EclipseBar, "TOP", 0, 0)
+	if layout == 3 then EclipseBar.Text:SetPoint("TOP", EclipseBar, "BOTTOM", 0, -15) else EclipseBar.Text:SetPoint("BOTTOM", EclipseBar, "TOP", 0, 0) end
 	EclipseBar.Text:SetFont(C["media"].font, 12, "THINOUTLINE")
 	EclipseBar.PostUpdatePower = D.EclipseDirection
 
@@ -76,7 +77,7 @@ D.ConstructRessources = function(name, width, height)
 		end
 		WildMushroom[i].bg = WildMushroom[i]:CreateTexture(nil, 'ARTWORK')
 	end
-	WildMushroom:CreateBackdrop()
+	if layout == 1 or layout == 3 then WildMushroom:CreateBackdrop() end
 
 	local NumPoints = MAX_COMBO_POINTS
 	local UnitHasVehicleUI = UnitHasVehicleUI

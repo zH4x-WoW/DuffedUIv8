@@ -1012,7 +1012,7 @@ playerDataSource:SetSortDirection(SORT_DIRECTION)
 trinketDataSource:SetSortDirection(SORT_DIRECTION)
 
 if classFilter then
-	targetDataSource:AddFilter(classFilter.target, TARGET_BAR_COLOR, TARGET_DEBUFF_COLOR)	
+	targetDataSource:AddFilter(classFilter.target, TARGET_BAR_COLOR, TARGET_DEBUFF_COLOR)
 	playerDataSource:AddFilter(classFilter.player, PLAYER_BAR_COLOR, PLAYER_DEBUFF_COLOR)
 	trinketDataSource:AddFilter(classFilter.procs, TRINKET_BAR_COLOR)
 end
@@ -1023,21 +1023,11 @@ if C["unitframes"].layout == 1 then
 	playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 0, 7)
 	playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", 0, 7)
 elseif C["unitframes"].layout == 2 then
-	if C["unitframes"].movableclassbar then
-		playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 2, 3)
-		playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", -2, 3)
-	else
-		playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 2, 14)
-		playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", -2, 14)
-	end
+	playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", -1, 3)
+	playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", 1, 3)
 elseif C["unitframes"].layout == 3 then
-	if C["unitframes"].movableclassbar then
-		playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 1, 4)
-		playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", -1, 4)
-	else
-		playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 1, 16)
-		playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", -1, 16)
-	end
+	playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 1, 9)
+	playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", -1, 9)
 end
 
 local trinketFrame = CreateAuraBarFrame(trinketDataSource, DuffedUIPlayer)

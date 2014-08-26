@@ -22,7 +22,6 @@ C["unitframes"] = {
 	["charportrait"] = true,
 	["weakenedsoulbar"] = true,
 	["showstatuebar"] = true,
-	["movableclassbar"] = false,
 	["classbar"] = true,
 	["runeofpower"] = true,
 	["targetauras"] = true,
@@ -35,7 +34,7 @@ C["unitframes"] = {
 	["focusdebuffs"] = true,
 	["focusbutton"] = true,
 	["showtotalhpmp"] = false,
-	["attached"] = true,
+	["attached"] = false,
 }
 
 C["chat"] = {

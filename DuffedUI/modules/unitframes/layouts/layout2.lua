@@ -57,8 +57,9 @@ local function Shared(self, unit)
 	if (unit == "player" or unit == "target") then
 		local panel = CreateFrame("Frame", nil, self)
 		panel:SetTemplate("Default")
-		panel:Size(218, 13)
+		panel:Size(224, 13)
 		panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
+		panel:SetFrameStrata("BACKGROUND")
 		self.panel = panel
 
 		local health = CreateFrame("StatusBar", nil, self)
@@ -264,43 +265,84 @@ local function Shared(self, unit)
 			end
 
 			if C["unitframes"].classbar then
-				if D.Class == "MAGE" then
-					D.ConstructRessources("mb", "rp", 216, 5)
-					self.ArcaneChargeBar = mb
-					self.RunePower = rp
+				if D.Class == "DEATHKNIGHT" then
+					D.ConstructRessources("Runes", 216, 5)
+					if C["unitframes"].attached then Runes:SetPoint("CENTER", panel, "CENTER", 0, 0) else Runes:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
 				end
 
 				if D.Class == "DRUID" then
+					local DruidManaUpdate = CreateFrame("Frame")
+					DruidManaUpdate:SetScript("OnUpdate", function() D.UpdateDruidManaText(self) end)
+					local DruidManaText = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
+					DruidManaText:Point("LEFT", power.value, "RIGHT", 5, 0)
+					DruidManaText:SetTextColor( 1, .49, .04 )
+					self.DruidManaText = DruidManaText
+
 					D.ConstructRessources("Druid", 216, 5)
+					if C["unitframes"].attached then
+						DruidMana:Point("TOP", health, "BOTTOM", 0, 4)
+						DruidEclipseBar:Point("CENTER", panel, "CENTER", 0, 0)
+						DruidWildMushroom:SetFrameLevel(health:GetFrameLevel() + 1)
+						DruidWildMushroom:Point("BOTTOM", health, "TOP", 0, -5)
+						DruidComboPoints:SetPoint("CENTER", panel, "CENTER", 0, 0)
+					else
+						DruidMana:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
+						DruidEclipseBar:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
+						DruidWildMushroom:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
+						DruidComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
+					end
 					self.DruidMana = DruidMana
 					self.DruidMana.bg = DruidMana.Background
 					self.EclipseBar = DruidEclipseBar
 					self.WildMushroom = DruidWildMushroom
 				end
 
-				if D.Class == "WARLOCK" then
-					D.ConstructRessources("wb", 216, 5)
-					self.WarlockSpecBars = wb
-				end
-
-				if D.Class == "PALADIN" then
-					D.ConstructRessources("bars", 216, 5)
-					self.HolyPower = bars
+				if D.Class == "MAGE" then
+					D.ConstructRessources("mb", "rp", 216, 5)
+					if C["unitframes"].attached then
+						mb:SetPoint("CENTER", panel, "CENTER", 0, 0)
+						rp:Point("BOTTOM", health, "TOP", 0, -5)
+					else
+						mb:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
+						rp:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
+					end
+					self.ArcaneChargeBar = mb
+					self.RunePower = rp
 				end
 
 				if D.Class == "MONK" then
 					D.ConstructRessources("Bar", 216, 5)
+					if C["unitframes"].attached then Bar:SetPoint("CENTER", panel, "CENTER", 0, 0) else Bar:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
 					self.HarmonyBar = Bar
+				end
+
+				if D.Class == "PALADIN" then
+					D.ConstructRessources("bars", 216, 5)
+					if C["unitframes"].attached then bars:SetPoint("CENTER", panel, "CENTER", 0, 0) else bars:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					self.HolyPower = bars
 				end
 
 				if D.Class == "PRIEST" then
 					D.ConstructRessources("pb", 216, 5)
+					if C["unitframes"].attached then pb:SetPoint("CENTER", panel, "CENTER", 0, 0) else pb:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
 					self.ShadowOrbsBar = pb
+				end
+
+				if D.Class == "ROGUE" then
+					D.ConstructRessources("ComboPoints", 216, 5)
+					if C["unitframes"].attached then ComboPoints:SetPoint("CENTER", panel, "CENTER", 0, 0) else ComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
 				end
 
 				if D.Class == "SHAMAN" then
 					D.ConstructRessources("TotemBar", 216, 5)
+					if C["unitframes"].attached then TotemBar:SetPoint("CENTER", panel, "CENTER", 0, 0) else TotemBar:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
 					self.TotemBar = TotemBar
+				end
+
+				if D.Class == "WARLOCK" then
+					D.ConstructRessources("wb", 216, 5)
+					if C["unitframes"].attached then wb:SetPoint("CENTER", panel, "CENTER", 0, 0) else wb:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					self.WarlockSpecBars = wb
 				end
 			end
 

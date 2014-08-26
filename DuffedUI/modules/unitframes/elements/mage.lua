@@ -3,6 +3,7 @@ if D.Class ~= "MAGE" then return end
 
 local texture = C["media"].normTex
 local font, fontheight, fontflag = C["media"].font, 12, "THINOUTLINE"
+local layout = C["unitframes"].layout
 
 if not C["unitframes"].attached then
 	D.ConstructEnergy("Mana", 216, 5)
@@ -49,6 +50,6 @@ D.ConstructRessources = function(name, name2, width, height)
 			end
 			rp[i].bg = rp[i]:CreateTexture(nil, 'ARTWORK')
 		end
-		rp:CreateBackdrop()
+		if layout == 1 or layout == 3 then rp:CreateBackdrop() end
 	end
 end
