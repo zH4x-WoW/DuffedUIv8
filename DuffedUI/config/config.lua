@@ -159,8 +159,6 @@ C["cooldown"] = {
 	["scdsize"] = 28,
 	["scdspacing"] = 10,
 	["scdfade"] = 0,
-	["scddirection"] = "HORIZONTAL", -- needs update
-	["scddisplay"] = "STATUSBAR",
 }
 
 C["classtimer"] = {

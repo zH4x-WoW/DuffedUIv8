@@ -10,9 +10,7 @@ local spacing = D.Scale(C["cooldown"].scdspacing)
 local anchor = {"BOTTOM", UIParent, "BOTTOM", 0, D.Scale(358)}
 local color = {1, 1, 0, 1}
 local fade = C["cooldown"].scdfade
-local direction = C["cooldown"].scddirection
 local mode = "HIDE"
-local displayMode = C["cooldown"].scddisplay
 
 if D.Class == "WARRIOR" or D.Class == "HUNTER" or D.Class == "DEATHKNIGHT" or D.Class == "ROGUE" then
 	mode = "HIDE"
@@ -481,15 +479,6 @@ local pairs = pairs
 local xSpacing, ySpacing = spacing, 0
 local width, height = size, size
 local anchorPoint = "TOPRIGHT"
-if direction == "VERTICAL" then
-	xSpacing = 0
-	ySpacing = spacing
-	anchorPoint = "BOTTOMLEFT"
-end
-if displayMode == "SPIRAL" then
-	width = size
-end
-
 local onUpdate
 
 local scfa = CreateFrame("Frame", "SpellCooldownsFrameAnchor", UIParent)
@@ -586,11 +575,7 @@ local function positionHide()
 			end
 		end
 	end
-	if direction == "HORIZONTAL" then
-		SpellCooldownFrame:SetWidth(width * index + (index + 1) * xSpacing)
-	else
-		SpellCooldownFrame:SetHeight(height * index + (index + 1) * ySpacing)
-	end
+	SpellCooldownFrame:SetWidth(width * index + (index + 1) * xSpacing)
 end
 
 local function positionDim()
@@ -629,11 +614,7 @@ local function positionDim()
 		lastFrame = frame
 		index = index + 1
 	end
-	if (direction == "HORIZONTAL") then
-		SpellCooldownFrame:SetWidth(width * index + (index + 1) * xSpacing)
-	else
-		SpellCooldownFrame:SetHeight(height * index + (index + 1 ) * ySpacing)
-	end
+	SpellCooldownFrame:SetWidth(width * index + (index + 1) * xSpacing)
 end
 
 
@@ -669,29 +650,22 @@ local function createCooldownFrame(spell)
 	icon:SetTexCoord(.08, .92, .08, .92)
 	frame.Icon = icon	
 
-	if displayMode == "STATUSBAR" then
-		-- Text Timer
-		local durationText = frame:CreateFontString(nil, "OVERLAY")
-		durationText:SetFont(font, fontSize, fontStyle)
-		durationText:SetTextColor(unpack(color))
-		durationText:SetText("")
-		durationText:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 2, 2)
-		frame.DurationText = durationText
+	local durationText = frame:CreateFontString(nil, "OVERLAY")
+	durationText:SetFont(font, fontSize, fontStyle)
+	durationText:SetTextColor(unpack(color))
+	durationText:SetText("")
+	durationText:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 2, 2)
+	frame.DurationText = durationText
 
-		-- Status Bar Timer
-		local statusBar = CreateFrame("StatusBar", nil, frame, "TextStatusBar")
-		statusBar:SetStatusBarTexture(C["media"].normTex)
-		statusBar:SetStatusBarColor(.77, .12, .23)
-		statusBar:CreateBackdrop("Transparent")
-		statusBar:SetPoint("TOPLEFT", frame, "BOTTOMLEFT", 0, -6)
-		statusBar:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 0, -10)
-		statusBar:SetMinMaxValues(0, 1)
-		frame.StatusBar = statusBar
-	elseif displayMode == "SPIRAL" then
-		local cooldown = CreateFrame("Cooldown", nil, frame)
-		cooldown:SetAllPoints(icon)
-		frame.Cooldown = cooldown
-	end
+	-- Status Bar Timer
+	local statusBar = CreateFrame("StatusBar", nil, frame, "TextStatusBar")
+	statusBar:SetStatusBarTexture(C["media"].normTex)
+	statusBar:SetStatusBarColor(.77, .12, .23)
+	statusBar:CreateBackdrop("Transparent")
+	statusBar:SetPoint("TOPLEFT", frame, "BOTTOMLEFT", 0, -6)
+	statusBar:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 0, -10)
+	statusBar:SetMinMaxValues(0, 1)
+	frame.StatusBar = statusBar
 	
 	frame.lastupdate = 0
 	frame.spell = spell
