@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-if C["icd"].enable ~= true then return end
+if C["cooldown"].icdenable ~= true then return end
 
 D.ignoredspells = {
 	--GetSpellInfo(779),	-- Swipe

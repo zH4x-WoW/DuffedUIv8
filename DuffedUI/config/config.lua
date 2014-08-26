@@ -146,6 +146,23 @@ C["skins"] = {
 	["calendarevent"] = false,
 }
 
+C["cooldown"] = {
+	["enable"] = true,
+	["treshold"] = 8,
+	["icdenable"] = true,
+	["rcdenable"] = true,
+	["rcdraid"] = true,
+	["rcdparty"] = false,
+	["rcdarena"] = false,
+	["scdenable"] = true,
+	["scdfsize"] = 12,
+	["scdsize"] = 28,
+	["scdspacing"] = 10,
+	["scdfade"] = 0,
+	["scddirection"] = "HORIZONTAL", -- needs update
+	["scddisplay"] = "STATUSBAR",
+}
+
 C["classtimer"] = {
 	["enable"] = true,											-- enable classtimer
 	["targetdebuffs"] = false,									-- target debuffs above target (looks crappy imo)
@@ -209,32 +226,6 @@ C["duffed"] = {
 C["loot"] = {
 	["lootframe"] = true,                               		-- reskin the loot frame to fit tukui
 	["rolllootframe"] = true,                           		-- reskin the roll frame to fit tukui
-}
-
-C["cooldown"] = {
-	["enable"] = true,
-	["treshold"] = 8,
-}
-
-C["rcd"] = {
-	["enable"] = true,											-- enable raidcooldowns
-	["raid"] = true,											-- raidannounce raidcooldowns
-	["party"] = false,											-- partyannounce raidcooldowns
-	["arena"] = false,											-- arenaannounce raidccooldowns
-}
-
-C["scd"] = {
-	["enable"] = true,
-	["fsize"] = 12,
-	["size"] = 28,
-	["spacing"] = 10,
-	["fade"] = 0,
-	["direction"] = "HORIZONTAL", -- needs update
-	["display"] = "STATUSBAR",
-}
-
-C["icd"] = {
-	["enable"] = true,
 }
 
 C["tooltip"] = {

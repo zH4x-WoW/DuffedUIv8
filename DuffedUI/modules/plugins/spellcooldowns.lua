@@ -1,18 +1,18 @@
 local D, C, L = unpack(select(2, ...))
-if C["scd"].enable ~= true then return end
+if C["cooldown"].scdenable ~= true then return end
 
 local font = C["media"].font
-local fontSize = C["scd"].fsize
+local fontSize = C["cooldown"].scdfsize
 local fontStyle = "THINOUTLINE"
 local texture = C["media"].normTex
-local size = D.Scale(C["scd"].size)
-local spacing = D.Scale(C["scd"].spacing)
+local size = D.Scale(C["cooldown"].scdsize)
+local spacing = D.Scale(C["cooldown"].scdspacing)
 local anchor = {"BOTTOM", UIParent, "BOTTOM", 0, D.Scale(358)}
 local color = {1, 1, 0, 1}
-local fade = C["scd"].fade
-local direction = C["scd"].direction
+local fade = C["cooldown"].scdfade
+local direction = C["cooldown"].scddirection
 local mode = "HIDE"
-local displayMode = C["scd"].display
+local displayMode = C["cooldown"].scddisplay
 
 if D.Class == "WARRIOR" or D.Class == "HUNTER" or D.Class == "DEATHKNIGHT" or D.Class == "ROGUE" then
 	mode = "HIDE"

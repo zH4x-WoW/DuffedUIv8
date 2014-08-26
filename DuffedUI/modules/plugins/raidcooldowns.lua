@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-if C["rcd"].enable ~= true then return end
+if C["cooldown"].rcdenable ~= true then return end
 
 -- Config start
 local anchor = "TOPLEFT"
@@ -15,9 +15,9 @@ local show_icon = true
 local texture = C["media"].normTex
 
 local show = {
-	raid = C["rcd"].raid,
-	party = C["rcd"].party,
-	arena = C["rcd"].arena,
+	raid = C["cooldown"].rcdraid,
+	party = C["cooldown"].rcdparty,
+	arena = C["cooldown"].rcdarena,
 }
 
 local spells = {

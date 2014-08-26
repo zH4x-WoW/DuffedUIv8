@@ -22,8 +22,6 @@ local ALLOWED_GROUPS = {
 	["duffed"] = 1,
 	["skins"] = 1,
 	["classtimer"] = 1,
-	["rcd"] = 1,
-	["scd"] = 1,
 	["raid"] = 1,
 }
 
