@@ -125,4 +125,51 @@ D.ConstructRessources = function(name, width, height)
 		local powerType, powerToken = UnitPowerType("player")
 		if powerToken == "ENERGY" then ComboPoints:Show() else ComboPoints:Hide() end
 	end)
+
+	if C["unitframes"].oocHide then
+		EclipseBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+		EclipseBar:RegisterEvent("PLAYER_REGEN_ENABLED")
+		EclipseBar:RegisterEvent("PLAYER_ENTERING_WORLD")
+		EclipseBar:SetScript("OnEvent", function(self, event)
+			if event == "PLAYER_REGEN_DISABLED" then
+				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+			elseif event == "PLAYER_REGEN_ENABLED" then
+				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+			elseif event == "PLAYER_ENTERING_WORLD" then
+				if not InCombatLockdown() then
+					EclipseBar:SetAlpha(0)
+				end
+			end
+		end)
+
+		WildMushroom:RegisterEvent("PLAYER_REGEN_DISABLED")
+		WildMushroom:RegisterEvent("PLAYER_REGEN_ENABLED")
+		WildMushroom:RegisterEvent("PLAYER_ENTERING_WORLD")
+		WildMushroom:SetScript("OnEvent", function(self, event)
+			if event == "PLAYER_REGEN_DISABLED" then
+				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+			elseif event == "PLAYER_REGEN_ENABLED" then
+				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+			elseif event == "PLAYER_ENTERING_WORLD" then
+				if not InCombatLockdown() then
+					WildMushroom:SetAlpha(0)
+				end
+			end
+		end)
+
+		ComboPoints:RegisterEvent("PLAYER_REGEN_DISABLED")
+		ComboPoints:RegisterEvent("PLAYER_REGEN_ENABLED")
+		ComboPoints:RegisterEvent("PLAYER_ENTERING_WORLD")
+		ComboPoints:SetScript("OnEvent", function(self, event)
+			if event == "PLAYER_REGEN_DISABLED" then
+				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+			elseif event == "PLAYER_REGEN_ENABLED" then
+				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+			elseif event == "PLAYER_ENTERING_WORLD" then
+				if not InCombatLockdown() then
+					ComboPoints:SetAlpha(0)
+				end
+			end
+		end)
+	end
 end

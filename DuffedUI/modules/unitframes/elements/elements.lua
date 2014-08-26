@@ -48,4 +48,21 @@ D.ConstructEnergy = function(name, width, height)
 			self.TimeSinceLastUpdate = 0
 		end
 	end)
+
+	if C["unitframes"].oocHide then
+		eb:RegisterEvent("PLAYER_REGEN_DISABLED")
+		eb:RegisterEvent("PLAYER_REGEN_ENABLED")
+		eb:RegisterEvent("PLAYER_ENTERING_WORLD")
+		eb:SetScript("OnEvent", function(self, event)
+			if event == "PLAYER_REGEN_DISABLED" then
+				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+			elseif event == "PLAYER_REGEN_ENABLED" then
+				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+			elseif event == "PLAYER_ENTERING_WORLD" then
+				if not InCombatLockdown() then
+					eb:SetAlpha(0)
+				end
+			end
+		end)
+	end
 end

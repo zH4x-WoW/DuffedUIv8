@@ -35,6 +35,7 @@ C["unitframes"] = {
 	["focusbutton"] = true,
 	["showtotalhpmp"] = false,
 	["attached"] = false,
+	["oocHide"] = true,
 }
 
 C["chat"] = {

@@ -52,4 +52,36 @@ D.ConstructRessources = function(name, name2, width, height)
 		end
 		if layout == 1 or layout == 3 then rp:CreateBackdrop() end
 	end
+	
+	if C["unitframes"].oocHide then
+		mb:RegisterEvent("PLAYER_REGEN_DISABLED")
+		mb:RegisterEvent("PLAYER_REGEN_ENABLED")
+		mb:RegisterEvent("PLAYER_ENTERING_WORLD")
+		mb:SetScript("OnEvent", function(self, event)
+			if event == "PLAYER_REGEN_DISABLED" then
+				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+			elseif event == "PLAYER_REGEN_ENABLED" then
+				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+			elseif event == "PLAYER_ENTERING_WORLD" then
+				if not InCombatLockdown() then
+					mb:SetAlpha(0)
+				end
+			end
+		end)
+
+		rp:RegisterEvent("PLAYER_REGEN_DISABLED")
+		rp:RegisterEvent("PLAYER_REGEN_ENABLED")
+		rp:RegisterEvent("PLAYER_ENTERING_WORLD")
+		rp:SetScript("OnEvent", function(self, event)
+			if event == "PLAYER_REGEN_DISABLED" then
+				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+			elseif event == "PLAYER_REGEN_ENABLED" then
+				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+			elseif event == "PLAYER_ENTERING_WORLD" then
+				if not InCombatLockdown() then
+					rp:SetAlpha(0)
+				end
+			end
+		end)
+	end
 end

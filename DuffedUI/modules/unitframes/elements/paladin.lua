@@ -36,4 +36,21 @@ D.ConstructRessources = function(name, width, height)
 		bars[i].bg:SetAlpha(.15)
 	end
 	bars:CreateBackdrop()
+
+	if C["unitframes"].oocHide then
+		bars:RegisterEvent("PLAYER_REGEN_DISABLED")
+		bars:RegisterEvent("PLAYER_REGEN_ENABLED")
+		bars:RegisterEvent("PLAYER_ENTERING_WORLD")
+		bars:SetScript("OnEvent", function(self, event)
+			if event == "PLAYER_REGEN_DISABLED" then
+				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+			elseif event == "PLAYER_REGEN_ENABLED" then
+				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+			elseif event == "PLAYER_ENTERING_WORLD" then
+				if not InCombatLockdown() then
+					bars:SetAlpha(0)
+				end
+			end
+		end)
+	end
 end
