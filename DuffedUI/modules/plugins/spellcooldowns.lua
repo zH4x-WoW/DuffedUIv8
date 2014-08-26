@@ -634,7 +634,7 @@ local function createCooldownFrame(spell)
 	frame:SetHeight(height)
 	frame:SetWidth(width)
 	frame:SetFrameStrata("MEDIUM")
-	
+
 	-- Cooldown Texture
 	local icon = frame:CreateTexture()
 	local spellInfo = GetSpellInfo(spell)
@@ -648,7 +648,7 @@ local function createCooldownFrame(spell)
 	if not texture then return nil end
 	icon:SetTexture(texture)
 	icon:SetTexCoord(.08, .92, .08, .92)
-	frame.Icon = icon	
+	frame.Icon = icon
 
 	local durationText = frame:CreateFontString(nil, "OVERLAY")
 	durationText:SetFont(font, fontSize, fontStyle)
@@ -659,14 +659,15 @@ local function createCooldownFrame(spell)
 
 	-- Status Bar Timer
 	local statusBar = CreateFrame("StatusBar", nil, frame, "TextStatusBar")
+	statusBar:Size(width, 4)
 	statusBar:SetStatusBarTexture(C["media"].normTex)
 	statusBar:SetStatusBarColor(.77, .12, .23)
 	statusBar:CreateBackdrop("Transparent")
-	statusBar:SetPoint("TOPLEFT", frame, "BOTTOMLEFT", 0, -6)
-	statusBar:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 0, -10)
+	statusBar:SetPoint("TOP", frame,"TOP", 0, 0)
 	statusBar:SetMinMaxValues(0, 1)
+	statusBar:SetFrameLevel(frame:GetFrameLevel() + 3)
 	frame.StatusBar = statusBar
-	
+
 	frame.lastupdate = 0
 	frame.spell = spell
 	frame.start = GetTime()
@@ -688,10 +689,8 @@ local function OnEvent(self, event, arg1)
 		end
 		position()
 	end
-	
-	if event == "SPELL_UPDATE_COOLDOWN" then
-		position()
-	end
+
+	if event == "SPELL_UPDATE_COOLDOWN" then position() end
 end
 
 -- Import your class abilities
