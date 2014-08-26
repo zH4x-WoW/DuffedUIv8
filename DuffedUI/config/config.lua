@@ -107,9 +107,43 @@ C["raid"] = {
 	["pointer"] = false,
 }
 
+C["datatext"] = {
+	["armor"] = 0,
+	["avd"] = 0,
+	["bags"] = 5,
+	["battleground"] = true,
+	["block"] = 0,
+	["bonusarmor"] = 0,
+	["calltoarms"] = 0,
+	["crit"] = 0,
+	["dodge"] = 0,
+	["dur"] = 2,
+	["friends"] = 3,
+	["gold"] = 6,
+	["guild"] = 1,
+	["haste"] = 0,
+	["honor"] = 0,
+	["honorablekills"] = 0,
+	["leech"] = 0,
+	["mastery"] = 0,
+	["micromenu"] = 0,
+	["multistrike"] = 0,
+	["parry"] = 0,
+	["power"] = 7,
+	["profession"] = 0,
+	["smf"] = 4,
+	["talent"] = 0,
+	["versatility"] = 0,
+	["wowtime"] = 8,
+
+	["time24"] = true,
+	["localtime"] = false,
+	["fontsize"] = 11,
+}
+
 C["skins"] = {
-	["blizzardreskin"] = true,									-- enable blizzardskins
-	["calendarevent"] = false,									-- disable calendar event textures
+	["blizzardreskin"] = true,
+	["calendarevent"] = false,
 }
 
 C["classtimer"] = {
@@ -201,37 +235,6 @@ C["scd"] = {
 
 C["icd"] = {
 	["enable"] = true,
-}
-
-C["datatext"] = {
-	["dodge"] = 0,												-- show dodge on panels
-	["honor"] = 0,												-- show honor on panels
-	["honorablekills"] = 0,										-- show honorablekills on panels
-	["parry"] = 0,												-- show parry on panels
-	["profession"] = 0,											-- show profession on panels
-	["smf"] = 4,												-- show system on panels
-	["block"] = 0,												-- show block on panels
-	["bags"] = 5,                                       		-- show space used in bags on panels
-	["gold"] = 6,                                       		-- show your current gold on panels
-	["wowtime"] = 8,                                    		-- show time on panels
-	["guild"] = 1,                                     			-- show number on guildmate connected on panels
-	["dur"] = 2,                                        		-- show your equipment durability on panels.
-	["friends"] = 3,                                    		-- show number of friends connected.
-	["power"] = 7,                                      		-- show your attackpower/spellpower/healpower/rangedattackpower whatever stat is higher gets displayed
-	["haste"] = 0,                                      		-- show your haste rating on panels.
-	["crit"] = 0,                                       		-- show your crit rating on panels.
-	["avd"] = 0,                                        		-- show your current avoidance against the level of the mob your targeting
-	["armor"] = 0,                                      		-- show your armor value against the level mob you are currently targeting
-	["hit"] = 0,                                        		-- show hit rating
-	["mastery"] = 0,                                    		-- show mastery rating
-	["micromenu"] = 0,                                  		-- add a micro menu thought datatext
-	["talent"] = 0,                                     		-- show talent
-	["calltoarms"] = 0,                                 		-- show dungeon and call to arms
-
-	["battleground"] = true,                            		-- enable 3 stats in battleground only that replace stat1,stat2,stat3.
-	["time24"] = true,                                  		-- set time to 24h format.
-	["localtime"] = false,                              		-- set time to local time instead of server time.
-	["fontsize"] = 11,                                  		-- font size for panels.
 }
 
 C["tooltip"] = {

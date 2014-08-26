@@ -4,6 +4,7 @@
 	<Script file="bags.lua" />
 	<Script file="battleground.lua" />
 	<Script file="block.lua" />
+	<Script file="bonusarmor.lua" />
 	<Script file="calltoarms.lua" />
 	<Script file="crit.lua" />
 	<Script file="currency.lua" />
@@ -13,13 +14,16 @@
 	<Script file="gold.lua" />
 	<Script file="guild.lua" />
 	<Script file="haste.lua" />
+	<Script file="leech.lua" />
 	<Script file="mastery.lua" />
 	<Script file="micromenu.lua" />
 	<Script file="misc.lua" />
+	<Script file="multistrike.lua" />
 	<Script file="parry.lua" />
 	<Script file="power.lua" />
 	<Script file="profession.lua" />
 	<Script file="smf.lua" />
 	<Script file="talent.lua" />
 	<Script file="time.lua" />
+	<Script file="versatility.lua" />
 </Ui>
