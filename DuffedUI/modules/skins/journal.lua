@@ -33,7 +33,6 @@ local function LoadSkin()
 	EncounterJournalNavBar.backdrop:SetPoint("BOTTOMRIGHT")
 	EncounterJournalNavBarHomeButton:SkinButton(true)
 
-	EncounterJournalSearchBox:StripTextures(true)
 	EncounterJournalSearchBox:SkinEditBox()
 	EncounterJournalCloseButton:SkinCloseButton()
 

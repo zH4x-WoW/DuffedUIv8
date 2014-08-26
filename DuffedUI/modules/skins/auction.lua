@@ -17,6 +17,8 @@ local function LoadSkin()
 	IsUsableCheckButton:SkinCheckBox()
 	ShowOnPlayerCheckButton:SkinCheckBox()
 	ExactMatchCheckButton:SkinCheckBox()
+	ExactMatchCheckButton:ClearAllPoints()
+	ExactMatchCheckButton:SetPoint("RIGHT", IsUsableCheckButton, "RIGHT", 150, 0)
 
 	-- Dress Frame
 	do
@@ -57,15 +59,12 @@ local function LoadSkin()
 	backdrop:Point("BOTTOMRIGHT", AuctionProgressBarIcon, "BOTTOMRIGHT", 2, -2)
 	backdrop:SetTemplate("Default")
 	AuctionProgressBarIcon:SetParent(backdrop)
-
 	AuctionProgressBarText:ClearAllPoints()
 	AuctionProgressBarText:SetPoint("CENTER")
-
 	AuctionProgressBar:StripTextures()
 	AuctionProgressBar:CreateBackdrop("Default")
 	AuctionProgressBar:SetStatusBarTexture(C["media"].normTex)
 	AuctionProgressBar:SetStatusBarColor(1, 1, 0)
-
 	BrowseNextPageButton:SkinNextPrevButton()
 	BrowsePrevPageButton:SkinNextPrevButton()
 
@@ -84,10 +83,7 @@ local function LoadSkin()
 		"AuctionsStackSizeMaxButton",
 		"AuctionsNumStacksMaxButton",
 	}
-
-	for _, button in pairs(buttons) do
-		_G[button]:SkinButton()
-	end
+	for _, button in pairs(buttons) do _G[button]:SkinButton() end
 
 	--Fix Button Positions
 	AuctionsCloseButton:Point("BOTTOMRIGHT", AuctionFrameAuctions, "BOTTOMRIGHT", 66, 10)
@@ -99,9 +95,10 @@ local function LoadSkin()
 	AuctionsItemButton:StripTextures()
 	AuctionsItemButton:StyleButton()
 	AuctionsItemButton:SetTemplate("Default", true)
+	BrowseResetButton:ClearAllPoints()
 	BrowseResetButton:Point("TOPLEFT", AuctionFrameBrowse, "TOPLEFT", 81, -74)
-	BrowseSearchButton:Point("TOPRIGHT", AuctionFrameBrowse, "TOPRIGHT", 25, -34)
-
+	BrowseSearchButton:Point("TOPRIGHT", AuctionFrameBrowse, "TOPRIGHT", 30, -34)
+	BrowseSearchButton:SetWidth(BrowseSearchButton:GetWidth() - 5)
 	AuctionsItemButton:SetScript("OnUpdate", function()
 		if AuctionsItemButton:GetNormalTexture() then
 			AuctionsItemButton:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
@@ -137,10 +134,7 @@ local function LoadSkin()
 
 	AuctionFrameTab1:ClearAllPoints()
 	AuctionFrameTab1:Point("TOPLEFT", AuctionFrame, "BOTTOMLEFT", -5, 2)
-
-	for i = 1, AuctionFrame.numTabs do
-		_G["AuctionFrameTab" .. i]:SkinTab()
-	end
+	for i = 1, AuctionFrame.numTabs do _G["AuctionFrameTab" .. i]:SkinTab() end
 
 	for i = 1, NUM_FILTERS_TO_DISPLAY do
 		local tab = _G["AuctionFilterButton" .. i]
@@ -175,28 +169,24 @@ local function LoadSkin()
 	BrowseMaxLevel:Point("LEFT", BrowseMinLevel, "RIGHT", 8, 0)
 	AuctionsStackSizeEntry.backdrop:SetAllPoints()
 	AuctionsNumStacksEntry.backdrop:SetAllPoints()
-	
-	for i=1, NUM_BROWSE_TO_DISPLAY do
+	for i = 1, NUM_BROWSE_TO_DISPLAY do
 		local button = _G["BrowseButton"..i]
 		local icon = _G["BrowseButton"..i.."Item"]
-		
+
 		if _G["BrowseButton"..i.."ItemIconTexture"] then
 			_G["BrowseButton"..i.."ItemIconTexture"]:SetTexCoord(.08, .92, .08, .92)
 			_G["BrowseButton"..i.."ItemIconTexture"]:ClearAllPoints()
 			_G["BrowseButton"..i.."ItemIconTexture"]:Point("TOPLEFT", 2, -2)
 			_G["BrowseButton"..i.."ItemIconTexture"]:Point("BOTTOMRIGHT", -2, 2)
 		end
-		
 		if icon then
 			icon:StripTextures()
 			icon:StyleButton()
 			--TODO: Find a better method to ensure that the icon:GetNormalTexture doesn't return after clicking
 			icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)
-			
 			icon:CreateBackdrop("Default")
 			icon.backdrop:SetAllPoints()
 		end
-
 		button:StripTextures()
 		button:StyleButton()
 		_G["BrowseButton"..i.."Highlight"] = button:GetHighlightTexture()
@@ -206,23 +196,20 @@ local function LoadSkin()
 		button:GetPushedTexture():SetAllPoints(button:GetHighlightTexture())
 	end
 	
-	for i=1, NUM_AUCTIONS_TO_DISPLAY do
+	for i = 1, NUM_AUCTIONS_TO_DISPLAY do
 		local button = _G["AuctionsButton"..i]
 		local icon = _G["AuctionsButton"..i.."Item"]
-		
+
 		_G["AuctionsButton"..i.."ItemIconTexture"]:SetTexCoord(.08, .92, .08, .92)
 		_G["AuctionsButton"..i.."ItemIconTexture"].SetTexCoord = D.dummy
 		_G["AuctionsButton"..i.."ItemIconTexture"]:ClearAllPoints()
 		_G["AuctionsButton"..i.."ItemIconTexture"]:Point("TOPLEFT", 2, -2)
 		_G["AuctionsButton"..i.."ItemIconTexture"]:Point("BOTTOMRIGHT", -2, 2)
-		
 		icon:StyleButton()
 		--TODO: Find a better method to ensure that the icon:GetNormalTexture doesn't return after clicking
 		icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)
-		
 		icon:CreateBackdrop("Default")
 		icon.backdrop:SetAllPoints()
-
 		button:StripTextures()
 		button:StyleButton()
 		_G["AuctionsButton"..i.."Highlight"] = button:GetHighlightTexture()
@@ -232,18 +219,16 @@ local function LoadSkin()
 		button:GetPushedTexture():SetAllPoints(button:GetHighlightTexture())		
 	end
 	
-	for i=1, NUM_BIDS_TO_DISPLAY do
+	for i = 1, NUM_BIDS_TO_DISPLAY do
 		local button = _G["BidButton"..i]
 		local icon = _G["BidButton"..i.."Item"]
-		
+
 		_G["BidButton"..i.."ItemIconTexture"]:SetTexCoord(.08, .92, .08, .92)
 		_G["BidButton"..i.."ItemIconTexture"]:ClearAllPoints()
 		_G["BidButton"..i.."ItemIconTexture"]:Point("TOPLEFT", 2, -2)
 		_G["BidButton"..i.."ItemIconTexture"]:Point("BOTTOMRIGHT", -2, 2)
-		
 		icon:StyleButton()
 		icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)
-		
 		icon:CreateBackdrop("Default")
 		icon.backdrop:SetAllPoints()
 
@@ -255,7 +240,7 @@ local function LoadSkin()
 		button:GetHighlightTexture():SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 5)
 		button:GetPushedTexture():SetAllPoints(button:GetHighlightTexture())			
 	end
-	
+
 	--Custom Backdrops
 	AuctionFrameBrowse.bg1 = CreateFrame("Frame", nil, AuctionFrameBrowse)
 	AuctionFrameBrowse.bg1:SetTemplate("Default")
@@ -268,7 +253,7 @@ local function LoadSkin()
 	AuctionFrameBrowse.bg2:Point("TOPLEFT", AuctionFrameBrowse.bg1, "TOPRIGHT", 4, 0)
 	AuctionFrameBrowse.bg2:Point("BOTTOMRIGHT", AuctionFrame, "BOTTOMRIGHT", -8, 40)
 	BrowseScrollFrame:Height(300) --Adjust scrollbar height a little off
-	
+
 	AuctionFrameBid.bg = CreateFrame("Frame", nil, AuctionFrameBid)
 	AuctionFrameBid.bg:SetTemplate("Default")
 	AuctionFrameBid.bg:Point("TOPLEFT", 22, -72)
@@ -281,7 +266,6 @@ local function LoadSkin()
 	AuctionFrameAuctions.bg1:Point("TOPLEFT", 15, -70)
 	AuctionFrameAuctions.bg1:Point("BOTTOMRIGHT", -545, 35)  
 	AuctionFrameAuctions.bg1:SetFrameLevel(AuctionFrameAuctions.bg1:GetFrameLevel() - 2)	
-	
 	AuctionFrameAuctions.bg2 = CreateFrame("Frame", nil, AuctionFrameAuctions)
 	AuctionFrameAuctions.bg2:SetTemplate("Default")
 	AuctionFrameAuctions.bg2:Point("TOPLEFT", AuctionFrameAuctions.bg1, "TOPRIGHT", 3, 0)
@@ -299,42 +283,40 @@ D.SkinFuncs["Blizzard_AuctionUI"] = LoadSkin
 -- macro while inactive: /script BlackMarket_LoadUI() ShowUIPanel(BlackMarketFrame)
 
 local function LoadSecondarySkin()
-		BlackMarketFrame:StripTextures()
-		BlackMarketFrame.Inset:StripTextures()
-		BlackMarketFrame:SetTemplate("Transparent")
-		BlackMarketScrollFrameScrollBar:SkinScrollBar()
-		BlackMarketFrame.MoneyFrameBorder:StripTextures()
-		BlackMarketBidPriceGold:SkinEditBox()
-		BlackMarketBidPriceGold:Height(16)
-		BlackMarketFrame.HotDeal.Item.IconTexture:SetTexCoord(.08, .92, .08, .92)
-		BlackMarketFrame.BidButton:SkinButton()
-		BlackMarketFrame.BidButton:Height(20)
-		BlackMarketFrame.BidButton:SkinButton()
-		BlackMarketFrame.CloseButton:SkinCloseButton()
-		
-		local tabs = {"ColumnName", "ColumnLevel", "ColumnType", "ColumnDuration", "ColumnHighBidder", "ColumnCurrentBid"}
-		for _, tab in pairs(tabs) do
-			local tab = BlackMarketFrame[tab]
-			tab.Left:Hide()
-			tab.Middle:Hide()
-			tab.Right:Hide()
-			
-			tab:CreateBackdrop()
-			tab.backdrop:Point("TOPLEFT", tab, 3, 0)
-			tab.backdrop:Point("BOTTOMRIGHT", tab, -3, 0)	
-		end
-		
+	BlackMarketFrame:StripTextures()
+	BlackMarketFrame.Inset:StripTextures()
+	BlackMarketFrame:SetTemplate("Transparent")
+	BlackMarketScrollFrameScrollBar:SkinScrollBar()
+	BlackMarketFrame.MoneyFrameBorder:StripTextures()
+	BlackMarketBidPriceGold:SkinEditBox()
+	BlackMarketBidPriceGold:Height(16)
+	BlackMarketFrame.HotDeal.Item.IconTexture:SetTexCoord(.08, .92, .08, .92)
+	BlackMarketFrame.BidButton:SkinButton()
+	BlackMarketFrame.BidButton:Height(20)
+	BlackMarketFrame.BidButton:SkinButton()
+	BlackMarketFrame.CloseButton:SkinCloseButton()
+
+	local tabs = {"ColumnName", "ColumnLevel", "ColumnType", "ColumnDuration", "ColumnHighBidder", "ColumnCurrentBid"}
+	for _, tab in pairs(tabs) do
+		local tab = BlackMarketFrame[tab]
+		tab.Left:Hide()
+		tab.Middle:Hide()
+		tab.Right:Hide()
+		tab:CreateBackdrop()
+		tab.backdrop:Point("TOPLEFT", tab, 3, 0)
+		tab.backdrop:Point("BOTTOMRIGHT", tab, -3, 0)
+	end
+
 	hooksecurefunc("BlackMarketScrollFrame_Update", function()
 		local buttons = BlackMarketScrollFrame.buttons
 		local numButtons = #buttons
 		local offset = HybridScrollFrame_GetOffset(BlackMarketScrollFrame)
 		local numItems = C_BlackMarket.GetNumItems()
-		
+
 		for i = 1, numButtons do
 			local button = buttons[i]
 			local index = offset + i
-			
-			
+
 			if not button.skinned then
 				button.Item:StripTextures()
 				button.Item:SetTemplate()
@@ -344,26 +326,22 @@ local function LoadSecondarySkin()
 				button:StripTextures()
 				button.skinned = true
 			end
-			
+
 			if ( index <= numItems ) then
 				local name, texture = C_BlackMarket.GetItemInfoByIndex(index)
-				if ( name ) then
-					button.Item.IconTexture:SetTexture(texture)
-				end
+				if ( name ) then button.Item.IconTexture:SetTexture(texture) end
 			end
 		end
 	end)
-	
+
 	BlackMarketFrame.HotDeal:StripTextures()
 	BlackMarketFrame.HotDeal.Item:CreateBackdrop()
 	BlackMarketFrame.HotDeal.Item:StyleButton()
 	BlackMarketFrame.HotDeal.Item.hover:SetAllPoints()
 	BlackMarketFrame.HotDeal.Item.pushed:SetAllPoints()
-	
 	BlackMarketFrame.BidButton:SkinButton()
 	BlackMarketBidPriceGold:SkinEditBox()
-	
-	for i=1, BlackMarketFrame:GetNumRegions() do
+	for i = 1, BlackMarketFrame:GetNumRegions() do
 		local region = select(i, BlackMarketFrame:GetRegions())
 		if region and region:GetObjectType() == "FontString" and region:GetText() == BLACK_MARKET_TITLE then
 			region:ClearAllPoints()
