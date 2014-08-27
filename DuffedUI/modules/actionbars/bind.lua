@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
--- keybind feature
+--[[Keybind feature from nightcracker, maintained by Coote]]--
 
 local bind, localmacros = CreateFrame("Frame", "DuffedUIHoverBind", UIParent), 0
 
