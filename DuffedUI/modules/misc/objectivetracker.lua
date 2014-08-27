@@ -3,10 +3,26 @@ local D, C, L = unpack(select(2, ...))
 -- Modified Script from Tukui T16
 -- Credits got to Tukz & Hydra
 local ObjectiveTracker = CreateFrame("Frame", "ObjectiveTracker", UIParent)
-local Noop = function() end
 local lST = "Wowhead"
 local lQ = "http://www.wowhead.com/quest=%d"
 local lA = "http://www.wowhead.com/achievement=%d"
+
+local DuffedUIWatchFrameAnchor = CreateFrame("Button", "DuffedUIWatchFrameAnchor", UIParent)
+DuffedUIWatchFrameAnchor:SetFrameStrata("HIGH")
+DuffedUIWatchFrameAnchor:SetFrameLevel(20)
+DuffedUIWatchFrameAnchor:SetSize(ObjectiveTrackerFrame:GetWidth(), 20)
+DuffedUIWatchFrameAnchor:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -D.screenheight / 5, -D.screenheight / 4)
+DuffedUIWatchFrameAnchor:SetClampedToScreen(true)
+DuffedUIWatchFrameAnchor:SetMovable(true)
+DuffedUIWatchFrameAnchor:EnableMouse(false)
+DuffedUIWatchFrameAnchor:SetTemplate("Default")
+DuffedUIWatchFrameAnchor:SetBackdropBorderColor(1, 0, 0)
+DuffedUIWatchFrameAnchor:SetAlpha(0)
+DuffedUIWatchFrameAnchor.text = D.SetFontString(DuffedUIWatchFrameAnchor, C["media"].font, 11)
+DuffedUIWatchFrameAnchor.text:SetPoint("CENTER")
+DuffedUIWatchFrameAnchor.text:SetText(L.move_watchframe)
+DuffedUIWatchFrameAnchor.text:Hide()
+tinsert(D.AllowFrameMoving, DuffedUIWatchFrameAnchor)
 
 _G.StaticPopupDialogs["WATCHFRAME_URL"] = {
 	text = lST .. " link",
@@ -28,10 +44,8 @@ function ObjectiveTracker:SetQuestItemButton(block)
 
 		Button:SkinButton()
 		Button:StyleButton()
-
 		Icon:SetTexCoord(.1,.9,.1,.9)
 		Icon:SetInside()
-
 		Button.isSkinned = true
 	end
 end
@@ -107,12 +121,11 @@ function ObjectiveTracker:Enable()
 	local Minimize = ObjectiveTrackerFrame.HeaderMenu.MinimizeButton
 
 	ObjectiveTracker:Size(Frame:GetWidth(), 23)
-	ObjectiveTracker:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -D.screenheight / 5, -D.screenheight / 4)
-
+	ObjectiveTracker:SetAllPoints(DuffedUIWatchFrameAnchor)
 	Frame:SetParent(ObjectiveTracker)
 	Frame:SetPoint("TOPRIGHT")
-	Frame.ClearAllPoints = Noop
-	Frame.SetPoint = Noop
+	Frame.ClearAllPoints = D.dummy
+	Frame.SetPoint = D.dummy
 
 	for i = 1, 5 do
 		local Module = ObjectiveTrackerFrame.MODULES[i]
@@ -123,7 +136,6 @@ function ObjectiveTracker:Enable()
 		end
 	end
 	Minimize:SkinCloseButton()
-
 	ObjectiveTracker:AddHooks()
 end
 
