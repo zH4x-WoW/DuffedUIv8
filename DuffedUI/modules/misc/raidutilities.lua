@@ -17,7 +17,7 @@ anchor:SetClampedToScreen(true)
 anchor.text = anchor:CreateFontString(nil, "OVERLAY")
 anchor.text:SetFont(C["media"].font, 11)
 anchor.text:SetPoint("CENTER")
-anchor.text:SetText("Move RaidUtility")
+anchor.text:SetText(L["move"]["raid"])
 anchor:Hide()
 tinsert(D.AllowFrameMoving, DuffedUIRaidUtilityAnchor)
 

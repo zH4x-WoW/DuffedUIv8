@@ -17,10 +17,10 @@ else
 end
 
 D.AFK_LIST = {
-	L.AFKText_Text1,
-	L.AFKText_Text2,
-	L.AFKText_Text3,
-	L.AFKText_Text4,
+	L["afk"]["text1"],
+	L["afk"]["text1"],
+	L["afk"]["text1"],
+	L["afk"]["text1"],
 }
 
 local DuffedUIAFKPanel = CreateFrame( "Frame", "DuffedUIAFKPanel", nil )

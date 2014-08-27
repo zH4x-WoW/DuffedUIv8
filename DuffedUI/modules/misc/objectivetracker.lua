@@ -20,7 +20,7 @@ DuffedUIWatchFrameAnchor:SetBackdropBorderColor(1, 0, 0)
 DuffedUIWatchFrameAnchor:SetAlpha(0)
 DuffedUIWatchFrameAnchor.text = D.SetFontString(DuffedUIWatchFrameAnchor, C["media"].font, 11)
 DuffedUIWatchFrameAnchor.text:SetPoint("CENTER")
-DuffedUIWatchFrameAnchor.text:SetText(L.move_watchframe)
+DuffedUIWatchFrameAnchor.text:SetText(L["move"]["watchframe"])
 DuffedUIWatchFrameAnchor.text:Hide()
 tinsert(D.AllowFrameMoving, DuffedUIWatchFrameAnchor)
 

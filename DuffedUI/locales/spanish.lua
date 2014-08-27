@@ -1,10 +1,49 @@
 local D, C, L = unpack(select(2, ...))
 
 if D.client == "esES" or D.client == "esMX" then
-	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
-	L.AFKText_Text2 = "Middle click the minimap for micromenu"
-	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
-	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
+	L["move"] = {
+		["tooltip"] = "Move Tooltip",
+		["minimap"] = "Move Minimap",
+		["watchframe"] = "Move Quests",
+		["gmframe"] = "Move Ticket",
+		["buffs"] = "Move Player Buffs",
+		["debuffs"] = "Move Player Debuffs",
+		["shapeshift"] = "Move Shapeshift/Totem",
+		["achievements"] = "Move Achievements",
+		["roll"] = "Move Loot Roll Frame",
+		["vehicle"] = "Move Vehicle Seat",
+		["extrabutton"] = "Extra Button",
+		["bar1"] = "Move Bar 1",
+		["bar2"] = "Move Bar 2",
+		["bar5"] = "Move Bar5",
+		["bar5_1"] = "Move\nBar5",
+		["pet"] = "Move\nPet",
+		["player"] = "Move Playercastbar",
+		["target"] = "Move Targetcastbar",
+		["classbar"] = "Move Classbar",
+		["raid"] = "Move RaidUtility",
+		["rcd"] = "Move RaidCD",
+		["spell"] = "Move SpellCooldowns",
+	}
+
+	L["afk"] = {
+		["text4"] = "Mouseover minimap shows coords and locations",
+		["text4"] = "Middle click the minimap for micromenu",
+		["text4"] = "Right click the minimap for gatheringmenu",
+		["text4"] = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link.",
+	}
+
+	L["symbol"] = {
+		["clear"] = "Clear",
+		["skull"] = "Skull",
+		["cross"] = "Cross",
+		["square"] = "Square",
+		["moon"] = "Moon",
+		["triangle"] = "Triangle",
+		["diamond"] = "Diamond",
+		["circle"] = "Circle",
+		["star"] = "Star",
+	}
 
 	L.UI_Outdated = "Tu versión de DuffedUI no está actualizada. Puedes descargar la última versión de www.duffed.net"
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
@@ -253,16 +292,6 @@ if D.client == "esES" or D.client == "esMX" then
 	L.core_uihelp11 = "|cffFF0000/ainv|r - Activa el autoinvitar via palabra clave en susurro. Puedes escoger la palabra clave escribiendo `/ainv palabraclave`"
 	L.core_uihelp100 = "(Sube el chat para ver mas comandos ...)"
  
-	L.symbol_CLEAR = "Nada"
-	L.symbol_SKULL = "Calavera"
-	L.symbol_CROSS = "Cruz"
-	L.symbol_SQUARE = "Cuadrado"
-	L.symbol_MOON = "Luna"
-	L.symbol_TRIANGLE = "Triangulo"
-	L.symbol_DIAMOND = "Diamante"
-	L.symbol_CIRCLE = "Circulo"
-	L.symbol_STAR = "Estrella"
- 
 	L.bind_combat = "No puedes asignar teclas en combate."
 	L.bind_saved = "La configuración de las teclas ha sido guardada."
 	L.bind_discard = "Se han descartado los cambios en la configuración de las teclas."
@@ -273,18 +302,6 @@ if D.client == "esES" or D.client == "esMX" then
 	L.hunter_unhappy = "Tu mascota está descontenta!"
 	L.hunter_content = "Tu mascota está contenta!"
 	L.hunter_happy = "Tu mascota está feliz!"
-	
-	L.move_tooltip = "Mover Descripción"
-	L.move_minimap = "Mover Minimapa"
-	L.move_watchframe = "Mover Misiones"
-	L.move_gmframe = "Mover Ticket"
-	L.move_buffs = "Mover Beneficios del Jugador"
-	L.move_debuffs = "Mover Perjuicios del Jugador"
-	L.move_shapeshift = "Mover Barra de cambio de forma/Totems"
-	L.move_achievements = "Mover Logros"
-	L.move_roll = "Mover Marco de Lanzamiento de Dados por Botín"
-	L.move_vehicle = "Mover Asiento del vehiculo"
-	L.move_extrabutton = "Botón Extra"
 	
 	-- tuto and install
 	L.install_header_1 = "Bienvenido/a"

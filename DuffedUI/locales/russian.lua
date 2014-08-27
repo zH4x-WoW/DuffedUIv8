@@ -1,10 +1,49 @@
 local D, C, L = unpack(select(2, ...))
 
 if D.client == "ruRU" then
-	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
-	L.AFKText_Text2 = "Middle click the minimap for micromenu"
-	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
-	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
+	L["move"] = {
+		["tooltip"] = "Move Tooltip",
+		["minimap"] = "Move Minimap",
+		["watchframe"] = "Move Quests",
+		["gmframe"] = "Move Ticket",
+		["buffs"] = "Move Player Buffs",
+		["debuffs"] = "Move Player Debuffs",
+		["shapeshift"] = "Move Shapeshift/Totem",
+		["achievements"] = "Move Achievements",
+		["roll"] = "Move Loot Roll Frame",
+		["vehicle"] = "Move Vehicle Seat",
+		["extrabutton"] = "Extra Button",
+		["bar1"] = "Move Bar 1",
+		["bar2"] = "Move Bar 2",
+		["bar5"] = "Move Bar5",
+		["bar5_1"] = "Move\nBar5",
+		["pet"] = "Move\nPet",
+		["player"] = "Move Playercastbar",
+		["target"] = "Move Targetcastbar",
+		["classbar"] = "Move Classbar",
+		["raid"] = "Move RaidUtility",
+		["rcd"] = "Move RaidCD",
+		["spell"] = "Move SpellCooldowns",
+	}
+
+	L["afk"] = {
+		["text4"] = "Mouseover minimap shows coords and locations",
+		["text4"] = "Middle click the minimap for micromenu",
+		["text4"] = "Right click the minimap for gatheringmenu",
+		["text4"] = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link.",
+	}
+
+	L["symbol"] = {
+		["clear"] = "Clear",
+		["skull"] = "Skull",
+		["cross"] = "Cross",
+		["square"] = "Square",
+		["moon"] = "Moon",
+		["triangle"] = "Triangle",
+		["diamond"] = "Diamond",
+		["circle"] = "Circle",
+		["star"] = "Star",
+	}
 
 	L.UI_Outdated = "Ваша версия DuffedUI устарела. Вы можете скачать последнюю версию на www.duffed.net"
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
@@ -253,16 +292,6 @@ if D.client == "ruRU" then
 	L.core_uihelp11 = "|cffFF0000/ainv|r - Включить автоинвайт по определенному слову в приват. Вы можете установить ваше слово коммандой `/ainv слово`"
 	L.core_uihelp100 = "(Прокрутите вверх, чтобы увидеть больше команд...)"
  
-	L.symbol_CLEAR = "Очистить"
-	L.symbol_SKULL = "Череп"
-	L.symbol_CROSS = "Крест"
-	L.symbol_SQUARE = "Квадрат"
-	L.symbol_MOON = "Полумесяц"
-	L.symbol_TRIANGLE = "Треугольник"
-	L.symbol_DIAMOND = "Ромб"
-	L.symbol_CIRCLE = "Круг"
-	L.symbol_STAR = "Звезда"
- 
 	L.bind_combat = "Вы не можете назначать клавиши в бою."
 	L.bind_saved = "Все назначения клавиш сохранены."
 	L.bind_discard = "Все новые назначения клавиш были отменены."
@@ -273,18 +302,6 @@ if D.client == "ruRU" then
 	L.hunter_unhappy = "Ваш питомец несчастлив!"
 	L.hunter_content = "Ваш питомец доволен!"
 	L.hunter_happy = "Ваш питомец счастлив!"
-	
-	L.move_tooltip = "Передвинуть подсказку"
-	L.move_minimap = "Передвинуть миникарту"
-	L.move_watchframe = "Передвинуть квесты"
-	L.move_gmframe = "Передвинуть тикет"
-	L.move_buffs = "Передвинуть баффы"
-	L.move_debuffs = "Передвинуть дебаффы"
-	L.move_shapeshift = "Передвинуть панель стоек/тотемов"
-	L.move_achievements = "Передвинуть всплывающее окно достижений"
-	L.move_roll = "Передвинуть окно розыгрыша добычи"
-	L.move_vehicle = "Передвинуть фрейм транспорта"
-	L.move_extrabutton = "Передвинуть доп. кнопку"
 	
 	-- tuto/install
 	L.install_header_1 = "Добро пожаловать!"

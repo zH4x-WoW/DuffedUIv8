@@ -1,10 +1,49 @@
 local D, C, L = unpack(select(2, ...))
 
 if D.client == "frFR" then
-	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
-	L.AFKText_Text2 = "Middle click the minimap for micromenu"
-	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
-	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
+	L["move"] = {
+		["tooltip"] = "Move Tooltip",
+		["minimap"] = "Move Minimap",
+		["watchframe"] = "Move Quests",
+		["gmframe"] = "Move Ticket",
+		["buffs"] = "Move Player Buffs",
+		["debuffs"] = "Move Player Debuffs",
+		["shapeshift"] = "Move Shapeshift/Totem",
+		["achievements"] = "Move Achievements",
+		["roll"] = "Move Loot Roll Frame",
+		["vehicle"] = "Move Vehicle Seat",
+		["extrabutton"] = "Extra Button",
+		["bar1"] = "Move Bar 1",
+		["bar2"] = "Move Bar 2",
+		["bar5"] = "Move Bar5",
+		["bar5_1"] = "Move\nBar5",
+		["pet"] = "Move\nPet",
+		["player"] = "Move Playercastbar",
+		["target"] = "Move Targetcastbar",
+		["classbar"] = "Move Classbar",
+		["raid"] = "Move RaidUtility",
+		["rcd"] = "Move RaidCD",
+		["spell"] = "Move SpellCooldowns",
+	}
+
+	L["afk"] = {
+		["text4"] = "Mouseover minimap shows coords and locations",
+		["text4"] = "Middle click the minimap for micromenu",
+		["text4"] = "Right click the minimap for gatheringmenu",
+		["text4"] = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link.",
+	}
+
+	L["symbol"] = {
+		["clear"] = "Clear",
+		["skull"] = "Skull",
+		["cross"] = "Cross",
+		["square"] = "Square",
+		["moon"] = "Moon",
+		["triangle"] = "Triangle",
+		["diamond"] = "Diamond",
+		["circle"] = "Circle",
+		["star"] = "Star",
+	}
 
 	L.UI_Outdated = "Une version plus récente de DuffedUI est disponible. Vous pouvez télécharger la dernière version sur www.duffed.net"
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
@@ -254,16 +293,6 @@ if D.client == "frFR" then
 	L.core_uihelp11 = "|cffFF0000/ainv|r - Active l'auto-invitation via mot clef par message privé. Vous pouvez définir votre mot clef en saisissant la commande `/ainv votremot`"
 	L.core_uihelp100 = "(Faites défiler le texte vers le haut pour plus de commandes...)"
 	
-	L.symbol_CLEAR = "Aucun"
-	L.symbol_SKULL = "Crâne"
-	L.symbol_CROSS = "Croix"
-	L.symbol_SQUARE = "Carré"
-	L.symbol_MOON = "Lune"
-	L.symbol_TRIANGLE = "Triangle"
-	L.symbol_DIAMOND = "Losange"
-	L.symbol_CIRCLE = "Cercle"
-	L.symbol_STAR = "Etoile"
-	
 	L.bind_combat = "Vous ne pouvez pas assigner une touche en combat."
 	L.bind_saved = "Vos assignations de touches ont été sauvegardées."
 	L.bind_discard = "Vos nouvelles assignations de touches n'ont pas été sauvegardées."
@@ -275,18 +304,6 @@ if D.client == "frFR" then
 	L.hunter_content = "Votre familier est heureux !"
 	L.hunter_happy = "Votre familier est très heureux !"
 
-	L.move_tooltip = "Bouger l'infobulle"
-	L.move_minimap = "Bouger la Minimap"
-	L.move_watchframe = "Bouger la fenêtre d'Objectifs"
-	L.move_gmframe = "Bouger le Ticket MJ"
-	L.move_buffs = "Bouger les améliorations du joueur"
-	L.move_debuffs = "Bouger les afflictions du joueur"
-	L.move_shapeshift = "Bouger la barre de formes/totems"
-	L.move_achievements = "Bouger la fenêtre des Hauts-Faits"
-	L.move_roll = "Bouger la fenêtre d'attribution du butin"
-	L.move_vehicle = "Bouger le schéma du véhicule"
-	L.move_extrabutton = "Extra Button"
-	
 	-- tuto/install
 	L.install_header_1 = "Bienvenue"
 	L.install_header_2 = "1. Principal"

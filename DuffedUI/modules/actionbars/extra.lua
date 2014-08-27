@@ -11,7 +11,7 @@ holder:SetBackdropBorderColor(1, 0, 0)
 holder:SetAlpha(0)
 holder.text = D.SetFontString(holder, C["media"].font, 11)
 holder.text:SetPoint("CENTER")
-holder.text:SetText(L.move_extrabutton)
+holder.text:SetText(L["move"]["extrabutton"])
 holder.text:Hide()
 tinsert(D.AllowFrameMoving, DuffedUIExtraActionBarFrameHolder)
 

@@ -1,10 +1,49 @@
 local D, C, L = unpack(select(2, ...))
 
 if D.client == "koKR" then
-	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
-	L.AFKText_Text2 = "Middle click the minimap for micromenu"
-	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
-	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
+	L["move"] = {
+		["tooltip"] = "Move Tooltip",
+		["minimap"] = "Move Minimap",
+		["watchframe"] = "Move Quests",
+		["gmframe"] = "Move Ticket",
+		["buffs"] = "Move Player Buffs",
+		["debuffs"] = "Move Player Debuffs",
+		["shapeshift"] = "Move Shapeshift/Totem",
+		["achievements"] = "Move Achievements",
+		["roll"] = "Move Loot Roll Frame",
+		["vehicle"] = "Move Vehicle Seat",
+		["extrabutton"] = "Extra Button",
+		["bar1"] = "Move Bar 1",
+		["bar2"] = "Move Bar 2",
+		["bar5"] = "Move Bar5",
+		["bar5_1"] = "Move\nBar5",
+		["pet"] = "Move\nPet",
+		["player"] = "Move Playercastbar",
+		["target"] = "Move Targetcastbar",
+		["classbar"] = "Move Classbar",
+		["raid"] = "Move RaidUtility",
+		["rcd"] = "Move RaidCD",
+		["spell"] = "Move SpellCooldowns",
+	}
+
+	L["afk"] = {
+		["text4"] = "Mouseover minimap shows coords and locations",
+		["text4"] = "Middle click the minimap for micromenu",
+		["text4"] = "Right click the minimap for gatheringmenu",
+		["text4"] = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link.",
+	}
+
+	L["symbol"] = {
+		["clear"] = "Clear",
+		["skull"] = "Skull",
+		["cross"] = "Cross",
+		["square"] = "Square",
+		["moon"] = "Moon",
+		["triangle"] = "Triangle",
+		["diamond"] = "Diamond",
+		["circle"] = "Circle",
+		["star"] = "Star",
+	}
 
 	L.UI_Outdated = "당신의 DuffedUI 버전이 구버전입니다. 당신은 www.duffed.net에서 최신 버전을 다운로드하실 수 있습니다."
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
@@ -260,16 +299,6 @@ if D.client == "koKR" then
 	L.core_uihelp11 = "|cffFF0000/ainv|r - 자동초대 기능을 사용합니다. '/ainv 단어'를 입력하여 해당 단어가 들어간 귓속말이 올 경우 자동으로 초대를 합니다."
 	L.core_uihelp100 = "(위로 올리십시오 ...)"
  
-	L.symbol_CLEAR = "초기화"
-	L.symbol_SKULL = "해골"
-	L.symbol_CROSS = "가위표"
-	L.symbol_SQUARE = "네모"
-	L.symbol_MOON = "달"
-	L.symbol_TRIANGLE = "세모"
-	L.symbol_DIAMOND = "다이아몬드"
-	L.symbol_CIRCLE = "동그라미"
-	L.symbol_STAR = "별"
- 
 	L.bind_combat = "전투 중에는 단축키를 지정할 수 없습니다."
 	L.bind_saved = "새로 지정한 모든 단축키가 저장되었습니다."
 	L.bind_discard = "새로 지정한 모든 단축키가 저장되지 않았습니다."
@@ -280,18 +309,6 @@ if D.client == "koKR" then
 	L.hunter_unhappy = "소환수의 만족도: 불만족"
 	L.hunter_content = "소환수의 만족도: 만족"
 	L.hunter_happy = "소환수의 만족도: 매우 만족"
-	
-	L.move_tooltip = "툴팁 이동"
-	L.move_minimap = "미니맵 이동"
-	L.move_watchframe = "퀘스트 이동"
-	L.move_gmframe = "대기표 이동"
-	L.move_buffs = "플레이어 버프 이동"
-	L.move_debuffs = "플레이어 디버프 이동"
-	L.move_shapeshift = "태세/토템 바 이동"
-	L.move_achievements = "업적창 이동"
-	L.move_roll = "주사위 창 이동"
-	L.move_vehicle = "탈것 창 이동"
-	L.move_extrabutton = "추가 버튼"
 	
 	-- tuto/install
 	L.install_header_1 = "환영합니다"

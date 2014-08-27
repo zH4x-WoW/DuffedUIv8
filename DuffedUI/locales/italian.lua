@@ -3,10 +3,49 @@
 local D, C, L = unpack(select(2, ...))
 
 if D.client == "itIT" then
-	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
-	L.AFKText_Text2 = "Middle click the minimap for micromenu"
-	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
-	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
+	L["move"] = {
+		["tooltip"] = "Move Tooltip",
+		["minimap"] = "Move Minimap",
+		["watchframe"] = "Move Quests",
+		["gmframe"] = "Move Ticket",
+		["buffs"] = "Move Player Buffs",
+		["debuffs"] = "Move Player Debuffs",
+		["shapeshift"] = "Move Shapeshift/Totem",
+		["achievements"] = "Move Achievements",
+		["roll"] = "Move Loot Roll Frame",
+		["vehicle"] = "Move Vehicle Seat",
+		["extrabutton"] = "Extra Button",
+		["bar1"] = "Move Bar 1",
+		["bar2"] = "Move Bar 2",
+		["bar5"] = "Move Bar5",
+		["bar5_1"] = "Move\nBar5",
+		["pet"] = "Move\nPet",
+		["player"] = "Move Playercastbar",
+		["target"] = "Move Targetcastbar",
+		["classbar"] = "Move Classbar",
+		["raid"] = "Move RaidUtility",
+		["rcd"] = "Move RaidCD",
+		["spell"] = "Move SpellCooldowns",
+	}
+
+	L["afk"] = {
+		["text4"] = "Mouseover minimap shows coords and locations",
+		["text4"] = "Middle click the minimap for micromenu",
+		["text4"] = "Right click the minimap for gatheringmenu",
+		["text4"] = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link.",
+	}
+
+	L["symbol"] = {
+		["clear"] = "Clear",
+		["skull"] = "Skull",
+		["cross"] = "Cross",
+		["square"] = "Square",
+		["moon"] = "Moon",
+		["triangle"] = "Triangle",
+		["diamond"] = "Diamond",
+		["circle"] = "Circle",
+		["star"] = "Star",
+	}
 
 	L.UI_Outdated = "La tua versione di DuffedUI non è aggiornata. Puoi scaricare l'ultima versione da www.duffed.net"
 	L.UI_Talent_Change_Bug = "Un bug della Blizzard sta impedendo il cambio dei talenti, questo succede quando si ispeziona qualcuno. Sfortunatamente non si può fare nulla per sistemare il problema, ricaricate la propria ui e riprovate."
@@ -255,34 +294,12 @@ if D.client == "itIT" then
 	L.core_uihelp11 = "|cffFF0000/ainv|r - Abilita autoinvito via parola su sussurro. Puoi settare la tua propia parola con `/ainv myword`"
 	L.core_uihelp100 = "(Scrolla su per maggiori comandi ...)"
 
-	L.symbol_CLEAR = "Pulisci"
-	L.symbol_SKULL = "Teschio"
-	L.symbol_CROSS = "Croce"
-	L.symbol_SQUARE = "Quadrato"
-	L.symbol_MOON = "Luna"
-	L.symbol_TRIANGLE = "Triangolo"
-	L.symbol_DIAMOND = "Diamante"
-	L.symbol_CIRCLE = "Cerchio"
-	L.symbol_STAR = "Stella"
-
 	L.bind_combat = "Non puoi associare tasti mentre sei in combattimento."
 	L.bind_saved = "Tutte le tue associazioni sono state salvate."
 	L.bind_discard = "Tutte le nuove associazioni sono state scartate."
 	L.bind_instruct = "Posiziona il puntatore del mouse su qualsiasi actionbutton per legarlo. Premere il tasto Esc o fare clic destro per cancellare le attuali associazioni."
 	L.bind_save = "Salva associazioni"
 	L.bind_discardbind = "Scarta associazioni"
-
-	L.move_tooltip = "Muovi Tooltip"
-	L.move_minimap = "Muovi Minimappa"
-	L.move_watchframe = "Muovi Quests"
-	L.move_gmframe = "Muovi Ticket"
-	L.move_buffs = "Muovi Player Buffs"
-	L.move_debuffs = "Muovi Player Debuffs"
-	L.move_shapeshift = "Muovi Shapeshift/Totem"
-	L.move_achievements = "Muovi Achievements"
-	L.move_roll = "Muovi Loot Roll Frame"
-	L.move_vehicle = "Muovi Vehicle Seat"
-	L.move_extrabutton = "Bottone Aggiuntivo"
 
 	-------------------------------------------------
 	-- INSTALLATION

@@ -491,7 +491,7 @@ scfa:SetBackdropColor(0, 0, 0)
 scfa:SetBackdropBorderColor(1, 0, 0)
 scfa.text = D.SetFontString(scfa, C["media"].font, 11)
 scfa.text:SetPoint("CENTER")
-scfa.text:SetText("Move SpellCooldowns")
+scfa.text:SetText(L["move"]["spell"])
 scfa:Hide()
 tinsert(D.AllowFrameMoving, SpellCooldownsFrameAnchor)
 

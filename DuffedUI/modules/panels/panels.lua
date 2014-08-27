@@ -60,7 +60,7 @@ if not C["actionbar"].enable ~= true then
 	DuffedUIBar1Mover:SetMovable(true)
 	DuffedUIBar1Mover.text = D.SetFontString(DuffedUIBar1Mover, C["media"].font, 11)
 	DuffedUIBar1Mover.text:SetPoint("CENTER")
-	DuffedUIBar1Mover.text:SetText("Move Bar1")
+	DuffedUIBar1Mover.text:SetText(L["move"]["bar1"])
 	DuffedUIBar1Mover:SetBackdropBorderColor(1, 0, 0, 1)
 	DuffedUIBar1Mover:Hide()
 	tinsert(D.AllowFrameMoving, DuffedUIBar1Mover)
@@ -110,7 +110,7 @@ if not C["actionbar"].enable ~= true then
 	DuffedUIBar5:SetMovable(true)
 	DuffedUIBar5.text = D.SetFontString(DuffedUIBar5, C["media"].font, 11)
 	DuffedUIBar5.text:SetPoint("CENTER")
-	if C["actionbar"].rightbarvertical then DuffedUIBar5.text:SetText("Move Bar5") else DuffedUIBar5.text:SetText("Move\nBar5") end
+	if C["actionbar"].rightbarvertical then DuffedUIBar5.text:SetText(L["move"]["bar5"]) else DuffedUIBar5.text:SetText(L["move"]["bar5_1"]) end
 	tinsert(D.AllowFrameMoving, DuffedUIBar5)
 
 	DuffedUIPetBarMover = CreateFrame("Frame", "DuffedUIPetBarMover", UIParent)
@@ -131,7 +131,7 @@ if not C["actionbar"].enable ~= true then
 	DuffedUIPetBarMover:SetMovable(true)
 	DuffedUIPetBarMover.text = D.SetFontString(DuffedUIPetBarMover, C["media"].font, 11)
 	DuffedUIPetBarMover.text:SetPoint("CENTER")
-	DuffedUIPetBarMover.text:SetText("Move\nPet")
+	DuffedUIPetBarMover.text:SetText(L["move"]["pet"])
 	DuffedUIPetBarMover:SetBackdropBorderColor(1, 0, 0, 1)
 	DuffedUIPetBarMover:Hide()
 	tinsert(D.AllowFrameMoving, DuffedUIPetBarMover)

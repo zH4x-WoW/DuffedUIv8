@@ -1,10 +1,49 @@
 -- localization for enUS and enGB
 local D, C, L = unpack(select(2, ...))
 
-L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
-L.AFKText_Text2 = "Middle click the minimap for micromenu"
-L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
-L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
+L["move"] = {
+	["tooltip"] = "Move Tooltip",
+	["minimap"] = "Move Minimap",
+	["watchframe"] = "Move Quests",
+	["gmframe"] = "Move Ticket",
+	["buffs"] = "Move Player Buffs",
+	["debuffs"] = "Move Player Debuffs",
+	["shapeshift"] = "Move Shapeshift/Totem",
+	["achievements"] = "Move Achievements",
+	["roll"] = "Move Loot Roll Frame",
+	["vehicle"] = "Move Vehicle Seat",
+	["extrabutton"] = "Extra Button",
+	["bar1"] = "Move Bar 1",
+	["bar2"] = "Move Bar 2",
+	["bar5"] = "Move Bar5",
+	["bar5_1"] = "Move\nBar5",
+	["pet"] = "Move\nPet",
+	["player"] = "Move Playercastbar",
+	["target"] = "Move Targetcastbar",
+	["classbar"] = "Move Classbar",
+	["raid"] = "Move RaidUtility",
+	["rcd"] = "Move RaidCD",
+	["spell"] = "Move SpellCooldowns",
+}
+
+L["afk"] = {
+	["text4"] = "Mouseover minimap shows coords and locations",
+	["text4"] = "Middle click the minimap for micromenu",
+	["text4"] = "Right click the minimap for gatheringmenu",
+	["text4"] = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link.",
+}
+
+L["symbol"] = {
+	["clear"] = "Clear",
+	["skull"] = "Skull",
+	["cross"] = "Cross",
+	["square"] = "Square",
+	["moon"] = "Moon",
+	["triangle"] = "Triangle",
+	["diamond"] = "Diamond",
+	["circle"] = "Circle",
+	["star"] = "Star",
+}
 
 L.UI_Outdated = "Your version of DuffedUI is out of date. You can download the latest version from www.duffed.net"
 L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
@@ -253,34 +292,12 @@ L.core_uihelp10 = "|cffFF0000/rd|r - Disband raid."
 L.core_uihelp11 = "|cffFF0000/ainv|r - Enable autoinvite via keyword on whisper. You can set your own keyword by typing `/ainv myword`"
 L.core_uihelp100 = "(Scroll up for more commands ...)"
 
-L.symbol_CLEAR = "Clear"
-L.symbol_SKULL = "Skull"
-L.symbol_CROSS = "Cross"
-L.symbol_SQUARE = "Square"
-L.symbol_MOON = "Moon"
-L.symbol_TRIANGLE = "Triangle"
-L.symbol_DIAMOND = "Diamond"
-L.symbol_CIRCLE = "Circle"
-L.symbol_STAR = "Star"
-
 L.bind_combat = "You can't bind keys in combat."
 L.bind_saved = "All keybindings have been saved."
 L.bind_discard = "All newly set keybindings have been discarded."
 L.bind_instruct = "Hover your mouse over any actionbutton to bind it. Press the escape key or right click to clear the current actionbuttons keybinding."
 L.bind_save = "Save bindings"
 L.bind_discardbind = "Discard bindings"
-
-L.move_tooltip = "Move Tooltip"
-L.move_minimap = "Move Minimap"
-L.move_watchframe = "Move Quests"
-L.move_gmframe = "Move Ticket"
-L.move_buffs = "Move Player Buffs"
-L.move_debuffs = "Move Player Debuffs"
-L.move_shapeshift = "Move Shapeshift/Totem"
-L.move_achievements = "Move Achievements"
-L.move_roll = "Move Loot Roll Frame"
-L.move_vehicle = "Move Vehicle Seat"
-L.move_extrabutton = "Extra Button"
 
 -------------------------------------------------
 -- INSTALLATION

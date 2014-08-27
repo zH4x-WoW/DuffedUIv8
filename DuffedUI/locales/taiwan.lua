@@ -1,10 +1,49 @@
 local D, C, L = unpack(select(2, ...))
 
 if D.client == "zhTW" then
-	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
-	L.AFKText_Text2 = "Middle click the minimap for micromenu"
-	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
-	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
+	L["move"] = {
+		["tooltip"] = "Move Tooltip",
+		["minimap"] = "Move Minimap",
+		["watchframe"] = "Move Quests",
+		["gmframe"] = "Move Ticket",
+		["buffs"] = "Move Player Buffs",
+		["debuffs"] = "Move Player Debuffs",
+		["shapeshift"] = "Move Shapeshift/Totem",
+		["achievements"] = "Move Achievements",
+		["roll"] = "Move Loot Roll Frame",
+		["vehicle"] = "Move Vehicle Seat",
+		["extrabutton"] = "Extra Button",
+		["bar1"] = "Move Bar 1",
+		["bar2"] = "Move Bar 2",
+		["bar5"] = "Move Bar5",
+		["bar5_1"] = "Move\nBar5",
+		["pet"] = "Move\nPet",
+		["player"] = "Move Playercastbar",
+		["target"] = "Move Targetcastbar",
+		["classbar"] = "Move Classbar",
+		["raid"] = "Move RaidUtility",
+		["rcd"] = "Move RaidCD",
+		["spell"] = "Move SpellCooldowns",
+	}
+
+	L["afk"] = {
+		["text4"] = "Mouseover minimap shows coords and locations",
+		["text4"] = "Middle click the minimap for micromenu",
+		["text4"] = "Right click the minimap for gatheringmenu",
+		["text4"] = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link.",
+	}
+
+	L["symbol"] = {
+		["clear"] = "Clear",
+		["skull"] = "Skull",
+		["cross"] = "Cross",
+		["square"] = "Square",
+		["moon"] = "Moon",
+		["triangle"] = "Triangle",
+		["diamond"] = "Diamond",
+		["circle"] = "Circle",
+		["star"] = "Star",
+	}
 
 	L.UI_Outdated = "DuffedUI 版本已過期，請至 www.duffed.net 下載最新版"
 	L.UI_Talent_Change_Bug = "一個由暴雪產生的故障已阻止你改變你當前的天賦,這發生在你使用觀察功能查看其他玩家角色裝備時.不幸的是在這個魔獸補丁中我們對修正它無能為力,請/reload你的Ui程式介面並且再次嘗試."
@@ -254,16 +293,6 @@ if D.client == "zhTW" then
 	L.core_uihelp11 = "|cffFF0000/ainv|r - 啟用密語自動邀請, 您可以設定輸入`/ainv myword`以設置您的密語關鍵字"
 	L.core_uihelp100 = "(想看更多? 向上拉吧! ...)"
  
-	L.symbol_CLEAR = "清除"
-	L.symbol_SKULL = "頭顱"
-	L.symbol_CROSS = "十字"
-	L.symbol_SQUARE = "方形"
-	L.symbol_MOON = "月亮"
-	L.symbol_TRIANGLE = "三角"
-	L.symbol_DIAMOND = "鑽石"
-	L.symbol_CIRCLE = "圈圈"
-	L.symbol_STAR = "星星"
- 
 	L.bind_combat = "您不能在戰鬥中設定快捷鍵"
 	L.bind_saved = "所有快捷鍵修改已儲存"
 	L.bind_discard = "這次的快捷鍵修改已重設為上一次修改"
@@ -274,18 +303,6 @@ if D.client == "zhTW" then
 	L.hunter_unhappy = "你的寵物感到不高興!"
 	L.hunter_content = "你的寵物感到滿足!"
 	L.hunter_happy = "你的寵物感到高興!"
-	
-	L.move_tooltip = "移動指示資訊"
-	L.move_minimap = "移動小地圖"
-	L.move_watchframe = "移動任務追蹤框架"
-	L.move_gmframe = "移動GM回報單及幫助介面"
-	L.move_buffs = "移動玩家Buff介面"
-	L.move_debuffs = "移動玩家Debuff介面"
-	L.move_shapeshift = "移動變形或圖騰列"
-	L.move_achievements = "移動成就介面"
-	L.move_roll = "移動Roll戰利品的介面"
-	L.move_vehicle = "移動載具坐位介面"
-	L.move_extrabutton = "額外的按鈕"
 	
 	-- tuto/install
 	L.install_header_1 = "歡迎"

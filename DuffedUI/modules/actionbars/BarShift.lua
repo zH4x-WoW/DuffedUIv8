@@ -17,7 +17,7 @@ ssmover:SetBackdropBorderColor(1, 0, 0)
 ssmover:SetAlpha(0)
 ssmover.text = D.SetFontString(ssmover, C["media"].font, 11)
 ssmover.text:SetPoint("CENTER")
-ssmover.text:SetText(L.move_shapeshift)
+ssmover.text:SetText(L["move"]["shapeshift"])
 tinsert(D.AllowFrameMoving, DuffedUIStance)
 
 local States = {

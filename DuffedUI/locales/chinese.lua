@@ -1,10 +1,49 @@
 local D, C, L = unpack(select(2, ...))
 
 if D.client == "zhCN" then
-	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
-	L.AFKText_Text2 = "Middle click the minimap for micromenu"
-	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
-	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
+	L["move"] = {
+		["tooltip"] = "Move Tooltip",
+		["minimap"] = "Move Minimap",
+		["watchframe"] = "Move Quests",
+		["gmframe"] = "Move Ticket",
+		["buffs"] = "Move Player Buffs",
+		["debuffs"] = "Move Player Debuffs",
+		["shapeshift"] = "Move Shapeshift/Totem",
+		["achievements"] = "Move Achievements",
+		["roll"] = "Move Loot Roll Frame",
+		["vehicle"] = "Move Vehicle Seat",
+		["extrabutton"] = "Extra Button",
+		["bar1"] = "Move Bar 1",
+		["bar2"] = "Move Bar 2",
+		["bar5"] = "Move Bar5",
+		["bar5_1"] = "Move\nBar5",
+		["pet"] = "Move\nPet",
+		["player"] = "Move Playercastbar",
+		["target"] = "Move Targetcastbar",
+		["classbar"] = "Move Classbar",
+		["raid"] = "Move RaidUtility",
+		["rcd"] = "Move RaidCD",
+		["spell"] = "Move SpellCooldowns",
+	}
+
+	L["afk"] = {
+		["text4"] = "Mouseover minimap shows coords and locations",
+		["text4"] = "Middle click the minimap for micromenu",
+		["text4"] = "Right click the minimap for gatheringmenu",
+		["text4"] = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link.",
+	}
+
+	L["symbol"] = {
+		["clear"] = "Clear",
+		["skull"] = "Skull",
+		["cross"] = "Cross",
+		["square"] = "Square",
+		["moon"] = "Moon",
+		["triangle"] = "Triangle",
+		["diamond"] = "Diamond",
+		["circle"] = "Circle",
+		["star"] = "Star",
+	}
 
 	L.UI_Outdated = "DuffedUI 版本已过期，请至 www.duffed.net 下载最新版"
 	L.UI_Talent_Change_Bug = "一个由暴雪产生的故障已阻止你改变你当前的天赋,这发生在你使用观察功能查看其他玩家角色装备时.不幸的是在这个魔兽补丁中我们对修正它无能为力,请/reload你的插件界面并且再次尝试."
@@ -253,16 +292,6 @@ if D.client == "zhCN" then
 	L.core_uihelp11 = "|cffFF0000/ainv|r - 通过M语关键词启用自动邀请。你可以通过在聊天框输入“/ainv 你的关键词”来设置你自己的关键词。"
 	L.core_uihelp100 = "（向下滚动以获取更多的指令。）"
 
-	L.symbol_CLEAR = "取消标记"
-	L.symbol_SKULL = "骷髅"
-	L.symbol_CROSS = "十字"
-	L.symbol_SQUARE = "方形"
-	L.symbol_MOON = "月亮"
-	L.symbol_TRIANGLE = "三角形"
-	L.symbol_DIAMOND = "钻石"
-	L.symbol_CIRCLE = "大饼"
-	L.symbol_STAR = "星星"
-
 	L.bind_combat = "您不能在战斗中绑定快捷键。"
 	L.bind_saved = "所有绑定的快捷键已经被保存。"
 	L.bind_discard = "所有新设定的快捷键已经呗取消。"
@@ -273,17 +302,6 @@ if D.client == "zhCN" then
 	L.hunter_unhappy = "你的宠物感到不高兴了！"
 	L.hunter_content = "你的宠物感到很满足！"
 	L.hunter_happy = "你的宠物很开心"
-
-	L.move_tooltip = "移动鼠标提示"
-	L.move_minimap = "移动小地图"
-	L.move_watchframe = "移动任务追踪"
-	L.move_gmframe = "移动G M对话框"
-	L.move_buffs = "移动玩家增益效果"
-	L.move_debuffs = "移动玩家减益效果"
-	L.move_shapeshift = "移动姿态或图腾条"
-	L.move_achievements = "移动成就框体"
-	L.move_roll = "移动拾取R点框体"
-	L.move_vehicle = "移动载具界面"
 
 	-------------------------------------------------
 	-- INSTALLATION

@@ -9,7 +9,7 @@ DuffedUIMinimap:SetClampedToScreen(true)
 DuffedUIMinimap:SetMovable(true)
 DuffedUIMinimap.text = D.SetFontString(DuffedUIMinimap, C["media"].font, 11)
 DuffedUIMinimap.text:SetPoint("CENTER")
-DuffedUIMinimap.text:SetText(L.move_minimap)
+DuffedUIMinimap.text:SetText(L["move"]["minimap"])
 tinsert(D.AllowFrameMoving, DuffedUIMinimap)
 
 MinimapCluster:Kill()

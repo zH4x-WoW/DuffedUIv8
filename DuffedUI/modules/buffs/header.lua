@@ -31,7 +31,7 @@ for _, frame in next, {
 		header.backdrop:SetBackdropBorderColor(1, 0, 0)
 		header.backdrop:FontString("text", C["media"].font, 11)
 		header.backdrop.text:SetPoint("CENTER")
-		header.backdrop.text:SetText(L.move_buffs)
+		header.backdrop.text:SetText(L["move"]["buffs"])
 		header.backdrop:SetAlpha(0)
 	end
 	header:SetAttribute("minWidth", wrap * 35)

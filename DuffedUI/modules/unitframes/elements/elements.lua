@@ -15,7 +15,7 @@ cba:SetBackdropColor(0, 0, 0)
 cba:SetBackdropBorderColor(1, 0, 0)
 cba.text = D.SetFontString(cba, font, fontsize)
 cba.text:SetPoint("CENTER")
-cba.text:SetText("Move Classbar")
+cba.text:SetText(L["move"]["classbar"])
 cba:Hide()
 tinsert(D.AllowFrameMoving, CBAnchor)
 

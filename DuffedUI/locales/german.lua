@@ -1,10 +1,49 @@
 local D, C, L = unpack(select(2, ...))
 
 if D.client == "deDE" then
-	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
-	L.AFKText_Text2 = "Middle click the minimap for micromenu"
-	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
-	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
+	L["move"] = {
+		["tooltip"] = "Move Tooltip",
+		["minimap"] = "Move Minimap",
+		["watchframe"] = "Move Quests",
+		["gmframe"] = "Move Ticket",
+		["buffs"] = "Move Player Buffs",
+		["debuffs"] = "Move Player Debuffs",
+		["shapeshift"] = "Move Shapeshift/Totem",
+		["achievements"] = "Move Achievements",
+		["roll"] = "Move Loot Roll Frame",
+		["vehicle"] = "Move Vehicle Seat",
+		["extrabutton"] = "Extra Button",
+		["bar1"] = "Move Bar 1",
+		["bar2"] = "Move Bar 2",
+		["bar5"] = "Move Bar5",
+		["bar5_1"] = "Move\nBar5",
+		["pet"] = "Move\nPet",
+		["player"] = "Move Playercastbar",
+		["target"] = "Move Targetcastbar",
+		["classbar"] = "Move Classbar",
+		["raid"] = "Move RaidUtility",
+		["rcd"] = "Move RaidCD",
+		["spell"] = "Move SpellCooldowns",
+	}
+
+	L["afk"] = {
+		["text4"] = "Mouseover minimap shows coords and locations",
+		["text4"] = "Middle click the minimap for micromenu",
+		["text4"] = "Right click the minimap for gatheringmenu",
+		["text4"] = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link.",
+	}
+
+	L["symbol"] = {
+		["clear"] = "Clear",
+		["skull"] = "Skull",
+		["cross"] = "Cross",
+		["square"] = "Square",
+		["moon"] = "Moon",
+		["triangle"] = "Triangle",
+		["diamond"] = "Diamond",
+		["circle"] = "Circle",
+		["star"] = "Star",
+	}
 
 	L.UI_Outdated = "Deine Version von DuffedUI ist veraltet. Du kannst die aktuelle Version von www.duffed.net laden"
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
@@ -253,16 +292,6 @@ if D.client == "deDE" then
 	L.core_uihelp11 = "|cffFF0000/ainv|r - Automatische Gruppeneinladung beim Anflüstern mit Schlüsselwort aktivieren. Du kannst dein eigenes Schlüsselwort mit `/ainv myword` einstellen"
 	L.core_uihelp100 = "(Hochscrollen wenn du mehr Befehle sehen willst ...)"
  
-	L.symbol_CLEAR = "Entfernen" 
-	L.symbol_SKULL = "Totenschädel"
-	L.symbol_CROSS = "Kreuz"
-	L.symbol_SQUARE = "Quadrat"
-	L.symbol_MOON = "Mond"
-	L.symbol_TRIANGLE = "Dreieck"
-	L.symbol_DIAMOND = "Diamant"
-	L.symbol_CIRCLE = "Kreis"
-	L.symbol_STAR = "Stern"
- 
 	L.bind_combat = "Du kannst keine Tasten im Kampf belegen."
 	L.bind_saved = "Alle Tastenbelegungen wurden gespeichert."
 	L.bind_discard = "Alle gerade neu belegten Tastenbelegungen wurden verworfen."
@@ -273,18 +302,6 @@ if D.client == "deDE" then
 	L.hunter_unhappy = "Dein Begleiter ist unzufrieden!"
 	L.hunter_content = "Dein Begleiter ist zufrieden!"
 	L.hunter_happy = "Dein Begleiter ist glücklich!"
-	
-	L.move_tooltip = "Tooltip bewegen"
-	L.move_minimap = "Minimap bewegen"
-	L.move_watchframe = "Quests bewegen"
-	L.move_gmframe = "Ticket bewegen"
-	L.move_buffs = "Spieler Stärkungszauber bewegen"
-	L.move_debuffs = "Spieler Schwächungszauber bewegen"
-	L.move_shapeshift = "Haltungs-/Totemleiste bewegen"
-	L.move_achievements = "Erfolgsfenster bewegen"
-	L.move_roll = "Würfelfenster bewegen"
-	L.move_vehicle = "Fahrzeugausstieg bewegen"
-	L.move_extrabutton = "Extra Button"
 	
 	-- tuto/install
 	L.install_header_1 = "Willkommen"

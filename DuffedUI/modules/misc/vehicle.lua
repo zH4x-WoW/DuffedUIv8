@@ -13,7 +13,7 @@ anchor:SetBackdropBorderColor(1, 0, 0)
 anchor:SetAlpha(0)
 anchor.text = D.SetFontString(anchor, C["media"].font, 11)
 anchor.text:SetPoint("CENTER")
-anchor.text:SetText(L.move_vehicle)
+anchor.text:SetText(L["move"]["vehicle"])
 tinsert(D.AllowFrameMoving, DuffedUIVehicleAnchor)
 
 hooksecurefunc(VehicleSeatIndicator,"SetPoint",function(_,_,parent) -- vehicle seat indicator

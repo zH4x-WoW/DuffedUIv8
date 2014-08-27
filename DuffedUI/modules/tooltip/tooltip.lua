@@ -56,7 +56,7 @@ Anchor:SetBackdropBorderColor(1, 0, 0, 1)
 Anchor:SetMovable(true)
 Anchor.text = D.SetFontString(Anchor, C["media"].font, 11)
 Anchor.text:SetPoint("CENTER")
-Anchor.text:SetText(L.move_tooltip)
+Anchor.text:SetText(L["move"]["tooltip"])
 tinsert(D.AllowFrameMoving, DuffedUITooltipAnchor)
 
 function DuffedUITooltips:SetTooltipDefaultAnchor()

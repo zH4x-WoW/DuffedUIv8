@@ -11,7 +11,7 @@ AchievementHolder:SetMovable(true)
 AchievementHolder:SetAlpha(0)
 AchievementHolder.text = D.SetFontString(AchievementHolder, C["media"].font, 11)
 AchievementHolder.text:SetPoint("CENTER")
-AchievementHolder.text:SetText(L.move_achievements)
+AchievementHolder.text:SetText(L["move"]["achievements"])
 tinsert(D.AllowFrameMoving, DuffedUIAchievementHolder)
 
 AlertFrame:SetParent(AchievementHolder)

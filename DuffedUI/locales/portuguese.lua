@@ -2,10 +2,49 @@
 local D, C, L = unpack(select(2, ...))
 
 if D.client == "ptBR" then
-	L.AFKText_Text1 = "Mouseover minimap shows coords and locations"
-	L.AFKText_Text2 = "Middle click the minimap for micromenu"
-	L.AFKText_Text3 = "Right click the minimap for gatheringmenu"
-	L.AFKText_Text4 = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link."
+	L["move"] = {
+		["tooltip"] = "Move Tooltip",
+		["minimap"] = "Move Minimap",
+		["watchframe"] = "Move Quests",
+		["gmframe"] = "Move Ticket",
+		["buffs"] = "Move Player Buffs",
+		["debuffs"] = "Move Player Debuffs",
+		["shapeshift"] = "Move Shapeshift/Totem",
+		["achievements"] = "Move Achievements",
+		["roll"] = "Move Loot Roll Frame",
+		["vehicle"] = "Move Vehicle Seat",
+		["extrabutton"] = "Extra Button",
+		["bar1"] = "Move Bar 1",
+		["bar2"] = "Move Bar 2",
+		["bar5"] = "Move Bar5",
+		["bar5_1"] = "Move\nBar5",
+		["pet"] = "Move\nPet",
+		["player"] = "Move Playercastbar",
+		["target"] = "Move Targetcastbar",
+		["classbar"] = "Move Classbar",
+		["raid"] = "Move RaidUtility",
+		["rcd"] = "Move RaidCD",
+		["spell"] = "Move SpellCooldowns",
+	}
+
+	L["afk"] = {
+		["text4"] = "Mouseover minimap shows coords and locations",
+		["text4"] = "Middle click the minimap for micromenu",
+		["text4"] = "Right click the minimap for gatheringmenu",
+		["text4"] = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link.",
+	}
+
+	L["symbol"] = {
+		["clear"] = "Clear",
+		["skull"] = "Skull",
+		["cross"] = "Cross",
+		["square"] = "Square",
+		["moon"] = "Moon",
+		["triangle"] = "Triangle",
+		["diamond"] = "Diamond",
+		["circle"] = "Circle",
+		["star"] = "Star",
+	}
 
 	L.UI_Outdated = "A sua versão da DuffedUI está desactualizada. Pode baixar a versão mais recente no site www.duffed.net"
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
@@ -254,16 +293,6 @@ if D.client == "ptBR" then
 	L.core_uihelp11 = "|cffFF0000/ainv|r - Activa o convite automático via palavra chave por sussurro. voce pode defenir a sua própria palavra chave escrevendo `/ainv myword`"
 	L.core_uihelp100 = "(Scroll para cima para mais comandos ...)"
 
-	L.symbol_CLEAR = "Limpar"
-	L.symbol_SKULL = "Caveira"
-	L.symbol_CROSS = "Cruz"
-	L.symbol_SQUARE = "Quadrado"
-	L.symbol_MOON = "Lua"
-	L.symbol_TRIANGLE = "Triangulo"
-	L.symbol_DIAMOND = "Diamante"
-	L.symbol_CIRCLE = "Circulo"
-	L.symbol_STAR = "Estrela"
-
 	L.bind_combat = "Você não pode fazer ligações em combate"
 	L.bind_saved = "Todas as Ligações foram salvas."
 	L.bind_discard = "Todas as novas Ligações foram descartadas."
@@ -274,18 +303,6 @@ if D.client == "ptBR" then
 	L.hunter_unhappy = "O seu ajudante está triste!"
 	L.hunter_content = "O seu ajudante está contente!"
 	L.hunter_happy = "O seu ajudante está feliz!"
-
-	L.move_tooltip = "Mover a Tooltip"
-	L.move_minimap = "Mover o Minimapa"
-	L.move_watchframe = "Mover as Missões"
-	L.move_gmframe = "Mover o quadro do bilhete ao GM"
-	L.move_buffs = "Mover os buffs do jogador"
-	L.move_debuffs = "Mover os debuffs do jogador"
-	L.move_shapeshift = "Mover a barra de Mudança de Forma/Totems"
-	L.move_achievements = "Mover o quadro das Conquistas"
-	L.move_roll = "Mover o quadro de Roll do Saque"
-	L.move_vehicle = "Mover o quadro do Veiculo"
-	L.move_extrabutton = "Botão Extra"
 
 	-------------------------------------------------
 	-- INSTALLATION
