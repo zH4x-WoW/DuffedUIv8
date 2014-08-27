@@ -1,8 +1,4 @@
 local D, C, L = unpack(select(2, ...)) 
------------------------------------------------------------------------------
--- Copy on chatframes feature
------------------------------------------------------------------------------
-
 if C["chat"].enable ~= true then return end
 
 local lines = {}
@@ -33,14 +29,12 @@ local function CreateCopyFrame()
 	editBox:Width((DuffedUIBar1:GetWidth() * 2) + 20)
 	editBox:Height(250)
 	editBox:SetScript("OnEscapePressed", function() frame:Hide() end)
-
 	scrollArea:SetScrollChild(editBox)
 
 	local close = CreateFrame("Button", "CopyCloseButton", frame, "UIPanelCloseButton")
 	close:SetPoint("TOPRIGHT", frame, "TOPRIGHT")
 	close:SkinCloseButton()
 	DuffedUIChatCopyScrollScrollBar:SkinScrollBar()
-
 	isf = true
 end
 
@@ -71,32 +65,39 @@ end
 for i = 1, NUM_CHAT_WINDOWS do
 	local cf = _G[format("ChatFrame%d",  i)]
 	local button = CreateFrame("Button", format("DuffedUIButtonCF%d", i), cf)
-	if C["chat"].lbackground and C["chat"].rbackground then button:SetPoint("TOPRIGHT", 5, 25) else button:SetPoint("TOPRIGHT", 0, 0) end
 	button:Height(20)
 	button:Width(20)
 	button:SetNormalTexture(C["media"].copyicon)
-	if C["chat"].lbackground and C["chat"].rbackground then button:SetAlpha(1) else button:SetAlpha(0) end
 	button:SetTemplate("Default")
 
-	button:SetScript("OnMouseUp", function(self)
-		Copy(cf)
-	end)
-	if not C["chat"].lbackground and C["chat"].rbackground then
-		button:SetScript("OnEnter", function() 
-			button:SetAlpha(1) 
-		end)
-		button:SetScript("OnLeave", function() button:SetAlpha(0) end)
-	end
+	button:SetScript("OnMouseUp", function(self) Copy(cf) end)
 end
 
--- little fix for RealID text copy/paste (real name bug)
+if C["chat"].lbackground then
+	DuffedUIButtonCF1:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
+	DuffedUIButtonCF2:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
+	DuffedUIButtonCF3:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
+else
+	DuffedUIButtonCF1:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
+	DuffedUIButtonCF2:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
+	DuffedUIButtonCF3:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
+end
+
+if C["chat"].rbackground then
+	DuffedUIButtonCF4:SetPoint("TOPRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", -4, -4)
+else
+	DuffedUIButtonCF4:SetPoint("TOPRIGHT", ChatFrame4, "TOPRIGHT", -4, 20)
+	DuffedUIButtonCF4:SetAlpha(0)
+	DuffedUIButtonCF4:SetScript("OnEnter", function() DuffedUIButtonCF4:SetAlpha(1) end)
+	DuffedUIButtonCF4:SetScript("OnLeave", function() DuffedUIButtonCF4:SetAlpha(0) end)
+end
+
 for i=1, NUM_CHAT_WINDOWS do
 	local editbox = _G["ChatFrame"..i.."EditBox"]
 	editbox:HookScript("OnTextChanged", function(self)
 		local text = self:GetText()
-		
 		local new, found = gsub(text, "|Kf(%S+)|k(%S+)%s(%S+)k:%s", "%2 %3: ")
-		
+
 		if found > 0 then
 			new = new:gsub('|', '')
 			self:SetText(new)

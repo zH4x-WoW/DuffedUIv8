@@ -79,9 +79,6 @@ if not C["actionbar"].enable ~= true then
 	DuffedUIBar2:SetFrameLevel(3)
 	DuffedUIBar2:SetClampedToScreen(true)
 	DuffedUIBar2:SetMovable(true)
-	DuffedUIBar2.text = D.SetFontString(DuffedUIBar2, C["media"].font, 11)
-	DuffedUIBar2.text:SetPoint("CENTER")
-	DuffedUIBar2.text:SetText("Move Bar2")
 	tinsert(D.AllowFrameMoving, DuffedUIBar2)
 
 	local DuffedUIBar3 = CreateFrame("Frame", "DuffedUIBar3", UIParent, "SecureHandlerStateTemplate")
@@ -147,7 +144,7 @@ end
 local chatmenu = CreateFrame("Frame", "DuffedUIChatMenu", UIParent)
 chatmenu:SetTemplate("Default")
 chatmenu:Size(20)
-if C["chat"].lbackground then chatmenu:Point("LEFT", DuffedUITabsLeftBackground, "RIGHT", 2, 0) else chatmenu:Point("TOPLEFT", ChatFrame1, "TOPLEFT", 2, 0) end
+if C["chat"].lbackground then chatmenu:Point("LEFT", DuffedUITabsLeftBackground, "RIGHT", 2, 0) else chatmenu:Point("TOPRIGHT", ChatFrame1, "TOPRIGHT", -11, 25) end
 chatmenu:SetFrameLevel(3)
 chatmenu.text = D.SetFontString(chatmenu, C["media"].font, 11, "THINOUTLINE")
 chatmenu.text:SetPoint("CENTER", 1, -1)

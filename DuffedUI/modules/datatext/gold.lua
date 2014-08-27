@@ -226,6 +226,8 @@ Stat:SetScript("OnEnter", function(self)
 	end
 
 	GameTooltip:AddLine(" ")
+	GameTooltip:AddLine("|cffC41F3BBags: Left Click|r")
+	GameTooltip:AddLine("|cffC41F3BCurrency Menu: Right Click|r")
 	GameTooltip:AddLine("|cffC41F3BReset Data: Hold Shift + Right Click|r")
 
 	GameTooltip:Show()
@@ -311,6 +313,8 @@ Stat:SetScript("OnMouseDown", function(self, btn)
 		DuffedUIData.gold = {}
 		DuffedUIData.gold[myPlayerRealm] = {}
 		DuffedUIData.gold[myPlayerRealm][myPlayerName] = GetMoney()
+	elseif btn == "LeftButton" then
+		ToggleAllBags()
 	else
 		EasyMenu(RightClickMenu, DuffedUIImprovedCurrencyDropDown, "cursor", 0, 0, "MENU", 2)
 	end

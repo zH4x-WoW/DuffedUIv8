@@ -8,8 +8,11 @@ local function exec(self, enable)
 	end
 
 	if self == DuffedUIBar2 then
-		if enable then 
+		if enable then
 			MultiBarBottomLeft:Hide()
+			self.text = D.SetFontString(DuffedUIBar2, C["media"].font, 11)
+			self.text:SetPoint("CENTER")
+			self.text:SetText("Move Bar2")
 			self:SetBackdropBorderColor(1, 0, 0, 1)
 		else 
 			MultiBarBottomLeft:Show()
