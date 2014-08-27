@@ -3,12 +3,8 @@ local D, C, L = unpack(select(2, ...))
 D.AllowFrameMoving = {}
 
 local function exec(self, enable)
-	if self == DuffedUIPetBarMover or self == DuffedUIBar1Mover or self == DuffedUIGMFrameAnchor or self == CBAnchor or self == PCBanchor or self == TCBanchor or self == FCBanchor or self == RCDAnchor or self == DebuffAnchor or self == SpellCooldownsFrameAnchor or self == DuffedUIBnetHolder or self == dRunesAnchorFrame or self == sCombosAnchor then
-		if enable then
-			self:Show()
-		else
-			self:Hide()
-		end
+	if self == DuffedUIPetBarMover or self == DuffedUIBar1Mover or self == DuffedUIGMFrameAnchor or self == CBAnchor or self == PCBanchor or self == TCBanchor or self == FCBanchor or self == RCDAnchor or self == DebuffAnchor or self == SpellCooldownsFrameAnchor or self == DuffedUIBnetHolder then
+		if enable then self:Show() else self:Hide() end
 	end
 
 	if self == DuffedUIBar2 then
@@ -43,89 +39,38 @@ local function exec(self, enable)
 
 	if self == DuffedUIAurasPlayerBuffs then
 		local buffs = DuffedUIAurasPlayerBuffs
-		
+
 		if enable then
 			buffs.backdrop:SetAlpha(1)
 		else
 			local position = self:GetPoint()
-			if position:match("TOPLEFT") or position:match("BOTTOMLEFT") or position:match("BOTTOMRIGHT") or position:match("TOPRIGHT") then
-				buffs:SetAttribute("point", position)
-			end
-			if position:match("LEFT") then
-				buffs:SetAttribute("xOffset", 35)
-			else
-				buffs:SetAttribute("xOffset", -35)
-			end
-			if position:match("BOTTOM") then
-				buffs:SetAttribute("wrapYOffset", 67.5)
-			else
-				buffs:SetAttribute("wrapYOffset", -67.5)
-			end
+			if position:match("TOPLEFT") or position:match("BOTTOMLEFT") or position:match("BOTTOMRIGHT") or position:match("TOPRIGHT") then buffs:SetAttribute("point", position) end 
+			if position:match("LEFT") then buffs:SetAttribute("xOffset", 35) else buffs:SetAttribute("xOffset", -35) end
+			if position:match("BOTTOM") then buffs:SetAttribute("wrapYOffset", 67.5) else buffs:SetAttribute("wrapYOffset", -67.5) end
 			buffs.backdrop:SetAlpha(0)
 		end
 	end
-	
+
 	if self == DuffedUIAurasPlayerDebuffs then
 		local debuffs = DuffedUIAurasPlayerDebuffs
-		
+
 		if enable then
 			debuffs.backdrop:SetAlpha(1)
 		else
 			local position = self:GetPoint()
-			if position:match("TOPLEFT") or position:match("BOTTOMLEFT") or position:match("BOTTOMRIGHT") or position:match("TOPRIGHT") then
-				debuffs:SetAttribute("point", position)
-			end
-			if position:match("LEFT") then
-				debuffs:SetAttribute("xOffset", 35)
-			else
-				debuffs:SetAttribute("xOffset", -35)
-			end
-			if position:match("BOTTOM") then
-				debuffs:SetAttribute("wrapYOffset", 67.5)
-			else
-				debuffs:SetAttribute("wrapYOffset", -67.5)
-			end
+			if position:match("TOPLEFT") or position:match("BOTTOMLEFT") or position:match("BOTTOMRIGHT") or position:match("TOPRIGHT") then debuffs:SetAttribute("point", position) end
+			if position:match("LEFT") then debuffs:SetAttribute("xOffset", 35) else debuffs:SetAttribute("xOffset", -35) end
+			if position:match("BOTTOM") then debuffs:SetAttribute("wrapYOffset", 67.5) else debuffs:SetAttribute("wrapYOffset", -67.5) end
 			debuffs.backdrop:SetAlpha(0)
 		end
 	end
-	
-	if self == DuffedUITooltipAnchor or self == DuffedUIRollAnchor or self == DuffedUIAchievementHolder or self == DuffedUIVehicleAnchor then
-		if enable then
-			self:SetAlpha(1)
-		else
-			self:SetAlpha(0)
-			if self == DuffedUITooltipAnchor then 
-				local position = DuffedUITooltipAnchor:GetPoint()
-				local healthBar = GameTooltipStatusBar
-				if position:match("TOP") then
-					healthBar:ClearAllPoints()
-					healthBar:Point("TOPLEFT", healthBar:GetParent(), "BOTTOMLEFT", 2, -5)
-					healthBar:Point("TOPRIGHT", healthBar:GetParent(), "BOTTOMRIGHT", -2, -5)
-					if healthBar.text then healthBar.text:Point("CENTER", healthBar, 0, -6) end
-				else
-					healthBar:ClearAllPoints()
-					healthBar:Point("BOTTOMLEFT", healthBar:GetParent(), "TOPLEFT", 2, 5)
-					healthBar:Point("BOTTOMRIGHT", healthBar:GetParent(), "TOPRIGHT", -2, 5)
-					if healthBar.text then healthBar.text:Point("CENTER", healthBar, 0, 6) end			
-				end
-			end
-		end		
+
+	if self == DuffedUITooltipAnchor or self == DuffedUIRollAnchor or self == DuffedUIAchievementHolder or self == DuffedUIVehicleAnchor or self == DuffedUIWatchFrameAnchor or self == DuffedUIExtraActionBarFrameHolder then
+		if enable then self:SetAlpha(1) else self:SetAlpha(0) end
 	end
-	
-	if self == DuffedUIWatchFrameAnchor or self == DuffedUIExtraActionBarFrameHolder then
-		if enable then
-			self:SetAlpha(1)
-		else
-			self:SetAlpha(0)
-		end
-	end
-	
+
 	if self == DuffedUIStance then
-		if enable then
-			DuffedUIStanceHolder:SetAlpha(1)
-		else
-			DuffedUIStanceHolder:SetAlpha(0)
-		end
+		if enable then DuffedUIStanceHolder:SetAlpha(1) else DuffedUIStanceHolder:SetAlpha(0) end
 	end
 end
 
@@ -179,9 +124,9 @@ D.MoveUIElements = function()
 	if DuffedUIRaidUtilityAnchor then
 		if DuffedUIRaidUtilityAnchor:IsShown() then DuffedUIRaidUtilityAnchor:Hide() else DuffedUIRaidUtilityAnchor:Show() end
 	end
-	
+
 	for i = 1, getn(D.AllowFrameMoving) do
-		if D.AllowFrameMoving[i] then		
+		if D.AllowFrameMoving[i] then
 			if enable then
 				D.AllowFrameMoving[i]:EnableMouse(true)
 				D.AllowFrameMoving[i]:RegisterForDrag("LeftButton", "RightButton")
@@ -190,16 +135,14 @@ D.MoveUIElements = function()
 					self.moving = true 
 					self:SetUserPlaced(true) 
 					self:StartMoving() 
-				end)			
+				end)
 				D.AllowFrameMoving[i]:SetScript("OnDragStop", function(self) 
 					self.moving = false 
 					self:StopMovingOrSizing() 
-				end)			
+				end)
 				exec(D.AllowFrameMoving[i], enable)
-				if D.AllowFrameMoving[i].text then 
-					D.AllowFrameMoving[i].text:Show() 
-				end
-			else			
+				if D.AllowFrameMoving[i].text then D.AllowFrameMoving[i].text:Show() end
+			else
 				D.AllowFrameMoving[i]:EnableMouse(false)
 				if D.AllowFrameMoving[i].moving == true then
 					D.AllowFrameMoving[i]:StopMovingOrSizing()
@@ -212,7 +155,7 @@ D.MoveUIElements = function()
 			end
 		end
 	end
-	
+
 	if enable then 
 		enable = false
 		gridsize()
@@ -225,12 +168,9 @@ SLASH_MOVING1 = "/mduffedui"
 SLASH_MOVING2 = "/moveui"
 SlashCmdList["MOVING"] = function()
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
-	
+
 	D.MoveUIElements()
-	
-	if D.MoveUnitFrames then
-		D.MoveUnitFrames()
-	end
+	if D.MoveUnitFrames then D.MoveUnitFrames() end
 end
 
 local protection = CreateFrame("Frame")

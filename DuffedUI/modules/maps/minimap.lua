@@ -70,7 +70,7 @@ QueueStatusMinimapButton:ClearAllPoints()
 QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", 0, 0)
 QueueStatusMinimapButtonBorder:Kill()
 QueueStatusFrame:StripTextures()
-QueueStatusFrame:SetTemplate("Default")
+QueueStatusFrame:SetTemplate("Transparent")
 QueueStatusFrame:SetFrameStrata("HIGH")
 
 local function UpdateLFGTooltip()
