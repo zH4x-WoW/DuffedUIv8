@@ -90,19 +90,13 @@ QueueStatusFrame:HookScript("OnShow", UpdateLFGTooltip)
 
 Minimap:EnableMouseWheel(true)
 Minimap:SetScript("OnMouseWheel", function(self, d)
-	if d > 0 then
-		_G.MinimapZoomIn:Click()
-	elseif d < 0 then
-		_G.MinimapZoomOut:Click()
-	end
+	if d > 0 then _G.MinimapZoomIn:Click() elseif d < 0 then _G.MinimapZoomOut:Click() end
 end)
 
 Minimap:SetMaskTexture(C["media"].blank)
 function GetMinimapShape() return "SQUARE" end
 DuffedUIMinimap:SetScript("OnEvent", function(self, event, addon)
-	if addon == "Blizzard_TimeManager" then
-		TimeManagerClockButton:Kill()
-	end
+	if addon == "Blizzard_TimeManager" then TimeManagerClockButton:Kill() end
 end)
 
 Minimap:SetScript("OnMouseUp", function(self, btn)
@@ -153,6 +147,24 @@ m_coord_text:Point("Center", -1, 0)
 m_coord_text:SetAlpha(0)
 m_coord_text:SetText("00,00")
 
+local int = 0
+m_coord:HookScript("OnUpdate", function(self, elapsed)
+	int = int + 1
+	
+	if int >= 3 then
+		local inInstance, _ = IsInInstance()
+		local x, y = GetPlayerMapPosition("player")
+		x = math.floor(100 * x)
+		y = math.floor(100 * y)
+		if x ~= 0 and y ~= 0 then
+			m_coord_text:SetText(x .. " - " .. y)
+		else
+			m_coord_text:SetText("x - x")
+		end
+		int = 0
+	end
+end)
+
 Minimap:SetScript("OnEnter", function()
 	m_zone:SetAlpha(1)
 	m_zone_text:SetAlpha(1)
@@ -166,33 +178,6 @@ Minimap:SetScript("OnLeave", function()
 	m_coord:SetAlpha(0)
 	m_coord_text:SetAlpha(0)
 end)
- 
-local ela = 0
-local coord_Update = function(self, t)
-	ela = ela - t
-	if ela > 0 then return end
-	local x, y = GetPlayerMapPosition("player")
-	local xt, yt
-	x = math.floor(100 * x)
-	y = math.floor(100 * y)
-	if x == 0 and y == 0 then
-		m_coord_text:SetText("X _ X")
-	else
-		if x < 10 then
-			xt = "0"..x
-		else
-			xt = x
-		end
-		if y < 10 then
-			yt = "0"..y
-		else
-			yt = y
-		end
-		m_coord_text:SetText(xt..","..yt)
-	end
-	ela = .2
-end
-m_coord:SetScript("OnUpdate",coord_Update)
  
 local zone_Update = function()
 	local pvp = GetZonePVPInfo()
@@ -214,4 +199,4 @@ m_zone:RegisterEvent("PLAYER_ENTERING_WORLD")
 m_zone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 m_zone:RegisterEvent("ZONE_CHANGED")
 m_zone:RegisterEvent("ZONE_CHANGED_INDOORS")
-m_zone:SetScript("OnEvent",zone_Update)
+m_zone:SetScript("OnEvent", zone_Update)

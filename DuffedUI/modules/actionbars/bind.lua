@@ -241,7 +241,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 		-- REGISTERING
 		local stance = StanceButton1:GetScript("OnClick")
 		local pet = PetActionButton1:GetScript("OnClick")
-		local button = SecureActionButton_OnClick
+		local button = ActionButton1:GetScript("OnClick")
 
 		local function register(val, override)
 			if val.IsProtected and val.GetObjectType and val.GetScript and val:GetObjectType() == "CheckButton" and val:IsProtected() then
@@ -272,6 +272,8 @@ SlashCmdList.MOUSEOVERBIND = function()
 				local b = _G["MacroButton"..i]
 				b:HookScript("OnEnter", function(self) bind:Update(self, "MACRO") end)
 			end
+			MacroFrameTab1:HookScript("OnMouseUp", function() localmacros = 0 end)
+			MacroFrameTab2:HookScript("OnMouseUp", function() localmacros = 1 end)
 		end
 		
 		if not IsAddOnLoaded("Blizzard_MacroUI") then
