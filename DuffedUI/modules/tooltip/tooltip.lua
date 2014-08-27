@@ -218,7 +218,6 @@ function DuffedUITooltips:Skin()
 	if not self.IsSkinned then
 		self:SetTemplate("Transparent")
 		self.IsSkinned = true
-		--self:SkinCloseButton()
 	end
 	DuffedUITooltips.SetColor(self)
 end
@@ -286,6 +285,15 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 	for _, Tooltip in pairs(DuffedUITooltips.Tooltips) do
 		if Tooltip == GameTooltip then Tooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit) end
 		Tooltip:HookScript("OnShow", self.Skin)
+	end
+
+	if C["tooltip"].hidebuttons == true then
+		local CombatHideActionButtonsTooltip = function(self)
+			if not IsShiftKeyDown() then self:Hide() end
+		end
+		hooksecurefunc(GameTooltip, "SetAction", CombatHideActionButtonsTooltip)
+		hooksecurefunc(GameTooltip, "SetPetAction", CombatHideActionButtonsTooltip)
+		hooksecurefunc(GameTooltip, "SetShapeshift", CombatHideActionButtonsTooltip)
 	end
 
 	HealthBar:SetStatusBarTexture(C["media"].normTex)

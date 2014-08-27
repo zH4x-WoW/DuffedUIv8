@@ -146,10 +146,10 @@ local function SetChatStyle(frame)
 	_G[chat.."EditBox"]:CreateBackdrop()
 	_G[chat.."EditBox"].backdrop:ClearAllPoints()
 	_G[chat.."EditBox"].backdrop:SetAllPoints(DuffedUIInfoLeft)
-	_G[chat.."EditBox"].backdrop:SetFrameStrata("LOW")
+	_G[chat.."EditBox"].backdrop:SetFrameStrata("HIGH")
 	_G[chat.."EditBox"].backdrop:SetFrameLevel(1)
 
-	if _G[chat] ~= _G["ChatFrame2"] then	
+	if _G[chat] ~= _G["ChatFrame2"] then
 		origs[_G[chat]] = _G[chat].AddMessage
 		_G[chat].AddMessage = AddMessage
 	else
@@ -211,6 +211,7 @@ for i=1, BNToastFrame:GetNumRegions() do
 	end
 end	
 BNToastFrame:SetTemplate("Transparent")
+
 
 BNToastFrame:HookScript("OnShow", function(self)
 	self:ClearAllPoints()

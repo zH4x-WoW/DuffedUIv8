@@ -3,7 +3,7 @@ local D, C, L = unpack(select(2, ...))
 local function LoadSkin()
 	local function SkinAchievePopUp()
 		for i = 1, MAX_ACHIEVEMENT_ALERTS do
-			local frame = _G["AchievementAlertFrame"..i]
+			local frame = _G["AchievementAlertFrame" .. i]
 
 			if frame then
 				frame:SetAlpha(1)
@@ -16,31 +16,31 @@ local function LoadSkin()
 				end
 
 				-- Background
-				_G["AchievementAlertFrame"..i.."Background"]:SetTexture(nil)
-				_G["AchievementAlertFrame"..i..'OldAchievement']:Kill()
-				_G["AchievementAlertFrame"..i.."Glow"]:Kill()
-				_G["AchievementAlertFrame"..i.."Shine"]:Kill()
-				_G["AchievementAlertFrame"..i.."GuildBanner"]:Kill()
-				_G["AchievementAlertFrame"..i.."GuildBorder"]:Kill()
+				_G["AchievementAlertFrame" .. i .."Background"]:SetTexture(nil)
+				_G["AchievementAlertFrame" .. i ..'OldAchievement']:Kill()
+				_G["AchievementAlertFrame" .. i .."Glow"]:Kill()
+				_G["AchievementAlertFrame" .. i .."Shine"]:Kill()
+				_G["AchievementAlertFrame" .. i .."GuildBanner"]:Kill()
+				_G["AchievementAlertFrame" .. i .."GuildBorder"]:Kill()
 
 				-- Text
-				_G["AchievementAlertFrame"..i.."Name"]:SetTextColor(1, 0.8, 0)
-				_G["AchievementAlertFrame"..i.."Name"]:SetFont(C["media"].font, 11)
-				_G["AchievementAlertFrame"..i.."Unlocked"]:SetTextColor(1, 1, 1)
-				_G["AchievementAlertFrame"..i.."Unlocked"]:SetFont(C["media"].font, 11)
+				_G["AchievementAlertFrame" .. i .."Name"]:SetTextColor(1, .8, 0)
+				_G["AchievementAlertFrame" .. i .."Name"]:SetFont(C["media"].font, 11)
+				_G["AchievementAlertFrame" .. i .."Unlocked"]:SetTextColor(1, 1, 1)
+				_G["AchievementAlertFrame" .. i .."Unlocked"]:SetFont(C["media"].font, 11)
 
 				-- Icon
-				_G["AchievementAlertFrame"..i.."IconTexture"]:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				_G["AchievementAlertFrame"..i.."IconOverlay"]:Kill()
-				_G["AchievementAlertFrame"..i.."IconTexture"]:ClearAllPoints()
-				_G["AchievementAlertFrame"..i.."IconTexture"]:Point("LEFT", frame, 7, 0)
+				_G["AchievementAlertFrame" .. i .."IconTexture"]:SetTexCoord(.1, .9, .1, .9)
+				_G["AchievementAlertFrame" .. i .."IconOverlay"]:Kill()
+				_G["AchievementAlertFrame" .. i .."IconTexture"]:ClearAllPoints()
+				_G["AchievementAlertFrame" .. i .."IconTexture"]:Point("LEFT", frame, 7, 0)
 
-				if not _G["AchievementAlertFrame"..i.."IconTexture"].b then
-					_G["AchievementAlertFrame"..i.."IconTexture"].b = CreateFrame("Frame", nil, _G["AchievementAlertFrame"..i])
-					_G["AchievementAlertFrame"..i.."IconTexture"].b:SetFrameLevel(0)
-					_G["AchievementAlertFrame"..i.."IconTexture"].b:SetTemplate("Default")
-					_G["AchievementAlertFrame"..i.."IconTexture"].b:Point("TOPLEFT", _G["AchievementAlertFrame"..i.."IconTexture"], "TOPLEFT", -2, 2)
-					_G["AchievementAlertFrame"..i.."IconTexture"].b:Point("BOTTOMRIGHT", _G["AchievementAlertFrame"..i.."IconTexture"], "BOTTOMRIGHT", 2, -2)
+				if not _G["AchievementAlertFrame" .. i .."IconTexture"].b then
+					_G["AchievementAlertFrame" .. i .."IconTexture"].b = CreateFrame("Frame", nil, _G["AchievementAlertFrame" .. i])
+					_G["AchievementAlertFrame" .. i .."IconTexture"].b:SetFrameLevel(0)
+					_G["AchievementAlertFrame" .. i .."IconTexture"].b:SetTemplate("Default")
+					_G["AchievementAlertFrame" .. i .."IconTexture"].b:Point("TOPLEFT", _G["AchievementAlertFrame" .. i .."IconTexture"], "TOPLEFT", -2, 2)
+					_G["AchievementAlertFrame" .. i .."IconTexture"].b:Point("BOTTOMRIGHT", _G["AchievementAlertFrame" .. i .."IconTexture"], "BOTTOMRIGHT", 2, -2)
 				end
 			end
 		end
@@ -49,7 +49,7 @@ local function LoadSkin()
 
 	local function SkinDungeonPopUp()
 		for i = 1, DUNGEON_COMPLETION_MAX_REWARDS do
-			local frame = _G["DungeonCompletionAlertFrame"..i]
+			local frame = _G["DungeonCompletionAlertFrame" .. i]
 			if frame then
 				frame:SetAlpha(1)
 				frame.SetAlpha = D.dummy
@@ -71,34 +71,31 @@ local function LoadSkin()
 					end
 				end
 
-				_G["DungeonCompletionAlertFrame"..i.."Shine"]:Kill()
-				_G["DungeonCompletionAlertFrame"..i.."GlowFrame"]:Kill()
-				_G["DungeonCompletionAlertFrame"..i.."GlowFrame"].glow:Kill()
-				_G["DungeonCompletionAlertFrame"..i].raidArt:Kill()
-				_G["DungeonCompletionAlertFrame"..i.."Reward1"]:Hide()
+				_G["DungeonCompletionAlertFrame" .. i .."Shine"]:Kill()
+				_G["DungeonCompletionAlertFrame" .. i .."GlowFrame"]:Kill()
+				_G["DungeonCompletionAlertFrame" .. i .."GlowFrame"].glow:Kill()
+				_G["DungeonCompletionAlertFrame" .. i].raidArt:Kill()
+				_G["DungeonCompletionAlertFrame" .. i .."Reward1"]:Hide()
 
 				-- Icon
-				_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"]:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"]:SetDrawLayer('OVERLAY')
-				_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"]:ClearAllPoints()
-				_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"]:Point("LEFT", frame.backdrop, 9, 0)
+				_G["DungeonCompletionAlertFrame" .. i .."DungeonTexture"]:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				_G["DungeonCompletionAlertFrame" .. i .."DungeonTexture"]:SetDrawLayer('OVERLAY')
+				_G["DungeonCompletionAlertFrame" .. i .."DungeonTexture"]:ClearAllPoints()
+				_G["DungeonCompletionAlertFrame" .. i .."DungeonTexture"]:Point("LEFT", frame.backdrop, 9, 0)
 
-				if not _G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b then
-					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b = CreateFrame("Frame", nil, _G["DungeonCompletionAlertFrame"..i])
-					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:SetFrameLevel(0)
-					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:SetTemplate("Default")
-					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:Point("TOPLEFT", _G["DungeonCompletionAlertFrame"..i.."DungeonTexture"], "TOPLEFT", -2, 2)
-					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:Point("BOTTOMRIGHT", _G["DungeonCompletionAlertFrame"..i.."DungeonTexture"], "BOTTOMRIGHT", 2, -2)
+				if not _G["DungeonCompletionAlertFrame" .. i .."DungeonTexture"].b then
+					_G["DungeonCompletionAlertFrame" .. i .."DungeonTexture"].b = CreateFrame("Frame", nil, _G["DungeonCompletionAlertFrame" .. i])
+					_G["DungeonCompletionAlertFrame" .. i .."DungeonTexture"].b:SetFrameLevel(0)
+					_G["DungeonCompletionAlertFrame" .. i .."DungeonTexture"].b:SetTemplate("Default")
+					_G["DungeonCompletionAlertFrame" .. i .."DungeonTexture"].b:Point("TOPLEFT", _G["DungeonCompletionAlertFrame" .. i .."DungeonTexture"], "TOPLEFT", -2, 2)
+					_G["DungeonCompletionAlertFrame" .. i .."DungeonTexture"].b:Point("BOTTOMRIGHT", _G["DungeonCompletionAlertFrame" .. i .."DungeonTexture"], "BOTTOMRIGHT", 2, -2)
 				end
 			end
 		end
 	end
 	hooksecurefunc("AlertFrame_SetDungeonCompletionAnchors", SkinDungeonPopUp)
-	
-	-- hide some shit icons on dungeons alerts
-	local function DungeonCompletionAlertFrameReward_SetReward(self)
-		self:Hide()
-	end
+
+	local function DungeonCompletionAlertFrameReward_SetReward(self) self:Hide() end
 	hooksecurefunc("DungeonCompletionAlertFrameReward_SetReward", DungeonCompletionAlertFrameReward_SetReward)
 
 	local function SkinGuildChallengePopUp()
@@ -214,7 +211,7 @@ local function LoadSkin()
 			_G["ScenarioAlertFrame1DungeonTexture"]:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 			_G["ScenarioAlertFrame1DungeonTexture"]:ClearAllPoints()
 			_G["ScenarioAlertFrame1DungeonTexture"]:Point("LEFT", frame.backdrop, 9, 0)
-			
+
 			-- Icon border
 			if not _G["ScenarioAlertFrame1DungeonTexture"].b then
 				_G["ScenarioAlertFrame1DungeonTexture"].b = CreateFrame("Frame", nil, _G["ScenarioAlertFrame1"])
@@ -226,10 +223,10 @@ local function LoadSkin()
 		end
 	end
 	hooksecurefunc("AlertFrame_SetScenarioAnchors", SkinScenarioPopUp)
-	
+
 	local function SkinCriteriaPopUp()
 		for i = 1, MAX_ACHIEVEMENT_ALERTS do
-			local frame = _G['CriteriaAlertFrame'..i]
+			local frame = _G['CriteriaAlertFrame' .. i]
 			if frame then
 				frame:SetAlpha(1)
 				frame.SetAlpha = D.dummy
@@ -240,36 +237,34 @@ local function LoadSkin()
 					frame.backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
 				end
 
-				_G['CriteriaAlertFrame'..i..'Unlocked']:SetTextColor(1, 1, 1)
-				_G['CriteriaAlertFrame'..i..'Name']:SetTextColor(1, 1, 0)
-				_G['CriteriaAlertFrame'..i..'Background']:Kill()
-				_G['CriteriaAlertFrame'..i..'Glow']:Kill()
-				_G['CriteriaAlertFrame'..i..'Shine']:Kill()
-				_G['CriteriaAlertFrame'..i..'IconBling']:Kill()
-				_G['CriteriaAlertFrame'..i..'IconOverlay']:Kill()
-				
-				-- Icon border
-				if not _G['CriteriaAlertFrame'..i..'IconTexture'].b then
-					_G['CriteriaAlertFrame'..i..'IconTexture'].b = CreateFrame("Frame", nil, frame)
-					_G['CriteriaAlertFrame'..i..'IconTexture'].b:SetTemplate("Default")
-					_G['CriteriaAlertFrame'..i..'IconTexture'].b:Point("TOPLEFT", _G['CriteriaAlertFrame'..i..'IconTexture'], "TOPLEFT", -2, 2)
-					_G['CriteriaAlertFrame'..i..'IconTexture'].b:Point("BOTTOMRIGHT", _G['CriteriaAlertFrame'..i..'IconTexture'], "BOTTOMRIGHT", 2, -2)
-					_G['CriteriaAlertFrame'..i..'IconTexture']:SetParent(_G['CriteriaAlertFrame'..i..'IconTexture'].b)
-					_G['CriteriaAlertFrame'..i..'IconTexture']:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				_G['CriteriaAlertFrame' .. i .. 'Unlocked']:SetTextColor(1, 1, 1)
+				_G['CriteriaAlertFrame' .. i .. 'Name']:SetTextColor(1, 1, 0)
+				_G['CriteriaAlertFrame' .. i .. 'Background']:Kill()
+				_G['CriteriaAlertFrame' .. i .. 'Glow']:Kill()
+				_G['CriteriaAlertFrame' .. i .. 'Shine']:Kill()
+				_G['CriteriaAlertFrame' .. i .. 'IconBling']:Kill()
+				_G['CriteriaAlertFrame' .. i .. 'IconOverlay']:Kill()
 
+				-- Icon border
+				if not _G['CriteriaAlertFrame' .. i .. 'IconTexture'].b then
+					_G['CriteriaAlertFrame'.. i .. 'IconTexture'].b = CreateFrame("Frame", nil, frame)
+					_G['CriteriaAlertFrame'.. i .. 'IconTexture'].b:SetTemplate("Default")
+					_G['CriteriaAlertFrame'.. i .. 'IconTexture'].b:Point("TOPLEFT", _G['CriteriaAlertFrame' .. i ..'IconTexture'], "TOPLEFT", -2, 2)
+					_G['CriteriaAlertFrame'.. i .. 'IconTexture'].b:Point("BOTTOMRIGHT", _G['CriteriaAlertFrame' .. i ..'IconTexture'], "BOTTOMRIGHT", 2, -2)
+					_G['CriteriaAlertFrame'.. i .. 'IconTexture']:SetParent(_G['CriteriaAlertFrame' .. i ..'IconTexture'].b)
+					_G['CriteriaAlertFrame'.. i .. 'IconTexture']:SetTexCoord(.1, .9, .1, .9)
 				end
 			end
 		end
 	end
 	hooksecurefunc("AlertFrame_SetCriteriaAnchors", SkinCriteriaPopUp)
-	
+
 	local function SetLootWonAnchors()
 		for i=1, #LOOT_WON_ALERT_FRAMES do
 			local frame = LOOT_WON_ALERT_FRAMES[i];
 			if frame then
 				frame:SetAlpha(1)
 				frame.SetAlpha = D.dummy
-
 				frame.Background:Kill()
 				frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				frame.IconBorder:Kill()
@@ -301,7 +296,6 @@ local function LoadSkin()
 			if frame then
 				frame:SetAlpha(1)
 				frame.SetAlpha = D.dummy
-
 				frame.Background:Kill()
 				frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				frame.IconBorder:Kill()
@@ -324,7 +318,7 @@ local function LoadSkin()
 		end
 	end
 	hooksecurefunc("AlertFrame_SetMoneyWonAnchors", SetMoneyWonAnchors)
-	
+
 	BonusRollLootWonFrame:StripTextures()
 	BonusRollLootWonFrame:SetTemplate("Transparent")
 	if not BonusRollLootWonFrame.Icon.b then
@@ -334,8 +328,7 @@ local function LoadSkin()
 		BonusRollLootWonFrame.Icon.b:Point("BOTTOMRIGHT", BonusRollLootWonFrame.Icon, "BOTTOMRIGHT", 2, -2)
 		BonusRollLootWonFrame.Icon:SetParent(BonusRollLootWonFrame.Icon.b)
 	end
-	--BonusRollLootWonFrame.IconBorder:Kill()
-	
+
 	BonusRollMoneyWonFrame:StripTextures()
 	BonusRollMoneyWonFrame:SetTemplate("Transparent")
 	if not BonusRollMoneyWonFrame.Icon.b then
@@ -345,7 +338,6 @@ local function LoadSkin()
 		BonusRollMoneyWonFrame.Icon.b:Point("BOTTOMRIGHT", BonusRollMoneyWonFrame.Icon, "BOTTOMRIGHT", 2, -2)
 		BonusRollMoneyWonFrame.Icon:SetParent(BonusRollMoneyWonFrame.Icon.b)
 	end
-	--BonusRollMoneyWonFrame.IconBorder:Kill()
 end
 
 tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
