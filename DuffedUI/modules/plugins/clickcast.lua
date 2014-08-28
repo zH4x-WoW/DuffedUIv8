@@ -13,7 +13,7 @@ _G["SpellBinderPortrait"]:SetTexture("Interface\\Spellbook\\Spellbook-Icon")
 
 SpellBinder.title = _G["SpellBinderTitle"] or SpellBinder:CreateFontString("SpellBinderTitle", "OVERLAY", "GameFontNormal")
 SpellBinder.title:SetPoint("TOP", _G["SpellBinder"], "TOP", 0, -5)
-SpellBinder.title:SetText(L.click2cast_title)
+SpellBinder.title:SetText(L["binds"]["c2c_title"])
 
 SpellBinder.sbOpen = false
 SpellBinder.spellbuttons = {}

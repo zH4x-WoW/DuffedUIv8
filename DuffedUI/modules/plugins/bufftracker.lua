@@ -265,23 +265,23 @@ local AllBuffs = {
 
 local function LabelType(bufftype)
 	if bufftype == "10ap" then
-		return L.bufftracker_10ap
+		return L["bufftracker"]["10ap"]
 	elseif bufftype == "10as" then
-		return L.bufftracker_10as
+		return L["bufftracker"]["10as"]
 	elseif bufftype == "10sp" then
-		return L.bufftracker_10sp
+		return L["bufftracker"]["10sp"]
 	elseif bufftype == "5sh" then
-		return L.bufftracker_5sh
+		return L["bufftracker"]["5sh"]
 	elseif bufftype == "5csc" then
-		return L.bufftracker_5csc
+		return L["bufftracker"]["5csc"]
 	elseif bufftype == "3kmr" then
-		return L.bufftracker_3kmr
+		return L["bufftracker"]["3kmr"]
 	elseif bufftype == "5sai" then
-		return L.bufftracker_5sai
+		return L["bufftracker"]["5sai"]
 	elseif bufftype == "10s" then
-		return L.bufftracker_10s
+		return L["bufftracker"]["10s"]
 	else
-		return L.bufftracker_error
+		return L["bufftracker"]["error"]
 	end
 end
 -------------------------

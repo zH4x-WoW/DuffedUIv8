@@ -158,7 +158,7 @@ end
 oUF.Tags.Events['DuffedUI:dead'] = 'UNIT_HEALTH'
 oUF.Tags.Methods['DuffedUI:dead'] = function(unit)
 	if UnitIsDeadOrGhost(unit) then
-		return L.unitframes_ouf_deaddps
+		return L["uf"]["dead"]
 	end
 end
 

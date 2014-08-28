@@ -1,9 +1,7 @@
 local D, C, L = unpack(select(2, ...)) 
 if C["tooltip"].enable ~= true then return end
 
-local function ClearItemID(self)
-	self.DuffedUIItemTooltip = nil
-end
+local function ClearItemID(self) self.DuffedUIItemTooltip = nil end
 D.ClearTooltipItemID = ClearItemID
 
 local function ShowItemID(self)
@@ -12,15 +10,9 @@ local function ShowItemID(self)
 		local num = GetItemCount(link)
 		local left = ""
 		local right = ""
-		
-		if DuffedUIItemTooltip.id and link ~= nil then
-			left = "|cFFCA3C3CID|r "..link:match(":(%w+)")
-		end
-		
-		if DuffedUIItemTooltip.count and num > 1 then
-			right = "|cFFCA3C3C"..L.tooltip_count.."|r "..num
-		end
-				
+
+		if DuffedUIItemTooltip.id and link ~= nil then left = "|cFFCA3C3CID|r " .. link:match(":(%w+)") end
+		if DuffedUIItemTooltip.count and num > 1 then right = "|cFFCA3C3C" .. L["loot"]["tt_count"] .. "|r " .. num end
 		self:AddLine(" ")
 		self:AddDoubleLine(left, right)
 		self.DuffedUIItemTooltip = 1

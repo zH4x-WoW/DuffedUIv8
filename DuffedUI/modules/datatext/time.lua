@@ -168,7 +168,7 @@ if C["datatext"].wowtime and C["datatext"].wowtime > 0 then
 
 		GameTooltip:AddDoubleLine(" ", " ")
 
-		GameTooltip:AddDoubleLine(L.worldboss_title)
+		GameTooltip:AddDoubleLine(L["boss"]["title"])
 		if UnitLevel("player") == 90 then
 			local Sha = IsQuestFlaggedCompleted(32099)
 			local Galleon = IsQuestFlaggedCompleted(32098)
@@ -177,12 +177,12 @@ if C["datatext"].wowtime and C["datatext"].wowtime > 0 then
 			local Celestials = IsQuestFlaggedCompleted(33117)
 			local Ordos = IsQuestFlaggedCompleted(33118)
 
-			GameTooltip:AddDoubleLine("|cffffffff"..L.worldboss_sha.."|r: ", Sha and "|cff00ff00"..L.worldboss_defeated.."|r" or "|cffff0000"..L.worldboss_undefeated.."|r")
-			GameTooltip:AddDoubleLine("|cffffffff"..L.worldboss_galleon.."|r: ", Galleon and "|cff00ff00"..L.worldboss_defeated.."|r" or "|cffff0000"..L.worldboss_undefeated.."|r")
-			GameTooltip:AddDoubleLine("|cffffffff"..L.worldboss_oondasta.."|r: ", Oondasta and "|cff00ff00"..L.worldboss_defeated.."|r" or "|cffff0000"..L.worldboss_undefeated.."|r")
-			GameTooltip:AddDoubleLine("|cffffffff"..L.worldboss_nalak.."|r: ", Nalak and "|cff00ff00"..L.worldboss_defeated.."|r" or "|cffff0000"..L.worldboss_undefeated.."|r")
-			GameTooltip:AddDoubleLine("|cffffffff"..L.worldboss_celestials.."|r: ", Celestials and "|cff00ff00"..L.worldboss_defeated.."|r" or "|cffff0000"..L.worldboss_undefeated.."|r")
-			GameTooltip:AddDoubleLine("|cffffffff"..L.worldboss_ordos.."|r: ", Ordos and "|cff00ff00"..L.worldboss_defeated.."|r" or "|cffff0000"..L.worldboss_undefeated.."|r")
+			GameTooltip:AddDoubleLine("|cffffffff"..L["boss"]["sha"].."|r: ", Sha and "|cff00ff00"..L["boss"]["defeated"].."|r" or "|cffff0000"..L["boss"]["undefeated"].."|r")
+			GameTooltip:AddDoubleLine("|cffffffff"..L["boss"]["galleon"].."|r: ", Galleon and "|cff00ff00"..L["boss"]["defeated"].."|r" or "|cffff0000"..L["boss"]["undefeated"].."|r")
+			GameTooltip:AddDoubleLine("|cffffffff"..L["boss"]["oondasta"].."|r: ", Oondasta and "|cff00ff00"..L["boss"]["defeated"].."|r" or "|cffff0000"..L["boss"]["undefeated"].."|r")
+			GameTooltip:AddDoubleLine("|cffffffff"..L["boss"]["nalak"].."|r: ", Nalak and "|cff00ff00"..L["boss"]["defeated"].."|r" or "|cffff0000"..L["boss"]["undefeated"].."|r")
+			GameTooltip:AddDoubleLine("|cffffffff"..L["boss"]["celestials"].."|r: ", Celestials and "|cff00ff00"..L["boss"]["defeated"].."|r" or "|cffff0000"..L["boss"]["undefeated"].."|r")
+			GameTooltip:AddDoubleLine("|cffffffff"..L["boss"]["ordos"].."|r: ", Ordos and "|cff00ff00"..L["boss"]["defeated"].."|r" or "|cffff0000"..L["boss"]["undefeated"].."|r")
 		end
 		GameTooltip:Show()
 	end)

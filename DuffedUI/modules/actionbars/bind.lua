@@ -5,7 +5,7 @@ local bind, localmacros = CreateFrame("Frame", "DuffedUIHoverBind", UIParent), 0
 
 -- SLASH COMMAND
 SlashCmdList.MOUSEOVERBIND = function()
-	if InCombatLockdown() then print(L.bind_combat) return end
+	if InCombatLockdown() then print(L["bind"]["combat"]) return end
 	if not bind.loaded then
 		local find = string.find
 		local _G = getfenv(0)
@@ -220,10 +220,10 @@ SlashCmdList.MOUSEOVERBIND = function()
 		function bind:Deactivate(save)
 			if save then
 				SaveBindings(2)
-				print(L.bind_saved)
+				print(L["bind"]["saved"])
 			else
 				LoadBindings(2)
-				print(L.bind_discard)
+				print(L["bind"]["discard"])
 			end
 			self.enabled = false
 			self:HideFrame()
@@ -231,9 +231,9 @@ SlashCmdList.MOUSEOVERBIND = function()
 		end
 
 		D.CreatePopup["DUFFEDUI_KEYBIND_MODE"] = {
-			question = L.bind_instruct,
-			answer1 = L.bind_save,
-			answer2 = L.bind_discardbind,
+			question = L["bind"]["text"],
+			answer1 = L["bind"]["save"],
+			answer2 = L["bind"]["discardbind"],
 			function1 = function() bind:Deactivate(true) end,
 			function2 = function() bind:Deactivate(false) end,
 		}

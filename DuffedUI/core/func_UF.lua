@@ -68,11 +68,11 @@ UnitPopupMenus["RAID"] = { "MUTE", "UNMUTE", "RAID_SILENCE", "RAID_UNSILENCE", "
 D.PostUpdateHealth = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
 		if not UnitIsConnected(unit) then
-			health.value:SetText("|cffD7BEA5" .. L.unitframes_ouf_offline .. "|r")
+			health.value:SetText("|cffD7BEA5" .. L["uf"]["offline"] .. "|r")
 		elseif UnitIsDead(unit) then
-			health.value:SetText("|cffD7BEA5" .. L.unitframes_ouf_dead .. "|r")
+			health.value:SetText("|cffD7BEA5" .. L["uf"]["dead"] .. "|r")
 		elseif UnitIsGhost(unit) then
-			health.value:SetText("|cffD7BEA5" .. L.unitframes_ouf_ghost .. "|r")
+			health.value:SetText("|cffD7BEA5" .. L["uf"]["ghost"] .. "|r")
 		end
 	else
 		local r, g, b
@@ -124,11 +124,11 @@ end
 D.PostUpdateHealthRaid = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
 		if not UnitIsConnected(unit) then
-			health.value:SetText("|cffD7BEA5" .. L.unitframes_ouf_offline .. "|r")
+			health.value:SetText("|cffD7BEA5" .. L["uf"]["offline"] .. "|r")
 		elseif UnitIsDead(unit) then
-			health.value:SetText("|cffD7BEA5" .. L.unitframes_ouf_dead .. "|r")
+			health.value:SetText("|cffD7BEA5" .. L["uf"]["dead"] .. "|r")
 		elseif UnitIsGhost(unit) then
-			health.value:SetText("|cffD7BEA5" .. L.unitframes_ouf_ghost .. "|r")
+			health.value:SetText("|cffD7BEA5" .. L["uf"]["ghost"] .. "|r")
 		end
 	else
 		if C["unitframes"].ColorGradient == true and C["unitframes"].unicolor == true then
@@ -487,9 +487,9 @@ end
 
 D.EclipseDirection = function(self)
 	if GetEclipseDirection() == "sun" then
-		self.Text:SetText("|cffE5994C" .. L.unitframes_ouf_starfirespell .. "|r")
+		self.Text:SetText("|cffE5994C" .. L["uf"]["starfire"] .. "|r")
 	elseif GetEclipseDirection() == "moon" then
-		self.Text:SetText("|cff4478BC" .. L.unitframes_ouf_wrathspell .. "|r")
+		self.Text:SetText("|cff4478BC" .. L["uf"]["wrath"] .. "|r")
 	else
 		self.Text:SetText("")
 	end
@@ -545,7 +545,7 @@ D.UpdateManaLevel = function(self, elapsed)
 	local percMana = mana / maxmana * 100
 
 	if percMana == 20 then
-		self.ManaLevel:SetText("|cffaf5050"..L.unitframes_ouf_lowmana.."|r")
+		self.ManaLevel:SetText("|cffaf5050" .. L["uf"]["lowmana"] .. "|r")
 		Flash(self, .3)
 	else
 		self.ManaLevel:SetText()
@@ -563,7 +563,7 @@ D.UpdateDruidManaText = function(self)
 
 		local percMana = min / max * 100
 		if percMana <= 20 then
-			self.FlashInfo.ManaLevel:SetText("|cffaf5050" .. L.unitframes_ouf_lowmana .. "|r")
+			self.FlashInfo.ManaLevel:SetText("|cffaf5050" .. L["uf"]["lowmana"] .. "|r")
 			Flash(self.FlashInfo, 0.3)
 		else
 			self.FlashInfo.ManaLevel:SetText()

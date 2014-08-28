@@ -45,42 +45,83 @@ if D.client == "ruRU" then
 		["star"] = "Star",
 	}
 
-	L.UI_Outdated = "Ваша версия DuffedUI устарела. Вы можете скачать последнюю версию на www.duffed.net"
-	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
-	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
-	
-	-- Bufftracker
-	L.bufftracker_10ap = "+10% Attack Power"
-	L.bufftracker_10as = "+10% Melee & Ranged Attack Speed"
-	L.bufftracker_10sp = "+10% Spell Power"
-	L.bufftracker_5sh = "+5% Spell Haste"
-	L.bufftracker_5csc = "+5% Critical Strike Chance"
-	L.bufftracker_3kmr = "+3000 Mastery Rating"
-	L.bufftracker_5sai = "+5% Strength, Agility, Intellect"
-	L.bufftracker_10s = "+10% Stamina"
-	L.bufftracker_error = "ERROR"
+	L["ui"] = {
+		["outdated"] = "Your version of DuffedUI is out of date. You can download the latest version from www.duffed.net",
+		["welcome"] = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r.",
+		["disableui"] = "DuffedUI doesn't work for this resolution, do you want to disable DuffedUI? (Cancel if you want to try another resolution)",
+		["fix_ab"] = "There is something wrong with your action bar. Do you want to reloadui to fix it?",
+	}
 
-	-- Click2Cast
-	L.click2cast_title = "Mouse Bindings"
-	
-	-- worldboss
-	L.worldboss_title = "World Boss(s):"
-	L.worldboss_galleon = "Галеон"
-	L.worldboss_sha = "Ша Злости"
-	L.worldboss_oondasta = "Oondasta"
-	L.worldboss_nalak = "Nalak"
-	L.worldboss_celestials = "Celestials"
-	L.worldboss_ordos = "Ordos"
-	L.worldboss_defeated = "Убит"
-	L.worldboss_undefeated = "Не убит"
-	
-	-- specswitcher buttons
-	L.sesbutton_reload = "Reloads the entire UI"
-	L.sesbutton_heal = "Switch to heal-layout"
-	L.sesbutton_dps = "Switch to dps-layout"
-	L.sesbutton_am = "Open Addonmanager"
-	L.sesbutton_move = "Move the frames"
-	L.sesbutton_kb = "Set your keybindings"
+	L["bufftracker"] = {
+		["10ap"] = "+10% Attack Power",
+		["10as"] = "+10% Melee & Ranged Attack Speed",
+		["10sp"] = "+10% Spell Power",
+		["5sh"] = "+5% Spell Haste",
+		["5csc"] = "+5% Critical Strike Chance",
+		["3kmr"] = "+3000 Mastery Rating",
+		["5sai"] = "+5% Strength, Agility, Intellect",
+		["10s"] = "+10% Stamina",
+		["error"] = "ERROR",
+	}
+
+	L["binds"] = {
+		["c2c_title"] = "Mouse Bindings",
+		["combat"] = "You can't bind keys in combat",
+		["saved"] = "All keybindings have been saved",
+		["discard"] = "All newly set keybindings have been discarded.",
+		["text"] = "Hover your mouse over any actionbutton to bind it. Press the escape key or right click to clear the current actionbuttons keybinding.",
+		["save"] = "Save bindings",
+		["discardbind"] = "Discard bindings",
+	}
+
+	L["loot"] = {
+		["tt_count"] = "Count",
+		["fish"] = "Fishy Loot",
+		["random"] = "Random Player",
+		["self"] = "Self Loot",
+		["repairmoney"] = "You don't have enough money to repair!",
+		["repaircost"] = "Your items have been repaired for",
+		["trash"] = "Your vendor trash has been sold and you earned",
+	}
+
+	L["buttons"] = {
+		["ses_reload"] = "Reloads the entire UI",
+		["ses_move"] = "Unlock the frames for moving",
+		["ses_kb"] = "Set your keybindings",
+	}
+
+	L["errors"] = {
+		["noerror"] = "No error yet."
+	}
+
+	L["uf"] = {
+		["offline"] = "Offline",
+		["dead"] = "|cffff0000[DEAD]|r",
+		["ghost"] = "GHOST",
+		["lowmana"] = "LOW MANA",
+		["threat1"] = "Threat on current target:",
+		["wrath"] = "Wrath",
+		["starfire"] = "Starfire",
+	}
+
+	L["group"] = {
+		["autoinv_enable"] = "Autoinvite ON: invite",
+		["autoinv_enable_custom"] = "Autoinvite ON: ",
+		["autoinv_disable"] = "Autoinvite OFF",
+		["disband"] = "Disbanding group?",
+	}
+
+	L["boss"] = {
+		["title"] = "World Boss(s):",
+		["galleon"] = "Galleon", 
+		["sha"] = "Sha of Anger", 
+		["oondasta"] = "Oondasta", 
+		["nalak"] = "Nalak",
+		["celestials"] = "Celestials", 
+		["ordos"] = "Ordos",
+		["defeated"] = "Defeated", 
+		["undefeated"] = "Undefeated",
+	}
 
 	-- chat
 	L.chat_INSTANCE_CHAT = "I"
@@ -108,8 +149,6 @@ if D.client == "ruRU" then
 	L.chat_recrutment = "Гильдии"
 	L.chat_lfg = "ПоискСпутников"
  
-	L.disband = "Роспуск группы ?"
-
 	L.datatext_notalents ="Нет талантов"
 	L.datatext_download = "Загрузка: "
 	L.datatext_bandwidth = "Скорость: "
@@ -205,104 +244,6 @@ if D.client == "ruRU" then
 	  [11] = {18, "Оружие дальнего боя", 1000}
 	}
  
-	L.popup_disableui = "DuffedUI не работает на этом разрешении, хотите отключить DuffedUI? (Отмена если хотите попробовать другое разрешение)"
-	L.popup_install = "Это первый запуск DuffedUI V13 для этого персонажа. Необходимо перезагрузить интерфейс для настройки Панелей, Переменных и Окон Чата."
-	L.popup_2raidactive = "Обе рейдовые раскладки активны, пожалуйста, выберите одну."
-	L.popup_reset = "Внимание! Это сбросит все настройки DuffedUI. Вы хотите продолжить?"
-	L.popup_install_yes = "Да! (рекомендуется!)"
-	L.popup_install_no = "Нет, это слишком сложно"
-	L.popup_reset_yes = "О да, детка!"
-	L.popup_reset_no = "Нет, я посмотрю на QQ форуме!"
-	L.popup_fix_ab = "Что-то не то с вашей панелью действий. Хотите перезагрузить интерфейс, чтобы исправить это?"
- 
-	L.merchant_repairnomoney = "Недостаточно денег на починку"
-	L.merchant_repaircost = "Предметы починены за"
-	L.merchant_trashsell = "Серые предметы проданы и Вы получили"
- 
-	L.goldabbrev = "|cffffd700з|r"
-	L.silverabbrev = "|cffc7c7cfс|r"
-	L.copperabbrev = "|cffeda55fм|r"
- 
-	L.error_noerror = "Ошибок не обнаружено."
- 
-	L.unitframes_ouf_offline = "Оффлайн"
-	L.unitframes_ouf_dead = "Труп"
-	L.unitframes_ouf_ghost = "Призрак"
-	L.unitframes_ouf_lowmana = "МАНА"
-	L.unitframes_ouf_threattext = "Угроза на цели:"
-	L.unitframes_ouf_threattext2 = "Threat"
-	L.unitframes_ouf_offlinedps = "Оффлайн"
-	L.unitframes_ouf_deaddps = "|cffff0000[Труп]|r"
-	L.unitframes_ouf_ghostheal = "ПРИЗРАК"
-	L.unitframes_ouf_deadheal = "ТРУП"
-	L.unitframes_ouf_gohawk = "Дух Ястреба"
-	L.unitframes_ouf_goviper = "Дух Гадюки"
-	L.unitframes_disconnected = "D/C"
-	L.unitframes_ouf_wrathspell = "Гнев"
-	L.unitframes_ouf_starfirespell = "Звездный огонь"
- 
-	L.tooltip_count = "Кол-во"
- 
-	L.bags_noslots = "невозможно купить еще ячеек!"
-	L.bags_costs = "Цена: %.2f золотых"
-	L.bags_buyslots = "Купить новую ячейку коммандой /bags purchase yes"
-	L.bags_openbank = "Сначала откройте банк."
-	L.bags_sort = "Сортировать предметы в сумке или банке, если они открыты."
-	L.bags_stack = "Заполнить неполные стопки в сумках или банке, если они открыты."
-	L.bags_buybankslot = "купить банковскую ячейку. (банк должен быть открыт)"
-	L.bags_search = "Поиск"
-	L.bags_sortmenu = "Сортировать"
-	L.bags_sortspecial = "Сортировать в спецсумках"
-	L.bags_stackmenu = "Сложить"
-	L.bags_stackspecial = "Сложить в спецсумках"
-	L.bags_showbags = "Показать сумки"
-	L.bags_sortingbags = "Сортировка завершена."
-	L.bags_nothingsort= "Нечего сортировать."
-	L.bags_bids = "Использование сумок: "
-	L.bags_stackend = "Заполнение завершено."
-	L.bags_rightclick_search = "ПКМ для поиска."
-	
-	L.loot_fish = "Рыбалка"
-	L.loot_empty = "Пусто"
-	L.loot_randomplayer = "Random Player"
-	L.loot_self = "Self Loot"
- 
-	L.chat_invalidtarget = "Неверная цель"
- 
-	L.mount_wintergrasp = "Озеро Ледяных Оков"
- 
-	L.core_autoinv_enable = "Автоприглашение ВКЛ: invite"
-	L.core_autoinv_enable_c = "Автоприглашение ВКЛ: "
-	L.core_autoinv_disable = "Автоприглашение ВЫКЛ"
-	L.core_wf_unlock = "Окно отслеживания заданий разблокировано"
-	L.core_wf_lock = "Окно отслеживания заданий закреплено"
-	L.core_welcome1 = "Добро пожаловать в |cffC495DDDuffedUI|r версии "
-	L.core_welcome2 = "Напечатайте |cff00FFFF/uihelp|r для получения доп. информации"
- 
-	L.core_uihelp1 = "|cff00ff00основные команды|r"
-	L.core_uihelp2 = "|cffFF0000/moveui|r - Разблокировать и передвинуть элементы интерфейса."
-	L.core_uihelp3 = "|cffFF0000/rl|r - Перегрузить интерфейс."
-	L.core_uihelp4 = "|cffFF0000/gm|r - Обратится за помощью к ГМ."
-	L.core_uihelp5 = "|cffFF0000/frame|r - Показать имя окна под мышкой. (очень удобно для правки lua)"
-	L.core_uihelp6 = "|cffFF0000/heal|r - Включить рейдовый интерфейс для хила."
-	L.core_uihelp7 = "|cffFF0000/dps|r - Включить рейдовый интерфейс для ДПС/Танка."
-	L.core_uihelp8 = "|cffFF0000/bags|r - Сортировка сумок, покупка слотов в банке."
-	L.core_uihelp9 = "|cffFF0000/reset|r - Сбросить DuffedUI к настройкам по умолчанию."
-	L.core_uihelp10 = "|cffFF0000/rd|r - Распустить рейд."
-	L.core_uihelp11 = "|cffFF0000/ainv|r - Включить автоинвайт по определенному слову в приват. Вы можете установить ваше слово коммандой `/ainv слово`"
-	L.core_uihelp100 = "(Прокрутите вверх, чтобы увидеть больше команд...)"
- 
-	L.bind_combat = "Вы не можете назначать клавиши в бою."
-	L.bind_saved = "Все назначения клавиш сохранены."
-	L.bind_discard = "Все новые назначения клавиш были отменены."
-	L.bind_instruct = "Наведите указатель мыши на кнопку действия, чтобы назначить клавишу. Нажмите клавишу ESC или правую кнопку мыши чтобы убрать назначение."
-	L.bind_save = "Сохранить назначения"
-	L.bind_discardbind = "Отменить назначения"
- 
-	L.hunter_unhappy = "Ваш питомец несчастлив!"
-	L.hunter_content = "Ваш питомец доволен!"
-	L.hunter_happy = "Ваш питомец счастлив!"
-	
 	-- tuto/install
 	L.install_header_1 = "Добро пожаловать!"
 	L.install_header_2 = "1. Необходимые элементы"

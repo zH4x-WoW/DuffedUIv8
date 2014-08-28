@@ -6,7 +6,7 @@ if not C["actionbar"].enable == true then
 end
 
 D.CreatePopup["DUFFEDUI_FIX_AB"] = {
-	question = L.popup_fix_ab,
+	question = L["ui"]["fix_ab"]
 	answer1 = ACCEPT,
 	answer2 = CANCEL,
 	function1 = ReloadUI,

@@ -45,42 +45,83 @@ if D.client == "koKR" then
 		["star"] = "Star",
 	}
 
-	L.UI_Outdated = "당신의 DuffedUI 버전이 구버전입니다. 당신은 www.duffed.net에서 최신 버전을 다운로드하실 수 있습니다."
-	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
-	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r."
-	
-	-- Bufftracker
-	L.bufftracker_10ap = "+10% Attack Power"
-	L.bufftracker_10as = "+10% Melee & Ranged Attack Speed"
-	L.bufftracker_10sp = "+10% Spell Power"
-	L.bufftracker_5sh = "+5% Spell Haste"
-	L.bufftracker_5csc = "+5% Critical Strike Chance"
-	L.bufftracker_3kmr = "+3000 Mastery Rating"
-	L.bufftracker_5sai = "+5% Strength, Agility, Intellect"
-	L.bufftracker_10s = "+10% Stamina"
-	L.bufftracker_error = "ERROR"
+	L["ui"] = {
+		["outdated"] = "Your version of DuffedUI is out of date. You can download the latest version from www.duffed.net",
+		["welcome"] = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r.",
+		["disableui"] = "DuffedUI doesn't work for this resolution, do you want to disable DuffedUI? (Cancel if you want to try another resolution)",
+		["fix_ab"] = "There is something wrong with your action bar. Do you want to reloadui to fix it?",
+	}
 
-	-- Click2Cast
-	L.click2cast_title = "Mouse Bindings"
-	
-	-- worldboss
-	L.worldboss_title = "World Boss(s):"
-	L.worldboss_galleon = "Galleon"
-	L.worldboss_sha = "Sha of Anger"
-	L.worldboss_oondasta = "Oondasta"
-	L.worldboss_nalak = "Nalak"
-	L.worldboss_celestials = "Celestials"
-	L.worldboss_ordos = "Ordos"
-	L.worldboss_defeated = "Defeated"
-	L.worldboss_undefeated = "Undefeated"
-	
-	-- specswitcher buttons
-	L.sesbutton_reload = "Reloads the entire UI"
-	L.sesbutton_heal = "Switch to heal-layout"
-	L.sesbutton_dps = "Switch to dps-layout"
-	L.sesbutton_am = "Open Addonmanager"
-	L.sesbutton_move = "Move the frames"
-	L.sesbutton_kb = "Set your keybindings"
+	L["bufftracker"] = {
+		["10ap"] = "+10% Attack Power",
+		["10as"] = "+10% Melee & Ranged Attack Speed",
+		["10sp"] = "+10% Spell Power",
+		["5sh"] = "+5% Spell Haste",
+		["5csc"] = "+5% Critical Strike Chance",
+		["3kmr"] = "+3000 Mastery Rating",
+		["5sai"] = "+5% Strength, Agility, Intellect",
+		["10s"] = "+10% Stamina",
+		["error"] = "ERROR",
+	}
+
+	L["binds"] = {
+		["c2c_title"] = "Mouse Bindings",
+		["combat"] = "You can't bind keys in combat",
+		["saved"] = "All keybindings have been saved",
+		["discard"] = "All newly set keybindings have been discarded.",
+		["text"] = "Hover your mouse over any actionbutton to bind it. Press the escape key or right click to clear the current actionbuttons keybinding.",
+		["save"] = "Save bindings",
+		["discardbind"] = "Discard bindings",
+	}
+
+	L["loot"] = {
+		["tt_count"] = "Count",
+		["fish"] = "Fishy Loot",
+		["random"] = "Random Player",
+		["self"] = "Self Loot",
+		["repairmoney"] = "You don't have enough money to repair!",
+		["repaircost"] = "Your items have been repaired for",
+		["trash"] = "Your vendor trash has been sold and you earned",
+	}
+
+	L["buttons"] = {
+		["ses_reload"] = "Reloads the entire UI",
+		["ses_move"] = "Unlock the frames for moving",
+		["ses_kb"] = "Set your keybindings",
+	}
+
+	L["errors"] = {
+		["noerror"] = "No error yet."
+	}
+
+	L["uf"] = {
+		["offline"] = "Offline",
+		["dead"] = "|cffff0000[DEAD]|r",
+		["ghost"] = "GHOST",
+		["lowmana"] = "LOW MANA",
+		["threat1"] = "Threat on current target:",
+		["wrath"] = "Wrath",
+		["starfire"] = "Starfire",
+	}
+
+	L["group"] = {
+		["autoinv_enable"] = "Autoinvite ON: invite",
+		["autoinv_enable_custom"] = "Autoinvite ON: ",
+		["autoinv_disable"] = "Autoinvite OFF",
+		["disband"] = "Disbanding group?",
+	}
+
+	L["boss"] = {
+		["title"] = "World Boss(s):",
+		["galleon"] = "Galleon", 
+		["sha"] = "Sha of Anger", 
+		["oondasta"] = "Oondasta", 
+		["nalak"] = "Nalak",
+		["celestials"] = "Celestials", 
+		["ordos"] = "Ordos",
+		["defeated"] = "Defeated", 
+		["undefeated"] = "Undefeated",
+	}
 
 	-- chat
 	L.chat_INSTANCE_CHAT = "I"
@@ -108,8 +149,6 @@ if D.client == "koKR" then
 	L.chat_recrutment = "길드모집"
 	L.chat_lfg = "파티찾기"
  
-	L.disband = "공격대를 해체합니까?"
-
 	L.datatext_notalents ="특성 없음"
 	L.datatext_download = "다운로드: "
 	L.datatext_bandwidth = "대역폭: "
@@ -212,104 +251,6 @@ if D.client == "koKR" then
 	  [11] = {18, "원거리", 1000}
 	}
  
-	L.popup_disableui = "DuffedUI는 현재 해상도에 최적화되어 있지 않습니다. DuffedUI를 비활성화하시겠습니까? (다른 해상도로 시도해보려면 취소)"
-	L.popup_install = "현재 캐릭터는 DuffedUI를 처음 사용합니다. 행동 단축바, 대화창, 다양한 설정을 위해 UI를 다시 시작하셔야만 합니다."
-	L.popup_2raidactive = "2개의 공격대 인터페이스가 사용 중입니다. 한 가지만 사용하셔야 합니다."
-	L.popup_reset = "경고! DuffedUI의 모든것을 기본값으로 변경합니다. 실행하시겠습니까?"
-	L.popup_install_yes = "예"
-	L.popup_install_no = "아니오"
-	L.popup_reset_yes = "예"
-	L.popup_reset_no = "아니오"
-	L.popup_fix_ab = "귀하의 행동단축바에 문제가 있습니다. reloadui를 하여 문제를 해결하시겠습니까?"
- 
-	L.merchant_repairnomoney = "수리에 필요한 돈이 충분하지 않습니다!"
-	L.merchant_repaircost = "모든 아이템이 수리되었습니다: "
-	L.merchant_trashsell = "불필요한 아이템이 판매되었습니다: "
- 
-	L.goldabbrev = "|cffffd700●|r"
-	L.silverabbrev = "|cffc7c7cf●|r"
-	L.copperabbrev = "|cffeda55f●|r"
- 
-	L.error_noerror = "오류가 발견되지 않았습니다."
- 
-	L.unitframes_ouf_offline = "오프라인"
-	L.unitframes_ouf_dead = "죽음"
-	L.unitframes_ouf_ghost = "유령"
-	L.unitframes_ouf_lowmana = "마나 적음"
-	L.unitframes_ouf_threattext = "현재 대상에 대한 위협수준:"
-	L.unitframes_ouf_threattext2 = "Threat"
-	L.unitframes_ouf_offlinedps = "오프라인"
-	L.unitframes_ouf_deaddps = "|cffff0000[죽음]|r"
-	L.unitframes_ouf_ghostheal = "유령"
-	L.unitframes_ouf_deadheal = "죽음"
-	L.unitframes_ouf_gohawk = "매의 상으로 전환"
-	L.unitframes_ouf_goviper = "독사의 상으로 전환"
-	L.unitframes_disconnected = "연결끊김"
-	L.unitframes_ouf_wrathspell = "격노"
-	L.unitframes_ouf_starfirespell = "별빛 섬광"
- 
-	L.tooltip_count = "개수"
- 
-	L.bags_noslots = "더이상 가방보관함을 구입할 수 없습니다."
-	L.bags_costs = "가격: %.2f 골"
-	L.bags_buyslots = "가방 보관함을 추가로 구입하시려면 /bags를 입력해주세요."
-	L.bags_openbank = "먼저 은행을 열어야 합니다."
-	L.bags_sort = "열려있는 가방이나 은행에 있는 아이템을 정리합니다."
-	L.bags_stack = "띄엄띄엄 있는 아이템을 정리합니다."
-	L.bags_buybankslot = "가방 보관함을 추가로 구입합니다."
-	L.bags_search = "검색"
-	L.bags_sortmenu = "분류"
-	L.bags_sortspecial = "특수물품 분류"
-	L.bags_stackmenu = "정리"
-	L.bags_stackspecial = "특수물품 정리"
-	L.bags_showbags = "가방 보기"
-	L.bags_sortingbags = "분류 완료."
-	L.bags_nothingsort= "분류할 것이 없습니다."
-	L.bags_bids = "사용 중인 가방: "
-	L.bags_stackend = "재정리 완료."
-	L.bags_rightclick_search = "검색하려면 오른쪽 클릭"
-	
-	L.loot_fish = "전리품"
-	L.loot_empty = "빈 슬롯"
-	L.loot_randomplayer = "Random Player"
-	L.loot_self = "Self Loot"
- 
-	L.chat_invalidtarget = "잘못된 대상"
- 
-	L.mount_wintergrasp = "겨울손아귀"
- 
-	L.core_autoinv_enable = "자동초대 활성화: 초대"
-	L.core_autoinv_enable_c = "자동초대 활성화: "
-	L.core_autoinv_disable = "자동초대 비활성화"
-	L.core_wf_unlock = "임무 추적창 잠금 해제"
-	L.core_wf_lock = "임무 추적창 잠금"
-	L.core_welcome1 = "|cffC495DDDuffedUI|r를 사용해주셔서 감사합니다. 버전 "
-	L.core_welcome2 = "자세한 사항은 |cff00FFFF/uihelp|r를 입력하거나 www.duffed.net 에 방문하시면 확인 가능합니다."
- 
-	L.core_uihelp1 = "|cff00ff00일반적인 명령어|r"
-	L.core_uihelp2 = "|cffFF0000/moveui|r - 화면 주위 요소들을 잠금해제하고 이동합니다."
-	L.core_uihelp3 = "|cffFF0000/rl|r - 당신의 인터페이스를 다시 불러옵니다."
-	L.core_uihelp4 = "|cffFF0000/gm|r - 도움 요청(지식 열람실, GM 요청하기) 창을 엽니다."
-	L.core_uihelp5 = "|cffFF0000/frame|r - 커서가 위치한 창의 이름을 보여줍니다. (lua 편집 시 매우 유용)"
-	L.core_uihelp6 = "|cffFF0000/heal|r - 힐러용 공격대 레이아웃을 사용합니다."
-	L.core_uihelp7 = "|cffFF0000/dps|r - DPS/탱커용 레이아웃을 사용합니다."
-	L.core_uihelp8 = "|cffFF0000/bags|r - 분류, 정리, 가방 보관함을 추가 구입을 할 수 있습니다."
-	L.core_uihelp9 = "|cffFF0000/reset|r - DuffedUI를 기본값으로 초기화 합니다."
-	L.core_uihelp10 = "|cffFF0000/rd|r - 공격대를 해체합니다."
-	L.core_uihelp11 = "|cffFF0000/ainv|r - 자동초대 기능을 사용합니다. '/ainv 단어'를 입력하여 해당 단어가 들어간 귓속말이 올 경우 자동으로 초대를 합니다."
-	L.core_uihelp100 = "(위로 올리십시오 ...)"
- 
-	L.bind_combat = "전투 중에는 단축키를 지정할 수 없습니다."
-	L.bind_saved = "새로 지정한 모든 단축키가 저장되었습니다."
-	L.bind_discard = "새로 지정한 모든 단축키가 저장되지 않았습니다."
-	L.bind_instruct = "커서가 위치한 단축버튼에 단축키를 지정할 수 있습니다. 오른쪽 클릭으로 해당 단축버튼의 단축키를 초기화할 수 있습니다."
-	L.bind_save = "저장"
-	L.bind_discardbind = "취소"
- 
-	L.hunter_unhappy = "소환수의 만족도: 불만족"
-	L.hunter_content = "소환수의 만족도: 만족"
-	L.hunter_happy = "소환수의 만족도: 매우 만족"
-	
 	-- tuto/install
 	L.install_header_1 = "환영합니다"
 	L.install_header_2 = "1. 필수사항"

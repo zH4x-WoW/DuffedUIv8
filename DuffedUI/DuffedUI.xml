@@ -24,6 +24,7 @@
 	<Script file="core\popup.lua" />
 	<Script file="core\install.lua" />
 	<Script file="core\filters\f_cbticks.lua" />
+	<Script file="cversion.lua" />
 
 	<!-- modules -->
 	<Script file="modules\maps\minimap.lua" />

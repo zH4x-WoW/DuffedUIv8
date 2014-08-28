@@ -45,44 +45,84 @@ if D.client == "zhTW" then
 		["star"] = "Star",
 	}
 
-	L.UI_Outdated = "DuffedUI 版本已過期，請至 www.duffed.net 下載最新版"
-	L.UI_Talent_Change_Bug = "一個由暴雪產生的故障已阻止你改變你當前的天賦,這發生在你使用觀察功能查看其他玩家角色裝備時.不幸的是在這個魔獸補丁中我們對修正它無能為力,請/reload你的Ui程式介面並且再次嘗試."
+	L["ui"] = {
+		["outdated"] = "Your version of DuffedUI is out of date. You can download the latest version from www.duffed.net",
+		["welcome"] = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r.",
+		["disableui"] = "DuffedUI doesn't work for this resolution, do you want to disable DuffedUI? (Cancel if you want to try another resolution)",
+		["fix_ab"] = "There is something wrong with your action bar. Do you want to reloadui to fix it?",
+	}
 
-	L.welcome_1 = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."感謝您使用|cffc41f3bDuffedUI "..D.version.."|r. 詳細資訊請訪問 |cffc41f3bhttp://www.duffed.net|r."
-	
-	-- Bufftracker
-	L.bufftracker_10ap = "+10% Attack Power"
-	L.bufftracker_10as = "+10% Melee & Ranged Attack Speed"
-	L.bufftracker_10sp = "+10% Spell Power"
-	L.bufftracker_5sh = "+5% Spell Haste"
-	L.bufftracker_5csc = "+5% Critical Strike Chance"
-	L.bufftracker_3kmr = "+3000 Mastery Rating"
-	L.bufftracker_5sai = "+5% Strength, Agility, Intellect"
-	L.bufftracker_10s = "+10% Stamina"
-	L.bufftracker_error = "ERROR"
+	L["bufftracker"] = {
+		["10ap"] = "+10% Attack Power",
+		["10as"] = "+10% Melee & Ranged Attack Speed",
+		["10sp"] = "+10% Spell Power",
+		["5sh"] = "+5% Spell Haste",
+		["5csc"] = "+5% Critical Strike Chance",
+		["3kmr"] = "+3000 Mastery Rating",
+		["5sai"] = "+5% Strength, Agility, Intellect",
+		["10s"] = "+10% Stamina",
+		["error"] = "ERROR",
+	}
 
-	-- Click2Cast
-	L.click2cast_title = "Mouse Bindings"
-	
-	-- worldboss 世界Boss
-	L.worldboss_title = "世界Boss:"
-	L.worldboss_galleon = "帆船"
-	L.worldboss_sha = "憤怒之煞"
-	L.worldboss_oondasta = "烏達斯塔"
-	L.worldboss_nalak = "風暴龍王納拉卡"
-	L.worldboss_celestials = "Celestials"
-	L.worldboss_ordos = "Ordos"
-	L.worldboss_defeated = "已擊殺"
-	L.worldboss_undefeated = "未擊殺"
+	L["binds"] = {
+		["c2c_title"] = "Mouse Bindings",
+		["combat"] = "You can't bind keys in combat",
+		["saved"] = "All keybindings have been saved",
+		["discard"] = "All newly set keybindings have been discarded.",
+		["text"] = "Hover your mouse over any actionbutton to bind it. Press the escape key or right click to clear the current actionbuttons keybinding.",
+		["save"] = "Save bindings",
+		["discardbind"] = "Discard bindings",
+	}
 
-	-- specswitcher buttons
-	L.sesbutton_reload = "重新載入Ui介面"
-	L.sesbutton_heal = "切換到治療佈局"
-	L.sesbutton_dps = "切換到Dps輸出佈局"
-	L.sesbutton_am = "打開插件管理器 Addonmanager"
-	L.sesbutton_move = "移動框體"
-	L.sesbutton_kb = "設置您的按鍵綁定"
-	
+	L["loot"] = {
+		["tt_count"] = "Count",
+		["fish"] = "Fishy Loot",
+		["random"] = "Random Player",
+		["self"] = "Self Loot",
+		["repairmoney"] = "You don't have enough money to repair!",
+		["repaircost"] = "Your items have been repaired for",
+		["trash"] = "Your vendor trash has been sold and you earned",
+	}
+
+	L["buttons"] = {
+		["ses_reload"] = "Reloads the entire UI",
+		["ses_move"] = "Unlock the frames for moving",
+		["ses_kb"] = "Set your keybindings",
+	}
+
+	L["errors"] = {
+		["noerror"] = "No error yet."
+	}
+
+	L["uf"] = {
+		["offline"] = "Offline",
+		["dead"] = "|cffff0000[DEAD]|r",
+		["ghost"] = "GHOST",
+		["lowmana"] = "LOW MANA",
+		["threat1"] = "Threat on current target:",
+		["wrath"] = "Wrath",
+		["starfire"] = "Starfire",
+	}
+
+	L["group"] = {
+		["autoinv_enable"] = "Autoinvite ON: invite",
+		["autoinv_enable_custom"] = "Autoinvite ON: ",
+		["autoinv_disable"] = "Autoinvite OFF",
+		["disband"] = "Disbanding group?",
+	}
+
+	L["boss"] = {
+		["title"] = "World Boss(s):",
+		["galleon"] = "Galleon", 
+		["sha"] = "Sha of Anger", 
+		["oondasta"] = "Oondasta", 
+		["nalak"] = "Nalak",
+		["celestials"] = "Celestials", 
+		["ordos"] = "Ordos",
+		["defeated"] = "Defeated", 
+		["undefeated"] = "Undefeated",
+	}
+
 	-- chat
 	L.chat_INSTANCE_CHAT = "I"
 	L.chat_INSTANCE_CHAT_LEADER = "IL"
@@ -109,8 +149,6 @@ if D.client == "zhTW" then
 	L.chat_recrutment = "公會招募"
 	L.chat_lfg = "尋求組隊"
 	
-	L.disband = "正在解散隊伍"
-
 	L.datatext_notalents ="無天賦"
 	L.datatext_download = "下載: "
 	L.datatext_bandwidth = "寬頻: "
@@ -206,104 +244,6 @@ if D.client == "zhTW" then
 		[11] = {18, "遠程", 1000}
 	}
  
-	L.popup_disableui = "DuffedUI並不支援此解析度, 你想要停用DuffedUI嗎? (若果您想要嘗試其他解析度, 請按取消)"
-	L.popup_install = "這個角色首次使用DuffedUI V13, 您必需先重載介面以完成設定"
-	L.popup_reset = "警告! 此動作會重置任何設定至DuffedUI預設值. 您是否依然決定這樣做?"
-	L.popup_2raidactive = "2個團隊框架正在運行, 請選擇以下其中一個."
-	L.popup_install_yes = "當然是! (建議!)"
-	L.popup_install_no = "不用了, 救命這UI真差"
-	L.popup_reset_yes = "當然啦, 預設就是美!"
-	L.popup_reset_no = "不囉, 不然我會發文抱怨!"
-	L.popup_fix_ab = "動作列發生問題, 您想要重新載入介面來修復嗎?"
- 
-	L.merchant_repairnomoney = "您沒有足夠的金錢來修理!"
-	L.merchant_repaircost = "您的裝備已修理, 花費了"
-	L.merchant_trashsell = "您背包內的粗糙物品已被自動賣出, 您賺取了"
- 
-	L.goldabbrev = "|cffffd700g|r"
-	L.silverabbrev = "|cffc7c7cfs|r"
-	L.copperabbrev = "|cffeda55fc|r"
- 
-	L.error_noerror = "沒有錯誤"
- 
-	L.unitframes_ouf_offline = "離線"
-	L.unitframes_ouf_dead = "死亡"
-	L.unitframes_ouf_ghost = "鬼魂"
-	L.unitframes_ouf_lowmana = "法力過低"
-	L.unitframes_ouf_threattext = "當前目標的仇恨:"
-	L.unitframes_ouf_threattext2 = "Threat"
-	L.unitframes_ouf_offlinedps = "離線"
-	L.unitframes_ouf_deaddps = "|cffff0000[死亡]|r"
-	L.unitframes_ouf_ghostheal = "鬼魂"
-	L.unitframes_ouf_deadheal = "死亡"
-	L.unitframes_ouf_gohawk = "切換為雄鷹守護"
-	L.unitframes_ouf_goviper = "切換為蝮蛇守護"
-	L.unitframes_disconnected = "斷線"
-	L.unitframes_ouf_wrathspell = "憤怒"
-	L.unitframes_ouf_starfirespell = "星火術"
- 
-	L.tooltip_count = "數量"
- 
-	L.bags_noslots = "不能再購買更多的背包欄位!"
-	L.bags_costs = "花費: %.2f 金"
-	L.bags_buyslots = "輸入 /bags purchase yes 以購買銀行背包欄位"
-	L.bags_openbank = "您需要先造訪您的銀行"
-	L.bags_sort = "將背包或銀行內的物品分類及排序"
-	L.bags_stack = "將背包或銀行內的不完整的物品堆疊重新堆疊"
-	L.bags_buybankslot = "購買銀行背包欄位. (需要造訪銀行)"
-	L.bags_search = "搜尋"
-	L.bags_sortmenu = "分類及排序"
-	L.bags_sortspecial = "分類及排序特殊物品"
-	L.bags_stackmenu = "堆疊"
-	L.bags_stackspecial = "堆疊特殊物品"
-	L.bags_showbags = "顯示背包"
-	L.bags_sortingbags = "分類及排序完成"
-	L.bags_nothingsort= "不需要分類"
-	L.bags_bids = "使用背包: "
-	L.bags_stackend = "重新堆疊完成"
-	L.bags_rightclick_search = "點擊右鍵以搜尋物品."
-	
-	L.loot_fish = "漁獲"
-	L.loot_empty = "無戰利品"
-	L.loot_randomplayer = "隨機隊伍玩家"
-	L.loot_self = "自我獲取"
- 
-	L.chat_invalidtarget = "無效的目標"
- 
-	L.mount_wintergrasp = "冬握湖"
- 
-	L.core_autoinv_enable = "啟用自動邀請: invite"
-	L.core_autoinv_enable_c = "自動邀請功能已啟用: "
-	L.core_autoinv_disable = "自動邀請功能已關閉"
-	L.core_wf_unlock = "解鎖任務追蹤"
-	L.core_wf_lock = "鎖定任務追蹤"
-	L.core_welcome1 = "歡迎使用 |cffC495DDDuffedUI|r "
-	L.core_welcome2 = "輸入 |cff00FFFF/uihelp|r 以獲得更多資訊"
- 
-	L.core_uihelp1 = "|cff00ff00通用指令|r"
-	L.core_uihelp2 = "|cffFF0000/moveui|r - 解鎖並移動任何您看得見的框架及UI元素"
-	L.core_uihelp3 = "|cffFF0000/rl|r - 重新載入UI"
-	L.core_uihelp4 = "|cffFF0000/gm|r - 傳送回報單給GM或開啟幫助介面"
-	L.core_uihelp5 = "|cffFF0000/frame|r - 偵測滑鼠位置下的框架名稱. (對lua編輯者非常有幫助!)"
-	L.core_uihelp6 = "|cffFF0000/heal|r - 啟用Heal介面"
-	L.core_uihelp7 = "|cffFF0000/dps|r - 啟用Dps/Tank介面"
-	L.core_uihelp8 = "|cffFF0000/bags|r - 排序背包, 購買銀行背包位置或堆疊物品"
-	L.core_uihelp9 = "|cffFF0000/reset|r - 重置DuffedUI到預設設置"
-	L.core_uihelp10 = "|cffFF0000/rd|r - 解散團隊"
-	L.core_uihelp11 = "|cffFF0000/ainv|r - 啟用密語自動邀請, 您可以設定輸入`/ainv myword`以設置您的密語關鍵字"
-	L.core_uihelp100 = "(想看更多? 向上拉吧! ...)"
- 
-	L.bind_combat = "您不能在戰鬥中設定快捷鍵"
-	L.bind_saved = "所有快捷鍵修改已儲存"
-	L.bind_discard = "這次的快捷鍵修改已重設為上一次修改"
-	L.bind_instruct = "將滑鼠指向動作列上以綁定快捷鍵, 您可以按ESC或以右鍵點擊快捷列上任何一格以清除該位置的設定"
-	L.bind_save = "儲存"
-	L.bind_discardbind = "放棄"
- 
-	L.hunter_unhappy = "你的寵物感到不高興!"
-	L.hunter_content = "你的寵物感到滿足!"
-	L.hunter_happy = "你的寵物感到高興!"
-	
 	-- tuto/install
 	L.install_header_1 = "歡迎"
 	L.install_header_2 = "1. 基本要素"

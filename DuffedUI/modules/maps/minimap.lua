@@ -115,9 +115,8 @@ Minimap:SetScript("OnMouseUp", function(self, btn)
 	end
 end)
 
--- Mouseover map, displaying zone and coords
 local m_zone = CreateFrame("Frame", "DuffedUIMinimapZone", DuffedUIMinimap)
-m_zone:SetTemplate()
+m_zone:SetTemplate("Transparent")
 m_zone:Size(0,20)
 m_zone:Point("TOPLEFT", DuffedUIMinimap, "TOPLEFT", 2,-2)
 m_zone:SetFrameLevel(Minimap:GetFrameLevel() + 3)
@@ -134,7 +133,7 @@ m_zone_text:Width(m_zone:GetWidth()-6)
 m_zone_text:SetAlpha(0)
 
 local m_coord = CreateFrame("Frame", "DuffedUIMinimapCoord", DuffedUIMinimap)
-m_coord:SetTemplate()
+m_coord:SetTemplate("Transparent")
 m_coord:Size(40,20)
 m_coord:Point("BOTTOMLEFT", DuffedUIMinimap, "BOTTOMLEFT", 2,2)
 m_coord:SetFrameLevel(Minimap:GetFrameLevel() + 3)
@@ -150,7 +149,6 @@ m_coord_text:SetText("00,00")
 local int = 0
 m_coord:HookScript("OnUpdate", function(self, elapsed)
 	int = int + 1
-	
 	if int >= 3 then
 		local inInstance, _ = IsInInstance()
 		local x, y = GetPlayerMapPosition("player")

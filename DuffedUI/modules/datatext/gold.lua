@@ -30,11 +30,11 @@ local function formatMoney(money)
 	local copper = mod(floor(math.abs(money)), 100)
 
 	if gold ~= 0 then
-		return format(Stat.Color2.."%s|r" .. L.goldabbrev .. Stat.Color2.." %s|r" .. L.silverabbrev .. Stat.Color2.." %s|r" .. L.copperabbrev, gold, silver, copper)
+		return format(Stat.Color2.."%s|r" .. "|cffffd700g|r" .. Stat.Color2.." %s|r" .. "|cffc7c7cfs|r" .. Stat.Color2.." %s|r" .. "|cffeda55fc|r", gold, silver, copper)
 	elseif silver ~= 0 then
-		return format(Stat.Color2.."%s|r" .. L.silverabbrev .. Stat.Color2.." %s|r" .. L.copperabbrev, silver, copper)
+		return format(Stat.Color2.."%s|r" .. "|cffc7c7cfs|r" .. Stat.Color2.." %s|r" .. "|cffeda55fc|r", silver, copper)
 	else
-		return format(Stat.Color2.."%s|r" .. L.copperabbrev, copper)
+		return format(Stat.Color2.."%s|r" .. "|cffeda55fc|r", copper)
 	end
 end
 
@@ -42,14 +42,13 @@ local function FormatTooltipMoney(money)
 	local gold, silver, copper = abs(money / 10000), abs(mod(money / 100, 100)), abs(mod(money, 100))
 	local cash = ""
 
-	cash = format("%.2d" .. L.goldabbrev .. " %.2d" .. L.silverabbrev .. " %.2d" .. L.copperabbrev, gold, silver, copper)
-
+	cash = format("%.2d" .. "|cffffd700g|r" .. " %.2d" .. "|cffc7c7cfs|r" .. " %.2d" .. "|cffeda55fc|r", gold, silver, copper)
 	return cash
 end	
 
 local function Currency(id, weekly, capped)
 	local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(id)
-	
+
 	local r, g, b = 1, 1, 1
 	for i = 1, GetNumWatchedTokens() do
 		local _, _, _, itemID = GetBackpackCurrencyInfo( i )
@@ -57,7 +56,6 @@ local function Currency(id, weekly, capped)
 	end
 
 	if (amount == 0 and not ImprovedCurrency["Zero"] and r == 1) then return end
-
 	if weekly then
 		if discovered then
 			if id == 390 then
@@ -77,9 +75,7 @@ local function Currency(id, weekly, capped)
 			end
 		end
 	else
-		if discovered then
-			GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, amount, r, g, b, r, g, b)
-		end
+		if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, amount, r, g, b, r, g, b) end
 	end
 end
 
@@ -90,7 +86,6 @@ local function OnEvent(self, event)
 	local Change = NewMoney - OldMoney
 
 	if OldMoney>NewMoney then Spent = Spent - Change else Profit = Profit + Change end
-
 	Text:SetText(formatMoney(NewMoney))
 	self:SetAllPoints(Text)
 
@@ -99,7 +94,6 @@ local function OnEvent(self, event)
 	if DuffedUIData.gold == nil then DuffedUIData.gold = {} end
 	if DuffedUIData.gold[myPlayerRealm] == nil then DuffedUIData.gold[myPlayerRealm] = {} end
 	DuffedUIData.gold[myPlayerRealm][myPlayerName] = GetMoney()
-	
 	OldMoney = NewMoney
 end
 

@@ -76,14 +76,14 @@ end)
 function SlashCmdList.AUTOINVITE(msg, editbox)
 	if msg == "off" then
 		ainvenabled = false
-		print(L.core_autoinv_disable)
+		print(L["group"]["autoinv_disable"])
 	elseif msg == "" then
 		ainvenabled = true
-		print(L.core_autoinv_enable)
+		print(L["group"]["autoinv_enable"])
 		ainvkeyword = "invite"
 	else
 		ainvenabled = true
-		print(L.core_autoinv_enable_c .. msg)
+		print(L["group"]["autoinv_enable_custom"] .. msg)
 		ainvkeyword = msg
 	end
 end

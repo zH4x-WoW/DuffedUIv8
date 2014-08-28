@@ -134,7 +134,7 @@ local OnLogon = CreateFrame("Frame")
 OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 OnLogon:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	print(L.welcome_1)
+	print(L["ui"]["welcome"])
 end)
 
 local function positionsetup()
@@ -506,7 +506,7 @@ SLASH_RESETUI1 = "/reset"
 SlashCmdList.RESETUI = function() f:Show() step1() end
 
 D.CreatePopup["DUFFEDUIDISABLE_UI"] = {
-	question = L.popup_disableui,
+	question = L["ui"]["disableui"]
 	answer1 = ACCEPT,
 	answer2 = CANCEL,
 	function1 = function() DisableAddOn("DuffedUI") ReloadUI() end,

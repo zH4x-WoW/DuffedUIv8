@@ -50,7 +50,7 @@ local function DisbandRaidGroup()
 end
 
 D.CreatePopup["DUFFEDUIDISBAND_RAID"] = {
-	question = L.disband,
+	question = L["group"]["disband"],
 	answer1 = ACCEPT,
 	answer2 = CANCEL,
 	function1 = DisbandRaidGroup,

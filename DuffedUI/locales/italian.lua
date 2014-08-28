@@ -47,42 +47,83 @@ if D.client == "itIT" then
 		["star"] = "Star",
 	}
 
-	L.UI_Outdated = "La tua versione di DuffedUI non è aggiornata. Puoi scaricare l'ultima versione da www.duffed.net"
-	L.UI_Talent_Change_Bug = "Un bug della Blizzard sta impedendo il cambio dei talenti, questo succede quando si ispeziona qualcuno. Sfortunatamente non si può fare nulla per sistemare il problema, ricaricate la propria ui e riprovate."
-	L.welcome_1 = "Ciao |cffc41f3b".. D.myname.."!|r".."\n".."Grazie per utilizzare |cffc41f3bDuffedUI "..D.version.."|r. Per maggiori informazioni visita |cffc41f3bhttp://www.duffed.net|r."
-	
-	-- Bufftracker
-	L.bufftracker_10ap = "Potenza Attacco +10%"
-	L.bufftracker_10as = "Velocità Att. a Distanza e Mischia +10%"
-	L.bufftracker_10sp = "Potenza Magica +10%"
-	L.bufftracker_5sh = "Celerità Magica +5%"
-	L.bufftracker_5csc = "Possibilità di Critico +5%"
-	L.bufftracker_3kmr = "Indice Maestria +3000"
-	L.bufftracker_5sai = "Forza, Agilità e Intelletto +5%"
-	L.bufftracker_10s = "Tempra +10%"
-	L.bufftracker_error = "ERRORE"
+	L["ui"] = {
+		["outdated"] = "Your version of DuffedUI is out of date. You can download the latest version from www.duffed.net",
+		["welcome"] = "Hello |cffc41f3b".. D.myname.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r.",
+		["disableui"] = "DuffedUI doesn't work for this resolution, do you want to disable DuffedUI? (Cancel if you want to try another resolution)",
+		["fix_ab"] = "There is something wrong with your action bar. Do you want to reloadui to fix it?",
+	}
 
-	-- Click2Cast
-	L.click2cast_title = "Associazioni Mouse"
-	
-	-- worldboss
-	L.worldboss_title = "World Boss(s):"
-	L.worldboss_galleon = "Galleon"
-	L.worldboss_sha = "Sha of Anger"
-	L.worldboss_oondasta = "Oondasta"
-	L.worldboss_nalak = "Nalak"
-	L.worldboss_celestials = "Celestials"
-	L.worldboss_ordos = "Ordos"
-	L.worldboss_defeated = "Sconfitto"
-	L.worldboss_undefeated = "Imbattuto"
+	L["bufftracker"] = {
+		["10ap"] = "+10% Attack Power",
+		["10as"] = "+10% Melee & Ranged Attack Speed",
+		["10sp"] = "+10% Spell Power",
+		["5sh"] = "+5% Spell Haste",
+		["5csc"] = "+5% Critical Strike Chance",
+		["3kmr"] = "+3000 Mastery Rating",
+		["5sai"] = "+5% Strength, Agility, Intellect",
+		["10s"] = "+10% Stamina",
+		["error"] = "ERROR",
+	}
 
-	-- specswitcher buttons
-	L.sesbutton_reload = "Ricarica l'intera UI"
-	L.sesbutton_heal = "Passa al layout guaritore"
-	L.sesbutton_dps = "Passa al layout dps"
-	L.sesbutton_am = "Apri il gestore di AddOns"
-	L.sesbutton_move = "Muovi i frames"
-	L.sesbutton_kb = "Associazioni scorciatoie tastiera"
+	L["binds"] = {
+		["c2c_title"] = "Mouse Bindings",
+		["combat"] = "You can't bind keys in combat",
+		["saved"] = "All keybindings have been saved",
+		["discard"] = "All newly set keybindings have been discarded.",
+		["text"] = "Hover your mouse over any actionbutton to bind it. Press the escape key or right click to clear the current actionbuttons keybinding.",
+		["save"] = "Save bindings",
+		["discardbind"] = "Discard bindings",
+	}
+
+	L["loot"] = {
+		["tt_count"] = "Count",
+		["fish"] = "Fishy Loot",
+		["random"] = "Random Player",
+		["self"] = "Self Loot",
+		["repairmoney"] = "You don't have enough money to repair!",
+		["repaircost"] = "Your items have been repaired for",
+		["trash"] = "Your vendor trash has been sold and you earned",
+	}
+
+	L["buttons"] = {
+		["ses_reload"] = "Reloads the entire UI",
+		["ses_move"] = "Unlock the frames for moving",
+		["ses_kb"] = "Set your keybindings",
+	}
+
+	L["errors"] = {
+		["noerror"] = "No error yet."
+	}
+
+	L["uf"] = {
+		["offline"] = "Offline",
+		["dead"] = "|cffff0000[DEAD]|r",
+		["ghost"] = "GHOST",
+		["lowmana"] = "LOW MANA",
+		["threat1"] = "Threat on current target:",
+		["wrath"] = "Wrath",
+		["starfire"] = "Starfire",
+	}
+
+	L["group"] = {
+		["autoinv_enable"] = "Autoinvite ON: invite",
+		["autoinv_enable_custom"] = "Autoinvite ON: ",
+		["autoinv_disable"] = "Autoinvite OFF",
+		["disband"] = "Disbanding group?",
+	}
+
+	L["boss"] = {
+		["title"] = "World Boss(s):",
+		["galleon"] = "Galleon", 
+		["sha"] = "Sha of Anger", 
+		["oondasta"] = "Oondasta", 
+		["nalak"] = "Nalak",
+		["celestials"] = "Celestials", 
+		["ordos"] = "Ordos",
+		["defeated"] = "Defeated", 
+		["undefeated"] = "Undefeated",
+	}
 
 	-- chat
 	L.chat_INSTANCE_CHAT = "I"
@@ -109,8 +150,6 @@ if D.client == "itIT" then
 	L.chat_defense = "Difesa Locale"
 	L.chat_recrutment = "Cerca Gilda"
 	L.chat_lfg = "Cerca Gruppo"
-
-	L.disband = "Rimuovere il gruppo?"
 
 	L.datatext_notalents ="Nessun talento"
 	L.datatext_download = "Download: "
@@ -206,100 +245,6 @@ if D.client == "itIT" then
 		[10] = {17, "Mano Secondaria", 1000},
 		[11] = {18, "Ranged", 1000}
 	}
-
-	L.popup_disableui = "DuffedUI non funziona con questa risoluzione, vuoi disabilitare DuffedUI? (Cancella se vuoi provare un altra risoluzione)"
-	L.popup_install = "La prima volta che esegui DuffedUI con questo personaggio. Devi ricaricare la tua UI per settare le barre di azione, le variabili e la chat."
-	L.popup_reset = "Attenzione! Questo resetterà DuffedUI alle impostazioni di default. Vuoi procedere?"
-	L.popup_2raidactive = "Sono attivi 2 raid layouts, sceglierne uno."
-	L.popup_install_yes = "Yeah! (Raccomandato!)"
-	L.popup_install_no = "No"
-	L.popup_reset_yes = "Yeah baby!"
-	L.popup_reset_no = "No"
-	L.popup_fix_ab = "C'è qualcosa di sbagliato nelle tue barre di azione. Vuoi ricaricare la UI per sistemare il problema?"
-
-	L.merchant_repairnomoney = "Non hai abbastanza soldi per riparare!"
-	L.merchant_repaircost = "I tuoi oggetti sono stati riparati per"
-	L.merchant_trashsell = "La tua spazzatura è stata venduta e hai guadagnato"
-
-	L.goldabbrev = "|cffffd700g|r"
-	L.silverabbrev = "|cffc7c7cfs|r"
-	L.copperabbrev = "|cffeda55fc|r"
-
-	L.error_noerror = "Nessun errore."
-
-	L.unitframes_ouf_offline = "Sconnesso"
-	L.unitframes_ouf_dead = "Morto"
-	L.unitframes_ouf_ghost = "Fantasma"
-	L.unitframes_ouf_lowmana = "MANA BASSO"
-	L.unitframes_ouf_threattext = "Minaccia sul target corrente:"
-	L.unitframes_ouf_threattext2 = "Threat"
-	L.unitframes_ouf_offlinedps = "Sconnesso"
-	L.unitframes_ouf_deaddps = "|cffff0000[DEAD]|r"
-	L.unitframes_ouf_ghostheal = "FANTASMA"
-	L.unitframes_ouf_deadheal = "MORTO"
-	L.unitframes_ouf_gohawk = "GO HAWK"
-	L.unitframes_ouf_goviper = "GO VIPER"
-	L.unitframes_disconnected = "D/C"
-	L.unitframes_ouf_wrathspell = "Wrath"
-	L.unitframes_ouf_starfirespell = "Starfire"
-
-	L.tooltip_count = "Count"
-
-	L.bags_noslots = "Impossibile comprare altri slot!"
-	L.bags_costs = "Prezzo: %.2f gold"
-	L.bags_buyslots = "Compra nuovi slot con /bags purchase yes"
-	L.bags_openbank = "Devi aprire la tua banca prima."
-	L.bags_sort = "Ordina i tuoi zaini o la tua banca, se aperta."
-	L.bags_stack = "Riempie gli slot nei tuoi zaini o nella tua banca, se aperta."
-	L.bags_buybankslot = "Compra slot di banca. (Devi avere la banca aperta)"
-	L.bags_search = "Cerca"
-	L.bags_sortmenu = "Ordina"
-	L.bags_sortspecial = "Ordina Speciale"
-	L.bags_stackmenu = "Stack"
-	L.bags_stackspecial = "Stack Speciale"
-	L.bags_showbags = "Visualizza Zaini"
-	L.bags_sortingbags = "Ordinamento finito."
-	L.bags_nothingsort= "Nulla da ordinare."
-	L.bags_bids = "Zaini utilizzati: "
-	L.bags_stackend = "Restacking finito."
-	L.bags_rightclick_search = "Click tasto destro per cercare."
-
-	L.loot_fish = "Fishy loot"
-	L.loot_empty = "slot vuoto"
-	L.loot_randomplayer = "Giocatore a Caso"
-	L.loot_self = "Self Loot"
-
-	L.chat_invalidtarget = "Bersaglio non valido"
-
-	L.mount_wintergrasp = "Wintergrasp"
-
-	L.core_autoinv_enable = "Autoinvite ON: invite"
-	L.core_autoinv_enable_c = "Autoinvite ON: "
-	L.core_autoinv_disable = "Autoinvite OFF"
-	L.core_wf_unlock = "WatchFrame unlock"
-	L.core_wf_lock = "WatchFrame lock"
-	L.core_welcome1 = "Benvenuto in |cffC495DDDuffedUI|r, versione "
-	L.core_welcome2 = "Digita |cff00FFFF/uihelp|r per maggiori informazione o visita www.duffed.net"
-
-	L.core_uihelp1 = "|cff00ff00Comandi Generali|r"
-	L.core_uihelp2 = "|cffFF0000/moveui|r - Sblocca e muove gli elementi attorno allo schermo."
-	L.core_uihelp3 = "|cffFF0000/rl|r - Ricaricare la UI."
-	L.core_uihelp4 = "|cffFF0000/gm|r - Iniva un ticket al GM o visualizza l'help in game."
-	L.core_uihelp5 = "|cffFF0000/frame|r - Rileva il nome del frame sul quale il tuo mouse si trova. (Utile per chi edita il lua)"
-	L.core_uihelp6 = "|cffFF0000/heal|r - Abilita l'healing raid layout."
-	L.core_uihelp7 = "|cffFF0000/dps|r - Abilita il DPS/Tank raid layout."
-	L.core_uihelp8 = "|cffFF0000/bags|r - Per ordinare, comprare slot di banca o completare gli stack degli item nei tuoi zaini."
-	L.core_uihelp9 = "|cffFF0000/reset|r - Reset DuffedUI alle impostazioni di default."
-	L.core_uihelp10 = "|cffFF0000/rd|r - Rimuovere il raid."
-	L.core_uihelp11 = "|cffFF0000/ainv|r - Abilita autoinvito via parola su sussurro. Puoi settare la tua propia parola con `/ainv myword`"
-	L.core_uihelp100 = "(Scrolla su per maggiori comandi ...)"
-
-	L.bind_combat = "Non puoi associare tasti mentre sei in combattimento."
-	L.bind_saved = "Tutte le tue associazioni sono state salvate."
-	L.bind_discard = "Tutte le nuove associazioni sono state scartate."
-	L.bind_instruct = "Posiziona il puntatore del mouse su qualsiasi actionbutton per legarlo. Premere il tasto Esc o fare clic destro per cancellare le attuali associazioni."
-	L.bind_save = "Salva associazioni"
-	L.bind_discardbind = "Scarta associazioni"
 
 	-------------------------------------------------
 	-- INSTALLATION

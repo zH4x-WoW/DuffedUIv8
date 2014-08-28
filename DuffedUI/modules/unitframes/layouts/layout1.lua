@@ -389,7 +389,7 @@ local function Shared(self, unit)
 			buffs["growth-x"] = "RIGHT"
 			buffs.PostCreateIcon = D.PostCreateAura
 			buffs.PostUpdateIcon = D.PostUpdateAura
-			self.Buffs = buffs	
+			self.Buffs = buffs
 
 			debuffs.spacing = 2
 			debuffs.initialAnchor = 'TOPRIGHT'
