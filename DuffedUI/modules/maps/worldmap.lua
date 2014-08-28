@@ -107,7 +107,10 @@ function WorldMap:Skin()
 
 	QuestBackground:SetAlpha(0)
 
-	TutorialButton:Kill()
+	TutorialButton.Ring:Hide()
+	TutorialButton:SetScale(.75)
+	TutorialButton:ClearAllPoints()
+	TutorialButton:SetPoint("LEFT", Map.Header, "LEFT", 0, 0)
 
 	TrackingMenuButton:SetAlpha(0)
 	TrackingMenuBackground:SetAlpha(0)

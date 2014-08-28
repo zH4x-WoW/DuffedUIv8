@@ -146,7 +146,18 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	else
 		for i = 2, NumLines do
 			local Line = _G["GameTooltipTextLeft"..i]
-			if ((Line:GetText():find("^" .. LEVEL)) or (CreatureType and Line:GetText():find("^" .. CreatureType))) then
+			local Text = Line:GetText()
+
+			if (Text:find("^" .. WORLD_MAP_WILDBATTLEPET_LEVEL)) then
+				local Level, CreatureType = strmatch(Text, WORLD_MAP_WILDBATTLEPET_LEVEL..'(%d+) (%w+)')
+				local Average = C_PetJournal.GetPetTeamAverageLevel()
+				local Color = Average and GetRelativeDifficultyColor(Average, Level) or GetQuestDifficultyColor(Level)
+
+				Line:SetFormattedText("%s|cff%02x%02x%02x%s|r %s", WORLD_MAP_WILDBATTLEPET_LEVEL, Color.r * 255, Color.g * 255, Color.b * 255, Level, CreatureType)
+				break
+			end
+
+			if ((Text:find("^" .. LEVEL)) or (CreatureType and Text:find("^" .. CreatureType))) then
 				if Level == -1 and Classification == "elite" then Classification = "worldboss" end
 				Line:SetFormattedText("|cff%02x%02x%02x%s|r%s %s", R * 255, G * 255, B * 255, Classification ~= "worldboss" and Level ~= 0 and Level or "", DuffedUITooltips.Classification[Classification] or "", CreatureType or "")
 				break
@@ -165,7 +176,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 
 	if (UnitExists(Unit .. "target") and Unit ~= "player") then
 		local hex, R, G, B = DuffedUITooltips:GetColor(Unit)
-		
+
 		if (not R) and (not G) and (not B) then R, G, B = 1, 1, 1 end
 		GameTooltip:AddLine(UnitName(Unit .. "target"), R, G, B)
 	end
@@ -275,36 +286,45 @@ hooksecurefunc(GameTooltip, "SetUnitDebuff", function(self,...)
 	addAuraInfo(self, caster, spellID)
 end)
 
+DuffedUITooltips:RegisterEvent("PLAYER_ENTERING_WORLD")
 DuffedUITooltips:RegisterEvent("ADDON_LOADED")
 DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "DuffedUI") then return end
+	if event == "PLAYER_ENTERING_WORLD" then
+		hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
+		ItemRefCloseButton:SkinCloseButton()
 
-	hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
-	ItemRefCloseButton:SkinCloseButton()
-
-	for _, Tooltip in pairs(DuffedUITooltips.Tooltips) do
-		if Tooltip == GameTooltip then Tooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit) end
-		Tooltip:HookScript("OnShow", self.Skin)
-	end
-
-	if C["tooltip"].hidebuttons == true then
-		local CombatHideActionButtonsTooltip = function(self)
-			if not IsShiftKeyDown() then self:Hide() end
+		for _, Tooltip in pairs(DuffedUITooltips.Tooltips) do
+			if Tooltip == GameTooltip then Tooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit) end
+			Tooltip:HookScript("OnShow", self.Skin)
 		end
-		hooksecurefunc(GameTooltip, "SetAction", CombatHideActionButtonsTooltip)
-		hooksecurefunc(GameTooltip, "SetPetAction", CombatHideActionButtonsTooltip)
-		hooksecurefunc(GameTooltip, "SetShapeshift", CombatHideActionButtonsTooltip)
-	end
 
-	HealthBar:SetStatusBarTexture(C["media"].normTex)
-	HealthBar:CreateBackdrop()
-	HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
-	HealthBar.Text = HealthBar:CreateFontString(nil, "OVERLAY")
-	HealthBar.Text:SetFont(C["media"].font, 11, "THINOULINE")
-	HealthBar.Text:SetShadowColor(0, 0, 0)
-	HealthBar.Text:SetShadowOffset(1.25, -1.25)
-	HealthBar.Text:Point("CENTER", HealthBar, 0, 6)
-	HealthBar:ClearAllPoints()
-	HealthBar:Point("BOTTOMLEFT", HealthBar:GetParent(), "TOPLEFT", 2, 5)
-	HealthBar:Point("BOTTOMRIGHT", HealthBar:GetParent(), "TOPRIGHT", -2, 5)
+		if C["tooltip"].hidebuttons == true then
+			local CombatHideActionButtonsTooltip = function(self)
+				if not IsShiftKeyDown() then self:Hide() end
+			end
+			hooksecurefunc(GameTooltip, "SetAction", CombatHideActionButtonsTooltip)
+			hooksecurefunc(GameTooltip, "SetPetAction", CombatHideActionButtonsTooltip)
+			hooksecurefunc(GameTooltip, "SetShapeshift", CombatHideActionButtonsTooltip)
+		end
+
+		HealthBar:SetStatusBarTexture(C["media"].normTex)
+		HealthBar:CreateBackdrop()
+		HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
+		HealthBar.Text = HealthBar:CreateFontString(nil, "OVERLAY")
+		HealthBar.Text:SetFont(C["media"].font, 11, "THINOULINE")
+		HealthBar.Text:SetShadowColor(0, 0, 0)
+		HealthBar.Text:SetShadowOffset(1.25, -1.25)
+		HealthBar.Text:Point("CENTER", HealthBar, 0, 6)
+		HealthBar:ClearAllPoints()
+		HealthBar:Point("BOTTOMLEFT", HealthBar:GetParent(), "TOPLEFT", 2, 5)
+		HealthBar:Point("BOTTOMRIGHT", HealthBar:GetParent(), "TOPRIGHT", -2, 5)
+	else
+		if addon ~= "Blizzard_DebugTools" then return end
+		if FrameStackTooltip then
+			FrameStackTooltip:SetScale(C["general"].uiscale)
+			FrameStackTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
+		end
+
+		if EventTraceTooltip then EventTraceTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
+	end
 end)
