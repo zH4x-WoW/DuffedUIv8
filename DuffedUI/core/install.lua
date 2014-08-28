@@ -506,7 +506,7 @@ SLASH_RESETUI1 = "/reset"
 SlashCmdList.RESETUI = function() f:Show() step1() end
 
 D.CreatePopup["DUFFEDUIDISABLE_UI"] = {
-	question = L["ui"]["disableui"]
+	question = L["ui"]["disableui"],
 	answer1 = ACCEPT,
 	answer2 = CANCEL,
 	function1 = function() DisableAddOn("DuffedUI") ReloadUI() end,
