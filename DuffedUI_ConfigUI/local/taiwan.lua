@@ -55,7 +55,7 @@
 	DuffedUIConfigUILocalization.castbarcolor = "Set color for castbars"
 	DuffedUIConfigUILocalization.castbarclasscolor = "Enable classcolor for castbar"
 	DuffedUIConfigUILocalization.castbarcbticks = "Enable castbar ticks for channeled casts."
-	DuffedUIConfigUILocalization.playerwidth = "Set width of player castbar"
+	DuffedUIConfigUILocalization.castbarplayerwidth = "Set width of player castbar"
 
 	-- nameplate
 	DuffedUIConfigUILocalization.nameplate = "Nameplates"

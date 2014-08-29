@@ -49,7 +49,7 @@ C["chat"] = {
 C["castbar"] = {
 	["enable"] = true,
 	["petenable"] = true,
-	["cblatency"] = false,
+	["cblatency"] = true,
 	["cbicons"] = true,
 	["spark"] = true,
 	["classcolor"] = false,
@@ -206,7 +206,7 @@ C["misc"] = {
 	["ilvlcharacter"] = true,
 	["loc"] = true,
 	["acm_screen"] = true,
-	["clickcast"] = false,
+	["clickcast"] = true,
 	["Click2Cast_Filter"] = true,
 	["AFKCamera"] = true,
 }

@@ -248,6 +248,7 @@ local AllBuffs = {
 		93435,						-- Roar of Courage (Hunterpet)
 		116956,						-- Grace of Air
 		128997,						-- Spirit Beast Blessing
+		155522,						-- Power of the Grave
 	},
 	["5sai"] = {
 		1126,						-- Mark of the Wild
