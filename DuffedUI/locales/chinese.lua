@@ -197,12 +197,12 @@ if D.client == "zhCN" then
 	}
 
 	L["chat"] = {
-		["instance_chat"] = "I,"
+		["instance_chat"] = "I",
 		["instance_chat_leader"] = "IL",
 		["guild"] = "G",
 		["officer"] = "O",
 		["party"] = "P",
-		["party_leader"] "P",
+		["party_leader"] = "P",
 		["raid"] = "R",
 		["raid_leader"] = "RL",
 		["raid_warning"] = "RW",

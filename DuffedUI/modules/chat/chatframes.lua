@@ -13,13 +13,13 @@ local strings = {
 	PARTY = L["chat"]["party"],
 	RAID = L["chat"]["raid"],
 	OFFICER = L["chat"]["officer"],
-	INSTANCE_CHAT_LEADER = L.["chat"]["instance_chat_leader"],
+	INSTANCE_CHAT_LEADER = L["chat"]["instance_chat_leader"],
 	PARTY_LEADER = L["chat"]["party_leader"],
 	RAID_LEADER = L["chat"]["raid_leader"],
 	PET_BATTLE_COMBAT_LOG = L["chat"]["petbattle"],
 
 	-- zhCN
-	Guild = L.["chat"]["guild"],
+	Guild = L["chat"]["guild"],
 	raid = L["chat"]["raid"],
 	Party = L["chat"]["party"],
 }
