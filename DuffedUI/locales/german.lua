@@ -174,7 +174,7 @@ if D.client == "deDE" then
 		["lowmana"] = "Wenig Mana",
 		["threat1"] = "Bedrohung auf aktuellem Ziel:",
 		["wrath"] = "Zorn",
-		["starfire"] = "Sternfeuer",
+		["starfire"] = "Sternenfeuer",
 	}
 
 	L["group"] = {
