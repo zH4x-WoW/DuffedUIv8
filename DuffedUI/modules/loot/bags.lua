@@ -2,7 +2,6 @@ local D, C, L, G = unpack(select(2,  ...))
 if not C["bags"].enable == true then return end
 
 local _G = _G
-local Noop = function() end
 local ReplaceBags = 0
 local LastButtonBag, LastButtonBank, LastButtonReagent
 local NUM_CONTAINER_FRAMES = NUM_CONTAINER_FRAMES
@@ -219,15 +218,16 @@ function CreateContainer(storagetype, ...)
 		Sort:Size(75, 23)
 		Sort:ClearAllPoints()
 		Sort:SetPoint("BOTTOMLEFT", Container, "BOTTOMLEFT", 10, 7)
-		Sort:SetFrameLevel(Container:GetFrameLevel())
+		Sort:SetFrameLevel(Container:GetFrameLevel() + 1)
 		Sort:SetFrameStrata(Container:GetFrameStrata())
 		Sort:StripTextures()
 		Sort:SkinButton()
+		Sort:SetScript("OnClick", SortBags)
 		Sort:FontString("Text", C["media"].font, 11)
 		Sort.Text:SetPoint("CENTER")
 		Sort.Text:SetText(BAG_FILTER_CLEANUP)
-		Sort.ClearAllPoints = Noop
-		Sort.SetPoint = Noop
+		Sort.ClearAllPoints = D.dummy
+		Sort.SetPoint = D.dummy
 
 		ToggleBagsContainer:SetHeight(20)
 		ToggleBagsContainer:SetWidth(20)
@@ -391,9 +391,9 @@ function SetBagsSearchPosition()
 	BagItemSearchBox:SetPoint("TOPRIGHT", _G["DuffedUI_Bag"], "TOPRIGHT", -28, -6)
 	BagItemSearchBox:StripTextures()
 	BagItemSearchBox:SetTemplate()
-	BagItemSearchBox.SetParent = Noop
-	BagItemSearchBox.ClearAllPoints = Noop
-	BagItemSearchBox.SetPoint = Noop
+	BagItemSearchBox.SetParent = D.dummy
+	BagItemSearchBox.ClearAllPoints = D.dummy
+	BagItemSearchBox.SetPoint = D.dummy
 
 	BankItemSearchBox:Hide()
 end
@@ -468,9 +468,9 @@ function UpdateAllBags()
 			Button:SetFrameStrata("HIGH")
 			Button:SetFrameLevel(2)
 			Button.newitemglowAnim:Stop()
-			Button.newitemglowAnim.Play = Noop
+			Button.newitemglowAnim.Play = D.dummy
 			Button.flashAnim:Stop()
-			Button.flashAnim.Play = Noop
+			Button.flashAnim.Play = D.dummy
 
 			Money:ClearAllPoints()
 			Money:Show()
