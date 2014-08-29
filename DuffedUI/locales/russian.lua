@@ -52,6 +52,72 @@ if D.client == "ruRU" then
 		["fix_ab"] = "There is something wrong with your action bar. Do you want to reloadui to fix it?",
 	}
 
+	L["install"] = {
+		["header01"] = "Welcome",
+		["header02"] = "1. Essentials",
+		["header03"] = "2. Unitframes",
+		["header04"] = "3. Features",
+		["header05"] = "4. Things you should know!",
+		["header06"] = "5. Commands",
+		["header07"] = "6. Finished",
+		["header08"] = "1. Essential Settings",
+		["header09"] = "2. Social",
+		["header10"] = "3. Frames",
+		["header11"] = "4. Success!",
+
+		["continue_skip"] = "Click 'Continue' to apply the settings, or click 'Skip' if you wish to skip this step.",
+		["initline1"] = "Thank you for choosing DuffedUI!",
+		["initline2"] = "You will be guided through the installation process in a few simple steps.  At each step, you can decide whether or not you want to apply or skip the presented settings.",
+		["initline3"] = "You are also given the possibility to be shown a brief tutorial on some of the features of DuffedUI.",
+		["initline4"] = "Press the 'Tutorial' button to be guided through this small introduction, or press 'Install' to skip this step.",
+
+		["step1line1"] = "These steps will apply the correct CVar settings for DuffedUI.",
+		["step1line2"] = "The first step applies the essential settings.",
+		["step1line3"] = "This is |cffff0000recommended|r for any user, unless you want to apply only a specific part of the settings.",
+
+		["step2line0"] = "Another chat addon is found.  We will ignore this step.  Please press skip to continue installation.",
+		["step2line1"] = "The second step applies the correct chat setup.",
+		["step2line2"] = "If you are a new user, this step is recommended.  If you are an existing user, you may want to skip this step.",
+		["step2line3"] = "It is normal that your chat font will appear too big upon applying these settings.  It will revert back to normal when you finish with the installation.",
+
+		["step3line1"] = "The third and final step applies the default frame positions.",
+		["step3line2"] = "This step is |cffff0000recommended|r for new users.",
+		["step3line3"] = "",
+
+		["step4line1"] = "Installation is complete.",
+		["step4line2"] = "Please click the 'Finish' button to reload the UI.",
+		["step4line3"] = "",
+		["step4line4"] = "Enjoy DuffedUI! Visit us at www.duffed.net!",
+	}
+
+	L["tutorial"] = {
+		["step1line1"] = "This quick tutorial will show you some of the features in DuffedUI.",
+		["step1line2"] = "First, the essentials that you should know before you can play with this UI.",
+		["step1line3"] = "This installer is partially character-specific. While some of the settings that will be applied later on are account-wide, you need to run the install script for each new character running DuffedUI. The script is auto shown on every new character you log in with DuffedUI installed for the first time.  Also, the options can be found in /DuffedUI/config/config.lua for `Power` users or by typing /duffedui in game for `Friendly` users.",
+		["step1line4"] = "A power user is a user of a personal computer who has the ability to use advanced features (ex: Lua editing) which are beyond the abilities of normal users.  A friendly user is a normal user and is not necessarily capable of programming.  It's recommended for them to use our in game configuration tool (/duffedui) for settings they want changed in DuffedUI.",
+
+		["step2line1"] = "DuffedUI includes an embedded version of oUF (oUFDuffedUI) created by Haste.  This handles all of the unitframes on the screen, the buffs and debuffs, and the class-specific elements.",
+		["step2line2"] = "You can visit wowinterface.com and search for oUF for more information about this tool.",
+		["step2line3"] = "To easily change the unitframes positions, just type /moveui.",
+
+		["step3line1"] = "DuffedUI is a redesigned Blizzard UI.  Nothing less, nothing more.  Approxmently all features you see with Default UI is available thought DuffedUI.  The only features not available thought default UI are some automated features not really visible on screen, for example auto selling grays when visiting a vendor or, auto sorting bags.",
+		["step3line2"] =  "Not everyone enjoys things like DPS meters, Boss mods, Threat meters, etc, we judge that it's the best thing to do. DuffedUI is made around the idea to work  for all classes, roles, specs, type of gameplay, taste of the users, etc. This why DuffedUI is one of the most popular UI at the moment. It fits everyones play style and is extremly editable. It's also designed to be a good start for everyone that want to make their own custom UI without depending on addons. Since 2010 a lot of users have started using DuffedUI as a base for their own UI. Take a look at the Edited Packages on our website!",
+		["step3line3"] = "Users may want to visit our extra mods section on our website or by visiting www.wowinterface.com to install additional features or mods.",
+
+		["step4line1"] = "To set how many bars you want, mouseover on left or right of bottom action bar background.  Do the same on the right, via top and bottom.  To copy text from the chat frame, click the button shown on mouseover in the right corner of chat frames.",
+		["step4line2"] = "You can left-click through 80% of datatext to show various panels from Blizzard.  Friend and Guild Datatext have right-click features aswell.",
+		["step4line3"] = "There are some dropdown menus available. Right-clicking on the [X] (Close) bag button will show a dropdown menu to show bags.  Middle-clicking thought Minimap will show the micro menu.",
+
+		["step5line1"] = "Lastly, DuffedUI includes useful slash commands.  Below is a list.",
+		["step5line2"] = "/moveui allow you to move lots of the frames anywhere on the screen. /rl reloads the UI.",
+		["step5line3"] = "/tt lets you whisper your target. /rc initiates a ready check. /rd disbands a party or raid. /ainv enable auto invite by whisper to you. /ainv off to turn it off",
+		["step5line4"] = "/install or /tutorial loads this installer. ",
+
+		["step6line1"] = "The tutorial is complete. You can choose to reconsult it at any time by typing /tutorial.",
+		["step6line2"] = "I suggest you have a look through config/config.lua or type /duffedui to customize the UI to your needs.",
+		["step6line3"] = "You can now continue install the UI if it's not done yet or if you want to reset to default!",
+	}
+
 	L["bufftracker"] = {
 		["10ap"] = "+10% Attack Power",
 		["10as"] = "+10% Melee & Ranged Attack Speed",
@@ -88,6 +154,13 @@ if D.client == "ruRU" then
 		["ses_reload"] = "Reloads the entire UI",
 		["ses_move"] = "Unlock the frames for moving",
 		["ses_kb"] = "Set your keybindings",
+		["tutorial"] = "Tutorial",
+		["install"] = "Install",
+		["next"] = "Next",
+		["skip"] = "Skip",
+		["continue"] = "Continue",
+		["finish"] = "Finish",
+		["close"] = "Close",
 	}
 
 	L["errors"] = {
@@ -123,32 +196,24 @@ if D.client == "ruRU" then
 		["undefeated"] = "Undefeated",
 	}
 
-	-- chat
-	L.chat_INSTANCE_CHAT = "I"
-	L.chat_INSTANCE_CHAT_LEADER = "IL"
-	L.chat_BN_WHISPER_GET = "От"
-	L.chat_GUILD_GET = "Г"
-	L.chat_OFFICER_GET = "О"
-	L.chat_PARTY_GET = "Гр"
-	L.chat_PARTY_GUIDE_GET = "Гр"
-	L.chat_PARTY_LEADER_GET = "Лгр"
-	L.chat_RAID_GET = "Р"
-	L.chat_RAID_LEADER_GET = "ЛР"
-	L.chat_RAID_WARNING_GET = "ОР"
-	L.chat_WHISPER_GET = "От"
-	L.chat_FLAG_AFK = "[АФК]"
-	L.chat_FLAG_DND = "[ДНД]"
-	L.chat_FLAG_GM = "[ГМ]"
-	L.chat_ERR_FRIEND_ONLINE_SS = "|cff298F00входит|r"
-	L.chat_ERR_FRIEND_OFFLINE_S = "|cffff0000выходит|r"
-	L.chat_PET_BATTLE_COMBAT_LOG = "Pet Battle"
-	
-	L.chat_general = "Общий"
-	L.chat_trade = "Торговля"
-	L.chat_defense = "ОборонаЛокальный"
-	L.chat_recrutment = "Гильдии"
-	L.chat_lfg = "ПоискСпутников"
- 
+	L["chat"] = {
+		["instance_chat"] = "I,"
+		["instance_chat_leader"] = "IL",
+		["guild"] = "G",
+		["officer"] = "O",
+		["party"] = "P",
+		["party_leader"] "P",
+		["raid"] = "R",
+		["raid_leader"] = "RL",
+		["raid_warning"] = "RW",
+		["flag_afk"] = "[AFK]",
+		["flag_dnd"] = "[DND]",
+		["petbattle"] = "Pet Battle",
+		["defense"] = "LocalDefense",
+		["recruitment"] = "GuildRecruitment",
+		["lfg"] = "LookingForGroup",
+	}
+
 	L.datatext_notalents ="Нет талантов"
 	L.datatext_download = "Загрузка: "
 	L.datatext_bandwidth = "Скорость: "
@@ -243,81 +308,4 @@ if D.client == "ruRU" then
 	  [10] = {17, "Левая рука", 1000},
 	  [11] = {18, "Оружие дальнего боя", 1000}
 	}
- 
-	-- tuto/install
-	L.install_header_1 = "Добро пожаловать!"
-	L.install_header_2 = "1. Необходимые элементы"
-	L.install_header_3 = "2. Рамки портретов"
-	L.install_header_4 = "3. Особенности"
-	L.install_header_5 = "4. Что нужно знать!"
-	L.install_header_6 = "5. Команды"
-	L.install_header_7 = "6. Завершено"
-	L.install_header_8 = "1. Основные настройки"
-	L.install_header_9 = "2. Панель общения"
-	L.install_header_10= "3. Портреты"
-	L.install_header_11= "4. Готово!"
-
-	L.install_init_line_1 = "Спасибо за использование DuffedUI!"
-	L.install_init_line_2 = "Мы Вам поможем с процессом установки с помощью всего нескольких простых шагов. На каждом шагу, Вы можете выбрать, хотите ли Вы применить выбранные настройки или пропустить этот шаг."
-	L.install_init_line_3 = "Также у Вас есть возможность просмотреть введение, которое расскажет о некоторых особенностях DuffedUI."
-	L.install_init_line_4 = "Нажмите `Введение` для перехода или нажмите `Установить` для пропуска данного шага."
-
-	L.tutorial_step_1_line_1 = "Это быстрое введение расскажет Вам об особенностях TukUI"
-	L.tutorial_step_1_line_2 = "Во-первых, важная информация, которую Вы должны знать перед тем, как приступить к игре, используя TukUI."
-	L.tutorial_step_1_line_3 = "Данный установщик отчасти индивидуален для каждого персонажа. Одни настройки будут применены для всех персонажей Вашего аккаунта, некоторые же другие настройки Вам будет необходимо устанавливать для каждого персонажа отдельно, для чего будет использовано диалоговое окно. Дbfлоговое окно будет показано каждый раз, когда Вы входите в игру новым персонажем, первый раз использующим TukUI. Также, для продвинутых пользователей предусмотрена возможность редактирования настроек через изменение файла конфигурации, который находится по пути /DuffedUI/config/config.lua. Интуитивно понятный интерфейс по изменению настроек для обычных пользователей вызывается командой /duffedui"
-	L.tutorial_step_1_line_4 = "Продвинутый пользователь - это пользователь компьютера, который обладает определенными навыками (например, LUA-кодировкой). Обычный пользователь - пользователь, не обладающий навыками программирования. Для них рекомендуется использование команды /duffedui для отображения настроек"
-
-	L.tutorial_step_2_line_1 = "DuffedUI включает в себя встроенную версию oUF, созданную Trond'ом (Haste) A Ekseth'ом. Данная встроенная версия oUF отвечает за все рамки портретов, эффекты и ауры, а также за уникальные для каждого класса элементы"
-	L.tutorial_step_2_line_2 = "Вы можете посетить wowinterface.com и поискать oUF для более полной информации"
-	L.tutorial_step_2_line_3 = "Если вы играете хилером (лекарем) или лидером рейда, возможно, Вы захотите включить специально разработанные панели для хилеров (лекарей). Они отображают более детальную информацию о членах вашей группы/рейда. Включается командой /heal. ДПСерам (ДДшникам) и танкам рекомендуется использовать простой интерфейс для рейда. Включается командой /dps. Если Вы не хотите использовать ни один из предложенных вариантов или желаете использовать что-то другое, Вы можете отключить эту функцию через панель модификаций на странице выбора персонажа"
-	L.tutorial_step_2_line_4 = "Для легкого изменения позиции рамки портрета просто наберите /moveui"
-
-	L.tutorial_step_3_line_1 = "TukUI - это модифицированный вариант оригинального интерфейса от Близзард. Ни больше, ни меньше. Практически ве функции, которые Вы можете встретить в оригинальном интерфейсе, присутствуют и в TukUI, кроме, например, таких уникальных для TukUI функций, как продажа серых вещей автоматически при посещении вендора (торговца) или авто-сортировка вещей в сумках."
-	L.tutorial_step_3_line_2 = "Хотя не все игроки любят использовать такие вещи, как ДПС метры, моды для боссов, аггро (угроза) метры и прочее, мы считаем, что лучше их использовать. TukUI создан именно для того, чтобы любой игрок любого класса, с любым вкусом и видом геймплея, мог использовать TukUI, как ему нравится, так как данный интерфейс легко редактируемый. Также TukUI может служить наглядным пособием для тех, кто хочет создать свой интерфейс без помощи посторонних аддонов (модификаций). Именно поэтому TukUI так популярен! С 2009 года множество игроков использовали TukUI, чтоьы создать свой уникальный интерфейс! Чтобы убедиться, зайдите в раздел Edited packages на нашей сайте!"
-	L.tutorial_step_3_line_3 = "Пользователи могут захотеть посетить страничку с дополнительными модификациями на нашей сайте или же посетить wowinterface.com"
-	L.tutorial_step_3_line_4 = ""
-
-	L.tutorial_step_4_line_1 = "Чтобы выбрать, сколько панелей команд Вы хотите, наведите курсор мыши слева или справа от нижней панели команд. Тем же путем вы можете выбрать количество панелей справа, наведя курсором соответственно снизу или сверху панели команд. Чтобы скопировать текст из окошка общения, нажмите на кнопку в правом углу окошка общения."
-	L.tutorial_step_4_line_2 = "Окантовка мини-карты меняет цвет. Она зеленая, когда у вас новое письмо, красная, когда у вас новое приглашение в игровом календаре, оранжевая, когда и то, и то в одно время..."
-	L.tutorial_step_4_line_3 = "Вы можете нажать левой кнопкой мыши почти на каждый дата-текст внизу экрана и под мини-картой для открытия соответствующий окошек (гильдия/друзья/календарь/прочее). Также дата-текст гильдии (там, где отображается количество членов гильдии онлайн) имеет некторые функции при нажатии правой кнопкой мыши на дата-текст."
-	L.tutorial_step_4_line_4 = "К тому же, имеются некоторые выпадающие меню. Нажмите правой кнопкой мыши на [Х] (Закрыть) кнопке окошка сумок для отображения меню, при помощи которого можно автоматически сортировать вещи в сумках, показать, какие у вас сумки, ключи и прочее. Щелчок колесиком по мини-карте вызовет мини-меню.."
-
-	L.tutorial_step_5_line_1 = "Напоследок, TukUI имеет широкий набор консольных команд (слэш-команды). Ниже приведен список некоторых из них. "
-	L.tutorial_step_5_line_2 = "/moveui позволяет вам двигать почти все элементы интерфейса на любую точку. /enable and /disable используются для быстрого включения и отключения аддонов (модификаций). /rl перезагружает интерфейс. /heal включает интерфейс хилера (лекаря), а /dps включает интерфейс для ДДшников (ДПСеров) и танков."
-	L.tutorial_step_5_line_3 = "/tt позволяет Вам послать сообщение вашей цели. /rc производить проверку готовности вашей группы/рейда (рэди-чек). /rd распускает группу или рейд. /bags отображает некоторые особенности команд, используемых через командную строку.. /ainv включает автоматическое приглашение в группу (инвайт) через посылку Вам сообщения. /ainv off отключает эту функцию"
-	L.tutorial_step_5_line_4 = "/gm открывает окно помощи. /install, /reset или /tutorial загружает данный установщик. /frame показывает вам имя и дополнительную информацию об элементе интерфейса, на который Вы навели курсор."
-
-	L.tutorial_step_6_line_1 = "Введение завершено. Вы можете повторить его в любое время, просто напечатав /tutorial."
-	L.tutorial_step_6_line_2 = "Рекомендую Вам взглянуть на файл конфигурации, который находится по пути config/config.lua, или же просто напечатайте /duffedui для настройки интерфейса, как Вам нравится."
-	L.tutorial_step_6_line_3 = "Сейчас Вы можете продолжить установку данного интерфейса, если вы еще не закончили, или же сбросить все настройки на настройки по умолчанию!"
-	L.tutorial_step_6_line_4 = ""
-
-	L.install_step_1_line_1 = "Данные шаги применят правильные CVar настройки для DuffedUI."
-	L.install_step_1_line_2 = "Первый шаг применяет основные настройки."
-	L.install_step_1_line_3 = "|cffff0000Рекомендуется|r для любого пользователя, если Вы не собираетесь применить только определенные параметры."
-	L.install_step_1_line_4 = "Нажмите «Продолжить», чтобы сохранить настройки, или нажмите «Пропустить», если вы хотите пропустить данный шаг."
-
-	L.install_step_2_line_0 = "Найдена другая модификация чата. Мы пропустим этот шаг. Пожалуйста, нажмите «Пропустить» для продолжения установки."
-	L.install_step_2_line_1 = "Второй шаг применит настройки для чата."
-	L.install_step_2_line_2 = "Если вы новый пользователь, этот шаг рекомендуется. Если Вы уже пользовались этим интерфейсом, возможно, Вы захотите пропустить данный шаг."
-	L.install_step_2_line_3 = "Это нормально, если размер шрифта будет слишком большим, пока Вы не применили настройки. Шрифт будет нормальным, когда Вы закончите установку. "
-	L.install_step_2_line_4 = "Нажмите «Продолжить» для сохранения настроек или нажмите «Пропустить», чтобы пропустить данный шаг."
-
-	L.install_step_3_line_1 = "Третий и последний шаг применит настройки положения рамок портретов и элементов интерфейса"
-	L.install_step_3_line_2 = "Этот шаг |cffff0000рекомендуется|r для любого пользователя."
-	L.install_step_3_line_3 = ""
-	L.install_step_3_line_4 = " Нажмите «Продолжить» для сохранения настроек или нажмите «Пропустить», чтобы пропустить данный шаг. "
-
-	L.install_step_4_line_1 = "Установка завершена."
-	L.install_step_4_line_2 = "Пожалуйста, нажмите «Завершить» для перезагрузки интерфейса."
-	L.install_step_4_line_3 = ""
-	L.install_step_4_line_4 = "Наслаждайтесь DuffedUI! Посетите нас на http://www.duffed.net!"
-
-	L.install_button_tutorial = "Введение"
-	L.install_button_install = "Установка"
-	L.install_button_next = "Далее"
-	L.install_button_skip = "Пропустить"
-	L.install_button_continue = "Продолжить"
-	L.install_button_finish = "Завершить"
-	L.install_button_close = "Закрыть"
 end

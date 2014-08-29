@@ -52,6 +52,72 @@ if D.client == "zhTW" then
 		["fix_ab"] = "There is something wrong with your action bar. Do you want to reloadui to fix it?",
 	}
 
+	L["install"] = {
+		["header01"] = "Welcome",
+		["header02"] = "1. Essentials",
+		["header03"] = "2. Unitframes",
+		["header04"] = "3. Features",
+		["header05"] = "4. Things you should know!",
+		["header06"] = "5. Commands",
+		["header07"] = "6. Finished",
+		["header08"] = "1. Essential Settings",
+		["header09"] = "2. Social",
+		["header10"] = "3. Frames",
+		["header11"] = "4. Success!",
+
+		["continue_skip"] = "Click 'Continue' to apply the settings, or click 'Skip' if you wish to skip this step.",
+		["initline1"] = "Thank you for choosing DuffedUI!",
+		["initline2"] = "You will be guided through the installation process in a few simple steps.  At each step, you can decide whether or not you want to apply or skip the presented settings.",
+		["initline3"] = "You are also given the possibility to be shown a brief tutorial on some of the features of DuffedUI.",
+		["initline4"] = "Press the 'Tutorial' button to be guided through this small introduction, or press 'Install' to skip this step.",
+
+		["step1line1"] = "These steps will apply the correct CVar settings for DuffedUI.",
+		["step1line2"] = "The first step applies the essential settings.",
+		["step1line3"] = "This is |cffff0000recommended|r for any user, unless you want to apply only a specific part of the settings.",
+
+		["step2line0"] = "Another chat addon is found.  We will ignore this step.  Please press skip to continue installation.",
+		["step2line1"] = "The second step applies the correct chat setup.",
+		["step2line2"] = "If you are a new user, this step is recommended.  If you are an existing user, you may want to skip this step.",
+		["step2line3"] = "It is normal that your chat font will appear too big upon applying these settings.  It will revert back to normal when you finish with the installation.",
+
+		["step3line1"] = "The third and final step applies the default frame positions.",
+		["step3line2"] = "This step is |cffff0000recommended|r for new users.",
+		["step3line3"] = "",
+
+		["step4line1"] = "Installation is complete.",
+		["step4line2"] = "Please click the 'Finish' button to reload the UI.",
+		["step4line3"] = "",
+		["step4line4"] = "Enjoy DuffedUI! Visit us at www.duffed.net!",
+	}
+
+	L["tutorial"] = {
+		["step1line1"] = "This quick tutorial will show you some of the features in DuffedUI.",
+		["step1line2"] = "First, the essentials that you should know before you can play with this UI.",
+		["step1line3"] = "This installer is partially character-specific. While some of the settings that will be applied later on are account-wide, you need to run the install script for each new character running DuffedUI. The script is auto shown on every new character you log in with DuffedUI installed for the first time.  Also, the options can be found in /DuffedUI/config/config.lua for `Power` users or by typing /duffedui in game for `Friendly` users.",
+		["step1line4"] = "A power user is a user of a personal computer who has the ability to use advanced features (ex: Lua editing) which are beyond the abilities of normal users.  A friendly user is a normal user and is not necessarily capable of programming.  It's recommended for them to use our in game configuration tool (/duffedui) for settings they want changed in DuffedUI.",
+
+		["step2line1"] = "DuffedUI includes an embedded version of oUF (oUFDuffedUI) created by Haste.  This handles all of the unitframes on the screen, the buffs and debuffs, and the class-specific elements.",
+		["step2line2"] = "You can visit wowinterface.com and search for oUF for more information about this tool.",
+		["step2line3"] = "To easily change the unitframes positions, just type /moveui.",
+
+		["step3line1"] = "DuffedUI is a redesigned Blizzard UI.  Nothing less, nothing more.  Approxmently all features you see with Default UI is available thought DuffedUI.  The only features not available thought default UI are some automated features not really visible on screen, for example auto selling grays when visiting a vendor or, auto sorting bags.",
+		["step3line2"] =  "Not everyone enjoys things like DPS meters, Boss mods, Threat meters, etc, we judge that it's the best thing to do. DuffedUI is made around the idea to work  for all classes, roles, specs, type of gameplay, taste of the users, etc. This why DuffedUI is one of the most popular UI at the moment. It fits everyones play style and is extremly editable. It's also designed to be a good start for everyone that want to make their own custom UI without depending on addons. Since 2010 a lot of users have started using DuffedUI as a base for their own UI. Take a look at the Edited Packages on our website!",
+		["step3line3"] = "Users may want to visit our extra mods section on our website or by visiting www.wowinterface.com to install additional features or mods.",
+
+		["step4line1"] = "To set how many bars you want, mouseover on left or right of bottom action bar background.  Do the same on the right, via top and bottom.  To copy text from the chat frame, click the button shown on mouseover in the right corner of chat frames.",
+		["step4line2"] = "You can left-click through 80% of datatext to show various panels from Blizzard.  Friend and Guild Datatext have right-click features aswell.",
+		["step4line3"] = "There are some dropdown menus available. Right-clicking on the [X] (Close) bag button will show a dropdown menu to show bags.  Middle-clicking thought Minimap will show the micro menu.",
+
+		["step5line1"] = "Lastly, DuffedUI includes useful slash commands.  Below is a list.",
+		["step5line2"] = "/moveui allow you to move lots of the frames anywhere on the screen. /rl reloads the UI.",
+		["step5line3"] = "/tt lets you whisper your target. /rc initiates a ready check. /rd disbands a party or raid. /ainv enable auto invite by whisper to you. /ainv off to turn it off",
+		["step5line4"] = "/install or /tutorial loads this installer. ",
+
+		["step6line1"] = "The tutorial is complete. You can choose to reconsult it at any time by typing /tutorial.",
+		["step6line2"] = "I suggest you have a look through config/config.lua or type /duffedui to customize the UI to your needs.",
+		["step6line3"] = "You can now continue install the UI if it's not done yet or if you want to reset to default!",
+	}
+
 	L["bufftracker"] = {
 		["10ap"] = "+10% Attack Power",
 		["10as"] = "+10% Melee & Ranged Attack Speed",
@@ -88,6 +154,13 @@ if D.client == "zhTW" then
 		["ses_reload"] = "Reloads the entire UI",
 		["ses_move"] = "Unlock the frames for moving",
 		["ses_kb"] = "Set your keybindings",
+		["tutorial"] = "Tutorial",
+		["install"] = "Install",
+		["next"] = "Next",
+		["skip"] = "Skip",
+		["continue"] = "Continue",
+		["finish"] = "Finish",
+		["close"] = "Close",
 	}
 
 	L["errors"] = {
@@ -123,32 +196,24 @@ if D.client == "zhTW" then
 		["undefeated"] = "Undefeated",
 	}
 
-	-- chat
-	L.chat_INSTANCE_CHAT = "I"
-	L.chat_INSTANCE_CHAT_LEADER = "IL"
-	L.chat_BN_WHISPER_GET = "密語"
-	L.chat_GUILD_GET = "公"
-	L.chat_OFFICER_GET = "官"
-	L.chat_PARTY_GET = "隊"
-	L.chat_PARTY_GUIDE_GET = "地下城向導"
-	L.chat_PARTY_LEADER_GET = "隊長"
-	L.chat_RAID_GET = "團"
-	L.chat_RAID_LEADER_GET = "團長"
-	L.chat_RAID_WARNING_GET = "團長警告"
-	L.chat_WHISPER_GET = "密語"
-	L.chat_FLAG_AFK = "[AFK]"
-	L.chat_FLAG_DND = "[DND]"
-	L.chat_FLAG_GM = "[GM]"
-	L.chat_ERR_FRIEND_ONLINE_SS = "|cff05e9FF上線了|r"
-	L.chat_ERR_FRIEND_OFFLINE_S = "|cffff0000下線了|r"
-	L.chat_PET_BATTLE_COMBAT_LOG = "Pet Battle"
-	
-	L.chat_general = "綜合"
-	L.chat_trade = "交易"
-	L.chat_defense = "本地防務"
-	L.chat_recrutment = "公會招募"
-	L.chat_lfg = "尋求組隊"
-	
+	L["chat"] = {
+		["instance_chat"] = "I,"
+		["instance_chat_leader"] = "IL",
+		["guild"] = "G",
+		["officer"] = "O",
+		["party"] = "P",
+		["party_leader"] "P",
+		["raid"] = "R",
+		["raid_leader"] = "RL",
+		["raid_warning"] = "RW",
+		["flag_afk"] = "[AFK]",
+		["flag_dnd"] = "[DND]",
+		["petbattle"] = "Pet Battle",
+		["defense"] = "LocalDefense",
+		["recruitment"] = "GuildRecruitment",
+		["lfg"] = "LookingForGroup",
+	}
+
 	L.datatext_notalents ="無天賦"
 	L.datatext_download = "下載: "
 	L.datatext_bandwidth = "寬頻: "
@@ -243,81 +308,4 @@ if D.client == "zhTW" then
 		[10] = {17, "副手", 1000},
 		[11] = {18, "遠程", 1000}
 	}
- 
-	-- tuto/install
-	L.install_header_1 = "歡迎"
-	L.install_header_2 = "1. 基本要素"
-	L.install_header_3 = "2. 單位框架"
-	L.install_header_4 = "3. 特點"
-	L.install_header_5 = "4. 您應該知道的事!"
-	L.install_header_6 = "5. 指令"
-	L.install_header_7 = "6. 完成"
-	L.install_header_8 = "1. 必要的設定"
-	L.install_header_9 = "2. 社交"
-	L.install_header_10= "3. 框架"
-	L.install_header_11= "4. 成功!"
-
-	L.install_init_line_1 = "感謝您選擇DuffedUI!"
-	L.install_init_line_2 = "透過幾個簡單的步驟，將會引導您通過整個安裝過程。每個步驟您都可以決定是否套用或略過所呈現的設定。"
-	L.install_init_line_3 = "您也可以選擇顯示關於DuffedUI功能的簡短指南。"
-	L.install_init_line_4 = "點選'指南'來獲得簡介，或者點選'安裝'以略過這步驟。"
-
-	L.tutorial_step_1_line_1 = "這個快速指南將向您展示一些DuffedUI的特點及功能。"
-	L.tutorial_step_1_line_2 = "首先，基本要素將會告訴您使用這個UI前該知道的事項。"
-	L.tutorial_step_1_line_3 = "這個安裝程序部分是角色特定，一些設定將會全帳號套用，您必須為每一個有使用DuffedUI的新角色執行安裝程序。程序將會在新角色第一次登入DuffedUI時自動顯示。同時，進階使用者可以在/DuffedUI/config/config.lua中找到選項，友善使用者可以在遊戲中輸入/duffedui。"
-	L.tutorial_step_1_line_4 = "進階使用者是指有能力會使用一般使用者所不會的進階功能(如：編輯lua)的個人電腦使用者。友善使用者為一般使用者，並不需要編寫程式的能力，推薦他們使用我們的遊戲內設定工具(/duffedui)來設定DuffedUI上想呈現的功能。"
-
-	L.tutorial_step_2_line_1 = "DuffedUI包含一個內建版本的oUF，由Trond (Haste) A Ekseth創造，處理畫面中所有的單位框架，增/減益狀態及職業特色元素。"
-	L.tutorial_step_2_line_2 = "您可以拜訪 http://www.wowinterface.com 蒐尋oUF以獲得更多這項工具的資訊。"
-	L.tutorial_step_2_line_3 = "假如您是治療者或是團隊領隊，您可能想啟用治療者團隊框架，它們提供更多團隊資訊(/heal)。傷害輸出玩家或是坦克應該使用簡潔的團隊框架(/dps)。如果不想顯示任一團隊框架或是其他東西，您可以在角色選單的插件管理中關閉它。"
-	L.tutorial_step_2_line_4 = "鍵入/moveui可以簡單地改變單位框架的位置。"
-
-	L.tutorial_step_3_line_1 = "DuffedUI是一個重新設計過的Blizzard UI，不多也不少。大部分你可以在預設UI上看到的都是DuffedUI，只有一些自動化功能是畫面中看不到的，如：拜訪商人時自動販賣灰色物品，或是自動分類背包中的物品。"
-	L.tutorial_step_3_line_2 = "並不是每個人都滿意傷害輸出統計、首領模組，仇恨監控等等，但我們認為這是最好的事情。DuffedUI是在符合所有職業、角色、天賦、玩法、玩家品味...等等的概念下產生，這就是為什麼DuffedUI是現今最受歡迎的UI之一，它適合每個人的玩法且可任意地調整。它也設計成可讓任何想做客製化UI卻沒有關聯插件的人有一個好的開始。自2009年後，許多玩家使用DuffedUI為基礎來創作自己的UI，可以到我們網站的Edited Packages論壇專區看看!"
-	L.tutorial_step_3_line_3 = "使用者可能有興趣到我們網站的額外模組專區看看，或是拜訪 http://www.wowinterface.com 來獲得額外的功能或模組。"
-	L.tutorial_step_3_line_4 = ""
-
-	L.tutorial_step_4_line_1 = "將滑鼠移至在底部快捷列背景的最左/右邊，可設定底部快捷列的數目，畫面右邊的快捷列同樣可藉由上方或底部調整。點擊對話框的右上角游標懸停顯示的按鈕即可複製聊天文字。"
-	L.tutorial_step_4_line_2 = "小地圖邊框將會改變顏色，收到新郵件時為綠色，受到新的行事曆邀請時為紅色，兩項皆有時為橘色。"
-	L.tutorial_step_4_line_3 = "您可以左鍵點擊80%的資訊欄位來顯示各種Blizzard的面板，好友資訊及公會資訊同時擁有右鍵點擊功能。"
-	L.tutorial_step_4_line_4 = "這裡有一些下拉式選單可供使用。右鍵點擊背包的[X](關閉)按鈕將會顯示功能選單以顯示背包、排列物品、顯示鑰匙圈等等。中鍵點擊小地圖可顯示微型選單。"
-
-	L.tutorial_step_5_line_1 = "最近，DuffedUI有許多實用的指令，以下列表。"
-	L.tutorial_step_5_line_2 = "/moveui 允許你移動畫面上大部分的框架。 /enable 及 /disable 快速啟用或關閉插件。 /rl 重新載入UI。 /heal 啟用治療者團隊框架。 /dps 啟用傷害輸出/坦克團隊框架。"
-	L.tutorial_step_5_line_3 = "/tt 密語目標。 /rc 發起團隊確認。 /rd 解散隊伍或團隊。 /bags 顯示可用的背包指令。 /ainv 啟用自動密語邀請。(/ainv off 關閉功能)"
-	L.tutorial_step_5_line_4 = "/gm 開啟尋求幫助選單。 /install, /reset 或 /tutorial 載入安裝程序。 /frame 列出滑鼠游標下的框架名稱及額外資訊。"
-
-	L.tutorial_step_6_line_1 = "指南到此結束，您可藉由輸入/tutorial 以再次諮詢。"
-	L.tutorial_step_6_line_2 = "建議您開啟config/config.lua或鍵入/duffedui來自訂符合您需求的UI。"
-	L.tutorial_step_6_line_3 = "如果安裝程序未完成，您現在可繼續安裝此UI。或者您想重置至預設值!"
-	L.tutorial_step_6_line_4 = ""
-
-	L.install_step_1_line_1 = "這些步驟將為DuffedUI套用正確的CVar設定。"
-	L.install_step_1_line_2 = "第一個步驟套用必要的設定。"
-	L.install_step_1_line_3 = "這個步驟|cffff0000建議|r給任何一位新使用者，除非您只想套用這些設定的特定部分。"
-	L.install_step_1_line_4 = "點選'繼續'以套用設定，如果您希望跳過這個步驟請點選'略過'。"
-
-	L.install_step_2_line_0 = "發現到其他的聊天插件。我們將會忽略這個步驟，請點擊略過以繼續安裝。"
-	L.install_step_2_line_1 = "第二個步驟將會套用正確的聊天設定。"
-	L.install_step_2_line_2 = "如果您是一位新使用者，我們建議這個步驟。如果是現有使用者，您可能想略過這個步驟。"
-	L.install_step_2_line_3 = "經由這些設定，您的聊天字體顯示過大是正常的，當安裝完成後將會還原。"
-	L.install_step_2_line_4 = "點選'繼續'以套用設定，如果您希望跳過這個步驟請點選'略過'。"
-
-	L.install_step_3_line_1 = "第三和最後的步驟將套用預設框架位置。"
-	L.install_step_3_line_2 = "我們|cffff0000建議|r這個步驟給任何一位新使用者。"
-	L.install_step_3_line_3 = ""
-	L.install_step_3_line_4 = "點選'繼續'以套用這些設定，如果您希望跳過這個步驟請點選'略過'。"
-
-	L.install_step_4_line_1 = "安裝完成。"
-	L.install_step_4_line_2 = "請點擊'完成'以重新載入UI。"
-	L.install_step_4_line_3 = ""
-	L.install_step_4_line_4 = "享受DuffedUI吧! 拜訪我們 http://www.duffed.net!"
-
-	L.install_button_tutorial = "指南"
-	L.install_button_install = "安裝"
-	L.install_button_next = "下一步"
-	L.install_button_skip = "略過"
-	L.install_button_continue = "繼續"
-	L.install_button_finish = "完成"
-	L.install_button_close = "關閉"
 end
