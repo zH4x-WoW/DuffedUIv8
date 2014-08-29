@@ -294,7 +294,7 @@ local step4 = function()
 	text4:SetText(L["install"]["step4line4"])
 	sbt:SetText("4/4")
 	option1:Hide()
-	option2.Text:SetText(L["button"]["finish"])
+	option2.Text:SetText(L["buttons"]["finish"])
 	option2:SetScript("OnClick", function()
 		ReloadUI()
 	end)
@@ -322,9 +322,6 @@ local step2 = function()
 	sbt:SetText("2/4")
 	if IsAddOnLoaded("Prat") or IsAddOnLoaded("Chatter") then 
 		text1:SetText(L["install"]["step2line0"])
-		text2:SetText("")
-		text3:SetText("")
-		text4:SetText("")
 		option2:Hide()
 	else
 		text1:SetText(L["install"]["step2line1"])
@@ -354,8 +351,8 @@ local step1 = function()
 
 	option1:Show()
 
-	option1.Text:SetText(L["button"]["skip"])
-	option2.Text:SetText(L["button"]["continue"])
+	option1.Text:SetText(L["buttons"]["skip"])
+	option2.Text:SetText(L["buttons"]["continue"])
 
 	option1:SetScript("OnClick", step2)
 	option2:SetScript("OnClick", function()
@@ -378,8 +375,8 @@ local tut6 = function()
 
 	option1:Show()
 
-	option1.Text:SetText(L["button"]["close"])
-	option2.Text:SetText(L["button"]["install"])
+	option1.Text:SetText(L["buttons"]["close"])
+	option2.Text:SetText(L["buttons"]["install"])
 
 	option1:SetScript("OnClick", function()
 		f:Hide()
@@ -449,7 +446,7 @@ local tut1 = function()
 	text4:SetText(L["tutorial"]["step1line4"])
 	sbt:SetText("1/6")
 	option1:Hide()
-	option2.Text:SetText(L["button"]["next"])
+	option2.Text:SetText(L["buttons"]["next"])
 	option2:SetScript("OnClick", tut2)
 end
 
@@ -465,8 +462,8 @@ local function install()
 	text3:SetText(L["install"]["initline3"])
 	text4:SetText(L["install"]["initline4"])
 
-	option1.Text:SetText(L["button"]["tutorial"])
-	option2.Text:SetText(L["button"]["install"])
+	option1.Text:SetText(L["buttons"]["tutorial"])
+	option2.Text:SetText(L["buttons"]["install"])
 
 	option1:SetScript("OnClick", tut1)
 	option2:SetScript("OnClick", step1)
