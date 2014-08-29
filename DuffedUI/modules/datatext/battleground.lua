@@ -24,41 +24,41 @@ bgframe:SetScript("OnEnter", function(self)
 				local curmapid = GetCurrentMapAreaID()
 				local color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
 				local classcolor = ("|cff%.2x%.2x%.2x"):format(color.r * 255, color.g * 255, color.b * 255)
-				SetMapToCurrentZone()			
+				SetMapToCurrentZone()
 				GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, D.Scale(4))
 				GameTooltip:ClearLines()
 				GameTooltip:Point("BOTTOM", self, "TOP", 0, 1)
 				GameTooltip:ClearLines()
-				GameTooltip:AddDoubleLine(L.datatext_ttstatsfor, classcolor..name.."|r")
+				GameTooltip:AddDoubleLine(L["dt"]["stats"], classcolor..name.."|r")
 				GameTooltip:AddLine' '
-				GameTooltip:AddDoubleLine(L.datatext_ttkillingblows, killingBlows,1,1,1)
-				GameTooltip:AddDoubleLine(L.datatext_tthonorkills, honorableKills,1,1,1)
-				GameTooltip:AddDoubleLine(L.datatext_ttdeaths, deaths,1,1,1)
-				GameTooltip:AddDoubleLine(L.datatext_tthonorgain, format('%d', honorGained),1,1,1)
-				GameTooltip:AddDoubleLine(L.datatext_ttdmgdone, damageDone,1,1,1)
-				GameTooltip:AddDoubleLine(L.datatext_tthealdone, healingDone,1,1,1)
+				GameTooltip:AddDoubleLine(KILLING_BLOWS..":", killingBlows,1,1,1)
+				GameTooltip:AddDoubleLine(HONORABLE_KILLS..":", honorableKills,1,1,1)
+				GameTooltip:AddDoubleLine(DEATHS..":", deaths,1,1,1)
+				GameTooltip:AddDoubleLine(HONOR_GAINED..":", format('%d', honorGained),1,1,1)
+				GameTooltip:AddDoubleLine(L["dt"]["dmgdone"], damageDone,1,1,1)
+				GameTooltip:AddDoubleLine(L["dt"]["healdone"], healingDone,1,1,1)
 				--Add extra statistics to watch based on what BG you are in.
 				if curmapid == WSG or curmapid == TP then 
-					GameTooltip:AddDoubleLine(L.datatext_flagscaptured,GetBattlefieldStatData(i, 1),1,1,1)
-					GameTooltip:AddDoubleLine(L.datatext_flagsreturned,GetBattlefieldStatData(i, 2),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["flagscaptured"],GetBattlefieldStatData(i, 1),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["flagsreturned"],GetBattlefieldStatData(i, 2),1,1,1)
 				elseif curmapid == EOTS then
-					GameTooltip:AddDoubleLine(L.datatext_flagscaptured,GetBattlefieldStatData(i, 1),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["flagscaptured"],GetBattlefieldStatData(i, 1),1,1,1)
 				elseif curmapid == AV then
-					GameTooltip:AddDoubleLine(L.datatext_graveyardsassaulted,GetBattlefieldStatData(i, 1),1,1,1)
-					GameTooltip:AddDoubleLine(L.datatext_graveyardsdefended,GetBattlefieldStatData(i, 2),1,1,1)
-					GameTooltip:AddDoubleLine(L.datatext_towersassaulted,GetBattlefieldStatData(i, 3),1,1,1)
-					GameTooltip:AddDoubleLine(L.datatext_towersdefended,GetBattlefieldStatData(i, 4),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["graveyardsassaulted"],GetBattlefieldStatData(i, 1),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["graveyardsdefended"],GetBattlefieldStatData(i, 2),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["towerassaulted"],GetBattlefieldStatData(i, 3),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["towerdefended"],GetBattlefieldStatData(i, 4),1,1,1)
 				elseif curmapid == SOTA then
-					GameTooltip:AddDoubleLine(L.datatext_demolishersdestroyed,GetBattlefieldStatData(i, 1),1,1,1)
-					GameTooltip:AddDoubleLine(L.datatext_gatesdestroyed,GetBattlefieldStatData(i, 2),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["demolishersdestroyed"],GetBattlefieldStatData(i, 1),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["gatesdestroyed"],GetBattlefieldStatData(i, 2),1,1,1)
 				elseif curmapid == IOC or curmapid == TBFG or curmapid == AB then
-					GameTooltip:AddDoubleLine(L.datatext_basesassaulted,GetBattlefieldStatData(i, 1),1,1,1)
-					GameTooltip:AddDoubleLine(L.datatext_basesdefended,GetBattlefieldStatData(i, 2),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["basesassaulted"],GetBattlefieldStatData(i, 1),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["basesdefended"],GetBattlefieldStatData(i, 2),1,1,1)
 				elseif CurrentMapID == TOK then
-					GameTooltip:AddDoubleLine(L.datatext_orb_possessions, GetBattlefieldStatData(i, 1),1,1,1)
-					GameTooltip:AddDoubleLine(L.datatext_victory_points, GetBattlefieldStatData(i, 2),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["orb_possessions"], GetBattlefieldStatData(i, 1),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["victory_points"], GetBattlefieldStatData(i, 2),1,1,1)
 				elseif CurrentMapID == SSM then
-					GameTooltip:AddDoubleLine(L.datatext_carts_controlled, GetBattlefieldStatData(i, 1),1,1,1)
+					GameTooltip:AddDoubleLine(L["dt"]["carts_controlled"], GetBattlefieldStatData(i, 1),1,1,1)
 				end			
 				GameTooltip:Show()
 			end
@@ -98,15 +98,15 @@ local function Update(self, t)
 		for i=1, numScores do
 			local name, killingBlows, honorableKills, deaths, honorGained, faction, race, class, classToken, damageDone, healingDone, bgRating, ratingChange = GetBattlefieldScore(i)
 			if healingDone > damageDone then
-				dmgtxt = (Stat.Color1..L.datatext_healing.."|r"..Stat.Color2..healingDone.."|r")
+				dmgtxt = (Stat.Color1 .. SHOW_COMBAT_HEALING .. ": " .. "|r" .. Stat.Color2 .. healingDone .. "|r")
 			else
-				dmgtxt = (Stat.Color1..L.datatext_damage.."|r"..Stat.Color2..damageDone.."|r")
+				dmgtxt = (Stat.Color1 .. DAMAGE .. ": " .. "|r" .. Stat.Color2 .. damageDone .. "|r")
 			end
 			if ( name ) then
 				if ( name == D.myname ) then
-					Text2:SetText(Stat.Color1..L.datatext_honor.."|r"..Stat.Color2..format('%d', honorGained).."|r")
+					Text2:SetText(Stat.Color1..HONOR..": ".."|r"..Stat.Color2..format('%d', honorGained).."|r")
 					Text1:SetText(dmgtxt)
-					Text3:SetText(Stat.Color1..L.datatext_killingblows.."|r"..Stat.Color2..killingBlows.."|r")
+					Text3:SetText(Stat.Color1..KILLING_BLOWS..": ".."|r"..Stat.Color2..killingBlows.."|r")
 				end   
 			end
 		end 

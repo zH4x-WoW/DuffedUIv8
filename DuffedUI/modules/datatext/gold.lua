@@ -59,9 +59,9 @@ local function Currency(id, weekly, capped)
 	if weekly then
 		if discovered then
 			if id == 390 then
-				GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, "Current: " .. amount .. " - " .. L.currencyWeekly .. week .. " / " .. weekmax, r, g, b, r, g, b)
+				GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, "Current: " .. amount .. " - " .. WEEKLY .. ": " .. week .. " / " .. weekmax, r, g, b, r, g, b)
 			else
-				GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, "Current: " .. amount .. " / " .. maxed .. " - " .. L.currencyWeekly .. week .. " / " .. weekmax, r, g, b, r, g, b)
+				GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, "Current: " .. amount .. " / " .. maxed .. " - " .. WEEKLY .. ": " .. week .. " / " .. weekmax, r, g, b, r, g, b)
 			end
 		end
 	elseif capped  then
@@ -69,7 +69,7 @@ local function Currency(id, weekly, capped)
 		if id == 396 then maxed = 3000 end
 		if discovered then
 			if id == 396 then
-				GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, "Current: " .. amount .. " / " .. maxed .. " - " .. L.currencyWeekly .. week .. " / 1000", r, g, b, r, g, b)
+				GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, "Current: " .. amount .. " / " .. maxed .. " - " .. WEEKLY .. ": " .. week .. " / 1000", r, g, b, r, g, b)
 			else
 				GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, amount .. " / " .. maxed, r, g, b, r, g, b)
 			end
@@ -120,20 +120,20 @@ Stat:SetScript("OnEnter", function(self)
 	local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
-	GameTooltip:AddLine(L.datatext_session)
-	GameTooltip:AddDoubleLine(L.datatext_earned, formatMoney(Profit), 1, 1, 1, 1, 1, 1)
-	GameTooltip:AddDoubleLine(L.datatext_spent, formatMoney(Spent), 1, 1, 1, 1, 1, 1)
+	GameTooltip:AddLine(L["dt"]["session"])
+	GameTooltip:AddDoubleLine(ACHIEVEMENTFRAME_FILTER_COMPLETED .. ":", formatMoney(Profit), 1, 1, 1, 1, 1, 1)
+	GameTooltip:AddDoubleLine(L["dt"]["spent"], formatMoney(Spent), 1, 1, 1, 1, 1, 1)
 
 	if Profit < Spent then
-		GameTooltip:AddDoubleLine(L.datatext_deficit, formatMoney(Profit - Spent), 1, 0, 0, 1, 1, 1)
+		GameTooltip:AddDoubleLine(L["dt"]["deficit"], formatMoney(Profit - Spent), 1, 0, 0, 1, 1, 1)
 	elseif (Profit-Spent) > 0 then
-		GameTooltip:AddDoubleLine(L.datatext_profit, formatMoney(Profit - Spent), 0, 1, 0, 1, 1, 1)
+		GameTooltip:AddDoubleLine(L["dt"]["profit"], formatMoney(Profit - Spent), 0, 1, 0, 1, 1, 1)
 	end
 
 	GameTooltip:AddLine(" ")
 
 	local totalGold = 0
-	GameTooltip:AddLine(L.datatext_character)
+	GameTooltip:AddLine(L["dt"]["character"])
 
 	local thisRealmList = DuffedUIData.gold[myPlayerRealm]
 	for k, v in pairs(thisRealmList) do
@@ -142,12 +142,12 @@ Stat:SetScript("OnEnter", function(self)
 	end
 
 	GameTooltip:AddLine(" ")
-	GameTooltip:AddLine(L.datatext_server)
-	GameTooltip:AddDoubleLine(L.datatext_totalgold, FormatTooltipMoney(totalGold), 1, 1, 1, 1, 1, 1)
+	GameTooltip:AddLine(L["dt"]["server"])
+	GameTooltip:AddDoubleLine(FROM_TOTAL .. " ", FormatTooltipMoney(totalGold), 1, 1, 1, 1, 1, 1)
 
 	if archaeology and ImprovedCurrency["Archaeology"] then
 		GameTooltip:AddLine(" ")
-		GameTooltip:AddLine(L.gametooltip_gold_a)
+		GameTooltip:AddLine(PROFESSIONS_ARCHAEOLOGY .. ": ")
 		Currency(398)
 		Currency(384)
 		Currency(393)
@@ -170,7 +170,7 @@ Stat:SetScript("OnEnter", function(self)
 
 	if cooking and ImprovedCurrency["Cooking"] then
 		GameTooltip:AddLine(" ")
-		GameTooltip:AddLine(L.gametooltip_gold_c)
+		GameTooltip:AddLine(PROFESSIONS_COOKING .. ": ")
 		Currency(81)
 		Currency(402)
 	end
@@ -190,7 +190,7 @@ Stat:SetScript("OnEnter", function(self)
 
 	if ImprovedCurrency["Raid"] then
 		GameTooltip:AddLine(" ")
-		GameTooltip:AddLine(L.gametooltip_gold_dr)
+		GameTooltip:AddLine(L["dt"]["dr"])
 		Currency(776, false, true)
 		Currency(752, false, true)
 		Currency(697, false, true)

@@ -50,7 +50,7 @@ f:SetScript("OnEvent", function()
 		local g = math.floor(Cost / 10000)
 		if GetGuildBankWithdrawMoney() >= Cost and C["merchant"].autoguildrepair then
 			RepairAllItems(1)
-			DEFAULT_CHAT_FRAME:AddMessage(L["loot"]["repaircost"] .. " (" .. L.datatext_guild .. ") |cffffffff" .. g .. "|cffffd700g|r" .. " |cffffffff" .. s .. "|cffc7c7cfs|r" .. " |cffffffff" .. c .. "|cffeda55fc|r" .. ".", 255, 255, 0)
+			DEFAULT_CHAT_FRAME:AddMessage(L["loot"]["repaircost"] .. " (" .. GUILD .. ") |cffffffff" .. g .. "|cffffd700g|r" .. " |cffffffff" .. s .. "|cffc7c7cfs|r" .. " |cffffffff" .. c .. "|cffeda55fc|r" .. ".", 255, 255, 0)
 		elseif GetMoney() >= Cost then
 			RepairAllItems()
 			DEFAULT_CHAT_FRAME:AddMessage(L["loot"]["repaircost"] .. " |cffffffff" .. g .. "|cffffd700g|r" .. " |cffffffff" .. s .. "|cffc7c7cfs|r" .. " |cffffffff" .. c .. "|cffeda55fc|r" .. ".", 255, 255, 0)

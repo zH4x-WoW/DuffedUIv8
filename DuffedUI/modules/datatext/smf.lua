@@ -98,36 +98,34 @@ if C["datatext"].smf and C["datatext"].smf > 0 then
 			end
 			GameTooltip:ClearLines()
 			local totalMemory = UpdateMemory()
-			GameTooltip:AddDoubleLine(L.datatext_totalmemusage, formatMem(totalMemory), 0.69, 0.31, 0.31,0.84, 0.75, 0.65)
+			GameTooltip:AddDoubleLine(L["dt"]["totalmemusage"], formatMem(totalMemory), 0.69, 0.31, 0.31,0.84, 0.75, 0.65)
 			GameTooltip:AddLine(" ")
 			for i = 1, #memoryTable do
 				if (memoryTable[i][4]) then
 					local red = memoryTable[i][3] / totalMemory
 					local green = 1 - red
 					GameTooltip:AddDoubleLine(memoryTable[i][2], formatMem(memoryTable[i][3]), 1, 1, 1, red, green + .5, 0)
-				end						
+				end
 			end
 			GameTooltip:AddLine(" ")
 			if bandwidth ~= 0 then
-				GameTooltip:AddDoubleLine(L.datatext_bandwidth , string.format(bandwidthString, bandwidth),0.69, 0.31, 0.31,0.84, 0.75, 0.65)
-				GameTooltip:AddDoubleLine(L.datatext_download , string.format(percentageString, GetDownloadedPercentage() *100),0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+				GameTooltip:AddDoubleLine(L["dt"]["bandwidth"] , string.format(bandwidthString, bandwidth),0.69, 0.31, 0.31,0.84, 0.75, 0.65)
+				GameTooltip:AddDoubleLine(L["dt"]["download"] , string.format(percentageString, GetDownloadedPercentage() *100),0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
 				GameTooltip:AddLine(" ")
 			end
-			GameTooltip:AddDoubleLine(L.datatext_home, latencyHome.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
-			GameTooltip:AddDoubleLine(L.datatext_world, latencyWorld.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
-			GameTooltip:AddDoubleLine(L.datatext_global, ms_combined.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+			GameTooltip:AddDoubleLine(L["dt"]["home"], latencyHome.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+			GameTooltip:AddDoubleLine(L["dt"]["world"], latencyWorld.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+			GameTooltip:AddDoubleLine(L["dt"]["global"], ms_combined.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
 			GameTooltip:AddLine(" ")
-			GameTooltip:AddDoubleLine(L.datatext_inc, string.format( "%.4f", bw_in ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
-			GameTooltip:AddDoubleLine(L.datatext_out, string.format( "%.4f", bw_out ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+			GameTooltip:AddDoubleLine(L["dt"]["inc"], string.format( "%.4f", bw_in ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+			GameTooltip:AddDoubleLine(L["dt"]["out"], string.format( "%.4f", bw_out ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
 			GameTooltip:Show()
 		end
 	end)
 
 	Stat:SetScript("OnMouseDown", function(self, btn)
 		if (btn == "LeftButton") then
-			if not PVEFrame then
-				PVEFrame_ToggleFrame()
-			end
+			if not PVEFrame then PVEFrame_ToggleFrame() end
 			PVEFrame_ToggleFrame()
 		else
 			collectgarbage("collect")

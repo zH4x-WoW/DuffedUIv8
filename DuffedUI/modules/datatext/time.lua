@@ -101,23 +101,23 @@ if C["datatext"].wowtime and C["datatext"].wowtime > 0 then
 				local sec = format("%02.f", floor(timeleft - hour * 3600 - min * 60)) 
 				timeleft = (hour>0 and hour..":" or "")..min..":"..sec
 			end
-			GameTooltip:AddDoubleLine(L.datatext_timeto.." "..name,timeleft)
+			GameTooltip:AddDoubleLine(L["dt"]["timeto"] .. " " .. name, timeleft)
 		end
 		GameTooltip:AddLine(" ")
 		
 		if C["datatext"].localtime == true then
 			local Hr, Min = GetGameTime()
 			if Min < 10 then Min = "0"..Min end
-			if C["datatext"].time24 == true then         
-				GameTooltip:AddDoubleLine(L.datatext_servertime,Hr .. ":" .. Min);
-			else             
+			if C["datatext"].time24 == true then
+				GameTooltip:AddDoubleLine(L["dt"]["server_time"], Hr .. ":" .. Min);
+			else
 				if Hr >= 12 then
-				Hr = Hr - 12
-				if Hr == 0 then Hr = 12 end
-					GameTooltip:AddDoubleLine(L.datatext_servertime,Hr .. ":" .. Min.." PM");
+					Hr = Hr - 12
+					if Hr == 0 then Hr = 12 end
+					GameTooltip:AddDoubleLine(L["dt"]["server_time"], Hr .. ":" .. Min.." PM");
 				else
 					if Hr == 0 then Hr = 12 end
-					GameTooltip:AddDoubleLine(L.datatext_servertime,Hr .. ":" .. Min.." AM");
+					GameTooltip:AddDoubleLine(L["dt"]["server_time"], Hr .. ":" .. Min.." AM");
 				end
 			end
 		else
@@ -125,12 +125,12 @@ if C["datatext"].wowtime and C["datatext"].wowtime > 0 then
 			Hr = tonumber(date("%I"))
 			Min = date("%M")
 			if C["datatext"].time24 == true then
-				GameTooltip:AddDoubleLine(L.datatext_localtime,Hr24 .. ":" .. Min);
+				GameTooltip:AddDoubleLine(L["dt"]["local_time"], Hr24 .. ":" .. Min);
 			else
 				if Hr24 >= 12 then
-					GameTooltip:AddDoubleLine(L.datatext_localtime,Hr .. ":" .. Min.." PM");
+					GameTooltip:AddDoubleLine(L["dt"]["local_time"], Hr .. ":" .. Min.." PM");
 				else
-					GameTooltip:AddDoubleLine(L.datatext_localtime,Hr .. ":" .. Min.." AM");
+					GameTooltip:AddDoubleLine(L["dt"]["local_time"], Hr .. ":" .. Min.." AM");
 				end
 			end
 		end  
@@ -142,7 +142,7 @@ if C["datatext"].wowtime and C["datatext"].wowtime > 0 then
 				local tr, tg, tb, diff
 				if not oneraid then
 					GameTooltip:AddLine(" ")
-					GameTooltip:AddLine(L.datatext_savedraid)
+					GameTooltip:AddLine(L["dt"]["raid"])
 					oneraid = true
 				end
 

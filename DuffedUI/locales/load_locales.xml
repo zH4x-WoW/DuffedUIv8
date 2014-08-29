@@ -5,7 +5,7 @@
 	<Script file="german.lua" />
 	<Script file="taiwan.lua" />
 	<Script file="spanish.lua" />
-	<Script file="korean.lua" />	
+	<Script file="korean.lua" />
 	<Script file="chinese.lua" />
 	<Script file="portuguese.lua" />
 	<Script file="italian.lua" />

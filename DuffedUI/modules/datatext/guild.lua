@@ -80,19 +80,17 @@ local function Update(self, event, ...)
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 		if IsInGuild() and not GuildFrame then LoadAddOn("Blizzard_GuildUI") end
 	end
-	
+
 	if IsInGuild() then
 		GuildRoster()
 		totalOnline = select(3, GetNumGuildMembers())
-	
-		Text:SetFormattedText(displayString, L.datatext_guild, totalOnline)
+		Text:SetFormattedText(displayString, GUILD, totalOnline)
 	else
-		Text:SetText(L.datatext_noguild)
+		Text:SetText(L["dt"]["noguild"])
 	end
-	
 	self:SetAllPoints(Text)
 end
-	
+
 local menuFrame = CreateFrame("Frame", "DuffedUIGuildRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 local menuList = {
 	{ text = OPTIONS_MENU, isTitle = true,notCheckable=true},
@@ -171,7 +169,7 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
 	if GuildInfo and GuildLevel then
-		GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo, GuildLevel), string.format(guildInfoString2, L.datatext_guild, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
+		GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo, GuildLevel), string.format(guildInfoString2, GUILD, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 	end
 	
 	if guildMotD ~= "" then GameTooltip:AddLine(' ') GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end

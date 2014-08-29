@@ -1,8 +1,5 @@
 local D, C, L = unpack(select(2, ...)) 
---------------------------------------------------------------------
--- DURABILITY
---------------------------------------------------------------------
-	
+
 if C["datatext"].dur and C["datatext"].dur > 0 then
 	local Stat = CreateFrame("Frame", "DuffedUIStatDurability")
 	Stat:EnableMouse(true)
@@ -32,11 +29,10 @@ if C["datatext"].dur and C["datatext"].dur > 0 then
 		table.sort(L.Slots, function(a, b) return a[3] < b[3] end)
 		
 		if Total > 0 then
-			Text:SetText(Stat.Color2..floor(L.Slots[1][3]*100).."% |r"..Stat.Color1..L.datatext_armor.."|r")
+			Text:SetText(Stat.Color2 .. floor(L["Slots"][1][3] * 100) .. "% |r" .. Stat.Color1 .. ARMOR .. "|r")
 		else
-			Text:SetText(Stat.Color2.."100% |r"..Stat.Color1..L.datatext_armor.."|r")
+			Text:SetText(Stat.Color2 .. "100% |r" .. Stat.Color1 .. ARMOR .."|r")
 		end
-		-- Setup Durability Tooltip
 		self:SetAllPoints(Text)
 		Total = 0
 	end

@@ -1,7 +1,4 @@
 local D, C, L = unpack(select(2, ...)) 
---------------------------------------------------------------------
--- player haste
---------------------------------------------------------------------
 
 if C["datatext"].haste and C["datatext"].haste > 0 then
 	local Stat = CreateFrame("Frame", "DuffedUIStatHaste")
@@ -18,7 +15,6 @@ if C["datatext"].haste and C["datatext"].haste > 0 then
 	local int = 1
 
 	local function Update(self, t)
-		
 		local spellhaste = UnitSpellHaste("player")
 		local rangedhaste = GetRangedHaste()
 		local attackhaste = GetMeleeHaste()
@@ -33,7 +29,7 @@ if C["datatext"].haste and C["datatext"].haste > 0 then
 
 		int = int - t
 		if int < 0 then
-			Text:SetText(Stat.Color2..format("%.2f", haste) .. "% |r"..Stat.Color1..L.datatext_playerhaste.."|r")
+			Text:SetText(Stat.Color2 .. format("%.2f", haste) .. "% |r" .. Stat.Color1 .. STAT_HASTE .."|r")
 			int = 1
 		end     
 	end

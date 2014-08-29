@@ -34,10 +34,10 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 			basemisschance = (5 - ((targetlv - playerlv)*.2)) --Mobs above player level
 			leveldifference = (targetlv - playerlv)
 		elseif targetlv < playerlv and targetlv > 0 then
-			basemisschance = (5 + ((playerlv - targetlv)*.2)) --Mobs below player level
+			basemisschance = (5 + ((playerlv - targetlv) * .2))
 			leveldifference = (targetlv - playerlv)
 		else
-			basemisschance = 5 --Sets miss chance of attacker level if no target exists, lv80=5, 81=4.2, 82=3.4, 83=2.6
+			basemisschance = 5
 			leveldifference = 0
 		end
 		
@@ -46,20 +46,18 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 		end
 
 		if leveldifference >= 0 then
-			dodge = (GetDodgeChance()-leveldifference*.2)
-			parry = (GetParryChance()-leveldifference*.2)
-			block = (GetBlockChance()-leveldifference*.2)
-			avoidance = (dodge+parry+block)
-			Text:SetText(Stat.Color1..L.datatext_playeravd.."|r"..Stat.Color2..format("%.2f", avoidance).."|r")
+			dodge = (GetDodgeChance() - leveldifference * .2)
+			parry = (GetParryChance() - leveldifference * .2)
+			block = (GetBlockChance() - leveldifference * .2)
+			avoidance = (dodge + parry + block)
+			Text:SetText(Stat.Color1 .. L["dt"]["avd"] .. "|r" .. Stat.Color2 .. format("%.2f", avoidance) .. "|r")
 		else
-			dodge = (GetDodgeChance()+abs(leveldifference*.2))
-			parry = (GetParryChance()+abs(leveldifference*.2))
-			block = (GetBlockChance()+abs(leveldifference*.2))
-			avoidance = (dodge+parry+block)
-			Text:SetText(Stat.Color1..L.datatext_playeravd.."|r"..Stat.Color2..format("%.2f", avoidance).."|r")
+			dodge = (GetDodgeChance() + abs(leveldifference * .2))
+			parry = (GetParryChance() + abs(leveldifference * .2))
+			block = (GetBlockChance() + abs(leveldifference * .2))
+			avoidance = (dodge + parry + block)
+			Text:SetText(Stat.Color1 .. L["dt"]["avd"] .. "|r" .. Stat.Color2 .. format("%.2f", avoidance) .. "|r")
 		end
-
-		--Setup Avoidance Tooltip
 		self:SetAllPoints(Text)
 	end
 
@@ -77,15 +75,15 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 			GameTooltip:SetPoint("BOTTOM", self, "TOP", 0, D.mult)
 			GameTooltip:ClearLines()
 			if targetlv > 1 then
-				GameTooltip:AddDoubleLine(L.datatext_avoidancebreakdown.." ("..L.datatext_lvl.." "..targetlv..")")
+				GameTooltip:AddDoubleLine(L["dt"]["avoidance"] .. " (" .. L["dt"]["lvl"] .. " " .. targetlv ..")")
 			elseif targetlv == -1 then
-				GameTooltip:AddDoubleLine(L.datatext_avoidancebreakdown.." ("..L.datatext_boss..")")
+				GameTooltip:AddDoubleLine(L["dt"]["avoidance"] .. " (" .. BOSS .. ")")
 			else
-				GameTooltip:AddDoubleLine(L.datatext_avoidancebreakdown.." ("..L.datatext_lvl.." "..targetlv..")")
+				GameTooltip:AddDoubleLine(L["dt"]["avoidance"] .." (" .. L["dt"]["lvl"] .. " " .. targetlv .. ")")
 			end
-			GameTooltip:AddDoubleLine(L.datatext_dodge,format("%.2f",dodge) .. "%",1,1,1,  1,1,1)
-			GameTooltip:AddDoubleLine(L.datatext_parry,format("%.2f",parry) .. "%",1,1,1,  1,1,1)
-			GameTooltip:AddDoubleLine(L.datatext_block,format("%.2f",block) .. "%",1,1,1,  1,1,1)
+			GameTooltip:AddDoubleLine(STAT_DODGE, format("%.2f", dodge) .. "%", 1, 1, 1, 1, 1, 1)
+			GameTooltip:AddDoubleLine(STAT_PARRY, format("%.2f", parry) .. "%", 1, 1, 1, 1, 1, 1)
+			GameTooltip:AddDoubleLine(STAT_DODGE, format("%.2f", block) .. "%", 1, 1, 1, 1, 1, 1)
 			GameTooltip:Show()
 		end
 	end)

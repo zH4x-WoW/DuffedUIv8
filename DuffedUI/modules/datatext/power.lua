@@ -49,19 +49,19 @@ if C["datatext"].power and C["datatext"].power > 0 then
 			if role ~= "None" then
 				if (select(2, UnitClass("Player")) == "DRUID" and specname == "Balance") or (select(2, UnitClass("Player")) == "SHAMAN" and specname == "Elemental") then
 					pwr = spellpwr
-					tp_pwr = L.datatext_playersp
+					tp_pwr = L["dt"]["sp"]
 				elseif select(2, UnitClass("Player")) == "HUNTER" then
 					pwr = Reffective
-					tp_pwr = L.datatext_playerap
+					tp_pwr = L["dt"]["ap"]
 				elseif role == "HEALER" then
 					pwr = spellpwr
-					tp_pwr = L.datatext_playersp
+					tp_pwr = L["dt"]["sp"]
 				elseif spellpwr >= attackpwr then
 					pwr = spellpwr
-					tp_pwr = L.datatext_playersp
+					tp_pwr = L["dt"]["sp"]
 				else
 					pwr = attackpwr
-					tp_pwr = L.datatext_playerap
+					tp_pwr = L["dt"]["ap"]
 				end
 			end
 			Text:SetText(Stat.Color2..pwr.." |r".. Stat.Color1..tp_pwr.."|r")      

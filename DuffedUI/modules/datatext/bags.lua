@@ -1,7 +1,4 @@
 local D, C, L = unpack(select(2, ...)) 
---------------------------------------------------------------------
- -- BAGS
---------------------------------------------------------------------
 
 if C["datatext"].bags and C["datatext"].bags > 0 then
 	local Stat = CreateFrame("Frame", "DuffedUIStatBags")
@@ -18,14 +15,12 @@ if C["datatext"].bags and C["datatext"].bags > 0 then
 
 	local function OnEvent(self, event, ...)
 		local free, total,used = 0, 0, 0
-		for i = 0, NUM_BAG_SLOTS do
-			free, total = free + GetContainerNumFreeSlots(i), total + GetContainerNumSlots(i)
-		end
+		for i = 0, NUM_BAG_SLOTS do free, total = free + GetContainerNumFreeSlots(i), total + GetContainerNumSlots(i) end
 		used = total - free
-		Text:SetText(Stat.Color1..L.datatext_bags.."|r"..Stat.Color2..used.."/"..total.."|r")
+		Text:SetText(Stat.Color1 .. BAGSLOT .. "|r" .. Stat.Color2 .. used .."/".. total .."|r")
 		self:SetAllPoints(Text)
 	end
-          
+
 	Stat:RegisterEvent("PLAYER_LOGIN")
 	Stat:RegisterEvent("BAG_UPDATE")
 	Stat:SetScript("OnEvent", OnEvent)

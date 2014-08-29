@@ -15,7 +15,7 @@ if C["datatext"].talent and C["datatext"].talent > 0 then
  
 	local function Update(self)
 		if not GetSpecialization() then
-			Text:SetText(L.datatext_notalents) 
+			Text:SetText(L["dt"]["talent"]) 
 		else
 			local tree = GetSpecialization()
 			local spec = select(2,GetSpecializationInfo(tree)) or ""

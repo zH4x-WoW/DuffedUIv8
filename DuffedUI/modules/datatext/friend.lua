@@ -32,7 +32,7 @@ local menuFrame = CreateFrame("Frame", "DuffedUIFriendRightClickMenu", UIParent,
 local menuList = {
 	{ text = OPTIONS_MENU, isTitle = true,notCheckable=true},
 	{ text = INVITE, hasArrow = true,notCheckable=true, },
-	{ text = CHAT_MSG_WHISPER_INFORM, hasArrow = true,notCheckable=true, },			
+	{ text = CHAT_MSG_WHISPER_INFORM, hasArrow = true,notCheckable=true, },
 	{ text = PLAYER_STATUS, hasArrow = true, notCheckable=true,
 		menuList = {
 			{ text = "|cff2BC226"..AVAILABLE.."|r", notCheckable=true, func = function() if IsChatAFK() then SendChatMessage("", "AFK") elseif IsChatDND() then SendChatMessage("", "DND") end end },
@@ -52,20 +52,12 @@ end
 
 local function inviteClick(self, arg1, arg2, checked)
 	menuFrame:Hide()
-	if type(arg1) ~= 'number' then
-		InviteUnit(arg1)
-	else
-		BNInviteFriend(arg1);
-	end
+	if type(arg1) ~= 'number' then InviteUnit(arg1) else BNInviteFriend(arg1) end
 end
 
 local function whisperClick(self, name, bnet)
 	menuFrame:Hide()
-	if bnet then
-		ChatFrame_SendSmartTell(name)
-	else
-		SetItemRef( "player:"..name, ("|Hplayer:%1$s|h[%1$s]|h"):format(name), "LeftButton" )
-	end
+	if bnet then ChatFrame_SendSmartTell(name) else SetItemRef( "player:"..name, ("|Hplayer:%1$s|h[%1$s]|h"):format(name), "LeftButton" ) end
 end
 
 local levelNameString = "|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r"
@@ -74,10 +66,10 @@ local levelNameClassString = "|cff%02x%02x%02x%d|r %s%s%s"
 local worldOfWarcraftString = "World of Warcraft"
 local battleNetString = "Battle.NET"
 local wowString = "WoW"
-local totalOnlineString = L.datatext_online .. "%s/%s"
-local tthead, ttsubh, ttoff = {r=0.4, g=0.78, b=1}, {r=0.75, g=0.9, b=1}, {r=.3,g=1,b=.3}
-local activezone, inactivezone = {r=0.3, g=1.0, b=0.3}, {r=0.65, g=0.65, b=0.65}
-local displayString = string.join("", Stat.Color1.."%s:|r ", Stat.Color2, "%d|r")
+local totalOnlineString = GUILD_ONLINE_LABEL .. ":" .. "%s/%s"
+local tthead, ttsubh, ttoff = {.4, .78, 1}, {.75, .9, 1}, {.3, 1, .3}
+local activezone, inactivezone = {.3, .0, .3}, {.65, .65, .65}
+local displayString = string.join("", Stat.Color1 .. "%s:|r ", Stat.Color2, "%d|r")
 local statusTable = { "|cffff0000[AFK]|r", "|cffff0000[DND]|r", "" }
 local groupedTable = { "|cffaaaaaa*|r", "" } 
 local friendTable, BNTable = {}, {}
@@ -255,7 +247,7 @@ local function Update(self, event)
 		end
 	end
 
-	Text:SetFormattedText(displayString, L.datatext_friends, totalOnline + BNTotalOnline)
+	Text:SetFormattedText(displayString, FRIENDS, totalOnline + BNTotalOnline)
 	self:SetAllPoints(Text)
 end
 
@@ -270,7 +262,7 @@ Stat:SetScript("OnEnter", function(self)
 		local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
 		GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 		GameTooltip:ClearLines()
-		GameTooltip:AddDoubleLine(L.datatext_friendlist, format(totalOnlineString, totalonline, totalfriends),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
+		GameTooltip:AddDoubleLine(FRIENDS_LIST .. ":", format(totalOnlineString, totalonline, totalfriends),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 		if totalOnline > 0 then
 			GameTooltip:AddLine(' ')
 			GameTooltip:AddLine(worldOfWarcraftString)

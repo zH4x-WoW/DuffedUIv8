@@ -1,7 +1,4 @@
 local D, C, L = unpack(select(2, ...)) 
---------------------------------------------------------------------
--- player Armor
---------------------------------------------------------------------
 
 if C["datatext"].armor and C["datatext"].armor > 0 then
 	local effectiveArmor
@@ -20,7 +17,7 @@ if C["datatext"].armor and C["datatext"].armor > 0 then
 
 	local function Update(self)
 		effectiveArmor = select(2, UnitArmor("player"))
-		Text:SetText(Stat.Color2..(effectiveArmor).."|r "..Stat.Color1..L.datatext_armor.."|r")
+		Text:SetText(Stat.Color2 .. (effectiveArmor) .. "|r " .. Stat.Color1 .. ARMOR .. "|r")
 		--Setup Armor Tooltip
 		self:SetAllPoints(Text)
 	end
@@ -35,7 +32,7 @@ if C["datatext"].armor and C["datatext"].armor > 0 then
 			local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)	
 			GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 			GameTooltip:ClearLines()
-			GameTooltip:AddLine(L.datatext_mitigation)
+			GameTooltip:AddLine(L["dt"]["mitigation"])
 			local lv = 83
 			local mitigation = (effectiveArmor/(effectiveArmor+(467.5*lv-22167.5)))
 			for i = 1, 4 do

@@ -117,9 +117,9 @@ if C["datatext"].calltoarms and C["datatext"].calltoarms > 0 then
 		end
 		
 		if allUnavailable then 
-			GameTooltip:AddLine(L.datatext_cta_allunavailable)
+			GameTooltip:AddLine(L["dt"]["cta_allunavailable"])
 		elseif numCTA == 0 then 
-			GameTooltip:AddLine(L.datatext_cta_nodungeons) 
+			GameTooltip:AddLine(L["dt"]["cta_nodungeons"]) 
 		end
 		GameTooltip:Show()	
 	end
