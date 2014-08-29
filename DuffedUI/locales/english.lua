@@ -223,6 +223,7 @@ L["dt"] = {
 	["world"] = "World Latency:",
 	["global"] = "Global Latency:",
 	["noguild"] = "No Guild",
+	["earned"] = "Earned:",
 	["spent"] = "Spent:",
 	["deficit"] = "Deficit:",
 	["profit"] = "Profit:",

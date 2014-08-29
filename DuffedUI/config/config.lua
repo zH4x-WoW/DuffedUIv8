@@ -33,7 +33,6 @@ C["unitframes"] = {
 	["totdbsize"] = 15,
 	["focusdebuffs"] = true,
 	["focusbutton"] = true,
-	["showtotalhpmp"] = false,
 	["attached"] = false,
 	["oocHide"] = true,
 }
@@ -162,28 +161,28 @@ C["cooldown"] = {
 }
 
 C["classtimer"] = {
-	["enable"] = true,											-- enable classtimer
-	["targetdebuffs"] = false,									-- target debuffs above target (looks crappy imo)
-	["playercolor"] = {.2, .2, .2, 1 },							-- playerbarcolor
-	["targetbuffcolor"] = { 70/255, 150/255, 70/255, 1 },		-- targetbarcolor (buff)
-	["targetdebuffcolor"] = { 150/255, 30/255, 30/255, 1 },		-- targetbarcolor (debuff)
-	["trinketcolor"] = {75/255, 75/255, 75/255, 1 },			-- trinketbarcolor
-	["height"] = 15,											-- height of classtimer bar
-	["spacing"] = 1,											-- spacing of classtimer bars
-	["separator"] = true,										-- enable cast separator
-	["separatorcolor"] = { 0, 0, 0, .5 },						-- color of separator
-	["targetdebuffsenable"] = true,								-- enable debuffbars
+	["enable"] = true,
+	["targetdebuffs"] = false,
+	["playercolor"] = {.2, .2, .2, 1 },
+	["targetbuffcolor"] = { 70/255, 150/255, 70/255, 1 },
+	["targetdebuffcolor"] = { 150/255, 30/255, 30/255, 1 },
+	["trinketcolor"] = {75/255, 75/255, 75/255, 1 },
+	["height"] = 15,
+	["spacing"] = 1,
+	["separator"] = true,
+	["separatorcolor"] = { 0, 0, 0, .5 },
+	["targetdebuffsenable"] = true,
 }
 
 C["auras"] = {
-	["player"] = true,                                  		-- enable tukui buffs/debuffs
-	["consolidate"] = false,                            		-- enable downpdown menu with consolidate buff
-	["flash"] = false,                                  		-- flash warning for buff with time < 30 sec
-	["classictimer"] = true,                            		-- Display classic timer on player auras.
-	["bufftracker"] = true,										-- enable bufftracker
-	["buffnotice"] = true,										-- enable buffnotice
-	["warning"] = true,											-- enable warning sound
-	["wrap"] = 18,												-- set wrap of buffs
+	["player"] = true,
+	["consolidate"] = false,
+	["flash"] = false,
+	["classictimer"] = true,
+	["bufftracker"] = true,
+	["buffnotice"] = true,
+	["warning"] = true,
+	["wrap"] = 18,
 }
 
 C["bags"] = {
@@ -196,58 +195,57 @@ C["bags"] = {
 }
 
 C["misc"] = {
-	["gold"] = true,											-- enable shorten golddisplay
-	["sesenable"] = true,										-- enable specswitcher
-	["sesenablegear"] = true,									-- enable gearslots
-	["sesgearswap"] = true,										-- enable automatic geearswap
-	["sesset1"] = 1,											-- set 1st set (1 - 10)
-	["sesset2"] = 2,											-- set 2nd set (1 - 10)
-	["combatanimation"] = true,									-- enable combat animation
-	["flightpoint"] = true,										-- enable flightpoint list
-	["ilvlcharacter"] = true,									-- enable itemlevel display on charscreen
-	["loc"] = true,												-- disable loss of control
-	["acm_screen"] = true,										-- enable Achievment-screenshot
-	["clickcast"] = false,										-- enable click2cast-plugin
+	["gold"] = true,
+	["sesenable"] = true,
+	["sesenablegear"] = true,
+	["sesgearswap"] = true,
+	["sesset1"] = 1,
+	["sesset2"] = 2,
+	["combatanimation"] = true,
+	["flightpoint"] = true,
+	["ilvlcharacter"] = true,
+	["loc"] = true,
+	["acm_screen"] = true,
+	["clickcast"] = false,
 	["Click2Cast_Filter"] = true,
 	["AFKCamera"] = true,
 }
 
 C["duffed"] = {
-	["dispelannouncement"] = false,								-- enable dispel announcement
-	["drinkannouncement"] = false,								-- enable drink announcement
-	["sayinterrupt"] = true,									-- enable interrupt announcement
-	["bossicons"] = true,										-- enable alternative bossicons
+	["dispelannouncement"] = false,
+	["drinkannouncement"] = false,
+	["sayinterrupt"] = true,
+	["bossicons"] = true,
 	["announcechannel"] = "SAY",
-	["spellannounce"] = true,									-- enable aura announcement
+	["spellannounce"] = true,
 }
 
 C["loot"] = {
-	["lootframe"] = true,                               		-- reskin the loot frame to fit tukui
-	["rolllootframe"] = true,                           		-- reskin the roll frame to fit tukui
+	["lootframe"] = true,
+	["rolllootframe"] = true,
 }
 
 C["tooltip"] = {
-	["enable"] = true,                                  		-- true to enable this mod, false to disable
-	["hidecombat"] = false,                             		-- hide bottom-right tooltip when in combat
-	["hidebuttons"] = false,                            		-- always hide action bar buttons tooltip.
-	["hideuf"] = false,                                 		-- hide tooltip on unitframes
-	["cursor"] = false,                                 		-- tooltip via cursor only
-	["ilvl"] = true,											-- enable itemlevel display for tooltip
-	["ids"] = true,												-- enable spellids
-	["enablecaster"] = true,									-- enable display for caster on buffs / debuffs
+	["enable"] = true,
+	["hidecombat"] = false,
+	["hidebuttons"] = false,
+	["hideuf"] = false,
+	["ilvl"] = true,
+	["ids"] = true,
+	["enablecaster"] = true,
 }
 
 C["merchant"] = {
-	["sellgrays"] = true,                               		-- automaticly sell grays?
-	["autorepair"] = true,                              		-- automaticly repair?
-	["sellmisc"] = true,                                		-- sell defined items automatically
-	["autoguildrepair"] = true,									-- enables autoguildrepair
+	["sellgrays"] = true,
+	["autorepair"] = true,
+	["sellmisc"] = true,
+	["autoguildrepair"] = true,
 }
 
 C["error"] = {
-	["enable"] = true,                                  		-- true to enable this mod, false to disable
-	filter = {                                          		-- what messages to not hide
-		[INVENTORY_FULL] = true,                        		-- inventory is full will not be hidden by default
+	["enable"] = true,
+	filter = {
+		[INVENTORY_FULL] = true,
 		[ERR_PARTY_LFG_BOOT_COOLDOWN_S] = true,
 		[ERR_PARTY_LFG_BOOT_LIMIT] = true,
 		[ERR_PETBATTLE_NOT_HERE] = true,
@@ -259,5 +257,5 @@ C["error"] = {
 }
 
 C["invite"] = { 
-	["autoaccept"] = true,                              		-- auto-accept invite from guildmate and friends.
+	["autoaccept"] = true,
 }
