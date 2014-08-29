@@ -2,24 +2,10 @@ local D, C, L = unpack(select(2, ...))
 if C["chat"].enable ~= true then return end
 
 local gsub = gsub
-local color = "16FF5D"
-local usebracket = false
-local usecolor = true
+local color = "C41F3B"
 
 local function PrintURL(url)
-	if (usecolor) then
-		if (usebracket) then
-			url = "|cff"..color.."|Hurl:"..url.."|h["..url.."]|h|r "
-		else
-			url = "|cff"..color.."|Hurl:"..url.."|h"..url.."|h|r "
-		end
-	else
-		if (usebracket) then
-			url = "|Hurl:"..url.."|h["..url.."]|h "
-		else
-			url = "|Hurl:"..url.."|h"..url.."|h "
-		end
-	end
+	url = "|cff"..color.."|Hurl:"..url.."|h["..url.."]|h|r "
 	return url
 end
 
