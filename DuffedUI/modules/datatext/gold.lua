@@ -220,9 +220,9 @@ Stat:SetScript("OnEnter", function(self)
 	end
 
 	GameTooltip:AddLine(" ")
-	GameTooltip:AddLine("|cffC41F3BBags: Left Click|r")
-	GameTooltip:AddLine("|cffC41F3BCurrency Menu: Right Click|r")
-	GameTooltip:AddLine("|cffC41F3BReset Data: Hold Shift + Right Click|r")
+	GameTooltip:AddLine(L["dt"]["goldbagsopen"])
+	GameTooltip:AddLine(L["dt"]["goldcurrency"])
+	GameTooltip:AddLine(L["dt"]["goldreset"])
 
 	GameTooltip:Show()
 	GameTooltip:SetTemplate("Transparent")

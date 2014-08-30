@@ -263,6 +263,9 @@ if D.client == "frFR" then
 		["carts_controlled"] = "Carts Controlled:",
 		["victory_points"] = "Victory Points:",
 		["orb_possessions"] = "Orb Possessions:",
+		["goldbagsopen"] = "|cffC41F3BBags: Left Click|r",
+		["goldcurrency"] = "|cffC41F3BCurrency Menu: Right Click|r",
+		["goldreset"] = "|cffC41F3BReset Data: Hold Shift + Right Click|r",
 	}
 
 	L["Slots"] = {

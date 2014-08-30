@@ -263,6 +263,9 @@ if D.client == "deDE" then
 		["carts_controlled"] = "Wagen kontrolliert:",
 		["victory_points"] = "Siegpunkte:",
 		["orb_possessions"] = "Orbbesitz:",
+		["goldbagsopen"] = "|cffC41F3BTaschen: Linksklick|r",
+		["goldcurrency"] = "|cffC41F3BWährungsmenü: Rechtsklick|r",
+		["goldreset"] = "|cffC41F3BDaten zurücksetzen: Shift halten + Rechtsklick|r",
 	}
 
 	L["Slots"] = {
