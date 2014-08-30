@@ -63,8 +63,8 @@
 	DuffedUIConfigUILocalization.nameplatedebuffs = "Enable debuff display"
 	DuffedUIConfigUILocalization.nameplatewidth = "Set width of nameplates (default = 110)"
 	DuffedUIConfigUILocalization.nameplateheight = "Set height of nameplates (default = 7)"
-	DuffedUIConfigUILocalization.nameplateaurawidth = "Set width of Debufficon"
-	DuffedUIConfigUILocalization.nameplateauraheight = "Set height of Debufficon"
+	DuffedUIConfigUILocalization.nameplateauraswidth = "Set width of Debufficon"
+	DuffedUIConfigUILocalization.nameplateaurasheight = "Set height of Debufficon"
 	DuffedUIConfigUILocalization.nameplateMaxDebuffs = "Set max debuffs to display (default = 5)"
 	DuffedUIConfigUILocalization.nameplateCastHeight = "Set height for Castbar"
 	DuffedUIConfigUILocalization.nameplateShowComboPoints = "Show ComboPoints on nameplates"
@@ -84,6 +84,7 @@
 	DuffedUIConfigUILocalization.actionbarshapeshiftborder = "Enable Shapeshiftbarborder"
 	DuffedUIConfigUILocalization.actionbarshapeshiftmouseover = "Enable mouseover for Shapeshiftbar"
 	DuffedUIConfigUILocalization.actionbarborderhighlight = "Enable prochighlight from DuffedUI (default = disabled)"
+	DuffedUIConfigUILocalization.actionbarpetbuttonsize = "Size of the petactionbuttons"
 
 	-- raid frames
 	DuffedUIConfigUILocalization.raid = "Raid Frames"

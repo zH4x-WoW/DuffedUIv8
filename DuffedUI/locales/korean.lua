@@ -27,9 +27,9 @@ if D.client == "koKR" then
 	}
 
 	L["afk"] = {
-		["text4"] = "Mouseover minimap shows coords and locations",
-		["text4"] = "Middle click the minimap for micromenu",
-		["text4"] = "Right click the minimap for gatheringmenu",
+		["text1"] = "Mouseover minimap shows coords and locations",
+		["text2"] = "Middle click the minimap for micromenu",
+		["text3"] = "Right click the minimap for gatheringmenu",
 		["text4"] = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link.",
 	}
 

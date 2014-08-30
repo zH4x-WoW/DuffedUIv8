@@ -29,8 +29,6 @@ DuffedUITooltips.Tooltips = {
 	WorldMapCompareTooltip2,
 	WorldMapCompareTooltip3,
 	ItemRefTooltip,
-	FriendsTooltip,
-	FloatingGarrisonMissionTooltip,
 }
 
 DuffedUITooltips.Classification = {
@@ -301,6 +299,7 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 			hooksecurefunc(GameTooltip, "SetPetAction", CombatHideActionButtonsTooltip)
 			hooksecurefunc(GameTooltip, "SetShapeshift", CombatHideActionButtonsTooltip)
 		end
+		if FriendsTooltip then FriendsTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
 
 		HealthBar:SetStatusBarTexture(C["media"].normTex)
 		HealthBar:CreateBackdrop()

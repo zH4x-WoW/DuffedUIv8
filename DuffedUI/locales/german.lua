@@ -27,9 +27,9 @@ if D.client == "deDE" then
 	}
 
 	L["afk"] = {
-		["text4"] = "Mouseover über die Minimap zeigt Koordinaten und die Zone an",
-		["text4"] = "Mausradklick in die Minimap zeigt das Micromenü",
-		["text4"] = "Rechtsklick in die Minimap zeigt das Aufspürmenü",
+		["text1"] = "Mouseover über die Minimap zeigt Koordinaten und die Zone an",
+		["text2"] = "Mausradklick in die Minimap zeigt das Micromenü",
+		["text3"] = "Rechtsklick in die Minimap zeigt das Aufspürmenü",
 		["text4"] = "Rechtsklick auf Quests oder Erfolge ermöglicht es einen Link zu WoWHead zu erhalten.",
 	}
 
