@@ -142,15 +142,6 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		end
 	else
 		for i = 2, NumLines do
-			if (_G["GameTooltipTextLeft"..i]:GetText():find("^" .. WORLD_MAP_WILDBATTLEPET_LEVEL)) then
-				local Level, CreatureType = strmatch(_G["GameTooltipTextLeft"..i]:GetText(), WORLD_MAP_WILDBATTLEPET_LEVEL..'(%d+) (%w+)')
-				local Average = C_PetJournal.GetPetTeamAverageLevel()
-				local Color = Average and GetRelativeDifficultyColor(Average, Level) or GetQuestDifficultyColor(Level)
-
-				Line:SetFormattedText("%s|cff%02x%02x%02x%s|r %s", WORLD_MAP_WILDBATTLEPET_LEVEL, Color.r * 255, Color.g * 255, Color.b * 255, Level, CreatureType)
-				break
-			end
-
 			if ((_G["GameTooltipTextLeft"..i]:GetText():find("^" .. LEVEL)) or (CreatureType and _G["GameTooltipTextLeft"..i]:GetText():find("^" .. CreatureType))) then
 				if Level == -1 and Classification == "elite" then Classification = "worldboss" end
 				_G["GameTooltipTextLeft"..i]:SetFormattedText("|cff%02x%02x%02x%s|r%s %s", R * 255, G * 255, B * 255, Classification ~= "worldboss" and Level ~= 0 and Level or "", DuffedUITooltips.Classification[Classification] or "", CreatureType or "")
