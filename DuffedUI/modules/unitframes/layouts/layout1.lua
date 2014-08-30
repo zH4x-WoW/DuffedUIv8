@@ -375,7 +375,7 @@ local function Shared(self, unit)
 			buffs:SetWidth(218)
 			buffs:SetPoint("TOPLEFT", self, "TOPLEFT", -2, 25)
 			buffs.size = 20
-			buffs.num = 9
+			buffs.num = 18
 
 			debuffs:SetHeight(20)
 			debuffs:SetWidth(218)

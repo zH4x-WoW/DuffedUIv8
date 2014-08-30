@@ -133,23 +133,19 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		end
 
 		for i = Offset, NumLines do
-			local Line = _G["GameTooltipTextLeft"..i]
-			if (Line:GetText():find("^" .. LEVEL)) then
+			if (_G["GameTooltipTextLeft"..i]:GetText():find("^" .. LEVEL)) then
 				if Race then
-					Line:SetFormattedText("|cff%02x%02x%02x%s|r %s %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Race, Color, Class .."|r")
+					_G["GameTooltipTextLeft"..i]:SetFormattedText("|cff%02x%02x%02x%s|r %s %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Race, Color, Class .."|r")
 				else
-					Line:SetFormattedText("|cff%02x%02x%02x%s|r %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Color, Class .."|r")
+					_G["GameTooltipTextLeft"..i]:SetFormattedText("|cff%02x%02x%02x%s|r %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Color, Class .."|r")
 				end
 				break
 			end
 		end
 	else
 		for i = 2, NumLines do
-			local Line = _G["GameTooltipTextLeft"..i]
-			local Text = Line:GetText()
-
-			if (Text:find("^" .. WORLD_MAP_WILDBATTLEPET_LEVEL)) then
-				local Level, CreatureType = strmatch(Text, WORLD_MAP_WILDBATTLEPET_LEVEL..'(%d+) (%w+)')
+			if (_G["GameTooltipTextLeft"..i]:GetText():find("^" .. WORLD_MAP_WILDBATTLEPET_LEVEL)) then
+				local Level, CreatureType = strmatch(_G["GameTooltipTextLeft"..i]:GetText(), WORLD_MAP_WILDBATTLEPET_LEVEL..'(%d+) (%w+)')
 				local Average = C_PetJournal.GetPetTeamAverageLevel()
 				local Color = Average and GetRelativeDifficultyColor(Average, Level) or GetQuestDifficultyColor(Level)
 
@@ -157,19 +153,18 @@ function DuffedUITooltips:OnTooltipSetUnit()
 				break
 			end
 
-			if ((Text:find("^" .. LEVEL)) or (CreatureType and Text:find("^" .. CreatureType))) then
+			if ((_G["GameTooltipTextLeft"..i]:GetText():find("^" .. LEVEL)) or (CreatureType and _G["GameTooltipTextLeft"..i]:GetText():find("^" .. CreatureType))) then
 				if Level == -1 and Classification == "elite" then Classification = "worldboss" end
-				Line:SetFormattedText("|cff%02x%02x%02x%s|r%s %s", R * 255, G * 255, B * 255, Classification ~= "worldboss" and Level ~= 0 and Level or "", DuffedUITooltips.Classification[Classification] or "", CreatureType or "")
+				_G["GameTooltipTextLeft"..i]:SetFormattedText("|cff%02x%02x%02x%s|r%s %s", R * 255, G * 255, B * 255, Classification ~= "worldboss" and Level ~= 0 and Level or "", DuffedUITooltips.Classification[Classification] or "", CreatureType or "")
 				break
 			end
 		end
 	end
 
 	for i = 1, NumLines do
-		local Line = _G["GameTooltipTextLeft"..i]
-		local Text = Line:GetText()
+		local Text = _G["GameTooltipTextLeft"..i]:GetText()
 		if (Text and Text == PVP_ENABLED) then
-			Line:SetText()
+			_G["GameTooltipTextLeft"..i]:SetText()
 			break
 		end
 	end
