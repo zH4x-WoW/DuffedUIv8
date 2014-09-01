@@ -84,6 +84,7 @@
 	DuffedUIConfigUILocalization.actionbarshapeshiftborder = "Enable Shapeshiftbarborder"
 	DuffedUIConfigUILocalization.actionbarshapeshiftmouseover = "Enable mouseover for Shapeshiftbar"
 	DuffedUIConfigUILocalization.actionbarborderhighlight = "Enable prochighlight from DuffedUI (default = disabled)"
+	DuffedUIConfigUILocalization.actionbarsidebars = "Enable mouseover for SideBars on chatframes"
 
 	-- raid frames
 	DuffedUIConfigUILocalization.raid = "Raid Frames"

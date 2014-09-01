@@ -21,3 +21,24 @@ for i = 1, 12 do
 	end
 end
 RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
+
+if C["actionbar"].sidebars then
+	function LeftSideBar(alpha)
+		DuffedUIBar3:SetAlpha(alpha)
+		MultiBarBottomRight:SetAlpha(alpha)
+	end
+
+	local function mouseover(f)
+		f:EnableMouse(true)
+		f:SetAlpha(0)
+		f:HookScript("OnEnter", function() LeftSideBar(1) end)
+		f:HookScript("OnLeave", function() LeftSideBar(0) end)
+	end
+	mouseover(DuffedUIBar3)
+
+	for i = 1, 12 do
+		_G["MultiBarBottomRightButton" .. i]:EnableMouse(true)
+		_G["MultiBarBottomRightButton" .. i]:HookScript("OnEnter", function() LeftSideBar(1) end)
+		_G["MultiBarBottomRightButton" .. i]:HookScript("OnLeave", function() LeftSideBar(0) end)
+	end
+end
