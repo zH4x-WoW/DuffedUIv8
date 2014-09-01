@@ -133,7 +133,7 @@ Stat:SetScript("OnMouseUp", function(self, btn)
 	menuList[3].menuList = {}
 
 	for i = 1, #guildTable do
-		if (guildTable[i][7] and guildTable[i][1] ~= D.myname) then
+		if (guildTable[i][7] and guildTable[i][1] ~= D.MyName) then
 			local classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[guildTable[i][9]], GetQuestDifficultyColor(guildTable[i][3])
 
 			if UnitInParty(guildTable[i][1]) or UnitInRaid(guildTable[i][1]) then
@@ -203,7 +203,7 @@ Stat:SetScript("OnEnter", function(self)
 			end
 
 			name, rank, level, zone, note, officernote, connected, status, class, isMobile = unpack(guildTable[i])
-			if connected and name ~= D.myname then
+			if connected and name ~= D.MyName then
 				if GetRealZoneText() == zone then zonec = activezone else zonec = inactivezone end
 				classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class], GetQuestDifficultyColor(level)
 				

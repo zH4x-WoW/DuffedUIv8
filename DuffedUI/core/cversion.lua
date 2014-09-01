@@ -18,9 +18,9 @@ local tonumber = tonumber
 
 local version = function(self, event, prefix, message, channel, sender)
 	if event == "CHAT_MSG_ADDON" then
-		if prefix ~= "DuffedUI Version" or sender == D.myname then return end
+		if prefix ~= "DuffedUI Version" or sender == D.MyName then return end
 		
-		if tonumber(message > D.version) then
+		if tonumber(message > D.Version) then
 			print(L["ui"]["outdated"])
 			StaticPopup_Show("OUTDATED")
 			self:UnregisterEvent("CHAT_MSG_ADDON")

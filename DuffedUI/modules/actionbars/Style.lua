@@ -29,7 +29,7 @@ function D.StyleActionBarButton(self)
 
 	if Border and Border:IsShown() then
 		Border:Hide()
-		Border = D.dummy
+		Border = D.Dummy
 	end
 
 	if Btname and normal and C["actionbar"].macro then
@@ -60,8 +60,8 @@ function D.StyleActionBarButton(self)
 	if C["actionbar"].hotkey then
 		HotKey:SetFont(C["media"].font, 11, "THINOUTLINE")
 		HotKey:SetShadowOffset(0, 0)
-		HotKey.ClearAllPoints = D.dummy
-		HotKey.SetPoint = D.dummy
+		HotKey.ClearAllPoints = D.Dummy
+		HotKey.SetPoint = D.Dummy
 	else
 		HotKey:SetText("")
 		HotKey:Kill()
@@ -115,7 +115,7 @@ function D.StyleActionBarPetAndShiftButton(normal, button, icon, name, pet)
 	end
 
 	button:SetNormalTexture("")
-	button.SetNormalTexture = D.dummy
+	button.SetNormalTexture = D.Dummy
 
 	local Flash	 = _G[name.."Flash"]
 	Flash:SetTexture("")

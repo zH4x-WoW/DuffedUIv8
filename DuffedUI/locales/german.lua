@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-if D.client == "deDE" then
+if D.Client == "deDE" then
 	L["move"] = {
 		["tooltip"] = "Bewege Tooltip",
 		["minimap"] = "Bewege Minimap",
@@ -47,7 +47,7 @@ if D.client == "deDE" then
 
 	L["ui"] = {
 		["outdated"] = "Deine Version von DuffedUI ist veraltet. Du kannst die neueste Version auf www.duffed.net erhalten.",
-		["welcome"] = "Hallo |cffc41f3b".. D.myname.."!|r".."\n".."Danke das du |cffc41f3bDuffedUI "..D.version.."|r benutzt. Für detailierte Informatione besuche |cffc41f3bhttp://www.duffed.net|r.",
+		["welcome"] = "Hallo |cffc41f3b".. D.MyName.."!|r".."\n".."Danke das du |cffc41f3bDuffedUI "..D.Version.."|r benutzt. Für detailierte Informatione besuche |cffc41f3bhttp://www.duffed.net|r.",
 		["disableui"] = "DuffedUI arbeitet nicht auf deiner Auflösung, möchtest du DuffedUI deaktivieren? (Abbrechen, wenn du es mit einer anderen Auflösung probieren möchtest)",
 		["fix_ab"] = "Etwas stimmt nicht mit den Aktionsleisten. Möchtest du das UI neu laden um diesen Fehler zu beheben?",
 	}

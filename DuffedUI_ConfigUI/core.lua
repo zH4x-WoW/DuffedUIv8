@@ -27,9 +27,7 @@ local ALLOWED_GROUPS = {
 
 if DuffedUIEditedDefaultConfig then
 	for group, value in pairs(DuffedUIEditedDefaultConfig) do
-		if group ~= "media" and not ALLOWED_GROUPS[group] then
-			ALLOWED_GROUPS[group] = 1
-		end
+		if group ~= "media" and not ALLOWED_GROUPS[group] then ALLOWED_GROUPS[group] = 1 end
 	end
 end
 
@@ -83,7 +81,6 @@ local function ShowGroup(group)
 	local D, C, L = unpack(DuffedUI)
 
 	if VISIBLE_GROUP then _G["DuffedUIConfigUI"..VISIBLE_GROUP]:Hide() end
-
 	if _G["DuffedUIConfigUI"..group] then
 		local o = "DuffedUIConfigUI"..group
 		local translate = Local(group)
@@ -161,9 +158,7 @@ function CreateDuffedUIConfigUI()
 			ReloadUI() 
 		end,
 		function2 = function()
-			if DuffedUIConfigUI and DuffedUIConfigUI:IsShown() then
-				DuffedUIConfigCover:Hide()
-			end
+			if DuffedUIConfigUI and DuffedUIConfigUI:IsShown() then DuffedUIConfigCover:Hide() end
 		end,
 		answer1 = ACCEPT,
 		answer2 = CANCEL,
@@ -176,9 +171,7 @@ function CreateDuffedUIConfigUI()
 			DuffedUIConfigPrivate = nil
 			ReloadUI()
 		end,
-		function2 = function()
-			DuffedUIConfigCover:Hide()
-		end,
+		function2 = function() DuffedUIConfigCover:Hide() end,
 		answer1 = ACCEPT,
 		answer2 = CANCEL,
 	}
@@ -188,6 +181,11 @@ function CreateDuffedUIConfigUI()
 	DuffedUIConfigUI:SetWidth(750)
 	DuffedUIConfigUI:SetHeight(420)
 	DuffedUIConfigUI:SetFrameStrata("HIGH")
+	DuffedUIConfigUI:EnableMouse(true)
+	DuffedUIConfigUI:SetScript("OnMouseDown", function() DuffedUIConfigUI:StartMoving() end)
+	DuffedUIConfigUI:SetScript("OnMouseUp", function() DuffedUIConfigUI:StopMovingOrSizing() end)
+	DuffedUIConfigUI:SetClampedToScreen(true)
+	DuffedUIConfigUI:SetMovable(true)
 
 	local DuffedUIConfigUIBG = CreateFrame("Frame", "DuffedUIConfigUI", DuffedUIConfigUI)
 	DuffedUIConfigUIBG:SetPoint("TOPLEFT", -10, 10)
@@ -198,7 +196,7 @@ function CreateDuffedUIConfigUI()
 	DuffedUIConfigUITitleBox:Size(DuffedUIConfigUIBG:GetWidth() - 33, 30)
 	DuffedUIConfigUITitleBox:SetPoint("BOTTOMLEFT", DuffedUIConfigUIBG, "TOPLEFT", 0, 3)
 	DuffedUIConfigUITitleBox:SetTemplate("Transparent")
-	
+
 	local DuffedUIConfigUITitle = DuffedUIConfigUITitleBox:CreateFontString("DuffedUIConfigUITitle", "OVERLAY")
 	DuffedUIConfigUITitle:SetFont(C["media"].font, 12, "THINOUTLINE")
 	DuffedUIConfigUITitle:SetPoint("LEFT", DuffedUIConfigUITitleBox, "LEFT", 10, 0)
@@ -524,65 +522,71 @@ function CreateDuffedUIConfigUI()
 
 	ShowGroup("general")
 
-	-- credits
-	local credits = D.Credits
-	local interval = #credits
-	local f = CreateFrame("ScrollingMessageFrame", "DuffedUIConfigUICredits", DuffedUIConfigUI)
-	f:SetSize(DuffedUIConfigUITitleBox:GetWidth(), UIParent:GetHeight())
-	f:SetPoint("RIGHT", DuffedUIConfigUI, "LEFT", 0, 170)
-	f:SetFont(C["media"].font, 26, "OUTLINE")
-	f:SetShadowColor(0, 0, 0, 0)
-	f:SetFading(false)
-	f:SetFadeDuration(20)
-	f:SetTimeVisible(1)
-	f:SetMaxLines(64)
-	f:SetSpacing(2)
-	f:AddMessage("DuffedUI " .. D.version, 222/255, 95/255, 95/255)
-	f:AddMessage(" ")
-	f:AddMessage("SPECIAL THANKS TO:", 75/255, 175/255, 76/255)
-	f:AddMessage(" ")
-	f:SetFrameLevel(0)
-	f:SetFrameStrata("BACKGROUND")
-	f:SetScript("OnUpdate", function(self, time)
-		interval = interval - time
-		for index, name in pairs(D.Credits) do
-			if interval < index then 
-				f:AddMessage(D.Credits[index], 1, 1, 1)
-				tremove(credits, index)
-			end
-		end
-		if interval < 0 then self:SetScript("OnUpdate", nil) end
+	-- global credits
+	local cf = CreateFrame("Frame", "CreditFrame", DuffedUIConfigUI)
+	cf:SetTemplate("Transparent")
+	cf:Size(770, 22)
+	cf:Point("TOP", DuffedUIConfigUI, "BOTTOM", 0, -13)
+
+	local sf = CreateFrame("ScrollFrame", nil, DuffedUIConfigUI)
+	sf:Size(770, 22)
+	sf:Point("CENTER", cf, 0, 0)
+
+	local scroll = CreateFrame("Frame", nil, sf)
+	scroll:Size(770, 22)
+	scroll:SetPoint("CENTER", cf)
+	sf:SetScrollChild(scroll)
+
+	local credit = "Special thanks to: "
+	for i = 1, #D.Credits do
+		if (i ~= 1) then credit = credit .. ", " .. "|cff9482C9" .. D.Credits[i] .. "|r" else credit = credit .. "|cff9482C9" .. D.Credits[i] .. "|r" end
+	end
+
+	local ct = scroll:CreateFontString(nil, "OVERLAY")
+	ct:SetFont(C["media"].font, 14)
+	ct:SetText(credit)
+	ct:Point("LEFT", scroll, "RIGHT", 4, 0)
+	scroll:SetAnimation("Move", "Horizontal", -1250, 0.5)
+
+	scroll:AnimOnFinished("Move", function(self)
+		if (not DuffedUIConfigUI:IsVisible()) then return end
+		self:ClearAllPoints()
+		self:SetPoint("CENTER", cf)
+		self:SetAnimation("Move", "Horizontal", -1250, 0.5)
 	end)
-	
-	local dcredits = D.DuffedCredits
-	local interval = #dcredits
-	local d = CreateFrame("ScrollingMessageFrame", "DuffedUIConfigUIDuffedCredits", DuffedUIConfigUI)
-	d:SetSize(DuffedUIConfigUITitleBox:GetWidth(), UIParent:GetHeight())
-	d:SetPoint("LEFT", DuffedUIConfigUI, "RIGHT", 0, 170)
-	d:SetFont(C["media"].font, 26, "OUTLINE")
-	d:SetShadowColor(0, 0, 0, 0)
-	d:SetFading(false)
-	d:SetFadeDuration(20)
-	d:SetTimeVisible(1)
-	d:SetMaxLines(64)
-	d:SetSpacing(2)
-	d:AddMessage("SPECIAL THANKS TO", 222/255, 95/255, 95/255)
-	d:AddMessage(" ")
-	d:AddMessage("MY BETATESTER:", 75/255, 175/255, 76/255)
-	d:AddMessage(" ")
-	d:SetFrameLevel(0)
-	d:SetFrameStrata("BACKGROUND")
-	d:SetScript("OnUpdate", function(self, time)
-		interval = interval - time
-		for index, name in pairs(D.DuffedCredits) do
-			if interval < index then 
-				d:AddMessage(D.DuffedCredits[index], .77, .12, .23)
-				tremove(dcredits, index)
-			end
-		end
-		if interval < 0 then self:SetScript("OnUpdate", nil) end
+
+	-- duffed credits
+	local cf2 = CreateFrame("Frame", "CreditFrame2", DuffedUIConfigUI)
+	cf2:SetTemplate("Transparent")
+	cf2:Size(770, 22)
+	cf2:Point("TOP", DuffedUIConfigUI, "BOTTOM", 0, -38)
+
+	local sf2 = CreateFrame("ScrollFrame", nil, DuffedUIConfigUI)
+	sf2:Size(766, 22)
+	sf2:Point("CENTER", cf2, 0, 0)
+
+	local scroll2 = CreateFrame("Frame", nil, sf2)
+	scroll2:Size(766, 22)
+	scroll2:SetPoint("CENTER", cf2)
+	sf2:SetScrollChild(scroll2)
+
+	local credit2 = "Special thanks to to my Betatester: "
+	for i = 1, #D.DuffedCredits do
+		if (i ~= 1) then credit2 = credit2 .. ", " .. "|cffC41F3B" ..  D.DuffedCredits[i]  .. "|r" else credit2 = credit2 .. "|cffC41F3B" ..  D.DuffedCredits[i]  .. "|r" end
+	end
+
+	local ct2 = scroll2:CreateFontString(nil, "OVERLAY")
+	ct2:SetFont(C["media"].font, 14)
+	ct2:SetText(credit2)
+	ct2:Point("LEFT", scroll2, "RIGHT", 4, 0)
+	scroll2:SetAnimation("Move", "Horizontal", -1250, 0.5)
+
+	scroll2:AnimOnFinished("Move", function(self)
+		if (not DuffedUIConfigUI:IsVisible()) then return end
+		self:ClearAllPoints()
+		self:SetPoint("CENTER", cf2)
+		self:SetAnimation("Move", "Horizontal", -1250, 0.5)
 	end)
-	tinsert(UISpecialFrames, "DuffedUIConfigUI")
 end
 
 do

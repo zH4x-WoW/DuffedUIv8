@@ -103,7 +103,7 @@ local function Update(self, t)
 				dmgtxt = (Stat.Color1 .. DAMAGE .. ": " .. "|r" .. Stat.Color2 .. damageDone .. "|r")
 			end
 			if ( name ) then
-				if ( name == D.myname ) then
+				if ( name == D.MyName ) then
 					Text2:SetText(Stat.Color1..HONOR..": ".."|r"..Stat.Color2..format('%d', honorGained).."|r")
 					Text1:SetText(dmgtxt)
 					Text3:SetText(Stat.Color1..KILLING_BLOWS..": ".."|r"..Stat.Color2..killingBlows.."|r")

@@ -4,14 +4,14 @@ local D, C, L = unpack(select(2, ...))
 GhostFrame:SetTemplate("Default")
 GhostFrame:SetBackdropColor(0, 0, 0, 0)
 GhostFrame:SetBackdropBorderColor(0, 0, 0, 0)
-GhostFrame.SetBackdropColor = D.dummy
-GhostFrame.SetBackdropBorderColor = D.dummy
+GhostFrame.SetBackdropColor = D.Dummy
+GhostFrame.SetBackdropBorderColor = D.Dummy
 GhostFrameContentsFrame:SetTemplate("Default")
 GhostFrameContentsFrameIcon:SetTexture(nil)
 GhostFrameContentsFrame:Width(148)
 GhostFrameContentsFrame:ClearAllPoints()
 GhostFrameContentsFrame:SetPoint("CENTER")
-GhostFrameContentsFrame.SetPoint = D.dummy
+GhostFrameContentsFrame.SetPoint = D.Dummy
 GhostFrame:SetFrameStrata("LOW")
 GhostFrame:SetFrameLevel(5)
 GhostFrame:ClearAllPoints()

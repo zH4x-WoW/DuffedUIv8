@@ -193,9 +193,9 @@ local function LoadSkin()
 	for i = 1, 4 do
 		local button = _G["StaticPopup"..i.."CloseButton"]
 		button:SetNormalTexture("")
-		button.SetNormalTexture = D.dummy
+		button.SetNormalTexture = D.Dummy
 		button:SetPushedTexture("")
-		button.SetPushedTexture = D.dummy
+		button.SetPushedTexture = D.Dummy
 		button:SkinCloseButton()
 	end
     

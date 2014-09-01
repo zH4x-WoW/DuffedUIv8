@@ -6,11 +6,11 @@ local function LoadSkin()
 	QuestFrameGreetingGoodbyeButton:SkinButton(true)
 	QuestGreetingFrameHorizontalBreak:Kill()
 	GreetingText:SetTextColor(1, 1, 1)
-	GreetingText.SetTextColor = D.dummy
+	GreetingText.SetTextColor = D.Dummy
 	CurrentQuestsText:SetTextColor(1, 1, 0)
-	CurrentQuestsText.SetTextColor = D.dummy
+	CurrentQuestsText.SetTextColor = D.Dummy
 	AvailableQuestsText:SetTextColor(1, 1, 0)
-	AvailableQuestsText.SetTextColor = D.dummy
+	AvailableQuestsText.SetTextColor = D.Dummy
 	for i = 1, MAX_NUM_QUESTS do
 		local button = _G["QuestTitleButton"..i]
 		if button then

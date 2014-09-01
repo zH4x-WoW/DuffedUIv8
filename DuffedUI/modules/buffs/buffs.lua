@@ -5,12 +5,12 @@ local frame = CreateFrame("Frame", "DuffedUIAuras")
 frame.content = {}
 
 local icon
-local faction = D.myfaction
+local faction = UnitFactionGroup("player")
 local flash = C["auras"].flash
 local filter = C["auras"].consolidate
 local sexID = UnitSex("player")
 local sex = "male"
-local race = D.myrace
+local race = D.MyRace
 
 if sexID == 3 or race == "Pandaren" then sex = "female" end -- look like they forgot to include male icon in MoP for pandaren
 if race == "Scourge" then race = "Undead" end

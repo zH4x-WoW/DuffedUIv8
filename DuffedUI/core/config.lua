@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-local myPlayerRealm = D.myrealm
+local myPlayerRealm = D.MyRealm
 local myPlayerName  = UnitName("player")
 
 if not IsAddOnLoaded("DuffedUI_ConfigUI") then return end

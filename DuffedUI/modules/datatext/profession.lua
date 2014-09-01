@@ -25,7 +25,7 @@ Stat:SetScript("OnEnter", function()
 	local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
-	GameTooltip:AddLine(D.myname.."'s Professions", .4,.78,1)
+	GameTooltip:AddLine(D.MyName.."'s Professions", .4,.78,1)
 	for _, v in pairs({GetProfessions()}) do
 		if v ~= nil then
 			local name, texture, rank, maxRank = GetProfessionInfo(v)

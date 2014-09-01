@@ -11,7 +11,7 @@ local DuffedUIWatchFrameAnchor = CreateFrame("Button", "DuffedUIWatchFrameAnchor
 DuffedUIWatchFrameAnchor:SetFrameStrata("HIGH")
 DuffedUIWatchFrameAnchor:SetFrameLevel(20)
 DuffedUIWatchFrameAnchor:SetSize(ObjectiveTrackerFrame:GetWidth(), 20)
-DuffedUIWatchFrameAnchor:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -D.screenheight / 5, -D.screenheight / 4)
+DuffedUIWatchFrameAnchor:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -D.ScreenHeight / 5, -D.ScreenHeight / 4)
 DuffedUIWatchFrameAnchor:SetClampedToScreen(true)
 DuffedUIWatchFrameAnchor:SetMovable(true)
 DuffedUIWatchFrameAnchor:EnableMouse(false)
@@ -124,8 +124,8 @@ function ObjectiveTracker:Enable()
 	ObjectiveTracker:SetAllPoints(DuffedUIWatchFrameAnchor)
 	Frame:SetParent(ObjectiveTracker)
 	Frame:SetPoint("TOPRIGHT")
-	Frame.ClearAllPoints = D.dummy
-	Frame.SetPoint = D.dummy
+	Frame.ClearAllPoints = D.Dummy
+	Frame.SetPoint = D.Dummy
 
 	for i = 1, 5 do
 		local Module = ObjectiveTrackerFrame.MODULES[i]

@@ -1,27 +1,26 @@
 local D, C, L = unpack(select(2, ...))
 
-D.dummy = function() return end
-D.myname = select(1, UnitName("player"))
+D.Dummy = function() return end
+D.MyName = select(1, UnitName("player"))
 D.Class = select(2, UnitClass("player"))
-D.myrace = select(2, UnitRace("player"))
-D.myfaction = UnitFactionGroup("player")
-D.client = GetLocale() 
-D.resolution = GetCVar("gxResolution")
-D.screenheight = tonumber(string.match(D.resolution, "%d+x(%d+)"))
-D.screenwidth = tonumber(string.match(D.resolution, "(%d+)x+%d"))
-D.version = GetAddOnMetadata("DuffedUI", "Version")
-D.versionnumber = tonumber(D.version)
-D.incombat = UnitAffectingCombat("player")
-D.patch, D.buildtext, D.releasedate, D.toc = GetBuildInfo()
-D.build = tonumber(D.buildtext)
-D.level = UnitLevel("player")
-D.myrealm = GetRealmName()
+D.MyRace = select(2, UnitRace("player"))
+D.Level = UnitLevel("player")
+D.MyRealm = GetRealmName()
+D.Client = GetLocale() 
+D.Resolution = GetCVar("gxResolution")
+D.ScreenHeight = tonumber(string.match(D.Resolution, "%d+x(%d+)"))
+D.ScreenWidth = tonumber(string.match(D.Resolution, "(%d+)x+%d"))
+D.Version = GetAddOnMetadata("DuffedUI", "Version")
+D.Versionnumber = tonumber(D.Version)
+D.Patch, D.BuildText, D.ReleaseDate, D.Toc = GetBuildInfo()
+D.build = tonumber(D.BuildText)
 D.InfoLeftRightWidth = 370
 D.IconCoord = {.08, .92, .08, .92}
 
 D.Credits = {
-	"humfras aka Shinizu",
-	"Hizuro",
+	"Tukz",
+	"Hydra",
+	"Elv",
 	"Azilroka",
 	"Caith",
 	"Ishtara",
@@ -36,9 +35,8 @@ D.Credits = {
 	"Haleth",
 	"Nightcracker",
 	"Haste",
-	"Hydra",
-	"Elv",
-	"Tukz",
+	"humfras aka Shinizu",
+	"Hizuro",
 }
 
 D.DuffedCredits = {
@@ -50,4 +48,8 @@ D.DuffedCredits = {
 	"Digawen",
 	"Zenglao",
 	"devel1988",
+	"Grimbeorn",
+	"Ginji",
+	"Floppiflappsi",
+	"Slideroh",
 }

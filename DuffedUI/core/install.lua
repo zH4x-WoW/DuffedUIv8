@@ -151,7 +151,7 @@ v:SetTemplate("Transparent")
 v:FontString("text", C["media"].font, 20)
 v:FontString("text2", C["media"].font, 11)
 v.text:SetPoint("CENTER")
-v.text:SetText("|cffC41F3BDuffedUI|r ".. D.version)
+v.text:SetText("|cffC41F3BDuffedUI|r ".. D.Version)
 v.text2:SetPoint("BOTTOM", 0, 2)
 v.text2:SetText("by |cffC41F3BMerith - liquidbase|r, website at |cffC41F3Bwww.duffed.net|r")
 v:SetScript("OnClick", function()
@@ -207,7 +207,7 @@ logo.bg:SetTexture(C["media"].duffed_logo)
 local name = title:CreateFontString(nil, "OVERLAY")
 name:SetFont( C["media"].font, 16)
 name:SetPoint("LEFT", title, 7, -1)
-name:SetText(D.version)
+name:SetText(D.Version)
 
 local sb = CreateFrame("StatusBar", nil, f)
 sb:SetStatusBarTexture(C["media"].normTex)
@@ -477,7 +477,7 @@ DuffedUIOnLogon:SetScript("OnEvent", function(self, event)
 	if (DuffedUIData == nil) then DuffedUIData = {} end
 	if (DuffedUIDataPerChar == nil) then DuffedUIDataPerChar = {} end
 
-	if D.screenwidth < 1200 then
+	if D.ScreenWidth < 1200 then
 		SetCVar("useUiScale", 0)
 		D.ShowPopup("DUFFEDUIDISABLE_UI")
 	else

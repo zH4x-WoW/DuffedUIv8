@@ -201,7 +201,7 @@ local function LoadSkin()
 		local icon = _G["AuctionsButton"..i.."Item"]
 
 		_G["AuctionsButton"..i.."ItemIconTexture"]:SetTexCoord(.08, .92, .08, .92)
-		_G["AuctionsButton"..i.."ItemIconTexture"].SetTexCoord = D.dummy
+		_G["AuctionsButton"..i.."ItemIconTexture"].SetTexCoord = D.Dummy
 		_G["AuctionsButton"..i.."ItemIconTexture"]:ClearAllPoints()
 		_G["AuctionsButton"..i.."ItemIconTexture"]:Point("TOPLEFT", 2, -2)
 		_G["AuctionsButton"..i.."ItemIconTexture"]:Point("BOTTOMRIGHT", -2, 2)

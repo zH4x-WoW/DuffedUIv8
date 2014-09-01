@@ -159,7 +159,7 @@ local function LoadSkin()
 		for i = 1, 4 do
 			local bu = _G[name..i]
 			_G["PlayerTalentFrameSpecializationSpecButton"..i.."Glow"]:Hide()
-			_G["PlayerTalentFrameSpecializationSpecButton"..i.."Glow"].Show = D.dummy
+			_G["PlayerTalentFrameSpecializationSpecButton"..i.."Glow"].Show = D.Dummy
 
 			bu:SetHighlightTexture("")
 			bu.bg:SetAlpha(0)

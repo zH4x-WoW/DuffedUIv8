@@ -157,7 +157,7 @@ local function LoadSkin()
 		local frame = _G["AchievementFrameAchievementsContainerButton"..i]
 		_G["AchievementFrameAchievementsContainerButton"..i.."Highlight"]:Kill()
 		frame:StripTextures(true)
-		frame.SetBackdropBorderColor = D.dummy
+		frame.SetBackdropBorderColor = D.Dummy
 
 		--Initiate fucked up method of creating a backdrop
 		frame.bg1 = frame:CreateTexture(nil, "BACKGROUND")
@@ -188,9 +188,9 @@ local function LoadSkin()
 
 		
 		_G["AchievementFrameAchievementsContainerButton"..i.."Description"]:SetTextColor(0.6, 0.6, 0.6)
-		_G["AchievementFrameAchievementsContainerButton"..i.."Description"].SetTextColor = D.dummy
+		_G["AchievementFrameAchievementsContainerButton"..i.."Description"].SetTextColor = D.Dummy
 		_G["AchievementFrameAchievementsContainerButton"..i.."HiddenDescription"]:SetTextColor(1, 1, 1)
-		_G["AchievementFrameAchievementsContainerButton"..i.."HiddenDescription"].SetTextColor = D.dummy
+		_G["AchievementFrameAchievementsContainerButton"..i.."HiddenDescription"].SetTextColor = D.Dummy
 		
 		_G["AchievementFrameAchievementsContainerButton"..i.."IconBling"]:Kill()
 		_G["AchievementFrameAchievementsContainerButton"..i.."IconOverlay"]:Kill()
@@ -216,8 +216,8 @@ local function LoadSkin()
 		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"]:ClearAllPoints()
 		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"]:Point("BOTTOMLEFT", frame, "BOTTOMLEFT", 5, 5)
 		
-		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"].ClearAllPoints = D.dummy
-		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"].SetPoint = D.dummy
+		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"].ClearAllPoints = D.Dummy
+		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"].SetPoint = D.Dummy
 	end
 
 	
@@ -233,11 +233,11 @@ local function LoadSkin()
 			_G[frame]:StripTextures()
 			_G[frame.."Background"]:Kill()
 			
-			_G[frame].SetBackdropBorderColor = D.dummy		
+			_G[frame].SetBackdropBorderColor = D.Dummy		
 			
 			if _G[frame.."Description"] then
 				_G[frame.."Description"]:SetTextColor(0.6, 0.6, 0.6)
-				_G[frame.."Description"].SetTextColor = D.dummy
+				_G[frame.."Description"].SetTextColor = D.Dummy
 			end
 
 			--Initiate fucked up method of creating a backdrop
@@ -342,8 +342,8 @@ local function LoadSkin()
 				if index > 1 then
 					frame:ClearAllPoints()
 					frame:Point("TOP", _G["AchievementFrameProgressBar"..index-1], "BOTTOM", 0, -5)
-					frame.SetPoint = D.dummy
-					frame.ClearAllPoints = D.dummy
+					frame.SetPoint = D.Dummy
+					frame.ClearAllPoints = D.Dummy
 				end
 				
 				frame.skinned = true

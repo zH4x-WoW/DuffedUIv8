@@ -291,8 +291,8 @@ bf.TurnTimer.SkipButton:Width(bar:GetWidth())
 bf.TurnTimer.SkipButton:Height(21)
 bf.TurnTimer.SkipButton:ClearAllPoints()
 bf.TurnTimer.SkipButton:SetPoint("BOTTOM", bar, "TOP", 0, 2)
-bf.TurnTimer.SkipButton.ClearAllPoints = D.dummy
-bf.TurnTimer.SkipButton.SetPoint = D.dummy
+bf.TurnTimer.SkipButton.ClearAllPoints = D.Dummy
+bf.TurnTimer.SkipButton.SetPoint = D.Dummy
 
 bf.TurnTimer:SetParent(bar)
 bf.TurnTimer:SetTemplate()

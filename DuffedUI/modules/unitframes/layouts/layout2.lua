@@ -1208,7 +1208,7 @@ if C["raid"].showboss then
 	for i = 1, MAX_BOSS_FRAMES do
 		local t_boss = _G["Boss"..i.."TargetFrame"]
 		t_boss:UnregisterAllEvents()
-		t_boss.Show = D.dummy
+		t_boss.Show = D.Dummy
 		t_boss:Hide()
 		_G["Boss"..i.."TargetFrame".."HealthBar"]:UnregisterAllEvents()
 		_G["Boss"..i.."TargetFrame".."ManaBar"]:UnregisterAllEvents()

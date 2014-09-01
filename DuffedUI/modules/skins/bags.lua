@@ -34,8 +34,8 @@ local function LoadSkin()
 	BagItemSearchBox:Size(159, 15)
 	BagItemSearchBox:ClearAllPoints()
 	BagItemSearchBox:Point("TOPLEFT", 19, -29)
-	BagItemSearchBox.ClearAllPoints = D.dummy
-	BagItemSearchBox.SetPoint = D.dummy
+	BagItemSearchBox.ClearAllPoints = D.Dummy
+	BagItemSearchBox.SetPoint = D.Dummy
 	BagItemSearchBox:SkinEditBox()
 
 	-- BANK
@@ -53,8 +53,8 @@ local function LoadSkin()
 		BankItemSearchBox:Size(159, 15)
 		BankItemSearchBox:ClearAllPoints()
 		BankItemSearchBox:Point("BOTTOMRIGHT", -29, 70)
-		BankItemSearchBox.ClearAllPoints = D.dummy
-		BankItemSearchBox.SetPoint = D.dummy
+		BankItemSearchBox.ClearAllPoints = D.Dummy
+		BankItemSearchBox.SetPoint = D.Dummy
 		BankItemSearchBox:SkinEditBox()
 
 		-- Bank Bags

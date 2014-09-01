@@ -316,7 +316,7 @@ local function AnotherOnAuraChange(self, event, arg1, unit)
 end
 
 local bufftrackersummary = CreateFrame("Frame", "BuffTrackerSummary", UIParent)
-if D.client == "deDE" then BuffTrackerSummary:Size(565, 250) else bufftrackersummary:Size(500, 250) end
+if D.Client == "deDE" then BuffTrackerSummary:Size(565, 250) else bufftrackersummary:Size(500, 250) end
 bufftrackersummary:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 bufftrackersummary:SetTemplate("Transparent")
 bufftrackersummary:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
@@ -424,11 +424,11 @@ bufftracker_toggle.text:SetText("|cff319f1b+|r")
 bufftracker_toggle.text:SetPoint("CENTER")
 
 -- Fix design bug for mini-button with 1280/1600 res and uiscale 1.0
-if ((D.screenwidth == 1280 or D.screenwidth == 1600) and C["general"].uiscale == 1) then
-	if D.screenwidth == 1600 then
+if ((D.ScreenWidth == 1280 or D.ScreenWidth == 1600) and C["general"].uiscale == 1) then
+	if D.ScreenWidth == 1600 then
 		bufftracker_toggle:Size(bufftracker:GetWidth(), 8.5)
 		bufftracker_toggle.text:SetPoint("CENTER", bufftracker_toggle, "CENTER", 1, 0.3)
-	elseif D.screenwidth == 1280 then
+	elseif D.ScreenWidth == 1280 then
 		bufftracker_toggle:Size(bufftracker:GetWidth(), 10)
 		bufftracker_toggle.text:SetPoint("CENTER", bufftracker_toggle, "CENTER", 1, -1)
 	end

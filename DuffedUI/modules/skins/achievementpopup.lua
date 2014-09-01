@@ -7,7 +7,7 @@ local function LoadSkin()
 
 			if frame then
 				frame:SetAlpha(1)
-				frame.SetAlpha = D.dummy
+				frame.SetAlpha = D.Dummy
 
 				if not frame.backdrop then
 					frame:CreateBackdrop("Transparent")
@@ -52,7 +52,7 @@ local function LoadSkin()
 			local frame = _G["DungeonCompletionAlertFrame" .. i]
 			if frame then
 				frame:SetAlpha(1)
-				frame.SetAlpha = D.dummy
+				frame.SetAlpha = D.Dummy
 				frame.heroicIcon:Hide()
 
 				if not frame.backdrop then
@@ -103,7 +103,7 @@ local function LoadSkin()
 
 		if frame then
 			frame:SetAlpha(1)
-			frame.SetAlpha = D.dummy
+			frame.SetAlpha = D.Dummy
 
 			if not frame.backdrop then
 				frame:CreateBackdrop("Transparent")
@@ -140,7 +140,7 @@ local function LoadSkin()
 
 		if frame then
 			frame:SetAlpha(1)
-			frame.SetAlpha = D.dummy
+			frame.SetAlpha = D.Dummy
 
 			if not frame.backdrop then
 				frame:CreateBackdrop("Transparent")
@@ -185,7 +185,7 @@ local function LoadSkin()
 
 		if frame then
 			frame:SetAlpha(1)
-			frame.SetAlpha = D.dummy
+			frame.SetAlpha = D.Dummy
 
 			if not frame.backdrop then
 				frame:CreateBackdrop("Transparent")
@@ -229,7 +229,7 @@ local function LoadSkin()
 			local frame = _G['CriteriaAlertFrame' .. i]
 			if frame then
 				frame:SetAlpha(1)
-				frame.SetAlpha = D.dummy
+				frame.SetAlpha = D.Dummy
 
 				if not frame.backdrop then
 					frame:CreateBackdrop("Transparent")
@@ -264,7 +264,7 @@ local function LoadSkin()
 			local frame = LOOT_WON_ALERT_FRAMES[i];
 			if frame then
 				frame:SetAlpha(1)
-				frame.SetAlpha = D.dummy
+				frame.SetAlpha = D.Dummy
 				frame.Background:Kill()
 				frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				frame.IconBorder:Kill()
@@ -295,7 +295,7 @@ local function LoadSkin()
 			local frame = MONEY_WON_ALERT_FRAMES[i];
 			if frame then
 				frame:SetAlpha(1)
-				frame.SetAlpha = D.dummy
+				frame.SetAlpha = D.Dummy
 				frame.Background:Kill()
 				frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				frame.IconBorder:Kill()

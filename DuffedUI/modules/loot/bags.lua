@@ -226,8 +226,8 @@ function CreateContainer(storagetype, ...)
 		Sort:FontString("Text", C["media"].font, 11)
 		Sort.Text:SetPoint("CENTER")
 		Sort.Text:SetText(BAG_FILTER_CLEANUP)
-		Sort.ClearAllPoints = D.dummy
-		Sort.SetPoint = D.dummy
+		Sort.ClearAllPoints = D.Dummy
+		Sort.SetPoint = D.Dummy
 
 		ToggleBagsContainer:SetHeight(20)
 		ToggleBagsContainer:SetWidth(20)
@@ -391,9 +391,9 @@ function SetBagsSearchPosition()
 	BagItemSearchBox:SetPoint("TOPRIGHT", _G["DuffedUI_Bag"], "TOPRIGHT", -28, -6)
 	BagItemSearchBox:StripTextures()
 	BagItemSearchBox:SetTemplate()
-	BagItemSearchBox.SetParent = D.dummy
-	BagItemSearchBox.ClearAllPoints = D.dummy
-	BagItemSearchBox.SetPoint = D.dummy
+	BagItemSearchBox.SetParent = D.Dummy
+	BagItemSearchBox.ClearAllPoints = D.Dummy
+	BagItemSearchBox.SetPoint = D.Dummy
 
 	BankItemSearchBox:Hide()
 end
@@ -468,9 +468,9 @@ function UpdateAllBags()
 			Button:SetFrameStrata("HIGH")
 			Button:SetFrameLevel(2)
 			Button.newitemglowAnim:Stop()
-			Button.newitemglowAnim.Play = D.dummy
+			Button.newitemglowAnim.Play = D.Dummy
 			Button.flashAnim:Stop()
-			Button.flashAnim.Play = D.dummy
+			Button.flashAnim.Play = D.Dummy
 
 			Money:ClearAllPoints()
 			Money:Show()

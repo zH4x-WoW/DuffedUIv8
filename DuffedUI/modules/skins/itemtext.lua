@@ -10,7 +10,7 @@ local function LoadSkin()
 	ItemTextPrevPageButton:SkinNextPrevButton()
 	ItemTextNextPageButton:SkinNextPrevButton()
 	ItemTextPageText:SetTextColor(1, 1, 1)
-	ItemTextPageText.SetTextColor = D.dummy
+	ItemTextPageText.SetTextColor = D.Dummy
 end
 
 tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)

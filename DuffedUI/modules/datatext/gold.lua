@@ -22,7 +22,7 @@ D.DataTextPosition(C["datatext"].gold, Text)
 local Profit = 0
 local Spent = 0
 local OldMoney = 0
-local myPlayerRealm = D.myrealm
+local myPlayerRealm = D.MyRealm
 
 local function formatMoney(money)
 	local gold = floor(math.abs(money) / 10000)
@@ -289,7 +289,7 @@ local DuffedUIImprovedCurrencyDropDown = CreateFrame("Frame", "DuffedUIImprovedC
 DuffedUIImprovedCurrencyDropDown:SetTemplate("Transparent")
 
 local function RESETGOLD()
-	local myPlayerRealm = D.myrealm
+	local myPlayerRealm = D.MyRealm
 	local myPlayerName  = UnitName("player")
 
 	DuffedUIData.gold = {}
@@ -301,7 +301,7 @@ SlashCmdList["RESETGOLD"] = RESETGOLD
 
 Stat:SetScript("OnMouseDown", function(self, btn)
 	if btn == "RightButton" and IsShiftKeyDown() then
-		local myPlayerRealm = D.myrealm
+		local myPlayerRealm = D.MyRealm
 		local myPlayerName  = UnitName("player")
 	
 		DuffedUIData.gold = {}

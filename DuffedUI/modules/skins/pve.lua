@@ -84,8 +84,8 @@ local function LoadSkin()
 	for i = 1, NUM_LFR_CHOICE_BUTTONS do
 		local bu = _G["LFRQueueFrameSpecificListButton"..i].enableButton
 		bu:SkinCheckBox()
-		bu.SetNormalTexture = D.dummy
-		bu.SetPushedTexture = D.dummy
+		bu.SetNormalTexture = D.Dummy
+		bu.SetPushedTexture = D.Dummy
 	end
 
 	LFDQueueFrameTypeDropDown:SkinDropDownBox()
@@ -303,7 +303,7 @@ local function LoadSkin()
 	LFDQueueFrameSpecificListScrollFrameScrollBar:SkinScrollBar()
 
 	LFGDungeonReadyPopup:SetTemplate("Transparent")
-	LFGDungeonReadyDialog.SetBackdrop = D.dummy
+	LFGDungeonReadyDialog.SetBackdrop = D.Dummy
 	LFGDungeonReadyDialog.filigree:SetAlpha(0)
 	LFGDungeonReadyDialog.bottomArt:SetAlpha(0)
 	LFGDungeonReadyDialogLeaveQueueButton:SkinButton()
@@ -338,7 +338,7 @@ local function LoadSecondarySkin()
 	select(11, ChallengesFrameDetails:GetRegions()):Hide()
 	ChallengesFrameDungeonButton1:SetPoint("TOPLEFT", ChallengesFrame, "TOPLEFT", 8, -83)
 
-	if D.toc == 60000 then
+	if D.Toc == 60000 then
 		for i = 1, 8 do
 			local bu = ChallengesFrame["button"..i]
 			bu:SkinButton()

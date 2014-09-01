@@ -41,7 +41,7 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 			leveldifference = 0
 		end
 		
-		if D.myrace == "NightElf" then
+		if D.MyRace == "NightElf" then
 			basemisschance = basemisschance + 2
 		end
 

@@ -119,7 +119,7 @@ local function LoadSkin()
 
 			object.Check:SetTexture(nil)
 			object.text:SetFont(C["media"].font, 11)
-			object.text.SetFont = D.dummy
+			object.text.SetFont = D.Dummy
 		end
 	end)
 
@@ -195,7 +195,7 @@ local function LoadSkin()
 					for i=1, tab:GetNumRegions() do
 						local region = select(i, tab:GetRegions())
 						region:SetTexCoord(0.16, 0.86, 0.16, 0.86)
-						region.SetTexCoord = D.dummy
+						region.SetTexCoord = D.Dummy
 					end
 				end
 				tab:CreateBackdrop("Default")
@@ -257,7 +257,7 @@ local function LoadSkin()
 			local button = _G["ReputationBar"..i.."ExpandOrCollapseButton"]
 			if not bar.isSkinned then
 				button:StripTextures()
-				button.SetNormalTexture = D.dummy
+				button.SetNormalTexture = D.Dummy
 				button:SkinCloseButton()
 				bar.isSkinned = true
 			end

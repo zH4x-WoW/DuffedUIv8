@@ -3,7 +3,7 @@
 
 local D, C, L = unpack(select(2, ...))
 
-local noop = D.dummy
+local noop = D.Dummy
 local floor = math.floor
 local class = D.Class
 local texture = C["media"].blank
@@ -314,13 +314,88 @@ local function StripTextures(object, kill)
 	for i=1, object:GetNumRegions() do
 		local region = select(i, object:GetRegions())
 		if region:GetObjectType() == "Texture" then
-			if kill then
-				region:Kill()
-			else
-				region:SetTexture(nil)
-			end
+			if kill then region:Kill() else region:SetTexture(nil) end
 		end
-	end		
+	end
+end
+
+--[[Horizontal Animationcode from Hydra]]--
+local Frame = CreateFrame("Frame")
+local strlower = string.lower
+local select = select
+local unpack = unpack
+local modf = math.modf
+local UIFrameFadeIn = UIFrameFadeIn
+local UIFrameFadeOut = UIFrameFadeOut
+
+local Show = Frame.Show
+local Hide = Frame.Hide
+local GetPoint = Frame.GetPoint
+local GetWidth = Frame.GetWidth
+local GetHeight = Frame.GetHeight
+
+local OnUpdateHorizontalMove = function(self)
+	local Point, RelativeTo, RelativePoint, XOfs, YOfs = GetPoint(self)
+
+	if (self.MoveType == "Positive") then
+		if (XOfs + self.MoveSpeed > self.EndX) then self:SetPoint(Point, RelativeTo, RelativePoint, XOfs + 1, YOfs) else self:SetPoint(Point, RelativeTo, RelativePoint, XOfs + self.MoveSpeed, YOfs) end
+		if (XOfs >= self.EndX) then
+			self:SetScript("OnUpdate", nil)
+			self:Point(Point, RelativeTo, RelativePoint, self.EndX, YOfs)
+			self.IsMoving = false
+			self:AnimCallback("move", self.MoveDirection, self.ValueX, self.MoveSpeed)
+		end
+	else
+		if (XOfs - self.MoveSpeed < self.EndX) then self:SetPoint(Point, RelativeTo, RelativePoint, XOfs - 1, YOfs) else self:SetPoint(Point, RelativeTo, RelativePoint, XOfs - self.MoveSpeed, YOfs) end 
+		if (XOfs <= self.EndX) then
+			self:SetScript("OnUpdate", nil)
+			self:Point(Point, RelativeTo, RelativePoint, self.EndX, YOfs)
+			self.IsMoving = false
+			self:AnimCallback("move", self.MoveDirection, self.ValueX, self.MoveSpeed)
+		end
+	end
+end
+
+local MoveFrameHorizontal = function(self, x, speed)
+	if self.IsMoving then return end
+
+	self.MoveSpeed = speed
+	if (x < 0) then self.MoveType = "Negative" else self.MoveType = "Positive" end
+	self.ValueX = x
+	self.EndX = select(4, GetPoint(self)) + x
+	self:SetScript("OnUpdate", OnUpdateHorizontalMove)
+end
+
+local MoveFrame = function(self, direction, offset, speed)
+	if (not direction) then direction = "horizontal" end
+
+	MoveFrameHorizontal(self, offset or 100, speed or 6)
+	self.MoveDirection = direction
+end
+
+local Functions = {
+	["move"] = MoveFrame,
+}
+
+local Callbacks = {
+	["move"] = {},
+}
+
+local AnimCallback = function(self, handler, ...)
+	local Function = Callbacks[handler][self]
+
+	if Function then Function(self, ...) end
+end
+
+local AnimOnFinished = function(self, handler, func)
+	if (type(handler) ~= "string" or type(func) ~= "function") then return end
+	Callbacks[strlower(handler)][self] = func
+end
+
+local SetAnimation = function(self, handler, ...)
+	local Function = Functions[strlower(handler)]
+
+	if Function then Function(self, ...) else return print("Invalid 'SetAnimation' handler: " .. handler) end
 end
 
 -- Skinning
@@ -330,9 +405,7 @@ local function SetModifiedBackdrop(self)
 	self:SetBackdropBorderColor(color.r, color.g, color.b)
 end
 
-local function SetOriginalBackdrop(self)
-	self:SetTemplate()
-end
+local function SetOriginalBackdrop(self) self:SetTemplate() end
 
 local function SkinButton(f, strip)
 	if f:GetName() then
@@ -553,7 +626,7 @@ local function SkinDropDownBox(frame, width)
 
 	button:ClearAllPoints()
 	Point(button, "RIGHT", frame, "RIGHT", -10, 3)
-	button.SetPoint = D.dummy
+	button.SetPoint = D.Dummy
 	
 	SkinNextPrevButton(button, true)
 	
@@ -572,7 +645,7 @@ local function SkinDropDownBoxLong(frame, width)
 
 	button:ClearAllPoints()
 	Point(button, "RIGHT", frame, "RIGHT", -10, 3)
-	button.SetPoint = D.dummy
+	button.SetPoint = D.Dummy
 	
 	SkinNextPrevButton(button, true)
 	
@@ -605,9 +678,9 @@ local function SkinCheckBox(frame)
 		end
 	end)
 	
-	frame.SetNormalTexture = D.dummy
-	frame.SetPushedTexture = D.dummy
-	frame.SetHighlightTexture = D.dummy
+	frame.SetNormalTexture = D.Dummy
+	frame.SetPushedTexture = D.Dummy
+	frame.SetHighlightTexture = D.Dummy
 end
 
 local function SkinCloseButton(f, point)
@@ -684,6 +757,9 @@ local function addapi(object)
 	if not object.CreateBorder then mt.CreateBorder = CreateBorder end
 	if not object.FadeIn then mt.FadeIn = FadeIn end
 	if not object.FadeOut then mt.FadeOut = FadeOut end
+	if not object.SetAnimation then mt.SetAnimation = SetAnimation end
+	if not object.AnimCallback then mt.AnimCallback = AnimCallback end
+	if not object.AnimOnFinished then mt.AnimOnFinished = AnimOnFinished end
 end
 
 local handled = {["Frame"] = true}

@@ -24,7 +24,7 @@ local function LoadSkin()
 
 		button:ClearAllPoints()
 		button:Point("RIGHT", frame, "RIGHT", -10, 3)
-		button.SetPoint = D.dummy
+		button.SetPoint = D.Dummy
 		button:SkinNextPrevButton(true)
 
 		frame:CreateBackdrop("Default")
@@ -33,11 +33,11 @@ local function LoadSkin()
 	end
 
 	CalendarContextMenu:SetTemplate("Default")
-	CalendarContextMenu.SetBackdropColor = D.dummy
-	CalendarContextMenu.SetBackdropBorderColor = D.dummy
+	CalendarContextMenu.SetBackdropColor = D.Dummy
+	CalendarContextMenu.SetBackdropBorderColor = D.Dummy
 	CalendarInviteStatusContextMenu:SetTemplate("Default")
-	CalendarInviteStatusContextMenu.SetBackdropColor = D.dummy
-	CalendarInviteStatusContextMenu.SetBackdropBorderColor = D.dummy
+	CalendarInviteStatusContextMenu.SetBackdropColor = D.Dummy
+	CalendarInviteStatusContextMenu.SetBackdropBorderColor = D.Dummy
 
 	--Boost frame levels
 	for i = 1, 42 do
@@ -86,7 +86,7 @@ local function LoadSkin()
 	CalendarCreateEventAMPMDropDown:SkinDropDownBox(68)
 	CalendarCreateEventRepeatOptionDropDown:SkinDropDownBox(120)
 	CalendarCreateEventIcon:SetTexCoord(.08, .92, .08, .92)
-	CalendarCreateEventIcon.SetTexCoord = D.dummy
+	CalendarCreateEventIcon.SetTexCoord = D.Dummy
 	CalendarCreateEventInviteListSection:StripTextures()
 	CalendarClassButtonContainer:HookScript("OnShow", function()
 		for i, class in ipairs(CLASS_SORT_ORDER) do
