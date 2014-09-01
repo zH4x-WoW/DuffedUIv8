@@ -111,8 +111,8 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	local Health = UnitHealth(Unit)
 	local MaxHealth = UnitHealth(Unit)
 
-	if (not Color) then Color = "|CFFFFFFFF" end
-	if (Title or Name) then
+	if not Color then Color = "|CFFFFFFFF" end
+	if Title or Name then
 		if Realm then
 			Line1:SetFormattedText("%s%s%s", Color, (Title or Name), Realm and Realm ~= "" and " - ".. Realm .."|r" or "|r")
 		else
@@ -120,7 +120,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		end
 	end
 
-	if (UnitIsPlayer(Unit)) then
+	if UnitIsPlayer(Unit) then
 		if (UnitIsAFK(Unit)) then self:AppendText((" %s"):format(CHAT_FLAG_AFK)) elseif UnitIsDND(Unit) then  self:AppendText((" %s"):format(CHAT_FLAG_DND)) end
 
 		local Offset = 2
@@ -131,34 +131,36 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		end
 
 		for i = Offset, NumLines do
-			if (_G["GameTooltipTextLeft"..i]:GetText():find("^" .. LEVEL)) then
+			local Line = _G["GameTooltipTextLeft"..i]
+			if Line:GetText():find("^" .. LEVEL) then
 				if Race then
-					_G["GameTooltipTextLeft"..i]:SetFormattedText("|cff%02x%02x%02x%s|r %s %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Race, Color, Class .."|r")
+					Line:SetFormattedText("|cff%02x%02x%02x%s|r %s %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Race, Color, Class .."|r")
 				else
-					_G["GameTooltipTextLeft"..i]:SetFormattedText("|cff%02x%02x%02x%s|r %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Color, Class .."|r")
+					Line:SetFormattedText("|cff%02x%02x%02x%s|r %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Color, Class .."|r")
 				end
 				break
 			end
 		end
 	else
 		for i = 2, NumLines do
-			if ((_G["GameTooltipTextLeft"..i]:GetText():find("^" .. LEVEL)) or (CreatureType and _G["GameTooltipTextLeft"..i]:GetText():find("^" .. CreatureType))) then
+			local Line = _G["GameTooltipTextLeft"..i]
+			if Line:GetText():find("^" .. LEVEL) or (CreatureType and Line:GetText():find("^" .. CreatureType)) then
 				if Level == -1 and Classification == "elite" then Classification = "worldboss" end
-				_G["GameTooltipTextLeft"..i]:SetFormattedText("|cff%02x%02x%02x%s|r%s %s", R * 255, G * 255, B * 255, Classification ~= "worldboss" and Level ~= 0 and Level or "", DuffedUITooltips.Classification[Classification] or "", CreatureType or "")
+				Line:SetFormattedText("|cff%02x%02x%02x%s|r%s %s", R * 255, G * 255, B * 255, Classification ~= "worldboss" and Level ~= 0 and Level or "", DuffedUITooltips.Classification[Classification] or "", CreatureType or "")
 				break
 			end
 		end
 	end
 
 	for i = 1, NumLines do
-		local Text = _G["GameTooltipTextLeft"..i]:GetText()
-		if (Text and Text == PVP_ENABLED) then
+		local Line = _G["GameTooltipTextLeft"..i]
+		if Line:GetText() and Text == PVP_ENABLED then
 			_G["GameTooltipTextLeft"..i]:SetText()
 			break
 		end
 	end
 
-	if (UnitExists(Unit .. "target") and Unit ~= "player") then
+	if UnitExists(Unit .. "target") and Unit ~= "player" then
 		local hex, R, G, B = DuffedUITooltips:GetColor(Unit)
 
 		if (not R) and (not G) and (not B) then R, G, B = 1, 1, 1 end
