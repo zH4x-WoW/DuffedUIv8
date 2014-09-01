@@ -23,6 +23,9 @@ local function exec(self, enable)
 	if self == DuffedUIBar5 then
 		if enable then 
 			MultiBarRight:Hide()
+			self.text = D.SetFontString(DuffedUIBar5, C["media"].font, 11)
+			self.text:SetPoint("CENTER")
+			if C["actionbar"].rightbarvertical then	self.text:SetText(L["move"]["bar5"]) else self.text:SetText(L["move"]["bar5_1"]) end
 			self:SetBackdropBorderColor(1, 0, 0, 1)
 		else 
 			MultiBarRight:Show()
