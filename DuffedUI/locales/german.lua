@@ -27,10 +27,10 @@ if D.Client == "deDE" then
 	}
 
 	L["afk"] = {
-		["text1"] = "Mouseover über die Minimap zeigt Koordinaten und die Zone an",
-		["text2"] = "Mausradklick in die Minimap zeigt das Micromenü",
-		["text3"] = "Rechtsklick in die Minimap zeigt das Aufspürmenü",
-		["text4"] = "Rechtsklick auf Quests oder Erfolge ermöglicht es einen Link zu WoWHead zu erhalten.",
+		["text1"] = "Mouseover über die Minimap zeigt Koordinaten und die aktuelle Zone an.",
+		["text2"] = "Mausradklick in die Minimap zeigt das Mikromenü an.",
+		["text3"] = "Rechtsklick in die Minimap zeigt das Aufspürmenü.",
+		["text4"] = "Rechtsklick auf Quests, oder Erfolge, ermöglicht es einen direkten Link zu 'WoWHead' zu kopieren.",
 	}
 
 	L["symbol"] = {
@@ -46,10 +46,10 @@ if D.Client == "deDE" then
 	}
 
 	L["ui"] = {
-		["outdated"] = "Deine Version von DuffedUI ist veraltet. Du kannst die neueste Version auf www.duffed.net erhalten.",
-		["welcome"] = "Hallo |cffc41f3b".. D.MyName.."!|r".."\n".."Danke das du |cffc41f3bDuffedUI "..D.Version.."|r benutzt. Für detailierte Informatione besuche |cffc41f3bhttp://www.duffed.net|r.",
-		["disableui"] = "DuffedUI arbeitet nicht auf deiner Auflösung, möchtest du DuffedUI deaktivieren? (Abbrechen, wenn du es mit einer anderen Auflösung probieren möchtest)",
-		["fix_ab"] = "Etwas stimmt nicht mit den Aktionsleisten. Möchtest du das UI neu laden um diesen Fehler zu beheben?",
+		["outdated"] = "Deine Version von DuffedUI ist veraltet. Du kannst die neuste Version auf |cffc41f3http://www.duffed.net|r herunter laden.",
+		["welcome"] = "Hallo |cffc41f3b".. D.MyName.."!|r".."\n".."Danke das Du Dich für |cffc41f3bDuffedUI "..D.Version.."|r entschieden hast. Um detailierte Informationen zu erhalten, besuche uns im Netz unter: |cffc41f3bhttp://www.duffed.net|r.",
+		["disableui"] = "DuffedUI funktioniert mit Deiner Auflösung nicht. Möchtest Du DuffedUI deaktivieren? (Abbrechen, wenn Du es mit einer anderen Auflösung probieren möchtest)",
+		["fix_ab"] = "Etwas stimmt nicht mit den Aktionsleisten. Möchtest Du das UI neu laden um diesen Fehler zu beheben?",
 	}
 
 	L["install"] = {
@@ -58,69 +58,69 @@ if D.Client == "deDE" then
 		["header03"] = "2. Einheitenfenster",
 		["header04"] = "3. Features",
 		["header05"] = "4. Dinge die man wissen sollte!",
-		["header06"] = "5. Kommandos",
+		["header06"] = "5. Chatbefehle",
 		["header07"] = "6. Beendet",
 		["header08"] = "1. Grundlegende Einstellungen",
 		["header09"] = "2. Soziales",
 		["header10"] = "3. Fenster",
 		["header11"] = "4. Erfolg!",
 
-		["continue_skip"] = "Klicke auf 'Weiter' um die Einstellungen zu übernehmen oder 'Überspringen' wenn du diesen Schritt überspringen mächtest.",
-		["initline1"] = "Danke das du DuffedUI gewählt hast!",
-		["initline2"] = "Du wirst mit einigen wenigen Schritten durch den Installationsprozess begleitet. Bei jedem Schritt kannst du entscheiden ob du die angegebenen Einstellungen übernehmen oder überspringen möchtest.",
-		["initline3"] = "Du hast ebenfalls die Möglichkeit dir ein Tutorial anzeigen zu lassen, welches dir die Features von DuffedUI aufzeigt.",
-		["initline4"] = "Drücke auf 'Tutorial' um dir diese kleine Einleitung anzuzeigen oder drücke 'Installieren' um diesen Schritt zu überspringen.",
+		["continue_skip"] = "Klicke auf 'Weiter' um die Einstellungen zu übernehmen, oder 'Überspringen', wenn Du diesen Schritt überspringen möchtest.",
+		["initline1"] = "Danke das Du DuffedUI gewählt hast!",
+		["initline2"] = "Du wirst mit einigen wenigen Schritten durch den Installationsprozess begleitet. Bei jedem Schritt kannst Du entscheiden, ob Du die angegebenen Einstellungen übernehmen, oder überspringen möchtest.",
+		["initline3"] = "Du hast ebenfalls die Möglichkeit Dir ein Tutorial anzeigen zu lassen, welches Dir die Features von DuffedUI aufzeigt.",
+		["initline4"] = "Drücke auf 'Tutorial' um Dir diese kleine Einleitung anzeigen zu lassen, oder drücke 'Installieren', um diesen Schritt zu überspringen.",
 
 		["step1line1"] = "Dieser Schritt fügt die korrekten CVar-Einstellungen für DuffedUI hinzu.",
 		["step1line2"] = "Der erste Schritt fügt grundlegende Einstellungen hinzu.",
-		["step1line3"] = "Das wird für alle Benutzer |cffff0000empfohlen|r, es sei denn du möchtest nur bestimmte Einstellungen anwenden.",
+		["step1line3"] = "Das wird für alle Benutzer des DuffedUI |cffff0000empfohlen|r, es sei denn Du möchtest nur bestimmte Einstellungen anwenden.",
 
-		["step2line0"] = "Ein anderes Chat-Addon gefunden. Dieser Schritt wird ignoriert, bitte klicke auf Überspringen.",
+		["step2line0"] = "Ein anderes Chat-Addon wurde gefunden. Dieser Schritt wird ignoriert! Bitte klicke auf 'Überspringen'.",
 		["step2line1"] = "Der zweite Schritt wendet die korrekten Chateinstellungen an.",
-		["step2line2"] = "Wenn du ein neuer Benutzer bist, wird dieser Schritt empfohlen. Bist du bereits Benutzer kannst du auch diesen Schritt überspringen.",
-		["step2line3"] = "Es ist normal wenn die Schrift im Chat zu groß erscheint bevor die Einstellungen übernommen werden.  Die Schrift kehrt zum normalen Aussehen zurück wenn die Installation abgeschlossen ist.",
+		["step2line2"] = "Wenn Du ein neuer Benutzer des DuffedUI bist, wird dieser Schritt empfohlen. Bist du bereits Benutzer des DuffedUI, kannst Du auch diesen Schritt überspringen.",
+		["step2line3"] = "Es ist normal, wenn die Schrift im Chat zu groß erscheint, bevor alle Einstellungen übernommen wurden.  Die Schrift kehrt zum normalen Aussehen zurück, sobald die Installation abgeschlossen ist.",
 
 		["step3line1"] = "Der dritte und letzte Schritt positioniert alle Elemente korrekt.",
-		["step3line2"] = "Dieser Schritt wird für alle neuen Benutzer |cffff0000empfohlen|r.",
+		["step3line2"] = "Dieser Schritt wird für alle neuen Benutzer des DuffedUI |cffff0000empfohlen|r.",
 		["step3line3"] = "",
 
-		["step4line1"] = "Die Installation ist komplett.",
+		["step4line1"] = "Die Installation wurde erfolgreich abgeschlossen.",
 		["step4line2"] = "Bitte klicke auf den Button 'Beenden' um das UI neu zu laden.",
 		["step4line3"] = "",
-		["step4line4"] = "Genieße DuffedUI! Besuche uns doch auf www.duffed.net!",
+		["step4line4"] = "Geniesse Dein DuffedUI! Und besuche uns doch mal auf |cffc41f3http://www.duffed.net|r!",
 	}
 
 	L["tutorial"] = {
-		["step1line1"] = "Diese kurze Anleitung zeigt dir einige der Features in DuffedUI.",
-		["step1line2"] = "Zuerst kommen die Grundlagen, die man wissen sollte, bevor du mit der UI spielst.",
+		["step1line1"] = "Diese kurze Anleitung zeigt Dir einige Features des DuffedUI.",
+		["step1line2"] = "Zuerst kommen die Grundlagen, die man wissen sollte, bevor Du mit der UI loslegst.",
 		["step1line3"] = "Die Installation ist teilweise charakterspezfisch. Während einige der Einstellungen Accountweit sind, muss die Installation bei jedem neuen Charakter erneut durchgeführt werden. Die Optionen sind einmal in config/config.lua (erfahrene Benutzer) oder mit /duffedui (normale Benutzer) zu finden.",
 		["step1line4"] = "Ein erfahrener Benutzer ist jemand der sich bereits damit auskennt Lua-Dateien zu bearbeiten und ein normaler Benutzer ist jemand der sich damit nicht auskennt. Es wird empfohlen die Konfigurationsmöglichkeit durch /duffedui zu benutzen um das Interface einzustellen.",
 
-		["step2line1"] = "DuffedUI behinhaltet eine eingebette Version von oUF (oUFDUffedUI) welches von Haste erstellt wurde. Das steuert alle Einheitenfenster die man sehen kann sowie Stärkungs-, Schwächungszauber und alle klassenspezifischen Anzeigen.",
-		["step2line2"] = "Du kannst www.wowinterface besuchen um mehr über das Tool oUF zu erfahren.",
+		["step2line1"] = "DuffedUI behinhaltet eine eingebette Version von oUF (oUFDUffedUI) welches von Haste erstellt wurde. Das steuert alle Einheitenfenster, die man sehen kann, sowie Stärkungs- und Schwächungszauber, sowie alle klassenspezifischen Anzeigen.",
+		["step2line2"] = "Du kannst gern http://www.wowinterface besuchen um mehr über das Tool oUF zu erfahren.",
 		["step2line3"] = "Man kann die Postionen der Einheitenfenster einfach mit /moveui verändern.",
 
-		["step3line1"] = "DuffedUI ist ein neugestaltetes BlizzardUI. Nicht mehr und nichts weniger. ALle Funktionen die man auch mit dem StandardUI hat findet man ebenfalls in DuffedUI. Zusätzlich bringt DuffedUI einige automatische Funktionen mit, die man in der StandardUI vermisst (Taschensortierung, verkaufen von grauen Gegenständen, usw.).",
-		["step3line2"] = "Nicht jeder mag Dinge wie DPS-Anzeigen, BossMods Bedrohungs-Anzeigen etc, und wir glauben dies ist der Weg dazu. DuffedUI wurde entworfen um das bestmöglichste Ergebniss zu erreichen das man für seine Spielweise, Klasse und Geschmack möchte, das ist auch der Grund wieso DuffedUI eines der populärsten UIs ist. Zusätzlich wurde es entworfen um einen schneller Start fernab jeglicher anderer Addons zu ermöglichen. Seit 2010 haben vielle aufgrund von DuffedUI auch ihre eigenen Versionen davon erstellt.",
-		["step3line3"] = "Für weitere Addons schaut bitte im Forum nach oder besucht www.wowinterface.com.",
+		["step3line1"] = "DuffedUI ist ein neugestaltetes BlizzardUI. Nicht mehr und nichts weniger. Alle Funktionen, die man auch im StandardUI findet, hat man ebenfalls in DuffedUI. Zusätzlich bringt DuffedUI einige automatische Funktionen mit, die man in der StandardUI vermisst. (Z.B. die Taschensortierung, das Verkaufen von grauen Gegenständen, usw.).",
+		["step3line2"] = "DuffedUI wurde entworfen um das bestmöglichste Spielerlebnis zu erreichen, egal welche Spielweise, Klasse und Geschmack. DuffedUI ist für jeden individuell kinderleicht anpassbar. Das ist auch der Grund wieso DuffedUI eines der populärsten UIs in der Geschichte von World of Warcraft™ ist. Ausserdem wurde es so entworfen, dass man mit wenigen Mausklicks sofort loslegen kann, ohne sich noch irgendwelche sonstigen AddOns herunterzuladen zu müssen. Seit 2010 haben viele Spieler aufgrund von DuffedUI, ihr eigenes, auf DuffedUI basiertes Interface erstellt.",
+		["step3line3"] = "Für weitere Addons schaue bitte im Forum nach, oder besuche http://www.wowinterface.com.",
 
-		["step4line1"] = "Du kannst 80% der Datenfelder linksklicken, um verschiedene Fenster von Blizzard zu öffnen. Die Datenfelder `Freunde` und `Gilde` haben auch eine Funktion bei Rechtsklick. Um festzulegen, wie viele Aktionsleisten Du möchtest, bewege Deine Maus an den linken oder rechten Rand der untersten Aktionsleiste. Mache das Gleiche auf der rechten Seite über dem unteren und oberen Rand. Um Text aus dem Chat zu kopieren, klicke den Knopf, der beim Überfahren des Chatfensters mit der Maus in der rechten Ecke auftaucht.",
-		["step4line2"] = "Die Minimap enthält alle wichtigen Anzeigen. Briefsymbol für Post, rote Uhrzeit für eine Kalendareinladung, LFG-Anzeige und vieles mehr.",
-		["step4line3"] = "Hier sind einige Aufklappmenüs verfügbar. Bei Rechtsklick auf [X] (Schliessen) der Tasche wird ein Aufklappmenü erscheinen um die Taschen anzuzeigen. Ein Klicken mit dem Mausrad auf die Miniaturkarte öffnet das Mikromenü.",
+		["step4line1"] = "Du kannst 80% der Datenfelder linksklicken, um verschiedene Fenster von Blizzard zu öffnen. Die Datenfelder `Freunde` und `Gilde` haben auch eine Funktion bei Rechtsklick. Um festzulegen, wieviele Aktionsleisten Du möchtest, öffne per ESC und klick auf 'DuffedUI' das Konfigurationsmenü. UNter dem Menüpunkt Aktionsleisten kannst Du die Anzahl der Leisten auswählen und vieles mehr. Um beliebigen Text aus dem Chat zu kopieren, klicke den kleinen Knopf mit dem Textsymbol, am jeweiligen Chatrand.",
+		["step4line2"] = "Die Minimap enthält wichtige Anzeigen. Z.B. das Briefsymbol, wenn du neue Post erhalten hast, oder die Uhrzeit färbt sich rot, wenn Du eine Kalendareinladung erhalten hast. Die LFG-Anzeige findest Du dort und vieles mehr. Ein Klick mit dem Mausrad auf die Miniaturkarte, öffnet das Mikromenü.",
+		["step4line3"] = "Hier findest Du einige Aufklappmenüs. Bei Rechtsklick auf das kleine '[X]', am oberen rechten Rand der Tasche, kannst Du Deine Taschen anzeigen lassen.",
 
-		["step5line1"] = "Zu guter Letzt beinhaltet DuffedUI eine Reihe nützlicher Kommandos.",
-		["step5line2"] = "/moveui erlaubt den größtteil der Fenster zu bewegen. /rl lädt das UI neu.",
-		["step5line3"] = "/tt um mit dem Ziel zu flüstern. /rc Startet einen Bereitschaftstest. /rd Löst die Gruppe oder Schlachtzug auf. /ainv Aktiviert das Einladen per flüstern. /ainv off Schaltet das automatisch Einladen ab.",
-		["step5line4"] = "/install oder /tutorial lädt die Installation. ",
+		["step5line1"] = "Zu guter Letzt, beinhaltet DuffedUI eine Reihe nützlicher Chat Eingabebefehle.",
+		["step5line2"] = "/moveui erlaubt einen Großteil aller UI Elemente zu verschieben. Der Befehl /rl lädt das komplette UI neu.",
+		["step5line3"] = "Benutze /tt im Chat um mit dem Ziel zu flüstern. /rc Startet einen Bereitschaftscheck. /rd Löst die Gruppe, oder den Schlachtzug auf. /ainv Aktiviert das Einladen per flüstern. /ainv off Schaltet das automatische Einladen ab.",
+		["step5line4"] = "/install , oder /tutorial startet die Installation erneut. ",
 
-		["step6line1"] = "Die Einführung ist abgeschlossen. Du kannst sie jeder Zeit wieder starten, indem Du /tutorial eingibst.",
-		["step6line2"] = "Ich schlage vor, Du wirfst mal einen Blick auf die Datei DuffedUI/config/config.lua oder gibst /duffedui ein, um das Interface deinen Bedürfnissen anzupassen.",
-		["step6line3"] = "Du kannst nun mit der Installation des Interface fortfahren, wenn diese noch nicht abgeschlossen ist oder Du das Interface auf die Standardeinstellungen zurücksetzen willst.",
+		["step6line1"] = "Die Einführung ist abgeschlossen. Du kannst sie jeder Zeit wieder starten, indem Du im Chat /tutorial eingibst.",
+		["step6line2"] = "Ich schlage vor, Du wirfst mal einen Blick auf die Datei DuffedUI/config/config.lua, oder gibst /duffedui ein, um das Interface Deinen Bedürfnissen anzupassen.",
+		["step6line3"] = "Du kannst nun mit der Installation des Interface fortfahren, sofern sie noch nicht abgeschlossen war, oder Du das Interface auf seine Standardeinstellungen zurücksetzen möchtest.",
 	}
 
 	L["bufftracker"] = {
 		["10ap"] = "+10% Angriffskraft",
-		["10as"] = "+10% Nah & Fernkampf Angriffsgeschwindigkeit",
+		["10as"] = "+10% Angriffsgeschwindigkeit",
 		["10sp"] = "+10% Zaubermacht",
 		["5sh"] = "+5% Zaubergeschwindigkeit",
 		["5csc"] = "+5% Chance auf kritische Treffer",
@@ -132,10 +132,10 @@ if D.Client == "deDE" then
 
 	L["binds"] = {
 		["c2c_title"] = "Mausbelegung",
-		["combat"] = "Während dem Kampf kannst du keine Tasten belegen",
+		["combat"] = "Während eines Kampfes kannst Du keine Tasten belegen",
 		["saved"] = "Alle Tastenbelegungen wurden gespeichert",
 		["discard"] = "Alle neuen Tastenbelegungen wurden verworfen.",
-		["text"] = "Schwebe über jeden beliebigen Aktionsbutton um ihn zu belegen. Drücke ESC oder die rechte Maustaste um die Belegung zu verwerfen.",
+		["text"] = "Bewege die Maus über jeden beliebigen Aktionsbutton um ihn zu belegen. Drücke ESC, oder die rechte Maustaste, um die Belegung zu verwerfen.",
 		["save"] = "Belegung speichern",
 		["discardbind"] = "Belegung verwerfen",
 	}
@@ -145,13 +145,13 @@ if D.Client == "deDE" then
 		["fish"] = "Schräger Loot",
 		["random"] = "Zufälliger Spieler",
 		["self"] = "Eigene Beute",
-		["repairmoney"] = "Du hast nicht genug Geld zum reparieren!",
-		["repaircost"] = "Deine Gegenständen wurden repariert für",
-		["trash"] = "Deine grauen Gegenstände wurden verkauft und du hast verdient",
+		["repairmoney"] = "Dir fehlt ds nötige Kleingeld um alles zu reparieren!",
+		["repaircost"] = "Alle Gegenstände wurden repariert für einen Gesamtpreis von",
+		["trash"] = "Alle grauen Gegenstände wurden verkauft. Deine Einnahmen belaufen sich auf",
 	}
 
 	L["buttons"] = {
-		["ses_reload"] = "Das ganze UI neu laden",
+		["ses_reload"] = "Das gesamte UI neu laden",
 		["ses_move"] = "Fenster entsperren um sie zu bewegen",
 		["ses_kb"] = "Tastenbelegung einstellen",
 		["tutorial"] = "Tutorial",
@@ -164,7 +164,7 @@ if D.Client == "deDE" then
 	}
 
 	L["errors"] = {
-		["noerror"] = "Derzeit kein Fehler."
+		["noerror"] = "Derzeit keine Fehler."
 	}
 
 	L["uf"] = {
@@ -215,17 +215,17 @@ if D.Client == "deDE" then
 	}
 
 	L["dt"] = {
-		["talents"] ="Keine Spezalisierung",
+		["talents"] ="Keine Talente",
 		["download"] = "Download: ",
-		["bandwith"] = "Bandwidth: ",
+		["bandwith"] = "Bandbreite: ",
 		["inc"] = "Eingehend:",
 		["out"] = "Ausgehend:",
 		["home"] = "Heimlatenz:",
 		["world"] = "Serverlatenz:",
 		["global"] = "Globale Latenz:",
 		["noguild"] = "Keine Gilde",
-		["earned"] = "Verdient:",
-		["spent"] = "Ausgeben:",
+		["earned"] = "Verdient",
+		["spent"] = "Ausgegeben:",
 		["deficit"] = "Unterschied:",
 		["profit"] = "Gewinn:",
 		["timeto"] = "Zeit bis",
@@ -259,13 +259,14 @@ if D.Client == "deDE" then
 		["totalmemusage"] = "Total benutzter Speicher:",
 		["control"] = "Kontrolliert von:",
 		["cta_allunavailable"] = "Kann keine Daten für 'Ruf zu den Waffen' erhalten.",
-		["cta_nodungeons"] = "Keine Instanz bietet derzeit ein 'Ruf zu den Waffen'.",
+		["cta_nodungeons"] = "Keine Instanz bietet derzeit eine 'Ruf zu den Waffen' Belohnung an.",
 		["carts_controlled"] = "Wagen kontrolliert:",
 		["victory_points"] = "Siegpunkte:",
 		["orb_possessions"] = "Orbbesitz:",
 		["goldbagsopen"] = "|cffC41F3BTaschen: Linksklick|r",
 		["goldcurrency"] = "|cffC41F3BWährungsmenü: Rechtsklick|r",
 		["goldreset"] = "|cffC41F3BDaten zurücksetzen: Shift halten + Rechtsklick|r",
+		["notalents"] = "Keine Talente",
 	}
 
 	L["Slots"] = {

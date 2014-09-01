@@ -1,7 +1,7 @@
 ﻿if GetLocale() == "deDE" then
 	-- general
 	DuffedUIConfigUILocalization.general = "Allgemein"
-	DuffedUIConfigUILocalization.generalautoscale = "Aktiviere 'Automatischer UI Maßstab'"
+	DuffedUIConfigUILocalization.generalautoscale = "Aktiviere 'Automatischen UI Maßstab'"
 	DuffedUIConfigUILocalization.generaluiscale = "UI Maßstab (wenn 'Automatischer UI Maßstab' deaktiviert ist)"
 	DuffedUIConfigUILocalization.generalbackdropcolor = "Setze Standard-Hintergrundfarbe der Panels"
 	DuffedUIConfigUILocalization.generalbordercolor = "Setze Standard-Rahmenfarbe der Panels"
@@ -38,7 +38,7 @@
 
 	-- chat
 	DuffedUIConfigUILocalization.chat = "Chat"
-	DuffedUIConfigUILocalization.chatenable = "Aktiviere DuffedUI Chat"
+	DuffedUIConfigUILocalization.chatenable = "Aktiviere den DuffedUI Chat"
 	DuffedUIConfigUILocalization.chatwhispersound = "Spiele einen Ton bei Empfang einer privaten Nachricht"
 	DuffedUIConfigUILocalization.chatlbackground = "Aktiviere Chathintergrund (links)"
 	DuffedUIConfigUILocalization.chatrbackground = "Aktiviere Chathintergrund (rechts)"
@@ -108,7 +108,7 @@
 	-- datatext
 	DuffedUIConfigUILocalization.datatext = "Datatext"
 	DuffedUIConfigUILocalization.datatextarmor = "Position der 'Rüstungsanzeige' (0 zum deaktivieren)"
-	DuffedUIConfigUILocalization.datatextavd = "Position der 'Vermeisungsanzeige' (0 zum deaktivieren)"
+	DuffedUIConfigUILocalization.datatextavd = "Position der 'Vermeidungsanzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextbags = "Position der 'Taschenanzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextbattleground = "Aktviere die 'Statistikanzeige' auf den 'Schlachtfeldern'"
 	DuffedUIConfigUILocalization.datatextblock = "Position der 'Blockenanzeige' (0 zum deaktivieren)"

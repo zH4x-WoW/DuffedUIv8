@@ -79,7 +79,7 @@ local int = 1
 local function Update(self, t)
 	int = int - t
 	if int > 0 then return end
-	if not GetSpecialization() then spec.t:SetText("No talents") return end
+	if not GetSpecialization() then spec.t:SetText(L["dt"]["talents"]) return end
 
 	local Tree = ActiveTalents()
 	local name = select(2, GetSpecializationInfo(Tree))
@@ -92,7 +92,7 @@ local function Update(self, t)
 			spec:SetScript("OnEnter", function() spec.t:SetText(cm .. sName) end)
 			spec:SetScript("OnLeave", function() spec.t:SetText(name) end)
 		else
-			spec:SetScript("OnEnter", function() spec.t:SetText(cm .. "No talents") end)
+			spec:SetScript("OnEnter", function() spec.t:SetText(cm .. L["dt"]["talents"]) end)
 			spec:SetScript("OnLeave", function() spec.t:SetText(name) end)
 		end
 	end
