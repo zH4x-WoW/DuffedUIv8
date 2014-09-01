@@ -85,7 +85,7 @@ C["actionbar"] = {
 	["shapeshiftborder"] = true,
 	["shapeshiftmouseover"] = false,
 	["borderhighlight"] = false,
-	["sidebars"] = true,
+	["sidebars"] = false,
 	--["font"] = "DuffedUI",
 }
 
