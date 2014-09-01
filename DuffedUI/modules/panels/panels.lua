@@ -108,9 +108,6 @@ if not C["actionbar"].enable ~= true then
 	DuffedUIBar5:SetFrameLevel(3)
 	DuffedUIBar5:SetClampedToScreen(true)
 	DuffedUIBar5:SetMovable(true)
-	--DuffedUIBar5.text = D.SetFontString(DuffedUIBar5, C["media"].font, 11)
-	--DuffedUIBar5.text:SetPoint("CENTER")
-	--if C["actionbar"].rightbarvertical then DuffedUIBar5.text:SetText(L["move"]["bar5"]) else DuffedUIBar5.text:SetText(L["move"]["bar5_1"]) end
 	tinsert(D.AllowFrameMoving, DuffedUIBar5)
 
 	DuffedUIPetBarMover = CreateFrame("Frame", "DuffedUIPetBarMover", UIParent)

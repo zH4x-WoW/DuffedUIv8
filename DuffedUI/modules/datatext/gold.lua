@@ -121,7 +121,7 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
 	GameTooltip:AddLine(L["dt"]["session"])
-	GameTooltip:AddDoubleLine(L["dt"]["earned"] .. ":", formatMoney(Profit), 1, 1, 1, 1, 1, 1)
+	GameTooltip:AddDoubleLine(L["dt"]["earned"], formatMoney(Profit), 1, 1, 1, 1, 1, 1)
 	GameTooltip:AddDoubleLine(L["dt"]["spent"], formatMoney(Spent), 1, 1, 1, 1, 1, 1)
 
 	if Profit < Spent then
