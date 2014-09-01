@@ -202,6 +202,9 @@ local function LoadSkin()
 	local frames = {
 		"VideoOptionsFrameCategoryFrame",
 		"VideoOptionsFramePanelContainer",
+		"Display_",
+		"Graphics_",
+		"RaidGraphics_",
 		"InterfaceOptionsFrameCategories",
 		"InterfaceOptionsFramePanelContainer",
 		"InterfaceOptionsFrameAddOns",
@@ -257,11 +260,13 @@ local function LoadSkin()
 		"ControlsPanelAutoClearAFK",
 		"ControlsPanelBlockTrades",
 		"ControlsPanelBlockGuildInvites",
+		"ControlsPanelBlockChatChannelInvites",
 		"ControlsPanelLootAtMouse",
 		"ControlsPanelAutoLootCorpse",
 		"ControlsPanelAutoOpenLootHistory",
 		"ControlsPanelInteractOnLeftClick",
-		"ControlsPanelBlockChatChannelInvites",
+		"ControlsPanelReverseCleanUpBags",
+		"ControlsPanelReverseNewLoot",
 		-- Combat
 		"CombatPanelAttackOnAssist",
 		"CombatPanelStopAutoAttack",
@@ -273,6 +278,8 @@ local function LoadSkin()
 		"CombatPanelLossOfControl",
 		"CombatPanelEnemyCastBarsOnPortrait",
 		"CombatPanelEnemyCastBarsOnNameplates",
+		"CombatPanelEnemyCastBarsOnOnlyTargetNameplates",
+		"CombatPanelEnemyCastBarsNameplateSpellNames",
 		"CombatPanelAutoSelfCast",
 		-- Display
 		"DisplayPanelShowCloak",
@@ -288,10 +295,7 @@ local function LoadSkin()
 		"DisplayPanelScreenEdgeFlash",
 		--Objectives
 		"ObjectivesPanelAutoQuestTracking",
-		"ObjectivesPanelAutoQuestProgress",
-		"ObjectivesPanelMapQuestDifficulty",
-		"ObjectivesPanelAdvancedWorldMap",
-		"ObjectivesPanelWatchFrameWidth",
+		"ObjectivesPanelMapFade",
 		-- Social
 		"SocialPanelProfanityFilter",
 		"SocialPanelSpamFilter",
@@ -309,8 +313,10 @@ local function LoadSkin()
 		"ActionBarsPanelLockActionBars",
 		"ActionBarsPanelAlwaysShowActionBars",
 		"ActionBarsPanelSecureAbilityToggle",
+		"ActionBarsPanelCountdownCooldowns",
 		-- Names
 		"NamesPanelMyName",
+		"NamesPanelMinus",
 		"NamesPanelFriendlyPlayerNames",
 		"NamesPanelFriendlyPets",
 		"NamesPanelFriendlyGuardians",
@@ -331,6 +337,7 @@ local function LoadSkin()
 		"NamesPanelUnitNameplatesEnemies",
 		"NamesPanelUnitNameplatesEnemyGuardians",
 		"NamesPanelUnitNameplatesEnemyTotems",
+		"NamesPanelUnitNameplatesEnemyMinus",
 		-- Combat Text
 		"CombatTextPanelTargetDamage",
 		"CombatTextPanelPeriodicDamage",
@@ -388,6 +395,7 @@ local function LoadSkin()
 		"MousePanelInvertMouse",
 		"MousePanelClickToMove",
 		"MousePanelWoWMouse",
+		"MousePanelEnableMouseSpeed",
 		-- Help
 		"HelpPanelShowTutorials",
 		"HelpPanelLoadingScreenTips",
@@ -421,6 +429,9 @@ local function LoadSkin()
 		-- Display
 		"DisplayPanelAggroWarningDisplay",
 		"DisplayPanelWorldPVPObjectiveDisplay",
+		"DisplayPanelOutlineDropDown",
+		-- Objectives
+		"ObjectivesPanelQuestSorting",
 		-- Social
 		"SocialPanelChatStyle",
 		"SocialPanelWhisperMode",
@@ -434,6 +445,7 @@ local function LoadSkin()
 		"NamesPanelUnitNameplatesMotionDropDown",
 		-- Combat Text
 		"CombatTextPanelFCTDropDown",
+		"CombatTextPanelTargetModeDropDown",
 		-- Camera
 		"CameraPanelStyleDropDown",
 		-- Mouse
@@ -451,6 +463,8 @@ local function LoadSkin()
 	InterfaceOptionsHelpPanelResetTutorials:SkinButton()
 
 	local optioncheckbox = {
+		-- Graphics
+		"Display_RaidSettingsEnabledCheckBox",
 		-- Advanced
 		"Advanced_MaxFPSCheckBox",
 		"Advanced_MaxFPSBKCheckBox",
@@ -476,6 +490,7 @@ local function LoadSkin()
 		-- Network
 		"NetworkOptionsPanelOptimizeSpeed",
 		"NetworkOptionsPanelUseIPv6",
+		"NetworkOptionsPanelAdvancedCombatLogging",
 	}
 
 	for i = 1, getn(optioncheckbox) do
@@ -487,12 +502,13 @@ local function LoadSkin()
 
 	local optiondropdown = {
 		-- Graphics
-		"Graphics_DisplayModeDropDown",
-		"Graphics_ResolutionDropDown",
-		"Graphics_RefreshDropDown",
-		"Graphics_PrimaryMonitorDropDown",
-		"Graphics_MultiSampleDropDown",
-		"Graphics_VerticalSyncDropDown",
+		"Display_DisplayModeDropDown",
+		"Display_ResolutionDropDown",
+		"Display_RefreshDropDown",
+		"Display_PrimaryMonitorDropDown",
+		"Display_AntiAliasingDropDown",
+		"Display_MultiSampleDropDown",
+		"Display_VerticalSyncDropDown",
 		"Graphics_TextureResolutionDropDown",
 		"Graphics_FilteringDropDown",
 		"Graphics_ProjectedTexturesDropDown",
@@ -504,6 +520,19 @@ local function LoadSkin()
 		"Graphics_SunshaftsDropDown",
 		"Graphics_ParticleDensityDropDown",
 		"Graphics_SSAODropDown",
+		"Graphics_RefractionDropDown",
+		"RaidGraphics_TextureResolutionDropDown",
+		"RaidGraphics_FilteringDropDown",
+		"RaidGraphics_ProjectedTexturesDropDown",
+		"RaidGraphics_ViewDistanceDropDown",
+		"RaidGraphics_EnvironmentalDetailDropDown",
+		"RaidGraphics_GroundClutterDropDown",
+		"RaidGraphics_ShadowsDropDown",
+		"RaidGraphics_LiquidDetailDropDown",
+		"RaidGraphics_SunshaftsDropDown",
+		"RaidGraphics_ParticleDensityDropDown",
+		"RaidGraphics_SSAODropDown",
+		"RaidGraphics_RefractionDropDown",
 		-- Advanced
 		"Advanced_BufferingDropDown",
 		"Advanced_LagDropDown",
@@ -555,6 +584,7 @@ local function LoadSkin()
 		"AudioOptionsSoundPanelSoundVolume",
 		"AudioOptionsSoundPanelMusicVolume",
 		"AudioOptionsSoundPanelAmbienceVolume",
+		"AudioOptionsSoundPanelDialogVolume",
 		"AudioOptionsVoicePanelMicrophoneVolume",
 		"AudioOptionsVoicePanelSpeakerVolume",
 		"AudioOptionsVoicePanelSoundFade",
@@ -572,9 +602,11 @@ local function LoadSkin()
 		end
 	end
 
+	GraphicsButton:StripTextures()
+	GraphicsButton:SkinButton()
 	Graphics_Quality:SetScript("OnUpdate", function(self)
 		Graphics_Quality:SkinSlideBar(11)
-	end )
+	end)
 	Graphics_RightQuality:SetAlpha(0)
 
 	Graphics_QualityLow2:Point("BOTTOM", 0, -20)
@@ -583,6 +615,20 @@ local function LoadSkin()
 	Graphics_QualityMed:Point("BOTTOM", 0, -20)
 	Graphics_QualityHigh2:Point("BOTTOM", 0, -20)
 	Graphics_QualityUltra:Point("BOTTOM", 0, -20)
+
+	RaidButton:StripTextures()
+	RaidButton:SkinButton()
+	RaidGraphics_Quality:SetScript("OnUpdate", function(self)
+		RaidGraphics_Quality:SkinSlideBar(11)
+	end)
+	RaidGraphics_RightQuality:SetAlpha(0)
+
+	RaidGraphics_QualityLow2:Point("BOTTOM", 0, -20)
+	RaidGraphics_QualityFair:Point("BOTTOM", 0, -20)
+	RaidGraphics_RightQualityLabel:Point("TOP", 0, 16)
+	RaidGraphics_QualityMed:Point("BOTTOM", 0, -20)
+	RaidGraphics_QualityHigh2:Point("BOTTOM", 0, -20)
+	RaidGraphics_QualityUltra:Point("BOTTOM", 0, -20)
 
 	MacOptionsFrame:StripTextures()
 	MacOptionsFrame:SetTemplate()
