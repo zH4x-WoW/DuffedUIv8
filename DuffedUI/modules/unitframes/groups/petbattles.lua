@@ -206,7 +206,7 @@ for i, tt in pairs(tooltips) do
 	tt.BorderBottom:SetTexture(nil)
 	tt.BorderBottomRight:SetTexture(nil)
 	tt.BorderBottomLeft:SetTexture(nil)
-	tt:SetTemplate()
+	tt:SetTemplate("Transparent")
 	
 	if tt.CloseButton then
 		tt.CloseButton:SkinCloseButton()

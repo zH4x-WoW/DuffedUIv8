@@ -1,6 +1,30 @@
 local D, C, L = unpack(select(2, ...))
 
 local function LoadGarrisonSkin()
+	-- Tooltips
+	local Tooltips = {
+		FloatingGarrisonFollowerTooltip,
+		FloatingGarrisonFollowerAbilityTooltip,
+		GarrisonFollowerAbilityTooltip,
+		GarrisonBuildingFrame.BuildingLevelTooltip,
+	}
+	for i, tt in pairs(Tooltips) do
+		tt.Background:SetTexture(nil)
+		tt.BorderTop:SetTexture(nil)
+		tt.BorderTopLeft:SetTexture(nil)
+		tt.BorderTopRight:SetTexture(nil)
+		tt.BorderLeft:SetTexture(nil)
+		tt.BorderRight:SetTexture(nil)
+		tt.BorderBottom:SetTexture(nil)
+		tt.BorderBottomRight:SetTexture(nil)
+		tt.BorderBottomLeft:SetTexture(nil)
+		tt:SetTemplate("Transparent")
+
+		if tt.Portrait then tt.Portrait:StripTextures() end
+		if tt.CloseButton then tt.CloseButton:SkinCloseButton() end
+		if tt.Icon then tt.Icon:SetTexCoord(unpack(D.IconCoord)) end
+	end
+
 	-- Work Orders
 	GarrisonCapacitiveDisplayFrame:StripTextures()
 	GarrisonCapacitiveDisplayFrame:SetTemplate("Transparent")
