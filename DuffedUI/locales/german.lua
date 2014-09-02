@@ -31,6 +31,8 @@ if D.Client == "deDE" then
 		["text2"] = "Mausradklick in die Minimap zeigt das Mikromenü an.",
 		["text3"] = "Rechtsklick in die Minimap zeigt das Aufspürmenü.",
 		["text4"] = "Rechtsklick auf Quests, oder Erfolge, ermöglicht es einen direkten Link zu 'WoWHead' zu kopieren.",
+		["text5"] = "Du kannst /moveui eingeben um die UI-Elemente zu verschieben.",
+		["text6"] = "Du kannst /uihelp eingeben um ein Tutorial anzuzeigen."
 	}
 
 	L["symbol"] = {

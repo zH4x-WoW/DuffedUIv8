@@ -14,8 +14,8 @@ L["move"] = {
 	["extrabutton"] = "Extra Button",
 	["bar1"] = "Move Bar 1",
 	["bar2"] = "Move Bar 2",
-	["bar5"] = "Move Bar5",
-	["bar5_1"] = "Move\nBar5",
+	["bar5"] = "Move Bar 5",
+	["bar5_1"] = "Move\nBar 5",
 	["pet"] = "Move\nPet",
 	["player"] = "Move Playercastbar",
 	["target"] = "Move Targetcastbar",
@@ -26,10 +26,12 @@ L["move"] = {
 }
 
 L["afk"] = {
-	["text1"] = "Mouseover minimap shows coords and locations",
-	["text2"] = "Middle click the minimap for micromenu",
-	["text3"] = "Right click the minimap for gatheringmenu",
+	["text1"] = "Mouseover minimap shows coords and locations.",
+	["text2"] = "Middle click the minimap for micromenu.",
+	["text3"] = "Right click the minimap for gatheringmenu.",
 	["text4"] = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link.",
+	["text5"] = "You can type /moveui to move the frames from the Interface.",
+	["text6"] = "You can type /uihelp to show a tutorial."
 }
 
 L["symbol"] = {

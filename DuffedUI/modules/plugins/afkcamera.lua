@@ -21,6 +21,8 @@ D.AFK_LIST = {
 	L["afk"]["text2"],
 	L["afk"]["text3"],
 	L["afk"]["text4"],
+	L["afk"]["text5"],
+	L["afk"]["text6"],
 }
 
 local DuffedUIAFKPanel = CreateFrame( "Frame", "DuffedUIAFKPanel", nil )
