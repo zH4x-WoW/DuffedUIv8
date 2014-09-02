@@ -539,7 +539,7 @@ function CreateDuffedUIConfigUI()
 
 	local credit = "Special thanks to: "
 	for i = 1, #D.Credits do
-		if (i ~= 1) then credit = credit .. ", " .. "|cff9482C9" .. D.Credits[i] .. "|r" else credit = credit .. "|cff9482C9" .. D.Credits[i] .. "|r" end
+		if (i ~= 1) then credit = credit .. ", " .. "|cffff8000" .. D.Credits[i] .. "|r" else credit = credit .. "|cffff8000" .. D.Credits[i] .. "|r" end
 	end
 
 	local ct = scroll:CreateFontString(nil, "OVERLAY")

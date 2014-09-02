@@ -86,7 +86,6 @@ C["actionbar"] = {
 	["shapeshiftmouseover"] = false,
 	["borderhighlight"] = false,
 	["sidebars"] = false,
-	--["font"] = "DuffedUI",
 }
 
 C["raid"] = {
@@ -189,7 +188,7 @@ C["auras"] = {
 C["bags"] = {
 	["enable"] = true,
 	["bpr"] = 10,
-	--["moveable"] = false,
+	["movable"] = true,
 	["scale"] = 1,
 	["buttonsize"] = 28,
 	["spacing"] = 4,

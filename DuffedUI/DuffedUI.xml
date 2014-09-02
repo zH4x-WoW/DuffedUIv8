@@ -16,6 +16,7 @@
 	<Script file="core\video.lua" />
 	<Script file="core\api.lua" />
 	<Script file="core\move.lua" />
+	<Script file="core_func_Font.lua" />
 	<Script file="core\func_Core.lua" />
 	<Script file="core\func_UF.lua" />
 	<Script file="core\func_Skins.lua" />

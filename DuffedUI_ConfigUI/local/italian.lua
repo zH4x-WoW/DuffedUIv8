@@ -187,7 +187,7 @@
 	DuffedUIConfigUILocalization.bags = "Bags"
 	DuffedUIConfigUILocalization.bagsenable = "Enable all-in-one bag"
 	DuffedUIConfigUILocalization.bagsbpr = "Set bagbuttons per row"
-	DuffedUIConfigUILocalization.bagsmoveable = "Make bags moveable"
+	DuffedUIConfigUILocalization.bagsmovable = "Make bags moveable"
 	DuffedUIConfigUILocalization.bagsscale = "Set scale of bag & bank frames"
 	DuffedUIConfigUILocalization.bagsspacing = "Set spacing betweens bagslots"
 	DuffedUIConfigUILocalization.bagsbuttonsize = " Set slotsize"

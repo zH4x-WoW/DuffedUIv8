@@ -202,6 +202,12 @@ function CreateContainer(storagetype, ...)
 	Container:Hide()
 	Container:SetTemplate("Transparent")
 	Container:EnableMouse(true)
+	if C["bags"].movable then
+		Container:SetMovable(true)
+		Container:SetClampedToScreen(true)
+		Container:SetScript("OnMouseDown", function() Container:ClearAllPoints() Container:StartMoving() end)
+		Container:SetScript("OnMouseUp", function() Container:StopMovingOrSizing() end)
+	end
 
 	if (storagetype == "Bag") then
 		local Sort = BagItemAutoSortButton
