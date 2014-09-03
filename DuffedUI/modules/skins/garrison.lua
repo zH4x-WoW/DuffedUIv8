@@ -60,10 +60,10 @@ end
 D.SkinFuncs["Blizzard_GarrisonUI"] = LoadGarrisonSkin
 
 --[[Remove me after beta ends or Blizzard fixed the issue]]--
-local _,bi = GetBuildInfo()
+--[[local _,bi = GetBuildInfo()
 if bi == "18764" then
 	GARRISON_BUILDING_FOLLOWER_WORKING="%s"
 	GARRISON_BUILDING_FOLLOWER_EMPTY="No follower"
 	print("Garrison follower tooltip hack applied")
-end
+end]]
 --[[Remove me after beta ends or Blizzard fixed the issue]]--

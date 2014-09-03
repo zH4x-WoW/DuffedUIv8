@@ -13,8 +13,7 @@ local function QuestChoiceSkin()
 
 			option.optID = optID
 			option.OptionText:SetTextColor(1, 1, 1)
-			option.Artwork:StripTextures()
-			option.Artwork:CreateBackdrop()
+			option.OptionButton:SkinButton()
 		end
 	end
 	hooksecurefunc("QuestChoiceFrame_Update", Options)
