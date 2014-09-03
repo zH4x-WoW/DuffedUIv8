@@ -108,8 +108,6 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	local Title = UnitPVPName(Unit)
 	local R, G, B = GetQuestDifficultyColor(Level).r, GetQuestDifficultyColor(Level).g, GetQuestDifficultyColor(Level).b
 	local Color = DuffedUITooltips:GetColor(Unit)
-	local Health = UnitHealth(Unit)
-	local MaxHealth = UnitHealth(Unit)
 
 	if not Color then Color = "|CFFFFFFFF" end
 	if Title or Name then
@@ -166,7 +164,6 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		if (not R) and (not G) and (not B) then R, G, B = 1, 1, 1 end
 		GameTooltip:AddLine(UnitName(Unit .. "target"), R, G, B)
 	end
-	HealthBar.Text:SetText(D.ShortValue(Health) .. " / " .. D.ShortValue(MaxHealth))
 	self.fadeOut = nil
 end
 
