@@ -134,6 +134,10 @@ D.CreateBtn("MB_binds", MB_reload, 19, 19, L["buttons"]["ses_kb"], "K")
 MB_binds:Point("LEFT", MB_mui, "RIGHT", 2, 0)
 MB_binds:SetAttribute("macrotext1", "/kb")
 
+D.CreateBtn("MB_dfaq", MB_reload, 19, 19, L["buttons"]["ses_dfaq"], "F")
+MB_dfaq:Point("LEFT", MB_binds, "RIGHT", 2, 0)
+MB_dfaq:SetAttribute("macrotext1", "/dfaq")
+
 if Enablegear == true then
 	local gearSets = CreateFrame("Frame", nil, MB_reload)	
 	for i = 1, 10 do

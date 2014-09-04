@@ -5,6 +5,7 @@
 	<Script file="clickcast.lua" />
 	<Script file="combat.lua" />
 	<Script file="efl.lua" />
+	<Script file="faq.lua" />
 	<Script file="flightpoint.lua" />
 	<Include file="flightpoint.xml" />
 	<Script file="HatTrick.lua" />
