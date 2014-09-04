@@ -174,6 +174,16 @@ local function Shared(self, unit)
 			self.Portrait = portrait
 		end
 
+		if C["unitframes"].playermodel == "Icon" then
+			local classicon = CreateFrame("Frame", nil, health)
+			classicon:Size(29)
+			if unit == "player" then classicon:Point("BOTTOMRIGHT", power, "BOTTOMLEFT", -5, 0) else classicon:Point("BOTTOMLEFT", power, "BOTTOMRIGHT", 5, 0) end
+			classicon:CreateBackdrop()
+			classicon.tex = classicon:CreateTexture("ClassIcon", "ARTWORK")
+			classicon.tex:SetAllPoints(classicon)
+			self.ClassIcon = classicon.tex
+		end
+
 		if D.Class == "PRIEST" and C["unitframes"].weakenedsoulbar then
 			local ws = CreateFrame("StatusBar", self:GetName().."_WeakenedSoul", power)
 			ws:SetAllPoints(power)

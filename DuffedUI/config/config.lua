@@ -35,6 +35,7 @@ C["unitframes"] = {
 	["focusbutton"] = true,
 	["attached"] = false,
 	["oocHide"] = true,
+	["playermodel"] = "Model",
 }
 
 C["chat"] = {

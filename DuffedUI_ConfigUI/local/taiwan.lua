@@ -35,6 +35,7 @@
 	DuffedUIConfigUILocalization.unitframesfocusbutton = "Enable focus button on player / focus frame"
 	DuffedUIConfigUILocalization.unitframesattached = "Attach Classbars to Unitframes"
 	DuffedUIConfigUILocalization.unitframesoocHide = "Hide Classbars out of Combat"
+	DuffedUIConfigUILocalization.unitframesplayermodel = "Set Portraitstyle (Icon or Model, default => Model)"
 
 	-- chat
 	DuffedUIConfigUILocalization.chat = "Chat"

@@ -166,8 +166,14 @@ local function Shared(self, unit)
 			portrait:Size(38)
 			if unit == "player" then portrait:SetPoint("BOTTOMRIGHT", panel, "BOTTOMLEFT", -5, 2) else portrait:SetPoint("BOTTOMLEFT", panel, "BOTTOMRIGHT", 5, 2) end
 			portrait:CreateBackdrop()
-			portrait.PostUpdate = D.PortraitUpdate 
-			self.Portrait = portrait
+			if C["unitframes"].playermodel == "Model" then
+				portrait.PostUpdate = D.PortraitUpdate
+				self.Portrait = portrait
+			else
+				portrait.tex = portrait:CreateTexture("ClassIcon", "ARTWORK")
+				portrait.tex:SetAllPoints(portrait)
+				self.ClassIcon = portrait.tex
+			end
 		end
 
 		if D.Class == "PRIEST" and C["unitframes"].weakenedsoulbar then

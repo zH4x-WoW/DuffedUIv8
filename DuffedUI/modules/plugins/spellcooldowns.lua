@@ -232,7 +232,6 @@ spellCooldowns = {
 		32379,  -- Shdow Word: Death
 		33076,  -- Prayer of Mending
 		33206,  -- Pain Suppression
-		34433,  -- Shadowfiend
 		34861,  -- Circle of Healing
 		47540,  -- Penance
 		47585,  -- Dispersion
@@ -256,8 +255,9 @@ spellCooldowns = {
 		120517, -- Halo
 		121135, -- Cascade
 		121536, -- Angelic Feather
-		123040, -- Mindbender
 		129250, -- Power Word: Solace
+		132603, -- Shadowfiend
+		132604, -- Mindbender
 	},
 	["ROGUE"] = {
 		408,    -- Kidney Shot

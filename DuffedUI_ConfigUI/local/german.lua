@@ -35,6 +35,7 @@
 	DuffedUIConfigUILocalization.unitframesfocusbutton = "Aktiviere den Fokusbutton für Spieler- / Fokuseinheitenfenster"
 	DuffedUIConfigUILocalization.unitframesattached = "Verbinde die Klassenleisten und die Einheitenfenster"
 	DuffedUIConfigUILocalization.unitframesoocHide = "Verstecke die Klassenleisten, wenn Du nicht im Kampf bist"
+	DuffedUIConfigUILocalization.unitframesplayermodel = "Setze den Portraitstil (Icon oder Model, Standard => Model)"
 
 	-- chat
 	DuffedUIConfigUILocalization.chat = "Chat"

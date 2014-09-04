@@ -451,6 +451,7 @@ local function LoadSkin()
 		-- Mouse
 		"MousePanelClickMoveStyleDropDown",
 		"LanguagesPanelLocaleDropDown",
+		"LanguagesPanelAudioLocaleDropDown",
 	}
 
 	for i = 1, getn(interfacedropdown) do
