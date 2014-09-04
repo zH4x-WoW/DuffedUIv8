@@ -24,25 +24,21 @@ WorldMap.QuestTexts = {
 
 function WorldMap:ColorQuestText()
 	for _, Text in pairs(WorldMap.QuestTexts) do Text:SetTextColor(1, 1, 1) end
-	
+
 	local Objectives = QuestInfoObjectivesFrame.Objectives
-	
+
 	for i = 1, #Objectives do
 		local Objective = _G["QuestInfoObjective"..i]
 		local Completed = select(3, GetQuestLogLeaderBoard(i))
-		
-		if Completed then
-			Objective:SetTextColor(0, 1, 0)
-		else
-			Objective:SetTextColor(1, 0, 0)
-		end
+
+		if Completed then Objective:SetTextColor(0, 1, 0) else Objective:SetTextColor(1, 0, 0) end
 	end
 end
 
 function WorldMap:SkinReward(i)
 	local Reward = _G[self:GetName().."QuestInfoItem"..i]
 	local Texture = Reward.Icon:GetTexture()
-	
+
 	Reward:StripTextures()
 	Reward:StyleButton()
 	Reward:CreateBackdrop()
@@ -54,13 +50,7 @@ end
 
 function WorldMap:Skin()
 	local Map = WorldMapFrame
-	local MapScroll = WorldMapScrollFrame
-	local MapBorder = WorldMapFrame.BorderFrame
-	local MapBorderInset = WorldMapFrame.BorderFrame.Inset
 	local QuestScroll = QuestScrollFrame
-	local Quest = QuestMapFrame
-	local Details = QuestMapFrame.DetailsFrame
-	local Rewards = QuestMapFrame.DetailsFrame.RewardsFrame
 	local Navigation = WorldMapFrameNavBar
 	local TutorialButton = WorldMapFrameTutorialButton
 	local TitleButton = WorldMapTitleButton
@@ -76,7 +66,6 @@ function WorldMap:Skin()
 	local RewardsInfo = MapQuestInfoRewardsFrame
 	local Money = MapQuestInfoRewardsFrame.MoneyFrame
 	local XP = MapQuestInfoRewardsFrame.XPFrame
-	local StoryHeader = QuestScrollFrame.Contents.StoryHeader
 	local QuestBackground = QuestScrollFrame.Background
 	local StoryTooltip = QuestScrollFrame.StoryTooltip
 	local MapDetails = WorldMapDetailFrame
@@ -95,23 +84,19 @@ function WorldMap:Skin()
 	Map.Header:SetPoint("BOTTOMLEFT", Map.backdrop, "TOPLEFT", 0, 2)
 	Map.Header:SetTemplate()
 
-	MapBorder:StripTextures()
-	MapBorderInset:StripTextures()
-	Details:StripTextures()
-	Rewards:StripTextures()
-	StoryHeader:StripTextures()
-	Quest:StripTextures()
+	WorldMapFrame.BorderFrame:StripTextures()
+	WorldMapFrame.BorderFrame.Inset:StripTextures()
+	QuestMapFrame.DetailsFrame:StripTextures()
+	QuestMapFrame.DetailsFrame.RewardsFrame:StripTextures()
+	QuestScrollFrame.Contents.StoryHeader:StripTextures()
+	QuestMapFrame:StripTextures()
 
 	StoryTooltip:StripTextures()
 	StoryTooltip:SetTemplate("Transparent")
 
 	QuestBackground:SetAlpha(0)
 
-	TutorialButton.Ring:Hide()
-	TutorialButton:SetScale(.75)
-	TutorialButton:ClearAllPoints()
-	TutorialButton:SetPoint("LEFT", Map.Header, "LEFT", 0, 0)
-
+	TutorialButton:Kill()
 	TrackingMenuButton:SetAlpha(0)
 	TrackingMenuBackground:SetAlpha(0)
 
@@ -220,20 +205,15 @@ function WorldMap:Coords()
 	coords.MouseText:SetPoint("BOTTOMLEFT", coords.PlayerText, "TOPLEFT", 0, 5)
 	coords.MouseText:SetText("Mouse:   0, 0")
 	local int = 0
-	
+
 	WorldMapFrame:HookScript("OnUpdate", function(self, elapsed)
 		int = int + 1
-
 		if int >= 3 then
 			local inInstance, _ = IsInInstance()
 			local x, y = GetPlayerMapPosition("player")
 			x = math.floor(100 * x)
 			y = math.floor(100 * y)
-			if x ~= 0 and y ~= 0 then
-				coords.PlayerText:SetText(PLAYER..":   "..x..", "..y)
-			else
-				coords.PlayerText:SetText(" ")
-			end
+			if x ~= 0 and y ~= 0 then coords.PlayerText:SetText(PLAYER..":   "..x..", "..y) else coords.PlayerText:SetText(" ") end
 
 			local scale = WorldMapDetailFrame:GetEffectiveScale()
 			local width = WorldMapDetailFrame:GetWidth()
@@ -250,7 +230,6 @@ function WorldMap:Coords()
 			else
 				coords.MouseText:SetText(" ")
 			end
-
 			int = 0
 		end
 	end)
@@ -263,13 +242,12 @@ end
 
 function WorldMap:Enable()
 	local SmallerMap = GetCVarBool("miniWorldMap")
-	
+
 	if not SmallerMap then
 		ToggleWorldMap()
 		WorldMapFrameSizeUpButton:Click()
 		ToggleWorldMap()
 	end
-
 	self:Skin()
 	self:Coords()
 	self:AddHooks()
