@@ -156,6 +156,7 @@ if D.Client == "ptBR" then
 		["ses_reload"] = "Reloads the entire UI",
 		["ses_move"] = "Unlock the frames for moving",
 		["ses_kb"] = "Set your keybindings",
+		["ses_dfaq"] = "Open DuffedUI F.A.Q.",
 		["tutorial"] = "Tutorial",
 		["install"] = "Install",
 		["next"] = "Next",
@@ -282,5 +283,55 @@ if D.Client == "ptBR" then
 		[9] = {16, "Main Hand", 1000},
 		[10] = {17, "Off Hand", 1000},
 		[11] = {18, "Ranged", 1000}
+	}
+	
+	L["Faq"] = {
+		["generaltitle"] = "|cffc41f3bDuffedUI - F.A.Q.|r",
+		["generaltext1"] = "",
+		["generaltext2"] = "",
+				
+		["content1title"] = "|cffc41f3bGeneral|r",
+		["content1text1"] = "",
+		["content1text2"] = "",		
+		
+		["content2title"] = "|cffc41f3bActionbars|r",
+		["content2text1"] = "",
+		["content2text2"] = "",		
+		
+		["content3title"] = "|cffc41f3bUnitframes|r",
+		["content3text1"] = "",
+		["content3text2"] = "",		
+		
+		["content4title"] = "|cffc41f3bDuffedUI Chat|r",
+		["content4text1"] = "",
+		["content4text2"] = "",
+				
+		["content5title"] = "|cffc41f3bUI Slashcommands|r",
+		["content5text1"] = "",
+		["content5text2"] = "",
+				
+		["content6title"] = "|cffc41f3bKeybinding|r",
+		["content6text1"] = "",
+		["content6text2"] = "",	
+		
+		["content7title"] = "|cffc41f3bMinimap|r",
+		["content7text1"] = "",
+		["content7text2"] = "",		
+		
+		["content8title"] = "|cffc41f3bBags|r",
+		["content8text1"] = "",
+		["content8text2"] = "",		
+		
+		["content9title"] = "|cffc41f3bAddons & Skins|r",
+		["content9text1"] = "",
+		["content9text2"] = "",
+				
+		["content10title"] = "|cffc41f3bOMG Errors|r",
+		["content10text1"] = "",
+		["content10text2"] = "",
+				
+		["content11title"] = "|cffc41f3bUpdating UI|r",
+		["content11text1"] = "",
+		["content11text2"] = "",	
 	}
 end
