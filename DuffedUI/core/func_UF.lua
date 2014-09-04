@@ -412,7 +412,7 @@ end
 			self:SetStatusBarColor(unpack(C["castbar"].color))
 		end
 	end
-end
+end]]
 
 local ticks = {}
 local HideTicks = function()
@@ -443,34 +443,6 @@ local SetCastTicks = function(frame, numTicks)
 			ticks[i]:Show()
 		end
 	end
-end]]
-
-local ticks = {}
-local function HideTicks()
-	for i = 1, #ticks do
-		ticks[i]:Hide()
-	end
-end
-
-local SetCastTicks = function(frame, numTicks, extraTickRatio)
-	extraTickRatio = extraTickRatio or 0
-	HideTicks()
-	if (numTicks and numTicks <= 0) then return end
-
-	local w = frame:GetWidth()
-	local d = w / (numTicks + extraTickRatio)
-	for i = 1, numTicks do
-		if not ticks[i] then
-			ticks[i] = frame:CreateTexture(nil, "OVERLAY")
-			ticks[i]:SetTexture( C["media"].normTex)
-			if C["castbar"].classcolor == true then ticks[i]:SetVertexColor(0, 0, 0) else ticks[i]:SetVertexColor(.84, .75, .65) end
-			ticks[i]:SetWidth(1)
-			ticks[i]:SetHeight(frame:GetHeight())
-		end
-		ticks[i]:ClearAllPoints()
-		ticks[i]:SetPoint("CENTER", frame, "LEFT", d * i, 0)
-		ticks[i]:Show()
-	end
 end
 
 D.CustomCastTime = function(self, duration)
@@ -496,8 +468,8 @@ D.CastBar = function(self, unit, name, rank, castid)
 	local color
 	self.unit = unit
 
-	if unit == "player" then --C["castbar"].cbticks == true and 
-		--[[local baseTicks = D.ChannelTicks[name]
+	if C["castbar"].cbticks == true and unit == "player" then
+		local baseTicks = D.ChannelTicks[name]
 		if baseTicks and D.HasteTicks[name] then
 			local tickIncRate = 1 / baseTicks
 			local curHaste = UnitSpellHaste("player") * 0.01
@@ -516,51 +488,9 @@ D.CastBar = function(self, unit, name, rank, castid)
 			SetCastTicks(self, baseTicks)
 		else
 			HideTicks()
-		end]]
-		local baseTicks = D.ChannelTicks[Name]
-
-		if baseTicks and Name == prevSpellCast then
-			self.chainChannel = true
-		elseif baseTicks then
-			self.chainChannel = nil
-			self.prevSpellCast = Name
 		end
-
-		if baseTicks and D.ChannelTicksSize[Name] and D.HasteTicks[Name] then
-			local tickIncRate = 1 / baseTicks
-			local curHaste = UnitSpellHaste('player') * 0.01
-			local firstTickInc = tickIncRate / 2
-			local bonusTicks = 0
-
-			if curHaste >= firstTickInc then bonusTicks = bonusTicks + 1 end
-
-			local x = tonumber(D.Round(firstTickInc + tickIncRate, 2))
-			while curHaste >= x do
-				x = tonumber(D.Round(firstTickInc + (tickIncRate * bonusTicks), 2))
-				if(curHaste >= x) then bonusTicks = bonusTicks + 1 end
-			end
-
-			local baseTickSize = D.ChannelTicksSize[Name]
-			local hastedTickSize = baseTickSize / (1 + curHaste)
-			local extraTick = self.max - hastedTickSize * (baseTicks + bonusTicks)
-			local extraTickRatio = extraTick / hastedTickSize
-
-			SetCastTicks(self, baseTicks + bonusTicks, extraTickRatio)
-		elseif baseTicks and D.ChannelTicksSize[Name] then
-			local curHaste = UnitSpellHaste('player') * 0.01
-			local baseTickSize = D.ChannelTicksSize[Name]
-			local hastedTickSize = baseTickSize / (1 + curHaste)
-			local extraTick = self.max - hastedTickSize * (baseTicks)
-			local extraTickRatio = extraTick / hastedTickSize
-
-			SetCastTicks(self, baseTicks, extraTickRatio)
-		elseif baseTicks then
-			SetCastTicks(self, baseTicks)
-		else
-			HideTicks()
-		end
-	--elseif unit == "player" then
-		--HideTicks()
+	elseif unit == "player" then
+		HideTicks()
 	end
 end
 

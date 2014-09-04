@@ -74,17 +74,17 @@ local FAQButtonsAttributes = {
 }
 
 local FAQButtonsTexts = {
-	[1] = { "Allgemeines" },
-	[2] = { "Aktionsleisten" },
-	[3] = { "Einheitenfenster" },
-	[4] = { "DuffedUI Chat" },
-	[5] = { "UI Chatbefehle" },
-	[6] = { "Tastaturbelegung" },
-	[7] = { "Minimap" },
-	[8] = { "Taschen" },
-	[9] = { "Addons & Skins" },
-	[10] = { "Fehler melden" },
-	[11] = { "UI Updaten" },
+	[1] = { L["Faq"]["button01"] },
+	[2] = { L["Faq"]["button02"] },
+	[3] = { L["Faq"]["button03"] },
+	[4] = { L["Faq"]["button04"] },
+	[5] = { L["Faq"]["button05"] },
+	[6] = { L["Faq"]["button06"] },
+	[7] = { L["Faq"]["button07"] },
+	[8] = { L["Faq"]["button08"] },
+	[9] = { L["Faq"]["button09"] },
+	[10] = { L["Faq"]["button10"] },
+	[11] = { L["Faq"]["button11"] },
 }
 
 local FAQMainFrameNavigationButton = CreateFrame( "Button", nil, FAQFrameNavigation )
