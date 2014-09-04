@@ -400,7 +400,7 @@ D.PortraitUpdate = function(self, unit)
 	end
 end
 
-local CheckInterrupt = function(self, unit)
+--[[local CheckInterrupt = function(self, unit)
 	if unit == "vehicle" then unit = "player" end
 
 	if self.interrupt and UnitCanAttack("player", unit) then
@@ -443,6 +443,34 @@ local SetCastTicks = function(frame, numTicks)
 			ticks[i]:Show()
 		end
 	end
+end]]
+
+local ticks = {}
+local function HideTicks()
+	for i = 1, #ticks do
+		ticks[i]:Hide()
+	end
+end
+
+local SetCastTicks = function(frame, numTicks, extraTickRatio)
+	extraTickRatio = extraTickRatio or 0
+	HideTicks()
+	if (numTicks and numTicks <= 0) then return end
+
+	local w = frame:GetWidth()
+	local d = w / (numTicks + extraTickRatio)
+	for i = 1, numTicks do
+		if not ticks[i] then
+			ticks[i] = frame:CreateTexture(nil, "OVERLAY")
+			ticks[i]:SetTexture( C["media"].normTex)
+			if C["castbar"].classcolor == true then ticks[i]:SetVertexColor(0, 0, 0) else ticks[i]:SetVertexColor(.84, .75, .65) end
+			ticks[i]:SetWidth(1)
+			ticks[i]:SetHeight(frame:GetHeight())
+		end
+		ticks[i]:ClearAllPoints()
+		ticks[i]:SetPoint("CENTER", frame, "LEFT", d * i, 0)
+		ticks[i]:Show()
+	end
 end
 
 D.CustomCastTime = function(self, duration)
@@ -454,13 +482,22 @@ D.CustomCastDelayText = function(self, duration)
 end
 
 D.CastBar = function(self, unit, name, rank, castid)
-	CheckInterrupt(self, unit)
+	--CheckInterrupt(self, unit)
+	if self.interrupt and unit ~= "player" then
+		if UnitCanAttack("player", unit) then self:SetStatusBarColor(1, 0, 0, .5) else self:SetStatusBarColor(1, 0, 0, .5) end
+	else
+		if C["castbar"].classcolor then
+			self:SetStatusBarColor(unpack(D.UnitColor.class[D.Class]))
+		else
+			self:SetStatusBarColor(unpack(C["castbar"].color))
+		end
+	end
 
 	local color
 	self.unit = unit
 
-	if C["castbar"].cbticks == true and unit == "player" then
-		local baseTicks = D.ChannelTicks[name]
+	if unit == "player" then --C["castbar"].cbticks == true and 
+		--[[local baseTicks = D.ChannelTicks[name]
 		if baseTicks and D.HasteTicks[name] then
 			local tickIncRate = 1 / baseTicks
 			local curHaste = UnitSpellHaste("player") * 0.01
@@ -479,9 +516,51 @@ D.CastBar = function(self, unit, name, rank, castid)
 			SetCastTicks(self, baseTicks)
 		else
 			HideTicks()
+		end]]
+		local baseTicks = D.ChannelTicks[Name]
+
+		if baseTicks and Name == prevSpellCast then
+			self.chainChannel = true
+		elseif baseTicks then
+			self.chainChannel = nil
+			self.prevSpellCast = Name
 		end
-	elseif unit == "player" then
-		HideTicks()
+
+		if baseTicks and D.ChannelTicksSize[Name] and D.HasteTicks[Name] then
+			local tickIncRate = 1 / baseTicks
+			local curHaste = UnitSpellHaste('player') * 0.01
+			local firstTickInc = tickIncRate / 2
+			local bonusTicks = 0
+
+			if curHaste >= firstTickInc then bonusTicks = bonusTicks + 1 end
+
+			local x = tonumber(D.Round(firstTickInc + tickIncRate, 2))
+			while curHaste >= x do
+				x = tonumber(D.Round(firstTickInc + (tickIncRate * bonusTicks), 2))
+				if(curHaste >= x) then bonusTicks = bonusTicks + 1 end
+			end
+
+			local baseTickSize = D.ChannelTicksSize[Name]
+			local hastedTickSize = baseTickSize / (1 + curHaste)
+			local extraTick = self.max - hastedTickSize * (baseTicks + bonusTicks)
+			local extraTickRatio = extraTick / hastedTickSize
+
+			SetCastTicks(self, baseTicks + bonusTicks, extraTickRatio)
+		elseif baseTicks and D.ChannelTicksSize[Name] then
+			local curHaste = UnitSpellHaste('player') * 0.01
+			local baseTickSize = D.ChannelTicksSize[Name]
+			local hastedTickSize = baseTickSize / (1 + curHaste)
+			local extraTick = self.max - hastedTickSize * (baseTicks)
+			local extraTickRatio = extraTick / hastedTickSize
+
+			SetCastTicks(self, baseTicks, extraTickRatio)
+		elseif baseTicks then
+			SetCastTicks(self, baseTicks)
+		else
+			HideTicks()
+		end
+	--elseif unit == "player" then
+		--HideTicks()
 	end
 end
 
