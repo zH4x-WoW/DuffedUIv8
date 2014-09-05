@@ -299,7 +299,7 @@ if D.Client == "zhTW" then
 		["button11"] = "UI Update",
 
 		["generaltitle"] = "|cffc41f3bDuffedUI - F.A.Q.|r",
-		["generaltext1"] = "",
+		["generaltext1"] = "Hello |cffc41f3b".. D.MyName.."|r. Thank you that you have chose |cffc41f3bDuffedUI "..D.Version.."|r.\n\nUse the menu on the left to learn more about the individual points about it.\n\nEnjoy the game and good loot!",
 		["generaltext2"] = "",
 
 		["content1title"] = "|cffc41f3bGeneral|r",
@@ -319,7 +319,7 @@ if D.Client == "zhTW" then
 		["content4text2"] = "",
 
 		["content5title"] = "|cffc41f3bUI Slashcommands|r",
-		["content5text1"] = "",
+		["content5text1"] = "The following chat commands are available to you:\n\n|cffc41f3b/install|r or |cffc41f3b/reset|r (Reinstalling)\n|cffc41f3b/rc|r (Readycheck)\n|cffc41f3b/moveui|r (Move the UI elements)\n|cffc41f3b/dc|r or |cffc41f3b/duffedui|r (DuffedUI Configuration)\n|cffc41f3b/rl|r (Reloads the UI)\n|cffc41f3b/luaerror|r (Show/Hide Lua-error)\n|cffc41f3b/dfaq|r (DuffedUI FAQ, You read it just ;))",
 		["content5text2"] = "",
 
 		["content6title"] = "|cffc41f3bKeybinding|r",
@@ -331,7 +331,7 @@ if D.Client == "zhTW" then
 		["content7text2"] = "",
 
 		["content8title"] = "|cffc41f3bBags|r",
-		["content8text1"] = "",
+		["content8text1"] = "The bags you are managing easily via the DuffedUI configuration menu. Press the ESC key -> DuffedUI, or open the menu via chat input with |cffc41f3b/dc|r or |cffc41f3b/duffedui|r. About the tab 'bags' in the left pane, you will receive a variety of configuration options for your bags.\n\nTip: Right-clicking on the little 'X' at the top of the bag, you can replace your bag. The button 'Clean' sort your bags. This tip also works with the bank.",
 		["content8text2"] = "",
 
 		["content9title"] = "|cffc41f3bAddons & Skins|r",

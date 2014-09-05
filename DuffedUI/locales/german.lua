@@ -313,14 +313,14 @@ if D.Client == "deDE" then
 
 		["content3title"] = "|cffc41f3bEinheitenfenster|r",
 		["content3text1"] = "Die Einheitenfenster bilden das Kernstück von DuffedUi und lassen sich individuell konfigurieren, sowie nach Deinen Vorstellungen plazieren.\nVorgefertigt gibt es drei verschiedene Layouts, die Du über das DuffedUI-Konfigurationsmenü auswählen kannst.\nJedes der drei Layouts lässt sich Deinen Wünschen entsprechend weiter anpassen.\n\nÖffne das DuffedUI Konfigurationsmenü. Entweder per ESC ->DuffedUI, oder per direkter Chateingabe mit /dc.\nNun wähle links den Reiter 'Einheitenfenster aus und arbeite Dich durch das recht unfangreiche Angebot an Auswahlmöglichkeiten.",
-		["content3text2"] = "Des Weiteren hast Du die Möglichkeit alle Einheitenfester nach Deinen Wünschen zu verschieben. Benutzte hierzu entweder den Chatbefehl /moveui, oder klick im rechten Chatbereich auf das kleine '+' und danach auf das aufploppende 'M'.",		
+		["content3text2"] = "Des Weiteren hast Du die Möglichkeit alle Einheitenfester nach Deinen Wünschen zu verschieben. Benutzte hierzu entweder den Chatbefehl /moveui, oder klick im rechten Chatbereich auf das kleine '+' und danach auf das aufploppende 'M'.",
 
 		["content4title"] = "|cffc41f3bDuffedUI Chat|r",
 		["content4text1"] = "Zum Chat gibt es eigentlich nicht viel zu sagen. Es wird der normale Blizzard Chat verwendet und der UI vom Aussehen her angepasst.\nDas Beutefenster ist entkoppelt und fest im rechten Chat verankert.\n\nWie bei der BlizzardUI kannst Du per Rechtsklick auf einen Chatreiter (z.B. G,S,W) die Schriftgröße ändern.\n\nUm die Emote aufzurufen, klicke auf das kleine 'E' am rechten, oberen Rand, des linken Chatframes.\n\nDes Weiteren kannst Du den Inhalt des linken und/oder rechten Chat kopieren, indem Du auf das jeweilige, kleine 'Blattsymbol klickst. Die Kopierfunktion nutzt Du wie gewohnt per STRG + C zum Kopieren und zum Einfügen, der Chatnachrichten, mittels STRG + V.",
 		["content4text2"] = "",
 
 		["content5title"] = "|cffc41f3bUI Chatbefehle|r",
-		["content5text1"] = "Folgende Chatbefehle stehen Dir zur Verfügung:\n\n/install ,oder /reset (Neuinstallation)\n/rc (Bereitschaftscheck)\n/moveui (Verschieben der UI Elemente)\n/dc (DuffedUI Konfiguration)\n/rl (Ui neuladen)\n/luaerror (Lua Fehler anzeigen/verbergen)\n/dfaq (DuffedUI FAQ, Du liest es gerade :-))",
+		["content5text1"] = "Folgende Chatbefehle stehen Dir zur Verfügung:\n\n|cffc41f3b/install|r oder |cffc41f3b/reset|r (Neuinstallation)\n|cffc41f3b/rc|r (Bereitschaftscheck)\n|cffc41f3b/moveui|r (Verschieben der UI Elemente)\n|cffc41f3b/dc|r oder |cffc41f3b/duffedui|r (DuffedUI Konfiguration)\n|cffc41f3b/rl|r (Ui neuladen)\n|cffc41f3b/luaerror|r (Lua Fehler anzeigen/verbergen)\n|cffc41f3b/dfaq|r (DuffedUI FAQ, Du liest es gerade ;))",
 		["content5text2"] = "",
 
 		["content6title"] = "|cffc41f3bTastaturbelegung|r",
@@ -332,7 +332,7 @@ if D.Client == "deDE" then
 		["content7text2"] = "Am rechten Rand der Minimap findest Du die Raidbuffübersicht. Hier kansnt Du ablesen, ob alle notwendigen Buffs gezaubert wurden, oder welcher noch fehlt. Um Dir eine detailierte Übersicht der Buffs anzeigen zu lassen, klicke auf das kleine grüne '+' unter der Raidbuffübersicht.",		
 
 		["content8title"] = "|cffc41f3bTaschen|r",
-		["content8text1"] = "Die Taschen verwaltest Du bequem über das DuffedUI Konfigurationsmenü. Drücke die Taste ESC ->DuffedUI, oder öffne das Menü per Chateingabe mit /dc. Über den Reiter 'Taschen' im linken Fenster erhälst Du eine Vielzahl von Einstellungsmöglichkeiten für Deine Taschen.\n\nTipp: Durch einen Rechtsklick auf das kleine 'X' am oberen Rand der Tasche, kannst Du Deine Beutel austauschen. Der Knopf 'Bereinigen' sortiert deine Taschen. Dieser Tippfunktioniert auch mit der Bank.",
+		["content8text1"] = "Die Taschen verwaltest Du bequem über das DuffedUI Konfigurationsmenü. Drücke die Taste ESC ->DuffedUI, oder öffne das Menü per Chateingabe mit |cffc41f3b/dc|r oder |cffc41f3b/duffedui|r. Über den Reiter 'Taschen' im linken Fenster erhälst Du eine Vielzahl von Einstellungsmöglichkeiten für Deine Taschen.\n\nTipp: Durch einen Rechtsklick auf das kleine 'X' am oberen Rand der Tasche, kannst Du Deine Beutel austauschen. Der Knopf 'Bereinigen' sortiert deine Taschen. Dieser Tipp funktioniert auch mit der Bank.",
 		["content8text2"] = "",
 
 		["content9title"] = "|cffc41f3bAddons & Skins|r",

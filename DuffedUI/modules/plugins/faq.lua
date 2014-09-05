@@ -1,8 +1,8 @@
 local D, C, L = unpack(select(2, ...))
 
-local FONT_TITLE = { C["media"]["font"], 14, "OUTLINE" }
-local FONT_HEADLINE = { C["media"]["font"], 13, "OUTLINE" }
-local FONT_TEXT = { C["media"]["font"], 12, "OUTLINE" }
+local FONT_TITLE = { C["media"]["font"], 14, "THINOUTLINE" }
+local FONT_HEADLINE = { C["media"]["font"], 13, "THINOUTLINE" }
+local FONT_TEXT = { C["media"]["font"], 11, "THINOUTLINE" }
 
 --------------------------------------------------
 -- Main Frame
