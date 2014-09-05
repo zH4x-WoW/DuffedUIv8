@@ -11,6 +11,7 @@ local filter = C["auras"].consolidate
 local sexID = UnitSex("player")
 local sex = "male"
 local race = D.MyRace
+local font = D.Font(C["font"].auras)
 
 if sexID == 3 or race == "Pandaren" then sex = "female" end -- look like they forgot to include male icon in MoP for pandaren
 if race == "Scourge" then race = "Undead" end
@@ -189,7 +190,7 @@ local Skin = function(self)
 	self.Icon = Icon
 
 	local Count = self:CreateFontString(nil, "OVERLAY")
-	Count:SetFontObject(NumberFontNormal)
+	Count:SetFontObject(font)
 	Count:SetPoint("TOP", self, 1, -4)
 	self.Count = Count
 
@@ -207,8 +208,7 @@ local Skin = function(self)
 		self.Bar = Bar
 
 		local Duration = self:CreateFontString(nil, "OVERLAY")
-		local font, size, flags = C["media"].font, 11, "OUTLINE"
-		Duration:SetFont(font, size, flags)
+		Duration:SetFontObject(font)
 		Duration:SetPoint("BOTTOM", 0, -17)
 		self.Duration = Duration
 

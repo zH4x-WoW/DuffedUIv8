@@ -6,8 +6,9 @@ local Stat = CreateFrame("Frame", "DuffedUIStatBlock")
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
 
+local font = D.Font(C["font"].datatext)
 local Text  = Stat:CreateFontString("DuffedUIStatBlockText", "OVERLAY")
-Text:SetFont(C["media"].font, C["datatext"].fontsize)
+Text:SetFontObject(font)
 D.DataTextPosition(C["datatext"].block, Text)
 
 local format = string.format
@@ -20,10 +21,8 @@ local function Update(self, t)
 	int = int - t
 	if int > 0 then return end
 
-	Text:SetFormattedText(displayFloat, STAT_BLOCK..": ", GetBlockChance())
-
+	Text:SetFormattedText(displayFloat, STAT_BLOCK .. ": ", GetBlockChance())
 	self:SetAllPoints(Text)
-
 	int = 2
 end
 

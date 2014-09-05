@@ -8,6 +8,14 @@ C["general"] = {
 	["classcolor"] = true,
 }
 
+C["font"] = {
+	["actionbars"] = "DuffedUI",
+	["auras"] = "DuffedUI",
+	["classtimer"] = "DuffedUI",
+	["ses"] = "DuffedUI",
+	["datatext"] = "DuffedUI",
+}
+
 C["unitframes"] = {
 	["enable"] = true,
 	["layout"] = 1,

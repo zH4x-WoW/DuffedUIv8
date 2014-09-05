@@ -6,8 +6,9 @@ local Stat = CreateFrame("Frame", "DuffedUIStatParry")
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
 
+local font = D.Font(C["font"].datatext)
 local Text  = Stat:CreateFontString("DuffedUIStatParryText", "OVERLAY")
-Text:SetFont(C["media"].font, C["datatext"].fontsize)
+Text:SetFontObject(font)
 D.DataTextPosition(C["datatext"].parry, Text)
 
 local format = string.format
@@ -21,9 +22,7 @@ local function Update(self, t)
 	if int > 0 then return end
 
 	Text:SetFormattedText(displayFloat, STAT_PARRY..": ", GetParryChance())
-
 	self:SetAllPoints(Text)
-
 	int = 2
 end
 

@@ -12,8 +12,9 @@ if C["datatext"].power and C["datatext"].power > 0 then
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
+	local font = D.Font(C["font"].datatext)
 	local Text  = Stat:CreateFontString("DuffedUIStatPowerText", "OVERLAY")
-	Text:SetFont(C["media"].font, C["datatext"].fontsize)
+	Text:SetFontObject(font)
 	D.DataTextPosition(C["datatext"].power, Text)
 
 	local int = 1

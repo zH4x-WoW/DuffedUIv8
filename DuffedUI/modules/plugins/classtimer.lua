@@ -26,6 +26,7 @@ local PLAYER_DEBUFF_COLOR = nil
 local TARGET_BAR_COLOR = C["classtimer"].targetbuffcolor
 local TARGET_DEBUFF_COLOR = C["classtimer"].targetdebuffcolor
 local TRINKET_BAR_COLOR = C["classtimer"].trinketcolor
+local font = D.Font(C["font"].classtimer)
 
 local SORT_DIRECTION = true
 local TENTHS_TRESHOLD = 1
@@ -826,7 +827,7 @@ do
 			result.icon = icon
 
 			local stacks = result:CreateFontString(nil, "OVERLAY", nil)
-			stacks:SetFont(C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
+			stacks:SetFontObject(font)
 			stacks:SetShadowColor(0, 0, 0)
 			stacks:SetShadowOffset(1.25, -1.25)
 			stacks:SetJustifyH("RIGHT")
@@ -860,7 +861,7 @@ do
 			end
 
 			local name = bar:CreateFontString(nil, "OVERLAY", nil)
-			name:SetFont(C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
+			name:SetFontObject(font)
 			name:SetShadowColor(0, 0, 0)
 			name:SetShadowOffset(1.25, -1.25)
 			name:SetJustifyH("LEFT")
@@ -869,7 +870,7 @@ do
 			result.name = name
 
 			local time = bar:CreateFontString(nil, "OVERLAY", nil)
-			time:SetFont(C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
+			time:SetFontObject(font)
 			time:SetJustifyH("RIGHT")
 			time:Point("LEFT", name, "RIGHT", 0, 0)
 			time:Point("RIGHT", bar, "RIGHT", -TEXT_MARGIN, 0)

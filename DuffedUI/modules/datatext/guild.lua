@@ -29,8 +29,9 @@ local officerNoteString = "  o: '%s'"
 local guildTable, guildXP, guildMotD = {}, {}, ""
 local totalOnline = 0
 
+local font = D.Font(C["font"].datatext)
 local Text = Stat:CreateFontString("DuffedUIStatGuildText", "OVERLAY")
-Text:SetFont(C["media"].font, C["datatext"].fontsize)
+Text:SetFontObject(font)
 D.DataTextPosition(C["datatext"].guild, Text)
 
 local function BuildGuildTable()

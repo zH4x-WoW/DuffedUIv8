@@ -3,6 +3,7 @@ if not C["actionbar"].enable == true then return end
 
 local _G = _G
 local sub, replace = string.sub, string.gsub
+local font = D.Font(C["font"].actionbars)
 
 function D.StyleActionBarButton(self)
 	local name = self:GetName()
@@ -41,11 +42,11 @@ function D.StyleActionBarButton(self)
 
 	if Button.isSkinned then return end
 
-	Count:SetFont(C["media"].font, 11, "OUTLINE")
+	Count:SetFontObject(font)
 
 	if Btname then
 		if C["actionbar"].macro then
-			Btname:SetFont(C["media"].font, 10)
+			Btname:SetFontObject(font)
 			Btname:ClearAllPoints()
 			Btname:SetPoint("BOTTOM", 1, 1)
 		else
@@ -57,7 +58,7 @@ function D.StyleActionBarButton(self)
 	if BtnBG then BtnBG:Kill() end
  
 	if C["actionbar"].hotkey then
-		HotKey:SetFont(C["media"].font, 11, "THINOUTLINE")
+		HotKey:SetFontObject(font)
 		HotKey:SetShadowOffset(0, 0)
 		HotKey.ClearAllPoints = D.Dummy
 		HotKey.SetPoint = D.Dummy

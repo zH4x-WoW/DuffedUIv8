@@ -13,8 +13,9 @@ if C["datatext"].bonusarmor and C["datatext"].bonusarmor > 0 then
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
+	local font = D.Font(C["font"].datatext)
 	local Text  = Stat:CreateFontString("DuffedUIStatBonusArmorText", "OVERLAY")
-	Text:SetFont(C["media"].font, C["datatext"].fontsize)
+	Text:SetFontObject(font)
 	D.DataTextPosition(C["datatext"].bonusarmor, Text)
 
 	local function Update(self)

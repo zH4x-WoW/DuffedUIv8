@@ -14,8 +14,9 @@ if C["datatext"].smf and C["datatext"].smf > 0 then
 	local scolor1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	local scolor2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
+	local font = D.Font(C["font"].datatext)
 	local Text  = DuffedUIInfoLeft:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(C["media"].font, C["datatext"].fontsize)
+	Text:SetFontObject(font)
 	D.DataTextPosition(C["datatext"].smf, Text)
 
 	local bandwidthString = "%.2f Mbps"

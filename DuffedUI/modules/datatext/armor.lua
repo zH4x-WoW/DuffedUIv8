@@ -2,7 +2,7 @@ local D, C, L = unpack(select(2, ...))
 
 if C["datatext"].armor and C["datatext"].armor > 0 then
 	local effectiveArmor
-	
+
 	local Stat = CreateFrame("Frame", "DuffedUIStatArmor")
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
@@ -11,14 +11,14 @@ if C["datatext"].armor and C["datatext"].armor > 0 then
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
+	local font = D.Font(C["font"].datatext)
 	local Text  = Stat:CreateFontString("DuffedUIStatArmorText", "OVERLAY")
-	Text:SetFont(C["media"].font, C["datatext"].fontsize)
+	Text:SetFontObject(font)
 	D.DataTextPosition(C["datatext"].armor, Text)
 
 	local function Update(self)
 		effectiveArmor = select(2, UnitArmor("player"))
 		Text:SetText(Stat.Color2 .. (effectiveArmor) .. "|r " .. Stat.Color1 .. ARMOR .. "|r")
-		--Setup Armor Tooltip
 		self:SetAllPoints(Text)
 	end
 

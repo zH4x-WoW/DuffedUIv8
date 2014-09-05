@@ -9,14 +9,15 @@ if C["datatext"].dur and C["datatext"].dur > 0 then
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
+	local font = D.Font(C["font"].datatext)
 	local Text  = Stat:CreateFontString("DuffedUIStatDurabilityText", "OVERLAY")
-	Text:SetFont(C["media"].font, C["datatext"].fontsize)
+	Text:SetFontObject(font)
 	D.DataTextPosition(C["datatext"].dur, Text)
 
 	local function OnEvent(self)
 		local Total = 0
 		local current, max
-		
+
 		for i = 1, 11 do
 			if GetInventoryItemLink("player", L.Slots[i][1]) ~= nil then
 				current, max = GetInventoryItemDurability(L.Slots[i][1])
@@ -27,7 +28,7 @@ if C["datatext"].dur and C["datatext"].dur > 0 then
 			end
 		end
 		table.sort(L.Slots, function(a, b) return a[3] < b[3] end)
-		
+
 		if Total > 0 then
 			Text:SetText(Stat.Color2 .. floor(L["Slots"][1][3] * 100) .. "% |r" .. Stat.Color1 .. ARMOR .. "|r")
 		else

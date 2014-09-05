@@ -1,11 +1,5 @@
 local D, C, L = unpack(select(2, ...)) 
 
--- NOTE : I seriously dont know what is avoidance and how the fuck it work in MoP
--- If someone can look and update this datatext if value in game are not ok, it will be awesome!
-
---------------------------------------------------------------------
--- Player Avoidance
---------------------------------------------------------------------
 if C["datatext"].avd and C["datatext"].avd > 0 then
 	local dodge, parry, block, avoidance, targetlv, playerlv, basemisschance, leveldifference
 	local Stat = CreateFrame("Frame", "DuffedUIStatAvoidance")
@@ -16,10 +10,11 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
+	local font = D.Font(C["font"].datatext)
 	local Text  = Stat:CreateFontString("DuffedUIStatAvoidanceText", "OVERLAY")
-	Text:SetFont(C["media"].font, C["datatext"].fontsize)
+	Text:SetFontObject(font)
 	D.DataTextPosition(C["datatext"].avd, Text)
-	
+
 	local targetlv, playerlv
 
 	local function Update(self)
@@ -40,10 +35,7 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 			basemisschance = 5
 			leveldifference = 0
 		end
-		
-		if D.MyRace == "NightElf" then
-			basemisschance = basemisschance + 2
-		end
+		if D.MyRace == "NightElf" then basemisschance = basemisschance + 2 end
 
 		if leveldifference >= 0 then
 			dodge = (GetDodgeChance() - leveldifference * .2)
@@ -60,7 +52,6 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 		end
 		self:SetAllPoints(Text)
 	end
-
 
 	Stat:RegisterEvent("UNIT_AURA")
 	Stat:RegisterEvent("UNIT_INVENTORY_CHANGED")

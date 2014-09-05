@@ -8,8 +8,9 @@ if C["datatext"].wowtime and C["datatext"].wowtime > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 
+	local font = D.Font(C["font"].datatext)
 	local Text  = DuffedUIInfoLeft:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(C["media"].font, C["datatext"].fontsize)
+	Text:SetFontObject(font)
 	D.DataTextPosition(C["datatext"].wowtime, Text)
 
 	local played = 0

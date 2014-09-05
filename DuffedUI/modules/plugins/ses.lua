@@ -5,6 +5,7 @@ local hoverovercolor = {.4, .4, .4}
 local cp = "|cff319f1b"
 local cm = "|cff9a1212"
 local dr, dg, db = unpack({ .4, .4, .4 })
+local font = D.Font(C["font"].ses)
 
 local Enablegear = C["misc"].sesenablegear
 local Autogearswap = C["misc"].sesgearswap
@@ -73,7 +74,7 @@ else
 end
 spec.t = spec:CreateFontString(spec, "OVERLAY")
 spec.t:SetPoint("CENTER")
-spec.t:SetFont(C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
+spec.t:SetFontObject(font)
 
 local int = 1
 local function Update(self, t)
@@ -207,7 +208,7 @@ toggle:EnableMouse(true)
 toggle:RegisterForClicks("AnyUp")
 toggle.t = toggle:CreateFontString(nil, "OVERLAY")
 toggle.t:SetPoint("CENTER", 0, 0)
-toggle.t:SetFont(C["media"].font, C["datatext"].fontsize)
+toggle.t:SetFontObject(font)
 toggle.t:SetText(cp .. "+|r")
 toggle:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(hoverovercolor)) end)
 toggle:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)

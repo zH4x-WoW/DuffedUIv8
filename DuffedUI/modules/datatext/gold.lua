@@ -15,8 +15,9 @@ Stat.Option = C["datatext"]["gold"]
 Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
+local font = D.Font(C["font"].datatext)
 local Text = Stat:CreateFontString("DuffedUIDataInfoGoldText", "OVERLAY")
-Text:SetFont(C["media"].font, C["datatext"].fontsize)
+Text:SetFontObject(font)
 D.DataTextPosition(C["datatext"].gold, Text)
 
 local Profit = 0

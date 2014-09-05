@@ -52,4 +52,5 @@ D.DuffedCredits = {
 	"Ginji",
 	"Floppiflappsi",
 	"Slideroh",
+	"McTrap",
 }
