@@ -8,9 +8,7 @@ local x, y = 150, -150
 local width, height = 200, 15
 local spacing = -5
 local icon_size = 15
-local font = C["media"].font
-local font_size = 11
-local font_style = "OUTLINE"
+local font = D.Font(C["font"].rcd)
 local show_icon = true
 local texture = C["media"].normTex
 
@@ -65,7 +63,7 @@ rcda:SetTemplate("Default")
 rcda:SetClampedToScreen(true)
 rcda:SetMovable(true)
 rcda:SetBackdropBorderColor(1,0,0)
-rcda.text = D.SetFontString(rcda, font, font_size)
+rcda.text = D.SetFontString(rcda, C["media"].font, 11)
 rcda.text:SetPoint("CENTER")
 rcda.text:SetText(L["move"]["rcd"])
 rcda:SetFrameLevel(10)
@@ -73,16 +71,12 @@ rcda:Hide()
 tinsert(D.AllowFrameMoving, rcda)
 
 local FormatTime = function(time)
-	if time >= 60 then
-		return sformat('%.2d:%.2d', floor(time / 60), time % 60)
-	else
-		return sformat('%.2d', time)
-	end
+	if time >= 60 then return sformat('%.2d:%.2d', floor(time / 60), time % 60) else return sformat('%.2d', time) end
 end
 
 local CreateFS = CreateFS or function(frame)
 	local fstring = frame:CreateFontString(nil, 'OVERLAY', 'GameFontHighlight')
-	fstring:SetFont(font, font_size, font_style)
+	fstring:SetFontObject(font)
 	fstring:SetShadowColor(0, 0, 0, 1)
 	fstring:SetShadowOffset(0.5, -0.5)
 	return fstring
@@ -101,11 +95,7 @@ end
 local UpdatePositions = function()
 	for i = 1, #bars do
 		bars[i]:ClearAllPoints()
-		if i == 1 then
-			bars[i]:SetPoint("TOPLEFT", rcda, "TOPLEFT", 0, 0)
-		else
-			bars[i]:SetPoint("TOPLEFT", bars[i-1], "BOTTOMLEFT", 0, spacing)
-		end
+		if i == 1 then bars[i]:SetPoint("TOPLEFT", rcda, "TOPLEFT", 0, 0) else bars[i]:SetPoint("TOPLEFT", bars[i-1], "BOTTOMLEFT", 0, spacing) end
 		bars[i].id = i
 	end
 end
@@ -134,9 +124,7 @@ local OnEnter = function(self)
 	GameTooltip:Show()
 end
 
-local OnLeave = function(self)
-	GameTooltip:Hide()
-end
+local OnLeave = function(self) GameTooltip:Hide() end
 
 local OnMouseDown = function(self, button)
 	if button == "LeftButton" then
@@ -169,15 +157,15 @@ local CreateBar = function()
 	bar.status:SetStatusBarTexture(texture)
 	bar.status:SetMinMaxValues(0, 100)
 	bar.status:SetFrameLevel(bar:GetFrameLevel()-1)
-	
+
 	bar.left = CreateFS(bar)
 	bar.left:SetPoint('LEFT', bar.status, 2, 0)
 	bar.left:SetJustifyH('LEFT')
-	
+
 	bar.right = CreateFS(bar)
 	bar.right:SetPoint('RIGHT', bar.status, -2, 0)
 	bar.right:SetJustifyH('RIGHT')
-	
+
 	CreateBG(bar.icon)
 	CreateBG(bar.status)
 	return bar
@@ -186,9 +174,7 @@ end
 local StartTimer = function(name, spellId)
 	local spell, rank, icon = GetSpellInfo(spellId)
 	for _, v in pairs(bars) do
-		if v.name == name and v.spell == spell then
-			return
-		end
+		if v.name == name and v.spell == spell then return end
 	end
 	local bar = CreateBar()
 	bar.endTime = GetTime() + spells[spellId]
@@ -202,10 +188,9 @@ local StartTimer = function(name, spellId)
 	end
 	bar.spell = spell
 	bar:Show()
-	
+
 	local color = RAID_CLASS_COLORS[select(2, UnitClass(name))]
 	bar.status:SetStatusBarColor(color.r, color.g, color.b)
-	
 	bar:SetScript("OnUpdate", BarUpdate)
 	bar:EnableMouse(true)
 	bar:SetScript("OnEnter", OnEnter)
@@ -221,15 +206,10 @@ local OnEvent = function(self, event, ...)
 		if band(sourceFlags, filter) == 0 then return end
 		if eventType == "SPELL_RESURRECT" or eventType == "SPELL_CAST_SUCCESS" or eventType == "SPELL_AURA_APPLIED" then
 			local spellId = select(12, ...)
-			--sourceName = sourceName:gsub(" - %w+", "")
-			if spells[spellId] and show[select(2, IsInInstance())] then
-				StartTimer(sourceName, spellId)
-			end
+			if spells[spellId] and show[select(2, IsInInstance())] then StartTimer(sourceName, spellId) end
 		end
 	elseif event == "ZONE_CHANGED_NEW_AREA" and select(2, IsInInstance()) == "arena" then
-		for k, v in pairs(bars) do
-			StopTimer(v)
-		end
+		for k, v in pairs(bars) do StopTimer(v) end
 	end
 end
 

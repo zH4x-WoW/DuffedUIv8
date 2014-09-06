@@ -15,6 +15,8 @@ C["font"] = {
 	["ses"] = "DuffedUI",
 	["datatext"] = "DuffedUI",
 	["unitframes"] = "DuffedUI",
+	["scd"] = "DuffedUI",
+	["rcd"] = "DuffedUI",
 }
 
 C["unitframes"] = {
