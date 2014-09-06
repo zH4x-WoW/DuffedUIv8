@@ -32,7 +32,7 @@ local BuffReminder1 = {
 		19740, -- Blessing of Might
 		20217, -- Blessing of Kings
 		90363, -- Embrace of the Shale Spider
-		117666, -- Legacy of the Emperor
+		115921, -- Legacy of the Emperor
 	},
 	['PRIEST'] = {
 		21562, -- PW: Fortitude
@@ -144,9 +144,7 @@ local ThrottleTime, TimeStart = 30, 0
 local function SoundThrottle(self, elapsed)
 	TimeStart = TimeStart + elapsed
 	if TimeStart > ThrottleTime then
-		if PlaySound == false then
-			PlaySound = true
-		end
+		if PlaySound == false then PlaySound = true end
 		TimeStart = 0
 	end
 end

@@ -12,6 +12,7 @@ ns._Headers = {}
 local normTex = C["media"].normTex
 local glowTex = C["media"].glowTex
 local bubbleTex = C["media"].bubbleTex
+local font = D.Font(C["font"].unitframes)
 
 local backdrop = {
 	bgFile = C["media"].blank,
@@ -20,7 +21,6 @@ local backdrop = {
 
 --	Layout
 local function Shared(self, unit)
-	-- set our own colors
 	self.colors = D.UnitColor
 
 	self:RegisterForClicks("AnyUp")
@@ -91,7 +91,8 @@ local function Shared(self, unit)
 			self.percHP = percHP
 		end
 
-		health.value = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
+		health.value = health:CreateFontString(nil, "OVERLAY")
+		health.value:SetFontObject(font)
 		health.value:Point("RIGHT", health, "RIGHT", -4, -1)
 		health.PostUpdate = D.PostUpdateHealth
 
@@ -137,7 +138,8 @@ local function Shared(self, unit)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
 
-		power.value = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
+		power.value = health:CreateFontString(nil, "OVERLAY")
+		power.value:SetFontObject(font)
 		if (unit == "player") then power.value:Point("LEFT", health, "LEFT", 4, -1) end
 
 		self.Power = power
@@ -184,7 +186,6 @@ local function Shared(self, unit)
 			ws:SetBackdrop(backdrop)
 			ws:SetBackdropColor(unpack(C["media"].backdropcolor))
 			ws:SetStatusBarColor(205/255, 20/255, 20/255)
-			
 			self.WeakenedSoul = ws
 		end
 
@@ -221,7 +222,8 @@ local function Shared(self, unit)
 			FlashInfo:SetScript("OnUpdate", D.UpdateManaLevel)
 			FlashInfo.parent = self
 			FlashInfo:SetAllPoints(health)
-			FlashInfo.ManaLevel = D.SetFontString(FlashInfo, C["media"].font, 11, "THINOUTLINE")
+			FlashInfo.ManaLevel = FlashInfo:CreateFontString(nil, "OVERLAY")
+			FlashInfo.ManaLevel:SetFontObject(font)
 			FlashInfo.ManaLevel:SetPoint("CENTER", health, "CENTER", 0, 1)
 			self.FlashInfo = FlashInfo
 
@@ -243,15 +245,6 @@ local function Shared(self, unit)
 			self.MasterLooter = MasterLooter
 			self:RegisterEvent("PARTY_LEADER_CHANGED", D.MLAnchorUpdate)
 			self:RegisterEvent("PARTY_MEMBERS_CHANGED", D.MLAnchorUpdate)
-
-			if D.Class == "DRUID" then
-				local DruidManaUpdate = CreateFrame("Frame")
-				DruidManaUpdate:SetScript("OnUpdate", function() D.UpdateDruidManaText(self) end)
-				local DruidManaText = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
-				DruidManaText:Point("LEFT", power.value, "RIGHT", 5, 0)
-				DruidManaText:SetTextColor( 1, .49, .04 )
-				self.DruidManaText = DruidManaText
-			end
 
 			if (D.Class == "WARRIOR" or D.Class == "DEATHKNIGHT" or D.Class == "MONK" or D.Class == "PRIEST") and C["unitframes"].showstatuebar then
 				local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
@@ -280,7 +273,8 @@ local function Shared(self, unit)
 				if D.Class == "DRUID" then
 					local DruidManaUpdate = CreateFrame("Frame")
 					DruidManaUpdate:SetScript("OnUpdate", function() D.UpdateDruidManaText(self) end)
-					local DruidManaText = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
+					local DruidManaText = health:CreateFontString(nil, "OVERLAY")
+					DruidManaText:SetFontObject(font)
 					DruidManaText:Point("LEFT", power.value, "RIGHT", 5, 0)
 					DruidManaText:SetTextColor( 1, .49, .04 )
 					self.DruidManaText = DruidManaText
@@ -372,7 +366,7 @@ local function Shared(self, unit)
 			local Name = health:CreateFontString(nil, "OVERLAY")
 			Name:Point("LEFT", health, "LEFT", 4, 0)
 			Name:SetJustifyH("LEFT")
-			Name:SetFont(C["media"].font, 11, "THINOUTLINE")
+			Name:SetFontObject(font)
 			Name:SetShadowOffset(1.25, -1.25)
 			self:Tag(Name, '[DuffedUI:getnamecolor][DuffedUI:namelong] [DuffedUI:diffcolor][level] [shortclassification]')
 			self.Name = Name
@@ -463,12 +457,14 @@ local function Shared(self, unit)
 			castbar.PostCastStart = D.CastBar
 			castbar.PostChannelStart = D.CastBar
 
-			castbar.time = D.SetFontString(castbar, C["media"].font, 11, "THINOUTLINE")
+			castbar.time = castbar:CreateFontString(nil, "OVERLAY")
+			castbar.time:SetFontObject(font)
 			castbar.time:Point("RIGHT", castbar, "RIGHT", -5, 0)
 			castbar.time:SetTextColor(0.84, 0.75, 0.65)
 			castbar.time:SetJustifyH("RIGHT")
 
-			castbar.Text = D.SetFontString(castbar, C["media"].font, 11, "THINOUTLINE")
+			castbar.Text = castbar:CreateFontString(nil, "OVERLAY")
+			castbar.Text:SetFontObject(font)
 			castbar.Text:Point("LEFT", castbar, "LEFT", 6, 0)
 			castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 			castbar:CreateBackdrop()
@@ -648,7 +644,7 @@ local function Shared(self, unit)
 		self:Tag(Name, '[DuffedUI:getnamecolor][DuffedUI:nameshort] [DuffedUI:diffcolor][level] [shortclassification]')
 		Name:SetPoint("CENTER", health, "CENTER", 2, 2)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(C["media"].font, 11, "THINOUTLINE")
+		Name:SetFontObject(font)
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		self.Name = Name
@@ -732,7 +728,8 @@ local function Shared(self, unit)
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 
-		health.value = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
+		health.value =health:CreateFontString(nil, "OVERLAY")
+		health.value:SetFontObject(font)
 		health.value:Point("RIGHT", 0, 1)
 		health.PostUpdate = D.PostUpdateHealth
 
@@ -787,7 +784,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("LEFT", health, "LEFT", 2, 0)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(C["media"].font, 11, "THINOUTLINE")
+		Name:SetFontObject(font)
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 
@@ -820,13 +817,15 @@ local function Shared(self, unit)
 
 		castbar:CreateBackdrop()
 
-		castbar.time = D.SetFontString(castbar, C["media"].font, 11, "THINOUTLINE")
+		castbar.time = castbar:CreateFontString(nil, "OVERLAY")
+		castbar.time:SetFontObject(font)
 		castbar.time:Point("RIGHT", castbar, "RIGHT", -4, 0)
 		castbar.time:SetTextColor(0.84, 0.75, 0.65)
 		castbar.time:SetJustifyH("RIGHT")
 		castbar.CustomTimeText = D.CustomTimeText
 
-		castbar.Text = D.SetFontString(castbar, C["media"].font, 11, "THINOUTLINE")
+		castbar.Text = castbar:CreateFontString(nil, "OVERLAY")
+		castbar.Text:SetFontObject(font)
 		castbar.Text:SetPoint("LEFT", castbar, "LEFT", 4, 0)
 		castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 
@@ -900,7 +899,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, -1)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(C["media"].font, 11, "THINOUTLINE")
+		Name:SetFontObject(font)
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 
@@ -934,7 +933,8 @@ local function Shared(self, unit)
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 
-		health.value = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
+		health.value = health:CreateFontString(nil, "OVERLAY")
+		health.value:SetFontObject(font)
 		health.value:Point("LEFT", 2, 0.5)
 		health.PostUpdate = D.PostUpdateHealth
 
@@ -983,7 +983,8 @@ local function Shared(self, unit)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
 
-		power.value = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
+		power.value = power:CreateFontString(nil, "OVERLAY")
+		power.value:SetFontObject(font)
 		power.value:Point("RIGHT", -2, 0.5)
 		power.PreUpdate = D.PreUpdatePower
 		power.PostUpdate = D.PostUpdatePower
@@ -994,7 +995,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 1)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(C["media"].font, 11, "THINOUTLINE")
+		Name:SetFontObject(font)
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		Name.frequentUpdates = 0.2
@@ -1066,11 +1067,13 @@ local function Shared(self, unit)
 		castbar:SetPoint("BOTTOM", 0, -21)
 		castbar:CreateBackdrop()
 
-		castbar.Text = D.SetFontString(castbar, C["media"].font, 11, "THINOUTLINE")
+		castbar.Text = castbar:CreateFontString(nil, "OVERLAY")
+		castbar.Text:SetFontObject(font)
 		castbar.Text:Point("LEFT", castbar, "LEFT", 4, 0)
 		castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 
-		castbar.time = D.SetFontString(castbar, C["media"].font, 11, "THINOUTLINE")
+		castbar.time = castbar:CreateFontString(nil, "OVERLAY")
+		castbar.time:SetFontObject(font)
 		castbar.time:Point("RIGHT", castbar, "RIGHT", -4, 0)
 		castbar.time:SetTextColor(0.84, 0.75, 0.65)
 		castbar.time:SetJustifyH("RIGHT")
@@ -1142,7 +1145,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 1)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(C["media"].font, 11, "THINOUTLINE")
+		Name:SetFontObject(font)
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 
@@ -1168,12 +1171,12 @@ target:Point("BOTTOM", UIParent, "BOTTOM", 340, 240)
 target:Size(218, 44)
 
 local tot = oUF:Spawn('targettarget', "DuffedUITargetTarget")
-tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMRIGHT", 0, -6)
+tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMRIGHT", -1, -8)
 tot:Size(129, 36)
 
 local pet = oUF:Spawn('pet', "DuffedUIPet")
 pet:SetParent(DuffedUIPetBattleHider)
-pet:SetPoint("TOPLEFT", DuffedUIPlayer, "BOTTOMLEFT", 0, -6)
+pet:SetPoint("TOPLEFT", DuffedUIPlayer, "BOTTOMLEFT", 1, -8)
 pet:Size(129, 36)
 
 local focus = oUF:Spawn('focus', "DuffedUIFocus")

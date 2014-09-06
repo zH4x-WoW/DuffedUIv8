@@ -14,6 +14,7 @@ C["font"] = {
 	["classtimer"] = "DuffedUI",
 	["ses"] = "DuffedUI",
 	["datatext"] = "DuffedUI",
+	["unitframes"] = "DuffedUI",
 }
 
 C["unitframes"] = {

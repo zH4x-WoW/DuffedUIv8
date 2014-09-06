@@ -8,7 +8,7 @@ assert(oUF, "DuffedUI was unable to locate oUF install.")
 ns._Objects = {}
 ns._Headers = {}
 
-local font, fontsize, fontflag = C["media"].font, 11, "THINOUTLINE"
+local font = D.Font(C["font"].unitframes)
 local normTex = C["media"].normTex
 local backdrop = {
 	bgFile = C["media"].blank,
@@ -38,7 +38,7 @@ local function Shared(self, unit)
 
 	health.value = health:CreateFontString(nil, "OVERLAY")
 	if not unit:find("partypet") then health.value:Point("BOTTOM", health, 1, 2) end
-	health.value:SetFont(font, fontsize, fontflag)
+	health.value:SetFontObject(font)
 	self.Health.value = health.value
 
 	health.PostUpdate = D.PostUpdateHealthRaid
@@ -94,7 +94,7 @@ local function Shared(self, unit)
 	end
 
 	local name = health:CreateFontString(nil, "OVERLAY")
-	local name = D.SetFontString(health, font, fontsize, fontflag)
+	name:SetFontObject(font)
 	if unit:find("partypet") then name:SetPoint("CENTER") else name:Point("CENTER", health, "TOP", 0, -7) end
 	self:Tag(name, "[DuffedUI:getnamecolor][DuffedUI:nameshort]")
 	self.Name = name
@@ -223,12 +223,13 @@ local function Shared(self, unit)
 		RaidDebuffs.icon:Point("TOPLEFT", 2, -2)
 		RaidDebuffs.icon:Point("BOTTOMRIGHT", -2, 2)
 
-		RaidDebuffs:FontString('time', font, (fontsize - 1), fontflag)
+		RaidDebuffs.time = RaidDebuffs:CreateFontString(nil, "OVERLAY")
+		RaidDebuffs.time:SetFontObject(font)
 		RaidDebuffs.time:Point('CENTER', 1, 0)
 		RaidDebuffs.time:SetTextColor(1, .9, 0)
 
 		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, 'OVERLAY')
-		RaidDebuffs.count:SetFont(font, (fontsize - 2) * D.raidscale, fontflag)
+		RaidDebuffs.count:SetFontObject(font)
 		RaidDebuffs.count:Point('BOTTOMRIGHT', RaidDebuffs, 'BOTTOMRIGHT', 0, 2)
 		RaidDebuffs.count:SetTextColor(1, .9, 0)
 		self.RaidDebuffs = RaidDebuffs

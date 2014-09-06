@@ -69,5 +69,4 @@
 	<!-- plugins -->
 	<Include file="modules\plugins\load_plugins.xml" />
 	<Include file="modules\skins\load_skins.xml" />
-	<Script file="core\dev.lua" />
 </Ui>
