@@ -5,14 +5,14 @@ local font, fontsize, flags = C["media"].font, 11, "THINOUTLINE"
 local barTex, flatTex = C["media"].normTex
 local color = RAID_CLASS_COLORS[D.Class]
 local FactionInfo = {
-	[1] = {{ 170/255, 70/255,  70/255 }, "Hated", "FFaa4646"},
-	[2] = {{ 170/255, 70/255,  70/255 }, "Hostile", "FFaa4646"},
-	[3] = {{ 170/255, 70/255,  70/255 }, "Unfriendly", "FFaa4646"},
-	[4] = {{ 200/255, 180/255, 100/255 }, "Neutral", "FFc8b464"},
-	[5] = {{ 75/255,  175/255, 75/255 }, "Friendly", "FF4baf4b"},
-	[6] = {{ 75/255,  175/255, 75/255 }, "Honored", "FF4baf4b"},
-	[7] = {{ 75/255,  175/255, 75/255 }, "Revered", "FF4baf4b"},
-	[8] = {{ 155/255,  255/255, 155/255 }, "Exalted","FF9bff9b"},
+	[1] = {{ 170/255, 70/255,  70/255 }, L["Xpbar"]["hated"], "FFaa4646"},
+	[2] = {{ 170/255, 70/255,  70/255 }, L["Xpbar"]["hostile"], "FFaa4646"},
+	[3] = {{ 170/255, 70/255,  70/255 }, L["Xpbar"]["unfriendly"], "FFaa4646"},
+	[4] = {{ 200/255, 180/255, 100/255 }, L["Xpbar"]["neutral"], "FFc8b464"},
+	[5] = {{ 75/255,  175/255, 75/255 }, L["Xpbar"]["friendly"], "FF4baf4b"},
+	[6] = {{ 75/255,  175/255, 75/255 }, L["Xpbar"]["honored"], "FF4baf4b"},
+	[7] = {{ 75/255,  175/255, 75/255 }, L["Xpbar"]["revered"], "FF4baf4b"},
+	[8] = {{ 155/255,  255/255, 155/255 }, L["Xpbar"]["exalted"],"FF9bff9b"},
 }
 
 function colorize(r) return FactionInfo[r][3] end
