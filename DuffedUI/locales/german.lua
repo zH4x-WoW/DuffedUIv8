@@ -347,4 +347,25 @@ if D.Client == "deDE" then
 		["content11text1"] = "Normalerweise wirst Du über neue Updates per Ingame Funktion informiert.\nEs erscheint ein Meldung a la 'Deine Version von DuffedUI ist veraltet ...'.\nBesuche uns dann auf der Webseite http://www.duffed.net und lade Dir die neuste Version herunter.",
 		["content11text2"] = "Im Normalfall ist ein drüberkopieren der Dateien aus dem Zip ausreichend.\nGebe nach dem Update der Dateien im Chatfenster '/rl' für ein Neuladen des DuffedUI ein.\n\nSollten keine Fehlermeldungen angezeigt werden, bist Du fertig mit dem Update und kannst weiter zocken. Treten Fehler auf, schliesse das gesamte Spiel und starte es danach neu.",	
 	}
+	
+	L["Xpbar"] = {
+		["xptitle"] = "Erfahrung",
+		["xp"] = "XP: %s/%s (%d%%)",
+		["xpremaining"] = "Benötigt: %s",
+		["xprested"] = "|cffb3e1ffAusgeruht: %s (%d%%)",
+		
+		["fctitle"] = "Ansehen: %s",
+		["standing"] = "Stand: |c",		
+		["fcrep"] = "Ruf: %s/%s (%d%%)",
+		["fcremaining"] = "Verbleibend: %s",
+		
+		["hated"] = "Hasserfüllt",
+		["hostile"] = "Feindseelig",
+		["unfriendly"] = "Unfreundlich",
+		["neutral"] = "Neutral",
+		["friendly"] = "Freundlich",
+		["honored"] = "Wohlwollend",
+		["revered"] = "Respektvoll",
+		["exalted"] = "Ehrfürchtig",	
+	}
 end

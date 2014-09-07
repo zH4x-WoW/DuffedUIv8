@@ -346,4 +346,25 @@ if D.Client == "ruRU" then
 		["content11text1"] = "",
 		["content11text2"] = "",
 	}
+	
+	L["Xpbar"] = {
+		["xptitle"] = "Experience:",
+		["xp"] = "XP: %s/%s (%d%%)",
+		["xpremaining"] = "Remaining: %s",
+		["xprested"] = "|cffb3e1ffRested: %s (%d%%)",
+		
+		["fctitle"] = "Reputation: %s",
+		["standing"] = "Standing: |c",		
+		["fcrep"] = "Rep: %s/%s (%d%%)",
+		["fcremaining"] = "Remaining: %s",
+		
+		["hated"] = "Hated",
+		["hostile"] = "Hostile",
+		["unfriendly"] = "Unfriendly",
+		["neutral"] = "Neutral",
+		["friendly"] = "Friendly",
+		["honored"] = "Honored",
+		["revered"] = "Revered",
+		["exalted"] = "Exalted",
+	}
 end

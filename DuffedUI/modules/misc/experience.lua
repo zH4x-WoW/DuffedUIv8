@@ -5,14 +5,14 @@ local font, fontsize, flags = C["media"].font, 11, "THINOUTLINE"
 local barTex, flatTex = C["media"].normTex
 local color = RAID_CLASS_COLORS[D.Class]
 local FactionInfo = {
-	[1] = {{ 170/255, 70/255,  70/255 }, "Hated", "FFaa4646"},
-	[2] = {{ 170/255, 70/255,  70/255 }, "Hostile", "FFaa4646"},
-	[3] = {{ 170/255, 70/255,  70/255 }, "Unfriendly", "FFaa4646"},
-	[4] = {{ 200/255, 180/255, 100/255 }, "Neutral", "FFc8b464"},
-	[5] = {{ 75/255,  175/255, 75/255 }, "Friendly", "FF4baf4b"},
-	[6] = {{ 75/255,  175/255, 75/255 }, "Honored", "FF4baf4b"},
-	[7] = {{ 75/255,  175/255, 75/255 }, "Revered", "FF4baf4b"},
-	[8] = {{ 155/255,  255/255, 155/255 }, "Exalted","FF9bff9b"},
+	[1] = {{ 170/255, 70/255,  70/255 }, L["Xpbar"]["hated"], "FFaa4646"},
+	[2] = {{ 170/255, 70/255,  70/255 }, L["Xpbar"]["hostile"], "FFaa4646"},
+	[3] = {{ 170/255, 70/255,  70/255 }, L["Xpbar"]["unfriendly"], "FFaa4646"},
+	[4] = {{ 200/255, 180/255, 100/255 }, L["Xpbar"]["neutral"], "FFc8b464"},
+	[5] = {{ 75/255,  175/255, 75/255 }, L["Xpbar"]["friendly"], "FF4baf4b"},
+	[6] = {{ 75/255,  175/255, 75/255 }, L["Xpbar"]["honored"], "FF4baf4b"},
+	[7] = {{ 75/255,  175/255, 75/255 }, L["Xpbar"]["revered"], "FF4baf4b"},
+	[8] = {{ 155/255,  255/255, 155/255 }, L["Xpbar"]["exalted"],"FF9bff9b"},
 }
 
 function colorize(r) return FactionInfo[r][3] end
@@ -114,18 +114,18 @@ local function updateStatus()
 		GameTooltip:SetOwner(mouseFrame, "ANCHOR_TOPLEFT", -2, 5)
 		GameTooltip:ClearLines()
 		if not IsMaxLevel() then
-			GameTooltip:AddLine("Experience:")
-			GameTooltip:AddLine(string.format("XP: %s/%s (%d%%)", D.CommaValue(XP), D.CommaValue(maxXP), (XP / maxXP) * 100))
-			GameTooltip:AddLine(string.format("Remaining: %s", D.CommaValue(maxXP - XP)))
-			if restXP then GameTooltip:AddLine(string.format("|cffb3e1ffRested: %s (%d%%)", D.CommaValue(restXP), restXP / maxXP * 100)) end
+			GameTooltip:AddLine(L["Xpbar"]["xptitle"])
+			GameTooltip:AddLine(string.format(L["Xpbar"]["xp"], D.CommaValue(XP), D.CommaValue(maxXP), (XP / maxXP) * 100))
+			GameTooltip:AddLine(string.format(L["Xpbar"]["xpremaining"], D.CommaValue(maxXP - XP)))
+			if restXP then GameTooltip:AddLine(string.format(L["Xpbar"]["xprested"], D.CommaValue(restXP), restXP / maxXP * 100)) end
 		end
 		if GetWatchedFactionInfo() then
 			local name, rank, min, max, value = GetWatchedFactionInfo()
 			if not IsMaxLevel() then GameTooltip:AddLine(" ") end
-			GameTooltip:AddLine(string.format("Reputation: %s", name))
-			GameTooltip:AddLine(string.format("Standing: |c"..colorize(rank) .. "%s|r", FactionInfo[rank][2]))
-			GameTooltip:AddLine(string.format("Rep: %s/%s (%d%%)", D.CommaValue(value - min), D.CommaValue(max - min), (value - min)/(max - min) * 100))
-			GameTooltip:AddLine(string.format("Remaining: %s", D.CommaValue(max - value)))
+			GameTooltip:AddLine(string.format(L["Xpbar"]["fctitle"], name))
+			GameTooltip:AddLine(string.format(L["Xpbar"]["standing"]..colorize(rank).. " %s|r", FactionInfo[rank][2]))
+			GameTooltip:AddLine(string.format(L["Xpbar"]["fcrep"], D.CommaValue(value - min), D.CommaValue(max - min), (value - min)/(max - min) * 100))
+			GameTooltip:AddLine(string.format(L["Xpbar"]["fcremaining"], D.CommaValue(max - value)))
 		end
 		GameTooltip:Show()
 	end)
