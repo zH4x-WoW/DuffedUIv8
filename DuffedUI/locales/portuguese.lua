@@ -285,7 +285,7 @@ if D.Client == "ptBR" then
 		[11] = {18, "Ranged", 1000}
 	}
 
-	L["Faq"] = {
+	L["faq"] = {
 		["button01"] = "General",
 		["button02"] = "Action Bars",
 		["button03"] = "Unit Frames",
@@ -347,7 +347,7 @@ if D.Client == "ptBR" then
 		["content11text2"] = "",
 	}
 	
-	L["Xpbar"] = {
+	L["xpbar"] = {
 		["xptitle"] = "Experience:",
 		["xp"] = "XP: %s/%s (%d%%)",
 		["xpremaining"] = "Remaining: %s",

@@ -286,7 +286,7 @@ if D.Client == "deDE" then
 		[11] = {18, "Ranged", 1000}
 	}
 
-	L["Faq"] = {
+	L["faq"] = {
 		["button01"] = "Allgemeines",
 		["button02"] = "Aktionsleisten",
 		["button03"] = "Einheitenfenster",
@@ -348,7 +348,7 @@ if D.Client == "deDE" then
 		["content11text2"] = "Im Normalfall ist ein drüberkopieren der Dateien aus dem Zip ausreichend.\nGebe nach dem Update der Dateien im Chatfenster '/rl' für ein Neuladen des DuffedUI ein.\n\nSollten keine Fehlermeldungen angezeigt werden, bist Du fertig mit dem Update und kannst weiter zocken. Treten Fehler auf, schliesse das gesamte Spiel und starte es danach neu.",	
 	}
 	
-	L["Xpbar"] = {
+	L["xpbar"] = {
 		["xptitle"] = "Erfahrung",
 		["xp"] = "XP: %s/%s (%d%%)",
 		["xpremaining"] = "Benötigt: %s",

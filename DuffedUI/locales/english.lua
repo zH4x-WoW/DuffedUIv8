@@ -284,7 +284,7 @@ L["Slots"] = {
 	[11] = {18, "Ranged", 1000}
 }
 
-L["Faq"] = {
+L["faq"] = {
 	["button01"] = "General",
 	["button02"] = "Action Bars",
 	["button03"] = "Unit Frames",
@@ -346,17 +346,17 @@ L["Faq"] = {
 	["content11text2"] = "",
 }
 
-L["Xpbar"] = {
+L["xpbar"] = {
 		["xptitle"] = "Experience:",
 		["xp"] = "XP: %s/%s (%d%%)",
 		["xpremaining"] = "Remaining: %s",
 		["xprested"] = "|cffb3e1ffRested: %s (%d%%)",
-		
+
 		["fctitle"] = "Reputation: %s",
-		["standing"] = "Standing: |c",		
+		["standing"] = "Standing: |c",
 		["fcrep"] = "Rep: %s/%s (%d%%)",
 		["fcremaining"] = "Remaining: %s",
-		
+
 		["hated"] = "Hated",
 		["hostile"] = "Hostile",
 		["unfriendly"] = "Unfriendly",
