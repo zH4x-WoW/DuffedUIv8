@@ -356,6 +356,15 @@ if D.Client == "zhCN" then
 		["fctitle"] = "Reputation: %s",
 		["standing"] = "Standing: |c",		
 		["fcrep"] = "Rep: %s/%s (%d%%)",
-		["fcremaining"] = "Remaining: %s",	
+		["fcremaining"] = "Remaining: %s",
+		
+		["hated"] = "Hated",
+		["hostile"] = "Hostile",
+		["unfriendly"] = "Unfriendly",
+		["neutral"] = "Neutral",
+		["friendly"] = "Friendly",
+		["honored"] = "Honored",
+		["revered"] = "Revered",
+		["exalted"] = "Exalted",	
 	}
 end

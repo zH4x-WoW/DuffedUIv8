@@ -357,6 +357,15 @@ if D.Client == "deDE" then
 		["fctitle"] = "Ansehen: %s",
 		["standing"] = "Stand: |c",		
 		["fcrep"] = "Ruf: %s/%s (%d%%)",
-		["fcremaining"] = "Verbleibend: %s",	
+		["fcremaining"] = "Verbleibend: %s",
+		
+		["hated"] = "Hasserfüllt",
+		["hostile"] = "Feindseelig",
+		["unfriendly"] = "Unfreundlich",
+		["neutral"] = "Neutral",
+		["friendly"] = "Freundlich",
+		["honored"] = "Wohlwollend",
+		["revered"] = "Respektvoll",
+		["exalted"] = "Ehrfürchtig",	
 	}
 end
