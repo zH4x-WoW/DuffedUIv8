@@ -46,20 +46,22 @@ local function Visibility(self, event, unit)
 			for i = 1, totalOrbs do
 				pb[i]:Show()
 				pb[i]:Width(pb[i].OriginalWidth)
-				pb[i]:Point("LEFT", i == 1 and pb or pb[i-1], i == 1 and "LEFT" or "RIGHT", i == 1 and 0 or 1, 0)
+				pb[i]:ClearAllPoints()
+				pb[i]:Point("LEFT", i == 1 and pb or pb[i - 1], i == 1 and "LEFT" or "RIGHT", i == 1 and 0 or 1, 0)
 			end
 		else
 			pb[4]:Hide()
 			pb[5]:Hide()
 			for i = 1, totalOrbs do
 				local Width = totalWidth / totalOrbs
+				pb[i]:ClearAllPoints()
 
 				if i == 3 then
 					pb[i]:SetPoint("RIGHT", pb, "RIGHT", 0, 0)
-					pb[i]:SetPoint("LEFT", pb[i-1], "RIGHT", 1, 0)
+					pb[i]:SetPoint("LEFT", pb[i - 1], "RIGHT", 1, 0)
 				else
 					pb[i]:Width(Width)
-					pb[i]:Point("LEFT", i == 1 and pb or pb[i-1], i == 1 and "LEFT" or "RIGHT", i == 1 and 0 or 1, 0)
+					pb[i]:Point("LEFT", i == 1 and pb or pb[i - 1], i == 1 and "LEFT" or "RIGHT", i == 1 and 0 or 1, 0)
 				end
 			end
 		end
