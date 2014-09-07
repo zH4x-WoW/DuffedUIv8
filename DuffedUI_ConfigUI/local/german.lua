@@ -7,6 +7,21 @@
 	DuffedUIConfigUILocalization.generalbordercolor = "Setze Standard-Rahmenfarbe der Panels"
 	DuffedUIConfigUILocalization.generalclasscolor = "Aktiviere Klassenfarben für Textelemente"
 
+	-- font
+	DuffedUIConfigUILocalization.font = "Schriftarten"
+	DuffedUIConfigUILocalization.fontduffeduisize = "Schriftgröße DuffedUI (default = 11)"
+	DuffedUIConfigUILocalization.fontduffedui_altsize = "Schriftgröße DuffedUI Alternativ (default = 12)"
+	DuffedUIConfigUILocalization.fontpixelfontsize = "Schriftgröße Pixel Font (default = 12)"
+	DuffedUIConfigUILocalization.fontactionbars = "Actionbar-Schriftart (Wert: DuffedUI, DuffedUI, Alternativ, Pixel Font)"
+	DuffedUIConfigUILocalization.fontauras = "Aura-Schriftart (Wert: DuffedUI, DuffedUI, Alternativ, Pixel Font)"
+	DuffedUIConfigUILocalization.fontclasstimer = "Classtimer-Schriftart (Wert: DuffedUI, DuffedUI, Alternativ, Pixel Font)"
+	DuffedUIConfigUILocalization.fontses = "SpecSwitcher-Schriftart (Wert: DuffedUI, DuffedUI, Alternativ, Pixel Font)"
+	DuffedUIConfigUILocalization.fontdatatext = "Datatext-Schriftart (Wert: DuffedUI, DuffedUI, Alternativ, Pixel Font)"
+	DuffedUIConfigUILocalization.fontunitframes = "Einheitenfenster-Schriftart (Wert: DuffedUI, DuffedUI, Alternativ, Pixel Font)"
+	DuffedUIConfigUILocalization.fontscd = "SpellCooldown-Schriftart (Wert: DuffedUI, DuffedUI, Alternativ, Pixel Font)"
+	DuffedUIConfigUILocalization.fontrcd = "RaidCooldowns-Schriftart (Wert: DuffedUI, DuffedUI, Alternativ, Pixel Font)"
+	DuffedUIConfigUILocalization.fontexperience = "ExperienceBar-Schriftart (Wert: DuffedUI, DuffedUI, Alternativ, Pixel Font)"
+
 	-- unit frames
 	DuffedUIConfigUILocalization.unitframes = "Einheitenfenster"
 	DuffedUIConfigUILocalization.unitframesenable = "Aktiviere die DuffedUI Einheitenfenster"

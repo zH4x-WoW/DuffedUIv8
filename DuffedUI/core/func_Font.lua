@@ -9,13 +9,13 @@ elseif D.Client == "zhCN" then
 end
 
 local duffed = CreateFont("DuffedUI")
-duffed:SetFont(C["media"].font, 11, "THINOUTLINE")
+duffed:SetFont(C["media"].font, C["font"].duffeduisize, "THINOUTLINE")
 
 local duffed_alt = CreateFont("DuffedUI_Alt")
-duffed_alt:SetFont(C["media"].font2, 12, "THINOUTLINE")
+duffed_alt:SetFont(C["media"].font2, C["font"].duffedui_altsize, "THINOUTLINE")
 
 local pixel = CreateFont("PixelFont")
-pixel:SetFont(C["media"].pixelfont, 12, "MONOCHROMEOUTLINE")
+pixel:SetFont(C["media"].pixelfont, C["font"].pixelfontsize, "MONOCHROMEOUTLINE")
 
 local MakeFont = {
 	["DuffedUI"] = "DuffedUI",

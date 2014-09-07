@@ -9,7 +9,9 @@ C["general"] = {
 }
 
 C["font"] = {
-	["size"] = 11,
+	["duffeduisize"] = 11,
+	["duffedui_altsize"] = 12,
+	["pixelfontsize"] = 12,
 	["actionbars"] = "DuffedUI",
 	["auras"] = "DuffedUI",
 	["classtimer"] = "DuffedUI",

@@ -65,7 +65,7 @@ DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
 	SetFont(SystemFont_Tiny,                    NORMAL, 11)
 	SetFont(Tooltip_Med,                        NORMAL, 11)
 	SetFont(Tooltip_Small,                      NORMAL, 11)
-	SetFont(CombatTextFont,                     COMBAT, 100, "OUTLINE") -- number here just increase the font quality.
+	SetFont(CombatTextFont,                     COMBAT, 150, "THINOUTLINE") -- number here just increase the font quality.
 	SetFont(SystemFont_Shadow_Huge1,            NORMAL, 20, "THINOUTLINE")
 	SetFont(ZoneTextString,                     NORMAL, 32, "OUTLINE")
 	SetFont(SubZoneTextString,                  NORMAL, 25, "OUTLINE")
