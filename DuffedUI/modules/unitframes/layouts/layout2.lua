@@ -297,6 +297,7 @@ local function Shared(self, unit)
 					self.DruidMana.bg = DruidMana.Background
 					self.EclipseBar = DruidEclipseBar
 					self.WildMushroom = DruidWildMushroom
+					self.ComboPointsBar = DruidComboPoints
 				end
 
 				if D.Class == "MAGE" then
@@ -333,6 +334,7 @@ local function Shared(self, unit)
 				if D.Class == "ROGUE" then
 					D.ConstructRessources("ComboPoints", 216, 5)
 					if C["unitframes"].attached then ComboPoints:SetPoint("CENTER", panel, "CENTER", 0, 0) else ComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					self.ComboPointsBar = ComboPoints
 				end
 
 				if D.Class == "SHAMAN" then

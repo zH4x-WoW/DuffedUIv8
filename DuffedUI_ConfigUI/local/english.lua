@@ -8,6 +8,21 @@ DuffedUIConfigUILocalization.generalbackdropcolor = "Set default backdrop color 
 DuffedUIConfigUILocalization.generalbordercolor = "Set default border color of panels"
 DuffedUIConfigUILocalization.generalclasscolor = "Enable class color for textelements"
 
+-- font
+DuffedUIConfigUILocalization.font = "Fonts"
+DuffedUIConfigUILocalization.fontduffeduisize = "Fontsize DuffedUI (default = 11)"
+DuffedUIConfigUILocalization.fontduffedui_altsize = "Fontsize DuffedUI Alternativ (default = 12)"
+DuffedUIConfigUILocalization.fontpixelfontsize = "Fontsize Pixel Font (default = 12)"
+DuffedUIConfigUILocalization.fontactionbars = "Actionbar-Font (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
+DuffedUIConfigUILocalization.fontauras = "Aura-Font (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
+DuffedUIConfigUILocalization.fontclasstimer = "Classtimer-Font (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
+DuffedUIConfigUILocalization.fontses = "SpecSwitcher-Font (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
+DuffedUIConfigUILocalization.fontdatatext = "Datatext-Font (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
+DuffedUIConfigUILocalization.fontunitframes = "Unit Frames-Font (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
+DuffedUIConfigUILocalization.fontscd = "SpellCooldown-Font (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
+DuffedUIConfigUILocalization.fontrcd = "RaidCooldowns-Font (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
+DuffedUIConfigUILocalization.fontexperience = "ExperienceBar-Font (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
+
 -- unit frames
 DuffedUIConfigUILocalization.unitframes = "Unit Frames"
 DuffedUIConfigUILocalization.unitframesenable = "Enable DuffedUI Unit Frames"

@@ -79,43 +79,31 @@ D.ConstructRessources = function(name, width, height)
 	end
 	if layout == 1 or layout == 3 then WildMushroom:CreateBackdrop() end
 
-	local NumPoints = MAX_COMBO_POINTS
-	local UnitHasVehicleUI = UnitHasVehicleUI
-	local GetComboPoints = GetComboPoints
-	local select = select
-	local SetComboPoints = function(self)
-		local Points = (UnitHasVehicleUI("player") and GetComboPoints("vehicle", "target") or GetComboPoints("player", "target"))
-
-		for i = 1, NumPoints do
-			if (i <= Points) then self[i]:SetAlpha(1) else self[i]:SetAlpha(.3) end
-		end
-	end
-
-	local ComboPoints = CreateFrame("Frame", name .. "ComboPoints", UIParent)
+	local ComboPoints= CreateFrame("Frame", name .. "ComboPoints", UIParent)
+	ComboPoints:Size(width, height)
 	ComboPoints:CreateBackdrop()
-	ComboPoints:SetSize(width, height)
-	ComboPoints:RegisterEvent("UNIT_COMBO_POINTS")
-	ComboPoints:RegisterEvent("PLAYER_TARGET_CHANGED")
-	ComboPoints:SetScript("OnEvent", function(self, event, arg1)
-		self[event](self, arg1)
-	end)
+	ComboPoints:SetBackdrop(backdrop)
+	ComboPoints:SetBackdropColor(0, 0, 0)
+	ComboPoints:SetBackdropBorderColor(0, 0, 0, 0)
 
-	ComboPoints["UNIT_COMBO_POINTS"] = function(self) SetComboPoints(self) end
-	ComboPoints["PLAYER_TARGET_CHANGED"] = function(self) SetComboPoints(self) end
-
-	for i = 1, NumPoints do
-		ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
+	for i = 1, 5 do
+		ComboPoints[i] = CreateFrame("StatusBar", name .. "ComboPoints" .. i, ComboPoints)
+		ComboPoints[i]:Height(height)
 		ComboPoints[i]:SetStatusBarTexture(texture)
 		ComboPoints[i]:SetStatusBarColor(unpack(Colors[i]))
-		ComboPoints[i]:SetHeight(height)
-
-		if (i == 1) then
-			ComboPoints[i]:SetWidth(44)
-			ComboPoints[i]:SetPoint("LEFT", ComboPoints, "LEFT", 0, 0)
+		ComboPoints[i].bg = ComboPoints[i]:CreateTexture(nil, "BORDER")
+		ComboPoints[i].bg:SetTexture(unpack(Colors[i]))
+		if i == 1 then
+			ComboPoints[i]:SetPoint("LEFT", ComboPoints)
+			ComboPoints[i]:Width(44)
+			ComboPoints[i].bg:SetAllPoints(ComboPoints[i])
 		else
-			ComboPoints[i]:SetWidth(42)
-			ComboPoints[i]:SetPoint("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
+			ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
+			ComboPoints[i]:Width(42)
+			ComboPoints[i].bg:SetAllPoints(ComboPoints[i])
 		end
+		ComboPoints[i].bg:SetTexture(texture)
+		ComboPoints[i].bg:SetAlpha(.15)
 	end
 
 	ComboPoints.Visibility = CreateFrame("Frame", nil, ComboPoints)
@@ -127,7 +115,22 @@ D.ConstructRessources = function(name, width, height)
 	end)
 
 	if C["unitframes"].oocHide then
-		EclipseBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+		DruidMana:RegisterEvent("PLAYER_REGEN_DISABLED")
+		DruidMana:RegisterEvent("PLAYER_REGEN_ENABLED")
+		DruidMana:RegisterEvent("PLAYER_ENTERING_WORLD")
+		DruidMana:SetScript("OnEvent", function(self, event)
+			if event == "PLAYER_REGEN_DISABLED" then
+				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+			elseif event == "PLAYER_REGEN_ENABLED" then
+				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+			elseif event == "PLAYER_ENTERING_WORLD" then
+				if not InCombatLockdown() then
+					DruidMana:SetAlpha(0)
+				end
+			end
+		end)
+
+		--[[EclipseBar:RegisterEvent("PLAYER_REGEN_DISABLED")
 		EclipseBar:RegisterEvent("PLAYER_REGEN_ENABLED")
 		EclipseBar:RegisterEvent("PLAYER_ENTERING_WORLD")
 		EclipseBar:SetScript("OnEvent", function(self, event)
@@ -155,7 +158,7 @@ D.ConstructRessources = function(name, width, height)
 					WildMushroom:SetAlpha(0)
 				end
 			end
-		end)
+		end)]]
 
 		ComboPoints:RegisterEvent("PLAYER_REGEN_DISABLED")
 		ComboPoints:RegisterEvent("PLAYER_REGEN_ENABLED")

@@ -109,45 +109,6 @@ local TRINKET_FILTER = {
 }
 
 local CLASS_FILTERS = {
-	MONK = { 
-		target = {
-			CreateSpellEntry(130320), -- Risin Sun Kick
-			CreateSpellEntry(123727), -- Dizzying Haze
-			CreateSpellEntry(123725), -- Breath of Fire
-			CreateSpellEntry(115804), -- Mortal Wounds
-			CreateSpellEntry(119611), -- Renewing Mists
-			CreateSpellEntry(132120), -- Envolpeing Mists
-			CreateSpellEntry(116849), -- Life Cocoon
-			CreateSpellEntry(115175), -- Soothing Mist
-			CreateSpellEntry(116095), -- Disable
-			CreateSpellEntry(115078), -- Paralysis
-		},
-		player = {
-			CreateSpellEntry(124081), -- Zensphere
-			CreateSpellEntry(125195), -- Tigereye Brew
-			CreateSpellEntry(125359), -- Tiger Power
-			CreateSpellEntry(115307), -- Shuffle
-			CreateSpellEntry(118636), -- Power Guard 
-			CreateSpellEntry(115295), -- Guard 
-			CreateSpellEntry(128939), -- Elusive Brew
-			CreateSpellEntry(118674), -- Vital Mists
-			CreateSpellEntry(127722), -- Serpent's Zeal
-			CreateSpellEntry(116680), -- Thunder Focus Tea
-			CreateSpellEntry(120954), -- Fortifying Brew
-			CreateSpellEntry(107270), -- Spinning Crane Kick
-			CreateSpellEntry(115176), -- Zen Meditation
-			CreateSpellEntry(119085), -- Momentum
-			CreateSpellEntry(115867), -- Mana Tea
-			CreateSpellEntry(124275), -- Light Stagger
-			CreateSpellEntry(116740), -- Tigereye Brew
-		},
-		procs = {
-			CreateSpellEntry(116768), -- Combobreaker: Blackout-Kick
-			CreateSpellEntry(120273), -- Tiger Strikes
-			CreateSpellEntry(118864), -- Combobreaker: Tigerpalm
-			CreateSpellEntry(104993), -- Jade Spirit
-		}
-	},
 	DEATHKNIGHT = { 
 		target = {
 			CreateSpellEntry(55095), -- Frost Fever
@@ -314,6 +275,45 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(48107), -- Heating Up!
 		},
 	},
+	MONK = { 
+		target = {
+			CreateSpellEntry(130320), -- Risin Sun Kick
+			CreateSpellEntry(123727), -- Dizzying Haze
+			CreateSpellEntry(123725), -- Breath of Fire
+			CreateSpellEntry(115804), -- Mortal Wounds
+			CreateSpellEntry(119611), -- Renewing Mists
+			CreateSpellEntry(132120), -- Envolpeing Mists
+			CreateSpellEntry(116849), -- Life Cocoon
+			CreateSpellEntry(115175), -- Soothing Mist
+			CreateSpellEntry(116095), -- Disable
+			CreateSpellEntry(115078), -- Paralysis
+		},
+		player = {
+			CreateSpellEntry(124081), -- Zensphere
+			CreateSpellEntry(125195), -- Tigereye Brew
+			CreateSpellEntry(125359), -- Tiger Power
+			CreateSpellEntry(115307), -- Shuffle
+			CreateSpellEntry(118636), -- Power Guard 
+			CreateSpellEntry(115295), -- Guard 
+			CreateSpellEntry(128939), -- Elusive Brew
+			CreateSpellEntry(118674), -- Vital Mists
+			CreateSpellEntry(127722), -- Serpent's Zeal
+			CreateSpellEntry(116680), -- Thunder Focus Tea
+			CreateSpellEntry(120954), -- Fortifying Brew
+			CreateSpellEntry(107270), -- Spinning Crane Kick
+			CreateSpellEntry(115176), -- Zen Meditation
+			CreateSpellEntry(119085), -- Momentum
+			CreateSpellEntry(115867), -- Mana Tea
+			CreateSpellEntry(124275), -- Light Stagger
+			CreateSpellEntry(116740), -- Tigereye Brew
+		},
+		procs = {
+			CreateSpellEntry(116768), -- Combobreaker: Blackout-Kick
+			CreateSpellEntry(120273), -- Tiger Strikes
+			CreateSpellEntry(118864), -- Combobreaker: Tigerpalm
+			CreateSpellEntry(104993), -- Jade Spirit
+		}
+	},
 	PALADIN = { 
 		target = {
 			CreateSpellEntry(31803), -- Censure --
@@ -390,7 +390,6 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(408), -- Kidney Shot
 			CreateSpellEntry(1776), -- Gouge
 			CreateSpellEntry(2094), -- Blind
-			CreateSpellEntry(51722), -- Dismantle
 			CreateSpellEntry(2818), -- Deadly Poison
 			CreateSpellEntry(3409),  -- Crippling Poison 
 			CreateSpellEntry(5760), -- Mind-Numbing Poison
@@ -416,6 +415,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(84747), -- Deep Insight 
 			CreateSpellEntry(121471), -- Shadow Blades
 			CreateSpellEntry(74001), -- Combat Readiness
+			CreateSpellEntry(115189), -- Anticipation
 		},
 		procs = {
 			CreateSpellEntry(13877), -- Blade Flurry
@@ -528,6 +528,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(112048), -- Shield Barrier
 			CreateSpellEntry(132404), -- Shield Block
 			CreateSpellEntry(122510), -- Ultimatum
+			CreateSpellEntry(169686), -- Unyielding Strikes
 		},
 		procs = {
 			CreateSpellEntry(46916), -- Bloodsurge Slam (Free & Instant)

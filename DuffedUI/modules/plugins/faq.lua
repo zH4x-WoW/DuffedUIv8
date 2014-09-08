@@ -74,17 +74,17 @@ local FAQButtonsAttributes = {
 }
 
 local FAQButtonsTexts = {
-	[1] = { L["Faq"]["button01"] },
-	[2] = { L["Faq"]["button02"] },
-	[3] = { L["Faq"]["button03"] },
-	[4] = { L["Faq"]["button04"] },
-	[5] = { L["Faq"]["button05"] },
-	[6] = { L["Faq"]["button06"] },
-	[7] = { L["Faq"]["button07"] },
-	[8] = { L["Faq"]["button08"] },
-	[9] = { L["Faq"]["button09"] },
-	[10] = { L["Faq"]["button10"] },
-	[11] = { L["Faq"]["button11"] },
+	[1] = { L["faq"]["button01"] },
+	[2] = { L["faq"]["button02"] },
+	[3] = { L["faq"]["button03"] },
+	[4] = { L["faq"]["button04"] },
+	[5] = { L["faq"]["button05"] },
+	[6] = { L["faq"]["button06"] },
+	[7] = { L["faq"]["button07"] },
+	[8] = { L["faq"]["button08"] },
+	[9] = { L["faq"]["button09"] },
+	[10] = { L["faq"]["button10"] },
+	[11] = { L["faq"]["button11"] },
 }
 
 local FAQMainFrameNavigationButton = CreateFrame( "Button", nil, FAQFrameNavigation )
@@ -163,75 +163,75 @@ FAQMainFrameContentText6:Point( "TOPLEFT", FAQMainFrameContentText5, "BOTTOMLEFT
 FAQFrameContentScrollFrameScrollBar:SkinScrollBar()
 
 local function FAQMainFrameBuildDefault()
-	FAQMainFrameContentTitle:SetText(L["Faq"]["generaltitle"])
-	FAQMainFrameContentText1:SetText(L["Faq"]["generaltext1"])
-	FAQMainFrameContentText2:SetText(L["Faq"]["generaltext2"])	
+	FAQMainFrameContentTitle:SetText(L["faq"]["generaltitle"])
+	FAQMainFrameContentText1:SetText(L["faq"]["generaltext1"])
+	FAQMainFrameContentText2:SetText(L["faq"]["generaltext2"])	
 end
 
 local function FAQMainFrameContent1()
-	FAQMainFrameContentTitle:SetText(L["Faq"]["content1title"])
-	FAQMainFrameContentText1:SetText(L["Faq"]["content1text1"])
-	FAQMainFrameContentText2:SetText(L["Faq"]["content1text2"])	
+	FAQMainFrameContentTitle:SetText(L["faq"]["content1title"])
+	FAQMainFrameContentText1:SetText(L["faq"]["content1text1"])
+	FAQMainFrameContentText2:SetText(L["faq"]["content1text2"])	
 end
 
 local function FAQMainFrameContent2()
-	FAQMainFrameContentTitle:SetText(L["Faq"]["content2title"])
-	FAQMainFrameContentText1:SetText(L["Faq"]["content2text1"])
-	FAQMainFrameContentText2:SetText(L["Faq"]["content2text2"])	
+	FAQMainFrameContentTitle:SetText(L["faq"]["content2title"])
+	FAQMainFrameContentText1:SetText(L["faq"]["content2text1"])
+	FAQMainFrameContentText2:SetText(L["faq"]["content2text2"])	
 end
 
 local function FAQMainFrameContent3()
-	FAQMainFrameContentTitle:SetText(L["Faq"]["content3title"])
-	FAQMainFrameContentText1:SetText(L["Faq"]["content3text1"])
-	FAQMainFrameContentText2:SetText(L["Faq"]["content3text2"])	
+	FAQMainFrameContentTitle:SetText(L["faq"]["content3title"])
+	FAQMainFrameContentText1:SetText(L["faq"]["content3text1"])
+	FAQMainFrameContentText2:SetText(L["faq"]["content3text2"])	
 end
 
 local function FAQMainFrameContent4()
-	FAQMainFrameContentTitle:SetText(L["Faq"]["content4title"])
-	FAQMainFrameContentText1:SetText(L["Faq"]["content4text1"])
-	FAQMainFrameContentText2:SetText(L["Faq"]["content4text2"])	
+	FAQMainFrameContentTitle:SetText(L["faq"]["content4title"])
+	FAQMainFrameContentText1:SetText(L["faq"]["content4text1"])
+	FAQMainFrameContentText2:SetText(L["faq"]["content4text2"])	
 end
 
 local function FAQMainFrameContent5()
-	FAQMainFrameContentTitle:SetText(L["Faq"]["content5title"])
-	FAQMainFrameContentText1:SetText(L["Faq"]["content5text1"])
-	FAQMainFrameContentText2:SetText(L["Faq"]["content5text2"])	
+	FAQMainFrameContentTitle:SetText(L["faq"]["content5title"])
+	FAQMainFrameContentText1:SetText(L["faq"]["content5text1"])
+	FAQMainFrameContentText2:SetText(L["faq"]["content5text2"])	
 end
 
 local function FAQMainFrameContent6()
-	FAQMainFrameContentTitle:SetText(L["Faq"]["content6title"])
-	FAQMainFrameContentText1:SetText(L["Faq"]["content6text1"])
-	FAQMainFrameContentText2:SetText(L["Faq"]["content6text2"])	
+	FAQMainFrameContentTitle:SetText(L["faq"]["content6title"])
+	FAQMainFrameContentText1:SetText(L["faq"]["content6text1"])
+	FAQMainFrameContentText2:SetText(L["faq"]["content6text2"])	
 end
 
 local function FAQMainFrameContent7()
-	FAQMainFrameContentTitle:SetText(L["Faq"]["content7title"])
-	FAQMainFrameContentText1:SetText(L["Faq"]["content7text1"])
-	FAQMainFrameContentText2:SetText(L["Faq"]["content7text2"])	
+	FAQMainFrameContentTitle:SetText(L["faq"]["content7title"])
+	FAQMainFrameContentText1:SetText(L["faq"]["content7text1"])
+	FAQMainFrameContentText2:SetText(L["faq"]["content7text2"])	
 end
 
 local function FAQMainFrameContent8()
-	FAQMainFrameContentTitle:SetText(L["Faq"]["content8title"])
-	FAQMainFrameContentText1:SetText(L["Faq"]["content8text1"])
-	FAQMainFrameContentText2:SetText(L["Faq"]["content8text2"])	
+	FAQMainFrameContentTitle:SetText(L["faq"]["content8title"])
+	FAQMainFrameContentText1:SetText(L["faq"]["content8text1"])
+	FAQMainFrameContentText2:SetText(L["faq"]["content8text2"])	
 end
 
 local function FAQMainFrameContent9()
-	FAQMainFrameContentTitle:SetText(L["Faq"]["content9title"])
-	FAQMainFrameContentText1:SetText(L["Faq"]["content9text1"])
-	FAQMainFrameContentText2:SetText(L["Faq"]["content9text2"])	
+	FAQMainFrameContentTitle:SetText(L["faq"]["content9title"])
+	FAQMainFrameContentText1:SetText(L["faq"]["content9text1"])
+	FAQMainFrameContentText2:SetText(L["faq"]["content9text2"])	
 end
 
 local function FAQMainFrameContent10()
-	FAQMainFrameContentTitle:SetText(L["Faq"]["content10title"])
-	FAQMainFrameContentText1:SetText(L["Faq"]["content10text1"])
-	FAQMainFrameContentText2:SetText(L["Faq"]["content10text2"])	
+	FAQMainFrameContentTitle:SetText(L["faq"]["content10title"])
+	FAQMainFrameContentText1:SetText(L["faq"]["content10text1"])
+	FAQMainFrameContentText2:SetText(L["faq"]["content10text2"])	
 end
 
 local function FAQMainFrameContent11()
-	FAQMainFrameContentTitle:SetText(L["Faq"]["content11title"])
-	FAQMainFrameContentText1:SetText(L["Faq"]["content11text1"])
-	FAQMainFrameContentText2:SetText(L["Faq"]["content11text2"])	
+	FAQMainFrameContentTitle:SetText(L["faq"]["content11title"])
+	FAQMainFrameContentText1:SetText(L["faq"]["content11text1"])
+	FAQMainFrameContentText2:SetText(L["faq"]["content11text2"])	
 end
 
 local dfaq = FAQMainFrameSlashcommand or function() end

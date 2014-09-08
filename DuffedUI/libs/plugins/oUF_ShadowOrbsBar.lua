@@ -5,7 +5,6 @@ local _, ns = ...
 local oUF = ns.oUF or oUF
 assert(oUF, 'oUF_ShadowOrbsBar was unable to locate oUF install')
 
-local SHADOW_ORBS_SHOW_LEVEL = SHADOW_ORBS_SHOW_LEVEL
 local PRIEST_BAR_NUM_LARGE_ORBS = PRIEST_BAR_NUM_LARGE_ORBS
 local PRIEST_BAR_NUM_SMALL_ORBS = PRIEST_BAR_NUM_SMALL_ORBS
 local SPELL_POWER_SHADOW_ORBS = SPELL_POWER_SHADOW_ORBS
@@ -22,7 +21,7 @@ local function Update(self, event, unit, powerType)
 	if(pb.PreUpdate) then pb:PreUpdate(unit) end
 
 	local numOrbs = UnitPower("player", SPELL_POWER_SHADOW_ORBS)
-	local totalOrbs = IsSpellKnown(SHADOW_ORB_MINOR_TALENT_ID) and 5 or 3
+	local totalOrbs = (IsSpellKnown(SHADOW_ORB_MINOR_TALENT_ID) and 5) or 3
 
 	for i = 1, totalOrbs do
 		if i <= numOrbs then pb[i]:SetAlpha(1) else pb[i]:SetAlpha(.2) end
@@ -40,27 +39,29 @@ local function Visibility(self, event, unit)
 
 	if (UnitLevel("player") >= SHADOW_ORBS_SHOW_LEVEL and spec == SPEC_PRIEST_SHADOW) then
 		pb:Show()
-		local totalOrbs = IsSpellKnown(SHADOW_ORB_MINOR_TALENT_ID) and 5 or 3
+		local totalOrbs = (IsSpellKnown(SHADOW_ORB_MINOR_TALENT_ID) and 5) or 3
 		local totalWidth = pb:GetWidth()
 
 		if totalOrbs == 5 then
 			for i = 1, totalOrbs do
 				pb[i]:Show()
 				pb[i]:Width(pb[i].OriginalWidth)
-				pb[i]:Point("LEFT", i == 1 and pb or pb[i-1], i == 1 and "LEFT" or "RIGHT", i == 1 and 0 or 1, 0)
+				pb[i]:ClearAllPoints()
+				pb[i]:Point("LEFT", i == 1 and pb or pb[i - 1], i == 1 and "LEFT" or "RIGHT", i == 1 and 0 or 1, 0)
 			end
 		else
 			pb[4]:Hide()
 			pb[5]:Hide()
 			for i = 1, totalOrbs do
 				local Width = totalWidth / totalOrbs
+				pb[i]:ClearAllPoints()
 
 				if i == 3 then
 					pb[i]:SetPoint("RIGHT", pb, "RIGHT", 0, 0)
-					pb[i]:SetPoint("LEFT", pb[i-1], "RIGHT", 1, 0)
+					pb[i]:SetPoint("LEFT", pb[i - 1], "RIGHT", 1, 0)
 				else
 					pb[i]:Width(Width)
-					pb[i]:Point("LEFT", i == 1 and pb or pb[i-1], i == 1 and "LEFT" or "RIGHT", i == 1 and 0 or 1, 0)
+					pb[i]:Point("LEFT", i == 1 and pb or pb[i - 1], i == 1 and "LEFT" or "RIGHT", i == 1 and 0 or 1, 0)
 				end
 			end
 		end
@@ -81,6 +82,8 @@ local function Enable(self, unit)
 		pb.Visibility = CreateFrame("Frame", nil, pb)
 		pb.Visibility:RegisterEvent("PLAYER_TALENT_UPDATE")
 		pb.Visibility:RegisterEvent("PLAYER_LEVEL_UP")
+		pb.Visibility:RegisterEvent("PLAYER_LOGIN")
+		pb.Visibility:RegisterEvent("PLAYER_ENTERING_WORLD")
 		pb.Visibility:SetScript("OnEvent", function(frame, event, unit) Visibility(self, event, unit) end)
 
 		for i = 1, 5 do
