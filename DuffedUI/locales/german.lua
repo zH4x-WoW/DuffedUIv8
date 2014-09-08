@@ -305,11 +305,11 @@ if D.Client == "deDE" then
 
 		["content1title"] = "|cffc41f3bAllgemeines|r",
 		["content1text1"] = "DuffedUI ist ein neugestaltetes BlizzardUI. Nicht mehr und nichts weniger. Alle Funktionen, die man auch im StandardUI findet, hat man ebenfalls in DuffedUI. Zusätzlich bringt DuffedUI einige automatische Funktionen mit, die man in der StandardUI vermisst. (Z.B. die Taschensortierung, das Verkaufen von grauen Gegenständen, usw.).",
-		["content1text2"] = "DuffedUI wurde entworfen um das bestmöglichste Spielerlebnis zu erreichen, egal welche Spielweise, Klasse und Geschmack. DuffedUI ist für jeden individuell kinderleicht anpassbar. Das ist auch der Grund wieso DuffedUI eines der populärsten UIs in der Geschichte von World of Warcraft™ ist. Ausserdem wurde es so entworfen, dass man mit wenigen Mausklicks sofort loslegen kann, ohne sich noch irgendwelche sonstigen AddOns herunterzuladen zu müssen. Seit 2010 haben viele Spieler aufgrund von DuffedUI, ihr eigenes, auf DuffedUI basiertes Interface erstellt.",		
+		["content1text2"] = "DuffedUI wurde entworfen um das bestmöglichste Spielerlebnis zu erreichen, egal welche Spielweise, Klasse und Geschmack. DuffedUI ist für jeden individuell kinderleicht anpassbar. Das ist auch der Grund wieso DuffedUI eines der populärsten UIs in der Geschichte von World of Warcraft™ ist. Ausserdem wurde es so entworfen, dass man mit wenigen Mausklicks sofort loslegen kann, ohne sich noch irgendwelche sonstigen AddOns herunterzuladen zu müssen. Seit 2010 haben viele Spieler aufgrund von DuffedUI, ihr eigenes, auf DuffedUI basiertes Interface erstellt.",
 
 		["content2title"] = "|cffc41f3bAktionsleisten|r",
 		["content2text1"] = "Die Konfiguration der Aktionsleisten ist nicht nur kinderleicht, sie lässt auch fast keine Wünsche offen.\nÜber das DuffedUI Konfigurationsmenü, dass Du entweder per ESC ->DuffedUI, oder per Chateingabe /dc öffnest, gelangst Du zum Reiter Aktionsleisten.\n\nDort hast Du nun die Möglichkeit vielerlei Unsinn mit den Leisten zu treiben. Zum einen kannst Du 'mouseover' für die rechte Leiste und/oder die Begleiterlesite aktivieren, oder Du entscheidest Dich dafür die rechten Leiste vertikal' anzeigen zu lassen, oder oder oder ...\nArbeite einfach die Einstellungen durch und stell Dir die Leisten nach Deinen Bedürfnissen ein.",
-		["content2text2"] = "Des Weiteren hast Du die Möglichkeit die mittleren zwei Leisten, sowie die Begleiter- und rechte Aktionsleiste, nach Deinen Vorstellungen auszurichten.\nBenutzte hierzu entweder den Chatbefehl /moveui, oder klick im rechten Chatbereich auf das kleine '+' und danach auf dann das aufploppende 'M'.\n\nEine weitere Besonderheit stellen die beiden Leistenblöcke am linken und rechten Chatfenster dar.\nDiese beiden Blöcke sind nicht bewegbar!\nAllerdings hast Du die Möglichkeit, entweder die 'mouseover' Funktion im Konfigurationsmenü zu aktivieren, oder per Klick auf die kleinen Pluszeichen am Rechten und linken Chatrand, die Leisten sessionübergreifend auszublenden.",		
+		["content2text2"] = "Des Weiteren hast Du die Möglichkeit die mittleren zwei Leisten, sowie die Begleiter- und rechte Aktionsleiste, nach Deinen Vorstellungen auszurichten.\nBenutzte hierzu entweder den Chatbefehl /moveui, oder klick im rechten Chatbereich auf das kleine '+' und danach auf dann das aufploppende 'M'.\n\nEine weitere Besonderheit stellen die beiden Leistenblöcke am linken und rechten Chatfenster dar.\nDiese beiden Blöcke sind nicht bewegbar!\nAllerdings hast Du die Möglichkeit, entweder die 'mouseover' Funktion im Konfigurationsmenü zu aktivieren, oder per Klick auf die kleinen Pluszeichen am Rechten und linken Chatrand, die Leisten sessionübergreifend auszublenden.",
 
 		["content3title"] = "|cffc41f3bEinheitenfenster|r",
 		["content3text1"] = "Die Einheitenfenster bilden das Kernstück von DuffedUi und lassen sich individuell konfigurieren, sowie nach Deinen Vorstellungen plazieren.\nVorgefertigt gibt es drei verschiedene Layouts, die Du über das DuffedUI-Konfigurationsmenü auswählen kannst.\nJedes der drei Layouts lässt sich Deinen Wünschen entsprechend weiter anpassen.\n\nÖffne das DuffedUI Konfigurationsmenü. Entweder per ESC ->DuffedUI, oder per direkter Chateingabe mit /dc.\nNun wähle links den Reiter 'Einheitenfenster aus und arbeite Dich durch das recht unfangreiche Angebot an Auswahlmöglichkeiten.",
@@ -325,11 +325,11 @@ if D.Client == "deDE" then
 
 		["content6title"] = "|cffc41f3bTastaturbelegung|r",
 		["content6text1"] = "Um die Aktionsleisten mit Leben zu füllen, steht Dir im DuffedUI eine kinderleicht zu bedienende Hilfe zur Verfügung -> DuffedUI Bind.\nUm das Einstellen der Tasten zu aktivieren, gib entweder im Chat /kb ein, oder dklicke im rechten Chatbereich auf das kleine '+' und dann auf das aufploppende 'K'. Ein PopUp Fenster erscheint und weisst Dich darauf hin, dass nun alle Tastatuebelegungen gespeichert werden. Also los!",
-		["content6text2"] = "Fahre mit der Maus über die Taste auf der Aktionsleiste, die Du mit einem Kürzel belegen möchtest und drücke dann Deine Wunschkombination.\nBeispiel: Maus steht auf Aktionsleiste eins, Taste 1 ->Drück die Taste eins auf dem Nummerblock und schon kannst Du Deine Fähigkeit mit der Taste eins auf dem Numblock auslösen.\n\nWenn Du alle Tasten mit Deinen Wunschkombinationen belegt hast, klicke im PopUp Fenster auf 'Übernehmen. Fertig!\nKinderleicht, oder?\n\nTipp: Auch eine Kombinationen aus STRG und/oder ALT + beliebige Taste sind möglich.",	
+		["content6text2"] = "Fahre mit der Maus über die Taste auf der Aktionsleiste, die Du mit einem Kürzel belegen möchtest und drücke dann Deine Wunschkombination.\nBeispiel: Maus steht auf Aktionsleiste eins, Taste 1 ->Drück die Taste eins auf dem Nummerblock und schon kannst Du Deine Fähigkeit mit der Taste eins auf dem Numblock auslösen.\n\nWenn Du alle Tasten mit Deinen Wunschkombinationen belegt hast, klicke im PopUp Fenster auf 'Übernehmen. Fertig!\nKinderleicht, oder?\n\nTipp: Auch eine Kombinationen aus STRG und/oder ALT + beliebige Taste sind möglich.",
 		
 		["content7title"] = "|cffc41f3bMinimap|r",
 		["content7text1"] = "Die DuffedUi Minimap nutzt den gleichen Aufbau wie die standard Minimap von Blizzard, kann aber mehr. Fahre mit der Maus über die Minimap um Deinen Aufenthaltsort, sowie Deine momentanen Standort Koordinaten abzufragen.\n\nWeitere Funtkionen:\nEin Klick mit der linken Maustaste löst die 'Ping' Funktion aus.\nEin Klick mit der rechten Maustaste öffnet das Aufspürmenü.\nEin Klick mit dem Mausrad öffnet das Mikromenü.",
-		["content7text2"] = "Am rechten Rand der Minimap findest Du die Raidbuffübersicht. Hier kansnt Du ablesen, ob alle notwendigen Buffs gezaubert wurden, oder welcher noch fehlt. Um Dir eine detailierte Übersicht der Buffs anzeigen zu lassen, klicke auf das kleine grüne '+' unter der Raidbuffübersicht.",		
+		["content7text2"] = "Am rechten Rand der Minimap findest Du die Raidbuffübersicht. Hier kansnt Du ablesen, ob alle notwendigen Buffs gezaubert wurden, oder welcher noch fehlt. Um Dir eine detailierte Übersicht der Buffs anzeigen zu lassen, klicke auf das kleine grüne '+' unter der Raidbuffübersicht.",
 
 		["content8title"] = "|cffc41f3bTaschen|r",
 		["content8text1"] = "Die Taschen verwaltest Du bequem über das DuffedUI Konfigurationsmenü. Drücke die Taste ESC ->DuffedUI, oder öffne das Menü per Chateingabe mit |cffc41f3b/dc|r oder |cffc41f3b/duffedui|r. Über den Reiter 'Taschen' im linken Fenster erhälst Du eine Vielzahl von Einstellungsmöglichkeiten für Deine Taschen.\n\nTipp: Durch einen Rechtsklick auf das kleine 'X' am oberen Rand der Tasche, kannst Du Deine Beutel austauschen. Der Knopf 'Bereinigen' sortiert deine Taschen. Dieser Tipp funktioniert auch mit der Bank.",
@@ -353,12 +353,12 @@ if D.Client == "deDE" then
 		["xp"] = "XP: %s/%s (%d%%)",
 		["xpremaining"] = "Benötigt: %s",
 		["xprested"] = "|cffb3e1ffAusgeruht: %s (%d%%)",
-		
+
 		["fctitle"] = "Ansehen: %s",
-		["standing"] = "Stand: |c",		
+		["standing"] = "Stand: |c",
 		["fcrep"] = "Ruf: %s/%s (%d%%)",
 		["fcremaining"] = "Verbleibend: %s",
-		
+
 		["hated"] = "Hasserfüllt",
 		["hostile"] = "Feindseelig",
 		["unfriendly"] = "Unfreundlich",
@@ -366,6 +366,6 @@ if D.Client == "deDE" then
 		["friendly"] = "Freundlich",
 		["honored"] = "Wohlwollend",
 		["revered"] = "Respektvoll",
-		["exalted"] = "Ehrfürchtig",	
+		["exalted"] = "Ehrfürchtig",
 	}
 end
