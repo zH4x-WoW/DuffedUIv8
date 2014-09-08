@@ -277,7 +277,7 @@ local function Shared(self, unit)
 			if C["unitframes"].classbar then
 				if D.Class == "DEATHKNIGHT" then
 					D.ConstructRessources("Runes", 216, 5)
-					if C["unitframes"].attached then Runes:SetPoint("TOP", power, "BOTTOM", 0, 0) else Runes:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					if C["unitframes"].attached then Runes:Point("TOP", power, "BOTTOM", 0, 0) else Runes:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
 				end
 
 				if D.Class == "DRUID" then
@@ -305,15 +305,16 @@ local function Shared(self, unit)
 					self.DruidMana.bg = DruidMana.Background
 					self.EclipseBar = DruidEclipseBar
 					self.WildMushroom = DruidWildMushroom
+					self.ComboPointsBar = DruidComboPoints
 				end
 
 				if D.Class == "MAGE" then
 					D.ConstructRessources("mb", "rp", 216, 5)
 					if C["unitframes"].attached then
-						mb:SetPoint("TOP", power, "BOTTOM", 0, 0)
+						mb:Point("TOP", power, "BOTTOM", 0, 0)
 						rp:Point("TOP", power, "BOTTOM", 0, -8)
 					else
-						mb:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
+						mb:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
 						rp:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
 					end
 					self.ArcaneChargeBar = mb
@@ -322,36 +323,37 @@ local function Shared(self, unit)
 
 				if D.Class == "MONK" then
 					D.ConstructRessources("Bar", 216, 5)
-					if C["unitframes"].attached then Bar:SetPoint("TOP", power, "BOTTOM", 0, 0) else Bar:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					if C["unitframes"].attached then Bar:Point("TOP", power, "BOTTOM", 0, 0) else Bar:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
 					self.HarmonyBar = Bar
 				end
 
 				if D.Class == "PALADIN" then
 					D.ConstructRessources("bars", 216, 5)
-					if C["unitframes"].attached then bars:SetPoint("TOP", power, "BOTTOM", 0, 0) else bars:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					if C["unitframes"].attached then bars:Point("TOP", power, "BOTTOM", 0, 0) else bars:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
 					self.HolyPower = bars
 				end
 
 				if D.Class == "PRIEST" then
 					D.ConstructRessources("pb", 216, 5)
-					if C["unitframes"].attached then pb:SetPoint("TOP", power, "BOTTOM", 0, 0) else pb:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					if C["unitframes"].attached then pb:Point("TOP", power, "BOTTOM", 0, 0) else pb:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
 					self.ShadowOrbsBar = pb
 				end
 
 				if D.Class == "ROGUE" then
 					D.ConstructRessources("ComboPoints", 216, 5)
-					if C["unitframes"].attached then ComboPoints:SetPoint("TOP", power, "BOTTOM", 0, 0) else ComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					if C["unitframes"].attached then ComboPoints:Point("TOP", power, "BOTTOM", 0, 0) else ComboPoints:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					self.ComboPointsBar = ComboPoints
 				end
 
 				if D.Class == "SHAMAN" then
 					D.ConstructRessources("TotemBar", 216, 5)
-					if C["unitframes"].attached then TotemBar:SetPoint("TOP", power, "BOTTOM", 0, 0) else TotemBar:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					if C["unitframes"].attached then TotemBar:Point("TOP", power, "BOTTOM", 0, 0) else TotemBar:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
 					self.TotemBar = TotemBar
 				end
 
 				if D.Class == "WARLOCK" then
 					D.ConstructRessources("wb", 216, 5)
-					if C["unitframes"].attached then wb:SetPoint("TOP", power, "BOTTOM", 0, 0) else wb:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					if C["unitframes"].attached then wb:Point("TOP", power, "BOTTOM", 0, 0) else wb:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
 					self.WarlockSpecBars = wb
 				end
 			end
