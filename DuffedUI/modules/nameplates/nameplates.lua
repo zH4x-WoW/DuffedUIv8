@@ -899,7 +899,6 @@ Plates.updateAll = function(self)
 	end
 	self:SetScript("OnUpdate", self.onupdate)
 
-	self:RegisterEvent("CHAT_MSG_CHANNEL")
 	self:RegisterEvent("GROUP_ROSTER_UPDATE")
 	self:RegisterEvent("PARTY_CONVERTED_TO_RAID")
 	self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
