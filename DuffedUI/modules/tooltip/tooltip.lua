@@ -238,7 +238,7 @@ function DuffedUITooltips:OnValueChanged(value)
 		self.text:Show()
 		if unit then
 			min, max = UnitHealth(unit), UnitHealthMax(unit)
-			local hp = D.ShortValue(min).." / "..D.ShortValue(max)
+			local hp = D.ShortValue(min) .. " / " .. D.ShortValue(max)
 			if UnitIsGhost(unit) then
 				self.text:SetText(L["uf"]["ghost"])
 			elseif min == 0 or UnitIsDead(unit) or UnitIsGhost(unit) then
@@ -251,7 +251,7 @@ function DuffedUITooltips:OnValueChanged(value)
 		if unit then
 			min, max = UnitHealth(unit), UnitHealthMax(unit)
 			self.text:Show()
-			local hp = ShortValue(min).." / "..ShortValue(max)
+			local hp = D.ShortValue(min) .. " / " .. D.ShortValue(max)
 			if UnitIsGhost(unit) then
 				self.text:SetText(L["uf"]["ghost"])
 			elseif min == 0 or UnitIsDead(unit) or UnitIsGhost(unit) then
