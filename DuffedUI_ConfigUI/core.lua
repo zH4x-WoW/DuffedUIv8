@@ -449,7 +449,7 @@ function CreateDuffedUIConfigUI()
 				offset = offset + 45
 			elseif type(value) == "table" and not TableFilter[option] then
 				local label = frame:CreateFontString(nil, "OVERLAY", nil)
-				label:SetFont(C["media"].font, 11, "")
+				label:SetFont(C["media"].font, 11, "THINOUTLINE")
 				local o = "DuffedUIConfigUI"..group..option
 				local translate = Local(group .. option)
 
@@ -462,15 +462,16 @@ function CreateDuffedUIConfigUI()
 				colorbuttonname = (label:GetText().."ColorPicker")
 				local colorbutton = CreateFrame("Button", colorbuttonname, frame)
 				colorbutton:SetHeight(20)
-				colorbutton:SetWidth(50)
+				colorbutton:SetWidth(60)
 				colorbutton:SetTemplate("Transparent")
-				colorbutton:SetBackdropBorderColor(unpack(value))
+				colorbutton:SetBackdropColor(unpack(value))
+				colorbutton:SetBackdropBorderColor(.125, .125, .125)
 				colorbutton:SetPoint("LEFT", label, "RIGHT", 3, 0)
 
 				local colortext = colorbutton:CreateFontString(nil, "OVERLAY", nil)
-				colortext:SetFont(C["media"].font, 12, "")
+				colortext:SetFont(C["media"].font, 11, "THINOUTLINE")
 				colortext:SetText("Set Color")
-				colortext:SetPoint("CENTER")
+				colortext:SetPoint("CENTER", 0, -1)
 				colortext:SetJustifyH("CENTER")
 
 				local function round(number, decimal) return (("%%.%df"):format(decimal)):format(number) end
