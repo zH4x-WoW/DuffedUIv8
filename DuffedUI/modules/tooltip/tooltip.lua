@@ -216,18 +216,60 @@ function DuffedUITooltips:Skin()
 	DuffedUITooltips.SetColor(self)
 end
 
-function DuffedUITooltips:OnValueChanged()
-	local _, max = HealthBar:GetMinMaxValues()
-	local value = HealthBar:GetValue()
+function DuffedUITooltips:OnValueChanged(value)
+	if not value then return end
+	local min, max = self:GetMinMaxValues()
 
-	self.Text:SetText(D.ShortValue(value) .. " / " .. D.ShortValue(max))
+	if (value < min) or (value > max) then return end
+	local _, unit = GameTooltip:GetUnit()
+
+	-- fix target of target returning nil
+	if not unit then
+		local GMF = GetMouseFocus()
+		unit = GMF and GMF:GetAttribute("unit")
+	end
+
+	if not self.text then
+		self.text = self:CreateFontString(nil, "OVERLAY")
+		local position = DuffedUITooltipAnchor:GetPoint()
+		if position:match("TOP") then self.text:Point("CENTER", GameTooltipStatusBar, 0, -6) else self.text:Point("CENTER", GameTooltipStatusBar, 0, 6) end
+		
+		self.text:SetFont(C["media"].font, 12, "THINOUTLINE")
+		self.text:Show()
+		if unit then
+			min, max = UnitHealth(unit), UnitHealthMax(unit)
+			local hp = D.ShortValue(min) .. " / " .. D.ShortValue(max)
+			if UnitIsGhost(unit) then
+				self.text:SetText(L["uf"]["ghost"])
+			elseif min == 0 or UnitIsDead(unit) or UnitIsGhost(unit) then
+				self.text:SetText(L["uf"]["dead"])
+			else
+				self.text:SetText(hp)
+			end
+		end
+	else
+		if unit then
+			min, max = UnitHealth(unit), UnitHealthMax(unit)
+			self.text:Show()
+			local hp = D.ShortValue(min) .. " / " .. D.ShortValue(max)
+			if UnitIsGhost(unit) then
+				self.text:SetText(L["uf"]["ghost"])
+			elseif min == 0 or UnitIsDead(unit) or UnitIsGhost(unit) then
+				self.text:SetText(L["uf"]["dead"])
+			else
+				self.text:SetText(hp)
+			end
+		else
+			self.text:Hide()
+		end
+	end
 	return
 end
 
 local hex = function(color) return (color.r and format('|cff%02x%02x%02x', color.r * 255, color.g * 255, color.b * 255)) or "|cffFFFFFF" end
 
-local nilcolor = { r=1, g=1, b=1 }
-local tapped = { r=.6, g=.6, b=.6 }
+local nilcolor = { 1, 1, 1 }
+local tapped = { .6, .6, .6 }
 
 local function unitColor(unit)
 	if (not unit) then unit = "mouseover" end

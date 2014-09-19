@@ -106,9 +106,7 @@ local ScheduleHide = function(frame, elapsed)
 							frame:Hide() 
 							IconFrameList[frame] = nil
 						else 
-							if frame.Poll then 
-								frame.Poll(frame, elapsed) 
-							end
+							if frame.Poll then frame.Poll(frame, elapsed) end
 							framecount = framecount + 1 
 						end
 					end
@@ -125,9 +123,7 @@ local GetTargetNameplate = function()
 	if not UnitExists("target") then return end
 
 	for frame, _ in pairs(NamePlateList) do
-		if frame.guid == UnitGUID("target") then
-			return frame
-		end
+		if frame.guid == UnitGUID("target") then return frame end
 	end
 end
 
@@ -151,11 +147,7 @@ local UpdateComboPoints = function(self, isMouseover)
 	if not self then return end
 
 	local cp
-	if UnitHasVehicleUI("player") then
-		cp = GetComboPoints("vehicle", unit)
-	else
-		cp = GetComboPoints("player", unit)
-	end
+	if UnitHasVehicleUI("player") then cp = GetComboPoints("vehicle", unit) else cp = GetComboPoints("player", unit) end
 
 	for i = 1, MAX_COMBO_POINTS do
 		if i <= cp then
@@ -193,11 +185,7 @@ end
 local UpdateCastbarColor = function(self)
 	if self.castbar == nil then return end
 	if self.castbar.shield == nil then return end
-	if self.castbar.shield:IsShown() then
-		self.castbar:SetStatusBarColor(.78, .25, .25, 1)
-	else 
-		self.castbar:SetStatusBarColor(1, .82, 0)
-	end
+	if self.castbar.shield:IsShown() then self.castbar:SetStatusBarColor(.78, .25, .25, 1) else self.castbar:SetStatusBarColor(1, .82, 0) end
 end
 
 local UpdateColor = function(self)
@@ -218,9 +206,7 @@ local UpdateColor = function(self)
 	if r ~= r1 or g ~= g1 or b ~= b1 then
 		for class, _ in pairs(RAID_CLASS_COLORS) do
 			local bb = b
-			if class == "MONK" then
-				bb = bb - .01
-			end
+			if class == "MONK" then bb = bb - .01 end
 
 			if RAID_CLASS_COLORS[class].r == r and RAID_CLASS_COLORS[class].g == g and RAID_CLASS_COLORS[class].b == bb then
 				self.health:SetStatusBarColor(RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b)
@@ -232,14 +218,19 @@ local UpdateColor = function(self)
 		local color
 		if (r + b + b) > 2 then -- tapped
 			r, g, b = .5, .5, .5
+			self.isFriendly = false
 		elseif g + b == 0 then -- hostile
 			r, g, b = .8, 0, 0
+			self.isFriendly = false
 		elseif r + b == 0 then -- friendly npc
 			r, g, b = 0, .9, .1
+			self.isFriendly = true
 		elseif r + g > 1.95 then -- neutral
 			color = .9, .9, 0
+			self.isFriendly = false
 		elseif r + g == 0 then -- friendly player
 			r, g, b = 0, .6, .9
+			self.isFriendly = true
 		else -- enemy player
 			--r, g, b = 1, 0, 0
 		end
@@ -462,9 +453,7 @@ end
 local Schedule = function(self, object)
 	if self.queue == nil then self.queue = {} end
 	self.queue[object] = true
-	if object.OldTexture then 
-		object:SetTexture(object.OldTexture) 
-	end
+	if object.OldTexture then object:SetTexture(object.OldTexture) end
 end
 
 local GetFilter = function(self, ...)
@@ -504,31 +493,62 @@ local GetGUID = function(self)
 		self.unit = "target"
 		UpdateAurasByUnit("target")
 		UpdateComboPoints(self)
-		if UnitIsPlayer("target") then
-			NameClasses[self.oldname:GetText()] = select(2, UnitClass("target"))
-		end
+		if UnitIsPlayer("target") then NameClasses[self.oldname:GetText()] = select(2, UnitClass("target"))end
 	elseif self.highlight and self.highlight:IsShown() and UnitExists("mouseover") and UnitName("mouseover") == self.oldname:GetText() then
 		self.guid = UnitGUID("mouseover")
 		self.unit = "mouseover"
 		UpdateAurasByUnit("mouseover")
 		NameGUID[self.oldname:GetText()] = self.guid
 		UpdateComboPoints(self, true)
-		if UnitIsPlayer("mouseover") then
-			NameClasses[self.oldname:GetText()] = select(2, UnitClass("mouseover"))
-		end
+		if UnitIsPlayer("mouseover") then NameClasses[self.oldname:GetText()] = select(2, UnitClass("mouseover")) end
 	else
 		self.unit = nil
 	end
 end
 
+local goodR, goodG, goodB = unpack(C["nameplate"].threat_goodcolor)
+local badR, badG, badB = unpack(C["nameplate"].threat_badcolor)
+local transitionR, transitionG, transitionB = unpack(C["nameplate"].threat_transitioncolor)
 local UpdateThreat = function(self)
-	if self.hasClass then return end
+	if self.hasClass or self.isTagged then return end
 	if self.health == nil then return end
-	if self.old_threat:IsShown() then
-		local _, val = self.old_threat:GetVertexColor()
-		if val > .7 then self.threat:SetVertexColor(1, .5, 0) else self.threat:SetVertexColor(1, 0, 0) end
+	UpdateColor(self)
+	if C["nameplate"]. threat then
+		if not self.old_threat:IsShown() then
+			if InCombatLockdown() and self.isFriendly ~= true then
+				if D.Role == "Tank" then
+					self.health:SetStatusBarColor(badR, badG, badB)
+					self.health.bg:SetTexture(badR, badG, badB, 0.25)
+				else
+					self.health:SetStatusBarColor(goodR, goodG, goodB)
+					self.health.bg:SetTexture(goodR, goodG, goodB, 0.25)
+				end
+			else
+				self.health:SetStatusBarColor(self.health.rcolor, self.health.gcolor, self.health.bcolor)
+				self.health.bg:SetTexture(self.health.rcolor, self.health.gcolor, self.health.bcolor, 0.25)
+			end
+		else
+			local r, g, b = self.old_threat:GetVertexColor()
+			if g + b == 0 then
+				if D.Role == "Tank" then
+					self.health:SetStatusBarColor(goodR, goodG, goodB)
+					self.health.bg:SetTexture(goodR, goodG, goodB, 0.25)
+				else
+					self.health:SetStatusBarColor(badR, badG, badB)
+					self.health.bg:SetTexture(badR, badG, badB, 0.25)
+				end
+			else
+				self.health:SetStatusBarColor(transitionR, transitionG, transitionB)
+				self.health.bg:SetTexture(transitionR, transitionG, transitionB, 0.25)
+			end
+		end
 	else
-		self.threat:SetVertexColor(unpack(C["media"].backdropcolor))
+		if self.old_threat:IsShown() then
+			local _, val = self.old_threat:GetVertexColor()
+			if val > .7 then self.threat:SetVertexColor(1, .5, 0) else self.threat:SetVertexColor(1, 0, 0) end
+		else
+			self.threat:SetVertexColor(unpack(C["media"].backdropcolor))
+		end
 	end
 
 	if self.unit == "target" then self.health.name:SetTextColor(1, 1, 0) else self.health.name:SetTextColor(1, 1, 1) end
@@ -582,7 +602,7 @@ local CastBar_OnShow = function(self)
 		self.castbar:SetStatusBarColor(1, .82, 0) 
 	end
 
-	self.castbar.icon:SetSize(C["nameplate"].CastHeight + mult * 9 + C["nameplate"].height, C["nameplate"].CastHeight + mult * 9 + C["nameplate"].height)
+	self.castbar.icon:SetSize(C["nameplate"].CastHeight + mult * 9 + C["nameplate"].plateheight, C["nameplate"].CastHeight + mult * 9 + C["nameplate"].plateheight)
 	self.castbar:Hide()
 	HideQueque(self)
 	self.castbar:Show()
@@ -632,14 +652,15 @@ local StylePlate = function(self)
 		self.plate = CreateFrame("Frame", nil, WorldFrame)
 		self.plate:SetFrameStrata("BACKGROUND")
 		self.plate:Hide()
-		self.plate:SetSize(C["nameplate"].width, C["nameplate"].height)
+		self.plate:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
 		self.plate.parent = self
 	end
 
 	if self.health == nil then
 		self.health = CreateFrame("StatusBar", nil, self.plate)
 		self.health:SetStatusBarTexture(C["media"].normTex)
-		self.health:SetSize(C["nameplate"].width, C["nameplate"].height)
+		self.health:GetStatusBarTexture():SetHorizTile(true)
+		self.health:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
 		self.health:SetPoint("BOTTOM", self, "BOTTOM", 0, 5)
 		self.health:SetTemplate()
 
@@ -659,11 +680,13 @@ local StylePlate = function(self)
 	end
 
 	if self.threat == nil then
-		self.threat = self.health:CreateTexture(nil, "BORDER")
-		self.threat:SetPoint("TOPLEFT", -mult * 2, mult * 2)
-		self.threat:SetPoint("BOTTOMRIGHT", mult * 2, -mult * 2)
-		self.threat:SetTexture(1, 1, 1)
-		self.threat:SetDrawLayer("BORDER", -3)
+		if not C["nameplate"].threat then
+			self.threat = self.health:CreateTexture(nil, "BORDER")
+			self.threat:SetPoint("TOPLEFT", -mult * 2, mult * 2)
+			self.threat:SetPoint("BOTTOMRIGHT", mult * 2, -mult * 2)
+			self.threat:SetTexture(1, 1, 1)
+			self.threat:SetDrawLayer("BORDER", -3)
+		end
 	end
 
 	if self.rare == nil then
@@ -679,7 +702,7 @@ local StylePlate = function(self)
 		self.health.name = self.health:CreateFontString("$parentHealth", "OVERLAY")
 		self.health.name:SetFont(Font, 11, "THINOUTLINE")
 		self.health.name:SetPoint("BOTTOMLEFT", self.health, "TOPLEFT", 0, 5)
-		self.health.name:SetSize(C["nameplate"].width, C["nameplate"].height)
+		self.health.name:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
 	end
 
 	if self.health.perc == nil then
@@ -704,7 +727,7 @@ local StylePlate = function(self)
 		self.castbar.bg:SetTexture(unpack(C["media"].backdropcolor))
 		self.castbar.bg:SetDrawLayer("BORDER", -8)
 
-		self.castbar:SetSize(C["nameplate"].width + 3, C["nameplate"].CastHeight)
+		self.castbar:SetSize(C["nameplate"].platewidth + 3, C["nameplate"].CastHeight)
 		self.castbar:SetPoint("TOP", self.health, "BOTTOM", 0, -5)
 		self.castbar:SetStatusBarTexture(C["media"].normTex)
 		self.castbar:GetStatusBarTexture():SetHorizTile(true)
@@ -737,7 +760,7 @@ local StylePlate = function(self)
 		self.raidicon = raidicon
 	end
 
-	if C["nameplate"].ShowComboPoints then
+	if C["nameplate"].ComboPoints then
 		if self.cpoints == nil then
 			self.cpoints = CreateFrame("Frame", nil, self.health)
 			self.cpoints:SetSize((16 * UIParent:GetScale()) * 5, 1)
@@ -762,7 +785,7 @@ local StylePlate = function(self)
 			self.AuraWidget = CreateFrame("Frame", nil, self.plate)
 			self.AuraWidget:SetHeight(32) 
 			self.AuraWidget:Show()
-			self.AuraWidget:SetSize(C["nameplate"].width, C["nameplate"].height)
+			self.AuraWidget:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
 			self.AuraWidget:SetPoint("BOTTOM", self.health, "TOP", 0, 20)
 
 			self.AuraWidget.PollFunction = function(self, elapsed)
@@ -899,7 +922,6 @@ Plates.updateAll = function(self)
 	end
 	self:SetScript("OnUpdate", self.onupdate)
 
-	self:RegisterEvent("CHAT_MSG_CHANNEL")
 	self:RegisterEvent("GROUP_ROSTER_UPDATE")
 	self:RegisterEvent("PARTY_CONVERTED_TO_RAID")
 	self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")

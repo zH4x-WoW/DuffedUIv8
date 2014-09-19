@@ -18,3 +18,6 @@ D.noscalemult = D.mult * C["general"].uiscale
 D.raidscale = 1
 
 C["datatext"].fontsize = C["datatext"].fontsize * mult
+C["font"].duffeduisize = C["font"].duffeduisize * mult
+C["font"].duffedui_altsize = C["font"].duffedui_altsize * mult
+C["font"].pixelfontsize = C["font"].pixelfontsize * mult

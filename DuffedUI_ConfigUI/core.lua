@@ -77,6 +77,35 @@ local function SetValue(group, option, value)
 	end
 end
 
+local GetOrderedIndex = function(t)
+	local OrderedIndex = {}
+
+	for key in pairs(t) do table.insert(OrderedIndex, key) end
+	table.sort(OrderedIndex)
+	return OrderedIndex
+end
+
+local OrderedNext = function(t, state)
+	local Key
+
+	if (state == nil) then
+		t.OrderedIndex = GetOrderedIndex(t)
+		Key = t.OrderedIndex[1]
+		return Key, t[Key]
+	end
+
+	Key = nil
+	for i = 1, #t.OrderedIndex do
+		if (t.OrderedIndex[i] == state) then Key = t.OrderedIndex[i + 1] end
+	end
+
+	if Key then return Key, t[Key] end
+	t.OrderedIndex = nil
+	return
+end
+
+local PairsByKeys = function(t) return OrderedNext, t, nil end
+
 local VISIBLE_GROUP = nil
 local function ShowGroup(group)
 	local D, C, L = unpack(DuffedUI)
@@ -248,7 +277,7 @@ function CreateDuffedUIConfigUI()
 	child:SetPoint("TOPLEFT")
 
 	local offset = 5
-	for group in pairs(ALLOWED_GROUPS) do
+	for group, table in PairsByKeys(ALLOWED_GROUPS) do
 		local o = "DuffedUIConfigUI"..group
 		local translate = Local(group)
 		local button = NewButton("|cffffffff".. translate.."|r", child)
@@ -310,7 +339,7 @@ function CreateDuffedUIConfigUI()
 		group:SetVerticalScroll(value)
 	end)
 
-	for group in pairs(ALLOWED_GROUPS) do
+	for group, table in PairsByKeys(ALLOWED_GROUPS) do
 		local frame = CreateFrame("Frame", "DuffedUIConfigUI"..group, DuffedUIConfigUIGroup)
 		frame:SetPoint("TOPLEFT")
 		frame:SetWidth(325)
@@ -318,7 +347,7 @@ function CreateDuffedUIConfigUI()
 		local offset = 5
 
 		if type(C[group]) ~= "table" then error(group.." GroupName not found in config table.") return end
-		for option, value in pairs(C[group]) do
+		for option, value in  PairsByKeys(C[group]) do
 			if type(value) == "boolean" then
 				local button = CreateFrame("CheckButton", "DuffedUIConfigUI"..group..option, frame, "InterfaceOptionsCheckButtonTemplate")
 				local o = "DuffedUIConfigUI"..group..option
@@ -420,7 +449,7 @@ function CreateDuffedUIConfigUI()
 				offset = offset + 45
 			elseif type(value) == "table" and not TableFilter[option] then
 				local label = frame:CreateFontString(nil, "OVERLAY", nil)
-				label:SetFont(C["media"].font, 11, "")
+				label:SetFont(C["media"].font, 11, "THINOUTLINE")
 				local o = "DuffedUIConfigUI"..group..option
 				local translate = Local(group .. option)
 
@@ -433,15 +462,16 @@ function CreateDuffedUIConfigUI()
 				colorbuttonname = (label:GetText().."ColorPicker")
 				local colorbutton = CreateFrame("Button", colorbuttonname, frame)
 				colorbutton:SetHeight(20)
-				colorbutton:SetWidth(50)
+				colorbutton:SetWidth(60)
 				colorbutton:SetTemplate("Transparent")
-				colorbutton:SetBackdropBorderColor(unpack(value))
+				colorbutton:SetBackdropColor(unpack(value))
+				colorbutton:SetBackdropBorderColor(.125, .125, .125)
 				colorbutton:SetPoint("LEFT", label, "RIGHT", 3, 0)
 
 				local colortext = colorbutton:CreateFontString(nil, "OVERLAY", nil)
-				colortext:SetFont(C["media"].font, 12, "")
+				colortext:SetFont(C["media"].font, 11, "THINOUTLINE")
 				colortext:SetText("Set Color")
-				colortext:SetPoint("CENTER")
+				colortext:SetPoint("CENTER", 0, -1)
 				colortext:SetJustifyH("CENTER")
 
 				local function round(number, decimal) return (("%%.%df"):format(decimal)):format(number) end

@@ -3,14 +3,14 @@ local D, C, L = unpack(select(2, ...))
 C["media"] = {
 	["font"] = [[Interface\Addons\DuffedUI\medias\fonts\normal_font.ttf]],
 	["font2"] = [[Interface\Addons\DuffedUI\medias\fonts\normal_font2.ttf]],
-	["dmgfont"] = [[Interface\AddOns\DuffedUI\medias\fonts\combat_font.ttf]],
+	["dmgfont"] = [[Interface\AddOns\DuffedUI\medias\fonts\combat.ttf]],
 	["pixelfont"] = [[Interface\Addons\DuffedUI\medias\fonts\pixel_font.ttf]],
 
 	["fr_font"] = [=[Interface\Addons\DuffedUI\medias\fonts\normal_font.ttf]=],
-	["fr_dmgfont"] = [=[Interface\AddOns\DuffedUI\medias\fonts\combat_font.ttf]=],
+	["fr_dmgfont"] = [=[Interface\AddOns\DuffedUI\medias\fonts\combat.ttf]=],
 
 	["ru_font"] = [=[Interface\Addons\DuffedUI\medias\fonts\normal_font.ttf]=],
-	["ru_dmgfont"] = [[Interface\AddOns\DuffedUI\medias\fonts\combat_font_rus.ttf]],
+	["ru_dmgfont"] = [[Interface\AddOns\DuffedUI\medias\fonts\combat_rus.ttf]],
 
 	["tw_font"] = [=[Fonts\bLEI00D.ttf]=],
 	["tw_dmgfont"] = [[Fonts\bLEI00D.ttf]],

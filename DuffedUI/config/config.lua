@@ -75,15 +75,19 @@ C["castbar"] = {
 }
 
 C["nameplate"] = {
-	["enable"] = true,
-	["debuffs"] = true,
-	["width"] = 110,
-	["height"] = 7,
 	["auraswidth"] = 20,
 	["aurasheight"] = 15,
-	["MaxDebuffs"] = 5,
 	["CastHeight"] = 5,
-	["ShowComboPoints"] = true,
+	["ComboPoints"] = true,
+	["debuffs"] = true,
+	["enable"] = true,
+	["MaxDebuffs"] = 5,
+	["platewidth"] = 110,
+	["plateheight"] = 7,
+	["threat"] = false,
+	["threat_goodcolor"] = {.29,  .69, .3},
+	["threat_badcolor"] = {.78, .25, .25},
+	["threat_transitioncolor"] = {.86, .77, .36},
 }
 
 C["actionbar"] = {
