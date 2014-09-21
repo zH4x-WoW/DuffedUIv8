@@ -497,7 +497,6 @@ local UpdateThreat = function(self)
 	if self.hasClass or self.isTagged then return end
 	if self.health == nil then return end
 
-	--UpdateColor(self.health)
 	if C["nameplate"].threat then
 		if not self.old_threat:IsShown() then
 			if InCombatLockdown() and self.isFriendly ~= true then
@@ -509,8 +508,8 @@ local UpdateThreat = function(self)
 					self.health.bg:SetTexture(goodR, goodG, goodB, 0.25)
 				end
 			else
-				self.health:SetStatusBarColor(self.health.rcolor, self.health.gcolor, self.health.bcolor)
-				self.health.bg:SetTexture(self.health.rcolor, self.health.gcolor, self.health.bcolor, 0.25)
+				self.health:SetStatusBarColor(r, g, b)
+				self.health.bg:SetTexture(r, g, b, 0.25)
 			end
 		else
 			local r, g, b = self.old_threat:GetVertexColor()
