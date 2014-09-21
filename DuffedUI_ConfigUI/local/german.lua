@@ -75,7 +75,7 @@
 
 	-- nameplate
 	DuffedUIConfigUILocalization.nameplate = "Namensplaketten"
-	DuffedUIConfigUILocalization.nameplateenable = "Aktiviere die DuffedUI Namensplaketten"
+	DuffedUIConfigUILocalization.nameplateactive = "Aktiviere die DuffedUI Namensplaketten"
 	DuffedUIConfigUILocalization.nameplatedebuffs = "Aktviere die Anzeige der Schwächungszauber"
 	DuffedUIConfigUILocalization.nameplateplatewidth = "'Breite' der Namensplaketten (Standard = 110)"
 	DuffedUIConfigUILocalization.nameplateplateheight = "'Höhe' der Namensplaketten (Standard = 7)"

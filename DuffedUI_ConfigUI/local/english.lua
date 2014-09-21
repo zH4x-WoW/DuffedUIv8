@@ -76,7 +76,7 @@ DuffedUIConfigUILocalization.castbarplayerwidth = "Set width of player castbar"
 
 -- nameplate
 DuffedUIConfigUILocalization.nameplate = "Nameplates"
-DuffedUIConfigUILocalization.nameplateenable = "Enable Nameplates"
+DuffedUIConfigUILocalization.nameplateactive = "Enable Nameplates"
 DuffedUIConfigUILocalization.nameplatedebuffs = "Enable debuff display"
 DuffedUIConfigUILocalization.nameplateplatewidth = "Set width of nameplates (default = 110)"
 DuffedUIConfigUILocalization.nameplateplateheight = "Set height of nameplates (default = 7)"

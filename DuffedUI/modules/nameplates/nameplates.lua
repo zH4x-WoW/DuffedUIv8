@@ -1,5 +1,5 @@
 ﻿local D, C, L = unpack(select(2, ...))
-if C["nameplate"].enable ~= true then return end
+if C["nameplate"].active ~= true then return end
 
 local Plates = CreateFrame("Frame", "Plates", UIParent)
 
@@ -190,52 +190,36 @@ end
 
 local UpdateColor = function(self)
 	if self.oldhealth == nil then return end
+	local r, g, b = self.oldhealth:GetStatusBarColor()
 
-	if self.oldname then
-		local class = NameClasses[self.oldname:GetText()]
-		if class then
-			self.health:SetStatusBarColor(RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b)
+	for class, color in pairs(RAID_CLASS_COLORS) do
+		local r, g, b = floor(r * 100 + .5) / 100, floor(g * 100 + .5) / 100, floor(b * 100 + .5) / 100
+		if RAID_CLASS_COLORS[class].r == r and RAID_CLASS_COLORS[class].g == g and RAID_CLASS_COLORS[class].b == b then
+			self.hasClass = true
+			self.isFriendly = false
+			self.health:SetStatusBarColor(unpack(oUFDuffedUI.colors.class[class]))
 			return
 		end
 	end
 
-	local r, g, b = self.oldhealth:GetStatusBarColor()
-	r, g, b = floor(r * 100 + .5) / 100, floor(g * 100 + .5) / 100, floor(b * 100 + .5) / 100
-	local r1, g1, b1 = self.health:GetStatusBarColor()
-
-	if r ~= r1 or g ~= g1 or b ~= b1 then
-		for class, _ in pairs(RAID_CLASS_COLORS) do
-			local bb = b
-			if class == "MONK" then bb = bb - .01 end
-
-			if RAID_CLASS_COLORS[class].r == r and RAID_CLASS_COLORS[class].g == g and RAID_CLASS_COLORS[class].b == bb then
-				self.health:SetStatusBarColor(RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b)
-				self.hasClass = class
-				return
-			end
-		end
-
-		local color
-		if (r + b + b) > 2 then -- tapped
-			r, g, b = .5, .5, .5
-			self.isFriendly = false
-		elseif g + b == 0 then -- hostile
-			r, g, b = .8, 0, 0
-			self.isFriendly = false
-		elseif r + b == 0 then -- friendly npc
-			r, g, b = 0, .9, .1
-			self.isFriendly = true
-		elseif r + g > 1.95 then -- neutral
-			color = .9, .9, 0
-			self.isFriendly = false
-		elseif r + g == 0 then -- friendly player
-			r, g, b = 0, .6, .9
-			self.isFriendly = true
-		else -- enemy player
-			--r, g, b = 1, 0, 0
-		end
-		self.health:SetStatusBarColor(r, g, b)
+	if g + b == 0 then
+		r, g, b = .87, .37, .37
+		self.isFriendly = false
+	elseif r + b == 0 then
+		r, g, b = .31, .45, .63
+		self.isFriendly = true
+	elseif r + g > 1.95 then
+		r, g, b = .86, .77, .36
+		self.isFriendly = false
+	elseif r + g == 0 then
+		r, g, b = .29,  .69, .3
+		self.isFriendly = true
+	else
+		self.isFriendly = false
 	end
+	self.hasClass = false
+
+	self.health:SetStatusBarColor(r, g, b)
 end
 
 local UpdateIcon = function(self, texture, expiration, stacks)
@@ -512,8 +496,9 @@ local transitionR, transitionG, transitionB = unpack(C["nameplate"].threat_trans
 local UpdateThreat = function(self)
 	if self.hasClass or self.isTagged then return end
 	if self.health == nil then return end
-	UpdateColor(self)
-	if C["nameplate"]. threat then
+
+	--UpdateColor(self.health)
+	if C["nameplate"].threat then
 		if not self.old_threat:IsShown() then
 			if InCombatLockdown() and self.isFriendly ~= true then
 				if D.Role == "Tank" then
@@ -576,8 +561,6 @@ local HealthBar_OnValue = function(self, value)
 	local health = self.parent.health
 	health:SetMinMaxValues(self:GetMinMaxValues())
 	health:SetValue(self:GetValue())
-	local _, mx = health:GetMinMaxValues()
-	health.perc:SetText(math.min(math.ceil((value or 0)/((mx or 0) / 100)), 100))
 end
 
 local CastBar_OnValue = function(self, value) 
@@ -596,11 +579,7 @@ local CastBar_OnShow = function(self)
 	self.castbar.icon:SetTexture(self.oldcbicon:GetTexture())
 	self.castbar.name:SetText(self.oldcbname:GetText())
 
-	if self.castbar.shield:IsShown() then 
-		self.castbar:SetStatusBarColor(.78, .25, .25, 1) 
-	else 
-		self.castbar:SetStatusBarColor(1, .82, 0) 
-	end
+	if self.castbar.shield:IsShown() then self.castbar:SetStatusBarColor(.78, .25, .25, 1) else self.castbar:SetStatusBarColor(1, .82, 0) end
 
 	self.castbar.icon:SetSize(C["nameplate"].CastHeight + mult * 9 + C["nameplate"].plateheight, C["nameplate"].CastHeight + mult * 9 + C["nameplate"].plateheight)
 	self.castbar:Hide()
@@ -612,8 +591,6 @@ local HealthBar_OnShow = function(self)
 	self.health:SetMinMaxValues(self.oldhealth:GetMinMaxValues())
 	self.health:SetValue(self.oldhealth:GetValue())
 
-	local _, mx = self.health:GetMinMaxValues()
-	self.health.perc:SetText(math.min(math.ceil((self.oldhealth:GetValue() or 0) / ((mx or 0) / 100)), 100))
 	self.hasClass = nil
 	self.health.name:SetText(self.oldname:GetText())
 	self.highlight:ClearAllPoints()
@@ -700,15 +677,9 @@ local StylePlate = function(self)
 
 	if self.health.name == nil then
 		self.health.name = self.health:CreateFontString("$parentHealth", "OVERLAY")
-		self.health.name:SetFont(Font, 11, "THINOUTLINE")
+		self.health.name:SetFont(Font, 10, "THINOUTLINE")
 		self.health.name:SetPoint("BOTTOMLEFT", self.health, "TOPLEFT", 0, 5)
 		self.health.name:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
-	end
-
-	if self.health.perc == nil then
-		self.health.perc = self.health:CreateFontString("$parentHealthPercent", "OVERLAY")
-		self.health.perc:SetFont(Font, 11, "THINOUTLINE")
-		self.health.perc:SetPoint("LEFT", self.health, "RIGHT", 4, 0)
 	end
 
 	if self.highlight == nil then
@@ -854,7 +825,7 @@ local StylePlate = function(self)
 	NamePlateList[self] = true
 end
 
-local UpdateRoster = function()
+--[[local UpdateRoster = function()
 	local groupType, groupSize, unitId, unitName
 	if IsInRaid() then 
 		groupType = "raid"
@@ -877,7 +848,7 @@ local UpdateRoster = function()
 			end
 		end
 	end	
-end
+end]]
 
 Plates.updateAll = function(self)
 	playerFaction = select(1, UnitFactionGroup("player")) == "Horde" and 1 or 0
@@ -889,7 +860,7 @@ Plates.updateAll = function(self)
 	timeToUpdate = 0
 	self.numChildren = -1
 	ScheduleFrameActive = false
-	UpdateRoster()
+	--UpdateRoster()
 
 	if self.onupdate == nil then
 		self.onupdate = function(self, elapsed)

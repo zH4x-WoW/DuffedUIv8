@@ -75,12 +75,12 @@ C["castbar"] = {
 }
 
 C["nameplate"] = {
+	["active"] = true,
 	["auraswidth"] = 20,
 	["aurasheight"] = 15,
 	["CastHeight"] = 5,
 	["ComboPoints"] = true,
 	["debuffs"] = true,
-	["enable"] = true,
 	["MaxDebuffs"] = 5,
 	["platewidth"] = 110,
 	["plateheight"] = 7,
