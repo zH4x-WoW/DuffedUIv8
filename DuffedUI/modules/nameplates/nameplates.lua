@@ -139,11 +139,9 @@ local UpdateComboPoints = function(self, isMouseover)
 
 	if type(self) ~= "table" then
 		if not UnitExists("target") then return end
-
 		frame = GetTargetNameplate()
 		if frame then ForEachFrame(HideComboPoints) end
 	end
-
 	if not self then return end
 
 	local cp
@@ -420,9 +418,7 @@ local UpdateAuraByLookup = function(guid)
 		local unit = GroupTargetList[guid]
 		if unit then
 			local unittarget = UnitGUID(unit.."target")
-			if guid == unittarget and UnitIsEnemy(unittarget, "player") then 
-				UpdateAurasByUnit(unittarget)
-			end
+			if guid == unittarget and UnitIsEnemy(unittarget, "player") then UpdateAurasByUnit(unittarget) end
 		end
 	elseif IsArena then
 		for i = 1, 5 do
@@ -494,6 +490,7 @@ local goodR, goodG, goodB = unpack(C["nameplate"].threat_goodcolor)
 local badR, badG, badB = unpack(C["nameplate"].threat_badcolor)
 local transitionR, transitionG, transitionB = unpack(C["nameplate"].threat_transitioncolor)
 local UpdateThreat = function(self)
+	UpdateColor(self.health)
 	if self.hasClass or self.isTagged then return end
 	if self.health == nil then return end
 
@@ -508,8 +505,8 @@ local UpdateThreat = function(self)
 					self.health.bg:SetTexture(goodR, goodG, goodB, 0.25)
 				end
 			else
-				self.health:SetStatusBarColor(r, g, b)
-				self.health.bg:SetTexture(r, g, b, 0.25)
+				self.health:SetStatusBarColor(self.health.r, self.health.g, self.health.b)
+				self.health.bg:SetTexture(self.health.r, self.health.g, self.health.b, 0.25)
 			end
 		else
 			local r, g, b = self.old_threat:GetVertexColor()
@@ -566,11 +563,7 @@ local CastBar_OnValue = function(self, value)
 	local castbar = self.parent.castbar
 	castbar:SetMinMaxValues(self:GetMinMaxValues())  
 	castbar:SetValue(value) 
-	if castbar.shield:IsShown() then
-		castbar:SetStatusBarColor(.78, .25, .25, 1)
-	else 
-		castbar:SetStatusBarColor(1, .82, 0)
-	end
+	if castbar.shield:IsShown() then castbar:SetStatusBarColor(.78, .25, .25, 1) else castbar:SetStatusBarColor(1, .82, 0) end
 end
 
 local CastBar_OnShow = function(self)
@@ -579,7 +572,6 @@ local CastBar_OnShow = function(self)
 	self.castbar.name:SetText(self.oldcbname:GetText())
 
 	if self.castbar.shield:IsShown() then self.castbar:SetStatusBarColor(.78, .25, .25, 1) else self.castbar:SetStatusBarColor(1, .82, 0) end
-
 	self.castbar.icon:SetSize(C["nameplate"].CastHeight + mult * 9 + C["nameplate"].plateheight, C["nameplate"].CastHeight + mult * 9 + C["nameplate"].plateheight)
 	self.castbar:Hide()
 	HideQueque(self)
@@ -740,11 +732,7 @@ local StylePlate = function(self)
 				self.cpoints[i] = self.cpoints:CreateTexture(nil, "OVERLAY")
 				self.cpoints[i]:SetTexture("Interface\\FriendsFrame\\StatusIcon-Offline")
 				self.cpoints[i]:SetSize(16 * UIParent:GetScale(), 16 * UIParent:GetScale())
-				if i == 1 then
-					self.cpoints[i]:SetPoint("LEFT", self.cpoints, "TOPLEFT")
-				else
-					self.cpoints[i]:SetPoint("LEFT", self.cpoints[i - 1], "RIGHT", 0, 0)
-				end
+				if i == 1 then self.cpoints[i]:SetPoint("LEFT", self.cpoints, "TOPLEFT") else self.cpoints[i]:SetPoint("LEFT", self.cpoints[i - 1], "RIGHT", 0, 0) end
 				self.cpoints[i]:Hide()
 			end
 		end
@@ -764,9 +752,7 @@ local StylePlate = function(self)
 			end
 			self.AuraWidget.AuraIconFrames = {}
 			local AuraIconFrames = self.AuraWidget.AuraIconFrames
-			for index = 1, C["nameplate"].MaxDebuffs do 
-				AuraIconFrames[index] = CreateAuraIcon(self.AuraWidget)
-			end
+			for index = 1, C["nameplate"].MaxDebuffs do AuraIconFrames[index] = CreateAuraIcon(self.AuraWidget) end
 			local FirstRowCount = min(C["nameplate"].MaxDebuffs / 2)
 
 			AuraIconFrames[1]:SetPoint("RIGHT", self.AuraWidget, -1, 0)
@@ -775,9 +761,7 @@ local StylePlate = function(self)
 			self.AuraWidget._Hide = self.AuraWidget.Hide
 			self.AuraWidget.Hide = function() if self.AuraWidget.guidcache then self.AuraWidget.unit = nil end self.AuraWidget:_Hide() end
 			self.AuraWidget:SetScript("OnHide", function() 
-				for index = 1, C["nameplate"].MaxDebuffs do 
-					ScheduleHide(AuraIconFrames[index], 0) 
-				end 
+				for index = 1, C["nameplate"].MaxDebuffs do ScheduleHide(AuraIconFrames[index], 0) end 
 			end)
 		end
 	end
@@ -819,12 +803,11 @@ local StylePlate = function(self)
 	self.old_castbar:HookScript("OnShow", CastBar_OnShow)
 	self.old_castbar:HookScript("OnHide", function(self) self.parent.castbar:Hide() end)
 	self.old_castbar:HookScript("OnValueChanged", CastBar_OnValue)
-
 	fadeIn(self.plate)
 	NamePlateList[self] = true
 end
 
---[[local UpdateRoster = function()
+local UpdateRoster = function()
 	local groupType, groupSize, unitId, unitName
 	if IsInRaid() then 
 		groupType = "raid"
@@ -847,7 +830,7 @@ end
 			end
 		end
 	end	
-end]]
+end
 
 Plates.updateAll = function(self)
 	playerFaction = select(1, UnitFactionGroup("player")) == "Horde" and 1 or 0
@@ -859,7 +842,7 @@ Plates.updateAll = function(self)
 	timeToUpdate = 0
 	self.numChildren = -1
 	ScheduleFrameActive = false
-	--UpdateRoster()
+	UpdateRoster()
 
 	if self.onupdate == nil then
 		self.onupdate = function(self, elapsed)
@@ -913,9 +896,7 @@ Plates:SetScript("OnEvent", function(self, event, ...)
 		local _, subEvent, _, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, spellid, spellName, _, auraType, stackCount  = ...
 		if band(sourceFlags, COMBATLOG_OBJECT_FOCUS) then
 			foundPlate = SearchNameplate(_,_,sourceName)
-			if foundPlate and foundPlate:IsShown() and foundPlate.unit ~= "target" then 
-				foundPlate.unit = "focus"
-			end
+			if foundPlate and foundPlate:IsShown() and foundPlate.unit ~= "target" then foundPlate.unit = "focus" end
 		end
 		if band(sourceFlags, COMBATLOG_OBJECT_TYPE_PLAYER) > 0 then 
 			if sourceGUID and sourceName then
@@ -923,9 +904,7 @@ Plates:SetScript("OnEvent", function(self, event, ...)
 				if class and name then
 					NameClasses[name] = class
 				else
-					if NameClasses[name] then
-						NameClasses[name] = nil
-					end
+					if NameClasses[name] then NameClasses[name] = nil end
 				end
 			end
 		end
@@ -969,7 +948,6 @@ Plates:SetScript("OnEvent", function(self, event, ...)
 			else 
 				return 
 			end
-
 			if foundPlate and foundPlate:IsShown() and foundPlate.unit ~= "target" then foundPlate.guid = sourceGUID end
 		end
 
@@ -977,7 +955,7 @@ Plates:SetScript("OnEvent", function(self, event, ...)
 			if (band(destFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) == 0) and auraType == "DEBUFF" then
 				UpdateAuraByLookup(destGUID)
 				local name, raidicon
-				
+
 				if band(destFlags, COMBATLOG_OBJECT_CONTROL_PLAYER) > 0 then 
 					local rawName = strsplit("-", destName or " ")
 					NameGUID[rawName] = destGUID
