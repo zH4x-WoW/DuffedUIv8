@@ -188,7 +188,6 @@ local function LoadSkin()
 	hooksecurefunc("ScenarioQueueFrameRandom_UpdateFrame", SkinScenarioRewards)
 
 	-- Raid frame (social frame)
-	RaidFrameRaidBrowserButton:SetTemplate("Default")
 	RaidFrameAllAssistCheckButton:SkinCheckBox()
 
 	-- Looking for raid

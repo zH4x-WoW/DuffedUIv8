@@ -37,6 +37,8 @@ D.Credits = {
 	"Haste",
 	"humfras aka Shinizu",
 	"Hizuro",
+	"Duugu",
+	"Phanx",
 }
 
 D.DuffedCredits = {
