@@ -400,20 +400,6 @@ D.PortraitUpdate = function(self, unit)
 	end
 end
 
---[[local CheckInterrupt = function(self, unit)
-	if unit == "vehicle" then unit = "player" end
-
-	if self.interrupt and UnitCanAttack("player", unit) then
-		self:SetStatusBarColor(1, 0, 0, .5)
-	else
-		if C["castbar"].classcolor then
-			self:SetStatusBarColor(unpack(D.UnitColor.class[D.Class]))
-		else
-			self:SetStatusBarColor(unpack(C["castbar"].color))
-		end
-	end
-end]]
-
 local ticks = {}
 local HideTicks = function()
 	for _, tick in pairs(ticks) do
@@ -454,7 +440,6 @@ D.CustomCastDelayText = function(self, duration)
 end
 
 D.CastBar = function(self, unit, name, rank, castid)
-	--CheckInterrupt(self, unit)
 	if self.interrupt and unit ~= "player" then
 		if UnitCanAttack("player", unit) then self:SetStatusBarColor(1, 0, 0, .5) else self:SetStatusBarColor(1, 0, 0, .5) end
 	else
@@ -762,6 +747,7 @@ if C["raid"].raidunitdebuffwatch == true then
 
 		-- Raid Debuffs
 		D.debuffids = {
+			-- MoP-Debuffs
 			-- Mogu'shan Vaults
 			-- The Stone Guard
 			SpellName(116281), -- Cobalt Mine Blast
@@ -917,6 +903,71 @@ if C["raid"].raidunitdebuffwatch == true then
 			-- Garrosh Hellscream
 			SpellName(145183), -- Gripping Despair
 			SpellName(145195), -- Empowered Gripping Despair
+			-- WoD-Debuffs
+			-- Highmaul
+			-- The Butcher
+			SpellName(156152), -- Gushing Wounds
+			-- Kargath Bladefist
+			SpellName(159178), -- Open Wounds
+			SpellName(159113), -- Impale
+			-- Pol & Phemos
+			SpellName(155569), -- Injured
+			SpellName(167200), -- Arcane Wound
+			SpellName(163374), -- Arcane Volatility
+			-- Ko'ragh
+			SpellName(161242), -- Caustic Energy
+			SpellName(163472), -- Dominating Power
+			-- Imperator Mar'gok
+			SpellName(156238), -- Arcane Wrath
+			SpellName(156467), -- Destructive Resonance
+			SpellName(158605), -- Mark of Chaos
+			SpellName(163988), -- Arcane Wrath: Displacement
+			SpellName(164075), -- Destructive Resonance: Displacement
+			SpellName(164176), -- Mark of Chaos: Displacement
+			SpellName(163989), -- Arcane Wrath: Fortification
+			SpellName(164076), -- Destructive Resonance: Fortification
+			SpellName(164178), -- Mark of Chaos: Fortification
+			SpellName(163990), -- Arcane Wrath: Replication
+			SpellName(164077), -- Destructive Resonance: Replication
+			SpellName(164191), -- Mark of Chaos: Replication
+			-- Blackrock Foundry
+			-- Blackhand
+			SpellName(156096), -- Marked for Death
+			SpellName(156107), -- Impaling Throw
+			SpellName(156047), -- Slagged
+			SpellName(157000), -- Attach Slag Bombs
+			-- Beastlord Darmac
+			SpellName(155365), -- Pin Down
+			SpellName(155061), -- Rend and Tear
+			SpellName(155399), -- Conflagration
+			SpellName(155236), -- Crush Armor
+			-- Flamebender Ka'graz
+			SpellName(154952), -- Fixate
+			SpellName(155049), -- Singe
+			SpellName(163284), -- Rising Flames
+			-- Operator Thogar
+			SpellName(155921), -- Enkindle
+			SpellName(165195), -- Prototype Pulse Grenade
+			SpellName(155701), -- Serrated Slash
+			SpellName(156310), -- Lava Shock
+			-- The Blast Furnace
+			SpellName(175104), -- Melt Armor
+			SpellName(158702), -- Fixate
+			SpellName(155240), -- Tempered
+			SpellName(155242), -- Heat
+			-- Franzok & Hans'gar
+			SpellName(157139), -- Shattered Vertebrae
+			-- Gruul
+			SpellName(155080), -- Inferno Slice
+			SpellName(155078), -- Overwhelming Blows
+			SpellName(165300), -- Flare
+			-- Kromog
+			SpellName(156766), -- Warped Armor
+			-- Admiral Gar'an
+			SpellName(156112), -- Convulsive Shadows
+			SpellName(170395), -- Sorka's Prey
+			SpellName(158702), -- Fixate
+			SpellName(158686), -- Expose Armor
 		}
 		D.ReverseTimer = {
 		},

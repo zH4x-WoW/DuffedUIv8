@@ -7,7 +7,6 @@ D.Spells = {
 	[48707] = true, -- Anti-Magic-Shell
 	[55233] = true, -- Vampric Blood
 	[61999] = true, -- Raise Ally
-	[113072] = true, -- Symbiosis (Might of Ursoc)
 
 	-- Druid
 	[61336] = true, -- Survival Insticts
@@ -16,14 +15,12 @@ D.Spells = {
 	-- Monk
 	[115203] = true, -- Fortifying Brew
 	[115213] = true, -- Avert Harm
-	[113306] = true, -- Symbiosis (Survival Insticts)
 
 	-- Paladin
 	[498] = true, -- Divine Protection
 	[642] = true, -- Divine Shield
 	[31850] = true, -- Ardent Defender
-	[113075] = true, -- Symbiosis (Barkskin)
-	
+
 	-- Priest
 	[33206] = true, -- Pain Supression
 	[47788] = true, -- Guardian Spirit
@@ -46,18 +43,15 @@ D.Spells = {
 	[114192] = true, -- Mocking Banner
 	[114203] = true, -- Demoralizing Banner
 	[114207] = true, -- Skull Banner
-	[122286] = true, -- Symbiosis (Savage Defense)
 }
 
-local select = select
-local SendChatMessage = SendChatMessage
-local UnitAura = UnitAura
+local PlayerGUID
+local Name = UnitName("player")
 local WaitTable = {}
-
 local OnEvent = function(self, event, ...)
 	local Time, Type, HideCaster, SourceGUID, SourceName, SourceFlags, SourceRaidFlags, DestGUID, DestName, DestFlags, DestRaidFlags, SpellID, SpellName = ...
 
-	if (SourceGUID ~= UnitGUID("player")) then return end
+	if (SourceGUID ~= PlayerGUID) then return end
 
 	if (D.Spells[SpellID] and Type == "SPELL_CAST_SUCCESS") then
 		if (not DestName) then DestName = SourceName end
@@ -66,7 +60,7 @@ local OnEvent = function(self, event, ...)
 		local SpellString = "\124cff71d5ff\124Hspell:" .. SpellID .. "\124h[" .. SpellName .. "]\124h\124r"
 		local AnnounceTo = C["duffed"].announcechannel
 
-		if (DestName ~= UnitName("player")) then
+		if (DestName ~= Name) then
 			if (Duration == nil) then
 				SendChatMessage("++ ".. SpellString .. " on " .. DestName .. "!", AnnounceTo)
 			else
@@ -80,5 +74,10 @@ local OnEvent = function(self, event, ...)
 end
 
 local AnnounceFrame = CreateFrame("Frame")
-AnnounceFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-AnnounceFrame:SetScript("OnEvent", OnEvent)
+AnnounceFrame:RegisterEvent("PLAYER_LOGIN")
+AnnounceFrame:SetScript("OnEvent", function(self, event)
+    PlayerGUID = UnitGUID("player")
+    self:UnregisterEvent("PLAYER_LOGIN")
+    self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+    self:SetScript("OnEvent", OnEvent)
+end)

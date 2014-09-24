@@ -73,6 +73,22 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(144901), -- Deathknight T16 2pieces
 	CreateSpellEntry(145336), -- Priest T16 4pieces
 
+	-- T17
+	CreateSpellEntry(165475), -- Mage Arcane 2pieces
+	CreateSpellEntry(166868), -- Mage Fire 4pieces
+	CreateSpellEntry(170408), -- Mage Frost 4pieces
+	CreateSpellEntry(165447), -- Paladin Protection 2pieces
+	CreateSpellEntry(167742), -- Paladin Protection 4pieces
+	CreateSpellEntry(165404), -- Monk Mistweaver 2pieces
+	CreateSpellEntry(167717), -- Monk Mistweaver 4pieces
+	CreateSpellEntry(166587), -- Warrior Arms 4pieces
+	CreateSpellEntry(165350), -- Warrior Fury 4pieces
+	CreateSpellEntry(166639), -- Druid Feral 4pieces
+	CreateSpellEntry(165423), -- Druid Guardian 4pieces
+	CreateSpellEntry(167655), -- Deathknight Frost 4pieces
+	CreateSpellEntry(165509), -- Rogue Subtlety 2pieces
+	CreateSpellEntry(170186), -- Hunter Markmanship 4pieces
+
 	-- Legendary MetaGems
 	CreateSpellEntry(137593, true), -- Indomitable Primal Diamond
 	CreateSpellEntry(137288, true), -- Courageous Primal Diamond
@@ -82,6 +98,28 @@ local TRINKET_FILTER = {
 	-- Legendary Cloaks
 	CreateSpellEntry(146194, true), -- Xuen
 	CreateSpellEntry(146200, true), -- Chi-Ji
+
+	-- Blackrock Foundry
+	CreateSpellEntry(177063), -- Elementalist's Shielding Talisman (Elemental Shield)
+	CreateSpellEntry(177056), -- Blast Furnace Door (Blast Furnace)
+	CreateSpellEntry(176873), -- Tablet of Turnbuckle Teamwork (Turnbuckle Terror)
+	CreateSpellEntry(176878), -- Beating Heart of the Mountain (Lub-Dub)
+	CreateSpellEntry(177051), -- Darmac's Unstable Talisman (Instability)
+	CreateSpellEntry(176874), -- Vial of Convulsive Shadows (Convulsive Shadows)
+	CreateSpellEntry(177096), -- Forgemaster's Insignia (Forgemaster's Vigor)
+	CreateSpellEntry(177081), -- Blackiron Micro Crucible (Molten Metal)
+	CreateSpellEntry(177067), -- Humming Blackiron Trigger (Detonation)
+	CreateSpellEntry(177086), -- Auto-Repairing Autoclave (Sanitizing)
+	CreateSpellEntry(177102), -- Battering Talisman (Battering)
+	CreateSpellEntry(177042), -- Horn of Screaming Spirits (Screaming Spirits)
+	CreateSpellEntry(177060), -- Ironspike Chew Toy (Squeak Squeak)
+	CreateSpellEntry(177035), -- Meaty Dragonspine Trophy (Meaty Dragonspine Trophy)
+
+	-- Highmaul
+	CreateSpellEntry(176876), -- Pol's Blinded Eye (Vision of the Cyclops)
+	CreateSpellEntry(176875), -- Shards of Nothing (Void Shards)
+	CreateSpellEntry(176879), -- Emblem of Caustic Healing (Caustic Healing)
+	CreateSpellEntry(177053), -- Evergaze Arcane Eidolon (Gazing Eye)
 }
 
 local CLASS_FILTERS = {

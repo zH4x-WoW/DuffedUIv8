@@ -18,19 +18,19 @@ local backdrop = {
 local function Shared(self, unit)
 	self.colors = D.oUF_colors
 	self:RegisterForClicks("AnyUp")
-	self:SetScript('OnEnter', UnitFrame_OnEnter)
-	self:SetScript('OnLeave', UnitFrame_OnLeave)
+	self:SetScript("OnEnter", UnitFrame_OnEnter)
+	self:SetScript("OnLeave", UnitFrame_OnLeave)
 
-	local health = CreateFrame('StatusBar', nil, self)
+	local health = CreateFrame("StatusBar", nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
 	if unit:find("partypet") then health:Height(18) else health:Height(30 * D.raidscale) end
 	health:SetStatusBarTexture(normTex)
 	health:CreateBackdrop()
 	self.Health = health
-	health:SetOrientation('VERTICAL')
+	health:SetOrientation("VERTICAL")
 
-	health.bg = health:CreateTexture(nil, 'BORDER')
+	health.bg = health:CreateTexture(nil, "BORDER")
 	health.bg:SetAllPoints(health)
 	health.bg:SetTexture(normTex)
 	health.bg.multiplier = (.3)
@@ -101,16 +101,16 @@ local function Shared(self, unit)
 
 	if C["raid"].aggro then
 		table.insert(self.__elements, D.UpdateThreat)
-		self:RegisterEvent('PLAYER_TARGET_CHANGED', D.UpdateThreat)
-		self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', D.UpdateThreat)
-		self:RegisterEvent('UNIT_THREAT_SITUATION_UPDATE', D.UpdateThreat)
+		self:RegisterEvent("PLAYER_TARGET_CHANGED", D.UpdateThreat)
+		self:RegisterEvent("UNIT_THREAT_LIST_UPDATE", D.UpdateThreat)
+		self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", D.UpdateThreat)
 	end
 
 	if C["raid"].showsymbols == true then
-		local RaidIcon = health:CreateTexture(nil, 'OVERLAY')
+		local RaidIcon = health:CreateTexture(nil, "OVERLAY")
 		RaidIcon:Height(18 * D.raidscale)
 		RaidIcon:Width(18 * D.raidscale)
-		RaidIcon:SetPoint('CENTER', self, 'TOP')
+		RaidIcon:SetPoint("CENTER", self, "TOP")
 		RaidIcon:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\raidicons.blp") -- thx hankthetank for texture
 		self.RaidIcon = RaidIcon
 	end
@@ -122,18 +122,18 @@ local function Shared(self, unit)
 	LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons.blp")
 	self.LFDRole = LFDRole
 
-	local Resurrect = CreateFrame('Frame', nil, self)
+	local Resurrect = CreateFrame("Frame", nil, self)
 	Resurrect:SetFrameLevel(20)
 	local ResurrectIcon = Resurrect:CreateTexture(nil, "OVERLAY")
 	ResurrectIcon:Point("CENTER", health, 0, 0)
 	ResurrectIcon:Size(20, 15)
-	ResurrectIcon:SetDrawLayer('OVERLAY', 7)
+	ResurrectIcon:SetDrawLayer("OVERLAY", 7)
 	self.ResurrectIcon = ResurrectIcon
 
 	local ReadyCheck = power:CreateTexture(nil, "OVERLAY")
 	ReadyCheck:Height(12 * D.raidscale)
 	ReadyCheck:Width(12 * D.raidscale)
-	ReadyCheck:SetPoint('CENTER')
+	ReadyCheck:SetPoint("CENTER")
 	self.ReadyCheck = ReadyCheck
 
 	local leader = health:CreateTexture(nil, "OVERLAY")
@@ -164,17 +164,17 @@ local function Shared(self, unit)
 	power.Smooth = true
 
 	if C["unitframes"].healcomm then
-		local mhpb = CreateFrame('StatusBar', nil, self.Health)
+		local mhpb = CreateFrame("StatusBar", nil, self.Health)
 		mhpb:SetOrientation("VERTICAL")
-		mhpb:SetPoint('BOTTOM', self.Health:GetStatusBarTexture(), 'TOP', 0, 0)
+		mhpb:SetPoint("BOTTOM", self.Health:GetStatusBarTexture(), "TOP", 0, 0)
 		mhpb:Width(68 * D.raidscale)
 		mhpb:Height(31 * D.raidscale)
 		mhpb:SetStatusBarTexture(normTex)
 		mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
 
-		local ohpb = CreateFrame('StatusBar', nil, self.Health)
+		local ohpb = CreateFrame("StatusBar", nil, self.Health)
 		ohpb:SetOrientation("VERTICAL")
-		ohpb:SetPoint('BOTTOM', mhpb:GetStatusBarTexture(), 'TOP', 0, 0)
+		ohpb:SetPoint("BOTTOM", mhpb:GetStatusBarTexture(), "TOP", 0, 0)
 		ohpb:Width(68 * D.raidscale)
 		ohpb:Height(31 * D.raidscale)
 		ohpb:SetStatusBarTexture(normTex)
@@ -210,27 +210,27 @@ local function Shared(self, unit)
 	if C["raid"].raidunitdebuffwatch == true then
 		D.createAuraWatch(self,unit)
 
-		local RaidDebuffs = CreateFrame('Frame', nil, self)
+		local RaidDebuffs = CreateFrame("Frame", nil, self)
 		RaidDebuffs:Height(24 * D.raidscale)
 		RaidDebuffs:Width(24 * D.raidscale)
-		RaidDebuffs:Point('CENTER', health, 1,0)
+		RaidDebuffs:Point("CENTER", health, 1,0)
 		RaidDebuffs:SetFrameStrata(health:GetFrameStrata())
 		RaidDebuffs:SetFrameLevel(health:GetFrameLevel() + 2)
 		RaidDebuffs:SetTemplate("Default")
 
-		RaidDebuffs.icon = RaidDebuffs:CreateTexture(nil, 'OVERLAY')
+		RaidDebuffs.icon = RaidDebuffs:CreateTexture(nil, "OVERLAY")
 		RaidDebuffs.icon:SetTexCoord(.1,.9,.1,.9)
 		RaidDebuffs.icon:Point("TOPLEFT", 2, -2)
 		RaidDebuffs.icon:Point("BOTTOMRIGHT", -2, 2)
 
 		RaidDebuffs.time = RaidDebuffs:CreateFontString(nil, "OVERLAY")
 		RaidDebuffs.time:SetFontObject(font)
-		RaidDebuffs.time:Point('CENTER', 1, 0)
+		RaidDebuffs.time:Point("CENTER", 1, 0)
 		RaidDebuffs.time:SetTextColor(1, .9, 0)
 
-		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, 'OVERLAY')
+		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, "OVERLAY")
 		RaidDebuffs.count:SetFontObject(font)
-		RaidDebuffs.count:Point('BOTTOMRIGHT', RaidDebuffs, 'BOTTOMRIGHT', 0, 2)
+		RaidDebuffs.count:Point("BOTTOMRIGHT", RaidDebuffs, "BOTTOMRIGHT", 0, 2)
 		RaidDebuffs.count:SetTextColor(1, .9, 0)
 		self.RaidDebuffs = RaidDebuffs
 	end
@@ -238,7 +238,7 @@ local function Shared(self, unit)
 	return self
 end
 
-oUF:RegisterStyle('DuffedUIHealR25R40', Shared)
+oUF:RegisterStyle("DuffedUIHealR25R40", Shared)
 oUF:Factory(function(self)
 	oUF:SetActiveStyle("DuffedUIHealR25R40")
 
@@ -246,8 +246,8 @@ oUF:Factory(function(self)
 	local raid = self:SpawnHeader("DuffedUIGrid", nil, spawnG,
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
-			self:SetWidth(header:GetAttribute('initial-width'))
-			self:SetHeight(header:GetAttribute('initial-height'))
+			self:SetWidth(header:GetAttribute("initial-width"))
+			self:SetHeight(header:GetAttribute("initial-height"))
 		]],
 		"initial-width", D.Scale(C["raid"].framewidth * D.raidscale),
 		"initial-height", D.Scale(C["raid"].frameheight * D.raidscale),
@@ -275,12 +275,12 @@ oUF:Factory(function(self)
 
 	if C["raid"].showraidpets then
 		local pets = {} 
-			pets[1] = oUF:Spawn('partypet1', 'oUF_DuffedUIPartyPet1') 
-			pets[1]:Point('BOTTOMLEFT', raid, 'TOPLEFT', 0, 8)
+			pets[1] = oUF:Spawn("partypet1", "oUF_DuffedUIPartyPet1") 
+			pets[1]:Point("BOTTOMLEFT", raid, "TOPLEFT", 0, 8)
 			pets[1]:Size(C["raid"].framewidth * D.raidscale, 18 * D.raidscale)
 		for i =2, 4 do 
-			pets[i] = oUF:Spawn('partypet'..i, 'oUF_DuffedUIPartyPet'..i) 
-			pets[i]:Point('LEFT', pets[i-1], 'RIGHT', 8, 0)
+			pets[i] = oUF:Spawn("partypet"..i, "oUF_DuffedUIPartyPet"..i) 
+			pets[i]:Point("LEFT", pets[i-1], "RIGHT", 8, 0)
 			pets[i]:Size(C["raid"].framewidth * D.raidscale, 18 * D.raidscale)
 		end
 
