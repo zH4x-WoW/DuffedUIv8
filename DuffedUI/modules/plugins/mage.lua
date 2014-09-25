@@ -1,6 +1,7 @@
 if (select(2, UnitClass("player")) ~= "MAGE") or not DuffedUIMinimapStatsLeft then return end
 local D, C, L = unpack(select(2, ...))
 
+local font = D.Font(C["font"].datatext)
 local spells = (UnitFactionGroup("player") == "Horde") and {
 	--  Tepelort id, Portal id
 	[1] = {53140,53142}, -- Dalaran
@@ -45,11 +46,7 @@ local UTF = function(string, i, dots)
 			end
 			if len == i then break end
 		end
-		if len == i and pos <= bytes then
-			return string:sub(1, pos - 1) .. (dots and "..." or "")
-		else
-			return string
-		end
+		if len == i and pos <= bytes then return string:sub(1, pos - 1) .. (dots and "..." or "") else return string end
 	end
 end
 
@@ -69,7 +66,7 @@ local r = CreateFrame("Frame", nil, f)
 r:Size(DuffedUIMinimap:GetWidth() - 4, 20)
 r:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
 local l = r:CreateFontString("Title", "OVERLAY")
-l:SetFont(C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
+l:SetFontObject(font)
 l:SetPoint("CENTER", r, "CENTER")
 r:SetFrameStrata("HIGH")
  
@@ -82,7 +79,7 @@ for i, spell in pairs(spells) do
 	b:CreateBackdrop()
  
 	local l = b:CreateFontString(nil,"OVERLAY")
-	l:SetFont(C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
+	l:SetFontObject(font)
 	l:SetText(abbrev(GetSpellInfo(spell[1])))
 	b:SetFontString(l)
  
@@ -119,7 +116,5 @@ end)
 f:RegisterEvent("UNIT_SPELLCAST_START")
 f:SetScript("OnEvent",
 	function(self)
-	if self:IsShown() then
-		self:Hide()
-	end
+	if self:IsShown() then self:Hide() end
 end)

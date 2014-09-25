@@ -687,12 +687,14 @@ local function Shared(self, unit)
 			castbar:Point("TOPLEFT", health, "BOTTOMLEFT", 0, 16)
 			castbar:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, 16)
 
-			castbar.time = D.SetFontString(castbar, C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
+			castbar.time = castbar:CreateFontString(nil, "OVERLAY")
+			castbar.time:SetFontObject(font)
 			castbar.time:Point("RIGHT", castbar, "RIGHT", -5, 0)
 			castbar.time:SetTextColor(0.84, 0.75, 0.65)
 			castbar.time:SetJustifyH("RIGHT")
 
-			castbar.Text = D.SetFontString(castbar, C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
+			castbar.Text = castbar:CreateFontString(nil, "OVERLAY")
+			castbar.Text:SetFontObject(font)
 			castbar.Text:Point("LEFT", castbar, "LEFT", 6, 0)
 			castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 

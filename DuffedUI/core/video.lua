@@ -20,7 +20,6 @@ Graphic:SetScript("OnEvent", function(self, event)
 
 	if (Useuiscale ~= "1") then SetCVar("useUiScale", 1) end
 	if (format("%.2f", GetCVar("uiScale")) ~= format("%.2f", C["general"].uiscale)) then SetCVar("uiScale", C["general"].uiscale) end
-	if (C["general"].uiscale < 0.64) then UIParent:SetScale(C["general"].uiscale) end
 
 	VideoOptionsFrameOkay:HookScript("OnClick", NeedReloadUI)
 	VideoOptionsFrameApply:HookScript("OnClick", NeedReloadUI)
@@ -35,8 +34,3 @@ D.Scale = function(x) return Scale(x) end
 D.mult = mult
 D.noscalemult = D.mult * C["general"].uiscale
 D.raidscale = 1
-
-C["datatext"].fontsize = C["datatext"].fontsize * mult
-C["font"].duffeduisize = C["font"].duffeduisize * mult
-C["font"].duffedui_altsize = C["font"].duffedui_altsize * mult
-C["font"].pixelfontsize = C["font"].pixelfontsize * mult

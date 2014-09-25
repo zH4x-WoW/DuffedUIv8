@@ -3,15 +3,15 @@
 C["general"] = {
 	["autoscale"] = true,
 	["uiscale"] = 0.71,
-	["backdropcolor"] = { .05, .05, .05 },
-	["bordercolor"] = { .125, .125, .125 },
+	["backdropcolor"] = {.05, .05, .05},
+	["bordercolor"] = {.125, .125, .125},
 	["classcolor"] = true,
 }
 
 C["font"] = {
 	["duffeduisize"] = 11,
 	["duffedui_altsize"] = 12,
-	["pixelfontsize"] = 12,
+	["pixelfontsize"] = 11,
 	["actionbars"] = "DuffedUI",
 	["auras"] = "DuffedUI",
 	["classtimer"] = "DuffedUI",
@@ -49,7 +49,7 @@ C["unitframes"] = {
 	["focusdebuffs"] = true,
 	["focusbutton"] = true,
 	["attached"] = false,
-	["oocHide"] = true,
+	["oocHide"] = false,
 	["playermodel"] = "Model",
 }
 
@@ -157,7 +157,6 @@ C["datatext"] = {
 
 	["time24"] = true,
 	["localtime"] = false,
-	["fontsize"] = 11,
 }
 
 C["skins"] = {

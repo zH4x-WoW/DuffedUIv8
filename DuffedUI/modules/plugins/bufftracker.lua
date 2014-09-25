@@ -419,7 +419,7 @@ bufftracker_toggle:SetPoint("TOP", bufftracker, "BOTTOM", 0, -2)
 bufftracker_toggle:SetTemplate("Default")
 bufftracker_toggle:Size(bufftracker:GetWidth(), 9)
 bufftracker_toggle.text = bufftracker_toggle:CreateFontString(nil, "OVERLAY")
-bufftracker_toggle.text:SetFont(C["media"].font, C["datatext"].fontsize, "THINOUTLINE")
+bufftracker_toggle.text:SetFont(C["media"].font, 11, "THINOUTLINE")
 bufftracker_toggle.text:SetText("|cff319f1b+|r")
 bufftracker_toggle.text:SetPoint("CENTER")
 
