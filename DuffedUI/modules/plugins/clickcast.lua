@@ -305,7 +305,7 @@ SpellBinder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 SpellBinder:RegisterEvent("ZONE_CHANGED")
 SpellBinder:SetScript("OnEvent", function(self, event, ...)
 	if event == "PLAYER_LOGIN" then
-		ClickCast = _G.ClickCast or {}
+		if ClickCast == nil then D.SetPerCharVariable("ClickCast", {}) end
 		ClickCast[UnitName("player")] = _G.ClickCast[UnitName("player")] or {}
 		DB = ClickCast[UnitName("player")]
 		DB.spells = DB.spells or {}

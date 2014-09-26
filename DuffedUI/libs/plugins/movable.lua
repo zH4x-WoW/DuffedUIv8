@@ -342,7 +342,7 @@ do
 
 	function frame:VARIABLES_LOADED()
 		-- I honestly don't trust the load order of SVs.
-		if (DuffedUIDataPerChar == nil) then DuffedUIDataPerChar = {} end
+		if (DuffedUIDataPerChar == nil) then D.SetPerCharVariable("DuffedUIDataPerChar", {}) end
 		_DB = DuffedUIDataPerChar.ufpos or {}
 		DuffedUIDataPerChar.ufpos = _DB
 		
