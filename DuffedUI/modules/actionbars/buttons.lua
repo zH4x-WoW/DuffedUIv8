@@ -163,7 +163,7 @@ RegisterStateDriver(vehicleright, "visibility", "[target=vehicle,exists] show;hi
 local init = CreateFrame("Frame")
 init:RegisterEvent("VARIABLES_LOADED")
 init:SetScript("OnEvent", function(self, event)
-	if not DuffedUIDataPerChar then DuffedUIDataPerChar = {} end
+	if not DuffedUIDataPerChar then D.SetPerCharVariable("DuffedUIDataPerChar", {}) end
 	local db = DuffedUIDataPerChar
 
 	if db.bar3 then UpdateBar(DuffedUIBar3Button, DuffedUIBar3) end

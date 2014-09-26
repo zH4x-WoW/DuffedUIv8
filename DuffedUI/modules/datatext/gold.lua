@@ -4,7 +4,7 @@ local D, C, L = unpack(select(2, ...))
 --------------------------------------------------------------------
 
 if not C["datatext"].gold or C["datatext"].gold == 0 then return end
-ImprovedCurrency = {}
+D.SetPerCharVariable("ImprovedCurrency", {})
 
 local Stat = CreateFrame("Frame", "DuffedUIDataInfoGold")
 Stat:EnableMouse(true)

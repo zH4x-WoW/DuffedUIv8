@@ -138,7 +138,7 @@ OnLogon:SetScript("OnEvent", function(self, event)
 end)
 
 local function positionsetup()
-	DuffedUIDataPerChar = {}
+	D.SetPerCharVariable("DuffedUIDataPerChar", {})
 	for i = 1, getn(D.AllowFrameMoving) do
 		if D.AllowFrameMoving[i] then D.AllowFrameMoving[i]:SetUserPlaced(false) end
 	end
@@ -475,7 +475,7 @@ DuffedUIOnLogon:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 	if (DuffedUIData == nil) then DuffedUIData = {} end
-	if (DuffedUIDataPerChar == nil) then DuffedUIDataPerChar = {} end
+	if (DuffedUIDataPerChar == nil) then D.SetPerCharVariable("DuffedUIDataPerChar", {}) end
 
 	if D.ScreenWidth < 1200 then
 		SetCVar("useUiScale", 0)
