@@ -62,6 +62,10 @@ function DuffedUITooltips:SetTooltipDefaultAnchor()
 
 	self:SetOwner(Anchor)
 	self:SetAnchorType("ANCHOR_TOPRIGHT", 0, 5)
+	if (self:GetOwner() ~= UIParent and InCombatLockdown() and C["tooltip"].hidecombat) then
+		self:Hide()
+		return
+	end
 end
 
 function DuffedUITooltips:GetColor(unit)
@@ -268,8 +272,8 @@ end
 
 local hex = function(color) return (color.r and format('|cff%02x%02x%02x', color.r * 255, color.g * 255, color.b * 255)) or "|cffFFFFFF" end
 
-local nilcolor = { 1, 1, 1 }
-local tapped = { .6, .6, .6 }
+local nilcolor = {1, 1, 1}
+local tapped = {.6, .6, .6}
 
 local function unitColor(unit)
 	if (not unit) then unit = "mouseover" end
