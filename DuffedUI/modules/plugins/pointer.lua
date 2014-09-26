@@ -1,6 +1,4 @@
--------------------------
--- Credits go to Gello --
--------------------------
+-- Credits go to Gello
 
 local D, C, L = unpack(select(2, ...))
 if not C["raid"].pointer then return end
@@ -45,9 +43,7 @@ local function UpdateArrow(self)
 	pointer.timer = fastThrottle
 
 	local angle = atan2(unitY - playerY, playerX - unitX) * PI / 180 + PI / 2
-	if angle < 0 then
-		angle = angle + 2 * PI
-	end
+	if angle < 0 then angle = angle + 2 * PI end
 	angle = angle - GetPlayerFacing()
 
 	local ULx,ULy = corner(angle + rads225)
@@ -67,11 +63,7 @@ end
 
 pointer:SetScript("OnUpdate", function(self, elapsed)
 	self.timer = self.timer - elapsed
-	if self.timer < 0 then
-		UpdateArrow(self.arrow)
-	end
+	if self.timer < 0 then UpdateArrow(self.arrow) end
 end)
 
-pointer:SetScript("OnShow", function(self)
-	UpdateArrow(self.arrow)
-end)
+pointer:SetScript("OnShow", function(self) UpdateArrow(self.arrow) end)

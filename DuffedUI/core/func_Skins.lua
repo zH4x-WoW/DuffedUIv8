@@ -10,20 +10,16 @@ LoadBlizzardSkin:SetScript("OnEvent", function(self, event, addon)
 		self:UnregisterEvent("ADDON_LOADED")
 		return 
 	end
-	
+
 	for _addon, skinfunc in pairs(D.SkinFuncs) do
 		if type(skinfunc) == "function" then
 			if _addon == addon then
-				if skinfunc then
-					skinfunc()
-				end
+				if skinfunc then skinfunc() end
 			end
 		elseif type(skinfunc) == "table" then
 			if _addon == addon then
 				for _, skinfunc in pairs(D.SkinFuncs[_addon]) do
-					if skinfunc then
-						skinfunc()
-					end
+					if skinfunc then skinfunc() end
 				end
 			end
 		end

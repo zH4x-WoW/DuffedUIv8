@@ -71,12 +71,7 @@ end
 
 local function OnAuraChange(self, event, arg1, unit)
 	if event == "UNIT_AURA" and arg1 ~= "player" then return end
-
-	if D.Role == "Caster" or D.Role == "Healer" then 
-		SetCasterOnlyBuffs()
-	else
-		SetBuffs()
-	end
+	if D.Role == "Caster" or D.Role == "Healer" then SetCasterOnlyBuffs() else SetBuffs() end
 
 	for i, Spell1Buff in pairs(Spell1Buff) do
 		local spellname = select(1, GetSpellInfo(Spell1Buff))
@@ -187,15 +182,8 @@ local function CreateButton(name, relativeTo, firstbutton, lastbutton)
 	local button = CreateFrame("Button", name, BuffTracker)
 	button:SetTemplate("Default")
 	button:Size(btWidth - 3)
-	if firstbutton == true then
-		button:Point("TOP", relativeTo, "TOP", 0, -2)
-	else
-		button:Point("TOP", relativeTo, "BOTTOM", 0, -1)
-	end
-
-	if lastbutton == true then
-		button:Point("BOTTOM", BuffTracker, "BOTTOM", 0, 2)
-	end
+	if firstbutton == true then button:Point("TOP", relativeTo, "TOP", 0, -2) else button:Point("TOP", relativeTo, "BOTTOM", 0, -1) end
+	if lastbutton == true then button:Point("BOTTOM", BuffTracker, "BOTTOM", 0, 2) end
 
 	button.t = button:CreateTexture(name .. ".t", "OVERLAY")
 	button.t:SetTexCoord(0.08, 0.92, 0.08, 0.92)
@@ -285,19 +273,14 @@ local function LabelType(bufftype)
 		return L["bufftracker"]["error"]
 	end
 end
--------------------------
+
 -- Buff Check Functions
--------------------------
 local function AnotherOnAuraChange(self, event, arg1, unit)
 	for key, value in pairs(AllBuffs) do
 		for i, v in ipairs(value) do
 			local spellname = select(1, GetSpellInfo(v))
 			_G[key.."mini"..i].spell = v
-			if UnitAura("player", spellname) then
-				_G[key.."mini"..i]:SetAlpha(1)
-			else
-				_G[key.."mini"..i]:SetAlpha(0.2)
-			end
+			if UnitAura("player", spellname) then _G[key.."mini"..i]:SetAlpha(1) else _G[key.."mini"..i]:SetAlpha(0.2) end
 		end
 
 		for i, v in ipairs(value) do
@@ -339,13 +322,8 @@ local BadTotems = {
 }
 local SetupTooltip = function(self)
 	GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", 0, 0)
-	
-	if BadTotems[self.spell] then
-		GameTooltip:SetHyperlink(format(str, BadTotems[self.spell]))
-	else
-		GameTooltip:SetHyperlink(format(str, self.spell))
-	end
-	
+
+	if BadTotems[self.spell] then GameTooltip:SetHyperlink(format(str, BadTotems[self.spell])) else GameTooltip:SetHyperlink(format(str, self.spell)) end
 	GameTooltip:Show()
 end
 
@@ -368,7 +346,7 @@ local function CreateBuffArea(bufftype, relativeTo, column)
 	bigButton.t:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	bigButton.t:Point("TOPLEFT", 2, -2)
 	bigButton.t:Point("BOTTOMRIGHT", -2, 2)
-	
+
 	local littlebutton = {}
 	for i, v in pairs(AllBuffs[bufftype]) do
 		littlebutton[i] = CreateFrame("Frame", bufftype.."mini"..i, bufftrackersummary)		
@@ -386,17 +364,15 @@ local function CreateBuffArea(bufftype, relativeTo, column)
 		littlebutton[i].t:Point("TOPLEFT", 2, -2)
 		littlebutton[i].t:Point("BOTTOMRIGHT", -2, 2)
 		littlebutton[i].t:SetTexture(select(3, GetSpellInfo(v)))
-		
+
 		littlebutton[i]:EnableMouse(true)
 		littlebutton[i]:SetScript("OnEnter", SetupTooltip)
 		littlebutton[i]:SetScript("OnLeave", GameTooltip_Hide)
 	end
-	
 	bigButton.text = bigButton:CreateFontString(nil, "OVERLAY")
 	bigButton.text:SetPoint("TOPLEFT", bigButton, "TOPRIGHT", 3, -1)
 	bigButton.text:SetFont(C["media"].font, 13)
 	bigButton.text:SetText(LabelType(bufftype))
-	
 	bigButton:EnableMouse(true)
 	bigButton:SetScript("OnEnter", SetupTooltip)
 	bigButton:SetScript("OnLeave", GameTooltip_Hide)

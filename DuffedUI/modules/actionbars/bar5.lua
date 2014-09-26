@@ -12,17 +12,9 @@ for i= 1, 12 do
 	b:SetFrameLevel(15)
 
 	if C["actionbar"].rightbarvertical then
-		if i == 1 then
-			b:SetPoint("BOTTOMLEFT", bar, D.buttonspacing, D.buttonspacing)
-		else
-			b:SetPoint("LEFT", b2, "RIGHT", D.buttonspacing, 0)
-		end
+		if i == 1 then b:SetPoint("BOTTOMLEFT", bar, D.buttonspacing, D.buttonspacing) else b:SetPoint("LEFT", b2, "RIGHT", D.buttonspacing, 0) end
 	else
-		if i == 1 then
-			b:SetPoint("TOPRIGHT", bar, -D.buttonspacing, -D.buttonspacing)
-		else
-			b:SetPoint("TOP", b2, "BOTTOM", 0, -D.buttonspacing)
-		end
+		if i == 1 then b:SetPoint("TOPRIGHT", bar, -D.buttonspacing, -D.buttonspacing) else b:SetPoint("TOP", b2, "BOTTOM", 0, -D.buttonspacing) end
 	end
 end
 RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
@@ -39,9 +31,7 @@ if C["actionbar"].rightbarsmouseover then
 		MultiBarRight:SetAlpha(alpha)
 		if C["actionbar"].petbaralwaysvisible ~= true then
 			DuffedUIPetBar:SetAlpha(alpha)
-			for i=1, NUM_PET_ACTION_SLOTS do
-				_G["PetActionButton" .. i]:SetAlpha(alpha)
-			end
+			for i=1, NUM_PET_ACTION_SLOTS do _G["PetActionButton" .. i]:SetAlpha(alpha) end
 		end
 	end
 

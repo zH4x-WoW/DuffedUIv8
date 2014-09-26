@@ -28,17 +28,9 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 
 			button:SetSize(D.petbuttonsize, D.petbuttonsize)
 			if C["actionbar"].petbarhorizontal == true then
-				if i == 1 then
-					button:SetPoint("TOPLEFT", D.buttonspacing, -D.buttonspacing)
-				else
-					button:SetPoint("LEFT", _G["PetActionButton" .. (i - 1)], "RIGHT", D.buttonspacing, 0)
-				end
+				if i == 1 then button:SetPoint("TOPLEFT", D.buttonspacing, -D.buttonspacing) else button:SetPoint("LEFT", _G["PetActionButton" .. (i - 1)], "RIGHT", D.buttonspacing, 0) end
 			else
-				if i == 1 then
-					button:SetPoint("TOPLEFT", D.buttonspacing, -D.buttonspacing)
-				else
-					button:SetPoint("TOP", _G["PetActionButton" .. (i - 1)], "BOTTOM", 0, -D.buttonspacing)
-				end
+				if i == 1 then button:SetPoint("TOPLEFT", D.buttonspacing, -D.buttonspacing) else button:SetPoint("TOP", _G["PetActionButton" .. (i - 1)], "BOTTOM", 0, -D.buttonspacing) end
 			end
 			button:Show()
 			self:SetAttribute("addchild", button)

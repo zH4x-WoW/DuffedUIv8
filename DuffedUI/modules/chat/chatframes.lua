@@ -50,11 +50,7 @@ local function UpdateEditBoxColor(self)
 	if bd then
 		if ( type == "CHANNEL" ) then
 			local id = GetChannelName(self:GetAttribute("channelTarget"))
-			if id == 0 then
-				bd:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-			else
-				bd:SetBackdropBorderColor(ChatTypeInfo[type..id].r,ChatTypeInfo[type..id].g,ChatTypeInfo[type..id].b)
-			end
+			if id == 0 then bd:SetBackdropBorderColor(unpack(C["media"].bordercolor)) else bd:SetBackdropBorderColor(ChatTypeInfo[type..id].r,ChatTypeInfo[type..id].g,ChatTypeInfo[type..id].b) end
 		else
 			bd:SetBackdropBorderColor(ChatTypeInfo[type].r,ChatTypeInfo[type].g,ChatTypeInfo[type].b)
 		end
@@ -96,9 +92,7 @@ local function SetChatStyle(frame)
 	_G[chat.."EditBox"]:Point("TOPLEFT", DuffedUIInfoLeft, 2, -2)
 	_G[chat.."EditBox"]:Point("BOTTOMRIGHT", DuffedUIInfoLeft, -2, 2)
 
-	for j = 1, #CHAT_FRAME_TEXTURES do
-		_G[chat..CHAT_FRAME_TEXTURES[j]]:SetTexture(nil)
-	end
+	for j = 1, #CHAT_FRAME_TEXTURES do _G[chat..CHAT_FRAME_TEXTURES[j]]:SetTexture(nil) end
 
 	_G[format("ChatFrame%sTabLeft", id)]:Kill()
 	_G[format("ChatFrame%sTabMiddle", id)]:Kill()
@@ -197,16 +191,13 @@ local function SetupTempChat()
 end
 hooksecurefunc("FCF_OpenTemporaryWindow", SetupTempChat)
 
-for i=1, BNToastFrame:GetNumRegions() do
+for i = 1, BNToastFrame:GetNumRegions() do
 	if i ~= 10 then
 		local region = select(i, BNToastFrame:GetRegions())
-		if region:GetObjectType() == "Texture" then
-			region:SetTexture(nil)
-		end
+		if region:GetObjectType() == "Texture" then region:SetTexture(nil) end
 	end
 end	
 BNToastFrame:SetTemplate("Transparent")
-
 
 BNToastFrame:HookScript("OnShow", function(self)
 	self:ClearAllPoints()
@@ -223,32 +214,16 @@ D.SetDefaultChatPosition = function(frame)
 		local name = FCF_GetChatWindowInfo(id)
 		local fontSize = select(2, frame:GetFont())
 
-		if fontSize < 11 then
-			FCF_SetChatWindowFontSize(nil, frame, 11)
-		else
-			FCF_SetChatWindowFontSize(nil, frame, fontSize)
-		end
+		if fontSize < 11 then FCF_SetChatWindowFontSize(nil, frame, 11) else FCF_SetChatWindowFontSize(nil, frame, fontSize) end
 
 		if id == 1 then
 			frame:ClearAllPoints()
-			if C["chat"].lbackground then
-				frame:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "BOTTOMLEFT", 3, 6)
-			else
-				frame:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 24)
-			end
+			if C["chat"].lbackground then frame:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "BOTTOMLEFT", 3, 6) else frame:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 24) end
 		elseif id == 4 and name == LOOT then
 			if not frame.isDocked then
 				frame:ClearAllPoints()
-				if C["chat"].rbackground then
-					frame:Point("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "BOTTOMRIGHT", -9, 6)
-				else
-					frame:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 24)
-				end
-				if C["chat"].textright then
-					frame:SetJustifyH("RIGHT")
-				else
-					frame:SetJustifyH("LEFT")
-				end
+				if C["chat"].rbackground then frame:Point("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "BOTTOMRIGHT", -9, 6) else frame:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 24) end
+				if C["chat"].textright then frame:SetJustifyH("RIGHT") else frame:SetJustifyH("LEFT") end
 			end
 		end
 
@@ -260,8 +235,6 @@ hooksecurefunc("FCF_RestorePositionAndDimensions", D.SetDefaultChatPosition)
 local function RemoveCurrentRealmName(self, event, msg, author, ...)
 	local realmName = string.gsub(GetRealmName(), " ", "")
 
-	if msg:find("-" .. realmName) then
-		return false, gsub(msg, "%-"..realmName, ""), author, ...
-	end
+	if msg:find("-" .. realmName) then return false, gsub(msg, "%-"..realmName, ""), author, ... end
 end
 ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", RemoveCurrentRealmName)

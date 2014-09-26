@@ -10,9 +10,7 @@ for i = 1, NUM_CHAT_WINDOWS do
 				local unitname, realm = UnitName("target")
 				if unitname then
 					if unitname then unitname = gsub(unitname, " ", "") end
-					if unitname and not UnitIsSameServer("player", "target") then
-						unitname = unitname .. "-" .. gsub(realm, " ", "")
-					end
+					if unitname and not UnitIsSameServer("player", "target") then unitname = unitname .. "-" .. gsub(realm, " ", "") end
 					ChatFrame_SendTell((unitname), ChatFrame1)
 				end
 			end
@@ -21,5 +19,4 @@ for i = 1, NUM_CHAT_WINDOWS do
 end
 
 SLASH_TELLTARGET1 = "/tt"
-SLASH_TELLTARGET2 = "/telltarget"
 SlashCmdList.TELLTARGET = function(msg) SendChatMessage(msg, "WHISPER") end

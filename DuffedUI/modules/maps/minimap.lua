@@ -154,11 +154,7 @@ m_coord:HookScript("OnUpdate", function(self, elapsed)
 		local x, y = GetPlayerMapPosition("player")
 		x = math.floor(100 * x)
 		y = math.floor(100 * y)
-		if x ~= 0 and y ~= 0 then
-			m_coord_text:SetText(x .. " - " .. y)
-		else
-			m_coord_text:SetText("x - x")
-		end
+		if x ~= 0 and y ~= 0 then m_coord_text:SetText(x .. " - " .. y) else m_coord_text:SetText("x - x") end
 		int = 0
 	end
 end)

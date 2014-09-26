@@ -10,9 +10,7 @@ local color = {1, 1, 0, 1}
 local fade = C["cooldown"].scdfade
 local mode = "HIDE"
 
-if D.Class == "WARRIOR" or D.Class == "HUNTER" or D.Class == "DEATHKNIGHT" or D.Class == "ROGUE" then
-	mode = "HIDE"
-end
+if D.Class == "WARRIOR" or D.Class == "HUNTER" or D.Class == "DEATHKNIGHT" or D.Class == "ROGUE" then mode = "HIDE" end
 
 spellCooldowns = {
 	["DEATHKNIGHT"] = {
@@ -505,9 +503,7 @@ local function enableCooldown(self)
 		self.StatusBar:Show()
 		self.DurationText:Show()
 	end
-	if self.Cooldown then
-		self.Cooldown:Show()
-	end
+	if self.Cooldown then self.Cooldown:Show() end
 	self:SetScript("OnUpdate", onUpdate)
 	onUpdate(self, 1)
 	if mode == "HIDE" then
@@ -530,9 +526,7 @@ local function disableCooldown(self)
 		self.StatusBar:Hide()
 		self.DurationText:SetText("")
 	end
-	if self.Cooldown then
-		self.Cooldown:Hide()
-	end
+	if self.Cooldown then self.Cooldown:Hide() end
 	self:SetScript("OnUpdate", nil)
 end
 
@@ -541,35 +535,24 @@ local function positionHide()
 	local index = 0
 	for k,v in pairs(frames) do
 		local frame = frames[k]
-		
-		-- Check if the spell is in the spellbook. E.G. will of the forsaken will show as a black icon if you're not a Forsaken, when using a PvP trinket, as it has 45s shared cooldown.
+
 		if GetSpellTexture(GetSpellInfo(frame.spell)) or D.Class == "PRIEST"then
 			local start, duration = GetSpellCooldown(frame.spell)
 			frame.start = start
 			frame.duration = duration
 			if duration and duration > 1.5 then
-				-- fix for setting textures again when respecced. lol.
-				-- Holy Word: ... Chakra state spell textures fix, sets all Holy Word: something textures to Holy Word: Chastise
-				if D.Class == "PRIEST" and frame.spell == 88682 or frame.spell == 88684 or frame.spell == 88685 then
+				if D.Class == "PRIEST" and frame.spell == 88682 or frame.spell == 88684 or frame.spell == 88685 then 
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(88625)))
 				else
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(frame.spell)))
 				end
 				frame:ClearAllPoints()
-				if index == 0 then
-					frame:SetPoint("TOPLEFT", lastFrame, "TOPLEFT", xSpacing, ySpacing)
-				else
-					frame:SetPoint("TOPLEFT", lastFrame, anchorPoint, xSpacing, ySpacing)
-				end
-				if not frame.disabled then
-					enableCooldown(frame)
-				end
+				if index == 0 then frame:SetPoint("TOPLEFT", lastFrame, "TOPLEFT", xSpacing, ySpacing) else frame:SetPoint("TOPLEFT", lastFrame, anchorPoint, xSpacing, ySpacing) end
+				if not frame.disabled then enableCooldown(frame) end
 				lastFrame = frame
 				index = index + 1
 			else
-				if frame.enabled then
-					disableCooldown(frame)
-				end
+				if frame.enabled then disableCooldown(frame) end
 			end
 		end
 	end
@@ -581,34 +564,23 @@ local function positionDim()
 	local index = 0
 	for k,v in pairs(frames) do
 		local frame = frames[k]
-		
-		-- Check if the spell is in the spellbook. E.G. will of the forsaken will show as a black icon if you're not a Forsaken, when using a PvP trinket, as it has 45s shared cooldown.
+
 		if GetSpellTexture(GetSpellInfo(frame.spell)) or D.Class == "PRIEST"then
 			local start, duration, enable = GetSpellCooldown(frame.spell)
 			frame.start = start
 			frame.duration = duration
 			if duration and duration > 1.5 then
-				-- fix for setting textures again when respecced. lol.
-				-- Holy Word: ... Chakra state spell textures fix, sets all Holy Word: something textures to Holy Word: Chastise
 				if D.Class == "PRIEST" and frame.spell == 88682 or frame.spell == 88684 or frame.spell == 88685 then
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(88625)))
 				else
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(frame.spell)))
 				end
-				if not frame.enabled then
-					enableCooldown(frame)	
-				end
+				if not frame.enabled then enableCooldown(frame) end
 			else
-				if frame.enabled then
-					disableCooldown(frame)
-				end
+				if frame.enabled then disableCooldown(frame) end
 			end
 		end
-		if (index == 0) then
-			frame:SetPoint("TOPLEFT", lastFrame, "TOPLEFT", xSpacing, ySpacing)
-		else
-			frame:SetPoint("TOPLEFT", lastFrame, anchorPoint, xSpacing, ySpacing)
-		end
+		if (index == 0) then frame:SetPoint("TOPLEFT", lastFrame, "TOPLEFT", xSpacing, ySpacing) else frame:SetPoint("TOPLEFT", lastFrame, anchorPoint, xSpacing, ySpacing) end
 		lastFrame = frame
 		index = index + 1
 	end
@@ -617,32 +589,23 @@ end
 
 
 local function position()
-	if mode == "HIDE" then
-		positionHide() 
-	else
-		positionDim()
-	end
+	if mode == "HIDE" then positionHide() else positionDim() end
 end
 
 -- Frames
 local function createCooldownFrame(spell)
-	-- Background
 	local frame = CreateFrame("Frame", nil, UIParent)
 	frame:CreateBackdrop("Transparent")
 	frame:SetHeight(20)
 	frame:SetWidth(width)
 	frame:SetFrameStrata("MEDIUM")
 
-	-- Cooldown Texture
 	local icon = frame:CreateTexture()
 	local spellInfo = GetSpellInfo(spell)
 	if not spellInfo then return nil end
 	local texture = GetSpellTexture(spellInfo)
 	icon:SetAllPoints(frame)
-	-- Holy Word: ... Chakra state spell textures fix, sets all Holy Word: something textures to Holy Word: Chastise
-	if D.Class == "PRIEST" and spell == 88682 or spell == 88684 or spell == 88685 then
-		texture = GetSpellTexture(GetSpellInfo(88625))
-	end
+	if D.Class == "PRIEST" and spell == 88682 or spell == 88684 or spell == 88685 then texture = GetSpellTexture(GetSpellInfo(88625)) end
 	if not texture then return nil end
 	icon:SetTexture(texture)
 	icon:SetTexCoord(.08, .92, .08, .92)
@@ -655,7 +618,6 @@ local function createCooldownFrame(spell)
 	durationText:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 2, 2)
 	frame.DurationText = durationText
 
-	-- Status Bar Timer
 	local statusBar = CreateFrame("StatusBar", nil, frame, "TextStatusBar")
 	statusBar:Size(width, 4)
 	statusBar:SetStatusBarTexture(C["media"].normTex)
@@ -675,15 +637,10 @@ local function createCooldownFrame(spell)
 	return frame
 end
 
--- Event Handling
 local function OnEvent(self, event, arg1)
 	if event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_TALENT_UPDATE" then	
 		for k, v in pairs(spells) do
-			if GetSpellInfo(v) then
-				frames[v] = frames[v] or createCooldownFrame(spells[k])
-			else
-				frames[v] = createCooldownFrame(spells[k])
-			end
+			if GetSpellInfo(v) then frames[v] = frames[v] or createCooldownFrame(spells[k]) else frames[v] = createCooldownFrame(spells[k]) end
 		end
 		position()
 	end
@@ -691,24 +648,16 @@ local function OnEvent(self, event, arg1)
 	if event == "SPELL_UPDATE_COOLDOWN" then position() end
 end
 
--- Import your class abilities
 spells = spellCooldowns[select(2, UnitClass("player"))]
 
--- And Race
 local race = spellCooldowns["RACE"]
-for i = 1, table.getn(race[select(2, UnitRace("player"))]) do
-	table.insert(spells, race[select(2, UnitRace("player"))][i])
-end
+for i = 1, table.getn(race[select(2, UnitRace("player"))]) do table.insert(spells, race[select(2, UnitRace("player"))][i]) end
 
--- And Pet, if you have one
 local _, pra = UnitRace("player")
 if D.Class == "WARLOCK" or D.Class == "HUNTER" then
-	for i = 1, table.getn(spellCooldowns["PET"]) do
-		table.insert(spells, spellCooldowns["PET"][i])
-	end
+	for i = 1, table.getn(spellCooldowns["PET"]) do table.insert(spells, spellCooldowns["PET"][i]) end
 end
 
--- Update function
 onUpdate = function (self, elapsed)
 	self.lastupdate = self.lastupdate + elapsed
 	if self.lastupdate > throttle then
@@ -719,20 +668,15 @@ onUpdate = function (self, elapsed)
 			if self.StatusBar then
 				self.StatusBar:SetValue(normalized)
 				self.DurationText:SetText(math.floor(currentDuration))
-				-- if fade is 1 make it gradient, else keep it as it was
-				if fade == 1 then
+				if fade == 1 then 
 					self.StatusBar:GetStatusBarTexture():SetVertexColor(1 - normalized, normalized, 0 / 255)
-				elseif fade == 2 then	
+				elseif fade == 2 then
 					self.StatusBar:GetStatusBarTexture():SetVertexColor(normalized, 1 - normalized, 0 / 255)
 				end
 			end
-			if (self.Cooldown) then
-				self.Cooldown:SetCooldown(start, duration)
-			end
+			if (self.Cooldown) then self.Cooldown:SetCooldown(start, duration) end
 		else
-			if self.enabled then
-				disableCooldown(self)
-			end
+			if self.enabled then disableCooldown(self) end
 			position()
 		end
 		self.lastupdate = 0

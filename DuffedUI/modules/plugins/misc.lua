@@ -2,12 +2,10 @@ local D, C, L = unpack(select(2, ...))
 
 -- Remove PVPBank.com spam from friends request
 local function RemoveSpam()
-    for i = 1, BNGetNumFriendInvites() do
-        local id, _ ,_ , t = BNGetFriendInviteInfo(i)
-        if t and t:lower():find("pvpbank") then
-            BNDeclineFriendInvite(id)
-        end
-    end
+	for i = 1, BNGetNumFriendInvites() do
+		local id, _ ,_ , t = BNGetFriendInviteInfo(i)
+		if t and t:lower():find("pvpbank") then BNDeclineFriendInvite(id) end
+	end
 end
 
 local f = CreateFrame("Frame")
@@ -19,9 +17,7 @@ f:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 -- Fixes for Blizzard issues
 hooksecurefunc("StaticPopup_Show", function(which)
-	if which == "DEATH" and not UnitIsDeadOrGhost("player") then
-		StaticPopup_Hide("DEATH")
-	end
+	if which == "DEATH" and not UnitIsDeadOrGhost("player") then StaticPopup_Hide("DEATH") end
 end)
 
 local function FixTradeSkillReagents()
@@ -30,16 +26,12 @@ local function FixTradeSkillReagents()
 			local link, name = GetTradeSkillReagentItemLink(TradeSkillFrame.selectedSkill, self:GetID())
 			if not link then
 				name, link = GameTooltip:GetItem()
-				if name == self.name:GetText() then
-					HandleModifiedItemClick(link)
-				end
+				if name == self.name:GetText() then HandleModifiedItemClick(link) end
 			end
 		end
 	end
 	
-	for i = 1, 8 do
-		_G["TradeSkillReagent"..i]:HookScript("OnClick", TradeSkillReagent_OnClick)
-	end
+	for i = 1, 8 do _G["TradeSkillReagent"..i]:HookScript("OnClick", TradeSkillReagent_OnClick) end
 end
 
 if TradeSkillReagent1 then
@@ -64,18 +56,18 @@ local farm = false
 local minisize = 144
 local farmsize = 300
 function SlashCmdList.FARMMODE(msg, editbox)
-    if farm == false then
-        DuffedUIMinimap:SetSize(farmsize, farmsize)
+	if farm == false then
+		DuffedUIMinimap:SetSize(farmsize, farmsize)
 		Minimap:SetSize(farmsize, farmsize)
-        farm = true
-        print("Farm Mode : On")
-    else
-        DuffedUIMinimap:SetSize(minisize, minisize)
+		farm = true
+		print("Farm Mode : On")
+	else
+		DuffedUIMinimap:SetSize(minisize, minisize)
 		Minimap:SetSize(minisize, minisize)
-        farm = false
-        print("Farm Mode : Off")
-    end
-	
+		farm = false
+		print("Farm Mode : Off")
+	end
+
 	local defaultBlip = "Interface\\Minimap\\ObjectIcons"
 	Minimap:SetBlipTexture(defaultBlip)
 end
@@ -96,7 +88,7 @@ if C["unitframes"].focusbutton then
 		Focus[i].Text:SetPoint("CENTER")
 		if i == 1 then
 			Focus[i]:SetParent(DuffedUITarget)
-			if C["unitframes"].layout == 3 then
+			if C["unitframes"].layout == 3 then 
 				Focus[i]:Point("LEFT", DuffedUITarget, "LEFT", -10, -34)
 			elseif C["unitframes"].layout == 2 then
 				Focus[i]:Point("RIGHT", DuffedUITarget, "RIGHT", 10, -32)
@@ -133,9 +125,7 @@ if C["unitframes"].focusbutton then
 end
 
 if C["misc"].acm_screen == true then
-	----------------------------------------------------------------------------------------
 	--	Take screenshots of Achievements(Based on Achievement Screenshotter by Blamdarot)
-	----------------------------------------------------------------------------------------
 	local function TakeScreen(delay, func, ...)
 		local waitTable = {}
 		local waitFrame = CreateFrame("Frame", "WaitFrame", UIParent)
@@ -159,9 +149,7 @@ if C["misc"].acm_screen == true then
 		tinsert(waitTable, {delay, func, {...}})
 	end
 
-	local function OnEvent(...)
-		TakeScreen(1, Screenshot)
-	end
+	local function OnEvent(...) TakeScreen(1, Screenshot) end
 
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("ACHIEVEMENT_EARNED")
@@ -191,9 +179,7 @@ if C["duffed"].dispelannouncement == true then
 
 	f:SetScript("OnEvent", function(self, event, ...)
 		local timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags = ...
-		if (eventType == "SPELL_DISPEL" or eventType == "SPELL_STOLEN") and sourceName == UnitName("player") then
-			f:AddMessage("- "..textcolor..select(14, ...), 1, 1, 1)
-		end
+		if (eventType == "SPELL_DISPEL" or eventType == "SPELL_STOLEN") and sourceName == UnitName("player") then f:AddMessage("- "..textcolor..select(14, ...), 1, 1, 1) end
 	end)
 
 	DuffedC = {
@@ -235,9 +221,7 @@ if C["duffed"].drinkannouncement == true then
 		if event == "UNIT_SPELLCAST_SUCCEEDED" then
 			local unit, spellName, spellrank, spelline, spellID = ...
 			if GetZonePVPInfo() == "arena" then
-				if UnitIsEnemy("player", unit) and (spellID == 80167 or spellID == 94468 or spellID == 43183 or spellID == 57073 or spellName == "Trinken") then
-					SendChatMessage(UnitName(unit).." is drinking.", "PARTY")
-				end
+				if UnitIsEnemy("player", unit) and (spellID == 80167 or spellID == 94468 or spellID == 43183 or spellID == 57073 or spellName == "Trinken") then SendChatMessage(UnitName(unit).." is drinking.", "PARTY") end
 			end
 		end
 	end
@@ -286,9 +270,7 @@ if C["duffed"].sayinterrupt == true then
 			end
 			
 			local timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, _, extraskillID, extraSkillName = ...
-			if eventType == "SPELL_INTERRUPT" and sourceName == UnitName("player") then
-				SendChatMessage("Interrupted => "..GetSpellLink(extraskillID).."!", channel)
-			end
+			if eventType == "SPELL_INTERRUPT" and sourceName == UnitName("player") then SendChatMessage("Interrupted => "..GetSpellLink(extraskillID).."!", channel) end
 		end
 	end
 	f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")

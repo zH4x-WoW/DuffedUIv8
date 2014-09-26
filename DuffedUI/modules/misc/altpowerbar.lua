@@ -40,11 +40,7 @@ AltPowerBar:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 local function OnEvent(self)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	if UnitAlternatePowerInfo("player") then
-		self:Show()
-	else
-		self:Hide()
-	end
+	if UnitAlternatePowerInfo("player") then self:Show() else self:Hide() end
 end
 AltPowerBar:SetScript("OnEvent", OnEvent)
 
@@ -60,11 +56,7 @@ local function OnUpdate(self, elapsed)
 		self:SetValue(power)
 		AltPowerText:SetText(power.." / "..mpower)
 		local texture, r, g, b = UnitAlternatePowerTextureInfo("player", 2, 0) -- 2 = status bar index, 0 = displayed bar
-		if texture and PowerTextures[texture] then
-			r, g, b = PowerTextures[texture].r, PowerTextures[texture].g, PowerTextures[texture].b
-		else
-			r, g, b = oUFDuffedUI.ColorGradient(power,mpower, 0, .8, 0, .8, .8, 0, .8, 0, 0)
-		end
+		if texture and PowerTextures[texture] then r, g, b = PowerTextures[texture].r, PowerTextures[texture].g, PowerTextures[texture].b else r, g, b = oUFDuffedUI.ColorGradient(power,mpower, 0, .8, 0, .8, .8, 0, .8, 0, 0) end
 		AltPowerBarStatus:SetStatusBarColor(r, g, b)
 		self.TimeSinceLastUpdate = 0
 	end

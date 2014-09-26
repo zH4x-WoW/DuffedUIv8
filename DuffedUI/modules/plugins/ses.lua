@@ -162,7 +162,7 @@ if Enablegear == true then
 			local frames = {gearSets[1]:IsShown(), gearSets[2]:IsShown(), gearSets[3]:IsShown(), gearSets[4]:IsShown(), 
 							gearSets[5]:IsShown(), gearSets[6]:IsShown(), gearSets[7]:IsShown(), gearSets[8]:IsShown(),
 							gearSets[9]:IsShown(), gearSets[10]:IsShown()}
-			if pt > points then
+			if pt > points then 
 				for i = points + 1, pt do gearSets[i]:Show() end 
 			end
 			if frames[pt + 1] == 1 then gearSets[pt + 1]:Hide() end

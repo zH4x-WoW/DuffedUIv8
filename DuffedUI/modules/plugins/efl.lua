@@ -7,9 +7,7 @@ local D, C, L = unpack(select(2, ...))
 function ColoringFriendsList()
 	local friendOffset = HybridScrollFrame_GetOffset(FriendsFrameFriendsScrollFrame)
 	if not friendOffset then return end
-	if friendOffset < 0 then
-		friendOffset = 0
-	end
+	if friendOffset < 0 then friendOffset = 0 end
 	local button = "FriendsFrameFriendsScrollFrameButton"
 	local numBNetTotal, numBNetOnline = BNGetNumFriends()
 	if numBNetOnline > 0 then
@@ -46,15 +44,11 @@ function ColoringFriendsList()
 			if client == BNET_CLIENT_WOW then
 				local _, _, _, realmName, _, faction, race, class, _, zoneName, level, _ = BNGetToonInfo(toonID)
 				for k, v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
-					if class == v then
-						class = k
-					end
+					if class == v then class = k end
 				end
 				if GetLocale() ~= "enUS" then
 					for k, v in pairs(LOCALIZED_CLASS_NAMES_FEMALE) do
-						if class == v then
-							class = k
-						end
+						if class == v then class = k end
 					end
 				end
 				local classc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
@@ -100,15 +94,11 @@ function ColoringFriendsList()
 			j = i + numBNetOnline
 			local name, level, class, area, connected, status, note, RAF = GetFriendInfo(i)
 			for k, v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
-				if class == v then
-					class = k
-				end
+				if class == v then class = k end
 			end
 			if GetLocale() ~= "enUS" then
 				for k, v in pairs(LOCALIZED_CLASS_NAMES_FEMALE) do
-					if class == v then
-						class = k
-					end
+					if class == v then class = k end
 				end
 			end
 			local classc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]

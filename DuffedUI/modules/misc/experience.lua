@@ -18,9 +18,7 @@ local FactionInfo = {
 function colorize(r) return FactionInfo[r][3] end
 
 local function IsMaxLevel()
-	if UnitLevel("player") == MAX_PLAYER_LEVEL then
-		return true
-	end
+	if UnitLevel("player") == MAX_PLAYER_LEVEL then return true end
 end
 
 local backdrop = CreateFrame("Frame", "Experience_Backdrop", UIParent)

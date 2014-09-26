@@ -58,13 +58,9 @@ RaidUtilityShowButton:SetFrameRef("RaidUtilityPanel", RaidUtilityPanel)
 RaidUtilityShowButton:SetAttribute("_onclick", [=[self:Hide(); self:GetFrameRef("RaidUtilityPanel"):Show();]=])
 RaidUtilityShowButton:SetScript("OnMouseUp", function(self, button)
 	if button == "RightButton" then
-		if CheckRaidStatus() then
-			DoReadyCheck()
-		end
+		if CheckRaidStatus() then DoReadyCheck() end
 	elseif button == "MiddleButton" then
-		if CheckRaidStatus() then
-			InitiateRolePoll()
-		end
+		if CheckRaidStatus() then InitiateRolePoll() end
 	elseif button == "LeftButton" then
 		RaidUtilityPanel.toggled = true
 	end
@@ -137,9 +133,7 @@ local function ToggleRaidUtil(self, event)
 		RaidUtilityPanel:Hide()
 	end
 
-	if event == "PLAYER_REGEN_ENABLED" then
-		self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-	end
+	if event == "PLAYER_REGEN_ENABLED" then self:UnregisterEvent("PLAYER_REGEN_ENABLED") end
 end
 
 local LeadershipCheck = CreateFrame("Frame")

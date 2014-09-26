@@ -15,10 +15,6 @@ GhostFrameContentsFrame.SetPoint = D.Dummy
 GhostFrame:SetFrameStrata("LOW")
 GhostFrame:SetFrameLevel(5)
 GhostFrame:ClearAllPoints()
-if C["misc"].location == true then
-	GhostFrame:Point("TOP", UIParent, 0, 6)
-else
-	GhostFrame:Point("TOP", UIParent, 0, 26)
-end
+GhostFrame:Point("TOP", UIParent, 0, 26)
 GhostFrameContentsFrameText:ClearAllPoints()
 GhostFrameContentsFrameText:Point("BOTTOM", 0, 5)

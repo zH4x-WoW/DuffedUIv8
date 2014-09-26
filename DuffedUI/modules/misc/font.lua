@@ -12,13 +12,12 @@ end
 DuffedUIFonts:RegisterEvent("ADDON_LOADED")
 DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
 	if addon ~= "DuffedUI" then return end
-	
+
 	local NORMAL     = C["media"].font
 	local COMBAT     = C["media"].dmgfont
 	local NUMBER     = C["media"].font
 
 	if D.eyefinity then
-		-- damage are huge on eyefinity, so we disable it
 		InterfaceOptionsCombatTextPanelTargetDamage:Hide()
 		InterfaceOptionsCombatTextPanelPeriodicDamage:Hide()
 		InterfaceOptionsCombatTextPanelPetDamage:Hide()
@@ -27,8 +26,7 @@ DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
 		SetCVar("PetMeleeDamage", 0)
 		SetCVar("CombatDamage", 0)
 		SetCVar("CombatHealing", 0)
-		
-		-- set an invisible font for xp, honor kill, etc
+
 		local INVISIBLE = [=[Interface\Addons\DuffedUI\medias\fonts\invisible_font.ttf]=]
 		COMBAT = INVISIBLE
 	end
@@ -41,7 +39,6 @@ DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
 	DAMAGE_TEXT_FONT   = COMBAT
 	STANDARD_TEXT_FONT = NORMAL
 
-	-- Base fonts
 	SetFont(GameTooltipHeader,                  NORMAL, 11)
 	SetFont(NumberFont_OutlineThick_Mono_Small, NUMBER, 11, "OUTLINE")
 	SetFont(NumberFont_Outline_Huge,            NUMBER, 28, "THICKOUTLINE", 28)

@@ -10,9 +10,7 @@ local ActionHasRange = ActionHasRange
 local HasAction = HasAction
 
 function DuffedUIRange:RangeOnUpdate(elapsed)
-	if not self.rangeTimer then
-		return
-	end
+	if not self.rangeTimer then return end
 	DuffedUIRange.RangeUpdate(self)
 end
 

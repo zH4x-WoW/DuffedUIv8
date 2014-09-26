@@ -173,12 +173,8 @@ D.UpdateKeybind = function(self, actionButtonType)
 	Text = replace(Text, KEY_NUMLOCK, "NuL")
 	Text = replace(Text, KEY_MOUSEWHEELDOWN, "MWD")
 	Text = replace(Text, KEY_MOUSEWHEELUP, "MWU")
-	
-	if HotKey:GetText() == _G["RANGE_INDICATOR"] then
-		HotKey:SetText("")
-	else
-		HotKey:SetText(Text)
-	end
+
+	if HotKey:GetText() == _G["RANGE_INDICATOR"] then HotKey:SetText("") else HotKey:SetText(Text) end
 end
 hooksecurefunc("ActionButton_OnEvent", function(self, event, ...) if event == "PLAYER_ENTERING_WORLD" then ActionButton_UpdateHotkeys(self, self.buttonType) end end)
 
@@ -187,10 +183,7 @@ local function SetupFlyoutButton()
 	for i = 1, buttons do
 		if _G["SpellFlyoutButton"..i] then
 			D.StyleActionBarButton(_G["SpellFlyoutButton"..i])
-
-			if _G["SpellFlyoutButton"..i]:GetChecked() then
-				_G["SpellFlyoutButton"..i]:SetChecked(nil)
-			end
+			if _G["SpellFlyoutButton"..i]:GetChecked() then _G["SpellFlyoutButton"..i]:SetChecked(nil) end
 		end
 	end
 end
@@ -219,16 +212,8 @@ function D.StyleActionBarFlyout(button)
 
 	--Change arrow direction depending on what bar the button is on
 	local arrowDistance
-	if ((SpellFlyout:IsShown() and SpellFlyout:GetParent() == button) or GetMouseFocus() == button) then
-		arrowDistance = 5
-	else
-		arrowDistance = 2
-	end
-
-	if button:GetParent() and button:GetParent():GetParent() and button:GetParent():GetParent():GetName() and button:GetParent():GetParent():GetName() == "SpellBookSpellIconsFrame" then 
-		return 
-	end
-
+	if ((SpellFlyout:IsShown() and SpellFlyout:GetParent() == button) or GetMouseFocus() == button) then arrowDistance = 5 else arrowDistance = 2 end
+	if button:GetParent() and button:GetParent():GetParent() and button:GetParent():GetParent():GetName() and button:GetParent():GetParent():GetName() == "SpellBookSpellIconsFrame" then return end
 	if button:GetParent() then
 		local point, _, _, _, _ = button:GetParent():GetParent():GetPoint()
 		if point == "UNKNOWN" then return end
@@ -251,32 +236,28 @@ local ProcBackdrop = {
 }
 
 local ShowOverlayGlow = function(self)
-    if self.overlay then
-        if (self.overlay.animOut:IsPlaying()) then
-            self.overlay.animOut:Stop()
-            self.overlay.animIn:Play()
-        end
-    else
-        self.overlay = ActionButton_GetOverlayGlow()
-        local frameWidth, frameHeight = self:GetSize()
-        self.overlay:SetParent(self)
-        self.overlay:ClearAllPoints()
-        self.overlay:SetSize(frameWidth * 1.4, frameHeight * 1.4)
-        self.overlay:SetPoint("TOPLEFT", self, "TOPLEFT", -frameWidth * 0.2, frameHeight * 0.2)
-        self.overlay:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", frameWidth * 0.2, -frameHeight * 0.2)
-        self.overlay.animIn:Play()
-    end
+	if self.overlay then
+		if (self.overlay.animOut:IsPlaying()) then
+			self.overlay.animOut:Stop()
+			self.overlay.animIn:Play()
+		end
+	else
+		self.overlay = ActionButton_GetOverlayGlow()
+		local frameWidth, frameHeight = self:GetSize()
+		self.overlay:SetParent(self)
+		self.overlay:ClearAllPoints()
+		self.overlay:SetSize(frameWidth * 1.4, frameHeight * 1.4)
+		self.overlay:SetPoint("TOPLEFT", self, "TOPLEFT", -frameWidth * 0.2, frameHeight * 0.2)
+		self.overlay:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", frameWidth * 0.2, -frameHeight * 0.2)
+		self.overlay.animIn:Play()
+	end
 end
- 
+
 local HideOverlayGlow = function(self)
-    if self.overlay then
-        if self.overlay.animIn:IsPlaying() then self.overlay.animIn:Stop() end
-        if self:IsVisible() then
-            self.overlay.animOut:Play()
-        else
-            ActionButton_OverlayGlowAnimOutFinished(self.overlay.animOut)
-        end
-    end
+	if self.overlay then
+		if self.overlay.animIn:IsPlaying() then self.overlay.animIn:Stop() end
+		if self:IsVisible() then self.overlay.animOut:Play() else ActionButton_OverlayGlowAnimOutFinished(self.overlay.animOut) end
+	end
 end
 
 D.ShowHighlightActionButton = function(self)

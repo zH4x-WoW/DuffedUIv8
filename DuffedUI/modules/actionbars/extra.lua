@@ -1,7 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 if not C["actionbar"].enable then return end
 
--- create the holder to allow moving extra button
 local holder = CreateFrame("Frame", "DuffedUIExtraActionBarFrameHolder", UIParent)
 holder:Size(160, 80)
 holder:SetPoint("BOTTOM", 0, 250)
@@ -20,14 +19,11 @@ ExtraActionBarFrame:ClearAllPoints()
 ExtraActionBarFrame:SetPoint("CENTER", holder, "CENTER", 0, 0)
 ExtraActionBarFrame.ignoreFramePositionManager = true
 
--- hook the texture, idea by roth via WoWInterface forums
 local button = ExtraActionButton1
 local icon = button.icon
 local texture = button.style
 local disableTexture = function(style, texture)
-	if string.sub(texture, 1, 9) == "Interface" or string.sub(texture, 1, 9) == "INTERFACE" then
-		style:SetTexture("")
-	end
+	if string.sub(texture, 1, 9) == "Interface" or string.sub(texture, 1, 9) == "INTERFACE" then style:SetTexture("") end
 end
 button.style:SetTexture("")
 hooksecurefunc(texture, "SetTexture", disableTexture)

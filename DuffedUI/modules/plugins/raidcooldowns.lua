@@ -2,7 +2,6 @@ local D, C, L = unpack(select(2, ...))
 
 if C["cooldown"].rcdenable ~= true then return end
 
--- Config start
 local anchor = "TOPLEFT"
 local x, y = 150, -150
 local width, height = 200, 15
@@ -70,7 +69,7 @@ rcda:SetFrameLevel(10)
 rcda:Hide()
 tinsert(D.AllowFrameMoving, rcda)
 
-local FormatTime = function(time)
+local FormatTime = function(time) 
 	if time >= 60 then return sformat('%.2d:%.2d', floor(time / 60), time % 60) else return sformat('%.2d', time) end
 end
 
@@ -173,7 +172,7 @@ end
 
 local StartTimer = function(name, spellId)
 	local spell, rank, icon = GetSpellInfo(spellId)
-	for _, v in pairs(bars) do
+	for _, v in pairs(bars) do 
 		if v.name == name and v.spell == spell then return end
 	end
 	local bar = CreateBar()

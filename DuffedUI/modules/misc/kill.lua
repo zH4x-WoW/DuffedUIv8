@@ -4,23 +4,21 @@ local Kill = CreateFrame("Frame")
 Kill:RegisterEvent("ADDON_LOADED")
 Kill:SetScript("OnEvent", function(self, event, addon)
 	if addon == "Blizzard_AchievementUI" then
-		if C["tooltip"].enable then
-			hooksecurefunc("AchievementFrameCategories_DisplayButton", function(button) button.showTooltipFunc = nil end)
-		end
+		if C["tooltip"].enable then hooksecurefunc("AchievementFrameCategories_DisplayButton", function(button) button.showTooltipFunc = nil end) end
 	end
 
 	if addon ~= "DuffedUI" then return end
 	if C["raid"].enable == true then
 		InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
-		
+
 		-- raid
 		CompactRaidFrameManager:SetParent(DuffedUIUIHider)
 		CompactUnitFrameProfiles:UnregisterAllEvents()
-			
+
 		for i = 1, MAX_PARTY_MEMBERS do
 			local member = "PartyMemberFrame"..i
-			
+
 			_G[member]:UnregisterAllEvents()
 			_G[member]:SetParent(DuffedUIUIHider)
 			_G[member]:Hide()
@@ -69,9 +67,9 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 	end
 
 	if C["unitframes"].enable then
-		PlayerFrame:SetParent(DuffedUIUIHider) -- Just to be sure we are safe
+		PlayerFrame:SetParent(DuffedUIUIHider)
 		InterfaceOptionsFrameCategoriesButton9:SetScale(0.00001)
-		InterfaceOptionsFrameCategoriesButton9:SetAlpha(0)	
+		InterfaceOptionsFrameCategoriesButton9:SetAlpha(0)
 	end
 
 	if C["actionbar"].enable then
@@ -82,14 +80,10 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Kill()
 	end
 
-	if C["nameplate"].enable then
-		InterfaceOptionsNamesPanelUnitNameplatesNameplateClassColors:Kill()
-	end
+	if C["nameplate"].enable then InterfaceOptionsNamesPanelUnitNameplatesNameplateClassColors:Kill() end
 
 	local TaintFix = CreateFrame("Frame")
 	TaintFix:SetScript("OnUpdate", function(self, elapsed)
-		if LFRBrowseFrame.timeToClear then
-			LFRBrowseFrame.timeToClear = nil 
-		end 
+		if LFRBrowseFrame.timeToClear then LFRBrowseFrame.timeToClear = nil end 
 	end)
 end)

@@ -13,30 +13,22 @@ local sex = "male"
 local race = D.MyRace
 local font = D.Font(C["font"].auras)
 
-if sexID == 3 or race == "Pandaren" then sex = "female" end -- look like they forgot to include male icon in MoP for pandaren
+if sexID == 3 or race == "Pandaren" then sex = "female" end
 if race == "Scourge" then race = "Undead" end
 
 local proxyicon = "Interface\\Icons\\Achievement_character_"..string.lower(race).."_"..sex
 
--- no racial icons exist for goblins in the game, wtf?
 if race == "Goblin" then
-	if sex == "male" then
-		proxyicon = "Interface\\Icons\\Achievement_goblinhead"
-	else
-		proxyicon = "Interface\\Icons\\Achievement_femalegoblinhead"
-	end
+	if sex == "male" then proxyicon = "Interface\\Icons\\Achievement_goblinhead" else proxyicon = "Interface\\Icons\\Achievement_femalegoblinhead" end
 end
 
 if race == "Worgen" then
-	-- couln't find any female icon in icon list
 	proxyicon = "Interface\\Icons\\Achievement_worganhead"
 end
 
 local StartStopFlash = function(self, timeLeft)
 	if(timeLeft < 31) then
-		if(not self:IsPlaying()) then
-			self:Play()
-		end
+		if(not self:IsPlaying()) then self:Play() end
 	elseif(self:IsPlaying()) then
 		self:Stop()
 	end
@@ -45,14 +37,9 @@ end
 local OnUpdate = function(self, elapsed)
 	local timeLeft
 
-	-- Handle refreshing of temporary enchants.
 	if self.offset then
 		local expiration = select(self.offset, GetWeaponEnchantInfo())
-		if(expiration) then
-			timeLeft = expiration / 1e3
-		else
-			timeLeft = 0
-		end
+		if(expiration) then timeLeft = expiration / 1e3 else timeLeft = 0 end
 	else
 		timeLeft = self.timeLeft - elapsed
 	end
@@ -60,7 +47,6 @@ local OnUpdate = function(self, elapsed)
 	self.timeLeft = timeLeft
 
 	if timeLeft <= 0 then
-		-- Kill the tracker so we don't end up with stuck timers.
 		self.timeLeft = nil
 
 		self.Duration:SetText("")
@@ -73,15 +59,9 @@ local OnUpdate = function(self, elapsed)
 		self.Bar:SetStatusBarColor(r, g, b)
 
 		if timeLeft < 60.5 then
-			if flash then
-				StartStopFlash(self.Animation, timeLeft)
-			end
+			if flash then StartStopFlash(self.Animation, timeLeft) end
 			
-			if timeLeft < 5 then
-				self.Duration:SetTextColor(255/255, 20/255, 20/255)	
-			else
-				self.Duration:SetTextColor(255/255, 165/255, 0/255)
-			end
+			if timeLeft < 5 then self.Duration:SetTextColor(255/255, 20/255, 20/255) else self.Duration:SetTextColor(255/255, 165/255, 0/255) end
 		else
 			if self.Animation and self.Animation:IsPlaying() then self.Animation:Stop() end
 			self.Duration:SetTextColor(.9, .9, .9)
@@ -105,8 +85,6 @@ local UpdateAura = function(self, index)
 			end
 			self.Dur = duration
 
-			-- We do the check here as well, that way we don't have to check on
-			-- every single OnUpdate call.
 			if flash then StartStopFlash(self.Animation, timeLeft) end
 
 			self.Bar:SetMinMaxValues(0, duration)
@@ -123,11 +101,7 @@ local UpdateAura = function(self, index)
 			if not C["auras"].classictimer then self.Holder:Hide() end
 		end
 
-		if count > 1 then
-			self.Count:SetText(count)
-		else
-			self.Count:SetText("")
-		end
+		if count > 1 then self.Count:SetText(count) else self.Count:SetText("") end
 
 		if self.filter == "HARMFUL" then
 			local color = DebuffTypeColor[dtype or "none"]
@@ -140,10 +114,8 @@ local UpdateAura = function(self, index)
 end
 
 local UpdateTempEnchant = function(self, slot)
-	-- set the icon
 	self.Icon:SetTexture(GetInventoryItemTexture("player", slot))
 
-	-- time left
 	local offset
 	local weapon = self:GetName():sub(-1)
 
@@ -168,11 +140,8 @@ local OnAttributeChanged = function(self, attribute, value)
 	if consolidate or C["auras"].classictimer then self.Holder:Hide() else self.Duration:Hide() end
 
 	if attribute == "index" then
-		-- look if the current buff is consolidated
 		if filter then
-			if consolidate then
-				self.consolidate = true
-			end
+			if consolidate then self.consolidate = true end
 		end
 		return UpdateAura(self, value)
 	elseif attribute == "target-slot" then
@@ -238,8 +207,7 @@ local Skin = function(self)
 		self.Overlay = Overlay
 	end
 
-	-- Set a template
-	self:SetTemplate("Default")
+	self:SetTemplate("Transparent")
 end
 
 frame:SetScript("OnEvent", function(self, event, ...) self[event](self, event, ...) end)

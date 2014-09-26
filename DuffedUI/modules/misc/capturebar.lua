@@ -1,5 +1,4 @@
 local D, C, L = unpack(select(2, ...)) 
--- reposition capture bar to top/center of the screen
 
 local function CaptureUpdate()
 	if NUM_EXTENDED_UI_FRAMES then
@@ -9,12 +8,7 @@ local function CaptureUpdate()
 
 			if captureBar and captureBar:IsVisible() then
 				captureBar:ClearAllPoints()
-				
-				if i == 1 then
-					captureBar:Point("TOP", UIParent, "TOP", 0, -120)
-				else
-					captureBar:Point("TOPLEFT", getglobal("WorldStateCaptureBar" .. i - 1 ), "TOPLEFT", 0, -25)
-				end
+				if i == 1 then captureBar:Point("TOP", UIParent, "TOP", 0, -120) else captureBar:Point("TOPLEFT", getglobal("WorldStateCaptureBar" .. i - 1 ), "TOPLEFT", 0, -25) end
 			end	
 		end	
 	end

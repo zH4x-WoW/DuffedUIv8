@@ -65,11 +65,7 @@ local function LootClick(frame)
 		DressUpItemLink(frame.link)
 	elseif IsShiftKeyDown() then
 		local _, item = GetItemInfo(frame.link)
-		if ChatEdit_GetActiveWindow() then
-			ChatEdit_InsertLink(item)
-		else
-			ChatFrame_OpenChat(item)
-		end
+		if ChatEdit_GetActiveWindow() then ChatEdit_InsertLink(item) else ChatFrame_OpenChat(item) end
 	end
 end
 
@@ -132,7 +128,7 @@ local function CreateRollFrame()
 
 	button.icon = button:CreateTexture(nil, "OVERLAY")
 	button.icon:SetAllPoints()
-	button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	button.icon:SetTexCoord(.1, .9, .1, .9)
 
 	local status = CreateFrame("StatusBar", nil, frame)
 	status:SetSize(326, 20)
@@ -141,15 +137,15 @@ local function CreateRollFrame()
 	status:SetScript("OnUpdate", StatusUpdate)
 	status:SetFrameLevel(status:GetFrameLevel() - 1)
 	status:SetStatusBarTexture(C["media"].normTex)
-	status:SetStatusBarColor(0.8, 0.8, 0.8, 0.9)
+	status:SetStatusBarColor(.8, .8, .8, .9)
 	status.parent = frame
 	frame.status = status
-	
+
 	status.bg = status:CreateTexture(nil, "BACKGROUND")
-	status.bg:SetAlpha(0.1)
+	status.bg:SetAlpha(.1)
 	status.bg:SetAllPoints()
 	status.bg:SetDrawLayer("BACKGROUND", 2)
-	
+
 	local spark = frame:CreateTexture(nil, "OVERLAY")
 	spark:Width(14)
 	spark:Height(50)
@@ -183,12 +179,10 @@ local function CreateRollFrame()
 end
 
 local function GetFrame()
-	for i, f in ipairs(frames) do
-		if not f.rollID then return f end
-	end
+	for i, f in ipairs(frames) do if not f.rollID then return f end end
 
 	local f = CreateRollFrame()
-	if pos == "TOP" then
+	if pos == "TOP" then 
 		f:SetPoint("TOPRIGHT", next(frames) and frames[#frames] or anchor, "BOTTOMRIGHT", next(frames) and 0 or -2, next(frames) and -7 or -5)
 	else
 		f:SetPoint("BOTTOMRIGHT", next(frames) and frames[#frames] or anchor, "TOPRIGHT", next(frames) and 0 or -2, next(frames) and 7 or 5)
@@ -198,7 +192,7 @@ local function GetFrame()
 end
 
 local function FindFrame(rollID)
-	for _, f in ipairs(frames) do
+	for _, f in ipairs(frames) do 
 		if f.rollID == rollID then return f end
 	end
 end
@@ -244,7 +238,7 @@ local function START_LOOT_ROLL(rollID, time)
 		SetDesaturation(f.needbutt:GetNormalTexture(), false)
 	else
 		f.needbutt:Disable()
-		f.needbutt:SetAlpha(0.2)
+		f.needbutt:SetAlpha(.2)
 		SetDesaturation(f.needbutt:GetNormalTexture(), true)
 		f.needbutt.errtext = _G["LOOT_ROLL_INELIGIBLE_REASON"..reasonNeed]
 	end
@@ -255,7 +249,7 @@ local function START_LOOT_ROLL(rollID, time)
 		SetDesaturation(f.greedbutt:GetNormalTexture(), false)
 	else
 		f.greedbutt:Disable()
-		f.greedbutt:SetAlpha(0.2)
+		f.greedbutt:SetAlpha(.2)
 		SetDesaturation(f.greedbutt:GetNormalTexture(), true)
 		f.greedbutt.errtext = _G["LOOT_ROLL_INELIGIBLE_REASON"..reasonGreed]
 	end
@@ -266,23 +260,23 @@ local function START_LOOT_ROLL(rollID, time)
 		SetDesaturation(f.disenchantbutt:GetNormalTexture(), false)
 	else
 		f.disenchantbutt:Disable()
-		f.disenchantbutt:SetAlpha(0.2)
+		f.disenchantbutt:SetAlpha(.2)
 		SetDesaturation(f.disenchantbutt:GetNormalTexture(), true)
 		f.disenchantbutt.errtext = format(_G["LOOT_ROLL_INELIGIBLE_REASON"..reasonDisenchant], deSkillRequired)
 	end
 
 	f.fsbind:SetText(bop and "BoP" or "BoE")
-	f.fsbind:SetVertexColor(bop and 1 or 0.3, bop and 0.3 or 1, bop and 0.1 or 0.3)
+	f.fsbind:SetVertexColor(bop and 1 or .3, bop and .3 or 1, bop and .1 or .3)
 
 	local color = ITEM_QUALITY_COLORS[quality]
 	f.fsloot:SetText(name)
 	f.fsloot:SetVertexColor(color.r, color.g, color.b)
 
-	f.status:SetStatusBarColor(color.r, color.g, color.b, 0.7)
+	f.status:SetStatusBarColor(color.r, color.g, color.b, .7)
 	f.status.bg:SetTexture(color.r, color.g, color.b)
 
-	f.backdrop:SetBackdropBorderColor(color.r, color.g, color.b, 0.7)
-	f.button.backdrop:SetBackdropBorderColor(color.r, color.g, color.b, 0.7)
+	f.backdrop:SetBackdropBorderColor(color.r, color.g, color.b, .7)
+	f.button.backdrop:SetBackdropBorderColor(color.r, color.g, color.b, .7)
 
 	f.status:SetMinMaxValues(0, time)
 	f.status:SetValue(time)
@@ -308,11 +302,7 @@ anchor:SetScript("OnEvent", function(frame, event, addon)
 	UIParent:UnregisterEvent("CANCEL_LOOT_ROLL")
 
 	anchor:SetScript("OnEvent", function(frame, event, ...)
-		if event == "LOOT_HISTORY_ROLL_CHANGED" then
-			return LOOT_HISTORY_ROLL_CHANGED(...)
-		else
-			return START_LOOT_ROLL(...)
-		end
+		if event == "LOOT_HISTORY_ROLL_CHANGED" then return LOOT_HISTORY_ROLL_CHANGED(...) else return START_LOOT_ROLL(...) end
 	end)
 
 	anchor:SetPoint("LEFT", UIParent, "LEFT", 250, 0)

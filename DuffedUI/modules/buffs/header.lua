@@ -11,7 +11,6 @@ for _, frame in next, {
 	"DuffedUIAurasPlayerConsolidate",
 } do
 	local header
-	
 	local wrap
 	wrap = C["auras"].wrap
 
@@ -40,7 +39,6 @@ for _, frame in next, {
 	header:SetSize(30, 30)
 
 	RegisterAttributeDriver(header, "unit", "[vehicleui] vehicle; player")
-
 	table.insert(content, header)
 end
 
@@ -62,7 +60,7 @@ buffs:Show()
 tinsert(D.AllowFrameMoving, DuffedUIAurasPlayerBuffs)
 
 local proxy = buffs:GetAttribute("consolidateProxy")
-proxy:HookScript("OnShow", function(self) if consolidate:IsShown() then consolidate:Hide() end end) -- kind of bug fix for secure aura header
+proxy:HookScript("OnShow", function(self) if consolidate:IsShown() then consolidate:Hide() end end)
 
 local dropdown = CreateFrame("BUTTON", "DuffedUIAurasPlayerConsolidateDropdownButton", proxy, "SecureHandlerClickTemplate")
 dropdown:SetAllPoints()
@@ -78,16 +76,11 @@ dropdown:SetAttribute("_onclick", [=[
 
 	numChild = numChild - 1
 
-	-- needed, else the dropdown is not positionned correctly on opening
 	local x, y = self:GetWidth(), self:GetHeight()
 	header:SetWidth(x)
 	header:SetHeight(y)
 	
-	if header:IsShown() then
-		header:Hide()
-	else
-		header:Show()
-	end
+	if header:IsShown() then header:Hide() else header:Show() end
 ]=]);
 
 consolidate:SetAttribute("point", "RIGHT")

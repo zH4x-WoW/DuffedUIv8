@@ -56,11 +56,7 @@ function waitForMail(self,elapsed)
 		needsToWait = false
 		button:SetScript("OnUpdate", nil)
 		local _, _, _, _, money, COD, _, numItems = GetInboxHeaderInfo(lastopened)
-		if money > 0 or ((not takingOnlyCash) and COD <= 0 and numItems and (numItems > 0)) then
-			openMail(lastopened)
-		else
-			openMail(lastopened - 1)
-		end
+		if money > 0 or ((not takingOnlyCash) and COD <= 0 and numItems and (numItems > 0)) then openMail(lastopened) else openMail(lastopened - 1) end
 	end
 end
 
@@ -68,9 +64,7 @@ function stopOpening(msg, ...)
 	button:SetScript("OnUpdate", nil)
 	button:SetScript("OnClick", openAll)
 	button2:SetScript("OnClick", openAllCash)
-	if baseInboxFrame_OnClick then
-		InboxFrame_OnClick = baseInboxFrame_OnClick
-	end
+	if baseInboxFrame_OnClick then InboxFrame_OnClick = baseInboxFrame_OnClick end
 	button:UnregisterEvent("UI_ERROR_MESSAGE")
 	takingOnlyCash = false
 	total_cash = nil
@@ -121,9 +115,7 @@ end
 button2:SetScript("OnEnter", function()
 	if not total_cash then
 		total_cash = 0
-		for index=0, GetInboxNumItems() do
-			total_cash = total_cash + select(5, GetInboxHeaderInfo(index))
-		end
+		for index=0, GetInboxNumItems() do total_cash = total_cash + select(5, GetInboxHeaderInfo(index)) end
 	end
 	GameTooltip:SetOwner(button, "ANCHOR_RIGHT")
 	GameTooltip:AddLine(copper_to_pretty_money(total_cash), 1, 1, 1)

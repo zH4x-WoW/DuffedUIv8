@@ -6,7 +6,7 @@ D.ignoredspells = {
 	--GetSpellInfo(779),	-- Swipe
 	--GetSpellInfo(6807),	-- Maul
 }
-	
+
 local noscalemult = D.mult * C["general"].uiscale
 local fadeInTime, fadeOutTime, maxAlpha, animScale, iconSize, holdTime, threshold
 local cooldowns, animating, watching = {}, {}, {}
@@ -36,17 +36,13 @@ dicdT:SetPoint("BOTTOMRIGHT", dicd, "BOTTOMRIGHT", -noscalemult * 2, noscalemult
 -- Utility Functions
 local function tcount(tab)
 	local n = 0
-	for _ in pairs(tab) do
-		n = n + 1
-	end
+	for _ in pairs(tab) do n = n + 1 end
 	return n
 end
 
 local function GetPetActionIndexByName(name)
 	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
-		if GetPetActionInfo(i) == name then
-			return i
-		end
+		if GetPetActionInfo(i) == name then return i end
 	end
 	return nil
 end
@@ -60,9 +56,7 @@ local function RefreshLocals()
 	holdTime = 0
 	threshold = 3
 
-	for _, v in pairs(D.ignoredspells) do
-		D.ignoredspells[v] = true
-	end
+	for _, v in pairs(D.ignoredspells) do D.ignoredspells[v] = true end
 end
 
 -- Cooldown/Animation
@@ -82,13 +76,9 @@ local function OnUpdate(_, update)
 						start, duration, enabled = GetItemCooldown(i)
 					end
 					if enabled ~= 0 then
-						if duration and duration > 2.0 and texture then
-							cooldowns[i] = {start, duration, texture, isPet}
-						end
+						if duration and duration > 2.0 and texture then cooldowns[i] = {start, duration, texture, isPet} end
 					end
-					if not (enabled == 0 and v[2] == "spell") then
-						watching[i] = nil
-					end
+					if not (enabled == 0 and v[2] == "spell") then watching[i] = nil end
 				end
 			end
 		end
@@ -119,16 +109,10 @@ local function OnUpdate(_, update)
 		else
 			if not dicdT:GetTexture() then
 				dicdT:SetTexture(animating[1][1])
-				if animating[1][2] then
-					dicdT:SetVertexColor(1, 1, 1)
-				end
+				if animating[1][2] then dicdT:SetVertexColor(1, 1, 1) end
 			end
 			local alpha = maxAlpha
-			if runtimer < fadeInTime then
-				alpha = maxAlpha * (runtimer / fadeInTime)
-			elseif runtimer >= fadeInTime + holdTime then
-				alpha = maxAlpha - (maxAlpha * ((runtimer - holdTime - fadeInTime) / fadeOutTime))
-			end
+			if runtimer < fadeInTime then alpha = maxAlpha * (runtimer / fadeInTime) elseif runtimer >= fadeInTime + holdTime then alpha = maxAlpha - (maxAlpha * ((runtimer - holdTime - fadeInTime) / fadeOutTime)) end
 			dicd:SetAlpha(alpha)
 			local scale = iconSize + (iconSize * ((animScale - 1) * (runtimer / (fadeInTime + holdTime + fadeOutTime))))
 			dicd:SetWidth(scale)
@@ -150,9 +134,7 @@ dicd:RegisterEvent("ADDON_LOADED")
 function dicd:UNIT_SPELLCAST_SUCCEEDED(unit, spell)
 	if unit == "player" then
 		watching[spell] = {GetTime(), "spell", spell}
-		if not self:IsMouseEnabled() then
-			self:SetScript("OnUpdate", OnUpdate)
-		end
+		if not self:IsMouseEnabled() then self:SetScript("OnUpdate", OnUpdate) end
 	end
 end
 dicd:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")

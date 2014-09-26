@@ -1,29 +1,20 @@
 local D, C, L = unpack(select(2, ...)) 
-------------------------------------------------------------------------
--- Auto accept invite
-------------------------------------------------------------------------
 
 if C["invite"].autoaccept then
 	local CheckFriend = function(name)
 		for i = 1, GetNumFriends() do
-			if GetFriendInfo(i) == name then
-				return true
-			end
+			if GetFriendInfo(i) == name then return true end
 		end
 		for i = 1, select(2, BNGetNumFriends()) do
 			local presenceID, _, _, _, _, _, client, isOnline = BNGetFriendInfo(i)
 			if client == "WoW" and isOnline then
 				local _, toonName, _, realmName = BNGetToonInfo(presenceID)
-				if name == toonName or name == toonName.."-"..realmName then
-					return true
-				end
-			end		
+				if name == toonName or name == toonName.."-"..realmName then return true end
+			end
 		end
 		if IsInGuild() then
 			for i = 1, GetNumGuildMembers() do
-				if Ambiguate(GetGuildRosterInfo(i), "guild") == name then
-					return true
-				end
+				if Ambiguate(GetGuildRosterInfo(i), "guild") == name then return true end
 			end
 		end
 	end
@@ -53,10 +44,7 @@ if C["invite"].autoaccept then
 	end)
 end
 
-------------------------------------------------------------------------
 -- Auto invite by whisper
-------------------------------------------------------------------------
-
 local ainvenabled = false
 local ainvkeyword = "invite"
 

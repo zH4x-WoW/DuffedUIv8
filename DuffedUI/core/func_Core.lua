@@ -45,9 +45,7 @@ D.CommaValue = function(amount)
 	local formatted = amount
 	while true do  
 		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
-		if (k==0) then
-			break
-		end
+		if (k == 0) then break end
 	end
 	return formatted
 end
@@ -158,7 +156,7 @@ D.ShiftBarUpdate = function(self)
 		icon = _G[buttonName.."Icon"]
 		if i <= numForms then
 			texture, name, isActive, isCastable = GetShapeshiftFormInfo(i)
-			
+
 			if not icon then return end
 			icon:SetTexture(texture)
 			cooldown = _G[buttonName.."Cooldown"]
@@ -201,34 +199,17 @@ D.PetBarUpdate = function(...)
 
 		if isActive and name ~= "PET_ACTION_FOLLOW" then
 			petActionButton:GetCheckedTexture():SetTexture(0, 1, 0, .3)
-			if IsPetAttackAction(i) then
-				PetActionButton_StartFlash(petActionButton)
-			end
+			if IsPetAttackAction(i) then PetActionButton_StartFlash(petActionButton) end
 		else
 			petActionButton:SetCheckedTexture(0, 0, 0, 0)
-			if IsPetAttackAction(i) then
-				PetActionButton_StopFlash(petActionButton)
-			end
+			if IsPetAttackAction(i) then PetActionButton_StopFlash(petActionButton) end
 		end
 
-		if autoCastAllowed then
-			petAutoCastableTexture:Show()
-		else
-			petAutoCastableTexture:Hide()
-		end
-
-		if autoCastEnabled then
-			AutoCastShine_AutoCastStart(petAutoCastShine)
-		else
-			AutoCastShine_AutoCastStop(petAutoCastShine)
-		end
+		if autoCastAllowed then petAutoCastableTexture:Show() else petAutoCastableTexture:Hide() end
+		if autoCastEnabled then AutoCastShine_AutoCastStart(petAutoCastShine) else AutoCastShine_AutoCastStop(petAutoCastShine) end
 
 		if texture then
-			if GetPetActionSlotUsable(i) then
-				SetDesaturation(petActionIcon, nil)
-			else
-				SetDesaturation(petActionIcon, 1)
-			end
+			if GetPetActionSlotUsable(i) then SetDesaturation(petActionIcon, nil) else SetDesaturation(petActionIcon, 1) end
 			petActionIcon:Show()
 		else
 			petActionIcon:Hide()
@@ -244,7 +225,7 @@ end
 
 D.Round = function(number, decimals)
 	if not decimals then decimals = 0 end
-    return (("%%.%df"):format(decimals)):format(number)
+	return (("%%.%df"):format(decimals)):format(number)
 end
 
 D.RGBToHex = function(r, g, b)
@@ -254,9 +235,7 @@ D.RGBToHex = function(r, g, b)
 	return string.format("|cff%02x%02x%02x", r*255, g*255, b*255)
 end
 
-if C["general"].classcolor then
-	C["media"].datatextcolor1 = D.UnitColor.class[D.Class]
-end
+if C["general"].classcolor then C["media"].datatextcolor1 = D.UnitColor.class[D.Class] end
 D.panelcolor = D.RGBToHex(unpack(C["media"].datatextcolor1))
 
 D.ShortValue = function(v)
@@ -281,11 +260,7 @@ local function CheckRole(self, event, unit)
 		local playeragi = select(2, UnitStat("player", 2))
 		local base, posBuff, negBuff = UnitAttackPower("player")
 		local playerap = base + posBuff + negBuff
-		if (playerap > playerint) or (playeragi > playerint) then
-			D.Role = "Melee"
-		else
-			D.Role = "Caster"
-		end
+		if (playerap > playerint) or (playeragi > playerint) then D.Role = "Melee" else D.Role = "Caster" end
 	end
 end
 local RoleUpdater = CreateFrame("Frame")

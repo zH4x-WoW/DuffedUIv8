@@ -1,9 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 if C["misc"].clickcast ~= true then return end
 
-----------------------------------------------------------------------------------------
 --	Simple click2cast spell binder(sBinder by Fernir)
-----------------------------------------------------------------------------------------
 local SpellBinder = CreateFrame("Frame", "SpellBinder", SpellBookFrame, "ButtonFrameTemplate")
 SpellBinder:SetPoint("TOPLEFT", SpellBookFrame, "TOPRIGHT", 100, 0)
 SpellBinder:SetSize(300, 400)
@@ -168,9 +166,7 @@ SpellBinder.ToggleButtons = function()
 			local slot = SpellBook_GetSpellBookSlot(SpellBinder.spellbuttons[i]:GetParent())
 			if slot then
 				local spellname, subtype = GetSpellBookItemName(slot, SpellBookFrame.bookType)
-				if spellname then
-					SpellBinder.spellbuttons[i]:Show()
-				end
+				if spellname then SpellBinder.spellbuttons[i]:Show() end
 			end
 		end
 	end

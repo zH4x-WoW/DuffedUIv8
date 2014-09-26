@@ -154,9 +154,7 @@ v.text:SetPoint("CENTER")
 v.text:SetText("|cffC41F3BDuffedUI|r ".. D.Version)
 v.text2:SetPoint("BOTTOM", 0, 2)
 v.text2:SetText("by |cffC41F3BMerith - liquidbase|r, website at |cffC41F3Bwww.duffed.net|r")
-v:SetScript("OnClick", function()
-	v:Hide()
-end)
+v:SetScript("OnClick", function() v:Hide() end)
 v:Hide()
 
 local vicon = CreateFrame("Frame", "DuffedVersion", v)
@@ -279,9 +277,7 @@ option2.Text:SetPoint("CENTER")
 local close = CreateFrame("Button", "DuffedUIInstallCloseButton", f, "UIPanelCloseButton")
 close:SetPoint("TOPRIGHT", f, "TOPRIGHT")
 close:SkinCloseButton()
-close:SetScript("OnClick", function()
-	f:Hide()
-end)
+close:SetScript("OnClick", function() f:Hide() end)
 
 local step4 = function()
 	DuffedUIDataPerChar.install = true
@@ -295,9 +291,7 @@ local step4 = function()
 	sbt:SetText("4/4")
 	option1:Hide()
 	option2.Text:SetText(L["buttons"]["finish"])
-	option2:SetScript("OnClick", function()
-		ReloadUI()
-	end)
+	option2:SetScript("OnClick", function() ReloadUI() end)
 end
 
 local step3 = function()
@@ -332,7 +326,7 @@ local step2 = function()
 			D.ChatSetup()
 			step3()
 		end)
-	end	
+	end
 	option1:SetScript("OnClick", step3)
 end
 
@@ -359,7 +353,7 @@ local step1 = function()
 		cvarsetup()
 		step2()
 	end)
-	
+
 	SetActionBarToggles(1, 1, 1, 1, 0)
 	SetCVar("alwaysShowActionBars", 0)
 end
@@ -378,9 +372,7 @@ local tut6 = function()
 	option1.Text:SetText(L["buttons"]["close"])
 	option2.Text:SetText(L["buttons"]["install"])
 
-	option1:SetScript("OnClick", function()
-		f:Hide()
-	end)
+	option1:SetScript("OnClick", function() f:Hide() end)
 	option2:SetScript("OnClick", step1)
 end
 

@@ -12,18 +12,14 @@ function FlightPoints_OnLoad(self)
 	self:RegisterEvent("ADDON_LOADED")
 	FlightPointsTaxiChoiceContainerScrollBar.Show = function(self)
 		FlightPointsTaxiChoiceContainer:SetPoint("BOTTOMRIGHT", FlightPointsTaxiChoice, "BOTTOMRIGHT", -23, 4)
-		for _, button in next, _G["FlightPointsTaxiChoiceContainer"].buttons do
-			button:SetWidth(228)
-		end
+		for _, button in next, _G["FlightPointsTaxiChoiceContainer"].buttons do button:SetWidth(228) end
 		FlightPointsTaxiChoiceContainer.scrollChild:SetWidth(228)
 		getmetatable(self).__index.Show(self)
 	end
 
 	FlightPointsTaxiChoiceContainerScrollBar.Hide = function (self)
 		FlightPointsTaxiChoiceContainer:SetPoint("BOTTOMRIGHT", FlightPointsTaxiChoice, "BOTTOMRIGHT", -4, 4)
-		for _, button in next, FlightPointsTaxiChoiceContainer.buttons do
-			button:SetWidth(250)
-		end
+		for _, button in next, FlightPointsTaxiChoiceContainer.buttons do button:SetWidth(250) end
 		FlightPointsTaxiChoiceContainer.scrollChild:SetWidth(250)
 		getmetatable(self).__index.Hide( self )
 	end
@@ -39,24 +35,17 @@ function FlightPointsTaxiChoiceButton_OnLoad(self)
 end
 
 function FlightPoints_Show()
-	if not FlightPointsTaxiChoiceContainer.buttons then
-		HybridScrollFrame_CreateButtons(FlightPointsTaxiChoiceContainer, "FlightPointsButtonTemplate", 1, -2, "TOPLEFT", "TOPLEFT", 0, 0)
-	end
+	if not FlightPointsTaxiChoiceContainer.buttons then HybridScrollFrame_CreateButtons(FlightPointsTaxiChoiceContainer, "FlightPointsButtonTemplate", 1, -2, "TOPLEFT", "TOPLEFT", 0, 0) end
 	FlightPointsTaxiChoiceContainer_Update()
 end
 
 function FlightPoints_GetFlight(index)
-	if taxinodeinfos[index] then
-		return taxinodeinfos[index].name, taxinodeinfos[index].isheader, taxinodeinfos[index].flightid, taxinodeinfos[index].isexpanded
-	else
-		return nil
-	end
+	if taxinodeinfos[index] then return taxinodeinfos[index].name, taxinodeinfos[index].isheader, taxinodeinfos[index].flightid, taxinodeinfos[index].isexpanded else return nil end
 end
 
 function FlightPointsTaxiChoiceContainer_Update()
-	if not FlightPointsTaxiChoiceContainer.buttons then
-		return
-	end
+	if not FlightPointsTaxiChoiceContainer.buttons then return end
+
 	local buttons = FlightPointsTaxiChoiceContainer.buttons
 	local button = buttons[1]
 	local scrollFrame = FlightPointsTaxiChoiceContainer
@@ -115,14 +104,10 @@ function FlightPointsTaxiChoiceContainer_Update()
 end
 
 function FlightPointsTaxiChoiceButton_OnEnter(self)
-	if not self.isHeader then
-		TaxiNodeOnButtonEnter(_G["TaxiButton" .. self.flightpath])
-	end
+	if not self.isHeader then TaxiNodeOnButtonEnter(_G["TaxiButton" .. self.flightpath]) end
 end
 
-function FlightPointsTaxiChoiceButton_OnLeave(self)
-	GameTooltip:Hide()
-end
+function FlightPointsTaxiChoiceButton_OnLeave(self) GameTooltip:Hide() end
 
 function FlightPointsTaxiChoiceButton_OnClick(self, button, down)
 	if self.isHeader then
@@ -133,24 +118,16 @@ function FlightPointsTaxiChoiceButton_OnClick(self, button, down)
 	end
 end
 
-function FlightPoints_TakeFlyPath(self) 
-	TakeTaxiNode(self.value)
-end
+function FlightPoints_TakeFlyPath(self) TakeTaxiNode(self.value) end
 
 local function pairsByKeys(t, f)
 	local a = {}
-	for n in pairs(t) do
-		table.insert(a, n)
-	end
+	for n in pairs(t) do table.insert(a, n) end
 	table.sort(a, f)
 	local i = 0
 	local iter = function ()
 		i = i + 1
-		if a[i] == nil then
-			return nil
-		else
-			return a[i], t[a[i]]
-		end
+		if a[i] == nil then return nil else return a[i], t[a[i]] end
 	end
 	return iter
 end
@@ -167,9 +144,7 @@ function FlightPoints_CreateFlyPathTable()
 			end
 			match1 = strtrim(match1)
 			match2 = strtrim(match2)
-			if not taxinodeinfos[match2] then
-				taxinodeinfos[match2] = {}
-			end
+			if not taxinodeinfos[match2] then taxinodeinfos[match2] = {} end
 			taxinodeinfos[match2][match1] = i
 		end
 	end

@@ -38,19 +38,12 @@ bar:SetScript("OnEvent", function(self, event, unit, ...)
 
 		self:Execute([[
 			buttons = table.new()
-			for i = 1, 12 do
-				table.insert(buttons, self:GetFrameRef("ActionButton" .. i))
-			end
+			for i = 1, 12 do table.insert(buttons, self:GetFrameRef("ActionButton" .. i)) end
 		]])
 
 		self:SetAttribute("_onstate-page", [[
-			if HasTempShapeshiftActionBar() then
-				newstate = GetTempShapeshiftBarIndex() or newstate
-			end
-
-			for i, button in ipairs(buttons) do
-				button:SetAttribute("actionpage", tonumber(newstate))
-			end
+			if HasTempShapeshiftActionBar() then newstate = GetTempShapeshiftBarIndex() or newstate end
+			for i, button in ipairs(buttons) do button:SetAttribute("actionpage", tonumber(newstate)) end
 		]])
 
 		RegisterStateDriver(self, "page", GetBar())	
@@ -72,13 +65,9 @@ bar:SetScript("OnEvent", function(self, event, unit, ...)
 		end
 	elseif event == "UPDATE_VEHICLE_ACTIONBAR" or event == "UPDATE_OVERRIDE_ACTIONBAR" then
 		if HasVehicleActionBar() or HasOverrideActionBar() then
-			if not self.inVehicle then
-				self.inVehicle = true
-			end
+			if not self.inVehicle then self.inVehicle = true end
 		else
-			if self.inVehicle then
-				self.inVehicle = false
-			end
+			if self.inVehicle then self.inVehicle = false end
 		end
 	else
 		MainMenuBar_OnEvent(self, event, ...)

@@ -152,9 +152,5 @@ local a = CreateFrame ("Frame")
 	a:RegisterEvent("PLAYER_REGEN_DISABLED")
 	a:SetScript("OnEvent", function (self,event)
 		if (UnitIsDead("player")) then return end
-		if event == "PLAYER_REGEN_ENABLED" then
-			allertrun("- Combat", 0.1, 1, 0.1)
-		else
-			allertrun("+ Combat", 1, 0.1, 0.1)
-		end
+		if event == "PLAYER_REGEN_ENABLED" then allertrun("- Combat", 0.1, 1, 0.1) else allertrun("+ Combat", 1, 0.1, 0.1) end
 	end)

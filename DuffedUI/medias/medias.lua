@@ -21,7 +21,6 @@ C["media"] = {
 	["cn_font"] = [=[Fonts\ARKai_T.TTF]=],
 	["cn_dmgfont"] = [[Fonts\ARKai_C.TTF]],
 
-	-- textures
 	["normTex"] = [[Interface\AddOns\DuffedUI\medias\textures\normTex]],
 	["glowTex"] = [[Interface\AddOns\DuffedUI\medias\textures\glowTex]],
 	["bubbleTex"] = [[Interface\AddOns\DuffedUI\medias\textures\bubbleTex]],
@@ -37,13 +36,11 @@ C["media"] = {
 	["sc2"] = [[Interface\AddOns\DuffedUI\medias\textures\sc2]],
 	["pointer"] = [[Interface\AddOns\DuffedUI\medias\textures\arrow]],
 
-	-- colors
 	["bordercolor"] = C["general"].bordercolor or { .125, .125, .125 },
 	["backdropcolor"] = C["general"].backdropcolor or { .05, .05, .05 },
 	["datatextcolor1"] = { .4, .4, .4 }, -- color of datatext title
 	["datatextcolor2"] = { 1, 1, 1 }, -- color of datatext result
 
-	-- sound
 	["whisper"] = [[Interface\AddOns\DuffedUI\medias\sounds\whisper.ogg]],
 	["warning"] = [[Interface\AddOns\DuffedUI\medias\sounds\warning.ogg]],
 }

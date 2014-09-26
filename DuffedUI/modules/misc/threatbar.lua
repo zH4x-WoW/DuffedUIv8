@@ -40,17 +40,9 @@ local function OnEvent(self, event, ...)
 	elseif event == "PLAYER_REGEN_ENABLED" then
 		self:Hide()
 	elseif event == "PLAYER_REGEN_DISABLED" then
-		if party > 0 or raid > 0 or pet == 1 then
-			self:Show()
-		else
-			self:Hide()
-		end
+		if party > 0 or raid > 0 or pet == 1 then self:Show() else self:Hide() end
 	else
-		if (InCombatLockdown()) and (party > 0 or raid > 0 or pet == 1) then
-			self:Show()
-		else
-			self:Hide()
-		end
+		if (InCombatLockdown()) and (party > 0 or raid > 0 or pet == 1) then self:Show() else self:Hide() end
 	end
 end
 
@@ -65,11 +57,7 @@ local function OnUpdate(self, event, unit)
 		local r, g, b = oUFDuffedUI.ColorGradient(threatval, 100, 0, .8, 0, .8, .8, 0, .8, 0, 0)
 		self:SetStatusBarColor(r, g, b)
 
-		if threatval > 0 then
-			self:SetAlpha(1)
-		else
-			self:SetAlpha(0)
-		end
+		if threatval > 0 then self:SetAlpha(1) else self:SetAlpha(0) end
 	end
 end
 

@@ -6,9 +6,7 @@ oUFDuffedUI = ns.oUF
 assert(oUF, "DuffedUI was unable to locate oUF install.")
 
 D.updateAllElements = function(frame)
-	for _, v in ipairs(frame.__elements) do
-		v(frame, "UpdateElement", frame.unit)
-	end
+	for _, v in ipairs(frame.__elements) do v(frame, "UpdateElement", frame.unit) end
 end
 
 local SetUpAnimGroup = function(self)
@@ -30,7 +28,7 @@ local Flash = function(self, duration)
 	self.anim:Play()
 end
 
-local StopFlash = function(self)
+local StopFlash = function(self) 
 	if self.anim then self.anim:Finish() end
 end
 
@@ -46,7 +44,6 @@ local initdropdown = function(self)
 	local menu, name, id
 
 	if(not unit) then return end
-
 	if(UnitIsPlayer(unit)) then
 		id = UnitInRaid(unit)
 		if(id) then
@@ -56,7 +53,6 @@ local initdropdown = function(self)
 			menu = "PARTY"
 		end
 	end
-
 	if(menu) then UnitPopup_ShowMenu(self, menu, unit, name, id) end
 end
 
@@ -164,8 +160,8 @@ end
 
 D.PreUpdatePower = function(power, unit)
 	local pType = select(2, UnitPowerType(unit))
-	
 	local color = D.UnitColor.power[pType]
+
 	if color then power:SetStatusBarColor(color[1], color[2], color[3]) end
 end
 
@@ -175,7 +171,6 @@ D.PostUpdatePower = function(power, unit, min, max)
 	local color = D.UnitColor.power[pToken]
 
 	if color then power.value:SetTextColor(color[1], color[2], color[3]) end
-
 	if not UnitIsPlayer(unit) and not UnitPlayerControlled(unit) or not UnitIsConnected(unit) then
 		power.value:SetText()
 	elseif UnitIsDead(unit) or UnitIsGhost(unit) then
@@ -196,11 +191,7 @@ D.PostUpdatePower = function(power, unit, min, max)
 				power.value:SetText(max - (max - min))
 			end
 		else
-			if unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and unit:find("arena%d")) then
-				power.value:SetText(D.ShortValue(min))
-			else
-				power.value:SetText(min)
-			end
+			if unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and unit:find("arena%d")) then power.value:SetText(D.ShortValue(min)) else power.value:SetText(min) end
 		end
 	end
 end
@@ -210,17 +201,16 @@ function updateAuraTrackerTime(self, elapsed)
 		self.timeleft = self.timeleft - elapsed
 
 		if (self.timeleft <= 5) then self.text:SetTextColor(1, 0, 0) else self.text:SetTextColor(1, 1, 1) end
-
 		if (self.timeleft <= 0) then
 			self.icon:SetTexture("")
 			self.text:SetText("")
-		end	
+		end
 		self.text:SetFormattedText("%.1f", self.timeleft)
 	end
 end
 
 D.PvPUpdate = function(self, elapsed)
-	if (self.elapsed and self.elapsed > 0.2) then
+	if (self.elapsed and self.elapsed > .2) then
 		local unit = self.unit
 		local time = GetPVPTimer()
 
@@ -229,17 +219,9 @@ D.PvPUpdate = function(self, elapsed)
 		if self.PvP then
 			local factionGroup = UnitFactionGroup(unit)
 			if UnitIsPVPFreeForAll(unit) then
-				if time ~= 301000 and time ~= -1 then
-					self.PvP:SetText(PVP .. " " .. "(" .. min .. ":" .. sec .. ")")
-				else
-					self.PvP:SetText(PVP)
-				end
+				if time ~= 301000 and time ~= -1 then self.PvP:SetText(PVP .. " " .. "(" .. min .. ":" .. sec .. ")") else self.PvP:SetText(PVP) end
 			elseif (factionGroup and UnitIsPVP(unit)) then
-				if time ~= 301000 and time ~= -1 then
-					self.PvP:SetText(PVP .. " " .. "(" .. min .. ":" .. sec .. ")")
-				else
-					self.PvP:SetText(PVP)
-				end
+				if time ~= 301000 and time ~= -1 then self.PvP:SetText(PVP .. " " .. "(" .. min .. ":" .. sec .. ")") else self.PvP:SetText(PVP) end
 			else
 				self.PvP:SetText("")
 			end
@@ -277,11 +259,7 @@ local CreateAuraTimer = function(self, elapsed)
 			if self.timeLeft > 0 then
 				local time = D.FormatTime(self.timeLeft)
 				self.remaining:SetText(time)
-				if self.timeLeft <= 5 then
-					self.remaining:SetTextColor(.99, .31, .31)
-				else
-					self.remaining:SetTextColor(1, 1, 1)
-				end
+				if self.timeLeft <= 5 then self.remaining:SetTextColor(.99, .31, .31) else self.remaining:SetTextColor(1, 1, 1) end
 			else
 				self.remaining:Hide()
 				self:SetScript("OnUpdate", nil)
@@ -324,7 +302,7 @@ D.PostCreateAura = function(self, button)
 	button.Glow = CreateFrame("Frame", nil, button)
 	button.Glow:Point("TOPLEFT", button, "TOPLEFT", -3, 3)
 	button.Glow:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 3, -3)
-	button.Glow:SetFrameStrata("BACKGROUND")	
+	button.Glow:SetFrameStrata("BACKGROUND")
 	button.Glow:SetBackdrop{edgeFile = C["media"].glowTex, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
@@ -359,9 +337,9 @@ D.PostUpdateAura = function(self, unit, icon, index, offset, filter, isDebuff, d
 				if icon.Animation:IsPlaying() then icon.Animation:Stop() end
 			end
 		end
-		
+
 		if duration and duration > 0 then icon.remaining:Show() else icon.remaining:Hide() end
-	 
+
 		icon.duration = duration
 		icon.timeLeft = expirationTime
 		icon.first = true
@@ -385,26 +363,18 @@ end
 
 D.HidePortrait = function(self, unit)
 	if self.unit == "target" then
-		if not UnitExists(self.unit) or not UnitIsConnected(self.unit) or not UnitIsVisible(self.unit) then
-			self.Portrait:SetAlpha(0)
-		else
-			self.Portrait:SetAlpha(1)
-		end
+		if not UnitExists(self.unit) or not UnitIsConnected(self.unit) or not UnitIsVisible(self.unit) then self.Portrait:SetAlpha(0) else self.Portrait:SetAlpha(1) end
 	end
 	self.Portrait:SetFrameLevel(4)
 end
 
 D.PortraitUpdate = function(self, unit)
-	if self:GetModel() and self:GetModel().find and self:GetModel():find("worgenmale") then
-		self:SetCamera(1)
-	end
+	if self:GetModel() and self:GetModel().find and self:GetModel():find("worgenmale") then self:SetCamera(1) end
 end
 
 local ticks = {}
 local HideTicks = function()
-	for _, tick in pairs(ticks) do
-		tick:Hide()
-	end
+	for _, tick in pairs(ticks) do tick:Hide() end
 end
 
 local SetCastTicks = function(frame, numTicks)
@@ -416,11 +386,7 @@ local SetCastTicks = function(frame, numTicks)
 				ticks[i] = frame:CreateTexture(nil, "OVERLAY")
 				ticks[i]:SetTexture( C["media"].normTex)
 
-				if C["castbar"].classcolor == true then
-					ticks[i]:SetVertexColor(0, 0, 0)
-				else
-					ticks[i]:SetVertexColor(.84, .75, .65)
-				end
+				if C["castbar"].classcolor == true then ticks[i]:SetVertexColor(0, 0, 0) else ticks[i]:SetVertexColor(.84, .75, .65) end
 				ticks[i]:SetWidth(2)
 				ticks[i]:SetHeight(frame:GetHeight())
 			end
@@ -431,23 +397,15 @@ local SetCastTicks = function(frame, numTicks)
 	end
 end
 
-D.CustomCastTime = function(self, duration)
-	self.Time:SetText(("%.1f / %.1f"):format(self.channeling and duration or self.max - duration, self.max))
-end
+D.CustomCastTime = function(self, duration) self.Time:SetText(("%.1f / %.1f"):format(self.channeling and duration or self.max - duration, self.max)) end
 
-D.CustomCastDelayText = function(self, duration)
-	self.Time:SetText(("%.1f |cffaf5050%s %.1f|r"):format(self.channeling and duration or self.max - duration, self.channeling and "- " or "+", self.delay))
-end
+D.CustomCastDelayText = function(self, duration) self.Time:SetText(("%.1f |cffaf5050%s %.1f|r"):format(self.channeling and duration or self.max - duration, self.channeling and "- " or "+", self.delay)) end
 
 D.CastBar = function(self, unit, name, rank, castid)
 	if self.interrupt and unit ~= "player" then
 		if UnitCanAttack("player", unit) then self:SetStatusBarColor(1, 0, 0, .5) else self:SetStatusBarColor(1, 0, 0, .5) end
 	else
-		if C["castbar"].classcolor then
-			self:SetStatusBarColor(unpack(D.UnitColor.class[D.Class]))
-		else
-			self:SetStatusBarColor(unpack(C["castbar"].color))
-		end
+		if C["castbar"].classcolor then self:SetStatusBarColor(unpack(D.UnitColor.class[D.Class])) else self:SetStatusBarColor(unpack(C["castbar"].color)) end
 	end
 
 	local color
@@ -457,7 +415,7 @@ D.CastBar = function(self, unit, name, rank, castid)
 		local baseTicks = D.ChannelTicks[name]
 		if baseTicks and D.HasteTicks[name] then
 			local tickIncRate = 1 / baseTicks
-			local curHaste = UnitSpellHaste("player") * 0.01
+			local curHaste = UnitSpellHaste("player") * .01
 			local firstTickInc = tickIncRate / 2
 			local bonusTicks = 0
 			if curHaste >= firstTickInc then bonusTicks = bonusTicks + 1 end
@@ -558,18 +516,12 @@ D.UpdateDruidManaText = function(self)
 		local percMana = min / max * 100
 		if percMana <= 20 then
 			self.FlashInfo.ManaLevel:SetText("|cffaf5050" .. L["uf"]["lowmana"] .. "|r")
-			Flash(self.FlashInfo, 0.3)
+			Flash(self.FlashInfo, .3)
 		else
 			self.FlashInfo.ManaLevel:SetText()
 			StopFlash(self.FlashInfo)
 		end
-
-		if min ~= max then
-			self.DruidManaText:SetFormattedText("%d%%", floor(min / max * 100))
-		else
-			self.DruidManaText:SetText()
-		end
-
+		if min ~= max then self.DruidManaText:SetFormattedText("%d%%", floor(min / max * 100)) else self.DruidManaText:SetText() end
 		self.DruidManaText:SetAlpha(1)
 	else
 		self.DruidManaText:SetAlpha(0)
@@ -580,11 +532,7 @@ D.UpdateThreat = function(self, event, unit)
 	if (self.unit ~= unit) or (unit == "target" or unit == "pet" or unit == "focus" or unit == "focustarget" or unit == "targettarget") then return end
 	local threat = UnitThreatSituation(self.unit)
 	if (threat == 3) then
-		if self.panel then
-			self.panel:SetBackdropBorderColor(.69, .31, .31, 1)
-		else
-			self.Name:SetTextColor(1,.1, .1)
-		end
+		if self.panel then self.panel:SetBackdropBorderColor(.69, .31, .31, 1) else self.Name:SetTextColor(1,.1, .1) end
 	else
 		if self.panel then
 			local r, g, b = unpack(C["media"].bordercolor)
@@ -641,7 +589,6 @@ D.createAuraWatch = function(self, unit)
 			icon.icon:SetTexCoord(.08, .92, .08, .92)
 			icon.icon:SetDrawLayer("ARTWORK")
 		end
-
 		if icon.cd then icon.cd:SetReverse() end
 		if icon.overlay then icon.overlay:SetTexture() end
 	end
@@ -649,15 +596,10 @@ D.createAuraWatch = function(self, unit)
 	local buffs = {}
 
 	if D.buffids["ALL"] then
-		for key, value in pairs(D.buffids["ALL"]) do
-			tinsert(buffs, value)
-		end
+		for key, value in pairs(D.buffids["ALL"]) do tinsert(buffs, value) end
 	end
-
 	if (D.buffids[D.Class]) then
-		for key, value in pairs(D.buffids[D.Class]) do
-			tinsert(buffs, value)
-		end
+		for key, value in pairs(D.buffids[D.Class]) do tinsert(buffs, value) end
 	end
 
 	if (buffs) then
@@ -672,11 +614,7 @@ D.createAuraWatch = function(self, unit)
 			local tex = icon:CreateTexture(nil, "OVERLAY")
 			tex:SetAllPoints(icon)
 			tex:SetTexture(C["media"].blank)
-			if (spell[4]) then
-				tex:SetVertexColor(unpack(spell[4]))
-			else
-				tex:SetVertexColor(.8, .8, .8)
-			end
+			if (spell[4]) then tex:SetVertexColor(unpack(spell[4])) else tex:SetVertexColor(.8, .8, .8) end
 
 			local count = icon:CreateFontString(nil, "OVERLAY")
 			count:SetFont(C["media"].font, 8, "THINOUTLINE")

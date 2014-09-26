@@ -12,7 +12,6 @@ local displayheal = GetCVar("CombatHealing")
 local displaydot = GetCVar("CombatLogPeriodicSpells")
 
 local gflags = bit.bor(COMBATLOG_OBJECT_AFFILIATION_MINE, COMBATLOG_OBJECT_REACTION_FRIENDLY, COMBATLOG_OBJECT_CONTROL_PLAYER, COMBATLOG_OBJECT_TYPE_GUARDIAN)
-	
 local function OnEvent(self, event, ...)
 	local timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags = select(1,...)
 
@@ -24,11 +23,7 @@ local function OnEvent(self, event, ...)
 				self:AddMessage(amount, 1, 1, 1)
 			elseif eventType == "SPELL_DAMAGE" or eventType == "SPELL_PERIODIC_DAMAGE" then
 				local _, _, _, spellId, _, spellSchool, amount, _, _, _, _, _, critical = select(9, ...)
-				if eventType == "SPELL_PERIODIC_DAMAGE" then
-					if displaydot then self:AddMessage(amount, 151 / 255, 70 / 255, 194 / 255) end
-				else
-					self:AddMessage(amount, 1, 1, 0)
-				end
+				if eventType == "SPELL_PERIODIC_DAMAGE" then if displaydot then self:AddMessage(amount, 151 / 255, 70 / 255, 194 / 255) end else self:AddMessage(amount, 1, 1, 0) end
 			elseif eventType == "RANGE_DAMAGE" then
 				local _, _, _, spellId, _, _, amount, _, _, _, _, _, critical = select(9, ...)
 				self:AddMessage(amount, 1, 1, 1)
@@ -40,7 +35,7 @@ local function OnEvent(self, event, ...)
 				self:AddMessage(missType, 1, 1, 1)
 			end
 		end
-		
+
 		-- heal
 		if displayheal then
 			if eventType == "SPELL_HEAL" or eventType== "SPELL_PERIODIC_HEAL" then
@@ -68,29 +63,15 @@ local o = CreateFrame("Frame")
 o:RegisterEvent("CVAR_UPDATE")
 o:SetScript("OnEvent", function(self, event, cvar, value)
 	if cvar == "SHOW_DAMAGE_TEXT" then
-		if value == 1 then
-			displaydamage = true
-		else
-			displaydamage = false
-		end
+		if value == 1 then displaydamage = true else displaydamage = false end
 	end
-	
+
 	if cvar == "LOG_PERIODIC_EFFECTS" then
-		if value == 1 then
-			displaydot = true
-		else
-			displaydot = false
-		end
+		if value == 1 then displaydot = true else displaydot = false end
 	end
-	
+
 	if cvar == "SHOW_COMBAT_HEALING" then
-		if value == 1 then
-			displayheal = true
-		else
-			displayheal = false
-		end
+		if value == 1 then displayheal = true else displayheal = false end
 	end
 end)
-
--- kill
 InterfaceOptionsCombatTextPanelPetDamage:Kill()

@@ -1,6 +1,5 @@
 local D, C, L = unpack(select(2, ...)) 
 
--- INFO LEFT (FOR STATS)
 local ileft = CreateFrame("Frame", "DuffedUIInfoLeft", UIParent)
 ileft:SetTemplate("Default")
 ileft:Size(D.Scale(D.InfoLeftRightWidth - 9), 19)
@@ -8,7 +7,6 @@ ileft:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 3)
 ileft:SetFrameLevel(2)
 ileft:SetFrameStrata("BACKGROUND")
 
--- INFO RIGHT (FOR STATS)
 local iright = CreateFrame("Frame", "DuffedUIInfoRight", UIParent)
 iright:SetTemplate("Default")
 iright:Size(D.Scale(D.InfoLeftRightWidth - 9), 19)
@@ -17,14 +15,12 @@ iright:SetFrameLevel(2)
 iright:SetFrameStrata("BACKGROUND")
 
 if C["chat"].lbackground then
-	-- CHAT BG LEFT
 	local chatleftbg = CreateFrame("Frame", "DuffedUIChatBackgroundLeft", DuffedUIInfoLeft)
 	chatleftbg:SetTemplate("Transparent")
 	chatleftbg:Size(D.InfoLeftRightWidth + 12, 149)
 	chatleftbg:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 5, 24)
 	chatleftbg:SetFrameLevel(1)
 
-	-- LEFT TAB PANEL
 	local tabsbgleft = CreateFrame("Frame", "DuffedUITabsLeftBackground", UIParent)
 	tabsbgleft:SetTemplate()
 	tabsbgleft:Size((D.InfoLeftRightWidth - 40), 20)
@@ -34,14 +30,12 @@ if C["chat"].lbackground then
 end
 
 if C["chat"].rbackground then
-	-- CHAT BG RIGHT
 	local chatrightbg = CreateFrame("Frame", "DuffedUIChatBackgroundRight", DuffedUIInfoRight)
 	chatrightbg:SetTemplate("Transparent")
 	chatrightbg:Size(D.InfoLeftRightWidth + 12, 149)
 	chatrightbg:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 24)
 	chatrightbg:SetFrameLevel(1)
-		
-	-- RIGHT TAB PANEL
+
 	local tabsbgright = CreateFrame("Frame", "DuffedUITabsRightBackground", UIParent)
 	tabsbgright:SetTemplate()
 	tabsbgright:Size((D.InfoLeftRightWidth - 187), 20)
@@ -117,11 +111,7 @@ if not C["actionbar"].enable ~= true then
 		DuffedUIPetBarMover:SetPoint("RIGHT", DuffedUIBar5, "LEFT", -6, 0)
 	else
 		DuffedUIPetBarMover:SetSize((D.petbuttonsize * 10) + (D.petbuttonspacing * 11), D.petbuttonsize + (D.petbuttonspacing * 2))
-		if C["chat"].rbackground then
-			DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 3)
-		else
-			DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 176)
-		end
+		if C["chat"].rbackground then DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 3) else DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 176) end
 	end
 	DuffedUIPetBarMover:SetFrameLevel(6)
 	DuffedUIPetBarMover:SetClampedToScreen(true)
@@ -147,9 +137,7 @@ chatmenu.text = D.SetFontString(chatmenu, C["media"].font, 11, "THINOUTLINE")
 chatmenu.text:SetPoint("CENTER", 1, -1)
 chatmenu.text:SetText(D.panelcolor .. "E")
 chatmenu:SetScript("OnMouseDown", function(self, btn)
-	if btn == "LeftButton" then	
-		ToggleFrame(ChatMenu)
-	end
+	if btn == "LeftButton" then ToggleFrame(ChatMenu) end
 end)
 
 if DuffedUIMinimap then
@@ -164,7 +152,6 @@ if DuffedUIMinimap then
 	minimapstatsright:Point("TOPRIGHT", DuffedUIMinimap, "BOTTOMRIGHT", 0, -2)
 end
 
---BATTLEGROUND STATS FRAME
 if C["datatext"].battleground == true then
 	local bgframe = CreateFrame("Frame", "DuffedUIInfoLeftBattleGround", UIParent)
 	bgframe:SetTemplate()

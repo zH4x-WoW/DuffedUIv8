@@ -24,9 +24,5 @@ local MakeFont = {
 }
 
 D.Font = function(value)
-	if MakeFont[value] then
-		return MakeFont[value]
-	else
-		return MakeFont["DuffedUI"]
-	end
+	if MakeFont[value] then return MakeFont[value] else return MakeFont["DuffedUI"] end
 end

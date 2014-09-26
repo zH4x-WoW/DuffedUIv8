@@ -10,7 +10,7 @@ local function CreateCopyFrame()
 	frame = CreateFrame("Frame", "DuffedUIChatCopyFrame", UIParent)
 	frame:SetTemplate("Transparent")
 	frame:Width(600)
-	frame:Height(750)
+	frame:Height(400)
 	frame:SetScale(1)
 	frame:Point("BOTTOM", UIParent, "BOTTOM", 0, 10)
 	frame:Hide()
@@ -92,7 +92,7 @@ else
 	DuffedUIButtonCF4:SetScript("OnLeave", function() DuffedUIButtonCF4:SetAlpha(0) end)
 end
 
-for i=1, NUM_CHAT_WINDOWS do
+for i = 1, NUM_CHAT_WINDOWS do
 	local editbox = _G["ChatFrame"..i.."EditBox"]
 	editbox:HookScript("OnTextChanged", function(self)
 		local text = self:GetText()

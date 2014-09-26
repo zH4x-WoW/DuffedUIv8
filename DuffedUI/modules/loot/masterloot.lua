@@ -14,9 +14,7 @@ D.CreatePopup["DUFFEDUI_GIVEMASTERLOOT"] = {
 }
 
 local hexColors = {}
-for k, v in pairs(RAID_CLASS_COLORS) do
-	hexColors[k] = "|c" .. v.colorStr
-end
+for k, v in pairs(RAID_CLASS_COLORS) do hexColors[k] = "|c" .. v.colorStr end
 hexColors["UNKNOWN"] = string.format("|cff%02x%02x%02x", .6 * 255, .6 * 255, .6 * 255)
 
 local playerName = UnitName("player")
@@ -25,9 +23,7 @@ local players, player_indices = {}, {}
 local randoms = {}
 local wipe = table.wipe
 
-local function MasterLoot_RequestRoll(frame)
-	DoMasterLootRoll(frame.value)
-end
+local function MasterLoot_RequestRoll(frame) DoMasterLootRoll(frame.value) end
 
 local function MasterLoot_GiveLoot(frame)
 	if LootFrame.selectedQuality >= MASTER_LOOT_THREHOLD then
@@ -46,8 +42,8 @@ local function init()
 	local candidate, color, lclass, className
 	local slot = LootFrame.selectedSlot or 0
 	local info = UIDropDownMenu_CreateInfo()
-	
- 	if UIDROPDOWNMENU_MENU_LEVEL == 2 then
+
+	if UIDROPDOWNMENU_MENU_LEVEL == 2 then
 		wipe(players)
 		wipe(player_indices)
 		local this_class = UIDROPDOWNMENU_MENU_VALUE
@@ -87,9 +83,7 @@ local function init()
 		wipe(classesInRaid)
 		for i = 1, MAX_RAID_MEMBERS do
 			candidate,lclass,className = GetMasterLootCandidate(slot,i)
-			if candidate then
-				classesInRaid[className] = lclass
-			end		
+			if candidate then classesInRaid[className] = lclass end
 		end
 
 		for i, class in ipairs(CLASS_SORT_ORDER) do
@@ -108,7 +102,6 @@ local function init()
 			end
 		end
 	else
-		-- In a party
 		for i = 1, MAX_PARTY_MEMBERS + 1, 1 do
 			candidate,lclass,className = GetMasterLootCandidate(slot,i)
 			if candidate then
@@ -125,7 +118,7 @@ local function init()
 			end
 		end
 	end
-	
+
 	info.colorCode = "|cffffffff"
 	info.isTitle = nil
 	info.textHeight = 12
@@ -136,13 +129,11 @@ local function init()
 	info.func = MasterLoot_RequestRoll
 	info.icon = "Interface\\Buttons\\UI-GroupLoot-Dice-Up"
 	UIDropDownMenu_AddButton(info)
-	
+
 	wipe(randoms)
 	for i = 1, MAX_RAID_MEMBERS do
 		candidate,lclass,className = GetMasterLootCandidate(slot,i)
-		if candidate then
-			table.insert(randoms, i)
-		end
+		if candidate then table.insert(randoms, i) end
 	end
 	if #randoms > 0 then
 		info.colorCode = "|cffffffff"

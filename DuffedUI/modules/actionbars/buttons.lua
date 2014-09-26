@@ -51,27 +51,15 @@ local function MoveButtonBar(button, bar)
 	local db = DuffedUIDataPerChar
 
 	if button == DuffedUIBar3Button then
-		if bar:IsShown() then
-			button.text:SetText(cm.."-|r")
-		else
-			button.text:SetText(cp.."+|r")
-		end
+		if bar:IsShown() then button.text:SetText(cm.."-|r") else button.text:SetText(cp.."+|r") end
 	end
 
 	if button == DuffedUIBar4Button then
-		if bar:IsShown() then
-			button.text:SetText(cm.."-|r")
-		else
-			button.text:SetText(cp.."+|r")
-		end
+		if bar:IsShown() then button.text:SetText(cm.."-|r") else button.text:SetText(cp.."+|r") end
 	end
 
 	if button == DuffedUIBar5Button then
-		if bar:IsShown() then
-			button.text:SetText(cm..">|r")
-		else
-			button.text:SetText(cp.."<|r")
-		end
+		if bar:IsShown() then button.text:SetText(cm..">|r") else button.text:SetText(cp.."<|r") end
 	end
 end
 
@@ -89,9 +77,7 @@ DuffedUIBar3Button:RegisterForClicks("AnyUp")
 DuffedUIBar3Button.text = D.SetFontString(DuffedUIBar3Button, C["media"].font, 11, "THINOUTLINE")
 DuffedUIBar3Button:SetScript("OnClick", function(self, btn)
 	if btn == "RightButton" then
-		if DuffedUIInfoLeftBattleGround and UnitInBattleground("player") then
-			ToggleFrame(DuffedUIInfoLeftBattleGround)
-		end
+		if DuffedUIInfoLeftBattleGround and UnitInBattleground("player") then ToggleFrame(DuffedUIInfoLeftBattleGround) end
 	else
 		UpdateBar(self, DuffedUIBar3)
 	end

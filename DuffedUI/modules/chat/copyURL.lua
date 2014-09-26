@@ -12,7 +12,7 @@ end
 local FindURL = function(self, event, msg, ...)
 	local newMsg, found = gsub(msg, "(%a+)://(%S+)%s?", PrintURL("%1://%2"))
 	if found > 0 then return false, newMsg, ... end
-	
+
 	newMsg, found = gsub(msg, "www%.([_A-Za-z0-9-]+)%.(%S+)%s?", PrintURL("www.%1.%2"))
 	if found > 0 then return false, newMsg, ... end
 
@@ -41,9 +41,7 @@ ChatFrame_OnHyperlinkShow = function(self, link, ...)
 	if (link):sub(1, 3) == "url" then
 		local ChatFrameEditBox = ChatEdit_ChooseBoxForSend()
 		currentLink = (link):sub(5)
-		if (not ChatFrameEditBox:IsShown()) then
-			ChatEdit_ActivateChat(ChatFrameEditBox)
-		end
+		if (not ChatFrameEditBox:IsShown()) then ChatEdit_ActivateChat(ChatFrameEditBox) end
 		ChatFrameEditBox:Insert(currentLink)
 		ChatFrameEditBox:HighlightText()
 		currentLink = nil
