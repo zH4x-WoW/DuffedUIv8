@@ -56,14 +56,18 @@ D.ConstructRessources = function(name, width, height)
 			ComboPoints[i]:SetStatusBarTexture(texture)
 			ComboPoints[i]:SetStatusBarColor(unpack(Colors[i]))
 			if i == 6 then
-				ComboPoints[i]:SetPoint("BOTTOM", _G["ComboPoints"..i - 5], "TOP", 0, 4)
+				ComboPoints[i]:SetPoint("BOTTOM", _G["ComboPoints"..i - 5], "TOP", 0, 5)
 				ComboPoints[i]:Width(44)
+				ComboPoints[i]:CreateBackdrop()
 			else
-				ComboPoints[i]:SetPoint("BOTTOM", _G["ComboPoints"..i - 5], "TOP", 0, 4)
+				ComboPoints[i]:SetPoint("BOTTOM", _G["ComboPoints"..i - 5], "TOP", 0, 5)
 				ComboPoints[i]:Width(42)
+				ComboPoints[i]:CreateBackdrop()
 			end
 			ComboPoints[i]:Hide()
 		end
+		DuffedUITarget:HookScript("OnShow", function() AnticipationPoints:Show() end)
+		DuffedUITarget:HookScript("OnHide", function() AnticipationPoints:Hide() end)
 	end
 
 	function Anticipation:UNIT_AURA(unit)
