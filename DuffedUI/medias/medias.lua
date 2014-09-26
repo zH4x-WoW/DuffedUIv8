@@ -44,6 +44,6 @@ C["media"] = {
 	["datatextcolor2"] = { 1, 1, 1 }, -- color of datatext result
 
 	-- sound
-	["whisper"] = [[Interface\AddOns\DuffedUI\medias\sounds\whisper.mp3]],
-	["warning"] = [[Interface\AddOns\DuffedUI\medias\sounds\warning.mp3]],
+	["whisper"] = [[Interface\AddOns\DuffedUI\medias\sounds\whisper.ogg]],
+	["warning"] = [[Interface\AddOns\DuffedUI\medias\sounds\warning.ogg]],
 }
