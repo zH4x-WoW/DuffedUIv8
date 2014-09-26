@@ -37,6 +37,11 @@ end
 
 		http://eu.battle.net/wow/en/forum/topic/12206010700
 
+	To enable this workaround enter the followin commands into the chat window:
+
+		/script DuffedUIData.usePerCharData = true
+		/reload
+
 	The code can be removed once the client issue has been fixed. Only the
 	"SetPerCharVariable" part above should stay in for compatibility
 	(otherwise all uses of the function must be replaced with an
@@ -54,38 +59,40 @@ DuffedUIOnVarsLoaded:SetScript("OnEvent", function(self, event)
 		DuffedUIData = {}
 	end
 
-	local playerName = UnitName("player") .. "@" .. GetRealmName();
+	if DuffedUIData.usePerCharData then
+		local playerName = UnitName("player") .. "@" .. GetRealmName()
 
-	if DuffedUIData.perCharData ~= nil and DuffedUIData.perCharData [playerName] ~= nil then
-		local pcd = DuffedUIData.perCharData [playerName];
+		if DuffedUIData.perCharData ~= nil and DuffedUIData.perCharData [playerName] ~= nil then
+			local pcd = DuffedUIData.perCharData [playerName]
 
-		if DuffedUIDataPerChar == nil then
-			DuffedUIDataPerChar = pcd.DuffedUIDataPerChar
+			if DuffedUIDataPerChar == nil then
+				DuffedUIDataPerChar = pcd.DuffedUIDataPerChar
+			end
+			if ClickCast == nil then
+				ClickCast = pcd.ClickCast
+			end
+			if ImprovedCurrency == nil then
+				ImprovedCurrency = pcd.ImprovedCurrency
+			end
 		end
-		if ClickCast == nil then
-			ClickCast = pcd.ClickCast
+
+		local SetPerCharVariable = function(varName, value)
+			if DuffedUIData.perCharData == nil then
+				-- probably this is the time the addon is loaded after updating it to SVPC support
+				DuffedUIData.perCharData = {};
+			end
+
+			if DuffedUIData.perCharData [playerName] == nil then
+				DuffedUIData.perCharData [playerName] = {};
+			end
+
+			local pcd = DuffedUIData.perCharData [playerName]
+
+			_G [varName] = value
+			pcd [varName] = value
 		end
-		if ImprovedCurrency == nil then
-			ImprovedCurrency = pcd.ImprovedCurrency
-		end
+
+		-- replace the minimum implementation provided above
+		DuffedUI [1].SetPerCharVariable = SetPerCharVariable
 	end
-
-	local SetPerCharVariable = function(varName, value)
-		if DuffedUIData.perCharData == nil then
-			-- probably this is the time the addon is loaded after updating it to SVPC support
-			DuffedUIData.perCharData = {};
-		end
-
-		if DuffedUIData.perCharData [playerName] == nil then
-			DuffedUIData.perCharData [playerName] = {};
-		end
-
-		local pcd = DuffedUIData.perCharData [playerName];
-
-		_G [varName] = value
-		pcd [varName] = value
-	end
-
-	-- replace the minimum implementation provided above
-	DuffedUI [1].SetPerCharVariable = SetPerCharVariable
 end)
