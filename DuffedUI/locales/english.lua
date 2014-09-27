@@ -187,7 +187,6 @@ L["group"] = {
 }
 
 L["boss"] = {
-	["title"] = "World Boss(s):",
 	["galleon"] = "Galleon", 
 	["sha"] = "Sha of Anger", 
 	["oondasta"] = "Oondasta", 

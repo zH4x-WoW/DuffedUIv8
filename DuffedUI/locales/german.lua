@@ -188,7 +188,6 @@ if D.Client == "deDE" then
 	}
 
 	L["boss"] = {
-		["title"] = "Weltboss(e):",
 		["galleon"] = "Galleon", 
 		["sha"] = "Sha des Zorns", 
 		["oondasta"] = "Oondasta", 

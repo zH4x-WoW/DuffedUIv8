@@ -188,7 +188,6 @@ if D.Client == "ruRU" then
 	}
 
 	L["boss"] = {
-		["title"] = "World Boss(s):",
 		["galleon"] = "Galleon", 
 		["sha"] = "Sha of Anger", 
 		["oondasta"] = "Oondasta", 
