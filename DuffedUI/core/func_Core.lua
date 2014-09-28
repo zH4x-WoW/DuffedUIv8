@@ -236,7 +236,7 @@ D.RGBToHex = function(r, g, b)
 end
 
 if C["general"].classcolor then C["media"].datatextcolor1 = D.UnitColor.class[D.Class] end
-D.panelcolor = D.RGBToHex(unpack(C["media"].datatextcolor1))
+D.PanelColor = D.RGBToHex(unpack(C["media"].datatextcolor1))
 
 D.ShortValue = function(v)
 	if v >= 1e6 then
@@ -316,7 +316,7 @@ D.CreateBtn = function(name, parent, w, h, tt_txt, txt)
 
 	b.text = b:CreateFontString(nil, "OVERLAY")
 	b.text:SetFontObject(font)
-	b.text:SetText(D.panelcolor..txt)
+	b.text:SetText(D.PanelColor..txt)
 	b.text:SetPoint("CENTER", b, "CENTER", 1, 0)
 	b.text:SetJustifyH("CENTER")
 	b:SetAttribute("type1", "macro")

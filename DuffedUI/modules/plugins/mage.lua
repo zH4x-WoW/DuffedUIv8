@@ -108,7 +108,7 @@ b:SetScript("OnClick", function(self)
 	if DuffedUITeleportMenu:IsShown() then
 		DuffedUITeleportMenu:Hide()
 	else
-		Title:SetText(D.panelcolor.."Portal / Teleportlist")
+		Title:SetText(D.PanelColor.."Portal / Teleportlist")
 		DuffedUITeleportMenu:Show()
 	end
 end)

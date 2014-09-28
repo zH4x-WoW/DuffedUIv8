@@ -135,7 +135,7 @@ if C["chat"].lbackground then chatmenu:Point("LEFT", DuffedUITabsLeftBackground,
 chatmenu:SetFrameLevel(3)
 chatmenu.text = D.SetFontString(chatmenu, C["media"].font, 11, "THINOUTLINE")
 chatmenu.text:SetPoint("CENTER", 1, -1)
-chatmenu.text:SetText(D.panelcolor .. "E")
+chatmenu.text:SetText(D.PanelColor .. "E")
 chatmenu:SetScript("OnMouseDown", function(self, btn)
 	if btn == "LeftButton" then ToggleFrame(ChatMenu) end
 end)

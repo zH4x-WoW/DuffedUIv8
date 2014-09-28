@@ -49,6 +49,13 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(120032, true), -- Dancing Steel
 	CreateSpellEntry(104993, true), -- Jade Spirit
 	CreateSpellEntry(116660, true), -- River's Song
+	CreateSpellEntry(159676, true), -- Mark of the Frostwolf
+	CreateSpellEntry(159675, true), -- Mark of Warsong
+	CreateSpellEntry(159234, true), -- Mark of the Thunderlord
+	CreateSpellEntry(159678, true), -- Mark of Shadowmoon
+	CreateSpellEntry(159679, true), -- Mark of Blackrock
+	CreateSpellEntry(173322, true), -- Mark of Bleeding Hollow
+	CreateSpellEntry(159238, true), -- Shattered Bleed
 
 	-- Siege of Orgrimmar
 	CreateSpellEntry(146046), -- Purified Bindings of Immerseus (Expanded Mind)
@@ -570,9 +577,7 @@ do
 		if (filter == nil) then return false end
 		local byPlayer = caster == "player" or caster == "pet" or caster == "vehicle"
 		for _, v in ipairs(filter) do 
-			if (v.id == id and (v.castByAnyone or byPlayer)) then 
-				return v
-			end
+			if (v.id == id and (v.castByAnyone or byPlayer)) then return v end
 		end
 		return false
 	end
@@ -585,9 +590,7 @@ do
 
 			for index = 1, 40 do
 				local name, _, texture, stacks, _, duration, expirationTime, caster, _, _, spellId = UnitAura(unit, index, auraType)
-				if (name == nil) then
-					break
-				end
+				if (name == nil) then break end
 				local filterInfo = CheckFilter(self, spellId, caster, filter)
 				if (filterInfo and (filterInfo.unitType ~= 1 or unitIsFriend) and (filterInfo.unitType ~= 2 or not unitIsFriend)) then
 					filterInfo.name = name
@@ -606,18 +609,13 @@ do
 	-- public 
 	local Update = function(self)
 		local result = self.table
-		for index = 1, #result do
-			table.remove(result)
-		end
+		for index = 1, #result do table.remove(result) end
 		CheckUnit(self, self.unit, self.filter, result)
-		if (self.includePlayer) then
-			CheckUnit(self, "player", self.playerFilter, result)
-		end
+		if (self.includePlayer) then CheckUnit(self, "player", self.playerFilter, result) end
 		self.table = result
 	end
 
 	local SetSortDirection = function(self, descending) self.sortDirection = descending end
-
 	local GetSortDirection = function(self) return self.sortDirection end
 
 	local Sort = function(self)
@@ -642,7 +640,6 @@ do
 	end
 
 	local Get = function(self) return self.table end
-
 	local Count = function(self) return #self.table end
 
 	local AddFilter = function(self, filter, defaultColor, debuffColor)
@@ -676,9 +673,7 @@ do
 	end
 
 	local GetUnit = function(self) return self.unit end
-
 	local GetIncludePlayer = function(self) return self.includePlayer end
-
 	local SetIncludePlayer = function(self, value) self.includePlayer = value end
 
 	-- constructor
@@ -700,7 +695,6 @@ do
 		result.filter = {}
 		result.playerFilter = {}
 		result.table = {}
-
 		return result
 	end
 end
@@ -709,13 +703,9 @@ local CreateFramedTexture
 do
 	-- public
 	local SetTexture = function(self, ...) return self.texture:SetTexture(...) end
-
 	local GetTexture = function(self) return self.texture:GetTexture() end
-
 	local GetTexCoord = function(self) return self.texture:GetTexCoord() end
-
 	local SetTexCoord = function(self, ...) return self.texture:SetTexCoord(...) end
-
 	local SetBorderColor = function(self, ...) return self.border:SetVertexColor(...) end
 
 	-- constructor
@@ -729,7 +719,6 @@ do
 		result.GetTexture = GetTexture
 		result.SetTexCoord = SetTexCoord
 		result.GetTexCoord = GetTexCoord
-
 		return result
 	end
 end
@@ -753,9 +742,9 @@ do
 				self.bar:SetValue(remaining)
 				local timeText = ""
 				if (remaining >= 3600) then
-					timeText = tostring(math.floor(remaining / 3600)) .. "h"
+					timeText = tostring(math.floor(remaining / 3600)) .. D.PanelColor .. "h"
 				elseif (remaining >= 60) then
-					timeText = tostring(math.floor(remaining / 60)) .. "m"
+					timeText = tostring(math.floor(remaining / 60)) .. D.PanelColor .. "m"
 				elseif (remaining > TENTHS_TRESHOLD) then
 					timeText = tostring(math.floor(remaining))
 				elseif (remaining > 0) then
@@ -770,11 +759,7 @@ do
 				if (castSeparator and self.castSpellId) then
 					local _, _, _, castTime, _, _ = GetSpellInfo(self.castSpellId)
 					castTime = castTime / 1000
-					if (castTime and remaining > castTime) then
-						castSeparator:Point("CENTER", self.bar, "LEFT", barWidth * (remaining - castTime) / self.duration, 0)
-					else
-						castSeparator:Hide()
-					end
+					if (castTime and remaining > castTime) then castSeparator:Point("CENTER", self.bar, "LEFT", barWidth * (remaining - castTime) / self.duration, 0) else castSeparator:Hide() end
 				end
 			end
 		end
@@ -805,7 +790,6 @@ do
 		end
 
 		local SetName = function(self, name) self.name:SetText(name) end
-
 		local SetStacks = function(self, stacks)
 			if (not self.stacks) then
 				if (stacks ~= nil and stacks > 1) then
@@ -818,7 +802,6 @@ do
 		end
 
 		local SetColor = function(self, color) self.bar:SetStatusBarColor(unpack(color)) end
-
 		local SetCastSpellId = function(self, id)
 			self.castSpellId = id
 			local castSeparator = self.castSeparator
@@ -909,7 +892,6 @@ do
 			result.SetAuraInfo = SetAuraInfo
 			result.SetColor = SetColor
 			result.SetCastSpellId = SetCastSpellId
-
 			return result
 		end
 	end
@@ -946,9 +928,7 @@ do
 	end
 
 	local function OnPlayerTargetChanged(self, method) self:Render() end
-
 	local function OnPlayerEnteringWorld(self) self:Render() end
-
 	local function OnEvent(self, event, ...)
 		if (event == "UNIT_AURA") then
 			OnUnitAura(self, ...)
@@ -1004,8 +984,8 @@ do
 		border:Point("TOPLEFT", result, "TOPLEFT", 21, 1)
 		border:Point("BOTTOMRIGHT", result, "BOTTOMRIGHT", 1, -1)
 		border:SetBackdrop {
-		  edgeFile = C["media"].blank, edgeSize = 1,
-		  insets = {left = 0, right = 0, top = 0, bottom = 0}
+			edgeFile = C["media"].blank, edgeSize = 1,
+			insets = {left = 0, right = 0, top = 0, bottom = 0}
 		}
 		border:SetBackdropColor(0, 0, 0, 0)
 		border:SetBackdropBorderColor(unpack(C["media"].backdropcolor))
@@ -1022,7 +1002,6 @@ do
 		if (unit == "target") then result:RegisterEvent("PLAYER_TARGET_CHANGED") end
 		result:SetScript("OnEvent", OnEvent)
 		result.Render = Render
-		
 		return result
 	end
 end

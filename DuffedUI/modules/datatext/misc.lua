@@ -13,7 +13,7 @@ if C["datatext"].honor and C["datatext"].honor > 0 then
 
 	local function OnEvent(self, event)
 		local _, amount, _ = GetCurrencyInfo(392)
-		Text:SetText("Honor: "..D.panelcolor..amount)
+		Text:SetText("Honor: "..D.PanelColor..amount)
 	end
 
 	-- Make sure the panel gets displayed when the player logs in
@@ -37,7 +37,7 @@ if C["datatext"].honorablekills and C["datatext"].honorablekills > 0 then
 	D.DataTextPosition(C["datatext"].honorablekills, Text)
 
 	local function OnEvent(self, event)
-		Text:SetText("Kills: "..D.panelcolor..GetPVPLifetimeStats())
+		Text:SetText("Kills: "..D.PanelColor..GetPVPLifetimeStats())
 	end
 
 	-- Make sure the panel gets displayed when the player logs in

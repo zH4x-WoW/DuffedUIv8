@@ -12,8 +12,8 @@ Text:SetFontObject(font)
 D.DataTextPosition(C["datatext"].block, Text)
 
 local format = string.format
-local displayFloat = string.join("", "%s", D.panelcolor, "%.2f%%|r")
-local displayChance = string.join("", D.panelcolor, "%.2f|r (%.2f + |cff00ff00%.2f|r)")
+local displayFloat = string.join("", "%s", D.PanelColor, "%.2f%%|r")
+local displayChance = string.join("", D.PanelColor, "%.2f|r (%.2f + |cff00ff00%.2f|r)")
 local displayRating = string.join("", "%d (|cff00ff00+%.2f|r)")
 
 local int = 5

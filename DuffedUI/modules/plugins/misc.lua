@@ -98,7 +98,7 @@ if C["unitframes"].focusbutton then
 			Focus[i]:SetAttribute("type1", "macro")
 			Focus[i]:SetAttribute("macrotext1", "/focus")
 			Focus[i]:SetFrameLevel(DuffedUITarget:GetFrameLevel() + 2)
-			Focus[i].Text:SetText(D.panelcolor.."Focus")
+			Focus[i].Text:SetText(D.PanelColor.."Focus")
 		elseif i == 2 then
 			Focus[i]:SetParent(DuffedUIFocus)
 			if C["unitframes"].layout == 3 then
@@ -119,7 +119,7 @@ if C["unitframes"].focusbutton then
 			Focus[i]:SetAttribute("type1", "macro")
 			Focus[i]:SetAttribute("macrotext1", "/clearfocus")
 			Focus[i]:SetFrameLevel(DuffedUIFocus:GetFrameLevel() + 2)
-			Focus[i].Text:SetText(D.panelcolor.."ClearFocus")
+			Focus[i].Text:SetText(D.PanelColor.."ClearFocus")
 		end
 	end
 end
