@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ..))
+local D, C, L = unpack(select(2, ...))
 
 _G.StaticPopupDialogs["OUTDATED"] = {
 	text = "http://www.duffed.net/downloads",
@@ -18,7 +18,7 @@ local tonumber = tonumber
 
 local version = function(self, event, prefix, message, channel, sender)
 	if event == "CHAT_MSG_ADDON" then
-		if prefix ~= "DuffedUI Version" or sender == D.MyName then return end
+		if prefix ~= "DuffedUI" or sender == D.MyName then return end
 		
 		if tonumber(message > D.Version) then
 			print(L["ui"]["outdated"])
@@ -27,13 +27,13 @@ local version = function(self, event, prefix, message, channel, sender)
 		end
 	else
 		if (not IsInGroup(LE_PARTY_CATEGORY_HOME)) or (not IsInRaid(LE_PARTY_CATEGORY_HOME)) then
-			SendAddonMessage("DuffedUI Version", D.Version, "INSTANCE_CHAT")
+			SendAddonMessage("DuffedUI", D.Version, "INSTANCE_CHAT")
 		elseif IsInRaid(LE_PARTY_CATEGORY_HOME) then
-			SendAddonMessage("DuffedUI Version", D.Version, "RAID")
+			SendAddonMessage("DuffedUI", D.Version, "RAID")
 		elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
-			SendAddonMessage("DuffedUI Version", D.Version, "PARTY")
+			SendAddonMessage("DuffedUI", D.Version, "PARTY")
 		elseif IsInGuild() then
-			SendAddonMessage("DuffedUI Version", D.Version, "GUILD")
+			SendAddonMessage("DuffedUI", D.Version, "GUILD")
 		end
 	end
 end
@@ -44,4 +44,4 @@ cversion:RegisterEvent("GROUP_ROSTER_UPDATE")
 cversion:RegisterEvent("CHAT_MSG_ADDON")
 cversion:SetScript("OnEvent", version)
 
-RegisterAddonMessagePrefix("DuffedUI Version")
+RegisterAddonMessagePrefix("DuffedUI")
