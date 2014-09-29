@@ -27,13 +27,13 @@ local version = function(self, event, prefix, message, channel, sender)
 		end
 	else
 		if (not IsInGroup(LE_PARTY_CATEGORY_HOME)) or (not IsInRaid(LE_PARTY_CATEGORY_HOME)) then
-			SendAddonMessage("DuffedUI Version", Version, "INSTANCE_CHAT")
+			SendAddonMessage("DuffedUI Version", D.Version, "INSTANCE_CHAT")
 		elseif IsInRaid(LE_PARTY_CATEGORY_HOME) then
-			SendAddonMessage("DuffedUI Version", Version, "RAID")
+			SendAddonMessage("DuffedUI Version", D.Version, "RAID")
 		elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
-			SendAddonMessage("DuffedUI Version", Version, "PARTY")
+			SendAddonMessage("DuffedUI Version", D.Version, "PARTY")
 		elseif IsInGuild() then
-			SendAddonMessage("DuffedUI Version", Version, "GUILD")
+			SendAddonMessage("DuffedUI Version", D.Version, "GUILD")
 		end
 	end
 end
@@ -42,6 +42,6 @@ local cversion = CreateFrame("Frame")
 cversion:RegisterEvent("PLAYER_ENTERING_WORLD")
 cversion:RegisterEvent("GROUP_ROSTER_UPDATE")
 cversion:RegisterEvent("CHAT_MSG_ADDON")
-cversion:SetScript("OnEvent", CheckVersion)
+cversion:SetScript("OnEvent", version)
 
 RegisterAddonMessagePrefix("DuffedUI Version")
