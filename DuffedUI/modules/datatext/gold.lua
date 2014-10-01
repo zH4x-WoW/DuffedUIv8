@@ -56,7 +56,7 @@ local function Currency(id, weekly, capped)
 		if id == itemID then r, g, b = .77, .12, .23 end
 	end
 
-	if (amount == 0 and not ImprovedCurrency["Zero"] and r == 1) then return end
+	if (amount == 0 and r == 1) then return end
 	if weekly then
 		if discovered then
 			if id == 390 then
@@ -114,7 +114,6 @@ Stat:SetScript("OnEnter", function(self)
 	if ImprovedCurrency["Miscellaneous"] == nil then ImprovedCurrency["Miscellaneous"] = true end
 	if ImprovedCurrency["PvP"] == nil then ImprovedCurrency["PvP"] = true end
 	if ImprovedCurrency["Raid"] == nil then ImprovedCurrency["Raid"] = true end
-	if ImprovedCurrency["Zero"] == nil then ImprovedCurrency["Zero"] = true end
 
 	local prof1, prof2, archaeology, _, cooking = GetProfessions()
 
@@ -275,13 +274,6 @@ local RightClickMenu = {
 			ImprovedCurrency["Miscellaneous"] = false
 		else
 			ImprovedCurrency["Miscellaneous"] = true
-		end
-	end	},
-	{ text = "Show Zero Currency", checked = function() return ImprovedCurrency["Zero"] end, func = function()
-		if ImprovedCurrency["Zero"] then
-			ImprovedCurrency["Zero"] = false
-		else
-			ImprovedCurrency["Zero"] = true
 		end
 	end	},
 }
