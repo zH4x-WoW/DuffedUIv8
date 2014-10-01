@@ -319,7 +319,7 @@ if D.Client == "deDE" then
 		["content4text2"] = "",
 
 		["content5title"] = "|cffc41f3bUI Chatbefehle|r",
-		["content5text1"] = "Folgende Chatbefehle stehen Dir zur Verfügung:\n\n|cffc41f3b/install|r oder |cffc41f3b/reset|r (Neuinstallation)\n|cffc41f3b/rc|r (Bereitschaftscheck)\n|cffc41f3b/moveui|r (Verschieben der UI Elemente)\n|cffc41f3b/dc|r oder |cffc41f3b/duffedui|r (DuffedUI Konfiguration)\n|cffc41f3b/rl|r (Ui neuladen)\n|cffc41f3b/luaerror|r (Lua Fehler anzeigen/verbergen)\n|cffc41f3b/dfaq|r (DuffedUI FAQ, Du liest es gerade ;))",
+		["content5text1"] = "Folgende Chatbefehle stehen Dir zur Verfügung:\n\n|cffc41f3b/install|r oder |cffc41f3b/reset|r (Neuinstallation)\n|cffc41f3b/rc|r (Bereitschaftscheck)\n|cffc41f3b/moveui|r (Verschieben der UI Elemente)\n|cffc41f3b/dc|r oder |cffc41f3b/duffedui|r (DuffedUI Konfiguration)\n|cffc41f3b/rl|r (Ui neuladen)\n|cffc41f3b/dfaq|r (DuffedUI FAQ, Du liest es gerade ;))",
 		["content5text2"] = "",
 
 		["content6title"] = "|cffc41f3bTastaturbelegung|r",

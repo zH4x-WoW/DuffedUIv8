@@ -318,7 +318,7 @@ if D.Client == "zhCN" then
 		["content4text2"] = "",
 
 		["content5title"] = "|cffc41f3bUI Slashcommands|r",
-		["content5text1"] = "The following chat commands are available to you:\n\n|cffc41f3b/install|r or |cffc41f3b/reset|r (Reinstalling)\n|cffc41f3b/rc|r (Readycheck)\n|cffc41f3b/moveui|r (Move the UI elements)\n|cffc41f3b/dc|r or |cffc41f3b/duffedui|r (DuffedUI Configuration)\n|cffc41f3b/rl|r (Reloads the UI)\n|cffc41f3b/luaerror|r (Show/Hide Lua-error)\n|cffc41f3b/dfaq|r (DuffedUI FAQ, You read it just ;))",
+		["content5text1"] = "The following chat commands are available to you:\n\n|cffc41f3b/install|r or |cffc41f3b/reset|r (Reinstalling)\n|cffc41f3b/rc|r (Readycheck)\n|cffc41f3b/moveui|r (Move the UI elements)\n|cffc41f3b/dc|r or |cffc41f3b/duffedui|r (DuffedUI Configuration)\n|cffc41f3b/rl|r (Reloads the UI)\n|cffc41f3b/dfaq|r (DuffedUI FAQ, You read it just ;))",
 		["content5text2"] = "",
 
 		["content6title"] = "|cffc41f3bKeybinding|r",
