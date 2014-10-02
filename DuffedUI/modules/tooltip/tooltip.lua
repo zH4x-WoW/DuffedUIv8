@@ -32,10 +32,10 @@ DuffedUITooltips.Tooltips = {
 }
 
 DuffedUITooltips.Classification = {
-	WorldBoss = "|cffAF5050Boss|r",
-	RareElite = "|cffAF5050+ Rare|r",
-	Elite = "|cffAF5050+|r",
-	Rare = "|cffAF5050Rare|r",
+	worldboss = "|cffAF5050World Boss|r",
+	rareelite = "|cffAF5050+ Rare|r",
+	elite = "|cffAF5050+|r",
+	rare = "|cffAF5050Rare|r",
 }
 
 local Anchor = CreateFrame("Frame", "DuffedUITooltipAnchor", UIParent)
