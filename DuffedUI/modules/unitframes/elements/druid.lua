@@ -13,9 +13,7 @@ Colors = {
 	[5] = {.30, .70, .30},
 }
 
-if not C["unitframes"].attached then
-	D.ConstructEnergy("Energy", 216, 5)
-end
+if not C["unitframes"].attached then D.ConstructEnergy("Energy", 216, 5) end
 
 D.ConstructRessources = function(name, width, height)
 	local DruidMana = CreateFrame("StatusBar", name .. "Mana", UIParent)
@@ -124,13 +122,11 @@ D.ConstructRessources = function(name, width, height)
 			elseif event == "PLAYER_REGEN_ENABLED" then
 				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then
-					DruidMana:SetAlpha(0)
-				end
+				if not InCombatLockdown() then DruidMana:SetAlpha(0) end
 			end
 		end)
 
-		--[[EclipseBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+		EclipseBar:RegisterEvent("PLAYER_REGEN_DISABLED")
 		EclipseBar:RegisterEvent("PLAYER_REGEN_ENABLED")
 		EclipseBar:RegisterEvent("PLAYER_ENTERING_WORLD")
 		EclipseBar:SetScript("OnEvent", function(self, event)
@@ -139,9 +135,7 @@ D.ConstructRessources = function(name, width, height)
 			elseif event == "PLAYER_REGEN_ENABLED" then
 				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then
-					EclipseBar:SetAlpha(0)
-				end
+				if not InCombatLockdown() then EclipseBar:SetAlpha(0) end
 			end
 		end)
 
@@ -154,11 +148,9 @@ D.ConstructRessources = function(name, width, height)
 			elseif event == "PLAYER_REGEN_ENABLED" then
 				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then
-					WildMushroom:SetAlpha(0)
-				end
+				if not InCombatLockdown() then WildMushroom:SetAlpha(0) end
 			end
-		end)]]
+		end)
 
 		ComboPoints:RegisterEvent("PLAYER_REGEN_DISABLED")
 		ComboPoints:RegisterEvent("PLAYER_REGEN_ENABLED")
@@ -169,9 +161,7 @@ D.ConstructRessources = function(name, width, height)
 			elseif event == "PLAYER_REGEN_ENABLED" then
 				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then
-					ComboPoints:SetAlpha(0)
-				end
+				if not InCombatLockdown() then ComboPoints:SetAlpha(0) end
 			end
 		end)
 	end

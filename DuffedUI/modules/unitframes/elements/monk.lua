@@ -4,9 +4,7 @@ if D.Class ~= "MONK" then return end
 local texture = C["media"].normTex
 local layout = C["unitframes"].layout
 
-if not C["unitframes"].attached then
-	D.ConstructEnergy("Energy", 216, 5)
-end
+if not C["unitframes"].attached then D.ConstructEnergy("Energy", 216, 5) end
 
 D.ConstructRessources = function(name, width, height)
 	local Bar = CreateFrame("Frame", name, UIParent)
@@ -39,9 +37,7 @@ D.ConstructRessources = function(name, width, height)
 			elseif event == "PLAYER_REGEN_ENABLED" then
 				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then
-					Bar:SetAlpha(0)
-				end
+				if not InCombatLockdown() then Bar:SetAlpha(0) end
 			end
 		end)
 	end

@@ -5,9 +5,7 @@ local texture = C["media"].normTex
 local font, fontheight, fontflag = C["media"].font, 12, "THINOUTLINE"
 local layout = C["unitframes"].layout
 
-if not C["unitframes"].attached then
-	D.ConstructEnergy("Mana", 216, 5)
-end
+if not C["unitframes"].attached then D.ConstructEnergy("Mana", 216, 5) end
 
 D.ConstructRessources = function(name, name2, width, height)
 	local mb = CreateFrame("Frame", name, UIParent)
@@ -63,9 +61,7 @@ D.ConstructRessources = function(name, name2, width, height)
 			elseif event == "PLAYER_REGEN_ENABLED" then
 				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then
-					mb:SetAlpha(0)
-				end
+				if not InCombatLockdown() then mb:SetAlpha(0) end
 			end
 		end)
 
@@ -78,9 +74,7 @@ D.ConstructRessources = function(name, name2, width, height)
 			elseif event == "PLAYER_REGEN_ENABLED" then
 				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then
-					rp:SetAlpha(0)
-				end
+				if not InCombatLockdown() then rp:SetAlpha(0) end
 			end
 		end)
 	end

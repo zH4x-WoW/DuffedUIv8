@@ -42,9 +42,7 @@ D.ConstructEnergy = function(name, width, height)
 			self:SetMinMaxValues(0, UnitPowerMax("player"))
 			local power = UnitPower("player")
 			self:SetValue(power)
-			if self.text then
-				self.text:SetText(D.ShortValue(power))
-			end
+			if self.text then self.text:SetText(D.ShortValue(power)) end
 			self.TimeSinceLastUpdate = 0
 		end
 	end)
@@ -59,9 +57,7 @@ D.ConstructEnergy = function(name, width, height)
 			elseif event == "PLAYER_REGEN_ENABLED" then
 				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then
-					eb:SetAlpha(0)
-				end
+				if not InCombatLockdown() then eb:SetAlpha(0) end
 			end
 		end)
 	end

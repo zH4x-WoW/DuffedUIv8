@@ -90,9 +90,7 @@ D.ConstructRessources = function(name, width, height)
 			elseif event == "PLAYER_REGEN_ENABLED" then
 				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then
-					ComboPoints:SetAlpha(0)
-				end
+				if not InCombatLockdown() then ComboPoints:SetAlpha(0) end
 			end
 		end)
 	end

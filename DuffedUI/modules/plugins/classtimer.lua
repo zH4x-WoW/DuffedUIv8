@@ -746,9 +746,9 @@ do
 				elseif (remaining >= 60) then
 					timeText = tostring(math.floor(remaining / 60)) .. D.PanelColor .. "m"
 				elseif (remaining > TENTHS_TRESHOLD) then
-					timeText = tostring(math.floor(remaining))
+					timeText = tostring(math.floor(remaining)) .. D.PanelColor .. "s"
 				elseif (remaining > 0) then
-					timeText = tostring(math.floor(remaining * 10) / 10)
+					timeText = tostring(math.floor(remaining * 10) / 10) .. D.PanelColor .. "s"
 				end
 				self.time:SetText(timeText)
 				local barWidth = self.bar:GetWidth()

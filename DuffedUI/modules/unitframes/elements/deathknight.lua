@@ -13,9 +13,7 @@ local RuneColors = {
 local Runes = {}
 local RuneMap = { 1, 2, 3, 4, 5, 6 }
 
-if not C["unitframes"].attached then
-	D.ConstructEnergy("RunicPower", 216, 5)
-end
+if not C["unitframes"].attached then D.ConstructEnergy("RunicPower", 216, 5) end
 
 D.ConstructRessources = function(name, width, height)
 	Runes = CreateFrame("Frame", name, UIParent)
@@ -46,11 +44,7 @@ D.ConstructRessources = function(name, width, height)
 		rune:SetStatusBarColor(unpack(RuneColors[GetRuneType(RuneMap[id])]))
 		rune:SetMinMaxValues(0, duration)
 
-		if finished then
-			rune:SetValue(duration)
-		else
-			rune:SetValue(GetTime() - start)
-		end
+		if finished then rune:SetValue(duration) else rune:SetValue(GetTime() - start) end
 	end
 
 	local OnUpdate = CreateFrame("Frame")
@@ -59,9 +53,7 @@ D.ConstructRessources = function(name, width, height)
 		self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + elapsed
 
 		if self.TimeSinceLastUpdate > 0.07 then
-			for i = 1, 6 do
-				UpdateRune(i, GetRuneCooldown(RuneMap[i]))
-			end
+			for i = 1, 6 do UpdateRune(i, GetRuneCooldown(RuneMap[i])) end
 			self.TimeSinceLastUpdate = 0
 		end
 	end
@@ -90,9 +82,7 @@ D.ConstructRessources = function(name, width, height)
 			elseif event == "PLAYER_REGEN_ENABLED" then
 				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then
-					Runes:SetAlpha(0)
-				end
+				if not InCombatLockdown() then Runes:SetAlpha(0) end
 			end
 		end)
 	end

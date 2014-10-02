@@ -4,9 +4,7 @@ if D.Class ~= "WARLOCK" then return end
 local texture = C["media"].normTex
 local font, fonsize, fontflag = C["media"].font, 12, "THINOUTLINE"
 
-if not C["unitframes"].attached then
-	D.ConstructEnergy("Energy", 216, 5)
-end
+if not C["unitframes"].attached then D.ConstructEnergy("Energy", 216, 5) end
 
 D.ConstructRessources = function(name, width, height)
 	local wb = CreateFrame("Frame", name, UIParent)
@@ -40,9 +38,7 @@ D.ConstructRessources = function(name, width, height)
 			elseif event == "PLAYER_REGEN_ENABLED" then
 				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then
-					wb:SetAlpha(0)
-				end
+				if not InCombatLockdown() then wb:SetAlpha(0) end
 			end
 		end)
 	end
