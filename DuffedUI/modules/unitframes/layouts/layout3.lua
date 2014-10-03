@@ -333,6 +333,7 @@ local function Shared(self, unit)
 					D.ConstructRessources("ComboPoints", 216, 5)
 					if C["unitframes"].attached then ComboPoints:SetPoint("CENTER", panel, "CENTER", 0, 5) else ComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5) end
 					self.ComboPointsBar = ComboPoints
+					self.AnticipationBar = ComboPointsAnticipationBar
 				end
 
 				if D.Class == "SHAMAN" then

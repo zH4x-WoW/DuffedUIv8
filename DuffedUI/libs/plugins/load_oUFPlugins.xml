@@ -20,4 +20,5 @@
 	<Script file="oUF_HolyPowerBar.lua" />
 	<Script file="classicons.lua" />
 	<Script file="oUF_RuneOfPower.lua" />
+	<Script file="oUF_AnticipationBar.lua" />
 </Ui>
