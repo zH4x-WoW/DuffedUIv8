@@ -596,7 +596,7 @@ end
 local function createCooldownFrame(spell)
 	local frame = CreateFrame("Frame", nil, UIParent)
 	frame:CreateBackdrop("Transparent")
-	frame:SetHeight(20)
+	frame:SetHeight(width)
 	frame:SetWidth(width)
 	frame:SetFrameStrata("MEDIUM")
 
@@ -622,8 +622,7 @@ local function createCooldownFrame(spell)
 	statusBar:Size(width, 4)
 	statusBar:SetStatusBarTexture(C["media"].normTex)
 	statusBar:SetStatusBarColor(.77, .12, .23)
-	statusBar:CreateBackdrop("Transparent")
-	statusBar:SetPoint("BOTTOM", frame,"TOP", 0, 5)
+	statusBar:SetPoint("TOP", frame,"TOP", 0, 0)
 	statusBar:SetMinMaxValues(0, 1)
 	statusBar:SetFrameLevel(frame:GetFrameLevel() + 3)
 	frame.StatusBar = statusBar
