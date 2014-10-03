@@ -119,6 +119,7 @@ function ObjectiveTracker:Enable()
 	local Frame = ObjectiveTrackerFrame
 	local Header = ObjectiveTrackerFrame.BlocksFrame.QuestHeader
 	local Minimize = ObjectiveTrackerFrame.HeaderMenu.MinimizeButton
+	local ScenarioStageBlock = ScenarioStageBlock
 
 	ObjectiveTracker:Size(Frame:GetWidth(), 23)
 	ObjectiveTracker:SetAllPoints(DuffedUIWatchFrameAnchor)
@@ -135,6 +136,8 @@ function ObjectiveTracker:Enable()
 			Header:Show()
 		end
 	end
+	ScenarioStageBlock:StripTextures()
+	ScenarioStageBlock:SetHeight(50)
 	Minimize:SkinCloseButton()
 	ObjectiveTracker:AddHooks()
 end

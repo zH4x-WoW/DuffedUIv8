@@ -419,10 +419,6 @@ function SlotUpdate(id, button)
 	local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
 	local NewItem = button.NewItemTexture
 
-	if Texture then
-		-- update cooldown code here
-	end
-
 	if IsNewItem then
 		NewItem:SetAlpha(0)
 		if not button.Animation then
@@ -439,15 +435,33 @@ function SlotUpdate(id, button)
 	end
 
 	if IsQuestItem then
-		button:SetBackdropBorderColor(1, 1, 0)
+		local QuestColor = {1, 1, 0}
+
+		if button.BorderColor ~= QuestColor then
+			button:SetBackdropBorderColor(1, 1, 0)
+			button.BorderColor = QuestColor
+		end
 		return
 	end
 
 	if ItemLink then
 		local Name, _, Rarity, _, _, Type = GetItemInfo(ItemLink)
-		if not Lock and Rarity and Rarity > 1 then button:SetBackdropBorderColor(GetItemQualityColor(Rarity)) else button:SetBackdropBorderColor(unpack(C["general"].bordercolor)) end
+		if not Lock and Rarity and Rarity > 1 then
+			if button.BorderColor ~= GetItemQualityColor(Rarity) then
+				button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
+				button.BorderColor = GetItemQualityColor(Rarity)
+			end
+		else
+			if (button.BorderColor ~= C["general"].bordercolor) then
+				button:SetBackdropBorderColor(unpack(C["general"].bordercolor))
+				button.BorderColor = C["general"].bordercolor
+			end
+		end
 	else
-		button:SetBackdropBorderColor(unpack(C["general"].bordercolor))
+		if (button.BorderColor ~= C["general"].bordercolor) then
+			button:SetBackdropBorderColor(unpack(C["general"].bordercolor))
+			button.BorderColor = C["general"].bordercolor
+		end
 	end
 end
 
@@ -668,9 +682,5 @@ EventFrame:SetScript("OnEvent", function(self, event, ...)
 		else
 			CloseBankFrame()
 		end
-	elseif event == "BAG_UPDATE_COOLDOWN" then
-
-	elseif event == "ITEM_LOCK_CHANGED" then
-
 	end
 end)
