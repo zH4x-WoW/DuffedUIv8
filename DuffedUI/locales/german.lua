@@ -121,14 +121,14 @@ if D.Client == "deDE" then
 	}
 
 	L["bufftracker"] = {
-		["10ap"] = "+10% Angriffskraft",
-		["10as"] = "+10% Angriffsgeschwindigkeit",
-		["10sp"] = "+10% Zaubermacht",
-		["5sh"] = "+5% Zaubergeschwindigkeit",
-		["5csc"] = "+5% Chance auf kritische Treffer",
-		["3kmr"] = "+3000 Meisterschaft",
-		["5sai"] = "+5% Werte",
-		["10s"] = "+10% Ausdauer",
+		["10ap"] = "+ Angriffskraft",
+		["10as"] = "+ Angriffsgeschwindigkeit",
+		["10sp"] = "+ Zaubermacht",
+		["5sh"] = "+ Zaubergeschwindigkeit",
+		["5csc"] = "+ Chance auf kritische Treffer",
+		["3kmr"] = "+ Meisterschaft",
+		["5sai"] = "+ Werte",
+		["10s"] = "+ Ausdauer",
 		["error"] = "FEHLER",
 	}
 

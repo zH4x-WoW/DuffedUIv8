@@ -52,10 +52,10 @@ end
 
 function ObjectiveTracker:UpdatePopup()
 	for i = 1, GetNumAutoQuestPopUps() do
-		local questID, popUpType = GetAutoQuestPopUp(i);
-		local questTitle, level, suggestedGroup, isHeader, isCollapsed, isComplete, isDaily, _ = GetQuestLogTitle(GetQuestLogIndexByID(questID));
+		local questID, popUpType = GetAutoQuestPopUp(i)
+		local questTitle, level, suggestedGroup, isHeader, isCollapsed, isComplete, isDaily, _ = GetQuestLogTitle(GetQuestLogIndexByID(questID))
 
-		if ( questTitle and questTitle ~= "" ) then
+		if (questTitle and questTitle ~= "") then
 			local Block = AUTO_QUEST_POPUP_TRACKER_MODULE:GetBlock(questID)
 			local ScrollChild = Block.ScrollChild
 

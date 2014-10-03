@@ -121,14 +121,14 @@ if D.Client == "zhCN" then
 	}
 
 	L["bufftracker"] = {
-		["10ap"] = "+10% Attack Power",
-		["10as"] = "+10% Melee & Ranged Attack Speed",
-		["10sp"] = "+10% Spell Power",
-		["5sh"] = "+5% Spell Haste",
-		["5csc"] = "+5% Critical Strike Chance",
-		["3kmr"] = "+3000 Mastery Rating",
-		["5sai"] = "+5% Strength, Agility, Intellect",
-		["10s"] = "+10% Stamina",
+		["10ap"] = "+ Attack Power",
+		["10as"] = "+ Melee & Ranged Attack Speed",
+		["10sp"] = "+ Spell Power",
+		["5sh"] = "+ Spell Haste",
+		["5csc"] = "+ Critical Strike Chance",
+		["3kmr"] = "+ Mastery Rating",
+		["5sai"] = "+ Strength, Agility, Intellect",
+		["10s"] = "+ Stamina",
 		["error"] = "ERROR",
 	}
 
