@@ -145,7 +145,7 @@ function CreateReagentContainer()
 	SortButton:FontString("Text", C["media"].font, 11)
 	SortButton.Text:SetPoint("CENTER")
 	SortButton.Text:SetText(BAG_FILTER_CLEANUP)
-	SortButton:SetScript("OnClick", BankFrame_AutoSortButtonOnClick) 
+	SortButton:SetScript("OnClick", BankFrame_AutoSortButtonOnClick)
 
 	for i = 1, 98 do
 		local Button = _G["ReagentBankFrameItem" .. i]

@@ -1,7 +1,4 @@
 local D, C, L = unpack(select(2, ...)) 
---------------------------------------------------------------------
--- GOLD
---------------------------------------------------------------------
 
 if not C["datatext"].gold or C["datatext"].gold == 0 then return end
 D.SetPerCharVariable("ImprovedCurrency", {})
@@ -164,20 +161,23 @@ Stat:SetScript("OnEnter", function(self)
 
 	if ImprovedCurrency["Professions"] then
 		GameTooltip:AddLine(" ")
-		GameTooltip:AddLine("Profession Token")
+		GameTooltip:AddLine("Profession Token & Garrison")
 		Currency(61)
 		Currency(361)
-		Currency(698)
-		Currency(910)
-		Currency(1020)
-		Currency(1008)
-		Currency(1017)
-		Currency(999)
+		Currency(824)
+		Currency(944)
+		Currency(980)
+		--Currency(910)
+		--Currency(1020)
+		--Currency(1008)
+		--Currency(1017)
+		--Currency(999)
 	end
 
 	if ImprovedCurrency["Raid"] then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(L["dt"]["dr"])
+		Currency(994, false, true)
 		Currency(776, false, true)
 		Currency(752, false, true)
 		Currency(697, false, true)
