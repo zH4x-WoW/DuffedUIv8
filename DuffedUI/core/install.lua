@@ -342,18 +342,14 @@ local step1 = function()
 	text3:SetText(L["install"]["step1line3"])
 	text4:SetText(L["install"]["continue_skip"])
 	sbt:SetText("1/4")
-
 	option1:Show()
-
 	option1.Text:SetText(L["buttons"]["skip"])
 	option2.Text:SetText(L["buttons"]["continue"])
-
 	option1:SetScript("OnClick", step2)
 	option2:SetScript("OnClick", function()
 		cvarsetup()
 		step2()
 	end)
-
 	SetActionBarToggles(1, 1, 1, 1, 0)
 	SetCVar("alwaysShowActionBars", 0)
 end
@@ -364,14 +360,10 @@ local tut6 = function()
 	text1:SetText(L["tutorial"]["step6line1"])
 	text2:SetText(L["tutorial"]["step6line2"])
 	text3:SetText(L["tutorial"]["step6line3"])
-
 	sbt:SetText("6/6")
-
 	option1:Show()
-
 	option1.Text:SetText(L["buttons"]["close"])
 	option2.Text:SetText(L["buttons"]["install"])
-
 	option1:SetScript("OnClick", function() f:Hide() end)
 	option2:SetScript("OnClick", step1)
 end
@@ -383,9 +375,7 @@ local tut5 = function()
 	text2:SetText(L["tutorial"]["step5line2"])
 	text3:SetText(L["tutorial"]["step5line3"])
 	text4:SetText(L["tutorial"]["step5line4"])
-
 	sbt:SetText("5/6")
-
 	option2:SetScript("OnClick", tut6)
 end
 
@@ -395,9 +385,7 @@ local tut4 = function()
 	text1:SetText(L["tutorial"]["step4line1"])
 	text2:SetText(L["tutorial"]["step4line2"])
 	text3:SetText(L["tutorial"]["step4line3"])
-
 	sbt:SetText("4/6")
-
 	option2:SetScript("OnClick", tut5)
 end
 
@@ -407,9 +395,7 @@ local tut3 = function()
 	text1:SetText(L["tutorial"]["step3line1"])
 	text2:SetText(L["tutorial"]["step3line2"])
 	text3:SetText(L["tutorial"]["step3line3"])
-
 	sbt:SetText("3/6")
-
 	option2:SetScript("OnClick", tut4)
 end
 
@@ -419,9 +405,7 @@ local tut2 = function()
 	text1:SetText(L["tutorial"]["step2line1"])
 	text2:SetText(L["tutorial"]["step2line2"])
 	text3:SetText(L["tutorial"]["step2line3"])
-
 	sbt:SetText("2/6")
-
 	option2:SetScript("OnClick", tut3)
 end
 
@@ -453,10 +437,8 @@ local function install()
 	text2:SetText(L["install"]["initline2"])
 	text3:SetText(L["install"]["initline3"])
 	text4:SetText(L["install"]["initline4"])
-
 	option1.Text:SetText(L["buttons"]["tutorial"])
 	option2.Text:SetText(L["buttons"]["install"])
-
 	option1:SetScript("OnClick", tut1)
 	option2:SetScript("OnClick", step1)
 end

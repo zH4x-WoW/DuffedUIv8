@@ -49,7 +49,7 @@ C["unitframes"] = {
 	["focusdebuffs"] = true,
 	["focusbutton"] = true,
 	["attached"] = false,
-	["oocHide"] = false,
+	["oocHide"] = true,
 	["playermodel"] = "Model",
 }
 

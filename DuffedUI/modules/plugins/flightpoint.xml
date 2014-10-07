@@ -12,7 +12,6 @@
 						<Anchor point="TOPLEFT" x="1" y="0"/>
 						<Anchor point="BOTTOMRIGHT" x="-1" y="0"/>
 					</Anchors>
-					<Color a=".08" r="1" g="1" b="1"/>
 				</Texture>
 			</Layer>
 			<Layer level="BORDER">
@@ -50,18 +49,6 @@
 					<TexCoords left="0.48046875" right="0.98046875" top="0.01562500" bottom="0.26562500"/>	
 				</Texture>
 				
-			</Layer>
-			<Layer level="ARTWORK">
-				<Texture name="$parentExpandIcon" file="Interface\Buttons\UI-PlusMinus-Buttons">
-					<Size>
-						<AbsDimension x="7" y="7"/>
-					</Size>
-					<Anchors>
-						<Anchor point="LEFT">
-							<Offset x="8" y="0"/>
-						</Anchor>
-					</Anchors>
-				</Texture>
 			</Layer>
 		</Layers>
 		
