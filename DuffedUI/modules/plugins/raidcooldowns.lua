@@ -1,14 +1,10 @@
 local D, C, L = unpack(select(2, ...))
-
 if C["cooldown"].rcdenable ~= true then return end
 
 local anchor = "TOPLEFT"
 local x, y = 150, -150
 local width, height = 200, 15
-local spacing = -5
-local icon_size = 15
 local font = D.Font(C["font"].rcd)
-local show_icon = true
 local texture = C["media"].normTex
 
 local show = {
@@ -18,25 +14,27 @@ local show = {
 }
 
 local spells = {
+	[740] = 480,		-- Tranq
+	[1022] = 300,		-- Hand of Protection
+	[6940] = 120,		-- Hand of Sacrifice
 	[20484] = 600,		-- Rebirth
-	[740] = 180,		-- Tranq
-	[64843] = 180,		-- Divine Hymn
 	[20707] = 600,		-- Soulstone res
-	[64901] = 360,		-- Hymn of Hope
-	[29166] = 180,		-- Innervate
+	[22812] = 60,		-- Barkskin
 	[31821] = 180,		-- Aura Mastery
-	[47788] = 180,		-- GS
+	[32182] = 300,		-- Heroism
 	[33206] = 180,		-- Pain Supp
+	[47788] = 180,		-- GS
 	[61999] = 600,		-- Raise Ally
-	[16190] = 180, 		-- Mana Tide
-	[98008] = 180, 		-- Spirit Link
-	[115176] = 180, 	-- Zen Meditation
-	[120668] = 300, 	-- Stormlash Totem
-	[115310] = 180, 	-- Revival
-	[108280] = 180,		-- Healing Tide Totem
-	[80353] = 300, 		-- Time Warp
-	[32182] = 300, 		-- Heroism
+	[64843] = 180,		-- Divine Hymn
 	[76577] = 180,		-- Smoke Bomb
+	[80353] = 300,		-- Time Warp
+	[97462] = 180,		-- Rallying Cry
+	[98008] = 180, 		-- Spirit Link
+	[102342] = 60,		-- Ironbark
+	[108280] = 180,		-- Healing Tide Totem
+	[114030] = 120,		-- Vigilance
+	[115176] = 180, 	-- Zen Meditation
+	[115310] = 180, 	-- Revival
 }
 
 local filter = COMBATLOG_OBJECT_AFFILIATION_RAID + COMBATLOG_OBJECT_AFFILIATION_PARTY + COMBATLOG_OBJECT_AFFILIATION_MINE
@@ -94,7 +92,7 @@ end
 local UpdatePositions = function()
 	for i = 1, #bars do
 		bars[i]:ClearAllPoints()
-		if i == 1 then bars[i]:SetPoint("TOPLEFT", rcda, "TOPLEFT", 0, 0) else bars[i]:SetPoint("TOPLEFT", bars[i-1], "BOTTOMLEFT", 0, spacing) end
+		if i == 1 then bars[i]:SetPoint("TOPLEFT", rcda, "TOPLEFT", 0, 0) else bars[i]:SetPoint("TOPLEFT", bars[i-1], "BOTTOMLEFT", 0, -5) end
 		bars[i].id = i
 	end
 end
@@ -143,14 +141,10 @@ local CreateBar = function()
 	local bar = CreateFrame("Frame", nil, UIParent)
 	bar:SetSize(width, height)
 	bar.status = CreateFrame("Statusbar", nil, bar)
-	if show_icon then
-		bar.icon = CreateFrame("button", nil, bar)
-		bar.icon:SetSize(icon_size, icon_size)
-		bar.icon:SetPoint("BOTTOMLEFT", 0, 0)
-		bar.status:SetPoint("BOTTOMLEFT", bar.icon, "BOTTOMRIGHT", 3, 0)
-	else
-		bar.status:SetPoint("BOTTOMLEFT", 0, 0)
-	end
+	bar.icon = CreateFrame("button", nil, bar)
+	bar.icon:SetSize(15, 15)
+	bar.icon:SetPoint("BOTTOMLEFT", 0, 0)
+	bar.status:SetPoint("BOTTOMLEFT", bar.icon, "BOTTOMRIGHT", 3, 0)
 	bar.status:SetPoint("BOTTOMRIGHT", 0, 0)
 	bar.status:SetHeight(height)
 	bar.status:SetStatusBarTexture(texture)

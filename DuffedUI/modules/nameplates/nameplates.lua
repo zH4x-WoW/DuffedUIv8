@@ -705,7 +705,8 @@ local StylePlate = function(self)
 		self.castbar.icon.bg = self.castbar:CreateTexture(nil, "BORDER")
 		self.castbar.icon.bg:SetPoint("TOPLEFT", self.castbar.icon, -mult, mult)
 		self.castbar.icon.bg:SetPoint("BOTTOMRIGHT", self.castbar.icon, mult, -mult)
-		self.castbar.icon.bg:SetTexture(unpack(C["media"].backdropcolor))
+		self.castbar.icon.bg:SetTexture(.05, .05, .05)
+		self.castbar.icon.bg:SetDrawLayer("BORDER", -8)
 	end
 
 	if self.castbar.name == nil then

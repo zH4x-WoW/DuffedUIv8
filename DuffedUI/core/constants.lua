@@ -56,4 +56,5 @@ D.DuffedCredits = {
 	"Slideroh",
 	"McTrap",
 	"HackManiac",
+	"Yascha",
 }
