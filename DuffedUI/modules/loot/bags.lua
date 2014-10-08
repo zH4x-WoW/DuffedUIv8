@@ -682,5 +682,9 @@ EventFrame:SetScript("OnEvent", function(self, event, ...)
 		else
 			CloseBankFrame()
 		end
+	elseif event == "BANKFRAME_CLOSED" then
+		if _G["DuffedUI_Reagent"] and _G["DuffedUI_Reagent"]:IsShown() then
+			_G["DuffedUI_Reagent"]:Hide()
+		end
 	end
 end)

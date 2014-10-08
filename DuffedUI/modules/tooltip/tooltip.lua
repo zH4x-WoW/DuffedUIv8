@@ -227,7 +227,6 @@ function DuffedUITooltips:OnValueChanged(value)
 	if (value < min) or (value > max) then return end
 	local _, unit = GameTooltip:GetUnit()
 
-	-- fix target of target returning nil
 	if not unit then
 		local GMF = GetMouseFocus()
 		unit = GMF and GMF:GetAttribute("unit")
@@ -237,7 +236,7 @@ function DuffedUITooltips:OnValueChanged(value)
 		self.text = self:CreateFontString(nil, "OVERLAY")
 		local position = DuffedUITooltipAnchor:GetPoint()
 		if position:match("TOP") then self.text:Point("CENTER", GameTooltipStatusBar, 0, -6) else self.text:Point("CENTER", GameTooltipStatusBar, 0, 6) end
-		
+
 		self.text:SetFont(C["media"].font, 12, "THINOUTLINE")
 		self.text:Show()
 		if unit then
