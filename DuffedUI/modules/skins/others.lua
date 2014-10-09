@@ -22,9 +22,7 @@ local function LoadSkin()
 	}
 
 	for i = 1, getn(skins) do
-		if _G[skins[i]] then
-			_G[skins[i]]:SetTemplate("Transparent")
-		end
+		if _G[skins[i]] then _G[skins[i]]:SetTemplate("Transparent") end
 	end
 
 	LFDRoleCheckPopup:StripTextures()
@@ -59,21 +57,21 @@ local function LoadSkin()
 
 	for i = 1, 4 do
 		for j = 1, 3 do
-			_G["StaticPopup"..i.."Button"..j]:SkinButton()
-			_G["StaticPopup"..i.."EditBox"]:SkinEditBox()
-			_G["StaticPopup"..i.."MoneyInputFrameGold"]:SkinEditBox()
-			_G["StaticPopup"..i.."MoneyInputFrameSilver"]:SkinEditBox()
-			_G["StaticPopup"..i.."MoneyInputFrameCopper"]:SkinEditBox()
-			_G["StaticPopup"..i.."EditBox"].backdrop:Point("TOPLEFT", -2, -4)
-			_G["StaticPopup"..i.."EditBox"].backdrop:Point("BOTTOMRIGHT", 2, 4)
-			_G["StaticPopup"..i.."ItemFrameNameFrame"]:Kill()
-			_G["StaticPopup"..i.."ItemFrame"]:GetNormalTexture():Kill()
-			_G["StaticPopup"..i.."ItemFrame"]:SetTemplate("Default")
-			_G["StaticPopup"..i.."ItemFrame"]:StyleButton()
-			_G["StaticPopup"..i.."ItemFrameIconTexture"]:SetTexCoord(.08, .92, .08, .92)
-			_G["StaticPopup"..i.."ItemFrameIconTexture"]:ClearAllPoints()
-			_G["StaticPopup"..i.."ItemFrameIconTexture"]:Point("TOPLEFT", 2, -2)
-			_G["StaticPopup"..i.."ItemFrameIconTexture"]:Point("BOTTOMRIGHT", -2, 2)
+			_G["StaticPopup" .. i .. "Button" .. j]:SkinButton()
+			_G["StaticPopup" .. i .. "EditBox"]:SkinEditBox()
+			_G["StaticPopup" .. i .. "MoneyInputFrameGold"]:SkinEditBox()
+			_G["StaticPopup" .. i .. "MoneyInputFrameSilver"]:SkinEditBox()
+			_G["StaticPopup" .. i .. "MoneyInputFrameCopper"]:SkinEditBox()
+			_G["StaticPopup" .. i .. "EditBox"].backdrop:Point("TOPLEFT", -2, -4)
+			_G["StaticPopup" .. i .. "EditBox"].backdrop:Point("BOTTOMRIGHT", 2, 4)
+			_G["StaticPopup" .. i .. "ItemFrameNameFrame"]:Kill()
+			_G["StaticPopup" .. i .. "ItemFrame"]:GetNormalTexture():Kill()
+			_G["StaticPopup" .. i .. "ItemFrame"]:SetTemplate("Default")
+			_G["StaticPopup" .. i .. "ItemFrame"]:StyleButton()
+			_G["StaticPopup" .. i .. "ItemFrameIconTexture"]:SetTexCoord(.08, .92, .08, .92)
+			_G["StaticPopup" .. i .. "ItemFrameIconTexture"]:ClearAllPoints()
+			_G["StaticPopup" .. i .. "ItemFrameIconTexture"]:Point("TOPLEFT", 2, -2)
+			_G["StaticPopup" .. i .. "ItemFrameIconTexture"]:Point("BOTTOMRIGHT", -2, 2)
 		end
 	end
 
@@ -97,14 +95,10 @@ local function LoadSkin()
 
 	for i = 1, getn(BlizzardMenuButtons) do
 		local button = _G["GameMenuButton"..BlizzardMenuButtons[i]]
-		if button then
-			button:SkinButton()
-		end
+		if button then button:SkinButton() end
 	end
 
-	if IsAddOnLoaded("OptionHouse") then
-		GameMenuButtonOptionHouse:SkinButton()
-	end
+	if IsAddOnLoaded("OptionHouse") then GameMenuButtonOptionHouse:SkinButton() end
 
 	local BlizzardHeader = {
 		"GameMenuFrame", 
@@ -118,17 +112,14 @@ local function LoadSkin()
 		if title then
 			title:SetTexture("")
 			title:ClearAllPoints()
-			if title == _G["GameMenuFrameHeader"] then
-				title:SetPoint("TOP", GameMenuFrame, 0, 7)
-			else
-				title:SetPoint("TOP", BlizzardHeader[i], 0, 0)
-			end
+			if title == _G["GameMenuFrameHeader"] then title:SetPoint("TOP", GameMenuFrame, 0, 7) else title:SetPoint("TOP", BlizzardHeader[i], 0, 0) end
 		end
 	end
 
 	if GameMenuFrame_UpdateVisibleButtons then
 		hooksecurefunc("GameMenuFrame_UpdateVisibleButtons", function()
-			GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + GameMenuButtonStore:GetHeight() + 25)
+			GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + GameMenuButtonStore:GetHeight())
+			if IsAddOnLoaded("Enhanced_Config") then GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + GameMenuButtonStore:GetHeight()) end
 		end)
 	end
 
@@ -154,9 +145,7 @@ local function LoadSkin()
 
 	for i = 1, getn(BlizzardButtons) do
 		local Buttons = _G[BlizzardButtons[i]]
-		if Buttons then
-			Buttons:SkinButton()
-		end
+		if Buttons then Buttons:SkinButton() end
 	end
 
 	_G["VideoOptionsFrameCancel"]:ClearAllPoints()
@@ -178,7 +167,7 @@ local function LoadSkin()
 	_G["ReadyCheckFrameText"]:SetPoint("TOP", 0, -12)
 
 	_G["ReadyCheckListenerFrame"]:SetAlpha(0)
-	_G["ReadyCheckFrame"]:HookScript("OnShow", function(self) if UnitIsUnit("player", self.initiator) then self:Hide() end end) -- bug fix, don't show it if initiator
+	_G["ReadyCheckFrame"]:HookScript("OnShow", function(self) if UnitIsUnit("player", self.initiator) then self:Hide() end end)
 	_G["StackSplitFrame"]:GetRegions():Hide()
 	_G["GeneralDockManagerOverflowButtonList"]:SetTemplate()
 
@@ -191,7 +180,7 @@ local function LoadSkin()
 	BasicScriptErrors:SetScale(C["general"].uiscale)
 
 	for i = 1, 4 do
-		local button = _G["StaticPopup"..i.."CloseButton"]
+		local button = _G["StaticPopup" .. i .. "CloseButton"]
 		button:SetNormalTexture("")
 		button.SetNormalTexture = D.Dummy
 		button:SetPushedTexture("")
@@ -409,9 +398,7 @@ local function LoadSkin()
 
 	for i = 1, getn(interfacecheckbox) do
 		local icheckbox = _G["InterfaceOptions"..interfacecheckbox[i]]
-		if icheckbox then
-			icheckbox:SkinCheckBox()
-		end
+		if icheckbox then icheckbox:SkinCheckBox() end
 	end
 
 	local interfacedropdown ={
@@ -496,9 +483,7 @@ local function LoadSkin()
 
 	for i = 1, getn(optioncheckbox) do
 		local ocheckbox = _G[optioncheckbox[i]]
-		if ocheckbox then
-			ocheckbox:SkinCheckBox()
-		end
+		if ocheckbox then ocheckbox:SkinCheckBox() end
 	end
 
 	local optiondropdown = {
@@ -561,9 +546,7 @@ local function LoadSkin()
 		"AudioOptionsVoicePanelChatMode1KeyBindingButton",
 	}
 
-	for _, button in pairs(buttons) do
-		_G[button]:SkinButton()
-	end
+	for _, button in pairs(buttons) do _G[button]:SkinButton() end
 	InterfaceOptionsFrameAddOnsListScrollBar:SkinScrollBar()
 	AudioOptionsVoicePanelChatMode1KeyBindingButton:ClearAllPoints()
 	AudioOptionsVoicePanelChatMode1KeyBindingButton:Point("CENTER", AudioOptionsVoicePanelBinding, "CENTER", 0, -10)
@@ -595,19 +578,13 @@ local function LoadSkin()
 
 	for i = 1, getn(slides) do
 		if _G[slides[i]] then
-			if _G[slides[i]] ~= AudioOptionsSoundPanelSoundVolume then
-				_G[slides[i]]:SkinSlideBar(8, true)
-			else
-				_G[slides[i]]:SkinSlideBar(8)
-			end
+			if _G[slides[i]] ~= AudioOptionsSoundPanelSoundVolume then _G[slides[i]]:SkinSlideBar(8, true) else _G[slides[i]]:SkinSlideBar(8) end
 		end
 	end
 
 	GraphicsButton:StripTextures()
 	GraphicsButton:SkinButton()
-	Graphics_Quality:SetScript("OnUpdate", function(self)
-		Graphics_Quality:SkinSlideBar(11)
-	end)
+	Graphics_Quality:SetScript("OnUpdate", function(self) Graphics_Quality:SkinSlideBar(11) end)
 	Graphics_RightQuality:SetAlpha(0)
 
 	Graphics_QualityLow2:Point("BOTTOM", 0, -20)
@@ -619,9 +596,7 @@ local function LoadSkin()
 
 	RaidButton:StripTextures()
 	RaidButton:SkinButton()
-	RaidGraphics_Quality:SetScript("OnUpdate", function(self)
-		RaidGraphics_Quality:SkinSlideBar(11)
-	end)
+	RaidGraphics_Quality:SetScript("OnUpdate", function(self) RaidGraphics_Quality:SkinSlideBar(11) end)
 	RaidGraphics_RightQuality:SetAlpha(0)
 
 	RaidGraphics_QualityLow2:Point("BOTTOM", 0, -20)
