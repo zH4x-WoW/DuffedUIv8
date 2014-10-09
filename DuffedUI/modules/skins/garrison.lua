@@ -65,5 +65,8 @@ local function LoadGarrisonSkin()
 	GarrisonRecruiterFrameInset:StripTextures()
 	GarrisonRecruiterFrameInset:SetTemplate()
 	GarrisonRecruiterFrameCloseButton:SkinCloseButton()
+	GarrisonRecruiterFramePickThreatDropDown:SkinDropDownBox()
+	GarrisonRecruiterFrame.Pick.ChooseRecruits:StripTextures()
+	GarrisonRecruiterFrame.Pick.ChooseRecruits:SkinButton()
 end
 D.SkinFuncs["Blizzard_GarrisonUI"] = LoadGarrisonSkin
