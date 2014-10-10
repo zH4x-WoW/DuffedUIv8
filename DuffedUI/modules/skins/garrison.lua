@@ -75,16 +75,18 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrame.CloseButton:SkinCloseButton()
 	GarrisonMissionFrameMissions.MaterialFrame:StripTextures()
 	GarrisonMissionFrameMissions.MaterialFrame:SetTemplate()
+	GarrisonMissionFrameMissions.MaterialFrame:ClearAllPoints()
+	GarrisonMissionFrameMissions.MaterialFrame:Point("TOPRIGHT", GarrisonMissionFrameMissionsListScrollFrame, "TOPRIGHT", 0, 27)
+	GarrisonMissionFrameMissions.MaterialFrame:SetHeight(GarrisonMissionFrameMissions.MaterialFrame:GetHeight() - 20)
+	GarrisonMissionFrameMissions.MaterialFrame:SetWidth(GarrisonMissionFrameFollowers:GetWidth())
 	GarrisonMissionFrameMissions:StripTextures()
 	GarrisonMissionFrame.MissionTab:StripTextures()
-
 	for i = 1, 2 do
 		_G["GarrisonMissionFrameMissionsTab" .. i]:StripTextures()
 		_G["GarrisonMissionFrameMissionsTab" .. i]:SkinButton()
 		_G["GarrisonMissionFrameTab" .. i]:StripTextures()
 		_G["GarrisonMissionFrameTab" .. i]:SkinTab()
 	end
-
 	GarrisonMissionFrameTab1:ClearAllPoints()
 	GarrisonMissionFrameTab1:Point("BOTTOMLEFT", 0, -40)
 	GarrisonMissionFrame.MissionTab.MissionPage:StripTextures()
@@ -98,10 +100,32 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrameMissionsListScrollFrameScrollBar:SkinScrollBar()
 	GarrisonMissionFrameMissionsListScrollFrame:StripTextures()
 	GarrisonMissionFrameMissionsListScrollFrame:SetTemplate()
-	GarrisonMissionFrameMissionsListScrollFrameScrollBar:StripTextures()
-	GarrisonMissionFrameMissionsListScrollFrameScrollBar:SkinScrollBar()
 	GarrisonMissionFrameMissionsListScrollFrameButton8:StripTextures()
-	GarrisonMissionFrameMissionsListScrollFrameButton8:SkinButton()	
+	GarrisonMissionFrameMissionsListScrollFrameButton8:SkinButton()
+	for i = 1, #GarrisonMissionFrame.MissionTab.MissionList.availableMissions do
+		local m = _G["GarrisonMissionFrameMissionsListScrollFrameButton" .. i]
+		if not m.skinned then
+			m:StripTextures()
+			m:SetTemplate()
+			m:StyleButton()
+			m:SetBackdropBorderColor(0, 0, 0, 0)
+			m:HideInsets()
+			for i = 1, #m.Rewards do
+				local Texture = m.Rewards[i].Icon:GetTexture()
+				
+				m.Rewards[i]:StripTextures()
+				m.Rewards[i]:StyleButton()
+				m.Rewards[i]:CreateBackdrop()
+				m.Rewards[i].Icon:SetTexture(Texture)
+				m.Rewards[i].backdrop:ClearAllPoints()
+				m.Rewards[i].backdrop:SetOutside(m.Rewards[i].Icon)
+				m.Rewards[i].Icon:SetTexCoord(unpack(D.IconCoord))
+			end
+
+			m.isSkinned = true
+		end
+	end
+
 	GarrisonMissionFrame.FollowerTab:StripTextures()
 	GarrisonMissionFrame.FollowerTab:SetTemplate()
 	GarrisonMissionFrame.FollowerTab.XPBar:StripTextures()
