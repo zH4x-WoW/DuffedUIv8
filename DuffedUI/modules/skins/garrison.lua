@@ -133,7 +133,8 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrame.FollowerTab:StripTextures()
 	GarrisonMissionFrame.FollowerTab:SetTemplate()
 	GarrisonMissionFrame.FollowerTab.XPBar:StripTextures()
-	GarrisonMissionFrame.FollowerTab.XPBar:SkinButton()
+	GarrisonMissionFrame.FollowerTab.XPBar:SetStatusBarTexture(C["media"].normTex)
+	GarrisonMissionFrame.FollowerTab.XPBar:CreateBackdrop()
 	GarrisonMissionFrameFollowers:StripTextures()
 	GarrisonMissionFrameFollowers:SetTemplate()	
 	GarrisonMissionFrameFollowers.SearchBox:StripTextures()
@@ -150,8 +151,6 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrame.FollowerTab.ItemWeapon.Icon:SetTexCoord(unpack(D.IconCoord))
 	GarrisonMissionFrame.FollowerTab.ItemArmor:StripTextures()
 	GarrisonMissionFrame.FollowerTab.ItemArmor.Icon:SetTexCoord(unpack(D.IconCoord))
-
-	-- Garrison Mission Complete
 	GarrisonMissionFrameMissions.CompleteDialog:StripTextures()
 	GarrisonMissionFrameMissions.CompleteDialog:SetTemplate("Transparent")
 	GarrisonMissionFrameMissions.CompleteDialog.BorderFrame.Stage:StripTextures()
@@ -175,10 +174,6 @@ local function LoadGarrisonSkin()
 	GarrisonBuildingFrame.Confirmation.CancelButton:SkinButton()
 	GarrisonBuildingFrame.Confirmation.UpgradeButton:StripTextures()
 	GarrisonBuildingFrame.Confirmation.UpgradeButton:SkinButton()
-
-	GarrisonBuildingFrame.BuildingList.Tab1:StripTextures() --cant strip
-	GarrisonBuildingFrame.BuildingList.Tab2:StripTextures() --cant strip
-	GarrisonBuildingFrame.BuildingList.Tab3:StripTextures() --cant strip
 
 	GarrisonBuildingFrame.TownHallBox.UpgradeButton:StripTextures()
 	GarrisonBuildingFrame.TownHallBox.UpgradeButton:SkinButton()
