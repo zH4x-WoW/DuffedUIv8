@@ -108,27 +108,25 @@ local function LoadGarrisonSkin()
 
 	for i = 1, #GarrisonMissionFrame.MissionTab.MissionList.availableMissions do
 		local m = _G["GarrisonMissionFrameMissionsListScrollFrameButton" .. i]
-		if m ~= nil then
-			if not m.skinned then
-				m:StripTextures()
-				m:SetTemplate()
-				m:StyleButton()
-				m:SetBackdropBorderColor(0, 0, 0, 0)
-				m:HideInsets()
-				m.LocBG:Hide()
-				for i = 1, #m.Rewards do
-					local Texture = m.Rewards[i].Icon:GetTexture()
+		if m and not m.skinned then
+			m:StripTextures()
+			m:SetTemplate()
+			m:StyleButton()
+			m:SetBackdropBorderColor(0, 0, 0, 0)
+			m:HideInsets()
+			m.LocBG:Hide()
+			for i = 1, #m.Rewards do
+				local Texture = m.Rewards[i].Icon:GetTexture()
 
-					m.Rewards[i]:StripTextures()
-					m.Rewards[i]:StyleButton()
-					m.Rewards[i]:CreateBackdrop()
-					m.Rewards[i].Icon:SetTexture(Texture)
-					m.Rewards[i].backdrop:ClearAllPoints()
-					m.Rewards[i].backdrop:SetOutside(m.Rewards[i].Icon)
-					m.Rewards[i].Icon:SetTexCoord(unpack(D.IconCoord))
-				end
-				m.isSkinned = true
+				m.Rewards[i]:StripTextures()
+				m.Rewards[i]:StyleButton()
+				m.Rewards[i]:CreateBackdrop()
+				m.Rewards[i].Icon:SetTexture(Texture)
+				m.Rewards[i].backdrop:ClearAllPoints()
+				m.Rewards[i].backdrop:SetOutside(m.Rewards[i].Icon)
+				m.Rewards[i].Icon:SetTexCoord(unpack(D.IconCoord))
 			end
+			m.isSkinned = true
 		end
 	end
 
