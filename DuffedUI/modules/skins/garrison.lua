@@ -151,9 +151,8 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrame.FollowerTab.ItemWeapon.Icon:SetTexCoord(unpack(D.IconCoord))
 	GarrisonMissionFrame.FollowerTab.ItemArmor:StripTextures()
 	GarrisonMissionFrame.FollowerTab.ItemArmor.Icon:SetTexCoord(unpack(D.IconCoord))
-	GarrisonMissionFrameMissions.CompleteDialog:StripTextures()
-	GarrisonMissionFrameMissions.CompleteDialog:SetTemplate("Transparent")
-	GarrisonMissionFrameMissions.CompleteDialog.BorderFrame.Stage:StripTextures()
+
+	-- Garrison Mission Complete
 	GarrisonMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:StripTextures()
 	GarrisonMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:SkinButton()
 	GarrisonMissionFrame.MissionComplete:StripTextures()
