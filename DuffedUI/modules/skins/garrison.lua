@@ -150,5 +150,46 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrame.FollowerTab.ItemWeapon.Icon:SetTexCoord(unpack(D.IconCoord))
 	GarrisonMissionFrame.FollowerTab.ItemArmor:StripTextures()
 	GarrisonMissionFrame.FollowerTab.ItemArmor.Icon:SetTexCoord(unpack(D.IconCoord))
+
+	-- Garrison Mission Complete
+	GarrisonMissionFrameMissions.CompleteDialog:StripTextures()
+	GarrisonMissionFrameMissions.CompleteDialog:SetTemplate("Transparent")
+	GarrisonMissionFrameMissions.CompleteDialog.BorderFrame.Stage:StripTextures()
+	GarrisonMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:StripTextures()
+	GarrisonMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:SkinButton()
+	GarrisonMissionFrame.MissionComplete:StripTextures()
+	GarrisonMissionFrame.MissionComplete:SetTemplate("Transparent")
+	GarrisonMissionFrame.MissionComplete.NextMissionButton:StripTextures()
+	GarrisonMissionFrame.MissionComplete.NextMissionButton:SkinButton()
+
+	-- Garrison Building Frame
+	GarrisonBuildingFrame:StripTextures()
+	GarrisonBuildingFrame:SetTemplate("Transparent")
+	GarrisonBuildingFrame.CloseButton:StripTextures()
+	GarrisonBuildingFrame.CloseButton:SkinCloseButton()
+	GarrisonBuildingFrame.BuildingList:StripTextures()
+	GarrisonBuildingFrame.BuildingList:SetTemplate()
+	GarrisonBuildingFrame.Confirmation:StripTextures()
+	GarrisonBuildingFrame.Confirmation:SetTemplate("Transparent")
+	GarrisonBuildingFrame.Confirmation.CancelButton:StripTextures()
+	GarrisonBuildingFrame.Confirmation.CancelButton:SkinButton()
+	GarrisonBuildingFrame.Confirmation.UpgradeButton:StripTextures()
+	GarrisonBuildingFrame.Confirmation.UpgradeButton:SkinButton()
+
+	GarrisonBuildingFrame.BuildingList.Tab1:StripTextures() --cant strip
+	GarrisonBuildingFrame.BuildingList.Tab2:StripTextures() --cant strip
+	GarrisonBuildingFrame.BuildingList.Tab3:StripTextures() --cant strip
+
+	GarrisonBuildingFrame.TownHallBox.UpgradeButton:StripTextures()
+	GarrisonBuildingFrame.TownHallBox.UpgradeButton:SkinButton()
+	GarrisonBuildingFrame.InfoBox.UpgradeButton:StripTextures()
+	GarrisonBuildingFrame.InfoBox.UpgradeButton:SkinButton()
+
+	GarrisonBuildingFrame.BuildingList.MaterialFrame:StripTextures()
+	GarrisonBuildingFrame.BuildingList.MaterialFrame:SetTemplate()
+	GarrisonBuildingFrame.BuildingList.MaterialFrame:ClearAllPoints()
+	GarrisonBuildingFrame.BuildingList.MaterialFrame:Point("BOTTOMLEFT", GarrisonBuildingFrame.BuildingList, 0, -30)
+	GarrisonBuildingFrame.BuildingList.MaterialFrame:SetHeight(GarrisonBuildingFrame.BuildingList.MaterialFrame:GetHeight() - 20)
+	GarrisonBuildingFrame.BuildingList.MaterialFrame:SetWidth(GarrisonBuildingFrame.BuildingList:GetWidth())
 end
 D.SkinFuncs["Blizzard_GarrisonUI"] = LoadGarrisonSkin
