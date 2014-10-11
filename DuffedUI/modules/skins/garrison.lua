@@ -98,6 +98,26 @@ local function LoadGarrisonSkin()
 	GarrisonRecruiterFrame.Pick.ChooseRecruits:StripTextures()
 	GarrisonRecruiterFrame.Pick.ChooseRecruits:SkinButton()
 
+	GarrisonRecruitSelectFrame:StripTextures()
+	GarrisonRecruitSelectFrame:SetTemplate("Transparent")
+	GarrisonRecruitSelectFrame.CloseButton:SkinCloseButton()
+	GarrisonRecruitSelectFrame.FollowerList:StripTextures()
+	GarrisonRecruitSelectFrame.FollowerList:SetTemplate()
+	GarrisonRecruitSelectFrame.FollowerList.SearchBox:StripTextures()
+	GarrisonRecruitSelectFrame.FollowerList.SearchBox:SetTemplate()
+	GarrisonRecruitSelectFrameListScrollFrame:StripTextures()
+	GarrisonRecruitSelectFrameListScrollFrameScrollBar:StripTextures()
+	GarrisonRecruitSelectFrameListScrollFrameScrollBar:SkinScrollBar()
+	GarrisonRecruitSelectFrame.FollowerSelection:StripTextures()
+
+	local frame = GarrisonRecruitSelectFrame.FollowerSelection
+	for i = 1, 3 do
+		local button = frame["Recruit" .. i]
+
+		button.HireRecruits:StripTextures()
+		button.HireRecruits:SkinButton()
+	end
+
 	-- Garrison Mission Frame
 	GarrisonMissionFrame:StripTextures()
 	GarrisonMissionFrame:SetTemplate("Transparent")
@@ -136,26 +156,26 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrameMissionsListScrollFrameButton8:SkinButton()
 
 	for i = 1, #GarrisonMissionFrame.MissionTab.MissionList.availableMissions do
-		local m = _G["GarrisonMissionFrameMissionsListScrollFrameButton" .. i]
-		if m and not m.skinned then
-			m:StripTextures()
-			m:SetTemplate()
-			m:StyleButton()
-			m:SetBackdropBorderColor(0, 0, 0, 0)
-			m:HideInsets()
-			m.LocBG:Hide()
-			for i = 1, #m.Rewards do
-				local Texture = m.Rewards[i].Icon:GetTexture()
+		local button = _G["GarrisonMissionFrameMissionsListScrollFrameButton" .. i]
+		if button and not button.skinned then
+			button:StripTextures()
+			button:SetTemplate()
+			button:StyleButton()
+			button:SetBackdropBorderColor(0, 0, 0, 0)
+			button:HideInsets()
+			button.LocBG:Hide()
+			for i = 1, #button.Rewards do
+				local Texture = button.Rewards[i].Icon:GetTexture()
 
-				m.Rewards[i]:StripTextures()
-				m.Rewards[i]:StyleButton()
-				m.Rewards[i]:CreateBackdrop()
-				m.Rewards[i].Icon:SetTexture(Texture)
-				m.Rewards[i].backdrop:ClearAllPoints()
-				m.Rewards[i].backdrop:SetOutside(m.Rewards[i].Icon)
-				m.Rewards[i].Icon:SetTexCoord(unpack(D.IconCoord))
+				button.Rewards[i]:StripTextures()
+				button.Rewards[i]:StyleButton()
+				button.Rewards[i]:CreateBackdrop()
+				button.Rewards[i].Icon:SetTexture(Texture)
+				button.Rewards[i].backdrop:ClearAllPoints()
+				button.Rewards[i].backdrop:SetOutside(button.Rewards[i].Icon)
+				button.Rewards[i].Icon:SetTexCoord(unpack(D.IconCoord))
 			end
-			m.isSkinned = true
+			button.isSkinned = true
 		end
 	end
 
@@ -188,6 +208,15 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrame.MissionComplete:SetTemplate("Transparent")
 	GarrisonMissionFrame.MissionComplete.NextMissionButton:StripTextures()
 	GarrisonMissionFrame.MissionComplete.NextMissionButton:SkinButton()
+
+	local bar = GarrisonMissionFrame.MissionComplete.Stage.FollowersFrame
+	for i = 1, 3 do
+		local follower = bar["Follower" .. i]
+
+		follower.XP:StripTextures()
+		follower.XP:SetStatusBarTexture(C["media"].normTex)
+		follower.XP:CreateBackdrop()
+	end
 
 	-- Garrison Building Frame
 	GarrisonBuildingFrame:StripTextures()
