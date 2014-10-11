@@ -112,12 +112,12 @@ local function LoadGarrisonSkin()
 	GarrisonRecruitSelectFrameListScrollFrameScrollBar:SkinScrollBar()
 	GarrisonRecruitSelectFrame.FollowerSelection:StripTextures()
 
-	local frame = GarrisonRecruitSelectFrame.FollowerSelection
+	local Frame = GarrisonRecruitSelectFrame.FollowerSelection
 	for i = 1, 3 do
-		local button = frame["Recruit" .. i]
+		local Button = Frame["Recruit" .. i]
 
-		button.HireRecruits:StripTextures()
-		button.HireRecruits:SkinButton()
+		Button.HireRecruits:StripTextures()
+		Button.HireRecruits:SkinButton()
 	end
 
 	-- Garrison Mission Frame
@@ -146,7 +146,6 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrameTab1:Point("BOTTOMLEFT", 0, -40)
 
 	GarrisonMissionFrame.MissionTab.MissionPage:StripTextures()
-	GarrisonMissionFrame.MissionTab.MissionPage:SetTemplate()
 	GarrisonMissionFrame.MissionTab.MissionPage.Stage:StripTextures()
 	GarrisonMissionFrame.MissionTab.MissionPage.CloseButton:StripTextures()
 	GarrisonMissionFrame.MissionTab.MissionPage.CloseButton:SkinCloseButton()
@@ -158,29 +157,41 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrameMissionsListScrollFrame:StripTextures()
 	GarrisonMissionFrameMissionsListScrollFrameButton8:StripTextures()
 	GarrisonMissionFrameMissionsListScrollFrameButton8:SkinButton()
+	GarrisonMissionFrame.MissionTab.MissionPage.EmptyFollowerModel.Texture:Hide()
 
 	for i, v in ipairs(GarrisonMissionFrame.MissionTab.MissionList.listScroll.buttons) do
-		local button = _G["GarrisonMissionFrameMissionsListScrollFrameButton" .. i]
-		if button and not button.skinned then
-			button:StripTextures()
-			button:SetTemplate()
-			button:SkinButton()
-			button:SetBackdropBorderColor(0, 0, 0, 0)
-			button:HideInsets()
-			button.LocBG:Hide()
-			for i = 1, #button.Rewards do
-				local Texture = button.Rewards[i].Icon:GetTexture()
+		local Button = _G["GarrisonMissionFrameMissionsListScrollFrameButton" .. i]
+		if Button and not Button.skinned then
+			Button:StripTextures()
+			Button:SetTemplate()
+			Button:SkinButton()
+			Button:SetBackdropBorderColor(0, 0, 0, 0)
+			Button:HideInsets()
+			Button.LocBG:Hide()
+			for i = 1, #Button.Rewards do
+				local Texture = Button.Rewards[i].Icon:GetTexture()
 
-				button.Rewards[i]:StripTextures()
-				button.Rewards[i]:StyleButton()
-				button.Rewards[i]:CreateBackdrop()
-				button.Rewards[i].Icon:SetTexture(Texture)
-				button.Rewards[i].backdrop:ClearAllPoints()
-				button.Rewards[i].backdrop:SetOutside(button.Rewards[i].Icon)
-				button.Rewards[i].Icon:SetTexCoord(unpack(D.IconCoord))
+				Button.Rewards[i]:StripTextures()
+				Button.Rewards[i]:StyleButton()
+				Button.Rewards[i]:CreateBackdrop()
+				Button.Rewards[i].Icon:SetTexture(Texture)
+				Button.Rewards[i].backdrop:ClearAllPoints()
+				Button.Rewards[i].backdrop:SetOutside(Button.Rewards[i].Icon)
+				Button.Rewards[i].Icon:SetTexCoord(unpack(D.IconCoord))
 			end
-			button.isSkinned = true
+			Button.isSkinned = true
 		end
+	end
+
+	local Frame = GarrisonMissionFrame.MissionTab.MissionPage
+	for i = 1, 3 do
+		local Enemy = Frame["Enemy" .. i]
+		local Follower = Frame["Follower" .. i]
+
+		Enemy.PortraitFrame:StripTextures()
+		Enemy.PortraitFrame:CreateBackdrop()
+		Enemy.PortraitFrame.Portrait:SetTexCoord(unpack(D.IconCoord))
+		Follower:StripTextures()
 	end
 
 	GarrisonMissionFrame.FollowerTab:StripTextures()
@@ -213,13 +224,13 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrame.MissionComplete.NextMissionButton:StripTextures()
 	GarrisonMissionFrame.MissionComplete.NextMissionButton:SkinButton()
 
-	local bar = GarrisonMissionFrame.MissionComplete.Stage.FollowersFrame
+	local Frame = GarrisonMissionFrame.MissionComplete.Stage.FollowersFrame
 	for i = 1, 3 do
-		local follower = bar["Follower" .. i]
+		local Follower = Frame["Follower" .. i]
 
-		follower.XP:StripTextures()
-		follower.XP:SetStatusBarTexture(C["media"].normTex)
-		follower.XP:CreateBackdrop()
+		Follower.XP:StripTextures()
+		Follower.XP:SetStatusBarTexture(C["media"].normTex)
+		Follower.XP:CreateBackdrop()
 	end
 
 	-- Garrison Building Frame
