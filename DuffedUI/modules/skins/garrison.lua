@@ -26,6 +26,35 @@ local function LoadGarrisonSkin()
 		if tt.Icon then tt.Icon:SetTexCoord(unpack(D.IconCoord)) end
 	end
 
+	-- Garrison Landing Page
+	GarrisonLandingPage:StripTextures()
+	GarrisonLandingPage:SetTemplate("Transparent")
+	GarrisonLandingPage.CloseButton:StripTextures()
+	GarrisonLandingPage.CloseButton:SkinCloseButton()
+	GarrisonLandingPageReportListListScrollFrameScrollBar:StripTextures()
+	GarrisonLandingPageReportListListScrollFrameScrollBar:SkinScrollBar()
+
+	for i = 1, 2 do
+		_G["GarrisonLandingPageTab" .. i]:StripTextures()
+		_G["GarrisonLandingPageTab" .. i]:SkinTab()
+	end
+	GarrisonLandingPageTab1:ClearAllPoints()
+	GarrisonLandingPageTab1:Point("BOTTOMLEFT", 0, -40)
+
+	GarrisonLandingPage.FollowerTab.AbilitiesFrame:StripTextures()
+	GarrisonLandingPage.FollowerList:StripTextures()
+	GarrisonLandingPage.FollowerList.SearchBox:StripTextures()
+	GarrisonLandingPage.FollowerList.SearchBox:SetTemplate()
+	GarrisonLandingPage.FollowerList.SearchBox:ClearAllPoints()
+	GarrisonLandingPage.FollowerList.SearchBox:Point("TOPLEFT", GarrisonLandingPageListScrollFrame, 0, 30)
+	GarrisonLandingPage.FollowerTab.XPBar:StripTextures()
+	GarrisonLandingPage.FollowerTab.XPBar:SetStatusBarTexture(C["media"].normTex)
+	GarrisonLandingPage.FollowerTab.XPBar:CreateBackdrop()
+	GarrisonLandingPageListScrollFrame:StripTextures()
+	GarrisonLandingPageListScrollFrame:SetTemplate()
+	GarrisonLandingPageListScrollFrameScrollBar:StripTextures()
+	GarrisonLandingPageListScrollFrameScrollBar:SkinScrollBar()
+
 	-- Work Orders
 	GarrisonCapacitiveDisplayFrame:StripTextures()
 	GarrisonCapacitiveDisplayFrame:SetTemplate("Transparent")
@@ -88,9 +117,9 @@ local function LoadGarrisonSkin()
 		_G["GarrisonMissionFrameTab" .. i]:StripTextures()
 		_G["GarrisonMissionFrameTab" .. i]:SkinTab()
 	end
-
 	GarrisonMissionFrameTab1:ClearAllPoints()
 	GarrisonMissionFrameTab1:Point("BOTTOMLEFT", 0, -40)
+
 	GarrisonMissionFrame.MissionTab.MissionPage:StripTextures()
 	GarrisonMissionFrame.MissionTab.MissionPage:SetTemplate()
 	GarrisonMissionFrame.MissionTab.MissionPage.Stage:StripTextures()
