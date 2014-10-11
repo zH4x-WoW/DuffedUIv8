@@ -127,7 +127,7 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrameMissions.MaterialFrame:StripTextures()
 	GarrisonMissionFrameMissions.MaterialFrame:SetTemplate()
 	GarrisonMissionFrameMissions.MaterialFrame:ClearAllPoints()
-	GarrisonMissionFrameMissions.MaterialFrame:Point("TOPRIGHT", GarrisonMissionFrameMissionsListScrollFrame, "TOPRIGHT", 0, 27)
+	GarrisonMissionFrameMissions.MaterialFrame:Point("TOPRIGHT", GarrisonMissionFrameMissionsListScrollFrame, "TOPRIGHT", -1, 27)
 	GarrisonMissionFrameMissions.MaterialFrame:SetHeight(GarrisonMissionFrameMissions.MaterialFrame:GetHeight() - 20)
 	GarrisonMissionFrameMissions.MaterialFrame:SetWidth(GarrisonMissionFrameFollowers:GetWidth())
 	GarrisonMissionFrameMissions:StripTextures()
@@ -136,9 +136,12 @@ local function LoadGarrisonSkin()
 	for i = 1, 2 do
 		_G["GarrisonMissionFrameMissionsTab" .. i]:StripTextures()
 		_G["GarrisonMissionFrameMissionsTab" .. i]:SkinButton()
+		_G["GarrisonMissionFrameMissionsTab" .. i]:Height(_G["GarrisonMissionFrameMissionsTab" .. i]:GetHeight() - 10)
 		_G["GarrisonMissionFrameTab" .. i]:StripTextures()
 		_G["GarrisonMissionFrameTab" .. i]:SkinTab()
 	end
+	GarrisonMissionFrameMissionsTab1:ClearAllPoints()
+	GarrisonMissionFrameMissionsTab1:Point("TOPLEFT", 20, GarrisonMissionFrameMissionsTab1:GetHeight() - 2)
 	GarrisonMissionFrameTab1:ClearAllPoints()
 	GarrisonMissionFrameTab1:Point("BOTTOMLEFT", 0, -40)
 
@@ -153,16 +156,15 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrameMissionsListScrollFrameScrollBar:StripTextures()
 	GarrisonMissionFrameMissionsListScrollFrameScrollBar:SkinScrollBar()
 	GarrisonMissionFrameMissionsListScrollFrame:StripTextures()
-	GarrisonMissionFrameMissionsListScrollFrame:SetTemplate()
 	GarrisonMissionFrameMissionsListScrollFrameButton8:StripTextures()
 	GarrisonMissionFrameMissionsListScrollFrameButton8:SkinButton()
 
-	for i = 1, #GarrisonMissionFrame.MissionTab.MissionList.availableMissions do
+	for i, v in ipairs(GarrisonMissionFrame.MissionTab.MissionList.listScroll.buttons) do
 		local button = _G["GarrisonMissionFrameMissionsListScrollFrameButton" .. i]
 		if button and not button.skinned then
 			button:StripTextures()
 			button:SetTemplate()
-			button:StyleButton()
+			button:SkinButton()
 			button:SetBackdropBorderColor(0, 0, 0, 0)
 			button:HideInsets()
 			button.LocBG:Hide()
