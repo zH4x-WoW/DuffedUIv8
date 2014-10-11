@@ -8,7 +8,9 @@ local function LoadGarrisonSkin()
 		FloatingGarrisonMissionTooltip,
 		GarrisonFollowerAbilityTooltip,
 		GarrisonBuildingFrame.BuildingLevelTooltip,
+		GarrisonFollowerTooltip
 	}
+
 	for i, tt in pairs(Tooltips) do
 		tt.Background:SetTexture(nil)
 		tt.BorderTop:SetTexture(nil)
@@ -243,5 +245,41 @@ local function LoadGarrisonSkin()
 	GarrisonBuildingFrame.BuildingList.MaterialFrame:Point("BOTTOMLEFT", GarrisonBuildingFrame.BuildingList, 0, -30)
 	GarrisonBuildingFrame.BuildingList.MaterialFrame:SetHeight(GarrisonBuildingFrame.BuildingList.MaterialFrame:GetHeight() - 20)
 	GarrisonBuildingFrame.BuildingList.MaterialFrame:SetWidth(GarrisonBuildingFrame.BuildingList:GetWidth())
+
+	GarrisonBuildingFrameFollowers:StripTextures()
+	GarrisonBuildingFrameFollowers:SetTemplate()
+	GarrisonBuildingFrameFollowers:Width(GarrisonBuildingFrameFollowers:GetWidth() - 10)
+	GarrisonBuildingFrameFollowers:ClearAllPoints()
+	GarrisonBuildingFrameFollowers:Point("LEFT", GarrisonBuildingFrame, 23, -15)
+	GarrisonBuildingFrameFollowersListScrollFrame:StripTextures()
+	GarrisonBuildingFrameFollowersListScrollFrameScrollBar:SkinScrollBar()
 end
 D.SkinFuncs["Blizzard_GarrisonUI"] = LoadGarrisonSkin
+
+local function LoadGarrisonTooltipSkin()
+	-- Tooltips
+	local Tooltips = {
+		FloatingGarrisonFollowerTooltip,
+		FloatingGarrisonFollowerAbilityTooltip,
+		FloatingGarrisonMissionTooltip,
+		GarrisonFollowerAbilityTooltip,
+	}
+
+	for i, tt in pairs(Tooltips) do
+		tt.Background:SetTexture(nil)
+		tt.BorderTop:SetTexture(nil)
+		tt.BorderTopLeft:SetTexture(nil)
+		tt.BorderTopRight:SetTexture(nil)
+		tt.BorderLeft:SetTexture(nil)
+		tt.BorderRight:SetTexture(nil)
+		tt.BorderBottom:SetTexture(nil)
+		tt.BorderBottomRight:SetTexture(nil)
+		tt.BorderBottomLeft:SetTexture(nil)
+		tt:SetTemplate("Transparent")
+
+		if tt.Portrait then tt.Portrait:StripTextures() end
+		if tt.CloseButton then tt.CloseButton:SkinCloseButton() end
+		if tt.Icon then tt.Icon:SetTexCoord(unpack(D.IconCoord)) end
+	end
+end
+tinsert(D.SkinFuncs["DuffedUI"], LoadGarrisonTooltipSkin)
