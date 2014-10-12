@@ -228,6 +228,7 @@ local function LoadGarrisonSkin()
 	for i = 1, 3 do
 		local Follower = Frame["Follower" .. i]
 
+		Follower:StripTextures()
 		Follower.XP:StripTextures()
 		Follower.XP:SetStatusBarTexture(C["media"].normTex)
 		Follower.XP:CreateBackdrop()
