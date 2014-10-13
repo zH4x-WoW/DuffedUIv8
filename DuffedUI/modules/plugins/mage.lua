@@ -13,6 +13,7 @@ local spells = (UnitFactionGroup("player") == "Horde") and {
 	[7] = {49358,49361}, -- Stonard
 	[8] = {88342,88345}, -- Tol Barad
 	[9] = {132627,132626}, -- Vale of Eternal Blossoms
+	[10] = {176242, 176244}, -- Warspear
 } or { -- ALLIANCE
 	[1] = {53140,53142}, -- Dalaran
 	[2] = {3561,10059}, -- Stormwind
@@ -23,6 +24,7 @@ local spells = (UnitFactionGroup("player") == "Horde") and {
 	[7] = {49359,49360}, -- Theramore
 	[8] = {88342,88345}, -- Tol Barad
 	[9] = {132621,132620}, -- Vale of Eternal Blossoms
+	[10] = {176248, 176246}, -- Stormshield
 };
 
 local UTF = function(string, i, dots)
