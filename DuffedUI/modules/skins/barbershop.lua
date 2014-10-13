@@ -13,24 +13,18 @@ local function LoadSkin()
 		_G[buttons[i]]:SkinButton()
 	end
 
-	for i = 1, 4 do
+	for i = 1, 5 do
 		local f = _G["BarberShopFrameSelector"..i]
-		local f2 = _G["BarberShopFrameSelector"..i-1]
 		_G["BarberShopFrameSelector"..i.."Prev"]:SkinNextPrevButton()
 		_G["BarberShopFrameSelector"..i.."Next"]:SkinNextPrevButton()
-
-		if i ~= 1 then
-			f:ClearAllPoints()
-			f:Point("TOP", f2, "BOTTOM", 0, -3)
-		end
 
 		if f then
 			f:StripTextures()
 		end
 	end
 
-	BarberShopFrameSelector1:ClearAllPoints()
-	BarberShopFrameSelector1:Point("TOP", 0, -12)
+	BarberShopFrameSelector5:ClearAllPoints()
+	BarberShopFrameSelector5:Point("TOP", 0, -12)
 
 	BarberShopFrameResetButton:ClearAllPoints()
 	BarberShopFrameResetButton:Point("BOTTOM", 0, 12)
@@ -41,7 +35,6 @@ local function LoadSkin()
 
 	BarberShopFrameMoneyFrame:StripTextures()
 	BarberShopFrameMoneyFrame:CreateBackdrop("Overlay")
-	BarberShopFrameBackground:Kill()
 
 	BarberShopBannerFrameBGTexture:Kill()
 	BarberShopBannerFrame:Kill()
@@ -51,5 +44,4 @@ local function LoadSkin()
 	BarberShopAltFormFrame:StripTextures()
 	BarberShopAltFormFrame:CreateBackdrop("Default")
 end
-
 D.SkinFuncs["Blizzard_BarbershopUI"] = LoadSkin
