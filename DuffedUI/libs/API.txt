@@ -1,9 +1,3 @@
-Tukui API
-
-This is how another addon imports the Tukui engine:
-(it must be at the top of every lua file if your addon or edited version is built around Tukui)
-	local T, C, L = unpack(Tukui)
-
 Now the functions:
 
 	frame:SetTemplate("Template", texture)

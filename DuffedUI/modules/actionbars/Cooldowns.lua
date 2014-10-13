@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...)) 
 --[[
-        An edited lightweight OmniCC for Tukui
+        An edited lightweight OmniCC
                 A featureless, 'pure' version of OmniCC.
                 This version should work on absolutely everything, but I've removed pretty much all of the options
 --]]
