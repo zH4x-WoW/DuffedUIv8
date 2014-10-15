@@ -195,42 +195,51 @@ local function LoadSkin()
 		button:GetHighlightTexture():SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 5)
 		button:GetPushedTexture():SetAllPoints(button:GetHighlightTexture())
 	end
-	
+
 	for i = 1, NUM_AUCTIONS_TO_DISPLAY do
 		local button = _G["AuctionsButton"..i]
 		local icon = _G["AuctionsButton"..i.."Item"]
 
-		_G["AuctionsButton"..i.."ItemIconTexture"]:SetTexCoord(.08, .92, .08, .92)
-		_G["AuctionsButton"..i.."ItemIconTexture"].SetTexCoord = D.Dummy
-		_G["AuctionsButton"..i.."ItemIconTexture"]:ClearAllPoints()
-		_G["AuctionsButton"..i.."ItemIconTexture"]:Point("TOPLEFT", 2, -2)
-		_G["AuctionsButton"..i.."ItemIconTexture"]:Point("BOTTOMRIGHT", -2, 2)
-		icon:StyleButton()
-		--TODO: Find a better method to ensure that the icon:GetNormalTexture doesn't return after clicking
-		icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)
-		icon:CreateBackdrop("Default")
-		icon.backdrop:SetAllPoints()
+		if _G["AuctionsButton"..i.."ItemIconTexture"] then
+			_G["AuctionsButton"..i.."ItemIconTexture"]:SetTexCoord(.08, .92, .08, .92)
+			_G["AuctionsButton"..i.."ItemIconTexture"]:ClearAllPoints()
+			_G["AuctionsButton"..i.."ItemIconTexture"]:Point("TOPLEFT", 2, -2)
+			_G["AuctionsButton"..i.."ItemIconTexture"]:Point("BOTTOMRIGHT", -2, 2)
+		end
+		if icon then
+			icon:StripTextures()
+			icon:StyleButton()
+			icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)
+			icon:CreateBackdrop("Default")
+			icon.backdrop:SetAllPoints()
+		end
+
 		button:StripTextures()
 		button:StyleButton()
 		_G["AuctionsButton"..i.."Highlight"] = button:GetHighlightTexture()
 		button:GetHighlightTexture():ClearAllPoints()
 		button:GetHighlightTexture():Point("TOPLEFT", icon, "TOPRIGHT", 2, 0)
 		button:GetHighlightTexture():SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 5)
-		button:GetPushedTexture():SetAllPoints(button:GetHighlightTexture())		
+		button:GetPushedTexture():SetAllPoints(button:GetHighlightTexture())
 	end
-	
+
 	for i = 1, NUM_BIDS_TO_DISPLAY do
 		local button = _G["BidButton"..i]
 		local icon = _G["BidButton"..i.."Item"]
 
-		_G["BidButton"..i.."ItemIconTexture"]:SetTexCoord(.08, .92, .08, .92)
-		_G["BidButton"..i.."ItemIconTexture"]:ClearAllPoints()
-		_G["BidButton"..i.."ItemIconTexture"]:Point("TOPLEFT", 2, -2)
-		_G["BidButton"..i.."ItemIconTexture"]:Point("BOTTOMRIGHT", -2, 2)
-		icon:StyleButton()
-		icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)
-		icon:CreateBackdrop("Default")
-		icon.backdrop:SetAllPoints()
+		if _G["BidButton"..i.."ItemIconTexture"] then
+			_G["BidButton"..i.."ItemIconTexture"]:SetTexCoord(.08, .92, .08, .92)
+			_G["BidButton"..i.."ItemIconTexture"]:ClearAllPoints()
+			_G["BidButton"..i.."ItemIconTexture"]:Point("TOPLEFT", 2, -2)
+			_G["BidButton"..i.."ItemIconTexture"]:Point("BOTTOMRIGHT", -2, 2)
+		end
+		if icon then
+			icon:StripTextures()
+			icon:StyleButton()
+			icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)
+			icon:CreateBackdrop("Default")
+			icon.backdrop:SetAllPoints()
+		end
 
 		button:StripTextures()
 		button:StyleButton()
@@ -238,7 +247,7 @@ local function LoadSkin()
 		button:GetHighlightTexture():ClearAllPoints()
 		button:GetHighlightTexture():Point("TOPLEFT", icon, "TOPRIGHT", 2, 0)
 		button:GetHighlightTexture():SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 5)
-		button:GetPushedTexture():SetAllPoints(button:GetHighlightTexture())			
+		button:GetPushedTexture():SetAllPoints(button:GetHighlightTexture())
 	end
 
 	--Custom Backdrops
