@@ -269,23 +269,24 @@ local function LoadSkin()
 	ToyBoxFilterButton:SkinButton()
 	ToyBoxFilterButton:ClearAllPoints()
 	ToyBoxFilterButton:Point("LEFT", ToyBoxSearchBox, "RIGHT", 5, 0)
-
 	ToyBoxIconsFrame:StripTextures()
-	local function SkinToyButtons(self)
+
+	for i = 1, 18 do
+		_G["ToySpellButton" .. i]:SkinButton()
+		_G["ToySpellButton" .. i .. "IconTexture"]:SetTexCoord(.1, .9, .1, .9)
+		_G["ToySpellButton" .. i .. "IconTexture"]:SetInside()
+		_G["ToySpellButton" .. i .. "IconTextureUncollected"]:SetTexCoord(.1, .9, .1, .9)
+		_G["ToySpellButton" .. i .. "IconTextureUncollected"]:SetInside()
+		_G["ToySpellButton" .. i .. "Cooldown"]:SetAllPoints(_G["ToySpellButton" .. i .. "IconTexture"])
+	end
+	hooksecurefunc("ToySpellButton_UpdateButton", function(self)
 		for i = 1, 18 do
-			_G["ToySpellButton" .. i]:SkinButton()
-			_G["ToySpellButton" .. i .. "IconTexture"]:SetTexCoord(.1, .9, .1, .9)
-			_G["ToySpellButton" .. i .. "IconTexture"]:SetInside()
-			_G["ToySpellButton" .. i .. "IconTextureUncollected"]:SetTexCoord(.1, .9, .1, .9)
-			_G["ToySpellButton" .. i .. "IconTextureUncollected"]:SetInside()
 			_G["ToySpellButton" .. i .. "SlotFrameCollected"]:Hide()
 			_G["ToySpellButton" .. i .. "SlotFrameUncollected"]:Hide()
 			_G["ToySpellButton" .. i .. "SlotFrameUncollectedInnerGlow"]:Hide()
-			_G["ToySpellButton" .. i .. "Cooldown"]:SetAllPoints(_G["ToySpellButton" .. i .. "IconTexture"])
 		end
 		if PlayerHasToy(self.itemID) then _G[self:GetName().."ToyName"]:SetTextColor(1, 1, 1) else _G[self:GetName().."ToyName"]:SetTextColor(.6, .6, .6) end
-	end
-	hooksecurefunc("ToySpellButton_UpdateButton", SkinToyButtons)
+	end)
 
 	ToyBoxPrevPageButton:SkinCloseButton()
 	ToyBoxNextPageButton:SkinCloseButton()
