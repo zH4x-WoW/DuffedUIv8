@@ -258,9 +258,9 @@ function CreateContainer(storagetype, ...)
 					BanksContainer:ClearAllPoints()
 					ToggleBagsContainer.Text:SetTextColor(1, 1, 1)
 					if Purchase:IsShown() then
-						BanksContainer:SetPoint("BOTTOMLEFT", Purchase, "TOPLEFT", 50, 2)
+						BanksContainer:SetPoint("BOTTOMLEFT", _G["DuffedUI_Bank"], "TOPLEFT", 0, 3)
 					else
-						BanksContainer:SetPoint("BOTTOMLEFT", ReagentButton, "TOPLEFT", 0, 2)
+						BanksContainer:SetPoint("BOTTOMLEFT", _G["DuffedUI_Bank"], "TOPLEFT", 0, 3)
 					end
 				else
 					ReplaceBags = 0
@@ -371,6 +371,9 @@ function CreateContainer(storagetype, ...)
 			Bag.IconBorder:SetAlpha(0)
 			Bag.icon:SetTexCoord(unpack(D.IconCoord))
 			Bag.icon:SetInside()
+			Bag:SetNormalTexture("")
+			Bag:SetPushedTexture("")
+			Bag:SetTemplate()
 			Bag:SkinButton()
 			Bag:ClearAllPoints()
 			if i == 1 then Bag:SetPoint("TOPLEFT", BankBagsContainer, "TOPLEFT", ButtonSpacing, -ButtonSpacing) else Bag:SetPoint("LEFT", BankSlotsFrame["Bag" .. i-1], "RIGHT", ButtonSpacing, 0) end
