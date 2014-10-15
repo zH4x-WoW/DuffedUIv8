@@ -24,7 +24,6 @@ D.MicroMenu = {
 	{text = CALENDAR_VIEW_EVENT, func = function() if(not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end Calendar_Toggle() end},
 	{text = ENCOUNTER_JOURNAL, func = function() if not IsAddOnLoaded("Blizzard_EncounterJournal") then EncounterJournal_LoadUI() end ToggleFrame(EncounterJournal) end},
 	{text = BLIZZARD_STORE, func = function() StoreMicroButton:Click() end},
-	{text = "Raid Browser", func = function() ToggleFrame(RaidBrowserFrame) end},
 	{text = GARRISON_LANDING_PAGE_TITLE, func = function() GarrisonLandingPageMinimapButton_OnClick() end},
 }
 
