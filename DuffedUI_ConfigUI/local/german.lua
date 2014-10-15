@@ -51,6 +51,8 @@
 	DuffedUIConfigUILocalization.unitframesattached = "Verbinde die Klassenleisten und die Einheitenfenster"
 	DuffedUIConfigUILocalization.unitframesoocHide = "Verstecke die Klassenleisten, wenn Du nicht im Kampf bist"
 	DuffedUIConfigUILocalization.unitframesplayermodel = "Setze den Portraitstil (Icon oder Model, Standard => Model)"
+	DuffedUIConfigUILocalization.unitframesbuffsize = "Wähle die Größe der Stärkungszauber am Ziel"
+	DuffedUIConfigUILocalization.unitframesdebuffsize = "Wähle die Größe der Schwächungszauber am Ziel"
 
 	-- chat
 	DuffedUIConfigUILocalization.chat = "Chat"

@@ -51,6 +51,8 @@ C["unitframes"] = {
 	["attached"] = false,
 	["oocHide"] = true,
 	["playermodel"] = "Model",
+	["buffsize"] = 20,
+	["debuffsize"] = 20,
 }
 
 C["chat"] = {

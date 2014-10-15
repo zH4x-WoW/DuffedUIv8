@@ -381,16 +381,16 @@ local function Shared(self, unit)
 			local buffs = CreateFrame("Frame", nil, self)
 			local debuffs = CreateFrame("Frame", nil, self)
 
-			buffs:SetHeight(20)
+			buffs:SetHeight(C["unitframes"].buffsize)
 			buffs:SetWidth(218)
-			buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 22)
-			buffs.size = 20
+			buffs:SetPoint("BOTTOMLEFT", health, "TOPLEFT", -2, 5)
+			buffs.size = C["unitframes"].buffsize
 			buffs.num = 18
 
-			debuffs:SetHeight(20)
+			debuffs:SetHeight(C["unitframes"].debuffsize)
 			debuffs:SetWidth(218)
 			debuffs:SetPoint("BOTTOMLEFT", buffs, "TOPLEFT", 4, 2)
-			debuffs.size = 20
+			debuffs.size = C["unitframes"].debuffsize
 			debuffs.num = 27
 
 			buffs.spacing = 2
