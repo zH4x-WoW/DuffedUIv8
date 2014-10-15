@@ -1,9 +1,9 @@
 local D, C, L = unpack(select(2, ...))
 
-if not C["actionbar"].enable == true then
+--[[if not C["actionbar"].enable == true then
 	DuffedUIPetBar:Hide()
 	return
-end
+end]]
 
 D.CreatePopup["DUFFEDUI_FIX_AB"] = {
 	question = L["ui"]["fix_ab"],

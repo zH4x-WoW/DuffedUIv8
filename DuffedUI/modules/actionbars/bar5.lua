@@ -1,4 +1,5 @@
 local D, C, L = unpack(select(2, ...))
+if C["actionbar"].enable ~= true then return end
 
 local bar = DuffedUIBar5
 MultiBarRight:SetParent(bar)

@@ -312,10 +312,10 @@ local function Shared(self, unit)
 					D.ConstructRessources("mb", "rp", 216, 5)
 					if C["unitframes"].attached then
 						mb:Point("TOP", power, "BOTTOM", 0, 0)
-						rp:Point("TOP", power, "BOTTOM", 0, -8)
+						if C["unitframes"].runeofpower then rp:Point("TOP", power, "BOTTOM", 0, -8) end
 					else
 						mb:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
-						rp:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
+						if C["unitframes"].runeofpower then rp:Point("TOP", CBAnchor, "BOTTOM", 0, -5) end
 					end
 					self.ArcaneChargeBar = mb
 					self.RunePower = rp
@@ -438,7 +438,7 @@ local function Shared(self, unit)
 
 			local pcb = CreateFrame("Frame", "PCBanchor", UIParent)
 			pcb:SetTemplate("Default")
-			pcb:Size(DuffedUIBar1:GetWidth(), 21)
+			pcb:Size(376, 21)
 			pcb:Point("BOTTOM", DuffedUIBar1, "TOP", 0, 5)
 			pcb:SetClampedToScreen(true)
 			pcb:SetMovable(true)

@@ -101,10 +101,12 @@ local OnEvent = function(self, event, unit)
 	elseif event == "PLAYER_LEAVING_WORLD" then
 		SpinStop()
 	elseif event == "PLAYER_DEAD" then
-		SpinStop()
-		DuffedUIAFKPanel:Hide()
-		DuffedUIAFKPanelTop:Hide()
-		Minimap:Show()
+		if UnitIsAFK("player") then
+			SpinStop()
+			DuffedUIAFKPanel:Hide()
+			DuffedUIAFKPanelTop:Hide()
+			Minimap:Show()
+		end
 	end
 end
 

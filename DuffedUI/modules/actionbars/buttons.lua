@@ -1,4 +1,5 @@
 local D, C, L = unpack(select(2, ...))
+if not C["actionbar"].enable == true then return end
 
 local cp = "|cff319f1b" -- +
 local cm = "|cff9a1212" -- -
