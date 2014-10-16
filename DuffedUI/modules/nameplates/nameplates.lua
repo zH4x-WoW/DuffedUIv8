@@ -557,7 +557,10 @@ local HealthBar_OnValue = function(self, value)
 	local health = self.parent.health
 	health:SetMinMaxValues(self:GetMinMaxValues())
 	health:SetValue(self:GetValue())
-	health.perc:SetText(math.min(math.ceil((value or 0)/((mx or 0) / 100)), 100))
+	if C["nameplate"].Percent then
+		local _, mx = health:GetMinMaxValues()
+		health.perc:SetText(math.min(math.ceil((value or 0)/((mx or 0) / 100)), 100))
+	end
 end
 
 local CastBar_OnValue = function(self, value) 
@@ -583,8 +586,10 @@ local HealthBar_OnShow = function(self)
 	self.health:SetMinMaxValues(self.oldhealth:GetMinMaxValues())
 	self.health:SetValue(self.oldhealth:GetValue())
 
-	local _, mx = self.health:GetMinMaxValues()
-	self.health.perc:SetText(math.min(math.ceil((self.oldhealth:GetValue() or 0) / ((mx or 0) / 100)), 100))
+	if C["nameplate"].Percent then
+		local _, mx = self.health:GetMinMaxValues()
+		self.health.perc:SetText(math.min(math.ceil((self.oldhealth:GetValue() or 0) / ((mx or 0) / 100)), 100))
+	end
 	self.hasClass = nil
 	self.health.name:SetText(self.oldname:GetText())
 	self.highlight:ClearAllPoints()
@@ -676,13 +681,13 @@ local StylePlate = function(self)
 		self.health.name:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
 	end
 
-	-- if C["nameplate"].Percent then
+	if C["nameplate"].Percent then
 		if self.health.perc == nil then
 			self.health.perc = self.health:CreateFontString("$parentHealthPercent", "OVERLAY")
 			self.health.perc:SetFont(Font, 11, "THINOUTLINE")
 			self.health.perc:SetPoint("LEFT", self.health, "RIGHT", 4, 0)
 		end
-	--end
+	end
 
 	if self.highlight == nil then
 		highlight:SetTexture(1, 1, 1, .15)

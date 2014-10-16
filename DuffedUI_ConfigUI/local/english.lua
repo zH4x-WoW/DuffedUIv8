@@ -91,6 +91,7 @@ DuffedUIConfigUILocalization.nameplatethreat = "Enable Threatfeature"
 DuffedUIConfigUILocalization.nameplatethreat_badcolor = "Bad threat color, varies depending if your a tank or dps/heal"
 DuffedUIConfigUILocalization.nameplatethreat_goodcolor = "Good threat color, varies depending if your a tank or dps/heal"
 DuffedUIConfigUILocalization.nameplatethreat_transitioncolor = "Losing/Gaining threat color"
+DuffedUIConfigUILocalization.nameplatePercent = "Enable Percent-Display on Nameplates"
 
 -- action bar
 DuffedUIConfigUILocalization.actionbar = "Action Bars"

@@ -90,6 +90,7 @@ C["nameplate"] = {
 	["threat_goodcolor"] = {.29,  .69, .3},
 	["threat_badcolor"] = {.78, .25, .25},
 	["threat_transitioncolor"] = {.86, .77, .36},
+	["Percent"] = false,
 }
 
 C["actionbar"] = {
