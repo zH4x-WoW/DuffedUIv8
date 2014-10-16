@@ -206,6 +206,7 @@
 	DuffedUIConfigUILocalization.auraswarning = "Aktiviere einen Warnton für die Bufferinnerung"
 	DuffedUIConfigUILocalization.aurasbufftracker = "Aktiviere das Bufftracker-Plugin"
 	DuffedUIConfigUILocalization.auraswrap = "Wähle Umbruch der Stärkungszauberleiste (Standard = 18)"
+	DuffedUIConfigUILocalization.aurasInside = "Verschiebe den Timer nach innen"
 
 	-- bags
 	DuffedUIConfigUILocalization.bags = "Taschen"

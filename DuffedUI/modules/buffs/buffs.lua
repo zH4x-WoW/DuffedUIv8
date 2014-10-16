@@ -178,7 +178,7 @@ local Skin = function(self)
 
 		local Duration = self:CreateFontString(nil, "OVERLAY")
 		Duration:SetFontObject(font)
-		Duration:SetPoint("BOTTOM", 0, -17)
+		if C["auras"].Inside then Duration:SetPoint("BOTTOM", 1, 1) else Duration:SetPoint("BOTTOM", 1, -15) end
 		self.Duration = Duration
 
 		if flash then

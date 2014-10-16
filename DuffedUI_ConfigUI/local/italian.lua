@@ -205,6 +205,7 @@
 	DuffedUIConfigUILocalization.auraswarning = "Enable warningsound for BuffNotice"
 	DuffedUIConfigUILocalization.aurasbufftracker = "Enable Bufftrackerplugin"
 	DuffedUIConfigUILocalization.auraswrap = "Set wrap for buffs (default = 18)"
+	DuffedUIConfigUILocalization.aurasInside = "Set timer inside"
 
 	-- bags
 	DuffedUIConfigUILocalization.bags = "Bags"
