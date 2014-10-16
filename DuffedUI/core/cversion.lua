@@ -1,47 +1,60 @@
+-- All codingfame to Shestak
 local D, C, L = unpack(select(2, ...))
 
 _G.StaticPopupDialogs["OUTDATED"] = {
-	text = "http://www.duffed.net/downloads",
+	text = "Download DuffedUI",
 	button1 = OKAY,
 	timeout = 0,
 	whileDead = true,
 	hasEditBox = true,
 	editBoxWidth = 350,
-	OnShow = function(self, ...) self.editBox:SetFocus() end,
+	OnShow = function(self, ...) 
+		self.editBox:SetFocus()
+		self.editBox:SetText("http://www.duffed.net/downloads")
+	end,
 	EditBoxOnEnterPressed = function(self) self:GetParent():Hide() end,
 	EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
 }
 
-local SendAddonMessage = SendAddonMessage
-local LE_PARTY_CATEGORY_HOME = LE_PARTY_CATEGORY_HOME
-local tonumber = tonumber
-
-local version = function(self, event, prefix, message, channel, sender)
+-- Check outdated UI version
+local check = function(self, event, prefix, message, channel, sender)
 	if event == "CHAT_MSG_ADDON" then
-		if prefix ~= "DuffedUI" or sender == D.MyName then return end
-		
-		if tonumber(message > D.Version) then
-			print(L["ui"]["outdated"])
+		if prefix ~= "DuffedUIVersion" or sender == D.MyName then return end
+		if tonumber(message) ~= nil and tonumber(message) > tonumber(D.Version) then
 			StaticPopup_Show("OUTDATED")
+			print("|cffff0000"..L["ui"]["outdated"].."|r")
 			self:UnregisterEvent("CHAT_MSG_ADDON")
 		end
 	else
-		if (not IsInGroup(LE_PARTY_CATEGORY_HOME)) or (not IsInRaid(LE_PARTY_CATEGORY_HOME)) then
-			SendAddonMessage("DuffedUI", D.Version, "INSTANCE_CHAT")
+		if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
+			SendAddonMessage("DuffedUIVersion", tonumber(D.Version), "INSTANCE_CHAT")
 		elseif IsInRaid(LE_PARTY_CATEGORY_HOME) then
-			SendAddonMessage("DuffedUI", D.Version, "RAID")
+			SendAddonMessage("DuffedUIVersion", tonumber(D.Version), "RAID")
 		elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
-			SendAddonMessage("DuffedUI", D.Version, "PARTY")
+			SendAddonMessage("DuffedUIVersion", tonumber(D.Version), "PARTY")
 		elseif IsInGuild() then
-			SendAddonMessage("DuffedUI", D.Version, "GUILD")
+			SendAddonMessage("DuffedUIVersion", tonumber(D.Version), "GUILD")
 		end
 	end
 end
 
-local cversion = CreateFrame("Frame")
-cversion:RegisterEvent("PLAYER_ENTERING_WORLD")
-cversion:RegisterEvent("GROUP_ROSTER_UPDATE")
-cversion:RegisterEvent("CHAT_MSG_ADDON")
-cversion:SetScript("OnEvent", version)
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+frame:RegisterEvent("GROUP_ROSTER_UPDATE")
+frame:RegisterEvent("CHAT_MSG_ADDON")
+frame:SetScript("OnEvent", check)
+RegisterAddonMessagePrefix("DuffedUIVersion")
 
-RegisterAddonMessagePrefix("DuffedUI")
+-- Whisper UI version
+local whisp = CreateFrame("Frame")
+whisp:RegisterEvent("CHAT_MSG_WHISPER")
+whisp:RegisterEvent("CHAT_MSG_BN_WHISPER")
+whisp:SetScript("OnEvent", function(self, event, text, name, ...)
+	if text:lower():match("ui_version") then
+		if event == "CHAT_MSG_WHISPER" then
+			SendChatMessage("DuffedUI" ..D.Version, "WHISPER", nil, name)
+		elseif event == "CHAT_MSG_BN_WHISPER" then
+			BNSendWhisper(select(11, ...), "DuffedUI" ..D.Version)
+		end
+	end
+end)

@@ -238,7 +238,6 @@ C["duffed"] = {
 	["dispelannouncement"] = false,
 	["drinkannouncement"] = false,
 	["sayinterrupt"] = true,
-	["bossicons"] = true,
 	["announcechannel"] = "SAY",
 	["spellannounce"] = true,
 }
