@@ -128,6 +128,7 @@ local function cvarsetup()
 	SetCVar("autoOpenLootHistory", 0)
 	SetCVar("spamFilter", 0)
 	SetCVar("violenceLevel", 5)
+	SetCVar("synchronizeBindings", 0)
 end
 
 local OnLogon = CreateFrame("Frame")
@@ -135,6 +136,10 @@ OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 OnLogon:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	print(L["ui"]["welcome"])
+
+	-- Remove me if Blizzard fix the issue
+	local Bindings = GetCVar("synchronizeBindings")
+	if Bindings == 1 then SetCVar("synchronizeBindings", 0) end
 end)
 
 local function positionsetup()
