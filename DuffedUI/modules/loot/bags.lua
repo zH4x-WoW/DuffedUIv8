@@ -426,15 +426,17 @@ function SlotUpdate(id, button)
 
 	if IsNewItem then
 		NewItem:SetAlpha(0)
-		if not button.Animation then
-			button.Animation = button:CreateAnimationGroup()
-			button.Animation:SetLooping("BOUNCE")
-			button.FadeOut = button.Animation:CreateAnimation("Alpha")
-			button.FadeOut:SetChange(-0.5)
-			button.FadeOut:SetDuration(0.40)
-			button.FadeOut:SetSmoothing("IN_OUT")
+		if C["bags"].Bounce then
+			if not button.Animation then
+				button.Animation = button:CreateAnimationGroup()
+				button.Animation:SetLooping("BOUNCE")
+				button.FadeOut = button.Animation:CreateAnimation("Alpha")
+				button.FadeOut:SetChange(-0.5)
+				button.FadeOut:SetDuration(0.40)
+				button.FadeOut:SetSmoothing("IN_OUT")
+			end
+			button.Animation:Play()
 		end
-		button.Animation:Play()
 	else
 		if button.Animation and button.Animation:IsPlaying() then button.Animation:Stop() end
 	end

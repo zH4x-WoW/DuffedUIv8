@@ -215,6 +215,7 @@ C["bags"] = {
 	["scale"] = 1,
 	["buttonsize"] = 28,
 	["spacing"] = 4,
+	["Bounce"] = true,
 }
 
 C["misc"] = {

@@ -217,6 +217,7 @@ DuffedUIConfigUILocalization.bagsmovable = "Make bags moveable"
 DuffedUIConfigUILocalization.bagsscale = "Set scale of bag & bank frames"
 DuffedUIConfigUILocalization.bagsspacing = "Set spacing betweens bagslots"
 DuffedUIConfigUILocalization.bagsbuttonsize = " Set slotsize"
+DuffedUIConfigUILocalization.bagsBounce = "Enable Pulse Animation for new items"
 
 -- misc
 DuffedUIConfigUILocalization.misc = "Misc"

@@ -216,6 +216,7 @@
 	DuffedUIConfigUILocalization.bagsscale = "Sklalierung für Bank und Taschen"
 	DuffedUIConfigUILocalization.bagsspacing = "Zwischenraum zwischen den Taschenslots"
 	DuffedUIConfigUILocalization.bagsbuttonsize = "Größe der Taschenplätze"
+	DuffedUIConfigUILocalization.bagsBounce = "Aktiviere Pulseanimation für neue Gegenstände"
 
 	-- misc
 	DuffedUIConfigUILocalization.misc = "Sonstiges"
