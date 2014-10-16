@@ -268,6 +268,8 @@ L["dt"] = {
 	["goldbagsopen"] = "|cffC41F3BBags: Left Click|r",
 	["goldcurrency"] = "|cffC41F3BCurrency Menu: Right Click|r",
 	["goldreset"] = "|cffC41F3BReset Data: Hold Shift + Right Click|r",
+	["systemleft"] = "|cffC41F3BLeft Click: Open PvE-Frame|r",
+	["systemright"] = "|cffC41F3BRight Click: Clean Memoryusage|r",
 }
 
 L["Slots"] = {

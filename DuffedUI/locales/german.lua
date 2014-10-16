@@ -270,6 +270,8 @@ if D.Client == "deDE" then
 		["goldcurrency"] = "|cffC41F3BWährungsmenü: Rechtsklick|r",
 		["goldreset"] = "|cffC41F3BDaten zurücksetzen: Shift halten + Rechtsklick|r",
 		["notalents"] = "Keine Talente",
+		["systemleft"] = "|cffC41F3BLeft Click: Öffne PvE-Frame|r",
+		["systemright"] = "|cffC41F3BRight Click: Speichernutzung bereinigen|r",
 	}
 
 	L["Slots"] = {
