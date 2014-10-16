@@ -121,7 +121,6 @@ end
 
 local GetTargetNameplate = function()
 	if not UnitExists("target") then return end
-
 	for frame, _ in pairs(NamePlateList) do
 		if frame.guid == UnitGUID("target") then return frame end
 	end
@@ -216,7 +215,6 @@ local UpdateColor = function(self)
 		self.isFriendly = false
 	end
 	self.hasClass = false
-
 	self.health:SetStatusBarColor(r, g, b)
 end
 
@@ -842,11 +840,9 @@ local UpdateRoster = function()
 		for index = 1, groupSize do
 			unitId = groupType..index
 			unitName = UnitName(unitId)
-			if unitName then
-				GroupMembersList[unitName] = unitId
-			end
+			if unitName then GroupMembersList[unitName] = unitId end
 		end
-	end	
+	end
 end
 
 Plates.updateAll = function(self)
@@ -993,6 +989,14 @@ Plates:SetScript("OnEvent", function(self, event, ...)
 		end
 
 	elseif event == "PLAYER_ENTERING_WORLD" then
+		SetCVar('bloatthreat', 0)
+		SetCVar('bloattest', 0)
+		SetCVar('showVKeyCastbar', 1)
+		SetCVar('ShowClassColorInNameplate', 1)
+		SetCVar('nameplateMotion', 3)
+		SetCVar('nameplateShowEnemies', 1)
+		SetCVar('nameplateShowFriends', 0)
+
 		Plates.updateAll(self)
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	elseif event == "UNIT_TARGET" then
