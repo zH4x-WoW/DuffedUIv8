@@ -128,12 +128,14 @@ Stat:SetScript("OnEnter", function(self)
 		end
 	end
 
-	for i = 1, GetNumSavedWorldBosses() do
-		name, instanceID, reset = GetWorldBossInfo(i)
-		if reset then
-			GameTooltip:AddLine(" ")
-			GameTooltip:AddDoubleLine(RAID_INFO_WORLD_BOSS.."(s)")
-			GameTooltip:AddDoubleLine(name, SecondsToTime(reset), 1, 1, 1, 0.8, 0.8, 0.8)
+	if UnitLevel("player") >= 91 then
+		for i = 1, GetNumSavedWorldBosses() do
+			name, instanceID, reset = GetWorldBossInfo(i)
+			if reset then
+				GameTooltip:AddLine(" ")
+				GameTooltip:AddDoubleLine(RAID_INFO_WORLD_BOSS.."(s)")
+				GameTooltip:AddDoubleLine(name, SecondsToTime(reset), 1, 1, 1, .8, .8, .8)
+			end
 		end
 	end
 
