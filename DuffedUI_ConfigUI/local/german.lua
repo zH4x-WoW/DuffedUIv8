@@ -230,7 +230,6 @@
 	DuffedUIConfigUILocalization.miscloc = "Deaktiviere die 'Kontrollverlustanzeige' an den Aktionsleisten"
 	DuffedUIConfigUILocalization.miscacm_screen = "Aktiviere ein automatisches Bildschirmfoto beim Erreichen eines Achievements"
 	DuffedUIConfigUILocalization.miscclickcast = "Aktiviere das Click2Cast-Plugin"
-	DuffedUIConfigUILocalization.miscClick2Cast_Filter = "Aktiviere den Click2Cast Filter für das Spieler- und Zielfenster"
 	DuffedUIConfigUILocalization.miscAFKCamera = "Aktiviere die AFK Kamera"
 
 	-- duffed

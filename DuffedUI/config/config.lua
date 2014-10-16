@@ -229,7 +229,6 @@ C["misc"] = {
 	["loc"] = true,
 	["acm_screen"] = true,
 	["clickcast"] = true,
-	["Click2Cast_Filter"] = true,
 	["AFKCamera"] = true,
 }
 

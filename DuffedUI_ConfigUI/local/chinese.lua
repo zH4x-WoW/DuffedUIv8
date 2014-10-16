@@ -230,7 +230,6 @@
 	DuffedUIConfigUILocalization.miscloc = "Disable Loss of Control for actionbars"
 	DuffedUIConfigUILocalization.miscacm_screen = "Enable automatic Achievment screenshots"
 	DuffedUIConfigUILocalization.miscclickcast = "Enable Click2Cast-plugin"
-	DuffedUIConfigUILocalization.miscClick2Cast_Filter = "Enable Click2Cast-Filter"
 	DuffedUIConfigUILocalization.miscAFKCamera = "Enable AFKCamera"
 
 	-- duffed

@@ -151,11 +151,7 @@ SpellBinder.makeFramesList = function(self)
 	for frame, value in pairs(ClickCastFrames) do
 		local v
 		if frame and type(frame) == "table" then v = frame:GetName() end
-		if C["misc"].Click2Cast_Filter then
-			if v ~= "DuffedUITarget" and v ~= "DuffedUIPlayer" then DB.frames[frame] = DB.frames[frame] or true end
-		else
-			if v then DB.frames[frame] = DB.frames[frame] or true end
-		end
+		if v then DB.frames[frame] = DB.frames[frame] or true end
 	end
 end
 
@@ -305,7 +301,7 @@ SpellBinder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 SpellBinder:RegisterEvent("ZONE_CHANGED")
 SpellBinder:SetScript("OnEvent", function(self, event, ...)
 	if event == "PLAYER_LOGIN" then
-		if ClickCast == nil then D.SetPerCharVariable("ClickCast", {}) end
+		ClickCast = _G.ClickCast or {}
 		ClickCast[UnitName("player")] = _G.ClickCast[UnitName("player")] or {}
 		DB = ClickCast[UnitName("player")]
 		DB.spells = DB.spells or {}
