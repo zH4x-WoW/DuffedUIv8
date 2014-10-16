@@ -562,6 +562,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(132404), -- Shield Block
 			CreateSpellEntry(122510), -- Ultimatum
 			CreateSpellEntry(169686), -- Unyielding Strikes
+			CreateSpellEntry(13046), -- Enrage
 		},
 		procs = {
 			CreateSpellEntry(46916), -- Bloodsurge Slam (Free & Instant)
