@@ -205,7 +205,7 @@ C["auras"] = {
 	["buffnotice"] = true,
 	["warning"] = true,
 	["wrap"] = 18,
-	["Inside"] = true,
+	["Inside"] = false,
 }
 
 C["bags"] = {

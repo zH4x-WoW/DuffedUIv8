@@ -25,7 +25,7 @@ function D.StyleActionBarButton(self)
 	Count:Point("BOTTOMRIGHT", 0, 2)
 
 	HotKey:ClearAllPoints()
-	HotKey:Point("TOPRIGHT", 0, -3)
+	HotKey:Point("TOPRIGHT", 1, -3)
 
 	if Border and Border:IsShown() then
 		Border:Hide()
@@ -158,6 +158,7 @@ D.UpdateKeybind = function(self, actionButtonType)
 	Text = replace(Text, "(a%-)", "A")
 	Text = replace(Text, "(c%-)", "C")
 	Text = replace(Text, "(Mouse Button )", "M")
+	Text = replace(Text, "(Num Pad )", "N")
 	Text = replace(Text, KEY_BUTTON3, "M3")
 	Text = replace(Text, KEY_PAGEUP, "PU")
 	Text = replace(Text, KEY_PAGEDOWN, "PD")
