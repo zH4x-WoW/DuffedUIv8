@@ -163,7 +163,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	end
 
 	if UnitExists(Unit .. "target") and Unit ~= "player" then
-		local hex, R, G, B = DuffedUITooltips:GetColor(Unit)
+		local Hex, R, G, B = DuffedUITooltips:GetColor(Unit .. "target")
 
 		if (not R) and (not G) and (not B) then R, G, B = 1, 1, 1 end
 		GameTooltip:AddLine(UnitName(Unit .. "target"), R, G, B)
