@@ -109,7 +109,12 @@ D.ConstructRessources = function(name, width, height)
 	ComboPoints.Visibility:RegisterEvent("PLAYER_LOGIN")
 	ComboPoints.Visibility:SetScript("OnEvent", function()
 		local powerType, powerToken = UnitPowerType("player")
-		if powerToken == "ENERGY" then ComboPoints:Show() else ComboPoints:Hide() end
+		if powerToken == "ENERGY" then
+			ComboPoints:Show()
+			EclipseBar:Hide()
+		else
+			ComboPoints:Hide()
+		end
 	end)
 
 	if C["unitframes"].oocHide then
