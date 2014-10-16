@@ -23,6 +23,7 @@ L["move"] = {
 	["raid"] = "Move RaidUtility",
 	["rcd"] = "Move RaidCD",
 	["spell"] = "Move SpellCooldowns",
+	["xp-bar"] = "Move XP-Bar",
 }
 
 L["afk"] = {

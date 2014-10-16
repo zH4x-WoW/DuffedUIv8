@@ -24,6 +24,7 @@ if D.Client == "zhTW" then
 		["raid"] = "移動 RaidUtility",
 		["rcd"] = "移動 RaidCD",
 		["spell"] = "移動 SpellCooldowns",
+		["xp-bar"] = "移動 XP-Bar",
 	}
 
 	L["afk"] = {

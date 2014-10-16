@@ -136,11 +136,12 @@ OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 OnLogon:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	print(L["ui"]["welcome"])
-
-	-- Remove me if Blizzard fix the issue
-	local Bindings = GetCVar("synchronizeBindings")
-	if Bindings == 1 then SetCVar("synchronizeBindings", 0) end
 end)
+
+--[[ Remove me if Blizzard fix the issue ]]--
+local Bindings = GetCVar("synchronizeBindings")
+if Bindings == "1" then SetCVar("synchronizeBindings", "0") end
+--[[ Remove me if Blizzard fix the issue ]]--
 
 local function positionsetup()
 	D.SetPerCharVariable("DuffedUIDataPerChar", {})

@@ -24,6 +24,7 @@ if D.Client == "koKR" then
 		["raid"] = "이동 RaidUtility",
 		["rcd"] = "이동 RaidCD",
 		["spell"] = "이동 SpellCooldowns",
+		["xp-bar"] = "이동 XP-Bar",
 	}
 
 	L["afk"] = {

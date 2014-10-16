@@ -21,12 +21,29 @@ local function IsMaxLevel()
 	if UnitLevel("player") == MAX_PLAYER_LEVEL then return true end
 end
 
+xpMover = CreateFrame("Frame", "xpMover", UIParent)
+xpMover:SetTemplate("Transparent")
+xpMover:SetSize(barWidth, barHeight)
+xpMover:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 7, 178)
+xpMover:SetFrameLevel(6)
+xpMover:SetClampedToScreen(true)
+xpMover:SetMovable(true)
+xpMover.text = D.SetFontString(xpMover, C["media"].font, 11)
+xpMover.text:SetPoint("CENTER")
+xpMover.text:SetText(L["move"]["xp-bar"])
+xpMover:SetBackdropBorderColor(1, 0, 0, 1)
+xpMover:Hide()
+tinsert(D.AllowFrameMoving, xpMover)
+
 local backdrop = CreateFrame("Frame", "Experience_Backdrop", UIParent)
-backdrop:Size(barWidth, barHeight)
-backdrop:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 7, 178)
+--backdrop:Size(barWidth, barHeight)
+backdrop:SetAllPoints(xpMover) --"BOTTOMLEFT", UIParent, "BOTTOMLEFT", 7, 178
 backdrop:SetBackdropColor(C["general"].backdropcolor)
 backdrop:SetBackdropBorderColor(C["general"].backdropcolor)
 backdrop:CreateBackdrop()
+backdrop:SetClampedToScreen(true)
+backdrop:SetMovable(true)
+tinsert(D.AllowFrameMoving, backdrop)
 
 local xpBar = CreateFrame("StatusBar",  "Experience_xpBar", backdrop, "TextStatusBar")
 xpBar:SetWidth(barWidth)

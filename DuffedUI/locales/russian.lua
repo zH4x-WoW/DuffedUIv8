@@ -24,6 +24,7 @@ if D.Client == "ruRU" then
 		["raid"] = "Переместить RaidUtility",
 		["rcd"] = "Переместить RaidCD",
 		["spell"] = "Переместить SpellCooldowns",
+		["xp-bar"] = "Переместить Move XP-Bar",
 	}
 
 	L["afk"] = {

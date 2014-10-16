@@ -24,6 +24,7 @@ if D.Client == "deDE" then
 		["raid"] = "Bewege RaidUtility",
 		["rcd"] = "Bewege RaidCD",
 		["spell"] = "Bewege SpellCooldowns",
+		["xp-bar"] = "Bewege XP-Leiste",
 	}
 
 	L["afk"] = {

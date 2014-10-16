@@ -24,6 +24,7 @@ if D.Client == "esES" or D.Client == "esMX" then
 		["raid"] = "Move RaidUtility",
 		["rcd"] = "Move RaidCD",
 		["spell"] = "Move SpellCooldowns",
+		["xp-bar"] = "Move XP-Bar",
 	}
 
 	L["afk"] = {
