@@ -130,6 +130,8 @@ if D.Client == "itIT" then
 		["3kmr"] = "+ Mastery Rating",
 		["5sai"] = "+ Strength, Agility, Intellect",
 		["10s"] = "+ Stamina",
+		["5ms"] = "+ Multistrike",
+		["3vs"] = "+ Versatility",
 		["error"] = "ERROR",
 	}
 

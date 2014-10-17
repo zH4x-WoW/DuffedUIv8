@@ -130,6 +130,8 @@ if D.Client == "deDE" then
 		["3kmr"] = "+ Meisterschaft",
 		["5sai"] = "+ Werte",
 		["10s"] = "+ Ausdauer",
+		["5ms"] = "+ Mehrfachschlag",
+		["3vs"] = "+ Vielseitigkeit",
 		["error"] = "FEHLER",
 	}
 

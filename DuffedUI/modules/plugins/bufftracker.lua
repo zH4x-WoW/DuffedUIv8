@@ -8,23 +8,24 @@ local function SetCasterOnlyBuffs()
 		109773, -- Dark Intent
 	}
 	Spell2Buff = {
-		--24907, -- Moonkin Aura
 		49868, -- Mind Quickening
 	}
 	Spell3Buff = {
 		1126, -- Mark of the Wild
 		20217, -- Blessing of Kings
 		115921, -- Legacy of the Emperor
+		116781, -- Legacy of the White Emperor
 	}
 	Spell4Buff = {
 		469, -- Commanding Shout
 		21562, -- Power Word: Fortitude
-		109773, -- Dark Intent
 		90364, -- Qiraji Fortitude
 	}
 	Spell5Buff = {
 		19740, -- Blessing of Might
 		116956, -- Grace of Air
+		128997, -- Spirit Beast Blessing
+		155522, -- Power of the Grave
 	}
 	Spell6Buff = {
 		1459, -- Arcane Brilliance
@@ -51,16 +52,19 @@ local function SetBuffs()
 		1126, -- Mark of the Wild
 		20217, -- Blessing of Kings
 		115921, -- Legacy of the Emperor
+		116781, -- Legacy of the White Tiger
 	}
 	Spell4Buff = {
 		469, -- Commanding Shout
 		21562, -- Power Word: Fortitude
-		109773,	-- Dark Intent
 		90364, -- Qiraji Fortitude
+		166928, -- Blood Pact
 	}
 	Spell5Buff = {
 		19740, -- Blessing of Might
 		116956, -- Grace of Air
+		128997, -- Spirit Beast Blessing
+		155522, -- Power of the Grave
 	}
 	Spell6Buff = {
 		6673, -- Battle Shout
@@ -219,7 +223,6 @@ local AllBuffs = {
 		109773,						-- Dark Intent
 	},
 	["5sh"] = {
-		24907,						-- Moonkin Aura
 		49868,						-- Mind Quickening
 		135678,						-- Energizing Spores
 	},
@@ -243,12 +246,25 @@ local AllBuffs = {
 		20217,						-- Blessing of Kings
 		90363,						-- Embrace of the Shale Spider (Hunterpet)
 		115921,						-- Legacy of the Emperor
+		116781,						-- Legacy of the White Tiger
 	},
 	["10s"] = {
 		469,						-- Commanding Shout
 		21562,						-- Power Word: Fortitude
 		90364,						-- Qiraji Fortitude
+		166928,						-- Blood Pact
+	},
+	["5ms"] = {
+		113742,						-- Swiftblade's Cunning
+		166916,						-- Windflurry
+		49868,						-- Mind Quickening
 		109773,						-- Dark Intent
+	},
+	["3vs"] = {
+		167188,						-- Inspiring Presence
+		1126,						-- Mark of the Wild
+		55610,						-- Unholy Aura
+		167187,						-- Sanctity Aura
 	},
 }
 
@@ -269,6 +285,10 @@ local function LabelType(bufftype)
 		return L["bufftracker"]["5sai"]
 	elseif bufftype == "10s" then
 		return L["bufftracker"]["10s"]
+	elseif bufftype == "5ms" then
+		return L["bufftracker"]["5ms"]
+	elseif bufftype == "3vs" then
+		return L["bufftracker"]["3vs"]
 	else
 		return L["bufftracker"]["error"]
 	end
@@ -313,17 +333,9 @@ bufftrackersummary:RegisterEvent("CHARACTER_POINTS_CHANGED")
 bufftrackersummary:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 bufftrackersummary:SetScript("OnEvent", AnotherOnAuraChange)
 
---DERP BLIZZ, cant make good spell id's
-local str = "spell:%s"
-local BadTotems = {
-	[8076] = 8075,
-	[8972] = 8071,
-	[5677] = 5675,
-}
 local SetupTooltip = function(self)
 	GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", 0, 0)
 
-	if BadTotems[self.spell] then GameTooltip:SetHyperlink(format(str, BadTotems[self.spell])) else GameTooltip:SetHyperlink(format(str, self.spell)) end
 	GameTooltip:Show()
 end
 
