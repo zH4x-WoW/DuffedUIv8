@@ -57,6 +57,61 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(173322, true), -- Mark of Bleeding Hollow
 	CreateSpellEntry(159238, true), -- Shattered Bleed
 
+	--[[Remove me after Addon-Release]]--
+	-- Dungeon-, Valor- & Darkmoontrinkets
+	CreateSpellEntry(126519), -- Lessons of the Darkmaster
+	CreateSpellEntry(126236), -- Iron Protector Talisman
+	CreateSpellEntry(126606), -- Scroll of Revered Ancestors
+	CreateSpellEntry(126597), -- Lao-Chin's Liquid Courage
+	CreateSpellEntry(128987), -- Relic of Chi Ji
+	CreateSpellEntry(128984), -- Relic of Xuen - Agi
+	CreateSpellEntry(128986), -- Relic of Xuen - Str
+	CreateSpellEntry(128988), -- Relic of Niuzao
+	CreateSpellEntry(128985), -- Relic of Yu'lon
+	CreateSpellEntry(129812), -- Iron Belly Wok
+	CreateSpellEntry(138699), -- Superluminal
+
+	-- Mogu'Shan Vaults
+	CreateSpellEntry(126582), -- Lei Shin's Final Orders
+	CreateSpellEntry(126577), -- Light of the Cosmos
+	CreateSpellEntry(126534), -- Vial of the Dragon's Blood
+	CreateSpellEntry(126554), -- Bottle of Infinite Stars
+	CreateSpellEntry(126599), -- Jade Charioteer Figurine
+
+	-- Terrace of Endless Spring
+	CreateSpellEntry(126646), -- Stuff of Nightmares
+	CreateSpellEntry(126649), -- Terror in the Mists
+	CreateSpellEntry(126640), -- Spirits of the Sun
+	CreateSpellEntry(126657), -- Darkmist Vortex
+	CreateSpellEntry(126659), -- Essence of Terror
+
+	-- Throne of Thunder
+	CreateSpellEntry(138938), -- JuJu Madness
+	CreateSpellEntry(138898), -- Breath of Many Minds
+	CreateSpellEntry(139133), -- Mastermind
+	CreateSpellEntry(138864), -- Blood of Power
+	CreateSpellEntry(138759), -- Feathers of Fury
+	CreateSpellEntry(126697), -- Tremendous Fortitude
+	CreateSpellEntry(139170), -- Eye of Brutality
+	CreateSpellEntry(138856), -- Cloudburst
+	CreateSpellEntry(140380), -- Shield of Hydra Sputum
+	CreateSpellEntry(139189), -- Infinite Power
+	CreateSpellEntry(138870), -- Rampage
+	CreateSpellEntry(138756), -- Blades of Renataki
+	CreateSpellEntry(138979), -- Soul Barrier
+	CreateSpellEntry(138958), -- Spark of Zandalar
+	CreateSpellEntry(138967), -- Blessing of Zuldazar
+	CreateSpellEntry(138895), -- Frenzy
+	CreateSpellEntry(138963), -- Perfect Aim
+	CreateSpellEntry(138786), -- Wushoolay's Lightning
+	CreateSpellEntry(138702), -- Surge of Strength
+	CreateSpellEntry(139117), -- Re-Origination (Crit)
+	CreateSpellEntry(139120), -- Re-Origination (Mastery)
+	CreateSpellEntry(139121), -- Re-Origination (Haste)
+	CreateSpellEntry(138703), -- Acceleration
+	CreateSpellEntry(138960), -- Zandalari Warrior
+	--[[Remove me after Addon-Release]]--
+
 	-- Siege of Orgrimmar
 	CreateSpellEntry(146046), -- Purified Bindings of Immerseus (Expanded Mind)
 	CreateSpellEntry(146343), -- Rook's Unlucky Talisman (Avoidance)
