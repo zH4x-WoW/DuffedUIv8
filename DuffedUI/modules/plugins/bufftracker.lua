@@ -319,9 +319,13 @@ local function AnotherOnAuraChange(self, event, arg1, unit)
 end
 
 local bufftrackersummary = CreateFrame("Frame", "BuffTrackerSummary", UIParent)
-if D.Client == "deDE" then BuffTrackerSummary:Size(565, 250) else bufftrackersummary:Size(500, 250) end
+if D.Client == "deDE" then BuffTrackerSummary:Size(565, 300) else bufftrackersummary:Size(500, 300) end
 bufftrackersummary:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 bufftrackersummary:SetTemplate("Transparent")
+local close = CreateFrame("Button", "BuffTrackerSummaryCloseButton", BuffTrackerSummary, "UIPanelCloseButton")
+close:SetPoint("TOPRIGHT", BuffTrackerSummary, "TOPRIGHT")
+close:SkinCloseButton()
+close:SetScript("OnClick", function() bufftrackersummary:Hide() end)
 bufftrackersummary:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 bufftrackersummary:RegisterEvent("UNIT_INVENTORY_CHANGED")
 bufftrackersummary:RegisterEvent("UNIT_AURA")
@@ -333,9 +337,16 @@ bufftrackersummary:RegisterEvent("CHARACTER_POINTS_CHANGED")
 bufftrackersummary:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 bufftrackersummary:SetScript("OnEvent", AnotherOnAuraChange)
 
+local str = "spell:%s"
+local BadTotems = {
+	[8076] = 8075,
+	[8972] = 8071,
+	[5677] = 5675,
+}
 local SetupTooltip = function(self)
 	GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", 0, 0)
 
+	if BadTotems[self.spell] then GameTooltip:SetHyperlink(format(str, BadTotems[self.spell])) else GameTooltip:SetHyperlink(format(str, self.spell)) end
 	GameTooltip:Show()
 end
 
@@ -361,7 +372,7 @@ local function CreateBuffArea(bufftype, relativeTo, column)
 
 	local littlebutton = {}
 	for i, v in pairs(AllBuffs[bufftype]) do
-		littlebutton[i] = CreateFrame("Frame", bufftype.."mini"..i, bufftrackersummary)		
+		littlebutton[i] = CreateFrame("Frame", bufftype.."mini"..i, bufftrackersummary)
 		if i == 1 then
 			littlebutton[i]:Size(20, 20)
 			littlebutton[i]:SetPoint("BOTTOMLEFT", bigButton, "BOTTOMRIGHT", 3, 0)
@@ -395,10 +406,12 @@ CreateBuffArea("10ap", nil, 1)
 CreateBuffArea("10as", "10apFrame", nil)
 CreateBuffArea("10sp", "10asFrame", nil)
 CreateBuffArea("5sh", "10spFrame", nil)
+CreateBuffArea("5ms", "5shFrame", nil)
 CreateBuffArea("5csc", "5shFrame", 2)
 CreateBuffArea("3kmr", "5cscFrame", nil)
 CreateBuffArea("5sai", "3kmrFrame", nil)
 CreateBuffArea("10s", "5saiFrame", nil)
+CreateBuffArea("3vs", "10sFrame", nil)
 
 bufftrackersummary:Hide()
 
