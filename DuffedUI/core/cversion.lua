@@ -11,6 +11,7 @@ _G.StaticPopupDialogs["OUTDATED"] = {
 	OnShow = function(self, ...) 
 		self.editBox:SetFocus()
 		self.editBox:SetText("http://www.duffed.net/downloads")
+		self.editBox:HighlightText()
 	end,
 	EditBoxOnEnterPressed = function(self) self:GetParent():Hide() end,
 	EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
