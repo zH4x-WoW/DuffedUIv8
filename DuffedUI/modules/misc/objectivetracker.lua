@@ -257,44 +257,41 @@ local function alterAQButton()
 	end
 end
 
---function otf:WOWHead_Quest()
-	hooksecurefunc("QuestObjectiveTracker_OnOpenDropDown", function(self)
-		local _, b, i, info, questID
-		b = self.activeFrame
-		i = b.questLogIndex
-		_, _, _, _, _, _, _, questID = GetQuestLogTitle(i)
-		info = UIDropDownMenu_CreateInfo()
-		info.text = lST .. "-Link"
-		info.func = function(id)
-			local inputBox = StaticPopup_Show("WATCHFRAME_URL")
-			inputBox.editBox:SetText(lQ:format(questID))
-			inputBox.editBox:HighlightText()
-		end
-		info.arg1 = questID
-		info.noClickSound = 1
-		info.checked = false
-		UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
-	end)
---end
+--[[generating WOWHead-Link]]
+hooksecurefunc("QuestObjectiveTracker_OnOpenDropDown", function(self)
+	local _, b, i, info, questID
+	b = self.activeFrame
+	i = b.questLogIndex
+	_, _, _, _, _, _, _, questID = GetQuestLogTitle(i)
+	info = UIDropDownMenu_CreateInfo()
+	info.text = lST .. "-Link"
+	info.func = function(id)
+		local inputBox = StaticPopup_Show("WATCHFRAME_URL")
+		inputBox.editBox:SetText(lQ:format(questID))
+		inputBox.editBox:HighlightText()
+	end
+	info.arg1 = questID
+	info.noClickSound = 1
+	info.checked = false
+	UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
+end)
 
---function otf:WOWHead_Achievement()
-	hooksecurefunc("AchievementObjectiveTracker_OnOpenDropDown", function(self)
-		local _, b, i, info
-		b = self.activeFrame
-		i = b.id
-		info = UIDropDownMenu_CreateInfo()
-		info.text = lST .. "-Link"
-		info.func = function(_, i)
-			local inputBox = StaticPopup_Show("WATCHFRAME_URL")
-			inputBox.editBox:SetText(lA:format(i))
-			inputBox.editBox:HighlightText()
-		end
-		info.arg1 = i
-		info.noClickSound = 1
-		info.checked = false
-		UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
-	end)
---end
+hooksecurefunc("AchievementObjectiveTracker_OnOpenDropDown", function(self)
+	local _, b, i, info
+	b = self.activeFrame
+	i = b.id
+	info = UIDropDownMenu_CreateInfo()
+	info.text = lST .. "-Link"
+	info.func = function(_, i)
+		local inputBox = StaticPopup_Show("WATCHFRAME_URL")
+		inputBox.editBox:SetText(lA:format(i))
+		inputBox.editBox:HighlightText()
+	end
+	info.arg1 = i
+	info.noClickSound = 1
+	info.checked = false
+	UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
+end)
 
 --[[execution]]--
 local ObjFhandler = CreateFrame("Frame")
