@@ -694,8 +694,6 @@ EventFrame:SetScript("OnEvent", function(self, event, ...)
 		if ID <= 28 then
 			local Button = _G["BankFrameItem" .. ID]
 			SlotUpdate(-1, Button)
-		else
-			CloseBankFrame()
 		end
 	elseif event == "BANKFRAME_CLOSED" then
 		if _G["DuffedUI_Reagent"] and _G["DuffedUI_Reagent"]:IsShown() then
