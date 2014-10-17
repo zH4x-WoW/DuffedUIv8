@@ -498,6 +498,8 @@ local function ShowHealth(frame, ...)
 	local valueHealth = frame.healthOriginal:GetValue()
 	local d =(valueHealth / maxHealth) * 100
 
+	frame.hp:SetValue(valueHealth - 1)
+	frame.hp:SetValue(valueHealth)
 	if C["nameplate"].Percent == true then frame.hp.value:SetText(string.format("%d%%", math.floor((valueHealth / maxHealth) * 100))) end
 	if frame.hasClass == true or frame.isFriendly == true then
 		if d <= 50 and d >= 20 then
