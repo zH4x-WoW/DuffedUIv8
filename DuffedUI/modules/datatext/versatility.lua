@@ -26,16 +26,18 @@ if C["datatext"].versatility and C["datatext"].versatility > 0 then
 	Stat:RegisterEvent("UNIT_AURA")
 	Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
 	Stat:SetScript("OnEnter", function(self)
-		if not InCombatLockdown() then
-			local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)	
-			GameTooltip:SetOwner(panel, anchor, xoff, yoff)
-			GameTooltip:ClearLines()
-			GameTooltip:AddLine(STAT_VERSATILITY)
-			GameTooltip:AddLine(" ")
-			GameTooltip:AddDoubleLine(DAMAGE .. " & " .. SHOW_COMBAT_HEALING .. ":", format("%.2f%%", vDB), 1, 1, 1)
-			GameTooltip:AddDoubleLine(COMBAT_TEXT_SHOW_RESISTANCES_TEXT .. ":", format("%.2f%%", vDTR), 1, 1, 1)
-			GameTooltip:Show()
+		if not C["datatext"].ShowInCombat then
+			if InCombatLockdown() then return end
 		end
+
+		local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)	
+		GameTooltip:SetOwner(panel, anchor, xoff, yoff)
+		GameTooltip:ClearLines()
+		GameTooltip:AddLine(STAT_VERSATILITY)
+		GameTooltip:AddLine(" ")
+		GameTooltip:AddDoubleLine(DAMAGE .. " & " .. SHOW_COMBAT_HEALING .. ":", format("%.2f%%", vDB), 1, 1, 1)
+		GameTooltip:AddDoubleLine(COMBAT_TEXT_SHOW_RESISTANCES_TEXT .. ":", format("%.2f%%", vDTR), 1, 1, 1)
+		GameTooltip:Show()
 	end)
 	Stat:SetScript("OnLeave", function() GameTooltip:Hide() end)
 	Stat:SetScript("OnEvent", Update)

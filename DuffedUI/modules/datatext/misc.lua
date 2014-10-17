@@ -16,12 +16,8 @@ if C["datatext"].honor and C["datatext"].honor > 0 then
 		Text:SetText("Honor: "..D.PanelColor..amount)
 	end
 
-	-- Make sure the panel gets displayed when the player logs in
 	Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
-
-	-- Make sure the panel updates when your amount of honor changes
 	Stat:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
-
 	Stat:SetScript("OnEvent", OnEvent)
 end
 
@@ -36,15 +32,9 @@ if C["datatext"].honorablekills and C["datatext"].honorablekills > 0 then
 	Text:SetFontObject(font)
 	D.DataTextPosition(C["datatext"].honorablekills, Text)
 
-	local function OnEvent(self, event)
-		Text:SetText("Kills: "..D.PanelColor..GetPVPLifetimeStats())
-	end
+	local function OnEvent(self, event) Text:SetText("Kills: "..D.PanelColor..GetPVPLifetimeStats()) end
 
-	-- Make sure the panel gets displayed when the player logs in
 	Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
-
-	-- Make sure the panel updates when your amount of honorable kills changes
 	Stat:RegisterEvent("PLAYER_PVP_KILLS_CHANGED")
-
 	Stat:SetScript("OnEvent", OnEvent)
 end

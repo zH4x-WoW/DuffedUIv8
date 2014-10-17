@@ -163,6 +163,7 @@
 	DuffedUIConfigUILocalization.datatexttime24 = "Aktiviere 24h Zeitanzeige"
 	DuffedUIConfigUILocalization.datatextlocaltime = "Zeige die lokale Zeit, anstatt der Server Zeit"
 	DuffedUIConfigUILocalization.datatextfontsize = "Schriftgröße des Datatexts"
+	DuffedUIConfigUILocalization.datatextShowInCombat = "Zeige DataText-Tooltip im Kampf"
 
 	-- skins
 	DuffedUIConfigUILocalization.skins = "AddOn-Skins"

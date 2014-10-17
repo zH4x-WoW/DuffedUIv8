@@ -91,7 +91,10 @@ Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 Stat:SetScript("OnEvent", OnEvent)
 Stat:SetScript("OnEnter", function(self)
-	if InCombatLockdown() then return end
+	if not C["datatext"].ShowInCombat then
+		if InCombatLockdown() then return end
+	end
+
 	if ImprovedCurrency["Archaeology"] == nil then ImprovedCurrency["Archaeology"] = true end
 	if ImprovedCurrency["Cooking"] == nil then ImprovedCurrency["Cooking"] = true end
 	if ImprovedCurrency["Professions"] == nil then ImprovedCurrency["Professions"] = true end

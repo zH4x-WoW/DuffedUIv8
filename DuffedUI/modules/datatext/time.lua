@@ -53,6 +53,10 @@ local function Update(self, t)
 end
 
 Stat:SetScript("OnEnter", function(self)
+	if not C["datatext"].ShowInCombat then
+		if InCombatLockdown() then return end
+	end
+
 	local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
 	OnLoad = function(self) RequestRaidInfo() end
 	if panel == DuffedUIMinimapStatsLeft or panel == DuffedUIMinimapStatsRight then GameTooltip:SetOwner(panel, anchor, xoff, yoff) else GameTooltip:SetOwner(self, anchor, xoff, yoff) end

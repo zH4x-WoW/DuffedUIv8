@@ -12,7 +12,7 @@ if C["datatext"].talent and C["datatext"].talent > 0 then
 	local font = D.Font(C["font"].datatext)
 	local Text = Stat:CreateFontString("DuffedUIStatTalentText", "OVERLAY")
 	Text:SetFontObject(font)
-	D.DataTextPosition(C.datatext.talent, Text)
+	D.DataTextPosition(C["datatext"].talent, Text)
  
 	local function Update(self)
 		if not GetSpecialization() then

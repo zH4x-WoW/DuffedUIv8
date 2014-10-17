@@ -86,6 +86,10 @@ if C["datatext"].calltoarms and C["datatext"].calltoarms > 0 then
 	end
 
 	local function OnEnter(self)
+		if not C["datatext"].ShowInCombat then
+			if InCombatLockdown() then return end
+		end
+
 		local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
 		GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 		GameTooltip:ClearLines()

@@ -163,6 +163,7 @@ C["datatext"] = {
 
 	["time24"] = true,
 	["localtime"] = false,
+	["ShowInCombat"] = false,
 }
 
 C["skins"] = {

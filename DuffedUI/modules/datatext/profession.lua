@@ -39,7 +39,5 @@ Stat:SetScript("OnUpdate", Update)
 Stat:SetScript("OnLeave", function() GameTooltip:Hide() end)
 
 Stat:SetScript('OnMouseDown', function(self, btn)
-	if btn == 'LeftButton' then
-		ToggleSpellBook("professions")
-	end
+	if btn == 'LeftButton' then ToggleSpellBook("professions") end
 end)

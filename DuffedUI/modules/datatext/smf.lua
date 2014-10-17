@@ -86,46 +86,48 @@ if C["datatext"].smf and C["datatext"].smf > 0 then
 	end
 
 	Stat:SetScript("OnEnter", function(self)
-		if not InCombatLockdown() then
-			self.tooltip = true
-			local bandwidth = GetAvailableBandwidth()
-			local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
-			local bw_in, bw_out, latencyHome, latencyWorld = GetNetStats()
-			ms_combined = latencyHome + latencyWorld
-			if panel == DuffedUIMinimapStatsLeft or panel == DuffedUIMinimapStatsRight then
-				GameTooltip:SetOwner(panel, anchor, xoff, yoff)
-			else
-				GameTooltip:SetOwner(self, anchor, xoff, yoff)
-			end
-			GameTooltip:ClearLines()
-			local totalMemory = UpdateMemory()
-			GameTooltip:AddDoubleLine(L["dt"]["totalmemusage"], formatMem(totalMemory), 0.69, 0.31, 0.31,0.84, 0.75, 0.65)
-			GameTooltip:AddLine(" ")
-			for i = 1, #memoryTable do
-				if (memoryTable[i][4]) then
-					local red = memoryTable[i][3] / totalMemory
-					local green = 1 - red
-					GameTooltip:AddDoubleLine(memoryTable[i][2], formatMem(memoryTable[i][3]), 1, 1, 1, red, green + .5, 0)
-				end
-			end
-			GameTooltip:AddLine(" ")
-			if bandwidth ~= 0 then
-				GameTooltip:AddDoubleLine(L["dt"]["bandwidth"] , string.format(bandwidthString, bandwidth),0.69, 0.31, 0.31,0.84, 0.75, 0.65)
-				GameTooltip:AddDoubleLine(L["dt"]["download"] , string.format(percentageString, GetDownloadedPercentage() *100),0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
-				GameTooltip:AddLine(" ")
-			end
-			GameTooltip:AddDoubleLine(L["dt"]["home"], latencyHome.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
-			GameTooltip:AddDoubleLine(L["dt"]["world"], latencyWorld.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
-			GameTooltip:AddDoubleLine(L["dt"]["global"], ms_combined.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
-			GameTooltip:AddLine(" ")
-			GameTooltip:AddDoubleLine(L["dt"]["inc"], string.format( "%.4f", bw_in ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
-			GameTooltip:AddDoubleLine(L["dt"]["out"], string.format( "%.4f", bw_out ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
-
-			GameTooltip:AddLine(" ")
-			GameTooltip:AddLine(L["dt"]["systemleft"])
-			GameTooltip:AddLine(L["dt"]["systemright"])
-			GameTooltip:Show()
+		if not C["datatext"].ShowInCombat then
+			if InCombatLockdown() then return end
 		end
+
+		self.tooltip = true
+		local bandwidth = GetAvailableBandwidth()
+		local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
+		local bw_in, bw_out, latencyHome, latencyWorld = GetNetStats()
+		ms_combined = latencyHome + latencyWorld
+		if panel == DuffedUIMinimapStatsLeft or panel == DuffedUIMinimapStatsRight then
+			GameTooltip:SetOwner(panel, anchor, xoff, yoff)
+		else
+			GameTooltip:SetOwner(self, anchor, xoff, yoff)
+		end
+		GameTooltip:ClearLines()
+		local totalMemory = UpdateMemory()
+		GameTooltip:AddDoubleLine(L["dt"]["totalmemusage"], formatMem(totalMemory), 0.69, 0.31, 0.31,0.84, 0.75, 0.65)
+		GameTooltip:AddLine(" ")
+		for i = 1, #memoryTable do
+			if (memoryTable[i][4]) then
+				local red = memoryTable[i][3] / totalMemory
+				local green = 1 - red
+				GameTooltip:AddDoubleLine(memoryTable[i][2], formatMem(memoryTable[i][3]), 1, 1, 1, red, green + .5, 0)
+			end
+		end
+		GameTooltip:AddLine(" ")
+		if bandwidth ~= 0 then
+			GameTooltip:AddDoubleLine(L["dt"]["bandwidth"] , string.format(bandwidthString, bandwidth),0.69, 0.31, 0.31,0.84, 0.75, 0.65)
+			GameTooltip:AddDoubleLine(L["dt"]["download"] , string.format(percentageString, GetDownloadedPercentage() *100),0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+			GameTooltip:AddLine(" ")
+		end
+		GameTooltip:AddDoubleLine(L["dt"]["home"], latencyHome.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+		GameTooltip:AddDoubleLine(L["dt"]["world"], latencyWorld.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+		GameTooltip:AddDoubleLine(L["dt"]["global"], ms_combined.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+		GameTooltip:AddLine(" ")
+		GameTooltip:AddDoubleLine(L["dt"]["inc"], string.format( "%.4f", bw_in ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+		GameTooltip:AddDoubleLine(L["dt"]["out"], string.format( "%.4f", bw_out ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+
+		GameTooltip:AddLine(" ")
+		GameTooltip:AddLine(L["dt"]["systemleft"])
+		GameTooltip:AddLine(L["dt"]["systemright"])
+		GameTooltip:Show()
 	end)
 
 	Stat:SetScript("OnMouseDown", function(self, btn)

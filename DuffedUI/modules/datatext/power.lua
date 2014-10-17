@@ -1,9 +1,5 @@
 local D, C, L = unpack(select(2, ...)) 
 
---------------------------------------------------------------------
--- player power (attackpower or power depending on what you have more of)
---------------------------------------------------------------------
-
 if C["datatext"].power and C["datatext"].power > 0 then
 	local Stat = CreateFrame("Frame", "DuffedUIStatPower")
 	Stat:SetFrameStrata("BACKGROUND")

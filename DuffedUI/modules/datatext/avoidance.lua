@@ -59,24 +59,26 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 	Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
 	Stat:SetScript("OnEvent", Update)
 	Stat:SetScript("OnEnter", function(self)
-		if not InCombatLockdown() then
-			local anchor, yoff = D.DataTextTooltipAnchor(Text)
-			GameTooltip:SetOwner(self, anchor, 0, yoff)
-			GameTooltip:ClearAllPoints()
-			GameTooltip:SetPoint("BOTTOM", self, "TOP", 0, D.mult)
-			GameTooltip:ClearLines()
-			if targetlv > 1 then
-				GameTooltip:AddDoubleLine(L["dt"]["avoidance"] .. " (" .. L["dt"]["lvl"] .. " " .. targetlv ..")")
-			elseif targetlv == -1 then
-				GameTooltip:AddDoubleLine(L["dt"]["avoidance"] .. " (" .. BOSS .. ")")
-			else
-				GameTooltip:AddDoubleLine(L["dt"]["avoidance"] .." (" .. L["dt"]["lvl"] .. " " .. targetlv .. ")")
-			end
-			GameTooltip:AddDoubleLine(STAT_DODGE, format("%.2f", dodge) .. "%", 1, 1, 1, 1, 1, 1)
-			GameTooltip:AddDoubleLine(STAT_PARRY, format("%.2f", parry) .. "%", 1, 1, 1, 1, 1, 1)
-			GameTooltip:AddDoubleLine(STAT_DODGE, format("%.2f", block) .. "%", 1, 1, 1, 1, 1, 1)
-			GameTooltip:Show()
+		if not C["datatext"].ShowInCombat then
+			if InCombatLockdown() then return end
 		end
+
+		local anchor, yoff = D.DataTextTooltipAnchor(Text)
+		GameTooltip:SetOwner(self, anchor, 0, yoff)
+		GameTooltip:ClearAllPoints()
+		GameTooltip:SetPoint("BOTTOM", self, "TOP", 0, D.mult)
+		GameTooltip:ClearLines()
+		if targetlv > 1 then
+			GameTooltip:AddDoubleLine(L["dt"]["avoidance"] .. " (" .. L["dt"]["lvl"] .. " " .. targetlv ..")")
+		elseif targetlv == -1 then
+			GameTooltip:AddDoubleLine(L["dt"]["avoidance"] .. " (" .. BOSS .. ")")
+		else
+			GameTooltip:AddDoubleLine(L["dt"]["avoidance"] .." (" .. L["dt"]["lvl"] .. " " .. targetlv .. ")")
+		end
+		GameTooltip:AddDoubleLine(STAT_DODGE, format("%.2f", dodge) .. "%", 1, 1, 1, 1, 1, 1)
+		GameTooltip:AddDoubleLine(STAT_PARRY, format("%.2f", parry) .. "%", 1, 1, 1, 1, 1, 1)
+		GameTooltip:AddDoubleLine(STAT_DODGE, format("%.2f", block) .. "%", 1, 1, 1, 1, 1, 1)
+		GameTooltip:Show()
 	end)
 	Stat:SetScript("OnLeave", function() GameTooltip:Hide() end)
 end

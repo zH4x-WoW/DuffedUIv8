@@ -272,7 +272,8 @@ hooksecurefunc("QuestObjectiveTracker_OnOpenDropDown", function(self)
 	end
 	info.arg1 = questID
 	info.noClickSound = 1
-	info.checked = false
+	info.isNotRadio = true
+	info.notCheckable = 1
 	UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
 end)
 
@@ -289,7 +290,8 @@ hooksecurefunc("AchievementObjectiveTracker_OnOpenDropDown", function(self)
 	end
 	info.arg1 = i
 	info.noClickSound = 1
-	info.checked = false
+	info.isNotRadio = true
+	info.notCheckable = 1
 	UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
 end)
 
