@@ -4,7 +4,7 @@ if D.Client == "zhTW" then
 	L["move"] = {
 		["tooltip"] = "移動 Tooltip",
 		["minimap"] = "移動 Minimap",
-		["watchframe"] = "移動 Quests",
+		["watchframe"] = "Shift + Click to 移動 Quests",
 		["gmframe"] = "移動 Ticket",
 		["buffs"] = "移動 Player Buffs",
 		["debuffs"] = "移動 Player Debuffs",

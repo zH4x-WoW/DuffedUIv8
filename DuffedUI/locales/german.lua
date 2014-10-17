@@ -4,7 +4,7 @@ if D.Client == "deDE" then
 	L["move"] = {
 		["tooltip"] = "Bewege Tooltip",
 		["minimap"] = "Bewege Minimap",
-		["watchframe"] = "Bewege Quests",
+		["watchframe"] = "Shift + Click um die Quests zu bewegen",
 		["gmframe"] = "Bewege Tickets",
 		["buffs"] = "Bewege Stärkungszauber (Spieler)",
 		["debuffs"] = "Bewege Schwächungszauber (Spieler)",

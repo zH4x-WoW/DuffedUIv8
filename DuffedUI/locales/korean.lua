@@ -4,7 +4,7 @@ if D.Client == "koKR" then
 	L["move"] = {
 		["tooltip"] = "이동 Tooltip",
 		["minimap"] = "이동 Minimap",
-		["watchframe"] = "이동 Quests",
+		["watchframe"] = "Shift + Click to 이동 Quests",
 		["gmframe"] = "이동 Ticket",
 		["buffs"] = "이동 Player Buffs",
 		["debuffs"] = "이동 Player Debuffs",

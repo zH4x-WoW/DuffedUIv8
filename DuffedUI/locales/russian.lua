@@ -4,7 +4,7 @@ if D.Client == "ruRU" then
 	L["move"] = {
 		["tooltip"] = "Переместить Tooltip",
 		["minimap"] = "Переместить Minimap",
-		["watchframe"] = "Переместить Quests",
+		["watchframe"] = "Shift + Click to Переместить Quests",
 		["gmframe"] = "Переместить Ticket",
 		["buffs"] = "Переместить Player Buffs",
 		["debuffs"] = "Переместить Player Debuffs",

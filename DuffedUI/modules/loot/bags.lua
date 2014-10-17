@@ -594,7 +594,7 @@ end
 
 function Options()
 	SetSortBagsRightToLeft(false)
-	SetInsertItemsLeftToRight(true)
+	SetInsertItemsLeftToRight(false)
 	InterfaceOptionsControlsPanelReverseCleanUpBags:Hide()
 	InterfaceOptionsControlsPanelReverseNewLoot:Hide()
 end

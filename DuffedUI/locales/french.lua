@@ -4,7 +4,7 @@ if D.Client == "frFR" then
 	L["move"] = {
 		["tooltip"] = "Move Tooltip",
 		["minimap"] = "Move Minimap",
-		["watchframe"] = "Move Quests",
+		["watchframe"] = "Shift + Click to Move Quests",
 		["gmframe"] = "Move Ticket",
 		["buffs"] = "Move Player Buffs",
 		["debuffs"] = "Move Player Debuffs",
