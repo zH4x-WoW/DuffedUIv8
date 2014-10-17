@@ -91,6 +91,7 @@
 	DuffedUIConfigUILocalization.nameplatethreat_goodcolor = "Wähle Farbe für 'Gute' Bedrohungs-Anzeige, variiert je nach Rolle"
 	DuffedUIConfigUILocalization.nameplatethreat_transitioncolor = "Wähle Farbe für Verlust/Gewinn der Bedrohung"
 	DuffedUIConfigUILocalization.nameplatePercent = "Aktiviere Prozentanzeige an Namensplaketten"
+	DuffedUIConfigUILocalization.nameplatecombat = "Verstecke Namensplaketten ausserhalb des Kampfes"
 
 	-- action bar
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"

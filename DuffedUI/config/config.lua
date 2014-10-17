@@ -80,10 +80,7 @@ C["nameplate"] = {
 	["active"] = true,
 	["auraswidth"] = 20,
 	["aurasheight"] = 15,
-	["CastHeight"] = 5,
-	["ComboPoints"] = true,
 	["debuffs"] = true,
-	["MaxDebuffs"] = 5,
 	["platewidth"] = 110,
 	["plateheight"] = 7,
 	["threat"] = false,
@@ -91,6 +88,7 @@ C["nameplate"] = {
 	["threat_badcolor"] = {.78, .25, .25},
 	["threat_transitioncolor"] = {.86, .77, .36},
 	["Percent"] = false,
+	["combat"] = false,
 }
 
 C["actionbar"] = {
