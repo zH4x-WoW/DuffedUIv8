@@ -592,6 +592,13 @@ function UpdateAllBankBags()
 	_G["DuffedUI_Bank"]:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)
 end
 
+function Options()
+	SetSortBagsRightToLeft(false)
+	SetInsertItemsLeftToRight(true)
+	InterfaceOptionsControlsPanelReverseCleanUpBags:Hide()
+	InterfaceOptionsControlsPanelReverseNewLoot:Hide()
+end
+
 ContainerFrame1Item1:SetScript("OnHide", function()
 	_G["DuffedUI_Bag"]:Hide()
 	if _G["DuffedUI_Reagent"] and _G["DuffedUI_Reagent"]:IsShown() then
@@ -609,6 +616,7 @@ if C["chat"].lbackground then CreateContainer("Bank", "BOTTOMLEFT", DuffedUIChat
 HideBlizzard()
 SetBagsSearchPosition()
 SkinEditBoxes()
+Options()
 
 function OpenBag(id, IsBank)
 	if (not CanOpenPanels()) then
