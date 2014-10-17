@@ -1,14 +1,9 @@
 local D, C, L = unpack(select(2, ...))
 
---[[
-	Modified Objective Tracker from ObbleYeah 
-	All Credits goes to him
-]]--
-
+--[[Modified Objective Tracker from ObbleYeah - All Credits goes to him]]--
 local otfheight = 450
 local otfwidth = 188
 local titlesize = 13
-local r, g, b = 103/255, 103/255, 103/255
 local otf = ObjectiveTrackerFrame
 local lST = "Wowhead"
 local lQ = "http://www.wowhead.com/quest=%d"
@@ -20,7 +15,7 @@ _G.StaticPopupDialogs["WATCHFRAME_URL"] = {
 	timeout = 0,
 	whileDead = true,
 	hasEditBox = true,
-	editBoxWidth = 350,
+	editBoxWidth = 325,
 	OnShow = function(self, ...) self.editBox:SetFocus() end,
 	EditBoxOnEnterPressed = function(self) self:GetParent():Hide() end,
 	EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
@@ -38,8 +33,8 @@ otf:SetHeight(otfheight)
 otf:SetWidth(otfwidth)
 
 local otfmove = CreateFrame("FRAME", nil, otf)  
-otfmove:SetHeight(16)
-otfmove:SetPoint("TOPLEFT", otf, 110, 0)
+otfmove:SetHeight(21)
+otfmove:SetPoint("TOPLEFT", otf, -11, -1)
 otfmove:SetPoint("TOPRIGHT", otf)
 otfmove:EnableMouse(true)
 otfmove:RegisterForDrag("LeftButton")
@@ -47,7 +42,7 @@ otfmove:SetHitRectInsets(-5, -5, -5, -5)
 
 local function OTFM_Tooltip(self)
 	GameTooltip:SetOwner(self, "ANCHOR_TOP")
-	GameTooltip:AddLine(L["move"]["watchframe"], 0, 1, .5)
+	GameTooltip:AddLine(L["move"]["watchframe"], 1, 1, 1)
 	GameTooltip:Show()
 end
 
@@ -65,6 +60,7 @@ end)
 
 otfmove:SetScript("OnEnter", function(s) OTFM_Tooltip(s) end)
 otfmove:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
+otf.HeaderMenu.MinimizeButton:SkinCloseButton()
 
 --[[collapse the watchframe if in a bossfight, arena of world state capture bar is showing https://github.com/haste/oWatchFrameToggler/blob/master/auto.lua]]--
 local otfboss = CreateFrame("Frame", nil)
@@ -76,7 +72,7 @@ otfboss:RegisterEvent("UPDATE_WORLD_STATES")
 
 local function bossexists()
 	for i = 1, MAX_BOSS_FRAMES do
-		if UnitExists("boss"..i) then return true end
+		if UnitExists("boss" .. i) then return true end
 	end
 end
 
@@ -87,13 +83,13 @@ otfboss:SetScript("OnEvent", function(self, event)
 
 	if bossexists() then
 		if not otf.collapsed then ObjectiveTracker_Collapse() end
-	elseif instanceType=="arena" or instanceType=="pvp" then
+	elseif instanceType == "arena" or instanceType == "pvp" then
 		if not otf.collapsed then ObjectiveTracker_Collapse() end
 	elseif bar and bar:IsVisible() then
 		if not otf.collapsed then ObjectiveTracker_Collapse() end
 	elseif otf.collapsed and instanceType == "raid" and not InCombatLockdown() then
 		ObjectiveTracker_Expand()
-	elseif otf.collapsed and mapcheck=="Ashran" and not InCombatLockdown() then
+	elseif otf.collapsed and mapcheck == "Ashran" and not InCombatLockdown() then
 		ObjectiveTracker_Expand()
 	end
 end)
@@ -154,7 +150,7 @@ if IsAddOnLoaded("Blizzard_ObjectiveTracker") then
 				otf.MODULES[i].Header.Text:SetFont(STANDARD_TEXT_FONT, 15)
 				otf.MODULES[i].Header.Text:ClearAllPoints()
 				otf.MODULES[i].Header.Text:SetPoint("RIGHT", otf.MODULES[i].Header, -62, 0)
-				otf.MODULES[i].Header.Text:SetJustifyH("RIGHT")
+				otf.MODULES[i].Header.Text:SetJustifyH("LEFT")
 			end
 		end
 	end)
@@ -182,17 +178,10 @@ local function SkinScenarioButtons()
 	local _, currentStage, numStages, flags = C_Scenario.GetInfo()
 	local inChallengeMode = C_Scenario.IsChallengeMode()
 
-	-- we have to independently resize the artwork
-	-- because we're messing with the tracker width >_>
-	-- pop-up artwork
 	block.NormalBG:SetSize(otfwidth + 21, 75)
-
-	-- pop-up final artwork
 	block.FinalBG:ClearAllPoints()
 	block.FinalBG:SetPoint("TOPLEFT", block.NormalBG, 6, -6)
 	block.FinalBG:SetPoint("BOTTOMRIGHT", block.NormalBG, -6, 6)
-
-	-- pop-up glo
 	block.GlowTexture:SetSize(otfwidth + 20, 75)
 end
 
