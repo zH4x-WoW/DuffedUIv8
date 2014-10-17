@@ -212,6 +212,23 @@ function DuffedUITooltips:SetColor()
 	end
 end
 
+function DuffedUITooltips:OnUpdate(elapsed)
+	local Owner = self:GetOwner()
+	if (not Owner) then return end
+
+	local Red, Green, Blue = self:GetBackdropColor()
+	local Owner = self:GetOwner():GetName()
+	local Anchor = self:GetAnchorType()
+
+	if (Owner == "UIParent" and Anchor == "ANCHOR_CURSOR") and (Red ~= BackdropColor[1] or Green ~= BackdropColor[2] or Blue ~= BackdropColor[3]) then
+		BackdropColor[1] = Red
+		BackdropColor[2] = Green
+		BackdropColor[3] = Blue
+		self:SetBackdropColor(unpack(C["general"].backdropcolor))
+		self:SetBackdropBorderColor(unpack(C["General"].bordercolor))
+	end
+end
+
 function DuffedUITooltips:Skin()
 	if not self.IsSkinned then
 		self:SetTemplate("Transparent")

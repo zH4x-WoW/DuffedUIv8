@@ -24,7 +24,7 @@ local function Shared(self, unit)
 	local health = CreateFrame("StatusBar", nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	if unit:find("partypet") then health:Height(18) else health:Height(30 * D.raidscale) end
+	if unit:find("partypet") then health:Height(18) else health:Height(C["raid"].frameheight - 15) end
 	health:SetStatusBarTexture(normTex)
 	health:CreateBackdrop()
 	self.Health = health
@@ -249,12 +249,12 @@ oUF:Factory(function(self)
 			self:SetWidth(header:GetAttribute("initial-width"))
 			self:SetHeight(header:GetAttribute("initial-height"))
 		]],
-		"initial-width", D.Scale(C["raid"].framewidth * D.raidscale),
-		"initial-height", D.Scale(C["raid"].frameheight * D.raidscale),
+		"initial-width", D.Scale(C["raid"].framewidth),
+		"initial-height", D.Scale(C["raid"].frameheight),
 		"showPlayer", C["raid"].showplayerinparty,
 		"showParty", true,
 		"showRaid", true, 
-		--"showSolo", true,
+		"showSolo", false,
 		"xoffset", D.Scale(8),
 		"yOffset", D.Scale(1),
 		"groupFilter", "1,2,3,4,5,6,7,8",
