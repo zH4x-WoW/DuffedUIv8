@@ -15,6 +15,8 @@ if D.Client == "ruRU" then
 		["extrabutton"] = "Extra Button",
 		["bar1"] = "Переместить Bar 1",
 		["bar2"] = "Переместить Bar 2",
+		["bar3"] = "Переместить Bar 3",
+		["bar4"] = "Переместить Bar 4",
 		["bar5"] = "Переместить Bar 5",
 		["bar5_1"] = "Переместить\nBar 5",
 		["pet"] = "Переместить\nPet",
@@ -24,7 +26,7 @@ if D.Client == "ruRU" then
 		["raid"] = "Переместить RaidUtility",
 		["rcd"] = "Переместить RaidCD",
 		["spell"] = "Переместить SpellCooldowns",
-		["xp-bar"] = "Переместить Move XP-Bar",
+		["xp-bar"] = "Переместить XP-Bar",
 	}
 
 	L["afk"] = {

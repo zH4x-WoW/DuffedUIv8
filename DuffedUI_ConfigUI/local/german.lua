@@ -108,7 +108,10 @@
 	DuffedUIConfigUILocalization.actionbarshapeshiftmouseover = "Aktiviere die Haltungsleiste per 'mouseover'"
 	DuffedUIConfigUILocalization.actionbarborderhighlight = "Aktiviere die Proc-Hervorhebung auf den Aktionsleisten (Standard = Deaktiviert)"
 	DuffedUIConfigUILocalization.actionbarpetbuttonsize = "Größe der Begleiter- und Haltungsleistenschaltflächen"
-	DuffedUIConfigUILocalization.actionbarsidebars = "Aktiviere die Sidebars an den Chatframes per 'mouseover'"
+	DuffedUIConfigUILocalization.actionbarLeftsidebars = "Aktiviere die linke Sidebar an den Chatframes per 'mouseover'"
+	DuffedUIConfigUILocalization.actionbarRightsidebars = "Aktiviere die rechte Sidebar an den Chatframes per 'mouseover'"
+	DuffedUIConfigUILocalization.actionbarLeftsidebarshorizontal = "Setze die linke Sidebar auf 'horizontal'"
+	DuffedUIConfigUILocalization.actionbarRightsidebarshorizontal = "Setze die rechte Sidebar auf 'horizontal'"
 
 	-- raid frames
 	DuffedUIConfigUILocalization.raid = "Schlachtzugfenster"

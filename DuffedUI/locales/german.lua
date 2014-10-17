@@ -15,6 +15,8 @@ if D.Client == "deDE" then
 		["extrabutton"] = "Bewege Extrabutton",
 		["bar1"] = "Bewege Leiste 1",
 		["bar2"] = "Bewege Leiste 2",
+		["bar3"] = "Bewege Leiste 3",
+		["bar4"] = "Bewege Leiste 4",
 		["bar5"] = "Bewege Leiste 5",
 		["bar5_1"] = "Bewege\nLeiste 5",
 		["pet"] = "Bewege\nBegleiterleiste",

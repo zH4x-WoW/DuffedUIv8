@@ -7,22 +7,26 @@ MultiBarBottomRight:SetParent(bar)
 for i = 1, 12 do
 	local b = _G["MultiBarBottomRightButton" .. i]
 	local b2 = _G["MultiBarBottomRightButton" .. i - 1]
-	b:SetSize((D.buttonsize - 4), (D.buttonsize - 4))
+	if C["actionbar"].Leftsidebarshorizontal then b:SetSize(D.buttonsize, D.buttonsize) else b:SetSize((D.buttonsize - 4), (D.buttonsize - 4)) end
 	b:ClearAllPoints()
 	b:SetFrameStrata("BACKGROUND")
 	b:SetFrameLevel(15)
 
-	if i == 1 then
-		b:SetPoint("TOPLEFT", bar, D.buttonspacing, -D.buttonspacing)
-	elseif i == 7 then
-		b:SetPoint("TOPRIGHT", bar, -D.buttonspacing, -D.buttonspacing)
+	if C["actionbar"].Leftsidebarshorizontal then
+		if i == 1 then b:SetPoint("BOTTOMLEFT", bar, D.buttonspacing, D.buttonspacing) else b:SetPoint("LEFT", b2, "RIGHT", D.buttonspacing, 0) end
 	else
-		b:SetPoint("TOP", b2, "BOTTOM", 0, -D.buttonspacing)
+		if i == 1 then
+			b:SetPoint("TOPLEFT", bar, D.buttonspacing, -D.buttonspacing)
+		elseif i == 7 then
+			b:SetPoint("TOPRIGHT", bar, -D.buttonspacing, -D.buttonspacing)
+		else
+			b:SetPoint("TOP", b2, "BOTTOM", 0, -D.buttonspacing)
+		end
 	end
 end
 RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
 
-if C["actionbar"].sidebars then
+if C["actionbar"].Leftsidebars then
 	function LeftSideBar(alpha)
 		DuffedUIBar3:SetAlpha(alpha)
 		MultiBarBottomRight:SetAlpha(alpha)

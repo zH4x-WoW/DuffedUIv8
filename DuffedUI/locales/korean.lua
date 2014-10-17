@@ -15,6 +15,8 @@ if D.Client == "koKR" then
 		["extrabutton"] = "Extra Button",
 		["bar1"] = "이동 Bar 1",
 		["bar2"] = "이동 Bar 2",
+		["bar3"] = "이동 Bar 3",
+		["bar4"] = "이동 Bar 4",
 		["bar5"] = "이동 Bar 5",
 		["bar5_1"] = "이동\nBar 5",
 		["pet"] = "이동\nPet",

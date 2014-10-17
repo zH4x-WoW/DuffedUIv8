@@ -15,6 +15,8 @@ if D.Client == "zhCN" then
 		["extrabutton"] = "Extra Button",
 		["bar1"] = "移動 Bar 1",
 		["bar2"] = "移動 Bar 2",
+		["bar3"] = "移動 Bar 3",
+		["bar4"] = "移動 Bar 4",
 		["bar5"] = "移動 Bar 5",
 		["bar5_1"] = "移動\nBar 5",
 		["pet"] = "移動\nPet",

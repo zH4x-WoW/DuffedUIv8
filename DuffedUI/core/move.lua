@@ -20,6 +20,32 @@ local function exec(self, enable)
 		end
 	end
 
+	if self == DuffedUIBar3 then
+		if enable then
+			MultiBarBottomRight:Hide()
+			self.text = D.SetFontString(DuffedUIBar3, C["media"].font, 11)
+			self.text:SetPoint("CENTER")
+			self.text:SetText(L["move"]["bar3"])
+			self:SetBackdropBorderColor(1, 0, 0, 1)
+		else 
+			MultiBarBottomRight:Show()
+			self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+		end
+	end
+
+	if self == DuffedUIBar4 then
+		if enable then
+			MultiBarLeft:Hide()
+			self.text = D.SetFontString(DuffedUIBar4, C["media"].font, 11)
+			self.text:SetPoint("CENTER")
+			self.text:SetText(L["move"]["bar4"])
+			self:SetBackdropBorderColor(1, 0, 0, 1)
+		else 
+			MultiBarLeft:Show()
+			self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+		end
+	end
+
 	if self == DuffedUIBar5 then
 		if enable then 
 			MultiBarRight:Hide()
@@ -71,7 +97,7 @@ local function exec(self, enable)
 		end
 	end
 
-	if self == DuffedUITooltipAnchor or self == DuffedUIRollAnchor or self == DuffedUIAchievementHolder or self == DuffedUIVehicleAnchor or self == DuffedUIWatchFrameAnchor or self == DuffedUIExtraActionBarFrameHolder then
+	if self == DuffedUITooltipAnchor or self == DuffedUIRollAnchor or self == DuffedUIAchievementHolder or self == DuffedUIVehicleAnchor or self == DuffedUIExtraActionBarFrameHolder then
 		if enable then self:SetAlpha(1) else self:SetAlpha(0) end
 	end
 

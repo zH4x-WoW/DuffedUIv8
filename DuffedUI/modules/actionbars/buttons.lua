@@ -80,7 +80,7 @@ DuffedUIBar3Button:SetScript("OnClick", function(self, btn)
 	if btn == "RightButton" then
 		if DuffedUIInfoLeftBattleGround and UnitInBattleground("player") then ToggleFrame(DuffedUIInfoLeftBattleGround) end
 	else
-		UpdateBar(self, DuffedUIBar3)
+		if not C["actionbar"].Leftsidebars then UpdateBar(self, DuffedUIBar3) end
 	end
 end)
 DuffedUIBar3Button:Size(DuffedUIInfoLeft:GetHeight())
@@ -94,7 +94,7 @@ local DuffedUIBar4Button = CreateFrame("Button", "DuffedUIBar4Button", UIParent)
 DuffedUIBar4Button:SetTemplate("Default")
 DuffedUIBar4Button:RegisterForClicks("AnyUp")
 DuffedUIBar4Button.text = D.SetFontString(DuffedUIBar4Button, C["media"].font, 11, "THINOUTLINE")
-DuffedUIBar4Button:SetScript("OnClick", function(self, btn) UpdateBar(self, DuffedUIBar4) end)
+if not C["actionbar"].Rightsidebars then DuffedUIBar4Button:SetScript("OnClick", function(self, btn) UpdateBar(self, DuffedUIBar4) end) end
 DuffedUIBar4Button:Size(DuffedUIInfoLeft:GetHeight())
 DuffedUIBar4Button:Point("RIGHT", DuffedUIInfoRight, "LEFT", -2, 0)
 DuffedUIBar4Button.text:Point("CENTER", 2, -1)
@@ -109,7 +109,9 @@ DuffedUIBar5Button:Point("RIGHT", UIParent, "RIGHT", 1, -14)
 DuffedUIBar5Button:SetTemplate("Default")
 DuffedUIBar5Button:RegisterForClicks("AnyUp")
 DuffedUIBar5Button:SetAlpha(0)
-DuffedUIBar5Button:SetScript("OnClick", function(self, btn) UpdateBar(self, DuffedUIBar5) end)
+if not C["actionbar"].rightbarvertical then
+	DuffedUIBar5Button:SetScript("OnClick", function(self, btn) UpdateBar(self, DuffedUIBar5) end)
+end
 if C["actionbar"].rightbarsmouseover == true then
 	DuffedUIBar5Button:SetScript("OnEnter", function(self) DuffedUIRightBarsMouseover(1) end)
 	DuffedUIBar5Button:SetScript("OnLeave", function(self) DuffedUIRightBarsMouseover(0) end)

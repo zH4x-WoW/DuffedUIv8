@@ -15,6 +15,8 @@ if D.Client == "frFR" then
 		["extrabutton"] = "Extra Button",
 		["bar1"] = "Move Bar 1",
 		["bar2"] = "Move Bar 2",
+		["bar3"] = "Move Bar 3",
+		["bar4"] = "Move Bar 4",
 		["bar5"] = "Move Bar 5",
 		["bar5_1"] = "Move\nBar 5",
 		["pet"] = "Move\nPet",

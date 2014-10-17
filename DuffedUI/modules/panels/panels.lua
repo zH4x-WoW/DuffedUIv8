@@ -78,16 +78,30 @@ if not C["actionbar"].enable ~= true then
 	local DuffedUIBar3 = CreateFrame("Frame", "DuffedUIBar3", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar3:SetTemplate("Transparent")
 	DuffedUIBar3:Point("BOTTOMLEFT", DuffedUIInfoLeft, "BOTTOMRIGHT", 23, 0)
-	DuffedUIBar3:SetSize(((D.buttonsize - 4) * 2) + (D.buttonspacing * 3), ((D.buttonsize - 4) * 6) + (D.buttonspacing * 7))
+	if C["actionbar"].Leftsidebarshorizontal then
+		DuffedUIBar3:SetSize((D.buttonsize * 12) + (D.buttonspacing * 13), (D.buttonsize * 1) + (D.buttonspacing * 2))
+	else
+		DuffedUIBar3:SetSize(((D.buttonsize - 4) * 2) + (D.buttonspacing * 3), ((D.buttonsize - 4) * 6) + (D.buttonspacing * 7))
+	end
 	DuffedUIBar3:SetFrameStrata("BACKGROUND")
 	DuffedUIBar3:SetFrameLevel(3)
+	DuffedUIBar3:SetClampedToScreen(true)
+	DuffedUIBar3:SetMovable(true)
+	tinsert(D.AllowFrameMoving, DuffedUIBar3)
 
 	local DuffedUIBar4 = CreateFrame("Frame", "DuffedUIBar4", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar4:SetTemplate("Transparent")
 	DuffedUIBar4:Point("BOTTOMRIGHT", DuffedUIInfoRight, "BOTTOMLEFT", -23, 0)
-	DuffedUIBar4:SetSize(((D.buttonsize - 4) * 2) + (D.buttonspacing * 3), ((D.buttonsize - 4) * 6) + (D.buttonspacing * 7))
+	if C["actionbar"].Rightsidebarshorizontal then
+		DuffedUIBar4:SetSize((D.buttonsize * 12) + (D.buttonspacing * 13), (D.buttonsize * 1) + (D.buttonspacing * 2))
+	else
+		DuffedUIBar4:SetSize(((D.buttonsize - 4) * 2) + (D.buttonspacing * 3), ((D.buttonsize - 4) * 6) + (D.buttonspacing * 7))
+	end
 	DuffedUIBar4:SetFrameStrata("BACKGROUND")
 	DuffedUIBar4:SetFrameLevel(3)
+	DuffedUIBar4:SetClampedToScreen(true)
+	DuffedUIBar4:SetMovable(true)
+	tinsert(D.AllowFrameMoving, DuffedUIBar4)
 
 	local DuffedUIBar5 = CreateFrame("Frame", "DuffedUIBar5", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar5:SetTemplate("Transparent")

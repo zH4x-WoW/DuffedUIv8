@@ -108,7 +108,10 @@ C["actionbar"] = {
 	["shapeshiftborder"] = true,
 	["shapeshiftmouseover"] = false,
 	["borderhighlight"] = false,
-	["sidebars"] = false,
+	["Leftsidebars"] = false,
+	["Leftsidebarshorizontal"] = false,
+	["Rightsidebars"] = false,
+	["Rightsidebarshorizontal"] = false,
 }
 
 C["raid"] = {

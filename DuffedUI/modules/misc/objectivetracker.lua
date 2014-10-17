@@ -47,7 +47,7 @@ local function OTFM_Tooltip(self)
 end
 
 otfmove:SetScript("OnDragStart", function(self, button)
-	if IsModifiedClick() and button=="LeftButton" then
+	if IsModifiedClick() and button == "LeftButton" then
 		local f = self:GetParent()
 		f:StartMoving()
 	end
