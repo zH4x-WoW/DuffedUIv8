@@ -260,7 +260,6 @@ end
 
 local function UpdateObjects(frame)
 	local frame = frame:GetParent()
-
 	local r, g, b = frame.hp:GetStatusBarColor()
 
 	frame.hp:ClearAllPoints()
@@ -278,8 +277,11 @@ local function UpdateObjects(frame)
 	SetVirtualBorder(frame.hp, unpack(C["media"].bordercolor))
 
 	frame.hp.name:SetText(frame.hp.oldname:GetText())
+	while frame.hp:GetEffectiveScale() < 1 do frame.hp:SetScale(frame.hp:GetScale() + .01) end
 
 	local level, elite, mylevel = tonumber(frame.hp.oldlevel:GetText()), frame.hp.elite:IsShown(), UnitLevel("player")
+	frame.hp.level:ClearAllPoints()
+	if not C["nameplate"].Percent then frame.hp.level:SetPoint("LEFT", frame.hp, "RIGHT", 2, 0) else frame.hp.level:SetPoint("LEFT", frame.hp, "RIGHT", 2, 10) end
 	frame.hp.level:SetTextColor(frame.hp.oldlevel:GetTextColor())
 	if frame.hp.boss:IsShown() then
 		frame.hp.level:SetText("??")
@@ -291,8 +293,6 @@ local function UpdateObjects(frame)
 		frame.hp.level:SetText(level .. (elite and "+" or ""))
 		frame.hp.level:Show()
 	end
-
-	while frame.hp:GetEffectiveScale() < 1 do frame.hp:SetScale(frame.hp:GetScale() + .01) end
 
 	frame.overlay:ClearAllPoints()
 	frame.overlay:SetAllPoints(frame.hp)
@@ -325,6 +325,15 @@ local function SkinObjects(frame, nameFrame)
 	hp:SetStatusBarTexture(C["media"].normTex)
 	CreateVirtualFrame(hp)
 
+	hp.level = hp:CreateFontString(nil, "OVERLAY")
+	hp.level:SetFont(C["media"].font, 9, "THINOUTLINE")
+	hp.level:SetShadowColor(0, 0, 0, 1)
+	hp.level:SetTextColor(1, 1, 1)
+	hp.level:SetShadowOffset(D.mult, -D.mult)
+	hp.oldlevel = oldlevel
+	hp.boss = bossicon
+	hp.elite = elite
+
 	if C["nameplate"].Percent == true then
 		hp.value = hp:CreateFontString(nil, "OVERLAY")
 		hp.value:SetFont(C["media"].font, 9, "THINOUTLINE")
@@ -336,22 +345,12 @@ local function SkinObjects(frame, nameFrame)
 	end
 
 	hp.name = hp:CreateFontString(nil, "OVERLAY")
-	hp.name:SetPoint("BOTTOM", hp, "TOP", 0, 5)
-	hp.name:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
+	hp.name:SetPoint("BOTTOMLEFT", hp, "TOPLEFT", -10, 5)
+	hp.name:SetPoint("BOTTOMRIGHT", hp, "TOPRIGHT", 10, 5)
 	hp.name:SetFont(C["media"].font, 9, "THINOUTLINE")
 	hp.name:SetShadowColor(0, 0, 0, 0.4)
 	hp.name:SetShadowOffset(D.mult, -D.mult)
 	hp.oldname = oldname
-
-	hp.level = hp:CreateFontString(nil, "OVERLAY")
-	hp.level:SetPoint("LEFT", hp.name, -13, 0)
-	hp.level:SetFont(C["media"].font, 9, "THINOUTLINE")
-	hp.level:SetShadowColor(0, 0, 0, 1)
-	hp.level:SetTextColor(1, 1, 1)
-	hp.level:SetShadowOffset(D.mult, -D.mult)
-	hp.oldlevel = oldlevel
-	hp.boss = bossicon
-	hp.elite = elite
 
 	hp.hpbg = hp:CreateTexture(nil, "BORDER")
 	hp.hpbg:SetAllPoints(hp)
