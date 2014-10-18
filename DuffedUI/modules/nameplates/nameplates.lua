@@ -280,6 +280,7 @@ local function UpdateObjects(frame)
 	while frame.hp:GetEffectiveScale() < 1 do frame.hp:SetScale(frame.hp:GetScale() + .01) end
 
 	local level, elite, mylevel = tonumber(frame.hp.oldlevel:GetText()), frame.hp.elite:IsShown(), UnitLevel("player")
+	if frame.hp.elite:IsShown() then frame.hp.elite:Hide() end
 	frame.hp.level:ClearAllPoints()
 	if not C["nameplate"].Percent then frame.hp.level:SetPoint("LEFT", frame.hp, "RIGHT", 2, 0) else frame.hp.level:SetPoint("LEFT", frame.hp, "RIGHT", 2, 10) end
 	frame.hp.level:SetTextColor(frame.hp.oldlevel:GetTextColor())
@@ -345,8 +346,8 @@ local function SkinObjects(frame, nameFrame)
 	end
 
 	hp.name = hp:CreateFontString(nil, "OVERLAY")
-	hp.name:SetPoint("BOTTOMLEFT", hp, "TOPLEFT", -10, 5)
-	hp.name:SetPoint("BOTTOMRIGHT", hp, "TOPRIGHT", 10, 5)
+	hp.name:SetPoint("BOTTOM", hp, "TOP", 0, 5)
+	hp.name:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
 	hp.name:SetFont(C["media"].font, 9, "THINOUTLINE")
 	hp.name:SetShadowColor(0, 0, 0, 0.4)
 	hp.name:SetShadowOffset(D.mult, -D.mult)
