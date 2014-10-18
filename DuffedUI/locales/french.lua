@@ -123,20 +123,6 @@ if D.Client == "frFR" then
 		["step6line3"] = "You can now continue install the UI if it's not done yet or if you want to reset to default!",
 	}
 
-	L["bufftracker"] = {
-		["10ap"] = "+ Attack Power",
-		["10as"] = "+ Melee & Ranged Attack Speed",
-		["10sp"] = "+ Spell Power",
-		["5sh"] = "+ Spell Haste",
-		["5csc"] = "+ Critical Strike Chance",
-		["3kmr"] = "+ Mastery Rating",
-		["5sai"] = "+ Strength, Agility, Intellect",
-		["10s"] = "+ Stamina",
-		["5ms"] = "+ Multistrike",
-		["3vs"] = "+ Versatility",
-		["error"] = "ERROR",
-	}
-
 	L["binds"] = {
 		["c2c_title"] = "Mouse Bindings",
 		["combat"] = "You can't bind keys in combat",

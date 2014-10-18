@@ -2,74 +2,184 @@ local D, C, L = unpack(select(2, ...))
 if C["auras"].bufftracker ~= true then return end
 
 local function SetCasterOnlyBuffs()
-	Spell1Buff = {
-		1459, -- Arcane Brilliance
-		61316, -- Dalaran Brilliance
-		109773, -- Dark Intent
+	Spell1Buff = { --Stats
+		1126, 					-- Mark of the Wild
+		115921,					-- Legacy of the Emperor
+		116781,					-- Legacy of the White Tiger
+		20217,					-- Blessing of Kings
+		159988,					-- Bark of the Wild (Hunterpet)
+		160017,					-- Blessing of Kongs (Hunterpet)
+		90363,					-- Embrace of the Shale Spider (Hunterpet)
+		160077,					-- Strength of the Earth (Hunterpet)
 	}
-	Spell2Buff = {
-		49868, -- Mind Quickening
+	Spell2Buff = { -- Stamina
+		21562,					-- Power Word: Fortitude
+		166928,					-- Blood Pact
+		469,					-- Commanding Shout
+		50256,					-- Invigorating Roar (Hunterpet)
+		160014,					-- Sturdiness (Hunterpet)
+		160003,					-- Savage Vigor (Hunterpet)
+		90364,					-- Qiraji Fortitude (Hunterpet)
 	}
-	Spell3Buff = {
-		1126, -- Mark of the Wild
-		20217, -- Blessing of Kings
-		115921, -- Legacy of the Emperor
-		116781, -- Legacy of the White Emperor
+	Spell3Buff = { -- Attack Power
+		57330,					-- Horn of Winter
+		19506,					-- Trueshot Aura
+		6673,					-- Battle Shout
 	}
-	Spell4Buff = {
-		469, -- Commanding Shout
-		21562, -- Power Word: Fortitude
-		90364, -- Qiraji Fortitude
+	Spell4Buff = { -- Spell Power
+		1459,					-- Arcane Brilliance
+		61316,					-- Dalaran Brilliance
+		109773,					-- Dark Intent
+		128433,					-- Serpent's Cunning (Hunterpet)
+		90364,					-- Qiraji Fortitude (Hunterpet)
+		126309,					-- Still Water (Hunterpet)
 	}
-	Spell5Buff = {
-		19740, -- Blessing of Might
-		116956, -- Grace of Air
-		128997, -- Spirit Beast Blessing
-		155522, -- Power of the Grave
+	Spell5Buff = { -- Mastery
+		155522,					-- Power of the Grave
+		24907,					-- Moonkin Aura
+		19740,					-- Blessing of Might
+		116956,					-- Grace of Air
+		93435,					-- Roar of Courage (Hunterpet)
+		160039,					-- Keen Senses (Hunterpet)
+		128997,					-- Spirit Beast Blessing (Hunterpet)
+		160073,					-- Plainswalking (Hunterpet)
 	}
-	Spell6Buff = {
-		1459, -- Arcane Brilliance
-		24932, -- Leader of the Pack
-		61316, -- Dalaran Brilliance
-		116781, -- Legacy of the White Tiger
+	Spell6Buff = { -- Haste
+		55510,					-- Unholy Aura
+		49868,					-- Mind Quickening
+		113742,					-- Swiftblade's Cunning
+		116956,					-- Grace of Air
+		128432,					-- Crackling Howl (Hunterpet)
+		160003,					-- Savage Vigor (Hunterpet)
+		135678,					-- Energizing Spores (Hunterpet)
+		160074,					-- Speed of the Swarm (Hunterpet)
+	}
+	Spell7Buff = { -- Crit
+		17007,					-- Leader of the Pack
+		1459,					-- Arcane Brilliance
+		61316,					-- Dalaran Brilliance
+		116781,					-- Legacy of the White Tiger
+		90309,					-- Terrifying Roar (Hunterpet)
+		126373,					-- Fearless Roar (Hunterpet)
+		160052,					-- Strength of the Pack (Hunterpet)
+		90363,					-- Embrace of the Shale Spider (Hunterpet)
+		126309,					-- Still Water (Hunterpet)
+		24604,					-- Furious Howl (Hunterpet)
+	}
+	Spell8Buff = { -- Multistrike
+		166916,					-- Windflurry
+		49868,					-- Mind Quickening
+		113742,					-- Swiftblade's Cunning
+		109773,					-- Dark Intent
+		50519,					-- Sonic Focus (Hunterpet)
+		57386,					-- Wild Strength (Hunterpet)
+		58604,					-- Double Bite (Hunterpet)
+		34889,					-- Spry Attacks (Hunterpet)
+		24844,					-- Breath of Winds (Hunterpet)
+	}
+	Spell9Buff = { -- Versatility
+		55610,					-- Unholy Aura
+		1126,					-- Mark of the Wild
+		167187,					-- Sanctity Aura
+		167188,					-- Inspiring Presence
+		159735,					-- Tenacity (Hunterpet)
+		35290,					-- Indomitable (Hunterpet)
+		57386,					-- Wild Strength (Hunterpet)
+		160045,					-- Defensive Quills (Hunterpet)
+		50518,					-- Chitinous Armor (Hunterpet)
+		173035,					-- Grace (Hunterpet)
+		160077,					-- Strength of the Earth (Hunterpet)
 	}
 end
 
 local function SetBuffs()
-	Spell1Buff = {
-		55610, -- Unholy Aura
-		113742, -- Swiftblade's Cunning
-		128432, -- Cackling Howl
+	Spell1Buff = { --Stats
+		1126, 					-- Mark of the Wild
+		115921,					-- Legacy of the Emperor
+		116781,					-- Legacy of the White Tiger
+		20217,					-- Blessing of Kings
+		159988,					-- Bark of the Wild (Hunterpet)
+		160017,					-- Blessing of Kongs (Hunterpet)
+		90363,					-- Embrace of the Shale Spider (Hunterpet)
+		160077,					-- Strength of the Earth (Hunterpet)
 	}
-	Spell2Buff = {
-		1459, -- Arcane Brilliance
-		24932, -- Leader of the Pack
-		61316, -- Dalaran Brilliance
-		109773, -- Dark Intent
-		116781, -- Legacy of the White Tiger
+	Spell2Buff = { -- Stamina
+		21562,					-- Power Word: Fortitude
+		166928,					-- Blood Pact
+		469,					-- Commanding Shout
+		50256,					-- Invigorating Roar (Hunterpet)
+		160014,					-- Sturdiness (Hunterpet)
+		160003,					-- Savage Vigor (Hunterpet)
+		90364,					-- Qiraji Fortitude (Hunterpet)
 	}
-	Spell3Buff = {
-		1126, -- Mark of the Wild
-		20217, -- Blessing of Kings
-		115921, -- Legacy of the Emperor
-		116781, -- Legacy of the White Tiger
+	Spell3Buff = { -- Attack Power
+		57330,					-- Horn of Winter
+		19506,					-- Trueshot Aura
+		6673,					-- Battle Shout
 	}
-	Spell4Buff = {
-		469, -- Commanding Shout
-		21562, -- Power Word: Fortitude
-		90364, -- Qiraji Fortitude
-		166928, -- Blood Pact
+	Spell4Buff = { -- Spell Power
+		1459,					-- Arcane Brilliance
+		61316,					-- Dalaran Brilliance
+		109773,					-- Dark Intent
+		128433,					-- Serpent's Cunning (Hunterpet)
+		90364,					-- Qiraji Fortitude (Hunterpet)
+		126309,					-- Still Water (Hunterpet)
 	}
-	Spell5Buff = {
-		19740, -- Blessing of Might
-		116956, -- Grace of Air
-		128997, -- Spirit Beast Blessing
-		155522, -- Power of the Grave
+	Spell5Buff = { -- Mastery
+		155522,					-- Power of the Grave
+		24907,					-- Moonkin Aura
+		19740,					-- Blessing of Might
+		116956,					-- Grace of Air
+		93435,					-- Roar of Courage (Hunterpet)
+		160039,					-- Keen Senses (Hunterpet)
+		128997,					-- Spirit Beast Blessing (Hunterpet)
+		160073,					-- Plainswalking (Hunterpet)
 	}
-	Spell6Buff = {
-		6673, -- Battle Shout
-		19506, -- Trueshot Aura
-		57330, -- Horn of Winter
+	Spell6Buff = { -- Haste
+		55510,					-- Unholy Aura
+		49868,					-- Mind Quickening
+		113742,					-- Swiftblade's Cunning
+		116956,					-- Grace of Air
+		128432,					-- Crackling Howl (Hunterpet)
+		160003,					-- Savage Vigor (Hunterpet)
+		135678,					-- Energizing Spores (Hunterpet)
+		160074,					-- Speed of the Swarm (Hunterpet)
+	}
+	Spell7Buff = { -- Crit
+		17007,					-- Leader of the Pack
+		1459,					-- Arcane Brilliance
+		61316,					-- Dalaran Brilliance
+		116781,					-- Legacy of the White Tiger
+		90309,					-- Terrifying Roar (Hunterpet)
+		126373,					-- Fearless Roar (Hunterpet)
+		160052,					-- Strength of the Pack (Hunterpet)
+		90363,					-- Embrace of the Shale Spider (Hunterpet)
+		126309,					-- Still Water (Hunterpet)
+		24604,					-- Furious Howl (Hunterpet)
+	}
+	Spell8Buff = { -- Multistrike
+		166916,					-- Windflurry
+		49868,					-- Mind Quickening
+		113742,					-- Swiftblade's Cunning
+		109773,					-- Dark Intent
+		50519,					-- Sonic Focus (Hunterpet)
+		57386,					-- Wild Strength (Hunterpet)
+		58604,					-- Double Bite (Hunterpet)
+		34889,					-- Spry Attacks (Hunterpet)
+		24844,					-- Breath of Winds (Hunterpet)
+	}
+	Spell9Buff = { -- Versatility
+		55610,					-- Unholy Aura
+		1126,					-- Mark of the Wild
+		167187,					-- Sanctity Aura
+		167188,					-- Inspiring Presence
+		159735,					-- Tenacity (Hunterpet)
+		35290,					-- Indomitable (Hunterpet)
+		57386,					-- Wild Strength (Hunterpet)
+		160045,					-- Defensive Quills (Hunterpet)
+		50518,					-- Chitinous Armor (Hunterpet)
+		173035,					-- Grace (Hunterpet)
+		160077,					-- Strength of the Earth (Hunterpet)
 	}
 end
 
@@ -206,91 +316,117 @@ CreateButton("Spell6Frame", Spell5Frame, false, true)
 
 -- Adding in ALL RAID BUFFS
 local AllBuffs = {
-	["10ap"] = {
-		6673,						-- Battle Shout
-		19506,						-- Trueshot Aura
-		57330,						-- Horn of Winter
+	["attackpower"] = {
+		57330,					-- Horn of Winter
+		19506,					-- Trueshot Aura
+		6673,					-- Battle Shout
 	},
-	["10as"] = {
-		55610,						-- Unholy Aura
-		113742,						-- Swiftblade's Cunning
-		128432,						-- Cackling Howl (Hunterpet)
-		128433,						-- Serpent's Swiftness (Hunterpet)
+	["haste"] = {
+		55510,					-- Unholy Aura
+		49868,					-- Mind Quickening
+		113742,					-- Swiftblade's Cunning
+		116956,					-- Grace of Air
+		128432,					-- Crackling Howl (Hunterpet)
+		160003,					-- Savage Vigor (Hunterpet)
+		135678,					-- Energizing Spores (Hunterpet)
+		160074,					-- Speed of the Swarm (Hunterpet)
 	},
-	["10sp"] = {
-		1459,						-- Arcane Brilliance
-		61316,						-- Dalaran Brilliance
-		109773,						-- Dark Intent
+	["spellpower"] = {
+		1459,					-- Arcane Brilliance
+		61316,					-- Dalaran Brilliance
+		109773,					-- Dark Intent
+		128433,					-- Serpent's Cunning (Hunterpet)
+		90364,					-- Qiraji Fortitude (Hunterpet)
+		126309,					-- Still Water (Hunterpet)
 	},
-	["5sh"] = {
-		49868,						-- Mind Quickening
-		135678,						-- Energizing Spores
+	["crit"] = {
+		17007,					-- Leader of the Pack
+		1459,					-- Arcane Brilliance
+		61316,					-- Dalaran Brilliance
+		116781,					-- Legacy of the White Tiger
+		90309,					-- Terrifying Roar (Hunterpet)
+		126373,					-- Fearless Roar (Hunterpet)
+		160052,					-- Strength of the Pack (Hunterpet)
+		90363,					-- Embrace of the Shale Spider (Hunterpet)
+		126309,					-- Still Water (Hunterpet)
+		24604,					-- Furious Howl (Hunterpet)
 	},
-	["5csc"] = {
-		1459,						-- Arcane Brilliance
-		17007,						-- Leader of the Pack
-		24604,						-- Furious Howl (Hunterpet)
-		61316,						-- Dalaran Brilliance
-		90309,						-- Terrifying Roar (Hunterpet)
-		116781,						-- Legacy of the White Tiger
+	["mastery"] = {
+		155522,					-- Power of the Grave
+		24907,					-- Moonkin Aura
+		19740,					-- Blessing of Might
+		116956,					-- Grace of Air
+		93435,					-- Roar of Courage (Hunterpet)
+		160039,					-- Keen Senses (Hunterpet)
+		128997,					-- Spirit Beast Blessing (Hunterpet)
+		160073,					-- Plainswalking (Hunterpet)
 	},
-	["3kmr"] = {
-		19740,						-- Blessing of Might
-		93435,						-- Roar of Courage (Hunterpet)
-		116956,						-- Grace of Air
-		128997,						-- Spirit Beast Blessing
-		155522,						-- Power of the Grave
+	["stats"] = {
+		1126, 					-- Mark of the Wild
+		115921,					-- Legacy of the Emperor
+		116781,					-- Legacy of the White Tiger
+		20217,					-- Blessing of Kings
+		159988,					-- Bark of the Wild (Hunterpet)
+		160017,					-- Blessing of Kongs (Hunterpet)
+		90363,					-- Embrace of the Shale Spider (Hunterpet)
+		160077,					-- Strength of the Earth (Hunterpet)
 	},
-	["5sai"] = {
-		1126,						-- Mark of the Wild
-		20217,						-- Blessing of Kings
-		90363,						-- Embrace of the Shale Spider (Hunterpet)
-		115921,						-- Legacy of the Emperor
-		116781,						-- Legacy of the White Tiger
+	["stamina"] = {
+		21562,					-- Power Word: Fortitude
+		166928,					-- Blood Pact
+		469,					-- Commanding Shout
+		50256,					-- Invigorating Roar (Hunterpet)
+		160014,					-- Sturdiness (Hunterpet)
+		160003,					-- Savage Vigor (Hunterpet)
+		90364,					-- Qiraji Fortitude (Hunterpet)
 	},
-	["10s"] = {
-		469,						-- Commanding Shout
-		21562,						-- Power Word: Fortitude
-		90364,						-- Qiraji Fortitude
-		166928,						-- Blood Pact
+	["multistrike"] = {
+		166916,					-- Windflurry
+		49868,					-- Mind Quickening
+		113742,					-- Swiftblade's Cunning
+		109773,					-- Dark Intent
+		50519,					-- Sonic Focus (Hunterpet)
+		57386,					-- Wild Strength (Hunterpet)
+		58604,					-- Double Bite (Hunterpet)
+		34889,					-- Spry Attacks (Hunterpet)
+		24844,					-- Breath of Winds (Hunterpet)
 	},
-	["5ms"] = {
-		113742,						-- Swiftblade's Cunning
-		166916,						-- Windflurry
-		49868,						-- Mind Quickening
-		109773,						-- Dark Intent
-	},
-	["3vs"] = {
-		167188,						-- Inspiring Presence
-		1126,						-- Mark of the Wild
-		55610,						-- Unholy Aura
-		167187,						-- Sanctity Aura
+	["versatility"] = {
+		55610,					-- Unholy Aura
+		1126,					-- Mark of the Wild
+		167187,					-- Sanctity Aura
+		167188,					-- Inspiring Presence
+		159735,					-- Tenacity (Hunterpet)
+		35290,					-- Indomitable (Hunterpet)
+		57386,					-- Wild Strength (Hunterpet)
+		160045,					-- Defensive Quills (Hunterpet)
+		50518,					-- Chitinous Armor (Hunterpet)
+		173035,					-- Grace (Hunterpet)
+		160077,					-- Strength of the Earth (Hunterpet)
 	},
 }
 
 local function LabelType(bufftype)
-	if bufftype == "10ap" then
-		return L["bufftracker"]["10ap"]
-	elseif bufftype == "10as" then
-		return L["bufftracker"]["10as"]
-	elseif bufftype == "10sp" then
-		return L["bufftracker"]["10sp"]
-	elseif bufftype == "5sh" then
-		return L["bufftracker"]["5sh"]
-	elseif bufftype == "5csc" then
-		return L["bufftracker"]["5csc"]
-	elseif bufftype == "3kmr" then
-		return L["bufftracker"]["3kmr"]
-	elseif bufftype == "5sai" then
-		return L["bufftracker"]["5sai"]
-	elseif bufftype == "10s" then
-		return L["bufftracker"]["10s"]
-	elseif bufftype == "5ms" then
-		return L["bufftracker"]["5ms"]
-	elseif bufftype == "3vs" then
-		return L["bufftracker"]["3vs"]
+	if bufftype == "attackpower" then
+		return "+ " .. RAID_BUFF_3
+	elseif bufftype == "haste" then
+		return "+ " .. RAID_BUFF_4
+	elseif bufftype == "spellpower" then
+		return "+ " .. RAID_BUFF_5
+	elseif bufftype == "crit" then
+		return "+ " .. RAID_BUFF_6
+	elseif bufftype == "mastery" then
+		return "+ " .. RAID_BUFF_7
+	elseif bufftype == "stats" then
+		return "+ " .. RAID_BUFF_1
+	elseif bufftype == "stamina" then
+		return "+ " .. RAID_BUFF_2
+	elseif bufftype == "multistrike" then
+		return "+ " .. RAID_BUFF_8
+	elseif bufftype == "versatility" then
+		return "+ " .. RAID_BUFF_9
 	else
-		return L["bufftracker"]["error"]
+		return "ERROR"
 	end
 end
 
@@ -319,7 +455,7 @@ local function AnotherOnAuraChange(self, event, arg1, unit)
 end
 
 local bufftrackersummary = CreateFrame("Frame", "BuffTrackerSummary", UIParent)
-if D.Client == "deDE" then BuffTrackerSummary:Size(565, 300) else bufftrackersummary:Size(500, 300) end
+BuffTrackerSummary:Size(608, 285)
 bufftrackersummary:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 bufftrackersummary:SetTemplate("Transparent")
 local close = CreateFrame("Button", "BuffTrackerSummaryCloseButton", BuffTrackerSummary, "UIPanelCloseButton")
@@ -358,7 +494,7 @@ local function CreateBuffArea(bufftype, relativeTo, column)
 		bigButton:SetTemplate("Default")
 	elseif column == 2 then
 		bigButton:Size(40, 40)
-		bigButton:SetPoint("TOPLEFT", BuffTrackerSummary, "TOPLEFT", 280, -14)
+		bigButton:SetPoint("TOPLEFT", BuffTrackerSummary, "TOPLEFT", 300, -14)
 		bigButton:SetTemplate("Default")
 	else
 		bigButton:Size(40, 40)
@@ -402,16 +538,15 @@ local function CreateBuffArea(bufftype, relativeTo, column)
 end
 
 --ORDER MATTERS!
-CreateBuffArea("10ap", nil, 1)
-CreateBuffArea("10as", "10apFrame", nil)
-CreateBuffArea("10sp", "10asFrame", nil)
-CreateBuffArea("5sh", "10spFrame", nil)
-CreateBuffArea("5ms", "5shFrame", nil)
-CreateBuffArea("5csc", "5shFrame", 2)
-CreateBuffArea("3kmr", "5cscFrame", nil)
-CreateBuffArea("5sai", "3kmrFrame", nil)
-CreateBuffArea("10s", "5saiFrame", nil)
-CreateBuffArea("3vs", "10sFrame", nil)
+CreateBuffArea("attackpower", nil, 1)
+CreateBuffArea("haste", "attackpowerFrame", nil)
+CreateBuffArea("spellpower", "hasteFrame", nil)
+CreateBuffArea("crit", "spellpowerFrame", nil)
+CreateBuffArea("mastery", "critFrame", nil)
+CreateBuffArea("stats", "critFrame", 2)
+CreateBuffArea("stamina", "statsFrame", nil)
+CreateBuffArea("multistrike", "staminaFrame", nil)
+CreateBuffArea("versatility", "multistrikeFrame", nil)
 
 bufftrackersummary:Hide()
 

@@ -123,20 +123,6 @@ if D.Client == "deDE" then
 		["step6line3"] = "Du kannst nun mit der Installation des Interface fortfahren, sofern sie noch nicht abgeschlossen war, oder Du das Interface auf seine Standardeinstellungen zurücksetzen möchtest.",
 	}
 
-	L["bufftracker"] = {
-		["10ap"] = "+ Angriffskraft",
-		["10as"] = "+ Angriffsgeschwindigkeit",
-		["10sp"] = "+ Zaubermacht",
-		["5sh"] = "+ Zaubergeschwindigkeit",
-		["5csc"] = "+ Chance auf kritische Treffer",
-		["3kmr"] = "+ Meisterschaft",
-		["5sai"] = "+ Werte",
-		["10s"] = "+ Ausdauer",
-		["5ms"] = "+ Mehrfachschlag",
-		["3vs"] = "+ Vielseitigkeit",
-		["error"] = "FEHLER",
-	}
-
 	L["binds"] = {
 		["c2c_title"] = "Mausbelegung",
 		["combat"] = "Während eines Kampfes kannst Du keine Tasten belegen",
