@@ -68,11 +68,9 @@ function WorldMap:Skin()
 	local XP = MapQuestInfoRewardsFrame.XPFrame
 	local QuestBackground = QuestScrollFrame.Background
 	local StoryTooltip = QuestScrollFrame.StoryTooltip
-	local MapDetails = WorldMapDetailFrame
 	local TrackingMenuButton = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button
 	local TrackingMenuBackground = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Background
 	local DetailsScroll = QuestMapDetailsScrollFrame
-	local WMDropDown = WorldMapLevelDropDown
 
 	Map:StripTextures()
 	Map:CreateBackdrop()
@@ -83,9 +81,12 @@ function WorldMap:Skin()
 	Map.Header:Size(Map.backdrop:GetWidth(), 23)
 	Map.Header:SetPoint("BOTTOMLEFT", Map.backdrop, "TOPLEFT", 0, 2)
 	Map.Header:SetTemplate()
-
 	WorldMapFrame.BorderFrame:StripTextures()
 	WorldMapFrame.BorderFrame.Inset:StripTextures()
+	WorldMapLevelDropDown:StripTextures()
+	WorldMapLevelDropDown:ClearAllPoints()
+	WorldMapLevelDropDown:SetPoint("TOPLEFT", Map.Header, -17, 1)
+
 	QuestMapFrame.DetailsFrame:StripTextures()
 	QuestMapFrame.DetailsFrame.RewardsFrame:StripTextures()
 	QuestScrollFrame.Contents.StoryHeader:StripTextures()
@@ -186,10 +187,6 @@ function WorldMap:Skin()
 	XP.Icon:SetTexCoord(unpack(D.IconCoord))
 	XP.backdrop:ClearAllPoints()
 	XP.backdrop:SetOutside(XP.Icon)
-
-	WMDropDown:SkinDropDownBox()
-	WMDropDown:ClearAllPoints()
-	WMDropDown:SetPoint("TOPLEFT", -18, -2)
 end
 
 function WorldMap:Coords()

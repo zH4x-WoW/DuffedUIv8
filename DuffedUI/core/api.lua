@@ -546,21 +546,27 @@ local function SkinDropDownBox(frame, width)
 	local button = _G[frame:GetName().."Button"]
 	if not width then width = 155 end
 
-	StripTextures(frame)
-	Width(frame, width)
+	frame:StripTextures()
+	frame:Width(width)
 
 	_G[frame:GetName().."Text"]:ClearAllPoints()
-	Point(_G[frame:GetName().."Text"], "RIGHT", button, "LEFT", -2, 0)
+	_G[frame:GetName().."Text"]:Point("RIGHT", button, "LEFT", -2, 0)
 
 	button:ClearAllPoints()
-	Point(button, "RIGHT", frame, "RIGHT", -10, 3)
+	button:Point("RIGHT", frame, "RIGHT", -10, 3)
+	hooksecurefunc(button, "SetPoint", function(self, point, attachTo, anchorPoint, xOffset, yOffset, noReset)
+		if not noReset then
+			button:ClearAllPoints()
+			button:SetPoint("RIGHT", frame, "RIGHT", -10, 3, true)
+		end
+	end)
 	button.SetPoint = D.Dummy
 
-	SkinNextPrevButton(button, true)
+	button:SkinNextPrevButton(true)
 
-	CreateBackdrop(frame, "Default")
-	Point(frame.backdrop, "TOPLEFT", 20, -2)
-	Point(frame.backdrop, "BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
+	frame:CreateBackdrop("Default")
+	frame.backdrop:Point("TOPLEFT", 20, -2)
+	frame.backdrop:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
 end
 
 local function SkinDropDownBoxLong(frame, width)
