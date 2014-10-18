@@ -2,7 +2,7 @@ local D, C, L = unpack(select(2, ...))
 if not C["actionbar"].enable == true then return end
 
 local bar = CreateFrame("Frame", "DuffedUIStance", UIParent, "SecureHandlerStateTemplate")
-bar:SetPoint("TOPLEFT", 4, -200)
+bar:SetPoint("TOPLEFT", 0, -200)
 bar:SetWidth((D.petbuttonsize * 4) + (D.petbuttonsize * 3))
 bar:SetHeight(15)
 bar:SetFrameStrata("MEDIUM")
@@ -45,7 +45,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 		StanceBarFrame:StripTextures()
 		StanceBarFrame:SetParent(bar)
 		StanceBarFrame:ClearAllPoints()
-		StanceBarFrame:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", -11, 4)
+		StanceBarFrame:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", -7, -25)
 		StanceBarFrame:EnableMouse(false)
 
 		for i = 1, NUM_STANCE_SLOTS do
