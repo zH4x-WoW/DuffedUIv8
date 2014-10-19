@@ -20,6 +20,7 @@ local UnitName = UnitName
 local UnitPlayerControlled = UnitPlayerControlled
 local UnitLevel = UnitLevel
 local GetCVar = GetCVar
+local SetCVar = SetCVar
 local band = bit.band
 local strsplit = strsplit
 local match = string.match
@@ -320,7 +321,7 @@ local SearchNameplate = function(guid, raidIcon, sourceName, raidIconFlags, cast
 	if sourceName then
 		local SearchFor = strsplit("-", sourceName)
 		for frame, _ in pairs(NamePlateList) do 
-			if frame and frame:IsShown() and frame.oldname and frame.oldname:GetText() == SearchFor and frame.hasClass then return frame end 
+			if frame and frame:IsShown() and frame.oldname and frame.plateName == SearchFor and frame.hasClass then return frame end
 		end
 	end
 
@@ -334,8 +335,8 @@ end
 local UpdateDebuffs = function(self)
 	local guid = self.guid
 	if not guid then
-		if self.hasClass then guid = NameGUID[self.oldname:GetText()] elseif self.isMarked then guid = RaidIconGUID[self.raidIconType] end
-		if guid then self.guid = guid else self.AuraWidget:Hide() return end
+		if self.hasClass then guid = NameGUID[self.plateName] elseif self.isMarked then guid = RaidIconGUID[self.raidIconType] end
+		if guid then self.guid = guid end
 	end
 	Plates:UpdateAuraWidget(self, guid)
 end
@@ -406,7 +407,6 @@ end
 local GetFilter = function(self, ...)
 	if self.oldname == nil then return end
 	if self.highlight == nil then return end
-	local name = self.oldname:GetText()
 	self.health:Show()
 	self.highlight:SetTexture(1, 1, 1, .15)
 end
@@ -434,18 +434,18 @@ end
 
 local GetGUID = function(self)
 	if self.oldname == nil then return end
-	if UnitExists("target") and self:GetAlpha() == 1 and UnitName("target") == self.oldname:GetText() then
+	if UnitExists("target") and self:GetAlpha() == 1 and UnitName("target") == self.plateName then
 		self.guid = UnitGUID("target")
-		NameGUID[self.oldname:GetText()] = self.guid
+		NameGUID[self.plateName] = self.guid
 		self.unit = "target"
 		UpdateAurasByUnit("target")
-		if UnitIsPlayer("target") then NameClasses[self.oldname:GetText()] = select(2, UnitClass("target"))end
-	elseif self.highlight and self.highlight:IsShown() and UnitExists("mouseover") and UnitName("mouseover") == self.oldname:GetText() then
+		if UnitIsPlayer("target") then NameClasses[self.plateName] = select(2, UnitClass("target")) end
+	elseif self.highlight and self.highlight:IsShown() and UnitExists("mouseover") and UnitName("mouseover") == self.plateName then
 		self.guid = UnitGUID("mouseover")
 		self.unit = "mouseover"
 		UpdateAurasByUnit("mouseover")
-		NameGUID[self.oldname:GetText()] = self.guid
-		if UnitIsPlayer("mouseover") then NameClasses[self.oldname:GetText()] = select(2, UnitClass("mouseover")) end
+		NameGUID[self.plateName] = self.guid
+		if UnitIsPlayer("mouseover") then NameClasses[self.plateName] = select(2, UnitClass("mouseover")) end
 	else
 		self.unit = nil
 	end
@@ -491,7 +491,7 @@ local UpdateThreat = function(self)
 	else
 		if self.old_threat:IsShown() then
 			local _, val = self.old_threat:GetVertexColor()
-			if val > .7 then self.threat:SetVertexColor(1, .5, 0) else self.threat:SetVertexColor(1, 0, 0) end
+			if val > .7 then self.threat:SetVertexColor(transitionR, transitionG, transitionB) else self.threat:SetVertexColor(badR, badG, badB) end
 		else
 			self.threat:SetVertexColor(unpack(C["media"].backdropcolor))
 		end
@@ -548,6 +548,7 @@ local CastBar_OnShow = function(self)
 end
 
 local HealthBar_OnShow = function(self)
+	self.plateName = gsub(self.oldname:GetText(), "%s%(%*%)","")
 	self.health:SetMinMaxValues(self.oldhealth:GetMinMaxValues())
 	self.health:SetValue(self.oldhealth:GetValue())
 
@@ -588,6 +589,8 @@ local StylePlate = function(self)
 	self.oldcbicon = old_cbicon
 	self.oldcbname = old_cbname
 	self.old_threat = old_threat
+
+	self.plateName = gsub(self.oldname:GetText(), "%s%(%*%)","")
 
 	if self.plate == nil then
 		self.plate = CreateFrame("Frame", nil, WorldFrame)
@@ -757,6 +760,9 @@ local StylePlate = function(self)
 		self.isMarked = nil
 		self.raidIconType = nil
 		self.guid = nil
+		local index = 0
+		NameClasses[self.plateName] = nil
+		self.plateName = nil
 		self.hasClass = nil
 		if self.icons then for _,icon in ipairs(self.icons) do icon:Hide() end end
 	end)
