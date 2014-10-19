@@ -438,9 +438,11 @@ D.CastBar = function(self, unit, name, rank, castid)
 end
 
 D.EclipseDirection = function(self)
-	if GetEclipseDirection() == "sun" then
+	local power = UnitPower("player", SPELL_POWER_ECLIPSE)
+
+	if power < 0 then
 		self.Text:SetText("|cffE5994C" .. L["uf"]["starfire"] .. "|r")
-	elseif GetEclipseDirection() == "moon" then
+	elseif power > 0 then
 		self.Text:SetText("|cff4478BC" .. L["uf"]["wrath"] .. "|r")
 	else
 		self.Text:SetText("")
