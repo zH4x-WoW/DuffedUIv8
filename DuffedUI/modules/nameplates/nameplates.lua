@@ -1,7 +1,7 @@
 ﻿local D, C, L = unpack(select(2, ...))
 if C["nameplate"].active ~= true then return end
 
---[[local Plates = CreateFrame("Frame", "Plates", UIParent)
+local Plates = CreateFrame("Frame", "Plates", UIParent)
 
 local Font = C["media"].font
 local _G = _G
@@ -918,7 +918,6 @@ Plates:SetScript("OnEvent", function(self, event, ...)
 		SetCVar("bloattest", 0)
 		SetCVar("showVKeyCastbar", 1)
 		SetCVar("ShowClassColorInNameplate", 1)
-		SetCVar("nameplateMotion", 3)
 		SetCVar("nameplateShowEnemies", 1)
 		SetCVar("nameplateShowFriends", 0)
 
@@ -935,9 +934,9 @@ end)
 
 Plates:RegisterEvent("PLAYER_LOGIN")
 Plates:RegisterEvent("PLAYER_ENTERING_WORLD")
-Plates.updateAll(Plates)]]
+Plates.updateAll(Plates)
 
-local numChildren = -1
+--[[local numChildren = -1
 local frames = {}
 local noscalemult = D.mult * C["general"].uiscale
 local Role
@@ -1530,4 +1529,4 @@ function NamePlates:PLAYER_ENTERING_WORLD()
 	else
 		if InCombatLockdown() then SetCVar("nameplateShowEnemies", 1) else SetCVar("nameplateShowEnemies", 1) end
 	end
-end
+end]]
