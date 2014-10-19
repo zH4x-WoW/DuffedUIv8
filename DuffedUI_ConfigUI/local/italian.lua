@@ -237,6 +237,7 @@
 	DuffedUIConfigUILocalization.miscacm_screen = "Enable automatic Achievment screenshots"
 	DuffedUIConfigUILocalization.miscclickcast = "Enable Click2Cast-plugin"
 	DuffedUIConfigUILocalization.miscAFKCamera = "Enable AFKCamera"
+	DuffedUIConfigUILocalization.miscXPBar = "Enable XP-Bar"
 
 	-- duffed
 	DuffedUIConfigUILocalization.duffed = "Duffed"
