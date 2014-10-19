@@ -84,14 +84,11 @@
 	DuffedUIConfigUILocalization.nameplateauraswidth = "'Breite' der Schwächungszaubersymbole"
 	DuffedUIConfigUILocalization.nameplateaurasheight = "'Höhe' der Schwächungszaubersymbole"
 	DuffedUIConfigUILocalization.nameplateMaxDebuffs = "'Anzahl' der angezeigten Schwächungszauber (Standard = 5)"
-	DuffedUIConfigUILocalization.nameplateCastHeight = "'Höhe' der Zauberleiste an den Namensplaketten"
-	DuffedUIConfigUILocalization.nameplateShowComboPoints = "Zeige deine Kombopunkte an den Namensplaketten"
 	DuffedUIConfigUILocalization.nameplatethreat = "Aktiviere Bedrohungs-Feature, wechselt automatisch je nach Rolle"
 	DuffedUIConfigUILocalization.nameplatethreat_badcolor = "Wähle Farbe für 'Schlechte' Bedrohungs-Anzeige, variiert je nach Rolle"
 	DuffedUIConfigUILocalization.nameplatethreat_goodcolor = "Wähle Farbe für 'Gute' Bedrohungs-Anzeige, variiert je nach Rolle"
 	DuffedUIConfigUILocalization.nameplatethreat_transitioncolor = "Wähle Farbe für Verlust/Gewinn der Bedrohung"
 	DuffedUIConfigUILocalization.nameplatePercent = "Aktiviere Prozentanzeige an Namensplaketten"
-	DuffedUIConfigUILocalization.nameplatecombat = "Verstecke Namensplaketten ausserhalb des Kampfes"
 
 	-- action bar
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"
