@@ -165,7 +165,8 @@ local UpdateColor = function(self)
 		if RAID_CLASS_COLORS[class].r == r and RAID_CLASS_COLORS[class].g == g and RAID_CLASS_COLORS[class].b == b then
 			self.hasClass = true
 			self.isFriendly = false
-			self.health:SetStatusBarColor(RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b)
+			self.health:SetStatusBarColor(unpack(oUFDuffedUI.colors.class[class]))
+			return
 		end
 	end
 
