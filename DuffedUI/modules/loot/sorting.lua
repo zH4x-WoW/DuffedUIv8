@@ -1,59 +1,47 @@
 _G.JPackLocale = {}
 
 local L = JPackLocale
+L.TYPE_BAG = INVTYPE_BAG
+L.TYPE_MISC = MISCELLANEOUS
+JPACK_DRAW = {"#"..BATTLE_PET_SOURCE_2}
 if (GetLocale() == "enUS" or GetLocale() == "enGB") then
-	L.TYPE_BAG = "Bag"
 	L.TYPE_FISHWEAPON = "Fishing Poles"
-	L.TYPE_MISC = "Miscellaneous"
 	JPACK_ORDER = {"Hearthstone","##Mounts","Mining Pick","Skinning Knife","Fishing Pole","#Fishing Poles","#Weapon","#Armor","#Weapon##Other","#Armor##Other","#Recipe","#Quest","##Elemental","##Metal & Stone","##Herb","#Gem","##Jewelcrafting","#Consumable","##Cloth","#Trade Goods","##Meat","#","Fish Oil","Soul Shard","#Miscellaneous"}
 	JPACK_DEPOSIT = {"##Elemental","##Metal & Stone","##Herb","#Jewelcrafting","#Container"}
-	JPACK_DRAW = {"#Quest"}
 elseif (GetLocale() == "zhCN") then 
-	L.TYPE_BAG = "容器"
 	L.TYPE_FISHWEAPON = "鱼竿"
-	L.TYPE_MISC = "其它"
-	JPACK_ORDER={"炉石","要塞炉石","虚灵之门","##工程","##坐骑","矿工锄","剥皮小刀","鱼竿","#鱼竿","#武器","#护甲","#武器##其它","#护甲##其它","#配方","#任务","##元素","##金属和矿石","##草药","#材料","##珠宝","#消耗品","##布料","#商品","##肉类","#","鱼油","灵魂碎片","#其它"}
-	JPACK_DEPOSIT={"##元素","##金属和矿石","#材料","##草药","#珠宝","#容器"}
-	JPACK_DRAW={"#任务","##草药"}
+	JPACK_ORDER = {"炉石","要塞炉石","虚灵之门","##工程","##坐骑","矿工锄","剥皮小刀","鱼竿","#鱼竿","#武器","#护甲","#武器##其它","#护甲##其它","#配方","#任务","##元素","##金属和矿石","##草药","#材料","##珠宝","#消耗品","##布料","#商品","##肉类","#","鱼油","灵魂碎片","#其它"}
+	JPACK_DEPOSIT = {"##元素","##金属和矿石","#材料","##草药","#珠宝","#容器"}
 elseif (GetLocale() == "zhTW") then
-	L.TYPE_BAG = "容器"
 	L.TYPE_FISHWEAPON = "魚竿"
-	L.TYPE_MISC = "雜項"
 	JPACK_ORDER = {"爐石","##坐騎","採礦鎬","剝皮小刀","寶石匠的工具箱","簡單的磨粉機","魚竿","#魚竿","#武器","#護甲","#武器##其它","#護甲##其它","#配方","#任務","##元素材料","##金屬與石頭","##草藥","#材料","##珠宝","#消耗品","##布料","#商人","##肉類","#","魚油","灵魂碎片","#其它"}
 	JPACK_DEPOSIT = {"#商人","#材料","##草藥","##肉類","#珠寶","#容器"}
-	JPACK_DRAW = {"#任務"}
 elseif (GetLocale() == "deDE") then
-	L.TYPE_BAG="Behälter"
-	L.TYPE_FISHWEAPON="Angelruten"
-	L.TYPE_MISC = ""
-	JPACK_ORDER={"Ruhestein","##Reittiere","Spitzhacke","Kürschnermesser","Angelrute","##Angelruten","#Waffe","#Rüstung","#Waffe##Verschiedenes","#Rüstung##Verschiedenes","#Rezept","#Quest","##Elementar","##Metall & Stein","##Kräuter","#Edelstein","##Juwelenschleifen",	"#Verbrauchbar","##Stoff","#Handwerkswaren","##Fleisch","#","Fischöl","Seelenstein","#Verschiedenes"}
-	JPACK_DEPOSIT={"##Elementar","##Metall & Stein","##Kräuter","#Juwelenschleifen","#Behälter"}
-	JPACK_DRAW={"#Quest"}
+	L.TYPE_FISHWEAPON = "Angelruten"
+	JPACK_ORDER = {"Ruhestein","##Reittiere","Spitzhacke","Kürschnermesser","Angelrute","##Angelruten","#Waffe","#Rüstung","#Waffe##Verschiedenes","#Rüstung##Verschiedenes","#Rezept","#Quest","##Elementar","##Metall & Stein","##Kräuter","#Edelstein","##Juwelenschleifen",	"#Verbrauchbar","##Stoff","#Handwerkswaren","##Fleisch","#","Fischöl","Seelenstein","#Verschiedenes"}
+	JPACK_DEPOSIT = {"##Elementar","##Metall & Stein","##Kräuter","#Juwelenschleifen","#Behälter"}
 elseif (GetLocale() == "koKR") then
-	L.TYPE_BAG="가방"
-	L.TYPE_FISHWEAPON="낚싯대"
-	L.TYPE_MISC = ""
-	JPACK_ORDER={"귀환석","##탈것","채광용 곡괭이","무두용 칼","낚싯대","#낚싯대","#무기","#방어구","#무기##기타","#방어구##기타","#문양","#제조법","#퀘스트","##원소","##광물","##약초","#보석","##보석세공","#소비용품","#직업용품##천","#직업용품","##고기","#","#기타##재료","영혼의 조각","#기타"}
-	JPACK_DEPOSIT={"##원소","##광물","##약초","#보석세공","#가방"}
-	JPACK_DRAW={"#퀘스트"}
+	L.TYPE_FISHWEAPON = "낚싯대"
+	JPACK_ORDER = {"귀환석","##탈것","채광용 곡괭이","무두용 칼","낚싯대","#낚싯대","#무기","#방어구","#무기##기타","#방어구##기타","#문양","#제조법","#퀘스트","##원소","##광물","##약초","#보석","##보석세공","#소비용품","#직업용품##천","#직업용품","##고기","#","#기타##재료","영혼의 조각","#기타"}
+	JPACK_DEPOSIT = {"##원소","##광물","##약초","#보석세공","#가방"}
+elseif (GetLocale() == "ruRU") then
+	L.TYPE_FISHWEAPON = "Удочки"
+	JPACK_ORDER = {"Камень возвращения","##Верховые животные","Шахтерская кирка","Нож для снятия шкур","Удочка","#Удочки","#Оружие","#Броня","#Оружие##Разное","#Доспехи##Разное","#Рецепты","#Задания","##Стихи","##Металл и камень","##Трава","#Самоцветы","##Ювелирное дело","#Расходуемые","##Cloth","#Хозяйственные товары","##Мясо","#","Рыбий жир","Осколок души","#Разное"}
+	JPACK_DEPOSIT = {"##Стихии","##Металл и камень","##Трава","#Ювелирное дело","#Сумки"}
 end
 
 --[[Local]]--
 local JPackDB = {}
 JPack = CreateFrame("Frame")
-JPack.DEV_MOD = DEV_MOD
 JPack.bankOpened = false
-JPack.guildbankOpened = false
 JPack.deposit = false
 JPack.draw = false
-JPack.packupguildbank = false
 JPack.bagGroups = {}
 JPack.packingGroupIndex = 1
 JPack.packingBags = {}
 JPack.updatePeriod = .1
-JPackDB.asc=false
+JPackDB.asc = false
 
-local version = GetAddOnMetadata("JPack", "Version") or "alpha-version"
 local RegisterEvent = JPack.RegisterEvent
 local UnregisterEvent = JPack.UnregisterEvent
 local event_table = {}

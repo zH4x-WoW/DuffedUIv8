@@ -88,7 +88,7 @@ C["nameplate"] = {
 	["threat_badcolor"] = {.78, .25, .25},
 	["threat_transitioncolor"] = {.86, .77, .36},
 	["Percent"] = false,
-	--["combat"] = false,
+	["combat"] = false,
 	["MaxDebuffs"] = 5,
 }
 
