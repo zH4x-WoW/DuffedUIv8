@@ -239,6 +239,7 @@
 	DuffedUIConfigUILocalization.miscclickcast = "Enable Click2Cast-plugin"
 	DuffedUIConfigUILocalization.miscAFKCamera = "Enable AFKCamera"
 	DuffedUIConfigUILocalization.miscXPBar = "Enable XP-Bar"
+	DuffedUIConfigUILocalization.miscXPBarWidth = "Set width of XP-Bar"
 
 	-- duffed
 	DuffedUIConfigUILocalization.duffed = "Duffed"

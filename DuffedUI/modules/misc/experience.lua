@@ -1,7 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 if not C["misc"].XPBar then return end
 
-local barHeight, barWidth = 10, 378
+local barHeight, barWidth = 10, C["misc"].XPBarWidth
 local font = D.Font(C["font"].experience)
 local barTex, flatTex = C["media"].normTex
 local color = RAID_CLASS_COLORS[D.Class]

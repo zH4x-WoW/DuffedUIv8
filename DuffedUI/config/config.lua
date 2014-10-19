@@ -235,6 +235,7 @@ C["misc"] = {
 	["clickcast"] = true,
 	["AFKCamera"] = true,
 	["XPBar"] = true,
+	["XPBarWidth"] = 378,
 }
 
 C["duffed"] = {

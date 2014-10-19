@@ -39,6 +39,7 @@ D.Credits = {
 	"Hizuro",
 	"Duugu",
 	"Phanx",
+	"ObbleYeah",
 }
 
 D.DuffedCredits = {
