@@ -136,10 +136,13 @@ local UpdateLevel = function(self)
 	if self.health.name == nil then return end
 
 	local level, elite, mylevel = tonumber(self.oldlevel:GetText()), self.oldelite:IsShown(), UnitLevel("player")
+	self.rare:SetTextColor(self.oldlevel:GetTextColor())
 
 	if self.oldboss:IsShown() then
-		self.rare:Show()
+		self.rare:SetText("??")
+		self.rare:SetTextColor(.8, .05, 0)
 	elseif elite then
+		self.rare:SetText(level .. (elite and "+"))
 		self.rare:Show()
 	elseif not elite and level == mylevel then
 		self.rare:Hide()
@@ -458,7 +461,6 @@ local badR, badG, badB = unpack(C["nameplate"].threat_badcolor)
 local transitionR, transitionG, transitionB = unpack(C["nameplate"].threat_transitioncolor)
 local UpdateThreat = function(self)
 	if self.health == nil then return end
-	UpdateColor(self.health)
 	if self.hasClass or self.isTagged then return end
 
 	if C["nameplate"].threat then
@@ -466,28 +468,28 @@ local UpdateThreat = function(self)
 			if InCombatLockdown() and self.isFriendly ~= true then
 				if D.Role == "Tank" then
 					self.health:SetStatusBarColor(badR, badG, badB)
-					self.health.bg:SetTexture(badR, badG, badB, 0.25)
+					self.health.bg:SetTexture(badR, badG, badB, .25)
 				else
 					self.health:SetStatusBarColor(goodR, goodG, goodB)
-					self.health.bg:SetTexture(goodR, goodG, goodB, 0.25)
+					self.health.bg:SetTexture(goodR, goodG, goodB, .25)
 				end
 			else
 				self.health:SetStatusBarColor(self.health.r, self.health.g, self.health.b)
-				self.health.bg:SetTexture(self.health.r, self.health.g, self.health.b, 0.25)
+				self.health.bg:SetTexture(self.health.r, self.health.g, self.health.b, .25)
 			end
 		else
-			local r, g, b = self.old_threat:GetVertexColor()
+			local r, g, b = self.health:GetVertexColor()
 			if g + b == 0 then
 				if D.Role == "Tank" then
 					self.health:SetStatusBarColor(goodR, goodG, goodB)
-					self.health.bg:SetTexture(goodR, goodG, goodB, 0.25)
+					self.health.bg:SetTexture(goodR, goodG, goodB, .25)
 				else
 					self.health:SetStatusBarColor(badR, badG, badB)
-					self.health.bg:SetTexture(badR, badG, badB, 0.25)
+					self.health.bg:SetTexture(badR, badG, badB, .25)
 				end
 			else
 				self.health:SetStatusBarColor(transitionR, transitionG, transitionB)
-				self.health.bg:SetTexture(transitionR, transitionG, transitionB, 0.25)
+				self.health.bg:SetTexture(transitionR, transitionG, transitionB, .25)
 			end
 		end
 	else
@@ -560,8 +562,6 @@ local HealthBar_OnShow = function(self)
 	end
 	self.hasClass = nil
 	self.health.name:SetText(self.oldname:GetText())
-	self.highlight:ClearAllPoints()
-	self.highlight:SetAllPoints(self.health)
 
 	fadeIn(self.plate)
 	HideQueque(self)
@@ -635,12 +635,9 @@ local StylePlate = function(self)
 	end
 
 	if self.rare == nil then
-		self.rare = self.health:CreateTexture(nil, "BORDER")
-		self.rare:SetPoint("TOPLEFT", -mult * 3, mult * 3)
-		self.rare:SetPoint("BOTTOMRIGHT", mult * 3, -mult * 3)
-		self.rare:SetTexture(1, 1, 1)
-		self.rare:SetGradientAlpha("HORIZONTAL", 1, .4, 0, 1, 0, 0, 0, 0)
-		self.rare:SetDrawLayer("BORDER", -4)
+		self.rare = self.health:CreateFontString(nil, "OVERLAY")
+		self.rare:SetFont(C["media"].font, 10, "THINOUTLINE")
+		if not C["nameplate"].Percent then self.rare:SetPoint("LEFT", self.health, "RIGHT", 4, 0) else self.rare:SetPoint("LEFT", self.health, "RIGHT", 4, 10) end
 	end
 
 	if self.health.name == nil then
@@ -656,11 +653,6 @@ local StylePlate = function(self)
 			self.health.perc:SetFont(Font, 10, "THINOUTLINE")
 			self.health.perc:SetPoint("LEFT", self.health, "RIGHT", 4, 0)
 		end
-	end
-
-	if self.highlight == nil then
-		highlight:SetTexture(1, 1, 1, .15)
-		self.highlight = highlight
 	end
 
 	if self.castbar == nil then
@@ -756,7 +748,6 @@ local StylePlate = function(self)
 	self:HookScript("OnHide", function(self)
 		if not self.health then return end
 		self.plate:Hide()
-		self.highlight:Hide()
 		self.castbar:Hide()
 		self.unit = nil
 		self.isMarked = nil
