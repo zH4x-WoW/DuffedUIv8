@@ -139,10 +139,11 @@ local UpdateLevel = function(self)
 	self.rare:SetTextColor(self.oldlevel:GetTextColor())
 
 	if self.oldboss:IsShown() then
-		self.rare:SetText("??")
-		self.rare:SetTextColor(.8, .05, 0)
+		self.health.name:SetText("|cffCC0D00" .. ("??") .. "|r " .. self.oldname:GetText())
+		self.rare:Show()
 	elseif elite then
-		self.rare:SetText(level .. (elite and "+"))
+		local colr = GetQuestDifficultyColor(level)
+		self.health.name:SetText(D.RGBToHex(colr.r, colr.g, colr.b) .. level .. (elite and "+") .. "|r " .. self.oldname:GetText())
 		self.rare:Show()
 	elseif not elite and level == mylevel then
 		self.rare:Hide()
@@ -637,7 +638,6 @@ local StylePlate = function(self)
 	if self.rare == nil then
 		self.rare = self.health:CreateFontString(nil, "OVERLAY")
 		self.rare:SetFont(C["media"].font, 10, "THINOUTLINE")
-		if not C["nameplate"].Percent then self.rare:SetPoint("LEFT", self.health, "RIGHT", 4, 0) else self.rare:SetPoint("LEFT", self.health, "RIGHT", 4, 10) end
 	end
 
 	if self.health.name == nil then
