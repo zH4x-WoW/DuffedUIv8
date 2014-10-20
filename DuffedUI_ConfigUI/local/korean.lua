@@ -53,6 +53,7 @@
 	DuffedUIConfigUILocalization.unitframesplayermodel = "Set Portraitstyle (Icon or Model, default => Model)"
 	DuffedUIConfigUILocalization.unitframesbuffsize = "Set size of Buffs on Targetframe"
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "Set size of Debuffs on Targetframe"
+	DuffedUIConfigUILocalization.unitframesEnable_ToT = "Enable Target of Target-Frame"
 
 	-- chat
 	DuffedUIConfigUILocalization.chat = "Chat"

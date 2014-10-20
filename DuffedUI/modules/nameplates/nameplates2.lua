@@ -478,7 +478,7 @@ local UpdateThreat = function(self)
 				self.health.bg:SetTexture(self.health.r, self.health.g, self.health.b, .25)
 			end
 		else
-			local r, g, b = self.health:GetVertexColor()
+			local r, g, b = self.old_threat:GetVertexColor()
 			if g + b == 0 then
 				if D.Role == "Tank" then
 					self.health:SetStatusBarColor(goodR, goodG, goodB)

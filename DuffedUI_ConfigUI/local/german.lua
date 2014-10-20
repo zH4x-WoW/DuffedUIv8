@@ -53,6 +53,7 @@
 	DuffedUIConfigUILocalization.unitframesplayermodel = "Setze den Portraitstil (Icon oder Model, Standard => Model)"
 	DuffedUIConfigUILocalization.unitframesbuffsize = "Wähle die Größe der Stärkungszauber am Ziel"
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "Wähle die Größe der Schwächungszauber am Ziel"
+	DuffedUIConfigUILocalization.unitframesEnable_ToT = "Aktiviere Ziel des Ziel-Fenster"
 
 	-- chat
 	DuffedUIConfigUILocalization.chat = "Chat"

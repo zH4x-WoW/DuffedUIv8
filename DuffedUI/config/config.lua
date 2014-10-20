@@ -53,6 +53,7 @@ C["unitframes"] = {
 	["playermodel"] = "Model",
 	["buffsize"] = 20,
 	["debuffsize"] = 20,
+	["Enable_ToT"] = true,
 }
 
 C["chat"] = {

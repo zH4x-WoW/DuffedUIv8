@@ -1178,9 +1178,11 @@ target:SetParent(DuffedUIPetBattleHider)
 target:Point("BOTTOM", UIParent, "BOTTOM", 340, 240)
 target:Size(218, 44)
 
-local tot = oUF:Spawn('targettarget', "DuffedUITargetTarget")
-tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMLEFT", 0, -2)
-tot:Size(129, 36)
+if C["unitframes"].Enable_ToT then
+	local tot = oUF:Spawn('targettarget', "DuffedUITargetTarget")
+	tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMLEFT", 0, -2)
+	tot:Size(129, 36)
+end
 
 local pet = oUF:Spawn('pet', "DuffedUIPet")
 pet:SetParent(DuffedUIPetBattleHider)
@@ -1201,11 +1203,7 @@ if C["raid"].arena then
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "DuffedUIArena"..i)
 		arena[i]:SetParent(DuffedUIPetBattleHider)
-		if i == 1 then
-			arena[i]:SetPoint("RIGHT", UIParent, "RIGHT", -163, -250)
-		else
-			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35)
-		end
+		if i == 1 then arena[i]:SetPoint("RIGHT", UIParent, "RIGHT", -163, -250) else arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35) end
 		arena[i]:Size(200, 27)
 	end
 
@@ -1265,7 +1263,7 @@ if C["raid"].arena then
 				for i=1, 5 do
 					local f = _G["DuffedUIPrepArena"..i]
 					f:Hide()
-				end			
+				end
 			end
 		end
 	end)
@@ -1285,11 +1283,7 @@ if C["raid"].showboss then
 	for i = 1, MAX_BOSS_FRAMES do
 		boss[i] = oUF:Spawn("boss"..i, "DuffedUIBoss"..i)
 		boss[i]:SetParent(DuffedUIPetBattleHider)
-		if i == 1 then
-			boss[i]:SetPoint("RIGHT", UIParent, "RIGHT", -163, -250)
-		else
-			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 35)             
-		end
+		if i == 1 then boss[i]:SetPoint("RIGHT", UIParent, "RIGHT", -163, -250) else boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 35) end
 		boss[i]:Size(200, 27)
 	end
 end
@@ -1309,11 +1303,7 @@ if C["raid"].maintank == true then
 		'template', 'oUF_DuffedUIMtt'
 	)
 	tank:SetParent(DuffedUIPetBattleHider)
-	if C["chat"].rbackground then
-		tank:SetPoint("TOPLEFT", DuffedUIChatBackgroundRight, "TOPLEFT", 2, 52)
-	else
-		tank:SetPoint("TOPLEFT", ChatFrame4, "TOPLEFT", 2, 62)
-	end
+	if C["chat"].rbackground then tank:SetPoint("TOPLEFT", DuffedUIChatBackgroundRight, "TOPLEFT", 2, 52) else tank:SetPoint("TOPLEFT", ChatFrame4, "TOPLEFT", 2, 62) end
 end
  
 if C["raid"].mainassist == true then
@@ -1329,11 +1319,7 @@ if C["raid"].mainassist == true then
 		'template', 'oUF_DuffedUIMtt'
 	)
 	assist:SetParent(DuffedUIPetBattleHider)
-	if C["raid"].maintank == true then
-		assist:SetPoint("TOPLEFT", DuffedUIMainTank, "BOTTOMLEFT", 2, -50)
-	else
-		assist:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-	end
+	if C["raid"].maintank == true then assist:SetPoint("TOPLEFT", DuffedUIMainTank, "BOTTOMLEFT", 2, -50) else assist:SetPoint("CENTER", UIParent, "CENTER", 0, 0) end
 end
 
 local party = oUF:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)

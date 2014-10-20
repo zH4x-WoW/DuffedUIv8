@@ -1175,9 +1175,11 @@ target:SetParent(DuffedUIPetBattleHider)
 target:Point("BOTTOM", UIParent, "BOTTOM", 340, 240)
 target:Size(218, 44)
 
-local tot = oUF:Spawn('targettarget', "DuffedUITargetTarget")
-tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMRIGHT", -1, -8)
-tot:Size(129, 36)
+if C["unitframes"].Enable_ToT then
+	local tot = oUF:Spawn('targettarget', "DuffedUITargetTarget")
+	tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMRIGHT", -1, -8)
+	tot:Size(129, 36)
+end
 
 local pet = oUF:Spawn('pet', "DuffedUIPet")
 pet:SetParent(DuffedUIPetBattleHider)
@@ -1198,11 +1200,7 @@ if C["raid"].arena then
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "DuffedUIArena"..i)
 		arena[i]:SetParent(DuffedUIPetBattleHider)
-		if i == 1 then
-			arena[i]:SetPoint("RIGHT", UIParent, "RIGHT", -163, -250)
-		else
-			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35)
-		end
+		if i == 1 then arena[i]:SetPoint("RIGHT", UIParent, "RIGHT", -163, -250) else arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35) end
 		arena[i]:Size(200, 27)
 	end
 
