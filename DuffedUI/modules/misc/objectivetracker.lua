@@ -2,7 +2,7 @@ local D, C, L = unpack(select(2, ...))
 
 --[[Modified Objective Tracker from ObbleYeah - All Credits goes to him]]--
 local otfheight = 450
-local otfwidth = 188
+local otfwidth = 190
 local titlesize = 13
 local otf = ObjectiveTrackerFrame
 local lST = "Wowhead"
@@ -98,13 +98,13 @@ end)
 local function moveQuestObjectiveItems(self)
 	local a = {self:GetPoint()}
 	self:ClearAllPoints()
-	self:SetPoint("TOPRIGHT", a[2], "TOPLEFT", -13, -7)
+	self:SetPoint("TOPRIGHT", a[2], "TOPRIGHT", 20, -7)
 	self:SetFrameLevel(0)
 
 	local Icon = self.icon
 	self:SetNormalTexture("")
 	self:CreateBackdrop()
-	self.Backdrop:SetOutside(self, 0, 0)
+	self.backdrop:SetOutside(self, 0, 0)
 	self:StyleButton()
 	Icon:SetTexCoord(unpack(D.IconCoord))
 	Icon:SetInside()
