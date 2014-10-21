@@ -659,6 +659,7 @@ function ToggleBackpack() ToggleAllBags() end
 function OpenAllBags() ToggleAllBags() end
 function OpenBackpack() ToggleAllBags() end
 function ToggleAllBags()
+	if ((MerchantFrame:IsShown() or InboxFrame:IsVisible()) and ContainerFrame1:IsShown()) then return end
 	if ContainerFrame1:IsShown() then
 		if not BankFrame:IsShown() then
 			_G["DuffedUI_Bag"]:Hide()

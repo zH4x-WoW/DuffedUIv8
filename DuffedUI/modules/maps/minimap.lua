@@ -115,6 +115,11 @@ Minimap:SetScript("OnMouseUp", function(self, btn)
 	end
 end)
 
+Minimap:EnableMouseWheel(true)
+Minimap:SetScript("OnMouseWheel", function(self, delta)
+	if delta > 0 then MinimapZoomIn:Click() elseif delta < 0 then MinimapZoomOut:Click() end
+end)
+
 local m_zone = CreateFrame("Frame", "DuffedUIMinimapZone", DuffedUIMinimap)
 m_zone:SetTemplate("Transparent")
 m_zone:Size(0,20)

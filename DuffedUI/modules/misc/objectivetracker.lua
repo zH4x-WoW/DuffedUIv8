@@ -102,7 +102,9 @@ local function moveQuestObjectiveItems(self)
 	self:SetFrameLevel(0)
 
 	local Icon = self.icon
-	self:SkinButton()
+	self:SetNormalTexture("")
+	self:CreateBackdrop()
+	self.Backdrop:SetOutside(self, 0, 0)
 	self:StyleButton()
 	Icon:SetTexCoord(unpack(D.IconCoord))
 	Icon:SetInside()
