@@ -60,7 +60,13 @@ local function MoveButtonBar(button, bar)
 	end
 
 	if button == DuffedUIBar5Button then
-		if bar:IsShown() then button.text:SetText(cm..">|r") else button.text:SetText(cp.."<|r") end
+		if bar:IsShown() then
+			button.text:SetText(cm..">|r")
+			DuffedUIPetBarMover:Point("RIGHT", DuffedUIBar5, "LEFT", -6, 0)
+		else
+			button.text:SetText(cp.."<|r")
+			DuffedUIPetBarMover:Point("RIGHT", UIParent, "RIGHT", -14, -14)
+		end
 	end
 end
 
