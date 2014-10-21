@@ -29,6 +29,7 @@ DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
 
 		local INVISIBLE = [=[Interface\Addons\DuffedUI\medias\fonts\invisible_font.ttf]=]
 		COMBAT = INVISIBLE
+		DAMAGE_TEXT_FONT = INVISIBLE
 	end
 
 	UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 11
