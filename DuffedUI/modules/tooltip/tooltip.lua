@@ -32,7 +32,7 @@ DuffedUITooltips.Tooltips = {
 }
 
 DuffedUITooltips.Classification = {
-	worldboss = "|cffAF5050World Boss|r",
+	worldboss = "|cffAF5050Boss|r",
 	rareelite = "|cffAF5050+ Rare|r",
 	elite = "|cffAF5050+|r",
 	rare = "|cffAF5050Rare|r",
@@ -162,7 +162,7 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		end
 	end
 
-	if UnitExists(Unit .. "target") and Unit ~= "player" then
+	if (UnitExists(Unit .. "target") and Unit ~= "player") then
 		local Hex, R, G, B = DuffedUITooltips:GetColor(Unit .. "target")
 
 		if (not R) and (not G) and (not B) then R, G, B = 1, 1, 1 end
@@ -174,6 +174,9 @@ end
 function DuffedUITooltips:SetColor()
 	local GetMouseFocus = GetMouseFocus()
 	local Unit = (select(2, self:GetUnit())) or (GetMouseFocus and GetMouseFocus:GetAttribute("unit"))
+
+	if (not Unit) and (UnitExists("mouseover")) then Unit = "mouseover" end
+
 	local Reaction = Unit and UnitReaction(Unit, "player")
 	local Player = Unit and UnitIsPlayer(Unit)
 	local Tapped = Unit and UnitIsTapped(Unit)
