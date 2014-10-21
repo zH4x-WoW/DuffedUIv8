@@ -11,14 +11,14 @@ end
 
 for i = 1, total do
 	frame[i] = CreateFrame("Frame", "DuffedUIPopupDialog" .. i, UIParent)
-	frame[i]:SetSize(250, 80)
+	frame[i]:SetSize(250, 100)
 	frame[i]:SetFrameLevel(3)
 	frame[i]:SetTemplate("Transparent")
 	frame[i]:SetPoint("TOP", UIParent, "TOP", 0, -150)
 	frame[i]:Hide()
 
 	frame[i].Text = CreateFrame("MessageFrame", nil, frame[i])
-	frame[i].Text:SetPoint("CENTER")
+	frame[i].Text:SetPoint("CENTER", 0, 10)
 	frame[i].Text:SetSize(230, 60)
 	frame[i].Text:SetFont(C["media"].font, 11)
 	frame[i].Text:SetInsertMode("TOP")
@@ -26,7 +26,7 @@ for i = 1, total do
 	frame[i].Text:AddMessage("")
 
 	frame[i].button1 = CreateFrame("Button", "DuffedUIPopupDialogButtonAccept" .. i, frame[i])
-	frame[i].button1:SetPoint("BOTTOMLEFT", frame[i], "BOTTOMLEFT", 7, 7)
+	frame[i].button1:SetPoint("BOTTOMLEFT", frame[i], "BOTTOMLEFT", 6, 7)
 	frame[i].button1:SetSize(100, 20)
 	frame[i].button1:SetTemplate("Default")
 	frame[i].button1:FontString("Text", C["media"].font, 11)
@@ -37,7 +37,7 @@ for i = 1, total do
 	frame[i].button1:SkinButton()
 
 	frame[i].button2 = CreateFrame("Button", "DuffedUIPopupDialogButtonCancel" .. i, frame[i])
-	frame[i].button2:SetPoint("BOTTOMRIGHT", frame[i], "BOTTOMRIGHT", -7, 7)
+	frame[i].button2:SetPoint("BOTTOMRIGHT", frame[i], "BOTTOMRIGHT", -6, 7)
 	frame[i].button2:SetSize(100, 20)
 	frame[i].button2:SetTemplate("Default")
 	frame[i].button2:FontString("Text", C["media"].font, 11)
@@ -52,9 +52,9 @@ for i = 1, total do
 	frame[i].EditBox:EnableMouse(true)
 	frame[i].EditBox:SetAutoFocus(true)
 	frame[i].EditBox:SetFontObject(ChatFontNormal)
-	frame[i].EditBox:Width(380)
+	frame[i].EditBox:Width(230)
 	frame[i].EditBox:Height(16)
-	frame[i].EditBox:SetPoint("BOTTOM", frame[i], 0, 12)
+	frame[i].EditBox:SetPoint("BOTTOM", frame[i], 0, 35)
 	frame[i].EditBox:SetScript("OnEscapePressed", function() frame[i]:Hide() end)
 	frame[i].EditBox:CreateBackdrop()
 	frame[i].EditBox.backdrop:SetPoint("TOPLEFT", -4, 4)

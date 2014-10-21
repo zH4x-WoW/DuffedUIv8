@@ -31,10 +31,10 @@ D.DataTextPosition(C["datatext"].friends, Text)
 
 local menuFrame = CreateFrame("Frame", "DuffedUIFriendRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 local menuList = {
-	{ text = OPTIONS_MENU, isTitle = true,notCheckable=true},
-	{ text = INVITE, hasArrow = true,notCheckable=true, },
-	{ text = CHAT_MSG_WHISPER_INFORM, hasArrow = true,notCheckable=true, },
-	{ text = PLAYER_STATUS, hasArrow = true, notCheckable=true,
+	{ text = OPTIONS_MENU, isTitle = true, notCheckable = true},
+	{ text = INVITE, hasArrow = true,notCheckable=true},
+	{ text = CHAT_MSG_WHISPER_INFORM, hasArrow = true, notCheckable = true},
+	{ text = PLAYER_STATUS, hasArrow = true, notCheckable = true,
 		menuList = {
 			{ text = "|cff2BC226"..AVAILABLE.."|r", notCheckable=true, func = function() if IsChatAFK() then SendChatMessage("", "AFK") elseif IsChatDND() then SendChatMessage("", "DND") end end },
 			{ text = "|cffE7E716"..DND.."|r", notCheckable=true, func = function() if not IsChatDND() then SendChatMessage("", "DND") end end },
@@ -102,7 +102,7 @@ local function UpdateFriendTable(total)
 		name, level, class, area, connected, status, note = GetFriendInfo(i)
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
-		-- get the correct index in our table		
+		-- get the correct index in our table
 		local index = GetTableIndex(friendTable, 1, name)
 		-- we cannot find a friend in our table, so rebuild it
 		if index == -1 then
@@ -147,7 +147,7 @@ local function UpdateBNTable(total)
 		
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
-		-- get the correct index in our table		
+		-- get the correct index in our table
 		local index = GetTableIndex(BNTable, 1, presenceID)
 		-- we cannot find a BN member in our table, so rebuild it
 		if index == -1 then
