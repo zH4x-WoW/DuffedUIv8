@@ -7,7 +7,7 @@ local tslu = 0
 local numkids = 0
 local bubbles = {}
 
-if D.eyefinity then
+if (D.ScreenWidth > 3840) then
 	-- hide options, disable bubbles, not compatible eyefinity
 	InterfaceOptionsSocialPanelChatBubbles:SetScale(0.00001)
 	InterfaceOptionsSocialPanelPartyChat:SetScale(0.00001)
