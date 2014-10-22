@@ -6,6 +6,8 @@
 	DuffedUIConfigUILocalization.generalbackdropcolor = "Set default backdrop color of panels"
 	DuffedUIConfigUILocalization.generalbordercolor = "Set default border color of panels"
 	DuffedUIConfigUILocalization.generalclasscolor = "Enable class color for textelements"
+	DuffedUIConfigUILocalization.generalFrameScaleActionBar = "Set Scale of Actionbar 1, 2 and Rightbar"
+	DuffedUIConfigUILocalization.generalFrameScaleMinimap = "Set Scale of Minimap"
 
 	-- font
 	DuffedUIConfigUILocalization.font = "Fonts"
@@ -112,6 +114,7 @@
 	DuffedUIConfigUILocalization.actionbarRightsidebars = "Enable mouseover for Right SideBar on chatframe"
 	DuffedUIConfigUILocalization.actionbarLeftsidebarshorizontal = "Set left SideBar horizontal"
 	DuffedUIConfigUILocalization.actionbarRightsidebarshorizontal = "Set right SideBar horizontal"
+	DuffedUIConfigUILocalization.raidFrameScaleRaid = "Set Scale of Raid"
 
 	-- raid frames
 	DuffedUIConfigUILocalization.raid = "Raid Frames"

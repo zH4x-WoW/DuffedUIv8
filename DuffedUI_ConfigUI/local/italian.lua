@@ -6,6 +6,8 @@
 	DuffedUIConfigUILocalization.generalbackdropcolor = "Set default backdrop color of panels"
 	DuffedUIConfigUILocalization.generalbordercolor = "Set default border color of panels"
 	DuffedUIConfigUILocalization.generalclasscolor = "Enable class color for textelements"
+	DuffedUIConfigUILocalization.generalFrameScaleActionBar = "Set Scale of Actionbar 1, 2 and Rightbar"
+	DuffedUIConfigUILocalization.generalFrameScaleMinimap = "Set Scale of Minimap"
 
 	-- font
 	DuffedUIConfigUILocalization.font = "Fonts"
@@ -129,6 +131,7 @@
 	DuffedUIConfigUILocalization.raidframewidth = "Set width of the unitframe"
 	DuffedUIConfigUILocalization.raidframeheight = "Set height of the unitframe"
 	DuffedUIConfigUILocalization.raidpointer = "Enable Pointer for direction display"
+	DuffedUIConfigUILocalization.raidFrameScaleRaid = "Set Scale of Raid"
 
 	-- datatext
 	DuffedUIConfigUILocalization.datatext = "Data Text"

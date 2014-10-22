@@ -6,6 +6,8 @@
 	DuffedUIConfigUILocalization.generalbackdropcolor = "Setze Standard-Hintergrundfarbe der Panels"
 	DuffedUIConfigUILocalization.generalbordercolor = "Setze Standard-Rahmenfarbe der Panels"
 	DuffedUIConfigUILocalization.generalclasscolor = "Aktiviere Klassenfarben für Textelemente"
+	DuffedUIConfigUILocalization.generalFrameScaleActionBar = "Setze Skalierung der Aktionsleisten 1, 2 und der rechten Leiste"
+	DuffedUIConfigUILocalization.generalFrameScaleMinimap = "Setze Skalierung der Minimap"
 
 	-- font
 	DuffedUIConfigUILocalization.font = "Schriftarten"
@@ -130,6 +132,7 @@
 	DuffedUIConfigUILocalization.raidframewidth = "Einstellung für die Breite der Einheitenfenster"
 	DuffedUIConfigUILocalization.raidframeheight = "Einstellung für die Höhe der Einheitenfenster"
 	DuffedUIConfigUILocalization.raidpointer = "Aktiviere Richtungspfeile für Deine Schlachtzugsmitglieder"
+	DuffedUIConfigUILocalization.raidFrameScaleRaid = "Setze Skalierung des Schlachtzugsfenster"
 
 	-- datatext
 	DuffedUIConfigUILocalization.datatext = "Datatext"
@@ -217,7 +220,7 @@
 	DuffedUIConfigUILocalization.bagsenable = "Aktiviere die 'Alles in einer Tasche' Ansicht"
 	DuffedUIConfigUILocalization.bagsbpr = "Taschenplatzanzahl pro Reihe"
 	DuffedUIConfigUILocalization.bagsmovable = "Aktiviere bewegliche Taschen"
-	DuffedUIConfigUILocalization.bagsscale = "Sklalierung für Bank und Taschen"
+	DuffedUIConfigUILocalization.bagsscale = "Skalierung für Bank und Taschen"
 	DuffedUIConfigUILocalization.bagsspacing = "Zwischenraum zwischen den Taschenslots"
 	DuffedUIConfigUILocalization.bagsbuttonsize = "Größe der Taschenplätze"
 	DuffedUIConfigUILocalization.bagsBounce = "Aktiviere Pulseanimation für neue Gegenstände"
