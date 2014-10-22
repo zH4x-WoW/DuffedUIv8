@@ -33,17 +33,17 @@ local function ShowOrHideBar(bar, button)
 	else
 		if bar == DuffedUIBar3 then
 			db.bar3 = false
-			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] hide; show")
+			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] show; hide")
 		end
 
 		if bar == DuffedUIBar4 then
 			db.bar4 = false
-			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] hide; show")
+			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] show; hide")
 		end
 
 		if bar == DuffedUIBar5 then
 			db.bar5 = false
-			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] hide; show")
+			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] show; hide")
 		end
 	end
 end
