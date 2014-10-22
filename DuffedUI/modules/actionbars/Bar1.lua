@@ -2,6 +2,7 @@ local D, C, L = unpack(select(2, ...))
 if not C["actionbar"].enable == true then return end
 
 local bar = DuffedUIBar1
+local FrameScale = C["general"].ActionBarFrameScale
 
 local Page = {
 	["DRUID"] = "[bonusbar:1,nostealth] 7; [bonusbar:1,stealth] 8; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;",
@@ -51,16 +52,16 @@ bar:SetScript("OnEvent", function(self, event, unit, ...)
 		local button
 		for i = 1, 12 do
 			button = _G["ActionButton" .. i]
-			button:SetSize(D.buttonsize, D.buttonsize)
+			button:SetSize((D.buttonsize * FrameScale), (D.buttonsize * FrameScale))
 			button:ClearAllPoints()
 			button:SetParent(bar)
 			button:SetFrameStrata("BACKGROUND")
 			button:SetFrameLevel(15)
 			if i == 1 then
-				button:SetPoint("BOTTOMLEFT", D.buttonspacing, D.buttonspacing)
+				button:SetPoint("BOTTOMLEFT", (D.buttonspacing * FrameScale), (D.buttonspacing * FrameScale))
 			else
 				local previous = _G["ActionButton"..i-1]
-				button:SetPoint("LEFT", previous, "RIGHT", D.buttonspacing, 0)
+				button:SetPoint("LEFT", previous, "RIGHT", (D.buttonspacing * FrameScale), 0)
 			end
 		end
 	elseif event == "UPDATE_VEHICLE_ACTIONBAR" or event == "UPDATE_OVERRIDE_ACTIONBAR" then

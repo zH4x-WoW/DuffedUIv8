@@ -6,6 +6,7 @@ C["general"] = {
 	["backdropcolor"] = {.05, .05, .05},
 	["bordercolor"] = {.125, .125, .125},
 	["classcolor"] = true,
+	["ActionBarFrameScale"] = 1,
 }
 
 C["font"] = {

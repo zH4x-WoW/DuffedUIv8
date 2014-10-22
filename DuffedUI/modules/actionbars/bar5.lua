@@ -2,25 +2,26 @@ local D, C, L = unpack(select(2, ...))
 if C["actionbar"].enable ~= true then return end
 
 local bar = DuffedUIBar5
+local FrameScale = C["general"].ActionBarFrameScale
 MultiBarRight:SetParent(bar)
 
 for i= 1, 12 do
 	local b = _G["MultiBarRightButton" .. i]
 	local b2 = _G["MultiBarRightButton" .. i - 1]
-	b:SetSize(D.buttonsize, D.buttonsize)
+	b:SetSize((D.buttonsize * FrameScale), (D.buttonsize * FrameScale))
 	b:ClearAllPoints()
 	b:SetFrameStrata("BACKGROUND")
 	b:SetFrameLevel(15)
 
 	if C["actionbar"].rightbarvertical then
-		if i == 1 then b:SetPoint("BOTTOMLEFT", bar, D.buttonspacing, D.buttonspacing) else b:SetPoint("LEFT", b2, "RIGHT", D.buttonspacing, 0) end
+		if i == 1 then b:SetPoint("BOTTOMLEFT", bar, (D.buttonspacing * FrameScale), (D.buttonspacing * FrameScale)) else b:SetPoint("LEFT", b2, "RIGHT", D.buttonspacing, 0) end
 	else
-		if i == 1 then b:SetPoint("TOPRIGHT", bar, -D.buttonspacing, -D.buttonspacing) else b:SetPoint("TOP", b2, "BOTTOM", 0, -D.buttonspacing) end
+		if i == 1 then b:SetPoint("TOPRIGHT", bar, -(D.buttonspacing * FrameScale), -(D.buttonspacing * FrameScale)) else b:SetPoint("TOP", b2, "BOTTOM", 0, -(D.buttonspacing * FrameScale)) end
 	end
 end
 RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
 
--- mouseover
+--[[Mouseover]]--
 if C["actionbar"].rightbarsmouseover then
 	local rbmoh = CreateFrame("Frame", nil, DuffedUIBar3)
 	rbmoh:Point("RIGHT", UIParent, "RIGHT", 0, -14)
