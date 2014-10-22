@@ -341,10 +341,7 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 		hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
 		ItemRefCloseButton:SkinCloseButton()
 
-		for _, Tooltip in pairs(DuffedUITooltips.Tooltips) do
-			if Tooltip == GameTooltip then Tooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit) end
-			Tooltip:HookScript("OnShow", self.Skin)
-		end
+		for _, Tooltip in pairs(DuffedUITooltips.Tooltips) do Tooltip:HookScript("OnShow", self.Skin) end
 
 		if C["tooltip"].hidebuttons == true then
 			local CombatHideActionButtonsTooltip = function(self)
@@ -367,6 +364,11 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 		HealthBar:ClearAllPoints()
 		HealthBar:Point("BOTTOMLEFT", HealthBar:GetParent(), "TOPLEFT", 2, 5)
 		HealthBar:Point("BOTTOMRIGHT", HealthBar:GetParent(), "TOPRIGHT", -2, 5)
+
+		for _, Tooltip in pairs(DuffedUITooltips.Tooltips) do
+			DuffedUITooltips:UnregisterEvent("PLAYER_ENTERING_WORLD")
+			if Tooltip == GameTooltip then Tooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit) end
+		end
 	else
 		if addon ~= "Blizzard_DebugTools" then return end
 		if FrameStackTooltip then
