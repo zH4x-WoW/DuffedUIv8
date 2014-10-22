@@ -2,7 +2,7 @@ local D, C, L = unpack(select(2, ...))
 if C["actionbar"].enable ~= true then return end
 
 local bar = DuffedUIBar5
-local FrameScale = C["general"].ActionBarFrameScale
+local FrameScale = C["general"].FrameScaleActionBar
 MultiBarRight:SetParent(bar)
 
 for i= 1, 12 do

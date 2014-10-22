@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-local FrameScale = C["general"].ActionBarFrameScale
+local FrameScale = C["general"].FrameScaleActionBar
 
 local ileft = CreateFrame("Frame", "DuffedUIInfoLeft", UIParent)
 ileft:SetTemplate("Default")
