@@ -24,7 +24,7 @@ local function Shared(self, unit)
 	local health = CreateFrame("StatusBar", nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	if unit:find("partypet") then health:Height(18) else health:Height(C["raid"].frameheight - 15) end
+	if unit:find("partypet") then health:Height(18) else health:Height((C["raid"].frameheight - 15) * C["raid"].FrameScaleRaid) end
 	health:SetStatusBarTexture(normTex)
 	health:CreateBackdrop()
 	self.Health = health
@@ -249,8 +249,8 @@ oUF:Factory(function(self)
 			self:SetWidth(header:GetAttribute("initial-width"))
 			self:SetHeight(header:GetAttribute("initial-height"))
 		]],
-		"initial-width", D.Scale(C["raid"].framewidth),
-		"initial-height", D.Scale(C["raid"].frameheight),
+		"initial-width", D.Scale(C["raid"].framewidth * C["raid"].FrameScaleRaid),
+		"initial-height", D.Scale(C["raid"].frameheight * C["raid"].FrameScaleRaid),
 		"showPlayer", C["raid"].showplayerinparty,
 		"showParty", true,
 		"showRaid", true, 
@@ -277,11 +277,11 @@ oUF:Factory(function(self)
 		local pets = {} 
 			pets[1] = oUF:Spawn("partypet1", "oUF_DuffedUIPartyPet1") 
 			pets[1]:Point("BOTTOMLEFT", raid, "TOPLEFT", 0, 8)
-			pets[1]:Size(C["raid"].framewidth * D.raidscale, 18 * D.raidscale)
+			pets[1]:Size(C["raid"].framewidth * C["raid"].FrameScaleRaid, 18 * C["raid"].FrameScaleRaid)
 		for i =2, 4 do 
 			pets[i] = oUF:Spawn("partypet"..i, "oUF_DuffedUIPartyPet"..i) 
 			pets[i]:Point("LEFT", pets[i-1], "RIGHT", 8, 0)
-			pets[i]:Size(C["raid"].framewidth * D.raidscale, 18 * D.raidscale)
+			pets[i]:Size(C["raid"].framewidth * C["raid"].FrameScaleRaid, 18 * C["raid"].FrameScaleRaid)
 		end
 
 		local ShowPet = CreateFrame("Frame")
