@@ -62,38 +62,6 @@ otfmove:SetScript("OnEnter", function(s) OTFM_Tooltip(s) end)
 otfmove:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
 otf.HeaderMenu.MinimizeButton:SkinCloseButton()
 
---[[collapse the watchframe if in a bossfight, arena of world state capture bar is showing https://github.com/haste/oWatchFrameToggler/blob/master/auto.lua]]--
-local otfboss = CreateFrame("Frame", nil)
-otfboss:RegisterEvent("PLAYER_ENTERING_WORLD")
-otfboss:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT")
-otfboss:RegisterEvent("UNIT_TARGETABLE_CHANGED")
-otfboss:RegisterEvent("PLAYER_REGEN_ENABLED")
-otfboss:RegisterEvent("UPDATE_WORLD_STATES")
-
-local function bossexists()
-	for i = 1, MAX_BOSS_FRAMES do
-		if UnitExists("boss" .. i) then return true end
-	end
-end
-
-otfboss:SetScript("OnEvent", function(self, event)
-	local _, instanceType = IsInInstance()
-	local bar = _G["WorldStateCaptureBar1"]
-	local mapcheck = GetMapInfo(mapFileName)
-
-	if bossexists() then
-		if not otf.collapsed then ObjectiveTracker_Collapse() end
-	elseif instanceType == "arena" or instanceType == "pvp" then
-		if not otf.collapsed then ObjectiveTracker_Collapse() end
-	elseif bar and bar:IsVisible() then
-		if not otf.collapsed then ObjectiveTracker_Collapse() end
-	elseif otf.collapsed and instanceType == "raid" and not InCombatLockdown() then
-		ObjectiveTracker_Expand()
-	elseif otf.collapsed and mapcheck == "Ashran" and not InCombatLockdown() then
-		ObjectiveTracker_Expand()
-	end
-end)
-
 --[[quest item buttons moving and skinning]]--
 local function moveQuestObjectiveItems(self)
 	local a = {self:GetPoint()}

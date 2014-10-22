@@ -601,7 +601,7 @@ function CreateDuffedUIConfigUI()
 	scroll2:SetPoint("CENTER", cf2)
 	sf2:SetScrollChild(scroll2)
 
-	local credit2 = "Special thanks to to my Betatester: "
+	local credit2 = "Special thanks to my Betatester & Bugreporter: "
 	for i = 1, #D.DuffedCredits do
 		if (i ~= 1) then credit2 = credit2 .. ", " .. "|cffC41F3B" ..  D.DuffedCredits[i]  .. "|r" else credit2 = credit2 .. "|cffC41F3B" ..  D.DuffedCredits[i]  .. "|r" end
 	end
