@@ -1,8 +1,10 @@
-local D, C, L = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...))
 
-SlashCmdList.RCSLASH = DoReadyCheck
-SLASH_RCSLASH1 = "/rc"
+--[[Slash Commands]]--
+SLASH_RELOADUI1 = "/rl"
+SlashCmdList.RELOADUI = ReloadUI
 
+--[[Disband Party / Raid]]--
 local function DisbandRaidGroup()
 	if InCombatLockdown() then return end
 
@@ -34,9 +36,8 @@ SlashCmdList["GROUPDISBAND"] = function()
 	if instanceType == "pvp" or instanceType == "arena" then return end
 	if UnitIsGroupLeader("player") or UnitIsGroupAssistant("player") then D.ShowPopup("DUFFEDUIDISBAND_RAID") end
 end
-SLASH_GROUPDISBAND1 = '/gd'
-SLASH_GROUPDISBAND2 = '/rd'
+SLASH_GROUPDISBAND1 = "/gd"
+SLASH_GROUPDISBAND2 = "/rd"
 
--- Leave party chat command
-SlashCmdList["LEAVEPARTY"] = function() LeaveParty() end
-SLASH_LEAVEPARTY1 = '/leaveparty'
+local x = "Commands loaded"
+print(x)

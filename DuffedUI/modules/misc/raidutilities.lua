@@ -1,8 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-----------------------------
--- Raid Utility(by Elv22) --
-----------------------------
+--[[Raid Utility(by Elv22)]]--
 local anchor = CreateFrame("Frame", "DuffedUIRaidUtilityAnchor", UIParent)
 anchor:SetMovable(true)
 anchor:SetTemplate("Default")
