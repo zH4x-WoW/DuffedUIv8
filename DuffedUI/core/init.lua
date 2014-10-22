@@ -6,9 +6,6 @@ engine[4] = {}
 
 DuffedUI = engine
 
-SLASH_RELOADUI1 = "/rl"
-SlashCmdList.RELOADUI = ReloadUI
-
 ERR_NOT_IN_RAID = ""
 
 local UIHider = CreateFrame("Frame", "DuffedUIUIHider", UIParent)
@@ -17,8 +14,6 @@ UIHider:Hide()
 local PetBattleHider = CreateFrame("Frame", "DuffedUIPetBattleHider", UIParent, "SecureHandlerStateTemplate");
 PetBattleHider:SetAllPoints(UIParent)
 RegisterStateDriver(PetBattleHider, "visibility", "[petbattle] hide; show")
-
-
 
 DuffedUI [1].SetPerCharVariable = function(varName, value)
 	-- print("ATTENTION: SPCV called prior to VARIABLES_LOADED event")
