@@ -196,14 +196,14 @@ local function Shared(self, unit)
 		}
 	end
 
-	if D.myclass == "PRIEST" and C["unitframes"].weakenedsoulbar then
+	if D.Class == "PRIEST" and C["unitframes"].weakenedsoulbar then
 		local ws = CreateFrame("StatusBar", self:GetName().."_WeakenedSoul", power)
 		ws:SetAllPoints(power)
-		ws:SetStatusBarTexture(C["media"].normTex)
+		ws:SetStatusBarTexture(normTex)
 		ws:GetStatusBarTexture():SetHorizTile(false)
 		ws:SetBackdrop(backdrop)
 		ws:SetBackdropColor(unpack(C["media"].backdropcolor))
-		ws:SetStatusBarColor(191/255, 10/255, 10/255)   
+		ws:SetStatusBarColor(.75, .04, .04)   
 		self.WeakenedSoul = ws
 	end
 
@@ -219,7 +219,7 @@ local function Shared(self, unit)
 		RaidDebuffs:SetTemplate("Default")
 
 		RaidDebuffs.icon = RaidDebuffs:CreateTexture(nil, "OVERLAY")
-		RaidDebuffs.icon:SetTexCoord(.1,.9,.1,.9)
+		RaidDebuffs.icon:SetTexCoord(unpack(D.IconCoord))
 		RaidDebuffs.icon:Point("TOPLEFT", 2, -2)
 		RaidDebuffs.icon:Point("BOTTOMRIGHT", -2, 2)
 
