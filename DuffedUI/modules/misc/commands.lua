@@ -38,6 +38,3 @@ SlashCmdList["GROUPDISBAND"] = function()
 end
 SLASH_GROUPDISBAND1 = "/gd"
 SLASH_GROUPDISBAND2 = "/rd"
-
-local x = "Commands loaded"
-print(x)
