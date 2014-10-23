@@ -475,9 +475,7 @@ local UpdateThreat = function(self)
 					self.health.bg:SetTexture(goodR, goodG, goodB, .25)
 				end
 			else
-				--UpdateColor(self.health)
-				self.health:SetStatusBarColor(self.health.r, self.health.g, self.health.b)
-				self.health.bg:SetTexture(self.health.r, self.health.g, self.health.b, .25)
+				UpdateColor(self)
 			end
 		else
 			local r, g, b = self.old_threat:GetVertexColor()
@@ -805,8 +803,7 @@ Plates.updateAll = function(self)
 				GetFilter(self)
 				UpdateThreat(self)
 				GetRaidIcon(self)
-				--if not C["nameplate"].threat then UpdateColor(self) end
-				UpdateColor(self)
+				if not C["nameplate"].threat then UpdateColor(self) end
 				UpdateCastbarColor(self)
 				UpdateLevel(self)
 			end)
