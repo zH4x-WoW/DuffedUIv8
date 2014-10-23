@@ -131,7 +131,6 @@
 	DuffedUIConfigUILocalization.raidshowplayerinparty = "Füge Dein Einheitenfester der Gruppe hinzu"
 	DuffedUIConfigUILocalization.raidframewidth = "Einstellung für die Breite der Einheitenfenster"
 	DuffedUIConfigUILocalization.raidframeheight = "Einstellung für die Höhe der Einheitenfenster"
-	DuffedUIConfigUILocalization.raidpointer = "Aktiviere Richtungspfeile für Deine Schlachtzugsmitglieder"
 	DuffedUIConfigUILocalization.raidFrameScaleRaid = "Setze Skalierung des Schlachtzugsfenster"
 
 	-- datatext

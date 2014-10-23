@@ -132,7 +132,6 @@ DuffedUIConfigUILocalization.raidshowraidpets = "Show Pets in DuffedUI Raid Fram
 DuffedUIConfigUILocalization.raidshowplayerinparty = "Show yourself in party"
 DuffedUIConfigUILocalization.raidframewidth = "Set width of the unitframe"
 DuffedUIConfigUILocalization.raidframeheight = "Set height of the unitframe"
-DuffedUIConfigUILocalization.raidpointer = "Enable Pointer for direction display"
 DuffedUIConfigUILocalization.raidFrameScaleRaid = "Set Scale of Raid"
 
 -- datatext
