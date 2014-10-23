@@ -53,8 +53,8 @@ local UTF = function(string, i, dots)
 end
 
 local abbrev = function(name)
-	local newname = (string.len(name) > 12) and string.gsub(name, "%s?(.[\128-\191]*)%S+%s", "%1. ") or name
-	return UTF(newname, 12, false)
+	local newname = (string.len(name) > 20) and string.gsub(name, "%s?(.[\128-\191]*)%S+%s", "%1. ") or name
+	return UTF(newname, 20, false)
 end
  
 local f = CreateFrame("Frame", "DuffedUITeleportMenu", UIParent)
