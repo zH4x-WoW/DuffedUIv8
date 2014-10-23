@@ -214,6 +214,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(114851), -- Blood Charge
 			CreateSpellEntry(115989), -- Unholy Blight
 			CreateSpellEntry(171049), -- Rune Tap
+			CreateSpellEntry(63560), -- Dark Transformation
 		},
 		procs = {
 			CreateSpellEntry(50421), -- Scent of Blood
