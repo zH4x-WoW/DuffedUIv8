@@ -448,8 +448,6 @@ function SlotUpdate(id, button)
 	end
 
 	if IsQuestItem then
-		local QuestColor = {1, 1, 0}
-
 		if button.BorderColor ~= QuestColor then
 			button:SetBackdropBorderColor(1, 1, 0)
 			button.BorderColor = QuestColor
@@ -459,7 +457,7 @@ function SlotUpdate(id, button)
 
 	if ItemLink then
 		local Name, _, Rarity, _, _, Type = GetItemInfo(ItemLink)
-		if not Lock and Rarity and Rarity > 1 then
+		if Rarity and Rarity > 1 then
 			if button.BorderColor ~= GetItemQualityColor(Rarity) then
 				button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
 				button.BorderColor = GetItemQualityColor(Rarity)
