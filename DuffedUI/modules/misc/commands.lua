@@ -52,17 +52,25 @@ SLASH_GROUPDISBAND2 = "/rd"
 local function RaidLayout(cmd)
 	if InCombatLockdown() then return end
 	local arg1 = Split(cmd)
+	local dbPrivate = DuffedUIConfigPrivate
+	local dbPublic = DuffedUIConfigAll
 
 	if arg1 == "heal" then
-		if C["unitframes"].DPS == true then
-			C["unitframes"].Heal = true
-			C["unitframes"].DPS = false
+		if dbPrivate["raid"]["DPS"] then
+			dbPrivate["raid"]["Heal"] = true
+			dbPrivate["raid"]["DPS"] = false
+		else
+			dbPublic["raid"]["Heal"] = true
+			dbPublic["raid"]["DPS"] = false
 		end
 		ReloadUI()
 	elseif arg1 == "dps" then
-		if C["unitframes"].heal == true then
-			C["unitframes"].DPS = true
-			C["unitframes"].Heal = false
+		if dbPrivate["raid"]["Heal"] then
+			dbPrivate["raid"]["DPS"] = true
+			dbPrivate["raid"]["Heal"] = false
+		else
+			dbPublic["raid"]["DPS"] = true
+			dbPublic["raid"]["Heal"] = false
 		end
 		ReloadUI()
 	elseif arg1 == "" then

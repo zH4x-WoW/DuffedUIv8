@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if (C["raid"].enable ~= true or C["raid"].Heal ~= true) then return end
+if (C["raid"].enable ~= true or C["raid"].Heal ~= true and C["raid"].DPS) then return end
 
 local ADDON_NAME, ns = ...
 local oUF = oUFDuffedUI or oUF
