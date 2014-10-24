@@ -1,13 +1,12 @@
 local D, C, L = unpack(select(2, ...))
-
 --[[Slash Commands]]--
-local Split = function(cmd)
+--[[local Split = function(cmd)
 	if cmd:find("%s") then
 		return strsplit(" ", strlower(cmd))
 	else
 		return cmd
 	end
-end
+end]]
 
 --[[ReloadUI]]--
 SLASH_RELOADUI1 = "/rl"
@@ -49,14 +48,14 @@ SLASH_GROUPDISBAND1 = "/gd"
 SLASH_GROUPDISBAND2 = "/rd"
 
 --[[Raid-Layout]]--
-local function RaidLayout(cmd)
+--[[local function RaidLayout(cmd)
 	if InCombatLockdown() then return end
 	local arg1 = Split(cmd)
 	local dbPrivate = DuffedUIConfigPrivate
 	local dbPublic = DuffedUIConfigAll
 
 	if arg1 == "heal" then
-		if dbPrivate["raid"]["DPS"] then
+		if not dbPrivate["raid"] then
 			dbPrivate["raid"]["Heal"] = true
 			dbPrivate["raid"]["DPS"] = false
 		else
@@ -65,7 +64,7 @@ local function RaidLayout(cmd)
 		end
 		ReloadUI()
 	elseif arg1 == "dps" then
-		if dbPrivate["raid"]["Heal"] then
+		if dbPrivate then
 			dbPrivate["raid"]["DPS"] = true
 			dbPrivate["raid"]["Heal"] = false
 		else
@@ -80,4 +79,4 @@ local function RaidLayout(cmd)
 	end
 end
 SLASH_RAIDLAYOUT1 = "/raidlayout"
-SlashCmdList["RAIDLAYOUT"] = RaidLayout
+SlashCmdList["RAIDLAYOUT"] = RaidLayout]]

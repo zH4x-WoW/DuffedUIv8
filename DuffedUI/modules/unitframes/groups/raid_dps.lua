@@ -26,13 +26,12 @@ local function Shared(self, unit)
 
 	--[[health]]--
 	local health = CreateFrame("Statusbar", nil, self)
-	health:Point("TOPLEFT", self, "BOTTOMLEFT", 0, 15)
-	health:Point("TOPRIGHT", self, "BOTTOMRIGHT", 0, 15)
+	health:Point("TOPLEFT", self, "BOTTOMLEFT", 0, 15) --, self, "BOTTOMLEFT", 0, 15
+	health:Point("TOPRIGHT", self, "BOTTOMRIGHT", 0, 15) --, self, "BOTTOMRIGHT", 0, 15
 	health:Height(15 * FrameScale)
 	health:Width(140 * FrameScale)
 	health:SetStatusBarTexture(texture)
 	health:CreateBackdrop()
-	health:SetOrientation("VERTICAL")
 
 	health.bg = health:CreateTexture(nil, "BORDER")
 	health.bg:SetAllPoints(health)
@@ -133,7 +132,7 @@ local function Shared(self, unit)
 	Resurrect:SetFrameLevel(20)
 	local ResurrectIcon = Resurrect:CreateTexture(nil, "OVERLAY")
 	ResurrectIcon:Point("CENTER", health, 0, -1)
-	ResurrectIcon:Size(20, 15)
+	ResurrectIcon:Size(10, 10)
 	ResurrectIcon:SetDrawLayer("OVERLAY", 7)
 	self.ResurrectIcon = ResurrectIcon
 
@@ -166,7 +165,7 @@ oUF:RegisterStyle("DPS", Shared)
 oUF:Factory(function(self)
 	oUF:SetActiveStyle("DPS")
 
-	local raid = self:SpawnHeader("oUF_DPS", nil, "solo, raid, party", 
+	local raid = self:SpawnHeader("oUF_DPS", nil, "custom [@raid40,exists] hide;show", 
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute("initial-width"))
@@ -175,14 +174,14 @@ oUF:Factory(function(self)
 		"initial-width", D.Scale(140 * FrameScale),
 		"initial-height", D.Scale(14 * FrameScale),
 		"initial-anchor", "BOTTOM",
-		"showParty", true, 
 		"showPlayer", C["raid"].showplayerinparty,
+		"showParty", true,
 		"showRaid", true,
-		"showSolo", true,
+		"showSolo", false,
 		"groupFilter", "1,2,3,4,5,6,7,8", 
 		"groupingOrder", "1,2,3,4,5,6,7,8", 
 		"groupBy", "GROUP", 
-		"yOffset", D.Scale(4),
+		"yOffset", D.Scale(8),
 		"point", "BOTTOM"
 	)
 	if DuffedUIChatBackgroundLeft then

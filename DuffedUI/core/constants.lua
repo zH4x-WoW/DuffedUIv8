@@ -60,4 +60,5 @@ D.DuffedCredits = {
 	"Yascha",
 	"Dahgoth",
 	"Shariza",
+	"Sandoras",
 }
