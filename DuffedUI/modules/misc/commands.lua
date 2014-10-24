@@ -1,6 +1,15 @@
 local D, C, L = unpack(select(2, ...))
 
 --[[Slash Commands]]--
+local Split = function(cmd)
+	if cmd:find("%s") then
+		return strsplit(" ", strlower(cmd))
+	else
+		return cmd
+	end
+end
+
+--[[ReloadUI]]--
 SLASH_RELOADUI1 = "/rl"
 SlashCmdList.RELOADUI = ReloadUI
 
@@ -38,3 +47,29 @@ SlashCmdList["GROUPDISBAND"] = function()
 end
 SLASH_GROUPDISBAND1 = "/gd"
 SLASH_GROUPDISBAND2 = "/rd"
+
+--[[Raid-Layout]]--
+local function RaidLayout(cmd)
+	if InCombatLockdown() then return end
+	local arg1 = Split(cmd)
+
+	if arg1 == "heal" then
+		if C["unitframes"].DPS == true then
+			C["unitframes"].Heal = true
+			C["unitframes"].DPS = false
+		end
+		ReloadUI()
+	elseif arg1 == "dps" then
+		if C["unitframes"].heal == true then
+			C["unitframes"].DPS = true
+			C["unitframes"].Heal = false
+		end
+		ReloadUI()
+	elseif arg1 == "" then
+		print(" ")
+		print("/raidlayout heal to switch to Heal-Layout (Grid-Theme)")
+		print("/raidlayout dps to switch to DPS-Layout")
+	end
+end
+SLASH_RAIDLAYOUT1 = "/raidlayout"
+SlashCmdList["RAIDLAYOUT"] = RaidLayout

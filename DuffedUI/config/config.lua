@@ -133,6 +133,8 @@ C["raid"] = {
 	["frameheight"] = 45,
 	["pointer"] = false,
 	["FrameScaleRaid"] = 1,
+	["Heal"] = false,
+	["DPS"] = true,
 }
 
 C["datatext"] = {

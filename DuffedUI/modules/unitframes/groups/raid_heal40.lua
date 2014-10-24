@@ -1,5 +1,5 @@
-local D, C, L, G = unpack(DuffedUI)
-if C["raid"].enable ~= true then return end
+local D, C, L = unpack(select(2, ...))
+if (C["raid"].enable ~= true or C["raid"].Heal ~= true) then return end
 
 local ADDON_NAME, ns = ...
 local oUF = oUFDuffedUI or oUF
@@ -44,7 +44,7 @@ local function Shared(self, unit)
 	health.PostUpdate = D.PostUpdateHealthRaid
 	health.frequentUpdates = true
 
-	if C["unitframes"].unicolor == true then
+	if C["unitframes"].unicolor then
 		health.colorDisconnected = false
 		health.colorClass = false
 		health:SetStatusBarColor(unpack(C["unitframes"].healthbarcolor))
@@ -63,8 +63,8 @@ local function Shared(self, unit)
 
 	local power = CreateFrame("StatusBar", nil, self)
 	if unit:find("partypet") then power:SetHeight(0) else power:SetHeight(3) end
-	power:Point("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -3)
-	power:Point("TOPRIGHT", self.Health, "BOTTOMRIGHT", 0, -3)
+	power:Point("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -2)
+	power:Point("TOPRIGHT", self.Health, "BOTTOMRIGHT", 0, -2)
 	power:SetStatusBarTexture(normTex)
 	self.Power = power
 
@@ -238,12 +238,12 @@ local function Shared(self, unit)
 	return self
 end
 
-oUF:RegisterStyle("DuffedUIHealR25R40", Shared)
+oUF:RegisterStyle("Heal", Shared)
 oUF:Factory(function(self)
-	oUF:SetActiveStyle("DuffedUIHealR25R40")
+	oUF:SetActiveStyle("Heal")
 
 	local spawnG = "solo,raid,party"
-	local raid = self:SpawnHeader("DuffedUIGrid", nil, spawnG,
+	local raid = self:SpawnHeader("oUF_Heal", nil, "solo,raid,party",
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute("initial-width"))
@@ -254,7 +254,7 @@ oUF:Factory(function(self)
 		"showPlayer", C["raid"].showplayerinparty,
 		"showParty", true,
 		"showRaid", true, 
-		"showSolo", false,
+		"showSolo", true,
 		"xoffset", D.Scale(8),
 		"yOffset", D.Scale(1),
 		"groupFilter", "1,2,3,4,5,6,7,8",
