@@ -456,7 +456,13 @@ DuffedUIOnLogon:SetScript("OnEvent", function(self, event)
 
 	if (DuffedUIData == nil) then DuffedUIData = {} end
 	if (DuffedUIDataPerChar == nil) then D.SetPerCharVariable("DuffedUIDataPerChar", {}) end
-	if not DuffedUIDataPerChar.install then install() end
+
+	if D.ScreenWidth < 1200 then
+		SetCVar("useUiScale", 0)
+		D.ShowPopup("DUFFEDUIDISABLE_UI")
+	else
+		if not DuffedUIDataPerChar.install then install() end
+	end
 end)
 
 SLASH_TUTORIAL1 = "/uihelp"

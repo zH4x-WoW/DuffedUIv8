@@ -131,6 +131,7 @@ C["raid"] = {
 	["showplayerinparty"] = true,
 	["framewidth"] = 68,
 	["frameheight"] = 45,
+	["pointer"] = false,
 	["FrameScaleRaid"] = 1,
 }
 
