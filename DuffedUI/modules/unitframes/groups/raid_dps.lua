@@ -26,8 +26,8 @@ local function Shared(self, unit)
 
 	--[[health]]--
 	local health = CreateFrame("Statusbar", nil, self)
-	health:Point("TOPLEFT", self, "BOTTOMLEFT", 0, 15) --, self, "BOTTOMLEFT", 0, 15
-	health:Point("TOPRIGHT", self, "BOTTOMRIGHT", 0, 15) --, self, "BOTTOMRIGHT", 0, 15
+	health:Point("TOPLEFT", self, "BOTTOMLEFT", 0, 15)
+	health:Point("TOPRIGHT", self, "BOTTOMRIGHT", 0, 15)
 	health:Height(15 * FrameScale)
 	health:Width(140 * FrameScale)
 	health:SetStatusBarTexture(texture)

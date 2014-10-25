@@ -37,11 +37,10 @@ xpMover:Hide()
 tinsert(D.AllowFrameMoving, xpMover)
 
 local backdrop = CreateFrame("Frame", "Experience_Backdrop", UIParent)
---backdrop:Size(barWidth, barHeight)
-backdrop:SetAllPoints(xpMover) --"BOTTOMLEFT", UIParent, "BOTTOMLEFT", 7, 178
+backdrop:SetAllPoints(xpMover)
 backdrop:SetBackdropColor(C["general"].backdropcolor)
 backdrop:SetBackdropBorderColor(C["general"].backdropcolor)
-backdrop:CreateBackdrop()
+backdrop:CreateBackdrop("Transparent")
 backdrop:SetClampedToScreen(true)
 backdrop:SetMovable(true)
 tinsert(D.AllowFrameMoving, backdrop)
@@ -59,6 +58,12 @@ restedxpBar:SetWidth(barWidth)
 restedxpBar:SetPoint("TOP", backdrop, "TOP", 0, 0)
 restedxpBar:SetStatusBarTexture(barTex)
 restedxpBar:Hide()
+
+local icon = xpBar:CreateTexture(nil, "OVERLAY")
+icon:Size(16)
+icon:Point("LEFT", xpBar, 3, 1)
+icon:SetTexture([=[Interface\CharacterFrame\UI-StateIcon]=])
+icon:SetTexCoord(0, .5, 0, .421875)
 
 local repBar = CreateFrame("StatusBar", "Experience_repBar", backdrop, "TextStatusBar")
 repBar:SetWidth(barWidth)
@@ -101,8 +106,10 @@ local function updateStatus()
 			restedxpBar:SetStatusBarColor(r, g, b, .40)
 			restedxpBar:SetMinMaxValues(min(0, XP), maxXP)
 			restedxpBar:SetValue(XP + restXP)
+			icon:Show()
 		else
 			restedxpBar:Hide()
+			icon:Hide()
 			Text:SetText(format("%s/%s (%s%%)", D.ShortValue(XP), D.ShortValue(maxXP), percXP))
 		end
 
