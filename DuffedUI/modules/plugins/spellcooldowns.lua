@@ -27,6 +27,7 @@ spellCooldowns = {
 		48982, -- Rune Tap
 		49016, -- Hysteria
 		49028, -- Dancing Runic Blade
+		49039, -- Lichborne
 		49203, -- Hungering Cold
 		49206, -- Summon Gargoyle
 		49222, -- Bone Shield
@@ -39,6 +40,7 @@ spellCooldowns = {
 		57330, -- Horn of Winter
 		77575, -- Outbreak
 		77606, -- Dark Simulacrum
+		96268, -- Death's Advance
 		108194, -- Asphyxiate
 		108199, -- Gorefiend's Grasp
 		108201, -- Desecreated Ground
@@ -46,6 +48,8 @@ spellCooldowns = {
 		108911, -- Gorefiends Grip
 		115989, -- Unholy Blight
 		123693, -- Plague Leech
+		152279, -- Breath of Sindragosa
+		152280, -- Defile
 	},
 	["DRUID"] = {
 		740, -- Tranquility
@@ -57,18 +61,27 @@ spellCooldowns = {
 		16979, -- Feral Charge - Bear
 		17116, -- Nature's Swiftness
 		20484, -- Rebirth
+		22812, -- Barksin
 		22842, -- Frenzied Regeneration
 		29166, -- Innervate
 		33831, -- Force of Nature
+		33891, -- Incarnation: Tree of Life
 		48505, -- Starfall
 		49376, -- Feral Charge - Cat
-		50334, -- Berserk		
+		50334, -- Berserk
 		50516, -- Typhoon
 		61336, -- Survival Instincts
 		77764, -- Stampeding Roar
+		102543, -- Incarnation: King of the Jungle
+		102558, -- Incarnation: Son of Ursoc
+		102560, -- Incarnation: Chosen of Elune
+		106952, -- Berserk
+		108238, -- Renewal
 		110621, -- Mirror Images
 		112071, -- Celestial Alignment
 		124974, -- Nature's Vigil
+		132158, -- Nature's Swiftness
+		155835, -- Bristling Fur
 	},
 	["HUNTER"] = {
 		781,    -- Disengage
@@ -139,9 +152,13 @@ spellCooldowns = {
 		82731, -- Flame Orb
 		84714, -- Frozen Orb
 		108978, -- Alter Time
+		110959, -- Greater Invisibility
 		115610, -- Temporal Shield
 		116257, -- Invoker's Energy
+		113724, -- Ring of Frost
 		131078, -- Icy Veins
+		152087, -- Prismatic Crystal
+		157913, -- Evanesce
 	},
 	["MONK"] = {
 		101545, -- Flying Serpent Kick

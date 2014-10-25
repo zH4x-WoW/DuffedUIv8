@@ -14,6 +14,7 @@ local show = {
 }
 
 local spells = {
+	[633] = 600,		-- Lay on Hands
 	[740] = 480,		-- Tranq
 	[1022] = 300,		-- Hand of Protection
 	[6940] = 120,		-- Hand of Sacrifice
@@ -24,17 +25,28 @@ local spells = {
 	[32182] = 300,		-- Heroism
 	[33206] = 180,		-- Pain Supp
 	[47788] = 180,		-- GS
+	[51052] = 120,		-- Anti-Magic Zone
 	[61999] = 600,		-- Raise Ally
+	[62618] = 180,		-- Power Word:Barrier
 	[64843] = 180,		-- Divine Hymn
 	[76577] = 180,		-- Smoke Bomb
 	[80353] = 300,		-- Time Warp
+	[90355] = 360,		-- Ancient Hysteria
 	[97462] = 180,		-- Rallying Cry
 	[98008] = 180, 		-- Spirit Link
 	[102342] = 60,		-- Ironbark
 	[108280] = 180,		-- Healing Tide Totem
+	[108281] = 120,		-- Ancestral Guidance
+	[109964] = 60,		-- Spirit Shell
+	[114028] = 30,		-- Mass Spell Reflection
 	[114030] = 120,		-- Vigilance
 	[115176] = 180, 	-- Zen Meditation
 	[115310] = 180, 	-- Revival
+	[124974] = 90,		-- Nature's Vigil
+	[126393] = 600,		-- Eternal Guardian
+	[152256] = 300, 	-- Storm Elemental Totem
+	[159916] = 120,		-- Amplify Magic
+	[172106] = 180, 	-- Aspect of the Fox
 }
 
 local filter = COMBATLOG_OBJECT_AFFILIATION_RAID + COMBATLOG_OBJECT_AFFILIATION_PARTY + COMBATLOG_OBJECT_AFFILIATION_MINE
