@@ -61,4 +61,5 @@ D.DuffedCredits = {
 	"Dahgoth",
 	"Shariza",
 	"Sandoras",
+	"DarKleFou",
 }

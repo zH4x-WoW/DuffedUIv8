@@ -8,6 +8,10 @@ if (GetLocale() == "enUS" or GetLocale() == "enGB") then
 	L.TYPE_FISHWEAPON = "Fishing Poles"
 	JPACK_ORDER = {"Hearthstone","##Mounts","Mining Pick","Skinning Knife","Fishing Pole","#Fishing Poles","#Weapon","#Armor","#Weapon##Other","#Armor##Other","#Recipe","#Quest","##Elemental","##Metal & Stone","##Herb","#Gem","##Jewelcrafting","#Consumable","##Cloth","#Trade Goods","##Meat","#","Fish Oil","Soul Shard","#Miscellaneous"}
 	JPACK_DEPOSIT = {"##Elemental","##Metal & Stone","##Herb","#Jewelcrafting","#Container"}
+elseif (GetLocale() == "frFR" or GetLocale() == "frFR") then
+	L.TYPE_FISHWEAPON = "Cannes à Pêche"
+	JPACK_ORDER = {"Foyer","##Montures","Pioche","Couteau à Dépecer","Canne à Pêche","#Canne à Pêche","#Arme","#Armure","#Arme##Autre","#Armure##Autre","#Recette","#Quête","##Elémentaire","##Métal & Pierre","##Herbe","#Gemme","##Joaillerie","#Consommable","##Vêtement","#Marchandises Commerciales","##Viande","#","Huile de Poisson","Fragment d'Âme","#Divers"}
+	JPACK_DEPOSIT = {"##Elémentaire","##Métal & Pierre","##Herbe","#Joaillerie","#Conteneur"}
 elseif (GetLocale() == "zhCN") then 
 	L.TYPE_FISHWEAPON = "鱼竿"
 	JPACK_ORDER = {"炉石","要塞炉石","虚灵之门","##工程","##坐骑","矿工锄","剥皮小刀","鱼竿","#鱼竿","#武器","#护甲","#武器##其它","#护甲##其它","#配方","#任务","##元素","##金属和矿石","##草药","#材料","##珠宝","#消耗品","##布料","#商品","##肉类","#","鱼油","灵魂碎片","#其它"}
