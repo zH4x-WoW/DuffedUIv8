@@ -553,7 +553,7 @@ function CreateDuffedUIConfigUI()
 
 	ShowGroup("general")
 
-	-- global credits
+	--[[Global Credits]]--
 	local cf = CreateFrame("Frame", "CreditFrame", DuffedUIConfigUI)
 	cf:SetTemplate("Transparent")
 	cf:Size(770, 22)
@@ -577,16 +577,16 @@ function CreateDuffedUIConfigUI()
 	ct:SetFont(C["media"].font, 14)
 	ct:SetText(credit)
 	ct:Point("LEFT", scroll, "RIGHT", 4, 0)
-	scroll:SetAnimation("Move", "Horizontal", -1250, 0.5)
+	scroll:SetAnimation("Move", "Horizontal", -1500, 0.5)
 
 	scroll:AnimOnFinished("Move", function(self)
 		if (not DuffedUIConfigUI:IsVisible()) then return end
 		self:ClearAllPoints()
 		self:SetPoint("CENTER", cf)
-		self:SetAnimation("Move", "Horizontal", -1250, 0.5)
+		self:SetAnimation("Move", "Horizontal", -1500, 0.5)
 	end)
 
-	-- duffed credits
+	--[[DuffedUI Credits]]--
 	local cf2 = CreateFrame("Frame", "CreditFrame2", DuffedUIConfigUI)
 	cf2:SetTemplate("Transparent")
 	cf2:Size(770, 22)
@@ -610,13 +610,13 @@ function CreateDuffedUIConfigUI()
 	ct2:SetFont(C["media"].font, 14)
 	ct2:SetText(credit2)
 	ct2:Point("LEFT", scroll2, "RIGHT", 4, 0)
-	scroll2:SetAnimation("Move", "Horizontal", -1250, 0.5)
+	scroll2:SetAnimation("Move", "Horizontal", -1500, 0.5)
 
 	scroll2:AnimOnFinished("Move", function(self)
 		if (not DuffedUIConfigUI:IsVisible()) then return end
 		self:ClearAllPoints()
 		self:SetPoint("CENTER", cf2)
-		self:SetAnimation("Move", "Horizontal", -1250, 0.5)
+		self:SetAnimation("Move", "Horizontal", -1500, 0.5)
 	end)
 end
 

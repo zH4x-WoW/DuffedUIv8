@@ -1,5 +1,3 @@
--- DuffedUI API, see DOCS/API.txt for more informations
--- Feel free to send us API suggestion at www.duffed.net/tickets
 local D, C, L = unpack(select(2, ...))
 
 local noop = D.Dummy
@@ -39,10 +37,7 @@ local function UpdateColor(t)
 	template = t
 end
 
----------------------------------------------------
--- DuffedUI API START HERE
----------------------------------------------------
-
+--[[DuffedUI API START HERE]]--
 local function Size(frame, width, height) frame:SetSize(D.Scale(width), D.Scale(height or width)) end
 
 local function Width(frame, width) frame:SetWidth(D.Scale(width)) end
@@ -358,7 +353,7 @@ local SetAnimation = function(self, handler, ...)
 	if Function then Function(self, ...) else return print("Invalid 'SetAnimation' handler: " .. handler) end
 end
 
--- Skinning
+--[[Skinning]]--
 local function SetModifiedBackdrop(self)
 	local color = RAID_CLASS_COLORS[D.Class]
 	self:SetBackdropColor(color.r * .15, color.g * .15, color.b * .15)
