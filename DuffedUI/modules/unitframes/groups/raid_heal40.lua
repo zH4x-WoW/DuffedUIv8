@@ -262,16 +262,12 @@ oUF:Factory(function(self)
 		"groupBy", "GROUP",
 		"maxColumns", 8,
 		"unitsPerColumn", 5,
-		"columnSpacing", D.Scale(1),
+		"columnSpacing", D.Scale(-3),
 		"point", "LEFT",
 		"columnAnchorPoint", "BOTTOM"
 	)
 
-	if DuffedUIChatBackgroundLeft then
-		raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 16)
-	else
-		raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33)
-	end
+	D.RaidPosition(raid)
 
 	if C["raid"].showraidpets then
 		local pets = {} 

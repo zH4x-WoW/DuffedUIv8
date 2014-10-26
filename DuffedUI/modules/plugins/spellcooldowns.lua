@@ -5,7 +5,6 @@ local font = D.Font(C["font"].scd)
 local texture = C["media"].normTex
 local size = D.Scale(C["cooldown"].scdsize)
 local spacing = D.Scale(C["cooldown"].scdspacing)
-local anchor = {"BOTTOM", UIParent, "BOTTOM", 0, D.Scale(358)}
 local color = {1, 1, 0, 1}
 local fade = C["cooldown"].scdfade
 local mode = "HIDE"
@@ -497,7 +496,11 @@ local onUpdate
 local scfa = CreateFrame("Frame", "SpellCooldownsFrameAnchor", UIParent)
 scfa:SetTemplate("Default")
 scfa:Size(120, 17)
-scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 350)
+if C["raid"].center then
+	if C["chat"].lbackground then scfa:SetPoint("BOTTOM", DuffedUIChatBackgroundLeft, "TOP", 0, 10) else scfa:SetPoint("BOTTOM", ChatFrame1, "TOP", 0, 25) end
+else
+	scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 350)
+end
 scfa:SetClampedToScreen(true)
 scfa:SetMovable(true)
 scfa:SetBackdropColor(0, 0, 0)

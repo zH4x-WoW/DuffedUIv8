@@ -8,7 +8,7 @@ local Color = RAID_CLASS_COLORS[D.Class]
 local cba = CreateFrame("Frame", "CBAnchor", UIParent)
 cba:SetTemplate("Default")
 cba:Size(250, 15)
-cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 325)
+if C["raid"].center then cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 200) else cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 325) end
 cba:SetClampedToScreen(true)
 cba:SetMovable(true)
 cba:SetBackdropColor(0, 0, 0)

@@ -83,9 +83,9 @@ local function Shared(self, unit)
 			percHP = D.SetFontString(health, C["media"].font, 20, "THINOUTLINE")
 			percHP:SetTextColor(unpack(C["media"].datatextcolor1))
 			if unit == "player" then
-                percHP:SetPoint("LEFT", health, "RIGHT", 25, -10)
+				if C["raid"].center then percHP:SetPoint("RIGHT", health, "LEFT", -25, -10) else percHP:SetPoint("LEFT", health, "RIGHT", 25, -10) end
 			elseif unit == "target" then
-				percHP:SetPoint("RIGHT", health, "LEFT", -25, -10)
+				if C["raid"].center then percHP:SetPoint("LEFT", health, "RIGHT", 25, -10) else percHP:SetPoint("RIGHT", health, "LEFT", -25, -10) end
 			end
 			self:Tag(percHP, "[DuffedUI:perchp]")
 			self.percHP = percHP
@@ -414,7 +414,7 @@ local function Shared(self, unit)
 			local tcb = CreateFrame("Frame", "TCBanchor", UIParent)
 			tcb:SetTemplate("Default")
 			tcb:Size(225, 18)
-			tcb:Point("BOTTOM", UIParent, "BOTTOM", 0, 395)
+			if C["raid"].center then tcb:Point("BOTTOM", UIParent, "BOTTOM", 340, 130) else tcb:Point("BOTTOM", UIParent, "BOTTOM", 0, 395) end
 			tcb:SetClampedToScreen(true)
 			tcb:SetMovable(true)
 			tcb:SetBackdropColor(0, 0, 0)
@@ -1167,12 +1167,12 @@ oUF:RegisterStyle('DuffedUI', Shared)
 
 local player = oUF:Spawn('player', "DuffedUIPlayer")
 player:SetParent(DuffedUIPetBattleHider)
-player:Point("BOTTOM", UIParent, "BOTTOM", -340, 240)
+player:Point("BOTTOM", UIParent, "BOTTOM", -340, 225)
 player:Size(218, 44)
 
 local target = oUF:Spawn('target', "DuffedUITarget")
 target:SetParent(DuffedUIPetBattleHider)
-target:Point("BOTTOM", UIParent, "BOTTOM", 340, 240)
+target:Point("BOTTOM", UIParent, "BOTTOM", 340, 225)
 target:Size(218, 44)
 
 if C["unitframes"].Enable_ToT then

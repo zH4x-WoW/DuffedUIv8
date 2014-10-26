@@ -116,6 +116,7 @@
 	DuffedUIConfigUILocalization.actionbarRightsidebarshorizontal = "Set right SideBar horizontal"
 	DuffedUIConfigUILocalization.raidFrameScaleRaid = "Set Scale of Raid"
 	DuffedUIConfigUILocalization.raidlayout = "Set layout for group frames (default = heal, Values: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
+	DuffedUIConfigUILocalization.raidcenter = "Set Heal-Layout set to center position"
 
 	-- raid frames
 	DuffedUIConfigUILocalization.raid = "Raid Frames"

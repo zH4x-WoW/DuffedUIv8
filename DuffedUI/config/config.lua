@@ -134,6 +134,7 @@ C["raid"] = {
 	["pointer"] = false,
 	["FrameScaleRaid"] = 1,
 	["layout"] = "heal",
+	["center"] = false,
 }
 
 C["datatext"] = {

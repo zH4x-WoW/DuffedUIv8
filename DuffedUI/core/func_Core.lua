@@ -272,6 +272,24 @@ RoleUpdater:RegisterEvent("UNIT_INVENTORY_CHANGED")
 RoleUpdater:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
 RoleUpdater:SetScript("OnEvent", CheckRole)
 
+D.RaidPosition = function(frame)
+	if frame:IsShown() then
+		if D.Role == "Healer" and C["raid"].center then
+			frame:ClearAllPoints()
+			frame:Point("BOTTOM", UIParent, "BOTTOM", 0, 225)
+		elseif C["raid"].center then
+			frame:ClearAllPoints()
+			frame:Point("BOTTOM", UIParent, "BOTTOM", 0, 225)
+		else
+			if DuffedUIChatBackgroundLeft then
+				frame:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 16)
+			else
+				frame:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33)
+			end
+		end
+	end
+end
+
 local waitTable = {}
 local waitFrame
 D.Delay = function(delay, func, ...)

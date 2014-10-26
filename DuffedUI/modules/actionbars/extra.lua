@@ -2,8 +2,8 @@ local D, C, L = unpack(select(2, ...))
 if not C["actionbar"].enable then return end
 
 local holder = CreateFrame("Frame", "DuffedUIExtraActionBarFrameHolder", UIParent)
-holder:Size(160, 80)
-holder:SetPoint("BOTTOM", 0, 250)
+holder:Size(80, 80)
+if C["raid"].center then holder:SetPoint("BOTTOM", -235, 88) else holder:SetPoint("BOTTOM", 0, 250) end
 holder:SetMovable(true)
 holder:SetTemplate("Default")
 holder:SetBackdropBorderColor(1, 0, 0)
