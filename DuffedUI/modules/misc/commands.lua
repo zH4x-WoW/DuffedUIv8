@@ -48,41 +48,39 @@ SLASH_GROUPDISBAND1 = "/gd"
 SLASH_GROUPDISBAND2 = "/rd"
 
 --[[Layout-Switch]]--
-local function HideFrame(frame)
-	if not frame then return end
+local myPlayerName = D.MyName
+local myPlayerRealm = D.MyRealm
+local function SetValue(group, option, value)
+	local mergesettings
+	if DuffedUIConfigPrivate == DuffedUIConfigPublic then mergesettings = true else mergesettings = false end
 
-	frame:SetAttribute("showSolo", false)
-	frame:SetAttribute("showParty", false)
-	frame:SetAttribute("showraid", false)
-end
-
-local function ShowFrame(frame)
-	if not frame then return end
-
-	frame:SetAttribute("showSolo", false)
-	frame:SetAttribute("showParty", true)
-	frame:SetAttribute("showraid", true)
+	if DuffedUIConfigAll[myPlayerRealm][myPlayerName] == true then
+		if not DuffedUIConfigPrivate then DuffedUIConfigPrivate = {} end
+		if not DuffedUIConfigPrivate[group] then DuffedUIConfigPrivate[group] = {} end
+		DuffedUIConfigPrivate[group][option] = value
+	else
+		if mergesettings == true then
+			if not DuffedUIConfigPrivate then DuffedUIConfigPrivate = {} end
+			if not DuffedUIConfigPrivate[group] then DuffedUIConfigPrivate[group] = {} end
+			DuffedUIConfigPrivate[group][option] = value
+		end
+		if not DuffedUIConfigPublic then DuffedUIConfigPublic = {} end
+		if not DuffedUIConfigPublic[group] then DuffedUIConfigPublic[group] = {} end
+		DuffedUIConfigPublic[group][option] = value
+	end
 end
 
 local function RaidLayout(cmd)
 	if InCombatLockdown() then return end
 	local arg1 = Split(cmd)
 
-	if arg1 == "heal" then
-		C["raid"].layout = "heal"
-		HideFrame(oUF_DPS)
-		ShowFrame(oUF_Heal)
+	if C["raid"].layout == "dps" then
+		SetValue("raid", "layout", "heal")
 		ReloadUI()
-	elseif arg1 == "dps" then
-		C["raid"].layout = "dps"
-		HideFrame(oUF_Heal)
-		ShowFrame(oUF_DPS)
+	else
+		SetValue("raid", "layout", "dps")
 		ReloadUI()
-	elseif arg1 == "" then
-		print(" ")
-		print("/raidlayout heal to switch to Heal-Layout (Grid-Theme)")
-		print("/raidlayout dps to switch to DPS-Layout")
 	end
 end
-SLASH_RAIDLAYOUT1 = "/raidlayout"
+SLASH_RAIDLAYOUT1 = "/switch"
 SlashCmdList["RAIDLAYOUT"] = RaidLayout

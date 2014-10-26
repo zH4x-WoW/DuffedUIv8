@@ -65,7 +65,7 @@ function DisableSpecSwitcherSpamFilter() ChatFrame_RemoveMessageEventFilter("CHA
 local spec = CreateFrame("Button", "DuffedUI_Spechelper", DuffedUIInfoLeft)
 spec:SetTemplate("Default")
 if C["chat"].rbackground then
-	spec:SetPoint("LEFT", DuffedUITabsRightBackground, "RIGHT", 2, 0)
+	spec:SetPoint("LEFT", DuffedUITabsRightBackground, "RIGHT", 24, 0)
 	spec:Size(DuffedUIMinimap:GetWidth() + 1, 20)
 else
 	spec:SetPoint("TOPLEFT", DuffedUIMinimapStatsLeft, "BOTTOMLEFT", 0, -2)
@@ -140,7 +140,7 @@ MB_dfaq:Point("LEFT", MB_binds, "RIGHT", 2, 0)
 MB_dfaq:SetAttribute("macrotext1", "/dfaq")
 
 if Enablegear == true then
-	local gearSets = CreateFrame("Frame", nil, MB_reload)	
+	local gearSets = CreateFrame("Frame", nil, MB_reload)
 	for i = 1, 10 do
 		gearSets[i] = CreateFrame("Button", nil, MB_reload)
 		gearSets[i]:Size(19, 19)

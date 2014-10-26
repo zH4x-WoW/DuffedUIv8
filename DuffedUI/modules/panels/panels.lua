@@ -40,7 +40,7 @@ if C["chat"].rbackground then
 
 	local tabsbgright = CreateFrame("Frame", "DuffedUITabsRightBackground", UIParent)
 	tabsbgright:SetTemplate()
-	tabsbgright:Size((D.InfoLeftRightWidth - 187), 20)
+	tabsbgright:Size((D.InfoLeftRightWidth - 209), 20)
 	tabsbgright:Point("TOPLEFT", chatrightbg, "TOPLEFT", 4, -4)
 	tabsbgright:SetFrameLevel(2)
 	tabsbgright:SetFrameStrata("BACKGROUND")
@@ -155,6 +155,10 @@ chatmenu.text:SetText(D.PanelColor .. "E")
 chatmenu:SetScript("OnMouseDown", function(self, btn)
 	if btn == "LeftButton" then ToggleFrame(ChatMenu) end
 end)
+
+D.CreateBtn("MB_switch", DuffedUITabsRightBackground, 20, 20, L["buttons"]["ses_switch"], "S")
+if C["chat"].rbackground then MB_switch:Point("LEFT", DuffedUITabsRightBackground, "RIGHT", 2, 0) else MB_switch:Point("LEFT",DuffedUIChatMenu, "RIGHT", 2, 0) end
+MB_switch:SetAttribute("macrotext1", "/switch")
 
 if DuffedUIMinimap then
 	local minimapstatsleft = CreateFrame("Frame", "DuffedUIMinimapStatsLeft", DuffedUIMinimap)

@@ -148,6 +148,7 @@ if D.Client == "deDE" then
 		["ses_move"] = "Fenster entsperren um sie zu bewegen",
 		["ses_kb"] = "Tastenbelegung einstellen",
 		["ses_dfaq"] = "DuffedUI F.A.Q. aufrufen",
+		["ses_switch"] = "Wechsel zwischen den Raidlayouts",
 		["tutorial"] = "Tutorial",
 		["install"] = "Installieren",
 		["next"] = "Nächste",

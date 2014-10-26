@@ -147,6 +147,7 @@ L["buttons"] = {
 	["ses_move"] = "Unlock the frames for moving",
 	["ses_kb"] = "Set your keybindings",
 	["ses_dfaq"] = "Open DuffedUI F.A.Q.",
+	["ses_switch"] = "Switch between Raidlayouts",
 	["tutorial"] = "Tutorial",
 	["install"] = "Install",
 	["next"] = "Next",
