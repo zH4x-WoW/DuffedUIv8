@@ -1,12 +1,12 @@
 local D, C, L = unpack(select(2, ...))
 --[[Slash Commands]]--
---[[local Split = function(cmd)
+local Split = function(cmd)
 	if cmd:find("%s") then
 		return strsplit(" ", strlower(cmd))
 	else
 		return cmd
 	end
-end]]
+end
 
 --[[ReloadUI]]--
 SLASH_RELOADUI1 = "/rl"
@@ -47,30 +47,36 @@ end
 SLASH_GROUPDISBAND1 = "/gd"
 SLASH_GROUPDISBAND2 = "/rd"
 
---[[Raid-Layout]]--
---[[local function RaidLayout(cmd)
+--[[Layout-Switch]]--
+local function HideFrame(frame)
+	if not frame then return end
+
+	frame:SetAttribute("showSolo", false)
+	frame:SetAttribute("showParty", false)
+	frame:SetAttribute("showraid", false)
+end
+
+local function ShowFrame(frame)
+	if not frame then return end
+
+	frame:SetAttribute("showSolo", false)
+	frame:SetAttribute("showParty", true)
+	frame:SetAttribute("showraid", true)
+end
+
+local function RaidLayout(cmd)
 	if InCombatLockdown() then return end
 	local arg1 = Split(cmd)
-	local dbPrivate = DuffedUIConfigPrivate
-	local dbPublic = DuffedUIConfigAll
 
 	if arg1 == "heal" then
-		if not dbPrivate["raid"] then
-			dbPrivate["raid"]["Heal"] = true
-			dbPrivate["raid"]["DPS"] = false
-		else
-			dbPublic["raid"]["Heal"] = true
-			dbPublic["raid"]["DPS"] = false
-		end
+		C["raid"].layout = "heal"
+		HideFrame(oUF_DPS)
+		ShowFrame(oUF_Heal)
 		ReloadUI()
 	elseif arg1 == "dps" then
-		if dbPrivate then
-			dbPrivate["raid"]["DPS"] = true
-			dbPrivate["raid"]["Heal"] = false
-		else
-			dbPublic["raid"]["DPS"] = true
-			dbPublic["raid"]["Heal"] = false
-		end
+		C["raid"].layout = "dps"
+		HideFrame(oUF_Heal)
+		ShowFrame(oUF_DPS)
 		ReloadUI()
 	elseif arg1 == "" then
 		print(" ")
@@ -79,4 +85,4 @@ SLASH_GROUPDISBAND2 = "/rd"
 	end
 end
 SLASH_RAIDLAYOUT1 = "/raidlayout"
-SlashCmdList["RAIDLAYOUT"] = RaidLayout]]
+SlashCmdList["RAIDLAYOUT"] = RaidLayout

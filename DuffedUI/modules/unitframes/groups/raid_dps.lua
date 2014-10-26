@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if (C["raid"].enable ~= true or C["raid"].DPS ~= true and C["raid"].Heal) then return end
+if (C["raid"].enable ~= true or C["raid"].layout == "heal") then return end
 
 --[[oUF]]--
 local ADDON_NAME, ns = ...
@@ -39,7 +39,7 @@ local function Shared(self, unit)
 	health.bg.multiplier = .3
 
 	health.value = health:CreateFontString(nil, "OVERLAY")
-	health.value:Point("LEFT", health, 5, 0)
+	health.value:Point("LEFT", health, 8, 0)
 	health.value:SetFontObject(font)
 
 	self.Health = health

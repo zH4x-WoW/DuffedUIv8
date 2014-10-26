@@ -132,8 +132,7 @@
 	DuffedUIConfigUILocalization.raidframeheight = "Set height of the unitframe"
 	DuffedUIConfigUILocalization.raidpointer = "Enable Pointer for direction display"
 	DuffedUIConfigUILocalization.raidFrameScaleRaid = "Set Scale of Raid"
-	DuffedUIConfigUILocalization.raidHeal = "Enable Heal-Layout (DPS-Layout must be disabled)"
-	DuffedUIConfigUILocalization.raidDPS = "Enable DPS-Layout (Heal-Layout must be disabled)"
+	DuffedUIConfigUILocalization.raidlayout = "Set layout for group frames (default = heal, Values: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
 
 	-- datatext
 	DuffedUIConfigUILocalization.datatext = "Data Text"

@@ -133,8 +133,7 @@
 	DuffedUIConfigUILocalization.raidframeheight = "Einstellung für die Höhe der Einheitenfenster"
 	DuffedUIConfigUILocalization.raidpointer = "Aktiviere Richtungspfeile für Deine Schlachtzugsmitglieder"
 	DuffedUIConfigUILocalization.raidFrameScaleRaid = "Setze Skalierung des Schlachtzugsfenster"
-	DuffedUIConfigUILocalization.raidHeal = "Aktiviere das Heal-Layout (DPS-Layout muss abgeschaltet sein)"
-	DuffedUIConfigUILocalization.raidDPS = "Aktiviere das DPS-Layout (Heal-Layout muss abgeschaltet sein)"
+	DuffedUIConfigUILocalization.raidlayout = "Wähle Layout für die Gruppenanzeige (Standard = heal, Werte: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
 
 	-- datatext
 	DuffedUIConfigUILocalization.datatext = "Datatext"
