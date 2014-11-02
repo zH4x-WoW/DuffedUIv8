@@ -218,7 +218,7 @@ function WorldMap:Coords()
 			local centerX, centerY = WorldMapDetailFrame:GetCenter()
 			local x, y = GetCursorPosition()
 			local adjustedX = (x / scale - (centerX - (width/2))) / width
-			local adjustedY = (centerY + (height/2) - y / scale) / height	
+			local adjustedY = (centerY + (height/2) - y / scale) / height
 
 			if (adjustedX >= 0  and adjustedY >= 0 and adjustedX <= 1 and adjustedY <= 1) then
 				adjustedX = math.floor(100 * adjustedX)

@@ -98,11 +98,7 @@ local function Shared(self, unit)
 	local name = health:CreateFontString(nil, "OVERLAY")
 	name:SetFontObject(font)
 	name:Point("RIGHT", health, -5, 0)
-	if C["unitframes"].unicolor then
-		self:Tag(name, "[DuffedUI:getnamecolor][DuffedUI:namemedium] [DuffedUI:dead][DuffedUI:afk]")
-	else
-		self:Tag(name, "[DuffedUI:namemedium][DuffedUI:dead][DuffedUI:afk]")
-	end
+	if C["unitframes"].unicolor then self:Tag(name, "[DuffedUI:getnamecolor][DuffedUI:namemedium]") else self:Tag(name, "[DuffedUI:namemedium]") end
 	self.Name = name
 
 	if C["raid"].showsymbols == true then
@@ -177,7 +173,7 @@ oUF:Factory(function(self)
 		"showPlayer", C["raid"].showplayerinparty,
 		"showParty", true,
 		"showRaid", true,
-		"showSolo", false,
+		"showSolo", true,
 		"groupFilter", "1,2,3,4,5,6,7,8", 
 		"groupingOrder", "1,2,3,4,5,6,7,8", 
 		"groupBy", "GROUP", 

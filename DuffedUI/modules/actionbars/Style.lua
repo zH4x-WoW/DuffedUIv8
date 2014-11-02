@@ -146,7 +146,10 @@ function D.StylePet()
 		local button  = _G[name]
 		local icon  = _G[name.."Icon"]
 		local normal  = _G[name.."NormalTexture2"]
+		local HotKey = _G[name.."HotKey"]
 		D.StyleActionBarPetAndShiftButton(normal, button, icon, name, true)
+		HotKey:ClearAllPoints()
+		HotKey:Point("TOPRIGHT", -1, -1)
 	end
 end
 
@@ -312,5 +315,5 @@ hooksecurefunc("ActionButton_ShowOverlayGlow", D.ShowHighlightActionButton)
 hooksecurefunc("ActionButton_HideOverlayGlow", D.HideHighlightActionButton)
 hooksecurefunc("ActionButton_Update", D.StyleActionBarButton)
 hooksecurefunc("ActionButton_UpdateHotkeys", D.UpdateKeybind)
---hooksecurefunc("PetActionButton_SetHotkeys", D.UpdateKeybind)
+hooksecurefunc("PetActionButton_SetHotkeys", D.UpdateKeybind)
 hooksecurefunc("ActionButton_UpdateFlyout", D.StyleActionBarFlyout)

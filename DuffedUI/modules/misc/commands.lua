@@ -48,37 +48,15 @@ SLASH_GROUPDISBAND1 = "/gd"
 SLASH_GROUPDISBAND2 = "/rd"
 
 --[[Layout-Switch]]--
-local myPlayerName = D.MyName
-local myPlayerRealm = D.MyRealm
-local function SetValue(group, option, value)
-	local mergesettings
-	if DuffedUIConfigPrivate == DuffedUIConfigPublic then mergesettings = true else mergesettings = false end
-
-	if DuffedUIConfigAll[myPlayerRealm][myPlayerName] == true then
-		if not DuffedUIConfigPrivate then DuffedUIConfigPrivate = {} end
-		if not DuffedUIConfigPrivate[group] then DuffedUIConfigPrivate[group] = {} end
-		DuffedUIConfigPrivate[group][option] = value
-	else
-		if mergesettings == true then
-			if not DuffedUIConfigPrivate then DuffedUIConfigPrivate = {} end
-			if not DuffedUIConfigPrivate[group] then DuffedUIConfigPrivate[group] = {} end
-			DuffedUIConfigPrivate[group][option] = value
-		end
-		if not DuffedUIConfigPublic then DuffedUIConfigPublic = {} end
-		if not DuffedUIConfigPublic[group] then DuffedUIConfigPublic[group] = {} end
-		DuffedUIConfigPublic[group][option] = value
-	end
-end
-
 local function RaidLayout(cmd)
 	if InCombatLockdown() then return end
 	local arg1 = Split(cmd)
 
 	if C["raid"].layout == "dps" then
-		SetValue("raid", "layout", "heal")
+		D.SetValue("raid", "layout", "heal")
 		ReloadUI()
 	else
-		SetValue("raid", "layout", "dps")
+		D.SetValue("raid", "layout", "dps")
 		ReloadUI()
 	end
 end
