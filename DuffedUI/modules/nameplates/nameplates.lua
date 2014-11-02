@@ -540,7 +540,13 @@ local UpdateThreat = function(self)
 		end
 	end
 
-	if self.unit == "target" then self.health.name:SetTextColor(1, 1, 0) else self.health.name:SetTextColor(1, 1, 1) end
+	if self.unit == "target" then
+		self.health.name:SetTextColor(1, 1, 0)
+		self.health:SetAlpha(1)
+	else
+		self.health.name:SetTextColor(1, 1, 1)
+		self.health:SetAlpha(C["nameplate"].NonTargetAlpha)
+	end
 end
 
 local HideQueque = function(self)
