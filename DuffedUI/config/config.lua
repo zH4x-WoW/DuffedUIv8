@@ -135,6 +135,8 @@ C["raid"] = {
 	["FrameScaleRaid"] = 1,
 	["layout"] = "heal",
 	["center"] = false,
+	["HidePower"] = false,
+	["NameOutside"] = false,
 }
 
 C["datatext"] = {

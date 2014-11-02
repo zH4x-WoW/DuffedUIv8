@@ -67,24 +67,26 @@ local function Shared(self, unit)
 	end
 
 	--[[Power]]--
-	local power = CreateFrame("Statusbar", nil, self)
-	power:Height(2)
-	power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, 2)
-	power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, 2)
-	power:SetStatusBarTexture(texture)
-	power:SetFrameLevel(health:GetFrameLevel() + 1)
-	power.colorClass = true
-	self.Power = power
+	if not C["raid"].HidePower then
+		local power = CreateFrame("Statusbar", nil, self)
+		power:Height(2)
+		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, 2)
+		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, 2)
+		power:SetStatusBarTexture(texture)
+		power:SetFrameLevel(health:GetFrameLevel() + 1)
+		power.colorClass = true
+		self.Power = power
 
-	power.bg = self.Power:CreateTexture(nil, "BORDER")
-	power.bg:SetAllPoints(power)
-	power.bg:SetTexture(texture)
-	power.bg:SetAlpha(1)
-	power.bg.multiplier = .3
-	self.Power.bg = power.bg
+		power.bg = self.Power:CreateTexture(nil, "BORDER")
+		power.bg:SetAllPoints(power)
+		power.bg:SetTexture(texture)
+		power.bg:SetAlpha(1)
+		power.bg.multiplier = .3
+		self.Power.bg = power.bg
 
-	power.frequentUpdates = true
-	power.colorDisconnected = false
+		power.frequentUpdates = true
+		power.colorDisconnected = false
+	end
 
 	--[[Panel]]--
 	local panel = CreateFrame("Frame", nil, self)
@@ -97,7 +99,7 @@ local function Shared(self, unit)
 	--[[Elements]]--
 	local name = health:CreateFontString(nil, "OVERLAY")
 	name:SetFontObject(font)
-	name:Point("RIGHT", health, -5, 0)
+	if C["raid"].NameOutside then name:Point("LEFT", health, "RIGHT", 5, 0) else name:Point("RIGHT", health, -5, 0) end
 	if C["unitframes"].unicolor then self:Tag(name, "[DuffedUI:getnamecolor][DuffedUI:namemedium]") else self:Tag(name, "[DuffedUI:namemedium]") end
 	self.Name = name
 

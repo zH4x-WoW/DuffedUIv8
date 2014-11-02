@@ -135,6 +135,8 @@
 	DuffedUIConfigUILocalization.raidFrameScaleRaid = "Setze Skalierung des Schlachtzugsfenster"
 	DuffedUIConfigUILocalization.raidlayout = "Wähle Layout für die Gruppenanzeige (Standard = heal, Werte: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
 	DuffedUIConfigUILocalization.raidcenter = "Verschiebe Heal-Layout in die Mitte"
+	DuffedUIConfigUILocalization.raidHidePower = "Deaktiviere Energieleiste (nur DPS-Layout)"
+	DuffedUIConfigUILocalization.raidNameOutside = "Bewege den Spielername nach aussen (nur DPS-Layout)"
 
 	-- datatext
 	DuffedUIConfigUILocalization.datatext = "Datatext"

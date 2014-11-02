@@ -135,6 +135,8 @@
 	DuffedUIConfigUILocalization.raidFrameScaleRaid = "Set Scale of Raid"
 	DuffedUIConfigUILocalization.raidlayout = "Set layout for group frames (default = heal, Values: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
 	DuffedUIConfigUILocalization.raidcenter = "Heal-Layout set to center position"
+	DuffedUIConfigUILocalization.raidHidePower = "Disable power bar (DPS-Layout only)"
+	DuffedUIConfigUILocalization.raidNameOutside = "Move player name to outside (DPS-Layout only)"
 
 	-- datatext
 	DuffedUIConfigUILocalization.datatext = "Data Text"
