@@ -117,7 +117,7 @@ function D.StyleActionBarPetAndShiftButton(normal, button, icon, name, pet)
 	button:SetNormalTexture("")
 	button.SetNormalTexture = D.Dummy
 
-	local Flash	 = _G[name.."Flash"]
+	local Flash = _G[name.."Flash"]
 	Flash:SetTexture("")
 
 	if normal then
@@ -148,8 +148,15 @@ function D.StylePet()
 		local normal  = _G[name.."NormalTexture2"]
 		local HotKey = _G[name.."HotKey"]
 		D.StyleActionBarPetAndShiftButton(normal, button, icon, name, true)
-		HotKey:ClearAllPoints()
-		HotKey:Point("TOPRIGHT", -1, -1)
+		if C["actionbar"].hotkey then
+			HotKey:SetFontObject(font)
+			HotKey:SetShadowOffset(0, 0)
+			HotKey:ClearAllPoints()
+			HotKey:Point("TOPRIGHT", -1, -1)
+		else
+			HotKey:SetText("")
+			HotKey:Kill()
+		end
 	end
 end
 
@@ -181,6 +188,7 @@ D.UpdateKeybind = function(self, actionButtonType)
 	if HotKey:GetText() == _G["RANGE_INDICATOR"] then HotKey:SetText("") else HotKey:SetText(Text) end
 end
 hooksecurefunc("ActionButton_OnEvent", function(self, event, ...) if event == "PLAYER_ENTERING_WORLD" then ActionButton_UpdateHotkeys(self, self.buttonType) end end)
+hooksecurefunc("PetActionButton_OnEvent", function(self, event, ...) if event == "PLAYER_ENTERING_WORLD" then PetActionButton_SetHotkeys(self, self.buttonType) end end)
 
 local buttons = 0
 local function SetupFlyoutButton()

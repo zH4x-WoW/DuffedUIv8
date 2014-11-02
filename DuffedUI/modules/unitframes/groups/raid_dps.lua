@@ -175,7 +175,7 @@ oUF:Factory(function(self)
 		"showPlayer", C["raid"].showplayerinparty,
 		"showParty", true,
 		"showRaid", true,
-		"showSolo", true,
+		"showSolo", false,
 		"groupFilter", "1,2,3,4,5,6,7,8", 
 		"groupingOrder", "1,2,3,4,5,6,7,8", 
 		"groupBy", "GROUP", 
