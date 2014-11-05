@@ -179,17 +179,6 @@ if D.Client == "deDE" then
 		["disband"] = "Gruppe auflösen?",
 	}
 
-	L["boss"] = {
-		["galleon"] = "Galleon", 
-		["sha"] = "Sha des Zorns", 
-		["oondasta"] = "Oondasta", 
-		["nalak"] = "Nalak",
-		["celestials"] = "Erhabene", 
-		["ordos"] = "Ordos",
-		["defeated"] = "besiegt", 
-		["undefeated"] = "unbesiegt",
-	}
-
 	L["chat"] = {
 		["instance_chat"] = "I",
 		["instance_chat_leader"] = "IL",

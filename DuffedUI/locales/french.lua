@@ -179,17 +179,6 @@ if D.Client == "frFR" then
 		["disband"] = "Disbanding group?",
 	}
 
-	L["boss"] = {
-		["galleon"] = "Galleon", 
-		["sha"] = "Sha of Anger", 
-		["oondasta"] = "Oondasta", 
-		["nalak"] = "Nalak",
-		["celestials"] = "Celestials", 
-		["ordos"] = "Ordos",
-		["defeated"] = "Defeated", 
-		["undefeated"] = "Undefeated",
-	}
-
 	L["chat"] = {
 		["instance_chat"] = "I",
 		["instance_chat_leader"] = "IL",

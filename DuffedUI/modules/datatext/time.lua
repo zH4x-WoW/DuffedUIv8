@@ -132,10 +132,11 @@ Stat:SetScript("OnEnter", function(self)
 		end
 	end
 
-	if UnitLevel("player") >= 91 then
-		for i = 1, GetNumSavedWorldBosses() do
+	local Worldboss = GetNumSavedWorldBosses()
+	if Worldboss > 0 then
+		for i = 1, Worldboss do
 			name, instanceID, reset = GetWorldBossInfo(i)
-			if reset then
+			if name and reset then
 				GameTooltip:AddLine(" ")
 				GameTooltip:AddDoubleLine(RAID_INFO_WORLD_BOSS.."(s)")
 				GameTooltip:AddDoubleLine(name, SecondsToTime(reset), 1, 1, 1, .8, .8, .8)
@@ -143,23 +144,6 @@ Stat:SetScript("OnEnter", function(self)
 		end
 	end
 
-	if UnitLevel("player") == 90 then
-		GameTooltip:AddLine(" ")
-		GameTooltip:AddDoubleLine(RAID_INFO_WORLD_BOSS.."(s)")
-		local Sha = IsQuestFlaggedCompleted(32099)
-		local Galleon = IsQuestFlaggedCompleted(32098)
-		local Oondasta = IsQuestFlaggedCompleted(32519)
-		local Nalak = IsQuestFlaggedCompleted(32518)
-		local Celestials = IsQuestFlaggedCompleted(33117)
-		local Ordos = IsQuestFlaggedCompleted(33118)
-
-		GameTooltip:AddDoubleLine("|cffffffff"..L["boss"]["sha"].."|r: ", Sha and "|cff00ff00"..L["boss"]["defeated"].."|r" or "|cffff0000"..L["boss"]["undefeated"].."|r")
-		GameTooltip:AddDoubleLine("|cffffffff"..L["boss"]["galleon"].."|r: ", Galleon and "|cff00ff00"..L["boss"]["defeated"].."|r" or "|cffff0000"..L["boss"]["undefeated"].."|r")
-		GameTooltip:AddDoubleLine("|cffffffff"..L["boss"]["oondasta"].."|r: ", Oondasta and "|cff00ff00"..L["boss"]["defeated"].."|r" or "|cffff0000"..L["boss"]["undefeated"].."|r")
-		GameTooltip:AddDoubleLine("|cffffffff"..L["boss"]["nalak"].."|r: ", Nalak and "|cff00ff00"..L["boss"]["defeated"].."|r" or "|cffff0000"..L["boss"]["undefeated"].."|r")
-		GameTooltip:AddDoubleLine("|cffffffff"..L["boss"]["celestials"].."|r: ", Celestials and "|cff00ff00"..L["boss"]["defeated"].."|r" or "|cffff0000"..L["boss"]["undefeated"].."|r")
-		GameTooltip:AddDoubleLine("|cffffffff"..L["boss"]["ordos"].."|r: ", Ordos and "|cff00ff00"..L["boss"]["defeated"].."|r" or "|cffff0000"..L["boss"]["undefeated"].."|r")
-	end
 	GameTooltip:Show()
 end)
 
