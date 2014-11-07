@@ -233,7 +233,6 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(1822), -- Rake
 			CreateSpellEntry(2637), -- Hibernate
 			CreateSpellEntry(6795), -- Growl
-			CreateSpellEntry(8921), -- Moonfire
 			CreateSpellEntry(8936, false, nil, nil, 8936), -- Regrowth
 			CreateSpellEntry(9005), -- Pounce stun
 			CreateSpellEntry(9007), -- Pounce bleed
@@ -253,6 +252,8 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(115798), -- Weakened Blows
 			CreateSpellEntry(155777), -- Germination
 			CreateSpellEntry(162359), -- Genesis
+			CreateSpellEntry(164812), -- Moonfire
+			CreateSpellEntry(164815), -- Sunfire
 		},
 		player = {
 			CreateSpellEntry(774), -- Rejuvenation
