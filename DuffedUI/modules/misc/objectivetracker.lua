@@ -2,7 +2,6 @@ local D, C, L = unpack(select(2, ...))
 
 --[[Modified Objective Tracker from ObbleYeah - All Credits goes to him]]--
 local otfheight = 450
-local otfwidth = 190
 local titlesize = 13
 local otf = ObjectiveTrackerFrame
 local lST = "Wowhead"
@@ -26,11 +25,10 @@ otf:SetClampedToScreen(true)
 otf:ClearAllPoints()
 otf.ClearAllPoints = D.Dummy
 otf:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -D.ScreenHeight / 5, -D.ScreenHeight / 4) 
-otf.SetPoint = function() end
+otf.SetPoint = D.Dummy
 otf:SetMovable(true)
 otf:SetUserPlaced(true)
 otf:SetHeight(otfheight)
-otf:SetWidth(otfwidth)
 
 local otfmove = CreateFrame("FRAME", nil, otf)  
 otfmove:SetHeight(21)
@@ -69,13 +67,13 @@ local function moveQuestObjectiveItems(self)
 	self:SetPoint("TOPRIGHT", a[2], "TOPRIGHT", 20, -7)
 	self:SetFrameLevel(0)
 
-	local Icon = self.icon
+	--[[local Icon = self.icon
 	self:SetNormalTexture("")
 	self:CreateBackdrop()
 	self.backdrop:SetOutside(self, 0, 0)
 	self:StyleButton()
 	Icon:SetTexCoord(unpack(D.IconCoord))
-	Icon:SetInside()
+	Icon:SetInside()]]
 end
 
 local qitime = 0
@@ -99,7 +97,6 @@ hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
 		block.HeaderText:SetFont(STANDARD_TEXT_FONT, 13)
 		block.HeaderText:SetShadowOffset(.7, -.7)
 		block.HeaderText:SetShadowColor(0, 0, 0, 1)
-		block.HeaderText:SetWidth(otfwidth)
 		block.HeaderText:SetWordWrap(true)
 
 		local heightcheck = block.HeaderText:GetNumLines()
@@ -148,11 +145,11 @@ local function SkinScenarioButtons()
 	local _, currentStage, numStages, flags = C_Scenario.GetInfo()
 	local inChallengeMode = C_Scenario.IsChallengeMode()
 
-	block.NormalBG:SetSize(otfwidth + 21, 75)
+	block.NormalBG:SetSize(otf:GetWidth() + 21, 75)
 	block.FinalBG:ClearAllPoints()
 	block.FinalBG:SetPoint("TOPLEFT", block.NormalBG, 6, -6)
 	block.FinalBG:SetPoint("BOTTOMRIGHT", block.NormalBG, -6, 6)
-	block.GlowTexture:SetSize(otfwidth + 20, 75)
+	block.GlowTexture:SetSize(otf:GetWidth() + 20, 75)
 end
 
 --[[proving grounds]]--
@@ -168,14 +165,14 @@ local function SkinProvingGroundButtons()
 	block.WaveLabel:ClearAllPoints()
 	block.WaveLabel:SetPoint("LEFT", block.MedalIcon, "RIGHT", 3, 0)
 
-	block.BG:SetSize(otfwidth + 21, 75)
+	block.BG:SetSize(otf:GetWidth() + 21, 75)
 
 	block.GoldCurlies:ClearAllPoints()
 	block.GoldCurlies:SetPoint("TOPLEFT", block.BG, 6, -6)
 	block.GoldCurlies:SetPoint("BOTTOMRIGHT", block.BG, -6, 6)
 
-	anim.BGAnim:SetSize(otfwidth + 21, 75)
-	anim.BorderAnim:SetSize(otfwidth + 21, 75)
+	anim.BGAnim:SetSize(otf:GetWidth() + 21, 75)
+	anim.BorderAnim:SetSize(otf:GetWidth() + 21, 75)
 	anim.BorderAnim:ClearAllPoints()
 	anim.BorderAnim:SetPoint("TOPLEFT", block.BG, 8, -8)
 	anim.BorderAnim:SetPoint("BOTTOMRIGHT", block.BG, -8, 8)
