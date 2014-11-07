@@ -17,7 +17,7 @@ if not C["unitframes"].attached then D.ConstructEnergy("Energy", 216, 5) end
 
 D.ConstructRessources = function(name, width, height)
 	local DruidMana = CreateFrame("StatusBar", name .. "Mana", UIParent)
-	DruidMana:Size(width, 2)
+	DruidMana:Size(width, height)
 	DruidMana:SetStatusBarTexture(texture)
 	DruidMana:SetStatusBarColor(.30, .52, .90)
 	DruidMana:CreateBackdrop()
@@ -61,7 +61,7 @@ D.ConstructRessources = function(name, width, height)
 	WildMushroom:SetBackdrop(backdrop)
 	WildMushroom:SetBackdropColor(0, 0, 0)
 	WildMushroom:SetBackdropBorderColor(0, 0, 0)
-	
+
 	for i = 1, 3 do
 		WildMushroom[i] = CreateFrame("StatusBar", name .. "WildMushroom" .. i, WildMushroom)
 		WildMushroom[i]:SetHeight(height)
@@ -104,16 +104,23 @@ D.ConstructRessources = function(name, width, height)
 		ComboPoints[i].bg:SetAlpha(.15)
 	end
 
-	ComboPoints.Visibility = CreateFrame("Frame", nil, ComboPoints)
-	ComboPoints.Visibility:RegisterEvent("UNIT_DISPLAYPOWER", "player")
-	ComboPoints.Visibility:RegisterEvent("PLAYER_LOGIN")
-	ComboPoints.Visibility:SetScript("OnEvent", function()
-		local powerType, powerToken = UnitPowerType("player")
-		if powerToken == "ENERGY" then
-			ComboPoints:Show()
-			EclipseBar:Hide()
-		else
+	Visibility = CreateFrame("Frame")
+	Visibility:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+	Visibility:SetScript("OnEvent", function()
+		local spec = GetSpecialization()
+		local specName = spec and select(2, GetSpecializationInfo(spec)) or "None"
+		if specName == "Balance" then
 			ComboPoints:Hide()
+		elseif specName == "Feral" then
+			WildMushroom:Hide()
+			EclipseBar:Hide()
+		elseif specName == "Restoration" then
+			EclipseBar:Hide()
+			ComboPoints:Hide()
+		elseif specName == "Guardian" then
+			EclipseBar:Hide()
+			ComboPoints:Hide()
+			WildMushroom:Hide()
 		end
 	end)
 
