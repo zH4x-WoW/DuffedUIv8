@@ -122,25 +122,23 @@ Stat:SetScript("OnEnter", function(self)
 			local function fmttime(sec, table)
 			local table = table or {}
 			local d, h, m, s = ChatFrame_TimeBreakDown(floor(sec))
-			local string = gsub(gsub(format(" %dd %dh %dm "..((d == 0 and h == 0) and "%ds" or ""), d, h, m, s)," 0[dhms]"," "),"%s+"," ")
-			local string = strtrim(gsub(string, "([dhms])", {d = table.days or "d", h = table.hours or "h", m = table.minutes or "m", s = table.seconds or "s"})," ")
-			return strmatch(string,"^%s*$") and "0"..(table.seconds or L"s") or string
+			local string = gsub(gsub(format(" %dd %dh %dm " .. ((d == 0 and h == 0) and "%ds" or ""), d, h, m, s), " 0[dhms]", " "), "%s+", " ")
+			local string = strtrim(gsub(string, "([dhms])", {d = table.days or "d", h = table.hours or "h", m = table.minutes or "m", s = table.seconds or "s"}), " ")
+			return strmatch(string, "^%s*$") and "0" .. (table.seconds or L"s") or string
 		end
-		if extended then tr, tg, tb = 0.3, 1, 0.3 else tr, tg, tb = 1, 1, 1 end
+		if extended then tr, tg, tb = .3, 1, .3 else tr, tg, tb = 1, 1, 1 end
 		if difficulty == 3 or difficulty == 4 then diff = "H" else diff = "N" end
-		GameTooltip:AddDoubleLine(name, fmttime(reset),1 ,1, 1, tr, tg, tb)
+		GameTooltip:AddDoubleLine(name, fmttime(reset),1 ,1, 1, 1, 0, 0)
 		end
 	end
 
 	local Worldboss = GetNumSavedWorldBosses()
 	if Worldboss > 0 then
+		GameTooltip:AddLine(" ")
+		GameTooltip:AddDoubleLine(RAID_INFO_WORLD_BOSS.."(s)")
 		for i = 1, Worldboss do
-			name, instanceID, reset = GetWorldBossInfo(i)
-			if name and reset then
-				GameTooltip:AddLine(" ")
-				GameTooltip:AddDoubleLine(RAID_INFO_WORLD_BOSS.."(s)")
-				GameTooltip:AddDoubleLine(name, SecondsToTime(reset), 1, 1, 1, .8, .8, .8)
-			end
+			name, _, reset = GetSavedWorldBossInfo(i)
+			if name and reset then GameTooltip:AddDoubleLine(name, SecondsToTime(reset), 1, 1, 1, 1, 0, 0) end
 		end
 	end
 
