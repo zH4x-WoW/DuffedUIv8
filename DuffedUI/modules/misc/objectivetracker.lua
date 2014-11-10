@@ -139,25 +139,29 @@ hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "AddTimerBar", function(self, b
 	end
 end)
 
---[[scenario buttons]]--
+--[[Skinning scenario buttons]]--
 local function SkinScenarioButtons()
 	local block = ScenarioStageBlock
 	local _, currentStage, numStages, flags = C_Scenario.GetInfo()
 	local inChallengeMode = C_Scenario.IsChallengeMode()
 
-	block.NormalBG:SetSize(otf:GetWidth() + 21, 75)
+	block:StripTextures()
+	block:CreateBackdrop("Transparent")
+	block.NormalBG:SetSize(otf:GetWidth(), 50)
 	block.FinalBG:ClearAllPoints()
 	block.FinalBG:SetPoint("TOPLEFT", block.NormalBG, 6, -6)
 	block.FinalBG:SetPoint("BOTTOMRIGHT", block.NormalBG, -6, 6)
-	block.GlowTexture:SetSize(otf:GetWidth() + 20, 75)
+	block.GlowTexture:SetSize(otf:GetWidth(), 50)
 end
 
---[[proving grounds]]--
+--[[Skinning proving grounds]]--
 local function SkinProvingGroundButtons()
 	local block = ScenarioProvingGroundsBlock
 	local sb = block.StatusBar
 	local anim = ScenarioProvingGroundsBlockAnim
 
+	block:StripTextures()
+	block:CreateBackdrop("Transparent")
 	block.MedalIcon:SetSize(32, 32)
 	block.MedalIcon:ClearAllPoints()
 	block.MedalIcon:SetPoint("TOPLEFT", block, 20, -10)
@@ -165,14 +169,14 @@ local function SkinProvingGroundButtons()
 	block.WaveLabel:ClearAllPoints()
 	block.WaveLabel:SetPoint("LEFT", block.MedalIcon, "RIGHT", 3, 0)
 
-	block.BG:SetSize(otf:GetWidth() + 21, 75)
+	block.BG:SetSize(otf:GetWidth(), 50)
 
 	block.GoldCurlies:ClearAllPoints()
 	block.GoldCurlies:SetPoint("TOPLEFT", block.BG, 6, -6)
 	block.GoldCurlies:SetPoint("BOTTOMRIGHT", block.BG, -6, 6)
 
-	anim.BGAnim:SetSize(otf:GetWidth() + 21, 75)
-	anim.BorderAnim:SetSize(otf:GetWidth() + 21, 75)
+	anim.BGAnim:SetSize(otf:GetWidth(), 50)
+	anim.BorderAnim:SetSize(otf:GetWidth(), 50)
 	anim.BorderAnim:ClearAllPoints()
 	anim.BorderAnim:SetPoint("TOPLEFT", block.BG, 8, -8)
 	anim.BorderAnim:SetPoint("BOTTOMRIGHT", block.BG, -8, 8)
