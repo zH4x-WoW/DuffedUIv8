@@ -1,7 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
-	-- global
+	-- [[Global]]--
 	PetJournalParent:StripTextures()
 	PetJournalParent:SetTemplate("Transparent")
 	PetJournalParentPortrait:Hide()
@@ -10,7 +10,7 @@ local function LoadSkin()
 	PetJournalParentTab3:SkinTab()
 	PetJournalParentCloseButton:SkinCloseButton()
 
-	--[[ mount journal (tab 1) ]]--
+	--[[Mountjournal (Tab 1 - Mounts)]]--
 	MountJournal:StripTextures()
 	MountJournal.LeftInset:StripTextures()
 	MountJournal.RightInset:StripTextures()
@@ -42,6 +42,9 @@ local function LoadSkin()
 			b.DragButton:StyleButton()
 			b.DragButton.hover:SetAllPoints(b.DragButton)
 			b.DragButton.ActiveTexture:SetAlpha(0)
+			b.favorite:SetTexture("Interface\\COMMON\\FavoritesIcon")
+			b.favorite:SetPoint("TOPLEFT",b.DragButton,"TOPLEFT", -8, 8)
+			b.favorite:SetSize(32, 32)
 
 			b:CreateBackdrop("Default")
 			b.backdrop:Point("TOPLEFT", b.icon, -2, 2)
@@ -53,13 +56,13 @@ local function LoadSkin()
 		end
 	end
 
-	-- Color in green icon border on selected mount
+	--[[Color selected Mount]]--
 	local function ColorSelectedMount()
 		for i = 1, #MountJournal.ListScrollFrame.buttons do
 			local b = _G["MountJournalListScrollFrameButton" .. i]
 			local t = _G["MountJournalListScrollFrameButton" .. i .. "Name"]
 			if b.DragButton.ActiveTexture:IsShown() then
-				t:SetTextColor(1,1,0)
+				t:SetTextColor(1, 1, 0)
 				b.backdrop:SetBackdropBorderColor(1, 1, 0)
 			else
 				t:SetTextColor(1, 1, 1)
@@ -75,11 +78,11 @@ local function LoadSkin()
 	MountJournalSummonRandomFavoriteButton.texture:SetTexture([[Interface/ICONS/ACHIEVEMENT_GUILDPERK_MOUNTUP]])
 	MountJournalSummonRandomFavoriteButton.texture:SetTexCoord(.08, .88, .08, .88)
 
-	-- bug fix when we scroll
+	--[[Bugfix for scrolling mount list]]--
 	MountJournalListScrollFrame:HookScript("OnVerticalScroll", ColorSelectedMount)
 	MountJournalListScrollFrame:HookScript("OnMouseWheel", ColorSelectedMount)
 
-	--[[ pet journal (tab 2) ]]--
+	--[[Mountjournal (Tab 2 - Pets)]]--
 	PetJournalSummonButton:StripTextures()
 	PetJournalFindBattle:StripTextures()
 	PetJournalSummonButton:SkinButton()
@@ -102,7 +105,7 @@ local function LoadSkin()
 			b:StripTextures()
 			b:SetTemplate()
 			b:StyleButton()
-			b:SetBackdropBorderColor(0,0,0,0)
+			b:SetBackdropBorderColor(0, 0, 0, 0)
 			b:HideInsets()
 			b.icon:SetTexCoord(.08, .92, .08, .92)
 			b.dragButton:StyleButton()
@@ -260,7 +263,7 @@ local function LoadSkin()
 	PetJournalPetCardXPBar:SetStatusBarTexture(C["media"].normTex)
 	PetJournalLoadoutBorder:Height(350)
 
-	--[[ toy box (tab 3) ]]--
+	--[[Mountjournal (Tab 3 - Toybox)]]--
 	ToyBoxProgressBar:StripTextures()
 	ToyBoxProgressBar:SetStatusBarTexture(C["media"].normTex)
 	ToyBoxProgressBar:CreateBackdrop()
