@@ -546,10 +546,10 @@ local UpdateThreat = function(self)
 	local bg = (select(2, IsInInstance()) == "pvp")
 	if self.unit == "target" then
 		self.health.name:SetTextColor(1, 1, 0)
-		if (not arena or not bg) then self.health:SetAlpha(1) end
+		self.health:SetAlpha(1)
 	else
 		self.health.name:SetTextColor(1, 1, 1)
-		if (not arena or not bg) then self.health:SetAlpha(C["nameplate"].NonTargetAlpha) end
+		if (arena or bg) then self.health:SetAlpha(1) else self.health:SetAlpha(C["nameplate"].NonTargetAlpha) end
 	end
 end
 

@@ -43,7 +43,7 @@ local function LoadSkin()
 			b.DragButton.hover:SetAllPoints(b.DragButton)
 			b.DragButton.ActiveTexture:SetAlpha(0)
 			b.favorite:SetTexture("Interface\\COMMON\\FavoritesIcon")
-			b.favorite:SetPoint("TOPLEFT",b.DragButton,"TOPLEFT", -8, 8)
+			b.favorite:SetPoint("TOPLEFT",b.DragButton,"TOPLEFT", -4, 4)
 			b.favorite:SetSize(32, 32)
 
 			b:CreateBackdrop("Default")
