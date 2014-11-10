@@ -125,7 +125,7 @@ local function Shared(self, unit)
 			health.colorReaction = true
 		end
 
-		local power = CreateFrame('StatusBar', nil, self)
+		local power = CreateFrame("StatusBar", nil, self)
 		power:Height(18)
 		power:Width(228)
 		power:Point("TOP", health, "BOTTOM", 2, 9)
@@ -141,7 +141,7 @@ local function Shared(self, unit)
 		PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
 		self.PowerBorder = PowerBorder
 
-		local powerBG = power:CreateTexture(nil, 'BORDER')
+		local powerBG = power:CreateTexture(nil, "BORDER")
 		powerBG:SetAllPoints(power)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
@@ -263,7 +263,7 @@ local function Shared(self, unit)
 				bar:Point("LEFT", power, "RIGHT", 7, 5)
 				bar:SetStatusBarTexture(C["media"].normTex)
 				bar:SetOrientation("VERTICAL")
-				bar.bg = bar:CreateTexture(nil, 'ARTWORK')
+				bar.bg = bar:CreateTexture(nil, "ARTWORK")
 				bar.background = CreateFrame("Frame", "DuffedUIStatue", bar)
 				bar.background:SetAllPoints()
 				bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
@@ -381,7 +381,7 @@ local function Shared(self, unit)
 			Name:SetJustifyH("LEFT")
 			Name:SetFontObject(font)
 			Name:SetShadowOffset(1.25, -1.25)
-			self:Tag(Name, '[DuffedUI:getnamecolor][DuffedUI:namelong] [DuffedUI:diffcolor][level] [shortclassification]')
+			self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:namelong] [DuffedUI:diffcolor][level] [shortclassification]")
 			self.Name = Name
 		end
 
@@ -402,7 +402,7 @@ local function Shared(self, unit)
 			debuffs.num = 27
 
 			buffs.spacing = 2
-			buffs.initialAnchor = 'TOPLEFT'
+			buffs.initialAnchor = "TOPLEFT"
 			buffs["growth-y"] = "UP"
 			buffs["growth-x"] = "RIGHT"
 			buffs.PostCreateIcon = D.PostCreateAura
@@ -410,7 +410,7 @@ local function Shared(self, unit)
 			self.Buffs = buffs
 
 			debuffs.spacing = 2
-			debuffs.initialAnchor = 'TOPRIGHT'
+			debuffs.initialAnchor = "TOPRIGHT"
 			debuffs["growth-y"] = "UP"
 			debuffs["growth-x"] = "LEFT"
 			debuffs.PostCreateIcon = D.PostCreateAura
@@ -543,17 +543,17 @@ local function Shared(self, unit)
 		end
 
 		if C["unitframes"].healcomm then
-			local mhpb = CreateFrame('StatusBar', nil, self.Health)
-			mhpb:SetPoint('TOPLEFT', self.Health:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
-			mhpb:SetPoint('BOTTOMLEFT', self.Health:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
+			local mhpb = CreateFrame("StatusBar", nil, self.Health)
+			mhpb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+			mhpb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 			mhpb:SetWidth(250)
 			mhpb:SetStatusBarTexture(normTex)
 			mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
 			mhpb:SetMinMaxValues(0,1)
 
-			local ohpb = CreateFrame('StatusBar', nil, self.Health)
-			ohpb:SetPoint('TOPLEFT', mhpb:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
-			ohpb:SetPoint('BOTTOMLEFT', mhpb:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
+			local ohpb = CreateFrame("StatusBar", nil, self.Health)
+			ohpb:SetPoint("TOPLEFT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+			ohpb:SetPoint("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 			ohpb:SetWidth(250)
 			ohpb:SetStatusBarTexture(normTex)
 			ohpb:SetStatusBarColor(0, 1, 0, 0.25)
@@ -568,22 +568,22 @@ local function Shared(self, unit)
 			self.HealPrediction = {
 				myBar = mhpb,
 				otherBar = ohpb,
-				absBar = absb,
+				absorbBar = absb,
 				maxOverflow = 1,
 			}
 		end
 
 		if C["unitframes"].playeraggro == true then
 			table.insert(self.__elements, D.UpdateThreat)
-			self:RegisterEvent('PLAYER_TARGET_CHANGED', D.UpdateThreat)
-			self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', D.UpdateThreat)
-			self:RegisterEvent('UNIT_THREAT_SITUATION_UPDATE', D.UpdateThreat)
+			self:RegisterEvent("PLAYER_TARGET_CHANGED", D.UpdateThreat)
+			self:RegisterEvent("UNIT_THREAT_LIST_UPDATE", D.UpdateThreat)
+			self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", D.UpdateThreat)
 		end
 
 		if unit == "player" then self:RegisterEvent("PLAYER_ENTERING_WORLD", D.updateAllElements) end
 	end
 
-	--	Target of Target
+	--[[Target of Target & Pet]]--
 	if (unit == "targettarget") or (unit == "pet") then
 		local panel = CreateFrame("Frame", nil, self)
 		panel:SetTemplate("Default")
@@ -595,7 +595,7 @@ local function Shared(self, unit)
 		panel:SetAlpha(0)
 		self.panel = panel
 
-		local health = CreateFrame('StatusBar', nil, self)
+		local health = CreateFrame("StatusBar", nil, self)
 		health:Height(17)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
@@ -608,7 +608,7 @@ local function Shared(self, unit)
 		HealthBorder:SetFrameLevel(2)
 		self.HealthBorder = HealthBorder
 
-		local healthBG = health:CreateTexture(nil, 'BORDER')
+		local healthBG = health:CreateTexture(nil, "BORDER")
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 
@@ -636,7 +636,7 @@ local function Shared(self, unit)
 			health.colorReaction = true
 		end
 
-		local power = CreateFrame('StatusBar', nil, self)
+		local power = CreateFrame("StatusBar", nil, self)
 		power:Height(3)
 		power:Point("TOPLEFT", health, "BOTTOMLEFT", 9, 1)
 		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", -9, -2)
@@ -653,7 +653,7 @@ local function Shared(self, unit)
 		power.frequentUpdates = true
 		if C["unitframes"].showsmooth == true then power.Smooth = true end
 
-		local powerBG = power:CreateTexture(nil, 'BORDER')
+		local powerBG = power:CreateTexture(nil, "BORDER")
 		powerBG:SetAllPoints(power)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
@@ -671,7 +671,7 @@ local function Shared(self, unit)
 		if C["unitframes"].showsmooth == true then power.Smooth = true end
 
 		local Name = health:CreateFontString(nil, "OVERLAY")
-		self:Tag(Name, '[DuffedUI:getnamecolor][DuffedUI:nameshort] [DuffedUI:diffcolor][level] [shortclassification]')
+		self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:nameshort] [DuffedUI:diffcolor][level] [shortclassification]")
 		Name:SetPoint("CENTER", health, "CENTER", 2, 2)
 		Name:SetJustifyH("CENTER")
 		Name:SetFontObject(font)
@@ -720,7 +720,7 @@ local function Shared(self, unit)
 
 	--	Focus
 	if (unit == "focus") then
-		local health = CreateFrame('StatusBar', nil, self)
+		local health = CreateFrame("StatusBar", nil, self)
 		health:Height(17)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
@@ -738,7 +738,7 @@ local function Shared(self, unit)
 		if C["unitframes"].showsmooth == true then health.Smooth = true end
 		health.colorClass = true
 
-		local healthBG = health:CreateTexture(nil, 'BORDER')
+		local healthBG = health:CreateTexture(nil, "BORDER")
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 
@@ -767,7 +767,7 @@ local function Shared(self, unit)
 			health.colorReaction = true	
 		end
 
-		local power = CreateFrame('StatusBar', nil, self)
+		local power = CreateFrame("StatusBar", nil, self)
 		power:Height(3)
 		power:Point("TOPLEFT", health, "BOTTOMLEFT", 85, 0)
 		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", -9, -3)
@@ -785,7 +785,7 @@ local function Shared(self, unit)
 		power.colorPower = true
 		if C["unitframes"].showsmooth == true then power.Smooth = true end
 
-		local powerBG = power:CreateTexture(nil, 'BORDER')
+		local powerBG = power:CreateTexture(nil, "BORDER")
 		powerBG:SetAllPoints(power)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
@@ -799,7 +799,7 @@ local function Shared(self, unit)
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 
-		self:Tag(Name, '[DuffedUI:getnamecolor][DuffedUI:namelong]')
+		self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:namelong]")
 		self.Name = Name
 
 		if C["unitframes"].focusdebuffs then
@@ -860,7 +860,7 @@ local function Shared(self, unit)
 
 	--	Focus target
 	if (unit == "focustarget") then
-		local health = CreateFrame('StatusBar', nil, self)
+		local health = CreateFrame("StatusBar", nil, self)
 		health:Height(10)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
@@ -878,7 +878,7 @@ local function Shared(self, unit)
 		if C["unitframes"].showsmooth == true then health.Smooth = true end
 		health.colorClass = true
 
-		local healthBG = health:CreateTexture(nil, 'BORDER')
+		local healthBG = health:CreateTexture(nil, "BORDER")
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 
@@ -912,7 +912,7 @@ local function Shared(self, unit)
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 
-		self:Tag(Name, '[DuffedUI:getnamecolor][DuffedUI:nameshort]')
+		self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:nameshort]")
 		self.Name = Name
 	end
 
@@ -920,7 +920,7 @@ local function Shared(self, unit)
 	if (unit and unit:find("arena%d") and C["raid"].arena == true) or (unit and unit:find("boss%d") and C["raid"].showboss == true) then
 		self:SetAttribute("type2", "togglemenu")
 
-		local health = CreateFrame('StatusBar', nil, self)
+		local health = CreateFrame("StatusBar", nil, self)
 		health:Height(22)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
@@ -938,7 +938,7 @@ local function Shared(self, unit)
 		if C["unitframes"].showsmooth == true then health.Smooth = true end
 		health.colorClass = true
 
-		local healthBG = health:CreateTexture(nil, 'BORDER')
+		local healthBG = health:CreateTexture(nil, "BORDER")
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 
@@ -969,7 +969,7 @@ local function Shared(self, unit)
 			health.colorReaction = true	
 		end
 
-		local power = CreateFrame('StatusBar', nil, self)
+		local power = CreateFrame("StatusBar", nil, self)
 		power:Height(3)
 		power:Point("TOPLEFT", health, "BOTTOMLEFT", 85, 0)
 		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", -9, -3)
@@ -987,7 +987,7 @@ local function Shared(self, unit)
 		power.colorPower = true
 		if C["unitframes"].showsmooth == true then power.Smooth = true end
 
-		local powerBG = power:CreateTexture(nil, 'BORDER')
+		local powerBG = power:CreateTexture(nil, "BORDER")
 		powerBG:SetAllPoints(power)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
@@ -1009,7 +1009,7 @@ local function Shared(self, unit)
 		Name:SetShadowOffset(1.25, -1.25)
 		Name.frequentUpdates = 0.2
 
-		self:Tag(Name, '[DuffedUI:getnamecolor][DuffedUI:nameshort]')
+		self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:nameshort]")
 		self.Name = Name
 
 		if (unit and unit:find("boss%d")) then
@@ -1035,7 +1035,7 @@ local function Shared(self, unit)
 			buffs.size = 26
 			buffs.num = 3
 			buffs.spacing = 3
-			buffs.initialAnchor = 'RIGHT'
+			buffs.initialAnchor = "RIGHT"
 			buffs["growth-x"] = "LEFT"
 			buffs.PostCreateIcon = D.PostCreateAura
 			buffs.PostUpdateIcon = D.PostUpdateAura
@@ -1047,18 +1047,18 @@ local function Shared(self, unit)
 		local debuffs = CreateFrame("Frame", nil, self)
 		debuffs:SetHeight(26)
 		debuffs:SetWidth(200)
-		debuffs:SetPoint('TOPLEFT', self, 'TOPRIGHT', D.Scale(5), 2)
+		debuffs:SetPoint("TOPLEFT", self, "TOPRIGHT", D.Scale(5), 2)
 		debuffs.size = 26
 		debuffs.num = 4
 		debuffs.spacing = 3
-		debuffs.initialAnchor = 'LEFT'
+		debuffs.initialAnchor = "LEFT"
 		debuffs["growth-x"] = "RIGHT"
 		debuffs.PostCreateIcon = D.PostCreateAura
 		debuffs.PostUpdateIcon = D.PostUpdateAura
 		debuffs.onlyShowPlayer = true
 		self.Debuffs = debuffs
 
-		if C["raid"].arena and (unit and unit:find('arena%d')) then
+		if C["raid"].arena and (unit and unit:find("arena%d")) then
 			local Trinket = CreateFrame("Frame", nil, self)
 			Trinket:Size(26)
 			Trinket:SetPoint("TOPRIGHT", self, "TOPLEFT", -5, 2)
@@ -1111,13 +1111,13 @@ local function Shared(self, unit)
 	if(self:GetParent():GetName():match"DuffedUIMainTank" or self:GetParent():GetName():match"DuffedUIMainAssist") then
 		self:SetAttribute("type2", "focus")
 
-		local health = CreateFrame('StatusBar', nil, self)
+		local health = CreateFrame("StatusBar", nil, self)
 		health:Height(20)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
 
-		local healthBG = health:CreateTexture(nil, 'BORDER')
+		local healthBG = health:CreateTexture(nil, "BORDER")
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 
@@ -1158,7 +1158,7 @@ local function Shared(self, unit)
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 
-		self:Tag(Name, '[DuffedUI:getnamecolor][DuffedUI:nameshort]')
+		self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:nameshort]")
 		self.Name = Name
 	end
 	return self
@@ -1166,30 +1166,30 @@ end
 
 --	Default position
 if C["unitframes"].totdebuffs then totdebuffs = 24 end
-oUF:RegisterStyle('DuffedUI', Shared)
+oUF:RegisterStyle("DuffedUI", Shared)
 
-local player = oUF:Spawn('player', "DuffedUIPlayer")
+local player = oUF:Spawn("player", "DuffedUIPlayer")
 player:SetParent(DuffedUIPetBattleHider)
 player:Point("BOTTOM", UIParent, "BOTTOM", -340, 225)
 player:Size(218, 44)
 
-local target = oUF:Spawn('target', "DuffedUITarget")
+local target = oUF:Spawn("target", "DuffedUITarget")
 target:SetParent(DuffedUIPetBattleHider)
 target:Point("BOTTOM", UIParent, "BOTTOM", 340, 225)
 target:Size(218, 44)
 
 if C["unitframes"].Enable_ToT then
-	local tot = oUF:Spawn('targettarget', "DuffedUITargetTarget")
+	local tot = oUF:Spawn("targettarget", "DuffedUITargetTarget")
 	if C["raid"].center then tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMLEFT", 129, -2) else tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMLEFT", 0, -2) end
 	tot:Size(129, 36)
 end
 
-local pet = oUF:Spawn('pet', "DuffedUIPet")
+local pet = oUF:Spawn("pet", "DuffedUIPet")
 pet:SetParent(DuffedUIPetBattleHider)
 if C["raid"].center then pet:SetPoint("TOPLEFT", DuffedUIPlayer, "BOTTOMRIGHT", -129, -2) else pet:SetPoint("TOPLEFT", DuffedUIPlayer, "BOTTOMRIGHT", 0, -2) end
 pet:Size(129, 36)
 
-local focus = oUF:Spawn('focus', "DuffedUIFocus")
+local focus = oUF:Spawn("focus", "DuffedUIFocus")
 focus:SetParent(DuffedUIPetBattleHider)
 focus:SetPoint("BOTTOMLEFT", InvDuffedUIActionBarBackground, "BOTTOM", 275, 500)
 focus:Size(200, 30)
@@ -1283,7 +1283,7 @@ if C["raid"].showboss then
 	for i = 1, MAX_BOSS_FRAMES do
 		boss[i] = oUF:Spawn("boss"..i, "DuffedUIBoss"..i)
 		boss[i]:SetParent(DuffedUIPetBattleHider)
-		if i == 1 then boss[i]:SetPoint("RIGHT", UIParent, "RIGHT", -163, -250) else boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 35) end
+		if i == 1 then boss[i]:SetPoint("RIGHT", UIParent, "RIGHT", -163, -250) else boss[i]:SetPoint("BOTTOM", boss[i-1], "TOP", 0, 35) end
 		boss[i]:Size(200, 27)
 	end
 end
@@ -1291,32 +1291,32 @@ end
 local assisttank_width = 90
 local assisttank_height  = 20
 if C["raid"].maintank == true then
-	local tank = oUF:SpawnHeader('DuffedUIMainTank', nil, 'raid',
-		'oUF-initialConfigFunction', ([[
+	local tank = oUF:SpawnHeader("DuffedUIMainTank", nil, "raid",
+		"oUF-initialConfigFunction", ([[
 			self:SetWidth(%d)
 			self:SetHeight(%d)
 		]]):format(assisttank_width, assisttank_height),
-		'showRaid', true,
-		'groupFilter', 'MAINTANK',
-		'yOffset', 7,
-		'point' , 'BOTTOM',
-		'template', 'oUF_DuffedUIMtt'
+		"showRaid", true,
+		"groupFilter", "MAINTANK",
+		"yOffset", 7,
+		"point" , "BOTTOM",
+		"template", "oUF_DuffedUIMtt"
 	)
 	tank:SetParent(DuffedUIPetBattleHider)
 	if C["chat"].rbackground then tank:SetPoint("TOPLEFT", DuffedUIChatBackgroundRight, "TOPLEFT", 2, 52) else tank:SetPoint("TOPLEFT", ChatFrame4, "TOPLEFT", 2, 62) end
 end
  
 if C["raid"].mainassist == true then
-	local assist = oUF:SpawnHeader("DuffedUIMainAssist", nil, 'raid',
-		'oUF-initialConfigFunction', ([[
+	local assist = oUF:SpawnHeader("DuffedUIMainAssist", nil, "raid",
+		"oUF-initialConfigFunction", ([[
 			self:SetWidth(%d)
 			self:SetHeight(%d)
 		]]):format(assisttank_width, assisttank_height),
-		'showRaid', true,
-		'groupFilter', 'MAINASSIST',
-		'yOffset', 7,
-		'point' , 'BOTTOM',
-		'template', 'oUF_DuffedUIMtt'
+		"showRaid", true,
+		"groupFilter", "MAINASSIST",
+		"yOffset", 7,
+		"point" , "BOTTOM",
+		"template", "oUF_DuffedUIMtt"
 	)
 	assist:SetParent(DuffedUIPetBattleHider)
 	if C["raid"].maintank == true then assist:SetPoint("TOPLEFT", DuffedUIMainTank, "BOTTOMLEFT", 2, -50) else assist:SetPoint("CENTER", UIParent, "CENTER", 0, 0) end

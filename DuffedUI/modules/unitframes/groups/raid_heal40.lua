@@ -191,7 +191,7 @@ local function Shared(self, unit)
 		self.HealPrediction = {
 			myBar = mhpb,
 			otherBar = ohpb,
-			absBar = absb,
+			absorbBar = absb,
 			maxOverflow = 1,
 		}
 	end
