@@ -503,6 +503,7 @@ local UpdateThreat = function(self)
 	if self.health == nil then return end
 	if self.hasClass or self.isTagged then return end
 
+	--[[Enhanced Threat feature]]--
 	if C["nameplate"].threat then
 		if not self.old_threat:IsShown() then
 			if InCombatLockdown() and self.isFriendly ~= true then
@@ -540,12 +541,15 @@ local UpdateThreat = function(self)
 		end
 	end
 
+	--[[Highlight current target]]--
+	local arena = (select(2, IsInInstance()) == "arena")
+	local bg = (select(2, IsInInstance()) == "pvp")
 	if self.unit == "target" then
 		self.health.name:SetTextColor(1, 1, 0)
-		self.health:SetAlpha(1)
+		if (not arena or not bg) then self.health:SetAlpha(1) end
 	else
 		self.health.name:SetTextColor(1, 1, 1)
-		self.health:SetAlpha(C["nameplate"].NonTargetAlpha)
+		if (not arena or not bg) then self.health:SetAlpha(C["nameplate"].NonTargetAlpha) end
 	end
 end
 

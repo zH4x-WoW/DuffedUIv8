@@ -84,6 +84,8 @@ DuffedUIAFKPanelTop:SetScript("OnUpdate", function(self, elapsed)
 end)
 
 local OnEvent = function(self, event, unit)
+	if InCombatLockdown() then return end
+
 	if event == "PLAYER_FLAGS_CHANGED" then
 		if unit == "player" then
 			if UnitIsAFK(unit) and not UnitIsDead(unit) then
