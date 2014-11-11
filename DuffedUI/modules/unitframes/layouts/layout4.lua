@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if not C["unitframes"].enable or C["unitframes"].layout ~= 1 then return end
+if not C["unitframes"].enable or C["unitframes"].layout ~= 4 then return end
 
 local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF
