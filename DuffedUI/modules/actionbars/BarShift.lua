@@ -93,6 +93,8 @@ bar:SetScript("OnEvent", function(self, event, ...)
 				_G["StanceButton" .. i]:SetAlpha(0)
 				_G["StanceButton" .. i]:HookScript("OnEnter", function(self) mouseover(1) end)
 				_G["StanceButton" .. i]:HookScript("OnLeave", function(self) mouseover(0) end)
+				_G["StanceButton" .. i]:SetSwipeColor(0, 0, 0, 0)
+				_G["StanceButton" .. i]:SetDrawBling(false)
 			end
 			ShapeShiftBorder:EnableMouse(true)
 			ShapeShiftBorder:HookScript("OnEnter", function(self) mouseover(1) end)
