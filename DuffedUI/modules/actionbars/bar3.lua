@@ -44,5 +44,7 @@ if C["actionbar"].Leftsidebars then
 		_G["MultiBarBottomRightButton" .. i]:EnableMouse(true)
 		_G["MultiBarBottomRightButton" .. i]:HookScript("OnEnter", function() LeftSideBar(1) end)
 		_G["MultiBarBottomRightButton" .. i]:HookScript("OnLeave", function() LeftSideBar(0) end)
+		_G["MultiBarBottomRightButton" .. i]:SetSwipeColor(0, 0, 0, 0)
+		_G["MultiBarBottomRightButton" .. i]:SetDrawBling(false)
 	end
 end
