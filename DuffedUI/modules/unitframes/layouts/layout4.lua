@@ -56,14 +56,571 @@ local function Shared(self, unit)
 
 	--[[Player & Target]]--
 	if (unit == "player" or unit == "target") then
-	
+		local panel = CreateFrame("Frame", nil, self)
+		panel:SetTemplate("Default")
+		panel:Size(250, 21)
+		panel:SetPoint("BOTTOM", self, "BOTTOM", 0, 0)
+		panel:SetFrameLevel(2)
+		panel:SetFrameStrata("MEDIUM")
+		panel:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+		panel:SetAlpha(0)
+		self.panel = panel
+
+		local health = CreateFrame("StatusBar", nil, self)
+		health:Height(35)
+		health:SetPoint("TOPLEFT")
+		health:SetPoint("TOPRIGHT")
+		health:SetStatusBarTexture(normTex)
+
+		local healthBG = health:CreateTexture(nil, "BORDER")
+		healthBG:SetAllPoints()
+		healthBG:SetTexture(0, 0, 0)
+
+		if C["unitframes"].percent then
+			local percHP
+			percHP = D.SetFontString(health, C["media"].font, 20, "THINOUTLINE")
+			percHP:SetTextColor(unpack(C["media"].datatextcolor1))
+			if unit == "player" then
+				if C["raid"].center then percHP:SetPoint("RIGHT", health, "LEFT", -25, -10) else percHP:SetPoint("LEFT", health, "RIGHT", 25, -10) end
+			elseif unit == "target" then
+				if C["raid"].center then percHP:SetPoint("LEFT", health, "RIGHT", 25, -10) else percHP:SetPoint("RIGHT", health, "LEFT", -25, -10) end
+			end
+			self:Tag(percHP, "[DuffedUI:perchp]")
+			self.percHP = percHP
+		end
+
+		health.value = health:CreateFontString(nil, "OVERLAY")
+		health.value:SetFontObject(font)
+		if (unit == "player") then health.value:Point("RIGHT", health, "RIGHT", -4, 7) else health.value:Point("LEFT", health, "LEFT", 4, 7) end
+		health.PostUpdate = D.PostUpdateHealth
+
+		self.Health = health
+		self.Health.bg = healthBG
+
+		health.frequentUpdates = true
+		if C["unitframes"].showsmooth == true then health.Smooth = true end
+
+		if C["unitframes"].unicolor == true then
+			health.colorTapping = false
+			health.colorDisconnected = false
+			health.colorClass = false
+			health:SetStatusBarColor(unpack(C["unitframes"].healthbarcolor))
+			healthBG:SetVertexColor(unpack(C["unitframes"].deficitcolor))
+			healthBG:SetTexture(.6, .6, .6)
+			if C["unitframes"].ColorGradient then
+				health.colorSmooth = true
+				healthBG:SetTexture(0, 0, 0)
+			end
+		else
+			health.colorDisconnected = true
+			health.colorTapping = true
+			health.colorClass = true
+			health.colorReaction = true
+		end
+
+		local power = CreateFrame("StatusBar", nil, self)
+		power:Height(5)
+		power:Width(210)
+		power:Point("TOP", health, "BOTTOM", 0, 8)
+		power:SetStatusBarTexture(normTex)
+		power:SetFrameLevel(self.Health:GetFrameLevel() + 2)
+
+		local powerBG = power:CreateTexture(nil, "BORDER")
+		powerBG:SetAllPoints(power)
+		powerBG:SetTexture(normTex)
+		powerBG.multiplier = 0.3
+
+		power.value = health:CreateFontString(nil, "OVERLAY")
+		power.value:SetFontObject(font)
+		if (unit == "player") then power.value:Point("RIGHT", health, "RIGHT", -4, -3) else power.value:Point("LEFT", health, "LEFT", 4, -3) end
+
+		self.Power = power
+		self.Power.bg = powerBG
+
+		power.PreUpdate = D.PreUpdatePower
+		power.PostUpdate = D.PostUpdatePower
+
+		power.frequentUpdates = true
+		power.colorDisconnected = true
+
+		if C["unitframes"].showsmooth == true then power.Smooth = true end
+		
+		if C["unitframes"].unicolor == true then
+			power.colorTapping = true
+			power.colorClass = true
+		else
+			power.colorPower = true
+		end
+
+		local Name = health:CreateFontString(nil, "OVERLAY")
+		if (unit == "player") then Name:Point("LEFT", health, "LEFT", 4, 0) else Name:Point("RIGHT", health, "RIGHT", -4, 0) end
+		Name:SetJustifyH("LEFT")
+		Name:SetFontObject(font)
+		Name:SetShadowOffset(1.25, -1.25)
+		self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:namelong] [DuffedUI:diffcolor][level] [shortclassification]")
+		self.Name = Name
+
+		if C["unitframes"].charportrait == true then
+			local portrait = CreateFrame("PlayerModel", nil, health)
+			portrait:SetFrameLevel(health:GetFrameLevel())
+			portrait:SetAllPoints(health)
+			portrait:SetAlpha(.15)
+			portrait.PostUpdate = D.PortraitUpdate 
+			self.Portrait = portrait
+		end
+
+		if C["unitframes"].playermodel == "Icon" then
+			local classicon = CreateFrame("Frame", nil, health)
+			classicon:Size(29)
+			if unit == "player" then classicon:Point("BOTTOMRIGHT", health, "BOTTOMLEFT", -5, 0) else classicon:Point("BOTTOMLEFT", health, "BOTTOMRIGHT", 5, 0) end
+			classicon:CreateBackdrop()
+			classicon.tex = classicon:CreateTexture("ClassIcon", "ARTWORK")
+			classicon.tex:SetAllPoints(classicon)
+			self.ClassIcon = classicon.tex
+		end
+
+		if D.Class == "PRIEST" and C["unitframes"].weakenedsoulbar then
+			local ws = CreateFrame("StatusBar", self:GetName().."_WeakenedSoul", power)
+			ws:SetAllPoints(power)
+			ws:SetStatusBarTexture(C["media"].normTex)
+			ws:GetStatusBarTexture():SetHorizTile(false)
+			ws:SetBackdrop(backdrop)
+			ws:SetBackdropColor(unpack(C["media"].backdropcolor))
+			ws:SetStatusBarColor(205/255, 20/255, 20/255)
+			self.WeakenedSoul = ws
+		end
+
+		local AltPowerBar = CreateFrame("StatusBar", self:GetName().."_AltPowerBar", self.Health)
+		AltPowerBar:SetFrameLevel(0)
+		AltPowerBar:SetFrameStrata("LOW")
+		AltPowerBar:SetHeight(5)
+		AltPowerBar:SetStatusBarTexture(C["media"].normTex)
+		AltPowerBar:GetStatusBarTexture():SetHorizTile(false)
+		AltPowerBar:SetStatusBarColor(163/255,  24/255,  24/255)
+		AltPowerBar:EnableMouse(true)
+
+		AltPowerBar:Point("LEFT", DuffedUIInfoLeft, 2, -2)
+		AltPowerBar:Point("RIGHT", DuffedUIInfoLeft, -2, 2)
+		AltPowerBar:Point("TOP", DuffedUIInfoLeft, 2, -2)
+		AltPowerBar:Point("BOTTOM", DuffedUIInfoLeft, -2, 2)
+		AltPowerBar:SetBackdrop({
+			bgFile = C["media"].blank, 
+			edgeFile = C["media"].blank, 
+			tile = false, tileSize = 0, edgeSize = 1, 
+			insets = { left = 0, right = 0, top = 0, bottom = D.Scale(-1)}
+		})
+		AltPowerBar:SetBackdropColor(0, 0, 0)
+		self.AltPowerBar = AltPowerBar
+
+		if (unit == "player") then
+			local Combat = health:CreateTexture(nil, "OVERLAY")
+			Combat:Height(19)
+			Combat:Width(19)
+			Combat:SetPoint("TOP", health, "TOPLEFT", 0, 12)
+			Combat:SetVertexColor(0.69, 0.31, 0.31)
+			self.Combat = Combat
+
+			FlashInfo = CreateFrame("Frame", "DuffedUIFlashInfo", self)
+			FlashInfo:SetScript("OnUpdate", D.UpdateManaLevel)
+			FlashInfo.parent = self
+			FlashInfo:SetAllPoints(health)
+			FlashInfo.ManaLevel = FlashInfo:CreateFontString(nil, "OVERLAY")
+			FlashInfo.ManaLevel:SetFontObject(font)
+			FlashInfo.ManaLevel:SetPoint("CENTER", health, "CENTER", 0, 1)
+			self.FlashInfo = FlashInfo
+
+			local PVP = health:CreateTexture(nil, "OVERLAY")
+			PVP:SetHeight(D.Scale(32))
+			PVP:SetWidth(D.Scale(32))
+			PVP:SetPoint("TOPLEFT", health, "TOPRIGHT", -7, 7)
+			self.PvP = PVP
+
+			local Leader = InvFrame:CreateTexture(nil, "OVERLAY")
+			Leader:Height(14)
+			Leader:Width(14)
+			Leader:Point("TOPLEFT", 2, 8)
+			self.Leader = Leader
+
+			local MasterLooter = InvFrame:CreateTexture(nil, "OVERLAY")
+			MasterLooter:Height(14)
+			MasterLooter:Width(14)
+			self.MasterLooter = MasterLooter
+			self:RegisterEvent("PARTY_LEADER_CHANGED", D.MLAnchorUpdate)
+			self:RegisterEvent("PARTY_MEMBERS_CHANGED", D.MLAnchorUpdate)
+
+			if (D.Class == "WARRIOR" or D.Class == "MONK" or D.Class == "PRIEST") and C["unitframes"].showstatuebar then
+				local bar = CreateFrame("StatusBar", "DuffedUIStatueBar", self)
+				bar:SetWidth(5)
+				bar:SetHeight(29)
+				bar:Point("LEFT", power, "RIGHT", 7, 5)
+				bar:SetStatusBarTexture(C["media"].normTex)
+				bar:SetOrientation("VERTICAL")
+				bar.bg = bar:CreateTexture(nil, "ARTWORK")
+				bar.background = CreateFrame("Frame", "DuffedUIStatue", bar)
+				bar.background:SetAllPoints()
+				bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
+				bar.background:SetBackdrop(backdrop)
+				bar.background:SetBackdropColor(0, 0, 0)
+				bar.background:SetBackdropBorderColor(0,0,0)
+				bar:CreateBackdrop()
+				self.Statue = bar
+			end
+
+			if C["unitframes"].classbar then
+				if D.Class == "DEATHKNIGHT" then
+					D.ConstructRessources("Runes", 216, 5)
+					if C["unitframes"].attached then Runes:Point("TOP", health, "BOTTOM", 0, 0) else Runes:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
+				end
+
+				if D.Class == "DRUID" then
+					local DruidManaUpdate = CreateFrame("Frame")
+					DruidManaUpdate:SetScript("OnUpdate", function() D.UpdateDruidManaText(self) end)
+					local DruidManaText = health:CreateFontString(nil, "OVERLAY")
+					DruidManaText:SetFontObject(font)
+					DruidManaText:Point("LEFT", power.value, "RIGHT", 5, 0)
+					DruidManaText:SetTextColor( 1, .49, .04 )
+					self.DruidManaText = DruidManaText
+
+					D.ConstructRessources("Druid", 216, 5)
+					if C["unitframes"].attached then
+						DruidMana:Point("TOP", health, "BOTTOM", 0, -8)
+						DruidEclipseBar:Point("TOP", health, "BOTTOM", 0, 0)
+						DruidWildMushroom:Point("TOP", health, "BOTTOM", 0, -8)
+						DruidComboPoints:SetPoint("TOP", health, "BOTTOM", 0, 0)
+					else
+						DruidMana:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
+						DruidEclipseBar:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
+						DruidWildMushroom:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
+						DruidComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
+					end
+					self.DruidMana = DruidMana
+					self.DruidMana.bg = DruidMana.Background
+					self.EclipseBar = DruidEclipseBar
+					self.WildMushroom = DruidWildMushroom
+					self.ComboPointsBar = DruidComboPoints
+				end
+
+				if D.Class == "MAGE" then
+					D.ConstructRessources("mb", "rp", 216, 5)
+					if C["unitframes"].attached then
+						mb:Point("TOP", health, "BOTTOM", 0, 0)
+						if C["unitframes"].runeofpower then rp:Point("TOP", health, "BOTTOM", 0, -8) end
+					else
+						mb:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
+						if C["unitframes"].runeofpower then rp:Point("TOP", CBAnchor, "BOTTOM", 0, -5) end
+					end
+					self.ArcaneChargeBar = mb
+					self.RunePower = rp
+				end
+
+				if D.Class == "MONK" then
+					D.ConstructRessources("Bar", 216, 5)
+					if C["unitframes"].attached then Bar:Point("TOP", health, "BOTTOM", 0, 0) else Bar:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					self.HarmonyBar = Bar
+				end
+
+				if D.Class == "PALADIN" then
+					D.ConstructRessources("bars", 216, 5)
+					if C["unitframes"].attached then bars:Point("TOP", health, "BOTTOM", 0, 0) else bars:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					self.HolyPower = bars
+				end
+
+				if D.Class == "PRIEST" then
+					D.ConstructRessources("pb", 216, 5)
+					if C["unitframes"].attached then pb:Point("TOP", health, "BOTTOM", 0, 0) else pb:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					self.ShadowOrbsBar = pb
+				end
+
+				if D.Class == "ROGUE" then
+					D.ConstructRessources("ComboPoints", 216, 5)
+					if C["unitframes"].attached then ComboPoints:Point("TOP", health, "BOTTOM", 0, 0) else ComboPoints:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					self.ComboPointsBar = ComboPoints
+					self.AnticipationBar = ComboPointsAnticipationBar
+				end
+
+				if D.Class == "SHAMAN" then
+					D.ConstructRessources("TotemBar", 216, 5)
+					if C["unitframes"].attached then TotemBar:Point("TOP", health, "BOTTOM", 0, 0) else TotemBar:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					self.TotemBar = TotemBar
+				end
+
+				if D.Class == "WARLOCK" then
+					D.ConstructRessources("wb", 216, 5)
+					if C["unitframes"].attached then wb:Point("TOP", health, "BOTTOM", 0, 0) else wb:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					self.WarlockSpecBars = wb
+				end
+			end
+
+			self:SetScript("OnEnter", function(self)
+				if self.EclipseBar and self.EclipseBar:IsShown() then 
+					self.EclipseBar.Text:Hide()
+				end
+				FlashInfo.ManaLevel:Hide()
+				UnitFrame_OnEnter(self) 
+			end)
+			self:SetScript("OnLeave", function(self) 
+				if self.EclipseBar and self.EclipseBar:IsShown() then 
+					self.EclipseBar.Text:Show()
+				end
+				FlashInfo.ManaLevel:Show()
+				UnitFrame_OnLeave(self) 
+			end)
+		end
+
+		if (unit == "target" and C["unitframes"].targetauras) then
+			local buffs = CreateFrame("Frame", nil, self)
+			local debuffs = CreateFrame("Frame", nil, self)
+
+			buffs:SetHeight(C["unitframes"].buffsize)
+			buffs:SetWidth(218)
+			buffs:SetPoint("BOTTOMLEFT", health, "TOPLEFT", 1, 2)
+			buffs.size = C["unitframes"].buffsize
+			buffs.num = 18
+
+			debuffs:SetHeight(C["unitframes"].debuffsize)
+			debuffs:SetWidth(218)
+			debuffs:SetPoint("BOTTOMLEFT", buffs, "TOPLEFT", 4, 2)
+			debuffs.size = C["unitframes"].debuffsize
+			debuffs.num = 27
+
+			buffs.spacing = 2
+			buffs.initialAnchor = "TOPLEFT"
+			buffs["growth-y"] = "UP"
+			buffs["growth-x"] = "RIGHT"
+			buffs.PostCreateIcon = D.PostCreateAura
+			buffs.PostUpdateIcon = D.PostUpdateAura
+			self.Buffs = buffs
+
+			debuffs.spacing = 2
+			debuffs.initialAnchor = "TOPRIGHT"
+			debuffs["growth-y"] = "UP"
+			debuffs["growth-x"] = "LEFT"
+			debuffs.PostCreateIcon = D.PostCreateAura
+			debuffs.PostUpdateIcon = D.PostUpdateAura
+
+			if unit == "target" then debuffs.onlyShowPlayer = C["unitframes"].onlyselfdebuffs end
+			self.Debuffs = debuffs
+		end
+
+		--[[Castbar for Player & Target]]--
+		if C["castbar"].enable == true then
+			local tcb = CreateFrame("Frame", "TCBanchor", UIParent)
+			tcb:SetTemplate("Default")
+			tcb:Size(225, 18)
+			if C["raid"].center then tcb:Point("BOTTOM", UIParent, "BOTTOM", 340, 130) else tcb:Point("BOTTOM", UIParent, "BOTTOM", 0, 395) end
+			tcb:SetClampedToScreen(true)
+			tcb:SetMovable(true)
+			tcb:SetBackdropColor(0, 0, 0)
+			tcb:SetBackdropBorderColor(1, 0, 0)
+			tcb.text = D.SetFontString(tcb, C["media"].font, 11)
+			tcb.text:SetPoint("CENTER")
+			tcb.text:SetText(L["move"]["target"])
+			tcb:Hide()
+			tinsert(D.AllowFrameMoving, TCBanchor)
+
+			local pcb = CreateFrame("Frame", "PCBanchor", UIParent)
+			pcb:SetTemplate("Default")
+			pcb:Size(376, 21)
+			pcb:Point("BOTTOM", DuffedUIBar1, "TOP", 0, 5)
+			pcb:SetClampedToScreen(true)
+			pcb:SetMovable(true)
+			pcb:SetBackdropColor(0, 0, 0)
+			pcb:SetBackdropBorderColor(1, 0, 0)
+			pcb.text = D.SetFontString(pcb, C["media"].font, 11)
+			pcb.text:SetPoint("CENTER")
+			pcb.text:SetText(L["move"]["player"])
+			pcb:Hide()
+			tinsert(D.AllowFrameMoving, PCBanchor)
+
+			local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
+			castbar:SetStatusBarTexture(normTex)
+			if unit == "player" then
+				castbar:Height(21)
+				if C["castbar"].cbicons then
+					castbar:Width(C["castbar"].playerwidth - 31)
+				else
+					castbar:Width(C["castbar"].playerwidth)
+				end
+				castbar:Point("RIGHT", PCBanchor, "RIGHT", -2, 0)
+			elseif unit == "target" then
+				castbar:Width(225)
+				castbar:Height(18)
+				castbar:Point("LEFT", TCBanchor, "LEFT", 0, 0)
+			end
+
+			castbar.CustomTimeText = D.CustomTimeText
+			castbar.CustomDelayText = CustomDelayText
+			castbar.PostCastStart = D.CastBar
+			castbar.PostChannelStart = D.CastBar
+
+			castbar.time = castbar:CreateFontString(nil, "OVERLAY")
+			castbar.time:SetFontObject(font)
+			castbar.time:Point("RIGHT", castbar, "RIGHT", -5, 0)
+			castbar.time:SetTextColor(0.84, 0.75, 0.65)
+			castbar.time:SetJustifyH("RIGHT")
+
+			castbar.Text = castbar:CreateFontString(nil, "OVERLAY")
+			castbar.Text:SetFontObject(font)
+			castbar.Text:Point("LEFT", castbar, "LEFT", 6, 0)
+			castbar.Text:SetTextColor(0.84, 0.75, 0.65)
+			castbar:CreateBackdrop()
+
+			if C["castbar"].cbicons then
+				castbar.button = CreateFrame("Frame", nil, castbar)
+				castbar.button:SetTemplate("Default")
+
+				if unit == "player" then
+					castbar.button:Size(25)
+					castbar.button:Point("RIGHT", castbar, "LEFT", -4, 0)
+				elseif unit == "target" then
+					castbar.button:Size(25)
+					castbar.button:Point("BOTTOM", castbar, "TOP", 0, 5)
+				end
+				castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
+				castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
+				castbar.icon:Point("BOTTOMRIGHT", castbar.button, -2, 2)
+				castbar.icon:SetTexCoord(0.08, 0.92, 0.08, .92)
+			end
+
+			if unit == "player" and C["castbar"].cblatency then
+				castbar.safezone = castbar:CreateTexture(nil, "ARTWORK")
+				castbar.safezone:SetTexture(normTex)
+				castbar.safezone:SetVertexColor(0.69, 0.31, 0.31, 0.75)
+				castbar.SafeZone = castbar.safezone
+			end
+
+			if unit == "player" and C["castbar"].spark then
+				castbar.Spark = castbar:CreateTexture(nil, "OVERLAY")
+				castbar.Spark:SetHeight(40)
+				castbar.Spark:SetWidth(10)
+				castbar.Spark:SetBlendMode("ADD")
+			end
+
+			self.Castbar = castbar
+			self.Castbar.Time = castbar.time
+			self.Castbar.Icon = castbar.icon
+		end
+
+		if C["unitframes"].combatfeedback == true then
+			local CombatFeedbackText 
+			CombatFeedbackText = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
+			CombatFeedbackText:SetPoint("CENTER", 0, 1)
+			CombatFeedbackText.colors = {
+				DAMAGE = {0.69, 0.31, 0.31},
+				CRUSHING = {0.69, 0.31, 0.31},
+				CRITICAL = {0.69, 0.31, 0.31},
+				GLANCING = {0.69, 0.31, 0.31},
+				STANDARD = {0.84, 0.75, 0.65},
+				IMMUNE = {0.84, 0.75, 0.65},
+				ABSORB = {0.84, 0.75, 0.65},
+				BLOCK = {0.84, 0.75, 0.65},
+				RESIST = {0.84, 0.75, 0.65},
+				MISS = {0.84, 0.75, 0.65},
+				HEAL = {0.33, 0.59, 0.33},
+				CRITHEAL = {0.33, 0.59, 0.33},
+				ENERGIZE = {0.31, 0.45, 0.63},
+				CRITENERGIZE = {0.31, 0.45, 0.63},
+			}
+			self.CombatFeedbackText = CombatFeedbackText
+		end
+
+		if C["unitframes"].healcomm then
+			local mhpb = CreateFrame("StatusBar", nil, self.Health)
+			mhpb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+			mhpb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+			mhpb:SetWidth(250)
+			mhpb:SetStatusBarTexture(normTex)
+			mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
+			mhpb:SetMinMaxValues(0,1)
+
+			local ohpb = CreateFrame("StatusBar", nil, self.Health)
+			ohpb:SetPoint("TOPLEFT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+			ohpb:SetPoint("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+			ohpb:SetWidth(250)
+			ohpb:SetStatusBarTexture(normTex)
+			ohpb:SetStatusBarColor(0, 1, 0, 0.25)
+
+			local absb = CreateFrame("StatusBar", nil, self.Health)
+			absb:SetPoint("TOPLEFT", ohpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+			absb:SetPoint("BOTTOMLEFT", ohpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+			absb:SetWidth(250)
+			absb:SetStatusBarTexture(normTex)
+			absb:SetStatusBarColor(1, 1, 0, 0.25)
+
+			self.HealPrediction = {
+				myBar = mhpb,
+				otherBar = ohpb,
+				absorbBar = absb,
+				maxOverflow = 1,
+			}
+		end
+
+		if C["unitframes"].playeraggro == true then
+			table.insert(self.__elements, D.UpdateThreat)
+			self:RegisterEvent("PLAYER_TARGET_CHANGED", D.UpdateThreat)
+			self:RegisterEvent("UNIT_THREAT_LIST_UPDATE", D.UpdateThreat)
+			self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", D.UpdateThreat)
+		end
+
+		if unit == "player" then self:RegisterEvent("PLAYER_ENTERING_WORLD", D.updateAllElements) end
 	end
 
 	--[[Target of Target & Pet]]--
-	if (unit == "targetoftarget" or unit == "pet") then
-	
+	if (unit == "targettarget") or (unit == "pet") then
+		local panel = CreateFrame("Frame", nil, self)
+		panel:SetTemplate("Default")
+		panel:Size(129, 17)
+		panel:Point("BOTTOM", self, "BOTTOM", 0, D.Scale(0))
+		panel:SetFrameLevel(2)
+		panel:SetFrameStrata("MEDIUM")
+		panel:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+		panel:SetAlpha(0)
+		self.panel = panel
+
+		local health = CreateFrame("StatusBar", nil, self)
+		health:Height(20)
+		health:SetPoint("TOPLEFT")
+		health:SetPoint("TOPRIGHT")
+		health:SetStatusBarTexture(normTex)
+
+		local healthBG = health:CreateTexture(nil, "BORDER")
+		healthBG:SetAllPoints()
+		healthBG:SetTexture(0, 0, 0)
+
+		self.Health = health
+		self.Health.bg = healthBG
+		health.PostUpdate = D.PostUpdatePetColor
+
+		health.frequentUpdates = true
+		if C["unitframes"].showsmooth == true then health.Smooth = true end
+		if C["unitframes"].unicolor == true then
+			health.colorTapping = false
+			health.colorDisconnected = false
+			health.colorClass = false
+			health:SetStatusBarColor(unpack(C["unitframes"].healthbarcolor))
+			healthBG:SetVertexColor(unpack(C["unitframes"].deficitcolor))
+			healthBG:SetTexture(.6, .6, .6)
+			if C["unitframes"].ColorGradient then
+				health.colorSmooth = true
+				healthBG:SetTexture(0, 0, 0)
+			end
+		else
+			health.colorDisconnected = true
+			health.colorTapping = true
+			health.colorClass = true
+			health.colorReaction = true
+		end
+
+		local Name = health:CreateFontString(nil, "OVERLAY")
+		self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:nameshort] [DuffedUI:diffcolor][level] [shortclassification]")
+		Name:SetPoint("CENTER", health, "CENTER", 0, 0)
+		Name:SetJustifyH("CENTER")
+		Name:SetFontObject(font)
+		Name:SetShadowColor(0, 0, 0)
+		Name:SetShadowOffset(1.25, -1.25)
+		self.Name = Name
 	end
-	
+
 	--[[Focus]]--
 	if (unit == "focus") then
 		local health = CreateFrame("StatusBar", nil, self)
@@ -453,7 +1010,7 @@ local function Shared(self, unit)
 		self.Castbar.Time = castbar.time
 	end
 
-	--[[Main Tanks]]--
+	--[[Maintanks]]--
 	if(self:GetParent():GetName():match"DuffedUIMainTank" or self:GetParent():GetName():match"DuffedUIMainAssist") then
 		self:SetAttribute("type2", "focus")
 
@@ -526,14 +1083,14 @@ target:Size(218, 44)
 
 if C["unitframes"].Enable_ToT then
 	local tot = oUF:Spawn("targettarget", "DuffedUITargetTarget")
-	if C["raid"].center then tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMLEFT", 129, -2) else tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMLEFT", 0, -2) end
-	tot:Size(129, 36)
+	tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMRIGHT", 0, 5)
+	tot:Size(100, 36)
 end
 
 local pet = oUF:Spawn("pet", "DuffedUIPet")
 pet:SetParent(DuffedUIPetBattleHider)
-if C["raid"].center then pet:SetPoint("TOPLEFT", DuffedUIPlayer, "BOTTOMRIGHT", -129, -2) else pet:SetPoint("TOPLEFT", DuffedUIPlayer, "BOTTOMRIGHT", 0, -2) end
-pet:Size(129, 36)
+pet:SetPoint("TOPLEFT", DuffedUIPlayer, "BOTTOMLEFT", 0, 5)
+pet:Size(100, 36)
 
 local focus = oUF:Spawn("focus", "DuffedUIFocus")
 focus:SetParent(DuffedUIPetBattleHider)

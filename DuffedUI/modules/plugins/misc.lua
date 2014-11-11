@@ -80,6 +80,8 @@ if C["unitframes"].focusbutton and C["unitframes"].enable then
 				Focus[i]:Point("RIGHT", DuffedUITarget, "RIGHT", 10, -32)
 			elseif C["unitframes"].layout == 1 then
 				Focus[i]:Point("BOTTOMRIGHT", DuffedUITarget, "BOTTOMRIGHT", 20, -1)
+			elseif C["unitframes"].layout == 4 then
+				Focus[i]:Point("BOTTOMLEFT", DuffedUITarget, "BOTTOMLEFT", -9, -4)
 			end
 			Focus[i]:SetAttribute("type1", "macro")
 			Focus[i]:SetAttribute("macrotext1", "/focus")
@@ -87,21 +89,7 @@ if C["unitframes"].focusbutton and C["unitframes"].enable then
 			Focus[i].Text:SetText(D.PanelColor.."Focus")
 		elseif i == 2 then
 			Focus[i]:SetParent(DuffedUIFocus)
-			if C["unitframes"].layout == 3 then
-				if C["unitframes"].largefocus then
-					Focus[i]:Point("LEFT", DuffedUIFocus, "LEFT", 0, -32)
-				else
-					Focus[i]:Point("CENTER", DuffedUIFocus, "CENTER", 0, -1)
-				end
-			elseif C["unitframes"].layout == 2 then
-				if C["unitframes"].largefocus then
-					Focus[i]:Point("LEFT", DuffedUIFocus, "LEFT", -9, -30)
-				else
-					Focus[i]:Point("RIGHT", DuffedUIFocus, "LEFT", -4, -1)
-				end
-			elseif C["unitframes"].layout == 1 then
-				Focus[i]:Point("TOPRIGHT", DuffedUIFocus, "TOPRIGHT", 2, 14)
-			end
+			Focus[i]:Point("TOPRIGHT", DuffedUIFocus, "TOPRIGHT", 2, 14)
 			Focus[i]:SetAttribute("type1", "macro")
 			Focus[i]:SetAttribute("macrotext1", "/clearfocus")
 			Focus[i]:SetFrameLevel(DuffedUIFocus:GetFrameLevel() + 2)

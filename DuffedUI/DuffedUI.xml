@@ -61,7 +61,7 @@
 	<Script file="modules\unitframes\layouts\layout1.lua" />
 	<Script file="modules\unitframes\layouts\layout2.lua" />
 	<Script file="modules\unitframes\layouts\layout3.lua" />
-	<!--<Script file="modules\unitframes\layouts\layout4.lua" />-->
+	<Script file="modules\unitframes\layouts\layout4.lua" />
 	<Script file="modules\unitframes\groups\raid_heal40.lua" />
 	<Script file="modules\unitframes\groups\raid_dps.lua" />
 	<Script file="modules\misc\altpowerbar.lua" />

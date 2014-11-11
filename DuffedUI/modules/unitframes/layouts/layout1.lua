@@ -419,7 +419,7 @@ local function Shared(self, unit)
 			if unit == "target" then debuffs.onlyShowPlayer = C["unitframes"].onlyselfdebuffs end
 			self.Debuffs = debuffs
 		end
-		
+
 		--[[Castbar for Player & Target]]--
 		if C["castbar"].enable == true then
 			local tcb = CreateFrame("Frame", "TCBanchor", UIParent)

@@ -915,7 +915,7 @@ if C["raid"].raidunitdebuffwatch == true then
 	end
 end
 
---[[local TestUI = function(msg)
+local TestUI = function(msg)
 	if not DuffedUI[2].unitframes.enable then return end
 	if msg == "" then msg = "all" end
 
@@ -933,4 +933,4 @@ end
 	if msg == "all" or msg == "pet" or msg == "p" then DuffedUIPet:Show(); DuffedUIPet.Hide = function() end; DuffedUIPet.unit = "player" end
 end
 SlashCmdList.TestUI = TestUI
-SLASH_TestUI1 = "/testui"]]
+SLASH_TestUI1 = "/testui"
