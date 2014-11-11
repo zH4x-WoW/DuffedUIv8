@@ -8,7 +8,7 @@ assert(oUF, "DuffedUI was unable to locate oUF install.")
 ns._Objects = {}
 ns._Headers = {}
 
---	local variables
+--[[Local Variables]]--
 local normTex = C["media"].normTex
 local glowTex = C["media"].glowTex
 local bubbleTex = C["media"].bubbleTex
@@ -40,7 +40,7 @@ local function Shared(self, unit)
 	RaidIcon:SetPoint("TOP", 0, 11)
 	self.RaidIcon = RaidIcon
 
-	-- Fader
+	--[[Fader]]--
 	if C["unitframes"].fader == true then
 		self.FadeCasting = true
 		self.FadeCombat = true
@@ -54,7 +54,7 @@ local function Shared(self, unit)
 		self.FadeMaxAlpha = 1
 	end
 
-	--	Player and Target
+	--[[Player & Target]]--
 	if (unit == "player" or unit == "target") then
 		local panel = CreateFrame("Frame", nil, self)
 		panel:SetTemplate("Default")
@@ -420,7 +420,7 @@ local function Shared(self, unit)
 			self.Debuffs = debuffs
 		end
 		
-		-- cast bar for player and target
+		--[[Castbar for Player & Target]]--
 		if C["castbar"].enable == true then
 			local tcb = CreateFrame("Frame", "TCBanchor", UIParent)
 			tcb:SetTemplate("Default")
@@ -718,7 +718,7 @@ local function Shared(self, unit)
 		self:RegisterEvent("UNIT_PET", D.updateAllElements)
 	end
 
-	--	Focus
+	--[[Focus]]--
 	if (unit == "focus") then
 		local health = CreateFrame("StatusBar", nil, self)
 		health:Height(17)
@@ -858,7 +858,7 @@ local function Shared(self, unit)
 		self.Castbar.Time = castbar.time
 	end
 
-	--	Focus target
+	--[[Focus Target]]--
 	if (unit == "focustarget") then
 		local health = CreateFrame("StatusBar", nil, self)
 		health:Height(10)
@@ -1107,7 +1107,7 @@ local function Shared(self, unit)
 		self.Castbar.Time = castbar.time
 	end
 
-	--	Main tanks
+	--[[Maintanks]]--
 	if(self:GetParent():GetName():match"DuffedUIMainTank" or self:GetParent():GetName():match"DuffedUIMainAssist") then
 		self:SetAttribute("type2", "focus")
 
@@ -1164,7 +1164,7 @@ local function Shared(self, unit)
 	return self
 end
 
---	Default position
+--[[Default Position]]--
 if C["unitframes"].totdebuffs then totdebuffs = 24 end
 oUF:RegisterStyle("DuffedUI", Shared)
 

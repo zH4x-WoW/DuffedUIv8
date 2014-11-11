@@ -53,6 +53,16 @@ local function Shared(self, unit)
 		self.FadeMinAlpha = C["unitframes"].minalpha
 		self.FadeMaxAlpha = 1
 	end
+
+	--[[Player & Target]]--
+	if (unit == "player" or unit == "target") then
+	
+	end
+
+	--[[Target of Target & Pet]]--
+	if (unit == "targetoftarget" or unit == "pet") then
+	
+	end
 	
 	--[[Focus]]--
 	if (unit == "focus") then
