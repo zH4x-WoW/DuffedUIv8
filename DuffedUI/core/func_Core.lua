@@ -1,11 +1,18 @@
 local D, C, L = unpack(select(2, ...))
 
--- Define action bar default buttons size
+--[[Default Actionbutton size]]--
 D.buttonsize = D.Scale(C["actionbar"].buttonsize)
 D.buttonspacing = D.Scale(C["actionbar"].buttonspacing)
 D.petbuttonsize = D.Scale(C["actionbar"].petbuttonsize)
 D.petbuttonspacing = D.Scale(C["actionbar"].buttonspacing)
 
+--[[Disable GCD-spiral]]--
+hooksecurefunc(getmetatable(CreateFrame('cooldown')).__index, 'SetCooldown', function(self)
+	self:SetDrawBling(false)
+	self:SetSwipeColor(0, 0, 0, 0)
+end)
+
+--[[Hover tooltip]]--
 local orig1, orig2 = {}, {}
 local GameTooltip = GameTooltip
 local linktypes = {item = true, enchant = true, spell = true, quest = true, unit = true, talent = true, achievement = true, glyph = true}

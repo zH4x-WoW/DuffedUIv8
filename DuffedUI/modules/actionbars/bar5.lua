@@ -50,8 +50,6 @@ if C["actionbar"].rightbarsmouseover then
 		_G["MultiBarRightButton" .. i]:EnableMouse(true)
 		_G["MultiBarRightButton" .. i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
 		_G["MultiBarRightButton" .. i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
-		_G["MultiBarRightButton" .. i]:SetSwipeColor(0, 0, 0, 0)
-		_G["MultiBarRightButton" .. i]:SetDrawBling(false)
 	end
 
 	if C["actionbar"].petbaralwaysvisible ~= true then
@@ -59,8 +57,6 @@ if C["actionbar"].rightbarsmouseover then
 			_G["PetActionButton" .. i]:EnableMouse(true)
 			_G["PetActionButton" .. i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
 			_G["PetActionButton" .. i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
-			_G["PetActionButton" .. i]:SetSwipeColor(0, 0, 0, 0)
-			_G["PetActionButton" .. i]:SetDrawBling(false)
 		end
 		mouseover(DuffedUIPetBar)
 	end

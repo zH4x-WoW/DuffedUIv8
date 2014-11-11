@@ -1,21 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
--- Remove PVPBank.com spam from friends request
-local function RemoveSpam()
-	for i = 1, BNGetNumFriendInvites() do
-		local id, _ ,_ , t = BNGetFriendInviteInfo(i)
-		if t and t:lower():find("pvpbank") then BNDeclineFriendInvite(id) end
-	end
-end
-
-local f = CreateFrame("Frame")
-f:SetScript("OnEvent", RemoveSpam)
-f:RegisterEvent("BN_FRIEND_INVITE_ADDED")
-f:RegisterEvent("BN_FRIEND_INVITE_LIST_INITIALIZED")
-f:RegisterEvent("BN_CONNECTED")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-
--- Fixes for Blizzard issues
+--[[Fixes for Blizzard issues]]--
 hooksecurefunc("StaticPopup_Show", function(which)
 	if which == "DEATH" and not UnitIsDeadOrGhost("player") then StaticPopup_Hide("DEATH") end
 end)
@@ -48,10 +33,10 @@ else
 	end)
 end
 
--- Blizzard taint fixes for 5.4.1
+--[[Blizzard taint fixes for 5.4.1]]--
 setfenv(FriendsFrame_OnShow, setmetatable({ UpdateMicroButtons = function() end }, { __index = _G }))
 
--- farmmode
+--[[Farmmode]]--
 local farm = false
 local minisize = 144
 local farmsize = 300
@@ -73,7 +58,8 @@ function SlashCmdList.FARMMODE(msg, editbox)
 end
 SLASH_FARMMODE1 = '/farmmode'
 
-if C["unitframes"].focusbutton then
+--[[Focus button]]--
+if C["unitframes"].focusbutton and C["unitframes"].enable then
 	local Focus = CreateFrame("Frame", "Focus", UIParent)
 	for i = 1, 2 do
 		Focus[i] = CreateFrame("Button", "Focus"..i, parent, "SecureActionButtonTemplate")
@@ -124,8 +110,8 @@ if C["unitframes"].focusbutton then
 	end
 end
 
+--[[Automatic achievement screenshot]]--
 if C["misc"].acm_screen == true then
-	--	Take screenshots of Achievements(Based on Achievement Screenshotter by Blamdarot)
 	local function TakeScreen(delay, func, ...)
 		local waitTable = {}
 		local waitFrame = CreateFrame("Frame", "WaitFrame", UIParent)
@@ -156,11 +142,11 @@ if C["misc"].acm_screen == true then
 	frame:SetScript("OnEvent", OnEvent)
 end
 
+--[[Dispel Announcement]]--
 if C["duffed"].dispelannouncement == true then
 	local textcolor = "|cff00ff00"
 	font = D.Font(C["font"].datatext)
 
-	-- Create movable frame for dispel announcements
 	local f = CreateFrame("MessageFrame", "dDispelFrame", UIParent)
 	f:SetPoint("TOP", 0, -220)
 	f:SetSize(200, 100)
@@ -215,8 +201,8 @@ if C["duffed"].dispelannouncement == true then
 	end
 end
 
+--[[Drink Announcement]]--
 if C["duffed"].drinkannouncement == true then
-	-- Drink Announcement
 	local function Update(self, event, ...)
 		if event == "UNIT_SPELLCAST_SUCCEEDED" then
 			local unit, spellName, spellrank, spelline, spellID = ...
@@ -231,6 +217,7 @@ if C["duffed"].drinkannouncement == true then
 	f:SetScript("OnEvent", Update)
 end
 
+--[[Shorten gold display]]--
 if C["misc"].gold == true then
 	local frame = CreateFrame("FRAME", "DuffedGold");
 	frame:RegisterEvent('PLAYER_ENTERING_WORLD');
@@ -253,6 +240,7 @@ if C["misc"].gold == true then
 	frame:SetScript("OnEvent", eventHandler);
 end
 
+--[[Interrupt Announcement]]--
 if C["duffed"].sayinterrupt == true then
 	local f = CreateFrame("Frame")
 	local function Update(self, event, ...)
