@@ -19,7 +19,7 @@ local backdrop = {
 	insets = {top = -D.mult, left = -D.mult, bottom = -D.mult, right = -D.mult},
 }
 
---	Layout
+--[[Layout]]--
 local function Shared(self, unit)
 	self.colors = D.UnitColor
 
@@ -916,7 +916,7 @@ local function Shared(self, unit)
 		self.Name = Name
 	end
 
-	--	Arena or boss
+	--[[Arena- / Boss-Frames]]--
 	if (unit and unit:find("arena%d") and C["raid"].arena == true) or (unit and unit:find("boss%d") and C["raid"].showboss == true) then
 		self:SetAttribute("type2", "togglemenu")
 
@@ -994,7 +994,7 @@ local function Shared(self, unit)
 
 		power.value = power:CreateFontString(nil, "OVERLAY")
 		power.value:SetFontObject(font)
-		power.value:Point("RIGHT", -2, 0.5)
+		power.value:Point("RIGHT", health, -2, 0.5)
 		power.PreUpdate = D.PreUpdatePower
 		power.PostUpdate = D.PostUpdatePower
 
