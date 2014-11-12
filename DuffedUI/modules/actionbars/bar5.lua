@@ -48,6 +48,8 @@ if C["actionbar"].rightbarsmouseover then
 
 	for i = 1, 12 do
 		_G["MultiBarRightButton" .. i]:EnableMouse(true)
+		_G["MultiBarRightButton" .. i .. "Cooldown"]:SetDrawBling(false)
+		_G["MultiBarRightButton" .. i .. "Cooldown"]:SetSwipeColor(0, 0, 0, 0)
 		_G["MultiBarRightButton" .. i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
 		_G["MultiBarRightButton" .. i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
 	end
@@ -55,6 +57,8 @@ if C["actionbar"].rightbarsmouseover then
 	if C["actionbar"].petbaralwaysvisible ~= true then
 		for i = 1, NUM_PET_ACTION_SLOTS do
 			_G["PetActionButton" .. i]:EnableMouse(true)
+			_G["PetActionButton" .. i .. "Cooldown"]:SetDrawBling(false)
+			_G["PetActionButton" .. i .. "Cooldown"]:SetSwipeColor(0, 0, 0, 0)
 			_G["PetActionButton" .. i]:HookScript("OnEnter", function() DuffedUIRightBarsMouseover(1) end)
 			_G["PetActionButton" .. i]:HookScript("OnLeave", function() DuffedUIRightBarsMouseover(0) end)
 		end

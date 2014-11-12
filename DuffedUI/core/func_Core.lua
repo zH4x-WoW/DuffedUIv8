@@ -6,12 +6,6 @@ D.buttonspacing = D.Scale(C["actionbar"].buttonspacing)
 D.petbuttonsize = D.Scale(C["actionbar"].petbuttonsize)
 D.petbuttonspacing = D.Scale(C["actionbar"].buttonspacing)
 
---[[Disable GCD-spiral]]--
-hooksecurefunc(getmetatable(CreateFrame('cooldown')).__index, 'SetCooldown', function(self)
-	self:SetDrawBling(false)
-	self:SetSwipeColor(0, 0, 0, 0)
-end)
-
 --[[Hover tooltip]]--
 local orig1, orig2 = {}, {}
 local GameTooltip = GameTooltip
