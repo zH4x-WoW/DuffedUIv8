@@ -60,7 +60,7 @@ otfmove:SetScript("OnEnter", function(s) OTFM_Tooltip(s) end)
 otfmove:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
 otf.HeaderMenu.MinimizeButton:SkinCloseButton()
 
---[[quest item buttons moving and skinning]]--
+--[[Quest item buttons moving and skinning]]--
 local function moveQuestObjectiveItems(self)
 	local a = {self:GetPoint()}
 	self:ClearAllPoints()
@@ -87,7 +87,7 @@ hooksecurefunc("QuestObjectiveItem_OnUpdate", function(self, elapsed)
 	end
 end)
 
---[[questtitle]]--
+--[[Questtitle]]--
 hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
 	for i = 1, GetNumQuestWatches() do
 		local questID = GetQuestWatchInfo(i)
@@ -108,7 +108,7 @@ hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
 	end
 end)
 
---[[hide header art & restyle text]]--
+--[[Hide header art & restyle text]]--
 if IsAddOnLoaded("Blizzard_ObjectiveTracker") then
 	hooksecurefunc("ObjectiveTracker_Update", function(reason, id)
 		if otf.MODULES then
@@ -123,13 +123,13 @@ if IsAddOnLoaded("Blizzard_ObjectiveTracker") then
 	end)
 end
 
---[[dashes to dots]]--
+--[[Dashes to dots]]--
 hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "AddObjective", function(self, block, objectiveKey, _, lineType)
 	local line = self:GetLine(block, objectiveKey, lineType)
 	if line.Dash and line.Dash:IsShown() then line.Dash:SetText("• ") end
 end)
 
---[[timer bars]]--
+--[[Timer bars]]--
 hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "AddTimerBar", function(self, block, line, duration, startTime)
 	local tb = self.usedTimerBars[block] and self.usedTimerBars[block][line]
 	if tb and tb:IsShown() and not tb.skinned then
@@ -187,7 +187,7 @@ local function SkinProvingGroundButtons()
 	sb:SetPoint("TOPLEFT", block.MedalIcon, "BOTTOMLEFT", -4, -5)
 end
 
---[[auto-quest pop ups for 6.0]]--
+--[[Auto-quest pop ups for 6.0]]--
 local function alterAQButton()
 	local pop = GetNumAutoQuestPopUps()
 	for i = 1, pop do
@@ -204,7 +204,7 @@ local function alterAQButton()
 				aqf:SetPoint("BOTTOMRIGHT", blockframe, -1, 1)
 				aqf:SetFrameStrata("DIALOG")
 				blockframe.aqf = aqf
-				if popUpType=="COMPLETE" then
+				if popUpType == "COMPLETE" then
 					blockframe.QuestIconBg:ClearAllPoints()
 					blockframe.QuestIconBg:SetPoint("CENTER", blockframe.aqf, "LEFT", 35, -2)
 					blockframe.QuestIconBg:SetParent(blockframe.aqf)
@@ -213,7 +213,7 @@ local function alterAQButton()
 					blockframe.QuestionMark:SetPoint("CENTER", blockframe.aqf, "LEFT", 35, -2)
 					blockframe.QuestionMark:SetParent(blockframe.aqf)
 					blockframe.QuestionMark:SetDrawLayer("OVERLAY", 7)
-				elseif popUpType=="OFFER" then
+				elseif popUpType == "OFFER" then
 					blockframe.QuestIconBg:ClearAllPoints()
 					blockframe.QuestIconBg:SetPoint("CENTER", blockframe.aqf, "LEFT", 35, -2)
 					blockframe.QuestIconBg:SetParent(blockframe.aqf)
@@ -228,7 +228,7 @@ local function alterAQButton()
 	end
 end
 
---[[generating WOWHead-Link]]
+--[[Generating WOWHead-Link]]
 hooksecurefunc("QuestObjectiveTracker_OnOpenDropDown", function(self)
 	local _, b, i, info, questID
 	b = self.activeFrame
@@ -343,7 +343,7 @@ function QuestInfo_hook(template, parentFrame, acceptButton, material, mapView)
 	end
 end
 
---[[execution]]--
+--[[Execution]]--
 local ObjFhandler = CreateFrame("Frame")
 ObjFhandler:RegisterEvent("ADDON_LOADED")
 ObjFhandler:RegisterEvent("PLAYER_ENTERING_WORLD")
