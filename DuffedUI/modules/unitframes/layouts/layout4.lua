@@ -91,7 +91,7 @@ local function Shared(self, unit)
 
 		health.value = health:CreateFontString(nil, "OVERLAY")
 		health.value:SetFontObject(font)
-		if (unit == "player") then health.value:Point("RIGHT", health, "RIGHT", -4, 7) else health.value:Point("LEFT", health, "LEFT", 4, 7) end
+		if (unit == "player") then health.value:Point("RIGHT", health, "RIGHT", -4, 10) else health.value:Point("LEFT", health, "LEFT", 4, 10) end
 		health.PostUpdate = D.PostUpdateHealth
 
 		self.Health = health
@@ -119,9 +119,9 @@ local function Shared(self, unit)
 		end
 
 		local power = CreateFrame("StatusBar", nil, self)
-		power:Height(5)
-		power:Width(210)
-		power:Point("TOP", health, "BOTTOM", 0, 8)
+		power:Height(3)
+		power:Width(206)
+		power:Point("TOP", health, "BOTTOM", 0, 10)
 		power:SetStatusBarTexture(normTex)
 		power:SetFrameLevel(self.Health:GetFrameLevel() + 2)
 		power:CreateBackdrop()
@@ -133,7 +133,7 @@ local function Shared(self, unit)
 
 		power.value = health:CreateFontString(nil, "OVERLAY")
 		power.value:SetFontObject(font)
-		if (unit == "player") then power.value:Point("RIGHT", health, "RIGHT", -4, -3) else power.value:Point("LEFT", health, "LEFT", 4, -3) end
+		if (unit == "player") then power.value:Point("RIGHT", health, "RIGHT", -4, -1) else power.value:Point("LEFT", health, "LEFT", 4, -1) end
 
 		self.Power = power
 		self.Power.bg = powerBG
@@ -1084,13 +1084,13 @@ target:Size(218, 44)
 
 if C["unitframes"].Enable_ToT then
 	local tot = oUF:Spawn("targettarget", "DuffedUITargetTarget")
-	tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMRIGHT", 0, 5)
+	tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMRIGHT", 0, 0)
 	tot:Size(100, 36)
 end
 
 local pet = oUF:Spawn("pet", "DuffedUIPet")
 pet:SetParent(DuffedUIPetBattleHider)
-pet:SetPoint("TOPLEFT", DuffedUIPlayer, "BOTTOMLEFT", 0, 5)
+pet:SetPoint("TOPLEFT", DuffedUIPlayer, "BOTTOMLEFT", 0, 0)
 pet:Size(100, 36)
 
 local focus = oUF:Spawn("focus", "DuffedUIFocus")

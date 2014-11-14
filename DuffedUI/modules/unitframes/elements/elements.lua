@@ -5,6 +5,7 @@ local font, fontsize, fontflag = C["media"].font, 11, "THINOUTLINE"
 local layout = C["unitframes"].layout
 local Color = RAID_CLASS_COLORS[D.Class]
 
+--[[Mover]]--
 local cba = CreateFrame("Frame", "CBAnchor", UIParent)
 cba:SetTemplate("Default")
 cba:Size(250, 15)
@@ -19,6 +20,7 @@ cba.text:SetText(L["move"]["classbar"])
 cba:Hide()
 tinsert(D.AllowFrameMoving, CBAnchor)
 
+--[[Energybar]]--
 D.ConstructEnergy = function(name, width, height)
 	local eb = CreateFrame("StatusBar", name, UIParent)
 	eb:SetPoint("TOP", CBAnchor, "BOTTOM", 0, 5)

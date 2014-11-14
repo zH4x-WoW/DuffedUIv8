@@ -56,13 +56,13 @@ function SlashCmdList.FARMMODE(msg, editbox)
 	local defaultBlip = "Interface\\Minimap\\ObjectIcons"
 	Minimap:SetBlipTexture(defaultBlip)
 end
-SLASH_FARMMODE1 = '/farmmode'
+SLASH_FARMMODE1 = "/farmmode"
 
 --[[Focus button]]--
 if C["unitframes"].focusbutton and C["unitframes"].enable then
 	local Focus = CreateFrame("Frame", "Focus", UIParent)
 	for i = 1, 2 do
-		Focus[i] = CreateFrame("Button", "Focus"..i, parent, "SecureActionButtonTemplate")
+		Focus[i] = CreateFrame("Button", "Focus" .. i, parent, "SecureActionButtonTemplate")
 		Focus[i]:Size(50, 10)
 		Focus[i]:SetTemplate("Default")
 		Focus[i]:EnableMouse(true)
@@ -81,19 +81,19 @@ if C["unitframes"].focusbutton and C["unitframes"].enable then
 			elseif C["unitframes"].layout == 1 then
 				Focus[i]:Point("BOTTOMRIGHT", DuffedUITarget, "BOTTOMRIGHT", 20, -1)
 			elseif C["unitframes"].layout == 4 then
-				Focus[i]:Point("BOTTOMLEFT", DuffedUITarget, "BOTTOMLEFT", -9, -4)
+				Focus[i]:Point("BOTTOMLEFT", DuffedUITarget, "BOTTOMLEFT", -9, -9)
 			end
 			Focus[i]:SetAttribute("type1", "macro")
 			Focus[i]:SetAttribute("macrotext1", "/focus")
 			Focus[i]:SetFrameLevel(DuffedUITarget:GetFrameLevel() + 2)
-			Focus[i].Text:SetText(D.PanelColor.."Focus")
+			Focus[i].Text:SetText(D.PanelColor .. "Focus")
 		elseif i == 2 then
 			Focus[i]:SetParent(DuffedUIFocus)
 			Focus[i]:Point("TOPRIGHT", DuffedUIFocus, "TOPRIGHT", 2, 14)
 			Focus[i]:SetAttribute("type1", "macro")
 			Focus[i]:SetAttribute("macrotext1", "/clearfocus")
 			Focus[i]:SetFrameLevel(DuffedUIFocus:GetFrameLevel() + 2)
-			Focus[i].Text:SetText(D.PanelColor.."ClearFocus")
+			Focus[i].Text:SetText(D.PanelColor .. "ClearFocus")
 		end
 	end
 end
@@ -208,9 +208,9 @@ end
 --[[Shorten gold display]]--
 if C["misc"].gold == true then
 	local frame = CreateFrame("FRAME", "DuffedGold");
-	frame:RegisterEvent('PLAYER_ENTERING_WORLD');
-	frame:RegisterEvent('MAIL_SHOW');
-	frame:RegisterEvent('MAIL_CLOSED');
+	frame:RegisterEvent("PLAYER_ENTERING_WORLD");
+	frame:RegisterEvent("MAIL_SHOW");
+	frame:RegisterEvent("MAIL_CLOSED");
 
 	local function eventHandler(self, event, ...)
 		if event == "MAIL_SHOW" then
