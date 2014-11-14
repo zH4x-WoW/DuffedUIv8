@@ -1094,6 +1094,9 @@ elseif C["unitframes"].layout == 2 then
 elseif C["unitframes"].layout == 3 then
 	playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 1, 9)
 	playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", -1, 9)
+elseif C["unitframes"].layout == 4 then
+	playerFrame:Point("BOTTOMLEFT", DuffedUIPlayer, "TOPLEFT", 3, 5)
+	playerFrame:Point("BOTTOMRIGHT", DuffedUIPlayer, "TOPRIGHT", -3, 5)
 end
 
 local trinketFrame = CreateAuraBarFrame(trinketDataSource, DuffedUIPlayer)
