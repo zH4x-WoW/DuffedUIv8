@@ -67,7 +67,7 @@ local function Shared(self, unit)
 		self.panel = panel
 
 		local health = CreateFrame("StatusBar", nil, self)
-		health:Height(35)
+		health:Height(40)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
@@ -124,6 +124,7 @@ local function Shared(self, unit)
 		power:Point("TOP", health, "BOTTOM", 0, 8)
 		power:SetStatusBarTexture(normTex)
 		power:SetFrameLevel(self.Health:GetFrameLevel() + 2)
+		power:CreateBackdrop()
 
 		local powerBG = power:CreateTexture(nil, "BORDER")
 		powerBG:SetAllPoints(power)
