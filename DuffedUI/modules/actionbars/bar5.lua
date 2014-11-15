@@ -14,7 +14,7 @@ for i= 1, 12 do
 	b:SetFrameLevel(15)
 
 	if C["actionbar"].rightbarvertical then
-		if i == 1 then b:SetPoint("BOTTOMLEFT", bar, (D.buttonspacing * FrameScale), (D.buttonspacing * FrameScale)) else b:SetPoint("LEFT", b2, "RIGHT", D.buttonspacing, 0) end
+		if i == 1 then b:SetPoint("BOTTOMLEFT", bar, (D.buttonspacing * FrameScale), (D.buttonspacing * FrameScale)) else b:SetPoint("LEFT", b2, "RIGHT", (D.buttonspacing * FrameScale), 0) end
 	else
 		if i == 1 then b:SetPoint("TOPRIGHT", bar, -(D.buttonspacing * FrameScale), -(D.buttonspacing * FrameScale)) else b:SetPoint("TOP", b2, "BOTTOM", 0, -(D.buttonspacing * FrameScale)) end
 	end

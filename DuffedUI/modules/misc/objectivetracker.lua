@@ -146,7 +146,6 @@ local function SkinScenarioButtons()
 	local inChallengeMode = C_Scenario.IsChallengeMode()
 
 	block:StripTextures()
-	block:CreateBackdrop("Transparent")
 	block.NormalBG:SetSize(otf:GetWidth(), 50)
 	block.FinalBG:ClearAllPoints()
 	block.FinalBG:SetPoint("TOPLEFT", block.NormalBG, 6, -6)
@@ -161,7 +160,6 @@ local function SkinProvingGroundButtons()
 	local anim = ScenarioProvingGroundsBlockAnim
 
 	block:StripTextures()
-	block:CreateBackdrop("Transparent")
 	block.MedalIcon:SetSize(32, 32)
 	block.MedalIcon:ClearAllPoints()
 	block.MedalIcon:SetPoint("TOPLEFT", block, 20, -10)
