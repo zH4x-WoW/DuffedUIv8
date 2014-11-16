@@ -28,7 +28,7 @@ DuffedUIConfigUILocalization.fontexperience = "ExperienceBar-Font (Values: |cffC
 -- unit frames
 DuffedUIConfigUILocalization.unitframes = "Unit Frames"
 DuffedUIConfigUILocalization.unitframesenable = "Enable DuffedUI Unit Frames"
-DuffedUIConfigUILocalization.unitframeslayout = "Set UF-Layout (1, 2 or 3, default = 2)"
+DuffedUIConfigUILocalization.unitframeslayout = "Set UF-Layout (1, 2, 3 or 4, default = 1)"
 DuffedUIConfigUILocalization.unitframesfader = "Enable Fader for unitframes"
 DuffedUIConfigUILocalization.unitframesminalpha = "Set minimum alpha for Fader (default = 0.1)"
 DuffedUIConfigUILocalization.unitframespercent = "Enable percent display beside player & target"

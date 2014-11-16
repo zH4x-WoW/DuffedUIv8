@@ -27,7 +27,7 @@
 	-- unit frames
 	DuffedUIConfigUILocalization.unitframes = "Einheitenfenster"
 	DuffedUIConfigUILocalization.unitframesenable = "Aktiviere die DuffedUI Einheitenfenster"
-	DuffedUIConfigUILocalization.unitframeslayout = "Wähle Dein UF-Layout (1, 2 oder 3, Standard = 2)"
+	DuffedUIConfigUILocalization.unitframeslayout = "Wähle Dein UF-Layout (1, 2, 3 oder 4, Standard = 1)"
 	DuffedUIConfigUILocalization.unitframesfader = "Aktiviere 'Verblassen' für Einheitenfenster"
 	DuffedUIConfigUILocalization.unitframesminalpha = "Setze den Minimumwert für das 'Verblassen' der Einheitenfenster (Standard = 0.1)"
 	DuffedUIConfigUILocalization.unitframespercent = "Aktiviere eine Prozentanzeige neben Spieler & Ziel"
