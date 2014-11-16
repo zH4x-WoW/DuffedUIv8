@@ -3,7 +3,6 @@ local oUF = ns.oUF or oUF
 assert(oUF, "DuffedUI was unable to locate oUF install.")
 
 local D, C, L = unpack(select(2, ...)) 
-if not C["unitframes"].enable == true then return end
 
 ------------------------------------------------------------------------
 --	Tags
