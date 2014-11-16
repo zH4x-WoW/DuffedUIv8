@@ -132,7 +132,7 @@ D.ConstructRessources = function(name, width, height)
 			if event == "PLAYER_REGEN_DISABLED" then
 				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
 			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
 				if not InCombatLockdown() then DruidMana:SetAlpha(0) end
 			end
@@ -145,7 +145,7 @@ D.ConstructRessources = function(name, width, height)
 			if event == "PLAYER_REGEN_DISABLED" then
 				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
 			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
 				if not InCombatLockdown() then EclipseBar:SetAlpha(0) end
 			end
@@ -158,7 +158,7 @@ D.ConstructRessources = function(name, width, height)
 			if event == "PLAYER_REGEN_DISABLED" then
 				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
 			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
 				if not InCombatLockdown() then WildMushroom:SetAlpha(0) end
 			end
@@ -171,7 +171,7 @@ D.ConstructRessources = function(name, width, height)
 			if event == "PLAYER_REGEN_DISABLED" then
 				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
 			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, (0.3 * (0 + self:GetAlpha())), self:GetAlpha(), 0)
+				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
 			elseif event == "PLAYER_ENTERING_WORLD" then
 				if not InCombatLockdown() then ComboPoints:SetAlpha(0) end
 			end
