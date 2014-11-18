@@ -156,9 +156,22 @@ chatmenu:SetScript("OnMouseDown", function(self, btn)
 	if btn == "LeftButton" then ToggleFrame(ChatMenu) end
 end)
 
---[[D.CreateBtn("MB_switch", DuffedUIChatMenu, 20, 20, L["buttons"]["ses_switch"], "S")
-if C["chat"].rbackground then MB_switch:Point("LEFT", DuffedUITabsRightBackground, "RIGHT", 2, 0) else MB_switch:Point("RIGHT",DuffedUIChatMenu, "LEFT", -2, 0) end
-MB_switch:SetAttribute("macrotext1", "/switch")]]
+--[[Layout-Switch]]--
+local function RaidLayout(cmd)
+	if InCombatLockdown() then return end
+	local arg1 = Split(cmd)
+
+	if C["raid"].layout == "dps" then
+		D.SetValue("raid", "layout", "heal")
+		ReloadUI()
+	else
+		D.SetValue("raid", "layout", "dps")
+		ReloadUI()
+	end
+end
+SLASH_RAIDLAYOUT1 = "/switch"
+SlashCmdList["RAIDLAYOUT"] = RaidLayout
+
 local font = D.Font(C["font"].ses)
 local MB_switch = CreateFrame("Frame", "MB_switch", UIParent)
 if C["chat"].rbackground then
@@ -175,13 +188,13 @@ MB_switch.text:SetFontObject(font)
 MB_switch.text:SetText(D.PanelColor .. "S")
 MB_switch.text:SetPoint("CENTER", MB_switch, "CENTER", 1, 0)
 MB_switch.text:SetJustifyH("CENTER")
-MB_switch:SetAttribute("type1", "macro")
 MB_switch:SetScript("OnEnter", function(self)
 	GameTooltip:SetOwner(self, "ANCHOR_LEFT")
 	GameTooltip:AddLine(L["buttons"]["ses_switch"], 1, 1, 1, 1, 1, 1)
 	GameTooltip:Show()
 end)
 MB_switch:SetScript("OnLeave", function(self) GameTooltip:Hide() end)
+MB_switch:SetAttribute("type1", "macro")
 MB_switch:SetAttribute("macrotext1", "/switch")
 
 if DuffedUIMinimap then
@@ -196,6 +209,7 @@ if DuffedUIMinimap then
 	minimapstatsright:Point("TOPRIGHT", DuffedUIMinimap, "BOTTOMRIGHT", 0, -2)
 end
 
+--[[Battleground DataText]]--
 if C["datatext"].battleground == true then
 	local bgframe = CreateFrame("Frame", "DuffedUIInfoLeftBattleGround", UIParent)
 	bgframe:SetTemplate()
