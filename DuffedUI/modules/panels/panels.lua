@@ -157,6 +157,10 @@ chatmenu:SetScript("OnMouseDown", function(self, btn)
 end)
 
 --[[Layout-Switch]]--
+local Split = function(cmd)
+	if cmd:find("%s") then return strsplit(" ", strlower(cmd)) else return cmd end
+end
+
 local function RaidLayout(cmd)
 	if InCombatLockdown() then return end
 	local arg1 = Split(cmd)
