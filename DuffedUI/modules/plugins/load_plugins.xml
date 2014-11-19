@@ -22,5 +22,4 @@
 	<Script file="spellcooldowns.lua" />
 	<Script file="spellID.lua" />
 	<Script file="pointer.lua" />
-	<Script file="questlevel.lua" />
 </Ui>
