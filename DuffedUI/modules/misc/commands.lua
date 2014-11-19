@@ -1,5 +1,12 @@
---[[Slash Commands]]--
 local D, C, L = unpack(select(2, ...))
+--[[Slash Commands]]--
+local Split = function(cmd)
+	if cmd:find("%s") then
+		return strsplit(" ", strlower(cmd))
+	else
+		return cmd
+	end
+end
 
 --[[ReloadUI]]--
 SLASH_RELOADUI1 = "/rl"
