@@ -167,6 +167,7 @@ C["datatext"] = {
 	["talent"] = 0,
 	["versatility"] = 0,
 	["wowtime"] = 8,
+	["garrison"] = 0,
 
 	["time24"] = true,
 	["localtime"] = false,

@@ -11,6 +11,7 @@
 	<Script file="dodge.lua" />
 	<Script file="durability.lua" />
 	<Script file="friend.lua" />
+	<Script file="garrison.lua" />
 	<Script file="gold.lua" />
 	<Script file="guild.lua" />
 	<Script file="haste.lua" />
