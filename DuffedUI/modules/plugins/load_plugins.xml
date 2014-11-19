@@ -18,9 +18,9 @@
 	<Script file="misc.lua" />
 	<Script file="raidcooldowns.lua" />
 	<Script file="runes.lua" />
-	<Script file="sCombo.lua" />
 	<Script file="ses.lua" />
 	<Script file="spellcooldowns.lua" />
 	<Script file="spellID.lua" />
 	<Script file="pointer.lua" />
+	<Script file="questlevel.lua" />
 </Ui>

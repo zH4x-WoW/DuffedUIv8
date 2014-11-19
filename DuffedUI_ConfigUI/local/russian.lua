@@ -1,5 +1,5 @@
 ﻿if GetLocale() == "ruRU" then
-	-- general
+	--[[General]]--
 	DuffedUIConfigUILocalization.general = "General"
 	DuffedUIConfigUILocalization.generalautoscale = "Auto UI Scale"
 	DuffedUIConfigUILocalization.generaluiscale = "UI Scale (if auto-scale is disabled)"
@@ -9,7 +9,7 @@
 	DuffedUIConfigUILocalization.generalFrameScaleActionBar = "Set Scale of Actionbar 1, 2 and Rightbar"
 	DuffedUIConfigUILocalization.generalFrameScaleMinimap = "Set Scale of Minimap"
 
-	-- font
+	--[[Font]]--
 	DuffedUIConfigUILocalization.font = "Fonts"
 	DuffedUIConfigUILocalization.fontduffeduisize = "Fontsize DuffedUI (default = 11)"
 	DuffedUIConfigUILocalization.fontduffedui_altsize = "Fontsize DuffedUI Alternativ (default = 12)"
@@ -24,7 +24,7 @@
 	DuffedUIConfigUILocalization.fontrcd = "RaidCooldowns-Font (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
 	DuffedUIConfigUILocalization.fontexperience = "ExperienceBar-Font (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
 
-	-- unit frames
+	--[[Unit Frames]]--
 	DuffedUIConfigUILocalization.unitframes = "Unit Frames"
 	DuffedUIConfigUILocalization.unitframesenable = "Enable DuffedUI Unit Frames"
 	DuffedUIConfigUILocalization.unitframeslayout = "Set UF-Layout (1, 2, 3 or 4, default = 1)"
@@ -57,7 +57,7 @@
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "Set size of Debuffs on Targetframe"
 	DuffedUIConfigUILocalization.unitframesEnable_ToT = "Enable Target of Target-Frame"
 
-	-- chat
+	--[[Chat]]--
 	DuffedUIConfigUILocalization.chat = "Chat"
 	DuffedUIConfigUILocalization.chatenable = "Enable DuffedUI Chat"
 	DuffedUIConfigUILocalization.chatwhispersound = "Play sound when receiving private message"
@@ -66,7 +66,7 @@
 	DuffedUIConfigUILocalization.chatfading = "Enable chatfading"
 	DuffedUIConfigUILocalization.chattextright = "Set textalign to right for right chatframe"
 
-	-- castbar
+	--[[Castbar]]--
 	DuffedUIConfigUILocalization.castbar = "Castbar"
 	DuffedUIConfigUILocalization.castbarenable = "Enable castbar"
 	DuffedUIConfigUILocalization.castbarpetenable = "Enable pet castbar"
@@ -78,7 +78,7 @@
 	DuffedUIConfigUILocalization.castbarcbticks = "Enable castbar ticks for channeled casts."
 	DuffedUIConfigUILocalization.castbarplayerwidth = "Set width of player castbar"
 
-	-- nameplate
+	--[[Nameplate]]--
 	DuffedUIConfigUILocalization.nameplate = "Nameplates"
 	DuffedUIConfigUILocalization.nameplateactive = "Enable Nameplates"
 	DuffedUIConfigUILocalization.nameplatedebuffs = "Enable debuff display"
@@ -94,7 +94,7 @@
 	DuffedUIConfigUILocalization.nameplatePercent = "Enable Percent-Display on Nameplates"
 	DuffedUIConfigUILocalization.nameplateNonTargetAlpha = "Set alpha for non target Nameplates"
 
-	-- action bar
+	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Action Bars"
 	DuffedUIConfigUILocalization.actionbarenable = "Enable DuffedUI action bar"
 	DuffedUIConfigUILocalization.actionbarrightbarvertical = "Set Rightbar horizontal"
@@ -118,7 +118,7 @@
 	DuffedUIConfigUILocalization.raidlayout = "Set layout for group frames (default = heal, Values: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
 	DuffedUIConfigUILocalization.raidcenter = "Set Heal-Layout to center position"
 
-	-- raid frames
+	--[[Raid Frames]]--
 	DuffedUIConfigUILocalization.raid = "Raid Frames"
 	DuffedUIConfigUILocalization.raidenable = "Enable Raid Frames"
 	DuffedUIConfigUILocalization.raidshowboss = "Enable Boss Unit Frames"
@@ -138,7 +138,7 @@
 	DuffedUIConfigUILocalization.raidHidePower = "Disable power bar (DPS-Layout only)"
 	DuffedUIConfigUILocalization.raidNameOutside = "Move player name to outside (DPS-Layout only)"
 
-	-- datatext
+	--[[DataText]]--
 	DuffedUIConfigUILocalization.datatext = "Data Text"
 	DuffedUIConfigUILocalization.datatextarmor = "Armor Position (0 for disabled)"
 	DuffedUIConfigUILocalization.datatextavd = "Avoidance position (0 for disabled)"
@@ -172,12 +172,12 @@
 	DuffedUIConfigUILocalization.datatextfontsize = "Font size of text"
 	DuffedUIConfigUILocalization.datatextShowInCombat = "Show DataText-Tooltip in combat"
 
-	-- skins
+	--[[Skins]]--
 	DuffedUIConfigUILocalization.skins = "Skins"
 	DuffedUIConfigUILocalization.skinsblizzardreskin = "Reskin Blizzard frames to match DuffedUI"
 	DuffedUIConfigUILocalization.skinscalendarevent = "Disable calendar event textures"
 
-	-- cooldowns
+	--[[Cooldowns]]--
 	DuffedUIConfigUILocalization.cooldown = "Cooldowns"
 	DuffedUIConfigUILocalization.cooldownenable = "Enable cooldown number on buttons"
 	DuffedUIConfigUILocalization.cooldowntreshold = "Turn cooldown number red at X value"
@@ -192,7 +192,7 @@
 	DuffedUIConfigUILocalization.cooldownscdspacing = "Set spacing of icons (default = 10)"
 	DuffedUIConfigUILocalization.cooldownscdfade = "Set fading (values: 0 one color, 1 green to red, 2 red to green)"
 
-	-- classtimer
+	--[[ClassTimer]]--
 	DuffedUIConfigUILocalization.classtimer = "Classtimer"
 	DuffedUIConfigUILocalization.classtimerenable = "Enable Classtimer"
 	DuffedUIConfigUILocalization.classtimerspark = "Enable spark"
@@ -207,7 +207,7 @@
 	DuffedUIConfigUILocalization.classtimerseparatorcolor = "Set color of separator"
 	DuffedUIConfigUILocalization.classtimertargetdebuffsenable = "Enable / disable debuff bars"
 
-	-- buff
+	--[[Buffs]]--
 	DuffedUIConfigUILocalization.auras = "Auras"
 	DuffedUIConfigUILocalization.aurasplayer = "Enable DuffedUI Buff/Debuff Frames"
 	DuffedUIConfigUILocalization.aurasconsolidate = "Enable Consolidate Buffs"
@@ -219,7 +219,7 @@
 	DuffedUIConfigUILocalization.auraswrap = "Set wrap for buffs (default = 18)"
 	DuffedUIConfigUILocalization.aurasInside = "Set timer inside"
 
-	-- bags
+	--[[Bags]]--
 	DuffedUIConfigUILocalization.bags = "Bags"
 	DuffedUIConfigUILocalization.bagsenable = "Enable all-in-one bag"
 	DuffedUIConfigUILocalization.bagsbpr = "Set bagbuttons per row"
@@ -229,7 +229,7 @@
 	DuffedUIConfigUILocalization.bagsbuttonsize = " Set slotsize"
 	DuffedUIConfigUILocalization.bagsBounce = "Enable Pulse Animation for new items"
 
-	-- misc
+	--[[Misc]]--
 	DuffedUIConfigUILocalization.misc = "Misc"
 	DuffedUIConfigUILocalization.miscgold = "Enable shorten golddisplay in chat"
 	DuffedUIConfigUILocalization.miscsesenable = "Enable Specswitcherplugin"
@@ -246,8 +246,9 @@
 	DuffedUIConfigUILocalization.miscAFKCamera = "Enable AFKCamera"
 	DuffedUIConfigUILocalization.miscXPBar = "Enable XP-Bar"
 	DuffedUIConfigUILocalization.miscXPBarWidth = "Set width of XP-Bar"
+	DuffedUIConfigUILocalization.miscQuestLevel = "Enable QuestLevel display"
 
-	-- duffed
+	--[[Duffed]]--
 	DuffedUIConfigUILocalization.duffed = "Duffed"
 	DuffedUIConfigUILocalization.duffeddrinkannouncement = "Enable Drinkannouncement"
 	DuffedUIConfigUILocalization.duffedsayinterrupt = "Enable Interruptannouncement"
@@ -255,12 +256,12 @@
 	DuffedUIConfigUILocalization.duffeddispelannouncement = "Enable Dispelannouncement"
 	DuffedUIConfigUILocalization.duffedspellannounce = "Enable Auraannouncement"
 
-	-- loot
+	--[[Loot]]--
 	DuffedUIConfigUILocalization.loot = "Loot"
 	DuffedUIConfigUILocalization.lootlootframe = "Enable loot window"
 	DuffedUIConfigUILocalization.lootrolllootframe = "Enable item roll window"
 
-	-- tooltip
+	--[[Tooltip]]--
 	DuffedUIConfigUILocalization.tooltip = "Tooltip"
 	DuffedUIConfigUILocalization.tooltipenable = "Enable tooltip"
 	DuffedUIConfigUILocalization.tooltiphidecombat = "Hide tooltip in combat"
@@ -270,22 +271,22 @@
 	DuffedUIConfigUILocalization.tooltipilvl = "Enable Itemleveldisplay on tooltip"
 	DuffedUIConfigUILocalization.tooltipenablecaster = "Enable Castername for buffs / debuffs on tooltip"
 
-	-- merchant
+	--[[Merchant]]--
 	DuffedUIConfigUILocalization.merchant = "Merchant"
 	DuffedUIConfigUILocalization.merchantsellgrays = "Auto sell grey items"
 	DuffedUIConfigUILocalization.merchantautorepair = "Auto Repair items"
 	DuffedUIConfigUILocalization.merchantsellmisc = "Sell some defined (craps not grey) items automatically"
 	DuffedUIConfigUILocalization.merchantautoguildrepair = "Enable Guild Repair Items"
 
-	-- error
+	--[[Error]]--
 	DuffedUIConfigUILocalization.error = "Error Message"
 	DuffedUIConfigUILocalization.errorenable = "Hide spamming error in the middle of your screen"
 
-	-- invite
+	--[[Invite]]--
 	DuffedUIConfigUILocalization.invite = "Invite"
 	DuffedUIConfigUILocalization.inviteautoaccept = "Enable Auto-Invite (Friends and Guildmates)"
 	 
-	-- buttons
+	--[[Buttons]]--
 	DuffedUIConfigUILocalization.option_button_reset = "Reset"
 	DuffedUIConfigUILocalization.option_button_load = "Apply Settings"
 	DuffedUIConfigUILocalization.option_button_close = "Close"

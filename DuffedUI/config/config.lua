@@ -246,6 +246,7 @@ C["misc"] = {
 	["AFKCamera"] = true,
 	["XPBar"] = true,
 	["XPBarWidth"] = 378,
+	["QuestLevel"] = true,
 }
 
 C["duffed"] = {

@@ -61,19 +61,19 @@ otfmove:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
 otf.HeaderMenu.MinimizeButton:SkinCloseButton()
 
 --[[Quest item buttons moving and skinning]]--
-local function moveQuestObjectiveItems(self)
+--[[local function moveQuestObjectiveItems(self)
 	local a = {self:GetPoint()}
 	self:ClearAllPoints()
 	self:SetPoint("TOPRIGHT", a[2], "TOPRIGHT", 20, -7)
 	self:SetFrameLevel(0)
 
-	--[[local Icon = self.icon
+	local Icon = self.icon
 	self:SetNormalTexture("")
 	self:CreateBackdrop()
 	self.backdrop:SetOutside(self, 0, 0)
 	self:StyleButton()
 	Icon:SetTexCoord(unpack(D.IconCoord))
-	Icon:SetInside()]]
+	Icon:SetInside()
 end
 
 local qitime = 0
@@ -85,7 +85,7 @@ hooksecurefunc("QuestObjectiveItem_OnUpdate", function(self, elapsed)
 		moveQuestObjectiveItems(self)
 		qitime = 0
 	end
-end)
+end)]]
 
 --[[Questtitle]]--
 hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
@@ -265,7 +265,7 @@ hooksecurefunc("AchievementObjectiveTracker_OnOpenDropDown", function(self)
 end)
 
 --[[Questlevel display]]
-local QuestLevelPatch = {}
+--[[local QuestLevelPatch = {}
 
 function GossipFrameUpdate_hook()
 	local buttonIndex = 1
@@ -325,7 +325,7 @@ function QuestLogQuests_hook(self, poiTable)
 		end
 	end
 end
-hooksecurefunc("QuestLogQuests_Update", QuestLogQuests_hook)
+hooksecurefunc("QuestLogQuests_Update", QuestLogQuests_hook)]]
 
 --[[Execution]]--
 local ObjFhandler = CreateFrame("Frame")
