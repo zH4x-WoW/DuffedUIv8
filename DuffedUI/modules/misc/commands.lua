@@ -46,3 +46,19 @@ SlashCmdList["GROUPDISBAND"] = function()
 end
 SLASH_GROUPDISBAND1 = "/gd"
 SLASH_GROUPDISBAND2 = "/rd"
+
+--[[Layout-Switch]]--
+local function RaidLayout(cmd)
+	if InCombatLockdown() then return end
+	local arg1 = Split(cmd)
+
+	if C["raid"].layout == "dps" then
+		D.SetValue("raid", "layout", "heal")
+		ReloadUI()
+	else
+		D.SetValue("raid", "layout", "dps")
+		ReloadUI()
+	end
+end
+SLASH_RAIDLAYOUT1 = "/switch"
+SlashCmdList["RAIDLAYOUT"] = RaidLayout

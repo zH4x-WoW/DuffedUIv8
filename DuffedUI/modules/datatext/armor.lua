@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...)) 
 
 if C["datatext"].armor and C["datatext"].armor > 0 then
 	local effectiveArmor

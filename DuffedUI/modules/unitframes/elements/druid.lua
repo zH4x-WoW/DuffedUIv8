@@ -104,7 +104,7 @@ D.ConstructRessources = function(name, width, height)
 		ComboPoints[i].bg:SetAlpha(.15)
 	end
 
-	--[[Visibility = CreateFrame("Frame")
+	Visibility = CreateFrame("Frame")
 	Visibility:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	Visibility:SetScript("OnEvent", function()
 		local spec = GetSpecialization()
@@ -122,7 +122,7 @@ D.ConstructRessources = function(name, width, height)
 			ComboPoints:Hide()
 			WildMushroom:Hide()
 		end
-	end)]]
+	end)
 
 	if C["unitframes"].oocHide then
 		DruidMana:RegisterEvent("PLAYER_REGEN_DISABLED")
