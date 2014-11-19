@@ -2,6 +2,10 @@ local D, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	CharacterFrameCloseButton:SkinCloseButton()
+	CharacterStatsPaneScrollBar:SkinScrollBar()
+	ReputationListScrollFrameScrollBar:SkinScrollBar()
+	TokenFrameContainerScrollBar:SkinScrollBar()
+	GearManagerDialogPopupScrollFrameScrollBar:SkinScrollBar()
 
 	local slots = {
 		"HeadSlot",
@@ -23,55 +27,56 @@ local function LoadSkin()
 		"MainHandSlot",
 		"SecondaryHandSlot",
 	}
-	
 	for _, slot in pairs(slots) do
-		local icon = _G["Character"..slot.."IconTexture"]
-		local slot = _G["Character"..slot]
+		local icon = _G["Character" .. slot .. "IconTexture"]
+		slot = _G["Character" .. slot]
 		slot:StripTextures()
 		slot:StyleButton(false)
-		icon:SetTexCoord(.08, .92, .08, .92)
-		icon:ClearAllPoints()
-		icon:Point("TOPLEFT", 2, -2)
-		icon:Point("BOTTOMRIGHT", -2, 2)
-		
-		slot.ignoreTexture = slot:CreateTexture(nil, "OVERLAY")
-		slot.ignoreTexture:SetTexture("Interface\\PaperDollInfoFrame\\UI-GearManager-LeaveItem-Transparent")
-		slot.ignoreTexture:SetSize(40, 40)
-		slot.ignoreTexture:SetPoint("CENTER", slot)
-		
-		slot:SetFrameLevel(slot:GetFrameLevel() + 2)
-		slot:CreateBackdrop("Default")
-		slot.backdrop:SetAllPoints()
+		slot.ignoreTexture:SetTexture([[Interface\PaperDollInfoFrame\UI-GearManager-LeaveItem-Transparent]])
+		slot:SetTemplate("Default", true)
+		icon:SetTexCoord(unpack(D.IconCoord))
+		icon:SetInside()
+
+		hooksecurefunc(slot.IconBorder, "SetVertexColor", function(self, r, g, b) self:GetParent():SetBackdropBorderColor(r, g, b) end)
+		hooksecurefunc(slot.IconBorder, "Hide", function(self) self:GetParent():SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
 	end
 
-	--Strip Textures
+	--[[Strip Textures]]--
 	local charframe = {
 		"CharacterFrame",
 		"CharacterModelFrame",
-		"CharacterFrameInset", 
+		"CharacterFrameInset",
 		"CharacterStatsPane",
 		"CharacterFrameInsetRight",
 		"PaperDollSidebarTabs",
 		"PaperDollEquipmentManagerPane",
-		"PaperDollFrameItemFlyout",
 	}
 
 	CharacterFrameExpandButton:Size(CharacterFrameExpandButton:GetWidth() - 7, CharacterFrameExpandButton:GetHeight() - 7)
 	CharacterFrameExpandButton:SkinNextPrevButton()
 
+	ReputationDetailCloseButton:SkinCloseButton()
+	TokenFramePopupCloseButton:SkinCloseButton()
+
+	ReputationDetailAtWarCheckBox:SkinCheckBox()
+	ReputationDetailMainScreenCheckBox:SkinCheckBox()
+	ReputationDetailInactiveCheckBox:SkinCheckBox()
+	ReputationDetailLFGBonusReputationCheckBox:SkinCheckBox()
+	TokenFramePopupInactiveCheckBox:SkinCheckBox()
+	TokenFramePopupBackpackCheckBox:SkinCheckBox()
 
 	EquipmentFlyoutFrameHighlight:Kill()
 	local function SkinItemFlyouts()
 		EquipmentFlyoutFrameButtons:StripTextures()
 
 		local i = 1
-		local button = _G["EquipmentFlyoutFrameButton"..i]
+		local button = _G["EquipmentFlyoutFrameButton" .. i]
 
 		while button do
- 			local icon = _G["EquipmentFlyoutFrameButton"..i.."IconTexture"]
+			local icon = _G["EquipmentFlyoutFrameButton" .. i .. "IconTexture"]
 			button:StyleButton(false)
 
-			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			icon:SetTexCoord(unpack(D.IconCoord))
 			button:GetNormalTexture():SetTexture(nil)
 
 			icon:SetInside()
@@ -79,54 +84,44 @@ local function LoadSkin()
 			if not button.backdrop then
 				button:CreateBackdrop("Default")
 				button.backdrop:SetAllPoints()
- 			end
+			end
 			i = i + 1
-			button = _G["EquipmentFlyoutFrameButton"..i]
+			button = _G["EquipmentFlyoutFrameButton" .. i]
 		end
 	end
 
-	-- Swap item flyout frame (shown when holding alt over a slot)
+	--[[Swap item flyout frame]]--
 	EquipmentFlyoutFrame:HookScript("OnShow", SkinItemFlyouts)
 	hooksecurefunc("EquipmentFlyout_Show", SkinItemFlyouts)
 
-	--Icon in upper right corner of character frame
+	--[[Icon in upper right corner of character frame]]--
 	CharacterFramePortrait:Kill()
 
 	local scrollbars = {
 		"PaperDollTitlesPaneScrollBar",
 		"PaperDollEquipmentManagerPaneScrollBar",
-		"CharacterStatsPaneScrollBar",
-		"ReputationListScrollFrameScrollBar",
 	}
 
-	for _, scrollbar in pairs(scrollbars) do
-		_G[scrollbar]:SkinScrollBar()
-	end
+	for _, scrollbar in pairs(scrollbars) do _G[scrollbar]:SkinScrollBar(5) end
+	for _, object in pairs(charframe) do _G[object]:StripTextures() end
 
-	for _, object in pairs(charframe) do
-		if _G[object] then
-			_G[object]:StripTextures()
-		end
-	end
 	CharacterFrame:SetTemplate("Transparent")
 
-	--Titles
+	--[[Titles]]--
 	PaperDollTitlesPane:HookScript("OnShow", function(self)
 		for x, object in pairs(PaperDollTitlesPane.buttons) do
 			object.BgTop:SetTexture(nil)
 			object.BgBottom:SetTexture(nil)
 			object.BgMiddle:SetTexture(nil)
-
 			object.Check:SetTexture(nil)
 			object.text:SetFont(C["media"].font, 11)
 			object.text.SetFont = D.Dummy
 		end
 	end)
 
-	--Equipement Manager
+	--[[Equipement Manager]]--
 	PaperDollEquipmentManagerPaneEquipSet:SkinButton()
 	PaperDollEquipmentManagerPaneSaveSet:SkinButton()
-	GearManagerDialogPopupScrollFrameScrollBar:SkinScrollBar()
 	PaperDollEquipmentManagerPaneEquipSet:Width(PaperDollEquipmentManagerPaneEquipSet:GetWidth() - 8)
 	PaperDollEquipmentManagerPaneSaveSet:Width(PaperDollEquipmentManagerPaneSaveSet:GetWidth() - 8)
 	PaperDollEquipmentManagerPaneEquipSet:Point("TOPLEFT", PaperDollEquipmentManagerPane, "TOPLEFT", 8, 0)
@@ -137,9 +132,18 @@ local function LoadSkin()
 			object.BgTop:SetTexture(nil)
 			object.BgBottom:SetTexture(nil)
 			object.BgMiddle:SetTexture(nil)
+			object.icon:Size(36, 36)
+			object.icon:SetTexCoord(unpack(D.IconCoord))
 
-			object.icon:SetTexCoord(.08, .92, .08, .92)
-			object:SetTemplate("Default")
+			--Making all icons the same size and position because otherwise BlizzardUI tries to attach itself to itself when it refreshes
+			object.icon:SetPoint("LEFT", object, "LEFT", 4, 0)
+			hooksecurefunc(object.icon, "SetPoint", function(self, point, attachTo, anchorPoint, xOffset, yOffset, isForced)
+				if isForced ~= true then self:SetPoint("LEFT", object, "LEFT", 4, 0, true) end
+			end)
+
+			hooksecurefunc(object.icon, "SetSize", function(self, width, height)
+				if width == 30 or height == 30 then self:Size(36, 36) end
+			end)
 		end
 		GearManagerDialogPopup:StripTextures()
 		GearManagerDialogPopup:SetTemplate("Transparent")
@@ -149,159 +153,111 @@ local function LoadSkin()
 		GearManagerDialogPopupEditBox:SetTemplate("Default")
 		GearManagerDialogPopupOkay:SkinButton()
 		GearManagerDialogPopupCancel:SkinButton()
-		
-		for i=1, NUM_GEARSET_ICONS_SHOWN do
-			local button = _G["GearManagerDialogPopupButton"..i]
+
+		for i = 1, NUM_GEARSET_ICONS_SHOWN do
+			local button = _G["GearManagerDialogPopupButton" .. i]
 			local icon = button.icon
-			
+
 			if button then
 				button:StripTextures()
-				button:StyleButton()
-				
-				icon:SetTexCoord(.08, .92, .08, .92)
-				_G["GearManagerDialogPopupButton"..i.."Icon"]:SetTexture(nil)
-				
-				icon:ClearAllPoints()
-				icon:Point("TOPLEFT", 2, -2)
-				icon:Point("BOTTOMRIGHT", -2, 2)	
+				button:StyleButton(true)
+				icon:SetTexCoord(unpack(D.IconCoord))
+				_G["GearManagerDialogPopupButton" .. i .. "Icon"]:SetTexture(nil)
+				icon:SetInside()
 				button:SetFrameLevel(button:GetFrameLevel() + 2)
 				if not button.backdrop then
 					button:CreateBackdrop("Default")
-					button.backdrop:SetAllPoints()			
+					button.backdrop:SetAllPoints()
 				end
 			end
 		end
 	end)
 
-	--Handle Tabs at bottom of character frame
-	for i=1, 4 do
-		_G["CharacterFrameTab"..i]:SkinTab()
-	end
+	--[[Handle Tabs at bottom of character frame]]--
+	for i = 1, 4 do _G["CharacterFrameTab" .. i]:SkinTab() end
 
-	--Buttons used to toggle between equipment manager, titles, and character stats
+	--[[Buttons used to toggle between equipment manager, titles, and character stats]]--
 	local function FixSidebarTabCoords()
-		for i=1, #PAPERDOLL_SIDEBARS do
-			local tab = _G["PaperDollSidebarTab"..i]
-			if tab then
+		for i = 1, #PAPERDOLL_SIDEBARS do
+			local tab = _G["PaperDollSidebarTab" .. i]
+			if tab and not tab.backdrop then
 				tab.Highlight:SetTexture(1, 1, 1, 0.3)
 				tab.Highlight:Point("TOPLEFT", 3, -4)
 				tab.Highlight:Point("BOTTOMRIGHT", -1, 0)
-				tab.Hider:SetTexture(0.4,0.4,0.4,0.4)
+				tab.Hider:SetTexture(.4, .4, .4, .4)
 				tab.Hider:Point("TOPLEFT", 3, -4)
 				tab.Hider:Point("BOTTOMRIGHT", -1, 0)
 				tab.TabBg:Kill()
-				
+
 				if i == 1 then
 					for i=1, tab:GetNumRegions() do
 						local region = select(i, tab:GetRegions())
-						region:SetTexCoord(0.16, 0.86, 0.16, 0.86)
-						region.SetTexCoord = D.Dummy
+						region:SetTexCoord(.16, .86, .16, .86)
+						hooksecurefunc(region, "SetTexCoord", function(self, x1, y1, x2, y2)
+							if x1 ~= .16001 then self:SetTexCoord(.16001, .86, .16, .86) end
+						end)
 					end
 				end
 				tab:CreateBackdrop("Default")
 				tab.backdrop:Point("TOPLEFT", 1, -2)
-				tab.backdrop:Point("BOTTOMRIGHT", 1, -2)	
+				tab.backdrop:Point("BOTTOMRIGHT", 1, -2)
 			end
 		end
 	end
 	hooksecurefunc("PaperDollFrame_UpdateSidebarTabs", FixSidebarTabCoords)
 
-	--Stat panels, atm it looks like 7 is the max
-	for i=1, 7 do
-		_G["CharacterStatsPaneCategory"..i]:StripTextures()
-	end
+	--[[Stat panels, atm it looks like 7 is the max]]--
+	for i = 1, 7 do _G["CharacterStatsPaneCategory" .. i]:StripTextures() end
 
-	--Reputation
+	--[[Reputation]]--
 	local function UpdateFactionSkins()
-		
-		for i=1, GetNumFactions() do
-			local statusbar = _G["ReputationBar"..i.."ReputationBar"]
+		ReputationListScrollFrame:StripTextures()
+		ReputationFrame:StripTextures(true)
+		for i = 1, GetNumFactions() do
+			local statusbar = _G["ReputationBar" .. i .. "ReputationBar"]
 
 			if statusbar then
 				statusbar:SetStatusBarTexture(C["media"].normTex)
-				
-				if not statusbar.backdrop then
-					statusbar:CreateBackdrop("Default")
-				end
-				
-				_G["ReputationBar"..i.."Background"]:SetTexture(nil)
-				_G["ReputationBar"..i.."ReputationBarHighlight1"]:SetTexture(nil)
-				_G["ReputationBar"..i.."ReputationBarHighlight2"]:SetTexture(nil)	
-				_G["ReputationBar"..i.."ReputationBarAtWarHighlight1"]:SetTexture(nil)
-				_G["ReputationBar"..i.."ReputationBarAtWarHighlight2"]:SetTexture(nil)
-				_G["ReputationBar"..i.."ReputationBarLeftTexture"]:SetTexture(nil)
-				_G["ReputationBar"..i.."ReputationBarRightTexture"]:SetTexture(nil)
-				
-			end		
+				if not statusbar.backdrop then statusbar:CreateBackdrop("Default") end
+
+				_G["ReputationBar" .. i .. "Background"]:SetTexture(nil)
+				_G["ReputationBar" .. i .. "ReputationBarHighlight1"]:SetTexture(nil)
+				_G["ReputationBar" .. i .. "ReputationBarHighlight2"]:SetTexture(nil)
+				_G["ReputationBar" .. i .. "ReputationBarAtWarHighlight1"]:SetTexture(nil)
+				_G["ReputationBar" .. i .. "ReputationBarAtWarHighlight2"]:SetTexture(nil)
+				_G["ReputationBar" .. i .. "ReputationBarLeftTexture"]:SetTexture(nil)
+				_G["ReputationBar" .. i .. "ReputationBarRightTexture"]:SetTexture(nil)
+
+			end
 		end
-		ReputationListScrollFrame:StripTextures()
-		ReputationFrame:StripTextures(true)
 		ReputationDetailFrame:StripTextures()
 		ReputationDetailFrame:SetTemplate("Transparent")
 		ReputationDetailFrame:Point("TOPLEFT", ReputationFrame, "TOPRIGHT", 4, -28)
-	end	
-	ReputationFrame:HookScript("OnShow", UpdateFactionSkins)
-	hooksecurefunc("ReputationFrame_OnEvent", UpdateFactionSkins)
-	ReputationDetailInactiveCheckBox:HookScript("OnClick", UpdateFactionSkins)
-	ReputationDetailCloseButton:SkinCloseButton()
-	ReputationDetailAtWarCheckBox:SkinCheckBox()
-	ReputationDetailAtWarCheckBox:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
-	ReputationDetailInactiveCheckBox:SkinCheckBox()
-	ReputationDetailMainScreenCheckBox:SkinCheckBox()
-	ReputationDetailLFGBonusReputationCheckBox:SkinCheckBox()
-	
-	local function UpdateReputationExpand()
-		-- Skin Expand Buttons
-		for i=1, NUM_FACTIONS_DISPLAYED do
-			local bar = _G["ReputationBar"..i]
-			local button = _G["ReputationBar"..i.."ExpandOrCollapseButton"]
-			if not bar.isSkinned then
-				button:StripTextures()
-				button.SetNormalTexture = D.Dummy
-				button:SkinCloseButton()
-				bar.isSkinned = true
-			end
-			
-			-- set the X or V texture
-			if bar.isCollapsed then
-				button.t:SetText("V")
-			else
-				button.t:SetText("X")
-			end
-		end
 	end
-	hooksecurefunc("ReputationFrame_Update", UpdateReputationExpand)
-	
-	--Currency
+	ReputationFrame:HookScript("OnShow", UpdateFactionSkins)
+	hooksecurefunc("ExpandFactionHeader", UpdateFactionSkins)
+	hooksecurefunc("CollapseFactionHeader", UpdateFactionSkins)
+
+	--[[Currency]]--
 	TokenFrame:HookScript("OnShow", function()
-		for i=1, GetCurrencyListSize() do
-			local button = _G["TokenFrameContainerButton"..i]
-			
+		for i = 1, GetCurrencyListSize() do
+			local button = _G["TokenFrameContainerButton" .. i]
+
 			if button then
 				button.highlight:Kill()
-				button.categoryMiddle:Kill()	
-				button.categoryLeft:Kill()	
+				button.categoryMiddle:Kill()
+				button.categoryLeft:Kill()
 				button.categoryRight:Kill()
-				
-				if button.icon then
-					button.icon:SetTexCoord(.08, .92, .08, .92)
-				end
+				if button.icon then button.icon:SetTexCoord(unpack(D.IconCoord)) end
 			end
 		end
 		TokenFramePopup:StripTextures()
 		TokenFramePopup:SetTemplate("Transparent")
-		TokenFramePopup:Point("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)				
+		TokenFramePopup:Point("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)
 	end)
-	TokenFrameContainerScrollBar:SkinScrollBar()
-	TokenFramePopupCloseButton:SkinCloseButton()
-	TokenFramePopupInactiveCheckBox:SkinCheckBox()
-	TokenFramePopupBackpackCheckBox:SkinCheckBox()
 
-	--Pet
+	--[[Pet]]--
 	PetModelFrame:CreateBackdrop("Default")
-	--PetPaperDollFrameExpBar:StripTextures()
-	--PetPaperDollFrameExpBar:SetStatusBarTexture(C["media"].normTex)
-	--PetPaperDollFrameExpBar:CreateBackdrop("Default")
 	PetModelFrameRotateRightButton:SkinRotateButton()
 	PetModelFrameRotateLeftButton:SkinRotateButton()
 	PetModelFrameRotateRightButton:ClearAllPoints()
@@ -311,35 +267,6 @@ local function LoadSkin()
 	xtex:SetTexCoord(.12, .63, .15, .55)
 	PetPaperDollPetInfo:CreateBackdrop("Default")
 	PetPaperDollPetInfo:Size(24, 24)
-	
-	-- a request to color item by rarity on character frame.
-	local function ColorItemBorder()
-		for _, slot in pairs(slots) do
-			-- Colour the equipment slots by rarity
-			local target = _G["Character"..slot]
-			local slotId, _, _ = GetInventorySlotInfo(slot)
-			local itemId = GetInventoryItemID("player", slotId)
-			
-			if itemId then
-				local _, _, rarity, _, _, _, _, _, _, _, _ = GetItemInfo(itemId)
-				if rarity then				
-					target.backdrop:SetBackdropBorderColor(GetItemQualityColor(rarity))
-				end
-			else
-				target.backdrop:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-			end
-		end
-	end
-	
-	-- execute item coloring everytime we open character frame
-	CharacterFrame:HookScript("OnShow", ColorItemBorder)
-	
-	-- execute item coloring everytime an item is changed
-	local CheckItemBorderColor = CreateFrame("Frame")
-	CheckItemBorderColor:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
-	CheckItemBorderColor:SetScript("OnEvent", ColorItemBorder)
-	
-	CharacterFrame:SetTemplate("Default")
 end
 
 tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
