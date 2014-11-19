@@ -156,9 +156,16 @@ chatmenu:SetScript("OnMouseDown", function(self, btn)
 	if btn == "LeftButton" then ToggleFrame(ChatMenu) end
 end)
 
-D.CreateBtn("MB_switch", DuffedUIChatMenu, 20, 20, L["buttons"]["ses_switch"], "S")
-if C["chat"].rbackground then MB_switch:Point("LEFT", DuffedUITabsRightBackground, "RIGHT", 2, 0) else MB_switch:Point("RIGHT",DuffedUIChatMenu, "LEFT", -2, 0) end
-MB_switch:SetAttribute("macrotext1", "/switch")
+if C["chat"].rbackground then
+	D.CreateBtn("MB_switch", DuffedUITabsRightBackground, 20, 20, L["buttons"]["ses_switch"], "S")
+	MB_switch:Point("LEFT", DuffedUITabsRightBackground, "RIGHT", 2, 0)
+	MB_switch:SetAttribute("macrotext1", "/switch")
+else
+	D.CreateBtn("MB_switch", DuffedUIChatMenu, 20, 20, L["buttons"]["ses_switch"], "S")
+	MB_switch:Point("RIGHT", DuffedUIChatMenu, "LEFT", -2, 0)
+	MB_switch:SetAttribute("macrotext1", "/switch")
+end
+
 
 if DuffedUIMinimap then
 	local minimapstatsleft = CreateFrame("Frame", "DuffedUIMinimapStatsLeft", DuffedUIMinimap)
