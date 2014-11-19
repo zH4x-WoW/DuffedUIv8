@@ -13,7 +13,7 @@ local Text  = DuffedUIInfoLeft:CreateFontString(nil, "OVERLAY")
 Text:SetFontObject(font)
 D.DataTextPosition(C["datatext"].garrison, Text)
 
-local function = Update(self, event)
+local function Update(self, event)
 	if not GarrisonMissionFrame then LoadAddOn("Blizzard_GarrisonUI") end
 	GarrisonMissionList_UpdateMissions()
 
@@ -75,5 +75,5 @@ end)
 
 Stat:SetScript("OnLeave", function() GameTooltip:Hide() end)
 Stat:SetScript("OnEvent", Update)
-Stat:SetScript("OnMouseDown", function() GarrisonLandingPage_Toggle end)
+Stat:SetScript("OnMouseDown", function() GarrisonLandingPage_Toggle() end)
 Update(Stat)
