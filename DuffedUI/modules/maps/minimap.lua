@@ -107,7 +107,7 @@ Minimap:SetScript("OnMouseUp", function(self, btn)
 	if btn == "RightButton" then
 		if position:match("RIGHT") then xoff = D.Scale(-8) end
 		ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, DuffedUIMinimap, xoff, D.Scale(-2))
-	elseif btn == "MiddleButton" then
+	elseif btn == "MiddleButton" or (IsShiftKeyDown() and btn == "RightButton") then
 		if not DuffedUIMicroButtonsDropDown then return end
 		if position:match("RIGHT") then xoff = D.Scale(-160) end
 		EasyMenu(D.MicroMenu, DuffedUIMicroButtonsDropDown, "cursor", xoff, 0, "MENU", 2)
