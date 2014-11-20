@@ -34,7 +34,7 @@ end
 
 local function Currency(id, weekly, capped)	
 	local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(id)
-	if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. Stat.Color1 .. name,Stat.Color2 ..  amount) end
+	if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. Stat.Color1 .. name, Stat.Color2 ..  amount) end
 end
 
 Stat:SetScript("OnEnter", function(self)	
@@ -50,8 +50,8 @@ Stat:SetScript("OnEnter", function(self)
 		GameTooltip:AddDoubleLine(Stat.Color1 .. v['name'],Stat.Color2 .. v['timeLeft'])
 		num = num - v['numFollowers']
 	end
-	GameTooltip:AddDoubleLine(Stat.Color1 .."Followers:",Stat.Color2 .. num.."/"..C_Garrison.GetNumFollowers())
-	GameTooltip:AddDoubleLine(Stat.Color1 .. "Missions:",Stat.Color2 .. #C_Garrison.GetInProgressMissions().."/"..#C_Garrison.GetAvailableMissions())
+	GameTooltip:AddDoubleLine(Stat.Color1 ..GARRISON_FOLLOWERS .. ":", Stat.Color2 .. num .. "/" .. C_Garrison.GetNumFollowers())
+	GameTooltip:AddDoubleLine(Stat.Color1 .. GARRISON_MISSIONS .. ":", Stat.Color2 .. #C_Garrison.GetInProgressMissions() .. "/" .. #C_Garrison.GetAvailableMissions())
 
 	GameTooltip:AddDoubleLine(" ")
 	GameTooltip:AddDoubleLine(Currency(824))		
