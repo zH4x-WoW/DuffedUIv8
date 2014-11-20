@@ -166,6 +166,7 @@
 	DuffedUIConfigUILocalization.datatexttalent = "Display talents (0 for disabled)"
 	DuffedUIConfigUILocalization.datatextversatility = "Versatility position (0 for disabled)"
 	DuffedUIConfigUILocalization.datatextwowtime = "Time position (0 for disabled)"
+	DuffedUIConfigUILocalization.datatextgarrison = "Garrison position (0 for disabled)"
 	DuffedUIConfigUILocalization.datatexttime24 = "Enable 24h time"
 	DuffedUIConfigUILocalization.datatextlocaltime = "Use Local Time instead of Server Time"
 	DuffedUIConfigUILocalization.datatextfontsize = "Font size of text"

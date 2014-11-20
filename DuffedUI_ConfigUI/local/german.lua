@@ -167,6 +167,7 @@
 	DuffedUIConfigUILocalization.datatexttalent = "Position der 'Talenteanzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextversatility = "Position der 'Vielseitigkeitsanzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextwowtime = "Position der 'Zeitanzeige' (0 zum deaktivieren)"
+	DuffedUIConfigUILocalization.datatextgarrison = "Position der 'Garnison' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatexttime24 = "Aktiviere 24h Zeitanzeige"
 	DuffedUIConfigUILocalization.datatextlocaltime = "Zeige die lokale Zeit, anstatt der Server Zeit"
 	DuffedUIConfigUILocalization.datatextfontsize = "Schriftgröße des Datatexts"
