@@ -46,6 +46,10 @@ local function Currency(id, weekly, capped)
 end
 
 Stat:SetScript("OnEnter", function(self)
+	if not C["datatext"].ShowInCombat then
+		if InCombatLockdown() then return end
+	end
+
 	local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
@@ -53,15 +57,19 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:AddLine(Stat.Color1 .. GARRISON_LANDING_PAGE_TITLE .. ":")
 	GameTooltip:AddLine(" ")
 
+	GameTooltip:AddDoubleLine("Active " .. GARRISON_MISSIONS)
 	local num = C_Garrison.GetNumFollowers()
 	for k,v in pairs(C_Garrison.GetInProgressMissions()) do
 		GameTooltip:AddDoubleLine(v['name'], v['timeLeft'], 1, 1, 1)
 		num = num - v['numFollowers']
 	end
+	GameTooltip:AddLine(" ")
+
+	GameTooltip:AddDoubleLine(GARRISON_FOLLOWERS .. " & " .. GARRISON_MISSIONS)
 	GameTooltip:AddDoubleLine(GARRISON_FOLLOWERS .. ":", num .. "/" .. C_Garrison.GetNumFollowers(), 1, 1, 1)
 	GameTooltip:AddDoubleLine(GARRISON_MISSIONS .. ":", #C_Garrison.GetInProgressMissions() .. "/" .. #C_Garrison.GetAvailableMissions(), 1, 1, 1)
+	GameTooltip:AddLine(" ")
 
-	GameTooltip:AddDoubleLine(" ")
 	GameTooltip:AddDoubleLine(Currency(824))
 	GameTooltip:Show()
 end)
