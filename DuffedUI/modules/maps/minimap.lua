@@ -81,10 +81,10 @@ local function UpdateLFGTooltip()
 		QueueStatusFrame:SetPoint("BOTTOMRIGHT", QueueStatusMinimapButton, "BOTTOMLEFT", 0, 0)
 	elseif position:match("BOTTOM") then
 		QueueStatusFrame:SetPoint("BOTTOMLEFT", QueueStatusMinimapButton, "BOTTOMRIGHT", 4, 0)
-	elseif position:match("LEFT") then		
+	elseif position:match("LEFT") then
 		QueueStatusFrame:SetPoint("TOPLEFT", QueueStatusMinimapButton, "TOPRIGHT", 4, 0)
 	else
-		QueueStatusFrame:SetPoint("TOPRIGHT", QueueStatusMinimapButton, "TOPLEFT", 0, 0)	
+		QueueStatusFrame:SetPoint("TOPRIGHT", QueueStatusMinimapButton, "TOPLEFT", 0, 0)
 	end
 end
 QueueStatusFrame:HookScript("OnShow", UpdateLFGTooltip)
@@ -103,14 +103,14 @@ end)
 Minimap:SetScript("OnMouseUp", function(self, btn)
 	local xoff = 0
 	local position = DuffedUIMinimap:GetPoint()
-	
-	if btn == "RightButton" then
-		if position:match("RIGHT") then xoff = D.Scale(-8) end
-		ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, DuffedUIMinimap, xoff, D.Scale(-2))
-	elseif btn == "MiddleButton" or (IsShiftKeyDown() and btn == "RightButton") then
+
+	if btn == "MiddleButton" or (IsShiftKeyDown() and btn == "RightButton") then
 		if not DuffedUIMicroButtonsDropDown then return end
 		if position:match("RIGHT") then xoff = D.Scale(-160) end
 		EasyMenu(D.MicroMenu, DuffedUIMicroButtonsDropDown, "cursor", xoff, 0, "MENU", 2)
+	elseif btn == "RightButton" then
+		if position:match("RIGHT") then xoff = D.Scale(-8) end
+		ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, DuffedUIMinimap, xoff, D.Scale(-2))
 	else
 		Minimap_OnClick(self)
 	end

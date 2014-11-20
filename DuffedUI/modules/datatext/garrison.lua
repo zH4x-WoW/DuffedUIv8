@@ -42,30 +42,29 @@ end
 
 local function Currency(id, weekly, capped)	
 	local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(id)
-	if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. Stat.Color1 .. name, Stat.Color2 ..  amount) end
+	if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, amount, 1, 1, 1) end
 end
 
-Stat:SetScript("OnEnter", function(self)	
+Stat:SetScript("OnEnter", function(self)
 	local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
 
-	GameTooltip:AddLine(Stat.Color2 .. GARRISON_LANDING_PAGE_TITLE .. ":")
+	GameTooltip:AddLine(Stat.Color1 .. GARRISON_LANDING_PAGE_TITLE .. ":")
 	GameTooltip:AddLine(" ")
 
 	local num = C_Garrison.GetNumFollowers()
 	for k,v in pairs(C_Garrison.GetInProgressMissions()) do
-		GameTooltip:AddDoubleLine(Stat.Color1 .. v['name'],Stat.Color2 .. v['timeLeft'])
+		GameTooltip:AddDoubleLine(v['name'], v['timeLeft'], 1, 1, 1)
 		num = num - v['numFollowers']
 	end
-	GameTooltip:AddDoubleLine(Stat.Color1 ..GARRISON_FOLLOWERS .. ":", Stat.Color2 .. num .. "/" .. C_Garrison.GetNumFollowers())
-	GameTooltip:AddDoubleLine(Stat.Color1 .. GARRISON_MISSIONS .. ":", Stat.Color2 .. #C_Garrison.GetInProgressMissions() .. "/" .. #C_Garrison.GetAvailableMissions())
+	GameTooltip:AddDoubleLine(GARRISON_FOLLOWERS .. ":", num .. "/" .. C_Garrison.GetNumFollowers(), 1, 1, 1)
+	GameTooltip:AddDoubleLine(GARRISON_MISSIONS .. ":", #C_Garrison.GetInProgressMissions() .. "/" .. #C_Garrison.GetAvailableMissions(), 1, 1, 1)
 
 	GameTooltip:AddDoubleLine(" ")
-	GameTooltip:AddDoubleLine(Currency(824))		
-	GameTooltip:Show()	
+	GameTooltip:AddDoubleLine(Currency(824))
+	GameTooltip:Show()
 end)
 Stat:SetScript("OnLeave", function() GameTooltip:Hide() end)
-	
 Stat:SetScript("OnEvent", Update)
 Stat:SetScript("OnMouseDown", function() GarrisonLandingPageMinimapButton_OnClick() end)
