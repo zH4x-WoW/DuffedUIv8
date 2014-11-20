@@ -1,8 +1,5 @@
--- Combined datatext for system, memory and fps --
+--[[Combined datatext for system, memory and fps]]--
 local D, C, L = unpack(select(2, ...))
---------------------------------------------------------------------
--- FPS
---------------------------------------------------------------------
 
 if C["datatext"].smf and C["datatext"].smf > 0 then
 	local Stat = CreateFrame("Frame")
@@ -19,16 +16,15 @@ if C["datatext"].smf and C["datatext"].smf > 0 then
 	Text:SetFontObject(font)
 	D.DataTextPosition(C["datatext"].smf, Text)
 
+	--[[Format Memory]]--
 	local bandwidthString = "%.2f Mbps"
 	local percentageString = "%.2f%%"
-
 	local kiloByteString = "%d kb"
 	local megaByteString = "%.2f mb"
-
 	local function formatMem(memory)
 		local mult = 10^1
 		if memory > 999 then
-			local mem = ((memory/1024) * mult) / mult
+			local mem = ((memory / 1024) * mult) / mult
 			return string.format(megaByteString, mem)
 		else
 			local mem = (memory * mult) / mult
@@ -36,24 +32,20 @@ if C["datatext"].smf and C["datatext"].smf > 0 then
 		end
 	end
 
+	--[[Build Memorytable]]--
 	local memoryTable = {}
-
 	local function RebuildAddonList(self)
 		local addOnCount = GetNumAddOns()
 		if (addOnCount == #memoryTable) or self.tooltip == true then return end
 
-		-- Number of loaded addons changed, create new memoryTable for all addons
 		memoryTable = {}
-		for i = 1, addOnCount do
-			memoryTable[i] = { i, select(2, GetAddOnInfo(i)), 0, IsAddOnLoaded(i) }
-		end
+		for i = 1, addOnCount do memoryTable[i] = {i, select(2, GetAddOnInfo(i)), 0, IsAddOnLoaded(i)} end
 		self:SetAllPoints(Text)
 	end
-	
+
+	--[[Update Memorytable]]
 	local function UpdateMemory()
-		-- Update the memory usages of the addons
 		UpdateAddOnMemoryUsage()
-		-- Load memory usage in table
 		local addOnMem = 0
 		local totalMemory = 0
 		for i = 1, #memoryTable do
@@ -61,16 +53,13 @@ if C["datatext"].smf and C["datatext"].smf > 0 then
 			memoryTable[i][3] = addOnMem
 			totalMemory = totalMemory + addOnMem
 		end
-		-- Sort the table to put the largest addon on top
 		table.sort(memoryTable, function(a, b)
-			if a and b then
-				return a[3] > b[3]
-			end
+			if a and b then return a[3] > b[3] end
 		end)
-		
 		return totalMemory
 	end
-	
+
+	--[[Build DataText]]--
 	local int, int2 = 10, 2
 	local function Update(self, t)
 		int = int - t
@@ -85,6 +74,7 @@ if C["datatext"].smf and C["datatext"].smf > 0 then
 		end
 	end
 
+	--[[Setup Tooltip]]--
 	Stat:SetScript("OnEnter", function(self)
 		if not C["datatext"].ShowInCombat then
 			if InCombatLockdown() then return end
@@ -102,7 +92,7 @@ if C["datatext"].smf and C["datatext"].smf > 0 then
 		end
 		GameTooltip:ClearLines()
 		local totalMemory = UpdateMemory()
-		GameTooltip:AddDoubleLine(L["dt"]["totalmemusage"], formatMem(totalMemory), 0.69, 0.31, 0.31,0.84, 0.75, 0.65)
+		GameTooltip:AddDoubleLine(L["dt"]["totalmemusage"], formatMem(totalMemory), .69, .31, .31, .84, .75, .65)
 		GameTooltip:AddLine(" ")
 		for i = 1, #memoryTable do
 			if (memoryTable[i][4]) then
@@ -113,16 +103,16 @@ if C["datatext"].smf and C["datatext"].smf > 0 then
 		end
 		GameTooltip:AddLine(" ")
 		if bandwidth ~= 0 then
-			GameTooltip:AddDoubleLine(L["dt"]["bandwidth"] , string.format(bandwidthString, bandwidth),0.69, 0.31, 0.31,0.84, 0.75, 0.65)
-			GameTooltip:AddDoubleLine(L["dt"]["download"] , string.format(percentageString, GetDownloadedPercentage() *100),0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+			GameTooltip:AddDoubleLine(L["dt"]["bandwidth"] , string.format(bandwidthString, bandwidth), .69, .31, .31, .84, .75, .65)
+			GameTooltip:AddDoubleLine(L["dt"]["download"] , string.format(percentageString, GetDownloadedPercentage() * 100), .69, .31, .31, .84, .75, .65)
 			GameTooltip:AddLine(" ")
 		end
-		GameTooltip:AddDoubleLine(L["dt"]["home"], latencyHome.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
-		GameTooltip:AddDoubleLine(L["dt"]["world"], latencyWorld.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
-		GameTooltip:AddDoubleLine(L["dt"]["global"], ms_combined.." "..MILLISECONDS_ABBR, 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+		GameTooltip:AddDoubleLine(L["dt"]["home"], latencyHome.." "..MILLISECONDS_ABBR, .69, .31, .31, .84, .75, .65)
+		GameTooltip:AddDoubleLine(L["dt"]["world"], latencyWorld.." "..MILLISECONDS_ABBR, .69, .31, .31, .84, .75, .65)
+		GameTooltip:AddDoubleLine(L["dt"]["global"], ms_combined.." "..MILLISECONDS_ABBR, .69, .31, .31, .84, .75, .65)
 		GameTooltip:AddLine(" ")
-		GameTooltip:AddDoubleLine(L["dt"]["inc"], string.format( "%.4f", bw_in ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
-		GameTooltip:AddDoubleLine(L["dt"]["out"], string.format( "%.4f", bw_out ) .. " kb/s", 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
+		GameTooltip:AddDoubleLine(L["dt"]["inc"], string.format( "%.4f", bw_in ) .. " kb/s", .69, .31, .31, .84, .75, .65)
+		GameTooltip:AddDoubleLine(L["dt"]["out"], string.format( "%.4f", bw_out ) .. " kb/s", .69, .31, .31, .84, .75, .65)
 
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(L["dt"]["systemleft"])
@@ -130,6 +120,7 @@ if C["datatext"].smf and C["datatext"].smf > 0 then
 		GameTooltip:Show()
 	end)
 
+	--[[Button functionality]]--
 	Stat:SetScript("OnMouseDown", function(self, btn)
 		if (btn == "LeftButton") then
 			if not PVEFrame then PVEFrame_ToggleFrame() end

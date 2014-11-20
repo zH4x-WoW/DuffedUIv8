@@ -1,6 +1,4 @@
 local D, C, L = unpack(select(2, ...))
-
--- TIME
 if not C["datatext"].wowtime and C["datatext"].wowtime == 0 then return end
 
 local Stat = CreateFrame("Frame")
