@@ -60,8 +60,8 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:AddDoubleLine("Active " .. GARRISON_MISSIONS)
 	local num = C_Garrison.GetNumFollowers()
 	for k,v in pairs(C_Garrison.GetInProgressMissions()) do
-		GameTooltip:AddDoubleLine(v['name'], v['timeLeft'], 1, 1, 1)
-		num = num - v['numFollowers']
+		GameTooltip:AddDoubleLine(v["name"], v["timeLeft"], 1, 1, 1)
+		num = num - v["numFollowers"]
 	end
 	GameTooltip:AddLine(" ")
 
