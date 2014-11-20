@@ -50,7 +50,7 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
 
-	GameTooltip:AddLine(Stat.Color2 .. "Garrisonreport:")
+	GameTooltip:AddLine(Stat.Color2 .. GARRISON_LANDING_PAGE_TITLE .. ":")
 	GameTooltip:AddLine(" ")
 
 	local num = C_Garrison.GetNumFollowers()
