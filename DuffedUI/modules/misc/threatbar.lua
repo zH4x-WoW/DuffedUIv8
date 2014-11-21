@@ -40,7 +40,7 @@ local function OnEvent(self, event, ...)
 	elseif event == "PLAYER_REGEN_ENABLED" then
 		self:Hide()
 	elseif event == "PLAYER_REGEN_DISABLED" then
-		if party > 0 or raid > 0 or pet == 1 then self:Show() else self:Hide() end
+		if (party > 0) or (raid > 0) or (pet == 1) then self:Show() else self:Hide() end
 	else
 		if (InCombatLockdown()) and (party > 0 or raid > 0 or pet == 1) then self:Show() else self:Hide() end
 	end
