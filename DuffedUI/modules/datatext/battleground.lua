@@ -13,6 +13,7 @@ local TBFG = 736
 local AB = 461
 local TOK = 856
 local SSM = 860
+local ASH = 978
 
 local bgframe = DuffedUIInfoLeftBattleGround
 bgframe:SetScript("OnEnter", function(self)
@@ -51,7 +52,7 @@ bgframe:SetScript("OnEnter", function(self)
 				elseif curmapid == SOTA then
 					GameTooltip:AddDoubleLine(L["dt"]["demolishersdestroyed"],GetBattlefieldStatData(i, 1), 1, 1, 1)
 					GameTooltip:AddDoubleLine(L["dt"]["gatesdestroyed"],GetBattlefieldStatData(i, 2), 1, 1, 1)
-				elseif curmapid == IOC or curmapid == TBFG or curmapid == AB then
+				elseif curmapid == IOC or curmapid == TBFG or curmapid == AB or curmapid == ASH then
 					GameTooltip:AddDoubleLine(L["dt"]["basesassaulted"],GetBattlefieldStatData(i, 1), 1, 1, 1)
 					GameTooltip:AddDoubleLine(L["dt"]["basesdefended"],GetBattlefieldStatData(i, 2), 1, 1, 1)
 				elseif CurrentMapID == TOK then

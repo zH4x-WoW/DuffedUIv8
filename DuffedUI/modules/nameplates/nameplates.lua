@@ -544,12 +544,13 @@ local UpdateThreat = function(self)
 	--[[Highlight current target]]--
 	local arena = (select(2, IsInInstance()) == "arena")
 	local bg = (select(2, IsInInstance()) == "pvp")
+	local ash = (select(1, GetCurrentMapAreaID()) == 978)
 	if self.unit == "target" then
 		self.health.name:SetTextColor(1, 1, 0)
 		self.health:SetAlpha(1)
 	else
 		self.health.name:SetTextColor(1, 1, 1)
-		if (arena or bg) then self.health:SetAlpha(1) else self.health:SetAlpha(C["nameplate"].NonTargetAlpha) end
+		if (arena or bg or ash) then self.health:SetAlpha(1) else self.health:SetAlpha(C["nameplate"].NonTargetAlpha) end
 	end
 end
 

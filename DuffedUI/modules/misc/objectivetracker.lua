@@ -1,7 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 
 --[[Modified Objective Tracker from ObbleYeah - All Credits goes to him]]--
-local otfheight = 450
+local otfheight = 525
 local titlesize = 13
 local otf = ObjectiveTrackerFrame
 local lST = "Wowhead"
@@ -24,7 +24,7 @@ _G.StaticPopupDialogs["WATCHFRAME_URL"] = {
 otf:SetClampedToScreen(true)
 otf:ClearAllPoints()
 otf.ClearAllPoints = D.Dummy
-otf:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -D.ScreenHeight / 5, -D.ScreenHeight / 4) 
+otf:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -D.ScreenHeight / 5, -D.ScreenHeight / 2) 
 otf.SetPoint = D.Dummy
 otf:SetMovable(true)
 otf:SetUserPlaced(true)
