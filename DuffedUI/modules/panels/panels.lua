@@ -122,9 +122,12 @@ if not C["actionbar"].enable ~= true then
 
 	DuffedUIPetBarMover = CreateFrame("Frame", "DuffedUIPetBarMover", UIParent)
 	DuffedUIPetBarMover:SetTemplate("Transparent")
-	if C["actionbar"].petbarhorizontal ~= true then
+	if C["actionbar"].petbarhorizontal ~= true and (not C["actionbar"].rightbarvertical) then
 		DuffedUIPetBarMover:SetSize(D.petbuttonsize + (D.petbuttonspacing * 2), (D.petbuttonsize * 10) + (D.petbuttonspacing * 11))
 		DuffedUIPetBarMover:SetPoint("RIGHT", DuffedUIBar5, "LEFT", -6, 0)
+	elseif C["actionbar"].rightbarvertical and (not C["actionbar"].petbarhorizontal) then
+		DuffedUIPetBarMover:SetSize(D.petbuttonsize + (D.petbuttonspacing * 2), (D.petbuttonsize * 10) + (D.petbuttonspacing * 11))
+		DuffedUIPetBarMover:SetPoint("RIGHT", UIParent, "RIGHT", -13, -14)
 	else
 		DuffedUIPetBarMover:SetSize((D.petbuttonsize * 10) + (D.petbuttonspacing * 11), D.petbuttonsize + (D.petbuttonspacing * 2))
 		if C["chat"].rbackground then DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 3) else DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 176) end
