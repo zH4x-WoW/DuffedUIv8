@@ -500,11 +500,15 @@ local goodR, goodG, goodB = unpack(C["nameplate"].threat_goodcolor)
 local badR, badG, badB = unpack(C["nameplate"].threat_badcolor)
 local transitionR, transitionG, transitionB = unpack(C["nameplate"].threat_transitioncolor)
 local UpdateThreat = function(self)
+	local arena = (select(2, IsInInstance()) == "arena")
+	local bg = (select(2, IsInInstance()) == "pvp")
+	local ash = (select(1, GetCurrentMapAreaID()) == 978)
+
 	if self.health == nil then return end
 	if self.hasClass or self.isTagged then return end
 
 	--[[Enhanced Threat feature]]--
-	if C["nameplate"].threat then
+	if C["nameplate"].threat and (not arena or bg or ash) then
 		if not self.old_threat:IsShown() then
 			if InCombatLockdown() and self.isFriendly ~= true then
 				if D.Role == "Tank" then
@@ -542,9 +546,6 @@ local UpdateThreat = function(self)
 	end
 
 	--[[Highlight current target]]--
-	local arena = (select(2, IsInInstance()) == "arena")
-	local bg = (select(2, IsInInstance()) == "pvp")
-	local ash = (select(1, GetCurrentMapAreaID()) == 978)
 	if self.unit == "target" then
 		self.health.name:SetTextColor(1, 1, 0)
 		self.health:SetAlpha(1)

@@ -321,6 +321,7 @@ spellCooldowns = {
 		51533,  -- Feral Spirit
 		55198,  -- Tidal Force
 		57994,  -- Wind Shear
+		58875,	-- Spirit Walk
 		60103,  -- Lava Lash
 		61295,  -- Riptide
 		73680,  -- Unleash Elements
@@ -334,7 +335,7 @@ spellCooldowns = {
 		108280, -- Healing Tide Totem
 		108281, -- Ancestral Guidance
 		108285, -- Call of Elements
-		117014, -- Elemental Blast		
+		117014, -- Elemental Blast
 	},
 	["WARLOCK"] = {
 		5484, -- Howl of Terror
