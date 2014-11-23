@@ -858,6 +858,7 @@ Plates.updateAll = function(self)
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	self:RegisterEvent("UNIT_TARGET")
 	self:RegisterEvent("UNIT_AURA")
+	self:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 end
 
 Plates:SetScript("OnEvent", function(self, event, ...)

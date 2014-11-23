@@ -42,6 +42,7 @@ local BuffReminder1 = {
 		2823, -- Deadly Poison
 		3408, -- Crippling Poison
 		8679, -- Wound Poison
+		108211, -- Leeching Poison
 	},
 	['SHAMAN'] = {
 		324, -- Lightning Shield
