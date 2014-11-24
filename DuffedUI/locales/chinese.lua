@@ -156,6 +156,7 @@ if D.Client == "zhCN" then
 		["continue"] = "Continue",
 		["finish"] = "Finish",
 		["close"] = "Close",
+		["treasure"] = "Show Treasures",
 	}
 
 	L["errors"] = {

@@ -155,6 +155,7 @@ L["buttons"] = {
 	["continue"] = "Continue",
 	["finish"] = "Finish",
 	["close"] = "Close",
+	["treasure"] = "Show Treasures",
 }
 
 L["errors"] = {

@@ -98,6 +98,36 @@ if C["unitframes"].focusbutton and C["unitframes"].enable then
 	end
 end
 
+--[[Treasureoption for Worldmap]]--
+local function click(self)
+	local checked = self.checked
+	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
+	ToggleTreasuresSettings = checked
+	WorldMapFrame_Update()
+end
+
+hooksecurefunc("WorldMapTrackingOptionsDropDown_Initialize",function()
+	if UnitLevel("player") >= 100 then
+		if ToggleTreasuresSettings == nil then ToggleTreasuresSettings = true end
+		local info = UIDropDownMenu_CreateInfo()
+		info.text = L["buttons"]["treasure"]
+		info.func = click
+		info.checked = ToggleTreasuresSettings and true
+		info.isNotRadio = true
+		info.keepShownOnClick = 1
+		UIDropDownMenu_AddButton(info)
+	end
+end)
+UIDropDownMenu_Initialize(WorldMapFrameDropDown, WorldMapTrackingOptionsDropDown_Initialize, "MENU")
+
+hooksecurefunc("WorldMapFrame_Update",function()
+	if not ToggleTreasuresSettings then
+		for i = 1,GetNumMapLandmarks() do
+			if select(3,GetMapLandmarkInfo(i)) == 197 then _G["WorldMapFramePOI"..i]:Hide() end
+		end
+	end
+end)
+
 --[[Automatic achievement screenshot]]--
 if C["misc"].acm_screen == true then
 	local function TakeScreen(delay, func, ...)

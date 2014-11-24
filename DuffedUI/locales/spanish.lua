@@ -156,6 +156,7 @@ if D.Client == "esES" or D.Client == "esMX" then
 		["continue"] = "Continue",
 		["finish"] = "Finish",
 		["close"] = "Close",
+		["treasure"] = "Show Treasures",
 	}
 
 	L["errors"] = {

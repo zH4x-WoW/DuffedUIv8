@@ -156,6 +156,7 @@ if D.Client == "deDE" then
 		["continue"] = "Weiter",
 		["finish"] = "Beenden",
 		["close"] = "Schliessen",
+		["treasure"] = "Zeige Schatztruhen",
 	}
 
 	L["errors"] = {
