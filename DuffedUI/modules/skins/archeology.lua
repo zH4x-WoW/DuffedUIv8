@@ -80,7 +80,7 @@ local function LoadSkin()
 	ArcheologyDigsiteProgressBar.FillBar:CreateBackdrop("Transparent")
 	ArcheologyDigsiteProgressBar.BarTitle:SetFont(C["media"].font, 11, "THINOUTLINE")
 	ArcheologyDigsiteProgressBar:ClearAllPoints()
-	ArcheologyDigsiteProgressBar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 225)
+	ArcheologyDigsiteProgressBar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 200)
 end
 
 D.SkinFuncs["Blizzard_ArchaeologyUI"] = LoadSkin
