@@ -71,6 +71,7 @@ local function Shared(self, unit)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
+		health:CreateBackdrop()
 
 		local healthBG = health:CreateTexture(nil, "BORDER")
 		healthBG:SetAllPoints()
