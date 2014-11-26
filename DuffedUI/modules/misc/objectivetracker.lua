@@ -24,7 +24,7 @@ _G.StaticPopupDialogs["WATCHFRAME_URL"] = {
 otf:SetClampedToScreen(true)
 otf:ClearAllPoints()
 otf.ClearAllPoints = D.Dummy
-otf:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -D.ScreenHeight / 5, -D.ScreenHeight / 2) 
+otf:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -D.ScreenHeight / 5, -D.ScreenHeight / 4) 
 otf.SetPoint = D.Dummy
 otf:SetMovable(true)
 otf:SetUserPlaced(true)
