@@ -163,7 +163,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(770, true), -- Farie Fire
 			CreateSpellEntry(774), -- Rejuvenation
 			CreateSpellEntry(1079), -- Rip
-			CreateSpellEntry(1822), -- Rake
+			CreateSpellEntry(1822), CreateSpellEntry(155722), -- Rake
 			CreateSpellEntry(2637), -- Hibernate
 			CreateSpellEntry(6795), -- Growl
 			CreateSpellEntry(8936, false, nil, nil, 8936), -- Regrowth
