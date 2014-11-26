@@ -12,7 +12,7 @@ local CreateSpellEntry = function(id, castByAnyone, color, unitType, castSpellId
 	return { id = id, castByAnyone = castByAnyone, color = color, unitType = unitType or 0, castSpellId = castSpellId }
 end
 
--- Configuration starts here:
+--[[Configuration starts here]]--
 local targetdebuffs = C["classtimer"].targetdebuffs
 local BAR_HEIGHT = C["classtimer"].height
 local BAR_SPACING = C["classtimer"].spacing
@@ -32,7 +32,7 @@ local SORT_DIRECTION = true
 local TENTHS_TRESHOLD = 1
 
 local TRINKET_FILTER = {
-	--Proccs & Racials
+	--[[Proccs & Racials]]--
 	CreateSpellEntry(2825, true), CreateSpellEntry(32182, true), CreateSpellEntry(80353, true), -- Bloodlust/Heroism/Timewarp
 	CreateSpellEntry(90355, true), -- Ancient Hysteria, bloodlust from hunters pet
 	CreateSpellEntry(26297), -- Berserking (troll racial)
@@ -43,7 +43,7 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(45861), -- Nitro Boost (Engeneering)
 	CreateSpellEntry(68992), -- Darkflight (Worgen Sprint Racial)
 
-	-- Weaponenchants & Stuff
+	--[[Weaponenchants & Stuff]]--
 	CreateSpellEntry(104510, true), -- Windsong
 	CreateSpellEntry(125487, true), -- Lightweave
 	CreateSpellEntry(120032, true), -- Dancing Steel
@@ -57,85 +57,18 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(173322, true), -- Mark of Bleeding Hollow
 	CreateSpellEntry(159238, true), -- Shattered Bleed
 
-	--[[Remove me after Addon-Release]]--
-	-- Dungeon-, Valor- & Darkmoontrinkets
-	CreateSpellEntry(126519), -- Lessons of the Darkmaster
-	CreateSpellEntry(126236), -- Iron Protector Talisman
-	CreateSpellEntry(126606), -- Scroll of Revered Ancestors
-	CreateSpellEntry(126597), -- Lao-Chin's Liquid Courage
-	CreateSpellEntry(128987), -- Relic of Chi Ji
-	CreateSpellEntry(128984), -- Relic of Xuen - Agi
-	CreateSpellEntry(128986), -- Relic of Xuen - Str
-	CreateSpellEntry(128988), -- Relic of Niuzao
-	CreateSpellEntry(128985), -- Relic of Yu'lon
-	CreateSpellEntry(129812), -- Iron Belly Wok
-	CreateSpellEntry(138699), -- Superluminal
+	--[[Darkmoon-Trinkets]]--
+	CreateSpellEntry(162915), -- Spirit of the Warlords (Skull of War)
+	CreateSpellEntry(162913), -- Visions of the Future (Winged Hourglass)
+	CreateSpellEntry(162919), -- Nightmare Fire (Sandman's Pouch)
+	CreateSpellEntry(162917), -- Strength of Steel (Knight's Badge)
 
-	-- Mogu'Shan Vaults
-	CreateSpellEntry(126582), -- Lei Shin's Final Orders
-	CreateSpellEntry(126577), -- Light of the Cosmos
-	CreateSpellEntry(126534), -- Vial of the Dragon's Blood
-	CreateSpellEntry(126554), -- Bottle of Infinite Stars
-	CreateSpellEntry(126599), -- Jade Charioteer Figurine
-
-	-- Terrace of Endless Spring
-	CreateSpellEntry(126646), -- Stuff of Nightmares
-	CreateSpellEntry(126649), -- Terror in the Mists
-	CreateSpellEntry(126640), -- Spirits of the Sun
-	CreateSpellEntry(126657), -- Darkmist Vortex
-	CreateSpellEntry(126659), -- Essence of Terror
-
-	-- Throne of Thunder
-	CreateSpellEntry(138938), -- JuJu Madness
-	CreateSpellEntry(138898), -- Breath of Many Minds
-	CreateSpellEntry(139133), -- Mastermind
-	CreateSpellEntry(138864), -- Blood of Power
-	CreateSpellEntry(138759), -- Feathers of Fury
-	CreateSpellEntry(126697), -- Tremendous Fortitude
-	CreateSpellEntry(139170), -- Eye of Brutality
-	CreateSpellEntry(138856), -- Cloudburst
-	CreateSpellEntry(140380), -- Shield of Hydra Sputum
-	CreateSpellEntry(139189), -- Infinite Power
-	CreateSpellEntry(138870), -- Rampage
-	CreateSpellEntry(138756), -- Blades of Renataki
-	CreateSpellEntry(138979), -- Soul Barrier
-	CreateSpellEntry(138958), -- Spark of Zandalar
-	CreateSpellEntry(138967), -- Blessing of Zuldazar
-	CreateSpellEntry(138895), -- Frenzy
-	CreateSpellEntry(138963), -- Perfect Aim
-	CreateSpellEntry(138786), -- Wushoolay's Lightning
-	CreateSpellEntry(138702), -- Surge of Strength
-	CreateSpellEntry(139117), -- Re-Origination (Crit)
-	CreateSpellEntry(139120), -- Re-Origination (Mastery)
-	CreateSpellEntry(139121), -- Re-Origination (Haste)
-	CreateSpellEntry(138703), -- Acceleration
-	CreateSpellEntry(138960), -- Zandalari Warrior
-	--[[Remove me after Addon-Release]]--
-
-	-- Siege of Orgrimmar
-	CreateSpellEntry(146046), -- Purified Bindings of Immerseus (Expanded Mind)
-	CreateSpellEntry(146343), -- Rook's Unlucky Talisman (Avoidance)
-	CreateSpellEntry(146308), -- Assurance of Consequence (Dextrous)
-	CreateSpellEntry(146245), -- Evil Eye of Galakras (Outrage)
-	CreateSpellEntry(148906), -- Kardris' Toxic Totem (Toxic Power)
-	CreateSpellEntry(148903), -- Haromm's Talisman (Vicious)
-	CreateSpellEntry(148908), -- Nazgrim's Burnished Insignia (Mark of Salvation)
-	CreateSpellEntry(148897), -- Frenzied Crystal of Rage (Extravagant Visions)
-	CreateSpellEntry(148896), -- Sigil of Rampage (Ferocity)
-	CreateSpellEntry(148911), -- Thok's Acid-Grooved Tooth (Soothing Power)
-	CreateSpellEntry(146250), -- Thok's Tail Tip (Determination)
-	CreateSpellEntry(146317), -- Dysmorphic Samophlange of Discontinuity (Restless Spirit)
-	CreateSpellEntry(146310), -- Ticking Ebon Detonator (Restless Agility)
-	CreateSpellEntry(146285), -- Skeer's Bloodsoaked Talisman (Cruelty)
-	CreateSpellEntry(146314), -- Prismatic Prison of Pride (Titanic Restoration)
-	CreateSpellEntry(146184), -- Black Blood of Y'Shaarj (Wrath of the Darkspear)
-
-	-- T16
+	--[[T16]]--
 	CreateSpellEntry(145164), -- Warlock T16 4pieces
 	CreateSpellEntry(144901), -- Deathknight T16 2pieces
 	CreateSpellEntry(145336), -- Priest T16 4pieces
 
-	-- T17
+	--[[T17]]--
 	CreateSpellEntry(165475), -- Mage Arcane 2pieces
 	CreateSpellEntry(166868), -- Mage Fire 4pieces
 	CreateSpellEntry(170408), -- Mage Frost 4pieces
@@ -151,17 +84,17 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(165509), -- Rogue Subtlety 2pieces
 	CreateSpellEntry(170186), -- Hunter Markmanship 4pieces
 
-	-- Legendary MetaGems
+	--[[Legendary MetaGems]]--
 	CreateSpellEntry(137593, true), -- Indomitable Primal Diamond
 	CreateSpellEntry(137288, true), -- Courageous Primal Diamond
 	CreateSpellEntry(137596, true), -- Capacitive Primal Diamond
 	CreateSpellEntry(137590, true), -- Sinister Primal Diamond
 
-	-- Legendary Cloaks
+	--[[Legendary Cloaks]]--
 	CreateSpellEntry(146194, true), -- Xuen
 	CreateSpellEntry(146200, true), -- Chi-Ji
 
-	-- Blackrock Foundry
+	--[[Blackrock Foundry]]--
 	CreateSpellEntry(177063), -- Elementalist's Shielding Talisman (Elemental Shield)
 	CreateSpellEntry(177056), -- Blast Furnace Door (Blast Furnace)
 	CreateSpellEntry(176873), -- Tablet of Turnbuckle Teamwork (Turnbuckle Terror)
@@ -177,7 +110,7 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(177060), -- Ironspike Chew Toy (Squeak Squeak)
 	CreateSpellEntry(177035), -- Meaty Dragonspine Trophy (Meaty Dragonspine Trophy)
 
-	-- Highmaul
+	--[[Highmaul]]--
 	CreateSpellEntry(176876), -- Pol's Blinded Eye (Vision of the Cyclops)
 	CreateSpellEntry(176875), -- Shards of Nothing (Void Shards)
 	CreateSpellEntry(176879), -- Emblem of Caustic Healing (Caustic Healing)
@@ -632,7 +565,7 @@ local CreateUnitAuraDataSource
 do
 	local auraTypes = { "HELPFUL", "HARMFUL" }
 
-	-- private
+	--[[private]]--
 	local CheckFilter = function(self, id, caster, filter)
 		if (filter == nil) then return false end
 		local byPlayer = caster == "player" or caster == "pet" or caster == "vehicle"
@@ -666,7 +599,7 @@ do
 		end
 	end
 
-	-- public 
+	--[[public]]--
 	local Update = function(self)
 		local result = self.table
 		for index = 1, #result do table.remove(result) end
@@ -736,7 +669,7 @@ do
 	local GetIncludePlayer = function(self) return self.includePlayer end
 	local SetIncludePlayer = function(self, value) self.includePlayer = value end
 
-	-- constructor
+	--[[constructor]]--
 	CreateUnitAuraDataSource = function(unit)
 		local result = {}
 		result.Sort = Sort
@@ -761,14 +694,14 @@ end
 
 local CreateFramedTexture
 do
-	-- public
+	--[[public]]--
 	local SetTexture = function(self, ...) return self.texture:SetTexture(...) end
 	local GetTexture = function(self) return self.texture:GetTexture() end
 	local GetTexCoord = function(self) return self.texture:GetTexCoord() end
 	local SetTexCoord = function(self, ...) return self.texture:SetTexCoord(...) end
 	local SetBorderColor = function(self, ...) return self.border:SetVertexColor(...) end
 
-	-- constructor
+	--[[constructor]]--
 	CreateFramedTexture = function(parent)
 		local result = parent:CreateTexture(nil, "BACKGROUND", nil)
 		local texture = parent:CreateTexture(nil, "OVERLAY", nil)
@@ -785,10 +718,10 @@ end
 
 local CreateAuraBarFrame
 do
-	-- classes
+	--[[classes]]--
 	local CreateAuraBar
 	do
-		-- private 
+		--[[private]]--
 		local OnUpdate = function(self, elapsed)
 			local time = GetTime()
 			if (time > self.expirationTime) then
@@ -824,7 +757,7 @@ do
 			end
 		end
 
-		-- public
+		--[[public]]--
 		local SetIcon = function(self, icon)
 			if (not self.icon) then return end
 			self.icon:SetTexture(icon)
@@ -878,7 +811,7 @@ do
 			self:SetCastSpellId(auraInfo.castSpellId)
 		end
 
-		-- constructor
+		--[[constructor]]--
 		CreateAuraBar = function(parent)
 			local result = CreateFrame("Frame", nil, parent, nil)
 			local icon = CreateFramedTexture(result, "ARTWORK")
@@ -956,7 +889,7 @@ do
 		end
 	end
 
-	-- private
+	--[[private]]--
 	local SetAuraBar = function(self, index, auraInfo)
 		local line = self.lines[ index ]
 		if (line == nil) then
@@ -1001,7 +934,7 @@ do
 		end
 	end
 
-	-- public
+	--[[public]]--
 	local function Render(self)
 		local dataSource = self.dataSource
 
@@ -1023,7 +956,7 @@ do
 		end
 	end
 
-	-- constructor
+	--[[constructor]]--
 	CreateAuraBarFrame = function(dataSource, parent)
 		local result = CreateFrame("Frame", nil, parent, nil)
 		local unit = dataSource:GetUnit()
