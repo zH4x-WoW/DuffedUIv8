@@ -93,6 +93,7 @@
 	DuffedUIConfigUILocalization.nameplatethreat_transitioncolor = "Losing/Gaining threat color"
 	DuffedUIConfigUILocalization.nameplatePercent = "Enable Percent-Display on Nameplates"
 	DuffedUIConfigUILocalization.nameplateNonTargetAlpha = "Set alpha for non target Nameplates"
+	DuffedUIConfigUILocalization.nameplatePvP = "Disable non target alpha for Nameplates for PvP"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Action Bars"

@@ -93,6 +93,7 @@
 	DuffedUIConfigUILocalization.nameplatethreat_transitioncolor = "Wähle Farbe für Verlust/Gewinn der Bedrohung"
 	DuffedUIConfigUILocalization.nameplatePercent = "Aktiviere Prozentanzeige an Namensplaketten"
 	DuffedUIConfigUILocalization.nameplateNonTargetAlpha = "Wähle Alphawert für non-Target Namensplaketten"
+	DuffedUIConfigUILocalization.nameplatePvP = "Deaktiviere Alpha für non-Target Namensplaketten im PvP"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"
