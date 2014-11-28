@@ -1,7 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 
 local function LoadGarrisonSkin()
-	-- Tooltips
+	--[[Tooltips]]--
 	local Tooltips = {
 		FloatingGarrisonFollowerTooltip,
 		FloatingGarrisonFollowerAbilityTooltip,
@@ -28,7 +28,7 @@ local function LoadGarrisonSkin()
 		if tt.Icon then tt.Icon:SetTexCoord(unpack(D.IconCoord)) end
 	end
 
-	-- Garrison Landing Page
+	--[[Garrison Landing Page]]--
 	GarrisonLandingPage:StripTextures()
 	GarrisonLandingPage:SetTemplate("Transparent")
 	GarrisonLandingPage.CloseButton:StripTextures()
@@ -57,7 +57,7 @@ local function LoadGarrisonSkin()
 	GarrisonLandingPageListScrollFrameScrollBar:StripTextures()
 	GarrisonLandingPageListScrollFrameScrollBar:SkinScrollBar()
 
-	-- Work Orders
+	--[[Work Orders]]--
 	GarrisonCapacitiveDisplayFrame:StripTextures()
 	GarrisonCapacitiveDisplayFrame:SetTemplate("Transparent")
 	GarrisonCapacitiveDisplayFramePortrait:Kill()
@@ -89,7 +89,7 @@ local function LoadGarrisonSkin()
 	end
 	hooksecurefunc("GarrisonCapacitiveDisplayFrame_Update", Reagents)
 
-	-- Follower Recruiting
+	--[[Follower Recruiting]]--
 	GarrisonRecruiterFrame:StripTextures()
 	GarrisonRecruiterFrame:SetTemplate("Transparent")
 	GarrisonRecruiterFramePortrait:Kill()
@@ -120,7 +120,7 @@ local function LoadGarrisonSkin()
 		Button.HireRecruits:SkinButton()
 	end
 
-	-- Garrison Mission Frame
+	--[[ Garrison Mission Frame]]--
 	GarrisonMissionFrame:StripTextures()
 	GarrisonMissionFrame:SetTemplate("Transparent")
 	GarrisonMissionFrame.CloseButton:SkinCloseButton()
@@ -216,7 +216,7 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrame.FollowerTab.ItemArmor:StripTextures()
 	GarrisonMissionFrame.FollowerTab.ItemArmor.Icon:SetTexCoord(unpack(D.IconCoord))
 
-	-- Garrison Mission Complete
+	--[[Garrison Mission Complete]]--
 	GarrisonMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:StripTextures()
 	GarrisonMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:SkinButton()
 	GarrisonMissionFrame.MissionComplete:StripTextures()
@@ -234,7 +234,7 @@ local function LoadGarrisonSkin()
 		Follower.XP:CreateBackdrop()
 	end
 
-	-- Garrison Building Frame
+	--[[Garrison Building Frame]]--
 	GarrisonBuildingFrame:StripTextures()
 	GarrisonBuildingFrame:SetTemplate("Transparent")
 	GarrisonBuildingFrame.CloseButton:StripTextures()
@@ -271,7 +271,7 @@ end
 D.SkinFuncs["Blizzard_GarrisonUI"] = LoadGarrisonSkin
 
 local function LoadGarrisonTooltipSkin()
-	-- Tooltips
+	--[[Tooltips]]--
 	local Tooltips = {
 		FloatingGarrisonFollowerTooltip,
 		FloatingGarrisonFollowerAbilityTooltip,

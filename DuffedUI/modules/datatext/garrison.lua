@@ -1,6 +1,7 @@
 local D, C, L = unpack(select(2, ...)) 
 if not C["datatext"].garrison or C["datatext"].garrison == 0 then return end
 
+--[[Textfield]]--
 local Stat = CreateFrame("Frame", "DuffedUIStatgarrison")
 Stat:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 Stat:RegisterEvent("GET_ITEM_INFO_RECEIVED")
@@ -22,6 +23,7 @@ local Text  = Stat:CreateFontString("DuffedUIStatgarrisonText", "OVERLAY")
 Text:SetFontObject(font)
 D.DataTextPosition(C["datatext"].garrison, Text)
 
+--[[Update for textfield]]--
 local function Update(self, event)
 	if not GarrisonMissionFrame then LoadAddOn("Blizzard_GarrisonUI") end
 	GarrisonMissionList_UpdateMissions()
@@ -40,11 +42,13 @@ local function Update(self, event)
 	self:SetAllPoints(Text)
 end
 
+--[[Ressources]]--
 local function Currency(id, weekly, capped)	
 	local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(id)
 	if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, amount, 1, 1, 1) end
 end
 
+--[[Tooltip]]--
 Stat:SetScript("OnEnter", function(self)
 	if not C["datatext"].ShowInCombat then
 		if InCombatLockdown() then return end
