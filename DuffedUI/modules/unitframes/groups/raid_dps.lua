@@ -163,7 +163,7 @@ oUF:RegisterStyle("DPS", Shared)
 oUF:Factory(function(self)
 	oUF:SetActiveStyle("DPS")
 
-	local raid = self:SpawnHeader("oUF_DPS", nil, "custom", "solo,raid,party", 
+	local raid = self:SpawnHeader("oUF_DPS", nil, "solo,raid,party", 
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute("initial-width"))
