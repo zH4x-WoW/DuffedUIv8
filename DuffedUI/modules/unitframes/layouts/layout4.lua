@@ -584,6 +584,7 @@ local function Shared(self, unit)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
+		health:CreateBackdrop()
 
 		local healthBG = health:CreateTexture(nil, "BORDER")
 		healthBG:SetAllPoints()
@@ -1085,14 +1086,14 @@ target:Size(218, 44)
 
 if C["unitframes"].Enable_ToT then
 	local tot = oUF:Spawn("targettarget", "DuffedUITargetTarget")
-	tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMRIGHT", 0, 0)
-	tot:Size(100, 36)
+	tot:SetPoint("TOPRIGHT", DuffedUITarget, "BOTTOMRIGHT", 0, -5)
+	tot:Size(100, 30)
 end
 
 local pet = oUF:Spawn("pet", "DuffedUIPet")
 pet:SetParent(DuffedUIPetBattleHider)
-pet:SetPoint("TOPLEFT", DuffedUIPlayer, "BOTTOMLEFT", 0, 0)
-pet:Size(100, 36)
+pet:SetPoint("TOPLEFT", DuffedUIPlayer, "BOTTOMLEFT", 0, -5)
+pet:Size(100, 30)
 
 local focus = oUF:Spawn("focus", "DuffedUIFocus")
 focus:SetParent(DuffedUIPetBattleHider)
