@@ -61,7 +61,11 @@ function DuffedUITooltips:SetTooltipDefaultAnchor()
 	local Anchor = DuffedUITooltipAnchor
 
 	self:SetOwner(Anchor)
-	self:SetAnchorType("ANCHOR_TOPRIGHT", 0, 5)
+	if C["tooltip"].anchormouse then
+		self:SetAnchorType("ANCHOR_CURSOR", 0, 5)
+	else
+		self:SetAnchorType("ANCHOR_TOPRIGHT", 0, 5)
+	end
 	if (self:GetOwner() ~= UIParent and InCombatLockdown() and C["tooltip"].hidecombat) then
 		self:Hide()
 		return
