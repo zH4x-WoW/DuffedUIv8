@@ -231,6 +231,7 @@ DuffedUIConfigUILocalization.bagsscale = "Set scale of bag & bank frames"
 DuffedUIConfigUILocalization.bagsspacing = "Set spacing betweens bagslots"
 DuffedUIConfigUILocalization.bagsbuttonsize = " Set slotsize"
 DuffedUIConfigUILocalization.bagsBounce = "Enable Pulse Animation for new items"
+DuffedUIConfigUILocalization.bagsSortBlizzard = "Enable sorting function from Blizzard"
 
 --[[Misc]]--
 DuffedUIConfigUILocalization.misc = "Misc"

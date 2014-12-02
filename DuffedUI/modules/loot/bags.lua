@@ -228,10 +228,14 @@ function CreateContainer(storagetype, ...)
 		Sort:SetFrameStrata(Container:GetFrameStrata())
 		Sort:StripTextures()
 		Sort:SkinButton()
-		Sort:SetScript('OnMouseDown', function(self, button) 
-			if InCombatLockdown() then return end
-			if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
-		end)
+		if C["bags"].SortBlizzard then
+			Sort:SetScript("OnClick", BankFrame_AutoSortButtonOnClick)
+		else
+			Sort:SetScript("OnMouseDown", function(self, button) 
+				if InCombatLockdown() then return end
+				if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
+			end)
+		end
 		Sort:FontString("Text", C["media"].font, 11)
 		Sort.Text:SetPoint("CENTER")
 		Sort.Text:SetText(BAG_FILTER_CLEANUP)
@@ -348,10 +352,14 @@ function CreateContainer(storagetype, ...)
 		SortButton:FontString("Text", C["media"].font, 11)
 		SortButton.Text:SetPoint("CENTER")
 		SortButton.Text:SetText(BAG_FILTER_CLEANUP)
-		SortButton:SetScript('OnMouseDown', function(self, button) 
-			if InCombatLockdown() then return end
-			if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
-		end)
+		if C["bags"].SortBlizzard then
+			SortButton:SetScript("OnClick", BankFrame_AutoSortButtonOnClick)
+		else
+			SortButton:SetScript("OnMouseDown", function(self, button) 
+				if InCombatLockdown() then return end
+				if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
+			end)
+		end
 
 		Purchase:ClearAllPoints()
 		Purchase:SetWidth(Container:GetWidth())
