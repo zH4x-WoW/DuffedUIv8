@@ -271,7 +271,7 @@ C["tooltip"] = {
 	["ilvl"] = true,
 	["ids"] = true,
 	["enablecaster"] = true,
-	["enablecursoranchor"] = false,
+	["Mouse"] = false,
 }
 
 C["merchant"] = {
