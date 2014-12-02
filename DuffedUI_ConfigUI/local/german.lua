@@ -272,7 +272,7 @@
 	DuffedUIConfigUILocalization.tooltipids = "Zeige die Zauber- und Gegenstands-ID im Tooltip"
 	DuffedUIConfigUILocalization.tooltipilvl = "Aktiviere die Gegenstandslevelanzeige im Tooltip"
 	DuffedUIConfigUILocalization.tooltipenablecaster = "Zeige den Namen des Zaubernden, für Stärkungs- und Schwächungszauber, im Tooltip"
-	DuffedUIConfigUILocalization.tooltipMouse = "Toolip follows the mouse cursor"
+	DuffedUIConfigUILocalization.tooltipMouse = "Aktiviere Tooltip am Mauszeiger"
 
 	--[[Merchant]]--
 	DuffedUIConfigUILocalization.merchant = "H ändler"
