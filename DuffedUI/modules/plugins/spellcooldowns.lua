@@ -300,6 +300,8 @@ spellCooldowns = {
 		114842, -- Shadow Walk
 		114018, -- Shroud of Concealment
 		121471, -- Shadow Blades
+		137619, -- Marked for Death
+		152150, -- Death from Above
 	},
 	["SHAMAN"] = {
 		421,    -- Chain Lightning

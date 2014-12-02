@@ -233,21 +233,26 @@ local CLASS_FILTERS = {
 	},
 	HUNTER = { 
 		target = { 
-			CreateSpellEntry(118253), -- Serpent Sting
-			CreateSpellEntry(63468), -- Piercing Shots
-			CreateSpellEntry(3674), -- Black Arrow
-			CreateSpellEntry(82654), -- Widow Venom
-			CreateSpellEntry(34490), -- Silencing Shot
-			CreateSpellEntry(19503), -- Scatter Shot
 			CreateSpellEntry(1130, true), -- Hunters mark
+			CreateSpellEntry(3674), -- Black Arrow
 			CreateSpellEntry(5116), -- Concussive Shot
+			CreateSpellEntry(19503), -- Scatter Shot
+			CreateSpellEntry(34490), -- Silencing Shot
 			CreateSpellEntry(53301), -- Explosive Shot
+			CreateSpellEntry(63468), -- Piercing Shots
+			CreateSpellEntry(82654), -- Widow Venom
+			CreateSpellEntry(118253), -- Serpent Sting
+			CreateSpellEntry(131894), -- A Murder of Crows
 		},
 		player = {
 			CreateSpellEntry(3045), -- Rapid Fire
 			CreateSpellEntry(34471), -- The beast within
-			CreateSpellEntry(53434), -- Call of the wild
 			CreateSpellEntry(34720), -- Thrill of the Hunt
+			CreateSpellEntry(51753), -- Camouflage
+			CreateSpellEntry(53434), -- Call of the wild
+			CreateSpellEntry(148469), -- Deterrence
+			CreateSpellEntry(168811), -- Sniper Training
+			CreateSpellEntry(172106), -- Aspect of the Fox
 		},
 		procs = {
 			CreateSpellEntry(56453), -- Lock and Load
@@ -408,36 +413,40 @@ local CLASS_FILTERS = {
 	},
 	ROGUE = { 
 		target = { 
-			CreateSpellEntry(1833), -- Cheap Shot
 			CreateSpellEntry(408), -- Kidney Shot
+			CreateSpellEntry(703), -- Garrote
 			CreateSpellEntry(1776), -- Gouge
+			CreateSpellEntry(1833), -- Cheap Shot
+			CreateSpellEntry(1943), -- Rupture
 			CreateSpellEntry(2094), -- Blind
 			CreateSpellEntry(2818), -- Deadly Poison
 			CreateSpellEntry(3409),  -- Crippling Poison 
 			CreateSpellEntry(5760), -- Mind-Numbing Poison
 			CreateSpellEntry(6770), -- Sap
-			CreateSpellEntry(1943), -- Rupture
-			CreateSpellEntry(703), -- Garrote
+			CreateSpellEntry(16511), -- Hemorrhage
 			CreateSpellEntry(79140), -- vendetta
-			CreateSpellEntry(89775), -- Hemorrhage
 			CreateSpellEntry(84617), -- Revealing Strike
+			CreateSpellEntry(89775), -- Hemorrhage
 			CreateSpellEntry(91021), -- Find Weakness
+			CreateSpellEntry(122233), -- Crimson Tempest
 		},
 		player = {
-			CreateSpellEntry(32645), -- Envenom
-			CreateSpellEntry(2983), -- Sprint
-			CreateSpellEntry(5277), -- Evasion
 			CreateSpellEntry(1776), -- Gouge
-			CreateSpellEntry(51713), -- Shadow Dance
 			CreateSpellEntry(1966), -- Feint
-			CreateSpellEntry(73651), -- Recuperate
+			CreateSpellEntry(2983), -- Sprint
 			CreateSpellEntry(5171), -- Slice and Dice
+			CreateSpellEntry(5277), -- Evasion
+			CreateSpellEntry(13750), -- Adrenaline Rush
+			CreateSpellEntry(31665), -- Master of Subtlety
+			CreateSpellEntry(32645), -- Envenom
+			CreateSpellEntry(51713), -- Shadow Dance
+			CreateSpellEntry(73651), -- Recuperate
+			CreateSpellEntry(74001), -- Combat Readiness
 			CreateSpellEntry(84745), -- Shallow Insight 
 			CreateSpellEntry(84746), -- Moderate Insight 
 			CreateSpellEntry(84747), -- Deep Insight 
-			CreateSpellEntry(121471), -- Shadow Blades
-			CreateSpellEntry(74001), -- Combat Readiness
 			CreateSpellEntry(115189), -- Anticipation
+			CreateSpellEntry(121471), -- Shadow Blades
 		},
 		procs = {
 			CreateSpellEntry(13877), -- Blade Flurry
