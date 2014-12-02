@@ -272,6 +272,7 @@
 	DuffedUIConfigUILocalization.tooltipids = "Show spell / item-id on tooltip"
 	DuffedUIConfigUILocalization.tooltipilvl = "Enable Itemleveldisplay on tooltip"
 	DuffedUIConfigUILocalization.tooltipenablecaster = "Enable Castername for buffs / debuffs on tooltip"
+	DuffedUIConfigUILocalization.tooltipenablecursoranchor = "Toolip follows the mouse cursor"
 
 	--[[Merchant]]--
 	DuffedUIConfigUILocalization.merchant = "Merchant"
