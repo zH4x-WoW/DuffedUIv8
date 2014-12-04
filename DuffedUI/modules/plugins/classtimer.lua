@@ -251,6 +251,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(51753), -- Camouflage
 			CreateSpellEntry(53434), -- Call of the wild
 			CreateSpellEntry(148469), -- Deterrence
+			CreateSpellEntry(155228), -- Lone Wolf
 			CreateSpellEntry(168811), -- Sniper Training
 			CreateSpellEntry(172106), -- Aspect of the Fox
 		},
