@@ -215,8 +215,9 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(124974), -- Nature's Vigil
 			CreateSpellEntry(127538), -- Savage Roar
 			CreateSpellEntry(132402, true), -- Savage Defense
-			CreateSpellEntry(145152), -- Dream of Cenarius / Bloodtalons
+			CreateSpellEntry(145152), CreateSpellEntry(145162), -- Dream of Cenarius / Bloodtalons
 			CreateSpellEntry(155777), -- Germination
+			CreateSpellEntry(158792), -- Pulverize
 			CreateSpellEntry(162359), -- Genesis
 		},
 		procs = {
@@ -360,6 +361,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(1022), -- Hand of Protection
 			CreateSpellEntry(1038), -- Hand of Salvation
 			CreateSpellEntry(53563), -- Beacon of Light
+			CreateSpellEntry(156910), -- Beacon of Faith
 			CreateSpellEntry(31821), -- Aura Mastery
 			CreateSpellEntry(54428), -- Divine Plea
 			CreateSpellEntry(31482), -- Divine Favor
