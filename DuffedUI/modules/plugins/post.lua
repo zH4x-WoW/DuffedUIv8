@@ -2,7 +2,17 @@ local D, C, L = unpack(select(2, ...))
 
 local UniqueCache = {}
 local Postmaster = {
+	-- Lost item guy
+	["Thaumaturge Vashreen"] = true,
+
+	-- The Postmaster
 	["The Postmaster"] = true,
+	["Der Postmeister"] = true,
+	["El Jefe de correos"] = true,
+	["Le maître de poste"] = true,
+	["Il Postino"] = true,
+	["O Chefe do Correio"] = true,
+	["Почтальон"] = true,
 }
 
 local ITEM_UNIQUE_MULTIPLE, ITEM_UNIQUE = ITEM_UNIQUE_MULTIPLE:gsub("%(%%d%)", "%%((%d+)%%)"), ITEM_UNIQUE
@@ -50,10 +60,13 @@ local function HasSpaceFor(itemLink, itemCount)
 	return false
 end
 
+local f = CreateFrame("Frame")
+f:Hide()
+
 local timesince = 0
-InboxFrame:HookScript("OnUpdate", function(self, elapsed)
+f:SetScript("OnUpdate", function(self, elapsed)
 	timesince = timesince + elapsed
-	if timesince >= 1 then
+	if timesince >= .1 then
 		for i = GetInboxNumItems(), 1, -1 do
 			local packageIcon, stationeryIcon, sender, subject, money, CODAmount, daysLeft, hasItem, wasRead, wasReturned, textCreated, canReply, isGM = GetInboxHeaderInfo(i)
 			if Postmaster[sender] then
@@ -73,3 +86,7 @@ InboxFrame:HookScript("OnUpdate", function(self, elapsed)
 		timesince = 0
 	end
 end)
+
+f:SetScript("OnEvent", function(self, event, ...) self:SetShown(event == "MAIL_SHOW") end)
+f:RegisterEvent("MAIL_SHOW")
+f:RegisterEvent("MAIL_CLOSED")
