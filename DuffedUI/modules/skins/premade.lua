@@ -1,14 +1,15 @@
 local D, C, L = unpack(select(2, ...))
+if IsAddOnLoaded("AddOnSkins") then return end
 
 local function LoadPremadeSkin()
-	-- global
+	--[[Global]]--
 	LFGListFrame.CategorySelection.Inset:StripTextures()
 	LFGListFrame.CategorySelection.StartGroupButton:StripTextures()
 	LFGListFrame.CategorySelection.StartGroupButton:SkinButton()
 	LFGListFrame.CategorySelection.FindGroupButton:StripTextures()
 	LFGListFrame.CategorySelection.FindGroupButton:SkinButton()
 
-	-- create
+	--[[Create Groups]]--
 	LFGListFrame.EntryCreation.Inset:StripTextures()
 	LFGListEntryCreationCategoryDropDown:SkinDropDownBoxLong()
 	LFGListEntryCreationGroupDropDown:SkinDropDownBox()
@@ -38,7 +39,7 @@ local function LoadPremadeSkin()
 	LFGListEntryCreationSearchScrollFrame:StripTextures()
 	LFGListEntryCreationSearchScrollFrameScrollBar:SkinScrollBar()
 
-	-- search
+	--[[Search Groups]]--
 	LFGListFrame.SearchPanel.ResultsInset:StripTextures()
 	LFGListFrame.SearchPanel.ResultsInset:SetTemplate()
 	LFGListFrame.SearchPanel.RefreshButton:SkinButton()
