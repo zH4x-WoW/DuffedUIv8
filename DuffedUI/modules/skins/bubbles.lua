@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if (IsAddOnLoaded("BossEncounter2")) then return end --> i don't know wtf this addon is doing but it broke my bubble script.
+if (IsAddOnLoaded("BossEncounter2")) or IsAddOnLoaded("AddOnSkins") then return end
 
 local chatbubblehook = CreateFrame("Frame", nil, UIParent)
 local noscalemult = D.mult * C["general"].uiscale

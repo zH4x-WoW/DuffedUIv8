@@ -1,4 +1,6 @@
 local D, C, L = unpack(select(2, ...))
+if IsAddOnLoaded("AddOnSkins") then return end
+
 local function LoadSkin()
 	local StripAllTextures = {
 		"SpellBookFrame",
@@ -13,13 +15,8 @@ local function LoadSkin()
 		"SpellBookPage2"
 	}
 
-	for _, object in pairs(StripAllTextures) do
-		_G[object]:StripTextures()
-	end
-
-	for _, texture in pairs(KillTextures) do
-		_G[texture]:Kill()
-	end
+	for _, object in pairs(StripAllTextures) do _G[object]:StripTextures() end
+	for _, texture in pairs(KillTextures) do _G[texture]:Kill() end
 
 	SpellBookPrevPageButton:SkinNextPrevButton()
 	SpellBookNextPageButton:SkinNextPrevButton()

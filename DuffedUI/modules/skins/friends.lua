@@ -1,4 +1,5 @@
 local D, C, L = unpack(select(2, ...))
+if IsAddOnLoaded("AddOnSkins") then return end
 
 local function LoadSkin()
 	local tabs = {
@@ -9,7 +10,7 @@ local function LoadSkin()
 		"Middle",
 		"Right",
 	}
-	
+
 	local function SkinSocialHeaderTab(tab)
 		if not tab then return end
 		for _, object in pairs(tabs) do
@@ -23,7 +24,7 @@ local function LoadSkin()
 		tab.backdrop:Point("TOPLEFT", 3, -8)
 		tab.backdrop:Point("BOTTOMRIGHT", -6, 0)
 	end
-		
+
 	local StripAllTextures = {
 		"FriendsListFrame",
 		"FriendsTabHeader",
@@ -53,7 +54,7 @@ local function LoadSkin()
 		"WhoFrameEditBoxInset",
 		"IgnoreListFrame",
 		"PendingListFrame",
-	}			
+	}
 
 	local KillTextures = {
 		"FriendsFrameInset",
@@ -69,8 +70,8 @@ local function LoadSkin()
 		"ChannelFrameDaughterFrameChannelNameRight",
 		"ChannelFrameDaughterFrameChannelNameMiddle",
 		"ChannelFrameDaughterFrameChannelPasswordLeft",
-		"ChannelFrameDaughterFrameChannelPasswordRight",				
-		"ChannelFrameDaughterFrameChannelPasswordMiddle",			
+		"ChannelFrameDaughterFrameChannelPasswordRight",
+		"ChannelFrameDaughterFrameChannelPasswordMiddle",
 	}
 
 	local buttons = {
@@ -97,16 +98,16 @@ local function LoadSkin()
 		"AddFriendInfoFrameContinueButton",
 		"FriendsFriendsSendRequestButton",
 		"FriendsFriendsCloseButton",
-	}			
+	}
 
-	for _, button in pairs(buttons) do
-		_G[button]:SkinButton()
-	end
-	--Reposition buttons
+	for _, button in pairs(buttons) do _G[button]:SkinButton() end
+
+	--[[Reposition buttons]]--
 	WhoFrameWhoButton:Point("RIGHT", WhoFrameAddFriendButton, "LEFT", -2, 0)
 	WhoFrameAddFriendButton:Point("RIGHT", WhoFrameGroupInviteButton, "LEFT", -2, 0)
 	WhoFrameGroupInviteButton:Point("BOTTOMRIGHT", WhoFrame, "BOTTOMRIGHT", -44, 82)
-	--Resize Buttons
+
+	--[[Resize Buttons]]--
 	WhoFrameWhoButton:Size(WhoFrameWhoButton:GetWidth() - 4, WhoFrameWhoButton:GetHeight())
 	WhoFrameAddFriendButton:Size(WhoFrameAddFriendButton:GetWidth() - 4, WhoFrameAddFriendButton:GetHeight())
 	WhoFrameGroupInviteButton:Size(WhoFrameGroupInviteButton:GetWidth() - 4, WhoFrameGroupInviteButton:GetHeight())
@@ -119,34 +120,28 @@ local function LoadSkin()
 	FriendsFriendsScrollFrameScrollBar:SkinScrollBar()
 
 	for _, texture in pairs(KillTextures) do
-		if _G[texture] then
-			_G[texture]:Kill()
-		end
+		if _G[texture] then _G[texture]:Kill() end
 	end
 
 	for _, object in pairs(StripAllTextures) do
-		if _G[object] then
-			_G[object]:StripTextures()
-		end
+		if _G[object] then _G[object]:StripTextures() end
 	end
 	FriendsFrame:StripTextures()
 	FriendsFrameIcon:SetAlpha(0)
 
 	AddFriendNameEditBox:SkinEditBox()
-	AddFriendFrame:SetTemplate("Transparent")			
+	AddFriendFrame:SetTemplate("Transparent")
 
-	--Who Frame
-	local function UpdateWhoSkins()
-		WhoListScrollFrame:StripTextures()
-	end
-	--Channel Frame
-	local function UpdateChannel()
-		ChannelRosterScrollFrame:StripTextures()
-	end
-	--BNet Frame
+	--[[Who Frame]]--
+	local function UpdateWhoSkins() WhoListScrollFrame:StripTextures() end
+
+	--[[Channel Frame]]--
+	local function UpdateChannel() ChannelRosterScrollFrame:StripTextures() end
+
+	--[[BNet Frame]]--
 	FriendsFrameBroadcastInput:CreateBackdrop("Default")
 	ChannelFrameDaughterFrameChannelName:CreateBackdrop("Default")
-	ChannelFrameDaughterFrameChannelPassword:CreateBackdrop("Default")			
+	ChannelFrameDaughterFrameChannelPassword:CreateBackdrop("Default")
 
 	ChannelFrame:HookScript("OnShow", UpdateChannel)
 	hooksecurefunc("FriendsFrame_OnEvent", UpdateChannel)
@@ -155,11 +150,11 @@ local function LoadSkin()
 	hooksecurefunc("FriendsFrame_OnEvent", UpdateWhoSkins)
 
 	ChannelFrameDaughterFrame:CreateBackdrop("Default")
-	
+
 	ChannelFrameDaughterFrameDetailCloseButton:SkinCloseButton(ChannelFrameDaughterFrame)
 	FriendsFrameCloseButton:SkinCloseButton(FriendsFrame.backdrop)
 	FriendsFrameCloseButton:ClearAllPoints()
-	FriendsFrameCloseButton:SetPoint("TOPRIGHT", 0, 0)	
+	FriendsFrameCloseButton:SetPoint("TOPRIGHT", 0, 0)
 	WhoFrameDropDown:SkinDropDownBox(150)
 	FriendsFrameStatusDropDown:SkinDropDownBox(70)
 	FriendsTabHeaderSoRButton:SkinButton()
@@ -186,21 +181,17 @@ local function LoadSkin()
 	RecruitAFriendFrameSendButton:SkinButton()
 
 	--Bottom Tabs
-	for i=1, 4 do
-		_G["FriendsFrameTab"..i]:SkinTab()
-	end
+	for i = 1, 4 do _G["FriendsFrameTab"..i]:SkinTab() end
 
-	for i=1, 3 do
-		SkinSocialHeaderTab(_G["FriendsTabHeaderTab"..i])
-	end
+	for i = 1, 3 do SkinSocialHeaderTab(_G["FriendsTabHeaderTab"..i]) end
 
 	local function Channel()
-		for i=1, MAX_DISPLAY_CHANNEL_BUTTONS do
+		for i = 1, MAX_DISPLAY_CHANNEL_BUTTONS do
 			local button = _G["ChannelButton"..i]
 			if button then
 				button:StripTextures()
 				button:SetHighlightTexture("Interface\\PaperDollInfoFrame\\UI-Character-Tab-Highlight")
-				
+
 				_G["ChannelButton"..i.."Text"]:SetFont(C["media"].font, 11)
 			end
 		end
@@ -240,18 +231,15 @@ local function LoadSkin()
 	FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.UpdateButton:SkinButton()
 	BattleTagInviteFrame:StripTextures()
 	BattleTagInviteFrame:SetTemplate()
-	for i=1, BattleTagInviteFrame:GetNumChildren() do
+	for i = 1, BattleTagInviteFrame:GetNumChildren() do
 		local child = select(i, BattleTagInviteFrame:GetChildren())
-		if child:GetObjectType() == "Button" then
-			child:SkinButton()
-		end
+		if child:GetObjectType() == "Button" then child:SkinButton() end
 	end
-	
 	FriendsFrameIgnoreScrollFrameScrollBar:SkinScrollBar()
 	FriendsFrameIgnoreScrollFrame:SetHeight(294)
 	FriendsFrameIgnoreScrollFrameScrollBar:SetPoint("TOPLEFT", FriendsFrameIgnoreScrollFrame, "TOPRIGHT", 42, -10)
 	
-	-- bn report
+	--[[bn report]]--
 	BNetReportFrame:StripTextures()
 	BNetReportFrame:SetTemplate()
 	BNetReportFrameCommentScrollFrameScrollBar:SkinScrollBar()
@@ -259,7 +247,7 @@ local function LoadSkin()
 	BNetReportFrameComment:SetTemplate()
 	BNetReportFrameReportButton:SkinButton()
 	BNetReportFrameCancelButton:SkinButton()
-	
+
 	FriendsFrame:SetTemplate("Transparent")
 end
 

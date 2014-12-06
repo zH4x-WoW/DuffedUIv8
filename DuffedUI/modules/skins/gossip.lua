@@ -1,26 +1,20 @@
 local D, C, L = unpack(select(2, ...))
+if IsAddOnLoaded("AddOnSkins") then return end
 
 local function LoadSkin()
 	local StripAllTextures = {
 		"GossipFrameGreetingPanel",
 	}
-
-	for _, object in pairs(StripAllTextures) do
-		_G[object]:StripTextures()
-	end
+	for _, object in pairs(StripAllTextures) do _G[object]:StripTextures() end
 
 	local KillTextures = {
 		"GossipFramePortrait",
 	}
-
-	for _, texture in pairs(KillTextures) do
-		_G[texture]:Kill()
-	end
+	for _, texture in pairs(KillTextures) do _G[texture]:Kill() end
 
 	local buttons = {
 		"GossipFrameGreetingGoodbyeButton",
 	}
-
 	for i = 1, #buttons do
 		_G[buttons[i]]:StripTextures()
 		_G[buttons[i]]:SkinButton()
@@ -39,11 +33,11 @@ local function LoadSkin()
 	GossipGreetingScrollFrameScrollBar:SkinScrollBar()
 	GossipGreetingScrollFrame:StripTextures()
 
-	--Extreme hackage, blizzard makes button text on quest frame use hex color codes for some reason
+	--[[Extreme hackage, blizzard makes button text on quest frame use hex color codes for some reason]]--
 	hooksecurefunc("GossipFrameUpdate", function()
-		for i=1, NUMGOSSIPBUTTONS do
+		for i = 1, NUMGOSSIPBUTTONS do
 			local button = _G["GossipTitleButton"..i]
-			
+
 			if button:GetFontString() then
 				if button:GetFontString():GetText() and button:GetFontString():GetText():find("|cff000000") then
 					button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), "|cff000000", "|cffFFFF00"))

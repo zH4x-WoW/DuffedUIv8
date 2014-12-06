@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if C["bags"].enable then return end	
+if C["bags"].enable or IsAddOnLoaded("AddOnSkins") then return end
 
 local function LoadSkin()
 	local QUEST_ITEM_STRING = select(10, GetAuctionItemClasses())
