@@ -58,7 +58,7 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
 
-	GameTooltip:AddLine(Stat.Color1 .. GARRISON_LANDING_PAGE_TITLE .. ":")
+	GameTooltip:AddLine(Stat.Color1 .. GARRISON_LANDING_PAGE_TITLE)
 	GameTooltip:AddLine(" ")
 
 	GameTooltip:AddDoubleLine("Active " .. GARRISON_MISSIONS)
