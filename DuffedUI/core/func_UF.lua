@@ -645,6 +645,7 @@ D.createAuraWatch = function(self, unit)
 	self.AuraWatch = auras
 end
 
+--[[Raidbuffs & -debuffs]]--
 if C["raid"].raidunitdebuffwatch == true then
 	do
 		D.buffids = {
@@ -701,164 +702,7 @@ if C["raid"].raidunitdebuffwatch == true then
 			return name	
 		end
 
-		-- Raid Debuffs
 		D.debuffids = {
-			-- MoP-Debuffs
-			-- Mogu'shan Vaults
-			-- The Stone Guard
-			SpellName(116281), -- Cobalt Mine Blast
-			-- Feng the Accursed
-			SpellName(116784), -- Wildfire Spark
-			SpellName(116417), -- Arcane Resonance
-			SpellName(116942), -- Flaming Spear
-			-- Gara'jal the Spiritbinder
-			SpellName(116161), -- Crossed Over
-			SpellName(122151), -- Voodoo Dolls
-			-- The Spirit Kings
-			SpellName(117708), -- Maddening Shout
-			SpellName(118303), -- Fixate
-			SpellName(118048), -- Pillaged
-			SpellName(118135), -- Pinned Down
-			-- Elegon
-			SpellName(117878), -- Overcharged
-			SpellName(117949), -- Closed Circuit
-			-- Will of the Emperor
-			SpellName(116835), -- Devastating Arc
-			SpellName(116778), -- Focused Defense
-			SpellName(116525), -- Focused Assault
-			-- Heart of Fear
-			-- Imperial Vizier Zor'lok
-			SpellName(122761), -- Exhale
-			SpellName(122760), -- Exhale
-			SpellName(122740), -- Convert
-			SpellName(123812), -- Pheromones of Zeal
-			-- Blade Lord Ta'yak
-			SpellName(123180), -- Wind Step
-			SpellName(123474), -- Overwhelming Assault
-			-- Garalon
-			SpellName(122835), -- Pheromones
-			SpellName(123081), -- Pungency
-			-- Wind Lord Mel'jarak
-			SpellName(122125), -- Corrosive Resin Pool
-			SpellName(121885), -- Amber Prison
-			-- Amber-Shaper Un'sok
-			SpellName(121949), -- Parasitic Growth
-			-- Terrace of Endless Spring
-			-- Protectors of the Endless
-			SpellName(117436), -- Lightning Prison
-			SpellName(118091), -- Defiled Ground
-			SpellName(117519), -- Touch of Sha
-			-- Tsulong
-			SpellName(122752), -- Shadow Breath
-			SpellName(123011), -- Terrorize
-			SpellName(116161), -- Crossed Over
-			-- Lei Shi
-			SpellName(123121), -- Spray
-			-- Sha of Fear
-			SpellName(119985), -- Dread Spray
-			SpellName(119086), -- Penetrating Bolt
-			SpellName(119775), -- Reaching Attack
-			-- Throne of Thunder
-			--Trash
-			SpellName(138349), -- Static Wound
-			SpellName(137371), -- Thundering Throw
-			--Horridon
-			SpellName(136767), --Triple Puncture
-			--Council of Elders
-			SpellName(137641), --Soul Fragment
-			SpellName(137359), --Shadowed Loa Spirit Fixate
-			SpellName(137972), --Twisted Fate
-			--Tortos
-			SpellName(136753), --Slashing Talons
-			SpellName(137633), --Crystal Shell
-			--Megaera
-			SpellName(137731), --Ignite Flesh
-			--Ji-Kun
-			SpellName(138309), --Slimed
-			--Durumu the Forgotten
-			SpellName(133767), --Serious Wound
-			SpellName(133768), --Arterial Cut
-			--Primordius
-			SpellName(136050), --Malformed Blood
-			--Dark Animus
-			SpellName(138569), --Explosive Slam
-			--Iron Qon
-			SpellName(134691), --Impale
-			--Twin Consorts
-			SpellName(137440), --Icy Shadows
-			SpellName(137408), --Fan of Flames
-			SpellName(137360), --Corrupted Healing
-			--Lei Shen
-			SpellName(135000), --Decapitate
-			-- Siege of Orgrimmar
-			-- Immerseus
-			SpellName(143436), -- Corrosive Blast
-			SpellName(143459), -- Sha Residue
-			SpellName(143579), -- Sha Corruption(Heroic)
-			-- The Fallen Protectors
-			SpellName(143198), -- Garrote
-			SpellName(143434), -- Shadow Word: Bane
-			SpellName(147383), -- Debilitation
-			-- Norushen
-			SpellName(146124), -- Self Doubt
-			SpellName(144851), -- Test of Confidence
-			SpellName(144514), -- Lingering Corruption
-			-- Sha of Pride
-			SpellName(144774), -- Reaching Attacks
-			SpellName(144358), -- Wounded Pride
-			SpellName(144351), -- Mark of Arrogance
-			SpellName(146594), -- Gift of the Titans
-			SpellName(147207), -- Weakened Resolve
-			-- Galakras
-			SpellName(146765), -- Flame Arrows
-			SpellName(146902), -- Poison-Tipped Blades
-			-- Iron Juggernaut
-			SpellName(144467), -- Ignite Armor
-			SpellName(144459), -- Laser Burn
-			SpellName(144918), -- Cutter Laser
-			-- Kor'kron Dark Shaman
-			SpellName(143990), -- Foul Geyser
-			SpellName(144107), -- Toxicity
-			SpellName(144215), -- Froststorm Strike
-			SpellName(144089), -- Toxic Mist
-			SpellName(144330), -- Iron Prison
-			-- General Nazgrim
-			SpellName(143494), -- Sundering Blow
-			SpellName(143638), -- Bonecracker
-			SpellName(143431), -- Magistrike
-			-- Malkorok
-			SpellName(142990), -- Fatal Strike
-			SpellName(142913), -- Displaced Energy
-			SpellName(143919), -- Languish(Heroic)
-			SpellName(142863), -- Weak Ancient Barrier
-			SpellName(142864), -- Ancient Barrier
-			SpellName(142865), -- Strong Ancient Barrier
-			-- Spoils of Pandaria
-			SpellName(146213), -- Keg Toss
-			SpellName(145218), -- Harden Flesh
-			SpellName(146235), -- Breath of Fire
-			-- Thok the Bloodthirsty
-			SpellName(143766), -- Panic
-			SpellName(143780), -- Acid Breath
-			SpellName(143773), -- Freezing Breath
-			SpellName(143800), -- Icy Blood
-			SpellName(143767), -- Scorching Breath
-			SpellName(143791), -- Corrosive Blood
-			SpellName(146589), -- Skeleton Key
-			SpellName(143777), -- Frozen Solid
-			SpellName(133042), -- Fixate
-			-- Siegecrafter Blackfuse
-			SpellName(143385), -- Electrostatic Charge
-			SpellName(144236), -- Pattern Recognition
-			-- Paragons of the Klaxxi
-			SpellName(142929), -- Tenderizing Strikes
-			SpellName(143275), -- Hewn
-			SpellName(143279), -- Genetic Alteration
-			SpellName(143974), -- Shield Bash
-			SpellName(142948), -- Aim
-			-- Garrosh Hellscream
-			SpellName(145183), -- Gripping Despair
-			SpellName(145195), -- Empowered Gripping Despair
 			-- WoD-Debuffs
 			-- Highmaul
 			-- The Butcher
@@ -931,7 +775,7 @@ if C["raid"].raidunitdebuffwatch == true then
 	end
 end
 
-local TestUI = function(msg)
+--[[local TestUI = function(msg)
 	if not DuffedUI[2].unitframes.enable then return end
 	if msg == "" then msg = "all" end
 
@@ -949,4 +793,4 @@ local TestUI = function(msg)
 	if msg == "all" or msg == "pet" or msg == "p" then DuffedUIPet:Show(); DuffedUIPet.Hide = function() end; DuffedUIPet.unit = "player" end
 end
 SlashCmdList.TestUI = TestUI
-SLASH_TestUI1 = "/testui"
+SLASH_TestUI1 = "/testui"]]--
