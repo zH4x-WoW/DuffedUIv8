@@ -12,7 +12,6 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
 
-		-- raid
 		CompactRaidFrameManager:SetParent(DuffedUIUIHider)
 		CompactUnitFrameProfiles:UnregisterAllEvents()
 
