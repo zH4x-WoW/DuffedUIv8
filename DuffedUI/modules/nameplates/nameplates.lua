@@ -725,6 +725,7 @@ local StylePlate = function(self)
 		self.castbar.icon:SetTexCoord(unpack(D.IconCoord))
 		CreateVirtualFrame(self.castbar, self.castbar.icon)
 		self.castbar.shield = old_cbshield
+		self.castbar.shield:Hide()
 	end
 
 	if self.castbar.name == nil then
