@@ -545,6 +545,23 @@ D.UpdateThreat = function(self, event, unit)
 	end 
 end
 
+--[[Classbar hide function]]--
+D.HideClassbar = function(frame)
+	frame:RegisterEvent("PLAYER_REGEN_DISABLED")
+	frame:RegisterEvent("PLAYER_REGEN_ENABLED")
+	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+	frame:SetScript("OnEvent", function(self, event)
+		if event == "PLAYER_REGEN_DISABLED" then
+			UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+		elseif event == "PLAYER_REGEN_ENABLED" then
+			UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
+		elseif event == "PLAYER_ENTERING_WORLD" then
+			if not InCombatLockdown() then frame:SetAlpha(0) end
+		end
+	end)
+end
+
+--[[Grid-Display]]--
 D.SetGridGroupRole = function(self, role)
 	local lfdrole = self.LFDRole
 	local role = UnitGroupRolesAssigned(self.unit)
@@ -563,7 +580,6 @@ D.SetGridGroupRole = function(self, role)
 	end
 end
 
--- Grid
 D.countOffsets = {
 	TOPLEFT = {6, 1},
 	TOPRIGHT = {-6, 1},
