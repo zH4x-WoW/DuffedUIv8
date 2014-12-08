@@ -116,10 +116,9 @@ local function Shared(self, unit)
 	end
 
 	local LFDRole = health:CreateTexture(nil, "OVERLAY")
-	LFDRole:Height(6 * D.raidscale)
-	LFDRole:Width(6 * D.raidscale)
-	LFDRole:Point("TOPRIGHT", -2, -2)
-	LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons.blp")
+	LFDRole:Height(15)
+	LFDRole:Width(15)
+	LFDRole:Point("TOPRIGHT", 2, 2)
 	self.LFDRole = LFDRole
 
 	local Resurrect = CreateFrame("Frame", nil, self)

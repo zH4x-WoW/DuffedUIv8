@@ -120,10 +120,9 @@ local function Shared(self, unit)
 	end
 
 	local LFDRole = health:CreateTexture(nil, "OVERLAY")
-	LFDRole:Height(6 * D.raidscale)
-	LFDRole:Width(6 * D.raidscale)
-	LFDRole:Point("TOPLEFT", 2, -2)
-	LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons.blp")
+	LFDRole:Height(15)
+	LFDRole:Width(15)
+	LFDRole:Point("TOPLEFT", -2, 0)
 	self.LFDRole = LFDRole
 
 	local Resurrect = CreateFrame("Frame", nil, self)
@@ -183,7 +182,7 @@ oUF:Factory(function(self)
 		"point", "BOTTOM"
 	)
 	if DuffedUIChatBackgroundLeft then
-		raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 16)
+		raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 22)
 	else
 		raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33)
 	end
