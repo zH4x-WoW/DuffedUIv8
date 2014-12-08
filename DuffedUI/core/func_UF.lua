@@ -61,6 +61,7 @@ UnitPopupMenus["PARTY"] = { "ADD_FRIEND", "ADD_FRIEND_MENU", "MUTE", "UNMUTE", "
 UnitPopupMenus["RAID_PLAYER"] = { "ADD_FRIEND", "ADD_FRIEND_MENU", "MUTE", "UNMUTE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "WHISPER", "INSPECT", "ACHIEVEMENTS", "TRADE", "FOLLOW", "DUEL", "PET_BATTLE_PVP_DUEL", "RAID_TARGET_ICON", "SELECT_ROLE", "RAID_LEADER", "RAID_PROMOTE", "RAID_DEMOTE", "LOOT_PROMOTE", "VOTE_TO_KICK", "RAID_REMOVE", "RAF_SUMMON", "RAF_GRANT_LEVEL", "REPORT_PLAYER", "CANCEL" };
 UnitPopupMenus["RAID"] = { "MUTE", "UNMUTE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "RAID_LEADER", "RAID_PROMOTE", "RAID_MAINTANK", "RAID_MAINASSIST", "LOOT_PROMOTE", "RAID_DEMOTE", "VOTE_TO_KICK", "RAID_REMOVE", "MOVE_PLAYER_FRAME", "MOVE_TARGET_FRAME", "REPORT_PLAYER", "CANCEL" };
 
+--[[Healthupdate for UFs]]--
 D.PostUpdateHealth = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
 		if not UnitIsConnected(unit) then
@@ -117,6 +118,7 @@ D.PostUpdateHealth = function(health, unit, min, max)
 	end
 end
 
+--[[Healthupdate for Raidframes]]--
 D.PostUpdateHealthRaid = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
 		if not UnitIsConnected(unit) then
@@ -158,6 +160,7 @@ D.PostUpdatePetColor = function(health, unit, min, max)
 	end
 end
 
+--[[Powerupdate for UFs]]--
 D.PreUpdatePower = function(power, unit)
 	local pType = select(2, UnitPowerType(unit))
 	local color = D.UnitColor.power[pType]
@@ -196,19 +199,6 @@ D.PostUpdatePower = function(power, unit, min, max)
 	end
 end
 
-function updateAuraTrackerTime(self, elapsed)
-	if (self.active) then
-		self.timeleft = self.timeleft - elapsed
-
-		if (self.timeleft <= 5) then self.text:SetTextColor(1, 0, 0) else self.text:SetTextColor(1, 1, 1) end
-		if (self.timeleft <= 0) then
-			self.icon:SetTexture("")
-			self.text:SetText("")
-		end
-		self.text:SetFormattedText("%.1f", self.timeleft)
-	end
-end
-
 D.PvPUpdate = function(self, elapsed)
 	if (self.elapsed and self.elapsed > .2) then
 		local unit = self.unit
@@ -232,6 +222,7 @@ D.PvPUpdate = function(self, elapsed)
 	end
 end
 
+--[[Timer for Buffs & Debuffs]]--
 D.FormatTime = function(s)
 	local day, hour, minute = 86400, 3600, 60
 	if s >= day then
@@ -244,6 +235,19 @@ D.FormatTime = function(s)
 		return floor(s)
 	end
 	return format("%.1f", s)
+end
+
+function updateAuraTrackerTime(self, elapsed)
+	if (self.active) then
+		self.timeleft = self.timeleft - elapsed
+
+		if (self.timeleft <= 5) then self.text:SetTextColor(1, 0, 0) else self.text:SetTextColor(1, 1, 1) end
+		if (self.timeleft <= 0) then
+			self.icon:SetTexture("")
+			self.text:SetText("")
+		end
+		self.text:SetFormattedText("%.1f", self.timeleft)
+	end
 end
 
 local CreateAuraTimer = function(self, elapsed)
