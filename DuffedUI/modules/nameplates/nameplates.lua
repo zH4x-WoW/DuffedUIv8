@@ -508,7 +508,7 @@ local UpdateThreat = function(self)
 	if self.hasClass or self.isTagged then return end
 
 	--[[Enhanced Threat feature]]--
-	if C["nameplate"].threat and (not arena or bg or ash) then
+	if C["nameplate"].threat then
 		if not self.old_threat:IsShown() then
 			if InCombatLockdown() and self.isFriendly ~= true then
 				if D.Role == "Tank" then
