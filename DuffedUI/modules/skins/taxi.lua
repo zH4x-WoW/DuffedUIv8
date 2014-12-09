@@ -1,4 +1,5 @@
 local D, C, L = unpack(select(2, ...))
+if IsAddOnLoaded("AddOnSkins") then return end
 
 local function LoadSkin()
 	TaxiFrame:StripTextures()
