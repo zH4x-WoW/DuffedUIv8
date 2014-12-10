@@ -94,6 +94,8 @@ C["nameplate"] = {
 	["MaxDebuffs"] = 5,
 	["NonTargetAlpha"] = .2,
 	["PvP"] = true,
+	["BlackBackground"] = false,
+	["PercentInside"] = false,
 }
 
 C["actionbar"] = {

@@ -33,7 +33,7 @@
 	DuffedUIConfigUILocalization.unitframespercent = "Aktiviere eine Prozentanzeige neben Spieler & Ziel"
 	DuffedUIConfigUILocalization.unitframesshowsmooth = "Aktiviere weiche Übergänge bei den Einheitenfenster"
 	DuffedUIConfigUILocalization.unitframesunicolor = "Aktiviere ein einheitliches Farbmotiv (graue Lebensleiste)"
-	DuffedUIConfigUILocalization.unitframeshealthbarcolor = "Setze die Farbe der Heileiste"
+	DuffedUIConfigUILocalization.unitframeshealthbarcolor = "Setze die Farbe der Lebensleiste"
 	DuffedUIConfigUILocalization.unitframesdeficitcolor = "Setze die Farbe bei Lebensverlust"
 	DuffedUIConfigUILocalization.unitframesColorGradient = "Aktiviere Farbverlauf für die Heilleiste"
 	DuffedUIConfigUILocalization.unitframescharportrait = "Aktviere Charakterportraits am Spieler- und Zielframe"
@@ -94,6 +94,8 @@
 	DuffedUIConfigUILocalization.nameplatePercent = "Aktiviere Prozentanzeige an Namensplaketten"
 	DuffedUIConfigUILocalization.nameplateNonTargetAlpha = "Wähle Alphawert für non-Target Namensplaketten"
 	DuffedUIConfigUILocalization.nameplatePvP = "Deaktiviere Alpha für non-Target Namensplaketten im PvP"
+	DuffedUIConfigUILocalization.nameplateBlackBackground = "Aktiviere schwarzen Hintergrund für Namensplaketten wenn das Bedrohungs-Feature aktiv ist"
+	DuffedUIConfigUILocalization.nameplatePercentInside = "Verschiebe die Prozentanzeige in die Lebensleiste"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"

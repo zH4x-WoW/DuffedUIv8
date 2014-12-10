@@ -94,6 +94,8 @@
 	DuffedUIConfigUILocalization.nameplatePercent = "Enable Percent-Display on Nameplates"
 	DuffedUIConfigUILocalization.nameplateNonTargetAlpha = "Set alpha for non target Nameplates"
 	DuffedUIConfigUILocalization.nameplatePvP = "Disable non target alpha for Nameplates for PvP"
+	DuffedUIConfigUILocalization.nameplateBlackBackground = "Enable black background for Nameplates if Threatfeature is enabled"
+	DuffedUIConfigUILocalization.nameplatePercentInside = "Set Percent-Display inside healthbar"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Action Bars"
