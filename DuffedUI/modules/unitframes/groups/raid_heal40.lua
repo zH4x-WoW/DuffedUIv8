@@ -1,6 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 if (C["raid"].enable ~= true or C["raid"].layout == "dps") then return end
 
+--[[oUF]]--
 local ADDON_NAME, ns = ...
 local oUF = oUFDuffedUI or oUF
 assert(oUF, "DuffedUI was unable to locate oUF install.")
@@ -8,6 +9,7 @@ assert(oUF, "DuffedUI was unable to locate oUF install.")
 ns._Objects = {}
 ns._Headers = {}
 
+--[[Locals]]--
 local font = D.Font(C["font"].unitframes)
 local normTex = C["media"].normTex
 local backdrop = {
@@ -21,6 +23,7 @@ local function Shared(self, unit)
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 
+	--[[Health]]--
 	local health = CreateFrame("StatusBar", nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
@@ -43,6 +46,7 @@ local function Shared(self, unit)
 
 	health.PostUpdate = D.PostUpdateHealthRaid
 	health.frequentUpdates = true
+	health.Smooth = true
 
 	if C["unitframes"].unicolor then
 		health.colorDisconnected = false
@@ -61,6 +65,7 @@ local function Shared(self, unit)
 		health.bg:SetTexture(.1, .1, .1)
 	end
 
+	--[[Power]]--
 	local power = CreateFrame("StatusBar", nil, self)
 	if unit:find("partypet") then power:SetHeight(0) else power:SetHeight(3) end
 	power:Point("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -2)
@@ -78,7 +83,9 @@ local function Shared(self, unit)
 	power.bg.multiplier = .3
 
 	power.colorClass = true
+	power.Smooth = true
 
+	--[[Panel]]--
 	local panel = CreateFrame("Frame", nil, self)
 	panel:SetTemplate("Default")
 	panel:Size(1, 1)
@@ -93,6 +100,7 @@ local function Shared(self, unit)
 		self.panel2 = ppanel
 	end
 
+	--[[Elements]]--
 	local name = health:CreateFontString(nil, "OVERLAY")
 	name:SetFontObject(font)
 	if unit:find("partypet") then name:SetPoint("CENTER") else name:Point("CENTER", health, "TOP", 0, -7) end
@@ -159,9 +167,7 @@ local function Shared(self, unit)
 		self.Range = range
 	end
 
-	health.Smooth = true
-	power.Smooth = true
-
+	--[[Healcom]]--
 	if C["unitframes"].healcomm then
 		local mhpb = CreateFrame("StatusBar", nil, self.Health)
 		mhpb:SetOrientation("VERTICAL")
@@ -195,6 +201,7 @@ local function Shared(self, unit)
 		}
 	end
 
+	--[[WeakenedSoul-Bar]]--
 	if D.Class == "PRIEST" and C["unitframes"].weakenedsoulbar then
 		local ws = CreateFrame("StatusBar", self:GetName().."_WeakenedSoul", power)
 		ws:SetAllPoints(power)
@@ -206,6 +213,7 @@ local function Shared(self, unit)
 		self.WeakenedSoul = ws
 	end
 
+	--[[RaidDebuffs]]--
 	if C["raid"].raidunitdebuffwatch == true then
 		D.createAuraWatch(self,unit)
 
@@ -265,7 +273,6 @@ oUF:Factory(function(self)
 		"point", "LEFT",
 		"columnAnchorPoint", "BOTTOM"
 	)
-
 	D.RaidPosition(raid)
 
 	if C["raid"].showraidpets then
@@ -300,3 +307,21 @@ oUF:Factory(function(self)
 		end)
 	end
 end)
+
+--[[Option to hide group 5 - 8]]--
+if C["raid"].MaxGroup then
+	local MaxGroup = CreateFrame("Frame")
+	MaxGroup:RegisterEvent("PLAYER_ENTERING_WORLD")
+	MaxGroup:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+	MaxGroup:SetScript("OnEvent", function(self)
+		local inInstance, instanceType = IsInInstance()
+		local _, _, _, _, maxPlayers, _, _ = GetInstanceInfo()
+		if inInstance and instanceType == "raid" and maxPlayers == 20 then
+			DuffedUIGrid:SetAttribute("groupFilter", "1,2,3,4")
+		elseif inInstance and instanceType == "raid" and maxPlayers == 40 then
+			DuffedUIGrid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
+		else
+			DuffedUIGrid:SetAttribute("groupFilter", "1,2,3,4,5,6")
+		end
+	end)
+end

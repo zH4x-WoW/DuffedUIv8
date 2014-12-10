@@ -9,7 +9,7 @@ assert(oUF, "DuffedUI was unable to locate oUF install.")
 ns._Objects = {}
 ns._Headers = {}
 
---[[locals]]--
+--[[Locals]]--
 local font = D.Font(C["font"].unitframes)
 local texture = C["media"].normTex
 local FrameScale = C["raid"].FrameScaleRaid
@@ -24,7 +24,7 @@ local function Shared(self, unit)
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnEnter)
 
-	--[[health]]--
+	--[[Health]]--
 	local health = CreateFrame("Statusbar", nil, self)
 	health:Point("TOPLEFT", self, "BOTTOMLEFT", 0, 15)
 	health:Point("TOPRIGHT", self, "BOTTOMRIGHT", 0, 15)
@@ -181,9 +181,23 @@ oUF:Factory(function(self)
 		"yOffset", D.Scale(8),
 		"point", "BOTTOM"
 	)
-	if DuffedUIChatBackgroundLeft then
-		raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 22)
-	else
-		raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33)
-	end
+	if DuffedUIChatBackgroundLeft then raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 22) else raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33) end
 end)
+
+--[[Option to hide group 5 - 8]]--
+if C["raid"].MaxGroup then
+	local MaxGroup = CreateFrame("Frame")
+	MaxGroup:RegisterEvent("PLAYER_ENTERING_WORLD")
+	MaxGroup:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+	MaxGroup:SetScript("OnEvent", function(self)
+		local inInstance, instanceType = IsInInstance()
+		local _, _, _, _, maxPlayers, _, _ = GetInstanceInfo()
+		if inInstance and instanceType == "raid" and maxPlayers == 20 then
+			DuffedUIGrid:SetAttribute("groupFilter", "1,2,3,4")
+		elseif inInstance and instanceType == "raid" and maxPlayers == 40 then
+			DuffedUIGrid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
+		else
+			DuffedUIGrid:SetAttribute("groupFilter", "1,2,3,4,5,6")
+		end
+	end)
+end

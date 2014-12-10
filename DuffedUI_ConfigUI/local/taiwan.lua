@@ -138,6 +138,7 @@
 	DuffedUIConfigUILocalization.raidcenter = "Heal-Layout set to center position"
 	DuffedUIConfigUILocalization.raidHidePower = "Disable power bar (DPS-Layout only)"
 	DuffedUIConfigUILocalization.raidNameOutside = "Move player name to outside (DPS-Layout only)"
+	DuffedUIConfigUILocalization.raidMaxGroup = "Enable MaxGroup-display for raidframes"
 
 	--[[DataText]]--
 	DuffedUIConfigUILocalization.datatext = "Data Text"

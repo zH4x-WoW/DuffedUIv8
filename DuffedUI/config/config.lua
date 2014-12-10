@@ -138,6 +138,7 @@ C["raid"] = {
 	["center"] = false,
 	["HidePower"] = false,
 	["NameOutside"] = false,
+	["MaxGroup"] = false,
 }
 
 C["datatext"] = {

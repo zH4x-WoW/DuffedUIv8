@@ -138,6 +138,7 @@
 	DuffedUIConfigUILocalization.raidcenter = "Verschiebe Heal-Layout in die Mitte"
 	DuffedUIConfigUILocalization.raidHidePower = "Deaktiviere Energieleiste (nur DPS-Layout)"
 	DuffedUIConfigUILocalization.raidNameOutside = "Bewege den Spielername nach aussen (nur DPS-Layout)"
+	DuffedUIConfigUILocalization.raidMaxGroup = "Aktiviere MaxGroup-Anzeige für Schlachtzugeinheiten"
 
 	--[[DataText]]--
 	DuffedUIConfigUILocalization.datatext = "Datatext"
