@@ -57,7 +57,6 @@
 	<!-- unitframes -->
 	<Include file="libs\templates\tankassist.xml" />
 	<Script file="modules\unitframes\tags\tags.lua" />
-	<Include file="modules\unitframes\elements\load_elements.xml" />
 	<Script file="modules\unitframes\layouts\layout1.lua" />
 	<Script file="modules\unitframes\layouts\layout2.lua" />
 	<Script file="modules\unitframes\layouts\layout3.lua" />

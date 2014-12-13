@@ -269,87 +269,85 @@ local function Shared(self, unit)
 			end
 
 			if C["unitframes"].classbar then
+				--[[Mover]]--
+				local cba = CreateFrame("Frame", "CBAnchor", UIParent)
+				cba:SetTemplate("Default")
+				cba:Size(250, 15)
+				if C["raid"].center then cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 200) else cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 325) end
+				cba:SetClampedToScreen(true)
+				cba:SetMovable(true)
+				cba:SetBackdropColor(0, 0, 0)
+				cba:SetBackdropBorderColor(1, 0, 0)
+				cba.text = D.SetFontString(cba, C["media"].font, 11)
+				cba.text:SetPoint("CENTER")
+				cba.text:SetText(L["move"]["classbar"])
+				cba:Hide()
+				tinsert(D.AllowFrameMoving, CBAnchor)
+
 				if D.Class == "DEATHKNIGHT" then
-					D.ConstructRessources("Runes", 216, 5)
-					if C["unitframes"].attached then Runes:Point("TOP", health, "BOTTOM", 0, 0) else Runes:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
+					local RuneColors = {
+						{.69, .31, .31}, -- blood
+						{.33, .59, .33}, -- unholy
+						{.31, .45, .63}, -- frost
+						{.84, .75, .65}, -- death
+						{0, .82, 1 }, -- runic power
+					}
+					local Runes = {}
+					local RuneMap = { 1, 2, 3, 4, 5, 6 }
+
+					Runes = CreateFrame("Frame", Runes, UIParent)
+					Runes:SetSize(216, 5)
+					Runes:CreateBackdrop()
+					if C["unitframes"].attached then
+						Runes:Point("TOP", health, "BOTTOM", 0, -5)
+					else
+						Runes:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
+						D.ConstructEnergy("RunicPower", 216, 5)
+					end
+					if not C["unitframes"].attached then Runes:SetParent(DuffedUIPetBattleHider) end
+					if C["unitframes"].oocHide then D.HideClassbar(Runes) end
+
+					for i = 1, 6 do
+						local rune = CreateFrame("StatusBar", "Rune"..i, Runes)
+						rune:SetStatusBarTexture(normTex)
+						rune:SetStatusBarColor(unpack(RuneColors[math.ceil(RuneMap[i] / 2) ]))
+						rune:SetMinMaxValues(0, 10)
+						rune:SetHeight(5)
+
+						if i == 1 then
+							rune:SetWidth(36)
+							rune:SetPoint("LEFT", Runes, "LEFT", 0, 0)
+						else
+							rune:SetWidth(35)
+							rune:SetPoint("LEFT", Runes[i - 1], "RIGHT", 1, 0)
+						end
+
+						tinsert(Runes, rune)
+					end
+
+					local function UpdateRune(id, start, duration, finished)
+						local rune = Runes[id]
+						rune:SetStatusBarColor(unpack(RuneColors[GetRuneType(RuneMap[id])]))
+						rune:SetMinMaxValues(0, duration)
+
+						if finished then rune:SetValue(duration) else rune:SetValue(GetTime() - start) end
+					end
+
+					local OnUpdate = CreateFrame("Frame")
+					OnUpdate.TimeSinceLastUpdate = 0
+					local updateFunc = function(self, elapsed)
+						self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + elapsed
+
+						if self.TimeSinceLastUpdate > 0.07 then
+							for i = 1, 6 do UpdateRune(i, GetRuneCooldown(RuneMap[i])) end
+							self.TimeSinceLastUpdate = 0
+						end
+					end
+					OnUpdate:SetScript("OnUpdate", updateFunc)
 				end
 
 				if D.Class == "DRUID" then
-					local DruidManaUpdate = CreateFrame("Frame")
-					DruidManaUpdate:SetScript("OnUpdate", function() D.UpdateDruidManaText(self) end)
-					local DruidManaText = health:CreateFontString(nil, "OVERLAY")
-					DruidManaText:SetFontObject(font)
-					DruidManaText:Point("LEFT", power.value, "RIGHT", 5, 0)
-					DruidManaText:SetTextColor( 1, .49, .04 )
-					self.DruidManaText = DruidManaText
-
-					D.ConstructRessources("Druid", 216, 5)
-					if C["unitframes"].attached then
-						DruidMana:Point("TOP", health, "BOTTOM", 0, -8)
-						DruidEclipseBar:Point("TOP", health, "BOTTOM", 0, 0)
-						DruidWildMushroom:Point("TOP", health, "BOTTOM", 0, -8)
-						DruidComboPoints:SetPoint("TOP", health, "BOTTOM", 0, 0)
-					else
-						DruidMana:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
-						DruidEclipseBar:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
-						DruidWildMushroom:Point("TOP", CBAnchor, "BOTTOM", 0, -5)
-						DruidComboPoints:SetPoint("BOTTOM", CBAnchor, "TOP", 0, -5)
-					end
-					self.DruidMana = DruidMana
-					self.DruidMana.bg = DruidMana.Background
-					self.EclipseBar = DruidEclipseBar
-					self.WildMushroom = DruidWildMushroom
-					self.ComboPointsBar = DruidComboPoints
-				end
-
-				if D.Class == "MAGE" then
-					D.ConstructRessources("mb", "rp", 216, 5)
-					if C["unitframes"].attached then
-						mb:Point("TOP", health, "BOTTOM", 0, 0)
-						if C["unitframes"].runeofpower then rp:Point("TOP", health, "BOTTOM", 0, -8) end
-					else
-						mb:Point("BOTTOM", CBAnchor, "TOP", 0, -5)
-						if C["unitframes"].runeofpower then rp:Point("TOP", CBAnchor, "BOTTOM", 0, -5) end
-					end
-					self.ArcaneChargeBar = mb
-					self.RunePower = rp
-				end
-
-				if D.Class == "MONK" then
-					D.ConstructRessources("Bar", 216, 5)
-					if C["unitframes"].attached then Bar:Point("TOP", health, "BOTTOM", 0, 0) else Bar:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
-					self.HarmonyBar = Bar
-				end
-
-				if D.Class == "PALADIN" then
-					D.ConstructRessources("bars", 216, 5)
-					if C["unitframes"].attached then bars:Point("TOP", health, "BOTTOM", 0, 0) else bars:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
-					self.HolyPower = bars
-				end
-
-				if D.Class == "PRIEST" then
-					D.ConstructRessources("pb", 216, 5)
-					if C["unitframes"].attached then pb:Point("TOP", health, "BOTTOM", 0, 0) else pb:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
-					self.ShadowOrbsBar = pb
-				end
-
-				if D.Class == "ROGUE" then
-					D.ConstructRessources("ComboPoints", 216, 5)
-					if C["unitframes"].attached then ComboPoints:Point("TOP", health, "BOTTOM", 0, 0) else ComboPoints:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
-					self.ComboPointsBar = ComboPoints
-					self.AnticipationBar = ComboPointsAnticipationBar
-				end
-
-				if D.Class == "SHAMAN" then
-					D.ConstructRessources("TotemBar", 216, 5)
-					if C["unitframes"].attached then TotemBar:Point("TOP", health, "BOTTOM", 0, 0) else TotemBar:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
-					self.TotemBar = TotemBar
-				end
-
-				if D.Class == "WARLOCK" then
-					D.ConstructRessources("wb", 216, 5)
-					if C["unitframes"].attached then wb:Point("TOP", health, "BOTTOM", 0, 0) else wb:Point("BOTTOM", CBAnchor, "TOP", 0, -5) end
-					self.WarlockSpecBars = wb
+				
 				end
 			end
 
@@ -1077,12 +1075,12 @@ oUF:RegisterStyle("DuffedUI", Shared)
 local player = oUF:Spawn("player", "DuffedUIPlayer")
 player:SetParent(DuffedUIPetBattleHider)
 player:Point("BOTTOM", UIParent, "BOTTOM", -340, 225)
-player:Size(218, 44)
+player:Size(216, 44)
 
 local target = oUF:Spawn("target", "DuffedUITarget")
 target:SetParent(DuffedUIPetBattleHider)
 target:Point("BOTTOM", UIParent, "BOTTOM", 340, 225)
-target:Size(218, 44)
+target:Size(216, 44)
 
 if C["unitframes"].Enable_ToT then
 	local tot = oUF:Spawn("targettarget", "DuffedUITargetTarget")
