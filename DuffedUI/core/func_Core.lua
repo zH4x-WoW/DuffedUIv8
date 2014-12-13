@@ -358,7 +358,7 @@ D.CreateBtn = function(name, parent, w, h, tt_txt, txt)
 	b.text = b:CreateFontString(nil, "OVERLAY")
 	b.text:SetFontObject(font)
 	b.text:SetText(D.PanelColor..txt)
-	b.text:SetPoint("CENTER", b, "CENTER", 1, 0)
+	b.text:SetPoint("CENTER", b, "CENTER", 1, -1)
 	b.text:SetJustifyH("CENTER")
 	b:SetAttribute("type1", "macro")
 end
