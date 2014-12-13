@@ -229,7 +229,7 @@ function CreateContainer(storagetype, ...)
 		Sort:StripTextures()
 		Sort:SkinButton()
 		if C["bags"].SortBlizzard then
-			Sort:SetScript("OnClick", BankFrame_AutoSortButtonOnClick)
+			Sort:SetScript("OnClick", SortBags)
 		else
 			Sort:SetScript("OnMouseDown", function(self, button) 
 				if InCombatLockdown() then return end
@@ -353,7 +353,7 @@ function CreateContainer(storagetype, ...)
 		SortButton.Text:SetPoint("CENTER")
 		SortButton.Text:SetText(BAG_FILTER_CLEANUP)
 		if C["bags"].SortBlizzard then
-			SortButton:SetScript("OnClick", BankFrame_AutoSortButtonOnClick)
+			SortButton:SetScript("OnClick", SortBags)
 		else
 			SortButton:SetScript("OnMouseDown", function(self, button) 
 				if InCombatLockdown() then return end

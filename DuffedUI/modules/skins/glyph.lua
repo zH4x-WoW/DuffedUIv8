@@ -12,34 +12,25 @@ local function LoadSkin()
 	GlyphFrameBackground:SetPoint("TOPLEFT", 5, 0)
 	GlyphFrameBackground:SetPoint("BOTTOMRIGHT", -5, 2)
 
-	for i = 1, 6 do
-		_G["GlyphFrameGlyph"..i]:SetFrameLevel(_G["GlyphFrameGlyph"..i]:GetFrameLevel() + 5)
-	end
-
-	for i = 1, 2 do
-		_G["GlyphFrameHeader"..i]:StripTextures()
-	end
+	for i = 1, 6 do _G["GlyphFrameGlyph"..i]:SetFrameLevel(_G["GlyphFrameGlyph"..i]:GetFrameLevel() + 5) end
+	for i = 1, 2 do _G["GlyphFrameHeader"..i]:StripTextures() end
 
 	local function Glyphs(self, first, i)
 		local button = _G["GlyphFrameScrollFrameButton"..i]
 		local icon = _G["GlyphFrameScrollFrameButton"..i.."Icon"]
 
-		if first then
-			button:StripTextures()
-		end
+		if first then button:StripTextures() end
 
 		if icon then
-			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			icon:SetTexCoord(.1, .9, .1, .9)
 			button:SkinButton()
 		end
 	end
 
-	for i = 1, 10 do
-		Glyphs(nil, true, i)
-	end
+	for i = 1, 10 do Glyphs(nil, true, i) end
 
 	GlyphFrameClearInfoFrame:SetTemplate("Default")
-	GlyphFrameClearInfoFrameIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	GlyphFrameClearInfoFrameIcon:SetTexCoord(.1, .9, .1, .9)
 	GlyphFrameClearInfoFrameIcon:Point("TOPLEFT", 2, -2)
 	GlyphFrameClearInfoFrameIcon:Point("BOTTOMRIGHT", -2, 2)
 
@@ -56,9 +47,8 @@ local function LoadSkin()
 		"GlyphFrameScrollFrameScrollChild"
 	}
 
-	for _, object in pairs(StripAllTextures) do
-		_G[object]:StripTextures()
-	end
+	for _, object in pairs(StripAllTextures) do _G[object]:StripTextures() end
+	GlyphFrameScrollFrame:EnableMouseWheel(false)
 end
 
 D.SkinFuncs["Blizzard_GlyphUI"] = LoadSkin
