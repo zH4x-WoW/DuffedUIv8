@@ -565,41 +565,6 @@ D.HideClassbar = function(frame)
 	end)
 end
 
---[[Energybar]]--
-D.ConstructEnergy = function(name, width, height)
-	local Color = RAID_CLASS_COLORS[D.Class]
-	local font, fontflag = C["media"].font, "THINOUTLINE"
-
-	local eb = CreateFrame("StatusBar", name, UIParent)
-	eb:SetPoint("TOP", CBAnchor, "BOTTOM", 0, 5)
-	eb:Size(D.Scale(width), D.Scale(height))
-	eb:SetStatusBarTexture(C["media"].normTex)
-	eb:SetStatusBarColor(Color.r, Color.g, Color.b)
-	eb:SetMinMaxValues(0, 100)
-	eb:CreateBackdrop()
-	eb:SetParent(DuffedUIPetBattleHider)
-
-	eb.text = eb:CreateFontString(nil, "ARTWORK")
-	eb.text:SetFont(font, 16, fontflag)
-	eb.text:SetPoint("LEFT", eb, "RIGHT", 4, 1)
-	eb.text:SetTextColor(Color.r, Color.g, Color.b)
-
-	eb.TimeSinceLastUpdate = 0
-	eb:SetScript("OnUpdate", function(self, elapsed)
-		self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + elapsed 
-
-		if self.TimeSinceLastUpdate > .07 then
-			self:SetMinMaxValues(0, UnitPowerMax("player"))
-			local power = UnitPower("player")
-			self:SetValue(power)
-			if self.text then self.text:SetText(D.ShortValue(power)) end
-			self.TimeSinceLastUpdate = 0
-		end
-	end)
-
-	if C["unitframes"].oocHide then D.HideClassbar(eb) end
-end
-
 --[[Grid-Display]]--
 D.SetGridGroupRole = function(self, role)
 	local lfdrole = self.LFDRole
