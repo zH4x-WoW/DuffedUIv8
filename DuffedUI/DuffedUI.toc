@@ -4,7 +4,7 @@
 ## Title: |cffC41F3BDuffedUI|r
 ## Credits to: humfras aka Shinizu, Hizuro, Azilroka, Caith, Ishtara, Hungtar, Tulla, P3lim, Alza, Roth, Tekkub, Shestak, Caellian, Haleth, Nightcracker, Haste, Hydra, Elv, Tukz, Phanx, Duugu
 ## SavedVariables: DuffedUIData
-## SavedVariablesPerCharacter: DuffedUIDataPerChar, ClickCast, ImprovedCurrency
+## SavedVariablesPerCharacter: DuffedUIDataPerChar, ClickCast, ImprovedCurrency, CurrencyData
 ## OptionalDeps: DuffedUI_ConfigUI
 ## X-oUF: oUFDuffedUI
 ## Website: http://www.duffed.net
