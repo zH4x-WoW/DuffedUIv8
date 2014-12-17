@@ -14,10 +14,10 @@ C["media"] = {
 
 	["tw_font"] = [=[Fonts\bLEI00D.ttf]=],
 	["tw_dmgfont"] = [[Fonts\bLEI00D.ttf]],
-	
+
 	["kr_font"] = [=[Fonts\2002.TTF]=],
 	["kr_dmgfont"] = [[Fonts\2002.TTF]],
-	
+
 	["cn_font"] = [=[Fonts\ARKai_T.TTF]=],
 	["cn_dmgfont"] = [[Fonts\ARKai_C.TTF]],
 
