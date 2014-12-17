@@ -249,7 +249,6 @@ oUF:RegisterStyle("Heal", Shared)
 oUF:Factory(function(self)
 	oUF:SetActiveStyle("Heal")
 
-	local spawnG = "solo,raid,party"
 	local raid = self:SpawnHeader("oUF_Heal", nil, "solo,raid,party",
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
@@ -277,10 +276,10 @@ oUF:Factory(function(self)
 
 	if C["raid"].showraidpets then
 		local pets = {} 
-			pets[1] = oUF:Spawn("partypet1", "oUF_DuffedUIPartyPet1") 
-			pets[1]:Point("BOTTOMLEFT", raid, "TOPLEFT", 0, 8)
-			pets[1]:Size(C["raid"].framewidth * C["raid"].FrameScaleRaid, 18 * C["raid"].FrameScaleRaid)
-		for i =2, 4 do 
+		pets[1] = oUF:Spawn("partypet1", "oUF_DuffedUIPartyPet1") 
+		pets[1]:Point("BOTTOMLEFT", raid, "TOPLEFT", 0, 8)
+		pets[1]:Size(C["raid"].framewidth * C["raid"].FrameScaleRaid, 18 * C["raid"].FrameScaleRaid)
+		for i =2, 5 do 
 			pets[i] = oUF:Spawn("partypet"..i, "oUF_DuffedUIPartyPet"..i) 
 			pets[i]:Point("LEFT", pets[i-1], "RIGHT", 8, 0)
 			pets[i]:Size(C["raid"].framewidth * C["raid"].FrameScaleRaid, 18 * C["raid"].FrameScaleRaid)
@@ -317,11 +316,11 @@ if C["raid"].MaxGroup then
 		local inInstance, instanceType = IsInInstance()
 		local _, _, _, _, maxPlayers, _, _ = GetInstanceInfo()
 		if inInstance and instanceType == "raid" and maxPlayers == 20 then
-			DuffedUIGrid:SetAttribute("groupFilter", "1,2,3,4")
-		elseif inInstance and instanceType == "raid" and maxPlayers == 40 then
-			DuffedUIGrid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
+			oUF_Heal:SetAttribute("groupFilter", "1,2,3,4")
+		elseif inInstance and instanceType == "raid" and maxPlayers == 30 then
+			oUF_Heal:SetAttribute("groupFilter", "1,2,3,4,5,6")
 		else
-			DuffedUIGrid:SetAttribute("groupFilter", "1,2,3,4,5,6")
+			oUF_Heal:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
 		end
 	end)
 end

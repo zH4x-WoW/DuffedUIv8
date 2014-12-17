@@ -93,7 +93,7 @@ C["nameplate"] = {
 	["Percent"] = false,
 	["MaxDebuffs"] = 5,
 	["NonTargetAlpha"] = .2,
-	["PvP"] = true,
+	["PvP"] = false,
 	["BlackBackground"] = false,
 	["PercentInside"] = false,
 }
