@@ -153,6 +153,8 @@ Stat:SetScript("OnEnter", function(self)
 		Currency(754)
 		Currency(677)
 		Currency(676)
+		Currency(828)
+		Currency(944)
 	end
 
 	if cooking and ImprovedCurrency["Cooking"] then
@@ -168,13 +170,7 @@ Stat:SetScript("OnEnter", function(self)
 		Currency(61)
 		Currency(361)
 		Currency(824)
-		Currency(944)
 		Currency(980)
-		--Currency(910)
-		--Currency(1020)
-		--Currency(1008)
-		--Currency(1017)
-		--Currency(999)
 	end
 
 	if ImprovedCurrency["Raid"] then
