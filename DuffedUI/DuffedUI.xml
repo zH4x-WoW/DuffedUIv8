@@ -2,6 +2,7 @@
 	<!-- engine -->
 	<Script file="core\init.lua" />
 	<Script file="core\constants.lua" />
+	<Script file="libs\LibStub.lua" />
 
 	<!-- core -->
 	<Include file="locales\load_locales.xml" />
