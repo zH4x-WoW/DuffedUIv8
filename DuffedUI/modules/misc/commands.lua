@@ -44,8 +44,7 @@ SlashCmdList["GROUPDISBAND"] = function()
 	if instanceType == "pvp" or instanceType == "arena" then return end
 	if UnitIsGroupLeader("player") or UnitIsGroupAssistant("player") then D.ShowPopup("DUFFEDUIDISBAND_RAID") end
 end
-SLASH_GROUPDISBAND1 = "/gd"
-SLASH_GROUPDISBAND2 = "/rd"
+SLASH_GROUPDISBAND1 = "/disband"
 
 --[[Layout-Switch]]--
 local function RaidLayout(cmd)
