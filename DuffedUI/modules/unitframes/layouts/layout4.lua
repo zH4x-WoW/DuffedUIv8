@@ -375,7 +375,7 @@ local function Shared(self, unit)
 
 			buffs:SetHeight(C["unitframes"].buffsize)
 			buffs:SetWidth(218)
-			buffs:SetPoint("BOTTOMLEFT", health, "TOPLEFT", 1, 2)
+			buffs:SetPoint("BOTTOMLEFT", health, "TOPLEFT", -2, 2)
 			buffs.size = C["unitframes"].buffsize
 			buffs.num = 18
 
