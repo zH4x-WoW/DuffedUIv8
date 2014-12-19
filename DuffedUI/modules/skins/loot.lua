@@ -134,10 +134,8 @@ local function LoadSkin()
 
 		for i = 1, LootFrame:GetNumRegions() do
 			local region = select(i, LootFrame:GetRegions())
-			if(region:GetObjectType() == "FontString") then
-				if(region:GetText() == ITEMS) then
-					LootFrame.Title = region
-				end
+			if region:GetObjectType() == "FontString" then
+				if region:GetText() == ITEMS then LootFrame.Title = region end
 			end
 		end
 
@@ -156,25 +154,21 @@ local function LoadSkin()
 
 			local point, attachTo, point2, x, y = button:GetPoint()
 			button:ClearAllPoints()
-			button:SetPoint(point, attachTo, point2, x, y+30)
+			button:SetPoint(point, attachTo, point2, x, y + 30)
 		end
 
 		hooksecurefunc("LootFrame_UpdateButton", function(index)
 			local numLootItems = LootFrame.numLootItems
 			local numLootToShow = LOOTFRAME_NUMBUTTONS
 			local self = LootFrame
-			if( self.AutoLootTable ) then
-				numLootItems = #self.AutoLootTable
-			end
-			if numLootItems > LOOTFRAME_NUMBUTTONS then
-				numLootToShow = numLootToShow - 1
-			end
+			if self.AutoLootTable then numLootItems = #self.AutoLootTable end
+			if numLootItems > LOOTFRAME_NUMBUTTONS then numLootToShow = numLootToShow - 1 end
 
 			local button = _G["LootButton" .. index]
 			local slot = (numLootToShow * (LootFrame.page - 1)) + index
 			if (button and button:IsShown()) then
 				local texture, item, quantity, quality, locked, isQuestItem, questId, isActive
-				if(LootFrame.AutoLootTablLootFramee)then
+				if LootFrame.AutoLootTablLootFramee then
 					local entry = LootFrame.AutoLootTable[slot]
 					if entry.hide then
 						button:Hide()
