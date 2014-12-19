@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-local FrameScale = C["general"].FrameScaleActionBar
+local FrameScale = C["general"]["FrameScaleActionBar"]
 
 local ileft = CreateFrame("Frame", "DuffedUIInfoLeft", UIParent)
 ileft:SetTemplate("Default")
@@ -16,7 +16,7 @@ iright:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 3)
 iright:SetFrameLevel(2)
 iright:SetFrameStrata("BACKGROUND")
 
-if C["chat"].lbackground then
+if C["chat"]["lbackground"] then
 	local chatleftbg = CreateFrame("Frame", "DuffedUIChatBackgroundLeft", DuffedUIInfoLeft)
 	chatleftbg:SetTemplate("Transparent")
 	chatleftbg:Size(D.InfoLeftRightWidth + 12, 149)
@@ -31,7 +31,7 @@ if C["chat"].lbackground then
 	tabsbgleft:SetFrameStrata("BACKGROUND")
 end
 
-if C["chat"].rbackground then
+if C["chat"]["rbackground"] then
 	local chatrightbg = CreateFrame("Frame", "DuffedUIChatBackgroundRight", DuffedUIInfoRight)
 	chatrightbg:SetTemplate("Transparent")
 	chatrightbg:Size(D.InfoLeftRightWidth + 12, 149)
@@ -44,9 +44,13 @@ if C["chat"].rbackground then
 	tabsbgright:Point("TOPLEFT", chatrightbg, "TOPLEFT", 4, -4)
 	tabsbgright:SetFrameLevel(2)
 	tabsbgright:SetFrameStrata("BACKGROUND")
+
+	D.CreateBtn("MB_switch", DuffedUITabsRightBackground, 20, 20, L["buttons"]["ses_switch"], "S")
+	MB_switch:Point("LEFT", DuffedUITabsRightBackground, "RIGHT", 2, 0)
+	MB_switch:SetAttribute("macrotext1", "/switch")
 end
 
-if not C["actionbar"].enable ~= true then
+if C["actionbar"]["enable"] then
 	DuffedUIBar1Mover = CreateFrame("Frame", "DuffedUIBar1Mover", UIParent)
 	DuffedUIBar1Mover:SetTemplate("Transparent")
 	DuffedUIBar1Mover:SetSize((((D.buttonsize * 12) + (D.buttonspacing * 13)) * FrameScale), (((D.buttonsize * 1) + (D.buttonspacing * 2)) * FrameScale))
@@ -80,7 +84,7 @@ if not C["actionbar"].enable ~= true then
 	local DuffedUIBar3 = CreateFrame("Frame", "DuffedUIBar3", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar3:SetTemplate("Transparent")
 	DuffedUIBar3:Point("BOTTOMLEFT", DuffedUIInfoLeft, "BOTTOMRIGHT", 23, 0)
-	if C["actionbar"].Leftsidebarshorizontal then
+	if C["actionbar"]["Leftsidebarshorizontal"] then
 		DuffedUIBar3:SetSize((D.buttonsize * 12) + (D.buttonspacing * 13), (D.buttonsize * 1) + (D.buttonspacing * 2))
 	else
 		DuffedUIBar3:SetSize(((D.buttonsize - 4) * 2) + (D.buttonspacing * 3), ((D.buttonsize - 4) * 6) + (D.buttonspacing * 7))
@@ -94,7 +98,7 @@ if not C["actionbar"].enable ~= true then
 	local DuffedUIBar4 = CreateFrame("Frame", "DuffedUIBar4", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar4:SetTemplate("Transparent")
 	DuffedUIBar4:Point("BOTTOMRIGHT", DuffedUIInfoRight, "BOTTOMLEFT", -23, 0)
-	if C["actionbar"].Rightsidebarshorizontal then
+	if C["actionbar"]["Rightsidebarshorizontal"] then
 		DuffedUIBar4:SetSize((D.buttonsize * 12) + (D.buttonspacing * 13), (D.buttonsize * 1) + (D.buttonspacing * 2))
 	else
 		DuffedUIBar4:SetSize(((D.buttonsize - 4) * 2) + (D.buttonspacing * 3), ((D.buttonsize - 4) * 6) + (D.buttonspacing * 7))
@@ -107,7 +111,7 @@ if not C["actionbar"].enable ~= true then
 
 	local DuffedUIBar5 = CreateFrame("Frame", "DuffedUIBar5", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar5:SetTemplate("Transparent")
-	if C["actionbar"].rightbarvertical then
+	if C["actionbar"]["rightbarvertical"] then
 		DuffedUIBar5:SetSize((((D.buttonsize * 12) + (D.buttonspacing * 13)) * FrameScale), (((D.buttonsize * 1) + (D.buttonspacing * 2)) * FrameScale))
 		DuffedUIBar5:Point("BOTTOM", UIParent, "BOTTOM", 0, 56)
 	else
@@ -122,15 +126,15 @@ if not C["actionbar"].enable ~= true then
 
 	DuffedUIPetBarMover = CreateFrame("Frame", "DuffedUIPetBarMover", UIParent)
 	DuffedUIPetBarMover:SetTemplate("Transparent")
-	if C["actionbar"].petbarhorizontal ~= true and (not C["actionbar"].rightbarvertical) then
+	if C["actionbar"]["petbarhorizontal"] ~= true and (not C["actionbar"]["rightbarvertical"]) then
 		DuffedUIPetBarMover:SetSize(D.petbuttonsize + (D.petbuttonspacing * 2), (D.petbuttonsize * 10) + (D.petbuttonspacing * 11))
 		DuffedUIPetBarMover:SetPoint("RIGHT", DuffedUIBar5, "LEFT", -6, 0)
-	elseif C["actionbar"].rightbarvertical and (not C["actionbar"].petbarhorizontal) then
+	elseif C["actionbar"]["rightbarvertical"] and (not C["actionbar"]["petbarhorizontal"]) then
 		DuffedUIPetBarMover:SetSize(D.petbuttonsize + (D.petbuttonspacing * 2), (D.petbuttonsize * 10) + (D.petbuttonspacing * 11))
 		DuffedUIPetBarMover:SetPoint("RIGHT", UIParent, "RIGHT", -13, -14)
 	else
 		DuffedUIPetBarMover:SetSize((D.petbuttonsize * 10) + (D.petbuttonspacing * 11), D.petbuttonsize + (D.petbuttonspacing * 2))
-		if C["chat"].rbackground then DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 3) else DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 176) end
+		if C["chat"]["rbackground"] then DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 3) else DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 176) end
 	end
 	DuffedUIPetBarMover:SetFrameLevel(6)
 	DuffedUIPetBarMover:SetClampedToScreen(true)
@@ -150,7 +154,7 @@ end
 local chatmenu = CreateFrame("Frame", "DuffedUIChatMenu", UIParent)
 chatmenu:SetTemplate("Default")
 chatmenu:Size(20)
-if C["chat"].lbackground then chatmenu:Point("LEFT", DuffedUITabsLeftBackground, "RIGHT", 2, 0) else chatmenu:Point("TOPRIGHT", ChatFrame1, "TOPRIGHT", -11, 25) end
+if C["chat"]["lbackground"] then chatmenu:Point("LEFT", DuffedUITabsLeftBackground, "RIGHT", 2, 0) else chatmenu:Point("TOPRIGHT", ChatFrame1, "TOPRIGHT", -11, 25) end
 chatmenu:SetFrameLevel(3)
 chatmenu.text = D.SetFontString(chatmenu, C["media"].font, 11, "THINOUTLINE")
 chatmenu.text:SetPoint("CENTER", 1, -1)
@@ -158,17 +162,6 @@ chatmenu.text:SetText(D.PanelColor .. "E")
 chatmenu:SetScript("OnMouseDown", function(self, btn)
 	if btn == "LeftButton" then ToggleFrame(ChatMenu) end
 end)
-
-if C["chat"].rbackground then
-	D.CreateBtn("MB_switch", DuffedUITabsRightBackground, 20, 20, L["buttons"]["ses_switch"], "S")
-	MB_switch:Point("LEFT", DuffedUITabsRightBackground, "RIGHT", 2, 0)
-	MB_switch:SetAttribute("macrotext1", "/switch")
-else
-	D.CreateBtn("MB_switch", DuffedUIChatMenu, 20, 20, L["buttons"]["ses_switch"], "S")
-	MB_switch:Point("RIGHT", DuffedUIChatMenu, "LEFT", -2, 0)
-	MB_switch:SetAttribute("macrotext1", "/switch")
-end
-
 
 if DuffedUIMinimap then
 	local minimapstatsleft = CreateFrame("Frame", "DuffedUIMinimapStatsLeft", DuffedUIMinimap)
@@ -182,7 +175,7 @@ if DuffedUIMinimap then
 	minimapstatsright:Point("TOPRIGHT", DuffedUIMinimap, "BOTTOMRIGHT", 0, -2)
 end
 
-if C["datatext"].battleground == true then
+if C["datatext"]["battleground"] == true then
 	local bgframe = CreateFrame("Frame", "DuffedUIInfoLeftBattleGround", UIParent)
 	bgframe:SetTemplate()
 	bgframe:SetAllPoints(ileft)
