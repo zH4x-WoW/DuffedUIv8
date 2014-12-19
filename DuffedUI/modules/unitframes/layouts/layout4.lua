@@ -139,9 +139,7 @@ local function Shared(self, unit)
 		self.Power = power
 		self.Power.bg = powerBG
 
-		power.PreUpdate = D.PreUpdatePower
 		power.PostUpdate = D.PostUpdatePower
-
 		power.frequentUpdates = true
 		power.colorDisconnected = true
 

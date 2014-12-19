@@ -161,31 +161,25 @@ D.PostUpdatePetColor = function(health, unit, min, max)
 end
 
 --[[Powerupdate for UFs]]--
-D.PreUpdatePower = function(power, unit)
-	local pType = select(2, UnitPowerType(unit))
-	local color = D.UnitColor.power[pType]
-
-	if color then power:SetStatusBarColor(color[1], color[2], color[3]) end
-end
-
 D.PostUpdatePower = function(power, unit, min, max)
-	local self = power:GetParent()
+	local Parent = power:GetParent()
 	local pType, pToken = UnitPowerType(unit)
-	local color = D.UnitColor.power[pToken]
+	local colors = D.UnitColor
+	local color = colors.power[pToken]
 
 	if color then power.value:SetTextColor(color[1], color[2], color[3]) end
-	if not UnitIsPlayer(unit) and not UnitPlayerControlled(unit) or not UnitIsConnected(unit) then
+	if (not UnitIsPlayer(unit) and not UnitPlayerControlled(unit) or not UnitIsConnected(unit)) then
 		power.value:SetText()
-	elseif UnitIsDead(unit) or UnitIsGhost(unit) then
+	elseif (UnitIsDead(unit) or UnitIsGhost(unit)) then
 		power.value:SetText()
 	else
 		if min ~= max then
 			if pType == 0 then
-				if unit == "target" then
+				if (unit == "target" or (unit and strfind(unit, "boss%d"))) then
 					power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), D.ShortValue(max - (max - min)))
-				elseif unit == "player" and self:GetAttribute("normalUnit") == "pet" or unit == "pet" then
+				elseif (unit == "player" and Parent:GetAttribute("normalUnit") == "pet" or unit == "pet") then
 					power.value:SetFormattedText("%d%%", floor(min / max * 100))
-				elseif (unit and unit:find("arena%d")) or unit == "focus" or unit == "focustarget" then
+				elseif (unit and strfind(unit, "arena%d")) or unit == "focus" or unit == "focustarget" then
 					power.value:SetText(D.ShortValue(min))
 				else
 					power.value:SetFormattedText("%d%% |cffD7BEA5-|r %d", floor(min / max * 100), max - (max - min))
@@ -194,31 +188,8 @@ D.PostUpdatePower = function(power, unit, min, max)
 				power.value:SetText(max - (max - min))
 			end
 		else
-			if unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and unit:find("arena%d")) then power.value:SetText(D.ShortValue(min)) else power.value:SetText(min) end
+			if (unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and strfind(unit, "arena%d")) or (unit and strfind(unit, "boss%d"))) then power.value:SetText(D.ShortValue(min)) else power.value:SetText(min) end
 		end
-	end
-end
-
-D.PvPUpdate = function(self, elapsed)
-	if (self.elapsed and self.elapsed > .2) then
-		local unit = self.unit
-		local time = GetPVPTimer()
-
-		local min = format("%01.f", floor((time / 1000) / 60))
-		local sec = format("%02.f", floor((time / 1000) - min * 60))
-		if self.PvP then
-			local factionGroup = UnitFactionGroup(unit)
-			if UnitIsPVPFreeForAll(unit) then
-				if time ~= 301000 and time ~= -1 then self.PvP:SetText(PVP .. " " .. "(" .. min .. ":" .. sec .. ")") else self.PvP:SetText(PVP) end
-			elseif (factionGroup and UnitIsPVP(unit)) then
-				if time ~= 301000 and time ~= -1 then self.PvP:SetText(PVP .. " " .. "(" .. min .. ":" .. sec .. ")") else self.PvP:SetText(PVP) end
-			else
-				self.PvP:SetText("")
-			end
-		end
-		self.elapsed = 0
-	else
-		self.elapsed = (self.elapsed or 0) + elapsed
 	end
 end
 

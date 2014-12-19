@@ -153,9 +153,7 @@ local function Shared(self, unit)
 		self.Power = power
 		self.Power.bg = powerBG
 
-		power.PreUpdate = D.PreUpdatePower
 		power.PostUpdate = D.PostUpdatePower
-
 		power.frequentUpdates = true
 		power.colorDisconnected = true
 
@@ -995,7 +993,6 @@ local function Shared(self, unit)
 		power.value = power:CreateFontString(nil, "OVERLAY")
 		power.value:SetFontObject(font)
 		power.value:Point("RIGHT", health, -2, 0.5)
-		power.PreUpdate = D.PreUpdatePower
 		power.PostUpdate = D.PostUpdatePower
 
 		self.Power = power
