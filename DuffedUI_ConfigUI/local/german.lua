@@ -141,6 +141,7 @@
 	DuffedUIConfigUILocalization.raidHidePower = "Deaktiviere Energieleiste (nur DPS-Layout)"
 	DuffedUIConfigUILocalization.raidNameOutside = "Bewege den Spielername nach aussen (nur DPS-Layout)"
 	DuffedUIConfigUILocalization.raidMaxGroup = "Aktiviere MaxGroup-Anzeige für Schlachtzugeinheiten"
+	DuffedUIConfigUILocalization.raidRoleIcons = "Aktiviere die standard Rollenicons (farbige Qudrate)"
 
 	--[[DataText]]--
 	DuffedUIConfigUILocalization.datatext = "Datatext"

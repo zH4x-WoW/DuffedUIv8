@@ -141,6 +141,7 @@ C["raid"] = {
 	["HidePower"] = false,
 	["NameOutside"] = false,
 	["MaxGroup"] = false,
+	["RoleIcons"] = false,
 }
 
 C["datatext"] = {
