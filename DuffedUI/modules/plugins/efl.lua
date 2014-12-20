@@ -56,6 +56,7 @@ function ColoringFriendsList()
 				local nameString = _G[button .. (i - friendOffset) .. "Name"]
 				local icon = _G[button .. (i - friendOffset) .. "GameIcon"]
 				if nameString then
+					if (level == nil or tonumber(level) == nil) then level = 0 end
 					local r, g, b = GetQuestDifficultyColor(level).r, GetQuestDifficultyColor(level).g, GetQuestDifficultyColor(level).b
 					local Diff = string.format("|cff%02x%02x%02x", r * 255, g * 255, b * 255)
 					nameString:SetTextColor(classc.r, classc.g, classc.b)
