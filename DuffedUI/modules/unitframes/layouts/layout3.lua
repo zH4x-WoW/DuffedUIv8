@@ -10,8 +10,6 @@ ns._Headers = {}
 
 --	local variables
 local normTex = C["media"].normTex
-local glowTex = C["media"].glowTex
-local bubbleTex = C["media"].bubbleTex
 local font = D.Font(C["font"].unitframes)
 
 local backdrop = {

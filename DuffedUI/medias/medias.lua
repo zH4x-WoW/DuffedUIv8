@@ -23,10 +23,8 @@ C["media"] = {
 
 	["normTex"] = [[Interface\AddOns\DuffedUI\medias\textures\normTex]],
 	["glowTex"] = [[Interface\AddOns\DuffedUI\medias\textures\glowTex]],
-	["bubbleTex"] = [[Interface\AddOns\DuffedUI\medias\textures\bubbleTex]],
 	["copyicon"] = [[Interface\AddOns\DuffedUI\medias\textures\copy]],
 	["blank"] = [[Interface\AddOns\DuffedUI\medias\textures\blank]],
-	["buttonhover"] = [[Interface\AddOns\DuffedUI\medias\textures\button_hover]],
 	["duffed"] = [[Interface\AddOns\DuffedUI\medias\textures\duffed]],
 	["duffed_logo"] = [[Interface\AddOns\DuffedUI\medias\textures\logo]],
 	["alliance"] = [[Interface\AddOns\DuffedUI\medias\textures\alliance]],
@@ -35,9 +33,6 @@ C["media"] = {
 	["neutral"] = [[Interface\AddOns\DuffedUI\medias\textures\neutral]],
 	["sc2"] = [[Interface\AddOns\DuffedUI\medias\textures\sc2]],
 	["pointer"] = [[Interface\AddOns\DuffedUI\medias\textures\arrow]],
-	["dps"] = [[Interface\AddOns\DuffedUI\medias\textures\dps]],
-	["heal"] = [[Interface\AddOns\DuffedUI\medias\textures\healer]],
-	["tank"] = [[Interface\AddOns\DuffedUI\medias\textures\tank]],
 
 	["bordercolor"] = C["general"].bordercolor or { .125, .125, .125 },
 	["backdropcolor"] = C["general"].backdropcolor or { .05, .05, .05 },
