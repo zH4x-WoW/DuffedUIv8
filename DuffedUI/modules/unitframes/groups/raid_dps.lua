@@ -99,7 +99,7 @@ local function Shared(self, unit)
 	--[[Elements]]--
 	local name = health:CreateFontString(nil, "OVERLAY")
 	name:SetFontObject(font)
-	if C["raid"].NameOutside then name:Point("LEFT", health, "RIGHT", 5, 0) else name:Point("RIGHT", health, -5, 0) end
+	if C["raid"].NameOutside then name:Point("LEFT", health, "RIGHT", 5, 0) else name:Point("RIGHT", health, -12, 0) end
 	if C["unitframes"].unicolor then self:Tag(name, "[DuffedUI:getnamecolor][DuffedUI:namemedium]") else self:Tag(name, "[DuffedUI:namemedium]") end
 	self.Name = name
 
@@ -126,9 +126,10 @@ local function Shared(self, unit)
 		LFDRole:Point("TOPLEFT", 2, -2)
 		LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons.blp")
 	else
-		LFDRole:Height(15)
-		LFDRole:Width(15)
-		LFDRole:Point("TOPLEFT", -2, 0)
+		LFDRole:Height(12)
+		LFDRole:Width(12)
+		LFDRole:Point("TOPRIGHT", -1, -1)
+		LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons2.blp")
 	end
 	self.LFDRole = LFDRole
 

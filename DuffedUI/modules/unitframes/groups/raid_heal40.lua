@@ -130,9 +130,10 @@ local function Shared(self, unit)
 		LFDRole:Point("TOPRIGHT", -2, -2)
 		LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons.blp")
 	else
-		LFDRole:Height(15)
-		LFDRole:Width(15)
-		LFDRole:Point("TOPRIGHT", 2, 2)
+		LFDRole:Height(12)
+		LFDRole:Width(12)
+		LFDRole:Point("TOPRIGHT", -1, -1)
+		LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons2.blp")
 	end
 	self.LFDRole = LFDRole
 
