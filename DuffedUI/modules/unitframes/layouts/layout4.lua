@@ -612,6 +612,22 @@ local function Shared(self, unit)
 			health.colorReaction = true
 		end
 
+		if C["unitframes"].totdebuffs == true and (unit == "targettarget") then
+			local debuffs = CreateFrame("Frame", nil, health)
+			debuffs:Height(20)
+			debuffs:Width(300)
+			debuffs.size = C["unitframes"].totdbsize
+			debuffs.spacing = 3
+			debuffs.num = 5
+
+			debuffs:Point("RIGHT", health, "LEFT", -5, 0)
+			debuffs.initialAnchor = "RIGHT"
+			debuffs["growth-y"] = "LEFT"
+			debuffs.PostCreateIcon = D.PostCreateAura
+			debuffs.PostUpdateIcon = D.PostUpdateAura
+			self.Debuffs = debuffs
+		end
+
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:nameshort] [DuffedUI:diffcolor][level] [shortclassification]")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 0)
