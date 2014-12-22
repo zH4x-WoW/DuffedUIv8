@@ -525,13 +525,27 @@ local function SkinRotateButton(btn)
 end
 
 local function SkinEditBox(frame)
-	if _G[frame:GetName().."Left"] then Kill(_G[frame:GetName().."Left"]) end
-	if _G[frame:GetName().."Middle"] then Kill(_G[frame:GetName().."Middle"]) end
-	if _G[frame:GetName().."Right"] then Kill(_G[frame:GetName().."Right"]) end
-	if _G[frame:GetName().."Mid"] then Kill(_G[frame:GetName().."Mid"]) end
-	CreateBackdrop(frame, "Default")
+	frame:CreateBackdrop("Default")
 
-	if frame:GetName() and frame:GetName():find("Silver") or frame:GetName():find("Copper") then Point(frame.backdrop, "BOTTOMRIGHT", -12, -2) end
+	if frame.TopLeftTex then frame.TopLeftTex:Kill() end
+	if frame.TopRightTex then frame.TopRightTex:Kill() end
+	if frame.TopTex then frame.TopTex:Kill() end
+	if frame.BottomLeftTex then frame.BottomLeftTex:Kill() end
+	if frame.BottomRightTex then frame.BottomRightTex:Kill() end
+	if frame.BottomTex then frame.BottomTex:Kill() end
+	if frame.LeftTex then frame.LeftTex:Kill() end
+	if frame.RightTex then frame.RightTex:Kill() end
+	if frame.MiddleTex then frame.MiddleTex:Kill() end
+
+	if frame:GetName() then
+		if _G[frame:GetName().."Left"] then _G[frame:GetName().."Left"]:Kill() end
+		if _G[frame:GetName().."Middle"] then _G[frame:GetName().."Middle"]:Kill() end
+		if _G[frame:GetName().."Right"] then _G[frame:GetName().."Right"]:Kill() end
+		if _G[frame:GetName().."Mid"] then _G[frame:GetName().."Mid"]:Kill() end
+
+		if frame:GetName():find("Silver") or frame:GetName():find("Copper") then frame.backdrop:Point("BOTTOMRIGHT", -12, -2) end
+	end
+
 	if(frame.Left) then frame.Left:Kill() end
 	if(frame.Right) then frame.Right:Kill() end
 	if(frame.Middle) then frame.Middle:Kill() end
