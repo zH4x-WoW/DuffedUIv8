@@ -618,9 +618,9 @@ local function Shared(self, unit)
 			debuffs.spacing = 3
 			debuffs.num = 5
 
-			debuffs:Point("RIGHT", health, "LEFT", -5, 0)
-			debuffs.initialAnchor = "RIGHT"
-			debuffs["growth-y"] = "LEFT"
+			debuffs:Point("LEFT", health, "RIGHT", 5, 0)
+			debuffs.initialAnchor = "LEFT"
+			debuffs["growth-y"] = "RIGHT"
 			debuffs.PostCreateIcon = D.PostCreateAura
 			debuffs.PostUpdateIcon = D.PostUpdateAura
 			self.Debuffs = debuffs
