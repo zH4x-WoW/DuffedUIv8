@@ -52,17 +52,14 @@ local function LoadGarrisonSkin()
 			reagent.NameFrame:SetTexture()
 			reagent.Icon:SetTexCoord(unpack(D.IconCoord))
 			reagent.Icon:SetDrawLayer("BORDER")
-			
+
 			if not reagent.border then
 				reagent.border = CreateFrame("Frame", nil, reagent)
 				reagent.Icon:StyleButton()
 				reagent.Count:SetParent(reagent.border)
 			end
 
-			if not reagent.backdrop then
-				reagent:CreateBackdrop("Default", true)
-			end
-
+			if not reagent.backdrop then reagent:CreateBackdrop("Default", true) end
 			reagentIndex = reagentIndex + 1
 			reagent = reagents[reagentIndex]
 		end
@@ -244,7 +241,7 @@ local function LoadGarrisonSkin()
 	GarrisonLandingPageTab1:ClearAllPoints()
 	GarrisonLandingPageTab1:SetPoint("TOPLEFT", GarrisonLandingPage, "BOTTOMLEFT", 70, 2)
 
-	--[[Report]]--
+	--[[Landing Page Report]]--
 	local Report = GarrisonLandingPage.Report
 	Report.List:StripTextures()
 	local scrollFrame = Report.List.listScroll
@@ -262,7 +259,7 @@ local function LoadGarrisonSkin()
 		end
 	end
 
-	--[[Follower list]]--
+	--[[Landing Page Follower list]]--
 	local FollowerList = GarrisonLandingPage.FollowerList
 	select(2, FollowerList:GetRegions()):Hide()
 	FollowerList.FollowerHeaderBar:Hide()
