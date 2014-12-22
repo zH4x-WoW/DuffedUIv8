@@ -126,7 +126,7 @@ Stat:SetScript("OnEnter", function(self)
 		end
 		if extended then tr, tg, tb = .3, 1, .3 else tr, tg, tb = 1, 1, 1 end
 		if difficulty == 3 or difficulty == 4 then diff = "H" else diff = "N" end
-		GameTooltip:AddDoubleLine(name, fmttime(reset),1 ,1, 1, 1, 0, 0)
+		GameTooltip:AddDoubleLine(name, fmttime(reset), 1, 1, 1, 1, 0, 0)
 		end
 	end
 
@@ -139,6 +139,19 @@ Stat:SetScript("OnEnter", function(self)
 			if name and reset then GameTooltip:AddDoubleLine(name, SecondsToTime(reset), 1, 1, 1, 1, 0, 0) end
 		end
 	end
+
+	--[[GameTooltip:AddLine(" ")
+	local invasion = {
+		Botani = 36171,
+		Goren = 36376,
+		Shadowmoon = 36412,
+		Horde = 36655,
+		Ogre = 36650,
+		Council = 36830,
+	}
+	for k, v in pairs(invasion) do
+		GameTooltip:AddDoubleLine(format("%s: %s", k, IsQuestFlaggedCompleted(v) and "\124cff00ff00Yes\124r" or "\124cffff0000No\124r"))
+	end]]
 
 	GameTooltip:Show()
 end)
