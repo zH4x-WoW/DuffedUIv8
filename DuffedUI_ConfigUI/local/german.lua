@@ -182,6 +182,7 @@
 	DuffedUIConfigUILocalization.skins = "AddOn-Skins"
 	DuffedUIConfigUILocalization.skinsblizzardreskin = "Zeige die Blizzard eigenen Fenster im Stile von DuffedUI an"
 	DuffedUIConfigUILocalization.skinscalendarevent = "Deaktiviere die Texturen, der Events, im Kalender"
+	DuffedUIConfigUILocalization.skinsHideBlips = "Deaktiviere die Blips auf der Minimap für Erze, Kräuter und Dailys ausserhalb von Gebäuden in der Garnison"
 
 	--[[Cooldowns]]--
 	DuffedUIConfigUILocalization.cooldown = "Abklingzeiten"

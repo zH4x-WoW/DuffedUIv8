@@ -182,6 +182,7 @@ C["datatext"] = {
 C["skins"] = {
 	["blizzardreskin"] = true,
 	["calendarevent"] = false,
+	["HideBlips"] = true,
 }
 
 C["cooldown"] = {
