@@ -57,9 +57,9 @@ local initdropdown = function(self)
 end
 
 UIDropDownMenu_Initialize(dropdown, initdropdown, "MENU")
-UnitPopupMenus["PARTY"] = { "ADD_FRIEND", "ADD_FRIEND_MENU", "MUTE", "UNMUTE", "PARTY_SILENCE", "PARTY_UNSILENCE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "WHISPER", "PROMOTE", "PROMOTE_GUIDE", "LOOT_PROMOTE", "VOTE_TO_KICK", "UNINVITE", "INSPECT", "ACHIEVEMENTS", "TRADE", "FOLLOW", "DUEL", "PET_BATTLE_PVP_DUEL", "RAID_TARGET_ICON", "SELECT_ROLE", "PVP_REPORT_AFK", "RAF_SUMMON", "RAF_GRANT_LEVEL", "REPORT_PLAYER", "CANCEL" };
-UnitPopupMenus["RAID_PLAYER"] = { "ADD_FRIEND", "ADD_FRIEND_MENU", "MUTE", "UNMUTE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "WHISPER", "INSPECT", "ACHIEVEMENTS", "TRADE", "FOLLOW", "DUEL", "PET_BATTLE_PVP_DUEL", "RAID_TARGET_ICON", "SELECT_ROLE", "RAID_LEADER", "RAID_PROMOTE", "RAID_DEMOTE", "LOOT_PROMOTE", "VOTE_TO_KICK", "RAID_REMOVE", "RAF_SUMMON", "RAF_GRANT_LEVEL", "REPORT_PLAYER", "CANCEL" };
-UnitPopupMenus["RAID"] = { "MUTE", "UNMUTE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "RAID_LEADER", "RAID_PROMOTE", "RAID_MAINTANK", "RAID_MAINASSIST", "LOOT_PROMOTE", "RAID_DEMOTE", "VOTE_TO_KICK", "RAID_REMOVE", "MOVE_PLAYER_FRAME", "MOVE_TARGET_FRAME", "REPORT_PLAYER", "CANCEL" };
+UnitPopupMenus["PARTY"] = { "ADD_FRIEND", "ADD_FRIEND_MENU", "MUTE", "UNMUTE", "PARTY_SILENCE", "PARTY_UNSILENCE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "WHISPER", "PROMOTE", "PROMOTE_GUIDE", "LOOT_PROMOTE", "VOTE_TO_KICK", "UNINVITE", "INSPECT", "ACHIEVEMENTS", "TRADE", "FOLLOW", "DUEL", "PET_BATTLE_PVP_DUEL", "RAID_TARGET_ICON", "SELECT_ROLE", "PVP_REPORT_AFK", "RAF_SUMMON", "RAF_GRANT_LEVEL", "REPORT_PLAYER", "CANCEL" }
+UnitPopupMenus["RAID_PLAYER"] = { "ADD_FRIEND", "ADD_FRIEND_MENU", "MUTE", "UNMUTE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "WHISPER", "INSPECT", "ACHIEVEMENTS", "TRADE", "FOLLOW", "DUEL", "PET_BATTLE_PVP_DUEL", "RAID_TARGET_ICON", "SELECT_ROLE", "RAID_LEADER", "RAID_PROMOTE", "RAID_DEMOTE", "LOOT_PROMOTE", "VOTE_TO_KICK", "RAID_REMOVE", "RAF_SUMMON", "RAF_GRANT_LEVEL", "REPORT_PLAYER", "CANCEL" }
+UnitPopupMenus["RAID"] = { "MUTE", "UNMUTE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "RAID_LEADER", "RAID_PROMOTE", "RAID_MAINTANK", "RAID_MAINASSIST", "LOOT_PROMOTE", "RAID_DEMOTE", "VOTE_TO_KICK", "RAID_REMOVE", "MOVE_PLAYER_FRAME", "MOVE_TARGET_FRAME", "REPORT_PLAYER", "CANCEL" }
 
 --[[Healthupdate for UFs]]--
 D.PostUpdateHealth = function(health, unit, min, max)
@@ -119,7 +119,7 @@ D.PostUpdateHealth = function(health, unit, min, max)
 end
 
 --[[Healthupdate for Raidframes]]--
-D.PostUpdateHealthRaid = function(health, unit, min, max)
+D["PostUpdateHealthRaid"] = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
 		if not UnitIsConnected(unit) then
 			health.value:SetText("|cffD7BEA5" .. L["uf"]["offline"] .. "|r")
@@ -129,19 +129,19 @@ D.PostUpdateHealthRaid = function(health, unit, min, max)
 			health.value:SetText("|cffD7BEA5" .. L["uf"]["ghost"] .. "|r")
 		end
 	else
-		if C["unitframes"].ColorGradient == true and C["unitframes"].unicolor == true then
+		if C["unitframes"]["ColorGradient"] and C["unitframes"]["unicolor"] then
 			local r, g, b = oUFDuffedUI.ColorGradient(min, max, 0, 0, 0, .6, .2, .2, .125, .125, .125)
 			health:SetStatusBarColor(r, g, b)
 		end
 
-		if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C["unitframes"].unicolor ~= true then
+		if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C["unitframes"]["unicolor"] ~= true then
 			local c = D.UnitColor.reaction[5]
 			local r, g, b = c[1], c[2], c[3]
 			health:SetStatusBarColor(r, g, b)
 			health.bg:SetTexture(.1, .1, .1)
 		end
 
-		if min ~= max then health.value:SetText("|cff559655-" .. D.ShortValue(max-min) .. "|r") else health.value:SetText("") end
+		if min ~= max then health.value:SetText("|cff559655-" .. D["ShortValue"](max-min) .. "|r") else health.value:SetText("") end
 	end
 end
 
@@ -162,6 +162,8 @@ end
 
 --[[Powerupdate for UFs]]--
 D.PostUpdatePower = function(power, unit, min, max)
+	if not power.value then return end
+
 	local Parent = power:GetParent()
 	local pType, pToken = UnitPowerType(unit)
 	local colors = D.UnitColor
@@ -412,7 +414,7 @@ D.CastBar = function(self, unit, name, rank, castid)
 	end
 end
 
-D.EclipseDirection = function(self)
+D["EclipseDirection"] = function(self)
 	local power = UnitPower("player", SPELL_POWER_ECLIPSE)
 
 	if power < 0 then
@@ -421,38 +423,6 @@ D.EclipseDirection = function(self)
 		self.Text:SetText("|cff4478BC" .. L["uf"]["wrath"] .. "|r")
 	else
 		self.Text:SetText("")
-	end
-end
-
-D.DruidBarDisplay = function(self, login)
-	local eb = self.EclipseBar
-	local dm = self.DruidMana
-	local bg = self.DruidManaBackground
-	local flash = self.FlashInfo
-
-	if login then dm:SetScript("OnUpdate", nil) end
-
-	if dm and dm:IsShown() then 
-		bg:SetAlpha(1)
-	else
-		flash:Show()
-		if bg then bg:SetAlpha(0) end
-	end
-
-	if (eb and eb:IsShown()) or (dm and dm:IsShown()) then
-		if eb and eb:IsShown() then
-			local txt = self.EclipseBar.Text
-			txt:Show()
-			flash:Hide()
-		end
-		if bg then bg:SetAlpha(1) end
-	else
-		if eb then
-			local txt = self.EclipseBar.Text
-			txt:Hide()
-		end
-		flash:Show()
-		if bg then bg:SetAlpha(0) end
 	end
 end
 
@@ -479,29 +449,6 @@ D.UpdateManaLevel = function(self, elapsed)
 	else
 		self.ManaLevel:SetText()
 		StopFlash(self)
-	end
-end
-
-D.UpdateDruidManaText = function(self)
-	if self.unit ~= "player" then return end
-
-	local num, str = UnitPowerType("player")
-	if num ~= 0 then
-		local min = UnitPower("player", 0)
-		local max = UnitPowerMax("player", 0)
-
-		local percMana = min / max * 100
-		if percMana <= 20 then
-			self.FlashInfo.ManaLevel:SetText("|cffaf5050" .. L["uf"]["lowmana"] .. "|r")
-			Flash(self.FlashInfo, .3)
-		else
-			self.FlashInfo.ManaLevel:SetText()
-			StopFlash(self.FlashInfo)
-		end
-		if min ~= max then self.DruidManaText:SetFormattedText("%d%%", floor(min / max * 100)) else self.DruidManaText:SetText() end
-		self.DruidManaText:SetAlpha(1)
-	else
-		self.DruidManaText:SetAlpha(0)
 	end
 end
 
@@ -734,22 +681,34 @@ if C["raid"].raidunitdebuffwatch == true then
 	end
 end
 
---[[local TestUI = function(msg)
+local TestUI = function(msg)
 	if not DuffedUI[2].unitframes.enable then return end
-	if msg == "" then msg = "all" end
 
-	if msg == "all" or msg == "arena" or msg == "a" then
+	if msg == "" then 
+		print("'|cffc41f3barena|r' or '|cffc41f3ba|r' to show arena frames")
+		print("'|cffc41f3bboss|r' or '|cffc41f3bb|r' to show boss frames")
+		print("'|cffc41f3bpet|r' or '|cffc41f3bp|r' to show pet frames")
+		print("'|cffc41f3bmaintank|r' or '|cffc41f3bmt|r' to show maintank frames")
+	elseif msg == "arena" or msg == "a" then
 		for i = 1, 3 do
-			_G["DuffedUIArena"..i]:Show(); _G["DuffedUIArena"..i].Hide = function() end; _G["DuffedUIArena"..i].unit = "player"
-			_G["DuffedUIArena"..i].Trinket.Icon:SetTexture("Interface\\Icons\\INV_Jewelry_Necklace_37")
+			_G["oUF_Arena"..i]:Show() _G["oUF_Arena"..i].Hide = function() end _G["oUF_Arena"..i].unit = "player"
+			_G["oUF_Arena"..i].Trinket.Icon:SetTexture("Interface\\Icons\\INV_Jewelry_Necklace_37")
 		end
+	elseif msg == "boss" or msg == "b" then
+		for i = 1, 3 do
+			_G["oUF_Boss"..i]:Show()
+			_G["oUF_Boss"..i].Hide = function() end
+			_G["oUF_Boss"..i].unit = "player"
+		end
+	elseif msg == "pet" or msg == "p" then
+		oUF_Pet:Show()
+		oUF_Pet.Hide = function() end
+		oUF_Pet.unit = "player"
+	elseif msg == "maintank" or msg == "mt" then
+		oUF_MainTank:Show()
+		oUF_MainTank.Hide = function() end
+		oUF_MainTank.unit = "player"
 	end
-
-	if msg == "all" or msg == "boss" or msg == "b" then
-		for i = 1, 3 do _G["DuffedUIBoss"..i]:Show(); _G["DuffedUIBoss"..i].Hide = function() end; _G["DuffedUIBoss"..i].unit = "player" end
-	end
-
-	if msg == "all" or msg == "pet" or msg == "p" then DuffedUIPet:Show(); DuffedUIPet.Hide = function() end; DuffedUIPet.unit = "player" end
 end
 SlashCmdList.TestUI = TestUI
-SLASH_TestUI1 = "/testui"]]--
+SLASH_TestUI1 = "/testui"

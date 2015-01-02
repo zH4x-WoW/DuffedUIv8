@@ -47,6 +47,9 @@ D.DuffedCredits = {
 	"Juhawny",
 	"Rav",
 	"loki",
+	"Shariza",
+	"Dahgoth",
+	"Sandoras",
 	"Sinaris",
 	"Digawen",
 	"Zenglao",
@@ -58,8 +61,5 @@ D.DuffedCredits = {
 	"McTrap",
 	"HackManiac",
 	"Yascha",
-	"Dahgoth",
-	"Shariza",
-	"Sandoras",
 	"DarKleFou",
 }

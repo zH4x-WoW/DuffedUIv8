@@ -264,11 +264,7 @@ function CreateContainer(storagetype, ...)
 					BanksContainer:Show()
 					BanksContainer:ClearAllPoints()
 					ToggleBagsContainer.Text:SetTextColor(1, 1, 1)
-					if Purchase:IsShown() then
-						BanksContainer:SetPoint("BOTTOMLEFT", _G["DuffedUI_Bank"], "TOPLEFT", 0, 3)
-					else
-						BanksContainer:SetPoint("BOTTOMLEFT", _G["DuffedUI_Bank"], "TOPLEFT", 0, 3)
-					end
+					if Purchase:IsShown() then BanksContainer:SetPoint("BOTTOMLEFT", _G["DuffedUI_Bank"], "TOPLEFT", 0, 3) else BanksContainer:SetPoint("BOTTOMLEFT", _G["DuffedUI_Bank"], "TOPLEFT", 0, 3) end
 				else
 					ReplaceBags = 0
 					BagsContainer:Hide()
@@ -276,11 +272,7 @@ function CreateContainer(storagetype, ...)
 					ToggleBagsContainer.Text:SetTextColor(.4, .4, .4)
 				end
 			else
-				if BankFrame:IsShown() then
-					CloseBankFrame()
-				else
-					ToggleAllBags()
-				end
+				if BankFrame:IsShown() then CloseBankFrame() else ToggleAllBags() end
 			end
 		end)
 
