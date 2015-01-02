@@ -1,32 +1,48 @@
 local D, C, L = unpack(select(2, ...))
-if D.Class ~= "DEATHKNIGHT" then return end
 
-local texture = C["media"].normTex
-local font, fonsize, fontflag = C["media"].font, 12, "THINOUTLINE"
-local RuneColors = {
-		{ 0.69, 0.31, 0.31 }, -- blood
-		{ 0.33, 0.59, 0.33 }, -- unholy
-		{ 0.31, 0.45, 0.63 }, -- frost
-		{ 0.84, 0.75, 0.65 }, -- death
-		{ 0, 0.82, 1 }, -- runic power
+local class = select(2, UnitClass("player"))
+local texture = C["media"]["normTex"]
+local font = D.Font(C["font"]["unitframes"])
+local layout = C["unitframes"]["layout"]
+
+if class ~= "DEATHKNIGHT" then return end
+
+D["ClassRessource"]["DEATHKNIGHT"] = function(self)
+	local RuneColors = {
+			{.69, .31, .31}, -- blood
+			{.33, .59, .33}, -- unholy
+			{.31, .45, .63}, -- frost
+			{.84, .75, .65}, -- death
+			{0, .82, 1 }, -- runic power
 	}
-local Runes = {}
-local RuneMap = { 1, 2, 3, 4, 5, 6 }
+	local Runes = {}
+	local RuneMap = { 1, 2, 3, 4, 5, 6 }
 
-if not C["unitframes"].attached then D.ConstructEnergy("RunicPower", 216, 5) end
-
-D.ConstructRessources = function(name, width, height)
-	Runes = CreateFrame("Frame", name, UIParent)
-	Runes:SetSize(width, height)
+	Runes = CreateFrame("Frame", Runes, UIParent)
+	Runes:SetSize(216, 5)
 	Runes:CreateBackdrop()
-	if not C["unitframes"].attached then Runes:SetParent(DuffedUIPetBattleHider) end
+	Runes:SetParent(DuffedUIPetBattleHider)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			Runes:Point("TOP", self.Power, "BOTTOM", 0, 0)
+		elseif layout == 2 then
+			Runes:Point("CENTER", self.panel, "CENTER", 0, 0)
+		elseif layout == 3 then
+			Runes:Point("CENTER", self.panel, "CENTER", 0, 5)
+		elseif layout == 4 then
+			Runes:Point("TOP", self.Health, "BOTTOM", 0, -5)
+		end
+	else
+		Runes:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
+		D["ConstructEnergy"]("RunicPower", 216, 5)
+	end
 
 	for i = 1, 6 do
 		local rune = CreateFrame("StatusBar", "Rune"..i, Runes)
 		rune:SetStatusBarTexture(texture)
 		rune:SetStatusBarColor(unpack(RuneColors[math.ceil(RuneMap[i] / 2) ]))
 		rune:SetMinMaxValues(0, 10)
-		rune:SetHeight(height)
+		rune:SetHeight(5)
 
 		if i == 1 then
 			rune:SetWidth(36)
@@ -72,18 +88,5 @@ D.ConstructRessources = function(name, width, height)
 		end
 	end)
 
-	if C["unitframes"].oocHide then
-		Runes:RegisterEvent("PLAYER_REGEN_DISABLED")
-		Runes:RegisterEvent("PLAYER_REGEN_ENABLED")
-		Runes:RegisterEvent("PLAYER_ENTERING_WORLD")
-		Runes:SetScript("OnEvent", function(self, event)
-			if event == "PLAYER_REGEN_DISABLED" then
-				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
-			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then Runes:SetAlpha(0) end
-			end
-		end)
-	end
+	if C["unitframes"].oocHide then D["oocHide"](Runes) end
 end

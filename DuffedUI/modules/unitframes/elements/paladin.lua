@@ -1,52 +1,59 @@
 local D, C, L = unpack(select(2, ...))
-if D.Class ~= "PALADIN" then return end
 
-local texture = C["media"].normTex
-local font, fontheight, fontflag = C["media"].font, 12, "THINOUTLINE"
+local class = select(2, UnitClass("player"))
+local texture = C["media"]["normTex"]
+local font = D.Font(C["font"]["unitframes"])
+local layout = C["unitframes"]["layout"]
+local backdrop = {
+	bgFile = C["media"]["blank"],
+	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
+}
 
-if not C["unitframes"].attached then D.ConstructEnergy("Mana", 216, 5) end
+if class ~= "PALADIN" then return end
 
-D.ConstructRessources = function(name, width, height)
-	local bars = CreateFrame("Frame", name, UIParent)
-	bars:Size(width, height)
-	bars:SetBackdrop(backdrop)
-	bars:SetBackdropColor(0, 0, 0)
-	bars:SetBackdropBorderColor(0, 0, 0, 0)
+D["ClassRessource"]["PALADIN"] = function(self)
+	local HolyPower = CreateFrame("Frame", "HolyPowerBar", UIParent)
+	HolyPower:Size(216, 5)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			HolyPower:Point("TOP", self.Power, "BOTTOM", 0, 0)
+		elseif layout == 2 then
+			HolyPower:Point("CENTER", self.panel, "CENTER", 0, 0)
+		elseif layout == 3 then
+			HolyPower:Point("CENTER", self.panel, "CENTER", 0, 5)
+		elseif layout == 4 then
+			HolyPower:Point("TOP", self.Health, "BOTTOM", 0, -5)
+		end
+	else
+		HolyPower:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
+		D["ConstructEnergy"]("Mana", 216, 5)
+	end
+	HolyPower:SetBackdrop(backdrop)
+	HolyPower:SetBackdropColor(0, 0, 0)
+	HolyPower:SetBackdropBorderColor(0, 0, 0, 0)
 
 	for i = 1, 5 do
-		bars[i]=CreateFrame("StatusBar", name .. "_HolyPower" .. i, bars)
-		bars[i]:Height(height)
-		bars[i]:SetStatusBarTexture(texture)
-		bars[i]:GetStatusBarTexture():SetHorizTile(false)
-		bars[i]:SetStatusBarColor(228/255, 225/255, 16/255)
-		bars[i].bg = bars[i]:CreateTexture(nil, "BORDER")
-		bars[i].bg:SetTexture(228/255, 225/255, 16/255)
+		HolyPower[i]=CreateFrame("StatusBar", "HolyPowerBar" .. i, HolyPower)
+		HolyPower[i]:Height(5)
+		HolyPower[i]:SetStatusBarTexture(texture)
+		HolyPower[i]:GetStatusBarTexture():SetHorizTile(false)
+		HolyPower[i]:SetStatusBarColor(228/255, 225/255, 16/255)
+		HolyPower[i].bg = HolyPower[i]:CreateTexture(nil, "BORDER")
+		HolyPower[i].bg:SetTexture(228/255, 225/255, 16/255)
 		if i == 1 then
-			bars[i]:SetPoint("LEFT", bars)
-			bars[i]:Width((width / 5) - 3)
-			bars[i].bg:SetAllPoints(bars[i])
+			HolyPower[i]:Width((216 / 5) - 3)
+			HolyPower[i]:SetPoint("LEFT", HolyPower)
+			HolyPower[i].bg:SetAllPoints(HolyPower[i])
 		else
-			bars[i]:Point("LEFT", bars[i-1], "RIGHT", 1, 0)
-			bars[i]:Width(width / 5)
-			bars[i].bg:SetAllPoints(bars[i])
+			HolyPower[i]:Width(216 / 5)
+			HolyPower[i]:Point("LEFT", HolyPower[i - 1], "RIGHT", 1, 0)
+			HolyPower[i].bg:SetAllPoints(HolyPower[i])
 		end
-		bars[i].bg:SetTexture(texture)
-		bars[i].bg:SetAlpha(.15)
+		HolyPower[i].bg:SetTexture(texture)
+		HolyPower[i].bg:SetAlpha(.15)
 	end
-	bars:CreateBackdrop()
+	HolyPower:CreateBackdrop()
+	self.HolyPower = HolyPower
 
-	if C["unitframes"].oocHide then
-		bars:RegisterEvent("PLAYER_REGEN_DISABLED")
-		bars:RegisterEvent("PLAYER_REGEN_ENABLED")
-		bars:RegisterEvent("PLAYER_ENTERING_WORLD")
-		bars:SetScript("OnEvent", function(self, event)
-			if event == "PLAYER_REGEN_DISABLED" then
-				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
-			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then bars:SetAlpha(0) end
-			end
-		end)
-	end
+	if C["unitframes"]["oocHide"] then D["oocHide"](HolyPower) end
 end

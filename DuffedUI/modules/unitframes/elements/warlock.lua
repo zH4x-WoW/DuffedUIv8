@@ -1,45 +1,51 @@
 local D, C, L = unpack(select(2, ...))
-if D.Class ~= "WARLOCK" then return end
 
-local texture = C["media"].normTex
-local font, fonsize, fontflag = C["media"].font, 12, "THINOUTLINE"
+local class = select(2, UnitClass("player"))
+local texture = C["media"]["normTex"]
+local font = D.Font(C["font"]["unitframes"])
+local layout = C["unitframes"]["layout"]
+local level = UnitLevel("player")
+local backdrop = {
+	bgFile = C["media"]["blank"],
+	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
+}
 
-if not C["unitframes"].attached then D.ConstructEnergy("Energy", 216, 5) end
+if class ~= "WARLOCK" then return end
 
-D.ConstructRessources = function(name, width, height)
-	local wb = CreateFrame("Frame", name, UIParent)
-	wb:Size(width, height)
-	wb:SetBackdrop(backdrop)
-	wb:SetBackdropColor(0, 0, 0)
-	wb:SetBackdropBorderColor(0, 0, 0)
+D["ClassRessource"]["WARLOCK"] = function(self)
+	local WarlockBar = CreateFrame("Frame", "WarlockBar", UIParent)
+	WarlockBar:Size(216, 5)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			WarlockBar:Point("TOP", self.Power, "BOTTOM", 0, 0)
+		elseif layout == 2 then
+			WarlockBar:Point("CENTER", self.panel, "CENTER", 0, 0)
+		elseif layout == 3 then
+			WarlockBar:Point("CENTER", self.panel, "CENTER", 0, 5)
+		elseif layout == 4 then
+			WarlockBar:Point("TOP", self.Health, "BOTTOM", 0, -5)
+		end
+	else
+		WarlockBar:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
+		D["ConstructEnergy"]("Mana", 216, 5)
+	end
+	WarlockBar:CreateBackdrop()
 
 	for i = 1, 4 do
-		wb[i] = CreateFrame("StatusBar", name..i, wb)
-		wb[i]:Height(height)
-		wb[i]:SetStatusBarTexture(texture)
+		WarlockBar[i] = CreateFrame("StatusBar", "WarlockBar" .. i, WarlockBar)
+		WarlockBar[i]:Height(5)
+		WarlockBar[i]:SetStatusBarTexture(texture)
 		if i == 1 then
-			wb[i]:Width(width / 4)
-			wb[i]:SetPoint("LEFT", wb, "LEFT", 0, 0)
+			WarlockBar[i]:Width(54)
+			WarlockBar[i]:SetPoint("LEFT", WarlockBar, "LEFT", 0, 0)
 		else
-			wb[i]:Width(width / 4)
-			wb[i]:SetPoint("LEFT", wb[i - 1], "RIGHT", 1, 0)
+			WarlockBar[i]:Width(53)
+			WarlockBar[i]:SetPoint("LEFT", WarlockBar[i - 1], "RIGHT", 1, 0)
 		end
-		wb[i].bg = wb[i]:CreateTexture(nil, "ARTWORK")
+		WarlockBar[i].bg = WarlockBar[i]:CreateTexture(nil, "ARTWORK")
 	end
-	wb:CreateBackdrop()
+	WarlockBar:CreateBackdrop()
+	self.WarlockSpecBars = WarlockBar
 
-	if C["unitframes"].oocHide then
-		wb:RegisterEvent("PLAYER_REGEN_DISABLED")
-		wb:RegisterEvent("PLAYER_REGEN_ENABLED")
-		wb:RegisterEvent("PLAYER_ENTERING_WORLD")
-		wb:SetScript("OnEvent", function(self, event)
-			if event == "PLAYER_REGEN_DISABLED" then
-				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
-			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then wb:SetAlpha(0) end
-			end
-		end)
-	end
+	if C["unitframes"]["oocHide"] then D["oocHide"](WarlockBar) end
 end

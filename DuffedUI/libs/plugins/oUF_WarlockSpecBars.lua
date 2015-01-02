@@ -54,7 +54,7 @@ local Update = function(self, event, unit, powerType)
 		elseif spec == SPEC_WARLOCK_DEMONOLOGY then
 			local power = UnitPower("player", SPELL_POWER_DEMONIC_FURY)
 			local maxPower = UnitPowerMax("player", SPELL_POWER_DEMONIC_FURY)
-						
+			
 			wsb[1]:SetMinMaxValues(0, maxPower)
 			wsb[1]:SetValue(power)
 		end
@@ -85,14 +85,15 @@ local function Visibility(self, event, unit)
 				else
 					wsb[i]:SetValue(0)
 				end
+				wsb[i]:SetAlpha(1)
 				wsb[i]:Show()
 				if wsb[i].bg then wsb[i].bg:SetAlpha(0.15) end
 			end	
 		end
 		
 		if spec == SPEC_WARLOCK_DESTRUCTION then
-			local maxembers = 4
-			
+			local maxembers = 4		
+
 			for i = 1, maxembers do
 				if i ~= maxembers then
 					wsb[i]:SetWidth(w / maxembers - spacing)
@@ -103,10 +104,9 @@ local function Visibility(self, event, unit)
 				wsb[i]:SetStatusBarColor(unpack(Colors[SPEC_WARLOCK_DESTRUCTION]))
 				if wsb[i].bg then wsb[i].bg:SetAlpha(0.15) wsb[i].bg:SetTexture(unpack(Colors[SPEC_WARLOCK_DESTRUCTION])) end
 			end
-			
 		elseif spec == SPEC_WARLOCK_AFFLICTION then
-			local maxshards = 4
-			
+			local maxshards = 4		
+
 			for i = 1, maxshards do
 				if i ~= maxshards then
 					wsb[i]:SetWidth(w / maxshards - spacing)
@@ -117,7 +117,6 @@ local function Visibility(self, event, unit)
 				wsb[i]:SetStatusBarColor(unpack(Colors[SPEC_WARLOCK_AFFLICTION]))
 				if wsb[i].bg then wsb[i].bg:SetAlpha(0) end
 			end
-			
 		elseif spec == SPEC_WARLOCK_DEMONOLOGY then
 			wsb[2]:Hide()
 			wsb[3]:Hide()
@@ -154,11 +153,8 @@ local function Enable(self)
 
 		self:RegisterEvent("UNIT_POWER", Path)
 		self:RegisterEvent("UNIT_DISPLAYPOWER", Path)
-
-		-- why the fuck does PLAYER_TALENT_UPDATE doesnt trigger on initial login if we register to: self or self.PluginName
-		wsb.Visibility = CreateFrame("Frame", nil, wsb)
-		wsb.Visibility:RegisterEvent("PLAYER_TALENT_UPDATE")
-		wsb.Visibility:SetScript("OnEvent", function(frame, event, unit) Visibility(self, event, unit) end)
+		self:RegisterEvent("PLAYER_TALENT_UPDATE", Visibility)
+		self:RegisterEvent("PLAYER_ENTERING_WORLD", Visibility)
 
 		for i = 1, 4 do
 			local Point = wsb[i]

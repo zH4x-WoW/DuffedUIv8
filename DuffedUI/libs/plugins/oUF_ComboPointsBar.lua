@@ -3,6 +3,8 @@ local oUF = ns.oUF
 
 local GetComboPoints = GetComboPoints
 local MAX_COMBO_POINTS = MAX_COMBO_POINTS
+local Spec = GetSpecialization()
+local class = select(2, UnitClass("player"))
 
 local Colors = { 
 	[1] = {.69, .31, .31, 1},
@@ -35,7 +37,11 @@ local Update = function(self, event, unit)
 		end
 	end
 	
-	cpb:Show()
+	if class == "DRUID" then
+		if Spec == 1 or Spec == 4 then cpb:Hide() elseif Spec == 2 then cpb:Show() end
+	else
+		cpb:Show()
+	end
 	
 	if cpb.PostUpdate then
 		cpb:PostUpdate(self, points)

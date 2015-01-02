@@ -1,83 +1,92 @@
 local D, C, L = unpack(select(2, ...))
-if D.Class ~= "MAGE" then return end
 
-local texture = C["media"].normTex
-local font, fontheight, fontflag = C["media"].font, 12, "THINOUTLINE"
-local layout = C["unitframes"].layout
+local class = select(2, UnitClass("player"))
+local texture = C["media"]["normTex"]
+local font = D.Font(C["font"]["unitframes"])
+local layout = C["unitframes"]["layout"]
+local backdrop = {
+	bgFile = C["media"]["blank"],
+	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
+}
 
-if not C["unitframes"].attached then D.ConstructEnergy("Mana", 216, 5) end
+if class ~= "MAGE" then return end
 
-D.ConstructRessources = function(name, name2, width, height)
-	local mb = CreateFrame("Frame", name, UIParent)
-	mb:Size(width, height)
-	mb:SetBackdrop(backdrop)
-	mb:SetBackdropColor(0, 0, 0)
-	mb:SetBackdropBorderColor(0, 0, 0)
+D["ClassRessource"]["MAGE"] = function(self)
+	local ArcaneCharge = CreateFrame("Frame", "ArcaneChargeBar", UIParent)
+	ArcaneCharge:Size(216, 5)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			ArcaneCharge:Point("TOP", self.Power, "BOTTOM", 0, 0)
+		elseif layout == 2 then
+			ArcaneCharge:Point("CENTER", self.panel, "CENTER", 0, 0)
+		elseif layout == 3 then
+			ArcaneCharge:Point("CENTER", self.panel, "CENTER", 0, 5)
+		elseif layout == 4 then
+			ArcaneCharge:Point("TOP", self.Health, "BOTTOM", 0, -5)
+		end
+	else
+		ArcaneCharge:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
+		D["ConstructEnergy"]("Mana", 216, 5)
+	end
+	ArcaneCharge:SetBackdrop(backdrop)
+	ArcaneCharge:SetBackdropColor(0, 0, 0)
+	ArcaneCharge:SetBackdropBorderColor(0, 0, 0)
 
 	for i = 1, 4 do
-		mb[i] = CreateFrame("StatusBar", name .. i, mb)
-		mb[i]:Height(height)
-		mb[i]:SetStatusBarTexture(texture)
+		ArcaneCharge[i] = CreateFrame("StatusBar", "ArcaneChargeBar" .. i, ArcaneCharge)
+		ArcaneCharge[i]:Height(5)
+		ArcaneCharge[i]:SetStatusBarTexture(texture)
 		if i == 1 then
-			mb[i]:Width(width / 4)
-			mb[i]:SetPoint("LEFT", mb, "LEFT", 0, 0)
+			ArcaneCharge[i]:Width(54)
+			ArcaneCharge[i]:SetPoint("LEFT", ArcaneCharge, "LEFT", 0, 0)
 		else
-			mb[i]:Width((width / 4) - 1)
-			mb[i]:SetPoint("LEFT", mb[i - 1], "RIGHT", 1, 0)
+			ArcaneCharge[i]:Width(53)
+			ArcaneCharge[i]:SetPoint("LEFT", ArcaneCharge[i - 1], "RIGHT", 1, 0)
 		end
-		mb[i].bg = mb[i]:CreateTexture(nil, 'ARTWORK')
+		ArcaneCharge[i].bg = ArcaneCharge[i]:CreateTexture(nil, 'ARTWORK')
 	end
-	mb:CreateBackdrop()
+	ArcaneCharge:CreateBackdrop()
+	self.ArcaneChargeBar = ArcaneCharge
 
-	if C["unitframes"].runeofpower then
-		local rp = CreateFrame("Frame", name2, UIParent)
-		rp:Size(width, height)
-		rp:SetBackdrop(backdrop)
-		rp:SetBackdropColor(0, 0, 0)
-		rp:SetBackdropBorderColor(0, 0, 0)
+	if C["unitframes"]["oocHide"] then D["oocHide"](ArcaneCharge) end
+
+	if C["unitframes"]["runeofpower"] then
+		local RunePower = CreateFrame("Frame", "RuneOfPower", UIParent)
+		RunePower:Size(216, 5)
+		if C["unitframes"]["attached"] then
+			if layout == 1 then
+				RunePower:Point("TOP", ArcaneCharge, "BOTTOM", 0, -3)
+			elseif layout == 2 then
+				RunePower:Point("BOTTOM", self.Health, "TOP", 0, -5)
+				RunePower:SetFrameLevel(self.Health:GetFrameLevel() + 2)
+			elseif layout == 3 then
+				RunePower:Point("CENTER", self.panel, "CENTER", 0, -3)
+			elseif layout == 4 then
+				RunePower:Point("TOP", ArcaneCharge, "BOTTOM", 0, -5)
+			end
+		else
+			RunePower:Point("TOP", RessourceMover, "BOTTOM", 0, -5)
+		end
+		RunePower:SetBackdrop(backdrop)
+		RunePower:SetBackdropColor(0, 0, 0)
+		RunePower:SetBackdropBorderColor(0, 0, 0)
+
 		for i = 1, 2 do
-			rp[i] = CreateFrame("StatusBar", "DuffedUIRunePower"..i, rp)
-			rp[i]:Height(5)
-			rp[i]:SetStatusBarTexture(texture)
+			RunePower[i] = CreateFrame("StatusBar", "RuneOfPower" .. i, RunePower)
+			RunePower[i]:Height(5)
+			RunePower[i]:SetStatusBarTexture(texture)
 			if i == 1 then
-				rp[i]:Width(width / 2)
-				rp[i]:SetPoint("LEFT", rp, "LEFT", 0, 0)
+				RunePower[i]:Width(108)
+				RunePower[i]:SetPoint("LEFT", RunePower, "LEFT", 0, 0)
 			else
-				rp[i]:Width(width / 2)
-				rp[i]:SetPoint("LEFT", rp[i - 1], "RIGHT", 1, 0)
+				RunePower[i]:Width(107)
+				RunePower[i]:SetPoint("LEFT", RunePower[i - 1], "RIGHT", 1, 0)
 			end
-			rp[i].bg = rp[i]:CreateTexture(nil, 'ARTWORK')
+			if layout == 1 or layout == 3 or layout == 4 then RunePower[i].bg = RunePower[i]:CreateTexture(nil, 'ARTWORK') end
 		end
-		if layout == 1 or layout == 3 then rp:CreateBackdrop() end
-	end
-	
-	if C["unitframes"].oocHide then
-		mb:RegisterEvent("PLAYER_REGEN_DISABLED")
-		mb:RegisterEvent("PLAYER_REGEN_ENABLED")
-		mb:RegisterEvent("PLAYER_ENTERING_WORLD")
-		mb:SetScript("OnEvent", function(self, event)
-			if event == "PLAYER_REGEN_DISABLED" then
-				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
-			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then mb:SetAlpha(0) end
-			end
-		end)
+		RunePower:CreateBackdrop()
+		self.RunePower = RunePower
 
-		if C["unitframes"].runeofpower then
-			rp:RegisterEvent("PLAYER_REGEN_DISABLED")
-			rp:RegisterEvent("PLAYER_REGEN_ENABLED")
-			rp:RegisterEvent("PLAYER_ENTERING_WORLD")
-			rp:SetScript("OnEvent", function(self, event)
-				if event == "PLAYER_REGEN_DISABLED" then
-					UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-				elseif event == "PLAYER_REGEN_ENABLED" then
-					UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
-				elseif event == "PLAYER_ENTERING_WORLD" then
-					if not InCombatLockdown() then rp:SetAlpha(0) end
-				end
-			end)
-		end
+		if C["unitframes"]["oocHide"] then D["oocHide"](RunePower) end
 	end
 end

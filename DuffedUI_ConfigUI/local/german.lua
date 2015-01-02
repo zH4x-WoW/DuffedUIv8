@@ -56,6 +56,8 @@
 	DuffedUIConfigUILocalization.unitframesbuffsize = "Wähle die Größe der Stärkungszauber am Ziel"
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "Wähle die Größe der Schwächungszauber am Ziel"
 	DuffedUIConfigUILocalization.unitframesEnable_ToT = "Aktiviere Ziel des Ziel-Fenster"
+	DuffedUIConfigUILocalization.unitframesDruidMana = "Aktiviere die Manaanzeige bei Gestaltswandlung"
+	DuffedUIConfigUILocalization.unitframesAnticipationBar = "Aktiviere die Erwartungsleiste wenn die Fähigkeit gelernt wurde"
 
 	--[[Chat]]--
 	DuffedUIConfigUILocalization.chat = "Chat"
@@ -136,7 +138,7 @@
 	DuffedUIConfigUILocalization.raidframeheight = "Einstellung für die Höhe der Einheitenfenster"
 	DuffedUIConfigUILocalization.raidpointer = "Aktiviere Richtungspfeile für Deine Schlachtzugsmitglieder"
 	DuffedUIConfigUILocalization.raidFrameScaleRaid = "Setze Skalierung des Schlachtzugsfenster"
-	DuffedUIConfigUILocalization.raidlayout = "Wähle Layout für die Gruppenanzeige (Standard = heal, Werte: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
+	DuffedUIConfigUILocalization.raidlayout = "Wähle Layout für das Schlachtzugfenster (Standard = heal, Werte: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
 	DuffedUIConfigUILocalization.raidcenter = "Verschiebe Heal-Layout in die Mitte"
 	DuffedUIConfigUILocalization.raidHidePower = "Deaktiviere Energieleiste (nur DPS-Layout)"
 	DuffedUIConfigUILocalization.raidNameOutside = "Bewege den Spielername nach aussen (nur DPS-Layout)"
@@ -182,7 +184,6 @@
 	DuffedUIConfigUILocalization.skins = "AddOn-Skins"
 	DuffedUIConfigUILocalization.skinsblizzardreskin = "Zeige die Blizzard eigenen Fenster im Stile von DuffedUI an"
 	DuffedUIConfigUILocalization.skinscalendarevent = "Deaktiviere die Texturen, der Events, im Kalender"
-	DuffedUIConfigUILocalization.skinsHideBlips = "Deaktiviere die Blips auf der Minimap für Erze, Kräuter und Dailys ausserhalb von Gebäuden in der Garnison"
 
 	--[[Cooldowns]]--
 	DuffedUIConfigUILocalization.cooldown = "Abklingzeiten"

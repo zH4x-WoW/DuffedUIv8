@@ -1,44 +1,52 @@
 local D, C, L = unpack(select(2, ...))
-if D.Class ~= "PRIEST" then return end
 
-local texture = C["media"].normTex
-local font, fonsize, fontflag = C["media"].font, 12, "THINOUTLINE"
+local class = select(2, UnitClass("player"))
+local texture = C["media"]["normTex"]
+local font = D.Font(C["font"]["unitframes"])
+local layout = C["unitframes"]["layout"]
+local backdrop = {
+	bgFile = C["media"]["blank"],
+	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
+}
 
-if not C["unitframes"].attached then D.ConstructEnergy("Mana", 216, 5) end
+if class ~= "PRIEST" then return end
 
-D.ConstructRessources = function(name, width, height)
-	local pb = CreateFrame("Frame", name, UIParent)
-	pb:Size(width, height)
-	pb:SetBackdrop(backdrop)
-	pb:SetBackdropColor(0, 0, 0)
-	pb:SetBackdropBorderColor(0, 0, 0)
+D["ClassRessource"]["PRIEST"] = function(self)
+	local ShadowOrb = CreateFrame("Frame", "ShadowOrbsBar", UIParent)
+	ShadowOrb:Size(216, 5)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			ShadowOrb:Point("TOP", self.Power, "BOTTOM", 0, 0)
+		elseif layout == 2 then
+			ShadowOrb:Point("CENTER", self.panel, "CENTER", 0, 0)
+		elseif layout == 3 then
+			ShadowOrb:Point("CENTER", self.panel, "CENTER", 0, 5)
+		elseif layout == 4 then
+			ShadowOrb:Point("TOP", self.Health, "BOTTOM", 0, -5)
+		end
+	else
+		ShadowOrb:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
+		D["ConstructEnergy"]("Mana", 216, 5)
+	end
+	ShadowOrb:SetBackdrop(backdrop)
+	ShadowOrb:SetBackdropColor(0, 0, 0)
+	ShadowOrb:SetBackdropBorderColor(0, 0, 0)
 
 	for i = 1, 5 do
-		pb[i] = CreateFrame("StatusBar", name .. i, pb)
-		pb[i]:Height(height)
-		pb[i]:SetStatusBarTexture(texture)
+		ShadowOrb[i] = CreateFrame("StatusBar", "ShadowOrbsBar" .. i, ShadowOrb)
+		ShadowOrb[i]:Height(5)
+		ShadowOrb[i]:SetStatusBarTexture(texture)
 		if i == 1 then
-			pb[i]:Width(width / 5)
-			pb[i]:SetPoint("LEFT", pb, "LEFT", 0, 0)
+			ShadowOrb[i]:Width((216 / 5) - 3)
+			ShadowOrb[i]:SetPoint("LEFT", ShadowOrb, "LEFT", 0, 0)
 		else
-			pb[i]:Width((width / 5) - 1)
-			pb[i]:SetPoint("LEFT", pb[i - 1], "RIGHT", 1, 0)
+			ShadowOrb[i]:Width(216 / 5)
+			ShadowOrb[i]:SetPoint("LEFT", ShadowOrb[i - 1], "RIGHT", 1, 0)
 		end
+		ShadowOrb[i].bg = ShadowOrb[i]:CreateTexture(nil, "ARTWORK")
 	end
-	pb:CreateBackdrop()
+	ShadowOrb:CreateBackdrop()
+	self.ShadowOrbsBar = ShadowOrb
 
-	if C["unitframes"].oocHide then
-		pb:RegisterEvent("PLAYER_REGEN_DISABLED")
-		pb:RegisterEvent("PLAYER_REGEN_ENABLED")
-		pb:RegisterEvent("PLAYER_ENTERING_WORLD")
-		pb:SetScript("OnEvent", function(self, event)
-			if event == "PLAYER_REGEN_DISABLED" then
-				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
-			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then pb:SetAlpha(0) end
-			end
-		end)
-	end
+	if C["unitframes"]["oocHide"] then D["oocHide"](ShadowOrb) end
 end

@@ -1,180 +1,210 @@
 local D, C, L = unpack(select(2, ...))
-if D.Class ~= "DRUID" then return end
 
-local texture = C["media"].normTex
-local layout = C["unitframes"].layout
-local font, fonsize, fontflag = C["media"].font, 12, "THINOUTLINE"
-
-Colors = {
-	[1] = {.70, .30, .30},
-	[2] = {.70, .40, .30},
-	[3] = {.60, .60, .30},
-	[4] = {.40, .70, .30},
-	[5] = {.30, .70, .30},
+local class = select(2, UnitClass("player"))
+local texture = C["media"]["normTex"]
+local font = D.Font(C["font"]["unitframes"])
+local layout = C["unitframes"]["layout"]
+local backdrop = {
+	bgFile = C["media"]["blank"],
+	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
 }
 
-if not C["unitframes"].attached then D.ConstructEnergy("Energy", 216, 5) end
+if class ~= "DRUID" then return end
 
-D.ConstructRessources = function(name, width, height)
-	local DruidMana = CreateFrame("StatusBar", name .. "Mana", UIParent)
-	DruidMana:Size(width, height)
-	DruidMana:SetStatusBarTexture(texture)
-	DruidMana:SetStatusBarColor(.30, .52, .90)
-	DruidMana:CreateBackdrop()
+D["ClassRessource"]["DRUID"] = function(self)
+	--[[Druid Mana]]--
+	if C["unitframes"]["DruidMana"] then
+		local DruidMana = CreateFrame("StatusBar", nil, self.Health)
+		DruidMana:Size(216, 5)
+		if C["unitframes"]["attached"] then
+			if layout == 1 then
+				DruidMana:Point("TOP", self.Power, "BOTTOM", 0, -10)
+			elseif layout == 2 then
+				DruidMana:Point("BOTTOM", self.Health, "TOP", 0, -5)
+				DruidMana:SetFrameLevel(self.Health:GetFrameLevel() + 2)
+			elseif layout == 3 then
+				DruidMana:Point("CENTER", self.panel, "CENTER", 0, -3)
+			elseif layout == 4 then
+				DruidMana:Point("TOP", self.Health, "BOTTOM", 0, -10)
+			end
+		else
+			DruidMana:Point("TOP", RessourceMover, "BOTTOM", 0, -5)
+		end
+		DruidMana:SetStatusBarTexture(texture)
+		DruidMana:SetStatusBarColor(.30, .52, .90)
+		DruidMana:SetFrameLevel(self.Health:GetFrameLevel() + 3)
+		DruidMana:CreateBackdrop()
 
-	DruidMana:SetBackdrop(backdrop)
-	DruidMana:SetBackdropColor(0, 0, 0)
-	DruidMana:SetBackdropBorderColor(0, 0, 0)
+		DruidMana:SetBackdrop(backdrop)
+		DruidMana:SetBackdropColor(0, 0, 0)
+		DruidMana:SetBackdropBorderColor(0, 0, 0)
 
-	DruidMana.Background = DruidMana:CreateTexture(nil, "BORDER")
-	DruidMana.Background:SetAllPoints()
-	DruidMana.Background:SetTexture(.30, .52, .90, .2)
+		DruidMana.bg = DruidMana:CreateTexture(nil, "BORDER")
+		DruidMana.bg:SetAllPoints(DruidMana)
+		DruidMana.bg:SetTexture(.30, .52, .90, .2)
 
-	local EclipseBar = CreateFrame("Frame", name .. "EclipseBar", UIParent)
-	EclipseBar:SetFrameStrata("MEDIUM")
-	EclipseBar:SetFrameLevel(8)
-	EclipseBar:Size(width, height)
+		self.DruidMana = DruidMana
+		self.DruidMana.bg = DruidMana.bg
+		if C["unitframes"]["oocHide"] then D["oocHide"](DruidMana) end
+	end
+
+	--[[Wild Mushrooms]]--
+	local Mushroom = CreateFrame("Frame", "Mushroom", UIParent)
+	Mushroom:SetSize(216, 5)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			Mushroom:Point("TOP", self.Power, "BOTTOM", 0, 0)
+		elseif layout == 2 then
+			Mushroom:Point("CENTER", self.panel, "CENTER", 0, 0)
+		elseif layout == 3 then
+			Mushroom:Point("CENTER", self.panel, "CENTER", 0, 5)
+		elseif layout == 4 then
+			Mushroom:Point("TOP", self.Health, "BOTTOM", 0, -5)
+		end
+	else
+		Mushroom:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
+		D["ConstructEnergy"]("Mana", 216, 5)
+	end
+	Mushroom:SetBackdrop(backdrop)
+	Mushroom:SetBackdropColor(0, 0, 0)
+	Mushroom:SetBackdropBorderColor(0, 0, 0)
+
+	for i = 1, 3 do
+		Mushroom[i] = CreateFrame("StatusBar", "Mushroom" .. i, Mushroom)
+		Mushroom[i]:SetHeight(5)
+		Mushroom[i]:SetStatusBarTexture(texture)
+		if i == 1 then
+			Mushroom[i]:SetWidth(216 / 3)
+			Mushroom[i]:SetPoint("LEFT", Mushroom, "LEFT", 0, 0)
+		else
+			Mushroom[i]:SetWidth((216 / 3) - 1)
+			Mushroom[i]:SetPoint("LEFT", Mushroom[i - 1], "RIGHT", 1, 0)
+		end
+		Mushroom[i].bg = Mushroom[i]:CreateTexture(nil, 'ARTWORK')
+	end
+	Mushroom:CreateBackdrop()
+	if C["unitframes"]["oocHide"] then D["oocHide"](Mushroom) end
+	self.WildMushroom = Mushroom
+
+	--[[Eclipse Bar]]--
+	local EclipseBar = CreateFrame("Frame", nil, self)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			EclipseBar:Point("TOP", self.Power, "BOTTOM", 0, 0)
+		elseif layout == 2 then
+			EclipseBar:Point("CENTER", self.panel, "CENTER", 0, 0)
+		elseif layout == 3 then
+			EclipseBar:Point("CENTER", self.panel, "CENTER", 0, 5)
+		elseif layout == 4 then
+			EclipseBar:Point("TOP", self.Health, "BOTTOM", 0, -5)
+		end
+	else
+		EclipseBar:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
+		D["ConstructEnergy"]("Mana", 216, 5)
+	end
+	EclipseBar:Size(216, 5)
+	EclipseBar:CreateBackdrop()
+
 	EclipseBar:SetBackdrop(backdrop)
 	EclipseBar:SetBackdropColor(0, 0, 0)
-	EclipseBar:SetBackdropBorderColor(0, 0, 0, 0)
-	EclipseBar:CreateBackdrop()
+	EclipseBar:SetBackdropBorderColor(0,0,0,0)
+	EclipseBar:Hide()
 
 	EclipseBar.LunarBar = CreateFrame("StatusBar", nil, EclipseBar)
 	EclipseBar.LunarBar:SetPoint("LEFT", EclipseBar, "LEFT", 0, 0)
-	EclipseBar.LunarBar:SetSize(EclipseBar:GetWidth(), EclipseBar:GetHeight())
+	EclipseBar.LunarBar:Size(EclipseBar:GetWidth(), EclipseBar:GetHeight())
 	EclipseBar.LunarBar:SetStatusBarTexture(texture)
 	EclipseBar.LunarBar:SetStatusBarColor(.50, .52, .70)
+	EclipseBar.LunarBar:SetFrameLevel(self.Health:GetFrameLevel())
 
 	EclipseBar.SolarBar = CreateFrame("StatusBar", nil, EclipseBar)
 	EclipseBar.SolarBar:SetPoint("LEFT", EclipseBar.LunarBar:GetStatusBarTexture(), "RIGHT", 0, 0)
-	EclipseBar.SolarBar:SetSize(EclipseBar:GetWidth(), EclipseBar:GetHeight())
+	EclipseBar.SolarBar:Size(EclipseBar:GetWidth(), EclipseBar:GetHeight())
 	EclipseBar.SolarBar:SetStatusBarTexture(texture)
-	EclipseBar.SolarBar:SetStatusBarColor(.80, .82,  .60)
+	EclipseBar.SolarBar:SetStatusBarColor(.80, .82, .60)
+	EclipseBar.SolarBar:SetFrameLevel(self.Health:GetFrameLevel())
 
 	EclipseBar.Text = EclipseBar:CreateFontString(nil, "OVERLAY")
-	if layout == 3 then EclipseBar.Text:SetPoint("TOP", EclipseBar, "BOTTOM", 0, -15) else EclipseBar.Text:SetPoint("BOTTOM", EclipseBar, "TOP", 0, 0) end
-	EclipseBar.Text:SetFont(C["media"].font, 12, "THINOUTLINE")
-	EclipseBar.PostUpdatePower = D.EclipseDirection
+	EclipseBar.Text:SetPoint("CENTER", self.Health, "CENTER", 0, 0)
+	EclipseBar.Text:SetFontObject(font)
 
-	local WildMushroom = CreateFrame("Frame", name .. "WildMushroom", UIParent)
-	WildMushroom:SetSize(width, height)
-	WildMushroom:SetBackdrop(backdrop)
-	WildMushroom:SetBackdropColor(0, 0, 0)
-	WildMushroom:SetBackdropBorderColor(0, 0, 0)
+	EclipseBar.PostUpdatePower = D["EclipseDirection"]
+	if C["unitframes"]["oocHide"] then D["oocHide"](EclipseBar) end
+	self.EclipseBar = EclipseBar
 
-	for i = 1, 3 do
-		WildMushroom[i] = CreateFrame("StatusBar", name .. "WildMushroom" .. i, WildMushroom)
-		WildMushroom[i]:SetHeight(height)
-		WildMushroom[i]:SetStatusBarTexture(texture)
-		if i == 1 then
-			WildMushroom[i]:SetWidth(width / 3)
-			WildMushroom[i]:SetPoint("LEFT", WildMushroom, "LEFT", 0, 0)
-		else
-			WildMushroom[i]:SetWidth((width / 3) - 1)
-			WildMushroom[i]:SetPoint("LEFT", WildMushroom[i - 1], "RIGHT", 1, 0)
+	--[[ComboPoints]]--
+	local ComboPoints = CreateFrame("Frame", "ComboPoints", UIParent)
+	ComboPoints:Size(216, 5)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			ComboPoints:Point("TOP", oUF_Player.Power, "BOTTOM", 0, 0)
+		elseif layout == 2 then
+			ComboPoints:Point("CENTER", oUF_Player.panel, "CENTER", 0, 0)
+		elseif layout == 3 then
+			ComboPoints:Point("CENTER", oUF_Player.panel, "CENTER", 0, 5)
+		elseif layout == 4 then
+			ComboPoints:Point("TOP", oUF_Player.Health, "BOTTOM", 0, -5)
 		end
-		WildMushroom[i].bg = WildMushroom[i]:CreateTexture(nil, 'ARTWORK')
+	else
+		ComboPoints:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
+		D["ConstructEnergy"]("Energy", 216, 5)
 	end
-	if layout == 1 or layout == 3 then WildMushroom:CreateBackdrop() end
-
-	local ComboPoints= CreateFrame("Frame", name .. "ComboPoints", UIParent)
-	ComboPoints:Size(width, height)
-	ComboPoints:CreateBackdrop()
 	ComboPoints:SetBackdrop(backdrop)
 	ComboPoints:SetBackdropColor(0, 0, 0)
-	ComboPoints:SetBackdropBorderColor(0, 0, 0, 0)
+	ComboPoints:SetBackdropBorderColor(0, 0, 0)
 
 	for i = 1, 5 do
-		ComboPoints[i] = CreateFrame("StatusBar", name .. "ComboPoints" .. i, ComboPoints)
-		ComboPoints[i]:Height(height)
+		ComboPoints[i] = CreateFrame("StatusBar", "ComboPoints" .. i, ComboPoints)
+		ComboPoints[i]:Height(5)
 		ComboPoints[i]:SetStatusBarTexture(texture)
-		ComboPoints[i]:SetStatusBarColor(unpack(Colors[i]))
-		ComboPoints[i].bg = ComboPoints[i]:CreateTexture(nil, "BORDER")
-		ComboPoints[i].bg:SetTexture(unpack(Colors[i]))
 		if i == 1 then
-			ComboPoints[i]:SetPoint("LEFT", ComboPoints)
 			ComboPoints[i]:Width(44)
-			ComboPoints[i].bg:SetAllPoints(ComboPoints[i])
+			ComboPoints[i]:SetPoint("LEFT", ComboPoints)
 		else
-			ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
 			ComboPoints[i]:Width(42)
-			ComboPoints[i].bg:SetAllPoints(ComboPoints[i])
+			ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
 		end
-		ComboPoints[i].bg:SetTexture(texture)
-		ComboPoints[i].bg:SetAlpha(.15)
+		ComboPoints[i].bg = ComboPoints[i]:CreateTexture(nil, "ARTWORK")
 	end
+	ComboPoints:CreateBackdrop()
+	self.ComboPointsBar = ComboPoints
+	if C["unitframes"]["oocHide"] then D["oocHide"](ComboPoints) end
 
+	--[[Visibility]]--
 	Visibility = CreateFrame("Frame")
+	Visibility:RegisterEvent("PLAYER_ENTERING_WORLD")
+	Visibility:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
 	Visibility:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	Visibility:SetScript("OnEvent", function()
 		local spec = GetSpecialization()
 		local specName = spec and select(2, GetSpecializationInfo(spec)) or "None"
+		local form = GetShapeshiftFormID()
 		if specName == "Balance" then
-			ComboPoints:Hide()
+			if not form == 1 then ComboPoints:Hide() end
+			if not C["unitframes"]["attached"] then
+				Mushroom:ClearAllPoints()
+				Mushroom:Point("TOP", RessourceMover, "BOTTOM", 0, -5)
+			else
+				Mushroom:ClearAllPoints()
+				Mushroom:Point("TOP", EclipseBar, "BOTTOM", 0, -7)
+			end
 		elseif specName == "Feral" then
-			WildMushroom:Hide()
+			Mushroom:Hide()
 			EclipseBar:Hide()
 		elseif specName == "Restoration" then
 			EclipseBar:Hide()
-			ComboPoints:Hide()
+			if not form == 1 then ComboPoints:Hide() end
+			Mushroom[1]:SetWidth(Mushroom:GetWidth())
+			Mushroom[2]:Hide()
+			Mushroom[3]:Hide()
 		elseif specName == "Guardian" then
 			EclipseBar:Hide()
+			if not form == 1 then ComboPoints:Hide() end
+			Mushroom:Hide()
+		else
+			EclipseBar:Hide()
 			ComboPoints:Hide()
-			WildMushroom:Hide()
+			Mushroom:Hide()
 		end
 	end)
-
-	if C["unitframes"].oocHide then
-		DruidMana:RegisterEvent("PLAYER_REGEN_DISABLED")
-		DruidMana:RegisterEvent("PLAYER_REGEN_ENABLED")
-		DruidMana:RegisterEvent("PLAYER_ENTERING_WORLD")
-		DruidMana:SetScript("OnEvent", function(self, event)
-			if event == "PLAYER_REGEN_DISABLED" then
-				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
-			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then DruidMana:SetAlpha(0) end
-			end
-		end)
-
-		EclipseBar:RegisterEvent("PLAYER_REGEN_DISABLED")
-		EclipseBar:RegisterEvent("PLAYER_REGEN_ENABLED")
-		EclipseBar:RegisterEvent("PLAYER_ENTERING_WORLD")
-		EclipseBar:SetScript("OnEvent", function(self, event)
-			if event == "PLAYER_REGEN_DISABLED" then
-				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
-			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then EclipseBar:SetAlpha(0) end
-			end
-		end)
-
-		WildMushroom:RegisterEvent("PLAYER_REGEN_DISABLED")
-		WildMushroom:RegisterEvent("PLAYER_REGEN_ENABLED")
-		WildMushroom:RegisterEvent("PLAYER_ENTERING_WORLD")
-		WildMushroom:SetScript("OnEvent", function(self, event)
-			if event == "PLAYER_REGEN_DISABLED" then
-				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
-			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then WildMushroom:SetAlpha(0) end
-			end
-		end)
-
-		ComboPoints:RegisterEvent("PLAYER_REGEN_DISABLED")
-		ComboPoints:RegisterEvent("PLAYER_REGEN_ENABLED")
-		ComboPoints:RegisterEvent("PLAYER_ENTERING_WORLD")
-		ComboPoints:SetScript("OnEvent", function(self, event)
-			if event == "PLAYER_REGEN_DISABLED" then
-				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
-			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then ComboPoints:SetAlpha(0) end
-			end
-		end)
-	end
 end

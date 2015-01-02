@@ -1,44 +1,69 @@
 local D, C, L = unpack(select(2, ...))
-if D.Class ~= "MONK" then return end
 
-local texture = C["media"].normTex
-local layout = C["unitframes"].layout
+local class = select(2, UnitClass("player"))
+local texture = C["media"]["normTex"]
+local font = D.Font(C["font"]["unitframes"])
+local layout = C["unitframes"]["layout"]
+local backdrop = {
+	bgFile = C["media"]["blank"],
+	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
+}
 
-if not C["unitframes"].attached then D.ConstructEnergy("Energy", 216, 5) end
+if class ~= "MONK" then return end
 
-D.ConstructRessources = function(name, width, height)
-	local Bar = CreateFrame("Frame", name, UIParent)
-	Bar:Size(width, height)
-	Bar:SetBackdrop(backdrop)
-	Bar:SetBackdropColor(0, 0, 0)
-	Bar:SetBackdropBorderColor(0, 0, 0)
+D["ClassRessource"]["MONK"] = function(self)
+	local HarmonyBar = CreateFrame("Frame", "HarmonyBar", UIParent)
+	HarmonyBar:Size(216, 5)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			HarmonyBar:Point("TOP", self.Power, "BOTTOM", 0, 0)
+		elseif layout == 2 then
+			HarmonyBar:Point("CENTER", self.panel, "CENTER", 0, 0)
+		elseif layout == 3 then
+			HarmonyBar:Point("CENTER", self.panel, "CENTER", 0, 5)
+		elseif layout == 4 then
+			HarmonyBar:Point("TOP", self.Health, "BOTTOM", 0, -5)
+		end
+	else
+		HarmonyBar:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
+		D["ConstructEnergy"]("Chi", 216, 5)
+	end
+	HarmonyBar:SetBackdrop(backdrop)
+	HarmonyBar:SetBackdropColor(0, 0, 0)
+	HarmonyBar:SetBackdropBorderColor(0, 0, 0)
 
 	for i = 1, 6 do
-		Bar[i] = CreateFrame("StatusBar", name .. i, Bar)
-		Bar[i]:Height(5)
-		Bar[i]:SetStatusBarTexture(texture)
+		HarmonyBar[i] = CreateFrame("StatusBar", "HarmonyBar" .. i, HarmonyBar)
+		HarmonyBar[i]:Height(5)
+		HarmonyBar[i]:SetStatusBarTexture(texture)
 		if i == 1 then
-			Bar[i]:Width(width / 6)
-			Bar[i]:SetPoint("LEFT", Bar, "LEFT", 0, 0)
+			HarmonyBar[i]:Width(216 / 6)
+			HarmonyBar[i]:SetPoint("LEFT", HarmonyBar, "LEFT", 0, 0)
 		else
-			Bar[i]:Width(width / 6)
-			Bar[i]:SetPoint("LEFT", Bar[i - 1], "RIGHT", 1, 0)
+			HarmonyBar[i]:Width(216 / 6)
+			HarmonyBar[i]:SetPoint("LEFT", HarmonyBar[i - 1], "RIGHT", 1, 0)
 		end
 	end
-	Bar:CreateBackdrop()
+	HarmonyBar:CreateBackdrop()
+	self.HarmonyBar = HarmonyBar
 
-	if C["unitframes"].oocHide then
-		Bar:RegisterEvent("PLAYER_REGEN_DISABLED")
-		Bar:RegisterEvent("PLAYER_REGEN_ENABLED")
-		Bar:RegisterEvent("PLAYER_ENTERING_WORLD")
-		Bar:SetScript("OnEvent", function(self, event)
-			if event == "PLAYER_REGEN_DISABLED" then
-				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
-			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then Bar:SetAlpha(0) end
-			end
-		end)
+	if C["unitframes"]["oocHide"] then D["oocHide"](HarmonyBar) end
+
+	if C["unitframes"]["showstatuebar"] then
+		local StatueBar = CreateFrame("StatusBar", "oUF_StatueBar", self)
+		StatueBar:SetWidth(5)
+		StatueBar:SetHeight(29)
+		StatueBar:Point("LEFT", power, "RIGHT", 7, 5)
+		StatueBar:SetStatusBarTexture(texture)
+		StatueBar:SetOrientation("VERTICAL")
+		StatueBar.bg = StatueBar:CreateTexture(nil, "ARTWORK")
+		StatueBar.background = CreateFrame("Frame", "oUF_Statue", StatueBar)
+		StatueBar.background:SetAllPoints()
+		StatueBar.background:SetFrameLevel(StatueBar:GetFrameLevel() - 1)
+		StatueBar.background:SetBackdrop(backdrop)
+		StatueBar.background:SetBackdropColor(0, 0, 0)
+		StatueBar.background:SetBackdropBorderColor(0,0,0)
+		StatueBar:CreateBackdrop()
+		self.Statue = StatueBar
 	end
 end

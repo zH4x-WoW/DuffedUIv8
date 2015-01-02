@@ -1,27 +1,46 @@
 local D, C, L = unpack(select(2, ...))
-if D.Class ~= "SHAMAN" then return end
 
-local texture = C["media"].normTex
-local font, fonsize, fontflag = C["media"].font, 12, "THINOUTLINE"
+local class = select(2, UnitClass("player"))
+local texture = C["media"]["normTex"]
+local font = D.Font(C["font"]["unitframes"])
+local layout = C["unitframes"]["layout"]
+local backdrop = {
+	bgFile = C["media"]["blank"],
+	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
+}
 
-if not C["unitframes"].attached then D.ConstructEnergy("Energy", 216, 5) end
+if class ~= "SHAMAN" then return end
 
-D.ConstructRessources = function(name, width, height)
-	local TotemBar = CreateFrame("Frame", name, UIParent)
-	TotemBar:Size(width, height)
+D["ClassRessource"]["SHAMAN"] = function(self)
+	local TotemBar = CreateFrame("Frame", "TotemBar", UIParent)
+	TotemBar:Size(216, 5)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			TotemBar:Point("TOP", self.Power, "BOTTOM", 0, 0)
+		elseif layout == 2 then
+			TotemBar:Point("CENTER", self.panel, "CENTER", 0, 0)
+		elseif layout == 3 then
+			TotemBar:Point("CENTER", self.panel, "CENTER", 0, 5)
+		elseif layout == 4 then
+			TotemBar:Point("TOP", self.Health, "BOTTOM", 0, -5)
+		end
+	else
+		TotemBar:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
+		D["ConstructEnergy"]("Mana", 216, 5)
+	end
 	TotemBar:SetBackdrop(backdrop)
 	TotemBar:SetBackdropColor(0, 0, 0)
 	TotemBar:SetBackdropBorderColor(0, 0, 0)
-	
+
 	for i = 1, 4 do
-		TotemBar[i] = CreateFrame("StatusBar", name ..i, TotemBar)
-		TotemBar[i]:SetHeight(height)
+		TotemBar[i] = CreateFrame("StatusBar", "TotemBar" .. i, TotemBar)
+		TotemBar[i]:SetHeight(5)
 		TotemBar[i]:SetStatusBarTexture(texture)
 		if i == 1 then
-			TotemBar[i]:SetWidth(width / 4)
+			TotemBar[i]:SetWidth(54)
 			TotemBar[i]:Point("LEFT", TotemBar, "LEFT", 0, 0)
 		else
-			TotemBar[i]:SetWidth((width / 4) - 1)
+			TotemBar[i]:SetWidth(53)
 			TotemBar[i]:SetPoint("LEFT", TotemBar[i - 1], "RIGHT", 1, 0)
 		end
 		TotemBar[i]:SetMinMaxValues(0, 1)
@@ -31,19 +50,7 @@ D.ConstructRessources = function(name, width, height)
 		TotemBar[i].bg.multiplier = .2
 	end
 	TotemBar:CreateBackdrop()
+	self.TotemBar = TotemBar
 
-	if C["unitframes"].oocHide then
-		TotemBar:RegisterEvent("PLAYER_REGEN_DISABLED")
-		TotemBar:RegisterEvent("PLAYER_REGEN_ENABLED")
-		TotemBar:RegisterEvent("PLAYER_ENTERING_WORLD")
-		TotemBar:SetScript("OnEvent", function(self, event)
-			if event == "PLAYER_REGEN_DISABLED" then
-				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
-			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then TotemBar:SetAlpha(0) end
-			end
-		end)
-	end
+	if C["unitframes"]["oocHide"] then D["oocHide"](TotemBar) end
 end

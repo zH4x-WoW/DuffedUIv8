@@ -2,28 +2,38 @@ local D, C, L = unpack(select(2, ...))
 
 local texture = C["media"].normTex
 local font, fontsize, fontflag = C["media"].font, 11, "THINOUTLINE"
-local layout = C["unitframes"].layout
 local Color = RAID_CLASS_COLORS[D.Class]
+local move = D["move"]
+D["ClassRessource"] = {}
 
---[[Mover]]--
-local cba = CreateFrame("Frame", "CBAnchor", UIParent)
-cba:SetTemplate("Default")
-cba:Size(250, 15)
-if C["raid"].center then cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 200) else cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 325) end
-cba:SetClampedToScreen(true)
-cba:SetMovable(true)
-cba:SetBackdropColor(0, 0, 0)
-cba:SetBackdropBorderColor(1, 0, 0)
-cba.text = D.SetFontString(cba, font, fontsize)
-cba.text:SetPoint("CENTER")
-cba.text:SetText(L["move"]["classbar"])
-cba:Hide()
-tinsert(D.AllowFrameMoving, CBAnchor)
+--[[Mover for ressources]]--
+if not C["unitframes"]["attached"] then
+	local cba = CreateFrame("Frame", "RessourceMover", UIParent)
+	cba:Size(250, 15)
+	if C["raid"]["center"] then cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 200) else cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 325) end
+	move:RegisterFrame(cba)
+end
+
+--[[Function for oocHide]]--
+D["oocHide"] = function(frame)
+	frame:RegisterEvent("PLAYER_REGEN_DISABLED")
+	frame:RegisterEvent("PLAYER_REGEN_ENABLED")
+	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+	frame:SetScript("OnEvent", function(self, event)
+		if event == "PLAYER_REGEN_DISABLED" then
+			UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
+		elseif event == "PLAYER_REGEN_ENABLED" then
+			UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
+		elseif event == "PLAYER_ENTERING_WORLD" then
+			if not InCombatLockdown() then frame:SetAlpha(0) end
+		end
+	end)
+end
 
 --[[Energybar]]--
-D.ConstructEnergy = function(name, width, height)
+D["ConstructEnergy"] = function(name, width, height)
 	local eb = CreateFrame("StatusBar", name, UIParent)
-	eb:SetPoint("TOP", CBAnchor, "BOTTOM", 0, 5)
+	eb:SetPoint("TOP", RessourceMover, "BOTTOM", 0, 5)
 	eb:Size(D.Scale(width), D.Scale(height))
 	eb:SetStatusBarTexture(texture)
 	eb:SetStatusBarColor(Color.r, Color.g, Color.b)
@@ -49,18 +59,5 @@ D.ConstructEnergy = function(name, width, height)
 		end
 	end)
 
-	if C["unitframes"].oocHide then
-		eb:RegisterEvent("PLAYER_REGEN_DISABLED")
-		eb:RegisterEvent("PLAYER_REGEN_ENABLED")
-		eb:RegisterEvent("PLAYER_ENTERING_WORLD")
-		eb:SetScript("OnEvent", function(self, event)
-			if event == "PLAYER_REGEN_DISABLED" then
-				UIFrameFadeIn(self, (0.3 * (1 - self:GetAlpha())), self:GetAlpha(), 1)
-			elseif event == "PLAYER_REGEN_ENABLED" then
-				UIFrameFadeOut(self, 2, self:GetAlpha(), 0)
-			elseif event == "PLAYER_ENTERING_WORLD" then
-				if not InCombatLockdown() then eb:SetAlpha(0) end
-			end
-		end)
-	end
+	if C["unitframes"].oocHide then D["oocHide"](eb) end
 end

@@ -27,6 +27,7 @@ C["font"] = {
 
 C["unitframes"] = {
 	["enable"] = true,
+	--["FrameWidth"] = 218,
 	["layout"] = 1,
 	["fader"] = false,
 	["minalpha"] = 0.1,
@@ -56,6 +57,8 @@ C["unitframes"] = {
 	["buffsize"] = 20,
 	["debuffsize"] = 20,
 	["Enable_ToT"] = true,
+	["DruidMana"] = true,
+	["AnticipationBar"] = true,
 }
 
 C["chat"] = {
@@ -182,7 +185,6 @@ C["datatext"] = {
 C["skins"] = {
 	["blizzardreskin"] = true,
 	["calendarevent"] = false,
-	["HideBlips"] = true,
 }
 
 C["cooldown"] = {
@@ -229,7 +231,7 @@ C["auras"] = {
 C["bags"] = {
 	["enable"] = true,
 	["bpr"] = 10,
-	["movable"] = true,
+	["movable"] = false,
 	["scale"] = 1,
 	["buttonsize"] = 28,
 	["spacing"] = 4,

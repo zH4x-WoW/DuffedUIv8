@@ -57,6 +57,8 @@ DuffedUIConfigUILocalization.unitframesplayermodel = "Set Portraitstyle (Icon or
 DuffedUIConfigUILocalization.unitframesbuffsize = "Set size of Buffs on Targetframe"
 DuffedUIConfigUILocalization.unitframesdebuffsize = "Set size of Debuffs on Targetframe"
 DuffedUIConfigUILocalization.unitframesEnable_ToT = "Enable Target of Target-Frame"
+DuffedUIConfigUILocalization.unitframesDruidMana = "Enable the display for Mana if shapeshifted"
+DuffedUIConfigUILocalization.unitframesAnticipationBar = "Enable Anticipationbar if skill is learned"
 
 --[[Chat]]--
 DuffedUIConfigUILocalization.chat = "Chat"
@@ -183,7 +185,6 @@ DuffedUIConfigUILocalization.datatextShowInCombat = "Show DataText-Tooltip in co
 DuffedUIConfigUILocalization.skins = "Skins"
 DuffedUIConfigUILocalization.skinsblizzardreskin = "Reskin Blizzard frames to match DuffedUI"
 DuffedUIConfigUILocalization.skinscalendarevent = "Disable calendar event textures"
-DuffedUIConfigUILocalization.skinsHideBlips = "Hide Mine-, Herbgarden- and Daily-Blips on minimap if outside of a building at your garrison"
 
 --[[Cooldowns]]--
 DuffedUIConfigUILocalization.cooldown = "Cooldowns"

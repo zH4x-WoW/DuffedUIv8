@@ -236,6 +236,7 @@ do
 		'maintank',
 		'mainassist',
 		'arena',
+		'castbar',
 	}
 
 	local rewrite = {
