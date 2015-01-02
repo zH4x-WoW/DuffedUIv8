@@ -30,7 +30,7 @@ otf:SetMovable(true)
 otf:SetUserPlaced(true)
 otf:SetHeight(otfheight)
 
-local otfmove = CreateFrame("FRAME", nil, otf)  
+local otfmove = CreateFrame("FRAME", "ObjectivetrackerMover", otf)  
 otfmove:SetHeight(21)
 otfmove:SetPoint("TOPLEFT", otf, -11, -1)
 otfmove:SetPoint("TOPRIGHT", otf)
