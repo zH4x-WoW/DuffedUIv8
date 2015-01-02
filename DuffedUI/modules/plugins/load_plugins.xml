@@ -1,7 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="afkcamera.lua" />
 	<Script file="buffnotice.lua" />
-	<Script file="classtimer.lua" />
 	<Script file="clickcast.lua" />
 	<Script file="combat.lua" />
 	<Script file="efl.lua" />

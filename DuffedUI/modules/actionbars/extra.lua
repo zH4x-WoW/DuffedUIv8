@@ -1,18 +1,11 @@
 local D, C, L = unpack(select(2, ...))
 if not C["actionbar"].enable then return end
 
-local holder = CreateFrame("Frame", "DuffedUIExtraActionBarFrameHolder", UIParent)
+local move = D["move"]
+local holder = CreateFrame("Frame", "ExtrabuttonMover", UIParent)
 holder:Size(80, 80)
 if C["raid"].center then holder:SetPoint("BOTTOM", -235, 88) else holder:SetPoint("BOTTOM", 0, 250) end
-holder:SetMovable(true)
-holder:SetTemplate("Default")
-holder:SetBackdropBorderColor(1, 0, 0)
-holder:SetAlpha(0)
-holder.text = D.SetFontString(holder, C["media"].font, 11)
-holder.text:SetPoint("CENTER")
-holder.text:SetText(L["move"]["extrabutton"])
-holder.text:Hide()
-tinsert(D.AllowFrameMoving, DuffedUIExtraActionBarFrameHolder)
+move:RegisterFrame(holder)
 
 ExtraActionBarFrame:SetParent(UIParent)
 ExtraActionBarFrame:ClearAllPoints()

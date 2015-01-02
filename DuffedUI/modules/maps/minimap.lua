@@ -1,17 +1,13 @@
 local D, C, L = unpack(select(2, ...))
 
+local move = D["move"]
 local DuffedUIMinimap = CreateFrame("Frame", "DuffedUIMinimap", DuffedUIPetBattleHider)
 DuffedUIMinimap:SetTemplate()
 DuffedUIMinimap:RegisterEvent("ADDON_LOADED")
 if C["auras"].bufftracker then DuffedUIMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -35, -5) else DuffedUIMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -5, -5) end
 DuffedUIMinimap:Size(144)
 DuffedUIMinimap:SetScale(C["general"].FrameScaleMinimap)
-DuffedUIMinimap:SetClampedToScreen(true)
-DuffedUIMinimap:SetMovable(true)
-DuffedUIMinimap.text = D.SetFontString(DuffedUIMinimap, C["media"].font, 11)
-DuffedUIMinimap.text:SetPoint("CENTER")
-DuffedUIMinimap.text:SetText(L["move"]["minimap"])
-tinsert(D.AllowFrameMoving, DuffedUIMinimap)
+move:RegisterFrame(DuffedUIMinimap)
 
 MinimapCluster:Kill()
 Minimap:SetParent(DuffedUIMinimap)
@@ -120,38 +116,6 @@ Minimap:EnableMouseWheel(true)
 Minimap:SetScript("OnMouseWheel", function(self, delta)
 	if delta > 0 then MinimapZoomIn:Click() elseif delta < 0 then MinimapZoomOut:Click() end
 end)
-
-if C["skins"].HideBlips then
-	local IsGarrison = {
-		[1152] = true,
-		[1330] = true,
-		[1153] = true,
-		[1154] = true,
-		[1158] = true,
-		[1331] = true,
-		[1159] = true,
-		[1160] = true,
-	}
-
-	local Blips = CreateFrame("Frame")
-	local Replaced = false
-	Blips:SetScript("OnEvent", function(self, event, ...)
-		local _, _, _, _, _, _, _, instance = GetInstanceInfo()
-		local Replace = IsGarrison[instance] and not IsIndoors()
-		if Replace and not Replaced then
-			Minimap:SetBlipTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\objecticons.tga")
-			Minimap:UpdateBlips()
-		elseif Replaced and not Replace then
-			Minimap:SetBlipTexture("Interface\\Minimap\\objecticons")
-			Minimap:UpdateBlips()
-		end
-		Replaced = Replace
-	end)
-	Blips:RegisterEvent("PLAYER_ENTERING_WORLD")
-	Blips:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-	Blips:RegisterEvent("ZONE_CHANGED")
-	Blips:RegisterEvent("NEW_WMO_CHUNK")
-end
 
 local m_zone = CreateFrame("Frame", "DuffedUIMinimapZone", DuffedUIMinimap)
 m_zone:SetTemplate("Transparent")

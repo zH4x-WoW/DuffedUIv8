@@ -8,7 +8,7 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 	end
 
 	if addon ~= "DuffedUI" then return end
-	if C["raid"].enable == true then
+	if C["raid"]["enable"] or C["raid"]["PartyEnable"] then
 		InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
 

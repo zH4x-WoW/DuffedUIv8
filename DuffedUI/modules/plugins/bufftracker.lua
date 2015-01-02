@@ -582,3 +582,56 @@ local function ToggleBuffTracker()
 	end
 end
 bufftracker_toggle:SetScript("OnMouseDown", ToggleBuffTracker)
+
+--[[Combatrez display]]--
+--[[local rebirth = 20484
+
+local f = CreateFrame("Button", "BRButton", UIParent, "ActionButtonTemplate")
+f:RegisterEvent("ADDON_LOADED")
+f:SetMovable(true)
+f:SetScript("OnMouseDown", function(self) self:StartMoving() end)
+f:SetScript("OnMouseUp", function(self) self:StopMovingOrSizing() end)
+f:SetScript("OnLeave", function() GameTooltip:Hide() end)
+f:SetScript("OnEnter", function(self)
+	GameTooltip:SetOwner(self,"ANCHOR_CURSOR")
+	GameTooltip:ClearLines()
+	GameTooltip:SetSpellByID(rebirth)
+	GameTooltip:Show()
+end)
+
+_G[format("%sCooldown", f:GetName())]:SetReverse(true)
+
+function f:Reset()
+	self:SetSize(36, 36)
+	self:SetPoint("CENTER")
+	self:SetAttribute("type", "spell")
+	self:SetAttribute("spell", rebirth)
+	local spellInfo = {GetSpellInfo(rebirth)}
+	_G[format("%sIcon", self:GetName())]:SetTexture(spellInfo[3])
+	spellInfo = nil
+end
+
+function f:Update()
+	local currentCharges, maxCharges, cooldownStart, cooldownDuration = GetSpellCharges(rebirth)
+	if not currentCharges then
+		self:Hide()
+	else
+		if(cooldownStart) then CooldownFrame_SetTimer(_G[format("%sCooldown", self:GetName())], cooldownStart, cooldownDuration, 1) else CooldownFrame_SetTimer(_G[format("%sCooldown", self:GetName())], 0, 0, 0) end
+		_G[format("%sCount", self:GetName())]:SetText(currentCharges and currentCharges or 0)
+		self:Show()
+	end
+end
+
+f:SetScript("OnEvent", function(self, event, arg1,...)
+	if (event=="ADDON_LOADED" and name==arg1) then
+		self:UnregisterEvent(event)
+		self:RegisterEvent("PLAYER_REGEN_ENABLED")
+		self:RegisterEvent("PLAYER_REGEN_DISABLED")
+		self:Reset()
+	elseif event=="PLAYER_REGEN_ENABLED" then
+		self:UnregisterEvent("SPELL_UPDATE_CHARGES")
+	elseif event=="PLAYER_REGEN_DISABLED" then
+		self:RegisterEvent("SPELL_UPDATE_CHARGES")
+	end
+	self:Update()
+end)]]

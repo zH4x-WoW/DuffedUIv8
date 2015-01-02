@@ -10,21 +10,11 @@ local pos = "TOP"
 local frames = {}
 local cancelled_rolls = {}
 local rolltypes = {"need", "greed", "disenchant", [0] = "pass"}
+local move = D["move"]
 
-local anchor = CreateFrame("Button", "DuffedUIRollAnchor", UIParent)
+local anchor = CreateFrame("Button", "DuffedUIRollMover", UIParent)
 anchor:Size(300, 22) 
-anchor:SetBackdrop(backdrop)
-anchor:SetBackdropColor(.25, .25, .25, 1)
-local label = anchor:CreateFontString(nil, "ARTWORK")
-label:SetFont(C["media"].font, 11, "OUTLINE")
-label:SetAllPoints(anchor)
-label:SetText(L["move"]["roll"])
-anchor:SetMovable(true)
-anchor:EnableMouse(false)
-anchor:SetTemplate("Default")
-anchor:SetAlpha(0)
-anchor:SetBackdropBorderColor(1, 0, 0, 1)
-tinsert(D.AllowFrameMoving, DuffedUIRollAnchor)
+move:RegisterFrame(anchor)
 
 local function ClickRoll(frame) RollOnLoot(frame.parent.rollID, frame.rolltype) end
 

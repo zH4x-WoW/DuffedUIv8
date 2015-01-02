@@ -5,6 +5,7 @@ local barHeight, barWidth = 10, C["misc"].XPBarWidth
 local font = D.Font(C["font"].experience)
 local barTex, flatTex = C["media"].normTex
 local color = RAID_CLASS_COLORS[D.Class]
+local move = D["move"]
 local FactionInfo = {
 	[1] = {{ 170/255, 70/255,  70/255 }, L["xpbar"]["hated"], "FFaa4646"},
 	[2] = {{ 170/255, 70/255,  70/255 }, L["xpbar"]["hostile"], "FFaa4646"},
@@ -22,28 +23,20 @@ local function IsMaxLevel()
 	if UnitLevel("player") == MAX_PLAYER_LEVEL then return true end
 end
 
-xpMover = CreateFrame("Frame", "xpMover", UIParent)
-xpMover:SetTemplate("Transparent")
+xpMover = CreateFrame("Frame", "XPBarMover", UIParent)
 xpMover:SetSize(barWidth, barHeight)
 xpMover:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 7, 178)
 xpMover:SetFrameLevel(6)
-xpMover:SetClampedToScreen(true)
-xpMover:SetMovable(true)
-xpMover.text = D.SetFontString(xpMover, C["media"].font, 11)
-xpMover.text:SetPoint("CENTER")
-xpMover.text:SetText(L["move"]["xp-bar"])
-xpMover:SetBackdropBorderColor(1, 0, 0, 1)
-xpMover:Hide()
-tinsert(D.AllowFrameMoving, xpMover)
+move:RegisterFrame(xpMover)
 
 local backdrop = CreateFrame("Frame", "Experience_Backdrop", UIParent)
 backdrop:SetAllPoints(xpMover)
 backdrop:SetBackdropColor(C["general"].backdropcolor)
 backdrop:SetBackdropBorderColor(C["general"].backdropcolor)
 backdrop:CreateBackdrop("Transparent")
-backdrop:SetClampedToScreen(true)
-backdrop:SetMovable(true)
-tinsert(D.AllowFrameMoving, backdrop)
+--backdrop:SetClampedToScreen(true)
+--backdrop:SetMovable(true)
+--move:RegisterFrame(backdrop)
 
 local xpBar = CreateFrame("StatusBar",  "Experience_xpBar", backdrop, "TextStatusBar")
 xpBar:SetWidth(barWidth)

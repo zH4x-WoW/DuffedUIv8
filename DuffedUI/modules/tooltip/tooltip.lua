@@ -13,6 +13,7 @@ local CHAT_FLAG_AFK = CHAT_FLAG_AFK
 local CHAT_FLAG_DND = CHAT_FLAG_DND
 local LEVEL = LEVEL
 local PVP_ENABLED = PVP_ENABLED
+local move = D["move"]
 
 DuffedUITooltips.ItemRefTooltip = ItemRefTooltip
 
@@ -38,27 +39,19 @@ DuffedUITooltips.Classification = {
 	rare = "|cffAF5050Rare|r",
 }
 
-local Anchor = CreateFrame("Frame", "DuffedUITooltipAnchor", UIParent)
+local Anchor = CreateFrame("Frame", "DuffedUITooltipMover", UIParent)
 Anchor:SetSize(200, DuffedUIInfoRight:GetHeight())
 Anchor:SetFrameStrata("TOOLTIP")
 Anchor:SetFrameLevel(20)
-Anchor:SetClampedToScreen(true)
-Anchor:SetAlpha(0)
 if C["chat"].rbackground and DuffedUIChatBackgroundRight then
 	Anchor:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, -DuffedUIInfoRight:GetHeight())
 else
 	Anchor:SetPoint("BOTTOMRIGHT", UIParent, 0, 110)
 end
-Anchor:SetTemplate("Transparent")
-Anchor:SetBackdropBorderColor(1, 0, 0, 1)
-Anchor:SetMovable(true)
-Anchor.text = D.SetFontString(Anchor, C["media"].font, 11)
-Anchor.text:SetPoint("CENTER")
-Anchor.text:SetText(L["move"]["tooltip"])
-tinsert(D.AllowFrameMoving, DuffedUITooltipAnchor)
+move:RegisterFrame(Anchor)
 
 function DuffedUITooltips:SetTooltipDefaultAnchor()
-	local Anchor = DuffedUITooltipAnchor
+	local Anchor = DuffedUITooltipMover
 
 	self:SetOwner(Anchor)
 	if C["tooltip"].Mouse then self:SetAnchorType("ANCHOR_CURSOR", 0, 5) else self:SetAnchorType("ANCHOR_TOPRIGHT", 0, 5) end
@@ -254,7 +247,7 @@ function DuffedUITooltips:OnValueChanged(value)
 
 	if not self.text then
 		self.text = self:CreateFontString(nil, "OVERLAY")
-		local position = DuffedUITooltipAnchor:GetPoint()
+		local position = DuffedUITooltipMover:GetPoint()
 		if position:match("TOP") then self.text:Point("CENTER", GameTooltipStatusBar, 0, -6) else self.text:Point("CENTER", GameTooltipStatusBar, 0, 6) end
 
 		self.text:SetFont(C["media"].font, 12, "THINOUTLINE")

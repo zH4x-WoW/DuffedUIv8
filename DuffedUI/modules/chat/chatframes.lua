@@ -201,7 +201,7 @@ BNToastFrame:SetTemplate("Transparent")
 
 BNToastFrame:HookScript("OnShow", function(self)
 	self:ClearAllPoints()
-	self:Point("TOPLEFT", DuffedUIBnetHolder, "TOPLEFT", 3, -3)
+	self:Point("TOPLEFT", DuffedUIBnetMover, "TOPLEFT", 3, -3)
 end)
 
 BNToastFrameCloseButton:SkinCloseButton()

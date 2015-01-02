@@ -1,6 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 
 local FrameScale = C["general"]["FrameScaleActionBar"]
+local move = D["move"]
 
 local ileft = CreateFrame("Frame", "DuffedUIInfoLeft", UIParent)
 ileft:SetTemplate("Default")
@@ -52,18 +53,10 @@ end
 
 if C["actionbar"]["enable"] then
 	DuffedUIBar1Mover = CreateFrame("Frame", "DuffedUIBar1Mover", UIParent)
-	DuffedUIBar1Mover:SetTemplate("Transparent")
 	DuffedUIBar1Mover:SetSize((((D.buttonsize * 12) + (D.buttonspacing * 13)) * FrameScale), (((D.buttonsize * 1) + (D.buttonspacing * 2)) * FrameScale))
 	DuffedUIBar1Mover:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 130)
 	DuffedUIBar1Mover:SetFrameLevel(6)
-	DuffedUIBar1Mover:SetClampedToScreen(true)
-	DuffedUIBar1Mover:SetMovable(true)
-	DuffedUIBar1Mover.text = D.SetFontString(DuffedUIBar1Mover, C["media"].font, 11)
-	DuffedUIBar1Mover.text:SetPoint("CENTER")
-	DuffedUIBar1Mover.text:SetText(L["move"]["bar1"])
-	DuffedUIBar1Mover:SetBackdropBorderColor(1, 0, 0, 1)
-	DuffedUIBar1Mover:Hide()
-	tinsert(D.AllowFrameMoving, DuffedUIBar1Mover)
+	move:RegisterFrame(DuffedUIBar1Mover)
 
 	local DuffedUIBar1 = CreateFrame("Frame", "DuffedUIBar1", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar1:SetTemplate("Transparent")
@@ -77,9 +70,7 @@ if C["actionbar"]["enable"] then
 	DuffedUIBar2:SetSize((((D.buttonsize * 12) + (D.buttonspacing * 13)) * FrameScale), (((D.buttonsize * 1) + (D.buttonspacing * 2)) * FrameScale))
 	DuffedUIBar2:SetFrameStrata("BACKGROUND")
 	DuffedUIBar2:SetFrameLevel(3)
-	DuffedUIBar2:SetClampedToScreen(true)
-	DuffedUIBar2:SetMovable(true)
-	tinsert(D.AllowFrameMoving, DuffedUIBar2)
+	move:RegisterFrame(DuffedUIBar2)
 
 	local DuffedUIBar3 = CreateFrame("Frame", "DuffedUIBar3", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar3:SetTemplate("Transparent")
@@ -91,9 +82,7 @@ if C["actionbar"]["enable"] then
 	end
 	DuffedUIBar3:SetFrameStrata("BACKGROUND")
 	DuffedUIBar3:SetFrameLevel(3)
-	DuffedUIBar3:SetClampedToScreen(true)
-	DuffedUIBar3:SetMovable(true)
-	tinsert(D.AllowFrameMoving, DuffedUIBar3)
+	move:RegisterFrame(DuffedUIBar3)
 
 	local DuffedUIBar4 = CreateFrame("Frame", "DuffedUIBar4", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar4:SetTemplate("Transparent")
@@ -105,9 +94,7 @@ if C["actionbar"]["enable"] then
 	end
 	DuffedUIBar4:SetFrameStrata("BACKGROUND")
 	DuffedUIBar4:SetFrameLevel(3)
-	DuffedUIBar4:SetClampedToScreen(true)
-	DuffedUIBar4:SetMovable(true)
-	tinsert(D.AllowFrameMoving, DuffedUIBar4)
+	move:RegisterFrame(DuffedUIBar4)
 
 	local DuffedUIBar5 = CreateFrame("Frame", "DuffedUIBar5", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar5:SetTemplate("Transparent")
@@ -120,12 +107,9 @@ if C["actionbar"]["enable"] then
 	end
 	DuffedUIBar5:SetFrameStrata("BACKGROUND")
 	DuffedUIBar5:SetFrameLevel(3)
-	DuffedUIBar5:SetClampedToScreen(true)
-	DuffedUIBar5:SetMovable(true)
-	tinsert(D.AllowFrameMoving, DuffedUIBar5)
+	move:RegisterFrame(DuffedUIBar5)
 
-	DuffedUIPetBarMover = CreateFrame("Frame", "DuffedUIPetBarMover", UIParent)
-	DuffedUIPetBarMover:SetTemplate("Transparent")
+	DuffedUIPetBarMover = CreateFrame("Frame", "DuffedUIPetMover", UIParent)
 	if C["actionbar"]["petbarhorizontal"] ~= true and (not C["actionbar"]["rightbarvertical"]) then
 		DuffedUIPetBarMover:SetSize(D.petbuttonsize + (D.petbuttonspacing * 2), (D.petbuttonsize * 10) + (D.petbuttonspacing * 11))
 		DuffedUIPetBarMover:SetPoint("RIGHT", DuffedUIBar5, "LEFT", -6, 0)
@@ -137,14 +121,7 @@ if C["actionbar"]["enable"] then
 		if C["chat"]["rbackground"] then DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 3) else DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 176) end
 	end
 	DuffedUIPetBarMover:SetFrameLevel(6)
-	DuffedUIPetBarMover:SetClampedToScreen(true)
-	DuffedUIPetBarMover:SetMovable(true)
-	DuffedUIPetBarMover.text = D.SetFontString(DuffedUIPetBarMover, C["media"].font, 11)
-	DuffedUIPetBarMover.text:SetPoint("CENTER")
-	DuffedUIPetBarMover.text:SetText(L["move"]["pet"])
-	DuffedUIPetBarMover:SetBackdropBorderColor(1, 0, 0, 1)
-	DuffedUIPetBarMover:Hide()
-	tinsert(D.AllowFrameMoving, DuffedUIPetBarMover)
+	move:RegisterFrame(DuffedUIPetBarMover)
 
 	local petbg = CreateFrame("Frame", "DuffedUIPetBar", UIParent, "SecureHandlerStateTemplate")
 	petbg:SetTemplate("Transparent")
@@ -184,15 +161,7 @@ if C["datatext"]["battleground"] == true then
 	bgframe:EnableMouse(true)
 end
 
-local bnet = CreateFrame("Frame", "DuffedUIBnetHolder", UIParent)
-bnet:SetTemplate("Default")
+local bnet = CreateFrame("Frame", "DuffedUIBnetMover", UIParent)
 bnet:Size(BNToastFrame:GetWidth(), BNToastFrame:GetHeight())
 bnet:Point("TOPLEFT", UIParent, "TOPLEFT", 3, -3)
-bnet:SetClampedToScreen(true)
-bnet:SetMovable(true)
-bnet:SetBackdropBorderColor(1, 0, 0)
-bnet.text = D.SetFontString(bnet, C["media"].font, 11)
-bnet.text:SetPoint("CENTER")
-bnet.text:SetText("Move BnetFrame")
-bnet:Hide()
-tinsert(D.AllowFrameMoving, bnet)
+move:RegisterFrame(bnet)

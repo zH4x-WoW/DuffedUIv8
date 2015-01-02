@@ -495,24 +495,16 @@ local xSpacing, ySpacing = spacing, 0
 local width, height = size, size
 local anchorPoint = "TOPRIGHT"
 local onUpdate
+local move = D["move"]
 
-local scfa = CreateFrame("Frame", "SpellCooldownsFrameAnchor", UIParent)
-scfa:SetTemplate("Default")
+local scfa = CreateFrame("Frame", "SpellCooldownsMover", UIParent)
 scfa:Size(120, 17)
 if C["raid"].center then
 	if C["chat"].lbackground then scfa:SetPoint("BOTTOM", DuffedUIChatBackgroundLeft, "TOP", 0, 10) else scfa:SetPoint("BOTTOM", ChatFrame1, "TOP", 0, 25) end
 else
 	scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 350)
 end
-scfa:SetClampedToScreen(true)
-scfa:SetMovable(true)
-scfa:SetBackdropColor(0, 0, 0)
-scfa:SetBackdropBorderColor(1, 0, 0)
-scfa.text = D.SetFontString(scfa, C["media"].font, 11)
-scfa.text:SetPoint("CENTER")
-scfa.text:SetText(L["move"]["spell"])
-scfa:Hide()
-tinsert(D.AllowFrameMoving, SpellCooldownsFrameAnchor)
+move:RegisterFrame(scfa)
 
 local SpellCooldownFrame = CreateFrame("Frame", "DuffedUISpellCooldowns", UIParent)
 SpellCooldownFrame:SetFrameStrata("BACKGROUND")

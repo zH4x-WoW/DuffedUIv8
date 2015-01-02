@@ -54,7 +54,7 @@ local band = bit.band
 local sformat = string.format
 local floor = math.floor
 local timer = 0
-
+local move = D["move"]
 local backdrop = {
 	bgFile = C["media"].normTex,
 	edgeFile = C["media"].blank, tile = false,
@@ -65,19 +65,10 @@ local backdrop = {
 
 local bars = {}
 
-local rcda = CreateFrame("Frame", "RCDAnchor", UIParent)
+local rcda = CreateFrame("Frame", "RaidCoolodownsMover", UIParent)
 rcda:SetSize(width, height)
 rcda:SetPoint(anchor, x, y)
-rcda:SetTemplate("Default")
-rcda:SetClampedToScreen(true)
-rcda:SetMovable(true)
-rcda:SetBackdropBorderColor(1,0,0)
-rcda.text = D.SetFontString(rcda, C["media"].font, 11)
-rcda.text:SetPoint("CENTER")
-rcda.text:SetText(L["move"]["rcd"])
-rcda:SetFrameLevel(10)
-rcda:Hide()
-tinsert(D.AllowFrameMoving, rcda)
+move:RegisterFrame(rcda)
 
 local FormatTime = function(time) 
 	if time >= 60 then return sformat('%.2d:%.2d', floor(time / 60), time % 60) else return sformat('%.2d', time) end

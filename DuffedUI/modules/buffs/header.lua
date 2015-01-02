@@ -4,6 +4,7 @@ if not C["auras"].player then return end
 
 local frame = DuffedUIAuras
 local content = DuffedUIAuras.content
+local move = D["move"]
 
 for _, frame in next, {
 	"DuffedUIAurasPlayerBuffs",
@@ -57,7 +58,7 @@ buffs:SetAttribute("consolidateTo", filter)
 buffs:SetAttribute("includeWeapons", 1)
 buffs:SetAttribute("consolidateDuration", -1)
 buffs:Show()
-tinsert(D.AllowFrameMoving, DuffedUIAurasPlayerBuffs)
+move:RegisterFrame(buffs)
 
 local proxy = buffs:GetAttribute("consolidateProxy")
 proxy:HookScript("OnShow", function(self) if consolidate:IsShown() then consolidate:Hide() end end)
@@ -95,4 +96,4 @@ SecureHandlerSetFrameRef(proxy, "header", consolidate)
 debuffs:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -7, -5)
 debuffs:SetAttribute("filter", "HARMFUL")
 debuffs:Show()
-tinsert(D.AllowFrameMoving, DuffedUIAurasPlayerDebuffs)
+move:RegisterFrame(debuffs)

@@ -1,28 +1,16 @@
 local D, C, L = unpack(select(2, ...))
 
 --[[Raid Utility(by Elv22)]]--
+local move = D["move"]
 local anchor = CreateFrame("Frame", "DuffedUIRaidUtilityAnchor", UIParent)
-anchor:SetMovable(true)
-anchor:SetTemplate("Default")
-anchor:Size(170, 21)
+anchor:Size(175, 21)
 anchor:Point("TOP", UIParent, "TOP", -350, 0)
-anchor:SetScript("OnMouseDown", function() anchor:StartMoving() end)
-anchor:SetScript("OnMouseUp", function() anchor:StopMovingOrSizing() end)
-anchor:SetBackdropBorderColor(1, 0, 0)
-anchor:SetFrameStrata("HIGH")
-anchor:SetUserPlaced(true)
-anchor:SetClampedToScreen(true)
-anchor.text = anchor:CreateFontString(nil, "OVERLAY")
-anchor.text:SetFont(C["media"].font, 11)
-anchor.text:SetPoint("CENTER")
-anchor.text:SetText(L["move"]["raid"])
-anchor:Hide()
-tinsert(D.AllowFrameMoving, DuffedUIRaidUtilityAnchor)
+move:RegisterFrame(anchor)
 
 local RaidUtilityPanel = CreateFrame("Frame", "RaidUtilityPanel", UIParent)
 RaidUtilityPanel:Point("TOPLEFT", anchor, "TOPLEFT", 0, 0)
 RaidUtilityPanel:SetTemplate("Transparent")
-RaidUtilityPanel:Size(170, 120)
+RaidUtilityPanel:Size(175, 120)
 
 local function CheckRaidStatus()
 	local _, instanceType = IsInInstance()

@@ -36,6 +36,47 @@ end
 --[[Blizzard taint fixes for 5.4.1]]--
 setfenv(FriendsFrame_OnShow, setmetatable({ UpdateMicroButtons = function() end }, { __index = _G }))
 
+--[[Taintfix for Talents & gylphs]]--
+local function hook()
+	PlayerTalentFrame_Toggle = function()
+	if not PlayerTalentFrame:IsShown() then
+		ShowUIPanel(PlayerTalentFrame)
+		TalentMicroButtonAlert:Hide()
+	else
+		PlayerTalentFrame_Close()
+	end 
+end
+
+for i = 1, 10 do
+	local tab = _G["PlayerTalentFrameTab"..i]
+	if not tab then break end
+		tab:SetScript("PreClick", function()
+			for index = 1, STATICPOPUP_NUMDIALOGS, 1 do
+				local frame = _G["StaticPopup"..index]
+				if not issecurevariable(frame, "which") then
+					local info = StaticPopupDialogs[frame.which]
+					if (frame:IsShown() and info) and not issecurevariable(info, "OnCancel") then info.OnCancel() end
+					frame:Hide()
+					frame.which = nil
+				end
+			end
+		end)
+	end
+end
+
+if IsAddOnLoaded("Blizzard_TalentUI") then
+	hook()
+else
+	local f = CreateFrame("Frame")
+	f:RegisterEvent("ADDON_LOADED")
+	f:SetScript("OnEvent", function(self, event, addon)
+		if addon=="Blizzard_TalentUI" then 
+			self:UnregisterEvent("ADDON_LOADED")
+			hook()
+		end
+	end)
+end
+
 --[[Farmmode]]--
 local farm = false
 local minisize = 144
@@ -57,46 +98,6 @@ function SlashCmdList.FARMMODE(msg, editbox)
 	Minimap:SetBlipTexture(defaultBlip)
 end
 SLASH_FARMMODE1 = "/farmmode"
-
---[[Focus button]]--
-if C["unitframes"].focusbutton and C["unitframes"].enable then
-	local Focus = CreateFrame("Frame", "Focus", UIParent)
-	for i = 1, 2 do
-		Focus[i] = CreateFrame("Button", "Focus" .. i, parent, "SecureActionButtonTemplate")
-		Focus[i]:Size(50, 10)
-		Focus[i]:SetTemplate("Default")
-		Focus[i]:EnableMouse(true)
-		Focus[i]:RegisterForClicks("AnyUp")
-		Focus[i]:StripTextures()
-		Focus[i].Text = Focus[i]:CreateFontString(nil, "OVERLAY")
-		Focus[i].Text:SetFont(C["media"].font, 11, "THINOUTLINE")
-		Focus[i].Text:SetShadowOffset(0, 0)
-		Focus[i].Text:SetPoint("CENTER")
-		if i == 1 then
-			Focus[i]:SetParent(DuffedUITarget)
-			if C["unitframes"].layout == 3 then 
-				Focus[i]:Point("LEFT", DuffedUITarget, "LEFT", -10, -34)
-			elseif C["unitframes"].layout == 2 then
-				Focus[i]:Point("RIGHT", DuffedUITarget, "RIGHT", 10, -32)
-			elseif C["unitframes"].layout == 1 then
-				Focus[i]:Point("BOTTOMRIGHT", DuffedUITarget, "BOTTOMRIGHT", 20, -1)
-			elseif C["unitframes"].layout == 4 then
-				Focus[i]:Point("BOTTOMLEFT", DuffedUITarget, "BOTTOMLEFT", -9, -9)
-			end
-			Focus[i]:SetAttribute("type1", "macro")
-			Focus[i]:SetAttribute("macrotext1", "/focus")
-			Focus[i]:SetFrameLevel(DuffedUITarget:GetFrameLevel() + 2)
-			Focus[i].Text:SetText(D.PanelColor .. "Focus")
-		elseif i == 2 then
-			Focus[i]:SetParent(DuffedUIFocus)
-			Focus[i]:Point("TOPRIGHT", DuffedUIFocus, "TOPRIGHT", 2, 14)
-			Focus[i]:SetAttribute("type1", "macro")
-			Focus[i]:SetAttribute("macrotext1", "/clearfocus")
-			Focus[i]:SetFrameLevel(DuffedUIFocus:GetFrameLevel() + 2)
-			Focus[i].Text:SetText(D.PanelColor .. "ClearFocus")
-		end
-	end
-end
 
 --[[Automatic achievement screenshot]]--
 if C["misc"].acm_screen == true then
@@ -207,10 +208,10 @@ end
 
 --[[Shorten gold display]]--
 if C["misc"].gold == true then
-	local frame = CreateFrame("FRAME", "DuffedGold");
-	frame:RegisterEvent("PLAYER_ENTERING_WORLD");
-	frame:RegisterEvent("MAIL_SHOW");
-	frame:RegisterEvent("MAIL_CLOSED");
+	local frame = CreateFrame("FRAME", "DuffedGold")
+	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+	frame:RegisterEvent("MAIL_SHOW")
+	frame:RegisterEvent("MAIL_CLOSED")
 
 	local function eventHandler(self, event, ...)
 		if event == "MAIL_SHOW" then
@@ -218,14 +219,14 @@ if C["misc"].gold == true then
 			SILVER_AMOUNT = "%d Silver"
 			GOLD_AMOUNT = "%d Gold"
 		else
-			COPPER_AMOUNT = "%d|cFF954F28"..COPPER_AMOUNT_SYMBOL.."|r";
-			SILVER_AMOUNT = "%d|cFFC0C0C0"..SILVER_AMOUNT_SYMBOL.."|r";
-			GOLD_AMOUNT = "%d|cFFF0D440"..GOLD_AMOUNT_SYMBOL.."|r";
+			COPPER_AMOUNT = "%d|cFF954F28"..COPPER_AMOUNT_SYMBOL.."|r"
+			SILVER_AMOUNT = "%d|cFFC0C0C0"..SILVER_AMOUNT_SYMBOL.."|r"
+			GOLD_AMOUNT = "%d|cFFF0D440"..GOLD_AMOUNT_SYMBOL.."|r"
 		end
-		YOU_LOOT_MONEY = "+%s";
-		LOOT_MONEY_SPLIT = "+%s";
+		YOU_LOOT_MONEY = "+%s"
+		LOOT_MONEY_SPLIT = "+%s"
 	end
-	frame:SetScript("OnEvent", eventHandler);
+	frame:SetScript("OnEvent", eventHandler)
 end
 
 --[[Interrupt Announcement]]--

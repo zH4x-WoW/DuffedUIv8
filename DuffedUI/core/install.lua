@@ -145,9 +145,7 @@ if Bindings == "1" then SetCVar("synchronizeBindings", "0") end
 
 local function positionsetup()
 	D.SetPerCharVariable("DuffedUIDataPerChar", {})
-	for i = 1, getn(D.AllowFrameMoving) do
-		if D.AllowFrameMoving[i] then D.AllowFrameMoving[i]:SetUserPlaced(false) end
-	end
+	if DuffedUIDataPerChar.Move then DuffedUIDataPerChar.Move = {} end
 end
 
 local v = CreateFrame("Button", "DuffedUIVersionFrame", UIParent)

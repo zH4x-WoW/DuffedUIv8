@@ -1,18 +1,11 @@
 local D, C, L = unpack(select(2, ...))
 
 -- move vehicle indicator
-local anchor = CreateFrame("Frame", "DuffedUIVehicleAnchor", UIParent)
+local move = D["move"]
+local anchor = CreateFrame("Frame", "VehicleMover", UIParent)
 anchor:Point("TOPRIGHT", UIParent, "TOPRIGHT", -45, -315)
 anchor:Size(120, 20)
-anchor:SetMovable(true)
-anchor:SetClampedToScreen(true)
-anchor:SetTemplate("Default")
-anchor:SetBackdropBorderColor(1, 0, 0)
-anchor:SetAlpha(0)
-anchor.text = D.SetFontString(anchor, C["media"].font, 11)
-anchor.text:SetPoint("CENTER")
-anchor.text:SetText(L["move"]["vehicle"])
-tinsert(D.AllowFrameMoving, DuffedUIVehicleAnchor)
+move:RegisterFrame(anchor)
 
 hooksecurefunc(VehicleSeatIndicator,"SetPoint",function(_,_,parent)
 	if (parent == "MinimapCluster") or (parent == _G["MinimapCluster"]) then

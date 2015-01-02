@@ -1,18 +1,10 @@
 local D, C, L = unpack(select(2, ...)) 
 
-local AchievementHolder = CreateFrame("Frame", "DuffedUIAchievementHolder", UIParent)
-AchievementHolder:Width(180)
-AchievementHolder:Height(20)
+local move = D["move"]
+local AchievementHolder = CreateFrame("Frame", "DuffedUIAchievementMover", UIParent)
+AchievementHolder:Size(180, 20)
 AchievementHolder:SetPoint("LEFT", UIParent, "LEFT", 312, 25)
-AchievementHolder:SetTemplate("Default")
-AchievementHolder:SetBackdropBorderColor(1, 0, 0)
-AchievementHolder:SetClampedToScreen(true)
-AchievementHolder:SetMovable(true)
-AchievementHolder:SetAlpha(0)
-AchievementHolder.text = D.SetFontString(AchievementHolder, C["media"].font, 11)
-AchievementHolder.text:SetPoint("CENTER")
-AchievementHolder.text:SetText(L["move"]["achievements"])
-tinsert(D.AllowFrameMoving, DuffedUIAchievementHolder)
+move:RegisterFrame(AchievementHolder)
 
 AlertFrame:SetParent(AchievementHolder)
 AlertFrame:SetPoint("TOP", AchievementHolder, 0, -30)

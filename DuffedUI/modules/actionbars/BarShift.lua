@@ -1,6 +1,7 @@
 local D, C, L = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true then return end
 
+local move = D["move"]
 local bar = CreateFrame("Frame", "DuffedUIStance", UIParent, "SecureHandlerStateTemplate")
 bar:SetPoint("TOPLEFT", 0, -200)
 bar:SetWidth((D.petbuttonsize * 4) + (D.petbuttonsize * 3))
@@ -11,14 +12,7 @@ bar:SetClampedToScreen(true)
 
 local ssmover = CreateFrame("Frame", "DuffedUIStanceHolder", UIParent)
 ssmover:SetAllPoints(DuffedUIStance)
-ssmover:SetTemplate("Default")
-ssmover:SetFrameStrata("HIGH")
-ssmover:SetBackdropBorderColor(1, 0, 0)
-ssmover:SetAlpha(0)
-ssmover.text = D.SetFontString(ssmover, C["media"].font, 11)
-ssmover.text:SetPoint("CENTER")
-ssmover.text:SetText(L["move"]["shapeshift"])
-tinsert(D.AllowFrameMoving, DuffedUIStance)
+move:RegisterFrame(bar)
 
 local States = {
 	["DRUID"] = "show",
