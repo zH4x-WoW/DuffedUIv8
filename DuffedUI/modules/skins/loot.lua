@@ -127,6 +127,7 @@ local function LoadSkin()
 	if C["loot"].lootframe then
 		LootFrame:StripTextures()
 		LootFrameInset:StripTextures()
+		LootFrame:SetWidth(LootFrame:GetWidth() + 30)
 		LootFrame:SetHeight(LootFrame:GetHeight() - 30)
 		LootFrameCloseButton:SkinCloseButton()
 		LootFrame:SetTemplate("Transparent")

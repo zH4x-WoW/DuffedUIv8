@@ -240,9 +240,7 @@ SLASH_MOVING1 = "/moveui"
 SlashCmdList["MOVING"] = function()
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 
-	if D.MoveUnitFrames then D.MoveUnitFrames() end
 	local Move = D["move"]
-
 	Move:StartOrStopMoving()
 end
 
