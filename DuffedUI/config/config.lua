@@ -204,7 +204,6 @@ C["cooldown"] = {
 
 C["classtimer"] = {
 	["enable"] = true,
-	["targetdebuffs"] = false,
 	["playercolor"] = {.2, .2, .2, 1 },
 	["targetbuffcolor"] = { 70/255, 150/255, 70/255, 1 },
 	["targetdebuffcolor"] = { 150/255, 30/255, 30/255, 1 },
@@ -213,7 +212,8 @@ C["classtimer"] = {
 	["spacing"] = 1,
 	["separator"] = true,
 	["separatorcolor"] = { 0, 0, 0, .5 },
-	["targetdebuffsenable"] = true,
+	["debuffsenable"] = true,
+	["targetdebuff"] = false,
 }
 
 C["auras"] = {

@@ -12,7 +12,6 @@ local CreateSpellEntry = function(id, castByAnyone, color, unitType, castSpellId
 end
 
 --[[Configuration starts here]]--
-local targetdebuffs = C["classtimer"]["targetdebuffs"]
 local BAR_HEIGHT = C["classtimer"]["height"]
 local BAR_SPACING = C["classtimer"]["spacing"]
 local SPARK = C["classtimer"]["spark"]
@@ -1049,20 +1048,19 @@ D["ClassTimer"] = function(self)
 	trinketFrame:Point("BOTTOMLEFT", playerFrame, "TOPLEFT", 0, 5)
 	trinketFrame:Point("BOTTOMRIGHT", playerFrame, "TOPRIGHT", 0, 5)
 
-	if C["classtimer"].targetdebuffsenable ~= false then
-		if not targetdebuffs then
-			local targetFrame = CreateAuraBarFrame(targetDataSource, self.Health)
-			targetFrame:Point("BOTTOMLEFT", trinketFrame, "TOPLEFT", 0, 5)
-			targetFrame:Point("BOTTOMRIGHT", trinketFrame, "TOPRIGHT", 0, 5)
-		else
+	if C["classtimer"]["debuffsenable"] then
+		local targetFrame = CreateAuraBarFrame(targetDataSource, self.Health)
+		if C["classtimer"]["targetdebuff"] then
 			local debuffMover = CreateFrame("Frame", "DebuffMover", UIParent)
-			debuffMover:SetSize(oUF_Target:GetWidth(), 20)
-			debuffMover:SetPoint("BOTTOMLEFT", oUF_Target, "TOPLEFT", 0, 83)
+			debuffMover:SetSize(218, 15)
+			debuffMover:SetPoint("BOTTOM", UIParent, "BOTTOM", 340, 380)
 			move:RegisterFrame(debuffMover)
 
-			local targetFrame = CreateAuraBarFrame(targetDataSource, oUF_Target)
-			targetFrame:Point("BOTTOMLEFT", DebuffAnchor, "TOPLEFT", 0, 0)
-			targetFrame:Point("BOTTOMRIGHT", DebuffAnchor, "TOPRIGHT", 0, 20)
+			targetFrame:Point("BOTTOMLEFT", DebuffMover, "TOPLEFT", 0, 5)
+			targetFrame:Point("BOTTOMRIGHT", DebuffMover, "TOPRIGHT", 0, 5)
+		else
+			targetFrame:Point("BOTTOMLEFT", trinketFrame, "TOPLEFT", 0, 5)
+			targetFrame:Point("BOTTOMRIGHT", trinketFrame, "TOPRIGHT", 0, 5)
 		end
 	end
 end

@@ -204,7 +204,7 @@
 	DuffedUIConfigUILocalization.classtimer = "Classtimer"
 	DuffedUIConfigUILocalization.classtimerenable = "Aktiviere den 'Classtimer' an den Einheitenfestern"
 	DuffedUIConfigUILocalization.classtimerspark = "Aktiviere den 'Funken' an den Classtimern"
-	DuffedUIConfigUILocalization.classtimertargetdebuffs = "Aktviere Zieldebuffs"
+	DuffedUIConfigUILocalization.classtimertargetdebuff = "Aktviere Zieldebuffs über dem Ziel anstatt über dem Spieler"
 	DuffedUIConfigUILocalization.classtimerplayercolor = "Wähle die Farbe am Spielerfenster"
 	DuffedUIConfigUILocalization.classtimertargetbuffcolor = "Wähle die Farbe des Stärkungszaubers auf dem Ziel"
 	DuffedUIConfigUILocalization.classtimertargetdebuffcolor = "Wähle Farbe des Schwächungszaubers auf dem Ziel"
@@ -213,7 +213,7 @@
 	DuffedUIConfigUILocalization.classtimerspacing = "Setze den Zwischenraum der ClassTimer-Leisten"
 	DuffedUIConfigUILocalization.classtimerseparator = "Aktiviere die Zauberabgrenzung"
 	DuffedUIConfigUILocalization.classtimerseparatorcolor = "Wähle die Abgrenzungsfarbe"
-	DuffedUIConfigUILocalization.classtimertargetdebuffsenable = "Aktiviere oder deaktiviere die Debuffleisten"
+	DuffedUIConfigUILocalization.classtimerdebuffsenable = "Aktiviere die Anzeige der Schwächungszauberleisten"
 
 	--[[Buffs]]--
 	DuffedUIConfigUILocalization.auras = "Auren"

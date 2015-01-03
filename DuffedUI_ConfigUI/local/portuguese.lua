@@ -206,7 +206,7 @@
 	DuffedUIConfigUILocalization.classtimer = "Classtimer"
 	DuffedUIConfigUILocalization.classtimerenable = "Enable Classtimer"
 	DuffedUIConfigUILocalization.classtimerspark = "Enable spark"
-	DuffedUIConfigUILocalization.classtimertargetdebuffs = "Enable targetdebuffs"
+	DuffedUIConfigUILocalization.classtimertargetdebuff = "Enable Debuff display above target frame instead of player frame"
 	DuffedUIConfigUILocalization.classtimerplayercolor = "Set player color"
 	DuffedUIConfigUILocalization.classtimertargetbuffcolor = "Set target buff color"
 	DuffedUIConfigUILocalization.classtimertargetdebuffcolor = "Set target debuff color"
@@ -215,7 +215,7 @@
 	DuffedUIConfigUILocalization.classtimerspacing = "Set spacing of classtimer bars"
 	DuffedUIConfigUILocalization.classtimerseparator = "Enable cast separator"
 	DuffedUIConfigUILocalization.classtimerseparatorcolor = "Set color of separator"
-	DuffedUIConfigUILocalization.classtimertargetdebuffsenable = "Enable / disable debuff bars"
+	DuffedUIConfigUILocalization.classtimerdebuffsenable = "Enable Debuff display on classtimer"
 
 	--[[Buffs]]--
 	DuffedUIConfigUILocalization.auras = "Auras"

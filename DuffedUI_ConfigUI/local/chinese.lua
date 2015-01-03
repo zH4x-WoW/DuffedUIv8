@@ -205,7 +205,7 @@
 	DuffedUIConfigUILocalization.classtimer = "职业法术计时条"
 	DuffedUIConfigUILocalization.classtimerenable = "启用职业法术计时条"
 	DuffedUIConfigUILocalization.classtimerspark = "启用闪烁"
-	DuffedUIConfigUILocalization.classtimertargetdebuffs = "启用目标Debuff计时条"
+	DuffedUIConfigUILocalization.classtimertargetdebuff = "Enable Debuff display above target frame instead of player frame"
 	DuffedUIConfigUILocalization.classtimerplayercolor = "设置玩家计时条颜色"
 	DuffedUIConfigUILocalization.classtimertargetbuffcolor = "设置目标计时条Buff颜色"
 	DuffedUIConfigUILocalization.classtimertargetdebuffcolor = "设置目标计时条DeBuff颜色"
@@ -214,7 +214,7 @@
 	DuffedUIConfigUILocalization.classtimerspacing = "设置计时条间距"
 	DuffedUIConfigUILocalization.classtimerseparator = "启用不同法术分离计时效果"
 	DuffedUIConfigUILocalization.classtimerseparatorcolor = "设置分离器显示颜色"
-	DuffedUIConfigUILocalization.classtimertargetdebuffsenable = "启用/禁用Debuff计时条"
+	DuffedUIConfigUILocalization.classtimerdebuffsenable = "Enable Debuff display on classtimer"
 
 	--[[Buffs]]--
 	DuffedUIConfigUILocalization.auras = "光环"
