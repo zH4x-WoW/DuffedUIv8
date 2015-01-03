@@ -9,6 +9,7 @@ ns._Headers = {}
 
 local font = D.Font(C["font"]["unitframes"])
 local layout = C["unitframes"]["layout"]
+local move = D["move"]
 
 --[[Option to hide group 5 - 8]]--
 D["MaxGroup"] = function(frame)
@@ -61,11 +62,13 @@ D["SpawnUF"] = function(self)
 	player:SetParent(DuffedUIPetBattleHider)
 	player:Point("BOTTOM", UIParent, "BOTTOM", -340, 245)
 	player:Size(218, 44)
+	move:RegisterFrame(player)
 
 	local target = oUF:Spawn("target", "oUF_Target")
 	target:SetParent(DuffedUIPetBattleHider)
 	target:Point("BOTTOM", UIParent, "BOTTOM", 340, 245)
 	target:Size(218, 44)
+	move:RegisterFrame(target)
 
 	if C["unitframes"].Enable_ToT then
 		local tot = oUF:Spawn("targettarget", "oUF_TargetTarget")
@@ -82,6 +85,7 @@ D["SpawnUF"] = function(self)
 			tot:Point("TOPRIGHT", oUF_Target, "BOTTOMRIGHT", 2, -5)
 			tot:Size(100, 25)
 		end
+		move:RegisterFrame(tot)
 	end
 
 	local pet = oUF:Spawn("pet", "oUF_Pet")
@@ -99,16 +103,19 @@ D["SpawnUF"] = function(self)
 		pet:Point("TOPLEFT", oUF_Player, "BOTTOMLEFT", -2, -5)
 		pet:Size(100, 25)
 	end
+	move:RegisterFrame(pet)
 
 	local focus = oUF:Spawn("focus", "oUF_Focus")
 	focus:SetParent(DuffedUIPetBattleHider)
 	focus:Point("BOTTOMLEFT", InvDuffedUIActionBarBackground, "BOTTOM", 275, 500)
 	focus:Size(200, 30)
+	move:RegisterFrame(focus)
 
 	local focustarget = oUF:Spawn("focustarget", "oUF_FocusTarget")
 	focustarget:SetParent(DuffedUIPetBattleHider)
 	focustarget:Point("TOPRIGHT", focus, "BOTTOMLEFT", 0, -2)
 	focustarget:Size(75, 10)
+	move:RegisterFrame(focustarget)
 
 	if C["raid"]["showboss"] then
 		for i = 1, MAX_BOSS_FRAMES do
@@ -126,6 +133,7 @@ D["SpawnUF"] = function(self)
 			boss[i]:SetParent(DuffedUIPetBattleHider)
 			if i == 1 then boss[i]:Point("RIGHT", UIParent, "RIGHT", -163, -250) else boss[i]:Point("BOTTOM", boss[i - 1], "TOP", 0, 35) end
 			boss[i]:Size(200, 27)
+			move:RegisterFrame(boss[i])
 		end
 	end
 
@@ -136,6 +144,7 @@ D["SpawnUF"] = function(self)
 			arena[i]:SetParent(DuffedUIPetBattleHider)
 			if i == 1 then arena[i]:Point("RIGHT", UIParent, "RIGHT", -163, -250) else arena[i]:Point("BOTTOM", arena[i - 1], "TOP", 0, 35) end
 			arena[i]:Size(200, 27)
+			move:RegisterFrame(arena[i])
 		end
 
 		local oUF_PrepArena = {}
@@ -213,6 +222,7 @@ D["SpawnUF"] = function(self)
 		)
 		tank:SetParent(DuffedUIPetBattleHider)
 		if C["chat"]["rbackground"] then tank:Point("TOPLEFT", DuffedUIChatBackgroundRight, "TOPLEFT", 2, 52) else tank:Point("TOPLEFT", ChatFrame4, "TOPLEFT", 2, 62) end
+		move:RegisterFrame(tank)
 	end
 
 	if C["raid"]["mainassist"] then
@@ -229,6 +239,7 @@ D["SpawnUF"] = function(self)
 		)
 		assist:SetParent(DuffedUIPetBattleHider)
 		if C["raid"]["maintank"] then assist:Point("TOPLEFT", oUF_MainTank, "BOTTOMLEFT", 2, -50) else assist:Point("CENTER", UIParent, "CENTER", 0, 0) end
+		move:RegisterFrame(assist)
 	end
 
 	if C["raid"]["enable"] then
@@ -261,9 +272,10 @@ D["SpawnUF"] = function(self)
 			raid:SetParent(DuffedUIPetBattleHider)
 			D["RaidPosition"](oUF_Heal)
 			if C["raid"]["MaxGroup"] then D["MaxGroup"](oUF_Heal) end
+			move:RegisterFrame(raid)
 
 			if C["raid"]["showraidpets"] then
-				local pet = oUF:SpawnHeader("oUF_RaidPet", "SecureGroupPetHeaderTemplate", "solo,raid,party",
+				local rpet = oUF:SpawnHeader("oUF_RaidPet", "SecureGroupPetHeaderTemplate", "solo,raid,party",
 					"oUF-initialConfigFunction", [[
 						local header = self:GetParent()
 						self:SetWidth(header:GetAttribute("initial-width"))
@@ -283,8 +295,9 @@ D["SpawnUF"] = function(self)
 					"point", "LEFT",
 					"columnAnchorPoint", "BOTTOM"
 				)
-				pet:SetParent(DuffedUIPetBattleHider)
-				pet:Point("BOTTOM", oUF_Heal, "TOP", 0, 3)
+				rpet:SetParent(DuffedUIPetBattleHider)
+				rpet:Point("BOTTOM", oUF_Heal, "TOP", 0, 3)
+				move:RegisterFrame(rpet)
 			end
 		else
 			local raid = oUF:SpawnHeader("oUF_DPS", nil, "solo,raid,party",
@@ -309,6 +322,7 @@ D["SpawnUF"] = function(self)
 			raid:SetParent(DuffedUIPetBattleHider)
 			if DuffedUIChatBackgroundLeft then raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 22) else raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33) end
 			if C["raid"]["MaxGroup"] then D["MaxGroup"](oUF_DPS) end
+			move:RegisterFrame(raid)
 		end
 	end
 end

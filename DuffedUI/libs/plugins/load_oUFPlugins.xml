@@ -4,7 +4,6 @@
 	<Script file="oUF_ComboPointsBar.lua" />
 	<Script file="oUF_DebuffHighlight.lua" />
 	<Script file="oUF_Fader.lua" />
-	<Script file="movable.lua" />
 	<Script file="oUF_Smooth.lua" />
 	<Script file="oUF_TotemBar.lua" />
 	<Script file="oUF_Trinkets.lua" />
@@ -18,7 +17,7 @@
 	<Script file="oUF_PVPSpecIcons.lua" />
 	<Script file="oUF_Statue.lua" />
 	<Script file="oUF_HolyPowerBar.lua" />
-	<Script file="classicons.lua" />
+	<Script file="oUF_ClassIcons.lua" />
 	<Script file="oUF_RuneOfPower.lua" />
 	<Script file="oUF_AnticipationBar.lua" />
 </Ui>
