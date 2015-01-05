@@ -321,22 +321,22 @@ D["ConstructUFTarget"] = function(self)
 	end
 
 	if C["unitframes"]["healcomm"] then
-		local mhpb = CreateFrame("StatusBar", nil, self.Health)
-		mhpb:Point("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-		mhpb:Point("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+		local mhpb = CreateFrame("StatusBar", nil, health)
+		mhpb:Point("TOPLEFT", health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+		mhpb:Point("BOTTOMLEFT", health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		mhpb:SetWidth(250)
 		mhpb:SetStatusBarTexture(texture)
 		mhpb:SetStatusBarColor(0, 1, .5, .25)
 		mhpb:SetMinMaxValues(0,1)
 
-		local ohpb = CreateFrame("StatusBar", nil, self.Health)
+		local ohpb = CreateFrame("StatusBar", nil, health)
 		ohpb:Point("TOPLEFT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		ohpb:Point("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		ohpb:SetWidth(250)
 		ohpb:SetStatusBarTexture(texture)
 		ohpb:SetStatusBarColor(0, 1, 0, .25)
 
-		local absb = CreateFrame("StatusBar", nil, self.Health)
+		local absb = CreateFrame("StatusBar", nil, health)
 		absb:Point("TOPLEFT", ohpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		absb:Point("BOTTOMLEFT", ohpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		absb:SetWidth(250)
