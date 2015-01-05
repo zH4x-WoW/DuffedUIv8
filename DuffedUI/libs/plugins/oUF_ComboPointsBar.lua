@@ -37,11 +37,7 @@ local Update = function(self, event, unit)
 		end
 	end
 	
-	if class == "DRUID" then
-		if Spec == 1 or Spec == 4 then cpb:Hide() elseif Spec == 2 then cpb:Show() end
-	else
-		cpb:Show()
-	end
+	cpb:Show()
 	
 	if cpb.PostUpdate then
 		cpb:PostUpdate(self, points)

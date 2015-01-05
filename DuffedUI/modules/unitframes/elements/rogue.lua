@@ -99,8 +99,9 @@ D["ClassRessource"]["ROGUE"] = function(self)
 			AnticipationBar[i].bg:SetTexture(texture)
 			AnticipationBar[i].bg:SetAlpha(.15)
 		end
-		self.AnticipationBar = AnticipationBar
-		
+		--self.AnticipationBar = AnticipationBar
+		AnticipationBar = AnticipationBar
+
 		local Anticipation = GetSpellInfo(115189)
 		local name = select(1, UnitAura("player", Anticipation))
 		if name then
