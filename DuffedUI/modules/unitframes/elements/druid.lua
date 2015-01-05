@@ -177,9 +177,9 @@ D["ClassRessource"]["DRUID"] = function(self)
 	Visibility:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	Visibility:SetScript("OnEvent", function()
 		local spec = GetSpecialization()
-		local specName = spec and select(2, GetSpecializationInfo(spec)) or "None"
+		--local specName = spec and select(2, GetSpecializationInfo(spec)) or "None"
 		local form = GetShapeshiftFormID()
-		if specName == "Balance" then
+		if spec == 1 then
 			if not form == 1 then ComboPoints:Hide() end
 			if not C["unitframes"]["attached"] then
 				Mushroom:ClearAllPoints()
@@ -188,16 +188,16 @@ D["ClassRessource"]["DRUID"] = function(self)
 				Mushroom:ClearAllPoints()
 				Mushroom:Point("TOP", EclipseBar, "BOTTOM", 0, -7)
 			end
-		elseif specName == "Feral" then
+		elseif spec == 2 then
 			Mushroom:Hide()
 			EclipseBar:Hide()
-		elseif specName == "Restoration" then
+		elseif spec == 4 then
 			EclipseBar:Hide()
 			if not form == 1 then ComboPoints:Hide() end
 			Mushroom[1]:SetWidth(Mushroom:GetWidth())
 			Mushroom[2]:Hide()
 			Mushroom[3]:Hide()
-		elseif specName == "Guardian" then
+		elseif spec == 3 then
 			EclipseBar:Hide()
 			if not form == 1 then ComboPoints:Hide() end
 			Mushroom:Hide()
