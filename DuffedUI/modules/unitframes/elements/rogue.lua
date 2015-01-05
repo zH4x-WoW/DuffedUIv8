@@ -66,14 +66,14 @@ D["ClassRessource"]["ROGUE"] = function(self)
 		AnticipationBar:Size(216, 5)
 		if C["unitframes"]["attached"] then
 			if layout == 1 then
-				AnticipationBar:Point("TOP", self.ComboPoints, "BOTTOM", 0, -3)
+				AnticipationBar:Point("TOP", ComboPoints, "BOTTOM", 0, -3)
 			elseif layout == 2 then
 				AnticipationBar:Point("BOTTOM", self.Health, "TOP", 0, -5)
 				AnticipationBar:SetFrameLevel(self.Health:GetFrameLevel() + 2)
 			elseif layout == 3 then
 				AnticipationBar:Point("CENTER", self.panel, "CENTER", 0, -3)
 			elseif layout == 4 then
-				AnticipationBar:Point("TOP", self.ComboPoints, "BOTTOM", 0, -5)
+				AnticipationBar:Point("TOP", ComboPoints, "BOTTOM", 0, -5)
 			end
 		else
 			AnticipationBar:Point("TOP", RessourceMover, "BOTTOM", 0, -5)
@@ -99,8 +99,7 @@ D["ClassRessource"]["ROGUE"] = function(self)
 			AnticipationBar[i].bg:SetTexture(texture)
 			AnticipationBar[i].bg:SetAlpha(.15)
 		end
-		--self.AnticipationBar = AnticipationBar
-		AnticipationBar = AnticipationBar
+		self.AnticipationBar = AnticipationBar
 
 		local Anticipation = GetSpellInfo(115189)
 		local name = select(1, UnitAura("player", Anticipation))
