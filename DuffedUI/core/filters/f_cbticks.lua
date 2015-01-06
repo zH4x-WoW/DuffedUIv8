@@ -24,7 +24,7 @@ D.ChannelTicks = {
 	[SpellName(106996)] = 10,
 	[SpellName(108371)] = 6,
 	[SpellName(115175)] = 9,
-	[SpellName(139139)] = 4,
+	[SpellName(139139)] = 3,
 }
 
 D.HasteTicks = {
