@@ -393,7 +393,7 @@ D["ConstructUFPlayer"] = function(self)
 
 		if C["castbar"]["cblatency"] then
 			castbar.safezone = castbar:CreateTexture(nil, "ARTWORK")
-			castbar.safezone:SetTexture(normTex)
+			castbar.safezone:SetTexture(texture)
 			castbar.safezone:SetVertexColor(.69, .31, .31, .75)
 			castbar.SafeZone = castbar.safezone
 		end
