@@ -102,6 +102,7 @@ local function Enable(self, unit)
 		t:SetFrameLevel(ms:GetFrameLevel() + 1)
 		t:SetFrameStrata(ms:GetFrameStrata())
 		t:SetAlpha(0)
+		TotemFrameTotem1Icon:Hide()
 		
 		ms:Hide()
 

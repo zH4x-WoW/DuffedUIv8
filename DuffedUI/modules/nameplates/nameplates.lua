@@ -951,7 +951,7 @@ Plates:SetScript("OnEvent", function(self, event, ...)
 	elseif event == "PLAYER_ENTERING_WORLD" then
 		SetCVar("bloatthreat", 0)
 		SetCVar("bloattest", 0)
-		SetCVar("showVKeyCastbar", 1)
+		--SetCVar("showVKeyCastbar", 1)
 		SetCVar("ShowClassColorInNameplate", 1)
 		SetCVar("nameplateShowEnemies", 1)
 		SetCVar("nameplateShowFriends", 0)
