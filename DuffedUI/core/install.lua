@@ -129,6 +129,7 @@ local function cvarsetup()
 	SetCVar("spamFilter", 0)
 	SetCVar("violenceLevel", 5)
 	SetCVar("synchronizeBindings", 0)
+	SetCVar("countdownForCooldowns", 0)
 end
 
 local OnLogon = CreateFrame("Frame")
@@ -136,12 +137,14 @@ OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 OnLogon:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	print(L["ui"]["welcome"])
-end)
 
---[[ Remove me if Blizzard fix the issue ]]--
-local Bindings = GetCVar("synchronizeBindings")
-if Bindings == "1" then SetCVar("synchronizeBindings", "0") end
---[[ Remove me if Blizzard fix the issue ]]--
+	local CD = GetCVar("countdownForCooldowns")
+	if CD == "1" then SetCVar("countdownForCooldowns", "0") end
+	--[[ Remove me if Blizzard fix the issue ]]--
+	local Bindings = GetCVar("synchronizeBindings")
+	if Bindings == "1" then SetCVar("synchronizeBindings", "0") end
+	--[[ Remove me if Blizzard fix the issue ]]--
+end)
 
 local function positionsetup()
 	D.SetPerCharVariable("DuffedUIDataPerChar", {})
