@@ -119,6 +119,7 @@
 	DuffedUIConfigUILocalization.actionbarRightsidebars = "Aktiviere die rechte Sidebar an den Chatframes per 'mouseover'"
 	DuffedUIConfigUILocalization.actionbarLeftsidebarshorizontal = "Setze die linke Sidebar auf 'horizontal'"
 	DuffedUIConfigUILocalization.actionbarRightsidebarshorizontal = "Setze die rechte Sidebar auf 'horizontal'"
+	DuffedUIConfigUILocalization.actionbarSidebarButtonsize = "Setze Größe der Knöpfe für die Sidebars am Chat (nur wenn vertikal)"
 
 	--[[Raid Frames]]--
 	DuffedUIConfigUILocalization.raid = "Schlachtzugfenster"

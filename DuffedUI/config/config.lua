@@ -111,6 +111,7 @@ C["actionbar"] = {
 	["hotkey"] = true,
 	["macro"] = false,
 	["buttonsize"] = 27,
+	["SidebarButtonsize"] = 23,
 	["petbuttonsize"] = 29,
 	["buttonspacing"] = 4,
 	["shapeshiftborder"] = true,

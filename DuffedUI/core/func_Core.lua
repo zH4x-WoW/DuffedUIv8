@@ -1,10 +1,11 @@
 local D, C, L = unpack(select(2, ...))
 
 --[[Default Actionbutton size]]--
-D.buttonsize = D.Scale(C["actionbar"].buttonsize)
-D.buttonspacing = D.Scale(C["actionbar"].buttonspacing)
-D.petbuttonsize = D.Scale(C["actionbar"].petbuttonsize)
-D.petbuttonspacing = D.Scale(C["actionbar"].buttonspacing)
+D["buttonsize"] = D["Scale"](C["actionbar"]["buttonsize"])
+D["SidebarButtonsize"] = D["Scale"](C["actionbar"]["SidebarButtonsize"])
+D["buttonspacing"] = D["Scale"](C["actionbar"]["buttonspacing"])
+D["petbuttonsize"] = D["Scale"](C["actionbar"]["petbuttonsize"])
+D["petbuttonspacing"] = D["Scale"](C["actionbar"]["buttonspacing"])
 
 --[[Hover tooltip]]--
 local orig1, orig2 = {}, {}
@@ -42,6 +43,7 @@ function D.HyperlinkMouseover()
 end
 D.HyperlinkMouseover()
 
+--[[Shorten comma values]]--
 D.CommaValue = function(amount)
 	local formatted = amount
 	while true do  
@@ -51,6 +53,7 @@ D.CommaValue = function(amount)
 	return formatted
 end
 
+--[[Set fontstring]]--
 D.SetFontString = function(parent, fontName, fontHeight, fontStyle)
 	local fs = parent:CreateFontString(nil, "OVERLAY")
 	fs:SetFont(fontName, fontHeight, fontStyle)
@@ -60,6 +63,7 @@ D.SetFontString = function(parent, fontName, fontHeight, fontStyle)
 	return fs
 end
 
+--[[DataText positions]]--
 D.DataTextPosition = function(p, obj)
 	local left = DuffedUIInfoLeft
 	local right = DuffedUIInfoRight
@@ -121,7 +125,7 @@ D.DataTextTooltipAnchor = function(self)
 	local panel = self:GetParent()
 	local anchor = "ANCHOR_TOP"
 	local xoff = 0
-	local yoff = D.Scale(5)
+	local yoff = D["Scale"](5)
 
 	if panel == DuffedUIInfoLeft then
 		anchor = "ANCHOR_TOPLEFT"
@@ -131,15 +135,15 @@ D.DataTextTooltipAnchor = function(self)
 		local position = DuffedUIMinimap:GetPoint()
 		if position:match("LEFT") then
 			anchor = "ANCHOR_BOTTOMRIGHT"
-			yoff = D.Scale(-6)
+			yoff = D["Scale"](-6)
 			xoff = 0 - DuffedUIMinimapStatsRight:GetWidth()
 		elseif position:match("RIGHT") then
 			anchor = "ANCHOR_BOTTOMLEFT"
-			yoff = D.Scale(-6)
+			yoff = D["Scale"](-6)
 			xoff = DuffedUIMinimapStatsRight:GetWidth()
 		else
 			anchor = "ANCHOR_BOTTOM"
-			yoff = D.Scale(-6)
+			yoff = D["Scale"](-6)
 		end
 	end
 

@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if C["actionbar"].enable ~= true then return end
+if C["actionbar"]["enable"] ~= true then return end
 
 local bar = DuffedUIBar4
 MultiBarLeft:SetParent(bar)
@@ -7,26 +7,26 @@ MultiBarLeft:SetParent(bar)
 for i= 1, 12 do
 	local b = _G["MultiBarLeftButton" .. i]
 	local b2 = _G["MultiBarLeftButton" .. i - 1]
-	if C["actionbar"].Rightsidebarshorizontal then b:SetSize(D.buttonsize, D.buttonsize) else b:SetSize((D.buttonsize - 4), (D.buttonsize - 4)) end
+	if C["actionbar"]["Rightsidebarshorizontal"] then b:SetSize(D["buttonsize"], D["buttonsize"]) else b:SetSize(D["SidebarButtonsize"], D["SidebarButtonsize"]) end
 	b:ClearAllPoints()
 	b:SetFrameStrata("BACKGROUND")
 	b:SetFrameLevel(15)
 
-	if C["actionbar"].Rightsidebarshorizontal then
-		if i == 1 then b:SetPoint("BOTTOMLEFT", bar, D.buttonspacing, D.buttonspacing) else b:SetPoint("LEFT", b2, "RIGHT", D.buttonspacing, 0) end
+	if C["actionbar"]["Rightsidebarshorizontal"] then
+		if i == 1 then b:SetPoint("BOTTOMLEFT", bar, D["buttonspacing"], D["buttonspacing"]) else b:SetPoint("LEFT", b2, "RIGHT", D["buttonspacing"], 0) end
 	else
 		if i == 1 then
-			b:SetPoint("TOPLEFT", bar, D.buttonspacing, -D.buttonspacing)
+			b:SetPoint("TOPLEFT", bar, D["buttonspacing"], -D["buttonspacing"])
 		elseif i == 7 then
-			b:SetPoint("TOPRIGHT", bar, -D.buttonspacing, -D.buttonspacing)
+			b:SetPoint("TOPRIGHT", bar, -D["buttonspacing"], -D["buttonspacing"])
 		else
-			b:SetPoint("TOP", b2, "BOTTOM", 0, -D.buttonspacing)
+			b:SetPoint("TOP", b2, "BOTTOM", 0, -D["buttonspacing"])
 		end
 	end
 end
 RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
 
-if C["actionbar"].Rightsidebars then
+if C["actionbar"]["Rightsidebars"] then
 	function RightSideBar(alpha)
 		DuffedUIBar4:SetAlpha(alpha)
 		MultiBarLeft:SetAlpha(alpha)

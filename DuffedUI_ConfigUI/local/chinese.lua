@@ -120,6 +120,7 @@
 	DuffedUIConfigUILocalization.actionbarRightsidebars = "启用鼠标划过显示右边聊天框体上的快捷栏"
 	DuffedUIConfigUILocalization.actionbarLeftsidebarshorizontal = "设定左边快捷栏水平显示"
 	DuffedUIConfigUILocalization.actionbarRightsidebarshorizontal = "设定右边快捷栏水平显示"
+	DuffedUIConfigUILocalization.actionbarSidebarButtonsize = "Set size of buttons for sidebars on chat (only when vertical)"
 
 	--[[Raid Frames]]--
 	DuffedUIConfigUILocalization.raid = "团队框体"

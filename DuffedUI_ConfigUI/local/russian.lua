@@ -119,9 +119,7 @@
 	DuffedUIConfigUILocalization.actionbarRightsidebars = "Enable mouseover for Right SideBar on chatframe"
 	DuffedUIConfigUILocalization.actionbarLeftsidebarshorizontal = "Set left SideBar horizontal"
 	DuffedUIConfigUILocalization.actionbarRightsidebarshorizontal = "Set right SideBar horizontal"
-	DuffedUIConfigUILocalization.raidFrameScaleRaid = "Set Scale of Raid"
-	DuffedUIConfigUILocalization.raidlayout = "Set layout for group frames (default = heal, Values: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
-	DuffedUIConfigUILocalization.raidcenter = "Set Heal-Layout to center position"
+	DuffedUIConfigUILocalization.actionbarSidebarButtonsize = "Set size of buttons for sidebars on chat (only when vertical)"
 
 	--[[Raid Frames]]--
 	DuffedUIConfigUILocalization.raid = "Raid Frames"
@@ -144,6 +142,9 @@
 	DuffedUIConfigUILocalization.raidNameOutside = "Move player name to outside (DPS-Layout only)"
 	DuffedUIConfigUILocalization.raidMaxGroup = "Enable MaxGroup-display for raidframes"
 	DuffedUIConfigUILocalization.raidRoleIcons = "Enable default Roleicons (colored squares)"
+	DuffedUIConfigUILocalization.raidFrameScaleRaid = "Set Scale of Raid"
+	DuffedUIConfigUILocalization.raidlayout = "Set layout for group frames (default = heal, Values: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
+	DuffedUIConfigUILocalization.raidcenter = "Set Heal-Layout to center position"
 
 	--[[DataText]]--
 	DuffedUIConfigUILocalization.datatext = "Data Text"
