@@ -35,6 +35,7 @@ local BuffReminder1 = {
 		115921, -- Legacy of the Emperor
 	},
 	['PRIEST'] = {
+		469, -- Commanding Shout
 		21562, -- PW: Fortitude
 		109773, -- Dark Intent
 	},
@@ -49,6 +50,7 @@ local BuffReminder1 = {
 		52127, -- Water Shield
 	},
 	['WARLOCK'] = {
+		469, -- Commanding Shout
 		21562, -- PW: Fortitude
 		109773, -- Dark Intent
 	},
