@@ -128,6 +128,7 @@ local function LoadGarrisonSkin()
 	--[[Handle MasterPlan AddOn]]--
 	local function skinMasterPlan()
 		GarrisonMissionFrameTab3:SkinTab()
+		GarrisonMissionFrameTab4:SkinTab()
 		local MissionPage = GarrisonMissionFrame.MissionTab.MissionPage
 		MissionPage.MinimizeButton:SkinCloseButton()
 		MissionPage.MinimizeButton:SetFrameLevel(MissionPage:GetFrameLevel() + 2)
