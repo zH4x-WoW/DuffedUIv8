@@ -59,7 +59,6 @@ local BuffReminder1 = {
 		6673, -- Battle Shout
 		93435, -- Roar of Courage (Hunter Pet)
 		57330, -- Horn of Winter
-		21562, -- PW: Fortitude
 	},
 	["HUNTER"] = {},
 }
