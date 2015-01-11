@@ -400,6 +400,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(589), -- Shadow Word: Pain
 			CreateSpellEntry(158831), -- Devouring Plague
 			CreateSpellEntry(47788), -- Guardian Spirit
+			CreateSpellEntry(155361), -- Void Entropy
 		},
 		player = {
 			CreateSpellEntry(139), -- Renew
