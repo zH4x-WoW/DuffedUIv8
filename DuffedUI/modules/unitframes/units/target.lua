@@ -36,7 +36,6 @@ D["ConstructUFTarget"] = function(self)
 		panel:Height(17)
 	end
 	panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
-	self.panel = panel
 
 	--[[Health]]--
 	local health = CreateFrame("StatusBar", nil, self)
@@ -80,9 +79,6 @@ D["ConstructUFTarget"] = function(self)
 	if layout == 4 then health.value:Point("LEFT", health, "LEFT", 4, 10) else health.value:Point("RIGHT", health, "RIGHT", -4, -1) end
 	health.PostUpdate = D.PostUpdateHealth
 
-	self.Health = health
-	self.Health.bg = healthBG
-
 	health.frequentUpdates = true
 	if C["unitframes"]["showsmooth"] == true then health.Smooth = true end
 	if C["unitframes"]["unicolor"] == true then
@@ -121,7 +117,7 @@ D["ConstructUFTarget"] = function(self)
 		power:Point("TOP", health, "BOTTOM", 0, 10)
 	end
 	power:SetStatusBarTexture(texture)
-	power:SetFrameLevel(self.Health:GetFrameLevel() + 2)
+	power:SetFrameLevel(health:GetFrameLevel() + 2)
 	if layout == 1 or layout == 2 or layout == 3 then power:SetFrameStrata("BACKGROUND") end
 
 	local PowerBorder = CreateFrame("Frame", nil, power)
@@ -154,9 +150,6 @@ D["ConstructUFTarget"] = function(self)
 	else
 		power.colorPower = true
 	end
-
-	self.Power = power
-	self.Power.bg = powerBG
 
 	--[[Elements]]--
 	if C["unitframes"]["charportrait"] then
@@ -237,7 +230,6 @@ D["ConstructUFTarget"] = function(self)
 		insets = { left = 0, right = 0, top = 0, bottom = D.Scale(-1)}
 	})
 	AltPowerBar:SetBackdropColor(0, 0, 0)
-	self.AltPowerBar = AltPowerBar
 
 	local Name = health:CreateFontString(nil, "OVERLAY")
 	if layout == 4 then Name:Point("RIGHT", health, "RIGHT", -4, 0) else Name:Point("LEFT", health, "LEFT", 4, 0) end
@@ -245,13 +237,11 @@ D["ConstructUFTarget"] = function(self)
 	Name:SetFontObject(font)
 	Name:SetShadowOffset(1.25, -1.25)
 	self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:namelong] [DuffedUI:diffcolor][level] [shortclassification]")
-	self.Name = Name
 
 	local RaidIcon = health:CreateTexture(nil, "OVERLAY")
 	RaidIcon:SetTexture(C["media"]["RaidIcons"])
 	RaidIcon:Size(20, 20)
 	RaidIcon:Point("TOP", health, "TOP", 0, 11)
-	self.RaidIcon = RaidIcon
 
 	if C["unitframes"]["playeraggro"] then
 		table.insert(self.__elements, D.UpdateThreat)
@@ -322,24 +312,24 @@ D["ConstructUFTarget"] = function(self)
 
 	if C["unitframes"]["healcomm"] then
 		local mhpb = CreateFrame("StatusBar", nil, health)
-		mhpb:Point("TOPLEFT", health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-		mhpb:Point("BOTTOMLEFT", health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
-		mhpb:SetWidth(250)
+		mhpb:Point("LEFT", health:GetStatusBarTexture(), "RIGHT", 0, 0)
+		mhpb:SetHeight(health:GetHeight())
+		mhpb:SetWidth(218)
 		mhpb:SetStatusBarTexture(texture)
 		mhpb:SetStatusBarColor(0, 1, .5, .25)
-		mhpb:SetMinMaxValues(0,1)
+		mhpb:SetMinMaxValues(0, 1)
 
 		local ohpb = CreateFrame("StatusBar", nil, health)
-		ohpb:Point("TOPLEFT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-		ohpb:Point("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
-		ohpb:SetWidth(250)
+		ohpb:Point("LEFT", mhpb:GetStatusBarTexture(), "RIGHT", 0, 0)
+		ohpb:SetHeight(health:GetHeight())
+		ohpb:SetWidth(218)
 		ohpb:SetStatusBarTexture(texture)
 		ohpb:SetStatusBarColor(0, 1, 0, .25)
 
 		local absb = CreateFrame("StatusBar", nil, health)
-		absb:Point("TOPLEFT", ohpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-		absb:Point("BOTTOMLEFT", ohpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
-		absb:SetWidth(250)
+		absb:Point("LEFT", ohpb:GetStatusBarTexture(), "RIGHT", 0, 0)
+		absb:SetHeight(health:GetHeight())
+		absb:SetWidth(218)
 		absb:SetStatusBarTexture(texture)
 		absb:SetStatusBarColor(1, 1, 0, .25)
 
@@ -412,6 +402,15 @@ D["ConstructUFTarget"] = function(self)
 		Focus:StripTextures()
 		Focus:SetAttribute("macrotext1", "/focus")
 	end
+
+	self.panel = panel
+	self.Health = health
+	self.Health.bg = healthBG
+	self.Power = power
+	self.Power.bg = powerBG
+	self.AltPowerBar = AltPowerBar
+	self.Name = Name
+	self.RaidIcon = RaidIcon
 
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", D.updateAllElements)
 end

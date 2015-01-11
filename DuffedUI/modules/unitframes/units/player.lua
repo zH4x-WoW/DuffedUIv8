@@ -39,7 +39,6 @@ D["ConstructUFPlayer"] = function(self)
 	elseif layout == 3 then
 		panel:Height(17)
 	end
-	self.panel = panel
 
 	--[[Health]]--
 	local health = CreateFrame("StatusBar", nil, self)
@@ -108,9 +107,6 @@ D["ConstructUFPlayer"] = function(self)
 		health.colorReaction = true
 	end
 
-	self.Health = health
-	self.Health.bg = healthBG
-
 	--[[Power]]--
 	local power = CreateFrame("StatusBar", nil, self)
 	if layout == 1 then
@@ -129,7 +125,7 @@ D["ConstructUFPlayer"] = function(self)
 		power:Point("TOP", health, "BOTTOM", 0, 10)
 	end
 	power:SetStatusBarTexture(texture)
-	power:SetFrameLevel(self.Health:GetFrameLevel() + 2)
+	power:SetFrameLevel(health:GetFrameLevel() + 2)
 	if layout == 1 or layout == 2 or layout == 3 then power:SetFrameStrata("BACKGROUND") end
 
 	local PowerBorder = CreateFrame("Frame", nil, power)
@@ -158,9 +154,6 @@ D["ConstructUFPlayer"] = function(self)
 		power.colorPower = true
 	end
 	if C["unitframes"]["showsmooth"] then power.Smooth = true end
-
-	self.Power = power
-	self.Power.bg = powerBG
 
 	--[[Elements]]--
 	if C["unitframes"]["charportrait"] then
@@ -226,7 +219,6 @@ D["ConstructUFPlayer"] = function(self)
 	Combat:Width(19)
 	Combat:Point("TOP", health, "TOPLEFT", 0, 12)
 	Combat:SetVertexColor(.69, .31, .31)
-	self.Combat = Combat
 
 	FlashInfo = CreateFrame("Frame", "DuffedUIFlashInfo", self)
 	FlashInfo:SetScript("OnUpdate", D.UpdateManaLevel)
@@ -235,19 +227,16 @@ D["ConstructUFPlayer"] = function(self)
 	FlashInfo.ManaLevel = FlashInfo:CreateFontString(nil, "OVERLAY")
 	FlashInfo.ManaLevel:SetFontObject(font)
 	FlashInfo.ManaLevel:Point("CENTER", health, "CENTER", 0, 1)
-	self.FlashInfo = FlashInfo
 
 	local PVP = health:CreateTexture(nil, "OVERLAY")
 	PVP:SetHeight(D.Scale(32))
 	PVP:SetWidth(D.Scale(32))
 	PVP:Point("TOPLEFT", health, "TOPRIGHT", -7, 7)
-	self.PvP = PVP
 
 	local Leader = health:CreateTexture(nil, "OVERLAY")
 	Leader:Height(14)
 	Leader:Width(14)
 	Leader:Point("TOPLEFT", 2, 8)
-	self.Leader = Leader
 
 	local MasterLooter = health:CreateTexture(nil, "OVERLAY")
 	MasterLooter:Height(14)
@@ -260,7 +249,6 @@ D["ConstructUFPlayer"] = function(self)
 	RaidIcon:SetTexture(C["media"]["RaidIcons"])
 	RaidIcon:Size(20, 20)
 	RaidIcon:Point("TOP", health, "TOP", 0, 11)
-	self.RaidIcon = RaidIcon
 
 	self:SetScript("OnEnter", function(self)
 		if self.EclipseBar and self.EclipseBar:IsShown() then 
@@ -320,23 +308,23 @@ D["ConstructUFPlayer"] = function(self)
 
 	if C["unitframes"]["healcomm"] then
 		local mhpb = CreateFrame("StatusBar", nil, health)
-		mhpb:Point("TOPLEFT", health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-		mhpb:Point("BOTTOMLEFT", health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+		mhpb:Point("LEFT", health:GetStatusBarTexture(), "RIGHT", 0, 0)
+		mhpb:SetHeight(health:GetHeight())
 		mhpb:SetWidth(218)
 		mhpb:SetStatusBarTexture(texture)
 		mhpb:SetStatusBarColor(0, 1, .5, .25)
 		mhpb:SetMinMaxValues(0,1)
 
 		local ohpb = CreateFrame("StatusBar", nil, health)
-		ohpb:Point("TOPLEFT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-		ohpb:Point("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+		ohpb:Point("LEFT", mhpb:GetStatusBarTexture(), "RIGHT", 0, 0)
+		ohpb:SetHeight(health:GetHeight())
 		ohpb:SetWidth(218)
 		ohpb:SetStatusBarTexture(texture)
 		ohpb:SetStatusBarColor(0, 1, 0, .25)
 
 		local absb = CreateFrame("StatusBar", nil, health)
-		absb:Point("TOPLEFT", ohpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-		absb:Point("BOTTOMLEFT", ohpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+		absb:Point("LEFT", ohpb:GetStatusBarTexture(), "RIGHT", 0, 0)
+		absb:SetHeight(health:GetHeight())
 		absb:SetWidth(218)
 		absb:SetStatusBarTexture(texture)
 		absb:SetStatusBarColor(1, 1, 0, .25)
@@ -409,6 +397,17 @@ D["ConstructUFPlayer"] = function(self)
 		self.Castbar.Time = castbar.time
 		self.Castbar.Icon = castbar.icon
 	end
+
+	self.panel = panel
+	self.Health = health
+	self.Health.bg = healthBG
+	self.Power = power
+	self.Power.bg = powerBG
+	self.Combat = Combat
+	self.FlashInfo = FlashInfo
+	self.PvP = PVP
+	self.Leader = Leader
+	self.RaidIcon = RaidIcon
 
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", D.updateAllElements)
 	if C["unitframes"]["classbar"] then D["ClassRessource"][class](self) end
