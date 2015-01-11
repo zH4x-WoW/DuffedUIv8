@@ -62,15 +62,28 @@ D["ConstructUFFocus"] = function(self)
 		health.colorReaction = true
 	end
 
-	self.Health = health
-	self.Health.bg = healthBG
+	if C["unitframes"]["focusbutton"] then
+		local ClearFocus = CreateFrame("Button", "ClearFocus", health, "SecureActionButtonTemplate")
+		ClearFocus:Size(50, 10)
+		ClearFocus:Point("TOPRIGHT", health, "TOPRIGHT", 0, 14)
+		ClearFocus:SetTemplate()
+		ClearFocus:StripTextures()
+		ClearFocus:EnableMouse(true)
+		ClearFocus:RegisterForClicks("AnyUp")
+		ClearFocus.text = ClearFocus:CreateFontString(nil, "OVERLAY")
+		ClearFocus.text:SetFont(C["media"]["font"], 11, "THINOUTLINE")
+		ClearFocus.text:SetPoint("CENTER")
+		ClearFocus.text:SetText(D["PanelColor"] .. "Clear Focus")
+		ClearFocus:SetAttribute("type1", "macro")
+		ClearFocus:SetAttribute("macrotext1", "/clearfocus")
+	end
 
 	local power = CreateFrame("StatusBar", nil, self)
 	power:Height(3)
 	power:Point("TOPLEFT", health, "BOTTOMLEFT", 85, 0)
 	power:Point("TOPRIGHT", health, "BOTTOMRIGHT", -9, -3)
 	power:SetStatusBarTexture(texture)
-	power:SetFrameLevel(self.Health:GetFrameLevel() + 2)
+	power:SetFrameLevel(health:GetFrameLevel() + 2)
 
 	local PowerBorder = CreateFrame("Frame", nil, power)
 	PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", D.Scale(-2), D.Scale(2))
@@ -89,9 +102,6 @@ D["ConstructUFFocus"] = function(self)
 	power.colorClassNPC = true
 	if C["unitframes"]["showsmooth"] then power.Smooth = true end
 
-	self.Power = power
-	self.Power.bg = powerBG
-
 	local Name = health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("LEFT", health, "LEFT", 2, 0)
 	Name:SetJustifyH("CENTER")
@@ -99,7 +109,6 @@ D["ConstructUFFocus"] = function(self)
 	Name:SetShadowColor(0, 0, 0)
 	Name:SetShadowOffset(1.25, -1.25)
 	self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:namelong]")
-	self.Name = Name
 
 	if C["unitframes"]["focusdebuffs"] then
 		local debuffs = CreateFrame("Frame", nil, self)
@@ -152,6 +161,11 @@ D["ConstructUFFocus"] = function(self)
 	castbar.icon:Point("BOTTOMRIGHT", castbar.button, -2, 2)
 	castbar.icon:SetTexCoord(.08, .92, .08, .92)
 
+	self.Health = health
+	self.Health.bg = healthBG
+	self.Power = power
+	self.Power.bg = powerBG
+	self.Name = Name
 	self.Castbar = castbar
 	self.Castbar.Icon = castbar.icon
 	self.Castbar.Time = castbar.time
