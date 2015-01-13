@@ -148,6 +148,10 @@ D["SpawnUF"] = function(self)
 		end
 
 		local oUF_PrepArena = {}
+		local backdrop = {
+			bgFile = C["media"]["blank"],
+			insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
+		}
 		for i = 1, 5 do
 			oUF_PrepArena[i] = CreateFrame("Frame", "oUF_PrepArena" .. i, UIParent)
 			oUF_PrepArena[i]:SetAllPoints(arena[i])
@@ -155,11 +159,11 @@ D["SpawnUF"] = function(self)
 			oUF_PrepArena[i]:SetBackdropColor(0, 0, 0)
 			oUF_PrepArena[i].Health = CreateFrame("StatusBar", nil, oUF_PrepArena[i])
 			oUF_PrepArena[i].Health:SetAllPoints()
-			oUF_PrepArena[i].Health:SetStatusBarTexture(normTex)
+			oUF_PrepArena[i].Health:SetStatusBarTexture(C["media"]["normTex"])
 			oUF_PrepArena[i].Health:SetStatusBarColor(.3, .3, .3, 1)
 			oUF_PrepArena[i].SpecClass = oUF_PrepArena[i].Health:CreateFontString(nil, "OVERLAY")
-			oUF_PrepArena[i].SpecClass:SetFontObject(font)
-			oUF_PrepArena[i].SpecClass:Point("CENTER")
+			oUF_PrepArena[i].SpecClass:SetFontObject(D.Font(C["font"]["unitframes"]))
+			oUF_PrepArena[i].SpecClass:Point("CENTER", oUF_PrepArena[i].Health)
 			oUF_PrepArena[i]:Hide()
 		end
 
