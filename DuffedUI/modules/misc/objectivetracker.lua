@@ -331,13 +331,13 @@ end
 
 --[[Execution]]--
 local ObjFhandler = CreateFrame("Frame")
-ObjFhandler:RegisterEvent("ADDON_LOADED")
+--ObjFhandler:RegisterEvent("ADDON_LOADED")
 ObjFhandler:RegisterEvent("PLAYER_ENTERING_WORLD")
-ObjFhandler:RegisterEvent("QUEST_AUTOCOMPLETE")
-ObjFhandler:RegisterEvent("QUEST_LOG_UPDATE")
+--ObjFhandler:RegisterEvent("QUEST_AUTOCOMPLETE")
+--ObjFhandler:RegisterEvent("QUEST_LOG_UPDATE")
 
 ObjFhandler:SetScript("OnEvent", function(self, event, AddOn)
-	if AddOn=="Blizzard_ObjectiveTracker" then alterAQButton() end
+	if AddOn == "Blizzard_ObjectiveTracker" then alterAQButton() end
 end)
 
 if IsAddOnLoaded("Blizzard_ObjectiveTracker") then
