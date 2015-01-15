@@ -29,6 +29,8 @@ local function LoadGarrisonSkin()
 	GarrisonBuildingFrameFollowers:Point("LEFT", GarrisonBuildingFrame, 23, -15)
 	GarrisonBuildingFrameFollowersListScrollFrame:StripTextures()
 	GarrisonBuildingFrameFollowersListScrollFrameScrollBar:SkinScrollBar()
+	GarrisonBuildingFrame.BuildingLevelTooltip:StripTextures()
+	GarrisonBuildingFrame.BuildingLevelTooltip:SetTemplate("Transparent")
 
 	--[[Capacitive display frame]]--
 	GarrisonCapacitiveDisplayFrame:StripTextures(true)
