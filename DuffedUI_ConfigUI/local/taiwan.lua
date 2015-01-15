@@ -238,6 +238,7 @@
 	DuffedUIConfigUILocalization.bagsbuttonsize = "設置篩選器(搜索框)大小"
 	DuffedUIConfigUILocalization.bagsBounce = "啟用獲得新物品跳躍動畫"
 	DuffedUIConfigUILocalization.bagsSortBlizzard = "啟用遊戲自帶的排序功能"
+	DuffedUIConfigUILocalization.bagsSortingButton = "Enable the sorting button on bags and bank"
 
 	--[[Misc]]--
 	DuffedUIConfigUILocalization.misc = "雜項"

@@ -139,13 +139,15 @@ function CreateReagentContainer()
 	Deposit:Point("BOTTOM", Reagent, "BOTTOM", 0, 7)
 	Deposit:SkinButton()
 
-	SortButton:Size(75, 23)
-	SortButton:SetPoint("BOTTOMRIGHT", Reagent, "BOTTOMRIGHT", -10, 7)
-	SortButton:SkinButton()
-	SortButton:FontString("Text", C["media"].font, 11)
-	SortButton.Text:SetPoint("CENTER")
-	SortButton.Text:SetText(BAG_FILTER_CLEANUP)
-	SortButton:SetScript("OnClick", BankFrame_AutoSortButtonOnClick)
+	if C["bags"]["SortingButton"] then
+		SortButton:Size(75, 23)
+		SortButton:SetPoint("BOTTOMRIGHT", Reagent, "BOTTOMRIGHT", -10, 7)
+		SortButton:SkinButton()
+		SortButton:FontString("Text", C["media"].font, 11)
+		SortButton.Text:SetPoint("CENTER")
+		SortButton.Text:SetText(BAG_FILTER_CLEANUP)
+		SortButton:SetScript("OnClick", BankFrame_AutoSortButtonOnClick)
+	end
 
 	for i = 1, 98 do
 		local Button = _G["ReagentBankFrameItem" .. i]
@@ -221,26 +223,28 @@ function CreateContainer(storagetype, ...)
 		BagsContainer:Hide()
 		BagsContainer:SetTemplate("Transparent")
 
-		Sort:Size(75, 23)
-		Sort:ClearAllPoints()
-		Sort:SetPoint("BOTTOMLEFT", Container, "BOTTOMLEFT", 10, 7)
-		Sort:SetFrameLevel(Container:GetFrameLevel() + 1)
-		Sort:SetFrameStrata(Container:GetFrameStrata())
-		Sort:StripTextures()
-		Sort:SkinButton()
-		if C["bags"].SortBlizzard then
-			Sort:SetScript("OnClick", SortBags)
-		else
-			Sort:SetScript("OnMouseDown", function(self, button) 
-				if InCombatLockdown() then return end
-				if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
-			end)
+		if C["bags"]["SortingButton"] then
+			Sort:Size(75, 23)
+			Sort:ClearAllPoints()
+			Sort:SetPoint("BOTTOMLEFT", Container, "BOTTOMLEFT", 10, 7)
+			Sort:SetFrameLevel(Container:GetFrameLevel() + 1)
+			Sort:SetFrameStrata(Container:GetFrameStrata())
+			Sort:StripTextures()
+			Sort:SkinButton()
+			if C["bags"].SortBlizzard then
+				Sort:SetScript("OnClick", SortBags)
+			else
+				Sort:SetScript("OnMouseDown", function(self, button) 
+					if InCombatLockdown() then return end
+					if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
+				end)
+			end
+			Sort:FontString("Text", C["media"].font, 11)
+			Sort.Text:SetPoint("CENTER")
+			Sort.Text:SetText(BAG_FILTER_CLEANUP)
+			Sort.ClearAllPoints = D.Dummy
+			Sort.SetPoint = D.Dummy
 		end
-		Sort:FontString("Text", C["media"].font, 11)
-		Sort.Text:SetPoint("CENTER")
-		Sort.Text:SetText(BAG_FILTER_CLEANUP)
-		Sort.ClearAllPoints = D.Dummy
-		Sort.SetPoint = D.Dummy
 
 		ToggleBagsContainer:SetHeight(20)
 		ToggleBagsContainer:SetWidth(20)
@@ -338,19 +342,21 @@ function CreateContainer(storagetype, ...)
 			for i = 5, 11 do CloseBag(i) end
 		end)
 
-		SortButton:Size(75, 23)
-		SortButton:SetPoint("BOTTOMRIGHT", Container, "BOTTOMRIGHT", -10, 7)
-		SortButton:SkinButton()
-		SortButton:FontString("Text", C["media"].font, 11)
-		SortButton.Text:SetPoint("CENTER")
-		SortButton.Text:SetText(BAG_FILTER_CLEANUP)
-		if C["bags"].SortBlizzard then
-			SortButton:SetScript("OnClick", SortBags)
-		else
-			SortButton:SetScript("OnMouseDown", function(self, button) 
-				if InCombatLockdown() then return end
-				if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
-			end)
+		if C["bags"]["SortingButton"] then
+			SortButton:Size(75, 23)
+			SortButton:SetPoint("BOTTOMRIGHT", Container, "BOTTOMRIGHT", -10, 7)
+			SortButton:SkinButton()
+			SortButton:FontString("Text", C["media"].font, 11)
+			SortButton.Text:SetPoint("CENTER")
+			SortButton.Text:SetText(BAG_FILTER_CLEANUP)
+			if C["bags"].SortBlizzard then
+				SortButton:SetScript("OnClick", SortBags)
+			else
+				SortButton:SetScript("OnMouseDown", function(self, button) 
+					if InCombatLockdown() then return end
+					if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
+				end)
+			end
 		end
 
 		Purchase:ClearAllPoints()

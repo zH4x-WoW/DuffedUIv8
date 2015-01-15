@@ -238,6 +238,7 @@
 	DuffedUIConfigUILocalization.bagsbuttonsize = "Größe der Taschenplätze"
 	DuffedUIConfigUILocalization.bagsBounce = "Aktiviere Pulseanimation für neue Gegenstände"
 	DuffedUIConfigUILocalization.bagsSortBlizzard = "Aktiviere die Sortierfunktion von Blizzard"
+	DuffedUIConfigUILocalization.bagsSortingButton = "Aktiviere den Sortierbutton in den Taschen und der Bank"
 
 	--[[Misc]]--
 	DuffedUIConfigUILocalization.misc = "Sonstiges"

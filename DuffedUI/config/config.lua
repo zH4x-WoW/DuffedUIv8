@@ -238,6 +238,7 @@ C["bags"] = {
 	["spacing"] = 4,
 	["Bounce"] = true,
 	["SortBlizzard"] = false,
+	["SortingButton"] = true,
 }
 
 C["misc"] = {
