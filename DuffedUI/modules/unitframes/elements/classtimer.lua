@@ -87,15 +87,13 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(165509), -- Rogue Subtlety 2pieces
 	CreateSpellEntry(170186), -- Hunter Markmanship 4pieces
 
-	--[[Legendary MetaGems]]--
-	CreateSpellEntry(137593, true), -- Indomitable Primal Diamond
-	CreateSpellEntry(137288, true), -- Courageous Primal Diamond
-	CreateSpellEntry(137596, true), -- Capacitive Primal Diamond
-	CreateSpellEntry(137590, true), -- Sinister Primal Diamond
-
-	--[[Legendary Cloaks]]--
-	CreateSpellEntry(146194, true), -- Xuen
-	CreateSpellEntry(146200, true), -- Chi-Ji
+	--[[Legendary Rings]]--
+	CreateSpellEntry(177159), -- Archmage's Incandescence (Intellect)
+	CreateSpellEntry(177160), -- Archmage's Incandescence (Strength)
+	CreateSpellEntry(177161), -- Archmage's Incandescence (Agility)
+	CreateSpellEntry(177172), -- Archmage's Incandescence (Agility)
+	CreateSpellEntry(177175), -- Archmage's Incandescence (Strength)
+	CreateSpellEntry(177176), -- Archmage's Incandescence (Agility)
 
 	--[[Blackrock Foundry]]--
 	CreateSpellEntry(177063), -- Elementalist's Shielding Talisman (Elemental Shield)
@@ -119,6 +117,7 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(176875), -- Shards of Nothing (Void Shards)
 	CreateSpellEntry(176879), -- Emblem of Caustic Healing (Caustic Healing)
 	CreateSpellEntry(177053), -- Evergaze Arcane Eidolon (Gazing Eye)
+	CreateSpellEntry(177040), -- Tectus' Beating Heart (Tectus' Heartbeat)
 }
 
 local CLASS_FILTERS = {
