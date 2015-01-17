@@ -100,8 +100,6 @@ local OnEvent = function(self, event, unit)
 				Minimap:Show()
 			end
 		end
-	elseif event == "PLAYER_LEAVING_WORLD" then
-		SpinStop()
 	elseif event == "PLAYER_DEAD" then
 		if UnitIsAFK("player") then
 			SpinStop()
@@ -109,12 +107,22 @@ local OnEvent = function(self, event, unit)
 			DuffedUIAFKPanelTop:Hide()
 			Minimap:Show()
 		end
+	elseif event == "PLAYER_REGEN_DISABLED" then
+		if UnitIsAFK("player") then
+			SpinStop()
+			DuffedUIAFKPanel:Hide()
+			DuffedUIAFKPanelTop:Hide()
+			Minimap:Show()
+		end
+	elseif event == "PLAYER_LEAVING_WORLD" then
+		SpinStop()
 	end
 end
 
 DuffedUIAFKPanel:RegisterEvent("PLAYER_ENTERING_WORLD")
 DuffedUIAFKPanel:RegisterEvent("PLAYER_LEAVING_WORLD")
 DuffedUIAFKPanel:RegisterEvent("PLAYER_FLAGS_CHANGED")
+DuffedUIAFKPanel:RegisterEvent("PLAYER_REGEN_DISABLED")
 DuffedUIAFKPanel:RegisterEvent("PLAYER_DEAD")
 DuffedUIAFKPanel:SetScript("OnEvent", OnEvent)
 
