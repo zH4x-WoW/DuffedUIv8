@@ -43,6 +43,13 @@ function D.HyperlinkMouseover()
 end
 D.HyperlinkMouseover()
 
+--[[Button mouseover]]--
+D["ButtonMO"] = function(frame)
+	frame:SetAlpha(0)
+	frame:SetScript("OnEnter", function() frame:SetAlpha(1) end)
+	frame:SetScript("OnLeave", function() frame:SetAlpha(0) end)
+end
+
 --[[Shorten comma values]]--
 D.CommaValue = function(amount)
 	local formatted = amount

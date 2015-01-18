@@ -131,7 +131,14 @@ end
 local chatmenu = CreateFrame("Frame", "DuffedUIChatMenu", UIParent)
 chatmenu:SetTemplate("Default")
 chatmenu:Size(20)
-if C["chat"]["lbackground"] then chatmenu:Point("LEFT", DuffedUITabsLeftBackground, "RIGHT", 2, 0) else chatmenu:Point("TOPRIGHT", ChatFrame1, "TOPRIGHT", -11, 25) end
+if C["chat"]["lbackground"] then
+	chatmenu:Point("LEFT", DuffedUITabsLeftBackground, "RIGHT", 2, 0)
+else
+	chatmenu:Point("TOPRIGHT", ChatFrame1, "TOPRIGHT", -11, 25)
+	chatmenu:SetAlpha(0)
+	chatmenu:SetScript("OnEnter", function() chatmenu:SetAlpha(1) end)
+	chatmenu:SetScript("OnLeave", function() chatmenu:SetAlpha(0) end)
+end
 chatmenu:SetFrameLevel(3)
 chatmenu.text = D.SetFontString(chatmenu, C["media"]["font"], 11, "THINOUTLINE")
 chatmenu.text:SetPoint("CENTER", 1, -1)

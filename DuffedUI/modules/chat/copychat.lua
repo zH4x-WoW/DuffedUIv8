@@ -81,15 +81,16 @@ else
 	DuffedUIButtonCF1:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
 	DuffedUIButtonCF2:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
 	DuffedUIButtonCF3:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
+	D["ButtonMO"](DuffedUIButtonCF1)
+	D["ButtonMO"](DuffedUIButtonCF2)
+	D["ButtonMO"](DuffedUIButtonCF3)
 end
 
 if C["chat"].rbackground then
 	DuffedUIButtonCF4:SetPoint("TOPRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", -4, -4)
 else
 	DuffedUIButtonCF4:SetPoint("TOPRIGHT", ChatFrame4, "TOPRIGHT", -4, 20)
-	DuffedUIButtonCF4:SetAlpha(0)
-	DuffedUIButtonCF4:SetScript("OnEnter", function() DuffedUIButtonCF4:SetAlpha(1) end)
-	DuffedUIButtonCF4:SetScript("OnLeave", function() DuffedUIButtonCF4:SetAlpha(0) end)
+	D["ButtonMO"](DuffedUIButtonCF4)
 end
 
 for i = 1, NUM_CHAT_WINDOWS do
