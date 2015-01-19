@@ -14,7 +14,7 @@ ExtraActionBarFrame.ignoreFramePositionManager = true
 
 DraenorZoneAbilityFrame:SetParent(holder)
 DraenorZoneAbilityFrame:ClearAllPoints()
-DraenorZoneAbilityFrame:SetPoint("CENTER", holder, "CENTER")
+DraenorZoneAbilityFrame:SetPoint("CENTER", holder, "CENTER", 0, 0)
 DraenorZoneAbilityFrame.ignoreFramePositionManager = true
 
 local button = ExtraActionButton1
