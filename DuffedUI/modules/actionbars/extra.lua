@@ -1,16 +1,21 @@
 local D, C, L = unpack(select(2, ...))
-if not C["actionbar"].enable then return end
+if not C["actionbar"]["enable"] then return end
 
 local move = D["move"]
 local holder = CreateFrame("Frame", "ExtrabuttonMover", UIParent)
 holder:Size(80, 80)
-if C["raid"].center then holder:SetPoint("BOTTOM", -235, 88) else holder:SetPoint("BOTTOM", 0, 250) end
+if C["raid"]["center"] then holder:SetPoint("BOTTOM", -235, 88) else holder:SetPoint("BOTTOM", 0, 250) end
 move:RegisterFrame(holder)
 
 ExtraActionBarFrame:SetParent(UIParent)
 ExtraActionBarFrame:ClearAllPoints()
 ExtraActionBarFrame:SetPoint("CENTER", holder, "CENTER", 0, 0)
 ExtraActionBarFrame.ignoreFramePositionManager = true
+
+DraenorZoneAbilityFrame:SetParent(holder)
+DraenorZoneAbilityFrame:ClearAllPoints()
+DraenorZoneAbilityFrame:SetPoint("CENTER", holder, "CENTER")
+DraenorZoneAbilityFrame.ignoreFramePositionManager = true
 
 local button = ExtraActionButton1
 local icon = button.icon
