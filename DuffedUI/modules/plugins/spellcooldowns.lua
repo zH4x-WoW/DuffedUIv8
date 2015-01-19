@@ -1,15 +1,15 @@
 local D, C, L = unpack(select(2, ...))
-if C["cooldown"].scdenable ~= true then return end
+if C["cooldown"]["scdenable"] ~= true then return end
 
-local font = D.Font(C["font"].scd)
-local texture = C["media"].normTex
-local size = D.Scale(C["cooldown"].scdsize)
-local spacing = D.Scale(C["cooldown"].scdspacing)
+local font = D.Font(C["font"]["scd"])
+local texture = C["media"]["normTex"]
+local size = D.Scale(C["cooldown"]["scdsize"])
+local spacing = D.Scale(C["cooldown"]["scdspacing"])
 local color = {1, 1, 0, 1}
-local fade = C["cooldown"].scdfade
+local fade = C["cooldown"]["scdfade"]
 local mode = "HIDE"
 
-if D.Class == "WARRIOR" or D.Class == "HUNTER" or D.Class == "DEATHKNIGHT" or D.Class == "ROGUE" then mode = "HIDE" end
+if D["Class"] == "WARRIOR" or D["Class"] == "HUNTER" or D["Class"] == "DEATHKNIGHT" or D["Class"] == "ROGUE" then mode = "HIDE" end
 
 spellCooldowns = {
 	["DEATHKNIGHT"] = {
@@ -499,8 +499,14 @@ local move = D["move"]
 
 local scfa = CreateFrame("Frame", "SpellCooldownsMover", UIParent)
 scfa:Size(120, 17)
-if C["raid"].center then
-	if C["chat"].lbackground then scfa:SetPoint("BOTTOM", DuffedUIChatBackgroundLeft, "TOP", 0, 10) else scfa:SetPoint("BOTTOM", ChatFrame1, "TOP", 0, 25) end
+if C["raid"]["center"] then
+	if C["chat"]["lbackground"] and C["raid"]["layout"] == "heal" then
+		scfa:SetPoint("BOTTOM", DuffedUIChatBackgroundLeft, "TOP", 0, 10)
+	elseif C["chat"]["lbackground"] and C["raid"]["layout"] == "dps" then
+		scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 350)
+	else
+		scfa:SetPoint("BOTTOM", ChatFrame1, "TOP", 0, 25)
+	end
 else
 	scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 350)
 end
@@ -551,12 +557,12 @@ local function positionHide()
 	for k,v in pairs(frames) do
 		local frame = frames[k]
 
-		if GetSpellTexture(GetSpellInfo(frame.spell)) or D.Class == "PRIEST"then
+		if GetSpellTexture(GetSpellInfo(frame.spell)) or D["Class"] == "PRIEST"then
 			local start, duration = GetSpellCooldown(frame.spell)
 			frame.start = start
 			frame.duration = duration
 			if duration and duration > 1.5 then
-				if D.Class == "PRIEST" and frame.spell == 88682 or frame.spell == 88684 or frame.spell == 88685 then 
+				if D["Class"] == "PRIEST" and frame.spell == 88682 or frame.spell == 88684 or frame.spell == 88685 then 
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(88625)))
 				else
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(frame.spell)))
@@ -580,12 +586,12 @@ local function positionDim()
 	for k,v in pairs(frames) do
 		local frame = frames[k]
 
-		if GetSpellTexture(GetSpellInfo(frame.spell)) or D.Class == "PRIEST"then
+		if GetSpellTexture(GetSpellInfo(frame.spell)) or D["Class"] == "PRIEST" then
 			local start, duration, enable = GetSpellCooldown(frame.spell)
 			frame.start = start
 			frame.duration = duration
 			if duration and duration > 1.5 then
-				if D.Class == "PRIEST" and frame.spell == 88682 or frame.spell == 88684 or frame.spell == 88685 then
+				if D["Class"] == "PRIEST" and frame.spell == 88682 or frame.spell == 88684 or frame.spell == 88685 then
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(88625)))
 				else
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(frame.spell)))
@@ -607,7 +613,7 @@ local function position()
 	if mode == "HIDE" then positionHide() else positionDim() end
 end
 
--- Frames
+--[[Frames]]--
 local function createCooldownFrame(spell)
 	local frame = CreateFrame("Frame", nil, UIParent)
 	frame:CreateBackdrop("Transparent")
@@ -620,7 +626,7 @@ local function createCooldownFrame(spell)
 	if not spellInfo then return nil end
 	local texture = GetSpellTexture(spellInfo)
 	icon:SetAllPoints(frame)
-	if D.Class == "PRIEST" and spell == 88682 or spell == 88684 or spell == 88685 then texture = GetSpellTexture(GetSpellInfo(88625)) end
+	if D["Class"] == "PRIEST" and spell == 88682 or spell == 88684 or spell == 88685 then texture = GetSpellTexture(GetSpellInfo(88625)) end
 	if not texture then return nil end
 	icon:SetTexture(texture)
 	icon:SetTexCoord(.08, .92, .08, .92)
@@ -635,7 +641,7 @@ local function createCooldownFrame(spell)
 
 	local statusBar = CreateFrame("StatusBar", nil, frame, "TextStatusBar")
 	statusBar:Size(width, 4)
-	statusBar:SetStatusBarTexture(C["media"].normTex)
+	statusBar:SetStatusBarTexture(texture)
 	statusBar:SetStatusBarColor(.77, .12, .23)
 	statusBar:SetPoint("TOP", frame,"TOP", 0, 0)
 	statusBar:SetMinMaxValues(0, 1)
@@ -668,7 +674,7 @@ local race = spellCooldowns["RACE"]
 for i = 1, table.getn(race[select(2, UnitRace("player"))]) do table.insert(spells, race[select(2, UnitRace("player"))][i]) end
 
 local _, pra = UnitRace("player")
-if D.Class == "WARLOCK" or D.Class == "HUNTER" then
+if D["Class"] == "WARLOCK" or D["Class"] == "HUNTER" then
 	for i = 1, table.getn(spellCooldowns["PET"]) do table.insert(spells, spellCooldowns["PET"][i]) end
 end
 
