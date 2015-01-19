@@ -504,6 +504,8 @@ if C["raid"]["center"] then
 		scfa:SetPoint("BOTTOM", DuffedUIChatBackgroundLeft, "TOP", 0, 10)
 	elseif C["chat"]["lbackground"] and C["raid"]["layout"] == "dps" then
 		scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 350)
+	elseif not C["chat"]["lbackground"] and C["raid"]["layout"] == "dps" then
+		scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 350)
 	else
 		scfa:SetPoint("BOTTOM", ChatFrame1, "TOP", 0, 25)
 	end
