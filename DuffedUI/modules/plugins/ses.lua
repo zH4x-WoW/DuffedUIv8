@@ -139,11 +139,9 @@ D.CreateBtn("MB_dfaq", MB_reload, 19, 19, L["buttons"]["ses_dfaq"], "F")
 MB_dfaq:Point("LEFT", MB_binds, "RIGHT", 2, 0)
 MB_dfaq:SetAttribute("macrotext1", "/dfaq")
 
-if not C["chat"]["rbackground"] then
-	D.CreateBtn("MB_switch", MB_reload, 19, 19, L["buttons"]["ses_switch"], "S")
-	MB_switch:Point("LEFT", MB_dfaq, "RIGHT", 2, 0)
-	MB_switch:SetAttribute("macrotext1", "/switch")
-end
+D.CreateBtn("MB_switch", MB_reload, 19, 19, L["buttons"]["ses_switch"], "S")
+MB_switch:Point("LEFT", MB_dfaq, "RIGHT", 2, 0)
+MB_switch:SetAttribute("macrotext1", "/switch")
 
 if Enablegear == true then
 	local gearSets = CreateFrame("Frame", nil, MB_reload)

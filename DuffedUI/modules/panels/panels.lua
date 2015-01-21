@@ -45,10 +45,6 @@ if C["chat"]["rbackground"] then
 	tabsbgright:Point("TOPLEFT", chatrightbg, "TOPLEFT", 4, -4)
 	tabsbgright:SetFrameLevel(2)
 	tabsbgright:SetFrameStrata("BACKGROUND")
-
-	D.CreateBtn("MB_switch", DuffedUITabsRightBackground, 20, 20, L["buttons"]["ses_switch"], "S")
-	MB_switch:Point("LEFT", DuffedUITabsRightBackground, "RIGHT", 2, 0)
-	MB_switch:SetAttribute("macrotext1", "/switch")
 end
 
 if C["actionbar"]["enable"] then
