@@ -41,7 +41,7 @@ if C["chat"]["rbackground"] then
 
 	local tabsbgright = CreateFrame("Frame", "DuffedUITabsRightBackground", UIParent)
 	tabsbgright:SetTemplate()
-	tabsbgright:Size((D["InfoLeftRightWidth"] - 209), 20)
+	tabsbgright:Size((D["InfoLeftRightWidth"] - 189), 20)
 	tabsbgright:Point("TOPLEFT", chatrightbg, "TOPLEFT", 4, -4)
 	tabsbgright:SetFrameLevel(2)
 	tabsbgright:SetFrameStrata("BACKGROUND")

@@ -65,8 +65,8 @@ function DisableSpecSwitcherSpamFilter() ChatFrame_RemoveMessageEventFilter("CHA
 local spec = CreateFrame("Button", "DuffedUI_Spechelper", DuffedUIInfoLeft)
 spec:SetTemplate("Default")
 if C["chat"].rbackground then
-	spec:SetPoint("LEFT", DuffedUITabsRightBackground, "RIGHT", 24, 0)
-	spec:Size(DuffedUIMinimap:GetWidth() + 1, 20)
+	spec:SetPoint("LEFT", DuffedUITabsRightBackground, "RIGHT", 2, 0)
+	spec:Size(DuffedUIMinimap:GetWidth() + 3, 20)
 else
 	spec:SetPoint("TOPLEFT", DuffedUIMinimapStatsLeft, "BOTTOMLEFT", 0, -2)
 	spec:Size(DuffedUIMinimap:GetWidth() + 9, 20)
