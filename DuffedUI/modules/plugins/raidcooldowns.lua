@@ -15,7 +15,7 @@ local show = {
 
 local spells = {
 	[633] = 600,		-- Lay on Hands
-	[740] = 480,		-- Tranq
+	[740] = 180,		-- Tranq
 	[1022] = 300,		-- Hand of Protection
 	[6940] = 120,		-- Hand of Sacrifice
 	[20484] = 600,		-- Rebirth
