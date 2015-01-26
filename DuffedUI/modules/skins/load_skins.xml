@@ -48,6 +48,7 @@
 	<Script file="questchoice.lua" />
 	<Script file="questlog.lua" />
 	<Script file="raid.lua" />
+	<Script file="recap.lua" />
 	<Script file="shop.lua" />
 	<Script file="socket.lua" />
 	<Script file="spellbook.lua" />
