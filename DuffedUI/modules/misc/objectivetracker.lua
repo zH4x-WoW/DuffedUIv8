@@ -317,12 +317,8 @@ if C["misc"].QuestLevel then
 			if isOnMap and not isTask and not isHeader then
 				headerIndex = headerIndex + 1
 				local button = QuestLogQuests_GetTitleButton(headerIndex)
-				local oldBlockHeight = button:GetHeight()
-				local oldHeight = button.Text:GetStringHeight()
 				local newTitle = "[" .. level .. "] " .. button.Text:GetText()
 				button.Text:SetText(newTitle)
-				local newHeight = button.Text:GetStringHeight()
-				button:SetHeight(oldBlockHeight + newHeight - oldHeight)
 			end
 		end
 	end
@@ -331,10 +327,7 @@ end
 
 --[[Execution]]--
 local ObjFhandler = CreateFrame("Frame")
---ObjFhandler:RegisterEvent("ADDON_LOADED")
 ObjFhandler:RegisterEvent("PLAYER_ENTERING_WORLD")
---ObjFhandler:RegisterEvent("QUEST_AUTOCOMPLETE")
---ObjFhandler:RegisterEvent("QUEST_LOG_UPDATE")
 
 ObjFhandler:SetScript("OnEvent", function(self, event, AddOn)
 	if AddOn == "Blizzard_ObjectiveTracker" then alterAQButton() end
