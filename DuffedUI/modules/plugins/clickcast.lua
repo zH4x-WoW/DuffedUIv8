@@ -210,7 +210,9 @@ end)
 hooksecurefunc(SpellBookFrame, "Hide", function()
 	SpellBinder:Hide()
 	SpellBinder.sbOpen = false
-	SpellBinder:ToggleButtons()
+	--[[Remove me after Patch 6.1.0 hits live server]]--
+	if not D.Patch == "6.1.0" then SpellBinder:ToggleButtons() end
+	--[[Remove me after Patch 6.1.0 hits live server]]--
 end)
 
 SpellBinder.DeleteSpell = function()
