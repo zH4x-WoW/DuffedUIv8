@@ -37,6 +37,15 @@ local function LoadGarrisonSkin()
 	GarrisonCapacitiveDisplayFrame:CreateBackdrop("Transparent")
 	GarrisonCapacitiveDisplayFrame.Inset:StripTextures()
 	GarrisonCapacitiveDisplayFrame.CloseButton:SkinCloseButton()
+	if D.Patch == "6.1.0" then
+		GarrisonCapacitiveDisplayFrame.CreateAllWorkOrdersButton:SkinButton(true)
+		GarrisonCapacitiveDisplayFrame.DecrementButton:SkinCloseButton()
+		GarrisonCapacitiveDisplayFrame.DecrementButton.t:SetText("-")
+		GarrisonCapacitiveDisplayFrame.Count:StripTextures()
+		GarrisonCapacitiveDisplayFrame.Count:SkinEditBox()
+		GarrisonCapacitiveDisplayFrame.IncrementButton:SkinCloseButton()
+		GarrisonCapacitiveDisplayFrame.IncrementButton.t:SetText("+")
+	end
 	GarrisonCapacitiveDisplayFrame.StartWorkOrderButton:SkinButton(true)
 	local CapacitiveDisplay = GarrisonCapacitiveDisplayFrame.CapacitiveDisplay
 	CapacitiveDisplay.IconBG:SetTexture()
