@@ -1,5 +1,4 @@
 local D, C, L = unpack(select(2, ...))
-
 if C["tooltip"].enable ~= true or C["tooltip"].ilvl ~= true then return end
 
 local currentUNIT, currentGUID
@@ -88,20 +87,12 @@ function boaILVL(level, itemLink)
 	return returnValue
 end
 
-local function IsPVPItem(link)
-	local itemStats = GetItemStats(link)
-	for stat in pairs(itemStats) do
-		if (stat == "ITEM_MOD_PVP_POWER_SHORT") then return true end
-	end
-	return false
-end
-
 local function UnitGear(unit)
 	if (not unit) or (UnitGUID(unit) ~= currentGUID) then return end
 
 	local ulvl = UnitLevel(unit)
 	local class = select(2, UnitClass(unit))
-	local ilvl, boa, pvp = 0, 0, 0
+	local ilvl, boa = 0, 0
 	local total, count, delay = 0, 16, nil
 	local mainhand, offhand, twohand = 1, 1, 0
 
@@ -114,14 +105,13 @@ local function UnitGear(unit)
 					delay = true
 				else
 					local _, _, quality, level, _, _, _, _, slot = GetItemInfo(itemLink)
-					if (not quality) or (not level) then
+					if (not quality) or (not level) then 
 						delay = true
 					else
 						if (quality == 7) then
 							boa = boa + 1
 							total = total + boaILVL(ulvl, itemLink)
 						else
-							if IsPVPItem(itemLink) then pvp = pvp + 1 end
 							if (level >= 458) then local uid = tonumber(strmatch(itemLink, '.+:(%d+)')) end
 							total = total + level
 						end
@@ -142,7 +132,6 @@ local function UnitGear(unit)
 		if (unit == "player") and (GetAverageItemLevel() > 0) then _, ilvl = GetAverageItemLevel() else ilvl = total / count end
 		if (ilvl > 0) then ilvl = string.format('%.1f', ilvl) end
 		if (boa > 0) then ilvl = ilvl.." |cffe6cc80"..boa.." BOA" end
-		if (pvp > 0) then ilvl = ilvl.." |cffa335ee"..pvp.." PVP" end
 	else
 		ilvl = nil
 	end
