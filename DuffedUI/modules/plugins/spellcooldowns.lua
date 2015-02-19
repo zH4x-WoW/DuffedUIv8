@@ -331,13 +331,17 @@ spellCooldowns = {
 		73920,  -- Healing Rain
 		77130,  -- Purify Spirit
 		79206,  -- Spiritwalker's Grace
+		98008,  -- Spirit Link Totem
 		108270, -- Stone Bulwark Totem
 		108271, -- Astral Shift
 		108273, -- Windwalk Totem
 		108280, -- Healing Tide Totem
 		108281, -- Ancestral Guidance
 		108285, -- Call of Elements
+		114050, -- Ascendance
 		117014, -- Elemental Blast
+		152255, -- Liquid Magma
+		165462, -- Unleash Flame
 	},
 	["WARLOCK"] = {
 		5484, -- Howl of Terror
