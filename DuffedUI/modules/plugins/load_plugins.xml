@@ -21,6 +21,5 @@
 	<Script file="spellcooldowns.lua" />
 	<Script file="spellID.lua" />
 	<Script file="pointer.lua" />
-	<Script file="post.lua" />
 	<Script file="currency.lua" />
 </Ui>

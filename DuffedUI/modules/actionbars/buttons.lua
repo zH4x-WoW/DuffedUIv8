@@ -155,6 +155,46 @@ vehicleright.text:Point("CENTER", 0, 0)
 vehicleright.text:SetText("|cff4BAF4C" .. string.upper(LEAVE_VEHICLE) .. "|r")
 RegisterStateDriver(vehicleright, "visibility", "[target=vehicle,exists] show;hide")
 
+local function Vehicle_OnEvent(self, event)
+	if CanExitVehicle() and ActionBarController_GetCurrentActionBarState() == LE_ACTIONBAR_STATE_MAIN then
+		self:Show()
+		self:EnableMouse(true)
+	else
+		self:Hide()
+	end
+end
+
+local function Vehicle_OnClick(self)
+	if UnitOnTaxi("player") then
+		TaxiRequestEarlyLanding()
+		self:EnableMouse(false)
+	else
+		VehicleExit()
+	end
+end
+
+local vehicleflight = CreateFrame("Button", "DuffedUIExitFlightButton", UIParent, "SecureHandlerClickTemplate")
+vehicleflight:SetAllPoints(DuffedUIInfoRight)
+vehicleflight:SetTemplate("Default")
+vehicleflight:SetFrameStrata("LOW")
+vehicleflight:SetFrameLevel(10)
+vehicleflight:SetBackdropBorderColor(75/255,  175/255, 76/255)
+vehicleflight:FontString("text", C["media"].font, 11)
+vehicleflight.text:Point("CENTER", 0, 0)
+vehicleflight.text:SetText("|cff4BAF4C" .. string.upper(LEAVE_VEHICLE) .. "|r")
+vehicleflight:SetScript("OnClick", Vehicle_OnClick)
+vehicleflight:SetScript("OnEnter", MainMenuBarVehicleLeaveButton_OnEnter)
+vehicleflight:SetScript("OnLeave", GameTooltip_Hide)
+vehicleflight:RegisterEvent("PLAYER_ENTERING_WORLD");
+vehicleflight:RegisterEvent("UPDATE_BONUS_ACTIONBAR");
+vehicleflight:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR");
+vehicleflight:RegisterEvent("UNIT_ENTERED_VEHICLE");
+vehicleflight:RegisterEvent("UNIT_EXITED_VEHICLE");
+vehicleflight:RegisterEvent("VEHICLE_UPDATE");
+vehicleflight:SetScript("OnEvent", Vehicle_OnEvent)
+
+vehicleflight:Hide()
+
 local init = CreateFrame("Frame")
 init:RegisterEvent("VARIABLES_LOADED")
 init:SetScript("OnEvent", function(self, event)

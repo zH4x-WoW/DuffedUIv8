@@ -45,11 +45,11 @@ local function FormatTooltipMoney(money)
 end	
 
 local function Currency(id, weekly, capped)
-	local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(id)
+	local name, amount, tex, week, weekmax, maxed, discovered, _ = GetCurrencyInfo(id)
 
 	local r, g, b = 1, 1, 1
 	for i = 1, GetNumWatchedTokens() do
-		local _, _, _, itemID = GetBackpackCurrencyInfo( i )
+		local _, _, _, itemID = GetBackpackCurrencyInfo(i)
 		if id == itemID then r, g, b = .77, .12, .23 end
 	end
 
@@ -188,7 +188,7 @@ Stat:SetScript("OnEnter", function(self)
 	if ImprovedCurrency["PvP"] then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(PVP_FLAG)
-		Currency(390, true)
+		Currency(390, true, true)
 		Currency(392, false, true)
 		Currency(391)
 		Currency(944)

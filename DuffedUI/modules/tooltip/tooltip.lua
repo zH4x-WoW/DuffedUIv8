@@ -210,7 +210,8 @@ end
 
 function DuffedUITooltips:OnUpdate(elapsed)
 	local Owner = self:GetOwner()
-	if (not Owner) then return end
+	if not Owner then return end
+	if Owner:IsForbidden() then return end
 
 	local Red, Green, Blue = self:GetBackdropColor()
 	local Owner = self:GetOwner():GetName()

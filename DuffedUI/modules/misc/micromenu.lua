@@ -6,16 +6,7 @@ D.MicroMenu = {
 	{text = SPELLBOOK_ABILITIES_BUTTON, func = function() ToggleFrame(SpellBookFrame) end},
 	{text = TALENTS_BUTTON, func = function() if not PlayerTalentFrame then TalentFrame_LoadUI() end ShowUIPanel(PlayerTalentFrame) end},
 	{text = ACHIEVEMENT_BUTTON, func = function() ToggleAchievementFrame() end},
-	{text = MOUNTS_AND_PETS,
-	func = function()
-		--[[Remove me after Patch 6.1.0 hits live server]]--
-		if not D.Patch == "6.1.0" then
-			TogglePetJournal()
-		else
-		--[[Remove me after Patch 6.1.0 hits live server]]--
-			ToggleCollectionsJournal()
-		end
-	end},
+	{text = MOUNTS_AND_PETS, func = function() ToggleCollectionsJournal() end},
 	{text = SOCIAL_BUTTON, func = function() ToggleFriendsFrame() end},
 	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVE.." / "..COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVP, func = function() PVEFrame_ToggleFrame() end},
 	{text = ACHIEVEMENTS_GUILD_TAB,
@@ -34,6 +25,13 @@ D.MicroMenu = {
 	{text = ENCOUNTER_JOURNAL, func = function() if not IsAddOnLoaded("Blizzard_EncounterJournal") then EncounterJournal_LoadUI() end ToggleFrame(EncounterJournal) end},
 	{text = BLIZZARD_STORE, func = function() StoreMicroButton:Click() end},
 	{text = GARRISON_LANDING_PAGE_TITLE, func = function() GarrisonLandingPageMinimapButton_OnClick() end},
+	{text = SOCIAL_TWITTER_COMPOSE_NEW_TWEET,
+	func = function()
+		if not SocialPostFrame then LoadAddOn("Blizzard_SocialUI") end
+
+		local IsTwitterEnabled = C_Social.IsSocialEnabled()
+		if IsTwitterEnabled then Social_SetShown(true) else print("|cffC41F3BTwitter is not enabled|r") end
+	end},
 }
 
 -- need to be opened at least one time before logging in, or big chance of taint later ...

@@ -606,41 +606,7 @@ local function LoadSkin()
 	RaidGraphics_QualityHigh2:Point("BOTTOM", 0, -20)
 	RaidGraphics_QualityUltra:Point("BOTTOM", 0, -20)
 
-	--[[Remove me after Patch 6.1 hits live server]]--
-	if D.Patch == "6.1.0" then
-	--[[Remove me after Patch 6.1 hits live server]]--
-		if IsMacClient() then
-			MacOptionsFrame:StripTextures()
-			MacOptionsFrame:SetTemplate()
-			MacOptionsButtonCompress:SkinButton()
-			MacOptionsButtonKeybindings:SkinButton()
-			MacOptionsFrameDefaults:SkinButton()
-			MacOptionsFrameOkay:SkinButton()
-			MacOptionsFrameCancel:SkinButton()
-			MacOptionsFrameMovieRecording:StripTextures()
-			MacOptionsITunesRemote:StripTextures()
-			MacOptionsFrameMisc:StripTextures()
-
-			MacOptionsFrameResolutionDropDown:SkinDropDownBox()
-			MacOptionsFrameFramerateDropDown:SkinDropDownBox()
-			MacOptionsFrameCodecDropDown:SkinDropDownBox()
-			MacOptionsFrameQualitySlider:SkinSlideBar(10)
-
-			for i = 1, 11 do
-				local b = _G["MacOptionsFrameCheckButton"..i]
-				b:SkinCheckBox()
-			end
-
-			MacOptionsButtonKeybindings:ClearAllPoints()
-			MacOptionsButtonKeybindings:SetPoint("LEFT", MacOptionsFrameDefaults, "RIGHT", 2, 0)
-			MacOptionsFrameOkay:ClearAllPoints()
-			MacOptionsFrameOkay:SetPoint("LEFT", MacOptionsButtonKeybindings, "RIGHT", 2, 0)
-			MacOptionsFrameCancel:ClearAllPoints()
-			MacOptionsFrameCancel:SetPoint("LEFT", MacOptionsFrameOkay, "RIGHT", 2, 0)
-			MacOptionsFrameCancel:SetWidth(MacOptionsFrameCancel:GetWidth() - 6)
-		end
-	--[[Remove me after Patch 6.1 hits live server]]--
-	else
+	if IsMacClient() then
 		MacOptionsFrame:StripTextures()
 		MacOptionsFrame:SetTemplate()
 		MacOptionsButtonCompress:SkinButton()
@@ -670,7 +636,6 @@ local function LoadSkin()
 		MacOptionsFrameCancel:SetPoint("LEFT", MacOptionsFrameOkay, "RIGHT", 2, 0)
 		MacOptionsFrameCancel:SetWidth(MacOptionsFrameCancel:GetWidth() - 6)
 	end
-	--[[Remove me after Patch 6.1 hits live server]]--
 end
 
 tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)

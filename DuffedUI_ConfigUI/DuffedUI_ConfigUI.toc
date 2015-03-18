@@ -1,7 +1,7 @@
-## Interface: 60000
+## Interface: 60100
 ## Title: |cffC41F3BDuffedUI|r Config UI
 ## Notes: Someday there is only pantesaur left.
-## Version: 8.15
+## Version: 8.16
 ## Author: Tohveli
 ## Editor: Tukz, Elv22
 ## SavedVariables: DuffedUIConfigAll, DuffedUIConfigPublic
