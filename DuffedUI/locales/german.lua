@@ -52,7 +52,6 @@ if D.Client == "deDE" then
 
 	L["ui"] = {
 		["outdated"] = "Deine Version von DuffedUI ist veraltet. Du kannst die neuste Version auf |cffc41f3http://www.duffed.net|r herunter laden.",
-		["welcome"] = "Hallo |cffc41f3b".. D.MyName.."!|r".."\n".."Danke das Du Dich für |cffc41f3bDuffedUI "..D.Version.."|r entschieden hast. Um detailierte Informationen zu erhalten, besuche uns im Netz unter: |cffc41f3bhttp://www.duffed.net|r.",
 		["disableui"] = "DuffedUI funktioniert mit Deiner Auflösung nicht. Möchtest Du DuffedUI deaktivieren? (Abbrechen, wenn Du es mit einer anderen Auflösung probieren möchtest)",
 		["fix_ab"] = "Etwas stimmt nicht mit den Aktionsleisten. Möchtest Du das UI neu laden um diesen Fehler zu beheben?",
 	}

@@ -40,5 +40,5 @@ taint:RegisterEvent("ADDON_LOADED")
 taint:SetScript("OnEvent", function(self, event, addon)
 	if addon ~= "DuffedUI" then return end
 	ToggleFrame(SpellBookFrame)
-	if D.Patch == "6.1.0" then ToggleCollectionsJournal() else PetJournal_LoadUI() end
+	ToggleCollectionsJournal()
 end)

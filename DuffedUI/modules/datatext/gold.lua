@@ -188,7 +188,7 @@ Stat:SetScript("OnEnter", function(self)
 	if ImprovedCurrency["PvP"] then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(PVP_FLAG)
-		Currency(390, true, true)
+		Currency(390, true)
 		Currency(392, false, true)
 		Currency(391)
 		Currency(944)

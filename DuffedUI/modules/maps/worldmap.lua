@@ -1,4 +1,5 @@
 local D, C, L = unpack(select(2, ...))
+if IsAddOnLoaded("AddOnSkins") then return end
 
 -- Modified Script from Tukui T16
 -- Credits got to Tukz & Hydra

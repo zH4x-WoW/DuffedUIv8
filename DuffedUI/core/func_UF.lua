@@ -691,7 +691,9 @@ local TestUI = function(msg)
 		print("'|cffc41f3bmaintank|r' or '|cffc41f3bmt|r' to show maintank frames")
 	elseif msg == "arena" or msg == "a" then
 		for i = 1, 3 do
-			_G["oUF_Arena"..i]:Show() _G["oUF_Arena"..i].Hide = function() end _G["oUF_Arena"..i].unit = "player"
+			_G["oUF_Arena"..i]:Show()
+			_G["oUF_Arena"..i].Hide = function() end
+			_G["oUF_Arena"..i].unit = "player"
 			_G["oUF_Arena"..i].Trinket.Icon:SetTexture("Interface\\Icons\\INV_Jewelry_Necklace_37")
 		end
 	elseif msg == "boss" or msg == "b" then

@@ -51,7 +51,6 @@ L["symbol"] = {
 
 L["ui"] = {
 	["outdated"] = "Your version of DuffedUI is out of date. You can download the latest version from www.duffed.net",
-	["welcome"] = "Hello |cffc41f3b".. D.MyName.."!|r".."\n".."Thank you for using |cffc41f3bDuffedUI "..D.Version.."|r. For detailed Information visit |cffc41f3bhttp://www.duffed.net|r.",
 	["disableui"] = "DuffedUI doesn't work for this resolution, do you want to disable DuffedUI? (Cancel if you want to try another resolution)",
 	["fix_ab"] = "There is something wrong with your action bar. Do you want to reloadui to fix it?",
 }

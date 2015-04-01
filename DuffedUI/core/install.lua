@@ -136,7 +136,6 @@ local OnLogon = CreateFrame("Frame")
 OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 OnLogon:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	print(L["ui"]["welcome"])
 
 	local CD = GetCVar("countdownForCooldowns")
 	if CD == "1" then SetCVar("countdownForCooldowns", "0") end
