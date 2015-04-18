@@ -140,8 +140,8 @@ OnLogon:SetScript("OnEvent", function(self, event)
 	local CD = GetCVar("countdownForCooldowns")
 	if CD == "1" then SetCVar("countdownForCooldowns", "0") end
 	--[[ Remove me if Blizzard fix the issue ]]--
-	local Bindings = GetCVar("synchronizeBindings")
-	if Bindings == "1" then SetCVar("synchronizeBindings", "0") end
+	--local Bindings = GetCVar("synchronizeBindings")
+	--if Bindings == "1" then SetCVar("synchronizeBindings", "0") end
 	--[[ Remove me if Blizzard fix the issue ]]--
 end)
 
