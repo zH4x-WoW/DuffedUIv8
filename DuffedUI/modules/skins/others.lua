@@ -122,6 +122,29 @@ local function LoadSkin()
 			if IsAddOnLoaded("Enhanced_Config") then GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + GameMenuButtonStore:GetHeight()) end
 		end)
 	end
+	
+	local rc = {
+		"ReadyCheckFrameYesButton",
+		"ReadyCheckFrameNoButton",
+	}
+
+	for i = 1, getn(rc) do
+		local Buttons = _G[rc[i]]
+		if Buttons then Buttons:SkinButton() end
+	end
+
+	_G["ReadyCheckFrameYesButton"]:SetParent(_G["ReadyCheckFrame"])
+	_G["ReadyCheckFrameNoButton"]:SetParent(_G["ReadyCheckFrame"])
+	_G["ReadyCheckFrameYesButton"]:ClearAllPoints()
+	_G["ReadyCheckFrameNoButton"]:ClearAllPoints()
+	_G["ReadyCheckFrameYesButton"]:SetPoint("RIGHT", _G["ReadyCheckFrame"], "CENTER", -2, -20)
+	_G["ReadyCheckFrameNoButton"]:SetPoint("LEFT", _G["ReadyCheckFrameYesButton"], "RIGHT", 3, 0)
+	_G["ReadyCheckFrameText"]:SetParent(_G["ReadyCheckFrame"])	
+	_G["ReadyCheckFrameText"]:ClearAllPoints()
+	_G["ReadyCheckFrameText"]:SetPoint("TOP", 0, -12)
+
+	_G["ReadyCheckListenerFrame"]:SetAlpha(0)
+	_G["ReadyCheckFrame"]:HookScript("OnShow", function(self) if UnitIsUnit("player", self.initiator) then self:Hide() end end)
 
 	if not IsAddOnLoaded("AddOnSkins") then
 		local BlizzardButtons = {
@@ -135,8 +158,6 @@ local function LoadSkin()
 			"InterfaceOptionsFrameDefaults", 
 			"InterfaceOptionsFrameOkay", 
 			"InterfaceOptionsFrameCancel",
-			"ReadyCheckFrameYesButton",
-			"ReadyCheckFrameNoButton",
 			"StackSplitOkayButton",
 			"StackSplitCancelButton",
 			"RolePollPopupAcceptButton",
@@ -157,18 +178,7 @@ local function LoadSkin()
 		_G["AudioOptionsFrameOkay"]:SetPoint("RIGHT",_G["AudioOptionsFrameCancel"],"LEFT",-4,0)
 		_G["InterfaceOptionsFrameOkay"]:ClearAllPoints()
 		_G["InterfaceOptionsFrameOkay"]:SetPoint("RIGHT",_G["InterfaceOptionsFrameCancel"],"LEFT", -4,0)
-		_G["ReadyCheckFrameYesButton"]:SetParent(_G["ReadyCheckFrame"])
-		_G["ReadyCheckFrameNoButton"]:SetParent(_G["ReadyCheckFrame"])
-		_G["ReadyCheckFrameYesButton"]:ClearAllPoints()
-		_G["ReadyCheckFrameNoButton"]:ClearAllPoints()
-		_G["ReadyCheckFrameYesButton"]:SetPoint("RIGHT", _G["ReadyCheckFrame"], "CENTER", -2, -20)
-		_G["ReadyCheckFrameNoButton"]:SetPoint("LEFT", _G["ReadyCheckFrameYesButton"], "RIGHT", 3, 0)
-		_G["ReadyCheckFrameText"]:SetParent(_G["ReadyCheckFrame"])	
-		_G["ReadyCheckFrameText"]:ClearAllPoints()
-		_G["ReadyCheckFrameText"]:SetPoint("TOP", 0, -12)
 
-		_G["ReadyCheckListenerFrame"]:SetAlpha(0)
-		_G["ReadyCheckFrame"]:HookScript("OnShow", function(self) if UnitIsUnit("player", self.initiator) then self:Hide() end end)
 		_G["StackSplitFrame"]:GetRegions():Hide()
 		_G["GeneralDockManagerOverflowButtonList"]:SetTemplate()
 
