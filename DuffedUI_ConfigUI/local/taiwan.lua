@@ -6,8 +6,6 @@
 	DuffedUIConfigUILocalization.generalbackdropcolor = "設置默認的面板背景色"
 	DuffedUIConfigUILocalization.generalbordercolor = "設置默認的面板邊框顏色"
 	DuffedUIConfigUILocalization.generalclasscolor = "啟用文本按職業著色顯示設定"
-	DuffedUIConfigUILocalization.generalFrameScaleActionBar = "設置快捷欄1,2及右邊快捷欄縮放"
-	DuffedUIConfigUILocalization.generalFrameScaleMinimap = "設置小地圖縮放大小"
 
 	--[[Font]]--
 	DuffedUIConfigUILocalization.font = "字體"
@@ -138,7 +136,6 @@
 	DuffedUIConfigUILocalization.raidframewidth = "設定框體寬度"
 	DuffedUIConfigUILocalization.raidframeheight = "設定框體高度"
 	DuffedUIConfigUILocalization.raidpointer = "啟用方向指示器顯示"
-	DuffedUIConfigUILocalization.raidFrameScaleRaid = "設定團隊框體縮放大小"
 	DuffedUIConfigUILocalization.raidlayout = "設定隊伍佈局樣式(默認 = heal, 數值為: |cffC41F3Bheal|r 或 |cffC41F3Bdps|r)"
 	DuffedUIConfigUILocalization.raidcenter = "治療佈局設定為界面中部"
 	DuffedUIConfigUILocalization.raidHidePower = "顯示DPS職業能量條(僅適用於dps佈局)"

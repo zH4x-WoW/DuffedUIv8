@@ -1,6 +1,5 @@
 local D, C, L = unpack(select(2, ...))
 
-local FrameScale = C["general"]["FrameScaleActionBar"]
 local move = D["move"]
 
 local ileft = CreateFrame("Frame", "DuffedUIInfoLeft", UIParent)
@@ -49,7 +48,7 @@ end
 
 if C["actionbar"]["enable"] then
 	DuffedUIBar1Mover = CreateFrame("Frame", "DuffedUIBar1Mover", UIParent)
-	DuffedUIBar1Mover:SetSize((((D["buttonsize"] * 12) + (D["buttonspacing"] * 13)) * FrameScale), (((D["buttonsize"] * 1) + (D["buttonspacing"] * 2)) * FrameScale))
+	DuffedUIBar1Mover:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
 	DuffedUIBar1Mover:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 130)
 	DuffedUIBar1Mover:SetFrameLevel(6)
 	move:RegisterFrame(DuffedUIBar1Mover)
@@ -63,7 +62,7 @@ if C["actionbar"]["enable"] then
 	local DuffedUIBar2 = CreateFrame("Frame", "DuffedUIBar2", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar2:SetTemplate("Transparent")
 	DuffedUIBar2:Point("BOTTOM", UIParent, "BOTTOM", 0, 93)
-	DuffedUIBar2:SetSize((((D["buttonsize"] * 12) + (D["buttonspacing"] * 13)) * FrameScale), (((D["buttonsize"] * 1) + (D["buttonspacing"] * 2)) * FrameScale))
+	DuffedUIBar2:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
 	DuffedUIBar2:SetFrameStrata("BACKGROUND")
 	DuffedUIBar2:SetFrameLevel(3)
 	move:RegisterFrame(DuffedUIBar2)
@@ -95,10 +94,10 @@ if C["actionbar"]["enable"] then
 	local DuffedUIBar5 = CreateFrame("Frame", "DuffedUIBar5", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar5:SetTemplate("Transparent")
 	if C["actionbar"]["rightbarvertical"] then
-		DuffedUIBar5:SetSize((((D["buttonsize"] * 12) + (D["buttonspacing"] * 13)) * FrameScale), (((D["buttonsize"] * 1) + (D["buttonspacing"] * 2)) * FrameScale))
+		DuffedUIBar5:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
 		DuffedUIBar5:Point("BOTTOM", UIParent, "BOTTOM", 0, 56)
 	else
-		DuffedUIBar5:SetSize((((D["buttonsize"] * 1) + (D["buttonspacing"] * 2)) * FrameScale), (((D["buttonsize"] * 12) + (D["buttonspacing"] * 13)) * FrameScale))
+		DuffedUIBar5:SetSize((D["buttonsize"] * 1) + (D["buttonspacing"] * 2), (D["buttonsize"] * 12) + (D["buttonspacing"] * 13))
 		DuffedUIBar5:Point("RIGHT", UIParent, "RIGHT", -13, -14)
 	end
 	DuffedUIBar5:SetFrameStrata("BACKGROUND")

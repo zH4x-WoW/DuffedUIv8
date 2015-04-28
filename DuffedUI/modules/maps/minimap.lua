@@ -6,7 +6,6 @@ DuffedUIMinimap:SetTemplate()
 DuffedUIMinimap:RegisterEvent("ADDON_LOADED")
 if C["auras"].bufftracker then DuffedUIMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -35, -5) else DuffedUIMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -5, -5) end
 DuffedUIMinimap:Size(144)
-DuffedUIMinimap:SetScale(C["general"].FrameScaleMinimap)
 move:RegisterFrame(DuffedUIMinimap)
 
 MinimapCluster:Kill()

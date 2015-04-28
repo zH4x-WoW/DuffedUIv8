@@ -25,12 +25,12 @@ D["ConstructUFRaid"] = function(self)
 	--[[Health]]--
 	local health = CreateFrame("StatusBar", nil, self)
 	if layout == "dps" then
-		health:Height(15 * C["raid"]["FrameScaleRaid"])
-		health:Width(140 * C["raid"]["FrameScaleRaid"])
+		health:Height(15)
+		health:Width(140)
 		health:Point("TOPLEFT", self, "BOTTOMLEFT", 0, 15)
 		health:Point("TOPRIGHT", self, "BOTTOMRIGHT", 0, 15)
 	else
-		health:Height((C["raid"]["frameheight"] - 15) * C["raid"]["FrameScaleRaid"])
+		health:Height(C["raid"]["frameheight"] - 15)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 	end

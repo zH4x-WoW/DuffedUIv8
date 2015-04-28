@@ -256,8 +256,8 @@ D["SpawnUF"] = function(self)
 					self:SetWidth(header:GetAttribute("initial-width"))
 					self:SetHeight(header:GetAttribute("initial-height"))
 				]],
-				"initial-width", D["Scale"](C["raid"]["framewidth"] * C["raid"]["FrameScaleRaid"]),
-				"initial-height", D["Scale"](C["raid"]["frameheight"] * C["raid"]["FrameScaleRaid"]),
+				"initial-width", D["Scale"](C["raid"]["framewidth"]),
+				"initial-height", D["Scale"](C["raid"]["frameheight"]),
 				"showPlayer", C["raid"]["showplayerinparty"],
 				"showParty", true,
 				"showRaid", true, 
@@ -285,8 +285,8 @@ D["SpawnUF"] = function(self)
 						self:SetWidth(header:GetAttribute("initial-width"))
 						self:SetHeight(header:GetAttribute("initial-height"))
 					]],
-					"initial-width", D["Scale"](C["raid"]["framewidth"] * C["raid"]["FrameScaleRaid"]),
-					"initial-height", D["Scale"](C["raid"]["frameheight"] * C["raid"]["FrameScaleRaid"]),
+					"initial-width", D["Scale"](C["raid"]["framewidth"]),
+					"initial-height", D["Scale"](C["raid"]["frameheight"]),
 					"showRaid", C["raid"]["showraidpets"],
 					"showParty", C["raid"]["showraidpets"],
 					--"showSolo", true,
@@ -310,8 +310,8 @@ D["SpawnUF"] = function(self)
 					self:SetWidth(header:GetAttribute("initial-width"))
 					self:SetHeight(header:GetAttribute("initial-height"))
 				]],
-				"initial-width", D["Scale"](140 * C["raid"]["FrameScaleRaid"]),
-				"initial-height", D["Scale"](14 * C["raid"]["FrameScaleRaid"]),
+				"initial-width", D["Scale"](140),
+				"initial-height", D["Scale"](14),
 				"initial-anchor", "BOTTOM",
 				"showPlayer", C["raid"]["showplayerinparty"],
 				"showParty", true,

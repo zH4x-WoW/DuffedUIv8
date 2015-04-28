@@ -7,8 +7,6 @@ DuffedUIConfigUILocalization.generaluiscale = "UI Scale (if auto-scale is disabl
 DuffedUIConfigUILocalization.generalbackdropcolor = "Set default backdrop color of panels"
 DuffedUIConfigUILocalization.generalbordercolor = "Set default border color of panels"
 DuffedUIConfigUILocalization.generalclasscolor = "Enable class color for textelements"
-DuffedUIConfigUILocalization.generalFrameScaleActionBar = "Set Scale of Actionbar 1, 2 and Rightbar"
-DuffedUIConfigUILocalization.generalFrameScaleMinimap = "Set Scale of Minimap"
 
 --[[Font]]--
 DuffedUIConfigUILocalization.font = "Fonts"
@@ -139,7 +137,6 @@ DuffedUIConfigUILocalization.raidshowplayerinparty = "Show yourself in party"
 DuffedUIConfigUILocalization.raidframewidth = "Set width of the unitframe"
 DuffedUIConfigUILocalization.raidframeheight = "Set height of the unitframe"
 DuffedUIConfigUILocalization.raidpointer = "Enable Pointer for direction display"
-DuffedUIConfigUILocalization.raidFrameScaleRaid = "Set Scale of Raid"
 DuffedUIConfigUILocalization.raidlayout = "Set layout for group frames (default = heal, Values: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
 DuffedUIConfigUILocalization.raidcenter = "Set Heal-Layout to center position"
 DuffedUIConfigUILocalization.raidHidePower = "Disable power bar (DPS-Layout only)"

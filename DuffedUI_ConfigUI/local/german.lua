@@ -6,8 +6,6 @@
 	DuffedUIConfigUILocalization.generalbackdropcolor = "Setze Standard-Hintergrundfarbe der Panels"
 	DuffedUIConfigUILocalization.generalbordercolor = "Setze Standard-Rahmenfarbe der Panels"
 	DuffedUIConfigUILocalization.generalclasscolor = "Aktiviere Klassenfarben für Textelemente"
-	DuffedUIConfigUILocalization.generalFrameScaleActionBar = "Setze Skalierung der Aktionsleisten 1, 2 und der rechten Leiste"
-	DuffedUIConfigUILocalization.generalFrameScaleMinimap = "Setze Skalierung der Minimap"
 
 	--[[Font]]--
 	DuffedUIConfigUILocalization.font = "Schriftarten"
@@ -138,7 +136,6 @@
 	DuffedUIConfigUILocalization.raidframewidth = "Einstellung für die Breite der Einheitenfenster"
 	DuffedUIConfigUILocalization.raidframeheight = "Einstellung für die Höhe der Einheitenfenster"
 	DuffedUIConfigUILocalization.raidpointer = "Aktiviere Richtungspfeile für Deine Schlachtzugsmitglieder"
-	DuffedUIConfigUILocalization.raidFrameScaleRaid = "Setze Skalierung des Schlachtzugsfenster"
 	DuffedUIConfigUILocalization.raidlayout = "Wähle Layout für das Schlachtzugfenster (Standard = heal, Werte: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
 	DuffedUIConfigUILocalization.raidcenter = "Verschiebe Heal-Layout in die Mitte"
 	DuffedUIConfigUILocalization.raidHidePower = "Deaktiviere Energieleiste (nur DPS-Layout)"

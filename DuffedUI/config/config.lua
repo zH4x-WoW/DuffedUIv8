@@ -6,8 +6,6 @@ C["general"] = {
 	["backdropcolor"] = {.05, .05, .05},
 	["bordercolor"] = {.125, .125, .125},
 	["classcolor"] = true,
-	["FrameScaleActionBar"] = 1,
-	["FrameScaleMinimap"] = 1,
 }
 
 C["font"] = {
@@ -139,7 +137,6 @@ C["raid"] = {
 	["framewidth"] = 68,
 	["frameheight"] = 45,
 	["pointer"] = false,
-	["FrameScaleRaid"] = 1,
 	["layout"] = "heal",
 	["center"] = false,
 	["HidePower"] = false,
