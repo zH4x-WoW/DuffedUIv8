@@ -268,68 +268,6 @@ if D.Client == "deDE" then
 		[11] = {18, "Distanzwaffe", 1000}
 	}
 
-	L["faq"] = {
-		["button01"] = "Allgemeines",
-		["button02"] = "Aktionsleisten",
-		["button03"] = "Einheitenfenster",
-		["button04"] = "DuffedUI Chat",
-		["button05"] = "UI Chatbefehle",
-		["button06"] = "Tastaturbelegung",
-		["button07"] = "Minimap",
-		["button08"] = "Taschen",
-		["button09"] = "Addons & Skins",
-		["button10"] = "Fehler melden",
-		["button11"] = "UI Updaten",
-
-		["generaltitle"] = "|cffc41f3bDuffedUI - F.A.Q.|r",
-		["generaltext1"] = "Hallo |cffc41f3b".. D.MyName.."|r. Vielen Dank, dass Du Dich für |cffc41f3bDuffedUI "..D.Version.."|r. entschieden hast.\n\nBenutze das Auswahlmenü auf der linken Seite um mehr über die einzelnen Punkte zu erfahren.\n\nViel Spaß im Spiel und guten Loot!",
-		["generaltext2"] = "",
-
-		["content1title"] = "|cffc41f3bAllgemeines|r",
-		["content1text1"] = "DuffedUI ist ein neugestaltetes BlizzardUI. Nicht mehr und nichts weniger. Alle Funktionen, die man auch im StandardUI findet, hat man ebenfalls in DuffedUI. Zusätzlich bringt DuffedUI einige automatische Funktionen mit, die man in der StandardUI vermisst. (Z.B. die Taschensortierung, das Verkaufen von grauen Gegenständen, usw.).",
-		["content1text2"] = "DuffedUI wurde entworfen um das bestmöglichste Spielerlebnis zu erreichen, egal welche Spielweise, Klasse und Geschmack. DuffedUI ist für jeden individuell kinderleicht anpassbar. Das ist auch der Grund wieso DuffedUI eines der populärsten UIs in der Geschichte von World of Warcraft™ ist. Ausserdem wurde es so entworfen, dass man mit wenigen Mausklicks sofort loslegen kann, ohne sich noch irgendwelche sonstigen AddOns herunterzuladen zu müssen. Seit 2010 haben viele Spieler aufgrund von DuffedUI, ihr eigenes, auf DuffedUI basiertes Interface erstellt.",
-
-		["content2title"] = "|cffc41f3bAktionsleisten|r",
-		["content2text1"] = "Die Konfiguration der Aktionsleisten ist nicht nur kinderleicht, sie lässt auch fast keine Wünsche offen.\nÜber das DuffedUI Konfigurationsmenü, dass Du entweder per ESC ->DuffedUI, oder per Chateingabe /dc öffnest, gelangst Du zum Reiter Aktionsleisten.\n\nDort hast Du nun die Möglichkeit vielerlei Unsinn mit den Leisten zu treiben. Zum einen kannst Du 'mouseover' für die rechte Leiste und/oder die Begleiterlesite aktivieren, oder Du entscheidest Dich dafür die rechten Leiste vertikal' anzeigen zu lassen, oder oder oder ...\nArbeite einfach die Einstellungen durch und stell Dir die Leisten nach Deinen Bedürfnissen ein.",
-		["content2text2"] = "Des Weiteren hast Du die Möglichkeit die mittleren zwei Leisten, sowie die Begleiter- und rechte Aktionsleiste, nach Deinen Vorstellungen auszurichten.\nBenutzte hierzu entweder den Chatbefehl /moveui, oder klick im rechten Chatbereich auf das kleine '+' und danach auf dann das aufploppende 'M'.\n\nEine weitere Besonderheit stellen die beiden Leistenblöcke am linken und rechten Chatfenster dar.\nDiese beiden Blöcke sind nicht bewegbar!\nAllerdings hast Du die Möglichkeit, entweder die 'mouseover' Funktion im Konfigurationsmenü zu aktivieren, oder per Klick auf die kleinen Pluszeichen am Rechten und linken Chatrand, die Leisten sessionübergreifend auszublenden.",
-
-		["content3title"] = "|cffc41f3bEinheitenfenster|r",
-		["content3text1"] = "Die Einheitenfenster bilden das Kernstück von DuffedUi und lassen sich individuell konfigurieren, sowie nach Deinen Vorstellungen plazieren.\nVorgefertigt gibt es drei verschiedene Layouts, die Du über das DuffedUI-Konfigurationsmenü auswählen kannst.\nJedes der drei Layouts lässt sich Deinen Wünschen entsprechend weiter anpassen.\n\nÖffne das DuffedUI Konfigurationsmenü. Entweder per ESC ->DuffedUI, oder per direkter Chateingabe mit /dc.\nNun wähle links den Reiter 'Einheitenfenster aus und arbeite Dich durch das recht unfangreiche Angebot an Auswahlmöglichkeiten.",
-		["content3text2"] = "Des Weiteren hast Du die Möglichkeit alle Einheitenfester nach Deinen Wünschen zu verschieben. Benutzte hierzu entweder den Chatbefehl /moveui, oder klick im rechten Chatbereich auf das kleine '+' und danach auf das aufploppende 'M'.",
-
-		["content4title"] = "|cffc41f3bDuffedUI Chat|r",
-		["content4text1"] = "Zum Chat gibt es eigentlich nicht viel zu sagen. Es wird der normale Blizzard Chat verwendet und der UI vom Aussehen her angepasst.\nDas Beutefenster ist entkoppelt und fest im rechten Chat verankert.\n\nWie bei der BlizzardUI kannst Du per Rechtsklick auf einen Chatreiter (z.B. G,S,W) die Schriftgröße ändern.\n\nUm die Emote aufzurufen, klicke auf das kleine 'E' am rechten, oberen Rand, des linken Chatframes.\n\nDes Weiteren kannst Du den Inhalt des linken und/oder rechten Chat kopieren, indem Du auf das jeweilige, kleine 'Blattsymbol klickst. Die Kopierfunktion nutzt Du wie gewohnt per STRG + C zum Kopieren und zum Einfügen, der Chatnachrichten, mittels STRG + V.",
-		["content4text2"] = "",
-
-		["content5title"] = "|cffc41f3bUI Chatbefehle|r",
-		["content5text1"] = "Folgende Chatbefehle stehen Dir zur Verfügung:\n\n|cffc41f3b/install|r oder |cffc41f3b/reset|r (Neuinstallation)\n|cffc41f3b/rc|r (Bereitschaftscheck)\n|cffc41f3b/moveui|r (Verschieben der UI Elemente)\n|cffc41f3b/dc|r oder |cffc41f3b/duffedui|r (DuffedUI Konfiguration)\n|cffc41f3b/rl|r (Ui neuladen)\n|cffc41f3b/dfaq|r (DuffedUI FAQ, Du liest es gerade ;))",
-		["content5text2"] = "",
-
-		["content6title"] = "|cffc41f3bTastaturbelegung|r",
-		["content6text1"] = "Um die Aktionsleisten mit Leben zu füllen, steht Dir im DuffedUI eine kinderleicht zu bedienende Hilfe zur Verfügung -> DuffedUI Bind.\nUm das Einstellen der Tasten zu aktivieren, gib entweder im Chat /kb ein, oder dklicke im rechten Chatbereich auf das kleine '+' und dann auf das aufploppende 'K'. Ein PopUp Fenster erscheint und weisst Dich darauf hin, dass nun alle Tastatuebelegungen gespeichert werden. Also los!",
-		["content6text2"] = "Fahre mit der Maus über die Taste auf der Aktionsleiste, die Du mit einem Kürzel belegen möchtest und drücke dann Deine Wunschkombination.\nBeispiel: Maus steht auf Aktionsleiste eins, Taste 1 ->Drück die Taste eins auf dem Nummerblock und schon kannst Du Deine Fähigkeit mit der Taste eins auf dem Numblock auslösen.\n\nWenn Du alle Tasten mit Deinen Wunschkombinationen belegt hast, klicke im PopUp Fenster auf 'Übernehmen. Fertig!\nKinderleicht, oder?\n\nTipp: Auch eine Kombinationen aus STRG und/oder ALT + beliebige Taste sind möglich.",
-		
-		["content7title"] = "|cffc41f3bMinimap|r",
-		["content7text1"] = "Die DuffedUi Minimap nutzt den gleichen Aufbau wie die standard Minimap von Blizzard, kann aber mehr. Fahre mit der Maus über die Minimap um Deinen Aufenthaltsort, sowie Deine momentanen Standort Koordinaten abzufragen.\n\nWeitere Funtkionen:\nEin Klick mit der linken Maustaste löst die 'Ping' Funktion aus.\nEin Klick mit der rechten Maustaste öffnet das Aufspürmenü.\nEin Klick mit dem Mausrad öffnet das Mikromenü.",
-		["content7text2"] = "Am rechten Rand der Minimap findest Du die Raidbuffübersicht. Hier kansnt Du ablesen, ob alle notwendigen Buffs gezaubert wurden, oder welcher noch fehlt. Um Dir eine detailierte Übersicht der Buffs anzeigen zu lassen, klicke auf das kleine grüne '+' unter der Raidbuffübersicht.",
-
-		["content8title"] = "|cffc41f3bTaschen|r",
-		["content8text1"] = "Die Taschen verwaltest Du bequem über das DuffedUI Konfigurationsmenü. Drücke die Taste ESC ->DuffedUI, oder öffne das Menü per Chateingabe mit |cffc41f3b/dc|r oder |cffc41f3b/duffedui|r. Über den Reiter 'Taschen' im linken Fenster erhälst Du eine Vielzahl von Einstellungsmöglichkeiten für Deine Taschen.\n\nTipp: Durch einen Rechtsklick auf das kleine 'X' am oberen Rand der Tasche, kannst Du Deine Beutel austauschen. Der Knopf 'Bereinigen' sortiert deine Taschen. Dieser Tipp funktioniert auch mit der Bank.",
-		["content8text2"] = "",
-
-		["content9title"] = "|cffc41f3bAddons & Skins|r",
-		["content9text1"] = "Die große Frage ist, funktionieren Fremdaddon mit DuffedUI?!\nJa, natürlich, aber die richtige Frage sollte sein, brauchst Du noch Fremdaddons?\nDuffedUI liefert alle wichtigen Funktionen in einem Rutsch auf Deinen Monitor. Prüfe sorgfälltig ob Du ein Fremdaddon brauchst und installier es, frei nach dem Motto ->Versuch macht kluch.\n\nLiefert alle wichtigen Funktionen mit?\nNein, Bossmods wie DBM, oder BigWigs solltest Du zusätzlich installieren. Des Weiteren solltest Du eine Schadensanzeige a la Recount, oder Skada installieren. Sofern Du Kämpfe auswerten magst. Alles andere ist wie schon geschrieben ->Reine Geschmacksache.\n\nAber die Addons haben dann nicht das geniale Aussehen von DuffedUI!\nViele Addons werden von Hause aus unterstützt. Den Extra Download findest Du im Forum. Der Name des Addons lautet treffend ->AddonSkins.",
-		["content9text2"] = "",
-
-		["content10title"] = "|cffc41f3bFehler meldenn|r",
-		["content10text1"] = "Sollte Dich ein Lua Fehler, unerwartet und mit voller Wucht erwischen, würde es uns freuen, wenn Du ihn uns meldest und wir ihn beheben können.\nWenn Du ihn meldest, dann aber bitte mit Schmackes!\nBedenke: Niemand geht in eine Werkstatt mit seinem Auto und sagt nur: Ist Kaputt!",
-		["content10text2"] = "So melde ich einen Fehler richtig:\n- Mach vorsichtshalber einen Screenshot (Taste 'Druck')\n- Kopiere die Fehlermeldung per STRG + C in die Zwischenablage\n- Bescheibe genau was Du gemacht hast und wann der Fehler auftrat\n- Füge uns die kopierte Fehlermeldung in Deinen Bericht ein und ggf. den gemachten Screenshot.\n\nWo melde ich einen Fehler?\n- Gehe auf die Webseite von DuffedUI ->http://www.duffed.net\n- Klick oben rechts auf Tickets und bombardiere uns mit Deiner Meldung.\n\nVielen Dank im voraus!",
-
-		["content11title"] = "|cffc41f3bUI Update|r",
-		["content11text1"] = "Normalerweise wirst Du über neue Updates per Ingame Funktion informiert.\nEs erscheint ein Meldung a la 'Deine Version von DuffedUI ist veraltet ...'.\nBesuche uns dann auf der Webseite http://www.duffed.net und lade Dir die neuste Version herunter.",
-		["content11text2"] = "Im Normalfall ist ein drüberkopieren der Dateien aus dem Zip ausreichend.\nGebe nach dem Update der Dateien im Chatfenster '/rl' für ein Neuladen des DuffedUI ein.\n\nSollten keine Fehlermeldungen angezeigt werden, bist Du fertig mit dem Update und kannst weiter zocken. Treten Fehler auf, schliesse das gesamte Spiel und starte es danach neu.",	
-	}
-	
 	L["xpbar"] = {
 		["xptitle"] = "Erfahrung",
 		["xp"] = "XP: %s/%s (%d%%)",

@@ -3,8 +3,8 @@
 	<Script file="buffnotice.lua" />
 	<Script file="clickcast.lua" />
 	<Script file="combat.lua" />
+	<Script file="currency.lua" />
 	<Script file="efl.lua" />
-	<Script file="faq.lua" />
 	<Script file="flightpoint.lua" />
 	<Include file="flightpoint.xml" />
 	<Script file="HatTrick.lua" />
@@ -16,10 +16,7 @@
 	<Script file="mail.lua" />
 	<Script file="misc.lua" />
 	<Script file="raidcooldowns.lua" />
-	<Script file="runes.lua" />
 	<Script file="ses.lua" />
 	<Script file="spellcooldowns.lua" />
 	<Script file="spellID.lua" />
-	<Script file="pointer.lua" />
-	<Script file="currency.lua" />
 </Ui>

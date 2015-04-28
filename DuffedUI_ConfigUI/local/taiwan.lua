@@ -133,7 +133,6 @@
 	DuffedUIConfigUILocalization.raidshowplayerinparty = "在隊伍中顯示你自己"
 	DuffedUIConfigUILocalization.raidframewidth = "設定框體寬度"
 	DuffedUIConfigUILocalization.raidframeheight = "設定框體高度"
-	DuffedUIConfigUILocalization.raidpointer = "啟用方向指示器顯示"
 	DuffedUIConfigUILocalization.raidlayout = "設定隊伍佈局樣式(默認 = heal, 數值為: |cffC41F3Bheal|r 或 |cffC41F3Bdps|r)"
 	DuffedUIConfigUILocalization.raidcenter = "治療佈局設定為界面中部"
 	DuffedUIConfigUILocalization.raidHidePower = "顯示DPS職業能量條(僅適用於dps佈局)"

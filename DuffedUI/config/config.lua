@@ -133,7 +133,6 @@ C["raid"] = {
 	["showplayerinparty"] = true,
 	["framewidth"] = 68,
 	["frameheight"] = 45,
-	["pointer"] = false, --deprecated
 	["layout"] = "heal",
 	["center"] = false, --deprecated
 	["HidePower"] = false, --deprecated

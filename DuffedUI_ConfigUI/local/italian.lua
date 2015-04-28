@@ -132,7 +132,6 @@
 	DuffedUIConfigUILocalization.raidshowplayerinparty = "Show yourself in party"
 	DuffedUIConfigUILocalization.raidframewidth = "Set width of the unitframe"
 	DuffedUIConfigUILocalization.raidframeheight = "Set height of the unitframe"
-	DuffedUIConfigUILocalization.raidpointer = "Enable Pointer for direction display"
 	DuffedUIConfigUILocalization.raidlayout = "Set layout for group frames (default = heal, Values: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
 	DuffedUIConfigUILocalization.raidcenter = "Set Heal-Layout to center position"
 	DuffedUIConfigUILocalization.raidHidePower = "Disable power bar (DPS-Layout only)"

@@ -133,7 +133,6 @@
 	DuffedUIConfigUILocalization.raidshowplayerinparty = "Show yourself in party"
 	DuffedUIConfigUILocalization.raidframewidth = "Set width of the unitframe"
 	DuffedUIConfigUILocalization.raidframeheight = "Set height of the unitframe"
-	DuffedUIConfigUILocalization.raidpointer = "Enable Pointer for direction display"
 	DuffedUIConfigUILocalization.raidHidePower = "Disable power bar (DPS-Layout only)"
 	DuffedUIConfigUILocalization.raidNameOutside = "Move player name to outside (DPS-Layout only)"
 	DuffedUIConfigUILocalization.raidMaxGroup = "Enable MaxGroup-display for raidframes"
