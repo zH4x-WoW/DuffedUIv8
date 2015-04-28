@@ -26,8 +26,6 @@
 	DuffedUIConfigUILocalization.unitframes = "Unit Frames"
 	DuffedUIConfigUILocalization.unitframesenable = "Enable DuffedUI Unit Frames"
 	DuffedUIConfigUILocalization.unitframeslayout = "Set UF-Layout (1, 2, 3 or 4, default = 1)"
-	DuffedUIConfigUILocalization.unitframesfader = "Enable Fader for unitframes"
-	DuffedUIConfigUILocalization.unitframesminalpha = "Set minimum alpha for Fader (default = 0.1)"
 	DuffedUIConfigUILocalization.unitframespercent = "Enable percent display beside player & target"
 	DuffedUIConfigUILocalization.unitframesshowsmooth = "Enable smooth bar"
 	DuffedUIConfigUILocalization.unitframesunicolor = "Enable Unique color theme (grey health bar)"

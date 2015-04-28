@@ -27,8 +27,6 @@
 	DuffedUIConfigUILocalization.unitframes = "单位框体"
 	DuffedUIConfigUILocalization.unitframesenable = "启用Duffed Ui头像框体"
 	DuffedUIConfigUILocalization.unitframeslayout = "设置人物头象样式 (1, 2, 3 or 4, 默认 = 1)"
-	DuffedUIConfigUILocalization.unitframesfader = "启用头像渐隐"
-	DuffedUIConfigUILocalization.unitframesminalpha = "设置最小渐隐透明度 (默认 = 0.1)"
 	DuffedUIConfigUILocalization.unitframespercent = "启用生命百分比显示于玩家&目标旁边"
 	DuffedUIConfigUILocalization.unitframesshowsmooth = "启用状态条平滑显示效果"
 	DuffedUIConfigUILocalization.unitframesunicolor = "启用特别颜色主题(灰色生命条)"
