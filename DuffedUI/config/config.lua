@@ -25,10 +25,9 @@ C["font"] = {
 
 C["unitframes"] = {
 	["enable"] = true,
-	--["FrameWidth"] = 218,
 	["layout"] = 1,
-	["fader"] = false,
-	["minalpha"] = 0.1,
+	["fader"] = false, --deprecated
+	["minalpha"] = 0.1,  --deprecated
 	["percent"] = true,
 	["showsmooth"] = true,
 	["unicolor"] = true,
@@ -37,7 +36,7 @@ C["unitframes"] = {
 	["ColorGradient"] = true,
 	["charportrait"] = true,
 	["weakenedsoulbar"] = true,
-	["showstatuebar"] = true,
+	["showstatuebar"] = true, --deprecated
 	["classbar"] = true,
 	["runeofpower"] = true,
 	["targetauras"] = true,
@@ -50,11 +49,11 @@ C["unitframes"] = {
 	["focusdebuffs"] = true,
 	["focusbutton"] = true,
 	["attached"] = false,
-	["oocHide"] = true,
+	["oocHide"] = true, --deprecated
 	["playermodel"] = "Model",
 	["buffsize"] = 20,
 	["debuffsize"] = 20,
-	["Enable_ToT"] = true,
+	["Enable_ToT"] = true, --deprecated
 	["DruidMana"] = true,
 	["AnticipationBar"] = true,
 }
@@ -94,14 +93,14 @@ C["nameplate"] = {
 	["Percent"] = false,
 	["MaxDebuffs"] = 5,
 	["NonTargetAlpha"] = .2,
-	["PvP"] = false,
-	["BlackBackground"] = false,
-	["PercentInside"] = false,
+	["PvP"] = false, --deprecated
+	["BlackBackground"] = false, --deprecated
+	["PercentInside"] = false, --deprecated
 }
 
 C["actionbar"] = {
 	["enable"] = true,
-	["rightbarvertical"] = false,
+	["rightbarvertical"] = false, 
 	["rightbarsmouseover"] = false,
 	["petbarhorizontal"] = false,
 	["petbaralwaysvisible"] = true,
@@ -115,10 +114,10 @@ C["actionbar"] = {
 	["shapeshiftborder"] = true,
 	["shapeshiftmouseover"] = false,
 	["borderhighlight"] = false,
-	["Leftsidebars"] = false,
-	["Leftsidebarshorizontal"] = false,
-	["Rightsidebars"] = false,
-	["Rightsidebarshorizontal"] = false,
+	["Leftsidebars"] = false, --deprecated
+	["Leftsidebarshorizontal"] = false, --deprecated
+	["Rightsidebars"] = false, --deprecated
+	["Rightsidebarshorizontal"] = false, --deprecated
 }
 
 C["raid"] = {
@@ -136,13 +135,13 @@ C["raid"] = {
 	["showplayerinparty"] = true,
 	["framewidth"] = 68,
 	["frameheight"] = 45,
-	["pointer"] = false,
+	["pointer"] = false, --deprecated
 	["layout"] = "heal",
-	["center"] = false,
-	["HidePower"] = false,
-	["NameOutside"] = false,
-	["MaxGroup"] = false,
-	["RoleIcons"] = false,
+	["center"] = false, --deprecated
+	["HidePower"] = false, --deprecated
+	["NameOutside"] = false, --deprecated
+	["MaxGroup"] = false, --deprecated
+	["RoleIcons"] = false, --deprecated
 }
 
 C["datatext"] = {
@@ -223,7 +222,7 @@ C["auras"] = {
 	["buffnotice"] = true,
 	["warning"] = true,
 	["wrap"] = 18,
-	["Inside"] = false,
+	["Inside"] = false, --deprecated
 }
 
 C["bags"] = {
@@ -234,7 +233,7 @@ C["bags"] = {
 	["buttonsize"] = 28,
 	["spacing"] = 4,
 	["Bounce"] = true,
-	["SortBlizzard"] = false,
+	["SortBlizzard"] = false, --deprecated
 	["SortingButton"] = true,
 }
 
@@ -254,7 +253,7 @@ C["misc"] = {
 	["AFKCamera"] = true,
 	["XPBar"] = true,
 	["XPBarWidth"] = 378,
-	["QuestLevel"] = true,
+	["QuestLevel"] = true, --deprecated
 }
 
 C["duffed"] = {
