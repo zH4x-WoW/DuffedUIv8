@@ -7,7 +7,7 @@ MultiBarBottomLeft:SetParent(bar)
 for i = 1, 12 do
 	local b = _G["MultiBarBottomLeftButton" .. i]
 	local b2 = _G["MultiBarBottomLeftButton" .. i - 1]
-	b:SetSize((D.buttonsize * FrameScale), (D.buttonsize * FrameScale))
+	b:SetSize(D.buttonsize, D.buttonsize)
 	b:ClearAllPoints()
 	b:SetFrameStrata("BACKGROUND")
 	b:SetFrameLevel(15)
