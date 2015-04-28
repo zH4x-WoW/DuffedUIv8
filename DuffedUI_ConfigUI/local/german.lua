@@ -34,7 +34,6 @@
 	DuffedUIConfigUILocalization.unitframesColorGradient = "Aktiviere Farbverlauf für die Heilleiste"
 	DuffedUIConfigUILocalization.unitframescharportrait = "Aktviere Charakterportraits am Spieler- und Zielframe"
 	DuffedUIConfigUILocalization.unitframesweakenedsoulbar = "Aktiviere 'Geschwächte Seele' Leiste (Priester ->Rote Leiste)"
-	DuffedUIConfigUILocalization.unitframesshowstatuebar = "Zeige die Statusleiste"
 	DuffedUIConfigUILocalization.unitframesclassbar = "Aktiviere die Klassenleisten"
 	DuffedUIConfigUILocalization.unitframesruneofpower = "Aktiviere die 'Rune der Macht' Leiste"
 	DuffedUIConfigUILocalization.unitframestargetauras = "Aktiviere Auren am Einheitenfenster des Ziels"

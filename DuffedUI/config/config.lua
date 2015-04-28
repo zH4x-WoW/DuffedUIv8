@@ -34,7 +34,6 @@ C["unitframes"] = {
 	["ColorGradient"] = true,
 	["charportrait"] = true,
 	["weakenedsoulbar"] = true,
-	["showstatuebar"] = true, --deprecated
 	["classbar"] = true,
 	["runeofpower"] = true,
 	["targetauras"] = true,

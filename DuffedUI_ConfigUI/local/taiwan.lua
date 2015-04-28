@@ -34,7 +34,6 @@
 	DuffedUIConfigUILocalization.unitframesColorGradient = "啟用生命條顏色漸變功能(隨血量變化)"
 	DuffedUIConfigUILocalization.unitframescharportrait = "為自身和目標啟用頭像顯示"
 	DuffedUIConfigUILocalization.unitframesweakenedsoulbar = "啟用靈魂虛弱指示 (牧師)"
-	DuffedUIConfigUILocalization.unitframesshowstatuebar = "顯示狀態條（職業條必須開啟的情況下）"
 	DuffedUIConfigUILocalization.unitframesclassbar = "啟用職業條"
 	DuffedUIConfigUILocalization.unitframesruneofpower = "啟用秘法符能能量條（法師）"
 	DuffedUIConfigUILocalization.unitframestargetauras = "啟用目標光環"

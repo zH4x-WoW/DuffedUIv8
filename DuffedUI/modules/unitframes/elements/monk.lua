@@ -48,21 +48,4 @@ D["ClassRessource"]["MONK"] = function(self)
 	self.HarmonyBar = HarmonyBar
 
 	if C["unitframes"]["oocHide"] then D["oocHide"](HarmonyBar) end
-
-	if C["unitframes"]["showstatuebar"] then
-		local StatueBar = CreateFrame("StatusBar", "oUF_StatueBar", self.Power)
-		StatueBar:SetWidth(5)
-		StatueBar:SetHeight(29)
-		StatueBar:Point("LEFT", power, "RIGHT", 7, 5)
-		StatueBar:SetStatusBarTexture(texture)
-		StatueBar:SetOrientation("VERTICAL")
-		StatueBar.background = CreateFrame("Frame", "oUF_Statue", StatueBar)
-		StatueBar.background:SetAllPoints()
-		StatueBar.background:SetFrameLevel(StatueBar:GetFrameLevel() - 1)
-		StatueBar.background:SetBackdrop(backdrop)
-		StatueBar.background:SetBackdropColor(0, 0, 0)
-		StatueBar.background:SetBackdropBorderColor(0,0,0)
-		StatueBar:CreateBackdrop()
-		self.Statue = StatueBar
-	end
 end

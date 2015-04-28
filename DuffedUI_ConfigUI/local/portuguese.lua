@@ -34,7 +34,6 @@
 	DuffedUIConfigUILocalization.unitframesColorGradient = "Enable ColorGradient for Healthbar"
 	DuffedUIConfigUILocalization.unitframescharportrait = "Enable portraits on player and target"
 	DuffedUIConfigUILocalization.unitframesweakenedsoulbar = "Enable Weakened Soul bar notification (Priest)"
-	DuffedUIConfigUILocalization.unitframesshowstatuebar = "Show Statue Bar"
 	DuffedUIConfigUILocalization.unitframesclassbar = "Enable class bar"
 	DuffedUIConfigUILocalization.unitframesruneofpower = "Enable rune of power bar"
 	DuffedUIConfigUILocalization.unitframestargetauras = "Enable target auras"
