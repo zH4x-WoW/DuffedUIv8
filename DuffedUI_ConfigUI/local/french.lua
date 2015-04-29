@@ -243,6 +243,7 @@
 	DuffedUIConfigUILocalization.duffedannouncechannel = "Set channel for announcement (|cffC41F3BSAY|r, |cffC41F3BPARTY|r, |cffC41F3BRAID|r or |cffC41F3BINSTANCE_CHAT|r)"
 	DuffedUIConfigUILocalization.duffeddispelannouncement = "Enable Dispelannouncement"
 	DuffedUIConfigUILocalization.duffedspellannounce = "Enable Auraannouncement"
+	DuffedUIConfigUILocalization.duffederrorfilter = "Hide spamming error in the middle of your screen"
 
 	--[[Loot]]--
 	DuffedUIConfigUILocalization.loot = "Loot"
@@ -266,10 +267,6 @@
 	DuffedUIConfigUILocalization.merchantautorepair = "Auto Repair items"
 	DuffedUIConfigUILocalization.merchantsellmisc = "Sell some defined (craps not grey) items automatically"
 	DuffedUIConfigUILocalization.merchantautoguildrepair = "Enable Guild Repair Items"
-
-	--[[Error]]--
-	DuffedUIConfigUILocalization.error = "Error Message"
-	DuffedUIConfigUILocalization.errorenable = "Hide spamming error in the middle of your screen"
 
 	--[[Buttons]]--
 	DuffedUIConfigUILocalization.option_button_reset = "Reset"

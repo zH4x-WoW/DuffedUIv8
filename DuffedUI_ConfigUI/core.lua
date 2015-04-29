@@ -14,13 +14,10 @@ local ALLOWED_GROUPS = {
 	["chat"] = 1,
 	["tooltip"] = 1,
 	["merchant"] = 1,
-	["error"] = 1,
-	["invite"] = 1,
 	["auras"] =  1,
 	["castbar"] = 1,
 	["misc"] = 1,
 	["duffed"] = 1,
-	["skins"] = 1,
 	["classtimer"] = 1,
 	["raid"] = 1,
 	["font"] = 1,
@@ -651,7 +648,7 @@ do
 		button:SetSize(continuex, continuey)
 		button:Point("TOP", interface, "BOTTOM", 0, -1)
 		button:SetText("DuffedUI")
-		if C["skins"].blizzardreskin then button:SkinButton() end
+		if C["general"].blizzardreskin then button:SkinButton() end
 		button:SetScript("OnClick", function(self)
 			local config = DuffedUIConfigUI
 			if config and config:IsShown() then

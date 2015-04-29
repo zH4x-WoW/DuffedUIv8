@@ -244,6 +244,7 @@
 	DuffedUIConfigUILocalization.duffedannouncechannel = "Chatkanal für Warnungsansagen (|cffC41F3BSAY|r, |cffC41F3BPARTY|r, |cffC41F3BRAID|r oder |cffC41F3BINSTANCE_CHAT|r)"
 	DuffedUIConfigUILocalization.duffeddispelannouncement = "Aktviere Reinigungswarnungen"
 	DuffedUIConfigUILocalization.duffedspellannounce = "Aktiviere Aurawarnungen"
+	DuffedUIConfigUILocalization.errorenable = "Verstecke die Fehlermeldungen, die in der Mitte Deines Bildschirms immer wieder angezeigt werden"
 
 	--[[Loot]]--
 	DuffedUIConfigUILocalization.loot = "Beutefenster"
@@ -267,10 +268,6 @@
 	DuffedUIConfigUILocalization.merchantautorepair = "Repariere beschädigte Rüstung automatisch"
 	DuffedUIConfigUILocalization.merchantsellmisc = "Verkaufe vordefinierte Gegenstände automatisch (Müll, NICHT grau)"
 	DuffedUIConfigUILocalization.merchantautoguildrepair = "Aktiviere Reparatur über die Gildenbank"
-
-	--[[Error]]--
-	DuffedUIConfigUILocalization.error = "Fehlermeldungen"
-	DuffedUIConfigUILocalization.errorenable = "Verstecke die Fehlermeldungen, die in der Mitte Deines Bildschirms immer wieder angezeigt werden"
 
 	--[[Buttons]]--
 	DuffedUIConfigUILocalization.option_button_reset = "Zurücksetzen"

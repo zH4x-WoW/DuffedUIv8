@@ -244,6 +244,7 @@
 	DuffedUIConfigUILocalization.duffedannouncechannel = "设置通告频道 (设定值为:|cffC41F3BSAY|r, |cffC41F3BPARTY|r, |cffC41F3BRAID|r or |cffC41F3BINSTANCE_CHAT|r)"
 	DuffedUIConfigUILocalization.duffeddispelannouncement = "启用驱散通告"
 	DuffedUIConfigUILocalization.duffedspellannounce = "启用光环通告"
+	DuffedUIConfigUILocalization.duffederrorfilter = "隐藏屏幕中部的错误信息提示"
 
 	--[[Loot]]--
 	DuffedUIConfigUILocalization.loot = "拾取"
@@ -267,10 +268,6 @@
 	DuffedUIConfigUILocalization.merchantautorepair = "自动修理物品"
 	DuffedUIConfigUILocalization.merchantsellmisc = "自动贩卖特定物品(非灰色等级的指定物品)"
 	DuffedUIConfigUILocalization.merchantautoguildrepair = "启用公会修理物品设定"
-
-	--[[Error]]--
-	DuffedUIConfigUILocalization.error = "错误信息提示"
-	DuffedUIConfigUILocalization.errorenable = "隐藏屏幕中部的错误信息提示"
 
 	--[[Buttons]]--
 	DuffedUIConfigUILocalization.option_button_reset = "重置设定"
