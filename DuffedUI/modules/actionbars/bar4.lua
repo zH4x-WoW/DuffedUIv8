@@ -7,21 +7,17 @@ MultiBarLeft:SetParent(bar)
 for i= 1, 12 do
 	local b = _G["MultiBarLeftButton" .. i]
 	local b2 = _G["MultiBarLeftButton" .. i - 1]
-	if C["actionbar"]["Rightsidebarshorizontal"] then b:SetSize(D["buttonsize"], D["buttonsize"]) else b:SetSize(D["SidebarButtonsize"], D["SidebarButtonsize"]) end
+	b:SetSize(D["SidebarButtonsize"], D["SidebarButtonsize"])
 	b:ClearAllPoints()
 	b:SetFrameStrata("BACKGROUND")
 	b:SetFrameLevel(15)
 
-	if C["actionbar"]["Rightsidebarshorizontal"] then
-		if i == 1 then b:SetPoint("BOTTOMLEFT", bar, D["buttonspacing"], D["buttonspacing"]) else b:SetPoint("LEFT", b2, "RIGHT", D["buttonspacing"], 0) end
+	if i == 1 then
+		b:SetPoint("TOPLEFT", bar, D["buttonspacing"], -D["buttonspacing"])
+	elseif i == 7 then
+		b:SetPoint("TOPRIGHT", bar, -D["buttonspacing"], -D["buttonspacing"])
 	else
-		if i == 1 then
-			b:SetPoint("TOPLEFT", bar, D["buttonspacing"], -D["buttonspacing"])
-		elseif i == 7 then
-			b:SetPoint("TOPRIGHT", bar, -D["buttonspacing"], -D["buttonspacing"])
-		else
-			b:SetPoint("TOP", b2, "BOTTOM", 0, -D["buttonspacing"])
-		end
+		b:SetPoint("TOP", b2, "BOTTOM", 0, -D["buttonspacing"])
 	end
 end
 RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")

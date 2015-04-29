@@ -78,7 +78,7 @@ D["ConstructUFRaid"] = function(self)
 		power:SetHeight(3)
 		power:Point("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -2)
 		power:Point("TOPRIGHT", self.Health, "BOTTOMRIGHT", 0, -2)
-	elseif not C["raid"]["HidePower"] then
+	else
 		power:Height(2)
 		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, 2)
 		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, 2)
@@ -119,7 +119,7 @@ D["ConstructUFRaid"] = function(self)
 		name:Point("CENTER", health, "TOP", 0, -7)
 		self:Tag(name, "[DuffedUI:getnamecolor][DuffedUI:nameshort]")
 	else
-		if C["raid"]["NameOutside"] then name:Point("LEFT", health, "RIGHT", 5, 0) else name:Point("RIGHT", health, -12, 0) end
+		name:Point("LEFT", health, "RIGHT", 5, 0)
 		if C["unitframes"]["unicolor"] then self:Tag(name, "[DuffedUI:getnamecolor][DuffedUI:namemedium]") else self:Tag(name, "[DuffedUI:namemedium]") end
 	end
 	self.Name = name
@@ -141,17 +141,10 @@ D["ConstructUFRaid"] = function(self)
 	end
 
 	local LFDRole = health:CreateTexture(nil, "OVERLAY")
-	if C["raid"]["RoleIcons"] then
-		LFDRole:Height(6)
-		LFDRole:Width(6)
-		LFDRole:Point("TOPRIGHT", -2, -2)
-		LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons.blp")
-	else
-		LFDRole:Height(12)
-		LFDRole:Width(12)
-		LFDRole:Point("TOPRIGHT", -1, -1)
-		LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons2.blp")
-	end
+	LFDRole:Height(12)
+	LFDRole:Width(12)
+	LFDRole:Point("TOPRIGHT", -1, -1)
+	LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons2.blp")
 	self.LFDRole = LFDRole
 
 	local Resurrect = CreateFrame("Frame", nil, self)

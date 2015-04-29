@@ -6,7 +6,7 @@ D.SkinFuncs["DuffedUI"] = {}
 local LoadBlizzardSkin = CreateFrame("Frame")
 LoadBlizzardSkin:RegisterEvent("ADDON_LOADED")
 LoadBlizzardSkin:SetScript("OnEvent", function(self, event, addon)
-	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") or not C["skins"].blizzardreskin then
+	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") or not C["general"].blizzardreskin then
 		self:UnregisterEvent("ADDON_LOADED")
 		return 
 	end

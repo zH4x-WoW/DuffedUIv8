@@ -6,6 +6,9 @@ C["general"] = {
 	["backdropcolor"] = {.05, .05, .05},
 	["bordercolor"] = {.125, .125, .125},
 	["classcolor"] = true,
+	["autoaccept"] = true,
+	["blizzardreskin"] = true,
+	["calendarevent"] = false,
 }
 
 C["font"] = {
@@ -46,11 +49,10 @@ C["unitframes"] = {
 	["focusdebuffs"] = true,
 	["focusbutton"] = true,
 	["attached"] = false,
-	["oocHide"] = true, --deprecated
+	["oocHide"] = true,
 	["playermodel"] = "Model",
 	["buffsize"] = 20,
 	["debuffsize"] = 20,
-	["Enable_ToT"] = true, --deprecated
 	["DruidMana"] = true,
 	["AnticipationBar"] = true,
 }
@@ -90,9 +92,6 @@ C["nameplate"] = {
 	["Percent"] = false,
 	["MaxDebuffs"] = 5,
 	["NonTargetAlpha"] = .2,
-	["PvP"] = false, --deprecated
-	["BlackBackground"] = false, --deprecated
-	["PercentInside"] = false, --deprecated
 }
 
 C["actionbar"] = {
@@ -111,10 +110,8 @@ C["actionbar"] = {
 	["shapeshiftborder"] = true,
 	["shapeshiftmouseover"] = false,
 	["borderhighlight"] = false,
-	["Leftsidebars"] = false, --deprecated
-	["Leftsidebarshorizontal"] = false, --deprecated
-	["Rightsidebars"] = false, --deprecated
-	["Rightsidebarshorizontal"] = false, --deprecated
+	["Leftsidebars"] = false,
+	["Rightsidebars"] = false,
 }
 
 C["raid"] = {
@@ -133,11 +130,6 @@ C["raid"] = {
 	["framewidth"] = 68,
 	["frameheight"] = 45,
 	["layout"] = "heal",
-	["center"] = false, --deprecated
-	["HidePower"] = false, --deprecated
-	["NameOutside"] = false, --deprecated
-	["MaxGroup"] = false, --deprecated
-	["RoleIcons"] = false, --deprecated
 }
 
 C["datatext"] = {
@@ -173,11 +165,6 @@ C["datatext"] = {
 	["time24"] = true,
 	["localtime"] = false,
 	["ShowInCombat"] = false,
-}
-
-C["skins"] = {
-	["blizzardreskin"] = true,
-	["calendarevent"] = false,
 }
 
 C["cooldown"] = {
@@ -218,7 +205,6 @@ C["auras"] = {
 	["buffnotice"] = true,
 	["warning"] = true,
 	["wrap"] = 18,
-	["Inside"] = false, --deprecated
 }
 
 C["bags"] = {
@@ -229,7 +215,6 @@ C["bags"] = {
 	["buttonsize"] = 28,
 	["spacing"] = 4,
 	["Bounce"] = true,
-	["SortBlizzard"] = false, --deprecated
 	["SortingButton"] = true,
 }
 
@@ -249,7 +234,6 @@ C["misc"] = {
 	["AFKCamera"] = true,
 	["XPBar"] = true,
 	["XPBarWidth"] = 378,
-	["QuestLevel"] = true, --deprecated
 }
 
 C["duffed"] = {
@@ -295,8 +279,4 @@ C["error"] = {
 		[CANT_USE_ITEM] = true,
 		[SPELL_FAILED_NOT_FISHABLE] = true,
 	},
-}
-
-C["invite"] = { 
-	["autoaccept"] = true,
 }

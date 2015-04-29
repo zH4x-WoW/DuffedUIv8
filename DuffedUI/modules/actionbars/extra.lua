@@ -4,7 +4,7 @@ if not C["actionbar"]["enable"] then return end
 local move = D["move"]
 local holder = CreateFrame("Frame", "ExtrabuttonMover", UIParent)
 holder:Size(80, 80)
-if C["raid"]["center"] then holder:SetPoint("BOTTOM", -235, 88) else holder:SetPoint("BOTTOM", 0, 250) end
+holder:SetPoint("BOTTOM", 0, 250)
 move:RegisterFrame(holder)
 
 ExtraActionBarFrame:SetParent(UIParent)

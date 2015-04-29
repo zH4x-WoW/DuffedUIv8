@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...)) 
 
-if C["invite"].autoaccept then
+if C["general"]["autoaccept"] then
 	local CheckFriend = function(name)
 		for i = 1, GetNumFriends() do
 			if GetFriendInfo(i) == name then return true end

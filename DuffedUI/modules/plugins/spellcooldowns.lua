@@ -503,19 +503,7 @@ local move = D["move"]
 
 local scfa = CreateFrame("Frame", "SpellCooldownsMover", UIParent)
 scfa:Size(120, 17)
-if C["raid"]["center"] then
-	if C["chat"]["lbackground"] and C["raid"]["layout"] == "heal" then
-		scfa:SetPoint("BOTTOM", DuffedUIChatBackgroundLeft, "TOP", 0, 10)
-	elseif C["chat"]["lbackground"] and C["raid"]["layout"] == "dps" then
-		scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 350)
-	elseif not C["chat"]["lbackground"] and C["raid"]["layout"] == "dps" then
-		scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 350)
-	else
-		scfa:SetPoint("BOTTOM", ChatFrame1, "TOP", 0, 25)
-	end
-else
-	scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 350)
-end
+scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 350)
 move:RegisterFrame(scfa)
 
 local SpellCooldownFrame = CreateFrame("Frame", "DuffedUISpellCooldowns", UIParent)

@@ -10,7 +10,7 @@ D["ClassRessource"] = {}
 if not C["unitframes"]["attached"] then
 	local cba = CreateFrame("Frame", "RessourceMover", UIParent)
 	cba:Size(250, 15)
-	if C["raid"]["center"] then cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 200) else cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 325) end
+	cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 325)
 	move:RegisterFrame(cba)
 end
 

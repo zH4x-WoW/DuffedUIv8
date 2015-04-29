@@ -7,6 +7,9 @@
 	DuffedUIConfigUILocalization.generalbackdropcolor = "设置默认的面板背景色"
 	DuffedUIConfigUILocalization.generalbordercolor = "设置默认的面板边框颜色"
 	DuffedUIConfigUILocalization.generalclasscolor = "启用文本按职业着色显示设定"
+	DuffedUIConfigUILocalization.generalblizzardreskin = "重设暴雪框体材质以适应DuffedUI"
+	DuffedUIConfigUILocalization.generalcalendarevent = "禁用行事历事件特殊材质显示"
+	DuffedUIConfigUILocalization.generalautoaccept = "启用自动接受邀请(好友或公会成员)"
 
 	--[[Font]]--
 	DuffedUIConfigUILocalization.font = "字体"
@@ -51,7 +54,6 @@
 	DuffedUIConfigUILocalization.unitframesplayermodel = "设定头像显示类型(职业图标 or 3D头像, 默认 => 3D头像)"
 	DuffedUIConfigUILocalization.unitframesbuffsize = "设定目标框体增益光环大小"
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "设定目标框体减益光环大小"
-	DuffedUIConfigUILocalization.unitframesEnable_ToT = "启用目标的目标框体"
 	DuffedUIConfigUILocalization.unitframesDruidMana = "Enable the display for Mana if shapeshifted"
 	DuffedUIConfigUILocalization.unitframesAnticipationBar = "Enable Anticipationbar if skill is learned"
 
@@ -91,9 +93,6 @@
 	DuffedUIConfigUILocalization.nameplatethreat_transitioncolor = "失去/获得仇恨颜色"
 	DuffedUIConfigUILocalization.nameplatePercent = "启用数字百分比显示"
 	DuffedUIConfigUILocalization.nameplateNonTargetAlpha = "设定非当前目标的姓名板透明度"
-	DuffedUIConfigUILocalization.nameplatePvP = "禁用PVP中无目标时姓名板透明降低"
-	DuffedUIConfigUILocalization.nameplateBlackBackground = "启用姓名板黑色背景(当仇恨着色功能启用时)"
-	DuffedUIConfigUILocalization.nameplatePercentInside = "生命条中显示百分比"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "快捷栏"
@@ -113,8 +112,6 @@
 	DuffedUIConfigUILocalization.actionbarpetbuttonsize = "宠物或姿态栏按钮大小"
 	DuffedUIConfigUILocalization.actionbarLeftsidebars = "启用鼠标划过显示左边聊天框体上的快捷栏"
 	DuffedUIConfigUILocalization.actionbarRightsidebars = "启用鼠标划过显示右边聊天框体上的快捷栏"
-	DuffedUIConfigUILocalization.actionbarLeftsidebarshorizontal = "设定左边快捷栏水平显示"
-	DuffedUIConfigUILocalization.actionbarRightsidebarshorizontal = "设定右边快捷栏水平显示"
 	DuffedUIConfigUILocalization.actionbarSidebarButtonsize = "Set size of buttons for sidebars on chat (only when vertical)"
 
 	--[[Raid Frames]]--
@@ -134,11 +131,6 @@
 	DuffedUIConfigUILocalization.raidframewidth = "设定框体宽度"
 	DuffedUIConfigUILocalization.raidframeheight = "设定框体高度"
 	DuffedUIConfigUILocalization.raidlayout = "设定队伍布局样式(默认 = heal, 数值为: |cffC41F3Bheal|r 或 |cffC41F3Bdps|r)"
-	DuffedUIConfigUILocalization.raidcenter = "治疗布局设定为界面中部"
-	DuffedUIConfigUILocalization.raidHidePower = "显示DPS职业能量条(仅适用于dps布局)"
-	DuffedUIConfigUILocalization.raidNameOutside = "玩家姓名外置(仅适用于dps布局)"
-	DuffedUIConfigUILocalization.raidMaxGroup = "启用团队界面队伍数量最大显示"
-	DuffedUIConfigUILocalization.raidRoleIcons = "启用默认的团队角色职能(tank,dps,heal)图标(彩色方块)"
 
 	--[[DataText]]--
 	DuffedUIConfigUILocalization.datatext = "信息栏信息"
@@ -174,11 +166,6 @@
 	DuffedUIConfigUILocalization.datatextlocaltime = "使用本地时间取代服务器时间"
 	DuffedUIConfigUILocalization.datatextfontsize = "信息字体大小"
 	DuffedUIConfigUILocalization.datatextShowInCombat = "战斗中显示信息栏光标信息"
-
-	--[[Skins]]--
-	DuffedUIConfigUILocalization.skins = "皮肤设定"
-	DuffedUIConfigUILocalization.skinsblizzardreskin = "重设暴雪框体材质以适应DuffedUI"
-	DuffedUIConfigUILocalization.skinscalendarevent = "禁用行事历事件特殊材质显示"
 
 	--[[Cooldowns]]--
 	DuffedUIConfigUILocalization.cooldown = "冷却计时"
@@ -220,7 +207,6 @@
 	DuffedUIConfigUILocalization.auraswarning = "启用提示音提醒光环缺失"
 	DuffedUIConfigUILocalization.aurasbufftracker = "启用光环追踪增强插件"
 	DuffedUIConfigUILocalization.auraswrap = "设定(小地图旁)单行Buff显示数量(默认 = 18)"
-	DuffedUIConfigUILocalization.aurasInside = "设定持续时间在光环内显示"
 
 	--[[Bags]]--
 	DuffedUIConfigUILocalization.bags = "背包"
@@ -231,7 +217,6 @@
 	DuffedUIConfigUILocalization.bagsspacing = "设置包内物品显示间距"
 	DuffedUIConfigUILocalization.bagsbuttonsize = "设置筛选器(搜索框)大小"
 	DuffedUIConfigUILocalization.bagsBounce = "启用获得新物品跳跃动画"
-	DuffedUIConfigUILocalization.bagsSortBlizzard = "启用游戏自带的排序功能"
 	DuffedUIConfigUILocalization.bagsSortingButton = "Enable the sorting button on bags and bank"
 
 	--[[Misc]]--
@@ -251,7 +236,6 @@
 	DuffedUIConfigUILocalization.miscAFKCamera = "启用暂离镜头效果"
 	DuffedUIConfigUILocalization.miscXPBar = "启用经验条"
 	DuffedUIConfigUILocalization.miscXPBarWidth = "设置经验条宽度"
-	DuffedUIConfigUILocalization.miscQuestLevel = "启用任务等级显示"
 
 	--[[Duffed]]--
 	DuffedUIConfigUILocalization.duffed = "Duffed特色功能"
@@ -288,10 +272,6 @@
 	DuffedUIConfigUILocalization.error = "错误信息提示"
 	DuffedUIConfigUILocalization.errorenable = "隐藏屏幕中部的错误信息提示"
 
-	--[[Invite]]--
-	DuffedUIConfigUILocalization.invite = "邀请"
-	DuffedUIConfigUILocalization.inviteautoaccept = "启用自动接受邀请(好友或公会成员)"
-	 
 	--[[Buttons]]--
 	DuffedUIConfigUILocalization.option_button_reset = "重置设定"
 	DuffedUIConfigUILocalization.option_button_load = "应用设定"

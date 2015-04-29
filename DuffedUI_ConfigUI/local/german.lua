@@ -6,6 +6,9 @@
 	DuffedUIConfigUILocalization.generalbackdropcolor = "Setze Standard-Hintergrundfarbe der Panels"
 	DuffedUIConfigUILocalization.generalbordercolor = "Setze Standard-Rahmenfarbe der Panels"
 	DuffedUIConfigUILocalization.generalclasscolor = "Aktiviere Klassenfarben für Textelemente"
+	DuffedUIConfigUILocalization.generalblizzardreskin = "Zeige die Blizzard eigenen Fenster im Stile von DuffedUI an"
+	DuffedUIConfigUILocalization.generalcalendarevent = "Deaktiviere die Texturen, der Events, im Kalender"
+	DuffedUIConfigUILocalization.generalautoaccept = "Aktiviere die automatische Einladung von Freunden und Gildenmitgliedern"
 
 	--[[Font]]--
 	DuffedUIConfigUILocalization.font = "Schriftarten"
@@ -50,7 +53,6 @@
 	DuffedUIConfigUILocalization.unitframesplayermodel = "Setze den Portraitstil (Icon oder Model, Standard => Model)"
 	DuffedUIConfigUILocalization.unitframesbuffsize = "Wähle die Größe der Stärkungszauber am Ziel"
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "Wähle die Größe der Schwächungszauber am Ziel"
-	DuffedUIConfigUILocalization.unitframesEnable_ToT = "Aktiviere Ziel des Ziel-Fenster"
 	DuffedUIConfigUILocalization.unitframesDruidMana = "Aktiviere die Manaanzeige bei Gestaltswandlung"
 	DuffedUIConfigUILocalization.unitframesAnticipationBar = "Aktiviere die Erwartungsleiste wenn die Fähigkeit gelernt wurde"
 
@@ -90,9 +92,6 @@
 	DuffedUIConfigUILocalization.nameplatethreat_transitioncolor = "Wähle Farbe für Verlust/Gewinn der Bedrohung"
 	DuffedUIConfigUILocalization.nameplatePercent = "Aktiviere Prozentanzeige an Namensplaketten"
 	DuffedUIConfigUILocalization.nameplateNonTargetAlpha = "Wähle Alphawert für non-Target Namensplaketten"
-	DuffedUIConfigUILocalization.nameplatePvP = "Deaktiviere Alpha für non-Target Namensplaketten im PvP"
-	DuffedUIConfigUILocalization.nameplateBlackBackground = "Aktiviere schwarzen Hintergrund für Namensplaketten wenn das Bedrohungs-Feature aktiv ist"
-	DuffedUIConfigUILocalization.nameplatePercentInside = "Verschiebe die Prozentanzeige in die Lebensleiste"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"
@@ -112,8 +111,6 @@
 	DuffedUIConfigUILocalization.actionbarpetbuttonsize = "Größe der Begleiter- und Haltungsleistenschaltflächen"
 	DuffedUIConfigUILocalization.actionbarLeftsidebars = "Aktiviere die linke Sidebar an den Chatframes per 'mouseover'"
 	DuffedUIConfigUILocalization.actionbarRightsidebars = "Aktiviere die rechte Sidebar an den Chatframes per 'mouseover'"
-	DuffedUIConfigUILocalization.actionbarLeftsidebarshorizontal = "Setze die linke Sidebar auf 'horizontal'"
-	DuffedUIConfigUILocalization.actionbarRightsidebarshorizontal = "Setze die rechte Sidebar auf 'horizontal'"
 	DuffedUIConfigUILocalization.actionbarSidebarButtonsize = "Setze Größe der Knöpfe für die Sidebars am Chat (nur wenn vertikal)"
 
 	--[[Raid Frames]]--
@@ -133,11 +130,6 @@
 	DuffedUIConfigUILocalization.raidframewidth = "Einstellung für die Breite der Einheitenfenster"
 	DuffedUIConfigUILocalization.raidframeheight = "Einstellung für die Höhe der Einheitenfenster"
 	DuffedUIConfigUILocalization.raidlayout = "Wähle Layout für das Schlachtzugfenster (Standard = heal, Werte: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
-	DuffedUIConfigUILocalization.raidcenter = "Verschiebe Heal-Layout in die Mitte"
-	DuffedUIConfigUILocalization.raidHidePower = "Deaktiviere Energieleiste (nur DPS-Layout)"
-	DuffedUIConfigUILocalization.raidNameOutside = "Bewege den Spielername nach aussen (nur DPS-Layout)"
-	DuffedUIConfigUILocalization.raidMaxGroup = "Aktiviere MaxGroup-Anzeige für Schlachtzugeinheiten"
-	DuffedUIConfigUILocalization.raidRoleIcons = "Aktiviere die standard Rollenicons (farbige Qudrate)"
 
 	--[[DataText]]--
 	DuffedUIConfigUILocalization.datatext = "Datatext"
@@ -173,11 +165,6 @@
 	DuffedUIConfigUILocalization.datatextlocaltime = "Zeige die lokale Zeit, anstatt der Server Zeit"
 	DuffedUIConfigUILocalization.datatextfontsize = "Schriftgröße des Datatexts"
 	DuffedUIConfigUILocalization.datatextShowInCombat = "Zeige DataText-Tooltip im Kampf"
-
-	--[[Skins]]--
-	DuffedUIConfigUILocalization.skins = "AddOn-Skins"
-	DuffedUIConfigUILocalization.skinsblizzardreskin = "Zeige die Blizzard eigenen Fenster im Stile von DuffedUI an"
-	DuffedUIConfigUILocalization.skinscalendarevent = "Deaktiviere die Texturen, der Events, im Kalender"
 
 	--[[Cooldowns]]--
 	DuffedUIConfigUILocalization.cooldown = "Abklingzeiten"
@@ -230,7 +217,6 @@
 	DuffedUIConfigUILocalization.bagsspacing = "Zwischenraum zwischen den Taschenslots"
 	DuffedUIConfigUILocalization.bagsbuttonsize = "Größe der Taschenplätze"
 	DuffedUIConfigUILocalization.bagsBounce = "Aktiviere Pulseanimation für neue Gegenstände"
-	DuffedUIConfigUILocalization.bagsSortBlizzard = "Aktiviere die Sortierfunktion von Blizzard"
 	DuffedUIConfigUILocalization.bagsSortingButton = "Aktiviere den Sortierbutton in den Taschen und der Bank"
 
 	--[[Misc]]--
@@ -250,7 +236,6 @@
 	DuffedUIConfigUILocalization.miscAFKCamera = "Aktiviere die AFK Kamera"
 	DuffedUIConfigUILocalization.miscXPBar = "Aktiviere XP-Leiste"
 	DuffedUIConfigUILocalization.miscXPBarWidth = "Stelle Breite der XP-Leiste ein"
-	DuffedUIConfigUILocalization.miscQuestLevel = "Aktiviere QuestLevel-Anzeige"
 
 	--[[Duffed]]--
 	DuffedUIConfigUILocalization.duffed = "Duffed"
@@ -287,10 +272,6 @@
 	DuffedUIConfigUILocalization.error = "Fehlermeldungen"
 	DuffedUIConfigUILocalization.errorenable = "Verstecke die Fehlermeldungen, die in der Mitte Deines Bildschirms immer wieder angezeigt werden"
 
-	--[[Invite]]--
-	DuffedUIConfigUILocalization.invite = "Einladungen"
-	DuffedUIConfigUILocalization.inviteautoaccept = "Aktiviere die automatische Einladung von Freunden und Gildenmitgliedern"
-	 
 	--[[Buttons]]--
 	DuffedUIConfigUILocalization.option_button_reset = "Zurücksetzen"
 	DuffedUIConfigUILocalization.option_button_load = "Übernehmen"

@@ -231,14 +231,7 @@ function CreateContainer(storagetype, ...)
 			Sort:SetFrameStrata(Container:GetFrameStrata())
 			Sort:StripTextures()
 			Sort:SkinButton()
-			if C["bags"].SortBlizzard then
-				Sort:SetScript("OnClick", SortBags)
-			else
-				Sort:SetScript("OnMouseDown", function(self, button) 
-					if InCombatLockdown() then return end
-					if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
-				end)
-			end
+			Sort:SetScript("OnClick", SortBags)
 			Sort:FontString("Text", C["media"].font, 11)
 			Sort.Text:SetPoint("CENTER")
 			Sort.Text:SetText(BAG_FILTER_CLEANUP)
@@ -349,14 +342,7 @@ function CreateContainer(storagetype, ...)
 			SortButton:FontString("Text", C["media"].font, 11)
 			SortButton.Text:SetPoint("CENTER")
 			SortButton.Text:SetText(BAG_FILTER_CLEANUP)
-			if C["bags"].SortBlizzard then
-				SortButton:SetScript("OnClick", SortBags)
-			else
-				SortButton:SetScript("OnMouseDown", function(self, button) 
-					if InCombatLockdown() then return end
-					if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
-				end)
-			end
+			SortButton:SetScript("OnClick", SortBags)
 		end
 
 		Purchase:ClearAllPoints()

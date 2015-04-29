@@ -6,6 +6,9 @@
 	DuffedUIConfigUILocalization.generalbackdropcolor = "設置默認的面板背景色"
 	DuffedUIConfigUILocalization.generalbordercolor = "設置默認的面板邊框顏色"
 	DuffedUIConfigUILocalization.generalclasscolor = "啟用文本按職業著色顯示設定"
+	DuffedUIConfigUILocalization.generalblizzardreskin = "重設暴雪框體材質以適應DuffedUI"
+	DuffedUIConfigUILocalization.generalcalendarevent = "禁用行事歷事件特殊材質顯示"
+	DuffedUIConfigUILocalization.generalautoaccept = "啟用自動接受邀請(好友或公會成員)"
 
 	--[[Font]]--
 	DuffedUIConfigUILocalization.font = "字體"
@@ -50,7 +53,6 @@
 	DuffedUIConfigUILocalization.unitframesplayermodel = "設定頭像顯示類型(職業圖標 or 3D頭像, 默認 => 3D頭像)"
 	DuffedUIConfigUILocalization.unitframesbuffsize = "設定目標框體增益光環大小"
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "設定目標框體減益光環大小"
-	DuffedUIConfigUILocalization.unitframesEnable_ToT = "啟用目標的目標框體"
 	DuffedUIConfigUILocalization.unitframesDruidMana = "Enable the display for Mana if shapeshifted"
 	DuffedUIConfigUILocalization.unitframesAnticipationBar = "Enable Anticipationbar if skill is learned"
 
@@ -174,11 +176,6 @@
 	DuffedUIConfigUILocalization.datatextfontsize = "資訊字體大小"
 	DuffedUIConfigUILocalization.datatextShowInCombat = "戰鬥中顯示信息欄游標信息"
 
-	--[[Skins]]--
-	DuffedUIConfigUILocalization.skins = "皮膚設定"
-	DuffedUIConfigUILocalization.skinsblizzardreskin = "重設暴雪框體材質以適應DuffedUI"
-	DuffedUIConfigUILocalization.skinscalendarevent = "禁用行事歷事件特殊材質顯示"
-
 	--[[Cooldowns]]--
 	DuffedUIConfigUILocalization.cooldown = "冷卻計時"
 	DuffedUIConfigUILocalization.cooldownenable = "啟用按鈕冷卻計時數字"
@@ -286,10 +283,6 @@
 	--[[Error]]--
 	DuffedUIConfigUILocalization.error = "錯誤信息提示"
 	DuffedUIConfigUILocalization.errorenable = "隱藏屏幕中部的錯誤信息提示"
-
-	--[[Invite]]--
-	DuffedUIConfigUILocalization.invite = "邀請"
-	DuffedUIConfigUILocalization.inviteautoaccept = "啟用自動接受邀請(好友或公會成員)"
 	 
 	--[[Buttons]]--
 	DuffedUIConfigUILocalization.option_button_reset = "重置設定"

@@ -513,10 +513,10 @@ local UpdateThreat = function(self)
 			if InCombatLockdown() and self.isFriendly ~= true then
 				if D.Role == "Tank" then
 					self.health:SetStatusBarColor(badR, badG, badB)
-					if C["nameplate"].BlackBackground then self.health.bg:SetTexture(unpack(C["media"].backdropcolor)) else self.health.bg:SetTexture(badR, badG, badB, .25) end
+					self.health.bg:SetTexture(unpack(C["media"].backdropcolor))
 				else
 					self.health:SetStatusBarColor(goodR, goodG, goodB)
-					if C["nameplate"].BlackBackground then self.health.bg:SetTexture(unpack(C["media"].backdropcolor)) else self.health.bg:SetTexture(goodR, goodG, goodB, .25) end
+					self.health.bg:SetTexture(unpack(C["media"].backdropcolor))
 				end
 			else
 				UpdateColor(self)
@@ -526,14 +526,14 @@ local UpdateThreat = function(self)
 			if g + b == 0 then
 				if D.Role == "Tank" then
 					self.health:SetStatusBarColor(goodR, goodG, goodB)
-					if C["nameplate"].BlackBackground then self.health.bg:SetTexture(unpack(C["media"].backdropcolor)) else self.health.bg:SetTexture(goodR, goodG, goodB, .25) end
+					self.health.bg:SetTexture(unpack(C["media"].backdropcolor))
 				else
 					self.health:SetStatusBarColor(badR, badG, badB)
-					if C["nameplate"].BlackBackground then self.health.bg:SetTexture(unpack(C["media"].backdropcolor)) else self.health.bg:SetTexture(badR, badG, badB, .25) end
+					self.health.bg:SetTexture(unpack(C["media"].backdropcolor))
 				end
 			else
 				self.health:SetStatusBarColor(transitionR, transitionG, transitionB)
-				if C["nameplate"].BlackBackground then self.health.bg:SetTexture(unpack(C["media"].backdropcolor)) else self.health.bg:SetTexture(transitionR, transitionG, transitionB, .25) end
+				self.health.bg:SetTexture(unpack(C["media"].backdropcolor))
 			end
 		end
 	else
@@ -551,7 +551,7 @@ local UpdateThreat = function(self)
 		self.health:SetAlpha(1)
 	else
 		self.health.name:SetTextColor(1, 1, 1)
-		if ((arena or bg or ash) or C["nameplate"].PvP) then self.health:SetAlpha(1) else self.health:SetAlpha(C["nameplate"].NonTargetAlpha) end
+		self.health:SetAlpha(C["nameplate"].NonTargetAlpha)
 	end
 end
 
@@ -702,7 +702,7 @@ local StylePlate = function(self)
 		if self.health.perc == nil then
 			self.health.perc = self.health:CreateFontString("$parentHealthPercent", "OVERLAY")
 			self.health.perc:SetFont(Font, 10, "THINOUTLINE")
-			if C["nameplate"].PercentInside then self.health.perc:SetPoint("CENTER", self.health, "CENTER", 0, 0) else self.health.perc:SetPoint("LEFT", self.health, "RIGHT", 4, 0) end
+			self.health.perc:SetPoint("LEFT", self.health, "RIGHT", 4, 0)
 		end
 	end
 

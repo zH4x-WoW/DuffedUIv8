@@ -70,23 +70,21 @@ D["SpawnUF"] = function(self)
 	target:Size(218, 44)
 	move:RegisterFrame(target)
 
-	if C["unitframes"].Enable_ToT then
-		local tot = oUF:Spawn("targettarget", "oUF_TargetTarget")
-		if layout == 1 then
-			if C["raid"].center then tot:Point("TOPRIGHT", oUF_Target, "BOTTOMLEFT", 129, -2) else tot:Point("TOPRIGHT", oUF_Target, "BOTTOMLEFT", 0, -2) end
-			tot:Size(129, 23)
-		elseif layout == 2 then
-			tot:Point("TOPLEFT", oUF_Target, "BOTTOMLEFT", -3, -16)
-			tot:Size(142, 16)
-		elseif layout == 3 then
-			tot:Point("TOPRIGHT", oUF_Target, "BOTTOMRIGHT", 1, -5)
-			tot:Size(129, 20)
-		elseif layout == 4 then
-			tot:Point("TOPRIGHT", oUF_Target, "BOTTOMRIGHT", 2, -5)
-			tot:Size(100, 25)
-		end
-		move:RegisterFrame(tot)
+	local tot = oUF:Spawn("targettarget", "oUF_TargetTarget")
+	if layout == 1 then
+		if C["raid"].center then tot:Point("TOPRIGHT", oUF_Target, "BOTTOMLEFT", 129, -2) else tot:Point("TOPRIGHT", oUF_Target, "BOTTOMLEFT", 0, -2) end
+		tot:Size(129, 23)
+	elseif layout == 2 then
+		tot:Point("TOPLEFT", oUF_Target, "BOTTOMLEFT", -3, -16)
+		tot:Size(142, 16)
+	elseif layout == 3 then
+		tot:Point("TOPRIGHT", oUF_Target, "BOTTOMRIGHT", 1, -5)
+		tot:Size(129, 20)
+	elseif layout == 4 then
+		tot:Point("TOPRIGHT", oUF_Target, "BOTTOMRIGHT", 2, -5)
+		tot:Size(100, 25)
 	end
+	move:RegisterFrame(tot)
 
 	local pet = oUF:Spawn("pet", "oUF_Pet")
 	pet:SetParent(DuffedUIPetBattleHider)
@@ -274,8 +272,8 @@ D["SpawnUF"] = function(self)
 				"columnAnchorPoint", "BOTTOM"
 			)
 			raid:SetParent(DuffedUIPetBattleHider)
-			D["RaidPosition"](oUF_Heal)
-			if C["raid"]["MaxGroup"] then D["MaxGroup"](oUF_Heal) end
+			if DuffedUIChatBackgroundLeft then frame:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 16) else frame:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33) end
+			D["MaxGroup"](oUF_Heal)
 			move:RegisterFrame(raid)
 
 			if C["raid"]["showraidpets"] then
@@ -325,7 +323,7 @@ D["SpawnUF"] = function(self)
 			)
 			raid:SetParent(DuffedUIPetBattleHider)
 			if DuffedUIChatBackgroundLeft then raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 22) else raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33) end
-			if C["raid"]["MaxGroup"] then D["MaxGroup"](oUF_DPS) end
+			D["MaxGroup"](oUF_DPS)
 			move:RegisterFrame(raid)
 		end
 	end

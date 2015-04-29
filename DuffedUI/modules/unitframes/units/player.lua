@@ -77,7 +77,7 @@ D["ConstructUFPlayer"] = function(self)
 		local percHP
 		percHP = D.SetFontString(health, C["media"].font, 20, "THINOUTLINE")
 		percHP:SetTextColor(unpack(C["media"].datatextcolor1))
-		if C["raid"]["center"] then percHP:Point("RIGHT", health, "LEFT", -25, -10) else percHP:Point("LEFT", health, "RIGHT", 25, -10) end
+		percHP:Point("LEFT", health, "RIGHT", 25, -10)
 		self:Tag(percHP, "[DuffedUI:perchp]")
 		self.percHP = percHP
 	end
