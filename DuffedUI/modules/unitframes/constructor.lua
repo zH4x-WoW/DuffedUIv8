@@ -272,7 +272,7 @@ D["SpawnUF"] = function(self)
 				"columnAnchorPoint", "BOTTOM"
 			)
 			raid:SetParent(DuffedUIPetBattleHider)
-			if DuffedUIChatBackgroundLeft then frame:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 16) else frame:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33) end
+			if DuffedUIChatBackgroundLeft then raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 16) else raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33) end
 			D["MaxGroup"](oUF_Heal)
 			move:RegisterFrame(raid)
 
