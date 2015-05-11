@@ -123,7 +123,7 @@ function AS:Blizzard_Collections(event, addon)
 	
 			Button.icon:SetPoint("LEFT", -41, 0)
 			Button.icon:SetDrawLayer('ARTWORK')
-			LevelBG:SetTexture(nil)
+			--LevelBG:SetTexture(nil)
 
 			hooksecurefunc(Button.iconBorder, 'SetVertexColor', function(self, r, g, b, a)
 				Button.iconbg:SetBackdropBorderColor(r, g, b)
@@ -185,7 +185,7 @@ function AS:Blizzard_Collections(event, addon)
 		PetJournalTutorialButton:ClearAllPoints()
 		PetJournalTutorialButton:SetPoint("TOPLEFT", CollectionsJournal, 0, 0)
 
-		PetJournalPetCardPetInfo.levelBG:SetTexture(nil)
+		--PetJournalPetCardPetInfo.levelBG:SetTexture(nil)
 		AS:SkinTexture(PetJournalPetCardPetInfoIcon)
 		AS:CreateBackdrop(PetJournalPetCardPetInfo)
 		PetJournalPetCardPetInfo.Backdrop:SetOutside(PetJournalPetCardPetInfoIcon)
@@ -236,7 +236,9 @@ function AS:Blizzard_Collections(event, addon)
 		for i = 1, 18 do
 			local Button = ToyBox.iconsFrame['spellButton'..i]
 			AS:SkinTexture(Button.iconTexture)
+			AS:SkinTexture(Button.iconTextureUncollected)
 			Button.iconTexture:SetInside()
+			Button.iconTextureUncollected:SetInside()
 			AS:SkinFrame(Button)
 			AS:StyleButton(Button)
 			Button.hover:SetAllPoints(Button.iconTexture)
