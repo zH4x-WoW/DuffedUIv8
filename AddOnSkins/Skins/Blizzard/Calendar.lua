@@ -170,7 +170,7 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:SkinScrollBar(CalendarEventPickerScrollBar)
 
 	AS:StripTextures(CalendarEventPickerCloseButton)
-	AS:SkinCloseButton(CalendarEventPickerCloseButton, true)
+	AS:SkinCloseButton(CalendarEventPickerCloseButton)
 	AS:SkinScrollBar(CalendarCreateEventDescriptionScrollFrameScrollBar)
 end
 
