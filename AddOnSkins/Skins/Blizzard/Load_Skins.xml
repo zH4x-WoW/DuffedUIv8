@@ -9,6 +9,7 @@
 	<Script file="Character.lua"/>
 	<Script file="ChatBubbles.lua"/>
 	<Script file="Collections.lua"/>
+	<Script file="DeathRecap.lua"/>
 	<Script file="DBM.lua" />
 	<Script file="DebugTools.lua"/>
 	<Script file="DressUp.lua"/>
@@ -22,6 +23,7 @@
 	<Script file="ItemSocketing.lua"/>
 	<Script file="LFG.lua"/>
 	<Script file="Loot.lua"/>
+	<Script file="Macro.lua"/>
 	<Script file="Mail.lua"/>
 	<Script file="Merchant.lua"/>
 	<Script file="Options.lua"/>
