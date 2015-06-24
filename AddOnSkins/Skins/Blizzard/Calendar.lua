@@ -33,7 +33,6 @@ function AS:Blizzard_Calendar(event, addon)
 	CalendarInviteStatusContextMenu.SetBackdropColor = AS.Noop
 	CalendarInviteStatusContextMenu.SetBackdropBorderColor = AS.Noop
 
-	AS.ParchmentEnabled = true
 	if not AS.ParchmentEnabled then
 		for i = 1, 42 do
 			local Button = _G["CalendarDayButton"..i]
@@ -55,7 +54,6 @@ function AS:Blizzard_Calendar(event, addon)
 		CalendarTodayFrame:HookScript('OnUpdate', function(self) self:SetAlpha(CalendarTodayTextureGlow:GetAlpha()) end)
 		CalendarTodayFrame.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
 		CalendarTodayFrame.Backdrop:SetBackdropColor(0, 0, 0, 0)
-		CalendarTodayFrame.Backdrop:CreateShadow()
 	end
 
 	AS:SkinFrame(CalendarCreateEventFrame)
@@ -84,7 +82,7 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:SkinDropDownBox(CalendarCreateEventHourDropDown, 68)
 	AS:SkinDropDownBox(CalendarCreateEventMinuteDropDown, 68)
 	AS:SkinDropDownBox(CalendarCreateEventAMPMDropDown, 68)
-	AS:SkinDropDownBox(CalendarCreateEventRepeatOptionDropDown, 120)
+	AS:SkinDropDownBox(CalendarCreateEventDifficultyOptionDropDown, 160)
 	AS:SkinTexture(CalendarCreateEventIcon)
 	CalendarCreateEventIcon.SetTexCoord = AS.Noop
 

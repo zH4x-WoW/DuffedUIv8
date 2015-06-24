@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_EncounterJournal(event, addon)
 	if addon ~= 'Blizzard_EncounterJournal' then return end
@@ -47,17 +47,22 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	end)
 
 	AS:StripTextures(EncounterJournalInstanceSelect)
+	AS:SkinFrame(EncounterJournalInstanceSelectScrollFrame)
 	AS:SkinTab(EncounterJournalInstanceSelectDungeonTab)
-	AS:StripTextures(EncounterJournalInstanceSelectRaidTab.grayBox)
+	EncounterJournalInstanceSelectDungeonTab.Backdrop:SetPoint('BOTTOMRIGHT', 0, -3)
 	AS:SkinTab(EncounterJournalInstanceSelectRaidTab)
-	EncounterJournalInstanceSelectRaidTab:Enable()
+	EncounterJournalInstanceSelectRaidTab.Backdrop:SetPoint('BOTTOMRIGHT', 0, -3)
+	AS:SkinTab(EncounterJournalInstanceSelectSuggestTab)
+	EncounterJournalInstanceSelectSuggestTab.Backdrop:SetPoint('TOPLEFT', -3, -7)
+	EncounterJournalInstanceSelectSuggestTab.Backdrop:SetPoint('BOTTOMRIGHT', 0, -3)
+
 	EncounterJournal.instanceSelect.bg:SetAlpha(0)
-	AS:SkinNextPrevButton(EncounterJournalInstanceSelectScrollDownButton)
-	EncounterJournalInstanceSelectScrollDownButton:Size(18,21)
-	EncounterJournalInstanceSelectScrollDownButton:SetScript('OnClick', function(self)
-		PlaySound("igMainMenuOptionCheckBoxOn")
-		ToggleDropDownMenu(1, nil, EJTierDropDown, self:GetName(), 0, -2)
-	end)
+
+	AS:SkinDropDownBox(EncounterJournalInstanceSelectTierDropDown)
+	-- EncounterJournalInstanceSelectTierDropDownButton:SetScript('OnClick', function(self)
+		-- PlaySound("igMainMenuOptionCheckBoxOn")
+		-- ToggleDropDownMenu(1, nil, EJTierDropDown, self:GetName(), 0, -2)
+	-- end)
 
 	local function SkinDungeons()
 		local b1 = EncounterJournalInstanceSelectScrollFrameScrollChildInstanceButton1

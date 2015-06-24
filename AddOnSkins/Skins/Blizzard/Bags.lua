@@ -2,7 +2,7 @@ local AS = unpack(AddOnSkins)
 
 local name = 'Blizzard_Bags'
 function AS:Blizzard_Bags()
-	if (Tukui and Tukui[2]["Bags"]["Enable"]) or (DuffedUI and DuffedUI[2]["bags"]["enable"]) then return end
+	if Tukui and Tukui[2]["Bags"]["Enable"] then return end
 
 	for i = 1, 12 do -- There is 13 Total..
 		local Bag = _G["ContainerFrame"..i]
