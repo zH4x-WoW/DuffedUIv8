@@ -285,6 +285,20 @@ local function LoadGarrisonSkin()
 			ability.styled = true
 		end
 	end)
+
+	hooksecurefunc("GarrisonFollowerPage_ShowFollower", function(self, followerID)
+		local abilities = self.AbilitiesFrame.Abilities
+		if self.numAbilitiesStyled == nil then self.numAbilitiesStyled = 1 end
+		local numAbilitiesStyled = self.numAbilitiesStyled
+		local ability = abilities[numAbilitiesStyled]
+		while ability do
+			local icon = ability.IconButton.Icon
+			icon:StyleButton()
+			numAbilitiesStyled = numAbilitiesStyled + 1
+			ability = abilities[numAbilitiesStyled]
+		end
+		self.numAbilitiesStyled = numAbilitiesStyled
+	end)
 end
 
 local function LoadGarrisonTooltipSkin()

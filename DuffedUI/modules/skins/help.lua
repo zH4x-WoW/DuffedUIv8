@@ -11,6 +11,7 @@ local function LoadSkin()
 
 	local buttons = {
 		"HelpFrameAccountSecurityOpenTicket",
+		"HelpFrameOpenTicketHelpTopIssues",
 		"HelpFrameOpenTicketHelpOpenTicket",
 		"HelpFrameKnowledgebaseSearchButton",
 		"HelpFrameKnowledgebaseNavBarHomeButton",
@@ -149,6 +150,7 @@ local function LoadSkin()
 		end
 	end
 	
+	HelpFrameOpenTicketHelpItemRestoration:SkinButton()
 	HelpFrameReportBugSubmit:SkinButton()
 	HelpFrameSubmitSuggestionScrollFrameScrollBar:SkinScrollBar()
 	HelpFrameReportBugScrollFrameScrollBar:SkinScrollBar()

@@ -13,6 +13,7 @@ function AS:Blizzard_Gossip()
 	AS:SkinScrollBar(GossipGreetingScrollFrameScrollBar)
 	AS:SkinFrame(GossipGreetingScrollFrame)
 
+	AS.ParchmentEnabled = false
 	if AS.ParchmentEnabled then
 		GossipGreetingScrollFrame.Background = GossipGreetingScrollFrame:CreateTexture(nil, 'ARTWORK')
 		GossipGreetingScrollFrame.Background:SetTexture('Interface\\QuestFrame\\QuestBG')

@@ -1,9 +1,9 @@
-## Interface: 60200
+## Interface: 60100
 ## Title: |cff1784d1AddOnSkins|r
-## Version: 3.17
+## Version: 3.16
 ## Author: Azilroka, Sortokk
 ## SavedVariablesPerCharacter: AddOnSkinsOptions
-## OptionalDep: ElvUI, BuyEmAll, DSM, Tukui, HydraUI, DuffedUI
+## OptionalDep: BuyEmAll, DSM, ElvUI, Tukui, HydraUI, DuffedUI, AsphyxiaUI
 ## X-Tukui-ProjectID: 128
 ## X-Tukui-ProjectFolders: AddOnSkins
 

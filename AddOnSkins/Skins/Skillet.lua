@@ -85,6 +85,13 @@ function AS:Skillet()
 		AS:SkinScrollBar(SkilletShoppingListListScrollBar)
 	end
 
+	local function SkinIgnoreMats(self)
+		AS:SkinFrame(SkilletIgnoreList)
+		AS:SkinFrame(SkilletIgnoreListParent,'Default')
+		AS:SkinCloseButton(SkilletIgnoreListCloseButton)
+		AS:SkinScrollBar(SkilletIgnoreListListScrollBar)
+	end
+
 	local function SkinPluginButtons(self)
 		AS:SkinButton(_G['SkilletPluginDropdown1'])
 		AS:SkinButton(_G['SkilletPluginDropdown2'])
@@ -331,6 +338,7 @@ function AS:Skillet()
 	_G['SkilletSkillListParent']:SetScript('OnShow', SkilletFrameOnShow)
 	_G['SkilletSkillListParent']:SetScript('OnUpdate', SkilletFrameOnUpdate)
 	_G['SkilletShoppingList']:SetScript('OnShow', SkinShopping)
+	_G['SkilletIgnoreList']:SetScript('OnShow', SkinIgnoreMats)
 	_G['SkilletHideUncraftableRecipes']:SetScript('OnUpdate', SkinIcon)
 	_G['SkilletReagentParent']:SetScript('OnUpdate', SkinReagentIcon)
 	_G['SkilletPluginButton']:SetScript('PostClick', SkinPluginButtons)

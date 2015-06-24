@@ -126,6 +126,7 @@ function AS:Blizzard_Quest()
 		QuestNPCModel:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x + 18, y);			
 	end)
 
+	AS.ParchmentEnabled = false
 	if AS.ParchmentEnabled then
 		QuestDetailScrollFrame.Background = QuestDetailScrollFrame:CreateTexture(nil, 'ARTWORK')
 		QuestDetailScrollFrame.Background:SetTexture('Interface\\QuestFrame\\QuestBG')

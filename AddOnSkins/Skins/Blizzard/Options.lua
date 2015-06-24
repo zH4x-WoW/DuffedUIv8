@@ -483,6 +483,7 @@ function AS:Blizzard_Options(event, addon)
 			end
 		end
 
+		AS:SkinButton(HelpFrameOpenTicketHelpItemRestoration)
 		AS:SkinButton(HelpFrameReportBugSubmit)
 		AS:SkinScrollBar(HelpFrameSubmitSuggestionScrollFrameScrollBar)
 		AS:SkinScrollBar(HelpFrameReportBugScrollFrameScrollBar)
