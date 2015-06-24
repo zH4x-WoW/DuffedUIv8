@@ -674,6 +674,89 @@ if C["raid"].raidunitdebuffwatch == true then
 			SpellName(170395), -- Sorka's Prey
 			SpellName(158702), -- Fixate
 			SpellName(158686), -- Expose Armor
+			-- Hellfire Citadel
+			-- Hellfire Assault
+			SpellName(184369), -- Howling Axe (Target)
+			SpellName(180079), -- Felfire Munitions
+			-- Iron Reaver
+			SpellName(179897), -- Blitz
+			SpellName(185978), -- Firebomb Vulnerability
+			SpellName(182373), -- Flame Vulnerability
+			SpellName(182280), -- Artillery (Target)
+			SpellName(182074), -- Immolation
+			SpellName(182001), -- Unstable Orb
+			-- Kormrok
+			SpellName(187819), -- Crush
+			SpellName(181345), -- Foul Crush
+			-- Hellfire High Council
+			SpellName(184360), -- Fel Rage
+			SpellName(184449), -- Mark of the Necromancer
+			SpellName(185065), -- Mark of the Necromancer
+			SpellName(184450), -- Mark of the Necromancer
+			SpellName(185066), -- Mark of the Necromancer
+			SpellName(184676), -- Mark of the Necromancer
+			SpellName(184652), -- Reap
+			-- Kilrogg Deadeye
+			SpellName(181488), -- Vision of Death
+			SpellName(188929), -- Heart Seeker (Target)
+			SpellName(180389), -- Heart Seeker (DoT)
+			-- Gorefiend
+			SpellName(179867), -- Gorefiend's Corruption
+			SpellName(181295), -- Digest
+			SpellName(179977), -- Touch of Doom
+			SpellName(179864), -- Shadow of Death
+			SpellName(179909), -- Shared Fate (self root)
+			SpellName(179908), -- Shared Fate (other players root)
+			-- Shadow-Lord Iskar
+			SpellName(181957), -- Phantasmal Winds
+			SpellName(182200), -- Fel Chakram
+			SpellName(182178), -- Fel Chakram
+			SpellName(182325), -- Phantasmal Wounds
+			SpellName(185239), -- Radiance of Anzu
+			SpellName(185510), -- Dark Bindings
+			SpellName(182600), -- Fel Fire
+			SpellName(179219), -- Phantasmal Fel Bomb
+			SpellName(181753), -- Fel Bomb
+			-- Soulbound Construct (Socrethar)
+			SpellName(182038), -- Shattered Defenses
+			SpellName(188666), -- Eternal Hunger (Add fixate, Mythic only)
+			SpellName(189627), -- Volatile Fel Orb (Fixated)
+			SpellName(180415), -- Fel Prison
+			-- Tyrant Velhari
+			SpellName(185237), -- Touch of Harm
+			SpellName(185238), -- Touch of Harm
+			SpellName(185241), -- Edict of Condemnation
+			SpellName(180526), -- Font of Corruption
+			-- Fel Lord Zakuun
+			SpellName(181508), -- Seed of Destruction
+			SpellName(181653), -- Fel Crystals (Too Close)
+			SpellName(179428), -- Rumbling Fissure (Soak)
+			SpellName(182008), -- Latent Energy (Cannot soak)
+			SpellName(179407), -- Disembodied (Player in Shadow Realm)
+			-- Xhul'horac
+			SpellName(188208), -- Ablaze
+			SpellName(186073), -- Felsinged
+			SpellName(186407), -- Fel Surge
+			SpellName(186500), -- Chains of Fel
+			SpellName(186063), -- Wasting Void
+			SpellName(186333), -- Void Surge
+			-- Mannoroth
+			SpellName(181275), -- Curse of the Legion
+			SpellName(181099), -- Mark of Doom
+			SpellName(181597), -- Mannoroth's Gaze
+			SpellName(182006), -- Empowered Mannoroth's Gaze
+			SpellName(181841), -- Shadowforce
+			SpellName(182088), -- Empowered Shadowforce
+			-- Archimonde
+			SpellName(184964), -- Shackled Torment
+			SpellName(186123), -- Wrought Chaos
+			SpellName(185014), -- Focused Chaos
+			SpellName(186952), -- Nether Banish
+			SpellName(186961), -- Nether Banish
+			SpellName(189891), -- Nether Tear
+			SpellName(183634), -- Shadowfel Burst
+			SpellName(189895), -- Void Star Fixate
+			SpellName(190049), -- Nether Corruption
 		}
 		D.ReverseTimer = {
 		},
