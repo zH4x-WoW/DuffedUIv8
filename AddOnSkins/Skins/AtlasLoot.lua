@@ -32,6 +32,7 @@ function AS:AtlasLoot(event, addon)
 		end
 	end)
 
+
 	local AtlasLootFrame = _G["AtlasLoot_GUI-Frame"]
 	AS:SkinFrame(AtlasLootFrame)
 	AS:SkinCloseButton(AtlasLootFrame.CloseButton)

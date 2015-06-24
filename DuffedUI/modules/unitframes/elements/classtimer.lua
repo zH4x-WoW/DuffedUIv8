@@ -301,6 +301,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(48108), -- Pyroblast!
 			CreateSpellEntry(115610), -- Temporal Shield
 			CreateSpellEntry(116257), -- Invocation
+			CreateSpellEntry(116267), -- Incanter's Flow
 		},
 		procs = {
 			CreateSpellEntry(44544), -- Fingers of Frost

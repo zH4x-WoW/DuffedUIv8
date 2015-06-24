@@ -245,7 +245,9 @@ function AS:Blizzard_Collections(event, addon)
 			Button.checked:SetAllPoints(Button.iconTexture)
 			Button.pushed:SetAllPoints(Button.iconTexture)
 			Button.cooldown:SetAllPoints(Button.iconTexture)
-			Button:HookScript('OnUpdate', function(self) self.name:SetTextColor(unpack(self.TextColor)) end)
+			Button:HookScript('OnUpdate', function(self)
+				self.name:SetTextColor(unpack(self.TextColor))
+			end)
 		end
 
 		hooksecurefunc("ToySpellButton_UpdateButton", function(self)
@@ -283,7 +285,7 @@ function AS:Blizzard_Collections(event, addon)
 					if type(layoutData) == "string" then
 						numHeadersInUse = numHeadersInUse + 1;
 						local header = self:AcquireFrame(self.heirloomHeaderFrames, numHeadersInUse, "FRAME", "HeirloomHeaderTemplate");
-						header.text:SetTextColor(1,1,0);
+						header.text:SetTextColor(1,1,1);
 					end
 				end
 			end

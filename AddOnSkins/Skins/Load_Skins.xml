@@ -6,6 +6,7 @@
 	<Script file="AdiCastBar.lua"/>
 	<Script file="AdvancedIconSelector.lua"/>
 	<Script file="AffDots.lua"/>
+	<Script file="alDamageMeter.lua"/>
 	<Script file="Altoholic.lua"/>
 	<Script file="Analyst.lua"/>
 	<Script file="AraBrokerGuildFriends.lua"/>
@@ -30,6 +31,7 @@
 	<Script file="BetterQuest.lua"/>
 	<Script file="BGDefender.lua"/>
 	<Script file="BigBrother.lua"/>
+	<Script file="BigWigs.lua"/>
 	<Script file="BPT.lua"/>
 	<Script file="BugSack.lua"/>
 	<Script file="BuyEmAll.lua"/>
@@ -43,7 +45,7 @@
 	<Script file="Cork.lua"/>
 	<Script file="Critline.lua"/>
 	<Script file="DailyTamerCheck.lua"/>
-	<Script file="DBM.lua"/>
+	<Script file="DBM.lua"/> 
 	<Script file="Details.lua"/> 
 	<Script file="DKDots.lua"/>
 	<Script file="Dominos.lua"/>
@@ -77,6 +79,7 @@
 	<Script file="LinkWrangler.lua"/>
 	<Script file="LootCouncilLite.lua"/>
 	<Script file="LootLog.lua"/>
+	<Script file="Ludwig.lua"/>
 	<Script file="MageNuggets.lua"/>
 	<Script file="MinimalArchaeology.lua"/>
 	<Script file="MasterLootManagerRemix.lua"/>
@@ -129,7 +132,6 @@
 	<Script file="Skillet.lua"/>
 	<Script file="SocialTabs.lua"/>
 	<Script file="Soundtrack.lua"/>
-	<Script file="SpellStealer.lua"/>
 	<Script file="SpineCounter.lua"/>
 	<Script file="Spy.lua"/>
 	<Script file="StormEarthAndFire.lua"/>

@@ -33,7 +33,6 @@ function AS:Blizzard_Calendar(event, addon)
 	CalendarInviteStatusContextMenu.SetBackdropColor = AS.Noop
 	CalendarInviteStatusContextMenu.SetBackdropBorderColor = AS.Noop
 
-	AS.ParchmentEnabled = true
 	if not AS.ParchmentEnabled then
 		for i = 1, 42 do
 			local Button = _G["CalendarDayButton"..i]
@@ -118,12 +117,9 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:StripTextures(CalendarTexturePickerTitleFrame)
 
 	AS:SkinScrollBar(CalendarTexturePickerScrollBar)
-	AS:StripTextures(CalendarTexturePickerAcceptButton)
 	AS:SkinButton(CalendarTexturePickerAcceptButton)
-	AS:StripTextures(CalendarTexturePickerCancelButton)
 	AS:SkinButton(CalendarTexturePickerCancelButton)
 	AS:SkinButton(CalendarCreateEventInviteButton)
-	AS:StripTextures(CalendarCreateEventRaidInviteButton)
 	AS:SkinButton(CalendarCreateEventRaidInviteButton)
 
 	AS:SkinFrame(CalendarMassInviteFrame)

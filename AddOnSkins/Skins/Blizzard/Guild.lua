@@ -269,10 +269,10 @@ function AS:Blizzard_Guild(event, addon)
 		GuildFrame.isSkinned = true
 		AddOnSkinned = AddOnSkinned + 1
 	end
-	--[[if (addon == 'Blizzard_GuildControlUI' or IsAddOnLoaded('Blizzard_GuildControlUI')) and not GuildControlUI.isSkinned then
+	if (addon == 'Blizzard_GuildControlUI' or IsAddOnLoaded('Blizzard_GuildControlUI')) and not GuildControlUI.isSkinned then
 		AS:StripTextures(GuildControlUI)
 		AS:StripTextures(GuildControlUIHbar)
-		AS:SetTemplate(GuildControlUI, 'Transparent')
+		AS:SetTemplate(GuildControlUI, 'Default')
 		--GuildControlUI:CreateShadow('Default')
 
 		local function SkinGuildRanks()
@@ -295,7 +295,7 @@ function AS:Blizzard_Guild(event, addon)
 		hooksecurefunc("GuildControlUI_RankOrder_Update", SkinGuildRanks)
 
 		GuildControlUIRankOrderFrameNewButton:HookScript("OnClick", function()
-			D.Delay(1, SkinGuildRanks)
+			T.Delay(1, SkinGuildRanks)
 		end)
 
 		AS:SkinDropDownBox(GuildControlUINavigationDropDown)
@@ -347,7 +347,7 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinScrollBar(GuildControlUIRankBankFrameInsetScrollFrameScrollBar)
 		GuildControlUI.isSkinned = true
 		AddOnSkinned = AddOnSkinned + 1
-	end]]
+	end
 	if (event == 'Blizzard_GuildBankUI' or IsAddOnLoaded('Blizzard_GuildBankUI')) and not GuildBankFrame.isSkinned then
 		AS:SkinFrame(GuildBankFrame)
 		AS:StripTextures(GuildBankEmblemFrame, true)

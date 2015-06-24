@@ -45,6 +45,11 @@ D["ConstructEnergy"] = function(name, width, height)
 	eb.text:SetFont(font, 16, fontflag)
 	eb.text:SetPoint("LEFT", eb, "RIGHT", 4, 1)
 	eb.text:SetTextColor(Color.r, Color.g, Color.b)
+	
+	eb.perctext = eb:CreateFontString(nil, "ARTWORK")
+	eb.perctext:SetFont(font, 16, fontflag)
+	eb.perctext:SetPoint("RIGHT", eb, "LEFT", -4, 1)
+	eb.perctext:SetTextColor(Color.r, Color.g, Color.b)
 
 	eb.TimeSinceLastUpdate = 0
 	eb:SetScript("OnUpdate", function(self, elapsed)
@@ -55,6 +60,7 @@ D["ConstructEnergy"] = function(name, width, height)
 			local power = UnitPower("player")
 			self:SetValue(power)
 			if self.text then self.text:SetText(D.ShortValue(power)) end
+			if self.perctext then self.perctext:SetFormattedText("%d%%", floor(power/UnitPowerMax("player") * 100)) end
 			self.TimeSinceLastUpdate = 0
 		end
 	end)

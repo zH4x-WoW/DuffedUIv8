@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="Achievement.lua"/>
 	<Script file="AddOnManager.lua"/>
-	<Script file="Archeology.lua" />
+	<Script file="Archeology.lua"/>
 	<Script file="Auction.lua"/>
 	<Script file="Bags.lua"/>
 	<Script file="BarberShop.lua"/>
@@ -10,7 +10,6 @@
 	<Script file="ChatBubbles.lua"/>
 	<Script file="Collections.lua"/>
 	<Script file="DeathRecap.lua"/>
-	<Script file="DBM.lua" />
 	<Script file="DebugTools.lua"/>
 	<Script file="DressUp.lua"/>
 	<Script file="EncounterJournal.lua"/>
@@ -27,6 +26,7 @@
 	<Script file="Mail.lua"/>
 	<Script file="Merchant.lua"/>
 	<Script file="Options.lua"/>
+	<Script file="Others.lua"/>
 	<Script file="Quest.lua"/>
 	<Script file="Raid.lua"/>
 	<Script file="StackSplit.lua"/>

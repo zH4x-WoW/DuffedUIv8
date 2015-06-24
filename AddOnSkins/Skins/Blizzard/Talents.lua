@@ -266,7 +266,6 @@ function AS:Blizzard_Talent(event, addon)
 		AS:StripTextures(GlyphFrameScrollFrame)
 		AS:StripTextures(GlyphFrameSideInset)
 		AS:StripTextures(GlyphFrameScrollFrameScrollChild)
-		GlyphFrameScrollFrame:EnableMouseWheel(false)
 
 		if not AS.ParchmentEnabled then
 			AS:StripTextures(GlyphFrame)
