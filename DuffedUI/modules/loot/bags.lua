@@ -224,7 +224,6 @@ function CreateContainer(storagetype, ...)
 		BagsContainer:SetTemplate("Transparent")
 
 		if C["bags"]["SortingButton"] then
-			Sort:Size(75, 23)
 			Sort:ClearAllPoints()
 			Sort:SetPoint("BOTTOMLEFT", Container, "BOTTOMLEFT", 10, 7)
 			Sort:SetFrameLevel(Container:GetFrameLevel() + 1)
@@ -232,9 +231,6 @@ function CreateContainer(storagetype, ...)
 			Sort:StripTextures()
 			Sort:SkinButton()
 			Sort:SetScript("OnClick", SortBags)
-			Sort:FontString("Text", C["media"].font, 11)
-			Sort.Text:SetPoint("CENTER")
-			Sort.Text:SetText(BAG_FILTER_CLEANUP)
 			Sort.ClearAllPoints = D.Dummy
 			Sort.SetPoint = D.Dummy
 		end
