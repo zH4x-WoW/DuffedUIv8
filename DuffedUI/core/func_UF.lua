@@ -577,6 +577,8 @@ if C["raid"].raidunitdebuffwatch == true then
 				{6940, "BOTTOMRIGHT", {0, 0}, {.89, .1, .1}, true}, -- Hand of Sacrifice
 				{114163, "BOTTOMLEFT", {0, 0}, {.89, .1, .1}, true}, -- Eternal Flame
 				{20925, "TOPLEFT", {0, 0}, {.81, .85, .1}, true}, -- Sacred Shield
+				{156910, "TOPRIGHT", {0, 0},{.7, .3, .7}}, -- Beacon of Faith
+				{157007, "TOPRIGHT", {0, 0},{.7, .3, .7}}, -- Beacon of Insight
 			},
 			SHAMAN = {
 				{61295, "TOPLEFT", {0, 0}, {.7, .3, .7}}, -- Riptide 

@@ -1,50 +1,78 @@
 local D, C, L = unpack(select(2, ...))
 
 local function LoadGarrisonSkin()
-	--[[Garrison Building Frame]]--
-	GarrisonBuildingFrame:StripTextures()
-	GarrisonBuildingFrame:SetTemplate("Transparent")
-	GarrisonBuildingFrame.CloseButton:StripTextures()
+	local function HandleFollowerPage(follower, hasItems)
+		local abilities = follower.followerTab.AbilitiesFrame.Abilities
+		if follower.numAbilitiesStyled == nil then
+			follower.numAbilitiesStyled = 1
+		end
+		local numAbilitiesStyled = follower.numAbilitiesStyled
+		local ability = abilities[numAbilitiesStyled]
+		while ability do
+			local icon = ability.IconButton.Icon
+			icon:StyleButton()
+			icon:SetDrawLayer("BORDER", 0)
+			numAbilitiesStyled = numAbilitiesStyled + 1
+			ability = abilities[numAbilitiesStyled]
+		end
+		follower.numAbilitiesStyled = numAbilitiesStyled
+
+		if hasItems then
+			local weapon = follower.followerTab.ItemWeapon
+			local armor = follower.followerTab.ItemArmor
+			weapon.Icon:StyleButton()
+			weapon.Icon:SetDrawLayer("BORDER", 0)
+			armor.Icon:StyleButton()
+			armor.Icon:SetDrawLayer("BORDER", 0)
+		end
+	end
+
+	local function HandleShipFollowerPage(followerTab)
+		local traits = followerTab.Traits
+		for i = 1, #traits do
+			local icon = traits[i].Portrait
+			local border = traits[i].Border
+			border:SetTexture(nil)
+			if followerTab.isLandingPage then
+				icon:SetTexCoord(unpack(D.IconCoord))
+			end
+		end
+
+		local equipment = followerTab.EquipmentFrame.Equipment
+		for i = 1, #equipment do
+			local icon = equipment[i].Icon
+			local border = equipment[i].Border
+			border:SetAtlas("ShipMission_ShipFollower-TypeFrame")
+			--The landing page icons display inner borders
+			if followerTab.isLandingPage then
+				icon:SetTexCoord(unpack(D.IconCoord))
+			end
+		end
+	end
+
+	--[[Building frame]]--
+	GarrisonBuildingFrame:StripTextures(true)
+	GarrisonBuildingFrame.TitleText:Show()
+	GarrisonBuildingFrame:CreateBackdrop("Transparent")
 	GarrisonBuildingFrame.CloseButton:SkinCloseButton()
-	GarrisonBuildingFrame.BuildingList:StripTextures()
-	GarrisonBuildingFrame.Confirmation:StripTextures()
-	GarrisonBuildingFrame.Confirmation:SetTemplate("Transparent")
-	GarrisonBuildingFrame.Confirmation.CancelButton:StripTextures()
-	GarrisonBuildingFrame.Confirmation.CancelButton:SkinButton()
-	GarrisonBuildingFrame.Confirmation.UpgradeButton:StripTextures()
-	GarrisonBuildingFrame.Confirmation.UpgradeButton:SkinButton()
-
-	GarrisonBuildingFrame.TownHallBox.UpgradeButton:StripTextures()
-	GarrisonBuildingFrame.TownHallBox.UpgradeButton:SkinButton()
-	GarrisonBuildingFrame.InfoBox.UpgradeButton:StripTextures()
-	GarrisonBuildingFrame.InfoBox.UpgradeButton:SkinButton()
-
-	GarrisonBuildingFrame.BuildingList.MaterialFrame:StripTextures()
-	GarrisonBuildingFrame.BuildingList.MaterialFrame:SetHeight(GarrisonBuildingFrame.BuildingList.MaterialFrame:GetHeight() - 20)
-	GarrisonBuildingFrame.BuildingList.MaterialFrame:SetWidth(GarrisonBuildingFrame.BuildingList:GetWidth())
-
-	GarrisonBuildingFrameFollowers:StripTextures()
-	GarrisonBuildingFrameFollowers:Width(GarrisonBuildingFrameFollowers:GetWidth() - 10)
-	GarrisonBuildingFrameFollowers:ClearAllPoints()
-	GarrisonBuildingFrameFollowers:Point("LEFT", GarrisonBuildingFrame, 23, -15)
-	GarrisonBuildingFrameFollowersListScrollFrame:StripTextures()
-	GarrisonBuildingFrameFollowersListScrollFrameScrollBar:SkinScrollBar()
 	GarrisonBuildingFrame.BuildingLevelTooltip:StripTextures()
-	GarrisonBuildingFrame.BuildingLevelTooltip:SetTemplate("Transparent")
+	GarrisonBuildingFrame.BuildingLevelTooltip:SetTemplate('Transparent')
 
 	--[[Capacitive display frame]]--
 	GarrisonCapacitiveDisplayFrame:StripTextures(true)
 	GarrisonCapacitiveDisplayFrame:CreateBackdrop("Transparent")
 	GarrisonCapacitiveDisplayFrame.Inset:StripTextures()
 	GarrisonCapacitiveDisplayFrame.CloseButton:SkinCloseButton()
+	GarrisonCapacitiveDisplayFrame.StartWorkOrderButton:SkinButton(true)
 	GarrisonCapacitiveDisplayFrame.CreateAllWorkOrdersButton:SkinButton(true)
+	GarrisonCapacitiveDisplayFrame.Count:StripTextures()
+	GarrisonCapacitiveDisplayFrame.Count:SkinEditBox()
 	GarrisonCapacitiveDisplayFrame.DecrementButton:SkinCloseButton()
 	GarrisonCapacitiveDisplayFrame.DecrementButton.t:SetText("-")
 	GarrisonCapacitiveDisplayFrame.Count:StripTextures()
 	GarrisonCapacitiveDisplayFrame.Count:SkinEditBox()
 	GarrisonCapacitiveDisplayFrame.IncrementButton:SkinCloseButton()
 	GarrisonCapacitiveDisplayFrame.IncrementButton.t:SetText("+")
-	GarrisonCapacitiveDisplayFrame.StartWorkOrderButton:SkinButton(true)
 	local CapacitiveDisplay = GarrisonCapacitiveDisplayFrame.CapacitiveDisplay
 	CapacitiveDisplay.IconBG:SetTexture()
 	CapacitiveDisplay.ShipmentIconFrame.Icon:SetTexCoord(unpack(D.IconCoord))
@@ -109,31 +137,19 @@ local function LoadGarrisonSkin()
 	local UnavailableFrame = GarrisonRecruiterFrame.UnavailableFrame
 	UnavailableFrame:GetChildren():SkinButton()
 
-	--[[ Garrison Mission Frame]]--
-	GarrisonMissionFrame:StripTextures()
-	GarrisonMissionFrame:SetTemplate("Transparent")
+	--[[Mission UI]]--
+	GarrisonMissionFrame:StripTextures(true)
+	GarrisonMissionFrame.TitleText:Show()
+	GarrisonMissionFrame:CreateBackdrop("Transparent")
 	GarrisonMissionFrame.CloseButton:SkinCloseButton()
-	GarrisonMissionFrameMissions.MaterialFrame:StripTextures()
-	GarrisonMissionFrameMissions.MaterialFrame:SetTemplate()
-	GarrisonMissionFrameMissions.MaterialFrame:ClearAllPoints()
-	GarrisonMissionFrameMissions.MaterialFrame:Point("TOPRIGHT", GarrisonMissionFrameMissionsListScrollFrame, "TOPRIGHT", -1, 27)
-	GarrisonMissionFrameMissions.MaterialFrame:SetHeight(GarrisonMissionFrameMissions.MaterialFrame:GetHeight() - 20)
-	GarrisonMissionFrameMissions.MaterialFrame:SetWidth(GarrisonMissionFrameFollowers:GetWidth())
-	GarrisonMissionFrameMissions:StripTextures()
-	GarrisonMissionFrame.MissionTab:StripTextures()
-
-	for i = 1, 2 do
+	for i = 1,2 do
 		_G["GarrisonMissionFrameMissionsTab" .. i]:StripTextures()
 		_G["GarrisonMissionFrameMissionsTab" .. i]:SkinButton()
 		_G["GarrisonMissionFrameMissionsTab" .. i]:Height(_G["GarrisonMissionFrameMissionsTab" .. i]:GetHeight() - 10)
 		_G["GarrisonMissionFrameTab" .. i]:StripTextures()
 		_G["GarrisonMissionFrameTab" .. i]:SkinTab()
 	end
-	GarrisonMissionFrameMissionsTab1:ClearAllPoints()
-	GarrisonMissionFrameMissionsTab1:Point("TOPLEFT", 20, GarrisonMissionFrameMissionsTab1:GetHeight() - 2)
-	GarrisonMissionFrameTab1:ClearAllPoints()
-	GarrisonMissionFrameTab1:Point("BOTTOMLEFT", 0, -40)
-
+	
 	--[[Handle MasterPlan AddOn]]--
 	local function skinMasterPlan()
 		GarrisonMissionFrameTab3:SkinTab()
@@ -153,7 +169,7 @@ local function LoadGarrisonSkin()
 			end
 		end)
 	end
-
+	
 	GarrisonMissionFrame.MissionTab.MissionPage:StripTextures()
 	GarrisonMissionFrame.MissionTab.MissionPage.Stage:StripTextures()
 	GarrisonMissionFrame.MissionTab.MissionPage.CloseButton:StripTextures()
@@ -203,6 +219,12 @@ local function LoadGarrisonSkin()
 		Follower:StripTextures()
 	end
 
+	GarrisonMissionFrameTab1:ClearAllPoints()
+	GarrisonMissionFrameTab1:SetPoint("BOTTOMLEFT", 11, -40)
+
+	--[[Follower list]]--
+	local FollowerList = GarrisonMissionFrame.FollowerList
+	FollowerList:DisableDrawLayer("BORDER")
 	GarrisonMissionFrame.FollowerTab:StripTextures()
 	GarrisonMissionFrame.FollowerTab:SetTemplate()
 	GarrisonMissionFrame.FollowerTab.XPBar:StripTextures()
@@ -219,41 +241,70 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrameFollowers.MaterialFrame:SetWidth(GarrisonMissionFrameFollowers:GetWidth())
 	GarrisonMissionFrameFollowersListScrollFrameScrollBar:StripTextures()
 	GarrisonMissionFrameFollowersListScrollFrameScrollBar:SkinScrollBar()
-	GarrisonMissionFrame.FollowerTab.ItemWeapon:StripTextures()
-	GarrisonMissionFrame.FollowerTab.ItemWeapon.Icon:SetTexCoord(unpack(D.IconCoord))
-	GarrisonMissionFrame.FollowerTab.ItemArmor:StripTextures()
-	GarrisonMissionFrame.FollowerTab.ItemArmor.Icon:SetTexCoord(unpack(D.IconCoord))
+	--GarrisonMissionFrame.FollowerTab.ItemWeapon:StripTextures()
+	--GarrisonMissionFrame.FollowerTab.ItemWeapon.Icon:SetTexCoord(unpack(D.IconCoord))
+	--GarrisonMissionFrame.FollowerTab.ItemArmor:StripTextures()
+	--GarrisonMissionFrame.FollowerTab.ItemArmor.Icon:SetTexCoord(unpack(D.IconCoord))
+	FollowerList.listScroll.scrollBar:SkinScrollBar()
+	hooksecurefunc(FollowerList, "ShowFollower", function(self)
+		HandleFollowerPage(self, true)
+	end)
 
-	--[[Garrison Mission Complete]]--
-	GarrisonMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:StripTextures()
-	GarrisonMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:SkinButton()
-	GarrisonMissionFrame.MissionComplete:StripTextures()
-	GarrisonMissionFrame.MissionComplete:SetTemplate("Transparent")
-	GarrisonMissionFrame.MissionComplete.NextMissionButton:StripTextures()
+	--[[Mission list]]--
+	local MissionTab = GarrisonMissionFrame.MissionTab
+	local MissionList = MissionTab.MissionList
+	local MissionPage = GarrisonMissionFrame.MissionTab.MissionPage
+	MissionList:DisableDrawLayer("BORDER")
+	MissionList.listScroll.scrollBar:SkinScrollBar()
+	MissionPage.CloseButton:SkinCloseButton()
+	MissionPage.CloseButton:SetFrameLevel(MissionPage:GetFrameLevel() + 2)
+	MissionList.CompleteDialog.BorderFrame.ViewButton:SkinButton()
+	MissionPage.StartMissionButton:SkinButton()
 	GarrisonMissionFrame.MissionComplete.NextMissionButton:SkinButton()
 
-	local Frame = GarrisonMissionFrame.MissionComplete.Stage.FollowersFrame
-	for i = 1, 3 do
-		local Follower = Frame["Follower" .. i]
+	hooksecurefunc("GarrisonMissionButton_SetRewards", function(self, rewards, numRewards)
+		if self.numRewardsStyled == nil then
+			self.numRewardsStyled = 0
+		end
+		while self.numRewardsStyled < numRewards do
+			self.numRewardsStyled = self.numRewardsStyled + 1
+			local reward = self.Rewards[self.numRewardsStyled]
+			local icon = reward.Icon
+			reward:GetRegions():Hide()
+			if not reward.border then
+				reward.border = CreateFrame("Frame", nil, reward)
+				reward.Icon:StyleButton()
+			end
+		end
+	end)
 
-		Follower:StripTextures()
-		Follower.XP:StripTextures()
-		Follower.XP:SetStatusBarTexture(C["media"].normTex)
-		Follower.XP:CreateBackdrop()
-	end
+	hooksecurefunc("GarrisonMissionPage_SetReward", function(frame, reward)
+		frame.BG:SetTexture()
+		if not frame.backdrop then
+			frame.Icon:StyleButton()
+		end
+		frame.Icon:SetDrawLayer("BORDER", 0)
+	end)
+
+	MissionPage.StartMissionButton.Flash:Hide()
+	MissionPage.StartMissionButton.Flash.Show = D.Dummy
+	MissionPage.StartMissionButton.FlashAnim:Stop()
+	MissionPage.StartMissionButton.FlashAnim.Play = D.Dummy
+
 
 	--[[Landing page]]--
-	GarrisonLandingPage:StripTextures()
+	GarrisonLandingPage:StripTextures(true)
 	GarrisonLandingPage:CreateBackdrop("Transparent")
 	GarrisonLandingPage.CloseButton:SkinCloseButton()
 	GarrisonLandingPageTab1:SkinTab()
 	GarrisonLandingPageTab2:SkinTab()
+	GarrisonLandingPageTab3:SkinTab()
 	GarrisonLandingPageTab1:ClearAllPoints()
 	GarrisonLandingPageTab1:SetPoint("TOPLEFT", GarrisonLandingPage, "BOTTOMLEFT", 70, 2)
 
-	--[[Landing Page Report]]--
+	--[[Landing page: Report]]--
 	local Report = GarrisonLandingPage.Report
-	Report.List:StripTextures()
+	Report.List:StripTextures(true)
 	local scrollFrame = Report.List.listScroll
 	scrollFrame.scrollBar:SkinScrollBar()
 	local buttons = scrollFrame.buttons
@@ -269,13 +320,16 @@ local function LoadGarrisonSkin()
 		end
 	end
 
-	--[[Landing Page Follower list]]--
+	--[[Landing page: Follower list]]--
 	local FollowerList = GarrisonLandingPage.FollowerList
-	select(2, FollowerList:GetRegions()):Hide()
 	FollowerList.FollowerHeaderBar:Hide()
 	FollowerList.SearchBox:SkinEditBox()
 	local scrollFrame = FollowerList.listScroll
 	scrollFrame.scrollBar:SkinScrollBar()
+
+	hooksecurefunc(FollowerList, "ShowFollower", function(self)
+		HandleFollowerPage(self)
+	end)
 
 	hooksecurefunc("GarrisonFollowerButton_AddAbility", function(self, index)
 		local ability = self.Abilities[index]
@@ -285,6 +339,78 @@ local function LoadGarrisonSkin()
 			ability.styled = true
 		end
 	end)
+
+	--[[Landing page: Fleet]]--
+	local ShipFollowerList = GarrisonLandingPage.ShipFollowerList
+	ShipFollowerList.FollowerHeaderBar:Hide()
+	ShipFollowerList.SearchBox:SkinEditBox()
+	local scrollFrame = ShipFollowerList.listScroll
+	scrollFrame.scrollBar:SkinScrollBar()
+	HandleShipFollowerPage(ShipFollowerList.followerTab)
+
+
+	--[[ShipYard]]--
+	GarrisonShipyardFrame:StripTextures(true)
+	GarrisonShipyardFrame.BorderFrame:StripTextures(true)
+	GarrisonShipyardFrame:CreateBackdrop("Transparent")
+	GarrisonShipyardFrame.backdrop:SetOutside(GarrisonShipyardFrame.BorderFrame)
+	GarrisonShipyardFrame.BorderFrame.CloseButton2:SkinCloseButton()
+	GarrisonShipyardFrameTab1:SkinTab()
+	GarrisonShipyardFrameTab2:SkinTab()
+
+	--[[ShipYard: Naval Map]]--
+	local MissionTab = GarrisonShipyardFrame.MissionTab
+	local MissionList = MissionTab.MissionList
+	MissionList:CreateBackdrop("Transparent")
+	MissionList.backdrop:SetOutside(MissionList.MapTexture)
+	MissionList.CompleteDialog.BorderFrame:StripTextures()
+	MissionList.CompleteDialog.BorderFrame:SetTemplate("Transparent")
+
+	--[[ShipYard: Mission]]--
+	local MissionPage = MissionTab.MissionPage
+	MissionPage.CloseButton:SkinCloseButton()
+	MissionPage.CloseButton:SetFrameLevel(MissionPage.CloseButton:GetFrameLevel() + 2)
+	MissionList.CompleteDialog.BorderFrame.ViewButton:SkinButton()
+	GarrisonShipyardFrame.MissionComplete.NextMissionButton:SkinButton()
+	MissionList.CompleteDialog:SetAllPoints(MissionList.MapTexture)
+	GarrisonShipyardFrame.MissionCompleteBackground:SetAllPoints(MissionList.MapTexture)
+	MissionPage.StartMissionButton:SkinButton()
+	MissionPage.StartMissionButton.Flash:Hide()
+	MissionPage.StartMissionButton.Flash.Show = D.Dummy
+	MissionPage.StartMissionButton.FlashAnim:Stop()
+	MissionPage.StartMissionButton.FlashAnim.Play = D.Dummy
+	GarrisonMissionFrameHelpBoxButton:SkinButton()
+
+	--[[ShipYard: Follower List]]--
+	local FollowerList = GarrisonShipyardFrame.FollowerList
+	local scrollFrame = FollowerList.listScroll
+	FollowerList:StripTextures()
+	scrollFrame.scrollBar:SkinScrollBar()
+	FollowerList.SearchBox:SkinEditBox()
+	FollowerList.MaterialFrame:StripTextures()
+	FollowerList.MaterialFrame.Icon:SetAtlas("ShipMission_CurrencyIcon-Oil", false) --Re-add the material icon
+	HandleShipFollowerPage(FollowerList.followerTab)
+
+	--[[ShipYard: Mission Tooltip]]--
+	local tooltip = GarrisonShipyardMapMissionTooltip
+	local reward = tooltip.ItemTooltip
+	local bonusReward = tooltip.BonusReward
+	local icon = reward.Icon
+	local bonusIcon = bonusReward.Icon
+	tooltip:SetTemplate("Transparent")
+	if icon then
+		icon:StyleButton()
+		reward.IconBorder:SetTexture(nil)
+	end
+	if bonusIcon then bonusIcon:StyleButton() end
+
+	--[[Threat Counter Tooltips]]--
+	--[[S:HookScript(GarrisonMissionMechanicFollowerCounterTooltip, "OnShow", function(self)
+		self:SetTemplate("Transparent")
+	end)
+	S:HookScript(GarrisonMissionMechanicTooltip, "OnShow", function(self)
+		self:SetTemplate("Transparent")
+	end)]]
 end
 
 local function LoadGarrisonTooltipSkin()
@@ -347,6 +473,26 @@ local function LoadGarrisonTooltipSkin()
 			trait = traits[numTraitsStyled]
 		end
 		tooltipFrame.numTraitsStyled = numTraitsStyled
+	end)
+
+	hooksecurefunc("GarrisonFollowerTooltipTemplate_SetShipyardFollower", function(tooltipFrame)
+		--[[Properties]]--
+		if tooltipFrame.numPropertiesStyled == nil then tooltipFrame.numPropertiesStyled = 1 end
+		local numPropertiesStyled = tooltipFrame.numPropertiesStyled
+		local properties = tooltipFrame.Properties
+		local property = properties[numPropertiesStyled]
+		while property do
+			local icon = property.Icon
+			icon:SetTexCoord(unpack(D.IconCoord))
+			if not property.border then
+				property.border = CreateFrame("Frame", nil, property)
+				property.Icon:StyleButton()
+			end
+
+			numPropertiesStyled = numPropertiesStyled + 1
+			property = properties[numPropertiesStyled]
+		end
+		tooltipFrame.numPropertiesStyled = numPropertiesStyled
 	end)
 end
 

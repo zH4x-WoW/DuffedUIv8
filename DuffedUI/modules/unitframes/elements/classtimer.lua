@@ -350,11 +350,11 @@ local CLASS_FILTERS = {
 	},
 	PALADIN = { 
 		target = {
-			CreateSpellEntry(31803), -- Censure --
-			CreateSpellEntry(20066), -- Repentance --
-			CreateSpellEntry(853), -- Hammer of Justice --
-			CreateSpellEntry(31935), -- Avenger's Shield --
-			CreateSpellEntry(20170), -- Seal of Justice --
+			CreateSpellEntry(31803), -- Censure
+			CreateSpellEntry(20066), -- Repentance
+			CreateSpellEntry(853), -- Hammer of Justice
+			CreateSpellEntry(31935), -- Avenger's Shield
+			CreateSpellEntry(20170), -- Seal of Justice
 		},
 		player = {
 			CreateSpellEntry(642), -- Divine Shield
@@ -378,6 +378,8 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(85499), -- Speed of Light
 			CreateSpellEntry(90174), -- Devine Purpose
 			CreateSpellEntry(114250), -- Selfless Healer
+			CreateSpellEntry(160002), -- Improved Holy Shock
+			CreateSpellEntry(157007), -- Beacon of Insight
 		},
 		procs = {
 			CreateSpellEntry(53672), CreateSpellEntry(54149), -- Infusion of Light (Rank1/Rank2)
