@@ -3,9 +3,7 @@ local D, C, L = unpack(select(2, ...))
 local function LoadGarrisonSkin()
 	local function HandleFollowerPage(follower, hasItems)
 		local abilities = follower.followerTab.AbilitiesFrame.Abilities
-		if follower.numAbilitiesStyled == nil then
-			follower.numAbilitiesStyled = 1
-		end
+		if follower.numAbilitiesStyled == nil then follower.numAbilitiesStyled = 1 end
 		local numAbilitiesStyled = follower.numAbilitiesStyled
 		local ability = abilities[numAbilitiesStyled]
 		while ability do
@@ -33,9 +31,7 @@ local function LoadGarrisonSkin()
 			local icon = traits[i].Portrait
 			local border = traits[i].Border
 			border:SetTexture(nil)
-			if followerTab.isLandingPage then
-				icon:SetTexCoord(unpack(D.IconCoord))
-			end
+			if followerTab.isLandingPage then icon:SetTexCoord(unpack(D.IconCoord)) end
 		end
 
 		local equipment = followerTab.EquipmentFrame.Equipment
@@ -43,10 +39,7 @@ local function LoadGarrisonSkin()
 			local icon = equipment[i].Icon
 			local border = equipment[i].Border
 			border:SetAtlas("ShipMission_ShipFollower-TypeFrame")
-			--The landing page icons display inner borders
-			if followerTab.isLandingPage then
-				icon:SetTexCoord(unpack(D.IconCoord))
-			end
+			if followerTab.isLandingPage then icon:SetTexCoord(unpack(D.IconCoord)) end
 		end
 	end
 
@@ -241,14 +234,8 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrameFollowers.MaterialFrame:SetWidth(GarrisonMissionFrameFollowers:GetWidth())
 	GarrisonMissionFrameFollowersListScrollFrameScrollBar:StripTextures()
 	GarrisonMissionFrameFollowersListScrollFrameScrollBar:SkinScrollBar()
-	--GarrisonMissionFrame.FollowerTab.ItemWeapon:StripTextures()
-	--GarrisonMissionFrame.FollowerTab.ItemWeapon.Icon:SetTexCoord(unpack(D.IconCoord))
-	--GarrisonMissionFrame.FollowerTab.ItemArmor:StripTextures()
-	--GarrisonMissionFrame.FollowerTab.ItemArmor.Icon:SetTexCoord(unpack(D.IconCoord))
 	FollowerList.listScroll.scrollBar:SkinScrollBar()
-	hooksecurefunc(FollowerList, "ShowFollower", function(self)
-		HandleFollowerPage(self, true)
-	end)
+	hooksecurefunc(FollowerList, "ShowFollower", function(self) HandleFollowerPage(self, true) end)
 
 	--[[Mission list]]--
 	local MissionTab = GarrisonMissionFrame.MissionTab
@@ -263,9 +250,7 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrame.MissionComplete.NextMissionButton:SkinButton()
 
 	hooksecurefunc("GarrisonMissionButton_SetRewards", function(self, rewards, numRewards)
-		if self.numRewardsStyled == nil then
-			self.numRewardsStyled = 0
-		end
+		if self.numRewardsStyled == nil then self.numRewardsStyled = 0 end
 		while self.numRewardsStyled < numRewards do
 			self.numRewardsStyled = self.numRewardsStyled + 1
 			local reward = self.Rewards[self.numRewardsStyled]
@@ -280,9 +265,7 @@ local function LoadGarrisonSkin()
 
 	hooksecurefunc("GarrisonMissionPage_SetReward", function(frame, reward)
 		frame.BG:SetTexture()
-		if not frame.backdrop then
-			frame.Icon:StyleButton()
-		end
+		if not frame.backdrop then frame.Icon:StyleButton() end
 		frame.Icon:SetDrawLayer("BORDER", 0)
 	end)
 
@@ -327,9 +310,7 @@ local function LoadGarrisonSkin()
 	local scrollFrame = FollowerList.listScroll
 	scrollFrame.scrollBar:SkinScrollBar()
 
-	hooksecurefunc(FollowerList, "ShowFollower", function(self)
-		HandleFollowerPage(self)
-	end)
+	hooksecurefunc(FollowerList, "ShowFollower", function(self) HandleFollowerPage(self) end)
 
 	hooksecurefunc("GarrisonFollowerButton_AddAbility", function(self, index)
 		local ability = self.Abilities[index]
@@ -403,14 +384,6 @@ local function LoadGarrisonSkin()
 		reward.IconBorder:SetTexture(nil)
 	end
 	if bonusIcon then bonusIcon:StyleButton() end
-
-	--[[Threat Counter Tooltips]]--
-	--[[S:HookScript(GarrisonMissionMechanicFollowerCounterTooltip, "OnShow", function(self)
-		self:SetTemplate("Transparent")
-	end)
-	S:HookScript(GarrisonMissionMechanicTooltip, "OnShow", function(self)
-		self:SetTemplate("Transparent")
-	end)]]
 end
 
 local function LoadGarrisonTooltipSkin()

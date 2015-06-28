@@ -75,6 +75,7 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:AddLine(" ")
 
 	GameTooltip:AddDoubleLine(Currency(824))
+	GameTooltip:AddDoubleLine(Currency(1101))
 	GameTooltip:Show()
 end)
 Stat:SetScript("OnLeave", function() GameTooltip:Hide() end)

@@ -170,6 +170,7 @@ Stat:SetScript("OnEnter", function(self)
 		Currency(361)
 		Currency(824)
 		Currency(980)
+		Currency(1101)
 	end
 
 	if ImprovedCurrency["Raid"] then
