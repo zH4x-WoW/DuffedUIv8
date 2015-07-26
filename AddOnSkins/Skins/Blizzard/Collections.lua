@@ -1,6 +1,58 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Collections(event, addon)
+	--[[if event == 'PLAYER_ENTERING_WORLD' then
+		AS:StripTextures(PetStableFrame)
+		AS:SkinFrame(PetStableFrame)
+		PetStableFrame:CreateShadow()
+		AS:StripTextures(PetStableFrameInset)
+		AS:StripTextures(PetStableLeftInset)
+		AS:StripTextures(PetStableBottomInset)
+		AS:SkinCloseButton(PetStableFrameCloseButton)
+		AS:SkinNextPrevButton(PetStablePrevPageButton)
+		AS:SkinNextPrevButton(PetStableNextPageButton)
+
+		AS:CreateBackdrop(PetStableModel)
+		AS:CreateBackdrop(PetStablePetInfo)
+		PetStablePetInfo.Backdrop:SetOutside(PetStableSelectedPetIcon)
+		AS:SkinTexture(PetStableSelectedPetIcon)
+		PetStableSelectedPetIcon:Size(36)
+
+		for i = 1, 5 do
+			local Button = _G["PetStableActivePet"..i]
+			local Icon = _G["PetStableActivePet"..i..'IconTexture']
+			AS:SkinTexture(Icon)
+			Icon:SetInside()
+			Button.Border:Hide()
+			Button.Background:Hide()
+			AS:SetTemplate(Button)
+			AS:StyleButton(Button)
+			Button.Checked:SetAlpha(0)
+			hooksecurefunc(Button.Checked, 'Show', function()
+				Button:SetBackdropBorderColor(0, 0.44, .87)
+			end)
+			hooksecurefunc(Button.Checked, 'Hide', function()
+				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end)
+		end
+
+		for i = 1, 10 do
+			local Button = _G["PetStableStabledPet"..i]
+			local Icon = _G["PetStableStabledPet"..i..'IconTexture']
+			AS:SkinTexture(Icon)
+			Icon:SetInside()
+			Button.Background:Hide()
+			AS:SetTemplate(Button)
+			AS:StyleButton(Button)
+			Button.Checked:SetAlpha(0)
+			hooksecurefunc(Button.Checked, 'Show', function()
+				Button:SetBackdropBorderColor(0, 0.44, .87)
+			end)
+			hooksecurefunc(Button.Checked, 'Hide', function()
+				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end)
+		end
+	end]]
 	if event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('Blizzard_Collections') or addon == 'Blizzard_Collections' then
 		if CollectionsJournal.IsSkinned then return end
 		AS:UnregisterSkinEvent('Blizzard_Collections', 'ADDON_LOADED')
@@ -100,7 +152,7 @@ function AS:Blizzard_Collections(event, addon)
 		AS:SkinButton(PetJournalFilterButton)
 		AS:StripTextures(PetJournalListScrollFrame)
 		AS:SkinScrollBar(PetJournalListScrollFrameScrollBar)
-		
+
 		for i = 1, #PetJournal.listScroll.buttons do
 			local Button = _G["PetJournalListScrollFrameButton"..i]
 			local LevelBG = _G["PetJournalListScrollFrameButton"..i.."LevelBG"]
@@ -120,7 +172,7 @@ function AS:Blizzard_Collections(event, addon)
 			AS:SetTemplate(Button.iconbg)
 			Button.iconbg:SetFrameLevel(Button.dragButton:GetFrameLevel() - 2)
 			Button.iconbg:SetOutside(Button.icon)
-	
+
 			Button.icon:SetPoint("LEFT", -41, 0)
 			Button.icon:SetDrawLayer('ARTWORK')
 			--LevelBG:SetTexture(nil)

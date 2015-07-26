@@ -15,7 +15,6 @@
 	<Script file="Archy.lua"/>
 	<Script file="Arh.lua"/>
 	<Script file="ArkInventory.lua"/>
-	<Script file="AskMrRobot.lua"/>
 	<Script file="AtlasLoot.lua"/>
 	<Script file="ATSW.lua"/>
 	<Script file="Auctionator.lua"/>
@@ -45,8 +44,8 @@
 	<Script file="Cork.lua"/>
 	<Script file="Critline.lua"/>
 	<Script file="DailyTamerCheck.lua"/>
-	<Script file="DBM.lua"/> 
-	<Script file="Details.lua"/> 
+	<Script file="DBM.lua"/>
+	<Script file="Details.lua"/>
 	<Script file="DKDots.lua"/>
 	<Script file="Dominos.lua"/>
 	<Script file="DoubleWideTradeSkills.lua"/>

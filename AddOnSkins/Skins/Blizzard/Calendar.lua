@@ -54,6 +54,7 @@ function AS:Blizzard_Calendar(event, addon)
 		CalendarTodayFrame:HookScript('OnUpdate', function(self) self:SetAlpha(CalendarTodayTextureGlow:GetAlpha()) end)
 		CalendarTodayFrame.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
 		CalendarTodayFrame.Backdrop:SetBackdropColor(0, 0, 0, 0)
+		--CalendarTodayFrame.Backdrop:CreateShadow()
 	end
 
 	AS:SkinFrame(CalendarCreateEventFrame)
@@ -82,7 +83,7 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:SkinDropDownBox(CalendarCreateEventHourDropDown, 68)
 	AS:SkinDropDownBox(CalendarCreateEventMinuteDropDown, 68)
 	AS:SkinDropDownBox(CalendarCreateEventAMPMDropDown, 68)
-	AS:SkinDropDownBox(CalendarCreateEventDifficultyOptionDropDown, 151)
+	AS:SkinDropDownBox(CalendarCreateEventDifficultyOptionDropDown, 120)
 	AS:SkinTexture(CalendarCreateEventIcon)
 	CalendarCreateEventIcon.SetTexCoord = AS.Noop
 
@@ -118,8 +119,8 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:SkinScrollBar(CalendarTexturePickerScrollBar)
 	AS:SkinButton(CalendarTexturePickerAcceptButton, true)
 	AS:SkinButton(CalendarTexturePickerCancelButton, true)
-	AS:SkinButton(CalendarCreateEventInviteButton, true)
-	AS:SkinButton(CalendarCreateEventRaidInviteButton, true)
+	AS:SkinButton(CalendarCreateEventInviteButton)
+	AS:SkinButton(CalendarCreateEventRaidInviteButton)
 
 	AS:SkinFrame(CalendarMassInviteFrame)
 	AS:StripTextures(CalendarMassInviteTitleFrame)

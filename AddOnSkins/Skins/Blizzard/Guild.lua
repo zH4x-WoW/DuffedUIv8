@@ -137,7 +137,7 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinButton(GuildRecruitmentDeclineButton, true)
 
 		local checkbuttons = {
-			"Quest", 
+			"Quest",
 			"Dungeon",
 			"Raid",
 			"PvP",
@@ -153,7 +153,7 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinCheckBox(GuildRecruitmentTankButton:GetChildren())
 		AS:SkinCheckBox(GuildRecruitmentHealerButton:GetChildren())
 		AS:SkinCheckBox(GuildRecruitmentDamagerButton:GetChildren())
-		
+
 		for i = 1, 5 do
 			AS:SkinTab(_G["GuildFrameTab"..i])
 		end
@@ -179,7 +179,7 @@ function AS:Blizzard_Guild(event, addon)
 						local achievementID, itemID, itemName, iconTexture, repLevel, moneyCost = GetGuildRewardInfo(Button.index);
 						self:SetBackdropBorderColor(unpack(AS.BorderColor))
 						if itemID then
-							local Quality = select(3, GetItemInfo(itemID)) 
+							local Quality = select(3, GetItemInfo(itemID))
 							if Quality and Quality > 1 and BAG_ITEM_QUALITY_COLORS[Quality] then
 								self:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 							end
@@ -290,7 +290,7 @@ function AS:Blizzard_Guild(event, addon)
 					rankFrame.nameBox.backdrop:Point("TOPLEFT", -2, -4)
 					rankFrame.nameBox.backdrop:Point("BOTTOMRIGHT", -4, 4)
 				end
-			end				
+			end
 		end
 		hooksecurefunc("GuildControlUI_RankOrder_Update", SkinGuildRanks)
 
@@ -310,14 +310,14 @@ function AS:Blizzard_Guild(event, addon)
 		end
 
 		AS:SkinButton(GuildControlUIRankOrderFrameNewButton)
-		
+
 		AS:SkinEditBox(GuildControlUIRankSettingsFrameGoldBox)
 		GuildControlUIRankSettingsFrameGoldBox.backdrop:Point("TOPLEFT", -2, -4)
 		GuildControlUIRankSettingsFrameGoldBox.backdrop:Point("BOTTOMRIGHT", 2, 4)
 		AS:StripTextures(GuildControlUIRankSettingsFrameGoldBox)
-		
+
 		AS:StripTextures(GuildControlUIRankBankFrame)
-		
+
 		local once = false
 		hooksecurefunc("GuildControlUI_BankTabPermissions_Update", function()
 			local numTabs = GetNumGuildBankTabs()
@@ -328,9 +328,9 @@ function AS:Blizzard_Guild(event, addon)
 				local tab = _G["GuildControlBankTab"..i.."Owned"]
 				local icon = tab.tabIcon
 				local editbox = tab.editBox
-				
+
 				AS:SkinTexture(icon)
-				
+
 				if once == false then
 					AS:SkinButton(_G["GuildControlBankTab"..i.."BuyPurchaseButton"])
 					AS:StripTextures(_G["GuildControlBankTab"..i.."OwnedStackBox"])
@@ -427,7 +427,7 @@ function AS:Blizzard_Guild(event, addon)
 			icon:Point("BOTTOMRIGHT", -2, 2)
 			AS:SkinTexture(icon)
 		end
-		
+
 		AS:SkinEditBox(GuildItemSearchBox)
 		AS:StripTextures(GuildBankMoneyFrameBackground)
 		AS:SkinScrollBar(GuildBankInfoScrollFrameScrollBar)

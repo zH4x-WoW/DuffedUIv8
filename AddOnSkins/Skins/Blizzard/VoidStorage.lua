@@ -18,7 +18,7 @@ function AS:Blizzard_VoidStorage(event, addon)
 	AS:SkinButton(VoidStoragePurchaseButton)
 	AS:SkinButton(VoidStorageHelpBoxButton)
 	AS:SkinButton(VoidStorageTransferButton)
-	
+
 	-- dress
 	AS:SkinFrame(SideDressUpFrame, nil, nil, true)
 	VoidStorageFrame:HookScript('OnShow', function(self)
