@@ -1,7 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 if not C["misc"].XPBar then return end
 
-local barHeight, barWidth = 10, C["misc"].XPBarWidth
+local barHeight, barWidth = 5, C["misc"].XPBarWidth
 local font = D.Font(C["font"].experience)
 local barTex, flatTex = C["media"].normTex
 local color = RAID_CLASS_COLORS[D.Class]
@@ -34,9 +34,6 @@ backdrop:SetAllPoints(xpMover)
 backdrop:SetBackdropColor(C["general"].backdropcolor)
 backdrop:SetBackdropBorderColor(C["general"].backdropcolor)
 backdrop:CreateBackdrop("Transparent")
---backdrop:SetClampedToScreen(true)
---backdrop:SetMovable(true)
---move:RegisterFrame(backdrop)
 
 local xpBar = CreateFrame("StatusBar",  "Experience_xpBar", backdrop, "TextStatusBar")
 xpBar:SetWidth(barWidth)
@@ -68,10 +65,6 @@ local mouseFrame = CreateFrame("Frame", "Experience_mouseFrame", backdrop)
 mouseFrame:SetAllPoints(backdrop)
 mouseFrame:EnableMouse(true)
 
-local Text = mouseFrame:CreateFontString("mouseFrame_Text", "OVERLAY")
-Text:SetFontObject(font)
-Text:SetPoint("CENTER", mouseFrame, "CENTER", 0, 0)
-
 backdrop:SetFrameLevel(0)
 restedxpBar:SetFrameLevel(1)
 repBar:SetFrameLevel(2)
@@ -93,7 +86,6 @@ local function updateStatus()
 		xpBar:SetValue(XP)
 
 		if restXP then
-			Text:SetText(format("%s/%s (%s%%|cffb3e1ff+%d%%|r)", D.ShortValue(XP), D.ShortValue(maxXP), percXP, restXP / maxXP * 100))
 			restedxpBar:Show()
 			local r, g, b = color.r, color.g, color.b
 			restedxpBar:SetStatusBarColor(r, g, b, .40)
@@ -103,7 +95,6 @@ local function updateStatus()
 		else
 			restedxpBar:Hide()
 			icon:Hide()
-			Text:SetText(format("%s/%s (%s%%)", D.ShortValue(XP), D.ShortValue(maxXP), percXP))
 		end
 
 		if GetWatchedFactionInfo() then
@@ -123,7 +114,6 @@ local function updateStatus()
 		repBar:SetMinMaxValues(minRep, maxRep)
 		repBar:SetValue(value)
 		repBar:SetStatusBarColor(unpack(FactionInfo[rank][1]))
-		Text:SetText(format("%d / %d (%d%%)", value - minRep, maxRep - minRep, (value - minRep) / (maxRep - minRep) * 100))
 	end
 
 	mouseFrame:SetScript("OnEnter", function()

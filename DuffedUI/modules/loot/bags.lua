@@ -230,6 +230,12 @@ function CreateContainer(storagetype, ...)
 			Sort:SetFrameStrata(Container:GetFrameStrata())
 			Sort:StripTextures()
 			Sort:SkinButton()
+			Sort:SetNormalTexture("Interface\\ICONS\\INV_Pet_Broom")
+			Sort:GetNormalTexture():SetTexCoord(unpack(D.IconCoord))
+			Sort:GetNormalTexture():SetInside()
+			Sort:SetPushedTexture("Interface\\ICONS\\INV_Pet_Broom")
+			Sort:GetPushedTexture():SetTexCoord(unpack(D.IconCoord))
+			Sort:GetPushedTexture():SetInside()
 			Sort:SetScript("OnClick", SortBags)
 			Sort.ClearAllPoints = D.Dummy
 			Sort.SetPoint = D.Dummy
@@ -292,7 +298,7 @@ function CreateContainer(storagetype, ...)
 			BagsContainer:SetWidth((ButtonSize * getn(BlizzardBags)) + (ButtonSpacing * (getn(BlizzardBags) + 1)))
 			BagsContainer:SetHeight(ButtonSize + (ButtonSpacing * 2))
 		end
-		
+
 		Container.BagsContainer = BagsContainer
 		Container.CloseButton = ToggleBagsContainer
 		Container.SortButton = Sort

@@ -349,21 +349,21 @@ end
 
 local function LoadPetStableSkin()
 	PetStableFrame:StripTextures()
-	PetStableFrame:SetTemplate()
+	PetStableFrame:SetTemplate("Transparent")
 	PetStableFrameInset:StripTextures()
 	PetStableLeftInset:StripTextures()
 	PetStableBottomInset:StripTextures()
 	PetStableFrameCloseButton:SkinCloseButton()
 	PetStablePrevPageButton:SkinNextPrevButton()
 	PetStableNextPageButton:SkinNextPrevButton()
-	
+
 	for i = 1, 5 do
 		local b = _G["PetStableActivePet" .. i]
 		b.Border:Hide()
 		b.Background:Hide()
 		b:SkinButton()
 	end
-	
+
 	for i = 1, 10 do
 		local b = _G["PetStableStabledPet" .. i]
 		b.Background:Hide()

@@ -171,7 +171,7 @@ D["ConstructUFPlayer"] = function(self)
 				classicon.tex:SetAllPoints(classicon)
 				self.ClassIcon = classicon.tex
 			else
-				portrait.PostUpdate = D.PortraitUpdate 
+				portrait.PostUpdate = D.PortraitUpdate
 				self.Portrait = portrait
 			end
 		elseif layout == 2 then
@@ -180,7 +180,7 @@ D["ConstructUFPlayer"] = function(self)
 			portrait:Point("BOTTOMRIGHT", panel, "BOTTOMLEFT", -5, 2)
 			portrait:CreateBackdrop()
 			if C["unitframes"]["playermodel"] == "Model" then
-				portrait.PostUpdate = D.PortraitUpdate 
+				portrait.PostUpdate = D.PortraitUpdate
 				self.Portrait = portrait
 			else
 				portrait.tex = portrait:CreateTexture("ClassIcon", "ARTWORK")
@@ -197,7 +197,7 @@ D["ConstructUFPlayer"] = function(self)
 				portrait.tex:SetAllPoints(portrait)
 				self.ClassIcon = portrait.tex
 			else
-				portrait.PostUpdate = D.PortraitUpdate 
+				portrait.PostUpdate = D.PortraitUpdate
 				self.Portrait = portrait
 			end
 		end
@@ -251,18 +251,18 @@ D["ConstructUFPlayer"] = function(self)
 	RaidIcon:Point("TOP", health, "TOP", 0, 11)
 
 	self:SetScript("OnEnter", function(self)
-		if self.EclipseBar and self.EclipseBar:IsShown() then 
+		if self.EclipseBar and self.EclipseBar:IsShown() then
 			self.EclipseBar.Text:Hide()
 		end
 		FlashInfo.ManaLevel:Hide()
-		UnitFrame_OnEnter(self) 
+		UnitFrame_OnEnter(self)
 	end)
-	self:SetScript("OnLeave", function(self) 
-		if self.EclipseBar and self.EclipseBar:IsShown() then 
+	self:SetScript("OnLeave", function(self)
+		if self.EclipseBar and self.EclipseBar:IsShown() then
 			self.EclipseBar.Text:Show()
 		end
 		FlashInfo.ManaLevel:Show()
-		UnitFrame_OnLeave(self) 
+		UnitFrame_OnLeave(self)
 	end)
 
 	if C["unitframes"]["playeraggro"] then
@@ -284,7 +284,7 @@ D["ConstructUFPlayer"] = function(self)
 
 	--[[Combat feedback & Healcom]]
 	if C["unitframes"]["combatfeedback"] then
-		local CombatFeedbackText 
+		local CombatFeedbackText
 		CombatFeedbackText = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
 		CombatFeedbackText:Point("CENTER", 0, 1)
 		CombatFeedbackText.colors = {
