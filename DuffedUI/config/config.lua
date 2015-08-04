@@ -96,7 +96,7 @@ C["nameplate"] = {
 
 C["actionbar"] = {
 	["enable"] = true,
-	["rightbarvertical"] = false, 
+	["rightbarvertical"] = false,
 	["rightbarsmouseover"] = false,
 	["petbarhorizontal"] = false,
 	["petbaralwaysvisible"] = true,
@@ -230,7 +230,7 @@ C["misc"] = {
 	["ilvlcharacter"] = true,
 	["loc"] = true,
 	["acm_screen"] = true,
-	["clickcast"] = true,
+	--["clickcast"] = true,
 	["AFKCamera"] = true,
 	["XPBar"] = true,
 	["XPBarWidth"] = 378,

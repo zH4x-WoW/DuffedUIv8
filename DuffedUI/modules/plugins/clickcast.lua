@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...))
+--[[local D, C, L = unpack(select(2, ...))
 if C["misc"].clickcast ~= true then return end
 
 --	Simple click2cast spell binder(sBinder by Fernir)
@@ -36,14 +36,14 @@ for i, v in pairs({
 	-- Boss and arena frames
 	"Boss1TargetFrame", "Boss2TargetFrame", "Boss3TargetFrame", "Boss4TargetFrame",
 	"ArenaEnemyFrame1", "ArenaEnemyFrame2", "ArenaEnemyFrame3", "ArenaEnemyFrame4", "ArenaEnemyFrame5",
-}) do
-	if _G[v] then ClickCastFrames[_G[v]] = true end
-end
+}) do]]
+	--if _G[v] then ClickCastFrames[_G[v]] = true end
+--end
 
-hooksecurefunc("CreateFrame", function(ftype, name, parent, template) if template and template:find("SecureUnitButtonTemplate") then ClickCastFrames[_G[name]] = true end end)
-hooksecurefunc("CompactUnitFrame_SetUpFrame", function(frame, ...) ClickCastFrames[frame] = true end)
+--hooksecurefunc("CreateFrame", function(ftype, name, parent, template) if template and template:find("SecureUnitButtonTemplate") then ClickCastFrames[_G[name]] = true end end)
+--hooksecurefunc("CompactUnitFrame_SetUpFrame", function(frame, ...) ClickCastFrames[frame] = true end)
 
-local ScrollSpells = CreateFrame("ScrollFrame", "SpellBinderScrollFrameSpellList", _G["SpellBinderInset"], "UIPanelScrollFrameTemplate")
+--[[local ScrollSpells = CreateFrame("ScrollFrame", "SpellBinderScrollFrameSpellList", _G["SpellBinderInset"], "UIPanelScrollFrameTemplate")
 ScrollSpells.child = CreateFrame("Frame", "SpellBinderScrollFrameSpellListChild", ScrollSpells)
 ScrollSpells:SetPoint("TOPLEFT", _G["SpellBinderInset"], "TOPLEFT", 0, -5)
 ScrollSpells:SetPoint("BOTTOMRIGHT", _G["SpellBinderInset"], "BOTTOMRIGHT", -30, 5)
@@ -361,4 +361,4 @@ SpellBinder.OpenButton:StyleButton()
 SpellBinderScrollFrameSpellList:StripTextures()
 SpellBinderScrollFrameSpellList:SetTemplate("Overlay")
 SpellBinderCloseButton:SkinCloseButton()
-SpellBinderScrollFrameSpellListScrollBar:SkinScrollBar()
+SpellBinderScrollFrameSpellListScrollBar:SkinScrollBar()]]
