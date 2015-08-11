@@ -29,15 +29,6 @@ if D.Client == "deDE" then
 		["xp-bar"] = "Bewege XP-Leiste",
 	}
 
-	L["afk"] = {
-		["text1"] = "Mouseover über die Minimap zeigt Koordinaten und die aktuelle Zone an.",
-		["text2"] = "Mausradklick in die Minimap zeigt das Mikromenü an.",
-		["text3"] = "Rechtsklick in die Minimap zeigt das Aufspürmenü.",
-		["text4"] = "Rechtsklick auf Quests, oder Erfolge, ermöglicht es einen direkten Link zu 'WoWHead' zu kopieren.",
-		["text5"] = "Du kannst /moveui eingeben um die UI-Elemente zu verschieben.",
-		["text6"] = "Du kannst /uihelp eingeben um ein Tutorial anzuzeigen."
-	}
-
 	L["symbol"] = {
 		["clear"] = "Kein Zeichen",
 		["skull"] = "Totenkopf",
@@ -92,34 +83,6 @@ if D.Client == "deDE" then
 		["step4line2"] = "Bitte klicke auf den Button 'Beenden' um das UI neu zu laden.",
 		["step4line3"] = "",
 		["step4line4"] = "Geniesse Dein DuffedUI! Und besuche uns doch mal auf |cffc41f3http://www.duffed.net|r!",
-	}
-
-	L["tutorial"] = {
-		["step1line1"] = "Diese kurze Anleitung zeigt Dir einige Features des DuffedUI.",
-		["step1line2"] = "Zuerst kommen die Grundlagen, die man wissen sollte, bevor Du mit der UI loslegst.",
-		["step1line3"] = "Die Installation ist teilweise charakterspezfisch. Während einige der Einstellungen Accountweit sind, muss die Installation bei jedem neuen Charakter erneut durchgeführt werden. Die Optionen sind einmal in config/config.lua (erfahrene Benutzer) oder mit /duffedui (normale Benutzer) zu finden.",
-		["step1line4"] = "Ein erfahrener Benutzer ist jemand der sich bereits damit auskennt Lua-Dateien zu bearbeiten und ein normaler Benutzer ist jemand der sich damit nicht auskennt. Es wird empfohlen die Konfigurationsmöglichkeit durch /duffedui zu benutzen um das Interface einzustellen.",
-
-		["step2line1"] = "DuffedUI behinhaltet eine eingebette Version von oUF (oUFDUffedUI) welches von Haste erstellt wurde. Das steuert alle Einheitenfenster, die man sehen kann, sowie Stärkungs- und Schwächungszauber, sowie alle klassenspezifischen Anzeigen.",
-		["step2line2"] = "Du kannst gern http://www.wowinterface besuchen um mehr über das Tool oUF zu erfahren.",
-		["step2line3"] = "Man kann die Postionen der Einheitenfenster einfach mit /moveui verändern.",
-
-		["step3line1"] = "DuffedUI ist ein neugestaltetes BlizzardUI. Nicht mehr und nichts weniger. Alle Funktionen, die man auch im StandardUI findet, hat man ebenfalls in DuffedUI. Zusätzlich bringt DuffedUI einige automatische Funktionen mit, die man in der StandardUI vermisst. (Z.B. die Taschensortierung, das Verkaufen von grauen Gegenständen, usw.).",
-		["step3line2"] = "DuffedUI wurde entworfen um das bestmöglichste Spielerlebnis zu erreichen, egal welche Spielweise, Klasse und Geschmack. DuffedUI ist für jeden individuell kinderleicht anpassbar. Das ist auch der Grund wieso DuffedUI eines der populärsten UIs in der Geschichte von World of Warcraft™ ist. Ausserdem wurde es so entworfen, dass man mit wenigen Mausklicks sofort loslegen kann, ohne sich noch irgendwelche sonstigen AddOns herunterzuladen zu müssen. Seit 2010 haben viele Spieler aufgrund von DuffedUI, ihr eigenes, auf DuffedUI basiertes Interface erstellt.",
-		["step3line3"] = "Für weitere Addons schaue bitte im Forum nach, oder besuche http://www.wowinterface.com.",
-
-		["step4line1"] = "Du kannst 80% der Datenfelder linksklicken, um verschiedene Fenster von Blizzard zu öffnen. Die Datenfelder `Freunde` und `Gilde` haben auch eine Funktion bei Rechtsklick. Um festzulegen, wieviele Aktionsleisten Du möchtest, öffne per ESC und klick auf 'DuffedUI' das Konfigurationsmenü. UNter dem Menüpunkt Aktionsleisten kannst Du die Anzahl der Leisten auswählen und vieles mehr. Um beliebigen Text aus dem Chat zu kopieren, klicke den kleinen Knopf mit dem Textsymbol, am jeweiligen Chatrand.",
-		["step4line2"] = "Die Minimap enthält wichtige Anzeigen. Z.B. das Briefsymbol, wenn du neue Post erhalten hast, oder die Uhrzeit färbt sich rot, wenn Du eine Kalendareinladung erhalten hast. Die LFG-Anzeige findest Du dort und vieles mehr. Ein Klick mit dem Mausrad auf die Miniaturkarte, öffnet das Mikromenü.",
-		["step4line3"] = "Hier findest Du einige Aufklappmenüs. Bei Rechtsklick auf das kleine '[X]', am oberen rechten Rand der Tasche, kannst Du Deine Taschen anzeigen lassen.",
-
-		["step5line1"] = "Zu guter Letzt, beinhaltet DuffedUI eine Reihe nützlicher Chat Eingabebefehle.",
-		["step5line2"] = "/moveui erlaubt einen Großteil aller UI Elemente zu verschieben. Der Befehl /rl lädt das komplette UI neu.",
-		["step5line3"] = "Benutze /tt im Chat um mit dem Ziel zu flüstern. /rc Startet einen Bereitschaftscheck. /rd Löst die Gruppe, oder den Schlachtzug auf. /ainv Aktiviert das Einladen per flüstern. /ainv off Schaltet das automatische Einladen ab.",
-		["step5line4"] = "/install , oder /tutorial startet die Installation erneut. ",
-
-		["step6line1"] = "Die Einführung ist abgeschlossen. Du kannst sie jeder Zeit wieder starten, indem Du im Chat /tutorial eingibst.",
-		["step6line2"] = "Ich schlage vor, Du wirfst mal einen Blick auf die Datei DuffedUI/config/config.lua, oder gibst /duffedui ein, um das Interface Deinen Bedürfnissen anzupassen.",
-		["step6line3"] = "Du kannst nun mit der Installation des Interface fortfahren, sofern sie noch nicht abgeschlossen war, oder Du das Interface auf seine Standardeinstellungen zurücksetzen möchtest.",
 	}
 
 	L["binds"] = {

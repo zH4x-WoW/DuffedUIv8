@@ -230,7 +230,6 @@ C["misc"] = {
 	["ilvlcharacter"] = true,
 	["loc"] = true,
 	["acm_screen"] = true,
-	--["clickcast"] = true,
 	["AFKCamera"] = true,
 	["XPBar"] = true,
 	["XPBarWidth"] = 378,

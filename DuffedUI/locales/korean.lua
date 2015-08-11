@@ -29,15 +29,6 @@ if D.Client == "koKR" then
 		["xp-bar"] = "이동 XP-Bar",
 	}
 
-	L["afk"] = {
-		["text1"] = "Mouseover minimap shows coords and locations.",
-		["text2"] = "Middle click the minimap for micromenu.",
-		["text3"] = "Right click the minimap for gatheringmenu.",
-		["text4"] = "By right-clicking on a quest or achievment at the objective tracker, you can retrieve the wowhead link.",
-		["text5"] = "You can type /moveui to move the frames from the Interface.",
-		["text6"] = "You can type /uihelp to show a tutorial."
-	}
-
 	L["symbol"] = {
 		["clear"] = "지우기",
 		["skull"] = "두개골",
@@ -92,34 +83,6 @@ if D.Client == "koKR" then
 		["step4line2"] = "Please click the 'Finish' button to reload the UI.",
 		["step4line3"] = "",
 		["step4line4"] = "Enjoy DuffedUI! Visit us at www.duffed.net!",
-	}
-
-	L["tutorial"] = {
-		["step1line1"] = "This quick tutorial will show you some of the features in DuffedUI.",
-		["step1line2"] = "First, the essentials that you should know before you can play with this UI.",
-		["step1line3"] = "This installer is partially character-specific. While some of the settings that will be applied later on are account-wide, you need to run the install script for each new character running DuffedUI. The script is auto shown on every new character you log in with DuffedUI installed for the first time.  Also, the options can be found in /DuffedUI/config/config.lua for `Power` users or by typing /duffedui in game for `Friendly` users.",
-		["step1line4"] = "A power user is a user of a personal computer who has the ability to use advanced features (ex: Lua editing) which are beyond the abilities of normal users.  A friendly user is a normal user and is not necessarily capable of programming.  It's recommended for them to use our in game configuration tool (/duffedui) for settings they want changed in DuffedUI.",
-
-		["step2line1"] = "DuffedUI includes an embedded version of oUF (oUFDuffedUI) created by Haste.  This handles all of the unitframes on the screen, the buffs and debuffs, and the class-specific elements.",
-		["step2line2"] = "You can visit wowinterface.com and search for oUF for more information about this tool.",
-		["step2line3"] = "To easily change the unitframes positions, just type /moveui.",
-
-		["step3line1"] = "DuffedUI is a redesigned Blizzard UI.  Nothing less, nothing more.  Approxmently all features you see with Default UI is available thought DuffedUI.  The only features not available thought default UI are some automated features not really visible on screen, for example auto selling grays when visiting a vendor or, auto sorting bags.",
-		["step3line2"] =  "Not everyone enjoys things like DPS meters, Boss mods, Threat meters, etc, we judge that it's the best thing to do. DuffedUI is made around the idea to work  for all classes, roles, specs, type of gameplay, taste of the users, etc. This why DuffedUI is one of the most popular UI at the moment. It fits everyones play style and is extremly editable. It's also designed to be a good start for everyone that want to make their own custom UI without depending on addons. Since 2010 a lot of users have started using DuffedUI as a base for their own UI. Take a look at the Edited Packages on our website!",
-		["step3line3"] = "Users may want to visit our extra mods section on our website or by visiting www.wowinterface.com to install additional features or mods.",
-
-		["step4line1"] = "To set how many bars you want, mouseover on left or right of bottom action bar background.  Do the same on the right, via top and bottom.  To copy text from the chat frame, click the button shown on mouseover in the right corner of chat frames.",
-		["step4line2"] = "You can left-click through 80% of datatext to show various panels from Blizzard.  Friend and Guild Datatext have right-click features aswell.",
-		["step4line3"] = "There are some dropdown menus available. Right-clicking on the [X] (Close) bag button will show a dropdown menu to show bags.  Middle-clicking thought Minimap will show the micro menu.",
-
-		["step5line1"] = "Lastly, DuffedUI includes useful slash commands.  Below is a list.",
-		["step5line2"] = "/moveui allow you to move lots of the frames anywhere on the screen. /rl reloads the UI.",
-		["step5line3"] = "/tt lets you whisper your target. /rc initiates a ready check. /rd disbands a party or raid. /ainv enable auto invite by whisper to you. /ainv off to turn it off",
-		["step5line4"] = "/install or /tutorial loads this installer. ",
-
-		["step6line1"] = "The tutorial is complete. You can choose to reconsult it at any time by typing /tutorial.",
-		["step6line2"] = "I suggest you have a look through config/config.lua or type /duffedui to customize the UI to your needs.",
-		["step6line3"] = "You can now continue install the UI if it's not done yet or if you want to reset to default!",
 	}
 
 	L["binds"] = {
@@ -196,7 +159,7 @@ if D.Client == "koKR" then
 		["recruitment"] = "GuildRecruitment",
 		["lfg"] = "LookingForGroup",
 	}
- 
+
 	L["dt"] = {
 		["talents"] ="No Talents",
 		["download"] = "Download: ",

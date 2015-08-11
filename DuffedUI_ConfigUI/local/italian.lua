@@ -230,7 +230,6 @@
 	DuffedUIConfigUILocalization.miscilvlcharacter = "Enable itemlevel on character screen"
 	DuffedUIConfigUILocalization.miscloc = "Disable Loss of Control for actionbars"
 	DuffedUIConfigUILocalization.miscacm_screen = "Enable automatic Achievment screenshots"
-	DuffedUIConfigUILocalization.miscclickcast = "Enable Click2Cast-plugin"
 	DuffedUIConfigUILocalization.miscAFKCamera = "Enable AFKCamera"
 	DuffedUIConfigUILocalization.miscXPBar = "Enable XP-Bar"
 	DuffedUIConfigUILocalization.miscXPBarWidth = "Set width of XP-Bar"

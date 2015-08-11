@@ -9,151 +9,39 @@ local PFaction = UnitFactionGroup("player")
 local color = RAID_CLASS_COLORS[D.Class]
 local Version = tonumber(GetAddOnMetadata("DuffedUI", "Version"))
 
-local PGuild
-if(IsInGuild()) then PGuild = select(1, GetGuildInfo("player")) else PGuild = " " end
-
-D.AFK_LIST = {
-	L["afk"]["text1"],
-	L["afk"]["text2"],
-	L["afk"]["text3"],
-	L["afk"]["text4"],
-	L["afk"]["text5"],
-	L["afk"]["text6"],
-}
-
-local DuffedUIAFKPanel = CreateFrame("Frame", "DuffedUIAFKPanel", nil)
-DuffedUIAFKPanel:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", -2, -2)
-DuffedUIAFKPanel:SetPoint("TOPRIGHT", UIParent, "BOTTOMRIGHT", 2, 150)
-DuffedUIAFKPanel:SetTemplate("Transparent")
-DuffedUIAFKPanel:Hide()
-
-local DuffedUIAFKPanelTop = CreateFrame("Frame", "DuffedUIAFKPanelTop", nil)
-DuffedUIAFKPanelTop:SetPoint("TOPLEFT", UIParent, "TOPLEFT",-2, 2)
-DuffedUIAFKPanelTop:SetPoint("BOTTOMRIGHT", UIParent, "TOPRIGHT", 2, -80)
-DuffedUIAFKPanelTop:SetTemplate("Transparent")
-DuffedUIAFKPanelTop:SetFrameStrata("FULLSCREEN")
-DuffedUIAFKPanelTop:Hide()
-
-local DuffedUIAFKPanelTopIcon = CreateFrame("Frame", "DuffedUIAFKPanelTopIcon", DuffedUIAFKPanelTop)
-DuffedUIAFKPanelTopIcon:Size(48)
-DuffedUIAFKPanelTopIcon:Point("CENTER", DuffedUIAFKPanelTop, "BOTTOM", 0, 0)
-DuffedUIAFKPanelTopIcon:SetTemplate("Default")
-
-DuffedUIAFKPanelTopIcon.Texture = DuffedUIAFKPanelTopIcon:CreateTexture(nil, "ARTWORK")
-DuffedUIAFKPanelTopIcon.Texture:Point("TOPLEFT", 2, -2)
-DuffedUIAFKPanelTopIcon.Texture:Point("BOTTOMRIGHT", -2, 2)
-DuffedUIAFKPanelTopIcon.Texture:SetTexture(C["media"].duffed)
-
-DuffedUIAFKPanelTop.DuffedUIText = DuffedUIAFKPanelTop:CreateFontString(nil, "OVERLAY")
-DuffedUIAFKPanelTop.DuffedUIText:SetPoint("CENTER", DuffedUIAFKPanelTop, "CENTER", 0, 0)
-DuffedUIAFKPanelTop.DuffedUIText:SetFont(C["media"].font, 40, "OUTLINE")
-DuffedUIAFKPanelTop.DuffedUIText:SetText("|cffc41f3bDuffedUI " .. Version)
-
-DuffedUIAFKPanelTop.DateText = DuffedUIAFKPanelTop:CreateFontString(nil, "OVERLAY")
-DuffedUIAFKPanelTop.DateText:SetPoint("BOTTOMLEFT", DuffedUIAFKPanelTop, "BOTTOMRIGHT", -100, 44)
-DuffedUIAFKPanelTop.DateText:SetFont(C["media"].font, 15, "OUTLINE")
-
-DuffedUIAFKPanelTop.ClockText = DuffedUIAFKPanelTop:CreateFontString(nil, "OVERLAY")
-DuffedUIAFKPanelTop.ClockText:SetPoint("BOTTOMLEFT", DuffedUIAFKPanelTop, "BOTTOMRIGHT", -100, 20)
-DuffedUIAFKPanelTop.ClockText:SetFont(C["media"].font, 20, "OUTLINE")
-
-DuffedUIAFKPanelTop.PlayerNameText = DuffedUIAFKPanelTop:CreateFontString(nil, "OVERLAY")
-DuffedUIAFKPanelTop.PlayerNameText:SetPoint("LEFT", DuffedUIAFKPanelTop, "LEFT", 25, 15)
-DuffedUIAFKPanelTop.PlayerNameText:SetFont(C["media"].font, 28, "OUTLINE")
-DuffedUIAFKPanelTop.PlayerNameText:SetText(PName)
-DuffedUIAFKPanelTop.PlayerNameText:SetTextColor(color.r, color.g, color.b)
-
-DuffedUIAFKPanelTop.GuildText = DuffedUIAFKPanelTop:CreateFontString(nil, "OVERLAY")
-DuffedUIAFKPanelTop.GuildText:SetPoint("LEFT", DuffedUIAFKPanelTop, "LEFT", 25, -3)
-DuffedUIAFKPanelTop.GuildText:SetFont(C["media"].font, 15, "OUTLINE")
-DuffedUIAFKPanelTop.GuildText:SetText("|cffc41f3b" .. PGuild .. "|r")
-
-DuffedUIAFKPanelTop.PlayerInfoText = DuffedUIAFKPanelTop:CreateFontString(nil, "OVERLAY")
-DuffedUIAFKPanelTop.PlayerInfoText:SetPoint("LEFT", DuffedUIAFKPanelTop, "LEFT", 25, -20)
-DuffedUIAFKPanelTop.PlayerInfoText:SetFont(C["media"].font, 15, "OUTLINE")
-DuffedUIAFKPanelTop.PlayerInfoText:SetText(LEVEL .. " " .. PLevel .. " " .. PFaction .. " " .. PClass)
-
-local interval = 0
-DuffedUIAFKPanelTop:SetScript("OnUpdate", function(self, elapsed)
-	interval = interval - elapsed
-	if interval <= 0 then
-		DuffedUIAFKPanelTop.ClockText:SetText(format("%s", date("%H|cffc41f3b:|r%M|cffc41f3b:|r%S")))
-		DuffedUIAFKPanelTop.DateText:SetText(format("%s", date("|cffc41f3b%a|r %b/%d")))
-		interval = 0.5
-	end
-end)
-
-local OnEvent = function(self, event, unit)
-	if InCombatLockdown() then return end
-
-	if event == "PLAYER_FLAGS_CHANGED" then
-		if unit == "player" then
-			if UnitIsAFK(unit) and not UnitIsDead(unit) then
-				SpinStart()
-				DuffedUIAFKPanel:Show()
-				DuffedUIAFKPanelTop:Show()
-				Minimap:Hide()
-			else
-				SpinStop()
-				DuffedUIAFKPanel:Hide()
-				DuffedUIAFKPanelTop:Hide()
-				Minimap:Show()
-			end
-		end
-	elseif event == "PLAYER_DEAD" then
-		if UnitIsAFK("player") then
-			SpinStop()
-			DuffedUIAFKPanel:Hide()
-			DuffedUIAFKPanelTop:Hide()
-			Minimap:Show()
-		end
-	elseif event == "PLAYER_REGEN_DISABLED" then
-		if UnitIsAFK("player") then
-			SpinStop()
-			DuffedUIAFKPanel:Hide()
-			DuffedUIAFKPanelTop:Hide()
-			Minimap:Show()
-		end
-	elseif event == "PLAYER_LEAVING_WORLD" then
-		SpinStop()
+--[[Guild]]--
+local function GuildText()
+	if IsInGuild() then
+		local guildName = GetGuildInfo("player")
+		DuffedUIAFKPanel.GuildText:SetText("|cffc41f3b" .. guildName .. "|r")
+	else
+		DuffedUIAFKPanel.GuildText:SetText(" ")
 	end
 end
 
-DuffedUIAFKPanel:RegisterEvent("PLAYER_ENTERING_WORLD")
-DuffedUIAFKPanel:RegisterEvent("PLAYER_LEAVING_WORLD")
-DuffedUIAFKPanel:RegisterEvent("PLAYER_FLAGS_CHANGED")
-DuffedUIAFKPanel:RegisterEvent("PLAYER_REGEN_DISABLED")
-DuffedUIAFKPanel:RegisterEvent("PLAYER_DEAD")
-DuffedUIAFKPanel:SetScript("OnEvent", OnEvent)
+--[[AFK-Timer]]--
+local function UpdateTimer()
+	local time = GetTime() - startTime
+	DuffedUIAFKPanel.AFKTimer:SetText(format("%02d|cffc41f3b:|r%02d", floor(time/60), time % 60))
+end
 
-local texts = D.AFK_LIST
-local interval = #texts
+--[[Playermodel]]--
+local function Model()
+	DuffedUIAFKPanel.modelHolder = CreateFrame("Frame", "AFKPlayerModelHolder", DuffedUIAFKPanel)
+	DuffedUIAFKPanel.modelHolder:SetSize(150, 150)
+	DuffedUIAFKPanel.modelHolder:SetPoint("BOTTOMRIGHT", DuffedUIAFKPanel, "TOPRIGHT", -150, 120)
 
-local DuffedUIAFKScrollFrame = CreateFrame("ScrollingMessageFrame", "DuffedUIAFKScrollFrame", DuffedUIAFKPanel)
-DuffedUIAFKScrollFrame:SetSize(DuffedUIAFKPanel:GetWidth(), DuffedUIAFKPanel:GetHeight())
-DuffedUIAFKScrollFrame:SetPoint("CENTER", DuffedUIAFKPanel, "CENTER", 0, 60)
-DuffedUIAFKScrollFrame:SetFont(C["media"].font, 20, "OUTLINE")
-DuffedUIAFKScrollFrame:SetShadowColor(0, 0, 0, 0)
-DuffedUIAFKScrollFrame:SetFading(false)
-DuffedUIAFKScrollFrame:SetFadeDuration(0)
-DuffedUIAFKScrollFrame:SetTimeVisible(1)
-DuffedUIAFKScrollFrame:SetMaxLines(1)
-DuffedUIAFKScrollFrame:SetSpacing(2)
-DuffedUIAFKScrollFrame:SetScript("OnUpdate", function(self, time)
-	interval = interval - (time / 30)
-	for index, name in pairs(D.AFK_LIST) do
-		if interval < index then
-			DuffedUIAFKScrollFrame:AddMessage(D.AFK_LIST[index], 1, 1, 1)
-			tremove(texts, index)
-		end
-	end
+	DuffedUIAFKPanel.model = CreateFrame("PlayerModel", "AFKPlayerModel", DuffedUIAFKPanel.modelHolder)
+	DuffedUIAFKPanel.model:SetPoint("CENTER", DuffedUIAFKPanel.modelHolder, "CENTER")
+	DuffedUIAFKPanel.model:SetSize(GetScreenWidth() * 2, GetScreenHeight() * 2)
+	DuffedUIAFKPanel.model:SetCamDistanceScale(6)
+	DuffedUIAFKPanel.model:SetFacing(6)
+	DuffedUIAFKPanel.model:SetUnit("player")
+	DuffedUIAFKPanel.model:SetAnimation(0)
+	DuffedUIAFKPanel.model:SetRotation(math.rad(-15))
+end
 
-	if interval < 0 then self:SetScript("OnUpdate", nil) end
-end)
-
-DuffedUIAFKPanel:SetScript("OnShow", function(self) UIFrameFadeIn(UIParent, .5, 1, 0) end)
-DuffedUIAFKPanel:SetScript("OnHide", function(self) UIFrameFadeOut(UIParent, .5, 0, 1) end)
-
+--[[Spin function]]--
 function SpinStart()
 	spinning = true
 	MoveViewRightStart(.1)
@@ -164,3 +52,111 @@ function SpinStop()
 	spinning = nil
 	MoveViewRightStop()
 end
+
+--[[Frames]]--
+local DuffedUIAFKPanel = CreateFrame("Frame", "DuffedUIAFKPanel", nil)
+DuffedUIAFKPanel:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 100)
+DuffedUIAFKPanel:SetSize((D.ScreenWidth - 550), 80)
+DuffedUIAFKPanel:SetTemplate("Transparent")
+DuffedUIAFKPanel:SetFrameStrata("FULLSCREEN")
+DuffedUIAFKPanel:Hide()
+
+local DuffedUIAFKPanelIcon = CreateFrame("Frame", "DuffedUIAFKPanelIcon", DuffedUIAFKPanel)
+DuffedUIAFKPanelIcon:Size(48)
+DuffedUIAFKPanelIcon:Point("CENTER", DuffedUIAFKPanel, "TOP", 0, 0)
+DuffedUIAFKPanelIcon:SetTemplate("Default")
+
+DuffedUIAFKPanelIcon.Texture = DuffedUIAFKPanelIcon:CreateTexture(nil, "ARTWORK")
+DuffedUIAFKPanelIcon.Texture:Point("TOPLEFT", 2, -2)
+DuffedUIAFKPanelIcon.Texture:Point("BOTTOMRIGHT", -2, 2)
+DuffedUIAFKPanelIcon.Texture:SetTexture(C["media"].duffed)
+
+DuffedUIAFKPanel.DuffedUIText = DuffedUIAFKPanel:CreateFontString(nil, "OVERLAY")
+DuffedUIAFKPanel.DuffedUIText:SetPoint("CENTER", DuffedUIAFKPanel, "CENTER", 0, -10)
+DuffedUIAFKPanel.DuffedUIText:SetFont(C["media"].font, 40, "OUTLINE")
+DuffedUIAFKPanel.DuffedUIText:SetText("|cffc41f3bDuffedUI " .. Version)
+
+DuffedUIAFKPanel.DateText = DuffedUIAFKPanel:CreateFontString(nil, "OVERLAY")
+DuffedUIAFKPanel.DateText:SetPoint("BOTTOMLEFT", DuffedUIAFKPanel, "BOTTOMRIGHT", -100, 54)
+DuffedUIAFKPanel.DateText:SetFont(C["media"].font, 15, "OUTLINE")
+
+DuffedUIAFKPanel.ClockText = DuffedUIAFKPanel:CreateFontString(nil, "OVERLAY")
+DuffedUIAFKPanel.ClockText:SetPoint("BOTTOMLEFT", DuffedUIAFKPanel, "BOTTOMRIGHT", -100, 30)
+DuffedUIAFKPanel.ClockText:SetFont(C["media"].font, 20, "OUTLINE")
+
+DuffedUIAFKPanel.AFKTimer = DuffedUIAFKPanel:CreateFontString(nil, "OVERLAY")
+DuffedUIAFKPanel.AFKTimer:SetPoint("BOTTOMLEFT", DuffedUIAFKPanel, "BOTTOMRIGHT", -100, 6)
+DuffedUIAFKPanel.AFKTimer:SetFont(C["media"].font, 20, "OUTLINE")
+
+DuffedUIAFKPanel.PlayerNameText = DuffedUIAFKPanel:CreateFontString(nil, "OVERLAY")
+DuffedUIAFKPanel.PlayerNameText:SetPoint("LEFT", DuffedUIAFKPanel, "LEFT", 25, 15)
+DuffedUIAFKPanel.PlayerNameText:SetFont(C["media"].font, 28, "OUTLINE")
+DuffedUIAFKPanel.PlayerNameText:SetText(PName)
+DuffedUIAFKPanel.PlayerNameText:SetTextColor(color.r, color.g, color.b)
+
+DuffedUIAFKPanel.GuildText = DuffedUIAFKPanel:CreateFontString(nil, "OVERLAY")
+DuffedUIAFKPanel.GuildText:SetPoint("LEFT", DuffedUIAFKPanel, "LEFT", 25, -3)
+DuffedUIAFKPanel.GuildText:SetFont(C["media"].font, 15, "OUTLINE")
+
+DuffedUIAFKPanel.PlayerInfoText = DuffedUIAFKPanel:CreateFontString(nil, "OVERLAY")
+DuffedUIAFKPanel.PlayerInfoText:SetPoint("LEFT", DuffedUIAFKPanel, "LEFT", 25, -20)
+DuffedUIAFKPanel.PlayerInfoText:SetFont(C["media"].font, 15, "OUTLINE")
+DuffedUIAFKPanel.PlayerInfoText:SetText(LEVEL .. " " .. PLevel .. " " .. PFaction .. " |cffc41f3b" .. PClass .. "|r")
+
+--[[Dynamic time & date]]--
+local interval = 0
+DuffedUIAFKPanel:SetScript("OnUpdate", function(self, elapsed)
+	interval = interval - elapsed
+	if interval <= 0 then
+		DuffedUIAFKPanel.ClockText:SetText(format("%s", date("%H|cffc41f3b:|r%M|cffc41f3b:|r%S")))
+		DuffedUIAFKPanel.DateText:SetText(format("%s", date("|cffc41f3b%a|r %b|cffc41f3b/|r%d")))
+		UpdateTimer()
+		interval = 0.5
+	end
+end)
+
+--[[Register events, script to start]]--
+DuffedUIAFKPanel:RegisterEvent("PLAYER_LOGIN")
+DuffedUIAFKPanel:RegisterEvent("PLAYER_ENTERING_WORLD")
+DuffedUIAFKPanel:RegisterEvent("PLAYER_LEAVING_WORLD")
+DuffedUIAFKPanel:RegisterEvent("PLAYER_FLAGS_CHANGED")
+DuffedUIAFKPanel:RegisterEvent("PLAYER_REGEN_DISABLED")
+DuffedUIAFKPanel:RegisterEvent("PLAYER_DEAD")
+DuffedUIAFKPanel:SetScript("OnEvent", function(self, event, unit)
+	if InCombatLockdown() then return end
+
+	if event == "PLAYER_FLAGS_CHANGED" then
+		startTime = GetTime()
+		if unit == "player" then
+			if UnitIsAFK(unit) and not UnitIsDead(unit) then
+				SpinStart()
+				DuffedUIAFKPanel:Show()
+				GuildText()
+				Model()
+				Minimap:Hide()
+			else
+				SpinStop()
+				DuffedUIAFKPanel:Hide()
+				Minimap:Show()
+			end
+		end
+	elseif event == "PLAYER_DEAD" then
+		if UnitIsAFK("player") then
+			SpinStop()
+			DuffedUIAFKPanel:Hide()
+			Minimap:Show()
+		end
+	elseif event == "PLAYER_REGEN_DISABLED" then
+		if UnitIsAFK("player") then
+			SpinStop()
+			DuffedUIAFKPanel:Hide()
+			Minimap:Show()
+		end
+	elseif event == "PLAYER_LEAVING_WORLD" then
+		SpinStop()
+	end
+end)
+
+--[[Fade in & out]]--
+DuffedUIAFKPanel:SetScript("OnShow", function(self) UIFrameFadeIn(UIParent, .5, 1, 0) end)
+DuffedUIAFKPanel:SetScript("OnHide", function(self) UIFrameFadeOut(UIParent, .5, 0, 1) end)

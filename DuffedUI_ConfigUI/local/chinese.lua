@@ -232,7 +232,6 @@
 	DuffedUIConfigUILocalization.miscilvlcharacter = "启用人物面板显示装备等级"
 	DuffedUIConfigUILocalization.miscloc = "禁用快捷栏<角色失去控制>功能"
 	DuffedUIConfigUILocalization.miscacm_screen = "启用成就自动截图功能"
-	DuffedUIConfigUILocalization.miscclickcast = "启用点击施法增强功能(Click2Cast-plugin)"
 	DuffedUIConfigUILocalization.miscAFKCamera = "启用暂离镜头效果"
 	DuffedUIConfigUILocalization.miscXPBar = "启用经验条"
 	DuffedUIConfigUILocalization.miscXPBarWidth = "设置经验条宽度"
