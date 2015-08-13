@@ -4,7 +4,7 @@ local D, C, L = unpack(select(2, ...))
 	castByAnyone - show if aura wasn't created by player
 	color - bar color (nil for default color)
 	unitType - 0 all, 1 friendly, 2 enemy
-	castSpellId - fill only if you want to see line on bar that indicates if its safe to start casting spell and not clip the last tick, also note that this can be different from aura id 
+	castSpellId - fill only if you want to see line on bar that indicates if its safe to start casting spell and not clip the last tick, also note that this can be different from aura id
 ]]--
 
 local CreateSpellEntry = function(id, castByAnyone, color, unitType, castSpellId)
@@ -94,6 +94,11 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(177172), -- Archmage's Incandescence (Agility)
 	CreateSpellEntry(177175), -- Archmage's Incandescence (Strength)
 	CreateSpellEntry(177176), -- Archmage's Incandescence (Agility)
+	CreateSpellEntry(187619), -- Thorasus, the Stone Heart of Draenor (Strength-DD)
+	CreateSpellEntry(187617), -- Sanctus, Sigil of the Unbroken (Tank)
+	CreateSpellEntry(187620), -- Maalus, the Blood Drinker (Agility-DD)
+	CreateSpellEntry(187616), -- Nithramus, the All-Seer (Intellect-DD)
+	CreateSpellEntry(187618), -- Etheralus, the Eternal Reward (Healer)
 
 	--[[Blackrock Foundry]]--
 	CreateSpellEntry(177063), -- Elementalist's Shielding Talisman (Elemental Shield)
@@ -121,7 +126,7 @@ local TRINKET_FILTER = {
 }
 
 local CLASS_FILTERS = {
-	DEATHKNIGHT = { 
+	DEATHKNIGHT = {
 		target = {
 			CreateSpellEntry(55095), -- Frost Fever
 			CreateSpellEntry(55078), -- Blood Plague
@@ -160,8 +165,8 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(164047), -- Shadow of Death
 		}
 	},
-	DRUID = { 
-		target = { 
+	DRUID = {
+		target = {
 			CreateSpellEntry(339), -- Entangling Roots
 			CreateSpellEntry(770, true), -- Farie Fire
 			CreateSpellEntry(774), -- Rejuvenation
@@ -235,8 +240,8 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(146874), -- Feral Rage (New)
 		},
 	},
-	HUNTER = { 
-		target = { 
+	HUNTER = {
+		target = {
 			CreateSpellEntry(1130, true), -- Hunters mark
 			CreateSpellEntry(3674), -- Black Arrow
 			CreateSpellEntry(5116), -- Concussive Shot
@@ -269,7 +274,7 @@ local CLASS_FILTERS = {
 		},
 	},
 	MAGE = {
-		target = { 
+		target = {
 			CreateSpellEntry(44457), -- Living Bomb
 			CreateSpellEntry(118), -- Polymorph
 			CreateSpellEntry(28271), -- Polymorph Turtle
@@ -309,7 +314,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(48107), -- Heating Up!
 		},
 	},
-	MONK = { 
+	MONK = {
 		target = {
 			CreateSpellEntry(130320), -- Risin Sun Kick
 			CreateSpellEntry(123727), -- Dizzying Haze
@@ -327,8 +332,8 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(125195), -- Tigereye Brew
 			CreateSpellEntry(125359), -- Tiger Power
 			CreateSpellEntry(115307), -- Shuffle
-			CreateSpellEntry(118636), -- Power Guard 
-			CreateSpellEntry(115295), -- Guard 
+			CreateSpellEntry(118636), -- Power Guard
+			CreateSpellEntry(115295), -- Guard
 			CreateSpellEntry(128939), -- Elusive Brew
 			CreateSpellEntry(118674), -- Vital Mists
 			CreateSpellEntry(127722), -- Serpent's Zeal
@@ -348,7 +353,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(104993), -- Jade Spirit
 		}
 	},
-	PALADIN = { 
+	PALADIN = {
 		target = {
 			CreateSpellEntry(31803), -- Censure
 			CreateSpellEntry(20066), -- Repentance
@@ -391,8 +396,8 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(128985), -- Relic of Yu'lon
 		},
 	},
-	PRIEST = { 
-		target = { 
+	PRIEST = {
+		target = {
 			CreateSpellEntry(17), -- Power Word: Shield
 			CreateSpellEntry(6788, true, nil, 1), -- Weakened Soul
 			CreateSpellEntry(139), -- Renew
@@ -422,8 +427,8 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(128985), -- Relic of Yu'lon
 		},
 	},
-	ROGUE = { 
-		target = { 
+	ROGUE = {
+		target = {
 			CreateSpellEntry(408), -- Kidney Shot
 			CreateSpellEntry(703), -- Garrote
 			CreateSpellEntry(1776), -- Gouge
@@ -431,7 +436,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(1943), -- Rupture
 			CreateSpellEntry(2094), -- Blind
 			CreateSpellEntry(2818), -- Deadly Poison
-			CreateSpellEntry(3409),  -- Crippling Poison 
+			CreateSpellEntry(3409),  -- Crippling Poison
 			CreateSpellEntry(5760), -- Mind-Numbing Poison
 			CreateSpellEntry(6770), -- Sap
 			CreateSpellEntry(16511), -- Hemorrhage
@@ -453,9 +458,9 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(51713), -- Shadow Dance
 			CreateSpellEntry(73651), -- Recuperate
 			CreateSpellEntry(74001), -- Combat Readiness
-			CreateSpellEntry(84745), -- Shallow Insight 
-			CreateSpellEntry(84746), -- Moderate Insight 
-			CreateSpellEntry(84747), -- Deep Insight 
+			CreateSpellEntry(84745), -- Shallow Insight
+			CreateSpellEntry(84746), -- Moderate Insight
+			CreateSpellEntry(84747), -- Deep Insight
 			CreateSpellEntry(115189), -- Anticipation
 			CreateSpellEntry(121471), -- Shadow Blades
 		},
@@ -540,7 +545,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(108559), -- Demonic Rebirth
 		},
 	},
-	WARRIOR = { 
+	WARRIOR = {
 		target = {
 			CreateSpellEntry(1160), -- Demoralizing Shout
 			CreateSpellEntry(64382), -- Shattering Throw
@@ -592,7 +597,7 @@ D["ClassTimer"] = function(self)
 		local CheckFilter = function(self, id, caster, filter)
 			if (filter == nil) then return false end
 			local byPlayer = caster == "player" or caster == "pet" or caster == "vehicle"
-			for _, v in ipairs(filter) do 
+			for _, v in ipairs(filter) do
 				if (v.id == id and (v.castByAnyone or byPlayer)) then return v end
 			end
 			return false
@@ -703,9 +708,9 @@ D["ClassTimer"] = function(self)
 			result.GetSortDirection = GetSortDirection
 			result.AddFilter = AddFilter
 			result.AddPlayerFilter = AddPlayerFilter
-			result.GetUnit = GetUnit 
-			result.SetIncludePlayer = SetIncludePlayer 
-			result.GetIncludePlayer = GetIncludePlayer 
+			result.GetUnit = GetUnit
+			result.SetIncludePlayer = SetIncludePlayer
+			result.GetIncludePlayer = GetIncludePlayer
 			result.unit = unit
 			result.includePlayer = false
 			result.filter = {}

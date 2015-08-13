@@ -8,7 +8,7 @@ local backdrop = {
 	bgFile = C["media"]["blank"],
 	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
 }
-local Colors = { 
+local Colors = {
 	[1] = {.70, .30, .30},
 	[2] = {.70, .40, .30},
 	[3] = {.60, .60, .30},
@@ -102,8 +102,9 @@ D["ClassRessource"]["ROGUE"] = function(self)
 		self.AnticipationBar = AnticipationBar
 
 		local Anticipation = GetSpellInfo(115189)
+		local skillknown = IsSpellKnown(114015)
 		local name = select(1, UnitAura("player", Anticipation))
-		if name then
+		if name and skillknown then
 			if C["unitframes"]["oocHide"] then D["oocHide"](AnticipationBar) end
 		end
 	end
