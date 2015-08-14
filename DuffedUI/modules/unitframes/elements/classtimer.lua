@@ -100,6 +100,9 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(187616), -- Nithramus, the All-Seer (Intellect-DD)
 	CreateSpellEntry(187618), -- Etheralus, the Eternal Reward (Healer)
 
+	--[[Hellfire Citadel]]--
+	CreateSpellEntry(184770), -- Tyrant's Immortality
+
 	--[[Blackrock Foundry]]--
 	CreateSpellEntry(177063), -- Elementalist's Shielding Talisman (Elemental Shield)
 	CreateSpellEntry(177056), -- Blast Furnace Door (Blast Furnace)
