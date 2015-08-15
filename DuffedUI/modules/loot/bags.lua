@@ -188,7 +188,6 @@ function CreateReagentContainer()
 		Icon:SetInside()
 		LastButton = Button
 
-		Count.Show = D["Dummy"]
 		Count:ClearAllPoints()
 		Count:SetPoint("BOTTOMRIGHT", -3, 3)
 		Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
@@ -484,7 +483,13 @@ function BagUpdate(id)
 	local Size = GetContainerNumSlots(id)
 	for Slot = 1, Size do
 		local Button = _G["ContainerFrame" .. (id + 1) .. "Item" .. Slot]
+		local Count = _G[Button:GetName().."Count"]
 		SlotUpdate(id, Button)
+
+		Count:ClearAllPoints()
+		Count:SetPoint("BOTTOMRIGHT", 0, 3)
+		Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+		Count:SetTextColor(Color.r, Color.g, Color.b)
 	end
 end
 
@@ -532,7 +537,6 @@ function UpdateAllBags()
 			SkinBagButton(Button)
 			LastButton = Button
 
-			Count.Show = D["Dummy"]
 			Count:ClearAllPoints()
 			Count:SetPoint("BOTTOMRIGHT", 0, 3)
 			Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
@@ -578,7 +582,6 @@ function UpdateAllBankBags()
 		SlotUpdate(-1, Button)
 		LastButton = Button
 
-		Count.Show = D["Dummy"]
 		Count:ClearAllPoints()
 		Count:SetPoint("BOTTOMRIGHT", 0, 3)
 		Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
@@ -612,7 +615,6 @@ function UpdateAllBankBags()
 			SlotUpdate(Bag - 1, Button)
 			LastButton = Button
 
-			Count.Show = D["Dummy"]
 			Count:ClearAllPoints()
 			Count:SetPoint("BOTTOMRIGHT", 0, 3)
 			Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
