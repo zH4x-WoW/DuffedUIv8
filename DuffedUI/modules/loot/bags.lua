@@ -13,6 +13,7 @@ local BagHelpBox = BagHelpBox
 local ButtonSize = C["bags"].buttonsize
 local ButtonSpacing = C["bags"].spacing
 local ItemsPerRow = C["bags"].bpr
+local Color = RAID_CLASS_COLORS[D["Class"]]
 
 local Boxes = {
 	BagItemSearchBox,
@@ -121,9 +122,10 @@ function CreateReagentContainer()
 	SwitchBankButton:Size(75, 23)
 	SwitchBankButton:SkinButton()
 	SwitchBankButton:Point("BOTTOMLEFT", Reagent, "BOTTOMLEFT", 10, 7)
-	SwitchBankButton:FontString("Text", C["media"].font, 11)
+	SwitchBankButton:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 	SwitchBankButton.Text:SetPoint("CENTER")
 	SwitchBankButton.Text:SetText(BANK)
+	SwitchBankButton.Text:SetTextColor(Color.r, Color.g, Color.b)
 	SwitchBankButton:SetScript("OnClick", function()
 		Reagent:Hide()
 		_G["DuffedUI_Bank"]:Show()
@@ -143,15 +145,17 @@ function CreateReagentContainer()
 		SortButton:Size(75, 23)
 		SortButton:SetPoint("BOTTOMRIGHT", Reagent, "BOTTOMRIGHT", -10, 7)
 		SortButton:SkinButton()
-		SortButton:FontString("Text", C["media"].font, 11)
+		SortButton:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 		SortButton.Text:SetPoint("CENTER")
 		SortButton.Text:SetText(BAG_FILTER_CLEANUP)
+		SortButton.Text:SetTextColor(Color.r, Color.g, Color.b)
 		SortButton:SetScript("OnClick", BankFrame_AutoSortButtonOnClick)
 	end
 
 	for i = 1, 98 do
 		local Button = _G["ReagentBankFrameItem" .. i]
 		local Icon = _G[Button:GetName() .. "IconTexture"]
+		local Count = _G[Button:GetName().."Count"]
 
 		ReagentBankFrame:SetParent(Reagent)
 		ReagentBankFrame:ClearAllPoints()
@@ -183,6 +187,12 @@ function CreateReagentContainer()
 		Icon:SetTexCoord(unpack(D.IconCoord))
 		Icon:SetInside()
 		LastButton = Button
+
+		Count.Show = D["Dummy"]
+		Count:ClearAllPoints()
+		Count:SetPoint("BOTTOMRIGHT", -3, 3)
+		Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+		Count:SetTextColor(Color.r, Color.g, Color.b)
 	end
 	Reagent:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)
 
@@ -224,18 +234,16 @@ function CreateContainer(storagetype, ...)
 		BagsContainer:SetTemplate("Transparent")
 
 		if C["bags"]["SortingButton"] then
+			Sort:Size(75, 23)
 			Sort:ClearAllPoints()
 			Sort:SetPoint("BOTTOMLEFT", Container, "BOTTOMLEFT", 10, 7)
 			Sort:SetFrameLevel(Container:GetFrameLevel() + 1)
 			Sort:SetFrameStrata(Container:GetFrameStrata())
-			Sort:StripTextures()
 			Sort:SkinButton()
-			Sort:SetNormalTexture("Interface\\ICONS\\INV_Pet_Broom")
-			Sort:GetNormalTexture():SetTexCoord(unpack(D.IconCoord))
-			Sort:GetNormalTexture():SetInside()
-			Sort:SetPushedTexture("Interface\\ICONS\\INV_Pet_Broom")
-			Sort:GetPushedTexture():SetTexCoord(unpack(D.IconCoord))
-			Sort:GetPushedTexture():SetInside()
+			Sort:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+			Sort.Text:SetPoint("CENTER")
+			Sort.Text:SetText(BAG_FILTER_CLEANUP)
+			Sort.Text:SetTextColor(Color.r, Color.g, Color.b)
 			Sort:SetScript("OnClick", SortBags)
 			Sort.ClearAllPoints = D.Dummy
 			Sort.SetPoint = D.Dummy
@@ -248,9 +256,9 @@ function CreateContainer(storagetype, ...)
 		ToggleBagsContainer:EnableMouse(true)
 		ToggleBagsContainer.Text = ToggleBagsContainer:CreateFontString("button")
 		ToggleBagsContainer.Text:SetPoint("CENTER", ToggleBagsContainer, "CENTER")
-		ToggleBagsContainer.Text:SetFont(C["media"].font, 11)
+		ToggleBagsContainer.Text:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 		ToggleBagsContainer.Text:SetText("X")
-		ToggleBagsContainer.Text:SetTextColor(.5, .5, .5)
+		ToggleBagsContainer.Text:SetTextColor(Color.r, Color.g, Color.b)
 		ToggleBagsContainer:SetScript("OnMouseUp", function(self, button)
 			local Purchase = BankFramePurchaseInfo
 			if (button == "RightButton") then
@@ -320,12 +328,13 @@ function CreateContainer(storagetype, ...)
 		BankItemAutoSortButton:Hide()
 
 		local SwitchReagentButton = CreateFrame("Button", nil, Container)
-		SwitchReagentButton:Size(75, 23)
+		SwitchReagentButton:Size(85, 23)
 		SwitchReagentButton:SkinButton()
 		SwitchReagentButton:Point("BOTTOMLEFT", Container, "BOTTOMLEFT", 10, 7)
-		SwitchReagentButton:FontString("Text", C["media"].font, 11)
+		SwitchReagentButton:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 		SwitchReagentButton.Text:SetPoint("CENTER")
 		SwitchReagentButton.Text:SetText(REAGENT_BANK)
+		SwitchReagentButton.Text:SetTextColor(Color.r, Color.g, Color.b)
 		SwitchReagentButton:SetScript("OnClick", function()
 			BankFrame_ShowPanel(BANK_PANELS[2].name)
 			if (not ReagentBankFrame.isMade) then
@@ -341,9 +350,10 @@ function CreateContainer(storagetype, ...)
 			SortButton:Size(75, 23)
 			SortButton:SetPoint("BOTTOMRIGHT", Container, "BOTTOMRIGHT", -10, 7)
 			SortButton:SkinButton()
-			SortButton:FontString("Text", C["media"].font, 11)
+			SortButton:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 			SortButton.Text:SetPoint("CENTER")
 			SortButton.Text:SetText(BAG_FILTER_CLEANUP)
+			SortButton.Text:SetTextColor(Color.r, Color.g, Color.b)
 			SortButton:SetScript("OnClick", SortBags)
 		end
 
@@ -485,6 +495,7 @@ function UpdateAllBags()
 		local Slots = GetContainerNumSlots(ID)
 		for Item = Slots, 1, -1 do
 			local Button = _G["ContainerFrame"  ..  Bag  ..  "Item"  ..  Item]
+			local Count = _G[Button:GetName().."Count"]
 			local Money = ContainerFrame1MoneyFrame
 
 			Button:ClearAllPoints()
@@ -520,6 +531,12 @@ function UpdateAllBags()
 			end
 			SkinBagButton(Button)
 			LastButton = Button
+
+			Count.Show = D["Dummy"]
+			Count:ClearAllPoints()
+			Count:SetPoint("BOTTOMRIGHT", 0, 3)
+			Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+			Count:SetTextColor(Color.r, Color.g, Color.b)
 		end
 		BagUpdate(ID)
 	end
@@ -530,6 +547,7 @@ function UpdateAllBankBags()
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
 	for Bank = 1, 28 do
 		local Button = _G["BankFrameItem" .. Bank]
+		local Count = _G[Button:GetName().."Count"]
 		local Money = ContainerFrame2MoneyFrame
 		local BankFrameMoneyFrame = BankFrameMoneyFrame
 
@@ -559,12 +577,20 @@ function UpdateAllBankBags()
 		SkinBagButton(Button)
 		SlotUpdate(-1, Button)
 		LastButton = Button
+
+		Count.Show = D["Dummy"]
+		Count:ClearAllPoints()
+		Count:SetPoint("BOTTOMRIGHT", 0, 3)
+		Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+		Count:SetTextColor(Color.r, Color.g, Color.b)
 	end
 
 	for Bag = 6, 12 do
 		local Slots = GetContainerNumSlots(Bag - 1)
 		for Item = Slots, 1, -1 do
 			local Button = _G["ContainerFrame"  ..  Bag  ..  "Item" .. Item]
+			local Count = _G[Button:GetName().."Count"]
+
 			Button:ClearAllPoints()
 			Button:SetWidth(ButtonSize, ButtonSize)
 			Button:SetFrameStrata("HIGH")
@@ -585,6 +611,12 @@ function UpdateAllBankBags()
 			SkinBagButton(Button)
 			SlotUpdate(Bag - 1, Button)
 			LastButton = Button
+
+			Count.Show = D["Dummy"]
+			Count:ClearAllPoints()
+			Count:SetPoint("BOTTOMRIGHT", 0, 3)
+			Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+			Count:SetTextColor(Color.r, Color.g, Color.b)
 		end
 	end
 	_G["DuffedUI_Bank"]:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)
