@@ -51,7 +51,6 @@
 	<Script file="modules\loot\bags.lua" />
 	<Script file="modules\loot\masterloot.lua" />
 	<Script file="modules\loot\rollframe.lua" />
-	<Script file="modules\loot\autoroll.lua" />
 	<Script file="modules\maps\zonemap.lua" />
 
 	<!-- unitframes -->

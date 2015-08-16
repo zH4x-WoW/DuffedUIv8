@@ -74,7 +74,6 @@ function AS:Embed_Show()
 		if _G[EmbedSystem_LeftWindow.FrameName] then _G[EmbedSystem_LeftWindow.FrameName]:Show() end
 		if _G[EmbedSystem_RightWindow.FrameName] then _G[EmbedSystem_RightWindow.FrameName]:Show() end
 	end
-	AS:SetOption('EmbedIsHidden', false)
 	AS:ToggleChatFrame(true)
 end
 
@@ -89,7 +88,6 @@ function AS:Embed_Hide()
 		if _G[EmbedSystem_LeftWindow.FrameName] then _G[EmbedSystem_LeftWindow.FrameName]:Hide() end
 		if _G[EmbedSystem_RightWindow.FrameName] then _G[EmbedSystem_RightWindow.FrameName]:Hide() end
 	end
-	AS:SetOption('EmbedIsHidden', true)
 	AS:ToggleChatFrame(false)
 end
 
@@ -332,7 +330,7 @@ if AS:CheckAddOn('Skada') then
 			end
 			barmod.ApplySettings(barmod, window)
 		end
-		
+
 		if NumberToEmbed == 1 then
 			local EmbedParent = EmbedSystem_MainWindow
 			if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Skada' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
@@ -430,7 +428,7 @@ if AS:CheckAddOn('Details') then
 				else
 					window:SetSize(width, height - 20)
 				end
-				
+
 			elseif (window.skin == "ElvUI Frame Style") then
 				if (window:GetId() == 2) then
 					window:SetSize(width-1, height - 20)
@@ -441,13 +439,13 @@ if AS:CheckAddOn('Details') then
 						window:SetSize(width, height - 20)
 					end
 				end
-			
+
 			elseif (window.skin == "ElvUI Style II") then
 				if (window:GetId() == 2) then
 					window:SetSize(width-3, height - 20)
 				else
 					if NumberToEmbed == 1 then
-						window:SetSize(width-6, height - 20)
+						window:SetSize(width-2, height - 20)
 					else
 						window:SetSize(width-2, height - 20)
 					end
@@ -455,7 +453,7 @@ if AS:CheckAddOn('Details') then
 			else
 				window:SetSize(width, height - 20)
 			end
-			
+
 			window.baseframe:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
 			window:SaveMainWindowPosition()
 			window:RestoreMainWindowPosition()
@@ -479,7 +477,7 @@ if AS:CheckAddOn('Details') then
 
 			--> reload everything - when calling ChangeSkin without parameter, it uses the same skin and reaply all configs from the window's config table.
 			window:ChangeSkin()
-			
+
 			if (window.skin ~= "Forced Square") then
 				if (AS:CheckOption("DetailsBackdrop")) then
 					window:SetBackgroundAlpha (1)
@@ -487,36 +485,36 @@ if AS:CheckAddOn('Details') then
 				else
 					window:SetBackgroundAlpha (0)
 					window:HideSideBars()
-					
+
 					local skin = Details.skins [window.skin]
-					
+
 					window.row_info.space.left = skin.instance_cprops.row_info.space.left
 					window.row_info.space.right = skin.instance_cprops.row_info.space.right
-					
+
 					window:InstanceWallpaper (false)
-					
+
 					window:SetBarGrowDirection()
 				end
-			
+
 			elseif (window.skin == "Forced Square") then
 				if (AS:CheckOption("DetailsBackdrop")) then
 					window:ShowSideBars()
 					window:InstanceColor (1, 1, 1, 1, nil, true)
-					
+
 					local skin = Details.skins [window.skin]
 					window:SetBackgroundAlpha (skin.instance_cprops.bg_alpha)
 				else
 					window:HideSideBars()
 					window:InstanceColor (1, 1, 1, 0, nil, true)
-					
+
 					local skin = Details.skins [window.skin]
-					
+
 					window.row_info.space.left = skin.instance_cprops.row_info.space.left
 					window.row_info.space.right = skin.instance_cprops.row_info.space.right
-					
+
 					window:InstanceWallpaper (false)
 					window:SetBackgroundAlpha (0)
-					
+
 					window:SetBarGrowDirection()
 				end
 			end
@@ -526,24 +524,24 @@ if AS:CheckAddOn('Details') then
 				window:SetDisplay (0)
 			end
 		end
-		
+
 		if NumberToEmbed == 1 then
 			local EmbedParent = EmbedSystem_MainWindow
-			if AS:CheckOption('EmbedSystemDual') then 
-				EmbedParent = AS:CheckOption('EmbedRight') == 'Details' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow 
+			if AS:CheckOption('EmbedSystemDual') then
+				EmbedParent = AS:CheckOption('EmbedRight') == 'Details' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow
 			end
 			EmbedWindow(AS.DetailsInstances[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
-			
+
 			if (AS.DetailsInstances[2]) then
 				AS.DetailsInstances[2]._ElvUIEmbed = nil
 			end
-			
+
 		elseif NumberToEmbed == 2 then
 			EmbedWindow(AS.DetailsInstances[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
 			EmbedWindow(AS.DetailsInstances[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPRIGHT', EmbedSystem_RightWindow, 'TOPRIGHT', -2, 0)
-			
+
 		end
-		
+
 		--> internal events
 		local listener = Details:CreateEventListener()
 		listener:RegisterEvent("DETAILS_INSTANCE_OPEN")
@@ -563,10 +561,10 @@ if AS:CheckAddOn('Details') then
 					if (NumberToEmbed == 2) then
 						AS.DetailsInstances[1]:UngroupInstance()
 						AS.DetailsInstances[2]:UngroupInstance()
-						
+
 						AS.DetailsInstances[1].baseframe:ClearAllPoints()
 						AS.DetailsInstances[2].baseframe:ClearAllPoints()
-						
+
 						AS.DetailsInstances[1]:RestoreMainWindowPosition()
 						AS.DetailsInstances[2]:RestoreMainWindowPosition()
 

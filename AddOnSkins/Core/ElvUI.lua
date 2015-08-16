@@ -10,7 +10,7 @@ function AS:CheckOption(optionName, ...)
 		if not addon then break end
 		if not IsAddOnLoaded(addon) then return false end
 	end
-	
+
 	return E.private.addonskins[optionName]
 end
 
@@ -49,7 +49,7 @@ function AS:InjectProfile()
 
 	V['addonskins'] = {
 	-- Embeds
-		['EmbedOoC'] = false, 
+		['EmbedOoC'] = false,
 		['EmbedOoCDelay'] = 10,
 		['EmbedCoolLine'] = false,
 		['EmbedSexyCooldown'] = false,
@@ -131,8 +131,10 @@ function AS:EmbedSystemHooks()
 		if btn == 'RightButton' then
 			if AS:CheckOption('EmbedRightChat') then
 				if EmbedSystem_MainWindow:IsShown() then
+					AS:SetOption('EmbedIsHidden', true)
 					EmbedSystem_MainWindow:Hide()
 				else
+					AS:SetOption('EmbedIsHidden', false)
 					EmbedSystem_MainWindow:Show()
 				end
 			end
@@ -165,8 +167,10 @@ function AS:EmbedSystemHooks()
 		if btn == 'RightButton' then
 			if not AS:CheckOption('EmbedRightChat') then
 				if EmbedSystem_MainWindow:IsShown() then
+					AS:SetOption('EmbedIsHidden', true)
 					EmbedSystem_MainWindow:Hide()
 				else
+					AS:SetOption('EmbedIsHidden', false)
 					EmbedSystem_MainWindow:Show()
 				end
 			end
@@ -220,7 +224,7 @@ function AS:EmbedSystem_WindowResize()
 	EmbedSystem_MainWindow:ClearAllPoints()
 	EmbedSystem_MainWindow:SetPoint('BOTTOMLEFT', ChatData, TopRight, 0, yOffset)
 	EmbedSystem_MainWindow:SetPoint('TOPRIGHT', ChatTab, AS:CheckOption('EmbedBelowTop') and 'BOTTOMRIGHT' or 'TOPRIGHT', 0, AS:CheckOption('EmbedBelowTop') and -1 or 0)
-	
+
 	EmbedSystem_LeftWindow:SetSize(AS:CheckOption('EmbedLeftWidth'), EmbedSystem_MainWindow:GetHeight())
 	EmbedSystem_RightWindow:SetSize((EmbedSystem_MainWindow:GetWidth() - AS:CheckOption('EmbedLeftWidth')) - 1, EmbedSystem_MainWindow:GetHeight())
 
