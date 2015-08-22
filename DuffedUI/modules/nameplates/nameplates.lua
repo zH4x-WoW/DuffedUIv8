@@ -3,6 +3,7 @@ if C["nameplate"].active ~= true then return end
 
 local Plates = CreateFrame("Frame", "Plates", UIParent)
 
+--[[variables]]--
 local Font = C["media"].font
 local _G = _G
 local UnitGUID = UnitGUID
@@ -40,7 +41,6 @@ local FACTION_BAR_COLORS = FACTION_BAR_COLORS
 local playerFaction = select(1, UnitFactionGroup("player")) == "Horde" and 1 or 0
 local playerGUID = UnitGUID("player")
 local mult = 768/match(GetCVar("gxResolution"), "%d+x(%d+)")
-local noscalemult = D.mult * C["general"].uiscale
 
 local ScheduleFrame = CreateFrame("Frame", "ScheduleFrame", UIParent)
 local ScheduleFrameActive = false
@@ -119,45 +119,6 @@ local ScheduleHide = function(frame, elapsed)
 			ScheduleFrameActive = true
 		end
 	end
-end
-
-local function CreateVirtualFrame(parent, point)
-	if point == nil then point = parent end
-	if point.backdrop then return end
-
-	parent.backdrop = parent:CreateTexture(nil, "BORDER")
-	parent.backdrop:SetDrawLayer("BORDER", -8)
-	parent.backdrop:SetPoint("TOPLEFT", point, "TOPLEFT", -noscalemult * 3, noscalemult * 3)
-	parent.backdrop:SetPoint("BOTTOMRIGHT", point, "BOTTOMRIGHT", noscalemult * 3, -noscalemult * 3)
-	parent.backdrop:SetTexture(unpack(C["media"]["backdropcolor"]))
-
-	parent.bordertop = parent:CreateTexture(nil, "BORDER")
-	parent.bordertop:SetPoint("TOPLEFT", point, "TOPLEFT", -noscalemult * 2, noscalemult * 2)
-	parent.bordertop:SetPoint("TOPRIGHT", point, "TOPRIGHT", noscalemult * 2, noscalemult * 2)
-	parent.bordertop:SetHeight(noscalemult)
-	parent.bordertop:SetTexture(unpack(C["media"].bordercolor))
-	parent.bordertop:SetDrawLayer("BORDER", -7)
-
-	parent.borderbottom = parent:CreateTexture(nil, "BORDER")
-	parent.borderbottom:SetPoint("BOTTOMLEFT", point, "BOTTOMLEFT", -noscalemult * 2, -noscalemult * 2)
-	parent.borderbottom:SetPoint("BOTTOMRIGHT", point, "BOTTOMRIGHT", noscalemult * 2, -noscalemult * 2)
-	parent.borderbottom:SetHeight(noscalemult)
-	parent.borderbottom:SetTexture(unpack(C["media"].bordercolor))
-	parent.borderbottom:SetDrawLayer("BORDER", -7)
-
-	parent.borderleft = parent:CreateTexture(nil, "BORDER")
-	parent.borderleft:SetPoint("TOPLEFT", point, "TOPLEFT", -noscalemult * 2, noscalemult * 2)
-	parent.borderleft:SetPoint("BOTTOMLEFT", point, "BOTTOMLEFT", noscalemult * 2, -noscalemult * 2)
-	parent.borderleft:SetWidth(noscalemult)
-	parent.borderleft:SetTexture(unpack(C["media"].bordercolor))
-	parent.borderleft:SetDrawLayer("BORDER", -7)
-
-	parent.borderright = parent:CreateTexture(nil, "BORDER")
-	parent.borderright:SetPoint("TOPRIGHT", point, "TOPRIGHT", noscalemult * 2, noscalemult * 2)
-	parent.borderright:SetPoint("BOTTOMRIGHT", point, "BOTTOMRIGHT", -noscalemult * 2, -noscalemult * 2)
-	parent.borderright:SetWidth(noscalemult)
-	parent.borderright:SetTexture(unpack(C["media"].bordercolor))
-	parent.borderright:SetDrawLayer("BORDER", -7)
 end
 
 local GetTargetNameplate = function()
@@ -246,6 +207,7 @@ local UpdateIcon = function(self, texture, expiration, stacks)
 	end
 end
 
+--[[Update nameplate debuffs]]--
 function Plates:UpdateAuraWidget(self, guid)
 	local widget = self.AuraWidget
 	if not widget then return end
@@ -287,6 +249,7 @@ function Plates:UpdateAuraWidget(self, guid)
 	DebuffCache = wipe(DebuffCache)
 end
 
+--[[Create nameplate debuffs]]--
 local CreateAuraIcon = function(parent)
 	local button = CreateFrame("Frame", nil, parent)
 	button:Hide()
@@ -297,8 +260,6 @@ local CreateAuraIcon = function(parent)
 	button.bg = button:CreateTexture(nil, "BACKGROUND")
 	button.bg:SetTexture(unpack(C["media"].backdropcolor))
 	button.bg:SetAllPoints(button)
-
-	button:SetTemplate()
 
 	button.icon = button:CreateTexture(nil, "BORDER")
 	button.icon:SetTexCoord(unpack(D.IconCoord))
@@ -321,6 +282,7 @@ local CreateAuraIcon = function(parent)
 	return button
 end
 
+--[[Create nameplate debuffs with stacks]]--
 local VirtualSetAura = function(guid, spellid, expiration, stacks, caster, duration, texture)
 	local filter = false
 	if (caster == playerGUID) then filter = true end
@@ -659,7 +621,6 @@ local StylePlate = function(self)
 		self.health:GetStatusBarTexture():SetHorizTile(true)
 		self.health:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
 		self.health:SetPoint("BOTTOM", self, "BOTTOM", 0, 5)
-		CreateVirtualFrame(self.health)
 
 		self.health.bg = self.health:CreateTexture(nil, "BORDER")
 		self.health.bg:SetTexture(.1, .1, .1)
@@ -688,20 +649,20 @@ local StylePlate = function(self)
 
 	if self.rare == nil then
 		self.rare = self.health:CreateFontString(nil, "OVERLAY")
-		self.rare:SetFont(C["media"].font, 10, "THINOUTLINE")
+		self.rare:SetFont(Font, 9, "THINOUTLINE")
 	end
 
 	if self.health.name == nil then
 		self.health.name = self.health:CreateFontString("$parentHealth", "OVERLAY")
-		self.health.name:SetFont(Font, 10, "THINOUTLINE")
-		self.health.name:SetPoint("BOTTOMLEFT", self.health, "TOPLEFT", 0, 5)
+		self.health.name:SetFont(Font, 8, "THINOUTLINE")
+		self.health.name:SetPoint("BOTTOMLEFT", self.health, "TOPLEFT", 0, 0)
 		self.health.name:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
 	end
 
 	if C["nameplate"].Percent then
 		if self.health.perc == nil then
 			self.health.perc = self.health:CreateFontString("$parentHealthPercent", "OVERLAY")
-			self.health.perc:SetFont(Font, 10, "THINOUTLINE")
+			self.health.perc:SetFont(Font, 9, "THINOUTLINE")
 			self.health.perc:SetPoint("LEFT", self.health, "RIGHT", 4, 0)
 		end
 	end
@@ -715,7 +676,6 @@ local StylePlate = function(self)
 		self.castbar:SetPoint("TOP", self.health, "BOTTOM", 0, -5)
 		self.castbar:SetStatusBarTexture(C["media"].normTex)
 		self.castbar:GetStatusBarTexture():SetHorizTile(true)
-		CreateVirtualFrame(self.castbar)
 		self.castbar:Hide()
 	end
 
@@ -723,14 +683,13 @@ local StylePlate = function(self)
 		self.castbar.icon = self.castbar:CreateTexture("$parentIcon", "OVERLAY")
 		self.castbar.icon:SetPoint("TOPRIGHT", self.health, "TOPLEFT", -5, 0)
 		self.castbar.icon:SetTexCoord(unpack(D.IconCoord))
-		CreateVirtualFrame(self.castbar, self.castbar.icon)
 		self.castbar.shield = old_cbshield
 		self.castbar.shield:Hide()
 	end
 
 	if self.castbar.name == nil then
 		self.castbar.name = self.castbar:CreateFontString(nil, "OVERLAY")
-		self.castbar.name:SetFont(Font, 11, "THINOUTLINE")
+		self.castbar.name:SetFont(Font, 9, "THINOUTLINE")
 		self.castbar.name:SetPoint("TOP", self.castbar, "BOTTOM", -3, 0)
 	end
 
@@ -951,7 +910,6 @@ Plates:SetScript("OnEvent", function(self, event, ...)
 	elseif event == "PLAYER_ENTERING_WORLD" then
 		SetCVar("bloatthreat", 0)
 		SetCVar("bloattest", 0)
-		--SetCVar("showVKeyCastbar", 1)
 		SetCVar("ShowClassColorInNameplate", 1)
 		SetCVar("nameplateShowEnemies", 1)
 		SetCVar("nameplateShowFriends", 0)
