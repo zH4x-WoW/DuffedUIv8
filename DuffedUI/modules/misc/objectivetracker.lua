@@ -60,33 +60,6 @@ otfmove:SetScript("OnEnter", function(s) OTFM_Tooltip(s) end)
 otfmove:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
 otf.HeaderMenu.MinimizeButton:SkinCloseButton()
 
---[[Quest item buttons moving and skinning]]--
---[[local function moveQuestObjectiveItems(self)
-	local a = {self:GetPoint()}
-	self:ClearAllPoints()
-	self:SetPoint("TOPRIGHT", a[2], "TOPRIGHT", 20, -7)
-	self:SetFrameLevel(0)
-
-	local Icon = self.icon
-	self:SetNormalTexture("")
-	self:CreateBackdrop()
-	self.backdrop:SetOutside(self, 0, 0)
-	self:StyleButton()
-	Icon:SetTexCoord(unpack(D.IconCoord))
-	Icon:SetInside()
-end
-
-local qitime = 0
-local qiinterval = 1
-hooksecurefunc("QuestObjectiveItem_OnUpdate", function(self, elapsed)
-	qitime = qitime + elapsed
-
-	if qitime > qiinterval then
-		moveQuestObjectiveItems(self)
-		qitime = 0
-	end
-end)]]
-
 --[[Questtitle]]--
 hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
 	for i = 1, GetNumQuestWatches() do

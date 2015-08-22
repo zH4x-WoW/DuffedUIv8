@@ -13,7 +13,6 @@ local BagHelpBox = BagHelpBox
 local ButtonSize = C["bags"].buttonsize
 local ButtonSpacing = C["bags"].spacing
 local ItemsPerRow = C["bags"].bpr
-local Color = RAID_CLASS_COLORS[D["Class"]]
 
 local Boxes = {
 	BagItemSearchBox,
@@ -125,7 +124,7 @@ function CreateReagentContainer()
 	SwitchBankButton:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 	SwitchBankButton.Text:SetPoint("CENTER")
 	SwitchBankButton.Text:SetText(BANK)
-	SwitchBankButton.Text:SetTextColor(Color.r, Color.g, Color.b)
+	SwitchBankButton.Text:SetTextColor(1, 1, 1)
 	SwitchBankButton:SetScript("OnClick", function()
 		Reagent:Hide()
 		_G["DuffedUI_Bank"]:Show()
@@ -148,7 +147,7 @@ function CreateReagentContainer()
 		SortButton:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 		SortButton.Text:SetPoint("CENTER")
 		SortButton.Text:SetText(BAG_FILTER_CLEANUP)
-		SortButton.Text:SetTextColor(Color.r, Color.g, Color.b)
+		SortButton.Text:SetTextColor(1, 1, 1)
 		SortButton:SetScript("OnClick", BankFrame_AutoSortButtonOnClick)
 	end
 
@@ -191,7 +190,7 @@ function CreateReagentContainer()
 		Count:ClearAllPoints()
 		Count:SetPoint("BOTTOMRIGHT", -3, 3)
 		Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
-		Count:SetTextColor(Color.r, Color.g, Color.b)
+		Count:SetTextColor(1, 1, 1)
 	end
 	Reagent:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)
 
@@ -242,7 +241,7 @@ function CreateContainer(storagetype, ...)
 			Sort:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 			Sort.Text:SetPoint("CENTER")
 			Sort.Text:SetText(BAG_FILTER_CLEANUP)
-			Sort.Text:SetTextColor(Color.r, Color.g, Color.b)
+			Sort.Text:SetTextColor(1, 1, 1)
 			Sort:SetScript("OnClick", SortBags)
 			Sort.ClearAllPoints = D.Dummy
 			Sort.SetPoint = D.Dummy
@@ -257,7 +256,7 @@ function CreateContainer(storagetype, ...)
 		ToggleBagsContainer.Text:SetPoint("CENTER", ToggleBagsContainer, "CENTER")
 		ToggleBagsContainer.Text:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 		ToggleBagsContainer.Text:SetText("X")
-		ToggleBagsContainer.Text:SetTextColor(Color.r, Color.g, Color.b)
+		ToggleBagsContainer.Text:SetTextColor(1, 1, 1)
 		ToggleBagsContainer:SetScript("OnMouseUp", function(self, button)
 			local Purchase = BankFramePurchaseInfo
 			if (button == "RightButton") then
@@ -275,7 +274,7 @@ function CreateContainer(storagetype, ...)
 					ReplaceBags = 0
 					BagsContainer:Hide()
 					BanksContainer:Hide()
-					ToggleBagsContainer.Text:SetTextColor(.4, .4, .4)
+					ToggleBagsContainer.Text:SetTextColor(1, 1, 1)
 				end
 			else
 				if BankFrame:IsShown() then CloseBankFrame() else ToggleAllBags() end
@@ -333,7 +332,7 @@ function CreateContainer(storagetype, ...)
 		SwitchReagentButton:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 		SwitchReagentButton.Text:SetPoint("CENTER")
 		SwitchReagentButton.Text:SetText(REAGENT_BANK)
-		SwitchReagentButton.Text:SetTextColor(Color.r, Color.g, Color.b)
+		SwitchReagentButton.Text:SetTextColor(1, 1, 1)
 		SwitchReagentButton:SetScript("OnClick", function()
 			BankFrame_ShowPanel(BANK_PANELS[2].name)
 			if (not ReagentBankFrame.isMade) then
@@ -352,7 +351,7 @@ function CreateContainer(storagetype, ...)
 			SortButton:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 			SortButton.Text:SetPoint("CENTER")
 			SortButton.Text:SetText(BAG_FILTER_CLEANUP)
-			SortButton.Text:SetTextColor(Color.r, Color.g, Color.b)
+			SortButton.Text:SetTextColor(1, 1, 1)
 			SortButton:SetScript("OnClick", SortBags)
 		end
 
@@ -489,7 +488,7 @@ function BagUpdate(id)
 		Count:ClearAllPoints()
 		Count:SetPoint("BOTTOMRIGHT", 0, 3)
 		Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
-		Count:SetTextColor(Color.r, Color.g, Color.b)
+		Count:SetTextColor(1, 1, 1)
 	end
 end
 
@@ -540,7 +539,7 @@ function UpdateAllBags()
 			Count:ClearAllPoints()
 			Count:SetPoint("BOTTOMRIGHT", 0, 3)
 			Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
-			Count:SetTextColor(Color.r, Color.g, Color.b)
+			Count:SetTextColor(1, 1, 1)
 		end
 		BagUpdate(ID)
 	end
@@ -585,7 +584,7 @@ function UpdateAllBankBags()
 		Count:ClearAllPoints()
 		Count:SetPoint("BOTTOMRIGHT", 0, 3)
 		Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
-		Count:SetTextColor(Color.r, Color.g, Color.b)
+		Count:SetTextColor(1, 1, 1)
 	end
 
 	for Bag = 6, 12 do
@@ -618,7 +617,7 @@ function UpdateAllBankBags()
 			Count:ClearAllPoints()
 			Count:SetPoint("BOTTOMRIGHT", 0, 3)
 			Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
-			Count:SetTextColor(Color.r, Color.g, Color.b)
+			Count:SetTextColor(1, 1, 1)
 		end
 	end
 	_G["DuffedUI_Bank"]:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)

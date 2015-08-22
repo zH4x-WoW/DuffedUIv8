@@ -53,7 +53,7 @@ end
 --[[Shorten comma values]]--
 D.CommaValue = function(amount)
 	local formatted = amount
-	while true do  
+	while true do
 		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
 		if (k == 0) then break end
 	end
@@ -80,7 +80,7 @@ D.DataTextPosition = function(p, obj)
 	if p == 1 then
 		obj:SetParent(left)
 		obj:SetHeight(left:GetHeight())
-		obj:SetPoint("LEFT", left, 30, 0)
+		obj:SetPoint("LEFT", left, 30, -2)
 		obj:SetPoint('TOP', left)
 		obj:SetPoint('BOTTOM', left)
 	elseif p == 2 then
@@ -91,13 +91,13 @@ D.DataTextPosition = function(p, obj)
 	elseif p == 3 then
 		obj:SetParent(left)
 		obj:SetHeight(left:GetHeight())
-		obj:SetPoint("RIGHT", left, -30, 0)
+		obj:SetPoint("RIGHT", left, -30, -2)
 		obj:SetPoint('TOP', left)
 		obj:SetPoint('BOTTOM', left)
 	elseif p == 4 then
 		obj:SetParent(right)
 		obj:SetHeight(right:GetHeight())
-		obj:SetPoint("LEFT", right, 30, 0)
+		obj:SetPoint("LEFT", right, 30, -2)
 		obj:SetPoint('TOP', right)
 		obj:SetPoint('BOTTOM', right)
 	elseif p == 5 then
@@ -108,7 +108,7 @@ D.DataTextPosition = function(p, obj)
 	elseif p == 6 then
 		obj:SetParent(right)
 		obj:SetHeight(right:GetHeight())
-		obj:SetPoint("RIGHT", right, -30, 0)
+		obj:SetPoint("RIGHT", right, -30, -2)
 		obj:SetPoint('TOP', right)
 		obj:SetPoint('BOTTOM', right)
 	end
@@ -117,13 +117,13 @@ D.DataTextPosition = function(p, obj)
 		if p == 7 then
 			obj:SetParent(mapleft)
 			obj:SetHeight(mapleft:GetHeight())
-			obj:SetPoint('TOP', mapleft)
-			obj:SetPoint('BOTTOM', mapleft)
+			obj:SetPoint('TOP', mapleft, 0, -1)
+			obj:SetPoint('BOTTOM', mapleft, 0, -1)
 		elseif p == 8 then
 			obj:SetParent(mapright)
 			obj:SetHeight(mapright:GetHeight())
-			obj:SetPoint('TOP', mapright)
-			obj:SetPoint('BOTTOM', mapright)
+			obj:SetPoint('TOP', mapright, 0, -1)
+			obj:SetPoint('BOTTOM', mapright, 0, -1)
 		end
 	end
 end
