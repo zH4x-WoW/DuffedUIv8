@@ -171,7 +171,6 @@ DuffedUIConfigUILocalization.datatextShowInCombat = "Show DataText-Tooltip in co
 DuffedUIConfigUILocalization.cooldown = "Cooldowns"
 DuffedUIConfigUILocalization.cooldownenable = "Enable cooldown number on buttons"
 DuffedUIConfigUILocalization.cooldowntreshold = "Turn cooldown number red at X value"
-DuffedUIConfigUILocalization.cooldownicdenable = "Enable ItemCooldown"
 DuffedUIConfigUILocalization.cooldownrcdenable = "Enable RaidCooldowns"
 DuffedUIConfigUILocalization.cooldownrcdraid = "Enable cooldown announcement for raid"
 DuffedUIConfigUILocalization.cooldownrcdparty = "Enable cooldown announcement for party"

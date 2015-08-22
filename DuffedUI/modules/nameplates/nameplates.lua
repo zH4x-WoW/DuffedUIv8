@@ -682,7 +682,7 @@ local StylePlate = function(self)
 	if self.castbar.icon == nil then
 		self.castbar.icon = self.castbar:CreateTexture("$parentIcon", "OVERLAY")
 		self.castbar.icon:SetPoint("TOPRIGHT", self.health, "TOPLEFT", -5, 0)
-		self.castbar.icon:SetTexCoord(unpack(D.IconCoord))
+		self.castbar.icon:SetTexCoord(.08, .92, .08, .92)
 		self.castbar.shield = old_cbshield
 		self.castbar.shield:Hide()
 	end

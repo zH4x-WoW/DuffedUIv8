@@ -170,7 +170,6 @@ C["datatext"] = {
 C["cooldown"] = {
 	["enable"] = true,
 	["treshold"] = 8,
-	["icdenable"] = true,
 	["rcdenable"] = true,
 	["rcdraid"] = true,
 	["rcdparty"] = false,

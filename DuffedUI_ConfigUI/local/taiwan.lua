@@ -180,7 +180,6 @@
 	DuffedUIConfigUILocalization.cooldown = "冷卻計時"
 	DuffedUIConfigUILocalization.cooldownenable = "啟用按鈕冷卻計時數字"
 	DuffedUIConfigUILocalization.cooldowntreshold = "在X秒以後以紅色顯示冷卻時間"
-	DuffedUIConfigUILocalization.cooldownicdenable = "啟用物品冷卻計時"
 	DuffedUIConfigUILocalization.cooldownrcdenable = "啟用團隊技能冷卻計時"
 	DuffedUIConfigUILocalization.cooldownrcdraid = "啟用團隊冷卻計時公告"
 	DuffedUIConfigUILocalization.cooldownrcdparty = "啟用小隊冷卻計時公告"

@@ -170,7 +170,6 @@
 	DuffedUIConfigUILocalization.cooldown = "Abklingzeiten"
 	DuffedUIConfigUILocalization.cooldownenable = "Aktiviere DuffedUI Abklingzeiten"
 	DuffedUIConfigUILocalization.cooldowntreshold = "Färbe die Abklingszeiten beim erreichen von Wert X 'rot'"
-	DuffedUIConfigUILocalization.cooldownicdenable = "Aktiviere Gegenstandsabklingzeiten"
 	DuffedUIConfigUILocalization.cooldownrcdenable = "Aktiviere Abklingzeiten im Raid"
 	DuffedUIConfigUILocalization.cooldownrcdraid = "Aktiviere Ankündigungen der Abklingzeiten für Raids"
 	DuffedUIConfigUILocalization.cooldownrcdparty = "Aktiviere Ankündigungen der Abklingzeiten für die Gruppe"

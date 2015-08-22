@@ -9,7 +9,6 @@
 	<Script file="HatTrick.lua" />
 	<Script file="ilevel.lua" />
 	<Script file="ilvlr.lua" />
-	<Script file="itemcooldowns.lua" />
 	<Script file="bufftracker.lua" />
 	<Script file="mage.lua" />
 	<Script file="mail.lua" />
