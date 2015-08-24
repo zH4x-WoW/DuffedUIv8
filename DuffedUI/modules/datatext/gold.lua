@@ -45,7 +45,7 @@ local function FormatTooltipMoney(money)
 end	
 
 local function Currency(id, weekly, capped)
-	local name, amount, tex, week, weekmax, maxed, discovered, _ = GetCurrencyInfo(id)
+	local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(id)
 
 	local r, g, b = 1, 1, 1
 	for i = 1, GetNumWatchedTokens() do
@@ -55,6 +55,9 @@ local function Currency(id, weekly, capped)
 
 	if (amount == 0 and r == 1) then return end
 	if weekly then
+		--[[NEEDS TESTING AFTER ID-RESET]]--
+		if id == 390 then week = floor(math.abs(week) / 100) end
+		--[[NEEDS TESTING AFTER ID-RESET]]--
 		if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, "Current: " .. amount .. " - " .. WEEKLY .. ": " .. week .. " / " .. weekmax, r, g, b, r, g, b) end
 	elseif capped  then
 		if id == 392 then maxed = 4000 end
@@ -191,8 +194,8 @@ Stat:SetScript("OnEnter", function(self)
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(PVP_FLAG)
 		Currency(390, true)
-		Currency(392, false, true)
 		Currency(391)
+		Currency(392, false, true)
 		Currency(944)
 	end
 
@@ -214,53 +217,27 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:SetTemplate("Transparent")
 end)
 
-Stat:SetScript("OnLeave", function()
-	GameTooltip:Hide()
-end)
+Stat:SetScript("OnLeave", function() GameTooltip:Hide() end)
 
 local RightClickMenu = {
 	{ text = "DuffedUI Improved Currency Options", isTitle = true , notCheckable = true },
 	{ text = "Show Archaeology Fragments", checked = function() return ImprovedCurrency["Archaeology"] end, func = function()
-		if ImprovedCurrency["Archaeology"] then
-			ImprovedCurrency["Archaeology"] = false
-		else
-			ImprovedCurrency["Archaeology"] = true
-		end
+		if ImprovedCurrency["Archaeology"] then ImprovedCurrency["Archaeology"] = false else ImprovedCurrency["Archaeology"] = true end
 	end	},
 	{ text = "Show Profession Tokens", checked = function() return ImprovedCurrency["Professions"] end, func = function()
-		if ImprovedCurrency["Professions"] then
-			ImprovedCurrency["Professions"] = false
-		else
-			ImprovedCurrency["Professions"] = true
-		end
+		if ImprovedCurrency["Professions"] then ImprovedCurrency["Professions"] = false else ImprovedCurrency["Professions"] = true end
 	end	},
 	{ text = "Show Player vs Player Currency", checked = function() return ImprovedCurrency["PvP"] end, func = function()
-		if ImprovedCurrency["PvP"] then 
-			ImprovedCurrency["PvP"] = false
-		else
-			ImprovedCurrency["PvP"] = true
-		end
+		if ImprovedCurrency["PvP"] then ImprovedCurrency["PvP"] = false else ImprovedCurrency["PvP"] = true end
 	end	},
 	{ text = "Show Dungeon and Raid Currency", checked = function() return ImprovedCurrency["Raid"] end, func = function()
-		if ImprovedCurrency["Raid"] then
-			ImprovedCurrency["Raid"] = false
-		else
-			ImprovedCurrency["Raid"] = true
-		end
+		if ImprovedCurrency["Raid"] then ImprovedCurrency["Raid"] = false else ImprovedCurrency["Raid"] = true end
 	end	},
 	{ text = "Show Cooking Awards", checked = function() return ImprovedCurrency["Cooking"] end, func = function()
-		if ImprovedCurrency["Cooking"] then
-			ImprovedCurrency["Cooking"] = false
-		else
-			ImprovedCurrency["Cooking"] = true
-		end
+		if ImprovedCurrency["Cooking"] then ImprovedCurrency["Cooking"] = false else ImprovedCurrency["Cooking"] = true end
 	end	},
 	{ text = "Show Miscellaneous Currency", checked = function() return ImprovedCurrency["Miscellaneous"] end, func = function()
-		if ImprovedCurrency["Miscellaneous"] then
-			ImprovedCurrency["Miscellaneous"] = false
-		else
-			ImprovedCurrency["Miscellaneous"] = true
-		end
+		if ImprovedCurrency["Miscellaneous"] then ImprovedCurrency["Miscellaneous"] = false else ImprovedCurrency["Miscellaneous"] = true end
 	end	},
 }
 
