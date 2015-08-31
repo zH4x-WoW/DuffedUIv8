@@ -222,8 +222,8 @@ function AS:Blizzard_AchievementUI(event, addon)
 					if index > 1 then
 						frame:ClearAllPoints()
 						frame:Point("TOP", _G["AchievementFrameProgressBar"..index-1], "BOTTOM", 0, -5)
-						frame.SetPoint = T.dummy
-						frame.ClearAllPoints = T.dummy
+						frame.SetPoint = D.Dummy
+						frame.ClearAllPoints = D.Dummy
 					end
 
 					frame.skinned = true

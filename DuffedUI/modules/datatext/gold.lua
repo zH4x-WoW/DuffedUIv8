@@ -55,9 +55,7 @@ local function Currency(id, weekly, capped)
 
 	if (amount == 0 and r == 1) then return end
 	if weekly then
-		--[[NEEDS TESTING AFTER ID-RESET]]--
 		if id == 390 then week = floor(math.abs(week) / 100) end
-		--[[NEEDS TESTING AFTER ID-RESET]]--
 		if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, "Current: " .. amount .. " - " .. WEEKLY .. ": " .. week .. " / " .. weekmax, r, g, b, r, g, b) end
 	elseif capped  then
 		if id == 392 then maxed = 4000 end
