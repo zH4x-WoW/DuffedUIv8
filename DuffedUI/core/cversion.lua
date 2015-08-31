@@ -10,7 +10,7 @@ _G.StaticPopupDialogs["OUTDATED"] = {
 	editBoxWidth = 325,
 	OnShow = function(self, ...) 
 		self.editBox:SetFocus()
-		self.editBox:SetText("http://www.duffed.net/downloads")
+		self.editBox:SetText("http://www.wowinterface.com/downloads/info23668-DuffedUIv8.html")
 		self.editBox:HighlightText()
 	end,
 	EditBoxOnEnterPressed = function(self) self:GetParent():Hide() end,
