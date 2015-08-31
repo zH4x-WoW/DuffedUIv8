@@ -159,7 +159,7 @@ v:FontString("text2", C["media"].font, 11)
 v.text:SetPoint("CENTER")
 v.text:SetText("|cffC41F3BDuffedUI|r ".. D.Version)
 v.text2:SetPoint("BOTTOM", 0, 2)
-v.text2:SetText("by |cffC41F3BMerith - liquidbase|r, website at |cffC41F3Bwww.duffed.net|r")
+v.text2:SetText("by |cffC41F3BMerith - liquidbase|r")
 v:SetScript("OnClick", function() v:Hide() end)
 v:Hide()
 
