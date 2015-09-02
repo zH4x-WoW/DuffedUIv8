@@ -1,4 +1,5 @@
 local D, C, L = unpack(select(2, ...))
+if IsAddOnLoaded("AddOnSkins") then return end
 
 local function LoadSkin()
 	local frames = {
@@ -28,31 +29,7 @@ local function LoadSkin()
 
 	HelpFrameHeader:SetFrameLevel(HelpFrameHeader:GetFrameLevel() + 2)
 	HelpFrameKnowledgebaseErrorFrame:SetFrameLevel(HelpFrameKnowledgebaseErrorFrame:GetFrameLevel() + 2)
-
-	HelpFrameTicketScrollFrame:StripTextures()
-	HelpFrameTicketScrollFrame:CreateBackdrop("Default")
-	HelpFrameTicketScrollFrame.backdrop:Point("TOPLEFT", -4, 4)
-	HelpFrameTicketScrollFrame.backdrop:Point("BOTTOMRIGHT", 6, -4)
-	for i=1, HelpFrameTicket:GetNumChildren() do
-		local child = select(i, HelpFrameTicket:GetChildren())
-		if not child:GetName() then
-			child:StripTextures()
-		end
-	end
-
 	HelpFrameKnowledgebaseScrollFrame2ScrollBar:SkinScrollBar()
-
-	-- skin sub buttons
-	for i = 1, #buttons do
-		_G[buttons[i]]:StripTextures(true)
-		_G[buttons[i]]:SkinButton(true)
-		
-		if _G[buttons[i]].text then
-			_G[buttons[i]].text:ClearAllPoints()
-			_G[buttons[i]].text:SetPoint("CENTER")
-			_G[buttons[i]].text:SetJustifyH("CENTER")				
-		end
-	end
 
 	-- skin main buttons
 	for i = 1, 6 do
@@ -96,7 +73,6 @@ local function LoadSkin()
 	HelpFrame:CreateBackdrop("Transparent")
 	HelpFrameKnowledgebaseSearchBox:SkinEditBox()
 	HelpFrameKnowledgebaseScrollFrameScrollBar:SkinScrollBar()
-	HelpFrameTicketScrollFrameScrollBar:SkinScrollBar()
 	HelpFrameCloseButton:SkinCloseButton(HelpFrame.backdrop)	
 	HelpFrameKnowledgebaseErrorFrameCloseButton:SkinCloseButton(HelpFrameKnowledgebaseErrorFrame.backdrop)
 
