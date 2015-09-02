@@ -6,7 +6,6 @@ local ALLOWED_GROUPS = {
 	["general"] = 1,
 	["unitframes"] = 1,
 	["actionbar"] = 1,
-	["nameplate"] = 1,
 	["bags"] = 1,
 	["loot"] = 1,
 	["cooldown"] = 1,

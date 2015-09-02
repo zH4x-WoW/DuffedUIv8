@@ -77,22 +77,6 @@
 	DuffedUIConfigUILocalization.castbarcbticks = "Aktiviere Ticks für kanalisierte Zauber."
 	DuffedUIConfigUILocalization.castbarplayerwidth = "Setze Breite der Zauberleiste."
 
-	--[[Nameplate]]--
-	DuffedUIConfigUILocalization.nameplate = "Namensplaketten"
-	DuffedUIConfigUILocalization.nameplateactive = "Aktiviere die DuffedUI Namensplaketten"
-	DuffedUIConfigUILocalization.nameplatedebuffs = "Aktviere die Anzeige der Schwächungszauber"
-	DuffedUIConfigUILocalization.nameplateplatewidth = "'Breite' der Namensplaketten (Standard = 110)"
-	DuffedUIConfigUILocalization.nameplateplateheight = "'Höhe' der Namensplaketten (Standard = 7)"
-	DuffedUIConfigUILocalization.nameplateauraswidth = "'Breite' der Schwächungszaubersymbole"
-	DuffedUIConfigUILocalization.nameplateaurasheight = "'Höhe' der Schwächungszaubersymbole"
-	DuffedUIConfigUILocalization.nameplateMaxDebuffs = "'Anzahl' der angezeigten Schwächungszauber (Standard = 5)"
-	DuffedUIConfigUILocalization.nameplatethreat = "Aktiviere Bedrohungs-Feature, wechselt automatisch je nach Rolle"
-	DuffedUIConfigUILocalization.nameplatethreat_badcolor = "Wähle Farbe für 'Schlechte' Bedrohungs-Anzeige, variiert je nach Rolle"
-	DuffedUIConfigUILocalization.nameplatethreat_goodcolor = "Wähle Farbe für 'Gute' Bedrohungs-Anzeige, variiert je nach Rolle"
-	DuffedUIConfigUILocalization.nameplatethreat_transitioncolor = "Wähle Farbe für Verlust/Gewinn der Bedrohung"
-	DuffedUIConfigUILocalization.nameplatePercent = "Aktiviere Prozentanzeige an Namensplaketten"
-	DuffedUIConfigUILocalization.nameplateNonTargetAlpha = "Wähle Alphawert für non-Target Namensplaketten"
-
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"
 	DuffedUIConfigUILocalization.actionbarenable = "Aktiviere die DuffedUI Aktionsleisten"

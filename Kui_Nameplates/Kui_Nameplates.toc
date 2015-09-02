@@ -1,0 +1,25 @@
+## Interface: 60200
+## Author: Kesava
+## Title: Kui |cff9966ffNameplates|r
+## Notes: Prettier nameplates.
+## SavedVariables: KuiNameplatesGDB
+## X-Curse-Packaged-Version: 257-transitional
+## X-Curse-Project-Name: KuiNameplates
+## X-Curse-Project-ID: kuinameplates
+## X-Curse-Repository-ID: wow/kuinameplates/mainline
+
+lib\embeds.xml
+
+core.lua
+config.lua
+create.lua
+layout.lua
+
+modules\arena.lua
+modules\castbar.lua
+modules\castwarnings.lua
+modules\classcolours.lua
+modules\combopoints.lua
+modules\tankmode.lua
+modules\lowhealth.lua
+modules\nemesis.lua

@@ -77,25 +77,6 @@
 	DuffedUIConfigUILocalization.castbarcbticks = "啟用施法條取消技能施放提示音"
 	DuffedUIConfigUILocalization.castbarplayerwidth = "設定玩家施法條寬度"
 
-	--[[Nameplate]]--
-	DuffedUIConfigUILocalization.nameplate = "姓名版"
-	DuffedUIConfigUILocalization.nameplateactive = "啟用姓名版"
-	DuffedUIConfigUILocalization.nameplatedebuffs = "啟用姓名板debuff顯示"
-	DuffedUIConfigUILocalization.nameplateplatewidth = "設置姓名板寬度 (默認 = 110)"
-	DuffedUIConfigUILocalization.nameplateplateheight = "設置姓名板高度 (默認 = 7)"
-	DuffedUIConfigUILocalization.nameplateauraswidth = "設置Debuff圖標寬度"
-	DuffedUIConfigUILocalization.nameplateaurasheight = "設置Debuff圖標高度"
-	DuffedUIConfigUILocalization.nameplateMaxDebuffs = "設置最大Debuff顯示數量 (默認 = 5)"
-	DuffedUIConfigUILocalization.nameplatethreat = "啟用仇恨著色"
-	DuffedUIConfigUILocalization.nameplatethreat_badcolor = "高仇恨著色,根據你的職業Tank or dps/heal而改變"
-	DuffedUIConfigUILocalization.nameplatethreat_goodcolor = "低仇恨著色,根據你的職業Tank or dps/heal而改變"
-	DuffedUIConfigUILocalization.nameplatethreat_transitioncolor = "失去/獲得仇恨顏色"
-	DuffedUIConfigUILocalization.nameplatePercent = "啟用數字百分比顯示"
-	DuffedUIConfigUILocalization.nameplateNonTargetAlpha = "設定非當前目標的姓名板透明度"
-	DuffedUIConfigUILocalization.nameplatePvP = "禁用PVP中無目標時姓名板透明降低"
-	DuffedUIConfigUILocalization.nameplateBlackBackground = "啟用姓名板黑色背景(當仇恨著色功能啟用時)"
-	DuffedUIConfigUILocalization.nameplatePercentInside = "生命條中顯示百分比"
-
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "快捷欄"
 	DuffedUIConfigUILocalization.actionbarenable = "啟用 DuffedUI 快捷欄"

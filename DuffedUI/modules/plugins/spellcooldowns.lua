@@ -158,6 +158,7 @@ spellCooldowns = {
 		131078, -- Icy Veins
 		152087, -- Prismatic Crystal
 		157913, -- Evanesce
+		157980, -- Super Nova
 	},
 	["MONK"] = {
 		101545, -- Flying Serpent Kick
