@@ -79,7 +79,7 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Kill()
 	end
 
-	if C["nameplate"].enable then InterfaceOptionsNamesPanelUnitNameplatesNameplateClassColors:Kill() end
+	if IsAddOnLoaded("KUI Nameplates") then InterfaceOptionsNamesPanelUnitNameplatesNameplateClassColors:Kill() end
 
 	local TaintFix = CreateFrame("Frame")
 	TaintFix:SetScript("OnUpdate", function(self, elapsed)
