@@ -257,10 +257,10 @@ function addon:CreateTargetArrows(f)
     local arrowSize = floor(self.sizes.tex.targetArrow)
     local ta = CreateFrame('Frame',nil,f.overlay)
 
-    --[[ta.left = ta:CreateTexture(nil,'ARTWORK',nil,1)
-    ta.left:SetTexture('Interface\\AddOns\\Kui_Nameplates\\media\\target-arrow')
-    ta.left:SetPoint('RIGHT',f.overlay,'LEFT',14,-1)
-    ta.left:SetSize(arrowSize,arrowSize)]]--
+    --ta.left = ta:CreateTexture(nil,'ARTWORK',nil,1)
+    --ta.left:SetTexture('Interface\\AddOns\\Kui_Nameplates\\media\\target-arrow')
+    --ta.left:SetPoint('RIGHT',f.overlay,'LEFT',14,-1)
+    --ta.left:SetSize(arrowSize,arrowSize)
 
     ta.right = ta:CreateTexture(nil,'ARTWORK',nil,1)
     ta.right:SetTexture('Interface\\AddOns\\Kui_Nameplates\\media\\target-arrow')
