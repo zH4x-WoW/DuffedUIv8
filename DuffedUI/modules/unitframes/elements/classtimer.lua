@@ -101,7 +101,14 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(187618), -- Etheralus, the Eternal Reward (Healer)
 
 	--[[Hellfire Citadel]]--
+	CreateSpellEntry(183941), -- Hungering Blows
+	CreateSpellEntry(183926), -- Countenance of Tyranny
+	CreateSpellEntry(184073), -- Mark of Doom
 	CreateSpellEntry(184770), -- Tyrant's Immortality
+	CreateSpellEntry(184293), -- Spirit Shift
+	CreateSpellEntry(183929), -- Sudden Intuition
+	CreateSpellEntry(183931), -- Anzus Flight
+	CreateSpellEntry(183924), -- Sign of the Dark Star
 
 	--[[Blackrock Foundry]]--
 	CreateSpellEntry(177063), -- Elementalist's Shielding Talisman (Elemental Shield)

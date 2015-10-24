@@ -93,7 +93,7 @@ consolidate:SetPoint("CENTER", proxy, "CENTER", 0, -35)
 consolidate:Hide()
 SecureHandlerSetFrameRef(proxy, "header", consolidate)
 
-debuffs:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -7, -5)
+debuffs:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -7, -25)
 debuffs:SetAttribute("filter", "HARMFUL")
 debuffs:Show()
 move:RegisterFrame(debuffs)
