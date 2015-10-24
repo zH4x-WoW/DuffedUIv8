@@ -1,9 +1,10 @@
 ## Interface: 60200
 ## Author: Kesava
 ## Title: Kui |cff9966ffNameplates|r
+## Version: 259
 ## Notes: Prettier nameplates.
 ## SavedVariables: KuiNameplatesGDB
-## X-Curse-Packaged-Version: 257-transitional
+## X-Curse-Packaged-Version: 259
 ## X-Curse-Project-Name: KuiNameplates
 ## X-Curse-Project-ID: kuinameplates
 ## X-Curse-Repository-ID: wow/kuinameplates/mainline
@@ -21,5 +22,8 @@ modules\castwarnings.lua
 modules\classcolours.lua
 modules\combopoints.lua
 modules\tankmode.lua
+modules\targetarrows.lua
 modules\lowhealth.lua
 modules\nemesis.lua
+modules\healthpatch.lua
+modules\nameonly.lua
