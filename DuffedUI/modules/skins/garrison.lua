@@ -143,26 +143,6 @@ local function LoadGarrisonSkin()
 		_G["GarrisonMissionFrameTab" .. i]:SkinTab()
 	end
 	
-	--[[Handle MasterPlan AddOn]]--
-	local function skinMasterPlan()
-		GarrisonMissionFrameTab3:SkinTab()
-		GarrisonMissionFrameTab4:SkinTab()
-		local MissionPage = GarrisonMissionFrame.MissionTab.MissionPage
-		MissionPage.MinimizeButton:SkinCloseButton()
-		MissionPage.MinimizeButton:SetFrameLevel(MissionPage:GetFrameLevel() + 2)
-	end
-
-	if IsAddOnLoaded("MasterPlan") then skinMasterPlan() else
-		local f = CreateFrame("Frame")
-		f:RegisterEvent("ADDON_LOADED")
-		f:SetScript("OnEvent", function(self, event, addon)
-			if addon == "MasterPlan" then
-				skinMasterPlan()
-				self:UnregisterEvent("ADDON_LOADED")
-			end
-		end)
-	end
-	
 	GarrisonMissionFrame.MissionTab.MissionPage:StripTextures()
 	GarrisonMissionFrame.MissionTab.MissionPage.Stage:StripTextures()
 	GarrisonMissionFrame.MissionTab.MissionPage.CloseButton:StripTextures()
@@ -467,6 +447,27 @@ local function LoadGarrisonTooltipSkin()
 		end
 		tooltipFrame.numPropertiesStyled = numPropertiesStyled
 	end)
+
+	--[[Handle MasterPlan AddOn]]--
+	local function skinMasterPlan()
+		GarrisonMissionFrameTab3:SkinTab()
+		GarrisonMissionFrameTab4:SkinTab()
+		GarrisonShipyardFrameTab3:SkinTab()
+		local MissionPage = GarrisonMissionFrame.MissionTab.MissionPage
+		MissionPage.MinimizeButton:SkinCloseButton()
+		MissionPage.MinimizeButton:SetFrameLevel(MissionPage:GetFrameLevel() + 2)
+	end
+
+	if IsAddOnLoaded("MasterPlan") then skinMasterPlan() else
+		local f = CreateFrame("Frame")
+		f:RegisterEvent("ADDON_LOADED")
+		f:SetScript("OnEvent", function(self, event, addon)
+			if addon == "MasterPlan" then
+				skinMasterPlan()
+				self:UnregisterEvent("ADDON_LOADED")
+			end
+		end)
+	end
 end
 
 D.SkinFuncs["Blizzard_GarrisonUI"] = LoadGarrisonSkin

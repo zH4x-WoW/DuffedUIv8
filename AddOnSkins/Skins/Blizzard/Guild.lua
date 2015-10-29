@@ -272,7 +272,7 @@ function AS:Blizzard_Guild(event, addon)
 	if (addon == 'Blizzard_GuildControlUI' or IsAddOnLoaded('Blizzard_GuildControlUI')) and not GuildControlUI.isSkinned then
 		AS:SkinFrame(GuildControlUI)
 		AS:StripTextures(GuildControlUIHbar)
-		GuildControlUI:CreateShadow('Default')
+		--GuildControlUI:CreateShadow('Default')
 
 		local function SkinGuildRanks()
 			for i=1, GuildControlGetNumRanks() do
