@@ -177,6 +177,7 @@ Stat:SetScript("OnEnter", function(self)
 	if ImprovedCurrency["Raid"] then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(L["dt"]["dr"])
+		Currency(1191, false, true)
 		Currency(1129, false, true)
 		Currency(994, false, true)
 		Currency(776, false, true)

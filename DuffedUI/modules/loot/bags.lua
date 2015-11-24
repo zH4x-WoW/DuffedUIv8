@@ -49,7 +49,7 @@ function SkinBagButton(Button)
 
 	Icon:SetTexCoord(unpack(D.IconCoord))
 	Icon:SetInside(Button)
-	if Quest then Quest:SetAlpha(0) end
+	if Quest then Quest:SetAlpha(0)end
 	if JunkIcon then JunkIcon:SetAlpha(0) end
 	if BattlePay then BattlePay:SetAlpha(0) end
 

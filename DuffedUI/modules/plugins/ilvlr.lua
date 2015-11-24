@@ -24,6 +24,20 @@ local slots = {
 	"Trinket1Slot"
 }
 
+local upgrades = {
+	["0"] 	= 0, ["1"] 	 = 8, ["373"] = 4, ["374"] = 8, ["375"] = 4, ["376"] = 4,
+	["377"] = 4, ["379"] = 4, ["380"] = 4, ["445"] = 0, ["446"] = 4, ["447"] = 8,
+	["451"] = 0, ["452"] = 8, ["453"] = 0, ["454"] = 4, ["455"] = 8, ["456"] = 0,
+	["457"] = 8, ["458"] = 0, ["459"] = 4, ["460"] = 8, ["461"] = 12, ["462"] = 16,
+	["465"] = 0, ["466"] = 4, ["467"] = 8, ["470"] = 8, ["476"] = 0, ["479"] = 0,
+	["529"] = 0, ["530"] = 5, ["531"] = 10,
+	["566"] = 0,
+	["650"] = 0, ["650"] = 3, ["650"] = 6, ["650"] = 9, ["650"] = 12, ["650"] = 15,
+	["650"] = 18, ["650"] = 21, ["650"] = 24, ["650"] = 27, ["650"] = 30, ["650"] = 33,
+	["650"] = 36, ["650"] = 39, ["650"] = 42, ["650"] = 45, ["650"] = 48, ["650"] = 51,
+	["650"] = 54, ["650"] = 57, ["650"] = 60, 
+}
+
 local iEqAvg, iAvg
 
 local function CreateButtonsText(frame)
@@ -56,6 +70,7 @@ local function UpdateButtonsText(frame)
 			local oldilevel = text:GetText()
 			local ilevel = select(4, GetItemInfo(item))
 			local heirloom = select(3, GetItemInfo(item))
+			local upgrade = item:match(":(%d+)\124h%[")
 			if ilevel then
 				if ilevel ~= oldilevel then
 					if heirloom == 7 then
@@ -81,12 +96,12 @@ local function UpdateButtonsText(frame)
 								elseif itemDurabilityPercentage == 0 then
 									duracolor = "|cFFFF0000"
 								end
-								text:SetText(ilevelcolor..ilevel.."\n"..duracolor..D.Round(itemDurabilityPercentage).."%|r")
+								text:SetText(ilevelcolor..ilevel + upgrades[upgrade].."\n"..duracolor..D.Round(itemDurabilityPercentage).."%|r")
 							else
-								text:SetText(ilevelcolor..ilevel)
+								text:SetText(ilevelcolor..ilevel + upgrades[upgrade])
 							end
 						else
-							text:SetText(ilevel)
+							text:SetText(ilevel + upgrades[upgrade])
 						end
 					end
 				end
