@@ -3,6 +3,7 @@ if not C["actionbar"].enable == true then return end
 
 local cp = "|cff319f1b" -- +
 local cm = "|cff9a1212" -- -
+
 local function ShowOrHideBar(bar, button)
 	local db = DuffedUIDataPerChar
 
@@ -52,11 +53,19 @@ local function MoveButtonBar(button, bar)
 	local db = DuffedUIDataPerChar
 
 	if button == DuffedUIBar3Button then
-		if bar:IsShown() then button.text:SetText(cm.."-|r") else button.text:SetText(cp.."+|r") end
+		if bar:IsShown() then 
+			button.text:SetText(cm.."-|r")
+		else
+			button.text:SetText(cp.."+|r")
+		end
 	end
 
 	if button == DuffedUIBar4Button then
-		if bar:IsShown() then button.text:SetText(cm.."-|r") else button.text:SetText(cp.."+|r") end
+		if bar:IsShown() then
+			button.text:SetText(cm.."-|r")
+		else
+			button.text:SetText(cp.."+|r")
+		end
 	end
 
 	if button == DuffedUIBar5Button then
@@ -86,7 +95,9 @@ DuffedUIBar3Button:SetScript("OnClick", function(self, btn)
 	if btn == "RightButton" then
 		if DuffedUIInfoLeftBattleGround and UnitInBattleground("player") then ToggleFrame(DuffedUIInfoLeftBattleGround) end
 	else
-		if not C["actionbar"].Leftsidebars then UpdateBar(self, DuffedUIBar3) end
+		if not C["actionbar"].Leftsidebars then
+			UpdateBar(self, DuffedUIBar3)
+		end
 	end
 end)
 DuffedUIBar3Button:Size(DuffedUIInfoLeft:GetHeight())

@@ -20,6 +20,7 @@ local ALLOWED_GROUPS = {
 	["classtimer"] = 1,
 	["raid"] = 1,
 	["font"] = 1,
+	["nameplate"] = 1,
 }
 
 if DuffedUIEditedDefaultConfig then

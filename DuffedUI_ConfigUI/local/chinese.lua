@@ -77,6 +77,22 @@
 	DuffedUIConfigUILocalization.castbarclasscolor = "启用施法条按职业颜色着着色"
 	DuffedUIConfigUILocalization.castbarcbticks = "启用施法条取消技能施放提示音"
 	DuffedUIConfigUILocalization.castbarplayerwidth = "设定玩家施法条宽度"
+	
+	--[[Nameplate]]--
+ 	DuffedUIConfigUILocalization.nameplate = "姓名版"
+ 	DuffedUIConfigUILocalization.nameplateactive = "启用姓名版"
+ 	DuffedUIConfigUILocalization.nameplatedebuffs = "启用姓名板debuff显示"
+ 	DuffedUIConfigUILocalization.nameplateplatewidth = "设置姓名板宽度 (默认 = 110)"
+ 	DuffedUIConfigUILocalization.nameplateplateheight = "设置姓名板高度 (默认 = 7)"
+ 	DuffedUIConfigUILocalization.nameplateauraswidth = "设置Debuff图标宽度"
+ 	DuffedUIConfigUILocalization.nameplateaurasheight = "设置Debuff图标高度"
+ 	DuffedUIConfigUILocalization.nameplateMaxDebuffs = "设置最大Debuff显示数量 (默认 = 5)"
+ 	DuffedUIConfigUILocalization.nameplatethreat = "启用仇恨着色"
+ 	DuffedUIConfigUILocalization.nameplatethreat_badcolor = "高仇恨着色,根据你的职业Tank or dps/heal而改变"
+ 	DuffedUIConfigUILocalization.nameplatethreat_goodcolor = "低仇恨着色,根据你的职业Tank or dps/heal而改变"
+ 	DuffedUIConfigUILocalization.nameplatethreat_transitioncolor = "失去/获得仇恨颜色"
+ 	DuffedUIConfigUILocalization.nameplatePercent = "启用数字百分比显示"
+ 	DuffedUIConfigUILocalization.nameplateNonTargetAlpha = "设定非当前目标的姓名板透明度"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "快捷栏"

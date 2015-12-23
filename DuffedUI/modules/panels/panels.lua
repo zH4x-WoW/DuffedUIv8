@@ -49,7 +49,7 @@ end
 if C["actionbar"]["enable"] then
 	DuffedUIBar1Mover = CreateFrame("Frame", "DuffedUIBar1Mover", UIParent)
 	DuffedUIBar1Mover:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
-	DuffedUIBar1Mover:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 130)
+	DuffedUIBar1Mover:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 129)
 	DuffedUIBar1Mover:SetFrameLevel(6)
 	move:RegisterFrame(DuffedUIBar1Mover)
 
@@ -70,11 +70,7 @@ if C["actionbar"]["enable"] then
 	local DuffedUIBar3 = CreateFrame("Frame", "DuffedUIBar3", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar3:SetTemplate("Transparent")
 	DuffedUIBar3:Point("BOTTOMLEFT", DuffedUIInfoLeft, "BOTTOMRIGHT", 23, 0)
-	if C["actionbar"]["Leftsidebarshorizontal"] then
-		DuffedUIBar3:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
-	else
-		DuffedUIBar3:SetSize((D["SidebarButtonsize"] * 2) + (D["buttonspacing"] * 3), (D["SidebarButtonsize"] * 6) + (D["buttonspacing"] * 7))
-	end
+	DuffedUIBar3:SetSize((D["SidebarButtonsize"] * 2) + (D["buttonspacing"] * 3), (D["SidebarButtonsize"] * 6) + (D["buttonspacing"] * 7))
 	DuffedUIBar3:SetFrameStrata("BACKGROUND")
 	DuffedUIBar3:SetFrameLevel(3)
 	move:RegisterFrame(DuffedUIBar3)
@@ -82,11 +78,7 @@ if C["actionbar"]["enable"] then
 	local DuffedUIBar4 = CreateFrame("Frame", "DuffedUIBar4", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar4:SetTemplate("Transparent")
 	DuffedUIBar4:Point("BOTTOMRIGHT", DuffedUIInfoRight, "BOTTOMLEFT", -23, 0)
-	if C["actionbar"]["Rightsidebarshorizontal"] then
-		DuffedUIBar4:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
-	else
-		DuffedUIBar4:SetSize((D["SidebarButtonsize"] * 2) + (D["buttonspacing"] * 3), (D["SidebarButtonsize"] * 6) + (D["buttonspacing"] * 7))
-	end
+	DuffedUIBar4:SetSize((D["SidebarButtonsize"] * 2) + (D["buttonspacing"] * 3), (D["SidebarButtonsize"] * 6) + (D["buttonspacing"] * 7))
 	DuffedUIBar4:SetFrameStrata("BACKGROUND")
 	DuffedUIBar4:SetFrameLevel(3)
 	move:RegisterFrame(DuffedUIBar4)

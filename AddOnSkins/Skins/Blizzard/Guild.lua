@@ -293,9 +293,9 @@ function AS:Blizzard_Guild(event, addon)
 		end
 		hooksecurefunc("GuildControlUI_RankOrder_Update", SkinGuildRanks)
 
-		GuildControlUIRankOrderFrameNewButton:HookScript("OnClick", function()
-			T.Delay(1, SkinGuildRanks)
-		end)
+		--[[GuildControlUIRankOrderFrameNewButton:HookScript("OnClick", function()
+			AS.Delay(1, SkinGuildRanks)
+		end)]]--
 
 		AS:SkinDropDownBox(GuildControlUINavigationDropDown)
 		AS:SkinDropDownBox(GuildControlUIRankSettingsFrameRankDropDown, 180)
