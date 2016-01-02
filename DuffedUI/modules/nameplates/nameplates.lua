@@ -1,10 +1,10 @@
 local D, C, L = unpack(select(2, ...))
-if C["nameplate"].active ~= true then return end
+if C["nameplate"]["active"] ~= true then return end
 
 local Plates = CreateFrame("Frame", "Plates", UIParent)
 
 --[[variables]]--
-local Font = C["media"].font
+local Font = C["media"]["font"]
 local _G = _G
 local UnitGUID = UnitGUID
 local GetTime = GetTime
@@ -29,18 +29,20 @@ local wipe = table.wipe
 local tonumber = tonumber
 local tostring = tostring
 local GetNumGroupMembers = GetNumGroupMembers
-local GetNumBattlefieldScores = GetNumBattlefieldScores
 local GetSpellTexture = GetSpellTexture
 local IsInInstance = IsInInstance
 local select = select
 local nop = function() end
+local IsArena = (select(2, IsInInstance()) == "arena")
+local bg = (select(2, IsInInstance()) == "pvp")
+local ash = (select(1, GetCurrentMapAreaID()) == 978)
 
 local RAID_CLASS_COLORS = RAID_CLASS_COLORS
 local FACTION_BAR_COLORS = FACTION_BAR_COLORS
 
 local playerFaction = select(1, UnitFactionGroup("player")) == "Horde" and 1 or 0
 local playerGUID = UnitGUID("player")
-local mult = 768/match(GetCVar("gxResolution"), "%d+x(%d+)")
+local mult = 768 / match(GetCVar("gxResolution"), "%d+x(%d+)")
 
 local ScheduleFrame = CreateFrame("Frame", "ScheduleFrame", UIParent)
 local ScheduleFrameActive = false
@@ -50,10 +52,10 @@ local fadeIn = function(obj) if obj == nil then return end UIFrameFadeIn(obj, .2
 local fadeOut = function(obj) if obj == nil then return end UIFrameFadeIn(obj, .2, obj:GetAlpha(), 0) end
 
 local fixvalue = function(val)
-	if(val >= 1e6) then
-		return ("%.2f"..SECOND_NUMBER_CAP):format(val / 1e6):gsub("%.?0+(["..FIRST_NUMBER_CAP..SECOND_NUMBER_CAP.."])$", "%1")
-	elseif(val >= 1e4) then
-		return ("%.1f"..FIRST_NUMBER_CAP):format(val / 1e3):gsub("%.?0+(["..FIRST_NUMBER_CAP..SECOND_NUMBER_CAP.."])$", "%1")
+	if (val >= 1e6) then
+		return ("%.2f" .. SECOND_NUMBER_CAP):format(val / 1e6):gsub("%.?0+([" .. FIRST_NUMBER_CAP .. SECOND_NUMBER_CAP .. "])$", "%1")
+	elseif (val >= 1e4) then
+		return ("%.1f" .. FIRST_NUMBER_CAP):format(val / 1e3):gsub("%.?0+([" .. FIRST_NUMBER_CAP .. SECOND_NUMBER_CAP .. "])$", "%1")
 	else
 		return val
 	end
@@ -151,14 +153,18 @@ local UpdateLevel = function(self)
 	elseif level then
 		self.rare:Hide()
 		local colr = GetQuestDifficultyColor(level)
-		self.health.name:SetText(D.RGBToHex(colr.r, colr.g, colr.b) .. level .. (elite and "+" or "") .. "|r " .. self.oldname:GetText())
+		self.health.name:SetText(D["RGBToHex"](colr.r, colr.g, colr.b) .. level .. (elite and "+" or "") .. "|r " .. self.oldname:GetText())
 	end	
 end
 
 local UpdateCastbarColor = function(self)
 	if self.castbar == nil then return end
 	if self.castbar.shield == nil then return end
-	if self.castbar.shield:IsShown() then self.castbar:SetStatusBarColor(.78, .25, .25, 1) else self.castbar:SetStatusBarColor(1, .82, 0) end
+	if self.castbar.shield:IsShown() then
+		self.castbar:SetStatusBarColor(.78, .25, .25, 1)
+	else
+		self.castbar:SetStatusBarColor(1, .82, 0)
+	end
 end
 
 local UpdateColor = function(self)
@@ -254,16 +260,16 @@ local CreateAuraIcon = function(parent)
 	local button = CreateFrame("Frame", nil, parent)
 	button:Hide()
 
-	button:SetSize(C["nameplate"].auraswidth, C["nameplate"].aurasheight)
+	button:SetSize(C["nameplate"]["auraswidth"], C["nameplate"]["aurasheight"])
 	button:SetScript("OnHide", function() if parent.guid then Plates:UpdateAuraWidget(parent, parent.guid) end end)
 
 	button.bg = button:CreateTexture(nil, "BACKGROUND")
-	button.bg:SetTexture(unpack(C["media"].backdropcolor))
+	button.bg:SetTexture(unpack(C["media"]["backdropcolor"]))
 	button.bg:SetAllPoints(button)
 
 	button.icon = button:CreateTexture(nil, "BORDER")
-	button.icon:SetTexCoord(unpack(D.IconCoord))
-	button.icon:SetSize(C["nameplate"].auraswidth - mult * 4, C["nameplate"].aurasheight - mult * 4)
+	button.icon:SetTexCoord(unpack(D["IconCoord"]))
+	button.icon:SetSize(C["nameplate"]["auraswidth"] - mult * 4, C["nameplate"]["aurasheight"] - mult * 4)
 	button.icon:SetPoint("CENTER")
 
 	button.expired = button:CreateFontString(nil, "OVERLAY")
@@ -381,8 +387,6 @@ local UpdateAurasByUnit = function(unit)
 end
 
 local UpdateAuraByLookup = function(guid)
-	local IsArena = (select(2, IsInInstance()) == "arena")
-
 	if guid == UnitGUID("target") and UnitIsEnemy("target", "player") then
 		UpdateAurasByUnit("target")
 	elseif guid == UnitGUID("mouseover") and UnitIsEnemy("mouseover", "player") then
@@ -392,7 +396,7 @@ local UpdateAuraByLookup = function(guid)
 	elseif GroupTargetList[guid] then
 		local unit = GroupTargetList[guid]
 		if unit then
-			local unittarget = UnitGUID(unit.."target")
+			local unittarget = UnitGUID(unit .. "target")
 			if guid == unittarget and UnitIsEnemy(unittarget, "player") then UpdateAurasByUnit(unittarget) end
 		end
 	elseif IsArena then
@@ -458,52 +462,40 @@ local GetGUID = function(self)
 	end
 end
 
-local goodR, goodG, goodB = unpack(C["nameplate"].threat_goodcolor)
-local badR, badG, badB = unpack(C["nameplate"].threat_badcolor)
-local transitionR, transitionG, transitionB = unpack(C["nameplate"].threat_transitioncolor)
+local goodR, goodG, goodB = unpack(C["nameplate"]["threat_goodcolor"])
+local badR, badG, badB = unpack(C["nameplate"]["threat_badcolor"])
+local transitionR, transitionG, transitionB = unpack(C["nameplate"]["threat_transitioncolor"])
 local UpdateThreat = function(self)
-	local arena = (select(2, IsInInstance()) == "arena")
-	local bg = (select(2, IsInInstance()) == "pvp")
-	local ash = (select(1, GetCurrentMapAreaID()) == 978)
-
 	if self.health == nil then return end
 	if self.hasClass or self.isTagged then return end
+	if (IsArena == true) or (bg == true) or (ash == true) then return end
 
 	--[[Enhanced Threat feature]]--
-	if C["nameplate"].threat then
-		if not self.old_threat:IsShown() then
-			if InCombatLockdown() and self.isFriendly ~= true then
-				if D.Role == "Tank" then
-					self.health:SetStatusBarColor(badR, badG, badB)
-					self.health.bg:SetTexture(unpack(C["media"].backdropcolor))
-				else
-					self.health:SetStatusBarColor(goodR, goodG, goodB)
-					self.health.bg:SetTexture(unpack(C["media"].backdropcolor))
-				end
+	if not self.old_threat:IsShown() then
+		if InCombatLockdown() and self.isFriendly ~= true then
+			if D.Role == "Tank" then
+				self.health:SetStatusBarColor(badR, badG, badB)
+				self.health.bg:SetTexture(unpack(C["media"]["backdropcolor"]))
 			else
-				UpdateColor(self)
+				self.health:SetStatusBarColor(goodR, goodG, goodB)
+				self.health.bg:SetTexture(unpack(C["media"]["backdropcolor"]))
 			end
 		else
-			local r, g, b = self.old_threat:GetVertexColor()
-			if g + b == 0 then
-				if D.Role == "Tank" then
-					self.health:SetStatusBarColor(goodR, goodG, goodB)
-					self.health.bg:SetTexture(unpack(C["media"].backdropcolor))
-				else
-					self.health:SetStatusBarColor(badR, badG, badB)
-					self.health.bg:SetTexture(unpack(C["media"].backdropcolor))
-				end
-			else
-				self.health:SetStatusBarColor(transitionR, transitionG, transitionB)
-				self.health.bg:SetTexture(unpack(C["media"].backdropcolor))
-			end
+			UpdateColor(self)
 		end
 	else
-		if self.old_threat:IsShown() then
-			local _, val = self.old_threat:GetVertexColor()
-			if val > .7 then self.threat:SetVertexColor(transitionR, transitionG, transitionB) else self.threat:SetVertexColor(badR, badG, badB) end
+		local r, g, b = self.old_threat:GetVertexColor()
+		if g + b == 0 then
+			if D.Role == "Tank" then
+				self.health:SetStatusBarColor(goodR, goodG, goodB)
+				self.health.bg:SetTexture(unpack(C["media"]["backdropcolor"]))
+			else
+				self.health:SetStatusBarColor(badR, badG, badB)
+				self.health.bg:SetTexture(unpack(C["media"]["backdropcolor"]))
+			end
 		else
-			self.threat:SetVertexColor(unpack(C["media"].backdropcolor))
+			self.health:SetStatusBarColor(transitionR, transitionG, transitionB)
+			self.health.bg:SetTexture(unpack(C["media"]["backdropcolor"]))
 		end
 	end
 
@@ -513,7 +505,7 @@ local UpdateThreat = function(self)
 		self.health:SetAlpha(1)
 	else
 		self.health.name:SetTextColor(1, 1, 1)
-		self.health:SetAlpha(C["nameplate"].NonTargetAlpha)
+		self.health:SetAlpha(C["nameplate"]["NonTargetAlpha"])
 	end
 end
 
@@ -539,7 +531,7 @@ local HealthBar_OnValue = function(self, value)
 	local health = self.parent.health
 	health:SetMinMaxValues(self:GetMinMaxValues())
 	health:SetValue(self:GetValue())
-	if C["nameplate"].Percent then
+	if C["nameplate"]["Percent"] then
 		local _, mx = health:GetMinMaxValues()
 		health.perc:SetText(string.format("%d%%", math.min(math.ceil((value or 0)/((mx or 0) / 100)), 100)))
 	end
@@ -558,7 +550,7 @@ local CastBar_OnShow = function(self)
 	self.castbar.name:SetText(self.oldcbname:GetText())
 
 	if self.castbar.shield:IsShown() then self.castbar:SetStatusBarColor(.78, .25, .25, 1) else self.castbar:SetStatusBarColor(1, .82, 0) end
-	self.castbar.icon:SetSize(5 + mult * 7 + C["nameplate"].plateheight, 5 + mult * 7 + C["nameplate"].plateheight)
+	self.castbar.icon:SetSize(1 + mult * 7 + C["nameplate"]["plateheight"], 1 + mult * 7 + C["nameplate"]["plateheight"])
 	self.castbar:Hide()
 	HideQueque(self)
 	self.castbar:Show()
@@ -569,7 +561,7 @@ local HealthBar_OnShow = function(self)
 	self.health:SetMinMaxValues(self.oldhealth:GetMinMaxValues())
 	self.health:SetValue(self.oldhealth:GetValue())
 
-	if C["nameplate"].Percent then
+	if C["nameplate"]["Percent"] then
 		local _, mx = self.health:GetMinMaxValues()
 		self.health.perc:SetText(string.format("%d%%", math.min(math.ceil((self.oldhealth:GetValue() or 0) / ((mx or 0) / 100)), 100)))
 	end
@@ -611,7 +603,7 @@ local StylePlate = function(self)
 		self.plate = CreateFrame("Frame", nil, WorldFrame)
 		self.plate:SetFrameStrata("BACKGROUND")
 		self.plate:Hide()
-		self.plate:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
+		self.plate:SetSize(C["nameplate"]["platewidth"], C["nameplate"]["plateheight"])
 		self.plate.parent = self
 	end
 
@@ -619,7 +611,7 @@ local StylePlate = function(self)
 		self.health = CreateFrame("StatusBar", nil, self.plate)
 		self.health:SetStatusBarTexture(C["media"].normTex)
 		self.health:GetStatusBarTexture():SetHorizTile(true)
-		self.health:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
+		self.health:SetSize(C["nameplate"]["platewidth"], C["nameplate"]["plateheight"])
 		self.health:SetPoint("BOTTOM", self, "BOTTOM", 0, 5)
 
 		self.health.bg = self.health:CreateTexture(nil, "BORDER")
@@ -627,24 +619,6 @@ local StylePlate = function(self)
 		self.health.bg:SetAllPoints()
 		self.health:GetStatusBarTexture():SetDrawLayer("BORDER", 0)
 		self.health.bg:SetDrawLayer("BORDER", -1)
-	end
-
-	if self.border == nil then
-		self.border = self.health:CreateTexture(nil, "BORDER")
-		self.border:SetPoint("TOPLEFT", -mult, mult)
-		self.border:SetPoint("BOTTOMRIGHT", mult, -mult)
-		self.border:SetTexture(unpack(C["media"].bordercolor))
-		self.border:SetDrawLayer("BORDER", -2)
-	end
-
-	if not C["nameplate"].threat then
-		if self.threat == nil then
-			self.threat = self.health:CreateTexture(nil, "BORDER")
-			self.threat:SetPoint("TOPLEFT", -mult * 2, mult * 2)
-			self.threat:SetPoint("BOTTOMRIGHT", mult * 2, -mult * 2)
-			self.threat:SetTexture(1, 1, 1)
-			self.threat:SetDrawLayer("BORDER", -3)
-		end
 	end
 
 	if self.rare == nil then
@@ -656,10 +630,10 @@ local StylePlate = function(self)
 		self.health.name = self.health:CreateFontString("$parentHealth", "OVERLAY")
 		self.health.name:SetFont(Font, 8, "THINOUTLINE")
 		self.health.name:SetPoint("BOTTOMLEFT", self.health, "TOPLEFT", 0, 0)
-		self.health.name:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
+		self.health.name:SetSize(C["nameplate"]["platewidth"], C["nameplate"]["plateheight"])
 	end
 
-	if C["nameplate"].Percent then
+	if C["nameplate"]["Percent"] then
 		if self.health.perc == nil then
 			self.health.perc = self.health:CreateFontString("$parentHealthPercent", "OVERLAY")
 			self.health.perc:SetFont(Font, 9, "THINOUTLINE")
@@ -672,8 +646,8 @@ local StylePlate = function(self)
 		self.castbar:SetFrameLevel(self.old_castbar:GetFrameLevel())
 		self.castbar:SetFrameStrata(self.old_castbar:GetFrameStrata())
 
-		self.castbar:SetSize(C["nameplate"].platewidth, 5)
-		self.castbar:SetPoint("TOP", self.health, "BOTTOM", 0, -5)
+		self.castbar:SetSize(C["nameplate"]["platewidth"], 3)
+		self.castbar:SetPoint("TOP", self.health, "BOTTOM", 0, -3)
 		self.castbar:SetStatusBarTexture(C["media"].normTex)
 		self.castbar:GetStatusBarTexture():SetHorizTile(true)
 		self.castbar:Hide()
@@ -681,7 +655,7 @@ local StylePlate = function(self)
 
 	if self.castbar.icon == nil then
 		self.castbar.icon = self.castbar:CreateTexture("$parentIcon", "OVERLAY")
-		self.castbar.icon:SetPoint("TOPRIGHT", self.health, "TOPLEFT", -5, 0)
+		self.castbar.icon:SetPoint("TOPRIGHT", self.health, "TOPLEFT", -2, 0)
 		self.castbar.icon:SetTexCoord(.08, .92, .08, .92)
 		self.castbar.shield = old_cbshield
 		self.castbar.shield:Hide()
@@ -706,7 +680,7 @@ local StylePlate = function(self)
 			self.AuraWidget = CreateFrame("Frame", nil, self.plate)
 			self.AuraWidget:SetHeight(32) 
 			self.AuraWidget:Show()
-			self.AuraWidget:SetSize(C["nameplate"].platewidth, C["nameplate"].plateheight)
+			self.AuraWidget:SetSize(C["nameplate"]["platewidth"], C["nameplate"]["plateheight"])
 			self.AuraWidget:SetPoint("BOTTOM", self.health, "TOP", 0, 20)
 
 			self.AuraWidget.PollFunction = function(self, elapsed)
@@ -805,7 +779,7 @@ Plates.updateAll = function(self)
 				GetFilter(self)
 				UpdateThreat(self)
 				GetRaidIcon(self)
-				if not C["nameplate"].threat then UpdateColor(self) end
+				if ((IsArena == true) or (bg == true) or (ash == true)) then UpdateColor(self) end
 				UpdateCastbarColor(self)
 				UpdateLevel(self)
 			end)
@@ -927,4 +901,5 @@ end)
 
 Plates:RegisterEvent("PLAYER_LOGIN")
 Plates:RegisterEvent("PLAYER_ENTERING_WORLD")
+Plates:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 Plates.updateAll(Plates)
