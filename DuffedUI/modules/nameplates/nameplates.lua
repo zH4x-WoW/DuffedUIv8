@@ -497,6 +497,16 @@ local UpdateThreat = function(self)
 	end
 end
 
+local Visibility = function(self)
+	if self.unit == "target" then
+		self.health.name:SetTextColor(1, 1, 0)
+		self.health:SetAlpha(1)
+	else
+		self.health.name:SetTextColor(1, 1, 1)
+		self.health:SetAlpha(.35)
+	end
+end
+
 local HideQueque = function(self)
 	local objectType
 	for object in pairs(self.queue) do
@@ -767,6 +777,7 @@ Plates.updateAll = function(self)
 				GetFilter(self)
 				UpdateColor(self)
 				UpdateThreat(self)
+				Visibility(self)
 				GetRaidIcon(self)
 				UpdateCastbarColor(self)
 				UpdateLevel(self)
