@@ -34,8 +34,6 @@ local IsInInstance = IsInInstance
 local select = select
 local nop = function() end
 local IsArena = (select(2, IsInInstance()) == "arena")
-local bg = (select(2, IsInInstance()) == "pvp")
-local ash = (select(1, GetCurrentMapAreaID()) == 978)
 
 local RAID_CLASS_COLORS = RAID_CLASS_COLORS
 local FACTION_BAR_COLORS = FACTION_BAR_COLORS
@@ -468,7 +466,6 @@ local transitionR, transitionG, transitionB = unpack(C["nameplate"]["threat_tran
 local UpdateThreat = function(self)
 	if self.health == nil then return end
 	if self.hasClass or self.isTagged then return end
-	--if (IsArena == true) or (bg == true) or (ash == true) then return end
 
 	--[[Enhanced Threat feature]]--
 	if not self.old_threat:IsShown() then
@@ -497,15 +494,6 @@ local UpdateThreat = function(self)
 			self.health:SetStatusBarColor(transitionR, transitionG, transitionB)
 			self.health.bg:SetTexture(unpack(C["media"]["backdropcolor"]))
 		end
-	end
-
-	--[[Highlight current target]]--
-	if self.unit == "target" then
-		self.health.name:SetTextColor(1, 1, 0)
-		self.health:SetAlpha(1)
-	else
-		self.health.name:SetTextColor(1, 1, 1)
-		self.health:SetAlpha(.35)
 	end
 end
 
@@ -777,9 +765,9 @@ Plates.updateAll = function(self)
 				self.health.name:SetAlpha(self:GetAlpha())
 				GetGUID(self)
 				GetFilter(self)
+				UpdateColor(self)
 				UpdateThreat(self)
 				GetRaidIcon(self)
-				if ((IsArena == true) or (bg == true) or (ash == true)) then UpdateColor(self) end
 				UpdateCastbarColor(self)
 				UpdateLevel(self)
 			end)
@@ -901,5 +889,4 @@ end)
 
 Plates:RegisterEvent("PLAYER_LOGIN")
 Plates:RegisterEvent("PLAYER_ENTERING_WORLD")
-Plates:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 Plates.updateAll(Plates)
