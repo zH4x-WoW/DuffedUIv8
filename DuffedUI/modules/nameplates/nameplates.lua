@@ -18,7 +18,6 @@ local UnitExists = UnitExists
 local UnitIsFriend = UnitIsFriend
 local UnitIsUnit = UnitIsUnit
 local UnitName = UnitName
-local UnitPlayerControlled = UnitPlayerControlled
 local UnitLevel = UnitLevel
 local GetCVar = GetCVar
 local SetCVar = SetCVar
