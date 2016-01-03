@@ -90,7 +90,6 @@ C["nameplate"] = {
  	["threat_transitioncolor"] = {.86, .77, .36},
  	["Percent"] = false,
  	["MaxDebuffs"] = 5,
- 	["NonTargetAlpha"] = .2,
  }
 
 C["actionbar"] = {

@@ -468,7 +468,7 @@ local transitionR, transitionG, transitionB = unpack(C["nameplate"]["threat_tran
 local UpdateThreat = function(self)
 	if self.health == nil then return end
 	if self.hasClass or self.isTagged then return end
-	if (IsArena == true) or (bg == true) or (ash == true) then return end
+	--if (IsArena == true) or (bg == true) or (ash == true) then return end
 
 	--[[Enhanced Threat feature]]--
 	if not self.old_threat:IsShown() then
@@ -505,7 +505,7 @@ local UpdateThreat = function(self)
 		self.health:SetAlpha(1)
 	else
 		self.health.name:SetTextColor(1, 1, 1)
-		self.health:SetAlpha(C["nameplate"]["NonTargetAlpha"])
+		self.health:SetAlpha(.35)
 	end
 end
 
