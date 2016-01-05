@@ -387,6 +387,44 @@ D["ConstructUFTarget"] = function(self)
 		self.Castbar.Time = castbar.time
 		self.Castbar.Icon = castbar.icon
 	end
+	
+	--[[ComboPoints]]--
+	local ComboPoints = CreateFrame("Frame", "ComboPoints", UIParent)
+	ComboPoints:Size(216, 5)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			ComboPoints:Point("TOP", oUF_Player.Power, "BOTTOM", 0, 0)
+		elseif layout == 2 then
+			ComboPoints:Point("CENTER", oUF_Player.panel, "CENTER", 0, 0)
+		elseif layout == 3 then
+			ComboPoints:Point("CENTER", oUF_Player.panel, "CENTER", 0, 5)
+		elseif layout == 4 then
+			ComboPoints:Point("TOP", oUF_Player.Health, "BOTTOM", 0, -5)
+		end
+	else
+		ComboPoints:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
+		D["ConstructEnergy"]("Energy", 216, 5)
+	end
+	ComboPoints:SetBackdrop(backdrop)
+	ComboPoints:SetBackdropColor(0, 0, 0)
+	ComboPoints:SetBackdropBorderColor(0, 0, 0)
+
+	for i = 1, 5 do
+		ComboPoints[i] = CreateFrame("StatusBar", "ComboPoints" .. i, ComboPoints)
+		ComboPoints[i]:Height(5)
+		ComboPoints[i]:SetStatusBarTexture(texture)
+		if i == 1 then
+			ComboPoints[i]:Width(44)
+			ComboPoints[i]:SetPoint("LEFT", ComboPoints)
+		else
+			ComboPoints[i]:Width(42)
+			ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
+		end
+		ComboPoints[i].bg = ComboPoints[i]:CreateTexture(nil, "ARTWORK")
+	end
+	ComboPoints:CreateBackdrop()
+	self.ComboPointsBar = ComboPoints
+	if C["unitframes"]["oocHide"] then D["oocHide"](ComboPoints) end
 
 	if C["unitframes"]["focusbutton"] then
 		D.CreateBtn("Focus", oUF_Target, 50, 10, "", "Focus")

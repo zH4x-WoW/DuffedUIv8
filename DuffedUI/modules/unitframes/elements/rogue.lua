@@ -19,47 +19,6 @@ local Colors = {
 if class ~= "ROGUE" then return end
 
 D["ClassRessource"]["ROGUE"] = function(self)
-	--[[ComboPoints]]--
-	local ComboPoints = CreateFrame("Frame", "ComboPoints", UIParent)
-	ComboPoints:Size(216, 5)
-	if C["unitframes"]["attached"] then
-		if layout == 1 then
-			ComboPoints:Point("TOP", oUF_Player.Power, "BOTTOM", 0, 0)
-		elseif layout == 2 then
-			ComboPoints:Point("CENTER", oUF_Player.panel, "CENTER", 0, 0)
-		elseif layout == 3 then
-			ComboPoints:Point("CENTER", oUF_Player.panel, "CENTER", 0, 5)
-		elseif layout == 4 then
-			ComboPoints:Point("TOP", oUF_Player.Health, "BOTTOM", 0, -5)
-		end
-	else
-		ComboPoints:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
-		D["ConstructEnergy"]("Energy", 216, 5)
-	end
-	ComboPoints:CreateBackdrop()
-
-	for i = 1, 5 do
-		ComboPoints[i] = CreateFrame("StatusBar", "ComboPoints" .. i, ComboPoints)
-		ComboPoints[i]:Height(5)
-		ComboPoints[i]:SetStatusBarTexture(texture)
-		ComboPoints[i]:SetStatusBarColor(unpack(Colors[i]))
-		ComboPoints[i].bg = ComboPoints[i]:CreateTexture(nil, "BORDER")
-		ComboPoints[i].bg:SetTexture(unpack(Colors[i]))
-		if i == 1 then
-			ComboPoints[i]:SetPoint("LEFT", ComboPoints)
-			ComboPoints[i]:Width(44)
-			ComboPoints[i].bg:SetAllPoints(ComboPoints[i])
-		else
-			ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
-			ComboPoints[i]:Width(42)
-			ComboPoints[i].bg:SetAllPoints(ComboPoints[i])
-		end
-		ComboPoints[i].bg:SetTexture(texture)
-		ComboPoints[i].bg:SetAlpha(.15)
-	end
-	self.ComboPointsBar = ComboPoints
-	if C["unitframes"]["oocHide"] then D["oocHide"](ComboPoints) end
-
 	--[[Anticipation Bar]]--
 	if C["unitframes"]["AnticipationBar"] then
 		local AnticipationBar = CreateFrame("Frame", "AnticipationBar", UIParent)

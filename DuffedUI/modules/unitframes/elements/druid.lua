@@ -15,7 +15,7 @@ D["ClassRessource"]["DRUID"] = function(self)
 	--[[Druid Mana]]--
 	if C["unitframes"]["DruidMana"] then
 		local DruidMana = CreateFrame("StatusBar", nil, self.Health)
-		DruidMana:Size(216, 5)
+		DruidMana:Size(216, 3)
 		if C["unitframes"]["attached"] then
 			if layout == 1 then
 				DruidMana:Point("TOP", self.Power, "BOTTOM", 0, -10)
@@ -83,7 +83,6 @@ D["ClassRessource"]["DRUID"] = function(self)
 		Mushroom[i].bg = Mushroom[i]:CreateTexture(nil, 'ARTWORK')
 	end
 	Mushroom:CreateBackdrop()
-	if C["unitframes"]["oocHide"] then D["oocHide"](Mushroom) end
 	self.WildMushroom = Mushroom
 
 	--[[Eclipse Bar]]--
@@ -129,46 +128,7 @@ D["ClassRessource"]["DRUID"] = function(self)
 	EclipseBar.Text:SetFontObject(font)
 
 	EclipseBar.PostUpdatePower = D["EclipseDirection"]
-	if C["unitframes"]["oocHide"] then D["oocHide"](EclipseBar) end
 	self.EclipseBar = EclipseBar
-
-	--[[ComboPoints]]--
-	local ComboPoints = CreateFrame("Frame", "ComboPoints", UIParent)
-	ComboPoints:Size(216, 5)
-	if C["unitframes"]["attached"] then
-		if layout == 1 then
-			ComboPoints:Point("TOP", oUF_Player.Power, "BOTTOM", 0, 0)
-		elseif layout == 2 then
-			ComboPoints:Point("CENTER", oUF_Player.panel, "CENTER", 0, 0)
-		elseif layout == 3 then
-			ComboPoints:Point("CENTER", oUF_Player.panel, "CENTER", 0, 5)
-		elseif layout == 4 then
-			ComboPoints:Point("TOP", oUF_Player.Health, "BOTTOM", 0, -5)
-		end
-	else
-		ComboPoints:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
-		D["ConstructEnergy"]("Energy", 216, 5)
-	end
-	ComboPoints:SetBackdrop(backdrop)
-	ComboPoints:SetBackdropColor(0, 0, 0)
-	ComboPoints:SetBackdropBorderColor(0, 0, 0)
-
-	for i = 1, 5 do
-		ComboPoints[i] = CreateFrame("StatusBar", "ComboPoints" .. i, ComboPoints)
-		ComboPoints[i]:Height(5)
-		ComboPoints[i]:SetStatusBarTexture(texture)
-		if i == 1 then
-			ComboPoints[i]:Width(44)
-			ComboPoints[i]:SetPoint("LEFT", ComboPoints)
-		else
-			ComboPoints[i]:Width(42)
-			ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
-		end
-		ComboPoints[i].bg = ComboPoints[i]:CreateTexture(nil, "ARTWORK")
-	end
-	ComboPoints:CreateBackdrop()
-	self.ComboPointsBar = ComboPoints
-	if C["unitframes"]["oocHide"] then D["oocHide"](ComboPoints) end
 
 	--[[Visibility]]--
 	Visibility = CreateFrame("Frame")
@@ -177,10 +137,7 @@ D["ClassRessource"]["DRUID"] = function(self)
 	Visibility:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	Visibility:SetScript("OnEvent", function()
 		local spec = GetSpecialization()
-		--local specName = spec and select(2, GetSpecializationInfo(spec)) or "None"
-		local form = GetShapeshiftFormID()
 		if spec == 1 then
-			if not form == 1 then ComboPoints:Hide() end
 			if not C["unitframes"]["attached"] then
 				Mushroom:ClearAllPoints()
 				Mushroom:Point("TOP", RessourceMover, "BOTTOM", 0, -5)
@@ -188,23 +145,20 @@ D["ClassRessource"]["DRUID"] = function(self)
 				Mushroom:ClearAllPoints()
 				Mushroom:Point("TOP", EclipseBar, "BOTTOM", 0, -7)
 			end
+			if C["unitframes"]["oocHide"] then D["oocHide"](Mushroom) end
+			if C["unitframes"]["oocHide"] then D["oocHide"](EclipseBar) end
 		elseif spec == 2 then
-			Mushroom:Hide()
-			EclipseBar:Hide()
+			Mushroom:SetAlpha(0)
+			EclipseBar:SetAlpha(0)
+		elseif spec == 3 then
+			Mushroom:SetAlpha(0)
+			EclipseBar:SetAlpha(0)
 		elseif spec == 4 then
-			EclipseBar:Hide()
-			if not form == 1 then ComboPoints:Hide() end
+			EclipseBar:SetAlpha(0)
 			Mushroom[1]:SetWidth(Mushroom:GetWidth())
 			Mushroom[2]:Hide()
 			Mushroom[3]:Hide()
-		elseif spec == 3 then
-			EclipseBar:Hide()
-			if not form == 1 then ComboPoints:Hide() end
-			Mushroom:Hide()
-		else
-			EclipseBar:Hide()
-			ComboPoints:Hide()
-			Mushroom:Hide()
+			if C["unitframes"]["oocHide"] then D["oocHide"](Mushroom) end
 		end
 	end)
 end
