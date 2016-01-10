@@ -502,7 +502,7 @@ local Visibility = function(self)
 		self.health:SetAlpha(1)
 	else
 		self.health.name:SetTextColor(1, 1, 1)
-		self.health:SetAlpha(.35)
+		self.health:SetAlpha(C["nameplate"]["NTA"])
 	end
 end
 

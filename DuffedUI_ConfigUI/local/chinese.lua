@@ -91,6 +91,7 @@
  	DuffedUIConfigUILocalization.nameplatethreat_goodcolor = "低仇恨着色,根据你的职业Tank or dps/heal而改变"
  	DuffedUIConfigUILocalization.nameplatethreat_transitioncolor = "失去/获得仇恨颜色"
  	DuffedUIConfigUILocalization.nameplatePercent = "启用数字百分比显示"
+	DuffedUIConfigUILocalization.nameplateNTA = "Set Non Target Alpha"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "快捷栏"
