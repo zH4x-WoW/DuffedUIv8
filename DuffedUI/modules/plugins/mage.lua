@@ -1,5 +1,5 @@
-if (select(2, UnitClass("player")) ~= "MAGE") or not DuffedUIMinimapStatsLeft then return end
 local D, C, L = unpack(select(2, ...))
+if (select(2, UnitClass("player")) ~= "MAGE") or not DuffedUIMinimapStatsLeft or not C["misc"]["magemenu"] then return end
 
 local font = D.Font(C["font"].datatext)
 local spells = (UnitFactionGroup("player") == "Horde") and {

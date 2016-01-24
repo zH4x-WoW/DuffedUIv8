@@ -132,7 +132,10 @@ D["ClassRessource"]["DRUID"] = function(self)
 
 	--[[Visibility]]--
 	Visibility = CreateFrame("Frame")
+	Visibility:RegisterEvent("PLAYER_LOGIN")
 	Visibility:RegisterEvent("PLAYER_ENTERING_WORLD")
+	Visibility:RegisterEvent("PLAYER_REGEN_DISABLED")
+	Visibility:RegisterEvent("PLAYER_REGEN_ENABLED")
 	Visibility:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
 	Visibility:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	Visibility:SetScript("OnEvent", function()

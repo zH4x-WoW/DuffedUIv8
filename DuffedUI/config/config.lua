@@ -231,6 +231,7 @@ C["misc"] = {
 	["AFKCamera"] = true,
 	["XPBar"] = true,
 	["XPBarWidth"] = 378,
+	["magemenu"] = false,
 }
 
 C["duffed"] = {

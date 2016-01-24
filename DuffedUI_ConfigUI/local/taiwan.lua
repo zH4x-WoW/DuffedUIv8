@@ -242,6 +242,7 @@
 	DuffedUIConfigUILocalization.miscXPBar = "啟用經驗條"
 	DuffedUIConfigUILocalization.miscXPBarWidth = "設置經驗條寬度"
 	DuffedUIConfigUILocalization.miscQuestLevel = "啟用任務等級顯示"
+	DuffedUIConfigUILocalization.miscmagemenu = "Enable Teleportmenu (works only on Mages)"
 
 	--[[Duffed]]--
 	DuffedUIConfigUILocalization.duffed = "Duffed特色功能"
