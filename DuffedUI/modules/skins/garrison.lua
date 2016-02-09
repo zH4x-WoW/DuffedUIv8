@@ -148,6 +148,7 @@ local function LoadGarrisonSkin()
 		GarrisonMissionFrameTab3:SkinTab()
 		GarrisonMissionFrameTab4:SkinTab()
 		GarrisonShipyardFrameTab3:SkinTab()
+		GarrisonLandingPageTab4:SkinTab()
 		local MissionPage = GarrisonMissionFrame.MissionTab.MissionPage
 		MissionPage.MinimizeButton:SkinCloseButton()
 		MissionPage.MinimizeButton:SetFrameLevel(MissionPage:GetFrameLevel() + 2)
