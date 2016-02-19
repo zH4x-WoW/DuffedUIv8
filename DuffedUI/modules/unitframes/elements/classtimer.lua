@@ -233,7 +233,11 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(124974), -- Nature's Vigil
 			CreateSpellEntry(127538), -- Savage Roar
 			CreateSpellEntry(132402, true), -- Savage Defense
-			CreateSpellEntry(145152), CreateSpellEntry(145162), -- Dream of Cenarius / Bloodtalons
+			CreateSpellEntry(108373), -- Dream of Cenarius (Balance)
+			CreateSpellEntry(158504), -- Dream of Cenarius (Restoration)
+			CreateSpellEntry(158501), -- Dream of Cenarius (Guardian)
+			CreateSpellEntry(158497), -- Dream of Cenarius (Feral)
+			CreateSpellEntry(145162), -- Bloodtalons
 			CreateSpellEntry(155777), -- Germination
 			CreateSpellEntry(158792), -- Pulverize
 			CreateSpellEntry(162359), -- Genesis
