@@ -1,9 +1,10 @@
 local D, C, L = unpack(select(2, ...))
 local LSM = LibStub("LibSharedMedia-3.0")
 
-LSM:Register("font","DuffedUI Font", [[Interface\AddOns\DuffedUI\medias\fonts\normal_font.ttf]], LSM.LOCALE_BIT_ruRU + LSM.LOCALE_BIT_western)
-LSM:Register("font","DuffedUI Font 2", [[Interface\AddOns\DuffedUI\medias\fonts\normal_font2.ttf]], LSM.LOCALE_BIT_ruRU + LSM.LOCALE_BIT_western)
-LSM:Register("font","DuffedUI Pixel Font", [[Interface\AddOns\DuffedUI\medias\fonts\pixel_font.ttf]], LSM.LOCALE_BIT_ruRU + LSM.LOCALE_BIT_western)
+LSM:Register("font", "DuffedUI Font", [[Interface\AddOns\DuffedUI\medias\fonts\normal_font.ttf]], LSM.LOCALE_BIT_ruRU + LSM.LOCALE_BIT_western)
+LSM:Register("font", "DuffedUI Font 2", [[Interface\AddOns\DuffedUI\medias\fonts\normal_font2.ttf]], LSM.LOCALE_BIT_ruRU + LSM.LOCALE_BIT_western)
+LSM:Register("font", "DuffedUI Pixel Font", [[Interface\AddOns\DuffedUI\medias\fonts\pixel_font.ttf]], LSM.LOCALE_BIT_ruRU + LSM.LOCALE_BIT_western)
+LSM:Register("statusbar", "DuffedUI Tex", [[Interface\AddOns\DuffedUI\medias\textures\normTex.tga]])
 
 if D.Client == "ruRU" then
 	C["media"].font = C["media"].ru_font
