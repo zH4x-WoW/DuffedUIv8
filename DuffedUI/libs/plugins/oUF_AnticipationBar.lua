@@ -36,7 +36,11 @@ local Update = function(self, event, unit)
 		end
 	end
 	
-	ab:Show()
+	if count > 0 then
+		ab:Show()
+	else
+		ab:Hide()
+	end
 	
 	if ab.PostUpdate then
 		ab:PostUpdate(self, count)
