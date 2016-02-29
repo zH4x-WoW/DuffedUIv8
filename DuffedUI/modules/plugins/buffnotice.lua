@@ -44,6 +44,8 @@ local BuffReminder1 = {
 		3408, -- Crippling Poison
 		8679, -- Wound Poison
 		108211, -- Leeching Poison
+		157584, -- Instant Poison
+		157605, -- Swift Poison
 	},
 	["SHAMAN"] = {
 		324, -- Lightning Shield
@@ -61,14 +63,6 @@ local BuffReminder1 = {
 		57330, -- Horn of Winter
 	},
 	["HUNTER"] = {},
-}
-
-local BuffReminder2 = {
-	["DEATHKNIGHT"] = {
-		48263, -- Blood Presence
-		48265, -- Unholy Presence
-		48266, -- Frost Presence
-	},
 }
 
 local pairs, select = pairs, select
@@ -92,10 +86,8 @@ end
 
 local function PositionFrames(self, event)
 	BuffsWarning1:ClearAllPoints()
-	BuffsWarning2:ClearAllPoints()
 	local Width = 40
 	BuffsWarning1:SetPoint("LEFT", BuffsWarningFrame, "LEFT", 0, 0)
-	BuffsWarning2:SetPoint("LEFT", BuffsWarningFrame, "LEFT", BuffsWarning1:IsShown() and 48 or 0, 0)
 	BuffsWarningFrame:SetWidth(Width)
 	BuffsWarningFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 100)
 end
@@ -154,10 +146,6 @@ end
 local BuffsWarning1 = CreateWarningFrame("BuffsWarning1")
 BuffsWarning1.Buffs = BuffReminder1[D["Class"]] or {}
 BuffsWarning1:SetScript("OnEvent", OnEvent)
-
-local BuffsWarning2 = CreateWarningFrame("BuffsWarning2")
-BuffsWarning2.Buffs = BuffReminder2[D["Class"]] or {}
-BuffsWarning2:SetScript("OnEvent", OnEvent)
 
 local BuffsWarningFrame = CreateFrame("Frame", "BuffsWarningFrame", UIParent)
 BuffsWarningFrame:SetSize(40, 40)
