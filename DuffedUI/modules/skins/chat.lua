@@ -221,7 +221,7 @@ local function LoadSkin()
 	ChannelRosterScrollFrameScrollBar:SkinScrollBar()
 	
 	-- BNConversationInviteDialog
-	BNConversationInviteDialog:StripTextures()
+	--[[BNConversationInviteDialog:StripTextures()
 	BNConversationInviteDialog:SetTemplate()
 	BNConversationInviteDialogInviteButton:SkinButton()
 	BNConversationInviteDialogCancelButton:SkinButton()
@@ -237,7 +237,7 @@ local function LoadSkin()
 				c.isSkinned = true
 			end
 		end
-	end)
+	end)]]--
 
 	-- Channel Pullout
 	ChannelPulloutBackground:Hide()

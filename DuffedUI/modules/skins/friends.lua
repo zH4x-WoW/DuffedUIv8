@@ -200,7 +200,7 @@ local function LoadSkin()
 
 	FriendsFriendsFrame:CreateBackdrop("Default")
 	FriendsFriendsList:SkinEditBox()
-	FriendsFriendsNoteFrame:SkinEditBox()
+	--FriendsFriendsNoteFrame:SkinEditBox()
 	FriendsFriendsFrameDropDown:SkinDropDownBox(150)
 	WhoFrameEditBox:ClearAllPoints()
 	WhoFrameWhoButton:ClearAllPoints()
