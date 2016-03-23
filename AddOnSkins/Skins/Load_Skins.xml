@@ -124,6 +124,7 @@
 	<Script file="Recount.lua"/>
 	<Script file="Scrap.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
+	<Script file="ServerHop.lua"/>
 	<Script file="ShieldBars.lua"/>
 	<Script file="ShieldMonitor.lua"/>
 	<Script file="SilverDragon.lua"/>
