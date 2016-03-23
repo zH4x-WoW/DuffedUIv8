@@ -380,7 +380,7 @@ function AS:Blizzard_Options(event, addon)
 
 		AS:SkinScrollBar(ChannelRosterScrollFrameScrollBar)
 		
-		AS:SkinFrame(BNConversationInviteDialog)
+		--[[AS:SkinFrame(BNConversationInviteDialog)
 		AS:SkinButton(BNConversationInviteDialogInviteButton)
 		AS:SkinButton(BNConversationInviteDialogCancelButton)
 		AS:StripTextures(BNConversationInviteDialogList)
@@ -389,7 +389,7 @@ function AS:Blizzard_Options(event, addon)
 
 		for i = 1, 7 do
 			AS:SkinCheckBox(_G["BNConversationInviteDialogListFriend"..i].checkButton)
-		end
+		end]]--
 		
 		-- Channel Pullout
 		ChannelPulloutBackground:Hide()
