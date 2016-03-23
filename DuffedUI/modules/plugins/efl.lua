@@ -42,7 +42,7 @@ function ColoringFriendsList()
 				end
 			end
 			if client == BNET_CLIENT_WOW then
-				local _, _, _, realmName, _, faction, race, class, _, zoneName, level, _ = BNGetToonInfo(toonID)
+				local _, _, _, realmName, _, faction, race, class, _, zoneName, level, _ = BNGetGameAccountInfo(toonID)
 				for k, v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
 					if class == v then class = k end
 				end
@@ -64,7 +64,7 @@ function ColoringFriendsList()
 					icon:SetTexture([[Interface\AddOns\DuffedUI\medias\textures\]] .. faction)
 					local filename, fontHeight, flags = nameString:GetFont()
 				end
-				if CanCooperateWithToon(toonID) ~= true then
+				if CanCooperateWithGameAccount(toonID) ~= true then
 					local nameString = _G[button .. (i - friendOffset) .. "Info"]
 					if nameString then
 						nameString:SetTextColor(125/255,133/255,138/255)

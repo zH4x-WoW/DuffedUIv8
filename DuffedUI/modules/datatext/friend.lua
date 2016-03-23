@@ -129,7 +129,7 @@ local function BuildBNTable(total)
 	
 	for i = 1, total do
 		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
-		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetToonInfo(presenceID)
+		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(presenceID)
 
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
@@ -143,7 +143,7 @@ local function UpdateBNTable(total)
 	for i = 1, #BNTable do
 		-- get guild roster information
 		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
-		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetToonInfo(presenceID)
+		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(presenceID)
 		
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
@@ -261,6 +261,8 @@ Stat:SetScript("OnEnter", function(self)
 	local totalonline = totalOnline + BNTotalOnline
 	local totalfriends = #friendTable + #BNTable
 	local zonec, classc, levelc, realmc, grouped
+	local onWoW, onHS, onD3, onHotS, onOW, onClient, onS2 = 0, 0, 0, 0, 0, 0, 0
+
 	if totalonline > 0 then
 		local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
 		GameTooltip:SetOwner(panel, anchor, xoff, yoff)
@@ -287,6 +289,7 @@ Stat:SetScript("OnEnter", function(self)
 				end
 			end
 		end
+
 		if BNTotalOnline > 0 then
 			GameTooltip:AddLine(' ')
 			GameTooltip:AddLine(battleNetString)
@@ -294,19 +297,20 @@ Stat:SetScript("OnEnter", function(self)
 			local status = 0
 			for i = 1, #BNTable do
 				if BNTable[i][7] then
-					if BNTable[i][6] == wowString then
+					if BNTable[i][6] == wowString then 
 						if (BNTable[i][8] == true) then status = 1 elseif (BNTable[i][9] == true) then status = 2 else status = 3 end
 	
 						classc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[BNTable[i][14]]
-						if classc == nil then 
-							classc = RAID_CLASS_COLORS["PRIEST"]
+						levelc = RAID_CLASS_COLORS["PRIEST"]
+						if not classc then 
+							classc = {r = 1, g = 1, b = 1}
 						end
 						
-						if BNTable[i][16] ~= '' then
+						--[[if BNTable[i][16] ~= '' then
 							levelc = GetQuestDifficultyColor(BNTable[i][16])
 						else
 							levelc = RAID_CLASS_COLORS["PRIEST"]
-						end
+						end]]--
 						
 						if UnitInParty(BNTable[i][4]) or UnitInRaid(BNTable[i][4]) then grouped = 1 else grouped = 2 end
 						GameTooltip:AddDoubleLine(format(clientLevelNameString, BNTable[i][6],levelc.r*255,levelc.g*255,levelc.b*255,BNTable[i][16],classc.r*255,classc.g*255,classc.b*255,BNTable[i][4],groupedTable[grouped], 255, 0, 0, statusTable[status]),BNTable[i][2],238,238,238,238,238,238)
@@ -316,10 +320,118 @@ Stat:SetScript("OnEnter", function(self)
 							GameTooltip:AddDoubleLine("  "..BNTable[i][15], BNTable[i][11], zonec.r, zonec.g, zonec.b, realmc.r, realmc.g, realmc.b)
 						end
 					else
-						GameTooltip:AddDoubleLine("|cffeeeeee"..BNTable[i][6].." ("..BNTable[i][4]..")|r", "|cffeeeeee"..BNTable[i][2].."|r")
+						--GameTooltip:AddDoubleLine("|cffeeeeee"..BNTable[i][6].." ("..BNTable[i][4]..")|r", "|cffeeeeee"..BNTable[i][2].."|r")
 					end
 				end
 			end
+
+			for i = 1, #BNTable do
+                if BNTable[i][7] then
+                    if BNTable[i][6] == "WTCG" then
+                        onHS = onHS + 1
+
+                        local Client = "Hearthstone"
+                        local isBattleTag = BNTable[i][17]
+
+                        if onHS == 1 then
+                            GameTooltip:AddDoubleLine(" ", " ")
+                            GameTooltip:AddDoubleLine("|cffD49E43"..Client.."|r", "")
+                        end
+
+                        GameTooltip:AddDoubleLine("|cffeeeeee"..BNTable[i][3].."|r", isBattleTag == false and BNTable[i][2],238,238,238,238,238,238)
+                    end
+                end
+            end
+
+            for i = 1, #BNTable do
+                if BNTable[i][7] then
+                    if BNTable[i][6] == "D3" then
+                        onD3 = onD3 + 1
+
+                        local Client = "Diablo III"
+                        local isBattleTag = BNTable[i][17]
+
+                        if onD3 == 1 then
+                            GameTooltip:AddDoubleLine(" ", " ")
+                            GameTooltip:AddDoubleLine("|cffCC2200"..Client.."|r", "")
+                        end
+
+                        GameTooltip:AddDoubleLine("|cffeeeeee"..BNTable[i][3].."|r", isBattleTag == false and BNTable[i][2],238,238,238,238,238,238)
+                    end
+                end
+            end
+
+            for i = 1, #BNTable do
+                if BNTable[i][7] then
+                    if BNTable[i][6] == "Hero" then
+                        onHotS = onHotS + 1
+
+                        local Client = "Heroes of the Storm"
+                        local isBattleTag = BNTable[i][17]
+
+                        if onHotS == 1 then
+                            GameTooltip:AddDoubleLine(" ", " ")
+                            GameTooltip:AddDoubleLine("|cffACE5EE"..Client.."|r", "")
+                        end
+
+                        GameTooltip:AddDoubleLine("|cffeeeeee"..BNTable[i][3].."|r", isBattleTag == false and BNTable[i][2],238,238,238,238,238,238)
+                    end
+                end
+            end
+
+            for i = 1, #BNTable do
+                if BNTable[i][7] then
+                    if BNTable[i][6] == "S2" then
+                        onS2 = onS2 + 1
+
+                        local Client = "Starcraft II"
+                        local isBattleTag = BNTable[i][17]
+
+                        if onS2 == 1 then
+                            GameTooltip:AddDoubleLine(" ", " ")
+                            GameTooltip:AddDoubleLine("|cffACE5EE"..Client.."|r", "")
+                        end
+
+                        GameTooltip:AddDoubleLine("|cffeeeeee"..BNTable[i][3].."|r", isBattleTag == false and BNTable[i][2],238,238,238,238,238,238)
+                    end
+                end
+            end
+
+            for i = 1, #BNTable do
+                if BNTable[i][7] then
+                    if BNTable[i][6] == "Pro" then
+                        onOW = onOW + 1
+
+                        local Client = "Overwatch"
+                        local isBattleTag = BNTable[i][17]
+
+                        if onOW == 1 then
+                            GameTooltip:AddDoubleLine(" ", " ")
+                            GameTooltip:AddDoubleLine("|cffACE5EE"..Client.."|r", "")
+                        end
+
+                        GameTooltip:AddDoubleLine("|cffeeeeee"..BNTable[i][3].."|r", isBattleTag == false and BNTable[i][2],238,238,238,238,238,238)
+                    end
+                end
+            end
+
+            for i = 1, #BNTable do
+                if BNTable[i][7] then
+                    if BNTable[i][6] == "App" then
+                        onClient = onClient + 1
+
+                        local Client = "Battle.NET Client"
+                        local isBattleTag = BNTable[i][17]
+
+                        if onClient == 1 then
+                            GameTooltip:AddDoubleLine(" ", " ")
+                            GameTooltip:AddDoubleLine("|cff00B4FF"..Client.."|r", "")
+                        end
+
+                        GameTooltip:AddDoubleLine("|cffeeeeee"..BNTable[i][3].."|r", isBattleTag == false and BNTable[i][2],238,238,238,238,238,238)
+                    end
+                end
+            end
 		end
 		GameTooltip:Show()
 	else 
