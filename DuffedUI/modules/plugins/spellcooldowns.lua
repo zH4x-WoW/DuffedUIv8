@@ -303,6 +303,7 @@ spellCooldowns = {
 		121471, -- Shadow Blades
 		137619, -- Marked for Death
 		152150, -- Death from Above
+		152151, -- Shadow Reflection
 	},
 	["SHAMAN"] = {
 		421,    -- Chain Lightning
