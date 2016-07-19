@@ -28,7 +28,7 @@ DuffedUIThreatBar.Title:SetPoint("LEFT", DuffedUIThreatBar, "LEFT", D.Scale(30),
   
 DuffedUIThreatBar.bg = DuffedUIThreatBar:CreateTexture(nil, 'BORDER')
 DuffedUIThreatBar.bg:SetAllPoints(DuffedUIThreatBar)
-DuffedUIThreatBar.bg:SetTexture(.1, .1, .1)
+DuffedUIThreatBar.bg:SetColorTexture(.1, .1, .1)
 
 local function OnEvent(self, event, ...)
 	--[[local party = GetNumGroupMembers()

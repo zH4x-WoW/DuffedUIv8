@@ -8,7 +8,7 @@ ns._Objects = {}
 ns._Headers = {}
 
 local texture = C["media"].normTex
-local font = D.Font(C["font"].unitframes)
+local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
 local layout = C["unitframes"]["layout"]
 local move = D["move"]
 local backdrop = {
@@ -63,7 +63,7 @@ D["ConstructUFTarget"] = function(self)
 
 	local healthBG = health:CreateTexture(nil, "BORDER")
 	healthBG:SetAllPoints()
-	healthBG:SetTexture(0, 0, 0)
+	healthBG:SetColorTexture(0, 0, 0)
 
 	if C["unitframes"]["percent"] then
 		local percHP
@@ -75,7 +75,7 @@ D["ConstructUFTarget"] = function(self)
 	end
 
 	health.value = health:CreateFontString(nil, "OVERLAY")
-	health.value:SetFontObject(font)
+	health.value:SetFont(f, fs, ff)
 	if layout == 4 then health.value:Point("LEFT", health, "LEFT", 4, 10) else health.value:Point("RIGHT", health, "RIGHT", -4, -1) end
 	health.PostUpdate = D.PostUpdateHealth
 
@@ -87,10 +87,10 @@ D["ConstructUFTarget"] = function(self)
 		health.colorClass = false
 		health:SetStatusBarColor(unpack(C["unitframes"].healthbarcolor))
 		healthBG:SetVertexColor(unpack(C["unitframes"].deficitcolor))
-		healthBG:SetTexture(.6, .6, .6)
+		healthBG:SetColorTexture(.6, .6, .6)
 		if C["unitframes"]["ColorGradient"] then
 			health.colorSmooth = true
-			healthBG:SetTexture(0, 0, 0)
+			healthBG:SetColorTexture(0, 0, 0)
 		end
 	else
 		health.colorDisconnected = true
@@ -134,7 +134,7 @@ D["ConstructUFTarget"] = function(self)
 
 	if layout == 2 or layout == 4 then
 		power.value = health:CreateFontString(nil, "OVERLAY")
-		power.value:SetFontObject(font)
+		power.value:SetFont(f, fs, ff)
 		if layout == 4 then power.value:Point("LEFT", health, "LEFT", 4, -1) else power.value:Point("RIGHT", panel, "RIGHT", -4, -1) end
 	end
 
@@ -143,12 +143,17 @@ D["ConstructUFTarget"] = function(self)
 	power.colorDisconnected = true
 	if C["unitframes"]["showsmooth"] == true then power.Smooth = true end
 	if C["unitframes"]["unicolor"] == true then
+		power.colorPower = true
+		power.colorTapping = false
+		power.colorClass = false
+		power.colorClassNPC = false
+		power.colorClassPet = false
+	else
 		power.colorTapping = true
 		power.colorClass = true
 		power.colorClassNPC = true
 		power.colorClassPet = true
-	else
-		power.colorPower = true
+		power.colorPower = false
 	end
 
 	--[[Elements]]--
@@ -234,7 +239,7 @@ D["ConstructUFTarget"] = function(self)
 	local Name = health:CreateFontString(nil, "OVERLAY")
 	if layout == 4 then Name:Point("RIGHT", health, "RIGHT", -4, 0) else Name:Point("LEFT", health, "LEFT", 4, 0) end
 	Name:SetJustifyH("LEFT")
-	Name:SetFontObject(font)
+	Name:SetFont(f, fs, ff)
 	Name:SetShadowOffset(1.25, -1.25)
 	self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:namelong] [DuffedUI:diffcolor][level] [shortclassification]")
 
@@ -310,42 +315,11 @@ D["ConstructUFTarget"] = function(self)
 		self.CombatFeedbackText = CombatFeedbackText
 	end
 
-	if C["unitframes"]["healcomm"] then
-		local mhpb = CreateFrame("StatusBar", nil, health)
-		mhpb:Point("LEFT", health:GetStatusBarTexture(), "RIGHT", 0, 0)
-		mhpb:SetHeight(health:GetHeight())
-		mhpb:SetWidth(218)
-		mhpb:SetStatusBarTexture(texture)
-		mhpb:SetStatusBarColor(0, 1, .5, .25)
-		mhpb:SetMinMaxValues(0, 1)
-
-		local ohpb = CreateFrame("StatusBar", nil, health)
-		ohpb:Point("LEFT", mhpb:GetStatusBarTexture(), "RIGHT", 0, 0)
-		ohpb:SetHeight(health:GetHeight())
-		ohpb:SetWidth(218)
-		ohpb:SetStatusBarTexture(texture)
-		ohpb:SetStatusBarColor(0, 1, 0, .25)
-
-		local absb = CreateFrame("StatusBar", nil, health)
-		absb:Point("LEFT", ohpb:GetStatusBarTexture(), "RIGHT", 0, 0)
-		absb:SetHeight(health:GetHeight())
-		absb:SetWidth(218)
-		absb:SetStatusBarTexture(texture)
-		absb:SetStatusBarColor(1, 1, 0, .25)
-
-		self.HealPrediction = {
-			myBar = mhpb,
-			otherBar = ohpb,
-			absorbBar = absb,
-			maxOverflow = 1,
-		}
-	end
-
 	--[[Castbar]]--
 	if C["castbar"]["enable"] then
 		local tcb = CreateFrame("Frame", "TargetCastBarMover", UIParent)
-		tcb:Size(225, 18)
-		if C["raid"].center then tcb:Point("BOTTOM", UIParent, "BOTTOM", 340, 130) else tcb:Point("BOTTOM", UIParent, "BOTTOM", 0, 395) end
+		tcb:Size(247, 18)
+		tcb:Point("BOTTOM", UIParent, "BOTTOM", 0, 265)
 		move:RegisterFrame(tcb)
 
 		local castbar = CreateFrame("StatusBar", self:GetName() .. "CastBar", self)
@@ -360,13 +334,13 @@ D["ConstructUFTarget"] = function(self)
 		castbar.PostChannelStart = D["CastBar"]
 
 		castbar.time = castbar:CreateFontString(nil, "OVERLAY")
-		castbar.time:SetFontObject(font)
+		castbar.time:SetFont(f, fs, ff)
 		castbar.time:Point("RIGHT", castbar, "RIGHT", -5, 0)
 		castbar.time:SetTextColor(.84, .75, .65)
 		castbar.time:SetJustifyH("RIGHT")
 
 		castbar.Text = castbar:CreateFontString(nil, "OVERLAY")
-		castbar.Text:SetFontObject(font)
+		castbar.Text:SetFont(f, fs, ff)
 		castbar.Text:Point("LEFT", castbar, "LEFT", 6, 0)
 		castbar.Text:SetTextColor(.84, .75, .65)
 		castbar:CreateBackdrop()
@@ -375,12 +349,12 @@ D["ConstructUFTarget"] = function(self)
 			castbar.button = CreateFrame("Frame", nil, castbar)
 			castbar.button:SetTemplate("Default")
 
-			castbar.button:Size(25)
-			castbar.button:Point("BOTTOM", castbar, "TOP", 0, 5)
+			castbar.button:Size(22)
+			castbar.button:Point("LEFT", castbar, "RIGHT", 3, 0)
 			castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
 			castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
 			castbar.icon:Point("BOTTOMRIGHT", castbar.button, -2, 2)
-			castbar.icon:SetTexCoord(.08, .92, .08, .92)
+			castbar.icon:SetTexCoord(unpack(D["IconCoord"]))
 		end
 
 		self.Castbar = castbar
@@ -388,44 +362,6 @@ D["ConstructUFTarget"] = function(self)
 		self.Castbar.Icon = castbar.icon
 	end
 	
-	--[[ComboPoints]]--
-	local ComboPoints = CreateFrame("Frame", "ComboPoints", UIParent)
-	ComboPoints:Size(216, 5)
-	if C["unitframes"]["attached"] then
-		if layout == 1 then
-			ComboPoints:Point("TOP", oUF_Player.Power, "BOTTOM", 0, 0)
-		elseif layout == 2 then
-			ComboPoints:Point("CENTER", oUF_Player.panel, "CENTER", 0, 0)
-		elseif layout == 3 then
-			ComboPoints:Point("CENTER", oUF_Player.panel, "CENTER", 0, 5)
-		elseif layout == 4 then
-			ComboPoints:Point("TOP", oUF_Player.Health, "BOTTOM", 0, -5)
-		end
-	else
-		ComboPoints:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
-		D["ConstructEnergy"]("Energy", 216, 5)
-	end
-	ComboPoints:SetBackdrop(backdrop)
-	ComboPoints:SetBackdropColor(0, 0, 0)
-	ComboPoints:SetBackdropBorderColor(0, 0, 0)
-
-	for i = 1, 5 do
-		ComboPoints[i] = CreateFrame("StatusBar", "ComboPoints" .. i, ComboPoints)
-		ComboPoints[i]:Height(5)
-		ComboPoints[i]:SetStatusBarTexture(texture)
-		if i == 1 then
-			ComboPoints[i]:Width(44)
-			ComboPoints[i]:SetPoint("LEFT", ComboPoints)
-		else
-			ComboPoints[i]:Width(42)
-			ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
-		end
-		ComboPoints[i].bg = ComboPoints[i]:CreateTexture(nil, "ARTWORK")
-	end
-	ComboPoints:CreateBackdrop()
-	self.ComboPointsBar = ComboPoints
-	if C["unitframes"]["oocHide"] then D["oocHide"](ComboPoints) end
-
 	if C["unitframes"]["focusbutton"] then
 		D.CreateBtn("Focus", oUF_Target, 50, 10, "", "Focus")
 		if layout == 1 then

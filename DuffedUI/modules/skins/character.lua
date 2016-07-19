@@ -3,7 +3,6 @@ if IsAddOnLoaded("AddOnSkins") then return end
 
 local function LoadSkin()
 	CharacterFrameCloseButton:SkinCloseButton()
-	CharacterStatsPaneScrollBar:SkinScrollBar()
 	ReputationListScrollFrameScrollBar:SkinScrollBar()
 	TokenFrameContainerScrollBar:SkinScrollBar()
 	GearManagerDialogPopupScrollFrameScrollBar:SkinScrollBar()
@@ -52,9 +51,6 @@ local function LoadSkin()
 		"PaperDollSidebarTabs",
 		"PaperDollEquipmentManagerPane",
 	}
-
-	CharacterFrameExpandButton:Size(CharacterFrameExpandButton:GetWidth() - 7, CharacterFrameExpandButton:GetHeight() - 7)
-	CharacterFrameExpandButton:SkinNextPrevButton()
 
 	ReputationDetailCloseButton:SkinCloseButton()
 	TokenFramePopupCloseButton:SkinCloseButton()
@@ -105,6 +101,16 @@ local function LoadSkin()
 
 	for _, scrollbar in pairs(scrollbars) do _G[scrollbar]:SkinScrollBar(5) end
 	for _, object in pairs(charframe) do _G[object]:StripTextures() end
+	CharacterStatsPane.AttributesCategory:StripTextures()
+	CharacterStatsPane.AttributesCategory:SetTemplate("Transparent")
+	CharacterStatsPane.AttributesCategory:SetHeight(CharacterStatsPane.AttributesCategory:GetHeight() - 20)
+	CharacterStatsPane.AttributesCategory.Title:ClearAllPoints()
+	CharacterStatsPane.AttributesCategory.Title:SetPoint("CENTER", 0, -1)
+	CharacterStatsPane.EnhancementsCategory:StripTextures()
+	CharacterStatsPane.EnhancementsCategory:SetTemplate("Transparent")
+	CharacterStatsPane.EnhancementsCategory:SetHeight(CharacterStatsPane.EnhancementsCategory:GetHeight() - 20)
+	CharacterStatsPane.EnhancementsCategory.Title:ClearAllPoints()
+	CharacterStatsPane.EnhancementsCategory.Title:SetPoint("CENTER", 0, -1)
 
 	CharacterFrame:SetTemplate("Transparent")
 
@@ -175,17 +181,17 @@ local function LoadSkin()
 	end)
 
 	--[[Handle Tabs at bottom of character frame]]--
-	for i = 1, 4 do _G["CharacterFrameTab" .. i]:SkinTab() end
+	for i = 1, 3 do _G["CharacterFrameTab" .. i]:SkinTab() end
 
 	--[[Buttons used to toggle between equipment manager, titles, and character stats]]--
 	local function FixSidebarTabCoords()
 		for i = 1, #PAPERDOLL_SIDEBARS do
 			local tab = _G["PaperDollSidebarTab" .. i]
 			if tab and not tab.backdrop then
-				tab.Highlight:SetTexture(1, 1, 1, 0.3)
+				tab.Highlight:SetColorTexture(1, 1, 1, 0.3)
 				tab.Highlight:Point("TOPLEFT", 3, -4)
 				tab.Highlight:Point("BOTTOMRIGHT", -1, 0)
-				tab.Hider:SetTexture(.4, .4, .4, .4)
+				tab.Hider:SetColorTexture(.4, .4, .4, .4)
 				tab.Hider:Point("TOPLEFT", 3, -4)
 				tab.Hider:Point("BOTTOMRIGHT", -1, 0)
 				tab.TabBg:Kill()
@@ -206,9 +212,6 @@ local function LoadSkin()
 		end
 	end
 	hooksecurefunc("PaperDollFrame_UpdateSidebarTabs", FixSidebarTabCoords)
-
-	--[[Stat panels, atm it looks like 7 is the max]]--
-	for i = 1, 7 do _G["CharacterStatsPaneCategory" .. i]:StripTextures() end
 
 	--[[Reputation]]--
 	local function UpdateFactionSkins()
@@ -258,7 +261,7 @@ local function LoadSkin()
 	end)
 
 	--[[Pet]]--
-	PetModelFrame:CreateBackdrop("Default")
+	--[[PetModelFrame:CreateBackdrop("Default")
 	PetModelFrameRotateRightButton:SkinRotateButton()
 	PetModelFrameRotateLeftButton:SkinRotateButton()
 	PetModelFrameRotateRightButton:ClearAllPoints()
@@ -267,7 +270,7 @@ local function LoadSkin()
 	local xtex = PetPaperDollPetInfo:GetRegions()
 	xtex:SetTexCoord(.12, .63, .15, .55)
 	PetPaperDollPetInfo:CreateBackdrop("Default")
-	PetPaperDollPetInfo:Size(24, 24)
+	PetPaperDollPetInfo:Size(24, 24)]]--
 end
 
 tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)

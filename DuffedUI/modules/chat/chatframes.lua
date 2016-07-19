@@ -79,6 +79,10 @@ local function SetChatStyle(frame)
 	_G[chat.."TabText"]:SetTextColor(unpack(C["media"].datatextcolor1))
 	_G[chat.."TabText"].SetTextColor = D.Dummy
 	_G[chat.."TabText"]:SetFont(C["media"].font, 11)
+	if id == 4 then
+		_G[chat.."TabText"]:ClearAllPoints()
+		_G[chat.."TabText"]:SetPoint("CENTER", _G[chat.."Tab"], 0, -4)
+	end
 
 	_G[chat]:SetClampRectInsets(0, 0, 0, 0)
 	_G[chat]:SetClampedToScreen(false)
@@ -116,13 +120,11 @@ local function SetChatStyle(frame)
 	_G[format("ChatFrame%sButtonFrameMinimizeButton", id)]:Kill()
 	_G[format("ChatFrame%sButtonFrame", id)]:Kill()
 
-	_G[format("ChatFrame%sEditBoxFocusLeft", id)]:Kill()
-	_G[format("ChatFrame%sEditBoxFocusMid", id)]:Kill()
-	_G[format("ChatFrame%sEditBoxFocusRight", id)]:Kill()
+	_G[format("ChatFrame%sEditBoxLeft", id)]:Kill()
+	_G[format("ChatFrame%sEditBoxMid", id)]:Kill()
+	_G[format("ChatFrame%sEditBoxRight", id)]:Kill()
 
 	local a, b, c = select(6, _G[chat.."EditBox"]:GetRegions()) a:Kill() b:Kill() c:Kill()
-
-	if tab.conversationIcon then tab.conversationIcon:Kill() end
 
 	_G[chat.."EditBox"]:SetAltArrowKeyMode(false)
 

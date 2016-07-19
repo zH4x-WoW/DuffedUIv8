@@ -1,39 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
-	local frame = MissingLootFrame
-	local close = MissingLootFramePassButton
-
-	frame:StripTextures()
-	frame:SetTemplate("Transparent")
-
-	MissingLootFramePassButton:SkinCloseButton()
-	
-	local function SkinButton()
-		local number = GetNumMissingLootItems()
-		for i = 1, number do
-			local slot = _G["MissingLootFrameItem"..i]
-			local icon = slot.icon
-			
-			if not slot.isSkinned then
-				slot:StripTextures()
-				slot:SetTemplate("Default")
-				slot:StyleButton()
-				icon:SetTexCoord(.08, .92, .08, .92)
-				icon:ClearAllPoints()
-				icon:Point("TOPLEFT", 2, -2)
-				icon:Point("BOTTOMRIGHT", -2, 2)
-				
-				slot.isSkinned = true
-			end
-			
-			local quality = select(4, GetMissingLootItemInfo(i))
-			local color = (GetItemQualityColor(quality)) or (unpack(C["media"].bordercolor))
-			frame:SetBackdropBorderColor(color)
-		end
-	end
-	hooksecurefunc("MissingLootFrame_Show", SkinButton)
-	
 	-- loot history frame
 	LootHistoryFrame:StripTextures()
 	LootHistoryFrame.CloseButton:SkinCloseButton()
@@ -118,7 +85,7 @@ local function LoadSkin()
 	BonusRollFrame.PromptFrame.IconBackdrop:SetFrameLevel(BonusRollFrame.PromptFrame.IconBackdrop:GetFrameLevel() - 1)
 	BonusRollFrame.PromptFrame.IconBackdrop:SetOutside(BonusRollFrame.PromptFrame.Icon)
 	BonusRollFrame.PromptFrame.IconBackdrop:SetTemplate()
-	BonusRollFrame.PromptFrame.Timer.Bar:SetTexture(75/255,  175/255, 76/255)
+	BonusRollFrame.PromptFrame.Timer.Bar:SetColorTexture(75/255,  175/255, 76/255)
 	BonusRollFrame.PromptFrame.Timer.Bar:SetVertexColor(75/255,  175/255, 76/255)
 	BonusRollFrame.BlackBackgroundHoist:StripTextures()
 	BonusRollFrame.PromptFrame.Timer:CreateBackdrop()

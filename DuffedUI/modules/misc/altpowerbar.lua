@@ -8,24 +8,27 @@ local PowerTextures = {
 	["INTERFACE\\UNITPOWERBARALT\\STONEGUARDJADE_HORIZONTAL_FILL.BLP"] = {r = .13, g = .55, b = .13},
 	["INTERFACE\\UNITPOWERBARALT\\STONEGUARDAMETHYST_HORIZONTAL_FILL.BLP"] = {r = .67, g = 0, b = 1},
 }
+local move = D["move"]
 
 PlayerPowerBarAlt:UnregisterEvent("UNIT_POWER_BAR_SHOW")
 PlayerPowerBarAlt:UnregisterEvent("UNIT_POWER_BAR_HIDE")
 PlayerPowerBarAlt:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 local AltPowerBar = CreateFrame("Frame", "DuffedUIAltPowerBar", DuffedUIInfoLeft)
-AltPowerBar:SetAllPoints()
+AltPowerBar:SetPoint("BOTTOM", UIParent, "BOTTOM", -340, 238)
+AltPowerBar:SetSize(232, 20)
+AltPowerBar:SetTemplate("Transparent")
 AltPowerBar:SetFrameStrata("MEDIUM")
 AltPowerBar:SetFrameLevel(0)
 AltPowerBar:EnableMouse(true)
-AltPowerBar:SetTemplate()
+move:RegisterFrame(AltPowerBar)
 
 local AltPowerBarStatus = CreateFrame("StatusBar", "DuffedUIAltPowerBarStatus", AltPowerBar)
 AltPowerBarStatus:SetFrameLevel(AltPowerBar:GetFrameLevel() + 1)
 AltPowerBarStatus:SetStatusBarTexture(C["media"].normTex)
 AltPowerBarStatus:SetMinMaxValues(0, 100)
-AltPowerBarStatus:Point("TOPLEFT", DuffedUIInfoLeft, "TOPLEFT", 2, -2)
-AltPowerBarStatus:Point("BOTTOMRIGHT", DuffedUIInfoLeft, "BOTTOMRIGHT", -2, 2)
+AltPowerBarStatus:Point("TOPLEFT", AltPowerBar, "TOPLEFT", 2, -2)
+AltPowerBarStatus:Point("BOTTOMRIGHT", AltPowerBar, "BOTTOMRIGHT", -2, 2)
 
 local AltPowerText = AltPowerBarStatus:CreateFontString("DuffedUIAltPowerBarText", "OVERLAY")
 AltPowerText:SetFont(C["media"].font, 11)

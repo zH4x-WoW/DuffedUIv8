@@ -74,10 +74,10 @@ local OnEvent = function(self, event, ...)
 end
 
 local AnnounceFrame = CreateFrame("Frame")
-AnnounceFrame:RegisterEvent("PLAYER_LOGIN")
+AnnounceFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 AnnounceFrame:SetScript("OnEvent", function(self, event)
     PlayerGUID = UnitGUID("player")
-    self:UnregisterEvent("PLAYER_LOGIN")
+    self:UnregisterEvent("PLAYER_ENTERING_WORLD")
     self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
     self:SetScript("OnEvent", OnEvent)
 end)

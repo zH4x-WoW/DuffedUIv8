@@ -4,7 +4,7 @@ if C["cooldown"].rcdenable ~= true then return end
 local anchor = "TOPLEFT"
 local x, y = 150, -150
 local width, height = 200, 15
-local font = D.Font(C["font"].rcd)
+local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
 local texture = C["media"].normTex
 
 local show = {
@@ -76,7 +76,7 @@ end
 
 local CreateFS = CreateFS or function(frame)
 	local fstring = frame:CreateFontString(nil, 'OVERLAY', 'GameFontHighlight')
-	fstring:SetFontObject(font)
+	fstring:SetFont(f, fs, ff)
 	fstring:SetShadowColor(0, 0, 0, 1)
 	fstring:SetShadowOffset(0.5, -0.5)
 	return fstring

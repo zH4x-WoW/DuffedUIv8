@@ -19,6 +19,7 @@ DuffedUITooltips.ItemRefTooltip = ItemRefTooltip
 
 DuffedUITooltips.Tooltips = {
 	GameTooltip,
+	ItemRefTooltip,
 	ItemRefShoppingTooltip1,
 	ItemRefShoppingTooltip2,
 	ItemRefShoppingTooltip3,
@@ -29,7 +30,6 @@ DuffedUITooltips.Tooltips = {
 	WorldMapCompareTooltip1,
 	WorldMapCompareTooltip2,
 	WorldMapCompareTooltip3,
-	ItemRefTooltip,
 }
 
 DuffedUITooltips.Classification = {
@@ -44,7 +44,11 @@ Anchor:SetSize(200, DuffedUIInfoRight:GetHeight())
 Anchor:SetFrameStrata("TOOLTIP")
 Anchor:SetFrameLevel(20)
 if C["chat"].rbackground and DuffedUIChatBackgroundRight then
-	Anchor:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, -DuffedUIInfoRight:GetHeight())
+	if Artifact_Backdrop:IsShown() then
+		Anchor:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, (-DuffedUIInfoRight:GetHeight() + 10))
+	else
+		Anchor:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, -DuffedUIInfoRight:GetHeight())
+	end
 else
 	Anchor:SetPoint("BOTTOMRIGHT", UIParent, 0, 110)
 end
@@ -172,9 +176,6 @@ function DuffedUITooltips:SetColor()
 
 	local Reaction = Unit and UnitReaction(Unit, "player")
 	local Player = Unit and UnitIsPlayer(Unit)
-	local Tapped = Unit and UnitIsTapped(Unit)
-	local PlayerTapped = Unit and UnitIsTappedByPlayer(Unit)
-	local QuestMOB = Unit and UnitIsTappedByAllThreatList(Unit)
 	local Connected = Unit and UnitIsConnected(Unit)
 	local Dead = Unit and UnitIsDead(Unit)
 	local R, G, B
@@ -287,7 +288,6 @@ end
 local hex = function(color) return (color.r and format('|cff%02x%02x%02x', color.r * 255, color.g * 255, color.b * 255)) or "|cffFFFFFF" end
 
 local nilcolor = {1, 1, 1}
-local tapped = {.6, .6, .6}
 
 local function unitColor(unit)
 	if (not unit) then unit = "mouseover" end
@@ -296,8 +296,6 @@ local function unitColor(unit)
 	if UnitIsPlayer(unit) then
 		local _, class = UnitClass(unit)
 		color = RAID_CLASS_COLORS[class]
-	elseif (UnitIsTapped(unit) and not UnitIsTappedByPlayer(unit)) and not UnitIsTappedByAllThreatList(Unit) then
-		color = tapped
 	else
 		local reaction = UnitReaction(unit, "player")
 		if reaction then color = FACTION_BAR_COLORS[reaction] end
@@ -309,7 +307,7 @@ local function addAuraInfo(self, caster, spellID)
 	if (C["tooltip"].enablecaster and caster) then
 		local color = unitColor(caster)
 		if color then color = hex(color) else color = "" end
-		GameTooltip:AddLine("Applied by "..color..UnitName(caster))
+		GameTooltip:AddLine(L["tooltip"]["applied"]..color..UnitName(caster))
 		GameTooltip:Show()
 	end
 end

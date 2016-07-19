@@ -44,7 +44,7 @@ local function LoadSkin()
 			end
 
 			if _G["SpellButton"..i.."Highlight"] then
-				_G["SpellButton"..i.."Highlight"]:SetTexture(1, 1, 1, 0.3)
+				_G["SpellButton"..i.."Highlight"]:SetColorTexture(1, 1, 1, 0.3)
 				_G["SpellButton"..i.."Highlight"]:ClearAllPoints()
 				_G["SpellButton"..i.."Highlight"]:SetAllPoints(icon)
 			end
@@ -225,7 +225,7 @@ local function LoadSkin()
 		end
 	end
 
-	hooksecurefunc("SpellBook_UpdateCoreAbilitiesTab", function()
+	--[[hooksecurefunc("SpellBook_UpdateCoreAbilitiesTab", function()
 		for i = 1, #SpellBookCoreAbilitiesFrame.Abilities do
 			local button = SpellBookCoreAbilitiesFrame.Abilities[i]
 			if button and button.isSkinned ~= true then
@@ -256,7 +256,7 @@ local function LoadSkin()
 
 	-- broken
 	-- What Has Changed Tab
-	--[[hooksecurefunc("SpellBook_UpdateWhatHasChangedTab", function()
+	hooksecurefunc("SpellBook_UpdateWhatHasChangedTab", function()
 		for i = 1, #SpellBookWhatHasChanged.ChangedItems do
 			local button = SpellBook_GetWhatChangedItem(i)
 			button.Ring:Hide()

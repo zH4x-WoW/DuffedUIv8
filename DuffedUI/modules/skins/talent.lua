@@ -3,10 +3,11 @@ if IsAddOnLoaded("AddOnSkins") then return end
 
 local function LoadSkin()
 	local buttons = {
-		"PlayerTalentFrameTalentsLearnButton",
-		"PlayerTalentFrameActivateButton",
-		"PlayerTalentFramePetSpecializationLearnButton",
-		"PlayerTalentFrameSpecializationLearnButton"
+		"PlayerTalentFrameSpecializationSpecButton1",
+		"PlayerTalentFrameSpecializationSpecButton2",
+		"PlayerTalentFrameSpecializationSpecButton3",
+		"PlayerTalentFrameSpecializationLearnButton",
+		"PlayerTalentFramePetSpecializationLearnButton"
 	}
 
 	for i = 1, #buttons do
@@ -20,6 +21,8 @@ local function LoadSkin()
 	PlayerTalentFrameSpecializationTutorialButton:Point("TOPLEFT", PlayerTalentFrame, "TOPLEFT", -12, 12)
 	PlayerTalentFramePetSpecializationTutorialButton.Ring:Hide()
 	PlayerTalentFramePetSpecializationTutorialButton:Point("TOPLEFT", PlayerTalentFrame, "TOPLEFT", -12, 12)
+	PlayerTalentFramePortrait:Hide()
+	PlayerTalentFramePortraitFrame:Hide()
 
 	PlayerTalentFrame:StripTextures()
 	PlayerTalentFrameInset:StripTextures()
@@ -42,12 +45,7 @@ local function LoadSkin()
 		select(i, PlayerTalentFrameSpecializationSpellScrollFrameScrollChild:GetRegions()):Hide()
 	end
 
-	PlayerTalentFrameTalentsClearInfoFrame:SetTemplate("Default")
-	PlayerTalentFrameTalentsClearInfoFrameIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	PlayerTalentFrameTalentsClearInfoFrameIcon:Point("TOPLEFT", 2, -2)
-	PlayerTalentFrameTalentsClearInfoFrameIcon:Point("BOTTOMRIGHT", -2, 2)
-
-	PlayerTalentFrameSpecializationSpellScrollFrameScrollChild.Seperator:SetTexture(1, 1, 1)
+	PlayerTalentFrameSpecializationSpellScrollFrameScrollChild.Seperator:SetColorTexture(1, 1, 1)
 	PlayerTalentFrameSpecializationSpellScrollFrameScrollChild.Seperator:SetAlpha(0.2)
 
 	if D.Class == "HUNTER" then
@@ -61,7 +59,7 @@ local function LoadSkin()
 			select(i, PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild:GetRegions()):Hide()
 		end
 
-		PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild.Seperator:SetTexture(1, 1, 1)
+		PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild.Seperator:SetColorTexture(1, 1, 1)
 		PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild.Seperator:SetAlpha(0.2)
 
 		for i = 1, GetNumSpecializations(false, true) do
@@ -70,7 +68,7 @@ local function LoadSkin()
 
 			bu.ring:Hide()
 			bu.specIcon:SetTexture(icon)
-			bu.specIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			bu.specIcon:SetTexCoord(unpack(D["IconCoord"]))
 			bu.specIcon:SetSize(50, 50)
 			bu.specIcon:Point("LEFT", bu, "LEFT", 15, 0)
 		end
@@ -168,8 +166,6 @@ local function LoadSkin()
 			bu.selectedTex:SetAlpha(0)
 
 			bu:CreateBackdrop("Overlay")
-			bu.backdrop:Point("TOPLEFT", 8, 2)
-			bu.backdrop:Point("BOTTOMRIGHT", 10, -2)
 
 			bu.border = CreateFrame("Frame", nil, bu)
 			bu.border:CreateBackdrop("Default")
@@ -221,11 +217,6 @@ local function LoadSkin()
 					bu.bg.backdrop:SetBackdropColor(unpack(C["media"].backdropcolor))
 					bu.bg.backdrop:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 				end
-				if bu.learnSelection:IsShown() then
-					bu.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
-					bu.bg.backdrop:SetBackdropColor(.2, .2, 0, 1)
-					bu.bg.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
-				end
 			end
 		end
 	end)
@@ -260,11 +251,7 @@ local function LoadSkin()
 	TalentMicroButtonAlert.CloseButton.t:SetTextColor(1, 1, 0)
 	TalentMicroButtonAlert.Text:SetTextColor(1, 1, 0)
 	TalentMicroButtonAlert:ClearAllPoints()
-	if DuffedUIPlayer then
-		TalentMicroButtonAlert:SetPoint("BOTTOM", DuffedUIPlayer, "TOP", 0, -2)
-	else
-		TalentMicroButtonAlert:SetPoint("BOTTOM", UIPARENT, "BOTTOM", 0, -6)
-	end
+	TalentMicroButtonAlert:SetPoint("BOTTOM", DuffedUIBar1, "TOP", 0, 0)
 end
 
 D.SkinFuncs["Blizzard_TalentUI"] = LoadSkin

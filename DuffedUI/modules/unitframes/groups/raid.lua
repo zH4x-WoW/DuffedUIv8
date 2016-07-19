@@ -9,7 +9,7 @@ ns._Headers = {}
 
 local class = select(2, UnitClass("player"))
 local texture = C["media"]["normTex"]
-local font = D.Font(C["font"]["unitframes"])
+local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
 local layout = C["raid"]["layout"]
 local backdrop = {
 	bgFile = C["media"].blank,
@@ -45,7 +45,7 @@ D["ConstructUFRaid"] = function(self)
 
 	health.value = health:CreateFontString(nil, "OVERLAY")
 	if layout == "heal" then health.value:Point("BOTTOM", health, 1, 2) else health.value:Point("LEFT", health, 8, 0) end
-	health.value:SetFontObject(font)
+	health.value:SetFont(f, fs, ff)
 
 	health.PostUpdate = D["PostUpdateHealthRaid"]
 	health.frequentUpdates = true
@@ -55,16 +55,16 @@ D["ConstructUFRaid"] = function(self)
 		health.colorClass = false
 		health:SetStatusBarColor(unpack(C["unitframes"].healthbarcolor))
 		health.bg:SetVertexColor(unpack(C["unitframes"].deficitcolor))
-		health.bg:SetTexture(.6, .6, .6)
+		health.bg:SetColorTexture(.6, .6, .6)
 		if C["unitframes"].ColorGradient then
 			health.colorSmooth = true
-			health.bg:SetTexture(0, 0, 0)
+			health.bg:SetColorTexture(0, 0, 0)
 		end
 	else
 		health.colorDisconnected = true
 		health.colorClass = true
 		health.colorReaction = true
-		health.bg:SetTexture(.1, .1, .1)
+		health.bg:SetColorTexture(.1, .1, .1)
 	end
 
 	self.Health = health
@@ -114,7 +114,7 @@ D["ConstructUFRaid"] = function(self)
 
 	--[[Elements]]--
 	local name = health:CreateFontString(nil, "OVERLAY")
-	name:SetFontObject(font)
+	name:SetFont(f, fs, ff)
 	if layout == "heal" then
 		name:Point("CENTER", health, "TOP", 0, -7)
 		self:Tag(name, "[DuffedUI:getnamecolor][DuffedUI:nameshort]")
@@ -250,12 +250,12 @@ D["ConstructUFRaid"] = function(self)
 			RaidDebuffs.icon:Point("BOTTOMRIGHT", -2, 2)
 
 			RaidDebuffs.time = RaidDebuffs:CreateFontString(nil, "OVERLAY")
-			RaidDebuffs.time:SetFontObject(font)
+			RaidDebuffs.time:SetFont(f, fs, ff)
 			RaidDebuffs.time:Point("CENTER", 1, 0)
 			RaidDebuffs.time:SetTextColor(1, .9, 0)
 
 			RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, "OVERLAY")
-			RaidDebuffs.count:SetFontObject(font)
+			RaidDebuffs.count:SetFont(f, fs, ff)
 			RaidDebuffs.count:Point("BOTTOMRIGHT", RaidDebuffs, "BOTTOMRIGHT", 0, 2)
 			RaidDebuffs.count:SetTextColor(1, .9, 0)
 			self.RaidDebuffs = RaidDebuffs

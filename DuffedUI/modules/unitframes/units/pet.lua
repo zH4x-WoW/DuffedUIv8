@@ -8,7 +8,7 @@ ns._Objects = {}
 ns._Headers = {}
 
 local texture = C["media"]["normTex"]
-local font = D.Font(C["font"]["unitframes"])
+local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
 local layout = C["unitframes"]["layout"]
 local backdrop = {
 	bgFile = C["media"].blank,
@@ -52,7 +52,7 @@ D["ConstructUFPet"] = function(self)
 
 	local healthBG = health:CreateTexture(nil, "BORDER")
 	healthBG:SetAllPoints()
-	healthBG:SetTexture(0, 0, 0)
+	healthBG:SetColorTexture(0, 0, 0)
 
 	self.Health = health
 	self.Health.bg = healthBG
@@ -66,10 +66,10 @@ D["ConstructUFPet"] = function(self)
 		health.colorClass = false
 		health:SetStatusBarColor(unpack(C["unitframes"].healthbarcolor))
 		healthBG:SetVertexColor(unpack(C["unitframes"].deficitcolor))
-		healthBG:SetTexture(.6, .6, .6)
+		healthBG:SetColorTexture(.6, .6, .6)
 		if C["unitframes"].ColorGradient then
 			health.colorSmooth = true
-			healthBG:SetTexture(0, 0, 0)
+			healthBG:SetColorTexture(0, 0, 0)
 		end
 	else
 		health.colorDisconnected = true
@@ -123,7 +123,7 @@ D["ConstructUFPet"] = function(self)
 	self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:nameshort] [DuffedUI:diffcolor][level] [shortclassification]")
 	if layout == 1 then Name:Point("CENTER", health, "CENTER", 2, 2) else Name:Point("CENTER", health) end
 	Name:SetJustifyH("CENTER")
-	Name:SetFontObject(font)
+	Name:SetFont(f, fs, ff)
 	Name:SetShadowColor(0, 0, 0)
 	Name:SetShadowOffset(1.25, -1.25)
 	self.Name = Name
@@ -159,13 +159,13 @@ D["ConstructUFPet"] = function(self)
 
 		if layout == 3 then
 			castbar.time = castbar:CreateFontString(nil, "OVERLAY")
-			castbar.time:SetFontObject(font)
+			castbar.time:SetFont(f, fs, ff)
 			castbar.time:Point("RIGHT", castbar, "RIGHT", -5, 0)
 			castbar.time:SetTextColor(.84, .75, .65)
 			castbar.time:SetJustifyH("RIGHT")
 
 			castbar.Text = castbar:CreateFontString(nil, "OVERLAY")
-			castbar.Text:SetFontObject(font)
+			castbar.Text:SetFont(f, fs, ff)
 			castbar.Text:Point("LEFT", castbar, "LEFT", 6, 0)
 			castbar.Text:SetTextColor(.84, .75, .65)
 		end

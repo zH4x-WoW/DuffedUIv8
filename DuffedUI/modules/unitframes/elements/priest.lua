@@ -2,7 +2,6 @@ local D, C, L = unpack(select(2, ...))
 
 local class = select(2, UnitClass("player"))
 local texture = C["media"]["normTex"]
-local font = D.Font(C["font"]["unitframes"])
 local layout = C["unitframes"]["layout"]
 local backdrop = {
 	bgFile = C["media"]["blank"],
@@ -12,41 +11,36 @@ local backdrop = {
 if class ~= "PRIEST" then return end
 
 D["ClassRessource"]["PRIEST"] = function(self)
-	local ShadowOrb = CreateFrame("Frame", "ShadowOrbsBar", UIParent)
-	ShadowOrb:Size(216, 5)
-	if C["unitframes"]["attached"] then
-		if layout == 1 then
-			ShadowOrb:Point("TOP", self.Power, "BOTTOM", 0, 0)
-		elseif layout == 2 then
-			ShadowOrb:Point("CENTER", self.panel, "CENTER", 0, 0)
-		elseif layout == 3 then
-			ShadowOrb:Point("CENTER", self.panel, "CENTER", 0, 5)
-		elseif layout == 4 then
-			ShadowOrb:Point("TOP", self.Health, "BOTTOM", 0, -5)
-		end
-	else
-		ShadowOrb:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
-		D["ConstructEnergy"]("Mana", 216, 5)
+	--[[Energy]]--
+	if not C["unitframes"]["attached"] then D["ConstructEnergy"]("Energy", 216, 5) end
+	
+	--[[PriestMana]]--
+	local PMB = CreateFrame("StatusBar", "PriestManaBar", self.Health)
+	PMB:Size(216, 5)
+	if layout == 1 then
+		PMB:Point("TOP", self.Power, "BOTTOM", 0, -25)
+	elseif layout == 2 then
+		PMB:Point("BOTTOM", self.Health, "TOP", 0, -5)
+		PMB:SetFrameLevel(self.Health:GetFrameLevel() + 2)
+	elseif layout == 3 then
+		PMB:Point("CENTER", self.panel, "CENTER", 0, -3)
+	elseif layout == 4 then
+		PMB:Point("TOP", self.Health, "BOTTOM", 0, -10)
 	end
-	ShadowOrb:SetBackdrop(backdrop)
-	ShadowOrb:SetBackdropColor(0, 0, 0)
-	ShadowOrb:SetBackdropBorderColor(0, 0, 0)
+	PMB:SetStatusBarTexture(texture)
+	PMB:SetStatusBarColor(.30, .52, .90)
+	PMB:SetFrameLevel(self.Health:GetFrameLevel() + 3)
+	PMB.PostUpdatePower = D.PostUpdateAltMana
+	PMB:CreateBackdrop()
 
-	for i = 1, 5 do
-		ShadowOrb[i] = CreateFrame("StatusBar", "ShadowOrbsBar" .. i, ShadowOrb)
-		ShadowOrb[i]:Height(5)
-		ShadowOrb[i]:SetStatusBarTexture(texture)
-		if i == 1 then
-			ShadowOrb[i]:Width((216 / 5) - 3)
-			ShadowOrb[i]:SetPoint("LEFT", ShadowOrb, "LEFT", 0, 0)
-		else
-			ShadowOrb[i]:Width(216 / 5)
-			ShadowOrb[i]:SetPoint("LEFT", ShadowOrb[i - 1], "RIGHT", 1, 0)
-		end
-		ShadowOrb[i].bg = ShadowOrb[i]:CreateTexture(nil, "ARTWORK")
-	end
-	ShadowOrb:CreateBackdrop()
-	self.ShadowOrbsBar = ShadowOrb
+	PMB:SetBackdrop(backdrop)
+	PMB:SetBackdropColor(0, 0, 0)
+	PMB:SetBackdropBorderColor(0, 0, 0)
 
-	if C["unitframes"]["oocHide"] then D["oocHide"](ShadowOrb) end
+	PMB.bg = PMB:CreateTexture(nil, "BORDER")
+	PMB.bg:SetAllPoints(PMB)
+	PMB.bg:SetTexture(.30, .52, .90, .2)
+
+	self.DruidMana = PMB
+	self.DruidMana.bg = PMB.bg
 end

@@ -38,6 +38,11 @@ function AS:EmbedInit()
 			EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
 
 			AS.EmbedSystemCreated = true
+			
+			if (AS:CheckOption('EmbedSystem') and AS:CheckOption('EmbedSystemDual')) then
+				AS:DisableOption('EmbedSystem')
+				AS:DisableOption('EmbedSystemDual')
+			end
 
 			AS:EmbedSystemHooks()
 			AS:EmbedSystem_WindowResize()

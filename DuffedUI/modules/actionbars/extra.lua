@@ -12,10 +12,10 @@ ExtraActionBarFrame:ClearAllPoints()
 ExtraActionBarFrame:SetPoint("CENTER", holder, "CENTER", 0, 0)
 ExtraActionBarFrame.ignoreFramePositionManager = true
 
-DraenorZoneAbilityFrame:SetParent(holder)
-DraenorZoneAbilityFrame:ClearAllPoints()
-DraenorZoneAbilityFrame:SetPoint("CENTER", holder, "CENTER", 0, 0)
-DraenorZoneAbilityFrame.ignoreFramePositionManager = true
+ZoneAbilityFrame:SetParent(UIParent)
+ZoneAbilityFrame:ClearAllPoints()
+ZoneAbilityFrame:SetPoint("CENTER", holder, "CENTER", 0, 0)
+ZoneAbilityFrame.ignoreFramePositionManager = true
 
 local button = ExtraActionButton1
 local icon = button.icon

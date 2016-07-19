@@ -54,7 +54,6 @@ D.ChatSetup = function()
 	ChatFrame_RemoveAllMessageGroups(ChatFrame3)
 	ChatFrame_AddMessageGroup(ChatFrame3, "WHISPER")
 	ChatFrame_AddMessageGroup(ChatFrame3, "BN_WHISPER")
-	ChatFrame_AddMessageGroup(ChatFrame3, "BN_CONVERSATION")
 
 	ChatFrame_RemoveAllMessageGroups(ChatFrame4)
 	ChatFrame_AddChannel(ChatFrame4, TRADE)
@@ -105,7 +104,6 @@ end
 
 local function cvarsetup()
 	SetCVar("buffDurations", 1)
-	SetCVar("consolidateBuffs", 0)
 	SetCVar("scriptErrors", 1)
 	SetCVar("ShowClassColorInNameplate", 1)
 	SetCVar("screenshotQuality", 8)
@@ -113,15 +111,12 @@ local function cvarsetup()
 	SetCVar("chatStyle", "im")
 	SetCVar("WholeChatWindowClickable", 0)
 	SetCVar("WhisperMode", "inline")
-	SetCVar("BnWhisperMode", "inline")
 	SetCVar("showTutorials", 0)
 	SetCVar("autoQuestWatch", 1)
 	SetCVar("autoQuestProgress", 1)
 	SetCVar("UberTooltips", 1)
 	SetCVar("removeChatDelay", 1)
 	SetCVar("showVKeyCastbar", 1)
-	SetCVar("bloatthreat", 0)
-	SetCVar("bloattest", 0)
 	SetCVar("showArenaEnemyFrames", 0)
 	SetCVar("alwaysShowActionBars", 1)
 	SetCVar("autoOpenLootHistory", 0)
@@ -129,6 +124,9 @@ local function cvarsetup()
 	SetCVar("violenceLevel", 5)
 	SetCVar("synchronizeBindings", 0)
 	SetCVar("countdownForCooldowns", 0)
+	SetCVar("autoSelfCast", 1)
+	SetCVar("NamePlateVerticalScale", 1)
+	SetCVar("NamePlateHorizontalScale", 1)
 end
 
 local OnLogon = CreateFrame("Frame")
@@ -138,10 +136,6 @@ OnLogon:SetScript("OnEvent", function(self, event)
 
 	local CD = GetCVar("countdownForCooldowns")
 	if CD == "1" then SetCVar("countdownForCooldowns", "0") end
-	--[[ Remove me if Blizzard fix the issue ]]--
-	--local Bindings = GetCVar("synchronizeBindings")
-	--if Bindings == "1" then SetCVar("synchronizeBindings", "0") end
-	--[[ Remove me if Blizzard fix the issue ]]--
 end)
 
 local function positionsetup()
@@ -153,10 +147,10 @@ local v = CreateFrame("Button", "DuffedUIVersionFrame", UIParent)
 v:SetSize(300, 66)
 v:SetPoint("CENTER")
 v:SetTemplate("Transparent")
-v:FontString("text", C["media"].font, 20)
-v:FontString("text2", C["media"].font, 11)
+v.text = v:FontString("text", C["media"].font, 20)
 v.text:SetPoint("CENTER")
 v.text:SetText("|cffC41F3BDuffedUI|r ".. D.Version)
+v.text2 = v:FontString("text2", C["media"].font, 11)
 v.text2:SetPoint("BOTTOM", 0, 2)
 v.text2:SetText("by |cffC41F3BMerith - liquidbase|r")
 v:SetScript("OnClick", function() v:Hide() end)
@@ -208,7 +202,7 @@ logo.bg:Point("BOTTOMRIGHT", -2, 2)
 logo.bg:SetTexture(C["media"].duffed_logo)
 
 local name = title:CreateFontString(nil, "OVERLAY")
-name:SetFont( C["media"].font, 16)
+name:SetFont(C["media"].font, 16)
 name:SetPoint("LEFT", title, 7, -1)
 name:SetText(D.Version)
 
@@ -296,6 +290,7 @@ local step4 = function()
 	sbt:SetText("4/4")
 	option1:Hide()
 	option2.Text:SetText(L["buttons"]["finish"])
+	option2:SetText(L["buttons"]["finish"])
 	option2:SetScript("OnClick", function() ReloadUI() end)
 end
 
@@ -350,6 +345,8 @@ local step1 = function()
 	option1:Show()
 	option1.Text:SetText(L["buttons"]["skip"])
 	option2.Text:SetText(L["buttons"]["continue"])
+	option1:SetText(L["buttons"]["skip"])
+	option2:SetText(L["buttons"]["continue"])
 	option1:SetScript("OnClick", step2)
 	option2:SetScript("OnClick", function()
 		cvarsetup()
@@ -359,82 +356,9 @@ local step1 = function()
 	SetCVar("alwaysShowActionBars", 0)
 end
 
-local tut6 = function()
-	sb:SetValue(6)
-	header:SetText(L["install"]["header07"])
-	text1:SetText(L["tutorial"]["step6line1"])
-	text2:SetText(L["tutorial"]["step6line2"])
-	text3:SetText(L["tutorial"]["step6line3"])
-	sbt:SetText("6/6")
-	option1:Show()
-	option1.Text:SetText(L["buttons"]["close"])
-	option2.Text:SetText(L["buttons"]["install"])
-	option1:SetScript("OnClick", function() f:Hide() end)
-	option2:SetScript("OnClick", step1)
-end
-
-local tut5 = function()
-	sb:SetValue(5)
-	header:SetText(L["install"]["header06"])
-	text1:SetText(L["tutorial"]["step5line1"])
-	text2:SetText(L["tutorial"]["step5line2"])
-	text3:SetText(L["tutorial"]["step5line3"])
-	text4:SetText(L["tutorial"]["step5line4"])
-	sbt:SetText("5/6")
-	option2:SetScript("OnClick", tut6)
-end
-
-local tut4 = function()
-	sb:SetValue(4)
-	header:SetText(L["install"]["header05"])
-	text1:SetText(L["tutorial"]["step4line1"])
-	text2:SetText(L["tutorial"]["step4line2"])
-	text3:SetText(L["tutorial"]["step4line3"])
-	sbt:SetText("4/6")
-	option2:SetScript("OnClick", tut5)
-end
-
-local tut3 = function()
-	sb:SetValue(3)
-	header:SetText(L["install"]["header04"])
-	text1:SetText(L["tutorial"]["step3line1"])
-	text2:SetText(L["tutorial"]["step3line2"])
-	text3:SetText(L["tutorial"]["step3line3"])
-	sbt:SetText("3/6")
-	option2:SetScript("OnClick", tut4)
-end
-
-local tut2 = function()
-	sb:SetValue(2)
-	header:SetText(L["install"]["header03"])
-	text1:SetText(L["tutorial"]["step2line1"])
-	text2:SetText(L["tutorial"]["step2line2"])
-	text3:SetText(L["tutorial"]["step2line3"])
-	sbt:SetText("2/6")
-	option2:SetScript("OnClick", tut3)
-end
-
-local tut1 = function()
-	sb:SetMinMaxValues(0, 6)
-	sb:Show()
-	close:Show()
-	sb:SetValue(1)
-	sb:SetStatusBarColor(0, 0.76, 1)
-	header:SetText(L["install"]["header02"])
-	text1:SetText(L["tutorial"]["step1line1"])
-	text2:SetText(L["tutorial"]["step1line2"])
-	text3:SetText(L["tutorial"]["step1line3"])
-	text4:SetText(L["tutorial"]["step1line4"])
-	sbt:SetText("1/6")
-	option1:Hide()
-	option2.Text:SetText(L["buttons"]["next"])
-	option2:SetScript("OnClick", tut2)
-end
-
 local function install()
 	f:Show()
 	sb:Hide()
-	option1:Show()
 	option2:Show()
 	close:Show()
 	header:SetText(L["install"]["header01"])
@@ -442,9 +366,8 @@ local function install()
 	text2:SetText(L["install"]["initline2"])
 	text3:SetText(L["install"]["initline3"])
 	text4:SetText(L["install"]["initline4"])
-	option1.Text:SetText(L["buttons"]["tutorial"])
 	option2.Text:SetText(L["buttons"]["install"])
-	option1:SetScript("OnClick", tut1)
+	option2:SetText(L["buttons"]["install"])
 	option2:SetScript("OnClick", step1)
 end
 
@@ -463,10 +386,6 @@ DuffedUIOnLogon:SetScript("OnEvent", function(self, event)
 		if not DuffedUIDataPerChar.install then install() end
 	end
 end)
-
-SLASH_TUTORIAL1 = "/uihelp"
-SLASH_TUTORIAL2 = "/tutorial"
-SlashCmdList.TUTORIAL = function() f:Show() tut1() end
 
 SLASH_VERSION1 = "/version"
 SlashCmdList.VERSION = function() if v:IsShown() then v:Hide() else v:Show() end end

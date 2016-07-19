@@ -7,7 +7,6 @@
 	<Script file="bonusarmor.lua" />
 	<Script file="calltoarms.lua" />
 	<Script file="crit.lua" />
-	<Script file="currency.lua" />
 	<Script file="dodge.lua" />
 	<Script file="durability.lua" />
 	<Script file="friend.lua" />
@@ -19,7 +18,6 @@
 	<Script file="mastery.lua" />
 	<Script file="micromenu.lua" />
 	<Script file="misc.lua" />
-	<Script file="multistrike.lua" />
 	<Script file="parry.lua" />
 	<Script file="power.lua" />
 	<Script file="profession.lua" />

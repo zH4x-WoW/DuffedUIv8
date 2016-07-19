@@ -26,6 +26,7 @@ L["move"] = {
 	["rcd"] = "Move RaidCD",
 	["spell"] = "Move SpellCooldowns",
 	["xp-bar"] = "Move XP-Bar",
+	["artifact-bar"] = "Move Artifact-XP-Bar",
 }
 
 L["symbol"] = {
@@ -213,6 +214,12 @@ L["dt"] = {
 	["goldreset"] = "|cffC41F3BReset Data: Hold Shift + Right Click|r",
 	["systemleft"] = "|cffC41F3BLeft Click: Open PvE-Frame|r",
 	["systemright"] = "|cffC41F3BRight Click: Clean Memoryusage|r",
+	["prof"] = "Professions",
+	["profless"] = "No Professions",
+	["proftooltip"] = "Click to open professions",
+	["specmenu"] = "Specialization Selector",
+	["specerror"] = "You're already in that spec!",
+	["specdata"] = "spec: ",
 }
 
 L["Slots"] = {
@@ -230,22 +237,34 @@ L["Slots"] = {
 }
 
 L["xpbar"] = {
-		["xptitle"] = "Experience:",
-		["xp"] = "XP: %s/%s (%d%%)",
-		["xpremaining"] = "Remaining: %s",
-		["xprested"] = "|cffb3e1ffRested: %s (%d%%)",
+	["xptitle"] = "Experience:",
+	["xp"] = "XP: %s/%s (%d%%)",
+	["xpremaining"] = "Remaining: %s",
+	["xprested"] = "|cffb3e1ffRested: %s (%d%%)",
 
-		["fctitle"] = "Reputation: %s",
-		["standing"] = "Standing: |c",
-		["fcrep"] = "Rep: %s/%s (%d%%)",
-		["fcremaining"] = "Remaining: %s",
+	["fctitle"] = "Reputation: %s",
+	["standing"] = "Standing: |c",
+	["fcrep"] = "Rep: %s/%s (%d%%)",
+	["fcremaining"] = "Remaining: %s",
 
-		["hated"] = "Hated",
-		["hostile"] = "Hostile",
-		["unfriendly"] = "Unfriendly",
-		["neutral"] = "Neutral",
-		["friendly"] = "Friendly",
-		["honored"] = "Honored",
-		["revered"] = "Revered",
-		["exalted"] = "Exalted",
+	["hated"] = "Hated",
+	["hostile"] = "Hostile",
+	["unfriendly"] = "Unfriendly",
+	["neutral"] = "Neutral",
+	["friendly"] = "Friendly",
+	["honored"] = "Honored",
+	["revered"] = "Revered",
+	["exalted"] = "Exalted",
+}
+
+L["artifactBar"] = {
+	["xptitle"] = "Artifact Experience",
+	["currentxp"] = "Current Experience: %s",
+	["xp"] = "Experience: %s/%s (%d%%)",
+	["xpremaining"] = "Remaining: %s",
+	["traits"] = "Traits avaiable: %s",
+}
+
+L["tooltip"] = {
+	["applied"] = "Applied by ",
 }

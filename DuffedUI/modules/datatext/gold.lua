@@ -12,9 +12,9 @@ Stat.Option = C["datatext"]["gold"]
 Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
-local font = D.Font(C["font"].datatext)
+local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 local Text = Stat:CreateFontString("DuffedUIDataInfoGoldText", "OVERLAY")
-Text:SetFontObject(font)
+Text:SetFont(f, fs, ff)
 D.DataTextPosition(C["datatext"].gold, Text)
 
 local Profit = 0
@@ -172,6 +172,7 @@ Stat:SetScript("OnEnter", function(self)
 		Currency(824)
 		Currency(980)
 		Currency(1101)
+		Currency(1220)
 	end
 
 	if ImprovedCurrency["Raid"] then
@@ -188,6 +189,8 @@ Stat:SetScript("OnEnter", function(self)
 		Currency(614)
 		Currency(823)
 		Currency(1166)
+		Currency(1155, false, true)
+		Currency(1273, false, true)
 	end
 
 	if ImprovedCurrency["PvP"] then

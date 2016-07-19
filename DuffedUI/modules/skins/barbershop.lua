@@ -15,17 +15,17 @@ local function LoadSkin()
 	end
 
 	for i = 1, 5 do
-		local f = _G["BarberShopFrameSelector"..i]
-		_G["BarberShopFrameSelector"..i.."Prev"]:SkinNextPrevButton()
-		_G["BarberShopFrameSelector"..i.."Next"]:SkinNextPrevButton()
+		local f = _G["BarberShopFrame"..i]
+		--_G["BarberShopFrameSelector"..i.."Prev"]:SkinNextPrevButton()
+		--_G["BarberShopFrameSelector"..i.."Next"]:SkinNextPrevButton()
 
 		if f then
 			f:StripTextures()
 		end
 	end
 
-	BarberShopFrameSelector5:ClearAllPoints()
-	BarberShopFrameSelector5:Point("TOP", 0, -12)
+	--BarberShopFrameSelector5:ClearAllPoints()
+	--BarberShopFrameSelector5:Point("TOP", 0, -12)
 
 	BarberShopFrameResetButton:ClearAllPoints()
 	BarberShopFrameResetButton:Point("BOTTOM", 0, 12)
@@ -39,7 +39,11 @@ local function LoadSkin()
 
 	BarberShopBannerFrameBGTexture:Kill()
 	BarberShopBannerFrame:Kill()
-
+	
+	BarberShopBannerFrameCaption:ClearAllPoints()
+	BarberShopBannerFrameCaption:Point("TOP", BarberShopFrame, 0, 0)
+	BarberShopBannerFrameCaption:SetParent(BarberShopFrame)
+	
 	BarberShopAltFormFrameBorder:StripTextures()
 	BarberShopAltFormFrame:Point("BOTTOM", BarberShopFrame, "TOP", 0, 5)
 	BarberShopAltFormFrame:StripTextures()

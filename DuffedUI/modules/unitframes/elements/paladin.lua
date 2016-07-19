@@ -2,7 +2,6 @@ local D, C, L = unpack(select(2, ...))
 
 local class = select(2, UnitClass("player"))
 local texture = C["media"]["normTex"]
-local font = D.Font(C["font"]["unitframes"])
 local layout = C["unitframes"]["layout"]
 local backdrop = {
 	bgFile = C["media"]["blank"],
@@ -12,6 +11,10 @@ local backdrop = {
 if class ~= "PALADIN" then return end
 
 D["ClassRessource"]["PALADIN"] = function(self)
+	--[[Energy]]--
+	if not C["unitframes"]["attached"] then D["ConstructEnergy"]("Energy", 216, 5) end
+	
+	--[[HolyPower]]--
 	local HolyPower = CreateFrame("Frame", "HolyPowerBar", UIParent)
 	HolyPower:Size(216, 5)
 	if C["unitframes"]["attached"] then
@@ -26,7 +29,6 @@ D["ClassRessource"]["PALADIN"] = function(self)
 		end
 	else
 		HolyPower:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
-		D["ConstructEnergy"]("Mana", 216, 5)
 	end
 	HolyPower:SetBackdrop(backdrop)
 	HolyPower:SetBackdropColor(0, 0, 0)
@@ -53,7 +55,24 @@ D["ClassRessource"]["PALADIN"] = function(self)
 		HolyPower[i].bg:SetAlpha(.15)
 	end
 	HolyPower:CreateBackdrop()
+	HolyPower:Hide()
 	self.HolyPower = HolyPower
-
-	if C["unitframes"]["oocHide"] then D["oocHide"](HolyPower) end
+	
+	
+	--[[Visibility]]--
+	Visibility = CreateFrame("Frame")
+	Visibility:RegisterEvent("PLAYER_LOGIN")
+	Visibility:RegisterEvent("PLAYER_ENTERING_WORLD")
+	Visibility:RegisterEvent("PLAYER_REGEN_DISABLED")
+	Visibility:RegisterEvent("PLAYER_REGEN_ENABLED")
+	Visibility:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
+	Visibility:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+	Visibility:SetScript("OnEvent", function()
+		local spec = GetSpecialization()
+		if spec == 3 then 
+			if C["unitframes"]["oocHide"] then D["oocHide"](HolyPower) else HolyPower:Show() end
+		else
+			HolyPower:Hide()
+		end
+	end)
 end

@@ -9,9 +9,9 @@ if C["datatext"].bags and C["datatext"].bags > 0 then
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
-	local font = D.Font(C["font"].datatext)
+	local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 	local Text  = Stat:CreateFontString("DuffedUIStatBagsText", "OVERLAY")
-	Text:SetFontObject(font)
+	Text:SetFont(f, fs, ff)
 	D.DataTextPosition(C["datatext"].bags, Text)
 
 	local function OnEvent(self, event, ...)
@@ -22,7 +22,7 @@ if C["datatext"].bags and C["datatext"].bags > 0 then
 		self:SetAllPoints(Text)
 	end
 
-	Stat:RegisterEvent("PLAYER_LOGIN")
+	Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
 	Stat:RegisterEvent("BAG_UPDATE")
 	Stat:SetScript("OnEvent", OnEvent)
 	Stat:SetScript("OnMouseDown", function() ToggleAllBags() end)

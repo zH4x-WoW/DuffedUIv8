@@ -13,6 +13,7 @@ local function LoadSkin()
 	PVEFrameTopRightCorner:Hide()
 	PVEFrameTopBorder:Hide()
 	PVEFrameLeftInsetBg:Hide()
+	PVEFrameLeftInsetInsetRightBorder:Hide()
 	PVEFrame.shadows:Hide()
 
 	for i = 1, 4 do
@@ -60,7 +61,7 @@ local function LoadSkin()
 					icon:SetTexCoord(.08, .92, .08, .92)
 					icon:SetDrawLayer("OVERLAY")
 					count:SetDrawLayer("OVERLAY")
-					na:SetTexture(0, 0, 0, .25)
+					na:SetColorTexture(0, 0, 0, .25)
 					na:SetSize(118, 39)
 					cta:SetAlpha(0)
 
@@ -120,7 +121,7 @@ local function LoadSkin()
 				icon:SetTexCoord(.08, .92, .08, .92)
 				icon:SetDrawLayer("OVERLAY")
 				count:SetDrawLayer("OVERLAY")
-				na:SetTexture(0, 0, 0, .25)
+				na:SetColorTexture(0, 0, 0, .25)
 				na:SetSize(118, 39)
 				cta:SetAlpha(0)
 
@@ -329,45 +330,7 @@ tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
 local function LoadSecondarySkin()
 	ChallengesFrameInset:StripTextures()
 	ChallengesFrameInsetBg:Hide()
-	ChallengesFrameDetails.bg:Hide()
-	ChallengesFrameLeaderboard:StripTextures()
-	ChallengesFrameLeaderboard:SkinButton()
-	select(2, ChallengesFrameDetails:GetRegions()):Hide()
-	select(9, ChallengesFrameDetails:GetRegions()):Hide()
-	select(10, ChallengesFrameDetails:GetRegions()):Hide()
-	select(11, ChallengesFrameDetails:GetRegions()):Hide()
-	ChallengesFrameDungeonButton1:SetPoint("TOPLEFT", ChallengesFrame, "TOPLEFT", 8, -83)
-
-	if D.Toc == 60000 then
-		for i = 1, 8 do
-			local bu = ChallengesFrame["button"..i]
-			bu:SkinButton()
-			bu:StyleButton()
-			bu:SetHighlightTexture("")
-			bu.selectedTex:SetAlpha(.2)
-			bu.selectedTex:SetPoint("TOPLEFT", 1, -1)
-			bu.selectedTex:SetPoint("BOTTOMRIGHT", -1, 1)
-		end
-	else
-		for i = 1, 9 do
-			local bu = ChallengesFrame["button"..i]
-			bu:SkinButton()
-			bu:StyleButton()
-			bu:SetHighlightTexture("")
-			bu.selectedTex:SetAlpha(.2)
-			bu.selectedTex:SetPoint("TOPLEFT", 1, -1)
-			bu.selectedTex:SetPoint("BOTTOMRIGHT", -1, 1)
-		end
-	end
-
-	for i = 1, 3 do
-		local rewardsRow = ChallengesFrame["RewardRow"..i]
-		for j = 1, 2 do
-			local bu = rewardsRow["Reward"..j]
-			bu:CreateBackdrop()
-			bu.Icon:SetTexCoord(.08, .92, .08, .92)	
-		end
-	end
+	ChallengesFrame.Background:Hide()
 end
 
 D.SkinFuncs["Blizzard_ChallengesUI"] = LoadSecondarySkin

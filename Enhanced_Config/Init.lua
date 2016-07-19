@@ -24,14 +24,14 @@ AddOn.Font = LSM:Fetch('font', 'PT Sans Narrow Bold')
 AddOn.PixelFont = AsphyxiaUI and LSM:Fetch('font', 'Homespun TT BRK') or LSM:Fetch('font', 'Visitor TT2 BRK')
 AddOn.ActionBarFont = LSM:Fetch('font', 'Arial')
 AddOn.UIScale = GetCVar('uiScale') or UIParent:GetScale()
-AddOn.Mult = 768/strmatch(GetCVar('gxResolution'), '%d+x(%d+)')/AddOn.UIScale
+AddOn.Mult = 768/strmatch(GetCVar('gxWindowedResolution'), '%d+x(%d+)')/AddOn.UIScale
 AddOn.BackdropColor = { Frame:GetBackdropColor() }
 AddOn.BorderColor = { Frame:GetBackdropBorderColor() }
 
 if Tukui and tonumber(GetAddOnMetadata('Tukui', 'Version')) >= 16.00 then
 	AddOn.DataTextFontSize = A['DataTexts'].Size
 elseif AsphyxiaUI then
-	AddOn.DataTextFontSize = 10
+	AddOn.DataTextFontSize = 12
 else
 	AddOn.DataTextFontSize = C['datatext'].fontsize
 end
@@ -102,7 +102,7 @@ E.ClassRole = {
 
 E.TexCoords = { .1, .9, .1, .9 }
 E.mult = AddOn.Mult
-E.resolution = GetCVar('gxResolution')
+E.resolution = GetCVar('gxWindowedResolution')
 E.screenheight = tonumber(strmatch(E.resolution, '%d+x(%d+)'))
 E.screenwidth = tonumber(strmatch(E.resolution, '(%d+)x+%d'))
 E.DF = {}

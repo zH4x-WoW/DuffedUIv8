@@ -1,7 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 if (select(2, UnitClass("player")) ~= "MAGE") or not DuffedUIMinimapStatsLeft or not C["misc"]["magemenu"] then return end
 
-local font = D.Font(C["font"].datatext)
+local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 local spells = (UnitFactionGroup("player") == "Horde") and {
 	--  Tepelort id, Portal id
 	[1] = {53140,53142}, -- Dalaran
@@ -14,6 +14,7 @@ local spells = (UnitFactionGroup("player") == "Horde") and {
 	[8] = {88342,88345}, -- Tol Barad
 	[9] = {132627,132626}, -- Vale of Eternal Blossoms
 	[10] = {176242, 176244}, -- Warspear
+	[11] = {193759, 193759}, -- Hall of Guardian (Orderhall)
 } or { -- ALLIANCE
 	[1] = {53140,53142}, -- Dalaran
 	[2] = {3561,10059}, -- Stormwind
@@ -25,6 +26,7 @@ local spells = (UnitFactionGroup("player") == "Horde") and {
 	[8] = {88342,88345}, -- Tol Barad
 	[9] = {132621,132620}, -- Vale of Eternal Blossoms
 	[10] = {176248, 176246}, -- Stormshield
+	[11] = {193759, 193759}, -- Hall of Guardian (Orderhall)
 };
 
 local UTF = function(string, i, dots)
@@ -68,7 +70,7 @@ local r = CreateFrame("Frame", nil, f)
 r:Size(DuffedUIMinimap:GetWidth() - 4, 20)
 r:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
 local l = r:CreateFontString("Title", "OVERLAY")
-l:SetFontObject(font)
+l:SetFont(C["media"]["font"], 11, "THINOUTLINE")
 l:SetPoint("CENTER", r, "CENTER")
 r:SetFrameStrata("HIGH")
  
@@ -81,7 +83,7 @@ for i, spell in pairs(spells) do
 	b:CreateBackdrop()
  
 	local l = b:CreateFontString(nil,"OVERLAY")
-	l:SetFontObject(font)
+	l:SetFont(C["media"]["font"], 11, "THINOUTLINE")
 	l:SetText(abbrev(GetSpellInfo(spell[1])))
 	b:SetFontString(l)
  

@@ -30,7 +30,7 @@ local function LoadSkin()
 		tab = _G[format("MacroFrameTab%s", i)]
 		tab:Height(22)
 	end
-	MacroFrameTab1:Point("TOPLEFT", MacroFrame, "TOPLEFT", 85, -39)
+	MacroFrameTab1:Point("TOPLEFT", MacroFrame, "TOPLEFT", 45, -39)
 	MacroFrameTab2:Point("LEFT", MacroFrameTab1, "RIGHT", 4, 0)
 	
 

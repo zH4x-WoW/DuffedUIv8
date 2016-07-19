@@ -2,7 +2,6 @@ local D, C, L = unpack(select(2, ...))
 
 local class = select(2, UnitClass("player"))
 local texture = C["media"]["normTex"]
-local font = D.Font(C["font"]["unitframes"])
 local layout = C["unitframes"]["layout"]
 local backdrop = {
 	bgFile = C["media"]["blank"],
@@ -12,43 +11,51 @@ local backdrop = {
 if class ~= "ROGUE" then return end
 
 D["ClassRessource"]["ROGUE"] = function(self)
-	--[[Anticipation Bar]]--
-	if C["unitframes"]["AnticipationBar"] then
-		local AnticipationBar = CreateFrame("Frame", "AnticipationBar", UIParent)
-		AnticipationBar:Size(216, 5)
-		if C["unitframes"]["attached"] then
-			if layout == 1 then
-				AnticipationBar:Point("TOP", ComboPoints, "BOTTOM", 0, -3)
-			elseif layout == 2 then
-				AnticipationBar:Point("BOTTOM", self.Health, "TOP", 0, -5)
-				AnticipationBar:SetFrameLevel(self.Health:GetFrameLevel() + 2)
-			elseif layout == 3 then
-				AnticipationBar:Point("CENTER", self.panel, "CENTER", 0, -3)
-			elseif layout == 4 then
-				AnticipationBar:Point("TOP", ComboPoints, "BOTTOM", 0, -5)
-			end
-		else
-			AnticipationBar:Point("TOP", RessourceMover, "BOTTOM", 0, -5)
+	--[[Energy]]--
+	if not C["unitframes"]["attached"] then D["ConstructEnergy"]("Energy", 216, 5) end
+	
+	--[[ComboPoints]]--
+	local ComboPoints = CreateFrame("Frame", "ComboPoints", UIParent)
+	ComboPoints:Size(216, 5)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			ComboPoints:Point("TOP", oUF_Player.Power, "BOTTOM", 0, 0)
+		elseif layout == 2 then
+			ComboPoints:Point("CENTER", oUF_Player.panel, "CENTER", 0, 0)
+		elseif layout == 3 then
+			ComboPoints:Point("CENTER", oUF_Player.panel, "CENTER", 0, 5)
+		elseif layout == 4 then
+			ComboPoints:Point("TOP", oUF_Player.Health, "BOTTOM", 0, -5)
 		end
-		AnticipationBar:CreateBackdrop()
-
-		for i = 1, 5 do
-			AnticipationBar[i] = CreateFrame("StatusBar", "AnticipationBar" .. i, AnticipationBar)
-			AnticipationBar[i]:Height(5)
-			AnticipationBar[i]:SetStatusBarTexture(texture)
-			AnticipationBar[i].bg = AnticipationBar[i]:CreateTexture(nil, "BORDER")
-			if i == 1 then
-				AnticipationBar[i]:Point("LEFT", AnticipationBar, "LEFT", 0, 0)
-				AnticipationBar[i]:Width(44)
-				AnticipationBar[i].bg:SetAllPoints(AnticipationBar[i])
-			else
-				AnticipationBar[i]:Point("LEFT", AnticipationBar[i-1], "RIGHT", 1, 0)
-				AnticipationBar[i]:Width(42)
-				AnticipationBar[i].bg:SetAllPoints(AnticipationBar[i])
-			end
-			AnticipationBar[i].bg:SetTexture(texture)
-			AnticipationBar[i].bg:SetAlpha(.15)
-		end
-		self.AnticipationBar = AnticipationBar
+	else
+		ComboPoints:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
 	end
+	ComboPoints:SetBackdrop(backdrop)
+	ComboPoints:SetBackdropColor(0, 0, 0)
+	ComboPoints:SetBackdropBorderColor(0, 0, 0)
+
+	for i = 1, 8 do
+		ComboPoints[i] = CreateFrame("StatusBar", "ComboPoints" .. i, ComboPoints)
+		ComboPoints[i]:Height(5)
+		ComboPoints[i]:SetStatusBarTexture(texture)
+		if i == 1 then
+			ComboPoints[i]:SetPoint("LEFT", ComboPoints, "LEFT", 0, 0)
+			ComboPoints[i]:Width(216 / 8)
+			
+			ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
+			ComboPoints[i].Deeper = 216 / 6
+			ComboPoints[i].None = 216 / 5
+		else
+			ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
+			ComboPoints[i]:Width(216 / 8 - 1)
+			
+			ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
+			ComboPoints[i].Deeper = 216 / 6 - 1
+			ComboPoints[i].None = 216 / 5 - 1
+		end
+		ComboPoints[i].bg = ComboPoints[i]:CreateTexture(nil, "ARTWORK")
+	end
+	ComboPoints:CreateBackdrop()
+	self.ComboPointsBar = ComboPoints
+	if C["unitframes"]["oocHide"] then D["oocHide"](ComboPoints) end
 end

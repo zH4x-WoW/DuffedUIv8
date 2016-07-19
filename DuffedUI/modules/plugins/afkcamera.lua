@@ -7,7 +7,7 @@ local PClass = UnitClass("player")
 local PRace = UnitRace("player")
 local PFaction = UnitFactionGroup("player")
 local color = RAID_CLASS_COLORS[D.Class]
-local Version = tonumber(GetAddOnMetadata("DuffedUI", "Version"))
+local Version = D["Version"]
 
 --[[Guild]]--
 local function GuildText()
@@ -116,7 +116,6 @@ DuffedUIAFKPanel:SetScript("OnUpdate", function(self, elapsed)
 end)
 
 --[[Register events, script to start]]--
-DuffedUIAFKPanel:RegisterEvent("PLAYER_LOGIN")
 DuffedUIAFKPanel:RegisterEvent("PLAYER_ENTERING_WORLD")
 DuffedUIAFKPanel:RegisterEvent("PLAYER_LEAVING_WORLD")
 DuffedUIAFKPanel:RegisterEvent("PLAYER_FLAGS_CHANGED")

@@ -21,9 +21,9 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
-	local font = D.Font(C["font"].datatext)
+	local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 	local Text  = Stat:CreateFontString("DuffedUIStatMicroMenuText", "OVERLAY")
-	Text:SetFontObject(font)
+	Text:SetFont(f, fs, ff)
 	D.DataTextPosition(C["datatext"].micromenu, Text)
 
 	local function OnEvent(self, event, ...)
@@ -36,7 +36,7 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 		EasyMenu(D.MicroMenu, DuffedUIMicroButtonsDropDown, "cursor", 0, 0, "MENU", 2)
 	end
 
-	Stat:RegisterEvent("PLAYER_LOGIN")
+	Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
 	Stat:SetScript("OnEvent", OnEvent)
 	Stat:SetScript("OnMouseDown", function() OpenMenu() end)
 end

@@ -29,7 +29,7 @@ local function LoadSkin()
 	TimeManagerStopwatchCheck:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
 	TimeManagerStopwatchCheck:StyleButton()
 	local hover = TimeManagerStopwatchCheck:CreateTexture("frame", nil, TimeManagerStopwatchCheck) -- hover
-	hover:SetTexture(1,1,1,0.3)
+	hover:SetColorTexture(1,1,1,0.3)
 	hover:Point("TOPLEFT",TimeManagerStopwatchCheck,2,-2)
 	hover:Point("BOTTOMRIGHT",TimeManagerStopwatchCheck,-2,2)
 	TimeManagerStopwatchCheck:SetHighlightTexture(hover)

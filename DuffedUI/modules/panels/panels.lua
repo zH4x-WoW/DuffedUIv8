@@ -139,11 +139,13 @@ if DuffedUIMinimap then
 	minimapstatsleft:SetTemplate()
 	minimapstatsleft:Size(((DuffedUIMinimap:GetWidth() + 4) / 2) -3, 19)
 	minimapstatsleft:Point("TOPLEFT", DuffedUIMinimap, "BOTTOMLEFT", 0, -2)
+	minimapstatsleft:SetFrameStrata("LOW")
 
 	local minimapstatsright = CreateFrame("Frame", "DuffedUIMinimapStatsRight", DuffedUIMinimap)
 	minimapstatsright:SetTemplate()
 	minimapstatsright:Size(((DuffedUIMinimap:GetWidth() + 4) / 2) -3, 19)
 	minimapstatsright:Point("TOPRIGHT", DuffedUIMinimap, "BOTTOMRIGHT", 0, -2)
+	minimapstatsright:SetFrameStrata("LOW")
 end
 
 if C["datatext"]["battleground"] then

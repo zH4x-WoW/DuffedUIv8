@@ -11,6 +11,15 @@ local function LoadSkin()
 	DressUpFrameCancelButton:SkinButton()
 	DressUpFrameCloseButton:SkinCloseButton(DressUpFrame.backdrop)
 	DressUpFrameResetButton:Point("RIGHT", DressUpFrameCancelButton, "LEFT", -2, 0)
+	
+	WardrobeOutfitFrame:StripTextures()
+	WardrobeOutfitFrame:CreateBackdrop("Transparent")
+	
+	DressUpFrameOutfitDropDown:SkinDropDownBox()
+	DressUpFrameOutfitDropDown:SetSize(200, 34)
+	DressUpFrameOutfitDropDown.SaveButton:ClearAllPoints()
+	DressUpFrameOutfitDropDown.SaveButton:SetPoint("RIGHT", DressUpFrameOutfitDropDown, 83, 4)
+	DressUpFrameOutfitDropDown.SaveButton:SkinButton()
 end
 
 tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)

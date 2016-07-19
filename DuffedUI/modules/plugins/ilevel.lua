@@ -178,7 +178,7 @@ local function ScanUnit(unit, forced)
 	end
 end
 
-hooksecurefunc("PaperDollFrame_SetItemLevel", function(self, unit)
+--[[hooksecurefunc("PaperDollFrame_SetItemLevel", function(self, unit)
 	if (unit ~= 'player') then return end
 
 	local total, equip = GetAverageItemLevel()
@@ -189,7 +189,7 @@ hooksecurefunc("PaperDollFrame_SetItemLevel", function(self, unit)
 	local ilvlLine = _G[self:GetName().."StatText"]
 	ilvlLine:SetText(ilvl)
 	self.tooltip = detailColor..STAT_AVERAGE_ITEM_LEVEL.." "..ilvl
-end)
+end)]]
 
 f:SetScript("OnEvent", function(self, event, ...)
 	if (event == "UNIT_INVENTORY_CHANGED") then

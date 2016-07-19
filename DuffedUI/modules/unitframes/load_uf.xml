@@ -2,6 +2,7 @@
 	<Script file="elements\classtimer.lua" />
 	<Script file="elements\elements.lua" />
 	<Script file="elements\deathknight.lua" />
+	<Script file="elements\demonhunter.lua" />
 	<Script file="elements\druid.lua" />
 	<Script file="elements\hunter.lua" />
 	<Script file="elements\mage.lua" />

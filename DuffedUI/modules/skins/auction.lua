@@ -53,15 +53,7 @@ local function LoadSkin()
 	AuctionProgressFrameCancelButton:GetNormalTexture():SetTexCoord(.67, .37, .61, .26)
 	AuctionProgressFrameCancelButton:Size(28, 28)
 	AuctionProgressFrameCancelButton:Point("LEFT", AuctionProgressBar, "RIGHT", 8, 0)
-	AuctionProgressBarIcon:SetTexCoord(.67, .37, .61, .26)
 
-	local backdrop = CreateFrame("Frame", nil, AuctionProgressBarIcon:GetParent())
-	backdrop:Point("TOPLEFT", AuctionProgressBarIcon, "TOPLEFT", -2, 2)
-	backdrop:Point("BOTTOMRIGHT", AuctionProgressBarIcon, "BOTTOMRIGHT", 2, -2)
-	backdrop:SetTemplate("Default")
-	AuctionProgressBarIcon:SetParent(backdrop)
-	AuctionProgressBarText:ClearAllPoints()
-	AuctionProgressBarText:SetPoint("CENTER")
 	AuctionProgressBar:StripTextures()
 	AuctionProgressBar:CreateBackdrop("Default")
 	AuctionProgressBar:SetStatusBarTexture(C["media"].normTex)
@@ -84,7 +76,10 @@ local function LoadSkin()
 		"AuctionsStackSizeMaxButton",
 		"AuctionsNumStacksMaxButton",
 	}
-	for _, button in pairs(buttons) do _G[button]:SkinButton() end
+	for _, button in pairs(buttons) do
+		_G[button]:StripTextures()
+		_G[button]:SkinButton()
+	end
 
 	--Fix Button Positions
 	AuctionsCloseButton:Point("BOTTOMRIGHT", AuctionFrameAuctions, "BOTTOMRIGHT", 66, 10)
@@ -98,7 +93,7 @@ local function LoadSkin()
 	AuctionsItemButton:SetTemplate("Default", true)
 	BrowseResetButton:ClearAllPoints()
 	BrowseResetButton:Point("TOPLEFT", AuctionFrameBrowse, "TOPLEFT", 81, -74)
-	BrowseSearchButton:Point("TOPRIGHT", AuctionFrameBrowse, "TOPRIGHT", 30, -34)
+	BrowseSearchButton:Point("TOPRIGHT", AuctionFrameBrowse, "TOPRIGHT", 55, -30) -- 30 -34
 	BrowseSearchButton:SetWidth(BrowseSearchButton:GetWidth() - 5)
 	AuctionsItemButton:SetScript("OnUpdate", function()
 		if AuctionsItemButton:GetNormalTexture() then
@@ -139,7 +134,8 @@ local function LoadSkin()
 
 	for i = 1, NUM_FILTERS_TO_DISPLAY do
 		local tab = _G["AuctionFilterButton" .. i]
-		tab:StripTextures()
+		_G["AuctionFilterButton"..i..'NormalTexture']:SetAlpha(0)
+		_G["AuctionFilterButton"..i..'NormalTexture'].SetAlpha = D.Dummy
 		tab:StyleButton()
 	end
 
@@ -286,6 +282,7 @@ local function LoadSkin()
 	BrowseScrollFrameScrollBar:SkinScrollBar()
 	AuctionsScrollFrameScrollBar:SkinScrollBar()
 	BidScrollFrameScrollBar:SkinScrollBar()
+	BrowseWowTokenResults.Buyout:SkinButton()
 end
 
 D.SkinFuncs["Blizzard_AuctionUI"] = LoadSkin

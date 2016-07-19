@@ -175,11 +175,11 @@ D.ShiftBarUpdate = function(self)
 			if texture then cooldown:SetAlpha(1) else cooldown:SetAlpha(0) end
 
 			start, duration, enable = GetShapeshiftFormCooldown(i)
-			CooldownFrame_SetTimer(cooldown, start, duration, enable)
+			CooldownFrame_Set(cooldown, start, duration, enable)
 
 			if isActive then
 				StanceBarFrame.lastSelected = button:GetID()
-				button:GetCheckedTexture():SetTexture(0, 1, 0, .3)
+				button:GetCheckedTexture():SetColorTexture(0, 1, 0, .3)
 			else
 				button:SetCheckedTexture(0, 0, 0, 0)
 			end
@@ -210,7 +210,7 @@ D.PetBarUpdate = function(...)
 		petActionButton.tooltipSubtext = subtext
 
 		if isActive and name ~= "PET_ACTION_FOLLOW" then
-			petActionButton:GetCheckedTexture():SetTexture(0, 1, 0, .3)
+			petActionButton:GetCheckedTexture():SetColorTexture(0, 1, 0, .3)
 			if IsPetAttackAction(i) then PetActionButton_StartFlash(petActionButton) end
 		else
 			petActionButton:SetCheckedTexture(0, 0, 0, 0)
@@ -335,7 +335,7 @@ D.Delay = function(delay, func, ...)
 end
 
 D.CreateBtn = function(name, parent, w, h, tt_txt, txt)
-	local font = D.Font(C["font"].ses)
+	local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
 	local b = CreateFrame("Button", name, parent, "SecureActionButtonTemplate")
 	b:Width(w)
 	b:Height(h)
@@ -349,7 +349,7 @@ D.CreateBtn = function(name, parent, w, h, tt_txt, txt)
 	b:SetScript("OnLeave", function(self) GameTooltip:Hide() end)
 
 	b.text = b:CreateFontString(nil, "OVERLAY")
-	b.text:SetFontObject(font)
+	b.text:SetFont(f, fs, ff)
 	b.text:SetText(D.PanelColor..txt)
 	b.text:SetPoint("CENTER", b, "CENTER", 1, -1)
 	b.text:SetJustifyH("CENTER")

@@ -6,9 +6,9 @@ local Stat = CreateFrame("Frame", "DuffedUIStatBlock")
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
 
-local font = D.Font(C["font"].datatext)
+local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 local Text  = Stat:CreateFontString("DuffedUIStatBlockText", "OVERLAY")
-Text:SetFontObject(font)
+Text:SetFont(f, fs, ff)
 D.DataTextPosition(C["datatext"].block, Text)
 
 local format = string.format

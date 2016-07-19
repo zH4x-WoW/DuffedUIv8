@@ -9,7 +9,7 @@ local Update = function(self, event)
 	local icon = self.ClassIcon
 
 	if class then
-		local left, right, top, bottom = unpack(CLASS_BUTTONS[class])
+		local left, right, top, bottom = unpack(CLASS_ICON_TCOORDS[class])
 
 		left = left + (right - left) * 0.09
 		right = right - (right - left) * 0.09

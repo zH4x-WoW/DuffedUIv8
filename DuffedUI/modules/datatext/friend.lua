@@ -23,9 +23,9 @@ Stat.Option = C["datatext"].friends
 Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
-local font = D.Font(C["font"].datatext)
+local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 local Text  = Stat:CreateFontString("DuffedUIStatFriendsText", "OVERLAY")
-Text:SetFontObject(font)
+Text:SetFont(f, fs, ff)
 Text:SetShadowOffset(D.mult, -D.mult)
 D.DataTextPosition(C["datatext"].friends, Text)
 
@@ -128,12 +128,12 @@ local function BuildBNTable(total)
 	wipe(BNTable)
 	
 	for i = 1, total do
-		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
-		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(presenceID)
+		local ID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
+		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(toonID or ID)
 
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
-		BNTable[i] = { presenceID, presenceName, battleTag, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level }
+		BNTable[i] = { ID, presenceName, battleTag, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level }
 		if isOnline then BNTotalOnline = BNTotalOnline + 1 end
 	end
 end
@@ -142,13 +142,13 @@ local function UpdateBNTable(total)
 	BNTotalOnline = 0
 	for i = 1, #BNTable do
 		-- get guild roster information
-		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
-		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(presenceID)
+		local ID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
+		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(toonID or ID)
 		
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
 		-- get the correct index in our table
-		local index = GetTableIndex(BNTable, 1, presenceID)
+		local index = GetTableIndex(BNTable, 1, ID)
 		-- we cannot find a BN member in our table, so rebuild it
 		if index == -1 then
 			BuildBNTable(total)
@@ -268,21 +268,16 @@ Stat:SetScript("OnEnter", function(self)
 		GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 		GameTooltip:ClearLines()
 		GameTooltip:AddDoubleLine(FRIENDS_LIST .. ":", format(totalOnlineString, totalonline, totalfriends),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
+
 		if totalOnline > 0 then
 			GameTooltip:AddLine(' ')
 			GameTooltip:AddLine(worldOfWarcraftString)
 			for i = 1, #friendTable do
 				if friendTable[i][5] then
 					if GetRealZoneText() == friendTable[i][4] then zonec = activezone else zonec = inactivezone end
-					classc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[friendTable[i][3]]
-					if classc == nil then classc = GetQuestDifficultyColor(friendTable[i][2]) end
+					classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[friendTable[i][3]], GetQuestDifficultyColor(friendTable[i][2])
 					
-					if friendTable[i][2] ~= '' then
-						levelc = GetQuestDifficultyColor(friendTable[i][2])
-					else
-						levelc = RAID_CLASS_COLORS["PRIEST"]
-						classc = RAID_CLASS_COLORS["PRIEST"]
-					end
+					if not classc then classc = {r=1, g=1, b=1} end
 					
 					if UnitInParty(friendTable[i][1]) or UnitInRaid(friendTable[i][1]) then grouped = 1 else grouped = 2 end
 					GameTooltip:AddDoubleLine(format(levelNameClassString,levelc.r*255,levelc.g*255,levelc.b*255,friendTable[i][2],friendTable[i][1],groupedTable[grouped]," "..friendTable[i][6]),friendTable[i][4],classc.r,classc.g,classc.b,zonec.r,zonec.g,zonec.b)

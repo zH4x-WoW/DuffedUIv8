@@ -13,9 +13,9 @@ if C["datatext"].calltoarms and C["datatext"].calltoarms > 0 then
 	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
-	local font = D.Font(C["font"].datatext)
+	local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 	local Text  = Stat:CreateFontString("DuffedUIStatCallToArmsText", "OVERLAY")
-	Text:SetFontObject(font)
+	Text:SetFont(f, fs, ff)
 	Text:SetShadowOffset(D.mult, -D.mult)
 	Text:SetShadowColor(0, 0, 0, 0.4)
 	D.DataTextPosition(C["datatext"].calltoarms, Text)

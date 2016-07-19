@@ -56,7 +56,7 @@ local function UpdateButtonsText(frame)
 			local oldilevel = text:GetText()
 			local ilevel = select(4, GetItemInfo(item))
 			local heirloom = select(3, GetItemInfo(item))
-			local itemlevel = LibItemUpgrade:GetUpgradedItemLevel(item) or 0
+			local itemlevel = LibItemUpgrade:GetUpgradedItemLevel(item) or nil or 0
 
 			if ilevel then
 				if ilevel ~= oldilevel then

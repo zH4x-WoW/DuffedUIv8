@@ -8,7 +8,7 @@ ns._Objects = {}
 ns._Headers = {}
 
 local texture = C["media"]["normTex"]
-local font = D.Font(C["font"]["unitframes"])
+local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
 local backdrop = {
 	bgFile = C["media"]["blank"],
 	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
@@ -39,10 +39,10 @@ D["ConstructUFArena"] = function(self)
 
 	local healthBG = health:CreateTexture(nil, "BORDER")
 	healthBG:SetAllPoints()
-	healthBG:SetTexture(0, 0, 0)
+	healthBG:SetColorTexture(0, 0, 0)
 
 	health.value = health:CreateFontString(nil, "OVERLAY")
-	health.value:SetFontObject(font)
+	health.value:SetFont(f, fs, ff)
 	health.value:Point("LEFT", 2, .5)
 	health.PostUpdate = D.PostUpdateHealth
 
@@ -53,10 +53,10 @@ D["ConstructUFArena"] = function(self)
 		health.colorClass = false
 		health:SetStatusBarColor(unpack(C["unitframes"]["healthbarcolor"]))
 		healthBG:SetVertexColor(unpack(C["unitframes"]["deficitcolor"]))
-		healthBG:SetTexture(.6, .6, .6)
+		healthBG:SetColorTexture(.6, .6, .6)
 		if C["unitframes"]["ColorGradient"] then
 			health.colorSmooth = true
-			healthBG:SetTexture(0, 0, 0)
+			healthBG:SetColorTexture(0, 0, 0)
 		end
 	else
 		health.colorDisconnected = true
@@ -89,7 +89,7 @@ D["ConstructUFArena"] = function(self)
 	powerBG.multiplier = .3
 
 	power.value = power:CreateFontString(nil, "OVERLAY")
-	power.value:SetFontObject(font)
+	power.value:SetFont(f, fs, ff)
 	power.value:Point("RIGHT", health, -2, .5)
 	power.PostUpdate = D.PostUpdatePower
 
@@ -104,7 +104,7 @@ D["ConstructUFArena"] = function(self)
 	local Name = health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER", health, "CENTER", 0, 1)
 	Name:SetJustifyH("CENTER")
-	Name:SetFontObject(font)
+	Name:SetFont(f, fs, ff)
 	Name:SetShadowColor(0, 0, 0)
 	Name:SetShadowOffset(1.25, -1.25)
 	Name.frequentUpdates = .2
@@ -144,12 +144,12 @@ D["ConstructUFArena"] = function(self)
 	castbar:CreateBackdrop()
 
 	castbar.Text = castbar:CreateFontString(nil, "OVERLAY")
-	castbar.Text:SetFontObject(font)
+	castbar.Text:SetFont(f, fs, ff)
 	castbar.Text:Point("LEFT", castbar, "LEFT", 4, 0)
 	castbar.Text:SetTextColor(.84, .75, .65)
 
 	castbar.time = castbar:CreateFontString(nil, "OVERLAY")
-	castbar.time:SetFontObject(font)
+	castbar.time:SetFont(f, fs, ff)
 	castbar.time:Point("RIGHT", castbar, "RIGHT", -4, 0)
 	castbar.time:SetTextColor(.84, .75, .65)
 	castbar.time:SetJustifyH("RIGHT")

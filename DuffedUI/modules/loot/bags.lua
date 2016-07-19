@@ -121,7 +121,7 @@ function CreateReagentContainer()
 	SwitchBankButton:Size(75, 23)
 	SwitchBankButton:SkinButton()
 	SwitchBankButton:Point("BOTTOMLEFT", Reagent, "BOTTOMLEFT", 10, 7)
-	SwitchBankButton:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+	SwitchBankButton:FontString("Text", C["media"].font, 11, "THINOUTLINE")
 	SwitchBankButton.Text:SetPoint("CENTER")
 	SwitchBankButton.Text:SetText(BANK)
 	SwitchBankButton.Text:SetTextColor(1, 1, 1)
@@ -144,7 +144,7 @@ function CreateReagentContainer()
 		SortButton:Size(75, 23)
 		SortButton:SetPoint("BOTTOMRIGHT", Reagent, "BOTTOMRIGHT", -10, 7)
 		SortButton:SkinButton()
-		SortButton:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+		SortButton:FontString("Text", C["media"].font, 11, "THINOUTLINE")
 		SortButton.Text:SetPoint("CENTER")
 		SortButton.Text:SetText(BAG_FILTER_CLEANUP)
 		SortButton.Text:SetTextColor(1, 1, 1)
@@ -189,7 +189,7 @@ function CreateReagentContainer()
 
 		Count:ClearAllPoints()
 		Count:SetPoint("BOTTOMRIGHT", -3, 3)
-		Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+		Count:SetFont(C["media"].font, 11, "THINOUTLINE")
 		Count:SetTextColor(1, 1, 1)
 	end
 	Reagent:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)
@@ -207,7 +207,7 @@ function CreateContainer(storagetype, ...)
 	Container:SetScale(C["bags"].scale)
 	Container:SetWidth(((ButtonSize + ButtonSpacing) * ItemsPerRow) + 22 - ButtonSpacing)
 	Container:SetPoint(...)
-	Container:SetFrameStrata("HIGH")
+	Container:SetFrameStrata("MEDIUM")
 	Container:SetFrameLevel(1)
 	Container:Hide()
 	Container:SetTemplate("Transparent")
@@ -228,7 +228,6 @@ function CreateContainer(storagetype, ...)
 		BagsContainer:SetWidth(10)
 		BagsContainer:SetHeight(10)
 		BagsContainer:SetPoint("BOTTOMRIGHT", Container, "TOPRIGHT", 0, 3)
-		BagsContainer:Hide()
 		BagsContainer:SetTemplate("Transparent")
 
 		if C["bags"]["SortingButton"] then
@@ -238,7 +237,7 @@ function CreateContainer(storagetype, ...)
 			Sort:SetFrameLevel(Container:GetFrameLevel() + 1)
 			Sort:SetFrameStrata(Container:GetFrameStrata())
 			Sort:SkinButton()
-			Sort:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+			Sort:FontString("Text", C["media"].font, 11, "THINOUTLINE")
 			Sort.Text:SetPoint("CENTER")
 			Sort.Text:SetText(BAG_FILTER_CLEANUP)
 			Sort.Text:SetTextColor(1, 1, 1)
@@ -254,31 +253,19 @@ function CreateContainer(storagetype, ...)
 		ToggleBagsContainer:EnableMouse(true)
 		ToggleBagsContainer.Text = ToggleBagsContainer:CreateFontString("button")
 		ToggleBagsContainer.Text:SetPoint("CENTER", ToggleBagsContainer, "CENTER")
-		ToggleBagsContainer.Text:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+		ToggleBagsContainer.Text:SetFont(C["media"].font, 11, "THINOUTLINE")
 		ToggleBagsContainer.Text:SetText("X")
 		ToggleBagsContainer.Text:SetTextColor(1, 1, 1)
 		ToggleBagsContainer:SetScript("OnMouseUp", function(self, button)
 			local Purchase = BankFramePurchaseInfo
-			if (button == "RightButton") then
-				local BanksContainer = _G["DuffedUI_Bank"].BagsContainer
-				local Purchase = BankFramePurchaseInfo
-				local ReagentButton = _G["DuffedUI_Bank"].ReagentButton
-				if (ReplaceBags == 0) then
-					ReplaceBags = 1
-					BagsContainer:Show()
-					BanksContainer:Show()
-					BanksContainer:ClearAllPoints()
-					ToggleBagsContainer.Text:SetTextColor(1, 1, 1)
-					if Purchase:IsShown() then BanksContainer:SetPoint("BOTTOMLEFT", _G["DuffedUI_Bank"], "TOPLEFT", 0, 3) else BanksContainer:SetPoint("BOTTOMLEFT", _G["DuffedUI_Bank"], "TOPLEFT", 0, 3) end
-				else
-					ReplaceBags = 0
-					BagsContainer:Hide()
-					BanksContainer:Hide()
-					ToggleBagsContainer.Text:SetTextColor(1, 1, 1)
-				end
-			else
-				if BankFrame:IsShown() then CloseBankFrame() else ToggleAllBags() end
-			end
+			local BanksContainer = _G["DuffedUI_Bank"].BagsContainer
+			local Purchase = BankFramePurchaseInfo
+			local ReagentButton = _G["DuffedUI_Bank"].ReagentButton
+			BanksContainer:ClearAllPoints()
+			ToggleBagsContainer.Text:SetTextColor(1, 1, 1)
+			if Purchase:IsShown() then BanksContainer:SetPoint("BOTTOMLEFT", _G["DuffedUI_Bank"], "TOPLEFT", 0, 3) else BanksContainer:SetPoint("BOTTOMLEFT", _G["DuffedUI_Bank"], "TOPLEFT", 0, 3) end
+			CloseBankFrame()
+			ToggleAllBags()
 		end)
 
 		for _, Button in pairs(BlizzardBags) do
@@ -329,7 +316,7 @@ function CreateContainer(storagetype, ...)
 		SwitchReagentButton:Size(85, 23)
 		SwitchReagentButton:SkinButton()
 		SwitchReagentButton:Point("BOTTOMLEFT", Container, "BOTTOMLEFT", 10, 7)
-		SwitchReagentButton:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+		SwitchReagentButton:FontString("Text", C["media"].font, 11, "THINOUTLINE")
 		SwitchReagentButton.Text:SetPoint("CENTER")
 		SwitchReagentButton.Text:SetText(REAGENT_BANK)
 		SwitchReagentButton.Text:SetTextColor(1, 1, 1)
@@ -348,7 +335,7 @@ function CreateContainer(storagetype, ...)
 			SortButton:Size(75, 23)
 			SortButton:SetPoint("BOTTOMRIGHT", Container, "BOTTOMRIGHT", -10, 7)
 			SortButton:SkinButton()
-			SortButton:FontString("Text", C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+			SortButton:FontString("Text", C["media"].font, 11, "THINOUTLINE")
 			SortButton.Text:SetPoint("CENTER")
 			SortButton.Text:SetText(BAG_FILTER_CLEANUP)
 			SortButton.Text:SetTextColor(1, 1, 1)
@@ -373,6 +360,7 @@ function CreateContainer(storagetype, ...)
 
 		for i = 1, 7 do
 			local Bag = BankSlotsFrame["Bag" .. i]
+			Bag.HighlightFrame:Kill()
 			Bag:SetParent(BankBagsContainer)
 			Bag:SetWidth(ButtonSize)
 			Bag:SetHeight(ButtonSize)
@@ -389,7 +377,6 @@ function CreateContainer(storagetype, ...)
 
 		BankBagsContainer:SetWidth((ButtonSize * 7) + (ButtonSpacing * (7 + 1)))
 		BankBagsContainer:SetHeight(ButtonSize + (ButtonSpacing * 2))
-		BankBagsContainer:Hide()
 
 		BankFrame:EnableMouse(false)
 
@@ -425,57 +412,66 @@ function SkinEditBoxes()
 end
 
 function SlotUpdate(id, button)
-	local ItemLink = GetContainerItemLink(id, button:GetID())
-	local Texture, Count, Lock = GetContainerItemInfo(id, button:GetID())
-	local IsQuestItem, QuestId, IsActive = GetContainerItemQuestInfo(id, button:GetID())
-	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
-	local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
-	local NewItem = button.NewItemTexture
+    if not button then return end
 
-	if IsNewItem then
-		NewItem:SetAlpha(0)
-		if C["bags"].Bounce then
-			if not button.Animation then
-				button.Animation = button:CreateAnimationGroup()
-				button.Animation:SetLooping("BOUNCE")
-				button.FadeOut = button.Animation:CreateAnimation("Alpha")
-				button.FadeOut:SetChange(-0.5)
-				button.FadeOut:SetDuration(0.40)
-				button.FadeOut:SetSmoothing("IN_OUT")
-			end
-			button.Animation:Play()
-		end
-	else
-		if button.Animation and button.Animation:IsPlaying() then button.Animation:Stop() end
-	end
+    local ItemLink = GetContainerItemLink(id, button:GetID())
+    local Texture, Count, Lock = GetContainerItemInfo(id, button:GetID())
+    local IsQuestItem, QuestId, IsActive = GetContainerItemQuestInfo(id, button:GetID())
+    local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
+    local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
+    local NewItem = button.NewItemTexture
+    local IconQuestTexture = button.IconQuestTexture
 
-	if IsQuestItem then
-		if button.BorderColor ~= QuestColor then
-			button:SetBackdropBorderColor(1, 1, 0)
-			button.BorderColor = QuestColor
-		end
-		return
-	end
+    if IconQuestTexture then IconQuestTexture:SetAlpha(0) end
 
-	if ItemLink then
-		local Name, _, Rarity, _, _, Type = GetItemInfo(ItemLink)
-		if Rarity and Rarity > 1 then
-			if button.BorderColor ~= GetItemQualityColor(Rarity) then
-				button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
-				button.BorderColor = GetItemQualityColor(Rarity)
-			end
-		else
-			if (button.BorderColor ~= C["general"].bordercolor) then
-				button:SetBackdropBorderColor(unpack(C["general"].bordercolor))
-				button.BorderColor = C["general"].bordercolor
-			end
-		end
-	else
-		if (button.BorderColor ~= C["general"].bordercolor) then
-			button:SetBackdropBorderColor(unpack(C["general"].bordercolor))
-			button.BorderColor = C["general"].bordercolor
-		end
-	end
+    if IsNewItem and NewItem then
+        NewItem:SetAlpha(0)
+
+        if C["bags"].Bounce then
+            if not button.Animation then
+                button.Animation = button:CreateAnimationGroup()
+                button.Animation:SetLooping("BOUNCE")
+                button.FadeOut = button.Animation:CreateAnimation("Alpha")
+                button.FadeOut:SetFromAlpha(1)
+                button.FadeOut:SetToAlpha(0)
+                button.FadeOut:SetDuration(0.40)
+                button.FadeOut:SetSmoothing("IN_OUT")
+            end
+
+            button.Animation:Play()
+        end
+    else
+        if button.Animation and button.Animation:IsPlaying() then button.Animation:Stop() end
+    end
+
+    if IsQuestItem then
+        if (button.BorderColor ~= QuestColor) then
+            button:SetBackdropBorderColor(1, 1, 0)
+            button.BorderColor = QuestColor
+        end
+        return
+    end
+
+    if ItemLink then
+        local Name, _, Rarity, _, _, Type = GetItemInfo(ItemLink)
+
+        if (not Lock and Rarity and Rarity > 1) then
+            if (button.BorderColor ~= GetItemQualityColor(Rarity)) then
+                button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
+                button.BorderColor = GetItemQualityColor(Rarity)
+            end
+        else
+            if (button.BorderColor ~= C["general"].bordercolor) then
+                button:SetBackdropBorderColor(unpack(C["general"].bordercolor))
+                button.BorderColor = C["general"].BorderColor
+            end
+        end
+    else
+        if (button.BorderColor ~= C["general"].bordercolor) then
+            button:SetBackdropBorderColor(unpack(C["general"].bordercolor))
+            button.BorderColor = C["general"].bordercolor
+        end
+    end
 end
 
 function BagUpdate(id)
@@ -487,7 +483,7 @@ function BagUpdate(id)
 
 		Count:ClearAllPoints()
 		Count:SetPoint("BOTTOMRIGHT", 0, 3)
-		Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+		Count:SetFont(C["media"].font, 11, "THINOUTLINE")
 		Count:SetTextColor(1, 1, 1)
 	end
 end
@@ -538,7 +534,7 @@ function UpdateAllBags()
 
 			Count:ClearAllPoints()
 			Count:SetPoint("BOTTOMRIGHT", 0, 3)
-			Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+			Count:SetFont(C["media"].font, 11, "THINOUTLINE")
 			Count:SetTextColor(1, 1, 1)
 		end
 		BagUpdate(ID)
@@ -583,7 +579,7 @@ function UpdateAllBankBags()
 
 		Count:ClearAllPoints()
 		Count:SetPoint("BOTTOMRIGHT", 0, 3)
-		Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+		Count:SetFont(C["media"].font, 10, "THINOUTLINE")
 		Count:SetTextColor(1, 1, 1)
 	end
 
@@ -616,7 +612,7 @@ function UpdateAllBankBags()
 
 			Count:ClearAllPoints()
 			Count:SetPoint("BOTTOMRIGHT", 0, 3)
-			Count:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+			Count:SetFont(C["media"].font, 11, "THINOUTLINE")
 			Count:SetTextColor(1, 1, 1)
 		end
 	end
@@ -626,8 +622,6 @@ end
 function Options()
 	SetSortBagsRightToLeft(false)
 	SetInsertItemsLeftToRight(false)
-	InterfaceOptionsControlsPanelReverseCleanUpBags:Hide()
-	InterfaceOptionsControlsPanelReverseNewLoot:Hide()
 end
 
 ContainerFrame1Item1:SetScript("OnHide", function()

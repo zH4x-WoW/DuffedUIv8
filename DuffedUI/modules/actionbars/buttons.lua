@@ -140,34 +140,13 @@ DuffedUIBar5Button.text = D.SetFontString(DuffedUIBar5Button, C["media"].font, 1
 DuffedUIBar5Button.text:Point("CENTER", 0, 0)
 DuffedUIBar5Button.text:SetText(cm .. ">|r")
 
-local vehicleleft = CreateFrame("Button", "DuffedUIExitVehicleButtonLeft", UIParent, "SecureHandlerClickTemplate")
-vehicleleft:SetAllPoints(DuffedUIInfoLeft)
-vehicleleft:SetFrameStrata("LOW")
-vehicleleft:SetFrameLevel(10)
-vehicleleft:SetTemplate("Default")
-vehicleleft:SetBackdropBorderColor(75/255,  175/255, 76/255)
-vehicleleft:RegisterForClicks("AnyUp")
-vehicleleft:SetScript("OnClick", function() VehicleExit() end)
-vehicleleft:FontString("text", C["media"].font, 11)
-vehicleleft.text:Point("CENTER", 0, 0)
-vehicleleft.text:SetText("|cff4BAF4C" .. string.upper(LEAVE_VEHICLE) .. "|r")
-RegisterStateDriver(vehicleleft, "visibility", "[target=vehicle,exists] show;hide")
-
-local vehicleright = CreateFrame("Button", "DuffedUIExitVehicleButtonRight", UIParent, "SecureHandlerClickTemplate")
-vehicleright:SetAllPoints(DuffedUIInfoRight)
-vehicleright:SetTemplate("Default")
-vehicleright:SetFrameStrata("LOW")
-vehicleright:SetFrameLevel(10)
-vehicleright:SetBackdropBorderColor(75/255,  175/255, 76/255)
-vehicleright:RegisterForClicks("AnyUp")
-vehicleright:SetScript("OnClick", function() VehicleExit() end)
-vehicleright:FontString("text", C["media"].font, 11)
-vehicleright.text:Point("CENTER", 0, 0)
-vehicleright.text:SetText("|cff4BAF4C" .. string.upper(LEAVE_VEHICLE) .. "|r")
-RegisterStateDriver(vehicleright, "visibility", "[target=vehicle,exists] show;hide")
-
 local function Vehicle_OnEvent(self, event)
-	if CanExitVehicle() and ActionBarController_GetCurrentActionBarState() == LE_ACTIONBAR_STATE_MAIN then
+	if CanExitVehicle() then
+		if (UnitOnTaxi("player")) then
+            self.text:SetText("|cff4BAF4C" .. TAXI_CANCEL_DESCRIPTION .. "|r")
+        else
+            self.text:SetText("|cff4BAF4C" .. LEAVE_VEHICLE .. "|r")
+        end
 		self:Show()
 		self:EnableMouse(true)
 	else
@@ -176,35 +155,31 @@ local function Vehicle_OnEvent(self, event)
 end
 
 local function Vehicle_OnClick(self)
-	if UnitOnTaxi("player") then
-		TaxiRequestEarlyLanding()
-		self:EnableMouse(false)
-	else
-		VehicleExit()
-	end
+	if UnitOnTaxi("player") then TaxiRequestEarlyLanding() else VehicleExit() end
 end
 
-local vehicleflight = CreateFrame("Button", "DuffedUIExitFlightButton", UIParent, "SecureHandlerClickTemplate")
-vehicleflight:SetAllPoints(DuffedUIInfoRight)
-vehicleflight:SetTemplate("Default")
-vehicleflight:SetFrameStrata("LOW")
-vehicleflight:SetFrameLevel(10)
-vehicleflight:SetBackdropBorderColor(75/255,  175/255, 76/255)
-vehicleflight:FontString("text", C["media"].font, 11)
-vehicleflight.text:Point("CENTER", 0, 0)
-vehicleflight.text:SetText("|cff4BAF4C" .. string.upper(TAXI_CANCEL_DESCRIPTION) .. "|r")
-vehicleflight:SetScript("OnClick", Vehicle_OnClick)
-vehicleflight:SetScript("OnEnter", MainMenuBarVehicleLeaveButton_OnEnter)
-vehicleflight:SetScript("OnLeave", GameTooltip_Hide)
-vehicleflight:RegisterEvent("PLAYER_ENTERING_WORLD");
-vehicleflight:RegisterEvent("UPDATE_BONUS_ACTIONBAR");
-vehicleflight:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR");
-vehicleflight:RegisterEvent("UNIT_ENTERED_VEHICLE");
-vehicleflight:RegisterEvent("UNIT_EXITED_VEHICLE");
-vehicleflight:RegisterEvent("VEHICLE_UPDATE");
-vehicleflight:SetScript("OnEvent", Vehicle_OnEvent)
+local vehicleleft = CreateFrame("Button", "DuffedUIExitVehicleButtonLeft", UIParent)
+vehicleleft:SetPoint("TOP", UIParent, "TOP", 0, -5)
+vehicleleft:SetSize(225, 20)
+vehicleleft:SetFrameStrata("LOW")
+vehicleleft:SetFrameLevel(10)
+vehicleleft:SetTemplate("Default")
+vehicleleft:SetBackdropBorderColor(75/255,  175/255, 76/255)
+vehicleleft:RegisterForClicks("AnyUp")
+vehicleleft:SetScript("OnClick", function() Vehicle_OnClick() end)
+vehicleleft:SetScript("OnEnter", MainMenuBarVehicleLeaveButton_OnEnter)
+vehicleleft:SetScript("OnLeave", GameTooltip_Hide)
+vehicleleft:RegisterEvent("PLAYER_ENTERING_WORLD")
+vehicleleft:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
+vehicleleft:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
+vehicleleft:RegisterEvent("UNIT_ENTERED_VEHICLE")
+vehicleleft:RegisterEvent("UNIT_EXITED_VEHICLE")
+vehicleleft:RegisterEvent("VEHICLE_UPDATE")
+vehicleleft:SetScript("OnEvent", Vehicle_OnEvent)
 
-vehicleflight:Hide()
+vehicleleft:FontString("text", C["media"].font, 11)
+vehicleleft.text:Point("CENTER", 0, 0)
+vehicleleft.text:SetShadowOffset(1.25, -1.25)
 
 local init = CreateFrame("Frame")
 init:RegisterEvent("VARIABLES_LOADED")
@@ -213,8 +188,6 @@ init:SetScript("OnEvent", function(self, event)
 	local db = DuffedUIDataPerChar
 
 	if db.bar3 then UpdateBar(DuffedUIBar3Button, DuffedUIBar3) end
-
 	if db.bar4 then UpdateBar(DuffedUIBar4Button, DuffedUIBar4) end
-
 	if db.bar5 then UpdateBar(DuffedUIBar5Button, DuffedUIBar5) end
 end)

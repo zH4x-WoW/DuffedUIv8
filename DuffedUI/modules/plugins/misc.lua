@@ -1,5 +1,10 @@
 local D, C, L = unpack(select(2, ...))
 
+--[[Option to disable TalkingHead]]--
+if C["duffed"]["talkinghead"] then
+	UIParent:UnregisterEvent("TALKINGHEAD_REQUESTED")
+end
+
 --[[Quest Rewards]]--
 local QuestReward = CreateFrame("Frame")
 QuestReward:SetScript("OnEvent", function(self, event, ...) self[event](...) end)
@@ -54,34 +59,6 @@ end, true)
 hooksecurefunc("StaticPopup_Show", function(which)
 	if which == "DEATH" and not UnitIsDeadOrGhost("player") then StaticPopup_Hide("DEATH") end
 end)
-
-local function FixTradeSkillReagents()
-	local function TradeSkillReagent_OnClick(self)
-		if IsModifiedClick() then
-			local link, name = GetTradeSkillReagentItemLink(TradeSkillFrame.selectedSkill, self:GetID())
-			if not link then
-				name, link = GameTooltip:GetItem()
-				if name == self.name:GetText() then HandleModifiedItemClick(link) end
-			end
-		end
-	end
-	
-	for i = 1, 8 do _G["TradeSkillReagent"..i]:HookScript("OnClick", TradeSkillReagent_OnClick) end
-end
-
-if TradeSkillReagent1 then
-	FixTradeSkillReagents()
-else
-	local f = CreateFrame("Frame")
-	f:RegisterEvent("ADDON_LOADED")
-	f:SetScript("OnEvent", function(f, e, a)
-		if a == "Blizzard_TradeSkillUI" then
-			FixTradeSkillReagents()
-			f:UnregisterAllEvents()
-			f:SetScript("OnEvent", nil)
-		end
-	end)
-end
 
 --[[Blizzard taint fixes for 5.4.1]]--
 setfenv(FriendsFrame_OnShow, setmetatable({ UpdateMicroButtons = function() end }, { __index = _G }))
@@ -313,14 +290,13 @@ end
 --[[Dispel Announcement]]--
 if C["duffed"].dispelannouncement == true then
 	local textcolor = "|cff00ff00"
-	font = D.Font(C["font"].datatext)
 
 	local f = CreateFrame("MessageFrame", "dDispelFrame", UIParent)
 	f:SetPoint("TOP", 0, -220)
 	f:SetSize(200, 100)
-	f:SetFontObject(font)
+	f:SetFont(C["media"].font, 11)
 	f:SetShadowOffset(1, -1)
-	f:SetShadowColor(0,0,0)
+	f:SetShadowColor(0, 0, 0)
 	f:SetTimeVisible(2)
 	f:SetBackdrop({bgFile = "Interface\\ChatFrame\\ChatFrameBackground"})
 	f:SetBackdropColor(0,0,0,0)

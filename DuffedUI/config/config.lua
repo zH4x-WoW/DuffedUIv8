@@ -11,21 +11,6 @@ C["general"] = {
 	["calendarevent"] = false,
 }
 
-C["font"] = {
-	["duffeduisize"] = 11,
-	["duffedui_altsize"] = 12,
-	["pixelfontsize"] = 10,
-	["actionbars"] = "DuffedUI",
-	["auras"] = "DuffedUI",
-	["classtimer"] = "DuffedUI",
-	["ses"] = "DuffedUI",
-	["datatext"] = "DuffedUI",
-	["unitframes"] = "DuffedUI",
-	["scd"] = "DuffedUI",
-	["rcd"] = "DuffedUI",
-	["experience"] = "DuffedUI",
-}
-
 C["unitframes"] = {
 	["enable"] = true,
 	["layout"] = 1,
@@ -37,8 +22,6 @@ C["unitframes"] = {
 	["ColorGradient"] = true,
 	["charportrait"] = true,
 	["weakenedsoulbar"] = true,
-	["classbar"] = true,
-	["runeofpower"] = true,
 	["targetauras"] = true,
 	["onlyselfdebuffs"] = false,
 	["combatfeedback"] = true,
@@ -48,13 +31,12 @@ C["unitframes"] = {
 	["totdbsize"] = 20,
 	["focusdebuffs"] = true,
 	["focusbutton"] = true,
-	["attached"] = false,
-	["oocHide"] = true,
 	["playermodel"] = "Model",
 	["buffsize"] = 20,
 	["debuffsize"] = 20,
-	["DruidMana"] = true,
-	["AnticipationBar"] = true,
+	["classbar"] = true,
+	["attached"] = false,
+	["oocHide"] = false,
 }
 
 C["chat"] = {
@@ -80,18 +62,10 @@ C["castbar"] = {
 
 C["nameplate"] = {
  	["active"] = true,
- 	["auraswidth"] = 20,
- 	["aurasheight"] = 15,
- 	["debuffs"] = true,
  	["platewidth"] = 110,
  	["plateheight"] = 7,
- 	["threat_goodcolor"] = {.29,  .69, .3},
- 	["threat_badcolor"] = {.78, .25, .25},
- 	["threat_transitioncolor"] = {.86, .77, .36},
- 	["Percent"] = false,
- 	["MaxDebuffs"] = 5,
-	["NTA"] = .35,
- }
+	["ethreat"] = true,
+}
 
 C["actionbar"] = {
 	["enable"] = true,
@@ -151,7 +125,6 @@ C["datatext"] = {
 	["leech"] = 0,
 	["mastery"] = 0,
 	["micromenu"] = 0,
-	["multistrike"] = 0,
 	["parry"] = 0,
 	["power"] = 7,
 	["profession"] = 0,
@@ -196,19 +169,14 @@ C["classtimer"] = {
 
 C["auras"] = {
 	["player"] = true,
-	["consolidate"] = false,
 	["flash"] = false,
 	["classictimer"] = true,
-	["bufftracker"] = true,
-	["buffnotice"] = true,
-	["warning"] = true,
 	["wrap"] = 18,
 }
 
 C["bags"] = {
 	["enable"] = true,
 	["bpr"] = 10,
-	["movable"] = false,
 	["scale"] = 1,
 	["buttonsize"] = 28,
 	["spacing"] = 4,
@@ -223,15 +191,18 @@ C["misc"] = {
 	["sesgearswap"] = true,
 	["sesset1"] = 1,
 	["sesset2"] = 2,
+	["sesset3"] = 3,
+	["sesset4"] = 4,
 	["combatanimation"] = true,
 	["flightpoint"] = true,
 	["ilvlcharacter"] = true,
-	["loc"] = true,
 	["acm_screen"] = true,
 	["AFKCamera"] = true,
 	["XPBar"] = true,
 	["XPBarWidth"] = 378,
 	["magemenu"] = false,
+	["artifact"] = true,
+	["artifactwidth"] = 378,
 }
 
 C["duffed"] = {
@@ -241,6 +212,7 @@ C["duffed"] = {
 	["announcechannel"] = "SAY",
 	["spellannounce"] = true,
 	["errorfilter"] = true,
+	["talkinghead"] = true,
 	filter = {
 		[INVENTORY_FULL] = true,
 		[ERR_PARTY_LFG_BOOT_COOLDOWN_S] = true,

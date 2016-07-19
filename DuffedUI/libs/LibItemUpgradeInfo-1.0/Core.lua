@@ -1,4 +1,4 @@
-local MAJOR, MINOR = "LibItemUpgradeInfo-1.0", 18
+local MAJOR, MINOR = "LibItemUpgradeInfo-1.0", 21
 local type,tonumber,select,strsplit,GetItemInfoFromHyperlink=type,tonumber,select,strsplit,GetItemInfoFromHyperlink
 local library,previous = _G.LibStub:NewLibrary(MAJOR, MINOR)
 local lib=library --#lib Needed to keep Eclipse LDT happy
@@ -61,6 +61,10 @@ local upgradeTable = {
 	[529] = { upgrade = 0, max = 2, ilevel = 0 },
 	[530] = { upgrade = 1, max = 2, ilevel = 5 },
 	[531] = { upgrade = 2, max = 2, ilevel = 10 },
+	[535] = { upgrade = 1, max = 3, ilevel = 15 },
+	[536] = { upgrade = 2, max = 3, ilevel = 30 },
+	[537] = { upgrade = 3, max = 3, ilevel = 45 },
+	[538] = { upgrade = 0, max = 3, ilevel = 0 },
 
 }
 do
@@ -75,7 +79,7 @@ local soulboundPattern = _G.ITEM_SOULBOUND
 local boePattern=_G.ITEM_BIND_ON_EQUIP
 local bopPattern=_G.ITEM_BIND_ON_PICKUP
 local boaPattern1=_G.ITEM_BIND_TO_BNETACCOUNT
-local boaPattern2=ITEM_BNETACCOUNTBOUND
+local boaPattern2=_G.ITEM_BNETACCOUNTBOUND
 
 local scanningTooltip
 local itemCache = setmetatable({},{__index=function(table,key) return {} end})
@@ -83,6 +87,10 @@ local heirloomcolor
 local emptytable={}
 local function ScanTip(itemLink,itemLevel)
 	if not heirloomcolor then heirloomcolor =_G.ITEM_QUALITY_COLORS[_G.LE_ITEM_QUALITY_HEIRLOOM].hex end
+	if type(itemLink)=="number" then
+		itemLink=select(2,GetItemInfo(itemLink))
+		if not itemLink then return emptytable end
+	end
 	if type(itemCache[itemLink].ilevel)=="nil" then
 		if not scanningTooltip then
 			scanningTooltip = _G.CreateFrame("GameTooltip", "LibItemUpgradeInfoTooltip", nil, "GameTooltipTemplate")
@@ -132,8 +140,10 @@ function lib:GetUpgradeID(itemString)
 	local itemString = itemString:match("item[%-?%d:]+") or ""-- Standardize itemlink to itemstring
 	local instaid, _, numBonuses, affixes = select(12, strsplit(":", itemString, 15))
 	instaid=tonumber(instaid) or 7
+	numBonuses=tonumber(numBonuses) or 0
+
 	if instaid >0 and (instaid-4)%8==0 then
-		return tonumber(select(numBonuses + 1, strsplit(":", affixes)))
+		return select(numBonuses + 1, strsplit(":", affixes))
 	end
 end
 
@@ -287,6 +297,30 @@ function lib:IsBoe(itemString)
 	local rc=ScanTip(itemString)
 	return rc.boe
 end
+-- IsBoa(itemString)
+--
+-- Check an item for  Bind On Aaccount
+--
+-- Arguments:
+--   itemString - String - An itemLink or itemString denoting the item
+--
+-- Returns:
+--   Boolean - True if Bind On Equip
+
+function lib:IsBoa(itemString)
+	local rc=ScanTip(itemString)
+	return rc.boa
+end
+
+-- IsHeirloom(itemString)
+--
+-- Check an item for  Heirloom
+--
+-- Arguments:
+--   itemString - String - An itemLink or itemString denoting the item
+--
+-- Returns:
+--   Boolean - True if Heirloom
 
 -- IsHeirloom(itemString)
 --
@@ -375,9 +409,6 @@ function lib:GetCacheStats()
 	local h=c.tot-c.miss
 	local perc=( h>0) and h/c.tot*100 or 0
 	return c.miss,h,perc
-end
-if lib.itemframe and lib.itemframe.UnregisterEvent then
-	lib.itemframe:UnregisterEvent('GET_ITEM_INFO_RECEIVED')
 end
 
 --[===========[ ]===========]
@@ -468,7 +499,7 @@ do
 						pp("LibItemUpgradeInfo-1.0: |cff00ff00No changes|r")
 					else
 						pp("LibItemUpgradeInfo-1.0: |cffff0000New table:|r {")
-						ppDiffTable(upgradeTable, newTable)
+						printDiffTable(upgradeTable, newTable)
 						pp("}")
 					end
 				else

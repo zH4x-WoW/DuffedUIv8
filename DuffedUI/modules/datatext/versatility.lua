@@ -4,7 +4,7 @@ if C["datatext"].versatility and C["datatext"].versatility > 0 then
 	local vDB = GetCombatRatingBonus(CR_VERSATILITY_DAMAGE_DONE) + GetVersatilityBonus(CR_VERSATILITY_DAMAGE_DONE)
 	local vDTR = GetCombatRatingBonus(CR_VERSATILITY_DAMAGE_TAKEN) + GetVersatilityBonus(CR_VERSATILITY_DAMAGE_TAKEN)
 
-	local font = D.Font(C["font"].datatext)
+	local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 	local Stat = CreateFrame("Frame", "DuffedUIStatVersatility")
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
@@ -14,7 +14,7 @@ if C["datatext"].versatility and C["datatext"].versatility > 0 then
 	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
 	local Text  = Stat:CreateFontString("DuffedUIStatVersatilityText", "OVERLAY")
-	Text:SetFontObject(font)
+	Text:SetFont(f, fs, ff)
 	D.DataTextPosition(C["datatext"].versatility, Text)
 
 	local function Update(self)

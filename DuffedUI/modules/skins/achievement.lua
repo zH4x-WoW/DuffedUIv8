@@ -50,7 +50,12 @@ local function LoadSkin()
 	AchievementFrameAchievementsContainer.backdrop:Point("BOTTOMRIGHT", -3, -3)
 	AchievementFrameCloseButton:SkinCloseButton(AchievementFrame.backdrop)
 	AchievementFrameFilterDropDown:SkinDropDownBox()
-	AchievementFrameFilterDropDown:Point("TOPRIGHT", AchievementFrame, "TOPRIGHT", -44, 5)
+	AchievementFrameFilterDropDown:ClearAllPoints()
+	AchievementFrameFilterDropDown:Point("LEFT", AchievementFrameHeaderPoints, "RIGHT", 5, -2)
+	AchievementFrame.searchBox:SkinEditBox()
+	AchievementFrame.searchBox:SetHeight(15)
+	AchievementFrame.searchBox:ClearAllPoints()
+	AchievementFrame.searchBox:Point("TOPRIGHT", AchievementFrame, "TOPRIGHT", -40, 0)
 
 	-- ScrollBars
 	AchievementFrameCategoriesContainerScrollBar:SkinScrollBar()
@@ -90,7 +95,7 @@ local function LoadSkin()
 		SkinStatusBar(frame)
 		button:StripTextures()
 		highlight:StripTextures()
-		_G[highlight:GetName().."Middle"]:SetTexture(1, 1, 1, 0.3)
+		_G[highlight:GetName().."Middle"]:SetColorTexture(1, 1, 1, 0.3)
 		_G[highlight:GetName().."Middle"]:SetAllPoints(frame)
 	end
 
@@ -153,7 +158,7 @@ local function LoadSkin()
 
 		frame.bg2 = frame:CreateTexture(nil, "BACKGROUND")
 		frame.bg2:SetDrawLayer("BACKGROUND", 3)
-		frame.bg2:SetTexture(0,0,0)
+		frame.bg2:SetColorTexture(0,0,0)
 		frame.bg2:Point("TOPLEFT", D.mult*3, -D.mult*3)
 		frame.bg2:Point("BOTTOMRIGHT", -D.mult*3, D.mult*3)
 
@@ -165,7 +170,7 @@ local function LoadSkin()
 
 		frame.bg4 = frame:CreateTexture(nil, "BACKGROUND")
 		frame.bg4:SetDrawLayer("BACKGROUND", 1)
-		frame.bg4:SetTexture(0,0,0)
+		frame.bg4:SetColorTexture(0,0,0)
 		frame.bg4:Point("TOPLEFT", D.mult, -D.mult)
 		frame.bg4:Point("BOTTOMRIGHT", -D.mult, D.mult)
 
@@ -228,7 +233,7 @@ local function LoadSkin()
 
 			_G[frame].bg2 = _G[frame]:CreateTexture(nil, "BACKGROUND")
 			_G[frame].bg2:SetDrawLayer("BACKGROUND", 3)
-			_G[frame].bg2:SetTexture(0, 0, 0)
+			_G[frame].bg2:SetColorTexture(0, 0, 0)
 			_G[frame].bg2:Point("TOPLEFT", D.mult * 3, -D.mult * 3)
 			_G[frame].bg2:Point("BOTTOMRIGHT", -D.mult * 3, D.mult * 3)
 
@@ -240,7 +245,7 @@ local function LoadSkin()
 
 			_G[frame].bg4 = _G[frame]:CreateTexture(nil, "BACKGROUND")
 			_G[frame].bg4:SetDrawLayer("BACKGROUND", 1)
-			_G[frame].bg4:SetTexture(0,0,0)
+			_G[frame].bg4:SetColorTexture(0,0,0)
 			_G[frame].bg4:Point("TOPLEFT", D.mult, -D.mult)
 			_G[frame].bg4:Point("BOTTOMRIGHT", -D.mult, D.mult)	
 
@@ -264,7 +269,7 @@ local function LoadSkin()
 		local frame = _G["AchievementFrameStatsContainerButton"..i]
 		frame:StyleButton()
 
-		_G["AchievementFrameStatsContainerButton"..i.."BG"]:SetTexture(1, 1, 1, 0)
+		_G["AchievementFrameStatsContainerButton"..i.."BG"]:SetColorTexture(1, 1, 1, 0)
 		_G["AchievementFrameStatsContainerButton"..i.."HeaderLeft"]:Kill()
 		_G["AchievementFrameStatsContainerButton"..i.."HeaderRight"]:Kill()
 		_G["AchievementFrameStatsContainerButton"..i.."HeaderMiddle"]:Kill()
@@ -273,7 +278,7 @@ local function LoadSkin()
 		_G[frame]:StripTextures()
 		_G[frame]:StyleButton()
 
-		_G[frame.."BG"]:SetTexture(1, 1, 1, 0.2)
+		_G[frame.."BG"]:SetColorTexture(1, 1, 1, 0.2)
 		_G[frame.."HeaderLeft"]:Kill()
 		_G[frame.."HeaderRight"]:Kill()
 		_G[frame.."HeaderMiddle"]:Kill()
@@ -361,9 +366,9 @@ local function LoadSkin()
 	
 	hooksecurefunc('AchievementButton_DisplayAchievement', function(frame)
 		if frame.accountWide and frame.bg3 then
-			frame.bg3:SetTexture(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
+			frame.bg3:SetColorTexture(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
 		elseif frame.bg3 then
-			frame.bg3:SetTexture(unpack(C["media"].bordercolor))
+			frame.bg3:SetColorTexture(unpack(C["media"].bordercolor))
 		end
 	end)
 end

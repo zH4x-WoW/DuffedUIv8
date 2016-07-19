@@ -5,16 +5,16 @@ local hoverovercolor = {.4, .4, .4}
 local cp = "|cff319f1b"
 local cm = "|cff9a1212"
 local dr, dg, db = unpack({ .4, .4, .4 })
-local font = D.Font(C["font"].ses)
+local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
 
 local Enablegear = C["misc"].sesenablegear
 local Autogearswap = C["misc"].sesgearswap
 local set1 = C["misc"].sesset1
 local set2 = C["misc"].sesset2
+local set3 = C["misc"].sesset3
+local set4 = C["misc"].sesset4
 
-local function HasDualSpec() if GetNumSpecGroups() > 1 then return true end end
-
-local function GetSecondaryTalentIndex()
+local function GetSecondaryTalentIndex() -- removed
 	local secondary
 	if GetActiveSpecGroup() == 1 then secondary = 2 else secondary = 1 end
 	return secondary
@@ -25,42 +25,47 @@ local function ActiveTalents()
 	return Tree
 end	
 
-local function UnactiveTalents()
-	local sTree = GetSpecialization(false, false, (GetSecondaryTalentIndex()))
-	return sTree
-end
+local LeftClickMenu = { }
+LeftClickMenu[1] = { text = L["dt"]["specmenu"], isTitle = true, notCheckable = true}
 
-local function HasUnactiveTalents()
-	local sTree = GetSpecialization(false, false, (GetSecondaryTalentIndex()))
-	if sTree == nil then return false else return true end
-end
+--Setting up the menu for later for each spec regardless of class, thanks to Simca for helping out with the function.
+local DuffedUISpecSwap = CreateFrame("Frame", "DuffedUISpecSwap", UIParent, "UIDropDownMenuTemplate")
+DuffedUISpecSwap:SetTemplate("Transparent")
+DuffedUISpecSwap:RegisterEvent("PLAYER_LOGIN")
+DuffedUISpecSwap:SetScript("OnEvent", function(...)
+	local specIndex
+	for specIndex = 1, GetNumSpecializations() do
+		LeftClickMenu[specIndex + 1] = {
+			text = tostring(select(2, GetSpecializationInfo(specIndex))),
+			notCheckable = true,
+			func = (function()
+				local getSpec = GetSpecialization()
+				if getSpec and getSpec == specIndex then
+					UIErrorsFrame:AddMessage(L["dt"]["specerror"], 1.0, 0.0, 0.0, 53, 5);
+					return
+				end
+				SetSpecialization(specIndex)
+			end)
+		}
+	end
+end)
 
-local function AutoGear(set1, set2)
+local function AutoGear(set1, set2, set3, set4)
 	local name1 = GetEquipmentSetInfo(set1)
 	local name2 = GetEquipmentSetInfo(set2)
+	local name3 = GetEquipmentSetInfo(set3)
+	local name4 = GetEquipmentSetInfo(set4)
+
 	if GetActiveSpecGroup() == 1 then
 		if name1 then UseEquipmentSet(name1) end
-	else
+	elseif GetActiveSpecGroup() == 2 then
 		if name2 then UseEquipmentSet(name2) end
+	elseif GetActiveSpecGroup() == 3 then
+		if name3 then UseEquipmentSet(name3) end
+	else
+		if name4 then UseEquipmentSet(name4) end
 	end
 end
-
-local function SpecSwitcherSpamFilter(self, event, msg, ...)
-	if strfind(msg, string.gsub(ERR_LEARN_ABILITY_S:gsub('%.', '%.'), '%%s', '(.*)')) then
-		return true
-	elseif strfind(msg, string.gsub(ERR_LEARN_SPELL_S:gsub('%.', '%.'), '%%s', '(.*)')) then
-		return true
-	elseif strfind(msg, string.gsub(ERR_SPELL_UNLEARNED_S:gsub('%.', '%.'), '%%s', '(.*)')) then
-		return true
-	elseif strfind(msg, string.gsub(ERR_LEARN_PASSIVE_S:gsub('%.', '%.'), '%%s', '(.*)')) then
-		return true
-	end
-	return false, msg, ...
-end
-
-function EnableSpecSwitcherSpamFilter() ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", SpecSwitcherSpamFilter) end
-
-function DisableSpecSwitcherSpamFilter() ChatFrame_RemoveMessageEventFilter("CHAT_MSG_SYSTEM", SpecSwitcherSpamFilter) end
 
 local spec = CreateFrame("Button", "DuffedUI_Spechelper", DuffedUIInfoLeft)
 spec:SetTemplate("Default")
@@ -70,11 +75,11 @@ if C["chat"].rbackground then
 else
 	spec:SetPoint("TOPLEFT", DuffedUIMinimapStatsLeft, "BOTTOMLEFT", 0, -2)
 	spec:Size(DuffedUIMinimap:GetWidth() + 9, 20)
-	spec:SetParent(DuffedUIPetBattleHider)
+	spec:SetParent(oUF_PetBattleFrameHider)
 end
 spec.t = spec:CreateFontString(spec, "OVERLAY")
 spec.t:SetPoint("CENTER")
-spec.t:SetFontObject(font)
+spec.t:SetFont(f, fs, ff)
 
 local int = 1
 local function Update(self, t)
@@ -86,17 +91,7 @@ local function Update(self, t)
 	local name = select(2, GetSpecializationInfo(Tree))
 
 	spec.t:SetText(name)
-	if HasDualSpec() then
-		if HasUnactiveTalents() then 
-			local sTree = UnactiveTalents()
-			sName = select(2, GetSpecializationInfo(sTree))
-			spec:SetScript("OnEnter", function() spec.t:SetText(cm .. sName) end)
-			spec:SetScript("OnLeave", function() spec.t:SetText(name) end)
-		else
-			spec:SetScript("OnEnter", function() spec.t:SetText(cm .. L["dt"]["talents"]) end)
-			spec:SetScript("OnLeave", function() spec.t:SetText(name) end)
-		end
-	end
+
 	int = 1
 	self:SetScript("OnUpdate", nil)
 end
@@ -116,9 +111,7 @@ spec:SetScript("OnClick", function(self)
 	if IsModifierKeyDown() then
 		ToggleTalentFrame()
 	else
-		if i == 1 then SetActiveSpecGroup(2) end
-		if i == 2 then SetActiveSpecGroup(1) end
-		EnableSpecSwitcherSpamFilter()
+		EasyMenu(LeftClickMenu, DuffedUISpecSwap, "cursor", 0, 0, "MENU", 2) --Dropdown/popup menu for spec selection.
 	end
 end)
 
@@ -191,7 +184,7 @@ if Enablegear == true then
 	if Autogearswap == true then
 		gearsetfunc = CreateFrame("Frame", "gearSetfunc", UIParent)
 		local function OnEvent(self, event)
-			if event == "PLAYER_ENTERING_WORLD" then self:UnregisterEvent("PLAYER_ENTERING_WORLD") else AutoGear(set1, set2)  end
+			if event == "PLAYER_ENTERING_WORLD" then self:UnregisterEvent("PLAYER_ENTERING_WORLD") else AutoGear(set1, set2, set3, set4)  end
 		end
 		gearsetfunc:RegisterEvent("PLAYER_ENTERING_WORLD")
 		gearsetfunc:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
@@ -208,7 +201,7 @@ toggle:EnableMouse(true)
 toggle:RegisterForClicks("AnyUp")
 toggle.t = toggle:CreateFontString(nil, "OVERLAY")
 toggle.t:SetPoint("CENTER", 0, 0)
-toggle.t:SetFontObject(font)
+toggle.t:SetFont(f, fs, ff)
 toggle.t:SetText(cp .. "+|r")
 toggle:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(hoverovercolor)) end)
 toggle:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)

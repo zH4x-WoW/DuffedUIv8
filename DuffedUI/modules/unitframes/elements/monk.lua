@@ -2,7 +2,6 @@ local D, C, L = unpack(select(2, ...))
 
 local class = select(2, UnitClass("player"))
 local texture = C["media"]["normTex"]
-local font = D.Font(C["font"]["unitframes"])
 local layout = C["unitframes"]["layout"]
 local backdrop = {
 	bgFile = C["media"]["blank"],
@@ -12,6 +11,10 @@ local backdrop = {
 if class ~= "MONK" then return end
 
 D["ClassRessource"]["MONK"] = function(self)
+	--[[Energy]]--
+	if not C["unitframes"]["attached"] then D["ConstructEnergy"]("Energy", 216, 5) end
+
+	--[[Chi]]--
 	local HarmonyBar = CreateFrame("Frame", "HarmonyBar", UIParent)
 	HarmonyBar:Size(216, 5)
 	if C["unitframes"]["attached"] then
@@ -26,7 +29,6 @@ D["ClassRessource"]["MONK"] = function(self)
 		end
 	else
 		HarmonyBar:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
-		D["ConstructEnergy"]("Chi", 216, 5)
 	end
 	HarmonyBar:SetBackdrop(backdrop)
 	HarmonyBar:SetBackdropColor(0, 0, 0)
@@ -39,9 +41,13 @@ D["ClassRessource"]["MONK"] = function(self)
 		if i == 1 then
 			HarmonyBar[i]:Width(216 / 6)
 			HarmonyBar[i]:SetPoint("LEFT", HarmonyBar, "LEFT", 0, 0)
+			HarmonyBar[i].Ascension = HarmonyBar[i]:GetWidth()
+            HarmonyBar[i].NoTalent = 216 / 5
 		else
 			HarmonyBar[i]:Width(216 / 6)
 			HarmonyBar[i]:SetPoint("LEFT", HarmonyBar[i - 1], "RIGHT", 1, 0)
+			HarmonyBar[i].Ascension = HarmonyBar[i]:GetWidth()
+            HarmonyBar[i].NoTalent = 216 / 5 - 1
 		end
 	end
 	HarmonyBar:CreateBackdrop()

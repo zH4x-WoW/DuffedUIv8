@@ -6,10 +6,9 @@ if not IsAddOnLoaded("AddOnSkins") then
 		CollectionsJournal:StripTextures()
 		CollectionsJournal:SetTemplate("Transparent")
 		CollectionsJournalPortrait:Hide()
-		CollectionsJournalTab1:SkinTab()
-		CollectionsJournalTab2:SkinTab()
-		CollectionsJournalTab3:SkinTab()
-		CollectionsJournalTab4:SkinTab()
+		for i = 1, 5 do
+			_G["CollectionsJournalTab" .. i]:SkinTab()
+		end
 		CollectionsJournalCloseButton:SkinCloseButton()
 
 		--[[Tab 1 - Mounts]]--
@@ -218,8 +217,6 @@ if not IsAddOnLoaded("AddOnSkins") then
 		PetJournalPetCardInset:StripTextures()
 
 		PetJournalTutorialButton.Ring:SetAlpha(0)
-		PetJournalTutorialButton:ClearAllPoints()
-		PetJournalTutorialButton:SetPoint("TOPLEFT", CollectionsJournal, 0, 0)
 
 		PetJournalPetCardPetInfo.levelBG:SetTexture(nil)
 		PetJournalPetCardPetInfoIcon:SetTexCoord(.1, .9, .1, .9)
@@ -316,6 +313,8 @@ if not IsAddOnLoaded("AddOnSkins") then
 		HeirloomsJournal.progressBar:SetStatusBarTexture(C["media"]["normTex"])
 		HeirloomsJournal.progressBar:CreateBackdrop()
 		HeirloomsJournalClassDropDown:SkinDropDownBox()
+		HeirloomsJournalFilterButton:StripTextures(true)
+		HeirloomsJournalFilterButton:SkinButton()
 		hooksecurefunc(HeirloomsJournal, "LayoutCurrentPage", function()
 			for i = 1, #HeirloomsJournal.heirloomHeaderFrames do
 				local header = HeirloomsJournal.heirloomHeaderFrames[i]
@@ -342,6 +341,53 @@ if not IsAddOnLoaded("AddOnSkins") then
 			button.iconTextureUncollected:SetTexture(button.iconTexture:GetTexture())
 			if C_Heirloom.PlayerHasHeirloom(button.itemID) then button.name:SetTextColor(1, 1, 1) else button.name:SetTextColor(.6, .6, .6) end
 		end)
+
+		--[[Tab 5 - Transmog (Collection)]]--
+		WardrobeCollectionFrame.progressBar:StripTextures()
+		WardrobeCollectionFrame.progressBar:SetStatusBarTexture(C["media"]["normTex"])
+		WardrobeCollectionFrame.progressBar:CreateBackdrop()
+		WardrobeCollectionFrameSearchBox:SkinEditBox()
+		WardrobeCollectionFrame.FilterButton:SkinButton()
+		WardrobeCollectionFrame.FilterButton:SetWidth(80)
+		WardrobeCollectionFrame.ModelsFrame:StripTextures()
+		WardrobeCollectionFrameWeaponDropDown:SkinDropDownBox()
+		WardrobeCollectionFrame.NavigationFrame.PrevPageButton:SkinCloseButton()
+		WardrobeCollectionFrame.NavigationFrame.NextPageButton:SkinCloseButton()
+		WardrobeCollectionFrame.NavigationFrame.PrevPageButton.t:SetText("<")
+		WardrobeCollectionFrame.NavigationFrame.NextPageButton.t:SetText(">")
+		WardrobeCollectionFrame.FilterButton:StripTextures(true)
+		WardrobeCollectionFrame.FilterButton:SkinButton()
+		
+		--[[Tab 5 - Transmog (NPC)]]--
+		WardrobeFrame:StripTextures()
+		WardrobeFrame:SetTemplate("Transparent")
+		WardrobeFrameCloseButton:SkinCloseButton()
+		WardrobeOutfitDropDown:SkinDropDownBox()
+		WardrobeOutfitDropDown:SetSize(200, 32)
+		WardrobeOutfitDropDownText:ClearAllPoints()
+		WardrobeOutfitDropDownText:SetPoint("CENTER", WardrobeOutfitDropDown, 10, 2)
+		WardrobeOutfitDropDown.SaveButton:SkinButton()
+		WardrobeOutfitDropDown.SaveButton:ClearAllPoints()
+		WardrobeOutfitDropDown.SaveButton:SetPoint("LEFT", WardrobeOutfitDropDown, "RIGHT", 1, 4)
+		WardrobeOutfitFrame:StripTextures()
+		WardrobeOutfitFrame:SetTemplate("Transparent")
+		
+		WardrobeTransmogFrame:StripTextures()
+		WardrobeTransmogFrame.Inset:StripTextures()
+		for i = 1, #WardrobeTransmogFrame.Model.SlotButtons do
+			WardrobeTransmogFrame.Model.SlotButtons[i]:StripTextures()
+			WardrobeTransmogFrame.Model.SlotButtons[i].Icon:SetTexCoord(unpack(D["IconCoord"]))
+		end
+		
+		local function OnEnter_Button(self)
+			self:SkinButton()
+		end
+		WardrobeTransmogFrame.SpecButton:SkinButton()
+		WardrobeTransmogFrame.SpecButton:SetScript("OnEnter", OnEnter_Button)
+		WardrobeTransmogFrame.SpecButton:SetScript("OnLeave", OnEnter_Button)
+		WardrobeTransmogFrame.SpecButton:ClearAllPoints()
+		WardrobeTransmogFrame.SpecButton:SetPoint("RIGHT", WardrobeTransmogFrame.ApplyButton, "LEFT", -2, 0)
+		WardrobeTransmogFrame.ApplyButton:SkinButton()
 	end
 
 	if CollectionsJournal then tinsert(D.SkinFuncs["DuffedUI"], LoadSkin) else D.SkinFuncs["Blizzard_Collections"] = LoadSkin end

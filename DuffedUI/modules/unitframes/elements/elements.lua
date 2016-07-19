@@ -10,7 +10,7 @@ D["ClassRessource"] = {}
 if not C["unitframes"]["attached"] then
 	local cba = CreateFrame("Frame", "RessourceMover", UIParent)
 	cba:Size(250, 15)
-	cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 325)
+	cba:Point("BOTTOM", UIParent, "BOTTOM", 0, 375)
 	move:RegisterFrame(cba)
 end
 
@@ -42,12 +42,12 @@ D["ConstructEnergy"] = function(name, width, height)
 	eb:SetParent(DuffedUIPetBattleHider)
 
 	eb.text = eb:CreateFontString(nil, "ARTWORK")
-	eb.text:SetFont(font, 16, fontflag)
+	eb.text:SetFont(C["media"].font, 16, "THINOUTLINE")
 	eb.text:SetPoint("LEFT", eb, "RIGHT", 4, 1)
 	eb.text:SetTextColor(Color.r, Color.g, Color.b)
 	
 	eb.perctext = eb:CreateFontString(nil, "ARTWORK")
-	eb.perctext:SetFont(font, 16, fontflag)
+	eb.perctext:SetFont(C["media"].font, 16, "THINOUTLINE")
 	eb.perctext:SetPoint("RIGHT", eb, "LEFT", -4, 1)
 	eb.perctext:SetTextColor(Color.r, Color.g, Color.b)
 
@@ -64,6 +64,5 @@ D["ConstructEnergy"] = function(name, width, height)
 			self.TimeSinceLastUpdate = 0
 		end
 	end)
-
 	if C["unitframes"].oocHide then D["oocHide"](eb) end
 end

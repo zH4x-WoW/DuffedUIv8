@@ -59,12 +59,6 @@
 			<OnClick>
 				FlightPointsTaxiChoiceButton_OnClick(self, button, down);
 			</OnClick>
-			<OnEnter>
-				FlightPointsTaxiChoiceButton_OnEnter(self);
-			</OnEnter>
-			<OnLeave>
-				FlightPointsTaxiChoiceButton_OnLeave(self);
-			</OnLeave>
 		</Scripts>
 		<ButtonText>
 			<Anchors>

@@ -49,7 +49,7 @@ function AS:InjectProfile()
 
 	V['addonskins'] = {
 	-- Embeds
-		['EmbedOoC'] = false,
+		['EmbedOoC'] = false, 
 		['EmbedOoCDelay'] = 10,
 		['EmbedCoolLine'] = false,
 		['EmbedSexyCooldown'] = false,
@@ -80,6 +80,7 @@ function AS:InjectProfile()
 		['HideChatFrame'] = 'NONE',
 		['SkinDebug'] = false,
 		['Parchment'] = true,
+		['LoginMsg'] = true,
 	}
 
 	do
@@ -126,89 +127,91 @@ function AS:EmbedSystemHooks()
 	end)
 	hooksecurefunc(E:GetModule('Layout'), 'ToggleChatPanels', function() AS:Embed_Check() end)
 
-	RightChatToggleButton:RegisterForClicks('AnyDown')
-	RightChatToggleButton:SetScript('OnClick', function(self, btn)
-		if btn == 'RightButton' then
+	if RightChatToggleButton and LeftChatToggleButton then
+		RightChatToggleButton:RegisterForClicks('AnyDown')
+		RightChatToggleButton:SetScript('OnClick', function(self, btn)
+			if btn == 'RightButton' then
+				if AS:CheckOption('EmbedRightChat') then
+					if EmbedSystem_MainWindow:IsShown() then
+						AS:SetOption('EmbedIsHidden', true)
+						EmbedSystem_MainWindow:Hide()
+					else
+						AS:SetOption('EmbedIsHidden', false)
+						EmbedSystem_MainWindow:Show()
+					end
+				end
+			else
+				if E.db[self.parent:GetName()..'Faded'] then
+					E.db[self.parent:GetName()..'Faded'] = nil
+					UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
+					UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
+					if AS:CheckOption('EmbedRightChat') and not AS:CheckOption('EmbedIsHidden') then
+						EmbedSystem_MainWindow:Show()
+					end
+				else
+					E.db[self.parent:GetName()..'Faded'] = true
+					UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
+					UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
+					self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
+				end
+			end
+		end)
+
+		RightChatToggleButton:HookScript('OnEnter', function(self, ...)
 			if AS:CheckOption('EmbedRightChat') then
-				if EmbedSystem_MainWindow:IsShown() then
-					AS:SetOption('EmbedIsHidden', true)
-					EmbedSystem_MainWindow:Hide()
-				else
-					AS:SetOption('EmbedIsHidden', false)
-					EmbedSystem_MainWindow:Show()
-				end
+				GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
+				GameTooltip:Show()
 			end
-		else
-			if E.db[self.parent:GetName()..'Faded'] then
-				E.db[self.parent:GetName()..'Faded'] = nil
-				UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
-				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
-				if AS:CheckOption('EmbedRightChat') and not AS:CheckOption('EmbedIsHidden') then
-					EmbedSystem_MainWindow:Show()
+		end)
+
+		LeftChatToggleButton:RegisterForClicks('AnyDown')
+		LeftChatToggleButton:SetScript('OnClick', function(self, btn)
+			if btn == 'RightButton' then
+				if not AS:CheckOption('EmbedRightChat') then
+					if EmbedSystem_MainWindow:IsShown() then
+						AS:SetOption('EmbedIsHidden', true)
+						EmbedSystem_MainWindow:Hide()
+					else
+						AS:SetOption('EmbedIsHidden', false)
+						EmbedSystem_MainWindow:Show()
+					end
 				end
 			else
-				E.db[self.parent:GetName()..'Faded'] = true
-				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
-				UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
-				self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
+				if E.db[self.parent:GetName()..'Faded'] then
+					E.db[self.parent:GetName()..'Faded'] = nil
+					UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
+					UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
+					if not AS:CheckOption('EmbedRightChat') and not AS:CheckOption('EmbedIsHidden') then
+						EmbedSystem_MainWindow:Show()
+					end
+				else
+					E.db[self.parent:GetName()..'Faded'] = true
+					UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
+					UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
+					self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
+				end
 			end
-		end
-	end)
+		end)
 
-	RightChatToggleButton:HookScript('OnEnter', function(self, ...)
-		if AS:CheckOption('EmbedRightChat') then
-			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
-			GameTooltip:Show()
-		end
-	end)
-
-	LeftChatToggleButton:RegisterForClicks('AnyDown')
-	LeftChatToggleButton:SetScript('OnClick', function(self, btn)
-		if btn == 'RightButton' then
+		LeftChatToggleButton:HookScript('OnEnter', function(self, ...)
 			if not AS:CheckOption('EmbedRightChat') then
-				if EmbedSystem_MainWindow:IsShown() then
-					AS:SetOption('EmbedIsHidden', true)
-					EmbedSystem_MainWindow:Hide()
-				else
-					AS:SetOption('EmbedIsHidden', false)
-					EmbedSystem_MainWindow:Show()
-				end
+				GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
+				GameTooltip:Show()
 			end
-		else
-			if E.db[self.parent:GetName()..'Faded'] then
-				E.db[self.parent:GetName()..'Faded'] = nil
-				UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
-				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
-				if not AS:CheckOption('EmbedRightChat') and not AS:CheckOption('EmbedIsHidden') then
-					EmbedSystem_MainWindow:Show()
-				end
-			else
-				E.db[self.parent:GetName()..'Faded'] = true
-				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
-				UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
-				self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
-			end
+		end)
+
+		function HideLeftChat()
+			LeftChatToggleButton:Click()
 		end
-	end)
 
-	LeftChatToggleButton:HookScript('OnEnter', function(self, ...)
-		if not AS:CheckOption('EmbedRightChat') then
-			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
-			GameTooltip:Show()
+		function HideRightChat()
+			RightChatToggleButton:Click()
 		end
-	end)
 
-	function HideLeftChat()
-		LeftChatToggleButton:Click()
-	end
-
-	function HideRightChat()
-		RightChatToggleButton:Click()
-	end
-
-	function HideBothChat()
-		LeftChatToggleButton:Click()
-		RightChatToggleButton:Click()
+		function HideBothChat()
+			LeftChatToggleButton:Click()
+			RightChatToggleButton:Click()
+		end
 	end
 end
 
@@ -224,7 +227,7 @@ function AS:EmbedSystem_WindowResize()
 	EmbedSystem_MainWindow:ClearAllPoints()
 	EmbedSystem_MainWindow:SetPoint('BOTTOMLEFT', ChatData, TopRight, 0, yOffset)
 	EmbedSystem_MainWindow:SetPoint('TOPRIGHT', ChatTab, AS:CheckOption('EmbedBelowTop') and 'BOTTOMRIGHT' or 'TOPRIGHT', 0, AS:CheckOption('EmbedBelowTop') and -1 or 0)
-
+	
 	EmbedSystem_LeftWindow:SetSize(AS:CheckOption('EmbedLeftWidth'), EmbedSystem_MainWindow:GetHeight())
 	EmbedSystem_RightWindow:SetSize((EmbedSystem_MainWindow:GetWidth() - AS:CheckOption('EmbedLeftWidth')) - 1, EmbedSystem_MainWindow:GetHeight())
 

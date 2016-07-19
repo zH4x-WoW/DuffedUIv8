@@ -2,7 +2,6 @@ local D, C, L = unpack(select(2, ...))
 if not C["misc"].XPBar then return end
 
 local barHeight, barWidth = 5, C["misc"].XPBarWidth
-local font = D.Font(C["font"].experience)
 local barTex, flatTex = C["media"].normTex
 local color = RAID_CLASS_COLORS[D.Class]
 local move = D["move"]
@@ -23,17 +22,14 @@ local function IsMaxLevel()
 	if UnitLevel("player") == MAX_PLAYER_LEVEL then return true end
 end
 
-xpMover = CreateFrame("Frame", "XPBarMover", UIParent)
-xpMover:SetSize(barWidth, barHeight)
-xpMover:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 7, 178)
-xpMover:SetFrameLevel(6)
-move:RegisterFrame(xpMover)
-
 local backdrop = CreateFrame("Frame", "Experience_Backdrop", UIParent)
-backdrop:SetAllPoints(xpMover)
+backdrop:SetSize(barWidth, barHeight)
+backdrop:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 7, 178)
 backdrop:SetBackdropColor(C["general"].backdropcolor)
 backdrop:SetBackdropBorderColor(C["general"].backdropcolor)
+backdrop:SetFrameStrata("LOW")
 backdrop:CreateBackdrop("Transparent")
+move:RegisterFrame(backdrop)
 
 local xpBar = CreateFrame("StatusBar",  "Experience_xpBar", backdrop, "TextStatusBar")
 xpBar:SetWidth(barWidth)
@@ -64,11 +60,6 @@ repBar:SetStatusBarTexture(barTex)
 local mouseFrame = CreateFrame("Frame", "Experience_mouseFrame", backdrop)
 mouseFrame:SetAllPoints(backdrop)
 mouseFrame:EnableMouse(true)
-
-backdrop:SetFrameLevel(0)
-restedxpBar:SetFrameLevel(1)
-repBar:SetFrameLevel(2)
-xpBar:SetFrameLevel(2)
 mouseFrame:SetFrameLevel(3)
 
 local function updateStatus()

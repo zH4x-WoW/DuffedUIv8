@@ -25,24 +25,6 @@ local function LoadGarrisonSkin()
 		end
 	end
 
-	local function HandleShipFollowerPage(followerTab)
-		local traits = followerTab.Traits
-		for i = 1, #traits do
-			local icon = traits[i].Portrait
-			local border = traits[i].Border
-			border:SetTexture(nil)
-			if followerTab.isLandingPage then icon:SetTexCoord(unpack(D.IconCoord)) end
-		end
-
-		local equipment = followerTab.EquipmentFrame.Equipment
-		for i = 1, #equipment do
-			local icon = equipment[i].Icon
-			local border = equipment[i].Border
-			border:SetAtlas("ShipMission_ShipFollower-TypeFrame")
-			if followerTab.isLandingPage then icon:SetTexCoord(unpack(D.IconCoord)) end
-		end
-	end
-
 	--[[Building frame]]--
 	GarrisonBuildingFrame:StripTextures(true)
 	GarrisonBuildingFrame.TitleText:Show()
@@ -71,6 +53,8 @@ local function LoadGarrisonSkin()
 	CapacitiveDisplay.ShipmentIconFrame.Icon:SetTexCoord(unpack(D.IconCoord))
 	CapacitiveDisplay.ShipmentIconFrame:SetTemplate("Default", true)
 	CapacitiveDisplay.ShipmentIconFrame.Icon:SetInside()
+	CapacitiveDisplay.ShipmentIconFrame.Follower:StripTextures()
+	CapacitiveDisplay.ShipmentIconFrame.Follower.Portrait:SetTexCoord(unpack(D["IconCoord"]))
 	GarrisonCapacitiveDisplayFrame:SetFrameStrata("MEDIUM")
 	GarrisonCapacitiveDisplayFrame:SetFrameLevel(45)
 
@@ -135,7 +119,7 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrame.TitleText:Show()
 	GarrisonMissionFrame:CreateBackdrop("Transparent")
 	GarrisonMissionFrame.CloseButton:SkinCloseButton()
-	for i = 1,2 do
+	for i = 1, 2 do
 		_G["GarrisonMissionFrameMissionsTab" .. i]:StripTextures()
 		_G["GarrisonMissionFrameMissionsTab" .. i]:SkinButton()
 		_G["GarrisonMissionFrameMissionsTab" .. i]:Height(_G["GarrisonMissionFrameMissionsTab" .. i]:GetHeight() - 10)
@@ -210,7 +194,6 @@ local function LoadGarrisonSkin()
 
 		Enemy.PortraitFrame:StripTextures()
 		Enemy.PortraitFrame:CreateBackdrop()
-		Enemy.PortraitFrame.Portrait:SetTexCoord(unpack(D.IconCoord))
 		Follower:StripTextures()
 	end
 
@@ -242,7 +225,7 @@ local function LoadGarrisonSkin()
 	--[[Mission list]]--
 	local MissionTab = GarrisonMissionFrame.MissionTab
 	local MissionList = MissionTab.MissionList
-	local MissionPage = GarrisonMissionFrame.MissionTab.MissionPage
+	local MissionPage = MissionTab.MissionPage
 	MissionList:DisableDrawLayer("BORDER")
 	MissionList.listScroll.scrollBar:SkinScrollBar()
 	MissionPage.CloseButton:SkinCloseButton()
@@ -329,7 +312,6 @@ local function LoadGarrisonSkin()
 	ShipFollowerList.SearchBox:SkinEditBox()
 	local scrollFrame = ShipFollowerList.listScroll
 	scrollFrame.scrollBar:SkinScrollBar()
-	HandleShipFollowerPage(ShipFollowerList.followerTab)
 
 
 	--[[ShipYard]]--
@@ -372,7 +354,6 @@ local function LoadGarrisonSkin()
 	FollowerList.SearchBox:SkinEditBox()
 	FollowerList.MaterialFrame:StripTextures()
 	FollowerList.MaterialFrame.Icon:SetAtlas("ShipMission_CurrencyIcon-Oil", false) --Re-add the material icon
-	HandleShipFollowerPage(FollowerList.followerTab)
 
 	--[[ShipYard: Mission Tooltip]]--
 	local tooltip = GarrisonShipyardMapMissionTooltip

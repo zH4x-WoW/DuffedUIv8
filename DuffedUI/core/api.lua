@@ -4,13 +4,15 @@ local noop = D.Dummy
 local floor = math.floor
 local class = D.Class
 local texture = C["media"].blank
-local backdropr, backdropg, backdropb = unpack(C["media"].backdropcolor)
-local borderr, borderg, borderb = unpack(C["media"].bordercolor)
+local backdropr, backdropg, backdropb = unpack(C["general"].backdropcolor)
+local borderr, borderg, borderb = unpack(C["general"].bordercolor)
 local backdropa = 1
 local bordera = 1
 local template
 local inset = 0
 local noinset = C["media"].noinset
+local UIFrameFadeIn = UIFrameFadeIn
+local UIFrameFadeOut = UIFrameFadeOut
 
 if noinset then inset = D.mult end
 
@@ -24,18 +26,24 @@ local function UpdateColor(t)
 	if t == "ClassColor" or t == "Class Color" or t == "Class" then
 		local c = D.UnitColor.class[class]
 		borderr, borderg, borderb = c[1], c[2], c[3]
-		backdropr, backdropg, backdropb = unpack(C["media"].backdropcolor)
+		backdropr, backdropg, backdropb = unpack(C["general"].backdropcolor)
 		backdropa = 1
 	else
 		local balpha = 1
 		if t == "Transparent" then balpha = 0.8 end
-		borderr, borderg, borderb = unpack(C["media"].bordercolor)
-		backdropr, backdropg, backdropb = unpack(C["media"].backdropcolor)
+		borderr, borderg, borderb = unpack(C["general"].bordercolor)
+		backdropr, backdropg, backdropb = unpack(C["general"].backdropcolor)
 		backdropa = balpha
 	end
 
 	template = t
 end
+
+local UIHider = CreateFrame("Frame", "DuffedUIUIHider", UIParent)
+UIHider:Hide()
+
+local PetBattleHider = CreateFrame("Frame", "DuffedUIPetBattleHider", UIParent, "SecureHandlerStateTemplate");
+RegisterStateDriver(PetBattleHider, "visibility", "[petbattle] hide; show")
 
 --[[DuffedUI API START HERE]]--
 local function Size(frame, width, height) frame:SetSize(D.Scale(width), D.Scale(height or width)) end
@@ -89,56 +97,56 @@ local function SetTemplate(f, t, tex)
 		f.insettop:Point("TOPLEFT", f, "TOPLEFT", -1, 1)
 		f.insettop:Point("TOPRIGHT", f, "TOPRIGHT", 1, -1)
 		f.insettop:Height(1)
-		f.insettop:SetTexture(0, 0, 0)	
+		f.insettop:SetColorTexture(0, 0, 0)	
 		f.insettop:SetDrawLayer("BORDER", -7)
 
 		f.insetbottom = f:CreateTexture(nil, "BORDER")
 		f.insetbottom:Point("BOTTOMLEFT", f, "BOTTOMLEFT", -1, -1)
 		f.insetbottom:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", 1, -1)
 		f.insetbottom:Height(1)
-		f.insetbottom:SetTexture(0, 0, 0)	
+		f.insetbottom:SetColorTexture(0, 0, 0)	
 		f.insetbottom:SetDrawLayer("BORDER", -7)
 
 		f.insetleft = f:CreateTexture(nil, "BORDER")
 		f.insetleft:Point("TOPLEFT", f, "TOPLEFT", -1, 1)
 		f.insetleft:Point("BOTTOMLEFT", f, "BOTTOMLEFT", 1, -1)
 		f.insetleft:Width(1)
-		f.insetleft:SetTexture(0, 0, 0)
+		f.insetleft:SetColorTexture(0, 0, 0)
 		f.insetleft:SetDrawLayer("BORDER", -7)
 
 		f.insetright = f:CreateTexture(nil, "BORDER")
 		f.insetright:Point("TOPRIGHT", f, "TOPRIGHT", 1, 1)
 		f.insetright:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", -1, -1)
 		f.insetright:Width(1)
-		f.insetright:SetTexture(0, 0, 0)
+		f.insetright:SetColorTexture(0, 0, 0)
 		f.insetright:SetDrawLayer("BORDER", -7)
 
 		f.insetinsidetop = f:CreateTexture(nil, "BORDER")
 		f.insetinsidetop:Point("TOPLEFT", f, "TOPLEFT", 1, -1)
 		f.insetinsidetop:Point("TOPRIGHT", f, "TOPRIGHT", -1, 1)
 		f.insetinsidetop:Height(1)
-		f.insetinsidetop:SetTexture(0, 0, 0)	
+		f.insetinsidetop:SetColorTexture(0, 0, 0)	
 		f.insetinsidetop:SetDrawLayer("BORDER", -7)
 
 		f.insetinsidebottom = f:CreateTexture(nil, "BORDER")
 		f.insetinsidebottom:Point("BOTTOMLEFT", f, "BOTTOMLEFT", 1, 1)
 		f.insetinsidebottom:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", -1, 1)
 		f.insetinsidebottom:Height(1)
-		f.insetinsidebottom:SetTexture(0, 0, 0)	
+		f.insetinsidebottom:SetColorTexture(0, 0, 0)	
 		f.insetinsidebottom:SetDrawLayer("BORDER", -7)
 
 		f.insetinsideleft = f:CreateTexture(nil, "BORDER")
 		f.insetinsideleft:Point("TOPLEFT", f, "TOPLEFT", 1, -1)
 		f.insetinsideleft:Point("BOTTOMLEFT", f, "BOTTOMLEFT", -1, 1)
 		f.insetinsideleft:Width(1)
-		f.insetinsideleft:SetTexture(0, 0, 0)
+		f.insetinsideleft:SetColorTexture(0, 0, 0)
 		f.insetinsideleft:SetDrawLayer("BORDER", -7)
 
 		f.insetinsideright = f:CreateTexture(nil, "BORDER")
 		f.insetinsideright:Point("TOPRIGHT", f, "TOPRIGHT", -1, -1)
 		f.insetinsideright:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", 1, 1)
 		f.insetinsideright:Width(1)
-		f.insetinsideright:SetTexture(0, 0, 0)	
+		f.insetinsideright:SetColorTexture(0, 0, 0)	
 		f.insetinsideright:SetDrawLayer("BORDER", -7)
 
 		f.isInsetDone = true
@@ -160,7 +168,7 @@ local borders = {
 
 local function HideInsets(f)
 	for i, border in pairs(borders) do
-		if f[border] then f[border]:SetTexture(0, 0, 0, 0) end
+		if f[border] then f[border]:SetColorTexture(0, 0, 0, 0) end
 	end
 end
 
@@ -209,7 +217,7 @@ end
 local function StyleButton(button) 
 	if button.SetHighlightTexture and not button.hover then
 		local hover = button:CreateTexture("frame", nil, self)
-		hover:SetTexture(1, 1, 1, .3)
+		hover:SetColorTexture(1, 1, 1, .3)
 		hover:SetInside()
 		button.hover = hover
 		button:SetHighlightTexture(hover)
@@ -217,7 +225,7 @@ local function StyleButton(button)
 
 	if button.SetPushedTexture and not button.pushed then
 		local pushed = button:CreateTexture("frame", nil, self)
-		pushed:SetTexture(.9, .8, .1, .3)
+		pushed:SetColorTexture(.9, .8, .1, .3)
 		pushed:SetInside()
 		button.pushed = pushed
 		button:SetPushedTexture(pushed)
@@ -225,7 +233,7 @@ local function StyleButton(button)
 
 	if button.SetCheckedTexture and not button.checked then
 		local checked = button:CreateTexture("frame", nil, self)
-		checked:SetTexture(0, 1, 0, .3)
+		checked:SetColorTexture(0, 1, 0, .3)
 		checked:SetInside()
 		button.checked = checked
 		button:SetCheckedTexture(checked)
@@ -239,14 +247,19 @@ local function StyleButton(button)
 end
 
 local function FontString(parent, name, fontName, fontHeight, fontStyle)
-	local fs = parent:CreateFontString(nil, "OVERLAY")
-	fs:SetFont(fontName, fontHeight, fontStyle)
-	fs:SetJustifyH("LEFT")
-	fs:SetShadowColor(0, 0, 0)
-	fs:SetShadowOffset(D.mult, -D.mult)
+    local fs = parent:CreateFontString(nil, "OVERLAY")
+    fs:SetFont(fontName, fontHeight, fontStyle)
+    fs:SetJustifyH("LEFT")
+    fs:SetShadowColor(0, 0, 0)
+    fs:SetShadowOffset(D.mult, -D.mult)
 
-	if not name then parent.text = fs else parent[name] = fs end
-	return fs
+    if not name then
+        parent.Text = fs
+    else
+        parent[name] = fs
+    end
+
+    return fs
 end
 
 local function HighlightTarget(self, event, unit)
@@ -282,8 +295,6 @@ local strlower = string.lower
 local select = select
 local unpack = unpack
 local modf = math.modf
-local UIFrameFadeIn = UIFrameFadeIn
-local UIFrameFadeOut = UIFrameFadeOut
 
 local Show = Frame.Show
 local Hide = Frame.Hide
@@ -505,7 +516,7 @@ local function SkinNextPrevButton(btn, horizonal)
 	Point(btn:GetNormalTexture(), "BOTTOMRIGHT", -2, 2)
 	if btn:GetDisabledTexture() then btn:GetDisabledTexture():SetAllPoints(btn:GetNormalTexture()) end
 	if btn:GetPushedTexture() then btn:GetPushedTexture():SetAllPoints(btn:GetNormalTexture()) end
-	btn:GetHighlightTexture():SetTexture(1, 1, 1, .3)
+	btn:GetHighlightTexture():SetColorTexture(1, 1, 1, .3)
 	btn:GetHighlightTexture():SetAllPoints(btn:GetNormalTexture())
 end
 
@@ -515,7 +526,7 @@ local function SkinRotateButton(btn)
 
 	btn:GetNormalTexture():SetTexCoord(.3, .29, .3, .65, .69, .29, .69, .65)
 	btn:GetPushedTexture():SetTexCoord(.3, .29, .3, .65, .69, .29, .69, .65)
-	btn:GetHighlightTexture():SetTexture(1, 1, 1, .3)
+	btn:GetHighlightTexture():SetColorTexture(1, 1, 1, .3)
 
 	btn:GetNormalTexture():ClearAllPoints()
 	Point(btn:GetNormalTexture(), "TOPLEFT", 2, -2)
@@ -653,9 +664,19 @@ local function SkinSlideBar(frame, height, movetext)
 	end
 end
 
+function SkinIcon(icon, parent)
+	parent = parent or icon:GetParent();
+
+	icon:SetTexCoord(unpack(D.IconCoord))
+	parent:CreateBackdrop('Default')
+	icon:SetParent(parent.backdrop)
+	parent.backdrop:SetOutside(icon)
+end
+
 -- merge api
 local function addapi(object)
 	local mt = getmetatable(object).__index
+
 	if not object.Size then mt.Size = Size end
 	if not object.Point then mt.Point = Point end
 	if not object.SetOutside then mt.SetOutside = SetOutside end
@@ -681,6 +702,7 @@ local function addapi(object)
 	if not object.SkinCheckBox then mt.SkinCheckBox = SkinCheckBox end
 	if not object.SkinCloseButton then mt.SkinCloseButton = SkinCloseButton end
 	if not object.SkinSlideBar then mt.SkinSlideBar = SkinSlideBar end
+	if not object.SkinIcon then mt.SkinIcon = SkinIcon end
 	if not object.HideInsets then mt.HideInsets = HideInsets end
 	if not object.CreateOverlay then mt.CreateOverlay = CreateOverlay end
 	if not object.CreateBorder then mt.CreateBorder = CreateBorder end
@@ -699,7 +721,7 @@ addapi(object:CreateFontString())
 
 object = EnumerateFrames()
 while object do
-	if not handled[object:GetObjectType()] then
+	if not object:IsForbidden() and not handled[object:GetObjectType()] then
 		addapi(object)
 		handled[object:GetObjectType()] = true
 	end

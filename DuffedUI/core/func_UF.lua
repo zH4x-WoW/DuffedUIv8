@@ -138,7 +138,7 @@ D["PostUpdateHealthRaid"] = function(health, unit, min, max)
 			local c = D.UnitColor.reaction[5]
 			local r, g, b = c[1], c[2], c[3]
 			health:SetStatusBarColor(r, g, b)
-			health.bg:SetTexture(.1, .1, .1)
+			health.bg:SetColorTexture(.1, .1, .1)
 		end
 
 		if min ~= max then health.value:SetText("|cff559655-" .. D["ShortValue"](max-min) .. "|r") else health.value:SetText("") end
@@ -156,7 +156,7 @@ D.PostUpdatePetColor = function(health, unit, min, max)
 		local r, g, b = c[1], c[2], c[3]
 
 		if health then health:SetStatusBarColor(r, g, b) end
-		if health.bg then health.bg:SetTexture(.1, .1, .1) end
+		if health.bg then health.bg:SetColorTexture(.1, .1, .1) end
 	end
 end
 
@@ -192,6 +192,45 @@ D.PostUpdatePower = function(power, unit, min, max)
 		else
 			if (unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and strfind(unit, "arena%d")) or (unit and strfind(unit, "boss%d"))) then power.value:SetText(D.ShortValue(min)) else power.value:SetText(min) end
 		end
+	end
+end
+
+D.PostUpdateAltMana = function(unit, min, max)
+	local parent = self:GetParent()
+	local powerText = parent.Power.value
+	local powerTextParent = powerText:GetParent()
+
+	local powerTextPosition = db.power.position
+
+	if min ~= max then
+		local color = D.UnitColor.power['MANA']
+		color = D.RGBToHex(color[1], color[2], color[3])
+
+		self.Text:SetParent(powerTextParent)
+
+		self.Text:ClearAllPoints()
+		if powerText:GetText() then
+			if find(powerTextPosition, "RIGHT") then
+				self.Text:Point("RIGHT", powerText, "LEFT", 3, 0)
+				self.Text:SetFormattedText(color.."%d%%|r |cffD7BEA5- |r", floor(min / max * 100))
+			elseif find(powerTextPosition, "LEFT") then
+				self.Text:Point("LEFT", powerText, "RIGHT", -3, 0)
+				self.Text:SetFormattedText("|cffD7BEA5-|r"..color.." %d%%|r", floor(min / max * 100))
+			else
+				if select(4, powerText:GetPoint()) <= 0 then
+					self.Text:Point("LEFT", powerText, "RIGHT", -3, 0)
+					self.Text:SetFormattedText("|cffD7BEA5-|r"..color.." %d%%|r", floor(min / max * 100))
+				else
+					self.Text:Point("RIGHT", powerText, "LEFT", 3, 0)
+					self.Text:SetFormattedText(color.."%d%%|r |cffD7BEA5- |r", floor(min / max * 100))
+				end
+			end
+		else
+			self.Text:Point(powerText:GetPoint())
+			self.Text:SetFormattedText(color.."%d%%|r", floor(min / max * 100))
+		end
+	else
+		self.Text:SetText()
 	end
 end
 
@@ -284,15 +323,14 @@ D.PostCreateAura = function(self, button)
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
 
-	local Animation = button:CreateAnimationGroup()
-	Animation:SetLooping("BOUNCE")
+	button.Animation = button:CreateAnimationGroup()
+    button.Animation:SetLooping("BOUNCE")
 
-	local FadeOut = Animation:CreateAnimation("Alpha")
-	FadeOut:SetChange(-.9)
-	FadeOut:SetDuration(.6)
-	FadeOut:SetSmoothing("IN_OUT")
-
-	button.Animation = Animation
+    button.Animation.FadeOut = button.Animation:CreateAnimation("Alpha")
+    button.Animation.FadeOut:SetFromAlpha(1)
+    button.Animation.FadeOut:SetToAlpha(0)
+    button.Animation.FadeOut:SetDuration(.6)
+    button.Animation.FadeOut:SetSmoothing("IN_OUT")
 end
 
 D.PostUpdateAura = function(self, unit, icon, index, offset, filter, isDebuff, duration, timeLeft)
@@ -346,7 +384,7 @@ D.HidePortrait = function(self, unit)
 end
 
 D.PortraitUpdate = function(self, unit)
-	if self:GetModel() and self:GetModel().find and self:GetModel():find("worgenmale") then self:SetCamera(1) end
+	--if self:GetModel() and self:GetModel().find and self:GetModel():find("worgenmale") then self:SetCamera(1) end
 end
 
 local ticks = {}
@@ -563,7 +601,6 @@ if C["raid"].raidunitdebuffwatch == true then
 			},
 			DRUID = {
 				{774, "TOPLEFT", {0, 0}, {.8, .4, .8}}, -- Rejuvenation
-				{162359, "TOPLEFT", {0, 0}, {.1, .3, .8}}, -- Genesis
 				{155777, "TOPLEFT", {0, -8}, {.3, .3, .8}}, -- Germination
 				{8936, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, -- Regrowth
 				{33763, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, -- Lifebloom
@@ -573,16 +610,12 @@ if C["raid"].raidunitdebuffwatch == true then
 				{53563, "TOPRIGHT", {0, 0}, {.7, .3, .7}}, -- Beacon of Light
 				{1022, "BOTTOMRIGHT", {0, 0}, {.2, .2, 1}, true}, -- Hand of Protection
 				{1044, "BOTTOMRIGHT", {0, 0}, {.89, .45, 0}, true}, -- Hand of Freedom
-				{1038, "BOTTOMRIGHT", {0, 0}, {.93, .75, 0}, true}, -- Hand of Salvation
 				{6940, "BOTTOMRIGHT", {0, 0}, {.89, .1, .1}, true}, -- Hand of Sacrifice
 				{114163, "BOTTOMLEFT", {0, 0}, {.89, .1, .1}, true}, -- Eternal Flame
-				{20925, "TOPLEFT", {0, 0}, {.81, .85, .1}, true}, -- Sacred Shield
 				{156910, "TOPRIGHT", {0, 0},{.7, .3, .7}}, -- Beacon of Faith
-				{157007, "TOPRIGHT", {0, 0},{.7, .3, .7}}, -- Beacon of Insight
 			},
 			SHAMAN = {
 				{61295, "TOPLEFT", {0, 0}, {.7, .3, .7}}, -- Riptide 
-				{974, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}}, -- Earth Shield
 			},
 			MONK = {
 				{119611, "TOPLEFT", {0, 0}, {.8, .4, .8}}, --Renewing Mist

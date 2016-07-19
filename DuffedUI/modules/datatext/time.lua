@@ -6,9 +6,9 @@ Stat:EnableMouse(true)
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
 
-local font = D.Font(C["font"].datatext)
+local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
 local Text  = DuffedUIInfoLeft:CreateFontString(nil, "OVERLAY")
-Text:SetFontObject(font)
+Text:SetFont(f, fs, ff)
 D.DataTextPosition(C["datatext"].wowtime, Text)
 
 local int = 1
@@ -139,19 +139,6 @@ Stat:SetScript("OnEnter", function(self)
 			if name and reset then GameTooltip:AddDoubleLine(name, SecondsToTime(reset), 1, 1, 1, 1, 0, 0) end
 		end
 	end
-
-	--[[GameTooltip:AddLine(" ")
-	local invasion = {
-		Botani = 36171,
-		Goren = 36376,
-		Shadowmoon = 36412,
-		Horde = 36655,
-		Ogre = 36650,
-		Council = 36830,
-	}
-	for k, v in pairs(invasion) do
-		GameTooltip:AddDoubleLine(format("%s: %s", k, IsQuestFlaggedCompleted(v) and "\124cff00ff00Yes\124r" or "\124cffff0000No\124r"))
-	end]]
 
 	GameTooltip:Show()
 end)

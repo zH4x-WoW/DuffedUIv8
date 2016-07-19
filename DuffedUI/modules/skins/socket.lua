@@ -20,12 +20,12 @@ local function LoadSkin()
 		button_icon:ClearAllPoints()
 		button_icon:Point("TOPLEFT", 2, -2)
 		button_icon:Point("BOTTOMRIGHT", -2, 2)
-		ItemSocketingFrame:HookScript("OnUpdate", function(self)
+		--[[ItemSocketingFrame:HookScript("OnUpdate", function(self)
 			gemColor = GetSocketTypes(i)
 			local color = GEM_TYPE_INFO[gemColor]
 			button:SetBackdropColor(color.r, color.g, color.b, 0.15)
 			button:SetBackdropBorderColor(color.r, color.g, color.b)
-		end)
+		end)]]--
 	end
 	
 	ItemSocketingFramePortrait:Kill()

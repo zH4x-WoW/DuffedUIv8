@@ -1,48 +1,40 @@
 ﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<!-- engine -->
 	<Script file="libs\LibStub\LibStub.lua" />
-	<Script file="libs\CallbackHandler-1.0\CallbackHandler-1.0.lua" />
 	<Script file="core\init.lua" />
 	<Script file="core\constants.lua" />
 
 	<!-- core -->
-	<Include file="locales\load_locales.xml" />
 	<Script file="config\config.lua" />
+	<Script file="medias\medias.lua" />
+	<Script file="core\api.lua" />
 	<Script file="core\customconfig.lua" />
 	<Script file="core\config.lua" />
-	<Script file="medias\medias.lua" />
-	<Include file="libs\LibSharedMedia-3.0\lib.xml" />
-	<Include file="libs\oUF\oUF.xml" />
-	<Include file="libs\plugins\load_oUFPlugins.xml" />
-	<Include file="libs\LibItemUpgradeInfo-1.0\LibItemUpgradeInfo-1.0.xml" />
-	<Script file="libs\templates\colors.lua" />
+	<Include file="libs\load_libs.xml" />
 	<Script file="core\video.lua" />
-	<Script file="core\api.lua" />
 	<Script file="core\move.lua" />
-	<Script file="core\func_Font.lua" />
 	<Script file="core\func_Core.lua" />
+	<Script file="core\func_Font.lua" />
 	<Script file="core\func_UF.lua" />
 	<Script file="core\func_Skins.lua" />
-	<Script file="core\fonts.lua" />
 	<Script file="core\popup.lua" />
+	<Include file="locales\load_locales.xml" />
 	<Script file="core\install.lua" />
 	<Script file="core\filters\f_cbticks.lua" />
 	<Script file="core\cversion.lua" />
-	<Script file="core\commands.lua" />
 
 	<!-- modules -->
 	<Script file="modules\maps\minimap.lua" />
+	<Script file="modules\maps\worldmap.lua" />
+	<Script file="modules\maps\zonemap.lua" />
 	<Script file="modules\panels\panels.lua" />
-	<Script file="modules\plugins\spellalert.lua" />
 	<Include file="modules\misc\load_misc.xml" />
 	<Script file="modules\loot\merchant.lua" />
 	<Script file="modules\chat\copyurl.lua" />
 	<Script file="modules\tooltip\itemidcount.lua" />
-	<Script file="modules\chat\spam.lua" />
 	<Include file="modules\buffs\template.xml" />
 	<Script file="modules\buffs\buffs.lua" />
 	<Script file="modules\buffs\header.lua" />
-	<Script file="modules\maps\worldmap.lua" />
 	<Include file="modules\datatext\load_dt.xml" />
 	<Include file="modules\actionbars\load_ab.xml" />
 	<Script file="modules\chat\chatframes.lua" />
@@ -55,7 +47,6 @@
 	<Script file="modules\loot\bags.lua" />
 	<Script file="modules\loot\masterloot.lua" />
 	<Script file="modules\loot\rollframe.lua" />
-	<Script file="modules\maps\zonemap.lua" />
 
 	<!-- unitframes -->
 	<Include file="libs\templates\tankassist.xml" />
@@ -63,10 +54,11 @@
 	<Include file="modules\unitframes\load_uf.xml" />
 	<Script file="modules\misc\altpowerbar.lua" />
 	<Script file="modules\misc\threatbar.lua" />
-	<Script file="modules\blizzard\achievements.lua" />
 	<Script file="modules\unitframes\groups\petbattles.lua" />
 
 	<!-- plugins -->
 	<Include file="modules\plugins\load_plugins.xml" />
 	<Include file="modules\skins\load_skins.xml" />
+	<!--<Script file="core\tracking.lua" />-->
+	<Script file="core\dev.lua" />
 </Ui>

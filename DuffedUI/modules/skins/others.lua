@@ -254,157 +254,62 @@ local function LoadSkin()
 		InterfaceOptionsFrameCancel:SetPoint("TOPRIGHT",InterfaceOptionsFramePanelContainer,"BOTTOMRIGHT",0,-6)
 
 		local interfacecheckbox = {
-			-- Controls
+			-- Controls --
 			"ControlsPanelStickyTargeting",
 			"ControlsPanelAutoDismount",
 			"ControlsPanelAutoClearAFK",
-			"ControlsPanelBlockTrades",
-			"ControlsPanelBlockGuildInvites",
-			"ControlsPanelBlockChatChannelInvites",
 			"ControlsPanelLootAtMouse",
 			"ControlsPanelAutoLootCorpse",
-			"ControlsPanelAutoOpenLootHistory",
 			"ControlsPanelInteractOnLeftClick",
-			"ControlsPanelReverseCleanUpBags",
-			"ControlsPanelReverseNewLoot",
-			-- Combat
-			"CombatPanelAttackOnAssist",
-			"CombatPanelStopAutoAttack",
-			"CombatPanelNameplateClassColors",
+			-- Combat --
 			"CombatPanelTargetOfTarget",
-			"CombatPanelShowSpellAlerts",
-			"CombatPanelReducedLagTolerance",
-			"CombatPanelActionButtonUseKeyDown",
+			"CombatPanelFlashLowHealthWarning",
 			"CombatPanelLossOfControl",
-			"CombatPanelEnemyCastBarsOnPortrait",
-			"CombatPanelEnemyCastBarsOnNameplates",
-			"CombatPanelEnemyCastBarsOnOnlyTargetNameplates",
-			"CombatPanelEnemyCastBarsNameplateSpellNames",
 			"CombatPanelAutoSelfCast",
-			-- Display
-			"DisplayPanelShowCloak",
-			"DisplayPanelShowHelm",
-			"DisplayPanelShowAggroPercentage",
-			"DisplayPanelPlayAggroSounds",
-			"DisplayPanelDetailedLootInfo",
-			"DisplayPanelShowSpellPointsAvg",
-			"DisplayPanelemphasizeMySpellEffects",
-			"DisplayPanelShowFreeBagSpace",
-			"DisplayPanelCinematicSubtitles",
+			"CombatPanelEnableFloatingCombatText",
+			-- Display --
 			"DisplayPanelRotateMinimap",
-			"DisplayPanelScreenEdgeFlash",
-			--Objectives
-			"ObjectivesPanelAutoQuestTracking",
-			"ObjectivesPanelMapFade",
-			-- Social
+			"DisplayPanelAJAlerts",
+			"DisplayPanelShowTutorials",
+			"DisplayPanelEnableFloatingCombatText",
+			-- Social --
 			"SocialPanelProfanityFilter",
 			"SocialPanelSpamFilter",
-			"SocialPanelChatBubbles",
-			"SocialPanelPartyChat",
-			"SocialPanelChatHoverDelay",
 			"SocialPanelGuildMemberAlert",
-			"SocialPanelChatMouseScroll",
-			"SocialPanelWholeChatWindowClickable",
-			-- Action bars
-			"ActionBarsPanelBottomLeft",
-			"ActionBarsPanelBottomRight",
-			"ActionBarsPanelRight",
-			"ActionBarsPanelRightTwo",
+			"SocialPanelBlockTrades",
+			"SocialPanelBlockGuildInvites",
+			"SocialPanelBlockChatChannelInvites",
+			"SocialPanelShowAccountAchievments",
+			"SocialPanelOnlineFriends",
+			"SocialPanelOfflineFriends",
+			"SocialPanelBroadcasts",
+			"SocialPanelFriendRequests",
+			"SocialPanelShowToastWindow",
+			"SocialPanelEnableTwitter",
+			-- Action bars --
 			"ActionBarsPanelLockActionBars",
-			"ActionBarsPanelAlwaysShowActionBars",
-			"ActionBarsPanelSecureAbilityToggle",
 			"ActionBarsPanelCountdownCooldowns",
-			-- Names
+			-- Names --
 			"NamesPanelMyName",
-			"NamesPanelMinus",
-			"NamesPanelFriendlyPlayerNames",
-			"NamesPanelFriendlyPets",
-			"NamesPanelFriendlyGuardians",
-			"NamesPanelFriendlyTotems",
-			"NamesPanelUnitNameplatesFriends",
-			"NamesPanelUnitNameplatesFriendlyGuardians",
-			"NamesPanelUnitNameplatesFriendlyPets",
-			"NamesPanelUnitNameplatesFriendlyTotems",
-			"NamesPanelGuilds",
-			"NamesPanelGuildTitles",
-			"NamesPanelTitles",
 			"NamesPanelNonCombatCreature",
+			"NamesPanelFriendlyPlayerNames",
+			"NamesPanelFriendlyMinions",
+			"NamesPanelUnitNameplatesPersonalResource",
+			"NamesPanelUnitNameplatesPersonalResourceOnEnemy",
+			"NamesPanelUnitNameplatesMakeLarger",
+			"NamesPanelUnitNameplatesShowAll",
+			"NamesPanelUnitNameplatesAggroFlash",
 			"NamesPanelEnemyPlayerNames",
-			"NamesPanelEnemyPets",
-			"NamesPanelEnemyGuardians",
-			"NamesPanelEnemyTotems",
-			"NamesPanelUnitNameplatesEnemyPets",
-			"NamesPanelUnitNameplatesEnemies",
-			"NamesPanelUnitNameplatesEnemyGuardians",
-			"NamesPanelUnitNameplatesEnemyTotems",
+			"NamesPanelEnemyMinions",
+			"NamesPanelUnitNameplatesFriendlyMinions",
+			"NamesPanelUnitNameplatesEnemyMinions",
 			"NamesPanelUnitNameplatesEnemyMinus",
-			-- Combat Text
-			"CombatTextPanelTargetDamage",
-			"CombatTextPanelPeriodicDamage",
-			"CombatTextPanelPetDamage",
-			"CombatTextPanelHealing",
-			"CombatTextPanelTargetEffects",
-			"CombatTextPanelOtherTargetEffects",
-			"CombatTextPanelEnableFCT",
-			"CombatTextPanelDodgeParryMiss",
-			"CombatTextPanelDamageReduction",
-			"CombatTextPanelRepChanges",
-			"CombatTextPanelReactiveAbilities",
-			"CombatTextPanelFriendlyHealerNames",
-			"CombatTextPanelCombatState",
-			"CombatTextPanelComboPoints",
-			"CombatTextPanelLowManaHealth",
-			"CombatTextPanelEnergyGains",
-			"CombatTextPanelPeriodicEnergyGains",
-			"CombatTextPanelHonorGains",
-			"CombatTextPanelAuras",
-			"CombatTextPanelAutoSelfCast",
-			-- Status Text
-			"StatusTextPanelPlayer",
-			"StatusTextPanelPet",
-			"StatusTextPanelParty",
-			"StatusTextPanelTarget",
-			"StatusTextPanelAlternateResource",
-			"StatusTextPanelPercentages",
-			"StatusTextPanelXP",
-			-- Unit Frames
-			"UnitFramePanelPartyPets",
-			"UnitFramePanelArenaEnemyFrames",
-			"UnitFramePanelArenaEnemyCastBar",
-			"UnitFramePanelArenaEnemyPets",
-			"UnitFramePanelFullSizeFocusFrame",
-			-- Buffs & Debuffs
-			"BuffsPanelBuffDurations",
-			"BuffsPanelDispellableDebuffs",
-			"BuffsPanelCastableBuffs",
-			"BuffsPanelConsolidateBuffs",
-			"BuffsPanelShowAllEnemyDebuffs",
-			--Battle net
-			"BattlenetPanelOnlineFriends",
-			"BattlenetPanelOfflineFriends",
-			"BattlenetPanelBroadcasts",
-			"BattlenetPanelFriendRequests",
-			"BattlenetPanelConversations",
-			"BattlenetPanelShowToastWindow",
-			-- Camera
-			"CameraPanelFollowTerrain",
-			"CameraPanelHeadBob",
+			-- Camera --
 			"CameraPanelWaterCollision",
-			"CameraPanelSmartPivot",
 			-- Mouse
 			"MousePanelInvertMouse",
 			"MousePanelClickToMove",
-			"MousePanelWoWMouse",
 			"MousePanelEnableMouseSpeed",
-			-- Help
-			"HelpPanelShowTutorials",
-			"HelpPanelLoadingScreenTips",
-			"HelpPanelEnhancedTooltips",
-			"HelpPanelBeginnerTooltips",
-			"HelpPanelShowLuaErrors",
-			"HelpPanelColorblindMode",
-			"HelpPanelMovePad",
-			"DisplayPanelShowAccountAchievments",
 		}
 
 		for i = 1, getn(interfacecheckbox) do
@@ -413,41 +318,29 @@ local function LoadSkin()
 		end
 
 		local interfacedropdown ={
-			-- Controls
+			-- Controls --
 			"ControlsPanelAutoLootKeyDropDown",
-			-- Combat
-			"CombatPanelTOTDropDown",
+			-- Combat --
 			"CombatPanelFocusCastKeyDropDown",
 			"CombatPanelSelfCastKeyDropDown",
-			"CombatPanelLossOfControlFullDropDown",
-			"CombatPanelLossOfControlSilenceDropDown",
-			"CombatPanelLossOfControlInterruptDropDown",
-			"CombatPanelLossOfControlDisarmDropDown",
-			"CombatPanelLossOfControlRootDropDown",
-			-- Display
-			"DisplayPanelAggroWarningDisplay",
-			"DisplayPanelWorldPVPObjectiveDisplay",
+			-- Display --
 			"DisplayPanelOutlineDropDown",
-			-- Objectives
-			"ObjectivesPanelQuestSorting",
-			-- Social
-			"SocialPanelChatStyle",
+			"DisplayPanelSelfHighlightDropDown",
+			"DisplayPanelDisplayDropDown",
+			"DisplayPanelChatBubblesDropDown",
+			-- Social --
 			"SocialPanelWhisperMode",
 			"SocialPanelTimestamps",
-			"SocialPanelBnWhisperMode",
-			"SocialPanelConversationMode",
-			-- Action bars
+			-- Action bars --
 			"ActionBarsPanelPickupActionKeyDropDown",
-			-- Names
+			-- Names --
 			"NamesPanelNPCNamesDropDown",
 			"NamesPanelUnitNameplatesMotionDropDown",
-			-- Combat Text
-			"CombatTextPanelFCTDropDown",
-			"CombatTextPanelTargetModeDropDown",
-			-- Camera
+			-- Camera --
 			"CameraPanelStyleDropDown",
-			-- Mouse
+			-- Mouse --
 			"MousePanelClickMoveStyleDropDown",
+			-- Languages --
 			"LanguagesPanelLocaleDropDown",
 			"LanguagesPanelAudioLocaleDropDown",
 		}
@@ -459,37 +352,39 @@ local function LoadSkin()
 				DropDownList1:SetTemplate("Transparent")
 			end
 		end
-		InterfaceOptionsHelpPanelResetTutorials:SkinButton()
+		--InterfaceOptionsHelpPanelResetTutorials:SkinButton()
 
 		local optioncheckbox = {
-			-- Graphics
+			-- Graphics --
 			"Display_RaidSettingsEnabledCheckBox",
-			-- Advanced
+			-- Advanced --
 			"Advanced_MaxFPSCheckBox",
 			"Advanced_MaxFPSBKCheckBox",
+			"Advanced_ShowHDModels",
 			"Advanced_DesktopGamma",
-			-- Audio
+			-- Network --
+			"NetworkOptionsPanelOptimizeSpeed",
+			"NetworkOptionsPanelUseIPv6",
+			"NetworkOptionsPanelAdvancedCombatLogging",
+			-- Audio --
 			"AudioOptionsSoundPanelEnableSound",
 			"AudioOptionsSoundPanelSoundEffects",
-			"AudioOptionsSoundPanelErrorSpeech",
-			"AudioOptionsSoundPanelEmoteSounds",
 			"AudioOptionsSoundPanelPetSounds",
+			"AudioOptionsSoundPanelEmoteSounds",
 			"AudioOptionsSoundPanelMusic",
 			"AudioOptionsSoundPanelLoopMusic",
 			"AudioOptionsSoundPanelPetBattleMusic",
 			"AudioOptionsSoundPanelAmbientSounds",
+			"AudioOptionsSoundPanelDialogSounds",
+			"AudioOptionsSoundPanelErrorSpeech",
 			"AudioOptionsSoundPanelSoundInBG",
 			"AudioOptionsSoundPanelReverb",
 			"AudioOptionsSoundPanelHRTF",
 			"AudioOptionsSoundPanelEnableDSPs",
-			"AudioOptionsSoundPanelUseHardware",
+			-- Voice --
 			"AudioOptionsVoicePanelEnableVoice",
 			"AudioOptionsVoicePanelEnableMicrophone",
 			"AudioOptionsVoicePanelPushToTalkSound",
-			-- Network
-			"NetworkOptionsPanelOptimizeSpeed",
-			"NetworkOptionsPanelUseIPv6",
-			"NetworkOptionsPanelAdvancedCombatLogging",
 		}
 
 		for i = 1, getn(optioncheckbox) do
@@ -498,46 +393,52 @@ local function LoadSkin()
 		end
 
 		local optiondropdown = {
-			-- Graphics
+			-- Graphics --
 			"Display_DisplayModeDropDown",
 			"Display_ResolutionDropDown",
 			"Display_RefreshDropDown",
 			"Display_PrimaryMonitorDropDown",
 			"Display_AntiAliasingDropDown",
-			"Display_MultiSampleDropDown",
 			"Display_VerticalSyncDropDown",
+			-- Base --
 			"Graphics_TextureResolutionDropDown",
 			"Graphics_FilteringDropDown",
 			"Graphics_ProjectedTexturesDropDown",
-			"Graphics_ViewDistanceDropDown",
-			"Graphics_EnvironmentalDetailDropDown",
-			"Graphics_GroundClutterDropDown",
 			"Graphics_ShadowsDropDown",
 			"Graphics_LiquidDetailDropDown",
 			"Graphics_SunshaftsDropDown",
 			"Graphics_ParticleDensityDropDown",
 			"Graphics_SSAODropDown",
-			"Graphics_RefractionDropDown",
+			"Graphics_DepthEffectsDropDown",
+			"Graphics_LightingQualityDropDown",
+			"Graphics_OutlineModeDropDown",
+			-- Raid --
 			"RaidGraphics_TextureResolutionDropDown",
 			"RaidGraphics_FilteringDropDown",
 			"RaidGraphics_ProjectedTexturesDropDown",
-			"RaidGraphics_ViewDistanceDropDown",
-			"RaidGraphics_EnvironmentalDetailDropDown",
-			"RaidGraphics_GroundClutterDropDown",
 			"RaidGraphics_ShadowsDropDown",
 			"RaidGraphics_LiquidDetailDropDown",
 			"RaidGraphics_SunshaftsDropDown",
 			"RaidGraphics_ParticleDensityDropDown",
 			"RaidGraphics_SSAODropDown",
-			"RaidGraphics_RefractionDropDown",
-			-- Advanced
+			"RaidGraphics_DepthEffectsDropDown",
+			"RaidGraphics_LightingQualityDropDown",
+			"RaidGraphics_OutlineModeDropDown",
+			-- Advanced --
 			"Advanced_BufferingDropDown",
 			"Advanced_LagDropDown",
 			"Advanced_HardwareCursorDropDown",
+			"Advanced_MultisampleAntiAliasingDropDown",
+			"Advanced_MultisampleAlphaTest",
+			"Advanced_PostProcessAntiAliasingDropDown",
+			"Advanced_ResampleQualityDropDown",
 			"Advanced_GraphicsAPIDropDown",
-			-- Audio
+			"Advanced_PhysicsInteractionDropDown",
+			-- Audio --
 			"AudioOptionsSoundPanelHardwareDropDown",
 			"AudioOptionsSoundPanelSoundChannelsDropDown",
+			"AudioOptionsSoundPanelSoundCacheSizeDropDown",
+			-- Voice --
 			"AudioOptionsVoicePanelInputDeviceDropDown",
 			"AudioOptionsVoicePanelChatModeDropDown",
 			"AudioOptionsVoicePanelOutputDeviceDropDown",
@@ -555,6 +456,9 @@ local function LoadSkin()
 			"RecordLoopbackSoundButton",
 			"PlayLoopbackSoundButton",
 			"AudioOptionsVoicePanelChatMode1KeyBindingButton",
+			"InterfaceOptionsDisplayPanelResetTutorials",
+			"InterfaceOptionsSocialPanelRedockChat",
+			"InterfaceOptionsSocialPanelTwitterLoginButton",
 		}
 
 		for _, button in pairs(buttons) do _G[button]:SkinButton() end
@@ -564,6 +468,7 @@ local function LoadSkin()
 
 		-- sliders
 		local slides = {
+			-- InterfaceOptions --
 			"InterfaceOptionsCombatPanelSpellAlertOpacitySlider",
 			"InterfaceOptionsCombatPanelMaxSpellStartRecoveryOffset",
 			"InterfaceOptionsBattlenetPanelToastDurationSlider",
@@ -571,15 +476,26 @@ local function LoadSkin()
 			"InterfaceOptionsCameraPanelFollowSpeedSlider",
 			"InterfaceOptionsMousePanelMouseSensitivitySlider",
 			"InterfaceOptionsMousePanelMouseLookSpeedSlider",
+			-- Base --
+			"Graphics_ViewDistanceSlider",
+			"Graphics_EnvironmentalDetailSlider",
+			"Graphics_GroundClutterSlider",
+			-- Raid --
+			"RaidGraphics_ViewDistanceSlider",
+			"RaidGraphics_EnvironmentalDetailSlider",
+			"RaidGraphics_GroundClutterSlider",
+			-- Advanced
 			"Advanced_MaxFPSSlider",
 			"Advanced_MaxFPSBKSlider",
+			"Advanced_RenderScaleSlider",
 			"Advanced_GammaSlider",
-			"AudioOptionsSoundPanelSoundQuality",
+			-- Audio -- 
 			"AudioOptionsSoundPanelMasterVolume",
 			"AudioOptionsSoundPanelSoundVolume",
 			"AudioOptionsSoundPanelMusicVolume",
 			"AudioOptionsSoundPanelAmbienceVolume",
 			"AudioOptionsSoundPanelDialogVolume",
+			-- Voice --
 			"AudioOptionsVoicePanelMicrophoneVolume",
 			"AudioOptionsVoicePanelSpeakerVolume",
 			"AudioOptionsVoicePanelSoundFade",
@@ -596,28 +512,12 @@ local function LoadSkin()
 		GraphicsButton:StripTextures()
 		GraphicsButton:SkinButton()
 		Graphics_Quality:SetScript("OnUpdate", function(self) Graphics_Quality:SkinSlideBar(11) end)
-		Graphics_RightQuality:SetAlpha(0)
-
-		Graphics_QualityLow2:Point("BOTTOM", 0, -20)
-		Graphics_QualityFair:Point("BOTTOM", 0, -20)
-		Graphics_RightQualityLabel:Point("TOP", 0, 16)
-		Graphics_QualityMed:Point("BOTTOM", 0, -20)
-		Graphics_QualityHigh2:Point("BOTTOM", 0, -20)
-		Graphics_QualityUltra:Point("BOTTOM", 0, -20)
 
 		RaidButton:StripTextures()
 		RaidButton:SkinButton()
 		RaidGraphics_Quality:SetScript("OnUpdate", function(self) RaidGraphics_Quality:SkinSlideBar(11) end)
-		RaidGraphics_RightQuality:SetAlpha(0)
 
-		RaidGraphics_QualityLow2:Point("BOTTOM", 0, -20)
-		RaidGraphics_QualityFair:Point("BOTTOM", 0, -20)
-		RaidGraphics_RightQualityLabel:Point("TOP", 0, 16)
-		RaidGraphics_QualityMed:Point("BOTTOM", 0, -20)
-		RaidGraphics_QualityHigh2:Point("BOTTOM", 0, -20)
-		RaidGraphics_QualityUltra:Point("BOTTOM", 0, -20)
-
-		if IsMacClient() then
+		--[[if IsMacClient() then
 			MacOptionsFrame:StripTextures()
 			MacOptionsFrame:SetTemplate()
 			MacOptionsButtonCompress:SkinButton()
@@ -646,7 +546,7 @@ local function LoadSkin()
 			MacOptionsFrameCancel:ClearAllPoints()
 			MacOptionsFrameCancel:SetPoint("LEFT", MacOptionsFrameOkay, "RIGHT", 2, 0)
 			MacOptionsFrameCancel:SetWidth(MacOptionsFrameCancel:GetWidth() - 6)
-		end
+		end]]--
 	end
 end
 

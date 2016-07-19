@@ -27,7 +27,7 @@ Graphic:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
 
-local mult = 768 / string.match(GetCVar("gxResolution"), "%d+x(%d+)") / C["general"].uiscale
+local mult = 768 / string.match(GetCVar("gxWindowedResolution"), "%d+x(%d+)") / C["general"].uiscale
 local Scale = function(x) return mult * math.floor(x / mult + 0.5) end
 
 D.Scale = function(x) return Scale(x) end

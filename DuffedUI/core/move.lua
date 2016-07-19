@@ -77,23 +77,6 @@ function Move:CreateDragInfo()
 	self.DragInfo:Hide()
 	self.DragInfo:SetScript("OnMouseUp", Move.RestoreDefaults)
 
-	--[[local _, _, _, x, y = self:GetPoint()
-	self.DragInfoPosX = CreateFrame("Frame", nil, self.DragInfo)
-	self.DragInfoPosX:Size(50, 15)
-	self.DragInfoPosX:SetTemplate("Transparent")
-	self.DragInfoPosX:Point("TOPLEFT", self, "BOTTOMLEFT", 0, -5)
-	self.DragInfoPosX:FontString("Text", C["media"]["font"], 11)
-	self.DragInfoPosX.Text:SetText("x:" .. format("%.0f", x))
-	self.DragInfoPosX.Text:Point("CENTER", self.DragInfoPosX)
-
-	self.DragInfoPosY = CreateFrame("Frame", nil, self.DragInfo)
-	self.DragInfoPosY:Size(50, 15)
-	self.DragInfoPosY:SetTemplate("Transparent")
-	self.DragInfoPosY:Point("LEFT", self, "RIGHT", 5, 0)
-	self.DragInfoPosY:FontString("Text", C["media"]["font"], 11)
-	self.DragInfoPosY.Text:SetText("y:" .. format("%.0f", y))
-	self.DragInfoPosY.Text:Point("CENTER", self.DragInfoPosY)]]--
-
 	self.DragInfo.Parent = self.DragInfo:GetParent()
 end
 
@@ -111,14 +94,14 @@ local gridsize = function()
 
 		for i = - (w / x / 2), w / x / 2 do
 			local aliv = ali:CreateTexture(nil, "BACKGROUND")
-			aliv:SetTexture(.3, 0, 0, .7)
+			aliv:SetColorTexture(.3, 0, 0, .7)
 			aliv:Point("CENTER", UIParent, "CENTER", i * x, 0)
 			aliv:SetSize(1, h)
 		end
 
 		for i = - (h / x / 2), h / x / 2 do
 			local alih = ali:CreateTexture(nil, "BACKGROUND")
-			alih:SetTexture(.3, 0, 0, .7)
+			alih:SetColorTexture(.3, 0, 0, .7)
 			alih:Point("CENTER", UIParent, "CENTER", 0, i * x)
 			alih:SetSize(w, 1)
 		end

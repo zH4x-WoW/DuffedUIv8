@@ -1,13 +1,11 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="afkcamera.lua" />
 	<Script file="armory.lua" />
-	<Script file="buffnotice.lua" />
 	<Script file="combat.lua" />
 	<Script file="currency.lua" />
 	<Script file="efl.lua" />
 	<Script file="flightpoint.lua" />
 	<Include file="flightpoint.xml" />
-	<Script file="HatTrick.lua" />
 	<Script file="ilevel.lua" />
 	<Script file="ilvlr.lua" />
 	<Script file="bufftracker.lua" />
@@ -16,6 +14,8 @@
 	<Script file="misc.lua" />
 	<Script file="raidcooldowns.lua" />
 	<Script file="ses.lua" />
+	<Script file="spellalert.lua" />
 	<Script file="spellcooldowns.lua" />
 	<Script file="spellID.lua" />
+	<Script file="stats.lua" />
 </Ui>

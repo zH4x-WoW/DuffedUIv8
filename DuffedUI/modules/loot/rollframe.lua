@@ -264,7 +264,7 @@ local function START_LOOT_ROLL(rollID, time)
 	f.fsloot:SetVertexColor(color.r, color.g, color.b)
 
 	f.status:SetStatusBarColor(color.r, color.g, color.b, .7)
-	f.status.bg:SetTexture(color.r, color.g, color.b)
+	f.status.bg:SetColorTexture(color.r, color.g, color.b)
 
 	f.backdrop:SetBackdropBorderColor(color.r, color.g, color.b, .7)
 	f.button.backdrop:SetBackdropBorderColor(color.r, color.g, color.b, .7)

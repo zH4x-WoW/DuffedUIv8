@@ -68,7 +68,7 @@ bgframe:SetScript("OnEnter", function(self)
 end) 
 bgframe:SetScript("OnLeave", function(self) GameTooltip:Hide() end)
 
-local font = D.Font(C["font"].datatext)
+local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 local Stat = CreateFrame("Frame", "DuffedUIStatBattleGround", UIParent)
 Stat:EnableMouse(true)
 Stat.Option = C["datatext"].battleground
@@ -76,17 +76,17 @@ Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
 local Text1  = DuffedUIInfoLeftBattleGround:CreateFontString("DuffedUIStatBattleGroundText1", "OVERLAY")
-Text1:SetFontObject(font)
+Text1:SetFont(f, fs, ff)
 Text1:SetPoint("LEFT", 30, .5)
 Text1:SetHeight(DuffedUIInfoLeft:GetHeight())
 
 local Text2  = DuffedUIInfoLeftBattleGround:CreateFontString("DuffedUIStatBattleGroundText2", "OVERLAY")
-Text2:SetFontObject(font)
+Text2:SetFont(f, fs, ff)
 Text2:SetPoint("CENTER", 0, .5)
 Text2:SetHeight(DuffedUIInfoLeft:GetHeight())
 
 local Text3  = DuffedUIInfoLeftBattleGround:CreateFontString("DuffedUIStatBattleGroundText3", "OVERLAY")
-Text3:SetFontObject(font)
+Text3:SetFont(f, fs, ff)
 Text3:SetPoint("RIGHT", -30, .5)
 Text3:SetHeight(DuffedUIInfoLeft:GetHeight())
 

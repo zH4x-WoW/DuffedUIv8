@@ -27,6 +27,7 @@ if D.Client == "deDE" then
 		["rcd"] = "Bewege RaidCD",
 		["spell"] = "Bewege SpellCooldowns",
 		["xp-bar"] = "Bewege XP-Leiste",
+		["artifact-bar"] = "Bewege Artefakt-XP-Leiste",
 	}
 
 	L["symbol"] = {
@@ -100,7 +101,7 @@ if D.Client == "deDE" then
 		["fish"] = "Schräger Loot",
 		["random"] = "Zufälliger Spieler",
 		["self"] = "Eigene Beute",
-		["repairmoney"] = "Dir fehlt ds nötige Kleingeld um alles zu reparieren!",
+		["repairmoney"] = "Dir fehlt das nötige Kleingeld um alles zu reparieren!",
 		["repaircost"] = "Alle Gegenstände wurden repariert für einen Gesamtpreis von",
 		["trash"] = "Alle grauen Gegenstände wurden verkauft. Deine Einnahmen belaufen sich auf",
 	}
@@ -136,7 +137,7 @@ if D.Client == "deDE" then
 	}
 
 	L["group"] = {
-		["autoinv_enable"] = "Automatische Einladung AN: invite",
+		["autoinv_enable"] = "Automatische Einladung AN",
 		["autoinv_enable_custom"] = "Automatische Einladung: ",
 		["autoinv_disable"] = "Automatische Einladung AUS",
 		["disband"] = "Gruppe auflösen?",
@@ -156,7 +157,7 @@ if D.Client == "deDE" then
 		["flag_dnd"] = "[DND]",
 		["petbattle"] = "Haustierkampf",
 		["defense"] = "LokaleVerteidigung",
-		["recruitment"] = "GuildRecruitment",
+		["recruitment"] = "Gildenrekrutierung",
 		["lfg"] = "SucheNachGruppe",
 	}
 
@@ -213,8 +214,14 @@ if D.Client == "deDE" then
 		["goldcurrency"] = "|cffC41F3BWährungsmenü: Rechtsklick|r",
 		["goldreset"] = "|cffC41F3BDaten zurücksetzen: Shift halten + Rechtsklick|r",
 		["notalents"] = "Keine Talente",
-		["systemleft"] = "|cffC41F3BLeft Click: Öffne PvE-Frame|r",
-		["systemright"] = "|cffC41F3BRight Click: Speichernutzung bereinigen|r",
+		["systemleft"] = "|cffC41F3BLinksklick: Öffnet das PvE-Fenster|r",
+		["systemright"] = "|cffC41F3BRechtsklick: Speichernutzung bereinigen|r",
+		["prof"] = "Berufe",
+		["profless"] = "Berufslos",
+		["proftooltip"] = "Beliebiger Klick öffnet die Berufsübersicht",
+		["specmenu"] = "Spezialisierungsauswahl",
+		["specerror"] = "Diese Spezialisierung ist bereits aktiv!",
+		["specdata"] = "Spez: ",
 	}
 
 	L["Slots"] = {
@@ -250,5 +257,17 @@ if D.Client == "deDE" then
 		["honored"] = "Wohlwollend",
 		["revered"] = "Respektvoll",
 		["exalted"] = "Ehrfürchtig",
+	}
+	
+	L["artifactBar"] = {
+		["xptitle"] = "Artefakt Erfahrung",
+		["currentxp"] = "Aktuelle Erfahrung: %s",
+		["xp"] = "Erfahrung: %s/%s (%d%%)",
+		["xpremaining"] = "Verbleibend: %s",
+		["traits"] = "Eigenschaft verfügbar: %s",
+	}
+	
+	L["tooltip"] = {
+		["applied"] = "Angewandt von ",
 	}
 end

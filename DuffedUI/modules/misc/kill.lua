@@ -43,10 +43,23 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 	TutorialFrameAlertButton:Kill()
 	GuildChallengeAlertFrame:Kill()
 
+	if C["unitframes"].classbar then
+		SetCVar("nameplateShowSelf", 0)
+		SetCVar("nameplateResourceOnTarget", 0)
+		InterfaceOptionsNamesPanelUnitNameplatesPersonalResource:SetAlpha(0)
+		InterfaceOptionsNamesPanelUnitNameplatesPersonalResourceText:Kill()
+		InterfaceOptionsNamesPanelUnitNameplatesPersonalResourceOnEnemy:SetAlpha(0)
+		InterfaceOptionsNamesPanelUnitNameplatesPersonalResourceOnEnemyText:Kill()
+	else
+		SetCVar("nameplateShowSelf", 1)
+		SetCVar("nameplateResourceOnTarget", 0)
+		InterfaceOptionsNamesPanelUnitNameplatesPersonalResource:SetAlpha(1)
+		InterfaceOptionsNamesPanelUnitNameplatesPersonalResourceOnEnemy:SetAlpha(1)
+	end
+
 	if C["auras"].player then
 		BuffFrame:Kill()
 		TemporaryEnchantFrame:Kill()
-		ConsolidatedBuffs:Kill()
 		InterfaceOptionsFrameCategoriesButton12:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton12:SetAlpha(0)	
 	end
@@ -55,15 +68,9 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 	if C["raid"].arena then
 		InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton10:SetAlpha(0) 
-		InterfaceOptionsUnitFramePanelArenaEnemyFrames:Kill()
-		InterfaceOptionsUnitFramePanelArenaEnemyCastBar:Kill()
-		InterfaceOptionsUnitFramePanelArenaEnemyPets:Kill()
 	end
 
-	if C["chat"].enable then
-		SetCVar("WholeChatWindowClickable", 0)
-		InterfaceOptionsSocialPanelWholeChatWindowClickable:Kill()
-	end
+	if C["chat"].enable then SetCVar("WholeChatWindowClickable", 0) end
 
 	if C["unitframes"].enable then
 		PlayerFrame:SetParent(DuffedUIUIHider)
@@ -78,8 +85,6 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		InterfaceOptionsActionBarsPanelRightTwo:Kill()
 		InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Kill()
 	end
-
-	if IsAddOnLoaded("KUI Nameplates") then InterfaceOptionsNamesPanelUnitNameplatesNameplateClassColors:Kill() end
 
 	local TaintFix = CreateFrame("Frame")
 	TaintFix:SetScript("OnUpdate", function(self, elapsed)

@@ -9,7 +9,7 @@ ns._Headers = {}
 
 local class = select(2, UnitClass("player"))
 local texture = C["media"]["normTex"]
-local font = D.Font(C["font"]["unitframes"])
+local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
 local layout = C["unitframes"]["layout"]
 local move = D["move"]
 local backdrop = {
@@ -71,7 +71,7 @@ D["ConstructUFPlayer"] = function(self)
 
 	local healthBG = health:CreateTexture(nil, "BORDER")
 	healthBG:SetAllPoints()
-	healthBG:SetTexture(0, 0, 0)
+	healthBG:SetColorTexture(0, 0, 0)
 
 	if C["unitframes"]["percent"] then
 		local percHP
@@ -83,7 +83,7 @@ D["ConstructUFPlayer"] = function(self)
 	end
 
 	health.value = health:CreateFontString(nil, "OVERLAY")
-	health.value:SetFontObject(font)
+	health.value:SetFont(f, fs, ff)
 	if layout == 4 then health.value:Point("RIGHT", health, "RIGHT", -4, 10) else health.value:Point("RIGHT", health, "RIGHT", -4, -1) end
 	health.PostUpdate = D.PostUpdateHealth
 
@@ -95,10 +95,10 @@ D["ConstructUFPlayer"] = function(self)
 		health.colorClass = false
 		health:SetStatusBarColor(unpack(C["unitframes"]["healthbarcolor"]))
 		healthBG:SetVertexColor(unpack(C["unitframes"]["deficitcolor"]))
-		healthBG:SetTexture(.6, .6, .6)
+		healthBG:SetColorTexture(.6, .6, .6)
 		if C["unitframes"]["ColorGradient"] then
 			health.colorSmooth = true
-			healthBG:SetTexture(0, 0, 0)
+			healthBG:SetColorTexture(0, 0, 0)
 		end
 	else
 		health.colorDisconnected = true
@@ -141,7 +141,7 @@ D["ConstructUFPlayer"] = function(self)
 	powerBG.multiplier = .3
 
 	power.value = health:CreateFontString(nil, "OVERLAY")
-	power.value:SetFontObject(font)
+	power.value:SetFont(f, fs, ff)
 	if layout == 4 then power.value:Point("RIGHT", health, "RIGHT", -4, -1) else power.value:Point("LEFT", health, "LEFT", 4, -1) end
 
 	power.PostUpdate = D.PostUpdatePower
@@ -225,7 +225,7 @@ D["ConstructUFPlayer"] = function(self)
 	FlashInfo.parent = self
 	FlashInfo:SetAllPoints(health)
 	FlashInfo.ManaLevel = FlashInfo:CreateFontString(nil, "OVERLAY")
-	FlashInfo.ManaLevel:SetFontObject(font)
+	FlashInfo.ManaLevel:SetFont(f, fs, ff)
 	FlashInfo.ManaLevel:Point("CENTER", health, "CENTER", 0, 1)
 
 	local PVP = health:CreateTexture(nil, "OVERLAY")
@@ -276,13 +276,13 @@ D["ConstructUFPlayer"] = function(self)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:Point("LEFT", health, "LEFT", 4, 0)
 		Name:SetJustifyH("LEFT")
-		Name:SetFontObject(font)
+		Name:SetFont(f, fs, ff)
 		Name:SetShadowOffset(1.25, -1.25)
 		self:Tag(Name, "[DuffedUI:getnamecolor][DuffedUI:namelong] [DuffedUI:diffcolor][level] [shortclassification]")
 		self.Name = Name
 	end
 
-	--[[Combat feedback & Healcom]]
+	--[[Combat feedback & Healcom]]--
 	if C["unitframes"]["combatfeedback"] then
 		local CombatFeedbackText
 		CombatFeedbackText = D.SetFontString(health, C["media"].font, 11, "THINOUTLINE")
@@ -306,37 +306,6 @@ D["ConstructUFPlayer"] = function(self)
 		self.CombatFeedbackText = CombatFeedbackText
 	end
 
-	if C["unitframes"]["healcomm"] then
-		local mhpb = CreateFrame("StatusBar", nil, health)
-		mhpb:Point("LEFT", health:GetStatusBarTexture(), "RIGHT", 0, 0)
-		mhpb:SetHeight(health:GetHeight())
-		mhpb:SetWidth(218)
-		mhpb:SetStatusBarTexture(texture)
-		mhpb:SetStatusBarColor(0, 1, .5, .25)
-		mhpb:SetMinMaxValues(0,1)
-
-		local ohpb = CreateFrame("StatusBar", nil, health)
-		ohpb:Point("LEFT", mhpb:GetStatusBarTexture(), "RIGHT", 0, 0)
-		ohpb:SetHeight(health:GetHeight())
-		ohpb:SetWidth(218)
-		ohpb:SetStatusBarTexture(texture)
-		ohpb:SetStatusBarColor(0, 1, 0, .25)
-
-		local absb = CreateFrame("StatusBar", nil, health)
-		absb:Point("LEFT", ohpb:GetStatusBarTexture(), "RIGHT", 0, 0)
-		absb:SetHeight(health:GetHeight())
-		absb:SetWidth(218)
-		absb:SetStatusBarTexture(texture)
-		absb:SetStatusBarColor(1, 1, 0, .25)
-
-		self.HealPrediction = {
-			myBar = mhpb,
-			otherBar = ohpb,
-			absorbBar = absb,
-			maxOverflow = 1,
-		}
-	end
-
 	--[[Castbar]]--
 	if C["castbar"]["enable"] then
 		local pcb = CreateFrame("Frame", "PlayerCastBarMover", UIParent)
@@ -356,13 +325,13 @@ D["ConstructUFPlayer"] = function(self)
 		castbar.PostChannelStart = D["CastBar"]
 
 		castbar.time = castbar:CreateFontString(nil, "OVERLAY")
-		castbar.time:SetFontObject(font)
+		castbar.time:SetFont(f, fs, ff)
 		castbar.time:Point("RIGHT", castbar, "RIGHT", -5, 0)
 		castbar.time:SetTextColor(.84, .75, .65)
 		castbar.time:SetJustifyH("RIGHT")
 
 		castbar.Text = castbar:CreateFontString(nil, "OVERLAY")
-		castbar.Text:SetFontObject(font)
+		castbar.Text:SetFont(f, fs, ff)
 		castbar.Text:Point("LEFT", castbar, "LEFT", 6, 0)
 		castbar.Text:SetTextColor(.84, .75, .65)
 		castbar:CreateBackdrop()
@@ -397,7 +366,7 @@ D["ConstructUFPlayer"] = function(self)
 		self.Castbar.Time = castbar.time
 		self.Castbar.Icon = castbar.icon
 	end
-
+	
 	self.panel = panel
 	self.Health = health
 	self.Health.bg = healthBG

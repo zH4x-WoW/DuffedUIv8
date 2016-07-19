@@ -7,7 +7,7 @@ D["MyRace"] = select(2, UnitRace("player"))
 D["Level"] = UnitLevel("player")
 D["MyRealm"] = GetRealmName()
 D["Client"] = GetLocale()
-D["Resolution"] = GetCVar("gxResolution")
+D["Resolution"] = GetCVar("gxWindowedResolution")
 D["ScreenHeight"] = tonumber(string.match(D.Resolution, "%d+x(%d+)"))
 D["ScreenWidth"] = tonumber(string.match(D.Resolution, "(%d+)x+%d"))
 D["Version"] = GetAddOnMetadata("DuffedUI", "Version")
@@ -19,6 +19,7 @@ D["IconCoord"] = {.08, .92, .08, .92}
 D["Guild"] = select(1, GetGuildInfo("player"))
 
 D["Credits"] = {
+	"Dejablue",
 	"Tukz",
 	"Hydra",
 	"Elv",
@@ -44,23 +45,18 @@ D["Credits"] = {
 }
 
 D["DuffedCredits"] = {
-	"Shaney",
-	"Juhawny",
-	"Rav",
-	"loki",
-	"Shariza",
-	"Dahgoth",
-	"Sandoras",
-	"Sinaris",
+	"Darryn/Nyle",
+	"Hizuro",
+	"Chrisey",
+	"Niraya",
+	"Roflman",
+	"siweia",
+	"Kahad",
+	"Blinks",
 	"Digawen",
-	"Zenglao",
-	"devel1988",
-	"Grimbeorn",
-	"Ginji",
-	"Floppiflappsi",
-	"Slideroh",
-	"McTrap",
-	"HackManiac",
-	"Yascha",
-	"DarKleFou",
+}
+
+D["CoAutor"] = {
+	"Djriff",
+	"Rav",
 }

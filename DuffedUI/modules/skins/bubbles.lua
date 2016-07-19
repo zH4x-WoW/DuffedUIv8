@@ -1,10 +1,11 @@
 local D, C, L = unpack(select(2, ...))
 if (IsAddOnLoaded("BossEncounter2")) or IsAddOnLoaded("AddOnSkins") then return end
 
+local f = CreateFrame("Frame", nil, UIParent)
 local chatbubblehook = CreateFrame("Frame", nil, UIParent)
+local total = 0
+local numKids = 0
 local noscalemult = D.mult * C["general"].uiscale
-local tslu = 0
-local numkids = 0
 local bubbles = {}
 
 if (D.ScreenWidth > 3840) then
@@ -16,7 +17,7 @@ if (D.ScreenWidth > 3840) then
 end
 
 local function skinbubble(frame)
-	for i=1, frame:GetNumRegions() do
+	for i = 1, frame:GetNumRegions() do
 		local region = select(i, frame:GetRegions())
 		if region:GetObjectType() == "Texture" then
 			region:SetTexture(nil)
@@ -24,47 +25,38 @@ local function skinbubble(frame)
 			frame.text = region
 		end
 	end
-	
+
 	frame:SetBackdrop({
-		bgFile = C["media"].blank,
-		edgeFile = C["media"].blank,
-		tile = false, tileSize = 0, edgeSize = noscalemult,
+		bgFile = C["media"].blank, edgeFile = C["media"].blank, edgeSize = D.noscalemult,
 		insets = {left = -noscalemult, right = -noscalemult, top = -noscalemult, bottom = -noscalemult}
 	})
-	frame:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 	frame:SetBackdropColor(.1, .1, .1, .8)
+	frame:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 	frame.text:SetFont(C["media"].font, 14)
+	frame:SetClampedToScreen(false)
+	frame:SetFrameStrata("BACKGROUND")
 	
 	tinsert(bubbles, frame)
 end
 
-local function ischatbubble(frame)
-	if frame:GetName() then return end
-	if not frame:GetRegions() then return end
-	return frame:GetRegions():GetTexture() == [[Interface\Tooltips\ChatBubble-Background]]
-end
-
-chatbubblehook:SetScript("OnUpdate", function(chatbubblehook, elapsed)
-	tslu = tslu + elapsed
-
-	if tslu > .05 then
-		tslu = 0
-
-		local newnumkids = WorldFrame:GetNumChildren()
-		if newnumkids ~= numkids then
-			for i=numkids + 1, newnumkids do
+f:SetScript("OnUpdate", function(self, elapsed)
+	total = total + elapsed
+	if total > 0.1 then
+		total = 0
+		local newNumKids = WorldFrame:GetNumChildren()
+		if newNumKids ~= numKids then
+			for i = numKids + 1, newNumKids do
 				local frame = select(i, WorldFrame:GetChildren())
-
-				if ischatbubble(frame) then
+				local b = frame:GetBackdrop()
+				if b and b.bgFile == [[Interface\Tooltips\ChatBubble-Background]] then
 					skinbubble(frame)
 				end
 			end
-			numkids = newnumkids
+			numKids = newNumKids
 		end
-		
-		for i, frame in next, bubbles do
-			local r, g, b = frame.text:GetTextColor()
-			frame:SetBackdropBorderColor(r, g, b, .8)
+		for i, f in next, bubbles do
+			local r, g, b = f.text:GetTextColor()
+			f:SetBackdropBorderColor(r, g, b, .8)
 			
 			-- bubbles is unfortunatly not compatible with eyefinity, we hide it event if they are enabled. :(
 			if D.eyefinity then frame:SetScale(0.00001) end

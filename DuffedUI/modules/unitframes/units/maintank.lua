@@ -8,7 +8,7 @@ ns._Objects = {}
 ns._Headers = {}
 
 local texture = C["media"]["normTex"]
-local font = D.Font(C["font"]["unitframes"])
+local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
 local backdrop = {
 	bgFile = C["media"]["blank"],
 	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
@@ -34,7 +34,7 @@ D["ConstructUFMaintank"] = function(self)
 
 	local healthBG = health:CreateTexture(nil, "BORDER")
 	healthBG:SetAllPoints()
-	healthBG:SetTexture(0, 0, 0)
+	healthBG:SetColorTexture(0, 0, 0)
 
 	local HealthBorder = CreateFrame("Frame", nil, health)
 	HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", D.Scale(-2), D.Scale(2))
@@ -51,10 +51,10 @@ D["ConstructUFMaintank"] = function(self)
 		health.colorClass = false
 		health:SetStatusBarColor(unpack(C["unitframes"]["healthbarcolor"]))
 		healthBG:SetVertexColor(unpack(C["unitframes"]["deficitcolor"]))
-		healthBG:SetTexture(.6, .6, .6)
+		healthBG:SetColorTexture(.6, .6, .6)
 		if C["unitframes"]["ColorGradient"] then
 			health.colorSmooth = true
-			healthBG:SetTexture(0, 0, 0)
+			healthBG:SetColorTexture(0, 0, 0)
 		end
 	else
 		health.colorDisconnected = true
@@ -69,7 +69,7 @@ D["ConstructUFMaintank"] = function(self)
 	local Name = health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER", health, "CENTER", 0, 1)
 	Name:SetJustifyH("CENTER")
-	Name:SetFontObject(font)
+	Name:SetFont(f, fs, ff)
 	Name:SetShadowColor(0, 0, 0)
 	Name:SetShadowOffset(1.25, -1.25)
 

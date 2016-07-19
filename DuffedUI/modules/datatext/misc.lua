@@ -6,9 +6,9 @@ local D, C, L = unpack(select(2, ...))
 if C["datatext"].honor and C["datatext"].honor > 0 then
 	local Stat = CreateFrame("Frame", "DuffedUIStatHonor")
 
-	local font = D.Font(C["font"].datatext)
+	local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 	local Text  = Stat:CreateFontString("DuffedUIStatHonorText", "LOW")
-	Text:SetFontObject(font)
+	Text:SetFont(f, fs, ff)
 	D.DataTextPosition(C["datatext"].honor, Text)
 
 	local function OnEvent(self, event)
@@ -27,9 +27,9 @@ end
 if C["datatext"].honorablekills and C["datatext"].honorablekills > 0 then
 	local Stat = CreateFrame("Frame", "DuffedUIStatHK")
 
-	local font = D.Font(C["font"].datatext)
+	local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 	local Text  = Stat:CreateFontString("DuffedUIStatHKText", "LOW")
-	Text:SetFontObject(font)
+	Text:SetFont(f, fs, ff)
 	D.DataTextPosition(C["datatext"].honorablekills, Text)
 
 	local function OnEvent(self, event) Text:SetText("Kills: "..D.PanelColor..GetPVPLifetimeStats()) end

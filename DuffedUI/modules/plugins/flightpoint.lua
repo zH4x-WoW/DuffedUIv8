@@ -73,7 +73,7 @@ function FlightPointsTaxiChoiceContainer_Update()
 				button.highlight:SetPoint("TOPLEFT", button, "TOPLEFT", 3, -2)
 				button.highlight:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -3, 2)
 				button.name:SetText(name)
-				button.name:SetFontObject("GameFontNormal")
+				button.name:SetFont(C["media"].font, 11, "THINOUTLINE")
 				button.name:SetPoint("LEFT", 22, 0)
 			else
 				button.categoryLeft:Hide()
@@ -85,7 +85,7 @@ function FlightPointsTaxiChoiceContainer_Update()
 				button.name:SetText(name)
 				button.name:SetPoint("LEFT", 11, 0)
 				button.flightpath = flightpathid
-				button.name:SetFontObject("GameFontHighlight")
+				button.name:SetFont(C["media"].font, 11, "THINOUTLINE")
 			end
 			button.isHeader = isHeader
 			button.isExpanded = isExpanded
@@ -97,12 +97,6 @@ function FlightPointsTaxiChoiceContainer_Update()
 	local totalHeight = #taxinodeinfos * (button:GetHeight())
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight)
 end
-
-function FlightPointsTaxiChoiceButton_OnEnter(self)
-	if not self.isHeader then TaxiNodeOnButtonEnter(_G["TaxiButton" .. self.flightpath]) end
-end
-
-function FlightPointsTaxiChoiceButton_OnLeave(self) GameTooltip:Hide() end
 
 function FlightPointsTaxiChoiceButton_OnClick(self, button, down)
 	if self.isHeader then
@@ -169,10 +163,18 @@ function FlightPoints_OnEvent(self, event, ...)
 	if event == "TAXIMAP_OPENED" then
 		firstshow = true
 		FlightPoints_CreateFlyPathTable()
-		FlightPointsTaxiChoice:SetHeight(TaxiFrame:GetHeight() - 24)
+		if TaxiFrame:IsShown() then 
+			FlightPointsTaxiChoice:SetHeight(TaxiFrame:GetHeight() - 24)
+		elseif FlightMapFrame:IsShown() then
+			FlightPointsTaxiChoice:SetHeight(FlightMapFrame:GetHeight())
+		end
 		FlightPointsTaxiChoice:SetWidth(250)
 		FlightPointsTaxiChoice:ClearAllPoints()
-		FlightPointsTaxiChoice:SetPoint("TOPLEFT", TaxiFrame, "BOTTOMRIGHT", 0, TaxiFrame:GetHeight() - 22)
+		if TaxiFrame:IsShown() then
+			FlightPointsTaxiChoice:SetPoint("TOPLEFT", TaxiFrame, "BOTTOMRIGHT", 0, TaxiFrame:GetHeight() - 22)
+		elseif FlightMapFrame:IsShown() then
+			FlightPointsTaxiChoice:SetPoint("TOPLEFT", FlightMapFrame, "BOTTOMRIGHT", 0, FlightMapFrame:GetHeight())
+		end
 		FlightPointsTaxiChoice:Show()
 		FlightPointsTaxiChoice:StripTextures()
 		FlightPointsTaxiChoice:SetTemplate("Transparent")

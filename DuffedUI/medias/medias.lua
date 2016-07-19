@@ -2,9 +2,7 @@ local D, C, L = unpack(select(2, ...))
 
 C["media"] = {
 	["font"] = [[Interface\Addons\DuffedUI\medias\fonts\normal_font.ttf]],
-	["font2"] = [[Interface\Addons\DuffedUI\medias\fonts\normal_font2.ttf]],
 	["dmgfont"] = [[Interface\AddOns\DuffedUI\medias\fonts\combat.ttf]],
-	["pixelfont"] = [[Interface\Addons\DuffedUI\medias\fonts\pixel_font.ttf]],
 
 	["fr_font"] = [=[Interface\Addons\DuffedUI\medias\fonts\normal_font.ttf]=],
 	["fr_dmgfont"] = [=[Interface\AddOns\DuffedUI\medias\fonts\combat.ttf]=],
@@ -40,5 +38,4 @@ C["media"] = {
 	["datatextcolor2"] = { 1, 1, 1 }, -- color of datatext result
 
 	["whisper"] = [[Interface\AddOns\DuffedUI\medias\sounds\whisper.ogg]],
-	["warning"] = [[Interface\AddOns\DuffedUI\medias\sounds\warning.ogg]],
 }

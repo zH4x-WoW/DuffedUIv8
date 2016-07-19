@@ -10,21 +10,6 @@
 	DuffedUIConfigUILocalization.generalcalendarevent = "Deaktiviere die Texturen, der Events, im Kalender"
 	DuffedUIConfigUILocalization.generalautoaccept = "Aktiviere die automatische Einladung von Freunden und Gildenmitgliedern"
 
-	--[[Font]]--
-	DuffedUIConfigUILocalization.font = "Schriftarten"
-	DuffedUIConfigUILocalization.fontduffeduisize = "Schriftgröße der Schriftart 'DuffedUI' (Standard = 11)"
-	DuffedUIConfigUILocalization.fontduffedui_altsize = "Schriftgröße der Schriftart 'DuffedUI Alternativ' (Standard = 12)"
-	DuffedUIConfigUILocalization.fontpixelfontsize = "Schriftgröße der Schriftart 'Pixel Font' (Standard = 12)"
-	DuffedUIConfigUILocalization.fontactionbars = "Schriftart der Aktionsleisten (Auswahl: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r"
-	DuffedUIConfigUILocalization.fontauras = "Schriftart der Auren (Auswahl: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
-	DuffedUIConfigUILocalization.fontclasstimer = "Schriftart des Classtimers (Auswahl: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
-	DuffedUIConfigUILocalization.fontses = "Schriftart des Talentwechslers (Auswahl: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
-	DuffedUIConfigUILocalization.fontdatatext = "Schriftart des Datatexts (Auswahl: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
-	DuffedUIConfigUILocalization.fontunitframes = "Schriftart der Einheitenfenster (Auswahl: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
-	DuffedUIConfigUILocalization.fontscd = "Schriftart der Abklingzeiten 'Zauber' (Auswahl: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
-	DuffedUIConfigUILocalization.fontrcd = "Schriftart der Abklingzeigen 'Raid' (Auswahl: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
-	DuffedUIConfigUILocalization.fontexperience = "Schriftart der 'Erfahrungsleiste' (Auswahl: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI Alternativ|r, |cffC41F3BPixel Font|r)"
-
 	--[[Unit Frames]]--
 	DuffedUIConfigUILocalization.unitframes = "Einheitenfenster"
 	DuffedUIConfigUILocalization.unitframesenable = "Aktiviere die DuffedUI Einheitenfenster"
@@ -37,8 +22,6 @@
 	DuffedUIConfigUILocalization.unitframesColorGradient = "Aktiviere Farbverlauf für die Heilleiste"
 	DuffedUIConfigUILocalization.unitframescharportrait = "Aktviere Charakterportraits am Spieler- und Zielframe"
 	DuffedUIConfigUILocalization.unitframesweakenedsoulbar = "Aktiviere 'Geschwächte Seele' Leiste (Priester ->Rote Leiste)"
-	DuffedUIConfigUILocalization.unitframesclassbar = "Aktiviere die Klassenleisten"
-	DuffedUIConfigUILocalization.unitframesruneofpower = "Aktiviere die 'Rune der Macht' Leiste"
 	DuffedUIConfigUILocalization.unitframestargetauras = "Aktiviere Auren am Einheitenfenster des Ziels"
 	DuffedUIConfigUILocalization.unitframesonlyselfdebuffs = "Zeige nur deine Schwächungszauber am Einheitenfester des Ziels"
 	DuffedUIConfigUILocalization.unitframescombatfeedback = "Zeige Kampf-Feedback auf dem Spieler- und Zieleinheitenfenster"
@@ -48,13 +31,12 @@
 	DuffedUIConfigUILocalization.unitframestotdbsize = "Wähle die Größe für Schwächungszauber vom 'Ziel des Ziels' Einheitenfester"
 	DuffedUIConfigUILocalization.unitframesfocusdebuffs = "Aktiviere Schwächungszauber am Fokuseinheitenfenster"
 	DuffedUIConfigUILocalization.unitframesfocusbutton = "Aktiviere den Fokusbutton für Spieler- / Fokuseinheitenfenster"
-	DuffedUIConfigUILocalization.unitframesattached = "Verbinde die Klassenleisten und die Einheitenfenster"
-	DuffedUIConfigUILocalization.unitframesoocHide = "Verstecke die Klassenleisten, wenn Du nicht im Kampf bist"
 	DuffedUIConfigUILocalization.unitframesplayermodel = "Setze den Portraitstil (Icon oder Model, Standard => Model)"
 	DuffedUIConfigUILocalization.unitframesbuffsize = "Wähle die Größe der Stärkungszauber am Ziel"
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "Wähle die Größe der Schwächungszauber am Ziel"
-	DuffedUIConfigUILocalization.unitframesDruidMana = "Aktiviere die Manaanzeige bei Gestaltswandlung"
-	DuffedUIConfigUILocalization.unitframesAnticipationBar = "Aktiviere die Erwartungsleiste wenn die Fähigkeit gelernt wurde"
+	DuffedUIConfigUILocalization.unitframesclassbar = "Aktiviere die Klassenleiste"
+	DuffedUIConfigUILocalization.unitframesattached = "Verbinde die Klassenleiste mit dem Einheitenfenster"
+	DuffedUIConfigUILocalization.unitframesoocHide = "Verstecke die Klassenleiste wenn Du nicht im Kampf bist"
 
 	--[[Chat]]--
 	DuffedUIConfigUILocalization.chat = "Chat"
@@ -78,19 +60,11 @@
 	DuffedUIConfigUILocalization.castbarplayerwidth = "Setze Breite der Zauberleiste."
 
 	--[[Nameplate]]--
-	DuffedUIConfigUILocalization.nameplate = "Nameplates"
-	DuffedUIConfigUILocalization.nameplateactive = "Enable Nameplates"
-	DuffedUIConfigUILocalization.nameplatedebuffs = "Enable debuff display"
-	DuffedUIConfigUILocalization.nameplateplatewidth = "Set width of nameplates (default = 110)"
-	DuffedUIConfigUILocalization.nameplateplateheight = "Set height of nameplates (default = 7)"
-	DuffedUIConfigUILocalization.nameplateauraswidth = "Set width of Debufficon"
-	DuffedUIConfigUILocalization.nameplateaurasheight = "Set height of Debufficon"
-	DuffedUIConfigUILocalization.nameplateMaxDebuffs = "Set max debuffs to display (default = 5)"
-	DuffedUIConfigUILocalization.nameplatethreat_badcolor = "Bad threat color, varies depending if your a tank or dps/heal"
-	DuffedUIConfigUILocalization.nameplatethreat_goodcolor = "Good threat color, varies depending if your a tank or dps/heal"
-	DuffedUIConfigUILocalization.nameplatethreat_transitioncolor = "Losing/Gaining threat color"
-	DuffedUIConfigUILocalization.nameplatePercent = "Enable Percent-Display on Nameplates"
-	DuffedUIConfigUILocalization.nameplateNTA = "Set Non Target Alpha"
+	DuffedUIConfigUILocalization.nameplate = "Namensplaketten"
+	DuffedUIConfigUILocalization.nameplateactive = "Aktivere Namensplaketten"
+	DuffedUIConfigUILocalization.nameplateplatewidth = "Breite der Namensplaketten (Standard = 110)"
+	DuffedUIConfigUILocalization.nameplateplateheight = "Höhe der Namensplaketten (Standard = 7)"
+	DuffedUIConfigUILocalization.nameplateethreat = "Aktiviere erweitertete Aggroanzeige"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"
@@ -108,9 +82,9 @@
 	DuffedUIConfigUILocalization.actionbarshapeshiftmouseover = "Aktiviere die Haltungsleiste per 'mouseover'"
 	DuffedUIConfigUILocalization.actionbarborderhighlight = "Aktiviere die Proc-Hervorhebung auf den Aktionsleisten (Standard = Deaktiviert)"
 	DuffedUIConfigUILocalization.actionbarpetbuttonsize = "Größe der Begleiter- und Haltungsleistenschaltflächen"
-	DuffedUIConfigUILocalization.actionbarLeftsidebars = "Aktiviere die linke Sidebar an den Chatframes per 'mouseover'"
-	DuffedUIConfigUILocalization.actionbarRightsidebars = "Aktiviere die rechte Sidebar an den Chatframes per 'mouseover'"
-	DuffedUIConfigUILocalization.actionbarSidebarButtonsize = "Setze Größe der Knöpfe für die Sidebars am Chat (nur wenn vertikal)"
+	DuffedUIConfigUILocalization.actionbarLeftsidebars = "Aktiviere die linke Seitenleiste an den Chatframes per 'mouseover'"
+	DuffedUIConfigUILocalization.actionbarRightsidebars = "Aktiviere die rechte Seitenleiste an den Chatframes per 'mouseover'"
+	DuffedUIConfigUILocalization.actionbarSidebarButtonsize = "Setze Größe der Knöpfe für die Seitenleisten am Chat (nur wenn vertikal)"
 
 	--[[Raid Frames]]--
 	DuffedUIConfigUILocalization.raid = "Schlachtzugfenster"
@@ -128,7 +102,7 @@
 	DuffedUIConfigUILocalization.raidshowplayerinparty = "Füge Dein Einheitenfester der Gruppe hinzu"
 	DuffedUIConfigUILocalization.raidframewidth = "Einstellung für die Breite der Einheitenfenster"
 	DuffedUIConfigUILocalization.raidframeheight = "Einstellung für die Höhe der Einheitenfenster"
-	DuffedUIConfigUILocalization.raidlayout = "Wähle Layout für das Schlachtzugfenster (Standard = heal, Werte: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
+	DuffedUIConfigUILocalization.raidlayout = "Wähle Layout für das Schlachtzugfenster (Standard = heal, Werte: |cffC41F3Bheal|r oder |cffC41F3Bdps|r)"
 
 	--[[DataText]]--
 	DuffedUIConfigUILocalization.datatext = "Datatext"
@@ -151,7 +125,6 @@
 	DuffedUIConfigUILocalization.datatextleech = "Position der 'Lebensraubanzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextmastery = "Position der 'Meisterschaftsanzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextmicromenu = "Position der 'Mikromenüanzeige' (0 zum deaktivieren)"
-	DuffedUIConfigUILocalization.datatextmultistrike = "Position der 'Mehrfachschlaganzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextparry = "Position der 'Parrierenanzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextpower = "Position der 'Kraftanzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextprofession = "Position der 'Berufsanzeige' position (0 zum deaktivieren)"
@@ -197,12 +170,8 @@
 	--[[Buffs]]--
 	DuffedUIConfigUILocalization.auras = "Auren"
 	DuffedUIConfigUILocalization.aurasplayer = "Aktiviere die DuffedUI Buff- und Debufffenster"
-	DuffedUIConfigUILocalization.aurasconsolidate = "Aktiviere zusammengelegte Buffs"
 	DuffedUIConfigUILocalization.aurasflash = "Aktiviere das Aufblitzen der Auren bei weniger als 30 Sekunden"
 	DuffedUIConfigUILocalization.aurasclassictimer = "Zeige den klassischen Timer auf den Spieler Auren"
-	DuffedUIConfigUILocalization.aurasbuffnotice = "Aktiviere die Bufferinnerung"
-	DuffedUIConfigUILocalization.auraswarning = "Aktiviere einen Warnton für die Bufferinnerung"
-	DuffedUIConfigUILocalization.aurasbufftracker = "Aktiviere das Bufftracker-Plugin"
 	DuffedUIConfigUILocalization.auraswrap = "Wähle Umbruch der Stärkungszauberleiste (Standard = 18)"
 	DuffedUIConfigUILocalization.aurasInside = "Verschiebe den Timer nach innen"
 
@@ -210,7 +179,6 @@
 	DuffedUIConfigUILocalization.bags = "Taschen"
 	DuffedUIConfigUILocalization.bagsenable = "Aktiviere die 'Alles in einer Tasche' Ansicht"
 	DuffedUIConfigUILocalization.bagsbpr = "Taschenplatzanzahl pro Reihe"
-	DuffedUIConfigUILocalization.bagsmovable = "Aktiviere bewegliche Taschen"
 	DuffedUIConfigUILocalization.bagsscale = "Skalierung für Bank und Taschen"
 	DuffedUIConfigUILocalization.bagsspacing = "Zwischenraum zwischen den Taschenslots"
 	DuffedUIConfigUILocalization.bagsbuttonsize = "Größe der Taschenplätze"
@@ -225,10 +193,11 @@
 	DuffedUIConfigUILocalization.miscsesgearswap = "Aktviere automatischen Setwechsel bei Talentwechsel"
 	DuffedUIConfigUILocalization.miscsesset1 = "Aktiviere das Set für die erste Spezalisierung (muss ein Wert zwischen 1 - 10 sein)"
 	DuffedUIConfigUILocalization.miscsesset2 = "Aktiviere das Set für die zweite Spezalisierung (muss ein Wert zwischen 1 - 10 sein)"
+	DuffedUIConfigUILocalization.miscsesset3 = "Aktiviere das Set für die dritte Spezalisierung (muss ein Wert zwischen 1 - 10 sein)"
+	DuffedUIConfigUILocalization.miscsesset4 = "Aktiviere das Set für die vierte Spezalisierung (muss ein Wert zwischen 1 - 10 sein)"
 	DuffedUIConfigUILocalization.misccombatanimation = "Aktviere die Kampf beginnen und verlassen Anzeige"
 	DuffedUIConfigUILocalization.miscflightpoint = "Zeige alle Flugpunkte auf der Weltkarte an"
 	DuffedUIConfigUILocalization.miscilvlcharacter = "Aktviere die Gegenstandsstufenanzeige im Charakterbildschirm"
-	DuffedUIConfigUILocalization.miscloc = "Deaktiviere die 'Kontrollverlustanzeige' an den Aktionsleisten"
 	DuffedUIConfigUILocalization.miscacm_screen = "Aktiviere ein automatisches Bildschirmfoto beim Erreichen eines Achievements"
 	DuffedUIConfigUILocalization.miscAFKCamera = "Aktiviere die AFK Kamera"
 	DuffedUIConfigUILocalization.miscXPBar = "Aktiviere XP-Leiste"
@@ -243,6 +212,7 @@
 	DuffedUIConfigUILocalization.duffeddispelannouncement = "Aktviere Reinigungswarnungen"
 	DuffedUIConfigUILocalization.duffedspellannounce = "Aktiviere Aurawarnungen"
 	DuffedUIConfigUILocalization.errorenable = "Verstecke die Fehlermeldungen, die in der Mitte Deines Bildschirms immer wieder angezeigt werden"
+	DuffedUIConfigUILocalization.duffedtalkinghead = "Deaktiviere den Emoteframe von NPC's"
 
 	--[[Loot]]--
 	DuffedUIConfigUILocalization.loot = "Beutefenster"
@@ -261,7 +231,7 @@
 	DuffedUIConfigUILocalization.tooltipMouse = "Aktiviere Tooltip am Mauszeiger"
 
 	--[[Merchant]]--
-	DuffedUIConfigUILocalization.merchant = "H ändler"
+	DuffedUIConfigUILocalization.merchant = "Händler"
 	DuffedUIConfigUILocalization.merchantsellgrays = "Verkaufe graue Gegenstände automatisch"
 	DuffedUIConfigUILocalization.merchantautorepair = "Repariere beschädigte Rüstung automatisch"
 	DuffedUIConfigUILocalization.merchantsellmisc = "Verkaufe vordefinierte Gegenstände automatisch (Müll, NICHT grau)"

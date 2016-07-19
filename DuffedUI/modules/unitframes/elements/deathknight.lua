@@ -2,19 +2,11 @@ local D, C, L = unpack(select(2, ...))
 
 local class = select(2, UnitClass("player"))
 local texture = C["media"]["normTex"]
-local font = D.Font(C["font"]["unitframes"])
 local layout = C["unitframes"]["layout"]
 
 if class ~= "DEATHKNIGHT" then return end
 
 D["ClassRessource"]["DEATHKNIGHT"] = function(self)
-	local RuneColors = {
-			{.69, .31, .31}, -- blood
-			{.33, .59, .33}, -- unholy
-			{.31, .45, .63}, -- frost
-			{.84, .75, .65}, -- death
-			{0, .82, 1 }, -- runic power
-	}
 	local Runes = {}
 	local RuneMap = { 1, 2, 3, 4, 5, 6 }
 
@@ -40,7 +32,7 @@ D["ClassRessource"]["DEATHKNIGHT"] = function(self)
 	for i = 1, 6 do
 		local rune = CreateFrame("StatusBar", "Rune"..i, Runes)
 		rune:SetStatusBarTexture(texture)
-		rune:SetStatusBarColor(unpack(RuneColors[math.ceil(RuneMap[i] / 2) ]))
+		rune:SetStatusBarColor(.84, .75, .65)
 		rune:SetMinMaxValues(0, 10)
 		rune:SetHeight(5)
 
@@ -57,7 +49,7 @@ D["ClassRessource"]["DEATHKNIGHT"] = function(self)
 
 	local function UpdateRune(id, start, duration, finished)
 		local rune = Runes[id]
-		rune:SetStatusBarColor(unpack(RuneColors[GetRuneType(RuneMap[id])]))
+		rune:SetStatusBarColor(.84, .75, .65)
 		rune:SetMinMaxValues(0, duration)
 
 		if finished then rune:SetValue(duration) else rune:SetValue(GetTime() - start) end
@@ -87,6 +79,5 @@ D["ClassRessource"]["DEATHKNIGHT"] = function(self)
 			RuneFrame:ClearAllPoints()
 		end
 	end)
-
 	if C["unitframes"].oocHide then D["oocHide"](Runes) end
 end

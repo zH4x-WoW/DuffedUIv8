@@ -1,5 +1,4 @@
 ﻿if GetLocale() == "zhCN" then
-
 	--[[General]]--
 	DuffedUIConfigUILocalization.general = "综合"
 	DuffedUIConfigUILocalization.generalautoscale = "UI自动缩放"
@@ -10,21 +9,6 @@
 	DuffedUIConfigUILocalization.generalblizzardreskin = "重设暴雪框体材质以适应DuffedUI"
 	DuffedUIConfigUILocalization.generalcalendarevent = "禁用行事历事件特殊材质显示"
 	DuffedUIConfigUILocalization.generalautoaccept = "启用自动接受邀请(好友或公会成员)"
-
-	--[[Font]]--
-	DuffedUIConfigUILocalization.font = "字体"
-	DuffedUIConfigUILocalization.fontduffeduisize = " DuffedUI字体大小(默认 = 11)"
-	DuffedUIConfigUILocalization.fontduffedui_altsize = "DuffedUI另类字体(Alternativ)大小(默认 = 12)"
-	DuffedUIConfigUILocalization.fontpixelfontsize = "Pixel像素字大小  (默认 = 12)"
-	DuffedUIConfigUILocalization.fontactionbars = "快捷栏文字 (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI 另类字体(Alternativ)|r, |cffC41F3BPixel像素字|r)"
-	DuffedUIConfigUILocalization.fontauras = "光环文字 (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI 另类字体(Alternativ)|r, |cffC41F3BPixel像素字|r)"
-	DuffedUIConfigUILocalization.fontclasstimer = "职业定时器文字 (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI 另类字体(Alternativ)|r, |cffC41F3BPixel像素字|r)"
-	DuffedUIConfigUILocalization.fontses = "自动切换器文字 (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI 另类字体(Alternativ)|r, |cffC41F3BPixel像素字|r)"
-	DuffedUIConfigUILocalization.fontdatatext = "信息栏文字 (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI 另类字体(Alternativ)|r, |cffC41F3BPixel像素字|r)"
-	DuffedUIConfigUILocalization.fontunitframes = "头像单位框体文字(Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI 另类字体(Alternativ)|r, |cffC41F3BPixel像素字|r)"
-	DuffedUIConfigUILocalization.fontscd = "法术冷却文字 (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI 另类字体(Alternativ)|r, |cffC41F3BPixel像素字|r)"
-	DuffedUIConfigUILocalization.fontrcd = "团队冷却文字 (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI 另类字体(Alternativ)|r, |cffC41F3BPixel像素字|r)"
-	DuffedUIConfigUILocalization.fontexperience = "经验条文字 (Values: |cffC41F3BDuffedUI|r, |cffC41F3BDuffedUI 另类字体(Alternativ)|r, |cffC41F3BPixel像素字|r)"
 
 	--[[Unit Frames]]--
 	DuffedUIConfigUILocalization.unitframes = "单位框体"
@@ -38,8 +22,6 @@
 	DuffedUIConfigUILocalization.unitframesColorGradient = "启用生命条颜色渐变功能(随血量变化)"
 	DuffedUIConfigUILocalization.unitframescharportrait = "为自身和目标启用头像显示"
 	DuffedUIConfigUILocalization.unitframesweakenedsoulbar = "启用灵魂虚弱指示 (牧师)"
-	DuffedUIConfigUILocalization.unitframesclassbar = "启用职业条"
-	DuffedUIConfigUILocalization.unitframesruneofpower = "启用秘法符能能量条（法师）"
 	DuffedUIConfigUILocalization.unitframestargetauras = "启用目标光环"
 	DuffedUIConfigUILocalization.unitframesonlyselfdebuffs = "只在目标框体上显示你释放的DEBUFF"
 	DuffedUIConfigUILocalization.unitframescombatfeedback = "在玩家和目标框体上显示战斗信息"
@@ -49,13 +31,12 @@
 	DuffedUIConfigUILocalization.unitframestotdbsize = "设置目标的目标减益光环大小"
 	DuffedUIConfigUILocalization.unitframesfocusdebuffs = "启用焦点目标Debuff"
 	DuffedUIConfigUILocalization.unitframesfocusbutton = "在玩家/焦点目标框体上启用焦点按钮"
-	DuffedUIConfigUILocalization.unitframesattached = "职业条依附在头像框体上"
-	DuffedUIConfigUILocalization.unitframesoocHide = "脱离战斗隐藏职业条"
 	DuffedUIConfigUILocalization.unitframesplayermodel = "设定头像显示类型(职业图标 or 3D头像, 默认 => 3D头像)"
 	DuffedUIConfigUILocalization.unitframesbuffsize = "设定目标框体增益光环大小"
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "设定目标框体减益光环大小"
-	DuffedUIConfigUILocalization.unitframesDruidMana = "Enable the display for Mana if shapeshifted"
-	DuffedUIConfigUILocalization.unitframesAnticipationBar = "Enable Anticipationbar if skill is learned"
+	DuffedUIConfigUILocalization.unitframesclassbar = "Enable Classbars"
+	DuffedUIConfigUILocalization.unitframesattached = "Attach Classbars to Unitframes"
+	DuffedUIConfigUILocalization.unitframesoocHide = "Hide Classbars out of Combat"
 
 	--[[Chat]]--
 	DuffedUIConfigUILocalization.chat = "聊天框体"
@@ -81,17 +62,9 @@
 	--[[Nameplate]]--
  	DuffedUIConfigUILocalization.nameplate = "姓名版"
  	DuffedUIConfigUILocalization.nameplateactive = "启用姓名版"
- 	DuffedUIConfigUILocalization.nameplatedebuffs = "启用姓名板debuff显示"
  	DuffedUIConfigUILocalization.nameplateplatewidth = "设置姓名板宽度 (默认 = 110)"
  	DuffedUIConfigUILocalization.nameplateplateheight = "设置姓名板高度 (默认 = 7)"
- 	DuffedUIConfigUILocalization.nameplateauraswidth = "设置Debuff图标宽度"
- 	DuffedUIConfigUILocalization.nameplateaurasheight = "设置Debuff图标高度"
- 	DuffedUIConfigUILocalization.nameplateMaxDebuffs = "设置最大Debuff显示数量 (默认 = 5)"
- 	DuffedUIConfigUILocalization.nameplatethreat_badcolor = "高仇恨着色,根据你的职业Tank or dps/heal而改变"
- 	DuffedUIConfigUILocalization.nameplatethreat_goodcolor = "低仇恨着色,根据你的职业Tank or dps/heal而改变"
- 	DuffedUIConfigUILocalization.nameplatethreat_transitioncolor = "失去/获得仇恨颜色"
- 	DuffedUIConfigUILocalization.nameplatePercent = "启用数字百分比显示"
-	DuffedUIConfigUILocalization.nameplateNTA = "Set Non Target Alpha"
+	DuffedUIConfigUILocalization.nameplateethreat = "Enable Enhanced Threat"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "快捷栏"
@@ -152,7 +125,6 @@
 	DuffedUIConfigUILocalization.datatextleech = "吸血(输入0关闭显示)"
 	DuffedUIConfigUILocalization.datatextmastery = "精通(输入0关闭显示)"
 	DuffedUIConfigUILocalization.datatextmicromenu = "微型系统菜单(输入0关闭显示)"
-	DuffedUIConfigUILocalization.datatextmulstistrike = "双击率(输入0关闭显示)"
 	DuffedUIConfigUILocalization.datatextparry = "格挡率(输入0关闭显示)"
 	DuffedUIConfigUILocalization.datatextpower = "能量(输入0关闭显示)"
 	DuffedUIConfigUILocalization.datatextprofession = "专业(输入0关闭显示)"
@@ -198,19 +170,14 @@
 	--[[Buffs]]--
 	DuffedUIConfigUILocalization.auras = "光环"
 	DuffedUIConfigUILocalization.aurasplayer = "启用DuffedUI Buff/Debuff 光环框体"
-	DuffedUIConfigUILocalization.aurasconsolidate = "启用Buffs强化显示模式"
 	DuffedUIConfigUILocalization.aurasflash = "启用光环持续时间低于30秒闪烁动画"
 	DuffedUIConfigUILocalization.aurasclassictimer = "传统模式显示玩家光环"
-	DuffedUIConfigUILocalization.aurasbuffnotice = "启用光环缺失提示"
-	DuffedUIConfigUILocalization.auraswarning = "启用提示音提醒光环缺失"
-	DuffedUIConfigUILocalization.aurasbufftracker = "启用光环追踪增强插件"
 	DuffedUIConfigUILocalization.auraswrap = "设定(小地图旁)单行Buff显示数量(默认 = 18)"
 
 	--[[Bags]]--
 	DuffedUIConfigUILocalization.bags = "背包"
 	DuffedUIConfigUILocalization.bagsenable = "开启背包整合"
 	DuffedUIConfigUILocalization.bagsbpr = "设定背包每行显示按钮"
-	DuffedUIConfigUILocalization.bagsmovable = "使背包可移动"
 	DuffedUIConfigUILocalization.bagsscale = "设置背包/银行框体缩放大小"
 	DuffedUIConfigUILocalization.bagsspacing = "设置包内物品显示间距"
 	DuffedUIConfigUILocalization.bagsbuttonsize = "设置筛选器(搜索框)大小"
@@ -225,10 +192,11 @@
 	DuffedUIConfigUILocalization.miscsesgearswap = "启用切换天赋时自动切换装备功能"
 	DuffedUIConfigUILocalization.miscsesset1 = "为主天赋设置装备序号 (必须是1-10之间的序号)"
 	DuffedUIConfigUILocalization.miscsesset2 = "为副天赋设置装备序号 (必须是1-10之间的序号)"
+	DuffedUIConfigUILocalization.miscsesset3 = "Set set for third spec (must be an value between 1 10)"
+	DuffedUIConfigUILocalization.miscsesset4 = "Set set for fourth spec (must be an value between 1 10)"
 	DuffedUIConfigUILocalization.misccombatanimation = "启用进战/脱战动画提示"
 	DuffedUIConfigUILocalization.miscflightpoint = "启用飞行点列表"
 	DuffedUIConfigUILocalization.miscilvlcharacter = "启用人物面板显示装备等级"
-	DuffedUIConfigUILocalization.miscloc = "禁用快捷栏<角色失去控制>功能"
 	DuffedUIConfigUILocalization.miscacm_screen = "启用成就自动截图功能"
 	DuffedUIConfigUILocalization.miscAFKCamera = "启用暂离镜头效果"
 	DuffedUIConfigUILocalization.miscXPBar = "启用经验条"
@@ -243,6 +211,7 @@
 	DuffedUIConfigUILocalization.duffeddispelannouncement = "启用驱散通告"
 	DuffedUIConfigUILocalization.duffedspellannounce = "启用光环通告"
 	DuffedUIConfigUILocalization.duffederrorfilter = "隐藏屏幕中部的错误信息提示"
+	DuffedUIConfigUILocalization.duffedtalkinghead = "Disable the Talking Head-Frame"
 
 	--[[Loot]]--
 	DuffedUIConfigUILocalization.loot = "拾取"
