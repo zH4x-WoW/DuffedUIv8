@@ -98,7 +98,7 @@ end
 
 local function IsPlayerEffectivelyTank()
 	local assignedRole = UnitGroupRolesAssigned("player")
-	
+
 	if assignedRole == "NONE" then
 		local spec GetSpecialization()
 		return spec and GetSpecializationRole(spec) == "TANK"
@@ -120,7 +120,7 @@ function nameplates:SetName()
 			self.SetText("|cffffffff".. text .."|r")
 		elseif level then
 			local colr = GetQuestDifficultyColor(level)
-			self:SetText(D["RGBToHex"](colr.r, colr.g, colr.b) .. level ..  "|r " .. "|cffffffff".. text .."|r") 
+			self:SetText(D["RGBToHex"](colr.r, colr.g, colr.b) .. level ..  "|r " .. "|cffffffff".. text .."|r")
 		end
     end
 end
@@ -166,7 +166,7 @@ end
 function nameplates:UpdateAggronameplates()
 	local isTanking, threatStatus = UnitDetailedThreatSituation("player", self.displayedUnit)
 	-- (3 = securely tanking, 2 = insecurely tanking, 1 = not tanking but higher threat than tank, 0 = not tanking and lower threat than tank)
-	
+
 	if IsPlayerEffectivelyTank() then
 		if not isTanking then
 			nameplates:colorHealth()
@@ -270,7 +270,7 @@ function nameplates:setupPlate(options)
 	name:SetFont(C["media"].font, 8)
 	name:SetShadowOffset(1.25, -1.25)
 	hooksecurefunc(name, "Show", nameplates.SetName)
-	
+
 	highlight:Kill()
 	shield:Kill()
 	aggro:Kill()
@@ -284,18 +284,6 @@ function nameplates:SetClassNameplateBar(frame)
 	self.ClassBar = frame
 	if frame then frame:SetScale(1.05) end
 end
-
---[[function nameplates:SetupPlayerNamePlate(setupOptions, frameOptions)
-	local parent = self:GetParent()
-
-	print(parent:GetName(), self:GetName())
-	--apply setpoint to parent
-	print(parent:GetPoint())
-
-	parent:ClearAllPoints()
-	parent:SetPoint("BOTTOM", 0, 370)
-	parent:Show()
-end]]--
 
 function nameplates:enable()
 	local active = C["nameplate"].active
@@ -319,7 +307,6 @@ function nameplates:enable()
 	self.ClassBar = NamePlateDriverFrame.nameplateBar
 	if self.ClassBar then self.ClassBar:SetScale(1.05) end
 	hooksecurefunc(NamePlateDriverFrame, "SetClassNameplateBar", self.SetClassNameplateBar)
-	--hooksecurefunc("DefaultCompactNamePlateFrameSetupInternal", self.SetupPlayerNamePlate)
 
 	hooksecurefunc("DefaultCompactNamePlateFrameSetupInternal", self.setupPlate)
 	if C["nameplate"]["ethreat"] then
