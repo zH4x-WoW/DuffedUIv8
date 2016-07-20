@@ -25,19 +25,19 @@ D.DataTextPosition(C["datatext"].garrison, Text)
 --[[Update for textfield]]--
 local function Update(self, event)
 	if not GarrisonMissionFrame then LoadAddOn("Blizzard_GarrisonUI") end
-	--GarrisonMissionList_UpdateMissions()
 
 	local missions = GarrisonMissionFrame.MissionTab.MissionList.inProgressMissions
 	local count = 0
 
-	--[[C_Garrison.GetInProgressMissions(missions)
+	C_Garrison.GetInProgressMissions(missions, LE_FOLLOWER_TYPE_GARRISON_6_0)
 	for i = 1, #missions do
 		if missions[i].inProgress then
 			local tl = missions[i].timeLeft:match("%d")
 			if tl ~= "0" then count = count + 1 end
 		end
-	end]]
-	if count > 0 then Text:SetText(Stat.Color1 .. format(GARRISON_LANDING_IN_PROGRESS, count)) else Text:SetText(Stat.Color2 .. GARRISON_LOCATION_TOOLTIP) end
+	end
+
+	if (count > 0) then self.Text:SetText(Stat.Color1 .. format(GARRISON_LANDING_IN_PROGRESS, count)) else self.Text:SetText(Stat.Color2 .. GARRISON_LOCATION_TOOLTIP) end
 	self:SetAllPoints(Text)
 end
 
@@ -61,8 +61,9 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:AddLine(" ")
 
 	GameTooltip:AddDoubleLine("Active " .. GARRISON_MISSIONS)
+	local missions = GarrisonMissionFrame.MissionTab.MissionList.inProgressMissions
 	local num = C_Garrison.GetNumFollowers()
-	for k,v in pairs(C_Garrison.GetInProgressMissions()) do
+	for k,v in pairs(C_Garrison.GetInProgressMissions(missions, LE_FOLLOWER_TYPE_GARRISON_6_0)) do
 		GameTooltip:AddDoubleLine(v["name"], v["timeLeft"], 1, 1, 1)
 		num = num - v["numFollowers"]
 	end
@@ -70,7 +71,7 @@ Stat:SetScript("OnEnter", function(self)
 
 	GameTooltip:AddDoubleLine(GARRISON_FOLLOWERS .. " & " .. GARRISON_MISSIONS)
 	GameTooltip:AddDoubleLine(GARRISON_FOLLOWERS .. ":", num .. "/" .. C_Garrison.GetNumFollowers(), 1, 1, 1)
-	GameTooltip:AddDoubleLine(GARRISON_MISSIONS .. ":", #C_Garrison.GetInProgressMissions() .. "/" .. #C_Garrison.GetAvailableMissions(), 1, 1, 1)
+	GameTooltip:AddDoubleLine(GARRISON_MISSIONS .. ":", #C_Garrison.GetInProgressMissions(missions, LE_FOLLOWER_TYPE_GARRISON_6_0) .. "/" .. #C_Garrison.GetAvailableMissions(), 1, 1, 1)
 	GameTooltip:AddLine(" ")
 
 	GameTooltip:AddDoubleLine(Currency(824))
