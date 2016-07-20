@@ -6,7 +6,7 @@ local function DisableTexture(self, texture)
 	end
 end
 
-function AS:Blizzard_ZoneAbilityButton()
+function AS:Blizzard_AbilityButton()
 	ZoneAbilityFrame.SpellButton:SetNormalTexture('')
 	AS:SetTemplate(ZoneAbilityFrame.SpellButton)
 	AS:StyleButton(ZoneAbilityFrame.SpellButton)
@@ -19,7 +19,7 @@ function AS:Blizzard_ZoneAbilityButton()
 	hooksecurefunc(ZoneAbilityFrame.SpellButton.Style, 'SetTexture', DisableTexture)
 end
 
-AS:RegisterSkin('Blizzard_ZoneAbilityButton', AS.Blizzard_ZoneAbilityButton)
+AS:RegisterSkin('Blizzard_AbilityButton', AS.Blizzard_AbilityButton)
 
 function AS:Blizzard_ExtraActionButton()
 	ExtraActionButton1:SetNormalTexture('')

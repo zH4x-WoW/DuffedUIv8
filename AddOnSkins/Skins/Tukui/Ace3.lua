@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+--[[local AS = unpack(AddOnSkins)
 
 if AS:CheckAddOn('ElvUI') then return end
 
@@ -125,17 +125,17 @@ function AS:Ace3()
 		elseif TYPE == 'InlineGroup' or TYPE == 'TreeGroup' or TYPE == 'TabGroup' or TYPE == 'SimpleGroup' or TYPE == 'Frame' or TYPE == 'DropdownGroup' then
 			local frame = widget.content:GetParent()
 			if TYPE == 'Frame' then
-				AS:StripTextures(frame)
+				--AS:StripTextures(frame)
 				for i=1, frame:GetNumChildren() do
 					local child = select(i, frame:GetChildren())
 					if child:GetObjectType() == 'Button' and child:GetText() then
-						AS:SkinButton(child)
+						--AS:SkinButton(child)
 					else
-						AS:StripTextures(child)
+						--AS:StripTextures(child)
 					end
 				end
 			end
-			AS:SetTemplate(frame, 'Transparent')
+			--AS:SetTemplate(frame, 'Transparent')
 
 			if widget.treeframe then
 				AS:SetTemplate(widget.treeframe, 'Transparent')
@@ -193,4 +193,4 @@ function AS:Ace3()
 	end
 end
 
-AS:RegisterSkin('Ace3', AS.Ace3)
+AS:RegisterSkin('Ace3', AS.Ace3)]]--
