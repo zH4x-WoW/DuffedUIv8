@@ -30,13 +30,13 @@ local function Update(self, event)
 	local missions = GarrisonMissionFrame.MissionTab.MissionList.inProgressMissions
 	local count = 0
 
-	C_Garrison.GetInProgressMissions(missions)
+	--[[C_Garrison.GetInProgressMissions(missions)
 	for i = 1, #missions do
 		if missions[i].inProgress then
 			local tl = missions[i].timeLeft:match("%d")
 			if tl ~= "0" then count = count + 1 end
 		end
-	end
+	end]]
 	if count > 0 then Text:SetText(Stat.Color1 .. format(GARRISON_LANDING_IN_PROGRESS, count)) else Text:SetText(Stat.Color2 .. GARRISON_LOCATION_TOOLTIP) end
 	self:SetAllPoints(Text)
 end
