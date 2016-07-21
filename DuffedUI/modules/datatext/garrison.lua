@@ -37,7 +37,7 @@ local function Update(self, event)
 		end
 	end
 
-	if (count > 0) then self.Text:SetText(Stat.Color1 .. format(GARRISON_LANDING_IN_PROGRESS, count)) else self.Text:SetText(Stat.Color2 .. GARRISON_LOCATION_TOOLTIP) end
+	if (count > 0) then Text:SetText(Stat.Color1 .. format(GARRISON_LANDING_IN_PROGRESS, count)) else Text:SetText(Stat.Color2 .. GARRISON_LOCATION_TOOLTIP) end
 	self:SetAllPoints(Text)
 end
 
@@ -52,7 +52,9 @@ Stat:SetScript("OnEnter", function(self)
 	if not C["datatext"].ShowInCombat then
 		if InCombatLockdown() then return end
 	end
-
+	
+	if D["Level"] < 91 then return end -- Otherwise the tooltip fires an error for low chars. Better solutons?
+	
 	local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
@@ -60,24 +62,23 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:AddLine(Stat.Color1 .. GARRISON_LANDING_PAGE_TITLE)
 	GameTooltip:AddLine(" ")
 
-	GameTooltip:AddDoubleLine("Active " .. GARRISON_MISSIONS)
+	GameTooltip:AddDoubleLine("Aktive " .. GARRISON_MISSIONS)
 	local missions = GarrisonMissionFrame.MissionTab.MissionList.inProgressMissions
-	local num = C_Garrison.GetNumFollowers()
+	local num = C_Garrison.GetNumFollowers(LE_FOLLOWER_TYPE_GARRISON_6_0)
 	for k,v in pairs(C_Garrison.GetInProgressMissions(missions, LE_FOLLOWER_TYPE_GARRISON_6_0)) do
 		GameTooltip:AddDoubleLine(v["name"], v["timeLeft"], 1, 1, 1)
 		num = num - v["numFollowers"]
 	end
-	GameTooltip:AddLine(" ")
+	--GameTooltip:AddLine(" ")
 
-	GameTooltip:AddDoubleLine(GARRISON_FOLLOWERS .. " & " .. GARRISON_MISSIONS)
-	GameTooltip:AddDoubleLine(GARRISON_FOLLOWERS .. ":", num .. "/" .. C_Garrison.GetNumFollowers(), 1, 1, 1)
-	GameTooltip:AddDoubleLine(GARRISON_MISSIONS .. ":", #C_Garrison.GetInProgressMissions(missions, LE_FOLLOWER_TYPE_GARRISON_6_0) .. "/" .. #C_Garrison.GetAvailableMissions(), 1, 1, 1)
+	--GameTooltip:AddDoubleLine(GARRISON_FOLLOWERS .. " & " .. GARRISON_MISSIONS)
+	--GameTooltip:AddDoubleLine(GARRISON_FOLLOWERS .. ":", num .. "/" .. C_Garrison.GetNumFollowers(LE_FOLLOWER_TYPE_GARRISON_6_0), 1, 1, 1)
+	--GameTooltip:AddDoubleLine(GARRISON_MISSIONS .. ":", #C_Garrison.GetInProgressMissions(missions, LE_FOLLOWER_TYPE_GARRISON_6_0) .. "/" .. #C_Garrison.GetAvailableMissions(), 1, 1, 1)
 	GameTooltip:AddLine(" ")
-
 	GameTooltip:AddDoubleLine(Currency(824))
-	GameTooltip:AddDoubleLine(Currency(1101))
+	GameTooltip:AddDoubleLine(Currency(1101))	
 	GameTooltip:Show()
 end)
 Stat:SetScript("OnLeave", function() GameTooltip:Hide() end)
 Stat:SetScript("OnEvent", Update)
-Stat:SetScript("OnMouseDown", function() GarrisonLandingPageMinimapButton_OnClick() end)
+Stat:SetScript("OnMouseDown", function() GarrisonLandingPage_Toggle() end)
