@@ -222,6 +222,7 @@ if D.Client == "deDE" then
 		["specmenu"] = "Spezialisierungsauswahl",
 		["specerror"] = "Diese Spezialisierung ist bereits aktiv!",
 		["specdata"] = "Spez: ",
+		["reward"] = "Belohnung: ",
 	}
 
 	L["Slots"] = {

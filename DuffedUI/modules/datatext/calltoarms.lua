@@ -76,7 +76,7 @@ if C["datatext"].calltoarms and C["datatext"].calltoarms > 0 then
 			Text:SetText(Stat.Color1..QUEUE_TIME_UNAVAILABLE.."|r")
 		else
 			if tankReward or healerReward or dpsReward then
-				Text:SetText(Stat.Color1..BATTLEGROUND_HOLIDAY..":|r"..Stat.Color2..MakeString(tankReward, healerReward, dpsReward, true).."|r")
+				Text:SetText(Stat.Color1..L["dt"]["reward"]..":|r"..Stat.Color2..MakeString(tankReward, healerReward, dpsReward, true).."|r")
 			else
 				Text:SetText(Stat.Color1..LOOKING_FOR_DUNGEON.."|r")
 			end
