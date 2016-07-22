@@ -201,23 +201,19 @@ end
 
 --[[Generating WOWHead-Link]]
 hooksecurefunc("QuestObjectiveTracker_OnOpenDropDown", function(self)
-	for i = 1, GetNumQuestWatches() do
-		local _, _, questLogIndex, _, _, _, _, _, _, _, _, _, _, _, _ = GetQuestWatchInfo(i)
-		local info
-		questID = GetQuestLogTitle(questLogIndex)
-		info = UIDropDownMenu_CreateInfo()
-		info.text = lST .. "-Link"
-		info.func = function(id)
-			local inputBox = StaticPopup_Show("WATCHFRAME_URL")
-			inputBox.editBox:SetText(lQ:format(questID))
-			inputBox.editBox:HighlightText()
-		end
-		info.arg1 = questID
-		info.noClickSound = 1
-		info.isNotRadio = true
-		info.notCheckable = 1
-		UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
-	end
+	local _, b, i, info, questID
+	b = self.activeFrame
+	questID = b.id
+	info = UIDropDownMenu_CreateInfo()
+	info.text = lST .. "-Link"
+	info.func = function(id)
+		local inputBox = StaticPopup_Show("WATCHFRAME_URL")
+		inputBox.editBox:SetText(lQ:format(questID))
+		inputBox.editBox:HighlightText()
+  	end
+	info.arg1 = questID
+	info.notCheckable = true
+	UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
 end)
 
 hooksecurefunc("AchievementObjectiveTracker_OnOpenDropDown", function(self)
