@@ -28,7 +28,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	BrowseNextPageButton:Size(20)
 	BrowseNextPageButton:SetPoint('TOPRIGHT', "$parent", "TOPRIGHT", 67, -60)
 	BrowseBuyoutButton:Point("RIGHT", BrowseCloseButton, "LEFT", -4, 0)
-	BrowseBidButton:Point("RIGHT", BrowseBuyoutButton, "LEFT", -4, 0)		
+	BrowseBidButton:Point("RIGHT", BrowseBuyoutButton, "LEFT", -4, 0)
 	AS:SkinEditBox(BrowseName)
 	AS:SkinEditBox(BrowseMinLevel)
 	AS:SkinEditBox(BrowseMaxLevel)
@@ -136,13 +136,14 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	AS:CreateBackdrop(AuctionProgressFrame)
 	AuctionProgressFrame.Backdrop:SetOutside(AuctionProgressBarIcon)
 	AuctionProgressFrame.Backdrop:SetFrameLevel(AuctionProgressFrame:GetFrameLevel())
+--[[
 	AuctionProgressBarIcon:SetSize(24, 24)
 	AuctionProgressBarIcon:SetPoint("RIGHT", "$parent", "LEFT", -10, 0)
 	AS:SkinTexture(AuctionProgressBarIcon)
 
 	AuctionProgressBarText:ClearAllPoints()
 	AuctionProgressBarText:SetPoint("CENTER")
-
+]]--
 	AS:SkinStatusBar(AuctionProgressBar, true)
 	AuctionProgressBar:SetHeight(24)
 
@@ -171,7 +172,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	end
 
 	AuctionFrameTab1:Point("TOPLEFT", AuctionFrame, "BOTTOMLEFT", -5, 2)
-	
+
 	for i = 1, AuctionFrame.numTabs do
 		AS:SkinTab(_G["AuctionFrameTab"..i])
 	end
@@ -213,7 +214,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 		Button:GetHighlightTexture():SetPoint("BOTTOMRIGHT", Button, "BOTTOMRIGHT", -2, 5)
 		Button:GetPushedTexture():SetAllPoints(Button:GetHighlightTexture())
 	end
-	
+
 	for i = 1, NUM_AUCTIONS_TO_DISPLAY do
 		local Button = _G["AuctionsButton"..i]
 		local Icon = _G["AuctionsButton"..i.."Item"]
@@ -241,7 +242,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 		Button:GetHighlightTexture():SetPoint("BOTTOMRIGHT", Button, "BOTTOMRIGHT", -2, 5)
 		Button:GetPushedTexture():SetAllPoints(Button:GetHighlightTexture())
 	end
-	
+
 	for i = 1, NUM_BIDS_TO_DISPLAY do
 		local Button = _G["BidButton"..i]
 		local Icon = _G["BidButton"..i.."Item"]
@@ -331,7 +332,7 @@ function AS:Blizzard_BlackMarket(event, addon)
 	for _, Tab in pairs(Tabs) do
 		AS:SkinTab(BlackMarketFrame[Tab])
 		BlackMarketFrame[Tab].Backdrop:Point("TOPLEFT", BlackMarketFrame[Tab], 3, 0)
-		BlackMarketFrame[Tab].Backdrop:Point("BOTTOMRIGHT", BlackMarketFrame[Tab], -3, 0)	
+		BlackMarketFrame[Tab].Backdrop:Point("BOTTOMRIGHT", BlackMarketFrame[Tab], -3, 0)
 	end
 
 	hooksecurefunc("BlackMarketScrollFrame_Update", function()
