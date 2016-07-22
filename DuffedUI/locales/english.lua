@@ -220,6 +220,7 @@ L["dt"] = {
 	["specmenu"] = "Specialization Selector",
 	["specerror"] = "You're already in that spec!",
 	["specdata"] = "spec: ",
+	["reward"] = "Reward: ",
 }
 
 L["Slots"] = {
