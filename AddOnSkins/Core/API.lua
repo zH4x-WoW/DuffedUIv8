@@ -634,10 +634,10 @@ function AS:SkinSlideBar(Frame, Height, MoveText)
 
 	if (Frame:GetWidth() < Frame:GetHeight()) then
 		Frame:Width(Height)
-		--Frame:GetThumbTexture():Size(Frame:GetWidth(), Frame:GetWidth() + 4)
+		Frame:GetThumbTexture():Size(Frame:GetWidth(), Frame:GetWidth() + 4)
 	else
 		Frame:Height(Height)
-		--Frame:GetThumbTexture():Size(Height  4, Height)
+		Frame:GetThumbTexture():Size(Height + 4, Height)
 	end
 end
 

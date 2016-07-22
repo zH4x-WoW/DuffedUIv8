@@ -49,7 +49,7 @@ D["DuffedCredits"] = {
 	"Hizuro",
 	"Chrisey",
 	"Niraya",
-	"Roflman",
+	"Rolfman",
 	"siweia",
 	"Kahad",
 	"Blinks",
