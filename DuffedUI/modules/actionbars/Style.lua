@@ -292,7 +292,8 @@ D.ShowHighlightActionButton = function(self)
 			Animation:SetLooping("BOUNCE")
 
 			local FadeOut = Animation:CreateAnimation("Alpha")
-			FadeOut:SetChange(-1)
+			FadeOut:SetFromAlpha(1)
+			FadeOut:SetToAlpha(0)
 			FadeOut:SetDuration(.40)
 			FadeOut:SetSmoothing("IN_OUT")
 
