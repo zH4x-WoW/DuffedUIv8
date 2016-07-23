@@ -221,6 +221,7 @@ if D.Client == "itIT" then
 		["specmenu"] = "Specialization Selector",
 		["specerror"] = "You're already in that spec!",
 		["specdata"] = "spec: ",
+		["reward"] = "Reward: ",
 	}
 
 	L["Slots"] = {

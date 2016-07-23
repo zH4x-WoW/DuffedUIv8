@@ -13,6 +13,7 @@ local BagHelpBox = BagHelpBox
 local ButtonSize = C["bags"].buttonsize
 local ButtonSpacing = C["bags"].spacing
 local ItemsPerRow = C["bags"].bpr
+local move = D["move"]
 
 local Boxes = {
 	BagItemSearchBox,
@@ -212,12 +213,7 @@ function CreateContainer(storagetype, ...)
 	Container:Hide()
 	Container:SetTemplate("Transparent")
 	Container:EnableMouse(true)
-	if C["bags"].movable then
-		Container:SetMovable(true)
-		Container:SetClampedToScreen(true)
-		Container:SetScript("OnMouseDown", function() Container:ClearAllPoints() Container:StartMoving() end)
-		Container:SetScript("OnMouseUp", function() Container:StopMovingOrSizing() end)
-	end
+	move:RegisterFrame(Container)
 
 	if (storagetype == "Bag") then
 		local Sort = BagItemAutoSortButton
@@ -227,7 +223,7 @@ function CreateContainer(storagetype, ...)
 		BagsContainer:SetParent(Container)
 		BagsContainer:SetWidth(10)
 		BagsContainer:SetHeight(10)
-		BagsContainer:SetPoint("BOTTOMRIGHT", Container, "TOPRIGHT", 0, 3)
+		BagsContainer:SetPoint("TOPRIGHT", Container, "TOPLEFT", -3, 0)
 		BagsContainer:SetTemplate("Transparent")
 
 		if C["bags"]["SortingButton"] then
@@ -241,7 +237,10 @@ function CreateContainer(storagetype, ...)
 			Sort.Text:SetPoint("CENTER")
 			Sort.Text:SetText(BAG_FILTER_CLEANUP)
 			Sort.Text:SetTextColor(1, 1, 1)
-			Sort:SetScript("OnClick", SortBags)
+			Sort:SetScript('OnMouseDown', function(self, button) 
+				if InCombatLockdown() then return end
+				if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
+			end)
 			Sort.ClearAllPoints = D.Dummy
 			Sort.SetPoint = D.Dummy
 		end
@@ -283,13 +282,13 @@ function CreateContainer(storagetype, ...)
 			Button:SetTemplate()
 			Button.IconBorder:SetAlpha(0)
 			Button:SkinButton()
-			if LastButtonBag then Button:SetPoint("LEFT", LastButtonBag, "RIGHT", 4, 0) else Button:SetPoint("TOPLEFT", BagsContainer, "TOPLEFT", 4, -4) end
+			if LastButtonBag then Button:SetPoint("TOP", LastButtonBag, "BOTTOM", 0, -4) else Button:SetPoint("TOPLEFT", BagsContainer, "TOPLEFT", 4, -4) end
 
 			Icon:SetTexCoord(unpack(D.IconCoord))
 			Icon:SetInside()
 			LastButtonBag = Button
-			BagsContainer:SetWidth((ButtonSize * getn(BlizzardBags)) + (ButtonSpacing * (getn(BlizzardBags) + 1)))
-			BagsContainer:SetHeight(ButtonSize + (ButtonSpacing * 2))
+			BagsContainer:SetWidth(ButtonSize + (ButtonSpacing * 2))
+			BagsContainer:SetHeight((ButtonSize * getn(BlizzardBags)) + (ButtonSpacing * (getn(BlizzardBags) + 1)))
 		end
 
 		Container.BagsContainer = BagsContainer
@@ -339,7 +338,10 @@ function CreateContainer(storagetype, ...)
 			SortButton.Text:SetPoint("CENTER")
 			SortButton.Text:SetText(BAG_FILTER_CLEANUP)
 			SortButton.Text:SetTextColor(1, 1, 1)
-			SortButton:SetScript("OnClick", SortBags)
+			SortButton:SetScript('OnMouseDown', function(self, button) 
+				if InCombatLockdown() then return end
+				if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
+			end)
 		end
 
 		Purchase:ClearAllPoints()
@@ -354,7 +356,7 @@ function CreateContainer(storagetype, ...)
 		BankBagsContainer:Size(Container:GetWidth(), BankSlotsFrame.Bag1:GetHeight() + ButtonSpacing + ButtonSpacing)
 		BankBagsContainer:SetTemplate("Transparent")
 		BankBagsContainer:ClearAllPoints()
-		BankBagsContainer:SetPoint("BOTTOMLEFT", Container, "TOPLEFT", 0, 3)
+		BankBagsContainer:SetPoint("TOPLEFT", Container, "TOPRIGHT", 3, 0)
 		BankBagsContainer:SetFrameLevel(Container:GetFrameLevel())
 		BankBagsContainer:SetFrameStrata(Container:GetFrameStrata())
 
@@ -372,11 +374,11 @@ function CreateContainer(storagetype, ...)
 			Bag:SetTemplate()
 			Bag:SkinButton()
 			Bag:ClearAllPoints()
-			if i == 1 then Bag:SetPoint("TOPLEFT", BankBagsContainer, "TOPLEFT", ButtonSpacing, -ButtonSpacing) else Bag:SetPoint("LEFT", BankSlotsFrame["Bag" .. i-1], "RIGHT", ButtonSpacing, 0) end
+			if i == 1 then Bag:SetPoint("TOPLEFT", BankBagsContainer, "TOPLEFT", ButtonSpacing, -ButtonSpacing) else Bag:SetPoint("TOP", BankSlotsFrame["Bag" .. i-1], "BOTTOM", 0, -ButtonSpacing) end
 		end
 
-		BankBagsContainer:SetWidth((ButtonSize * 7) + (ButtonSpacing * (7 + 1)))
-		BankBagsContainer:SetHeight(ButtonSize + (ButtonSpacing * 2))
+		BankBagsContainer:SetWidth(ButtonSize + (ButtonSpacing * 2))
+		BankBagsContainer:SetHeight((ButtonSize * 7) + (ButtonSpacing * (7 + 1)))
 
 		BankFrame:EnableMouse(false)
 

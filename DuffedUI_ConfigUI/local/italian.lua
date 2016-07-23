@@ -83,6 +83,10 @@
 	DuffedUIConfigUILocalization.actionbarLeftsidebars = "Enable mouseover for Left SideBar on chatframe"
 	DuffedUIConfigUILocalization.actionbarRightsidebars = "Enable mouseover for Right SideBar on chatframe"
 	DuffedUIConfigUILocalization.actionbarSidebarButtonsize = "Set size of buttons for sidebars on chat (only when vertical)"
+	DuffedUIConfigUILocalization.actionbarLeftSideBar = "Set left side actionbar horizontal"
+	DuffedUIConfigUILocalization.actionbarRightSideBar = "Set right side actionbar horizontal"
+	DuffedUIConfigUILocalization.actionbarLeftSideBarDisable = "Disable left side actionbar"
+	DuffedUIConfigUILocalization.actionbarRightSideBarDisable = "Disable right side actionbar"
 
 	--[[Raid Frames]]--
 	DuffedUIConfigUILocalization.raid = "Raid Frames"

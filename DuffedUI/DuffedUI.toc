@@ -1,10 +1,10 @@
 ## Interface: 70000
 ## Author: Merith @ Zirkel des Cenarius EU, Djriff, Rav
-## Version: 8.36
+## Version: 8.37
 ## Title: |cffC41F3BDuffedUI|r
 ## Credits to: humfras aka Shinizu, Hizuro, Azilroka, Caith, Ishtara, Hungtar, Tulla, P3lim, Alza, Roth, Tekkub, Shestak, Caellian, Haleth, Nightcracker, Haste, Hydra, Elv, Tukz, Phanx, Duugu
 ## SavedVariables: DuffedUIData
-## SavedVariablesPerCharacter: DuffedUIDataPerChar, ImprovedCurrency, CurrencyData
+## SavedVariablesPerCharacter: DuffedUIDataPerChar, ImprovedCurrency, CurrencyData, SquareMinimapButtonOptions
 ## OptionalDeps: DuffedUI_ConfigUI
 ## X-oUF: oUFDuffedUI
 

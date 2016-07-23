@@ -44,11 +44,7 @@ Anchor:SetSize(200, DuffedUIInfoRight:GetHeight())
 Anchor:SetFrameStrata("TOOLTIP")
 Anchor:SetFrameLevel(20)
 if C["chat"].rbackground and DuffedUIChatBackgroundRight then
-	if Artifact_Backdrop:IsShown() then
-		Anchor:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, (-DuffedUIInfoRight:GetHeight() + 10))
-	else
-		Anchor:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, -DuffedUIInfoRight:GetHeight())
-	end
+	Anchor:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, (-DuffedUIInfoRight:GetHeight() + 10))
 else
 	Anchor:SetPoint("BOTTOMRIGHT", UIParent, 0, 110)
 end
