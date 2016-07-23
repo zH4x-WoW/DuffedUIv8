@@ -84,6 +84,10 @@
 	DuffedUIConfigUILocalization.actionbarLeftsidebars = "啟用滑鼠劃過顯示左邊聊天框體上的快捷欄"
 	DuffedUIConfigUILocalization.actionbarRightsidebars = "啟用滑鼠劃過顯示右邊聊天框體上的快捷欄"
 	DuffedUIConfigUILocalization.actionbarSidebarButtonsize = "Set size of buttons for sidebars on chat (only when vertical)"
+	DuffedUIConfigUILocalization.actionbarLeftSideBar = "Set left side actionbar vertical"
+	DuffedUIConfigUILocalization.actionbarRightSideBar = "Set right side actionbar vertical"
+	DuffedUIConfigUILocalization.actionbarLeftSideBarDisable = "Disable left side actionbar"
+	DuffedUIConfigUILocalization.actionbarRightSideBarDisable = "Disable right side actionbar"
 
 	--[[Raid Frames]]--
 	DuffedUIConfigUILocalization.raid = "團隊框體"

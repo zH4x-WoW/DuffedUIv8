@@ -85,6 +85,10 @@ C["actionbar"] = {
 	["borderhighlight"] = false,
 	["Leftsidebars"] = false,
 	["Rightsidebars"] = false,
+	["LeftSideBar"] = false,
+	["RightSideBar"] = false,
+	["LeftSideBarDisable"] = false,
+	["RightSideBarDisable"] = false,
 }
 
 C["raid"] = {
