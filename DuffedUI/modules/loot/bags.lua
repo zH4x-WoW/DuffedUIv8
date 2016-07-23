@@ -13,6 +13,7 @@ local BagHelpBox = BagHelpBox
 local ButtonSize = C["bags"].buttonsize
 local ButtonSpacing = C["bags"].spacing
 local ItemsPerRow = C["bags"].bpr
+local move = D["move"]
 
 local Boxes = {
 	BagItemSearchBox,
@@ -212,12 +213,7 @@ function CreateContainer(storagetype, ...)
 	Container:Hide()
 	Container:SetTemplate("Transparent")
 	Container:EnableMouse(true)
-	if C["bags"].movable then
-		Container:SetMovable(true)
-		Container:SetClampedToScreen(true)
-		Container:SetScript("OnMouseDown", function() Container:ClearAllPoints() Container:StartMoving() end)
-		Container:SetScript("OnMouseUp", function() Container:StopMovingOrSizing() end)
-	end
+	move:RegisterFrame(Container)
 
 	if (storagetype == "Bag") then
 		local Sort = BagItemAutoSortButton
