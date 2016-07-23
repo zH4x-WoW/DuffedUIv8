@@ -1,9 +1,5 @@
 local D, C, L = unpack(select(2, ...))
 
-local Resolution = select(GetCurrentResolution(), GetScreenResolutions())
-local Windowed = Display_DisplayModeDropDown:windowedmode()
-local Fullscreen = Display_DisplayModeDropDown:fullscreenmode()
-
 D["Dummy"] = function() return end
 D["MyName"] = select(1, UnitName("player"))
 D["Class"] = select(2, UnitClass("player"))
@@ -11,7 +7,7 @@ D["MyRace"] = select(2, UnitRace("player"))
 D["Level"] = UnitLevel("player")
 D["MyRealm"] = GetRealmName()
 D["Client"] = GetLocale()
-D["Resolution"] = Resolution or (Windowed and GetCVar("gxWindowedResolution")) or GetCVar("gxFullscreenResolution")
+D["Resolution"] = GetCVar("gxWindowedResolution")
 D["ScreenHeight"] = tonumber(string.match(D.Resolution, "%d+x(%d+)"))
 D["ScreenWidth"] = tonumber(string.match(D.Resolution, "(%d+)x+%d"))
 D["Version"] = GetAddOnMetadata("DuffedUI", "Version")
