@@ -95,6 +95,8 @@ DuffedUIBar3Button:SetScript("OnClick", function(self, btn)
 	if btn == "RightButton" then
 		if DuffedUIInfoLeftBattleGround and UnitInBattleground("player") then ToggleFrame(DuffedUIInfoLeftBattleGround) end
 	else
+		if C["actionbar"].LeftSideBarDisable == true then
+			return UIErrorsFrame:AddMessage("Left Sidebars are disabled!", 1.0, 0.0, 0.0, 53, 5) end 
 		if not C["actionbar"].Leftsidebars then
 			UpdateBar(self, DuffedUIBar3)
 		end
@@ -110,8 +112,10 @@ DuffedUIBar3Button.text:SetText(cm .. "-|r")
 local DuffedUIBar4Button = CreateFrame("Button", "DuffedUIBar4Button", UIParent)
 DuffedUIBar4Button:SetTemplate("Default")
 DuffedUIBar4Button:RegisterForClicks("AnyUp")
-DuffedUIBar4Button.text = D.SetFontString(DuffedUIBar4Button, C["media"].font, 11, "THINOUTLINE")
-if not C["actionbar"].Rightsidebars then DuffedUIBar4Button:SetScript("OnClick", function(self, btn) UpdateBar(self, DuffedUIBar4) end) end
+DuffedUIBar4Button.text = D.SetFontString(DuffedUIBar4Button, C["media"].font, 11, "THINOUTLINE") 
+DuffedUIBar4Button:SetScript("OnClick", function(self, btn) 
+if C["actionbar"].RightSideBarDisable then return UIErrorsFrame:AddMessage("Right Sidebars are disabled!", 1.0, 0.0, 0.0, 53, 5) end
+if not C["actionbar"].Rightsidebars then UpdateBar(self, DuffedUIBar4) end end)
 DuffedUIBar4Button:Size(DuffedUIInfoLeft:GetHeight())
 DuffedUIBar4Button:Point("RIGHT", DuffedUIInfoRight, "LEFT", -2, 0)
 DuffedUIBar4Button.text:Point("CENTER", 2, -1)
