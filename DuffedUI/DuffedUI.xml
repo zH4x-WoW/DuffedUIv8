@@ -5,6 +5,7 @@
 	<Script file="core\constants.lua" />
 
 	<!-- core -->
+	<Include file="locales\load_locales.xml" />
 	<Script file="config\config.lua" />
 	<Script file="medias\medias.lua" />
 	<Script file="core\api.lua" />
@@ -18,7 +19,6 @@
 	<Script file="core\func_Font.lua" />
 	<Script file="core\func_UF.lua" />
 	<Script file="core\func_Skins.lua" />
-	<Include file="locales\load_locales.xml" />
 	<Script file="core\install.lua" />
 	<Script file="core\filters\f_cbticks.lua" />
 	<Script file="core\cversion.lua" />
