@@ -334,7 +334,7 @@ D.Delay = function(delay, func, ...)
 	return true
 end
 
-D.CreateBtn = function(name, parent, w, h, tt_txt, txt)
+D["CreateBtn"] = function(name, parent, w, h, tt_txt, txt)
 	local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
 	local b = CreateFrame("Button", name, parent, "SecureActionButtonTemplate")
 	b:Width(w)
