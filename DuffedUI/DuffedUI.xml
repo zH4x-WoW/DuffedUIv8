@@ -11,13 +11,13 @@
 	<Script file="core\customconfig.lua" />
 	<Script file="core\config.lua" />
 	<Include file="libs\load_libs.xml" />
+	<Script file="core\popup.lua" />
 	<Script file="core\video.lua" />
 	<Script file="core\move.lua" />
 	<Script file="core\func_Core.lua" />
 	<Script file="core\func_Font.lua" />
 	<Script file="core\func_UF.lua" />
 	<Script file="core\func_Skins.lua" />
-	<Script file="core\popup.lua" />
 	<Include file="locales\load_locales.xml" />
 	<Script file="core\install.lua" />
 	<Script file="core\filters\f_cbticks.lua" />

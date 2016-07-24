@@ -277,4 +277,8 @@ if D.Client == "deDE" then
 		["LeftSideBar"] = "Linke Sidebar ist deaktiviert!",
 		["RightSideBar"] = "Rechte Sidebars ist deaktiviert!",
 	}
+
+	L["misc"] = {
+		["Resolution"] = "Du hast Auto-Skalierung aktiviert und es wurde ein Wechsel der Auflösung registriert. Möchtest du den Client jetzt neustarten?"
+	}
 end

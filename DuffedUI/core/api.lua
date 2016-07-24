@@ -13,6 +13,13 @@ local inset = 0
 local noinset = C["media"].noinset
 local UIFrameFadeIn = UIFrameFadeIn
 local UIFrameFadeOut = UIFrameFadeOut
+local mult = 768 / string.match(GetCVar("gxWindowedResolution"), "%d+x(%d+)") / C["general"].uiscale
+local Scale = function(x) return mult * math.floor(x / mult + 0.5) end
+
+D.Scale = function(x) return Scale(x) end
+D.mult = mult
+D.noscalemult = D.mult * C["general"].uiscale
+D.raidscale = 1
 
 if noinset then inset = D.mult end
 
