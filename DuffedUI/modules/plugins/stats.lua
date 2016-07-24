@@ -21,9 +21,6 @@ hooksecurefunc(CharacterStatsPane.AttributesCategory, "SetPoint", function(self,
 	if flag ~= "CharacterStatsPane" then
 		self:ClearAllPoints()
 		self:SetPoint("TOP", CharacterStatsPane.ItemLevelFrame, "BOTTOM", 0, -10, "CharacterStatsPane")
-		self:StripTextures()
-		self:SetTemplate()
-		self:SetHeight(self:GetHeight() / 2)
 	end
 end)
 
@@ -31,14 +28,6 @@ hooksecurefunc(CharacterStatsPane.AttributesCategory.Background, "SetPoint", fun
 	if flag ~= "CharacterStatsPane" then
 		self:ClearAllPoints()
 		self:SetPoint("CENTER", CharacterStatsPane.AttributesCategory, "CENTER", 0, 2, "CharacterStatsPane")
-	end
-end)
-
-hooksecurefunc(CharacterStatsPane.EnhancementsCategory, "SetPoint", function(self,_,_,_,_,_,flag)
-	if flag ~= "CharacterStatsPane" then
-		self:StripTextures()
-		self:SetTemplate()
-		self:SetHeight(self:GetHeight() / 2)
 	end
 end)
 
