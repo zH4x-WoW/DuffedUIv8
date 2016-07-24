@@ -48,7 +48,7 @@ function ChangeLog:CreateChangelog()
 	title.text:SetFont(C["media"]["font"], 15)
 	title.text:SetText("|cffC41F3BDuffedUI|r - ChangeLog " .. D["Version"])
 	
-	D["CreateBtn"]("close", frame, 40, 19, "Close ChangeLog", "Close")
+	D["CreateBtn"]("close", frame, 50, 19, L["tooltip"]["changelog"], L["buttons"]["close"])
 	close:SetPoint("BOTTOMRIGHT", frame, -5, 5)
 	close:SetScript("OnClick", function(self) frame:Hide() end)
 	

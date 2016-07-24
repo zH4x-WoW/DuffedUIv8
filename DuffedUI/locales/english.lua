@@ -268,4 +268,10 @@ L["artifactBar"] = {
 
 L["tooltip"] = {
 	["applied"] = "Applied by ",
+	["changelog"] = "Close Changelog",
+}
+
+L["errortext"] = {
+	["LeftSideBar"] = "Left Sidebars are disabled!",
+	["RightSideBar"] = "Right Sidebars are disabled!",
 }

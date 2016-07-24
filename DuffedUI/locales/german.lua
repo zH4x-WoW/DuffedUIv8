@@ -270,5 +270,11 @@ if D.Client == "deDE" then
 	
 	L["tooltip"] = {
 		["applied"] = "Angewandt von ",
+		["changelog"] = "Schließe Changelog",
+	}
+
+	L["errortext"] = {
+		["LeftSideBar"] = "Linke Sidebar ist deaktiviert!",
+		["RightSideBar"] = "Rechte Sidebars ist deaktiviert!",
 	}
 end
