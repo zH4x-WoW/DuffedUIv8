@@ -1,6 +1,6 @@
 ## Interface: 70000
 ## Author: Merith @ Zirkel des Cenarius EU, Djriff, Rav
-## Version: 8.37
+## Version: 8.38
 ## Title: |cffC41F3BDuffedUI|r
 ## Credits to: humfras aka Shinizu, Hizuro, Azilroka, Caith, Ishtara, Hungtar, Tulla, P3lim, Alza, Roth, Tekkub, Shestak, Caellian, Haleth, Nightcracker, Haste, Hydra, Elv, Tukz, Phanx, Duugu
 ## SavedVariables: DuffedUIData

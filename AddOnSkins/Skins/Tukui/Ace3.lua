@@ -1,4 +1,4 @@
---[[local AS = unpack(AddOnSkins)
+local AS = unpack(AddOnSkins)
 
 if AS:CheckAddOn('ElvUI') then return end
 
@@ -193,4 +193,4 @@ function AS:Ace3()
 	end
 end
 
-AS:RegisterSkin('Ace3', AS.Ace3)]]--
+AS:RegisterSkin('Ace3', AS.Ace3)
