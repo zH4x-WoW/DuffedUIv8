@@ -223,7 +223,7 @@ function CreateContainer(storagetype, ...)
 		BagsContainer:SetParent(Container)
 		BagsContainer:SetWidth(10)
 		BagsContainer:SetHeight(10)
-		BagsContainer:SetPoint("TOPRIGHT", Container, "TOPLEFT", -3, 0)
+		BagsContainer:SetPoint("BOTTOMRIGHT", Container, "BOTTOMLEFT", -3, 0)
 		BagsContainer:SetTemplate("Transparent")
 
 		if C["bags"]["SortingButton"] then
@@ -262,7 +262,7 @@ function CreateContainer(storagetype, ...)
 			local ReagentButton = _G["DuffedUI_Bank"].ReagentButton
 			BanksContainer:ClearAllPoints()
 			ToggleBagsContainer.Text:SetTextColor(1, 1, 1)
-			if Purchase:IsShown() then BanksContainer:SetPoint("BOTTOMLEFT", _G["DuffedUI_Bank"], "TOPLEFT", 0, 3) else BanksContainer:SetPoint("BOTTOMLEFT", _G["DuffedUI_Bank"], "TOPLEFT", 0, 3) end
+			BanksContainer:SetPoint("BOTTOMLEFT", _G["DuffedUI_Bank"], "BOTTOMRIGHT", 3, 0)
 			CloseBankFrame()
 			ToggleAllBags()
 		end)
@@ -356,7 +356,7 @@ function CreateContainer(storagetype, ...)
 		BankBagsContainer:Size(Container:GetWidth(), BankSlotsFrame.Bag1:GetHeight() + ButtonSpacing + ButtonSpacing)
 		BankBagsContainer:SetTemplate("Transparent")
 		BankBagsContainer:ClearAllPoints()
-		BankBagsContainer:SetPoint("TOPLEFT", Container, "TOPRIGHT", 3, 0)
+		BankBagsContainer:SetPoint("BOTTOMLEFT", Container, "BOTTOMRIGHT", 3, 0)
 		BankBagsContainer:SetFrameLevel(Container:GetFrameLevel())
 		BankBagsContainer:SetFrameStrata(Container:GetFrameStrata())
 
