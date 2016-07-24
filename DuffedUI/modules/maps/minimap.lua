@@ -25,7 +25,7 @@ MiniMapTracking:Hide()
 GameTimeFrame:Hide()
 
 MiniMapMailFrame:ClearAllPoints()
-MiniMapMailFrame:Point("TOPRIGHT", Minimap, 3, 3)
+MiniMapMailFrame:Point("TOPRIGHT", Minimap, -2, 0)
 MiniMapMailFrame:SetFrameLevel(Minimap:GetFrameLevel() + 1)
 MiniMapMailFrame:SetFrameStrata(Minimap:GetFrameStrata())
 MiniMapMailBorder:Hide()
