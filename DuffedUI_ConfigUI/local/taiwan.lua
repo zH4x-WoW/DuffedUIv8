@@ -205,6 +205,8 @@
 	DuffedUIConfigUILocalization.miscXPBar = "啟用經驗條"
 	DuffedUIConfigUILocalization.miscXPBarWidth = "設置經驗條寬度"
 	DuffedUIConfigUILocalization.miscmagemenu = "Enable Teleportmenu (works only on Mages)"
+	DuffedUIConfigUILocalization.miscartifact = "Enable Artifact XP-Bar"
+	DuffedUIConfigUILocalization.miscartifactwidth = "Set width of Artifact XP-Bar"
 
 	--[[Duffed]]--
 	DuffedUIConfigUILocalization.duffed = "Duffed特色功能"

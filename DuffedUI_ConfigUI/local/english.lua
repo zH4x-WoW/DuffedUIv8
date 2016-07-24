@@ -207,6 +207,8 @@ DuffedUIConfigUILocalization.miscAFKCamera = "Enable AFKCamera"
 DuffedUIConfigUILocalization.miscXPBar = "Enable XP-Bar"
 DuffedUIConfigUILocalization.miscXPBarWidth = "Set width of XP-Bar"
 DuffedUIConfigUILocalization.miscmagemenu = "Enable Teleport menu (works only on Mages)"
+DuffedUIConfigUILocalization.miscartifact = "Enable Artifact XP-Bar"
+DuffedUIConfigUILocalization.miscartifactwidth = "Set width of Artifact XP-Bar"
 
 --[[Duffed]]--
 DuffedUIConfigUILocalization.duffed = "Duffed"
