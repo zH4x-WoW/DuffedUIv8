@@ -14,12 +14,6 @@ local set2 = C["misc"].sesset2
 local set3 = C["misc"].sesset3
 local set4 = C["misc"].sesset4
 
-local function GetSecondaryTalentIndex() -- removed
-	local secondary
-	if GetActiveSpecGroup() == 1 then secondary = 2 else secondary = 1 end
-	return secondary
-end
-
 local function ActiveTalents()
 	local Tree = GetSpecialization(false, false, GetActiveSpecGroup())
 	return Tree
@@ -56,11 +50,11 @@ local function AutoGear(set1, set2, set3, set4)
 	local name3 = GetEquipmentSetInfo(set3)
 	local name4 = GetEquipmentSetInfo(set4)
 
-	if GetActiveSpecGroup() == 1 then
+	if GetSpecialization() == 1 then
 		if name1 then UseEquipmentSet(name1) end
-	elseif GetActiveSpecGroup() == 2 then
+	elseif GetSpecialization() == 2 then
 		if name2 then UseEquipmentSet(name2) end
-	elseif GetActiveSpecGroup() == 3 then
+	elseif GetSpecialization() == 3 then
 		if name3 then UseEquipmentSet(name3) end
 	else
 		if name4 then UseEquipmentSet(name4) end

@@ -26,7 +26,6 @@ if C["datatext"].talent and C["datatext"].talent > 0 then
 		end
 	end)
 	
-
 	local Stat = CreateFrame("Frame", "DuffedUIStatTalent") --The datatext
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
