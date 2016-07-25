@@ -4,7 +4,7 @@ local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
 		"• Changelog added",
-		"• Several Bugfixes",
+		"• Several Bugfixes (Combopoints for druids, bags, video settings)",
 		"• Update for AddOnSkins",
 		"• Locals",
 	" ",
