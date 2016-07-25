@@ -56,12 +56,12 @@ local SetMaxCombo = function(self)
 	local Deeper = select(4, GetTalentInfo(3, 1, 1))
     local cpb = self.ComboPointsBar
 
-    if Anticipation then
+    if (Anticipation and class == "ROGUE") then
         for i = 1, 8 do
             cpb[i]:SetWidth(cpb[i].Anticipation)
             cpb[i]:Show()
         end
-    elseif Deeper then
+    elseif (Deeper and class == "ROGUE") then
         for i = 1, 8 do
             cpb[i]:SetWidth(cpb[i].Deeper)
             

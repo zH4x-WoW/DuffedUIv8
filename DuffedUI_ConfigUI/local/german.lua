@@ -207,6 +207,8 @@
 	DuffedUIConfigUILocalization.miscXPBar = "Aktiviere XP-Leiste"
 	DuffedUIConfigUILocalization.miscXPBarWidth = "Stelle Breite der XP-Leiste ein"
 	DuffedUIConfigUILocalization.miscmagemenu = "Aktiviere Teleportmenu (funktioniert nur bei Magiern)"
+	DuffedUIConfigUILocalization.miscartifact = "Aktiviere Artefakt XP-Leiste"
+	DuffedUIConfigUILocalization.miscartifactwidth = "Stelle Breite der Artefakt XP-Leiste ein"
 
 	--[[Duffed]]--
 	DuffedUIConfigUILocalization.duffed = "Duffed"

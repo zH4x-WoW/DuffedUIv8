@@ -269,5 +269,15 @@ if D.Client == "zhCN" then
 	
 	L["tooltip"] = {
 		["applied"] = "Applied by ",
+		["changelog"] = "Close Changelog",
+	}
+
+	L["errortext"] = {
+		["LeftSideBar"] = "Left Sidebars are disabled!",
+		["RightSideBar"] = "Right Sidebars are disabled!",
+	}
+
+	L["misc"] = {
+		["Resolution"] = "You have auto-scale enabled and we detected a resolution change. Do you want to restart the Client?"
 	}
 end
