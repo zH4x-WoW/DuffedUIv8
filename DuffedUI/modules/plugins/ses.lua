@@ -108,11 +108,7 @@ spec:SetScript("OnEvent", OnEvent)
 
 spec:SetScript("OnClick", function(self) 
 	local i = GetActiveSpecGroup()
-	if IsModifierKeyDown() then
-		ToggleTalentFrame()
-	else
-		EasyMenu(LeftClickMenu, DuffedUISpecSwap, "cursor", 0, 0, "MENU", 2) --Dropdown/popup menu for spec selection.
-	end
+	if IsModifierKeyDown() then ToggleTalentFrame() else Lib_EasyMenu(LeftClickMenu, DuffedUISpecSwap, "cursor", 0, 0, "MENU", 2) end
 end)
 
 D.CreateBtn("MB_reload", DuffedUIMinimap, 19, 19, L["buttons"]["ses_reload"], "R")

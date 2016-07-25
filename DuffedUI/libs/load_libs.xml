@@ -5,4 +5,7 @@
 	<Include file="plugins\load_oUFPlugins.xml" />
 	<Include file="LibItemUpgradeInfo-1.0\LibItemUpgradeInfo-1.0.xml" />
 	<Script file="templates\colors.lua" />
+	<Include file="DropDownMenu\UIDropDownMenuTemplates.xml"/>
+	<Script file="DropDownMenu\EasyMenu.lua"/>
+	<Script file="DropDownMenu\UIDropDownMenu.lua"/>
 </Ui>

@@ -33,7 +33,7 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 
 	local function OpenMenu()
 		if not DuffedUIMicroButtonsDropDown then return end
-		EasyMenu(D.MicroMenu, DuffedUIMicroButtonsDropDown, "cursor", 0, 0, "MENU", 2)
+		Lib_EasyMenu(D.MicroMenu, DuffedUIMicroButtonsDropDown, "cursor", 0, 0, "MENU", 2)
 	end
 
 	Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
