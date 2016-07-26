@@ -232,7 +232,7 @@ D["ConstructUFPlayer"] = function(self)
 	PVP:SetHeight(D.Scale(32))
 	PVP:SetWidth(D.Scale(32))
 	PVP:Point("TOPLEFT", health, "TOPRIGHT", -7, 7)
-
+	
 	local Leader = health:CreateTexture(nil, "OVERLAY")
 	Leader:Height(14)
 	Leader:Width(14)
@@ -251,16 +251,10 @@ D["ConstructUFPlayer"] = function(self)
 	RaidIcon:Point("TOP", health, "TOP", 0, 11)
 
 	self:SetScript("OnEnter", function(self)
-		if self.EclipseBar and self.EclipseBar:IsShown() then
-			self.EclipseBar.Text:Hide()
-		end
 		FlashInfo.ManaLevel:Hide()
 		UnitFrame_OnEnter(self)
 	end)
 	self:SetScript("OnLeave", function(self)
-		if self.EclipseBar and self.EclipseBar:IsShown() then
-			self.EclipseBar.Text:Show()
-		end
 		FlashInfo.ManaLevel:Show()
 		UnitFrame_OnLeave(self)
 	end)

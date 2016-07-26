@@ -741,7 +741,6 @@ oUF.Tags = {
 	Methods = tags,
 	Events = tagEvents,
 	SharedEvents = unitlessEvents,
-
 }
 oUF:RegisterMetaFunction('Tag', Tag)
 oUF:RegisterMetaFunction('Untag', Untag)
