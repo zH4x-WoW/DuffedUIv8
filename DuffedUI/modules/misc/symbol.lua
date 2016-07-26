@@ -27,6 +27,6 @@ WorldFrame:HookScript("OnMouseDown", function(self, button)
 	if(button=="RightButton" and IsShiftKeyDown() and IsControlKeyDown() and UnitExists("mouseover")) then 
 		local inParty = (GetNumGroupMembers() > 0)
 		local inRaid = (GetNumGroupMembers() > 0)
-		if (inRaid and (IsRaidLeader() or IsRaidOfficer()) or (inParty and not inRaid)) or (not inParty and not inRaid) then EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", nil) end
+		if (inRaid and (IsRaidLeader() or IsRaidOfficer()) or (inParty and not inRaid)) or (not inParty and not inRaid) then Lib_EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", nil) end
 	end
 end)

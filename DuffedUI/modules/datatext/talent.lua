@@ -26,7 +26,6 @@ if C["datatext"].talent and C["datatext"].talent > 0 then
 		end
 	end)
 	
-
 	local Stat = CreateFrame("Frame", "DuffedUIStatTalent") --The datatext
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
@@ -56,8 +55,6 @@ if C["datatext"].talent and C["datatext"].talent > 0 then
 	Stat:RegisterEvent("PLAYER_TALENT_UPDATE")
 	Stat:SetScript("OnEvent", Update)
 	Stat:SetScript("OnMouseDown", function(self, btn)
-		if btn == "LeftButton" then 
-			EasyMenu(LeftClickMenu, DuffedUISpecSwap, "cursor", 0, 0, "MENU", 2) --Dropdown/popup menu for spec selection.
-		end
+		if btn == "LeftButton" then Lib_EasyMenu(LeftClickMenu, DuffedUISpecSwap, "cursor", 0, 0, "MENU", 2) end
     end)
 end

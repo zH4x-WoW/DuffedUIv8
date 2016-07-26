@@ -3,10 +3,7 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Changelog added",
-		"• Several Bugfixes",
-		"• Update for AddOnSkins",
-		"• Locals",
+		"• Added new lib for dropdowns",
 	" ",
 	"Notes:",
 		"• Some skins are not completly finished",

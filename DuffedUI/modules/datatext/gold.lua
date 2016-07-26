@@ -269,6 +269,6 @@ Stat:SetScript("OnMouseDown", function(self, btn)
 	elseif btn == "LeftButton" then
 		ToggleAllBags()
 	else
-		EasyMenu(RightClickMenu, DuffedUIImprovedCurrencyDropDown, "cursor", 0, 0, "MENU", 2)
+		Lib_EasyMenu(RightClickMenu, DuffedUIImprovedCurrencyDropDown, "cursor", 0, 0, "MENU", 2)
 	end
 end)

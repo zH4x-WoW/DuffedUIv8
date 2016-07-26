@@ -13,6 +13,18 @@ local function SkinDropDownList(level, index)
 			backdrop:SetTemplate("Transparent")
 			backdrop.isSkinned = true
 		end
+
+		backdrop = _G["Lib_DropDownList"..i.."MenuBackdrop"]
+		if backdrop and not backdrop.IsSkinned then
+			backdrop:SetTemplate("Transparent")
+			backdrop.IsSkinned = true
+		end
+
+		backdrop = _G["Lib_DropDownList"..i.."Backdrop"]
+		if backdrop and not backdrop.IsSkinned then
+			backdrop:SetTemplate("Transparent")
+			backdrop.IsSkinned = true
+		end
 	end
 end
 hooksecurefunc("UIDropDownMenu_CreateFrames", SkinDropDownList)
