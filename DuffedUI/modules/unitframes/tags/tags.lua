@@ -2,7 +2,7 @@ local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF
 assert(oUF, "DuffedUI was unable to locate oUF install.")
 
-local D, C, L = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...))
 
 --[[Tags]]--
 local function ShortenValue(value)
@@ -169,3 +169,11 @@ oUF.Tags.Methods["DuffedUI:afk"] = function(unit)
 		return CHAT_FLAG_AFK
 	end
 end
+
+--[[oUF.Tags.Methods["DuffedUI:PvPtimer"] = function(unit)
+    if (not IsPVPTimerRunning() and GetPVPTimer() >= 0) then
+        return ''
+    end
+
+    return ns.FormatTime(math.floor(GetPVPTimer()/1000))
+end]]
