@@ -232,13 +232,13 @@ D["ConstructUFPlayer"] = function(self)
 	PVP:SetHeight(D.Scale(32))
 	PVP:SetWidth(D.Scale(32))
 	PVP:Point("TOPLEFT", health, "TOPRIGHT", -7, 7)
-
-	--[[PvPTimer = self:CreateFontString(nil, "OVERLAY")
-	PvPTimer:SetFont(f, fs, ff)
-	PvPTimer:SetShadowOffset(1.25, -1.25)
-	PvPTimer:SetPoint("RIGHT", PvP, "LEFT", 0, 0)
-	PvPTimer.frequentUpdates = 0.5
-	self:Tag(self.PvPTimer, "[DuffedUI:PvPtimer]")]]--
+	
+	--[[local pvptimer = health:CreateFontString(nil, "OVERLAY")
+	pvptimer:SetFont(f, fs, ff)
+	pvptimer:SetText(" ")
+	pvptimer:SetTextColor(unpack(C["media"].datatextcolor1))
+	pvptimer:SetPoint("TOP", PVP, 0, 8)
+	pvptimer:SetScript("OnUpdate", D.PvPUpdate)]]--
 
 	local Leader = health:CreateTexture(nil, "OVERLAY")
 	Leader:Height(14)
@@ -367,16 +367,15 @@ D["ConstructUFPlayer"] = function(self)
 		self.Castbar.Time = castbar.time
 		self.Castbar.Icon = castbar.icon
 	end
-
+	
 	self.panel = panel
 	self.Health = health
 	self.Health.bg = healthBG
 	self.Power = power
 	self.Power.bg = powerBG
 	self.Combat = Combat
-	self.FlashInfo = FlashInfo
 	self.PvP = PVP
-	--self.PvPTimer = PvPTimer
+	self.FlashInfo = FlashInfo
 	self.Leader = Leader
 	self.RaidIcon = RaidIcon
 
