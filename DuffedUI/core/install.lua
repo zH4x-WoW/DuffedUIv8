@@ -315,7 +315,7 @@ local step2 = function()
 	sb:SetValue(2)
 	header:SetText(L["install"]["header09"])
 	sbt:SetText("2/4")
-	if IsAddOnLoaded("Prat") or IsAddOnLoaded("Chatter") then
+	if IsAddOnLoaded("Prat") or IsAddOnLoaded("Chatter") then 
 		text1:SetText(L["install"]["step2line0"])
 		option2:Hide()
 	else
