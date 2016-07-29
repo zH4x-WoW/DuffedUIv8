@@ -169,7 +169,7 @@ function nameplates:UpdateAggroNameplates()
 	-- (3 = securely tanking, 2 = insecurely tanking, 1 = not tanking but higher threat than tank, 0 = not tanking and lower threat than tank)
 
 	if C["nameplate"]["ethreat"] then
-		if isTank then
+		if isInGroup, isInRaid, isTank then
 			if isTanking then
 				if (threatStatus == 3) then
 					self.healthBar.barTexture:SetVertexColor(.29,  .69, .3) -- good
