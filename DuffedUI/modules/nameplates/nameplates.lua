@@ -126,7 +126,7 @@ function nameplates:SetName()
 end
 
 function nameplates:colorHealth()
-    if (self:GetName() and string.find(self:GetName(), "NamePlate")) then
+	if (self:GetName() and string.find(self:GetName(), "NamePlate")) then
         local r, g, b = self.healthBar:GetStatusBarColor()
 
         for class, color in pairs(RAID_CLASS_COLORS) do
@@ -163,45 +163,48 @@ function nameplates:colorHealth()
     end
 end
 
-function nameplates:UpdateAggronameplates()
+function nameplates:UpdateAggroNameplates()
 	local isTanking, threatStatus = UnitDetailedThreatSituation("player", self.displayedUnit)
+	local isInGroup, isInRaid, isTank = IsInGroup(), IsInRaid(), IsPlayerEffectivelyTank()
 	-- (3 = securely tanking, 2 = insecurely tanking, 1 = not tanking but higher threat than tank, 0 = not tanking and lower threat than tank)
 
-	if IsPlayerEffectivelyTank() then
-		if not isTanking then
-			nameplates:colorHealth()
+	if C["nameplate"]["ethreat"] then
+		if isTank then
+			if isTanking then
+				if (threatStatus == 3) then
+					self.healthBar.barTexture:SetVertexColor(.29,  .69, .3) -- good
+				elseif (threatStatus == 2) then
+					self.healthBar.barTexture:SetVertexColor(.86, .77, .36) -- transition
+				elseif (threatStatus == 1) then
+					self.healthBar.barTexture:SetVertexColor(.86, .77, .36) -- transition
+				elseif (threatStatus == 0) then
+					self.healthBar.barTexture:SetVertexColor(.78, .25, .25) -- bad
+				end
+			end
 		else
-			if (threatStatus == 3) then
-				self.healthBar.barTexture:SetVertexColor(.29,  .69, .3) -- good
-			elseif (threatStatus == 2) then
-				self.healthBar.barTexture:SetVertexColor(.86, .77, .36) -- transition
-			elseif (threatStatus == 1) then
-				self.healthBar.barTexture:SetVertexColor(.86, .77, .36) -- transition
-			elseif (threatStatus == 0) then
+			if isTanking then
 				self.healthBar.barTexture:SetVertexColor(.78, .25, .25) -- bad
+				self:GetParent().playerHasAggro = true
+			else
+				if (threatStatus == 3) then
+					self.healthBar.barTexture:SetVertexColor(.78, .25, .25) -- bad
+					self:GetParent().playerHasAggro = true
+				elseif (threatStatus == 2) then
+					self.healthBar.barTexture:SetVertexColor(.86, .77, .36) -- transition
+					self:GetParent().playerHasAggro = true
+				elseif (threatStatus == 1) then
+					self.healthBar.barTexture:SetVertexColor(.86, .77, .36) -- transition
+					self:GetParent().playerHasAggro = false
+				elseif (threatStatus == 0) then
+					self.healthBar.barTexture:SetVertexColor(.29,  .69, .3) -- good
+					self:GetParent().playerHasAggro = false
+				else
+					nameplates:colorHealth()
+				end
 			end
 		end
 	else
-		if isTanking then
-			self.healthBar.barTexture:SetVertexColor(.78, .25, .25) -- bad
-			self:GetParent().playerHasAggro = true
-		else
-			if (threatStatus == 3) then
-				self.healthBar.barTexture:SetVertexColor(.78, .25, .25) -- bad
-				self:GetParent().playerHasAggro = true
-			elseif (threatStatus == 2) then
-				self.healthBar.barTexture:SetVertexColor(.86, .77, .36) -- transition
-				self:GetParent().playerHasAggro = true
-			elseif (threatStatus == 1) then
-				self.healthBar.barTexture:SetVertexColor(.86, .77, .36) -- transition
-				self:GetParent().playerHasAggro = false
-			elseif (threatStatus == 0) then
-				self.healthBar.barTexture:SetVertexColor(.29,  .69, .3) -- good
-				self:GetParent().playerHasAggro = false
-			else
-				nameplates:colorHealth()
-			end
-		end
+		nameplates:colorHealth()
 	end
 end
 
@@ -309,11 +312,7 @@ function nameplates:enable()
 	hooksecurefunc(NamePlateDriverFrame, "SetClassNameplateBar", self.SetClassNameplateBar)
 
 	hooksecurefunc("DefaultCompactNamePlateFrameSetupInternal", self.setupPlate)
-	if C["nameplate"]["ethreat"] then
-		hooksecurefunc("CompactUnitFrame_UpdateHealthColor", self.UpdateAggronameplates)
-	else
-		hooksecurefunc("CompactUnitFrame_UpdateHealthColor", self.colorHealth)
-	end
+	hooksecurefunc("CompactUnitFrame_UpdateHealthColor", self.UpdateAggroNameplates)
 
 	NamePlateDriverFrame.UpdateNamePlateOptions = function() end
 	InterfaceOptionsNamesPanelUnitNameplatesMakeLarger:Hide()
