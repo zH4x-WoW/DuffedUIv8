@@ -91,7 +91,8 @@ local function CreateQuestTag(level, questTag, frequency)
 	end
 	
 	if frequency == 2 then tag = tag.."!" elseif frequency == 3 then tag = tag.."!!" end
-	if tag ~= "" then tag = ("|cff00b3ff%s|r"):format(tag) end
+	color = D.RGBToHex(unpack(C["media"].datatextcolor1))
+	if tag ~= "" then tag = (color.."%s|r"):format(tag) end
 	tag = ("[%s %s] "):format(level, tag)
 	return tag
 end
@@ -116,12 +117,10 @@ hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
 				block:SetHeight(height + 16)
 			end
 
-			if block then
-				local oldBlockHeight = block.height
-				local oldHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
-				local newTitle = CreateQuestTag(level, tagID, frequency) .. title
-				local newHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, newTitle, nil, OBJECTIVE_TRACKER_COLOR["Header"])
-			end
+			local oldBlockHeight = block.height
+			local oldHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
+			local newTitle = CreateQuestTag(level, tagID, frequency) .. title
+			local newHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, newTitle, nil, OBJECTIVE_TRACKER_COLOR["Header"])
 		end
 	end
 end)
