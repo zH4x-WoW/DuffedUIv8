@@ -7,6 +7,7 @@ local otf = ObjectiveTrackerFrame
 local lST = "Wowhead"
 local lQ = "http://www.wowhead.com/quest=%d"
 local lA = "http://www.wowhead.com/achievement=%d"
+local format = string.format
 
 _G.StaticPopupDialogs["WATCHFRAME_URL"] = {
 	text = lST .. " link",
@@ -67,7 +68,7 @@ hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
 		if not questID then break end
 		local block = QUEST_TRACKER_MODULE:GetBlock(questID)
 
-		block.HeaderText:SetFont(STANDARD_TEXT_FONT, 13)
+		block.HeaderText:SetFont(STANDARD_TEXT_FONT, 11)
 		block.HeaderText:SetShadowOffset(.7, -.7)
 		block.HeaderText:SetShadowColor(0, 0, 0, 1)
 		block.HeaderText:SetWordWrap(true)
@@ -116,7 +117,6 @@ end)
 local function SkinScenarioButtons()
 	local block = ScenarioStageBlock
 	local _, currentStage, numStages, flags = C_Scenario.GetInfo()
-	--local inChallengeMode = C_Scenario.IsChallengeMode()
 
 	block:StripTextures()
 	block.NormalBG:SetSize(otf:GetWidth(), 50)
@@ -210,7 +210,7 @@ hooksecurefunc("QuestObjectiveTracker_OnOpenDropDown", function(self)
 		local inputBox = StaticPopup_Show("WATCHFRAME_URL")
 		inputBox.editBox:SetText(lQ:format(questID))
 		inputBox.editBox:HighlightText()
-  	end
+	end
 	info.arg1 = questID
 	info.notCheckable = true
 	UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
@@ -234,23 +234,62 @@ hooksecurefunc("AchievementObjectiveTracker_OnOpenDropDown", function(self)
 	UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
 end)
 
---[[Questlevel display]]--
+--[[Questlevel, tags]]--
 local QuestLevelPatch = {}
 
-function SetBlockHeader_hook()
-	for i = 1, GetNumQuestWatches() do
-		local questID, title, questLogIndex, numObjectives, requiredMoney, isComplete, startEvent, isAutoComplete, failureTime, timeElapsed, questType, isTask, isStory, isOnMap, hasLocalPOI = GetQuestWatchInfo(i)
-		if not questID then	break end
+local function CreateQuestTag(level, questTag, frequency)
+	local tag = ""
+	
+	if level == -1 then level = "*" else level = tostring(level) end
+	
+	if questTag == ELITE then
+		tag = "+"
+	elseif questTag == QUEST_TAG_GROUP then
+		tag = "g"
+	elseif questTag == QUEST_TAG_PVP then
+		tag = "pvp"
+	elseif questTag == QUEST_TAG_DUNGEON then
+		tag = "d"
+	elseif questTag == QUEST_TAG_HEROIC then
+		tag = "hc"
+	elseif questTag == QUEST_TAG_RAID then
+		tag = "r"
+	elseif questTag == QUEST_TAG_RAID10 then
+		tag = "r10"
+	elseif questTag == QUEST_TAG_RAID25 then
+		tag = "r25"
+	elseif questTag == QUEST_TAG_SCENARIO then
+		tag = "s"
+	elseif questTag == QUEST_TAG_ACCOUNT then
+		tag = "a"
+	elseif questTag == QUEST_TAG_LEGENDARY then
+		tag = "leg"
+	end
+	
+	if frequency == 2 then tag = tag.."!" elseif frequency == 3 then tag = tag.."!!" end
+	if tag ~= "" then tag = ("|cff00b3ff%s|r"):format(tag) end
+	tag = ("[%s %s] "):format(level, tag)
+	return tag
+end
+
+function SetBlockHeader_Hook()
+for i = 1, GetNumQuestWatches() do
+		local title, level, groupSize, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isBounty, isStory = GetQuestLogTitle(i)
+		if ( not questID ) then
+			break
+		end
+		local tagID = GetQuestTagInfo(questID) or ""
 		local oldBlock = QUEST_TRACKER_MODULE:GetExistingBlock(questID)
+
 		if oldBlock then
 			local oldBlockHeight = oldBlock.height
 			local oldHeight = QUEST_TRACKER_MODULE:SetStringText(oldBlock.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
-			local newTitle = "["..select(2, GetQuestLogTitle(questLogIndex)).."] "..title
+			local newTitle = CreateQuestTag(level, tagID, frequency) .. title
 			local newHeight = QUEST_TRACKER_MODULE:SetStringText(oldBlock.HeaderText, newTitle, nil, OBJECTIVE_TRACKER_COLOR["Header"])
 		end
-	end
+	end	
 end
-hooksecurefunc(QUEST_TRACKER_MODULE, "Update", SetBlockHeader_hook)
+hooksecurefunc(QUEST_TRACKER_MODULE, "Update", SetBlockHeader_Hook)
 
 --[[Execution]]--
 local ObjFhandler = CreateFrame("Frame")
@@ -266,6 +305,5 @@ if IsAddOnLoaded("Blizzard_ObjectiveTracker") then
 	hooksecurefunc("Scenario_ProvingGrounds_ShowBlock", SkinProvingGroundButtons)
 	hooksecurefunc("AutoQuestPopupTracker_AddPopUp", function(questID, popUpType)
 		if AddAutoQuestPopUp(questID, popUpType) then alterAQButton() end
-	end)     
-	hooksecurefunc(AUTO_QUEST_POPUP_TRACKER_MODULE, "Update", alterAQButton)
+	end)
 end
