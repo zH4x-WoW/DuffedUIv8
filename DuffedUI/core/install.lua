@@ -127,7 +127,7 @@ local function cvarsetup()
 	SetCVar("autoSelfCast", 1)
 	SetCVar("NamePlateVerticalScale", 1)
 	SetCVar("NamePlateHorizontalScale", 1)
-	setcvar("nameplatemaxdistance", 43)
+	SetCVar("nameplateMaxDistance", 43)
 end
 
 local OnLogon = CreateFrame("Frame")
