@@ -61,12 +61,48 @@ otfmove:SetScript("OnEnter", function(s) OTFM_Tooltip(s) end)
 otfmove:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
 otf.HeaderMenu.MinimizeButton:SkinCloseButton()
 
+local function CreateQuestTag(level, questTag, frequency)
+	local tag = ""
+	
+	if level == -1 then level = "*" else level = tostring(level) end
+	
+	if questTag == ELITE then
+		tag = "+"
+	elseif questTag == QUEST_TAG_GROUP then
+		tag = "g"
+	elseif questTag == QUEST_TAG_PVP then
+		tag = "pvp"
+	elseif questTag == QUEST_TAG_DUNGEON then
+		tag = "d"
+	elseif questTag == QUEST_TAG_HEROIC then
+		tag = "hc"
+	elseif questTag == QUEST_TAG_RAID then
+		tag = "r"
+	elseif questTag == QUEST_TAG_RAID10 then
+		tag = "r10"
+	elseif questTag == QUEST_TAG_RAID25 then
+		tag = "r25"
+	elseif questTag == QUEST_TAG_SCENARIO then
+		tag = "s"
+	elseif questTag == QUEST_TAG_ACCOUNT then
+		tag = "a"
+	elseif questTag == QUEST_TAG_LEGENDARY then
+		tag = "leg"
+	end
+	
+	if frequency == 2 then tag = tag.."!" elseif frequency == 3 then tag = tag.."!!" end
+	if tag ~= "" then tag = ("|cff00b3ff%s|r"):format(tag) end
+	tag = ("[%s %s] "):format(level, tag)
+	return tag
+end
+
 --[[Questtitle]]--
 hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
 	for i = 1, GetNumQuestWatches() do
-		local questID = GetQuestWatchInfo(i)
+		local title, level, groupSize, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isBounty, isStory = GetQuestLogTitle(i)
 		if not questID then break end
 		local block = QUEST_TRACKER_MODULE:GetBlock(questID)
+		local tagID = GetQuestTagInfo(questID)
 
 		block.HeaderText:SetFont(STANDARD_TEXT_FONT, 11)
 		block.HeaderText:SetShadowOffset(.7, -.7)
@@ -78,6 +114,13 @@ hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
 		if heightcheck == 2 then
 			local height = block:GetHeight()
 			block:SetHeight(height + 16)
+		end
+
+		if block then
+			local oldBlockHeight = block.height
+			local oldHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
+			local newTitle = CreateQuestTag(level, tagID, frequency) .. title
+			local newHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, newTitle, nil, OBJECTIVE_TRACKER_COLOR["Header"])
 		end
 	end
 end)
@@ -233,63 +276,6 @@ hooksecurefunc("AchievementObjectiveTracker_OnOpenDropDown", function(self)
 	info.notCheckable = 1
 	UIDropDownMenu_AddButton(info, UIDROPDOWN_MENU_LEVEL)
 end)
-
---[[Questlevel, tags]]--
-local QuestLevelPatch = {}
-
-local function CreateQuestTag(level, questTag, frequency)
-	local tag = ""
-	
-	if level == -1 then level = "*" else level = tostring(level) end
-	
-	if questTag == ELITE then
-		tag = "+"
-	elseif questTag == QUEST_TAG_GROUP then
-		tag = "g"
-	elseif questTag == QUEST_TAG_PVP then
-		tag = "pvp"
-	elseif questTag == QUEST_TAG_DUNGEON then
-		tag = "d"
-	elseif questTag == QUEST_TAG_HEROIC then
-		tag = "hc"
-	elseif questTag == QUEST_TAG_RAID then
-		tag = "r"
-	elseif questTag == QUEST_TAG_RAID10 then
-		tag = "r10"
-	elseif questTag == QUEST_TAG_RAID25 then
-		tag = "r25"
-	elseif questTag == QUEST_TAG_SCENARIO then
-		tag = "s"
-	elseif questTag == QUEST_TAG_ACCOUNT then
-		tag = "a"
-	elseif questTag == QUEST_TAG_LEGENDARY then
-		tag = "leg"
-	end
-	
-	if frequency == 2 then tag = tag.."!" elseif frequency == 3 then tag = tag.."!!" end
-	if tag ~= "" then tag = ("|cff00b3ff%s|r"):format(tag) end
-	tag = ("[%s %s] "):format(level, tag)
-	return tag
-end
-
-function SetBlockHeader_Hook()
-for i = 1, GetNumQuestWatches() do
-		local title, level, groupSize, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isBounty, isStory = GetQuestLogTitle(i)
-		if ( not questID ) then
-			break
-		end
-		local tagID = GetQuestTagInfo(questID) or ""
-		local oldBlock = QUEST_TRACKER_MODULE:GetExistingBlock(questID)
-
-		if oldBlock then
-			local oldBlockHeight = oldBlock.height
-			local oldHeight = QUEST_TRACKER_MODULE:SetStringText(oldBlock.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
-			local newTitle = CreateQuestTag(level, tagID, frequency) .. title
-			local newHeight = QUEST_TRACKER_MODULE:SetStringText(oldBlock.HeaderText, newTitle, nil, OBJECTIVE_TRACKER_COLOR["Header"])
-		end
-	end	
-end
-hooksecurefunc(QUEST_TRACKER_MODULE, "Update", SetBlockHeader_Hook)
 
 --[[Execution]]--
 local ObjFhandler = CreateFrame("Frame")
