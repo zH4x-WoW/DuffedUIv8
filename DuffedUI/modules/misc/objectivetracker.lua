@@ -98,29 +98,30 @@ end
 
 --[[Questtitle]]--
 hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
-	for i = 1, GetNumQuestWatches() do
+	for i = 1, GetNumQuestLogEntries() do
 		local title, level, groupSize, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isBounty, isStory = GetQuestLogTitle(i)
-		if not questID then break end
-		local block = QUEST_TRACKER_MODULE:GetBlock(questID)
-		local tagID = GetQuestTagInfo(questID)
+		if questID then
+			local block = QUEST_TRACKER_MODULE:GetBlock(questID)
+			local tagID = GetQuestTagInfo(questID)
 
-		block.HeaderText:SetFont(STANDARD_TEXT_FONT, 11)
-		block.HeaderText:SetShadowOffset(.7, -.7)
-		block.HeaderText:SetShadowColor(0, 0, 0, 1)
-		block.HeaderText:SetWordWrap(true)
+			block.HeaderText:SetFont(STANDARD_TEXT_FONT, 11)
+			block.HeaderText:SetShadowOffset(.7, -.7)
+			block.HeaderText:SetShadowColor(0, 0, 0, 1)
+			block.HeaderText:SetWordWrap(true)
 
-		local heightcheck = block.HeaderText:GetNumLines()
+			local heightcheck = block.HeaderText:GetNumLines()
 
-		if heightcheck == 2 then
-			local height = block:GetHeight()
-			block:SetHeight(height + 16)
-		end
+			if heightcheck == 2 then
+				local height = block:GetHeight()
+				block:SetHeight(height + 16)
+			end
 
-		if block then
-			local oldBlockHeight = block.height
-			local oldHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
-			local newTitle = CreateQuestTag(level, tagID, frequency) .. title
-			local newHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, newTitle, nil, OBJECTIVE_TRACKER_COLOR["Header"])
+			if block then
+				local oldBlockHeight = block.height
+				local oldHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
+				local newTitle = CreateQuestTag(level, tagID, frequency) .. title
+				local newHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, newTitle, nil, OBJECTIVE_TRACKER_COLOR["Header"])
+			end
 		end
 	end
 end)
@@ -280,18 +281,6 @@ end)
 --[[Execution]]--
 local ObjFhandler = CreateFrame("Frame")
 ObjFhandler:RegisterEvent("PLAYER_ENTERING_WORLD")
-ObjFhandler:RegisterEvent("QUEST_LOG_UPDATE")
-ObjFhandler:RegisterEvent("GOSSIP_SHOW")
-ObjFhandler:RegisterEvent("QUEST_GREETING")
-ObjFhandler:RegisterEvent("QUEST_COMPLETE")
-ObjFhandler:RegisterEvent("UNIT_QUEST_LOG_CHANGED")
-ObjFhandler:RegisterEvent("QUEST_WATCH_LIST_CHANGED")
-ObjFhandler:RegisterEvent("QUEST_WATCH_LIST_CHANGED")
-ObjFhandler:RegisterEvent("TRACKED_ACHIEVEMENT_LIST_CHANGED")
-ObjFhandler:RegisterEvent("QUEST_AUTOCOMPLETE")
-ObjFhandler:RegisterEvent("PLAYER_REGEN_ENABLED")
-ObjFhandler:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-ObjFhandler:RegisterEvent("ZONE_CHANGED")
 
 ObjFhandler:SetScript("OnEvent", function(self, event, AddOn)
 	if AddOn == "Blizzard_ObjectiveTracker" then alterAQButton() end
