@@ -280,6 +280,18 @@ end)
 --[[Execution]]--
 local ObjFhandler = CreateFrame("Frame")
 ObjFhandler:RegisterEvent("PLAYER_ENTERING_WORLD")
+ObjFhandler:RegisterEvent("QUEST_LOG_UPDATE")
+ObjFhandler:RegisterEvent("GOSSIP_SHOW")
+ObjFhandler:RegisterEvent("QUEST_GREETING")
+ObjFhandler:RegisterEvent("QUEST_COMPLETE")
+ObjFhandler:RegisterEvent("UNIT_QUEST_LOG_CHANGED")
+ObjFhandler:RegisterEvent("QUEST_WATCH_LIST_CHANGED")
+ObjFhandler:RegisterEvent("QUEST_WATCH_LIST_CHANGED")
+ObjFhandler:RegisterEvent("TRACKED_ACHIEVEMENT_LIST_CHANGED")
+ObjFhandler:RegisterEvent("QUEST_AUTOCOMPLETE")
+ObjFhandler:RegisterEvent("PLAYER_REGEN_ENABLED")
+ObjFhandler:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+ObjFhandler:RegisterEvent("ZONE_CHANGED")
 
 ObjFhandler:SetScript("OnEvent", function(self, event, AddOn)
 	if AddOn == "Blizzard_ObjectiveTracker" then alterAQButton() end
