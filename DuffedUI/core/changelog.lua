@@ -3,11 +3,8 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Added new lib for dropdowns",
-		"• Skinupdate => Tradeskill",
-		"• Fixed several bugs(garrison-datatext, taint on actionbars)",
-		"• Fixed automatic gearswitch for specswitcher",
-		"• Added ItemIDs to tooltips",
+		"• Added QuestTags to objectivetracker",
+		--"• ",
 	" ",
 	"Notes:",
 		"• Some skins are not completly finished",
