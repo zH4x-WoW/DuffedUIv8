@@ -6,11 +6,11 @@ local ChangeLogData = {
 		"• Added QuestTags to objectivetracker",
 		"• Nameplateupdate (new leveldisplay, fixed castbar icons)",
 		"• Skinupdate (PvE-Frame, Barbershop, Tradeskills, Collections)",
+		"• Added tooltips to Objectivetracker",
 		--"• ",
 	" ",
 	"Notes:",
 		"• Some skins are not completly finished",
-		"• AddOnSkins not completly finished",
 }
 
 local function ModifiedString(string)
