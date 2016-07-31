@@ -106,61 +106,64 @@ local function IsPlayerEffectivelyTank()
 	return assignedRole == "TANK"
 end
 
-function nameplates:SetName()
-    local text = self:GetText()
-	local level, elite, mylevel = UnitLevel("target"), UnitClassification("target"), UnitLevel("player")
+function nameplates:GetClassification(unit)
+	local cc = UnitClassification(unit)
+	local String = ""
+	
+	if cc == "elite" then
+		String = "+"
+	elseif cc == "rare" then
+		String = "r"
+	elseif cc == "rareelite" then
+		String = "r+"
+	elseif cc == "worldboss" then
+		String = "??"
+	end
+	
+	return String
+end
 
-    if text then
-		if (level == -1 or not level) then
-			self:SetText("|cffCC0D00" .. ("??") .. "|r " .. "|cffffffff".. text .."|r")
-		elseif elite == "elite" then
-			local colr = GetQuestDifficultyColor(level)
-			self:SetText(D["RGBToHex"](colr.r, colr.g, colr.b) .. level .. (elite and "+")  .. "|r " .. "|cffffffff".. text .."|r")
-		elseif not elite and level == mylevel then
-			self.SetText("|cffffffff".. text .."|r")
-		elseif level then
-			local colr = GetQuestDifficultyColor(level)
-			self:SetText(D["RGBToHex"](colr.r, colr.g, colr.b) .. level ..  "|r " .. "|cffffffff".. text .."|r")
-		end
-    end
+function nameplates:SetName()
+	local Text = self:GetText()
+
+	if Text then
+		local Unit = self:GetParent().unit
+		local Class = select(2, UnitClass(Unit))
+		local Level = UnitLevel(Unit)
+		local LevelColor = GetQuestDifficultyColor(Level)
+		local LevelHexColor = D.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
+		local IsFriend = UnitIsFriend("player", Unit)
+		local NameColor = IsFriend and D.UnitColor.reaction[5] or D.UnitColor.reaction[1]
+		local NameHexColor = D.RGBToHex(NameColor[1], NameColor[2], NameColor[3])
+		local Elite = nameplates:GetClassification(Unit)
+		local EliteColor = D.RGBToHex(unpack(C["media"].datatextcolor1))
+
+		if Level < 0 then Level = "" else Level = Level end
+		self:SetText("|cffba9b03[|r" .. LevelHexColor .. Level .."|r" .. EliteColor .. Elite .."|r" .. "|cffba9b03]|r " ..NameHexColor.. Text .."|r")
+	end
 end
 
 function nameplates:colorHealth()
 	if (self:GetName() and string.find(self:GetName(), "NamePlate")) then
-        local r, g, b = self.healthBar:GetStatusBarColor()
+		local r, g, b
 
-        for class, color in pairs(RAID_CLASS_COLORS) do
-			local r, g, b = floor(r * 100 + .5) / 100, floor(g * 100 + .5) / 100, floor(b * 100 + .5) / 100
-			if RAID_CLASS_COLORS[class].r == r and RAID_CLASS_COLORS[class].g == g and RAID_CLASS_COLORS[class].b == b then
-				self.hasClass = true
-				self.isFriendly = false
-				self.healthBar:SetStatusBarColor(unpack(D.UnitColor.class[class]))
-				return
+		if not UnitIsConnected(self.unit) then
+			r, g, b = unpack(D.UnitColor.disconnected)
+		else
+			if UnitIsPlayer(self.unit) then
+				local Class = select(2, UnitClass(self.unit))
+				r, g, b = unpack(D.UnitColor.class[Class])
+			else
+				if (UnitIsFriend("player", self.unit)) then
+					r, g, b = unpack(D.UnitColor.reaction[5])
+				else
+					local Reaction = UnitReaction("player", self.unit)
+					r, g, b = unpack(D.UnitColor.reaction[Reaction])
+				end
 			end
 		end
-
-		if g + b == 0 then
-			r, g, b = .78, .25, .25 -- hostile
-			self.isFriendly = false
-		elseif r + b == 0 then
-			r, g, b = .31, .45, .63 -- player
-			self.isFriendly = true
-		elseif r + g > 1.95 then
-			r, g, b = .86, .77, .36 -- neutral
-			self.isFriendly = false
-		elseif r + g == 0 then
-			r, g, b = .29,  .69, .3 -- good
-			self.isFriendly = true
-		else
-			self.isFriendly = false
-		end
-
-		if UnitIsPlayer(self.unit) then
-			local Class = select(2, UnitClass(self.unit))
-			r, g, b = unpack(colors.class[Class])
-		end
-        self.healthBar:SetStatusBarColor(r, g, b)
-    end
+		self.healthBar:SetStatusBarColor(r, g, b)
+	end
 end
 
 function nameplates:UpdateAggroNameplates()
@@ -209,14 +212,17 @@ function nameplates:UpdateAggroNameplates()
 end
 
 function nameplates:displayCastIcon()
-	local icon = self
-	local tex = icon:GetTexture()
-	local backdrop = icon:GetParent()
-
-	if tex then
-		if not backdrop:IsShown() then backdrop:Show() end
+	local Icon = self.Icon
+	local Texture = Icon:GetTexture()
+	local Backdrop = self.IconBackdrop
+	local IconTexture = self.IconTexture
+	
+	if Texture then
+		Backdrop:SetAlpha(1)
+		IconTexture:SetTexture(Texture)
 	else
-		if backdrop:IsShown() then backdrop:Hide() end
+		Backdrop:SetAlpha(0)
+		Icon:SetTexture(nil)		
 	end
 end
 
@@ -252,12 +258,12 @@ function nameplates:setupPlate(options)
 	castBar.IconBackdrop:SetBackdropColor(unpack(C["media"].backdropcolor))
 	castBar.IconBackdrop:SetFrameLevel(castBar:GetFrameLevel() - 1 or 0)
 
-	castBar.Icon:SetTexCoord(.08, .92, .08, .92)
-	castBar.Icon:SetParent(castBar.IconBackdrop)
-	castBar.Icon:ClearAllPoints()
-	castBar.Icon:SetAllPoints(castBar.IconBackdrop)
-	castBar.Icon.ClearAllPoints = noop
-	castBar.Icon.SetPoint = noop
+	castBar.Icon:SetParent(DuffedUIUIHider)
+	
+	castBar.IconTexture = castBar:CreateTexture(nil, "OVERLAY")
+	castBar.IconTexture:SetTexCoord(.08, .92, .08, .92)
+	castBar.IconTexture:SetParent(castBar.IconBackdrop)
+	castBar.IconTexture:SetAllPoints(castBar.IconBackdrop)
 
 	castBar.Text:SetFont(C["media"].font, 8)
 	castBar.Text:SetShadowOffset(1.25, -1.25)
@@ -268,7 +274,7 @@ function nameplates:setupPlate(options)
 	castBar.nonInterruptibleColor.r, castBar.nonInterruptibleColor.g, castBar.nonInterruptibleColor.b = unpack(nameplates.Options.castBarColors.NonInterrupt)
 	castBar.finishedCastColor.r, castBar.finishedCastColor.g, castBar.finishedCastColor.b = unpack(nameplates.Options.castBarColors.Success)
 
-	hooksecurefunc(castBar.Icon, "SetTexture", nameplates.displayCastIcon)
+	castBar:HookScript("OnShow", nameplates.displayCastIcon)
 
 	name:SetFont(C["media"].font, 8)
 	name:SetShadowOffset(1.25, -1.25)
