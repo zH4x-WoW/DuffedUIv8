@@ -8,19 +8,23 @@ local function ShowOrHideBar(bar, button)
 	local db = DuffedUIDataPerChar
 
 	if bar:IsShown() then
-		if bar == DuffedUIBar3 then
-			if button == DuffedUIBar3Button then
-				UnregisterStateDriver(bar, "visibility")
-				bar:Hide()
-				db.bar3 = true
+		if not C["actionbar"].LeftSideBarDisable then
+			if bar == DuffedUIBar3 then
+				if button == DuffedUIBar3Button then
+					UnregisterStateDriver(bar, "visibility")
+					bar:Hide()
+					db.bar3 = true
+				end
 			end
 		end
 
-		if bar == DuffedUIBar4 then
-			if button == DuffedUIBar4Button then
-				UnregisterStateDriver(bar, "visibility")
-				bar:Hide()
-				db.bar4 = true
+		if not C["actionbar"].RightSideBarDisable then
+			if bar == DuffedUIBar4 then
+				if button == DuffedUIBar4Button then
+					UnregisterStateDriver(bar, "visibility")
+					bar:Hide()
+					db.bar4 = true
+				end
 			end
 		end
 
@@ -32,14 +36,18 @@ local function ShowOrHideBar(bar, button)
 			end
 		end
 	else
-		if bar == DuffedUIBar3 then
-			db.bar3 = false
-			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] show; show")
+		if not C["actionbar"].LeftSideBarDisable then
+			if bar == DuffedUIBar3 then
+				db.bar3 = false
+				RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] show; show")
+			end
 		end
 
-		if bar == DuffedUIBar4 then
-			db.bar4 = false
-			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] show; show")
+		if not C["actionbar"].RightSideBarDisable then
+			if bar == DuffedUIBar4 then
+				db.bar4 = false
+				RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] show; show")
+			end
 		end
 
 		if bar == DuffedUIBar5 then
