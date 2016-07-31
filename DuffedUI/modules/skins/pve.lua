@@ -77,9 +77,25 @@ local function LoadSkin()
 				end
 			end
 		end
-		LFDQueueFrameRandomScrollFrameChildFrameMoneyReward:StripTextures()
 	end
 	hooksecurefunc("LFDQueueFrameRandom_UpdateFrame", ReskinRewards)
+	
+	local function HandleGoldIcon(button)
+		_G[button.."IconTexture"]:SetTexCoord(unpack(D["IconCoord"]))
+		_G[button.."IconTexture"]:SetDrawLayer("OVERLAY")
+		_G[button.."Count"]:SetDrawLayer("OVERLAY")
+		_G[button.."NameFrame"]:SetTexture()
+		_G[button.."NameFrame"]:SetSize(118, 39)
+
+		_G[button].border = CreateFrame("Frame", nil, _G[button])
+		_G[button].border:SetTemplate()
+		_G[button].border:SetOutside(_G[button.."IconTexture"])
+		_G[button.."IconTexture"]:SetParent(_G[button].border)
+		_G[button.."Count"]:SetParent(_G[button].border)
+	end
+	HandleGoldIcon("LFDQueueFrameRandomScrollFrameChildFrameMoneyReward")
+	HandleGoldIcon("RaidFinderQueueFrameScrollFrameChildFrameMoneyReward")
+	HandleGoldIcon("ScenarioQueueFrameRandomScrollFrameChildFrameMoneyReward")
 
 	for i = 1, NUM_LFD_CHOICE_BUTTONS do _G["LFDQueueFrameSpecificListButton"..i].enableButton:SkinCheckBox() end
 
@@ -323,6 +339,141 @@ local function LoadSkin()
 	ScenarioQueueFrameRandomScrollFrameChildFrameBonusRepFrame.ChooseButton:SkinButton()
 	LFDQueueFrameRandomScrollFrameScrollBar:StripTextures()
 	LFDQueueFrameRandomScrollFrameScrollBar:SkinScrollBar()
+	
+	--LFGListFrame
+	LFGListFrame.CategorySelection.Inset:StripTextures()
+	LFGListFrame.CategorySelection.StartGroupButton:SkinButton(true)
+	LFGListFrame.CategorySelection.FindGroupButton:SkinButton(true)
+	LFGListFrame.CategorySelection.StartGroupButton:ClearAllPoints()
+	LFGListFrame.CategorySelection.StartGroupButton:Point("BOTTOMLEFT", -1, 3)
+	LFGListFrame.CategorySelection.FindGroupButton:ClearAllPoints()
+	LFGListFrame.CategorySelection.FindGroupButton:Point("BOTTOMRIGHT", -6, 3)
+
+	--Fix issue with labels not following changes to GameFontNormal as they should
+	local function SetLabelFontObject(self, btnIndex)
+		local button = self.CategoryButtons[btnIndex]
+		if button then
+			button.Label:SetFontObject(GameFontNormal)
+			button:StripTextures()
+			button:SkinButton()
+		end
+	end
+	hooksecurefunc("LFGListCategorySelection_AddButton", SetLabelFontObject)
+
+	LFGListFrame.EntryCreation.Inset:StripTextures()
+	LFGListFrame.EntryCreation.CancelButton:SkinButton(true)
+	LFGListFrame.EntryCreation.ListGroupButton:SkinButton(true)
+	LFGListFrame.EntryCreation.CancelButton:ClearAllPoints()
+	LFGListFrame.EntryCreation.CancelButton:Point("BOTTOMLEFT", -1, 3)
+	LFGListFrame.EntryCreation.ListGroupButton:ClearAllPoints()
+	LFGListFrame.EntryCreation.ListGroupButton:Point("BOTTOMRIGHT", -6, 3)
+	LFGListEntryCreationDescription:SkinEditBox()
+
+	LFGListFrame.EntryCreation.Name:SkinEditBox()
+	LFGListFrame.EntryCreation.ItemLevel.EditBox:SkinEditBox()
+	LFGListFrame.EntryCreation.HonorLevel.EditBox:SkinEditBox()
+	LFGListFrame.EntryCreation.VoiceChat.EditBox:SkinEditBox()
+
+	LFGListEntryCreationActivityDropDown:SkinDropDownBox()
+	LFGListEntryCreationGroupDropDown:SkinDropDownBox()
+	LFGListEntryCreationCategoryDropDown:SkinDropDownBox(330)
+
+	LFGListFrame.EntryCreation.ItemLevel.CheckButton:SkinCheckBox()
+	LFGListFrame.EntryCreation.HonorLevel.CheckButton:SkinCheckBox()
+	LFGListFrame.EntryCreation.VoiceChat.CheckButton:SkinCheckBox()
+
+	LFGListFrame.EntryCreation.ActivityFinder.Dialog:StripTextures()
+	LFGListFrame.EntryCreation.ActivityFinder.Dialog:SetTemplate("Transparent")
+	LFGListFrame.EntryCreation.ActivityFinder.Dialog.BorderFrame:StripTextures()
+	LFGListFrame.EntryCreation.ActivityFinder.Dialog.BorderFrame:SetTemplate("Transparent")
+
+	LFGListFrame.EntryCreation.ActivityFinder.Dialog.EntryBox:SkinEditBox()
+	LFGListEntryCreationSearchScrollFrameScrollBar:SkinEditBox()
+	LFGListFrame.EntryCreation.ActivityFinder.Dialog.SelectButton:SkinButton()
+	LFGListFrame.EntryCreation.ActivityFinder.Dialog.CancelButton:SkinButton()
+
+	LFGListApplicationDialog:StripTextures()
+	LFGListApplicationDialog:SetTemplate("Transparent")
+	LFGListApplicationDialog.SignUpButton:SkinButton()
+	LFGListApplicationDialog.CancelButton:SkinButton()
+	LFGListApplicationDialogDescription:SkinButton()
+
+	LFGListInviteDialog:SetTemplate("Transparent")
+	LFGListInviteDialog.AcknowledgeButton:SkinButton()
+	LFGListInviteDialog.AcceptButton:SkinButton()
+	LFGListInviteDialog.DeclineButton:SkinButton()
+	LFGListInviteDialog.RoleIcon:SetTexture("Interface\\LFGFrame\\UI-LFG-ICONS-ROLEBACKGROUNDS")
+	local function SetRoleIcon(self, resultID)
+		local _,_,_,_, role = C_LFGList_GetApplicationInfo(resultID)
+		self.RoleIcon:SetTexCoord(GetBackgroundTexCoordsForRole(role))
+	end
+	hooksecurefunc("LFGListInviteDialog_Show", SetRoleIcon)
+
+	LFGListFrame.SearchPanel.SearchBox:SkinEditBox()
+
+	--[[local columns = {
+		['Name'] = true,
+		['Tank'] = true,
+		['Healer'] = true,
+		['Damager'] = true
+	}
+
+	for x, _ in pairs(columns) do
+		LFGListFrame.SearchPanel[x.."ColumnHeader"].Left:Hide()
+		LFGListFrame.SearchPanel[x.."ColumnHeader"].Middle:Hide()
+		LFGListFrame.SearchPanel[x.."ColumnHeader"].Right:Hide()
+	end]]
+
+	LFGListFrame.SearchPanel.BackButton:SkinButton(true)
+	LFGListFrame.SearchPanel.SignUpButton:SkinButton(true)
+	LFGListSearchPanelScrollFrame.StartGroupButton:SkinButton(true)
+	LFGListFrame.SearchPanel.BackButton:ClearAllPoints()
+	LFGListFrame.SearchPanel.BackButton:Point("BOTTOMLEFT", -1, 3)
+	LFGListFrame.SearchPanel.SignUpButton:ClearAllPoints()
+	LFGListFrame.SearchPanel.SignUpButton:Point("BOTTOMRIGHT", -6, 3)
+	LFGListFrame.SearchPanel.ResultsInset:StripTextures()
+	LFGListSearchPanelScrollFrameScrollBar:SkinScrollBar()
+	LFGListFrame.SearchPanel.AutoCompleteFrame:StripTextures()
+	LFGListFrame.SearchPanel.AutoCompleteFrame:SetTemplate("Transparent")
+
+	LFGListFrame.SearchPanel.FilterButton:SkinButton()
+	LFGListFrame.SearchPanel.RefreshButton:SkinButton()
+	LFGListFrame.SearchPanel.RefreshButton:Size(26)
+
+
+	--ApplicationViewer (Custom Groups)
+	LFGListFrame.ApplicationViewer.InfoBackground:SetTexCoord(unpack(D["IconCoord"]))
+	LFGListFrame.ApplicationViewer.AutoAcceptButton:SkinCheckBox()
+
+	LFGListFrame.ApplicationViewer.Inset:StripTextures()
+	LFGListFrame.ApplicationViewer.Inset:SetTemplate("Transparent")
+
+	LFGListFrame.ApplicationViewer.NameColumnHeader:SkinButton(true)
+	LFGListFrame.ApplicationViewer.RoleColumnHeader:SkinButton(true)
+	LFGListFrame.ApplicationViewer.ItemLevelColumnHeader:SkinButton(true)
+	LFGListFrame.ApplicationViewer.NameColumnHeader:ClearAllPoints()
+	LFGListFrame.ApplicationViewer.NameColumnHeader:Point("BOTTOMLEFT", LFGListFrame.ApplicationViewer.Inset, "TOPLEFT", 0, 1)
+	LFGListFrame.ApplicationViewer.RoleColumnHeader:ClearAllPoints()
+	LFGListFrame.ApplicationViewer.RoleColumnHeader:Point("LEFT", LFGListFrame.ApplicationViewer.NameColumnHeader, "RIGHT", 1, 0)
+	LFGListFrame.ApplicationViewer.ItemLevelColumnHeader:ClearAllPoints()
+	LFGListFrame.ApplicationViewer.ItemLevelColumnHeader:Point("LEFT", LFGListFrame.ApplicationViewer.RoleColumnHeader, "RIGHT", 1, 0)
+
+	LFGListFrame.ApplicationViewer.RefreshButton:SkinButton()
+	LFGListFrame.ApplicationViewer.RefreshButton:SetSize(24,24)
+	LFGListFrame.ApplicationViewer.RefreshButton:ClearAllPoints()
+	LFGListFrame.ApplicationViewer.RefreshButton:Point("BOTTOMRIGHT", LFGListFrame.ApplicationViewer.Inset, "TOPRIGHT", 16, 4)
+
+	LFGListFrame.ApplicationViewer.RemoveEntryButton:SkinButton(true)
+	LFGListFrame.ApplicationViewer.EditButton:SkinButton(true)
+	LFGListFrame.ApplicationViewer.RemoveEntryButton:ClearAllPoints()
+	LFGListFrame.ApplicationViewer.RemoveEntryButton:Point("BOTTOMLEFT", -1, 3)
+	LFGListFrame.ApplicationViewer.EditButton:ClearAllPoints()
+	LFGListFrame.ApplicationViewer.EditButton:Point("BOTTOMRIGHT", -6, 3)
+
+	LFGListApplicationViewerScrollFrameScrollBar:SkinScrollBar()
+	LFGListApplicationViewerScrollFrameScrollBar:ClearAllPoints()
+	LFGListApplicationViewerScrollFrameScrollBar:Point("TOPLEFT", LFGListFrame.ApplicationViewer.Inset, "TOPRIGHT", 0, -14)
+	LFGListApplicationViewerScrollFrameScrollBar:Point("BOTTOMLEFT", LFGListFrame.ApplicationViewer.Inset, "BOTTOMRIGHT", 0, 14)
 end
 
 tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
