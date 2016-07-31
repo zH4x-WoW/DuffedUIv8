@@ -96,16 +96,6 @@ function nameplates:RegisterOptions()
 	}
 end
 
-local function IsPlayerEffectivelyTank()
-	local assignedRole = UnitGroupRolesAssigned("player")
-
-	if assignedRole == "NONE" then
-		local spec GetSpecialization()
-		return spec and GetSpecializationRole(spec) == "TANK"
-	end
-	return assignedRole == "TANK"
-end
-
 function nameplates:GetClassification(unit)
 	local cc = UnitClassification(unit)
 	local String = ""
@@ -168,7 +158,6 @@ end
 
 function nameplates:UpdateAggroNameplates()
 	local isTanking, threatStatus = UnitDetailedThreatSituation("player", self.displayedUnit)
-	local isInGroup, isInRaid, isTank = IsInGroup(), IsInRaid(), IsPlayerEffectivelyTank()
 	-- (3 = securely tanking, 2 = insecurely tanking, 1 = not tanking but higher threat than tank, 0 = not tanking and lower threat than tank)
 
 	if C["nameplate"]["ethreat"] then
