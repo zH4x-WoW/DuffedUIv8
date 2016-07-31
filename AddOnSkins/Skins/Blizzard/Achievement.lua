@@ -92,6 +92,7 @@ function AS:Blizzard_AchievementUI(event, addon)
 		AS:SkinCloseButton(AchievementFrameCloseButton)
 
 		AS:SkinDropDownBox(AchievementFrameFilterDropDown)
+		AchievementFrameFilterDropDown:ClearAllPoints()
 		AchievementFrameFilterDropDown:Point("TOPRIGHT", AchievementFrame, "TOPRIGHT", -44, 0)
 
 		AS:SkinBackdropFrame(AchievementFrameCategories, nil, nil, true)
@@ -130,6 +131,10 @@ function AS:Blizzard_AchievementUI(event, addon)
 		AchievementFrameHeaderTitle:Point("TOPLEFT", AchievementFrame, "TOP", -50, -6)
 		AchievementFrameHeaderPoints:ClearAllPoints()
 		AchievementFrameHeaderPoints:Point("LEFT", AchievementFrameHeaderTitle, "RIGHT", 2, 0)
+		AS:SkinEditBox(AchievementFrame.searchBox)
+		AchievementFrame.searchBox:SetHeight(18)
+		AchievementFrame.searchBox:ClearAllPoints()
+		AchievementFrame.searchBox:Point("RIGHT", AchievementFrameHeaderTitle, "LEFT", -1, -1)
 
 		for i = 1, 3 do
 			AS:SkinTab(_G["AchievementFrameTab"..i])
