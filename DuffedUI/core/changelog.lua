@@ -4,6 +4,8 @@ local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
 		"• Added QuestTags to objectivetracker",
+		"• Nameplateupdate (new leveldisplay, fixed castbar icons)",
+		"• Skinupdate (PvE-Frame, Barbershop, Tradeskills, Collections)",
 		--"• ",
 	" ",
 	"Notes:",
