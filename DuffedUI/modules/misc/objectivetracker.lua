@@ -90,11 +90,11 @@ local function CreateQuestTag(level, questTag, frequency)
 		tag = "leg"
 	end
 	
-	if frequency == 2 then tag = tag.."!" elseif frequency == 3 then tag = tag.."!!" end
 	local color = D.RGBToHex(unpack(C["media"].datatextcolor1))
-	if tag ~= "" then tag = (color.."%s|r"):format(tag) end
 	local col = GetQuestDifficultyColor(level)
-	tag = ("|cff%2x%2x%2x[%s|r%s|cff%1$2x%2$2x%3$2x]|r "):format(col.r * 255, col.g * 255, col.b * 255, level, tag) 
+	if frequency == 2 then tag = tag.."!" elseif frequency == 3 then tag = tag.."!!" end
+	if tag ~= "" then tag = (color.."%s|r"):format(tag) end
+	tag = ("[|cff%2x%2x%2x%s|r%s|cff%1$2x%2$2x%3$2x|r] "):format(col.r * 255, col.g * 255, col.b * 255, level, tag) 
 	return tag
 end
 
