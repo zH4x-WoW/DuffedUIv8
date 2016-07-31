@@ -34,7 +34,7 @@ local function addLine(tooltip, id, type)
 
     if not found then
 		tooltip:AddLine(" ")
-        tooltip:AddDoubleLine(type, "|cffffffff" .. id)
+        tooltip:AddLine(type .. " |cffffffff" .. id)
         tooltip:Show()
     end
 end
@@ -81,20 +81,20 @@ end)
 
 -- Items
 local function attachItemTooltip(self)
-  local link = select(2, self:GetItem())
-  if link then
-    local id = string.match(link, "item:(%d*)")
-    if (id == "" or id == "0") and TradeSkillFrame ~= nil and TradeSkillFrame:IsVisible() and GetMouseFocus().reagentIndex then
-      local selectedRecipe = TradeSkillFrame.RecipeList:GetSelectedRecipeID()
-      for i = 1, 8 do
-        if GetMouseFocus().reagentIndex == i then
-          id = C_TradeSkillUI.GetRecipeReagentItemLink(selectedRecipe, i):match("item:(%d+):") or nil
-          break
-        end
-      end
-    end
-    if id then addLine(self, id, types.item) end
-  end
+	local link = select(2, self:GetItem())
+	if link then
+		local id = string.match(link, "item:(%d*)")
+		if (id == "" or id == "0") and TradeSkillFrame ~= nil and TradeSkillFrame:IsVisible() and GetMouseFocus().reagentIndex then
+			local selectedRecipe = TradeSkillFrame.RecipeList:GetSelectedRecipeID()
+			for i = 1, 8 do
+				if GetMouseFocus().reagentIndex == i then
+					id = C_TradeSkillUI.GetRecipeReagentItemLink(selectedRecipe, i):match("item:(%d+):") or nil
+					break
+				end
+			end
+		end
+		if id then addLine(self, id, types.item) end
+	end
 end
 
 GameTooltip:HookScript("OnTooltipSetItem", attachItemTooltip)
