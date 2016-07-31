@@ -352,11 +352,7 @@ local function LoadSkin()
 	--Fix issue with labels not following changes to GameFontNormal as they should
 	local function SetLabelFontObject(self, btnIndex)
 		local button = self.CategoryButtons[btnIndex]
-		if button then
-			button.Label:SetFontObject(GameFontNormal)
-			button:StripTextures()
-			button:SkinButton()
-		end
+		if button then button.Label:SetFontObject(GameFontNormal) end
 	end
 	hooksecurefunc("LFGListCategorySelection_AddButton", SetLabelFontObject)
 
