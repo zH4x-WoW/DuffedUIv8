@@ -8,6 +8,8 @@ local lST = "Wowhead"
 local lQ = "http://www.wowhead.com/quest=%d"
 local lA = "http://www.wowhead.com/achievement=%d"
 local format = string.format
+local blocks = {}
+local tooltips = {}
 
 _G.StaticPopupDialogs["WATCHFRAME_URL"] = {
 	text = lST .. " link",
@@ -98,6 +100,31 @@ local function CreateQuestTag(level, questTag, frequency)
 	return tag
 end
 
+function OTF_Tooltip_OnEnter(self,tooltip,anchor)
+	local tt = self.tooltip or tooltip or false
+	local a = self.tooltip_anchor or anchor
+	if tt then
+		if type(a) == "table" then
+			GameTooltip:SetOwner(self, "ANCHOR_NONE")
+			GameTooltip:SetPoint(unpack(a))
+		else
+			GameTooltip:SetOwner(self, "ANCHOR_" .. (a or "TOP"))
+		end
+		GameTooltip:ClearLines()
+		GameTooltip:SetText(tt[1])
+		for i = 2, #tt do
+			if type(tt[i]) == "table" then
+				GameTooltip:AddDoubleLine(tt[i][1], tt[i][2])
+			else
+				GameTooltip:AddLine(tt[i], 1, 1, 1, 1)
+			end
+		end
+		GameTooltip:Show()
+	end
+end
+
+function OTF_Tooltip_OnLeave() GameTooltip:Hide() end
+
 --[[Questtitle]]--
 hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
 	for i = 1, GetNumQuestLogEntries() do
@@ -122,6 +149,39 @@ hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
 			local oldHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
 			local newTitle = CreateQuestTag(level, tagID, frequency) .. title
 			local newHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, newTitle, nil, OBJECTIVE_TRACKER_COLOR["Header"])
+		end
+	end
+end)
+
+hooksecurefunc("QuestSuperTracking_CheckSelection", function(self)
+	local num = GetNumQuestLogEntries()
+	for i = 1, num do
+		local title, level, suggestedGroup, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isBounty, isStory = GetQuestLogTitle(i)
+		if questID and questID~=0 then
+			local block = QUEST_TRACKER_MODULE:GetBlock(questID)
+			local tagID, tagName = GetQuestTagInfo(questID)
+			local tags = {tagName}
+			local questText = GetQuestLogQuestText(i)
+
+			tooltips[questID] = false
+			tooltips[questID] = {title}
+			tinsert(tooltips[questID],{" ", " "})
+			tinsert(tooltips[questID],{"Questlevel:", level})
+			tinsert(tooltips[questID],{"Questtag:", table.concat(tags,", ")})
+			tinsert(tooltips[questID],{"QuestID:", questID})
+			tinsert(tooltips[questID],{" ", " "})
+			tinsert(tooltips[questID], questText)
+
+			QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
+			if not blocks[questID] and block.HeaderButton then
+				block.HeaderButton:HookScript("OnEnter",function(self)
+					if tooltips[questID] then
+						OTF_Tooltip_OnEnter(self, tooltips[questID], {"RIGHT", self, "LEFT", -28, 0})
+					end
+				end)
+				block.HeaderButton:HookScript("OnLeave", OTF_Tooltip_OnLeave)
+				blocks[questID] = true
+			end
 		end
 	end
 end)
