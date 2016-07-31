@@ -7,6 +7,7 @@ local ChangeLogData = {
 		"• Nameplateupdate (new leveldisplay, fixed castbar icons)",
 		"• Skinupdate (PvE-Frame, Barbershop, Tradeskills, Collections)",
 		"• Added tooltips to Objectivetracker",
+		"• Bugfixes",
 		--"• ",
 	" ",
 	"Notes:",
