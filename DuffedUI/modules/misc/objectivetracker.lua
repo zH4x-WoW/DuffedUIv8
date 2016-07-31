@@ -113,11 +113,7 @@ function OTF_Tooltip_OnEnter(self,tooltip,anchor)
 		GameTooltip:ClearLines()
 		GameTooltip:SetText(tt[1])
 		for i = 2, #tt do
-			if type(tt[i]) == "table" then
-				GameTooltip:AddDoubleLine(tt[i][1], tt[i][2])
-			else
-				GameTooltip:AddLine(tt[i], 1, 1, 1, 1)
-			end
+			if type(tt[i]) == "table" then GameTooltip:AddDoubleLine(tt[i][1], tt[i][2]) else GameTooltip:AddLine(tt[i], 1, 1, 1, 1) end
 		end
 		GameTooltip:Show()
 	end
@@ -162,22 +158,21 @@ hooksecurefunc("QuestSuperTracking_CheckSelection", function(self)
 			local tagID, tagName = GetQuestTagInfo(questID)
 			local tags = {tagName}
 			local questText = GetQuestLogQuestText(i)
+			local color = D.RGBToHex(unpack(C["media"].datatextcolor1))
 
 			tooltips[questID] = false
 			tooltips[questID] = {title}
 			tinsert(tooltips[questID],{" ", " "})
-			tinsert(tooltips[questID],{"Questlevel:", level})
-			tinsert(tooltips[questID],{"Questtag:", table.concat(tags,", ")})
-			tinsert(tooltips[questID],{"QuestID:", questID})
+			tinsert(tooltips[questID],{"Questlevel:", color .. level .. "|r"})
+			tinsert(tooltips[questID],{"Questtag:", color .. table.concat(tags, "|r, "..color) .. "|r"})
+			tinsert(tooltips[questID],{"QuestID:", color .. questID .. "|r"})
 			tinsert(tooltips[questID],{" ", " "})
 			tinsert(tooltips[questID], questText)
 
 			QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
 			if not blocks[questID] and block.HeaderButton then
 				block.HeaderButton:HookScript("OnEnter",function(self)
-					if tooltips[questID] then
-						OTF_Tooltip_OnEnter(self, tooltips[questID], {"RIGHT", self, "LEFT", -28, 0})
-					end
+					if tooltips[questID] then OTF_Tooltip_OnEnter(self, tooltips[questID], {"RIGHT", self, "LEFT", -28, 0}) end
 				end)
 				block.HeaderButton:HookScript("OnLeave", OTF_Tooltip_OnLeave)
 				blocks[questID] = true
