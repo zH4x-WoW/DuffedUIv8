@@ -170,7 +170,7 @@ D["ConstructUFTarget"] = function(self)
 				classicon:CreateBackdrop()
 				classicon.tex = classicon:CreateTexture("ClassIcon", "ARTWORK")
 				classicon.tex:SetAllPoints(classicon)
-				self.ClassIcon = classicon.tex
+				self.ClassIcons = classicon.tex
 			else
 				portrait.PostUpdate = D.PortraitUpdate 
 				self.Portrait = portrait
@@ -186,7 +186,7 @@ D["ConstructUFTarget"] = function(self)
 			else
 				portrait.tex = portrait:CreateTexture("ClassIcon", "ARTWORK")
 				portrait.tex:SetAllPoints(portrait)
-				self.ClassIcon = portrait.tex
+				self.ClassIcons = portrait.tex
 			end
 		elseif layout == 3 then
 			local portrait = CreateFrame("PlayerModel", nil, self)
@@ -196,7 +196,7 @@ D["ConstructUFTarget"] = function(self)
 			if C["unitframes"]["playermodel"] == "Icon" then
 				portrait.tex = portrait:CreateTexture("ClassIcon", "ARTWORK")
 				portrait.tex:SetAllPoints(portrait)
-				self.ClassIcon = portrait.tex
+				self.ClassIcons = portrait.tex
 			else
 				portrait.PostUpdate = D.PortraitUpdate 
 				self.Portrait = portrait
