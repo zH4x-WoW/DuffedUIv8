@@ -132,7 +132,7 @@ if IsAddOnLoaded("Blizzard_ObjectiveTracker") then
 		if otf.MODULES then
 			for i = 1, #otf.MODULES do
 				otf.MODULES[i].Header.Background:SetAtlas(nil)
-				otf.MODULES[i].Header.Text:SetFont(STANDARD_TEXT_FONT, 15)
+				otf.MODULES[i].Header.Text:SetFont(STANDARD_TEXT_FONT, 13)
 				otf.MODULES[i].Header.Text:ClearAllPoints()
 				otf.MODULES[i].Header.Text:SetPoint("RIGHT", otf.MODULES[i].Header, -62, 0)
 				otf.MODULES[i].Header.Text:SetJustifyH("LEFT")
