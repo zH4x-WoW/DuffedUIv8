@@ -162,44 +162,22 @@ D["ConstructUFPlayer"] = function(self)
 			portrait:SetFrameLevel(health:GetFrameLevel())
 			portrait:SetAllPoints(health)
 			portrait:SetAlpha(.15)
-			if C["unitframes"]["playermodel"] == "Icon" then
-				local classicon = CreateFrame("Frame", nil, health)
-				classicon:Size(29)
-				if layout == 1 then classicon:Point("BOTTOMRIGHT", power, "BOTTOMLEFT", -15, 0) else classicon:Point("BOTTOMRIGHT", health, "BOTTOMLEFT", -5, 0) end
-				classicon:CreateBackdrop()
-				classicon.tex = classicon:CreateTexture("ClassIcon", "ARTWORK")
-				classicon.tex:SetAllPoints(classicon)
-				self.ClassIcons = classicon.tex
-			else
-				portrait.PostUpdate = D.PortraitUpdate
-				self.Portrait = portrait
-			end
+			portrait.PostUpdate = D.PortraitUpdate
+			self.Portrait = portrait
 		elseif layout == 2 then
 			local portrait = CreateFrame("PlayerModel", nil, self)
 			portrait:Size(38)
 			portrait:Point("BOTTOMRIGHT", panel, "BOTTOMLEFT", -5, 2)
 			portrait:CreateBackdrop()
-			if C["unitframes"]["playermodel"] == "Model" then
-				portrait.PostUpdate = D.PortraitUpdate
-				self.Portrait = portrait
-			else
-				portrait.tex = portrait:CreateTexture("ClassIcon", "ARTWORK")
-				portrait.tex:SetAllPoints(portrait)
-				self.ClassIcons = portrait.tex
-			end
+			portrait.PostUpdate = D.PortraitUpdate
+			self.Portrait = portrait
 		elseif layout == 3 then
 			local portrait = CreateFrame("PlayerModel", nil, self)
 			portrait:Size(48)
 			portrait:Point("BOTTOMRIGHT", power, "BOTTOMLEFT", -6, 0)
 			portrait:CreateBackdrop()
-			if C["unitframes"]["playermodel"] == "Icon" then
-				portrait.tex = portrait:CreateTexture("ClassIcon", "ARTWORK")
-				portrait.tex:SetAllPoints(portrait)
-				self.ClassIcons = portrait.tex
-			else
-				portrait.PostUpdate = D.PortraitUpdate
-				self.Portrait = portrait
-			end
+			portrait.PostUpdate = D.PortraitUpdate
+			self.Portrait = portrait
 		end
 	end
 

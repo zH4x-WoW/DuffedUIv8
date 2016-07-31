@@ -31,7 +31,6 @@ C["unitframes"] = {
 	["totdbsize"] = 20,
 	["focusdebuffs"] = true,
 	["focusbutton"] = true,
-	["playermodel"] = "Model",
 	["buffsize"] = 20,
 	["debuffsize"] = 20,
 	["classbar"] = true,

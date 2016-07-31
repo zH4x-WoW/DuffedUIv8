@@ -32,7 +32,6 @@ DuffedUIConfigUILocalization.unitframestotdebuffs = "Enable Target of Target deb
 DuffedUIConfigUILocalization.unitframestotdbsize = "Set size of debuffs for Target of Target"
 DuffedUIConfigUILocalization.unitframesfocusdebuffs = "Enable focus debuffs"
 DuffedUIConfigUILocalization.unitframesfocusbutton = "Enable focus button on player / focus frame"
-DuffedUIConfigUILocalization.unitframesplayermodel = "Set Portraitstyle (Icon or Model, default => Model)"
 DuffedUIConfigUILocalization.unitframesbuffsize = "Set size of Buffs on Targetframe"
 DuffedUIConfigUILocalization.unitframesdebuffsize = "Set size of Debuffs on Targetframe"
 DuffedUIConfigUILocalization.unitframesclassbar = "Enable Classbars"

@@ -31,7 +31,6 @@
 	DuffedUIConfigUILocalization.unitframestotdbsize = "设置目标的目标减益光环大小"
 	DuffedUIConfigUILocalization.unitframesfocusdebuffs = "启用焦点目标Debuff"
 	DuffedUIConfigUILocalization.unitframesfocusbutton = "在玩家/焦点目标框体上启用焦点按钮"
-	DuffedUIConfigUILocalization.unitframesplayermodel = "设定头像显示类型(职业图标 or 3D头像, 默认 => 3D头像)"
 	DuffedUIConfigUILocalization.unitframesbuffsize = "设定目标框体增益光环大小"
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "设定目标框体减益光环大小"
 	DuffedUIConfigUILocalization.unitframesclassbar = "Enable Classbars"

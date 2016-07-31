@@ -31,7 +31,6 @@
 	DuffedUIConfigUILocalization.unitframestotdbsize = "Wähle die Größe für Schwächungszauber vom 'Ziel des Ziels' Einheitenfester"
 	DuffedUIConfigUILocalization.unitframesfocusdebuffs = "Aktiviere Schwächungszauber am Fokuseinheitenfenster"
 	DuffedUIConfigUILocalization.unitframesfocusbutton = "Aktiviere den Fokusbutton für Spieler- / Fokuseinheitenfenster"
-	DuffedUIConfigUILocalization.unitframesplayermodel = "Setze den Portraitstil (Icon oder Model, Standard => Model)"
 	DuffedUIConfigUILocalization.unitframesbuffsize = "Wähle die Größe der Stärkungszauber am Ziel"
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "Wähle die Größe der Schwächungszauber am Ziel"
 	DuffedUIConfigUILocalization.unitframesclassbar = "Aktiviere die Klassenleiste"
