@@ -10,6 +10,10 @@ local lA = "http://www.wowhead.com/achievement=%d"
 local format = string.format
 local blocks = {}
 local tooltips = {}
+local frequencies = {
+	[LE_QUEST_FREQUENCY_DAILY] = {"*", DAILY},
+	[LE_QUEST_FREQUENCY_WEEKLY] = {"**", WEEKLY},
+}
 
 _G.StaticPopupDialogs["WATCHFRAME_URL"] = {
 	text = lST .. " link",
@@ -160,6 +164,7 @@ hooksecurefunc("QuestSuperTracking_CheckSelection", function(self)
 			local questText = GetQuestLogQuestText(i)
 			local color = D.RGBToHex(unpack(C["media"].datatextcolor1))
 
+			if frequencies[frequency] then tinsert(tags,frequencies[frequency][2]) end
 			tooltips[questID] = false
 			tooltips[questID] = {title}
 			tinsert(tooltips[questID],{" ", " "})
