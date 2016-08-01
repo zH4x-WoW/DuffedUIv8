@@ -116,10 +116,10 @@ DuffedUIAFKPanel:SetScript("OnUpdate", function(self, elapsed)
 end)
 
 --[[Register events, script to start]]--
-DuffedUIAFKPanel:RegisterEvent("PLAYER_ENTERING_WORLD")
-DuffedUIAFKPanel:RegisterEvent("PLAYER_LEAVING_WORLD")
 DuffedUIAFKPanel:RegisterEvent("PLAYER_FLAGS_CHANGED")
 DuffedUIAFKPanel:RegisterEvent("PLAYER_REGEN_DISABLED")
+DuffedUIAFKPanel:RegisterEvent("LFG_PROPOSAL_SHOW")
+DuffedUIAFKPanel:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
 DuffedUIAFKPanel:RegisterEvent("PLAYER_DEAD")
 DuffedUIAFKPanel:SetScript("OnEvent", function(self, event, unit)
 	if InCombatLockdown() then return end
