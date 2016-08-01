@@ -3,15 +3,12 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Added QuestTags to objectivetracker",
-		"• Nameplateupdate (new leveldisplay, fixed castbar icons)",
-		"• Skinupdate (PvE-Frame, Barbershop, Tradeskills, Collections)",
-		"• Added tooltips to Objectivetracker",
-		"• Bugfixes",
+		"• Update for AddOnSkins",
+		"• ",
 		--"• ",
 	" ",
 	"Notes:",
-		"• Some skins are not completly finished",
+		"• No additional notes yet",
 }
 
 local function ModifiedString(string)

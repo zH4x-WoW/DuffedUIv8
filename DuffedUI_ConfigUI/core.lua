@@ -160,8 +160,10 @@ function CreateDuffedUIConfigUI()
 		function1 = function()
 			if DuffedUIConfigAllCharacters:GetChecked() then 
 				DuffedUIConfigAll[myPlayerRealm][myPlayerName] = true
+				DuffedUIConfigPublic = nil
 			else 
 				DuffedUIConfigAll[myPlayerRealm][myPlayerName] = false
+				DuffedUIConfigPrivate = nil
 			end
 			ReloadUI()
 		end,
