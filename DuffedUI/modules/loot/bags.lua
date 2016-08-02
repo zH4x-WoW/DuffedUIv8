@@ -163,6 +163,8 @@ function CreateReagentContainer()
 
 		Button:ClearAllPoints()
 		Button:Size(ButtonSize, ButtonSize)
+		Button:SetFrameStrata("HIGH")
+		Button:SetFrameLevel(2)
 		Button:SetNormalTexture("")
 		Button:SetPushedTexture("")
 		Button:SetHighlightTexture("")
