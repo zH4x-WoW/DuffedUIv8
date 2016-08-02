@@ -129,7 +129,7 @@ DuffedUIAFKPanel:SetScript("OnEvent", function(self, event, unit)
 				SpinStart()
 				DuffedUIAFKPanel:Show()
 				GuildText()
-				Model()
+				if not AFKPlayerModel then Model() end
 				Minimap:Hide()
 			else
 				SpinStop()
