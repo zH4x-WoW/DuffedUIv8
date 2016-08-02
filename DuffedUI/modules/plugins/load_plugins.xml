@@ -18,4 +18,5 @@
 	<Script file="spellcooldowns.lua" />
 	<Script file="squareminimapbuttons.lua" />
 	<Script file="stats.lua" />
+	<Script file="tradeskilltabs.lua" />
 </Ui>
