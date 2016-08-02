@@ -128,37 +128,10 @@ function OTF_Tooltip_OnLeave() GameTooltip:Hide() end
 
 --[[Questtitle]]--
 hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
-	for i = 1, GetNumQuestLogEntries() do
-		local title, level, groupSize, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isBounty, isStory = GetQuestLogTitle(i)
-		if questID then
-			local block = QUEST_TRACKER_MODULE:GetBlock(questID)
-			local tagID = GetQuestTagInfo(questID)
-
-			block.HeaderText:SetFont(STANDARD_TEXT_FONT, 11)
-			block.HeaderText:SetShadowOffset(.7, -.7)
-			block.HeaderText:SetShadowColor(0, 0, 0, 1)
-			block.HeaderText:SetWordWrap(true)
-
-			local heightcheck = block.HeaderText:GetNumLines()
-
-			if heightcheck == 2 then
-				local height = block:GetHeight()
-				block:SetHeight(height + 16)
-			end
-
-			local oldBlockHeight = block.height
-			local oldHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
-			local newTitle = CreateQuestTag(level, tagID, frequency) .. title
-			local newHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, newTitle, nil, OBJECTIVE_TRACKER_COLOR["Header"])
-		end
-	end
-end)
-
-hooksecurefunc("QuestSuperTracking_CheckSelection", function(self)
 	local num = GetNumQuestLogEntries()
 	for i = 1, num do
-		local title, level, suggestedGroup, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isBounty, isStory = GetQuestLogTitle(i)
-		if questID and questID~=0 then
+		local title, level, groupSize, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isBounty, isStory = GetQuestLogTitle(i)
+		if questID and questID ~= 0 then
 			local block = QUEST_TRACKER_MODULE:GetBlock(questID)
 			local tagID, tagName = GetQuestTagInfo(questID)
 			local tags = {tagName}
@@ -183,9 +156,76 @@ hooksecurefunc("QuestSuperTracking_CheckSelection", function(self)
 				block.HeaderButton:HookScript("OnLeave", OTF_Tooltip_OnLeave)
 				blocks[questID] = true
 			end
+
+			block.HeaderText:SetFont(STANDARD_TEXT_FONT, 11)
+			block.HeaderText:SetShadowOffset(.7, -.7)
+			block.HeaderText:SetShadowColor(0, 0, 0, 1)
+			block.HeaderText:SetWordWrap(true)
+
+			local heightcheck = block.HeaderText:GetNumLines()
+
+			if heightcheck == 2 then
+				local height = block:GetHeight()
+				block:SetHeight(height + 16)
+			end
+
+			local oldBlockHeight = block.height
+			local oldHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
+			local newTitle = CreateQuestTag(level, tagID, frequency) .. title
+			local newHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, newTitle, nil, OBJECTIVE_TRACKER_COLOR["Header"])
 		end
 	end
 end)
+
+--[[hooksecurefunc("QuestSuperTracking_CheckSelection", function(self)
+	local num = GetNumQuestLogEntries()
+	for i = 1, num do
+		local title, level, groupSize, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isBounty, isStory = GetQuestLogTitle(i)
+		if questID and questID ~= 0 then
+			local block = QUEST_TRACKER_MODULE:GetBlock(questID)
+			local tagID, tagName = GetQuestTagInfo(questID)
+			local tags = {tagName}
+			local questText = GetQuestLogQuestText(i)
+			local color = D.RGBToHex(unpack(C["media"].datatextcolor1))
+
+			if frequencies[frequency] then tinsert(tags,frequencies[frequency][2]) end
+			tooltips[questID] = false
+			tooltips[questID] = {title}
+			tinsert(tooltips[questID],{" ", " "})
+			tinsert(tooltips[questID],{"Questlevel:", color .. level .. "|r"})
+			tinsert(tooltips[questID],{"Questtag:", color .. table.concat(tags, "|r, "..color) .. "|r"})
+			tinsert(tooltips[questID],{"QuestID:", color .. questID .. "|r"})
+			tinsert(tooltips[questID],{" ", " "})
+			tinsert(tooltips[questID], questText)
+
+			QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
+			if not blocks[questID] and block.HeaderButton then
+				block.HeaderButton:HookScript("OnEnter",function(self)
+					if tooltips[questID] then OTF_Tooltip_OnEnter(self, tooltips[questID], {"RIGHT", self, "LEFT", -28, 0}) end
+				end)
+				block.HeaderButton:HookScript("OnLeave", OTF_Tooltip_OnLeave)
+				blocks[questID] = true
+			end
+
+			block.HeaderText:SetFont(STANDARD_TEXT_FONT, 11)
+			block.HeaderText:SetShadowOffset(.7, -.7)
+			block.HeaderText:SetShadowColor(0, 0, 0, 1)
+			block.HeaderText:SetWordWrap(true)
+
+			local heightcheck = block.HeaderText:GetNumLines()
+
+			if heightcheck == 2 then
+				local height = block:GetHeight()
+				block:SetHeight(height + 16)
+			end
+
+			local oldBlockHeight = block.height
+			local oldHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
+			local newTitle = CreateQuestTag(level, tagID, frequency) .. title
+			local newHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, newTitle, nil, OBJECTIVE_TRACKER_COLOR["Header"])
+		end
+	end
+end)]]
 
 --[[Hide header art & restyle text]]--
 if IsAddOnLoaded("Blizzard_ObjectiveTracker") then
