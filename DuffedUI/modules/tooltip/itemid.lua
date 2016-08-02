@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if C["tooltip"].enable ~= true or C["tooltip"].ids ~= true then return end
+--if C["tooltip"].enable ~= true or C["tooltip"].ids ~= true then return end
 
 --[[Global variables]]--
 local hooksecurefunc = hooksecurefunc
@@ -67,6 +67,21 @@ end)
 GameTooltip:HookScript("OnTooltipSetSpell", function(self)
     local id = select(3, self:GetSpell())
     if id then addLine(self, id, types.spell) end
+end)
+
+hooksecurefunc(GameTooltip, "SetUnitBuff", function(self, ...)
+	local id = select(11, UnitBuff(...))
+	if id then addLine(GameTooltip, id, types.spell) end
+end)
+
+hooksecurefunc(GameTooltip, "SetUnitDebuff", function(self, ...)
+	local id = select(11, UnitDebuff(...))
+	if id then addLine(GameTooltip, id, types.spell) end
+end)
+
+hooksecurefunc(GameTooltip, "SetUnitAura", function(self, ...)
+	local id = select(11, UnitAura(...))
+	if id then addLine(GameTooltip, id, types.spell) end
 end)
 
 -- NPCs
