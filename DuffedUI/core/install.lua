@@ -24,7 +24,7 @@ D.ChatSetup = function()
 		if i == 1 then FCF_SetWindowName(frame, "G, S & W") end
 		if i == 2 then FCF_SetWindowName(frame, "Log") end
 		if i == 3 then FCF_SetWindowName(frame, "Whisper") end
-		D.SetDefaultChatPosition(frame)
+		if C["chat"].enable then D.SetDefaultChatPosition(frame) end
 	end
 
 	ChatFrame_RemoveAllMessageGroups(ChatFrame1)
