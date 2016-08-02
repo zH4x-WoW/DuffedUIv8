@@ -1,4 +1,5 @@
 local D, C, L = unpack(select(2, ...))
+if C["tooltip"].enable ~= true or C["tooltip"].ids ~= true then return end
 
 --[[Global variables]]--
 local hooksecurefunc = hooksecurefunc
