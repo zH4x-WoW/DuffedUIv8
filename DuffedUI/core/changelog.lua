@@ -4,7 +4,11 @@ local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
 		"• Update for AddOnSkins",
-		"• ",
+		"• Added profession tabs to tradeskill window",
+		"• Bugfixes (raidframes, petbar, options, regeant bank, sidebars, objectivetracker)",
+		"• Update for oUF_Aurawatch",
+		"• Update for AddOnSkins",
+		"• Update for Skins",
 		--"• ",
 	" ",
 	"Notes:",
