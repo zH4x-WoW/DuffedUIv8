@@ -13,6 +13,8 @@ local move = D["move"]
 
 --[[Option to hide group 5 - 8]]--
 D["MaxGroup"] = function(frame)
+	if InCombatLockdown() then return end
+	
 	local MaxGroup = CreateFrame("Frame")
 	MaxGroup:RegisterEvent("PLAYER_ENTERING_WORLD")
 	MaxGroup:RegisterEvent("ZONE_CHANGED_NEW_AREA")
