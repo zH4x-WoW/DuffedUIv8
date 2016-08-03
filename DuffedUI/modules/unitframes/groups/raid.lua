@@ -31,6 +31,7 @@ D["ConstructUFRaid"] = function(self)
 		health:Point("TOPRIGHT", self, "BOTTOMRIGHT", 0, 15)
 	else
 		health:Height(C["raid"]["frameheight"] - 15)
+		health:Width(C["raid"]["framewidth"])
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 	end
