@@ -289,7 +289,7 @@ D["ConstructUFPlayer"] = function(self)
 	if C["castbar"]["enable"] then
 		local pcb = CreateFrame("Frame", "PlayerCastBarMover", UIParent)
 		pcb:Size(376, 21)
-		pcb:Point("BOTTOM", DuffedUIBar1, "TOP", 0, 5)
+		if C["actionbar"].enable then pcb:Point("BOTTOM", DuffedUIBar1, "TOP", 0, 5) else pcb:Point("BOTTOM", UIParent, "BOTTOM", 0, 167) end
 		move:RegisterFrame(pcb)
 
 		local castbar = CreateFrame("StatusBar", self:GetName() .. "CastBar", self)
