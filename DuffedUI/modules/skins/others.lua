@@ -347,12 +347,9 @@ local function LoadSkin()
 
 		for i = 1, getn(interfacedropdown) do
 			local idropdown = _G["InterfaceOptions"..interfacedropdown[i]]
-			if idropdown then
-				idropdown:SkinDropDownBox()
-				DropDownList1:SetTemplate("Transparent")
-			end
+			if idropdown then DropDownList1:SetTemplate("Transparent") end
 		end
-		--InterfaceOptionsHelpPanelResetTutorials:SkinButton()
+		_G["InterfaceOptionsCameraPanelStyleDropDown"]:SetWidth(200)
 
 		local optioncheckbox = {
 			-- Graphics --
