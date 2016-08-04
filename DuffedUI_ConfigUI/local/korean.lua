@@ -216,6 +216,7 @@
 	DuffedUIConfigUILocalization.duffedspellannounce = "Enable Auraannouncement"
 	DuffedUIConfigUILocalization.duffederrorfilter = "Hide spamming error in the middle of your screen"
 	DuffedUIConfigUILocalization.duffedtalkinghead = "Disable the Talking Head-Frame"
+	DuffedUIConfigUILocalization.duffedobjectivetracker = "Enable moving for objectivetracker"
 
 	--[[Loot]]--
 	DuffedUIConfigUILocalization.loot = "Loot"

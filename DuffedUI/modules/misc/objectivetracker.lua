@@ -37,34 +37,37 @@ otf:SetMovable(true)
 otf:SetUserPlaced(true)
 otf:SetHeight(otfheight)
 
-local otfmove = CreateFrame("FRAME", "ObjectivetrackerMover", otf)  
-otfmove:SetHeight(21)
-otfmove:SetPoint("TOPLEFT", otf, -11, -1)
-otfmove:SetPoint("TOPRIGHT", otf)
-otfmove:EnableMouse(true)
-otfmove:RegisterForDrag("LeftButton")
-otfmove:SetHitRectInsets(-5, -5, -5, -5)
+if C["duffed"].objectivetracker then
+	local otfmove = CreateFrame("FRAME", "ObjectivetrackerMover", otf)  
+	otfmove:SetHeight(21)
+	otfmove:SetPoint("TOPLEFT", otf, -11, -1)
+	otfmove:SetPoint("TOPRIGHT", otf)
+	otfmove:EnableMouse(true)
+	otfmove:RegisterForDrag("LeftButton")
+	otfmove:SetHitRectInsets(-5, -5, -5, -5)
 
-local function OTFM_Tooltip(self)
-	GameTooltip:SetOwner(self, "ANCHOR_TOP")
-	GameTooltip:AddLine(L["move"]["watchframe"], 1, 1, 1)
-	GameTooltip:Show()
+	local function OTFM_Tooltip(self)
+		GameTooltip:SetOwner(self, "ANCHOR_TOP")
+		GameTooltip:AddLine(L["move"]["watchframe"], 1, 1, 1)
+		GameTooltip:Show()
+	end
+
+	otfmove:SetScript("OnDragStart", function(self, button)
+		if IsModifiedClick() and button == "LeftButton" then
+			local f = self:GetParent()
+			f:StartMoving()
+		end
+	end)
+
+	otfmove:SetScript("OnDragStop", function(self, button)
+		local f = self:GetParent()
+		f:StopMovingOrSizing()
+	end)
+
+	otfmove:SetScript("OnEnter", function(s) OTFM_Tooltip(s) end)
+	otfmove:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
 end
 
-otfmove:SetScript("OnDragStart", function(self, button)
-	if IsModifiedClick() and button == "LeftButton" then
-		local f = self:GetParent()
-		f:StartMoving()
-	end
-end)
-
-otfmove:SetScript("OnDragStop", function(self, button)
-	local f = self:GetParent()
-	f:StopMovingOrSizing()
-end)
-
-otfmove:SetScript("OnEnter", function(s) OTFM_Tooltip(s) end)
-otfmove:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
 otf.HeaderMenu.MinimizeButton:SkinCloseButton()
 
 local function CreateQuestTag(level, questTag, frequency)
@@ -174,56 +177,6 @@ hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
 		end
 	end
 end)
-
---[[hooksecurefunc("QuestSuperTracking_CheckSelection", function(self)
-	local num = GetNumQuestLogEntries()
-	for i = 1, num do
-		local title, level, groupSize, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isBounty, isStory = GetQuestLogTitle(i)
-		if questID and questID ~= 0 then
-			local block = QUEST_TRACKER_MODULE:GetBlock(questID)
-			local tagID, tagName = GetQuestTagInfo(questID)
-			local tags = {tagName}
-			local questText = GetQuestLogQuestText(i)
-			local color = D.RGBToHex(unpack(C["media"].datatextcolor1))
-
-			if frequencies[frequency] then tinsert(tags,frequencies[frequency][2]) end
-			tooltips[questID] = false
-			tooltips[questID] = {title}
-			tinsert(tooltips[questID],{" ", " "})
-			tinsert(tooltips[questID],{"Questlevel:", color .. level .. "|r"})
-			tinsert(tooltips[questID],{"Questtag:", color .. table.concat(tags, "|r, "..color) .. "|r"})
-			tinsert(tooltips[questID],{"QuestID:", color .. questID .. "|r"})
-			tinsert(tooltips[questID],{" ", " "})
-			tinsert(tooltips[questID], questText)
-
-			QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
-			if not blocks[questID] and block.HeaderButton then
-				block.HeaderButton:HookScript("OnEnter",function(self)
-					if tooltips[questID] then OTF_Tooltip_OnEnter(self, tooltips[questID], {"RIGHT", self, "LEFT", -28, 0}) end
-				end)
-				block.HeaderButton:HookScript("OnLeave", OTF_Tooltip_OnLeave)
-				blocks[questID] = true
-			end
-
-			block.HeaderText:SetFont(STANDARD_TEXT_FONT, 11)
-			block.HeaderText:SetShadowOffset(.7, -.7)
-			block.HeaderText:SetShadowColor(0, 0, 0, 1)
-			block.HeaderText:SetWordWrap(true)
-
-			local heightcheck = block.HeaderText:GetNumLines()
-
-			if heightcheck == 2 then
-				local height = block:GetHeight()
-				block:SetHeight(height + 16)
-			end
-
-			local oldBlockHeight = block.height
-			local oldHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, title, nil, OBJECTIVE_TRACKER_COLOR["Header"])
-			local newTitle = CreateQuestTag(level, tagID, frequency) .. title
-			local newHeight = QUEST_TRACKER_MODULE:SetStringText(block.HeaderText, newTitle, nil, OBJECTIVE_TRACKER_COLOR["Header"])
-		end
-	end
-end)]]
 
 --[[Hide header art & restyle text]]--
 if IsAddOnLoaded("Blizzard_ObjectiveTracker") then

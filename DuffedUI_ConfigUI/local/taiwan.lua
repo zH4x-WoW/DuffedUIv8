@@ -216,6 +216,7 @@
 	DuffedUIConfigUILocalization.duffedspellannounce = "啟用光環通告"
 	DuffedUIConfigUILocalization.duffederrorfilter = "隱藏屏幕中部的錯誤信息提示"
 	DuffedUIConfigUILocalization.duffedtalkinghead = "Disable the Talking Head-Frame"
+	DuffedUIConfigUILocalization.duffedobjectivetracker = "Enable moving for objectivetracker"
 
 	--[[Loot]]--
 	DuffedUIConfigUILocalization.loot = "拾取"

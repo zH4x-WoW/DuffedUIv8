@@ -216,6 +216,7 @@ C["duffed"] = {
 	["spellannounce"] = true,
 	["errorfilter"] = true,
 	["talkinghead"] = true,
+	["objectivetracker"] = false,
 	filter = {
 		[INVENTORY_FULL] = true,
 		[ERR_PARTY_LFG_BOOT_COOLDOWN_S] = true,

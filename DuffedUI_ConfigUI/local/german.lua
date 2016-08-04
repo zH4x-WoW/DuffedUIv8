@@ -218,6 +218,7 @@
 	DuffedUIConfigUILocalization.duffedspellannounce = "Aktiviere Aurawarnungen"
 	DuffedUIConfigUILocalization.errorenable = "Verstecke die Fehlermeldungen, die in der Mitte Deines Bildschirms immer wieder angezeigt werden"
 	DuffedUIConfigUILocalization.duffedtalkinghead = "Deaktiviere den Emoteframe von NPC's"
+	DuffedUIConfigUILocalization.duffedobjectivetracker = "Aktiviere Bewegen für Questverfolgung"
 
 	--[[Loot]]--
 	DuffedUIConfigUILocalization.loot = "Beutefenster"
