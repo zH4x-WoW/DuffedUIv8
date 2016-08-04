@@ -73,7 +73,7 @@ otf.HeaderMenu.MinimizeButton:SkinCloseButton()
 local function CreateQuestTag(level, questTag, frequency)
 	local tag = ""
 	
-	if level == -1 then level = "*" else level = tostring(level) end
+	if level == -1 then level = "*" else level = tonumber(level) end
 	
 	if questTag == ELITE then
 		tag = "+"
@@ -100,9 +100,12 @@ local function CreateQuestTag(level, questTag, frequency)
 	end
 	
 	local color = D.RGBToHex(unpack(C["media"].datatextcolor1))
+	if (level == nil or tonumber(level) == nil) then level = 0 end
+	local col = GetQuestDifficultyColor(level)
+	if not col then col = {r = 1, g = 1, b = 1} end
 	if frequency == 2 then tag = tag .. "*" elseif frequency == 3 then tag = tag .. "**" end
 	if tag ~= "" then tag = (color .. "%s|r"):format(tag) end
-	tag = ("[%s%s] "):format(level, tag) 
+	tag = ("[|cff%2x%2x%2x%s|r%s|cff%1$2x%2$2x%3$2x|r] "):format(col.r * 255, col.g * 255, col.b * 255, level, tag)
 	return tag
 end
 
