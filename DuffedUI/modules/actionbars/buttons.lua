@@ -3,6 +3,7 @@ if not C["actionbar"].enable == true then return end
 
 local cp = "|cff319f1b" -- +
 local cm = "|cff9a1212" -- -
+local move = D["move"]
 
 local function ShowOrHideBar(bar, button)
 	local db = DuffedUIDataPerChar
@@ -180,6 +181,7 @@ vehicleleft:RegisterEvent("UNIT_ENTERED_VEHICLE")
 vehicleleft:RegisterEvent("UNIT_EXITED_VEHICLE")
 vehicleleft:RegisterEvent("VEHICLE_UPDATE")
 vehicleleft:SetScript("OnEvent", Vehicle_OnEvent)
+move:RegisterFrame(vehicleleft)
 
 vehicleleft:FontString("text", C["media"].font, 11)
 vehicleleft.text:Point("CENTER", 0, 0)
