@@ -80,10 +80,26 @@ local function MoveButtonBar(button, bar)
 	if button == DuffedUIBar5Button then
 		if bar:IsShown() then
 			button.text:SetText(cm..">|r")
-			DuffedUIPetBarMover:Point("RIGHT", DuffedUIBar5, "LEFT", -6, 0)
+			if not C["actionbar"].petbarhorizontal then
+				DuffedUIPetBarMover:Point("RIGHT", DuffedUIBar5, "LEFT", -6, 0)
+			else
+				if C["chat"]["rbackground"] then
+					DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 3)
+				else
+					DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 176)
+				end
+			end
 		else
 			button.text:SetText(cp.."<|r")
-			DuffedUIPetBarMover:Point("RIGHT", UIParent, "RIGHT", -14, -14)
+			if not C["actionbar"].petbarhorizontal then
+				DuffedUIPetBarMover:Point("RIGHT", UIParent, "RIGHT", -14, -14)
+			else
+				if C["chat"]["rbackground"] then
+					DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 3)
+				else
+					DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 176)
+				end
+			end
 		end
 	end
 end

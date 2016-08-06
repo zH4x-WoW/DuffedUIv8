@@ -107,7 +107,7 @@ function nameplates:GetClassification(unit)
 	elseif cc == "rareelite" then
 		String = "r+"
 	elseif cc == "worldboss" then
-		String = "??"
+		String = "b"
 	end
 	
 	return String
@@ -128,7 +128,7 @@ function nameplates:SetName()
 		local Elite = nameplates:GetClassification(Unit)
 		local EliteColor = D.RGBToHex(unpack(C["media"].datatextcolor1))
 
-		if Level < 0 then Level = "" else Level = Level end
+		if Level < 0 then Level = "|cffba9b03??|r" else Level = Level end
 		self:SetText("|cffba9b03[|r" .. LevelHexColor .. Level .."|r" .. EliteColor .. Elite .."|r" .. "|cffba9b03]|r " ..NameHexColor.. Text .."|r")
 	end
 end
