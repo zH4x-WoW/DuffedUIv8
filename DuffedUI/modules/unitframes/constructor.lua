@@ -261,6 +261,7 @@ D["SpawnUF"] = function(self)
 				"initial-width", D["Scale"](C["raid"]["framewidth"]),
 				"initial-height", D["Scale"](C["raid"]["frameheight"]),
 				"showPlayer", C["raid"]["showplayerinparty"],
+				--"showSolo", true,
 				"showParty", true,
 				"showRaid", true, 
 				"xoffset", D["Scale"](8),
