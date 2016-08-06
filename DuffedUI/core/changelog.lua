@@ -9,6 +9,7 @@ local ChangeLogData = {
 		"• Update for oUF_Aurawatch",
 		"• Update for AddOnSkins",
 		"• Update for Skins",
+		"• Added raid debuffs for Legion"
 		--"• ",
 	" ",
 	"Notes:",
