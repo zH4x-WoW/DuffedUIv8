@@ -143,7 +143,7 @@ D["ConstructUFPlayer"] = function(self)
 	power.value = health:CreateFontString(nil, "OVERLAY")
 	power.value:SetFont(f, fs, ff)
 	if layout == 4 then power.value:Point("RIGHT", health, "RIGHT", -4, -1) else power.value:Point("LEFT", health, "LEFT", 4, -1) end
-
+	
 	power.PostUpdate = D.PostUpdatePower
 	power.frequentUpdates = true
 	power.colorDisconnected = true

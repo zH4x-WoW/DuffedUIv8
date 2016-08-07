@@ -11,25 +11,6 @@ local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
 local layout = C["unitframes"]["layout"]
 local move = D["move"]
 
---[[Option to hide group 5 - 8]]--
-D["MaxGroup"] = function(frame)
-	if InCombatLockdown() then return end
-	
-	local MaxGroup = CreateFrame("Frame")
-	MaxGroup:RegisterEvent("PLAYER_ENTERING_WORLD")
-	MaxGroup:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-	MaxGroup:RegisterEvent("GROUP_ROSTER_UPDATE")
-	MaxGroup:SetScript("OnEvent", function(self)
-		local inInstance, instanceType = IsInInstance()
-		local _, _, _, _, maxPlayers = GetInstanceInfo()
-		if (inInstance and instanceType == "raid" and maxPlayers == 20) then
-			frame:SetAttribute("groupFilter", "1,2,3,4")
-		elseif (inInstance and instanceType == "raid" and maxPlayers == 30) then
-			frame:SetAttribute("groupFilter", "1,2,3,4,5,6")
-		end
-	end)
-end
-
 D["ConstructUF"] = function(self, unit)
 	if not unit then return end
 	local parent = self:GetParent():GetName()
@@ -281,7 +262,6 @@ D["SpawnUF"] = function(self)
 			else
 				raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33)
 			end
-			D["MaxGroup"](oUF_Heal)
 			move:RegisterFrame(raid)
 
 			if C["raid"]["showraidpets"] then
@@ -333,7 +313,6 @@ D["SpawnUF"] = function(self)
 			else
 				raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33)
 			end
-			D["MaxGroup"](oUF_DPS)
 			move:RegisterFrame(raid)
 		end
 	end
