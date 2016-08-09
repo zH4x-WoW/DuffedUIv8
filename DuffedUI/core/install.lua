@@ -128,6 +128,8 @@ local function cvarsetup()
 	SetCVar("NamePlateVerticalScale", 1)
 	SetCVar("NamePlateHorizontalScale", 1)
 	SetCVar("nameplateMaxDistance", 43)
+	SetCVar("TargetPriorityAllowAnyOnScreen", 0)
+	SetCVar("Targetnearestuseold", 1)
 end
 
 local OnLogon = CreateFrame("Frame")
@@ -315,7 +317,7 @@ local step2 = function()
 	sb:SetValue(2)
 	header:SetText(L["install"]["header09"])
 	sbt:SetText("2/4")
-	if IsAddOnLoaded("Prat") or IsAddOnLoaded("Chatter") then 
+	if IsAddOnLoaded("Prat") or IsAddOnLoaded("Chatter") then
 		text1:SetText(L["install"]["step2line0"])
 		option2:Hide()
 	else
