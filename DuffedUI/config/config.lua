@@ -35,7 +35,7 @@ C["unitframes"] = {
 	["debuffsize"] = 20,
 	["classbar"] = true,
 	["attached"] = false,
-	["oocHide"] = false,
+	["oocHide"] = true,
 }
 
 C["chat"] = {
