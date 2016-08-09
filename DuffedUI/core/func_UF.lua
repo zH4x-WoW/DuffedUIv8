@@ -28,7 +28,7 @@ local Flash = function(self, duration)
 	self.anim:Play()
 end
 
-local StopFlash = function(self) 
+local StopFlash = function(self)
 	if self.anim then self.anim:Finish() end
 end
 
@@ -81,7 +81,7 @@ D.PostUpdateHealth = function(health, unit, min, max)
 
 		if (C["unitframes"].unicolor ~= true and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C["unitframes"].unicolor ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
 			local c = D.UnitColor.reaction[UnitReaction(unit, "player")]
-			if c then 
+			if c then
 				r, g, b = c[1], c[2], c[3]
 				health:SetStatusBarColor(r, g, b)
 			else
@@ -92,7 +92,7 @@ D.PostUpdateHealth = function(health, unit, min, max)
 
 		if min ~= max then
 			local r, g, b
-			r, g, b = oUF.ColorGradient(min, max, .69, .31, .31, .65, .63, .35, .33, .59, .33) 
+			r, g, b = oUF.ColorGradient(min, max, .69, .31, .31, .65, .63, .35, .33, .59, .33)
 			if unit == "player" and health:GetAttribute("normalUnit") ~= "pet" then
 				health.value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", D.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
 			elseif unit == "target" or (unit and unit:find("boss%d")) then
@@ -502,7 +502,7 @@ D.UpdateThreat = function(self, event, unit)
 		else
 			self.Name:SetTextColor(1, 1, 1)
 		end
-	end 
+	end
 end
 
 function D.PvPUpdate(self, elapsed)
@@ -631,6 +631,7 @@ if C["raid"].raidunitdebuffwatch == true then
 				{774, "TOPLEFT", {0, 0}, {.8, .4, .8}}, 				-- Rejuvenation
 				{155777, "TOPLEFT", {0, -8}, {.3, .3, .8}}, 			-- Germination
 				{8936, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, 				-- Regrowth
+				{145205, "TOPRIGHT", {0, -8}, {.21, .8, .21}}			-- Efflorescence
 				{33763, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, 			-- Lifebloom
 				{48438, "BOTTOMRIGHT", {0, 0}, {.8, .4, 0}}, 			-- Wild Growth
 			},
@@ -643,7 +644,7 @@ if C["raid"].raidunitdebuffwatch == true then
 				{156910, "TOPRIGHT", {0, 0},{.7, .3, .7}}, 				-- Beacon of Faith
 			},
 			SHAMAN = {
-				{61295, "TOPLEFT", {0, 0}, {.7, .3, .7}}, 				-- Riptide 
+				{61295, "TOPLEFT", {0, 0}, {.7, .3, .7}}, 				-- Riptide
 			},
 			MONK = {
 				{119611, "TOPLEFT", {0, 0}, {.8, .4, .8}}, 				-- Renewing Mist
@@ -668,7 +669,7 @@ if C["raid"].raidunitdebuffwatch == true then
 
 		local function SpellName(id)
 			local name = select(1, GetSpellInfo(id))
-			return name	
+			return name
 		end
 
 		D.debuffids = {
@@ -820,7 +821,7 @@ if C["raid"].raidunitdebuffwatch == true then
 			SpellName(183634), -- Shadowfel Burst
 			SpellName(189895), -- Void Star Fixate
 			SpellName(190049), -- Nether Corruption
-			
+
 			-- Legion Debuffs
 			-- The Emerald Nightmare
 			-- Il'gynoth, Heart of Corruption
