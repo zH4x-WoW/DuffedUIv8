@@ -5,6 +5,17 @@ if C["duffed"]["talkinghead"] then
 	UIParent:UnregisterEvent("TALKINGHEAD_REQUESTED")
 end
 
+--[[/console cameraDistanceMaxFactor 2.6]]--
+local f = CreateFrame("Frame")
+function f:OnEvent(event, addon)
+	hooksecurefunc("BlizzardOptionsPanel_SetupControl", function(control)
+		if control == InterfaceOptionsCameraPanelMaxDistanceSlider then SetCVar("cameraDistanceMaxFactor", 2.6) end
+	end)
+	self:UnregisterEvent(event)
+end
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", f.OnEvent)
+
 --[[Quest Rewards]]--
 local QuestReward = CreateFrame("Frame")
 QuestReward:SetScript("OnEvent", function(self, event, ...) self[event](...) end)
