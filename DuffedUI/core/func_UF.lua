@@ -631,7 +631,7 @@ if C["raid"].raidunitdebuffwatch == true then
 				{774, "TOPLEFT", {0, 0}, {.8, .4, .8}}, 				-- Rejuvenation
 				{155777, "TOPLEFT", {0, -8}, {.3, .3, .8}}, 			-- Germination
 				{8936, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, 				-- Regrowth
-				{145205, "TOPRIGHT", {0, -8}, {.21, .8, .21}}			-- Efflorescence
+				{145205, "TOPRIGHT", {0, -8}, {.21, .8, .21}},			-- Efflorescence
 				{33763, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, 			-- Lifebloom
 				{48438, "BOTTOMRIGHT", {0, 0}, {.8, .4, 0}}, 			-- Wild Growth
 			},
