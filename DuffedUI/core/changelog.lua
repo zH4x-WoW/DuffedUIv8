@@ -3,11 +3,17 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Added new lib for dropdowns",
+		"• Update for AddOnSkins",
+		"• Added profession tabs to tradeskill window",
+		"• Bugfixes (raidframes, petbar, options, regeant bank, sidebars, objectivetracker)",
+		"• Update for oUF_Aurawatch",
+		"• Update for AddOnSkins",
+		"• Update for Skins",
+		"• Added raid debuffs for Legion"
+		--"• ",
 	" ",
 	"Notes:",
-		"• Some skins are not completly finished",
-		"• AddOnSkins not completly finished",
+		"• No additional notes yet",
 }
 
 local function ModifiedString(string)

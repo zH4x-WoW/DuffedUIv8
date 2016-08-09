@@ -116,8 +116,6 @@ DuffedUIAFKPanel:SetScript("OnUpdate", function(self, elapsed)
 end)
 
 --[[Register events, script to start]]--
-DuffedUIAFKPanel:RegisterEvent("PLAYER_ENTERING_WORLD")
-DuffedUIAFKPanel:RegisterEvent("PLAYER_LEAVING_WORLD")
 DuffedUIAFKPanel:RegisterEvent("PLAYER_FLAGS_CHANGED")
 DuffedUIAFKPanel:RegisterEvent("PLAYER_REGEN_DISABLED")
 DuffedUIAFKPanel:RegisterEvent("PLAYER_DEAD")
@@ -131,7 +129,7 @@ DuffedUIAFKPanel:SetScript("OnEvent", function(self, event, unit)
 				SpinStart()
 				DuffedUIAFKPanel:Show()
 				GuildText()
-				Model()
+				if not AFKPlayerModel then Model() end
 				Minimap:Hide()
 			else
 				SpinStop()
@@ -151,8 +149,6 @@ DuffedUIAFKPanel:SetScript("OnEvent", function(self, event, unit)
 			DuffedUIAFKPanel:Hide()
 			Minimap:Show()
 		end
-	elseif event == "PLAYER_LEAVING_WORLD" then
-		SpinStop()
 	end
 end)
 

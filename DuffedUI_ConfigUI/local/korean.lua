@@ -31,7 +31,6 @@
 	DuffedUIConfigUILocalization.unitframestotdbsize = "Set size of debuffs for Target of Target"
 	DuffedUIConfigUILocalization.unitframesfocusdebuffs = "Enable focus debuffs"
 	DuffedUIConfigUILocalization.unitframesfocusbutton = "Enable focus button on player / focus frame"
-	DuffedUIConfigUILocalization.unitframesplayermodel = "Set Portraitstyle (Icon or Model, default => Model)"
 	DuffedUIConfigUILocalization.unitframesbuffsize = "Set size of Buffs on Targetframe"
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "Set size of Debuffs on Targetframe"
 	DuffedUIConfigUILocalization.unitframesattached = "Attach Classbars to Unitframes"
@@ -217,6 +216,7 @@
 	DuffedUIConfigUILocalization.duffedspellannounce = "Enable Auraannouncement"
 	DuffedUIConfigUILocalization.duffederrorfilter = "Hide spamming error in the middle of your screen"
 	DuffedUIConfigUILocalization.duffedtalkinghead = "Disable the Talking Head-Frame"
+	DuffedUIConfigUILocalization.duffedobjectivetracker = "Enable moving for objectivetracker"
 
 	--[[Loot]]--
 	DuffedUIConfigUILocalization.loot = "Loot"

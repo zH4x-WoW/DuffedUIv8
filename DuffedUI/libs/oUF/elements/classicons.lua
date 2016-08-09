@@ -58,10 +58,10 @@ local _, PlayerClass = UnitClass'player'
 -- Holds the class specific stuff.
 local ClassPowerID, ClassPowerType
 local ClassPowerEnable, ClassPowerDisable
-local RequireSpec, RequireSpell, RequirePower
+local RequireSpec, RequireSpell, RequireFormID
 
 local UpdateTexture = function(element)
-	local color = oUF.colors.power[ClassPowerType]
+	local color = oUF.colors.power[ClassPowerType or 'COMBO_POINTS']
 	for i = 1, #element do
 		local icon = element[i]
 		if(icon.SetDesaturated) then
@@ -108,7 +108,7 @@ local Update = function(self, event, unit, powerType)
 			if(i <= cur) then
 				element[i]:Show()
 			else
-				element[i]:Hide()
+				--element[i]:Hide()
 			end
 		end
 
@@ -154,10 +154,14 @@ local function Visibility(self, event, unit)
 		shouldEnable = true
 	elseif(ClassPowerID) then
 		if(not RequireSpec or RequireSpec == GetSpecialization()) then
-			if(not RequireSpell or IsPlayerSpell(RequireSpell)) then
-				if(not RequirePower or RequirePower == UnitPowerType('player')) then
-					self:UnregisterEvent('SPELLS_CHANGED', Visibility)
-					shouldEnable = true
+			if(not RequireFormID or RequireFormID == GetShapeshiftFormID()) then
+				if(not RequireSpell or IsPlayerSpell(RequireSpell)) then
+					if(not RequirePower or RequirePower == UnitPowerType('player')) then
+						self:UnregisterEvent('SPELLS_CHANGED', Visibility)
+						shouldEnable = true
+					else
+						self:RegisterEvent('SPELLS_CHANGED', Visibility, true)
+					end
 				else
 					self:RegisterEvent('SPELLS_CHANGED', Visibility, true)
 				end
@@ -187,6 +191,7 @@ do
 	ClassPowerEnable = function(self)
 		self:RegisterEvent('UNIT_DISPLAYPOWER', VisibilityPath)
 		self:RegisterEvent('UNIT_POWER_FREQUENT', Path)
+		self:RegisterEvent('UNIT_MAXPOWER', Path)
 
 		if(UnitHasVehicleUI('player')) then
 			Path(self, 'ClassPowerEnable', 'vehicle', 'COMBO_POINTS')
@@ -199,6 +204,7 @@ do
 	ClassPowerDisable = function(self)
 		self:UnregisterEvent('UNIT_DISPLAYPOWER', VisibilityPath)
 		self:UnregisterEvent('UNIT_POWER_FREQUENT', Path)
+		self:UnregisterEvent('UNIT_MAXPOWER', Path)
 
 		local element = self.ClassIcons
 		for i = 1, #element do
@@ -243,7 +249,8 @@ do
 		ClassPowerType = 'COMBO_POINTS'
 
 		if(isBetaClient and PlayerClass == 'DRUID') then
-			RequirePower = SPELL_POWER_ENERGY
+			RequireFormID = 1 --CAT_FORM
+			RequireSpell = 5221 -- Shred
 		end
 	elseif(PlayerClass == 'MAGE' and isBetaClient) then
 		ClassPowerID = SPELL_POWER_ARCANE_CHARGES
@@ -264,6 +271,10 @@ local Enable = function(self, unit)
 
 	if(RequireSpec) then
 		self:RegisterEvent('PLAYER_TALENT_UPDATE', VisibilityPath, true)
+	end
+
+	if(RequireFormID) then
+		self:RegisterEvent('UPDATE_SHAPESHIFT_FORM', VisibilityPath, true)
 	end
 
 	element.ClassPowerEnable = ClassPowerEnable

@@ -3,24 +3,29 @@ if not C["actionbar"].enable == true then return end
 
 local cp = "|cff319f1b" -- +
 local cm = "|cff9a1212" -- -
+local move = D["move"]
 
 local function ShowOrHideBar(bar, button)
 	local db = DuffedUIDataPerChar
 
 	if bar:IsShown() then
-		if bar == DuffedUIBar3 then
-			if button == DuffedUIBar3Button then
-				UnregisterStateDriver(bar, "visibility")
-				bar:Hide()
-				db.bar3 = true
+		if not C["actionbar"].LeftSideBarDisable then
+			if bar == DuffedUIBar3 then
+				if button == DuffedUIBar3Button then
+					UnregisterStateDriver(bar, "visibility")
+					bar:Hide()
+					db.bar3 = true
+				end
 			end
 		end
 
-		if bar == DuffedUIBar4 then
-			if button == DuffedUIBar4Button then
-				UnregisterStateDriver(bar, "visibility")
-				bar:Hide()
-				db.bar4 = true
+		if not C["actionbar"].RightSideBarDisable then
+			if bar == DuffedUIBar4 then
+				if button == DuffedUIBar4Button then
+					UnregisterStateDriver(bar, "visibility")
+					bar:Hide()
+					db.bar4 = true
+				end
 			end
 		end
 
@@ -32,14 +37,18 @@ local function ShowOrHideBar(bar, button)
 			end
 		end
 	else
-		if bar == DuffedUIBar3 then
-			db.bar3 = false
-			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] show; show")
+		if not C["actionbar"].LeftSideBarDisable then
+			if bar == DuffedUIBar3 then
+				db.bar3 = false
+				RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] show; show")
+			end
 		end
 
-		if bar == DuffedUIBar4 then
-			db.bar4 = false
-			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] show; show")
+		if not C["actionbar"].RightSideBarDisable then
+			if bar == DuffedUIBar4 then
+				db.bar4 = false
+				RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] show; show")
+			end
 		end
 
 		if bar == DuffedUIBar5 then
@@ -71,10 +80,26 @@ local function MoveButtonBar(button, bar)
 	if button == DuffedUIBar5Button then
 		if bar:IsShown() then
 			button.text:SetText(cm..">|r")
-			DuffedUIPetBarMover:Point("RIGHT", DuffedUIBar5, "LEFT", -6, 0)
+			if not C["actionbar"].petbarhorizontal then
+				DuffedUIPetBarMover:Point("RIGHT", DuffedUIBar5, "LEFT", -6, 0)
+			else
+				if C["chat"]["rbackground"] then
+					DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 3)
+				else
+					DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 176)
+				end
+			end
 		else
 			button.text:SetText(cp.."<|r")
-			DuffedUIPetBarMover:Point("RIGHT", UIParent, "RIGHT", -14, -14)
+			if not C["actionbar"].petbarhorizontal then
+				DuffedUIPetBarMover:Point("RIGHT", UIParent, "RIGHT", -14, -14)
+			else
+				if C["chat"]["rbackground"] then
+					DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 3)
+				else
+					DuffedUIPetBarMover:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 176)
+				end
+			end
 		end
 	end
 end
@@ -172,6 +197,7 @@ vehicleleft:RegisterEvent("UNIT_ENTERED_VEHICLE")
 vehicleleft:RegisterEvent("UNIT_EXITED_VEHICLE")
 vehicleleft:RegisterEvent("VEHICLE_UPDATE")
 vehicleleft:SetScript("OnEvent", Vehicle_OnEvent)
+move:RegisterFrame(vehicleleft)
 
 vehicleleft:FontString("text", C["media"].font, 11)
 vehicleleft.text:Point("CENTER", 0, 0)

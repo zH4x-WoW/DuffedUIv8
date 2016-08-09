@@ -13,6 +13,8 @@ local move = D["move"]
 
 --[[Option to hide group 5 - 8]]--
 D["MaxGroup"] = function(frame)
+	if InCombatLockdown() then return end
+	
 	local MaxGroup = CreateFrame("Frame")
 	MaxGroup:RegisterEvent("PLAYER_ENTERING_WORLD")
 	MaxGroup:RegisterEvent("ZONE_CHANGED_NEW_AREA")
@@ -259,6 +261,7 @@ D["SpawnUF"] = function(self)
 				"initial-width", D["Scale"](C["raid"]["framewidth"]),
 				"initial-height", D["Scale"](C["raid"]["frameheight"]),
 				"showPlayer", C["raid"]["showplayerinparty"],
+				--"showSolo", true,
 				"showParty", true,
 				"showRaid", true, 
 				"xoffset", D["Scale"](8),

@@ -1,6 +1,21 @@
 local D, C, L = unpack(select(2, ...)) 
 if not C["datatext"].garrison or C["datatext"].garrison == 0 then return end
 
+--[[Variables]]--
+local format = string.format
+local tsort = table.sort
+local GetMouseFocus = GetMouseFocus
+local GetCurrencyInfo = GetCurrencyInfo
+local C_GarrisonRequestLandingPageShipmentInfo = C_Garrison.RequestLandingPageShipmentInfo
+local C_GarrisonGetBuildings = C_Garrison.GetBuildings
+local C_GarrisonGetInProgressMissions = C_Garrison.GetInProgressMissions
+local C_GarrisonGetLandingPageShipmentInfo = C_Garrison.GetLandingPageShipmentInfo
+local GARRISON_LANDING_SHIPMENT_COUNT = GARRISON_LANDING_SHIPMENT_COUNT
+local COMPLETE = COMPLETE
+local LE_FOLLOWER_TYPE_GARRISON_6_0 = LE_FOLLOWER_TYPE_GARRISON_6_0
+local LE_FOLLOWER_TYPE_SHIPYARD_6_2 = LE_FOLLOWER_TYPE_SHIPYARD_6_2
+local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
+
 local Stat = CreateFrame("Frame", "DuffedUIStatgarrison")
 Stat:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 Stat:RegisterEvent("GET_ITEM_INFO_RECEIVED")
@@ -17,34 +32,16 @@ Stat.Option = C["datatext"].garrison
 Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
-local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 local Text  = Stat:CreateFontString("DuffedUIStatgarrisonText", "OVERLAY")
 Text:SetFont(f, fs, ff)
 D.DataTextPosition(C["datatext"].garrison, Text)
-
-local format = string.format
-local tsort = table.sort
-
---WoW API / Variables
-local GetMouseFocus = GetMouseFocus
-local GetCurrencyInfo = GetCurrencyInfo
-local C_GarrisonRequestLandingPageShipmentInfo = C_Garrison.RequestLandingPageShipmentInfo
-local C_GarrisonGetBuildings = C_Garrison.GetBuildings
-local C_GarrisonGetInProgressMissions = C_Garrison.GetInProgressMissions
-local C_GarrisonGetLandingPageShipmentInfo = C_Garrison.GetLandingPageShipmentInfo
-local GARRISON_LANDING_SHIPMENT_COUNT = GARRISON_LANDING_SHIPMENT_COUNT
-local COMPLETE = COMPLETE
-local LE_FOLLOWER_TYPE_GARRISON_6_0 = LE_FOLLOWER_TYPE_GARRISON_6_0
-local LE_FOLLOWER_TYPE_SHIPYARD_6_2 = LE_FOLLOWER_TYPE_SHIPYARD_6_2
 
 local function Currency(id, weekly, capped)	
 	local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(id)
 	if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, amount, 1, 1, 1) end
 end
 
-local function sortFunction(a, b)
-	return a.missionEndTime < b.missionEndTime
-end
+local function sortFunction(a, b) return a.missionEndTime < b.missionEndTime end
 
 local function Update(self, event)
 	if not GarrisonMissionFrame then LoadAddOn("Blizzard_GarrisonUI") end
@@ -58,19 +55,11 @@ local function Update(self, event)
 		if Missions[i].inProgress then
 			local TimeLeft = Missions[i].timeLeft:match("%d")
 			
-			if (TimeLeft ~= "0") then
-				CountInProgress = CountInProgress + 1
-			else
-				CountCompleted = CountCompleted + 1
-			end
+			if (TimeLeft ~= "0") then CountInProgress = CountInProgress + 1 else CountCompleted = CountCompleted + 1 end
 		end
 	end
 
-	if (CountInProgress > 0) then
-		Text:SetText(Stat.Color1 .. format(GARRISON_MISSIONS, CountCompleted, #Missions))
-	else
-		Text:SetText(Stat.Color2 ..("Garnison"))		
-	end	
+	if (CountInProgress > 0) then Text:SetText(Stat.Color1 .. format(GARRISON_MISSIONS, CountCompleted, #Missions)) else Text:SetText(Stat.Color2 ..("Garnison")) end	
 	self:SetAllPoints(Text)
 end
 
@@ -109,23 +98,14 @@ if InCombatLockdown() then return end
 	if(numMissions > 0) then
 		tsort(inProgressMissions, sortFunction) --Sort by time left, lowest first
 
-		if(numBuildings > 0) then
-			GameTooltip:AddLine(" ")
-		end
+		if(numBuildings > 0) then GameTooltip:AddLine(" ") end
 		GameTooltip:AddLine(GARRISON_MISSIONS_TITLE)
 		for i=1, numMissions do
 			local mission = inProgressMissions[i]
 			local timeLeft = mission.timeLeft:match("%d")
 			local r, g, b = 1, 1, 1
-			if(mission.isRare) then
-				r, g, b = 0.09, 0.51, 0.81
-			end
-
-			if(timeLeft and timeLeft == "0") then
-				GameTooltip:AddDoubleLine(mission.name, COMPLETE, r, g, b, 0, 1, 0)
-			else
-				GameTooltip:AddDoubleLine(mission.name, mission.timeLeft, r, g, b)
-			end
+			if(mission.isRare) then r, g, b = .09, .51, .81 end
+			if(timeLeft and timeLeft == "0") then GameTooltip:AddDoubleLine(mission.name, COMPLETE, r, g, b, 0, 1, 0) else GameTooltip:AddDoubleLine(mission.name, mission.timeLeft, r, g, b) end
 		end
 	end
 
@@ -136,23 +116,14 @@ if InCombatLockdown() then return end
 	if(numShipMissions > 0) then
 		tsort(inProgressShipMissions, sortFunction) --Sort by time left, lowest first
 
-		if(numBuildings > 0 or numMissions > 0) then
-			GameTooltip:AddLine(" ")
-		end
+		if(numBuildings > 0 or numMissions > 0) then GameTooltip:AddLine(" ") end
 		GameTooltip:AddLine(SPLASH_NEW_6_2_FEATURE2_TITLE)
 		for i=1, numShipMissions do
 			local mission = inProgressShipMissions[i]
 			local timeLeft = mission.timeLeft:match("%d")
 			local r, g, b = 1, 1, 1
-			if(mission.isRare) then
-				r, g, b = 0.09, 0.51, 0.81
-			end
-
-			if(timeLeft and timeLeft == "0") then
-				GameTooltip:AddDoubleLine(mission.name, COMPLETE, r, g, b, 0, 1, 0)
-			else
-				GameTooltip:AddDoubleLine(mission.name, mission.timeLeft, r, g, b)
-			end
+			if(mission.isRare) then r, g, b = .09, .51, .81 end
+			if(timeLeft and timeLeft == "0") then GameTooltip:AddDoubleLine(mission.name, COMPLETE, r, g, b, 0, 1, 0) else GameTooltip:AddDoubleLine(mission.name, mission.timeLeft, r, g, b) end
 		end
 	end
 

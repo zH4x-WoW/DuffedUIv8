@@ -358,6 +358,15 @@ if not IsAddOnLoaded("AddOnSkins") then
 		WardrobeCollectionFrame.FilterButton:StripTextures(true)
 		WardrobeCollectionFrame.FilterButton:SkinButton()
 		
+		for i = 1, 3 do
+			for j = 1, 6 do
+				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:StripTextures()
+				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:SetFrameLevel(WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:GetFrameLevel() + 2)
+				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:CreateBackdrop()
+				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j].Border:Kill()
+			end
+		end
+		
 		--[[Tab 5 - Transmog (NPC)]]--
 		WardrobeFrame:StripTextures()
 		WardrobeFrame:SetTemplate("Transparent")
@@ -374,14 +383,16 @@ if not IsAddOnLoaded("AddOnSkins") then
 		
 		WardrobeTransmogFrame:StripTextures()
 		WardrobeTransmogFrame.Inset:StripTextures()
+		
 		for i = 1, #WardrobeTransmogFrame.Model.SlotButtons do
 			WardrobeTransmogFrame.Model.SlotButtons[i]:StripTextures()
 			WardrobeTransmogFrame.Model.SlotButtons[i].Icon:SetTexCoord(unpack(D["IconCoord"]))
+			WardrobeTransmogFrame.Model.SlotButtons[i]:SetFrameLevel(WardrobeTransmogFrame.Model.SlotButtons[i]:GetFrameLevel() + 2)
+			WardrobeTransmogFrame.Model.SlotButtons[i]:CreateBackdrop("Default")
+			WardrobeTransmogFrame.Model.SlotButtons[i].Border:Kill()
 		end
 		
-		local function OnEnter_Button(self)
-			self:SkinButton()
-		end
+		local function OnEnter_Button(self) self:SkinButton() end
 		WardrobeTransmogFrame.SpecButton:SkinButton()
 		WardrobeTransmogFrame.SpecButton:SetScript("OnEnter", OnEnter_Button)
 		WardrobeTransmogFrame.SpecButton:SetScript("OnLeave", OnEnter_Button)

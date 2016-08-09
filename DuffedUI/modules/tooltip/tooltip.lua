@@ -303,6 +303,7 @@ local function addAuraInfo(self, caster, spellID)
 	if (C["tooltip"].enablecaster and caster) then
 		local color = unitColor(caster)
 		if color then color = hex(color) else color = "" end
+		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(L["tooltip"]["applied"]..color..UnitName(caster))
 		GameTooltip:Show()
 	end

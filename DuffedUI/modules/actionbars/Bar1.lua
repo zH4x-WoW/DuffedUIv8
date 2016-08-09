@@ -64,7 +64,7 @@ bar:SetScript("OnEvent", function(self, event, unit, ...)
 			end
 		end
 	elseif event == "UPDATE_VEHICLE_ACTIONBAR" or event == "UPDATE_OVERRIDE_ACTIONBAR" then
-		if HasVehicleActionBar() or HasOverrideActionBar() then
+		if HasVehicleActionBar() then
 			if not self.inVehicle then self.inVehicle = true end
 		else
 			if self.inVehicle then self.inVehicle = false end

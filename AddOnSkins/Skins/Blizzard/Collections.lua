@@ -60,7 +60,7 @@ function AS:Blizzard_Collections(event, addon)
 		CollectionsJournal.IsSkinned = true
 		CollectionsJournalPortrait:Hide()
 
-		for i = 1, 4 do
+		for i = 1, 5 do
 			AS:SkinTab(_G["CollectionsJournalTab"..i])
 		end
 
@@ -355,6 +355,68 @@ function AS:Blizzard_Collections(event, addon)
 			button.iconTextureUncollected:SetInside()
 			button.slotFrameUncollected:SetAlpha(0)
 		end)
+		
+		AS:StripTextures(WardrobeCollectionFrame.progressBar)
+		AS:SkinStatusBar(WardrobeCollectionFrame.progressBar)
+		AS:SkinEditBox(WardrobeCollectionFrameSearchBox)
+		AS:SkinButton(WardrobeCollectionFrame.FilterButton)
+		WardrobeCollectionFrame.FilterButton:SetWidth(80)
+		AS:StripTextures(WardrobeCollectionFrame.ModelsFrame)
+		AS:SkinDropDownBox(WardrobeCollectionFrameWeaponDropDown)
+		AS:SkinNextPrevButton(WardrobeCollectionFrame.NavigationFrame.PrevPageButton)
+		AS:SkinNextPrevButton(WardrobeCollectionFrame.NavigationFrame.NextPageButton)
+		AS:StripTextures(WardrobeCollectionFrame.FilterButton, true)
+		AS:SkinButton(WardrobeCollectionFrame.FilterButton)
+
+		for i = 1, 3 do
+			for j = 1, 6 do
+				AS:StripTextures(WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j])
+				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:SetFrameLevel(WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:GetFrameLevel() + 2)
+				AS:CreateBackdrop(WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j])
+				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j].Border:Kill()
+				hooksecurefunc(WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j].Border, 'SetAtlas', function(self, texture)
+					local Color = AS.BorderColor
+					if texture == "transmog-wardrobe-border-uncollected" then
+						Color = { 1, 1, 0}
+					elseif texture == "transmog-wardrobe-border-unusable" then
+						Color = { 1, 0, 0}
+					end
+					self:GetParent().Backdrop:SetBackdropBorderColor(unpack(Color))
+				end)
+			end
+		end
+		
+		AS:StripTextures(WardrobeFrame)
+		WardrobeFrame:SetTemplate("Transparent")
+		AS:SkinCloseButton(WardrobeFrameCloseButton)
+		AS:SkinDropDownBox(WardrobeOutfitDropDown)
+		WardrobeOutfitDropDown:SetSize(200, 32)
+		WardrobeOutfitDropDownText:ClearAllPoints()
+		WardrobeOutfitDropDownText:SetPoint("CENTER", WardrobeOutfitDropDown, 10, 2)
+		AS:SkinButton(WardrobeOutfitDropDown.SaveButton)
+		WardrobeOutfitDropDown.SaveButton:ClearAllPoints()
+		WardrobeOutfitDropDown.SaveButton:SetPoint("LEFT", WardrobeOutfitDropDown, "RIGHT", 1, 4)
+		AS:StripTextures(WardrobeOutfitFrame)
+		WardrobeOutfitFrame:SetTemplate("Transparent")
+		
+		AS:StripTextures(WardrobeTransmogFrame)
+		AS:StripTextures(WardrobeTransmogFrame.Inset)
+
+		for i = 1, #WardrobeTransmogFrame.Model.SlotButtons do
+			AS:StripTextures(WardrobeTransmogFrame.Model.SlotButtons[i])
+			WardrobeTransmogFrame.Model.SlotButtons[i].Icon:SetTexCoord(.08, .92, .08, .92)
+			WardrobeTransmogFrame.Model.SlotButtons[i]:SetFrameLevel(WardrobeTransmogFrame.Model.SlotButtons[i]:GetFrameLevel() + 2)
+			AS:CreateBackdrop(WardrobeTransmogFrame.Model.SlotButtons[i])
+			WardrobeTransmogFrame.Model.SlotButtons[i].Border:Kill()
+		end
+		
+		local function OnEnter_Button(self) AS:SkinButton(self) end
+		AS:SkinButton(WardrobeTransmogFrame.SpecButton)
+		WardrobeTransmogFrame.SpecButton:SetScript("OnEnter", OnEnter_Button)
+		WardrobeTransmogFrame.SpecButton:SetScript("OnLeave", OnEnter_Button)
+		WardrobeTransmogFrame.SpecButton:ClearAllPoints()
+		WardrobeTransmogFrame.SpecButton:SetPoint("RIGHT", WardrobeTransmogFrame.ApplyButton, "LEFT", -2, 0)
+		AS:SkinButton(WardrobeTransmogFrame.ApplyButton)
 	end
 end
 

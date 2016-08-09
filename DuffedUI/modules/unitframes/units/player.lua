@@ -162,44 +162,22 @@ D["ConstructUFPlayer"] = function(self)
 			portrait:SetFrameLevel(health:GetFrameLevel())
 			portrait:SetAllPoints(health)
 			portrait:SetAlpha(.15)
-			if C["unitframes"]["playermodel"] == "Icon" then
-				local classicon = CreateFrame("Frame", nil, health)
-				classicon:Size(29)
-				if layout == 1 then classicon:Point("BOTTOMRIGHT", power, "BOTTOMLEFT", -15, 0) else classicon:Point("BOTTOMRIGHT", health, "BOTTOMLEFT", -5, 0) end
-				classicon:CreateBackdrop()
-				classicon.tex = classicon:CreateTexture("ClassIcon", "ARTWORK")
-				classicon.tex:SetAllPoints(classicon)
-				self.ClassIcons = classicon.tex
-			else
-				portrait.PostUpdate = D.PortraitUpdate
-				self.Portrait = portrait
-			end
+			portrait.PostUpdate = D.PortraitUpdate
+			self.Portrait = portrait
 		elseif layout == 2 then
 			local portrait = CreateFrame("PlayerModel", nil, self)
 			portrait:Size(38)
 			portrait:Point("BOTTOMRIGHT", panel, "BOTTOMLEFT", -5, 2)
 			portrait:CreateBackdrop()
-			if C["unitframes"]["playermodel"] == "Model" then
-				portrait.PostUpdate = D.PortraitUpdate
-				self.Portrait = portrait
-			else
-				portrait.tex = portrait:CreateTexture("ClassIcon", "ARTWORK")
-				portrait.tex:SetAllPoints(portrait)
-				self.ClassIcons = portrait.tex
-			end
+			portrait.PostUpdate = D.PortraitUpdate
+			self.Portrait = portrait
 		elseif layout == 3 then
 			local portrait = CreateFrame("PlayerModel", nil, self)
 			portrait:Size(48)
 			portrait:Point("BOTTOMRIGHT", power, "BOTTOMLEFT", -6, 0)
 			portrait:CreateBackdrop()
-			if C["unitframes"]["playermodel"] == "Icon" then
-				portrait.tex = portrait:CreateTexture("ClassIcon", "ARTWORK")
-				portrait.tex:SetAllPoints(portrait)
-				self.ClassIcons = portrait.tex
-			else
-				portrait.PostUpdate = D.PortraitUpdate
-				self.Portrait = portrait
-			end
+			portrait.PostUpdate = D.PortraitUpdate
+			self.Portrait = portrait
 		end
 	end
 
@@ -232,13 +210,13 @@ D["ConstructUFPlayer"] = function(self)
 	PVP:SetHeight(D.Scale(32))
 	PVP:SetWidth(D.Scale(32))
 	PVP:Point("TOPLEFT", health, "TOPRIGHT", -7, 7)
-
-	--[[PvPTimer = self:CreateFontString(nil, "OVERLAY")
-	PvPTimer:SetFont(f, fs, ff)
-	PvPTimer:SetShadowOffset(1.25, -1.25)
-	PvPTimer:SetPoint("RIGHT", PvP, "LEFT", 0, 0)
-	PvPTimer.frequentUpdates = 0.5
-	self:Tag(self.PvPTimer, "[DuffedUI:PvPtimer]")]]--
+	
+	--[[local pvptimer = health:CreateFontString(nil, "OVERLAY")
+	pvptimer:SetFont(f, fs, ff)
+	pvptimer:SetText(" ")
+	pvptimer:SetTextColor(unpack(C["media"].datatextcolor1))
+	pvptimer:SetPoint("TOP", PVP, 0, 8)
+	pvptimer:SetScript("OnUpdate", D.PvPUpdate)]]--
 
 	local Leader = health:CreateTexture(nil, "OVERLAY")
 	Leader:Height(14)
@@ -311,7 +289,7 @@ D["ConstructUFPlayer"] = function(self)
 	if C["castbar"]["enable"] then
 		local pcb = CreateFrame("Frame", "PlayerCastBarMover", UIParent)
 		pcb:Size(376, 21)
-		pcb:Point("BOTTOM", DuffedUIBar1, "TOP", 0, 5)
+		if C["actionbar"].enable then pcb:Point("BOTTOM", DuffedUIBar1, "TOP", 0, 5) else pcb:Point("BOTTOM", UIParent, "BOTTOM", 0, 167) end
 		move:RegisterFrame(pcb)
 
 		local castbar = CreateFrame("StatusBar", self:GetName() .. "CastBar", self)
@@ -367,16 +345,15 @@ D["ConstructUFPlayer"] = function(self)
 		self.Castbar.Time = castbar.time
 		self.Castbar.Icon = castbar.icon
 	end
-
+	
 	self.panel = panel
 	self.Health = health
 	self.Health.bg = healthBG
 	self.Power = power
 	self.Power.bg = powerBG
 	self.Combat = Combat
-	self.FlashInfo = FlashInfo
 	self.PvP = PVP
-	--self.PvPTimer = PvPTimer
+	self.FlashInfo = FlashInfo
 	self.Leader = Leader
 	self.RaidIcon = RaidIcon
 

@@ -209,7 +209,7 @@ D.PetBarUpdate = function(...)
 		petActionButton.isToken = isToken
 		petActionButton.tooltipSubtext = subtext
 
-		if isActive and name ~= "PET_ACTION_FOLLOW" then
+		if isActive then
 			petActionButton:GetCheckedTexture():SetColorTexture(0, 1, 0, .3)
 			if IsPetAttackAction(i) then PetActionButton_StartFlash(petActionButton) end
 		else
@@ -230,7 +230,7 @@ D.PetBarUpdate = function(...)
 		if not PetHasActionBar() and texture and name ~= "PET_ACTION_FOLLOW" then
 			PetActionButton_StopFlash(petActionButton)
 			SetDesaturation(petActionIcon, 1)
-			petActionButton:SetCheckedTexture(0, 0, 0, 0)
+			petActionButton:SetChecked(0)
 		end
 	end
 end

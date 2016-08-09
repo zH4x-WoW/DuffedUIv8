@@ -169,11 +169,3 @@ oUF.Tags.Methods["DuffedUI:afk"] = function(unit)
 		return CHAT_FLAG_AFK
 	end
 end
-
---[[oUF.Tags.Methods["DuffedUI:PvPtimer"] = function(unit)
-    if (not IsPVPTimerRunning() and GetPVPTimer() >= 0) then
-        return ''
-    end
-
-    return ns.FormatTime(math.floor(GetPVPTimer()/1000))
-end]]

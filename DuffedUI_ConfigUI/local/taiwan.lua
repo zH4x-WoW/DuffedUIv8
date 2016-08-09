@@ -31,7 +31,6 @@
 	DuffedUIConfigUILocalization.unitframestotdbsize = "設置目標的目標減益光環大小"
 	DuffedUIConfigUILocalization.unitframesfocusdebuffs = "啟用焦點目標Debuff"
 	DuffedUIConfigUILocalization.unitframesfocusbutton = "在玩家/焦點目標框體上啟用焦點按鈕"
-	DuffedUIConfigUILocalization.unitframesplayermodel = "設定頭像顯示類型(職業圖標 or 3D頭像, 默認 => 3D頭像)"
 	DuffedUIConfigUILocalization.unitframesbuffsize = "設定目標框體增益光環大小"
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "設定目標框體減益光環大小"
 	DuffedUIConfigUILocalization.unitframesattached = "Attach Classbars to Unitframes"
@@ -217,6 +216,7 @@
 	DuffedUIConfigUILocalization.duffedspellannounce = "啟用光環通告"
 	DuffedUIConfigUILocalization.duffederrorfilter = "隱藏屏幕中部的錯誤信息提示"
 	DuffedUIConfigUILocalization.duffedtalkinghead = "Disable the Talking Head-Frame"
+	DuffedUIConfigUILocalization.duffedobjectivetracker = "Enable moving for objectivetracker"
 
 	--[[Loot]]--
 	DuffedUIConfigUILocalization.loot = "拾取"

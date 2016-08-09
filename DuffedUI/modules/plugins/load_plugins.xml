@@ -16,7 +16,7 @@
 	<Script file="ses.lua" />
 	<Script file="spellalert.lua" />
 	<Script file="spellcooldowns.lua" />
-	<Script file="spellID.lua" />
 	<Script file="squareminimapbuttons.lua" />
 	<Script file="stats.lua" />
+	<Script file="tradeskilltabs.lua" />
 </Ui>

@@ -24,7 +24,7 @@ D.ChatSetup = function()
 		if i == 1 then FCF_SetWindowName(frame, "G, S & W") end
 		if i == 2 then FCF_SetWindowName(frame, "Log") end
 		if i == 3 then FCF_SetWindowName(frame, "Whisper") end
-		D.SetDefaultChatPosition(frame)
+		if C["chat"].enable then D.SetDefaultChatPosition(frame) end
 	end
 
 	ChatFrame_RemoveAllMessageGroups(ChatFrame1)
@@ -127,7 +127,9 @@ local function cvarsetup()
 	SetCVar("autoSelfCast", 1)
 	SetCVar("NamePlateVerticalScale", 1)
 	SetCVar("NamePlateHorizontalScale", 1)
-	setcvar("nameplatemaxdistance", 43)
+	SetCVar("nameplateMaxDistance", 43)
+	SetCVar("TargetPriorityAllowAnyOnScreen", 0)
+	SetCVar("Targetnearestuseold", 1)
 end
 
 local OnLogon = CreateFrame("Frame")

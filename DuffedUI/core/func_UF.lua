@@ -28,7 +28,7 @@ local Flash = function(self, duration)
 	self.anim:Play()
 end
 
-local StopFlash = function(self) 
+local StopFlash = function(self)
 	if self.anim then self.anim:Finish() end
 end
 
@@ -81,7 +81,7 @@ D.PostUpdateHealth = function(health, unit, min, max)
 
 		if (C["unitframes"].unicolor ~= true and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C["unitframes"].unicolor ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
 			local c = D.UnitColor.reaction[UnitReaction(unit, "player")]
-			if c then 
+			if c then
 				r, g, b = c[1], c[2], c[3]
 				health:SetStatusBarColor(r, g, b)
 			else
@@ -92,7 +92,7 @@ D.PostUpdateHealth = function(health, unit, min, max)
 
 		if min ~= max then
 			local r, g, b
-			r, g, b = oUF.ColorGradient(min, max, .69, .31, .31, .65, .63, .35, .33, .59, .33) 
+			r, g, b = oUF.ColorGradient(min, max, .69, .31, .31, .65, .63, .35, .33, .59, .33)
 			if unit == "player" and health:GetAttribute("normalUnit") ~= "pet" then
 				health.value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", D.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
 			elseif unit == "target" or (unit and unit:find("boss%d")) then
@@ -502,7 +502,34 @@ D.UpdateThreat = function(self, event, unit)
 		else
 			self.Name:SetTextColor(1, 1, 1)
 		end
-	end 
+	end
+end
+
+function D.PvPUpdate(self, elapsed)
+	if (self.elapsed and self.elapsed > 0.2) then
+		local unit = self.unit
+		local time = GetPVPTimer()
+
+		local min = format("%01.f", floor((time / 1000) / 60))
+		local sec = format("%02.f", floor((time / 1000) - min * 60))
+		if self.pvptimer then
+			local factionGroup = UnitFactionGroup(unit)
+			if UnitIspvptimerFreeForAll(unit) then
+				if time ~= 301000 and time ~= -1 then
+					self.pvptimer:SetText(pvptimer.." ".."("..min..":"..sec..")")
+				end
+			elseif (factionGroup and UnitIspvptimer(unit)) then
+				if time ~= 301000 and time ~= -1 then
+					self.pvptimer:SetText(pvptimer.." ".."("..min..":"..sec..")")
+				end
+			else
+				self.pvptimer:SetText("")
+			end
+		end
+		self.elapsed = 0
+	else
+		self.elapsed = (self.elapsed or 0) + elapsed
+	end
 end
 
 D.SetGridGroupRole = function(self, role)
@@ -560,6 +587,7 @@ D.createAuraWatch = function(self, unit)
 	if D.buffids["ALL"] then
 		for key, value in pairs(D.buffids["ALL"]) do tinsert(buffs, value) end
 	end
+
 	if (D.buffids[D.Class]) then
 		for key, value in pairs(D.buffids[D.Class]) do tinsert(buffs, value) end
 	end
@@ -594,37 +622,38 @@ if C["raid"].raidunitdebuffwatch == true then
 	do
 		D.buffids = {
 			PRIEST = {
-				{6788, "TOPRIGHT", {0, 0}, {1, 0, 0}, true}, -- Weakened Soul
-				{33076, "BOTTOMRIGHT", {0, 0}, {.2, .7, .2}}, -- Prayer of Mending
-				{139, "BOTTOMLEFT", {0, 0}, {.4, .7, .2}}, -- Renew
-				{17, "TOPLEFT", {0, 0}, {.81, .85, .1}, true}, -- Power Word: Shield
+				{6788, "TOPRIGHT", {0, 0}, {1, 0, 0}, true}, 			-- Weakened Soul
+				{33076, "BOTTOMRIGHT", {0, 0}, {.2, .7, .2}}, 			-- Prayer of Mending
+				{139, "BOTTOMLEFT", {0, 0}, {.4, .7, .2}}, 				-- Renew
+				{17, "TOPLEFT", {0, 0}, {.81, .85, .1}, true}, 			-- Power Word: Shield
 			},
 			DRUID = {
-				{774, "TOPLEFT", {0, 0}, {.8, .4, .8}}, -- Rejuvenation
-				{155777, "TOPLEFT", {0, -8}, {.3, .3, .8}}, -- Germination
-				{8936, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, -- Regrowth
-				{33763, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, -- Lifebloom
-				{48438, "BOTTOMRIGHT", {0, 0}, {.8, .4, 0}}, -- Wild Growth
+				{774, "TOPLEFT", {0, 0}, {.8, .4, .8}}, 				-- Rejuvenation
+				{155777, "TOPLEFT", {0, -8}, {.3, .3, .8}}, 			-- Germination
+				{8936, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, 				-- Regrowth
+				{145205, "TOPRIGHT", {0, -8}, {.21, .8, .21}}			-- Efflorescence
+				{33763, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, 			-- Lifebloom
+				{48438, "BOTTOMRIGHT", {0, 0}, {.8, .4, 0}}, 			-- Wild Growth
 			},
 			PALADIN = {
-				{53563, "TOPRIGHT", {0, 0}, {.7, .3, .7}}, -- Beacon of Light
-				{1022, "BOTTOMRIGHT", {0, 0}, {.2, .2, 1}, true}, -- Hand of Protection
-				{1044, "BOTTOMRIGHT", {0, 0}, {.89, .45, 0}, true}, -- Hand of Freedom
-				{6940, "BOTTOMRIGHT", {0, 0}, {.89, .1, .1}, true}, -- Hand of Sacrifice
-				{114163, "BOTTOMLEFT", {0, 0}, {.89, .1, .1}, true}, -- Eternal Flame
-				{156910, "TOPRIGHT", {0, 0},{.7, .3, .7}}, -- Beacon of Faith
+				{53563, "TOPRIGHT", {0, 0}, {.7, .3, .7}}, 				-- Beacon of Light
+				{1022, "BOTTOMRIGHT", {0, 0}, {.2, .2, 1}, true}, 		-- Hand of Protection
+				{1044, "BOTTOMRIGHT", {0, 0}, {.89, .45, 0}, true}, 	-- Hand of Freedom
+				{6940, "BOTTOMRIGHT", {0, 0}, {.89, .1, .1}, true}, 	-- Hand of Sacrifice
+				{114163, "BOTTOMLEFT", {0, 0}, {.89, .1, .1}, true},	-- Eternal Flame
+				{156910, "TOPRIGHT", {0, 0},{.7, .3, .7}}, 				-- Beacon of Faith
 			},
 			SHAMAN = {
-				{61295, "TOPLEFT", {0, 0}, {.7, .3, .7}}, -- Riptide 
+				{61295, "TOPLEFT", {0, 0}, {.7, .3, .7}}, 				-- Riptide
 			},
 			MONK = {
-				{119611, "TOPLEFT", {0, 0}, {.8, .4, .8}}, --Renewing Mist
-				{116849, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, -- Life Cocoon
-				{124682, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, -- Enveloping Mist
-				{124081, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}}, -- Zen Sphere
+				{119611, "TOPLEFT", {0, 0}, {.8, .4, .8}}, 				-- Renewing Mist
+				{116849, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, 			-- Life Cocoon
+				{124682, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, 			-- Enveloping Mist
+				{124081, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}}, 			-- Zen Sphere
 			},
 			ALL = {
-				{14253, "RIGHT", {0, 0}, {0, 1, 0}}, -- Abolish Poison
+				{14253, "RIGHT", {0, 0}, {0, 1, 0}}, 					-- Abolish Poison
 			},
 		}
 	end
@@ -640,7 +669,7 @@ if C["raid"].raidunitdebuffwatch == true then
 
 		local function SpellName(id)
 			local name = select(1, GetSpellInfo(id))
-			return name	
+			return name
 		end
 
 		D.debuffids = {
@@ -792,43 +821,50 @@ if C["raid"].raidunitdebuffwatch == true then
 			SpellName(183634), -- Shadowfel Burst
 			SpellName(189895), -- Void Star Fixate
 			SpellName(190049), -- Nether Corruption
+
+			-- Legion Debuffs
+			-- The Emerald Nightmare
+			-- Il'gynoth, Heart of Corruption
+			SpellName(209469), -- Touch of Corruption
+			SpellName(208929), -- Spew Corruption
+			-- Elerethe Renferal
+			SpellName(215288), -- Web of Pain
+			-- Dragons of Nightmare
+			SpellName(203770), -- Defiled Vines
+			-- Cenarius
+			SpellName(210279), -- Creeping Nightmares
+			-- Xavius
+			SpellName(206651), -- Darkening Soul
+			SpellName(209158), -- Blackening Soul
+			-- The Nighthold
+			-- Skorpyron
+			SpellName(204531), -- Arcane Tether
+			-- Trilliax
+			SpellName(206788), -- Toxic Slice
+			-- Spellbalde Aluriel
+			SpellName(212587), -- Mark of Frost
+			SpellName(213328), -- Detonate: Arcane Orb
+			-- Tichondrius
+			SpellName(206480), -- Carrion Plague
+			SpellName(216040), -- Burning Soul
+			SpellName(208230), -- Feast of Blood
+			-- High Botanist Tel'arn
+			SpellName(218424), -- Parasitic Fetter
+			-- Star Augur Etraeus
+			SpellName(206936), -- Icy Ejection
+			SpellName(206399), -- Felflame
+			SpellName(206464), -- Coronal Ejection
+			SpellName(206965), -- Voidburst
+			-- Grand Magistrix Elisande
+			SpellName(210387), -- Permeliative Torment
+			-- Gul'dan
+			SpellName(206222), -- Bonds of Fel
+			SpellName(206675), -- Shatter Essence
+			SpellName(212568), -- Drain
+			SpellName(206883), -- Soul Vortex
 		}
 		D.ReverseTimer = {
 		},
 		ORD:RegisterDebuffs(D.debuffids)
 	end
 end
-
-local TestUI = function(msg)
-	if not DuffedUI[2].unitframes.enable then return end
-
-	if msg == "" then 
-		print("'|cffc41f3barena|r' or '|cffc41f3ba|r' to show arena frames")
-		print("'|cffc41f3bboss|r' or '|cffc41f3bb|r' to show boss frames")
-		print("'|cffc41f3bpet|r' or '|cffc41f3bp|r' to show pet frames")
-		print("'|cffc41f3bmaintank|r' or '|cffc41f3bmt|r' to show maintank frames")
-	elseif msg == "arena" or msg == "a" then
-		for i = 1, 3 do
-			_G["oUF_Arena"..i]:Show()
-			_G["oUF_Arena"..i].Hide = function() end
-			_G["oUF_Arena"..i].unit = "player"
-			_G["oUF_Arena"..i].Trinket.Icon:SetTexture("Interface\\Icons\\INV_Jewelry_Necklace_37")
-		end
-	elseif msg == "boss" or msg == "b" then
-		for i = 1, 3 do
-			_G["oUF_Boss"..i]:Show()
-			_G["oUF_Boss"..i].Hide = function() end
-			_G["oUF_Boss"..i].unit = "player"
-		end
-	elseif msg == "pet" or msg == "p" then
-		oUF_Pet:Show()
-		oUF_Pet.Hide = function() end
-		oUF_Pet.unit = "player"
-	elseif msg == "maintank" or msg == "mt" then
-		oUF_MainTank:Show()
-		oUF_MainTank.Hide = function() end
-		oUF_MainTank.unit = "player"
-	end
-end
-SlashCmdList.TestUI = TestUI
-SLASH_TestUI1 = "/testui"

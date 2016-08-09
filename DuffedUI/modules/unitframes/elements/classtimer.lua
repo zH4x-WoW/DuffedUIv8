@@ -894,6 +894,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(30108, false, nil, nil, 30108), -- Unstable Affliction
 			CreateSpellEntry(48181, false, nil, nil, 48181), -- Haunt
 			CreateSpellEntry(63106), -- Siphon Life
+			CreateSpellEntry(146739), -- Corruption Debuff
 			CreateSpellEntry(198590), -- Drain Soul
 			CreateSpellEntry(205178), -- Soul Effigy
 			CreateSpellEntry(205179), -- Phantom Singularity

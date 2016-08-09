@@ -16,16 +16,8 @@ local function LoadSkin()
 
 	for i = 1, 5 do
 		local f = _G["BarberShopFrame"..i]
-		--_G["BarberShopFrameSelector"..i.."Prev"]:SkinNextPrevButton()
-		--_G["BarberShopFrameSelector"..i.."Next"]:SkinNextPrevButton()
-
-		if f then
-			f:StripTextures()
-		end
+		if f then f:StripTextures() end
 	end
-
-	--BarberShopFrameSelector5:ClearAllPoints()
-	--BarberShopFrameSelector5:Point("TOP", 0, -12)
 
 	BarberShopFrameResetButton:ClearAllPoints()
 	BarberShopFrameResetButton:Point("BOTTOM", 0, 12)

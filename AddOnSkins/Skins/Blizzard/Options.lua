@@ -157,6 +157,7 @@ function AS:Blizzard_Options(event, addon)
 					AS:SkinTab(Child)
 				elseif Child:IsObjectType('Frame') and Child:GetName() and strfind(Child:GetName(), 'DropDown') then
 					AS:SkinDropDownBox(Child)
+					_G["InterfaceOptionsCameraPanelStyleDropDown"]:SetWidth(200)
 				end
 			end
 		end
