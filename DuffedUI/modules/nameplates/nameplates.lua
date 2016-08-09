@@ -99,7 +99,7 @@ end
 function nameplates:GetClassification(unit)
 	local cc = UnitClassification(unit)
 	local String = ""
-	
+
 	if cc == "elite" then
 		String = "+"
 	elseif cc == "rare" then
@@ -109,7 +109,7 @@ function nameplates:GetClassification(unit)
 	elseif cc == "worldboss" then
 		String = "b"
 	end
-	
+
 	return String
 end
 
@@ -163,13 +163,13 @@ function nameplates:UpdateAggroNameplates()
 	if C["nameplate"]["ethreat"] then
 		if D.Role == "Tank" then
 			if isTanking then
-				if (threatStatus == 3) then
+				if (threatStatus and threatStatus == 3) then
 					self.healthBar.barTexture:SetVertexColor(.29,  .69, .3) -- good
-				elseif (threatStatus == 2) then
+				elseif (threatStatus and threatStatus == 2) then
 					self.healthBar.barTexture:SetVertexColor(.86, .77, .36) -- transition
-				elseif (threatStatus == 1) then
-					self.healthBar.barTexture:SetVertexColor(.86, .77, .36) -- transition
-				elseif (threatStatus == 0) then
+				elseif (threatStatus and threatStatus == 1) then
+					self.healthBar.barTexture:SetVertexColor(.5, 0, .5) -- offtank
+				elseif (threatStatus and threatStatus == 0) then
 					self.healthBar.barTexture:SetVertexColor(.78, .25, .25) -- bad
 				end
 			end
@@ -178,16 +178,16 @@ function nameplates:UpdateAggroNameplates()
 				self.healthBar.barTexture:SetVertexColor(.78, .25, .25) -- bad
 				self:GetParent().playerHasAggro = true
 			else
-				if (threatStatus == 3) then
+				if (threatStatus and threatStatus == 3) then
 					self.healthBar.barTexture:SetVertexColor(.78, .25, .25) -- bad
 					self:GetParent().playerHasAggro = true
-				elseif (threatStatus == 2) then
+				elseif (threatStatus and threatStatus == 2) then
 					self.healthBar.barTexture:SetVertexColor(.86, .77, .36) -- transition
 					self:GetParent().playerHasAggro = true
-				elseif (threatStatus == 1) then
-					self.healthBar.barTexture:SetVertexColor(.86, .77, .36) -- transition
+				elseif (threatStatus and threatStatus == 1) then
+					self.healthBar.barTexture:SetVertexColor(.5, 0, .5) -- transition
 					self:GetParent().playerHasAggro = false
-				elseif (threatStatus == 0) then
+				elseif (threatStatus and threatStatus == 0) then
 					self.healthBar.barTexture:SetVertexColor(.29,  .69, .3) -- good
 					self:GetParent().playerHasAggro = false
 				else
@@ -205,13 +205,13 @@ function nameplates:displayCastIcon()
 	local Texture = Icon:GetTexture()
 	local Backdrop = self.IconBackdrop
 	local IconTexture = self.IconTexture
-	
+
 	if Texture then
 		Backdrop:SetAlpha(1)
 		IconTexture:SetTexture(Texture)
 	else
 		Backdrop:SetAlpha(0)
-		Icon:SetTexture(nil)		
+		Icon:SetTexture(nil)
 	end
 end
 
@@ -248,7 +248,7 @@ function nameplates:setupPlate(options)
 	castBar.IconBackdrop:SetFrameLevel(castBar:GetFrameLevel() - 1 or 0)
 
 	castBar.Icon:SetParent(DuffedUIUIHider)
-	
+
 	castBar.IconTexture = castBar:CreateTexture(nil, "OVERLAY")
 	castBar.IconTexture:SetTexCoord(.08, .92, .08, .92)
 	castBar.IconTexture:SetParent(castBar.IconBackdrop)
