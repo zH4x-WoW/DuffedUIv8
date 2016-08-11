@@ -3,7 +3,12 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• ",
+		"• Added Nether Shards to currency in gold datatext",
+		"• Update skins from DuffedUI",
+		"• Update AddOnSkins",
+		"• Added new cameraDistanceMaxFactor",
+		"• Added some strings to shorten lootdisplay",
+		"• Fixed a taint on raidframes",
 		--"• ",
 	" ",
 	"Notes:",
