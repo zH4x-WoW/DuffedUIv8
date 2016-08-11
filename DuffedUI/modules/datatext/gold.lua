@@ -209,6 +209,7 @@ Stat:SetScript("OnEnter", function(self)
 		Currency(416)
 		Currency(515)
 		Currency(777)
+		Currency(1226)
 	end
 
 	GameTooltip:AddLine(" ")
