@@ -194,16 +194,6 @@ ExpandCurrencyList = function(index, value)
 	return unpack(returnValues)
 end
 
-GetCurrencyListLink = function(index)
-	if index < 1 then
-		return nil
-	elseif index > #data then
-		return oldGetCurrencyListLink(index)
-	end
-
-	return oldGetCurrencyListLink(data[index])
-end
-
 SetCurrencyUnused = function(index, value)
 	if index < 1 then
 		return nil
