@@ -768,6 +768,8 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(13750), -- Adrenaline Rush
 			CreateSpellEntry(13877), -- Blade Flurry
 			CreateSpellEntry(51690), -- Killing Spree
+			CreateSpellEntry(193356), -- Broadsides
+			CreateSpellEntry(193357), -- Shark Infested Waters
 			CreateSpellEntry(193358), -- Grand Melee
 			CreateSpellEntry(195627), -- Opportunity
 			CreateSpellEntry(199600), -- Buried Treasure
