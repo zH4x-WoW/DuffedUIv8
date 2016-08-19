@@ -135,6 +135,7 @@ function AS:Blizzard_AchievementUI(event, addon)
 		AchievementFrame.searchBox:SetHeight(18)
 		AchievementFrame.searchBox:ClearAllPoints()
 		AchievementFrame.searchBox:Point("RIGHT", AchievementFrameHeaderTitle, "LEFT", -1, -1)
+		AS:SetTemplate(AchievementFrame.searchResults)
 
 		for i = 1, 3 do
 			AS:SkinTab(_G["AchievementFrameTab"..i])
