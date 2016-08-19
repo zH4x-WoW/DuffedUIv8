@@ -415,10 +415,10 @@ if C["misc"].gold == true then
 		CURRENCY_GAINED_MULTIPLE_BONUS = "+ %s x %d (Bonus Objective)"
 		LOOT_ITEM = "+ %s => %s"
 		LOOT_ITEM_BONUS_ROLL = "+ %s => %s (Bonus)"
-		LOOT_ITEM_BONUS_ROLL_MULTIPLE = "+ %s => %s x %d"
-		LOOT_ITEM_MULTIPLE = "+ %s => %sx%d"
+		LOOT_ITEM_BONUS_ROLL_MULTIPLE = "+ %s x %d => %s"
+		LOOT_ITEM_MULTIPLE = "+ %sx%d => %s"
 		LOOT_ITEM_PUSHED = "+ %s => %s"
-		LOOT_ITEM_PUSHED_MULTIPLE = "+ %s => %s x %d"
+		LOOT_ITEM_PUSHED_MULTIPLE = "+ %s x %d => %s"
 	end
 	frame:SetScript("OnEvent", eventHandler)
 end
