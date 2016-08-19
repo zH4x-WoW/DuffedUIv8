@@ -135,34 +135,48 @@ end
 
 function nameplates:colorHealth()
 	if (self:GetName() and string.find(self:GetName(), "NamePlate")) then
-		local r, g, b
+        local r, g, b = self.healthBar:GetStatusBarColor()
 
-		if not UnitIsConnected(self.unit) then
-			r, g, b = unpack(D.UnitColor.disconnected)
-		else
-			if UnitIsPlayer(self.unit) then
-				local Class = select(2, UnitClass(self.unit))
-				r, g, b = unpack(D.UnitColor.class[Class])
-			else
-				if (UnitIsFriend("player", self.unit)) then
-					r, g, b = unpack(D.UnitColor.reaction[5])
-				else
-					local Reaction = UnitReaction("player", self.unit)
-					r, g, b = unpack(D.UnitColor.reaction[Reaction])
+		if C["nameplate"]["ClassColor"] then
+			for class, color in pairs(RAID_CLASS_COLORS) do
+				local r, g, b = floor(r * 100 + .5) / 100, floor(g * 100 + .5) / 100, floor(b * 100 + .5) / 100
+				if RAID_CLASS_COLORS[class].r == r and RAID_CLASS_COLORS[class].g == g and RAID_CLASS_COLORS[class].b == b then
+					self.hasClass = true
+					self.isFriendly = false
+					self.healthBar:SetStatusBarColor(unpack(D.UnitColor.class[class]))
+					return
 				end
 			end
 		end
-		self.healthBar:SetStatusBarColor(r, g, b)
-	end
-end
 
-function nameplates:UpdateAggroNameplates()
-	local isTanking, threatStatus = UnitDetailedThreatSituation("player", self.displayedUnit)
+		if g + b == 0 then
+			r, g, b = .78, .25, .25 -- hostile
+			self.isFriendly = false
+		elseif r + b == 0 then
+			r, g, b = .31, .45, .63 -- player
+			self.isFriendly = true
+		elseif r + g > 1.95 then
+			r, g, b = .86, .77, .36 -- neutral
+			self.isFriendly = false
+		elseif r + g == 0 then
+			r, g, b = .29,  .69, .3 -- good
+			self.isFriendly = true
+		else
+			self.isFriendly = false
+		end
+
+		if UnitIsPlayer(self.unit) then
+			local Class = select(2, UnitClass(self.unit))
+			r, g, b = unpack(D.UnitColor.class[Class])
+		end
+        self.healthBar:SetStatusBarColor(r, g, b)
+    end
+	
 	-- (3 = securely tanking, 2 = insecurely tanking, 1 = not tanking but higher threat than tank, 0 = not tanking and lower threat than tank)
-
+	local isTanking, threatStatus = UnitDetailedThreatSituation("player", self.displayedUnit)
 	if C["nameplate"]["ethreat"] then
 		if D.Role == "Tank" then
-			if isTanking then
+			if isTanking and threatStatus then
 				if (threatStatus and threatStatus == 3) then
 					self.healthBar.barTexture:SetVertexColor(.29,  .69, .3) -- good
 				elseif (threatStatus and threatStatus == 2) then
@@ -174,7 +188,7 @@ function nameplates:UpdateAggroNameplates()
 				end
 			end
 		else
-			if isTanking then
+			if isTanking and threatStatus then
 				self.healthBar.barTexture:SetVertexColor(.78, .25, .25) -- bad
 				self:GetParent().playerHasAggro = true
 			else
@@ -190,13 +204,9 @@ function nameplates:UpdateAggroNameplates()
 				elseif (threatStatus and threatStatus == 0) then
 					self.healthBar.barTexture:SetVertexColor(.29,  .69, .3) -- good
 					self:GetParent().playerHasAggro = false
-				else
-					nameplates:colorHealth()
 				end
 			end
 		end
-	else
-		nameplates:colorHealth()
 	end
 end
 
@@ -306,8 +316,8 @@ function nameplates:enable()
 	if self.ClassBar then self.ClassBar:SetScale(1.05) end
 	hooksecurefunc(NamePlateDriverFrame, "SetClassNameplateBar", self.SetClassNameplateBar)
 
+	hooksecurefunc("CompactUnitFrame_UpdateHealthColor", self.colorHealth)
 	hooksecurefunc("DefaultCompactNamePlateFrameSetupInternal", self.setupPlate)
-	hooksecurefunc("CompactUnitFrame_UpdateHealthColor", self.UpdateAggroNameplates)
 
 	NamePlateDriverFrame.UpdateNamePlateOptions = function() end
 	InterfaceOptionsNamesPanelUnitNameplatesMakeLarger:Hide()
