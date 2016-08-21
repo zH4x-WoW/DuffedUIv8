@@ -3,7 +3,7 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Added option to show / hide buffs & procs on Classtimer",
+		"• Fix for critical errors on client",
 		"• Added option to set width of target castbar",
 		"• Update Bagscript",
 		"• Update AFK-Camera",
