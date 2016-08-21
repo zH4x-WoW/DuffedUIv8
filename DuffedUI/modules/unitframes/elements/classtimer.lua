@@ -1470,39 +1470,35 @@ D["ClassTimer"] = function(self)
 	end
 	trinketDataSource:AddFilter(TRINKET_FILTER, TRINKET_BAR_COLOR)
 
+	local playerFrame = CreateAuraBarFrame(playerDataSource, self.Health)
+	local trinketFrame = CreateAuraBarFrame(trinketDataSource, self.Health)
 	if C["classtimer"]["enableBuffs"] then
-		local playerFrame = CreateAuraBarFrame(playerDataSource, self.Health)
-		if layout == 3 then
-			playerFrame:Point("BOTTOMLEFT", self.Health, "TOPLEFT", 0, 25)
-			playerFrame:Point("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, 25)
-		else
-			playerFrame:Point("BOTTOMLEFT", self.Health, "TOPLEFT", 0, 7)
-			playerFrame:Point("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, 7)
-		end
-
-		local trinketFrame = CreateAuraBarFrame(trinketDataSource, self.Health)
-		trinketFrame:Point("BOTTOMLEFT", playerFrame, "TOPLEFT", 0, 5)
-		trinketFrame:Point("BOTTOMRIGHT", playerFrame, "TOPRIGHT", 0, 5)
+		local playerMover = CreateFrame("Frame", "PlayerBuffMover", self.Health)
+		playerMover:SetSize(218, 15)
+		if layout == 3 then playerMover:SetPoint("BOTTOM", self.Health, "TOP", 0, 25) else playerMover:SetPoint("BOTTOM", self.Health, "TOP", 0, 0) end
+		move:RegisterFrame(playerMover)
+		
+		playerFrame:Point("BOTTOMLEFT", PlayerBuffMover, "TOPLEFT", 0, 0)
+		playerFrame:Point("BOTTOMRIGHT", PlayerBuffMover, "TOPRIGHT", 0, 0)
+		
+		trinketFrame:Point("BOTTOMLEFT", playerFrame, "TOPLEFT", 0, 0)
+		trinketFrame:Point("BOTTOMRIGHT", playerFrame, "TOPRIGHT", 0, 0)
 	end
 
 	if C["classtimer"]["debuffsenable"] then
-		local targetFrame = CreateAuraBarFrame(targetDataSource, self.Health)
-		if C["classtimer"]["targetdebuff"] then
-			local debuffMover = CreateFrame("Frame", "DebuffMover", UIParent)
-			debuffMover:SetSize(218, 15)
+		local debuffMover = CreateFrame("Frame", "DebuffMover", UIParent)
+		debuffMover:SetSize(218, 15)
+		if C["classtimer"]["targetdebuff"] then 
 			debuffMover:SetPoint("BOTTOM", UIParent, "BOTTOM", 340, 380)
-			move:RegisterFrame(debuffMover)
-
-			targetFrame:Point("BOTTOMLEFT", DebuffMover, "TOPLEFT", 0, 5)
-			targetFrame:Point("BOTTOMRIGHT", DebuffMover, "TOPRIGHT", 0, 5)
+		elseif C["classtimer"]["enableBuffs"] then
+			if (not playerFrame:Show() or not trinketFrame:Show()) then debuffMover:SetPoint("BOTTOM", self.Health, "TOP", 0, 0) else debuffMover:SetPoint("BOTTOM", trinketFrame, "TOP", 0, 5) end
 		else
-			if C["classtimer"]["enableBuffs"] then
-				targetFrame:Point("BOTTOMLEFT", trinketFrame, "TOPLEFT", 0, 5)
-				targetFrame:Point("BOTTOMRIGHT", trinketFrame, "TOPRIGHT", 0, 5)
-			else
-				targetFrame:Point("BOTTOMLEFT", self.Health, "TOPLEFT", 0, 5)
-				targetFrame:Point("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, 5)
-			end
+			debuffMover:SetPoint("BOTTOM", self.Health, "TOP", 0, 0)
 		end
+		move:RegisterFrame(debuffMover)
+
+		local targetFrame = CreateAuraBarFrame(targetDataSource, self.Health)
+		targetFrame:Point("BOTTOMLEFT", DebuffMover, "TOPLEFT", 0, 0)
+		targetFrame:Point("BOTTOMRIGHT", DebuffMover, "TOPRIGHT", 0, 0)
 	end
 end
