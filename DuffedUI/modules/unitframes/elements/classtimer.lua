@@ -1470,7 +1470,7 @@ D["ClassTimer"] = function(self)
 	end
 	trinketDataSource:AddFilter(TRINKET_FILTER, TRINKET_BAR_COLOR)
 
-	if C["classtimer"][enableBuffs] then
+	if C["classtimer"]["enableBuffs"] then
 		local playerFrame = CreateAuraBarFrame(playerDataSource, self.Health)
 		if layout == 3 then
 			playerFrame:Point("BOTTOMLEFT", self.Health, "TOPLEFT", 0, 25)
@@ -1496,7 +1496,7 @@ D["ClassTimer"] = function(self)
 			targetFrame:Point("BOTTOMLEFT", DebuffMover, "TOPLEFT", 0, 5)
 			targetFrame:Point("BOTTOMRIGHT", DebuffMover, "TOPRIGHT", 0, 5)
 		else
-			if C["classtimer"][enableBuffs] then
+			if C["classtimer"]["enableBuffs"] then
 				targetFrame:Point("BOTTOMLEFT", trinketFrame, "TOPLEFT", 0, 5)
 				targetFrame:Point("BOTTOMRIGHT", trinketFrame, "TOPRIGHT", 0, 5)
 			else
