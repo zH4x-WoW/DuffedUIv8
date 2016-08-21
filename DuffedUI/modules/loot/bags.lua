@@ -3,7 +3,6 @@ local D, C, L, G = unpack(select(2,  ...))
 local _G = _G
 local ReplaceBags = 0
 local LastButtonBag, LastButtonBank, LastButtonReagent
-local Token1, Token2, Token3 = BackpackTokenFrameToken1, BackpackTokenFrameToken2, BackpackTokenFrameToken3
 local NUM_CONTAINER_FRAMES = NUM_CONTAINER_FRAMES
 local NUM_BAG_FRAMES = NUM_BAG_FRAMES
 local ContainerFrame_GetOpenFrame = ContainerFrame_GetOpenFrame
@@ -255,7 +254,7 @@ function Bags:CreateContainer(storagetype, ...)
 			Sort.Text:SetPoint("CENTER")
 			Sort.Text:SetText(BAG_FILTER_CLEANUP)
 			Sort.Text:SetTextColor(1, 1, 1)
-			Sort:SetScript('OnMouseDown', function(self, button) 
+			Sort:SetScript('OnMouseDown', function(self, button)
 				if InCombatLockdown() then return end
 				if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
 			end)
@@ -352,7 +351,7 @@ function Bags:CreateContainer(storagetype, ...)
 			SortButton.Text:SetPoint("CENTER")
 			SortButton.Text:SetText(BAG_FILTER_CLEANUP)
 			SortButton.Text:SetTextColor(1, 1, 1)
-			SortButton:SetScript('OnMouseDown', function(self, button) 
+			SortButton:SetScript('OnMouseDown', function(self, button)
 				if InCombatLockdown() then return end
 				if button == "RightButton" then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
 			end)
@@ -426,15 +425,15 @@ function Bags:SlotUpdate(id, button)
 	if not button then return end
 
 	local ItemLink = GetContainerItemLink(id, button:GetID())
-	
+
 	local Texture, Count, Lock, quality, _, _, _, _, _, ItemID = GetContainerItemInfo(id, button:GetID())
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
-	
+
 	if IsNewItem ~= true and button.Animation and button.Animation:IsPlaying() then button.Animation:Stop() end
 	if (button.ItemID == ItemID) then return end
-	
+
 	button.ItemID = ItemID
-	
+
 	local IsQuestItem, QuestId, IsActive = GetContainerItemQuestInfo(id, button:GetID())
 	local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
 	local NewItem = button.NewItemTexture
@@ -459,7 +458,7 @@ function Bags:SlotUpdate(id, button)
 			button.Animation:Play()
 		end
 	end
-	
+
 	if IsQuestItem then
 		button:SetBackdropBorderColor(1, 1, 0)
 	elseif ItemLink then
@@ -704,12 +703,12 @@ function Bags:OnEvent(event, ...)
 		local Bag = ... + 1
 		local Container = _G["ContainerFrame"..Bag]
 		local Size = Container.size
-		
+
 		for i = 1, Size do
 			local Button = _G["ContainerFrame"..Bag.."Item"..i]
 			if Button then Button:Hide() end
 		end
-		
+
 		self:CloseAllBags()
 		self:CloseAllBankBags()
 	elseif (event == "PLAYERBANKSLOTS_CHANGED") then
