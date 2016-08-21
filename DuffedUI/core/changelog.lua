@@ -3,12 +3,10 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Added font for cyrillic languages",
-		"• Added ID-Display for tradeskills",
-		"• Added more shorten Tags for loot",
-		"• Update Nameplates",
-		"• Update AddOnSkins",
-		"• Several bugfixes (SpellID, Bank, Skins Currency",
+		"• Added option to show / hide buffs & procs on Classtimer",
+		"• Added option to set width of target castbar",
+		"• Update Bagscript",
+		"• Update AFK-Camera",
 		--"• ",
 	" ",
 	"Notes:",
