@@ -171,7 +171,6 @@ DuffedUIConfigUILocalization.classtimerspacing = "Set spacing of classtimer bars
 DuffedUIConfigUILocalization.classtimerseparator = "Enable cast separator"
 DuffedUIConfigUILocalization.classtimerseparatorcolor = "Set color of separator"
 DuffedUIConfigUILocalization.classtimerdebuffsenable = "Enable Debuff display on classtimer"
-DuffedUIConfigUILocalization.classtimerenableBuffs = "Enable Buff and Procc display on classtimer"
 
 --[[Buffs]]--
 DuffedUIConfigUILocalization.auras = "Auras"

@@ -169,7 +169,6 @@
 	DuffedUIConfigUILocalization.classtimerseparator = "啟用不同法術分離計時效果"
 	DuffedUIConfigUILocalization.classtimerseparatorcolor = "設置分離器顯示顏色"
 	DuffedUIConfigUILocalization.classtimerdebuffsenable = "Enable Debuff display on classtimer"
-	DuffedUIConfigUILocalization.classtimerenableBuffs = "Enable Buff and Procc display on classtimer"
 
 	--[[Buffs]]--
 	DuffedUIConfigUILocalization.auras = "光環"

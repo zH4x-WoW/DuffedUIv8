@@ -169,7 +169,6 @@ C["classtimer"] = {
 	["separator"] = true,
 	["separatorcolor"] = { 0, 0, 0, .5 },
 	["debuffsenable"] = true,
-	["enableBuffs"] = true,
 	["targetdebuff"] = false,
 }
 

@@ -170,7 +170,6 @@
 	DuffedUIConfigUILocalization.classtimerseparator = "Aktiviere die Zauberabgrenzung"
 	DuffedUIConfigUILocalization.classtimerseparatorcolor = "Wähle die Abgrenzungsfarbe"
 	DuffedUIConfigUILocalization.classtimerdebuffsenable = "Aktiviere die Anzeige der Schwächungszauberleisten"
-	DuffedUIConfigUILocalization.classtimerenableBuffs = "Aktiviere die Anzeige der Staärkungszauber und Procleisten"
 
 	--[[Buffs]]--
 	DuffedUIConfigUILocalization.auras = "Auren"

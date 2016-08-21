@@ -363,7 +363,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(202797), -- Viper Sting
 			CreateSpellEntry(202900), -- Scorpid Sting
 			-- Beast Mastery
-			CreateSpellEntry(24394), -- Intimidation
+			CreateSpellEntry(24394), -- Intimidation			
 			CreateSpellEntry(202933), -- Spider Sting
 			CreateSpellEntry(207094), -- Titan's Thunder
 			-- Marksmanship
@@ -635,12 +635,12 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(109142), -- Twist of Fate
 			CreateSpellEntry(186263), -- Shadow Mend
 			-- Holy
-			CreateSpellEntry(139), -- Renew
-			CreateSpellEntry(33076), -- Prayer of Mending
+			CreateSpellEntry(139), -- Renew					
+			CreateSpellEntry(33076), -- Prayer of Mending			
 			CreateSpellEntry(47788), -- Guardian Spirit
 			CreateSpellEntry(64901), -- Symbol of Hope
 			CreateSpellEntry(196611), -- Delivered from Evil
-			CreateSpellEntry(200196), -- Holy Word: Chastise
+			CreateSpellEntry(200196), -- Holy Word: Chastise			
 			CreateSpellEntry(208065), -- Light of T'uure
 			CreateSpellEntry(210980), -- Focus in the Light
 			CreateSpellEntry(213610), -- Holy Ward
@@ -668,11 +668,11 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(2096), --Mind Vision
 			-- Shared
 			CreateSpellEntry(17), -- Power Word: Shield
-			CreateSpellEntry(10060), -- Power Infusion
+			CreateSpellEntry(10060), -- Power Infusion			
 			CreateSpellEntry(121536), -- Angelic Feather
 			CreateSpellEntry(186263), -- Shadow Mend
 			-- Holy
-			CreateSpellEntry(139), -- Renew
+			CreateSpellEntry(139), -- Renew			
 			CreateSpellEntry(33076), -- Prayer of Mending
 			CreateSpellEntry(63735), -- Serendipity
 			CreateSpellEntry(64843), -- Divine Hymn
@@ -690,7 +690,7 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(33206), -- Pain Suppression
 			CreateSpellEntry(47536), -- Rapture
 			CreateSpellEntry(81700), -- Archangel
-			CreateSpellEntry(81749), -- Atonement
+			CreateSpellEntry(81749), -- Atonement			
 			CreateSpellEntry(152118), -- Clarity of Will
 			CreateSpellEntry(197763), -- Borrowed Time
 			CreateSpellEntry(197871), -- Dark Archangel
@@ -1471,34 +1471,31 @@ D["ClassTimer"] = function(self)
 	trinketDataSource:AddFilter(TRINKET_FILTER, TRINKET_BAR_COLOR)
 
 	local playerFrame = CreateAuraBarFrame(playerDataSource, self.Health)
-	local trinketFrame = CreateAuraBarFrame(trinketDataSource, self.Health)
-	if C["classtimer"]["enableBuffs"] then
-		local playerMover = CreateFrame("Frame", "PlayerBuffMover", self.Health)
-		playerMover:SetSize(218, 15)
-		if layout == 3 then playerMover:SetPoint("BOTTOM", self.Health, "TOP", 0, 25) else playerMover:SetPoint("BOTTOM", self.Health, "TOP", 0, 0) end
-		move:RegisterFrame(playerMover)
-		
-		playerFrame:Point("BOTTOMLEFT", PlayerBuffMover, "TOPLEFT", 0, 0)
-		playerFrame:Point("BOTTOMRIGHT", PlayerBuffMover, "TOPRIGHT", 0, 0)
-		
-		trinketFrame:Point("BOTTOMLEFT", playerFrame, "TOPLEFT", 0, 0)
-		trinketFrame:Point("BOTTOMRIGHT", playerFrame, "TOPRIGHT", 0, 0)
+	if layout == 3 then
+		playerFrame:Point("BOTTOMLEFT", self.Health, "TOPLEFT", 0, 25)
+		playerFrame:Point("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, 25)
+	else
+		playerFrame:Point("BOTTOMLEFT", self.Health, "TOPLEFT", 0, 7)
+		playerFrame:Point("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, 7)
 	end
 
-	if C["classtimer"]["debuffsenable"] then
-		local debuffMover = CreateFrame("Frame", "DebuffMover", UIParent)
-		debuffMover:SetSize(218, 15)
-		if C["classtimer"]["targetdebuff"] then 
-			debuffMover:SetPoint("BOTTOM", UIParent, "BOTTOM", 340, 380)
-		elseif C["classtimer"]["enableBuffs"] then
-			if (not playerFrame:Show() or not trinketFrame:Show()) then debuffMover:SetPoint("BOTTOM", self.Health, "TOP", 0, 0) else debuffMover:SetPoint("BOTTOM", trinketFrame, "TOP", 0, 5) end
-		else
-			debuffMover:SetPoint("BOTTOM", self.Health, "TOP", 0, 0)
-		end
-		move:RegisterFrame(debuffMover)
+	local trinketFrame = CreateAuraBarFrame(trinketDataSource, self.Health)
+	trinketFrame:Point("BOTTOMLEFT", playerFrame, "TOPLEFT", 0, 5)
+	trinketFrame:Point("BOTTOMRIGHT", playerFrame, "TOPRIGHT", 0, 5)
 
+	if C["classtimer"]["debuffsenable"] then
 		local targetFrame = CreateAuraBarFrame(targetDataSource, self.Health)
-		targetFrame:Point("BOTTOMLEFT", DebuffMover, "TOPLEFT", 0, 0)
-		targetFrame:Point("BOTTOMRIGHT", DebuffMover, "TOPRIGHT", 0, 0)
+		if C["classtimer"]["targetdebuff"] then
+			local debuffMover = CreateFrame("Frame", "DebuffMover", UIParent)
+			debuffMover:SetSize(218, 15)
+			debuffMover:SetPoint("BOTTOM", UIParent, "BOTTOM", 340, 380)
+			move:RegisterFrame(debuffMover)
+
+			targetFrame:Point("BOTTOMLEFT", DebuffMover, "TOPLEFT", 0, 5)
+			targetFrame:Point("BOTTOMRIGHT", DebuffMover, "TOPRIGHT", 0, 5)
+		else
+			targetFrame:Point("BOTTOMLEFT", trinketFrame, "TOPLEFT", 0, 5)
+			targetFrame:Point("BOTTOMRIGHT", trinketFrame, "TOPRIGHT", 0, 5)
+		end
 	end
 end
