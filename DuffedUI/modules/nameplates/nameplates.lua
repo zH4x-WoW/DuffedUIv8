@@ -325,7 +325,7 @@ end
 
 nameplates:RegisterEvent("PLAYER_LOGIN")
 nameplates:RegisterEvent("PLAYER_ENTERING_WORLD")
-nameplates:RegisterEvent("ADDON_LOADED")
+nameplates:RegisterEvent("PLAYER_TARGET_CHANGED")
 nameplates:SetScript("OnEvent", function(self, event, ...)
 	nameplates:enable()
 end)
