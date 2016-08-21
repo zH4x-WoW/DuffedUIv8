@@ -286,7 +286,7 @@ function Bags:CreateContainer(storagetype, ...)
 			Button:SetWidth(ButtonSize)
 			Button:SetHeight(ButtonSize)
 			Button:SetFrameStrata("HIGH")
-			Button:SetFrameLevel(2)
+			Button:SetFrameLevel(3)
 			Button:SetNormalTexture("")
 			Button:SetPushedTexture("")
 			Button:SetCheckedTexture("")
@@ -726,7 +726,7 @@ end
 function Bags:Enable()
 	if not C["bags"]["enable"] then return end
 
-	SetSortBagsRightToLeft(false)
+	SetSortBagsRightToLeft(true)
 	SetInsertItemsLeftToRight(true)
 
 	Font = C["media"]["font"]
@@ -739,8 +739,8 @@ function Bags:Enable()
 	local Bank = BankFrameItem1
 	local BankFrame = BankFrame
 
-	self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIInfoRight, "TOPRIGHT", 0, 6)
-	self:CreateContainer("Bank", "BOTTOMLEFT", DuffedUIInfoLeft, "TOPLEFT", 0, 6)
+	if C["chat"]["rbackground"] then self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 5) else self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIInfoRight, "TOPRIGHT", 0, 5) end
+	if C["chat"]["lbackground"] then self:CreateContainer("Bank", "BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 0, 5) else self:CreateContainer("Bank", "BOTTOMLEFT", DuffedUIInfoLeft, "TOPLEFT", 0, 5) end
 	self:HideBlizzard()
 	self:SetBagsSearchPosition()
 
