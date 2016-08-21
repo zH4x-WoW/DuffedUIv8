@@ -444,7 +444,7 @@ function Bags:SlotUpdate(id, button)
 	if IsNewItem and NewItem then
 		NewItem:SetAlpha(0)
 
-		if C["bags"]["bounce"] then
+		if C["bags"]["Bounce"] then
 			if not button.Animation then
 				button.Animation = button:CreateAnimationGroup()
 				button.Animation:SetLooping("BOUNCE")
@@ -466,7 +466,6 @@ function Bags:SlotUpdate(id, button)
 		button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
 	else
 		button:SetBackdropBorderColor(unpack(C["general"].bordercolor))
-        button.BorderColor = C["general"].bordercolor
 	end
 end
 
