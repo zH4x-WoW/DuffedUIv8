@@ -56,7 +56,8 @@
 	DuffedUIConfigUILocalization.castbarclasscolor = "啟用施法條按職業顏色著著色"
 	DuffedUIConfigUILocalization.castbarcbticks = "啟用施法條取消技能施放提示音"
 	DuffedUIConfigUILocalization.castbarplayerwidth = "設定玩家施法條寬度"
-	
+	DuffedUIConfigUILocalization.castbartargetwidth = "Set width of target castbar"
+
 	--[[Nameplate]]--
  	DuffedUIConfigUILocalization.nameplate = "姓名版"
  	DuffedUIConfigUILocalization.nameplateactive = "啟用姓名版"
@@ -168,6 +169,7 @@
 	DuffedUIConfigUILocalization.classtimerseparator = "啟用不同法術分離計時效果"
 	DuffedUIConfigUILocalization.classtimerseparatorcolor = "設置分離器顯示顏色"
 	DuffedUIConfigUILocalization.classtimerdebuffsenable = "Enable Debuff display on classtimer"
+	DuffedUIConfigUILocalization.classtimerenableBuffs = "Enable Buff and Procc display on classtimer"
 
 	--[[Buffs]]--
 	DuffedUIConfigUILocalization.auras = "光環"

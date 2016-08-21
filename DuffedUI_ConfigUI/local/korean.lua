@@ -56,7 +56,8 @@
 	DuffedUIConfigUILocalization.castbarclasscolor = "Enable classcolor for castbar"
 	DuffedUIConfigUILocalization.castbarcbticks = "Enable castbar ticks for channeled casts."
 	DuffedUIConfigUILocalization.castbarplayerwidth = "Set width of player castbar"
-	
+	DuffedUIConfigUILocalization.castbartargetwidth = "Set width of target castbar"
+
 	--[[Nameplate]]--
 	DuffedUIConfigUILocalization.nameplate = "Nameplates"
 	DuffedUIConfigUILocalization.nameplateactive = "Enable Nameplates"
@@ -168,6 +169,7 @@
 	DuffedUIConfigUILocalization.classtimerseparator = "Enable cast separator"
 	DuffedUIConfigUILocalization.classtimerseparatorcolor = "Set color of separator"
 	DuffedUIConfigUILocalization.classtimerdebuffsenable = "Enable Debuff display on classtimer"
+	DuffedUIConfigUILocalization.classtimerenableBuffs = "Enable Buff and Procc display on classtimer"
 
 	--[[Buffs]]--
 	DuffedUIConfigUILocalization.auras = "Auras"
