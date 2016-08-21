@@ -57,6 +57,7 @@ C["castbar"] = {
 	["color"] = {.31, .45, .63, .5},
 	["cbticks"] = true,
 	["playerwidth"] = 376,
+	["targetwidth"] = 225,
 }
 
 C["nameplate"] = {
@@ -168,6 +169,7 @@ C["classtimer"] = {
 	["separator"] = true,
 	["separatorcolor"] = { 0, 0, 0, .5 },
 	["debuffsenable"] = true,
+	["enableBuffs"] = true,
 	["targetdebuff"] = false,
 }
 
