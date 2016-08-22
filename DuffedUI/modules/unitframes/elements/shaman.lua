@@ -30,7 +30,6 @@ D["ClassRessource"]["SHAMAN"] = function(self)
 	else
 		TotemBar:Point("BOTTOM", RessourceMover, "TOP", 0, -5)
 	end
-	--TotemBar:SetTemplate("Default")
 
 	for i = 1, MAX_TOTEMS do
 		TotemBar[i] = CreateFrame("StatusBar", "TotemBar" .. i, TotemBar)
