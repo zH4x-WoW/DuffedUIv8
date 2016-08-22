@@ -126,7 +126,7 @@ function Bags:CreateReagentContainer()
 	local Movers = D["move"]
 
 	Reagent:SetWidth(((ButtonSize + ButtonSpacing) * ItemsPerRow) + 22 - ButtonSpacing)
-	Reagent:SetPoint("BOTTOMLEFT", DuffedUIInfoLeft, "TOPLEFT", 0, 6)
+	if C["chat"]["lbackground"] then Reagent:SetPoint("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 0, 5) else Reagent:SetPoint("BOTTOMLEFT", DuffedUIInfoLeft, "TOPLEFT", 0, 5) end
 	Reagent:SetTemplate("Transparent")
 	Reagent:SetFrameStrata(self.Bank:GetFrameStrata())
 	Reagent:SetFrameLevel(self.Bank:GetFrameLevel())
@@ -211,8 +211,9 @@ function Bags:CreateReagentContainer()
 
 	Unlock:StripTextures()
 	Unlock:SetAllPoints(Reagent)
-	Unlock:SetTemplate()
+	Unlock:SetTemplate("Transparent")
 	UnlockButton:SkinButton()
+	ReagentBankFrameUnlockInfoText:SetFont(C["media"]["font"], 10)
 	Movers:RegisterFrame(Reagent)
 
 	self.Reagent = Reagent
@@ -358,9 +359,12 @@ function Bags:CreateContainer(storagetype, ...)
 		end
 
 		Purchase:ClearAllPoints()
-		Purchase:SetWidth(Container:GetWidth() + 50)
+		Purchase:SetWidth(Container:GetWidth())
 		Purchase:SetHeight(70)
-		Purchase:SetPoint("BOTTOMLEFT", SwitchReagentButton, "TOPLEFT", -50, 2)
+		Purchase:SetPoint("BOTTOM", Container, "TOP", 0, 3)
+		Purchase:CreateBackdrop("Transparent")
+		Purchase.backdrop:SetPoint("TOPLEFT", 0, 0)
+		Purchase.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
 
 		BankBagsContainer:Size(Container:GetWidth(), BankSlotsFrame.Bag1:GetHeight() + ButtonSpacing + ButtonSpacing)
 		BankBagsContainer:SetTemplate()
