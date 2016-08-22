@@ -201,6 +201,11 @@ function Bags:CreateReagentContainer()
 		Icon:SetInside()
 		LastButton = Button
 		self:SlotUpdate(-3, Button)
+
+		Count:ClearAllPoints()
+		Count:SetPoint("BOTTOMRIGHT", -3, 3)
+		Count:SetFont(C["media"].font, 11, "THINOUTLINE")
+		Count:SetTextColor(1, 1, 1)
 	end
 
 	Reagent:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)
@@ -296,8 +301,6 @@ function Bags:CreateContainer(storagetype, ...)
 			Button:SkinButton()
 			if LastButtonBag then Button:SetPoint("TOP", LastButtonBag, "BOTTOM", 0, -4) else Button:SetPoint("TOPLEFT", BagsContainer, "TOPLEFT", 4, -4) end
 
-			Count.Show = Noop
-			Count:Hide()
 			Icon:SetTexCoord(unpack(D["IconCoord"]))
 			Icon:SetInside()
 			LastButtonBag = Button
@@ -478,10 +481,15 @@ function Bags:BagUpdate(id)
 
 	for Slot = 1, Size do
 		local Button = _G["ContainerFrame"..(id + 1).."Item"..Slot]
+		local Count = _G[Button:GetName().."Count"]
 
 		if Button then
 			if not Button:IsShown() then Button:Show() end
 			self:SlotUpdate(id, Button)
+			Count:ClearAllPoints()
+			Count:SetPoint("BOTTOMRIGHT", 0, 3)
+			Count:SetFont(C["media"].font, 11, "THINOUTLINE")
+			Count:SetTextColor(1, 1, 1)
 		end
 	end
 end
@@ -546,6 +554,7 @@ function Bags:UpdateAllBankBags()
 
 	for Bank = 1, 28 do
 		local Button = _G["BankFrameItem"..Bank]
+		local Count = _G[Button:GetName().."Count"]
 		local Money = ContainerFrame2MoneyFrame
 		local BankFrameMoneyFrame = BankFrameMoneyFrame
 
@@ -576,6 +585,11 @@ function Bags:UpdateAllBankBags()
 		Bags.SkinBagButton(Button)
 		Bags.SlotUpdate(self, -1, Button)
 		LastButton = Button
+
+		Count:ClearAllPoints()
+		Count:SetPoint("BOTTOMRIGHT", 0, 3)
+		Count:SetFont(C["media"].font, 11, "THINOUTLINE")
+		Count:SetTextColor(1, 1, 1)
 	end
 
 	for Bag = 6, 12 do
@@ -583,6 +597,7 @@ function Bags:UpdateAllBankBags()
 
 		for Item = Slots, 1, -1 do
 			local Button = _G["ContainerFrame"..Bag.."Item"..Item]
+			local Count = _G[Button:GetName().."Count"]
 
 			Button:ClearAllPoints()
 			Button:SetWidth(ButtonSize)
@@ -606,6 +621,11 @@ function Bags:UpdateAllBankBags()
 			Bags.SkinBagButton(Button)
 			Bags.SlotUpdate(self, Bag - 1, Button)
 			LastButton = Button
+
+			Count:ClearAllPoints()
+			Count:SetPoint("BOTTOMRIGHT", 0, 3)
+			Count:SetFont(C["media"].font, 11, "THINOUTLINE")
+			Count:SetTextColor(1, 1, 1)
 		end
 	end
 	Bags.Bank:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 50) - ButtonSpacing)
