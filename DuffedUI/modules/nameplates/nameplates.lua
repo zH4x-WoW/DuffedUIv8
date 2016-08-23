@@ -279,6 +279,9 @@ end
 
 function nameplates:enable()
 	local active = C["nameplate"].active
+	local hooked = {}
+	local ref = tostring(CompactUnitFrame_UpdateHealthColor)
+	local ref2 = tostring(DefaultCompactNamePlateFrameSetupInternal)
 	if not active then return end
 
 	self:RegisterOptions()
@@ -300,16 +303,19 @@ function nameplates:enable()
 	if self.ClassBar then self.ClassBar:SetScale(1.05) end
 	hooksecurefunc(NamePlateDriverFrame, "SetClassNameplateBar", self.SetClassNameplateBar)
 
-	hooksecurefunc("CompactUnitFrame_UpdateHealthColor", self.colorHealth)
-	hooksecurefunc("DefaultCompactNamePlateFrameSetupInternal", self.setupPlate)
+	if not hooked[ref] and not hooked[ref2] then
+		hooksecurefunc("CompactUnitFrame_UpdateHealthColor", self.colorHealth)
+		hooksecurefunc("DefaultCompactNamePlateFrameSetupInternal", self.setupPlate)
+		hooked[ref] = true
+		hooked[ref2] = true
+	end
 
 	NamePlateDriverFrame.UpdateNamePlateOptions = function() end
 	InterfaceOptionsNamesPanelUnitNameplatesMakeLarger:Hide()
 end
 
-nameplates:RegisterEvent("PLAYER_LOGIN")
 nameplates:RegisterEvent("PLAYER_ENTERING_WORLD")
-nameplates:RegisterEvent("PLAYER_TARGET_CHANGED")
 nameplates:SetScript("OnEvent", function(self, event, ...)
 	nameplates:enable()
+	nameplates:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
