@@ -89,14 +89,6 @@ function nameplates:RegisterOptions()
 		castIconWidth = 10,
 		castIconHeight = 10,
 	}
-
-	nameplates.Options.castBarColors = {
-		StartNormal =  {0.65, 0.63, 0.35},
-		StartChannel = {0.31, 0.45, 0.63},
-		Success = {1, .8, 0},
-		NonInterrupt = {.7, 0, 0},
-		Failed = {1, 0, 0},
-	}
 end
 
 function nameplates:GetClassification(unit)
@@ -260,12 +252,11 @@ function nameplates:setupPlate(options)
 	castBar.Text:SetFont(font, 8)
 	castBar.Text:SetShadowOffset(1.25, -1.25)
 
-	castBar.startCastColor.r, castBar.startCastColor.g, castBar.startCastColor.b = unpack(nameplates.Options.castBarColors.StartNormal)
-	castBar.startChannelColor.r, castBar.startChannelColor.g, castBar.startChannelColor.b = unpack(nameplates.Options.castBarColors.StartChannel)
-	castBar.failedCastColor.r, castBar.failedCastColor.g, castBar.failedCastColor.b = unpack(nameplates.Options.castBarColors.Failed)
-	castBar.nonInterruptibleColor.r, castBar.nonInterruptibleColor.g, castBar.nonInterruptibleColor.b = unpack(nameplates.Options.castBarColors.NonInterrupt)
-	castBar.finishedCastColor.r, castBar.finishedCastColor.g, castBar.finishedCastColor.b = unpack(nameplates.Options.castBarColors.Success)
-
+	castBar.startCastColor.r, castBar.startCastColor.g, castBar.startCastColor.b = .65, .63, .35
+	castBar.startChannelColor.r, castBar.startChannelColor.g, castBar.startChannelColor.b = .31, .45, .63
+	castBar.failedCastColor.r, castBar.failedCastColor.g, castBar.failedCastColor.b = 1, 0, 0
+	castBar.nonInterruptibleColor.r, castBar.nonInterruptibleColor.g, castBar.nonInterruptibleColor.b = .8, 0, 0
+	castBar.finishedCastColor.r, castBar.finishedCastColor.g, castBar.finishedCastColor.b = 1, .8, 0
 	castBar:HookScript("OnShow", nameplates.displayCastIcon)
 
 	name:SetFont(font, 8)
