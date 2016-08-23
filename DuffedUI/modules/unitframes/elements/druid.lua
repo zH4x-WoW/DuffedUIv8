@@ -17,15 +17,19 @@ D["ClassRessource"]["DRUID"] = function(self)
 	--[[DruidMana]]--
 	local DruidMana = CreateFrame("StatusBar", nil, self.Health)
 	DruidMana:Size(216, 3)
-	if layout == 1 then
-		DruidMana:Point("TOP", self.Power, "BOTTOM", 0, -25)
-	elseif layout == 2 then
-		DruidMana:Point("BOTTOM", self.Health, "TOP", 0, -5)
-		DruidMana:SetFrameLevel(self.Health:GetFrameLevel() + 2)
-	elseif layout == 3 then
-		DruidMana:Point("CENTER", self.panel, "CENTER", 0, -3)
-	elseif layout == 4 then
-		DruidMana:Point("TOP", self.Health, "BOTTOM", 0, -10)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			DruidMana:Point("TOP", self.Power, "BOTTOM", 0, -25)
+		elseif layout == 2 then
+			DruidMana:Point("BOTTOM", self.Health, "TOP", 0, -5)
+			DruidMana:SetFrameLevel(self.Health:GetFrameLevel() + 2)
+		elseif layout == 3 then
+			DruidMana:Point("CENTER", self.panel, "CENTER", 0, -3)
+		elseif layout == 4 then
+			DruidMana:Point("TOP", self.Health, "BOTTOM", 0, -10)
+		end
+	else
+		DruidMana:Point("TOP", Energy, "BOTTOM", 0, -5)
 	end
 	DruidMana:SetStatusBarTexture(texture)
 	DruidMana:SetStatusBarColor(.30, .52, .90)
@@ -42,6 +46,7 @@ D["ClassRessource"]["DRUID"] = function(self)
 
 	self.DruidMana = DruidMana
 	self.DruidMana.bg = DruidMana.bg
+	if C["unitframes"]["oocHide"] then D["oocHide"](DruidMana) end
 	
 	--[[ComboPoints]]--
 	local ComboPoints = CreateFrame("Frame", "ComboPoints", UIParent)
