@@ -3,14 +3,14 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Fix for critical errors on client",
-		"• Added option to set width of target castbar",
-		"• Update Bagscript",
-		"• Update AFK-Camera",
+		"• Fixed mover for maintank and added a better mover for Heal-Layout",
+		"• Fixed a C-Stackoverflow-issue",
+		"• Fixed some issues on new bag script",
+		"• New Position for altmana for druids",
 		--"• ",
 	" ",
 	"Notes:",
-		"• No additional notes yet",
+		"• New Bagscrip isn't finished yet.",
 }
 
 local function ModifiedString(string)
