@@ -55,22 +55,28 @@ D["ClassRessource"]["SHAMAN"] = function(self)
 	
 	--[[ShamanMana]]--
 	local SMB = CreateFrame("StatusBar", "ShamanManaBar", self.Health)
-	SMB:Size(216, 5)
-	if layout == 1 then
-		SMB:Point("TOP", self.Power, "BOTTOM", 0, -25)
-	elseif layout == 2 then
-		SMB:Point("BOTTOM", self.Health, "TOP", 0, -5)
-		SMB:SetFrameLevel(self.Health:GetFrameLevel() + 2)
-	elseif layout == 3 then
-		SMB:Point("CENTER", self.panel, "CENTER", 0, -3)
-	elseif layout == 4 then
-		SMB:Point("TOP", self.Health, "BOTTOM", 0, -10)
+	SMB:Size(218, 3)
+	if C["unitframes"]["attached"] then
+		if layout == 1 then
+			SMB:Point("TOP", self.Power, "BOTTOM", 0, -5)
+			SMB:CreateBackdrop()
+		elseif layout == 2 then
+			SMB:Point("BOTTOM", self.Health, "TOP", 0, -3)
+			SMB:SetFrameLevel(self.Health:GetFrameLevel() + 2)
+		elseif layout == 3 then
+			SMB:Point("CENTER", self.panel, "CENTER", 0, -3)
+			SMB:CreateBackdrop()
+		elseif layout == 4 then
+			SMB:Point("TOP", self.Health, "BOTTOM", 0, -5)
+			SMB:CreateBackdrop()
+		end
+	else
+		SMB:Point("TOP", Energy, "BOTTOM", 0, -5)
 	end
 	SMB:SetStatusBarTexture(texture)
 	SMB:SetStatusBarColor(.30, .52, .90)
 	SMB:SetFrameLevel(self.Health:GetFrameLevel() + 3)
 	SMB.PostUpdatePower = D.PostUpdateAltMana
-	SMB:CreateBackdrop()
 
 	SMB:SetBackdrop(backdrop)
 	SMB:SetBackdropColor(0, 0, 0)
