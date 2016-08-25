@@ -9,6 +9,7 @@ C["general"] = {
 	["autoaccept"] = true,
 	["blizzardreskin"] = true,
 	["calendarevent"] = false,
+	["lua"] = true,
 }
 
 C["unitframes"] = {
