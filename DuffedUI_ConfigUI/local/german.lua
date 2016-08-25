@@ -66,6 +66,7 @@
 	DuffedUIConfigUILocalization.nameplateplatewidth = "Breite der Namensplaketten (Standard = 110)"
 	DuffedUIConfigUILocalization.nameplateplateheight = "Höhe der Namensplaketten (Standard = 7)"
 	DuffedUIConfigUILocalization.nameplateethreat = "Aktiviere erweitertete Aggroanzeige"
+	DuffedUIConfigUILocalization.nameplateClassColor = "Aktiviere Anzeige für Klassenfarben bei den Namensplaketten"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"
