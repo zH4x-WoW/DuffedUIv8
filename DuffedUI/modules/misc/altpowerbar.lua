@@ -21,7 +21,7 @@ AltPowerBar:SetTemplate("Transparent")
 AltPowerBar:SetFrameStrata("MEDIUM")
 AltPowerBar:SetFrameLevel(0)
 AltPowerBar:EnableMouse(true)
-move:RegisterFrame(AltPowerBar)
+move:RegisterFrame(DuffedUIAltPowerBar)
 
 local AltPowerBarStatus = CreateFrame("StatusBar", "DuffedUIAltPowerBarStatus", AltPowerBar)
 AltPowerBarStatus:SetFrameLevel(AltPowerBar:GetFrameLevel() + 1)
