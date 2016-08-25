@@ -67,19 +67,19 @@ function nameplates:RegisterOptions()
 	}
 
 	nameplates.Options.Size = {
-		healthBarHeight = 7,
+		healthBarHeight = C["nameplate"].plateheight,
 		healthBarAlpha = 1,
 		castBarHeight = 5,
 		castBarFontHeight = 9,
 		useLargeNameFont = false,
 		castBarShieldWidth = 10,
 		castBarShieldHeight = 12,
-		castIconWidth = 14,
-		castIconHeight = 14,
+		castIconWidth = C["nameplate"].plateheight + 7,
+		castIconHeight = C["nameplate"].plateheight + 7,
 	}
 
 	nameplates.Options.PlayerSize = {
-		healthBarHeight = 7,
+		healthBarHeight = C["nameplate"].plateheight,
 		healthBarAlpha = 1,
 		castBarHeight = 5,
 		castBarFontHeight = 10,
@@ -279,6 +279,7 @@ end
 
 function nameplates:enable()
 	local active = C["nameplate"].active
+	local npwidth = C["nameplate"]["platewidth"]
 	local hooked = {}
 	local ref = tostring(CompactUnitFrame_UpdateHealthColor)
 	local ref2 = tostring(DefaultCompactNamePlateFrameSetupInternal)
@@ -312,6 +313,7 @@ function nameplates:enable()
 
 	NamePlateDriverFrame.UpdateNamePlateOptions = function() end
 	InterfaceOptionsNamesPanelUnitNameplatesMakeLarger:Hide()
+	C_NamePlate.SetNamePlateOtherSize(npwidth, 45)
 end
 
 nameplates:RegisterEvent("PLAYER_ENTERING_WORLD")

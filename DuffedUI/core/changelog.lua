@@ -10,6 +10,7 @@ local ChangeLogData = {
 		"• New Position for altmana for druids, shaman and shadow priest",
 		"• Added option to enable / disable Lua-Errors",
 		"• Added missing locals",
+		"• Reenabled width and height for nameplate",
 		--"• ",
 	" ",
 	"Notes:",
