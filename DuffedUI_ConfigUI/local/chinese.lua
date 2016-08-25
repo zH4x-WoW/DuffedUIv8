@@ -9,7 +9,6 @@
 	DuffedUIConfigUILocalization.generalblizzardreskin = "重设暴雪框体材质以适应DuffedUI"
 	DuffedUIConfigUILocalization.generalcalendarevent = "禁用行事历事件特殊材质显示"
 	DuffedUIConfigUILocalization.generalautoaccept = "启用自动接受邀请(好友或公会成员)"
-	DuffedUIConfigUILocalization.generallua = "Enable messages for Lua-Errors"
 
 	--[[Unit Frames]]--
 	DuffedUIConfigUILocalization.unitframes = "单位框体"

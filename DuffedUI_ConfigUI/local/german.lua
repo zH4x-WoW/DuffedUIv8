@@ -9,7 +9,6 @@
 	DuffedUIConfigUILocalization.generalblizzardreskin = "Zeige die Blizzard eigenen Fenster im Stile von DuffedUI an"
 	DuffedUIConfigUILocalization.generalcalendarevent = "Deaktiviere die Texturen, der Events, im Kalender"
 	DuffedUIConfigUILocalization.generalautoaccept = "Aktiviere die automatische Einladung von Freunden und Gildenmitgliedern"
-	DuffedUIConfigUILocalization.generallua = "Aktiviere Nachrichten für Lua-Fehler"
 
 	--[[Unit Frames]]--
 	DuffedUIConfigUILocalization.unitframes = "Einheitenfenster"

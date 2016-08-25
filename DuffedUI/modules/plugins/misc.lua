@@ -24,13 +24,6 @@ end
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", f.OnEvent)
 
-if C["general"]["lua"] then
-	local setting = GetCVar("scriptErrors")
-	if setting == 1 then return else SetCVar("scriptErrors", 1) end
-else
-	SetCVar("scriptErrors", 0)
-end
-
 --[[Quest Rewards]]--
 local QuestReward = CreateFrame("Frame")
 QuestReward:SetScript("OnEvent", function(self, event, ...) self[event](...) end)

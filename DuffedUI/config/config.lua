@@ -9,7 +9,6 @@ C["general"] = {
 	["autoaccept"] = true,
 	["blizzardreskin"] = true,
 	["calendarevent"] = false,
-	["lua"] = true,
 }
 
 C["unitframes"] = {
@@ -63,8 +62,8 @@ C["castbar"] = {
 
 C["nameplate"] = {
  	["active"] = true,
- 	["platewidth"] = 110,
- 	["plateheight"] = 7,
+ 	--["platewidth"] = 110,
+ 	--["plateheight"] = 7,
 	["ethreat"] = true,
 	["ClassColor"] = true,
 }
