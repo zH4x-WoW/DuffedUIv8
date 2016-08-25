@@ -683,6 +683,7 @@ do
 		button:SetText("DuffedUI")
 		if C["general"].blizzardreskin then button:SkinButton() end
 		button:SetScript("OnClick", function(self)
+			if InCombatLockdown() then return end
 			local config = DuffedUIConfigUI
 			if config and config:IsShown() then
 				DuffedUIConfigUI:Hide()
