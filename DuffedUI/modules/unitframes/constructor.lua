@@ -161,14 +161,14 @@ D["SpawnUF"] = function(self)
 			else
 				local numOpps = GetNumArenaOpponentSpecs()
 
-				if numOpps > 0 then
-					for i = 1, 5 do
-						local f = _G["oUF_PrepArena" .. i]
-						local s = GetArenaOpponentSpec(i)
-						local _, spec, class = nil, "UNKNOWN", "UNKNOWN"
+				for i = 1, 5 do
+					local f = _G["oUF_PrepArena" .. i]
+					
+					if (i <= numOpps) then
+						local specID = GetArenaOpponentSpec(i)
 
-						if s and s > 0 then _, spec, _, _, _, _, class = GetSpecializationInfoByID(s) end
-						if (i <= numOpps) then
+						if specID and specID > 0 then 
+							local _, spec, _, _, _, _, class = GetSpecializationInfoByID(specID)
 							if class and spec then
 								f.SpecClass:SetText(spec .. "  -  " .. LOCALIZED_CLASS_NAMES_MALE[class])
 								if not C["unitframes"]["unicolor"] then
@@ -181,11 +181,11 @@ D["SpawnUF"] = function(self)
 							f:Hide()
 						end
 					end
-				else
-					for i = 1, 5 do
-						local f = _G["oUF_PrepArena"..i]
-						f:Hide()
-					end
+				end
+
+				for i = 1, 5 do
+					local f = _G["oUF_PrepArena"..i]
+					f:Hide()
 				end
 			end
 		end)
