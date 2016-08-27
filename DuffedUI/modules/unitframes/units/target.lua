@@ -302,7 +302,7 @@ D["ConstructUFTarget"] = function(self)
 
 		local castbar = CreateFrame("StatusBar", self:GetName() .. "CastBar", self)
 		castbar:SetStatusBarTexture(texture)
-		castbar:Width(225)
+		castbar:Width(C["castbar"]["targetwidth"])
 		castbar:Height(18)
 		castbar:Point("LEFT", TargetCastBarMover, "LEFT", 0, 0)
 

@@ -204,7 +204,6 @@ function AS:Skillet()
 	local function SkilletFrameOnUpdate(self, event, ...)
 		SkilletRecipeNotesButton:SetPoint('BOTTOMRIGHT', SkilletReagentParent, 'TOPRIGHT', 0, 2)
 		SkilletQueueManagementButton:SetPoint('RIGHT', SkilletRecipeNotesButton, 'LEFT', -5, 0)
-		SkilletItemCountInputBox:SetPoint('BOTTOM', SkilletCreateCountSlider, 'TOP', 0, 2)	
 
 		if SkilletDoBasic_Campfire then
 			SkilletDoBasic_Campfire:ClearAllPoints()
@@ -330,6 +329,8 @@ function AS:Skillet()
 	AS:SkinStatusBar(SkilletRankFrame)
 	SkilletRankFrame:SetHeight(10)		
 	AS:SkinScrollBar(SkilletSkillListScrollBar, 5)
+	SkilletClearNumButton:ClearAllPoints()
+	SkilletClearNumButton:SetPoint("LEFT", SkilletItemCountInputBox, "RIGHT", 0, -2)
 
 	_G['SkilletSkillListParent']:SetScript('OnShow', SkilletFrameOnShow)
 	_G['SkilletSkillListParent']:SetScript('OnUpdate', SkilletFrameOnUpdate)

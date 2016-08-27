@@ -56,6 +56,7 @@ local function LoadSkin()
 	AchievementFrame.searchBox:SetHeight(15)
 	AchievementFrame.searchBox:ClearAllPoints()
 	AchievementFrame.searchBox:Point("TOPRIGHT", AchievementFrame, "TOPRIGHT", -40, 0)
+	AchievementFrame.searchResults:SetTemplate("Transparent")
 
 	-- ScrollBars
 	AchievementFrameCategoriesContainerScrollBar:SkinScrollBar()

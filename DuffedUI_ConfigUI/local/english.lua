@@ -58,6 +58,7 @@ DuffedUIConfigUILocalization.castbarcolor = "Set color for castbars"
 DuffedUIConfigUILocalization.castbarclasscolor = "Enable classcolor for castbar"
 DuffedUIConfigUILocalization.castbarcbticks = "Enable castbar ticks for channeled casts."
 DuffedUIConfigUILocalization.castbarplayerwidth = "Set width of player castbar"
+DuffedUIConfigUILocalization.castbartargetwidth = "Set width of target castbar"
 
 --[[Nameplate]]--
 DuffedUIConfigUILocalization.nameplate = "Nameplates"
@@ -65,6 +66,7 @@ DuffedUIConfigUILocalization.nameplateactive = "Enable Nameplates"
 DuffedUIConfigUILocalization.nameplateplatewidth = "Set width of nameplates (default = 110)"
 DuffedUIConfigUILocalization.nameplateplateheight = "Set height of nameplates (default = 7)"
 DuffedUIConfigUILocalization.nameplateethreat = "Enable Enhanced Threat"
+DuffedUIConfigUILocalization.nameplateClassColor = "Enable classcolor-display on nameplates"
 
 --[[Actionbars]]--
 DuffedUIConfigUILocalization.actionbar = "Action Bars"

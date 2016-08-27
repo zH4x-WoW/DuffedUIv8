@@ -3,16 +3,18 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Added Nether Shards to currency in gold datatext",
-		"• Update skins from DuffedUI",
-		"• Update AddOnSkins",
-		"• Added new cameraDistanceMaxFactor",
-		"• Added some strings to shorten lootdisplay",
-		"• Fixed a taint on raidframes",
+		"• Fixed mover for maintank and added a better mover for Heal-Layout",
+		"• Fixed a C-Stackoverflow-issue",
+		"• Fixed some issues on new bag script",
+		"• Fixed mover for alternative power bar",
+		"• New Position for altmana for druids, shaman and shadow priest",
+		"• Added option to enable / disable Lua-Errors",
+		"• Added missing locals",
+		"• Reenabled width and height for nameplate",
 		--"• ",
 	" ",
 	"Notes:",
-		"• No additional notes yet",
+		"• New Bagscrip isn't finished yet.",
 }
 
 local function ModifiedString(string)
