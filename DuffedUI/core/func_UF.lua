@@ -623,7 +623,7 @@ if C["raid"].raidunitdebuffwatch == true then
 		D.buffids = {
 			PRIEST = {
 				{6788, "TOPRIGHT", {0, 0}, {1, 0, 0}, true}, 			-- Weakened Soul
-				{33110, "BOTTOMRIGHT", {0, 0}, {.2, .7, .2}}, 			-- Prayer of Mending
+				{41635, "BOTTOMRIGHT", {0, 0}, {.2, .7, .2}}, 			-- Prayer of Mending
 				{139, "BOTTOMLEFT", {0, 0}, {.4, .7, .2}}, 				-- Renew
 				{17, "TOPLEFT", {0, 0}, {.81, .85, .1}, true}, 			-- Power Word: Shield
 			},
