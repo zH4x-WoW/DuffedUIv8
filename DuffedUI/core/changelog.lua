@@ -3,18 +3,17 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Fixed mover for maintank and added a better mover for Heal-Layout",
-		"• Fixed a C-Stackoverflow-issue",
-		"• Fixed some issues on new bag script",
-		"• Fixed mover for alternative power bar",
-		"• New Position for altmana for druids, shaman and shadow priest",
-		"• Added option to enable / disable Lua-Errors",
-		"• Added missing locals",
-		"• Reenabled width and height for nameplate",
+		"• Update SpellID's",
+		"• Update AddOnSkins",
+		"• Fixed a issue with flash info for low mana",
+		"• Fixed a issue with corner buffs and Prayer of Mending",
+		"• Attempt to fix arena preperation frame",
+		"• Functions are removed which no longer needed",
+		"• Raid-Debuffs from WoD removed (no longer needed)",
 		--"• ",
 	" ",
 	"Notes:",
-		"• New Bagscrip isn't finished yet.",
+		"• New Bagscript isn't finished yet.",
 }
 
 local function ModifiedString(string)
