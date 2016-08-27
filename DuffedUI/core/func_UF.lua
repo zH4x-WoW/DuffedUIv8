@@ -12,12 +12,12 @@ end
 local SetUpAnimGroup = function(self)
 	self.anim = self:CreateAnimationGroup("Flash")
 	self.anim.fadein = self.anim:CreateAnimation("ALPHA", "FadeIn")
-	self.anim.fadein:SetChange(1)
-	self.anim.fadein:SetOrder(2)
+	self.anim.fadein:SetFromAlpha(1)
+	self.anim.fadein:SetToAlpha(0)
 
 	self.anim.fadeout = self.anim:CreateAnimation("ALPHA", "FadeOut")
-	self.anim.fadeout:SetChange(-1)
-	self.anim.fadeout:SetOrder(1)
+	self.anim.fadeout:SetFromAlpha(1)
+	self.anim.fadeout:SetToAlpha(0)
 end
 
 local Flash = function(self, duration)
