@@ -192,17 +192,6 @@ local function CreateBackdrop(f, t, tex)
 	f.backdrop = b
 end
 
-local function CreateBorder(f, n, p)
-	if f.border then return end
-
-	border = CreateFrame("Frame", n or nil, p or f)
-	border:SetTemplate("")
-	border:Size( 1, 1)
-	border:Point("TOPLEFT", f, "TOPLEFT", -2, 2)
-	border:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", 2, -2)
-	f.border = border
-end
-
 local function CreateOverlay(frame)
 	if frame.overlay then return end
 
@@ -260,12 +249,7 @@ local function FontString(parent, name, fontName, fontHeight, fontStyle)
     fs:SetShadowColor(0, 0, 0)
     fs:SetShadowOffset(D.mult, -D.mult)
 
-    if not name then
-        parent.Text = fs
-    else
-        parent[name] = fs
-    end
-
+    if not name then parent.Text = fs else parent[name] = fs end
     return fs
 end
 
@@ -712,7 +696,6 @@ local function addapi(object)
 	if not object.SkinIcon then mt.SkinIcon = SkinIcon end
 	if not object.HideInsets then mt.HideInsets = HideInsets end
 	if not object.CreateOverlay then mt.CreateOverlay = CreateOverlay end
-	if not object.CreateBorder then mt.CreateBorder = CreateBorder end
 	if not object.FadeIn then mt.FadeIn = FadeIn end
 	if not object.FadeOut then mt.FadeOut = FadeOut end
 	if not object.SetAnimation then mt.SetAnimation = SetAnimation end
