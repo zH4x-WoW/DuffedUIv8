@@ -1,0 +1,13 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="merchant.lua" />
+	<Script file="bags\config.lua" />
+
+	<Include file="bags\cargBags\embed.xml" />
+	<Script file="bags\localization.lua" />
+	<Script file="bags\filters.lua" />
+	<Script file="bags\cargBags_Nivaya.lua" />
+	<Script file="bags\style.lua" />
+	<Script file="masterloot.lua" />
+	<Script file="rollframe.lua" />
+	<Script file="sort.lua" />
+</Ui>

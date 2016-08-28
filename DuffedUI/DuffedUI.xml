@@ -30,7 +30,7 @@
 	<Script file="modules\maps\zonemap.lua" />
 	<Script file="modules\panels\panels.lua" />
 	<Include file="modules\misc\load_misc.xml" />
-	<Script file="modules\loot\merchant.lua" />
+	<!--<Script file="modules\loot\merchant.lua" />-->
 	<Script file="modules\chat\copyurl.lua" />
 	<Script file="modules\tooltip\itemid.lua" />
 	<Include file="modules\buffs\template.xml" />
@@ -45,10 +45,11 @@
 	<Script file="modules\chat\sounds.lua" />
 	<Script file="modules\tooltip\tooltip.lua" />
 	<Script file="modules\nameplates\nameplates.lua" />
-	<Script file="modules\loot\sort.lua" />
-	<Script file="modules\loot\bags.lua" />
-	<Script file="modules\loot\masterloot.lua" />
-	<Script file="modules\loot\rollframe.lua" />
+	<!--<Script file="modules\loot\sort.lua" />-->
+	<!--<Script file="modules\loot\bags.lua" />-->
+	<!--<Script file="modules\loot\masterloot.lua" />-->
+	<!--<Script file="modules\loot\rollframe.lua" />-->
+	<Include file="modules\loot\load_bags.xml" />
 
 	<!-- unitframes -->
 	<Include file="libs\templates\tankassist.xml" />
