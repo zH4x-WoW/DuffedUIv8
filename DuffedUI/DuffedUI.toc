@@ -3,8 +3,8 @@
 ## Version: 8.47
 ## Title: |cffC41F3BDuffedUI|r
 ## Credits to: humfras aka Shinizu, Hizuro, Azilroka, Caith, Ishtara, Hungtar, Tulla, P3lim, Alza, Roth, Tekkub, Shestak, Caellian, Haleth, Nightcracker, Haste, Hydra, Elv, Tukz, Phanx, Duugu
-## SavedVariables: DuffedUIData, cBnivCfg, cB_CustomBags, cBniv_CatInfo
-## SavedVariablesPerCharacter: DuffedUIDataPerChar, ImprovedCurrency, CurrencyData, SquareMinimapButtonOptions, cB_KnownItems, cBniv
+## SavedVariables: DuffedUIData
+## SavedVariablesPerCharacter: DuffedUIDataPerChar, ImprovedCurrency, CurrencyData, SquareMinimapButtonOptions
 ## OptionalDeps: DuffedUI_ConfigUI
 ## X-oUF: oUFDuffedUI
 
