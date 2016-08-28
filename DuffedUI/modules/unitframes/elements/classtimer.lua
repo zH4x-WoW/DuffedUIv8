@@ -44,11 +44,6 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(68992), -- Darkflight (Worgen Sprint Racial)
 
 	--[[Weaponenchants & Stuff]]--
-	CreateSpellEntry(104510, true), -- Windsong
-	CreateSpellEntry(125487, true), -- Lightweave
-	CreateSpellEntry(120032, true), -- Dancing Steel
-	CreateSpellEntry(104993, true), -- Jade Spirit
-	CreateSpellEntry(116660, true), -- River's Song
 	CreateSpellEntry(159676, true), -- Mark of the Frostwolf
 	CreateSpellEntry(159675, true), -- Mark of Warsong
 	CreateSpellEntry(159234, true), -- Mark of the Thunderlord
@@ -65,27 +60,6 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(162913), -- Visions of the Future (Winged Hourglass)
 	CreateSpellEntry(162919), -- Nightmare Fire (Sandman's Pouch)
 	CreateSpellEntry(162917), -- Strength of Steel (Knight's Badge)
-
-	--[[T16]]--
-	CreateSpellEntry(145164), -- Warlock T16 4pieces
-	CreateSpellEntry(144901), -- Deathknight T16 2pieces
-	CreateSpellEntry(145336), -- Priest T16 4pieces
-
-	--[[T17]]--
-	CreateSpellEntry(165475), -- Mage Arcane 2pieces
-	CreateSpellEntry(166868), -- Mage Fire 4pieces
-	CreateSpellEntry(170408), -- Mage Frost 4pieces
-	CreateSpellEntry(165447), -- Paladin Protection 2pieces
-	CreateSpellEntry(167742), -- Paladin Protection 4pieces
-	CreateSpellEntry(165404), -- Monk Mistweaver 2pieces
-	CreateSpellEntry(167717), -- Monk Mistweaver 4pieces
-	CreateSpellEntry(166587), -- Warrior Arms 4pieces
-	CreateSpellEntry(165350), -- Warrior Fury 4pieces
-	CreateSpellEntry(166639), -- Druid Feral 4pieces
-	CreateSpellEntry(165423), -- Druid Guardian 4pieces
-	CreateSpellEntry(167655), -- Deathknight Frost 4pieces
-	CreateSpellEntry(165509), -- Rogue Subtlety 2pieces
-	CreateSpellEntry(170186), -- Hunter Markmanship 4pieces
 
 	--[[Legendary Rings]]--
 	CreateSpellEntry(177159), -- Archmage's Incandescence (Intellect)
@@ -109,30 +83,6 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(183929), -- Sudden Intuition
 	CreateSpellEntry(183931), -- Anzus Flight
 	CreateSpellEntry(183924), -- Sign of the Dark Star
-
-	--[[Blackrock Foundry]]--
-	CreateSpellEntry(177063), -- Elementalist's Shielding Talisman (Elemental Shield)
-	CreateSpellEntry(177056), -- Blast Furnace Door (Blast Furnace)
-	CreateSpellEntry(176873), -- Tablet of Turnbuckle Teamwork (Turnbuckle Terror)
-	CreateSpellEntry(176878), -- Beating Heart of the Mountain (Lub-Dub)
-	CreateSpellEntry(177051), -- Darmac's Unstable Talisman (Instability)
-	CreateSpellEntry(176874), -- Vial of Convulsive Shadows (Convulsive Shadows)
-	CreateSpellEntry(177096), -- Forgemaster's Insignia (Forgemaster's Vigor)
-	CreateSpellEntry(177081), -- Blackiron Micro Crucible (Molten Metal)
-	CreateSpellEntry(177067), -- Humming Blackiron Trigger (Detonation)
-	CreateSpellEntry(177086), -- Auto-Repairing Autoclave (Sanitizing)
-	CreateSpellEntry(177102), -- Battering Talisman (Battering)
-	CreateSpellEntry(177042), -- Horn of Screaming Spirits (Screaming Spirits)
-	CreateSpellEntry(177060), -- Ironspike Chew Toy (Squeak Squeak)
-	CreateSpellEntry(177035), -- Meaty Dragonspine Trophy (Meaty Dragonspine Trophy)
-
-	--[[Highmaul]]--
-	CreateSpellEntry(177038), -- Scales of Doom (Balanced Fate)
-	CreateSpellEntry(176876), -- Pol's Blinded Eye (Vision of the Cyclops)
-	CreateSpellEntry(176875), -- Shards of Nothing (Void Shards)
-	CreateSpellEntry(176879), -- Emblem of Caustic Healing (Caustic Healing)
-	CreateSpellEntry(177053), -- Evergaze Arcane Eidolon (Gazing Eye)
-	CreateSpellEntry(177040), -- Tectus' Beating Heart (Tectus' Heartbeat)
 }
 
 local CLASS_FILTERS = {

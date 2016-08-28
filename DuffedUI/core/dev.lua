@@ -33,3 +33,9 @@ local TestUI = function(msg)
 end
 SlashCmdList.TestUI = TestUI
 SLASH_TestUI1 = "/testui"
+
+hooksecurefunc("ContainerFrame_UpdateLockedItem", function(frame,slot)
+	local index = frame.size + 1 - slot
+	local itemButton = _G[frame:GetName().."Item"..index]
+	if not itemButton then print(frame:GetName(),slot,index) end
+end)
