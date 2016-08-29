@@ -3,14 +3,8 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Update SpellID's",
-		"• Update AddOnSkins",
-		"• Fixed a issue with flash info for low mana",
-		"• Fixed a issue with corner buffs and Prayer of Mending",
-		"• Attempt to fix arena preperation frame",
-		"• Functions are removed which no longer needed",
-		"• Raid-Debuffs from WoD removed (no longer needed)",
-		"• Added Bugreport-button to changelog and specswitcher buttons",
+		"• Added currencys",
+		"• Fixed a issue with the moving script",
 		--"• ",
 	" ",
 	"Notes:",
