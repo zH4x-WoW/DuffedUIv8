@@ -5,6 +5,7 @@ local ChangeLogData = {
 	"Changes:",
 		"• Added currencys",
 		"• Fixed a issue with the moving script",
+		"• Added Mage portals",
 		--"• ",
 	" ",
 	"Notes:",
