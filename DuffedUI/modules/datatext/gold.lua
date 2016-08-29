@@ -99,6 +99,7 @@ Stat:SetScript("OnEnter", function(self)
 	if ImprovedCurrency["Archaeology"] == nil then ImprovedCurrency["Archaeology"] = true end
 	if ImprovedCurrency["Cooking"] == nil then ImprovedCurrency["Cooking"] = true end
 	if ImprovedCurrency["Professions"] == nil then ImprovedCurrency["Professions"] = true end
+	if ImprovedCurrency["Garrison"] == nil then ImprovedCurrency["Garrison"] = true end
 	if ImprovedCurrency["Miscellaneous"] == nil then ImprovedCurrency["Miscellaneous"] = true end
 	if ImprovedCurrency["PvP"] == nil then ImprovedCurrency["PvP"] = true end
 	if ImprovedCurrency["Raid"] == nil then ImprovedCurrency["Raid"] = true end
@@ -136,25 +137,24 @@ Stat:SetScript("OnEnter", function(self)
 	if archaeology and ImprovedCurrency["Archaeology"] then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(PROFESSIONS_ARCHAEOLOGY .. ": ")
-		Currency(398)
-		Currency(384)
-		Currency(393)
-		Currency(677)
-		Currency(400)
-		Currency(394)
-		Currency(397)
-		Currency(676)
-		Currency(401)
-		Currency(385)
-		Currency(399)
-		Currency(829)
-		Currency(944)
-		Currency(810)
-		Currency(821)
-		Currency(754)
-		Currency(677)
-		Currency(676)
-		Currency(828)
+		Currency(384) -- Dwarf
+		Currency(385) -- Troll
+		Currency(393) -- Fossil
+		Currency(394) -- Night Elf
+		Currency(397) -- Orc
+		Currency(398) -- Draenei
+		Currency(399) -- Vyrkul
+		Currency(400) -- Nerubian
+		Currency(401) -- Tol'vir
+		Currency(676) -- Pandaren
+		Currency(677) -- Mogu
+		Currency(754) -- Mantid
+		Currency(821) -- Draenor Clans
+		Currency(828) -- Ogre
+		Currency(829) -- Arakkoa
+		Currency(1172) -- Highborne
+		Currency(1173) -- Highmountain
+		Currency(1174) -- Demonic
 	end
 
 	if cooking and ImprovedCurrency["Cooking"] then
@@ -166,11 +166,21 @@ Stat:SetScript("OnEnter", function(self)
 
 	if ImprovedCurrency["Professions"] then
 		GameTooltip:AddLine(" ")
-		GameTooltip:AddLine("Profession Token & Garrison")
+		GameTooltip:AddLine("Profession Token")
 		Currency(61)
 		Currency(361)
-		Currency(824)
+		Currency(910)
 		Currency(980)
+		Currency(999)
+		Currency(1008)
+		Currency(1017)
+		Currency(1020)
+	end
+
+	if ImprovedCurrency["Garrison"] then
+		GameTooltip:AddLine(" ")
+		GameTooltip:AddLine("Garrison")
+		Currency(824)
 		Currency(1101)
 		Currency(1220)
 	end
@@ -200,6 +210,7 @@ Stat:SetScript("OnEnter", function(self)
 		Currency(391)
 		Currency(392, false, true)
 		Currency(944)
+		Currency(1268)
 	end
 
 	if ImprovedCurrency["Miscellaneous"] then
@@ -209,7 +220,10 @@ Stat:SetScript("OnEnter", function(self)
 		Currency(416)
 		Currency(515)
 		Currency(777)
+		Currency(1149, false, true)
+		Currency(1154, false, true)
 		Currency(1226)
+		Currency(1275)
 	end
 
 	GameTooltip:AddLine(" ")
@@ -230,6 +244,9 @@ local RightClickMenu = {
 	end	},
 	{ text = "Show Profession Tokens", checked = function() return ImprovedCurrency["Professions"] end, func = function()
 		if ImprovedCurrency["Professions"] then ImprovedCurrency["Professions"] = false else ImprovedCurrency["Professions"] = true end
+	end	},
+	{ text = "Show Garrison Tokens", checked = function() return ImprovedCurrency["Garrison"] end, func = function()
+		if ImprovedCurrency["Garrison"] then ImprovedCurrency["Garrison"] = false else ImprovedCurrency["Garrison"] = true end
 	end	},
 	{ text = "Show Player vs Player Currency", checked = function() return ImprovedCurrency["PvP"] end, func = function()
 		if ImprovedCurrency["PvP"] then ImprovedCurrency["PvP"] = false else ImprovedCurrency["PvP"] = true end
