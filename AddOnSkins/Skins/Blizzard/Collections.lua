@@ -298,9 +298,10 @@ function AS:Blizzard_Collections(event, addon)
 		hooksecurefunc("ToySpellButton_UpdateButton", function(self)
 			if (PlayerHasToy(self.itemID)) then
 				local quality = select(3, GetItemInfo(self.itemID))
-				local r, g, b = GetItemQualityColor(quality)
-				self.TextColor = { r, g, b }
-				self:SetBackdropBorderColor(r, g, b)
+				--local r, g, b, = GetItemQualityColor(quality)
+				local color = ITEM_QUALITY_COLORS[quality-1]
+				self.TextColor = { color.r, color.g, color.b }
+				self:SetBackdropBorderColor(color.r, color.g, color.b)
 			else
 				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 				self.TextColor = { .6, .6, .6 }
