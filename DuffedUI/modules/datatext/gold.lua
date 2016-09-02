@@ -44,27 +44,6 @@ local function FormatTooltipMoney(money)
 	return cash
 end	
 
-local function Currency(id, weekly, capped)
-	local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(id)
-
-	local r, g, b = 1, 1, 1
-	for i = 1, GetNumWatchedTokens() do
-		local _, _, _, itemID = GetBackpackCurrencyInfo(i)
-		if id == itemID then r, g, b = .77, .12, .23 end
-	end
-
-	if (amount == 0 and r == 1) then return end
-	if weekly then
-		if id == 390 then week = floor(math.abs(week) / 100) end
-		if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, "Current: " .. amount .. " - " .. WEEKLY .. ": " .. week .. " / " .. weekmax, r, g, b, r, g, b) end
-	elseif capped  then
-		if id == 392 then maxed = 4000 end
-		if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, amount .. " / " .. maxed, r, g, b, r, g, b) end
-	else
-		if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, amount, r, g, b, r, g, b) end
-	end
-end
-
 local function OnEvent(self, event)
 	if event == "PLAYER_ENTERING_WORLD" then OldMoney = GetMoney() end
 
@@ -137,93 +116,93 @@ Stat:SetScript("OnEnter", function(self)
 	if archaeology and ImprovedCurrency["Archaeology"] then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(PROFESSIONS_ARCHAEOLOGY .. ": ")
-		Currency(384) -- Dwarf
-		Currency(385) -- Troll
-		Currency(393) -- Fossil
-		Currency(394) -- Night Elf
-		Currency(397) -- Orc
-		Currency(398) -- Draenei
-		Currency(399) -- Vyrkul
-		Currency(400) -- Nerubian
-		Currency(401) -- Tol'vir
-		Currency(676) -- Pandaren
-		Currency(677) -- Mogu
-		Currency(754) -- Mantid
-		Currency(821) -- Draenor Clans
-		Currency(828) -- Ogre
-		Currency(829) -- Arakkoa
-		Currency(1172) -- Highborne
-		Currency(1173) -- Highmountain
-		Currency(1174) -- Demonic
+		D["Currency"](384) -- Dwarf
+		D["Currency"](385) -- Troll
+		D["Currency"](393) -- Fossil
+		D["Currency"](394) -- Night Elf
+		D["Currency"](397) -- Orc
+		D["Currency"](398) -- Draenei
+		D["Currency"](399) -- Vyrkul
+		D["Currency"](400) -- Nerubian
+		D["Currency"](401) -- Tol'vir
+		D["Currency"](676) -- Pandaren
+		D["Currency"](677) -- Mogu
+		D["Currency"](754) -- Mantid
+		D["Currency"](821) -- Draenor Clans
+		D["Currency"](828) -- Ogre
+		D["Currency"](829) -- Arakkoa
+		D["Currency"](1172) -- Highborne
+		D["Currency"](1173) -- Highmountain
+		D["Currency"](1174) -- Demonic
 	end
 
 	if cooking and ImprovedCurrency["Cooking"] then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(PROFESSIONS_COOKING .. ": ")
-		Currency(81)
-		Currency(402)
+		D["Currency"](81)
+		D["Currency"](402)
 	end
 
 	if ImprovedCurrency["Professions"] then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine("Profession Token")
-		Currency(61)
-		Currency(361)
-		Currency(910)
-		Currency(980)
-		Currency(999)
-		Currency(1008)
-		Currency(1017)
-		Currency(1020)
+		D["Currency"](61)
+		D["Currency"](361)
+		D["Currency"](910)
+		D["Currency"](980)
+		D["Currency"](999)
+		D["Currency"](1008)
+		D["Currency"](1017)
+		D["Currency"](1020)
 	end
 
 	if ImprovedCurrency["Garrison"] then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine("Garrison")
-		Currency(824)
-		Currency(1101)
-		Currency(1220)
+		D["Currency"](824)
+		D["Currency"](1101)
+		D["Currency"](1220)
 	end
 
 	if ImprovedCurrency["Raid"] then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(L["dt"]["dr"])
-		Currency(1191, false, true)
-		Currency(1129, false, true)
-		Currency(994, false, true)
-		Currency(776, false, true)
-		Currency(752, false, true)
-		Currency(697, false, true)
-		Currency(738)
-		Currency(615)
-		Currency(614)
-		Currency(823)
-		Currency(1166)
-		Currency(1155, false, true)
-		Currency(1273, false, true)
+		D["Currency"](1191, false, true)
+		D["Currency"](1129, false, true)
+		D["Currency"](994, false, true)
+		D["Currency"](776, false, true)
+		D["Currency"](752, false, true)
+		D["Currency"](697, false, true)
+		D["Currency"](738)
+		D["Currency"](615)
+		D["Currency"](614)
+		D["Currency"](823)
+		D["Currency"](1166)
+		D["Currency"](1155, false, true)
+		D["Currency"](1273, false, true)
 	end
 
 	if ImprovedCurrency["PvP"] then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(PVP_FLAG)
-		Currency(390, true)
-		Currency(391)
-		Currency(392, false, true)
-		Currency(944)
-		Currency(1268)
+		D["Currency"](390, true)
+		D["Currency"](391)
+		D["Currency"](392, false, true)
+		D["Currency"](944)
+		D["Currency"](1268)
 	end
 
 	if ImprovedCurrency["Miscellaneous"] then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(MISCELLANEOUS)
-		Currency(241)
-		Currency(416)
-		Currency(515)
-		Currency(777)
-		Currency(1149, false, true)
-		Currency(1154, false, true)
-		Currency(1226)
-		Currency(1275)
+		D["Currency"](241)
+		D["Currency"](416)
+		D["Currency"](515)
+		D["Currency"](777)
+		D["Currency"](1149, false, true)
+		D["Currency"](1154, false, true)
+		D["Currency"](1226)
+		D["Currency"](1275)
 	end
 
 	GameTooltip:AddLine(" ")

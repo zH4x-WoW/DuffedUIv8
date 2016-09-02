@@ -43,6 +43,29 @@ function D.HyperlinkMouseover()
 end
 D.HyperlinkMouseover()
 
+--[[Currencys]]--
+local GetCurrencyInfo = GetCurrencyInfo
+D["Currency"] = function(id, weekly, capped)
+	local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(id)
+
+	local r, g, b = 1, 1, 1
+	for i = 1, GetNumWatchedTokens() do
+		local _, _, _, itemID = GetBackpackCurrencyInfo(i)
+		if id == itemID then r, g, b = .77, .12, .23 end
+	end
+
+	if (amount == 0 and r == 1) then return end
+	if weekly then
+		if id == 390 then week = floor(math.abs(week) / 100) end
+		if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, "Current: " .. amount .. " - " .. WEEKLY .. ": " .. week .. " / " .. weekmax, r, g, b, r, g, b) end
+	elseif capped  then
+		if id == 392 then maxed = 4000 end
+		if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, amount .. " / " .. maxed, r, g, b, r, g, b) end
+	else
+		if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, amount, r, g, b, r, g, b) end
+	end
+end
+
 --[[Button mouseover]]--
 D["ButtonMO"] = function(frame)
 	frame:SetAlpha(0)
