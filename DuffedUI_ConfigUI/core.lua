@@ -650,13 +650,9 @@ function CreateDuffedUIConfigUI()
 end
 
 do
-	SLASH_CONFIG1 = "/duffedui"
-	function SlashCmdList.CONFIG(msg, editbox)
-		if not DuffedUIConfigUI or not DuffedUIConfigUI:IsShown() then CreateDuffedUIConfigUI() else DuffedUIConfigUI:Hide() end
-	end
-
 	SLASH_RESETCONFIG1 = "/resetui"
 	function SlashCmdList.RESETCONFIG()
+		if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 		if DuffedUIConfigUI and DuffedUIConfigUI:IsShown() then DuffedUIConfigCover:Show() end
 		if DuffedUIConfigAll[myPlayerRealm][myPlayerName] == true then D.ShowPopup("RESET_PERCHAR") else D.ShowPopup("RESET_ALL") end
 	end
@@ -683,6 +679,7 @@ do
 		button:SetText("DuffedUI")
 		if C["general"].blizzardreskin then button:SkinButton() end
 		button:SetScript("OnClick", function(self)
+			if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 			local config = DuffedUIConfigUI
 			if config and config:IsShown() then
 				DuffedUIConfigUI:Hide()

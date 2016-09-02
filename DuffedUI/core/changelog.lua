@@ -3,17 +3,14 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Update for AddOnSkins",
-		"• Added profession tabs to tradeskill window",
-		"• Bugfixes (raidframes, petbar, options, regeant bank, sidebars, objectivetracker)",
-		"• Update for oUF_Aurawatch",
-		"• Update for AddOnSkins",
-		"• Update for Skins",
-		"• Added raid debuffs for Legion"
+		"• Added currencys",
+		"• Fixed a issue with the moving script",
+		"• Added Mage portals",
 		--"• ",
 	" ",
 	"Notes:",
-		"• No additional notes yet",
+		"• New Bagscript isn't finished yet.",
+		"• LAST UPDATE BEFORE LEVELPHASE, ONLY GAMEBREAKING ISSUES WILL BE FIXED\n DURING LEVELPHASE!"
 }
 
 local function ModifiedString(string)
@@ -38,10 +35,26 @@ local function GetChangeLogInfo(i)
 	end
 end
 
+_G.StaticPopupDialogs["BUGREPORT"] = {
+	text = "Bugreporting for DuffedUI",
+	button1 = OKAY,
+	timeout = 0,
+	whileDead = true,
+	hasEditBox = true,
+	editBoxWidth = 325,
+	OnShow = function(self, ...) 
+		self.editBox:SetFocus()
+		self.editBox:SetText("http://www.wowinterface.com/portal.php?id=826&a=listbugs")
+		self.editBox:HighlightText()
+	end,
+	EditBoxOnEnterPressed = function(self) self:GetParent():Hide() end,
+	EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
+}
+
 function ChangeLog:CreateChangelog()
 	local frame = CreateFrame("Frame", "DuffedUIChangeLog", UIParent)
 	frame:SetPoint("CENTER")
-	frame:SetSize(400, 200)
+	frame:SetSize(445, 245)
 	frame:SetTemplate("Transparent")
 	
 	local icon = CreateFrame("Frame", nil, frame)
@@ -55,16 +68,20 @@ function ChangeLog:CreateChangelog()
 	
 	local title = CreateFrame("Frame", nil, frame)
 	title:SetPoint("LEFT", icon, "RIGHT", 3, 0)
-	title:SetSize(377, 20)
+	title:SetSize(422, 20)
 	title:SetTemplate("Transparent")
 	title.text = title:CreateFontString(nil, "OVERLAY")
 	title.text:SetPoint("CENTER", title, 0, -1)
 	title.text:SetFont(C["media"]["font"], 15)
 	title.text:SetText("|cffC41F3BDuffedUI|r - ChangeLog " .. D["Version"])
 	
-	D["CreateBtn"]("close", frame, 50, 19, L["tooltip"]["changelog"], L["buttons"]["close"])
+	D["CreateBtn"]("close", frame, 65, 19, L["tooltip"]["changelog"], L["buttons"]["close"])
 	close:SetPoint("BOTTOMRIGHT", frame, -5, 5)
 	close:SetScript("OnClick", function(self) frame:Hide() end)
+	
+	D["CreateBtn"]("bReport", frame, 65, 19, "Bugreport", "Bugreport")
+	bReport:SetPoint("BOTTOMLEFT", frame, 5, 5)
+	bReport:SetScript("OnClick", function(self) StaticPopup_Show("BUGREPORT") end)
 	
 	local offset = 4
 	for i = 1, #ChangeLogData do

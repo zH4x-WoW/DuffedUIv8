@@ -26,7 +26,7 @@ local types = {
 local function addLine(tooltip, id, type)
     local found = false
 
-    for i = 1,15 do
+    for i = 1, 15 do
         local frame = _G[tooltip:GetName() .. "TextLeft" .. i]
         local text
         if frame then text = frame:GetText() end
@@ -43,7 +43,9 @@ end
 local function onSetHyperlink(self, link)
     local type, id = string.match(link,"^(%a+):(%d+)")
     if not type or not id then return end
-   if type == "talent" then
+	if type == "trade" then
+        addLine(self, id, types.spell)
+    elseif type == "talent" then
         addLine(self, id, types.talent)
     elseif type == "quest" then
         addLine(self, id, types.quest)
@@ -99,7 +101,8 @@ end)
 local function attachItemTooltip(self)
 	local link = select(2, self:GetItem())
 	if link then
-		local id = string.match(link, "item:(%d*)")
+		--local id = string.match(link, "item:(%d*)")
+		local id = select(3, strfind(link, "^|%x+|Hitem:(%-?%d+):(%d*):(%d*):(%d*):(%d*):(%d*):(%-?%d*):(%-?%d*)"))
 		if (id == "" or id == "0") and TradeSkillFrame ~= nil and TradeSkillFrame:IsVisible() and GetMouseFocus().reagentIndex then
 			local selectedRecipe = TradeSkillFrame.RecipeList:GetSelectedRecipeID()
 			for i = 1, 8 do
@@ -132,9 +135,7 @@ f:SetScript("OnEvent", function(_, _, what)
                 addLine(GameTooltip, button.id, types.achievement)
                 GameTooltip:Show()
             end)
-            button:HookScript("OnLeave", function()
-                GameTooltip:Hide()
-            end)
+            button:HookScript("OnLeave", function() GameTooltip:Hide() end)
         end
     end
 end)

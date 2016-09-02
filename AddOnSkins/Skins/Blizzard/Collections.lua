@@ -108,7 +108,6 @@ function AS:Blizzard_Collections(event, addon)
 			AS:SkinTexture(Button.icon)
 			AS:StyleButton(Button.DragButton)
 
-			Button.DragButton.hover:SetAllPoints(Button.DragButton)
 			Button.DragButton.ActiveTexture:SetAlpha(0)
 			Button.iconbg = CreateFrame('Frame', nil, Button)
 			AS:SetTemplate(Button.iconbg)
@@ -165,7 +164,6 @@ function AS:Blizzard_Collections(event, addon)
 			AS:StyleButton(Button)
 			AS:SkinTexture(Button.icon)
 			AS:StyleButton(Button.dragButton)
-			Button.dragButton.hover:SetAllPoints(Button.dragButton)
 			Button.dragButton.ActiveTexture:SetAlpha(0)
 
 			Button.iconbg = CreateFrame('Frame', nil, Button)
@@ -292,11 +290,6 @@ function AS:Blizzard_Collections(event, addon)
 			Button.iconTexture:SetInside()
 			Button.iconTextureUncollected:SetInside()
 			AS:SkinFrame(Button)
-			AS:StyleButton(Button)
-			Button.hover:SetAllPoints(Button.iconTexture)
-			Button.checked:SetAllPoints(Button.iconTexture)
-			Button.pushed:SetAllPoints(Button.iconTexture)
-			Button.cooldown:SetAllPoints(Button.iconTexture)
 			Button:HookScript('OnUpdate', function(self)
 				self.name:SetTextColor(unpack(self.TextColor))
 			end)
@@ -305,9 +298,10 @@ function AS:Blizzard_Collections(event, addon)
 		hooksecurefunc("ToySpellButton_UpdateButton", function(self)
 			if (PlayerHasToy(self.itemID)) then
 				local quality = select(3, GetItemInfo(self.itemID))
-				local r, g, b = GetItemQualityColor(quality)
-				self.TextColor = { r, g, b }
-				self:SetBackdropBorderColor(r, g, b)
+				--local r, g, b, = GetItemQualityColor(quality)
+				local color = ITEM_QUALITY_COLORS[quality-1]
+				self.TextColor = { color.r, color.g, color.b }
+				self:SetBackdropBorderColor(color.r, color.g, color.b)
 			else
 				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 				self.TextColor = { .6, .6, .6 }

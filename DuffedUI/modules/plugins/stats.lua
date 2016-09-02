@@ -58,7 +58,6 @@ PAPERDOLL_STATCATEGORIES= {
 			[14] = { stat = "ENERGY_REGEN", hideAt = 0, primary = LE_UNIT_STAT_AGILITY },
 			[15] = { stat = "RUNE_REGEN", hideAt = 0 },
 			[16] = { stat = "FOCUS_REGEN", hideAt = 0 },
-			[17] = { stat = "MOVESPEED" },
 		},
 	},
 	[2] = {
@@ -73,8 +72,6 @@ PAPERDOLL_STATCATEGORIES= {
 			[7] = { stat = "DODGE", hideAt = 0, roles =  { "TANK" } },
 			[8] = { stat = "PARRY", hideAt = 0, roles =  { "TANK" } },
 			[9] = { stat = "BLOCK", hideAt = 0, roles =  { "TANK" } },
---			[10] = { stat = "HEALTH", },
---			[11] = { stat = "POWER", },
 		},
 	},
 }

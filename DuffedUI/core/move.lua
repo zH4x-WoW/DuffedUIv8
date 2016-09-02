@@ -82,9 +82,9 @@ end
 
 local enable = true
 local gridsize = function()
-	local defsize = 16
-	local w = tonumber(string.match(({ GetScreenResolutions() })[GetCurrentResolution()], "(%d+)x+%d"))
-	local h = tonumber(string.match(({ GetScreenResolutions() })[GetCurrentResolution()], "%d+x(%d+)"))
+	local defsize = 8
+	local w = D["ScreenWidth"]
+	local h = D["ScreenHeight"]
 	local x = tonumber(gridsize) or defsize
 
 	function Grid()

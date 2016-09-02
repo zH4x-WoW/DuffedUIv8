@@ -162,6 +162,11 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrameMissionsListScrollFrameButton8:StripTextures()
 	GarrisonMissionFrameMissionsListScrollFrameButton8:SkinButton()
 	GarrisonMissionFrame.MissionTab.MissionPage.EmptyFollowerModel.Texture:Hide()
+	GarrisonShipyardFrame.BorderFrame.CloseButton2:SkinCloseButton()
+	GarrisonMissionFrame.GarrCorners.TopLeftGarrCorner:SetTexture(nil)
+	GarrisonMissionFrame.GarrCorners.TopRightGarrCorner:SetTexture(nil)
+	GarrisonMissionFrame.GarrCorners.BottomLeftGarrCorner:SetTexture(nil)
+	GarrisonMissionFrame.GarrCorners.BottomRightGarrCorner:SetTexture(nil)
 
 	for i, v in ipairs(GarrisonMissionFrame.MissionTab.MissionList.listScroll.buttons) do
 		local Button = _G["GarrisonMissionFrameMissionsListScrollFrameButton" .. i]

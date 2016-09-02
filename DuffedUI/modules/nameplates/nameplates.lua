@@ -4,6 +4,11 @@ local _G = _G
 local unpack = unpack
 local nameplates = CreateFrame("Frame", nil, WorldFrame)
 local noop = function() end
+local texture = C["media"].normTex
+local blank = C["media"].blank
+local font = C["media"].font
+local ClassColor = C["nameplate"]["ClassColor"]
+local ethreat = C["nameplate"]["ethreat"]
 
 function nameplates:RegisterOptions()
 	nameplates.Options = {}
@@ -13,9 +18,7 @@ function nameplates:RegisterOptions()
 		displayAggroHighlight = false,
 		displayName = true,
 		fadeOutOfRange = false,
-		--displayStatusText = true,
 		displayHealPrediction = false,
-		--displayDispelDebuffs = true,
 		colorNameBySelection = true,
 		colorNameWithExtendedColors = true,
 		colorHealthWithExtendedColors = true,
@@ -86,14 +89,6 @@ function nameplates:RegisterOptions()
 		castIconWidth = 10,
 		castIconHeight = 10,
 	}
-
-	nameplates.Options.castBarColors = {
-		StartNormal =  D.UnitColor.power["ENERGY"],
-		StartChannel = D.UnitColor.power["MANA"],
-		Success = {1, .8, 0},
-		NonInterrupt = {.7, 0, 0},
-		Failed = {1, 0, 0},
-	}
 end
 
 function nameplates:GetClassification(unit)
@@ -135,34 +130,38 @@ end
 
 function nameplates:colorHealth()
 	if (self:GetName() and string.find(self:GetName(), "NamePlate")) then
-		local r, g, b
+        local r, g, b = self.healthBar:GetStatusBarColor()
 
-		if not UnitIsConnected(self.unit) then
-			r, g, b = unpack(D.UnitColor.disconnected)
+		if g + b == 0 then
+			r, g, b = .78, .25, .25 -- hostile
+			self.isFriendly = false
+		elseif r + b == 0 then
+			r, g, b = .31, .45, .63 -- player
+			self.isFriendly = true
+		elseif r + g > 1.95 then
+			r, g, b = .86, .77, .36 -- neutral
+			self.isFriendly = false
+		elseif r + g == 0 then
+			r, g, b = .29,  .69, .3 -- good
+			self.isFriendly = true
 		else
+			self.isFriendly = false
+		end
+
+		if ClassColor then
 			if UnitIsPlayer(self.unit) then
 				local Class = select(2, UnitClass(self.unit))
 				r, g, b = unpack(D.UnitColor.class[Class])
-			else
-				if (UnitIsFriend("player", self.unit)) then
-					r, g, b = unpack(D.UnitColor.reaction[5])
-				else
-					local Reaction = UnitReaction("player", self.unit)
-					r, g, b = unpack(D.UnitColor.reaction[Reaction])
-				end
 			end
 		end
 		self.healthBar:SetStatusBarColor(r, g, b)
-	end
-end
-
-function nameplates:UpdateAggroNameplates()
-	local isTanking, threatStatus = UnitDetailedThreatSituation("player", self.displayedUnit)
+    end
+	
 	-- (3 = securely tanking, 2 = insecurely tanking, 1 = not tanking but higher threat than tank, 0 = not tanking and lower threat than tank)
-
-	if C["nameplate"]["ethreat"] then
+	local isTanking, threatStatus = UnitDetailedThreatSituation("player", self.displayedUnit)
+	if ethreat then
 		if D.Role == "Tank" then
-			if isTanking then
+			if isTanking and threatStatus then
 				if (threatStatus and threatStatus == 3) then
 					self.healthBar.barTexture:SetVertexColor(.29,  .69, .3) -- good
 				elseif (threatStatus and threatStatus == 2) then
@@ -174,7 +173,7 @@ function nameplates:UpdateAggroNameplates()
 				end
 			end
 		else
-			if isTanking then
+			if isTanking and threatStatus then
 				self.healthBar.barTexture:SetVertexColor(.78, .25, .25) -- bad
 				self:GetParent().playerHasAggro = true
 			else
@@ -190,13 +189,9 @@ function nameplates:UpdateAggroNameplates()
 				elseif (threatStatus and threatStatus == 0) then
 					self.healthBar.barTexture:SetVertexColor(.29,  .69, .3) -- good
 					self:GetParent().playerHasAggro = false
-				else
-					nameplates:colorHealth()
 				end
 			end
 		end
-	else
-		nameplates:colorHealth()
 	end
 end
 
@@ -228,12 +223,12 @@ function nameplates:setupPlate(options)
 	local spark = self.castBar.Spark
 	local name = self.name
 
-	health:SetStatusBarTexture(C["media"].normTex)
+	health:SetStatusBarTexture(texture)
 	health.background:ClearAllPoints()
 	health.background:SetInside(0, 0)
 	health.border:SetAlpha(0)
 
-	castBar:SetStatusBarTexture(C["media"].normTex)
+	castBar:SetStatusBarTexture(texture)
 	castBar.background:ClearAllPoints()
 	castBar.background:SetInside(0, 0)
 	if castBar.border then castBar.border:SetAlpha(0) end
@@ -243,8 +238,8 @@ function nameplates:setupPlate(options)
 	castBar.IconBackdrop = CreateFrame("Frame", nil, castBar)
 	castBar.IconBackdrop:SetSize(castBar.Icon:GetSize())
 	castBar.IconBackdrop:SetPoint("TOPRIGHT", health, "TOPLEFT", -4, 0)
-	castBar.IconBackdrop:SetBackdrop({bgFile = C["media"].blank})
-	castBar.IconBackdrop:SetBackdropColor(unpack(C["media"].backdropcolor))
+	castBar.IconBackdrop:SetBackdrop({bgFile = blank})
+	castBar.IconBackdrop:SetBackdropColor(.05, .05, .05)
 	castBar.IconBackdrop:SetFrameLevel(castBar:GetFrameLevel() - 1 or 0)
 
 	castBar.Icon:SetParent(DuffedUIUIHider)
@@ -254,18 +249,17 @@ function nameplates:setupPlate(options)
 	castBar.IconTexture:SetParent(castBar.IconBackdrop)
 	castBar.IconTexture:SetAllPoints(castBar.IconBackdrop)
 
-	castBar.Text:SetFont(C["media"].font, 8)
+	castBar.Text:SetFont(font, 8)
 	castBar.Text:SetShadowOffset(1.25, -1.25)
 
-	castBar.startCastColor.r, castBar.startCastColor.g, castBar.startCastColor.b = unpack(nameplates.Options.castBarColors.StartNormal)
-	castBar.startChannelColor.r, castBar.startChannelColor.g, castBar.startChannelColor.b = unpack(nameplates.Options.castBarColors.StartChannel)
-	castBar.failedCastColor.r, castBar.failedCastColor.g, castBar.failedCastColor.b = unpack(nameplates.Options.castBarColors.Failed)
-	castBar.nonInterruptibleColor.r, castBar.nonInterruptibleColor.g, castBar.nonInterruptibleColor.b = unpack(nameplates.Options.castBarColors.NonInterrupt)
-	castBar.finishedCastColor.r, castBar.finishedCastColor.g, castBar.finishedCastColor.b = unpack(nameplates.Options.castBarColors.Success)
-
+	castBar.startCastColor.r, castBar.startCastColor.g, castBar.startCastColor.b = .65, .63, .35
+	castBar.startChannelColor.r, castBar.startChannelColor.g, castBar.startChannelColor.b = .31, .45, .63
+	castBar.failedCastColor.r, castBar.failedCastColor.g, castBar.failedCastColor.b = 1, 0, 0
+	castBar.nonInterruptibleColor.r, castBar.nonInterruptibleColor.g, castBar.nonInterruptibleColor.b = .8, 0, 0
+	castBar.finishedCastColor.r, castBar.finishedCastColor.g, castBar.finishedCastColor.b = 1, .8, 0
 	castBar:HookScript("OnShow", nameplates.displayCastIcon)
 
-	name:SetFont(C["media"].font, 8)
+	name:SetFont(font, 8)
 	name:SetShadowOffset(1.25, -1.25)
 	hooksecurefunc(name, "Show", nameplates.SetName)
 
@@ -285,6 +279,10 @@ end
 
 function nameplates:enable()
 	local active = C["nameplate"].active
+	local npwidth = C["nameplate"]["platewidth"]
+	local hooked = {}
+	local ref = tostring(CompactUnitFrame_UpdateHealthColor)
+	local ref2 = tostring(DefaultCompactNamePlateFrameSetupInternal)
 	if not active then return end
 
 	self:RegisterOptions()
@@ -297,25 +295,29 @@ function nameplates:enable()
 
 	if ClassNameplateManaBarFrame then
 		ClassNameplateManaBarFrame.Border:SetAlpha(0)
-		ClassNameplateManaBarFrame:SetStatusBarTexture(C["media"].normTex)
-		ClassNameplateManaBarFrame.ManaCostPredictionBar:SetTexture(C["media"].normTex)
-		ClassNameplateManaBarFrame:SetBackdrop({bgFile = C["media"].blank})
+		ClassNameplateManaBarFrame:SetStatusBarTexture(texture)
+		ClassNameplateManaBarFrame.ManaCostPredictionBar:SetTexture(texture)
+		ClassNameplateManaBarFrame:SetBackdrop({bgFile = blank})
 		ClassNameplateManaBarFrame:SetBackdropColor(.2, .2, .2)
 	end
 	self.ClassBar = NamePlateDriverFrame.nameplateBar
 	if self.ClassBar then self.ClassBar:SetScale(1.05) end
 	hooksecurefunc(NamePlateDriverFrame, "SetClassNameplateBar", self.SetClassNameplateBar)
 
-	hooksecurefunc("DefaultCompactNamePlateFrameSetupInternal", self.setupPlate)
-	hooksecurefunc("CompactUnitFrame_UpdateHealthColor", self.UpdateAggroNameplates)
+	if not hooked[ref] and not hooked[ref2] then
+		hooksecurefunc("CompactUnitFrame_UpdateHealthColor", self.colorHealth)
+		hooksecurefunc("DefaultCompactNamePlateFrameSetupInternal", self.setupPlate)
+		hooked[ref] = true
+		hooked[ref2] = true
+	end
 
 	NamePlateDriverFrame.UpdateNamePlateOptions = function() end
 	InterfaceOptionsNamesPanelUnitNameplatesMakeLarger:Hide()
+	C_NamePlate.SetNamePlateOtherSize(npwidth, 45)
 end
 
-nameplates:RegisterEvent("PLAYER_LOGIN")
 nameplates:RegisterEvent("PLAYER_ENTERING_WORLD")
-nameplates:RegisterEvent("ADDON_LOADED")
 nameplates:SetScript("OnEvent", function(self, event, ...)
 	nameplates:enable()
+	nameplates:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)

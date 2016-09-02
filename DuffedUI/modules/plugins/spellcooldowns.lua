@@ -79,7 +79,7 @@ spellCooldowns = {
 		-- Havoc
 		179057, -- Chaos Nova
 		185123, -- Throw Glaive
-		188409, -- Blade Dance
+		188499, -- Blade Dance
 		191427, -- Metamorphosis (Havoc)
 		195072, -- Fel Rush
 		196555, -- Netherwalk

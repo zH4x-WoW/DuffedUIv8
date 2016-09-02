@@ -6,14 +6,14 @@ local PLevel = UnitLevel("player")
 local PClass = UnitClass("player")
 local PRace = UnitRace("player")
 local PFaction = UnitFactionGroup("player")
-local color = RAID_CLASS_COLORS[D.Class]
+local color = D.RGBToHex(unpack(C["media"].datatextcolor1))
 local Version = D["Version"]
 
 --[[Guild]]--
 local function GuildText()
 	if IsInGuild() then
 		local guildName = GetGuildInfo("player")
-		DuffedUIAFKPanel.GuildText:SetText("|cffc41f3b" .. guildName .. "|r")
+		DuffedUIAFKPanel.GuildText:SetText(color .. guildName .. "|r")
 	else
 		DuffedUIAFKPanel.GuildText:SetText(" ")
 	end
@@ -22,7 +22,7 @@ end
 --[[AFK-Timer]]--
 local function UpdateTimer()
 	local time = GetTime() - startTime
-	DuffedUIAFKPanel.AFKTimer:SetText(format("%02d|cffc41f3b:|r%02d", floor(time/60), time % 60))
+	DuffedUIAFKPanel.AFKTimer:SetText(format("%02d" .. color ..":|r%02d", floor(time/60), time % 60))
 end
 
 --[[Playermodel]]--
@@ -91,8 +91,7 @@ DuffedUIAFKPanel.AFKTimer:SetFont(C["media"].font, 20, "OUTLINE")
 DuffedUIAFKPanel.PlayerNameText = DuffedUIAFKPanel:CreateFontString(nil, "OVERLAY")
 DuffedUIAFKPanel.PlayerNameText:SetPoint("LEFT", DuffedUIAFKPanel, "LEFT", 25, 15)
 DuffedUIAFKPanel.PlayerNameText:SetFont(C["media"].font, 28, "OUTLINE")
-DuffedUIAFKPanel.PlayerNameText:SetText(PName)
-DuffedUIAFKPanel.PlayerNameText:SetTextColor(color.r, color.g, color.b)
+DuffedUIAFKPanel.PlayerNameText:SetText(color .. PName .. "|r")
 
 DuffedUIAFKPanel.GuildText = DuffedUIAFKPanel:CreateFontString(nil, "OVERLAY")
 DuffedUIAFKPanel.GuildText:SetPoint("LEFT", DuffedUIAFKPanel, "LEFT", 25, -3)
@@ -101,15 +100,15 @@ DuffedUIAFKPanel.GuildText:SetFont(C["media"].font, 15, "OUTLINE")
 DuffedUIAFKPanel.PlayerInfoText = DuffedUIAFKPanel:CreateFontString(nil, "OVERLAY")
 DuffedUIAFKPanel.PlayerInfoText:SetPoint("LEFT", DuffedUIAFKPanel, "LEFT", 25, -20)
 DuffedUIAFKPanel.PlayerInfoText:SetFont(C["media"].font, 15, "OUTLINE")
-DuffedUIAFKPanel.PlayerInfoText:SetText(LEVEL .. " " .. PLevel .. " " .. PFaction .. " |cffc41f3b" .. PClass .. "|r")
+DuffedUIAFKPanel.PlayerInfoText:SetText(LEVEL .. " " .. PLevel .. " " .. PFaction .. " " .. color .. PClass .. "|r")
 
 --[[Dynamic time & date]]--
 local interval = 0
 DuffedUIAFKPanel:SetScript("OnUpdate", function(self, elapsed)
 	interval = interval - elapsed
 	if interval <= 0 then
-		DuffedUIAFKPanel.ClockText:SetText(format("%s", date("%H|cffc41f3b:|r%M|cffc41f3b:|r%S")))
-		DuffedUIAFKPanel.DateText:SetText(format("%s", date("|cffc41f3b%a|r %b|cffc41f3b/|r%d")))
+		DuffedUIAFKPanel.ClockText:SetText(format("%s", date("%H" .. color .. ":|r%M" .. color .. ":|r%S")))
+		DuffedUIAFKPanel.DateText:SetText(format("%s", date(color .. "%a|r %b" .. color .. "/|r%d")))
 		UpdateTimer()
 		interval = 0.5
 	end

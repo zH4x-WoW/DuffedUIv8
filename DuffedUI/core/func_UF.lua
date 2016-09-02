@@ -12,12 +12,12 @@ end
 local SetUpAnimGroup = function(self)
 	self.anim = self:CreateAnimationGroup("Flash")
 	self.anim.fadein = self.anim:CreateAnimation("ALPHA", "FadeIn")
-	self.anim.fadein:SetChange(1)
-	self.anim.fadein:SetOrder(2)
+	self.anim.fadein:SetFromAlpha(1)
+	self.anim.fadein:SetToAlpha(0)
 
 	self.anim.fadeout = self.anim:CreateAnimation("ALPHA", "FadeOut")
-	self.anim.fadeout:SetChange(-1)
-	self.anim.fadeout:SetOrder(1)
+	self.anim.fadeout:SetFromAlpha(1)
+	self.anim.fadeout:SetToAlpha(0)
 end
 
 local Flash = function(self, duration)
@@ -623,7 +623,7 @@ if C["raid"].raidunitdebuffwatch == true then
 		D.buffids = {
 			PRIEST = {
 				{6788, "TOPRIGHT", {0, 0}, {1, 0, 0}, true}, 			-- Weakened Soul
-				{33076, "BOTTOMRIGHT", {0, 0}, {.2, .7, .2}}, 			-- Prayer of Mending
+				{41635, "BOTTOMRIGHT", {0, 0}, {.2, .7, .2}}, 			-- Prayer of Mending
 				{139, "BOTTOMLEFT", {0, 0}, {.4, .7, .2}}, 				-- Renew
 				{17, "TOPLEFT", {0, 0}, {.81, .85, .1}, true}, 			-- Power Word: Shield
 			},
@@ -673,155 +673,6 @@ if C["raid"].raidunitdebuffwatch == true then
 		end
 
 		D.debuffids = {
-			-- WoD-Debuffs
-			-- Highmaul
-			-- The Butcher
-			SpellName(156152), -- Gushing Wounds
-			-- Kargath Bladefist
-			SpellName(159178), -- Open Wounds
-			SpellName(159113), -- Impale
-			-- Pol & Phemos
-			SpellName(155569), -- Injured
-			SpellName(167200), -- Arcane Wound
-			SpellName(163374), -- Arcane Volatility
-			-- Ko'ragh
-			SpellName(161242), -- Caustic Energy
-			SpellName(163472), -- Dominating Power
-			-- Imperator Mar'gok
-			SpellName(156238), -- Arcane Wrath
-			SpellName(156467), -- Destructive Resonance
-			SpellName(158605), -- Mark of Chaos
-			SpellName(163988), -- Arcane Wrath: Displacement
-			SpellName(164075), -- Destructive Resonance: Displacement
-			SpellName(164176), -- Mark of Chaos: Displacement
-			SpellName(163989), -- Arcane Wrath: Fortification
-			SpellName(164076), -- Destructive Resonance: Fortification
-			SpellName(164178), -- Mark of Chaos: Fortification
-			SpellName(163990), -- Arcane Wrath: Replication
-			SpellName(164077), -- Destructive Resonance: Replication
-			SpellName(164191), -- Mark of Chaos: Replication
-			-- Blackrock Foundry
-			-- Blackhand
-			SpellName(156096), -- Marked for Death
-			SpellName(156107), -- Impaling Throw
-			SpellName(156047), -- Slagged
-			SpellName(157000), -- Attach Slag Bombs
-			-- Beastlord Darmac
-			SpellName(155365), -- Pin Down
-			SpellName(155061), -- Rend and Tear
-			SpellName(155399), -- Conflagration
-			SpellName(155236), -- Crush Armor
-			-- Flamebender Ka'graz
-			SpellName(154952), -- Fixate
-			SpellName(155049), -- Singe
-			SpellName(163284), -- Rising Flames
-			-- Operator Thogar
-			SpellName(155921), -- Enkindle
-			SpellName(165195), -- Prototype Pulse Grenade
-			SpellName(155701), -- Serrated Slash
-			SpellName(156310), -- Lava Shock
-			-- The Blast Furnace
-			SpellName(175104), -- Melt Armor
-			SpellName(158702), -- Fixate
-			SpellName(155240), -- Tempered
-			SpellName(155242), -- Heat
-			-- Franzok & Hans'gar
-			SpellName(157139), -- Shattered Vertebrae
-			-- Gruul
-			SpellName(155080), -- Inferno Slice
-			SpellName(155078), -- Overwhelming Blows
-			SpellName(165300), -- Flare
-			-- Kromog
-			SpellName(156766), -- Warped Armor
-			-- Admiral Gar'an
-			SpellName(156112), -- Convulsive Shadows
-			SpellName(170395), -- Sorka's Prey
-			SpellName(158702), -- Fixate
-			SpellName(158686), -- Expose Armor
-			-- Hellfire Citadel
-			-- Hellfire Assault
-			SpellName(184369), -- Howling Axe (Target)
-			SpellName(180079), -- Felfire Munitions
-			-- Iron Reaver
-			SpellName(179897), -- Blitz
-			SpellName(185978), -- Firebomb Vulnerability
-			SpellName(182373), -- Flame Vulnerability
-			SpellName(182280), -- Artillery (Target)
-			SpellName(182074), -- Immolation
-			SpellName(182001), -- Unstable Orb
-			-- Kormrok
-			SpellName(187819), -- Crush
-			SpellName(181345), -- Foul Crush
-			-- Hellfire High Council
-			SpellName(184360), -- Fel Rage
-			SpellName(184449), -- Mark of the Necromancer
-			SpellName(185065), -- Mark of the Necromancer
-			SpellName(184450), -- Mark of the Necromancer
-			SpellName(185066), -- Mark of the Necromancer
-			SpellName(184676), -- Mark of the Necromancer
-			SpellName(184652), -- Reap
-			-- Kilrogg Deadeye
-			SpellName(181488), -- Vision of Death
-			SpellName(188929), -- Heart Seeker (Target)
-			SpellName(180389), -- Heart Seeker (DoT)
-			-- Gorefiend
-			SpellName(179867), -- Gorefiend's Corruption
-			SpellName(181295), -- Digest
-			SpellName(179977), -- Touch of Doom
-			SpellName(179864), -- Shadow of Death
-			SpellName(179909), -- Shared Fate (self root)
-			SpellName(179908), -- Shared Fate (other players root)
-			-- Shadow-Lord Iskar
-			SpellName(181957), -- Phantasmal Winds
-			SpellName(182200), -- Fel Chakram
-			SpellName(182178), -- Fel Chakram
-			SpellName(182325), -- Phantasmal Wounds
-			SpellName(185239), -- Radiance of Anzu
-			SpellName(185510), -- Dark Bindings
-			SpellName(182600), -- Fel Fire
-			SpellName(179219), -- Phantasmal Fel Bomb
-			SpellName(181753), -- Fel Bomb
-			-- Soulbound Construct (Socrethar)
-			SpellName(182038), -- Shattered Defenses
-			SpellName(188666), -- Eternal Hunger (Add fixate, Mythic only)
-			SpellName(189627), -- Volatile Fel Orb (Fixated)
-			SpellName(180415), -- Fel Prison
-			-- Tyrant Velhari
-			SpellName(185237), -- Touch of Harm
-			SpellName(185238), -- Touch of Harm
-			SpellName(185241), -- Edict of Condemnation
-			SpellName(180526), -- Font of Corruption
-			-- Fel Lord Zakuun
-			SpellName(181508), -- Seed of Destruction
-			SpellName(181653), -- Fel Crystals (Too Close)
-			SpellName(179428), -- Rumbling Fissure (Soak)
-			SpellName(182008), -- Latent Energy (Cannot soak)
-			SpellName(179407), -- Disembodied (Player in Shadow Realm)
-			-- Xhul'horac
-			SpellName(188208), -- Ablaze
-			SpellName(186073), -- Felsinged
-			SpellName(186407), -- Fel Surge
-			SpellName(186500), -- Chains of Fel
-			SpellName(186063), -- Wasting Void
-			SpellName(186333), -- Void Surge
-			-- Mannoroth
-			SpellName(181275), -- Curse of the Legion
-			SpellName(181099), -- Mark of Doom
-			SpellName(181597), -- Mannoroth's Gaze
-			SpellName(182006), -- Empowered Mannoroth's Gaze
-			SpellName(181841), -- Shadowforce
-			SpellName(182088), -- Empowered Shadowforce
-			-- Archimonde
-			SpellName(184964), -- Shackled Torment
-			SpellName(186123), -- Wrought Chaos
-			SpellName(185014), -- Focused Chaos
-			SpellName(186952), -- Nether Banish
-			SpellName(186961), -- Nether Banish
-			SpellName(189891), -- Nether Tear
-			SpellName(183634), -- Shadowfel Burst
-			SpellName(189895), -- Void Star Fixate
-			SpellName(190049), -- Nether Corruption
-
 			-- Legion Debuffs
 			-- The Emerald Nightmare
 			-- Il'gynoth, Heart of Corruption

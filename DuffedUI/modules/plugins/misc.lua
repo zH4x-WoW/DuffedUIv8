@@ -2,8 +2,27 @@ local D, C, L = unpack(select(2, ...))
 
 --[[Option to disable TalkingHead]]--
 if C["duffed"]["talkinghead"] then
-	UIParent:UnregisterEvent("TALKINGHEAD_REQUESTED")
+	local f = CreateFrame("Frame")
+	function f:OnEvent(event, addon)
+		if addon == "Blizzard_TalkingHeadUI" then
+			hooksecurefunc("TalkingHeadFrame_PlayCurrent", function() TalkingHeadFrame:Hide() end)
+			self:UnregisterEvent(event)
+		end
+	end
+	f:RegisterEvent("ADDON_LOADED")
+	f:SetScript("OnEvent", f.OnEvent)
 end
+
+--[[/console cameraDistanceMaxFactor 2.6]]--
+local f = CreateFrame("Frame")
+function f:OnEvent(event, addon)
+	hooksecurefunc("BlizzardOptionsPanel_SetupControl", function(control)
+		if control == InterfaceOptionsCameraPanelMaxDistanceSlider then SetCVar("cameraDistanceMaxFactor", 2.6) end
+	end)
+	self:UnregisterEvent(event)
+end
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", f.OnEvent)
 
 --[[Quest Rewards]]--
 local QuestReward = CreateFrame("Frame")
@@ -380,6 +399,26 @@ if C["misc"].gold == true then
 		end
 		YOU_LOOT_MONEY = "+%s"
 		LOOT_MONEY_SPLIT = "+%s"
+		LOOT_ITEM_PUSHED_SELF = "+ %s"
+		LOOT_ITEM_PUSHED_SELF_MULTIPLE = "+ %s x %d"
+		LOOT_ITEM_SELF = "+ %s"
+		LOOT_ITEM_SELF_MULTIPLE = "+ %s x %d"
+		LOOT_ITEM_BONUS_ROLL_SELF = "+ %s"
+		LOOT_ITEM_BONUS_ROLL_SELF_MULTIPLE = "+ %s x %d (Bonus)"
+		LOOT_ITEM_CREATED_SELF = "+ %s"
+		LOOT_ITEM_CREATED_SELF_MULTIPLE = "+ %s x %d"
+		LOOT_ITEM_REFUND = "+ %s"
+		LOOT_ITEM_REFUND_MULTIPLE = "+ %s x %d"
+		ERR_QUEST_REWARD_ITEM_S = "+ %s"
+		CURRENCY_GAINED = "+ %s"
+		CURRENCY_GAINED_MULTIPLE = "+ %s x %d"
+		CURRENCY_GAINED_MULTIPLE_BONUS = "+ %s x %d (Bonus Objective)"
+		LOOT_ITEM = "+ %s => %s"
+		LOOT_ITEM_BONUS_ROLL = "+ %s => %s (Bonus)"
+		LOOT_ITEM_BONUS_ROLL_MULTIPLE = "+ %s => %s x %d"
+		LOOT_ITEM_MULTIPLE = "+ %s => %s x %d"
+		LOOT_ITEM_PUSHED = "+ %s => %s"
+		LOOT_ITEM_PUSHED_MULTIPLE = "+ %s => %s x %d"
 	end
 	frame:SetScript("OnEvent", eventHandler)
 end

@@ -15,6 +15,8 @@ local spells = (UnitFactionGroup("player") == "Horde") and {
 	[9] = {132627,132626}, -- Vale of Eternal Blossoms
 	[10] = {176242, 176244}, -- Warspear
 	[11] = {193759, 193759}, -- Hall of Guardian (Orderhall)
+	[12] = {120145, 120146}, -- Old Dalaran
+	[13] = {224869, 224871}, -- Dalaran, Broken Isles
 } or { -- ALLIANCE
 	[1] = {53140,53142}, -- Dalaran
 	[2] = {3561,10059}, -- Stormwind
@@ -27,6 +29,8 @@ local spells = (UnitFactionGroup("player") == "Horde") and {
 	[9] = {132621,132620}, -- Vale of Eternal Blossoms
 	[10] = {176248, 176246}, -- Stormshield
 	[11] = {193759, 193759}, -- Hall of Guardian (Orderhall)
+	[12] = {120145, 120146}, -- Old Dalaran
+	[13] = {224869, 224871}, -- Dalaran, Broken Isles
 };
 
 local UTF = function(string, i, dots)

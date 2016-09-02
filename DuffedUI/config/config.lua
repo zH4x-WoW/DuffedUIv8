@@ -35,7 +35,7 @@ C["unitframes"] = {
 	["debuffsize"] = 20,
 	["classbar"] = true,
 	["attached"] = false,
-	["oocHide"] = false,
+	["oocHide"] = true,
 }
 
 C["chat"] = {
@@ -57,6 +57,7 @@ C["castbar"] = {
 	["color"] = {.31, .45, .63, .5},
 	["cbticks"] = true,
 	["playerwidth"] = 376,
+	["targetwidth"] = 225,
 }
 
 C["nameplate"] = {
@@ -64,6 +65,7 @@ C["nameplate"] = {
  	["platewidth"] = 110,
  	["plateheight"] = 7,
 	["ethreat"] = true,
+	["ClassColor"] = true,
 }
 
 C["actionbar"] = {

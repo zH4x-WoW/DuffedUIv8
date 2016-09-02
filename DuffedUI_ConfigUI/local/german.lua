@@ -55,8 +55,9 @@
 	DuffedUIConfigUILocalization.castbarspark = "Aktiviere Zauberleisten-Spark"
 	DuffedUIConfigUILocalization.castbarcolor = "Wähle Farbe der Zauberleiste"
 	DuffedUIConfigUILocalization.castbarclasscolor = "Aktiviere Klassenfarben für die Zauberleiste"
-	DuffedUIConfigUILocalization.castbarcbticks = "Aktiviere Ticks für kanalisierte Zauber."
-	DuffedUIConfigUILocalization.castbarplayerwidth = "Setze Breite der Zauberleiste."
+	DuffedUIConfigUILocalization.castbarcbticks = "Aktiviere Ticks für kanalisierte Zauber"
+	DuffedUIConfigUILocalization.castbarplayerwidth = "Setze Breite der SpielerZauberleiste"
+	DuffedUIConfigUILocalization.castbartargetwidth = "Setze Breite der Zielzauberleiste"
 
 	--[[Nameplate]]--
 	DuffedUIConfigUILocalization.nameplate = "Namensplaketten"
@@ -64,6 +65,7 @@
 	DuffedUIConfigUILocalization.nameplateplatewidth = "Breite der Namensplaketten (Standard = 110)"
 	DuffedUIConfigUILocalization.nameplateplateheight = "Höhe der Namensplaketten (Standard = 7)"
 	DuffedUIConfigUILocalization.nameplateethreat = "Aktiviere erweitertete Aggroanzeige"
+	DuffedUIConfigUILocalization.nameplateClassColor = "Aktiviere Anzeige für Klassenfarben bei den Namensplaketten"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"

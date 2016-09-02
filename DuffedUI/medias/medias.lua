@@ -7,7 +7,7 @@ C["media"] = {
 	["fr_font"] = [=[Interface\Addons\DuffedUI\medias\fonts\normal_font.ttf]=],
 	["fr_dmgfont"] = [=[Interface\AddOns\DuffedUI\medias\fonts\combat.ttf]=],
 
-	["ru_font"] = [=[Interface\Addons\DuffedUI\medias\fonts\normal_font.ttf]=],
+	["ru_font"] = [=[Interface\Addons\DuffedUI\medias\fonts\normal_rus.ttf]=],
 	["ru_dmgfont"] = [[Interface\AddOns\DuffedUI\medias\fonts\combat_rus.ttf]],
 
 	["tw_font"] = [=[Fonts\bLEI00D.ttf]=],

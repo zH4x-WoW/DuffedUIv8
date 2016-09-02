@@ -56,13 +56,15 @@
 	DuffedUIConfigUILocalization.castbarclasscolor = "啟用施法條按職業顏色著著色"
 	DuffedUIConfigUILocalization.castbarcbticks = "啟用施法條取消技能施放提示音"
 	DuffedUIConfigUILocalization.castbarplayerwidth = "設定玩家施法條寬度"
-	
+	DuffedUIConfigUILocalization.castbartargetwidth = "Set width of target castbar"
+
 	--[[Nameplate]]--
  	DuffedUIConfigUILocalization.nameplate = "姓名版"
  	DuffedUIConfigUILocalization.nameplateactive = "啟用姓名版"
  	DuffedUIConfigUILocalization.nameplateplatewidth = "設置姓名板寬度 (默認 = 110)"
  	DuffedUIConfigUILocalization.nameplateplateheight = "設置姓名板高度 (默認 = 7)"
 	DuffedUIConfigUILocalization.nameplateethreat = "Enable Enhanced Threat"
+	DuffedUIConfigUILocalization.nameplateClassColor = "Enable classcolor-display on nameplates"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "快捷欄"

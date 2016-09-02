@@ -9,26 +9,9 @@ ns._Headers = {}
 
 local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
 local layout = C["unitframes"]["layout"]
+local width = C["raid"]["framewidth"]
+local height = C["raid"]["frameheight"]
 local move = D["move"]
-
---[[Option to hide group 5 - 8]]--
-D["MaxGroup"] = function(frame)
-	if InCombatLockdown() then return end
-	
-	local MaxGroup = CreateFrame("Frame")
-	MaxGroup:RegisterEvent("PLAYER_ENTERING_WORLD")
-	MaxGroup:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-	MaxGroup:RegisterEvent("GROUP_ROSTER_UPDATE")
-	MaxGroup:SetScript("OnEvent", function(self)
-		local inInstance, instanceType = IsInInstance()
-		local _, _, _, _, maxPlayers = GetInstanceInfo()
-		if (inInstance and instanceType == "raid" and maxPlayers == 20) then
-			frame:SetAttribute("groupFilter", "1,2,3,4")
-		elseif (inInstance and instanceType == "raid" and maxPlayers == 30) then
-			frame:SetAttribute("groupFilter", "1,2,3,4,5,6")
-		end
-	end)
-end
 
 D["ConstructUF"] = function(self, unit)
 	if not unit then return end
@@ -178,14 +161,14 @@ D["SpawnUF"] = function(self)
 			else
 				local numOpps = GetNumArenaOpponentSpecs()
 
-				if numOpps > 0 then
-					for i = 1, 5 do
-						local f = _G["oUF_PrepArena" .. i]
-						local s = GetArenaOpponentSpec(i)
-						local _, spec, class = nil, "UNKNOWN", "UNKNOWN"
+				for i = 1, 5 do
+					local f = _G["oUF_PrepArena" .. i]
+					
+					if (i <= numOpps) then
+						local specID = GetArenaOpponentSpec(i)
 
-						if s and s > 0 then _, spec, _, _, _, _, class = GetSpecializationInfoByID(s) end
-						if (i <= numOpps) then
+						if specID and specID > 0 then 
+							local _, spec, _, _, _, _, class = GetSpecializationInfoByID(specID)
 							if class and spec then
 								f.SpecClass:SetText(spec .. "  -  " .. LOCALIZED_CLASS_NAMES_MALE[class])
 								if not C["unitframes"]["unicolor"] then
@@ -198,11 +181,11 @@ D["SpawnUF"] = function(self)
 							f:Hide()
 						end
 					end
-				else
-					for i = 1, 5 do
-						local f = _G["oUF_PrepArena"..i]
-						f:Hide()
-					end
+				end
+
+				for i = 1, 5 do
+					local f = _G["oUF_PrepArena"..i]
+					f:Hide()
 				end
 			end
 		end)
@@ -228,7 +211,7 @@ D["SpawnUF"] = function(self)
 		else 
 			tank:Point("TOPLEFT", ChatFrame4, "TOPLEFT", 2, 62)
 		end
-		move:RegisterFrame(tank)
+		move:RegisterFrame(oUF_MainTank)
 	end
 
 	if C["raid"]["mainassist"] then
@@ -245,21 +228,23 @@ D["SpawnUF"] = function(self)
 		)
 		assist:SetParent(oUF_PetBattleFrameHider)
 		if C["raid"]["maintank"] then assist:Point("TOPLEFT", oUF_MainTank, "BOTTOMLEFT", 2, -50) else assist:Point("CENTER", UIParent, "CENTER", 0, 0) end
-		move:RegisterFrame(assist)
+		move:RegisterFrame(oUF_MainAssist)
 	end
 
 	if C["raid"]["enable"] then
 		local layout = C["raid"]["layout"]
 
 		if layout == "heal" then
+			local ra = CreateFrame("Frame", "RaidAnchor", UIParent)
+			ra:SetSize(D["Scale"](D["InfoLeftRightWidth"]), 15)
 			local raid = oUF:SpawnHeader("oUF_Heal", nil, "solo,raid,party",
 				"oUF-initialConfigFunction", [[
 					local header = self:GetParent()
 					self:SetWidth(header:GetAttribute("initial-width"))
 					self:SetHeight(header:GetAttribute("initial-height"))
 				]],
-				"initial-width", D["Scale"](C["raid"]["framewidth"]),
-				"initial-height", D["Scale"](C["raid"]["frameheight"]),
+				"initial-width", D["Scale"](width),
+				"initial-height", D["Scale"](height),
 				"showPlayer", C["raid"]["showplayerinparty"],
 				--"showSolo", true,
 				"showParty", true,
@@ -276,13 +261,13 @@ D["SpawnUF"] = function(self)
 				"columnAnchorPoint", "BOTTOM"
 			)
 			raid:SetParent(oUF_PetBattleFrameHider)
+			raid:SetPoint("BOTTOMLEFT", ra, "BOTTOMLEFT", 0, 0)
 			if DuffedUIChatBackgroundLeft then 
-				raid:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 10)
+				ra:Point("BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 2, 8)
 			else
-				raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33)
+				ra:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33)
 			end
-			D["MaxGroup"](oUF_Heal)
-			move:RegisterFrame(raid)
+			move:RegisterFrame(RaidAnchor)
 
 			if C["raid"]["showraidpets"] then
 				local rpet = oUF:SpawnHeader("oUF_RaidPet", "SecureGroupPetHeaderTemplate", "solo,raid,party",
@@ -306,7 +291,7 @@ D["SpawnUF"] = function(self)
 				)
 				rpet:SetParent(oUF_PetBattleFrameHider)
 				rpet:Point("BOTTOM", oUF_Heal, "TOP", 0, 3)
-				move:RegisterFrame(rpet)
+				move:RegisterFrame(oUF_RaidPet)
 			end
 		else
 			local raid = oUF:SpawnHeader("oUF_DPS", nil, "solo,raid,party",
@@ -319,6 +304,7 @@ D["SpawnUF"] = function(self)
 				"initial-height", D["Scale"](14),
 				"initial-anchor", "BOTTOM",
 				"showPlayer", C["raid"]["showplayerinparty"],
+				--"showSolo", true,
 				"showParty", true,
 				"showRaid", true,
 				"groupFilter", "1,2,3,4,5,6,7,8", 
@@ -333,8 +319,7 @@ D["SpawnUF"] = function(self)
 			else
 				raid:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 33)
 			end
-			D["MaxGroup"](oUF_DPS)
-			move:RegisterFrame(raid)
+			move:RegisterFrame(oUF_DPS)
 		end
 	end
 end
