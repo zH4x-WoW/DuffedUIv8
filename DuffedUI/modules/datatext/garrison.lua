@@ -13,6 +13,7 @@ local C_GarrisonGetLandingPageShipmentInfo = C_Garrison.GetLandingPageShipmentIn
 local GARRISON_LANDING_SHIPMENT_COUNT = GARRISON_LANDING_SHIPMENT_COUNT
 local COMPLETE = COMPLETE
 local LE_FOLLOWER_TYPE_GARRISON_6_0 = LE_FOLLOWER_TYPE_GARRISON_6_0
+local LE_FOLLOWER_TYPE_GARRISON_7_0 = LE_FOLLOWER_TYPE_GARRISON_7_0
 local LE_FOLLOWER_TYPE_SHIPYARD_6_2 = LE_FOLLOWER_TYPE_SHIPYARD_6_2
 local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 
@@ -91,7 +92,7 @@ if InCombatLockdown() then return end
 		end
 	end
 
-	--Missions
+	--Garrison Missions
 	local inProgressMissions = {};
 	C_GarrisonGetInProgressMissions(inProgressMissions, LE_FOLLOWER_TYPE_GARRISON_6_0)
 	local numMissions = #inProgressMissions
@@ -100,6 +101,24 @@ if InCombatLockdown() then return end
 
 		if(numBuildings > 0) then GameTooltip:AddLine(" ") end
 		GameTooltip:AddLine(GARRISON_MISSIONS_TITLE)
+		for i=1, numMissions do
+			local mission = inProgressMissions[i]
+			local timeLeft = mission.timeLeft:match("%d")
+			local r, g, b = 1, 1, 1
+			if(mission.isRare) then r, g, b = .09, .51, .81 end
+			if(timeLeft and timeLeft == "0") then GameTooltip:AddDoubleLine(mission.name, COMPLETE, r, g, b, 0, 1, 0) else GameTooltip:AddDoubleLine(mission.name, mission.timeLeft, r, g, b) end
+		end
+	end
+	
+	--Orderhall Missions
+	local inProgressMissions = {};
+	C_GarrisonGetInProgressMissions(inProgressMissions, LE_FOLLOWER_TYPE_GARRISON_7_0)
+	local numMissions = #inProgressMissions
+	if(numMissions > 0) then
+		tsort(inProgressMissions, sortFunction) --Sort by time left, lowest first
+
+		if(numBuildings > 0) then GameTooltip:AddLine(" ") end
+		GameTooltip:AddLine(_G["ORDER_HALL_"..D["Class"]])
 		for i=1, numMissions do
 			local mission = inProgressMissions[i]
 			local timeLeft = mission.timeLeft:match("%d")
@@ -128,8 +147,11 @@ if InCombatLockdown() then return end
 	end
 
 	GameTooltip:AddLine(" ")
+	GameTooltip:AddLine(TOKENS)
 	GameTooltip:AddDoubleLine(Currency(824))
-	GameTooltip:AddDoubleLine(Currency(1101))	
+	GameTooltip:AddDoubleLine(Currency(1101))
+	GameTooltip:AddDoubleLine(Currency(1220))
+	GameTooltip:AddDoubleLine(Currency(1155))	
 	GameTooltip:Show()
 end)
 
