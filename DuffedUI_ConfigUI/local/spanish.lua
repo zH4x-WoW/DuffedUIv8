@@ -15,6 +15,7 @@
 	DuffedUIConfigUILocalization.unitframesenable = "Enable DuffedUI Unit Frames"
 	DuffedUIConfigUILocalization.unitframeslayout = "Set UF-Layout (1, 2, 3 or 4, default = 1)"
 	DuffedUIConfigUILocalization.unitframespercent = "Enable percent display beside player & target"
+	DuffedUIConfigUILocalization.unitframespercentoutside = "Show the percent Display outside unitframes"
 	DuffedUIConfigUILocalization.unitframesshowsmooth = "Enable smooth bar"
 	DuffedUIConfigUILocalization.unitframesunicolor = "Enable Unique color theme (grey health bar)"
 	DuffedUIConfigUILocalization.unitframeshealthbarcolor = "Set healthbar color"

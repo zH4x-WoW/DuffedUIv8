@@ -69,7 +69,11 @@ D["ConstructUFTarget"] = function(self)
 		local percHP
 		percHP = D.SetFontString(health, C["media"].font, 20, "THINOUTLINE")
 		percHP:SetTextColor(unpack(C["media"].datatextcolor1))
-		percHP:Point("RIGHT", health, "LEFT", -25, -10)
+		if C["unitframes"]["percentoutside"] == true then
+			percHP:Point("LEFT", health, "RIGHT", 25, -10)
+		else	
+			percHP:Point("RIGHT", health, "LEFT", -25, -10)
+		end
 		self:Tag(percHP, "[DuffedUI:perchp]")
 		self.percHP = percHP
 	end

@@ -15,6 +15,7 @@
 	DuffedUIConfigUILocalization.unitframesenable = "Aktiviere die DuffedUI Einheitenfenster"
 	DuffedUIConfigUILocalization.unitframeslayout = "Wähle Dein UF-Layout (1, 2, 3 oder 4, Standard = 1)"
 	DuffedUIConfigUILocalization.unitframespercent = "Aktiviere eine Prozentanzeige neben Spieler & Ziel"
+	DuffedUIConfigUILocalization.unitframespercentoutside = "Zeige die Prozentanzeige an den Einheitenfenstern außen an"
 	DuffedUIConfigUILocalization.unitframesshowsmooth = "Aktiviere weiche Übergänge bei den Einheitenfenster"
 	DuffedUIConfigUILocalization.unitframesunicolor = "Aktiviere ein einheitliches Farbmotiv (graue Lebensleiste)"
 	DuffedUIConfigUILocalization.unitframeshealthbarcolor = "Setze die Farbe der Lebensleiste"
