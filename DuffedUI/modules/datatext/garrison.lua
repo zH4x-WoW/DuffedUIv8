@@ -5,7 +5,6 @@ if not C["datatext"].garrison or C["datatext"].garrison == 0 then return end
 local format = string.format
 local tsort = table.sort
 local GetMouseFocus = GetMouseFocus
-local GetCurrencyInfo = GetCurrencyInfo
 local C_GarrisonRequestLandingPageShipmentInfo = C_Garrison.RequestLandingPageShipmentInfo
 local C_GarrisonGetBuildings = C_Garrison.GetBuildings
 local C_GarrisonGetInProgressMissions = C_Garrison.GetInProgressMissions
@@ -37,11 +36,6 @@ local Text  = Stat:CreateFontString("DuffedUIStatgarrisonText", "OVERLAY")
 Text:SetFont(f, fs, ff)
 D.DataTextPosition(C["datatext"].garrison, Text)
 
-local function Currency(id, weekly, capped)	
-	local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(id)
-	if discovered then GameTooltip:AddDoubleLine("\124T" .. tex .. ":12\124t " .. name, amount, 1, 1, 1) end
-end
-
 local function sortFunction(a, b) return a.missionEndTime < b.missionEndTime end
 
 local function Update(self, event)
@@ -60,7 +54,7 @@ local function Update(self, event)
 		end
 	end
 
-	if (CountInProgress > 0) then Text:SetText(Stat.Color1 .. format(GARRISON_MISSIONS, CountCompleted, #Missions)) else Text:SetText(Stat.Color2 ..("Garnison")) end	
+	if (CountInProgress > 0) then Text:SetText(Stat.Color1 .. format(GARRISON_MISSIONS, CountCompleted, #Missions)) else Text:SetText(Stat.Color2 ..("Garrison")) end	
 	self:SetAllPoints(Text)
 end
 
@@ -148,10 +142,9 @@ if InCombatLockdown() then return end
 
 	GameTooltip:AddLine(" ")
 	GameTooltip:AddLine(TOKENS)
-	GameTooltip:AddDoubleLine(Currency(824))
-	GameTooltip:AddDoubleLine(Currency(1101))
-	GameTooltip:AddDoubleLine(Currency(1220))
-	GameTooltip:AddDoubleLine(Currency(1155))	
+	GameTooltip:AddDoubleLine(D["Currency"](824))
+	GameTooltip:AddDoubleLine(D["Currency"](1101))
+	GameTooltip:AddDoubleLine(D["Currency"](1220))
 	GameTooltip:Show()
 end)
 
