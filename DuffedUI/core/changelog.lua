@@ -8,6 +8,7 @@ local ChangeLogData = {
 		"• Added Mage portals",
 		"• Added option to set percent display outside on unitframes",
 		"• Added option to disable right actionbar",
+		"• Update AddOnSkins",
 		--"• ",
 	" ",
 	"Notes:",
