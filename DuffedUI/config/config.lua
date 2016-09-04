@@ -15,6 +15,7 @@ C["unitframes"] = {
 	["enable"] = true,
 	["layout"] = 1,
 	["percent"] = true,
+	["percentoutside"] = false,
 	["showsmooth"] = true,
 	["unicolor"] = true,
 	["healthbarcolor"] = {.125, .125, .125, 1},
