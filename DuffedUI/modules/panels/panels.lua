@@ -95,24 +95,26 @@ if C["actionbar"]["enable"] then
 		move:RegisterFrame(DuffedUIBar4)
 	end
 
-	local DuffedUIBar5 = CreateFrame("Frame", "DuffedUIBar5", UIParent, "SecureHandlerStateTemplate")
-	DuffedUIBar5:SetTemplate("Transparent")
-	if C["actionbar"]["rightbarvertical"] then
-		DuffedUIBar5:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
-		DuffedUIBar5:Point("BOTTOM", UIParent, "BOTTOM", 0, 56)
-	else
-		DuffedUIBar5:SetSize((D["buttonsize"] * 1) + (D["buttonspacing"] * 2), (D["buttonsize"] * 12) + (D["buttonspacing"] * 13))
-		DuffedUIBar5:Point("RIGHT", UIParent, "RIGHT", -13, -14)
+	if (not C["actionbar"]["rightbarDisable"]) then
+		local DuffedUIBar5 = CreateFrame("Frame", "DuffedUIBar5", UIParent, "SecureHandlerStateTemplate")
+		DuffedUIBar5:SetTemplate("Transparent")
+		if C["actionbar"]["rightbarvertical"] then
+			DuffedUIBar5:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
+			DuffedUIBar5:Point("BOTTOM", UIParent, "BOTTOM", 0, 56)
+		else
+			DuffedUIBar5:SetSize((D["buttonsize"] * 1) + (D["buttonspacing"] * 2), (D["buttonsize"] * 12) + (D["buttonspacing"] * 13))
+			DuffedUIBar5:Point("RIGHT", UIParent, "RIGHT", -13, -14)
+		end
+		DuffedUIBar5:SetFrameStrata("BACKGROUND")
+		DuffedUIBar5:SetFrameLevel(3)
+		move:RegisterFrame(DuffedUIBar5)
 	end
-	DuffedUIBar5:SetFrameStrata("BACKGROUND")
-	DuffedUIBar5:SetFrameLevel(3)
-	move:RegisterFrame(DuffedUIBar5)
 
 	DuffedUIPetBarMover = CreateFrame("Frame", "DuffedUIPetMover", UIParent)
 	if C["actionbar"]["petbarhorizontal"] ~= true and C["actionbar"]["rightbarvertical"] ~= true then
 		DuffedUIPetBarMover:SetSize(D["petbuttonsize"] + (D["petbuttonspacing"] * 2), (D["petbuttonsize"] * 10) + (D["petbuttonspacing"] * 11))
 		DuffedUIPetBarMover:SetPoint("RIGHT", DuffedUIBar5, "LEFT", -6, 0)
-	elseif C["actionbar"]["petbarhorizontal"] ~= true and C["actionbar"]["rightbarvertical"]  then
+	elseif C["actionbar"]["petbarhorizontal"] ~= true and (C["actionbar"]["rightbarvertical"] or C["actionbar"]["rightbarDisable"]) then
 		DuffedUIPetBarMover:SetSize(D["petbuttonsize"] + (D["petbuttonspacing"] * 2), (D["petbuttonsize"] * 10) + (D["petbuttonspacing"] * 11))
 		DuffedUIPetBarMover:SetPoint("RIGHT", UIParent, "RIGHT", -13, -14)
 	else

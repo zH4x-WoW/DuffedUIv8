@@ -6,11 +6,12 @@ local ChangeLogData = {
 		"• Added currencys",
 		"• Fixed a issue with the moving script",
 		"• Added Mage portals",
+		"• Added option to set percent display outside on unitframes",
+		"• Added option to disable right actionbar",
 		--"• ",
 	" ",
 	"Notes:",
 		"• New Bagscript isn't finished yet.",
-		"• LAST UPDATE BEFORE LEVELPHASE, ONLY GAMEBREAKING ISSUES WILL BE FIXED\n DURING LEVELPHASE!"
 }
 
 local function ModifiedString(string)

@@ -92,6 +92,7 @@ DuffedUIConfigUILocalization.actionbarLeftSideBar = "Set left side actionbar hor
 DuffedUIConfigUILocalization.actionbarRightSideBar = "Set right side actionbar horizontal"
 DuffedUIConfigUILocalization.actionbarLeftSideBarDisable = "Disable left side actionbar"
 DuffedUIConfigUILocalization.actionbarRightSideBarDisable = "Disable right side actionbar"
+DuffedUIConfigUILocalization.actionbarrightbarDisable = "Disable bar on the right side"
 
 --[[Raid Frames]]--
 DuffedUIConfigUILocalization.raid = "Raid Frames"

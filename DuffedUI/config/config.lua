@@ -73,6 +73,7 @@ C["actionbar"] = {
 	["enable"] = true,
 	["rightbarvertical"] = false,
 	["rightbarsmouseover"] = false,
+	["rightbarDisable"] = false,
 	["petbarhorizontal"] = false,
 	["petbaralwaysvisible"] = true,
 	["verticalshapeshift"] = true,
