@@ -1,5 +1,4 @@
 local D, C, L = unpack(select(2, ...))
-if IsAddOnLoaded("AddOnSkins") then return end
 
 -- Modified Script from Tukui T16
 -- Credits got to Tukz & Hydra
@@ -198,9 +197,9 @@ function WorldMap:Coords()
 	coords:FontString("MouseText", C["media"].font, fontheight, fontflag)
 	coords.PlayerText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
 	coords.MouseText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
-	coords.PlayerText:SetPoint("BOTTOMLEFT", WorldMapFrame, "BOTTOMLEFT", 5, 5)
+	coords.PlayerText:SetPoint("BOTTOMRIGHT", WorldMapFrame, "BOTTOMRIGHT", -5, 40)
 	coords.PlayerText:SetText("Player:   0, 0")
-	coords.MouseText:SetPoint("BOTTOMLEFT", coords.PlayerText, "TOPLEFT", 0, 5)
+	coords.MouseText:SetPoint("BOTTOMRIGHT", coords.PlayerText, "TOPRIGHT", 0, 5)
 	coords.MouseText:SetText("Mouse:   0, 0")
 	local int = 0
 
@@ -239,16 +238,18 @@ function WorldMap:AddHooks()
 end
 
 function WorldMap:Enable()
-	local SmallerMap = GetCVarBool("miniWorldMap")
+	if not IsAddOnLoaded("AddOnSkins") then
+		local SmallerMap = GetCVarBool("miniWorldMap")
 
-	if not SmallerMap then
-		ToggleWorldMap()
-		WorldMapFrameSizeUpButton:Click()
-		ToggleWorldMap()
+		if not SmallerMap then
+			ToggleWorldMap()
+			WorldMapFrameSizeUpButton:Click()
+			ToggleWorldMap()
+		end
+		self:Skin()
+		self:AddHooks()
 	end
-	self:Skin()
 	self:Coords()
-	self:AddHooks()
 end
 
 WorldMap:RegisterEvent("ADDON_LOADED")
