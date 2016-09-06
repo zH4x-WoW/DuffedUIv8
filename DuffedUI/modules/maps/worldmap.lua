@@ -197,9 +197,9 @@ function WorldMap:Coords()
 	coords:FontString("MouseText", C["media"].font, fontheight, fontflag)
 	coords.PlayerText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
 	coords.MouseText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
-	coords.PlayerText:SetPoint("BOTTOMRIGHT", WorldMapFrame, "BOTTOMRIGHT", -5, 40)
+	coords.PlayerText:SetPoint("TOPLEFT", WorldMapPOIFrame, "TOPLEFT", -5, -5)
 	coords.PlayerText:SetText("Player:   0, 0")
-	coords.MouseText:SetPoint("BOTTOMRIGHT", coords.PlayerText, "TOPRIGHT", 0, 5)
+	coords.MouseText:SetPoint("TOPRIGHT", coords.PlayerText, "BOTTOMRIGHT", 0, -5)
 	coords.MouseText:SetText("Mouse:   0, 0")
 	local int = 0
 

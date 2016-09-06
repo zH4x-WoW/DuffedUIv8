@@ -3,16 +3,11 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Added currencys",
-		"• Fixed a issue with the moving script",
-		"• Added Mage portals",
-		"• Added option to set percent display outside on unitframes",
-		"• Added option to disable right actionbar",
-		"• Update AddOnSkins",
+		"• Added quest sorting functionality",
 		--"• ",
 	" ",
 	"Notes:",
-		"• New Bagscript isn't finished yet.",
+		"• No additional notes.",
 }
 
 local function ModifiedString(string)
