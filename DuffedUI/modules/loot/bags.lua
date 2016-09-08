@@ -432,7 +432,6 @@ function Bags:SlotUpdate(id, button)
 	if not button then return end
 
 	local ItemLink = GetContainerItemLink(id, button:GetID())
-
 	local Texture, Count, Lock, quality, _, _, _, _, _, ItemID = GetContainerItemInfo(id, button:GetID())
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
 
@@ -455,7 +454,6 @@ function Bags:SlotUpdate(id, button)
 			if not button.Animation then
 				button.Animation = button:CreateAnimationGroup()
 				button.Animation:SetLooping("BOUNCE")
-
 				button.FadeOut = button.Animation:CreateAnimation("Alpha")
 				button.FadeOut:SetFromAlpha(1)
 				button.FadeOut:SetToAlpha(0)
@@ -464,13 +462,15 @@ function Bags:SlotUpdate(id, button)
 			end
 			button.Animation:Play()
 		end
+	else
+		if button.Animation and button.Animation:IsPlaying() then button.Animation:Stop() end
 	end
 
 	if IsQuestItem then
 		button:SetBackdropBorderColor(1, 1, 0)
 	elseif ItemLink then
 		local Rarity = select(3, GetItemInfo(ItemLink)) or 0
-		button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
+		if Rarity > 0 then button:SetBackdropBorderColor(GetItemQualityColor(Rarity)) else button:SetBackdropBorderColor(unpack(C["general"].bordercolor)) end
 	else
 		button:SetBackdropBorderColor(unpack(C["general"].bordercolor))
 	end
