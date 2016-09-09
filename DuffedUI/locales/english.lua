@@ -221,6 +221,9 @@ L["dt"] = {
 	["specerror"] = "You're already in that spec!",
 	["specdata"] = "spec: ",
 	["reward"] = "Reward: ",
+	["noorderhallnowo"] = "Orderhall",
+	["noorderhallwo"] = "Orderhall+",
+	["noorderhall"] = "Whats up? No orderhall at this time?",
 }
 
 L["Slots"] = {

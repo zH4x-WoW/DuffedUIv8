@@ -140,6 +140,7 @@ C["datatext"] = {
 	["versatility"] = 0,
 	["wowtime"] = 8,
 	["garrison"] = 0,
+	["orderhall"] = 0,
 
 	["time24"] = true,
 	["localtime"] = false,

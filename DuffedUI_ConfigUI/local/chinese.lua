@@ -140,6 +140,7 @@
 	DuffedUIConfigUILocalization.datatextversatility = "临机应变(输入0关闭显示)"
 	DuffedUIConfigUILocalization.datatextwowtime = "时间"
 	DuffedUIConfigUILocalization.datatextgarrison = "要塞(输入0关闭显示)"
+	DuffedUIConfigUILocalization.datatextorderhall = "Orderhall position (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatexttime24 = "启用24小时制"
 	DuffedUIConfigUILocalization.datatextlocaltime = "使用本地时间取代服务器时间"
 	DuffedUIConfigUILocalization.datatextfontsize = "信息字体大小"

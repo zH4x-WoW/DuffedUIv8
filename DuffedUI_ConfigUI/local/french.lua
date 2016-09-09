@@ -139,6 +139,7 @@
 	DuffedUIConfigUILocalization.datatextversatility = "Versatility position (0 for disabled)"
 	DuffedUIConfigUILocalization.datatextwowtime = "Time position (0 for disabled)"
 	DuffedUIConfigUILocalization.datatextgarrison = "Garrison position (0 for disabled)"
+	DuffedUIConfigUILocalization.datatextorderhall = "Orderhall position (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatexttime24 = "Enable 24h time"
 	DuffedUIConfigUILocalization.datatextlocaltime = "Use Local Time instead of Server Time"
 	DuffedUIConfigUILocalization.datatextfontsize = "Font size of text"

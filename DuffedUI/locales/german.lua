@@ -223,6 +223,9 @@ if D.Client == "deDE" then
 		["specerror"] = "Diese Spezialisierung ist bereits aktiv!",
 		["specdata"] = "Spez: ",
 		["reward"] = "Belohnung: ",
+		["noorderhallnowo"] = "Ordenshalle",
+		["noorderhallwo"] = "Ordenshalle+",
+		["noorderhall"] = "Du hast Deine Ordenshalle noch nicht freigeschaltet, nun aber los!",
 	}
 
 	L["Slots"] = {
