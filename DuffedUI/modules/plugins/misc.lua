@@ -448,13 +448,3 @@ if C["duffed"].sayinterrupt == true then
 	f:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 	f:SetScript("OnEvent", Update)
 end
-
---[[Link ArtifactSpells to Chat =>Shift + Click]]--
-local oldOnClick = ArtifactPowerButtonMixin.OnClick
-function ArtifactPowerButtonMixin:OnClick(button)
-	if IsModifiedClick("CHATLINK") then
-		ChatEdit_InsertLink(GetSpellLink(self.spellID))
-	else
-		oldOnClick(self, button)
-	end
-end

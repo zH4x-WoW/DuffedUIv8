@@ -13,6 +13,12 @@ local function ArtifactSkin()
 	end
 	ArtifactFrameTab1:ClearAllPoints()
 	ArtifactFrameTab1:SetPoint("TOPLEFT", ArtifactFrame, "BOTTOMLEFT", 0, -2)
+
+	--[[Link ArtifactSpells to Chat =>Shift + Click]]--
+	local oldOnClick = ArtifactPowerButtonMixin.OnClick
+	function ArtifactPowerButtonMixin:OnClick(button)
+		if IsModifiedClick("CHATLINK") then ChatEdit_InsertLink(GetSpellLink(self.spellID)) else oldOnClick(self, button) end
+	end
 end
 
 D.SkinFuncs["Blizzard_ArtifactUI"] = ArtifactSkin
