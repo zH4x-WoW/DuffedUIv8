@@ -139,6 +139,7 @@
 	DuffedUIConfigUILocalization.datatextversatility = "臨機應變(輸入0關閉顯示)"
 	DuffedUIConfigUILocalization.datatextwowtime = "時間"
 	DuffedUIConfigUILocalization.datatextgarrison = "要塞(輸入0關閉顯示)"
+	DuffedUIConfigUILocalization.datatextorderhall = "Orderhall position (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatexttime24 = "啟用24小時制"
 	DuffedUIConfigUILocalization.datatextlocaltime = "使用本地時間取代伺服器時間"
 	DuffedUIConfigUILocalization.datatextfontsize = "資訊字體大小"
