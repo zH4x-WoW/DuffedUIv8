@@ -4,6 +4,12 @@ local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
 		"• Added quest sorting functionality",
+		"• Added functionality to Shift+Click Artifact traits",
+		"• Added Orderhall-DataText",
+		"• Fixed coords on worldmap",
+		"• Update AddOnSkins",
+		"• Update colored borders in bags",
+		"• Removed unnecessary locales",
 		--"• ",
 	" ",
 	"Notes:",

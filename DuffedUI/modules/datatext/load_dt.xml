@@ -14,6 +14,7 @@
 	<Script file="gold.lua" />
 	<Script file="guild.lua" />
 	<Script file="haste.lua" />
+	<Script file="orderhall.lua" />
 	<Script file="leech.lua" />
 	<Script file="mastery.lua" />
 	<Script file="micromenu.lua" />
