@@ -3,14 +3,11 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Added currencys",
-		"• Fixed a issue with the moving script",
-		"• Added Mage portals",
+		"• Added quest sorting functionality",
 		--"• ",
 	" ",
 	"Notes:",
-		"• New Bagscript isn't finished yet.",
-		"• LAST UPDATE BEFORE LEVELPHASE, ONLY GAMEBREAKING ISSUES WILL BE FIXED\n DURING LEVELPHASE!"
+		"• No additional notes.",
 }
 
 local function ModifiedString(string)

@@ -91,6 +91,7 @@
 	DuffedUIConfigUILocalization.actionbarRightSideBar = "Setze die rechte Sidebar 'horizontal'"
 	DuffedUIConfigUILocalization.actionbarLeftSideBarDisable = "Deaktiviere die linke Sidebar"
 	DuffedUIConfigUILocalization.actionbarRightSideBarDisable = "Deaktiviere die rechte Sidebar"
+	DuffedUIConfigUILocalization.actionbarrightbarDisable = "Deaktiviere Leiste auf der rechten Seite"
 
 	--[[Raid Frames]]--
 	DuffedUIConfigUILocalization.raid = "Schlachtzugfenster"

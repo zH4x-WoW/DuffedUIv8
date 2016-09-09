@@ -16,6 +16,7 @@
 	<Script file="micromenu.lua" />
 	<Script file="mirror.lua" />
 	<Script file="objectivetracker.lua" />
+	<Script file="questsorting.lua" />
 	<Script file="raidutilities.lua" />
 	<Script file="symbol.lua" />
 	<Script file="threatbar.lua" />

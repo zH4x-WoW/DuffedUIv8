@@ -29,11 +29,13 @@ local function ShowOrHideBar(bar, button)
 			end
 		end
 
-		if bar == DuffedUIBar5 then
-			if button == DuffedUIBar5Button then
-				UnregisterStateDriver(bar, "visibility")
-				bar:Hide()
-				db.bar5 = true
+		if (not C["actionbar"]["rightbarDisable"]) then
+			if bar == DuffedUIBar5 then
+				if button == DuffedUIBar5Button then
+					UnregisterStateDriver(bar, "visibility")
+					bar:Hide()
+					db.bar5 = true
+				end
 			end
 		end
 	else
@@ -51,9 +53,11 @@ local function ShowOrHideBar(bar, button)
 			end
 		end
 
-		if bar == DuffedUIBar5 then
-			db.bar5 = false
-			RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] show; show")
+		if (not C["actionbar"]["rightbarDisable"]) then
+			if bar == DuffedUIBar5 then
+				db.bar5 = false
+				RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle] show; show")
+			end
 		end
 	end
 end
@@ -153,13 +157,15 @@ DuffedUIBar5Button:Point("RIGHT", UIParent, "RIGHT", 1, -14)
 DuffedUIBar5Button:SetTemplate("Default")
 DuffedUIBar5Button:RegisterForClicks("AnyUp")
 DuffedUIBar5Button:SetAlpha(0)
-if not C["actionbar"].rightbarvertical then DuffedUIBar5Button:SetScript("OnClick", function(self, btn) UpdateBar(self, DuffedUIBar5) end) end
-if C["actionbar"].rightbarsmouseover == true then
-	DuffedUIBar5Button:SetScript("OnEnter", function(self) DuffedUIRightBarsMouseover(1) end)
-	DuffedUIBar5Button:SetScript("OnLeave", function(self) DuffedUIRightBarsMouseover(0) end)
-else
-	DuffedUIBar5Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
-	DuffedUIBar5Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
+if not C["actionbar"]["rightbarDisable"] then
+	if not C["actionbar"].rightbarvertical then DuffedUIBar5Button:SetScript("OnClick", function(self, btn) UpdateBar(self, DuffedUIBar5) end) end
+	if C["actionbar"].rightbarsmouseover == true then
+		DuffedUIBar5Button:SetScript("OnEnter", function(self) DuffedUIRightBarsMouseover(1) end)
+		DuffedUIBar5Button:SetScript("OnLeave", function(self) DuffedUIRightBarsMouseover(0) end)
+	else
+		DuffedUIBar5Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
+		DuffedUIBar5Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
+	end
 end
 DuffedUIBar5Button.text = D.SetFontString(DuffedUIBar5Button, C["media"].font, 13)
 DuffedUIBar5Button.text:Point("CENTER", 0, 0)
