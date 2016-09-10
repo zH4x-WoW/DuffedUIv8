@@ -462,8 +462,6 @@ function Bags:SlotUpdate(id, button)
 			end
 			button.Animation:Play()
 		end
-	else
-		if button.Animation and button.Animation:IsPlaying() then button.Animation:Stop() end
 	end
 
 	if IsQuestItem then
