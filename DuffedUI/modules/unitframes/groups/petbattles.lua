@@ -1,18 +1,7 @@
---[[
-	NOTE FOR ME:
- 
-	Pet Battles UI is loaded directly on initial login and 
-	is temporary for Beta. Pet Battles UI will go "Load on Demand" 
-	on a future MoP beta build, so don't forget to modify loading parameters.
---]]
-
-----------------------------------------------
--- Pet Battles UI ----------------------------
-----------------------------------------------
-
 local D, C, L = unpack(select(2, ...)) 
 local f = PetBattleFrame
 local bf = f.BottomFrame
+local move = D["move"]
 local pets = {
 	f.ActiveAlly,
 	f.ActiveEnemy
@@ -120,11 +109,7 @@ hooksecurefunc("PetBattleFrame_UpdateSpeedIndicators", function(self)
 
 	for i, pet in pairs(pets) do
 		pet.FirstAttack:Show()
-		if pet.SpeedIcon:IsShown() then
-			pet.FirstAttack:SetVertexColor(0, 1, 0, 1)
-		else
-			pet.FirstAttack:SetVertexColor(.8, 0, .3, 1)
-		end
+		if pet.SpeedIcon:IsShown() then pet.FirstAttack:SetVertexColor(0, 1, 0, 1) else pet.FirstAttack:SetVertexColor(.8, 0, .3, 1) end
 	end
 end)
 
@@ -132,9 +117,7 @@ end)
 hooksecurefunc("PetBattleUnitFrame_UpdatePetType", function(self)
 	if self.PetType then
 		local petType = C_PetBattles.GetPetType(self.petOwner, self.petIndex)
-		if self.PetTypeFrame then
-			self.PetTypeFrame.text:SetText(PET_TYPE_SUFFIX[petType])
-		end
+		if self.PetTypeFrame then self.PetTypeFrame.text:SetText(PET_TYPE_SUFFIX[petType]) end
 	end
 end)
 
@@ -157,15 +140,8 @@ hooksecurefunc("PetBattleAuraHolder_Update", function(self)
 				frame.Icon:SetTexCoord(.1, .9, .1, .9)
 			end
 
-			if isBuff then
-				frame.backdrop:SetBackdropBorderColor(0, 1, 0)
-			else
-				frame.backdrop:SetBackdropBorderColor(1, 0, 0)
-			end
-			
-			if turnsRemaining > 0 then
-				frame.Duration:SetText(turnsRemaining)
-			end
+			if isBuff then frame.backdrop:SetBackdropBorderColor(0, 1, 0) else frame.backdrop:SetBackdropBorderColor(1, 0, 0) end
+			if turnsRemaining > 0 then frame.Duration:SetText(turnsRemaining) end
 			
 			frame.Duration:SetFont(C["media"].font, 14, "OUTLINE")
 			frame.Duration:ClearAllPoints()
@@ -208,9 +184,7 @@ for i, tt in pairs(tooltips) do
 	tt.BorderBottomLeft:SetTexture(nil)
 	tt:SetTemplate("Transparent")
 	
-	if tt.CloseButton then
-		tt.CloseButton:SkinCloseButton()
-	end
+	if tt.CloseButton then tt.CloseButton:SkinCloseButton() end
 end
 
 -- TOOLTIP DEFAULT POSITION
@@ -270,17 +244,14 @@ hooksecurefunc("PetBattleWeatherFrame_Update", function(self)
 	end
 end)
 
----------------------------------
 -- PET BATTLE ACTION BAR SETUP --
----------------------------------
-
 local bar = CreateFrame("Frame", "DuffedUIPetBattleActionBar", UIParent, "SecureHandlerStateTemplate")
 bar:SetSize (52 * 6 + 7 * 10, 52 * 1 + 10 * 2)
 bar:EnableMouse(true)
 bar:SetTemplate()
 bar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 50)
 bar:Hide()
-
+move:RegisterFrame(DuffedUIPetBattleActionBar)
 RegisterStateDriver(bar, "visibility", "[petbattle] show; hide")
 
 bf:StripTextures()
@@ -374,11 +345,7 @@ hooksecurefunc("PetBattleFrame_UpdateActionBarLayout", function(self)
 	bf.SwitchPetButton.checked:SetInside(bf.SwitchPetButton.backdrop)
 	bf.SwitchPetButton:SetPoint("LEFT", bf.abilityButtons[3], "RIGHT", 10, 0)
 	bf.SwitchPetButton:SetScript("OnClick", function(self)
-		if bf.PetSelectionFrame:IsShown() then
-			PetBattlePetSelectionFrame_Hide(bf.PetSelectionFrame)
-		else
-			PetBattlePetSelectionFrame_Show(bf.PetSelectionFrame)
-		end
+		if bf.PetSelectionFrame:IsShown() then PetBattlePetSelectionFrame_Hide(bf.PetSelectionFrame) else PetBattlePetSelectionFrame_Show(bf.PetSelectionFrame) end
 	end)
 
 	SkinPetButton(bf.SwitchPetButton)
