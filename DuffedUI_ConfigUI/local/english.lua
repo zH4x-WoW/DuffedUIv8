@@ -38,6 +38,7 @@ DuffedUIConfigUILocalization.unitframesdebuffsize = "Set size of Debuffs on Targ
 DuffedUIConfigUILocalization.unitframesclassbar = "Enable Classbars"
 DuffedUIConfigUILocalization.unitframesattached = "Attach Classbars to Unitframes"
 DuffedUIConfigUILocalization.unitframesoocHide = "Hide Classbars out of Combat"
+DuffedUIConfigUILocalization.unitframesEnableAltMana = "Enable additional Manadisplay for Druids, Priests & Shamans"
 
 --[[Chat]]--
 DuffedUIConfigUILocalization.chat = "Chat"

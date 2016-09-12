@@ -37,6 +37,7 @@ C["unitframes"] = {
 	["classbar"] = true,
 	["attached"] = false,
 	["oocHide"] = true,
+	["EnableAltMana"] = true,
 }
 
 C["chat"] = {

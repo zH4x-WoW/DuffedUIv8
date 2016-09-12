@@ -37,6 +37,7 @@
 	DuffedUIConfigUILocalization.unitframesclassbar = "Aktiviere die Klassenleiste"
 	DuffedUIConfigUILocalization.unitframesattached = "Verbinde die Klassenleiste mit dem Einheitenfenster"
 	DuffedUIConfigUILocalization.unitframesoocHide = "Verstecke die Klassenleiste wenn Du nicht im Kampf bist"
+	DuffedUIConfigUILocalization.unitframesEnableAltMana = "Aktiviere zusätzliche Manaanzeige für Druiden, Priester & Schamanen"
 
 	--[[Chat]]--
 	DuffedUIConfigUILocalization.chat = "Chat"

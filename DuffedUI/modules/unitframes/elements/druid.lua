@@ -13,43 +13,45 @@ if class ~= "DRUID" then return end
 D["ClassRessource"]["DRUID"] = function(self)
 	--[[Energy]]--
 	if not C["unitframes"]["attached"] then D["ConstructEnergy"]("Energy", 216, 5) end
-	
+
 	--[[DruidMana]]--
-	local DruidMana = CreateFrame("StatusBar", nil, self.Health)
-	DruidMana:Size(218, 3)
-	if C["unitframes"]["attached"] then
-		if layout == 1 then
-			DruidMana:Point("TOP", self.Power, "BOTTOM", 0, -5)
-			DruidMana:CreateBackdrop()
-		elseif layout == 2 then
-			DruidMana:Point("BOTTOM", self.Health, "TOP", 0, -3)
-			DruidMana:SetFrameLevel(self.Health:GetFrameLevel() + 2)
-		elseif layout == 3 then
-			DruidMana:Point("CENTER", self.panel, "CENTER", 0, -3)
-			DruidMana:CreateBackdrop()
-		elseif layout == 4 then
-			DruidMana:Point("TOP", self.Health, "BOTTOM", 0, -5)
-			DruidMana:CreateBackdrop()
+	if C["unitframes"]["EnableAltMana"] then
+		local DruidMana = CreateFrame("StatusBar", nil, self.Health)
+		DruidMana:Size(218, 3)
+		if C["unitframes"]["attached"] then
+			if layout == 1 then
+				DruidMana:Point("TOP", self.Power, "BOTTOM", 0, -5)
+				DruidMana:CreateBackdrop()
+			elseif layout == 2 then
+				DruidMana:Point("BOTTOM", self.Health, "TOP", 0, -3)
+				DruidMana:SetFrameLevel(self.Health:GetFrameLevel() + 2)
+			elseif layout == 3 then
+				DruidMana:Point("CENTER", self.panel, "CENTER", 0, -3)
+				DruidMana:CreateBackdrop()
+			elseif layout == 4 then
+				DruidMana:Point("TOP", self.Health, "BOTTOM", 0, -5)
+				DruidMana:CreateBackdrop()
+			end
+		else
+			DruidMana:Point("TOP", Energy, "BOTTOM", 0, -5)
 		end
-	else
-		DruidMana:Point("TOP", Energy, "BOTTOM", 0, -5)
+		DruidMana:SetStatusBarTexture(texture)
+		DruidMana:SetStatusBarColor(.30, .52, .90)
+		DruidMana:SetFrameLevel(self.Health:GetFrameLevel() + 3)
+
+		DruidMana:SetBackdrop(backdrop)
+		DruidMana:SetBackdropColor(0, 0, 0)
+		DruidMana:SetBackdropBorderColor(0, 0, 0)
+
+		DruidMana.bg = DruidMana:CreateTexture(nil, "BORDER")
+		DruidMana.bg:SetAllPoints(DruidMana)
+		DruidMana.bg:SetTexture(.30, .52, .90, .2)
+
+		self.DruidMana = DruidMana
+		self.DruidMana.bg = DruidMana.bg
+		if C["unitframes"]["oocHide"] then D["oocHide"](DruidMana) end
 	end
-	DruidMana:SetStatusBarTexture(texture)
-	DruidMana:SetStatusBarColor(.30, .52, .90)
-	DruidMana:SetFrameLevel(self.Health:GetFrameLevel() + 3)
 
-	DruidMana:SetBackdrop(backdrop)
-	DruidMana:SetBackdropColor(0, 0, 0)
-	DruidMana:SetBackdropBorderColor(0, 0, 0)
-
-	DruidMana.bg = DruidMana:CreateTexture(nil, "BORDER")
-	DruidMana.bg:SetAllPoints(DruidMana)
-	DruidMana.bg:SetTexture(.30, .52, .90, .2)
-
-	self.DruidMana = DruidMana
-	self.DruidMana.bg = DruidMana.bg
-	if C["unitframes"]["oocHide"] then D["oocHide"](DruidMana) end
-	
 	--[[ComboPoints]]--
 	local ComboPoints = CreateFrame("Frame", "ComboPoints", UIParent)
 	ComboPoints:Size(216, 5)
@@ -77,14 +79,14 @@ D["ClassRessource"]["DRUID"] = function(self)
 		if i == 1 then
 			ComboPoints[i]:SetPoint("LEFT", ComboPoints, "LEFT", 0, 0)
 			ComboPoints[i]:Width(216 / 8)
-			
+
 			ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
 			ComboPoints[i].Deeper = 216 / 6
 			ComboPoints[i].None = 216 / 5
 		else
 			ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
 			ComboPoints[i]:Width(216 / 8 - 1)
-			
+
 			ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
 			ComboPoints[i].Deeper = 216 / 6 - 1
 			ComboPoints[i].None = 216 / 5 - 1
@@ -94,7 +96,7 @@ D["ClassRessource"]["DRUID"] = function(self)
 	ComboPoints:CreateBackdrop()
 	ComboPoints:Hide()
 	self.ComboPointsBar = ComboPoints
-	
+
 	--[[Visibility]]--
 	Visibility = CreateFrame("Frame")
 	Visibility:RegisterEvent("PLAYER_LOGIN")
@@ -105,7 +107,7 @@ D["ClassRessource"]["DRUID"] = function(self)
 	Visibility:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	Visibility:SetScript("OnEvent", function()
 		local form = GetShapeshiftFormID()
-		if form == 1 then 
+		if form == 1 then
 			if C["unitframes"]["oocHide"] then D["oocHide"](ComboPoints) else ComboPoints:Show() end
 		else
 			ComboPoints:Hide()

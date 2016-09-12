@@ -36,6 +36,7 @@
 	DuffedUIConfigUILocalization.unitframesdebuffsize = "設定目標框體減益光環大小"
 	DuffedUIConfigUILocalization.unitframesattached = "Attach Classbars to Unitframes"
 	DuffedUIConfigUILocalization.unitframesoocHide = "Hide Classbars out of Combat"
+	DuffedUIConfigUILocalization.unitframesEnableAltMana = "Enable additional Manadisplay for Druids, Priests & Shamans"
 
 	--[[Chat]]--
 	DuffedUIConfigUILocalization.chat = "聊天框體"
