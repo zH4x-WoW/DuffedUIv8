@@ -43,9 +43,7 @@ end
 local function onSetHyperlink(self, link)
     local type, id = string.match(link,"^(%a+):(%d+)")
     if not type or not id then return end
-	if type == "trade" then
-        addLine(self, id, types.spell)
-    elseif type == "talent" then
+	if type == "talent" then
         addLine(self, id, types.talent)
     elseif type == "quest" then
         addLine(self, id, types.quest)
