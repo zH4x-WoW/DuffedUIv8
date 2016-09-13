@@ -32,6 +32,7 @@ local function LoadOrderHallSkin()
 	OrderHallMissionFrame.MissionTab.ZoneSupportMissionPage:StripTextures()
 	OrderHallMissionFrame.MissionTab.ZoneSupportMissionPage.CloseButton:SkinCloseButton()
 	OrderHallMissionFrame.MissionTab.ZoneSupportMissionPage.StartMissionButton:SkinButton()
+	OrderHallMissionFrame.ClassHallIcon:Hide()
 
 	for i = 1, 2 do
 		_G["OrderHallMissionFrameMissionsTab" .. i]:StripTextures()
