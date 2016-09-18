@@ -102,7 +102,7 @@ function AS:Blizzard_Calendar(event, addon)
 
 	CalendarClassButton1:Point("TOPLEFT", CalendarClassButtonContainer, "TOPLEFT", 4, 0)
 
-	for i = 1, 11 do
+	for i = 1, 12 do
 		local Button = _G["CalendarClassButton"..i]
 		AS:StripTextures(Button)
 		AS:SkinButton(Button)
