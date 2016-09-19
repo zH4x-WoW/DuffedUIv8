@@ -3,13 +3,10 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Added quest sorting functionality",
-		"• Added functionality to Shift+Click Artifact traits",
-		"• Added Orderhall-DataText",
-		"• Fixed coords on worldmap",
+		"• Added option to enable / disable AltMana-Display for Priest, Druids & Shaman",
 		"• Update AddOnSkins",
-		"• Update colored borders in bags",
-		"• Removed unnecessary locales",
+		"• Removed ID in tooltip for Tradeskills",
+		"• Update ArtifactUI & Orderhall-Skin",
 		--"• ",
 	" ",
 	"Notes:",
