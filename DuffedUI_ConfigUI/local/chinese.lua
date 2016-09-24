@@ -192,6 +192,8 @@
 	DuffedUIConfigUILocalization.bagsbuttonsize = "设置筛选器(搜索框)大小"
 	DuffedUIConfigUILocalization.bagsBounce = "启用获得新物品跳跃动画"
 	DuffedUIConfigUILocalization.bagsSortingButton = "Enable the sorting button on bags and bank"
+	DuffedUIConfigUILocalization.bagsBagsRtL = "Sort bags right to left"
+	DuffedUIConfigUILocalization.bagsItemsLtR = "Sort items left to right in bags"
 
 	--[[Misc]]--
 	DuffedUIConfigUILocalization.misc = "杂项"

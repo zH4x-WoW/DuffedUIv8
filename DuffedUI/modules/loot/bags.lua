@@ -748,8 +748,8 @@ end
 function Bags:Enable()
 	if not C["bags"]["enable"] then return end
 
-	SetSortBagsRightToLeft(true)
-	SetInsertItemsLeftToRight(true)
+	SetSortBagsRightToLeft(C["bags"]["BagsRtL"])
+	SetInsertItemsLeftToRight(C["bags"]["ItemsLtR"])
 
 	Font = C["media"]["font"]
 	ButtonSize = C["bags"]["buttonsize"]

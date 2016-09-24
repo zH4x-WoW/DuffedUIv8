@@ -3,10 +3,7 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Added option to enable / disable AltMana-Display for Priest, Druids & Shaman",
-		"• Update AddOnSkins",
-		"• Removed ID in tooltip for Tradeskills",
-		"• Update ArtifactUI & Orderhall-Skin",
+		"• Added option change sorting for items & bags",
 		--"• ",
 	" ",
 	"Notes:",
