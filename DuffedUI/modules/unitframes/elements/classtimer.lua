@@ -598,10 +598,10 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(221660), -- Holy Concentration
 			-- Discipline
 			CreateSpellEntry(33206), -- Pain Suppression
-			CreateSpellEntry(81749), -- Atonement
 			CreateSpellEntry(152118), -- Clarity of Will
+			CreateSpellEntry(194384), -- Atonement
 			CreateSpellEntry(196440), -- Purified Resolve
-			CreateSpellEntry(204197), -- Purge the Wicked (should replace Shadow Word: Pain when talented)
+			CreateSpellEntry(204213), -- Purge the Wicked (should replace Shadow Word: Pain when talented)
 			CreateSpellEntry(204263), -- Shining Force
 			CreateSpellEntry(214621), -- Schism
 			CreateSpellEntry(219521), -- Shadow Covenant
@@ -640,8 +640,8 @@ local CLASS_FILTERS = {
 			CreateSpellEntry(33206), -- Pain Suppression
 			CreateSpellEntry(47536), -- Rapture
 			CreateSpellEntry(81700), -- Archangel
-			CreateSpellEntry(81749), -- Atonement			
 			CreateSpellEntry(152118), -- Clarity of Will
+			CreateSpellEntry(194384), -- Atonement
 			CreateSpellEntry(197763), -- Borrowed Time
 			CreateSpellEntry(197871), -- Dark Archangel
 			CreateSpellEntry(198069), -- Power of the Dark Side
