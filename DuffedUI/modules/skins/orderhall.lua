@@ -97,6 +97,19 @@ local function LoadOrderHallSkin()
 	ClassHallTalentInset:StripTextures()
 	OrderHallTalentFrame.Currency:SetFont(C["media"].font, 16)
 	OrderHallTalentFrame.CurrencyIcon:SetAtlas("legionmission-icon-currency", false)
+
+	--[[Scouting Map - Zonechoice]]--
+	AdventureMapQuestChoiceDialog:StripTextures()	
+	AdventureMapQuestChoiceDialog:SetTemplate("Transparent")
+	AdventureMapQuestChoiceDialog.CloseButton:SkinCloseButton()
+	AdventureMapQuestChoiceDialog.Portrait:Hide()
+	AdventureMapQuestChoiceDialog.Details:SetTemplate("Default")
+	AdventureMapQuestChoiceDialog.Details.Child.DescriptionText:SetTextColor(1, 1, 1)
+	AdventureMapQuestChoiceDialog.Details.Child.TitleHeader:SetTextColor(1, 1, 0)
+	AdventureMapQuestChoiceDialog.AcceptButton:StripTextures()
+	AdventureMapQuestChoiceDialog.AcceptButton:SkinButton()
+	AdventureMapQuestChoiceDialog.DeclineButton:StripTextures()
+	AdventureMapQuestChoiceDialog.DeclineButton:SkinButton()
 end
 
 D.SkinFuncs["Blizzard_OrderHallUI"] = LoadOrderHallSkin
