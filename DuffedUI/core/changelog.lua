@@ -4,6 +4,10 @@ local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
 		"• Added option change sorting for items & bags",
+		"• Update Orderhall-Skin",
+		"• Fixed SpellID's for Disciplin Priest",
+		"• Fixed a issue with itemlevel display on tooltip",
+		"• Update LibItemUpgrade",
 		--"• ",
 	" ",
 	"Notes:",
