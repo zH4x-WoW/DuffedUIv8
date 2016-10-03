@@ -1,14 +1,13 @@
 local D, C, L = unpack(select(2, ...))
-if IsAddOnLoaded("AddOnSkins") then return end
+--if IsAddOnLoaded("AddOnSkins") then return end
 
 local function LoadSkin()
-	--FlightMapFrame.ScrollContainer:StripTextures()
-	--FlightMapFrame.ScrollContainer:SetFrameLevel(5)
-	--FlightMapFrame.ScrollContainer:SetFrameStrata("HIGH")
-	--FlightMapFrameTitleText:SetAlpha(0)
-	--FlightMapFrameCloseButton:SkinCloseButton()
-	--FlightMapFrameCloseButton:ClearAllPoints()
-	--FlightMapFrameCloseButton:SetPoint("TOPRIGHT", 0, -20)
+	FlightMapFramePortrait:Kill()
+	FlightMapFramePortraitFrame:Kill()
+	FlightMapFrame:CreateBackdrop("Transparent")
+	FlightMapFrame.BorderFrame:StripTextures()
+
+	FlightMapFrameCloseButton:SkinCloseButton()
 end
 
-tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
+D.SkinFuncs["Blizzard_FlightMap"] = LoadSkin
