@@ -462,15 +462,13 @@ function Bags:SlotUpdate(id, button)
 			end
 			button.Animation:Play()
 		end
-	else
-		if button.Animation and button.Animation:IsPlaying() then button.Animation:Stop() end
 	end
 
 	if IsQuestItem then
 		button:SetBackdropBorderColor(1, 1, 0)
 	elseif ItemLink then
 		local Rarity = select(3, GetItemInfo(ItemLink)) or 0
-		if Rarity > 0 then button:SetBackdropBorderColor(GetItemQualityColor(Rarity)) else button:SetBackdropBorderColor(unpack(C["general"].bordercolor)) end
+		if (Rarity and Rarity > 1) then button:SetBackdropBorderColor(GetItemQualityColor(Rarity)) else button:SetBackdropBorderColor(unpack(C["general"].bordercolor)) end
 	else
 		button:SetBackdropBorderColor(unpack(C["general"].bordercolor))
 	end
@@ -750,8 +748,8 @@ end
 function Bags:Enable()
 	if not C["bags"]["enable"] then return end
 
-	SetSortBagsRightToLeft(true)
-	SetInsertItemsLeftToRight(true)
+	SetSortBagsRightToLeft(C["bags"]["BagsRtL"])
+	SetInsertItemsLeftToRight(C["bags"]["ItemsLtR"])
 
 	Font = C["media"]["font"]
 	ButtonSize = C["bags"]["buttonsize"]

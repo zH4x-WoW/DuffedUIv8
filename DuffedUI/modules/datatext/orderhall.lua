@@ -71,7 +71,6 @@ local function Update(self, event)
 	for i = 1, #Missions do
 		if Missions[i].inProgress then
 			local TimeLeft = Missions[i].timeLeft:match("%d")
-			
 			if (TimeLeft ~= "0") then CountInProgress = CountInProgress + 1 else CountCompleted = CountCompleted + 1 end
 		end
 	end
@@ -87,9 +86,7 @@ if InCombatLockdown() then return end
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
 	
-	if not (C_Garrison_HasGarrison(LE_GARRISON_TYPE_7_0)) then return 
-		GameTooltip:AddLine(L["dt"]["noorderhall"])
-	end	
+	if not (C_Garrison_HasGarrison(LE_GARRISON_TYPE_7_0)) then return GameTooltip:AddLine(L["dt"]["noorderhall"]) end	
 	
 	--[[Loose Work Orders]]--
 	local looseShipments = C_GarrisonGetLooseShipments(LE_GARRISON_TYPE_7_0)	
@@ -97,12 +94,12 @@ if InCombatLockdown() then return end
 		GameTooltip:AddLine(CAPACITANCE_WORK_ORDERS)
 		for i = 1, #looseShipments do
 			local name, _, _, shipmentsReady, shipmentsTotal = C_GarrisonGetLandingPageShipmentInfoByContainerID(looseShipments[i])
-					GameTooltip:AddDoubleLine(name, format(GARRISON_LANDING_SHIPMENT_COUNT, shipmentsReady, shipmentsTotal), 1, 1, 1)
+			GameTooltip:AddDoubleLine(name, format(GARRISON_LANDING_SHIPMENT_COUNT, shipmentsReady, shipmentsTotal), 1, 1, 1)
 		end
 	end
 	
 	--[[Orderhall Missions]]--
-	local inProgressMissions = {};
+	local inProgressMissions = {}
 	C_GarrisonGetInProgressMissions(inProgressMissions, LE_FOLLOWER_TYPE_GARRISON_7_0)
 	local numMissions = #inProgressMissions
 	if(numMissions > 0) then
@@ -137,23 +134,19 @@ if InCombatLockdown() then return end
 	end
 	
 	--[[Talents]]--
-	local talentTrees = C_GarrisonGetTalentTrees(LE_GARRISON_TYPE_7_0, select(3, UnitClass("player")));
+	local talentTrees = C_GarrisonGetTalentTrees(LE_GARRISON_TYPE_7_0, select(3, UnitClass("player")))
 	local hasTalent = false
 	if (followerShipments) then GameTooltip:AddLine(" ") end
 	if (talentTrees) then
 		local completeTalentID = C_GarrisonGetCompleteTalent(LE_GARRISON_TYPE_7_0)
 		for treeIndex, tree in ipairs(talentTrees) do
 			for talentIndex, talent in ipairs(tree) do
-				local showTalent = false;
-				if (talent.isBeingResearched) then
-					showTalent = true;
-				end
-				if (talent.id == completeTalentID) then
-					showTalent = true;
-				end
+				local showTalent = false
+				if (talent.isBeingResearched) then showTalent = true end
+				if (talent.id == completeTalentID) then showTalent = true end
 				if (showTalent) then
 				GameTooltip:AddLine(GARRISON_TALENT_ORDER_ADVANCEMENT)
-				GameTooltip:AddDoubleLine(talent.name, format(GARRISON_LANDING_SHIPMENT_COUNT, talent.isBeingResearched and 0 or 1, 1), 1, 1, 1);
+				GameTooltip:AddDoubleLine(talent.name, format(GARRISON_LANDING_SHIPMENT_COUNT, talent.isBeingResearched and 0 or 1, 1), 1, 1, 1)
 				end
 			end
 		end
@@ -167,14 +160,14 @@ end)
 Stat:SetScript("OnLeave", function() GameTooltip:Hide() end)	
 Stat:SetScript("OnEvent", Update)
 Stat:SetScript("OnMouseDown", function() 
-if not (C_Garrison_HasGarrison(LE_GARRISON_TYPE_7_0)) then return end
+	if not (C_Garrison_HasGarrison(LE_GARRISON_TYPE_7_0)) then return end
 
-	local isShown = GarrisonLandingPage and GarrisonLandingPage:IsShown();
+	local isShown = GarrisonLandingPage and GarrisonLandingPage:IsShown()
 	if (not isShown) then
 		ShowGarrisonLandingPage(LE_GARRISON_TYPE_7_0)
 	elseif (GarrisonLandingPage) then
 		local currentGarrType = GarrisonLandingPage.garrTypeID
-		HideUIPanel(GarrisonLandingPage);
+		HideUIPanel(GarrisonLandingPage)
 		if (currentGarrType ~= LE_GARRISON_TYPE_7_0) then
 			ShowGarrisonLandingPage(LE_GARRISON_TYPE_7_0)
 		end

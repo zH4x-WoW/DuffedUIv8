@@ -119,11 +119,7 @@ end)
 OnEvent:SetScript("OnUpdate", function(self, elapsed)
 	time = time + elapsed
 	if time >= 3 then
-		if InspectFrame and InspectFrame:IsShown() then
-			UpdateButtonsText("Inspect")
-		else
-			UpdateButtonsText("Character")
-		end
+		if InspectFrame and InspectFrame:IsShown() then UpdateButtonsText("Inspect") else UpdateButtonsText("Character") end
 	end
 end)
 
@@ -132,9 +128,7 @@ OnLoad:RegisterEvent("ADDON_LOADED")
 OnLoad:SetScript("OnEvent", function(self, event, addon)
 	if addon == "Blizzard_InspectUI" then
 		CreateButtonsText("Inspect")
-		InspectFrame:HookScript("OnShow", function(self)
-			UpdateButtonsText("Inspect")
-		end)
+		InspectFrame:HookScript("OnShow", function(self) UpdateButtonsText("Inspect") end)
 		OnEvent:RegisterEvent("PLAYER_TARGET_CHANGED")
 		OnEvent:RegisterEvent("INSPECT_READY")
 		self:UnregisterEvent("ADDON_LOADED")

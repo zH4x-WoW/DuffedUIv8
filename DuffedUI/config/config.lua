@@ -37,6 +37,7 @@ C["unitframes"] = {
 	["classbar"] = true,
 	["attached"] = false,
 	["oocHide"] = true,
+	["EnableAltMana"] = true,
 }
 
 C["chat"] = {
@@ -190,6 +191,8 @@ C["bags"] = {
 	["spacing"] = 4,
 	["Bounce"] = true,
 	["SortingButton"] = true,
+	["BagsRtL"] = true,
+	["ItemsLtR"] = true,
 }
 
 C["misc"] = {

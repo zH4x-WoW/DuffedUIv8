@@ -533,6 +533,8 @@ do
 		local isPetHeader = template:match'PetHeader'
 		local name = overrideName or generateName(nil, ...)
 		local header = CreateFrame('Frame', name, oUF_PetBattleFrameHider, template)
+		header:SetSize(50, 50)
+		header:SetPoint("CENTER", -5000, 0)
 
 		header:SetAttribute("template", "oUF_ClickCastUnitTemplate")
 		for i=1, select("#", ...), 2 do

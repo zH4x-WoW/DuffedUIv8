@@ -38,6 +38,7 @@ DuffedUIConfigUILocalization.unitframesdebuffsize = "Set size of Debuffs on Targ
 DuffedUIConfigUILocalization.unitframesclassbar = "Enable Classbars"
 DuffedUIConfigUILocalization.unitframesattached = "Attach Classbars to Unitframes"
 DuffedUIConfigUILocalization.unitframesoocHide = "Hide Classbars out of Combat"
+DuffedUIConfigUILocalization.unitframesEnableAltMana = "Enable additional Manadisplay for Druids, Priests & Shamans"
 
 --[[Chat]]--
 DuffedUIConfigUILocalization.chat = "Chat"
@@ -192,6 +193,8 @@ DuffedUIConfigUILocalization.bagsspacing = "Set spacing betweens bagslots"
 DuffedUIConfigUILocalization.bagsbuttonsize = " Set slotsize"
 DuffedUIConfigUILocalization.bagsBounce = "Enable Pulse Animation for new items"
 DuffedUIConfigUILocalization.bagsSortingButton = "Enable the sorting button on bags and bank"
+DuffedUIConfigUILocalization.bagsBagsRtL = "Sort bags right to left"
+DuffedUIConfigUILocalization.bagsItemsLtR = "Sort items left to right in bags"
 
 --[[Misc]]--
 DuffedUIConfigUILocalization.misc = "Misc"

@@ -3,7 +3,11 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Added quest sorting functionality",
+		"• Added option change sorting for items & bags",
+		"• Update Orderhall-Skin",
+		"• Fixed SpellID's for Disciplin Priest",
+		"• Fixed a issue with itemlevel display on tooltip",
+		"• Update LibItemUpgrade",
 		--"• ",
 	" ",
 	"Notes:",

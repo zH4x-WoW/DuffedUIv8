@@ -37,6 +37,7 @@
 	<Script file="macro.lua" />
 	<Script file="mail.lua" />
 	<Script file="merchant.lua" />
+	<Script file="obliterumforge.lua" />
 	<Script file="opacity.lua" />
 	<Script file="orderhall.lua" />
 	<Script file="others.lua" />

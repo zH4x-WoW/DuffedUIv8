@@ -37,6 +37,7 @@
 	DuffedUIConfigUILocalization.unitframesclassbar = "Aktiviere die Klassenleiste"
 	DuffedUIConfigUILocalization.unitframesattached = "Verbinde die Klassenleiste mit dem Einheitenfenster"
 	DuffedUIConfigUILocalization.unitframesoocHide = "Verstecke die Klassenleiste wenn Du nicht im Kampf bist"
+	DuffedUIConfigUILocalization.unitframesEnableAltMana = "Aktiviere zusätzliche Manaanzeige für Druiden, Priester & Schamanen"
 
 	--[[Chat]]--
 	DuffedUIConfigUILocalization.chat = "Chat"
@@ -192,6 +193,8 @@
 	DuffedUIConfigUILocalization.bagsbuttonsize = "Größe der Taschenplätze"
 	DuffedUIConfigUILocalization.bagsBounce = "Aktiviere Pulseanimation für neue Gegenstände"
 	DuffedUIConfigUILocalization.bagsSortingButton = "Aktiviere den Sortierbutton in den Taschen und der Bank"
+	DuffedUIConfigUILocalization.bagsBagsRtL = "Sortiere die Taschen rechts nach links"
+	DuffedUIConfigUILocalization.bagsItemsLtR = "Sortiere die Gegenstände links nach rechts in den Taschen"
 
 	--[[Misc]]--
 	DuffedUIConfigUILocalization.misc = "Sonstiges"
