@@ -17,7 +17,6 @@
 	<Script file="colorpicker.lua" />
 	<Script file="debugtools.lua" />
 	<Script file="dressup.lua" />
-	<Script file="flightmap.lua" />
 	<Script file="friends.lua" />
 	<Script file="help.lua" />
 	<Script file="inspect.lua" />
