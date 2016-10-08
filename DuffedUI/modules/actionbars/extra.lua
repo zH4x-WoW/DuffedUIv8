@@ -24,4 +24,4 @@ local disableTexture = function(style, texture)
 	if string.sub(texture, 1, 9) == "Interface" or string.sub(texture, 1, 9) == "INTERFACE" then style:SetTexture("") end
 end
 button.style:SetTexture("")
-hooksecurefunc(texture, "SetTexture", disableTexture)
+if not IsAddOnLoaded("AddOnSkins") then hooksecurefunc(texture, "SetTexture", disableTexture) end
