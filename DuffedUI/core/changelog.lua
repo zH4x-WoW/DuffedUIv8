@@ -3,15 +3,12 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Added option change sorting for items & bags",
-		"• Update Orderhall-Skin",
-		"• Fixed SpellID's for Disciplin Priest",
-		"• Fixed a issue with itemlevel display on tooltip",
-		"• Update LibItemUpgrade",
+		"• Fixed a issue with AltPowerBar",
+		"• Set AltPowerBar back to DuffedUI Infopanel Left",
 		--"• ",
 	" ",
 	"Notes:",
-		"• No additional notes.",
+		"• Moving for AltPowerBar currently disabled.",
 }
 
 local function ModifiedString(string)

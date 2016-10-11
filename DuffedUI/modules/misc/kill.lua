@@ -42,6 +42,7 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 	PartyMemberBackground:Kill()
 	TutorialFrameAlertButton:Kill()
 	GuildChallengeAlertFrame:Kill()
+	if D["MyName"] == "Merith" then TalentMicroButtonAlert:Kill() end
 
 	if C["unitframes"].classbar then
 		SetCVar("nameplateShowSelf", 0)
