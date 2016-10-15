@@ -1,7 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
-	WorldStateScoreScrollFrame:StripTextures()
 	WorldStateScoreScrollFrameScrollBar:SkinScrollBar()
 	WorldStateScoreFrame:StripTextures()
 	WorldStateScoreFrameInset:StripTextures()

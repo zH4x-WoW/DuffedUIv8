@@ -2,7 +2,6 @@ local D, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	QuestFrameGreetingPanel:StripTextures()
-	QuestGreetingScrollFrame:StripTextures()
 	QuestFrameGreetingGoodbyeButton:SkinButton(true)
 	QuestGreetingFrameHorizontalBreak:Kill()
 	GreetingText:SetTextColor(1, 1, 1)
