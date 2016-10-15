@@ -253,7 +253,6 @@ local function LoadSkin()
 	end
 
 	LFRBrowseFrameListScrollFrameScrollBar:SkinScrollBar()
-	LFRBrowseFrameListScrollFrame:StripTextures()
 	LFRBrowseFrame:StripTextures()
 	LFRBrowseFrameSendMessageButton:SkinButton()
 	LFRBrowseFrameInviteButton:SkinButton()
@@ -263,7 +262,6 @@ local function LoadSkin()
 	local StripAllTextures = {
 		"LFDQueueFrameSpecific",
 		"LFDQueueFrameRandom",
-		"LFDQueueFrameRandomScrollFrame",
 		"LFDDungeonReadyDialog",
 		"LFGDungeonReadyDialog",
 	}
@@ -314,8 +312,6 @@ local function LoadSkin()
 		_G["LFDQueueFrameSpecificListButton"..i.."EnableButton"]:SkinCheckBox()
 	end
 
-	LFDQueueFrameSpecificListScrollFrame:StripTextures()
-	LFDQueueFrameSpecificListScrollFrame:Height(LFDQueueFrameSpecificListScrollFrame:GetHeight() - 8)
 	LFDQueueFrameTypeDropDown:Point("RIGHT",-10,0)
 	LFDQueueFrameSpecificListScrollFrameScrollBar:SkinScrollBar()
 
@@ -356,15 +352,6 @@ local function LoadSkin()
 	end
 	hooksecurefunc("LFGListCategorySelection_AddButton", SetLabelFontObject)
 
-	LFGListFrame.EntryCreation.Inset:StripTextures()
-	LFGListFrame.EntryCreation.CancelButton:SkinButton(true)
-	LFGListFrame.EntryCreation.ListGroupButton:SkinButton(true)
-	LFGListFrame.EntryCreation.CancelButton:ClearAllPoints()
-	LFGListFrame.EntryCreation.CancelButton:Point("BOTTOMLEFT", -1, 3)
-	LFGListFrame.EntryCreation.ListGroupButton:ClearAllPoints()
-	LFGListFrame.EntryCreation.ListGroupButton:Point("BOTTOMRIGHT", -6, 3)
-	LFGListEntryCreationDescription:SkinEditBox()
-
 	LFGListFrame.EntryCreation.Name:SkinEditBox()
 	LFGListFrame.EntryCreation.ItemLevel.EditBox:SkinEditBox()
 	LFGListFrame.EntryCreation.HonorLevel.EditBox:SkinEditBox()
@@ -388,12 +375,6 @@ local function LoadSkin()
 	LFGListFrame.EntryCreation.ActivityFinder.Dialog.SelectButton:SkinButton()
 	LFGListFrame.EntryCreation.ActivityFinder.Dialog.CancelButton:SkinButton()
 
-	LFGListApplicationDialog:StripTextures()
-	LFGListApplicationDialog:SetTemplate("Transparent")
-	LFGListApplicationDialog.SignUpButton:SkinButton()
-	LFGListApplicationDialog.CancelButton:SkinButton()
-	LFGListApplicationDialogDescription:SkinButton()
-
 	LFGListInviteDialog:SetTemplate("Transparent")
 	LFGListInviteDialog.AcknowledgeButton:SkinButton()
 	LFGListInviteDialog.AcceptButton:SkinButton()
@@ -406,19 +387,6 @@ local function LoadSkin()
 	hooksecurefunc("LFGListInviteDialog_Show", SetRoleIcon)
 
 	LFGListFrame.SearchPanel.SearchBox:SkinEditBox()
-
-	--[[local columns = {
-		['Name'] = true,
-		['Tank'] = true,
-		['Healer'] = true,
-		['Damager'] = true
-	}
-
-	for x, _ in pairs(columns) do
-		LFGListFrame.SearchPanel[x.."ColumnHeader"].Left:Hide()
-		LFGListFrame.SearchPanel[x.."ColumnHeader"].Middle:Hide()
-		LFGListFrame.SearchPanel[x.."ColumnHeader"].Right:Hide()
-	end]]
 
 	LFGListFrame.SearchPanel.BackButton:SkinButton(true)
 	LFGListFrame.SearchPanel.SignUpButton:SkinButton(true)

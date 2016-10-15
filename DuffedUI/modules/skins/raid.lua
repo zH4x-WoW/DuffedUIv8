@@ -13,25 +13,18 @@ local function LoadSkin()
 		"RaidGroup8",
 	}
 
-	for _, object in pairs(groups) do
-		_G[object]:StripTextures()
+	for _, object in pairs(groups) do _G[object]:StripTextures() end
+	
+	for i = 1, 8 do
+		for j = 1, 5 do _G["RaidGroup"..i.."Slot"..j]:StripTextures() end
 	end
 	
-	for i=1,8 do
-		for j=1,5 do
-			_G["RaidGroup"..i.."Slot"..j]:StripTextures()
-		end
-	end
-	
-	for i=1,40 do
+	for i = 1, 40 do
 		_G["RaidGroupButton"..i]:StripTextures()
 		_G["RaidGroupButton"..i]:SkinButton()
 	end
 end
-
 D.SkinFuncs["Blizzard_RaidUI"] = LoadSkin
-
-local D, C, L = unpack(select(2, ...))
 
 local function LoadSecondarySkin()
 	local StripAllTextures = {
@@ -54,23 +47,16 @@ local function LoadSecondarySkin()
 		"RaidFrameNotInRaidRaidBrowserButton",
 	}
 
-	for _, object in pairs(StripAllTextures) do
-		_G[object]:StripTextures()
-	end
-
-	for _, texture in pairs(KillTextures) do
-		_G[texture]:Kill()
-	end
+	for _, object in pairs(StripAllTextures) do _G[object]:StripTextures() end
+	for _, texture in pairs(KillTextures) do _G[texture]:Kill() end
 
 	for i = 1, #buttons do
 		if _G[buttons[i]] then _G[buttons[i]]:SkinButton() end
 	end
-	RaidInfoScrollFrame:StripTextures()
 	RaidInfoFrame:CreateBackdrop("Transparent")
 	RaidInfoFrame.backdrop:Point( "TOPLEFT", RaidInfoFrame, "TOPLEFT")
 	RaidInfoFrame.backdrop:Point( "BOTTOMRIGHT", RaidInfoFrame, "BOTTOMRIGHT")
 	RaidInfoCloseButton:SkinCloseButton(RaidInfoFrame)
 	RaidInfoScrollFrameScrollBar:SkinScrollBar()
 end
-
 tinsert(D.SkinFuncs["DuffedUI"], LoadSecondarySkin)
