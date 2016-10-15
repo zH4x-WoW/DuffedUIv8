@@ -28,12 +28,10 @@ local function LoadSkin()
 	local StripAllTextures = {
 		"FriendsListFrame",
 		"FriendsTabHeader",
-		"FriendsFrameFriendsScrollFrame",
 		"WhoFrameColumnHeader1",
 		"WhoFrameColumnHeader2",
 		"WhoFrameColumnHeader3",
 		"WhoFrameColumnHeader4",
-		"ChannelListScrollFrame",
 		"ChannelRoster",
 		"FriendsFramePendingButton1",
 		"FriendsFramePendingButton2",
@@ -83,14 +81,6 @@ local function LoadSkin()
 		"ChannelFrameNewButton",
 		"FriendsFrameIgnorePlayerButton",
 		"FriendsFrameUnsquelchButton",
-		"FriendsFramePendingButton1AcceptButton",
-		"FriendsFramePendingButton1DeclineButton",
-		"FriendsFramePendingButton2AcceptButton",
-		"FriendsFramePendingButton2DeclineButton",
-		"FriendsFramePendingButton3AcceptButton",
-		"FriendsFramePendingButton3DeclineButton",
-		"FriendsFramePendingButton4AcceptButton",
-		"FriendsFramePendingButton4DeclineButton",
 		"ChannelFrameDaughterFrameOkayButton",
 		"ChannelFrameDaughterFrameCancelButton",
 		"AddFriendEntryFrameAcceptButton",
@@ -132,23 +122,14 @@ local function LoadSkin()
 	AddFriendNameEditBox:SkinEditBox()
 	AddFriendFrame:SetTemplate("Transparent")
 
-	--[[Who Frame]]--
-	local function UpdateWhoSkins() WhoListScrollFrame:StripTextures() end
-
 	--[[Channel Frame]]--
-	local function UpdateChannel() ChannelRosterScrollFrame:StripTextures() end
+	QuickJoinFrame.JoinQueueButton:StripTextures()
+	QuickJoinFrame.JoinQueueButton:SkinButton()
 
 	--[[BNet Frame]]--
 	FriendsFrameBroadcastInput:CreateBackdrop("Default")
 	ChannelFrameDaughterFrameChannelName:CreateBackdrop("Default")
 	ChannelFrameDaughterFrameChannelPassword:CreateBackdrop("Default")
-
-	ChannelFrame:HookScript("OnShow", UpdateChannel)
-	hooksecurefunc("FriendsFrame_OnEvent", UpdateChannel)
-
-	WhoFrame:HookScript("OnShow", UpdateWhoSkins)
-	hooksecurefunc("FriendsFrame_OnEvent", UpdateWhoSkins)
-
 	ChannelFrameDaughterFrame:CreateBackdrop("Default")
 
 	ChannelFrameDaughterFrameDetailCloseButton:SkinCloseButton(ChannelFrameDaughterFrame)
@@ -224,10 +205,10 @@ local function LoadSkin()
 	FriendsFrameBattlenetFrame.BroadcastButton:SetAllPoints(FriendsFrameBattlenetFrame)
 	FriendsFrameBattlenetFrame.BroadcastFrame:StripTextures()
 	FriendsFrameBattlenetFrame.BroadcastFrame:SetTemplate()
-	FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame:StripTextures()
+	--[[FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame:StripTextures()
 	FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame:SetTemplate()
 	FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.CancelButton:SkinButton()
-	FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.UpdateButton:SkinButton()
+	FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.UpdateButton:SkinButton()]]--
 	BattleTagInviteFrame:StripTextures()
 	BattleTagInviteFrame:SetTemplate()
 	for i = 1, BattleTagInviteFrame:GetNumChildren() do
