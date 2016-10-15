@@ -49,7 +49,6 @@ local function LoadSkin()
 		"CharacterStatsPane",
 		"CharacterFrameInsetRight",
 		"PaperDollSidebarTabs",
-		"PaperDollEquipmentManagerPane",
 	}
 
 	ReputationDetailCloseButton:SkinCloseButton()
@@ -155,7 +154,6 @@ local function LoadSkin()
 		GearManagerDialogPopup:StripTextures()
 		GearManagerDialogPopup:SetTemplate("Transparent")
 		GearManagerDialogPopup:Point("LEFT", PaperDollFrame, "RIGHT", 4, 0)
-		GearManagerDialogPopupScrollFrame:StripTextures()
 		GearManagerDialogPopupEditBox:StripTextures()
 		GearManagerDialogPopupEditBox:SetTemplate("Default")
 		GearManagerDialogPopupOkay:SkinButton()
@@ -215,7 +213,6 @@ local function LoadSkin()
 
 	--[[Reputation]]--
 	local function UpdateFactionSkins()
-		ReputationListScrollFrame:StripTextures()
 		ReputationFrame:StripTextures(true)
 		for i = 1, GetNumFactions() do
 			local statusbar = _G["ReputationBar" .. i .. "ReputationBar"]
@@ -259,18 +256,6 @@ local function LoadSkin()
 		TokenFramePopup:SetTemplate("Transparent")
 		TokenFramePopup:Point("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)
 	end)
-
-	--[[Pet]]--
-	--[[PetModelFrame:CreateBackdrop("Default")
-	PetModelFrameRotateRightButton:SkinRotateButton()
-	PetModelFrameRotateLeftButton:SkinRotateButton()
-	PetModelFrameRotateRightButton:ClearAllPoints()
-	PetModelFrameRotateRightButton:Point("LEFT", PetModelFrameRotateLeftButton, "RIGHT", 4, 0)
-
-	local xtex = PetPaperDollPetInfo:GetRegions()
-	xtex:SetTexCoord(.12, .63, .15, .55)
-	PetPaperDollPetInfo:CreateBackdrop("Default")
-	PetPaperDollPetInfo:Size(24, 24)]]--
 end
 
 tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
