@@ -184,8 +184,7 @@ local function CreateBackdrop(f, t, tex)
 	if not t then t = "Default" end
 
 	local b = CreateFrame("Frame", nil, f)
-	b:Point("TOPLEFT", -2 + inset, 2 - inset)
-	b:Point("BOTTOMRIGHT", 2 - inset, -2 + inset)
+	b:SetOutside()
 	b:SetTemplate(t, tex)
 
 	if f:GetFrameLevel() - 1 >= 0 then b:SetFrameLevel(f:GetFrameLevel() - 1) else b:SetFrameLevel(0) end
