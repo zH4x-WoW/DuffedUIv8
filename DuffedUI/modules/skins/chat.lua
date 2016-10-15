@@ -6,7 +6,6 @@ local function LoadSkin()
 		"ChatConfigCategoryFrame",
 		"ChatConfigBackgroundFrame",
 		"ChatConfigCombatSettingsFilters",
-		"ChatConfigCombatSettingsFiltersScrollFrame",
 		"CombatConfigColorsHighlighting",
 		"CombatConfigColorsColorizeUnitName",
 		"CombatConfigColorsColorizeSpellNames",
@@ -156,7 +155,7 @@ local function LoadSkin()
 
 	local ccbuttons = {
 		"ChatConfigFrameOkayButton",
-		"ChatConfigFrameDefaultButton",
+		"ChatConfigFrameRedockButton",
 		"CombatLogDefaultButton",
 		"ChatConfigCombatSettingsFiltersDeleteButton",
 		"ChatConfigCombatSettingsFiltersAddFilterButton",
@@ -171,7 +170,7 @@ local function LoadSkin()
 		end
 	end
 	ChatConfigFrameOkayButton:SetPoint("TOPRIGHT",ChatConfigBackgroundFrame,"BOTTOMRIGHT",-3,-5)
-	ChatConfigFrameDefaultButton:SetPoint("TOPLEFT",ChatConfigCategoryFrame,"BOTTOMLEFT",1,-5)
+	ChatConfigFrameRedockButton:SetPoint("TOPLEFT",ChatConfigCategoryFrame,"BOTTOMLEFT",1,-5)
 	CombatLogDefaultButton:SetPoint("TOPLEFT",ChatConfigCategoryFrame,"BOTTOMLEFT",1,-5)
 	ChatConfigCombatSettingsFiltersDeleteButton:SetPoint("TOPRIGHT",ChatConfigCombatSettingsFilters,"BOTTOMRIGHT",-3,-1)
 	ChatConfigCombatSettingsFiltersCopyFilterButton:SetPoint("RIGHT",ChatConfigCombatSettingsFiltersDeleteButton,"LEFT",-2,0)

@@ -40,7 +40,6 @@ local function AddMessage(frame, str, ...)
 	return origs[frame](frame, str, ...)
 end
 
-FriendsMicroButton:Kill()
 ChatFrameMenuButton:Kill()
 
 local function UpdateEditBoxColor(self)
