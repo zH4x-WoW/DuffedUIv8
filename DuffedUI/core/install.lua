@@ -128,7 +128,7 @@ local function cvarsetup()
 	SetCVar("NamePlateVerticalScale", 1)
 	SetCVar("NamePlateHorizontalScale", 1)
 	SetCVar("nameplateMaxDistance", 43)
-	SetCVar("TargetPriorityAllowAnyOnScreen", 0)
+	--SetCVar("TargetPriorityAllowAnyOnScreen", 0)
 	SetCVar("Targetnearestuseold", 1)
 end
 
