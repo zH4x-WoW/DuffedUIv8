@@ -105,18 +105,16 @@ local function Timer_Create(self)
 end
 
 local function Timer_Start(self, start, duration, charges, maxCharges)
-	if self.noOCC then return end
+	local remainingCharges = charges or 0
 
-	if start > 0 and duration > D.SetDefaultActionButtonCooldownMinDuration then
+	if self:GetName() and string.find(self:GetName(), "ChargeCooldown") then return end
+	if start > 0 and duration > D.SetDefaultActionButtonCooldownMinDuration and remainingCharges == 0 and (not self.noOCC) then
 		local timer = self.timer or Timer_Create(self)
-		local num = charges or 0
 		timer.start = start
 		timer.duration = duration
-		timer.charges = num
-		timer.maxCharges = maxCharges
 		timer.enabled = true
 		timer.nextUpdate = 0
-		if timer.fontScale >= D.SetDefaultActionButtonCooldownMinScale and timer.charges < 1 then timer:Show() end
+		if timer.fontScale >= D.SetDefaultActionButtonCooldownMinScale then timer:Show() end
 	else
 		local timer = self.timer
 		if timer then Timer_Stop(timer) end
