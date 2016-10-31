@@ -70,7 +70,6 @@ function WorldMap:Skin()
 	local StoryTooltip = QuestScrollFrame.StoryTooltip
 	local TrackingMenuButton = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button
 	local TrackingMenuBackground = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Background
-	local DetailsScroll = QuestMapDetailsScrollFrame
 
 	Map:StripTextures()
 	Map:CreateBackdrop()
@@ -86,7 +85,6 @@ function WorldMap:Skin()
 	WorldMapLevelDropDown:StripTextures()
 	WorldMapLevelDropDown:ClearAllPoints()
 	WorldMapLevelDropDown:SetPoint("TOPLEFT", Map.Header, -17, 1)
-	WorldMapTooltip.BackdropFrame:SetTemplate("Transparent")
 
 	QuestMapFrame.DetailsFrame:StripTextures()
 	QuestMapFrame.DetailsFrame.RewardsFrame:StripTextures()
@@ -94,6 +92,7 @@ function WorldMap:Skin()
 	QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:StripTextures()
 	QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:SkinButton()
 	QuestScrollFrame.Contents.StoryHeader:StripTextures()
+	QuestScrollFrame.Contents.StoryHeader:SetTemplate("Transparent")
 	QuestMapFrame:StripTextures()
 
 	StoryTooltip:StripTextures()
@@ -105,19 +104,14 @@ function WorldMap:Skin()
 	TrackingMenuButton:SetAlpha(0)
 	TrackingMenuBackground:SetAlpha(0)
 
-	QuestScroll:CreateBackdrop()
-	QuestScroll.backdrop:ClearAllPoints()
-	QuestScroll.backdrop:SetTemplate("Transparent")
-	QuestScroll.backdrop:Size(299, 470)
-	QuestScroll.backdrop:SetPoint("LEFT", Map.backdrop, "RIGHT", 2, 0)
 	QuestScrollFrameScrollBar:SkinScrollBar()
 
-	DetailsScroll:CreateBackdrop()
-	DetailsScroll.backdrop:SetAllPoints(QuestScroll.backdrop)
-	DetailsScroll.backdrop:SetTemplate("Transparent")
-	DetailsScroll.backdrop:ClearAllPoints()
-	DetailsScroll.backdrop:Size(299, 470)
-	DetailsScroll.backdrop:SetPoint("LEFT", Map.backdrop, "RIGHT", 2, 0)
+	QuestMapFrame.DetailsFrame:CreateBackdrop()
+	QuestMapFrame.DetailsFrame.backdrop:SetAllPoints(QuestScroll.backdrop)
+	QuestMapFrame.DetailsFrame.backdrop:SetTemplate("Transparent")
+	QuestMapFrame.DetailsFrame.backdrop:ClearAllPoints()
+	QuestMapFrame.DetailsFrame.backdrop:Size(299, 470)
+	QuestMapFrame.DetailsFrame.backdrop:SetPoint("LEFT", Map.backdrop, "RIGHT", 2, 0)
 	QuestMapDetailsScrollFrameScrollBar:SkinScrollBar()
 
 	BackButton:SkinButton()
@@ -127,7 +121,7 @@ function WorldMap:Skin()
 	AbandonButton:StripTextures()
 	AbandonButton:SkinButton()
 	AbandonButton:ClearAllPoints()
-	AbandonButton:SetPoint("BOTTOMLEFT", QuestScroll.backdrop, "BOTTOMLEFT", 3, 3)
+	AbandonButton:SetPoint("BOTTOMLEFT", QuestMapFrame.DetailsFrame.backdrop, "BOTTOMLEFT", 3, 3)
 	ShareButton:StripTextures()
 	ShareButton:SkinButton()
 	TrackButton:StripTextures()
@@ -206,11 +200,13 @@ function WorldMap:Coords()
 	WorldMapFrame:HookScript("OnUpdate", function(self, elapsed)
 		int = int + 1
 		if int >= 3 then
-			local inInstance, _ = IsInInstance()
-			local x, y = GetPlayerMapPosition("player")
-			x = math.floor(100 * x)
-			y = math.floor(100 * y)
-			if x ~= 0 and y ~= 0 then coords.PlayerText:SetText(PLAYER..":   "..x..", "..y) else coords.PlayerText:SetText(" ") end
+			local inInstance, raid = IsInInstance()
+			if not raid then
+				local x, y = GetPlayerMapPosition("player")
+				x = math.floor(100 * x)
+				y = math.floor(100 * y)
+				if x ~= 0 and y ~= 0 then coords.PlayerText:SetText(PLAYER..":   "..x..", "..y) else coords.PlayerText:SetText(" ") end
+			end
 
 			local scale = WorldMapDetailFrame:GetEffectiveScale()
 			local width = WorldMapDetailFrame:GetWidth()

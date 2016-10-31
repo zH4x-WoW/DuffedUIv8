@@ -3,15 +3,11 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Added option change sorting for items & bags",
-		"• Update Orderhall-Skin",
-		"• Fixed SpellID's for Disciplin Priest",
-		"• Fixed a issue with itemlevel display on tooltip",
-		"• Update LibItemUpgrade",
+		"• Functional update for changes in 7.1",
 		--"• ",
 	" ",
 	"Notes:",
-		"• No additional notes.",
+		"• Last version for a long time. If anyone want to takeover the project\nplease send me a PM on wowinterface.",
 }
 
 local function ModifiedString(string)

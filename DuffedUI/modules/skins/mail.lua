@@ -38,9 +38,6 @@ local function LoadSkin()
 	MailFrameTab2:SkinTab()
 
 	-- send mail
-	SendMailScrollFrame:StripTextures(true)
-	SendMailScrollFrame:SetTemplate("Default")
-
 	SendMailScrollFrameScrollBar:SkinScrollBar()
 
 	SendMailNameEditBox:SkinEditBox()
@@ -88,9 +85,6 @@ local function LoadSkin()
 	OpenMailReplyButton:SkinButton()
 	OpenMailDeleteButton:SkinButton()
 	OpenMailCancelButton:SkinButton()
-
-	OpenMailScrollFrame:StripTextures(true)
-	OpenMailScrollFrame:SetTemplate("Default")
 
 	OpenMailScrollFrameScrollBar:SkinScrollBar()
 

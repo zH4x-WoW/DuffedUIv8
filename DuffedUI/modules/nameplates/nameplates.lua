@@ -313,7 +313,7 @@ function nameplates:enable()
 
 	NamePlateDriverFrame.UpdateNamePlateOptions = function() end
 	InterfaceOptionsNamesPanelUnitNameplatesMakeLarger:Hide()
-	C_NamePlate.SetNamePlateOtherSize(npwidth, 45)
+	--C_NamePlate.SetNamePlateOtherSize(npwidth, 45)
 end
 
 nameplates:RegisterEvent("PLAYER_ENTERING_WORLD")

@@ -95,7 +95,6 @@ if not IsAddOnLoaded("AddOnSkins") then
 		PetJournalFilterButton:SkinButton()
 		PetJournalFilterButton:ClearAllPoints()
 		PetJournalFilterButton:Point("LEFT", PetJournalSearchBox, "RIGHT", 5, 0)
-		PetJournalListScrollFrame:StripTextures()
 		PetJournalListScrollFrameScrollBar:SkinScrollBar()
 
 		for i = 1, #PetJournal.listScroll.buttons do

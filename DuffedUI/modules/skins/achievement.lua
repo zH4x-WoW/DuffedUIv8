@@ -42,12 +42,6 @@ local function LoadSkin()
 	AchievementFrameHeaderPoints:Point("LEFT", AchievementFrameHeaderTitle, "RIGHT", 2, 0)
 
 	--Backdrops
-	AchievementFrameCategoriesContainer:CreateBackdrop("Default")
-	AchievementFrameCategoriesContainer.backdrop:Point("TOPLEFT", 0, 4)
-	AchievementFrameCategoriesContainer.backdrop:Point("BOTTOMRIGHT", -2, -3)
-	AchievementFrameAchievementsContainer:CreateBackdrop("Default")
-	AchievementFrameAchievementsContainer.backdrop:Point("TOPLEFT", 0, 2)
-	AchievementFrameAchievementsContainer.backdrop:Point("BOTTOMRIGHT", -3, -3)
 	AchievementFrameCloseButton:SkinCloseButton(AchievementFrame.backdrop)
 	AchievementFrameFilterDropDown:SkinDropDownBox()
 	AchievementFrameFilterDropDown:ClearAllPoints()

@@ -62,25 +62,7 @@ local function LoadSkin()
 	EncounterJournalEncounterFrameInfoResetButtonTexture:SetTexture("Interface\\EncounterJournal\\UI-EncounterJournalTextures")
 	EncounterJournalEncounterFrameInfoResetButtonTexture:SetTexCoord(0.90625000, 0.94726563, 0.00097656, 0.02050781)
 
-	EncounterInfo.bossesScroll:CreateBackdrop("Transparent")
-	EncounterInfo.bossesScroll.backdrop:Point("TOPLEFT", EncounterInfo.bossesScroll, "TOPLEFT", -25, 1)
 	EncounterInfo.bossesScroll.ScrollBar:SkinScrollBar(4)
-
-	local scrollFrames = {
-		EncounterInfo.overviewScroll,
-		EncounterInfo.lootScroll,
-		EncounterInfo.detailsScroll,
-	}
-
-	for _, scrollFrame in pairs(scrollFrames) do
-		scrollFrame:CreateBackdrop("Transparent")
-		scrollFrame:Height(EncounterInfo.overviewScroll:GetHeight() - 2)
-		scrollFrame:Width(370)
-		scrollFrame:ClearAllPoints()
-		scrollFrame:Point("BOTTOMRIGHT", EncounterJournalEncounterFrame, "BOTTOMRIGHT", -1, 5)
-		scrollFrame.backdrop:Point("TOPLEFT", EncounterInfo.bossesScroll.backdrop, "TOPRIGHT", 5, 0)
-		scrollFrame.backdrop:Point("BOTTOMLEFT", EncounterInfo.bossesScroll.backdrop, "BOTTOMRIGHT", 5, 0)
-	end
 
 	EncounterInfo.overviewScroll.ScrollBar:SkinScrollBar(4)
 	EncounterInfo.detailsScroll.ScrollBar:SkinScrollBar(4)

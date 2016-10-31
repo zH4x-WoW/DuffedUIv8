@@ -151,11 +151,13 @@ local int = 0
 m_coord:HookScript("OnUpdate", function(self, elapsed)
 	int = int + 1
 	if int >= 3 then
-		local inInstance, _ = IsInInstance()
-		local x, y = GetPlayerMapPosition("player")
-		x = math.floor(100 * x)
-		y = math.floor(100 * y)
-		if x ~= 0 and y ~= 0 then m_coord_text:SetText(x .. " - " .. y) else m_coord_text:SetText("x - x") end
+		local inInstance, raid = IsInInstance()
+		if not raid then
+			local x, y = GetPlayerMapPosition("player")
+			x = math.floor(100 * x)
+			y = math.floor(100 * y)
+			if x ~= 0 and y ~= 0 then m_coord_text:SetText(x .. " - " .. y) else m_coord_text:SetText("x - x") end
+		end
 		int = 0
 	end
 end)
