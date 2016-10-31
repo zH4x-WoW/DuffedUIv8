@@ -556,8 +556,8 @@ function CreateDuffedUIConfigUI()
 	cf:Point("TOP", DuffedUIConfigUI, "BOTTOM", 0, -13)
 
 	local sf = CreateFrame("ScrollFrame", nil, DuffedUIConfigUI)
-	sf:Size(770, 22)
-	sf:Point("CENTER", cf, 0, 0)
+	sf:SetSize(770, 22)
+	sf:SetPoint("CENTER", cf, 0, 0)
 
 	local scroll = CreateFrame("Frame", nil, sf)
 	scroll:Size(770, 22)
@@ -589,8 +589,8 @@ function CreateDuffedUIConfigUI()
 	cf2:Point("TOP", DuffedUIConfigUI, "BOTTOM", 0, -38)
 
 	local sf2 = CreateFrame("ScrollFrame", nil, DuffedUIConfigUI)
-	sf2:Size(766, 22)
-	sf2:Point("CENTER", cf2, 0, 0)
+	sf2:SetSize(766, 22)
+	sf2:SetPoint("CENTER", cf2, 0, 0)
 
 	local scroll2 = CreateFrame("Frame", nil, sf2)
 	scroll2:Size(766, 22)
@@ -622,8 +622,8 @@ function CreateDuffedUIConfigUI()
 	cf3:Point("TOP", DuffedUIConfigUI, "BOTTOM", 0, -63)
 
 	local sf3 = CreateFrame("ScrollFrame", nil, DuffedUIConfigUI)
-	sf3:Size(766, 22)
-	sf3:Point("CENTER", cf3, 0, 0)
+	sf3:SetSize(766, 22)
+	sf3:SetPoint("CENTER", cf3, 0, 0)
 
 	local scroll3 = CreateFrame("Frame", nil, sf3)
 	scroll3:Size(766, 22)

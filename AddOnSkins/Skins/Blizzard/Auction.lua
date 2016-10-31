@@ -6,7 +6,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	AS:SkinFrame(AuctionFrame, nil, nil, true)
 	AS:SkinCloseButton(AuctionFrameCloseButton)
 	AuctionFrameCloseButton:SetPoint('TOPRIGHT', '$parent', 'TOPRIGHT', 2, 2)
-	AS:CreateShadow(AuctionFrame)
+	--AS:CreateShadow(AuctionFrame)
 
 	AS:SkinCheckBox(ExactMatchCheckButton)
 	AS:SkinCheckBox(IsUsableCheckButton)
@@ -28,7 +28,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	BrowseNextPageButton:Size(20)
 	BrowseNextPageButton:SetPoint('TOPRIGHT', "$parent", "TOPRIGHT", 67, -60)
 	BrowseBuyoutButton:Point("RIGHT", BrowseCloseButton, "LEFT", -4, 0)
-	BrowseBidButton:Point("RIGHT", BrowseBuyoutButton, "LEFT", -4, 0)
+	BrowseBidButton:Point("RIGHT", BrowseBuyoutButton, "LEFT", -4, 0)		
 	AS:SkinEditBox(BrowseName)
 	AS:SkinEditBox(BrowseMinLevel)
 	AS:SkinEditBox(BrowseMaxLevel)
@@ -43,14 +43,14 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	AuctionFrameBrowse.LeftBackground:SetFrameLevel(AuctionFrameBrowse:GetFrameLevel())
 	AuctionFrameBrowse.LeftBackground:Point("TOPLEFT", 20, -103)
 	AuctionFrameBrowse.LeftBackground:Point("BOTTOMRIGHT", -575, 40)
-	BrowseFilterScrollFrame:Height(300)
+	BrowseFilterScrollFrame:SetHeight(300)
 
 	AuctionFrameBrowse.RightBackground = CreateFrame("Frame", nil, AuctionFrameBrowse)
 	AS:SkinFrame(AuctionFrameBrowse.RightBackground)
 	AuctionFrameBrowse.RightBackground:SetFrameLevel(AuctionFrameBrowse:GetFrameLevel())
 	AuctionFrameBrowse.RightBackground:Point("TOPLEFT", AuctionFrameBrowse.LeftBackground, "TOPRIGHT", 4, 0)
 	AuctionFrameBrowse.RightBackground:Point("BOTTOMRIGHT", AuctionFrame, "BOTTOMRIGHT", -8, 40)
-	BrowseScrollFrame:Height(300)
+	BrowseScrollFrame:SetHeight(300)
 
 	AS:SkinButton(BidBidButton, true)
 	AS:SkinButton(BidBuyoutButton, true)
@@ -66,7 +66,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	AS:SkinFrame(AuctionFrameBid.Background)
 	AuctionFrameBid.Background:Point("TOPLEFT", 22, -72)
 	AuctionFrameBid.Background:Point("BOTTOMRIGHT", 66, 39)
-	BidScrollFrame:Height(332)
+	BidScrollFrame:SetHeight(332)
 
 	AS:StripTextures(AuctionsScrollFrame)
 	AS:SkinScrollBar(AuctionsScrollFrameScrollBar)
@@ -114,7 +114,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	AuctionFrameAuctions.RightBackground:Point("TOPLEFT", AuctionFrameAuctions.LeftBackground, "TOPRIGHT", 3, 0)
 	AuctionFrameAuctions.RightBackground:Point("BOTTOMRIGHT", AuctionFrame, -8, 35)
 	AuctionFrameAuctions.RightBackground:SetFrameLevel(AuctionFrameAuctions:GetFrameLevel())
-	AuctionsScrollFrame:Height(336)
+	AuctionsScrollFrame:SetHeight(336)
 
 	AS:SkinFrame(SideDressUpFrame, nil, nil, true)
 	AuctionFrame:HookScript('OnShow', function(self)
@@ -124,7 +124,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	AS:SkinCloseButton(SideDressUpModelCloseButton)
 
 	AS:SkinFrame(AuctionProgressFrame)
-	AS:CreateShadow(AuctionProgressFrame)
+	--AS:CreateShadow(AuctionProgressFrame)
 	AS:StyleButton(AuctionProgressFrameCancelButton)
 	AS:SetTemplate(AuctionProgressFrameCancelButton, 'Default')
 	AuctionProgressFrameCancelButton:SetHitRectInsets(0, 0, 0, 0)
@@ -143,7 +143,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 
 	AuctionProgressBarText:ClearAllPoints()
 	AuctionProgressBarText:SetPoint("CENTER")
-]]--
+]]
 	AS:SkinStatusBar(AuctionProgressBar, true)
 	AuctionProgressBar:SetHeight(24)
 
@@ -172,7 +172,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	end
 
 	AuctionFrameTab1:Point("TOPLEFT", AuctionFrame, "BOTTOMLEFT", -5, 2)
-
+	
 	for i = 1, AuctionFrame.numTabs do
 		AS:SkinTab(_G["AuctionFrameTab"..i])
 	end
@@ -214,7 +214,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 		Button:GetHighlightTexture():SetPoint("BOTTOMRIGHT", Button, "BOTTOMRIGHT", -2, 5)
 		Button:GetPushedTexture():SetAllPoints(Button:GetHighlightTexture())
 	end
-
+	
 	for i = 1, NUM_AUCTIONS_TO_DISPLAY do
 		local Button = _G["AuctionsButton"..i]
 		local Icon = _G["AuctionsButton"..i.."Item"]
@@ -242,7 +242,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 		Button:GetHighlightTexture():SetPoint("BOTTOMRIGHT", Button, "BOTTOMRIGHT", -2, 5)
 		Button:GetPushedTexture():SetAllPoints(Button:GetHighlightTexture())
 	end
-
+	
 	for i = 1, NUM_BIDS_TO_DISPLAY do
 		local Button = _G["BidButton"..i]
 		local Icon = _G["BidButton"..i.."Item"]
@@ -292,11 +292,11 @@ function AS:Blizzard_BlackMarket(event, addon)
 	BlackMarketMoneyFrame:SetPoint("BOTTOMRIGHT", BlackMarketFrame.MoneyFrameBorder, "BOTTOMRIGHT", 8, 12)
 	AS:SkinEditBox(BlackMarketBidPriceGold)
 	BlackMarketBidPriceGold.Backdrop:SetAllPoints()
-	BlackMarketBidPriceGold:Height(16)
+	BlackMarketBidPriceGold:SetHeight(16)
 	BlackMarketBidPriceGold:SetPoint("BOTTOMRIGHT", BlackMarketFrame.BidButton, "BOTTOMLEFT", -3, 0)
 
 	AS:SkinButton(BlackMarketFrame.BidButton)
-	BlackMarketFrame.BidButton:Height(20)
+	BlackMarketFrame.BidButton:SetHeight(20)
 	BlackMarketFrame.BidButton:SetPoint("BOTTOMRIGHT", -285, 12)
 
 	AS:SkinCloseButton(BlackMarketFrame.CloseButton)
@@ -330,7 +330,7 @@ function AS:Blizzard_BlackMarket(event, addon)
 	for _, Tab in pairs(Tabs) do
 		AS:SkinTab(BlackMarketFrame[Tab])
 		BlackMarketFrame[Tab].Backdrop:Point("TOPLEFT", BlackMarketFrame[Tab], 3, 0)
-		BlackMarketFrame[Tab].Backdrop:Point("BOTTOMRIGHT", BlackMarketFrame[Tab], -3, 0)
+		BlackMarketFrame[Tab].Backdrop:Point("BOTTOMRIGHT", BlackMarketFrame[Tab], -3, 0)	
 	end
 
 	hooksecurefunc("BlackMarketScrollFrame_Update", function()

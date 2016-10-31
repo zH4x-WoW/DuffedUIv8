@@ -20,9 +20,10 @@ function AS:Blizzard_Quest()
 	AS:SkinScrollBar(QuestRewardScrollFrameScrollBar)
 
 	AS:SkinButton(QuestFrameAcceptButton, true)
-	AS:SkinButton(QuestFrameDeclineButton, true)
 	AS:SkinButton(QuestFrameDetailPanel.IgnoreButton, true)
+	AS:SkinButton(QuestFrameProgressPanel.IgnoreButton, true)
 	AS:SkinButton(QuestFrameDetailPanel.UnignoreButton, true)
+	AS:SkinButton(QuestFrameDeclineButton, true)
 	AS:SkinButton(QuestFrameCompleteButton, true)
 	AS:SkinButton(QuestFrameGoodbyeButton, true)
 	AS:SkinButton(QuestFrameGreetingGoodbyeButton, true)
@@ -180,7 +181,15 @@ function AS:Blizzard_Quest()
 			QuestInfoRewardText:SetTextColor(1, 1, 1)
 			QuestInfoRewardsFrame.ItemChooseText:SetTextColor(1, 1, 1);
 			QuestInfoRewardsFrame.ItemReceiveText:SetTextColor(1, 1, 1);
-			--QuestInfoRewardsFrame.SpellLearnText:SetTextColor(1, 1, 1);
+
+			QuestInfoQuestType:SetTextColor(1, 1, 1)
+
+			if QuestInfoRewardsFrame.SpellLearnText then
+				QuestInfoRewardsFrame.SpellLearnText:SetTextColor(1, 1, 1);
+			end
+
+			QuestInfoRewardsFrame.spellHeaderPool.textR, QuestInfoRewardsFrame.spellHeaderPool.textG, QuestInfoRewardsFrame.spellHeaderPool.textB = 1, 1, 1
+
 			QuestInfoRewardsFrame.PlayerTitleText:SetTextColor(1, 1, 1);
 			QuestInfoRewardsFrame.XPFrame.ReceiveText:SetTextColor(1, 1, 1);
 			local numObjectives = GetNumQuestLeaderBoards()

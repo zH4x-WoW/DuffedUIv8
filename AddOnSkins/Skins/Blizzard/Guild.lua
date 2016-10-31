@@ -84,7 +84,7 @@ function AS:Blizzard_Guild(event, addon)
 	end
 	if (addon == "Blizzard_GuildUI" or IsAddOnLoaded("Blizzard_GuildUI")) and not GuildFrame.isSkinned then
 		AS:SkinFrame(GuildFrame, nil, nil, true)
-		AS:CreateShadow(GuildFrame)
+		--AS:CreateShadow(GuildFrame)
 
 		AS:SkinCloseButton(GuildMemberDetailCloseButton)
 		AS:SkinCloseButton(GuildFrameCloseButton)
@@ -209,8 +209,8 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinFrame(GuildNewsFiltersFrame)
 		AS:SkinCloseButton(GuildNewsFiltersFrameCloseButton)
 
-		for i = 1, 6 do
-			AS:SkinCheckBox(_G["GuildNewsFilterButton"..i])
+		for _, CheckBox in pairs({'GuildAchievement', 'Achievement', 'DungeonEncounter', 'EpicItemLooted', 'EpicItemPurchased', 'EpicItemCrafted', 'LegendaryItemLooted' }) do
+			AS:SkinCheckBox(GuildNewsFiltersFrame[CheckBox])
 		end
 
 		GuildNewsFiltersFrame:Point("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -20)
@@ -266,7 +266,7 @@ function AS:Blizzard_Guild(event, addon)
 	if (addon == 'Blizzard_GuildControlUI' or IsAddOnLoaded('Blizzard_GuildControlUI')) and not GuildControlUI.isSkinned then
 		AS:SkinFrame(GuildControlUI)
 		AS:StripTextures(GuildControlUIHbar)
-		AS:CreateShadow(GuildControlUI)
+		--AS:CreateShadow(GuildControlUI)
 
 		local function SkinGuildRanks()
 			for i=1, GuildControlGetNumRanks() do
