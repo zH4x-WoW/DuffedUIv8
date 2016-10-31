@@ -135,12 +135,15 @@ function AS:CreateBackdrop(Frame, Template, UseTexture, TextureFile)
 	Frame.Backdrop = Backdrop
 end
 
-function AS:StripTextures(Object, Kill)
+function AS:StripTextures(Object, Kill, Alpha)
 	for i = 1, Object:GetNumRegions() do
 		local Region = select(i, Object:GetRegions())
-		if Region:GetObjectType() == "Texture" then
+		if Region and Region:GetObjectType() == "Texture" then
 			if Kill then
 				Region:Kill()
+				--Region:SetParent(AS.Hider)
+			elseif Alpha then
+				Region:SetAlpha(0)
 			else
 				Region:SetTexture(nil)
 			end
@@ -306,7 +309,7 @@ function AS:SkinCloseButton(CloseButton, Reposition)
 	CloseButton.Text:SetText('x')
 
 	if Reposition then
-		f:Point("TOPRIGHT", Reposition, "TOPRIGHT", 2, 2)
+		CloseButton:Point("TOPRIGHT", Reposition, "TOPRIGHT", 2, 2)
 	end
 
 	CloseButton.isSkinned = true

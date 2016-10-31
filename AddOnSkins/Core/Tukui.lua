@@ -38,8 +38,8 @@ function AS:EmbedSystemHooks()
 	RightToggleButton:HookScript('OnClick', function(self, button)
 		if button == 'RightButton' then
 			if EmbedSystem_MainWindow:IsShown() then
-				AS:SetOption('EmbedIsHidden', true)
 				EmbedSystem_MainWindow:Hide()
+				AS:SetOption('EmbedIsHidden', true)
 			else
 				AS:SetOption('EmbedIsHidden', false)
 				EmbedSystem_MainWindow:Show()

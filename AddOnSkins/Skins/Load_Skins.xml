@@ -13,6 +13,7 @@
 	<Script file="Archy.lua"/>
 	<Script file="Arh.lua"/>
 	<Script file="ArkInventory.lua"/>
+	<Script file="ArtifactPowerUser.lua"/>
 	<Script file="AtlasLoot.lua"/>
 	<Script file="ATSW.lua"/>
 	<Script file="Auctionator.lua"/>
@@ -22,7 +23,6 @@
 	<Script file="AutoEquipQuestItem.lua"/>
 	<Script file="Baggins.lua"/>
 	<Script file="Bagnon.lua"/>
-	<Script file="BagSync.lua"/>
 	<Script file="Bartender4.lua"/>
 	<Script file="BattlePetBreedID.lua"/>
 	<Script file="BetterQuest.lua"/>
@@ -64,6 +64,7 @@
 	<Script file="GuildMemberInfo_TradeSkills.lua"/>
 	<Script file="GupPet.lua"/>
 	<Script file="Healium.lua"/>
+	<Script file="Hekili.lua"/>
 	<Script file="Ignition.lua"/>
 	<Script file="InboxMailBag.lua"/>
 	<Script file="Incoming.lua"/>
@@ -120,9 +121,9 @@
 	<Script file="ReagentMaker.lua"/>
 	<Script file="Recount.lua"/>
 	<Script file="REPorter.lua"/>
+	<Script file="ServerHop.lua"/>
 	<Script file="Scrap.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
-	<Script file="ServerHop.lua"/>
 	<Script file="ShieldBars.lua"/>
 	<Script file="ShieldMonitor.lua"/>
 	<Script file="SilverDragon.lua"/>
@@ -134,6 +135,7 @@
 	<Script file="Spy.lua"/>
 	<Script file="StormEarthAndFire.lua"/>
 	<Script file="Swatter.lua"/>
+	<Script file="TalentSetManager.lua"/>
 	<Script file="TinyDPS.lua"/>
 	<Script file="TitanPanel.lua"/>
 	<Script file="TomeOfTeleportation.lua"/>
