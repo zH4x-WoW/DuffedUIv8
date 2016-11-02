@@ -5,7 +5,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 		AS:UnregisterSkinEvent('Blizzard_TradeSkill', 'ADDON_LOADED')
 		TradeSkillFramePortrait:Kill()
 		AS:SkinFrame(TradeSkillFrame, nil, nil, true)
-		TradeSkillFrame:Height(TradeSkillFrame:GetHeight() + 12)
+		TradeSkillFrame:SetHeight(TradeSkillFrame:GetHeight() + 12)
 		AS:SkinStatusBar(TradeSkillFrame.RankFrame)
 		AS:SkinBackdropFrame(TradeSkillFrame.FilterButton, nil, nil, true)
 		TradeSkillFrame.FilterButton.Backdrop:SetAllPoints()
@@ -13,7 +13,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 		TradeSkillFrame.LinkToButton:GetPushedTexture():SetTexCoord(0.25, 0.7, 0.45, 0.8)
 		TradeSkillFrame.LinkToButton:GetHighlightTexture():Kill()
 		TradeSkillFrame.LinkToButton:CreateBackdrop("Default")
-		TradeSkillFrame.LinkToButton:Size(17, 14)
+		TradeSkillFrame.LinkToButton:SetSize(17, 14)
 		TradeSkillFrame.LinkToButton:SetPoint("BOTTOMRIGHT", TradeSkillFrame.FilterButton, "TOPRIGHT", -2, 4)
 
 		AS:SkinEditBox(TradeSkillFrame.SearchBox)
@@ -39,7 +39,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 
 		AS:SkinNextPrevButton(TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.DecrementButton, nil, true)
 		AS:SkinNextPrevButton(TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.IncrementButton)
-		TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.IncrementButton:Point("LEFT", TradeSkillFrame.DetailsFrame.CreateMultipleInputBox, "RIGHT", 4, 0)
+		TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.IncrementButton:SetPoint("LEFT", TradeSkillFrame.DetailsFrame.CreateMultipleInputBox, "RIGHT", 4, 0)
 
 		hooksecurefunc(TradeSkillFrame.DetailsFrame, "RefreshDisplay", function()
 			local ResultIcon = TradeSkillFrame.DetailsFrame.Contents.ResultIcon
@@ -55,7 +55,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 				local Button = TradeSkillFrame.DetailsFrame.Contents.Reagents[i]
 				local Icon = Button.Icon
 				local Count = Button.Count
-
+				
 				Icon:SetTexCoord(unpack(AS.TexCoords))
 				Icon:SetDrawLayer("OVERLAY")
 				if not Icon.Backdrop then
@@ -64,11 +64,11 @@ function AS:Blizzard_TradeSkill(event, addon)
 					Icon.Backdrop:SetTemplate("Default")
 					Icon.Backdrop:SetOutside(Icon)
 				end
-
+				
 				Icon:SetParent(Icon.Backdrop)
 				Count:SetParent(Icon.Backdrop)
 				Count:SetDrawLayer("OVERLAY")
-
+				
 				Button.NameFrame:Kill()
 			end
 		end)

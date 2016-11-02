@@ -5,6 +5,5 @@
 	<Script file="DuffedUI.lua"/>
 	<Script file="Tukui.lua"/>
 	<Script file="ElvUI.lua"/>
-	<Script file="Conflicts.lua"/>
 	<Script file="Embed.lua"/>
 </Ui>

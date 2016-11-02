@@ -7,7 +7,7 @@ function AS:ParchmentRemover(event, addon)
 		AS:StripTextures(ArchaeologyFrame, true)
 		for i = 1, ARCHAEOLOGY_MAX_COMPLETED_SHOWN do
 			local artifact = _G["ArchaeologyFrameCompletedPageArtifact"..i]
-
+			
 			if artifact then
 				_G["ArchaeologyFrameCompletedPageArtifact"..i.."ArtifactName"]:SetTextColor(1, 1, 0)
 				_G["ArchaeologyFrameCompletedPageArtifact"..i.."ArtifactSubText"]:SetTextColor(0.6, 0.6, 0.6)
