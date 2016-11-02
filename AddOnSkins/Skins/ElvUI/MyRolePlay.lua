@@ -24,7 +24,7 @@ function AS:MyRolePlayElvUI()
 		if not msp.char[player].supported then return end
 		if not player and unit then return end
 		self:_UpdateTooltip(player, unit);
-		
+			
 		if (AS:CheckAddOn("ElvUI_SLE") and ElvUI[1].db.sle.tooltip.showFaction) then
 			if (UnitIsPlayer(unit)) then
 				local text = GameTooltipTextLeft1:GetText()
