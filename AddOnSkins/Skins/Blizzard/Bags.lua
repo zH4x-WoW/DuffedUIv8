@@ -24,7 +24,7 @@ function AS:Blizzard_Bags()
 
 			-- This shit is hax.
 			AS:CreateBackdrop(ItemButton)
-			--AS:CreateShadow(ItemButton.Backdrop)
+			AS:CreateShadow(ItemButton.Backdrop)
 			ItemButton.Backdrop:Hide()
 			hooksecurefunc(ItemButton.NewItemTexture, 'Show', function()
 				ItemButton.Backdrop:Show()
