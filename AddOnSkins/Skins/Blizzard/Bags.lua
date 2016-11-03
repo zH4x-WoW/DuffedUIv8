@@ -24,7 +24,7 @@ function AS:Blizzard_Bags()
 
 			-- This shit is hax.
 			AS:CreateBackdrop(ItemButton)
-			--AS:CreateShadow(ItemButton.Backdrop)
+			AS:CreateShadow(ItemButton.Backdrop)
 			ItemButton.Backdrop:Hide()
 			hooksecurefunc(ItemButton.NewItemTexture, 'Show', function()
 				ItemButton.Backdrop:Show()
@@ -156,7 +156,7 @@ function AS:Blizzard_Bags()
 		Token.icon:SetPoint("LEFT", Token.count, "RIGHT", 3, 0)
 	end
 
-	AS:SkinFrame(BankFrame, nil, nil, true)
+	--AS:SkinFrame(BankFrame, nil, nil, true) -- I think Duffed dont need it.
 	AS:SkinCloseButton(BankFrameCloseButton)
 	AS:StripTextures(BankFrameMoneyFrameBorder)
 	AS:StripTextures(BankFrameMoneyFrameInset)
