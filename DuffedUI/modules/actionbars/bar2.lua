@@ -14,3 +14,4 @@ for i = 1, 12 do
 
 	if i == 1 then b:SetPoint("BOTTOMLEFT", bar, D.buttonspacing, D.buttonspacing) else b:SetPoint("LEFT", b2, "RIGHT", D.buttonspacing, 0) end
 end
+RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
