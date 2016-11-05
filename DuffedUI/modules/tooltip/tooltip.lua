@@ -180,11 +180,13 @@ function DuffedUITooltips:SetColor()
 	if Player then
 		local Class = select(2, UnitClass(Unit))
 		local Color = Colors.class[Class]
-		R, G, B = Color[1], Color[2], Color[3]
-		HealthBar:SetStatusBarColor(R, G, B)
-		HealthBar.backdrop:SetBackdropBorderColor(R, G, B)
-		self:SetTemplate("Transparent")
-		self:SetBackdropBorderColor(R, G, B)
+		if Color then
+			R, G, B = Color[1], Color[2], Color[3]
+			HealthBar:SetStatusBarColor(R, G, B)
+			HealthBar.backdrop:SetBackdropBorderColor(R, G, B)
+			self:SetTemplate("Transparent")
+			self:SetBackdropBorderColor(R, G, B)
+		end
 	elseif Reaction then
 		local Color = Colors.reaction[Reaction]
 		R, G, B = Color[1], Color[2], Color[3]
