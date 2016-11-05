@@ -241,7 +241,7 @@ function DuffedUITooltips:OnValueChanged(value)
 
 	if not unit then
 		local GMF = GetMouseFocus()
-		unit = GMF and GMF:GetAttribute("unit")
+		unit = GMF and GMF.GetAttribute and GMF:GetAttribute("unit")
 	end
 
 	if not self.text then
