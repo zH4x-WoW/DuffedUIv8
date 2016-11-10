@@ -3,7 +3,7 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Many fixes from Rav99, Rolfman for bags and tooltip"
+		"• Many fixes from Rav99, Rolfman for bags and tooltip",
 		"• Fixed some general issues",
 		--"• ",
 	" ",
