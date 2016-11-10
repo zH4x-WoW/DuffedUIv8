@@ -55,6 +55,9 @@ local function Copy(cf)
 	FCF_SetChatWindowFontSize(cf, cf, .01)
 	local lineCt = GetLines(cf:GetRegions())
 	local text = table.concat(lines, "\n", 1, lineCt)
+	for i = 1, cf:GetNumMessages() do
+		text = text..cf:GetMessageInfo(i).."\n"
+	end
 	FCF_SetChatWindowFontSize(cf, cf, size)
 	if not isf then CreateCopyFrame() end
 	if frame:IsShown() then frame:Hide() return end
