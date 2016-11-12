@@ -3,8 +3,10 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Many fixes from Rav99, Rolfman for bags and tooltip",
-		"• Fixed some general issues",
+		"• Fixes for searching in bags by Rav99",
+		"• AddOnSkins by liquidbase",
+		"• Fix for copychat by Rav99",
+		"• Fix for FPS-drop by Rav99",
 		--"• ",
 	" ",
 	"Notes:",
