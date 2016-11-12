@@ -39,6 +39,7 @@ local defaults = {
 		['LoginMsg'] = true,
 		['EmbedSystemMessage'] = true,
 		['ElvUISkinModule'] = false,
+		['ThinBorder'] = false,
 	},
 }
 
@@ -361,23 +362,23 @@ function AS:GetOptions()
 					WeakAuraAuraBar = {
 						type = "toggle",
 						name = ASL["WeakAura AuraBar"],
-						order = 1,
+						order = 2,
 						disabled = function() return not AS:CheckOption("WeakAuras", "WeakAuras") end,
 					},
 					Parchment = {
 						type = "toggle",
 						name = ASL["Parchment"],
-						order = 2,
+						order = 3,
 					},
 					SkinDebug = {
 						type = "toggle",
 						name = ASL["Enable Skin Debugging"],
-						order = 3,
+						order = 4,
 					},
 					LoginMsg = {
 						type = "toggle",
 						name = ASL["Login Message"],
-						order = 4,
+						order = 5,
 					},
 				},
 			},
@@ -468,7 +469,7 @@ function AS:GetOptions()
 		end
 	end
 
-	if IsAddOnLoaded("ElvUI") then
+	if AS:CheckAddOn("ElvUI") then
 		Options.args.misc.args.WeakAuraIconCooldown = {
 			type = "toggle",
 			name = ASL["WeakAura Cooldowns"],
@@ -482,6 +483,14 @@ function AS:GetOptions()
 			order = 5,
 		}
 	end
+
+	if not AS:CheckAddOn('ElvUI') then
+ 		Options.args.misc.args.ThinBorder = {
+ 			name = "Thin Border",
+ 			order = 1,
+ 			type = "toggle",
+ 		}
+ 	end
 
 	Options.args.profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(AS.data);
 	Options.args.profiles.order = -2;

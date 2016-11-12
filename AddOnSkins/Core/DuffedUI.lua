@@ -6,6 +6,7 @@ local D, C, L
 
 function AS:UpdateMedia()
 	D, C, L = unpack(DuffedUI)
+	AS.PixelPerfect = AS:CheckOption('ThinBorder')
 	AS.DataTextFontSize = C['datatext'].fontsize
 
 	AS.InfoLeft = DuffedUIInfoLeft
