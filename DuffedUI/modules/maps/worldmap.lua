@@ -192,9 +192,9 @@ function WorldMap:Coords()
 	coords.PlayerText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
 	coords.MouseText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
 	coords.PlayerText:SetPoint("TOPLEFT", WorldMapFrame.UIElementsFrame, "TOPLEFT", 5, -5)
-	coords.PlayerText:SetText("Player:   0, 0")
+	coords.PlayerText:SetText("Player:   x, x")
 	coords.MouseText:SetPoint("TOPRIGHT", coords.PlayerText, "BOTTOMRIGHT", 0, -5)
-	coords.MouseText:SetText("Mouse:   0, 0")
+	coords.MouseText:SetText("Mouse:   x, x")
 	local int = 0
 
 	WorldMapFrame:HookScript("OnUpdate", function(self, elapsed)
@@ -203,8 +203,7 @@ function WorldMap:Coords()
 			local InInstance, _ = IsInInstance()
 		
 			if not GetPlayerMapPosition("player") then
-				x:SetText(" ")
-				y:SetText(" ")
+				coords.PlayerText:SetText("x, x")
 				return
 			end
 

@@ -145,17 +145,16 @@ local m_coord_text = m_coord:CreateFontString("DuffedUIMinimapCoordText", "Overl
 m_coord_text:SetFont(C["media"].font, 11)
 m_coord_text:Point("Center", -1, 0)
 m_coord_text:SetAlpha(0)
-m_coord_text:SetText("00,00")
+m_coord_text:SetText("x - x")
 
 local int = 0
 m_coord:HookScript("OnUpdate", function(self, elapsed)
 	int = int + 1
 	if int >= 3 then
 		local InInstance, _ = IsInInstance()
-		
+
 		if not GetPlayerMapPosition("player") then
-			x:SetText(" ")
-			y:SetText(" ")
+			m_coord_text:SetText("x - x")
 			return
 		end
 
