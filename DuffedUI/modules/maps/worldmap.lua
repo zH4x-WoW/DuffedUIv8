@@ -200,13 +200,19 @@ function WorldMap:Coords()
 	WorldMapFrame:HookScript("OnUpdate", function(self, elapsed)
 		int = int + 1
 		if int >= 3 then
-			local inInstance, raid = IsInInstance()
-			if not raid then
-				local x, y = GetPlayerMapPosition("player")
-				x = math.floor(100 * x)
-				y = math.floor(100 * y)
-				if x ~= 0 and y ~= 0 then coords.PlayerText:SetText(PLAYER..":   "..x..", "..y) else coords.PlayerText:SetText(" ") end
+			local InInstance, _ = IsInInstance()
+		
+			if not GetPlayerMapPosition("player") then
+				x:SetText(" ")
+				y:SetText(" ")
+			
+				return
 			end
+
+			local x, y = GetPlayerMapPosition("player")
+			x = math.floor(100 * x)
+			y = math.floor(100 * y)
+			if x ~= 0 and y ~= 0 then coords.PlayerText:SetText(PLAYER..":   "..x..", "..y) else coords.PlayerText:SetText(" ") end
 
 			local scale = WorldMapDetailFrame:GetEffectiveScale()
 			local width = WorldMapDetailFrame:GetWidth()
