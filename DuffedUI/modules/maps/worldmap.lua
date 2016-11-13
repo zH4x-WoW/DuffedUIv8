@@ -205,7 +205,6 @@ function WorldMap:Coords()
 			if not GetPlayerMapPosition("player") then
 				x:SetText(" ")
 				y:SetText(" ")
-			
 				return
 			end
 
