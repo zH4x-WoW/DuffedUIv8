@@ -269,6 +269,7 @@ if D.Client == "deDE" then
 		["xp"] = "Erfahrung: %s/%s (%d%%)",
 		["xpremaining"] = "Verbleibend: %s",
 		["traits"] = "Eigenschaft verfügbar: %s",
+		["click"] = "Klick: Öffnet die Artefaktübersicht",
 	}
 	
 	L["tooltip"] = {

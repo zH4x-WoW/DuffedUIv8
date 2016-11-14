@@ -40,7 +40,23 @@ local function updateStatus()
 	else
 		backdrop:Hide()
 	end
-
+	
+	ArtifactmouseFrame:SetScript("OnMouseDown", function()
+		if not ArtifactFrame then LoadAddOn("Blizzard_ArtifactUI") end
+		
+		if hAE then
+			local frame = ArtifactFrame
+			local activeID = C_ArtifactUI.GetArtifactInfo()
+			local equippedID = C_ArtifactUI.GetEquippedArtifactInfo()
+		
+			if frame:IsShown() and activeID == equippedID then
+				HideUIPanel(frame)
+			else
+				SocketInventoryItem(16)
+			end
+		end
+	end)
+	
 	ArtifactmouseFrame:SetScript("OnEnter", function()
 		GameTooltip:SetOwner(ArtifactmouseFrame, "ANCHOR_TOPRIGHT", 2, 5)
 		GameTooltip:ClearLines()
