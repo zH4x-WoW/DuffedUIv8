@@ -267,6 +267,7 @@ L["artifactBar"] = {
 	["xp"] = "Experience: %s/%s (%d%%)",
 	["xpremaining"] = "Remaining: %s",
 	["traits"] = "Traits avaiable: %s",
+	["click"] = "Click: Shows Artifactoverview",
 }
 
 L["tooltip"] = {
