@@ -378,8 +378,8 @@ DuffedUIOnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 DuffedUIOnLogon:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
-	if (DuffedUIData == nil) then DuffedUIData = {} end
-	if (DuffedUIDataPerChar == nil) then D.SetPerCharVariable("DuffedUIDataPerChar", {}) end
+	if DuffedUIData == nil then DuffedUIData = {} end
+	if DuffedUIDataPerChar == nil then D.SetPerCharVariable("DuffedUIDataPerChar", {}) end
 
 	if D.ScreenWidth < 1200 then
 		SetCVar("useUiScale", 0)

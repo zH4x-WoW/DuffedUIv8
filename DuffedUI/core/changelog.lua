@@ -115,5 +115,6 @@ end
 ChangeLog:RegisterEvent("ADDON_LOADED")
 ChangeLog:RegisterEvent("PLAYER_ENTERING_WORLD")
 ChangeLog:SetScript("OnEvent", function(self, event, ...)
+	if DuffedUIData == nil then DuffedUIData = {} end
 	ChangeLog:OnCheckVersion()
 end)
