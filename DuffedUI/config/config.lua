@@ -119,7 +119,6 @@ C["datatext"] = {
 	["bags"] = 5,
 	["battleground"] = true,
 	["block"] = 0,
-	["bonusarmor"] = 0,
 	["calltoarms"] = 0,
 	["crit"] = 0,
 	["dodge"] = 0,

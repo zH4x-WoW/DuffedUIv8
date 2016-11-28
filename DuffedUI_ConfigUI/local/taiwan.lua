@@ -118,7 +118,6 @@
 	DuffedUIConfigUILocalization.datatextbags = "背包 (輸入0關閉顯示)"
 	DuffedUIConfigUILocalization.datatextbattleground = "啟用戰場狀態信息欄"
 	DuffedUIConfigUILocalization.datatextblock = "格擋率(輸入0關閉顯示)"
-	DuffedUIConfigUILocalization.datatextbonusarmor = "額外護甲值 (輸入0關閉顯示)"
 	DuffedUIConfigUILocalization.datatextcalltoarms = "戰鬥/地城召喚 (輸入0關閉顯示)"
 	DuffedUIConfigUILocalization.datatextcrit = "爆擊率(輸入0關閉顯示)"
 	DuffedUIConfigUILocalization.datatextdodge = "躲閃率(輸入0關閉顯示)"

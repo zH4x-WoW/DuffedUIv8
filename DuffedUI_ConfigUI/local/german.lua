@@ -119,7 +119,6 @@
 	DuffedUIConfigUILocalization.datatextbags = "Position der 'Taschenanzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextbattleground = "Aktviere die 'Statistikanzeige' auf den 'Schlachtfeldern'"
 	DuffedUIConfigUILocalization.datatextblock = "Position der 'Blockenanzeige' (0 zum deaktivieren)"
-	DuffedUIConfigUILocalization.datatextbonusarmor = "Position der 'Bonus Rüstungsanzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextcalltoarms = "Position der 'Ruf zu den Waffen Anzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextcrit = "Position der 'Kritische Trefferanzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextdodge = "Position der 'Ausweichenanzeige' (0 zum deaktivieren)"

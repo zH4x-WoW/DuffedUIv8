@@ -4,7 +4,6 @@
 	<Script file="bags.lua" />
 	<Script file="battleground.lua" />
 	<Script file="block.lua" />
-	<Script file="bonusarmor.lua" />
 	<Script file="calltoarms.lua" />
 	<Script file="crit.lua" />
 	<Script file="dodge.lua" />
