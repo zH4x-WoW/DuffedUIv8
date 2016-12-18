@@ -116,23 +116,6 @@ Minimap:SetScript("OnMouseWheel", function(self, delta)
 	if delta > 0 then MinimapZoomIn:Click() elseif delta < 0 then MinimapZoomOut:Click() end
 end)
 
-local m_zone = CreateFrame("Frame", "DuffedUIMinimapZone", DuffedUIMinimap)
-m_zone:SetTemplate("Transparent")
-m_zone:Size(0,20)
-m_zone:Point("TOPLEFT", DuffedUIMinimap, "TOPLEFT", 2,-2)
-m_zone:SetFrameLevel(Minimap:GetFrameLevel() + 3)
-m_zone:SetFrameStrata(Minimap:GetFrameStrata())
-m_zone:Point("TOPRIGHT",DuffedUIMinimap,-2,-2)
-m_zone:SetAlpha(0)
-
-local m_zone_text = m_zone:CreateFontString("DuffedUIMinimapZoneText", "Overlay")
-m_zone_text:SetFont(C["media"].font, 11)
-m_zone_text:Point("TOP", 0, -1)
-m_zone_text:SetPoint("BOTTOM")
-m_zone_text:Height(12)
-m_zone_text:Width(m_zone:GetWidth()-6)
-m_zone_text:SetAlpha(0)
-
 local m_coord = CreateFrame("Frame", "DuffedUIMinimapCoord", DuffedUIMinimap)
 m_coord:SetTemplate("Transparent")
 m_coord:Size(40,20)
@@ -167,37 +150,11 @@ m_coord:HookScript("OnUpdate", function(self, elapsed)
 end)
 
 Minimap:SetScript("OnEnter", function()
-	m_zone:SetAlpha(1)
-	m_zone_text:SetAlpha(1)
 	m_coord:SetAlpha(1)
 	m_coord_text:SetAlpha(1)
 end)
 
 Minimap:SetScript("OnLeave", function()
-	m_zone:SetAlpha(0)
-	m_zone_text:SetAlpha(0)
 	m_coord:SetAlpha(0)
 	m_coord_text:SetAlpha(0)
 end)
- 
-local zone_Update = function()
-	local pvp = GetZonePVPInfo()
-	m_zone_text:SetText(GetMinimapZoneText())
-	if pvp == "friendly" then
-		m_zone_text:SetTextColor(.1, 1, .1)
-	elseif pvp == "sanctuary" then
-		m_zone_text:SetTextColor(.41, .8, .94)
-	elseif pvp == "arena" or pvp == "hostile" then
-		m_zone_text:SetTextColor(1, .1, .1)
-	elseif pvp == "contested" then
-		m_zone_text:SetTextColor(1, .7, 0)
-	else
-		m_zone_text:SetTextColor(1, 1, 1)
-	end
-end
- 
-m_zone:RegisterEvent("PLAYER_ENTERING_WORLD")
-m_zone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-m_zone:RegisterEvent("ZONE_CHANGED")
-m_zone:RegisterEvent("ZONE_CHANGED_INDOORS")
-m_zone:SetScript("OnEvent", zone_Update)
