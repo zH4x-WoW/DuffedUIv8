@@ -117,7 +117,7 @@ Minimap:SetScript("OnMouseWheel", function(self, delta)
 end)
 
 local m_coord = CreateFrame("Frame", "DuffedUIMinimapCoord", DuffedUIMinimap)
-m_coord:Size(40,20)
+m_coord:Size(40, 20)
 m_coord:Point("BOTTOMLEFT", DuffedUIMinimap, "BOTTOMLEFT", 5, -2)
 m_coord:SetFrameLevel(Minimap:GetFrameLevel() + 3)
 m_coord:SetFrameStrata(Minimap:GetFrameStrata())
@@ -125,7 +125,7 @@ m_coord:SetFrameStrata(Minimap:GetFrameStrata())
 local m_coord_text = m_coord:CreateFontString("DuffedUIMinimapCoordText", "Overlay")
 m_coord_text:SetFont(C["media"].font, 11, "THINOUTLINE")
 m_coord_text:Point("Center", -1, 0)
-m_coord_text:SetText("x - x")
+m_coord_text:SetText(" ")
 
 local int = 0
 m_coord:HookScript("OnUpdate", function(self, elapsed)
@@ -134,14 +134,14 @@ m_coord:HookScript("OnUpdate", function(self, elapsed)
 		local InInstance, _ = IsInInstance()
 
 		if not GetPlayerMapPosition("player") then
-			m_coord_text:SetText("x - x")
+			m_coord_text:SetText(" ")
 			return
 		end
 
 		local x, y = GetPlayerMapPosition("player")
 		x = math.floor(100 * x)
 		y = math.floor(100 * y)
-		if x ~= 0 and y ~= 0 then m_coord_text:SetText(x .. " - " .. y) else m_coord_text:SetText("x - x") end
+		if x ~= 0 and y ~= 0 then m_coord_text:SetText(x .. " - " .. y) else m_coord_text:SetText(" ") end
 		int = 0
 	end
 end)
