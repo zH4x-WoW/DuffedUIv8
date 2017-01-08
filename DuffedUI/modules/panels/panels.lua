@@ -85,7 +85,11 @@ end
 if C["actionbar"]["enable"] then
 	DuffedUIBar1Mover = CreateFrame("Frame", "DuffedUIBar1Mover", UIParent)
 	DuffedUIBar1Mover:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
-	DuffedUIBar1Mover:SetPoint("BOTTOM", icenter, "TOP", 0, 39)
+	if C["actionbar"]["rightbarvertical"] then
+		DuffedUIBar1Mover:SetPoint("BOTTOM", icenter, "TOP", 0, 88)
+	else
+		DuffedUIBar1Mover:SetPoint("BOTTOM", icenter, "TOP", 0, 39)
+	end
 	DuffedUIBar1Mover:SetFrameLevel(6)
 	move:RegisterFrame(DuffedUIBar1Mover)
 
@@ -97,7 +101,11 @@ if C["actionbar"]["enable"] then
 
 	local DuffedUIBar2 = CreateFrame("Frame", "DuffedUIBar2", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar2:SetTemplate("Transparent")
-	DuffedUIBar2:Point("BOTTOM", icenter, "TOP", 0, 2)
+	if C["actionbar"]["rightbarvertical"] then
+		DuffedUIBar2:Point("BOTTOM", icenter, "TOP", 0, 49)
+	else
+		DuffedUIBar2:Point("BOTTOM", icenter, "TOP", 0, 2)
+	end
 	DuffedUIBar2:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
 	DuffedUIBar2:SetFrameStrata("BACKGROUND")
 	DuffedUIBar2:SetFrameLevel(3)
@@ -136,7 +144,7 @@ if C["actionbar"]["enable"] then
 		DuffedUIBar5:SetTemplate("Transparent")
 		if C["actionbar"]["rightbarvertical"] then
 			DuffedUIBar5:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
-			DuffedUIBar5:Point("BOTTOM", UIParent, "BOTTOM", 0, 56)
+			DuffedUIBar5:Point("BOTTOM", icenter, "TOP", 0, 2)
 		else
 			DuffedUIBar5:SetSize((D["buttonsize"] * 1) + (D["buttonspacing"] * 2), (D["buttonsize"] * 12) + (D["buttonspacing"] * 13))
 			DuffedUIBar5:Point("RIGHT", UIParent, "RIGHT", -13, -14)
