@@ -43,7 +43,7 @@ if D.Client == "deDE" then
 	}
 
 	L["ui"] = {
-		["outdated"] = "Deine Version von DuffedUI ist veraltet. Du kannst die neuste Version auf |cffc41f3http://www.duffed.net|r herunter laden.",
+		["outdated"] = "Deine Version von DuffedUI ist veraltet. Du kannst die neuste Version auf |cffc41f3http://www.wowinterface.com|r herunter laden.",
 		["disableui"] = "DuffedUI funktioniert mit Deiner Auflösung nicht. Möchtest Du DuffedUI deaktivieren? (Abbrechen, wenn Du es mit einer anderen Auflösung probieren möchtest)",
 		["fix_ab"] = "Etwas stimmt nicht mit den Aktionsleisten. Möchtest Du das UI neu laden um diesen Fehler zu beheben?",
 	}
@@ -83,7 +83,7 @@ if D.Client == "deDE" then
 		["step4line1"] = "Die Installation wurde erfolgreich abgeschlossen.",
 		["step4line2"] = "Bitte klicke auf den Button 'Beenden' um das UI neu zu laden.",
 		["step4line3"] = "",
-		["step4line4"] = "Geniesse Dein DuffedUI! Und besuche uns doch mal auf |cffc41f3http://www.duffed.net|r!",
+		["step4line4"] = "Geniesse Dein DuffedUI! Und besuche uns doch mal auf |cffc41f3http://www.wowinterface.com|r!",
 	}
 
 	L["binds"] = {
