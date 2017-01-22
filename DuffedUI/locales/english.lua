@@ -42,7 +42,7 @@ L["symbol"] = {
 }
 
 L["ui"] = {
-	["outdated"] = "Your version of DuffedUI is out of date. You can download the latest version from www.duffed.net",
+	["outdated"] = "Your version of DuffedUI is out of date. You can download the latest version from www.wowinterface.com",
 	["disableui"] = "DuffedUI doesn't work for this resolution, do you want to disable DuffedUI? (Cancel if you want to try another resolution)",
 	["fix_ab"] = "There is something wrong with your action bar. Do you want to reloadui to fix it?",
 }
@@ -82,7 +82,7 @@ L["install"] = {
 	["step4line1"] = "Installation is complete.",
 	["step4line2"] = "Please click the 'Finish' button to reload the UI.",
 	["step4line3"] = "",
-	["step4line4"] = "Enjoy DuffedUI! Visit us at www.duffed.net!",
+	["step4line4"] = "Enjoy DuffedUI! Visit us at www.wowinterface.com!",
 }
 
 L["binds"] = {
