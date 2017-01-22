@@ -687,6 +687,30 @@ if C["raid"].raidunitdebuffwatch == true then
 			-- Xavius
 			SpellName(206651), -- Darkening Soul
 			SpellName(209158), -- Blackening Soul
+			--Trial of Valor
+			SpellName(228030), -- Expel Light (need aura)
+			SpellName(227807), -- Storm of Justice
+			SpellName(228918), -- Stormforged Spear
+			SpellName(227490), -- Branded
+			SpellName(227491), -- Branded
+			SpellName(227498), -- Branded
+			SpellName(227499), -- Branded
+			SpellName(227500), -- Branded
+			SpellName(231297), -- Runic Brand (Mythic Only)
+			-- Guarm
+			SpellName(228228), -- Flame Lick
+			SpellName(228248), -- Frost Lick
+			SpellName(228253), -- Shadow Lick
+			--SpellName(228768), -- Salty Spittle
+			--SpellName(228758), -- Fiery Phlegm
+			--SpellName(228769), -- Dark Discharge
+			-- Helya
+			SpellName(228883), -- Unholy Reckoning (Trash)
+			SpellName(228054), -- Taint of the Sea
+			SpellName(229119), -- Orb of Corruption
+			SpellName(228058), -- Orb of Corrosion
+			SpellName(193367), -- Fetid Rot
+			SpellName(227982), -- Bilewater Redox
 			-- The Nighthold
 			-- Skorpyron
 			SpellName(204531), -- Arcane Tether

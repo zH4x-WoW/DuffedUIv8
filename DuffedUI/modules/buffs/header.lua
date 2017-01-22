@@ -47,7 +47,7 @@ buffs:SetAttribute("includeWeapons", 1)
 buffs:Show()
 move:RegisterFrame(buffs)
 
-debuffs:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -7, -25)
+debuffs:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -7, -2)
 debuffs:SetAttribute("filter", "HARMFUL")
 debuffs:Show()
 move:RegisterFrame(debuffs)

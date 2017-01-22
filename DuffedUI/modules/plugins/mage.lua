@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if (select(2, UnitClass("player")) ~= "MAGE") or not DuffedUIMinimapStatsLeft or not C["misc"]["magemenu"] then return end
+if (select(2, UnitClass("player")) ~= "MAGE") or not C["misc"]["magemenu"] then return end
 
 local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 local spells = (UnitFactionGroup("player") == "Horde") and {
@@ -65,10 +65,9 @@ end
  
 local f = CreateFrame("Frame", "DuffedUITeleportMenu", UIParent)
 f:Size(DuffedUIMinimap:GetWidth(),(#spells + 1) * 21 + 3)
-f:SetPoint("TOPLEFT", DuffedUIMinimapStatsLeft, "BOTTOMLEFT", 0, -3)
+f:SetPoint("BOTTOMLEFT", DuffedUIInfoCenter, "TOPLEFT", 0, 2)
 f:SetFrameStrata("HIGH")
 f:SetTemplate("Transparent")
-f:CreateBackdrop()
  
 local r = CreateFrame("Frame", nil, f)
 r:Size(DuffedUIMinimap:GetWidth() - 4, 20)
@@ -84,7 +83,6 @@ for i, spell in pairs(spells) do
 	b:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -(i * 21) - 2)
 	b:SetFrameStrata("HIGH")
 	b:SetTemplate("Transparent")
-	b:CreateBackdrop()
  
 	local l = b:CreateFontString(nil,"OVERLAY")
 	l:SetFont(C["media"]["font"], 11, "THINOUTLINE")
@@ -110,8 +108,8 @@ for i, spell in pairs(spells) do
 end
 f:Hide()
  
-local b = CreateFrame("Button", nil, DuffedUIMinimapStatsLeft)
-b:SetAllPoints(DuffedUIMinimapStatsLeft)
+local b = CreateFrame("Button", nil, DuffedUIInfoCenter)
+b:SetAllPoints(DuffedUIInfoCenter)
 b:SetScript("OnClick", function(self)
 	if DuffedUITeleportMenu:IsShown() then
 		DuffedUITeleportMenu:Hide()

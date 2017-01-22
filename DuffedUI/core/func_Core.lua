@@ -97,8 +97,7 @@ end
 D.DataTextPosition = function(p, obj)
 	local left = DuffedUIInfoLeft
 	local right = DuffedUIInfoRight
-	local mapleft = DuffedUIMinimapStatsLeft
-	local mapright = DuffedUIMinimapStatsRight
+	local center = DuffedUIInfoCenter
 
 	if p == 1 then
 		obj:SetParent(left)
@@ -134,20 +133,18 @@ D.DataTextPosition = function(p, obj)
 		obj:SetPoint("RIGHT", right, -30, -1)
 		obj:SetPoint('TOP', right, 0, -1)
 		obj:SetPoint('BOTTOM', right, 0, -1)
-	end
-
-	if DuffedUIMinimap then
-		if p == 7 then
-			obj:SetParent(mapleft)
-			obj:SetHeight(mapleft:GetHeight())
-			obj:SetPoint('TOP', mapleft, 0, -1)
-			obj:SetPoint('BOTTOM', mapleft, 0, -1)
-		elseif p == 8 then
-			obj:SetParent(mapright)
-			obj:SetHeight(mapright:GetHeight())
-			obj:SetPoint('TOP', mapright, 0, -1)
-			obj:SetPoint('BOTTOM', mapright, 0, -1)
-		end
+	elseif p == 7 then
+		obj:SetParent(center)
+		obj:SetHeight(center:GetHeight())
+		obj:SetPoint("LEFT", center, 30, -1)
+		obj:SetPoint('TOP', center, 0, -1)
+		obj:SetPoint('BOTTOM', center, 0, -1)
+	elseif p == 8 then
+		obj:SetParent(center)
+		obj:SetHeight(center:GetHeight())
+		obj:SetPoint("RIGHT", center, -30, -1)
+		obj:SetPoint('TOP', center, 0, -1)
+		obj:SetPoint('BOTTOM', center, 0, -1)
 	end
 end
 
@@ -161,20 +158,8 @@ D.DataTextTooltipAnchor = function(self)
 		anchor = "ANCHOR_TOPLEFT"
 	elseif panel == DuffedUIInfoRight then
 		anchor = "ANCHOR_TOPRIGHT"
-	elseif panel == DuffedUIMinimapStatsLeft or panel == DuffedUIMinimapStatsRight then
-		local position = DuffedUIMinimap:GetPoint()
-		if position:match("LEFT") then
-			anchor = "ANCHOR_BOTTOMRIGHT"
-			yoff = D["Scale"](-6)
-			xoff = 0 - DuffedUIMinimapStatsRight:GetWidth()
-		elseif position:match("RIGHT") then
-			anchor = "ANCHOR_BOTTOMLEFT"
-			yoff = D["Scale"](-6)
-			xoff = DuffedUIMinimapStatsRight:GetWidth()
-		else
-			anchor = "ANCHOR_BOTTOM"
-			yoff = D["Scale"](-6)
-		end
+	elseif panel == DuffedUIInfoCenter then
+		anchor = "ANCHOR_TOPRIGHT"
 	end
 
 	return anchor, panel, xoff, yoff

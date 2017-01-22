@@ -252,6 +252,7 @@ function AS:Blizzard_PvE(event, addon)
 	AS:SkinEditBox(LFGListFrame.EntryCreation.ItemLevel.EditBox)
 	AS:SkinCheckBox(LFGListFrame.EntryCreation.VoiceChat.CheckButton)
 	AS:SkinEditBox(LFGListFrame.EntryCreation.VoiceChat.EditBox)
+	AS:SkinCheckBox(LFGListFrame.EntryCreation.PrivateGroup.CheckButton)
 end
 
 AS:RegisterSkin("Blizzard_PvE", AS.Blizzard_PvE)

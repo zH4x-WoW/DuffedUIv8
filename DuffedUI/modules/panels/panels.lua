@@ -16,6 +16,42 @@ iright:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 3)
 iright:SetFrameLevel(2)
 iright:SetFrameStrata("BACKGROUND")
 
+local icenter = CreateFrame("Frame", "DuffedUIInfoCenter", UIParent)
+icenter:SetTemplate("Default")
+icenter:Size(376.6, 19)
+icenter:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 3)
+icenter:SetFrameLevel(2)
+icenter:SetFrameStrata("BACKGROUND")
+move:RegisterFrame(DuffedUIInfoCenter)
+
+local m_zone_text = icenter:CreateFontString("DuffedUIZoneText", "Overlay")
+m_zone_text:SetFont(C["media"].font, 11)
+m_zone_text:Point("CENTER", 0, -1)
+m_zone_text:Height(11)
+m_zone_text:Width(icenter:GetWidth() - 6)
+
+local zone_Update = function()
+	local pvp = GetZonePVPInfo()
+	m_zone_text:SetText(GetMinimapZoneText())
+	if pvp == "friendly" then
+		m_zone_text:SetTextColor(.1, 1, .1)
+	elseif pvp == "sanctuary" then
+		m_zone_text:SetTextColor(.41, .8, .94)
+	elseif pvp == "arena" or pvp == "hostile" then
+		m_zone_text:SetTextColor(1, .1, .1)
+	elseif pvp == "contested" then
+		m_zone_text:SetTextColor(1, .7, 0)
+	else
+		m_zone_text:SetTextColor(1, 1, 1)
+	end
+end
+ 
+icenter:RegisterEvent("PLAYER_ENTERING_WORLD")
+icenter:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+icenter:RegisterEvent("ZONE_CHANGED")
+icenter:RegisterEvent("ZONE_CHANGED_INDOORS")
+icenter:SetScript("OnEvent", zone_Update)
+
 if C["chat"]["lbackground"] then
 	local chatleftbg = CreateFrame("Frame", "DuffedUIChatBackgroundLeft", DuffedUIInfoLeft)
 	chatleftbg:SetTemplate("Transparent")
@@ -49,7 +85,11 @@ end
 if C["actionbar"]["enable"] then
 	DuffedUIBar1Mover = CreateFrame("Frame", "DuffedUIBar1Mover", UIParent)
 	DuffedUIBar1Mover:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
-	DuffedUIBar1Mover:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 129)
+	if C["actionbar"]["rightbarvertical"] then
+		DuffedUIBar1Mover:SetPoint("BOTTOM", icenter, "TOP", 0, 88)
+	else
+		DuffedUIBar1Mover:SetPoint("BOTTOM", icenter, "TOP", 0, 39)
+	end
 	DuffedUIBar1Mover:SetFrameLevel(6)
 	move:RegisterFrame(DuffedUIBar1Mover)
 
@@ -61,7 +101,11 @@ if C["actionbar"]["enable"] then
 
 	local DuffedUIBar2 = CreateFrame("Frame", "DuffedUIBar2", UIParent, "SecureHandlerStateTemplate")
 	DuffedUIBar2:SetTemplate("Transparent")
-	DuffedUIBar2:Point("BOTTOM", UIParent, "BOTTOM", 0, 93)
+	if C["actionbar"]["rightbarvertical"] then
+		DuffedUIBar2:Point("BOTTOM", icenter, "TOP", 0, 49)
+	else
+		DuffedUIBar2:Point("BOTTOM", icenter, "TOP", 0, 2)
+	end
 	DuffedUIBar2:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
 	DuffedUIBar2:SetFrameStrata("BACKGROUND")
 	DuffedUIBar2:SetFrameLevel(3)
@@ -100,7 +144,7 @@ if C["actionbar"]["enable"] then
 		DuffedUIBar5:SetTemplate("Transparent")
 		if C["actionbar"]["rightbarvertical"] then
 			DuffedUIBar5:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
-			DuffedUIBar5:Point("BOTTOM", UIParent, "BOTTOM", 0, 56)
+			DuffedUIBar5:Point("BOTTOM", icenter, "TOP", 0, 2)
 		else
 			DuffedUIBar5:SetSize((D["buttonsize"] * 1) + (D["buttonspacing"] * 2), (D["buttonsize"] * 12) + (D["buttonspacing"] * 13))
 			DuffedUIBar5:Point("RIGHT", UIParent, "RIGHT", -13, -14)
@@ -148,24 +192,10 @@ chatmenu:SetScript("OnMouseDown", function(self, btn)
 	if btn == "LeftButton" then ToggleFrame(ChatMenu) end
 end)
 
-if DuffedUIMinimap then
-	local minimapstatsleft = CreateFrame("Frame", "DuffedUIMinimapStatsLeft", DuffedUIMinimap)
-	minimapstatsleft:SetTemplate()
-	minimapstatsleft:Size(((DuffedUIMinimap:GetWidth() + 4) / 2) -3, 19)
-	minimapstatsleft:Point("TOPLEFT", DuffedUIMinimap, "BOTTOMLEFT", 0, -2)
-	minimapstatsleft:SetFrameStrata("LOW")
-
-	local minimapstatsright = CreateFrame("Frame", "DuffedUIMinimapStatsRight", DuffedUIMinimap)
-	minimapstatsright:SetTemplate()
-	minimapstatsright:Size(((DuffedUIMinimap:GetWidth() + 4) / 2) -3, 19)
-	minimapstatsright:Point("TOPRIGHT", DuffedUIMinimap, "BOTTOMRIGHT", 0, -2)
-	minimapstatsright:SetFrameStrata("LOW")
-end
-
 if C["datatext"]["battleground"] then
 	local bgframe = CreateFrame("Frame", "DuffedUIInfoLeftBattleGround", UIParent)
 	bgframe:SetTemplate()
-	bgframe:SetAllPoints(ileft)
+	bgframe:SetAllPoints(icenter)
 	bgframe:SetFrameStrata("LOW")
 	bgframe:SetFrameLevel(0)
 	bgframe:EnableMouse(true)

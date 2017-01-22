@@ -364,6 +364,7 @@ local function LoadSkin()
 	LFGListFrame.EntryCreation.ItemLevel.CheckButton:SkinCheckBox()
 	LFGListFrame.EntryCreation.HonorLevel.CheckButton:SkinCheckBox()
 	LFGListFrame.EntryCreation.VoiceChat.CheckButton:SkinCheckBox()
+	LFGListFrame.EntryCreation.PrivateGroup.CheckButton:SkinCheckBox()
 
 	LFGListFrame.EntryCreation.ActivityFinder.Dialog:StripTextures()
 	LFGListFrame.EntryCreation.ActivityFinder.Dialog:SetTemplate("Transparent")

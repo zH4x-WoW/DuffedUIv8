@@ -1,4 +1,4 @@
-## Interface: 70000
+## Interface: 70100
 ## Author: Azilroka / Credits: Elv, Sortokk
 ## Version: 1.11
 ## Title: |cff1784d1Enhanced Config|r
