@@ -551,7 +551,7 @@ D.SetGridGroupRole = function(self, role)
 end
 
 -- Grid
-D.countOffsets = {
+D["countOffsets"] = {
 	TOPLEFT = {6, 1},
 	TOPRIGHT = {-6, 1},
 	BOTTOMLEFT = {6, 1},
@@ -562,184 +562,294 @@ D.countOffsets = {
 	BOTTOM = {0, 0},
 }
 
-D.createAuraWatch = function(self, unit)
+D.CreateAuraWatchIcon = function(icon)
+	icon:SetTemplate()
+	icon.icon:Point("TOPLEFT", 1, -1)
+	icon.icon:Point("BOTTOMRIGHT", -1, 1)
+	icon.icon:SetTexCoord(.08, .92, .08, .92)
+	icon.icon:SetDrawLayer("ARTWORK")
+
+	if (icon.cd) then
+		icon.cd:SetHideCountdownNumbers(true)
+		icon.cd:SetReverse(true)
+	end
+
+	icon.overlay:SetTexture()
+end
+
+D["createAuraWatch"] = function(self, unit)
+	local Class = select(2, UnitClass("player"))
+
 	local auras = CreateFrame("Frame", nil, self)
 	auras:SetPoint("TOPLEFT", self.Health, 2, -2)
 	auras:SetPoint("BOTTOMRIGHT", self.Health, -2, 2)
 	auras.presentAlpha = 1
 	auras.missingAlpha = 0
-	auras.displayText = true
 	auras.icons = {}
-	auras.PostCreateIcon = function(self, icon)
-		if icon.icon and not icon.hideIcon then
-			icon:SetTemplate()
-			icon.icon:Point("TOPLEFT", 1, -1)
-			icon.icon:Point("BOTTOMRIGHT", -1, 1)
-			icon.icon:SetTexCoord(.08, .92, .08, .92)
-			icon.icon:SetDrawLayer("ARTWORK")
-		end
-		if icon.cd then icon.cd:SetReverse() end
-		if icon.overlay then icon.overlay:SetTexture() end
-	end
+	auras.PostCreateIcon = D["CreateAuraWatchIcon"]
+	auras.strictMatching = true
 
 	local buffs = {}
 
-	if D.buffids["ALL"] then
-		for key, value in pairs(D.buffids["ALL"]) do tinsert(buffs, value) end
+	if (D.Buffids["ALL"]) then
+		for key, value in pairs(D.Buffids["ALL"]) do tinsert(buffs, value) end
 	end
 
-	if (D.buffids[D.Class]) then
-		for key, value in pairs(D.buffids[D.Class]) do tinsert(buffs, value) end
+	if (D.Buffids[D.Class]) then
+		for key, value in pairs(D.Buffids[D.Class]) do tinsert(buffs, value) end
 	end
 
-	if (buffs) then
+	-- Cornerbuffs
+	if buffs then
 		for key, spell in pairs(buffs) do
-			local icon = CreateFrame("Frame", nil, auras)
-			icon.spellID = spell[1]
-			icon.anyUnit = spell[5]
-			icon:Width(6)
-			icon:Height(6)
-			icon:SetPoint(spell[2], unpack(spell[3]))
+			local Icon = CreateFrame("Frame", nil, auras)
+			Icon.spellID = spell[1]
+			Icon.anyUnit = spell[4]
+			Icon:Width(6)
+			Icon:Height(6)
+			Icon:SetPoint(spell[2], 0, 0)
 
-			local tex = icon:CreateTexture(nil, "OVERLAY")
-			tex:SetAllPoints(icon)
-			tex:SetTexture(C["media"].blank)
-			if (spell[4]) then tex:SetVertexColor(unpack(spell[4])) else tex:SetVertexColor(.8, .8, .8) end
+			local Texture = Icon:CreateTexture(nil, "OVERLAY")
+			Texture:SetAllPoints(Icon)
+			Texture:SetTexture(C["media"].blank)
 
-			local count = icon:CreateFontString(nil, "OVERLAY")
-			count:SetFont(C["media"].font, 8, "THINOUTLINE")
-			count:SetPoint("CENTER", unpack(D.countOffsets[spell[2]]))
-			icon.count = count
+			if (spell[3]) then Texture:SetVertexColor(unpack(spell[3])) else Texture:SetVertexColor(0.8, 0.8, 0.8) end
 
-			auras.icons[spell[1]] = icon
+			local Count = Icon:CreateFontString(nil, "OVERLAY")
+			Count:SetFont(C["media"].font, 8, "THINOUTLINE")
+			Count:SetPoint("CENTER", unpack(D.countOffsets[spell[2]]))
+			Icon.count = Count
+
+			auras.icons[spell[1]] = Icon
 		end
 	end
-	self.AuraWatch = auras
+	frame.AuraWatch = auras
 end
 
 --[[Raidbuffs & -debuffs]]--
-if C["raid"].raidunitdebuffwatch == true then
-	do
-		D.buffids = {
-			PRIEST = {
-				{194384, "TOPRIGHT", {0, 0}, {1, 0, 0}, true}, 			-- Atonment
-				{41635, "BOTTOMRIGHT", {0, 0}, {.2, .7, .2}}, 			-- Prayer of Mending
-				{139, "BOTTOMLEFT", {0, 0}, {.4, .7, .2}}, 				-- Renew
-				{17, "TOPLEFT", {0, 0}, {.81, .85, .1}, true}, 			-- Power Word: Shield
-			},
-			DRUID = {
-				{774, "TOPLEFT", {0, 0}, {.8, .4, .8}}, 				-- Rejuvenation
-				{155777, "TOPLEFT", {0, -8}, {.3, .3, .8}}, 			-- Germination
-				{8936, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, 				-- Regrowth
-				{145205, "TOPRIGHT", {0, -8}, {.21, .8, .21}},			-- Efflorescence
-				{33763, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, 			-- Lifebloom
-				{48438, "BOTTOMRIGHT", {0, 0}, {.8, .4, 0}}, 			-- Wild Growth
-			},
-			PALADIN = {
-				{53563, "TOPRIGHT", {0, 0}, {.7, .3, .7}}, 				-- Beacon of Light
-				{1022, "BOTTOMRIGHT", {0, 0}, {.2, .2, 1}, true}, 		-- Hand of Protection
-				{1044, "BOTTOMRIGHT", {0, 0}, {.89, .45, 0}, true}, 	-- Hand of Freedom
-				{6940, "BOTTOMRIGHT", {0, 0}, {.89, .1, .1}, true}, 	-- Hand of Sacrifice
-				{114163, "BOTTOMLEFT", {0, 0}, {.89, .1, .1}, true},	-- Eternal Flame
-				{156910, "TOPRIGHT", {0, 0},{.7, .3, .7}}, 				-- Beacon of Faith
-			},
-			SHAMAN = {
-				{61295, "TOPLEFT", {0, 0}, {.7, .3, .7}}, 				-- Riptide
-			},
-			MONK = {
-				{119611, "TOPLEFT", {0, 0}, {.8, .4, .8}}, 				-- Renewing Mist
-				{116849, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, 			-- Life Cocoon
-				{124682, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, 			-- Enveloping Mist
-				{124081, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}}, 			-- Zen Sphere
-			},
-			ALL = {
-				{14253, "RIGHT", {0, 0}, {0, 1, 0}}, 					-- Abolish Poison
-			},
-		}
-	end
+D.Buffids = {
+	PRIEST = {
+		{194384, "TOPRIGHT", {0, 0}, {1, 0, 0}, true}, 			-- Atonment
+		{41635, "BOTTOMRIGHT", {0, 0}, {.2, .7, .2}}, 			-- Prayer of Mending
+		{139, "BOTTOMLEFT", {0, 0}, {.4, .7, .2}}, 				-- Renew
+		{17, "TOPLEFT", {0, 0}, {.81, .85, .1}, true}, 			-- Power Word: Shield
+	},
+	DRUID = {
+		{774, "TOPLEFT", {0, 0}, {.8, .4, .8}}, 				-- Rejuvenation
+		{155777, "TOPLEFT", {0, -8}, {.3, .3, .8}}, 			-- Germination
+		{8936, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, 				-- Regrowth
+		{145205, "TOPRIGHT", {0, -8}, {.21, .8, .21}},			-- Efflorescence
+		{33763, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, 			-- Lifebloom
+		{48438, "BOTTOMRIGHT", {0, 0}, {.8, .4, 0}}, 			-- Wild Growth
+	},
+	PALADIN = {
+		{53563, "TOPRIGHT", {0, 0}, {.7, .3, .7}}, 				-- Beacon of Light
+		{1022, "BOTTOMRIGHT", {0, 0}, {.2, .2, 1}, true}, 		-- Hand of Protection
+		{1044, "BOTTOMRIGHT", {0, 0}, {.89, .45, 0}, true}, 	-- Hand of Freedom
+		{6940, "BOTTOMRIGHT", {0, 0}, {.89, .1, .1}, true}, 	-- Hand of Sacrifice
+		{114163, "BOTTOMLEFT", {0, 0}, {.89, .1, .1}, true},	-- Eternal Flame
+		{156910, "TOPRIGHT", {0, 0},{.7, .3, .7}}, 				-- Beacon of Faith
+	},
+	SHAMAN = {
+		{61295, "TOPLEFT", {0, 0}, {.7, .3, .7}}, 				-- Riptide
+	},
+	MONK = {
+		{119611, "TOPLEFT", {0, 0}, {.8, .4, .8}}, 				-- Renewing Mist
+		{116849, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, 			-- Life Cocoon
+		{124682, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, 			-- Enveloping Mist
+		{124081, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}}, 			-- Zen Sphere
+	},
+	ALL = {
+		{14253, "RIGHT", {0, 0}, {0, 1, 0}}, 					-- Abolish Poison
+	},
+}
 
-	do
-		local ORD = oUF_RaidDebuffs
-		if not ORD then return end
-
-		ORD.ShowDispelableDebuff = true
-		ORD.FilterDispellableDebuff = true
-		ORD.MatchBySpellName = true
-		ORD.DeepCorruption = true
-
-		local function SpellName(id)
-			local name = select(1, GetSpellInfo(id))
-			return name
-		end
-
-		D.debuffids = {
-			-- Legion Debuffs
-			-- The Emerald Nightmare
-			-- Il'gynoth, Heart of Corruption
-			SpellName(209469), -- Touch of Corruption
-			SpellName(208929), -- Spew Corruption
-			-- Elerethe Renferal
-			SpellName(215288), -- Web of Pain
-			-- Dragons of Nightmare
-			SpellName(203770), -- Defiled Vines
-			-- Cenarius
-			SpellName(210279), -- Creeping Nightmares
-			-- Xavius
-			SpellName(206651), -- Darkening Soul
-			SpellName(209158), -- Blackening Soul
-			--Trial of Valor
-			SpellName(228030), -- Expel Light (need aura)
-			SpellName(227807), -- Storm of Justice
-			SpellName(228918), -- Stormforged Spear
-			SpellName(227490), -- Branded
-			SpellName(227491), -- Branded
-			SpellName(227498), -- Branded
-			SpellName(227499), -- Branded
-			SpellName(227500), -- Branded
-			SpellName(231297), -- Runic Brand (Mythic Only)
-			-- Guarm
-			SpellName(228228), -- Flame Lick
-			SpellName(228248), -- Frost Lick
-			SpellName(228253), -- Shadow Lick
-			--SpellName(228768), -- Salty Spittle
-			--SpellName(228758), -- Fiery Phlegm
-			--SpellName(228769), -- Dark Discharge
-			-- Helya
-			SpellName(228883), -- Unholy Reckoning (Trash)
-			SpellName(228054), -- Taint of the Sea
-			SpellName(229119), -- Orb of Corruption
-			SpellName(228058), -- Orb of Corrosion
-			SpellName(193367), -- Fetid Rot
-			SpellName(227982), -- Bilewater Redox
-			-- The Nighthold
-			-- Skorpyron
-			SpellName(204531), -- Arcane Tether
-			-- Trilliax
-			SpellName(206788), -- Toxic Slice
-			-- Spellbalde Aluriel
-			SpellName(212587), -- Mark of Frost
-			SpellName(213328), -- Detonate: Arcane Orb
-			-- Tichondrius
-			SpellName(206480), -- Carrion Plague
-			SpellName(216040), -- Burning Soul
-			SpellName(208230), -- Feast of Blood
-			-- High Botanist Tel'arn
-			SpellName(218424), -- Parasitic Fetter
-			-- Star Augur Etraeus
-			SpellName(206936), -- Icy Ejection
-			SpellName(206399), -- Felflame
-			SpellName(206464), -- Coronal Ejection
-			SpellName(206965), -- Voidburst
-			-- Grand Magistrix Elisande
-			SpellName(210387), -- Permeliative Torment
-			-- Gul'dan
-			SpellName(206222), -- Bonds of Fel
-			SpellName(206675), -- Shatter Essence
-			SpellName(212568), -- Drain
-			SpellName(206883), -- Soul Vortex
-		}
-		D.ReverseTimer = {
-		},
-		ORD:RegisterDebuffs(D.debuffids)
-	end
-end
+D.Debuffids = {
+	-- Legion Debuffs
+	-- The Emerald Nightmare
+	-- Nythendra
+	[GetSpellInfo(204504)] = 6, -- Infested
+	[GetSpellInfo(205043)] = 6, -- Infested mind
+	[GetSpellInfo(203096)] = 6, -- Rot
+	[GetSpellInfo(204463)] = 6, -- Volatile Rot
+	[GetSpellInfo(203045)] = 6, -- Infested Ground
+	[GetSpellInfo(203646)] = 6, -- Burst of Corruption
+	-- Elerethe Renferal
+	[GetSpellInfo(210228)] = 6, -- Dripping Fangs
+	[GetSpellInfo(215307)] = 6, -- Web of Pain
+	[GetSpellInfo(215300)] = 6, -- Web of Pain
+	[GetSpellInfo(215460)] = 6, -- Necrotic Venom
+	[GetSpellInfo(213124)] = 6, -- Venomous Pool
+	[GetSpellInfo(210850)] = 6, -- Twisting Shadows
+	[GetSpellInfo(215489)] = 6, -- Venomous Pool
+	-- Il'gynoth, Heart of the Corruption
+	[GetSpellInfo(208929)] = 6, -- Spew Corruption
+	[GetSpellInfo(210984)] = 6, -- Eye of Fate
+	[GetSpellInfo(209469)] = 7, -- Touch of Corruption
+	[GetSpellInfo(208697)] = 6, -- Mind Flay
+	-- Ursoc
+	[GetSpellInfo(198108)] = 6, -- Unbalanced
+	[GetSpellInfo(197943)] = 6, -- Overwhelm
+	[GetSpellInfo(204859)] = 6, -- Rend Flesh
+	[GetSpellInfo(205611)] = 6, -- Miasma
+	[GetSpellInfo(198006)] = 6, -- Focused Gaze
+	[GetSpellInfo(197980)] = 6, -- Nightmarish Cacophony
+	-- Dragons of Nightmare
+	[GetSpellInfo(203102)] = 6, -- Mark of Ysondre
+	[GetSpellInfo(203121)] = 6, -- Mark of Taerar
+	[GetSpellInfo(203125)] = 6, -- Mark of Emeriss
+	[GetSpellInfo(203124)] = 6, -- Mark of Lethon
+	[GetSpellInfo(204731)] = 7, -- Wasting Dread
+	[GetSpellInfo(203110)] = 7, -- Slumbering Nightmare
+	[GetSpellInfo(207681)] = 7, -- Nightmare Bloom
+	[GetSpellInfo(205341)] = 7, -- Sleeping Fog
+	[GetSpellInfo(203770)] = 7, -- Defiled Vines
+	[GetSpellInfo(203787)] = 7, -- Volatile Infection
+	-- Cenarius
+	[GetSpellInfo(210279)] = 5, -- Creeping Nightmares
+	[GetSpellInfo(213162)] = 6, -- Nightmare Blast
+	[GetSpellInfo(210315)] = 6, -- Nightmare Brambles
+	[GetSpellInfo(212681)] = 6, -- Cleansed Ground
+	[GetSpellInfo(211507)] = 6, -- Nightmare Javelin
+	[GetSpellInfo(211471)] = 6, -- Scorned Touch
+	[GetSpellInfo(211612)] = 6, -- Replenishing Roots
+	[GetSpellInfo(216516)] = 6, -- Ancient Dream
+	-- Xavius
+	[GetSpellInfo(206005)] = 5, -- Dream Simulacrum
+	[GetSpellInfo(206651)] = 7, -- Darkening Soul
+	[GetSpellInfo(209158)] = 7, -- Blackening Soul
+	[GetSpellInfo(211802)] = 6, -- Nightmare Blades
+	[GetSpellInfo(206109)] = 6, -- Awakening to the Nightmare
+	[GetSpellInfo(209034)] = 6, -- Bonds of Terror
+	[GetSpellInfo(210451)] = 6, -- Bonds of Terror
+	[GetSpellInfo(208431)] = 6, -- Corruption: Descent into Madness
+	[GetSpellInfo(207409)] = 6, -- Madness
+	[GetSpellInfo(211634)] = 6, -- The Infinite Dark
+	[GetSpellInfo(208385)] = 6, -- Tainted Discharge
+	-- Trial of Valor (By Anzor)
+	-- Odyn
+	[GetSpellInfo(228030)] = 6, -- Expel Light (need aura)
+	[GetSpellInfo(227807)] = 6, -- Storm of Justice
+	[GetSpellInfo(228918)] = 6, -- Stormforged Spear
+	[GetSpellInfo(227490)] = 6, -- Branded
+	[GetSpellInfo(227491)] = 6, -- Branded
+	[GetSpellInfo(227498)] = 6, -- Branded
+	[GetSpellInfo(227499)] = 6, -- Branded
+	[GetSpellInfo(227500)] = 6, -- Branded
+	[GetSpellInfo(231297)] = 6, -- Runic Brand (Mythic Only)
+	-- Guarm
+	[GetSpellInfo(228228)] = 5, -- Flame Lick
+	[GetSpellInfo(228248)] = 7, -- Frost Lick
+	[GetSpellInfo(228253)] = 6, -- Shadow Lick
+	--[GetSpellInfo(228768)] = 6, -- Salty Spittle
+	--[GetSpellInfo(228758)] = 6, -- Fiery Phlegm
+	--[GetSpellInfo(228769)] = 6, -- Dark Discharge
+	-- Helya
+	[GetSpellInfo(228883)] = 6, -- Unholy Reckoning (Trash)
+	[GetSpellInfo(228054)] = 7, -- Taint of the Sea
+	[GetSpellInfo(229119)] = 6, -- Orb of Corruption
+	[GetSpellInfo(228058)] = 6, -- Orb of Corrosion
+	[GetSpellInfo(193367)] = 6, -- Fetid Rot
+	[GetSpellInfo(227982)] = 6, -- Bilewater Redox
+	-- The Nighthold
+	-- Skorpyron
+	[GetSpellInfo(204766)] = 6, -- Energy Surge
+	[GetSpellInfo(214718)] = 6, -- Acidic Fragments
+	[GetSpellInfo(211801)] = 6, -- Volatile Fragments
+	[GetSpellInfo(204284)] = 6, -- Broken Shard (Protection)
+	[GetSpellInfo(204275)] = 6, -- Arcanoslash (Tank)
+	[GetSpellInfo(211659)] = 6, -- Arcane Tether (Tank debuff)
+	[GetSpellInfo(204483)] = 6, -- Focused Blast (Stun)
+	-- Chronomatic Anomaly
+	[GetSpellInfo(206607)] = 6, -- Chronometric Particles (Tank stack debuff)
+	[GetSpellInfo(206609)] = 6, -- Time Release (Heal buff/debuff)
+	[GetSpellInfo(205653)] = 6, -- Passage of Time
+	[GetSpellInfo(206617)] = 6, -- Time Bomb
+	[GetSpellInfo(206618)] = 6, -- Time Bomb
+	[GetSpellInfo(207871)] = 6, -- Vortex (Mythic)
+	[GetSpellInfo(212099)] = 6, -- Temporal Charge
+	-- Trilliax
+	[GetSpellInfo(206488)] = 6, -- Arcane Seepage
+	[GetSpellInfo(206641)] = 6, -- Arcane Spear (Tank)
+	[GetSpellInfo(206798)] = 6, -- Toxic Slice
+	[GetSpellInfo(214672)] = 6, -- Annihilation
+	[GetSpellInfo(214573)] = 6, -- Stuffed
+	[GetSpellInfo(214583)] = 6, -- Sterilize
+	[GetSpellInfo(208910)] = 6, -- Arcing Bonds
+	[GetSpellInfo(206838)] = 6, -- Succulent Feast
+	-- Spellblade Aluriel
+	[GetSpellInfo(212492)] = 6, -- Annihilate (Tank)
+	[GetSpellInfo(212494)] = 6, -- Annihilated (Main Tank debuff)
+	[GetSpellInfo(212587)] = 6, -- Mark of Frost
+	[GetSpellInfo(212531)] = 6, -- Mark of Frost (marked)
+	[GetSpellInfo(212530)] = 6, -- Replicate: Mark of Frost
+	[GetSpellInfo(212647)] = 6, -- Frostbitten
+	[GetSpellInfo(212736)] = 6, -- Pool of Frost
+	[GetSpellInfo(213085)] = 6, -- Frozen Tempest
+	[GetSpellInfo(213621)] = 6, -- Entombed in Ice
+	[GetSpellInfo(213148)] = 6, -- Searing Brand Chosen
+	[GetSpellInfo(213181)] = 6, -- Searing Brand Stunned
+	[GetSpellInfo(213166)] = 6, -- Searing Brand
+	[GetSpellInfo(213278)] = 6, -- Burning Ground
+	[GetSpellInfo(213504)] = 6, -- Arcane Fog
+	-- Tichondrius
+	[GetSpellInfo(206480)] = 6, -- Carrion Plague
+	[GetSpellInfo(215988)] = 6, -- Carrion Nightmare
+	[GetSpellInfo(208230)] = 6, -- Feast of Blood
+	[GetSpellInfo(212794)] = 6, -- Brand of Argus
+	[GetSpellInfo(216685)] = 6, -- Flames of Argus
+	[GetSpellInfo(206311)] = 6, -- Illusionary Night
+	[GetSpellInfo(206466)] = 6, -- Essence of Night
+	[GetSpellInfo(216024)] = 6, -- Volatile Wound
+	[GetSpellInfo(216027)] = 6, -- Nether Zone
+	[GetSpellInfo(216039)] = 6, -- Fel Storm
+	[GetSpellInfo(216726)] = 6, -- Ring of Shadows
+	[GetSpellInfo(216040)] = 6, -- Burning Soul
+	-- Krosus
+	[GetSpellInfo(206677)] = 6, -- Searing Brand
+	[GetSpellInfo(205344)] = 6, -- Orb of Destruction
+	-- High Botanist Tel'arn
+	[GetSpellInfo(218503)] = 6, -- Recursive Strikes (Tank)
+	[GetSpellInfo(219235)] = 6, -- Toxic Spores
+	[GetSpellInfo(218809)] = 6, -- Call of Night
+	[GetSpellInfo(218342)] = 6, -- Parasitic Fixate
+	[GetSpellInfo(218304)] = 6, -- Parasitic Fetter
+	[GetSpellInfo(218780)] = 6, -- Plasma Explosion
+	-- Star Augur Etraeus
+	[GetSpellInfo(205984)] = 6, -- Gravitaional Pull
+	[GetSpellInfo(214167)] = 6, -- Gravitaional Pull
+	[GetSpellInfo(214335)] = 6, -- Gravitaional Pull
+	[GetSpellInfo(206936)] = 6, -- Icy Ejection
+	[GetSpellInfo(206388)] = 6, -- Felburst
+	[GetSpellInfo(206585)] = 6, -- Absolute Zero
+	[GetSpellInfo(206398)] = 6, -- Felflame
+	[GetSpellInfo(206589)] = 6, -- Chilled
+	[GetSpellInfo(205649)] = 6, -- Fel Ejection
+	[GetSpellInfo(206965)] = 6, -- Voidburst
+	[GetSpellInfo(206464)] = 6, -- Coronal Ejection
+	[GetSpellInfo(207143)] = 6, -- Void Ejection
+	[GetSpellInfo(206603)] = 6, -- Frozen Solid
+	[GetSpellInfo(207720)] = 6, -- Witness the Void
+	[GetSpellInfo(216697)] = 6, -- Frigid Pulse
+	-- Grand Magistrix Elisande
+	[GetSpellInfo(209166)] = 6, -- Fast Time
+	[GetSpellInfo(211887)] = 6, -- Ablated
+	[GetSpellInfo(209615)] = 6, -- Ablation
+	[GetSpellInfo(209244)] = 6, -- Delphuric Beam
+	[GetSpellInfo(209165)] = 6, -- Slow Time
+	[GetSpellInfo(209598)] = 6, -- Conflexive Burst
+	[GetSpellInfo(209433)] = 6, -- Spanning Singularity
+	[GetSpellInfo(209973)] = 6, -- Ablating Explosion
+	[GetSpellInfo(209549)] = 6, -- Lingering Burn
+	[GetSpellInfo(211261)] = 6, -- Permaliative Torment
+	[GetSpellInfo(208659)] = 6, -- Arcanetic Ring
+	-- Gul'dan
+	[GetSpellInfo(210339)] = 6, -- Time Dilation
+	[GetSpellInfo(180079)] = 6, -- Felfire Munitions
+	[GetSpellInfo(206875)] = 6, -- Fel Obelisk (Tank)
+	[GetSpellInfo(206840)] = 6, -- Gaze of Vethriz
+	[GetSpellInfo(206896)] = 6, -- Torn Soul
+	[GetSpellInfo(206221)] = 6, -- Empowered Bonds of Fel
+	[GetSpellInfo(208802)] = 6, -- Soul Corrosion
+	[GetSpellInfo(212686)] = 6, -- Flames of Sargeras
+}

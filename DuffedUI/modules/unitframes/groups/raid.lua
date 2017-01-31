@@ -238,27 +238,36 @@ D["ConstructUFRaid"] = function(self)
 			D.createAuraWatch(self,unit)
 
 			local RaidDebuffs = CreateFrame("Frame", nil, self)
-			RaidDebuffs:Height(24)
-			RaidDebuffs:Width(24)
-			RaidDebuffs:Point("CENTER", health, 1,0)
-			RaidDebuffs:SetFrameStrata(health:GetFrameStrata())
-			RaidDebuffs:SetFrameLevel(health:GetFrameLevel() + 2)
-			RaidDebuffs:SetTemplate("Default")
+			RaidDebuffs:SetHeight(22)
+			RaidDebuffs:SetWidth(22)
+			RaidDebuffs:SetPoint("CENTER", Health)
+			RaidDebuffs:SetFrameLevel(health:GetFrameLevel() + 20)
+			RaidDebuffs:SetBackdrop(backdrop)
+			RaidDebuffs:SetBackdropColor(unpack(C["media"].backdropcolor))
+			RaidDebuffs:SetTemplate()
 
-			RaidDebuffs.icon = RaidDebuffs:CreateTexture(nil, "OVERLAY")
-			RaidDebuffs.icon:SetTexCoord(unpack(D["IconCoord"]))
-			RaidDebuffs.icon:Point("TOPLEFT", 2, -2)
-			RaidDebuffs.icon:Point("BOTTOMRIGHT", -2, 2)
+			RaidDebuffs.icon = RaidDebuffs:CreateTexture(nil, "ARTWORK")
+			RaidDebuffs.icon:SetTexCoord(.1, .9, .1, .9)
+			RaidDebuffs.icon:SetInside(RaidDebuffs)
 
-			RaidDebuffs.time = RaidDebuffs:CreateFontString(nil, "OVERLAY")
-			RaidDebuffs.time:SetFont(f, fs, ff)
-			RaidDebuffs.time:Point("CENTER", 1, 0)
-			RaidDebuffs.time:SetTextColor(1, .9, 0)
+			RaidDebuffs.cd = CreateFrame("Cooldown", nil, RaidDebuffs)
+			RaidDebuffs.cd:SetAllPoints(RaidDebuffs)
+			RaidDebuffs.cd:SetHideCountdownNumbers(true)
+
+			RaidDebuffs.ShowDispelableDebuff = true
+			RaidDebuffs.FilterDispelableDebuff = true
+			RaidDebuffs.MatchBySpellName = true
+			RaidDebuffs.ShowBossDebuff = true
+			RaidDebuffs.BossDebuffPriority = 5
 
 			RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, "OVERLAY")
-			RaidDebuffs.count:SetFont(f, fs, ff)
-			RaidDebuffs.count:Point("BOTTOMRIGHT", RaidDebuffs, "BOTTOMRIGHT", 0, 2)
+			RaidDebuffs.count:SetFont(C["media"].font, 11, "OUTLINE")
+			RaidDebuffs.count:SetPoint("BOTTOMRIGHT", RaidDebuffs, "BOTTOMRIGHT", 2, 0)
 			RaidDebuffs.count:SetTextColor(1, .9, 0)
+
+			RaidDebuffs.SetDebuffTypeColor = RaidDebuffs.SetBackdropBorderColor
+			RaidDebuffs.Debuffs = D.Debuffids
+
 			self.RaidDebuffs = RaidDebuffs
 		end
 	end

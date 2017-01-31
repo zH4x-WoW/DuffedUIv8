@@ -8,6 +8,7 @@ local function LoadSkin()
 	MailFrameCloseButton:SkinCloseButton()
 	MailFrameInset:StripTextures()
 	InboxFrame:StripTextures()
+	
 
 	for i = 1, INBOXITEMS_TO_DISPLAY do
 		local bg = _G["MailItem"..i]

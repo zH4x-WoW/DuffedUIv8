@@ -3,14 +3,11 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Fixes for searching in bags by Rav99",
-		"• AddOnSkins by liquidbase",
-		"• Fix for copychat by Rav99",
-		"• Fix for FPS-drop by Rav99",
+		"• Small fixes for 7.1.5",
 		--"• ",
 	" ",
 	"Notes:",
-		"• Last version for a long time. If anyone want to takeover the project\nplease send me a PM on wowinterface.",
+		"",
 }
 
 local function ModifiedString(string)
