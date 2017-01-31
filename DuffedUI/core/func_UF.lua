@@ -562,21 +562,6 @@ D["countOffsets"] = {
 	BOTTOM = {0, 0},
 }
 
-D.CreateAuraWatchIcon = function(icon)
-	icon:SetTemplate()
-	icon.icon:Point("TOPLEFT", 1, -1)
-	icon.icon:Point("BOTTOMRIGHT", -1, 1)
-	icon.icon:SetTexCoord(.08, .92, .08, .92)
-	icon.icon:SetDrawLayer("ARTWORK")
-
-	if (icon.cd) then
-		icon.cd:SetHideCountdownNumbers(true)
-		icon.cd:SetReverse(true)
-	end
-
-	icon.overlay:SetTexture()
-end
-
 D["createAuraWatch"] = function(self, unit)
 	local Class = select(2, UnitClass("player"))
 
@@ -586,7 +571,20 @@ D["createAuraWatch"] = function(self, unit)
 	auras.presentAlpha = 1
 	auras.missingAlpha = 0
 	auras.icons = {}
-	auras.PostCreateIcon = D["CreateAuraWatchIcon"]
+	auras.PostCreateIcon = function(self, icon)
+		if icon.icon and not icon.hideIcon then
+			icon:SetTemplate()
+			icon.icon:Point("TOPLEFT", 1, -1)
+			icon.icon:Point("BOTTOMRIGHT", -1, 1)
+			icon.icon:SetTexCoord(.08, .92, .08, .92)
+			icon.icon:SetDrawLayer("ARTWORK")
+		end
+		if (icon.cd) then
+			icon.cd:SetHideCountdownNumbers(true)
+			icon.cd:SetReverse(true)
+		end
+		if icon.overlay then icon.overlay:SetTexture() end
+	end
 	auras.strictMatching = true
 
 	local buffs = {}
@@ -623,7 +621,7 @@ D["createAuraWatch"] = function(self, unit)
 			auras.icons[spell[1]] = Icon
 		end
 	end
-	frame.AuraWatch = auras
+	self.AuraWatch = auras
 end
 
 --[[Raidbuffs & -debuffs]]--
@@ -752,6 +750,10 @@ D.Debuffids = {
 	[GetSpellInfo(193367)] = 6, -- Fetid Rot
 	[GetSpellInfo(227982)] = 6, -- Bilewater Redox
 	-- The Nighthold
+	--Trash
+	[GetSpellInfo(224234)] = 6, -- Ill Fated
+	[GetSpellInfo(225412)] = 6, -- Mass Siphon
+	[GetSpellInfo(224568)] = 6, -- Mass Supress
 	-- Skorpyron
 	[GetSpellInfo(204766)] = 6, -- Energy Surge
 	[GetSpellInfo(214718)] = 6, -- Acidic Fragments
