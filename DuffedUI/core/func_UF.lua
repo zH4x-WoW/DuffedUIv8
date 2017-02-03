@@ -61,7 +61,7 @@ UnitPopupMenus["PARTY"] = { "ADD_FRIEND", "ADD_FRIEND_MENU", "MUTE", "UNMUTE", "
 UnitPopupMenus["RAID_PLAYER"] = { "ADD_FRIEND", "ADD_FRIEND_MENU", "MUTE", "UNMUTE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "WHISPER", "INSPECT", "ACHIEVEMENTS", "TRADE", "FOLLOW", "DUEL", "PET_BATTLE_PVP_DUEL", "RAID_TARGET_ICON", "SELECT_ROLE", "RAID_LEADER", "RAID_PROMOTE", "RAID_DEMOTE", "LOOT_PROMOTE", "VOTE_TO_KICK", "RAID_REMOVE", "RAF_SUMMON", "RAF_GRANT_LEVEL", "REPORT_PLAYER", "CANCEL" }
 UnitPopupMenus["RAID"] = { "MUTE", "UNMUTE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "RAID_LEADER", "RAID_PROMOTE", "RAID_MAINTANK", "RAID_MAINASSIST", "LOOT_PROMOTE", "RAID_DEMOTE", "VOTE_TO_KICK", "RAID_REMOVE", "MOVE_PLAYER_FRAME", "MOVE_TARGET_FRAME", "REPORT_PLAYER", "CANCEL" }
 
---[[Healthupdate for UFs]]--
+--Healthupdate for UFs
 D.PostUpdateHealth = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
 		if not UnitIsConnected(unit) then
@@ -118,7 +118,7 @@ D.PostUpdateHealth = function(health, unit, min, max)
 	end
 end
 
---[[Healthupdate for Raidframes]]--
+--Healthupdate for Raidframes
 D["PostUpdateHealthRaid"] = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
 		if not UnitIsConnected(unit) then
@@ -160,7 +160,7 @@ D.PostUpdatePetColor = function(health, unit, min, max)
 	end
 end
 
---[[Powerupdate for UFs]]--
+--Powerupdate for UFs
 D.PostUpdatePower = function(power, unit, min, max)
 	if not power.value then return end
 
@@ -234,7 +234,7 @@ D.PostUpdateAltMana = function(unit, min, max)
 	end
 end
 
---[[Timer for Buffs & Debuffs]]--
+--Timer for Buffs & Debuffs
 D.FormatTime = function(s)
 	local day, hour, minute = 86400, 3600, 60
 	if s >= day then
@@ -624,41 +624,44 @@ D["createAuraWatch"] = function(self, unit)
 	self.AuraWatch = auras
 end
 
---[[Raidbuffs & -debuffs]]--
+--Raidbuffs & -debuffs
 D.Buffids = {
 	PRIEST = {
-		{194384, "TOPRIGHT", {0, 0}, {1, 0, 0}, true}, 			-- Atonment
-		{41635, "BOTTOMRIGHT", {0, 0}, {.2, .7, .2}}, 			-- Prayer of Mending
-		{139, "BOTTOMLEFT", {0, 0}, {.4, .7, .2}}, 				-- Renew
-		{17, "TOPLEFT", {0, 0}, {.81, .85, .1}, true}, 			-- Power Word: Shield
+		{41635, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},             -- Prayer of Mending
+		{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}},                -- Renew
+		{17, "TOPLEFT", {0.81, 0.85, 0.1}, true},            -- Power Word: Shield
 	},
+
 	DRUID = {
-		{774, "TOPLEFT", {0, 0}, {.8, .4, .8}}, 				-- Rejuvenation
-		{155777, "TOPLEFT", {0, -8}, {.3, .3, .8}}, 			-- Germination
-		{8936, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, 				-- Regrowth
-		{145205, "TOPRIGHT", {0, -8}, {.21, .8, .21}},			-- Efflorescence
-		{33763, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, 			-- Lifebloom
-		{48438, "BOTTOMRIGHT", {0, 0}, {.8, .4, 0}}, 			-- Wild Growth
+		{774, "TOPLEFT", {0.8, 0.4, 0.8}},                   -- Rejuvenation
+		{155777, "LEFT", {0.8, 0.4, 0.8}},                   -- Germination
+		{8936, "TOPRIGHT", {0.2, 0.8, 0.2}},                 -- Regrowth
+		{33763, "BOTTOMLEFT", {0.4, 0.8, 0.2}},              -- Lifebloom
+		{48438, "BOTTOMRIGHT", {0.8, 0.4, 0}},               -- Wild Growth
 	},
+
 	PALADIN = {
-		{53563, "TOPRIGHT", {0, 0}, {.7, .3, .7}}, 				-- Beacon of Light
-		{1022, "BOTTOMRIGHT", {0, 0}, {.2, .2, 1}, true}, 		-- Hand of Protection
-		{1044, "BOTTOMRIGHT", {0, 0}, {.89, .45, 0}, true}, 	-- Hand of Freedom
-		{6940, "BOTTOMRIGHT", {0, 0}, {.89, .1, .1}, true}, 	-- Hand of Sacrifice
-		{114163, "BOTTOMLEFT", {0, 0}, {.89, .1, .1}, true},	-- Eternal Flame
-		{156910, "TOPRIGHT", {0, 0},{.7, .3, .7}}, 				-- Beacon of Faith
+		{53563, "TOPLEFT", {0.7, 0.3, 0.7}},	             -- Beacon of Light
+		{156910, "TOPRIGHT", {0.7, 0.3, 0.7}},	             -- Beacon of Faith
+		{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true}, 	     -- Hand of Protection
+		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},	     -- Hand of Freedom
+		{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},	     -- Hand of Sacrifice
+		{114163, "BOTTOMLEFT", {0.81, 0.85, 0.1}, true},	 -- Eternal Flame
 	},
+
 	SHAMAN = {
-		{61295, "TOPLEFT", {0, 0}, {.7, .3, .7}}, 				-- Riptide
+		{61295, "TOPLEFT", {0.7, 0.3, 0.7}},                 -- Riptide
 	},
+
 	MONK = {
-		{119611, "TOPLEFT", {0, 0}, {.8, .4, .8}}, 				-- Renewing Mist
-		{116849, "TOPRIGHT", {0, 0}, {.2, .8, .2}}, 			-- Life Cocoon
-		{124682, "BOTTOMLEFT", {0, 0}, {.4, .8, .2}}, 			-- Enveloping Mist
-		{124081, "BOTTOMRIGHT", {0, 0}, {.7, .4, 0}}, 			-- Zen Sphere
+		{119611, "TOPLEFT", {0.8, 0.4, 0.8}},	             -- Renewing Mist
+		{116849, "TOPRIGHT", {0.2, 0.8, 0.2}},	             -- Life Cocoon
+		{124682, "BOTTOMLEFT", {0.4, 0.8, 0.2}},             -- Enveloping Mist
+		{124081, "BOTTOMRIGHT", {0.7, 0.4, 0}},              -- Zen Sphere
 	},
+
 	ALL = {
-		{14253, "RIGHT", {0, 0}, {0, 1, 0}}, 					-- Abolish Poison
+		{14253, "RIGHT", {0, 1, 0}},                         -- Abolish Poison
 	},
 }
 
