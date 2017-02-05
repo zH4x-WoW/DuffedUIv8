@@ -49,11 +49,7 @@ local function updateStatus()
 			local activeID = C_ArtifactUI.GetArtifactInfo()
 			local equippedID = C_ArtifactUI.GetEquippedArtifactInfo()
 		
-			if frame:IsShown() and activeID == equippedID then
-				HideUIPanel(frame)
-			else
-				SocketInventoryItem(16)
-			end
+			if frame:IsShown() and activeID == equippedID then HideUIPanel(frame) else SocketInventoryItem(16) end
 		end
 	end)
 	
@@ -74,7 +70,7 @@ local function updateStatus()
 	ArtifactmouseFrame:SetScript("OnLeave", function() GameTooltip:Hide() end)
 end
 
-local frame = CreateFrame("Frame",nil,UIParent)
+local frame = CreateFrame("Frame", nil, UIParent)
 frame:RegisterEvent("ARTIFACT_XP_UPDATE")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:RegisterEvent("UNIT_INVENTORY_CHANGED")

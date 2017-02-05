@@ -3,7 +3,9 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Small fixes for 7.1.5",
+		"• Fixed display for raid debuffs",
+		"• Update for AddOnSkins",
+		"• Fixes for several other modules",
 		--"• ",
 	" ",
 	"Notes:",
