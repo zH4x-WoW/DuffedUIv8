@@ -49,11 +49,6 @@ local updateActiveUnit = function(self, event, unit)
 	if(modUnit == "pet" and realUnit ~= "pet") then
 		modUnit = "vehicle"
 	end
-	
-	-- UNIT_EXITED_VEHICLE returns player as unit, which is not the case for pet frame
-	if(modUnit == 'pet') and(realUnit == 'pet') and(unit == 'player') then
-		unit = nil
-	end
 
 	-- Drop out if the event unit doesn't match any of the frame units.
 	if(not UnitExists(modUnit) or unit and unit ~= realUnit and unit ~= modUnit) then return end
@@ -63,26 +58,6 @@ local updateActiveUnit = function(self, event, unit)
 		self:UpdateAllElements('RefreshUnit')
 
 		return true
-	end
-end
-
-local function updateArenaPreparation(self, event)
-	if(event == 'ARENA_OPPONENT_UPDATE' and not self:IsEnabled()) then
-		self:Enable()
-		self:UnregisterEvent(event, updateArenaPreparation)
-	elseif(event == 'PLAYER_ENTERING_WORLD' and not UnitExists(self.unit)) then
-		updateArenaPreparation(self, 'ARENA_PREP_OPPONENT_SPECIALIZATIONS')
-	elseif(event == 'ARENA_PREP_OPPONENT_SPECIALIZATIONS') then
-		local specID = GetArenaOpponentSpec(self.id)
-		if(specID) then
-			if(self:IsEnabled()) then
-				self:Disable()
-				self:RegisterEvent('ARENA_OPPONENT_UPDATE', updateArenaPreparation)
-			end
-
-			self:Show()
-			self:UpdateAllElements('ArenaPreparation', true)
-		end
 	end
 end
 
@@ -165,16 +140,15 @@ for k, v in pairs{
 		return active and active[name]
 	end,
 
-	IsEnabled = UnitWatchRegistered,
 	Enable = RegisterUnitWatch,
 	Disable = function(self)
 		UnregisterUnitWatch(self)
 		self:Hide()
 	end,
 
-	UpdateAllElements = function(self, event, forced)
+	UpdateAllElements = function(self, event)
 		local unit = self.unit
-		if(not UnitExists(unit) and not forced) then return end
+		if(not UnitExists(unit)) then return end
 
 		if(self.PreUpdate) then
 			self:PreUpdate(event)
@@ -297,12 +271,6 @@ local initObject = function(unit, style, styleFunc, header, ...)
 
 		for _, func in next, callback do
 			func(object)
-		end
-
-		-- Arena preparation fluff
-		if(unit and unit:match'(arena)%d?$' == 'arena') then
-			object:RegisterEvent('ARENA_PREP_OPPONENT_SPECIALIZATIONS', updateArenaPreparation, true)
-			object:HookScript('OnEvent', updateArenaPreparation)
 		end
 
 		-- Make Clique happy
@@ -533,8 +501,6 @@ do
 		local isPetHeader = template:match'PetHeader'
 		local name = overrideName or generateName(nil, ...)
 		local header = CreateFrame('Frame', name, oUF_PetBattleFrameHider, template)
-		header:SetSize(50, 50)
-		header:SetPoint("CENTER", -5000, 0)
 
 		header:SetAttribute("template", "oUF_ClickCastUnitTemplate")
 		for i=1, select("#", ...), 2 do

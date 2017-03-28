@@ -411,51 +411,92 @@ local function SkinIconButton(b, shrinkIcon)
 	b.isSkinned = true
 end
 
-local function SkinScrollBar(frame)
-	if _G[frame:GetName().."BG"] then _G[frame:GetName().."BG"]:SetTexture(nil) end
-	if _G[frame:GetName().."Track"] then _G[frame:GetName().."Track"]:SetTexture(nil) end
-	if _G[frame:GetName().."Top"] then _G[frame:GetName().."Top"]:SetTexture(nil) end
-	if _G[frame:GetName().."Bottom"] then _G[frame:GetName().."Bottom"]:SetTexture(nil) end
-	if _G[frame:GetName().."Middle"] then _G[frame:GetName().."Middle"]:SetTexture(nil) end
-
-	if _G[frame:GetName().."ScrollUpButton"] and _G[frame:GetName().."ScrollDownButton"] then
-		StripTextures(_G[frame:GetName().."ScrollUpButton"])
-		SetTemplate(_G[frame:GetName().."ScrollUpButton"], "Default", true)
-		if not _G[frame:GetName().."ScrollUpButton"].texture then
-			_G[frame:GetName().."ScrollUpButton"].texture = _G[frame:GetName().."ScrollUpButton"]:CreateTexture(nil, "OVERLAY")
-			Point(_G[frame:GetName().."ScrollUpButton"].texture, "TOPLEFT", 2, -2)
-			Point(_G[frame:GetName().."ScrollUpButton"].texture, "BOTTOMRIGHT", -2, 2)
-			_G[frame:GetName().."ScrollUpButton"].texture:SetTexture([[Interface\AddOns\DuffedUI\medias\textures\arrowup.tga]])
-			_G[frame:GetName().."ScrollUpButton"].texture:SetVertexColor(unpack(C["media"].bordercolor))
+function SkinScrollBar(frame, thumbTrim)
+	if frame:GetName() then
+		if frame.Background then frame.Background:SetTexture(nil) end
+		if frame.trackBG then frame.trackBG:SetTexture(nil) end
+		if frame.Middle then frame.Middle:SetTexture(nil) end
+		if frame.Top then frame.Top:SetTexture(nil) end
+		if frame.Bottom then frame.Bottom:SetTexture(nil) end
+		if frame.ScrollBarTop then frame.ScrollBarTop:SetTexture(nil) end
+		if frame.ScrollBarBottom then frame.ScrollBarBottom:SetTexture(nil) end
+		if frame.ScrollBarMiddle then frame.ScrollBarMiddle:SetTexture(nil) end
+		if _G[frame:GetName().."BG"] then _G[frame:GetName().."BG"]:SetTexture(nil) end
+		if _G[frame:GetName().."Track"] then _G[frame:GetName().."Track"]:SetTexture(nil) end
+		if _G[frame:GetName().."Top"] then _G[frame:GetName().."Top"]:SetTexture(nil) end
+		if _G[frame:GetName().."Bottom"] then _G[frame:GetName().."Bottom"]:SetTexture(nil) end
+		if _G[frame:GetName().."Middle"] then _G[frame:GetName().."Middle"]:SetTexture(nil) end
+		if _G[frame:GetName().."ScrollUpButton"] and _G[frame:GetName().."ScrollDownButton"] then
+			_G[frame:GetName().."ScrollUpButton"]:StripTextures()
+			if not _G[frame:GetName().."ScrollUpButton"].texture then
+				_G[frame:GetName().."ScrollUpButton"].texture = _G[frame:GetName().."ScrollUpButton"]:CreateTexture(nil, "OVERLAY")
+				_G[frame:GetName().."ScrollUpButton"].texture:Point("TOPLEFT", 2, -2)
+				_G[frame:GetName().."ScrollUpButton"].texture:Point("BOTTOMRIGHT", -2, 2)
+				_G[frame:GetName().."ScrollUpButton"].texture:SetTexture([[Interface\AddOns\DuffedUI\medias\textures\arrowup.tga]])
+				_G[frame:GetName().."ScrollUpButton"].texture:SetVertexColor(unpack(C["media"].bordercolor))
+			end
+			_G[frame:GetName().."ScrollDownButton"]:StripTextures()
+			if not _G[frame:GetName().."ScrollDownButton"].texture then
+				_G[frame:GetName().."ScrollDownButton"].texture = _G[frame:GetName().."ScrollDownButton"]:CreateTexture(nil, "OVERLAY")
+				_G[frame:GetName().."ScrollDownButton"].texture:Point("TOPLEFT", 2, -2)
+				_G[frame:GetName().."ScrollDownButton"].texture:Point("BOTTOMRIGHT", -2, 2)
+				_G[frame:GetName().."ScrollDownButton"].texture:SetTexture([[Interface\AddOns\DuffedUI\medias\textures\arrowdown.tga]])
+				_G[frame:GetName().."ScrollDownButton"].texture:SetVertexColor(unpack(C["media"].bordercolor))
+			end
+			if not frame.trackbg then
+				frame.trackbg = CreateFrame("Frame", nil, frame)
+				frame.trackbg:Point("TOPLEFT", _G[frame:GetName().."ScrollUpButton"], "BOTTOMLEFT", 0, -1)
+				frame.trackbg:Point("BOTTOMRIGHT", _G[frame:GetName().."ScrollDownButton"], "TOPRIGHT", 0, 1)
+				frame.trackbg:SetTemplate("Transparent")
+			end
+			if frame:GetThumbTexture() then
+				if not thumbTrim then thumbTrim = 3 end
+				frame:GetThumbTexture():SetTexture(nil)
+				if not frame.thumbbg then
+					frame.thumbbg = CreateFrame("Frame", nil, frame)
+					frame.thumbbg:Point("TOPLEFT", frame:GetThumbTexture(), "TOPLEFT", 2, -thumbTrim)
+					frame.thumbbg:Point("BOTTOMRIGHT", frame:GetThumbTexture(), "BOTTOMRIGHT", -2, thumbTrim)
+					frame.thumbbg:SetTemplate("Default", true)
+					if frame.trackbg then frame.thumbbg:SetFrameLevel(frame.trackbg:GetFrameLevel()) end
+				end
+			end
 		end
-
-		StripTextures(_G[frame:GetName().."ScrollDownButton"])
-		SetTemplate(_G[frame:GetName().."ScrollDownButton"], "Default", true)
-
-		if not _G[frame:GetName().."ScrollDownButton"].texture then
-			_G[frame:GetName().."ScrollDownButton"].texture = _G[frame:GetName().."ScrollDownButton"]:CreateTexture(nil, "OVERLAY")
-			Point(_G[frame:GetName().."ScrollDownButton"].texture, "TOPLEFT", 2, -2)
-			Point(_G[frame:GetName().."ScrollDownButton"].texture, "BOTTOMRIGHT", -2, 2)
-			_G[frame:GetName().."ScrollDownButton"].texture:SetTexture([[Interface\AddOns\DuffedUI\medias\textures\arrowdown.tga]])
-			_G[frame:GetName().."ScrollDownButton"].texture:SetVertexColor(unpack(C["media"].bordercolor))
-		end
-
-		if not frame.trackbg then
-			frame.trackbg = CreateFrame("Frame", nil, frame)
-			Point(frame.trackbg, "TOPLEFT", _G[frame:GetName().."ScrollUpButton"], "BOTTOMLEFT", 0, -1)
-			Point(frame.trackbg, "BOTTOMRIGHT", _G[frame:GetName().."ScrollDownButton"], "TOPRIGHT", 0, 1)
-			SetTemplate(frame.trackbg, "Transparent")
-		end
-
-		if frame:GetThumbTexture() then
-			if not thumbTrim then thumbTrim = 3 end
-			frame:GetThumbTexture():SetTexture(nil)
-			if not frame.thumbbg then
-				frame.thumbbg = CreateFrame("Frame", nil, frame)
-				Point(frame.thumbbg, "TOPLEFT", frame:GetThumbTexture(), "TOPLEFT", 2, -thumbTrim)
-				Point(frame.thumbbg, "BOTTOMRIGHT", frame:GetThumbTexture(), "BOTTOMRIGHT", -2, thumbTrim)
-				SetTemplate(frame.thumbbg, "Default", true)
-				if frame.trackbg then frame.thumbbg:SetFrameLevel(frame.trackbg:GetFrameLevel()) end
+	else
+		if frame.Background then frame.Background:SetTexture(nil) end
+		if frame.trackBG then frame.trackBG:SetTexture(nil) end
+		if frame.Middle then frame.Middle:SetTexture(nil) end
+		if frame.Top then frame.Top:SetTexture(nil) end
+		if frame.Bottom then frame.Bottom:SetTexture(nil) end
+		if frame.ScrollBarTop then frame.ScrollBarTop:SetTexture(nil) end
+		if frame.ScrollBarBottom then frame.ScrollBarBottom:SetTexture(nil) end
+		if frame.ScrollBarMiddle then frame.ScrollBarMiddle:SetTexture(nil) end
+		if frame.ScrollUpButton and frame.ScrollDownButton then
+			if not frame.ScrollUpButton.icon then
+				frame.ScrollUpButton:SkinNextPrevButton(true, true)
+				frame.ScrollUpButton:Size(frame.ScrollUpButton:GetWidth() + 7, frame.ScrollUpButton:GetHeight() + 7)
+			end
+			if not frame.ScrollDownButton.icon then
+				frame.ScrollDownButton:SkinNextPrevButton(true)
+				frame.ScrollDownButton:Size(frame.ScrollDownButton:GetWidth() + 7, frame.ScrollDownButton:GetHeight() + 7)
+			end
+			
+			if not frame.trackbg then
+				frame.trackbg = CreateFrame("Frame", nil, frame)
+				frame.trackbg:Point("TOPLEFT", frame.ScrollUpButton, "BOTTOMLEFT", 0, -1)
+				frame.trackbg:Point("BOTTOMRIGHT", frame.ScrollDownButton, "TOPRIGHT", 0, 1)
+				frame.trackbg:SetTemplate("Transparent")
+			end
+			
+			if frame:GetThumbTexture() then
+				if not thumbTrim then thumbTrim = 3 end
+				frame:GetThumbTexture():SetTexture(nil)
+				if not frame.thumbbg then
+					frame.thumbbg = CreateFrame("Frame", nil, frame)
+					frame.thumbbg:Point("TOPLEFT", frame:GetThumbTexture(), "TOPLEFT", 2, -thumbTrim)
+					frame.thumbbg:Point("BOTTOMRIGHT", frame:GetThumbTexture(), "BOTTOMRIGHT", -2, thumbTrim)
+					frame.thumbbg:SetTemplate("Default", true)
+					if frame.trackbg then frame.thumbbg:SetFrameLevel(frame.trackbg:GetFrameLevel()) end
+				end
 			end
 		end
 	end
@@ -663,6 +704,38 @@ function SkinIcon(icon, parent)
 	parent.backdrop:SetOutside(icon)
 end
 
+function SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameNameOverride)
+	assert(frame, "HandleIconSelectionFrame: frame argument missing")
+	assert(numIcons and type(numIcons) == "number", "HandleIconSelectionFrame: numIcons argument missing or not a number")
+	assert(buttonNameTemplate and type(buttonNameTemplate) == "string", "HandleIconSelectionFrame: buttonNameTemplate argument missing or not a string")
+
+	local frameName = frameNameOverride or frame:GetName()
+	local scrollFrame = _G[frameName.."ScrollFrame"]
+	local editBox = _G[frameName.."EditBox"]
+	local okayButton = _G[frameName.."OkayButton"] or _G[frameName.."Okay"]
+	local cancelButton = _G[frameName.."CancelButton"] or _G[frameName.."Cancel"]
+
+	frame:StripTextures()
+	frame.BorderBox:StripTextures()
+	editBox:DisableDrawLayer("BACKGROUND")
+	frame:SetTemplate("Transparent")
+	frame:Height(frame:GetHeight() + 10)
+	okayButton:SkinButton()
+	cancelButton:SkinButton()
+	editBox:SkinEditBox()
+	cancelButton:ClearAllPoints()
+	cancelButton:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -5, 5)
+	for i = 1, numIcons do
+		local button = _G[buttonNameTemplate..i]
+		local icon = _G[button:GetName().."Icon"]
+		button:StripTextures()
+		button:SetTemplate("Default")
+		button:StyleButton(true)
+		icon:SetInside()
+		icon:SetTexCoord(unpack(D["IconCoord"]))
+	end
+end
+
 -- merge api
 local function addapi(object)
 	local mt = getmetatable(object).__index
@@ -693,6 +766,7 @@ local function addapi(object)
 	if not object.SkinCloseButton then mt.SkinCloseButton = SkinCloseButton end
 	if not object.SkinSlideBar then mt.SkinSlideBar = SkinSlideBar end
 	if not object.SkinIcon then mt.SkinIcon = SkinIcon end
+	if not object.SkinIconSelectionFrame then mt.SkinIconSelectionFrame = SkinIconSelectionFrame end
 	if not object.HideInsets then mt.HideInsets = HideInsets end
 	if not object.CreateOverlay then mt.CreateOverlay = CreateOverlay end
 	if not object.FadeIn then mt.FadeIn = FadeIn end

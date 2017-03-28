@@ -34,20 +34,20 @@ D["ClassRessource"]["ROGUE"] = function(self)
 	ComboPoints:SetBackdropColor(0, 0, 0)
 	ComboPoints:SetBackdropBorderColor(0, 0, 0)
 
-	for i = 1, 8 do
+	for i = 1, 10 do
 		ComboPoints[i] = CreateFrame("StatusBar", "ComboPoints" .. i, ComboPoints)
 		ComboPoints[i]:Height(5)
 		ComboPoints[i]:SetStatusBarTexture(texture)
 		if i == 1 then
 			ComboPoints[i]:SetPoint("LEFT", ComboPoints, "LEFT", 0, 0)
-			ComboPoints[i]:Width(216 / 8)
+			ComboPoints[i]:Width(216 / 10)
 			
 			ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
 			ComboPoints[i].Deeper = 216 / 6
 			ComboPoints[i].None = 216 / 5
 		else
 			ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
-			ComboPoints[i]:Width(216 / 8 - 1)
+			ComboPoints[i]:Width(216 / 10 - 1)
 			
 			ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
 			ComboPoints[i].Deeper = 216 / 6 - 1

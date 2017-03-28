@@ -10,7 +10,8 @@ local function ArtifactSkin()
 	for i = 1, 2 do _G["ArtifactFrameTab" .. i]:SkinTab() end
 	ArtifactFrameTab1:ClearAllPoints()
 	ArtifactFrameTab1:SetPoint("TOPLEFT", ArtifactFrame, "BOTTOMLEFT", 0, -2)
-	ArtifactFrame.ForgeBadgeFrame.ForgeClassBadgeIcon:Hide()
+	ArtifactFrame.ForgeBadgeFrame.CircleMask:Hide()
+	ArtifactFrame.ForgeBadgeFrame.ItemIconBorder:Hide()
 	ArtifactFrame.ForgeBadgeFrame.ForgeLevelBackground:ClearAllPoints()
 	ArtifactFrame.ForgeBadgeFrame.ForgeLevelBackground:SetPoint("RIGHT", ArtifactFrame.PerksTab.TitleContainer.ArtifactName, "LEFT", 0, -12)
 

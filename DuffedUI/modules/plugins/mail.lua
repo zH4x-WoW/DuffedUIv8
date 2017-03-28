@@ -6,7 +6,7 @@ local L_MAIL_NEED = "Need a mainbox."
 local L_MAIL_MESSAGES = "Posts"
 local deletedelay, t = 0.5, 0
 local takingOnlyCash = false
-local button, button2, waitForMail, doNothing, openAll, openAllCash, openMail, lastopened, stopOpening, onEvent, needsToWait, copper_to_pretty_money, total_cash
+local button, waitForMail, doNothing, openAllCash, openMail, lastopened, stopOpening, onEvent, needsToWait, copper_to_pretty_money, total_cash
 local _G = _G
 local baseInboxFrame_OnClick
 function doNothing() end
@@ -14,7 +14,6 @@ function doNothing() end
 function openAll()
 	if GetInboxNumItems() == 0 then return end
 	button:SetScript("OnClick", nil)
-	button2:SetScript("OnClick", nil)
 	baseInboxFrame_OnClick = InboxFrame_OnClick
 	InboxFrame_OnClick = doNothing
 	button:RegisterEvent("UI_ERROR_MESSAGE")
@@ -61,9 +60,7 @@ function waitForMail(self,elapsed)
 end
 
 function stopOpening(msg, ...)
-	button:SetScript("OnUpdate", nil)
-	button:SetScript("OnClick", openAll)
-	button2:SetScript("OnClick", openAllCash)
+	button:SetScript("OnClick", openAllCash)
 	if baseInboxFrame_OnClick then InboxFrame_OnClick = baseInboxFrame_OnClick end
 	button:UnregisterEvent("UI_ERROR_MESSAGE")
 	takingOnlyCash = false
@@ -73,9 +70,7 @@ end
 
 function onEvent(frame, event, arg1, arg2, arg3, arg4)
 	if event == "UI_ERROR_MESSAGE" then
-		if arg1 == ERR_INV_FULL then
-		stopOpening("|cffffff00"..L_MAIL_STOPPED)
-		end
+		if arg1 == ERR_INV_FULL then stopOpening("|cffffff00"..L_MAIL_STOPPED) end
 	end
 end
 
@@ -83,24 +78,13 @@ local function makeButton(id, text, w, h, x, y)
 	local button = CreateFrame("Button", id, InboxFrame, "UIPanelButtonTemplate")
 	button:SetWidth(w)
 	button:SetHeight(h)
-	button:SetPoint("CENTER", InboxFrame, "TOP", x, y)
+	button:SetPoint("BOTTOM", MailFrame, "BOTTOM", x, y)
 	button:SetText(text)
 	return button
 end
-button = makeButton("OpenAllButton", ALL, 70, 25, -45, -408)
-button:SetScript("OnClick", openAll)
-button:SetScript("OnEvent", onEvent)
-button2 = makeButton("OpenAllButton2", "Gold", 70, 25, 28, -408)
-button2:SetScript("OnClick", openAllCash)
+button = makeButton("OpenAllButton", "Gold", 70, 25, 25, 8)
+button:SetScript("OnClick", openAllCash)
 OpenAllButton:SkinButton()
-OpenAllButton2:SkinButton()
-
-button:SetScript("OnEnter", function()
-	GameTooltip:SetOwner(button, "ANCHOR_RIGHT")
-	GameTooltip:AddLine(string.format("%d "..L_MAIL_MESSAGES, GetInboxNumItems()), 1, 1, 1)
-	GameTooltip:Show()
-end)
-button:SetScript("OnLeave", function() GameTooltip:Hide() end)
 
 function copper_to_pretty_money(c)
 	if c > 10000 then
@@ -112,7 +96,7 @@ function copper_to_pretty_money(c)
 	end
 end
 
-button2:SetScript("OnEnter", function()
+button:SetScript("OnEnter", function()
 	if not total_cash then
 		total_cash = 0
 		for index=0, GetInboxNumItems() do total_cash = total_cash + select(5, GetInboxHeaderInfo(index)) end
@@ -121,5 +105,4 @@ button2:SetScript("OnEnter", function()
 	GameTooltip:AddLine(copper_to_pretty_money(total_cash), 1, 1, 1)
 	GameTooltip:Show()
 end)
-
-button2:SetScript("OnLeave", function() GameTooltip:Hide() end)
+button:SetScript("OnLeave", function() GameTooltip:Hide() end)

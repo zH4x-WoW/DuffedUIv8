@@ -20,10 +20,10 @@ if not IsAddOnLoaded("AddOnSkins") then
 		MountJournal.MountCount:StripTextures()
 		MountJournalMountButton:SkinButton(true)
 		MountJournalListScrollFrameScrollBar:SkinScrollBar()
-		MountJournal.MountDisplay.ModelFrame.RotateLeftButton:SkinCloseButton()
-		MountJournal.MountDisplay.ModelFrame.RotateRightButton:SkinCloseButton()
-		MountJournal.MountDisplay.ModelFrame.RotateLeftButton.t:SetText("<")
-		MountJournal.MountDisplay.ModelFrame.RotateRightButton.t:SetText(">")
+		MountJournal.MountDisplay.ModelScene.RotateLeftButton:SkinCloseButton()
+		MountJournal.MountDisplay.ModelScene.RotateRightButton:SkinCloseButton()
+		MountJournal.MountDisplay.ModelScene.RotateLeftButton.t:SetText("<")
+		MountJournal.MountDisplay.ModelScene.RotateRightButton.t:SetText(">")
 		MountJournalSearchBox:SkinEditBox()
 		MountJournalFilterButton:StripTextures(true)
 		MountJournalFilterButton:SkinButton()
@@ -291,10 +291,10 @@ if not IsAddOnLoaded("AddOnSkins") then
 			self.updateFunction = ToySpellButton_UpdateButton
 		end)
 
-		ToyBox.navigationFrame.prevPageButton:SkinCloseButton()
-		ToyBox.navigationFrame.nextPageButton:SkinCloseButton()
-		ToyBox.navigationFrame.prevPageButton.t:SetText("<")
-		ToyBox.navigationFrame.nextPageButton.t:SetText(">")
+		ToyBox.PagingFrame.PrevPageButton:SkinCloseButton()
+		ToyBox.PagingFrame.NextPageButton:SkinCloseButton()
+		ToyBox.PagingFrame.PrevPageButton.t:SetText("<")
+		ToyBox.PagingFrame.NextPageButton.t:SetText(">")
 
 		--[[Tab 4 - Heirlooms]]--
 		HeirloomsJournalFilterButton:StripTextures()
@@ -304,10 +304,10 @@ if not IsAddOnLoaded("AddOnSkins") then
 
 		HeirloomsJournal.SearchBox:SkinEditBox()
 		HeirloomsJournal.iconsFrame:StripTextures()
-		HeirloomsJournal.navigationFrame.prevPageButton:SkinCloseButton()
-		HeirloomsJournal.navigationFrame.nextPageButton:SkinCloseButton()
-		HeirloomsJournal.navigationFrame.prevPageButton.t:SetText("<")
-		HeirloomsJournal.navigationFrame.nextPageButton.t:SetText(">")
+		HeirloomsJournal.PagingFrame.PrevPageButton:SkinCloseButton()
+		HeirloomsJournal.PagingFrame.NextPageButton:SkinCloseButton()
+		HeirloomsJournal.PagingFrame.PrevPageButton.t:SetText("<")
+		HeirloomsJournal.PagingFrame.NextPageButton.t:SetText(">")
 		HeirloomsJournal.progressBar:StripTextures()
 		HeirloomsJournal.progressBar:SetStatusBarTexture(C["media"]["normTex"])
 		HeirloomsJournal.progressBar:CreateBackdrop()
@@ -348,23 +348,54 @@ if not IsAddOnLoaded("AddOnSkins") then
 		WardrobeCollectionFrameSearchBox:SkinEditBox()
 		WardrobeCollectionFrame.FilterButton:SkinButton()
 		WardrobeCollectionFrame.FilterButton:SetWidth(80)
-		WardrobeCollectionFrame.ModelsFrame:StripTextures()
+		WardrobeCollectionFrame.ItemsCollectionFrame:StripTextures()
 		WardrobeCollectionFrameWeaponDropDown:SkinDropDownBox()
-		WardrobeCollectionFrame.NavigationFrame.PrevPageButton:SkinCloseButton()
-		WardrobeCollectionFrame.NavigationFrame.NextPageButton:SkinCloseButton()
-		WardrobeCollectionFrame.NavigationFrame.PrevPageButton.t:SetText("<")
-		WardrobeCollectionFrame.NavigationFrame.NextPageButton.t:SetText(">")
+		WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.PrevPageButton:SkinCloseButton()
+		WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.NextPageButton:SkinCloseButton()
+		WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.PrevPageButton.t:SetText("<")
+		WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.NextPageButton.t:SetText(">")
 		WardrobeCollectionFrame.FilterButton:StripTextures(true)
 		WardrobeCollectionFrame.FilterButton:SkinButton()
 		
 		for i = 1, 3 do
 			for j = 1, 6 do
-				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:StripTextures()
-				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:SetFrameLevel(WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:GetFrameLevel() + 2)
-				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:CreateBackdrop()
-				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j].Border:Kill()
+				WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j]:StripTextures()
+				WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j]:SetFrameLevel(WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j]:GetFrameLevel() + 2)
+				WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j]:CreateBackdrop()
+				WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j].Border:Kill()
 			end
 		end
+
+		WardrobeCollectionFrameTab1:SkinTab()
+		WardrobeCollectionFrameTab2:SkinTab()
+		WardrobeCollectionFrame.SetsCollectionFrame:StripTextures()
+		WardrobeCollectionFrame.SetsCollectionFrame.LeftInset:StripTextures()
+		WardrobeCollectionFrame.SetsCollectionFrame.DetailsFrame:StripTextures()
+		WardrobeCollectionFrame.SetsCollectionFrame.RightInset:StripTextures()
+		WardrobeCollectionFrameScrollFrameScrollBar:SkinScrollBar()
+		WardrobeSetsCollectionVariantSetsButton:SkinButton()
+
+		--[[local baseSets = C_TransmogSets.GetBaseSets()
+		for i = 1, #baseSets do
+			local b = _G["WardrobeCollectionFrameScrollFrameButton" .. i]
+			if not b.isSkinned then
+				b:StripTextures()
+				b:SetTemplate()
+				b:SkinButton()
+				b:SetBackdropBorderColor(0, 0, 0, 0)
+				b:HideInsets()
+				b.Icon:SetTexCoord(.08, .92, .08, .92)
+				b.HighlightTexture:SetTexture(nil)
+				b.SelectedTexture:SetTexture(nil)
+
+				b:CreateBackdrop("Default")
+				b.backdrop:Point("TOPLEFT", b.Icon, -2, 2)
+				b.backdrop:Point("BOTTOMRIGHT", b.Icon, 2, -2)
+				b.backdrop:SetBackdropColor(0, 0, 0, 0)
+
+				b.isSkinned = true
+			end
+		end]]
 		
 		--[[Tab 5 - Transmog (NPC)]]--
 		WardrobeFrame:StripTextures()
@@ -398,6 +429,19 @@ if not IsAddOnLoaded("AddOnSkins") then
 		WardrobeTransmogFrame.SpecButton:ClearAllPoints()
 		WardrobeTransmogFrame.SpecButton:SetPoint("RIGHT", WardrobeTransmogFrame.ApplyButton, "LEFT", -2, 0)
 		WardrobeTransmogFrame.ApplyButton:SkinButton()
+
+		WardrobeCollectionFrame.SetsTransmogFrame:StripTextures()
+		WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.PrevPageButton:SkinCloseButton()
+		WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.NextPageButton:SkinCloseButton()
+		WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.PrevPageButton.t:SetText("<")
+		WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.NextPageButton.t:SetText(">")
+
+		for i = 1, 2 do
+			for j = 1, 4 do
+				WardrobeCollectionFrame.SetsTransmogFrame["ModelR"..i.."C"..j]:StripTextures()
+				WardrobeCollectionFrame.SetsTransmogFrame["ModelR"..i.."C"..j]:CreateBackdrop("Default")
+			end
+		end
 	end
 
 	if CollectionsJournal then tinsert(D.SkinFuncs["DuffedUI"], LoadSkin) else D.SkinFuncs["Blizzard_Collections"] = LoadSkin end

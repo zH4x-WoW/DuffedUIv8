@@ -6,12 +6,12 @@ local f = CreateFrame("Frame", "TST")
 f:RegisterEvent("TRADE_SKILL_LIST_UPDATE")
 f:RegisterEvent("PLAYER_LOGIN")
 
---Local Functions
+--[[Local Functions]]--
 local function isCurrentTab(self)
 	if self.tooltip and IsCurrentSpell(self.tooltip) then self:SetChecked(true) else self:SetChecked(false) end
 end
 
---Add Tab Button
+--[[Add Tab Button]]--
 local function addTab(id, index, isSub)
 	local name, _, icon = GetSpellInfo(id)
 	if (not name) or (not icon) then return end
@@ -29,13 +29,12 @@ local function addTab(id, index, isSub)
 	tab:SetAttribute("type", "spell")
 	tab:SetAttribute("spell", name)
 	tab:SetNormalTexture(icon)
-	tab:GetNormalTexture():SetTexCoord(unpack(D["IconCoord"]))
 	tab:Show()
 
 	isCurrentTab(tab)
 end
 
---Remove Tab Buttons
+--[[Remove Tab Buttons]]--
 local function removeTabs()
 	for i = 1, numTabs do
 		local tab = _G["TSTab" .. i]
@@ -46,13 +45,13 @@ local function removeTabs()
 	end
 end
 
---Check Profession Useable
+--[[Check Profession Useable]]--
 local function isUseable(id)
 	local name = GetSpellInfo(id)
 	return IsUsableSpell(name)
 end
 
---Update Profession Tabs
+--[[Update Profession Tabs]]--
 local function updateTabs()
 	local mainTabs, subTabs = {}, {}
 
@@ -88,7 +87,7 @@ local function updateTabs()
 	end
 end
 
---SearchBoxFix
+--[[SearchBoxFix]]--
 hooksecurefunc("ChatEdit_InsertLink", function(link)
 	if link and TradeSkillFrame and TradeSkillFrame:IsShown() then
 		local text = strmatch(link, "|h%[(.+)%]|h|r")
@@ -99,15 +98,15 @@ hooksecurefunc("ChatEdit_InsertLink", function(link)
 	end
 end)
 
---Fix Legion RecipeLink
+--[[Fix Legion RecipeLink]]--
 local getRecipe = C_TradeSkillUI.GetRecipeLink
 C_TradeSkillUI.GetRecipeLink = function(link)
 	if link and (link ~= "") then return getRecipe(link) end
 end
 
---Enable
+--[[Enable]]--
 f:SetScript("OnEvent", function(self, event, ...)
-	if event == "TRADE_SKILL_LIST_UPDATE" then
+	if (event == "TRADE_SKILL_LIST_UPDATE") then
 		if TradeSkillFrame and TradeSkillFrame.RecipeList then
 			if TradeSkillFrame.RecipeList.buttons and #TradeSkillFrame.RecipeList.buttons < (itemDisplay + 2) then HybridScrollFrame_CreateButtons(TradeSkillFrame.RecipeList, "TradeSkillRowButtonTemplate", 0, 0) end
 			if not InCombatLockdown() then updateTabs() end

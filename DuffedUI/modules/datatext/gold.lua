@@ -162,6 +162,7 @@ Stat:SetScript("OnEnter", function(self)
 		D["Currency"](824)
 		D["Currency"](1101)
 		D["Currency"](1220)
+		D["Currency"](1342, false, true)
 	end
 
 	if ImprovedCurrency["Raid"] then
