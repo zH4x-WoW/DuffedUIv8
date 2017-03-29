@@ -180,6 +180,7 @@ Stat:SetScript("OnEnter", function(self)
 		D["Currency"](823)
 		D["Currency"](1166)
 		D["Currency"](1155, false, true)
+		D["Currency"](1226)
 		D["Currency"](1273, false, true)
 	end
 
@@ -202,7 +203,6 @@ Stat:SetScript("OnEnter", function(self)
 		D["Currency"](777)
 		D["Currency"](1149, false, true)
 		D["Currency"](1154, false, true)
-		D["Currency"](1226)
 		D["Currency"](1275)
 	end
 
