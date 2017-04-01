@@ -32,35 +32,6 @@ local StopFlash = function(self)
 	if self.anim then self.anim:Finish() end
 end
 
-local dropdown = CreateFrame("Frame", "oUF_DuffedUIDropDown", UIParent, "UIDropDownMenuTemplate")
-
-D.SpawnMenu = function(self)
-	dropdown:SetParent(self)
-	return ToggleDropDownMenu(nil, nil, dropdown, "cursor", 0, 0)
-end
-
-local initdropdown = function(self)
-	local unit = self:GetParent().unit
-	local menu, name, id
-
-	if(not unit) then return end
-	if(UnitIsPlayer(unit)) then
-		id = UnitInRaid(unit)
-		if(id) then
-			menu = "RAID_PLAYER"
-			name = GetRaidRosterInfo(id)
-		elseif(UnitInParty(unit)) then
-			menu = "PARTY"
-		end
-	end
-	if(menu) then UnitPopup_ShowMenu(self, menu, unit, name, id) end
-end
-
-UIDropDownMenu_Initialize(dropdown, initdropdown, "MENU")
-UnitPopupMenus["PARTY"] = { "RAID_TARGET_ICON", "SET_FOCUS", "ADD_FRIEND", "ADD_FRIEND_MENU", "INTERACT_SUBSECTION_TITLE", "RAF_SUMMON", "RAF_GRANT_LEVEL", "PROMOTE", "PROMOTE_GUIDE", "LOOT_PROMOTE", "WHISPER", "INSPECT", "ACHIEVEMENTS", "TRADE", "FOLLOW", "DUEL", "PET_BATTLE_PVP_DUEL", "OTHER_SUBSECTION_TITLE", "SELECT_ROLE", "MOVE_PLAYER_FRAME", "MOVE_TARGET_FRAME", "REPORT_PLAYER", "PVP_REPORT_AFK", "VOTE_TO_KICK", "UNINVITE", "CANCEL" }
-UnitPopupMenus["RAID_PLAYER"] = { "RAID_TARGET_ICON", "SET_FOCUS", "ADD_FRIEND", "ADD_FRIEND_MENU", "INTERACT_SUBSECTION_TITLE", "RAF_SUMMON", "RAF_GRANT_LEVEL", "RAID_LEADER", "RAID_PROMOTE", "RAID_DEMOTE", "LOOT_PROMOTE", "WHISPER", "INSPECT", "ACHIEVEMENTS", "TRADE", "FOLLOW", "DUEL", "PET_BATTLE_PVP_DUEL", "OTHER_SUBSECTION_TITLE", "SELECT_ROLE", "MOVE_PLAYER_FRAME", "MOVE_TARGET_FRAME", "REPORT_PLAYER", "PVP_REPORT_AFK", "VOTE_TO_KICK", "RAID_REMOVE", "CANCEL" }
-UnitPopupMenus["RAID"] = { "SET_FOCUS", "INTERACT_SUBSECTION_TITLE", "RAID_LEADER",  "RAID_PROMOTE", "RAID_DEMOTE", "RAID_MAINTANK", "RAID_MAINASSIST", "LOOT_PROMOTE", "OTHER_SUBSECTION_TITLE", "MOVE_PLAYER_FRAME", "MOVE_TARGET_FRAME", "REPORT_PLAYER", "PVP_REPORT_AFK", "VOTE_TO_KICK", "RAID_REMOVE", "CANCEL" }
-
 --Healthupdate for UFs
 D.PostUpdateHealth = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then

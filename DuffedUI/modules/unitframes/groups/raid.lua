@@ -21,6 +21,7 @@ D["ConstructUFRaid"] = function(self)
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
+	self:SetAttribute("type2", "togglemenu")
 
 	--[[Health]]--
 	local health = CreateFrame("StatusBar", nil, self)

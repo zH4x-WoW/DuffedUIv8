@@ -21,8 +21,6 @@ D["ConstructUFMaintank"] = function(self)
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self.menu = D.SpawnMenu
-
 	self:SetAttribute("type2", "focus")
 
 	--[[Health]]--

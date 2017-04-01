@@ -23,7 +23,7 @@ D["ConstructUFTarget"] = function(self)
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self.menu = D["SpawnMenu"]
+	self:SetAttribute("type2", "togglemenu")
 
 	local panel = CreateFrame("Frame", nil, self)
 	if layout == 1 or layout == 4 then
