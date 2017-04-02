@@ -85,6 +85,11 @@ end
 button = makeButton("OpenAllButton", "Gold", 70, 25, 25, 8)
 button:SetScript("OnClick", openAllCash)
 OpenAllButton:SkinButton()
+OpenAllMail:SkinButton()
+OpenAllMail:ClearAllPoints()
+OpenAllMail:SetWidth(70)
+OpenAllMail:SetHeight(25)
+OpenAllMail:SetPoint("RIGHT", OpenAllButton, "LEFT", -2, 0)
 
 function copper_to_pretty_money(c)
 	if c > 10000 then
