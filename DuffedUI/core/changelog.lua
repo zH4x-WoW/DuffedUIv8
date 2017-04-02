@@ -3,7 +3,9 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Small fixes for 7.1.5",
+		"• Fixed a issue with UnitPopupmenu",
+		"• Added missing currency to gold datatext",
+		"• Fixed a issue with AddOnSkins",
 		--"• ",
 	" ",
 	"Notes:",
