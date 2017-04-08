@@ -3,9 +3,10 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Fixed a issue with UnitPopupmenu",
-		"• Added missing currency to gold datatext",
-		"• Fixed a issue with AddOnSkins",
+		"• Fixed position and skin of new Open All Mail-Button",
+		"• Fixed a issue with orderhall-skin",
+		"• Fixed Tradeskill-Skin",
+		"• Fixed Collections-Skin from AddOnSkins",
 		--"• ",
 	" ",
 	"Notes:",
