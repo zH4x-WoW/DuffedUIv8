@@ -30,7 +30,7 @@ local function LoadSkin()
 		"GuildRecruitmentLevelFrame",
 		"GuildRecruitmentCommentFrame",
 		"GuildRecruitmentCommentInputFrame",
-		"GuildInfoFrameApplicantsContainer",
+		--"GuildInfoFrameApplicantsContainer",
 		"GuildInfoFrameApplicants",
 		"GuildNewsBossModel",
 		"GuildNewsBossModelTextFrame",
@@ -109,7 +109,9 @@ local function LoadSkin()
 	GuildNewsFiltersFrame:StripTextures()
 	GuildNewsFiltersFrame:SetTemplate("Transparent")
 	GuildNewsFiltersFrameCloseButton:SkinCloseButton()
-	for i = 1, 6 do _G["GuildNewsFilterButton" .. i]:SkinCheckBox() end
+	for _, CheckBox in pairs({'GuildAchievement', 'Achievement', 'DungeonEncounter', 'EpicItemLooted', 'EpicItemPurchased', 'EpicItemCrafted', 'LegendaryItemLooted' }) do
+		GuildNewsFiltersFrame[CheckBox]:SkinCheckBox()
+	end
 	GuildNewsFiltersFrame:Point("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -20)
 	GuildNewsContainerScrollBar:SkinScrollBar(4)
 
