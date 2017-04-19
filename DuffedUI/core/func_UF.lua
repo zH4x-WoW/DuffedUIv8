@@ -445,8 +445,8 @@ D.UpdateManaLevel = function(self, elapsed)
 	if self.parent.unit ~= "player" or UpdateManaLevelDelay < .2 or UnitIsDeadOrGhost("player") then return end
 	UpdateManaLevelDelay = 0
 
-	local mana = UnitPower("player")
-	local maxmana = UnitPowerMax("player")
+	local mana = UnitPower("player", SPELL_POWER_MANA)
+	local maxmana = UnitPowerMax("player", SPELL_POWER_MANA)
 
 	if maxmana == 0 then return end
 
