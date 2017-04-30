@@ -135,8 +135,10 @@ D["SpawnUF"] = function(self)
 		}
 
 		for i = 1, 5 do
+			local arena = _G["oUF_Arena"..i]
+
 			oUF_PrepArena[i] = CreateFrame("Frame", "oUF_PrepArena" .. i, UIParent)
-			oUF_PrepArena[i]:SetAllPoints(arena[i])
+			oUF_PrepArena[i]:SetAllPoints(arena)
 			oUF_PrepArena[i]:SetBackdrop(backdrop)
 			oUF_PrepArena[i]:SetBackdropColor(0, 0, 0)
 			oUF_PrepArena[i].Health = CreateFrame("StatusBar", nil, oUF_PrepArena[i])
