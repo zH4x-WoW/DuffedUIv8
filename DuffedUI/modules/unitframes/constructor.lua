@@ -133,6 +133,7 @@ D["SpawnUF"] = function(self)
 			bgFile = C["media"]["blank"],
 			insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
 		}
+
 		for i = 1, 5 do
 			oUF_PrepArena[i] = CreateFrame("Frame", "oUF_PrepArena" .. i, UIParent)
 			oUF_PrepArena[i]:SetAllPoints(arena[i])
@@ -148,11 +149,7 @@ D["SpawnUF"] = function(self)
 			oUF_PrepArena[i]:Hide()
 		end
 
-		local ArenaListener = CreateFrame("Frame", "oUF_UIArenaListener", UIParent)
-		ArenaListener:RegisterEvent("PLAYER_ENTERING_WORLD")
-		ArenaListener:RegisterEvent("ARENA_PREP_OPPONENT_SPECIALIZATIONS")
-		ArenaListener:RegisterEvent("ARENA_OPPONENT_UPDATE")
-		ArenaListener:SetScript("OnEvent", function(self, event)
+		function Prep()
 			if event == "ARENA_OPPONENT_UPDATE" then
 				for i = 1, 5 do
 					local f = _G["oUF_PrepArena" .. i]
@@ -166,9 +163,8 @@ D["SpawnUF"] = function(self)
 					
 					if (i <= numOpps) then
 						local specID = GetArenaOpponentSpec(i)
-
-						if specID and specID > 0 then 
-							local _, spec, _, _, _, _, class = GetSpecializationInfoByID(specID)
+						if (specID and specID > 0) then 
+							local _, spec, _, _, _, class = GetSpecializationInfoByID(specID)
 							if class and spec then
 								f.SpecClass:SetText(spec .. "  -  " .. LOCALIZED_CLASS_NAMES_MALE[class])
 								if not C["unitframes"]["unicolor"] then
@@ -184,11 +180,17 @@ D["SpawnUF"] = function(self)
 				end
 
 				for i = 1, 5 do
-					local f = _G["oUF_PrepArena"..i]
+					local f = _G["oUF_PrepArena" .. i]
 					f:Hide()
 				end
 			end
-		end)
+		end
+
+		local ArenaListener = CreateFrame("Frame", "oUF_UIArenaListener", UIParent)
+		ArenaListener:RegisterEvent("PLAYER_ENTERING_WORLD")
+		ArenaListener:RegisterEvent("ARENA_PREP_OPPONENT_SPECIALIZATIONS")
+		ArenaListener:RegisterEvent("ARENA_OPPONENT_UPDATE")
+		ArenaListener:SetScript("OnEvent", Prep)
 	end
 
 	local assisttank_width = 90
