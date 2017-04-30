@@ -7,7 +7,6 @@
 	<Script file="elements\hunter.lua" />
 	<Script file="elements\mage.lua" />
 	<Script file="elements\monk.lua" />
-	<!--Script file="elements\nameplates.lua" />-->
 	<Script file="elements\paladin.lua" />
 	<Script file="elements\priest.lua" />
 	<Script file="elements\rogue.lua" />
