@@ -215,13 +215,6 @@ D["ConstructUFPlayer"] = function(self)
 	PVP:SetWidth(D.Scale(32))
 	PVP:Point("TOPLEFT", health, "TOPRIGHT", -7, 7)
 	
-	--[[local pvptimer = health:CreateFontString(nil, "OVERLAY")
-	pvptimer:SetFont(f, fs, ff)
-	pvptimer:SetText(" ")
-	pvptimer:SetTextColor(unpack(C["media"].datatextcolor1))
-	pvptimer:SetPoint("TOP", PVP, 0, 8)
-	pvptimer:SetScript("OnUpdate", D.PvPUpdate)]]--
-
 	local Leader = health:CreateTexture(nil, "OVERLAY")
 	Leader:Height(14)
 	Leader:Width(14)
