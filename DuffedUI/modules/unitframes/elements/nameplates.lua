@@ -23,8 +23,3 @@ D["NamePlateCVars"] = settings
 D["ConstructNP"] = function(self)
 
 end
-
-if C["nameplate"]["active"] then
-	oUF:RegisterStyle("DuffedUINameplate", D["ConstructNP"])
-	oUF:SpawnNamePlates("DuffedUINameplate", Duffed, D["NPCallback"], D["NamePlateCVars"])
-end

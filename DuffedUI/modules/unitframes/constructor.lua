@@ -329,6 +329,10 @@ D["LoadUF"] = function()
 		oUF:RegisterStyle("DuffedUI", D["ConstructUF"])
 		D["SpawnUF"]()
 	end
+	--[[if C["nameplate"]["active"] then
+		oUF:RegisterStyle("DuffedUINameplate", D["ConstructNP"])
+		oUF:SpawnNamePlates("DuffedUINameplate", Duffed, D["NPCallback"], D["NamePlateCVars"])
+	end]]--
 end
 
 local LoadUF = CreateFrame("Frame")
