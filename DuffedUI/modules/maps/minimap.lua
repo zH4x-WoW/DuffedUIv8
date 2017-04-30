@@ -131,8 +131,6 @@ local int = 0
 m_coord:HookScript("OnUpdate", function(self, elapsed)
 	int = int + 1
 	if int >= 3 then
-		local InInstance, _ = IsInInstance()
-
 		if not GetPlayerMapPosition("player") then
 			m_coord_text:SetText(" ")
 			return
