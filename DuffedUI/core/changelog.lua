@@ -3,10 +3,7 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Fixed position and skin of new Open All Mail-Button",
-		"• Fixed a issue with orderhall-skin",
-		"• Fixed Tradeskill-Skin",
-		"• Fixed Collections-Skin from AddOnSkins",
+		"• Fixed Orderhall-Datatext",
 		--"• ",
 	" ",
 	"Notes:",

@@ -14,14 +14,15 @@ local COMPLETE = COMPLETE
 local LE_FOLLOWER_TYPE_GARRISON_6_0 = LE_FOLLOWER_TYPE_GARRISON_6_0
 local LE_FOLLOWER_TYPE_GARRISON_7_0 = LE_FOLLOWER_TYPE_GARRISON_7_0
 local LE_FOLLOWER_TYPE_SHIPYARD_6_2 = LE_FOLLOWER_TYPE_SHIPYARD_6_2
-local C_GarrisonGetCompleteTalent = C_Garrison.GetCompleteTalent
-local C_GarrisonGetFollowerShipments = C_Garrison.GetFollowerShipments
-local C_GarrisonGetInProgressMissions = C_Garrison.GetInProgressMissions
-local C_GarrisonGetLandingPageShipmentInfoByContainerID = C_Garrison.GetLandingPageShipmentInfoByContainerID
-local C_GarrisonGetLooseShipments = C_Garrison.GetLooseShipments
-local C_GarrisonGetTalentTrees = C_Garrison.GetTalentTrees
-local C_GarrisonRequestLandingPageShipmentInfo = C_Garrison.RequestLandingPageShipmentInfo
+local C_Garrison_GetCompleteTalent = C_Garrison.GetCompleteTalent
+local C_Garrison_GetFollowerShipments = C_Garrison.GetFollowerShipments
+local C_Garrison_GetInProgressMissions = C_Garrison.GetInProgressMissions
+local C_Garrison_GetLandingPageShipmentInfoByContainerID = C_Garrison.GetLandingPageShipmentInfoByContainerID
+local C_Garrison_GetLooseShipments = C_Garrison.GetLooseShipments
+local C_Garrison_GetTalentTreeIDsByClassID = C_Garrison.GetTalentTreeIDsByClassID
+local C_Garrison_GetTalentTreeInfoForID = C_Garrison.GetTalentTreeInfoForID
 local C_Garrison_HasGarrison = C_Garrison.HasGarrison
+local C_Garrison_RequestLandingPageShipmentInfo = C_Garrison.RequestLandingPageShipmentInfo
 local GetCurrencyInfo = GetCurrencyInfo
 local GetMouseFocus = GetMouseFocus
 local HideUIPanel = HideUIPanel
@@ -89,18 +90,18 @@ if InCombatLockdown() then return end
 	if not (C_Garrison_HasGarrison(LE_GARRISON_TYPE_7_0)) then return GameTooltip:AddLine(L["dt"]["noorderhall"]) end	
 	
 	--[[Loose Work Orders]]--
-	local looseShipments = C_GarrisonGetLooseShipments(LE_GARRISON_TYPE_7_0)	
+	local looseShipments = C_Garrison_GetLooseShipments(LE_GARRISON_TYPE_7_0)	
 	if (looseShipments) then
 		GameTooltip:AddLine(CAPACITANCE_WORK_ORDERS)
 		for i = 1, #looseShipments do
-			local name, _, _, shipmentsReady, shipmentsTotal = C_GarrisonGetLandingPageShipmentInfoByContainerID(looseShipments[i])
+			local name, _, _, shipmentsReady, shipmentsTotal = C_Garrison_GetLandingPageShipmentInfoByContainerID(looseShipments[i])
 			GameTooltip:AddDoubleLine(name, format(GARRISON_LANDING_SHIPMENT_COUNT, shipmentsReady, shipmentsTotal), 1, 1, 1)
 		end
 	end
 	
 	--[[Orderhall Missions]]--
 	local inProgressMissions = {}
-	C_GarrisonGetInProgressMissions(inProgressMissions, LE_FOLLOWER_TYPE_GARRISON_7_0)
+	C_Garrison_GetInProgressMissions(inProgressMissions, LE_FOLLOWER_TYPE_GARRISON_7_0)
 	local numMissions = #inProgressMissions
 	if(numMissions > 0) then
 		tsort(inProgressMissions, sortFunction)
@@ -117,11 +118,11 @@ if InCombatLockdown() then return end
 	end
 	
 	--[[Troop Work Orders]]--
-	local followerShipments = C_GarrisonGetFollowerShipments(LE_GARRISON_TYPE_7_0)
+	local followerShipments = C_Garrison_GetFollowerShipments(LE_GARRISON_TYPE_7_0)
 	local hasFollowers = false
 	if (followerShipments) then
 		for i = 1, #followerShipments do
-			local name, _, _, shipmentsReady, shipmentsTotal = C_GarrisonGetLandingPageShipmentInfoByContainerID(followerShipments[i])
+			local name, _, _, shipmentsReady, shipmentsTotal = C_Garrison_GetLandingPageShipmentInfoByContainerID(followerShipments[i])
 			if ( name and shipmentsReady and shipmentsTotal ) then
 				if(hasFollowers == false) then
 				if(numMissions > 0) then GameTooltip:AddLine(" ") end
@@ -134,19 +135,19 @@ if InCombatLockdown() then return end
 	end
 	
 	--[[Talents]]--
-	local talentTrees = C_GarrisonGetTalentTrees(LE_GARRISON_TYPE_7_0, select(3, UnitClass("player")))
-	local hasTalent = false
-	if (followerShipments) then GameTooltip:AddLine(" ") end
-	if (talentTrees) then
-		local completeTalentID = C_GarrisonGetCompleteTalent(LE_GARRISON_TYPE_7_0)
-		for treeIndex, tree in ipairs(talentTrees) do
+	local talentTreeIDs = C_Garrison_GetTalentTreeIDsByClassID(LE_GARRISON_TYPE_7_0, select(3, UnitClass("player")));
+ 	local hasTalent = false
+	if talentTreeIDs then
+		local completeTalentID = C_Garrison_GetCompleteTalent(LE_GARRISON_TYPE_7_0);
+		for treeIndex, treeID in ipairs(talentTreeIDs) do
+			local _, _, tree = C_Garrison_GetTalentTreeInfoForID(LE_GARRISON_TYPE_7_0, treeID);
 			for talentIndex, talent in ipairs(tree) do
 				local showTalent = false
-				if (talent.isBeingResearched) then showTalent = true end
-				if (talent.id == completeTalentID) then showTalent = true end
-				if (showTalent) then
-				GameTooltip:AddLine(GARRISON_TALENT_ORDER_ADVANCEMENT)
-				GameTooltip:AddDoubleLine(talent.name, format(GARRISON_LANDING_SHIPMENT_COUNT, talent.isBeingResearched and 0 or 1, 1), 1, 1, 1)
+				if talent.isBeingResearched then showTalent = true end
+				if talent.id == completeTalentID then showTalent = true end
+				if showTalent then
+					GameTooltip:AddLine(GARRISON_TALENT_ORDER_ADVANCEMENT)
+					GameTooltip:AddDoubleLine(talent.name, format(GARRISON_LANDING_SHIPMENT_COUNT, talent.isBeingResearched and 0 or 1, 1), 1, 1, 1)
 				end
 			end
 		end
