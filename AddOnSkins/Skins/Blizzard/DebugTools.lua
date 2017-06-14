@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+--[[local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_DebugTools(event, addon)
 	if IsAddOnLoaded('Blizzard_DebugTools') or addon == 'Blizzard_DebugTools' then
@@ -22,13 +22,13 @@ function AS:Blizzard_DebugTools(event, addon)
 
 		AS:SkinTooltip(EventTraceTooltip)
 
-		--[[FrameStackTooltip:SetParent(UIParent)
+		FrameStackTooltip:SetParent(UIParent)
 		AS:SkinTooltip(FrameStackTooltip)
 		FrameStackTooltip:SetFrameStrata('TOOLTIP')
-		FrameStackTooltip:SetFrameLevel(255)]]--
+		FrameStackTooltip:SetFrameLevel(255)
 
 		AS:UnregisterSkinEvent('Blizzard_DebugTools', 'ADDON_LOADED')
 	end
 end
 
-AS:RegisterSkin('Blizzard_DebugTools', AS.Blizzard_DebugTools, 'ADDON_LOADED')
+AS:RegisterSkin('Blizzard_DebugTools', AS.Blizzard_DebugTools, 'ADDON_LOADED')]]--
