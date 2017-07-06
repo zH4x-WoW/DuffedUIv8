@@ -29,11 +29,13 @@ function AS:Blizzard_ChatBubbles()
 	end
 
 	local function IsChatBubble(frame)
-		if not IsForbidden() then
+		if not frame:IsForbidden() then
 			for i = 1, frame:GetNumRegions() do
 				local region = select(i, frame:GetRegions()) 
 				if region.GetTexture and region:GetTexture() and type(region:GetTexture() == "string") then
-					if strfind(strlower(region:GetTexture()), "chatbubble%-background") then return true end;
+					if strfind(strlower(region:GetTexture()), "chatbubble%-background") then
+						return true
+					end;
 				end
 			end
 		end
