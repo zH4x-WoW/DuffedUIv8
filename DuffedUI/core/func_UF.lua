@@ -828,4 +828,43 @@ D.Debuffids = {
 	[GetSpellInfo(206221)] = 6, -- Empowered Bonds of Fel
 	[GetSpellInfo(208802)] = 6, -- Soul Corrosion
 	[GetSpellInfo(212686)] = 6, -- Flames of Sargeras
+	-- Tomb of Sargeras
+	-- Trash
+	-- Goroth
+	[GetSpellInfo(233279)] = 6, -- Shattering Star
+	[GetSpellInfo(230345)] = 6, -- Crashing Comet
+	[GetSpellInfo(234264)] = 6, -- Melted Armor
+	-- Demonic Inquisition
+	[GetSpellInfo(233983)] = 6, -- Echoing Anguish
+	-- Harjatan
+	[GetSpellInfo(231770)] = 6, -- Drenched
+	[GetSpellInfo(231729)] = 6, -- Aqueous Burst
+	-- Mistress Sassz'ine
+	[GetSpellInfo(230201)] = 6, -- Burden of Pain
+	[GetSpellInfo(230959)] = 6, -- Concealing Murk
+	[GetSpellInfo(232754)] = 6, -- Hydra Acid
+	-- Sisters of the Moon
+	[GetSpellInfo(236603)] = 6, -- Rapid Shot
+	[GetSpellInfo(236712)] = 6, -- Lunar Beacon
+	-- The Desolate Host
+	[GetSpellInfo(236515)] = 6, -- Shattering Scream
+	[GetSpellInfo(235989)] = 6, -- Tormented Cries
+	[GetSpellInfo(236340)] = 6, -- Crush Mind
+	[GetSpellInfo(236449)] = 6, -- Soulbind
+	-- Maiden of Vigilance
+	[GetSpellInfo(240209)] = 6, -- Unstable Soul
+	[GetSpellInfo(235213)] = 6, -- Light Infusion
+	[GetSpellInfo(235240)] = 6, -- Fel Infusion
+	-- Fallen Avatar
+	[GetSpellInfo(236494)] = 6, -- Desolate
+	[GetSpellInfo(234059)] = 6, -- Unbound
+	[GetSpellInfo(236604)] = 6, -- Shadowy Blades
+	[GetSpellInfo(239739)] = 6, -- Dark Mark
+	-- Kil'Jaeden
+	[GetSpellInfo(234310)] = 6, -- Armageddon Rain
+	[GetSpellInfo(239932)] = 6, -- Felclaws
+	[GetSpellInfo(240908)] = 6, -- Armageddon Blast
+	[GetSpellInfo(238505)] = 6, -- Focused Dreadflame
+	[GetSpellInfo(238429)] = 6, -- Bursting Dreadflame
+	[GetSpellInfo(236710)] = 6, -- Shadow Reflection: Erupting
 }

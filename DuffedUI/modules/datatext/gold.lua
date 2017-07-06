@@ -182,6 +182,7 @@ Stat:SetScript("OnEnter", function(self)
 		D["Currency"](1155, false, true)
 		D["Currency"](1226)
 		D["Currency"](1273, false, true)
+		D["Currency"](1501)
 	end
 
 	if ImprovedCurrency["PvP"] then

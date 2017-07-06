@@ -3,7 +3,8 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Fixed Orderhall-Datatext",
+		"• Update AddOnSkins",
+		"• Update Raid-Debufffilter"
 		--"• ",
 	" ",
 	"Notes:",
