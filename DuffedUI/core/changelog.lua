@@ -4,7 +4,7 @@ local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
 		"• Update AddOnSkins",
-		"• Update Raid-Debufffilter"
+		"• Update Raid-Debufffilter",
 		--"• ",
 	" ",
 	"Notes:",
