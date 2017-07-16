@@ -149,19 +149,23 @@ D.PostUpdatePower = function(power, unit, cur, max, min)
 		if min ~= max then
 			if pType == 0 then
 				if (unit == "target" or (unit and strfind(unit, "boss%d"))) then
-					power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), D.ShortValue(max - (max - min)))
+					power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / cur * 100), D.ShortValue(cur - (cur - min)))
 				elseif (unit == "player" and Parent:GetAttribute("normalUnit") == "pet" or unit == "pet") then
-					power.value:SetFormattedText("%d%%", floor(min / max * 100))
+					power.value:SetFormattedText("%d%%", floor(min / cur * 100))
 				elseif (unit and strfind(unit, "arena%d")) or unit == "focus" or unit == "focustarget" then
 					power.value:SetText(D.ShortValue(min))
 				else
-					power.value:SetFormattedText("%d%% |cffD7BEA5-|r %d", floor(min / max * 100), max - (max - min))
+					power.value:SetFormattedText("%d%% |cffD7BEA5-|r %d", floor(min / cur * 100), cur - (cur - min))
 				end
 			else
 				power.value:SetText(cur - (cur - min))
 			end
 		else
-			if (unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and strfind(unit, "arena%d")) or (unit and strfind(unit, "boss%d"))) then power.value:SetText(D.ShortValue(min)) else power.value:SetText(min) end
+			if (unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and strfind(unit, "arena%d")) or (unit and strfind(unit, "boss%d"))) then
+				power.value:SetText(D.ShortValue(min))
+			else
+				power.value:SetText(min)
+			end
 		end
 	end
 end
