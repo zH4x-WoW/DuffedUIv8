@@ -12,6 +12,7 @@ local texture = C["media"]["normTex"]
 local f, fs, ff = C["media"]["font"], 8, "THINOUTLINE"
 local nWidth, nHeight = C["nameplate"]["platewidth"], C["nameplate"]["plateheight"]
 local pScale = C["nameplate"]["platescale"]
+local threat = C["nameplate"]["threat"]
 local backdrop = {
 	bgFile = C["media"].blank,
 	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
@@ -63,12 +64,51 @@ D["ConstructNameplates"] = function(self)
 	debuffs.size = 15
 	debuffs.num = 5
 	debuffs.filter = "HARMFUL|INCLUDE_NAME_PLATE_ONLY"
-	debuffs.spacing = 2
+	debuffs.spacing = 4
 	debuffs.initialAnchor = "TOPLEFT"
 	debuffs["growth-y"] = "UP"
-	debuffs["growth-x"] = "LEFT"
+	debuffs["growth-x"] = "RIGHT"
 	debuffs.PostCreateIcon = D.PostCreateAura
 	debuffs.PostUpdateIcon = D.PostUpdateAura
+
+	-- castbar
+	local castbar = CreateFrame("StatusBar", self:GetName() .. "CastBar", self)
+	castbar:SetStatusBarTexture(texture)
+	castbar:Width(nWidth - 2)
+	castbar:Height(5)
+	castbar:Point("TOP", health, "BOTTOM", 0, -4)
+
+	castbar.CustomTimeText = D["CustomTimeText"]
+	castbar.CustomDelayText = CustomDelayText
+	castbar.PostCastStart = D["CastBar"]
+	castbar.PostChannelStart = D["CastBar"]
+
+	castbar.time = castbar:CreateFontString(nil, "OVERLAY")
+	castbar.time:SetFont(f, 6, ff)
+	castbar.time:Point("RIGHT", castbar, "RIGHT", -5, 0)
+	castbar.time:SetTextColor(.84, .75, .65)
+	castbar.time:SetJustifyH("RIGHT")
+
+	castbar.Text = castbar:CreateFontString(nil, "OVERLAY")
+	castbar.Text:SetFont(f, 6, ff)
+	castbar.Text:Point("LEFT", castbar, "LEFT", 6, 0)
+	castbar.Text:SetTextColor(.84, .75, .65)
+	castbar:CreateBackdrop()
+
+	castbar.button = CreateFrame("Frame", nil, castbar)
+	castbar.button:SetTemplate("Default")
+
+	castbar.button:Size(nHeight + 12)
+	castbar.button:Point("BOTTOMLEFT", castbar, "BOTTOMRIGHT", 3, -2)
+	castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
+	castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
+	castbar.icon:Point("BOTTOMRIGHT", castbar.button, -2, 2)
+	castbar.icon:SetTexCoord(unpack(D["IconCoord"]))
+
+	-- threat
+	if threat then
+	
+	end
 
 	-- size
 	self:SetSize(nWidth, nHeight)
@@ -79,4 +119,7 @@ D["ConstructNameplates"] = function(self)
 	self.Health = health
 	self.Name = name
 	self.Debuffs = debuffs
+	self.Castbar = castbar
+	self.Castbar.Time = castbar.time
+	self.Castbar.Icon = castbar.icon
 end
