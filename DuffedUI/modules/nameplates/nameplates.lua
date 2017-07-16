@@ -28,6 +28,7 @@ D["ConstructNameplates"] = function(self)
 	health.colorTapping = true
 	health.colorReaction = true
 	health.frequentUpdates = true
+	health.Smooth = true
 	if C["nameplate"]["classcolor"] then
 		health.colorClass = true
 	else
@@ -55,6 +56,20 @@ D["ConstructNameplates"] = function(self)
 	name:SetShadowOffset(1.25, -1.25)
 	self:Tag(name, "[difficulty][level][shortclassification] [DuffedUI:getnamecolor][DuffedUI:namelong]")
 
+	-- debuffs
+	local debuffs = CreateFrame("Frame", "NameplateDebuffs", self)
+	debuffs:SetPoint("BOTTOMLEFT", health, "TOPLEFT", 0, 15)
+	debuffs:SetSize(nWidth, 15)
+	debuffs.size = 15
+	debuffs.num = 5
+	debuffs.filter = "HARMFUL|INCLUDE_NAME_PLATE_ONLY"
+	debuffs.spacing = 2
+	debuffs.initialAnchor = "TOPLEFT"
+	debuffs["growth-y"] = "UP"
+	debuffs["growth-x"] = "LEFT"
+	debuffs.PostCreateIcon = D.PostCreateAura
+	debuffs.PostUpdateIcon = D.PostUpdateAura
+
 	-- size
 	self:SetSize(nWidth, nHeight)
 	self:SetPoint("CENTER", 0, 0)
@@ -63,4 +78,5 @@ D["ConstructNameplates"] = function(self)
 	-- Init
 	self.Health = health
 	self.Name = name
+	self.Debuffs = debuffs
 end

@@ -66,6 +66,7 @@ C["nameplate"] = {
  	["active"] = true,
  	["platewidth"] = 110,
  	["plateheight"] = 7,
+	["platescale"] = 1.5,
 	["ethreat"] = true,
 	["classcolor"] = true,
 }
