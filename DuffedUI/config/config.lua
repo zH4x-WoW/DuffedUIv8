@@ -67,7 +67,7 @@ C["nameplate"] = {
  	["platewidth"] = 110,
  	["plateheight"] = 7,
 	["ethreat"] = true,
-	["ClassColor"] = true,
+	["classcolor"] = true,
 }
 
 C["actionbar"] = {

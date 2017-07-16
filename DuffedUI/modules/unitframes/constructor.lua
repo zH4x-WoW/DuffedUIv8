@@ -37,6 +37,8 @@ D["ConstructUF"] = function(self, unit)
 		if parent:match("Party") then D["ConstructUFParty"](self) else D["ConstructUFRaid"](self) end
 	elseif (self:GetParent():GetName():match"oUF_MainTank" or self:GetParent():GetName():match"oUF_MainAssist") then
 		D["ConstructUFMaintank"](self)
+	elseif unit:match("nameplate") then
+		D["ConstructNameplates"](self)
 	end
 end
 
@@ -328,10 +330,26 @@ D["SpawnUF"] = function(self)
 	end
 end
 
+local cvars = {
+    -- important, strongly recommend to set these to 1
+    nameplateGlobalScale = 1,
+    NamePlateHorizontalScale = 1,
+    NamePlateVerticalScale = 1,
+    -- optional, you may use any values
+    nameplateLargerScale = 1,
+    nameplateMaxScale = 1,
+    nameplateMinScale = 1,
+    nameplateSelectedScale = 1,
+    nameplateSelfScale = 1,
+}
+
 D["LoadUF"] = function()
 	if C["unitframes"]["enable"] then
 		oUF:RegisterStyle("DuffedUI", D["ConstructUF"])
 		D["SpawnUF"]()
+	end
+	if C["nameplate"]["active"] then
+		oUF:SpawnNamePlates(nil, nil, cvars)
 	end
 end
 
