@@ -132,7 +132,7 @@ D.PostUpdatePetColor = function(health, unit, min, max)
 end
 
 --Powerupdate for UFs
-D.PostUpdatePower = function(power, unit, min, max)
+D.PostUpdatePower = function(power, unit, cur, max, min)
 	if not power.value then return end
 
 	local Parent = power:GetParent()
@@ -158,7 +158,7 @@ D.PostUpdatePower = function(power, unit, min, max)
 					power.value:SetFormattedText("%d%% |cffD7BEA5-|r %d", floor(min / max * 100), max - (max - min))
 				end
 			else
-				power.value:SetText(max - (max - min))
+				power.value:SetText(cur - (cur - min))
 			end
 		else
 			if (unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and strfind(unit, "arena%d")) or (unit and strfind(unit, "boss%d"))) then power.value:SetText(D.ShortValue(min)) else power.value:SetText(min) end
