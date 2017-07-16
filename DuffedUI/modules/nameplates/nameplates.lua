@@ -9,8 +9,9 @@ ns._Headers = {}
 
 local class = select(2, UnitClass("player"))
 local texture = C["media"]["normTex"]
-local f, fs, ff = C["media"]["font"], 7, "THINOUTLINE"
+local f, fs, ff = C["media"]["font"], 8, "THINOUTLINE"
 local nWidth, nHeight = C["nameplate"]["platewidth"], C["nameplate"]["plateheight"]
+local pScale = C["nameplate"]["platescale"]
 local backdrop = {
 	bgFile = C["media"].blank,
 	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
@@ -26,6 +27,7 @@ D["ConstructNameplates"] = function(self)
 	health:SetStatusBarTexture(texture)
 	health.colorTapping = true
 	health.colorReaction = true
+	health.frequentUpdates = true
 	if C["nameplate"]["classcolor"] then
 		health.colorClass = true
 	else
@@ -51,11 +53,12 @@ D["ConstructNameplates"] = function(self)
 	name:SetJustifyH("LEFT")
 	name:SetFont(f, fs, ff)
 	name:SetShadowOffset(1.25, -1.25)
-	self:Tag(name, "[DuffedUI:getnamecolor][DuffedUI:namelong] [DuffedUI:diffcolor][level] [shortclassification]")
+	self:Tag(name, "[difficulty][level][shortclassification] [DuffedUI:getnamecolor][DuffedUI:namelong]")
 
 	-- size
 	self:SetSize(nWidth, nHeight)
 	self:SetPoint("CENTER", 0, 0)
+	self:SetScale(pScale * UIParent:GetScale())
 
 	-- Init
 	self.Health = health
