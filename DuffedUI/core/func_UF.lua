@@ -469,7 +469,11 @@ D.UpdateThreat = function(self, event, unit)
 	if (self.unit ~= unit) or (unit == "target" or unit == "pet" or unit == "focus" or unit == "focustarget" or unit == "targettarget") then return end
 	local threat = UnitThreatSituation(self.unit)
 	if (threat == 3) then
-		if self.panel then self.panel:SetBackdropBorderColor(.69, .31, .31, 1) else self.Name:SetTextColor(1,.1, .1) end
+		if self.panel then
+			self.panel:SetBackdropBorderColor(.69, .31, .31, 1)
+		else
+			self.Name:SetTextColor(1,.1, .1)
+		end
 	else
 		if self.panel then
 			local r, g, b = unpack(C["media"].bordercolor)
@@ -477,33 +481,6 @@ D.UpdateThreat = function(self, event, unit)
 		else
 			self.Name:SetTextColor(1, 1, 1)
 		end
-	end
-end
-
-function D.PvPUpdate(self, elapsed)
-	if (self.elapsed and self.elapsed > 0.2) then
-		local unit = self.unit
-		local time = GetPVPTimer()
-
-		local min = format("%01.f", floor((time / 1000) / 60))
-		local sec = format("%02.f", floor((time / 1000) - min * 60))
-		if self.pvptimer then
-			local factionGroup = UnitFactionGroup(unit)
-			if UnitIspvptimerFreeForAll(unit) then
-				if time ~= 301000 and time ~= -1 then
-					self.pvptimer:SetText(pvptimer.." ".."("..min..":"..sec..")")
-				end
-			elseif (factionGroup and UnitIspvptimer(unit)) then
-				if time ~= 301000 and time ~= -1 then
-					self.pvptimer:SetText(pvptimer.." ".."("..min..":"..sec..")")
-				end
-			else
-				self.pvptimer:SetText("")
-			end
-		end
-		self.elapsed = 0
-	else
-		self.elapsed = (self.elapsed or 0) + elapsed
 	end
 end
 

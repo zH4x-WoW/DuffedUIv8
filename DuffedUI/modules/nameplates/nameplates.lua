@@ -13,10 +13,32 @@ local f, fs, ff = C["media"]["font"], 8, "THINOUTLINE"
 local nWidth, nHeight = C["nameplate"]["platewidth"], C["nameplate"]["plateheight"]
 local pScale = C["nameplate"]["platescale"]
 local threat = C["nameplate"]["threat"]
-local backdrop = {
-	bgFile = C["media"].blank,
-	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
-}
+
+-- Set color for threat
+local function ColorHealthbarOnThreat(self,unit)
+  if self.colorThreat and self.colorThreatInvers and unit and UnitThreatSituation("player", unit) == 3 then
+    self:SetStatusBarColor(0, 1, 0, .3)
+    self.bg:SetVertexColor(0, 1 * .2, 0)
+  elseif self.colorThreat and unit and UnitThreatSituation(unit) == 3 then
+    self:SetStatusBarColor(1, 0, 0, .3)
+    self.bg:SetVertexColor(1 * .2, 0, 0)
+  end
+end
+
+-- PostUpdateHealth
+local function PostUpdateHealth(self, unit, min, max)
+  ColorHealthbarOnThreat(self,unit)
+end
+
+-- UpdateThreat
+local function UpdateThreat(self,event,unit)
+  if event == "PLAYER_ENTER_COMBAT" or event == "PLAYER_LEAVE_COMBAT" then
+    --do natting
+  elseif self.unit ~= unit then
+    return
+  end
+  self.Health:ForceUpdate()
+end
 
 D["ConstructNameplates"] = function(self)
 	-- Initial Elements
@@ -30,10 +52,24 @@ D["ConstructNameplates"] = function(self)
 	health.colorReaction = true
 	health.frequentUpdates = true
 	health.Smooth = true
-	if C["nameplate"]["classcolor"] then
-		health.colorClass = true
+	if C["nameplate"]["classcolor"] then health.colorClass = true else health.colorClass = false end
+	if C["nameplate"]["threat"] then
+		health.colorThreat = true
+		health.colorThreatInvers = true
 	else
-		health.colorClass = false
+		health.colorThreat = false
+		health.colorThreatInvers = false
+	end
+	health.PostUpdate = PostUpdateHealth
+	
+	-- threat
+	if health.colorThreat and health.colorThreatInvers then
+		table.insert(self.__elements, D.UpdateThreat)
+		self:RegisterEvent("PLAYER_ENTER_COMBAT", UpdateThreat)
+		self:RegisterEvent("PLAYER_LEAVE_COMBAT", UpdateThreat)
+		self:RegisterEvent("PLAYER_TARGET_CHANGED", UpdateThreat)
+		self:RegisterEvent("UNIT_THREAT_LIST_UPDATE", UpdateThreat)
+		self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", UpdateThreat)
 	end
 
 	-- health border
@@ -105,10 +141,10 @@ D["ConstructNameplates"] = function(self)
 	castbar.icon:Point("BOTTOMRIGHT", castbar.button, -2, 2)
 	castbar.icon:SetTexCoord(unpack(D["IconCoord"]))
 
-	-- threat
-	if threat then
-	
-	end
+	local RaidIcon = health:CreateTexture(nil, "OVERLAY")
+	RaidIcon:SetTexture(C["media"]["RaidIcons"])
+	RaidIcon:Size(20, 20)
+	RaidIcon:Point("LEFT", health, "LEFT", -25, 0)
 
 	-- size
 	self:SetSize(nWidth, nHeight)
@@ -117,9 +153,11 @@ D["ConstructNameplates"] = function(self)
 
 	-- Init
 	self.Health = health
+	self.Health.bg = bg
 	self.Name = name
 	self.Debuffs = debuffs
 	self.Castbar = castbar
 	self.Castbar.Time = castbar.time
 	self.Castbar.Icon = castbar.icon
+	self.RaidTargetIndicator = RaidIcon
 end
