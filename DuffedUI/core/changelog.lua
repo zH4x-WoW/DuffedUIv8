@@ -3,8 +3,8 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Update AddOnSkins",
-		"• Update Raid-Debufffilter",
+		"• Update oUF",
+		"• Adjust all funtions of the unitframes",
 		--"• ",
 	" ",
 	"Notes:",
