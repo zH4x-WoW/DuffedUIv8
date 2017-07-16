@@ -436,7 +436,7 @@ D["EclipseDirection"] = function(self)
 end
 
 D.MLAnchorUpdate = function (self)
-	if self.Leader:IsShown() then self.MasterLooter:SetPoint("TOPLEFT", 14, 8) else self.MasterLooter:SetPoint("TOPLEFT", 0, 8) end
+	if self.LeaderIndicator:IsShown() then self.MasterLooterIndicator:SetPoint("TOPLEFT", 14, 8) else self.MasterLooterIndicator:SetPoint("TOPLEFT", 0, 8) end
 end
 
 local UpdateManaLevelDelay = 0
@@ -504,7 +504,7 @@ function D.PvPUpdate(self, elapsed)
 end
 
 D.SetGridGroupRole = function(self, role)
-	local lfdrole = self.LFDRole
+	local lfdrole = self.GroupRoleIndicator
 	local role = UnitGroupRolesAssigned(self.unit)
 
 	if role == "TANK" then

@@ -122,7 +122,7 @@ D["ConstructUFBoss"] = function(self)
 	AltPowerBar:SetPoint("TOP", self.Health, "TOP")
 	AltPowerBar:SetBackdrop(backdrop)
 	AltPowerBar:SetBackdropColor(0, 0, 0)
-	self.AltPowerBar = AltPowerBar
+	self.AlternativePower = AltPowerBar
 
 	--[[Buffs & Debuffs]]--
 	local buffs = CreateFrame("Frame", nil, self)

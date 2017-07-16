@@ -139,7 +139,7 @@ D["ConstructUFRaid"] = function(self)
 		RaidIcon:Width(18)
 		RaidIcon:SetPoint("CENTER", self, "TOP")
 		RaidIcon:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\raidicons.blp") -- thx hankthetank for texture
-		self.RaidIcon = RaidIcon
+		self.RaidTargetIndicator = RaidIcon
 	end
 
 	local LFDRole = health:CreateTexture(nil, "OVERLAY")
@@ -147,7 +147,7 @@ D["ConstructUFRaid"] = function(self)
 	LFDRole:Width(12)
 	LFDRole:Point("TOPRIGHT", -1, -1)
 	LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons2.blp")
-	self.LFDRole = LFDRole
+	self.GroupRoleIndicator = LFDRole
 
 	local Resurrect = CreateFrame("Frame", nil, self)
 	Resurrect:SetFrameLevel(20)
@@ -161,18 +161,18 @@ D["ConstructUFRaid"] = function(self)
 	ReadyCheck:Height(12)
 	ReadyCheck:Width(12)
 	ReadyCheck:SetPoint("CENTER")
-	self.ReadyCheck = ReadyCheck
+	self.ReadyCheckIndicator = ReadyCheck
 
 	local leader = health:CreateTexture(nil, "OVERLAY")
 	leader:Height(12)
 	leader:Width(12)
 	leader:Point("TOPLEFT", 0, 8)
-	self.Leader = leader
+	self.LeaderIndicator = leader
 
 	local MasterLooter = health:CreateTexture(nil, "OVERLAY")
 	MasterLooter:Height(12)
 	MasterLooter:Width(12)
-	self.MasterLooter = MasterLooter
+	self.MasterLooterIndicator = MasterLooter
 	self:RegisterEvent("PARTY_LEADER_CHANGED", D.MLAnchorUpdate)
 	self:RegisterEvent("PARTY_MEMBERS_CHANGED", D.MLAnchorUpdate)
 
@@ -214,7 +214,7 @@ D["ConstructUFRaid"] = function(self)
 			absb:SetStatusBarTexture(texture)
 			absb:SetStatusBarColor(1, 1, 0, 0.25)
 
-			self.HealPrediction = {
+			self.HealthPrediction = {
 				myBar = mhpb,
 				otherBar = ohpb,
 				absorbBar = absb,

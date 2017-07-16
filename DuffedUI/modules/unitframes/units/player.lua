@@ -223,7 +223,7 @@ D["ConstructUFPlayer"] = function(self)
 	local MasterLooter = health:CreateTexture(nil, "OVERLAY")
 	MasterLooter:Height(14)
 	MasterLooter:Width(14)
-	self.MasterLooter = MasterLooter
+	self.MasterLooterIndicator = MasterLooter
 	self:RegisterEvent("PARTY_LEADER_CHANGED", D.MLAnchorUpdate)
 	self:RegisterEvent("PARTY_MEMBERS_CHANGED", D.MLAnchorUpdate)
 
@@ -348,11 +348,11 @@ D["ConstructUFPlayer"] = function(self)
 	self.Health.bg = healthBG
 	self.Power = power
 	self.Power.bg = powerBG
-	self.Combat = Combat
-	self.PvP = PVP
+	self.CombatIndicator = Combat
+	self.PvPIndicator = PVP
 	self.FlashInfo = FlashInfo
-	self.Leader = Leader
-	self.RaidIcon = RaidIcon
+	self.LeaderIndicator = Leader
+	self.RaidTargetIndicator = RaidIcon
 
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", D.updateAllElements)
 	if C["unitframes"]["classbar"] then D["ClassRessource"][class](self) end

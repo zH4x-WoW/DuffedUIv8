@@ -48,8 +48,8 @@ D["ClassRessource"]["PRIEST"] = function(self)
 		PMB.bg:SetAllPoints(PMB)
 		PMB.bg:SetTexture(.30, .52, .90, .2)
 
-		self.DruidMana = PMB
-		self.DruidMana.bg = PMB.bg
+		self.AdditionalPower = PMB
+		self.AdditionalPower.bg = PMB.bg
 		if C["unitframes"]["oocHide"] then D["oocHide"](PMB) end
 	end
 end

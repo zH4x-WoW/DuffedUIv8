@@ -47,8 +47,8 @@ D["ClassRessource"]["DRUID"] = function(self)
 		DruidMana.bg:SetAllPoints(DruidMana)
 		DruidMana.bg:SetTexture(.30, .52, .90, .2)
 
-		self.DruidMana = DruidMana
-		self.DruidMana.bg = DruidMana.bg
+		self.AdditionalPower = DruidMana
+		self.AdditionalPower.bg = DruidMana.bg
 		if C["unitframes"]["oocHide"] then D["oocHide"](DruidMana) end
 	end
 

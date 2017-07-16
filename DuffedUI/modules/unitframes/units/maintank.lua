@@ -78,5 +78,5 @@ D["ConstructUFMaintank"] = function(self)
 	RaidIcon:SetTexture(C["media"]["RaidIcons"])
 	RaidIcon:Size(28, 28)
 	RaidIcon:Point("TOP", health, "TOP", 0, 11)
-	self.RaidIcon = RaidIcon
+	self.RaidTargetIndicator = RaidIcon
 end

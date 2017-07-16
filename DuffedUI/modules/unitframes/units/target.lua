@@ -364,9 +364,9 @@ D["ConstructUFTarget"] = function(self)
 	self.Health.bg = healthBG
 	self.Power = power
 	self.Power.bg = powerBG
-	self.AltPowerBar = AltPowerBar
+	self.AlternativePower = AltPowerBar
 	self.Name = Name
-	self.RaidIcon = RaidIcon
+	self.RaidTargetIndicator = RaidIcon
 
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", D.updateAllElements)
 end

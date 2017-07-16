@@ -87,8 +87,8 @@ D["ClassRessource"]["SHAMAN"] = function(self)
 		SMB.bg:SetAllPoints(SMB)
 		SMB.bg:SetTexture(.30, .52, .90, .2)
 
-		self.DruidMana = SMB
-		self.DruidMana.bg = SMB.bg
+		self.AdditionalPower = SMB
+		self.AdditionalPower.bg = SMB.bg
 		if C["unitframes"]["oocHide"] then D["oocHide"](SMB) end
 	end
 end
