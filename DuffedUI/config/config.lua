@@ -64,11 +64,11 @@ C["castbar"] = {
 
 C["nameplate"] = {
  	["active"] = true,
+	["classcolor"] = true,
  	["platewidth"] = 110,
  	["plateheight"] = 7,
 	["platescale"] = 1.5,
-	["ethreat"] = true,
-	["classcolor"] = true,
+	["threat"] = true,
 }
 
 C["actionbar"] = {
