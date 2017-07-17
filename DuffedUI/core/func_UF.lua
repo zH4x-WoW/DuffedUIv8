@@ -392,12 +392,6 @@ D.CustomCastTime = function(self, duration) self.Time:SetText(("%.1f / %.1f"):fo
 D.CustomCastDelayText = function(self, duration) self.Time:SetText(("%.1f |cffaf5050%s %.1f|r"):format(self.channeling and duration or self.max - duration, self.channeling and "- " or "+", self.delay)) end
 
 D.CastBar = function(self, unit, name, rank, castid)
-	if self.interrupt and unit ~= "player" then
-		if UnitCanAttack("player", unit) then self:SetStatusBarColor(1, 0, 0, .5) else self:SetStatusBarColor(1, 0, 0, .5) end
-	else
-		if C["castbar"].classcolor then self:SetStatusBarColor(unpack(D.UnitColor.class[D.Class])) else self:SetStatusBarColor(unpack(C["castbar"].color)) end
-	end
-
 	local color
 	self.unit = unit
 

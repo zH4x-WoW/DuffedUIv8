@@ -14,6 +14,14 @@ local backdrop = {
 	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
 }
 
+local function SetCastBarColorShielded(self)
+	self.__owner:SetStatusBarColor(1, 0, 0)
+end
+
+local function SetCastBarColorDefault(self)
+	self.__owner:SetStatusBarColor(unpack(C["castbar"].color))
+end
+
 D["ConstructUFBoss"] = function(self)
 	--[[Initial Elements]]--
 	self.colors = D.UnitColor
@@ -174,6 +182,12 @@ D["ConstructUFBoss"] = function(self)
 	castbar.time:SetTextColor(.84, .75, .65)
 	castbar.time:SetJustifyH("RIGHT")
 	castbar.CustomTimeText = D.CustomTimeText
+
+	local shield = castbar:CreateTexture(nil, "BACKGROUND", nil, -8)
+	shield.__owner = castbar
+	castbar.Shield = shield
+	hooksecurefunc(shield, "Show", SetCastBarColorShielded)
+	hooksecurefunc(shield, "Hide", SetCastBarColorDefault)
 
 	castbar.CustomDelayText = D.CustomDelayText
 	castbar.PostCastStart = D.CastBar

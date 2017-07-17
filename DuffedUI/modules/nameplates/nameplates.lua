@@ -12,32 +12,39 @@ local texture = C["media"]["normTex"]
 local f, fs, ff = C["media"]["font"], 8, "THINOUTLINE"
 local nWidth, nHeight = C["nameplate"]["platewidth"], C["nameplate"]["plateheight"]
 local pScale = C["nameplate"]["platescale"]
-local threat = C["nameplate"]["threat"]
 
 -- Set color for threat
 local function ColorHealthbarOnThreat(self,unit)
-  if self.colorThreat and self.colorThreatInvers and unit and UnitThreatSituation("player", unit) == 3 then
-    self:SetStatusBarColor(0, 1, 0, .3)
-    self.bg:SetVertexColor(0, 1 * .2, 0)
-  elseif self.colorThreat and unit and UnitThreatSituation(unit) == 3 then
-    self:SetStatusBarColor(1, 0, 0, .3)
-    self.bg:SetVertexColor(1 * .2, 0, 0)
-  end
+	if self.colorThreat and self.colorThreatInvers and unit and UnitThreatSituation("player", unit) == 3 then
+		self:SetStatusBarColor(0, 1, 0, .3)
+		self.bg:SetVertexColor(0, 1 * .2, 0)
+	elseif self.colorThreat and unit and UnitThreatSituation(unit) == 3 then
+		self:SetStatusBarColor(1, 0, 0, .3)
+		self.bg:SetVertexColor(1 * .2, 0, 0)
+	end
 end
 
 -- PostUpdateHealth
 local function PostUpdateHealth(self, unit, min, max)
-  ColorHealthbarOnThreat(self,unit)
+	ColorHealthbarOnThreat(self,unit)
+end
+
+local function SetCastBarColorShielded(self)
+	self.__owner:SetStatusBarColor(1, 0, 0)
+end
+
+local function SetCastBarColorDefault(self)
+	self.__owner:SetStatusBarColor(unpack(C["castbar"].color))
 end
 
 -- UpdateThreat
 local function UpdateThreat(self,event,unit)
-  if event == "PLAYER_ENTER_COMBAT" or event == "PLAYER_LEAVE_COMBAT" then
-    --do natting
-  elseif self.unit ~= unit then
-    return
-  end
-  self.Health:ForceUpdate()
+	if event == "PLAYER_ENTER_COMBAT" or event == "PLAYER_LEAVE_COMBAT" then
+		--do natting
+	elseif self.unit ~= unit then
+		return
+	end
+	self.Health:ForceUpdate()
 end
 
 D["ConstructNameplates"] = function(self)
@@ -61,7 +68,7 @@ D["ConstructNameplates"] = function(self)
 		health.colorThreatInvers = false
 	end
 	health.PostUpdate = PostUpdateHealth
-	
+
 	-- threat
 	if health.colorThreat and health.colorThreatInvers then
 		table.insert(self.__elements, D.UpdateThreat)
@@ -130,6 +137,12 @@ D["ConstructNameplates"] = function(self)
 	castbar.Text:Point("LEFT", castbar, "LEFT", 6, 0)
 	castbar.Text:SetTextColor(.84, .75, .65)
 	castbar:CreateBackdrop()
+	
+	local shield = castbar:CreateTexture(nil, "BACKGROUND", nil, -8)
+	shield.__owner = castbar
+	castbar.Shield = shield
+	hooksecurefunc(shield, "Show", SetCastBarColorShielded)
+	hooksecurefunc(shield, "Hide", SetCastBarColorDefault)
 
 	castbar.button = CreateFrame("Frame", nil, castbar)
 	castbar.button:SetTemplate("Default")
