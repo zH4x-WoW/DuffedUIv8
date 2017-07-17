@@ -263,7 +263,7 @@ end
 D.PostCreateAura = function(self, button)
 	button:SetTemplate("Default")
 
-	button.remaining = D.SetFontString(button, C["media"].font, 6, "THINOUTLINE")
+	button.remaining = D.SetFontString(button, C["media"].font, 8, "THINOUTLINE")
 	button.remaining:Point("TOPLEFT", 1, -3)
 
 	button.cd.noOCC = true

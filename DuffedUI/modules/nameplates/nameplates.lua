@@ -102,10 +102,11 @@ D["ConstructNameplates"] = function(self)
 
 	-- debuffs
 	local debuffs = CreateFrame("Frame", "NameplateDebuffs", self)
-	debuffs:SetPoint("BOTTOMLEFT", health, "TOPLEFT", 0, 15)
+	debuffs:SetPoint("BOTTOMLEFT", health, "TOPLEFT", 0, 18)
 	debuffs:SetSize(nWidth, 15)
-	debuffs.size = 15
+	debuffs.size = 18
 	debuffs.num = 5
+	debuffs.disableCooldown = true
 	debuffs.filter = "HARMFUL|INCLUDE_NAME_PLATE_ONLY"
 	debuffs.spacing = 4
 	debuffs.initialAnchor = "TOPLEFT"
