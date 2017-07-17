@@ -135,6 +135,7 @@ D["ConstructUFFocus"] = function(self)
 
 	local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 	castbar:SetStatusBarTexture(texture)
+	castbar:SetStatusBarColor(unpack(C["castbar"]["color"]))
 	castbar:SetFrameLevel(10)
 	castbar:Height(10)
 	castbar:Width(201)

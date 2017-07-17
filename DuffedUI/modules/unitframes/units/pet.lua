@@ -140,6 +140,7 @@ D["ConstructUFPet"] = function(self)
 	if C["castbar"]["enable"] then
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		castbar:SetStatusBarTexture(texture)
+		castbar:SetStatusBarColor(unpack(C["castbar"]["color"]))
 		if layout == 3 then
 			castbar:Height(16)
 			castbar:SetFrameLevel(health:GetFrameLevel() + 4)

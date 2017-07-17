@@ -291,6 +291,7 @@ D["ConstructUFPlayer"] = function(self)
 
 		local castbar = CreateFrame("StatusBar", self:GetName() .. "CastBar", self)
 		castbar:SetStatusBarTexture(texture)
+		castbar:SetStatusBarColor(unpack(C["castbar"]["color"]))
 		castbar:Height(21)
 		if C["castbar"]["cbicons"] then castbar:Width(C["castbar"]["playerwidth"] - 31) else castbar:Width(C["castbar"]["playerwidth"]) end
 		castbar:Point("RIGHT", PlayerCastBarMover, "RIGHT", -2, 0)
