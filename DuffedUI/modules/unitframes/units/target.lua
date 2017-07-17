@@ -17,7 +17,7 @@ local backdrop = {
 }
 
 local function SetCastBarColorShielded(self)
-	self.__owner:SetStatusBarColor(1, 0, 0)
+	self.__owner:SetStatusBarColor(1, 0, 0, .3)
 end
 
 local function SetCastBarColorDefault(self)
