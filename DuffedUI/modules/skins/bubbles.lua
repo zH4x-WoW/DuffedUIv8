@@ -47,9 +47,11 @@ f:SetScript("OnUpdate", function(self, elapsed)
 		if newNumKids ~= numKids then
 			for i = numKids + 1, newNumKids do
 				local frame = select(i, WorldFrame:GetChildren())
-				local b = frame:GetBackdrop()
-				if b and b.bgFile == [[Interface\Tooltips\ChatBubble-Background]] then
-					skinbubble(frame)
+				if not frame:IsForbidden() then
+					local b = frame:GetBackdrop()
+					if b and b.bgFile == [[Interface\Tooltips\ChatBubble-Background]] then
+						skinbubble(frame)
+					end
 				end
 			end
 			numKids = newNumKids

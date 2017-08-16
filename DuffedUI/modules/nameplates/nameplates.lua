@@ -12,6 +12,7 @@ local texture = C["media"]["normTex"]
 local f, fs, ff = C["media"]["font"], 8, "THINOUTLINE"
 local nWidth, nHeight = C["nameplate"]["platewidth"], C["nameplate"]["plateheight"]
 local pScale = C["nameplate"]["platescale"]
+local pDebuffs = C["nameplate"]["pDebuffs"]
 
 -- Set color for threat
 local function ColorHealthbarOnThreat(self,unit)
@@ -107,6 +108,7 @@ D["ConstructNameplates"] = function(self)
 	debuffs.size = 18
 	debuffs.num = 5
 	debuffs.disableCooldown = true
+	debuffs.onlyShowPlayer = pDebuffs
 	debuffs.filter = "HARMFUL|INCLUDE_NAME_PLATE_ONLY"
 	debuffs.spacing = 4
 	debuffs.initialAnchor = "TOPLEFT"

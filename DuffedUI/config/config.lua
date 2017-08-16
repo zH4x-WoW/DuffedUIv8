@@ -69,6 +69,7 @@ C["nameplate"] = {
  	["plateheight"] = 7,
 	["platescale"] = 1.5,
 	["threat"] = true,
+	["pDebuffs"] = true,
 }
 
 C["actionbar"] = {

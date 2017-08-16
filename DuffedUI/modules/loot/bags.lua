@@ -761,7 +761,11 @@ function Bags:Enable()
 	local Bank = BankFrameItem1
 	local BankFrame = BankFrame
 
-	if C["chat"]["rbackground"] then self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 5) else self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIInfoRight, "TOPRIGHT", 0, 5) end
+	if C["misc"]["artifact"] then
+		if C["chat"]["rbackground"] then self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 15) else self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIInfoRight, "TOPRIGHT", 0, 5) end
+	else
+		if C["chat"]["rbackground"] then self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 5) else self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIInfoRight, "TOPRIGHT", 0, 5) end
+	end
 	if C["chat"]["lbackground"] then self:CreateContainer("Bank", "BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 0, 5) else self:CreateContainer("Bank", "BOTTOMLEFT", DuffedUIInfoLeft, "TOPLEFT", 0, 5) end
 	self:HideBlizzard()
 	self:SetBagsSearchPosition()
