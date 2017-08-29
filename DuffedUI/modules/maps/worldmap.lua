@@ -165,7 +165,6 @@ function WorldMap:Skin()
 	CloseButton:SetPoint("RIGHT", Map.Header, "RIGHT", 8, -1)
 	CloseButton:SkinCloseButton()
 
-	SizeButton:Kill()
 	ScrollBar:Hide()
 
 	Money:StripTextures()

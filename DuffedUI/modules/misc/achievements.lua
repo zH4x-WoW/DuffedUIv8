@@ -10,7 +10,7 @@ AlertFrame:SetParent(AchievementHolder)
 AlertFrame:SetPoint("TOP", AchievementHolder, 0, -30)
 
 --[[SlashCmdList.TEST_ACHIEVEMENT = function()
-	PlaySound("LFG_Rewards")
+	PlaySound(17316)
 	AchievementFrame_LoadUI()
 	AchievementAlertFrame_ShowAlert(5780)
 	AchievementAlertFrame_ShowAlert(5000)

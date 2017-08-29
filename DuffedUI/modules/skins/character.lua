@@ -96,6 +96,7 @@ local function LoadSkin()
 	local scrollbars = {
 		"PaperDollTitlesPaneScrollBar",
 		"PaperDollEquipmentManagerPaneScrollBar",
+		"ReputationListScrollFrameScrollBar",
 	}
 
 	for _, scrollbar in pairs(scrollbars) do _G[scrollbar]:SkinScrollBar(5) end
@@ -156,6 +157,7 @@ local function LoadSkin()
 		GearManagerDialogPopup:Point("LEFT", PaperDollFrame, "RIGHT", 4, 0)
 		GearManagerDialogPopupEditBox:StripTextures()
 		GearManagerDialogPopupEditBox:SetTemplate("Default")
+		GearManagerDialogPopup.BorderBox:StripTextures()
 		GearManagerDialogPopupOkay:SkinButton()
 		GearManagerDialogPopupCancel:SkinButton()
 

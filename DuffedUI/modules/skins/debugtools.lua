@@ -51,11 +51,7 @@ local function LoadSkin()
 	end
 
 	ScriptErrorsFrameClose:SkinCloseButton()
-	ScriptErrorsFrameScrollFrameScrollBar:SkinScrollBar()
 	EventTraceFrameScrollBG:SetTexture(nil)
-	ScriptErrorsFrameScrollFrameScrollBar:ClearAllPoints()
-	ScriptErrorsFrameScrollFrameScrollBar:SetPoint("TOPRIGHT", 50, 14)
-	ScriptErrorsFrameScrollFrameScrollBar:SetPoint("BOTTOMRIGHT", 50, -20)
 	EventTraceFrameCloseButton:SkinCloseButton()
 end
 D.SkinFuncs["Blizzard_DebugTools"] = LoadSkin

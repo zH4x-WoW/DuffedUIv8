@@ -688,7 +688,7 @@ end
 function Bags:CloseAllBags()
 	if MerchantFrame:IsVisible() or InboxFrame:IsVisible() then return end
 	CloseAllBags()
-	PlaySound("igBackPackClose")
+	PlaySound(863)
 end
 
 function Bags:CloseAllBankBags()

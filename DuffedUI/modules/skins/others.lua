@@ -48,13 +48,6 @@ local function LoadSkin()
 	ReportCheatingDialogCommentFrame:StripTextures()
 	ReportCheatingDialogCommentFrameEditBox:SkinEditBox()
 
-	ReportPlayerNameDialog:StripTextures()
-	ReportPlayerNameDialog:SetTemplate("Transparent")
-	ReportPlayerNameDialogReportButton:SkinButton()
-	ReportPlayerNameDialogCancelButton:SkinButton()
-	ReportPlayerNameDialogCommentFrame:StripTextures()
-	ReportPlayerNameDialogCommentFrameEditBox:SkinEditBox()
-
 	for i = 1, 4 do
 		for j = 1, 3 do
 			_G["StaticPopup" .. i .. "Button" .. j]:SkinButton()
@@ -184,11 +177,6 @@ local function LoadSkin()
 
 		RolePollPopup:SetTemplate("Default")
 		RolePollPopupCloseButton:SkinCloseButton()
-
-		BasicScriptErrors:StripTextures()
-		BasicScriptErrors:SetTemplate()
-		BasicScriptErrorsButton:SkinButton()
-		BasicScriptErrors:SetScale(C["general"].uiscale)
 
 		for i = 1, 4 do
 			local button = _G["StaticPopup" .. i .. "CloseButton"]
