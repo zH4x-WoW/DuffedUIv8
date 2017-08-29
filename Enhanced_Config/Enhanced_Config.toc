@@ -1,12 +1,10 @@
-## Interface: 70200
+## Interface: 70300
 ## Author: Azilroka / Credits: Elv, Sortokk
 ## Version: 1.11
 ## Title: |cff1784d1Enhanced Config|r
 ## Notes: AddOn Option Panel for AsphyxiaUI, DuffedUI and Tukui
 ## OptionalDeps: Ace3, Tukui, DSM
 ## SavedVariables: EnhancedConfigDB, EnhancedConfigGlobalDB, EnhancedConfigPrivateDB
-## X-Tukui-ProjectID: 201
-## X-Tukui-ProjectFolders: Enhanced_Config
 
 Libs\load_libs.xml
 Locale.lua

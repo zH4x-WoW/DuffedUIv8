@@ -3,8 +3,9 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Update oUF",
-		"• Adjust all funtions of the unitframes",
+		"• Update for 7.3",
+		"• New Nameplates (based on oUF)",
+		"• Bugfixes",
 		--"• ",
 	" ",
 	"Notes:",
