@@ -284,6 +284,33 @@ function AS:StyleButton(Button)
 	Button.HasStyle = true
 end
 
+function AS:SkinMaxMinFrame(Frame)
+	assert(Frame, "does not exist.")
+
+	for _, name in next, {"MaximizeButton", "MinimizeButton"} do
+		if Frame then AS:StripTextures(Frame) end
+
+		local button = Frame[name]
+		button:SetSize(16, 16)
+		button:ClearAllPoints()
+		button:SetPoint("CENTER")
+
+		button:SetNormalTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\vehicleexit")
+		button:SetPushedTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\vehicleexit")
+
+		if not button.backdrop then
+			button:CreateBackdrop("Default", true)
+			button.backdrop:Point("TOPLEFT", button, 1, -1)
+			button.backdrop:Point("BOTTOMRIGHT", button, -1, 1)
+		end
+
+		if name == "MaximizeButton" then
+			button:GetNormalTexture():SetTexCoord(1, 1, 1, -1.2246467991474e-016, 1.1102230246252e-016, 1, 0, -1.144237745222e-017)
+			button:GetPushedTexture():SetTexCoord(1, 1, 1, -1.2246467991474e-016, 1.1102230246252e-016, 1, 0, -1.144237745222e-017)
+		end
+	end
+end
+
 function AS:SkinCloseButton(CloseButton, Reposition)
 	if CloseButton.isSkinned then return end
 
