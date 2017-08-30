@@ -421,11 +421,11 @@ function AS:SkinTab(Tab, Strip)
 
 	if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
 		-- Check if ElvUI already provides the backdrop. Otherwise we have two backdrops (e.g. Auctionhouse)
- 		if Tab.backdrop then
- 			Tab.Backdrop:Hide()
- 		else
- 			AS:SetTemplate(Tab.Backdrop, 'Default')
- 		end
+		if Tab.backdrop then
+			Tab.Backdrop:Hide()
+		else
+			AS:SetTemplate(Tab.Backdrop, 'Default')
+		end
 	end
 
 	Tab.Backdrop:Point("TOPLEFT", 10, AS.PixelPerfect and -1 or -3)
@@ -792,14 +792,6 @@ function AS:Desaturate(frame, point)
 			self:GetHighlightTexture():SetDesaturated(true)
 		end
 	end)
-end
-
-function AS:AdjustForPixelPerfect(number)
-	if AS.PixelPerfect then
-		number = number - 1
-	end
-
-	return number
 end
 
 function AS:AdjustForPixelPerfect(number)

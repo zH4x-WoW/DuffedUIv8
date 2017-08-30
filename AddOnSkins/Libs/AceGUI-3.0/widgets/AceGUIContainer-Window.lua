@@ -32,7 +32,7 @@ do
 	end
 	
 	local function closeOnClick(this)
-		(PlaySoundKitID and "gsTitleOptionExit" or 799)
+		PlaySound(PlaySoundKitID and "gsTitleOptionExit" or 799)
 		this.obj:Hide()
 	end
 	
