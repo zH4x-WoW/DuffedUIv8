@@ -41,9 +41,9 @@ function AS:Blizzard_WorldMap()
 		Button.Text:SetPoint('CENTER', Button)
 	end
 
-	WorldMapFrameSizeDownButton:SetPoint('RIGHT', WorldMapFrameCloseButton, 'LEFT', -1, 0)
-	WorldMapFrameSizeDownButton.Text:SetText('▼')
-	WorldMapFrameSizeUpButton.Text:SetText('▲')
+	--WorldMapFrameSizeDownButton:SetPoint('RIGHT', WorldMapFrameCloseButton, 'LEFT', -1, 0)
+	--WorldMapFrameSizeDownButton.Text:SetText('▼')
+	--WorldMapFrameSizeUpButton.Text:SetText('▲')
 
 	local rewardFrames = {
 		['MoneyFrame'] = true,
