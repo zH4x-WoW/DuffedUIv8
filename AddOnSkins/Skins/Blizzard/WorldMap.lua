@@ -41,8 +41,6 @@ function AS:Blizzard_WorldMap()
 		Button.Text:SetPoint('CENTER', Button)
 	end
 
-	AS:SkinMaxMinFrame(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame)
-
 	local rewardFrames = {
 		['MoneyFrame'] = true,
 		['HonorFrame'] = true,
@@ -78,6 +76,8 @@ function AS:Blizzard_WorldMap()
 
 	AS:SkinNextPrevButton(WorldMapFrame.UIElementsFrame.OpenQuestPanelButton)
 	AS:SkinNextPrevButton(WorldMapFrame.UIElementsFrame.CloseQuestPanelButton)
+
+	AS:SkinMaxMinFrame(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame)
 
 	local function HandleTooltipStatusBar()
 		local bar = _G["WorldMapTaskTooltipStatusBar"].Bar
