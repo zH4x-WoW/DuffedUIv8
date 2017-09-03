@@ -192,7 +192,7 @@ function WorldMap:Coords()
 	coords.MouseText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
 	coords.PlayerText:SetPoint("TOPLEFT", WorldMapFrame.UIElementsFrame, "TOPLEFT", 5, -5)
 	coords.PlayerText:SetText("Player:   x, x")
-	coords.MouseText:SetPoint("TOPRIGHT", coords.PlayerText, "BOTTOMRIGHT", 0, -5)
+	coords.MouseText:SetPoint("TOPLEFT", WorldMapFrame.UIElementsFrame, "TOPLEFT", 5, -20)
 	coords.MouseText:SetText("Mouse:   x, x")
 	local int = 0
 
