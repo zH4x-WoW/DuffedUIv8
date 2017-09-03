@@ -736,6 +736,79 @@ function SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameNameOv
 	end
 end
 
+function SkinMaxMinFrame(Frame)
+	assert(Frame, "does not exist.")
+
+	for _, name in next, {"MaximizeButton", "MinimizeButton"} do
+		if Frame then StripTextures(Frame) end
+
+		local button = Frame[name]
+		button:SetSize(16, 16)
+		button:ClearAllPoints()
+		button:SetPoint("CENTER")
+
+		button:SetNormalTexture("Interface\\AddOns\\DuffedUI\\medias\\Textures\\vehicleexit")
+		button:SetPushedTexture("Interface\\AddOns\\DuffedUI\\medias\\Textures\\vehicleexit")
+
+		if not button.backdrop then
+			button:CreateBackdrop("Default", true)
+			button.backdrop:Point("TOPLEFT", button, 1, -1)
+			button.backdrop:Point("BOTTOMRIGHT", button, -1, 1)
+			button:HookScript('OnEnter', SetModifiedBackdrop)
+			button:HookScript('OnLeave', SetOriginalBackdrop)
+
+		end
+
+		if name == "MaximizeButton" then
+			button:GetNormalTexture():SetTexCoord(1, 1, 1, -1.2246467991474e-016, 1.1102230246252e-016, 1, 0, -1.144237745222e-017)
+			button:GetPushedTexture():SetTexCoord(1, 1, 1, -1.2246467991474e-016, 1.1102230246252e-016, 1, 0, -1.144237745222e-017)
+		end
+	end
+end
+
+function SkinIconButton(Button, ShrinkIcon)
+	if Button.isSkinned then return end
+
+	local Icon, Texture
+	local ButtonName = Button:GetName()
+
+	if Button.icon then
+		Icon = Button.icon
+		Texture = Button.icon:GetTexture()
+	elseif Button.Icon then
+		Icon = Button.Icon
+		Texture = Button.Icon:GetTexture()
+	elseif ButtonName then
+		if _G[ButtonName.."IconTexture"] then
+			Icon = _G[ButtonName.."IconTexture"]
+			Texture = _G[ButtonName.."IconTexture"]:GetTexture()
+		elseif _G[ButtonName.."Icon"] then
+			Icon = _G[ButtonName.."Icon"]
+			Texture = _G[ButtonName.."Icon"]:GetTexture()
+		end
+	end
+
+	if Icon then
+		StripTextures(Button)
+		SetTemplate(Button)
+		StyleButton(Button)
+		Icon:SetTexture(Texture)
+		Icon:SetTexCoord(.08, .88, .08, .88)
+		Icon:SetInside(Button)
+		Button.isSkinned = true
+	end
+end
+
+function SkinStatusBar(frame, ClassColor)
+	frame:StripTextures()
+	frame:CreateBackdrop()
+	frame:SetStatusBarTexture(C["media"]["normTex"])
+	if ClassColor then
+		local color = RAID_CLASS_COLORS[D.Class]
+		frame:SetStatusBarColor(color.r, color.g, color.b)
+	end
+end
+
 -- merge api
 local function addapi(object)
 	local mt = getmetatable(object).__index
@@ -767,6 +840,9 @@ local function addapi(object)
 	if not object.SkinSlideBar then mt.SkinSlideBar = SkinSlideBar end
 	if not object.SkinIcon then mt.SkinIcon = SkinIcon end
 	if not object.SkinIconSelectionFrame then mt.SkinIconSelectionFrame = SkinIconSelectionFrame end
+	if not object.SkinMaxMinFrame then mt.SkinMaxMinFrame = SkinMaxMinFrame end
+	if not object.SkinIconButton then mt.SkinIconButton = SkinIconButton end
+	if not object.SkinStatusBar then mt.SkinStatusBar = SkinStatusBar end
 	if not object.HideInsets then mt.HideInsets = HideInsets end
 	if not object.CreateOverlay then mt.CreateOverlay = CreateOverlay end
 	if not object.FadeIn then mt.FadeIn = FadeIn end
