@@ -70,12 +70,7 @@ if not IsAddOnLoaded("AddOnSkins") then
 			end
 		end
 		hooksecurefunc("MountJournal_UpdateMountList", ColorSelectedMount)
-
-		MountJournalSummonRandomFavoriteButton:StripTextures()
-		MountJournalSummonRandomFavoriteButton:CreateBackdrop()
-		MountJournalSummonRandomFavoriteButton:StyleButton()
-		MountJournalSummonRandomFavoriteButton.texture:SetTexture([[Interface/ICONS/ACHIEVEMENT_GUILDPERK_MOUNTUP]])
-		MountJournalSummonRandomFavoriteButton.texture:SetTexCoord(.08, .88, .08, .88)
+		MountJournalSummonRandomFavoriteButton:SkinIconButton()
 
 		--[[Bugfix for scrolling mount list]]--
 		MountJournalListScrollFrame:HookScript("OnVerticalScroll", ColorSelectedMount)
@@ -96,6 +91,7 @@ if not IsAddOnLoaded("AddOnSkins") then
 		PetJournalFilterButton:ClearAllPoints()
 		PetJournalFilterButton:Point("LEFT", PetJournalSearchBox, "RIGHT", 5, 0)
 		PetJournalListScrollFrameScrollBar:SkinScrollBar()
+		PetJournalSummonRandomFavoritePetButton:SkinIconButton()
 
 		for i = 1, #PetJournal.listScroll.buttons do
 			local b = _G["PetJournalListScrollFrameButton" .. i]
@@ -173,34 +169,32 @@ if not IsAddOnLoaded("AddOnSkins") then
 		PetJournalHealPetButton.texture:SetTexture([[Interface\Icons\spell_magic_polymorphrabbit]])
 		PetJournalHealPetButton.texture:SetTexCoord(.08, .88, .08, .88)
 		PetJournalLoadoutBorder:StripTextures()
+		
 		for i = 1, 3 do
-			_G["PetJournalLoadoutPet" .. i .. "HelpFrame"]:StripTextures()
-			_G["PetJournalLoadoutPet" .. i]:StripTextures()
-			_G["PetJournalLoadoutPet" .. i]:CreateBackdrop()
-			_G["PetJournalLoadoutPet" .. i].backdrop:SetAllPoints()
-			_G["PetJournalLoadoutPet" .. i].petTypeIcon:SetPoint("BOTTOMLEFT", 2, 2)
-			_G["PetJournalLoadoutPet" .. i]:StyleButton()
+			local Pet = _G["PetJournalLoadoutPet"..i]
+			Pet.helpFrame:StripTextures()
+			Pet:StripTextures()
+			Pet:SetTemplate()
+			Pet.petTypeIcon:SetPoint("BOTTOMLEFT", 2, 2)
 
-			_G["PetJournalLoadoutPet" .. i].dragButton:StyleButton()
-			_G["PetJournalLoadoutPet" .. i].dragButton:SetOutside(_G["PetJournalLoadoutPet" .. i .. "Icon"])
-			_G["PetJournalLoadoutPet" .. i].dragButton:SetFrameLevel(_G["PetJournalLoadoutPet" .. i].dragButton:GetFrameLevel() + 1)
-			_G["PetJournalLoadoutPet" .. i]:SkinIconButton()
-			_G["PetJournalLoadoutPet" .. i].backdrop:SetFrameLevel(_G["PetJournalLoadoutPet" .. i].backdrop:GetFrameLevel() + 1)
+			Pet.icon:SetTexCoord(.08, .88, .08, .88)
+			Pet.dragButton:StyleButton()
+			Pet.dragButton:CreateBackdrop()
+			Pet.dragButton.backdrop:SetOutside(Pet.icon)
 
-			_G["PetJournalLoadoutPet" .. i].setButton:StripTextures()
-			_G["PetJournalLoadoutPet" .. i .. "HealthFrame"].healthBar:StripTextures()
-			_G["PetJournalLoadoutPet" .. i .. "HealthFrame"].healthBar:CreateBackdrop("Default")
-			_G["PetJournalLoadoutPet" .. i .. "HealthFrame"].healthBar:SetStatusBarTexture(C["media"]["normTex"])
-			_G["PetJournalLoadoutPet" .. i .. "XPBar"]:StripTextures()
-			_G["PetJournalLoadoutPet" .. i .. "XPBar"]:CreateBackdrop("Default")
-			_G["PetJournalLoadoutPet" .. i .. "XPBar"]:SetStatusBarTexture(C["media"]["normTex"])
-			_G["PetJournalLoadoutPet" .. i .. "XPBar"]:SetFrameLevel(_G["PetJournalLoadoutPet" .. i .. "XPBar"]:GetFrameLevel() + 2)
+			Pet.setButton:StripTextures()
+			Pet.healthFrame.healthBar:SkinStatusBar()
+			Pet.xpBar:SkinStatusBar()
+
+			hooksecurefunc(Pet.qualityBorder, 'SetVertexColor', function(self, r, g, b)
+				Pet.dragButton.backdrop:SetBackdropBorderColor(r, g, b)
+			end)
 
 			for index = 1, 3 do
-				local f = _G["PetJournalLoadoutPet" .. i .. "Spell" .. index]
-				f:SkinIconButton()
-				f.FlyoutArrow:SetTexture([[Interface\Buttons\ActionBarFlyoutButton]])
-				_G["PetJournalLoadoutPet" .. i .. "Spell" .. index .. "Icon"]:SetInside(f)
+				local Spell = _G["PetJournalLoadoutPet"..i.."Spell"..index]
+				Spell:SkinIconButton()
+				Spell.FlyoutArrow:SetTexture([[Interface\Buttons\ActionBarFlyoutButton]])
+				_G["PetJournalLoadoutPet"..i.."Spell"..index.."Icon"]:SetInside(Spell)
 			end
 		end
 

@@ -164,6 +164,7 @@ function WorldMap:Skin()
 	CloseButton:ClearAllPoints()
 	CloseButton:SetPoint("RIGHT", Map.Header, "RIGHT", 8, -1)
 	CloseButton:SkinCloseButton()
+	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame:SkinMaxMinFrame()
 
 	ScrollBar:Hide()
 
@@ -189,13 +190,13 @@ function WorldMap:Coords()
 	coords:FontString("PlayerText", C["media"].font, fontheight, fontflag)
 	coords:FontString("MouseText", C["media"].font, fontheight, fontflag)
 	coords.PlayerText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
-	coords.MouseText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
-	coords.PlayerText:SetPoint("TOPLEFT", WorldMapFrame.UIElementsFrame, "TOPLEFT", 5, -5)
 	coords.PlayerText:SetText("Player:   x, x")
-	coords.MouseText:SetPoint("TOPLEFT", WorldMapFrame.UIElementsFrame, "TOPLEFT", 5, -20)
+	coords.PlayerText:SetPoint("TOPLEFT", WorldMapFrame.UIElementsFrame, "TOPLEFT", 5, -5)
+	coords.MouseText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
 	coords.MouseText:SetText("Mouse:   x, x")
+	coords.MouseText:SetPoint("TOPLEFT", WorldMapFrame.UIElementsFrame, "TOPLEFT", 5, -20)
+	
 	local int = 0
-
 	WorldMapFrame:HookScript("OnUpdate", function(self, elapsed)
 		int = int + 1
 		if int >= 3 then
