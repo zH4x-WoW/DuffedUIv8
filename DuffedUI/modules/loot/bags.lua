@@ -1,6 +1,7 @@
 local D, C, L, G = unpack(select(2,  ...))
 
 local _G = _G
+local Noop = function() end
 local ReplaceBags = 0
 local LastButtonBag, LastButtonBank, LastButtonReagent
 local NUM_CONTAINER_FRAMES = NUM_CONTAINER_FRAMES

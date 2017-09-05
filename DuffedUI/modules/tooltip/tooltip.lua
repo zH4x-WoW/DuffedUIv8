@@ -43,11 +43,7 @@ local Anchor = CreateFrame("Frame", "DuffedUITooltipMover", UIParent)
 Anchor:SetSize(200, DuffedUIInfoRight:GetHeight())
 Anchor:SetFrameStrata("TOOLTIP")
 Anchor:SetFrameLevel(20)
-if C["chat"].rbackground and DuffedUIChatBackgroundRight then
-	Anchor:SetPoint("BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, (-DuffedUIInfoRight:GetHeight() + 10))
-else
-	Anchor:SetPoint("BOTTOMRIGHT", UIParent, 0, 110)
-end
+Anchor:SetPoint("BOTTOMRIGHT", DuffedUIInfoRight, 0, -2)
 move:RegisterFrame(Anchor)
 
 function DuffedUITooltips:SetTooltipDefaultAnchor()
