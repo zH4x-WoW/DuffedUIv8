@@ -8,6 +8,7 @@ local lST = "Wowhead"
 local lQ = "http://www.wowhead.com/quest=%d"
 local lA = "http://www.wowhead.com/achievement=%d"
 local format = string.format
+local move = D["move"]
 local blocks = {}
 local tooltips = {}
 local frequencies = {
@@ -45,6 +46,7 @@ if C["duffed"].objectivetracker then
 	otfmove:EnableMouse(true)
 	otfmove:RegisterForDrag("LeftButton")
 	otfmove:SetHitRectInsets(-5, -5, -5, -5)
+	--otfmove:SetTemplate("Transparent")
 
 	local function OTFM_Tooltip(self)
 		GameTooltip:SetOwner(self, "ANCHOR_TOP")
