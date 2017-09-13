@@ -3,8 +3,9 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Update for AddOnSkins (fixed all known bugs)",
-		"• Latest fixes for the UI",
+		"• Update for AddOnSkins",
+		"• Update for UI-Skins",
+		"• Removed Currency for Argus Waystones",
 		--"• ",
 	" ",
 	"Notes:",
