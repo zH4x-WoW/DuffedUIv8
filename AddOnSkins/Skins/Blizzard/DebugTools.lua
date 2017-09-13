@@ -1,4 +1,4 @@
---[[local AS = unpack(AddOnSkins)
+local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_DebugTools(event, addon)
 	if IsAddOnLoaded('Blizzard_DebugTools') or addon == 'Blizzard_DebugTools' then
@@ -8,8 +8,6 @@ function AS:Blizzard_DebugTools(event, addon)
 		AS:SkinNextPrevButton(ScriptErrorsFrame.PreviousError) -- must be redone
 		AS:SkinButton(ScriptErrorsFrame.Close)
 		AS:SkinButton(ScriptErrorsFrame.Reload)
-		AS:SkinButton(ScriptErrorsFrame.firstButton)
-		AS:SkinButton(ScriptErrorsFrame.lastButton)
 		AS:SkinCloseButton(ScriptErrorsFrameClose)
 		AS:SkinScrollBar(ScriptErrorsFrameScrollBar)
 		ScriptErrorsFrame.ScrollFrame.Text:FontTemplate(nil, 13)
@@ -34,4 +32,4 @@ function AS:Blizzard_DebugTools(event, addon)
 	end
 end
 
-AS:RegisterSkin('Blizzard_DebugTools', AS.Blizzard_DebugTools, 'ADDON_LOADED')]]--
+AS:RegisterSkin('Blizzard_DebugTools', AS.Blizzard_DebugTools, 'ADDON_LOADED')
