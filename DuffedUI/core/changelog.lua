@@ -5,7 +5,7 @@ local ChangeLogData = {
 	"Changes:",
 		"• Update for AddOnSkins",
 		"• Update for UI-Skins",
-		"• Removed Currency for Argus Waystones",
+		"• Bugfixes",
 		--"• ",
 	" ",
 	"Notes:",
