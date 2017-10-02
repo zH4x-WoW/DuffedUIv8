@@ -37,4 +37,4 @@ function AS:Blizzard_Garrison(event, addon)
 	end
 end
 
-AS:RegisterSkin('Blizzard_Garrison', AS.Blizzard_Garrison, 'ADDON_LOADED')]]--
+AS:RegisterSkin('Blizzard_Garrison', AS.Blizzard_Garrison, 'ADDON_LOADED')]]

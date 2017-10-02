@@ -6,7 +6,7 @@ function AS:OrderHallCommander(event)
 	if event == "ADDON_LOADED" then
 		if not OrderHallMissionFrameMissions then return end
 		OrderHallMissionFrameMissions:HookScript('OnShow', function(self)
-			AS:Delay(0.2, function()
+			AS:Delay(0.5, function()
 				local frame = FollowerIcon:GetParent()
 				if frame.IsSkinned then return end
 
@@ -46,8 +46,8 @@ function AS:OrderHallCommander(event)
 				--AS:SkinCloseButton(frame[1])
 				--AS:StripTextures(frame[2])
 
-				--frame = {OrderHallMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:GetChildren()}
-				--AS:SkinButton(frame[1])
+				frame = {OrderHallMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:GetChildren()}
+				AS:SkinButton(frame[1])
 			end)
 		end)
 		AS:UnregisterSkinEvent('OrderHallCommander', event)
@@ -57,7 +57,7 @@ function AS:OrderHallCommander(event)
 
 		AS:Delay(0.1, function()
 			AS:SkinFrame(OHCGUIContainer1)
-			AS:SkinCloseButton(OHCGUIContainer1.CloseButton)
+			AS:SkinCloseButton(OHCGUIContainer1.Close)
 		end)
 	end
 end
