@@ -5,7 +5,7 @@ local select, floor = select, floor
 local IsAddOnLoaded = IsAddOnLoaded
 local UIFrameFadeIn, UIFrameFadeOut = UIFrameFadeIn, UIFrameFadeOut
 local CreateFrame = CreateFrame
-local D, C, L = = unpack(DuffedUI)
+local D, C, L = unpack(DuffedUI)
 
 function AS:UpdateMedia()
 	AS.PixelPerfect = AS:CheckOption('ThinBorder')
