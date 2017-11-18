@@ -4,12 +4,16 @@ local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
 		"• Update for AddOnSkins",
-		"• Update for UI-Skins",
+		"• Removed Enhanced_Configs",
 		"• Bugfixes",
 		--"• ",
 	" ",
 	"Notes:",
-		"",
+		"The settings for AddOnSkins can now be changed via the interface menu, in the",
+		"tab AddOns.",
+		" ",
+		"Updates to the interface will be rarer in the near future, as I currently can not afford",
+		"the time to provide timely updates.",
 }
 
 local function ModifiedString(string)
