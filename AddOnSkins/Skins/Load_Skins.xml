@@ -11,6 +11,7 @@
 	<Script file="Analyst.lua"/>
 	<Script file="Arcanometer.lua"/>
 	<Script file="Archy.lua"/>
+	<Script file="ArgusEliteTracker.lua"/>
 	<Script file="Arh.lua"/>
 	<Script file="ArkInventory.lua"/>
 	<Script file="ArtifactPowerUser.lua"/>
@@ -33,12 +34,14 @@
 	<Script file="BigBrother.lua"/>
 	<Script file="BigWigs.lua"/>
 	<Script file="BPT.lua"/>
+	<Script file="BtWQuests.lua"/>
 	<Script file="BugSack.lua"/>
 	<Script file="BulkOrder.lua"/>
 	<Script file="BuyEmAll.lua"/>
 	<Script file="Capping.lua"/>
 	<Script file="ChocolateBar.lua"/>
 	<Script file="ClassicQuestLog.lua"/>
+	<Script file="ClassOrderHallsComplete.lua"/>
 	<Script file="CLCInfo.lua"/>
 	<Script file="CLCProt.lua"/>
 	<Script file="CLCRet.lua"/>
@@ -74,6 +77,7 @@
 	<Script file="GCGambler.lua"/>
 	<Script file="Grinder.lua"/>
 	<Script file="GryphonHeartItems.lua"/>
+	<Script file="Guild_Roster_Manager.lua"/>
 	<Script file="GuildMemberInfo_TradeSkills.lua"/>
 	<Script file="GupPet.lua"/>
 	<Script file="Hack.lua"/>

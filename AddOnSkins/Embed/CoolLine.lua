@@ -30,10 +30,6 @@ if AS:CheckAddOn('CoolLine') then
 				AS.ActionBar4:HookScript('OnShow', OnShow)
 				AS.ActionBar4:HookScript('OnHide', OnHide)
 				CoolLine.updatelook()
-			elseif AS:CheckAddOn('DuffedUI') then
-				CoolLine:Point('BOTTOM', AS.ActionBar2, 'TOP', 0, 3)
-				CoolLineDB.h = ActionButton1:GetHeight()
-				CoolLineDB.w = AS.ActionBar2:GetWidth()
 			end
 		end
 	end

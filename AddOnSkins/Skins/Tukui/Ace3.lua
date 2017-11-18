@@ -101,9 +101,6 @@ function AS:Ace3()
 		elseif TYPE == 'Button' then
 			local frame = widget.frame
 			AS:SkinButton(frame)
-			AS:StripTextures(frame)
-			AS:CreateBackdrop(frame, 'Default')
-			frame.Backdrop:SetInside()
 		elseif TYPE == 'Slider' then
 			local frame = widget.slider
 			local editbox = widget.editbox
@@ -169,7 +166,7 @@ function AS:Ace3()
 				end
 
 				local oldRefreshTree = widget.RefreshTree
-				widget.RefreshTree = function(self, scrollToSelection)		
+				widget.RefreshTree = function(self, scrollToSelection)
 					oldRefreshTree(self, scrollToSelection)
 					if not self.tree then return end
 					local status = self.status or self.localstatus
