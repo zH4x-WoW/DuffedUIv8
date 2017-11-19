@@ -3,14 +3,13 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Update for AddOnSkins",
-		"• Removed Enhanced_Configs",
-		"• Bugfixes",
+		"• Fixed options for AddOnSkins",
 		--"• ",
 	" ",
 	"Notes:",
 		"The settings for AddOnSkins can now be changed via the interface menu, in the",
 		"tab AddOns.",
+		"The AddOn Enhanced_Config must be removed.",
 		" ",
 		"Updates to the interface will be rarer in the near future, as I currently can not afford",
 		"the time to provide timely updates.",
