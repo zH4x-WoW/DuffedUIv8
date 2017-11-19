@@ -1,5 +1,6 @@
 local AS, ASL = unpack(AddOnSkins)
 local sort, pairs, gsub, strfind, strlower, strtrim = sort, pairs, gsub, strfind, strlower, strtrim
+local ACR, ACD = LibStub('AceConfigRegistry-3.0'), LibStub('AceConfigDialog-3.0')
 
 local DEVELOPER_STRING = ''
 local LINE_BREAK = '\n'
@@ -530,9 +531,18 @@ function AS:GetOptions()
 
 	Options.args.profiles = LibStub('AceDBOptions-3.0'):GetOptionsTable(AS.data)
 	Options.args.profiles.order = -2
+	ACR:RegisterOptionsTable('AddOnSkinsProfiles', Options.args.profiles)
 
 	if AS.EP then
 		local Ace3OptionsPanel = IsAddOnLoaded('ElvUI') and ElvUI[1] or Enhanced_Config
 		Ace3OptionsPanel.Options.args.addonskins = Options
+	end
+
+	ACR:RegisterOptionsTable('AddOnSkins', Options)
+	ACD:AddToBlizOptions('AddOnSkins', 'AddOnSkins', nil, 'addons')
+	for k, v in AS:OrderedPairs(Options.args) do
+		if k ~= 'addons' then
+			ACD:AddToBlizOptions('AddOnSkins', v.name, 'AddOnSkins', k)
+		end
 	end
 end
