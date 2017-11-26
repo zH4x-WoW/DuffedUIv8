@@ -132,13 +132,14 @@ D.PostUpdatePetColor = function(health, unit, min, max)
 end
 
 --Powerupdate for UFs
-D.PostUpdatePower = function(power, unit, cur, max, min)
+D.PostUpdatePower = function(power, unit, min)
 	if not power.value then return end
 
 	local Parent = power:GetParent()
 	local pType, pToken = UnitPowerType(unit)
 	local colors = D.UnitColor
 	local color = colors.power[pToken]
+	local max = UnitPowerMax(unit)
 
 	if color then power.value:SetTextColor(color[1], color[2], color[3]) end
 	if (not UnitIsPlayer(unit) and not UnitPlayerControlled(unit) or not UnitIsConnected(unit)) then
@@ -146,19 +147,19 @@ D.PostUpdatePower = function(power, unit, cur, max, min)
 	elseif (UnitIsDead(unit) or UnitIsGhost(unit)) then
 		power.value:SetText()
 	else
-		if min ~= max then
-			if pType == 0 then
+		if (min ~= max) then
+			if (pType == 0) then
 				if (unit == "target" or (unit and strfind(unit, "boss%d"))) then
-					power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / cur * 100), D.ShortValue(cur - (cur - min)))
+					power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), D.ShortValue(max - (max - min)))
 				elseif (unit == "player" and Parent:GetAttribute("normalUnit") == "pet" or unit == "pet") then
-					power.value:SetFormattedText("%d%%", floor(min / cur * 100))
+					power.value:SetFormattedText("%d%%", floor(min / max * 100))
 				elseif (unit and strfind(unit, "arena%d")) or unit == "focus" or unit == "focustarget" then
 					power.value:SetText(D.ShortValue(min))
 				else
-					power.value:SetFormattedText("%d%% |cffD7BEA5-|r %d", floor(min / cur * 100), cur - (cur - min))
+					power.value:SetFormattedText("%d%% |cffD7BEA5-|r %d", floor(min / max * 100), max - (max - min))
 				end
 			else
-				power.value:SetText(cur - (cur - min))
+				power.value:SetText(max - (max - min))
 			end
 		else
 			if (unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and strfind(unit, "arena%d")) or (unit and strfind(unit, "boss%d"))) then
