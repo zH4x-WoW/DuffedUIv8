@@ -1,8 +1,8 @@
 ## Interface: 70300
 ## Title: |cff1784d1AddOnSkins|r
-## Version: 3.61
-## Author: Azilroka, Infinitron
+## Version: 3.63
+## Author: Azilroka, ChaoticVoid
 ## SavedVariables: AddOnSkinsDB
-## OptionalDep: ProjectAzilroka, ElvUI, BuyEmAll, DSM, Tukui, DuffedUI
+## OptionalDeps: ProjectAzilroka, ElvUI, BuyEmAll, DSM, Tukui, DuffedUI
  
 Load_AddOnSkins.xml
