@@ -138,6 +138,7 @@ C["datatext"] = {
 	["wowtime"] = 8,
 	["garrison"] = 0,
 	["orderhall"] = 0,
+	["quickjoin"] = 0,
 
 	["time24"] = true,
 	["localtime"] = false,
