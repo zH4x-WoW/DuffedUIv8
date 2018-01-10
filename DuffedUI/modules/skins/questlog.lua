@@ -45,7 +45,6 @@ local function LoadSkin()
 		end
 	end)
 
-	QuestLogPopupDetailFrame:HookScript("OnShow", function() QuestLogPopupDetailFrameScrollFrame:Height(QuestLogPopupDetailFrameScrollFrame:GetHeight() - 4) end)
 	QuestLogPopupDetailFrameInset:StripTextures()
 end	
 tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)

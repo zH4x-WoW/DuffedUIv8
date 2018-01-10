@@ -241,7 +241,6 @@ function SquareMinimapButtonBar:SkinMinimapButton(Button)
 		MiniMapMailFrame:HookScript('OnHide', function(self) MiniMapMailIcon:SetVertexColor(1, 1, 1) end)
 	else
 		Button:SetTemplate()
-		--Button:SetBackdropColor(0, 0, 0, 0)
 	end
 
 	Button.isSkinned = true
@@ -320,15 +319,10 @@ function SquareMinimapButtonBar:GetOptions()
 			}
 		},
 	}
-	if EP then
-		local Ace3OptionsPanel = IsAddOnLoaded("ElvUI") and ElvUI[1] or Enhanced_Config[1]
-		Ace3OptionsPanel.Options.args.SquareMinimapButton = Options
-	else
-		local ACR, ACD = LibStub("AceConfigRegistry-3.0", true), LibStub("AceConfigDialog-3.0", true)
-		if not (ACR or ACD) then return end
-		ACR:RegisterOptionsTable("SquareMinimapButtons", Options)
-		ACD:AddToBlizOptions("SquareMinimapButtons", "SquareMinimapButtons", nil, "mbb")
-	end
+	local ACR, ACD = LibStub("AceConfigRegistry-3.0", true), LibStub("AceConfigDialog-3.0", true)
+	if not (ACR or ACD) then return end
+	ACR:RegisterOptionsTable("SquareMinimapButtons", Options)
+	ACD:AddToBlizOptions("SquareMinimapButtons", "SquareMinimapButtons", nil, "mbb")
 end
 
 SquareMinimapButtonBar:RegisterEvent('PLAYER_ENTERING_WORLD')
@@ -447,12 +441,7 @@ SquareMinimapButtonBar:SetScript('OnEvent', function(self, event, addon)
 		self:SetScript('OnEnter', self.OnEnter)
 		self:SetScript('OnLeave', self.OnLeave)
 
-		EP = LibStub('LibElvUIPlugin-1.0', true)
-		if EP then
-			EP:RegisterPlugin(AddOnName, self.GetOptions)
-		else
-			self:GetOptions()
-		end
+		self:GetOptions()
 		self:RegisterEvent('ADDON_LOADED')
 	end
 	self:GrabMinimapButtons()

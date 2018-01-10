@@ -43,6 +43,7 @@ CreateButton("RaidUtilityShowButton", UIParent, "UIPanelButtonTemplate, SecureHa
 RaidUtilityShowButton:SetFrameRef("RaidUtilityPanel", RaidUtilityPanel)
 RaidUtilityShowButton:SetAttribute("_onclick", [=[self:Hide(); self:GetFrameRef("RaidUtilityPanel"):Show();]=])
 RaidUtilityShowButton:SetScript("OnMouseUp", function(self, button)
+	if InCombatLockdown() then return end
 	if button == "RightButton" then
 		if CheckRaidStatus() then DoReadyCheck() end
 	elseif button == "MiddleButton" then

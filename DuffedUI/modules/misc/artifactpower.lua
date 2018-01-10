@@ -31,8 +31,8 @@ local function updateStatus()
 	local hAE = HasArtifactEquipped()
 
 	if hAE then
-		local _, _, _, _, totalxp, pointsSpent, _, _, _, _, _, _ = C_ArtifactUI.GetEquippedArtifactInfo()
-		local _, xp, xpForNextPoint = MainMenuBar_GetNumArtifactTraitsPurchasableFromXP(pointsSpent, totalxp)
+		local _, _, _, _, totalxp, pointsSpent, _, _, _, _, _, _, artifactTier = C_ArtifactUI.GetEquippedArtifactInfo()
+		local _, xp, xpForNextPoint = MainMenuBar_GetNumArtifactTraitsPurchasableFromXP(pointsSpent, totalxp, artifactTier)
 
 		backdrop:Show()
 		artifactBar:SetMinMaxValues(min(0, xp), xpForNextPoint)
@@ -61,8 +61,8 @@ local function updateStatus()
 		GameTooltip:SetOwner(ArtifactmouseFrame, "ANCHOR_TOPRIGHT", 2, 5)
 		GameTooltip:ClearLines()
 		if hAE then
-			local _, _, _, _, totalxp, pointsSpent, _, _, _, _, _, _ = C_ArtifactUI.GetEquippedArtifactInfo()
-			local numPointsAvailableToSpend, xp, xpForNextPoint = MainMenuBar_GetNumArtifactTraitsPurchasableFromXP(pointsSpent, totalxp)
+			local _, _, _, _, totalxp, pointsSpent, _, _, _, _, _, _, artifactTier = C_ArtifactUI.GetEquippedArtifactInfo()
+			local numPointsAvailableToSpend, xp, xpForNextPoint = MainMenuBar_GetNumArtifactTraitsPurchasableFromXP(pointsSpent, totalxp, artifactTier)
 
 			GameTooltip:AddLine(L["artifactBar"]["xptitle"])
 			GameTooltip:AddLine(string.format(L["artifactBar"]["xp"], xp, xpForNextPoint, (xp / xpForNextPoint) * 100))

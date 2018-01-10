@@ -6,18 +6,12 @@ local cp = "|cff319f1b"
 local cm = "|cff9a1212"
 local dr, dg, db = unpack({ .4, .4, .4 })
 local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
-
 local Enablegear = C["misc"].sesenablegear
-local Autogearswap = C["misc"].sesgearswap
-local set1 = C["misc"].sesset1
-local set2 = C["misc"].sesset2
-local set3 = C["misc"].sesset3
-local set4 = C["misc"].sesset4
 
 local function ActiveTalents()
 	local Tree = GetSpecialization(false, false, GetActiveSpecGroup())
 	return Tree
-end	
+end
 
 local LeftClickMenu = { }
 LeftClickMenu[1] = { text = L["dt"]["specmenu"], isTitle = true, notCheckable = true}
@@ -43,23 +37,6 @@ DuffedUISpecSwap:SetScript("OnEvent", function(...)
 		}
 	end
 end)
-
-local function AutoGear(set1, set2, set3, set4)
-	local name1 = GetEquipmentSetInfo(set1)
-	local name2 = GetEquipmentSetInfo(set2)
-	local name3 = GetEquipmentSetInfo(set3)
-	local name4 = GetEquipmentSetInfo(set4)
-
-	if GetSpecialization() == 1 then
-		if name1 then UseEquipmentSet(name1) end
-	elseif GetSpecialization() == 2 then
-		if name2 then UseEquipmentSet(name2) end
-	elseif GetSpecialization() == 3 then
-		if name3 then UseEquipmentSet(name3) end
-	else
-		if name4 then UseEquipmentSet(name4) end
-	end
-end
 
 local spec = CreateFrame("Button", "DuffedUI_Spechelper", DuffedUIInfoLeft)
 spec:SetTemplate("Default")
@@ -126,7 +103,7 @@ D["CreateBtn"]("bReport2", MB_reload, 63, 19, "Bugreport", "Bugreport")
 bReport2:SetPoint("LEFT", MB_switch, "RIGHT", 2, 0)
 bReport2:SetScript("OnClick", function(self) StaticPopup_Show("BUGREPORT") end)
 
-if Enablegear == true then
+if Enablegear then
 	local gearSets = CreateFrame("Frame", nil, MB_reload)
 	for i = 1, 10 do
 		gearSets[i] = CreateFrame("Button", nil, MB_reload)
@@ -134,12 +111,13 @@ if Enablegear == true then
 		gearSets[i]:SetPoint("CENTER", MB_reload, "CENTER", 0, 0)
 		gearSets[i]:SetTemplate("Default")
 
-		if i == 1 then gearSets[i]:Point("TOPRIGHT", MB_reload, "BOTTOMRIGHT", 0, -2) else gearSets[i]:SetPoint("BOTTOMLEFT", gearSets[i-1], "BOTTOMRIGHT", 2, 0) end
+		if i == 1 then gearSets[i]:Point("TOPRIGHT", MB_reload, "BOTTOMRIGHT", 0, -2) else gearSets[i]:SetPoint("BOTTOMLEFT", gearSets[i - 1], "BOTTOMRIGHT", 2, 0) end
 		gearSets[i].texture = gearSets[i]:CreateTexture(nil, "BORDER")
 		gearSets[i].texture:SetTexCoord(.08, .92, .08, .92)
 		gearSets[i].texture:SetPoint("TOPLEFT", gearSets[i] ,"TOPLEFT", 2, -2)
 		gearSets[i].texture:SetPoint("BOTTOMRIGHT", gearSets[i] ,"BOTTOMRIGHT", -2, 2)
-		gearSets[i].texture:SetTexture(select(2, GetEquipmentSetInfo(i)))
+		local _, iconFileID, _, _, _, _, _, _, _ = C_EquipmentSet.GetEquipmentSetInfo(i)
+		gearSets[i].texture:SetTexture(iconFileID)
 		gearSets[i]:Hide()
 
 		gearSets[i]:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -158,31 +136,13 @@ if Enablegear == true then
 			gearSets[i].texture:SetTexCoord(.08, .92, .08, .92)
 			gearSets[i].texture:SetPoint("TOPLEFT", gearSets[i] ,"TOPLEFT", 2, -2)
 			gearSets[i].texture:SetPoint("BOTTOMRIGHT", gearSets[i] ,"BOTTOMRIGHT", -2, 2)
-			gearSets[i].texture:SetTexture(select(2, GetEquipmentSetInfo(i)))
+			local _, iconFileID, _, _, _, _, _, _, _ = C_EquipmentSet.GetEquipmentSetInfo(i)
+			gearSets[i].texture:SetTexture(iconFileID)
 
 			gearSets[i]:SetScript("OnClick", function(self) UseEquipmentSet(GetEquipmentSetInfo(i)) end)
 			gearSets[i]:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(hoverovercolor)) end)
 			gearSets[i]:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
-
-			if Autogearswap == true then
-				gearSets[1]:SetBackdropBorderColor(0, 1, 0)
-				gearSets[2]:SetBackdropBorderColor(1, 0, 0)
-				gearSets[1]:SetScript("OnEnter", nil)
-				gearSets[1]:SetScript("OnLeave", nil)
-				gearSets[2]:SetScript("OnEnter", nil)
-				gearSets[2]:SetScript("OnLeave", nil)
-			end
 		end)
-	end	
-
-	if Autogearswap == true then
-		gearsetfunc = CreateFrame("Frame", "gearSetfunc", UIParent)
-		local function OnEvent(self, event)
-			if event == "PLAYER_ENTERING_WORLD" then self:UnregisterEvent("PLAYER_ENTERING_WORLD") else AutoGear(set1, set2, set3, set4)  end
-		end
-		gearsetfunc:RegisterEvent("PLAYER_ENTERING_WORLD")
-		gearsetfunc:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
-		gearsetfunc:SetScript("OnEvent", OnEvent)
 	end
 end
 

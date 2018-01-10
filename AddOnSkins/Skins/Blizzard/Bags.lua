@@ -3,13 +3,14 @@ local AS = unpack(AddOnSkins)
 local name = 'Blizzard_Bags'
 function AS:Blizzard_Bags()
 	if Tukui and Tukui[2]["Bags"]["Enable"] then return end
+	if DuffedUI and DuffedUI[2]["bags"]["enable"] then return end
 
 	for i = 1, 12 do -- There is 13 Total..
 		local Bag = _G["ContainerFrame"..i]
 		AS:SkinBackdropFrame(Bag, nil, true)
 		for j = 1, 36 do
 			local ItemButton = _G["ContainerFrame"..i.."Item"..j]
-			--AS:SkinTexture(_G["ContainerFrame"..i.."Item"..j..'IconQuestTexture'])
+--			AS:SkinTexture(_G["ContainerFrame"..i.."Item"..j..'IconQuestTexture'])
 			AS:SetTemplate(ItemButton, AS:CheckOption('SkinTemplate'))
 			AS:SkinTexture(ItemButton.icon)
 			ItemButton:SetNormalTexture('')
@@ -37,7 +38,7 @@ function AS:Blizzard_Bags()
 			ItemButton.Backdrop:SetFrameLevel(ItemButton:GetFrameLevel() + 4)
 			ItemButton.Backdrop:SetBackdropColor(0, 0, 0, 0)
 			ItemButton.Backdrop:SetScript('OnUpdate', function(self)
-				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID());
+				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
 				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
 				ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 				if Quality and BAG_ITEM_QUALITY_COLORS[Quality] then
@@ -54,7 +55,7 @@ function AS:Blizzard_Bags()
 			end)
 			ItemButton.Backdrop:SetScript('OnHide', function(self)
 				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
-				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID());
+				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
 				if Quality and (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
 					ItemButton:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 				elseif isQuestItem then
@@ -65,14 +66,14 @@ function AS:Blizzard_Bags()
 			end)
 			-- End of hax.
 
-			--ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
-			--ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
+			ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
+			ItemButton.searchOverlay:SetColorTexture(0, 0, 0, .8)
 
 			ItemButton:SetNormalTexture('')
 			AS:StyleButton(ItemButton)
 			hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
 				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
-				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID());
+				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
 				if Quality and Quality > LE_ITEM_QUALITY_COMMON then
 					ItemButton:SetBackdropBorderColor(r, g, b)
 				elseif isQuestItem then
@@ -156,7 +157,7 @@ function AS:Blizzard_Bags()
 		Token.icon:SetPoint("LEFT", Token.count, "RIGHT", 3, 0)
 	end
 
-	--AS:SkinFrame(BankFrame, nil, nil, true)
+	AS:SkinFrame(BankFrame, nil, nil, true)
 	AS:SkinCloseButton(BankFrameCloseButton)
 	AS:StripTextures(BankFrameMoneyFrameBorder)
 	AS:StripTextures(BankFrameMoneyFrameInset)
@@ -164,7 +165,7 @@ function AS:Blizzard_Bags()
 
 	AS:SkinButton(BankFramePurchaseButton)
 	BankFramePurchaseButton:SetHeight(22)
-	
+
 	BankItemSearchBox:SetSize(159, 16)
 	AS:SkinEditBox(BankItemSearchBox)
 
@@ -201,8 +202,8 @@ function AS:Blizzard_Bags()
 		AS:SkinTexture(ItemButton.icon)
 		ItemButton.icon:SetInside()
 
-		--ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
-		--ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
+		ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
+		ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
 
 		ItemButton:SetNormalTexture(nil)
 		AS:StyleButton(ItemButton)
@@ -224,8 +225,8 @@ function AS:Blizzard_Bags()
 				AS:SkinTexture(ItemButton.icon)
 				ItemButton.icon:SetInside()
 
-				--ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
-				--ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
+				ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
+				ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
 
 				ItemButton:SetNormalTexture(nil)
 				AS:StyleButton(ItemButton)

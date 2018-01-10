@@ -8,6 +8,12 @@ local function LoadSkin()
 	MailFrameCloseButton:SkinCloseButton()
 	MailFrameInset:StripTextures()
 	InboxFrame:StripTextures()
+	--[[needs tuning for liveserver]]--
+	OpenAllMail:StripTextures()
+	OpenAllMail:SkinButton()
+	OpenAllMail:ClearAllPoints()
+	OpenAllMail:SetPoint("RIGHT", OpenAllButton, "LEFT", -5, 0)
+	OpenAllMail:SetWidth(70)
 
 	for i = 1, INBOXITEMS_TO_DISPLAY do
 		local bg = _G["MailItem"..i]

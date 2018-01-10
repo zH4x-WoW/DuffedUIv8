@@ -2,23 +2,24 @@ local D, C, L = unpack(select(2, ...))
 if IsAddOnLoaded("AddOnSkins") then return end
 
 local function LoadSkin()
-	local StripAllTextures = {
-		"GossipFrameGreetingPanel",
-	}
+	local StripAllTextures = {"GossipFrameGreetingPanel",}
 	for _, object in pairs(StripAllTextures) do _G[object]:StripTextures() end
 
-	local KillTextures = {
-		"GossipFramePortrait",
-	}
+	local KillTextures = {"GossipFramePortrait",}
 	for _, texture in pairs(KillTextures) do _G[texture]:Kill() end
 
-	local buttons = {
-		"GossipFrameGreetingGoodbyeButton",
-	}
+	local buttons = {"GossipFrameGreetingGoodbyeButton",}
 	for i = 1, #buttons do
 		_G[buttons[i]]:StripTextures()
 		_G[buttons[i]]:SkinButton()
 	end
+	
+	local frames = {
+		"GossipGreetingScrollFrameMiddle",
+		"GossipGreetingScrollFrameTop",
+		"GossipGreetingScrollFrameBottom",
+	}
+	for i = 1, #frames do _G[frames[i]]:SetTexture(nil) end
 
 	for i = 1, NUMGOSSIPBUTTONS do
 		obj = select(3,_G["GossipTitleButton"..i]:GetRegions())

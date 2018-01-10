@@ -21,7 +21,7 @@ D["ConstructUFPet"] = function(self)
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self.menu = D["SpawnMenu"]
+	self:SetAttribute("type2", "togglemenu")
 
 	if layout == 1 then
 		local panel = CreateFrame("Frame", nil, self)
@@ -140,6 +140,7 @@ D["ConstructUFPet"] = function(self)
 	if C["castbar"]["enable"] then
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		castbar:SetStatusBarTexture(texture)
+		castbar:SetStatusBarColor(unpack(C["castbar"]["color"]))
 		if layout == 3 then
 			castbar:Height(16)
 			castbar:SetFrameLevel(health:GetFrameLevel() + 4)

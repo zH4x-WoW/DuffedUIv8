@@ -37,6 +37,8 @@ D["ConstructUF"] = function(self, unit)
 		if parent:match("Party") then D["ConstructUFParty"](self) else D["ConstructUFRaid"](self) end
 	elseif (self:GetParent():GetName():match"oUF_MainTank" or self:GetParent():GetName():match"oUF_MainAssist") then
 		D["ConstructUFMaintank"](self)
+	elseif unit:match("nameplate") then
+		D["ConstructNameplates"](self)
 	end
 end
 
@@ -133,9 +135,12 @@ D["SpawnUF"] = function(self)
 			bgFile = C["media"]["blank"],
 			insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
 		}
+
 		for i = 1, 5 do
+			--local arena = _G["oUF_Arena"..i]
+
 			oUF_PrepArena[i] = CreateFrame("Frame", "oUF_PrepArena" .. i, UIParent)
-			oUF_PrepArena[i]:SetAllPoints(arena[i])
+			if i == 1 then oUF_PrepArena[i]:SetPoint("RIGHT", UIParent, "RIGHT", -163, -250) else oUF_PrepArena[i]:SetPoint("BOTTOM", oUF_PrepArena[i - 1], "TOP", 0, 35) end
 			oUF_PrepArena[i]:SetBackdrop(backdrop)
 			oUF_PrepArena[i]:SetBackdropColor(0, 0, 0)
 			oUF_PrepArena[i].Health = CreateFrame("StatusBar", nil, oUF_PrepArena[i])
@@ -148,11 +153,7 @@ D["SpawnUF"] = function(self)
 			oUF_PrepArena[i]:Hide()
 		end
 
-		local ArenaListener = CreateFrame("Frame", "oUF_UIArenaListener", UIParent)
-		ArenaListener:RegisterEvent("PLAYER_ENTERING_WORLD")
-		ArenaListener:RegisterEvent("ARENA_PREP_OPPONENT_SPECIALIZATIONS")
-		ArenaListener:RegisterEvent("ARENA_OPPONENT_UPDATE")
-		ArenaListener:SetScript("OnEvent", function(self, event)
+		function Prep()
 			if event == "ARENA_OPPONENT_UPDATE" then
 				for i = 1, 5 do
 					local f = _G["oUF_PrepArena" .. i]
@@ -166,9 +167,8 @@ D["SpawnUF"] = function(self)
 					
 					if (i <= numOpps) then
 						local specID = GetArenaOpponentSpec(i)
-
-						if specID and specID > 0 then 
-							local _, spec, _, _, _, _, class = GetSpecializationInfoByID(specID)
+						if (specID and specID > 0) then 
+							local _, spec, _, _, _, class = GetSpecializationInfoByID(specID)
 							if class and spec then
 								f.SpecClass:SetText(spec .. "  -  " .. LOCALIZED_CLASS_NAMES_MALE[class])
 								if not C["unitframes"]["unicolor"] then
@@ -183,12 +183,18 @@ D["SpawnUF"] = function(self)
 					end
 				end
 
-				for i = 1, 5 do
-					local f = _G["oUF_PrepArena"..i]
+				--[[for i = 1, 5 do
+					local f = _G["oUF_PrepArena" .. i]
 					f:Hide()
-				end
+				end]]
 			end
-		end)
+		end
+
+		local ArenaListener = CreateFrame("Frame", "oUF_UIArenaListener", UIParent)
+		ArenaListener:RegisterEvent("PLAYER_ENTERING_WORLD")
+		ArenaListener:RegisterEvent("ARENA_PREP_OPPONENT_SPECIALIZATIONS")
+		ArenaListener:RegisterEvent("ARENA_OPPONENT_UPDATE")
+		ArenaListener:SetScript("OnEvent", Prep)
 	end
 
 	local assisttank_width = 90
@@ -324,10 +330,26 @@ D["SpawnUF"] = function(self)
 	end
 end
 
+local cvars = {
+    -- important, strongly recommend to set these to 1
+    nameplateGlobalScale = 1,
+    NamePlateHorizontalScale = 1,
+    NamePlateVerticalScale = 1,
+    -- optional, you may use any values
+    nameplateLargerScale = 1,
+    nameplateMaxScale = 1,
+    nameplateMinScale = 1,
+    nameplateSelectedScale = 1,
+    nameplateSelfScale = 1,
+}
+
 D["LoadUF"] = function()
 	if C["unitframes"]["enable"] then
 		oUF:RegisterStyle("DuffedUI", D["ConstructUF"])
 		D["SpawnUF"]()
+	end
+	if C["nameplate"]["active"] then
+		oUF:SpawnNamePlates(nil, nil, cvars)
 	end
 end
 

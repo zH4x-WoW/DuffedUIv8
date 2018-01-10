@@ -60,7 +60,7 @@ function AS:Blizzard_Spellbook()
 	-- Skill Line Tabs
 
 	hooksecurefunc('SpellBookFrame_UpdateSkillLineTabs', function()
-		local NumSkillLineTabs = GetNumSpellTabs();
+		local NumSkillLineTabs = GetNumSpellTabs()
 		for i = 1, MAX_SKILLLINE_TABS do
 			local Tab = _G["SpellBookSkillLineTab"..i]
 			if ( i <= NumSkillLineTabs and SpellBookFrame.bookType == BOOKTYPE_SPELL ) then
@@ -153,6 +153,25 @@ function AS:Blizzard_Spellbook()
 
 	SpellBookFrameTabButton1:ClearAllPoints()
 	SpellBookFrameTabButton1:SetPoint("TOPLEFT", SpellBookFrame, "BOTTOMLEFT", -5, 2)
+
+	if not AS:CheckAddOn('ElvUI') then
+		hooksecurefunc('SharedActionButton_RefreshSpellHighlight', function(self, shown)
+			if shown then
+				self.SpellHighlightTexture:Hide()
+				self.SpellHighlightAnim:Stop()
+				if not self.AutoCastShine.Resized then
+					for _, sparks in pairs(self.AutoCastShine.sparkles) do
+						sparks:SetSize(sparks:GetWidth() * 2, sparks:GetHeight() * 2)
+					end
+					self.AutoCastShine.Resized = true
+				end
+				self.AutoCastShine:Show()
+				AutoCastShine_AutoCastStart(self.AutoCastShine, 1, .82, 0)
+			else
+				AutoCastShine_AutoCastStop(self.AutoCastShine)
+			end
+		end)
+	end
 end
 
 AS:RegisterSkin('Blizzard_Spellbook', AS.Blizzard_Spellbook)

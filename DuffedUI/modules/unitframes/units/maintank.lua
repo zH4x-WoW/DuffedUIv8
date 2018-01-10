@@ -21,8 +21,6 @@ D["ConstructUFMaintank"] = function(self)
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self.menu = D.SpawnMenu
-
 	self:SetAttribute("type2", "focus")
 
 	--[[Health]]--
@@ -80,5 +78,5 @@ D["ConstructUFMaintank"] = function(self)
 	RaidIcon:SetTexture(C["media"]["RaidIcons"])
 	RaidIcon:Size(28, 28)
 	RaidIcon:Point("TOP", health, "TOP", 0, 11)
-	self.RaidIcon = RaidIcon
+	self.RaidTargetIndicator = RaidIcon
 end

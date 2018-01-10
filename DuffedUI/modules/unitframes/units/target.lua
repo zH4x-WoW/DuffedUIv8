@@ -16,6 +16,14 @@ local backdrop = {
 	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
 }
 
+local function SetCastBarColorShielded(self)
+	self.__owner:SetStatusBarColor(1, 0, 0, .3)
+end
+
+local function SetCastBarColorDefault(self)
+	self.__owner:SetStatusBarColor(unpack(C["castbar"].color))
+end
+
 D["ConstructUFTarget"] = function(self)
 	--[[Initial Elements]]--
 	self.colors = D["UnitColor"]
@@ -23,7 +31,7 @@ D["ConstructUFTarget"] = function(self)
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self.menu = D["SpawnMenu"]
+	self:SetAttribute("type2", "togglemenu")
 
 	local panel = CreateFrame("Frame", nil, self)
 	if layout == 1 or layout == 4 then
@@ -306,6 +314,7 @@ D["ConstructUFTarget"] = function(self)
 
 		local castbar = CreateFrame("StatusBar", self:GetName() .. "CastBar", self)
 		castbar:SetStatusBarTexture(texture)
+		castbar:SetStatusBarColor(unpack(C["castbar"]["color"]))
 		castbar:Width(C["castbar"]["targetwidth"])
 		castbar:Height(18)
 		castbar:Point("LEFT", TargetCastBarMover, "LEFT", 0, 0)
@@ -326,6 +335,12 @@ D["ConstructUFTarget"] = function(self)
 		castbar.Text:Point("LEFT", castbar, "LEFT", 6, 0)
 		castbar.Text:SetTextColor(.84, .75, .65)
 		castbar:CreateBackdrop()
+
+		local shield = castbar:CreateTexture(nil, "BACKGROUND", nil, -8)
+		shield.__owner = castbar
+		castbar.Shield = shield
+		hooksecurefunc(shield, "Show", SetCastBarColorShielded)
+		hooksecurefunc(shield, "Hide", SetCastBarColorDefault)
 
 		if C["castbar"]["cbicons"] then
 			castbar.button = CreateFrame("Frame", nil, castbar)
@@ -364,9 +379,9 @@ D["ConstructUFTarget"] = function(self)
 	self.Health.bg = healthBG
 	self.Power = power
 	self.Power.bg = powerBG
-	self.AltPowerBar = AltPowerBar
+	self.AlternativePower = AltPowerBar
 	self.Name = Name
-	self.RaidIcon = RaidIcon
+	self.RaidTargetIndicator = RaidIcon
 
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", D.updateAllElements)
 end

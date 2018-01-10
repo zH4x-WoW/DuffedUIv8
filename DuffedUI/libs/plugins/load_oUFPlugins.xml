@@ -9,6 +9,6 @@
 	<Script file="oUF_RaidDebuffs.lua" />
 	<Script file="oUF_Smooth.lua" />
 	<Script file="oUF_SoulShards.lua" />
-	<Script file="oUF_Trinkets.lua" />
+	<!--<Script file="oUF_Trinkets.lua" />-->
 	<Script file="oUF_WeakenedSoul.lua" />
 </Ui>

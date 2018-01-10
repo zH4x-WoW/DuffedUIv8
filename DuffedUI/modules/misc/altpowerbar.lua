@@ -15,13 +15,10 @@ PlayerPowerBarAlt:UnregisterEvent("UNIT_POWER_BAR_HIDE")
 PlayerPowerBarAlt:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 local AltPowerBar = CreateFrame("Frame", "DuffedUIAltPowerBar", UIParent)
---[[if layout == 2 or layout == 3 then AltPowerBar:SetPoint("BOTTOM", UIParent, "BOTTOM", -340, 185) else AltPowerBar:SetPoint("BOTTOM", UIParent, "BOTTOM", -340, 228) end
-AltPowerBar:SetSize(232, 20)]]--
 AltPowerBar:SetTemplate("Default")
 AltPowerBar:SetAllPoints(DuffedUIInfoLeft)
 AltPowerBar:SetFrameStrata("MEDIUM")
 AltPowerBar:SetFrameLevel(0)
---AltPowerBar:EnableMouse(true)
 
 local AltPowerBarStatus = CreateFrame("StatusBar", "DuffedUIAltPowerBarStatus", AltPowerBar)
 AltPowerBarStatus:SetFrameLevel(AltPowerBar:GetFrameLevel() + 1)

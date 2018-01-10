@@ -1,6 +1,7 @@
 local D, C, L, G = unpack(select(2,  ...))
 
 local _G = _G
+local Noop = function() end
 local ReplaceBags = 0
 local LastButtonBag, LastButtonBank, LastButtonReagent
 local NUM_CONTAINER_FRAMES = NUM_CONTAINER_FRAMES
@@ -257,7 +258,7 @@ function Bags:CreateContainer(storagetype, ...)
 			Sort:StripTextures()
 			Sort:SkinButton()
 			Sort:FontString(Text, C["media"]["font"], 11)
-			Sort.Text:SetPoint("CENTER", 50, 0)
+			Sort.Text:SetPoint("CENTER", 0, 0)
 			Sort.Text:SetText(BAG_FILTER_CLEANUP)
 			Sort.Text:SetTextColor(1, 1, 1)
 			Sort:SetScript('OnMouseDown', function(self, button)
@@ -688,7 +689,7 @@ end
 function Bags:CloseAllBags()
 	if MerchantFrame:IsVisible() or InboxFrame:IsVisible() then return end
 	CloseAllBags()
-	PlaySound("igBackPackClose")
+	PlaySound(863)
 end
 
 function Bags:CloseAllBankBags()
@@ -761,7 +762,11 @@ function Bags:Enable()
 	local Bank = BankFrameItem1
 	local BankFrame = BankFrame
 
-	if C["chat"]["rbackground"] then self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 5) else self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIInfoRight, "TOPRIGHT", 0, 5) end
+	if C["misc"]["artifact"] then
+		if C["chat"]["rbackground"] then self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 15) else self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIInfoRight, "TOPRIGHT", 0, 5) end
+	else
+		if C["chat"]["rbackground"] then self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIChatBackgroundRight, "TOPRIGHT", 0, 5) else self:CreateContainer("Bag", "BOTTOMRIGHT", DuffedUIInfoRight, "TOPRIGHT", 0, 5) end
+	end
 	if C["chat"]["lbackground"] then self:CreateContainer("Bank", "BOTTOMLEFT", DuffedUIChatBackgroundLeft, "TOPLEFT", 0, 5) else self:CreateContainer("Bank", "BOTTOMLEFT", DuffedUIInfoLeft, "TOPLEFT", 0, 5) end
 	self:HideBlizzard()
 	self:SetBagsSearchPosition()

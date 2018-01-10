@@ -5,12 +5,12 @@ local function LoadSkin()
 	QuestFrame:StripTextures(true)
 	QuestFrameInset:StripTextures()
 	QuestFrameDetailPanel:StripTextures(true)
-	QuestFrameDetailPanel.IgnoreButton:SkinButton(true)
-	QuestFrameDetailPanel.UnignoreButton:SkinButton(true)
+	--QuestFrameDetailPanel.IgnoreButton:SkinButton(true)
+	--QuestFrameDetailPanel.UnignoreButton:SkinButton(true)
 	QuestDetailScrollChildFrame:StripTextures(true)
 	QuestRewardScrollChildFrame:StripTextures(true)
 	QuestFrameProgressPanel:StripTextures(true)
-	QuestFrameProgressPanel.IgnoreButton:SkinButton(true)
+	--QuestFrameProgressPanel.IgnoreButton:SkinButton(true)
 	QuestFrameRewardPanel:StripTextures(true)
 	QuestFrame:CreateBackdrop("Transparent")
 	QuestFrameAcceptButton:SkinButton(true)
@@ -47,6 +47,20 @@ local function LoadSkin()
 	QuestNPCModelTextScrollFrameScrollBar:SkinScrollBar()
 	QuestGreetingScrollFrameScrollBar:SkinScrollBar()
 	QuestProgressScrollFrameScrollBar:SkinScrollBar()
+
+	local frames = {
+		"QuestDetailScrollFrameMiddle",
+		"QuestDetailScrollFrameTop",
+		"QuestDetailScrollFrameBottom",
+		"QuestRewardScrollFrameMiddle",
+		"QuestRewardScrollFrameTop",
+		"QuestRewardScrollFrameBottom",
+		"QuestProgressScrollFrameMiddle",
+		"QuestProgressScrollFrameTop",
+		"QuestProgressScrollFrameBottom",
+	}
+	for i = 1, #frames do _G[frames[i]]:SetTexture(nil) end
+	
 	QuestNPCModel:StripTextures()
 	QuestNPCModel:CreateBackdrop("Transparent")
 	QuestNPCModel:Point("TOPLEFT", QuestLogDetailFrame, "TOPRIGHT", 4, -34)

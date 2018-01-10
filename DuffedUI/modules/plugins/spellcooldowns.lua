@@ -168,6 +168,7 @@ spellCooldowns = {
 		102342, -- Ironbark
 		102351, -- Cenarion Ward
 		102793, -- Ursol's Vortex
+		145205, -- Efflorescence
 		197721, -- Flourish
 		208253, -- Essence of G'Hanir (Artifact)
 		-- PvP

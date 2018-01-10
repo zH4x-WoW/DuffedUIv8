@@ -39,21 +39,8 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(33702), CreateSpellEntry(33697), CreateSpellEntry(20572), -- Blood Fury (orc racial)
 	CreateSpellEntry(57933), -- Tricks of Trade (15% dmg buff)
 	CreateSpellEntry(121279), -- Lifeblood
-	CreateSpellEntry(96230), -- Synapse Springs
 	CreateSpellEntry(45861), -- Nitro Boost (Engeneering)
 	CreateSpellEntry(68992), -- Darkflight (Worgen Sprint Racial)
-
-	--[[Weaponenchants & Stuff]]--
-	CreateSpellEntry(159676, true), -- Mark of the Frostwolf
-	CreateSpellEntry(159675, true), -- Mark of Warsong
-	CreateSpellEntry(159234, true), -- Mark of the Thunderlord
-	CreateSpellEntry(159678, true), -- Mark of Shadowmoon
-	CreateSpellEntry(159679, true), -- Mark of Blackrock
-	CreateSpellEntry(173322, true), -- Mark of Bleeding Hollow
-	CreateSpellEntry(159238, true), -- Shattered Bleed
-	CreateSpellEntry(156060, true), -- Megawatt Filament
-	CreateSpellEntry(156055, true), -- Oglethorpe's Missile Splitter
-	CreateSpellEntry(173288, true), -- Hemet's Heartseeker
 
 	--[[Darkmoon-Trinkets]]--
 	CreateSpellEntry(162915), -- Spirit of the Warlords (Skull of War)
@@ -61,28 +48,8 @@ local TRINKET_FILTER = {
 	CreateSpellEntry(162919), -- Nightmare Fire (Sandman's Pouch)
 	CreateSpellEntry(162917), -- Strength of Steel (Knight's Badge)
 
-	--[[Legendary Rings]]--
-	CreateSpellEntry(177159), -- Archmage's Incandescence (Intellect)
-	CreateSpellEntry(177160), -- Archmage's Incandescence (Strength)
-	CreateSpellEntry(177161), -- Archmage's Incandescence (Agility)
-	CreateSpellEntry(177172), -- Archmage's Incandescence (Agility)
-	CreateSpellEntry(177175), -- Archmage's Incandescence (Strength)
-	CreateSpellEntry(177176), -- Archmage's Incandescence (Agility)
-	CreateSpellEntry(187619), -- Thorasus, the Stone Heart of Draenor (Strength-DD)
-	CreateSpellEntry(187617), -- Sanctus, Sigil of the Unbroken (Tank)
-	CreateSpellEntry(187620), -- Maalus, the Blood Drinker (Agility-DD)
-	CreateSpellEntry(187616), -- Nithramus, the All-Seer (Intellect-DD)
-	CreateSpellEntry(187618), -- Etheralus, the Eternal Reward (Healer)
-
-	--[[Hellfire Citadel]]--
-	CreateSpellEntry(183941), -- Hungering Blows
-	CreateSpellEntry(183926), -- Countenance of Tyranny
-	CreateSpellEntry(184073), -- Mark of Doom
-	CreateSpellEntry(184770), -- Tyrant's Immortality
-	CreateSpellEntry(184293), -- Spirit Shift
-	CreateSpellEntry(183929), -- Sudden Intuition
-	CreateSpellEntry(183931), -- Anzus Flight
-	CreateSpellEntry(183924), -- Sign of the Dark Star
+	--[[Legendarys]]--
+	CreateSpellEntry(235169), -- Archimonde's Hatred Reborn
 }
 
 local CLASS_FILTERS = {

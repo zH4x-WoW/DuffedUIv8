@@ -24,7 +24,7 @@ D["ConstructUFPlayer"] = function(self)
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self.menu = D["SpawnMenu"]
+	self:SetAttribute("type2", "togglemenu")
 
 	local panel = CreateFrame("Frame", nil, self)
 	if layout == 1 or layout == 4 then
@@ -215,13 +215,6 @@ D["ConstructUFPlayer"] = function(self)
 	PVP:SetWidth(D.Scale(32))
 	PVP:Point("TOPLEFT", health, "TOPRIGHT", -7, 7)
 	
-	--[[local pvptimer = health:CreateFontString(nil, "OVERLAY")
-	pvptimer:SetFont(f, fs, ff)
-	pvptimer:SetText(" ")
-	pvptimer:SetTextColor(unpack(C["media"].datatextcolor1))
-	pvptimer:SetPoint("TOP", PVP, 0, 8)
-	pvptimer:SetScript("OnUpdate", D.PvPUpdate)]]--
-
 	local Leader = health:CreateTexture(nil, "OVERLAY")
 	Leader:Height(14)
 	Leader:Width(14)
@@ -230,7 +223,7 @@ D["ConstructUFPlayer"] = function(self)
 	local MasterLooter = health:CreateTexture(nil, "OVERLAY")
 	MasterLooter:Height(14)
 	MasterLooter:Width(14)
-	self.MasterLooter = MasterLooter
+	self.MasterLooterIndicator = MasterLooter
 	self:RegisterEvent("PARTY_LEADER_CHANGED", D.MLAnchorUpdate)
 	self:RegisterEvent("PARTY_MEMBERS_CHANGED", D.MLAnchorUpdate)
 
@@ -298,6 +291,7 @@ D["ConstructUFPlayer"] = function(self)
 
 		local castbar = CreateFrame("StatusBar", self:GetName() .. "CastBar", self)
 		castbar:SetStatusBarTexture(texture)
+		castbar:SetStatusBarColor(unpack(C["castbar"]["color"]))
 		castbar:Height(21)
 		if C["castbar"]["cbicons"] then castbar:Width(C["castbar"]["playerwidth"] - 31) else castbar:Width(C["castbar"]["playerwidth"]) end
 		castbar:Point("RIGHT", PlayerCastBarMover, "RIGHT", -2, 0)
@@ -355,11 +349,11 @@ D["ConstructUFPlayer"] = function(self)
 	self.Health.bg = healthBG
 	self.Power = power
 	self.Power.bg = powerBG
-	self.Combat = Combat
-	self.PvP = PVP
+	self.CombatIndicator = Combat
+	self.PvPIndicator = PVP
 	self.FlashInfo = FlashInfo
-	self.Leader = Leader
-	self.RaidIcon = RaidIcon
+	self.LeaderIndicator = Leader
+	self.RaidTargetIndicator = RaidIcon
 
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", D.updateAllElements)
 	if C["unitframes"]["classbar"] then D["ClassRessource"][class](self) end

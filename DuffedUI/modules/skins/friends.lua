@@ -89,8 +89,17 @@ local function LoadSkin()
 		"FriendsFriendsSendRequestButton",
 		"FriendsFriendsCloseButton",
 	}
-
 	for _, button in pairs(buttons) do _G[button]:SkinButton() end
+	
+	local frames = {
+		"FriendsFrameFriendsScrollFrameMiddle",
+		"FriendsFrameFriendsScrollFrameTop",
+		"FriendsFrameFriendsScrollFrameBottom",
+		"QuickJoinScrollFrameMiddle",
+		"QuickJoinScrollFrameTop",
+		"QuickJoinScrollFrameBottom",
+	}
+	for i = 1, #frames do _G[frames[i]]:SetTexture(nil) end
 
 	--[[Reposition buttons]]--
 	WhoFrameWhoButton:Point("RIGHT", WhoFrameAddFriendButton, "LEFT", -2, 0)
@@ -125,6 +134,7 @@ local function LoadSkin()
 	--[[Channel Frame]]--
 	QuickJoinFrame.JoinQueueButton:StripTextures()
 	QuickJoinFrame.JoinQueueButton:SkinButton()
+	QuickJoinScrollFrameScrollBar:SkinScrollBar()
 
 	--[[BNet Frame]]--
 	FriendsFrameBroadcastInput:CreateBackdrop("Default")

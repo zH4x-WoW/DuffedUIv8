@@ -39,3 +39,7 @@ hooksecurefunc("ContainerFrame_UpdateLockedItem", function(frame,slot)
 	local itemButton = _G[frame:GetName().."Item"..index]
 	if not itemButton then print(frame:GetName(),slot,index) end
 end)
+
+--[[hooksecurefunc(getmetatable(GameTooltip).__index,"Show", function(self)
+	print(self:GetName() or tostring(self))
+end)]]

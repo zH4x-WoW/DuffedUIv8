@@ -1,4 +1,4 @@
-﻿local AS, ASL = unpack(AddOnSkins)
+local AS, ASL = unpack(AddOnSkins)
 
 function AS:UpdateLocale_ruRU()
 	ASL.DataText.ToggleEmbed = 'Показать/скрыть всроенный'
@@ -52,7 +52,7 @@ function AS:UpdateLocale_ruRU()
 	ASL["Credits"] = "Благодарности"
 	ASL["Credits:"] = "Благодарности:"
 	ASL["About/Help"] = "Информация/Помощь"
-	ASL["This is where you can find out more of AddOnSkins."] = "По этим ссылкам вы найдете больше информации."
+	ASL["Links"] = "Links"
 	ASL["Download Link"] = "Скачать"
 	ASL["Changelog Link"] = "Изменения"
 	ASL["GitLab Link / Report Errors"] = "GitLab / Сообщить об ошибках"
@@ -62,7 +62,6 @@ function AS:UpdateLocale_ruRU()
 	ASL["Right Click to Hide"] = "ПКМ для скрытия"
 	ASL["Left Click:"] = "ЛКМ"
 	ASL["Right Click:"] = "ПКМ:"
-	ASL["Conflict System: Please remove '%s' from your 'World of Warcraft\\Interface\\AddOns\\' directory."] = "Системный конфликт: Пожалуйста, удалите '%s' из вашей папки 'World of Warcraft\\Interface\\AddOns\\'."
 	ASL["Skin Template"] = "Шаблон скина"
 	ASL["Hide Chat Frame"] = "Скрыть фрейм чата"
 	ASL["Embed OoC Delay"] = "Embed OoC Delay"

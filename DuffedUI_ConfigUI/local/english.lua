@@ -67,8 +67,9 @@ DuffedUIConfigUILocalization.nameplate = "Nameplates"
 DuffedUIConfigUILocalization.nameplateactive = "Enable Nameplates"
 DuffedUIConfigUILocalization.nameplateplatewidth = "Set width of nameplates (default = 110)"
 DuffedUIConfigUILocalization.nameplateplateheight = "Set height of nameplates (default = 7)"
-DuffedUIConfigUILocalization.nameplateethreat = "Enable Enhanced Threat"
-DuffedUIConfigUILocalization.nameplateClassColor = "Enable classcolor-display on nameplates"
+DuffedUIConfigUILocalization.nameplatethreat = "Enable Enhanced Threat"
+DuffedUIConfigUILocalization.nameplateclasscolor = "Enable classcolor-display on nameplates"
+DuffedUIConfigUILocalization.nameplateplatescale = "Set scale of nameplates (default 1.5)"
 
 --[[Actionbars]]--
 DuffedUIConfigUILocalization.actionbar = "Action Bars"

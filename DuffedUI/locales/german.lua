@@ -83,7 +83,7 @@ if D.Client == "deDE" then
 		["step4line1"] = "Die Installation wurde erfolgreich abgeschlossen.",
 		["step4line2"] = "Bitte klicke auf den Button 'Beenden' um das UI neu zu laden.",
 		["step4line3"] = "",
-		["step4line4"] = "Geniesse Dein DuffedUI! Und besuche uns doch mal auf |cffc41f3http://www.wowinterface.com|r!",
+		["step4line4"] = "Geniesse Dein DuffedUI! Und besuche uns doch mal auf |cfff41f3http://www.wowinterface.com|r!",
 	}
 
 	L["binds"] = {

@@ -21,6 +21,7 @@ D["ConstructUFRaid"] = function(self)
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
+	self:SetAttribute("type2", "togglemenu")
 
 	--[[Health]]--
 	local health = CreateFrame("StatusBar", nil, self)
@@ -138,7 +139,7 @@ D["ConstructUFRaid"] = function(self)
 		RaidIcon:Width(18)
 		RaidIcon:SetPoint("CENTER", self, "TOP")
 		RaidIcon:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\raidicons.blp") -- thx hankthetank for texture
-		self.RaidIcon = RaidIcon
+		self.RaidTargetIndicator = RaidIcon
 	end
 
 	local LFDRole = health:CreateTexture(nil, "OVERLAY")
@@ -146,7 +147,7 @@ D["ConstructUFRaid"] = function(self)
 	LFDRole:Width(12)
 	LFDRole:Point("TOPRIGHT", -1, -1)
 	LFDRole:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons2.blp")
-	self.LFDRole = LFDRole
+	self.GroupRoleIndicator = LFDRole
 
 	local Resurrect = CreateFrame("Frame", nil, self)
 	Resurrect:SetFrameLevel(20)
@@ -160,18 +161,18 @@ D["ConstructUFRaid"] = function(self)
 	ReadyCheck:Height(12)
 	ReadyCheck:Width(12)
 	ReadyCheck:SetPoint("CENTER")
-	self.ReadyCheck = ReadyCheck
+	self.ReadyCheckIndicator = ReadyCheck
 
 	local leader = health:CreateTexture(nil, "OVERLAY")
 	leader:Height(12)
 	leader:Width(12)
 	leader:Point("TOPLEFT", 0, 8)
-	self.Leader = leader
+	self.LeaderIndicator = leader
 
 	local MasterLooter = health:CreateTexture(nil, "OVERLAY")
 	MasterLooter:Height(12)
 	MasterLooter:Width(12)
-	self.MasterLooter = MasterLooter
+	self.MasterLooterIndicator = MasterLooter
 	self:RegisterEvent("PARTY_LEADER_CHANGED", D.MLAnchorUpdate)
 	self:RegisterEvent("PARTY_MEMBERS_CHANGED", D.MLAnchorUpdate)
 
@@ -213,7 +214,7 @@ D["ConstructUFRaid"] = function(self)
 			absb:SetStatusBarTexture(texture)
 			absb:SetStatusBarColor(1, 1, 0, 0.25)
 
-			self.HealPrediction = {
+			self.HealthPrediction = {
 				myBar = mhpb,
 				otherBar = ohpb,
 				absorbBar = absb,
@@ -238,27 +239,36 @@ D["ConstructUFRaid"] = function(self)
 			D.createAuraWatch(self,unit)
 
 			local RaidDebuffs = CreateFrame("Frame", nil, self)
-			RaidDebuffs:Height(24)
-			RaidDebuffs:Width(24)
-			RaidDebuffs:Point("CENTER", health, 1,0)
-			RaidDebuffs:SetFrameStrata(health:GetFrameStrata())
-			RaidDebuffs:SetFrameLevel(health:GetFrameLevel() + 2)
-			RaidDebuffs:SetTemplate("Default")
+			RaidDebuffs:SetHeight(22)
+			RaidDebuffs:SetWidth(22)
+			RaidDebuffs:SetPoint("CENTER", self.Health, "CENTER", 1, 0)
+			RaidDebuffs:SetFrameLevel(self.Health:GetFrameLevel() + 20)
+			RaidDebuffs:SetBackdrop(backdrop)
+			RaidDebuffs:SetBackdropColor(unpack(C["media"].backdropcolor))
+			RaidDebuffs:SetTemplate()
 
-			RaidDebuffs.icon = RaidDebuffs:CreateTexture(nil, "OVERLAY")
-			RaidDebuffs.icon:SetTexCoord(unpack(D["IconCoord"]))
-			RaidDebuffs.icon:Point("TOPLEFT", 2, -2)
-			RaidDebuffs.icon:Point("BOTTOMRIGHT", -2, 2)
+			RaidDebuffs.icon = RaidDebuffs:CreateTexture(nil, "ARTWORK")
+			RaidDebuffs.icon:SetTexCoord(.1, .9, .1, .9)
+			RaidDebuffs.icon:SetInside(RaidDebuffs)
 
-			RaidDebuffs.time = RaidDebuffs:CreateFontString(nil, "OVERLAY")
-			RaidDebuffs.time:SetFont(f, fs, ff)
-			RaidDebuffs.time:Point("CENTER", 1, 0)
-			RaidDebuffs.time:SetTextColor(1, .9, 0)
+			RaidDebuffs.cd = CreateFrame("Cooldown", nil, RaidDebuffs)
+			RaidDebuffs.cd:SetAllPoints(RaidDebuffs)
+			RaidDebuffs.cd:SetHideCountdownNumbers(true)
+
+			RaidDebuffs.ShowDispelableDebuff = true
+			RaidDebuffs.FilterDispelableDebuff = true
+			RaidDebuffs.MatchBySpellName = true
+			RaidDebuffs.ShowBossDebuff = true
+			RaidDebuffs.BossDebuffPriority = 5
 
 			RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, "OVERLAY")
-			RaidDebuffs.count:SetFont(f, fs, ff)
-			RaidDebuffs.count:Point("BOTTOMRIGHT", RaidDebuffs, "BOTTOMRIGHT", 0, 2)
+			RaidDebuffs.count:SetFont(C["media"].font, 11, "OUTLINE")
+			RaidDebuffs.count:SetPoint("BOTTOMRIGHT", RaidDebuffs, "BOTTOMRIGHT", 2, 0)
 			RaidDebuffs.count:SetTextColor(1, .9, 0)
+
+			RaidDebuffs.SetDebuffTypeColor = RaidDebuffs.SetBackdropBorderColor
+			RaidDebuffs.Debuffs = D.Debuffids
+
 			self.RaidDebuffs = RaidDebuffs
 		end
 	end

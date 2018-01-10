@@ -14,6 +14,14 @@ local backdrop = {
 	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
 }
 
+local function SetCastBarColorShielded(self)
+	self.__owner:SetStatusBarColor(1, 0, 0, .3)
+end
+
+local function SetCastBarColorDefault(self)
+	self.__owner:SetStatusBarColor(unpack(C["castbar"].color))
+end
+
 D["ConstructUFBoss"] = function(self)
 	--[[Initial Elements]]--
 	self.colors = D.UnitColor
@@ -21,7 +29,6 @@ D["ConstructUFBoss"] = function(self)
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self.menu = D.SpawnMenu
 	self:SetAttribute("type2", "togglemenu")
 
 	--[[Health]]--
@@ -123,7 +130,7 @@ D["ConstructUFBoss"] = function(self)
 	AltPowerBar:SetPoint("TOP", self.Health, "TOP")
 	AltPowerBar:SetBackdrop(backdrop)
 	AltPowerBar:SetBackdropColor(0, 0, 0)
-	self.AltPowerBar = AltPowerBar
+	self.AlternativePower = AltPowerBar
 
 	--[[Buffs & Debuffs]]--
 	local buffs = CreateFrame("Frame", nil, self)
@@ -158,6 +165,7 @@ D["ConstructUFBoss"] = function(self)
 	local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 	castbar:SetHeight(12)
 	castbar:SetStatusBarTexture(texture)
+	castbar:SetStatusBarColor(unpack(C["castbar"]["color"]))
 	castbar:SetFrameLevel(10)
 	castbar:SetPoint("LEFT", 23, -1)
 	castbar:SetPoint("RIGHT", 0, -1)
@@ -175,6 +183,12 @@ D["ConstructUFBoss"] = function(self)
 	castbar.time:SetTextColor(.84, .75, .65)
 	castbar.time:SetJustifyH("RIGHT")
 	castbar.CustomTimeText = D.CustomTimeText
+
+	local shield = castbar:CreateTexture(nil, "BACKGROUND", nil, -8)
+	shield.__owner = castbar
+	castbar.Shield = shield
+	hooksecurefunc(shield, "Show", SetCastBarColorShielded)
+	hooksecurefunc(shield, "Hide", SetCastBarColorDefault)
 
 	castbar.CustomDelayText = D.CustomDelayText
 	castbar.PostCastStart = D.CastBar

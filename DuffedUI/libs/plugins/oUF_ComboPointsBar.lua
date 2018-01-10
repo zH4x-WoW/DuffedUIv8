@@ -15,6 +15,8 @@ local Colors = {
     [6] = {.33, .63, .33, 1},
     [7] = {.33, .63, .33, 1},
     [8] = {.33, .63, .33, 1},
+	[9] = {.33, .63, .33, 1},
+	[10] = {.33, .63, .33, 1},
 }
 
 local Update = function(self, event, unit, powerType)
@@ -31,7 +33,7 @@ local Update = function(self, event, unit, powerType)
 
     if points then
         -- update combos display
-        for i = 1, 8 do
+        for i = 1, 10 do
             if i <= points then
                 cpb[i]:SetAlpha(1)
             else
@@ -57,12 +59,12 @@ local SetMaxCombo = function(self)
     local cpb = self.ComboPointsBar
 
     if (Anticipation and class == "ROGUE") then
-        for i = 1, 8 do
+        for i = 1, 10 do
             cpb[i]:SetWidth(cpb[i].Anticipation)
             cpb[i]:Show()
         end
     elseif (Deeper and class == "ROGUE") then
-        for i = 1, 8 do
+        for i = 1, 10 do
             cpb[i]:SetWidth(cpb[i].Deeper)
             
             if i > 6 then
@@ -72,7 +74,7 @@ local SetMaxCombo = function(self)
             end
         end
     else
-        for i = 1, 8 do
+        for i = 1, 10 do
             cpb[i]:SetWidth(cpb[i].None)
             
             if i > 5 then
@@ -102,7 +104,7 @@ local Enable = function(self, unit)
         self:RegisterEvent('PLAYER_TARGET_CHANGED', Path, true)
         self:RegisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo, true)
 
-        for i = 1, 8 do
+        for i = 1, 10 do
             local Point = cpb[i]
             if not Point:GetStatusBarTexture() then
                 Point:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])

@@ -14,13 +14,21 @@ local backdrop = {
 	insets = {top = -D["mult"], left = -D["mult"], bottom = -D["mult"], right = -D["mult"]},
 }
 
+local function SetCastBarColorShielded(self)
+	self.__owner:SetStatusBarColor(1, 0, 0, .3)
+end
+
+local function SetCastBarColorDefault(self)
+	self.__owner:SetStatusBarColor(unpack(C["castbar"].color))
+end
+
 D["ConstructUFFocus"] = function(self)
 	self.colors = D["UnitColor"]
 
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	self.menu = D["SpawnMenu"]
+	self:SetAttribute("type2", "togglemenu")
 
 	local health = CreateFrame("StatusBar", nil, self)
 	health:Height(17)
@@ -127,6 +135,7 @@ D["ConstructUFFocus"] = function(self)
 
 	local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 	castbar:SetStatusBarTexture(texture)
+	castbar:SetStatusBarColor(unpack(C["castbar"]["color"]))
 	castbar:SetFrameLevel(10)
 	castbar:Height(10)
 	castbar:Width(201)
@@ -146,6 +155,13 @@ D["ConstructUFFocus"] = function(self)
 	castbar.Text:SetFont(f, fs, ff)
 	castbar.Text:SetPoint("LEFT", castbar, "LEFT", 4, 0)
 	castbar.Text:SetTextColor(.84, .75, .65)
+
+	local shield = castbar:CreateTexture(nil, "BACKGROUND", nil, -8)
+	shield.__owner = castbar
+	castbar.Shield = shield
+	hooksecurefunc(shield, "Show", SetCastBarColorShielded)
+	hooksecurefunc(shield, "Hide", SetCastBarColorDefault)
+
 	castbar.CustomDelayText = D["CustomDelayText"]
 	castbar.PostCastStart = D["CastBar"]
 	castbar.PostChannelStart = D["CastBar"]

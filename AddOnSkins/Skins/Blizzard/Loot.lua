@@ -17,15 +17,15 @@ function AS:Blizzard_LootFrames()
 		Frame.Timer.Backdrop:SetBackdropBorderColor(0, 0, 0, 0)
 
 		Frame:HookScript('OnUpdate', function(self)
-			local texture, name, count, quality, bindOnPickUp, canNeed, canGreed, canDisenchant, reasonNeed, reasonGreed, reasonDisenchant, deSkillRequired = GetLootRollItemInfo(self.rollID);
+			local texture, name, count, quality, bindOnPickUp, canNeed, canGreed, canDisenchant, reasonNeed, reasonGreed, reasonDisenchant, deSkillRequired = GetLootRollItemInfo(self.rollID)
 			if not name then return end
-			local color = ITEM_QUALITY_COLORS[quality];
+			local color = ITEM_QUALITY_COLORS[quality]
 			self.Name:SetText((bindOnPickUp and "BoP" or "BoE")..' |cFFFFFFFF'..name)
 			self.Name:SetVertexColor(bindOnPickUp and 1 or .3, bindOnPickUp and .3 or 1, bindOnPickUp and .1 or .3)
 			self.Timer:SetStatusBarColor(color.r, color.g, color.b)
 			self.Timer:SetFrameLevel(self:GetFrameLevel() + 1)
 			for _, Button in pairs({'NeedButton', 'GreedButton', 'PassButton', 'DisenchantButton'}) do
-				Frame[Button]:SetFrameLevel(Frame.Timer:GetFrameLevel() + 2)
+				self[Button]:SetFrameLevel(self.Timer:GetFrameLevel() + 2)
 			end
 		end)
 
@@ -57,16 +57,15 @@ function AS:Blizzard_LootFrames()
 
 	--[[
 	AS:SkinFrame(MissingLootFrame)
-	--MissingLootFrame:CreateShadow()
+	MissingLootFrame:CreateShadow()
 
 	AS:SkinCloseButton(MissingLootFramePassButton)
-	
+
 	local function SkinButton()
 		local number = GetNumMissingLootItems()
 		for i = 1, number do
 			local slot = _G["MissingLootFrameItem"..i]
 			local icon = slot.icon
-			
 			if not slot.isSkinned then
 				AS:StripTextures(slot)
 				AS:SetTemplate(slot, 'Default')
@@ -75,17 +74,17 @@ function AS:Blizzard_LootFrames()
 				icon:ClearAllPoints()
 				icon:SetPoint("TOPLEFT", 2, -2)
 				icon:SetPoint("BOTTOMRIGHT", -2, 2)
-				
+
 				slot.isSkinned = true
 			end
-			
+
 			local quality = select(4, GetMissingLootItemInfo(i))
 			local color = (GetItemQualityColor(quality)) or (unpack(C.media.bordercolor))
 			frame:SetBackdropBorderColor(color)
 		end
 	end
 	hooksecurefunc("MissingLootFrame_Show", SkinButton)
-	
+
 	-- loot history frame
 	AS:StripTextures(LootHistoryFrame)
 	AS:SkinCloseButton(LootHistoryFrame.CloseButton)
@@ -99,12 +98,12 @@ function AS:Blizzard_LootFrames()
 	LootHistoryFrame.ResizeButton:ClearAllPoints()
 	LootHistoryFrame.ResizeButton:SetPoint("TOP", LootHistoryFrame, "BOTTOM", 0, -2)
 	AS:SkinScrollBar(LootHistoryFrameScrollFrameScrollBar)
-	
+
 	local function UpdateLoots(self)
 		local numItems = C_LootHistory.GetNumItems()
 		for i=1, numItems do
 			local frame = self.itemFrames[i]
-			
+
 			if not frame.isSkinned then
 				frame.NameBorderLeft:Hide()
 				frame.NameBorderRight:Hide()
@@ -114,7 +113,7 @@ function AS:Blizzard_LootFrames()
 				frame.ActiveHighlight:Hide()
 				AS:SkinTexture(frame.Icon)
 				frame.Icon:SetDrawLayer("ARTWORK")
-				
+
 				-- create a backdrop around the icon
 				AS:CreateBackdrop(frame, 'Default')
 				frame.backdrop:SetPoint("TOPLEFT", frame.Icon, -2, 2)
@@ -125,18 +124,18 @@ function AS:Blizzard_LootFrames()
 		end
 	end
 	hooksecurefunc("LootHistoryFrame_FullUpdate", UpdateLoots)
-	
+
 	-- master loot frame
 	AS:StripTextures(MasterLooterFrame)
 	AS:SetTemplate(MasterLooterFrame)
-	
+
 	hooksecurefunc("MasterLooterFrame_Show", function()
 		local b = MasterLooterFrame.Item
 		if b then
 			local i = b.Icon
 			local icon = i:GetTexture()
 			local c = ITEM_QUALITY_COLORS[LootFrame.selectedQuality]
-			
+
 			AS:StripTextures(b)
 			i:SetTexture(icon)
 			AS:SkinTexture(i)
@@ -144,7 +143,7 @@ function AS:Blizzard_LootFrames()
 			b.backdrop:SetOutside(i)
 			b.backdrop:SetBackdropBorderColor(c.r, c.g, c.b)
 		end
-		
+
 		for i=1, MasterLooterFrame:GetNumChildren() do
 			local child = select(i, MasterLooterFrame:GetChildren())
 			if child and not child.isSkinned and not child:GetName() then
@@ -153,14 +152,14 @@ function AS:Blizzard_LootFrames()
 						AS:SkinCloseButton(child)
 					else
 						AS:SetTemplate(child)
-						AS:StyleButton(child)		
+						AS:StyleButton(child)
 					end
 					child.isSkinned = true
 				end
 			end
 		end
 	end)
-	
+
 	-- bonus
 	AS:StripTextures(BonusRollFrame)
 	AS:CreateBackdrop(BonusRollFrame)

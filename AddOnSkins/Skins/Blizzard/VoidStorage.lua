@@ -12,13 +12,13 @@ function AS:Blizzard_VoidStorage(event, addon)
 	VoidStoragePurchaseFrame:SetFrameLevel(VoidStorageFrame:GetFrameLevel() + 10)
 
 	AS:SkinFrame(VoidStorageFrame)
-	--VoidStorageFrame:CreateShadow()
+	VoidStorageFrame:CreateShadow()
 	AS:SkinFrame(VoidStoragePurchaseFrame)
 
 	AS:SkinButton(VoidStoragePurchaseButton)
 	AS:SkinButton(VoidStorageHelpBoxButton)
 	AS:SkinButton(VoidStorageTransferButton)
-	
+
 	-- dress
 	AS:SkinFrame(SideDressUpFrame, nil, nil, true)
 	VoidStorageFrame:HookScript('OnShow', function(self)
@@ -72,7 +72,7 @@ function AS:Blizzard_VoidStorage(event, addon)
 		hooksecurefunc(Button.IconBorder, 'SetVertexColor', function(self, r, g, b)
 			Button:SetBackdropBorderColor(r, g, b)
 		end)
-		hooksecurefunc(Button.IconBorder, 'Hide', function(self, r, g, b)
+		hooksecurefunc(Button.IconBorder, 'Hide', function(self)
 			Button:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end)
 	end

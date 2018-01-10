@@ -54,7 +54,7 @@ local function UpdateQuestsDistance()
             local currDist = GetDistanceSqToQuest(GetQuestLogIndexByID(GetSuperTrackedQuestID()))
             if currDist and currDist - nearest > nearest * 0.07 + 1000 then
                 SetSuperTrackedQuestID(questID)
-                PlaySoundFile("Sound\\Interface\\UI_BonusLootRoll_End_01.ogg")
+                PlaySound(31581)
                 WorldMapFrame_OnUserChangedSuperTrackedQuest(questID)
             end
         end

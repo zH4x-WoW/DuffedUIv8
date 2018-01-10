@@ -3,14 +3,16 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Fixes for searching in bags by Rav99",
-		"• AddOnSkins by liquidbase",
-		"• Fix for copychat by Rav99",
-		"• Fix for FPS-drop by Rav99",
+		"• Fixed options for AddOnSkins",
 		--"• ",
 	" ",
 	"Notes:",
-		"• Last version for a long time. If anyone want to takeover the project\nplease send me a PM on wowinterface.",
+		"The settings for AddOnSkins can now be changed via the interface menu, in the",
+		"tab AddOns.",
+		"The AddOn Enhanced_Config must be removed.",
+		" ",
+		"Updates to the interface will be rarer in the near future, as I currently can not afford",
+		"the time to provide timely updates.",
 }
 
 local function ModifiedString(string)
