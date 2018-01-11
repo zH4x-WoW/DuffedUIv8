@@ -16,6 +16,7 @@
 	<Script file="misc.lua" />
 	<Script file="power.lua" />
 	<Script file="profession.lua" />
+	<Script file="quickjoin.lua" />
 	<Script file="smf.lua" />
 	<Script file="talent.lua" />
 	<Script file="time.lua" />

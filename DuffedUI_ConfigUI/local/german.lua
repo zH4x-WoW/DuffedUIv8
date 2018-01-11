@@ -137,6 +137,7 @@
 	DuffedUIConfigUILocalization.datatextwowtime = "Position der 'Zeitanzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextgarrison = "Position der 'Garnison' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatextorderhall = "Position der 'Ordenshalle' (0 zum deaktivieren)"
+	DuffedUIConfigUILocalization.datatextquickjoin = "Position der 'QuickJoinanzeige' (0 zum deaktivieren)"
 	DuffedUIConfigUILocalization.datatexttime24 = "Aktiviere 24h Zeitanzeige"
 	DuffedUIConfigUILocalization.datatextlocaltime = "Zeige die lokale Zeit, anstatt der Server Zeit"
 	DuffedUIConfigUILocalization.datatextfontsize = "Schriftgröße des Datatexts"
