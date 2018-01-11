@@ -17,7 +17,7 @@ local SocialQueueUtil_SortGroupMembers = SocialQueueUtil_SortGroupMembers
 local ToggleQuickJoinPanel = ToggleQuickJoinPanel
 local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 
-local Stat = CreateFrame("Frame", "DuffedUIStatgarrison")
+local Stat = CreateFrame("Frame", "DuffedUIStatquickjoin")
 Stat:RegisterEvent("SOCIAL_QUEUE_UPDATE")
 Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
 Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -28,7 +28,7 @@ Stat.Option = C["datatext"].orderhall
 Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
 Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
 
-local Text  = Stat:CreateFontString("DuffedUIStatgarrisonText", "OVERLAY")
+local Text  = Stat:CreateFontString("DuffedUIStatquickjoinText", "OVERLAY")
 Text:SetFont(f, fs, ff)
 D.DataTextPosition(C["datatext"].quickjoin, Text)
 
