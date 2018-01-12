@@ -265,11 +265,10 @@ if D.Client == "deDE" then
 	
 	L["artifactBar"] = {
 		["xptitle"] = "Artefakt Erfahrung",
-		["currentxp"] = "Aktuelle Erfahrung: %s",
-		["xp"] = "Erfahrung: %s/%s (%d%%)",
-		["xpremaining"] = "Verbleibend: %s",
-		["traits"] = "Eigenschaft verfügbar: %s",
+		["xp"] = "Erfahrung:",
+		["xpremaining"] = "Verbleibend:",
 		["click"] = "Klick: Öffnet die Artefaktübersicht",
+		['bags'] = "In Taschen:"
 	}
 	
 	L["tooltip"] = {
