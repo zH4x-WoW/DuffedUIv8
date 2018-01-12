@@ -226,6 +226,7 @@ if D.Client == "deDE" then
 		["noorderhallnowo"] = "Ordenshalle",
 		["noorderhallwo"] = "Ordenshalle+",
 		["noorderhall"] = "Du hast Deine Ordenshalle noch nicht freigeschaltet, nun aber los!",
+		["noquickjoin"] = "Niemand aus deiner Freundesliste sucht momentan nach einer Gruppe.",
 	}
 
 	L["Slots"] = {

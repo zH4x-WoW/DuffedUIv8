@@ -224,6 +224,7 @@ L["dt"] = {
 	["noorderhallnowo"] = "Orderhall",
 	["noorderhallwo"] = "Orderhall+",
 	["noorderhall"] = "Whats up? No orderhall at this time?",
+	["noquickjoin"] = "No quickjoin available at this time.",
 }
 
 L["Slots"] = {
