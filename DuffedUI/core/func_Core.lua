@@ -259,7 +259,9 @@ if C["general"].classcolor then C["media"].datatextcolor1 = D.UnitColor.class[D.
 D.PanelColor = D.RGBToHex(unpack(C["media"].datatextcolor1))
 
 D.ShortValue = function(v)
-	if v >= 1e6 then
+	if v >= 1e9 then
+		return ("%.1fb"):format(v / 1e9):gsub("%.?0+([km])$", "%1")
+	elseif v >= 1e6 then
 		return ("%.1fm"):format(v / 1e6):gsub("%.?0+([km])$", "%1")
 	elseif v >= 1e3 or v <= -1e3 then
 		return ("%.1fk"):format(v / 1e3):gsub("%.?0+([km])$", "%1")

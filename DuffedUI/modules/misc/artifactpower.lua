@@ -2,8 +2,8 @@ local D, C, L = unpack(select(2, ...))
 if not C['misc'].artifact then return end
 
 local LAP = LibStub("LibArtifactPower-1.0")
-local barHeight, barWidth = 5, C['misc'].artifactwidth
-local barTex, flatTex = C['media'].normTex
+local barHeight, barWidth = 5, C['misc']['artifactwidth']
+local barTex, flatTex = C['media']['normTex']
 local color = RAID_CLASS_COLORS[D.Class]
 local move = D['move']
 
@@ -22,6 +22,15 @@ artifactBar:SetHeight(barHeight)
 artifactBar:SetPoint('TOP', backdrop,'TOP', 0, 0)
 artifactBar:SetStatusBarTexture(barTex)
 artifactBar:SetStatusBarColor(157/255, 138/255, 108/255)
+artifactBar:SetFrameLevel(backdrop:GetFrameLevel() + 2)
+
+local artifactBarBag = CreateFrame('StatusBar',  'Experience_artifactBarBag', backdrop, 'TextStatusBar')
+artifactBarBag:SetWidth(barWidth)
+artifactBarBag:SetHeight(barHeight)
+artifactBarBag:SetPoint('TOP', backdrop,'TOP', 0, 0)
+artifactBarBag:SetStatusBarTexture(barTex)
+artifactBarBag:SetStatusBarColor(color.r, color.g, color.b)
+artifactBarBag:SetFrameLevel(backdrop:GetFrameLevel() + 1)
 
 local ArtifactmouseFrame = CreateFrame('Frame', 'Artifact_mouseFrame', backdrop)
 ArtifactmouseFrame:SetAllPoints(backdrop)
@@ -73,10 +82,18 @@ local function updateStatus()
 	if hAE then
 		local _, _, _, _, totalxp, pointsSpent, _, _, _, _, _, _, artifactTier = C_ArtifactUI.GetEquippedArtifactInfo()
 		local _, xp, xpForNextPoint = MainMenuBar_GetNumArtifactTraitsPurchasableFromXP(pointsSpent, totalxp, artifactTier)
+		local apInBags = GetArtifactPowerInBags()
 
 		backdrop:Show()
 		artifactBar:SetMinMaxValues(min(0, xp), xpForNextPoint)
 		artifactBar:SetValue(xp)
+		if (apInBags and apInBags > 0) then
+			artifactBarBag:SetMinMaxValues(0, xpForNextPoint)
+			artifactBarBag:SetValue(xp + apInBags)
+		else
+			artifactBarBag:SetMinMaxValues(0, 1)
+			artifactBarBag:SetValue(0)
+		end
 	else
 		backdrop:Hide()
 	end
@@ -89,11 +106,7 @@ local function updateStatus()
 			local activeID = C_ArtifactUI.GetArtifactInfo()
 			local equippedID = C_ArtifactUI.GetEquippedArtifactInfo()
 		
-			if frame:IsShown() and activeID == equippedID then
-				HideUIPanel(frame)
-			else
-				SocketInventoryItem(16)
-			end
+			if frame:IsShown() and activeID == equippedID then HideUIPanel(frame) else SocketInventoryItem(16) end
 		end
 	end)
 	
@@ -110,9 +123,11 @@ local function updateStatus()
 			GameTooltip:AddDoubleLine(L['artifactBar']['xpremaining'],string.format(' %s (%d%%)', D['ShortValue'](xpForNextPoint - xp), (xpForNextPoint - xp) / xpForNextPoint * 100), 1, 1, 1)
 			GameTooltip:AddDoubleLine(L['artifactBar']['bags'], string.format(' %s (%d%%)',D['ShortValue'](apInBags), apInBags / xpForNextPoint * 100), 1, 1, 1)
 			if (numPointsAvailableToSpend > 0) then
-				GameTooltip:AddLine('')
+				GameTooltip:AddLine(' ')
 				GameTooltip:AddLine(format(ARTIFACT_POWER_TOOLTIP_BODY, numPointsAvailableToSpend), nil, nil, nil, true)
 			end
+			GameTooltip:AddLine(' ')
+			GameTooltip:AddLine(L['artifactBar']['click'])
 		end
 		GameTooltip:Show()
 	end)
