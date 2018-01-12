@@ -108,7 +108,7 @@ if C["actionbar"]["enable"] then
 	end
 	DuffedUIBar2:SetSize((D["buttonsize"] * 12) + (D["buttonspacing"] * 13), (D["buttonsize"] * 1) + (D["buttonspacing"] * 2))
 	DuffedUIBar2:SetFrameStrata("BACKGROUND")
-	DuffedUIBar2:SetFrameLevel(3)
+	DuffedUIBar2:SetFrameLevel(1)
 	move:RegisterFrame(DuffedUIBar2)
 
 	if (not C["actionbar"]["LeftSideBarDisable"]) then
