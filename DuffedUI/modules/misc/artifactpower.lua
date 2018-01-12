@@ -19,7 +19,7 @@ move:RegisterFrame(backdrop)
 local artifactBar = CreateFrame('StatusBar',  'Experience_artifactBar', backdrop, 'TextStatusBar')
 artifactBar:SetWidth(barWidth)
 artifactBar:SetHeight(barHeight)
-artifactBar:SetPoint('TOP', backdrop,'TOP', 0, 0)
+artifactBar:SetPoint('TOP', backdrop, 'TOP', 0, 0)
 artifactBar:SetStatusBarTexture(barTex)
 artifactBar:SetStatusBarColor(157/255, 138/255, 108/255)
 artifactBar:SetFrameLevel(backdrop:GetFrameLevel() + 2)
@@ -27,7 +27,7 @@ artifactBar:SetFrameLevel(backdrop:GetFrameLevel() + 2)
 local artifactBarBag = CreateFrame('StatusBar',  'Experience_artifactBarBag', backdrop, 'TextStatusBar')
 artifactBarBag:SetWidth(barWidth)
 artifactBarBag:SetHeight(barHeight)
-artifactBarBag:SetPoint('TOP', backdrop,'TOP', 0, 0)
+artifactBarBag:SetPoint('TOP', backdrop, 'TOP', 0, 0)
 artifactBarBag:SetStatusBarTexture(barTex)
 artifactBarBag:SetStatusBarColor(color.r, color.g, color.b)
 artifactBarBag:SetFrameLevel(backdrop:GetFrameLevel() + 1)
@@ -35,7 +35,7 @@ artifactBarBag:SetFrameLevel(backdrop:GetFrameLevel() + 1)
 local ArtifactmouseFrame = CreateFrame('Frame', 'Artifact_mouseFrame', backdrop)
 ArtifactmouseFrame:SetAllPoints(backdrop)
 ArtifactmouseFrame:EnableMouse(true)
-ArtifactmouseFrame:SetFrameLevel(3)
+ArtifactmouseFrame:SetFrameLevel(backdrop:GetFrameLevel() + 3)
 
 local function GetKnowledgeLevelFromItemLink(itemLink)
 	local upgradeID = select(15, string.split(":", itemLink))
@@ -44,16 +44,13 @@ local function GetKnowledgeLevelFromItemLink(itemLink)
 end
 
 local apItemCache = {}
-
 local function GetAPForItem(itemLink)
-	--Return cached item if possible
 	if (apItemCache[itemLink] ~= nil) then return apItemCache[itemLink] end
 
 	if (LAP:DoesItemGrantArtifactPower(itemLink)) then
 		local knowledgeLevel = GetKnowledgeLevelFromItemLink(itemLink)
 		local apValue = LAP:GetArtifactPowerGrantedByItem(itemLink, knowledgeLevel)
 
-		--Cache item
 		apItemCache[itemLink] = apValue
 		return apValue
 	end
@@ -76,7 +73,7 @@ local function GetArtifactPowerInBags()
 	return BagArtifactPower
 end
 
-local function updateStatus()
+function updateStatus()
 	local hAE = HasArtifactEquipped()
 
 	if hAE then
@@ -124,7 +121,7 @@ local function updateStatus()
 			GameTooltip:AddDoubleLine(L['artifactBar']['bags'], string.format(' %s (%d%%)',D['ShortValue'](apInBags), apInBags / xpForNextPoint * 100), 1, 1, 1)
 			if (numPointsAvailableToSpend > 0) then
 				GameTooltip:AddLine(' ')
-				GameTooltip:AddLine(format(ARTIFACT_POWER_TOOLTIP_BODY, numPointsAvailableToSpend), nil, nil, nil, true)
+				GameTooltip:AddLine(string.format(ARTIFACT_POWER_TOOLTIP_BODY, numPointsAvailableToSpend), nil, nil, nil, true)
 			end
 			GameTooltip:AddLine(' ')
 			GameTooltip:AddLine(L['artifactBar']['click'])
