@@ -119,10 +119,6 @@ function updateStatus()
 			GameTooltip:AddDoubleLine(L['artifactBar']['xp'], string.format(' %s / %s (%d%%)', D['ShortValue'](xp), D['ShortValue'](xpForNextPoint), xp/xpForNextPoint * 100), 1, 1, 1)
 			GameTooltip:AddDoubleLine(L['artifactBar']['xpremaining'],string.format(' %s (%d%%)', D['ShortValue'](xpForNextPoint - xp), (xpForNextPoint - xp) / xpForNextPoint * 100), 1, 1, 1)
 			GameTooltip:AddDoubleLine(L['artifactBar']['bags'], string.format(' %s (%d%%)',D['ShortValue'](apInBags), apInBags / xpForNextPoint * 100), 1, 1, 1)
-			if (numPointsAvailableToSpend > 0) then
-				GameTooltip:AddLine(' ')
-				GameTooltip:AddLine(string.format(ARTIFACT_POWER_TOOLTIP_BODY, numPointsAvailableToSpend), nil, nil, nil, true)
-			end
 			GameTooltip:AddLine(' ')
 			GameTooltip:AddLine(L['artifactBar']['click'])
 		end
