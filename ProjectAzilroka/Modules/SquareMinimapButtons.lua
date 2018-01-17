@@ -540,6 +540,8 @@ function SMB:Initialize()
 
 	if PA.Tukui then
 		Tukui[1]['Movers']:RegisterFrame(self.Bar)
+	elseif PA.DuffedUI then
+		DuffedUI[1]['move']:RegisterFrame(self.Bar)
 	elseif PA.ElvUI then
 		ElvUI[1]:CreateMover(self.Bar, 'SquareMinimapButtonBarMover', 'SquareMinimapButtonBar Anchor', nil, nil, nil, 'ALL,GENERAL')
 	end
