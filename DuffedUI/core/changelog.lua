@@ -3,12 +3,12 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• Update for 7.4.5",
+		"• Update for 7.3.5",
 		"• Bugfixes",
 		--"• ",
 	" ",
 	"Notes:",
-		"Options for AddOnSkins are again available via the button Enhanced Config."
+		"Options for AddOnSkins are again available via the button Enhanced Config.",
 		"Options for additional modules, like elite dragons above target, can changed in Enhanced Config",
 		" ",
 		"Updates to the interface will be rarer in the near future, as I currently can not afford",
