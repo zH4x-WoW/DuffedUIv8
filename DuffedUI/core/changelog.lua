@@ -3,18 +3,13 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame("frame")
 local ChangeLogData = {
 	"Changes:",
-		"• New datatext QuickJoin added (@Rav99)",
-		"• Added debuffs for bosses in Antorus (@Rav99)",
-		"• Added detailed tooltip for artifact power",
-		"• Added visible indicator for artifact power in bags",
-		"• Update for AddOnSkins",
-		"• Added Project Azilroka",
-		"• Added LibArtifactPower-1.0",
+		"• Update for 7.4.5",
 		"• Bugfixes",
 		--"• ",
 	" ",
 	"Notes:",
-		"Options for AddOnSkins are again available via the button Enhanced Config.",
+		"Options for AddOnSkins are again available via the button Enhanced Config."
+		"Options for additional modules, like elite dragons above target, can changed in Enhanced Config",
 		" ",
 		"Updates to the interface will be rarer in the near future, as I currently can not afford",
 		"the time to provide timely updates.",
