@@ -795,8 +795,7 @@ function Bags:Enable()
 	self:RegisterEvent("BAG_CLOSED")
 	self:SetScript("OnEvent", self.OnEvent)
 
-	ToggleAllBags()
-	ToggleAllBags()
+	function ManageBackpackTokenFrame() end
 end
 
 Bags:RegisterEvent("ADDON_LOADED")
