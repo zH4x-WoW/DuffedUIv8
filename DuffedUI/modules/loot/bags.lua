@@ -795,8 +795,12 @@ function Bags:Enable()
 	self:RegisterEvent("BAG_CLOSED")
 	self:SetScript("OnEvent", self.OnEvent)
 
-	ToggleAllBags()
-	ToggleAllBags()
+	if D['Toc'] >= 25860 then
+		function ManageBackpackTokenFrame() end
+	else
+		ToggleAllBags()
+		ToggleAllBags()
+	end
 end
 
 Bags:RegisterEvent("ADDON_LOADED")
