@@ -58,8 +58,12 @@
 	DuffedUIConfigUILocalization.castbarcolor = "Wähle Farbe der Zauberleiste"
 	DuffedUIConfigUILocalization.castbarclasscolor = "Aktiviere Klassenfarben für die Zauberleiste"
 	DuffedUIConfigUILocalization.castbarcbticks = "Aktiviere Ticks für kanalisierte Zauber"
-	DuffedUIConfigUILocalization.castbarplayerwidth = "Setze Breite der SpielerZauberleiste"
+	DuffedUIConfigUILocalization.castbarplayerwidth = "Setze Breite der Spielerzauberleiste"
 	DuffedUIConfigUILocalization.castbartargetwidth = "Setze Breite der Zielzauberleiste"
+	DuffedUIConfigUILocalization.castbarplayerheight = "Setze Höhe der Spielerzauberleiste"
+	DuffedUIConfigUILocalization.castbartargetheight = "Setze Höhe der Zielzauberleiste"
+	DuffedUIConfigUILocalization.castbarcbiconwidth = "Setze Breit der Zauberleisten-Icons"
+	DuffedUIConfigUILocalization.castbarcbiconheight = "Setze Höhe der Zauberleisten-Icons"
 
 	--[[Nameplate]]--
 	DuffedUIConfigUILocalization.nameplate = "Namensplaketten"
@@ -69,6 +73,7 @@
 	DuffedUIConfigUILocalization.nameplatethreat = "Aktiviere erweitertete Aggroanzeige"
 	DuffedUIConfigUILocalization.nameplateclasscolor = "Aktiviere Anzeige für Klassenfarben bei den Namensplaketten"
 	DuffedUIConfigUILocalization.nameplateplatescale = "Wähle die Skalierung der Namensplaketten (default 1.5)"
+	DuffedUIConfigUILocalization.nameplatepDebuffs = "Aktiviere die Anzeige der Schwächungszauber"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"

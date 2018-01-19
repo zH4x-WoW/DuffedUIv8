@@ -308,7 +308,7 @@ D['ConstructUFTarget'] = function(self)
 	--[[Castbar]]--
 	if C['castbar']['enable'] then
 		local tcb = CreateFrame('Frame', 'TargetCastBarMover', UIParent)
-		tcb:Size(247, 10)
+		tcb:Size(247, C['castbar']['targetheight'])
 		tcb:Point('BOTTOM', UIParent, 'BOTTOM', 0, 265)
 		move:RegisterFrame(tcb)
 
@@ -316,7 +316,7 @@ D['ConstructUFTarget'] = function(self)
 		castbar:SetStatusBarTexture(texture)
 		castbar:SetStatusBarColor(unpack(C['castbar']['color']))
 		castbar:Width(C['castbar']['targetwidth'])
-		castbar:Height(10)
+		castbar:Height(C['castbar']['targetheight'])
 		castbar:Point('LEFT', TargetCastBarMover, 'LEFT', 0, 0)
 
 		castbar.CustomTimeText = D['CustomTimeText']
@@ -346,7 +346,7 @@ D['ConstructUFTarget'] = function(self)
 			castbar.button = CreateFrame('Frame', nil, castbar)
 			castbar.button:SetTemplate('Default')
 
-			castbar.button:Size(22, 14)
+			castbar.button:Size((C['castbar']['cbiconwidth'] - 3), C['castbar']['cbiconheight'])
 			castbar.button:Point('LEFT', castbar, 'RIGHT', 3, 0)
 			castbar.icon = castbar.button:CreateTexture(nil, 'ARTWORK')
 			castbar.icon:Point('TOPLEFT', castbar.button, 2, -2)

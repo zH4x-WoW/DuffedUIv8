@@ -292,7 +292,7 @@ D['ConstructUFPlayer'] = function(self)
 		local castbar = CreateFrame('StatusBar', self:GetName() .. 'CastBar', self)
 		castbar:SetStatusBarTexture(texture)
 		castbar:SetStatusBarColor(unpack(C['castbar']['color']))
-		castbar:Height(10)
+		castbar:Height(C['castbar']['playerheight'])
 		if C['castbar']['cbicons'] then castbar:Width(C['castbar']['playerwidth'] - 31) else castbar:Width(C['castbar']['playerwidth']) end
 		castbar:Point('RIGHT', PlayerCastBarMover, 'RIGHT', -2, 0)
 
@@ -317,7 +317,7 @@ D['ConstructUFPlayer'] = function(self)
 			castbar.button = CreateFrame('Frame', nil, castbar)
 			castbar.button:SetTemplate('Default')
 
-			castbar.button:Size(25, 14)
+			castbar.button:Size(C['castbar']['cbiconwidth'], C['castbar']['cbiconheight'])
 			castbar.button:Point('RIGHT', castbar, 'LEFT', -4, 0)
 			castbar.icon = castbar.button:CreateTexture(nil, 'ARTWORK')
 			castbar.icon:Point('TOPLEFT', castbar.button, 2, -2)
