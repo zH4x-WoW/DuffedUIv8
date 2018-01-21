@@ -285,7 +285,7 @@ D['ConstructUFPlayer'] = function(self)
 	--[[Castbar]]--
 	if C['castbar']['enable'] then
 		local pcb = CreateFrame('Frame', 'PlayerCastBarMover', UIParent)
-		pcb:Size(376, 10)
+		pcb:Size(C['castbar']['playerwidth'], C['castbar']['playerheight'])
 		if C['actionbar']['enable'] then pcb:Point('BOTTOM', DuffedUIBar1, 'TOP', 0, 5) else pcb:Point('BOTTOM', UIParent, 'BOTTOM', 0, 167) end
 		move:RegisterFrame(pcb)
 
@@ -293,7 +293,7 @@ D['ConstructUFPlayer'] = function(self)
 		castbar:SetStatusBarTexture(texture)
 		castbar:SetStatusBarColor(unpack(C['castbar']['color']))
 		castbar:Height(C['castbar']['playerheight'])
-		if C['castbar']['cbicons'] then castbar:Width(C['castbar']['playerwidth'] - 31) else castbar:Width(C['castbar']['playerwidth']) end
+		if C['castbar']['cbicons'] then castbar:Width(C['castbar']['playerwidth'] - (C['castbar']['cbiconwidth'] + 6)) else castbar:Width(C['castbar']['playerwidth']) end
 		castbar:Point('RIGHT', PlayerCastBarMover, 'RIGHT', -2, 0)
 
 		castbar.CustomTimeText = D['CustomTimeText']

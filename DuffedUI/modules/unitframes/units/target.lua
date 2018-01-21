@@ -308,7 +308,7 @@ D['ConstructUFTarget'] = function(self)
 	--[[Castbar]]--
 	if C['castbar']['enable'] then
 		local tcb = CreateFrame('Frame', 'TargetCastBarMover', UIParent)
-		tcb:Size(247, C['castbar']['targetheight'])
+		tcb:Size(C['castbar']['targetwidth'], C['castbar']['targetheight'])
 		tcb:Point('BOTTOM', UIParent, 'BOTTOM', 0, 265)
 		move:RegisterFrame(tcb)
 
