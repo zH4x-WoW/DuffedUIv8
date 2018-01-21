@@ -94,13 +94,13 @@ if C['actionbar']['enable'] then
 	move:RegisterFrame(DuffedUIBar1Mover)
 
 	local DuffedUIBar1 = CreateFrame('Frame', 'DuffedUIBar1', UIParent, 'SecureHandlerStateTemplate')
-	DuffedUIBar1:SetTemplate('Transparent')
+	if not C['actionbar']['hidepanels'] then DuffedUIBar1:SetTemplate('Transparent') end
 	DuffedUIBar1:SetAllPoints(DuffedUIBar1Mover)
 	DuffedUIBar1:SetFrameStrata('BACKGROUND')
 	DuffedUIBar1:SetFrameLevel(1)
 
 	local DuffedUIBar2 = CreateFrame('Frame', 'DuffedUIBar2', UIParent, 'SecureHandlerStateTemplate')
-	DuffedUIBar2:SetTemplate('Transparent')
+	if not C['actionbar']['hidepanels'] then DuffedUIBar2:SetTemplate('Transparent') end
 	if C['actionbar']['rightbarvertical'] then
 		DuffedUIBar2:Point('BOTTOM', icenter, 'TOP', 0, 49)
 	else
@@ -113,7 +113,7 @@ if C['actionbar']['enable'] then
 
 	if (not C['actionbar']['LeftSideBarDisable']) then
 		local DuffedUIBar3 = CreateFrame('Frame', 'DuffedUIBar3', UIParent, 'SecureHandlerStateTemplate')
-		DuffedUIBar3:SetTemplate('Transparent')
+		if not C['actionbar']['hidepanels'] then DuffedUIBar3:SetTemplate('Transparent') end
 		DuffedUIBar3:Point('BOTTOMLEFT', DuffedUIInfoLeft, 'BOTTOMRIGHT', 23, 0)
 		if C['actionbar']['LeftSideBar'] then
 			DuffedUIBar3:SetSize((D['buttonsize'] * 12) + (D['buttonspacing'] * 13), (D['buttonsize'] * 1) + (D['buttonspacing'] * 2))
@@ -127,7 +127,7 @@ if C['actionbar']['enable'] then
 
 	if (not C['actionbar']['RightSideBarDisable']) then
 		local DuffedUIBar4 = CreateFrame('Frame', 'DuffedUIBar4', UIParent, 'SecureHandlerStateTemplate')
-		DuffedUIBar4:SetTemplate('Transparent')
+		if not C['actionbar']['hidepanels'] then DuffedUIBar4:SetTemplate('Transparent') end
 		DuffedUIBar4:Point('BOTTOMRIGHT', DuffedUIInfoRight, 'BOTTOMLEFT', -23, 0)
 		if C['actionbar']['RightSideBar'] then
 			DuffedUIBar4:SetSize((D['buttonsize'] * 12) + (D['buttonspacing'] * 13), (D['buttonsize'] * 1) + (D['buttonspacing'] * 2))
@@ -141,7 +141,7 @@ if C['actionbar']['enable'] then
 
 	if (not C['actionbar']['rightbarDisable']) then
 		local DuffedUIBar5 = CreateFrame('Frame', 'DuffedUIBar5', UIParent, 'SecureHandlerStateTemplate')
-		DuffedUIBar5:SetTemplate('Transparent')
+		if not C['actionbar']['hidepanels'] then DuffedUIBar5:SetTemplate('Transparent') end
 		if C['actionbar']['rightbarvertical'] then
 			DuffedUIBar5:SetSize((D['buttonsize'] * 12) + (D['buttonspacing'] * 13), (D['buttonsize'] * 1) + (D['buttonspacing'] * 2))
 			DuffedUIBar5:Point('BOTTOM', icenter, 'TOP', 0, 2)
@@ -169,7 +169,7 @@ if C['actionbar']['enable'] then
 	move:RegisterFrame(DuffedUIPetBarMover)
 
 	local petbg = CreateFrame('Frame', 'DuffedUIPetBar', UIParent, 'SecureHandlerStateTemplate')
-	petbg:SetTemplate('Transparent')
+	if not C['actionbar']['hidepanels'] then petbg:SetTemplate('Transparent') end
 	petbg:SetAllPoints(DuffedUIPetBarMover)
 end
 
