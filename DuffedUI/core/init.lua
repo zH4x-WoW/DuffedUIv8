@@ -6,10 +6,10 @@ engine[4] = {}
 
 DuffedUI = engine
 
-ERR_NOT_IN_RAID = ""
+ERR_NOT_IN_RAID = ''
 
 DuffedUI [1].SetPerCharVariable = function(varName, value)
-	-- print("ATTENTION: SPCV called prior to VARIABLES_LOADED event")
+	-- print('ATTENTION: SPCV called prior to VARIABLES_LOADED event')
 	_G [varName] = value
 end
 
@@ -17,9 +17,9 @@ end
 --[[
 
 	The code below works around a issue of the WoD Beta Client 6.0.2 b18934
-	on OS X 10.10 where data stored in "SavedVariablesPerCharacter" variables
+	on OS X 10.10 where data stored in 'SavedVariablesPerCharacter' variables
 	is not reliably restored after exiting and reentering the game if the
-	player's name contains "umlauts".
+	player's name contains 'umlauts'.
 
 	The corresponding bug report can be found under:
 
@@ -31,16 +31,16 @@ end
 		/reload
 
 	The code can be removed once the client issue has been fixed. Only the
-	"SetPerCharVariable" part above should stay in for compatibility
+	'SetPerCharVariable' part above should stay in for compatibility
 	(otherwise all uses of the function must be replaced with an
 	assignment statement again).
 
 --]]
 
-local DuffedUIOnVarsLoaded = CreateFrame("Frame")
-DuffedUIOnVarsLoaded:RegisterEvent("VARIABLES_LOADED")
-DuffedUIOnVarsLoaded:SetScript("OnEvent", function(self, event)
-	self:UnregisterEvent("VARIABLES_LOADED")
+local DuffedUIOnVarsLoaded = CreateFrame('Frame')
+DuffedUIOnVarsLoaded:RegisterEvent('VARIABLES_LOADED')
+DuffedUIOnVarsLoaded:SetScript('OnEvent', function(self, event)
+	self:UnregisterEvent('VARIABLES_LOADED')
 
 	if DuffedUIData == nil then
 		-- probably the first load after installation of addon, assume that SVPC works
@@ -48,7 +48,7 @@ DuffedUIOnVarsLoaded:SetScript("OnEvent", function(self, event)
 	end
 
 	if DuffedUIData.usePerCharData then
-		local playerName = UnitName("player") .. "@" .. GetRealmName()
+		local playerName = UnitName('player') .. '@' .. GetRealmName()
 
 		if DuffedUIData.perCharData ~= nil and DuffedUIData.perCharData [playerName] ~= nil then
 			local pcd = DuffedUIData.perCharData [playerName]
