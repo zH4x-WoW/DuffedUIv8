@@ -28,7 +28,7 @@ local function OnHyperlinkLeave(frame, ...)
 	if orig2[frame] then return orig2[frame](frame, ...) end
 end
 
-function D['HyperlinkMouseover']()
+function D.HyperlinkMouseover()
 	local _G = getfenv(0)
 	for i=1, NUM_CHAT_WINDOWS do
 		if ( i ~= 2 ) then

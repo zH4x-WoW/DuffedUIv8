@@ -351,7 +351,7 @@ end
 
 local SetAnimation = function(self, handler, ...)
 	local Function = Functions[strlower(handler)]
-	if Function then Function(self, ...) else return print('Invalid 'SetAnimation' handler: ' .. handler) end
+	if Function then Function(self, ...) else return print("Invalid 'SetAnimation' handler: " .. handler) end
 end
 
 --[[Skinning]]--
