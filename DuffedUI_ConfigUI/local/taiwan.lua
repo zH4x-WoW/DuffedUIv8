@@ -213,9 +213,11 @@
 	DuffedUIConfigUILocalization.miscAFKCamera = "啟用暫離鏡頭效果"
 	DuffedUIConfigUILocalization.miscXPBar = "啟用經驗條"
 	DuffedUIConfigUILocalization.miscXPBarWidth = "設置經驗條寬度"
+	DuffedUIConfigUILocalization.miscXPBarWidth = "Set height of XP-Bar"
 	DuffedUIConfigUILocalization.miscmagemenu = "Enable Teleportmenu (works only on Mages)"
 	DuffedUIConfigUILocalization.miscartifact = "Enable Artifact XP-Bar"
 	DuffedUIConfigUILocalization.miscartifactwidth = "Set width of Artifact XP-Bar"
+	DuffedUIConfigUILocalization.miscartifactwidth = "Set height of Artifact XP-Bar"
 
 	--[[Duffed]]--
 	DuffedUIConfigUILocalization.duffed = "Duffed特色功能"

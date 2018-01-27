@@ -114,7 +114,11 @@ if C['actionbar']['enable'] then
 	if (not C['actionbar']['LeftSideBarDisable']) then
 		local DuffedUIBar3 = CreateFrame('Frame', 'DuffedUIBar3', UIParent, 'SecureHandlerStateTemplate')
 		if not C['actionbar']['hidepanels'] then DuffedUIBar3:SetTemplate('Transparent') end
-		DuffedUIBar3:Point('BOTTOMLEFT', DuffedUIInfoLeft, 'BOTTOMRIGHT', 23, 0)
+		if C['misc']['artifact'] then
+			DuffedUIBar3:Point('BOTTOMLEFT', DuffedUIInfoLeft, 'BOTTOMRIGHT', 36, 0)
+		else
+			DuffedUIBar3:Point('BOTTOMLEFT', DuffedUIInfoLeft, 'BOTTOMRIGHT', 23, 0)
+		end
 		if C['actionbar']['LeftSideBar'] then
 			DuffedUIBar3:SetSize((D['buttonsize'] * 12) + (D['buttonspacing'] * 13), (D['buttonsize'] * 1) + (D['buttonspacing'] * 2))
 		else
@@ -128,7 +132,11 @@ if C['actionbar']['enable'] then
 	if (not C['actionbar']['RightSideBarDisable']) then
 		local DuffedUIBar4 = CreateFrame('Frame', 'DuffedUIBar4', UIParent, 'SecureHandlerStateTemplate')
 		if not C['actionbar']['hidepanels'] then DuffedUIBar4:SetTemplate('Transparent') end
-		DuffedUIBar4:Point('BOTTOMRIGHT', DuffedUIInfoRight, 'BOTTOMLEFT', -23, 0)
+		if C['misc']['artifact'] then 
+			DuffedUIBar4:Point('BOTTOMRIGHT', DuffedUIInfoRight, 'BOTTOMLEFT', -36, 0)
+		else
+			DuffedUIBar4:Point('BOTTOMRIGHT', DuffedUIInfoRight, 'BOTTOMLEFT', -23, 0)
+		end
 		if C['actionbar']['RightSideBar'] then
 			DuffedUIBar4:SetSize((D['buttonsize'] * 12) + (D['buttonspacing'] * 13), (D['buttonsize'] * 1) + (D['buttonspacing'] * 2))
 		else

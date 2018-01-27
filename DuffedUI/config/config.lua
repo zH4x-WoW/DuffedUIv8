@@ -212,10 +212,12 @@ C['misc'] = {
 	['acm_screen'] = true,
 	['AFKCamera'] = true,
 	['XPBar'] = true,
-	['XPBarWidth'] = 378,
+	['XPBarWidth'] = 5,
+	['XPBarHeight'] = 166,
 	['magemenu'] = false,
 	['artifact'] = true,
-	['artifactwidth'] = 378,
+	['artifactwidth'] = 5,
+	['artifactheight'] = 166,
 }
 
 C['duffed'] = {

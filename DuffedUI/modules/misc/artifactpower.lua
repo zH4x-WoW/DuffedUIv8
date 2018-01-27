@@ -1,17 +1,17 @@
 local D, C, L = unpack(select(2, ...))
-if not C['misc'].artifact then return end
+if not C['misc']['artifact'] then return end
 
 local LAP = LibStub("LibArtifactPower-1.0")
-local barHeight, barWidth = 5, C['misc']['artifactwidth']
+local barHeight, barWidth = C['misc']['artifactheight'], C['misc']['artifactwidth']
 local barTex, flatTex = C['media']['normTex']
 local color = RAID_CLASS_COLORS[D.Class]
 local move = D['move']
 
 local backdrop = CreateFrame('Frame', 'Artifact_Backdrop', UIParent)
 backdrop:SetSize(barWidth, barHeight)
-backdrop:SetPoint('BOTTOMRIGHT', UIParent, 'BOTTOMRIGHT', -7, 178)
-backdrop:SetBackdropColor(C['general'].backdropcolor)
-backdrop:SetBackdropBorderColor(C['general'].backdropcolor)
+backdrop:SetPoint('BOTTOMRIGHT', UIParent, 'BOTTOMRIGHT', -392, 5)
+backdrop:SetBackdropColor(C['general']['backdropcolor'])
+backdrop:SetBackdropBorderColor(C['general']['backdropcolor'])
 backdrop:CreateBackdrop('Transparent')
 backdrop:SetFrameStrata('LOW')
 move:RegisterFrame(backdrop)
@@ -84,12 +84,15 @@ function updateStatus()
 		backdrop:Show()
 		artifactBar:SetMinMaxValues(min(0, xp), xpForNextPoint)
 		artifactBar:SetValue(xp)
+		artifactBar:SetOrientation('VERTICAL')
 		if (apInBags and apInBags > 0) then
 			artifactBarBag:SetMinMaxValues(0, xpForNextPoint)
 			artifactBarBag:SetValue(xp + apInBags)
+			artifactBarBag:SetOrientation('VERTICAL')
 		else
 			artifactBarBag:SetMinMaxValues(0, 1)
 			artifactBarBag:SetValue(0)
+			artifactBarBag:SetOrientation('VERTICAL')
 		end
 	else
 		backdrop:Hide()
