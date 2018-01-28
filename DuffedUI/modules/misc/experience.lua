@@ -75,6 +75,7 @@ local function updateStatus()
 	else
 		xpBar:SetMinMaxValues(min(0, XP), maxXP)
 		xpBar:SetValue(XP)
+		xpBar:SetOrientation('VERTICAL')
 
 		if restXP then
 			restedxpBar:Show()
@@ -82,6 +83,7 @@ local function updateStatus()
 			restedxpBar:SetStatusBarColor(r, g, b, .40)
 			restedxpBar:SetMinMaxValues(min(0, XP), maxXP)
 			restedxpBar:SetValue(XP + restXP)
+			restedxpBar:SetOrientation('VERTICAL')
 			icon:Show()
 		else
 			restedxpBar:Hide()
@@ -104,6 +106,7 @@ local function updateStatus()
 		local name, rank, minRep, maxRep, value = GetWatchedFactionInfo()
 		repBar:SetMinMaxValues(minRep, maxRep)
 		repBar:SetValue(value)
+		repBar:SetOrientation('VERTICAL')
 		repBar:SetStatusBarColor(unpack(FactionInfo[rank][1]))
 	end
 
@@ -112,17 +115,17 @@ local function updateStatus()
 		GameTooltip:ClearLines()
 		if not IsMaxLevel() then
 			GameTooltip:AddLine(L['xpbar']['xptitle'])
-			GameTooltip:AddLine(string.format(L['xpbar']['xp'], D.CommaValue(XP), D.CommaValue(maxXP), (XP / maxXP) * 100))
-			GameTooltip:AddLine(string.format(L['xpbar']['xpremaining'], D.CommaValue(maxXP - XP)))
-			if restXP then GameTooltip:AddLine(string.format(L['xpbar']['xprested'], D.CommaValue(restXP), restXP / maxXP * 100)) end
+			GameTooltip:AddLine(string.format(L['xpbar']['xp'], D['CommaValue'](XP), D['CommaValue'](maxXP), (XP / maxXP) * 100))
+			GameTooltip:AddLine(string.format(L['xpbar']['xpremaining'], D['CommaValue'](maxXP - XP)))
+			if restXP then GameTooltip:AddLine(string.format(L['xpbar']['xprested'], D['CommaValue'](restXP), restXP / maxXP * 100)) end
 		end
 		if GetWatchedFactionInfo() then
 			local name, rank, min, max, value = GetWatchedFactionInfo()
 			if not IsMaxLevel() then GameTooltip:AddLine(' ') end
 			GameTooltip:AddLine(string.format(L['xpbar']['fctitle'], name))
 			GameTooltip:AddLine(string.format(L['xpbar']['standing']..colorize(rank).. ' %s|r', FactionInfo[rank][2]))
-			GameTooltip:AddLine(string.format(L['xpbar']['fcrep'], D.CommaValue(value - min), D.CommaValue(max - min), (value - min)/(max - min) * 100))
-			GameTooltip:AddLine(string.format(L['xpbar']['fcremaining'], D.CommaValue(max - value)))
+			GameTooltip:AddLine(string.format(L['xpbar']['fcrep'], D['CommaValue'](value - min), D['CommaValue'](max - min), (value - min)/(max - min) * 100))
+			GameTooltip:AddLine(string.format(L['xpbar']['fcremaining'], D['CommaValue'](max - value)))
 		end
 		GameTooltip:Show()
 	end)
