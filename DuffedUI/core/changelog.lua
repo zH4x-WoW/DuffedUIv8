@@ -3,9 +3,10 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame('frame')
 local ChangeLogData = {
 	"Changes:",
-		"• Added option to adjust height of castbars",
-		"• Added mover for squaren minimap buttons",
-		"• Bugfixes",
+		"• Update for AddOnSkins",
+		"• Changed artifact und xpbar to vertical beside the chatbackgrounds",
+		"• Added options to change size of castbar",
+		"• Bugfixes & Codeoptimization",
 		--"• ",
 	" ",
 	"Notes:",
