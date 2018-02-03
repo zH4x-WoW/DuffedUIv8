@@ -723,6 +723,12 @@ spellCooldowns = {
 		['VoidElf'] = {
 			256948, -- Spatial Rift
 		},
+		['Nightborne'] = {
+			260364, -- Arcane Pulse
+		},
+		['HighmountainTauren'] = {
+			255654, -- Bull Rush
+		},
 	},
 	['PET'] = {
 		-- Warlock: Succubus
