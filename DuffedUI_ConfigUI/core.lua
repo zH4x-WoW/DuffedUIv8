@@ -675,7 +675,11 @@ do
 
 		local button = CreateFrame("BUTTON", "GameMenuDuffedUIButtonOptions", menu, "GameMenuButtonTemplate")
 		button:SetSize(continuex, continuey)
-		button:Point("TOP", interface, "BOTTOM", 0, -1)
+		if IsAddOnLoaded("ProjectAzilroka") then
+			button:Point("TOP", Enhanced_ConfigButton, "BOTTOM", 0, -1)
+		else
+			button:Point("TOP", interface, "BOTTOM", 0, -1)
+		end
 		button:SetText("DuffedUI")
 		if C["general"].blizzardreskin then button:SkinButton() end
 		button:SetScript("OnClick", function(self)

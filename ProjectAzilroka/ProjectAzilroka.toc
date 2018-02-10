@@ -1,0 +1,18 @@
+## Interface: 70300
+## Title: |cFF16C3F2Project|r|cFFFFFFFFAzilroka|r
+## Author: Azilroka
+## Version: 1.17
+## OptionalDeps: AddOnSkins, ElvUI, Tukui
+## SavedVariables: ProjectAzilrokaDB, SquareMinimapButtonsDB, MovableFramesDB, EnhancedFriendsListDB, EnhancedShadowsDB, DragonOverlayDB, stAddonManagerDB, stAddonManagerProfilesDB, BigButtonsDB
+
+Libs\Load_Libs.xml
+Locales\Load_Locales.xml
+
+Init.lua
+
+Modules\Enhanced_Config.lua
+
+LibElvUIPlugin-1.0.lua
+
+Media\Media.lua
+Modules\Load_Modules.xml

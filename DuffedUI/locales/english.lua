@@ -264,11 +264,10 @@ L["xpbar"] = {
 
 L["artifactBar"] = {
 	["xptitle"] = "Artifact Experience",
-	["currentxp"] = "Current Experience: %s",
-	["xp"] = "Experience: %s/%s (%d%%)",
-	["xpremaining"] = "Remaining: %s",
-	["traits"] = "Traits avaiable: %s",
+	["xp"] = "Experience:",
+	["xpremaining"] = "Remaining:",
 	["click"] = "Click: Shows Artifactoverview",
+	['bags'] = "In Bags:"
 }
 
 L["tooltip"] = {

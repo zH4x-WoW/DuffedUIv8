@@ -58,8 +58,12 @@
 	DuffedUIConfigUILocalization.castbarcolor = "Wähle Farbe der Zauberleiste"
 	DuffedUIConfigUILocalization.castbarclasscolor = "Aktiviere Klassenfarben für die Zauberleiste"
 	DuffedUIConfigUILocalization.castbarcbticks = "Aktiviere Ticks für kanalisierte Zauber"
-	DuffedUIConfigUILocalization.castbarplayerwidth = "Setze Breite der SpielerZauberleiste"
+	DuffedUIConfigUILocalization.castbarplayerwidth = "Setze Breite der Spielerzauberleiste"
 	DuffedUIConfigUILocalization.castbartargetwidth = "Setze Breite der Zielzauberleiste"
+	DuffedUIConfigUILocalization.castbarplayerheight = "Setze Höhe der Spielerzauberleiste"
+	DuffedUIConfigUILocalization.castbartargetheight = "Setze Höhe der Zielzauberleiste"
+	DuffedUIConfigUILocalization.castbarcbiconwidth = "Setze Breit der Zauberleisten-Icons"
+	DuffedUIConfigUILocalization.castbarcbiconheight = "Setze Höhe der Zauberleisten-Icons"
 
 	--[[Nameplate]]--
 	DuffedUIConfigUILocalization.nameplate = "Namensplaketten"
@@ -69,6 +73,7 @@
 	DuffedUIConfigUILocalization.nameplatethreat = "Aktiviere erweitertete Aggroanzeige"
 	DuffedUIConfigUILocalization.nameplateclasscolor = "Aktiviere Anzeige für Klassenfarben bei den Namensplaketten"
 	DuffedUIConfigUILocalization.nameplateplatescale = "Wähle die Skalierung der Namensplaketten (default 1.5)"
+	DuffedUIConfigUILocalization.nameplatepDebuffs = "Aktiviere die Anzeige der Schwächungszauber"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"
@@ -94,6 +99,7 @@
 	DuffedUIConfigUILocalization.actionbarLeftSideBarDisable = "Deaktiviere die linke Sidebar"
 	DuffedUIConfigUILocalization.actionbarRightSideBarDisable = "Deaktiviere die rechte Sidebar"
 	DuffedUIConfigUILocalization.actionbarrightbarDisable = "Deaktiviere Leiste auf der rechten Seite"
+	DuffedUIConfigUILocalization.actionbarhidepanels = "Deaktiviere die Hintergrundpanels der Aktionsleisten"
 
 	--[[Raid Frames]]--
 	DuffedUIConfigUILocalization.raid = "Schlachtzugfenster"
@@ -209,9 +215,11 @@
 	DuffedUIConfigUILocalization.miscAFKCamera = "Aktiviere die AFK Kamera"
 	DuffedUIConfigUILocalization.miscXPBar = "Aktiviere XP-Leiste"
 	DuffedUIConfigUILocalization.miscXPBarWidth = "Stelle Breite der XP-Leiste ein"
+	DuffedUIConfigUILocalization.miscXPBarWidth = "Stelle Höhe der XP-Leiste ein"
 	DuffedUIConfigUILocalization.miscmagemenu = "Aktiviere Teleportmenu (funktioniert nur bei Magiern)"
 	DuffedUIConfigUILocalization.miscartifact = "Aktiviere Artefakt XP-Leiste"
 	DuffedUIConfigUILocalization.miscartifactwidth = "Stelle Breite der Artefakt XP-Leiste ein"
+	DuffedUIConfigUILocalization.miscartifactwidth = "Stelle Höhe der Artefakt XP-Leiste ein"
 
 	--[[Duffed]]--
 	DuffedUIConfigUILocalization.duffed = "Duffed"

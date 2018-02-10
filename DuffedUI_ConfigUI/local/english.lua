@@ -61,6 +61,10 @@ DuffedUIConfigUILocalization.castbarclasscolor = "Enable classcolor for castbar"
 DuffedUIConfigUILocalization.castbarcbticks = "Enable castbar ticks for channeled casts."
 DuffedUIConfigUILocalization.castbarplayerwidth = "Set width of player castbar"
 DuffedUIConfigUILocalization.castbartargetwidth = "Set width of target castbar"
+DuffedUIConfigUILocalization.castbarplayerheight = "Set height of player castbar"
+DuffedUIConfigUILocalization.castbartargetheight = "Set height of target castbar"
+DuffedUIConfigUILocalization.castbarcbiconwidth = "Set width of castbar icons"
+DuffedUIConfigUILocalization.castbarcbiconheight = "Set height of castbar icons"
 
 --[[Nameplate]]--
 DuffedUIConfigUILocalization.nameplate = "Nameplates"
@@ -70,6 +74,7 @@ DuffedUIConfigUILocalization.nameplateplateheight = "Set height of nameplates (d
 DuffedUIConfigUILocalization.nameplatethreat = "Enable Enhanced Threat"
 DuffedUIConfigUILocalization.nameplateclasscolor = "Enable classcolor-display on nameplates"
 DuffedUIConfigUILocalization.nameplateplatescale = "Set scale of nameplates (default 1.5)"
+DuffedUIConfigUILocalization.nameplatepDebuffs = "Enable display of debuffs on nameplates"
 
 --[[Actionbars]]--
 DuffedUIConfigUILocalization.actionbar = "Action Bars"
@@ -95,6 +100,7 @@ DuffedUIConfigUILocalization.actionbarRightSideBar = "Set right side actionbar h
 DuffedUIConfigUILocalization.actionbarLeftSideBarDisable = "Disable left side actionbar"
 DuffedUIConfigUILocalization.actionbarRightSideBarDisable = "Disable right side actionbar"
 DuffedUIConfigUILocalization.actionbarrightbarDisable = "Disable bar on the right side"
+DuffedUIConfigUILocalization.actionbarhidepanels = "Hide panels of actionbars"
 
 --[[Raid Frames]]--
 DuffedUIConfigUILocalization.raid = "Raid Frames"
@@ -209,9 +215,11 @@ DuffedUIConfigUILocalization.miscacm_screen = "Enable automatic Achievment scree
 DuffedUIConfigUILocalization.miscAFKCamera = "Enable AFKCamera"
 DuffedUIConfigUILocalization.miscXPBar = "Enable XP-Bar"
 DuffedUIConfigUILocalization.miscXPBarWidth = "Set width of XP-Bar"
+DuffedUIConfigUILocalization.miscXPBarWidth = "Set height of XP-Bar"
 DuffedUIConfigUILocalization.miscmagemenu = "Enable Teleport menu (works only on Mages)"
 DuffedUIConfigUILocalization.miscartifact = "Enable Artifact XP-Bar"
 DuffedUIConfigUILocalization.miscartifactwidth = "Set width of Artifact XP-Bar"
+DuffedUIConfigUILocalization.miscartifactwidth = "Set height of Artifact XP-Bar"
 
 --[[Duffed]]--
 DuffedUIConfigUILocalization.duffed = "Duffed"

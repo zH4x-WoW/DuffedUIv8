@@ -1,9 +1,9 @@
 local D, C, L = unpack(select(2, ...))
 
-local myPlayerRealm = D.MyRealm
-local myPlayerName  = UnitName("player")
+local myPlayerRealm = D['MyRealm']
+local myPlayerName  = UnitName('player')
 
-if not IsAddOnLoaded("DuffedUI_ConfigUI") then return end
+if not IsAddOnLoaded('DuffedUI_ConfigUI') then return end
 if not DuffedUIConfigAll then DuffedUIConfigAll = {} end
 
 local tca = DuffedUIConfigAll

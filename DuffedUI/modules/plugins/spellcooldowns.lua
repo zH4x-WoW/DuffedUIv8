@@ -1,18 +1,18 @@
 local D, C, L = unpack(select(2, ...))
-if C["cooldown"]["scdenable"] ~= true then return end
+if C['cooldown']['scdenable'] ~= true then return end
 
-local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
-local texture = C["media"]["normTex"]
-local size = D.Scale(C["cooldown"]["scdsize"])
-local spacing = D.Scale(C["cooldown"]["scdspacing"])
+local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
+local texture = C['media']['normTex']
+local size = D['Scale'](C['cooldown']['scdsize'])
+local spacing = D['Scale'](C['cooldown']['scdspacing'])
 local color = {1, 1, 0, 1}
-local fade = C["cooldown"]["scdfade"]
-local mode = "HIDE"
+local fade = C['cooldown']['scdfade']
+local mode = 'HIDE'
 
-if D["Class"] == "WARRIOR" or D["Class"] == "HUNTER" or D["Class"] == "DEATHKNIGHT" or D["Class"] == "ROGUE" then mode = "HIDE" end
+if D['Class'] == 'WARRIOR' or D['Class'] == 'HUNTER' or D['Class'] == 'DEATHKNIGHT' or D['Class'] == 'ROGUE' then mode = 'HIDE' end
 
 spellCooldowns = {
-	["DEATHKNIGHT"] = {
+	['DEATHKNIGHT'] = {
 		-- Global
 		47528, -- Mind Freeze
 		48707, -- Anti-Magic Shell
@@ -68,7 +68,7 @@ spellCooldowns = {
 		204160, -- Chill Streak
 		208683, -- Gladiators Medallion
 	},
-	["DEMONHUNTER"] = {
+	['DEMONHUNTER'] = {
 		-- Global
 		183752, -- Consume Magic
 		188501, -- Spectral Sight
@@ -114,7 +114,7 @@ spellCooldowns = {
 		206803, -- Rain from Above
 		208683, -- Gladiators Medallion
 	},
-	["DRUID"] = {
+	['DRUID'] = {
 		-- Global
 		1850, -- Dash
 		5211, -- Mighty Bash
@@ -180,7 +180,7 @@ spellCooldowns = {
 		208683, -- Gladiators Medallion
 		209749, -- Faerie Swarm
   	},
-	["HUNTER"] = {
+	['HUNTER'] = {
 		-- Global
 		1543, -- Flare
 		5384, -- Feign Death
@@ -246,7 +246,7 @@ spellCooldowns = {
 		212640, -- Mending Bandage
 		213691, -- Scatter Shot
 	},
-	["MAGE"] = {
+	['MAGE'] = {
 		-- Global
 		122, -- Frost Nova
 		1953, -- Blink
@@ -300,7 +300,7 @@ spellCooldowns = {
 		198158, -- Mass Invisibility
 		208683, -- Gladiators Medallion
 	},
-	["MONK"] = {
+	['MONK'] = {
 		-- Global
 		101643, -- Transcendence
 		109132, -- Roll
@@ -358,7 +358,7 @@ spellCooldowns = {
 		213658, -- Craft: Nimble Brew
 		216113, -- Way of the Crane
 	},
-	["PALADIN"] = {
+	['PALADIN'] = {
 		-- Global
 		633, -- Lay on Hands
 		642, -- Divine Shield
@@ -414,7 +414,7 @@ spellCooldowns = {
 		215652, -- Shield of Virtue
 		216331, -- Avenging Crusader
 	},
-	["PRIEST"] = {
+	['PRIEST'] = {
 		-- Global
 		586, -- Fade
 		32375, -- Mass Dispel
@@ -475,7 +475,7 @@ spellCooldowns = {
 		213602, -- Greater Fade
 		213610, -- Holy Ward
 	},
-	["ROGUE"] = {
+	['ROGUE'] = {
 		-- Global
 		1725, -- Distract
 		1766, -- Kick
@@ -520,7 +520,7 @@ spellCooldowns = {
 		212182, -- Smoke Bomb
 		213981, -- Cold Blood
 	},
-	["SHAMAN"] = {
+	['SHAMAN'] = {
 		-- Global
 		556, -- Astral Recall
 		32182, -- Heroism
@@ -581,7 +581,7 @@ spellCooldowns = {
 		208683, -- Gladiators Medallion
 		210918, -- Ethereal Form
 	},
-	["WARLOCK"] = {
+	['WARLOCK'] = {
 		-- Global
 		698, -- Ritual of Summoning
 		1122, -- Summon Infernal & Summon Doomguard
@@ -619,7 +619,7 @@ spellCooldowns = {
 		212284, -- Firestone
 		212295, -- Nether Ward
 	},
-	["WARRIOR"] = {
+	['WARRIOR'] = {
 		-- Global
 		1719, -- Battle Cry
 		6544, -- Heroic Leap
@@ -661,13 +661,13 @@ spellCooldowns = {
 		213915, -- Mass Spell Reflection
 		216890, -- Spell Reflection
 	},
-	["RACE"] = {
-		["Orc"] = {
+	['RACE'] = {
+		['Orc'] = {
 			33697, -- Blood Fury (Monk, Shaman)
 			33702, -- Blood Fury (Mage, Warlock)
 			20572, -- Blood Fury (Death Knight, Hunter, Rogue, Warrior)
 		},
-		["BloodElf"] = {
+		['BloodElf'] = {
 			25046, -- Arcane Torrent (Rogue)
 			28730, -- Arcane Torrent (Mage, Paladin, Priest, Warlock)
 			50163, -- Arcane Torrent (Death Knight)
@@ -676,20 +676,20 @@ spellCooldowns = {
 			129597, -- Arcane Torrent (Monk)
 			202719, -- Arcane Torrent (Demon Hunter)
 		},
-		["Scourge"] = {		
+		['Scourge'] = {		
 			20577, -- Cannibalize
 			7744, -- Will of the Forsaken
 		},
-		["Tauren"] = {
+		['Tauren'] = {
 			20549, -- War Stomp
 		},
-		["Troll"] = {
+		['Troll'] = {
 			26297, -- Berserking
 		},
-		["Goblin"] = {
+		['Goblin'] = {
 			69070, -- Rocket Jump & Rocket Barrage
 		},
-		["Draenei"] = {
+		['Draenei'] = {
 			28880, -- Gift of the Naaru (Warrior)
 			59542, -- Gift of the Naaru (Paladin)
 			59543, -- Gift of the Naaru (Hunter)
@@ -699,26 +699,38 @@ spellCooldowns = {
 			59548, -- Gift of the Naaru (Mage)
 			121093, -- Gift of the Naaru (Monk)
 		},
-		["Dwarf"] = {
+		['Dwarf'] = {
 			20594, -- Stoneform
 		},
-		["Gnome"] = {
+		['Gnome'] = {
 			20589, -- Escape Artist
 		},
-		["Human"] = {
+		['Human'] = {
 			59752, -- Every Man for Himself
 		},
-		["NightElf"] = {
+		['NightElf'] = {
 			58984, -- Shadowmeld
 		},		
-		["Worgen"] = {
+		['Worgen'] = {
 			68992, -- Darkflight
 		},
-		["Pandaren"] = {
+		['Pandaren'] = {
 			107079, -- Quaking Palm
-		}
+		},
+		['LightforgedDraenei'] = {
+			255647, -- Light's Judgement
+		},
+		['VoidElf'] = {
+			256948, -- Spatial Rift
+		},
+		['Nightborne'] = {
+			260364, -- Arcane Pulse
+		},
+		['HighmountainTauren'] = {
+			255654, -- Bull Rush
+		},
 	},
-	["PET"] = {
+	['PET'] = {
 		-- Warlock: Succubus
 		6358, -- Seduction
 		6360, -- Whisplash
@@ -759,20 +771,20 @@ local GetTime = GetTime
 local pairs = pairs
 local xSpacing, ySpacing = spacing, 0
 local width, height = size, size
-local anchorPoint = "TOPRIGHT"
+local anchorPoint = 'TOPRIGHT'
 local onUpdate
-local move = D["move"]
+local move = D['move']
 
-local scfa = CreateFrame("Frame", "SpellCooldownsMover", UIParent)
+local scfa = CreateFrame('Frame', 'SpellCooldownsMover', UIParent)
 scfa:Size(120, 17)
-scfa:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 335)
+scfa:SetPoint('BOTTOM', UIParent, 'BOTTOM', 0, 335)
 move:RegisterFrame(scfa)
 
-local SpellCooldownFrame = CreateFrame("Frame", "DuffedUISpellCooldowns", UIParent)
-SpellCooldownFrame:SetFrameStrata("BACKGROUND")
+local SpellCooldownFrame = CreateFrame('Frame', 'DuffedUISpellCooldowns', UIParent)
+SpellCooldownFrame:SetFrameStrata('BACKGROUND')
 SpellCooldownFrame:SetHeight(height)
 SpellCooldownFrame:SetWidth(width)
-SpellCooldownFrame:SetPoint("CENTER", scfa, 0, 0)
+SpellCooldownFrame:SetPoint('CENTER', scfa, 0, 0)
 
 local function enableCooldown(self)
 	self.enabled = true
@@ -781,9 +793,9 @@ local function enableCooldown(self)
 		self.DurationText:Show()
 	end
 	if self.Cooldown then self.Cooldown:Show() end
-	self:SetScript("OnUpdate", onUpdate)
+	self:SetScript('OnUpdate', onUpdate)
 	onUpdate(self, 1)
-	if mode == "HIDE" then
+	if mode == 'HIDE' then
 		self:Show()
 	else
 		self.Icon:SetVertexColor(1, 1, 1, 1)
@@ -793,7 +805,7 @@ end
 
 local function disableCooldown(self)
 	self.enabled = false
-	if mode == "HIDE" then
+	if mode == 'HIDE' then
 		self:Hide()
 	else
 		self.Icon:SetVertexColor(1, 1, 1, .15)
@@ -801,10 +813,10 @@ local function disableCooldown(self)
 	end
 	if self.StatusBar then
 		self.StatusBar:Hide()
-		self.DurationText:SetText("")
+		self.DurationText:SetText('')
 	end
 	if self.Cooldown then self.Cooldown:Hide() end
-	self:SetScript("OnUpdate", nil)
+	self:SetScript('OnUpdate', nil)
 end
 
 local function positionHide()
@@ -813,18 +825,18 @@ local function positionHide()
 	for k,v in pairs(frames) do
 		local frame = frames[k]
 
-		if GetSpellTexture(GetSpellInfo(frame.spell)) or D["Class"] == "PRIEST"then
+		if GetSpellTexture(GetSpellInfo(frame.spell)) or D['Class'] == 'PRIEST'then
 			local start, duration = GetSpellCooldown(frame.spell)
 			frame.start = start
 			frame.duration = duration
 			if duration and duration > 1.5 then
-				if D["Class"] == "PRIEST" and frame.spell == 2050 or frame.spell == 34861 or frame.spell == 88625 then 
+				if D['Class'] == 'PRIEST' and frame.spell == 2050 or frame.spell == 34861 or frame.spell == 88625 then 
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(88625)))
 				else
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(frame.spell)))
 				end
 				frame:ClearAllPoints()
-				if index == 0 then frame:SetPoint("TOPLEFT", lastFrame, "TOPLEFT", xSpacing, ySpacing) else frame:SetPoint("TOPLEFT", lastFrame, anchorPoint, xSpacing, ySpacing) end
+				if index == 0 then frame:SetPoint('TOPLEFT', lastFrame, 'TOPLEFT', xSpacing, ySpacing) else frame:SetPoint('TOPLEFT', lastFrame, anchorPoint, xSpacing, ySpacing) end
 				if not frame.disabled then enableCooldown(frame) end
 				lastFrame = frame
 				index = index + 1
@@ -842,12 +854,12 @@ local function positionDim()
 	for k,v in pairs(frames) do
 		local frame = frames[k]
 
-		if GetSpellTexture(GetSpellInfo(frame.spell)) or D["Class"] == "PRIEST" then
+		if GetSpellTexture(GetSpellInfo(frame.spell)) or D['Class'] == 'PRIEST' then
 			local start, duration, enable = GetSpellCooldown(frame.spell)
 			frame.start = start
 			frame.duration = duration
 			if duration and duration > 1.5 then
-				if D["Class"] == "PRIEST" and frame.spell == 2050 or frame.spell == 34861 or frame.spell == 88625 then 
+				if D['Class'] == 'PRIEST' and frame.spell == 2050 or frame.spell == 34861 or frame.spell == 88625 then 
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(88625)))
 				else
 					frame.Icon:SetTexture(GetSpellTexture(GetSpellInfo(frame.spell)))
@@ -857,7 +869,7 @@ local function positionDim()
 				if frame.enabled then disableCooldown(frame) end
 			end
 		end
-		if (index == 0) then frame:SetPoint("TOPLEFT", lastFrame, "TOPLEFT", xSpacing, ySpacing) else frame:SetPoint("TOPLEFT", lastFrame, anchorPoint, xSpacing, ySpacing) end
+		if (index == 0) then frame:SetPoint('TOPLEFT', lastFrame, 'TOPLEFT', xSpacing, ySpacing) else frame:SetPoint('TOPLEFT', lastFrame, anchorPoint, xSpacing, ySpacing) end
 		lastFrame = frame
 		index = index + 1
 	end
@@ -866,39 +878,39 @@ end
 
 
 local function position()
-	if mode == "HIDE" then positionHide() else positionDim() end
+	if mode == 'HIDE' then positionHide() else positionDim() end
 end
 
 --[[Frames]]--
 local function createCooldownFrame(spell)
-	local frame = CreateFrame("Frame", nil, UIParent)
+	local frame = CreateFrame('Frame', nil, UIParent)
 	frame:SetHeight(width)
 	frame:SetWidth(width)
-	frame:SetFrameStrata("MEDIUM")
+	frame:SetFrameStrata('MEDIUM')
 
 	local icon = frame:CreateTexture()
 	local spellInfo = GetSpellInfo(spell)
 	if not spellInfo then return nil end
 	local texture = GetSpellTexture(spellInfo)
 	icon:SetAllPoints(frame)
-	if D["Class"] == "PRIEST" and spell == 2050 or spell == 34861 or spell == 88625 then texture = GetSpellTexture(GetSpellInfo(88625)) end
+	if D['Class'] == 'PRIEST' and spell == 2050 or spell == 34861 or spell == 88625 then texture = GetSpellTexture(GetSpellInfo(88625)) end
 	if not texture then return nil end
 	icon:SetTexture(texture)
-	icon:SetTexCoord(unpack(D["IconCoord"]))
+	icon:SetTexCoord(unpack(D['IconCoord']))
 	frame.Icon = icon
 
-	local durationText = frame:CreateFontString(nil, "OVERLAY")
+	local durationText = frame:CreateFontString(nil, 'OVERLAY')
 	durationText:SetFont(f, fs, ff)
 	durationText:SetTextColor(unpack(color))
-	durationText:SetText("")
-	durationText:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 2, 2)
+	durationText:SetText('')
+	durationText:SetPoint('BOTTOMLEFT', frame, 'BOTTOMLEFT', 2, 2)
 	frame.DurationText = durationText
 
-	local statusBar = CreateFrame("StatusBar", nil, frame, "TextStatusBar")
+	local statusBar = CreateFrame('StatusBar', nil, frame, 'TextStatusBar')
 	statusBar:Size(width, 4)
 	statusBar:SetStatusBarTexture(texture)
 	statusBar:SetStatusBarColor(.77, .12, .23)
-	statusBar:SetPoint("TOP", frame,"TOP", 0, 0)
+	statusBar:SetPoint('TOP', frame,'TOP', 0, 0)
 	statusBar:SetMinMaxValues(0, 1)
 	statusBar:SetFrameLevel(frame:GetFrameLevel() + 3)
 	frame.StatusBar = statusBar
@@ -913,24 +925,24 @@ local function createCooldownFrame(spell)
 end
 
 local function OnEvent(self, event, arg1)
-	if event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_TALENT_UPDATE" then	
+	if event == 'PLAYER_ENTERING_WORLD' or event == 'PLAYER_TALENT_UPDATE' then	
 		for k, v in pairs(spells) do
 			if GetSpellInfo(v) then frames[v] = frames[v] or createCooldownFrame(spells[k]) else frames[v] = createCooldownFrame(spells[k]) end
 		end
 		position()
 	end
 
-	if event == "SPELL_UPDATE_COOLDOWN" then position() end
+	if event == 'SPELL_UPDATE_COOLDOWN' then position() end
 end
 
-spells = spellCooldowns[select(2, UnitClass("player"))]
+spells = spellCooldowns[select(2, UnitClass('player'))]
 
-local race = spellCooldowns["RACE"]
-for i = 1, table.getn(race[select(2, UnitRace("player"))]) do table.insert(spells, race[select(2, UnitRace("player"))][i]) end
+local race = spellCooldowns['RACE']
+for i = 1, table.getn(race[select(2, UnitRace('player'))]) do table.insert(spells, race[select(2, UnitRace('player'))][i]) end
 
-local _, pra = UnitRace("player")
-if D["Class"] == "WARLOCK" or D["Class"] == "HUNTER" then
-	for i = 1, table.getn(spellCooldowns["PET"]) do table.insert(spells, spellCooldowns["PET"][i]) end
+local _, pra = UnitRace('player')
+if D['Class'] == 'WARLOCK' or D['Class'] == 'HUNTER' then
+	for i = 1, table.getn(spellCooldowns['PET']) do table.insert(spells, spellCooldowns['PET'][i]) end
 end
 
 onUpdate = function (self, elapsed)
@@ -958,7 +970,7 @@ onUpdate = function (self, elapsed)
 	end
 end
 
-SpellCooldownFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
-SpellCooldownFrame:RegisterEvent("SPELL_UPDATE_COOLDOWN")
-SpellCooldownFrame:RegisterEvent("PLAYER_TALENT_UPDATE")
-SpellCooldownFrame:SetScript("OnEvent", OnEvent)
+SpellCooldownFrame:RegisterEvent('PLAYER_ENTERING_WORLD')
+SpellCooldownFrame:RegisterEvent('SPELL_UPDATE_COOLDOWN')
+SpellCooldownFrame:RegisterEvent('PLAYER_TALENT_UPDATE')
+SpellCooldownFrame:SetScript('OnEvent', OnEvent)

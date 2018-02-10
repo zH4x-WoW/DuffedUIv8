@@ -1,8 +1,8 @@
 local D, C, L = unpack(select(2, ...))
 
-local Move = CreateFrame("Frame")
-Move:RegisterEvent("PLAYER_ENTERING_WORLD")
-Move:RegisterEvent("PLAYER_REGEN_DISABLED")
+local Move = CreateFrame('Frame')
+Move:RegisterEvent('PLAYER_ENTERING_WORLD')
+Move:RegisterEvent('PLAYER_REGEN_DISABLED')
 
 Move.Frames = {}
 Move.Defaults = {}
@@ -22,7 +22,7 @@ function Move:RestoreDefaults(button)
 	local Data = Move.Defaults[FrameName]
 	local SavedVariables = DuffedUIDataPerChar.Move
 
-	if (button == "RightButton") and (Data) then
+	if (button == 'RightButton') and (Data) then
 		local Anchor1, ParentName, Anchor2, X, Y = unpack(Data)
 		local Frame = _G[FrameName]
 		local Parent = _G[ParentName]
@@ -62,20 +62,20 @@ function Move:OnDragStop()
 end
 
 function Move:CreateDragInfo()
-	self.DragInfo = CreateFrame("Button", nil, self)
+	self.DragInfo = CreateFrame('Button', nil, self)
 	self.DragInfo:SetAllPoints(self)
-	self.DragInfo:SetTemplate("Transparent")
+	self.DragInfo:SetTemplate('Transparent')
 	self.DragInfo:SetBackdropBorderColor(1, 0, 0)
-	self.DragInfo:FontString("Text", C["media"]["font"], 11)
+	self.DragInfo:FontString('Text', C['media']['font'], 11)
 	self.DragInfo.Text:SetText(self:GetName())
-	self.DragInfo.Text:SetPoint("CENTER")
+	self.DragInfo.Text:SetPoint('CENTER')
 	self.DragInfo:SetFrameLevel(100)
-	self.DragInfo:SetFrameStrata("HIGH")
+	self.DragInfo:SetFrameStrata('HIGH')
 	self.DragInfo:SetMovable(true)
 	self.DragInfo:SetClampedToScreen(true)
-	self.DragInfo:RegisterForDrag("LeftButton")
+	self.DragInfo:RegisterForDrag('LeftButton')
 	self.DragInfo:Hide()
-	self.DragInfo:SetScript("OnMouseUp", Move.RestoreDefaults)
+	self.DragInfo:SetScript('OnMouseUp', Move.RestoreDefaults)
 
 	self.DragInfo.Parent = self.DragInfo:GetParent()
 end
@@ -83,26 +83,26 @@ end
 local enable = true
 local gridsize = function()
 	local defsize = 8
-	local w = D["ScreenWidth"]
-	local h = D["ScreenHeight"]
+	local w = D['ScreenWidth']
+	local h = D['ScreenHeight']
 	local x = tonumber(gridsize) or defsize
 
 	function Grid()
-		ali = CreateFrame("Frame", nil, UIParent)
+		ali = CreateFrame('Frame', nil, UIParent)
 		ali:SetFrameLevel(0)
-		ali:SetFrameStrata("BACKGROUND")
+		ali:SetFrameStrata('BACKGROUND')
 
 		for i = - (w / x / 2), w / x / 2 do
-			local aliv = ali:CreateTexture(nil, "BACKGROUND")
+			local aliv = ali:CreateTexture(nil, 'BACKGROUND')
 			aliv:SetColorTexture(.3, 0, 0, .7)
-			aliv:Point("CENTER", UIParent, "CENTER", i * x, 0)
+			aliv:Point('CENTER', UIParent, 'CENTER', i * x, 0)
 			aliv:SetSize(1, h)
 		end
 
 		for i = - (h / x / 2), h / x / 2 do
-			local alih = ali:CreateTexture(nil, "BACKGROUND")
+			local alih = ali:CreateTexture(nil, 'BACKGROUND')
 			alih:SetColorTexture(.3, 0, 0, .7)
-			alih:Point("CENTER", UIParent, "CENTER", 0, i * x)
+			alih:Point('CENTER', UIParent, 'CENTER', 0, i * x)
 			alih:SetSize(w, 1)
 		end
 	end
@@ -137,35 +137,35 @@ function Move:StartOrStopMoving()
 
 			if Frame.unit then
 				Frame.oldunit = Frame.unit
-				Frame.unit = "player"
-				Frame:SetAttribute("unit", "player")
+				Frame.unit = 'player'
+				Frame:SetAttribute('unit', 'player')
 			end
 
-			Frame.DragInfo:SetScript("OnDragStart", self.OnDragStart)
-			Frame.DragInfo:SetScript("OnDragStop", self.OnDragStop)
+			Frame.DragInfo:SetScript('OnDragStart', self.OnDragStart)
+			Frame.DragInfo:SetScript('OnDragStop', self.OnDragStop)
 			Frame.DragInfo:SetParent(UIParent)
 			Frame.DragInfo:Show()
 
 			if Frame.DragInfo:GetFrameLevel() ~= 100 then Frame.DragInfo:SetFrameLevel(100) end
-			if Frame.DragInfo:GetFrameStrata() ~= "HIGH" then Frame.DragInfo:SetFrameStrata("HIGH") end
+			if Frame.DragInfo:GetFrameStrata() ~= 'HIGH' then Frame.DragInfo:SetFrameStrata('HIGH') end
 
 			if Frame.DragInfo:GetHeight() < 15 then
 				Frame.DragInfo:ClearAllPoints()
 				Frame.DragInfo:SetWidth(Frame:GetWidth())
 				Frame.DragInfo:SetHeight(23)
-				Frame.DragInfo:SetPoint("TOP", Frame)
+				Frame.DragInfo:SetPoint('TOP', Frame)
 			end
 		else
 			if Frame.unit then
 				Frame.unit = Frame.oldunit
-				Frame:SetAttribute("unit", Frame.unit)
+				Frame:SetAttribute('unit', Frame.unit)
 			end
 
 			if Frame.DragInfo then
 				Frame.DragInfo:SetParent(Frame.DragInfo.Parent)
 				Frame.DragInfo:Hide()
-				Frame.DragInfo:SetScript("OnDragStart", nil)
-				Frame.DragInfo:SetScript("OnDragStop", nil)
+				Frame.DragInfo:SetScript('OnDragStart', nil)
+				Frame.DragInfo:SetScript('OnDragStop', nil)
 
 				if Frame.DragInfo.CurrentHeight then
 					Frame.DragInfo:ClearAllPoints()
@@ -175,7 +175,7 @@ function Move:StartOrStopMoving()
 		end
 	end
 
-	if enable then 
+	if enable then
 		enable = false
 		gridsize()
 	else
@@ -194,8 +194,8 @@ function Move:IsRegisteredFrame(frame)
 	return Match
 end
 
-Move:SetScript("OnEvent", function(self, event)
-	if event == "PLAYER_ENTERING_WORLD" then
+Move:SetScript('OnEvent', function(self, event)
+	if event == 'PLAYER_ENTERING_WORLD' then
 		if not DuffedUIDataPerChar.Move then DuffedUIDataPerChar.Move = {} end
 
 		local Data = DuffedUIDataPerChar.Move
@@ -214,26 +214,26 @@ Move:SetScript("OnEvent", function(self, event)
 				Frame:SetPoint(Anchor1, _G[Parent], Anchor2, X, Y)
 			end
 		end
-	elseif event == "PLAYER_REGEN_DISABLED" then
+	elseif event == 'PLAYER_REGEN_DISABLED' then
 		if self.IsEnabled then self:StartOrStopMoving() end
 	end
 end)
 
-SLASH_MOVING1 = "/moveui"
-SlashCmdList["MOVING"] = function()
+SLASH_MOVING1 = '/moveui'
+SlashCmdList['MOVING'] = function()
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 
-	local Move = D["move"]
+	local Move = D['move']
 	Move:StartOrStopMoving()
 end
 
-local protection = CreateFrame("Frame")
-protection:RegisterEvent("PLAYER_REGEN_DISABLED")
-protection:SetScript("OnEvent", function(self, event)
+local protection = CreateFrame('Frame')
+protection:RegisterEvent('PLAYER_REGEN_DISABLED')
+protection:SetScript('OnEvent', function(self, event)
 	if enable then return end
 	print(ERR_NOT_IN_COMBAT)
 	enable = false
 	Move:StartOrStopMoving()
 end)
 
-D["move"] = Move
+D['move'] = Move
