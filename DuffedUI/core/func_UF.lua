@@ -262,7 +262,7 @@ local CreateAuraTimer = function(self, elapsed)
 end
 
 D.PostCreateAura = function(self, button)
-	button:SetTemplate("Default")
+	button:SetTemplate("Transparent")
 
 	button.remaining = D.SetFontString(button, C["media"].font, 8, "THINOUTLINE")
 	button.remaining:Point("TOPLEFT", 1, -3)
