@@ -1,13 +1,13 @@
 local PA = _G.ProjectAzilroka
 local SMB = PA:NewModule('SquareMinimapButtons', 'AceEvent-3.0', 'AceHook-3.0', 'AceTimer-3.0')
-_G.SquareMinimapButtons = SMB
+PA.SMB, _G.SquareMinimapButtons = SMB, SMB
 
 SMB.Title = '|cFF16C3F2Square|r |cFFFFFFFFMinimap Buttons|r'
 SMB.Description = 'Minimap Button Bar / Minimap Button Skinning'
 SMB.Authors = 'Azilroka    Infinitron    Sinaris    Omega    Durc'
 
 local strsub, strlen, strfind, ceil = strsub, strlen, strfind, ceil
-local tinsert, pairs, unpack, select = tinsert, pairs, unpack, select
+local tinsert, pairs, unpack, select, tContains = tinsert, pairs, unpack, select, tContains
 local InCombatLockdown, C_PetBattles = InCombatLockdown, C_PetBattles
 local Minimap = Minimap
 
@@ -53,10 +53,6 @@ local AcceptedFrames = {
 	'VendomaticButtonFrame',
 }
 
-local AddButtonsToBar = {
-	'SmartBuff_MiniMapButton',
-}
-
 local ButtonFunctions = { 'SetParent', 'ClearAllPoints', 'SetPoint', 'SetSize', 'SetScale', 'SetFrameStrata', 'SetFrameLevel' }
 
 function SMB:LockButton(Button)
@@ -87,11 +83,11 @@ function SMB:HandleBlizzardButtons()
 		GarrisonLandingPageMinimapButton:SetScript('OnLeave', nil)
 
 		GarrisonLandingPageMinimapButton:SetNormalTexture(1044517)
-		GarrisonLandingPageMinimapButton:GetNormalTexture(1044517):SetTexCoord(unpack(self.TexCoords))
+		GarrisonLandingPageMinimapButton:GetNormalTexture():SetTexCoord(unpack(self.TexCoords))
 		GarrisonLandingPageMinimapButton:GetNormalTexture():SetInside()
 
 		GarrisonLandingPageMinimapButton:SetPushedTexture(1044517)
-		GarrisonLandingPageMinimapButton:GetPushedTexture(1044517):SetTexCoord(unpack(self.TexCoords))
+		GarrisonLandingPageMinimapButton:GetPushedTexture():SetTexCoord(unpack(self.TexCoords))
 		GarrisonLandingPageMinimapButton:GetPushedTexture():SetInside()
 
 		GarrisonLandingPageMinimapButton:SetHighlightTexture(nil)
@@ -251,9 +247,7 @@ function SMB:SkinMinimapButton(Button)
 	if not Name then return end
 
 	if Button:IsObjectType('Button') then
-		for i = 1, #ignoreButtons do
-			if Name == ignoreButtons[i] then return end
-		end
+		if tContains(ignoreButtons, Name) then return end
 
 		for i = 1, #GenericIgnores do
 			if strsub(Name, 1, strlen(GenericIgnores[i])) == GenericIgnores[i] then return end
@@ -322,7 +316,8 @@ function SMB:GrabMinimapButtons()
 		for i = 1, Frame:GetNumChildren() do
 			local object = select(i, Frame:GetChildren())
 			if object then
-				if object:IsObjectType('Button') and object:GetName() then
+				local name = object:GetName()
+				if name and (object:IsObjectType('Button') or object:IsObjectType('Frame') and tContains(AcceptedFrames, name)) then
 					self:SkinMinimapButton(object)
 				end
 			end
@@ -540,8 +535,6 @@ function SMB:Initialize()
 
 	if PA.Tukui then
 		Tukui[1]['Movers']:RegisterFrame(self.Bar)
-	elseif PA.DuffedUI then
-		DuffedUI[1]['move']:RegisterFrame(self.Bar)
 	elseif PA.ElvUI then
 		ElvUI[1]:CreateMover(self.Bar, 'SquareMinimapButtonBarMover', 'SquareMinimapButtonBar Anchor', nil, nil, nil, 'ALL,GENERAL')
 	end

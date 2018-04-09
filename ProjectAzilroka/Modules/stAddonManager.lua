@@ -1,7 +1,9 @@
 local PA = _G.ProjectAzilroka
 local stAM = PA:NewModule('stAddonManager', 'AceEvent-3.0')
-_G.stAddonManager = stAM
+PA.stAM, _G.stAddonManager = stAM, stAM
+
 _G.stAddonManagerProfilesDB = {}
+_G.stAddonManagerServerDB = {}
 
 stAM.Title = '|cFF16C3F2st|r|cFFFFFFFFAddonManager|r'
 stAM.Description = 'A simple and minimalistic addon to disable/enabled addons without logging out.'
@@ -20,8 +22,8 @@ local DisableAddOn, EnableAddOn, GetAddOnMetadata, DisableAllAddOns, EnableAllAd
 local IsShiftKeyDown = IsShiftKeyDown
 
 _G.StaticPopupDialogs['STADDONMANAGER_OVERWRITEPROFILE'] = {
-	button1 = 'Overwrite',
-	button2 = 'Cancel',
+	button1 = PA.ACL['Overwrite'],
+	button2 = PA.ACL['Cancel'],
 	timeout = 0,
 	whileDead = 1,
 	enterClicksFirstButton = 1,
@@ -29,9 +31,9 @@ _G.StaticPopupDialogs['STADDONMANAGER_OVERWRITEPROFILE'] = {
 }
 
 _G.StaticPopupDialogs['STADDONMANAGER_NEWPROFILE'] = {
-	text = "Enter a name for your new Addon Profile:",
-	button1 = 'Create',
-	button2 = 'Cancel',
+	text = PA.ACL['Enter a name for your new Addon Profile:'],
+	button1 = PA.ACL['Create'],
+	button2 = PA.ACL['Cancel'],
 	timeout = 0,
 	hasEditBox = 1,
 	whileDead = 1,
@@ -40,9 +42,19 @@ _G.StaticPopupDialogs['STADDONMANAGER_NEWPROFILE'] = {
 	EditBoxOnEscapePressed = function(self) self:GetParent():Hide(); end,
 }
 
+_G.StaticPopupDialogs['STADDONMANAGER_RENAMEPROFILE'] = {
+	text = PA.ACL['Enter a name for your AddOn Profile:'],
+	button1 = PA.ACL['Update'],
+	button2 = PA.ACL['Cancel'],
+	timeout = 0,
+	hasEditBox = 1,
+	whileDead = 1,
+	EditBoxOnEscapePressed = function(self) self:GetParent():Hide(); end,
+}
+
 _G.StaticPopupDialogs['STADDONMANAGER_DELETECONFIRMATION'] = {
-	button1 = 'Delete',
-	button2 = 'Cancel',
+	button1 = PA.ACL['Delete'],
+	button2 = PA.ACL['Cancel'],
 	timeout = 0,
 	whileDead = 1,
 	enterClicksFirstButton = 1,
@@ -55,6 +67,16 @@ end
 
 function stAM:BuildFrame()
 	local Frame = CreateFrame("Frame", 'stAMFrame', UIParent)
+	local Close = CreateFrame('Button', 'stAMCloseButton', Frame)
+	local Reload = CreateFrame('Button', 'stAMReload', Frame)
+	local Search = CreateFrame('EditBox', 'stAMSearchBox', Frame)
+	local CharacterSelect = CreateFrame('Button', nil, Frame)
+	local Profiles = CreateFrame('Button', 'stAMProfiles', Frame)
+	local AddOns = CreateFrame("Frame", 'stAMAddOns', Frame)
+	local Slider = CreateFrame("Slider", nil, AddOns)
+
+	local Title = Frame:CreateFontString(nil, 'OVERLAY')
+
 	Frame:SetSize(self.db['FrameWidth'], 10 + self.db['NumAddOns'] * 25 + 40)
 	Frame:SetPoint('CENTER', UIParent, 'CENTER', 0, 0)
 	Frame:SetTemplate("Transparent")
@@ -65,16 +87,13 @@ function stAM:BuildFrame()
 	Frame:SetScript("OnMouseDown", function(self) self:StartMoving() end)
 	Frame:SetScript("OnMouseUp", function(self) self:StopMovingOrSizing() end)
 
-	local Title = Frame:CreateFontString(nil, 'OVERLAY')
 	Title:SetPoint('TOPLEFT', 0, -5)
 	Title:SetPoint('TOPRIGHT', 0, -5)
-	Title:SetFont(PA.LSM:Fetch('font', 'PT Sans Narrow'), 12, 'OUTLINE')
+	Title:SetFont(PA.LSM:Fetch('font', self.db['Font']), 14, self.db['FontFlag'])
 	Title:SetText(stAM.Title)
 	Title:SetJustifyH('CENTER')
 	Title:SetJustifyV('MIDDLE')
-	Frame.Title = Title
 
-	local Close = CreateFrame('Button', nil, Frame)
 	Close:SetTemplate()
 	Close:SetPoint('TOPRIGHT', -3, -3)
 	Close:SetSize(16, 16)
@@ -82,25 +101,28 @@ function stAM:BuildFrame()
 	Close:SetScript('OnLeave', function(self) self:SetTemplate() end)
 	Close:SetScript('OnClick', function(self) Frame:Hide() end)
 	Close.Text = Close:CreateFontString(nil, 'OVERLAY')
-	Close.Text:SetFont(PA.LSM:Fetch('font', 'PT Sans Narrow'), 12, 'OUTLINE')
+	Close.Text:SetFont(PA.LSM:Fetch('font', self.db['Font']), 12, self.db['FontFlag'])
 	Close.Text:SetJustifyH('CENTER')
 	Close.Text:SetJustifyV('MIDDLE')
 	Close.Text:SetText('x')
 	Close.Text:SetPoint('CENTER', 1, 1)
 
-	Frame.Close = Close
-
-	local Search = CreateFrame('EditBox', nil, Frame)
+	Search:SetPoint('TOPLEFT', Title, 'BOTTOMLEFT', 10, -10)
+	Search:SetPoint('BOTTOMRIGHT', Profiles, 'BOTTOMLEFT', -5, 0)
 	Search:SetSize(1, 20)
 	Search:SetTemplate()
 	Search:SetAutoFocus(false)
 	Search:SetTextInsets(5, 5, 0, 0)
 	Search:SetTextColor(1, 1, 1)
-	Search:SetFont(PA.LSM:Fetch('font', 'PT Sans Narrow'), 12, 'OUTLINE')
+	Search:SetFont(PA.LSM:Fetch('font', self.db['Font']), 12, self.db['FontFlag'])
 	Search:SetShadowOffset(0,0)
-	Search:SetText("Search")
-
-	Search:HookScript("OnEnterPressed", function(self)
+	Search:SetText(PA.ACL['Search'])
+	Search.AddOns = {}
+	Search:HookScript('OnEscapePressed', function(self) stAM:UpdateAddonList() self:SetText("Search") self:ClearFocus()end)
+	Search:HookScript('OnTextChanged', function(self, userInput) stAM.scrollOffset = 0 stAM.searchQuery = userInput stAM:UpdateAddonList() end)
+	Search:HookScript('OnEditFocusGained', function(self) self:SetBackdropBorderColor(unpack(stAM.db['CheckColor'])) self:HighlightText() end)
+	Search:HookScript('OnEditFocusLost', function(self) self:SetTemplate() self:HighlightText(0, 0) end)
+	Search:HookScript('OnEnterPressed', function(self)
 		if strlen(strtrim(self:GetText())) == 0 then
 			stAM:UpdateAddonList()
 			self:SetText("Search")
@@ -109,55 +131,77 @@ function stAM:BuildFrame()
 		self:ClearFocus()
 	end)
 
-	Search:HookScript('OnEscapePressed', function(self) stAM:UpdateAddonList() self:SetText("Search") self:ClearFocus()end)
-	Search:HookScript("OnTextChanged", function(self, userInput) stAM.scrollOffset = 0 stAM.searchQuery = userInput stAM:UpdateAddonList() end)
-	Search:HookScript('OnEditFocusGained', function(self) self:SetBackdropBorderColor(unpack(stAM.db['CheckColor'])) self:HighlightText() end)
-	Search:HookScript('OnEditFocusLost', function(self) self:SetTemplate() self:HighlightText(0, 0) end)
-
-	Frame.Search = Search
-	Frame.Search.AddOns = {}
-
-	local Reload = CreateFrame('Button', nil, Frame)
 	Reload:SetTemplate()
 	Reload:SetSize(70, 20)
 	Reload:SetScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(stAM.db['ClassColor'] and PA.ClassColor or stAM.db['CheckColor'])) end)
 	Reload:SetScript('OnLeave', function(self) self:SetTemplate() end)
 	Reload:SetScript('OnClick', _G.ReloadUI)
 	Reload.Text = Reload:CreateFontString(nil, 'OVERLAY')
-	Reload.Text:SetFont(PA.LSM:Fetch('font', 'PT Sans Narrow'), 12, 'OUTLINE')
-	Reload.Text:SetText('Reload')
+	Reload.Text:SetFont(PA.LSM:Fetch('font', self.db['Font']), 12, self.db['FontFlag'])
+	Reload.Text:SetText(PA.ACL['Reload'])
 	Reload.Text:SetPoint('CENTER', 0, 0)
 	Reload.Text:SetJustifyH('CENTER')
-	Frame.Reload = Reload
+	Reload:SetPoint('TOPLEFT', AddOns, 'BOTTOMLEFT', 0, -10)
 
-	local Profiles = CreateFrame('Button', nil, Frame)
+	CharacterSelect:SetPoint('TOPRIGHT', AddOns, 'BOTTOMRIGHT', 0, -10)
+	CharacterSelect.DropDown = CreateFrame('Frame', 'stAMCharacterSelectDropDown', CharacterSelect, 'UIDropDownMenuTemplate')
+	CharacterSelect:SetSize(150, 20)
+	CharacterSelect:SetTemplate()
+	CharacterSelect:SetScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(stAM.db['ClassColor'] and PA.ClassColor or stAM.db['CheckColor'])) end)
+	CharacterSelect:SetScript('OnLeave', function(self) self:SetTemplate() end)
+	CharacterSelect:SetScript('OnClick', function(self) EasyMenu(stAM.Menu, self.DropDown, self, 0, 38 + (stAM.MenuOffset * 16), "MENU", 5) end)
+	CharacterSelect.Text = CharacterSelect:CreateFontString(nil, 'OVERLAY')
+	CharacterSelect.Text:SetFont(PA.LSM:Fetch('font', self.db['Font']), 12, self.db['FontFlag'])
+	CharacterSelect.Text:SetText(PA.ACL['Character Select'])
+	CharacterSelect.Text:SetPoint('CENTER', 0, 0)
+	CharacterSelect.Text:SetJustifyH('CENTER')
+
+	Profiles:SetPoint('TOPRIGHT', Title, 'BOTTOMRIGHT', -10, -10)
 	Profiles:SetTemplate()
 	Profiles:SetSize(70, 20)
 	Profiles:SetScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(stAM.db['ClassColor'] and PA.ClassColor or stAM.db['CheckColor'])) end)
 	Profiles:SetScript('OnLeave', function(self) self:SetTemplate() end)
 	Profiles:SetScript('OnClick', function() stAM:ToggleProfiles() end)
 	Profiles.Text = Profiles:CreateFontString(nil, 'OVERLAY')
-	Profiles.Text:SetFont(PA.LSM:Fetch('font', 'PT Sans Narrow'), 12, 'OUTLINE')
-	Profiles.Text:SetText('Profiles')
+	Profiles.Text:SetFont(PA.LSM:Fetch('font', self.db['Font']), 12, self.db['FontFlag'])
+	Profiles.Text:SetText(PA.ACL['Profiles'])
 	Profiles.Text:SetPoint('CENTER', 0, 0)
 	Profiles.Text:SetJustifyH('CENTER')
-	Frame.Profiles = Profiles
 
-	--Frame used to display addons list
-	local AddOns = CreateFrame("ScrollFrame", nil, Frame)
+	AddOns:SetPoint('TOPLEFT', Search, 'BOTTOMLEFT', 0, -5)
+	AddOns:SetPoint('TOPRIGHT', Profiles, 'BOTTOMRIGHT', 0, -5)
 	AddOns:SetHeight(self.db['NumAddOns'] * (self.db['ButtonHeight'] + 5) + 15)
 	AddOns:SetTemplate()
 	AddOns.Buttons = {}
 	AddOns:EnableMouse(true)
 	AddOns:EnableMouseWheel(true)
 
-	AddOns:SetScript('OnMouseWheel', function(self, delta)
+	Slider:SetPoint("RIGHT", -2, 0)
+	Slider:SetWidth(12)
+	Slider:SetHeight(self.db['NumAddOns'] * (self.db['ButtonHeight'] + 5) + 11)
+	Slider:SetThumbTexture(PA.LSM:Fetch('background', 'Solid'))
+	Slider:SetOrientation("VERTICAL")
+	Slider:SetValueStep(1)
+	Slider:SetTemplate()
+	Slider:SetMinMaxValues(0, 1)
+	Slider:SetValue(0)
+	Slider:EnableMouse(true)
+	Slider:EnableMouseWheel(true)
+
+	local Thumb = Slider:GetThumbTexture()
+	Thumb:Width(8)
+	Thumb:Height(16)
+	Thumb:SetVertexColor(AddOns:GetBackdropBorderColor())
+
+	AddOns.ScrollBar = Slider
+
+	local OnScroll = function(self, delta)
 		local numAddons = stAM.searchQuery and #Search.AddOns or #stAM.AddOnInfo
 		if IsShiftKeyDown() then
 			if delta == 1 then
 				stAM.scrollOffset = max(0, stAM.scrollOffset - stAM.db['NumAddOns'])
 			elseif delta == -1 then
-				stAM.scrollOffset = min(#stAM.AddOnInfo - stAM.db['NumAddOns'], stAM.scrollOffset + stAM.db['NumAddOns'])
+				stAM.scrollOffset = min(numAddons - stAM.db['NumAddOns'], stAM.scrollOffset + stAM.db['NumAddOns'])
 			end
 		else
 			if delta == 1 and stAM.scrollOffset > 0 then
@@ -168,20 +212,29 @@ function stAM:BuildFrame()
 				end
 			end
 		end
+		Slider:SetMinMaxValues(0, (numAddons - stAM.db['NumAddOns']))
+		Slider:SetValue(stAM.scrollOffset)
 		stAM:UpdateAddonList()
+	end
+
+	AddOns:SetScript('OnMouseWheel', OnScroll)
+	Slider:SetScript('OnMouseWheel', OnScroll)
+	Slider:SetScript('OnValueChanged', function(self, value)
+		stAM.scrollOffset = value;
+		OnScroll()
 	end)
 
 	for i = 1, 30 do
-		local CheckButton = CreateFrame('CheckButton', nil, AddOns)
+		local CheckButton = CreateFrame('CheckButton', 'stAMCheckButton_'..i, AddOns)
 		CheckButton:SetTemplate()
 		CheckButton:SetSize(self.db['ButtonWidth'], self.db['ButtonHeight'])
 		CheckButton:SetPoint(unpack(i == 1 and {"TOPLEFT", AddOns, "TOPLEFT", 10, -10} or {"TOP", AddOns.Buttons[i-1], "BOTTOM", 0, -5}))
 		CheckButton:SetScript('OnClick', function(self)
 			if self.name then
-				if PA:IsAddOnEnabled(self.name) then
-					DisableAddOn(self.name, PA.MyName)
+				if PA:IsAddOnEnabled(self.name, stAM.SelectedCharacter) then
+					DisableAddOn(self.name, stAM.SelectedCharacter)
 				else
-					EnableAddOn(self.name, PA.MyName)
+					EnableAddOn(self.name, stAM.SelectedCharacter)
 				end
 				stAM:UpdateAddonList()
 			end
@@ -189,9 +242,9 @@ function stAM:BuildFrame()
 		CheckButton:SetScript('OnEnter', function(self)
 			GameTooltip:SetOwner(self, 'ANCHOR_TOPRIGHT', 0, 4)
 			GameTooltip:ClearLines()
-			GameTooltip:AddLine(self.title, 1, 1, 1)
-			GameTooltip:AddLine(self.author, 1, 1, 1)
-			GameTooltip:AddLine(self.notes, 1, 1, 1)
+			GameTooltip:AddDoubleLine('AddOn:', self.title, 1, 1, 1, 1, 1, 1)
+			GameTooltip:AddDoubleLine(PA.ACL['Authors:'], self.author, 1, 1, 1, 1, 1, 1)
+			GameTooltip:AddDoubleLine('Notes:', self.notes, 1, 1, 1, 1, 1, 1)
 			if self.requireddeps or self.optionaldeps then
 				GameTooltip:AddLine(' ')
 			end
@@ -216,34 +269,30 @@ function stAM:BuildFrame()
 
 		CheckButton:SetHighlightTexture('')
 
-		local text = CheckButton:CreateFontString(nil, 'OVERLAY')
-		text:SetPoint('LEFT', 5, 0)
-		text:SetFont(PA.LSM:Fetch('font', self.db['Font']), self.db['FontSize'], self.db['FontFlag'])
-		text:SetText('')
-		text:SetJustifyH('CENTER')
-		text:ClearAllPoints()
-		text:SetPoint("LEFT", CheckButton, "RIGHT", 10, 0)
-		text:SetPoint("TOP", CheckButton, "TOP")
-		text:SetPoint("BOTTOM", CheckButton, "BOTTOM")
-		text:SetPoint("RIGHT", AddOns, "RIGHT", -10, 0)
-		text:SetJustifyH("LEFT")
+		local Text = CheckButton:CreateFontString(nil, 'OVERLAY')
+		Text:SetPoint('LEFT', 5, 0)
+		Text:SetFont(PA.LSM:Fetch('font', self.db['Font']), self.db['FontSize'], self.db['FontFlag'])
+		Text:SetText('')
+		Text:SetJustifyH('CENTER')
+		Text:ClearAllPoints()
+		Text:SetPoint("LEFT", CheckButton, "RIGHT", 10, 0)
+		Text:SetPoint("TOP", CheckButton, "TOP")
+		Text:SetPoint("BOTTOM", CheckButton, "BOTTOM")
+		Text:SetPoint("RIGHT", AddOns, "RIGHT", -10, 0)
+		Text:SetJustifyH("LEFT")
 
-		CheckButton.text = text
+		CheckButton.Text = Text
 
 		AddOns.Buttons[i] = CheckButton
 	end
 
-	Reload:SetPoint('TOPLEFT', AddOns, 'BOTTOMLEFT', 0, -10)
-	Profiles:SetPoint('TOPRIGHT', Title, 'BOTTOMRIGHT', -10, -10)
-
-	Search:SetPoint('TOPLEFT', Title, 'BOTTOMLEFT', 10, -10)
-	Search:SetPoint('BOTTOMRIGHT', Profiles, 'BOTTOMLEFT', -5, 0)
-
-	AddOns:SetPoint('TOPLEFT', Search, 'BOTTOMLEFT', 0, -5)
-	AddOns:SetPoint('TOPRIGHT', Profiles, 'BOTTOMRIGHT', 0, -5)
-
+	Frame.Title = Title
+	Frame.Close = Close
+	Frame.Reload = Reload
+	Frame.Search = Search
+	Frame.CharacterSelect = CharacterSelect
+	Frame.Profiles = Profiles
 	Frame.AddOns = AddOns
-
 	self.Frame = Frame
 
 	tinsert(_G.UISpecialFrames, self.Frame:GetName())
@@ -253,7 +302,7 @@ end
 
 function stAM:NewAddOnProfile(name, overwrite)
 	if _G.stAddonManagerProfilesDB[name] and (not overwrite) then
-		_G.StaticPopupDialogs['STADDONMANAGER_OVERWRITEPROFILE'].text = 'There is already a profile named ' .. name .. '. Do you want to overwrite it?'
+		_G.StaticPopupDialogs['STADDONMANAGER_OVERWRITEPROFILE'].text = format(PA.ACL['There is already a profile named %s. Do you want to overwrite it?'], name)
 		_G.StaticPopupDialogs['STADDONMANAGER_OVERWRITEPROFILE'].OnAccept = function(self) stAM:NewAddOnProfile(name, true) end
 		_G.StaticPopup_Show('STADDONMANAGER_OVERWRITEPROFILE')
 		return
@@ -262,7 +311,7 @@ function stAM:NewAddOnProfile(name, overwrite)
 	_G.stAddonManagerProfilesDB[name] = {}
 
 	for i = 1, #self.AddOnInfo do
-		local AddOn, isEnabled = unpack(self.AddOnInfo[i]), PA:IsAddOnEnabled(i)
+		local AddOn, isEnabled = unpack(self.AddOnInfo[i]), PA:IsAddOnEnabled(i, stAM.SelectedCharacter)
 		if isEnabled then
 			tinsert(_G.stAddonManagerProfilesDB[name], AddOn)
 		end
@@ -272,13 +321,13 @@ function stAM:NewAddOnProfile(name, overwrite)
 end
 
 function stAM:InitProfiles()
-	local ProfileMenu = CreateFrame('Frame', nil, self.Frame)
+	local ProfileMenu = CreateFrame('Frame', 'stAMProfileMenu', self.Frame)
 	ProfileMenu:SetPoint('TOPLEFT', self.Frame, 'TOPRIGHT', 3, 0)
 	ProfileMenu:SetSize(250, 50)
 	ProfileMenu:SetTemplate('Transparent')
 	ProfileMenu:Hide()
 
-	for _, name in pairs({'Enable All', 'Disable All'}) do
+	for _, name in pairs({'EnableAll', 'DisableAll', 'NewButton'}) do
 		local Button = CreateFrame('Button', nil, ProfileMenu)
 		Button:SetTemplate()
 		Button:SetSize(self.db['ButtonWidth'], self.db['ButtonHeight'])
@@ -286,43 +335,33 @@ function stAM:InitProfiles()
 		Button:SetScript('OnLeave', function(self) self:SetTemplate() end)
 
 		Button.Text = Button:CreateFontString(nil, 'OVERLAY')
-		Button.Text:SetFont(PA.LSM:Fetch('font', 'PT Sans Narrow'), 12, 'OUTLINE')
+		Button.Text:SetFont(PA.LSM:Fetch('font', self.db['Font']), 12, 'OUTLINE')
 		Button.Text:SetPoint('CENTER', 0, 0)
 		Button.Text:SetJustifyH('CENTER')
-		Button.Text:SetText(name)
 
-		ProfileMenu[name:gsub(' ', '')] = Button
+		ProfileMenu[name] = Button
 	end
 
+	ProfileMenu.EnableAll.Text:SetText(PA.ACL['Enable All'])
 	ProfileMenu.EnableAll:SetPoint('TOPLEFT', ProfileMenu, 'TOPLEFT', 10, -10)
 	ProfileMenu.EnableAll:SetPoint('TOPRIGHT', ProfileMenu, 'TOP', -3, -10)
 	ProfileMenu.EnableAll:SetScript('OnClick', function(self)
-		EnableAllAddOns(PA.MyName)
+		EnableAllAddOns(stAM.SelectedCharacter)
 		stAM:UpdateAddonList()
 	end)
 
+	ProfileMenu.DisableAll.Text:SetText(PA.ACL['Disable All'])
 	ProfileMenu.DisableAll:SetPoint('TOPRIGHT', ProfileMenu, 'TOPRIGHT', -10, -10)
 	ProfileMenu.DisableAll:SetPoint('TOPLEFT', ProfileMenu, 'TOP', 2, -10)
 	ProfileMenu.DisableAll:SetScript('OnClick', function(self)
-		DisableAllAddOns(PA.MyName)
+		DisableAllAddOns(stAM.SelectedCharacter)
 		stAM:UpdateAddonList()
 	end)
 
-	local NewButton = CreateFrame('Button', nil, ProfileMenu)
-	NewButton:SetTemplate()
-	NewButton:SetSize(self.db['ButtonWidth'], self.db['ButtonHeight'])
-	NewButton:SetPoint('TOPLEFT', ProfileMenu.EnableAll, 'BOTTOMLEFT', 0, -5)
-	NewButton:SetPoint('TOPRIGHT', ProfileMenu.DisableAll, 'BOTTOMRIGHT', 0, -5)
-	NewButton:SetScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(stAM.db['ClassColor'] and PA.ClassColor or stAM.db['CheckColor'])) end)
-	NewButton:SetScript('OnLeave', function(self) self:SetTemplate() end)
-	NewButton:SetScript('OnClick', function() _G.StaticPopup_Show('STADDONMANAGER_NEWPROFILE') end)
-	NewButton.Text = NewButton:CreateFontString(nil, 'OVERLAY')
-	NewButton.Text:SetFont(PA.LSM:Fetch('font', 'PT Sans Narrow'), 12, 'OUTLINE')
-	NewButton.Text:SetPoint('CENTER', 0, 0)
-	NewButton.Text:SetJustifyH('CENTER')
-	NewButton.Text:SetText('New Profile')
-
-	ProfileMenu.NewButton = NewButton
+	ProfileMenu.NewButton:SetPoint('TOPLEFT', ProfileMenu.EnableAll, 'BOTTOMLEFT', 0, -5)
+	ProfileMenu.NewButton:SetPoint('TOPRIGHT', ProfileMenu.DisableAll, 'BOTTOMRIGHT', 0, -5)
+	ProfileMenu.NewButton:SetScript('OnClick', function() _G.StaticPopup_Show('STADDONMANAGER_NEWPROFILE') end)
+	ProfileMenu.NewButton.Text:SetText(PA.ACL['New Profile'])
 
 	ProfileMenu.Buttons = {}
 
@@ -336,10 +375,12 @@ function stAM:InitProfiles()
 			local Button = CreateFrame('Button', nil, Pullout)
 			Button:SetTemplate()
 			Button:SetSize(73, stAM.db.ButtonHeight)
+			Button:RegisterForClicks('AnyDown')
 			Button:SetScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(stAM.db['ClassColor'] and PA.ClassColor or stAM.db['CheckColor'])) end)
 			Button:SetScript('OnLeave', function(self) self:SetTemplate() end)
+
 			Button.Text = Button:CreateFontString(nil, 'OVERLAY')
-			Button.Text:SetFont(PA.LSM:Fetch('font', 'PT Sans Narrow'), 12, 'OUTLINE')
+			Button.Text:SetFont(PA.LSM:Fetch('font', self.db['Font']), 12, 'OUTLINE')
 			Button.Text:SetPoint('CENTER', 0, 0)
 			Button.Text:SetJustifyH('CENTER')
 
@@ -348,27 +389,45 @@ function stAM:InitProfiles()
 
 		Pullout.Load:SetPoint('LEFT', Pullout, 0, 0)
 		Pullout.Load.Text:SetText('Load')
-		Pullout.Load:SetScript('OnClick', function(self)
-			DisableAllAddOns(PA.MyName)
-			for _, AddOn in pairs(_G.stAddonManagerProfilesDB[Pullout.Name]) do
-				EnableAddOn(AddOn, PA.MyName)
-			end
+		Pullout.Load:SetScript('OnClick', function(self, btn)
+			if btn == 'RightButton' then
+				local Dialog = _G.StaticPopupDialogs['STADDONMANAGER_RENAMEPROFILE']
+				Dialog.OnAccept = function(self)
+					_G.stAddonManagerProfilesDB[Pullout.Name] = nil
+					stAM:NewAddOnProfile(self.editBox:GetText())
+					stAM:UpdateProfiles()
+				end
+				Dialog.EditBoxOnEnterPressed = function(self)
+					_G.stAddonManagerProfilesDB[Pullout.Name] = nil
+					stAM:NewAddOnProfile(self:GetText())
+					stAM:UpdateProfiles()
+					self:GetParent():Hide()
+				end
+				_G.StaticPopup_Show('STADDONMANAGER_RENAMEPROFILE')
+			else
+				if not IsShiftKeyDown() then
+					DisableAllAddOns(stAM.SelectedCharacter)
+				end
+				for _, AddOn in pairs(_G.stAddonManagerProfilesDB[Pullout.Name]) do
+					EnableAddOn(AddOn, stAM.SelectedCharacter)
+				end
 
-			stAM:UpdateAddonList()
+				stAM:UpdateAddonList()
+			end
 		end)
 
 		Pullout.Update:SetPoint('LEFT', Pullout.Load, 'RIGHT', 5, 0)
-		Pullout.Update.Text:SetText('Update')
+		Pullout.Update.Text:SetText(PA.ACL['Update'])
 		Pullout.Update:SetScript('OnClick', function(self)
 			stAM:NewAddOnProfile(Pullout.Name, true)
 		end)
 
 		Pullout.Delete:SetPoint('LEFT', Pullout.Update, 'RIGHT', 5, 0)
-		Pullout.Delete.Text:SetText('Delete')
+		Pullout.Delete.Text:SetText(PA.ACL['Delete'])
 		Pullout.Delete:SetScript('OnClick', function(self)
 			local dialog = _G.StaticPopupDialogs['STADDONMANAGER_DELETECONFIRMATION']
 
-			dialog.text = format("Are you sure you want to delete %s?", Pullout.Name)
+			dialog.text = format(PA.ACL['Are you sure you want to delete %s?'], Pullout.Name)
 			dialog.OnAccept = function(self)
 				_G.stAddonManagerProfilesDB[Pullout.Name] = nil
 				stAM:UpdateProfiles()
@@ -444,8 +503,9 @@ function stAM:UpdateAddonList()
 		local button = self.Frame.AddOns.Buttons[i]
 		if addonIndex and addonIndex <= #self.AddOnInfo then
 			button.name, button.title, button.author, button.notes, button.requireddeps, button.optionaldeps = unpack(self.AddOnInfo[addonIndex])
-			button.text:SetText(button.title)
-			button:SetChecked(PA:IsAddOnEnabled(addonIndex))
+			button.Text:SetText(button.title)
+			button:SetChecked(PA:IsAddOnPartiallyEnabled(addonIndex, stAM.SelectedCharacter) or PA:IsAddOnEnabled(addonIndex, stAM.SelectedCharacter))
+			button.CheckTexture:SetVertexColor(unpack(PA:IsAddOnPartiallyEnabled(addonIndex, stAM.SelectedCharacter) and {.6, .6, .6} or stAM.db['ClassColor'] and PA.ClassColor or stAM.db['CheckColor']))
 			button:Show()
 		else
 			button:Hide()
@@ -465,11 +525,19 @@ function stAM:Update()
 		local CheckButton = self.Frame.AddOns.Buttons[i]
 
 		CheckButton:SetSize(self.db['ButtonWidth'], self.db['ButtonHeight'])
-		CheckButton.text:SetFont(PA.LSM:Fetch('font', self.db['Font']), self.db['FontSize'], self.db['FontFlag'])
+		CheckButton.Text:SetFont(PA.LSM:Fetch('font', self.db['Font']), self.db['FontSize'], self.db['FontFlag'])
 		CheckButton.CheckTexture:SetTexture(PA.LSM:Fetch('statusbar', self.db['CheckTexture']))
 		CheckButton.CheckTexture:SetVertexColor(unpack(stAM.db['ClassColor'] and PA.ClassColor or stAM.db['CheckColor']))
 		CheckButton:SetCheckedTexture(CheckButton.CheckTexture)
 	end
+
+	-- Frame fonts
+	self.Frame.Title:SetFont(PA.LSM:Fetch('font', self.db['Font']), 14, self.db['FontFlag'])
+	self.Frame.Close.Text:SetFont(PA.LSM:Fetch('font', self.db['Font']), 12, self.db['FontFlag'])
+	self.Frame.Search:SetFont(PA.LSM:Fetch('font', self.db['Font']), 12, self.db['FontFlag'])
+	self.Frame.Reload.Text:SetFont(PA.LSM:Fetch('font', self.db['Font']), 12, self.db['FontFlag'])
+	self.Frame.Profiles.Text:SetFont(PA.LSM:Fetch('font', self.db['Font']), 12, self.db['FontFlag'])
+	self.Frame.CharacterSelect.Text:SetFont(PA.LSM:Fetch('font', self.db['Font']), 12, self.db['FontFlag'])
 
 	stAM:UpdateAddonList()
 end
@@ -554,7 +622,7 @@ function stAM:GetOptions()
 			ClassColor = {
 				order = 10,
 				type = 'toggle',
-				name = 'Class Color Check Texture',
+				name = PA.ACL['Class Color Check Texture'],
 			},
 			AuthorHeader = {
 				order = 11,
@@ -610,6 +678,23 @@ function stAM:Initialize()
 		local author = GetAddOnMetadata(i, "Author")
 		self.AddOnInfo[i] = { name, title, author, notes, requireddeps, optionaldeps }
 	end
+
+	self.SelectedCharacter = PA.MyName
+
+	stAM.Menu = {
+		{ text = 'All', checked = function() return self.SelectedCharacter == true end, func = function() self.SelectedCharacter = true stAM:UpdateAddonList() end}
+	}
+
+	_G.stAddonManagerServerDB[PA.MyRealm] = _G.stAddonManagerServerDB[PA.MyRealm] or {}
+	_G.stAddonManagerServerDB[PA.MyRealm][PA.MyName] = true
+
+	local index = 2
+	for Character in PA:PairsByKeys(_G.stAddonManagerServerDB[PA.MyRealm]) do
+		stAM.Menu[index] = { text = Character, checked = function() return self.SelectedCharacter == Character end, func = function() self.SelectedCharacter = Character stAM:UpdateAddonList() end }
+		index = index + 1
+	end
+
+	self.MenuOffset = index
 
 	self.scrollOffset = 0
 

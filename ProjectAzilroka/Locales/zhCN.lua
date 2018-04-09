@@ -3,6 +3,7 @@ local ACL = LibStub('AceLocale-3.0'):NewLocale('ProjectAzilroka', 'zhCN')
 if not ACL then return end
 
 -- Misc
+ACL["A setting you have changed will change an option for this character only. This setting that you have changed will be uneffected by changing user profiles. Changing this setting requires that you reload your User Interface."] = true
 ACL['Authors:'] = true
 ACL['Blizzard'] = true
 ACL['Controls AddOns in this package'] = true
@@ -35,6 +36,13 @@ ACL['stAddOnManager'] = true
 ACL['Drop Farm Tools'] = true
 ACL['Farm Tool Size'] = true
 ACL['Seed Size'] = true
+
+-- BrokerLDB
+ACL['MouseOver'] = true
+ACL['Panel Height'] = true
+ACL['Panel Width'] = true
+ACL['Show Icon'] = true
+ACL['Show Text'] = true
 
 -- Dragon Overlay
 ACL['Anchor Point'] = true
@@ -109,9 +117,26 @@ ACL['Move Queue Status Icon'] = true
 
 -- stAddOnManager
 ACL['# Shown AddOns'] = true
+ACL['Are you sure you want to delete %s?'] = true
 ACL['Button Height'] = true
 ACL['Button Width'] = true
+ACL['Cancel'] = true
+ACL['Character Select'] = true
+ACL['Class Color Check Texture'] = true
+ACL['Create'] = true
+ACL['Delete'] = true
+ACL['Enable All'] = true
+ACL['Enter a name for your AddOn Profile:'] = true
+ACL['Enter a name for your new Addon Profile:'] = true
+ACL['Disable All'] = true
 ACL['Font'] = true
 ACL['Font Outline'] = true
 ACL['Frame Width'] = true
+ACL['New Profile'] = true
+ACL['Overwrite'] = true
+ACL['Profiles'] = true
+ACL['Reload'] = true
+ACL['Search'] = true
 ACL['Texture'] = true
+ACL['There is already a profile named %s. Do you want to overwrite it?'] = true
+ACL['Update'] = true

@@ -3,7 +3,8 @@ local ACL = LibStub('AceLocale-3.0'):NewLocale('ProjectAzilroka', 'deDE')
 if not ACL then return end
 
 -- Misc
-ACL['Authors:'] = "Authoren:"
+ACL["A setting you have changed will change an option for this character only. This setting that you have changed will be uneffected by changing user profiles. Changing this setting requires that you reload your User Interface."] = "Eine Einstellung die du geändert hast, betrifft eine Option nur für diesen Charakter. Diese Einstellung die du geändert hast, wirkt sich nicht auf dein Profil aus. Ein neu Laden des Benutzer Interface ist erforderlich."
+ACL['Authors:'] = "Autoren:"
 ACL['Blizzard'] = true
 ACL['Controls AddOns in this package'] = "Kontrolliert AddOns in diesem Paket"
 ACL["Frame doesn't exist: "] = "Frame existiert nicht: "
@@ -35,6 +36,13 @@ ACL['stAddOnManager'] = true
 ACL['Drop Farm Tools'] = "Werkzeuge fallen lassen"
 ACL['Farm Tool Size'] = "Werkzeug Größe"
 ACL['Seed Size'] = "Samen Größe"
+
+-- BrokerLDB
+ACL['MouseOver'] = true
+ACL['Panel Height'] = "Leisten Höhe"
+ACL['Panel Width'] = "Leisten Breite"
+ACL['Show Icon'] = "Zeige Symbol"
+ACL['Show Text'] = "Zeige Text"
 
 -- Dragon Overlay
 ACL['Anchor Point'] = "Ankerpunkt"
@@ -108,10 +116,27 @@ ACL['Move Tracker Icon'] = "Verflogen Icon bewegen"
 ACL['Move Queue Status Icon'] = "LFG Icon bewegen"
 
 -- stAddOnManager
-ACL['# Shown AddOns'] = "# Angezeigte AddOns"
+ACL['# Shown AddOns'] = "# angezeigte AddOns"
+ACL['Are you sure you want to delete %s?'] = "Willst du wirklich %s löschen?"
 ACL['Button Height'] = "Tasten Höhe"
 ACL['Button Width'] = "Tasten Breite"
+ACL['Cancel'] = "Abbrechen"
+ACL['Character Select'] = "Charakter Auswahl"
+ACL['Class Color Check Texture'] = "Textur in Klassenfarbe"
+ACL['Create'] = "Erstellen"
+ACL['Delete'] = "Löschen"
+ACL['Enable All'] = "Alles aktivieren"
+ACL['Enter a name for your AddOn Profile:'] = "Gib einen Namen für das AddOn Profil ein:"
+ACL['Enter a name for your new Addon Profile:'] = "Gib einen Namen für das neue AddOn Profil ein:"
+ACL['Disable All'] = "Alles deaktivieren"
 ACL['Font'] = "Schrifart"
 ACL['Font Outline'] = "Schriftumrandung"
 ACL['Frame Width'] = "Fenster Breite"
+ACL['New Profile'] = "Neues Profil"
+ACL['Overwrite'] = "Überschreiben"
+ACL['Profiles'] = "Profile"
+ACL['Reload'] = "Neu Laden"
+ACL['Search'] = "Suche"
 ACL['Texture'] = "Textur"
+ACL['There is already a profile named %s. Do you want to overwrite it?'] = "Es ist bereits ein Profil mit dem Namen %s vorhanden. Willst du es überschreiben?"
+ACL['Update'] = "Aktualisieren"

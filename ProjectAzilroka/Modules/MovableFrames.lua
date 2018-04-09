@@ -1,6 +1,6 @@
 local PA = _G.ProjectAzilroka
 local MF = PA:NewModule('MovableFrames', 'AceEvent-3.0')
-_G.MovableFrames = MF
+PA.MF, _G.MovableFrames = MF, MF
 
 MF.Title = '|cFF16C3F2Movable|r |cFFFFFFFFFrames|r'
 MF.Desciption = 'Make Blizzard Frames Movable'
@@ -100,8 +100,12 @@ local AddOnFrames = {
 }
 
 local function LoadPosition(self)
-	if self.IsMoving == true then return end
 	local Name = self:GetName()
+
+	if not self:GetPoint() then
+		self:SetPoint('TOPLEFT', 'UIParent', 'TOPLEFT', 16, -116)
+	end
+
 	if MF.db[Name] and MF.db[Name]['Permanent'] and MF.db[Name]['Points'] then
 		self:ClearAllPoints()
 		self:SetPoint(unpack(MF.db[Name]['Points']))
@@ -109,17 +113,15 @@ local function LoadPosition(self)
 end
 
 local function OnDragStart(self)
-	self.IsMoving = true
 	self:StartMoving()
 end
 
 local function OnDragStop(self)
 	self:StopMovingOrSizing()
-	self.IsMoving = false
 	local Name = self:GetName()
 	if MF.db[Name] and MF.db[Name]['Permanent'] then
-		local a, b, c, d, e = self:GetPoint()
-		b = self:GetParent():GetName() or UIParent
+		local a, _, c, d, e = self:GetPoint()
+		local b = self:GetParent():GetName() or 'UIParent'
 		if Name == 'QuestFrame' or Name == 'GossipFrame' then
 			MF.db['GossipFrame'].Points = {a, b, c, d, e}
 			MF.db['QuestFrame'].Points = {a, b, c, d, e}
@@ -131,18 +133,15 @@ local function OnDragStop(self)
 	end
 end
 
-function MF:MakeMovable(Frame)
-	if not _G[Frame] then
-		PA:Print(PA.ACL["Frame doesn't exist: "]..Frame)
+function MF:MakeMovable(Name)
+	if not _G[Name] then
+		PA:Print(PA.ACL["Frame doesn't exist: "]..Name)
 		return
 	end
 
-	Frame = _G[Frame]
-	local Name = Frame:GetName()
+	local Frame = _G[Name]
 
-	if not Name then return end
-
-	if Name == 'AchievementFrame' then AchievementFrameHeader:EnableMouse(false) UIPanelWindows[Name] = {} end
+	if Name == 'AchievementFrame' then AchievementFrameHeader:EnableMouse(false) end
 
 	Frame:EnableMouse(true)
 	Frame:SetMovable(true)
@@ -155,6 +154,15 @@ function MF:MakeMovable(Frame)
 	if Name == 'WorldStateAlwaysUpFrame' then
 		Frame:HookScript('OnEnter', function(self) self:SetTemplate() end)
 		Frame:HookScript('OnLeave', function(self) self:StripTextures() end)
+	end
+
+	Frame.ignoreFramePositionManager = true
+	if UIPanelWindows[Name] then
+		for Key in pairs(UIPanelWindows[Name]) do
+			if Key == 'area' or Key == "pushable" then
+				UIPanelWindows[Name][Key] = nil
+			end
+		end
 	end
 
 	C_Timer.After(0, function()
