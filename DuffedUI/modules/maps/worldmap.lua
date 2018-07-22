@@ -188,7 +188,7 @@ function WorldMap:Coords()
 	coords.PlayerText:SetPoint('TOPLEFT', WorldMapFrame.ScrollContainer, 'TOPLEFT', 5, -25)
 	coords.MouseText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
 	coords.MouseText:SetText('Mouse:   x, x')
-	coords.MouseText:SetPoint('TOPLEFT', WorldMapFrame.ScrollContainer, 'TOPLEFT', 0, -40)
+	coords.MouseText:SetPoint('TOPLEFT', WorldMapFrame.ScrollContainer, 'TOPLEFT', 5, -40)
 	
 	local int = 0
 	WorldMapFrame:HookScript('OnUpdate', function(self, elapsed)
@@ -198,7 +198,7 @@ function WorldMap:Coords()
 			local x, y = 0, 0
 
 			if not C_Map.GetPlayerMapPosition(UnitMap, 'player') then
-				coords.PlayerText:SetText('x, x')
+				coords.PlayerText:SetText(PLAYER..': x, x')
 				return
 			end
 			
@@ -221,7 +221,7 @@ function WorldMap:Coords()
 			if (adjustedX >= 0  and adjustedY >= 0 and adjustedX <= 1 and adjustedY <= 1) then
 				adjustedX = math.floor(100 * adjustedX)
 				adjustedY = math.floor(100 * adjustedY)
-				coords.MouseText:SetText(MOUSE_LABEL..':   '..adjustedX..', '..adjustedY)
+				coords.MouseText:SetText(MOUSE_LABEL..': '..adjustedX..', '..adjustedY)
 			else
 				coords.MouseText:SetText(' ')
 			end

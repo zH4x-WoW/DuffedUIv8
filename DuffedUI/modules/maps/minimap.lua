@@ -135,7 +135,7 @@ m_coord:HookScript('OnUpdate', function(self, elapsed)
 		local x, y = 0, 0
 
 		if not C_Map.GetPlayerMapPosition(UnitMap, 'player') then
-			coords.PlayerText:SetText('x, x')
+			m_coord_text:SetText('x, x')
 			return
 		end
 		
