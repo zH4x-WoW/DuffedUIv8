@@ -1,7 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 if C['actionbar']['enable'] ~= true then return end
 
-if (not C['actionbar']['rightbarDisable']) then
+if (not C['actionbar']['RightSideBarDisable']) then
 	local bar = DuffedUIBar5
 	MultiBarRight:SetParent(bar)
 
@@ -21,7 +21,7 @@ if (not C['actionbar']['rightbarDisable']) then
 	end
 	RegisterStateDriver(bar, 'visibility', '[vehicleui][petbattle][overridebar] hide; show')
 
-	--[[Mouseover]]--
+	-- Mouseover
 	if C['actionbar'].rightbarsmouseover then
 		local rbmoh = CreateFrame('Frame', nil, DuffedUIBar3)
 		rbmoh:Point('RIGHT', UIParent, 'RIGHT', 0, -14)
