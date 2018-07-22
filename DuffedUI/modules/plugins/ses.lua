@@ -103,7 +103,8 @@ D["CreateBtn"]("bReport2", MB_reload, 63, 19, "Bugreport", "Bugreport")
 bReport2:SetPoint("LEFT", MB_switch, "RIGHT", 2, 0)
 bReport2:SetScript("OnClick", function(self) StaticPopup_Show("BUGREPORT") end)
 
-if Enablegear then
+--[[broken]]--
+--[[if Enablegear then
 	local gearSets = CreateFrame("Frame", nil, MB_reload)
 	for i = 1, 10 do
 		gearSets[i] = CreateFrame("Button", nil, MB_reload)
@@ -144,7 +145,7 @@ if Enablegear then
 			gearSets[i]:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
 		end)
 	end
-end
+end]]--
 
 -- toggle button
 local toggle = CreateFrame("Button", nil, spec)

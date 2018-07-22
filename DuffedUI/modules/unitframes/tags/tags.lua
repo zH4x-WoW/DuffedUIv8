@@ -119,7 +119,7 @@ local utf8sub = function(string, i, dots)
 	end
 end
 
-oUF.Tags.Events["DuffedUI:getnamecolor"] = "UNIT_POWER"
+oUF.Tags.Events["DuffedUI:getnamecolor"] = "UNIT_POWER_UPDATE"
 oUF.Tags.Methods["DuffedUI:getnamecolor"] = function(unit)
 	local UnitReaction = UnitReaction(unit, "player")
 	local _, UnitClass = UnitClass(unit)

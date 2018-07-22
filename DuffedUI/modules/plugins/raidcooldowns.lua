@@ -199,7 +199,8 @@ end
 local OnEvent = function(self, event, ...)
 	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
 		local timestamp, eventType, _, sourceGUID, sourceName, sourceFlags = ...
-		if band(sourceFlags, filter) == 0 then return end
+		--[[broken]]--
+		--if band(sourceFlags, filter) == 0 then return end
 		if eventType == "SPELL_RESURRECT" or eventType == "SPELL_CAST_SUCCESS" or eventType == "SPELL_AURA_APPLIED" then
 			local spellId = select(12, ...)
 			if spells[spellId] and show[select(2, IsInInstance())] then StartTimer(sourceName, spellId) end

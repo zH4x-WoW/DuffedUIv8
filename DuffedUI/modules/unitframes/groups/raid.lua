@@ -174,7 +174,7 @@ D['ConstructUFRaid'] = function(self)
 	MasterLooter:Width(12)
 	self.MasterLooterIndicator = MasterLooter
 	self:RegisterEvent('PARTY_LEADER_CHANGED', D.MLAnchorUpdate)
-	self:RegisterEvent('PARTY_MEMBERS_CHANGED', D.MLAnchorUpdate)
+	self:RegisterEvent('GROUP_ROSTER_UPDATE', D.MLAnchorUpdate)
 
 	if C['raid']['showrange'] then
 		local range = {insideAlpha = 1, outsideAlpha = C['raid']['raidalphaoor']}

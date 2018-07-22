@@ -429,9 +429,10 @@ end)
 Stat:RegisterEvent("BN_FRIEND_ACCOUNT_ONLINE")
 Stat:RegisterEvent("BN_FRIEND_ACCOUNT_OFFLINE")
 Stat:RegisterEvent("BN_FRIEND_INFO_CHANGED")
-Stat:RegisterEvent("BN_FRIEND_TOON_ONLINE")
-Stat:RegisterEvent("BN_FRIEND_TOON_OFFLINE")
-Stat:RegisterEvent("BN_TOON_NAME_UPDATED")
+--[[broken]]--
+--Stat:RegisterEvent("BN_FRIEND_TOON_ONLINE")
+--Stat:RegisterEvent("BN_FRIEND_TOON_OFFLINE")
+--Stat:RegisterEvent("BN_TOON_NAME_UPDATED")
 Stat:RegisterEvent("FRIENDLIST_UPDATE")
 Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
 

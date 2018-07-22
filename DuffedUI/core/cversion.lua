@@ -1,5 +1,6 @@
 --[[All codingfame to Shestak]]--
-local D, C, L = unpack(select(2, ...))
+--[[broken]]--
+--[[local D, C, L = unpack(select(2, ...))
 
 _G.StaticPopupDialogs['OUTDATED'] = {
 	text = "Download DuffedUI",
@@ -17,7 +18,7 @@ _G.StaticPopupDialogs['OUTDATED'] = {
 	EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
 }
 
---[[Check outdated UI version]]--
+-- Check outdated UI version
 local check = function(self, event, prefix, message, channel, sender)
 	if event == 'CHAT_MSG_ADDON' then
 		if prefix ~= 'DuffedUIVersion' or sender == D.MyName then return end
@@ -46,7 +47,7 @@ frame:RegisterEvent('CHAT_MSG_ADDON')
 frame:SetScript('OnEvent', check)
 RegisterAddonMessagePrefix('DuffedUIVersion')
 
---[[Whisper UI version]]--
+-- Whisper UI version --
 local whisp = CreateFrame('Frame')
 whisp:RegisterEvent('CHAT_MSG_WHISPER')
 whisp:RegisterEvent('CHAT_MSG_BN_WHISPER')
@@ -58,4 +59,4 @@ whisp:SetScript('OnEvent', function(self, event, text, name, ...)
 			BNSendWhisper(select(11, ...), 'DuffedUI' .. D['Version'])
 		end
 	end
-end)
+end)]]--

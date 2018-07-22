@@ -1,4 +1,5 @@
 local D, C, L = unpack(select(2, ...))
+--[[broken]]--
 
 -- Modified Script from Tukui T16
 -- Credits got to Tukz & Hydra
@@ -68,8 +69,8 @@ function WorldMap:Skin()
 	local XP = MapQuestInfoRewardsFrame.XPFrame
 	local QuestBackground = QuestScrollFrame.Background
 	local StoryTooltip = QuestScrollFrame.StoryTooltip
-	local TrackingMenuButton = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button
-	local TrackingMenuBackground = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Background
+	--local TrackingMenuButton = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button
+	--local TrackingMenuBackground = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Background
 
 	Map:StripTextures()
 	Map:CreateBackdrop()
@@ -81,10 +82,10 @@ function WorldMap:Skin()
 	Map.Header:SetPoint("BOTTOMLEFT", Map.backdrop, "TOPLEFT", 0, 2)
 	Map.Header:SetTemplate()
 	WorldMapFrame.BorderFrame:StripTextures()
-	WorldMapFrame.BorderFrame.Inset:StripTextures()
-	WorldMapLevelDropDown:StripTextures()
-	WorldMapLevelDropDown:ClearAllPoints()
-	WorldMapLevelDropDown:SetPoint("TOPLEFT", Map.Header, -17, 1)
+	--WorldMapFrame.BorderFrame.Inset:StripTextures()
+	--WorldMapLevelDropDown:StripTextures()
+	--WorldMapLevelDropDown:ClearAllPoints()
+	--WorldMapLevelDropDown:SetPoint("TOPLEFT", Map.Header, -17, 1)
 
 	QuestMapFrame.DetailsFrame:StripTextures()
 	QuestMapFrame.DetailsFrame.RewardsFrame:StripTextures()
@@ -100,9 +101,9 @@ function WorldMap:Skin()
 
 	QuestBackground:SetAlpha(0)
 
-	TutorialButton:Kill()
-	TrackingMenuButton:SetAlpha(0)
-	TrackingMenuBackground:SetAlpha(0)
+	--TutorialButton:Kill()
+	--TrackingMenuButton:SetAlpha(0)
+	--TrackingMenuBackground:SetAlpha(0)
 
 	QuestScrollFrameScrollBar:SkinScrollBar()
 
@@ -140,7 +141,7 @@ function WorldMap:Skin()
 	end)
 
 	-- Quests Buttons
-	for i = 1, 2 do
+	--[[for i = 1, 2 do
 		local Button = i == 1 and WorldMapFrame.UIElementsFrame.OpenQuestPanelButton or WorldMapFrame.UIElementsFrame.CloseQuestPanelButton
 		local Text = (i == 1 and QUESTS_LABEL.." ->") or ("<- "..QUESTS_LABEL)
 
@@ -152,13 +153,13 @@ function WorldMap:Skin()
 		Button:FontString("Text", C["media"].font, 11, fontflag)
 		Button.Text:SetPoint("CENTER")
 		Button.Text:SetText(Text)
-	end
+	end]]--
 
-	Navigation:Hide()
-	TitleButton:ClearAllPoints()
-	TitleButton:SetAllPoints(Map.Header)
-	Title:ClearAllPoints()
-	Title:SetPoint("CENTER", Map.Header)
+	--Navigation:Hide()
+	--TitleButton:ClearAllPoints()
+	--TitleButton:SetAllPoints(Map.Header)
+	--Title:ClearAllPoints()
+	--Title:SetPoint("CENTER", Map.Header)
 
 	CloseButton:StripTextures()
 	CloseButton:ClearAllPoints()
@@ -183,7 +184,7 @@ function WorldMap:Skin()
 	XP.backdrop:SetOutside(XP.Icon)
 end
 
-function WorldMap:Coords()
+--[[function WorldMap:Coords()
 	local coords = CreateFrame("Frame", "CoordsFrame", WorldMapFrame)
 	local fontheight = 11 * 1.1
 	coords:SetFrameLevel(90)
@@ -228,7 +229,7 @@ function WorldMap:Coords()
 			int = 0
 		end
 	end)
-end
+end]]
 
 function WorldMap:AddHooks()
 	hooksecurefunc("QuestInfo_Display", self.ColorQuestText)
@@ -247,7 +248,7 @@ function WorldMap:Enable()
 		self:Skin()
 		self:AddHooks()
 	end
-	self:Coords()
+	--self:Coords()
 end
 
 WorldMap:RegisterEvent("ADDON_LOADED")

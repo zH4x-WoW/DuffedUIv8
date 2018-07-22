@@ -13,7 +13,8 @@ D.DataTextPosition(C["datatext"].wowtime, Text)
 
 local int = 1
 local function Update(self, t)
-	local pendingCalendarInvites = CalendarGetNumPendingInvites()
+	--[[broken]]--
+	--local pendingCalendarInvites = CalendarGetNumPendingInvites()
 	int = int - t
 	if int < 0 then
 		if C["datatext"].localtime == true then
@@ -21,13 +22,19 @@ local function Update(self, t)
 			Hr = tonumber(date("%I"))
 			Min = date("%M")
 			if C["datatext"].time24 == true then
-				if pendingCalendarInvites > 0 then Text:SetText("|cffFF0000"..Hr24..":"..Min) else Text:SetText(Hr24..":"..Min)
+				--[[broken]]--
+				--if pendingCalendarInvites > 0 then Text:SetText("|cffFF0000"..Hr24..":"..Min) else Text:SetText(Hr24..":"..Min) end
+				Text:SetText(Hr24..":"..Min)
 			end
 		else
 			if Hr24 >= 12 then
-				if pendingCalendarInvites > 0 then Text:SetText("|cffFF0000"..Hr..":"..Min.." |cffffffffpm|r") else Text:SetText(Hr..":"..Min.." |cffffffffpm|r") end
+				--[[broken]]--
+				--if pendingCalendarInvites > 0 then Text:SetText("|cffFF0000"..Hr..":"..Min.." |cffffffffpm|r") else Text:SetText(Hr..":"..Min.." |cffffffffpm|r") end
+				Text:SetText(Hr..":"..Min.." |cffffffffpm|r")
 			else
-				if pendingCalendarInvites > 0 then Text:SetText("|cffFF0000"..Hr..":"..Min.." |cffffffffam|r") else Text:SetText(Hr..":"..Min.." |cffffffffam|r") end
+				--[[broken]]--
+				--if pendingCalendarInvites > 0 then Text:SetText("|cffFF0000"..Hr..":"..Min.." |cffffffffam|r") else Text:SetText(Hr..":"..Min.." |cffffffffam|r") end
+				Text:SetText(Hr..":"..Min.." |cffffffffpm|r")
 			end
 		end
 	else
@@ -38,16 +45,19 @@ local function Update(self, t)
 		else
 			if Hr >= 12 then
 				if Hr > 12 then Hr = Hr - 12 end
-				if pendingCalendarInvites > 0 then Text:SetText("|cffFF0000"..Hr..":"..Min.." |cffffffffpm|r") else Text:SetText(Hr..":"..Min.." |cffffffffpm|r") end
+				--[[broken]]--
+				--if pendingCalendarInvites > 0 then Text:SetText("|cffFF0000"..Hr..":"..Min.." |cffffffffpm|r") else Text:SetText(Hr..":"..Min.." |cffffffffpm|r") end
+				Text:SetText(Hr..":"..Min.." |cffffffffpm|r")
 			else
 				if Hr == 0 then Hr = 12 end
-				if pendingCalendarInvites > 0 then Text:SetText("|cffFF0000"..Hr..":"..Min.." |cffffffffam|r") else Text:SetText(Hr..":"..Min.." |cffffffffam|r") end
+				--[[broken]]--
+				--if pendingCalendarInvites > 0 then Text:SetText("|cffFF0000"..Hr..":"..Min.." |cffffffffam|r") else Text:SetText(Hr..":"..Min.." |cffffffffam|r") end
+				Text:SetText(Hr..":"..Min.." |cffffffffpm|r")
 			end
 		end
 	end
 	self:SetAllPoints(Text)
 	int = 1
-	end
 end
 
 Stat:SetScript("OnEnter", function(self)

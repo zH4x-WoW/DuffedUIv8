@@ -33,7 +33,7 @@ AltPowerText:Point("CENTER", AltPowerBar, "CENTER", 0, 0)
 AltPowerText:SetShadowColor(0, 0, 0)
 AltPowerText:SetShadowOffset(1.25, -1.25)
 
-AltPowerBar:RegisterEvent("UNIT_POWER")
+AltPowerBar:RegisterEvent("UNIT_POWER_UPDATE")
 AltPowerBar:RegisterEvent("UNIT_POWER_BAR_SHOW")
 AltPowerBar:RegisterEvent("UNIT_POWER_BAR_HIDE")
 AltPowerBar:RegisterEvent("PLAYER_ENTERING_WORLD")

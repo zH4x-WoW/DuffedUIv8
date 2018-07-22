@@ -8,7 +8,6 @@
 	<Include file="flightpoint.xml" />
 	<Script file="ilevel.lua" />
 	<Script file="ilvlr.lua" />
-	<Script file="bufftracker.lua" />
 	<Script file="mage.lua" />
 	<Script file="mail.lua" />
 	<Script file="misc.lua" />

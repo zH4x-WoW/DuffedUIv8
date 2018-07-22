@@ -1,4 +1,5 @@
-local D, C, L = unpack(select(2, ...))
+--[[brokenneeds rework]]--
+--[[local D, C, L = unpack(select(2, ...))
 if not C['misc']['artifact'] then return end
 
 local LAP = LibStub("LibArtifactPower-1.0")
@@ -134,4 +135,4 @@ local frame = CreateFrame('Frame',nil,UIParent)
 frame:RegisterEvent('ARTIFACT_XP_UPDATE')
 frame:RegisterEvent('PLAYER_ENTERING_WORLD')
 frame:RegisterEvent('UNIT_INVENTORY_CHANGED')
-frame:SetScript('OnEvent', updateStatus)
+frame:SetScript('OnEvent', updateStatus)]]--

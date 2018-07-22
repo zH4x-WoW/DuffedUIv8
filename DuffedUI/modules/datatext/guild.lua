@@ -210,7 +210,8 @@ Stat:SetScript("OnMouseDown", function(self, btn)
 	ToggleGuildFrame()
 end)
 
-Stat:RegisterEvent("GUILD_ROSTER_SHOW")
+--[[broken]]--
+--Stat:RegisterEvent("GUILD_ROSTER_SHOW")
 Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
 Stat:RegisterEvent("GUILD_ROSTER_UPDATE")
 Stat:RegisterEvent("PLAYER_GUILD_UPDATE")

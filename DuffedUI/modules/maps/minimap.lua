@@ -18,7 +18,7 @@ MinimapBorder:Hide()
 MinimapBorderTop:Hide()
 MinimapZoomIn:Hide()
 MinimapZoomOut:Hide()
-MiniMapVoiceChatFrame:Hide()
+--MiniMapVoiceChatFrame:Hide()
 MinimapNorthTag:SetTexture(nil)
 MinimapZoneTextButton:Hide()
 MiniMapTracking:Hide()
@@ -116,7 +116,7 @@ Minimap:SetScript("OnMouseWheel", function(self, delta)
 	if delta > 0 then MinimapZoomIn:Click() elseif delta < 0 then MinimapZoomOut:Click() end
 end)
 
-local m_coord = CreateFrame("Frame", "DuffedUIMinimapCoord", DuffedUIMinimap)
+--[[local m_coord = CreateFrame("Frame", "DuffedUIMinimapCoord", DuffedUIMinimap)
 m_coord:Size(40, 20)
 m_coord:Point("BOTTOMLEFT", DuffedUIMinimap, "BOTTOMLEFT", 5, -2)
 m_coord:SetFrameLevel(Minimap:GetFrameLevel() + 3)
@@ -142,4 +142,4 @@ m_coord:HookScript("OnUpdate", function(self, elapsed)
 		if x ~= 0 and y ~= 0 then m_coord_text:SetText(x .. " - " .. y) else m_coord_text:SetText(" ") end
 		int = 0
 	end
-end)
+end)]]--

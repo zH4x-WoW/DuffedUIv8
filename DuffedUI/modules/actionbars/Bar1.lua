@@ -23,7 +23,8 @@ end
 
 bar:RegisterEvent("PLAYER_LOGIN")
 bar:RegisterEvent("PLAYER_ENTERING_WORLD")
-bar:RegisterEvent("KNOWN_CURRENCY_TYPES_UPDATE")
+--[[broken]]--
+--bar:RegisterEvent("KNOWN_CURRENCY_TYPES_UPDATE")
 bar:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 bar:RegisterEvent("BAG_UPDATE")
 bar:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
@@ -70,6 +71,6 @@ bar:SetScript("OnEvent", function(self, event, unit, ...)
 			if self.inVehicle then self.inVehicle = false end
 		end
 	else
-		MainMenuBar_OnEvent(self, event, ...)
+		--MainMenuBar_OnEvent(self, event, ...)
 	end
 end)

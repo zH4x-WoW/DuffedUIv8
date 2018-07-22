@@ -71,7 +71,7 @@ local OnUpdate = function(self, elapsed)
 end
 
 local UpdateAura = function(self, index)
-	local name, rank, texture, count, dtype, duration, expirationTime, caster, isStealable, shouldConsolidate, spellID, canApplyAura, isBossDebuff = UnitAura(self:GetParent():GetAttribute"unit", index, self.filter)
+	local name, texture, count, dtype, duration, expirationTime, caster, isStealable, shouldConsolidate, spellID, canApplyAura, isBossDebuff = UnitAura(self:GetParent():GetAttribute"unit", index, self.filter)
 	local consolidate = self.consolidate
 	if name then
 		if (duration > 0 and expirationTime and not consolidate) then
@@ -100,7 +100,8 @@ local UpdateAura = function(self, index)
 			if not C["auras"].classictimer then self.Holder:Hide() end
 		end
 
-		if count > 1 then self.Count:SetText(count) else self.Count:SetText("") end
+		--[[broken]]--
+		--if count > 1 then self.Count:SetText(count) else self.Count:SetText("") end
 
 		if self.filter == "HARMFUL" then
 			local color = DebuffTypeColor[dtype or "none"]
