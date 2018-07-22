@@ -1,30 +1,30 @@
 local D, C, L = unpack(select(2, ...))
-if IsAddOnLoaded("AddOnSkins") then return end
+if IsAddOnLoaded('AddOnSkins') then return end
 
 local function LoadSkin()
 	local frames = {
-		"HelpFrameLeftInset",
-		"HelpFrameMainInset",
-		"HelpFrameKnowledgebase",
-		"HelpFrameHeader",
-		"HelpFrameKnowledgebaseErrorFrame",
+		'HelpFrameLeftInset',
+		'HelpFrameMainInset',
+		'HelpFrameKnowledgebase',
+		'HelpFrameHeader',
+		'HelpFrameKnowledgebaseErrorFrame',
 	}
 
 	local buttons = {
-		"HelpFrameAccountSecurityOpenTicket",
-		"HelpFrameOpenTicketHelpOpenTicket",
-		"HelpFrameKnowledgebaseSearchButton",
-		"HelpFrameKnowledgebaseNavBarHomeButton",
-		"HelpFrameCharacterStuckStuck",
-		"GMChatOpenLog",
-		"HelpFrameTicketSubmit",
-		"HelpFrameTicketCancel",
+		'HelpFrameAccountSecurityOpenTicket',
+		'HelpFrameOpenTicketHelpOpenTicket',
+		'HelpFrameKnowledgebaseSearchButton',
+		'HelpFrameKnowledgebaseNavBarHomeButton',
+		'HelpFrameCharacterStuckStuck',
+		'GMChatOpenLog',
+		'HelpFrameTicketSubmit',
+		'HelpFrameTicketCancel',
 	}
 
 	-- skin main frames
 	for i = 1, #frames do
 		_G[frames[i]]:StripTextures(true)
-		_G[frames[i]]:CreateBackdrop("Default")
+		_G[frames[i]]:CreateBackdrop('Default')
 	end
 
 	HelpFrameHeader:SetFrameLevel(HelpFrameHeader:GetFrameLevel() + 2)
@@ -33,44 +33,35 @@ local function LoadSkin()
 
 	-- skin main buttons
 	for i = 1, 6 do
-		local b = _G["HelpFrameButton"..i]
+		local b = _G['HelpFrameButton'..i]
 		b:SkinButton(true)
 		b.text:ClearAllPoints()
-		b.text:SetPoint("CENTER")
-		b.text:SetJustifyH("CENTER")
+		b.text:SetPoint('CENTER')
+		b.text:SetJustifyH('CENTER')
 	end
 	
-	local b = _G["HelpFrameButton16"]
+	local b = _G['HelpFrameButton16']
 	b:StripTextures(true)
 	b:SkinButton(true)
 	b.text:ClearAllPoints()
-	b.text:SetPoint("CENTER")
-	b.text:SetJustifyH("CENTER")
+	b.text:SetPoint('CENTER')
+	b.text:SetJustifyH('CENTER')
 
-	local b2 = _G["HelpFrameSubmitSuggestionSubmit"]
+	local b2 = _G['HelpFrameSubmitSuggestionSubmit']
 	b2:StripTextures(true)
 	b2:SkinButton(true)
 	
-	local b3 = _G["HelpFrameButton6"]
+	local b3 = _G['HelpFrameButton6']
 	b3:ClearAllPoints()
-	b3:Point("TOP", b, "BOTTOM", 0, -4)
-
-	-- skin table options
-	for i = 1, HelpFrameKnowledgebaseScrollFrameScrollChild:GetNumChildren() do
-		local b = _G["HelpFrameKnowledgebaseScrollFrameButton"..i]
-		b:StripTextures(true)
-		b:SkinButton(true)
-	end
+	b3:Point('TOP', b, 'BOTTOM', 0, -4)
 
 	-- skin misc items
 	HelpFrameKnowledgebaseSearchBox:ClearAllPoints()
-	HelpFrameKnowledgebaseSearchBox:Point("TOPLEFT", HelpFrameMainInset, "TOPLEFT", 13, -10)
-	HelpFrameKnowledgebaseNavBarOverlay:Kill()
-
+	HelpFrameKnowledgebaseSearchBox:Point('TOPLEFT', HelpFrameMainInset, 'TOPLEFT', 13, -10)
 	HelpFrameKnowledgebaseNavBar:StripTextures()
 
 	HelpFrame:StripTextures(true)
-	HelpFrame:CreateBackdrop("Transparent")
+	HelpFrame:CreateBackdrop('Transparent')
 	HelpFrameKnowledgebaseSearchBox:SkinEditBox()
 	HelpFrameKnowledgebaseScrollFrameScrollBar:SkinScrollBar()
 	HelpFrameCloseButton:SkinCloseButton(HelpFrame.backdrop)	
@@ -92,10 +83,10 @@ local function LoadSkin()
 
 	--Hearth Stone Button
 	HelpFrameCharacterStuckHearthstone:StyleButton()
-	HelpFrameCharacterStuckHearthstone:SetTemplate("Default", true)
+	HelpFrameCharacterStuckHearthstone:SetTemplate('Default', true)
 	HelpFrameCharacterStuckHearthstone.IconTexture:ClearAllPoints()
-	HelpFrameCharacterStuckHearthstone.IconTexture:Point("TOPLEFT", 2, -2)
-	HelpFrameCharacterStuckHearthstone.IconTexture:Point("BOTTOMRIGHT", -2, 2)
+	HelpFrameCharacterStuckHearthstone.IconTexture:Point('TOPLEFT', 2, -2)
+	HelpFrameCharacterStuckHearthstone.IconTexture:Point('BOTTOMRIGHT', -2, 2)
 	HelpFrameCharacterStuckHearthstone.IconTexture:SetTexCoord(.08, .92, .08, .92)
 
 	HelpFrameGM_ResponseScrollFrame2ScrollBar:SkinScrollBar()
@@ -104,8 +95,8 @@ local function LoadSkin()
 	HelpFrameGM_ResponseCancel:SkinButton()
 	for i=1, HelpFrameGM_Response:GetNumChildren() do
 		local child = select(i, HelpFrameGM_Response:GetChildren())
-		if child and child:GetObjectType() == "Frame" and not child:GetName() then
-			child:SetTemplate("Default")
+		if child and child:GetObjectType() == 'Frame' and not child:GetName() then
+			child:SetTemplate('Default')
 		end
 	end
 	
@@ -132,4 +123,4 @@ local function LoadSkin()
 	HelpFrameGM_ResponseScrollFrame2ScrollBar:SkinScrollBar()
 end
 
-tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
+tinsert(D['SkinFuncs']['DuffedUI'], LoadSkin)

@@ -4,7 +4,7 @@ if IsAddOnLoaded("AddOnSkins") then return end
 local format = string.format
 
 local function LoadSkin()
-	GuildFrame:StripTextures(true)
+	--[[GuildFrame:StripTextures(true)
 	GuildFrame:SetTemplate("Transparent")
 
 	GuildMemberDetailCloseButton:SkinCloseButton()
@@ -236,7 +236,7 @@ local function LoadSkin()
 			button.icon:SetHeight(14)
 		end
 		if GUILD_EVENT_TEXTURES[eventType] then button.icon:SetTexture(GUILD_EVENT_TEXTURES[eventType]) else button.icon:SetTexture(GUILD_EVENT_TEXTURE_PATH .. textureName) end	
-	end	
+	end	]]--
 end
 
-D.SkinFuncs["Blizzard_GuildUI"] = LoadSkin
+D['SkinFuncs']["Blizzard_GuildUI"] = LoadSkin
