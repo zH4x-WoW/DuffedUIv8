@@ -5,8 +5,10 @@ local Adjust = (D['ScreenHeight'] / 10000) / 2
 local UIScale = min(2, max(0.01, 768 / string.match(D['Resolution'], "%d+x(%d+)")))
 
 if C['general']['autoscale'] then
-	if D['ScreenHeight'] >= 1600 then
-		UIScale = UIScale + (Adjust * 1.82222)
+	if (D['ScreenHeight'] >= 1600 and not C['general']['4k-pp']) then
+		UIScale = UIScale + Adjust --(Adjust * 1.82222)
+	elseif (D['ScreenHeight'] >= 1600 and C['general']['4k-pp']) then
+		UIScale = UIScale * 2
 	else
 		UIScale = UIScale
 	end
