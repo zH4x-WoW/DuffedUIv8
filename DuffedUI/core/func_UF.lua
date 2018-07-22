@@ -3,19 +3,19 @@ local D, C, L = unpack(select(2, ...))
 local ADDON_NAME, ns = ...
 local oUF = ns.oUF
 oUFDuffedUI = ns.oUF
-assert(oUF, "DuffedUI was unable to locate oUF install.")
+assert(oUF, 'DuffedUI was unable to locate oUF install.')
 
-D.updateAllElements = function(frame)
-	for _, v in ipairs(frame.__elements) do v(frame, "UpdateElement", frame.unit) end
+D['updateAllElements'] = function(frame)
+	for _, v in ipairs(frame.__elements) do v(frame, 'UpdateElement', frame.unit) end
 end
 
 local SetUpAnimGroup = function(self)
-	self.anim = self:CreateAnimationGroup("Flash")
-	self.anim.fadein = self.anim:CreateAnimation("ALPHA", "FadeIn")
+	self.anim = self:CreateAnimationGroup('Flash')
+	self.anim.fadein = self.anim:CreateAnimation('ALPHA', 'FadeIn')
 	self.anim.fadein:SetFromAlpha(1)
 	self.anim.fadein:SetToAlpha(0)
 
-	self.anim.fadeout = self.anim:CreateAnimation("ALPHA", "FadeOut")
+	self.anim.fadeout = self.anim:CreateAnimation('ALPHA', 'FadeOut')
 	self.anim.fadeout:SetFromAlpha(1)
 	self.anim.fadeout:SetToAlpha(0)
 end
@@ -32,26 +32,26 @@ local StopFlash = function(self)
 	if self.anim then self.anim:Finish() end
 end
 
---Healthupdate for UFs
-D.PostUpdateHealth = function(health, unit, min, max)
+-- Healthupdate for UFs
+D['PostUpdateHealth'] = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
 		if not UnitIsConnected(unit) then
-			health.value:SetText("|cffD7BEA5" .. L["uf"]["offline"] .. "|r")
+			health.value:SetText('|cffD7BEA5' .. L['uf']['offline'] .. '|r')
 		elseif UnitIsDead(unit) then
-			health.value:SetText("|cffD7BEA5" .. L["uf"]["dead"] .. "|r")
+			health.value:SetText('|cffD7BEA5' .. L['uf']['dead'] .. '|r')
 		elseif UnitIsGhost(unit) then
-			health.value:SetText("|cffD7BEA5" .. L["uf"]["ghost"] .. "|r")
+			health.value:SetText('|cffD7BEA5' .. L['uf']['ghost'] .. '|r')
 		end
 	else
 		local r, g, b
 
-		if C["unitframes"].ColorGradient == true and C["unitframes"].unicolor == true then
+		if C['unitframes'].ColorGradient == true and C['unitframes'].unicolor == true then
 			local r, g, b = oUFDuffedUI.ColorGradient(min, max, 0, 0, 0, .6, .2, .2, .125, .125, .125)
 			health:SetStatusBarColor(r, g, b)
 		end
 
-		if (C["unitframes"].unicolor ~= true and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C["unitframes"].unicolor ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
-			local c = D.UnitColor.reaction[UnitReaction(unit, "player")]
+		if (C['unitframes'].unicolor ~= true and unit == 'target' and UnitIsEnemy(unit, 'player') and UnitIsPlayer(unit)) or (C['unitframes'].unicolor ~= true and unit == 'target' and not UnitIsPlayer(unit) and UnitIsFriend(unit, 'player')) then
+			local c = D['UnitColor']['reaction'][UnitReaction(unit, 'player')]
 			if c then
 				r, g, b = c[1], c[2], c[3]
 				health:SetStatusBarColor(r, g, b)
@@ -64,66 +64,66 @@ D.PostUpdateHealth = function(health, unit, min, max)
 		if min ~= max then
 			local r, g, b
 			r, g, b = oUF.ColorGradient(min, max, .69, .31, .31, .65, .63, .35, .33, .59, .33)
-			if unit == "player" and health:GetAttribute("normalUnit") ~= "pet" then
-				health.value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", D.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
-			elseif unit == "target" or (unit and unit:find("boss%d")) then
-				health.value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", D.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
-			elseif (unit and unit:find("boss%d")) then
-				health.value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", D.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
-			elseif (unit and unit:find("arena%d")) or unit == "focus" or unit == "focustarget" then
-				health.value:SetText("|cff559655" .. D.ShortValue(min) .. "|r")
+			if unit == 'player' and health:GetAttribute('normalUnit') ~= 'pet' then
+				health.value:SetFormattedText('|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r', D['ShortValue'](min), r * 255, g * 255, b * 255, floor(min / max * 100))
+			elseif unit == 'target' or (unit and unit:find('boss%d')) then
+				health.value:SetFormattedText('|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r', D['ShortValue'](min), r * 255, g * 255, b * 255, floor(min / max * 100))
+			elseif (unit and unit:find('boss%d')) then
+				health.value:SetFormattedText('|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r', D['ShortValue'](min), r * 255, g * 255, b * 255, floor(min / max * 100))
+			elseif (unit and unit:find('arena%d')) or unit == 'focus' or unit == 'focustarget' then
+				health.value:SetText('|cff559655' .. D['ShortValue'](min) .. '|r')
 			else
-				health.value:SetText("|cff559655-" .. D.ShortValue(max-min) .. "|r")
+				health.value:SetText('|cff559655-' .. D['ShortValue'](max-min) .. '|r')
 			end
 		else
-			if unit == "player" and health:GetAttribute("normalUnit") ~= "pet" then
-				health.value:SetText("|cff559655" .. D.ShortValue(max) .. "|r")
-			elseif unit == "target" or unit == "focus"  or unit == "focustarget" or (unit and unit:find("arena%d")) then
-				health.value:SetText("|cff559655" .. D.ShortValue(max) .. "|r")
-			elseif (unit and unit:find("boss%d")) then
-				health.value:SetText("")
+			if unit == 'player' and health:GetAttribute('normalUnit') ~= 'pet' then
+				health.value:SetText('|cff559655' .. D['ShortValue'](max) .. '|r')
+			elseif unit == 'target' or unit == 'focus'  or unit == 'focustarget' or (unit and unit:find('arena%d')) then
+				health.value:SetText('|cff559655' .. D['ShortValue'](max) .. '|r')
+			elseif (unit and unit:find('boss%d')) then
+				health.value:SetText('')
 			else
-				health.value:SetText("")
+				health.value:SetText('')
 			end
 		end
 	end
 end
 
---Healthupdate for Raidframes
-D["PostUpdateHealthRaid"] = function(health, unit, min, max)
+-- Healthupdate for Raidframes
+D['PostUpdateHealthRaid'] = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
 		if not UnitIsConnected(unit) then
-			health.value:SetText("|cffD7BEA5" .. L["uf"]["offline"] .. "|r")
+			health.value:SetText('|cffD7BEA5' .. L['uf']['offline'] .. '|r')
 		elseif UnitIsDead(unit) then
-			health.value:SetText("|cffD7BEA5" .. L["uf"]["dead"] .. "|r")
+			health.value:SetText('|cffD7BEA5' .. L['uf']['dead'] .. '|r')
 		elseif UnitIsGhost(unit) then
-			health.value:SetText("|cffD7BEA5" .. L["uf"]["ghost"] .. "|r")
+			health.value:SetText('|cffD7BEA5' .. L['uf']['ghost'] .. '|r')
 		end
 	else
-		if C["unitframes"]["ColorGradient"] and C["unitframes"]["unicolor"] then
+		if C['unitframes']['ColorGradient'] and C['unitframes']['unicolor'] then
 			local r, g, b = oUFDuffedUI.ColorGradient(min, max, 0, 0, 0, .6, .2, .2, .125, .125, .125)
 			health:SetStatusBarColor(r, g, b)
 		end
 
-		if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C["unitframes"]["unicolor"] ~= true then
-			local c = D.UnitColor.reaction[5]
+		if not UnitIsPlayer(unit) and UnitIsFriend(unit, 'player') and C['unitframes']['unicolor'] ~= true then
+			local c = D['UnitColor']['reaction'][5]
 			local r, g, b = c[1], c[2], c[3]
 			health:SetStatusBarColor(r, g, b)
 			health.bg:SetColorTexture(.1, .1, .1)
 		end
 
-		if min ~= max then health.value:SetText("|cff559655-" .. D["ShortValue"](max-min) .. "|r") else health.value:SetText("") end
+		if min ~= max then health.value:SetText('|cff559655-' .. D['ShortValue'](max-min) .. '|r') else health.value:SetText('') end
 	end
 end
 
-D.PostUpdatePetColor = function(health, unit, min, max)
-	if C["unitframes"].ColorGradient == true and C["unitframes"].unicolor == true then
+D['PostUpdatePetColor'] = function(health, unit, min, max)
+	if C['unitframes'].ColorGradient == true and C['unitframes'].unicolor == true then
 		local r, g, b = oUFDuffedUI.ColorGradient(min, max, 0, 0, 0, .6, .2, .2, .125, .125, .125)
 		health:SetStatusBarColor(r, g, b)
 	end
 
-	if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C["unitframes"].unicolor ~= true then
-		local c = D.UnitColor.reaction[5]
+	if not UnitIsPlayer(unit) and UnitIsFriend(unit, 'player') and C['unitframes'].unicolor ~= true then
+		local c = D['UnitColor']['reaction'][5]
 		local r, g, b = c[1], c[2], c[3]
 
 		if health then health:SetStatusBarColor(r, g, b) end
@@ -131,13 +131,13 @@ D.PostUpdatePetColor = function(health, unit, min, max)
 	end
 end
 
---Powerupdate for UFs
-D.PostUpdatePower = function(power, unit, min)
+-- Powerupdate for UFs
+D['PostUpdatePower'] = function(power, unit, min)
 	if not power.value then return end
 
 	local Parent = power:GetParent()
 	local pType, pToken = UnitPowerType(unit)
-	local colors = D.UnitColor
+	local colors = D['UnitColor']
 	local color = colors.power[pToken]
 	local max = UnitPowerMax(unit)
 
@@ -149,21 +149,21 @@ D.PostUpdatePower = function(power, unit, min)
 	else
 		if (min ~= max) then
 			if (pType == 0) then
-				if (unit == "target" or (unit and strfind(unit, "boss%d"))) then
-					power.value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), D.ShortValue(max - (max - min)))
-				elseif (unit == "player" and Parent:GetAttribute("normalUnit") == "pet" or unit == "pet") then
-					power.value:SetFormattedText("%d%%", floor(min / max * 100))
-				elseif (unit and strfind(unit, "arena%d")) or unit == "focus" or unit == "focustarget" then
-					power.value:SetText(D.ShortValue(min))
+				if (unit == 'target' or (unit and strfind(unit, 'boss%d'))) then
+					power.value:SetFormattedText('%d%% |cffD7BEA5-|r %s', floor(min / max * 100), D['ShortValue'](max - (max - min)))
+				elseif (unit == 'player' and Parent:GetAttribute('normalUnit') == 'pet' or unit == 'pet') then
+					power.value:SetFormattedText('%d%%', floor(min / max * 100))
+				elseif (unit and strfind(unit, 'arena%d')) or unit == 'focus' or unit == 'focustarget' then
+					power.value:SetText(D['ShortValue'](min))
 				else
-					power.value:SetFormattedText("%d%% |cffD7BEA5-|r %d", floor(min / max * 100), max - (max - min))
+					power.value:SetFormattedText('%d%% |cffD7BEA5-|r %d', floor(min / max * 100), max - (max - min))
 				end
 			else
 				power.value:SetText(max - (max - min))
 			end
 		else
-			if (unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and strfind(unit, "arena%d")) or (unit and strfind(unit, "boss%d"))) then
-				power.value:SetText(D.ShortValue(min))
+			if (unit == 'pet' or unit == 'target' or unit == 'focus' or unit == 'focustarget' or (unit and strfind(unit, 'arena%d')) or (unit and strfind(unit, 'boss%d'))) then
+				power.value:SetText(D['ShortValue'](min))
 			else
 				power.value:SetText(min)
 			end
@@ -171,7 +171,7 @@ D.PostUpdatePower = function(power, unit, min)
 	end
 end
 
-D.PostUpdateAltMana = function(unit, min, max)
+D['PostUpdateAltMana'] = function(unit, min, max)
 	local parent = self:GetParent()
 	local powerText = parent.Power.value
 	local powerTextParent = powerText:GetParent()
@@ -179,50 +179,50 @@ D.PostUpdateAltMana = function(unit, min, max)
 	local powerTextPosition = db.power.position
 
 	if min ~= max then
-		local color = D.UnitColor.power['MANA']
-		color = D.RGBToHex(color[1], color[2], color[3])
+		local color = D['UnitColor']['power']['MANA']
+		color = D['RGBToHex'](color[1], color[2], color[3])
 
 		self.Text:SetParent(powerTextParent)
 
 		self.Text:ClearAllPoints()
 		if powerText:GetText() then
-			if find(powerTextPosition, "RIGHT") then
-				self.Text:Point("RIGHT", powerText, "LEFT", 3, 0)
-				self.Text:SetFormattedText(color.."%d%%|r |cffD7BEA5- |r", floor(min / max * 100))
-			elseif find(powerTextPosition, "LEFT") then
-				self.Text:Point("LEFT", powerText, "RIGHT", -3, 0)
-				self.Text:SetFormattedText("|cffD7BEA5-|r"..color.." %d%%|r", floor(min / max * 100))
+			if find(powerTextPosition, 'RIGHT') then
+				self.Text:Point('RIGHT', powerText, 'LEFT', 3, 0)
+				self.Text:SetFormattedText(color..'%d%%|r |cffD7BEA5- |r', floor(min / max * 100))
+			elseif find(powerTextPosition, 'LEFT') then
+				self.Text:Point('LEFT', powerText, 'RIGHT', -3, 0)
+				self.Text:SetFormattedText('|cffD7BEA5-|r'..color..' %d%%|r', floor(min / max * 100))
 			else
 				if select(4, powerText:GetPoint()) <= 0 then
-					self.Text:Point("LEFT", powerText, "RIGHT", -3, 0)
-					self.Text:SetFormattedText("|cffD7BEA5-|r"..color.." %d%%|r", floor(min / max * 100))
+					self.Text:Point('LEFT', powerText, 'RIGHT', -3, 0)
+					self.Text:SetFormattedText('|cffD7BEA5-|r'..color..' %d%%|r', floor(min / max * 100))
 				else
-					self.Text:Point("RIGHT", powerText, "LEFT", 3, 0)
-					self.Text:SetFormattedText(color.."%d%%|r |cffD7BEA5- |r", floor(min / max * 100))
+					self.Text:Point('RIGHT', powerText, 'LEFT', 3, 0)
+					self.Text:SetFormattedText(color..'%d%%|r |cffD7BEA5- |r', floor(min / max * 100))
 				end
 			end
 		else
 			self.Text:Point(powerText:GetPoint())
-			self.Text:SetFormattedText(color.."%d%%|r", floor(min / max * 100))
+			self.Text:SetFormattedText(color..'%d%%|r', floor(min / max * 100))
 		end
 	else
 		self.Text:SetText()
 	end
 end
 
---Timer for Buffs & Debuffs
-D.FormatTime = function(s)
+-- Timer for Buffs & Debuffs
+D['FormatTime'] = function(s)
 	local day, hour, minute = 86400, 3600, 60
 	if s >= day then
-		return format("%d" .. D.PanelColor .. "d", ceil(s / day))
+		return format('%d' .. D['PanelColor'] .. 'd', ceil(s / day))
 	elseif s >= hour then
-		return format("%d" .. D.PanelColor .. "h", ceil(s / hour))
+		return format('%d' .. D['PanelColor'] .. 'h', ceil(s / hour))
 	elseif s >= minute then
-		return format("%d" .. D.PanelColor .. "m", ceil(s / minute))
+		return format('%d' .. D['PanelColor'] .. 'm', ceil(s / minute))
 	elseif s >= minute / 12 then
 		return floor(s)
 	end
-	return format("%.1f", s)
+	return format('%.1f', s)
 end
 
 function updateAuraTrackerTime(self, elapsed)
@@ -231,10 +231,10 @@ function updateAuraTrackerTime(self, elapsed)
 
 		if (self.timeleft <= 5) then self.text:SetTextColor(1, 0, 0) else self.text:SetTextColor(1, 1, 1) end
 		if (self.timeleft <= 0) then
-			self.icon:SetTexture("")
-			self.text:SetText("")
+			self.icon:SetTexture('')
+			self.text:SetText('')
 		end
-		self.text:SetFormattedText("%.1f", self.timeleft)
+		self.text:SetFormattedText('%.1f', self.timeleft)
 	end
 end
 
@@ -249,80 +249,80 @@ local CreateAuraTimer = function(self, elapsed)
 				self.first = false
 			end
 			if self.timeLeft > 0 then
-				local time = D.FormatTime(self.timeLeft)
+				local time = D['FormatTime'](self.timeLeft)
 				self.remaining:SetText(time)
 				if self.timeLeft <= 5 then self.remaining:SetTextColor(.99, .31, .31) else self.remaining:SetTextColor(1, 1, 1) end
 			else
 				self.remaining:Hide()
-				self:SetScript("OnUpdate", nil)
+				self:SetScript('OnUpdate', nil)
 			end
 			self.elapsed = 0
 		end
 	end
 end
 
-D.PostCreateAura = function(self, button)
-	button:SetTemplate("Transparent")
+D['PostCreateAura'] = function(self, button)
+	button:SetTemplate('Transparent')
 
-	button.remaining = D.SetFontString(button, C["media"].font, 8, "THINOUTLINE")
-	button.remaining:Point("TOPLEFT", 1, -3)
+	button.remaining = D['SetFontString'](button, C['media'].font, 8, 'THINOUTLINE')
+	button.remaining:Point('TOPLEFT', 1, -3)
 
 	button.cd.noOCC = true
 	button.cd.noCooldownCount = true
 
 	button.cd:SetReverse()
-	button.icon:Point("TOPLEFT", 2, -2)
-	button.icon:Point("BOTTOMRIGHT", -2, 2)
+	button.icon:Point('TOPLEFT', 2, -2)
+	button.icon:Point('BOTTOMRIGHT', -2, 2)
 	button.icon:SetTexCoord(.08, .92, .08, .92)
 	button.icon:SetDrawLayer('ARTWORK')
 
-	button.count:Point("BOTTOMRIGHT", 1, 1)
-	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C["media"].font, 9, "THINOUTLINE")
+	button.count:Point('BOTTOMRIGHT', 1, 1)
+	button.count:SetJustifyH('RIGHT')
+	button.count:SetFont(C['media'].font, 9, 'THINOUTLINE')
 	button.count:SetTextColor(.84, .75, .65)
 
-	button.overlayFrame = CreateFrame("frame", nil, button, nil)
+	button.overlayFrame = CreateFrame('frame', nil, button, nil)
 	button.cd:SetFrameLevel(button:GetFrameLevel() + 1)
 	button.cd:ClearAllPoints()
-	button.cd:Point("TOPLEFT", button, "TOPLEFT", 2, -2)
-	button.cd:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
+	button.cd:Point('TOPLEFT', button, 'TOPLEFT', 2, -2)
+	button.cd:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', -2, 2)
 	button.overlayFrame:SetFrameLevel(button.cd:GetFrameLevel() + 1)
 	button.overlay:SetParent(button.overlayFrame)
 	button.count:SetParent(button.overlayFrame)
 	button.remaining:SetParent(button.overlayFrame)
 
-	button.Glow = CreateFrame("Frame", nil, button)
-	button.Glow:Point("TOPLEFT", button, "TOPLEFT", -3, 3)
-	button.Glow:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 3, -3)
-	button.Glow:SetFrameStrata("BACKGROUND")
-	button.Glow:SetBackdrop{edgeFile = C["media"].glowTex, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
+	button.Glow = CreateFrame('Frame', nil, button)
+	button.Glow:Point('TOPLEFT', button, 'TOPLEFT', -3, 3)
+	button.Glow:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 3, -3)
+	button.Glow:SetFrameStrata('BACKGROUND')
+	button.Glow:SetBackdrop{edgeFile = C['media'].glowTex, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
 
 	button.Animation = button:CreateAnimationGroup()
-    button.Animation:SetLooping("BOUNCE")
+    button.Animation:SetLooping('BOUNCE')
 
-    button.Animation.FadeOut = button.Animation:CreateAnimation("Alpha")
+    button.Animation.FadeOut = button.Animation:CreateAnimation('Alpha')
     button.Animation.FadeOut:SetFromAlpha(1)
     button.Animation.FadeOut:SetToAlpha(0)
     button.Animation.FadeOut:SetDuration(.6)
-    button.Animation.FadeOut:SetSmoothing("IN_OUT")
+    button.Animation.FadeOut:SetSmoothing('IN_OUT')
 end
 
-D.PostUpdateAura = function(self, unit, icon, index, offset, filter, isDebuff, duration, timeLeft)
+D['PostUpdateAura'] = function(self, unit, icon, index, offset, filter, isDebuff, duration, timeLeft)
 	local _, _, _, dtype, duration, expirationTime, unitCaster, isStealable = UnitAura(unit, index, icon.filter)
 	if icon then
-		if icon.filter == "HARMFUL" then
-			if not UnitIsFriend("player", unit) and icon.owner ~= "player" and icon.owner ~= "vehicle" then
+		if icon.filter == 'HARMFUL' then
+			if not UnitIsFriend('player', unit) and icon.owner ~= 'player' and icon.owner ~= 'vehicle' then
 				icon.icon:SetDesaturated(true)
-				icon:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+				icon:SetBackdropBorderColor(unpack(C['media'].bordercolor))
 			else
 				local color = DebuffTypeColor[dtype] or DebuffTypeColor.none
 				icon.icon:SetDesaturated(false)
 				icon:SetBackdropBorderColor(color.r * .8, color.g * .8, color.b * .8)
 			end
 		else
-			if isStealable or ((D.Class == "MAGE" or D.Class == "PRIEST" or D.Class == "SHAMAN") and dtype == "Magic") and not UnitIsFriend("player", unit) then
+			if isStealable or ((D['Class'] == 'MAGE' or D['Class'] == 'PRIEST' or D['Class'] == 'SHAMAN') and dtype == 'Magic') and not UnitIsFriend('player', unit) then
 				if not icon.Animation:IsPlaying() then icon.Animation:Play() end
 			else
 				if icon.Animation:IsPlaying() then icon.Animation:Stop() end
@@ -334,11 +334,11 @@ D.PostUpdateAura = function(self, unit, icon, index, offset, filter, isDebuff, d
 		icon.duration = duration
 		icon.timeLeft = expirationTime
 		icon.first = true
-		icon:SetScript("OnUpdate", CreateAuraTimer)
+		icon:SetScript('OnUpdate', CreateAuraTimer)
 	end
 end
 
-D.UpdateTargetDebuffsHeader = function(self)
+D['UpdateTargetDebuffsHeader'] = function(self)
 	local numBuffs = self.visibleBuffs
 	local perRow = self.numRow
 	local s = self.size
@@ -349,18 +349,18 @@ D.UpdateTargetDebuffsHeader = function(self)
 	local addition = s
 
 	if numBuffs == 0 then addition = 0 end
-	h:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", -2, y + addition)
+	h:SetPoint('BOTTOMLEFT', self, 'BOTTOMLEFT', -2, y + addition)
 end
 
-D.HidePortrait = function(self, unit)
-	if self.unit == "target" then
+D['HidePortrait'] = function(self, unit)
+	if self.unit == 'target' then
 		if not UnitExists(self.unit) or not UnitIsConnected(self.unit) or not UnitIsVisible(self.unit) then self.Portrait:SetAlpha(0) else self.Portrait:SetAlpha(1) end
 	end
 	self.Portrait:SetFrameLevel(4)
 end
 
-D.PortraitUpdate = function(self, unit)
-	--if self:GetModel() and self:GetModel().find and self:GetModel():find("worgenmale") then self:SetCamera(1) end
+D['PortraitUpdate'] = function(self, unit)
+	--if self:GetModel() and self:GetModel().find and self:GetModel():find('worgenmale') then self:SetCamera(1) end
 end
 
 local ticks = {}
@@ -374,40 +374,40 @@ local SetCastTicks = function(frame, numTicks)
 		local d = frame:GetWidth() / numTicks
 		for i = 1, numTicks do
 			if not ticks[i] then
-				ticks[i] = frame:CreateTexture(nil, "OVERLAY")
-				ticks[i]:SetTexture( C["media"].normTex)
+				ticks[i] = frame:CreateTexture(nil, 'OVERLAY')
+				ticks[i]:SetTexture( C['media'].normTex)
 
-				if C["castbar"].classcolor == true then ticks[i]:SetVertexColor(0, 0, 0) else ticks[i]:SetVertexColor(.84, .75, .65) end
+				if C['castbar'].classcolor == true then ticks[i]:SetVertexColor(0, 0, 0) else ticks[i]:SetVertexColor(.84, .75, .65) end
 				ticks[i]:SetWidth(2)
 				ticks[i]:SetHeight(frame:GetHeight())
 			end
 			ticks[i]:ClearAllPoints()
-			ticks[i]:SetPoint("CENTER", frame, "LEFT", d * i, 0)
+			ticks[i]:SetPoint('CENTER', frame, 'LEFT', d * i, 0)
 			ticks[i]:Show()
 		end
 	end
 end
 
-D.CustomCastTime = function(self, duration) self.Time:SetText(("%.1f / %.1f"):format(self.channeling and duration or self.max - duration, self.max)) end
+D['CustomCastTime'] = function(self, duration) self.Time:SetText(('%.1f / %.1f'):format(self.channeling and duration or self.max - duration, self.max)) end
 
-D.CustomCastDelayText = function(self, duration) self.Time:SetText(("%.1f |cffaf5050%s %.1f|r"):format(self.channeling and duration or self.max - duration, self.channeling and "- " or "+", self.delay)) end
+D['CustomCastDelayText'] = function(self, duration) self.Time:SetText(('%.1f |cffaf5050%s %.1f|r'):format(self.channeling and duration or self.max - duration, self.channeling and '- ' or '+', self.delay)) end
 
-D.CastBar = function(self, unit, name, rank, castid)
+D['CastBar'] = function(self, unit, name, rank, castid)
 	local color
 	self.unit = unit
 
-	if C["castbar"].cbticks == true and unit == "player" then
-		local baseTicks = D.ChannelTicks[name]
-		if baseTicks and D.HasteTicks[name] then
+	if C['castbar'].cbticks == true and unit == 'player' then
+		local baseTicks = D['ChannelTicks'][name]
+		if baseTicks and D['HasteTicks'][name] then
 			local tickIncRate = 1 / baseTicks
-			local curHaste = UnitSpellHaste("player") * .01
+			local curHaste = UnitSpellHaste('player') * .01
 			local firstTickInc = tickIncRate / 2
 			local bonusTicks = 0
 			if curHaste >= firstTickInc then bonusTicks = bonusTicks + 1 end
 
-			local x = tonumber(D.Round(firstTickInc + tickIncRate, 2))
+			local x = tonumber(D['Round'](firstTickInc + tickIncRate, 2))
 			while curHaste >= x do
-				x = tonumber(D.Round(firstTickInc + (tickIncRate * bonusTicks), 2))
+				x = tonumber(D['Round'](firstTickInc + (tickIncRate * bonusTicks), 2))
 				if curHaste >= x then bonusTicks = bonusTicks + 1 end
 			end
 
@@ -417,42 +417,42 @@ D.CastBar = function(self, unit, name, rank, castid)
 		else
 			HideTicks()
 		end
-	elseif unit == "player" then
+	elseif unit == 'player' then
 		HideTicks()
 	end
 end
 
-D["EclipseDirection"] = function(self)
-	local power = UnitPower("player", SPELL_POWER_ECLIPSE)
+D['EclipseDirection'] = function(self)
+	local power = UnitPower('player', SPELL_POWER_ECLIPSE)
 
 	if power < 0 then
-		self.Text:SetText("|cffE5994C" .. L["uf"]["starfire"] .. "|r")
+		self.Text:SetText('|cffE5994C' .. L['uf']['starfire'] .. '|r')
 	elseif power > 0 then
-		self.Text:SetText("|cff4478BC" .. L["uf"]["wrath"] .. "|r")
+		self.Text:SetText('|cff4478BC' .. L['uf']['wrath'] .. '|r')
 	else
-		self.Text:SetText("")
+		self.Text:SetText('')
 	end
 end
 
-D.MLAnchorUpdate = function (self)
-	if self.LeaderIndicator:IsShown() then self.MasterLooterIndicator:SetPoint("TOPLEFT", 14, 8) else self.MasterLooterIndicator:SetPoint("TOPLEFT", 0, 8) end
+D['MLAnchorUpdate'] = function (self)
+	if self.LeaderIndicator:IsShown() then self.MasterLooterIndicator:SetPoint('TOPLEFT', 14, 8) else self.MasterLooterIndicator:SetPoint('TOPLEFT', 0, 8) end
 end
 
 local UpdateManaLevelDelay = 0
-D.UpdateManaLevel = function(self, elapsed)
+D['UpdateManaLevel'] = function(self, elapsed)
 	UpdateManaLevelDelay = UpdateManaLevelDelay + elapsed
-	if self.parent.unit ~= "player" or UpdateManaLevelDelay < .2 or UnitIsDeadOrGhost("player") then return end
+	if self.parent.unit ~= 'player' or UpdateManaLevelDelay < .2 or UnitIsDeadOrGhost('player') then return end
 	UpdateManaLevelDelay = 0
 
-	local mana = UnitPower("player", SPELL_POWER_MANA)
-	local maxmana = UnitPowerMax("player", SPELL_POWER_MANA)
+	local mana = UnitPower('player', SPELL_POWER_MANA)
+	local maxmana = UnitPowerMax('player', SPELL_POWER_MANA)
 
 	if maxmana == 0 then return end
 
 	local percMana = mana / maxmana * 100
 
 	if percMana == 20 then
-		self.ManaLevel:SetText("|cffaf5050" .. L["uf"]["lowmana"] .. "|r")
+		self.ManaLevel:SetText('|cffaf5050' .. L['uf']['lowmana'] .. '|r')
 		Flash(self, .3)
 	else
 		self.ManaLevel:SetText()
@@ -460,8 +460,8 @@ D.UpdateManaLevel = function(self, elapsed)
 	end
 end
 
-D.UpdateThreat = function(self, event, unit)
-	if (self.unit ~= unit) or (unit == "target" or unit == "pet" or unit == "focus" or unit == "focustarget" or unit == "targettarget") then return end
+D['UpdateThreat'] = function(self, event, unit)
+	if (self.unit ~= unit) or (unit == 'target' or unit == 'pet' or unit == 'focus' or unit == 'focustarget' or unit == 'targettarget') then return end
 	local threat = UnitThreatSituation(self.unit)
 	if (threat == 3) then
 		if self.panel then
@@ -471,7 +471,7 @@ D.UpdateThreat = function(self, event, unit)
 		end
 	else
 		if self.panel then
-			local r, g, b = unpack(C["media"].bordercolor)
+			local r, g, b = unpack(C['media'].bordercolor)
 			self.panel:SetBackdropBorderColor(r * .7, g * .7, b * .7)
 		else
 			self.Name:SetTextColor(1, 1, 1)
@@ -479,18 +479,18 @@ D.UpdateThreat = function(self, event, unit)
 	end
 end
 
-D.SetGridGroupRole = function(self, role)
+D['SetGridGroupRole'] = function(self, role)
 	local lfdrole = self.GroupRoleIndicator
 	local role = UnitGroupRolesAssigned(self.unit)
 
-	if role == "TANK" then
-		lfdrole:SetTexture(C["media"].tank)
+	if role == 'TANK' then
+		lfdrole:SetTexture(C['media'].tank)
 		lfdrole:Show()
-	elseif role == "HEALER" then
-		lfdrole:SetTexture(C["media"].heal)
+	elseif role == 'HEALER' then
+		lfdrole:SetTexture(C['media'].heal)
 		lfdrole:Show()
-	elseif role == "DAMAGER" then
-		lfdrole:SetTexture(C["media"].dps)
+	elseif role == 'DAMAGER' then
+		lfdrole:SetTexture(C['media'].dps)
 		lfdrole:Show()
 	else
 		lfdrole:Hide()
@@ -498,7 +498,7 @@ D.SetGridGroupRole = function(self, role)
 end
 
 -- Grid
-D["countOffsets"] = {
+D['countOffsets'] = {
 	TOPLEFT = {6, 1},
 	TOPRIGHT = {-6, 1},
 	BOTTOMLEFT = {6, 1},
@@ -509,22 +509,22 @@ D["countOffsets"] = {
 	BOTTOM = {0, 0},
 }
 
-D["createAuraWatch"] = function(self, unit)
-	local Class = select(2, UnitClass("player"))
+D['createAuraWatch'] = function(self, unit)
+	local Class = select(2, UnitClass('player'))
 
-	local auras = CreateFrame("Frame", nil, self)
-	auras:SetPoint("TOPLEFT", self.Health, 2, -2)
-	auras:SetPoint("BOTTOMRIGHT", self.Health, -2, 2)
+	local auras = CreateFrame('Frame', nil, self)
+	auras:SetPoint('TOPLEFT', self.Health, 2, -2)
+	auras:SetPoint('BOTTOMRIGHT', self.Health, -2, 2)
 	auras.presentAlpha = 1
 	auras.missingAlpha = 0
 	auras.icons = {}
 	auras.PostCreateIcon = function(self, icon)
 		if icon.icon and not icon.hideIcon then
 			icon:SetTemplate()
-			icon.icon:Point("TOPLEFT", 1, -1)
-			icon.icon:Point("BOTTOMRIGHT", -1, 1)
+			icon.icon:Point('TOPLEFT', 1, -1)
+			icon.icon:Point('BOTTOMRIGHT', -1, 1)
 			icon.icon:SetTexCoord(.08, .92, .08, .92)
-			icon.icon:SetDrawLayer("ARTWORK")
+			icon.icon:SetDrawLayer('ARTWORK')
 		end
 		if (icon.cd) then
 			icon.cd:SetHideCountdownNumbers(true)
@@ -536,33 +536,33 @@ D["createAuraWatch"] = function(self, unit)
 
 	local buffs = {}
 
-	if (D.Buffids["ALL"]) then
-		for key, value in pairs(D.Buffids["ALL"]) do tinsert(buffs, value) end
+	if (D['Buffids']['ALL']) then
+		for key, value in pairs(D.Buffids['ALL']) do tinsert(buffs, value) end
 	end
 
-	if (D.Buffids[D.Class]) then
-		for key, value in pairs(D.Buffids[D.Class]) do tinsert(buffs, value) end
+	if (D['Buffids'][D['Class']]) then
+		for key, value in pairs(D.Buffids[D['Class']]) do tinsert(buffs, value) end
 	end
 
 	-- Cornerbuffs
 	if buffs then
 		for key, spell in pairs(buffs) do
-			local Icon = CreateFrame("Frame", nil, auras)
+			local Icon = CreateFrame('Frame', nil, auras)
 			Icon.spellID = spell[1]
 			Icon.anyUnit = spell[4]
 			Icon:Width(6)
 			Icon:Height(6)
 			Icon:SetPoint(spell[2], 0, 0)
 
-			local Texture = Icon:CreateTexture(nil, "OVERLAY")
+			local Texture = Icon:CreateTexture(nil, 'OVERLAY')
 			Texture:SetAllPoints(Icon)
-			Texture:SetTexture(C["media"].blank)
+			Texture:SetTexture(C['media'].blank)
 
 			if (spell[3]) then Texture:SetVertexColor(unpack(spell[3])) else Texture:SetVertexColor(0.8, 0.8, 0.8) end
 
-			local Count = Icon:CreateFontString(nil, "OVERLAY")
-			Count:SetFont(C["media"].font, 8, "THINOUTLINE")
-			Count:SetPoint("CENTER", unpack(D.countOffsets[spell[2]]))
+			local Count = Icon:CreateFontString(nil, 'OVERLAY')
+			Count:SetFont(C['media'].font, 8, 'THINOUTLINE')
+			Count:SetPoint('CENTER', unpack(D.countOffsets[spell[2]]))
 			Icon.count = Count
 
 			auras.icons[spell[1]] = Icon
@@ -572,47 +572,47 @@ D["createAuraWatch"] = function(self, unit)
 end
 
 --Raidbuffs & -debuffs
-D.Buffids = {
+D['Buffids'] = {
 	PRIEST = {
-		{41635, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},             -- Prayer of Mending
-		{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}},                -- Renew
-		{17, "TOPLEFT", {0.81, 0.85, 0.1}, true},            -- Power Word: Shield
+		{41635, 'BOTTOMRIGHT', {0.2, 0.7, 0.2}},             -- Prayer of Mending
+		{139, 'BOTTOMLEFT', {0.4, 0.7, 0.2}},                -- Renew
+		{17, 'TOPLEFT', {0.81, 0.85, 0.1}, true},            -- Power Word: Shield
 	},
 
 	DRUID = {
-		{774, "TOPLEFT", {0.8, 0.4, 0.8}},                   -- Rejuvenation
-		{155777, "LEFT", {0.8, 0.4, 0.8}},                   -- Germination
-		{8936, "TOPRIGHT", {0.2, 0.8, 0.2}},                 -- Regrowth
-		{33763, "BOTTOMLEFT", {0.4, 0.8, 0.2}},              -- Lifebloom
-		{48438, "BOTTOMRIGHT", {0.8, 0.4, 0}},               -- Wild Growth
+		{774, 'TOPLEFT', {0.8, 0.4, 0.8}},                   -- Rejuvenation
+		{155777, 'LEFT', {0.8, 0.4, 0.8}},                   -- Germination
+		{8936, 'TOPRIGHT', {0.2, 0.8, 0.2}},                 -- Regrowth
+		{33763, 'BOTTOMLEFT', {0.4, 0.8, 0.2}},              -- Lifebloom
+		{48438, 'BOTTOMRIGHT', {0.8, 0.4, 0}},               -- Wild Growth
 	},
 
 	PALADIN = {
-		{53563, "TOPLEFT", {0.7, 0.3, 0.7}},	             -- Beacon of Light
-		{156910, "TOPRIGHT", {0.7, 0.3, 0.7}},	             -- Beacon of Faith
-		{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true}, 	     -- Hand of Protection
-		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},	     -- Hand of Freedom
-		{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},	     -- Hand of Sacrifice
-		{114163, "BOTTOMLEFT", {0.81, 0.85, 0.1}, true},	 -- Eternal Flame
+		{53563, 'TOPLEFT', {0.7, 0.3, 0.7}},	             -- Beacon of Light
+		{156910, 'TOPRIGHT', {0.7, 0.3, 0.7}},	             -- Beacon of Faith
+		{1022, 'BOTTOMRIGHT', {0.2, 0.2, 1}, true}, 	     -- Hand of Protection
+		{1044, 'BOTTOMRIGHT', {0.89, 0.45, 0}, true},	     -- Hand of Freedom
+		{6940, 'BOTTOMRIGHT', {0.89, 0.1, 0.1}, true},	     -- Hand of Sacrifice
+		{114163, 'BOTTOMLEFT', {0.81, 0.85, 0.1}, true},	 -- Eternal Flame
 	},
 
 	SHAMAN = {
-		{61295, "TOPLEFT", {0.7, 0.3, 0.7}},                 -- Riptide
+		{61295, 'TOPLEFT', {0.7, 0.3, 0.7}},                 -- Riptide
 	},
 
 	MONK = {
-		{119611, "TOPLEFT", {0.8, 0.4, 0.8}},	             -- Renewing Mist
-		{116849, "TOPRIGHT", {0.2, 0.8, 0.2}},	             -- Life Cocoon
-		{124682, "BOTTOMLEFT", {0.4, 0.8, 0.2}},             -- Enveloping Mist
-		{124081, "BOTTOMRIGHT", {0.7, 0.4, 0}},              -- Zen Sphere
+		{119611, 'TOPLEFT', {0.8, 0.4, 0.8}},	             -- Renewing Mist
+		{116849, 'TOPRIGHT', {0.2, 0.8, 0.2}},	             -- Life Cocoon
+		{124682, 'BOTTOMLEFT', {0.4, 0.8, 0.2}},             -- Enveloping Mist
+		{124081, 'BOTTOMRIGHT', {0.7, 0.4, 0}},              -- Zen Sphere
 	},
 
 	ALL = {
-		{14253, "RIGHT", {0, 1, 0}},                         -- Abolish Poison
+		{14253, 'RIGHT', {0, 1, 0}},                         -- Abolish Poison
 	},
 }
 
-D.Debuffids = {
+D['Debuffids'] = {
 	-- Legion Raids
 	-- Antorus, the Burning Throne
 	-- Garothi Worldbreaker
@@ -781,166 +781,6 @@ D.Debuffids = {
 	[GetSpellInfo(248167)] = 3, -- Death Fog
 	[GetSpellInfo(258646)] = 3, -- Gift of the Sky
 	[GetSpellInfo(253903)] = 3, -- Strength of the Sky
-
-	-- Tomb of Sargeras
-	-- Goroth
-	[GetSpellInfo(231363)] = 3, -- Burning Armor
-	[GetSpellInfo(233279)] = 3, -- Shattering Star
-	[GetSpellInfo(230345)] = 3, -- Crashing Comet
-	[GetSpellInfo(234346)] = 4, -- Fel Eruption
-	-- Demonic Inquisition
-	[GetSpellInfo(233983)] = 3, -- Echoing Anguish
-	[GetSpellInfo(233895)] = 3, -- Suffocating Dark
-	[GetSpellInfo(233430)] = 3, -- Unbearable Torment
-	-- Harjatan
-	[GetSpellInfo(231998)] = 3, -- Jagged Abrasion
-	[GetSpellInfo(231770)] = 4, -- Drenched
-	[GetSpellInfo(231729)] = 3, -- Aqueous Burst
-	[GetSpellInfo(231768)] = 3, -- Drenching Waters
-	-- Sisters of the Moon
-	[GetSpellInfo(236516)] = 3, -- Twilight Volley
-	[GetSpellInfo(236519)] = 3, -- Moon Burn
-	[GetSpellInfo(239264)] = 3, -- Lunar Fire
-	[GetSpellInfo(236712)] = 3, -- Lunar Beacon
-	[GetSpellInfo(236550)] = 3, -- Discorporate
-	[GetSpellInfo(237561)] = 4, -- Twilight Glaive
-	[GetSpellInfo(233263)] = 4, -- Embrace of the Eclipse
-	[GetSpellInfo(236596)] = 5, -- Rapid Shot
-	-- Mistress Sassz'ine
-	[GetSpellInfo(230201)] = 3, -- Burden of Pain
-	[GetSpellInfo(230139)] = 3, -- Hydra Shot
-	[GetSpellInfo(230358)] = 3, -- Thundering Shock
-	[GetSpellInfo(232913)] = 3, -- Befouling Ink
-	[GetSpellInfo(230920)] = 3, -- Consuming Hunger
-	[GetSpellInfo(232732)] = 3, -- Slicing Tornado
-	-- The Desolate Host
-	[GetSpellInfo(235907)] = 3, -- Collapsing Fissure
-	[GetSpellInfo(235989)] = 3, -- Tormented Cries
-	[GetSpellInfo(235933)] = 3, -- Spear of Anguish
-	[GetSpellInfo(235968)] = 3, -- Grasping Darkness
-	[GetSpellInfo(236340)] = 3, -- Crush Mind
-	[GetSpellInfo(236449)] = 3, -- Soulbind
-	[GetSpellInfo(236515)] = 3, -- Shattering Scream
-	[GetSpellInfo(236241)] = 3, -- Soul Rot
-	-- Maiden of Vigilance
-	-- [GetSpellInfo(235213)] = 4, -- Light Infusion
-	-- [GetSpellInfo(235240)] = 4, -- Fel Infusion
-	[GetSpellInfo(240209)] = 3, -- Unstable Soul
-	-- Fallen Avatar
-	[GetSpellInfo(236494)] = 3, -- Desolate
-	[GetSpellInfo(236604)] = 3, -- Shadowy Blades
-	[GetSpellInfo(234059)] = 3, -- Unbound Chaos
-	[GetSpellInfo(239058)] = 3, -- Touch of Sargeras
-	[GetSpellInfo(239739)] = 3, -- Dark Mark
-	[GetSpellInfo(242017)] = 3, -- Black Winds
-	[GetSpellInfo(240728)] = 3, -- Tainted Essence
-	-- Kil'Jaeden
-	[GetSpellInfo(236710)] = 3, -- Shadow Reflection: Erupting
-	[GetSpellInfo(236378)] = 3, -- Shadow Reflection: Wailing
-	[GetSpellInfo(238429)] = 3, -- Bursting Dreadflame
-	[GetSpellInfo(238505)] = 3, -- Focused Dreadflame
-	[GetSpellInfo(239155)] = 3, -- Gravity Squeeze
-	[GetSpellInfo(239253)] = 3, -- Flaming Orb
-	[GetSpellInfo(239130)] = 3, -- Tear Rift
-	-- The Nighthold
-	-- Skorpyron
-	[GetSpellInfo(211659)] = 3, -- Arcane Tether
-	[GetSpellInfo(204483)] = 3, -- Focused Blast
-	-- Chronomatic Anomaly
-	[GetSpellInfo(206609)] = 3, -- Time Release
-	[GetSpellInfo(206607)] = 3, -- Chronometric Particles
-	-- Trilliax
-	[GetSpellInfo(206788)] = 3, -- Toxic Slice
-	[GetSpellInfo(206641)] = 3, -- Arcane Slash
-	-- Spellblade Aluriel
-	[GetSpellInfo(212492)] = 3, -- Annihilate
-	[GetSpellInfo(212494)] = 3, -- Annihilated
-	[GetSpellInfo(212587)] = 3, -- Mark of Frost
-	-- Tichondrius
-	[GetSpellInfo(206480)] = 3, -- Carrion Plague
-	[GetSpellInfo(216040)] = 3, -- Burning Soul
-	[GetSpellInfo(208230)] = 3, -- Feast of Blood
-	-- Krosus
-	[GetSpellInfo(206677)] = 3, -- Searing Brand
-	-- High Botanist Tel'arn
-	[GetSpellInfo(218304)] = 3, -- Parasitic Fetter
-	[GetSpellInfo(218503)] = 3, -- Recursive Strikes
-	-- Star Augur Etraeus
-	[GetSpellInfo(206936)] = 3, -- Icy Ejection
-	-- Gul'dan
-	[GetSpellInfo(206222)] = 3, -- Bonds of Fel
-	[GetSpellInfo(212568)] = 3, -- Drain
-	[GetSpellInfo(206875)] = 3, -- Fel Obelisk
-	-- Trial of Valor
-	-- Odyn
-	[GetSpellInfo(198088)] = 3, -- Glowing Fragment
-	[GetSpellInfo(228915)] = 3, -- Stormforged Spear
-	[GetSpellInfo(227959)] = 3, -- Storm of Justice
-	[GetSpellInfo(227475)] = 3, -- Cleansing Flame
-	-- Guarm
-	[GetSpellInfo(227570)] = 3, -- Dark Discharge
-	[GetSpellInfo(227566)] = 3, -- Salty Spittle
-	[GetSpellInfo(227539)] = 3, -- Fiery Phlegm
-	[GetSpellInfo(228250)] = 4, -- Shadow Lick
-	[GetSpellInfo(228246)] = 4, -- Frost Lick
-	[GetSpellInfo(228226)] = 4, -- Flame Lick
-	-- Helya
-	[GetSpellInfo(228054)] = 3, -- Taint of the Sea
-	[GetSpellInfo(227982)] = 3, -- Bilewater Redox
-	[GetSpellInfo(193367)] = 3, -- Fetid Rot
-	[GetSpellInfo(227903)] = 3, -- Orb of Corruption
-	[GetSpellInfo(228058)] = 3, -- Orb of Corrosion
-	[GetSpellInfo(228519)] = 3, -- Anchor Slam
-	[GetSpellInfo(202476)] = 3, -- Rabid
-	[GetSpellInfo(232450)] = 3, -- Corrupted Axion
-	-- The Emerald Nightmare
-	-- Nythendra
-	[GetSpellInfo(204504)] = 5, -- Infested
-	[GetSpellInfo(203096)] = 3, -- Rot
-	[GetSpellInfo(204463)] = 3, -- Volatile Rot
-	[GetSpellInfo(203646)] = 4, -- Burst of Corruption
-	-- Il'gynoth, Heart of Corruption
-	[GetSpellInfo(215845)] = 3, -- Dispersed Spores
-	[GetSpellInfo(210099)] = 6, -- Fixate
-	[GetSpellInfo(209469)] = 5, -- Touch of Corruption
-	[GetSpellInfo(210984)] = 3, -- Eye of Fate
-	[GetSpellInfo(208697)] = 4, -- Mind Flay
-	[GetSpellInfo(208929)] = 3, -- Spew Corruption
-	[GetSpellInfo(215128)] = 3, -- Cursed Blood
-	-- Erethe Renferal
-	[GetSpellInfo(215582)] = 4, -- Raking Talons
-	[GetSpellInfo(218519)] = 4, -- Wind Burn
-	[GetSpellInfo(215307)] = 4, -- Web of Pain
-	[GetSpellInfo(215449)] = 3, -- Necrotic Venom
-	[GetSpellInfo(215460)] = 3, -- Necrotic Venom
-	[GetSpellInfo(210850)] = 4, -- Twisting Shadows
-	-- Ursoc
-	[GetSpellInfo(197943)] = 3, -- Overwhelm
-	[GetSpellInfo(204859)] = 4, -- Rend Flesh
-	[GetSpellInfo(198006)] = 3, -- Focused Gaze
-	[GetSpellInfo(198108)] = 3, -- Momentum
-	-- Dragons of Nightmare
-	[GetSpellInfo(207681)] = 4, -- Nightmare Bloom
-	[GetSpellInfo(203770)] = 3, -- Defiled Vines
-	[GetSpellInfo(203787)] = 3, -- Volatile Infection
-	[GetSpellInfo(204044)] = 3, -- Shadow Burst
-	[GetSpellInfo(205341)] = 3, -- Seeping Fog
-	[GetSpellInfo(204078)] = 3, -- Bellowing Roar
-	-- Cenarius
-	[GetSpellInfo(210315)] = 3, -- Nightmare Brambles
-	[GetSpellInfo(226821)] = 3, -- Desiccating Stomp
-	[GetSpellInfo(211507)] = 3, -- Nightmare Javelin
-	[GetSpellInfo(211471)] = 3, -- Scorned Touch
-	[GetSpellInfo(214529)] = 3, -- Spear of Nightmares
-	[GetSpellInfo(210279)] = 3, -- Creeping Nightmare
-	-- Xavius
-	[GetSpellInfo(208431)] = 3, -- Descent into Madness
-	[GetSpellInfo(206651)] = 3, -- Darkening Soul
-	[GetSpellInfo(209158)] = 3, -- Blackening Soul
-	[GetSpellInfo(211802)] = 3, -- Nightmare Blades
-	[GetSpellInfo(205771)] = 3, -- Tormenting Fixation
-	[GetSpellInfo(210451)] = 3, -- Bonds of Terror
-	[GetSpellInfo(224508)] = 3, -- Corruption Meteor
 
 	-- Legion Dungeon
 	-- Mythic+ Affixes

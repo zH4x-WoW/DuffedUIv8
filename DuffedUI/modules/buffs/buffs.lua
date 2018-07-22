@@ -100,8 +100,7 @@ local UpdateAura = function(self, index)
 			if not C["auras"].classictimer then self.Holder:Hide() end
 		end
 
-		--[[broken]]--
-		--if count > 1 then self.Count:SetText(count) else self.Count:SetText("") end
+		if count > 1 then self.Count:SetText(count) else self.Count:SetText("") end
 
 		if self.filter == "HARMFUL" then
 			local color = DebuffTypeColor[dtype or "none"]
