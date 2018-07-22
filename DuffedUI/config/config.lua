@@ -99,7 +99,7 @@ C['actionbar'] = {
 	['RightSideBar'] = false,
 	['LeftSideBarDisable'] = false,
 	['RightSideBarDisable'] = false,
-	['hidepanels'] = true,
+	['hidepanels'] = false,
 }
 
 C['raid'] = {

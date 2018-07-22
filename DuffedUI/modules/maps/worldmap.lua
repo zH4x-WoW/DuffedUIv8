@@ -184,10 +184,10 @@ function WorldMap:Coords()
 	coords:FontString('PlayerText', C['media'].font, fontheight, fontflag)
 	coords:FontString('MouseText', C['media'].font, fontheight, fontflag)
 	coords.PlayerText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
-	coords.PlayerText:SetText('Player:   x, x')
+	coords.PlayerText:SetText('Player: x, x')
 	coords.PlayerText:SetPoint('TOPLEFT', WorldMapFrame.ScrollContainer, 'TOPLEFT', 5, -25)
 	coords.MouseText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
-	coords.MouseText:SetText('Mouse:   x, x')
+	coords.MouseText:SetText('Cursor: x, x')
 	coords.MouseText:SetPoint('TOPLEFT', WorldMapFrame.ScrollContainer, 'TOPLEFT', 5, -40)
 	
 	local int = 0
@@ -208,7 +208,7 @@ function WorldMap:Coords()
 			end		
 			x = math.floor(100 * x)
 			y = math.floor(100 * y)
-			if x ~= 0 and y ~= 0 then coords.PlayerText:SetText(PLAYER..':   '..x..', '..y) else coords.PlayerText:SetText(' ') end
+			if x ~= 0 and y ~= 0 then coords.PlayerText:SetText(PLAYER..': '..x..', '..y) else coords.PlayerText:SetText(' ') end
 
 			local scale = WorldMapFrame.ScrollContainer:GetEffectiveScale()
 			local width = WorldMapFrame.ScrollContainer:GetWidth()
@@ -221,7 +221,7 @@ function WorldMap:Coords()
 			if (adjustedX >= 0  and adjustedY >= 0 and adjustedX <= 1 and adjustedY <= 1) then
 				adjustedX = math.floor(100 * adjustedX)
 				adjustedY = math.floor(100 * adjustedY)
-				coords.MouseText:SetText(MOUSE_LABEL..': '..adjustedX..', '..adjustedY)
+				coords.MouseText:SetText('Cursor: '..adjustedX..', '..adjustedY)
 			else
 				coords.MouseText:SetText(' ')
 			end
