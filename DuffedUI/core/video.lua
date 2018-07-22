@@ -1,7 +1,13 @@
 local D, C, L = unpack(select(2, ...))
 
 local RequireRestart = false
-if C['general']['autoscale'] then C['general']['uiscale'] = min(2, max(0.32, 768 / string.match(D.Resolution, '%d+x(%d+)'))) end
+local Adjust = (D['ScreenHeight'] / 10000) / 2
+local UIScale = min(2, max(0.01, 768 / string.match(D['Resolution'], "%d+x(%d+)")))
+
+if C['general']['autoscale'] then
+	UIScale = UIScale + (Adjust * 2)
+	C['general']['uiscale'] = UIScale
+end
 
 D['CreatePopup']['CLIENT_RESTART'] = {
 	Question = L['misc']['Resolution'],
