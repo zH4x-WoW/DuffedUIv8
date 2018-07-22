@@ -1,11 +1,10 @@
 local D, C, L = unpack(select(2, ...))
---[[broken]]--
 
 -- Modified Script from Tukui T16
 -- Credits got to Tukz & Hydra
 local _G = _G
-local WorldMap = CreateFrame("Frame")
-local fontflag = "THINOUTLINE"
+local WorldMap = CreateFrame('Frame')
+local fontflag = 'THINOUTLINE'
 
 WorldMap.QuestTexts = {
 	QuestInfoTitleHeader,
@@ -29,7 +28,7 @@ function WorldMap:ColorQuestText()
 	local Objectives = QuestInfoObjectivesFrame.Objectives
 
 	for i = 1, #Objectives do
-		local Objective = _G["QuestInfoObjective"..i]
+		local Objective = _G['QuestInfoObjective'..i]
 		local Completed = select(3, GetQuestLogLeaderBoard(i))
 
 		if Completed then Objective:SetTextColor(0, 1, 0) else Objective:SetTextColor(1, 0, 0) end
@@ -37,7 +36,7 @@ function WorldMap:ColorQuestText()
 end
 
 function WorldMap:SkinReward(i)
-	local Reward = _G[self:GetName().."QuestInfoItem"..i]
+	local Reward = _G[self:GetName()..'QuestInfoItem'..i]
 	local Texture = Reward.Icon:GetTexture()
 
 	Reward:StripTextures()
@@ -52,16 +51,15 @@ end
 function WorldMap:Skin()
 	local Map = WorldMapFrame
 	local QuestScroll = QuestScrollFrame
-	local Navigation = WorldMapFrameNavBar
-	local TutorialButton = WorldMapFrameTutorialButton
-	local TitleButton = WorldMapTitleButton
+	local Navigation = WorldMapFrame.NavBar
+	local TutorialButton = WorldMapFrame.BorderFrame.Tutorial
 	local ViewAllButton = QuestScrollFrame.ViewAll
 	local BackButton = QuestMapFrame.DetailsFrame.BackButton
 	local AbandonButton = QuestMapFrame.DetailsFrame.AbandonButton
 	local ShareButton = QuestMapFrame.DetailsFrame.ShareButton
 	local TrackButton = QuestMapFrame.DetailsFrame.TrackButton
 	local ScrollBar = QuestScrollFrame.ScrollBar
-	local Title = WorldMapFrame.BorderFrame.TitleText
+	local Title = WorldMapFrameTitleText
 	local CloseButton = WorldMapFrameCloseButton
 	local SizeButton = WorldMapFrameSizeUpButton
 	local RewardsInfo = MapQuestInfoRewardsFrame
@@ -69,101 +67,96 @@ function WorldMap:Skin()
 	local XP = MapQuestInfoRewardsFrame.XPFrame
 	local QuestBackground = QuestScrollFrame.Background
 	local StoryTooltip = QuestScrollFrame.StoryTooltip
-	--local TrackingMenuButton = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button
-	--local TrackingMenuBackground = WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Background
 
 	Map:StripTextures()
 	Map:CreateBackdrop()
 	Map.backdrop:ClearAllPoints()
 	Map.backdrop:Size(701, 470)
-	Map.backdrop:Point("TOPLEFT", 0, -66)
-	Map.Header = CreateFrame("Frame", nil, Map)
+	Map.backdrop:Point('TOPLEFT', 0, -66)
+	Map.Header = CreateFrame('Frame', nil, Map)
 	Map.Header:Size(Map.backdrop:GetWidth(), 23)
-	Map.Header:SetPoint("BOTTOMLEFT", Map.backdrop, "TOPLEFT", 0, 2)
+	Map.Header:SetPoint('BOTTOMLEFT', Map.backdrop, 'TOPLEFT', 0, 2)
 	Map.Header:SetTemplate()
 	WorldMapFrame.BorderFrame:StripTextures()
-	--WorldMapFrame.BorderFrame.Inset:StripTextures()
-	--WorldMapLevelDropDown:StripTextures()
-	--WorldMapLevelDropDown:ClearAllPoints()
-	--WorldMapLevelDropDown:SetPoint("TOPLEFT", Map.Header, -17, 1)
 
 	QuestMapFrame.DetailsFrame:StripTextures()
 	QuestMapFrame.DetailsFrame.RewardsFrame:StripTextures()
 	QuestMapFrame.DetailsFrame.CompleteQuestFrame:StripTextures()
 	QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:StripTextures()
 	QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:SkinButton()
-	QuestScrollFrame.Contents.StoryHeader:StripTextures()
-	QuestScrollFrame.Contents.StoryHeader:SetTemplate("Transparent")
 	QuestMapFrame:StripTextures()
-
 	StoryTooltip:StripTextures()
-	StoryTooltip:SetTemplate("Transparent")
-
+	StoryTooltip:SetTemplate('Transparent')
 	QuestBackground:SetAlpha(0)
 
-	--TutorialButton:Kill()
-	--TrackingMenuButton:SetAlpha(0)
-	--TrackingMenuBackground:SetAlpha(0)
+	QuestScrollFrame:SetTemplate('Transparent')
+	QuestScrollFrame:ClearAllPoints()
+	QuestScrollFrame:Size(299, 496)
+	QuestScrollFrame:SetPoint('LEFT', Map.backdrop, 'RIGHT', 2, 13)
+	QuestScrollFrame.Contents:Size(295, 491)
+	QuestScrollFrame.Contents.StoryHeader:StripTextures()
+	QuestScrollFrame.Contents.StoryHeader:SetTemplate('Transparent')
+	QuestScrollFrame.DetailFrame.TopDetail:Hide()
+	QuestScrollFrame.DetailFrame.BottomDetail:Hide()
 
 	QuestScrollFrameScrollBar:SkinScrollBar()
-
 	QuestMapFrame.DetailsFrame:CreateBackdrop()
 	QuestMapFrame.DetailsFrame.backdrop:SetAllPoints(QuestScroll.backdrop)
-	QuestMapFrame.DetailsFrame.backdrop:SetTemplate("Transparent")
+	QuestMapFrame.DetailsFrame.backdrop:SetTemplate('Transparent')
 	QuestMapFrame.DetailsFrame.backdrop:ClearAllPoints()
 	QuestMapFrame.DetailsFrame.backdrop:Size(299, 470)
-	QuestMapFrame.DetailsFrame.backdrop:SetPoint("LEFT", Map.backdrop, "RIGHT", 2, 0)
+	QuestMapFrame.DetailsFrame.backdrop:SetPoint('LEFT', Map.backdrop, 'RIGHT', 2, 0)
 	QuestMapDetailsScrollFrameScrollBar:SkinScrollBar()
 
 	BackButton:SkinButton()
 	BackButton:ClearAllPoints()
-	BackButton:SetPoint("LEFT", Map.Header, "RIGHT", 2, 0)
+	BackButton:SetPoint('LEFT', Map.Header, 'RIGHT', 2, 0)
 	BackButton:Size(299, 23)
 	AbandonButton:StripTextures()
 	AbandonButton:SkinButton()
 	AbandonButton:ClearAllPoints()
-	AbandonButton:SetPoint("BOTTOMLEFT", QuestMapFrame.DetailsFrame.backdrop, "BOTTOMLEFT", 3, 3)
+	AbandonButton:SetPoint('BOTTOMLEFT', QuestMapFrame.DetailsFrame.backdrop, 'BOTTOMLEFT', 3, 3)
 	ShareButton:StripTextures()
 	ShareButton:SkinButton()
 	TrackButton:StripTextures()
 	TrackButton:SkinButton()
 
 	QuestNPCModel:StripTextures()
-	QuestNPCModel:CreateBackdrop("Transparent")
+	QuestNPCModel:CreateBackdrop('Transparent')
 	QuestNPCModel:ClearAllPoints()
-	QuestNPCModel:Point("TOPLEFT", BackButton, "TOPRIGHT", 2, -2)
+	QuestNPCModel:Point('TOPLEFT', BackButton, 'TOPRIGHT', 2, -2)
 	QuestNPCModelTextFrame:StripTextures()
-	QuestNPCModelTextFrame:CreateBackdrop("Default")
-	QuestNPCModelTextFrame.backdrop:Point("TOPLEFT", QuestNPCModel.backdrop, "BOTTOMLEFT", 0, -2)
-	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(parentFrame, portrait, text, name, x, y)
+	QuestNPCModelTextFrame:CreateBackdrop('Default')
+	QuestNPCModelTextFrame.backdrop:Point('TOPLEFT', QuestNPCModel.backdrop, 'BOTTOMLEFT', 0, -2)
+	hooksecurefunc('QuestFrame_ShowQuestPortrait', function(parentFrame, portrait, text, name, x, y)
 		QuestNPCModel:ClearAllPoints()
-		QuestNPCModel:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x + 16, y)
+		QuestNPCModel:SetPoint('TOPLEFT', parentFrame, 'TOPRIGHT', x + 16, y)
 	end)
 
 	-- Quests Buttons
-	--[[for i = 1, 2 do
-		local Button = i == 1 and WorldMapFrame.UIElementsFrame.OpenQuestPanelButton or WorldMapFrame.UIElementsFrame.CloseQuestPanelButton
-		local Text = (i == 1 and QUESTS_LABEL.." ->") or ("<- "..QUESTS_LABEL)
+	for i = 1, 2 do
+		local Button = i == 1 and WorldMapFrame.SidePanelToggle.OpenButton or WorldMapFrame.SidePanelToggle.CloseButton
+		local Text = (i == 1 and ' ->') or ('<- ')
 
 		Button:ClearAllPoints()
-		Button:SetPoint("BOTTOMRIGHT", -3, 3)
-		Button:Size(100, 23)
+		Button:SetPoint('BOTTOMRIGHT', 0, 0)
+		Button:Size(32, 32)
 		Button:StripTextures()
+		Button:SetTemplate('Transparent')
 		Button:SkinButton()
-		Button:FontString("Text", C["media"].font, 11, fontflag)
-		Button.Text:SetPoint("CENTER")
+		Button:FontString('Text', C['media'].font, 11, fontflag)
+		Button.Text:SetPoint('CENTER')
 		Button.Text:SetText(Text)
-	end]]--
+	end
 
-	--Navigation:Hide()
-	--TitleButton:ClearAllPoints()
-	--TitleButton:SetAllPoints(Map.Header)
-	--Title:ClearAllPoints()
-	--Title:SetPoint("CENTER", Map.Header)
+	Navigation:Hide()
+	Title:ClearAllPoints()
+	Title:SetPoint('CENTER', Map.Header)
+	TutorialButton:Kill()
 
 	CloseButton:StripTextures()
 	CloseButton:ClearAllPoints()
-	CloseButton:SetPoint("RIGHT", Map.Header, "RIGHT", 8, -1)
+	CloseButton:SetPoint('RIGHT', Map.Header, 'RIGHT', 8, -1)
 	CloseButton:SkinCloseButton()
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame:SkinMaxMinFrame()
 
@@ -171,50 +164,56 @@ function WorldMap:Skin()
 
 	Money:StripTextures()
 	Money:CreateBackdrop()
-	Money.Icon:SetTexture("Interface\\Icons\\inv_misc_coin_01")
+	Money.Icon:SetTexture('Interface\\Icons\\inv_misc_coin_01')
 	Money.Icon:SetTexCoord(unpack(D.IconCoord))
 	Money.backdrop:ClearAllPoints()
 	Money.backdrop:SetOutside(Money.Icon)
 
 	XP:StripTextures()
 	XP:CreateBackdrop()
-	XP.Icon:SetTexture("Interface\\Icons\\XP_Icon")
+	XP.Icon:SetTexture('Interface\\Icons\\XP_Icon')
 	XP.Icon:SetTexCoord(unpack(D.IconCoord))
 	XP.backdrop:ClearAllPoints()
 	XP.backdrop:SetOutside(XP.Icon)
 end
 
---[[function WorldMap:Coords()
-	local coords = CreateFrame("Frame", "CoordsFrame", WorldMapFrame)
+function WorldMap:Coords()
+	local coords = CreateFrame('Frame', 'CoordsFrame', WorldMapFrame)
 	local fontheight = 11 * 1.1
 	coords:SetFrameLevel(90)
-	coords:FontString("PlayerText", C["media"].font, fontheight, fontflag)
-	coords:FontString("MouseText", C["media"].font, fontheight, fontflag)
+	coords:FontString('PlayerText', C['media'].font, fontheight, fontflag)
+	coords:FontString('MouseText', C['media'].font, fontheight, fontflag)
 	coords.PlayerText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
-	coords.PlayerText:SetText("Player:   x, x")
-	coords.PlayerText:SetPoint("TOPLEFT", WorldMapFrame.UIElementsFrame, "TOPLEFT", 5, -5)
+	coords.PlayerText:SetText('Player:   x, x')
+	coords.PlayerText:SetPoint('TOPLEFT', WorldMapFrame.ScrollContainer, 'TOPLEFT', 5, -25)
 	coords.MouseText:SetTextColor(235 / 255, 245 / 255, 0 / 255)
-	coords.MouseText:SetText("Mouse:   x, x")
-	coords.MouseText:SetPoint("TOPLEFT", WorldMapFrame.UIElementsFrame, "TOPLEFT", 5, -20)
+	coords.MouseText:SetText('Mouse:   x, x')
+	coords.MouseText:SetPoint('TOPLEFT', WorldMapFrame.ScrollContainer, 'TOPLEFT', 0, -40)
 	
 	local int = 0
-	WorldMapFrame:HookScript("OnUpdate", function(self, elapsed)
+	WorldMapFrame:HookScript('OnUpdate', function(self, elapsed)
 		int = int + 1
 		if int >= 3 then
-			if not GetPlayerMapPosition("player") then
-				coords.PlayerText:SetText("x, x")
+			local UnitMap = C_Map.GetBestMapForUnit('player')
+			local x, y = 0, 0
+
+			if not C_Map.GetPlayerMapPosition(UnitMap, 'player') then
+				coords.PlayerText:SetText('x, x')
 				return
 			end
-
-			local x, y = GetPlayerMapPosition("player")
+			
+			if UnitMap then
+				local GetPlayerMapPosition = C_Map.GetPlayerMapPosition(UnitMap, 'player')
+				if GetPlayerMapPosition then x, y = C_Map.GetPlayerMapPosition(UnitMap, 'player'):GetXY() end
+			end		
 			x = math.floor(100 * x)
 			y = math.floor(100 * y)
-			if x ~= 0 and y ~= 0 then coords.PlayerText:SetText(PLAYER..":   "..x..", "..y) else coords.PlayerText:SetText(" ") end
+			if x ~= 0 and y ~= 0 then coords.PlayerText:SetText(PLAYER..':   '..x..', '..y) else coords.PlayerText:SetText(' ') end
 
-			local scale = WorldMapDetailFrame:GetEffectiveScale()
-			local width = WorldMapDetailFrame:GetWidth()
-			local height = WorldMapDetailFrame:GetHeight()
-			local centerX, centerY = WorldMapDetailFrame:GetCenter()
+			local scale = WorldMapFrame.ScrollContainer:GetEffectiveScale()
+			local width = WorldMapFrame.ScrollContainer:GetWidth()
+			local height = WorldMapFrame.ScrollContainer:GetHeight()
+			local centerX, centerY = WorldMapFrame.ScrollContainer:GetCenter()
 			local x, y = GetCursorPosition()
 			local adjustedX = (x / scale - (centerX - (width/2))) / width
 			local adjustedY = (centerY + (height/2) - y / scale) / height
@@ -222,23 +221,23 @@ end
 			if (adjustedX >= 0  and adjustedY >= 0 and adjustedX <= 1 and adjustedY <= 1) then
 				adjustedX = math.floor(100 * adjustedX)
 				adjustedY = math.floor(100 * adjustedY)
-				coords.MouseText:SetText(MOUSE_LABEL..":   "..adjustedX..", "..adjustedY)
+				coords.MouseText:SetText(MOUSE_LABEL..':   '..adjustedX..', '..adjustedY)
 			else
-				coords.MouseText:SetText(" ")
+				coords.MouseText:SetText(' ')
 			end
 			int = 0
 		end
 	end)
-end]]
+end
 
 function WorldMap:AddHooks()
-	hooksecurefunc("QuestInfo_Display", self.ColorQuestText)
-	hooksecurefunc("QuestInfo_GetRewardButton", self.SkinReward)
+	hooksecurefunc('QuestInfo_Display', self.ColorQuestText)
+	hooksecurefunc('QuestInfo_GetRewardButton', self.SkinReward)
 end
 
 function WorldMap:Enable()
-	if not IsAddOnLoaded("AddOnSkins") then
-		local SmallerMap = GetCVarBool("miniWorldMap")
+	if not IsAddOnLoaded('AddOnSkins') then
+		local SmallerMap = GetCVarBool('miniWorldMap')
 
 		if not SmallerMap then
 			ToggleWorldMap()
@@ -248,11 +247,11 @@ function WorldMap:Enable()
 		self:Skin()
 		self:AddHooks()
 	end
-	--self:Coords()
+	self:Coords()
 end
 
-WorldMap:RegisterEvent("ADDON_LOADED")
-WorldMap:RegisterEvent("PLAYER_ENTERING_WORLD")
-WorldMap:SetScript("OnEvent", function(self, event, ...)
+WorldMap:RegisterEvent('ADDON_LOADED')
+WorldMap:RegisterEvent('PLAYER_ENTERING_WORLD')
+WorldMap:SetScript('OnEvent', function(self, event, ...)
 	WorldMap:Enable()
 end)
