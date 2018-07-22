@@ -77,13 +77,13 @@ for i = 1, NUM_CHAT_WINDOWS do
 end
 
 if C["chat"].lbackground then
-	DuffedUIButtonCF1:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
-	DuffedUIButtonCF2:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
-	DuffedUIButtonCF3:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
+	DuffedUIButtonCF1:SetPoint("LEFT", DuffedUIChatChannels, "RIGHT", 2, 0)
+	DuffedUIButtonCF2:SetPoint("LEFT", DuffedUIChatChannels, "RIGHT", 2, 0)
+	DuffedUIButtonCF3:SetPoint("LEFT", DuffedUIChatChannels, "RIGHT", 2, 0)
 else
-	DuffedUIButtonCF1:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
-	DuffedUIButtonCF2:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
-	DuffedUIButtonCF3:SetPoint("LEFT", DuffedUIChatMenu, "RIGHT", 2, 0)
+	DuffedUIButtonCF1:SetPoint("LEFT", DuffedUIChatChannels, "RIGHT", 2, 0)
+	DuffedUIButtonCF2:SetPoint("LEFT", DuffedUIChatChannels, "RIGHT", 2, 0)
+	DuffedUIButtonCF3:SetPoint("LEFT", DuffedUIChatChannels, "RIGHT", 2, 0)
 	D["ButtonMO"](DuffedUIButtonCF1)
 	D["ButtonMO"](DuffedUIButtonCF2)
 	D["ButtonMO"](DuffedUIButtonCF3)

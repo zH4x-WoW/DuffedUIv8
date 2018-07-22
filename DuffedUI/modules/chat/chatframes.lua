@@ -113,11 +113,9 @@ local function SetChatStyle(frame)
 	_G[format("ChatFrame%sTabSelectedMiddle", id)]:Kill()
 	_G[format("ChatFrame%sTabSelectedRight", id)]:Kill()
 
-	--_G[format("ChatFrame%sButtonFrameUpButton", id)]:Kill()
-	--_G[format("ChatFrame%sButtonFrameDownButton", id)]:Kill()
-	--_G[format("ChatFrame%sButtonFrameBottomButton", id)]:Kill()
-	--_G[format("ChatFrame%sButtonFrameMinimizeButton", id)]:Kill()
-	--_G[format("ChatFrame%sButtonFrame", id)]:Kill()
+	_G[format("ChatFrame%sButtonFrameMinimizeButton", id)]:Kill()
+	_G[format("ChatFrame%sButtonFrame", id)]:Kill()
+	_G["ChatFrameChannelButton"]:Kill()
 
 	_G[format("ChatFrame%sEditBoxLeft", id)]:Kill()
 	_G[format("ChatFrame%sEditBoxMid", id)]:Kill()
@@ -204,9 +202,6 @@ BNToastFrame:HookScript("OnShow", function(self)
 	self:ClearAllPoints()
 	self:Point("TOPLEFT", DuffedUIBnetMover, "TOPLEFT", 3, -3)
 end)
-
---[[broken]]--
---BNToastFrameCloseButton:SkinCloseButton()
 
 ChatConfigFrameDefaultButton:Kill()
 
