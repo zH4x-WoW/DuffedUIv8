@@ -9,16 +9,16 @@ ns._Headers = {}
 
 local class = select(2, UnitClass('player'))
 local texture = C['media']['normTex']
-local f, fs, ff = C['media'].font, 11, 'THINOUTLINE'
+local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local layout = C['unitframes']['layout']
 local move = D['move']
 local backdrop = {
-	bgFile = C['media'].blank,
+	bgFile = C['media']['blank'],
 	insets = {top = -D['mult'], left = -D['mult'], bottom = -D['mult'], right = -D['mult']},
 }
 
 D['ConstructUFPlayer'] = function(self)
-	--[[Initial Elements]]--
+	-- Initial Elements
 	self.colors = D['UnitColor']
 
 	self:RegisterForClicks('AnyUp')
@@ -40,7 +40,7 @@ D['ConstructUFPlayer'] = function(self)
 		panel:Height(17)
 	end
 
-	--[[Health]]--
+	-- Health
 	local health = CreateFrame('StatusBar', nil, self)
 	if layout == 1 or layout == 2 then
 		if layout == 1 then health:Height(20) else health:Height(22) end
@@ -56,6 +56,8 @@ D['ConstructUFPlayer'] = function(self)
 		health:SetPoint('BOTTOMRIGHT', panel, -2, 0)
 	end
 	health:SetStatusBarTexture(texture)
+	health:SetFrameLevel(5)
+	health:SetFrameStrata('MEDIUM')
 
 	if layout == 3 then
 		panel:Point('BOTTOMLEFT', health, 'TOPLEFT', -2, 2)
@@ -63,10 +65,10 @@ D['ConstructUFPlayer'] = function(self)
 	end
 
 	local HealthBorder = CreateFrame('Frame', nil, health)
-	HealthBorder:Point('TOPLEFT', health, 'TOPLEFT', D.Scale(-2), D.Scale(2))
-	HealthBorder:Point('BOTTOMRIGHT', health, 'BOTTOMRIGHT', D.Scale(2), D.Scale(-2))
+	HealthBorder:Point('TOPLEFT', health, 'TOPLEFT', -2, 2)
+	HealthBorder:Point('BOTTOMRIGHT', health, 'BOTTOMRIGHT', 2, -2)
 	HealthBorder:SetTemplate('Default')
-	HealthBorder:SetFrameLevel(2)
+	HealthBorder:SetFrameLevel(health:GetFrameLevel() - 1)
 	self.HealthBorder = HealthBorder
 
 	local healthBG = health:CreateTexture(nil, 'BORDER')
@@ -75,7 +77,7 @@ D['ConstructUFPlayer'] = function(self)
 
 	if C['unitframes']['percent'] then
 		local percHP
-		percHP = D.SetFontString(health, C['media'].font, 20, 'THINOUTLINE')
+		percHP = D['SetFontString'](health, C['media']['font'], 20, 'THINOUTLINE')
 		percHP:SetTextColor(unpack(C['media'].datatextcolor1))
 		if C['unitframes']['percentoutside'] == true then
 			percHP:Point('RIGHT', health, 'LEFT', -25, -10)
@@ -89,7 +91,7 @@ D['ConstructUFPlayer'] = function(self)
 	health.value = health:CreateFontString(nil, 'OVERLAY')
 	health.value:SetFont(f, fs, ff)
 	if layout == 4 then health.value:Point('RIGHT', health, 'RIGHT', -4, 10) else health.value:Point('RIGHT', health, 'RIGHT', -4, -1) end
-	health.PostUpdate = D.PostUpdateHealth
+	health.PostUpdate = D['PostUpdateHealth']
 
 	health.frequentUpdates = true
 	if C['unitframes']['showsmooth'] then health.Smooth = true end
@@ -111,7 +113,7 @@ D['ConstructUFPlayer'] = function(self)
 		health.colorReaction = true
 	end
 
-	--[[Power]]--
+	-- Power
 	local power = CreateFrame('StatusBar', nil, self)
 	if layout == 1 then
 		power:Size(228, 18)
@@ -129,12 +131,11 @@ D['ConstructUFPlayer'] = function(self)
 		power:Point('TOP', health, 'BOTTOM', 0, 10)
 	end
 	power:SetStatusBarTexture(texture)
-	power:SetFrameLevel(health:GetFrameLevel() + 2)
 	if layout == 1 or layout == 2 or layout == 3 then power:SetFrameStrata('BACKGROUND') end
 
 	local PowerBorder = CreateFrame('Frame', nil, power)
-	PowerBorder:Point('TOPLEFT', power, 'TOPLEFT', D.Scale(-2), D.Scale(2))
-	PowerBorder:Point('BOTTOMRIGHT', power, 'BOTTOMRIGHT', D.Scale(2), D.Scale(-2))
+	PowerBorder:Point('TOPLEFT', power, 'TOPLEFT', D['Scale'](-2), D['Scale'](2))
+	PowerBorder:Point('BOTTOMRIGHT', power, 'BOTTOMRIGHT', D['Scale'](2), D['Scale'](-2))
 	PowerBorder:SetTemplate('Default')
 	PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
 	self.PowerBorder = PowerBorder
@@ -159,33 +160,33 @@ D['ConstructUFPlayer'] = function(self)
 	end
 	if C['unitframes']['showsmooth'] then power.Smooth = true end
 
-	--[[Elements]]--
+	-- Elements
 	if C['unitframes']['charportrait'] then
 		if layout == 1 or layout == 4 then
 			local portrait = CreateFrame('PlayerModel', nil, health)
 			portrait:SetFrameLevel(health:GetFrameLevel())
 			portrait:SetAllPoints(health)
 			portrait:SetAlpha(.15)
-			portrait.PostUpdate = D.PortraitUpdate
+			portrait.PostUpdate = D['PortraitUpdate']
 			self.Portrait = portrait
 		elseif layout == 2 then
 			local portrait = CreateFrame('PlayerModel', nil, self)
 			portrait:Size(38)
 			portrait:Point('BOTTOMRIGHT', panel, 'BOTTOMLEFT', -5, 2)
 			portrait:CreateBackdrop()
-			portrait.PostUpdate = D.PortraitUpdate
+			portrait.PostUpdate = D['PortraitUpdate']
 			self.Portrait = portrait
 		elseif layout == 3 then
 			local portrait = CreateFrame('PlayerModel', nil, self)
 			portrait:Size(48)
 			portrait:Point('BOTTOMRIGHT', power, 'BOTTOMLEFT', -6, 0)
 			portrait:CreateBackdrop()
-			portrait.PostUpdate = D.PortraitUpdate
+			portrait.PostUpdate = D['PortraitUpdate']
 			self.Portrait = portrait
 		end
 	end
 
-	if D.Class == 'PRIEST' and C['unitframes']['weakenedsoulbar'] then
+	if D['Class'] == 'PRIEST' and C['unitframes']['weakenedsoulbar'] then
 		local ws = CreateFrame('StatusBar', self:GetName()..'_WeakenedSoul', power)
 		ws:SetAllPoints(power)
 		ws:SetStatusBarTexture(texture)
@@ -211,8 +212,8 @@ D['ConstructUFPlayer'] = function(self)
 	FlashInfo.ManaLevel:Point('CENTER', health, 'CENTER', 0, 1)
 
 	local PVP = health:CreateTexture(nil, 'OVERLAY')
-	PVP:SetHeight(D.Scale(32))
-	PVP:SetWidth(D.Scale(32))
+	PVP:SetHeight(D['Scale'](32))
+	PVP:SetWidth(D['Scale'](32))
 	PVP:Point('TOPLEFT', health, 'TOPRIGHT', -7, 7)
 	
 	local Leader = health:CreateTexture(nil, 'OVERLAY')
@@ -242,10 +243,10 @@ D['ConstructUFPlayer'] = function(self)
 	end)
 
 	if C['unitframes']['playeraggro'] then
-		table.insert(self.__elements, D.UpdateThreat)
-		self:RegisterEvent('PLAYER_TARGET_CHANGED', D.UpdateThreat)
-		self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', D.UpdateThreat)
-		self:RegisterEvent('UNIT_THREAT_SITUATION_UPDATE', D.UpdateThreat)
+		table.insert(self.__elements, D['UpdateThreat'])
+		self:RegisterEvent('PLAYER_TARGET_CHANGED', D['UpdateThreat'])
+		self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', D['UpdateThreat'])
+		self:RegisterEvent('UNIT_THREAT_SITUATION_UPDATE', D['UpdateThreat'])
 	end
 
 	if layout == 4 then
@@ -258,7 +259,7 @@ D['ConstructUFPlayer'] = function(self)
 		self.Name = Name
 	end
 
-	--[[Combat feedback & Healcom]]--
+	-- Combat feedback & Healcom
 	if C['unitframes']['combatfeedback'] then
 		local CombatFeedbackText
 		CombatFeedbackText = D.SetFontString(health, C['media'].font, 11, 'THINOUTLINE')
@@ -282,7 +283,7 @@ D['ConstructUFPlayer'] = function(self)
 		self.CombatFeedbackText = CombatFeedbackText
 	end
 
-	--[[Castbar]]--
+	-- Castbar
 	if C['castbar']['enable'] then
 		local pcb = CreateFrame('Frame', 'PlayerCastBarMover', UIParent)
 		pcb:Size(C['castbar']['playerwidth'], C['castbar']['playerheight'])

@@ -25,7 +25,7 @@ local function SetCastBarColorDefault(self)
 end
 
 D['ConstructUFTarget'] = function(self)
-	--[[Initial Elements]]--
+	-- Initial Elements
 	self.colors = D['UnitColor']
 
 	self:RegisterForClicks('AnyUp')
@@ -45,7 +45,7 @@ D['ConstructUFTarget'] = function(self)
 	end
 	panel:Point('BOTTOM', self, 'BOTTOM', 0, 0)
 
-	--[[Health]]--
+	-- Health
 	local health = CreateFrame('StatusBar', nil, self)
 	if layout == 1 or layout == 2 then
 		if layout == 1 then health:Height(20) else health:Height(22) end
@@ -61,12 +61,14 @@ D['ConstructUFTarget'] = function(self)
 		health:SetPoint('BOTTOMRIGHT', panel, -2, 0)
 	end
 	health:SetStatusBarTexture(texture)
+	health:SetFrameLevel(5)
+	health:SetFrameStrata('MEDIUM')
 
 	local HealthBorder = CreateFrame('Frame', nil, health)
-	HealthBorder:Point('TOPLEFT', health, 'TOPLEFT', D.Scale(-2), D.Scale(2))
-	HealthBorder:Point('BOTTOMRIGHT', health, 'BOTTOMRIGHT', D.Scale(2), D.Scale(-2))
+	HealthBorder:Point('TOPLEFT', health, 'TOPLEFT', -2, 2)
+	HealthBorder:Point('BOTTOMRIGHT', health, 'BOTTOMRIGHT', 2, -2)
 	HealthBorder:SetTemplate('Default')
-	HealthBorder:SetFrameLevel(2)
+	HealthBorder:SetFrameLevel(health:GetFrameLevel() - 1)
 	self.HealthBorder = HealthBorder
 
 	local healthBG = health:CreateTexture(nil, 'BORDER')
@@ -75,8 +77,8 @@ D['ConstructUFTarget'] = function(self)
 
 	if C['unitframes']['percent'] then
 		local percHP
-		percHP = D.SetFontString(health, C['media'].font, 20, 'THINOUTLINE')
-		percHP:SetTextColor(unpack(C['media'].datatextcolor1))
+		percHP = D.SetFontString(health, C['media']['font'], 20, 'THINOUTLINE')
+		percHP:SetTextColor(unpack(C['media']['datatextcolor1']))
 		if C['unitframes']['percentoutside'] == true then
 			percHP:Point('LEFT', health, 'RIGHT', 25, -10)
 		else	
@@ -111,7 +113,7 @@ D['ConstructUFTarget'] = function(self)
 		health.colorReaction = true
 	end
 
-	--[[Power]]--
+	-- Power
 	local power = CreateFrame('StatusBar', nil, self)
 	if layout == 1 then
 		power:Size(228, 18)
@@ -129,12 +131,11 @@ D['ConstructUFTarget'] = function(self)
 		power:Point('TOP', health, 'BOTTOM', 0, 10)
 	end
 	power:SetStatusBarTexture(texture)
-	power:SetFrameLevel(health:GetFrameLevel() + 2)
 	if layout == 1 or layout == 2 or layout == 3 then power:SetFrameStrata('BACKGROUND') end
 
 	local PowerBorder = CreateFrame('Frame', nil, power)
-	PowerBorder:Point('TOPLEFT', power, 'TOPLEFT', D.Scale(-2), D.Scale(2))
-	PowerBorder:Point('BOTTOMRIGHT', power, 'BOTTOMRIGHT', D.Scale(2), D.Scale(-2))
+	PowerBorder:Point('TOPLEFT', power, 'TOPLEFT', -2, 2)
+	PowerBorder:Point('BOTTOMRIGHT', power, 'BOTTOMRIGHT', 2, -2)
 	PowerBorder:SetTemplate('Default')
 	PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
 	self.PowerBorder = PowerBorder
@@ -168,39 +169,39 @@ D['ConstructUFTarget'] = function(self)
 		power.colorPower = false
 	end
 
-	--[[Elements]]--
+	-- Elements
 	if C['unitframes']['charportrait'] then
 		if layout == 1 or layout == 4 then
 			local portrait = CreateFrame('PlayerModel', nil, health)
 			portrait:SetFrameLevel(health:GetFrameLevel())
 			portrait:SetAllPoints(health)
 			portrait:SetAlpha(.15)
-			portrait.PostUpdate = D.PortraitUpdate 
+			portrait.PostUpdate = D['PortraitUpdate'] 
 			self.Portrait = portrait
 		elseif layout == 2 then
 			local portrait = CreateFrame('PlayerModel', nil, self)
 			portrait:Size(38)
 			portrait:Point('BOTTOMLEFT', panel, 'BOTTOMRIGHT', 5, 2)
 			portrait:CreateBackdrop()
-			portrait.PostUpdate = D.PortraitUpdate 
+			portrait.PostUpdate = D['PortraitUpdate'] 
 			self.Portrait = portrait
 		elseif layout == 3 then
 			local portrait = CreateFrame('PlayerModel', nil, self)
 			portrait:Size(48)
 			portrait:Point('BOTTOMLEFT', power, 'BOTTOMRIGHT', 6, 0)
 			portrait:CreateBackdrop()
-			portrait.PostUpdate = D.PortraitUpdate 
+			portrait.PostUpdate = D['PortraitUpdate'] 
 			self.Portrait = portrait
 		end
 	end
 
-	if D.Class == 'PRIEST' and C['unitframes']['weakenedsoulbar'] then
+	if D['Class'] == 'PRIEST' and C['unitframes']['weakenedsoulbar'] then
 		local ws = CreateFrame('StatusBar', self:GetName()..'_WeakenedSoul', power)
 		ws:SetAllPoints(power)
 		ws:SetStatusBarTexture(texture)
 		ws:GetStatusBarTexture():SetHorizTile(false)
 		ws:SetBackdrop(backdrop)
-		ws:SetBackdropColor(unpack(C['media'].backdropcolor))
+		ws:SetBackdropColor(unpack(C['media']['backdropcolor']))
 		ws:SetStatusBarColor(205/255, 20/255, 20/255)
 		self.WeakenedSoul = ws
 	end
@@ -219,8 +220,8 @@ D['ConstructUFTarget'] = function(self)
 	AltPowerBar:Point('TOP', DuffedUIInfoLeft, 2, -2)
 	AltPowerBar:Point('BOTTOM', DuffedUIInfoLeft, -2, 2)
 	AltPowerBar:SetBackdrop({
-		bgFile = C['media'].blank, 
-		edgeFile = C['media'].blank, 
+		bgFile = C['media']['blank'], 
+		edgeFile = C['media']['blank'], 
 		tile = false, tileSize = 0, edgeSize = 1, 
 		insets = { left = 0, right = 0, top = 0, bottom = D.Scale(-1)}
 	})
@@ -239,13 +240,13 @@ D['ConstructUFTarget'] = function(self)
 	RaidIcon:Point('TOP', health, 'TOP', 0, 11)
 
 	if C['unitframes']['playeraggro'] then
-		table.insert(self.__elements, D.UpdateThreat)
-		self:RegisterEvent('PLAYER_TARGET_CHANGED', D.UpdateThreat)
-		self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', D.UpdateThreat)
-		self:RegisterEvent('UNIT_THREAT_SITUATION_UPDATE', D.UpdateThreat)
+		table.insert(self.__elements, D['UpdateThreat'])
+		self:RegisterEvent('PLAYER_TARGET_CHANGED', D['UpdateThreat'])
+		self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', D['UpdateThreat'])
+		self:RegisterEvent('UNIT_THREAT_SITUATION_UPDATE', D['UpdateThreat'])
 	end
 
-	--[[Buffs & Debuffs]]--
+	-- Buffs & Debuffs
 	if C['unitframes']['targetauras'] then
 		local buffs = CreateFrame('Frame', nil, self)
 		local debuffs = CreateFrame('Frame', nil, self)
@@ -281,10 +282,10 @@ D['ConstructUFTarget'] = function(self)
 		self.Debuffs = debuffs
 	end
 
-	--[[Combat feedback & Healcom]]--
+	-- Combat feedback & Healcom
 	if C['unitframes']['combatfeedback'] then
 		local CombatFeedbackText 
-		CombatFeedbackText = D.SetFontString(health, C['media'].font, 11, 'THINOUTLINE')
+		CombatFeedbackText = D.SetFontString(health, C['media']['font'], 11, 'THINOUTLINE')
 		CombatFeedbackText:Point('CENTER', 0, 1)
 		CombatFeedbackText.colors = {
 			DAMAGE = {.69, .31, .31},
@@ -305,7 +306,7 @@ D['ConstructUFTarget'] = function(self)
 		self.CombatFeedbackText = CombatFeedbackText
 	end
 
-	--[[Castbar]]--
+	-- Castbar
 	if C['castbar']['enable'] then
 		local tcb = CreateFrame('Frame', 'TargetCastBarMover', UIParent)
 		tcb:Size(C['castbar']['targetwidth'], C['castbar']['targetheight'])
