@@ -64,6 +64,7 @@ PA.SLE = PA:IsAddOnEnabled('ElvUI_SLE', PA.MyName)
 PA.CUI = PA:IsAddOnEnabled('ElvUI_ChaoticUI', PA.MyName)
 PA.Tukui = PA:IsAddOnEnabled('Tukui', PA.MyName)
 PA.AzilUI = PA:IsAddOnEnabled('AzilUI', PA.MyName)
+PA.DuffedUI = PA:IsAddOnEnabled('DuffedUI')
 
 PA.Classes = {}
 
