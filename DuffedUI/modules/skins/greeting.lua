@@ -12,7 +12,7 @@ local function LoadSkin()
 		for i = 1, C_QuestLog.GetMaxNumQuestsCanAccept() do
 			local button = _G['QuestTitleButton'..i]
 			if button:GetFontString() then
-				if button:GetFontString():GetText() and button:GetFontString:GetText():find('|cff000000') then
+				if button:GetFontString():GetText() and button:GetFontString():GetText():find('|cff000000') then
 					button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), '|cff000000', '|cffFFFF00'))
 				end
 			end
