@@ -1,9 +1,8 @@
---[[All codingfame to Shestak]]--
---[[broken]]--
---[[local D, C, L = unpack(select(2, ...))
+-- All codingfame to Shestak
+local D, C, L = unpack(select(2, ...))
 
 _G.StaticPopupDialogs['OUTDATED'] = {
-	text = "Download DuffedUI",
+	text = 'Download DuffedUI',
 	button1 = OKAY,
 	timeout = 0,
 	whileDead = true,
@@ -18,10 +17,13 @@ _G.StaticPopupDialogs['OUTDATED'] = {
 	EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
 }
 
+local C_ChatInfo_RegisterAddonMessagePrefix = C_ChatInfo_RegisterAddonMessagePrefix
+local C_ChatInfo_SendAddonMessage = C_ChatInfo_SendAddonMessage
+
 -- Check outdated UI version
 local check = function(self, event, prefix, message, channel, sender)
 	if event == 'CHAT_MSG_ADDON' then
-		if prefix ~= 'DuffedUIVersion' or sender == D.MyName then return end
+		if prefix ~= 'DuffedUIVersion' or sender == D['MyName'] then return end
 		if tonumber(message) ~= nil and tonumber(message) > tonumber(D['Version']) then
 			StaticPopup_Show('OUTDATED')
 			print('|cffff0000' .. L['ui']['outdated'] .. '|r')
@@ -29,13 +31,13 @@ local check = function(self, event, prefix, message, channel, sender)
 		end
 	else
 		if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
-			SendAddonMessage('DuffedUIVersion', tonumber(D.Version), 'INSTANCE_CHAT')
+			C_ChatInfo_SendAddonMessage('DuffedUIVersion', tonumber(D.Version), 'INSTANCE_CHAT')
 		elseif IsInRaid(LE_PARTY_CATEGORY_HOME) then
-			SendAddonMessage('DuffedUIVersion', tonumber(D.Version), 'RAID')
+			C_ChatInfo_SendAddonMessage('DuffedUIVersion', tonumber(D.Version), 'RAID')
 		elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
-			SendAddonMessage('DuffedUIVersion', tonumber(D.Version), 'PARTY')
+			C_ChatInfo_SendAddonMessage('DuffedUIVersion', tonumber(D.Version), 'PARTY')
 		elseif IsInGuild() then
-			SendAddonMessage('DuffedUIVersion', tonumber(D.Version), 'GUILD')
+			C_ChatInfo_SendAddonMessage('DuffedUIVersion', tonumber(D.Version), 'GUILD')
 		end
 	end
 end
@@ -45,7 +47,7 @@ frame:RegisterEvent('PLAYER_ENTERING_WORLD')
 frame:RegisterEvent('GROUP_ROSTER_UPDATE')
 frame:RegisterEvent('CHAT_MSG_ADDON')
 frame:SetScript('OnEvent', check)
-RegisterAddonMessagePrefix('DuffedUIVersion')
+C_ChatInfo_RegisterAddonMessagePrefix('DuffedUIVersion')
 
 -- Whisper UI version --
 local whisp = CreateFrame('Frame')
@@ -59,4 +61,4 @@ whisp:SetScript('OnEvent', function(self, event, text, name, ...)
 			BNSendWhisper(select(11, ...), 'DuffedUI' .. D['Version'])
 		end
 	end
-end)]]--
+end)
