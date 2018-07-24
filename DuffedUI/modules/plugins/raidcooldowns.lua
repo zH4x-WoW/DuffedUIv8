@@ -1,16 +1,16 @@
 local D, C, L = unpack(select(2, ...))
-if C["cooldown"].rcdenable ~= true then return end
+if C['cooldown'].rcdenable ~= true then return end
 
-local anchor = "TOPLEFT"
+local anchor = 'TOPLEFT'
 local x, y = 150, -150
 local width, height = 200, 15
-local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
-local texture = C["media"].normTex
+local f, fs, ff = C['media'].font, 11, 'THINOUTLINE'
+local texture = C['media'].normTex
 
 local show = {
-	raid = C["cooldown"].rcdraid,
-	party = C["cooldown"].rcdparty,
-	arena = C["cooldown"].rcdarena,
+	raid = C['cooldown'].rcdraid,
+	party = C['cooldown'].rcdparty,
+	arena = C['cooldown'].rcdarena,
 }
 
 local spells = {
@@ -54,10 +54,10 @@ local band = bit.band
 local sformat = string.format
 local floor = math.floor
 local timer = 0
-local move = D["move"]
+local move = D['move']
 local backdrop = {
-	bgFile = C["media"].normTex,
-	edgeFile = C["media"].blank, tile = false,
+	bgFile = C['media'].normTex,
+	edgeFile = C['media'].blank, tile = false,
 	tileSize = 0,
 	edgeSize = 1,
 	insets = {top = 0, left = 0, bottom = 0, right = 0},
@@ -65,7 +65,7 @@ local backdrop = {
 
 local bars = {}
 
-local rcda = CreateFrame("Frame", "RaidCoolodownsMover", UIParent)
+local rcda = CreateFrame('Frame', 'RaidCoolodownsMover', UIParent)
 rcda:SetSize(width, height)
 rcda:SetPoint(anchor, x, y)
 move:RegisterFrame(rcda)
@@ -83,25 +83,25 @@ local CreateFS = CreateFS or function(frame)
 end
 
 local CreateBG = CreateBG or function(parent)
-	local bg = CreateFrame("Frame", nil, parent)
-	bg:SetPoint("TOPLEFT", parent, "TOPLEFT", -1, 1)
-	bg:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", 1, -1)
-	bg:SetFrameStrata("LOW")
+	local bg = CreateFrame('Frame', nil, parent)
+	bg:SetPoint('TOPLEFT', parent, 'TOPLEFT', -1, 1)
+	bg:SetPoint('BOTTOMRIGHT', parent, 'BOTTOMRIGHT', 1, -1)
+	bg:SetFrameStrata('LOW')
 	bg:SetBackdrop(backdrop)
-	bg:SetTemplate("Default")
+	bg:SetTemplate('Default')
 	return bg
 end
 
 local UpdatePositions = function()
 	for i = 1, #bars do
 		bars[i]:ClearAllPoints()
-		if i == 1 then bars[i]:SetPoint("TOPLEFT", rcda, "TOPLEFT", 0, 0) else bars[i]:SetPoint("TOPLEFT", bars[i-1], "BOTTOMLEFT", 0, -5) end
+		if i == 1 then bars[i]:SetPoint('TOPLEFT', rcda, 'TOPLEFT', 0, 0) else bars[i]:SetPoint('TOPLEFT', bars[i-1], 'BOTTOMLEFT', 0, -5) end
 		bars[i].id = i
 	end
 end
 
 local StopTimer = function(bar)
-	bar:SetScript("OnUpdate", nil)
+	bar:SetScript('OnUpdate', nil)
 	bar:Hide()
 	tremove(bars, bar.id)
 	UpdatePositions()
@@ -118,7 +118,7 @@ local BarUpdate = function(self, elapsed)
 end
 
 local OnEnter = function(self)
-	GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+	GameTooltip:SetOwner(self, 'ANCHOR_RIGHT')
 	GameTooltip:AddLine(self.spell, self.right:GetText())
 	GameTooltip:SetClampedToScreen(true)
 	GameTooltip:Show()
@@ -127,28 +127,28 @@ end
 local OnLeave = function(self) GameTooltip:Hide() end
 
 local OnMouseDown = function(self, button)
-	if button == "LeftButton" then
+	if button == 'LeftButton' then
 		if IsInRaid() then
-			SendChatMessage(sformat("Cooldown - %s [%s] %s", self.left:GetText(), self.spell, self.right:GetText()), "RAID")
+			SendChatMessage(sformat('Cooldown - %s [%s] %s', self.left:GetText(), self.spell, self.right:GetText()), 'RAID')
 		elseif IsInGroup() then
-			SendChatMessage(sformat("Cooldown - %s [%s] %s", self.left:GetText(), self.spell, self.right:GetText()), "PARTY")
+			SendChatMessage(sformat('Cooldown - %s [%s] %s', self.left:GetText(), self.spell, self.right:GetText()), 'PARTY')
 		else
-			SendChatMessage(sformat("Cooldown - %s [%s] %s", self.left:GetText(), self.spell, self.right:GetText()), "SAY")
+			SendChatMessage(sformat('Cooldown - %s [%s] %s', self.left:GetText(), self.spell, self.right:GetText()), 'SAY')
 		end
-	elseif button == "RightButton" then
+	elseif button == 'RightButton' then
 		StopTimer(self)
 	end
 end
 
 local CreateBar = function()
-	local bar = CreateFrame("Frame", nil, UIParent)
+	local bar = CreateFrame('Frame', nil, UIParent)
 	bar:SetSize(width, height)
-	bar.status = CreateFrame("Statusbar", nil, bar)
-	bar.icon = CreateFrame("button", nil, bar)
+	bar.status = CreateFrame('Statusbar', nil, bar)
+	bar.icon = CreateFrame('button', nil, bar)
 	bar.icon:SetSize(15, 15)
-	bar.icon:SetPoint("BOTTOMLEFT", 0, 0)
-	bar.status:SetPoint("BOTTOMLEFT", bar.icon, "BOTTOMRIGHT", 3, 0)
-	bar.status:SetPoint("BOTTOMRIGHT", 0, 0)
+	bar.icon:SetPoint('BOTTOMLEFT', 0, 0)
+	bar.status:SetPoint('BOTTOMLEFT', bar.icon, 'BOTTOMRIGHT', 3, 0)
+	bar.status:SetPoint('BOTTOMRIGHT', 0, 0)
 	bar.status:SetHeight(height)
 	bar.status:SetStatusBarTexture(texture)
 	bar.status:SetMinMaxValues(0, 100)
@@ -187,30 +187,28 @@ local StartTimer = function(name, spellId)
 
 	local color = RAID_CLASS_COLORS[select(2, UnitClass(name))]
 	bar.status:SetStatusBarColor(color.r, color.g, color.b)
-	bar:SetScript("OnUpdate", BarUpdate)
+	bar:SetScript('OnUpdate', BarUpdate)
 	bar:EnableMouse(true)
-	bar:SetScript("OnEnter", OnEnter)
-	bar:SetScript("OnLeave", OnLeave)
-	bar:SetScript("OnMouseDown", OnMouseDown)
+	bar:SetScript('OnEnter', OnEnter)
+	bar:SetScript('OnLeave', OnLeave)
+	bar:SetScript('OnMouseDown', OnMouseDown)
 	tinsert(bars, bar)
 	UpdatePositions()
 end
 
 local OnEvent = function(self, event, ...)
-	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+	if event == 'COMBAT_LOG_EVENT_UNFILTERED' then
 		local timestamp, eventType, _, sourceGUID, sourceName, sourceFlags = ...
-		--[[broken]]--
-		--if band(sourceFlags, filter) == 0 then return end
-		if eventType == "SPELL_RESURRECT" or eventType == "SPELL_CAST_SUCCESS" or eventType == "SPELL_AURA_APPLIED" then
+		if eventType == 'SPELL_RESURRECT' or eventType == 'SPELL_CAST_SUCCESS' or eventType == 'SPELL_AURA_APPLIED' then
 			local spellId = select(12, ...)
 			if spells[spellId] and show[select(2, IsInInstance())] then StartTimer(sourceName, spellId) end
 		end
-	elseif event == "ZONE_CHANGED_NEW_AREA" and select(2, IsInInstance()) == "arena" then
+	elseif event == 'ZONE_CHANGED_NEW_AREA' and select(2, IsInInstance()) == 'arena' then
 		for k, v in pairs(bars) do StopTimer(v) end
 	end
 end
 
-local addon = CreateFrame("frame")
+local addon = CreateFrame('frame')
 addon:SetScript('OnEvent', OnEvent)
-addon:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-addon:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+addon:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
+addon:RegisterEvent('ZONE_CHANGED_NEW_AREA')
