@@ -82,7 +82,7 @@ function AS:DBM(event, addon)
 					bar:ApplyStyle()
 				end
 			end
-		end		
+		end
 
 		local function SkinRange(self, range, filter, forceshow, redCircleNumPlayers)
 			if DBM.Options.DontShowRangeFrame and not forceshow then return end

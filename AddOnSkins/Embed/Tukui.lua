@@ -81,3 +81,4 @@ function AS:EmbedSystem_WindowResize()
 		_G.Enhanced_Config.Options.args.addonskins.args.embed.args.EmbedLeftWidth.max = floor(_G.EmbedSystem_MainWindow:GetWidth() * .75)
 	end
 end
+
