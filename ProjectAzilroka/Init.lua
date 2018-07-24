@@ -61,10 +61,9 @@ PA.ClassColor = { Color.r, Color.g, Color.b }
 
 PA.ElvUI = PA:IsAddOnEnabled('ElvUI', PA.MyName)
 PA.SLE = PA:IsAddOnEnabled('ElvUI_SLE', PA.MyName)
-PA.NUI = PA:IsAddOnEnabled('ElvUI_NenaUI', PA.MyName)
+PA.CUI = PA:IsAddOnEnabled('ElvUI_ChaoticUI', PA.MyName)
 PA.Tukui = PA:IsAddOnEnabled('Tukui', PA.MyName)
 PA.AzilUI = PA:IsAddOnEnabled('AzilUI', PA.MyName)
-PA.DuffedUI = PA:IsAddOnEnabled('DuffedUI')
 
 PA.Classes = {}
 
@@ -161,7 +160,7 @@ PA.Options = {
 					order = 4,
 					type = 'toggle',
 					name = PA.ACL['Enhanced Shadows'],
-					disabled = function() return (PA.SLE or PA.NUI) end,
+					disabled = function() return (PA.SLE or PA.CUI) end,
 				},
 				FG = {
 					order = 5,
@@ -213,7 +212,7 @@ function PA:UpdateProfile()
 		},
 	}
 
-	if (PA.SLE or PA.NUI) then
+	if (PA.SLE or PA.CUI) then
 		Defaults.profile.ES = false
 	end
 
@@ -236,35 +235,35 @@ function PA:PLAYER_LOGIN()
 	if PA.EP then
 		PA.EP:RegisterPlugin('ProjectAzilroka', PA.GetOptions)
 	end
-	if not (PA.SLE or PA.NUI) and PA.db['ES'] then
-		PA.ES:Initialize()
+	if not (PA.SLE or PA.CUI) and PA.db['ES'] then
+		pcall(PA.ES.Initialize)
 	end
 	if PA.db['BB'] then
-		PA.BB:Initialize()
+		pcall(PA.BB.Initialize)
 	end
 	if PA.db['BrokerLDB'] then
-		PA.BrokerLDB:Initialize()
+		pcall(PA.BrokerLDB.Initialize)
 	end
 	if PA.db['DO'] then
-		PA.DO:Initialize()
+		pcall(PA.DO.Initialize)
 	end
 	if PA.db['FG'] then -- Has to be before EFL
-		--PA.FG:Initialize()
+		pcall(PA.FG.Initialize)
 	end
 	if PA.db['EFL'] then
-		PA.EFL:Initialize()
+		pcall(PA.EFL.Initialize)
 	end
 	if PA.db['LC'] then
-		PA.LC:Initialize()
+		pcall(PA.LC.Initialize)
 	end
 	if PA.db['MF'] then
-		PA.MF:Initialize()
+		pcall(PA.MF.Initialize)
 	end
 	if PA.db['SMB'] and not PA.SLE then
-		PA.SMB:Initialize()
+		pcall(PA.SMB.Initialize)
 	end
 	if PA.db['stAM'] then
-		PA.stAM:Initialize()
+		pcall(PA.stAM.Initialize)
 	end
 	if PA.Tukui and GetAddOnEnableState(PA.MyName, 'Tukui_Config') > 0 then
 		PA:TukuiOptions()

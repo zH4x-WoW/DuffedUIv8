@@ -299,8 +299,8 @@ function DO:BuildProfile()
 		if PA.ElvUI then
 			Defaults.profile[Option].relativeTo = 'ElvUF_Target'
 		end
-		if PA.NUI then
-			Defaults.profile[Option].relativeTo = 'NenaUF_TargetVerticalUnitFrame'
+		if PA.CUI then
+			Defaults.profile[Option].relativeTo = 'ChaoticUF_Target'
 		end
 		if PA.AzilUI then
 			Defaults.profile[Option].relativeTo = 'oUF_AzilUITarget'
@@ -324,10 +324,10 @@ function DO:Initialize()
 	local frame = CreateFrame("Frame", 'DragonOverlayFrame', UIParent)
 	frame.Texture = frame:CreateTexture(nil, 'ARTWORK')
 	frame.Texture:SetAllPoints()
-	self.frame = frame
+	DO.frame = frame
 
-	self:RegisterEvent('PLAYER_ENTERING_WORLD', 'SetupProfile')
-	self:RegisterEvent('PLAYER_TARGET_CHANGED', 'SetOverlay')
+	DO:RegisterEvent('PLAYER_ENTERING_WORLD', 'SetupProfile')
+	DO:RegisterEvent('PLAYER_TARGET_CHANGED', 'SetOverlay')
 
-	self:GetOptions()
+	DO:GetOptions()
 end

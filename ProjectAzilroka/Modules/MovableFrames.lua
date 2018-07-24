@@ -110,6 +110,8 @@ local function LoadPosition(self)
 		self:ClearAllPoints()
 		self:SetPoint(unpack(MF.db[Name]['Points']))
 	end
+
+	tinsert(UISpecialFrames, Name)
 end
 
 local function OnDragStart(self)
@@ -151,6 +153,7 @@ function MF:MakeMovable(Name)
 	Frame:HookScript('OnDragStart', OnDragStart)
 	Frame:HookScript('OnDragStop', OnDragStop)
 	Frame:HookScript('OnHide', OnDragStop)
+
 	if Name == 'WorldStateAlwaysUpFrame' then
 		Frame:HookScript('OnEnter', function(self) self:SetTemplate() end)
 		Frame:HookScript('OnLeave', function(self) self:StripTextures() end)
@@ -282,27 +285,27 @@ function MF:Initialize()
 		sort(Frames)
 	end
 
-	self:BuildProfile()
-	self:GetOptions()
+	MF:BuildProfile()
+	MF:GetOptions()
 
 	for i = 1, #Frames do
-		self:MakeMovable(Frames[i])
+		MF:MakeMovable(Frames[i])
 	end
 
 	-- Check Forced Loaded AddOns
 	for AddOn, Table in pairs(AddOnFrames) do
 		if IsAddOnLoaded(AddOn) then
 			for _, Frame in pairs(Table) do
-				self:MakeMovable(Frame)
+				MF:MakeMovable(Frame)
 			end
 		end
 	end
-
+--[[
 	hooksecurefunc(ExtendedUI['CAPTUREPOINT'], 'create', function(id)
 		if _G['WorldStateCaptureBar'..id].MoverAssigned then return end
 		MF:MakeMovable(_G['WorldStateCaptureBar'..id])
 		_G['WorldStateCaptureBar'..id].MoverAssigned = true
 	end)
-
-	self:RegisterEvent('ADDON_LOADED')
+]]
+	MF:RegisterEvent('ADDON_LOADED')
 end
