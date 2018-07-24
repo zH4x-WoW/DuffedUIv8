@@ -78,7 +78,7 @@ D['ConstructUFPlayer'] = function(self)
 	if C['unitframes']['percent'] then
 		local percHP
 		percHP = D['SetFontString'](health, C['media']['font'], 20, 'THINOUTLINE')
-		percHP:SetTextColor(unpack(C['media'].datatextcolor1))
+		percHP:SetTextColor(unpack(C['media']['datatextcolor1']))
 		if C['unitframes']['percentoutside'] == true then
 			percHP:Point('RIGHT', health, 'LEFT', -25, -10)
 		else

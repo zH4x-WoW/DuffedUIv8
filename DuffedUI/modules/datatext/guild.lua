@@ -11,8 +11,8 @@ Stat:SetFrameStrata('BACKGROUND')
 Stat:SetFrameLevel(3)
 Stat.Option = C['datatext'].guild
 Stat.update = false
-Stat.Color1 = D.RGBToHex(unpack(C['media'].datatextcolor1))
-Stat.Color2 = D.RGBToHex(unpack(C['media'].datatextcolor2))
+Stat.Color1 = D.RGBToHex(unpack(C['media']['datatextcolor1']))
+Stat.Color2 = D.RGBToHex(unpack(C['media']['datatextcolor2']))
 
 local tthead, ttsubh, ttoff = {r=0.4, g=0.78, b=1}, {r=0.75, g=0.9, b=1}, {r=.3,g=1,b=.3}
 local activezone, inactivezone = {r=0.3, g=1.0, b=0.3}, {r=0.65, g=0.65, b=0.65}

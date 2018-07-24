@@ -20,8 +20,8 @@ Stat:EnableMouse(true)
 Stat:SetFrameStrata('BACKGROUND')
 Stat:SetFrameLevel(3)
 Stat.Option = C['datatext'].friends
-Stat.Color1 = D.RGBToHex(unpack(C['media'].datatextcolor1))
-Stat.Color2 = D.RGBToHex(unpack(C['media'].datatextcolor2))
+Stat.Color1 = D.RGBToHex(unpack(C['media']['datatextcolor1']))
+Stat.Color2 = D.RGBToHex(unpack(C['media']['datatextcolor2']))
 
 local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local Text  = Stat:CreateFontString('DuffedUIStatFriendsText', 'OVERLAY')
