@@ -190,12 +190,8 @@ function AS:Blizzard_Options(event, addon)
 
 		InterfaceOptionsDisplayPanelOutlineDropDown:SetWidth(210)
 		InterfaceOptionsNamesPanelUnitNameplatesMotionDropDown:SetWidth(190)
-		AudioOptionsVoicePanelChatModeDropDown:SetWidth(190)
 		AudioOptionsSoundPanelHardwareDropDown:SetWidth(190)
 		AudioOptionsSoundPanelSoundChannelsDropDown:SetWidth(190)
-
-		AS:StripTextures(LoopbackVUMeter:GetParent())
-		AS:SkinStatusBar(LoopbackVUMeter)
 
 		-- Color Picker
 		AS:SkinFrame(ColorPickerFrame, nil, true)
@@ -243,8 +239,6 @@ function AS:Blizzard_Options(event, addon)
 			AS:SkinFrame(Frame)
 		end
 
-		AS:StripTextures(ChatConfigChatSettingsClassColorLegend)
-		AS:StripTextures(ChatConfigChannelSettingsClassColorLegend)
 		AS:StripTextures(ChatConfigChatSettingsLeft)
 		AS:StripTextures(ChatConfigChannelSettingsLeft)
 		AS:StripTextures(ChatConfigOtherSettingsCombat)
@@ -380,14 +374,6 @@ function AS:Blizzard_Options(event, addon)
 		ChatConfigMoveFilterDownButton:SetPoint("LEFT", ChatConfigMoveFilterUpButton, "RIGHT", 3, 0)
 
 		AS:SkinEditBox(CombatConfigSettingsNameEditBox)
-
-		AS:SkinScrollBar(ChannelRosterScrollFrameScrollBar)
-
-		-- Channel Pullout
-		ChannelPulloutBackground:Hide()
-		AS:SkinFrame(ChannelPullout)
-		AS:SkinCloseButton(ChannelPulloutCloseButton)
-		AS:SkinTab(ChannelPulloutTab)
 
 		-- Help
 		local HelpFrames = {

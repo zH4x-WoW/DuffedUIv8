@@ -1,25 +1,25 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_WorldMap()
-	WorldMapFrameNavBar:StripTextures()
-	WorldMapFrameNavBarOverlay:StripTextures()
+	--WorldMapFrameNavBar:StripTextures()
+	--WorldMapFrameNavBarOverlay:StripTextures()
 
-	AS:SkinBackdropFrame(WorldMapFrameNavBarHomeButton)
-	WorldMapFrameNavBarHomeButton.Backdrop:SetPoint("TOPLEFT", WorldMapFrameNavBarHomeButton, "TOPLEFT", 0, 0)
-	WorldMapFrameNavBarHomeButton.Backdrop:SetPoint("BOTTOMRIGHT", WorldMapFrameNavBarHomeButton, "BOTTOMRIGHT", -15, 0)
-	WorldMapFrameNavBarHomeButton:SetFrameLevel(1)
+	--AS:SkinBackdropFrame(WorldMapFrameNavBarHomeButton)
+	--WorldMapFrameNavBarHomeButton.Backdrop:SetPoint("TOPLEFT", WorldMapFrameNavBarHomeButton, "TOPLEFT", 0, 0)
+	--WorldMapFrameNavBarHomeButton.Backdrop:SetPoint("BOTTOMRIGHT", WorldMapFrameNavBarHomeButton, "BOTTOMRIGHT", -15, 0)
+	--WorldMapFrameNavBarHomeButton:SetFrameLevel(1)
 
-	AS:SkinDropDownBox(WorldMapLevelDropDown)
-	WorldMapLevelDropDown:SetPoint("TOPLEFT", -17, 0)
+	--AS:SkinDropDownBox(WorldMapLevelDropDown)
+	--WorldMapLevelDropDown:SetPoint("TOPLEFT", -17, 0)
 
 	AS:SkinBackdropFrame(WorldMapFrame.BorderFrame)
-	AS:SkinBackdropFrame(WorldMapFrame.BorderFrame.Inset)
-	WorldMapFrame.BorderFrame.Inset.Backdrop:SetPoint("TOPLEFT", WorldMapFrame.BorderFrame.Inset, "TOPLEFT", 3, -3)
-	WorldMapFrame.BorderFrame.Inset.Backdrop:SetPoint("BOTTOMRIGHT", WorldMapFrame.BorderFrame.Inset, "BOTTOMRIGHT", -3, 2)
+	--AS:SkinBackdropFrame(WorldMapFrame.BorderFrame.Inset)
+	--WorldMapFrame.BorderFrame.Inset.Backdrop:SetPoint("TOPLEFT", WorldMapFrame.BorderFrame.Inset, "TOPLEFT", 3, -3)
+	--WorldMapFrame.BorderFrame.Inset.Backdrop:SetPoint("BOTTOMRIGHT", WorldMapFrame.BorderFrame.Inset, "BOTTOMRIGHT", -3, 2)
 
 	AS:SkinScrollBar(QuestScrollFrameScrollBar)
 
-	WorldMapFrameTutorialButton:Kill()
+	--WorldMapFrameTutorialButton:Kill()
 
 	AS:SkinButton(QuestMapFrame.DetailsFrame.BackButton)
 	AS:SkinButton(QuestMapFrame.DetailsFrame.AbandonButton)
@@ -74,8 +74,8 @@ function AS:Blizzard_WorldMap()
 		end
 	end)
 
-	AS:SkinNextPrevButton(WorldMapFrame.UIElementsFrame.OpenQuestPanelButton)
-	AS:SkinNextPrevButton(WorldMapFrame.UIElementsFrame.CloseQuestPanelButton)
+	--AS:SkinNextPrevButton(WorldMapFrame.UIElementsFrame.OpenQuestPanelButton)
+	--AS:SkinNextPrevButton(WorldMapFrame.UIElementsFrame.CloseQuestPanelButton)
 
 	AS:SkinMaxMinFrame(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame)
 
@@ -100,7 +100,7 @@ function AS:Blizzard_WorldMap()
 		AS:StripTextures(QuestMapFrame.DetailsFrame.RewardsFrame)
 	end
 
-	AS:SkinFrame(WorldMapFrame.UIElementsFrame.OpenQuestPanelButton)
+	--[[AS:SkinFrame(WorldMapFrame.UIElementsFrame.OpenQuestPanelButton)
 	WorldMapFrame.UIElementsFrame.OpenQuestPanelButton.Text = WorldMapFrame.UIElementsFrame.OpenQuestPanelButton:CreateFontString(nil, 'OVERLAY')
 	WorldMapFrame.UIElementsFrame.OpenQuestPanelButton.Text:SetFont('Interface\\AddOns\\AddOnSkins\\Media\\Fonts\\Arial.ttf', 12)
 	WorldMapFrame.UIElementsFrame.OpenQuestPanelButton.Text:SetText('►')
@@ -117,7 +117,7 @@ function AS:Blizzard_WorldMap()
 	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.IconOverlay:SetAlpha(0)
 	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button.Border:SetAlpha(0)
 	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button.Shine:SetAlpha(0)
-	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button:SetHighlightTexture('')
+	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button:SetHighlightTexture('')]]--
 end
 
 AS:RegisterSkin('Blizzard_WorldMap', AS.Blizzard_WorldMap)
