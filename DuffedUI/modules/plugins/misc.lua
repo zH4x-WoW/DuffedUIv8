@@ -431,7 +431,7 @@ if C["duffed"].sayinterrupt == true then
 		
 		if event == "COMBAT_LOG_EVENT_UNFILTERED" then
 			if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
-				channel = "INSTANCE_CHAT"
+				channel = "INSTANCE_CHAT" or "PARTY"
 			elseif IsInRaid("player") then
 				channel = C["duffed"].announcechannel
 			elseif IsInGroup("player") then
@@ -440,7 +440,7 @@ if C["duffed"].sayinterrupt == true then
 				channel = "SAY"
 			end
 			
-			local timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, _, extraskillID, extraSkillName = ...
+			local _, eventType, _, _, sourceName, _, _, _, _, _, _, spellID, spellName, _, extraskillID, _ = CombatLogGetCurrentEventInfo()
 			if eventType == "SPELL_INTERRUPT" and sourceName == UnitName("player") then SendChatMessage("Interrupted => "..GetSpellLink(extraskillID).."!", channel) end
 		end
 	end

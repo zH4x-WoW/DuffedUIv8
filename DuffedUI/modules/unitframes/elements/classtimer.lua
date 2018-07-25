@@ -1397,8 +1397,8 @@ D["ClassTimer"] = function(self)
 	end
 
 	local trinketFrame = CreateAuraBarFrame(trinketDataSource, self.Health)
-	trinketFrame:Point("BOTTOMLEFT", playerFrame, "TOPLEFT", 0, 5)
-	trinketFrame:Point("BOTTOMRIGHT", playerFrame, "TOPRIGHT", 0, 5)
+	trinketFrame:Point("BOTTOMLEFT", self.Health, "TOPLEFT", 0, 5)
+	trinketFrame:Point("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, 5)
 
 	if C["classtimer"]["debuffsenable"] then
 		local targetFrame = CreateAuraBarFrame(targetDataSource, self.Health)
@@ -1411,8 +1411,8 @@ D["ClassTimer"] = function(self)
 			targetFrame:Point("BOTTOMLEFT", DebuffMover, "TOPLEFT", 0, 5)
 			targetFrame:Point("BOTTOMRIGHT", DebuffMover, "TOPRIGHT", 0, 5)
 		else
-			targetFrame:Point("BOTTOMLEFT", trinketFrame, "TOPLEFT", 0, 5)
-			targetFrame:Point("BOTTOMRIGHT", trinketFrame, "TOPRIGHT", 0, 5)
+			targetFrame:Point("BOTTOMLEFT", self.Health, "TOPLEFT", 0, 5)
+			targetFrame:Point("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, 5)
 		end
 	end
 end

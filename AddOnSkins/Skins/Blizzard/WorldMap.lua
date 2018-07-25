@@ -74,7 +74,7 @@ function AS:Blizzard_WorldMap()
 
 	AS:SkinMaxMinFrame(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame)
 
-	local function HandleTooltipStatusBar()
+	--[[local function HandleTooltipStatusBar()
 		local bar = _G["WorldMapTaskTooltipStatusBar"].Bar
 		local label = bar.Label
 
@@ -87,7 +87,7 @@ function AS:Blizzard_WorldMap()
 			label:SetDrawLayer("OVERLAY")
 		end
 	end
-	hooksecurefunc("TaskPOI_OnEnter", HandleTooltipStatusBar)
+	hooksecurefunc("TaskPOI_OnEnter", HandleTooltipStatusBar)]]--
 
 	if not AS.ParchmentEnabled then
 		AS:SkinScrollBar(QuestMapDetailsScrollFrameScrollBar)

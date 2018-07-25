@@ -23,6 +23,7 @@ local strings = {
 	raid = L["chat"]["raid"],
 	Party = L["chat"]["party"],
 }
+local move = D['move']
 
 local function ShortChannel(channel) return string.format("|Hchannel:%s|h[%s]|h", channel, strings[channel] or channel:gsub("channel:", "")) end
 
@@ -65,6 +66,9 @@ local function SetChatStyle(frame)
 	local id = frame:GetID()
 	local chat = frame:GetName()
 	local tab = _G[chat.."Tab"]
+	local scroll = frame.Scrollbar
+	local scrollBottom = frame.ScrollToBottomButton
+	local scrollTexture = _G[chat.."ThumbTexture"]
 
 	tab:SetAlpha(1)
 	tab.SetAlpha = UIFrameFadeRemoveFrame
@@ -120,6 +124,12 @@ local function SetChatStyle(frame)
 	_G[format("ChatFrame%sEditBoxLeft", id)]:Kill()
 	_G[format("ChatFrame%sEditBoxMid", id)]:Kill()
 	_G[format("ChatFrame%sEditBoxRight", id)]:Kill()
+
+	if scroll then
+		scroll:Kill()
+		scrollBottom:Kill()
+		scrollTexture:Kill()
+	end
 
 	local a, b, c = select(6, _G[chat.."EditBox"]:GetRegions()) a:Kill() b:Kill() c:Kill()
 
@@ -197,6 +207,7 @@ for i = 1, BNToastFrame:GetNumRegions() do
 	end
 end	
 BNToastFrame:SetTemplate("Transparent")
+BNToastFrame.CloseButton:SkinCloseButton()
 
 BNToastFrame:HookScript("OnShow", function(self)
 	self:ClearAllPoints()

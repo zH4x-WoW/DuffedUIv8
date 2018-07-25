@@ -223,5 +223,5 @@ end
 
 local bnet = CreateFrame('Frame', 'DuffedUIBnetMover', UIParent)
 bnet:Size(BNToastFrame:GetWidth(), BNToastFrame:GetHeight())
-bnet:Point('TOPLEFT', UIParent, 'TOPLEFT', 3, -3)
+bnet:Point('TOPLEFT', UIParent, 'TOPLEFT', 5, -5)
 move:RegisterFrame(bnet)
