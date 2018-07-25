@@ -10,6 +10,7 @@ DuffedUIConfigUILocalization.generalclasscolor = "Enable class color for textele
 DuffedUIConfigUILocalization.generalblizzardreskin = "Reskin Blizzard frames to match DuffedUI"
 DuffedUIConfigUILocalization.generalcalendarevent = "Disable calendar event textures"
 DuffedUIConfigUILocalization.generalautoaccept = "Enable Auto-Invite (Friends and Guildmates)"
+DuffedUIConfigUILocalization.general4kpp = "Double scaling for 4k-Monitors to get pixelperfect (should only used with 4k and autoscaling\nis to small)"
 
 --[[Unit Frames]]--
 DuffedUIConfigUILocalization.unitframes = "Unit Frames"

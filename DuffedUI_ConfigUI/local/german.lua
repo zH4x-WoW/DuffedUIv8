@@ -9,6 +9,7 @@
 	DuffedUIConfigUILocalization.generalblizzardreskin = "Zeige die Blizzard eigenen Fenster im Stile von DuffedUI an"
 	DuffedUIConfigUILocalization.generalcalendarevent = "Deaktiviere die Texturen, der Events, im Kalender"
 	DuffedUIConfigUILocalization.generalautoaccept = "Aktiviere die automatische Einladung von Freunden und Gildenmitgliedern"
+	DuffedUIConfigUILocalization.general4kpp = 'Verdoppelt die Skalierung bei 4k-Monitoren für PixelPerfect (Sollte nur mit 4k-Monitoren benutzt werden, wenn die Autosklaierung\nzu klein ist)'
 
 	--[[Unit Frames]]--
 	DuffedUIConfigUILocalization.unitframes = "Einheitenfenster"

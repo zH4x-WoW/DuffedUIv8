@@ -43,8 +43,8 @@ local function Update(self, event, unit, powerType)
         Bar:PreUpdate(unit)
     end
 
-    local Current = UnitPower("player", SPELL_POWER_CHI)
-    local Max = UnitPowerMax("player", SPELL_POWER_CHI)
+    local Current = UnitPower("player", Enum.PowerType.Chi)
+    local Max = UnitPowerMax("player", Enum.PowerType.Chi)
     local Spec = GetSpecialization()
 
     -- Determine if we need it show or not
@@ -66,7 +66,7 @@ local function Update(self, event, unit, powerType)
         if i <= Current then
             Bar[i]:SetAlpha(1)
         else
-            Bar[i]:SetAlpha(.2)
+            Bar[i]:SetAlpha(.3)
         end
     end
 
