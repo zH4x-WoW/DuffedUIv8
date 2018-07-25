@@ -10,8 +10,13 @@ local Update = function(self, event, unit, powerType)
     if(self.unit ~= unit or (powerType and powerType ~= 'HOLY_POWER')) then return end
 
     local hp = self.HolyPower
-    local num = UnitPower(unit, SPELL_POWER_HOLY_POWER)
-    local numMax = UnitPowerMax('player', SPELL_POWER_HOLY_POWER)
+    local num = UnitPower(unit, Enum.PowerType.HolyPower)
+    local numMax = UnitPowerMax('player', Enum.PowerType.HolyPower)
+    local spec = GetSpecialization()
+	
+	if spec ~= 3 then
+		num = 0
+	end
     
     if(hp.PreUpdate) then 
         hp:PreUpdate()
@@ -59,7 +64,9 @@ local function Enable(self)
 
             hp[i].width = hp[i]:GetWidth()
         end
-        
+
+        hp:Hide()
+
         return true
     end
 end
