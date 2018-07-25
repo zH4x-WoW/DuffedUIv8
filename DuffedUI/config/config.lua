@@ -149,6 +149,7 @@ C['datatext'] = {
 	['time24'] = true,
 	['localtime'] = false,
 	['ShowInCombat'] = false,
+	['ogf'] = false,
 }
 
 C['cooldown'] = {

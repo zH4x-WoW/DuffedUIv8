@@ -1,35 +1,30 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_WorldMap()
-	--WorldMapFrameNavBar:StripTextures()
-	--WorldMapFrameNavBarOverlay:StripTextures()
+	WorldMapFrame.NavBar:StripTextures() 
+	WorldMapFrame.NavBar.overlay:StripTextures()
 
-	--AS:SkinBackdropFrame(WorldMapFrameNavBarHomeButton)
-	--WorldMapFrameNavBarHomeButton.Backdrop:SetPoint("TOPLEFT", WorldMapFrameNavBarHomeButton, "TOPLEFT", 0, 0)
-	--WorldMapFrameNavBarHomeButton.Backdrop:SetPoint("BOTTOMRIGHT", WorldMapFrameNavBarHomeButton, "BOTTOMRIGHT", -15, 0)
-	--WorldMapFrameNavBarHomeButton:SetFrameLevel(1)
-
-	--AS:SkinDropDownBox(WorldMapLevelDropDown)
-	--WorldMapLevelDropDown:SetPoint("TOPLEFT", -17, 0)
+	AS:SkinBackdropFrame(WorldMapFrameHomeButton)
+	WorldMapFrameHomeButton.Backdrop:SetPoint("TOPLEFT", WorldMapFrameHomeButton, "TOPLEFT", 0, 0)
+	WorldMapFrameHomeButton.Backdrop:SetPoint("BOTTOMRIGHT", WorldMapFrameHomeButton, "BOTTOMRIGHT", -15, 0)
+	WorldMapFrameHomeButton:SetFrameLevel(1)
 
 	AS:SkinBackdropFrame(WorldMapFrame.BorderFrame)
-	--AS:SkinBackdropFrame(WorldMapFrame.BorderFrame.Inset)
-	--WorldMapFrame.BorderFrame.Inset.Backdrop:SetPoint("TOPLEFT", WorldMapFrame.BorderFrame.Inset, "TOPLEFT", 3, -3)
-	--WorldMapFrame.BorderFrame.Inset.Backdrop:SetPoint("BOTTOMRIGHT", WorldMapFrame.BorderFrame.Inset, "BOTTOMRIGHT", -3, 2)
+	WorldMapFrame.BorderFrame:SetFrameStrata(WorldMapFrame:GetFrameStrata())
 
 	AS:SkinScrollBar(QuestScrollFrameScrollBar)
 
-	--WorldMapFrameTutorialButton:Kill()
+	WorldMapFrame.BorderFrame.Tutorial:Kill()
 
 	AS:SkinButton(QuestMapFrame.DetailsFrame.BackButton)
 	AS:SkinButton(QuestMapFrame.DetailsFrame.AbandonButton)
-	--AS:SkinButton(QuestMapFrame.DetailsFrame.IgnoreButton)
 	AS:SkinButton(QuestMapFrame.DetailsFrame.ShareButton, true)
 	AS:SkinButton(QuestMapFrame.DetailsFrame.TrackButton)
 	AS:SkinButton(QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton, true)
 
 	AS:SkinFrame(QuestMapFrame.QuestsFrame.StoryTooltip)
 	QuestMapFrame.DetailsFrame.CompleteQuestFrame:StripTextures()
+	QuestMapFrame.QuestsFrame.StoryTooltip:SetTemplate("Transparent")
 
 	AS:SkinCloseButton(WorldMapFrameCloseButton)
 
@@ -74,8 +69,8 @@ function AS:Blizzard_WorldMap()
 		end
 	end)
 
-	--AS:SkinNextPrevButton(WorldMapFrame.UIElementsFrame.OpenQuestPanelButton)
-	--AS:SkinNextPrevButton(WorldMapFrame.UIElementsFrame.CloseQuestPanelButton)
+	AS:SkinNextPrevButton(WorldMapFrame.SidePanelToggle.OpenButton)
+	AS:SkinNextPrevButton(WorldMapFrame.SidePanelToggle.CloseButton)
 
 	AS:SkinMaxMinFrame(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame)
 
@@ -100,19 +95,19 @@ function AS:Blizzard_WorldMap()
 		AS:StripTextures(QuestMapFrame.DetailsFrame.RewardsFrame)
 	end
 
-	--[[AS:SkinFrame(WorldMapFrame.UIElementsFrame.OpenQuestPanelButton)
-	WorldMapFrame.UIElementsFrame.OpenQuestPanelButton.Text = WorldMapFrame.UIElementsFrame.OpenQuestPanelButton:CreateFontString(nil, 'OVERLAY')
-	WorldMapFrame.UIElementsFrame.OpenQuestPanelButton.Text:SetFont('Interface\\AddOns\\AddOnSkins\\Media\\Fonts\\Arial.ttf', 12)
-	WorldMapFrame.UIElementsFrame.OpenQuestPanelButton.Text:SetText('►')
-	WorldMapFrame.UIElementsFrame.OpenQuestPanelButton.Text:SetPoint('CENTER', WorldMapFrame.UIElementsFrame.OpenQuestPanelButton)
+	AS:SkinFrame(WorldMapFrame.SidePanelToggle.OpenButton)
+	WorldMapFrame.SidePanelToggle.OpenButton.Text = WorldMapFrame.SidePanelToggle.OpenButton:CreateFontString(nil, 'OVERLAY')
+	WorldMapFrame.SidePanelToggle.OpenButton.Text:SetFont('Interface\\AddOns\\AddOnSkins\\Media\\Fonts\\Arial.ttf', 12)
+	WorldMapFrame.SidePanelToggle.OpenButton.Text:SetText('►')
+	WorldMapFrame.SidePanelToggle.OpenButton.Text:SetPoint('CENTER', WorldMapFrame.SidePanelToggle.OpenButton)
 
-	AS:SkinFrame(WorldMapFrame.UIElementsFrame.CloseQuestPanelButton)
-	WorldMapFrame.UIElementsFrame.CloseQuestPanelButton.Text = WorldMapFrame.UIElementsFrame.CloseQuestPanelButton:CreateFontString(nil, 'OVERLAY')
-	WorldMapFrame.UIElementsFrame.CloseQuestPanelButton.Text:SetFont('Interface\\AddOns\\AddOnSkins\\Media\\Fonts\\Arial.ttf', 12)
-	WorldMapFrame.UIElementsFrame.CloseQuestPanelButton.Text:SetText('◄')
-	WorldMapFrame.UIElementsFrame.CloseQuestPanelButton.Text:SetPoint('CENTER', WorldMapFrame.UIElementsFrame.CloseQuestPanelButton)
+	AS:SkinFrame(WorldMapFrame.SidePanelToggle.CloseButton)
+	WorldMapFrame.SidePanelToggle.CloseButton.Text = WorldMapFrame.SidePanelToggle.CloseButton:CreateFontString(nil, 'OVERLAY')
+	WorldMapFrame.SidePanelToggle.CloseButton.Text:SetFont('Interface\\AddOns\\AddOnSkins\\Media\\Fonts\\Arial.ttf', 12)
+	WorldMapFrame.SidePanelToggle.CloseButton.Text:SetText('◄')
+	WorldMapFrame.SidePanelToggle.CloseButton.Text:SetPoint('CENTER', WorldMapFrame.SidePanelToggle.CloseButton)
 
-	AS:SkinButton(WorldMapFrame.UIElementsFrame.TrackingOptionsButton)
+	--[[AS:SkinButton(WorldMapFrame.UIElementsFrame.TrackingOptionsButton)
 	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Background:SetAlpha(0)
 	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.IconOverlay:SetAlpha(0)
 	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button.Border:SetAlpha(0)

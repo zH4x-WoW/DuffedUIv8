@@ -729,6 +729,10 @@ spellCooldowns = {
 		['HighmountainTauren'] = {
 			255654, -- Bull Rush
 		},
+		['DarkIronDwarf'] = {
+			265221, -- Fireblood
+			265225, -- Mole Machine
+		},
 	},
 	['PET'] = {
 		-- Warlock: Succubus

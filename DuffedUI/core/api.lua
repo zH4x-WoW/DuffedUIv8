@@ -516,16 +516,22 @@ local function SkinTab(tab)
 	if not tab then return end
 	for _, object in pairs(tabs) do
 		local tex = _G[tab:GetName()..object]
-		if tex then tex:SetTexture(nil) end
+		if tex then
+			tex:SetTexture(nil)
+		end
 	end
 
-	if tab.GetHighlightTexture and tab:GetHighlightTexture() then tab:GetHighlightTexture():SetTexture(nil) else StripTextures(tab) end
+	if tab.GetHighlightTexture and tab:GetHighlightTexture() then
+		tab:GetHighlightTexture():SetTexture(nil)
+	else
+		tab:StripTextures()
+	end
 
-	tab.backdrop = CreateFrame('Frame', nil, tab)
-	SetTemplate(tab.backdrop, 'Default')
+	tab.backdrop = CreateFrame("Frame", nil, tab)
+	tab.backdrop:SetTemplate("Default")
 	tab.backdrop:SetFrameLevel(tab:GetFrameLevel() - 1)
-	Point(tab.backdrop, 'TOPLEFT', 10, -3)
-	Point(tab.backdrop, 'BOTTOMRIGHT', -10, 3)
+	tab.backdrop:Point("TOPLEFT", 10,  -3)
+	tab.backdrop:Point("BOTTOMRIGHT", -10, 3)
 end
 
 local function SkinNextPrevButton(btn, horizonal)
@@ -809,6 +815,120 @@ function SkinStatusBar(frame, ClassColor)
 	end
 end
 
+function SkinInsetFrameTemplate(frame)
+	if frame.InsetBorderTop then frame.InsetBorderTop:Hide() end
+	if frame.InsetBorderTopLeft then frame.InsetBorderTopLeft:Hide() end
+	if frame.InsetBorderTopRight then frame.InsetBorderTopRight:Hide() end
+
+	if frame.InsetBorderBottom then frame.InsetBorderBottom:Hide() end
+	if frame.InsetBorderBottomLeft then frame.InsetBorderBottomLeft:Hide() end
+	if frame.InsetBorderBottomRight then frame.InsetBorderBottomRight:Hide() end
+
+	if frame.InsetBorderLeft then frame.InsetBorderLeft:Hide() end
+	if frame.InsetBorderRight then frame.InsetBorderRight:Hide() end
+
+	if frame.Bg then frame.Bg:Hide() end
+end
+
+function SkinScrollSlider(Slider, thumbTrim)
+	local parent = Slider:GetParent()
+	if not parent then return end
+	Slider:SetPoint("TOPLEFT", parent, "TOPRIGHT", 0, -17)
+	Slider:SetPoint("BOTTOMLEFT", parent, "BOTTOMRIGHT", 0, 17)
+
+	if Slider.trackBG then Slider.trackBG:Hide() end
+	if Slider.ScrollBarTop then Slider.ScrollBarTop:Hide() end
+	if Slider.ScrollBarMiddle then Slider.ScrollBarMiddle:Hide() end
+	if Slider.ScrollBarBottom then Slider.ScrollBarBottom:Hide() end
+	if Slider.Top then Slider.Top:SetTexture(nil) end
+	if Slider.Bottom then Slider.Bottom:SetTexture(nil) end
+
+	if not Slider.trackbg then
+		Slider.trackbg = CreateFrame("Frame", nil, Slider)
+		Slider.trackbg:Point("TOPLEFT", Slider.ScrollUp, "BOTTOMLEFT", 0, -1)
+		Slider.trackbg:Point("BOTTOMRIGHT", Slider.ScrollDown, "TOPRIGHT", 0, 1)
+		Slider.trackbg:SetTemplate("Transparent")
+	end
+
+	if Slider.ScrollUp and Slider.ScrollDown then
+		if not Slider.ScrollUp.icon then
+			SkinNextPrevButton(Slider.ScrollUp, true, true)
+			Slider.ScrollUp:Size(Slider.ScrollUp:GetWidth() + 7, Slider.ScrollUp:GetHeight() + 7)
+		end
+
+		if not Slider.ScrollDown.icon then
+			SkinNextPrevButton(Slider.ScrollDown, true)
+			Slider.ScrollDown:Size(Slider.ScrollDown:GetWidth() + 7, Slider.ScrollDown:GetHeight() + 7)
+		end
+	end
+
+	if Slider.ScrollUpButton  and Slider.ScrollDownButton then
+		if not Slider.ScrollUpButton.icon then
+			SkinNextPrevButton(Slider.ScrollUpButton, true, true)
+			Slider.ScrollUpButton:Size(Slider.ScrollUpButton:GetWidth() + 9, Slider.ScrollUpButton:GetHeight() + 7) -- Not perfect
+		end
+
+		if not Slider.ScrollDownButton.icon then
+			SkinNextPrevButton(Slider.ScrollDownButton, true)
+			Slider.ScrollDownButton:Size(Slider.ScrollDownButton:GetWidth() + 7, Slider.ScrollDownButton:GetHeight() + 7)
+		end
+	end
+
+	if parent.scrollUp and parent.scrollDown then
+		if not parent.scrollUp.icon then
+			SkinNextPrevButton(parent.scrollUp, true, true)
+			parent.scrollUp:Size(parent.scrollUp:GetWidth() + 9, parent.scrollUp:GetHeight() + 7) -- Not perfect
+		end
+
+		if not parent.scrollDown.icon then
+			SkinNextPrevButton(parent.scrollDown, true)
+			parent.scrollDown:Size(parent.scrollDown:GetWidth() + 9, parent.scrollDown:GetHeight() + 7) -- Not perfect
+		end
+	end
+
+	if Slider.thumbTexture then
+		if not thumbTrim then thumbTrim = 3 end
+		Slider.thumbTexture:SetTexture(nil)
+		if not Slider.thumbbg then
+			Slider.thumbbg = CreateFrame("Frame", nil, Slider)
+			Slider.thumbbg:Point("TOPLEFT", Slider.thumbTexture, "TOPLEFT", 2, -thumbTrim)
+			Slider.thumbbg:Point("BOTTOMRIGHT", Slider.thumbTexture, "BOTTOMRIGHT", -2, thumbTrim)
+			Slider.thumbbg:SetTemplate("Default", true, true)
+			--Slider.thumbbg.backdropTexture:SetVertexColor(0.6, 0.6, 0.6)
+			if Slider.trackbg then
+				Slider.thumbbg:SetFrameLevel(Slider.trackbg:GetFrameLevel()+1)
+			end
+		end
+	end
+
+	if Slider.ThumbTexture then
+		if not thumbTrim then thumbTrim = 3 end
+		Slider.ThumbTexture:SetTexture(nil)
+		if not Slider.thumbbg then
+			Slider.thumbbg = CreateFrame("Frame", nil, Slider)
+			Slider.thumbbg:Point("TOPLEFT", Slider.ThumbTexture, "TOPLEFT", 2, -thumbTrim)
+			Slider.thumbbg:Point("BOTTOMRIGHT", Slider.ThumbTexture, "BOTTOMRIGHT", -2, thumbTrim)
+			Slider.thumbbg:SetTemplate("Default", true, true)
+			Slider.thumbbg.backdropTexture:SetVertexColor(0.6, 0.6, 0.6)
+			if Slider.trackbg then
+				Slider.thumbbg:SetFrameLevel(Slider.trackbg:GetFrameLevel()+1)
+			end
+		end
+	end
+end
+
+function SkinCropIcon(texture, parent)
+	texture:SetTexCoord(unpack(D['IconCoord']))
+	if parent then
+		local layer, subLevel = texture:GetDrawLayer()
+		local iconBorder = parent:CreateTexture(nil, layer, nil, subLevel - 1)
+		iconBorder:SetPoint("TOPLEFT", texture, -1, 1)
+		iconBorder:SetPoint("BOTTOMRIGHT", texture, 1, -1)
+		iconBorder:SetColorTexture(0, 0, 0)
+		return iconBorder
+	end
+end
+
 -- merge api
 local function addapi(object)
 	local mt = getmetatable(object).__index
@@ -850,6 +970,9 @@ local function addapi(object)
 	if not object.SetAnimation then mt.SetAnimation = SetAnimation end
 	if not object.AnimCallback then mt.AnimCallback = AnimCallback end
 	if not object.AnimOnFinished then mt.AnimOnFinished = AnimOnFinished end
+	if not object.SkinInsetFrameTemplate then mt.SkinInsetFrameTemplate = SkinInsetFrameTemplate end
+	if not object.SkinScrollSlider then mt.SkinScrollSlider = SkinScrollSlider end
+	if not object.SkinCropIcon then mt.SkinCropIcon = SkinCropIcon end
 end
 
 local handled = {['Frame'] = true}

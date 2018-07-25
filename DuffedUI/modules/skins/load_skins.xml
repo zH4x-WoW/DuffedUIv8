@@ -15,6 +15,7 @@
 	<Script file="chat.lua" />
 	<Script file="collections.lua" />
 	<Script file="colorpicker.lua" />
+	<Script file='communities.lua' />
 	<Script file="debugtools.lua" />
 	<Script file="dressup.lua" />
 	<Script file="friends.lua" />

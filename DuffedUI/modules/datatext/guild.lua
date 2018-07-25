@@ -207,7 +207,11 @@ end)
 Stat:SetScript('OnLeave', function() GameTooltip:Hide() end)
 Stat:SetScript('OnMouseDown', function(self, btn)
 	if btn ~= 'LeftButton' then return end
-	ToggleGuildFrame()
+	if C['datatext']['ogf'] then
+		ToggleGuildFrame()
+	else
+		ToggleCommunitiesFrame()
+	end
 end)
 
 Stat:RegisterEvent('PLAYER_ENTERING_WORLD')

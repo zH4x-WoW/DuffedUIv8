@@ -164,7 +164,7 @@ function AS:Blizzard_Talent(event, addon)
 			if self.isPet then
 				bonuses = {GetSpecializationSpells(shownSpec, nil, self.isPet, true)}
 			else
-				bonuses = SPEC_SPELLS_DISPLAY[id]
+				bonuses = C_SpecializationInfo.GetSpellsDisplay(id)
 			end
 
 			for i = 1, #bonuses, 2 do
@@ -262,7 +262,122 @@ function AS:Blizzard_Talent(event, addon)
 		TalentMicroButtonAlert:ClearAllPoints()
 		TalentMicroButtonAlert:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -6)
 
-		AS:StripTextures(PlayerTalentFramePVPTalents.Talents)
+		-- PVP Talents
+		local function SkinPvpTalentSlots(button)
+			AS:SkinBackdropFrame(button)
+			button.Texture:SetTexture([[Interface\Icons\INV_Misc_QuestionMark]])
+			button.Arrow:SetPoint("LEFT", button.Texture, "RIGHT", 5, 0)
+			button.Arrow:SetSize(26, 13)
+			button.Border:Hide()
+
+			button:SetSize(button:GetSize())
+			button.Texture:SetSize(32, 32)
+			button.TalentName:SetPoint("TOP", button, "BOTTOM", 0, 0)
+		end
+
+		local function SkinPvpTalentTrinketSlot(button)
+			SkinPvpTalentSlots(button)
+			button.Texture:SetTexture([[Interface\Icons\INV_Jewelry_Trinket_04]])
+			button.Texture:SetSize(48, 48)
+			button.Arrow:SetSize(26, 13)
+		end
+
+		local PvpTalentFrame = PlayerTalentFrameTalents.PvpTalentFrame
+		PvpTalentFrame:StripTextures()
+
+		PvpTalentFrame.Swords:SetSize(72, 67)
+		PvpTalentFrame.Orb:Hide()
+		PvpTalentFrame.Ring:Hide()
+
+		-- Skin the PvP Icons
+		SkinPvpTalentTrinketSlot(PvpTalentFrame.TrinketSlot)
+		SkinPvpTalentSlots(PvpTalentFrame.TalentSlot1)
+		SkinPvpTalentSlots(PvpTalentFrame.TalentSlot2)
+		SkinPvpTalentSlots(PvpTalentFrame.TalentSlot3)
+
+		PvpTalentFrame.TalentList:StripTextures()
+		PvpTalentFrame.TalentList:CreateBackdrop("Transparent")
+
+		PvpTalentFrame.TalentList:SetPoint("BOTTOMLEFT", PlayerTalentFrame, "BOTTOMRIGHT", 5, 26)
+		AS:SkinFrame(PvpTalentFrame.TalentList)
+		PvpTalentFrame.TalentList.MyTopLeftCorner:Hide()
+		PvpTalentFrame.TalentList.MyTopRightCorner:Hide()
+		PvpTalentFrame.TalentList.MyTopBorder:Hide()
+
+		local function HandleInsetButton(Button)
+			AS:SkinButton(Button)
+
+			if Button.LeftSeparator then
+				Button.LeftSeparator:Hide()
+			end
+			if Button.RightSeparator then
+				Button.RightSeparator:Hide()
+			end
+		end
+
+		local TalentList_CloseButton = select(4, PlayerTalentFrameTalents.PvpTalentFrame.TalentList:GetChildren())
+		if TalentList_CloseButton and TalentList_CloseButton:HasScript("OnClick") then
+			HandleInsetButton(TalentList_CloseButton)
+		end
+
+		PvpTalentFrame.TalentList.ScrollFrame:SetPoint("TOPLEFT", 5, -5)
+		PvpTalentFrame.TalentList.ScrollFrame:SetPoint("BOTTOMRIGHT", -21, 32)
+		PvpTalentFrame.OrbModelScene:SetAlpha(0)
+
+		PvpTalentFrame:SetSize(131, 379)
+		PvpTalentFrame:SetPoint("LEFT", PlayerTalentFrameTalents, "RIGHT", -135, 0)
+		PvpTalentFrame.Swords:SetPoint("BOTTOM", 0, 30)
+		PvpTalentFrame.Label:SetPoint("BOTTOM", 0, 104)
+		PvpTalentFrame.InvisibleWarmodeButton:SetAllPoints(PvpTalentFrame.Swords)
+
+		PvpTalentFrame.TrinketSlot:SetPoint("TOP", 0, -16)
+		PvpTalentFrame.TalentSlot1:SetPoint("TOP", PvpTalentFrame.TrinketSlot, "BOTTOM", 0, -16)
+		PvpTalentFrame.TalentSlot2:SetPoint("TOP", PvpTalentFrame.TalentSlot1, "BOTTOM", 0, -10)
+		PvpTalentFrame.TalentSlot3:SetPoint("TOP", PvpTalentFrame.TalentSlot2, "BOTTOM", 0, -10)
+
+		for i = 1, 10 do
+			local bu = _G["PlayerTalentFrameTalentsPvpTalentFrameTalentListScrollFrameButton"..i]
+			if bu then
+				local border = bu:GetRegions()
+				if border then border:SetTexture(nil) end
+
+				bu:StyleButton()
+				bu:CreateBackdrop("Overlay")
+
+				if bu.Selected then
+					bu.Selected:SetTexture(nil)
+
+					bu.selectedTexture = bu:CreateTexture(nil, 'ARTWORK')
+					bu.selectedTexture:SetInside(bu)
+					bu.selectedTexture:SetColorTexture(0, 1, 0, 0.2)
+					bu.selectedTexture:SetShown(bu.Selected:IsShown())
+
+					hooksecurefunc(bu, "Update", function(selectedHere)
+						if not bu.selectedTexture then return end
+						if bu.Selected:IsShown() then
+							bu.selectedTexture:SetShown(selectedHere)
+						else
+							bu.selectedTexture:Hide()
+						end
+					end)
+				end
+
+				bu.backdrop:SetAllPoints()
+
+				if bu.Icon then
+					bu.Icon:SetTexCoord(unpack(AS.TexCoords))
+					bu.Icon:SetDrawLayer('ARTWORK', 1)
+				end
+			end
+		end
+
+		AS:SkinButton(PlayerTalentFrameTalentsPvpTalentButton)
+		AS:SkinScrollBar(PlayerTalentFrameTalentsPvpTalentFrameTalentListScrollFrameScrollBar)
+
+		AS:SkinCloseButton(PlayerTalentFrameTalentsPvpTalentFrame.TrinketSlot.HelpBox.CloseButton)
+		AS:SkinCloseButton(PlayerTalentFrameTalentsPvpTalentFrame.WarmodeTutorialBox.CloseButton)
+
+		--[[AS:StripTextures(PlayerTalentFrameTalentsPvpTalentFrame)
 
 		PlayerTalentFramePVPTalents.XPBar:StripTextures()
 		PlayerTalentFramePVPTalents.XPBar.PrestigeReward.Accept:ClearAllPoints()
@@ -340,7 +455,7 @@ function AS:Blizzard_Talent(event, addon)
 		PVPTalentPrestigeLevelDialog.BottomDivider:SetAtlas("honorsystem-prestige-rewardline", true)
 		AS:SkinButton(PVPTalentPrestigeLevelDialog.Accept)
 		AS:SkinButton(PVPTalentPrestigeLevelDialog.Cancel)
-		AS:SkinCloseButton(PVPTalentPrestigeLevelDialog.CloseButton) --There are 2 buttons with the exact same name, may not be able to skin it properly until fixed by Blizzard.
+		AS:SkinCloseButton(PVPTalentPrestigeLevelDialog.CloseButton) --There are 2 buttons with the exact same name, may not be able to skin it properly until fixed by Blizzard.]]--
 	end
 end
 

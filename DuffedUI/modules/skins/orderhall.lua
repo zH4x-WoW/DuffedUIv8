@@ -15,12 +15,12 @@ local function LoadOrderHallSkin()
 	OrderHallCommandBar.WorldMapButton:ClearAllPoints()
 	OrderHallCommandBar.WorldMapButton:SetPoint("RIGHT", OrderHallCommandBar, -5, -2)
 	
-	--[[MissionFrame]]--
-	OrderHallMissionFrame:StripTextures()
+	-- MissionFrame
+	--[[OrderHallMissionFrame:StripTextures()
 	OrderHallMissionFrame:CreateBackdrop("Transparent")
 	OrderHallMissionFrame.backdrop:SetOutside(OrderHallMissionFrame.BorderFrame)
 	OrderHallMissionFrame.CloseButton:SkinCloseButton()
-	for i = 1, 3 do _G["OrderHallMissionFrameTab" .. i]:SkinTab() end
+	for i = 1, 2 do _G["OrderHallMissionFrameTab" .. i]:SkinTab() end
 	OrderHallMissionFrame.GarrCorners:StripTextures()
 	OrderHallMissionFrameMissions:StripTextures()
 	OrderHallMissionFrameMissionsListScrollFrameScrollBar:SkinScrollBar()
@@ -63,7 +63,7 @@ local function LoadOrderHallSkin()
 		end
 	end
 	
-	--[[MissionTab]]--
+	-- MissionTab
 	local Follower = OrderHallMissionFrameFollowers
 	Follower:StripTextures()
 	Follower.SearchBox:SkinEditBox()
@@ -73,7 +73,7 @@ local function LoadOrderHallSkin()
 	OrderHallMissionFrame.MissionTab.MissionPage.CloseButton:SkinCloseButton()
 	OrderHallMissionFrame.MissionTab.MissionPage.StartMissionButton:SkinButton()
 	
-	--[[FollowerTab]]--
+	-- FollowerTab
 	local FollowerList = OrderHallMissionFrame.FollowerTab
 	FollowerList:StripTextures()
 	FollowerList.Class:SetSize(50, 43)
@@ -81,14 +81,14 @@ local function LoadOrderHallSkin()
 	FollowerList.XPBar:SetStatusBarTexture(C["media"].normTex)
 	FollowerList.XPBar:CreateBackdrop()
 	
-	--[[MissionStage]]--
+	-- MissionStage
 	local Mission = OrderHallMissionFrameMissions
 	Mission.CompleteDialog:StripTextures()
 	Mission.CompleteDialog:SetTemplate("Transparent")
 	Mission.CompleteDialog.BorderFrame.ViewButton:SkinButton()
 	OrderHallMissionFrame.MissionComplete.NextMissionButton:SkinButton()
 
-	--[[TalentFrame]]--
+	-- TalentFrame
 	OrderHallTalentFrame:StripTextures()
 	OrderHallTalentFrame:SetTemplate("Transparent")
 	OrderHallTalentFrameCloseButton:SkinCloseButton()
@@ -96,7 +96,7 @@ local function LoadOrderHallSkin()
 	OrderHallTalentFrame.Currency:SetFont(C["media"].font, 16)
 	OrderHallTalentFrame.CurrencyIcon:SetAtlas("legionmission-icon-currency", false)
 
-	--[[Scouting Map - Zonechoice]]--
+	-- Scouting Map - Zonechoice
 	AdventureMapQuestChoiceDialog:StripTextures()	
 	AdventureMapQuestChoiceDialog:SetTemplate("Transparent")
 	AdventureMapQuestChoiceDialog.CloseButton:SkinCloseButton()
@@ -108,7 +108,7 @@ local function LoadOrderHallSkin()
 	AdventureMapQuestChoiceDialog.AcceptButton:StripTextures()
 	AdventureMapQuestChoiceDialog.AcceptButton:SkinButton()
 	AdventureMapQuestChoiceDialog.DeclineButton:StripTextures()
-	AdventureMapQuestChoiceDialog.DeclineButton:SkinButton()
+	AdventureMapQuestChoiceDialog.DeclineButton:SkinButton()]]--
 end
 
-D.SkinFuncs["Blizzard_OrderHallUI"] = LoadOrderHallSkin
+D['SkinFuncs']["Blizzard_OrderHallUI"] = LoadOrderHallSkin
