@@ -1,7 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
-	QuestFrameGreetingPanel:HooScript('OnShow', function()
+	QuestFrameGreetingPanel:HookScript('OnShow', function()
 		QuestFrameGreetingPanel:StripTextures()
 		QuestFrameGreetingGoodbyeButton:SkinButton(true)
 		GreetingText:SetTextColor(1, 1, 1)
@@ -11,10 +11,14 @@ local function LoadSkin()
 
 		for i = 1, C_QuestLog.GetMaxNumQuestsCanAccept() do
 			local button = _G['QuestTitleButton'..i]
-			if button:GetFontString() then
-				if button:GetFontString():GetText() and button:GetFontString():GetText():find('|cff000000') then
-					button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), '|cff000000', '|cffFFFF00'))
-				end
+			if button then
+				hooksecurefunc(button, 'SetFormattedText', function()
+					if button:GetFontString() then
+						if button:GetFontString():GetText() and button:GetFontString():GetText():find('|cff000000') then
+							button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), '|cff000000', '|cffFFFF00'))
+						end
+					end
+				end)
 			end
 		end
 	end)

@@ -19,6 +19,6 @@
 	<Script file="quickjoin.lua" />
 	<Script file="smf.lua" />
 	<Script file="talent.lua" />
-	<!--<Script file="time.lua" />-->
+	<Script file="time.lua" />
 	<Script file="versatility.lua" />
 </Ui>

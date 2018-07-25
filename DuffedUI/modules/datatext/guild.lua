@@ -23,8 +23,8 @@ local guildMotDString = '  %s |cffaaaaaa- |cffffffff%s'
 local levelNameString = '|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r %s'
 local levelNameStatusString = '|cff%02x%02x%02x%d|r %s %s'
 local nameRankString = '%s |cff999999-|cffffffff %s'
-local noteString = '  '%s''
-local officerNoteString = '  o: '%s''
+local noteString = "  '%s'"
+local officerNoteString = "  o: '%s'"
 
 local guildTable, guildXP, guildMotD = {}, {}, ''
 local totalOnline = 0
@@ -32,7 +32,7 @@ local totalOnline = 0
 local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local Text = Stat:CreateFontString('DuffedUIStatGuildText', 'OVERLAY')
 Text:SetFont(f, fs, ff)
-D.DataTextPosition(C['datatext'].guild, Text)
+D.DataTextPosition(C['datatext']['guild'], Text)
 
 local function BuildGuildTable()
 	totalOnline = 0

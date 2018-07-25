@@ -80,7 +80,7 @@ L['install'] = {
 	['step3line3'] = '',
 
 	['step4line1'] = 'Installation is complete.',
-	['step4line2'] = 'Please click the 'Finish' button to reload the UI.',
+	['step4line2'] = "Please click the 'Finish' button to reload the UI.",
 	['step4line3'] = '',
 	['step4line4'] = 'Enjoy DuffedUI! Visit us at |cfffc41f3www.wowinterface.com|r!',
 }

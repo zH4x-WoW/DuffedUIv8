@@ -89,6 +89,7 @@ D['SpawnUF'] = function(self)
 		pet:Point('TOPLEFT', oUF_Player, 'BOTTOMLEFT', -2, -5)
 		pet:Size(100, 25)
 	end
+	pet:SetScale(frameScale)
 	move:RegisterFrame(pet)
 
 	local focus = oUF:Spawn('focus', 'oUF_Focus')
