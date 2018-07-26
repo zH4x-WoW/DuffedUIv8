@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if IsAddOnLoaded("AddOnSkins") then return end
+--if IsAddOnLoaded("AddOnSkins") then return end
 
 local function LoadSkin()
 	CharacterFrameCloseButton:SkinCloseButton()
@@ -41,7 +41,7 @@ local function LoadSkin()
 		hooksecurefunc(slot.IconBorder, "Hide", function(self) self:GetParent():SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
 	end
 
-	--[[Strip Textures]]--
+	-- Strip Textures
 	local charframe = {
 		"CharacterFrame",
 		"CharacterModelFrame",
@@ -86,11 +86,11 @@ local function LoadSkin()
 		end
 	end
 
-	--[[Swap item flyout frame]]--
+	-- Swap item flyout frame
 	EquipmentFlyoutFrame:HookScript("OnShow", SkinItemFlyouts)
 	hooksecurefunc("EquipmentFlyout_Show", SkinItemFlyouts)
 
-	--[[Icon in upper right corner of character frame]]--
+	-- Icon in upper right corner of character frame
 	CharacterFramePortrait:Kill()
 
 	local scrollbars = {
@@ -114,7 +114,7 @@ local function LoadSkin()
 
 	CharacterFrame:SetTemplate("Transparent")
 
-	--[[Titles]]--
+	-- Titles
 	PaperDollTitlesPane:HookScript("OnShow", function(self)
 		for x, object in pairs(PaperDollTitlesPane.buttons) do
 			object.BgTop:SetTexture(nil)
@@ -126,7 +126,7 @@ local function LoadSkin()
 		end
 	end)
 
-	--[[Equipement Manager]]--
+	-- Equipement Manager
 	PaperDollEquipmentManagerPaneEquipSet:SkinButton()
 	PaperDollEquipmentManagerPaneSaveSet:SkinButton()
 	PaperDollEquipmentManagerPaneEquipSet:Width(PaperDollEquipmentManagerPaneEquipSet:GetWidth() - 8)
@@ -180,10 +180,10 @@ local function LoadSkin()
 		end
 	end)
 
-	--[[Handle Tabs at bottom of character frame]]--
+	-- Handle Tabs at bottom of character frame
 	for i = 1, 3 do _G["CharacterFrameTab" .. i]:SkinTab() end
 
-	--[[Buttons used to toggle between equipment manager, titles, and character stats]]--
+	-- Buttons used to toggle between equipment manager, titles, and character stats
 	local function FixSidebarTabCoords()
 		for i = 1, #PAPERDOLL_SIDEBARS do
 			local tab = _G["PaperDollSidebarTab" .. i]
@@ -213,7 +213,7 @@ local function LoadSkin()
 	end
 	hooksecurefunc("PaperDollFrame_UpdateSidebarTabs", FixSidebarTabCoords)
 
-	--[[Reputation]]--
+	-- Reputation
 	local function UpdateFactionSkins()
 		ReputationFrame:StripTextures(true)
 		for i = 1, GetNumFactions() do
@@ -241,23 +241,81 @@ local function LoadSkin()
 	hooksecurefunc("ExpandFactionHeader", UpdateFactionSkins)
 	hooksecurefunc("CollapseFactionHeader", UpdateFactionSkins)
 
-	--[[Currency]]--
-	TokenFrame:HookScript("OnShow", function()
-		for i = 1, GetCurrencyListSize() do
-			local button = _G["TokenFrameContainerButton" .. i]
+	local tooltip = EmbeddedItemTooltip
+	local reward = tooltip.ItemTooltip
+	local icon = reward.Icon
+	tooltip:SetTemplate("Transparent")
+	if icon then
+		icon:SkinIcon()
+		hooksecurefunc(reward.IconBorder, "SetVertexColor", function(self, r, g, b)
+			self:GetParent().backdrop:SetBackdropBorderColor(r, g, b)
+			self:SetTexture("")
+		end)
+		hooksecurefunc(reward.IconBorder, "Hide", function(self)
+			self:GetParent().backdrop:SetBackdropBorderColor(unpack(C['media']['bordercolor']))
+		end)
+	end
+	tooltip:HookScript("OnShow", function(self)
+		self:SetTemplate("Transparent")
+	end)
+
+	-- Currency
+	local function UpdateCurrencySkins()
+		if TokenFramePopup then
+			if not TokenFramePopup.template then
+				TokenFramePopup:StripTextures();
+				TokenFramePopup:SetTemplate("Transparent");
+			end
+			TokenFramePopup:Point("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28);
+		end
+
+		if not TokenFrameContainer.buttons then return end
+		local buttons = TokenFrameContainer.buttons;
+		local numButtons = #buttons;
+
+		for i = 1, numButtons do
+			local button = buttons[i];
 
 			if button then
-				button.highlight:Kill()
-				button.categoryMiddle:Kill()
-				button.categoryLeft:Kill()
-				button.categoryRight:Kill()
-				if button.icon then button.icon:SetTexCoord(unpack(D.IconCoord)) end
+				if button.highlight then button.highlight:Kill() end
+				if button.categoryLeft then button.categoryLeft:Kill() end
+				if button.categoryRight then button.categoryRight:Kill() end
+				if button.categoryMiddle then button.categoryMiddle:Kill() end
+
+				if button.icon then
+					button.icon:SetTexCoord(unpack(D['IconCoord']));
+				end
+
+				if button.expandIcon then
+					if not button.highlightTexture then
+						button.highlightTexture = button:CreateTexture(button:GetName().."HighlightTexture", "HIGHLIGHT");
+						button.highlightTexture:SetTexture("Interface\\Buttons\\UI-PlusButton-Hilight");
+						button.highlightTexture:SetBlendMode("ADD");
+						button.highlightTexture:SetInside(button.expandIcon);
+
+						-- these two only need to be called once
+						-- adding them here will prevent additional calls
+						button.expandIcon:Point("LEFT", 4, 0);
+						button.expandIcon:SetSize(15, 15);
+					end
+					if button.isHeader then
+						if button.isExpanded then
+							button.expandIcon:SetTexture("Interface\\AddOns\\ElvUI\\media\\textures\\MinusButton");
+							button.expandIcon:SetTexCoord(0,1,0,1);
+						else
+							button.expandIcon:SetTexture("Interface\\AddOns\\ElvUI\\media\\textures\\PlusButton");
+							button.expandIcon:SetTexCoord(0,1,0,1);
+						end
+						button.highlightTexture:Show()
+					else
+						button.highlightTexture:Hide()
+					end
+				end
 			end
 		end
-		TokenFramePopup:StripTextures()
-		TokenFramePopup:SetTemplate("Transparent")
-		TokenFramePopup:Point("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)
-	end)
+	end
+	hooksecurefunc("TokenFrame_Update", UpdateCurrencySkins)
+	hooksecurefunc(TokenFrameContainer, "update", UpdateCurrencySkins)
 end
 
 tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
