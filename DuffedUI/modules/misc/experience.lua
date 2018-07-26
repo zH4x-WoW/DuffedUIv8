@@ -120,11 +120,13 @@ local function updateStatus()
 			if restXP then GameTooltip:AddLine(string.format(L['xpbar']['xprested'], D['CommaValue'](restXP), restXP / maxXP * 100)) end
 		end
 		if GetWatchedFactionInfo() then
-			local name, rank, min, max, value = GetWatchedFactionInfo()
+			local name, rank, min, max, value, id = GetWatchedFactionInfo()
+			local maxMinDiff = max - min
+			if (maxMinDiff == 0) then maxMinDiff = 1 end
 			if not IsMaxLevel() then GameTooltip:AddLine(' ') end
 			GameTooltip:AddLine(string.format(L['xpbar']['fctitle'], name))
 			GameTooltip:AddLine(string.format(L['xpbar']['standing']..colorize(rank).. ' %s|r', FactionInfo[rank][2]))
-			GameTooltip:AddLine(string.format(L['xpbar']['fcrep'], D['CommaValue'](value - min), D['CommaValue'](max - min), (value - min)/(max - min) * 100))
+			GameTooltip:AddLine(string.format(L['xpbar']['fcrep'], D['CommaValue'](value - min), D['CommaValue'](max - min), (value - min)/(maxMinDiff) * 100)) 
 			GameTooltip:AddLine(string.format(L['xpbar']['fcremaining'], D['CommaValue'](max - value)))
 		end
 		GameTooltip:Show()
