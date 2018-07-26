@@ -824,7 +824,7 @@ function SkinInsetFrameTemplate(frame)
 	if frame.Bg then frame.Bg:Hide() end
 end
 
---[[function SkinScrollSlider(Slider, thumbTrim)
+function SkinScrollSlider(Slider, thumbTrim)
 	local parent = Slider:GetParent()
 	if not parent then return end
 	Slider:SetPoint("TOPLEFT", parent, "TOPRIGHT", 0, -17)
@@ -909,7 +909,7 @@ end
 			end
 		end
 	end
-end]]--
+end
 
 function SkinCropIcon(texture, parent)
 	texture:SetTexCoord(unpack(D['IconCoord']))
@@ -965,7 +965,7 @@ local function addapi(object)
 	if not object.AnimCallback then mt.AnimCallback = AnimCallback end
 	if not object.AnimOnFinished then mt.AnimOnFinished = AnimOnFinished end
 	if not object.SkinInsetFrameTemplate then mt.SkinInsetFrameTemplate = SkinInsetFrameTemplate end
-	--if not object.SkinScrollSlider then mt.SkinScrollSlider = SkinScrollSlider end
+	if not object.SkinScrollSlider then mt.SkinScrollSlider = SkinScrollSlider end
 	if not object.SkinCropIcon then mt.SkinCropIcon = SkinCropIcon end
 end
 

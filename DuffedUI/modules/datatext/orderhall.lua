@@ -40,7 +40,6 @@ local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
 
 local Stat = CreateFrame("Frame", "DuffedUIStatgarrison")
 Stat:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
---Stat:RegisterEvent("GET_ITEM_INStatO_RECEIVED")
 Stat:RegisterEvent("GARRISON_MISSION_LIST_UPDATE")
 Stat:RegisterEvent("GARRISON_MISSION_STARTED")
 Stat:RegisterEvent("GARRISON_MISSION_FINISHED")
