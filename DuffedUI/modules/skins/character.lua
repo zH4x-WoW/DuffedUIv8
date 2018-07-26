@@ -2,6 +2,8 @@ local D, C, L = unpack(select(2, ...))
 --if IsAddOnLoaded("AddOnSkins") then return end
 
 local function LoadSkin()
+	ToggleCharacter('TokenFrame')
+	ToggleCharacter('TokenFrame')
 	CharacterFrameCloseButton:SkinCloseButton()
 	ReputationListScrollFrameScrollBar:SkinScrollBar()
 	TokenFrameContainerScrollBar:SkinScrollBar()
@@ -181,7 +183,7 @@ local function LoadSkin()
 	end)
 
 	-- Handle Tabs at bottom of character frame
-	for i = 1, 3 do _G["CharacterFrameTab" .. i]:SkinTab() end
+	for i = 1, 3 do _G["CharacterFrameTab" .. i]:SkinTab()	end
 
 	-- Buttons used to toggle between equipment manager, titles, and character stats
 	local function FixSidebarTabCoords()
@@ -300,10 +302,10 @@ local function LoadSkin()
 					end
 					if button.isHeader then
 						if button.isExpanded then
-							button.expandIcon:SetTexture("Interface\\AddOns\\ElvUI\\media\\textures\\MinusButton");
+							button.expandIcon:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\MinusButton");
 							button.expandIcon:SetTexCoord(0,1,0,1);
 						else
-							button.expandIcon:SetTexture("Interface\\AddOns\\ElvUI\\media\\textures\\PlusButton");
+							button.expandIcon:SetTexture("Interface\\AddOns\\DuffedUI\\medias\\textures\\PlusButton");
 							button.expandIcon:SetTexCoord(0,1,0,1);
 						end
 						button.highlightTexture:Show()

@@ -17,7 +17,6 @@ local Frames = {
 	'BonusRollFrame',
 	'BonusRollLootWonFrame',
 	'BonusRollMoneyWonFrame',
-	'CharacterFrame',
 	'DressUpFrame',
 	'FriendsFrame',
 	'FriendsFriendsFrame',
@@ -62,7 +61,6 @@ local Frames = {
 	'TradeFrame',
 	'TutorialFrame',
 	'VideoOptionsFrame',
-	'WorldStateAlwaysUpFrame',
 	'WorldStateScoreFrame',
 }
 
@@ -154,16 +152,13 @@ function MF:MakeMovable(Name)
 	Frame:HookScript('OnDragStop', OnDragStop)
 	Frame:HookScript('OnHide', OnDragStop)
 
-	if Name == 'WorldStateAlwaysUpFrame' then
-		Frame:HookScript('OnEnter', function(self) self:SetTemplate() end)
-		Frame:HookScript('OnLeave', function(self) self:StripTextures() end)
-	end
-
 	Frame.ignoreFramePositionManager = true
-	if UIPanelWindows[Name] then
-		for Key in pairs(UIPanelWindows[Name]) do
-			if Key == 'area' or Key == "pushable" then
-				UIPanelWindows[Name][Key] = nil
+	if Name ~= "CharacterFrame" then
+		if UIPanelWindows[Name] then
+			for Key in pairs(UIPanelWindows[Name]) do
+				if Key == 'area' or Key == "pushable" then
+					UIPanelWindows[Name][Key] = nil
+				end
 			end
 		end
 	end
