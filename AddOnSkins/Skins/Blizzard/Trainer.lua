@@ -90,11 +90,11 @@ function AS:Blizzard_Trainer(event, addon)
 			end
 
 			skillButton.Backdrop:SetBackdropBorderColor(0, 0.44, .87)
-			if ( serviceType == "available" and not unavailable) then
+			--[[if ( serviceType == "available" and not unavailable) then
 				ClassTrainerTrainButton:Enable()
 			else
 				ClassTrainerTrainButton:Disable()
-			end
+			end]]--
 		else
 			skillButton.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end

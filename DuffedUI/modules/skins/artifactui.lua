@@ -16,16 +16,6 @@ local function ArtifactSkin()
 	ArtifactFrame.ForgeBadgeFrame.ForgeLevelBackground:ClearAllPoints()
 	ArtifactFrame.ForgeBadgeFrame.ForgeLevelBackground:SetPoint("RIGHT", ArtifactFrame.PerksTab.TitleContainer.ArtifactName, "LEFT", 0, -12)
 
-	-- Artifact Relic Forge
-	if ArtifactRelicForgeFrame:IsShown() then
-		ArtifactRelicForgeFrame:StripTextures()
-		ArtifactRelicForgeFrame:SetTemplate("Transparent")
-		ArtifactRelicForgeFrameCloseButton:SkinCloseButton()
-		ArtifactRelicForgeFrame.TitleContainer.RelicSlot1.AttuneButton:SkinButton()
-		ArtifactRelicForgeFrame.TitleContainer.RelicSlot2.AttuneButton:SkinButton()
-		ArtifactRelicForgeFrame.TitleContainer.RelicSlot3.AttuneButton:SkinButton()
-	end
-
 	-- Link ArtifactSpells to Chat => Shift + Click
 	local oldOnClick = ArtifactPowerButtonMixin.OnClick
 	function ArtifactPowerButtonMixin:OnClick(button)

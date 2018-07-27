@@ -1,9 +1,15 @@
 local D, C, L = unpack(select(2, ...))
---if IsAddOnLoaded("AddOnSkins") then return end
+if IsAddOnLoaded("AddOnSkins") then return end
+
+local function IsMaxLevel()
+	if UnitLevel('player') == MAX_PLAYER_LEVEL then return true end
+end
 
 local function LoadSkin()
-	ToggleCharacter('TokenFrame')
-	ToggleCharacter('TokenFrame')
+	if IsMaxLevel then
+		ToggleCharacter('TokenFrame')
+		ToggleCharacter('TokenFrame')
+	end
 	CharacterFrameCloseButton:SkinCloseButton()
 	ReputationListScrollFrameScrollBar:SkinScrollBar()
 	TokenFrameContainerScrollBar:SkinScrollBar()
