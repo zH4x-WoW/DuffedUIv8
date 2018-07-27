@@ -46,7 +46,7 @@ bar:SetScript('OnEvent', function(self, event, unit, ...)
 		]])
 
 		RegisterStateDriver(self, 'page', GetBar())
-		RegisterStateDriver(ActionBar1, "visibility", "[petbattle] hide; show")
+		RegisterStateDriver(bar, "visibility", "[petbattle] hide; show")
 	elseif event == 'PLAYER_ENTERING_WORLD' then
 		local button
 		for i = 1, 12 do
