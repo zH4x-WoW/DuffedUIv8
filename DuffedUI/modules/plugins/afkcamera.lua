@@ -86,7 +86,7 @@ DuffedUIAFKPanel.DuffedUIText:SetText('|cffc41f3bDuffedUI ' .. Version)
 
 DuffedUIAFKPanel.DateText = DuffedUIAFKPanel:CreateFontString(nil, 'OVERLAY')
 if GetScreenWidth() >= 1921 then
-	DuffedUIAFKPanel.DateText:SetPoint('BOTTOMLEFT', DuffedUIAFKPanel, 'BOTTOMRIGHT', -525, 54)
+	DuffedUIAFKPanel.DateText:SetPoint('BOTTOMLEFT', DuffedUIAFKPanel, 'BOTTOMRIGHT', -475, 54)
 else	
 	DuffedUIAFKPanel.DateText:SetPoint('BOTTOMLEFT', DuffedUIAFKPanel, 'BOTTOMRIGHT', -100, 54)
 end
@@ -94,7 +94,7 @@ DuffedUIAFKPanel.DateText:SetFont(C['media']['font'], 15, 'OUTLINE')
 
 DuffedUIAFKPanel.ClockText = DuffedUIAFKPanel:CreateFontString(nil, 'OVERLAY')
 if GetScreenWidth() >= 1921 then
-	DuffedUIAFKPanel.ClockText:SetPoint('BOTTOMLEFT', DuffedUIAFKPanel, 'BOTTOMRIGHT', -525, 30)
+	DuffedUIAFKPanel.ClockText:SetPoint('BOTTOMLEFT', DuffedUIAFKPanel, 'BOTTOMRIGHT', -475, 30)
 else
 	DuffedUIAFKPanel.ClockText:SetPoint('BOTTOMLEFT', DuffedUIAFKPanel, 'BOTTOMRIGHT', -100, 30)
 end
@@ -102,7 +102,7 @@ DuffedUIAFKPanel.ClockText:SetFont(C['media']['font'], 20, 'OUTLINE')
 
 DuffedUIAFKPanel.AFKTimer = DuffedUIAFKPanel:CreateFontString(nil, 'OVERLAY')
 if GetScreenWidth() >= 1921 then
-	DuffedUIAFKPanel.AFKTimer:SetPoint('BOTTOMLEFT', DuffedUIAFKPanel, 'BOTTOMRIGHT', -525, 6)
+	DuffedUIAFKPanel.AFKTimer:SetPoint('BOTTOMLEFT', DuffedUIAFKPanel, 'BOTTOMRIGHT', -475, 6)
 else
 	DuffedUIAFKPanel.AFKTimer:SetPoint('BOTTOMLEFT', DuffedUIAFKPanel, 'BOTTOMRIGHT', -100, 6)
 end
@@ -110,7 +110,7 @@ DuffedUIAFKPanel.AFKTimer:SetFont(C['media']['font'], 20, 'OUTLINE')
 
 DuffedUIAFKPanel.PlayerNameText = DuffedUIAFKPanel:CreateFontString(nil, 'OVERLAY')
 if GetScreenWidth() >= 1921 then
-	DuffedUIAFKPanel.PlayerNameText:SetPoint('LEFT', DuffedUIAFKPanel, 'LEFT', 445, 15)
+	DuffedUIAFKPanel.PlayerNameText:SetPoint('LEFT', DuffedUIAFKPanel, 'LEFT', 395, 15)
 else
 	DuffedUIAFKPanel.PlayerNameText:SetPoint('LEFT', DuffedUIAFKPanel, 'LEFT', 25, 15)
 end
@@ -119,7 +119,7 @@ DuffedUIAFKPanel.PlayerNameText:SetText(color .. PName .. '|r')
 
 DuffedUIAFKPanel.GuildText = DuffedUIAFKPanel:CreateFontString(nil, 'OVERLAY')
 if GetScreenWidth() >= 1921 then
-	DuffedUIAFKPanel.GuildText:SetPoint('LEFT', DuffedUIAFKPanel, 'LEFT', 445, -3)
+	DuffedUIAFKPanel.GuildText:SetPoint('LEFT', DuffedUIAFKPanel, 'LEFT', 395, -3)
 else
 	DuffedUIAFKPanel.GuildText:SetPoint('LEFT', DuffedUIAFKPanel, 'LEFT', 25, -3)
 end
@@ -127,7 +127,7 @@ DuffedUIAFKPanel.GuildText:SetFont(C['media']['font'], 15, 'OUTLINE')
 
 DuffedUIAFKPanel.PlayerInfoText = DuffedUIAFKPanel:CreateFontString(nil, 'OVERLAY')
 if GetScreenWidth() >= 1921 then
-	DuffedUIAFKPanel.PlayerInfoText:SetPoint('LEFT', DuffedUIAFKPanel, 'LEFT', 445, -20)
+	DuffedUIAFKPanel.PlayerInfoText:SetPoint('LEFT', DuffedUIAFKPanel, 'LEFT', 395, -20)
 else
 	DuffedUIAFKPanel.PlayerInfoText:SetPoint('LEFT', DuffedUIAFKPanel, 'LEFT', 25, -20)
 end
