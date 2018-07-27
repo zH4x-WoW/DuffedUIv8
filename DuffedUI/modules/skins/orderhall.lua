@@ -16,7 +16,7 @@ local function LoadOrderHallSkin()
 	OrderHallCommandBar.WorldMapButton:SetPoint("RIGHT", OrderHallCommandBar, -5, -2)
 	
 	-- MissionFrame
-	--[[OrderHallMissionFrame:StripTextures()
+	OrderHallMissionFrame:StripTextures()
 	OrderHallMissionFrame:CreateBackdrop("Transparent")
 	OrderHallMissionFrame.backdrop:SetOutside(OrderHallMissionFrame.BorderFrame)
 	OrderHallMissionFrame.CloseButton:SkinCloseButton()
@@ -93,8 +93,6 @@ local function LoadOrderHallSkin()
 	OrderHallTalentFrame:SetTemplate("Transparent")
 	OrderHallTalentFrameCloseButton:SkinCloseButton()
 	ClassHallTalentInset:StripTextures()
-	OrderHallTalentFrame.Currency:SetFont(C["media"].font, 16)
-	OrderHallTalentFrame.CurrencyIcon:SetAtlas("legionmission-icon-currency", false)
 
 	-- Scouting Map - Zonechoice
 	AdventureMapQuestChoiceDialog:StripTextures()	
@@ -108,7 +106,7 @@ local function LoadOrderHallSkin()
 	AdventureMapQuestChoiceDialog.AcceptButton:StripTextures()
 	AdventureMapQuestChoiceDialog.AcceptButton:SkinButton()
 	AdventureMapQuestChoiceDialog.DeclineButton:StripTextures()
-	AdventureMapQuestChoiceDialog.DeclineButton:SkinButton()]]--
+	AdventureMapQuestChoiceDialog.DeclineButton:SkinButton()
 end
 
 D['SkinFuncs']["Blizzard_OrderHallUI"] = LoadOrderHallSkin
