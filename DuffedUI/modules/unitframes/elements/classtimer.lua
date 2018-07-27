@@ -952,7 +952,7 @@ D["ClassTimer"] = function(self)
 				local isDebuff = auraType == "HARMFUL"
 
 				for index = 1, 40 do
-					local name, _, texture, stacks, _, duration, expirationTime, caster, _, _, spellId = UnitAura(unit, index, auraType)
+					local name, texture, stacks, _, duration, expirationTime, caster, _, _, spellId = UnitAura(unit, index, auraType)
 					if (name == nil) then break end
 					local filterInfo = CheckFilter(self, spellId, caster, filter)
 					if (filterInfo and (filterInfo.unitType ~= 1 or unitIsFriend) and (filterInfo.unitType ~= 2 or not unitIsFriend)) then
@@ -1397,8 +1397,8 @@ D["ClassTimer"] = function(self)
 	end
 
 	local trinketFrame = CreateAuraBarFrame(trinketDataSource, self.Health)
-	trinketFrame:Point("BOTTOMLEFT", self.Health, "TOPLEFT", 0, 5)
-	trinketFrame:Point("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, 5)
+	trinketFrame:Point("BOTTOMLEFT", playerFrame, "TOPLEFT", 0, 5)
+	trinketFrame:Point("BOTTOMRIGHT", playerFrame, "TOPRIGHT", 0, 5)
 
 	if C["classtimer"]["debuffsenable"] then
 		local targetFrame = CreateAuraBarFrame(targetDataSource, self.Health)
@@ -1411,8 +1411,8 @@ D["ClassTimer"] = function(self)
 			targetFrame:Point("BOTTOMLEFT", DebuffMover, "TOPLEFT", 0, 5)
 			targetFrame:Point("BOTTOMRIGHT", DebuffMover, "TOPRIGHT", 0, 5)
 		else
-			targetFrame:Point("BOTTOMLEFT", self.Health, "TOPLEFT", 0, 5)
-			targetFrame:Point("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, 5)
+			targetFrame:Point("BOTTOMLEFT", trinketFrame, "TOPLEFT", 0, 5)
+			targetFrame:Point("BOTTOMRIGHT", trinketFrame, "TOPRIGHT", 0, 5)
 		end
 	end
 end
