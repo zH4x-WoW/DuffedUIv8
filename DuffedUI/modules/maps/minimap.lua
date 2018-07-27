@@ -133,7 +133,7 @@ m_coord:HookScript('OnUpdate', function(self, elapsed)
 		local UnitMap = C_Map.GetBestMapForUnit('player')
 		local x, y = 0, 0
 
-		if not C_Map.GetPlayerMapPosition(UnitMap, 'player') then
+		if IsInInstance() then
 			m_coord_text:SetText('x, x')
 			return
 		end
