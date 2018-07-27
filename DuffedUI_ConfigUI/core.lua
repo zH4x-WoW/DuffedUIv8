@@ -614,39 +614,6 @@ function CreateDuffedUIConfigUI()
 		self:SetPoint("CENTER", cf2)
 		self:SetAnimation("Move", "Horizontal", -1500, 0.5)
 	end)
-	
-	--[[CoAutor Credits]]--
-	local cf3 = CreateFrame("Frame", "CreditFrame3", DuffedUIConfigUI)
-	cf3:SetTemplate("Transparent")
-	cf3:Size(770, 22)
-	cf3:Point("TOP", DuffedUIConfigUI, "BOTTOM", 0, -63)
-
-	local sf3 = CreateFrame("ScrollFrame", nil, DuffedUIConfigUI)
-	sf3:SetSize(766, 22)
-	sf3:SetPoint("CENTER", cf3, 0, 0)
-
-	local scroll3 = CreateFrame("Frame", nil, sf3)
-	scroll3:Size(766, 22)
-	scroll3:SetPoint("CENTER", cf3)
-	sf3:SetScrollChild(scroll3)
-
-	local credit3 = "Special thanks to my CoAutors: "
-	for i = 1, #D.CoAutor do
-		if (i ~= 1) then credit3 = credit3 .. ", " .. "|cff1d669d" ..  D.CoAutor[i]  .. "|r" else credit3 = credit3 .. "|cff1d669d" ..  D.CoAutor[i]  .. "|r" end
-	end
-
-	local ct3 = scroll3:CreateFontString(nil, "OVERLAY")
-	ct3:SetFont(C["media"].font, 14)
-	ct3:SetText(credit3)
-	ct3:Point("LEFT", scroll3, "RIGHT", 4, 0)
-	scroll3:SetAnimation("Move", "Horizontal", -1500, 0.5)
-
-	scroll3:AnimOnFinished("Move", function(self)
-		if (not DuffedUIConfigUI:IsVisible()) then return end
-		self:ClearAllPoints()
-		self:SetPoint("CENTER", cf3)
-		self:SetAnimation("Move", "Horizontal", -1500, 0.5)
-	end)
 end
 
 do

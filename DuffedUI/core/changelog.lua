@@ -3,18 +3,12 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame('frame')
 local ChangeLogData = {
 	"Changes:",
-		"• Update for AddOnSkins",
-		"• Changed artifact und xpbar to vertical beside the chatbackgrounds",
-		"• Added options to change size of castbar",
-		"• Bugfixes & Codeoptimization",
+		"• Too many changes for a full listing",
+		"• Compatibility for Battle for Azeroth 8.0",
 		--"• ",
 	" ",
 	"Notes:",
-		"Options for AddOnSkins are again available via the button Enhanced Config.",
-		"Options for additional modules, like elite dragons above target, can changed in Enhanced\nConfig",
-		" ",
-		"Updates to the interface will be rarer in the near future, as I currently can not afford",
-		"the time to provide timely updates.",
+		"Some UI components still have bugs. But over time they are fixed too :)",
 }
 
 local function ModifiedString(string)
