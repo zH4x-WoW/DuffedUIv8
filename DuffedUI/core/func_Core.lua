@@ -199,46 +199,54 @@ end
 
 D['PetBarUpdate'] = function(...)
 	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
-		local buttonName = 'PetActionButton' .. i
-		local petActionButton = _G[buttonName]
-		local petActionIcon = _G[buttonName..'Icon']
-		local petAutoCastableTexture = _G[buttonName..'AutoCastable']
-		local petAutoCastShine = _G[buttonName..'Shine']
-		local name, subtext, texture, isToken, isActive, autoCastAllowed, autoCastEnabled = GetPetActionInfo(i)
+		local ButtonName = "PetActionButton" .. i
+		local PetActionButton = _G[ButtonName]
+		local PetActionIcon = _G[ButtonName.."Icon"]
+		local PetActionBackdrop = PetActionButton.Backdrop
+		local PetAutoCastableTexture = _G[ButtonName.."AutoCastable"]
+		local PetAutoCastShine = _G[ButtonName.."Shine"]
+		local Name, Texture, IsToken, IsActive, AutoCastAllowed, AutoCastEnabled = GetPetActionInfo(i)
 
-		if not isToken then
-			petActionIcon:SetTexture(texture)
-			petActionButton.tooltipName = name
+		if (not IsToken) then
+			PetActionIcon:SetTexture(Texture)
+			PetActionButton.tooltipName = Name
 		else
-			petActionIcon:SetTexture(_G[texture])
-			petActionButton.tooltipName = _G[name]
+			PetActionIcon:SetTexture(_G[Texture])
+			PetActionButton.tooltipName = _G[Name]
 		end
 
-		petActionButton.isToken = isToken
-		petActionButton.tooltipSubtext = subtext
+		PetActionButton.IsToken = IsToken
+		PetActionButton.tooltipSubtext = SubText
 
-		if isActive then
-			petActionButton:GetCheckedTexture():SetColorTexture(0, 1, 0, .3)
-			if IsPetAttackAction(i) then PetActionButton_StartFlash(petActionButton) end
+		if (IsActive) then
+			PetActionButton:SetChecked(1)
+
+			if PetActionBackdrop then PetActionBackdrop:SetBackdropBorderColor(0, 1, 0) end
+
+			if IsPetAttackAction(i) then PetActionButton_StartFlash(PetActionButton) end
 		else
-			petActionButton:SetCheckedTexture(0, 0, 0, 0)
-			if IsPetAttackAction(i) then PetActionButton_StopFlash(petActionButton) end
+			PetActionButton:SetChecked()
+
+			if PetActionBackdrop then PetActionBackdrop:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end
+
+			if IsPetAttackAction(i) then PetActionButton_StopFlash(PetActionButton) end
 		end
 
-		if autoCastAllowed then petAutoCastableTexture:Show() else petAutoCastableTexture:Hide() end
-		if autoCastEnabled then AutoCastShine_AutoCastStart(petAutoCastShine) else AutoCastShine_AutoCastStop(petAutoCastShine) end
+		if AutoCastAllowed then PetAutoCastableTexture:Show() else PetAutoCastableTexture:Hide() end
 
-		if texture then
-			if GetPetActionSlotUsable(i) then SetDesaturation(petActionIcon, nil) else SetDesaturation(petActionIcon, 1) end
-			petActionIcon:Show()
+		if AutoCastEnabled then AutoCastShine_AutoCastStart(PetAutoCastShine) else AutoCastShine_AutoCastStop(PetAutoCastShine) end
+
+		if Texture then
+			if (GetPetActionSlotUsable(i)) then SetDesaturation(PetActionIcon, nil) else SetDesaturation(PetActionIcon, 1) end
+			PetActionIcon:Show()
 		else
-			petActionIcon:Hide()
+			PetActionIcon:Hide()
 		end
 
-		if not PetHasActionBar() and texture and name ~= 'PET_ACTION_FOLLOW' then
-			PetActionButton_StopFlash(petActionButton)
-			SetDesaturation(petActionIcon, 1)
-			petActionButton:SetChecked(0)
+		if (not PetHasActionBar() and Texture and Name ~= "PET_ACTION_FOLLOW") then
+			PetActionButton_StopFlash(PetActionButton)
+			SetDesaturation(PetActionIcon, 1)
+			PetActionButton:SetChecked(0)
 		end
 	end
 end
