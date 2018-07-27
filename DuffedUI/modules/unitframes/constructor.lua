@@ -45,17 +45,15 @@ end
 
 D['SpawnUF'] = function(self)
 	local player = oUF:Spawn('player', 'oUF_Player')
-	player:SetParent(oUF_PetBattleFrameHider)
+	player:SetParent(oUFDuffedUI_PetBattleFrameHider)
 	player:Point('BOTTOM', UIParent, 'BOTTOM', -340, 245)
 	player:Size(218, 44)
-	player:SetScale(frameScale)
 	move:RegisterFrame(player)
 
 	local target = oUF:Spawn('target', 'oUF_Target')
-	target:SetParent(oUF_PetBattleFrameHider)
+	target:SetParent(oUFDuffedUI_PetBattleFrameHider)
 	target:Point('BOTTOM', UIParent, 'BOTTOM', 340, 245)
 	target:Size(218, 44)
-	target:SetScale(frameScale)
 	move:RegisterFrame(target)
 
 	local tot = oUF:Spawn('targettarget', 'oUF_TargetTarget')
@@ -75,7 +73,7 @@ D['SpawnUF'] = function(self)
 	move:RegisterFrame(tot)
 
 	local pet = oUF:Spawn('pet', 'oUF_Pet')
-	pet:SetParent(oUF_PetBattleFrameHider)
+	pet:SetParent(oUFDuffedUI_PetBattleFrameHider)
 	if layout == 1 then
 		if C['raid'].center then pet:Point('TOPLEFT', oUF_Player, 'BOTTOMRIGHT', -129, -2) else pet:Point('TOPLEFT', oUF_Player, 'BOTTOMRIGHT', 0, -2) end
 		pet:Size(129, 23)
@@ -89,21 +87,18 @@ D['SpawnUF'] = function(self)
 		pet:Point('TOPLEFT', oUF_Player, 'BOTTOMLEFT', -2, -5)
 		pet:Size(100, 25)
 	end
-	pet:SetScale(frameScale)
 	move:RegisterFrame(pet)
 
 	local focus = oUF:Spawn('focus', 'oUF_Focus')
-	focus:SetParent(oUF_PetBattleFrameHider)
+	focus:SetParent(oUFDuffedUI_PetBattleFrameHider)
 	focus:Point('BOTTOMLEFT', InvDuffedUIActionBarBackground, 'BOTTOM', 275, 500)
 	focus:Size(200, 30)
-	focus:SetScale(frameScale)
 	move:RegisterFrame(focus)
 
 	local focustarget = oUF:Spawn('focustarget', 'oUF_FocusTarget')
-	focustarget:SetParent(oUF_PetBattleFrameHider)
+	focustarget:SetParent(oUFDuffedUI_PetBattleFrameHider)
 	focustarget:Point('TOPRIGHT', focus, 'BOTTOMLEFT', 0, -2)
 	focustarget:Size(75, 10)
-	focustarget:SetScale(frameScale)
 	move:RegisterFrame(focustarget)
 
 	if C['raid']['showboss'] then
@@ -119,10 +114,9 @@ D['SpawnUF'] = function(self)
 		local boss = {}
 		for i = 1, MAX_BOSS_FRAMES do
 			boss[i] = oUF:Spawn('boss' .. i, 'oUF_Boss' .. i)
-			boss[i]:SetParent(oUF_PetBattleFrameHider)
+			boss[i]:SetParent(oUFDuffedUI_PetBattleFrameHider)
 			if i == 1 then boss[i]:Point('RIGHT', UIParent, 'RIGHT', -163, -250) else boss[i]:Point('BOTTOM', boss[i - 1], 'TOP', 0, 35) end
 			boss[i]:Size(200, 27)
-			boss[i]:SetScale(frameScale)
 			move:RegisterFrame(boss[i])
 		end
 	end
@@ -131,10 +125,9 @@ D['SpawnUF'] = function(self)
 		local arena = {}
 		for i = 1, 5 do
 			arena[i] = oUF:Spawn('arena' .. i, 'oUF_Arena' .. i)
-			arena[i]:SetParent(oUF_PetBattleFrameHider)
+			arena[i]:SetParent(oUFDuffedUI_PetBattleFrameHider)
 			if i == 1 then arena[i]:Point('RIGHT', UIParent, 'RIGHT', -163, -250) else arena[i]:Point('BOTTOM', arena[i - 1], 'TOP', 0, 35) end
 			arena[i]:Size(200, 27)
-			arena[i]:SetScale(frameScale)
 			move:RegisterFrame(arena[i])
 		end
 
@@ -219,13 +212,12 @@ D['SpawnUF'] = function(self)
 			'point' , 'BOTTOM',
 			'template', 'oUF_DuffedUIMtt'
 		)
-		tank:SetParent(oUF_PetBattleFrameHider)
+		tank:SetParent(oUFDuffedUI_PetBattleFrameHider)
 		if C['chat']['rbackground'] then 
 			tank:Point('TOPLEFT', DuffedUIChatBackgroundRight, 'TOPLEFT', 2, 57)
 		else 
 			tank:Point('TOPLEFT', ChatFrame4, 'TOPLEFT', 2, 62)
 		end
-		tank:SetScale(frameScale)
 		move:RegisterFrame(oUF_MainTank)
 	end
 
@@ -241,7 +233,7 @@ D['SpawnUF'] = function(self)
 			'point' , 'BOTTOM',
 			'template', 'oUF_DuffedUIMtt'
 		)
-		assist:SetParent(oUF_PetBattleFrameHider)
+		assist:SetParent(oUFDuffedUI_PetBattleFrameHider)
 		if C['raid']['maintank'] then assist:Point('TOPLEFT', oUF_MainTank, 'BOTTOMLEFT', 2, -50) else assist:Point('CENTER', UIParent, 'CENTER', 0, 0) end
 		move:RegisterFrame(oUF_MainAssist)
 	end
@@ -275,9 +267,8 @@ D['SpawnUF'] = function(self)
 				'point', 'LEFT',
 				'columnAnchorPoint', 'BOTTOM'
 			)
-			raid:SetParent(oUF_PetBattleFrameHider)
+			raid:SetParent(oUFDuffedUI_PetBattleFrameHider)
 			raid:SetPoint('BOTTOMLEFT', ra, 'BOTTOMLEFT', 0, 0)
-			raid:SetScale(frameScale)
 			if DuffedUIChatBackgroundLeft then 
 				ra:Point('BOTTOMLEFT', DuffedUIChatBackgroundLeft, 'TOPLEFT', 2, 8)
 			else
@@ -305,9 +296,8 @@ D['SpawnUF'] = function(self)
 					'point', 'LEFT',
 					'columnAnchorPoint', 'BOTTOM'
 				)
-				rpet:SetParent(oUF_PetBattleFrameHider)
+				rpet:SetParent(oUFDuffedUI_PetBattleFrameHider)
 				rpet:Point('BOTTOM', oUF_Heal, 'TOP', 0, 3)
-				rpet:SetScale(frameScale)
 				move:RegisterFrame(oUF_RaidPet)
 			end
 		else
@@ -330,8 +320,7 @@ D['SpawnUF'] = function(self)
 				'yOffset', D['Scale'](8),
 				'point', 'BOTTOM'
 			)
-			raid:SetParent(oUF_PetBattleFrameHider)
-			raid:SetScale(frameScale)
+			raid:SetParent(oUFDuffedUI_PetBattleFrameHider)
 			if DuffedUIChatBackgroundLeft then 
 				raid:Point('BOTTOMLEFT', DuffedUIChatBackgroundLeft, 'TOPLEFT', 2, 10)
 			else

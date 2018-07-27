@@ -46,7 +46,7 @@ if C['chat'].rbackground then
 else
 	spec:SetPoint('TOPLEFT', DuffedUIMinimap, 'BOTTOMLEFT', 0, -2)
 	spec:Size(DuffedUIMinimap:GetWidth() - 22, 20)
-	spec:SetParent(oUF_PetBattleFrameHider)
+	spec:SetParent(oUFDuffedUI_PetBattleFrameHider)
 end
 spec.t = spec:CreateFontString(spec, 'OVERLAY')
 spec.t:SetPoint('CENTER')

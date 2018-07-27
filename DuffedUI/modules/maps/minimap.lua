@@ -1,12 +1,11 @@
 local D, C, L = unpack(select(2, ...))
 
 local move = D['move']
-local DuffedUIMinimap = CreateFrame('Frame', 'DuffedUIMinimap', oUF_PetBattleFrameHider)
+local DuffedUIMinimap = CreateFrame('Frame', 'DuffedUIMinimap', oUFDuffedUI_PetBattleFrameHider)
 DuffedUIMinimap:SetTemplate()
 DuffedUIMinimap:RegisterEvent('ADDON_LOADED')
 DuffedUIMinimap:Point('TOPRIGHT', UIParent, 'TOPRIGHT', -5, -5)
 DuffedUIMinimap:Size(144)
-DuffedUIMinimap:SetScale(C['general']['uiscale'])
 move:RegisterFrame(DuffedUIMinimap)
 
 MinimapCluster:Kill()

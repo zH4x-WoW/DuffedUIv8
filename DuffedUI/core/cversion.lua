@@ -17,9 +17,6 @@ _G.StaticPopupDialogs['OUTDATED'] = {
 	EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
 }
 
---local C_ChatInfo.RegisterAddonMessagePrefix = C_ChatInfo.RegisterAddonMessagePrefix
---local C_ChatInfo.SendAddonMessage = C_ChatInfo.SendAddonMessage
-
 -- Check outdated UI version
 local check = function(self, event, prefix, message, channel, sender)
 	if event == 'CHAT_MSG_ADDON' then

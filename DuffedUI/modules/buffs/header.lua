@@ -13,7 +13,7 @@ for _, frame in next, {
 	local wrap
 	wrap = C['auras'].wrap
 
-	header = CreateFrame('Frame', frame, oUF_PetBattleFrameHider, 'SecureAuraHeaderTemplate')
+	header = CreateFrame('Frame', frame, oUFDuffedUI_PetBattleFrameHider, 'SecureAuraHeaderTemplate')
 	header:SetClampedToScreen(true)
 	header:SetMovable(true)
 	header:SetAttribute('minHeight', 30)
@@ -43,12 +43,10 @@ local filter = 0
 buffs:SetPoint('TOPRIGHT', Minimap, 'TOPLEFT', -7, 2)
 buffs:SetAttribute('filter', 'HELPFUL')
 buffs:SetAttribute('includeWeapons', 1)
-buffs:SetScale(C['general']['uiscale'])
 buffs:Show()
 move:RegisterFrame(buffs)
 
 debuffs:SetPoint('BOTTOMRIGHT', Minimap, 'BOTTOMLEFT', -7, -2)
 debuffs:SetAttribute('filter', 'HARMFUL')
-debuffs:SetScale(C['general']['uiscale'])
 debuffs:Show()
 move:RegisterFrame(debuffs)
