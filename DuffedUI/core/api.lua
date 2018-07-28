@@ -213,7 +213,7 @@ local function StyleButton(button)
 	if button.SetHighlightTexture and not button.hover then
 		local hover = button:CreateTexture('frame', nil, self)
 		hover:SetColorTexture(1, 1, 1, .3)
-		hover:SetInside()
+		hover:SetInside(button, 1, 1)
 		button.hover = hover
 		button:SetHighlightTexture(hover)
 	end
@@ -221,15 +221,15 @@ local function StyleButton(button)
 	if button.SetPushedTexture and not button.pushed then
 		local pushed = button:CreateTexture('frame', nil, self)
 		pushed:SetColorTexture(.9, .8, .1, .3)
-		pushed:SetInside()
+		pushed:SetInside(button, 1, 1)
 		button.pushed = pushed
 		button:SetPushedTexture(pushed)
 	end
 
 	if button.SetCheckedTexture and not button.checked then
 		local checked = button:CreateTexture('frame', nil, self)
-		checked:SetColorTexture(0, 1, 0, .3)
-		checked:SetInside()
+		checked:SetColorTexture(0, 1, 0, .1)
+		checked:SetInside(button, 1, 1)
 		button.checked = checked
 		button:SetCheckedTexture(checked)
 	end
@@ -237,7 +237,7 @@ local function StyleButton(button)
 	local cooldown = button:GetName() and _G[button:GetName()..'Cooldown']
 	if cooldown then
 		cooldown:ClearAllPoints()
-		cooldown:SetInside()
+		cooldown:SetInside(button, 1, 1)
 	end
 end
 
