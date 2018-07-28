@@ -200,6 +200,11 @@ local function SetupTempChat()
 end
 hooksecurefunc("FCF_OpenTemporaryWindow", SetupTempChat)
 
+local bnet = CreateFrame('Frame', 'DuffedUIBnetMover', UIParent)
+bnet:Size(BNToastFrame:GetWidth(), BNToastFrame:GetHeight())
+bnet:Point('TOPLEFT', UIParent, 'TOPLEFT', 5, -5)
+move:RegisterFrame(bnet)
+
 for i = 1, BNToastFrame:GetNumRegions() do
 	if i ~= 10 then
 		local region = select(i, BNToastFrame:GetRegions())
@@ -211,7 +216,7 @@ BNToastFrame.CloseButton:SkinCloseButton()
 
 BNToastFrame:HookScript("OnShow", function(self)
 	self:ClearAllPoints()
-	self:Point("TOPLEFT", DuffedUIBnetMover, "TOPLEFT", 3, -3)
+	self:Point("TOPLEFT", bnet, "TOPLEFT", 3, -3)
 end)
 
 ChatConfigFrameDefaultButton:Kill()
