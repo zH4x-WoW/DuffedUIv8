@@ -1,12 +1,12 @@
 local D, C, L = unpack(select(2, ...))
-if IsAddOnLoaded("AddOnSkins") then return end
+if IsAddOnLoaded('AddOnSkins') then return end
 
 local function LoadSkin()
 	PVPUIFrame:StripTextures()
 
-	--[[Category Buttons]]--
-	for i = 1, 4 do
-		local button = _G["PVPQueueFrameCategoryButton" .. i]
+	-- Category Buttons
+	for i = 1, 3 do
+		local button = _G['PVPQueueFrameCategoryButton' .. i]
 		button:SetTemplate()
 		button.Background:Kill()
 		button.Ring:Kill()
@@ -19,16 +19,16 @@ local function LoadSkin()
 		button:StyleButton()
 	end
 
-	--[[Honor Frame]]--
+	-- Honor Frame
 	HonorFrameTypeDropDown:SkinDropDownBox()
 	HonorFrameTypeDropDown:ClearAllPoints()
-	HonorFrameTypeDropDown:SetPoint("BOTTOMRIGHT", HonorFrame.BonusFrame.RandomBGButton, "TOPRIGHT", 9, 19)
+	HonorFrameTypeDropDown:SetPoint('BOTTOMRIGHT', HonorFrame.BonusFrame.RandomBGButton, 'TOPRIGHT', 9, 19)
 	HonorFrame.Inset:StripTextures()
 	HonorFrameSpecificFrameScrollBar:SkinScrollBar()
 	HonorFrameQueueButton:SkinButton(true)
 	HonorFrame.BonusFrame:StripTextures()
 	HonorFrame.BonusFrame:SetFrameLevel(5)
-	HonorFrame.BonusFrame:SetFrameStrata("HIGH")
+	HonorFrame.BonusFrame:SetFrameStrata('HIGH')
 	HonorFrame.BonusFrame.ShadowOverlay:StripTextures()
 	HonorFrame.BonusFrame.RandomBGButton:StripTextures()
 	HonorFrame.BonusFrame.RandomBGButton:SkinButton()
@@ -40,35 +40,39 @@ local function LoadSkin()
 	HonorFrame.BonusFrame.Arena1Button.SelectedTexture:ClearAllPoints()
 	HonorFrame.BonusFrame.Arena1Button.SelectedTexture:SetAllPoints()
 	HonorFrame.BonusFrame.Arena1Button.SelectedTexture:SetColorTexture(0, 1, 0, .1)
-	HonorFrame.BonusFrame.AshranButton:StripTextures()
-	HonorFrame.BonusFrame.AshranButton:SkinButton()
-	HonorFrame.BonusFrame.AshranButton.SelectedTexture:ClearAllPoints()
-	HonorFrame.BonusFrame.AshranButton.SelectedTexture:SetAllPoints()
-	HonorFrame.BonusFrame.AshranButton.SelectedTexture:SetColorTexture(0, 1, 0, .1)
-	HonorFrame.BonusFrame.DiceButton:SkinButton()
+	HonorFrame.BonusFrame.RandomEpicBGButton:StripTextures()
+	HonorFrame.BonusFrame.RandomEpicBGButton:SkinButton()
+	HonorFrame.BonusFrame.RandomEpicBGButton.SelectedTexture:ClearAllPoints()
+	HonorFrame.BonusFrame.RandomEpicBGButton.SelectedTexture:SetAllPoints()
+	HonorFrame.BonusFrame.RandomEpicBGButton.SelectedTexture:SetColorTexture(0, 1, 0, .1)
+	HonorFrame.BonusFrame.BrawlButton:StripTextures()
+	HonorFrame.BonusFrame.BrawlButton:SkinButton()
+	HonorFrame.BonusFrame.BrawlButton.SelectedTexture:ClearAllPoints()
+	HonorFrame.BonusFrame.BrawlButton.SelectedTexture:SetAllPoints()
+	HonorFrame.BonusFrame.BrawlButton.SelectedTexture:SetColorTexture(0, 1, 0, .1)
 
-	HonorFrame.RoleInset:StripTextures()
-	HonorFrame.RoleInset.DPSIcon.checkButton:SkinCheckBox()
-	HonorFrame.RoleInset.DPSIcon.checkButton:SetFrameLevel(HonorFrame.RoleInset.DPSIcon:GetFrameLevel() + 2)
-	HonorFrame.RoleInset.TankIcon.checkButton:SkinCheckBox()
-	HonorFrame.RoleInset.TankIcon.checkButton:SetFrameLevel(HonorFrame.RoleInset.TankIcon:GetFrameLevel() + 2)
-	HonorFrame.RoleInset.HealerIcon.checkButton:SkinCheckBox()
-	HonorFrame.RoleInset.HealerIcon.checkButton:SetFrameLevel(HonorFrame.RoleInset.HealerIcon:GetFrameLevel() + 2)
+	HonorFrame.DPSIcon.checkButton:SkinCheckBox()
+	HonorFrame.DPSIcon.checkButton:SetFrameLevel(HonorFrame.DPSIcon:GetFrameLevel() + 2)
+	HonorFrame.TankIcon.checkButton:SkinCheckBox()
+	HonorFrame.TankIcon.checkButton:SetFrameLevel(HonorFrame.TankIcon:GetFrameLevel() + 2)
+	HonorFrame.HealerIcon.checkButton:SkinCheckBox()
+	HonorFrame.HealerIcon.checkButton:SetFrameLevel(HonorFrame.HealerIcon:GetFrameLevel() + 2)
 
-	--[[Conquest Frame]]--
+	PVPQueueFrame.HonorInset:StripTextures()
+
+	-- Conquest Frame
 	ConquestFrame.Inset:StripTextures()
 	ConquestFrame:StripTextures()
 	ConquestFrame:SetFrameLevel(5)
-	ConquestFrame:SetFrameStrata("HIGH")
+	ConquestFrame:SetFrameStrata('HIGH')
 	ConquestFrame.ShadowOverlay:StripTextures()
 
-	ConquestFrame.RoleInset:StripTextures()
-	ConquestFrame.RoleInset.DPSIcon.checkButton:SkinCheckBox()
-	ConquestFrame.RoleInset.DPSIcon.checkButton:SetFrameLevel(ConquestFrame.RoleInset.DPSIcon:GetFrameLevel() + 2)
-	ConquestFrame.RoleInset.TankIcon.checkButton:SkinCheckBox()
-	ConquestFrame.RoleInset.TankIcon.checkButton:SetFrameLevel(ConquestFrame.RoleInset.TankIcon:GetFrameLevel() + 2)
-	ConquestFrame.RoleInset.HealerIcon.checkButton:SkinCheckBox()
-	ConquestFrame.RoleInset.HealerIcon.checkButton:SetFrameLevel(ConquestFrame.RoleInset.HealerIcon:GetFrameLevel() + 2)
+	ConquestFrame.DPSIcon.checkButton:SkinCheckBox()
+	ConquestFrame.DPSIcon.checkButton:SetFrameLevel(ConquestFrame.DPSIcon:GetFrameLevel() + 2)
+	ConquestFrame.TankIcon.checkButton:SkinCheckBox()
+	ConquestFrame.TankIcon.checkButton:SetFrameLevel(ConquestFrame.TankIcon:GetFrameLevel() + 2)
+	ConquestFrame.HealerIcon.checkButton:SkinCheckBox()
+	ConquestFrame.HealerIcon.checkButton:SetFrameLevel(ConquestFrame.HealerIcon:GetFrameLevel() + 2)
 
 	local function SkinRated(button)
 		button:StripTextures()
@@ -82,28 +86,16 @@ local function LoadSkin()
 	SkinRated(ConquestFrame.Arena3v3)
 	ConquestJoinButton:SkinButton(true)
 
-	--[[Wargames Frame]]--
-	WarGamesFrame:StripTextures()
-	WarGamesFrame.RightInset:StripTextures()
-	WarGameStartButton:SkinButton(true)
-	WarGamesFrameScrollFrameScrollBar:SkinScrollBar()
-	WarGamesFrameInfoScrollFrameScrollBar:StripTextures()
-	WarGamesFrameInfoScrollFrameScrollBar:SkinScrollBar()
-	WarGamesFrame.HorizontalBar:StripTextures()
-	WarGameStartButton:StripTextures()
-	WarGameStartButton:SkinButton()
-	WarGameTournamentModeCheckButton:SkinCheckBox()
-
-	--[[PvP Ready Dialog]]--
+	-- PvP Ready Dialog
 	PVPReadyDialog:StripTextures()
-	PVPReadyDialog:SetTemplate("Transparent")
+	PVPReadyDialog:SetTemplate('Transparent')
 	PVPReadyDialog.SetBackdrop = D.Dummy
 	PVPReadyDialog.filigree:SetAlpha(0)
 	PVPReadyDialog.bottomArt:SetAlpha(0)
 	PVPReadyDialogEnterBattleButton:SkinButton()
 	PVPReadyDialogLeaveQueueButton:SkinButton()
 	PVPReadyDialogCloseButton:SkinCloseButton()
-	PVPReadyDialogCloseButton.t:SetText("_")
+	PVPReadyDialogCloseButton.t:SetText('_')
 end
 
-D.SkinFuncs["Blizzard_PVPUI"] = LoadSkin
+D['SkinFuncs']['Blizzard_PVPUI'] = LoadSkin
