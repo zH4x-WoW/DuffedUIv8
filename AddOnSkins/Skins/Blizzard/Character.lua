@@ -1,14 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-local function IsMaxLevel()
-	if UnitLevel('player') == MAX_PLAYER_LEVEL then return true end
-end
-
 function AS:Blizzard_CharacterFrame()
-	if IsMaxLevel then
-		ToggleCharacter('TokenFrame')
-		ToggleCharacter('TokenFrame')
-	end
 	AS:SkinCloseButton(CharacterFrameCloseButton)
 	AS:SkinFrame(CharacterFrame)
 	AS:SkinFrame(CharacterModelFrame)
