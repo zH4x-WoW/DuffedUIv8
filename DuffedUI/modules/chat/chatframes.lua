@@ -213,11 +213,12 @@ for i = 1, BNToastFrame:GetNumRegions() do
 end	
 BNToastFrame:SetTemplate("Transparent")
 BNToastFrame.CloseButton:SkinCloseButton()
+move:RegisterFrame(BNToastFrame)
 
-BNToastFrame:HookScript("OnShow", function(self)
+--[[BNToastFrame:HookScript("OnShow", function(self)
 	self:ClearAllPoints()
 	self:Point("TOPLEFT", bnet, "TOPLEFT", 3, -3)
-end)
+end)]]--
 
 ChatConfigFrameDefaultButton:Kill()
 
