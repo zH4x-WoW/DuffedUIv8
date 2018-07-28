@@ -1,12 +1,12 @@
 local D, C, L = unpack(select(2, ...))
-if C['misc'].sesenable ~= true then return end
+if C['misc']['sesenable'] ~= true then return end
 
 local hoverovercolor = {.4, .4, .4}
 local cp = '|cff319f1b'
 local cm = '|cff9a1212'
 local dr, dg, db = unpack({ .4, .4, .4 })
-local f, fs, ff = C['media'].font, 11, 'THINOUTLINE'
-local Enablegear = C['misc'].sesenablegear
+local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
+local Enablegear = C['misc']['sesenablegear']
 
 local function ActiveTalents()
 	local Tree = GetSpecialization(false, false, GetActiveSpecGroup())
@@ -16,7 +16,7 @@ end
 local LeftClickMenu = { }
 LeftClickMenu[1] = { text = L['dt']['specmenu'], isTitle = true, notCheckable = true}
 
---Setting up the menu for later for each spec regardless of class, thanks to Simca for helping out with the function.
+-- Setting up the menu for later for each spec regardless of class, thanks to Simca for helping out with the function.
 local DuffedUISpecSwap = CreateFrame('Frame', 'DuffedUISpecSwap', UIParent, 'UIDropDownMenuTemplate')
 DuffedUISpecSwap:SetTemplate('Transparent')
 DuffedUISpecSwap:RegisterEvent('PLAYER_LOGIN')
@@ -40,7 +40,7 @@ end)
 
 local spec = CreateFrame('Button', 'DuffedUI_Spechelper', DuffedUIInfoLeft)
 spec:SetTemplate('Default')
-if C['chat'].rbackground then
+if C['chat']['rbackground'] then
 	spec:SetPoint('LEFT', DuffedUITabsRightBackground, 'RIGHT', 2, 0)
 	spec:Size(DuffedUIMinimap:GetWidth() + 3, 20)
 else
@@ -82,20 +82,20 @@ spec:SetScript('OnClick', function(self)
 	if IsModifierKeyDown() then ToggleTalentFrame() else Lib_EasyMenu(LeftClickMenu, DuffedUISpecSwap, 'cursor', 0, 0, 'MENU', 2) end
 end)
 
-D.CreateBtn('MB_reload', DuffedUIMinimap, 19, 19, L['buttons']['ses_reload'], 'R')
+D['CreateBtn']('MB_reload', DuffedUIMinimap, 19, 19, L['buttons']['ses_reload'], 'R')
 MB_reload:Point('TOPLEFT', spec, 'BOTTOMLEFT', 0, -2)
 MB_reload:SetAttribute('macrotext1', '/rl')
 MB_reload:Hide()
 
-D.CreateBtn('MB_mui', MB_reload, 19, 19, L['buttons']['ses_move'], 'M')
+D['CreateBtn']('MB_mui', MB_reload, 19, 19, L['buttons']['ses_move'], 'M')
 MB_mui:Point('LEFT', MB_reload, 'RIGHT', 2, 0)
 MB_mui:SetAttribute('macrotext1', '/moveui')
 
-D.CreateBtn('MB_binds', MB_reload, 19, 19, L['buttons']['ses_kb'], 'K')
+D['CreateBtn']('MB_binds', MB_reload, 19, 19, L['buttons']['ses_kb'], 'K')
 MB_binds:Point('LEFT', MB_mui, 'RIGHT', 2, 0)
 MB_binds:SetAttribute('macrotext1', '/kb')
 
-D.CreateBtn('MB_switch', MB_reload, 19, 19, L['buttons']['ses_switch'], 'S')
+D['CreateBtn']('MB_switch', MB_reload, 19, 19, L['buttons']['ses_switch'], 'S')
 MB_switch:Point('LEFT', MB_binds, 'RIGHT', 2, 0)
 MB_switch:SetAttribute('macrotext1', '/switch')
 
@@ -103,8 +103,7 @@ D['CreateBtn']('bReport2', MB_reload, 63, 19, 'Bugreport', 'Bugreport')
 bReport2:SetPoint('LEFT', MB_switch, 'RIGHT', 2, 0)
 bReport2:SetScript('OnClick', function(self) StaticPopup_Show('BUGREPORT') end)
 
---[[broken]]--
---[[if Enablegear then
+if Enablegear then
 	local gearSets = CreateFrame('Frame', nil, MB_reload)
 	for i = 1, 10 do
 		gearSets[i] = CreateFrame('Button', nil, MB_reload)
@@ -124,7 +123,7 @@ bReport2:SetScript('OnClick', function(self) StaticPopup_Show('BUGREPORT') end)
 		gearSets[i]:RegisterEvent('PLAYER_ENTERING_WORLD')
 		gearSets[i]:RegisterEvent('EQUIPMENT_SETS_CHANGED')
 		gearSets[i]:SetScript('OnEvent', function(self, event)
-			local points, pt = 0, GetNumEquipmentSets()
+			local points, pt = 0, C_EquipmentSet.GetNumEquipmentSets()
 			local frames = {gearSets[1]:IsShown(), gearSets[2]:IsShown(), gearSets[3]:IsShown(), gearSets[4]:IsShown(), 
 							gearSets[5]:IsShown(), gearSets[6]:IsShown(), gearSets[7]:IsShown(), gearSets[8]:IsShown(),
 							gearSets[9]:IsShown(), gearSets[10]:IsShown()}
@@ -142,10 +141,10 @@ bReport2:SetScript('OnClick', function(self) StaticPopup_Show('BUGREPORT') end)
 
 			gearSets[i]:SetScript('OnClick', function(self) UseEquipmentSet(GetEquipmentSetInfo(i)) end)
 			gearSets[i]:SetScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(hoverovercolor)) end)
-			gearSets[i]:SetScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(C['media'].bordercolor)) end)
+			gearSets[i]:SetScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(C['media']['bordercolor'])) end)
 		end)
 	end
-end]]--
+end
 
 -- toggle button
 local toggle = CreateFrame('Button', nil, spec)
@@ -159,7 +158,7 @@ toggle.t:SetPoint('CENTER', 0, 0)
 toggle.t:SetFont(f, fs, ff)
 toggle.t:SetText(cp .. '+|r')
 toggle:SetScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(hoverovercolor)) end)
-toggle:SetScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(C['media'].bordercolor)) end)
+toggle:SetScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(C['media']['bordercolor'])) end)
 
 toggle:SetScript('OnMouseDown', function(self)
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
