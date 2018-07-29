@@ -64,7 +64,7 @@ PA.SLE = PA:IsAddOnEnabled('ElvUI_SLE', PA.MyName)
 PA.CUI = PA:IsAddOnEnabled('ElvUI_ChaoticUI', PA.MyName)
 PA.Tukui = PA:IsAddOnEnabled('Tukui', PA.MyName)
 PA.AzilUI = PA:IsAddOnEnabled('AzilUI', PA.MyName)
-PA.DuffedUI = PA:IsAddOnEnabled('DuffedUI')
+PA.DuffedUI = PA:IsAddOnEnabled('DuffedUI', PA.MyName)
 
 PA.Classes = {}
 
@@ -233,39 +233,46 @@ end
 function PA:PLAYER_LOGIN()
 	PA.Multiple = 768 / PA.ScreenHeight / UIParent:GetScale()
 
+	local InitializeModules = {}
+
 	if PA.EP then
 		PA.EP:RegisterPlugin('ProjectAzilroka', PA.GetOptions)
 	end
 	if not (PA.SLE or PA.CUI) and PA.db['ES'] then
-		pcall(PA.ES.Initialize)
+		tinsert(InitializeModules, 'ES')
 	end
 	if PA.db['BB'] then
-		pcall(PA.BB.Initialize)
+		tinsert(InitializeModules, 'BB')
 	end
 	if PA.db['BrokerLDB'] then
-		pcall(PA.BrokerLDB.Initialize)
+		tinsert(InitializeModules, 'BrokerLDB')
 	end
 	if PA.db['DO'] then
-		pcall(PA.DO.Initialize)
+		tinsert(InitializeModules, 'DO')
 	end
 	if PA.db['FG'] then -- Has to be before EFL
-		pcall(PA.FG.Initialize)
+		tinsert(InitializeModules, 'FG')
 	end
 	if PA.db['EFL'] then
-		pcall(PA.EFL.Initialize)
+		tinsert(InitializeModules, 'EFL')
 	end
 	if PA.db['LC'] then
-		pcall(PA.LC.Initialize)
+		tinsert(InitializeModules, 'LC')
 	end
 	if PA.db['MF'] then
-		pcall(PA.MF.Initialize)
+		tinsert(InitializeModules, 'MF')
 	end
 	if PA.db['SMB'] and not PA.SLE then
-		pcall(PA.SMB.Initialize)
+		tinsert(InitializeModules, 'SMB')
 	end
 	if PA.db['stAM'] then
-		pcall(PA.stAM.Initialize)
+		tinsert(InitializeModules, 'stAM')
 	end
+
+	for _, Module in pairs(InitializeModules) do
+		pcall(PA[Module].Initialize)
+	end
+
 	if PA.Tukui and GetAddOnEnableState(PA.MyName, 'Tukui_Config') > 0 then
 		PA:TukuiOptions()
 	end

@@ -14,9 +14,8 @@ local CreateFrame = CreateFrame
 local IsInGroup, IsInRaid = IsInGroup, IsInRaid
 local GetAddOnMetadata = GetAddOnMetadata
 local C_Timer = C_Timer
-local IsAddOnLoaded = IsAddOnLoaded
-local C_ChatInfo_RegisterAddonMessagePrefix = C_ChatInfo.RegisterAddonMessagePrefix
-local C_ChatInfo_SendAddonMessage = C_ChatInfo.SendAddonMessage
+local RegisterAddonMessagePrefix = C_ChatInfo.RegisterAddonMessagePrefix
+local SendAddonMessage = C_ChatInfo.SendAddonMessage
 local GetNumGroupMembers = GetNumGroupMembers
 local LE_PARTY_CATEGORY_HOME = LE_PARTY_CATEGORY_HOME
 local LE_PARTY_CATEGORY_INSTANCE = LE_PARTY_CATEGORY_INSTANCE
@@ -88,7 +87,7 @@ function lib:RegisterPlugin(name, callback)
 	plugin.callback = callback
 	lib.plugins[name] = plugin
 	if not lib.vcframe then
-		C_ChatInfo_RegisterAddonMessagePrefix(lib.prefix)
+		RegisterAddonMessagePrefix(lib.prefix)
 		local f = CreateFrame('Frame')
 		f:RegisterEvent("GROUP_ROSTER_UPDATE")
 		f:RegisterEvent("CHAT_MSG_ADDON")
@@ -189,12 +188,12 @@ function lib:SendPluginVersionCheck(message)
 			splitMessage = strmatch(strsub(message, 1, maxChar), '.+;')
 			if splitMessage then -- incase the string is over 250 but doesnt contain `;`
 				message = gsub(message, "^"..gsub(splitMessage, '([%(%)%.%%%+%-%*%?%[%^%$])','%%%1'), "")
-				C_Timer.After(delay, function() C_ChatInfo_SendAddonMessage(lib.prefix, splitMessage, ChatType) end)
+				C_Timer.After(delay, function() SendAddonMessage(lib.prefix, splitMessage, ChatType) end)
 				delay = delay + 1
 			end
 		end
 	else
-		C_ChatInfo_SendAddonMessage(lib.prefix, message, ChatType)
+		SendAddonMessage(lib.prefix, message, ChatType)
 	end
 end
 
