@@ -30,33 +30,38 @@ local function LoadSkin()
 	HonorFrame.BonusFrame:SetFrameLevel(5)
 	HonorFrame.BonusFrame:SetFrameStrata('HIGH')
 	HonorFrame.BonusFrame.ShadowOverlay:StripTextures()
-	HonorFrame.BonusFrame.RandomBGButton:StripTextures()
-	HonorFrame.BonusFrame.RandomBGButton:SkinButton()
-	HonorFrame.BonusFrame.RandomBGButton.SelectedTexture:ClearAllPoints()
-	HonorFrame.BonusFrame.RandomBGButton.SelectedTexture:SetAllPoints()
-	HonorFrame.BonusFrame.RandomBGButton.SelectedTexture:SetColorTexture(0, 1, 0, .1)
-	HonorFrame.BonusFrame.Arena1Button:StripTextures()
-	HonorFrame.BonusFrame.Arena1Button:SkinButton()
-	HonorFrame.BonusFrame.Arena1Button.SelectedTexture:ClearAllPoints()
-	HonorFrame.BonusFrame.Arena1Button.SelectedTexture:SetAllPoints()
-	HonorFrame.BonusFrame.Arena1Button.SelectedTexture:SetColorTexture(0, 1, 0, .1)
-	HonorFrame.BonusFrame.RandomEpicBGButton:StripTextures()
-	HonorFrame.BonusFrame.RandomEpicBGButton:SkinButton()
-	HonorFrame.BonusFrame.RandomEpicBGButton.SelectedTexture:ClearAllPoints()
-	HonorFrame.BonusFrame.RandomEpicBGButton.SelectedTexture:SetAllPoints()
-	HonorFrame.BonusFrame.RandomEpicBGButton.SelectedTexture:SetColorTexture(0, 1, 0, .1)
-	HonorFrame.BonusFrame.BrawlButton:StripTextures()
-	HonorFrame.BonusFrame.BrawlButton:SkinButton()
-	HonorFrame.BonusFrame.BrawlButton.SelectedTexture:ClearAllPoints()
-	HonorFrame.BonusFrame.BrawlButton.SelectedTexture:SetAllPoints()
-	HonorFrame.BonusFrame.BrawlButton.SelectedTexture:SetColorTexture(0, 1, 0, .1)
+
+	for _, Section in pairs({ 'RandomBGButton', 'RandomEpicBGButton', 'Arena1Button', 'BrawlButton' }) do
+		local Button = HonorFrame.BonusFrame[Section]
+		Button:StripTextures()
+		Button:SkinButton()
+		Button:HookScript('OnEnter', function(self)
+			self:SetBackdropBorderColor(1, .82, 0)
+		end)
+		Button:HookScript('OnLeave', function(self)
+			if self.SelectedTexture:IsShown() then
+				self:SetBackdropBorderColor(0, 0.44, .87, 1)
+			else
+				self:SetBackdropBorderColor(C['general']['bordercolor'])
+			end
+		end)
+		Button.SelectedTexture:SetTexture('')
+	end
+
+	hooksecurefunc('HonorFrame_UpdateQueueButtons', function()
+		for _, Section in pairs({ 'RandomBGButton', 'RandomEpicBGButton', 'Arena1Button', 'BrawlButton' }) do
+			local Button = HonorFrame.BonusFrame[Section]
+			if Button.SelectedTexture:IsShown() then
+				Button:SetBackdropBorderColor(0, 0.44, .87, 1)
+			else
+				Button:SetBackdropBorderColor(C['general']['bordercolor'])
+			end
+		end
+	end)
 
 	HonorFrame.DPSIcon.checkButton:SkinCheckBox()
-	HonorFrame.DPSIcon.checkButton:SetFrameLevel(HonorFrame.DPSIcon:GetFrameLevel() + 2)
 	HonorFrame.TankIcon.checkButton:SkinCheckBox()
-	HonorFrame.TankIcon.checkButton:SetFrameLevel(HonorFrame.TankIcon:GetFrameLevel() + 2)
 	HonorFrame.HealerIcon.checkButton:SkinCheckBox()
-	HonorFrame.HealerIcon.checkButton:SetFrameLevel(HonorFrame.HealerIcon:GetFrameLevel() + 2)
 
 	PVPQueueFrame.HonorInset:StripTextures()
 
@@ -68,11 +73,8 @@ local function LoadSkin()
 	ConquestFrame.ShadowOverlay:StripTextures()
 
 	ConquestFrame.DPSIcon.checkButton:SkinCheckBox()
-	ConquestFrame.DPSIcon.checkButton:SetFrameLevel(ConquestFrame.DPSIcon:GetFrameLevel() + 2)
 	ConquestFrame.TankIcon.checkButton:SkinCheckBox()
-	ConquestFrame.TankIcon.checkButton:SetFrameLevel(ConquestFrame.TankIcon:GetFrameLevel() + 2)
 	ConquestFrame.HealerIcon.checkButton:SkinCheckBox()
-	ConquestFrame.HealerIcon.checkButton:SetFrameLevel(ConquestFrame.HealerIcon:GetFrameLevel() + 2)
 
 	local function SkinRated(button)
 		button:StripTextures()
