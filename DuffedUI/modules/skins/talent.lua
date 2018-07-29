@@ -141,8 +141,9 @@ local function LoadSkin()
 		local bonuses
 		
 		if self.isPet then bonuses = {GetSpecializationSpells(shownSpec, nil, self.isPet)} else bonuses = C_SpecializationInfo.GetSpellsDisplay(id) end
+		local bonusesIncrement = self.isPet and 2 or 1
 		if bonuses then
-			for i = 1, #bonuses, 2 do
+			for i = 1, #bonuses, bonusesIncrement do
 				local frame = scrollChild['abilityButton'..index]
 				local _, icon = GetSpellTexture(bonuses[i])
 				if frame then
