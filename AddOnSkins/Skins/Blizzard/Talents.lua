@@ -256,6 +256,9 @@ function AS:Blizzard_Talent(event, addon)
 		TalentMicroButtonAlert.Text:SetTextColor(1, 1, 0)
 		TalentMicroButtonAlert:ClearAllPoints()
 		TalentMicroButtonAlert:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -6)
+
+		AS:StripTextures(PlayerTalentFrameTalentsPvpTalentFrame)
+		AS:SkinNextPrevButton(PlayerTalentFrameTalentsPvpTalentButton)
 	end
 end
 
