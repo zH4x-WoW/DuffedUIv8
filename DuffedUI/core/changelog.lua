@@ -3,12 +3,13 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame('frame')
 local ChangeLogData = {
 	"Changes:",
-		"• Too many changes for a full listing",
-		"• Compatibility for Battle for Azeroth 8.0",
+		"• Fix the last known errors",
+		"• Update for AddOnSkins & ProjektAzilroka",
+		"• Several adjustments to the UI-Code",
 		--"• ",
 	" ",
 	"Notes:",
-		"Some UI components still have bugs. But over time they are fixed too :)",
+		"In this version all bugs should be fixed. Currently the azerit feature is missing which\nwill be available in the near future.",
 }
 
 local function ModifiedString(string)
@@ -94,6 +95,7 @@ function ChangeLog:CreateChangelog()
 			button.Text:SetFont(C['media']['font'], 11)
 			button.Text:SetText(string)
 			button.Text:SetPoint('LEFT', 0, 0)
+			button.Text:SetJustifyH('LEFT')
 		end
 		offset = offset + 16
 	end
