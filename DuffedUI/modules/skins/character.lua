@@ -311,10 +311,10 @@ local function LoadSkin()
 					end
 					if button.isHeader then
 						if button.isExpanded then
-							button.expandIcon:SetTexture('Interface\\AddOns\\DuffedUI\\medias\\textures\\MinusButton');
+							button.expandIcon:SetTexture('Interface\\AddOns\\DuffedUI\\media\\textures\\MinusButton');
 							button.expandIcon:SetTexCoord(0,1,0,1);
 						else
-							button.expandIcon:SetTexture('Interface\\AddOns\\DuffedUI\\medias\\textures\\PlusButton');
+							button.expandIcon:SetTexture('Interface\\AddOns\\DuffedUI\\media\\textures\\PlusButton');
 							button.expandIcon:SetTexCoord(0,1,0,1);
 						end
 						button.highlightTexture:Show()

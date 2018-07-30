@@ -138,7 +138,7 @@ D['ConstructUFRaid'] = function(self)
 		RaidIcon:Height(18)
 		RaidIcon:Width(18)
 		RaidIcon:SetPoint('CENTER', self, 'TOP')
-		RaidIcon:SetTexture('Interface\\AddOns\\DuffedUI\\medias\\textures\\raidicons.blp') -- thx hankthetank for texture
+		RaidIcon:SetTexture('Interface\\AddOns\\DuffedUI\\media\\textures\\raidicons.blp') -- thx hankthetank for texture
 		self.RaidTargetIndicator = RaidIcon
 	end
 
@@ -146,7 +146,7 @@ D['ConstructUFRaid'] = function(self)
 	LFDRole:Height(12)
 	LFDRole:Width(12)
 	LFDRole:Point('TOPRIGHT', -1, -1)
-	LFDRole:SetTexture('Interface\\AddOns\\DuffedUI\\medias\\textures\\lfdicons2.blp')
+	LFDRole:SetTexture('Interface\\AddOns\\DuffedUI\\media\\textures\\lfdicons2.blp')
 	self.GroupRoleIndicator = LFDRole
 
 	local Resurrect = CreateFrame('Frame', nil, self)
