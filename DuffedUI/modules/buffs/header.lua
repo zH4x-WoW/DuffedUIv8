@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if not C['auras'].player then return end
+if not C['auras']['player'] then return end
 
 local frame = DuffedUIAuras
 local content = DuffedUIAuras.content
@@ -11,7 +11,7 @@ for _, frame in next, {
 } do
 	local header
 	local wrap
-	wrap = C['auras'].wrap
+	wrap = C['auras']['wrap']
 
 	header = CreateFrame('Frame', frame, oUFDuffedUI_PetBattleFrameHider, 'SecureAuraHeaderTemplate')
 	header:SetClampedToScreen(true)
@@ -22,7 +22,7 @@ for _, frame in next, {
 	header:SetAttribute('xOffset', -35)
 	header:CreateBackdrop()
 	header.backdrop:SetBackdropBorderColor(1, 0, 0)
-	header.backdrop:FontString('text', C['media'].font, 11)
+	header.backdrop:FontString('text', C['media']['font'], 11)
 	header.backdrop.text:SetPoint('CENTER')
 	header.backdrop.text:SetText(L['move']['buffs'])
 	header.backdrop:SetAlpha(0)

@@ -1,9 +1,9 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Button name="DuffedUIAurasAuraTemplate" inherits="SecureActionButtonTemplate" virtual="true">
-		<Size x="30" y="30"/>
+<Ui xmlns='http://www.blizzard.com/wow/ui/'>
+	<Button name='DuffedUIAurasAuraTemplate' inherits='SecureActionButtonTemplate' virtual='true'>
+		<Size x='30' y='30'/>
 
 		<Attributes>
-			<Attribute name="type" value="cancelaura"/>
+			<Attribute name='type' value='cancelaura'/>
 		</Attributes>
 
 		<Scripts>
@@ -23,12 +23,12 @@
 				end
 			</OnEnter>
 
-			<OnLeave function="GameTooltip_Hide" />
+			<OnLeave function='GameTooltip_Hide' />
 		</Scripts>
 	</Button>
 
-	<Frame name="DuffedUIAurasProxyTemplate" inherits="SecureUnitButtonTemplate, SecureHandlerEnterLeaveTemplate" virtual="true">
-		<Size x="30" y="30"/>
+	<Frame name='DuffedUIAurasProxyTemplate' inherits='SecureUnitButtonTemplate, SecureHandlerEnterLeaveTemplate' virtual='true'>
+		<Size x='30' y='30'/>
 		<Scripts>
 			<OnLoad>
 				-- Avoiding XML 101:

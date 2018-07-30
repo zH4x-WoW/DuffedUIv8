@@ -1,16 +1,16 @@
 local D, C, L = unpack(select(2, ...))
 
---[[ This is a forked file by Haste ]]--
+-- This is a forked file by Haste
 local frame = CreateFrame('Frame', 'DuffedUIAuras')
 frame.content = {}
 
 local icon
 local faction = UnitFactionGroup('player')
-local flash = C['auras'].flash
+local flash = C['auras']['flash']
 local sexID = UnitSex('player')
 local sex = 'male'
-local race = D.MyRace
-local f, fs, ff = C['media'].font, 11, 'THINOUTLINE'
+local race = D['MyRace']
+local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 
 if sexID == 3 or race == 'Pandaren' then sex = 'female' end
 if race == 'Scourge' then race = 'Undead' end
@@ -87,7 +87,7 @@ local UpdateAura = function(self, index)
 			if flash then StartStopFlash(self.Animation, timeLeft) end
 
 			self.Bar:SetMinMaxValues(0, duration)
-			if not C['auras'].classictimer then self.Holder:Show() end
+			if not C['auras']['classictimer'] then self.Holder:Show() end
 		else
 			if flash then self.Animation:Stop() end
 			self.timeLeft = nil
@@ -97,7 +97,7 @@ local UpdateAura = function(self, index)
 			local min, max  = self.Bar:GetMinMaxValues()
 			self.Bar:SetValue(max)
 			self.Bar:SetStatusBarColor(0, .8, 0)
-			if not C['auras'].classictimer then self.Holder:Hide() end
+			if not C['auras']['classictimer'] then self.Holder:Hide() end
 		end
 
 		if count > 1 then self.Count:SetText(count) else self.Count:SetText('') end
@@ -134,7 +134,7 @@ local UpdateTempEnchant = function(self, slot)
 end
 
 local OnAttributeChanged = function(self, attribute, value)
-	if C['auras'].classictimer then self.Holder:Hide() else self.Duration:Hide() end
+	if C['auras']['classictimer'] then self.Holder:Hide() else self.Duration:Hide() end
 
 	if attribute == 'index' then
 		return UpdateAura(self, value)
