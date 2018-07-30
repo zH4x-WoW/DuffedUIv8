@@ -1,9 +1,9 @@
 local D, C, L = unpack(select(2, ...)) 
-if not C["actionbar"].enable == true then return end
+if not C['actionbar']['enable'] then return end
 
 local _G = _G
 local unpack = unpack
-local DuffedUIRange = CreateFrame("Frame")
+local DuffedUIRange = CreateFrame('Frame')
 local IsUsableAction = IsUsableAction
 local IsActionInRange = IsActionInRange
 local ActionHasRange = ActionHasRange
@@ -16,8 +16,8 @@ end
 
 function DuffedUIRange:RangeUpdate()
 	local Name = self:GetName()
-	local Icon = _G[Name.."Icon"]
-	local NormalTexture = _G[Name.."NormalTexture"]
+	local Icon = _G[Name..'Icon']
+	local NormalTexture = _G[Name..'NormalTexture']
 	local ID = self.action
 	local IsUsable, NotEnoughMana = IsUsableAction(ID)
 	local HasRange = ActionHasRange(ID)
@@ -40,6 +40,6 @@ function DuffedUIRange:RangeUpdate()
     end
 end
 
-hooksecurefunc("ActionButton_OnUpdate", DuffedUIRange.RangeOnUpdate)
-hooksecurefunc("ActionButton_Update", DuffedUIRange.RangeUpdate)
-hooksecurefunc("ActionButton_UpdateUsable", DuffedUIRange.RangeUpdate)
+hooksecurefunc('ActionButton_OnUpdate', DuffedUIRange.RangeOnUpdate)
+hooksecurefunc('ActionButton_Update', DuffedUIRange.RangeUpdate)
+hooksecurefunc('ActionButton_UpdateUsable', DuffedUIRange.RangeUpdate)

@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...)) 
-if not C['actionbar']['enable'] == true then return end
+if not C['actionbar']['enable'] then return end
 
 local bar = DuffedUIBar1
 
@@ -46,7 +46,7 @@ bar:SetScript('OnEvent', function(self, event, unit, ...)
 		]])
 
 		RegisterStateDriver(self, 'page', GetBar())
-		RegisterStateDriver(bar, "visibility", "[petbattle] hide; show")
+		RegisterStateDriver(bar, 'visibility', '[petbattle] hide; show')
 	elseif event == 'PLAYER_ENTERING_WORLD' then
 		local button
 		for i = 1, 12 do
@@ -69,7 +69,5 @@ bar:SetScript('OnEvent', function(self, event, unit, ...)
 		else
 			if self.inVehicle then self.inVehicle = false end
 		end
-	--else
-		--MainMenuBar_OnEvent(self, event, ...)
 	end
 end)

@@ -7,7 +7,7 @@
 	<!-- core -->
 	<Include file='locales\load_locales.xml' />
 	<Script file='config\config.lua' />
-	<Script file='medias\medias.lua' />
+	<Script file='media\medias.lua' />
 	<Script file='core\api.lua' />
 	<Script file='core\customconfig.lua' />
 	<Script file='core\config.lua' />

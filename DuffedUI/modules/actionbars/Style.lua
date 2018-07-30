@@ -1,11 +1,11 @@
 local D, C, L = unpack(select(2, ...))
-if not C['actionbar'].enable == true then return end
+if not C['actionbar']['enable'] then return end
 
 local _G = _G
 local sub, replace = string.sub, string.gsub
-local f, fs, ff = C['media'].font, 11, 'THINOUTLINE'
+local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 
-function D.StyleActionBarButton(self)
+function D['StyleActionBarButton'](self)
 	local name = self:GetName()
 	local action = self.action
 	local Button = self
@@ -29,10 +29,10 @@ function D.StyleActionBarButton(self)
 
 	if Border and Border:IsShown() then
 		Border:Hide()
-		Border = D.Dummy
+		Border = D['Dummy']
 	end
 
-	if Btname and normal and C['actionbar'].macro then
+	if Btname and normal and C['actionbar']['macro'] then
 		local query = GetActionText(action)
 		if query then
 			local text = string.sub(query, 1, 5)
@@ -45,7 +45,7 @@ function D.StyleActionBarButton(self)
 	Count:SetFont(f, fs, ff)
 
 	if Btname then
-		if C['actionbar'].macro then
+		if C['actionbar']['macro'] then
 			Btname:SetFont(f, fs, ff)
 			Btname:ClearAllPoints()
 			Btname:SetPoint('BOTTOM', 1, 1)
@@ -57,11 +57,11 @@ function D.StyleActionBarButton(self)
 
 	if BtnBG then BtnBG:Kill() end
  
-	if C['actionbar'].hotkey then
+	if C['actionbar']['hotkey'] then
 		HotKey:SetFont(f, fs, ff)
 		HotKey:SetShadowOffset(0, 0)
-		HotKey.ClearAllPoints = D.Dummy
-		HotKey.SetPoint = D.Dummy
+		HotKey.ClearAllPoints = D['Dummy']
+		HotKey.SetPoint = D['Dummy']
 	else
 		HotKey:SetText('')
 		HotKey:Kill()
@@ -102,7 +102,7 @@ D['StyleActionBarPetAndShiftButton'] = function(normal, button, icon, name, pet)
 	button:CreateBackdrop()
 	button.backdrop:SetInside(button, 0, 0)
 	
-	if C['actionbar'].hotkey then
+	if C['actionbar']['hotkey'] then
 		HotKey:SetFont(f, fs, ff)
 		HotKey:SetShadowOffset(0, 0)
 		HotKey:ClearAllPoints()
@@ -199,15 +199,15 @@ local buttons = 0
 local function SetupFlyoutButton()
 	for i = 1, buttons do
 		if _G['SpellFlyoutButton'..i] then
-			D.StyleActionBarButton(_G['SpellFlyoutButton'..i])
+			D['StyleActionBarButton'](_G['SpellFlyoutButton'..i])
 			if _G['SpellFlyoutButton'..i]:GetChecked() then _G['SpellFlyoutButton'..i]:SetChecked(nil) end
 		end
 	end
 end
 SpellFlyout:HookScript('OnShow', SetupFlyoutButton)
  
---written by Elv
-function D.StyleActionBarFlyout(button)
+-- written by Elv
+D['StyleActionBarFlyout'] = function(button)
 	if(not button.FlyoutArrow or not button.FlyoutArrow:IsShown()) then return end
 
 	if not button.FlyoutBorder then return end
@@ -227,7 +227,7 @@ function D.StyleActionBarFlyout(button)
 		end
 	end
 
-	--Change arrow direction depending on what bar the button is on
+	-- Change arrow direction depending on what bar the button is on
 	local arrowDistance
 	if ((SpellFlyout:IsShown() and SpellFlyout:GetParent() == button) or GetMouseFocus() == button) then arrowDistance = 5 else arrowDistance = 2 end
 	if button:GetParent() and button:GetParent():GetParent() and button:GetParent():GetParent():GetName() and button:GetParent():GetParent():GetName() == 'SpellBookSpellIconsFrame' then return end
@@ -278,7 +278,7 @@ local HideOverlayGlow = function(self)
 end
 
 D.ShowHighlightActionButton = function(self)
-	if C['actionbar'].borderhighlight then
+	if C['actionbar']['borderhighlight'] then
 		if self.overlay then
 			self.overlay:Hide()
 			ActionButton_HideOverlayGlow(self)
@@ -314,8 +314,8 @@ D.ShowHighlightActionButton = function(self)
 	end
 end
 
-D.HideHighlightActionButton = function(self)
-	if C['actionbar'].borderhighlight then
+D['HideHighlightActionButton'] = function(self)
+	if C['actionbar']['borderhighlight'] then
 		if self.Animation and self.Animation:IsPlaying() then self.Animation:Stop() self.NewProc:Hide() end
 	else
 		if self.Animation and self.Animation:IsPlaying() then
@@ -325,9 +325,9 @@ D.HideHighlightActionButton = function(self)
 	end
 end
 
-hooksecurefunc('ActionButton_ShowOverlayGlow', D.ShowHighlightActionButton)
-hooksecurefunc('ActionButton_HideOverlayGlow', D.HideHighlightActionButton)
-hooksecurefunc('ActionButton_Update', D.StyleActionBarButton)
-hooksecurefunc('ActionButton_UpdateHotkeys', D.UpdateKeybind)
-hooksecurefunc('PetActionButton_SetHotkeys', D.UpdateKeybind)
-hooksecurefunc('ActionButton_UpdateFlyout', D.StyleActionBarFlyout)
+hooksecurefunc('ActionButton_ShowOverlayGlow', D['ShowHighlightActionButton'])
+hooksecurefunc('ActionButton_HideOverlayGlow', D['HideHighlightActionButton'])
+hooksecurefunc('ActionButton_Update', D['StyleActionBarButton'])
+hooksecurefunc('ActionButton_UpdateHotkeys', D['UpdateKeybind'])
+hooksecurefunc('PetActionButton_SetHotkeys', D['UpdateKeybind'])
+hooksecurefunc('ActionButton_UpdateFlyout', D['StyleActionBarFlyout'])

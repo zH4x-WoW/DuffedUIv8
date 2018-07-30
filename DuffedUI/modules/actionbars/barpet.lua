@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...)) 
-if not C['actionbar']['enable'] == true then return end
+if not C['actionbar']['enable'] then return end
 
 local bar = DuffedUIPetBar
 bar:RegisterEvent('PLAYER_LOGIN')
@@ -26,7 +26,7 @@ bar:SetScript('OnEvent', function(self, event, arg1)
 			button:SetParent(DuffedUIPetBar)
 
 			button:Size(D['petbuttonsize'])
-			if C['actionbar']['petbarhorizontal'] == true then
+			if C['actionbar']['petbarhorizontal'] then
 				if i == 1 then 
 					button:SetPoint('TOPLEFT', D['buttonspacing'], -D['buttonspacing']) 
 				else 

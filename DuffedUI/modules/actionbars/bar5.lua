@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if C['actionbar']['enable'] ~= true then return end
+if not C['actionbar']['enable'] then return end
 
 if (not C['actionbar']['RightSideBarDisable']) then
 	local bar = DuffedUIBar5
@@ -13,7 +13,7 @@ if (not C['actionbar']['RightSideBarDisable']) then
 		b:SetFrameStrata('BACKGROUND')
 		b:SetFrameLevel(15)
 
-		if C['actionbar'].rightbarvertical then
+		if C['actionbar']['rightbarvertical'] then
 			if i == 1 then b:SetPoint('BOTTOMLEFT', bar, D['buttonspacing'], D['buttonspacing']) else b:SetPoint('LEFT', b2, 'RIGHT', D['buttonspacing'], 0) end
 		else
 			if i == 1 then b:SetPoint('TOPRIGHT', bar, -D['buttonspacing'], -D['buttonspacing']) else b:SetPoint('TOP', b2, 'BOTTOM', 0, -D['buttonspacing']) end
@@ -22,7 +22,7 @@ if (not C['actionbar']['RightSideBarDisable']) then
 	RegisterStateDriver(bar, 'visibility', '[vehicleui][petbattle][overridebar] hide; show')
 
 	-- Mouseover
-	if C['actionbar'].rightbarsmouseover then
+	if C['actionbar']['rightbarsmouseover'] then
 		local rbmoh = CreateFrame('Frame', nil, DuffedUIBar3)
 		rbmoh:Point('RIGHT', UIParent, 'RIGHT', 0, -14)
 		rbmoh:SetSize(24, (D['buttonsize'] * 12) + (D['buttonspacing'] * 13))
@@ -31,9 +31,9 @@ if (not C['actionbar']['RightSideBarDisable']) then
 			DuffedUIBar5:SetAlpha(alpha)
 			DuffedUIBar5Button:SetAlpha(alpha)
 			MultiBarRight:SetAlpha(alpha)
-			if C['actionbar'].petbaralwaysvisible ~= true then
+			if C['actionbar']['petbaralwaysvisible'] ~= true then
 				DuffedUIPetBar:SetAlpha(alpha)
-				for i=1, NUM_PET_ACTION_SLOTS do _G['PetActionButton' .. i]:SetAlpha(alpha) end
+				for i = 1, NUM_PET_ACTION_SLOTS do _G['PetActionButton' .. i]:SetAlpha(alpha) end
 			end
 		end
 
@@ -54,7 +54,7 @@ if (not C['actionbar']['RightSideBarDisable']) then
 			_G['MultiBarRightButton' .. i]:HookScript('OnLeave', function() DuffedUIRightBarsMouseover(0) end)
 		end
 
-		if C['actionbar'].petbaralwaysvisible ~= true then
+		if C['actionbar']['petbaralwaysvisible'] ~= true then
 			for i = 1, NUM_PET_ACTION_SLOTS do
 				_G['PetActionButton' .. i]:EnableMouse(true)
 				_G['PetActionButton' .. i .. 'Cooldown']:SetDrawBling(false)
