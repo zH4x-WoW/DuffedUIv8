@@ -5,7 +5,7 @@ local _G = _G
 local sub, replace = string.sub, string.gsub
 local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 
-function D.StyleActionBarButton(self)
+function D['StyleActionBarButton'](self)
 	local name = self:GetName()
 	local action = self.action
 	local Button = self

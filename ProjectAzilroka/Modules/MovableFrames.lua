@@ -17,7 +17,6 @@ local Frames = {
 	'BonusRollFrame',
 	'BonusRollLootWonFrame',
 	'BonusRollMoneyWonFrame',
-	-- 'CharacterFrame',
 	'DressUpFrame',
 	'FriendsFrame',
 	'FriendsFriendsFrame',
@@ -62,7 +61,6 @@ local Frames = {
 	'TradeFrame',
 	'TutorialFrame',
 	'VideoOptionsFrame',
-	'WorldStateAlwaysUpFrame',
 	'WorldStateScoreFrame',
 }
 
