@@ -350,7 +350,7 @@ if IsAddOnLoaded("Blizzard_ObjectiveTracker") then
 	end)
 end
 
---[[NumQUests]]--
+--[[NumQuests]]--
 local a = ...
 local numQuests = CreateFrame("Frame", a)
 local MAX_QUESTS=MAX_QUESTS
