@@ -28,7 +28,7 @@ MiniMapMailFrame:Point('TOPRIGHT', Minimap, -2, 0)
 MiniMapMailFrame:SetFrameLevel(Minimap:GetFrameLevel() + 1)
 MiniMapMailFrame:SetFrameStrata(Minimap:GetFrameStrata())
 MiniMapMailBorder:Hide()
-MiniMapMailIcon:SetTexture('Interface\\AddOns\\DuffedUI\\medias\\textures\\mail')
+MiniMapMailIcon:SetTexture('Interface\\AddOns\\DuffedUI\\media\\textures\\mail')
 
 local DuffedUITicket = CreateFrame('Frame', 'DuffedUITicket', DuffedUIMinimap)
 DuffedUITicket:SetTemplate()
