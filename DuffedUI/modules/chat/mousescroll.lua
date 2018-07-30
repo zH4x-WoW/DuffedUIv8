@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...)) 
-if C["chat"].enable ~= true then return end
+if not C['chat']['enable'] then return end
 
 local numlines = 2
 function FloatingChatFrame_OnMouseScroll(self, delta)
