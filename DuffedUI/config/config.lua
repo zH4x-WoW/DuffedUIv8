@@ -220,6 +220,9 @@ C['misc'] = {
 	['artifact'] = true,
 	['artifactwidth'] = 5,
 	['artifactheight'] = 166,
+	['azerite'] = true,
+	['azeritewidth'] = 5,
+	['azeriteheight'] = 166,
 }
 
 C['duffed'] = {
