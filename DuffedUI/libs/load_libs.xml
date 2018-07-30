@@ -1,12 +1,12 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Include file="CallbackHandler-1.0\CallbackHandler-1.0.xml" />
-	<Include file="LibSharedMedia-3.0\lib.xml" />
-	<Include file="oUF\oUF.xml" />
-	<Include file="plugins\load_oUFPlugins.xml" />
-	<Include file="LibItemUpgradeInfo-1.0\LibItemUpgradeInfo-1.0.xml" />
-	<Script file="templates\colors.lua" />
-	<Include file="DropDownMenu\UIDropDownMenuTemplates.xml"/>
-	<Script file="DropDownMenu\EasyMenu.lua"/>
-	<Script file="DropDownMenu\UIDropDownMenu.lua"/>
-	<Script file="LibArtifactPower-1.0\LibArtifactPower-1.0.lua" />
+<Ui xmlns='http://www.blizzard.com/wow/ui/'>
+	<Include file='CallbackHandler-1.0\CallbackHandler-1.0.xml' />
+	<Include file='LibSharedMedia-3.0\lib.xml' />
+	<Include file='oUF\oUF.xml' />
+	<Include file='plugins\load_oUFPlugins.xml' />
+	<Include file='LibItemUpgradeInfo-1.0\LibItemUpgradeInfo-1.0.xml' />
+	<Script file='templates\colors.lua' />
+	<Include file='DropDownMenu\UIDropDownMenuTemplates.xml'/>
+	<Script file='DropDownMenu\EasyMenu.lua'/>
+	<Script file='DropDownMenu\UIDropDownMenu.lua'/>
+	<Script file='LibArtifactPower-1.0\LibArtifactPower-1.0.lua' />
 </Ui>

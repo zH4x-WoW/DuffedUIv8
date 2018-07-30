@@ -40,7 +40,7 @@ Graphic:SetScript('OnEvent', function(self, event)
 		if (UseUIScale ~= '1') then SetCVar('useUiScale', 1) end
 		if (format('%.2f', GetCVar('uiScale')) ~= format('%.2f', C['general']['uiscale'])) then SetCVar('uiScale', C['general']['uiscale']) end
 
-		--[[Allow 4K and WQHD Resolution with UIScale lower than 0.64]]--
+		-- Allow 4K and WQHD Resolution with UIScale lower than 0.64
 		if (C['general']['uiscale'] < 0.64) then UIParent:SetScale(C['general']['uiscale']) end
 
 		self:UnregisterEvent('PLAYER_ENTERING_WORLD')
