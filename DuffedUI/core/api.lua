@@ -42,7 +42,6 @@ local function UpdateColor(t)
 		backdropr, backdropg, backdropb = unpack(C['general']['backdropcolor'])
 		backdropa = balpha
 	end
-
 	template = t
 end
 
@@ -279,7 +278,7 @@ local function StripTextures(object, kill)
 	end
 end
 
---[[Horizontal Animationcode from Hydra]]--
+-- Horizontal Animationcode from Hydra
 local Frame = CreateFrame('Frame')
 local strlower = string.lower
 local select = select
@@ -354,7 +353,7 @@ local SetAnimation = function(self, handler, ...)
 	if Function then Function(self, ...) else return print("Invalid 'SetAnimation' handler: " .. handler) end
 end
 
---[[Skinning]]--
+-- Skinning
 local function SetModifiedBackdrop(self)
 	local color = RAID_CLASS_COLORS[D['Class']]
 	self:SetBackdropColor(color.r * .15, color.g * .15, color.b * .15)
@@ -396,7 +395,11 @@ local function SkinIconButton(b, shrinkIcon)
 	b:StyleButton()
 
 	local icon = b.icon
-	if b:GetName() and _G[b:GetName()..'IconTexture'] then icon = _G[b:GetName()..'IconTexture'] elseif b:GetName() and _G[b:GetName()..'Icon'] then icon = _G[b:GetName()..'Icon'] end
+	if b:GetName() and _G[b:GetName()..'IconTexture'] then
+		icon = _G[b:GetName()..'IconTexture']
+	elseif b:GetName() and _G[b:GetName()..'Icon'] then
+		icon = _G[b:GetName()..'Icon']
+	end
 
 	if icon then
 		icon:SetTexCoord(.08, .88, .08, .88)
@@ -502,7 +505,7 @@ function SkinScrollBar(frame, thumbTrim)
 	end
 end
 
---Tab Regions
+-- Tab Regions
 local tabs = {
 	'LeftDisabled',
 	'MiddleDisabled',

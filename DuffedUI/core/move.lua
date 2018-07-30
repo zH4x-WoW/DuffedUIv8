@@ -20,7 +20,7 @@ end
 function Move:RestoreDefaults(button)
 	local FrameName = self.Parent:GetName()
 	local Data = Move.Defaults[FrameName]
-	local SavedVariables = DuffedUIDataPerChar.Move
+	local SavedVariables = DuffedUIDataPerChar['Move']
 
 	if (button == 'RightButton') and (Data) then
 		local Anchor1, ParentName, Anchor2, X, Y = unpack(Data)
@@ -196,9 +196,9 @@ end
 
 Move:SetScript('OnEvent', function(self, event)
 	if event == 'PLAYER_ENTERING_WORLD' then
-		if not DuffedUIDataPerChar.Move then DuffedUIDataPerChar.Move = {} end
+		if not DuffedUIDataPerChar['Move'] then DuffedUIDataPerChar['Move'] = {} end
 
-		local Data = DuffedUIDataPerChar.Move
+		local Data = DuffedUIDataPerChar['Move']
 
 		for Frame, Position in pairs(Data) do
 			local Frame = _G[Frame]

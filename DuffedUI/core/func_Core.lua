@@ -1,13 +1,13 @@
 local D, C, L = unpack(select(2, ...))
 
---[[Default Actionbutton size]]--
+-- Default Actionbutton size
 D['buttonsize'] = D['Scale'](C['actionbar']['buttonsize'])
 D['SidebarButtonsize'] = D['Scale'](C['actionbar']['SidebarButtonsize'])
 D['buttonspacing'] = D['Scale'](C['actionbar']['buttonspacing'])
 D['petbuttonsize'] = D['Scale'](C['actionbar']['petbuttonsize'])
 D['petbuttonspacing'] = D['Scale'](C['actionbar']['buttonspacing'])
 
---[[Hover tooltip]]--
+-- Hover tooltip
 local orig1, orig2 = {}, {}
 local GameTooltip = GameTooltip
 local linktypes = {item = true, enchant = true, spell = true, quest = true, unit = true, talent = true, achievement = true, glyph = true}
@@ -28,9 +28,9 @@ local function OnHyperlinkLeave(frame, ...)
 	if orig2[frame] then return orig2[frame](frame, ...) end
 end
 
-function D.HyperlinkMouseover()
+D['HyperlinkMouseover'] = function()
 	local _G = getfenv(0)
-	for i=1, NUM_CHAT_WINDOWS do
+	for i = 1, NUM_CHAT_WINDOWS do
 		if ( i ~= 2 ) then
 			local frame = _G['ChatFrame'..i]
 			orig1[frame] = frame:GetScript('OnHyperlinkEnter')
@@ -43,7 +43,7 @@ function D.HyperlinkMouseover()
 end
 D['HyperlinkMouseover']()
 
---[[Currencys]]--
+-- Currencys
 local GetCurrencyInfo = GetCurrencyInfo
 D['Currency'] = function(id, weekly, capped)
 	local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(id)
@@ -66,14 +66,14 @@ D['Currency'] = function(id, weekly, capped)
 	end
 end
 
---[[Button mouseover]]--
+-- Button mouseover
 D['ButtonMO'] = function(frame)
 	frame:SetAlpha(0)
 	frame:SetScript('OnEnter', function() frame:SetAlpha(1) end)
 	frame:SetScript('OnLeave', function() frame:SetAlpha(0) end)
 end
 
---[[Shorten comma values]]--
+-- Shorten comma values
 D['CommaValue'] = function(amount)
 	local formatted = amount
 	while true do
@@ -83,7 +83,7 @@ D['CommaValue'] = function(amount)
 	return formatted
 end
 
---[[Set fontstring]]--
+-- Set fontstring
 D['SetFontString'] = function(parent, fontName, fontHeight, fontStyle)
 	local fs = parent:CreateFontString(nil, 'OVERLAY')
 	fs:SetFont(fontName, fontHeight, fontStyle)
@@ -93,7 +93,7 @@ D['SetFontString'] = function(parent, fontName, fontHeight, fontStyle)
 	return fs
 end
 
---[[DataText positions]]--
+-- DataText positions
 D['DataTextPosition'] = function(p, obj)
 	local left = DuffedUIInfoLeft
 	local right = DuffedUIInfoRight
@@ -165,92 +165,6 @@ D['DataTextTooltipAnchor'] = function(self)
 	return anchor, panel, xoff, yoff
 end
 
-D['ShiftBarUpdate'] = function(self)
-	local numForms = GetNumShapeshiftForms()
-	local texture, name, isActive, isCastable
-	local button, icon, cooldown
-	local start, duration, enable
-	for i = 1, NUM_STANCE_SLOTS do
-		buttonName = 'StanceButton'..i
-		button = _G[buttonName]
-		icon = _G[buttonName..'Icon']
-		if i <= numForms then
-			texture, name, isActive, isCastable = GetShapeshiftFormInfo(i)
-
-			if not icon then return end
-			icon:SetTexture(texture)
-			cooldown = _G[buttonName..'Cooldown']
-			if texture then cooldown:SetAlpha(1) else cooldown:SetAlpha(0) end
-
-			start, duration, enable = GetShapeshiftFormCooldown(i)
-			CooldownFrame_Set(cooldown, start, duration, enable)
-
-			if isActive then
-				StanceBarFrame.lastSelected = button:GetID()
-				button:GetCheckedTexture():SetColorTexture(0, 1, 0, .3)
-			else
-				button:SetCheckedTexture(0, 0, 0, 0)
-			end
-
-			if isCastable then icon:SetVertexColor(1, 1, 1) else icon:SetVertexColor(.4, .4, .4) end
-		end
-	end
-end
-
-D['PetBarUpdate'] = function(...)
-	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
-		local ButtonName = "PetActionButton" .. i
-		local PetActionButton = _G[ButtonName]
-		local PetActionIcon = _G[ButtonName.."Icon"]
-		local PetActionBackdrop = PetActionButton.Backdrop
-		local PetAutoCastableTexture = _G[ButtonName.."AutoCastable"]
-		local PetAutoCastShine = _G[ButtonName.."Shine"]
-		local Name, Texture, IsToken, IsActive, AutoCastAllowed, AutoCastEnabled = GetPetActionInfo(i)
-
-		if (not IsToken) then
-			PetActionIcon:SetTexture(Texture)
-			PetActionButton.tooltipName = Name
-		else
-			PetActionIcon:SetTexture(_G[Texture])
-			PetActionButton.tooltipName = _G[Name]
-		end
-
-		PetActionButton.IsToken = IsToken
-		PetActionButton.tooltipSubtext = SubText
-
-		if (IsActive) then
-			PetActionButton:SetChecked(1)
-
-			if PetActionBackdrop then PetActionBackdrop:SetBackdropBorderColor(0, 1, 0) end
-
-			if IsPetAttackAction(i) then PetActionButton_StartFlash(PetActionButton) end
-		else
-			PetActionButton:SetChecked()
-
-			if PetActionBackdrop then PetActionBackdrop:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end
-
-			if IsPetAttackAction(i) then PetActionButton_StopFlash(PetActionButton) end
-		end
-
-		if AutoCastAllowed then PetAutoCastableTexture:Show() else PetAutoCastableTexture:Hide() end
-
-		if AutoCastEnabled then AutoCastShine_AutoCastStart(PetAutoCastShine) else AutoCastShine_AutoCastStop(PetAutoCastShine) end
-
-		if Texture then
-			if (GetPetActionSlotUsable(i)) then SetDesaturation(PetActionIcon, nil) else SetDesaturation(PetActionIcon, 1) end
-			PetActionIcon:Show()
-		else
-			PetActionIcon:Hide()
-		end
-
-		if (not PetHasActionBar() and Texture and Name ~= "PET_ACTION_FOLLOW") then
-			PetActionButton_StopFlash(PetActionButton)
-			SetDesaturation(PetActionIcon, 1)
-			PetActionButton:SetChecked(0)
-		end
-	end
-end
-
 D['Round'] = function(number, decimals)
 	if not decimals then decimals = 0 end
 	return (('%%.%df'):format(decimals)):format(number)
@@ -264,7 +178,7 @@ D['RGBToHex'] = function(r, g, b)
 end
 
 if C['general']['classcolor'] then C['media']['datatextcolor1'] = D['UnitColor']['class'][D.Class] end
-D.PanelColor = D['RGBToHex'](unpack(C['media']['datatextcolor1']))
+D['PanelColor'] = D['RGBToHex'](unpack(C['media']['datatextcolor1']))
 
 D['ShortValue'] = function(v)
 	if v >= 1e9 then
@@ -363,7 +277,6 @@ D['CreateBtn'] = function(name, parent, w, h, tt_txt, txt)
 		GameTooltip:AddLine(tt_txt, 1, 1, 1, 1, 1, 1)
 		GameTooltip:Show()
 	end)
-
 	b:SetScript('OnLeave', function(self) GameTooltip:Hide() end)
 
 	b.text = b:CreateFontString(nil, 'OVERLAY')

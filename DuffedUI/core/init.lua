@@ -9,7 +9,6 @@ DuffedUI = engine
 ERR_NOT_IN_RAID = ''
 
 DuffedUI [1].SetPerCharVariable = function(varName, value)
-	-- print('ATTENTION: SPCV called prior to VARIABLES_LOADED event')
 	_G [varName] = value
 end
 
@@ -43,15 +42,14 @@ DuffedUIOnVarsLoaded:SetScript('OnEvent', function(self, event)
 	self:UnregisterEvent('VARIABLES_LOADED')
 
 	if DuffedUIData == nil then
-		-- probably the first load after installation of addon, assume that SVPC works
 		DuffedUIData = {}
 	end
 
 	if DuffedUIData.usePerCharData then
 		local playerName = UnitName('player') .. '@' .. GetRealmName()
 
-		if DuffedUIData.perCharData ~= nil and DuffedUIData.perCharData [playerName] ~= nil then
-			local pcd = DuffedUIData.perCharData [playerName]
+		if DuffedUIData.perCharData ~= nil and DuffedUIData.perCharData[playerName] ~= nil then
+			local pcd = DuffedUIData.perCharData[playerName]
 
 			if DuffedUIDataPerChar == nil then
 				DuffedUIDataPerChar = pcd.DuffedUIDataPerChar
@@ -66,21 +64,19 @@ DuffedUIOnVarsLoaded:SetScript('OnEvent', function(self, event)
 
 		local SetPerCharVariable = function(varName, value)
 			if DuffedUIData.perCharData == nil then
-				-- probably this is the time the addon is loaded after updating it to SVPC support
-				DuffedUIData.perCharData = {};
+				DuffedUIData.perCharData = {}
 			end
 
-			if DuffedUIData.perCharData [playerName] == nil then
-				DuffedUIData.perCharData [playerName] = {};
+			if DuffedUIData.perCharData[playerName] == nil then
+				DuffedUIData.perCharData[playerName] = {}
 			end
 
-			local pcd = DuffedUIData.perCharData [playerName]
+			local pcd = DuffedUIData.perCharData[playerName]
 
 			_G [varName] = value
 			pcd [varName] = value
 		end
 
-		-- replace the minimum implementation provided above
-		DuffedUI [1].SetPerCharVariable = SetPerCharVariable
+		DuffedUI[1].SetPerCharVariable = SetPerCharVariable
 	end
 end)

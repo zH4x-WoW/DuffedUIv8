@@ -45,12 +45,12 @@ D['PostUpdateHealth'] = function(health, unit, min, max)
 	else
 		local r, g, b
 
-		if C['unitframes'].ColorGradient == true and C['unitframes'].unicolor == true then
+		if C['unitframes']['ColorGradient'] and C['unitframes']['unicolor'] then
 			local r, g, b = oUFDuffedUI.ColorGradient(min, max, 0, 0, 0, .6, .2, .2, .125, .125, .125)
 			health:SetStatusBarColor(r, g, b)
 		end
 
-		if (C['unitframes'].unicolor ~= true and unit == 'target' and UnitIsEnemy(unit, 'player') and UnitIsPlayer(unit)) or (C['unitframes'].unicolor ~= true and unit == 'target' and not UnitIsPlayer(unit) and UnitIsFriend(unit, 'player')) then
+		if (C['unitframes']['unicolor'] ~= true and unit == 'target' and UnitIsEnemy(unit, 'player') and UnitIsPlayer(unit)) or (C['unitframes']['unicolor'] ~= true and unit == 'target' and not UnitIsPlayer(unit) and UnitIsFriend(unit, 'player')) then
 			local c = D['UnitColor']['reaction'][UnitReaction(unit, 'player')]
 			if c then
 				r, g, b = c[1], c[2], c[3]
@@ -117,12 +117,12 @@ D['PostUpdateHealthRaid'] = function(health, unit, min, max)
 end
 
 D['PostUpdatePetColor'] = function(health, unit, min, max)
-	if C['unitframes'].ColorGradient == true and C['unitframes'].unicolor == true then
+	if C['unitframes']['ColorGradient'] and C['unitframes']['unicolor'] then
 		local r, g, b = oUFDuffedUI.ColorGradient(min, max, 0, 0, 0, .6, .2, .2, .125, .125, .125)
 		health:SetStatusBarColor(r, g, b)
 	end
 
-	if not UnitIsPlayer(unit) and UnitIsFriend(unit, 'player') and C['unitframes'].unicolor ~= true then
+	if not UnitIsPlayer(unit) and UnitIsFriend(unit, 'player') and C['unitframes']['unicolor'] ~= true then
 		local c = D['UnitColor']['reaction'][5]
 		local r, g, b = c[1], c[2], c[3]
 
@@ -264,7 +264,7 @@ end
 D['PostCreateAura'] = function(self, button)
 	button:SetTemplate('Transparent')
 
-	button.remaining = D['SetFontString'](button, C['media'].font, 8, 'THINOUTLINE')
+	button.remaining = D['SetFontString'](button, C['media']['font'], 8, 'THINOUTLINE')
 	button.remaining:Point('TOPLEFT', 1, -3)
 
 	button.cd.noOCC = true
@@ -278,7 +278,7 @@ D['PostCreateAura'] = function(self, button)
 
 	button.count:Point('BOTTOMRIGHT', 1, 1)
 	button.count:SetJustifyH('RIGHT')
-	button.count:SetFont(C['media'].font, 9, 'THINOUTLINE')
+	button.count:SetFont(C['media']['font'], 9, 'THINOUTLINE')
 	button.count:SetTextColor(.84, .75, .65)
 
 	button.overlayFrame = CreateFrame('frame', nil, button, nil)
@@ -295,7 +295,7 @@ D['PostCreateAura'] = function(self, button)
 	button.Glow:Point('TOPLEFT', button, 'TOPLEFT', -3, 3)
 	button.Glow:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 3, -3)
 	button.Glow:SetFrameStrata('BACKGROUND')
-	button.Glow:SetBackdrop{edgeFile = C['media'].glowTex, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
+	button.Glow:SetBackdrop{edgeFile = C['media']['glowTex'], edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
 
@@ -315,7 +315,7 @@ D['PostUpdateAura'] = function(self, unit, icon, index, offset, filter, isDebuff
 		if icon.filter == 'HARMFUL' then
 			if not UnitIsFriend('player', unit) and icon.owner ~= 'player' and icon.owner ~= 'vehicle' then
 				icon.icon:SetDesaturated(true)
-				icon:SetBackdropBorderColor(unpack(C['media'].bordercolor))
+				icon:SetBackdropBorderColor(unpack(C['media']['bordercolor']))
 			else
 				local color = DebuffTypeColor[dtype] or DebuffTypeColor.none
 				icon.icon:SetDesaturated(false)
@@ -359,10 +359,6 @@ D['HidePortrait'] = function(self, unit)
 	self.Portrait:SetFrameLevel(4)
 end
 
-D['PortraitUpdate'] = function(self, unit)
-	--if self:GetModel() and self:GetModel().find and self:GetModel():find('worgenmale') then self:SetCamera(1) end
-end
-
 local ticks = {}
 local HideTicks = function()
 	for _, tick in pairs(ticks) do tick:Hide() end
@@ -375,9 +371,9 @@ local SetCastTicks = function(frame, numTicks)
 		for i = 1, numTicks do
 			if not ticks[i] then
 				ticks[i] = frame:CreateTexture(nil, 'OVERLAY')
-				ticks[i]:SetTexture( C['media'].normTex)
+				ticks[i]:SetTexture( C['media']['normTex'])
 
-				if C['castbar'].classcolor == true then ticks[i]:SetVertexColor(0, 0, 0) else ticks[i]:SetVertexColor(.84, .75, .65) end
+				if C['castbar']['classcolor'] then ticks[i]:SetVertexColor(0, 0, 0) else ticks[i]:SetVertexColor(.84, .75, .65) end
 				ticks[i]:SetWidth(2)
 				ticks[i]:SetHeight(frame:GetHeight())
 			end
@@ -388,15 +384,19 @@ local SetCastTicks = function(frame, numTicks)
 	end
 end
 
-D['CustomCastTime'] = function(self, duration) self.Time:SetText(('%.1f / %.1f'):format(self.channeling and duration or self.max - duration, self.max)) end
+D['CustomCastTime'] = function(self, duration)
+	self.Time:SetText(('%.1f / %.1f'):format(self.channeling and duration or self.max - duration, self.max))
+end
 
-D['CustomCastDelayText'] = function(self, duration) self.Time:SetText(('%.1f |cffaf5050%s %.1f|r'):format(self.channeling and duration or self.max - duration, self.channeling and '- ' or '+', self.delay)) end
+D['CustomCastDelayText'] = function(self, duration)
+	self.Time:SetText(('%.1f |cffaf5050%s %.1f|r'):format(self.channeling and duration or self.max - duration, self.channeling and '- ' or '+', self.delay))
+end
 
 D['CastBar'] = function(self, unit, name, rank, castid)
 	local color
 	self.unit = unit
 
-	if C['castbar'].cbticks == true and unit == 'player' then
+	if C['castbar']['cbticks'] and unit == 'player' then
 		local baseTicks = D['ChannelTicks'][name]
 		if baseTicks and D['HasteTicks'][name] then
 			local tickIncRate = 1 / baseTicks
@@ -435,7 +435,11 @@ D['EclipseDirection'] = function(self)
 end
 
 D['MLAnchorUpdate'] = function (self)
-	if self.LeaderIndicator:IsShown() then self.MasterLooterIndicator:SetPoint('TOPLEFT', 14, 8) else self.MasterLooterIndicator:SetPoint('TOPLEFT', 0, 8) end
+	if self.LeaderIndicator:IsShown() then
+		self.MasterLooterIndicator:SetPoint('TOPLEFT', 14, 8)
+	else
+		self.MasterLooterIndicator:SetPoint('TOPLEFT', 0, 8)
+	end
 end
 
 local UpdateManaLevelDelay = 0
@@ -537,11 +541,11 @@ D['createAuraWatch'] = function(self, unit)
 	local buffs = {}
 
 	if (D['Buffids']['ALL']) then
-		for key, value in pairs(D.Buffids['ALL']) do tinsert(buffs, value) end
+		for key, value in pairs(D['Buffids']['ALL']) do tinsert(buffs, value) end
 	end
 
 	if (D['Buffids'][D['Class']]) then
-		for key, value in pairs(D.Buffids[D['Class']]) do tinsert(buffs, value) end
+		for key, value in pairs(D['Buffids'][D['Class']]) do tinsert(buffs, value) end
 	end
 
 	-- Cornerbuffs
@@ -561,8 +565,8 @@ D['createAuraWatch'] = function(self, unit)
 			if (spell[3]) then Texture:SetVertexColor(unpack(spell[3])) else Texture:SetVertexColor(0.8, 0.8, 0.8) end
 
 			local Count = Icon:CreateFontString(nil, 'OVERLAY')
-			Count:SetFont(C['media'].font, 8, 'THINOUTLINE')
-			Count:SetPoint('CENTER', unpack(D.countOffsets[spell[2]]))
+			Count:SetFont(C['media']['font'], 8, 'THINOUTLINE')
+			Count:SetPoint('CENTER', unpack(D['countOffsets'][spell[2]]))
 			Icon.count = Count
 
 			auras.icons[spell[1]] = Icon
