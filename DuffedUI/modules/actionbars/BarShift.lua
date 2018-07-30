@@ -74,7 +74,7 @@ bar:SetScript('OnEvent', function(self, event, ...)
 	elseif event == 'PLAYER_ENTERING_WORLD' then
 		D['ShiftBarUpdate'](self)
 		D['StyleShift'](self)
-		if C['actionbar'].['verticalshapeshift'] then
+		if C['actionbar']['verticalshapeshift'] then
 			ShapeShiftBorder:Size(((StanceButton1:GetWidth() + space)) + space, StanceButton1:GetHeight() * GetNumShapeshiftForms() + (GetNumShapeshiftForms() + 1) * space)
 		else
 			ShapeShiftBorder:Size(((StanceButton1:GetWidth() + space) * GetNumShapeshiftForms()) + space, StanceButton1:GetHeight()+ 2 * space)

@@ -61,7 +61,7 @@ function ColoringFriendsList()
 					local Diff = string.format("|cff%02x%02x%02x", r * 255, g * 255, b * 255)
 					nameString:SetTextColor(classc.r, classc.g, classc.b)
 					nameString:SetText("|cFF82C4FC" .. realName .. "|r |cFFFFFFFF(|r" .. toonName .. "|cFFFFFFFF - " .. LEVEL .. "|r " .. Diff .. level .. "|r|cFFFFFFFF)|r")
-					icon:SetTexture([[Interface\AddOns\DuffedUI\medias\textures\]] .. faction)
+					icon:SetTexture([[Interface\AddOns\DuffedUI\media\textures\]] .. faction)
 					local filename, fontHeight, flags = nameString:GetFont()
 				end
 				if CanCooperateWithGameAccount(toonID) ~= true then

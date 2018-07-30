@@ -435,7 +435,7 @@ function SkinScrollBar(frame, thumbTrim)
 				_G[frame:GetName()..'ScrollUpButton'].texture = _G[frame:GetName()..'ScrollUpButton']:CreateTexture(nil, 'OVERLAY')
 				_G[frame:GetName()..'ScrollUpButton'].texture:Point('TOPLEFT', 2, -2)
 				_G[frame:GetName()..'ScrollUpButton'].texture:Point('BOTTOMRIGHT', -2, 2)
-				_G[frame:GetName()..'ScrollUpButton'].texture:SetTexture([[Interface\AddOns\DuffedUI\medias\textures\arrowup.tga]])
+				_G[frame:GetName()..'ScrollUpButton'].texture:SetTexture([[Interface\AddOns\DuffedUI\media\textures\arrowup.tga]])
 				_G[frame:GetName()..'ScrollUpButton'].texture:SetVertexColor(unpack(C['media']['bordercolor']))
 			end
 			_G[frame:GetName()..'ScrollDownButton']:StripTextures()
@@ -443,7 +443,7 @@ function SkinScrollBar(frame, thumbTrim)
 				_G[frame:GetName()..'ScrollDownButton'].texture = _G[frame:GetName()..'ScrollDownButton']:CreateTexture(nil, 'OVERLAY')
 				_G[frame:GetName()..'ScrollDownButton'].texture:Point('TOPLEFT', 2, -2)
 				_G[frame:GetName()..'ScrollDownButton'].texture:Point('BOTTOMRIGHT', -2, 2)
-				_G[frame:GetName()..'ScrollDownButton'].texture:SetTexture([[Interface\AddOns\DuffedUI\medias\textures\arrowdown.tga]])
+				_G[frame:GetName()..'ScrollDownButton'].texture:SetTexture([[Interface\AddOns\DuffedUI\media\textures\arrowdown.tga]])
 				_G[frame:GetName()..'ScrollDownButton'].texture:SetVertexColor(unpack(C['media']['bordercolor']))
 			end
 			if not frame.trackbg then
@@ -687,7 +687,7 @@ local function SkinSlideBar(frame, height, movetext)
 		if(_G[frame:GetName() .. 'Text']) then _G[frame:GetName() .. 'Text']:Point('TOP', 0, 19) end
 	end
 
-	_G[frame:GetName()]:SetThumbTexture( [[Interface\AddOns\DuffedUI\medias\textures\blank.tga]] )
+	_G[frame:GetName()]:SetThumbTexture( [[Interface\AddOns\DuffedUI\media\textures\blank.tga]] )
 	_G[frame:GetName()]:GetThumbTexture():SetVertexColor(unpack( C['media']['bordercolor']))
 	if( frame:GetWidth() < frame:GetHeight() ) then
 		frame:Width(height)

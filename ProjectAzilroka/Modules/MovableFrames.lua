@@ -17,7 +17,7 @@ local Frames = {
 	'BonusRollFrame',
 	'BonusRollLootWonFrame',
 	'BonusRollMoneyWonFrame',
-	'CharacterFrame',
+	-- 'CharacterFrame',
 	'DressUpFrame',
 	'FriendsFrame',
 	'FriendsFriendsFrame',

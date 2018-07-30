@@ -27,7 +27,7 @@ DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
 		SetCVar("CombatDamage", 0)
 		SetCVar("CombatHealing", 0)
 
-		local INVISIBLE = [=[Interface\Addons\DuffedUI\medias\fonts\invisible_font.ttf]=]
+		local INVISIBLE = [=[Interface\Addons\DuffedUI\media\fonts\invisible_font.ttf]=]
 		COMBAT = INVISIBLE
 		DAMAGE_TEXT_FONT = INVISIBLE
 	end
