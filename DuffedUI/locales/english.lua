@@ -262,12 +262,9 @@ L['xpbar'] = {
 	['exalted'] = 'Exalted',
 }
 
-L['artifactBar'] = {
-	['xptitle'] = 'Artifact Experience',
-	['xp'] = 'Experience:',
-	['xpremaining'] = 'Remaining:',
-	['click'] = 'Click: Shows Artifactoverview',
-	['bags'] = 'In Bags:'
+L['azeriteBar'] = {
+		['xptitle'] = 'AP:',
+		['xpremaining'] = 'Remaining:',
 }
 
 L['tooltip'] = {

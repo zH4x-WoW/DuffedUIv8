@@ -264,12 +264,9 @@ if D.Client == 'deDE' then
 		['exalted'] = 'Ehrfürchtig',
 	}
 	
-	L['artifactBar'] = {
-		['xptitle'] = 'Artefakt Erfahrung',
-		['xp'] = 'Erfahrung:',
+	L['azeriteBar'] = {
+		['xptitle'] = 'AM:',
 		['xpremaining'] = 'Verbleibend:',
-		['click'] = 'Klick: Öffnet die Artefaktübersicht',
-		['bags'] = 'In Taschen:'
 	}
 	
 	L['tooltip'] = {

@@ -26,7 +26,7 @@ azeriteBar:SetWidth(barWidth)
 azeriteBar:SetHeight(barHeight)
 azeriteBar:SetPoint('TOP', backdrop, 'TOP', 0, 0)
 azeriteBar:SetStatusBarTexture(barTex)
-azeriteBar:SetStatusBarColor(.901, .8, .601)
+azeriteBar:SetStatusBarColor(157/255, 138/255, 108/255)
 azeriteBar:SetFrameLevel(backdrop:GetFrameLevel() + 2)
 
 local AzeritemouseFrame = CreateFrame('Frame', 'Azerite_mouseFrame', backdrop)
@@ -35,7 +35,7 @@ AzeritemouseFrame:EnableMouse(true)
 AzeritemouseFrame:SetFrameLevel(backdrop:GetFrameLevel() + 3)
 
 function updateStatus()
-	if (event == "UNIT_INVENTORY_CHANGED" and unit ~= "player") then
+	if (event == 'UNIT_INVENTORY_CHANGED' and unit ~= 'player') then
 		return
 	end
 
@@ -59,11 +59,11 @@ AzeritemouseFrame:SetScript('OnEnter', function()
 		azeriteBar.itemDataLoadedCancelFunc = azeriteItem:ContinueWithCancelOnItemLoad(function()
 		local azeriteItemName = azeriteItem:GetItemName()
 
-		GameTooltip:AddDoubleLine("Azerite-Macht", azeriteItemName.." ("..currentLevel..")", nil,  nil, nil, 0.90, 0.80, 0.50) 
-		GameTooltip:AddLine(" ")
+		GameTooltip:AddDoubleLine(ARTIFACT_POWER, azeriteItemName..' ('..currentLevel..')', nil,  nil, nil, 0.90, 0.80, 0.50) 
+		GameTooltip:AddLine('')
 
-		GameTooltip:AddDoubleLine("AM:", format(" %d / %d (%d%%)", xp, totalLevelXP, xp / totalLevelXP  * 100), 1, 1, 1)
-		GameTooltip:AddDoubleLine("Verbleibend:", format(" %d (%d%% - %d ".."Bars"..")", xpToNextLevel, xpToNextLevel / totalLevelXP * 100, 10 * xpToNextLevel / totalLevelXP), 1, 1, 1)
+		GameTooltip:AddDoubleLine(L['azeriteBar']['xptitle'], format(" %d / %d (%d%%)", xp, totalLevelXP, xp / totalLevelXP  * 100), 1, 1, 1)
+		GameTooltip:AddDoubleLine(L['azeriteBar']['xpremaining'], format(' %d (%d%% - %d '..'Bars'..')', xpToNextLevel, xpToNextLevel / totalLevelXP * 100, 10 * xpToNextLevel / totalLevelXP), 1, 1, 1)
 	
 		GameTooltip:Show()
 	end)	
