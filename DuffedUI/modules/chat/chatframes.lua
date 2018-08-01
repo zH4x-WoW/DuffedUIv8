@@ -172,6 +172,7 @@ end
 local function SetupChat(self)	
 	for i = 1, NUM_CHAT_WINDOWS do
 		local frame = _G[format('ChatFrame%s', i)]
+		local name = frame:GetName()
 		SetChatStyle(frame)
 		FCFTab_UpdateAlpha(frame)
 		frame.ScrollBar:Kill()
