@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-local function LoadOrderHallSkin()
+local function LoadOrderHallSkin()	
 	--[[OrderHall CommandBar]]--
 	OrderHallCommandBar:StripTextures()
 	OrderHallCommandBar:SetTemplate("Transparent")
@@ -15,7 +15,7 @@ local function LoadOrderHallSkin()
 	OrderHallCommandBar.WorldMapButton:ClearAllPoints()
 	OrderHallCommandBar.WorldMapButton:SetPoint("RIGHT", OrderHallCommandBar, -5, -2)
 	
-	-- MissionFrame
+	--[[-- MissionFrame
 	OrderHallMissionFrame:StripTextures()
 	OrderHallMissionFrame:CreateBackdrop("Transparent")
 	OrderHallMissionFrame.backdrop:SetOutside(OrderHallMissionFrame.BorderFrame)
@@ -32,6 +32,7 @@ local function LoadOrderHallSkin()
 	OrderHallMissionFrame.MissionTab.ZoneSupportMissionPage.CloseButton:SkinCloseButton()
 	OrderHallMissionFrame.MissionTab.ZoneSupportMissionPage.StartMissionButton:SkinButton()
 	OrderHallMissionFrame.ClassHallIcon:Hide()
+	
 
 	for i = 1, 2 do
 		_G["OrderHallMissionFrameMissionsTab" .. i]:StripTextures()
@@ -106,7 +107,7 @@ local function LoadOrderHallSkin()
 	AdventureMapQuestChoiceDialog.AcceptButton:StripTextures()
 	AdventureMapQuestChoiceDialog.AcceptButton:SkinButton()
 	AdventureMapQuestChoiceDialog.DeclineButton:StripTextures()
-	AdventureMapQuestChoiceDialog.DeclineButton:SkinButton()
+	AdventureMapQuestChoiceDialog.DeclineButton:SkinButton()]]
 end
 
 D['SkinFuncs']["Blizzard_OrderHallUI"] = LoadOrderHallSkin
