@@ -1,5 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 
+if IsAddOnLoaded("AddOnSkins") then return end
+
 local function LoadSkin()
 	--Class Trainer Frame
 	local StripAllTextures = {
