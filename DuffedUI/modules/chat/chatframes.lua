@@ -174,6 +174,9 @@ local function SetupChat(self)
 		local frame = _G[format('ChatFrame%s', i)]
 		SetChatStyle(frame)
 		FCFTab_UpdateAlpha(frame)
+		frame.ScrollBar:Kill()
+		frame.ScrollToBottomButton:Kill()
+		_G[name.."ThumbTexture"]:Kill()
 	end
 
 	ChatTypeInfo.WHISPER.sticky = 1
