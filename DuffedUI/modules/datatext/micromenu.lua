@@ -12,31 +12,30 @@ local D, C, L = unpack(select(2, ...))
 --        map.
 -----------------------------------------
 
-if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
-	local Stat = CreateFrame("Frame", "DuffedUIStatMicroMenu")
-	Stat:EnableMouse(true)
-	Stat:SetFrameStrata("BACKGROUND")
-	Stat:SetFrameLevel(3)
-	Stat.Option = C["datatext"].micromenu
-	Stat.Color1 = D.RGBToHex(unpack(C["media"].datatextcolor1))
-	Stat.Color2 = D.RGBToHex(unpack(C["media"].datatextcolor2))
+if not C['datatext']['micromenu'] or C['datatext']['micromenu'] == 0 then return end
 
-	local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
-	local Text  = Stat:CreateFontString("DuffedUIStatMicroMenuText", "OVERLAY")
-	Text:SetFont(f, fs, ff)
-	D.DataTextPosition(C["datatext"].micromenu, Text)
+local Stat = CreateFrame('Frame', 'DuffedUIStatMicroMenu')
+Stat:EnableMouse(true)
+Stat:SetFrameStrata('BACKGROUND')
+Stat:SetFrameLevel(3)
+Stat.Color1 = D['RGBoHex'](unpack(C['media']['datatextcolor1']))
+Stat.Color2 = D['RGBoHex'](unpack(C['media']['datatextcolor2']))
 
-	local function OnEvent(self, event, ...)
-		Text:SetText(Stat.Color2..MAINMENU_BUTTON.."|r")
-		self:SetAllPoints(Text)
-	end
+local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
+local Text  = Stat:CreateFontString('DuffedUIStatMicroMenuText', 'OVERLAY')
+Text:SetFont(f, fs, ff)
+D['DataTextPosition'](C['datatext']['micromenu'], Text)
 
-	local function OpenMenu()
-		if not DuffedUIMicroButtonsDropDown then return end
-		Lib_EasyMenu(D.MicroMenu, DuffedUIMicroButtonsDropDown, "cursor", 0, 0, "MENU", 2)
-	end
-
-	Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
-	Stat:SetScript("OnEvent", OnEvent)
-	Stat:SetScript("OnMouseDown", function() OpenMenu() end)
+local function OnEvent(self, event, ...)
+	Text:SetText(Stat.Color2 .. MAINMENU_BUTTON .. '|r')
+	self:SetAllPoints(Text)
 end
+
+local function OpenMenu()
+	if not DuffedUIMicroButtonsDropDown then return end
+	Lib_EasyMenu(D['MicroMenu'], DuffedUIMicroButtonsDropDown, 'cursor', 0, 0, 'MENU', 2)
+end
+
+Stat:RegisterEvent('PLAYER_ENTERING_WORLD')
+Stat:SetScript('OnEvent', OnEvent)
+Stat:SetScript('OnMouseDown', function() OpenMenu() end)

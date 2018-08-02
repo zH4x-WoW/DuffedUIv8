@@ -32,7 +32,7 @@ local function CreateButton(name, parent, template, width, height, point, relati
 	b:StyleButton()
 	if text then
 		b.t = b:CreateFontString(nil, "OVERLAY")
-		b.t:SetFont(C["media"].font, 11, "THINOUTLINE")
+		b.t:SetFont(C['media']['font'], 11, "THINOUTLINE")
 		b.t:SetPoint("CENTER", 0, -1)
 		b.t:SetJustifyH("CENTER")
 		b.t:SetText(text)

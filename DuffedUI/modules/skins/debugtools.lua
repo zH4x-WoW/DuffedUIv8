@@ -4,7 +4,7 @@ if IsAddOnLoaded("AddOnSkins") then return end
 local function LoadSkin()
 	ScriptErrorsFrame:SetParent(UIParent)
 
-	local noscalemult = D.mult * C["general"].uiscale
+	local noscalemult = D['mult'] * C["general"].uiscale
 	local bg = {
 		bgFile = C["media"].blank, 
 		edgeFile = C["media"].blank, 

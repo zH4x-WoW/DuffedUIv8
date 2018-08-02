@@ -21,7 +21,7 @@ oUF.Tags.Methods["DuffedUI:perchp"] = function(unit)
 	if(m == 0) then
 		return 0
 	else
-		return D.PanelColor..math.floor(UnitHealth(unit) / m * 100 + .5).."%"
+		return D['PanelColor']..math.floor(UnitHealth(unit) / m * 100 + .5).."%"
 	end
 end
 
@@ -128,7 +128,7 @@ oUF.Tags.Methods["DuffedUI:getnamecolor"] = function(unit)
 		local c = RAID_CLASS_COLORS[UnitClass]
 
 		if not c then return "" end
-		return D.RGBToHex(c["r"], c["g"], c["b"] )
+		return D['RGBoHex'](c["r"], c["g"], c["b"] )
 	elseif UnitReaction then
 		local c = D["UnitColor"]["reaction"][UnitReaction]
 		return string.format("|cff%02x%02x%02x", c[1] * 255, c[2] * 255, c[3] * 255)

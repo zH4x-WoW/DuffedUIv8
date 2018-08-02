@@ -262,7 +262,7 @@ D['ConstructUFPlayer'] = function(self)
 	-- Combat feedback & Healcom
 	if C['unitframes']['combatfeedback'] then
 		local CombatFeedbackText
-		CombatFeedbackText = D.SetFontString(health, C['media'].font, 11, 'THINOUTLINE')
+		CombatFeedbackText = D.SetFontString(health, C['media']['font'], 11, 'THINOUTLINE')
 		CombatFeedbackText:Point('CENTER', 0, 1)
 		CombatFeedbackText.colors = {
 			DAMAGE = {.69, .31, .31},

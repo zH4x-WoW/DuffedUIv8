@@ -20,7 +20,7 @@ local function DisbandRaidGroup()
 		SendChatMessage(ERR_GROUP_DISBANDED, "RAID")
 		for i = 1, GetNumGroupMembers() do
 			local name, _, _, _, _, _, _, online = GetRaidRosterInfo(i)
-			if online and name ~= D.MyName then UninviteUnit(name) end
+			if online and name ~= D['MyName'] then UninviteUnit(name) end
 		end
 	else
 		SendChatMessage(ERR_GROUP_DISBANDED, "PARTY")

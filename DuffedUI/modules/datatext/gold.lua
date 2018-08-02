@@ -1,7 +1,7 @@
 local D, C, L = unpack(select(2, ...)) 
 
 if not C['datatext']['gold'] or C['datatext']['gold'] == 0 then return end
-D.SetPerCharVariable('ImprovedCurrency', {})
+D['SetPerCharVariable']('ImprovedCurrency', {})
 
 local Stat = CreateFrame('Frame', 'DuffedUIDataInfoGold')
 Stat:EnableMouse(true)
@@ -20,7 +20,7 @@ D['DataTextPosition'](C['datatext']['gold'], Text)
 local Profit = 0
 local Spent = 0
 local OldMoney = 0
-local myPlayerRealm = D.MyRealm
+local myPlayerRealm = D['MyRealm']
 
 local function formatMoney(money)
 	local gold = floor(math.abs(money) / 10000)
@@ -71,7 +71,9 @@ Stat:RegisterEvent('PLAYER_ENTERING_WORLD')
 
 Stat:SetScript('OnEvent', OnEvent)
 Stat:SetScript('OnEnter', function(self)
-	if not C['datatext']['ShowInCombat'] then if InCombatLockdown() then return end end
+	if not C['datatext']['ShowInCombat'] then
+		if InCombatLockdown() then return end
+	end
 
 	if ImprovedCurrency['Archaeology'] == nil then ImprovedCurrency['Archaeology'] = true end
 	if ImprovedCurrency['Cooking'] == nil then ImprovedCurrency['Cooking'] = true end
@@ -83,7 +85,7 @@ Stat:SetScript('OnEnter', function(self)
 
 	local prof1, prof2, archaeology, _, cooking = GetProfessions()
 
-	local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
+	local anchor, panel, xoff, yoff = D['DataTextTooltipAnchor'](Text)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
 	GameTooltip:AddLine(L['dt']['session'])
@@ -143,7 +145,7 @@ Stat:SetScript('OnEnter', function(self)
 
 	if ImprovedCurrency['Professions'] then
 		GameTooltip:AddLine(' ')
-		GameTooltip:AddLine("Profession Token")
+		GameTooltip:AddLine('Profession Token')
 		D['Currency'](61)
 		D['Currency'](361)
 		D['Currency'](910)
@@ -156,7 +158,7 @@ Stat:SetScript('OnEnter', function(self)
 
 	if ImprovedCurrency['Garrison'] then
 		GameTooltip:AddLine(' ')
-		GameTooltip:AddLine("Garrison")
+		GameTooltip:AddLine('Garrison')
 		D['Currency'](824)
 		D['Currency'](1101)
 		D['Currency'](1220)
@@ -221,25 +223,25 @@ Stat:SetScript('OnLeave', function() GameTooltip:Hide() end)
 
 local RightClickMenu = {
 	{ text = 'DuffedUI Improved Currency Options', isTitle = true , notCheckable = true },
-	{ text = "Show Archaeology Fragments", checked = function() return ImprovedCurrency['Archaeology'] end, func = function()
+	{ text = 'Show Archaeology Fragments', checked = function() return ImprovedCurrency['Archaeology'] end, func = function()
 		if ImprovedCurrency['Archaeology'] then ImprovedCurrency['Archaeology'] = false else ImprovedCurrency['Archaeology'] = true end
 	end	},
-	{ text = "Show Profession Tokens", checked = function() return ImprovedCurrency['Professions'] end, func = function()
+	{ text = 'Show Profession Tokens', checked = function() return ImprovedCurrency['Professions'] end, func = function()
 		if ImprovedCurrency['Professions'] then ImprovedCurrency['Professions'] = false else ImprovedCurrency['Professions'] = true end
 	end	},
-	{ text = "Show Garrison Tokens", checked = function() return ImprovedCurrency['Garrison'] end, func = function()
+	{ text = 'Show Garrison Tokens', checked = function() return ImprovedCurrency['Garrison'] end, func = function()
 		if ImprovedCurrency['Garrison'] then ImprovedCurrency['Garrison'] = false else ImprovedCurrency['Garrison'] = true end
 	end	},
-	{ text = "Show Player vs Player Currency", checked = function() return ImprovedCurrency['PvP'] end, func = function()
+	{ text = 'Show Player vs Player Currency', checked = function() return ImprovedCurrency['PvP'] end, func = function()
 		if ImprovedCurrency['PvP'] then ImprovedCurrency['PvP'] = false else ImprovedCurrency['PvP'] = true end
 	end	},
-	{ text = "Show Dungeon and Raid Currency", checked = function() return ImprovedCurrency['Raid'] end, func = function()
+	{ text = 'Show Dungeon and Raid Currency', checked = function() return ImprovedCurrency['Raid'] end, func = function()
 		if ImprovedCurrency['Raid'] then ImprovedCurrency['Raid'] = false else ImprovedCurrency['Raid'] = true end
 	end	},
-	{ text = "Show Cooking Awards", checked = function() return ImprovedCurrency['Cooking'] end, func = function()
+	{ text = 'Show Cooking Awards', checked = function() return ImprovedCurrency['Cooking'] end, func = function()
 		if ImprovedCurrency['Cooking'] then ImprovedCurrency['Cooking'] = false else ImprovedCurrency['Cooking'] = true end
 	end	},
-	{ text = "Show Miscellaneous Currency", checked = function() return ImprovedCurrency['Miscellaneous'] end, func = function()
+	{ text = 'Show Miscellaneous Currency', checked = function() return ImprovedCurrency['Miscellaneous'] end, func = function()
 		if ImprovedCurrency['Miscellaneous'] then ImprovedCurrency['Miscellaneous'] = false else ImprovedCurrency['Miscellaneous'] = true end
 	end	},
 }

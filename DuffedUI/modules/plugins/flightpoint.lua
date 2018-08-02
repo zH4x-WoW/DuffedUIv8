@@ -73,7 +73,7 @@ function FlightPointsTaxiChoiceContainer_Update()
 				button.highlight:SetPoint("TOPLEFT", button, "TOPLEFT", 3, -2)
 				button.highlight:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -3, 2)
 				button.name:SetText(name)
-				button.name:SetFont(C["media"].font, 11, "THINOUTLINE")
+				button.name:SetFont(C['media']['font'], 11, "THINOUTLINE")
 				button.name:SetPoint("LEFT", 22, 0)
 			else
 				button.categoryLeft:Hide()
@@ -85,7 +85,7 @@ function FlightPointsTaxiChoiceContainer_Update()
 				button.name:SetText(name)
 				button.name:SetPoint("LEFT", 11, 0)
 				button.flightpath = flightpathid
-				button.name:SetFont(C["media"].font, 11, "THINOUTLINE")
+				button.name:SetFont(C['media']['font'], 11, "THINOUTLINE")
 			end
 			button.isHeader = isHeader
 			button.isExpanded = isExpanded

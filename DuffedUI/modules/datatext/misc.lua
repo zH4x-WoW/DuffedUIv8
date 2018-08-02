@@ -1,40 +1,36 @@
 local D, C, L = unpack(select(2, ...))
 
---------------------------------------------------------------------
 -- Honor
---------------------------------------------------------------------
-if C["datatext"].honor and C["datatext"].honor > 0 then
-	local Stat = CreateFrame("Frame", "DuffedUIStatHonor")
+if C['datatext']['honor'] and C['datatext']['honor'] > 0 then
+	local Stat = CreateFrame('Frame', 'DuffedUIStatHonor')
 
-	local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
-	local Text  = Stat:CreateFontString("DuffedUIStatHonorText", "LOW")
+	local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
+	local Text  = Stat:CreateFontString('DuffedUIStatHonorText', 'LOW')
 	Text:SetFont(f, fs, ff)
-	D.DataTextPosition(C["datatext"].honor, Text)
+	D['DataTextPosition'](C['datatext']['honor'], Text)
 
 	local function OnEvent(self, event)
 		local _, amount, _ = GetCurrencyInfo(392)
-		Text:SetText("Honor: "..D.PanelColor..amount)
+		Text:SetText('Honor: '..D['PanelColor']..amount)
 	end
 
-	Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
-	Stat:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
-	Stat:SetScript("OnEvent", OnEvent)
+	Stat:RegisterEvent('PLAYER_ENTERING_WORLD')
+	Stat:RegisterEvent('CURRENCY_DISPLAY_UPDATE')
+	Stat:SetScript('OnEvent', OnEvent)
 end
 
---------------------------------------------------------------------
 -- Honorable Kills
---------------------------------------------------------------------
-if C["datatext"].honorablekills and C["datatext"].honorablekills > 0 then
-	local Stat = CreateFrame("Frame", "DuffedUIStatHK")
+if C['datatext']['honorablekills'] and C['datatext']['honorablekills'] > 0 then
+	local Stat = CreateFrame('Frame', 'DuffedUIStatHK')
 
-	local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
-	local Text  = Stat:CreateFontString("DuffedUIStatHKText", "LOW")
+	local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
+	local Text  = Stat:CreateFontString('DuffedUIStatHKText', 'LOW')
 	Text:SetFont(f, fs, ff)
-	D.DataTextPosition(C["datatext"].honorablekills, Text)
+	D['DataTextPosition'](C['datatext']['honorablekills'], Text)
 
-	local function OnEvent(self, event) Text:SetText("Kills: "..D.PanelColor..GetPVPLifetimeStats()) end
+	local function OnEvent(self, event) Text:SetText('Kills: '..D['PanelColor']..GetPVPLifetimeStats()) end
 
-	Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
-	Stat:RegisterEvent("PLAYER_PVP_KILLS_CHANGED")
-	Stat:SetScript("OnEvent", OnEvent)
+	Stat:RegisterEvent('PLAYER_ENTERING_WORLD')
+	Stat:RegisterEvent('PLAYER_PVP_KILLS_CHANGED')
+	Stat:SetScript('OnEvent', OnEvent)
 end

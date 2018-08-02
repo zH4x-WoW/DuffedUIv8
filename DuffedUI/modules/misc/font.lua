@@ -13,9 +13,9 @@ DuffedUIFonts:RegisterEvent("ADDON_LOADED")
 DuffedUIFonts:SetScript("OnEvent", function(self, event, addon)
 	if addon ~= "DuffedUI" then return end
 
-	local NORMAL = C["media"].font
-	local COMBAT = C["media"].font
-	local NUMBER = C["media"].font
+	local NORMAL = C['media']['font']
+	local COMBAT = C['media']['font']
+	local NUMBER = C['media']['font']
 
 	if (D.ScreenWidth > 3840) then
 		InterfaceOptionsCombatTextPanelTargetDamage:Hide()

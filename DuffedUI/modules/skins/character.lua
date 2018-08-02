@@ -132,7 +132,7 @@ local function LoadSkin()
 			object.BgBottom:SetTexture(nil)
 			object.BgMiddle:SetTexture(nil)
 			object.Check:SetTexture(nil)
-			object.text:SetFont(C['media'].font, 11)
+			object.text:SetFont(C['media']['font'], 11)
 			object.text.SetFont = D.Dummy
 		end
 	end)

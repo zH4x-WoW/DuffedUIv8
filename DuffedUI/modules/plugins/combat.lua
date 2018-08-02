@@ -27,11 +27,11 @@ flowingframe:SetPoint("CENTER",UIParent,0, 170) -- where we want the textframe
 flowingframe:SetHeight(64)
  
 local flowingtext = flowingframe:CreateFontString(nil,"OVERLAY")
-flowingtext:SetFont(C["media"].font, 26, "OUTLINE")
+flowingtext:SetFont(C['media']['font'], 26, "OUTLINE")
 flowingtext:SetShadowOffset(1,-1)
  
 local rightchar = flowingframe:CreateFontString(nil,"OVERLAY")
-rightchar:SetFont(C["media"].font, 64, "OUTLINE")
+rightchar:SetFont(C['media']['font'], 64, "OUTLINE")
 rightchar:SetShadowOffset(1,-1)
 rightchar:SetJustifyH("LEFT") -- left or right
  

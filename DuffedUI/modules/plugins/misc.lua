@@ -313,7 +313,7 @@ if C["duffed"].dispelannouncement == true then
 	local f = CreateFrame("MessageFrame", "dDispelFrame", UIParent)
 	f:SetPoint("TOP", 0, -220)
 	f:SetSize(200, 100)
-	f:SetFont(C["media"].font, 11)
+	f:SetFont(C['media']['font'], 11)
 	f:SetShadowOffset(1, -1)
 	f:SetShadowColor(0, 0, 0)
 	f:SetTimeVisible(2)

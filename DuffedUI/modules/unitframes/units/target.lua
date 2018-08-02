@@ -8,7 +8,7 @@ ns._Objects = {}
 ns._Headers = {}
 
 local texture = C['media'].normTex
-local f, fs, ff = C['media'].font, 11, 'THINOUTLINE'
+local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local layout = C['unitframes']['layout']
 local move = D['move']
 local backdrop = {

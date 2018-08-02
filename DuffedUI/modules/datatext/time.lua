@@ -1,26 +1,26 @@
 local D, C, L = unpack(select(2, ...))
-if not C['datatext'].wowtime and C['datatext'].wowtime == 0 then return end
+if not C['datatext']['wowtime'] or C['datatext']['wowtime'] == 0 then return end
 
 local Stat = CreateFrame('Frame')
 Stat:EnableMouse(true)
 Stat:SetFrameStrata('BACKGROUND')
 Stat:SetFrameLevel(3)
 
-local f, fs, ff = C['media'].font, 11, 'THINOUTLINE'
+local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local Text  = DuffedUIInfoLeft:CreateFontString(nil, 'OVERLAY')
 Text:SetFont(f, fs, ff)
-D.DataTextPosition(C['datatext'].wowtime, Text)
+D['DataTextPosition'](C['datatext']['wowtime'], Text)
 
 local int = 1
 local function Update(self, t)
 	local pendingCalendarInvites = C_Calendar.GetNumPendingInvites()
 	int = int - t
 	if int < 0 then
-		if C['datatext'].localtime == true then
+		if C['datatext']['localtime'] then
 			Hr24 = tonumber(date('%H'))
 			Hr = tonumber(date('%I'))
 			Min = date('%M')
-			if C['datatext'].time24 == true then
+			if C['datatext']['time24'] then
 				if pendingCalendarInvites > 0 then Text:SetText('|cffFF0000'..Hr24..':'..Min) else Text:SetText(Hr24..':'..Min)
 			end
 		else
@@ -33,7 +33,7 @@ local function Update(self, t)
 	else
 		local Hr, Min = GetGameTime()
 		if Min < 10 then Min = '0'..Min end
-		if C['datatext'].time24 == true then
+		if C['datatext']['time24'] then
 			if pendingCalendarInvites > 0 then Text:SetText('|cffFF0000'..Hr..':'..Min..' |cffffffff|r') else Text:SetText(Hr..':'..Min..' |cffffffff|r') end
 		else
 			if Hr >= 12 then
@@ -51,13 +51,17 @@ local function Update(self, t)
 end
 
 Stat:SetScript('OnEnter', function(self)
-	if not C['datatext'].ShowInCombat then
+	if not C['datatext']['ShowInCombat'] then
 		if InCombatLockdown() then return end
 	end
 
-	local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
+	local anchor, panel, xoff, yoff = D['DataTextTooltipAnchor'](Text)
 	OnLoad = function(self) RequestRaidInfo() end
-	if panel == DuffedUIMinimapStatsLeft or panel == DuffedUIMinimapStatsRight then GameTooltip:SetOwner(panel, anchor, xoff, yoff) else GameTooltip:SetOwner(self, anchor, xoff, yoff) end
+	if panel == DuffedUIMinimapStatsLeft or panel == DuffedUIMinimapStatsRight then
+		GameTooltip:SetOwner(panel, anchor, xoff, yoff)
+	else
+		GameTooltip:SetOwner(self, anchor, xoff, yoff)
+	end
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
 	local pvp = GetNumWorldPVPAreas()
@@ -80,10 +84,10 @@ Stat:SetScript('OnEnter', function(self)
 	end
 	GameTooltip:AddLine(' ')
 
-	if C['datatext'].localtime == true then
+	if C['datatext']['localtime'] then
 		local Hr, Min = GetGameTime()
 		if Min < 10 then Min = '0'..Min end
-		if C['datatext'].time24 == true then
+		if C['datatext']['time24'] then
 			GameTooltip:AddDoubleLine(L['dt']['server_time'], Hr .. ':' .. Min)
 		else
 			if Hr >= 12 then
@@ -99,10 +103,14 @@ Stat:SetScript('OnEnter', function(self)
 		Hr24 = tonumber(date('%H'))
 		Hr = tonumber(date('%I'))
 		Min = date('%M')
-		if C['datatext'].time24 == true then
+		if C['datatext']['time24'] then
 			GameTooltip:AddDoubleLine(L['dt']['local_time'], Hr24 .. ':' .. Min)
 		else
-			if Hr24 >= 12 then GameTooltip:AddDoubleLine(L['dt']['local_time'], Hr .. ':' .. Min..' PM') else GameTooltip:AddDoubleLine(L['dt']['local_time'], Hr .. ':' .. Min..' AM') end
+			if Hr24 >= 12 then
+				GameTooltip:AddDoubleLine(L['dt']['local_time'], Hr .. ':' .. Min..' PM')
+			else
+				GameTooltip:AddDoubleLine(L['dt']['local_time'], Hr .. ':' .. Min..' AM')
+			end
 		end
 	end  
 

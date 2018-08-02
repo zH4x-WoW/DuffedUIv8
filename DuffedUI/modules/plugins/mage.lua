@@ -96,7 +96,7 @@ for i, spell in pairs(spells) do
 	b:SetAttribute("spell2", GetSpellInfo(spell[2]))
 	
 	b:HookScript("OnEnter", function(self)
-		local r,g,b = unpack(C["media"].datatextcolor1)
+		local r,g,b = unpack(C['media']['datatextcolor1'])
 		self:SetBackdropColor(r,g,b, 0.15)
 		self:SetBackdropBorderColor(r,g,b)
 	end)
@@ -114,7 +114,7 @@ b:SetScript("OnClick", function(self)
 	if DuffedUITeleportMenu:IsShown() then
 		DuffedUITeleportMenu:Hide()
 	else
-		Title:SetText(D.PanelColor.."Portal / Teleportlist")
+		Title:SetText(D['PanelColor'].."Portal / Teleportlist")
 		DuffedUITeleportMenu:Show()
 	end
 end)

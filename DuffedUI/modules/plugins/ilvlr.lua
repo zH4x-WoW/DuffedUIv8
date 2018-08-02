@@ -30,7 +30,7 @@ local function CreateButtonsText(frame)
 	for _, slot in pairs(slots) do
 		local button = _G[frame .. slot]
 		button.text = button:CreateFontString(nil, "ARTWORK")
-		button.text:SetFont(C["media"].font, 11, "THINOUTLINE")
+		button.text:SetFont(C['media']['font'], 11, "THINOUTLINE")
 		if slot == "HeadSlot" or slot == "NeckSlot" or slot == "ShoulderSlot" or slot == "BackSlot" or slot == "ChestSlot" or slot == "WristSlot" or slot == "ShirtSlot" or slot == "TabardSlot" then
 			button.text:SetPoint("CENTER", button, "CENTER", 42, 0)
 		elseif slot == "HandsSlot" or slot == "WaistSlot" or slot == "LegsSlot" or slot == "FeetSlot" or slot == "Finger0Slot" or slot == "Finger1Slot" or slot == "Trinket0Slot" or slot == "Trinket1Slot" then

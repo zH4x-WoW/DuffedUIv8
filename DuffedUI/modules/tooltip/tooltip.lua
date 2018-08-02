@@ -71,7 +71,7 @@ function DuffedUITooltips:GetColor(unit)
 		local Color = Colors.reaction[Reaction]
 
 		if not Color then return end
-		local Hex = D.RGBToHex(unpack(Color))
+		local Hex = D['RGBoHex'](unpack(Color))
 		return Hex, Color.r, Color.g, Color.b
 	end
 end
@@ -247,11 +247,11 @@ function DuffedUITooltips:OnValueChanged(value)
 		local position = DuffedUITooltipMover:GetPoint()
 		if position:match("TOP") then self.text:Point("CENTER", GameTooltipStatusBar, 0, -6) else self.text:Point("CENTER", GameTooltipStatusBar, 0, 6) end
 
-		self.text:SetFont(C["media"].font, 12, "THINOUTLINE")
+		self.text:SetFont(C['media']['font'], 12, "THINOUTLINE")
 		self.text:Show()
 		if unit then
 			min, max = UnitHealth(unit), UnitHealthMax(unit)
-			local hp = D.ShortValue(min) .. " / " .. D.ShortValue(max)
+			local hp = D['ShortValue'](min) .. " / " .. D['ShortValue'](max)
 			if UnitIsGhost(unit) then
 				self.text:SetText(L["uf"]["ghost"])
 			elseif min == 0 or UnitIsDead(unit) or UnitIsGhost(unit) then
@@ -264,7 +264,7 @@ function DuffedUITooltips:OnValueChanged(value)
 		if unit then
 			min, max = UnitHealth(unit), UnitHealthMax(unit)
 			self.text:Show()
-			local hp = D.ShortValue(min) .. " / " .. D.ShortValue(max)
+			local hp = D['ShortValue'](min) .. " / " .. D['ShortValue'](max)
 			if UnitIsGhost(unit) then
 				self.text:SetText(L["uf"]["ghost"])
 			elseif min == 0 or UnitIsDead(unit) or UnitIsGhost(unit) then
@@ -345,7 +345,7 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 		HealthBar:CreateBackdrop()
 		HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
 		HealthBar.Text = HealthBar:CreateFontString(nil, "OVERLAY")
-		HealthBar.Text:SetFont(C["media"].font, 11, "THINOULINE")
+		HealthBar.Text:SetFont(C['media']['font'], 11, "THINOULINE")
 		HealthBar.Text:SetShadowColor(0, 0, 0)
 		HealthBar.Text:SetShadowOffset(1.25, -1.25)
 		HealthBar.Text:Point("CENTER", HealthBar, 0, 6)

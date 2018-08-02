@@ -24,7 +24,7 @@ local PLAYER_DEBUFF_COLOR = nil
 local TARGET_BAR_COLOR = C["classtimer"]["targetbuffcolor"]
 local TARGET_DEBUFF_COLOR = C["classtimer"]["targetdebuffcolor"]
 local TRINKET_BAR_COLOR = C["classtimer"]["trinketcolor"]
-local f, fs, ff = C["media"].font, 11, "THINOUTLINE"
+local f, fs, ff = C['media']['font'], 11, "THINOUTLINE"
 local layout = C["unitframes"]["layout"]
 local move = D["move"]
 
@@ -1105,13 +1105,13 @@ D["ClassTimer"] = function(self)
 					self.bar:SetValue(remaining)
 					local timeText = ""
 					if (remaining >= 3600) then
-						timeText = tostring(math.floor(remaining / 3600)) .. D.PanelColor .. "h"
+						timeText = tostring(math.floor(remaining / 3600)) .. D['PanelColor'] .. "h"
 					elseif (remaining >= 60) then
-						timeText = tostring(math.floor(remaining / 60)) .. D.PanelColor .. "m"
+						timeText = tostring(math.floor(remaining / 60)) .. D['PanelColor'] .. "m"
 					elseif (remaining > TENTHS_TRESHOLD) then
-						timeText = tostring(math.floor(remaining)) .. D.PanelColor .. "s"
+						timeText = tostring(math.floor(remaining)) .. D['PanelColor'] .. "s"
 					elseif (remaining > 0) then
-						timeText = tostring(math.floor(remaining * 10) / 10) .. D.PanelColor .. "s"
+						timeText = tostring(math.floor(remaining * 10) / 10) .. D['PanelColor'] .. "s"
 					end
 					self.time:SetText(timeText)
 					local barWidth = self.bar:GetWidth()

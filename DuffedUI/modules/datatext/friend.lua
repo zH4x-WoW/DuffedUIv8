@@ -1,13 +1,11 @@
 local D, C, L = unpack(select(2, ...))
 
---------------------------------------------------------------------
 -- FRIEND
---------------------------------------------------------------------
 
-if not C['datatext'].friends or C['datatext'].friends == 0 then return end
+if not C['datatext']['friends'] or C['datatext']['friends'] == 0 then return end
 
 -- create a popup
-D.CreatePopup['DUFFEDUI_SET_BN_BROADCAST'] = {
+D['CreatePopup']['DUFFEDUI_SET_BN_BROADCAST'] = {
 	question = BN_BROADCAST_TOOLTIP,
 	answer1 = ACCEPT,
 	answer2 = CANCEL,
@@ -19,15 +17,15 @@ local Stat = CreateFrame('Frame', 'DuffedUIStatFriends')
 Stat:EnableMouse(true)
 Stat:SetFrameStrata('BACKGROUND')
 Stat:SetFrameLevel(3)
-Stat.Option = C['datatext'].friends
-Stat.Color1 = D.RGBToHex(unpack(C['media']['datatextcolor1']))
-Stat.Color2 = D.RGBToHex(unpack(C['media']['datatextcolor2']))
+Stat.Option = C['datatext']['friends']
+Stat.Color1 = D['RGBoHex'](unpack(C['media']['datatextcolor1']))
+Stat.Color2 = D['RGBoHex'](unpack(C['media']['datatextcolor2']))
 
 local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local Text  = Stat:CreateFontString('DuffedUIStatFriendsText', 'OVERLAY')
 Text:SetFont(f, fs, ff)
-Text:SetShadowOffset(D.mult, -D.mult)
-D.DataTextPosition(C['datatext'].friends, Text)
+Text:SetShadowOffset(D['mult'], -D['mult'])
+D['DataTextPosition'](C['datatext']['friends'], Text)
 
 local menuFrame = CreateFrame('Frame', 'DuffedUIFriendRightClickMenu', UIParent, 'UIDropDownMenuTemplate')
 local menuList = {
@@ -199,8 +197,8 @@ Stat:SetScript('OnMouseUp', function(self, btn)
 				classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[friendTable[i][3]], GetQuestDifficultyColor(friendTable[i][2])
 				if classc == nil then classc = GetQuestDifficultyColor(friendTable[i][2]) end
 
-				menuList[2].menuList[menuCountInvites] = {text = format(levelNameString,levelc.r*255,levelc.g*255,levelc.b*255,friendTable[i][2],classc.r*255,classc.g*255,classc.b*255,friendTable[i][1]), arg1 = friendTable[i][1],notCheckable=true, func = inviteClick}
-				menuList[3].menuList[menuCountWhispers] = {text = format(levelNameString,levelc.r*255,levelc.g*255,levelc.b*255,friendTable[i][2],classc.r*255,classc.g*255,classc.b*255,friendTable[i][1]), arg1 = friendTable[i][1],notCheckable=true, func = whisperClick}
+				menuList[2].menuList[menuCountInvites] = {text = format(levelNameString, levelc.r * 255, levelc.g * 255, levelc.b * 255, friendTable[i][2], classc.r * 255, classc.g * 255, classc.b * 255, friendTable[i][1]), arg1 = friendTable[i][1], notCheckable=true, func = inviteClick}
+				menuList[3].menuList[menuCountWhispers] = {text = format(levelNameString, levelc.r * 255, levelc.g * 255, levelc.b * 255, friendTable[i][2], classc.r * 255, classc.g * 255, classc.b * 255, friendTable[i][1]), arg1 = friendTable[i][1], notCheckable=true, func = whisperClick}
 			end
 		end
 	end
@@ -219,7 +217,7 @@ Stat:SetScript('OnMouseUp', function(self, btn)
 
 					if UnitInParty(BNTable[i][4]) or UnitInRaid(BNTable[i][4]) then grouped = 1 else grouped = 2 end
 					menuCountInvites = menuCountInvites + 1
-					menuList[2].menuList[menuCountInvites] = {text = format(levelNameString,levelc.r*255,levelc.g*255,levelc.b*255,BNTable[i][16],classc.r*255,classc.g*255,classc.b*255,BNTable[i][4]), arg1 = BNTable[i][5],notCheckable=true, func = inviteClick}
+					menuList[2].menuList[menuCountInvites] = {text = format(levelNameString, levelc.r * 255, levelc.g * 255, levelc.b * 255, BNTable[i][16], classc.r * 255, classc.g * 255, classc.b * 255, BNTable[i][4]), arg1 = BNTable[i][5], notCheckable=true, func = inviteClick}
 				end
 			end
 		end
@@ -264,10 +262,10 @@ Stat:SetScript('OnEnter', function(self)
 	local onWoW, onHS, onD3, onHotS, onOW, onClient, onS2 = 0, 0, 0, 0, 0, 0, 0
 
 	if totalonline > 0 then
-		local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
+		local anchor, panel, xoff, yoff = D['DataTextTooltipAnchor'](Text)
 		GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 		GameTooltip:ClearLines()
-		GameTooltip:AddDoubleLine(FRIENDS_LIST .. ':', format(totalOnlineString, totalonline, totalfriends),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
+		GameTooltip:AddDoubleLine(FRIENDS_LIST .. ':', format(totalOnlineString, totalonline, totalfriends), tthead.r, tthead.g, tthead.b, tthead.r, tthead.g, tthead.b)
 
 		if totalOnline > 0 then
 			GameTooltip:AddLine(' ')
@@ -277,10 +275,10 @@ Stat:SetScript('OnEnter', function(self)
 					if GetRealZoneText() == friendTable[i][4] then zonec = activezone else zonec = inactivezone end
 					classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[friendTable[i][3]], GetQuestDifficultyColor(friendTable[i][2])
 					
-					if not classc then classc = {r=1, g=1, b=1} end
+					if not classc then classc = {r = 1, g = 1, b = 1} end
 					
 					if UnitInParty(friendTable[i][1]) or UnitInRaid(friendTable[i][1]) then grouped = 1 else grouped = 2 end
-					GameTooltip:AddDoubleLine(format(levelNameClassString,levelc.r*255,levelc.g*255,levelc.b*255,friendTable[i][2],friendTable[i][1],groupedTable[grouped],' '..friendTable[i][6]),friendTable[i][4],classc.r,classc.g,classc.b,zonec.r,zonec.g,zonec.b)
+					GameTooltip:AddDoubleLine(format(levelNameClassString, levelc.r * 255, levelc.g * 255, levelc.b * 255, friendTable[i][2], friendTable[i][1], groupedTable[grouped], ' '..friendTable[i][6]),friendTable[i][4], classc.r, classc.g, classc.b, zonec.r, zonec.g, zonec.b)
 				end
 			end
 		end
@@ -302,7 +300,7 @@ Stat:SetScript('OnEnter', function(self)
 						end
 						
 						if UnitInParty(BNTable[i][4]) or UnitInRaid(BNTable[i][4]) then grouped = 1 else grouped = 2 end
-						GameTooltip:AddDoubleLine(format(clientLevelNameString, BNTable[i][6],levelc.r*255,levelc.g*255,levelc.b*255,BNTable[i][16],classc.r*255,classc.g*255,classc.b*255,BNTable[i][4],groupedTable[grouped], 255, 0, 0, statusTable[status]),BNTable[i][2],238,238,238,238,238,238)
+						GameTooltip:AddDoubleLine(format(clientLevelNameString, BNTable[i][6], levelc.r * 255, levelc.g * 255, levelc.b * 255, BNTable[i][16], classc.r * 255, classc.g * 255, classc.b * 255, BNTable[i][4], groupedTable[grouped], 255, 0, 0, statusTable[status]),BNTable[i][2], 238, 238, 238, 238, 238, 238)
 						if IsShiftKeyDown() then
 							if GetRealZoneText() == BNTable[i][15] then zonec = activezone else zonec = inactivezone end
 							if GetRealmName() == BNTable[i][11] then realmc = activezone else realmc = inactivezone end
@@ -325,7 +323,7 @@ Stat:SetScript('OnEnter', function(self)
                             GameTooltip:AddDoubleLine('|cffD49E43'..Client..'|r', '')
                         end
 
-                        GameTooltip:AddDoubleLine('|cffeeeeee'..BNTable[i][3]..'|r', isBattleTag == false and BNTable[i][2],238,238,238,238,238,238)
+                        GameTooltip:AddDoubleLine('|cffeeeeee'..BNTable[i][3]..'|r', isBattleTag == false and BNTable[i][2], 238, 238, 238, 238, 238, 238)
                     end
                 end
             end
@@ -343,7 +341,7 @@ Stat:SetScript('OnEnter', function(self)
                             GameTooltip:AddDoubleLine('|cffCC2200'..Client..'|r', '')
                         end
 
-                        GameTooltip:AddDoubleLine('|cffeeeeee'..BNTable[i][3]..'|r', isBattleTag == false and BNTable[i][2],238,238,238,238,238,238)
+                        GameTooltip:AddDoubleLine('|cffeeeeee'..BNTable[i][3]..'|r', isBattleTag == false and BNTable[i][2], 238, 238, 238, 238, 238, 238)
                     end
                 end
             end
@@ -361,7 +359,7 @@ Stat:SetScript('OnEnter', function(self)
                             GameTooltip:AddDoubleLine('|cffACE5EE'..Client..'|r', '')
                         end
 
-                        GameTooltip:AddDoubleLine('|cffeeeeee'..BNTable[i][3]..'|r', isBattleTag == false and BNTable[i][2],238,238,238,238,238,238)
+                        GameTooltip:AddDoubleLine('|cffeeeeee'..BNTable[i][3]..'|r', isBattleTag == false and BNTable[i][2], 238, 238, 238, 238, 238, 238)
                     end
                 end
             end
@@ -379,7 +377,7 @@ Stat:SetScript('OnEnter', function(self)
                             GameTooltip:AddDoubleLine('|cffACE5EE'..Client..'|r', '')
                         end
 
-                        GameTooltip:AddDoubleLine('|cffeeeeee'..BNTable[i][3]..'|r', isBattleTag == false and BNTable[i][2],238,238,238,238,238,238)
+                        GameTooltip:AddDoubleLine('|cffeeeeee'..BNTable[i][3]..'|r', isBattleTag == false and BNTable[i][2], 238, 238, 238, 238, 238, 238)
                     end
                 end
             end
@@ -397,7 +395,7 @@ Stat:SetScript('OnEnter', function(self)
                             GameTooltip:AddDoubleLine('|cffACE5EE'..Client..'|r', '')
                         end
 
-                        GameTooltip:AddDoubleLine('|cffeeeeee'..BNTable[i][3]..'|r', isBattleTag == false and BNTable[i][2],238,238,238,238,238,238)
+                        GameTooltip:AddDoubleLine('|cffeeeeee'..BNTable[i][3]..'|r', isBattleTag == false and BNTable[i][2], 238, 238, 238, 238, 238, 238)
                     end
                 end
             end
@@ -415,7 +413,7 @@ Stat:SetScript('OnEnter', function(self)
                             GameTooltip:AddDoubleLine('|cff00B4FF'..Client..'|r', '')
                         end
 
-                        GameTooltip:AddDoubleLine('|cffeeeeee'..BNTable[i][3]..'|r', isBattleTag == false and BNTable[i][2],238,238,238,238,238,238)
+                        GameTooltip:AddDoubleLine('|cffeeeeee'..BNTable[i][3]..'|r', isBattleTag == false and BNTable[i][2], 238, 238, 238, 238, 238, 238)
                     end
                 end
             end

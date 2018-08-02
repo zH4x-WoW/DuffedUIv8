@@ -79,7 +79,7 @@ local function LoadSkin()
 	ArcheologyDigsiteProgressBar.FillBar:SetStatusBarColor(.7, .2, 0)
 	ArcheologyDigsiteProgressBar.FillBar:SetFrameLevel(ArchaeologyFrameArtifactPageSolveFrameStatusBar:GetFrameLevel() + 2)
 	ArcheologyDigsiteProgressBar.FillBar:CreateBackdrop("Transparent")
-	ArcheologyDigsiteProgressBar.BarTitle:SetFont(C["media"].font, 11, "THINOUTLINE")
+	ArcheologyDigsiteProgressBar.BarTitle:SetFont(C['media']['font'], 11, "THINOUTLINE")
 	ArcheologyDigsiteProgressBar:ClearAllPoints()
 	ArcheologyDigsiteProgressBar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 200)
 end

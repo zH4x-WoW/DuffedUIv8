@@ -1,21 +1,20 @@
---------------------------------------------------------------------
--- GUILD ROSTER
---------------------------------------------------------------------
 local D, C, L = unpack(select(2, ...)) 
 
-if not C['datatext'].guild or C['datatext'].guild == 0 then return end
+-- GUILD ROSTER
+
+if not C['datatext']['guild'] or C['datatext']['guild'] == 0 then return end
 
 local Stat = CreateFrame('Frame', 'DuffedUIStatGuild')
 Stat:EnableMouse(true)
 Stat:SetFrameStrata('BACKGROUND')
 Stat:SetFrameLevel(3)
-Stat.Option = C['datatext'].guild
+Stat.Option = C['datatext']['guild']
 Stat.update = false
-Stat.Color1 = D.RGBToHex(unpack(C['media']['datatextcolor1']))
-Stat.Color2 = D.RGBToHex(unpack(C['media']['datatextcolor2']))
+Stat.Color1 = D['RGBoHex'](unpack(C['media']['datatextcolor1']))
+Stat.Color2 = D['RGBoHex'](unpack(C['media']['datatextcolor2']))
 
-local tthead, ttsubh, ttoff = {r=0.4, g=0.78, b=1}, {r=0.75, g=0.9, b=1}, {r=.3,g=1,b=.3}
-local activezone, inactivezone = {r=0.3, g=1.0, b=0.3}, {r=0.65, g=0.65, b=0.65}
+local tthead, ttsubh, ttoff = {r = .4, g = .78, b = 1}, {r = .75, g = .9, b = 1}, {r = .3, g = 1, b = .3}
+local activezone, inactivezone = {r = .3, g = .0, b = .3}, {r = .65, g = .65, b = .65}
 local displayString = string.join('', Stat.Color1..'%s: |r', Stat.Color2, '%d|r')
 local guildInfoString = '%s [%d]'
 local guildInfoString2 = '%s: %d/%d'
@@ -23,8 +22,8 @@ local guildMotDString = '  %s |cffaaaaaa- |cffffffff%s'
 local levelNameString = '|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r %s'
 local levelNameStatusString = '|cff%02x%02x%02x%d|r %s %s'
 local nameRankString = '%s |cff999999-|cffffffff %s'
-local noteString = "  '%s'"
-local officerNoteString = "  o: '%s'"
+local noteString = '  '%s''
+local officerNoteString = '  o: '%s''
 
 local guildTable, guildXP, guildMotD = {}, {}, ''
 local totalOnline = 0
@@ -32,7 +31,7 @@ local totalOnline = 0
 local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local Text = Stat:CreateFontString('DuffedUIStatGuildText', 'OVERLAY')
 Text:SetFont(f, fs, ff)
-D.DataTextPosition(C['datatext']['guild'], Text)
+D['DataTextPosition'](C['datatext']['guild'], Text)
 
 local function BuildGuildTable()
 	totalOnline = 0
@@ -126,7 +125,7 @@ Stat:SetScript('OnMouseUp', function(self, btn)
 	menuList[3].menuList = {}
 
 	for i = 1, #guildTable do
-		if (guildTable[i][7] and guildTable[i][1] ~= D.MyName) then
+		if (guildTable[i][7] and guildTable[i][1] ~= D['MyName']) then
 			local classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[guildTable[i][9]], GetQuestDifficultyColor(guildTable[i][3])
 
 			if UnitInParty(guildTable[i][1]) or UnitInRaid(guildTable[i][1]) then
@@ -135,18 +134,18 @@ Stat:SetScript('OnMouseUp', function(self, btn)
 				grouped = ''
 				if not guildTable[i][10] then
 					menuCountInvites = menuCountInvites + 1
-					menuList[2].menuList[menuCountInvites] = {text = string.format(levelNameString, levelc.r*255,levelc.g*255,levelc.b*255, guildTable[i][3], classc.r*255,classc.g*255,classc.b*255, guildTable[i][1], ''), arg1 = guildTable[i][1],notCheckable=true, func = inviteClick}
+					menuList[2].menuList[menuCountInvites] = {text = string.format(levelNameString, levelc.r * 255, levelc.g * 255, levelc.b * 255, guildTable[i][3], classc.r * 255, classc.g * 255, classc.b * 255, guildTable[i][1], ''), arg1 = guildTable[i][1], notCheckable=true, func = inviteClick}
 				end
 			end
 			menuCountWhispers = menuCountWhispers + 1
-			menuList[3].menuList[menuCountWhispers] = {text = string.format(levelNameString, levelc.r*255,levelc.g*255,levelc.b*255, guildTable[i][3], classc.r*255,classc.g*255,classc.b*255, guildTable[i][1], grouped), arg1 = guildTable[i][1],notCheckable=true, func = whisperClick}
+			menuList[3].menuList[menuCountWhispers] = {text = string.format(levelNameString, levelc.r * 255, levelc.g * 255, levelc.b * 255, guildTable[i][3], classc.r * 255, classc.g * 255, classc.b * 255, guildTable[i][1], grouped), arg1 = guildTable[i][1], notCheckable=true, func = whisperClick}
 		end
 	end
 	Lib_EasyMenu(menuList, menuFrame, 'cursor', 0, 0, 'MENU', 2)
 end)
 
 Stat:SetScript('OnEnter', function(self)
-	if not C['datatext'].ShowInCombat then
+	if not C['datatext']['ShowInCombat'] then
 		if InCombatLockdown() then return end
 	end
 	if not IsInGuild() then return end
@@ -160,13 +159,17 @@ Stat:SetScript('OnEnter', function(self)
 	local online = totalOnline
 	local GuildInfo, GuildRank = GetGuildInfo('player')
 
-	local anchor, panel, xoff, yoff = D.DataTextTooltipAnchor(Text)
+	local anchor, panel, xoff, yoff = D['DataTextTooltipAnchor'](Text)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
-	if GuildInfo then GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo), string.format(guildInfoString2, GUILD, online, #guildTable), tthead.r, tthead.g, tthead.b, tthead.r, tthead.g, tthead.b) end
-	if guildMotD ~= '' then GameTooltip:AddLine(' ') GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
+	if GuildInfo then
+		GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo), string.format(guildInfoString2, GUILD, online, #guildTable), tthead.r, tthead.g, tthead.b, tthead.r, tthead.g, tthead.b)
+	end
+	if guildMotD ~= '' then
+		GameTooltip:AddLine(' ') GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1)
+	end
 
-	local col = D.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
+	local col = D['RGBoHex'](ttsubh.r, ttsubh.g, ttsubh.b)
 	GameTooltip:AddLine' '
 
 	local _, _, standingID, barMin, barMax, barValue = GetGuildFactionInfo()
@@ -174,7 +177,7 @@ Stat:SetScript('OnEnter', function(self)
 		barMax = barMax - barMin
 		barValue = barValue - barMin
 		barMin = 0
-		GameTooltip:AddLine(string.format('%s:|r |cFFFFFFFF%s/%s (%s%%)',col..COMBAT_FACTION_CHANGE, D.ShortValue(barValue), D.ShortValue(barMax), math.ceil((barValue / barMax) * 100)))
+		GameTooltip:AddLine(string.format('%s:|r |cFFFFFFFF%s/%s (%s%%)',col..COMBAT_FACTION_CHANGE, D['ShortValue'](barValue), D['ShortValue'](barMax), math.ceil((barValue / barMax) * 100)))
 	end
 
 	if online > 1 then
@@ -186,7 +189,7 @@ Stat:SetScript('OnEnter', function(self)
 			end
 
 			name, rank, level, zone, note, officernote, connected, status, class, isMobile = unpack(guildTable[i])
-			if connected and name ~= D.MyName then
+			if connected and name ~= D['MyName'] then
 				if GetRealZoneText() == zone then zonec = activezone else zonec = inactivezone end
 				classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class], GetQuestDifficultyColor(level)
 

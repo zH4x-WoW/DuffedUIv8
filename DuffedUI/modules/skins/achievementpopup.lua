@@ -25,9 +25,9 @@ local function LoadSkin()
 
 				-- Text
 				_G["AchievementAlertFrame" .. i .."Name"]:SetTextColor(1, .8, 0)
-				_G["AchievementAlertFrame" .. i .."Name"]:SetFont(C["media"].font, 11)
+				_G["AchievementAlertFrame" .. i .."Name"]:SetFont(C['media']['font'], 11)
 				_G["AchievementAlertFrame" .. i .."Unlocked"]:SetTextColor(1, 1, 1)
-				_G["AchievementAlertFrame" .. i .."Unlocked"]:SetFont(C["media"].font, 11)
+				_G["AchievementAlertFrame" .. i .."Unlocked"]:SetFont(C['media']['font'], 11)
 
 				-- Icon
 				_G["AchievementAlertFrame" .. i .."IconTexture"]:SetTexCoord(.1, .9, .1, .9)

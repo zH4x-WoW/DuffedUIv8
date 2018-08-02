@@ -25,7 +25,7 @@ icenter:SetFrameStrata('BACKGROUND')
 move:RegisterFrame(DuffedUIInfoCenter)
 
 local m_zone_text = icenter:CreateFontString('DuffedUIZoneText', 'Overlay')
-m_zone_text:SetFont(C['media'].font, 11)
+m_zone_text:SetFont(C['media']['font'], 11)
 m_zone_text:Point('CENTER', 0, -1)
 m_zone_text:Height(11)
 m_zone_text:Width(icenter:GetWidth() - 6)

@@ -4,7 +4,7 @@ if C['cooldown'].rcdenable ~= true then return end
 local anchor = 'TOPLEFT'
 local x, y = 150, -150
 local width, height = 200, 15
-local f, fs, ff = C['media'].font, 11, 'THINOUTLINE'
+local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local texture = C['media'].normTex
 
 local show = {

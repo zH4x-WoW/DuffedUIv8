@@ -5,7 +5,7 @@ local f = CreateFrame("Frame", nil, UIParent)
 local chatbubblehook = CreateFrame("Frame", nil, UIParent)
 local total = 0
 local numKids = 0
-local noscalemult = D.mult * C["general"].uiscale
+local noscalemult = D['mult'] * C["general"].uiscale
 local bubbles = {}
 
 if (D.ScreenWidth > 3840) then
@@ -32,7 +32,7 @@ local function skinbubble(frame)
 	})
 	frame:SetBackdropColor(.1, .1, .1, .8)
 	frame:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-	frame.text:SetFont(C["media"].font, 14)
+	frame.text:SetFont(C['media']['font'], 14)
 	frame:SetClampedToScreen(false)
 	frame:SetFrameStrata("BACKGROUND")
 	

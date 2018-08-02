@@ -262,7 +262,7 @@ D['ConstructUFRaid'] = function(self)
 			RaidDebuffs.BossDebuffPriority = 5
 
 			RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, 'OVERLAY')
-			RaidDebuffs.count:SetFont(C['media'].font, 11, 'OUTLINE')
+			RaidDebuffs.count:SetFont(C['media']['font'], 11, 'OUTLINE')
 			RaidDebuffs.count:SetPoint('BOTTOMRIGHT', RaidDebuffs, 'BOTTOMRIGHT', 2, 0)
 			RaidDebuffs.count:SetTextColor(1, .9, 0)
 

@@ -248,8 +248,8 @@ D['StyleActionBarFlyout'] = function(button)
 end
 
 local ProcBackdrop = {
-	edgeFile = C['media'].blank, edgeSize = D.mult,
-	insets = {left = D.mult, right = D.mult, top = D.mult, bottom = D.mult},
+	edgeFile = C['media'].blank, edgeSize = D['mult'],
+	insets = {left = D['mult'], right = D['mult'], top = D['mult'], bottom = D['mult']},
 }
 
 local ShowOverlayGlow = function(self)

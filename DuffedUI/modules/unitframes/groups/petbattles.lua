@@ -16,7 +16,7 @@ for i, pet in pairs(pets) do
 	pet.Border2:SetAlpha(0)
 	pet.healthBarWidth = 300
 
-	pet.Name:SetFont(C["media"].font, 11, "OUTLINE")
+	pet.Name:SetFont(C['media']['font'], 11, "OUTLINE")
 
 	pet.IconBackdrop = CreateFrame("Frame", nil, pet)
 	pet.IconBackdrop:SetFrameLevel(pet:GetFrameLevel() - 1)
@@ -36,7 +36,7 @@ for i, pet in pairs(pets) do
 
 	pet.PetTypeFrame = CreateFrame("Frame", nil, pet)
 	pet.PetTypeFrame:Size(100, 23)
-	pet.PetTypeFrame:FontString("text", C["media"].font, 11, "OUTLINE")
+	pet.PetTypeFrame:FontString("text", C['media']['font'], 11, "OUTLINE")
 	pet.PetTypeFrame.text:SetText("")
 
 	-- hide original speed icon, create our after
@@ -143,7 +143,7 @@ hooksecurefunc("PetBattleAuraHolder_Update", function(self)
 			if isBuff then frame.backdrop:SetBackdropBorderColor(0, 1, 0) else frame.backdrop:SetBackdropBorderColor(1, 0, 0) end
 			if turnsRemaining > 0 then frame.Duration:SetText(turnsRemaining) end
 			
-			frame.Duration:SetFont(C["media"].font, 14, "OUTLINE")
+			frame.Duration:SetFont(C['media']['font'], 14, "OUTLINE")
 			frame.Duration:ClearAllPoints()
 			frame.Duration:SetPoint("CENTER", frame.Icon, "CENTER", 1, 0)
 		
