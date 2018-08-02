@@ -70,7 +70,7 @@ local function SetChatStyle(frame)
 	local id = frame:GetID()
 	local chat = frame:GetName()
 	local tab = _G[chat..'Tab']
-	local scroll = frame.Scrollbar
+	local scroll = frame.ScrollBar
 	local scrollBottom = frame.ScrollToBottomButton
 	local scrollTexture = _G[chat..'ThumbTexture']
 
@@ -175,9 +175,11 @@ local function SetupChat(self)
 		local name = frame:GetName()
 		SetChatStyle(frame)
 		FCFTab_UpdateAlpha(frame)
-		frame.ScrollBar:Kill()
-		frame.ScrollToBottomButton:Kill()
-		_G[name.."ThumbTexture"]:Kill()
+		if frame.ScrollBar then
+			frame.ScrollBar:Kill()
+			frame.ScrollToBottomButton:Kill()
+			_G[name.."ThumbTexture"]:Kill()
+		end
 	end
 
 	ChatTypeInfo.WHISPER.sticky = 1
