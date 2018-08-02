@@ -440,4 +440,5 @@ function AS:Blizzard_PVPUI(_, addon)
 	AS:StripTextures(PVPQueueFrame.HonorInset)
 end
 
+
 AS:RegisterSkin("Blizzard_PVPUI", AS.Blizzard_PVPUI, 'ADDON_LOADED')
