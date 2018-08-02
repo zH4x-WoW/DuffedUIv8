@@ -28,6 +28,7 @@ PA.LAB = LibStub('LibActionButton-1.0')
 PA.MyClass = select(2, UnitClass('player'))
 PA.MyName = UnitName('player')
 PA.MyRealm = GetRealmName()
+PA.Locale = GetLocale()
 PA.Noop = function() end
 PA.TexCoords = {.08, .92, .08, .92}
 PA.UIScale = UIParent:GetScale()
@@ -197,16 +198,16 @@ function PA:GetOptions()
 	PA.AceOptionsPanel.Options.args.ProjectAzilroka = PA.Options
 end
 
-function PA:UpdateProfile()
+function PA:BuildProfile()
 	local Defaults = {
 		profile = {
-			['BB'] = true,
-			['BrokerLDB'] = true,
+			['BB'] = false,
+			['BrokerLDB'] = false,
 			['DO'] = true,
 			['EFL'] = true,
 			['ES'] = true,
 			['FG'] = false,
-			['LC'] = true,
+			['LC'] = false,
 			['MF'] = true,
 			['SMB'] = true,
 			['stAM'] = true,
@@ -218,6 +219,11 @@ function PA:UpdateProfile()
 	end
 
 	PA.data = PA.ADB:New('ProjectAzilrokaDB', Defaults)
+
+	PA.db = PA.data.profile
+end
+
+function PA:SetupProfile()
 	PA.db = PA.data.profile
 end
 
@@ -225,7 +231,7 @@ function PA:ADDON_LOADED(event, addon)
 	if addon == AddOnName then
 		PA.EP = LibStub('LibElvUIPlugin-1.0', true)
 		PA.AceOptionsPanel = PA.ElvUI and _G.ElvUI[1] or PA.EC
-		PA:UpdateProfile()
+		PA:BuildProfile()
 		PA:UnregisterEvent(event)
 	end
 end
@@ -251,7 +257,7 @@ function PA:PLAYER_LOGIN()
 		tinsert(InitializeModules, 'DO')
 	end
 	if PA.db['FG'] then -- Has to be before EFL
-		tinsert(InitializeModules, 'FG')
+		--tinsert(InitializeModules, 'FG')
 	end
 	if PA.db['EFL'] then
 		tinsert(InitializeModules, 'EFL')

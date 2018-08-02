@@ -4,7 +4,7 @@ PA.SMB, _G.SquareMinimapButtons = SMB, SMB
 
 SMB.Title = '|cFF16C3F2Square|r |cFFFFFFFFMinimap Buttons|r'
 SMB.Description = 'Minimap Button Bar / Minimap Button Skinning'
-SMB.Authors = 'Azilroka    Infinitron    Sinaris    Omega    Durc'
+SMB.Authors = 'Azilroka    Whiro    Sinaris    Omega    Durc'
 
 local strsub, strlen, strfind, ceil = strsub, strlen, strfind, ceil
 local tinsert, pairs, unpack, select, tContains = tinsert, pairs, unpack, select, tContains
@@ -394,12 +394,12 @@ function SMB:GetOptions()
 		set = function(info, value) SMB.db[info[#info]] = value SMB:Update() end,
 		args = {
 			Header = {
-				order = 0,
+				order = 1,
 				type = 'header',
 				name = PA:Color(SMB.Title),
 			},
 			mbb = {
-				order = 1,
+				order = 2,
 				type = 'group',
 				name = PA.ACL['Minimap Buttons / Bar'],
 				guiInline = true,
@@ -484,6 +484,9 @@ function SMB:GetOptions()
 		},
 	}
 
+	Options.args.profiles = LibStub('AceDBOptions-3.0'):GetOptionsTable(SMB.data)
+	Options.args.profiles.order = -2
+
 	PA.Options.args.SquareMinimapButton = Options
 end
 
@@ -496,10 +499,10 @@ function SMB:BuildProfile()
 			['ButtonsPerRow'] = 12,
 			['ButtonSpacing'] = 2,
 			['HideGarrison'] = false,
-			['MoveGarrison'] = false,
-			['MoveMail'] = false,
-			['MoveTracker'] = false,
-			['MoveQueue'] = false,
+			['MoveGarrison'] = true,
+			['MoveMail'] = true,
+			['MoveTracker'] = true,
+			['MoveQueue'] = true,
 		},
 	})
 	self.data.RegisterCallback(self, 'OnProfileChanged', 'SetupProfile')
@@ -546,7 +549,6 @@ function SMB:Initialize()
 
 	Minimap:SetMaskTexture('Interface\\ChatFrame\\ChatFrameBackground')
 
-	SMB:HandleBlizzardButtons()
-
 	SMB:ScheduleRepeatingTimer('GrabMinimapButtons', 5)
+	SMB:ScheduleTimer('HandleBlizzardButtons', 6)
 end

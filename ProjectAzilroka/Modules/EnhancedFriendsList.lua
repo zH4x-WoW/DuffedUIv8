@@ -233,7 +233,7 @@ function EFL:GetOptions()
 		order = 206,
 		args = {
 			header = {
-				order = 0,
+				order = 1,
 				type = 'header',
 				name = PA:Color(EFL.Title)
 			},
@@ -414,6 +414,9 @@ function EFL:GetOptions()
 		}
 	end
 
+	Options.args.profiles = LibStub('AceDBOptions-3.0'):GetOptionsTable(EFL.data)
+	Options.args.profiles.order = -2
+
 	PA.Options.args.EnhancedFriendsList = Options
 end
 
@@ -427,20 +430,11 @@ function EFL:BuildProfile()
 			['InfoFontSize'] = 12,
 			['InfoFontFlag'] = 'OUTLINE',
 			['StatusIconPack'] = 'Default',
-			['Alliance'] = 'Default',
-			['Horde'] = 'Default',
-			['Neutral'] = 'Default',
-			['D3'] = 'Default',
-			['WTCG'] = 'Default',
-			['S1'] = 'Default',
-			['S2'] = 'Default',
-			['App'] = 'Default',
-			['BSAp'] = 'Default',
-			['Hero'] = 'Default',
-			['Pro'] = 'Default',
-			['DST2'] = 'Default',
 		}
 	}
+	for _, GameIcon in pairs({'Alliance', 'Horde', 'Neutral', 'D3', 'WTCG', 'S1', 'S2', 'BSAp', 'Hero', 'Pro', 'DST2'}) do
+		Defaults.profile[GameIcon] = 'Launcher'
+	end
 
 	if self.ElvUI then
 		Defaults.profile['NameFont'] = ElvUI[1].db.general.font

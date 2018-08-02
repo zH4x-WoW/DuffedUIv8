@@ -638,13 +638,16 @@ function stAM:GetOptions()
 		},
 	}
 
+	Options.args.profiles = LibStub('AceDBOptions-3.0'):GetOptionsTable(stAM.data)
+	Options.args.profiles.order = -2
+
 	PA.Options.args.stAM = Options
 end
 
 function stAM:BuildProfile()
 	self.data = PA.ADB:New('stAddonManagerDB', {
 		profile = {
-			['NumAddOns'] = 15,
+			['NumAddOns'] = 30,
 			['FrameWidth'] = 550,
 			['Font'] = 'PT Sans Narrow',
 			['FontSize'] = 16,
