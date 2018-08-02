@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-local function LoadOrderHallSkin()	
+local function LoadCommandBarSkin()	
 	--[[OrderHall CommandBar]]--
 	OrderHallCommandBar:StripTextures()
 	OrderHallCommandBar:SetTemplate("Transparent")
@@ -14,8 +14,16 @@ local function LoadOrderHallSkin()
 	OrderHallCommandBar.AreaName:SetPoint("LEFT", OrderHallCommandBar.CurrencyIcon, "RIGHT", 10, 0)
 	OrderHallCommandBar.WorldMapButton:ClearAllPoints()
 	OrderHallCommandBar.WorldMapButton:SetPoint("RIGHT", OrderHallCommandBar, -5, -2)
+
+	-- TalentFrame
+	OrderHallTalentFrame:StripTextures()
+	OrderHallTalentFrame:SetTemplate("Transparent")
+	OrderHallTalentFrameCloseButton:SkinCloseButton()
+	ClassHallTalentInset:StripTextures()
+end
 	
-	--[[-- MissionFrame
+local function LoadOrderHallSkin()	
+	-- MissionFrame
 	OrderHallMissionFrame:StripTextures()
 	OrderHallMissionFrame:CreateBackdrop("Transparent")
 	OrderHallMissionFrame.backdrop:SetOutside(OrderHallMissionFrame.BorderFrame)
@@ -89,12 +97,6 @@ local function LoadOrderHallSkin()
 	Mission.CompleteDialog.BorderFrame.ViewButton:SkinButton()
 	OrderHallMissionFrame.MissionComplete.NextMissionButton:SkinButton()
 
-	-- TalentFrame
-	OrderHallTalentFrame:StripTextures()
-	OrderHallTalentFrame:SetTemplate("Transparent")
-	OrderHallTalentFrameCloseButton:SkinCloseButton()
-	ClassHallTalentInset:StripTextures()
-
 	-- Scouting Map - Zonechoice
 	AdventureMapQuestChoiceDialog:StripTextures()	
 	AdventureMapQuestChoiceDialog:SetTemplate("Transparent")
@@ -107,7 +109,8 @@ local function LoadOrderHallSkin()
 	AdventureMapQuestChoiceDialog.AcceptButton:StripTextures()
 	AdventureMapQuestChoiceDialog.AcceptButton:SkinButton()
 	AdventureMapQuestChoiceDialog.DeclineButton:StripTextures()
-	AdventureMapQuestChoiceDialog.DeclineButton:SkinButton()]]
+	AdventureMapQuestChoiceDialog.DeclineButton:SkinButton()
 end
 
-D['SkinFuncs']["Blizzard_OrderHallUI"] = LoadOrderHallSkin
+D['SkinFuncs']["Blizzard_OrderHallUI"] = LoadCommandBarSkin
+D['SkinFuncs']['Blizzard_GarrisonUI'] = LoadOrderHallSkin

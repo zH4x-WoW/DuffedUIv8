@@ -61,7 +61,7 @@ if C['chat']['lbackground'] then
 
 	local tabsbgleft = CreateFrame('Frame', 'DuffedUITabsLeftBackground', UIParent)
 	tabsbgleft:SetTemplate()
-	tabsbgleft:Size((D['InfoLeftRightWidth'] - 142), 20)
+	tabsbgleft:Size((D['InfoLeftRightWidth'] - 62), 20)
 	tabsbgleft:Point('TOPLEFT', chatleftbg, 'TOPLEFT', 4, -4)
 	tabsbgleft:SetFrameLevel(2)
 	tabsbgleft:SetFrameStrata('BACKGROUND')
@@ -202,12 +202,12 @@ end)
 
 local chatchannel = CreateFrame('Frame', 'DuffedUIChatChannels', UIParent)
 chatchannel:SetTemplate('Default')
-chatchannel:Size(100, 20)
+chatchannel:Size(20)
 chatchannel:Point('LEFT', chatmenu, 'RIGHT', 2, 0)
 chatchannel:SetFrameLevel(3)
 chatchannel.text = D['SetFontString'](chatchannel, C['media']['font'], 11, 'THINOUTLINE')
 chatchannel.text:SetPoint('CENTER', 1, -1)
-chatchannel.text:SetText(D['PanelColor'] .. 'ChatChannels')
+chatchannel.text:SetText(D['PanelColor'] .. 'C')
 chatchannel:SetScript('OnMouseDown', function(self, btn)
 	if btn == 'LeftButton' then ToggleFrame(ChannelFrame) end
 end)
