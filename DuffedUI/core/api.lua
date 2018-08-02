@@ -740,31 +740,30 @@ function SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameNameOv
 end
 
 function SkinMaxMinFrame(Frame)
-	assert(Frame, 'does not exist.')
+	local color = D['UnitColor']['class'][class]
+	Frame:StripTextures(true)
 
-	for _, name in next, {'MaximizeButton', 'MinimizeButton'} do
-		if Frame then StripTextures(Frame) end
-
+	for _, name in pairs({"MaximizeButton", "MinimizeButton"}) do
 		local button = Frame[name]
-		button:SetSize(16, 16)
-		button:ClearAllPoints()
-		button:SetPoint('CENTER')
 
-		button:SetNormalTexture('Interface\\AddOns\\DuffedUI\\medias\\Textures\\vehicleexit')
-		button:SetPushedTexture('Interface\\AddOns\\DuffedUI\\medias\\Textures\\vehicleexit')
+		if button then
+			button:SetSize(16, 16)
+			button:ClearAllPoints()
+			button:SetPoint("CENTER")
+			button:SetHitRectInsets(1, 1, 1, 1)
+			button:StripTextures(nil, true)
+			button:SetTemplate()
 
-		if not button.backdrop then
-			button:CreateBackdrop('Default', true)
-			button.backdrop:Point('TOPLEFT', button, 1, -1)
-			button.backdrop:Point('BOTTOMRIGHT', button, -1, 1)
-			button:HookScript('OnEnter', SetModifiedBackdrop)
-			button:HookScript('OnLeave', SetOriginalBackdrop)
+			button.Text = button:CreateFontString(nil, "OVERLAY")
+			button.Text:SetFont([[Interface\AddOns\DuffedUI\media\fonts\Arial.ttf]], 12)
+			button.Text:SetText(name == "MaximizeButton" and "▲" or "▼")
+			button.Text:SetPoint("CENTER", 0, 0)
 
-		end
-
-		if name == 'MaximizeButton' then
-			button:GetNormalTexture():SetTexCoord(1, 1, 1, -1.2246467991474e-016, 1.1102230246252e-016, 1, 0, -1.144237745222e-017)
-			button:GetPushedTexture():SetTexCoord(1, 1, 1, -1.2246467991474e-016, 1.1102230246252e-016, 1, 0, -1.144237745222e-017)
+			button:HookScript('OnShow', function(self)
+				if not self:IsEnabled() then
+					self.Text:SetTextColor(.3, .3, .3)
+				end
+			end)
 		end
 	end
 end

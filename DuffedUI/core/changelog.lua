@@ -3,13 +3,15 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame('frame')
 local ChangeLogData = {
 	"Changes:",
-		"• Fix the last known errors",
-		"• Update for AddOnSkins & ProjektAzilroka",
-		"• Several adjustments to the UI-Code",
+		"• Update for AddOnSkins",
+		"• Update for projectAzilroka",
+		"• Update to the code structure",
+		"• Several bug fixes",
+		"• Added Azerite-Fetaure by Rav",
 		--"• ",
 	" ",
 	"Notes:",
-		"In this version all bugs should be fixed. Currently the azerit feature is missing which\nwill be available in the near future.",
+		"Currently nothing important :)",
 }
 
 local function ModifiedString(string)

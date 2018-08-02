@@ -14,7 +14,7 @@
 	<!--Script file='mastery.lua' /-->
 	<Script file='micromenu.lua' />
 	<Script file='misc.lua' />
-	<!--Script file='power.lua' /-->
+	<Script file='power.lua' />
 	<Script file='profession.lua' />
 	<Script file='quickjoin.lua' />
 	<Script file='smf.lua' />
