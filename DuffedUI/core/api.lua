@@ -740,7 +740,6 @@ function SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameNameOv
 end
 
 function SkinMaxMinFrame(Frame)
-	local color = D['UnitColor']['class'][class]
 	Frame:StripTextures(true)
 
 	for _, name in pairs({"MaximizeButton", "MinimizeButton"}) do
@@ -764,6 +763,9 @@ function SkinMaxMinFrame(Frame)
 					self.Text:SetTextColor(.3, .3, .3)
 				end
 			end)
+
+			button:HookScript('OnEnter', SetModifiedBackdrop)
+			button:HookScript('OnLeave', SetOriginalBackdrop)
 		end
 	end
 end
