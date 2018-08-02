@@ -76,8 +76,8 @@ local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local Stat = CreateFrame('Frame', 'DuffedUIStatBattleGround', UIParent)
 Stat:EnableMouse(true)
 Stat.Option = C['datatext']['battleground']
-Stat.Color1 = D['RGBoHex'](unpack(C['media']['datatextcolor1']))
-Stat.Color2 = D['RGBoHex'](unpack(C['media']['datatextcolor2']))
+Stat.Color1 = D['RGBToHex'](unpack(C['media']['datatextcolor1']))
+Stat.Color2 = D['RGBToHex'](unpack(C['media']['datatextcolor2']))
 
 local Text1  = DuffedUIInfoLeftBattleGround:CreateFontString('DuffedUIStatBattleGroundText1', 'OVERLAY')
 Text1:SetFont(f, fs, ff)

@@ -4,8 +4,8 @@ local D, C, L = unpack(select(2, ...))
 if not C['datatext'].mastery or C['datatext'].mastery == 0 then return end
 
 local Stat = CreateFrame('Frame', 'DuffedUIStatMastery')
-Stat.Color1 = D['RGBoHex'](unpack(C['media']['datatextcolor1']))
-Stat.Color2 = D['RGBoHex'](unpack(C['media']['datatextcolor2']))
+Stat.Color1 = D['RGBToHex'](unpack(C['media']['datatextcolor1']))
+Stat.Color2 = D['RGBToHex'](unpack(C['media']['datatextcolor2']))
 
 local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local Text  = Stat:CreateFontString('DuffedUIStatMasteryText', 'OVERLAY')

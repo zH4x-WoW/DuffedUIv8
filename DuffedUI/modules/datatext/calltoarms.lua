@@ -9,8 +9,8 @@ Stat:EnableMouse(true)
 Stat:SetFrameStrata('MEDIUM')
 Stat:SetFrameLevel(3)
 Stat.Option = C['datatext']['calltoarms']
-Stat.Color1 = D['RGBoHex'](unpack(C['media']['datatextcolor1']))
-Stat.Color2 = D['RGBoHex'](unpack(C['media']['datatextcolor2']))
+Stat.Color1 = D['RGBToHex'](unpack(C['media']['datatextcolor1']))
+Stat.Color2 = D['RGBToHex'](unpack(C['media']['datatextcolor2']))
 
 local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local Text  = Stat:CreateFontString('DuffedUIStatCallToArmsText', 'OVERLAY')

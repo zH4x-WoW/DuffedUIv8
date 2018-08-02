@@ -71,7 +71,7 @@ function DuffedUITooltips:GetColor(unit)
 		local Color = Colors.reaction[Reaction]
 
 		if not Color then return end
-		local Hex = D['RGBoHex'](unpack(Color))
+		local Hex = D['RGBToHex'](unpack(Color))
 		return Hex, Color.r, Color.g, Color.b
 	end
 end

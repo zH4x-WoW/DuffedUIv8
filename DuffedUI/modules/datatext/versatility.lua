@@ -11,8 +11,8 @@ Stat:EnableMouse(true)
 Stat:SetFrameStrata('BACKGROUND')
 Stat:SetFrameLevel(3)
 Stat.Option = C['datatext']['versatility']
-Stat.Color1 = D['RGBoHex'](unpack(C['media']['datatextcolor1']))
-Stat.Color2 = D['RGBoHex'](unpack(C['media']['datatextcolor2']))
+Stat.Color1 = D['RGBToHex'](unpack(C['media']['datatextcolor1']))
+Stat.Color2 = D['RGBToHex'](unpack(C['media']['datatextcolor2']))
 
 local Text  = Stat:CreateFontString('DuffedUIStatVersatilityText', 'OVERLAY')
 Text:SetFont(f, fs, ff)

@@ -6,7 +6,7 @@ local PLevel = UnitLevel('player')
 local PClass = UnitClass('player')
 local PRace = UnitRace('player')
 local PFaction = UnitFactionGroup('player')
-local color = D['RGBoHex'](unpack(C['media'].datatextcolor1))
+local color = D['RGBToHex'](unpack(C['media'].datatextcolor1))
 local Version = D['Version']
 
 --[[Guild]]--

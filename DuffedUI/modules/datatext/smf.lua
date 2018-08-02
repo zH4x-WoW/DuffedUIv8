@@ -9,8 +9,8 @@ Stat:SetFrameStrata('BACKGROUND')
 Stat:SetFrameLevel(3)
 Stat:EnableMouse(true)
 Stat.tooltip = false
-local scolor1 = D['RGBoHex'](unpack(C['media']['datatextcolor1']))
-local scolor2 = D['RGBoHex'](unpack(C['media']['datatextcolor2']))
+local scolor1 = D['RGBToHex'](unpack(C['media']['datatextcolor1']))
+local scolor2 = D['RGBToHex'](unpack(C['media']['datatextcolor2']))
 
 local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local Text  = DuffedUIInfoLeft:CreateFontString(nil, 'OVERLAY')

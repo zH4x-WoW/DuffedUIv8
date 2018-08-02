@@ -10,8 +10,8 @@ Stat:SetFrameStrata('BACKGROUND')
 Stat:SetFrameLevel(3)
 Stat.Option = C['datatext']['guild']
 Stat.update = false
-Stat.Color1 = D['RGBoHex'](unpack(C['media']['datatextcolor1']))
-Stat.Color2 = D['RGBoHex'](unpack(C['media']['datatextcolor2']))
+Stat.Color1 = D['RGBToHex'](unpack(C['media']['datatextcolor1']))
+Stat.Color2 = D['RGBToHex'](unpack(C['media']['datatextcolor2']))
 
 local tthead, ttsubh, ttoff = {r = .4, g = .78, b = 1}, {r = .75, g = .9, b = 1}, {r = .3, g = 1, b = .3}
 local activezone, inactivezone = {r = .3, g = .0, b = .3}, {r = .65, g = .65, b = .65}
@@ -22,8 +22,8 @@ local guildMotDString = '  %s |cffaaaaaa- |cffffffff%s'
 local levelNameString = '|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r %s'
 local levelNameStatusString = '|cff%02x%02x%02x%d|r %s %s'
 local nameRankString = '%s |cff999999-|cffffffff %s'
-local noteString = '  '%s''
-local officerNoteString = '  o: '%s''
+local noteString = '  "%s"'
+local officerNoteString = '  o: "%s"'
 
 local guildTable, guildXP, guildMotD = {}, {}, ''
 local totalOnline = 0
@@ -169,7 +169,7 @@ Stat:SetScript('OnEnter', function(self)
 		GameTooltip:AddLine(' ') GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1)
 	end
 
-	local col = D['RGBoHex'](ttsubh.r, ttsubh.g, ttsubh.b)
+	local col = D['RGBToHex'](ttsubh.r, ttsubh.g, ttsubh.b)
 	GameTooltip:AddLine' '
 
 	local _, _, standingID, barMin, barMax, barValue = GetGuildFactionInfo()

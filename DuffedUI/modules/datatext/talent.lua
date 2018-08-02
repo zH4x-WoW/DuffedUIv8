@@ -1,7 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 -- As long as blizzard doesn't go back to dual spec, this should work forever, even with new classes with no changes.
 
-if not C['datatext']['talent'] or C['datatext']['talent'] == 0 then
+if not C['datatext']['talent'] or C['datatext']['talent'] == 0 then return end
 
 local LeftClickMenu = { }
 LeftClickMenu[1] = { text = L['dt']['specmenu'], isTitle = true, notCheckable = true}
@@ -33,8 +33,8 @@ Stat:EnableMouse(true)
 Stat:SetFrameStrata('BACKGROUND')
 Stat:SetFrameLevel(3)
 Stat.Option = C['datatext']['talent']
-Stat.Color1 = D['RGBoHex'](unpack(C['media']['datatextcolor1']))
-Stat.Color2 = D['RGBoHex'](unpack(C['media']['datatextcolor2']))
+Stat.Color1 = D['RGBToHex'](unpack(C['media']['datatextcolor1']))
+Stat.Color2 = D['RGBToHex'](unpack(C['media']['datatextcolor2']))
 
 local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local Text = Stat:CreateFontString('DuffedUIStatTalentText', 'OVERLAY')

@@ -99,7 +99,7 @@ local function CreateQuestTag(level, questTag, frequency)
 		tag = "leg"
 	end
 	
-	local color = D['RGBoHex'](unpack(C['media']['datatextcolor1']))
+	local color = D['RGBToHex'](unpack(C['media']['datatextcolor1']))
 	if (level == nil or tonumber(level) == nil) then level = 0 end
 	local col = GetQuestDifficultyColor(level)
 	if not col then col = {r = 1, g = 1, b = 1} end
@@ -140,7 +140,7 @@ hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function(self)
 			local tagID, tagName = GetQuestTagInfo(questID)
 			local tags = {tagName}
 			local questText = GetQuestLogQuestText(i)
-			local color = D['RGBoHex'](unpack(C['media']['datatextcolor1']))
+			local color = D['RGBToHex'](unpack(C['media']['datatextcolor1']))
 
 			if frequencies[frequency] then tinsert(tags,frequencies[frequency][2]) end
 			tooltips[questID] = false

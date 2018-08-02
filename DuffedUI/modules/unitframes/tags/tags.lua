@@ -128,7 +128,7 @@ oUF.Tags.Methods["DuffedUI:getnamecolor"] = function(unit)
 		local c = RAID_CLASS_COLORS[UnitClass]
 
 		if not c then return "" end
-		return D['RGBoHex'](c["r"], c["g"], c["b"] )
+		return D['RGBToHex'](c["r"], c["g"], c["b"] )
 	elseif UnitReaction then
 		local c = D["UnitColor"]["reaction"][UnitReaction]
 		return string.format("|cff%02x%02x%02x", c[1] * 255, c[2] * 255, c[3] * 255)
