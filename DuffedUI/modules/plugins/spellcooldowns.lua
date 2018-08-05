@@ -885,7 +885,7 @@ local function position()
 	if mode == 'HIDE' then positionHide() else positionDim() end
 end
 
---[[Frames]]--
+-- Frames
 local function createCooldownFrame(spell)
 	local frame = CreateFrame('Frame', nil, UIParent)
 	frame:SetHeight(width)

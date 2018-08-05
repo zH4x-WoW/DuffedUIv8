@@ -1,8 +1,8 @@
 local L = select(2,...)
 
 CurrencyData = CurrencyData or {}
-CurrencyData["order"] = CurrencyData["order"] or {}
-CurrencyData["collapsed"] = CurrencyData["collapsed"] or {}
+CurrencyData['order'] = CurrencyData['order'] or {}
+CurrencyData['collapsed'] = CurrencyData['collapsed'] or {}
 
 local oldGetCurrencyListInfo = GetCurrencyListInfo
 local oldExpandCurrencyList = ExpandCurrencyList
@@ -41,7 +41,7 @@ local SortLists = function(jaggedList, currentOrder, desiredOrder)
 end
 
 local FlattenList = function(jaggedList, flatList)
-	flatList = flatList and type(flatList) == "table" and wipe(flatList) or {}
+	flatList = flatList and type(flatList) == 'table' and wipe(flatList) or {}
 
 	for i = 1, #jaggedList do
 		for j = 1, #jaggedList[i] do tinsert(flatList, jaggedList[i][j]) end
@@ -63,41 +63,41 @@ local InitList = function(self)
 			tinsert(headers, name)
 			tinsert(jagged, {i})
 
-			if not tContains(CurrencyData["order"], name) then tinsert(CurrencyData["order"], name) end
+			if not tContains(CurrencyData['order'], name) then tinsert(CurrencyData['order'], name) end
 		else
 			tinsert(jagged[curIndex], i)
 		end
 	end
 
-	SortLists(jagged, headers, CurrencyData["order"])
+	SortLists(jagged, headers, CurrencyData['order'])
 	FlattenList(jagged, data)
 end
 
 SortedCurrencyTab_MoveUp = function(name)
 	local activeIndex = indexOf(headers, name)
-	local storageIndex = indexOf(CurrencyData["order"], name)
+	local storageIndex = indexOf(CurrencyData['order'], name)
 
 	if not activeIndex or not storageIndex or activeIndex == 1 then return end
 
 	local offset = 1
-	while CurrencyData["order"][storageIndex-offset] and not tContains(headers, CurrencyData["order"][storageIndex-offset]) do offset = offset + 1 end
+	while CurrencyData['order'][storageIndex-offset] and not tContains(headers, CurrencyData['order'][storageIndex-offset]) do offset = offset + 1 end
 
-	tremove(CurrencyData["order"], storageIndex)
-	tinsert(CurrencyData["order"], storageIndex-offset, name)
+	tremove(CurrencyData['order'], storageIndex)
+	tinsert(CurrencyData['order'], storageIndex-offset, name)
 	TokenFrame_Update()
 end
 
 SortedCurrencyTab_MoveDown = function(name)
 	local activeIndex = indexOf(headers, name)
-	local storageIndex = indexOf(CurrencyData["order"], name)
+	local storageIndex = indexOf(CurrencyData['order'], name)
 
 	if not activeIndex or not storageIndex or activeIndex == #headers then return end
 
 	local offset = 1
-	while CurrencyData["order"][storageIndex+offset] and not tContains(headers, CurrencyData["order"][storageIndex+offset]) do offset = offset + 1 end
+	while CurrencyData['order'][storageIndex+offset] and not tContains(headers, CurrencyData['order'][storageIndex+offset]) do offset = offset + 1 end
 
-	tremove(CurrencyData["order"], storageIndex)
-	tinsert(CurrencyData["order"], storageIndex+offset, name)
+	tremove(CurrencyData['order'], storageIndex)
+	tinsert(CurrencyData['order'], storageIndex+offset, name)
 	TokenFrame_Update()
 end
 
@@ -115,46 +115,46 @@ local CreateArrows = function()
 		button.highlight:SetAlpha(.5)
 
 		if not button.MoveUp then
-			local b = CreateFrame("Button", nil, button)
+			local b = CreateFrame('Button', nil, button)
 			button.MoveUp = b
 			b:SetAlpha(.6)
-			b:SetPoint("TOPRIGHT", -1, -5)
+			b:SetPoint('TOPRIGHT', -1, -5)
 			b:SetSize(16, 8)
 
-			local t = b:CreateTexture(nil, "BACKGROUND")
-			t:SetTexture("Interface\\PaperDollInfoFrame\\StatSortArrows.blp")
+			local t = b:CreateTexture(nil, 'BACKGROUND')
+			t:SetTexture('Interface\\PaperDollInfoFrame\\StatSortArrows.blp')
 			t:SetTexCoord(0, 1, 0, .5)
 			t:SetAllPoints()
 			b.texture = t
 
-			b:SetScript("OnEnter", function(self) self.texture:SetAlpha(1) end)
-			b:SetScript("OnLeave", function(self) self.texture:SetAlpha(.6) end)
-			b:SetScript("OnClick", function(self) SortedCurrencyTab_MoveUp(self:GetParent().name:GetText()) end)
+			b:SetScript('OnEnter', function(self) self.texture:SetAlpha(1) end)
+			b:SetScript('OnLeave', function(self) self.texture:SetAlpha(.6) end)
+			b:SetScript('OnClick', function(self) SortedCurrencyTab_MoveUp(self:GetParent().name:GetText()) end)
 		end
 
 		if not button.MoveDown then
-			local b = CreateFrame("Button", nil, button)
+			local b = CreateFrame('Button', nil, button)
 			button.MoveDown = b
 			b:SetAlpha(.6)
-			b:SetPoint("RIGHT", button.MoveUp, "LEFT", 0, 0)
+			b:SetPoint('RIGHT', button.MoveUp, 'LEFT', 0, 0)
 			b:SetSize(16, 8)
 
-			local t = b:CreateTexture(nil, "BACKGROUND")
-			t:SetTexture("Interface\\PaperDollInfoFrame\\StatSortArrows.blp")
+			local t = b:CreateTexture(nil, 'BACKGROUND')
+			t:SetTexture('Interface\\PaperDollInfoFrame\\StatSortArrows.blp')
 			t:SetTexCoord(0, 1, .5, 1)
 			t:SetAllPoints()
 			b.texture = t
 
-			b:SetScript("OnEnter", function(self) self.texture:SetAlpha(1) end)
-			b:SetScript("OnLeave", function(self) self.texture:SetAlpha(.6) end)
-			b:SetScript("OnClick", function(self) SortedCurrencyTab_MoveDown(self:GetParent().name:GetText()) end)
+			b:SetScript('OnEnter', function(self) self.texture:SetAlpha(1) end)
+			b:SetScript('OnLeave', function(self) self.texture:SetAlpha(.6) end)
+			b:SetScript('OnClick', function(self) SortedCurrencyTab_MoveDown(self:GetParent().name:GetText()) end)
 		end
 
 		if not button.scriptsChanged then
 			button.scriptsChanged = true
 
-			button.oldOnEnter = button:GetScript("OnEnter")
-			button.oldOnLeave = button:GetScript("OnLeave")
+			button.oldOnEnter = button:GetScript('OnEnter')
+			button.oldOnLeave = button:GetScript('OnLeave')
 		end
 
 		if button.isHeader then
@@ -187,7 +187,7 @@ ExpandCurrencyList = function(index, value)
 	end
 
 	local name = GetCurrencyListInfo(index)
-	CurrencyData["collapsed"][name] = value == 0 and 0 or nil
+	CurrencyData['collapsed'][name] = value == 0 and 0 or nil
 
 	local returnValues = { oldExpandCurrencyList(data[index], value) }
 	InitList()
@@ -232,11 +232,11 @@ TokenFrame_Update = function()
 	CreateArrows()
 end
 
-local UnusedHidingFrame = CreateFrame("Frame")
-UnusedHidingFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
-UnusedHidingFrame:SetScript("OnEvent", function()
+local UnusedHidingFrame = CreateFrame('Frame')
+UnusedHidingFrame:RegisterEvent('PLAYER_ENTERING_WORLD')
+UnusedHidingFrame:SetScript('OnEvent', function()
 	for i = 1,GetCurrencyListSize() do
 		local name, _, isExpanded = GetCurrencyListInfo(i)
-		if CurrencyData["collapsed"][name] and CurrencyData["collapsed"][name] == 0 and isExpanded then ExpandCurrencyList(i, 0) end
+		if CurrencyData['collapsed'][name] and CurrencyData['collapsed'][name] == 0 and isExpanded then ExpandCurrencyList(i, 0) end
 	end
 end)

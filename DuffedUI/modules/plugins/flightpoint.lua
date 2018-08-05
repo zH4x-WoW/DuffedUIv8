@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if C["misc"].flightpoint ~= true then return end
+if not C['misc']['flightpoint'] then return end
 
 local taxinodeinfos = {}
 local firstshow = false
@@ -7,18 +7,18 @@ FlightPoints_Config = {}
 FlightPoints_Config.notexpanded = {}
 
 function FlightPoints_OnLoad(self)
-	self:RegisterEvent("TAXIMAP_OPENED")
-	self:RegisterEvent("TAXIMAP_CLOSED")
-	self:RegisterEvent("ADDON_LOADED")
+	self:RegisterEvent('TAXIMAP_OPENED')
+	self:RegisterEvent('TAXIMAP_CLOSED')
+	self:RegisterEvent('ADDON_LOADED')
 	FlightPointsTaxiChoiceContainerScrollBar.Show = function(self)
-		FlightPointsTaxiChoiceContainer:SetPoint("BOTTOMRIGHT", FlightPointsTaxiChoice, "BOTTOMRIGHT", -23, 4)
-		for _, button in next, _G["FlightPointsTaxiChoiceContainer"].buttons do button:SetWidth(228) end
+		FlightPointsTaxiChoiceContainer:SetPoint('BOTTOMRIGHT', FlightPointsTaxiChoice, 'BOTTOMRIGHT', -23, 4)
+		for _, button in next, _G['FlightPointsTaxiChoiceContainer'].buttons do button:SetWidth(228) end
 		FlightPointsTaxiChoiceContainer.scrollChild:SetWidth(228)
 		getmetatable(self).__index.Show(self)
 	end
 
 	FlightPointsTaxiChoiceContainerScrollBar.Hide = function (self)
-		FlightPointsTaxiChoiceContainer:SetPoint("BOTTOMRIGHT", FlightPointsTaxiChoice, "BOTTOMRIGHT", -4, 4)
+		FlightPointsTaxiChoiceContainer:SetPoint('BOTTOMRIGHT', FlightPointsTaxiChoice, 'BOTTOMRIGHT', -4, 4)
 		for _, button in next, FlightPointsTaxiChoiceContainer.buttons do button:SetWidth(250) end
 		FlightPointsTaxiChoiceContainer.scrollChild:SetWidth(250)
 		getmetatable(self).__index.Hide( self )
@@ -28,14 +28,14 @@ end
 
 function FlightPointsTaxiChoiceButton_OnLoad(self)
 	local name = self:GetName()
-	self.name = _G[name.."Name"]
-	self.expandIcon = _G[name.."ExpandIcon"]
-	self.highlight = _G[name.."Highlight"]
-	self.stripe = _G[name.."Stripe"]
+	self.name = _G[name..'Name']
+	self.expandIcon = _G[name..'ExpandIcon']
+	self.highlight = _G[name..'Highlight']
+	self.stripe = _G[name..'Stripe']
 end
 
 function FlightPoints_Show()
-	if not FlightPointsTaxiChoiceContainer.buttons then HybridScrollFrame_CreateButtons(FlightPointsTaxiChoiceContainer, "FlightPointsButtonTemplate", 1, -2, "TOPLEFT", "TOPLEFT", 0, 0) end
+	if not FlightPointsTaxiChoiceContainer.buttons then HybridScrollFrame_CreateButtons(FlightPointsTaxiChoiceContainer, 'FlightPointsButtonTemplate', 1, -2, 'TOPLEFT', 'TOPLEFT', 0, 0) end
 	FlightPointsTaxiChoiceContainer_Update()
 end
 
@@ -61,7 +61,7 @@ function FlightPointsTaxiChoiceContainer_Update()
 		name, isHeader, flightpathid, isExpanded = FlightPoints_GetFlight(index)
 		button = buttons[i]
 
-		if not name or name == "" then
+		if not name or name == '' then
 			button:Hide()
 		else
 			if isHeader then
@@ -69,23 +69,23 @@ function FlightPointsTaxiChoiceContainer_Update()
 				button.categoryRight:Show()
 				button.categoryMiddle:Show()
 				hidebuttons = false
-				button.highlight:SetTexture("Interface\\TokenFrame\\UI-TokenFrame-CategoryButton")
-				button.highlight:SetPoint("TOPLEFT", button, "TOPLEFT", 3, -2)
-				button.highlight:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -3, 2)
+				button.highlight:SetTexture('Interface\\TokenFrame\\UI-TokenFrame-CategoryButton')
+				button.highlight:SetPoint('TOPLEFT', button, 'TOPLEFT', 3, -2)
+				button.highlight:SetPoint('BOTTOMRIGHT', button, 'BOTTOMRIGHT', -3, 2)
 				button.name:SetText(name)
-				button.name:SetFont(C['media']['font'], 11, "THINOUTLINE")
-				button.name:SetPoint("LEFT", 22, 0)
+				button.name:SetFont(C['media']['font'], 11, 'THINOUTLINE')
+				button.name:SetPoint('LEFT', 22, 0)
 			else
 				button.categoryLeft:Hide()
 				button.categoryRight:Hide()
 				button.categoryMiddle:Hide()
-				button.highlight:SetTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight")
-				button.highlight:SetPoint("TOPLEFT", button, "TOPLEFT", 0, 0)
-				button.highlight:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 0, 0)
+				button.highlight:SetTexture('Interface\\QuestFrame\\UI-QuestTitleHighlight')
+				button.highlight:SetPoint('TOPLEFT', button, 'TOPLEFT', 0, 0)
+				button.highlight:SetPoint('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 0, 0)
 				button.name:SetText(name)
-				button.name:SetPoint("LEFT", 11, 0)
+				button.name:SetPoint('LEFT', 11, 0)
 				button.flightpath = flightpathid
-				button.name:SetFont(C['media']['font'], 11, "THINOUTLINE")
+				button.name:SetFont(C['media']['font'], 11, 'THINOUTLINE')
 			end
 			button.isHeader = isHeader
 			button.isExpanded = isExpanded
@@ -125,8 +125,8 @@ function FlightPoints_CreateFlyPathTable()
 	local tmptaxinode={}
 	taxinodeinfos = {}
 	for i = 1, NumTaxiNodes() do
-		if TaxiNodeGetType(i) == "REACHABLE" then
-			local match1, match2 = strmatch(TaxiNodeName(i), "^(.*),(.*)")
+		if TaxiNodeGetType(i) == 'REACHABLE' then
+			local match1, match2 = strmatch(TaxiNodeName(i), '^(.*),(.*)')
 			if match2 == nil then
 				match1 = TaxiNodeName(i)
 				match2 = TaxiNodeName(i)
@@ -160,7 +160,7 @@ function FlightPoints_CreateFlyPathTable()
 end
 
 function FlightPoints_OnEvent(self, event, ...)
-	if event == "TAXIMAP_OPENED" then
+	if event == 'TAXIMAP_OPENED' then
 		firstshow = true
 		FlightPoints_CreateFlyPathTable()
 		if TaxiFrame:IsShown() then 
@@ -171,16 +171,16 @@ function FlightPoints_OnEvent(self, event, ...)
 		FlightPointsTaxiChoice:SetWidth(250)
 		FlightPointsTaxiChoice:ClearAllPoints()
 		if TaxiFrame:IsShown() then
-			FlightPointsTaxiChoice:SetPoint("TOPLEFT", TaxiFrame, "BOTTOMRIGHT", 0, TaxiFrame:GetHeight() - 22)
+			FlightPointsTaxiChoice:SetPoint('TOPLEFT', TaxiFrame, 'BOTTOMRIGHT', 0, TaxiFrame:GetHeight() - 22)
 		elseif FlightMapFrame:IsShown() then
-			FlightPointsTaxiChoice:SetPoint("TOPLEFT", FlightMapFrame, "BOTTOMRIGHT", 0, FlightMapFrame:GetHeight())
+			FlightPointsTaxiChoice:SetPoint('TOPLEFT', FlightMapFrame, 'BOTTOMRIGHT', 0, FlightMapFrame:GetHeight())
 		end
 		FlightPointsTaxiChoice:Show()
 		FlightPointsTaxiChoice:StripTextures()
-		FlightPointsTaxiChoice:SetTemplate("Transparent")
+		FlightPointsTaxiChoice:SetTemplate('Transparent')
 		FlightPointsTaxiChoice.CloseButton:SkinCloseButton()
 		FlightPointsTaxiChoiceContainerScrollBar:SkinScrollBar()
-	elseif event == "TAXIMAP_CLOSED" then
+	elseif event == 'TAXIMAP_CLOSED' then
 		FlightPointsTaxiChoice:Hide()
 		taxinodeinfos = {}
 	end

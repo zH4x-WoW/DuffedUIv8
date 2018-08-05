@@ -1,8 +1,8 @@
 local D, C, L = unpack(select(2, ...))
-if (select(2, UnitClass("player")) ~= "MAGE") or not C["misc"]["magemenu"] then return end
+if (select(2, UnitClass('player')) ~= 'MAGE') or not C['misc']['magemenu'] then return end
 
-local f, fs, ff = C["media"]["font"], 11, "THINOUTLINE"
-local spells = (UnitFactionGroup("player") == "Horde") and {
+local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
+local spells = (UnitFactionGroup('player') == 'Horde') and {
 	--  Tepelort id, Portal id
 	[1] = {53140,53142}, -- Dalaran
 	[2] = {3567,11417}, -- Orgrimmar
@@ -54,73 +54,73 @@ local UTF = function(string, i, dots)
 			end
 			if len == i then break end
 		end
-		if len == i and pos <= bytes then return string:sub(1, pos - 1) .. (dots and "..." or "") else return string end
+		if len == i and pos <= bytes then return string:sub(1, pos - 1) .. (dots and '...' or '') else return string end
 	end
 end
 
 local abbrev = function(name)
-	local newname = (string.len(name) > 20) and string.gsub(name, "%s?(.[\128-\191]*)%S+%s", "%1. ") or name
+	local newname = (string.len(name) > 20) and string.gsub(name, '%s?(.[\128-\191]*)%S+%s', '%1. ') or name
 	return UTF(newname, 20, false)
 end
  
-local f = CreateFrame("Frame", "DuffedUITeleportMenu", UIParent)
+local f = CreateFrame('Frame', 'DuffedUITeleportMenu', UIParent)
 f:Size(DuffedUIMinimap:GetWidth(),(#spells + 1) * 21 + 3)
-f:SetPoint("BOTTOMLEFT", DuffedUIInfoCenter, "TOPLEFT", 0, 2)
-f:SetFrameStrata("HIGH")
-f:SetTemplate("Transparent")
+f:SetPoint('BOTTOMLEFT', DuffedUIInfoCenter, 'TOPLEFT', 0, 2)
+f:SetFrameStrata('HIGH')
+f:SetTemplate('Transparent')
  
-local r = CreateFrame("Frame", nil, f)
+local r = CreateFrame('Frame', nil, f)
 r:Size(DuffedUIMinimap:GetWidth() - 4, 20)
-r:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
-local l = r:CreateFontString("Title", "OVERLAY")
-l:SetFont(C["media"]["font"], 11, "THINOUTLINE")
-l:SetPoint("CENTER", r, "CENTER")
-r:SetFrameStrata("HIGH")
+r:SetPoint('TOPLEFT', f, 'TOPLEFT', 2, -2)
+local l = r:CreateFontString('Title', 'OVERLAY')
+l:SetFont(C['media']['font'], 11, 'THINOUTLINE')
+l:SetPoint('CENTER', r, 'CENTER')
+r:SetFrameStrata('HIGH')
  
 for i, spell in pairs(spells) do
-	local b = CreateFrame("Button", nil, f, "SecureActionButtonTemplate")
+	local b = CreateFrame('Button', nil, f, 'SecureActionButtonTemplate')
 	b:Size(DuffedUIMinimap:GetWidth() - 4, 20)
-	b:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -(i * 21) - 2)
-	b:SetFrameStrata("HIGH")
-	b:SetTemplate("Transparent")
+	b:SetPoint('TOPLEFT', f, 'TOPLEFT', 2, -(i * 21) - 2)
+	b:SetFrameStrata('HIGH')
+	b:SetTemplate('Transparent')
  
-	local l = b:CreateFontString(nil,"OVERLAY")
-	l:SetFont(C["media"]["font"], 11, "THINOUTLINE")
+	local l = b:CreateFontString(nil,'OVERLAY')
+	l:SetFont(C['media']['font'], 11, 'THINOUTLINE')
 	l:SetText(abbrev(GetSpellInfo(spell[1])))
 	b:SetFontString(l)
  
-	b:RegisterForClicks("LeftButtonDown", "RightButtonDown")
-	b:SetAttribute("type1", "spell")
-	b:SetAttribute("spell1", GetSpellInfo(spell[1]))
-	b:SetAttribute("type2", "spell")
-	b:SetAttribute("spell2", GetSpellInfo(spell[2]))
+	b:RegisterForClicks('LeftButtonDown', 'RightButtonDown')
+	b:SetAttribute('type1', 'spell')
+	b:SetAttribute('spell1', GetSpellInfo(spell[1]))
+	b:SetAttribute('type2', 'spell')
+	b:SetAttribute('spell2', GetSpellInfo(spell[2]))
 	
-	b:HookScript("OnEnter", function(self)
+	b:HookScript('OnEnter', function(self)
 		local r,g,b = unpack(C['media']['datatextcolor1'])
 		self:SetBackdropColor(r,g,b, 0.15)
 		self:SetBackdropBorderColor(r,g,b)
 	end)
 
-	b:HookScript("OnLeave", function(self)
-		self:SetBackdropColor(unpack(C["media"].backdropcolor))
-		self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+	b:HookScript('OnLeave', function(self)
+		self:SetBackdropColor(unpack(C['media'].backdropcolor))
+		self:SetBackdropBorderColor(unpack(C['media'].bordercolor))
 	end)
 end
 f:Hide()
  
-local b = CreateFrame("Button", nil, DuffedUIInfoCenter)
+local b = CreateFrame('Button', nil, DuffedUIInfoCenter)
 b:SetAllPoints(DuffedUIInfoCenter)
-b:SetScript("OnClick", function(self)
+b:SetScript('OnClick', function(self)
 	if DuffedUITeleportMenu:IsShown() then
 		DuffedUITeleportMenu:Hide()
 	else
-		Title:SetText(D['PanelColor'].."Portal / Teleportlist")
+		Title:SetText(D['PanelColor']..'Portal / Teleportlist')
 		DuffedUITeleportMenu:Show()
 	end
 end)
  
-f:RegisterEvent("UNIT_SPELLCAST_START")
-f:SetScript("OnEvent",
+f:RegisterEvent('UNIT_SPELLCAST_START')
+f:SetScript('OnEvent',
 	function(self)
 	if self:IsShown() then self:Hide() end
 end)

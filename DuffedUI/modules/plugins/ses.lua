@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if C['misc']['sesenable'] ~= true then return end
+if not C['misc']['sesenable'] then return end
 
 local hoverovercolor = {.4, .4, .4}
 local cp = '|cff319f1b'

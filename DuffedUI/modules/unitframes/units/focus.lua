@@ -19,7 +19,7 @@ local function SetCastBarColorShielded(self)
 end
 
 local function SetCastBarColorDefault(self)
-	self.__owner:SetStatusBarColor(unpack(C["castbar"].color))
+	self.__owner:SetStatusBarColor(unpack(C['castbar']['color']))
 end
 
 D["ConstructUFFocus"] = function(self)

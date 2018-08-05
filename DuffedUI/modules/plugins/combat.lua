@@ -1,12 +1,12 @@
 local D, C, L = unpack(select(2, ...))
-if not C["misc"].combatanimation then return end
+if not C['misc']['combatanimation'] then return end
 
 local speed = .041 -- how fast the text appears
  
 local GetNextChar = function(word,num)
 	local c = word:byte(num)
 	local shift
-	if not c then return "",num end
+	if not c then return '',num end
 		if (c > 0 and c <= 127) then
 			shift = 1
 		elseif (c >= 192 and c <= 223) then
@@ -16,72 +16,72 @@ local GetNextChar = function(word,num)
 		elseif (c >= 240 and c <= 247) then
 			shift = 4
 		end
-	return word:sub(num,num+shift-1),(num+shift)
+	return word:sub(num,num + shift - 1), (num + shift)
 end
  
-local updaterun = CreateFrame("Frame")
+local updaterun = CreateFrame('Frame')
  
-local flowingframe = CreateFrame("Frame",nil,UIParent)
-flowingframe:SetFrameStrata("HIGH")
-flowingframe:SetPoint("CENTER",UIParent,0, 170) -- where we want the textframe
+local flowingframe = CreateFrame('Frame', nil, UIParent)
+flowingframe:SetFrameStrata('HIGH')
+flowingframe:SetPoint('CENTER', UIParent, 0, 170) -- where we want the textframe
 flowingframe:SetHeight(64)
  
-local flowingtext = flowingframe:CreateFontString(nil,"OVERLAY")
-flowingtext:SetFont(C['media']['font'], 26, "OUTLINE")
-flowingtext:SetShadowOffset(1,-1)
+local flowingtext = flowingframe:CreateFontString(nil, 'OVERLAY')
+flowingtext:SetFont(C['media']['font'], 26, 'OUTLINE')
+flowingtext:SetShadowOffset(1, -1)
  
-local rightchar = flowingframe:CreateFontString(nil,"OVERLAY")
-rightchar:SetFont(C['media']['font'], 64, "OUTLINE")
-rightchar:SetShadowOffset(1,-1)
-rightchar:SetJustifyH("LEFT") -- left or right
+local rightchar = flowingframe:CreateFontString(nil, 'OVERLAY')
+rightchar:SetFont(C['media']['font'], 64, 'OUTLINE')
+rightchar:SetShadowOffset(1, -1)
+rightchar:SetJustifyH('LEFT') -- left or right
  
-local count,len,step,word,stringE,a,backstep
+local count, len, step, word, stringE, a, backstep
  
 local nextstep = function()
-	a,step = GetNextChar (word,step)
+	a, step = GetNextChar (word, step)
 	flowingtext:SetText(stringE)
 	stringE = stringE..a
 	a = string.upper(a)
 	rightchar:SetText(a)
 end
  
-local backrun = CreateFrame("Frame")
+local backrun = CreateFrame('Frame')
 backrun:Hide()
  
-local updatestring = function(self,t)
+local updatestring = function(self, t)
 	count = count - t
-		if count < 0 then
-			count = speed
-			if step > len then
-				self:Hide()
-				flowingtext:SetText(stringE)
-				rightchar:SetText()
-				flowingtext:ClearAllPoints()
-				flowingtext:SetPoint("RIGHT")
-				flowingtext:SetJustifyH("RIGHT")
-				rightchar:ClearAllPoints()
-				rightchar:SetPoint("RIGHT",flowingtext,"LEFT")
-				rightchar:SetJustifyH("RIGHT")
-				self:Hide()
-				count = 1.8
-				backrun:Show()
-			else
-				nextstep()
-			end
+	if count < 0 then
+		count = speed
+		if step > len then
+			self:Hide()
+			flowingtext:SetText(stringE)
+			rightchar:SetText()
+			flowingtext:ClearAllPoints()
+			flowingtext:SetPoint('RIGHT')
+			flowingtext:SetJustifyH('RIGHT')
+			rightchar:ClearAllPoints()
+			rightchar:SetPoint('RIGHT', flowingtext, 'LEFT')
+			rightchar:SetJustifyH('RIGHT')
+			self:Hide()
+			count = 1.8
+			backrun:Show()
+		else
+			nextstep()
 		end
+	end
 end
  
-updaterun:SetScript("OnUpdate",updatestring)
+updaterun:SetScript('OnUpdate', updatestring)
 updaterun:Hide()
  
 local backstepf = function()
 	local a = backstep
 	local firstchar
-		local texttemp = ""
+		local texttemp = ''
 		local flagon = true
 		while a <= len do
 			local u
-			u,a = GetNextChar(word,a)
+			u, a = GetNextChar(word, a)
 			if flagon == true then
 				backstep = a
 				flagon = false
@@ -95,7 +95,7 @@ local backstepf = function()
 	rightchar:SetText(firstchar)
 end
  
-local rollback = function(self,t)
+local rollback = function(self, t)
 	count = count - t
 		if count < 0 then
 			count = speed
@@ -109,9 +109,9 @@ local rollback = function(self,t)
 		end
 end
  
-backrun:SetScript("OnUpdate",rollback)
+backrun:SetScript('OnUpdate', rollback)
  
-local allertrun = function(f,r,g,b)
+local allertrun = function(f, r, g, b)
 	flowingframe:Hide()
 	updaterun:Hide()
 	backrun:Hide()
@@ -123,34 +123,34 @@ local allertrun = function(f,r,g,b)
 	local color2 = g or 1
 	local color3 = b or 1
  
-	flowingtext:SetTextColor(color1*.95,color2*.95,color3*.95) -- color in RGB(red green blue)(alpha)
-	rightchar:SetTextColor(color1,color2,color3)
+	flowingtext:SetTextColor(color1 * .95, color2 * .95, color3 * .95) -- color in RGB(red green blue)(alpha)
+	rightchar:SetTextColor(color1, color2, color3)
  
 	word = f
 	len = f:len()
-	step,backstep = 1,1
+	step, backstep = 1, 1
 	count = speed
-	stringE = ""
-	a = ""
+	stringE = ''
+	a = ''
  
-	flowingtext:SetText("")
+	flowingtext:SetText('')
 	flowingframe:SetWidth(l)
 	flowingtext:ClearAllPoints()
-	flowingtext:SetPoint("LEFT")
-	flowingtext:SetJustifyH("LEFT")
+	flowingtext:SetPoint('LEFT')
+	flowingtext:SetJustifyH('LEFT')
 	rightchar:ClearAllPoints()
-	rightchar:SetPoint("LEFT",flowingtext,"RIGHT")
-	rightchar:SetJustifyH("LEFT")
+	rightchar:SetPoint('LEFT', flowingtext, 'RIGHT')
+	rightchar:SetJustifyH('LEFT')
  
-	rightchar:SetText("")
+	rightchar:SetText('')
 	updaterun:Show()
 	flowingframe:Show()
 end
  
-local a = CreateFrame ("Frame")
-	a:RegisterEvent("PLAYER_REGEN_ENABLED")
-	a:RegisterEvent("PLAYER_REGEN_DISABLED")
-	a:SetScript("OnEvent", function (self,event)
-		if (UnitIsDead("player")) then return end
-		if event == "PLAYER_REGEN_ENABLED" then allertrun("- Combat", 0.1, 1, 0.1) else allertrun("+ Combat", 1, 0.1, 0.1) end
-	end)
+local a = CreateFrame ('Frame')
+a:RegisterEvent('PLAYER_REGEN_ENABLED')
+a:RegisterEvent('PLAYER_REGEN_DISABLED')
+a:SetScript('OnEvent', function (self,event)
+	if (UnitIsDead('player')) then return end
+	if event == 'PLAYER_REGEN_ENABLED' then allertrun('- Combat', .1, 1, .1) else allertrun('+ Combat', 1, .1, .1) end
+end)

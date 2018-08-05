@@ -1,7 +1,7 @@
 local D, C, L = unpack(select(2, ...))
-if C["duffed"].spellannounce ~= true then return end
+if not C['duffed']['spellannounce'] then return end
 
-D.Spells = {
+D['Spells'] = {
 	-- Death Knight
 	[48792] = true, -- Icebound Fortitude
 	[48707] = true, -- Anti-Magic-Shell
@@ -46,38 +46,38 @@ D.Spells = {
 }
 
 local PlayerGUID
-local Name = UnitName("player")
+local Name = UnitName('player')
 local WaitTable = {}
 local OnEvent = function(self, event, ...)
 	local Time, Type, HideCaster, SourceGUID, SourceName, SourceFlags, SourceRaidFlags, DestGUID, DestName, DestFlags, DestRaidFlags, SpellID, SpellName = ...
 
 	if (SourceGUID ~= PlayerGUID) then return end
 
-	if (D.Spells[SpellID] and Type == "SPELL_CAST_SUCCESS") then
+	if (D['Spells'][SpellID] and Type == 'SPELL_CAST_SUCCESS') then
 		if (not DestName) then DestName = SourceName end
 
 		local Duration = select(6, UnitAura(DestName, SpellName)) or 10
-		local SpellString = "\124cff71d5ff\124Hspell:" .. SpellID .. "\124h[" .. SpellName .. "]\124h\124r"
-		local AnnounceTo = C["duffed"].announcechannel
+		local SpellString = '\124cff71d5ff\124Hspell:' .. SpellID .. '\124h[' .. SpellName .. ']\124h\124r'
+		local AnnounceTo = C['duffed']['announcechannel']
 
 		if (DestName ~= Name) then
 			if (Duration == nil) then
-				SendChatMessage("++ ".. SpellString .. " on " .. DestName .. "!", AnnounceTo)
+				SendChatMessage('++ '.. SpellString .. ' on ' .. DestName .. '!', AnnounceTo)
 			else
-				SendChatMessage("++ ".. SpellString .. " on " .. DestName .. " for " .. Duration .. " s", AnnounceTo)
+				SendChatMessage('++ '.. SpellString .. ' on ' .. DestName .. ' for ' .. Duration .. ' s', AnnounceTo)
 			end
 		else
-			SendChatMessage("++ ".. SpellString .. " for " .. Duration .. " s", AnnounceTo)
+			SendChatMessage('++ '.. SpellString .. ' for ' .. Duration .. ' s', AnnounceTo)
 		end
-		D.Delay(Duration, SendChatMessage, "-- ".. SpellString, AnnounceTo)
+		D['Delay'](Duration, SendChatMessage, '-- '.. SpellString, AnnounceTo)
 	end
 end
 
-local AnnounceFrame = CreateFrame("Frame")
-AnnounceFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
-AnnounceFrame:SetScript("OnEvent", function(self, event)
-    PlayerGUID = UnitGUID("player")
-    self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-    self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-    self:SetScript("OnEvent", OnEvent)
+local AnnounceFrame = CreateFrame('Frame')
+AnnounceFrame:RegisterEvent('PLAYER_ENTERING_WORLD')
+AnnounceFrame:SetScript('OnEvent', function(self, event)
+    PlayerGUID = UnitGUID('player')
+    self:UnregisterEvent('PLAYER_ENTERING_WORLD')
+    self:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
+    self:SetScript('OnEvent', OnEvent)
 end)

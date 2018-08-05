@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if C['cooldown'].rcdenable ~= true then return end
+if not C['cooldown']['rcdenable'] then return end
 
 local anchor = 'TOPLEFT'
 local x, y = 150, -150
@@ -8,9 +8,9 @@ local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local texture = C['media']['normTex']
 
 local show = {
-	raid = C['cooldown'].rcdraid,
-	party = C['cooldown'].rcdparty,
-	arena = C['cooldown'].rcdarena,
+	raid = C['cooldown']['rcdraid'],
+	party = C['cooldown']['rcdparty'],
+	arena = C['cooldown']['rcdarena'],
 }
 
 local spells = {

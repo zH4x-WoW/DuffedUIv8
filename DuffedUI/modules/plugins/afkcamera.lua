@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if C['misc'].AFKCamera ~= true then return end
+if not C['misc']['AFKCamera'] then return end
 
 local PName = UnitName('player')
 local PLevel = UnitLevel('player')
@@ -9,7 +9,7 @@ local PFaction = UnitFactionGroup('player')
 local color = D['RGBToHex'](unpack(C['media'].datatextcolor1))
 local Version = D['Version']
 
---[[Guild]]--
+-- Guild
 local function GuildText()
 	if IsInGuild() then
 		local guildName = GetGuildInfo('player')
@@ -19,13 +19,13 @@ local function GuildText()
 	end
 end
 
---[[AFK-Timer]]--
+-- AFK-Timer
 local function UpdateTimer()
 	local time = GetTime() - startTime
 	DuffedUIAFKPanel.AFKTimer:SetText(format('%02d' .. color ..':|r%02d', floor(time/60), time % 60))
 end
 
---[[Playermodel]]--
+-- Playermodel
 local function Model()
 	DuffedUIAFKPanel.modelHolder = CreateFrame('Frame', 'AFKPlayerModelHolder', DuffedUIAFKPanel)
 	DuffedUIAFKPanel.modelHolder:SetSize(150, 150)
@@ -49,7 +49,7 @@ local function Model()
 	DuffedUIAFKPanel.model:SetRotation(math.rad(-15))
 end
 
---[[Spin function]]--
+-- Spin function
 function SpinStart()
 	spinning = true
 	MoveViewRightStart(.1)
@@ -61,7 +61,7 @@ function SpinStop()
 	MoveViewRightStop()
 end
 
---[[Frames]]--
+-- Frames
 local DuffedUIAFKPanel = CreateFrame('Frame', 'DuffedUIAFKPanel', nil)
 DuffedUIAFKPanel:SetPoint('BOTTOM', UIParent, 'BOTTOM', 0, 100)
 DuffedUIAFKPanel:SetSize((D['ScreenWidth'] * C['general']['uiscale']), 80)
@@ -134,7 +134,7 @@ end
 DuffedUIAFKPanel.PlayerInfoText:SetFont(C['media']['font'], 15, 'OUTLINE')
 DuffedUIAFKPanel.PlayerInfoText:SetText(LEVEL .. ' ' .. PLevel .. ' ' .. PFaction .. ' ' .. color .. PClass .. '|r')
 
---[[Dynamic time & date]]--
+-- Dynamic time & date
 local interval = 0
 DuffedUIAFKPanel:SetScript('OnUpdate', function(self, elapsed)
 	interval = interval - elapsed
@@ -146,7 +146,7 @@ DuffedUIAFKPanel:SetScript('OnUpdate', function(self, elapsed)
 	end
 end)
 
---[[Register events, script to start]]--
+-- Register events, script to start
 DuffedUIAFKPanel:RegisterEvent('PLAYER_FLAGS_CHANGED')
 DuffedUIAFKPanel:RegisterEvent('PLAYER_REGEN_DISABLED')
 DuffedUIAFKPanel:RegisterEvent('PLAYER_DEAD')
@@ -183,6 +183,6 @@ DuffedUIAFKPanel:SetScript('OnEvent', function(self, event, unit)
 	end
 end)
 
---[[Fade in & out]]--
+-- Fade in & out
 DuffedUIAFKPanel:SetScript('OnShow', function(self) UIFrameFadeIn(UIParent, .5, 1, 0) end)
 DuffedUIAFKPanel:SetScript('OnHide', function(self) UIFrameFadeOut(UIParent, .5, 0, 1) end)
