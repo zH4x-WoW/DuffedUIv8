@@ -261,10 +261,6 @@ function Bags:CreateContainer(storagetype, ...)
 			Sort.Text:SetPoint('CENTER', 0, 0)
 			Sort.Text:SetText(BAG_FILTER_CLEANUP)
 			Sort.Text:SetTextColor(1, 1, 1)
-			Sort:SetScript('OnMouseDown', function(self, button)
-				if InCombatLockdown() then return end
-				if button == 'RightButton' then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
-			end)
 			Sort.ClearAllPoints = D['Dummy']
 			Sort.SetPoint = D['Dummy']
 		end
@@ -356,10 +352,7 @@ function Bags:CreateContainer(storagetype, ...)
 			SortButton.Text:SetPoint('CENTER')
 			SortButton.Text:SetText(BAG_FILTER_CLEANUP)
 			SortButton.Text:SetTextColor(1, 1, 1)
-			SortButton:SetScript('OnMouseDown', function(self, button)
-				if InCombatLockdown() then return end
-				if button == 'RightButton' then JPack:Pack(nil, 1) else JPack:Pack(nil, 2) end
-			end)
+			SortButton:SetScript('OnClick', BankFrame_AutoSortButtonOnClick)
 		end
 
 		Purchase:ClearAllPoints()
