@@ -8,7 +8,7 @@ local D, C, L = unpack(select(2, ...))
 --	Colors
 ------------------------------------------------------------------------
 
-D.UnitColor = setmetatable({
+D['UnitColor'] = setmetatable({
 	tapped = {0.55, 0.57, 0.61},
 	disconnected = {0.84, 0.75, 0.65},
 	power = setmetatable({
@@ -55,4 +55,4 @@ D.UnitColor = setmetatable({
 	}, {__index = oUF.colors.class}),
 }, {__index = oUF.colors})
 
-D.ColorTemplate = D.UnitColor
+D.ColorTemplate = D['UnitColor']

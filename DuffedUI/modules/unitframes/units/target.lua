@@ -16,13 +16,8 @@ local backdrop = {
 	insets = {top = -D['mult'], left = -D['mult'], bottom = -D['mult'], right = -D['mult']},
 }
 
-local function SetCastBarColorShielded(self)
-	self.__owner:SetStatusBarColor(1, 0, 0, .3)
-end
-
-local function SetCastBarColorDefault(self)
-	self.__owner:SetStatusBarColor(unpack(C['castbar']['color']))
-end
+local function SetCastBarColorShielded(self) self.__owner:SetStatusBarColor(1, 0, 0, .3) end
+local function SetCastBarColorDefault(self) self.__owner:SetStatusBarColor(unpack(C['castbar']['color'])) end
 
 D['ConstructUFTarget'] = function(self)
 	-- Initial Elements
@@ -91,7 +86,7 @@ D['ConstructUFTarget'] = function(self)
 	health.value = health:CreateFontString(nil, 'OVERLAY')
 	health.value:SetFont(f, fs, ff)
 	if layout == 4 then health.value:Point('LEFT', health, 'LEFT', 4, 10) else health.value:Point('RIGHT', health, 'RIGHT', -4, -1) end
-	health.PostUpdate = D.PostUpdateHealth
+	health.PostUpdate = D['PostUpdateHealth']
 
 	health.frequentUpdates = true
 	if C['unitframes']['showsmooth'] == true then health.Smooth = true end
@@ -99,8 +94,8 @@ D['ConstructUFTarget'] = function(self)
 		health.colorTapping = false
 		health.colorDisconnected = false
 		health.colorClass = false
-		health:SetStatusBarColor(unpack(C['unitframes'].healthbarcolor))
-		healthBG:SetVertexColor(unpack(C['unitframes'].deficitcolor))
+		health:SetStatusBarColor(unpack(C['unitframes']['healthbarcolor']))
+		healthBG:SetVertexColor(unpack(C['unitframes']['deficitcolor']))
 		healthBG:SetColorTexture(.6, .6, .6)
 		if C['unitframes']['ColorGradient'] then
 			health.colorSmooth = true
@@ -151,7 +146,7 @@ D['ConstructUFTarget'] = function(self)
 		if layout == 4 then power.value:Point('LEFT', health, 'LEFT', 4, -1) else power.value:Point('RIGHT', panel, 'RIGHT', -4, -1) end
 	end
 
-	power.PostUpdate = D.PostUpdatePower
+	power.PostUpdate = D['PostUpdatePower']
 	power.frequentUpdates = true
 	power.colorDisconnected = true
 	if C['unitframes']['showsmooth'] == true then power.Smooth = true end
@@ -223,7 +218,7 @@ D['ConstructUFTarget'] = function(self)
 		bgFile = C['media']['blank'], 
 		edgeFile = C['media']['blank'], 
 		tile = false, tileSize = 0, edgeSize = 1, 
-		insets = { left = 0, right = 0, top = 0, bottom = D.Scale(-1)}
+		insets = { left = 0, right = 0, top = 0, bottom = D['Scale'](-1)}
 	})
 	AltPowerBar:SetBackdropColor(0, 0, 0)
 
@@ -267,16 +262,16 @@ D['ConstructUFTarget'] = function(self)
 		buffs.initialAnchor = 'TOPLEFT'
 		buffs['growth-y'] = 'UP'
 		buffs['growth-x'] = 'RIGHT'
-		buffs.PostCreateIcon = D.PostCreateAura
-		buffs.PostUpdateIcon = D.PostUpdateAura
+		buffs.PostCreateIcon = D['PostCreateAura']
+		buffs.PostUpdateIcon = D['PostUpdateAura']
 		self.Buffs = buffs
 
 		debuffs.spacing = 2
 		debuffs.initialAnchor = 'TOPRIGHT'
 		debuffs['growth-y'] = 'UP'
 		debuffs['growth-x'] = 'LEFT'
-		debuffs.PostCreateIcon = D.PostCreateAura
-		debuffs.PostUpdateIcon = D.PostUpdateAura
+		debuffs.PostCreateIcon = D['PostCreateAura']
+		debuffs.PostUpdateIcon = D['PostUpdateAura']
 
 		debuffs.onlyShowPlayer = C['unitframes']['onlyselfdebuffs']
 		self.Debuffs = debuffs

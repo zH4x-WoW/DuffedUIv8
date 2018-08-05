@@ -114,8 +114,8 @@ D['ConstructNameplates'] = function(self)
 	debuffs.initialAnchor = 'TOPLEFT'
 	debuffs['growth-y'] = 'UP'
 	debuffs['growth-x'] = 'RIGHT'
-	debuffs.PostCreateIcon = D.PostCreateAura
-	debuffs.PostUpdateIcon = D.PostUpdateAura
+	debuffs.PostCreateIcon = D['PostCreateAura']
+	debuffs.PostUpdateIcon = D['PostUpdateAura']
 
 	-- castbar
 	local castbar = CreateFrame('StatusBar', self:GetName() .. 'CastBar', self)

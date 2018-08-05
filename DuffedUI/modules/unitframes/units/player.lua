@@ -149,7 +149,7 @@ D['ConstructUFPlayer'] = function(self)
 	power.value:SetFont(f, fs, ff)
 	if layout == 4 then power.value:Point('RIGHT', health, 'RIGHT', -4, -1) else power.value:Point('LEFT', health, 'LEFT', 4, -1) end
 	
-	power.PostUpdate = D.PostUpdatePower
+	power.PostUpdate = D['PostUpdatePower']
 	power.frequentUpdates = true
 	power.colorDisconnected = true
 	if C['unitframes']['unicolor'] then
@@ -225,8 +225,8 @@ D['ConstructUFPlayer'] = function(self)
 	MasterLooter:Height(14)
 	MasterLooter:Width(14)
 	self.MasterLooterIndicator = MasterLooter
-	self:RegisterEvent('PARTY_LEADER_CHANGED', D.MLAnchorUpdate)
-	self:RegisterEvent('GROUP_ROSTER_UPDATE', D.MLAnchorUpdate)
+	self:RegisterEvent('PARTY_LEADER_CHANGED', D['MLAnchorUpdate'])
+	self:RegisterEvent('GROUP_ROSTER_UPDATE', D['MLAnchorUpdate'])
 
 	local RaidIcon = health:CreateTexture(nil, 'OVERLAY')
 	RaidIcon:SetTexture(C['media']['RaidIcons'])
@@ -356,7 +356,7 @@ D['ConstructUFPlayer'] = function(self)
 	self.LeaderIndicator = Leader
 	self.RaidTargetIndicator = RaidIcon
 
-	self:RegisterEvent('PLAYER_ENTERING_WORLD', D.updateAllElements)
+	self:RegisterEvent('PLAYER_ENTERING_WORLD', D['updateAllElements'])
 	if C['unitframes']['classbar'] then D['ClassRessource'][class](self) end
 	if C['classtimer']['enable'] then D['ClassTimer'](self) end
 end

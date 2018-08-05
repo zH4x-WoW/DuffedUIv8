@@ -4,7 +4,7 @@ if not C['tooltip']['enable'] then return end
 
 local _G = _G
 local unpack = unpack
-local Colors = D.UnitColor
+local Colors = D['UnitColor']
 local RaidColors = RAID_CLASS_COLORS
 local DuffedUITooltips = CreateFrame('Frame')
 local gsub, find, format = string.gsub, string.find, string.format

@@ -12,21 +12,21 @@ local CreateSpellEntry = function(id, castByAnyone, color, unitType, castSpellId
 end
 
 --[[Configuration starts here]]--
-local BAR_HEIGHT = C["classtimer"]["height"]
-local BAR_SPACING = C["classtimer"]["spacing"]
-local SPARK = C["classtimer"]["spark"]
-local CAST_SEPARATOR = C["classtimer"]["separator"]
-local CAST_SEPARATOR_COLOR = C["classtimer"]["separatorcolor"]
+local BAR_HEIGHT = C['classtimer']['height']
+local BAR_SPACING = C['classtimer']['spacing']
+local SPARK = C['classtimer']['spark']
+local CAST_SEPARATOR = C['classtimer']['separator']
+local CAST_SEPARATOR_COLOR = C['classtimer']['separatorcolor']
 local TEXT_MARGIN = 5
 local PERMANENT_AURA_VALUE = 1
-local PLAYER_BAR_COLOR = C["classtimer"]["playercolor"]
+local PLAYER_BAR_COLOR = C['classtimer']['playercolor']
 local PLAYER_DEBUFF_COLOR = nil
-local TARGET_BAR_COLOR = C["classtimer"]["targetbuffcolor"]
-local TARGET_DEBUFF_COLOR = C["classtimer"]["targetdebuffcolor"]
-local TRINKET_BAR_COLOR = C["classtimer"]["trinketcolor"]
-local f, fs, ff = C['media']['font'], 11, "THINOUTLINE"
-local layout = C["unitframes"]["layout"]
-local move = D["move"]
+local TARGET_BAR_COLOR = C['classtimer']['targetbuffcolor']
+local TARGET_DEBUFF_COLOR = C['classtimer']['targetdebuffcolor']
+local TRINKET_BAR_COLOR = C['classtimer']['trinketcolor']
+local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
+local layout = C['unitframes']['layout']
+local move = D['move']
 
 local SORT_DIRECTION = true
 local TENTHS_TRESHOLD = 1
@@ -930,15 +930,15 @@ local CLASS_FILTERS = {
 	},
 }
 
-D["ClassTimer"] = function(self)
+D['ClassTimer'] = function(self)
 	local CreateUnitAuraDataSource
 	do
-		local auraTypes = { "HELPFUL", "HARMFUL" }
+		local auraTypes = { 'HELPFUL', 'HARMFUL' }
 
-		--[[private]]--
+		-- private
 		local CheckFilter = function(self, id, caster, filter)
 			if (filter == nil) then return false end
-			local byPlayer = caster == "player" or caster == "pet" or caster == "vehicle"
+			local byPlayer = caster == 'player' or caster == 'pet' or caster == 'vehicle'
 			for _, v in ipairs(filter) do
 				if (v.id == id and (v.castByAnyone or byPlayer)) then return v end
 			end
@@ -947,9 +947,9 @@ D["ClassTimer"] = function(self)
 
 		local CheckUnit = function(self, unit, filter, result)
 			if (not UnitExists(unit)) then return 0 end
-			local unitIsFriend = UnitIsFriend("player", unit)
+			local unitIsFriend = UnitIsFriend('player', unit)
 			for _, auraType in ipairs(auraTypes) do
-				local isDebuff = auraType == "HARMFUL"
+				local isDebuff = auraType == 'HARMFUL'
 
 				for index = 1, 40 do
 					local name, texture, stacks, _, duration, expirationTime, caster, _, _, spellId = UnitAura(unit, index, auraType)
@@ -969,12 +969,12 @@ D["ClassTimer"] = function(self)
 			end
 		end
 
-		--[[public]]--
+		-- public
 		local Update = function(self)
 			local result = self.table
 			for index = 1, #result do table.remove(result) end
 			CheckUnit(self, self.unit, self.filter, result)
-			if (self.includePlayer) then CheckUnit(self, "player", self.playerFilter, result) end
+			if (self.includePlayer) then CheckUnit(self, 'player', self.playerFilter, result) end
 			self.table = result
 		end
 
@@ -1039,7 +1039,7 @@ D["ClassTimer"] = function(self)
 		local GetIncludePlayer = function(self) return self.includePlayer end
 		local SetIncludePlayer = function(self, value) self.includePlayer = value end
 
-		--[[constructor]]--
+		-- constructor
 		CreateUnitAuraDataSource = function(unit)
 			local result = {}
 			result.Sort = Sort
@@ -1064,19 +1064,19 @@ D["ClassTimer"] = function(self)
 
 	local CreateFramedTexture
 	do
-		--[[public]]--
+		--public
 		local SetTexture = function(self, ...) return self.texture:SetTexture(...) end
 		local GetTexture = function(self) return self.texture:GetTexture() end
 		local GetTexCoord = function(self) return self.texture:GetTexCoord() end
 		local SetTexCoord = function(self, ...) return self.texture:SetTexCoord(...) end
 		local SetBorderColor = function(self, ...) return self.border:SetVertexColor(...) end
 
-		--[[constructor]]--
+		-- constructor
 		CreateFramedTexture = function(parent)
-			local result = parent:CreateTexture(nil, "BACKGROUND", nil)
-			local texture = parent:CreateTexture(nil, "OVERLAY", nil)
-			texture:Point("TOPLEFT", result, "TOPLEFT", 3, -3)
-			texture:Point("BOTTOMRIGHT", result, "BOTTOMRIGHT", -3, 3)
+			local result = parent:CreateTexture(nil, 'BACKGROUND', nil)
+			local texture = parent:CreateTexture(nil, 'OVERLAY', nil)
+			texture:Point('TOPLEFT', result, 'TOPLEFT', 3, -3)
+			texture:Point('BOTTOMRIGHT', result, 'BOTTOMRIGHT', -3, 3)
 			result.texture = texture
 			result.SetTexture = SetTexture
 			result.GetTexture = GetTexture
@@ -1088,46 +1088,46 @@ D["ClassTimer"] = function(self)
 
 	local CreateAuraBarFrame
 	do
-		--[[classes]]--
+		-- classes
 		local CreateAuraBar
 		do
-			--[[private]]--
+			-- private
 			local OnUpdate = function(self, elapsed)
 				local time = GetTime()
 				if (time > self.expirationTime) then
-					self.bar:SetScript("OnUpdate", nil)
+					self.bar:SetScript('OnUpdate', nil)
 					self.bar:SetValue(0)
-					self.time:SetText("")
+					self.time:SetText('')
 					local spark = self.spark
 					if (spark) then spark:Hide() end
 				else
 					local remaining = self.expirationTime - time
 					self.bar:SetValue(remaining)
-					local timeText = ""
+					local timeText = ''
 					if (remaining >= 3600) then
-						timeText = tostring(math.floor(remaining / 3600)) .. D['PanelColor'] .. "h"
+						timeText = tostring(math.floor(remaining / 3600)) .. D['PanelColor'] .. 'h'
 					elseif (remaining >= 60) then
-						timeText = tostring(math.floor(remaining / 60)) .. D['PanelColor'] .. "m"
+						timeText = tostring(math.floor(remaining / 60)) .. D['PanelColor'] .. 'm'
 					elseif (remaining > TENTHS_TRESHOLD) then
-						timeText = tostring(math.floor(remaining)) .. D['PanelColor'] .. "s"
+						timeText = tostring(math.floor(remaining)) .. D['PanelColor'] .. 's'
 					elseif (remaining > 0) then
-						timeText = tostring(math.floor(remaining * 10) / 10) .. D['PanelColor'] .. "s"
+						timeText = tostring(math.floor(remaining * 10) / 10) .. D['PanelColor'] .. 's'
 					end
 					self.time:SetText(timeText)
 					local barWidth = self.bar:GetWidth()
 					local spark = self.spark
-					if (spark) then spark:Point("CENTER", self.bar, "LEFT", barWidth * remaining / self.duration, 0) end
+					if (spark) then spark:Point('CENTER', self.bar, 'LEFT', barWidth * remaining / self.duration, 0) end
 
 					local castSeparator = self.castSeparator
 					if (castSeparator and self.castSpellId) then
 						local _, _, _, castTime, _, _ = GetSpellInfo(self.castSpellId)
 						castTime = castTime / 1000
-						if (castTime and remaining > castTime) then castSeparator:Point("CENTER", self.bar, "LEFT", barWidth * (remaining - castTime) / self.duration, 0) else castSeparator:Hide() end
+						if (castTime and remaining > castTime) then castSeparator:Point('CENTER', self.bar, 'LEFT', barWidth * (remaining - castTime) / self.duration, 0) else castSeparator:Hide() end
 					end
 				end
 			end
 
-			--[[public]]--
+			-- public
 			local SetIcon = function(self, icon)
 				if (not self.icon) then return end
 				self.icon:SetTexture(icon)
@@ -1141,14 +1141,14 @@ D["ClassTimer"] = function(self)
 					OnUpdate(self, 0)
 					local spark = self.spark
 					if (spark) then spark:Show() end
-					self:SetScript("OnUpdate", OnUpdate)
+					self:SetScript('OnUpdate', OnUpdate)
 				else
 					self.bar:SetMinMaxValues(0, 1)
 					self.bar:SetValue(PERMANENT_AURA_VALUE)
-					self.time:SetText("")
+					self.time:SetText('')
 					local spark = self.spark
 					if (spark) then spark:Hide() end
-					self:SetScript("OnUpdate", nil)
+					self:SetScript('OnUpdate', nil)
 				end
 			end
 
@@ -1157,10 +1157,10 @@ D["ClassTimer"] = function(self)
 				if (not self.stacks) then
 					if (stacks ~= nil and stacks > 1) then
 						local name = self.name
-						name:SetText(tostring(stacks) .. "  " .. name:GetText())
+						name:SetText(tostring(stacks) .. '  ' .. name:GetText())
 					end
 				else
-					if (stacks ~= nil and stacks > 1) then self.stacks:SetText(stacks) else self.stacks:SetText("") end
+					if (stacks ~= nil and stacks > 1) then self.stacks:SetText(stacks) else self.stacks:SetText('') end
 				end
 			end
 
@@ -1181,50 +1181,50 @@ D["ClassTimer"] = function(self)
 				self:SetCastSpellId(auraInfo.castSpellId)
 			end
 
-			--[[constructor]]--
+			-- constructor
 			CreateAuraBar = function(parent)
-				local result = CreateFrame("Frame", nil, parent, nil)
-				local icon = CreateFramedTexture(result, "ARTWORK")
+				local result = CreateFrame('Frame', nil, parent, nil)
+				local icon = CreateFramedTexture(result, 'ARTWORK')
 				icon:SetTexCoord(.15, .85, .15, .85)
 
 				local iconAnchor1
 				local iconAnchor2
 				local iconOffset
-				iconAnchor1 = "TOPRIGHT"
-				iconAnchor2 = "TOPLEFT"
+				iconAnchor1 = 'TOPRIGHT'
+				iconAnchor2 = 'TOPLEFT'
 				iconOffset = -1
 				icon:Point(iconAnchor1, result, iconAnchor2, iconOffset * -5, 3)
 				icon:SetWidth(BAR_HEIGHT + 6)
 				icon:SetHeight(BAR_HEIGHT + 6)
 				result.icon = icon
 
-				local stacks = result:CreateFontString(nil, "OVERLAY", nil)
+				local stacks = result:CreateFontString(nil, 'OVERLAY', nil)
 				stacks:SetFont(f, fs, ff)
 				stacks:SetShadowColor(0, 0, 0)
 				stacks:SetShadowOffset(1.25, -1.25)
-				stacks:SetJustifyH("RIGHT")
-				stacks:SetJustifyV("BOTTOM")
-				stacks:Point("TOPLEFT", icon, "TOPLEFT", 0, 0)
-				stacks:Point("BOTTOMRIGHT", icon, "BOTTOMRIGHT", -1, 3)
+				stacks:SetJustifyH('RIGHT')
+				stacks:SetJustifyV('BOTTOM')
+				stacks:Point('TOPLEFT', icon, 'TOPLEFT', 0, 0)
+				stacks:Point('BOTTOMRIGHT', icon, 'BOTTOMRIGHT', -1, 3)
 				result.stacks = stacks
 
-				local bar = CreateFrame("StatusBar", nil, result, nil)
+				local bar = CreateFrame('StatusBar', nil, result, nil)
 				bar:SetStatusBarTexture(C['media']['normTex'])
-				bar:Point("TOPLEFT", result, "TOPLEFT", 9, 0)
-				bar:Point("BOTTOMRIGHT", result, "BOTTOMRIGHT", 0, 0)
+				bar:Point('TOPLEFT', result, 'TOPLEFT', 9, 0)
+				bar:Point('BOTTOMRIGHT', result, 'BOTTOMRIGHT', 0, 0)
 				result.bar = bar
 
 				if (SPARK) then
-					local spark = bar:CreateTexture(nil, "OVERLAY", nil)
+					local spark = bar:CreateTexture(nil, 'OVERLAY', nil)
 					spark:SetTexture([[Interface\CastingBar\UI-CastingBar-Spark]])
 					spark:SetWidth(12)
-					spark:SetBlendMode("ADD")
+					spark:SetBlendMode('ADD')
 					spark:Show()
 					result.spark = spark
 				end
 
 				if (CAST_SEPARATOR) then
-					local castSeparator = bar:CreateTexture(nil, "OVERLAY", nil)
+					local castSeparator = bar:CreateTexture(nil, 'OVERLAY', nil)
 					castSeparator:SetTexture(unpack(CAST_SEPARATOR_COLOR))
 					castSeparator:SetWidth(1)
 					castSeparator:SetHeight(BAR_HEIGHT)
@@ -1232,20 +1232,20 @@ D["ClassTimer"] = function(self)
 					result.castSeparator = castSeparator
 				end
 
-				local name = bar:CreateFontString(nil, "OVERLAY", nil)
+				local name = bar:CreateFontString(nil, 'OVERLAY', nil)
 				name:SetFont(f, fs, ff)
 				name:SetShadowColor(0, 0, 0)
 				name:SetShadowOffset(1.25, -1.25)
-				name:SetJustifyH("LEFT")
-				name:Point("TOPLEFT", bar, "TOPLEFT", TEXT_MARGIN, 0)
-				name:Point("BOTTOMRIGHT", bar, "BOTTOMRIGHT", -45, 0)
+				name:SetJustifyH('LEFT')
+				name:Point('TOPLEFT', bar, 'TOPLEFT', TEXT_MARGIN, 0)
+				name:Point('BOTTOMRIGHT', bar, 'BOTTOMRIGHT', -45, 0)
 				result.name = name
 
-				local time = bar:CreateFontString(nil, "OVERLAY", nil)
+				local time = bar:CreateFontString(nil, 'OVERLAY', nil)
 				time:SetFont(f, fs, ff)
-				time:SetJustifyH("RIGHT")
-				time:Point("LEFT", name, "RIGHT", 0, 0)
-				time:Point("RIGHT", bar, "RIGHT", -TEXT_MARGIN, 0)
+				time:SetJustifyH('RIGHT')
+				time:Point('LEFT', name, 'RIGHT', 0, 0)
+				time:Point('RIGHT', bar, 'RIGHT', -TEXT_MARGIN, 0)
 				result.time = time
 
 				result.SetIcon = SetIcon
@@ -1259,18 +1259,18 @@ D["ClassTimer"] = function(self)
 			end
 		end
 
-		--[[private]]--
+		-- private
 		local SetAuraBar = function(self, index, auraInfo)
 			local line = self.lines[ index ]
 			if (line == nil) then
 				line = CreateAuraBar(self)
 				if (index == 1) then
-					line:Point("TOPLEFT", self, "BOTTOMLEFT", 13, BAR_HEIGHT)
-					line:Point("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, 0)
+					line:Point('TOPLEFT', self, 'BOTTOMLEFT', 13, BAR_HEIGHT)
+					line:Point('BOTTOMRIGHT', self, 'BOTTOMRIGHT', 0, 0)
 				else
 					local anchor = self.lines[ index - 1 ]
-					line:Point("TOPLEFT", anchor, "TOPLEFT", 0, BAR_HEIGHT + BAR_SPACING)
-					line:Point("BOTTOMRIGHT", anchor, "TOPRIGHT", 0, BAR_SPACING)
+					line:Point('TOPLEFT', anchor, 'TOPLEFT', 0, BAR_HEIGHT + BAR_SPACING)
+					line:Point('BOTTOMRIGHT', anchor, 'TOPRIGHT', 0, BAR_SPACING)
 				end
 				tinsert(self.lines, index, line)
 			end
@@ -1286,25 +1286,25 @@ D["ClassTimer"] = function(self)
 		end
 
 		local function OnUnitAura(self, unit)
-			if (unit ~= self.unit and (self.dataSource:GetIncludePlayer() == false or unit ~= "player")) then return end
+			if (unit ~= self.unit and (self.dataSource:GetIncludePlayer() == false or unit ~= 'player')) then return end
 			self:Render()
 		end
 
 		local function OnPlayerTargetChanged(self, method) self:Render() end
 		local function OnPlayerEnteringWorld(self) self:Render() end
 		local function OnEvent(self, event, ...)
-			if (event == "UNIT_AURA") then
+			if (event == 'UNIT_AURA') then
 				OnUnitAura(self, ...)
-			elseif (event == "PLAYER_TARGET_CHANGED") then
+			elseif (event == 'PLAYER_TARGET_CHANGED') then
 				OnPlayerTargetChanged(self, ...)
-			elseif (event == "PLAYER_ENTERING_WORLD") then
+			elseif (event == 'PLAYER_ENTERING_WORLD') then
 				OnPlayerEnteringWorld(self)
 			else
-				error("Unhandled event " .. event)
+				error('Unhandled event ' .. event)
 			end
 		end
 
-		--[[public]]--
+		-- public
 		local function Render(self)
 			local dataSource = self.dataSource
 
@@ -1326,26 +1326,26 @@ D["ClassTimer"] = function(self)
 			end
 		end
 
-		--[[constructor]]--
+		-- constructor
 		CreateAuraBarFrame = function(dataSource, parent)
-			local result = CreateFrame("Frame", nil, parent, nil)
+			local result = CreateFrame('Frame', nil, parent, nil)
 			local unit = dataSource:GetUnit()
 
 			result.unit = unit
 			result.lines = {}
 			result.dataSource = dataSource
 
-			local background = CreateFrame("Frame", nil, result, nil)
-			background:SetFrameStrata("BACKGROUND")
-			background:Point("TOPLEFT", result, "TOPLEFT", 20, 2)
-			background:Point("BOTTOMRIGHT", result, "BOTTOMRIGHT", 2, -2)
-			background:SetTemplate("Transparent")
+			local background = CreateFrame('Frame', nil, result, nil)
+			background:SetFrameStrata('BACKGROUND')
+			background:Point('TOPLEFT', result, 'TOPLEFT', 20, 2)
+			background:Point('BOTTOMRIGHT', result, 'BOTTOMRIGHT', 2, -2)
+			background:SetTemplate('Transparent')
 			result.background = background
 
-			local border = CreateFrame("Frame", nil, result, nil)
-			border:SetFrameStrata("BACKGROUND")
-			border:Point("TOPLEFT", result, "TOPLEFT", 21, 1)
-			border:Point("BOTTOMRIGHT", result, "BOTTOMRIGHT", 1, -1)
+			local border = CreateFrame('Frame', nil, result, nil)
+			border:SetFrameStrata('BACKGROUND')
+			border:Point('TOPLEFT', result, 'TOPLEFT', 21, 1)
+			border:Point('BOTTOMRIGHT', result, 'BOTTOMRIGHT', 1, -1)
 			border:SetBackdrop {
 				edgeFile = C['media']['blank'], edgeSize = 1,
 				insets = {left = 0, right = 0, top = 0, bottom = 0}
@@ -1354,27 +1354,27 @@ D["ClassTimer"] = function(self)
 			border:SetBackdropBorderColor(unpack(C['media']['backdropcolor']))
 			result.border = border
 
-			iconborder = CreateFrame("Frame", nil, result)
-			iconborder:SetTemplate("Default")
+			iconborder = CreateFrame('Frame', nil, result)
+			iconborder:SetTemplate('Default')
 			iconborder:Size(1, 1)
-			iconborder:Point("TOPLEFT", result, "TOPLEFT", -2, 2)
-			iconborder:Point("BOTTOMRIGHT", result, "BOTTOMLEFT", BAR_HEIGHT + 2, -2)
+			iconborder:Point('TOPLEFT', result, 'TOPLEFT', -2, 2)
+			iconborder:Point('BOTTOMRIGHT', result, 'BOTTOMLEFT', BAR_HEIGHT + 2, -2)
 
-			result:RegisterEvent("PLAYER_ENTERING_WORLD")
-			result:RegisterEvent("UNIT_AURA")
-			if (unit == "target") then result:RegisterEvent("PLAYER_TARGET_CHANGED") end
-			result:SetScript("OnEvent", OnEvent)
+			result:RegisterEvent('PLAYER_ENTERING_WORLD')
+			result:RegisterEvent('UNIT_AURA')
+			if (unit == 'target') then result:RegisterEvent('PLAYER_TARGET_CHANGED') end
+			result:SetScript('OnEvent', OnEvent)
 			result.Render = Render
 			return result
 		end
 	end
 
-	local _, playerClass = UnitClass("player")
+	local _, playerClass = UnitClass('player')
 	local classFilter = CLASS_FILTERS[ playerClass ]
 
-	local targetDataSource = CreateUnitAuraDataSource("target")
-	local playerDataSource = CreateUnitAuraDataSource("player")
-	local trinketDataSource = CreateUnitAuraDataSource("player")
+	local targetDataSource = CreateUnitAuraDataSource('target')
+	local playerDataSource = CreateUnitAuraDataSource('player')
+	local trinketDataSource = CreateUnitAuraDataSource('player')
 
 	targetDataSource:SetSortDirection(SORT_DIRECTION)
 	playerDataSource:SetSortDirection(SORT_DIRECTION)
@@ -1389,30 +1389,30 @@ D["ClassTimer"] = function(self)
 
 	local playerFrame = CreateAuraBarFrame(playerDataSource, self.Health)
 	if layout == 3 then
-		playerFrame:Point("BOTTOMLEFT", self.Health, "TOPLEFT", 0, 25)
-		playerFrame:Point("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, 25)
+		playerFrame:Point('BOTTOMLEFT', self.Health, 'TOPLEFT', 0, 25)
+		playerFrame:Point('BOTTOMRIGHT', self.Health, 'TOPRIGHT', 0, 25)
 	else
-		playerFrame:Point("BOTTOMLEFT", self.Health, "TOPLEFT", 0, 7)
-		playerFrame:Point("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, 7)
+		playerFrame:Point('BOTTOMLEFT', self.Health, 'TOPLEFT', 0, 7)
+		playerFrame:Point('BOTTOMRIGHT', self.Health, 'TOPRIGHT', 0, 7)
 	end
 
 	local trinketFrame = CreateAuraBarFrame(trinketDataSource, self.Health)
-	trinketFrame:Point("BOTTOMLEFT", playerFrame, "TOPLEFT", 0, 5)
-	trinketFrame:Point("BOTTOMRIGHT", playerFrame, "TOPRIGHT", 0, 5)
+	trinketFrame:Point('BOTTOMLEFT', playerFrame, 'TOPLEFT', 0, 5)
+	trinketFrame:Point('BOTTOMRIGHT', playerFrame, 'TOPRIGHT', 0, 5)
 
-	if C["classtimer"]["debuffsenable"] then
+	if C['classtimer']['debuffsenable'] then
 		local targetFrame = CreateAuraBarFrame(targetDataSource, self.Health)
-		if C["classtimer"]["targetdebuff"] then
-			local debuffMover = CreateFrame("Frame", "DebuffMover", UIParent)
+		if C['classtimer']['targetdebuff'] then
+			local debuffMover = CreateFrame('Frame', 'DebuffMover', UIParent)
 			debuffMover:SetSize(218, 15)
-			debuffMover:SetPoint("BOTTOM", UIParent, "BOTTOM", 340, 380)
+			debuffMover:SetPoint('BOTTOM', UIParent, 'BOTTOM', 340, 380)
 			move:RegisterFrame(debuffMover)
 
-			targetFrame:Point("BOTTOMLEFT", DebuffMover, "TOPLEFT", 0, 5)
-			targetFrame:Point("BOTTOMRIGHT", DebuffMover, "TOPRIGHT", 0, 5)
+			targetFrame:Point('BOTTOMLEFT', DebuffMover, 'TOPLEFT', 0, 5)
+			targetFrame:Point('BOTTOMRIGHT', DebuffMover, 'TOPRIGHT', 0, 5)
 		else
-			targetFrame:Point("BOTTOMLEFT", trinketFrame, "TOPLEFT", 0, 5)
-			targetFrame:Point("BOTTOMRIGHT", trinketFrame, "TOPRIGHT", 0, 5)
+			targetFrame:Point('BOTTOMLEFT', trinketFrame, 'TOPLEFT', 0, 5)
+			targetFrame:Point('BOTTOMRIGHT', trinketFrame, 'TOPRIGHT', 0, 5)
 		end
 	end
 end

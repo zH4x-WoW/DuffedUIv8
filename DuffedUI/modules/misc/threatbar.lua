@@ -24,7 +24,7 @@ DuffedUIThreatBar.text:Point('RIGHT', DuffedUIThreatBar, 'RIGHT', -30, 0)
 
 DuffedUIThreatBar.Title = D.SetFontString(DuffedUIThreatBar, C['media']['font'], 11)
 DuffedUIThreatBar.Title:SetText(L['uf']['threat1'])
-DuffedUIThreatBar.Title:SetPoint('LEFT', DuffedUIThreatBar, 'LEFT', D.Scale(30), 0)
+DuffedUIThreatBar.Title:SetPoint('LEFT', DuffedUIThreatBar, 'LEFT', D['Scale'](30), 0)
   
 DuffedUIThreatBar.bg = DuffedUIThreatBar:CreateTexture(nil, 'BORDER')
 DuffedUIThreatBar.bg:SetAllPoints(DuffedUIThreatBar)

@@ -6,7 +6,7 @@ local Color = RAID_CLASS_COLORS[D['Class']]
 local move = D['move']
 D['ClassRessource'] = {}
 
---[[Mover for ressources]]--
+-- Mover for ressources
 if not C['unitframes']['attached'] then
 	local cba = CreateFrame('Frame', 'RessourceMover', UIParent)
 	cba:Size(250, 15)
@@ -14,7 +14,7 @@ if not C['unitframes']['attached'] then
 	move:RegisterFrame(cba)
 end
 
---[[Function for oocHide]]--
+-- Function for oocHide
 D['oocHide'] = function(frame)
 	frame:RegisterEvent('PLAYER_REGEN_DISABLED')
 	frame:RegisterEvent('PLAYER_REGEN_ENABLED')
@@ -30,7 +30,7 @@ D['oocHide'] = function(frame)
 	end)
 end
 
---[[Energybar]]--
+-- Energybar
 D['ConstructEnergy'] = function(name, width, height)
 	local eb = CreateFrame('StatusBar', name, UIParent)
 	eb:SetPoint('TOP', RessourceMover, 'BOTTOM', 0, 5)

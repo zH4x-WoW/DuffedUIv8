@@ -23,7 +23,7 @@ D['ConstructUFRaid'] = function(self)
 	self:SetScript('OnLeave', UnitFrame_OnLeave)
 	self:SetAttribute('type2', 'togglemenu')
 
-	--[[Health]]--
+	-- Health
 	local health = CreateFrame('StatusBar', nil, self)
 	if layout == 'dps' then
 		health:Height(15)
@@ -73,7 +73,7 @@ D['ConstructUFRaid'] = function(self)
 	self.Health.bg = health.bg
 	self.Health.value = health.value
 
-	--[[Power]]--
+	-- Power
 	local power = CreateFrame('StatusBar', nil, self)
 	power:SetStatusBarTexture(texture)
 	if layout == 'heal' then
@@ -106,7 +106,7 @@ D['ConstructUFRaid'] = function(self)
 	self.Power = power
 	self.Power.bg = power.bg
 
-	--[[Panel]]--
+	-- Panel
 	local panel = CreateFrame('Frame', nil, self)
 	panel:SetTemplate('Default')
 	panel:Size(1, 1)
@@ -114,7 +114,7 @@ D['ConstructUFRaid'] = function(self)
 	panel:Point('BOTTOMRIGHT', power, 'BOTTOMRIGHT', 2, -2)
 	self.panel = panel
 
-	--[[Elements]]--
+	-- Elements
 	local name = health:CreateFontString(nil, 'OVERLAY')
 	name:SetFont(f, fs, ff)
 	if layout == 'heal' then
@@ -173,8 +173,8 @@ D['ConstructUFRaid'] = function(self)
 	MasterLooter:Height(12)
 	MasterLooter:Width(12)
 	self.MasterLooterIndicator = MasterLooter
-	self:RegisterEvent('PARTY_LEADER_CHANGED', D.MLAnchorUpdate)
-	self:RegisterEvent('GROUP_ROSTER_UPDATE', D.MLAnchorUpdate)
+	self:RegisterEvent('PARTY_LEADER_CHANGED', D['MLAnchorUpdate'])
+	self:RegisterEvent('GROUP_ROSTER_UPDATE', D['MLAnchorUpdate'])
 
 	if C['raid']['showrange'] then
 		local range = {insideAlpha = 1, outsideAlpha = C['raid']['raidalphaoor']}
@@ -188,7 +188,7 @@ D['ConstructUFRaid'] = function(self)
 			self.DebuffHighlightFilter = true
 		end
 
-		--[[Healcom]]--
+		-- Healcom
 		if C['unitframes']['healcomm'] then
 			local mhpb = CreateFrame('StatusBar', nil, self.Health)
 			mhpb:SetOrientation('VERTICAL')
@@ -222,7 +222,7 @@ D['ConstructUFRaid'] = function(self)
 			}
 		end
 
-		--[[WeakenedSoul-Bar]]--
+		-- WeakenedSoul-Bar
 		if D['Class'] == 'PRIEST' and C['unitframes']['weakenedsoulbar'] then
 			local ws = CreateFrame('StatusBar', self:GetName()..'_WeakenedSoul', power)
 			ws:SetAllPoints(power)
@@ -234,9 +234,9 @@ D['ConstructUFRaid'] = function(self)
 			self.WeakenedSoul = ws
 		end
 
-		--[[RaidDebuffs]]--
+		-- RaidDebuffs
 		if C['raid']['raidunitdebuffwatch'] then
-			D.createAuraWatch(self,unit)
+			D['createAuraWatch'](self,unit)
 
 			local RaidDebuffs = CreateFrame('Frame', nil, self)
 			RaidDebuffs:SetHeight(22)

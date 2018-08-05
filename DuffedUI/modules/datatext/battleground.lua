@@ -30,7 +30,7 @@ bgframe:SetScript('OnEnter', function(self)
 				local color = RAID_CLASS_COLORS[select(2, UnitClass('player'))]
 				local classcolor = ('|cff%.2x%.2x%.2x'):format(color.r * 255, color.g * 255, color.b * 255)
 				SetMapToCurrentZone()
-				GameTooltip:SetOwner(self, 'ANCHOR_TOPLEFT', 0, D.Scale(4))
+				GameTooltip:SetOwner(self, 'ANCHOR_TOPLEFT', 0, D['Scale'](4))
 				GameTooltip:ClearLines()
 				GameTooltip:Point('BOTTOM', self, 'TOP', 0, 1)
 				GameTooltip:ClearLines()

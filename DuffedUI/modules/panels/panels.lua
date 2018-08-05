@@ -4,14 +4,14 @@ local move = D['move']
 
 local ileft = CreateFrame('Frame', 'DuffedUIInfoLeft', UIParent)
 ileft:SetTemplate('Default')
-ileft:Size(D.Scale(D['InfoLeftRightWidth'] - 9), 19)
+ileft:Size(D['Scale'](D['InfoLeftRightWidth'] - 9), 19)
 ileft:SetPoint('BOTTOMLEFT', UIParent, 'BOTTOMLEFT', 5, 3)
 ileft:SetFrameLevel(2)
 ileft:SetFrameStrata('BACKGROUND')
 
 local iright = CreateFrame('Frame', 'DuffedUIInfoRight', UIParent)
 iright:SetTemplate('Default')
-iright:Size(D.Scale(D['InfoLeftRightWidth'] - 9), 19)
+iright:Size(D['Scale'](D['InfoLeftRightWidth'] - 9), 19)
 iright:SetPoint('BOTTOMRIGHT', UIParent, 'BOTTOMRIGHT', -5, 3)
 iright:SetFrameLevel(2)
 iright:SetFrameStrata('BACKGROUND')
