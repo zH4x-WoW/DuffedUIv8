@@ -102,8 +102,8 @@ local function LoadSkin()
 	for i = 1, NUM_LFR_CHOICE_BUTTONS do
 		local bu = _G["LFRQueueFrameSpecificListButton"..i].enableButton
 		bu:SkinCheckBox()
-		bu.SetNormalTexture = D.Dummy
-		bu.SetPushedTexture = D.Dummy
+		bu.SetNormalTexture = D['Dummy']
+		bu.SetPushedTexture = D['Dummy']
 	end
 
 	LFDQueueFrameTypeDropDown:SkinDropDownBox()
@@ -316,7 +316,7 @@ local function LoadSkin()
 	LFDQueueFrameSpecificListScrollFrameScrollBar:SkinScrollBar()
 
 	LFGDungeonReadyPopup:SetTemplate("Transparent")
-	LFGDungeonReadyDialog.SetBackdrop = D.Dummy
+	LFGDungeonReadyDialog.SetBackdrop = D['Dummy']
 	LFGDungeonReadyDialog.filigree:SetAlpha(0)
 	LFGDungeonReadyDialog.bottomArt:SetAlpha(0)
 	LFGDungeonReadyDialogLeaveQueueButton:SkinButton()

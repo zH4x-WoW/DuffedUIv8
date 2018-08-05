@@ -82,8 +82,6 @@ function WorldMap:Skin()
 	WorldMapFrame.NavBar.overlay:StripTextures()
 
 	WorldMapFrameHomeButton:SkinButton()
-	--WorldMapFrameHomeButton.Backdrop:SetPoint("TOPLEFT", WorldMapFrameHomeButton, "TOPLEFT", 0, 0)
-	--WorldMapFrameHomeButton.Backdrop:SetPoint("BOTTOMRIGHT", WorldMapFrameHomeButton, "BOTTOMRIGHT", -15, 0)
 	WorldMapFrameHomeButton:SetFrameLevel(1)
 
 	QuestMapFrame.DetailsFrame:StripTextures()

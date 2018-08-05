@@ -133,7 +133,7 @@ local function LoadSkin()
 			object.BgMiddle:SetTexture(nil)
 			object.Check:SetTexture(nil)
 			object.text:SetFont(C['media']['font'], 11)
-			object.text.SetFont = D.Dummy
+			object.text.SetFont = D['Dummy']
 		end
 	end)
 
@@ -231,7 +231,7 @@ local function LoadSkin()
 			local statusbar = _G['ReputationBar' .. i .. 'ReputationBar']
 
 			if statusbar then
-				statusbar:SetStatusBarTexture(C['media'].normTex)
+				statusbar:SetStatusBarTexture(C['media']['normTex'])
 				if not statusbar.backdrop then statusbar:CreateBackdrop('Default') end
 
 				_G['ReputationBar' .. i .. 'Background']:SetTexture(nil)

@@ -87,7 +87,7 @@ local function LoadOrderHallSkin()
 	FollowerList:StripTextures()
 	FollowerList.Class:SetSize(50, 43)
 	FollowerList.XPBar:StripTextures()
-	FollowerList.XPBar:SetStatusBarTexture(C["media"].normTex)
+	FollowerList.XPBar:SetStatusBarTexture(C['media']['normTex'])
 	FollowerList.XPBar:CreateBackdrop()
 	
 	-- MissionStage

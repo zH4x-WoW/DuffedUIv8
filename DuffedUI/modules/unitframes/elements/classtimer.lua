@@ -1209,7 +1209,7 @@ D["ClassTimer"] = function(self)
 				result.stacks = stacks
 
 				local bar = CreateFrame("StatusBar", nil, result, nil)
-				bar:SetStatusBarTexture(C["media"].normTex)
+				bar:SetStatusBarTexture(C['media']['normTex'])
 				bar:Point("TOPLEFT", result, "TOPLEFT", 9, 0)
 				bar:Point("BOTTOMRIGHT", result, "BOTTOMRIGHT", 0, 0)
 				result.bar = bar
@@ -1347,7 +1347,7 @@ D["ClassTimer"] = function(self)
 			border:Point("TOPLEFT", result, "TOPLEFT", 21, 1)
 			border:Point("BOTTOMRIGHT", result, "BOTTOMRIGHT", 1, -1)
 			border:SetBackdrop {
-				edgeFile = C["media"].blank, edgeSize = 1,
+				edgeFile = C['media']['blank'], edgeSize = 1,
 				insets = {left = 0, right = 0, top = 0, bottom = 0}
 			}
 			border:SetBackdropColor(0, 0, 0, 0)

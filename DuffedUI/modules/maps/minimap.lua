@@ -88,7 +88,7 @@ Minimap:SetScript('OnMouseWheel', function(self, d)
 	if d > 0 then _G.MinimapZoomIn:Click() elseif d < 0 then _G.MinimapZoomOut:Click() end
 end)
 
-Minimap:SetMaskTexture(C['media'].blank)
+Minimap:SetMaskTexture(C['media']['blank'])
 function GetMinimapShape() return 'SQUARE' end
 DuffedUIMinimap:SetScript('OnEvent', function(self, event, addon)
 	if addon == 'Blizzard_TimeManager' then TimeManagerClockButton:Kill() end
@@ -101,7 +101,7 @@ Minimap:SetScript('OnMouseUp', function(self, btn)
 	if btn == 'MiddleButton' or (IsShiftKeyDown() and btn == 'RightButton') then
 		if not DuffedUIMicroButtonsDropDown then return end
 		if position:match('RIGHT') then xoff = D.Scale(-160) end
-		Lib_EasyMenu(D.MicroMenu, DuffedUIMicroButtonsDropDown, 'cursor', xoff, 0, 'MENU', 2)
+		Lib_EasyMenu(D['MicroMenu'], DuffedUIMicroButtonsDropDown, 'cursor', xoff, 0, 'MENU', 2)
 	elseif btn == 'RightButton' then
 		if position:match('RIGHT') then xoff = D.Scale(-8) end
 		ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, DuffedUIMinimap, xoff, D.Scale(-2))

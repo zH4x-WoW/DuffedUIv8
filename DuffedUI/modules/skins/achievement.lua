@@ -67,7 +67,7 @@ local function LoadSkin()
 
 	local function SkinStatusBar(bar)
 		bar:StripTextures()
-		bar:SetStatusBarTexture(C["media"].normTex)
+		bar:SetStatusBarTexture(C['media']['normTex'])
 		bar:SetStatusBarColor(4/255, 179/255, 30/255)
 		bar:CreateBackdrop("Default")
 
@@ -141,12 +141,12 @@ local function LoadSkin()
 		local frame = _G["AchievementFrameAchievementsContainerButton"..i]
 		_G["AchievementFrameAchievementsContainerButton"..i.."Highlight"]:Kill()
 		frame:StripTextures(true)
-		frame.SetBackdropBorderColor = D.Dummy
+		frame.SetBackdropBorderColor = D['Dummy']
 
 		--Initiate fucked up method of creating a backdrop
 		frame.bg1 = frame:CreateTexture(nil, "BACKGROUND")
 		frame.bg1:SetDrawLayer("BACKGROUND", 4)
-		frame.bg1:SetTexture(C["media"].normTex)
+		frame.bg1:SetTexture(C['media']['normTex'])
 		frame.bg1:SetVertexColor(unpack(C["media"].backdropcolor))
 		frame.bg1:Point("TOPLEFT", D['mult']*4, -D['mult']*4)
 		frame.bg1:Point("BOTTOMRIGHT", -D['mult']*4, D['mult']*4)
@@ -170,9 +170,9 @@ local function LoadSkin()
 		frame.bg4:Point("BOTTOMRIGHT", -D['mult'], D['mult'])
 
 		_G["AchievementFrameAchievementsContainerButton"..i.."Description"]:SetTextColor(0.6, 0.6, 0.6)
-		_G["AchievementFrameAchievementsContainerButton"..i.."Description"].SetTextColor = D.Dummy
+		_G["AchievementFrameAchievementsContainerButton"..i.."Description"].SetTextColor = D['Dummy']
 		_G["AchievementFrameAchievementsContainerButton"..i.."HiddenDescription"]:SetTextColor(1, 1, 1)
-		_G["AchievementFrameAchievementsContainerButton"..i.."HiddenDescription"].SetTextColor = D.Dummy
+		_G["AchievementFrameAchievementsContainerButton"..i.."HiddenDescription"].SetTextColor = D['Dummy']
 
 		_G["AchievementFrameAchievementsContainerButton"..i.."IconBling"]:Kill()
 		_G["AchievementFrameAchievementsContainerButton"..i.."IconOverlay"]:Kill()
@@ -197,8 +197,8 @@ local function LoadSkin()
 		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"]:ClearAllPoints()
 		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"]:Point("BOTTOMLEFT", frame, "BOTTOMLEFT", 5, 5)
 
-		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"].ClearAllPoints = D.Dummy
-		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"].SetPoint = D.Dummy
+		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"].ClearAllPoints = D['Dummy']
+		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"].SetPoint = D['Dummy']
 	end
 
 	local compares = {
@@ -212,10 +212,10 @@ local function LoadSkin()
 
 			_G[frame]:StripTextures()
 			_G[frame.."Background"]:Kill()
-			_G[frame].SetBackdropBorderColor = D.Dummy
+			_G[frame].SetBackdropBorderColor = D['Dummy']
 			if _G[frame.."Description"] then
 				_G[frame.."Description"]:SetTextColor(.6, .6, .6)
-				_G[frame.."Description"].SetTextColor = D.Dummy
+				_G[frame.."Description"].SetTextColor = D['Dummy']
 			end
 
 			--Initiate fucked up method of creating a backdrop
@@ -284,7 +284,7 @@ local function LoadSkin()
 		if frame then
 			if not frame.skinned then
 				frame:StripTextures()
-				frame:SetStatusBarTexture(C["media"].normTex)
+				frame:SetStatusBarTexture(C['media']['normTex'])
 				frame:SetStatusBarColor(4/255, 179/255, 30/255)
 				frame:SetFrameLevel(frame:GetFrameLevel() + 3)
 				frame:Height(frame:GetHeight() - 2)
@@ -315,8 +315,8 @@ local function LoadSkin()
 				if index > 1 then
 					frame:ClearAllPoints()
 					frame:Point("TOP", _G["AchievementFrameProgressBar"..index-1], "BOTTOM", 0, -5)
-					frame.SetPoint = D.Dummy
-					frame.ClearAllPoints = D.Dummy
+					frame.SetPoint = D['Dummy']
+					frame.ClearAllPoints = D['Dummy']
 				end
 				frame.skinned = true
 			end

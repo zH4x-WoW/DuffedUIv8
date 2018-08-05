@@ -10,11 +10,11 @@ local function LoadSkin()
 	ArchaeologyFrameRaceFilter:SkinDropDownBox(125)
 	
 	ArchaeologyFrameRankBar:StripTextures()
-	ArchaeologyFrameRankBar:SetStatusBarTexture(C["media"].normTex)
+	ArchaeologyFrameRankBar:SetStatusBarTexture(C['media']['normTex'])
 	ArchaeologyFrameRankBar:CreateBackdrop("Default")
 
 	ArchaeologyFrameArtifactPageSolveFrameStatusBar:StripTextures()
-	ArchaeologyFrameArtifactPageSolveFrameStatusBar:SetStatusBarTexture(C["media"].normTex)
+	ArchaeologyFrameArtifactPageSolveFrameStatusBar:SetStatusBarTexture(C['media']['normTex'])
 	ArchaeologyFrameArtifactPageSolveFrameStatusBar:SetStatusBarColor(.7, .2, 0)
 	ArchaeologyFrameArtifactPageSolveFrameStatusBar:CreateBackdrop("Default")
 
@@ -75,7 +75,7 @@ local function LoadSkin()
 
 	ArcheologyDigsiteProgressBar:StripTextures()
 	ArcheologyDigsiteProgressBar.FillBar:StripTextures()
-	ArcheologyDigsiteProgressBar.FillBar:SetStatusBarTexture(C["media"].normTex)
+	ArcheologyDigsiteProgressBar.FillBar:SetStatusBarTexture(C['media']['normTex'])
 	ArcheologyDigsiteProgressBar.FillBar:SetStatusBarColor(.7, .2, 0)
 	ArcheologyDigsiteProgressBar.FillBar:SetFrameLevel(ArchaeologyFrameArtifactPageSolveFrameStatusBar:GetFrameLevel() + 2)
 	ArcheologyDigsiteProgressBar.FillBar:CreateBackdrop("Transparent")

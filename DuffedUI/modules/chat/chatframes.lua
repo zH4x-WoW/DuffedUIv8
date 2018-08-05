@@ -84,7 +84,7 @@ local function SetChatStyle(frame)
 	end
 
 	_G[chat..'TabText']:SetTextColor(unpack(C['media'].datatextcolor1))
-	_G[chat..'TabText'].SetTextColor = D.Dummy
+	_G[chat..'TabText'].SetTextColor = D['Dummy']
 	_G[chat..'TabText']:SetFont(C['media']['font'], 11)
 	if id == 4 then
 		_G[chat..'TabText']:ClearAllPoints()

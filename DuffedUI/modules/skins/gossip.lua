@@ -47,7 +47,7 @@ local function LoadSkin()
 	end)
 
 	NPCFriendshipStatusBar:StripTextures()
-	NPCFriendshipStatusBar:SetStatusBarTexture(C["media"].normTex)
+	NPCFriendshipStatusBar:SetStatusBarTexture(C['media']['normTex'])
 	NPCFriendshipStatusBar:CreateBackdrop('Default')
 end
 

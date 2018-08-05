@@ -82,7 +82,7 @@ local function LoadSkin()
 	GuildPerksContainerScrollBar:SkinScrollBar(4)
 
 	GuildFactionBar:StripTextures()
-	GuildFactionBar.progress:SetTexture(C['media'].normTex)
+	GuildFactionBar.progress:SetTexture(C['media']['normTex'])
 	GuildFactionBar:CreateBackdrop('Default')
 	GuildFactionBar.backdrop:Point('TOPLEFT', GuildFactionBar.progress, 'TOPLEFT', -2, 2)
 	GuildFactionBar.backdrop:Point('BOTTOMRIGHT', GuildFactionBar, 'BOTTOMRIGHT', 1, 0)

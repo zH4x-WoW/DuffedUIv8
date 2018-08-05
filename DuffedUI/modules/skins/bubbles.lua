@@ -8,7 +8,7 @@ local numKids = 0
 local noscalemult = D['mult'] * C["general"].uiscale
 local bubbles = {}
 
-if (D.ScreenWidth > 3840) then
+if (D['ScreenWidth'] > 3840) then
 	-- hide options, disable bubbles, not compatible eyefinity
 	InterfaceOptionsSocialPanelChatBubbles:SetScale(0.00001)
 	InterfaceOptionsSocialPanelPartyChat:SetScale(0.00001)
@@ -27,7 +27,7 @@ local function skinbubble(frame)
 	end
 
 	frame:SetBackdrop({
-		bgFile = C["media"].blank, edgeFile = C["media"].blank, edgeSize = D.noscalemult,
+		bgFile = C['media']['blank'], edgeFile = C['media']['blank'], edgeSize = D.noscalemult,
 		insets = {left = -noscalemult, right = -noscalemult, top = -noscalemult, bottom = -noscalemult}
 	})
 	frame:SetBackdropColor(.1, .1, .1, .8)

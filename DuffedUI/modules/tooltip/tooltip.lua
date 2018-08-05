@@ -341,7 +341,7 @@ DuffedUITooltips:SetScript("OnEvent", function(self, event, addon)
 		end
 		if FriendsTooltip then FriendsTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
 
-		HealthBar:SetStatusBarTexture(C["media"].normTex)
+		HealthBar:SetStatusBarTexture(C['media']['normTex'])
 		HealthBar:CreateBackdrop()
 		HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
 		HealthBar.Text = HealthBar:CreateFontString(nil, "OVERLAY")

@@ -56,7 +56,7 @@ local function LoadSkin()
 
 	AuctionProgressBar:StripTextures()
 	AuctionProgressBar:CreateBackdrop("Default")
-	AuctionProgressBar:SetStatusBarTexture(C["media"].normTex)
+	AuctionProgressBar:SetStatusBarTexture(C['media']['normTex'])
 	AuctionProgressBar:SetStatusBarColor(1, 1, 0)
 	BrowseNextPageButton:SkinNextPrevButton()
 	BrowsePrevPageButton:SkinNextPrevButton()
@@ -135,7 +135,7 @@ local function LoadSkin()
 	for i = 1, NUM_FILTERS_TO_DISPLAY do
 		local tab = _G["AuctionFilterButton" .. i]
 		_G["AuctionFilterButton"..i..'NormalTexture']:SetAlpha(0)
-		_G["AuctionFilterButton"..i..'NormalTexture'].SetAlpha = D.Dummy
+		_G["AuctionFilterButton"..i..'NormalTexture'].SetAlpha = D['Dummy']
 		tab:StyleButton()
 	end
 

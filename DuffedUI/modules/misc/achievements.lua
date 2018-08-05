@@ -1,13 +1,13 @@
 local D, C, L = unpack(select(2, ...)) 
 
-local move = D["move"]
-local AchievementHolder = CreateFrame("Frame", "DuffedUIAchievementMover", UIParent)
+local move = D['move']
+local AchievementHolder = CreateFrame('Frame', 'DuffedUIAchievementMover', UIParent)
 AchievementHolder:Size(180, 20)
-AchievementHolder:SetPoint("LEFT", UIParent, "LEFT", 312, 25)
+AchievementHolder:SetPoint('LEFT', UIParent, 'LEFT', 312, 25)
 move:RegisterFrame(AchievementHolder)
 
 AlertFrame:SetParent(AchievementHolder)
-AlertFrame:SetPoint("TOP", AchievementHolder, 0, -30)
+AlertFrame:SetPoint('TOP', AchievementHolder, 0, -30)
 
 --[[SlashCmdList.TEST_ACHIEVEMENT = function()
 	PlaySound(17316)
@@ -26,4 +26,4 @@ AlertFrame:SetPoint("TOP", AchievementHolder, 0, -30)
 	LootWonAlertFrame_ShowAlert(itemLink, -1, 1, 1)
 	AlertFrame_FixAnchors()
 end
-SLASH_TEST_ACHIEVEMENT1 = "/testalerts"]]
+SLASH_TEST_ACHIEVEMENT1 = '/testalerts']]

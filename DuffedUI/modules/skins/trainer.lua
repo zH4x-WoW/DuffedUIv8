@@ -72,7 +72,7 @@ local function LoadSkin()
 	ClassTrainerFrameSkillStepButton.selectedTex:SetColorTexture(1,1,1,0.3)
 	
 	ClassTrainerStatusBar:StripTextures()
-	ClassTrainerStatusBar:SetStatusBarTexture(C["media"].normTex)
+	ClassTrainerStatusBar:SetStatusBarTexture(C['media']['normTex'])
 	ClassTrainerStatusBar:ClearAllPoints()
 	ClassTrainerStatusBar:Point("TOPLEFT", ClassTrainerFrame, "TOPLEFT", 15, -35)
 	ClassTrainerStatusBar:CreateBackdrop("Transparent")

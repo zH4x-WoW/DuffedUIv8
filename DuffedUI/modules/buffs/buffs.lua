@@ -166,7 +166,7 @@ local Skin = function(self)
 
 		local Bar = CreateFrame('StatusBar', nil, Holder)
 		Bar:SetInside()
-		Bar:SetStatusBarTexture(C['media'].blank)
+		Bar:SetStatusBarTexture(C['media']['blank'])
 		Bar:SetStatusBarColor(0, .8, 0)
 		self.Bar = Bar
 

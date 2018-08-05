@@ -212,7 +212,7 @@ local function LoadGarrisonSkin()
 	GarrisonMissionFrame.FollowerTab:StripTextures()
 	GarrisonMissionFrame.FollowerTab:SetTemplate()
 	GarrisonMissionFrame.FollowerTab.XPBar:StripTextures()
-	GarrisonMissionFrame.FollowerTab.XPBar:SetStatusBarTexture(C['media'].normTex)
+	GarrisonMissionFrame.FollowerTab.XPBar:SetStatusBarTexture(C['media']['normTex'])
 	GarrisonMissionFrame.FollowerTab.XPBar:CreateBackdrop()
 	GarrisonMissionFrameFollowers:StripTextures()
 	GarrisonMissionFrameFollowers:SetTemplate()	
@@ -261,9 +261,9 @@ local function LoadGarrisonSkin()
 	end)
 
 	MissionPage.StartMissionButton.Flash:Hide()
-	MissionPage.StartMissionButton.Flash.Show = D.Dummy
+	MissionPage.StartMissionButton.Flash.Show = D['Dummy']
 	MissionPage.StartMissionButton.FlashAnim:Stop()
-	MissionPage.StartMissionButton.FlashAnim.Play = D.Dummy
+	MissionPage.StartMissionButton.FlashAnim.Play = D['Dummy']
 
 
 	-- Landing page
@@ -352,9 +352,9 @@ local function LoadGarrisonSkin()
 	GarrisonShipyardFrame.MissionCompleteBackground:SetAllPoints(MissionList.MapTexture)
 	MissionPage.StartMissionButton:SkinButton()
 	MissionPage.StartMissionButton.Flash:Hide()
-	MissionPage.StartMissionButton.Flash.Show = D.Dummy
+	MissionPage.StartMissionButton.Flash.Show = D['Dummy']
 	MissionPage.StartMissionButton.FlashAnim:Stop()
-	MissionPage.StartMissionButton.FlashAnim.Play = D.Dummy
+	MissionPage.StartMissionButton.FlashAnim.Play = D['Dummy']
 	GarrisonMissionFrameHelpBoxButton:SkinButton()
 
 	-- ShipYard: Follower List

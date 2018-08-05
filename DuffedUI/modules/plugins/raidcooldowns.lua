@@ -5,7 +5,7 @@ local anchor = 'TOPLEFT'
 local x, y = 150, -150
 local width, height = 200, 15
 local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
-local texture = C['media'].normTex
+local texture = C['media']['normTex']
 
 local show = {
 	raid = C['cooldown'].rcdraid,
@@ -56,8 +56,8 @@ local floor = math.floor
 local timer = 0
 local move = D['move']
 local backdrop = {
-	bgFile = C['media'].normTex,
-	edgeFile = C['media'].blank, tile = false,
+	bgFile = C['media']['normTex'],
+	edgeFile = C['media']['blank'], tile = false,
 	tileSize = 0,
 	edgeSize = 1,
 	insets = {top = 0, left = 0, bottom = 0, right = 0},

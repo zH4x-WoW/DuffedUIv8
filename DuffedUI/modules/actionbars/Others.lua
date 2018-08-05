@@ -1,6 +1,6 @@
 local D, C, L = unpack(select(2, ...))
 
-D.CreatePopup['DUFFEDUI_FIX_AB'] = {
+D['CreatePopup']['DUFFEDUI_FIX_AB'] = {
 	question = L['ui']['fix_ab'],
 	answer1 = ACCEPT,
 	answer2 = CANCEL,

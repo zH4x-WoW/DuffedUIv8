@@ -6,8 +6,8 @@ local function LoadSkin()
 
 	local noscalemult = D['mult'] * C["general"].uiscale
 	local bg = {
-		bgFile = C["media"].blank, 
-		edgeFile = C["media"].blank, 
+		bgFile = C['media']['blank'], 
+		edgeFile = C['media']['blank'], 
 		tile = false, tileSize = 0, edgeSize = noscalemult, 
 		insets = { left = -noscalemult, right = -noscalemult, top = -noscalemult, bottom = -noscalemult}
 	}
@@ -35,8 +35,8 @@ local function LoadSkin()
 	end
 
 	local bg = {
-		bgFile = C["media"].normTex, 
-		edgeFile = C["media"].blank, 
+		bgFile = C['media']['normTex'], 
+		edgeFile = C['media']['blank'], 
 		tile = false, tileSize = 0, edgeSize = noscalemult, 
 		insets = { left = -noscalemult, right = -noscalemult, top = -noscalemult, bottom = -noscalemult}
 	}

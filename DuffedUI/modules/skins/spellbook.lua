@@ -179,7 +179,7 @@ local function LoadSkin()
 	for _, statusbar in pairs(professionstatusbars) do
 		local statusbar = _G[statusbar]
 		statusbar:StripTextures()
-		statusbar:SetStatusBarTexture(C['media'].normTex)
+		statusbar:SetStatusBarTexture(C['media']['normTex'])
 		statusbar:SetStatusBarColor(0, 0.8, 0)
 		statusbar:CreateBackdrop('Overlay')
 

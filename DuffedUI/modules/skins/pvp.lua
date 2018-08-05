@@ -91,7 +91,7 @@ local function LoadSkin()
 	-- PvP Ready Dialog
 	PVPReadyDialog:StripTextures()
 	PVPReadyDialog:SetTemplate('Transparent')
-	PVPReadyDialog.SetBackdrop = D.Dummy
+	PVPReadyDialog.SetBackdrop = D['Dummy']
 	PVPReadyDialog.filigree:SetAlpha(0)
 	PVPReadyDialog.bottomArt:SetAlpha(0)
 	PVPReadyDialogEnterBattleButton:SkinButton()

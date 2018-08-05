@@ -208,7 +208,7 @@ name:SetPoint('LEFT', title, 7, -1)
 name:SetText(D['Version'])
 
 local sb = CreateFrame('StatusBar', nil, f)
-sb:SetStatusBarTexture(C['media'].normTex)
+sb:SetStatusBarTexture(C['media']['normTex'])
 sb:SetPoint('BOTTOM', f, 'BOTTOM', 0, 35)
 sb:SetHeight(15)
 sb:SetWidth(f:GetWidth() - 44)

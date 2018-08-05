@@ -560,7 +560,7 @@ D['createAuraWatch'] = function(self, unit)
 
 			local Texture = Icon:CreateTexture(nil, 'OVERLAY')
 			Texture:SetAllPoints(Icon)
-			Texture:SetTexture(C['media'].blank)
+			Texture:SetTexture(C['media']['blank'])
 
 			if (spell[3]) then Texture:SetVertexColor(unpack(spell[3])) else Texture:SetVertexColor(0.8, 0.8, 0.8) end
 
