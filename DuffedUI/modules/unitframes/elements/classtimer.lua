@@ -1351,7 +1351,7 @@ D["ClassTimer"] = function(self)
 				insets = {left = 0, right = 0, top = 0, bottom = 0}
 			}
 			border:SetBackdropColor(0, 0, 0, 0)
-			border:SetBackdropBorderColor(unpack(C["media"].backdropcolor))
+			border:SetBackdropBorderColor(unpack(C['media']['backdropcolor']))
 			result.border = border
 
 			iconborder = CreateFrame("Frame", nil, result)

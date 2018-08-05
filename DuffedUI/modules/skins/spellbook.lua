@@ -35,22 +35,20 @@ local function LoadSkin()
 			if first then
 				for i = 1, button:GetNumRegions() do
 					local region = select(i, button:GetRegions())
-					if region:GetObjectType() == 'Texture' then
-						if region:GetTexture() ~= 'Interface\\Buttons\\ActionBarFlyoutButton' then
-							region:SetTexture(nil)
-						end
+					if region:GetObjectType() == 'Texture' then 
+						if region:GetTexture() ~= 'Interface\\Buttons\\ActionBarFlyoutButton' then region:SetTexture(nil) end
 					end
 				end
 			end
 
 			if _G['SpellButton'..i..'Highlight'] then
-				_G['SpellButton'..i..'Highlight']:SetColorTexture(1, 1, 1, 0.3)
+				_G['SpellButton'..i..'Highlight']:SetColorTexture(1, 1, 1, .3)
 				_G['SpellButton'..i..'Highlight']:ClearAllPoints()
 				_G['SpellButton'..i..'Highlight']:SetAllPoints(icon)
 			end
 
 			if icon then
-				icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				icon:SetTexCoord(.1, .9, .1, .9)
 				icon:ClearAllPoints()
 				icon:SetAllPoints()
 
@@ -62,17 +60,15 @@ local function LoadSkin()
 
 			local r, g, b = _G['SpellButton'..i..'SpellName']:GetTextColor()
 
-			if r < 0.8 then
-				_G['SpellButton'..i..'SpellName']:SetTextColor(0.6, 0.6, 0.6)
-			end
-			_G['SpellButton'..i..'SubSpellName']:SetTextColor(0.6, 0.6, 0.6)
-			_G['SpellButton'..i..'RequiredLevelString']:SetTextColor(0.6, 0.6, 0.6)
+			if r < 0.8 then _G['SpellButton'..i..'SpellName']:SetTextColor(.6, .6, .6) end
+			_G['SpellButton'..i..'SubSpellName']:SetTextColor(.6, .6, .6)
+			_G['SpellButton'..i..'RequiredLevelString']:SetTextColor(.6, .6, .6)
 		end
 	end
 	SpellButtons(nil, true)
 	hooksecurefunc('SpellButton_UpdateButton', SpellButtons)
 
-	SpellBookPageText:SetTextColor(0.6, 0.6, 0.6)
+	SpellBookPageText:SetTextColor(.6, .6, .6)
 
 	-- Skill Line Tabs
 	for i = 1, MAX_SKILLLINE_TABS do
@@ -83,7 +79,7 @@ local function LoadSkin()
 			tab:GetNormalTexture():ClearAllPoints()
 			tab:GetNormalTexture():Point('TOPLEFT', 2, -2)
 			tab:GetNormalTexture():Point('BOTTOMRIGHT', -2, 2)
-			tab:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			tab:GetNormalTexture():SetTexCoord(.1, .9, .1, .9)
 
 			tab:CreateBackdrop('Default')
 			tab.backdrop:SetAllPoints()
@@ -102,7 +98,7 @@ local function LoadSkin()
 				tab:GetNormalTexture():ClearAllPoints()
 				tab:GetNormalTexture():Point('TOPLEFT', 2, -2)
 				tab:GetNormalTexture():Point('BOTTOMRIGHT', -2, 2)
-				tab:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				tab:GetNormalTexture():SetTexCoord(.1, .9, .1, .9)
 			end
 		end
 	end
@@ -137,10 +133,10 @@ local function LoadSkin()
 	}
 
 	for _, header in pairs(professionheaders) do
-		_G[header..'Missing']:SetTextColor(1, 0.8, 0)
+		_G[header..'Missing']:SetTextColor(1, .8, 0)
 		_G[header..'Missing']:SetShadowColor(0, 0, 0)
 		_G[header..'Missing']:SetShadowOffset(1, -1)
-		_G[header].missingText:SetTextColor(0.6, 0.6, 0.6)
+		_G[header].missingText:SetTextColor(.6, .6, .6)
 	end
 
 	for _, button in pairs(professionbuttons) do
@@ -149,9 +145,7 @@ local function LoadSkin()
 		local button = _G[button]
 		button:StripTextures()
 
-		if rank then
-			rank:SetTextColor(1, 1, 1)
-		end
+		if rank then rank:SetTextColor(1, 1, 1) end
 
 		if icon then
 			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
@@ -180,7 +174,7 @@ local function LoadSkin()
 		local statusbar = _G[statusbar]
 		statusbar:StripTextures()
 		statusbar:SetStatusBarTexture(C['media']['normTex'])
-		statusbar:SetStatusBarColor(0, 0.8, 0)
+		statusbar:SetStatusBarColor(0, .8, 0)
 		statusbar:CreateBackdrop('Overlay')
 
 		statusbar.rankText:ClearAllPoints()
@@ -188,9 +182,7 @@ local function LoadSkin()
 	end
 
 	-- Bottom Tabs
-	for i = 1, 5 do
-		_G['SpellBookFrameTabButton'..i]:SkinTab()
-	end
+	for i = 1, 5 do _G['SpellBookFrameTabButton'..i]:SkinTab() end
 	_G['SpellBookFrameTabButton1']:ClearAllPoints()
 	_G['SpellBookFrameTabButton1']:Point('TOPLEFT', _G['SpellBookFrame'], 'BOTTOMLEFT', -5, 1)
 
@@ -205,16 +197,14 @@ local function LoadSkin()
 				tab:SetNormalTexture(icon)
 				tab:GetNormalTexture():ClearAllPoints()
 				tab:GetNormalTexture():SetInside()
-				tab:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				tab:GetNormalTexture():SetTexCoord(.1, .9, .1, .9)
 
 				tab:CreateBackdrop('Default')
 				tab.backdrop:SetAllPoints()
 
 				tab:StyleButton()
 
-				if i == 1 then
-					tab:SetPoint('TOPLEFT', SpellBookFrame.backdrop, 'TOPRIGHT', 1, 0)
-				end
+				if i == 1 then tab:SetPoint('TOPLEFT', SpellBookFrame.backdrop, 'TOPRIGHT', 1, 0) end
 				
 				tab.isSkinned = true
 			end

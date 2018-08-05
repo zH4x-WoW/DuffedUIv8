@@ -102,8 +102,8 @@ for i, spell in pairs(spells) do
 	end)
 
 	b:HookScript('OnLeave', function(self)
-		self:SetBackdropColor(unpack(C['media'].backdropcolor))
-		self:SetBackdropBorderColor(unpack(C['media'].bordercolor))
+		self:SetBackdropColor(unpack(C['media']['backdropcolor']))
+		self:SetBackdropBorderColor(unpack(C['media']['bordercolor']))
 	end)
 end
 f:Hide()

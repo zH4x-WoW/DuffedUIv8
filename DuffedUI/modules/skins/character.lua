@@ -42,7 +42,7 @@ local function LoadSkin()
 		slot:StyleButton(false)
 		slot.ignoreTexture:SetTexture([[Interface\PaperDollInfoFrame\UI-GearManager-LeaveItem-Transparent]])
 		slot:SetTemplate('Default', true)
-		icon:SetTexCoord(unpack(D.IconCoord))
+		icon:SetTexCoord(unpack(D['IconCoord']))
 		icon:SetInside()
 
 		hooksecurefunc(slot.IconBorder, 'SetVertexColor', function(self, r, g, b) self:GetParent():SetBackdropBorderColor(r, g, b) end)
@@ -80,7 +80,7 @@ local function LoadSkin()
 			local icon = _G['EquipmentFlyoutFrameButton' .. i .. 'IconTexture']
 			button:StyleButton(false)
 
-			icon:SetTexCoord(unpack(D.IconCoord))
+			icon:SetTexCoord(unpack(D['IconCoord']))
 			button:GetNormalTexture():SetTexture(nil)
 
 			icon:SetInside()
@@ -151,7 +151,7 @@ local function LoadSkin()
 			object.BgBottom:SetTexture(nil)
 			object.BgMiddle:SetTexture(nil)
 			object.icon:Size(36, 36)
-			object.icon:SetTexCoord(unpack(D.IconCoord))
+			object.icon:SetTexCoord(unpack(D['IconCoord']))
 
 			-- Making all icons the same size and position because otherwise BlizzardUI tries to attach itself to itself when it refreshes
 			object.icon:SetPoint('LEFT', object, 'LEFT', 4, 0)
@@ -179,7 +179,7 @@ local function LoadSkin()
 			if button then
 				button:StripTextures()
 				button:StyleButton(true)
-				icon:SetTexCoord(unpack(D.IconCoord))
+				icon:SetTexCoord(unpack(D['IconCoord']))
 				_G['GearManagerDialogPopupButton' .. i .. 'Icon']:SetTexture(nil)
 				icon:SetInside()
 				button:SetFrameLevel(button:GetFrameLevel() + 2)
@@ -329,4 +329,4 @@ local function LoadSkin()
 	hooksecurefunc(TokenFrameContainer, 'update', UpdateCurrencySkins)
 end
 
-tinsert(D.SkinFuncs['DuffedUI'], LoadSkin)
+tinsert(D['SkinFuncs']['DuffedUI'], LoadSkin)

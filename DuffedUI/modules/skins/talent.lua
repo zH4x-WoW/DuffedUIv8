@@ -235,4 +235,4 @@ local function LoadSkin()
 	PlayerTalentFrameTalentsPvpTalentButton:SkinNextPrevButton()
 end
 
-D.SkinFuncs['Blizzard_TalentUI'] = LoadSkin
+D['SkinFuncs']['Blizzard_TalentUI'] = LoadSkin

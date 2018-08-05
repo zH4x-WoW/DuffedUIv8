@@ -50,7 +50,7 @@ local function LoadGarrisonSkin()
 	GarrisonCapacitiveDisplayFrame.IncrementButton.t:SetText('+')
 	local CapacitiveDisplay = GarrisonCapacitiveDisplayFrame.CapacitiveDisplay
 	CapacitiveDisplay.IconBG:SetTexture()
-	CapacitiveDisplay.ShipmentIconFrame.Icon:SetTexCoord(unpack(D.IconCoord))
+	CapacitiveDisplay.ShipmentIconFrame.Icon:SetTexCoord(unpack(D['IconCoord']))
 	CapacitiveDisplay.ShipmentIconFrame:SetTemplate('Default', true)
 	CapacitiveDisplay.ShipmentIconFrame.Icon:SetInside()
 	CapacitiveDisplay.ShipmentIconFrame.Follower:SetInside()
@@ -67,7 +67,7 @@ local function LoadGarrisonSkin()
 		local reagent = reagents[reagentIndex]
 		while reagent do
 			reagent.NameFrame:SetTexture()
-			reagent.Icon:SetTexCoord(unpack(D.IconCoord))
+			reagent.Icon:SetTexCoord(unpack(D['IconCoord']))
 			reagent.Icon:SetDrawLayer('BORDER')
 
 			if not reagent.border then
@@ -187,7 +187,7 @@ local function LoadGarrisonSkin()
 				Button.Rewards[i].Icon:SetTexture(Texture)
 				Button.Rewards[i].backdrop:ClearAllPoints()
 				Button.Rewards[i].backdrop:SetOutside(Button.Rewards[i].Icon)
-				Button.Rewards[i].Icon:SetTexCoord(unpack(D.IconCoord))
+				Button.Rewards[i].Icon:SetTexCoord(unpack(D['IconCoord']))
 			end
 			Button.isSkinned = true
 		end
@@ -285,7 +285,7 @@ local function LoadGarrisonSkin()
 	for i = 1, #buttons do
 		local button = buttons[i]
 		for _, reward in pairs(button.Rewards) do
-			reward.Icon:SetTexCoord(unpack(D.IconCoord))
+			reward.Icon:SetTexCoord(unpack(D['IconCoord']))
 			if not reward.border then
 				reward.border = CreateFrame('Frame', nil, reward)
 				reward.Icon:StyleButton()
@@ -389,7 +389,7 @@ local function LoadGarrisonTooltipSkin()
 	local function restyleGarrisonFollowerAbilityTooltipTemplate(frame)
 		for i = 1, 9 do select(i, frame:GetRegions()):Hide() end
 		local icon = frame.Icon
-		icon:SetTexCoord(unpack(D.IconCoord))
+		icon:SetTexCoord(unpack(D['IconCoord']))
 		if not frame.border then
 			frame.border = CreateFrame('Frame', nil, frame)
 			frame.Icon:StyleButton()
@@ -412,7 +412,7 @@ local function LoadGarrisonTooltipSkin()
 		local ability = abilities[numAbilitiesStyled]
 		while ability do
 			local icon = ability.Icon
-			icon:SetTexCoord(unpack(D.IconCoord))
+			icon:SetTexCoord(unpack(D['IconCoord']))
 			if not ability.border then
 				ability.border = CreateFrame('Frame', nil, ability)
 				ability.Icon:StyleButton()
@@ -430,7 +430,7 @@ local function LoadGarrisonTooltipSkin()
 		local trait = traits[numTraitsStyled]
 		while trait do
 			local icon = trait.Icon
-			icon:SetTexCoord(unpack(D.IconCoord))
+			icon:SetTexCoord(unpack(D['IconCoord']))
 			if not trait.border then
 				trait.border = CreateFrame('Frame', nil, trait)
 				trait.Icon:StyleButton()
@@ -450,7 +450,7 @@ local function LoadGarrisonTooltipSkin()
 		local property = properties[numPropertiesStyled]
 		while property do
 			local icon = property.Icon
-			icon:SetTexCoord(unpack(D.IconCoord))
+			icon:SetTexCoord(unpack(D['IconCoord']))
 			if not property.border then
 				property.border = CreateFrame('Frame', nil, property)
 				property.Icon:StyleButton()
@@ -463,5 +463,5 @@ local function LoadGarrisonTooltipSkin()
 	end)
 end
 
-D.SkinFuncs['Blizzard_GarrisonUI'] = LoadGarrisonSkin
-tinsert(D.SkinFuncs['DuffedUI'], LoadGarrisonTooltipSkin)
+D['SkinFuncs']['Blizzard_GarrisonUI'] = LoadGarrisonSkin
+tinsert(D['SkinFuncs']['DuffedUI'], LoadGarrisonTooltipSkin)

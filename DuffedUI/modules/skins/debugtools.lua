@@ -1,10 +1,10 @@
 local D, C, L = unpack(select(2, ...))
-if IsAddOnLoaded("AddOnSkins") then return end
+if IsAddOnLoaded('AddOnSkins') then return end
 
 local function LoadSkin()
 	ScriptErrorsFrame:SetParent(UIParent)
 
-	local noscalemult = D['mult'] * C["general"].uiscale
+	local noscalemult = D['mult'] * C['general']['uiscale']
 	local bg = {
 		bgFile = C['media']['blank'], 
 		edgeFile = C['media']['blank'], 
@@ -12,26 +12,26 @@ local function LoadSkin()
 		insets = { left = -noscalemult, right = -noscalemult, top = -noscalemult, bottom = -noscalemult}
 	}
 	ScriptErrorsFrame:SetBackdrop(bg)
-	ScriptErrorsFrame:SetBackdropColor(unpack(C["media"].backdropcolor))
-	ScriptErrorsFrame:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+	ScriptErrorsFrame:SetBackdropColor(unpack(C['media']['backdropcolor']))
+	ScriptErrorsFrame:SetBackdropBorderColor(unpack(C['media']['bordercolor']))
 
-	EventTraceFrame:SetTemplate("Default")
+	EventTraceFrame:SetTemplate('Default')
 
 	local texs = {
-		"TopLeft",
-		"TopRight",
-		"Top",
-		"BottomLeft",
-		"BottomRight",
-		"Bottom",
-		"Left",
-		"Right",
-		"TitleBG",
-		"DialogBG",
+		'TopLeft',
+		'TopRight',
+		'Top',
+		'BottomLeft',
+		'BottomRight',
+		'Bottom',
+		'Left',
+		'Right',
+		'TitleBG',
+		'DialogBG',
 	}
 	for i=1, #texs do
-		_G["ScriptErrorsFrame"..texs[i]]:SetTexture(nil)
-		_G["EventTraceFrame"..texs[i]]:SetTexture(nil)
+		_G['ScriptErrorsFrame'..texs[i]]:SetTexture(nil)
+		_G['EventTraceFrame'..texs[i]]:SetTexture(nil)
 	end
 
 	local bg = {
@@ -42,11 +42,11 @@ local function LoadSkin()
 	}
 	for i=1, ScriptErrorsFrame:GetNumChildren() do
 		local child = select(i, ScriptErrorsFrame:GetChildren())
-		if child:GetObjectType() == "Button" and not child:GetName() then
+		if child:GetObjectType() == 'Button' and not child:GetName() then
 			child:SkinButton()
 			child:SetBackdrop(bg)
-			child:SetBackdropColor(unpack(C["media"].backdropcolor))
-			child:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+			child:SetBackdropColor(unpack(C['media']['backdropcolor']))
+			child:SetBackdropBorderColor(unpack(C['media']['bordercolor']))
 		end
 	end
 
@@ -54,4 +54,4 @@ local function LoadSkin()
 	EventTraceFrameScrollBG:SetTexture(nil)
 	EventTraceFrameCloseButton:SkinCloseButton()
 end
-D.SkinFuncs["Blizzard_DebugTools"] = LoadSkin
+D['SkinFuncs']['Blizzard_DebugTools'] = LoadSkin

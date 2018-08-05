@@ -3,7 +3,7 @@ local D, C, L = unpack(select(2, ...))
 local function LoadSkin()
 	ItemTextFrame:StripTextures(true)
 	ItemTextFrameInset:StripTextures()
-	ItemTextFrame:SetTemplate("Transparent")
+	ItemTextFrame:SetTemplate('Transparent')
 	ItemTextScrollFrameScrollBar:SkinScrollBar()
 	ItemTextFrameCloseButton:SkinCloseButton()
 	ItemTextPrevPageButton:SkinNextPrevButton()
@@ -12,4 +12,4 @@ local function LoadSkin()
 	ItemTextPageText.SetTextColor = D['Dummy']
 end
 
-tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
+tinsert(D['SkinFuncs']['DuffedUI'], LoadSkin)

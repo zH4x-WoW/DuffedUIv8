@@ -2,7 +2,7 @@ local D, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	PetitionFrame:StripTextures(true)
-	PetitionFrame:SetTemplate("Transparent")
+	PetitionFrame:SetTemplate('Transparent')
 	PetitionFrameInset:StripTextures()
 
 	PetitionFrameRequestButton:SkinButton()
@@ -18,18 +18,16 @@ local function LoadSkin()
 	PetitionFrameMasterName:SetTextColor(1, 1, 1)
 	PetitionFrameMemberTitle:SetTextColor(1, 1, 0)
 
-	for i=1, 9 do
-		_G["PetitionFrameMemberName"..i]:SetTextColor(1, 1, 1)
-	end
+	for i=1, 9 do _G['PetitionFrameMemberName'..i]:SetTextColor(1, 1, 1) end
 
 	PetitionFrameInstructions:SetTextColor(1, 1, 1)
 
-	PetitionFrameRenameButton:Point("LEFT", PetitionFrameRequestButton, "RIGHT", 3, 0)
-	PetitionFrameRenameButton:Point("RIGHT", PetitionFrameCancelButton, "LEFT", -3, 0)
+	PetitionFrameRenameButton:Point('LEFT', PetitionFrameRequestButton, 'RIGHT', 3, 0)
+	PetitionFrameRenameButton:Point('RIGHT', PetitionFrameCancelButton, 'LEFT', -3, 0)
 	PetitionFrame:Height(PetitionFrame:GetHeight() - 80)
 
-	PetitionFrameCancelButton:Point("BOTTOMRIGHT", PetitionFrame, "BOTTOMRIGHT", -40, 20)
-	PetitionFrameRequestButton:Point("BOTTOMLEFT", PetitionFrame, "BOTTOMLEFT", 22, 20)
+	PetitionFrameCancelButton:Point('BOTTOMRIGHT', PetitionFrame, 'BOTTOMRIGHT', -40, 20)
+	PetitionFrameRequestButton:Point('BOTTOMLEFT', PetitionFrame, 'BOTTOMLEFT', 22, 20)
 end
 
-tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
+tinsert(D['SkinFuncs']['DuffedUI'], LoadSkin)

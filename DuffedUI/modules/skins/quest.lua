@@ -1,18 +1,15 @@
 local D, C, L = unpack(select(2, ...))
-if IsAddOnLoaded("AddOnSkins") then return end
+if IsAddOnLoaded('AddOnSkins') then return end
 
 local function LoadSkin()
 	QuestFrame:StripTextures(true)
 	QuestFrameInset:StripTextures()
 	QuestFrameDetailPanel:StripTextures(true)
-	--QuestFrameDetailPanel.IgnoreButton:SkinButton(true)
-	--QuestFrameDetailPanel.UnignoreButton:SkinButton(true)
 	QuestDetailScrollChildFrame:StripTextures(true)
 	QuestRewardScrollChildFrame:StripTextures(true)
 	QuestFrameProgressPanel:StripTextures(true)
-	--QuestFrameProgressPanel.IgnoreButton:SkinButton(true)
 	QuestFrameRewardPanel:StripTextures(true)
-	QuestFrame:CreateBackdrop("Transparent")
+	QuestFrame:CreateBackdrop('Transparent')
 	QuestFrameAcceptButton:SkinButton(true)
 	QuestFrameDeclineButton:SkinButton(true)
 	QuestFrameCompleteButton:SkinButton(true)
@@ -22,22 +19,22 @@ local function LoadSkin()
 	QuestDetailScrollFrameScrollBar:SkinScrollBar()
 	QuestRewardScrollFrameScrollBar:SkinScrollBar()
 
-	for i=1, 6 do
-		local button = _G["QuestProgressItem"..i]
-		local texture = _G["QuestProgressItem"..i.."IconTexture"]
+	for i = 1, 6 do
+		local button = _G['QuestProgressItem'..i]
+		local texture = _G['QuestProgressItem'..i..'IconTexture']
 		button:StripTextures()
 		button:StyleButton()
-		button:Width(_G["QuestProgressItem"..i]:GetWidth() - 4)
+		button:Width(_G['QuestProgressItem'..i]:GetWidth() - 4)
 		button:SetFrameLevel(button:GetFrameLevel() + 2)
 		texture:SetTexCoord(.08, .92, .08, .92)
-		texture:SetDrawLayer("OVERLAY")
-		texture:Point("TOPLEFT", 2, -2)
+		texture:SetDrawLayer('OVERLAY')
+		texture:Point('TOPLEFT', 2, -2)
 		texture:Size(texture:GetWidth() - 2, texture:GetHeight() - 2)
-		_G["QuestProgressItem"..i.."Count"]:SetDrawLayer("OVERLAY")
-		button:SetTemplate("Default")
+		_G['QuestProgressItem'..i..'Count']:SetDrawLayer('OVERLAY')
+		button:SetTemplate('Default')
 	end
 
-	hooksecurefunc("QuestFrameProgressItems_Update", function()
+	hooksecurefunc('QuestFrameProgressItems_Update', function()
 		QuestProgressTitleText:SetTextColor(1, 1, 0)
 		QuestProgressText:SetTextColor(1, 1, 1)
 		QuestProgressRequiredItemsText:SetTextColor(1, 1, 0)
@@ -49,29 +46,29 @@ local function LoadSkin()
 	QuestProgressScrollFrameScrollBar:SkinScrollBar()
 
 	local frames = {
-		"QuestDetailScrollFrameMiddle",
-		"QuestDetailScrollFrameTop",
-		"QuestDetailScrollFrameBottom",
-		"QuestRewardScrollFrameMiddle",
-		"QuestRewardScrollFrameTop",
-		"QuestRewardScrollFrameBottom",
-		"QuestProgressScrollFrameMiddle",
-		"QuestProgressScrollFrameTop",
-		"QuestProgressScrollFrameBottom",
+		'QuestDetailScrollFrameMiddle',
+		'QuestDetailScrollFrameTop',
+		'QuestDetailScrollFrameBottom',
+		'QuestRewardScrollFrameMiddle',
+		'QuestRewardScrollFrameTop',
+		'QuestRewardScrollFrameBottom',
+		'QuestProgressScrollFrameMiddle',
+		'QuestProgressScrollFrameTop',
+		'QuestProgressScrollFrameBottom',
 	}
 	for i = 1, #frames do _G[frames[i]]:SetTexture(nil) end
 	
 	QuestNPCModel:StripTextures()
-	QuestNPCModel:CreateBackdrop("Transparent")
-	QuestNPCModel:Point("TOPLEFT", QuestLogDetailFrame, "TOPRIGHT", 4, -34)
+	QuestNPCModel:CreateBackdrop('Transparent')
+	QuestNPCModel:Point('TOPLEFT', QuestLogDetailFrame, 'TOPRIGHT', 4, -34)
 	QuestNPCModelTextFrame:StripTextures()
-	QuestNPCModelTextFrame:CreateBackdrop("Default")
-	QuestNPCModelTextFrame.backdrop:Point("TOPLEFT", QuestNPCModel.backdrop, "BOTTOMLEFT", 0, -2)
+	QuestNPCModelTextFrame:CreateBackdrop('Default')
+	QuestNPCModelTextFrame.backdrop:Point('TOPLEFT', QuestNPCModel.backdrop, 'BOTTOMLEFT', 0, -2)
 
-	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(parentFrame, portrait, text, name, x, y)
+	hooksecurefunc('QuestFrame_ShowQuestPortrait', function(QuestFrame, parentFrame, portrait, text, name, x, y)
 		QuestNPCModel:ClearAllPoints()
-		QuestNPCModel:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x + 18, y)
+		QuestNPCModel:SetPoint('TOPLEFT', QuestFrame, 'TOPRIGHT', x + 10, y)
 	end)
 end
 
-tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
+tinsert(D['SkinFuncs']['DuffedUI'], LoadSkin)

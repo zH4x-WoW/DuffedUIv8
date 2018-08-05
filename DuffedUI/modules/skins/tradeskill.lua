@@ -100,7 +100,7 @@ local function LoadSkin()
 
 	--Create new one with fixed template
 	TradeSkillFrame.RecipeList.scrollBar = CreateFrame('Slider', nil, TradeSkillFrame.RecipeList, 'HybridScrollBarTemplateFixed')
-	C_Timer.After(0.25, function()
+	C_Timer.After(.25, function()
 		TradeSkillFrame.RecipeList.scrollBar:SetValue(1)
 		TradeSkillFrame.RecipeList.scrollBar:SetValue(0)
 	end)

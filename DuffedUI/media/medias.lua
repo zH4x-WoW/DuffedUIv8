@@ -32,8 +32,8 @@ C['media'] = {
 	['sc2'] = [[Interface\AddOns\DuffedUI\media\textures\sc2]],
 	['RaidIcons'] = [[Interface\AddOns\DuffedUI\media\textures\raidicons]],
 
-	['bordercolor'] = C['general'].bordercolor or { .125, .125, .125 },
-	['backdropcolor'] = C['general'].backdropcolor or { .05, .05, .05 },
+	['bordercolor'] = C['general']['bordercolor'] or { .125, .125, .125 },
+	['backdropcolor'] = C['general']['backdropcolor'] or { .05, .05, .05 },
 	['datatextcolor1'] = { .4, .4, .4 }, -- color of datatext title
 	['datatextcolor2'] = { 1, 1, 1 }, -- color of datatext result
 

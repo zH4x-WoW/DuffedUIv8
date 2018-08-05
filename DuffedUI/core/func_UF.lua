@@ -475,7 +475,7 @@ D['UpdateThreat'] = function(self, event, unit)
 		end
 	else
 		if self.panel then
-			local r, g, b = unpack(C['media'].bordercolor)
+			local r, g, b = unpack(C['media']['bordercolor'])
 			self.panel:SetBackdropBorderColor(r * .7, g * .7, b * .7)
 		else
 			self.Name:SetTextColor(1, 1, 1)

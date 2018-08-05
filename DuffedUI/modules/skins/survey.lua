@@ -3,9 +3,9 @@ local D, C, L = unpack(select(2, ...))
 local function LoadSkin()
 	GMSurveyHeader:StripTextures()
 	GMSurveyFrame:StripTextures()
-	GMSurveyFrame:CreateBackdrop("Transparent")
-	GMSurveyFrame.backdrop:Point("TOPLEFT", 0, 0)
-	GMSurveyFrame.backdrop:Point("BOTTOMRIGHT", -44, 10)
+	GMSurveyFrame:CreateBackdrop('Transparent')
+	GMSurveyFrame.backdrop:Point('TOPLEFT', 0, 0)
+	GMSurveyFrame.backdrop:Point('BOTTOMRIGHT', -44, 10)
 
 	GMSurveyCommentFrame:StripTextures()
 	GMSurveyCommentFrame:SetTemplate()
@@ -18,9 +18,7 @@ local function LoadSkin()
 	GMSurveyScrollFrame:SkinScrollBar()
 	GMSurveyScrollFrameScrollBar:SkinScrollBar()
 
-	for i = 1, 11 do
-		_G["GMSurveyQuestion"..i]:StripTextures()
-	end
+	for i = 1, 11 do _G['GMSurveyQuestion'..i]:StripTextures() end
 end
 
-D.SkinFuncs["Blizzard_GMSurveyUI"] = LoadSkin
+D['SkinFuncs']['Blizzard_GMSurveyUI'] = LoadSkin

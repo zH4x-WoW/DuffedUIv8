@@ -1,46 +1,46 @@
 local D, C, L = unpack(select(2, ...))
-if IsAddOnLoaded("AddOnSkins") then return end
+if IsAddOnLoaded('AddOnSkins') then return end
 
 local function LoadSkin()
-	local StripAllTextures = {"GossipFrameGreetingPanel",}
+	local StripAllTextures = {'GossipFrameGreetingPanel',}
 	for _, object in pairs(StripAllTextures) do _G[object]:StripTextures() end
 
-	local KillTextures = {"GossipFramePortrait",}
+	local KillTextures = {'GossipFramePortrait',}
 	for _, texture in pairs(KillTextures) do _G[texture]:Kill() end
 
-	local buttons = {"GossipFrameGreetingGoodbyeButton",}
+	local buttons = {'GossipFrameGreetingGoodbyeButton',}
 	for i = 1, #buttons do
 		_G[buttons[i]]:StripTextures()
 		_G[buttons[i]]:SkinButton()
 	end
 	
 	local frames = {
-		"GossipGreetingScrollFrameMiddle",
-		"GossipGreetingScrollFrameTop",
-		"GossipGreetingScrollFrameBottom",
+		'GossipGreetingScrollFrameMiddle',
+		'GossipGreetingScrollFrameTop',
+		'GossipGreetingScrollFrameBottom',
 	}
 	for i = 1, #frames do _G[frames[i]]:SetTexture(nil) end
 
 	for i = 1, NUMGOSSIPBUTTONS do
-		obj = select(3,_G["GossipTitleButton"..i]:GetRegions())
+		obj = select(3,_G['GossipTitleButton'..i]:GetRegions())
 		obj:SetTextColor(1,1,1)
 	end
 
 	GossipGreetingText:SetTextColor(1,1,1)
 	GossipFrame:StripTextures()
 	GossipFrameInset:StripTextures()
-	GossipFrame:CreateBackdrop("Transparent")
+	GossipFrame:CreateBackdrop('Transparent')
 	GossipFrameCloseButton:SkinCloseButton(GossipFrame.backdrop)
 	GossipGreetingScrollFrameScrollBar:SkinScrollBar()
 
-	--[[Extreme hackage, blizzard makes button text on quest frame use hex color codes for some reason]]--
-	hooksecurefunc("GossipFrameUpdate", function()
+	-- Extreme hackage, blizzard makes button text on quest frame use hex color codes for some reason
+	hooksecurefunc('GossipFrameUpdate', function()
 		for i = 1, NUMGOSSIPBUTTONS do
-			local button = _G["GossipTitleButton"..i]
+			local button = _G['GossipTitleButton'..i]
 
 			if button:GetFontString() then
-				if button:GetFontString():GetText() and button:GetFontString():GetText():find("|cff000000") then
-					button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), "|cff000000", "|cffFFFF00"))
+				if button:GetFontString():GetText() and button:GetFontString():GetText():find('|cff000000') then
+					button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), '|cff000000', '|cffFFFF00'))
 				end
 			end
 		end
@@ -51,4 +51,4 @@ local function LoadSkin()
 	NPCFriendshipStatusBar:CreateBackdrop('Default')
 end
 
-tinsert(D.SkinFuncs["DuffedUI"], LoadSkin)
+tinsert(D['SkinFuncs']['DuffedUI'], LoadSkin)

@@ -1,23 +1,23 @@
 local D, C, L = unpack(select(2, ...))
 
 local function LoadCommandBarSkin()	
-	--[[OrderHall CommandBar]]--
+	-- OrderHall CommandBar
 	OrderHallCommandBar:StripTextures()
-	OrderHallCommandBar:SetTemplate("Transparent")
+	OrderHallCommandBar:SetTemplate('Transparent')
 	OrderHallCommandBar:ClearAllPoints()
-	OrderHallCommandBar:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 5, -5)
-	OrderHallCommandBar:SetWidth(D["ScreenWidth"] / 2)
-	OrderHallCommandBar.ClassIcon:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles")
+	OrderHallCommandBar:SetPoint('TOPLEFT', UIParent, 'TOPLEFT', 5, -5)
+	OrderHallCommandBar:SetWidth(D['ScreenWidth'] / 2)
+	OrderHallCommandBar.ClassIcon:SetTexture('Interface\\TargetingFrame\\UI-Classes-Circles')
 	OrderHallCommandBar.ClassIcon:SetSize(46, 20)
-	OrderHallCommandBar.CurrencyIcon:SetAtlas("legionmission-icon-currency", false)
+	OrderHallCommandBar.CurrencyIcon:SetAtlas('legionmission-icon-currency', false)
 	OrderHallCommandBar.AreaName:ClearAllPoints()
-	OrderHallCommandBar.AreaName:SetPoint("LEFT", OrderHallCommandBar.CurrencyIcon, "RIGHT", 10, 0)
+	OrderHallCommandBar.AreaName:SetPoint('LEFT', OrderHallCommandBar.CurrencyIcon, 'RIGHT', 10, 0)
 	OrderHallCommandBar.WorldMapButton:ClearAllPoints()
-	OrderHallCommandBar.WorldMapButton:SetPoint("RIGHT", OrderHallCommandBar, -5, -2)
+	OrderHallCommandBar.WorldMapButton:SetPoint('RIGHT', OrderHallCommandBar, -5, -2)
 
 	-- TalentFrame
 	OrderHallTalentFrame:StripTextures()
-	OrderHallTalentFrame:SetTemplate("Transparent")
+	OrderHallTalentFrame:SetTemplate('Transparent')
 	OrderHallTalentFrameCloseButton:SkinCloseButton()
 	ClassHallTalentInset:StripTextures()
 end
@@ -25,10 +25,10 @@ end
 local function LoadOrderHallSkin()	
 	-- MissionFrame
 	OrderHallMissionFrame:StripTextures()
-	OrderHallMissionFrame:CreateBackdrop("Transparent")
+	OrderHallMissionFrame:CreateBackdrop('Transparent')
 	OrderHallMissionFrame.backdrop:SetOutside(OrderHallMissionFrame.BorderFrame)
 	OrderHallMissionFrame.CloseButton:SkinCloseButton()
-	for i = 1, 2 do _G["OrderHallMissionFrameTab" .. i]:SkinTab() end
+	for i = 1, 2 do _G['OrderHallMissionFrameTab' .. i]:SkinTab() end
 	OrderHallMissionFrame.GarrCorners:StripTextures()
 	OrderHallMissionFrameMissions:StripTextures()
 	OrderHallMissionFrameMissionsListScrollFrameScrollBar:SkinScrollBar()
@@ -43,13 +43,13 @@ local function LoadOrderHallSkin()
 	
 
 	for i = 1, 2 do
-		_G["OrderHallMissionFrameMissionsTab" .. i]:StripTextures()
-		_G["OrderHallMissionFrameMissionsTab" .. i]:SkinButton()
-		_G["OrderHallMissionFrameMissionsTab" .. i]:Height(_G["GarrisonMissionFrameMissionsTab" .. i]:GetHeight() - 10)
+		_G['OrderHallMissionFrameMissionsTab' .. i]:StripTextures()
+		_G['OrderHallMissionFrameMissionsTab' .. i]:SkinButton()
+		_G['OrderHallMissionFrameMissionsTab' .. i]:Height(_G['GarrisonMissionFrameMissionsTab' .. i]:GetHeight() - 10)
 	end
 
 	for i, v in ipairs(OrderHallMissionFrame.MissionTab.MissionList.listScroll.buttons) do
-		local Button = _G["OrderHallMissionFrameMissionsListScrollFrameButton" .. i]
+		local Button = _G['OrderHallMissionFrameMissionsListScrollFrameButton' .. i]
 		if Button and not Button.skinned then
 			Button:StripTextures()
 			Button:SetTemplate()
@@ -66,7 +66,7 @@ local function LoadOrderHallSkin()
 				Button.Rewards[i].Icon:SetTexture(Texture)
 				Button.Rewards[i].backdrop:ClearAllPoints()
 				Button.Rewards[i].backdrop:SetOutside(Button.Rewards[i].Icon)
-				Button.Rewards[i].Icon:SetTexCoord(unpack(D.IconCoord))
+				Button.Rewards[i].Icon:SetTexCoord(unpack(D['IconCoord']))
 			end
 			Button.isSkinned = true
 		end
@@ -93,13 +93,13 @@ local function LoadOrderHallSkin()
 	-- MissionStage
 	local Mission = OrderHallMissionFrameMissions
 	Mission.CompleteDialog:StripTextures()
-	Mission.CompleteDialog:SetTemplate("Transparent")
+	Mission.CompleteDialog:SetTemplate('Transparent')
 	Mission.CompleteDialog.BorderFrame.ViewButton:SkinButton()
 	OrderHallMissionFrame.MissionComplete.NextMissionButton:SkinButton()
 
 	-- Scouting Map - Zonechoice
 	AdventureMapQuestChoiceDialog:StripTextures()	
-	AdventureMapQuestChoiceDialog:SetTemplate("Transparent")
+	AdventureMapQuestChoiceDialog:SetTemplate('Transparent')
 	AdventureMapQuestChoiceDialog.CloseButton:SkinCloseButton()
 	AdventureMapQuestChoiceDialog.Portrait:Hide()
 	AdventureMapQuestChoiceDialog.Details.Child.TitleHeader:SetTextColor(1, 1, 0)
@@ -112,5 +112,5 @@ local function LoadOrderHallSkin()
 	AdventureMapQuestChoiceDialog.DeclineButton:SkinButton()
 end
 
-D['SkinFuncs']["Blizzard_OrderHallUI"] = LoadCommandBarSkin
+D['SkinFuncs']['Blizzard_OrderHallUI'] = LoadCommandBarSkin
 D['SkinFuncs']['Blizzard_GarrisonUI'] = LoadOrderHallSkin

@@ -229,7 +229,7 @@ D['ConstructUFRaid'] = function(self)
 			ws:SetStatusBarTexture(texture)
 			ws:GetStatusBarTexture():SetHorizTile(false)
 			ws:SetBackdrop(backdrop)
-			ws:SetBackdropColor(unpack(C['media'].backdropcolor))
+			ws:SetBackdropColor(unpack(C['media']['backdropcolor']))
 			ws:SetStatusBarColor(.75, .04, .04)   
 			self.WeakenedSoul = ws
 		end

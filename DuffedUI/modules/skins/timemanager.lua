@@ -1,9 +1,9 @@
 local D, C, L = unpack(select(2, ...))
-if IsAddOnLoaded("AddOnSkins") then return end
+if IsAddOnLoaded('AddOnSkins') then return end
 
 local function LoadSkin()
 	TimeManagerFrame:StripTextures()
-	TimeManagerFrame:SetTemplate("Transparent")
+	TimeManagerFrame:SetTemplate('Transparent')
 	TimeManagerFrameInset:StripTextures()
 
 	TimeManagerFrameCloseButton:SkinCloseButton()
@@ -16,35 +16,35 @@ local function LoadSkin()
 	
 	TimeManagerAlarmEnabledButton:SkinButton()
 	TimeManagerAlarmEnabledButton:Size(16)
-	TimeManagerAlarmEnabledButtonText:SetPoint("RIGHT", 76, 0)
+	TimeManagerAlarmEnabledButtonText:SetPoint('RIGHT', 76, 0)
 	
 	TimeManagerMilitaryTimeCheck:SkinCheckBox()
 	TimeManagerLocalTimeCheck:SkinCheckBox()
 	
 	TimeManagerStopwatchFrame:StripTextures()
-	TimeManagerStopwatchCheck:SetTemplate("Default")
+	TimeManagerStopwatchCheck:SetTemplate('Default')
 	TimeManagerStopwatchCheck:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
 	TimeManagerStopwatchCheck:GetNormalTexture():ClearAllPoints()
-	TimeManagerStopwatchCheck:GetNormalTexture():Point("TOPLEFT", 2, -2)
-	TimeManagerStopwatchCheck:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
+	TimeManagerStopwatchCheck:GetNormalTexture():Point('TOPLEFT', 2, -2)
+	TimeManagerStopwatchCheck:GetNormalTexture():Point('BOTTOMRIGHT', -2, 2)
 	TimeManagerStopwatchCheck:StyleButton()
-	local hover = TimeManagerStopwatchCheck:CreateTexture("frame", nil, TimeManagerStopwatchCheck) -- hover
+	local hover = TimeManagerStopwatchCheck:CreateTexture('frame', nil, TimeManagerStopwatchCheck) -- hover
 	hover:SetColorTexture(1,1,1,0.3)
-	hover:Point("TOPLEFT",TimeManagerStopwatchCheck,2,-2)
-	hover:Point("BOTTOMRIGHT",TimeManagerStopwatchCheck,-2,2)
+	hover:Point('TOPLEFT',TimeManagerStopwatchCheck,2,-2)
+	hover:Point('BOTTOMRIGHT',TimeManagerStopwatchCheck,-2,2)
 	TimeManagerStopwatchCheck:SetHighlightTexture(hover)
 	
 	StopwatchFrame:StripTextures()
-	StopwatchFrame:CreateBackdrop("Default")
-	StopwatchFrame.backdrop:Point("TOPLEFT", 0, -17)
-	StopwatchFrame.backdrop:Point("BOTTOMRIGHT", 0, 2)
+	StopwatchFrame:CreateBackdrop('Default')
+	StopwatchFrame.backdrop:Point('TOPLEFT', 0, -17)
+	StopwatchFrame.backdrop:Point('BOTTOMRIGHT', 0, 2)
 	
 	StopwatchTabFrame:StripTextures()
 	StopwatchCloseButton:SkinCloseButton()
 	StopwatchPlayPauseButton:SkinNextPrevButton()
 	StopwatchResetButton:SkinNextPrevButton()
-	StopwatchPlayPauseButton:Point("RIGHT", StopwatchResetButton, "LEFT", -4, 0)
-	StopwatchResetButton:Point("BOTTOMRIGHT", StopwatchFrame, "BOTTOMRIGHT", -4, 6)
+	StopwatchPlayPauseButton:Point('RIGHT', StopwatchResetButton, 'LEFT', -4, 0)
+	StopwatchResetButton:Point('BOTTOMRIGHT', StopwatchFrame, 'BOTTOMRIGHT', -4, 6)
 end
 
-D.SkinFuncs["Blizzard_TimeManager"] = LoadSkin
+D['SkinFuncs']['Blizzard_TimeManager'] = LoadSkin

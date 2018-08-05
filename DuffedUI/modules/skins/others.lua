@@ -37,7 +37,7 @@ local function LoadSkin()
 	LFDRoleCheckPopupRoleButtonHealer:GetChildren():SetFrameLevel(LFDRoleCheckPopupRoleButtonHealer:GetChildren():GetFrameLevel() + 1)
 
 	CinematicFrameCloseDialog:SetTemplate('Transparent')
-	CinematicFrameCloseDialog:SetScale(C['general'].uiscale)
+	CinematicFrameCloseDialog:SetScale(C['general']['uiscale'])
 	CinematicFrameCloseDialogConfirmButton:SkinButton()
 	CinematicFrameCloseDialogResumeButton:SkinButton()
 

@@ -1,7 +1,7 @@
 local D, C, L = unpack(select(2, ...))
 
 local function OFSkin()
-	ObliterumForgeFrame:SetTemplate("Transparent")
+	ObliterumForgeFrame:SetTemplate('Transparent')
 	ObliterumForgeFramePortrait:Hide()
 	ObliterumForgeFramePortraitFrame:Hide()
 	ObliterumForgeFrameBg:Hide()
@@ -10,4 +10,4 @@ local function OFSkin()
 	ObliterumForgeFrame.ObliterateButton:SkinButton()
 end
 
-D.SkinFuncs["Blizzard_ObliterumUI"] = OFSkin
+D['SkinFuncs']['Blizzard_ObliterumUI'] = OFSkin

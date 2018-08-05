@@ -93,4 +93,4 @@ local function LoadSkin()
 	GuildBankInfoScrollFrameScrollBar:SkinScrollBar()
 end
 
-D.SkinFuncs['Blizzard_GuildBankUI'] = LoadSkin
+D['SkinFuncs']['Blizzard_GuildBankUI'] = LoadSkin

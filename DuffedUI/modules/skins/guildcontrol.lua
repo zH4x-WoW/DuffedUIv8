@@ -1,14 +1,14 @@
 local D, C, L = unpack(select(2, ...))
 
-if not IsAddOnLoaded("AddOnSkins") then
+if not IsAddOnLoaded('AddOnSkins') then
 	local function LoadSkin()
 		GuildControlUI:StripTextures()
 		GuildControlUIHbar:StripTextures()
-		GuildControlUI:SetTemplate("Transparent")
+		GuildControlUI:SetTemplate('Transparent')
 		
 		local function SkinGuildRanks()
 			for i=1, GuildControlGetNumRanks() do
-				local rankFrame = _G["GuildControlUIRankOrderFrameRank"..i]
+				local rankFrame = _G['GuildControlUIRankOrderFrameRank'..i]
 				if rankFrame then
 					rankFrame.downButton:SkinButton()
 					rankFrame.upButton:SkinButton()
@@ -18,12 +18,12 @@ if not IsAddOnLoaded("AddOnSkins") then
 						rankFrame.nameBox:SkinEditBox()
 					end
 					
-					rankFrame.nameBox.backdrop:Point("TOPLEFT", -2, -4)
-					rankFrame.nameBox.backdrop:Point("BOTTOMRIGHT", -4, 4)
+					rankFrame.nameBox.backdrop:Point('TOPLEFT', -2, -4)
+					rankFrame.nameBox.backdrop:Point('BOTTOMRIGHT', -4, 4)
 				end
 			end				
 		end
-		hooksecurefunc("GuildControlUI_RankOrder_Update", SkinGuildRanks)
+		hooksecurefunc('GuildControlUI_RankOrder_Update', SkinGuildRanks)
 
 		GuildControlUINavigationDropDown:SkinDropDownBox()
 		GuildControlUIRankSettingsFrameRankDropDown:SkinDropDownBox(180)
@@ -31,36 +31,36 @@ if not IsAddOnLoaded("AddOnSkins") then
 		GuildControlUIRankSettingsFrameRankDropDownButton:Width(20)
 		
 		for i=1, NUM_RANK_FLAGS do
-			if _G["GuildControlUIRankSettingsFrameCheckbox"..i] then
-				_G["GuildControlUIRankSettingsFrameCheckbox"..i]:SkinCheckBox()
+			if _G['GuildControlUIRankSettingsFrameCheckbox'..i] then
+				_G['GuildControlUIRankSettingsFrameCheckbox'..i]:SkinCheckBox()
 			end
 		end
 		
 		GuildControlUIRankOrderFrameNewButton:SkinButton()
 		
 		GuildControlUIRankSettingsFrameGoldBox:SkinEditBox()
-		GuildControlUIRankSettingsFrameGoldBox.backdrop:Point("TOPLEFT", -2, -4)
-		GuildControlUIRankSettingsFrameGoldBox.backdrop:Point("BOTTOMRIGHT", 2, 4)
+		GuildControlUIRankSettingsFrameGoldBox.backdrop:Point('TOPLEFT', -2, -4)
+		GuildControlUIRankSettingsFrameGoldBox.backdrop:Point('BOTTOMRIGHT', 2, 4)
 		GuildControlUIRankSettingsFrameGoldBox:StripTextures()
 		
 		GuildControlUIRankBankFrame:StripTextures()
 		
 		local once = false
-		hooksecurefunc("GuildControlUI_BankTabPermissions_Update", function()
+		hooksecurefunc('GuildControlUI_BankTabPermissions_Update', function()
 			local numTabs = GetNumGuildBankTabs()
 			if numTabs < MAX_BUY_GUILDBANK_TABS then
 				numTabs = numTabs + 1
 			end
 			for i=1, numTabs do
-				local tab = _G["GuildControlBankTab"..i.."Owned"]
+				local tab = _G['GuildControlBankTab'..i..'Owned']
 				local icon = tab.tabIcon
 				local editbox = tab.editBox
 				
 				icon:SetTexCoord(.08, .92, .08, .92)
 				
 				if once == false then
-					_G["GuildControlBankTab"..i.."BuyPurchaseButton"]:SkinButton()
-					_G["GuildControlBankTab"..i.."OwnedStackBox"]:StripTextures()
+					_G['GuildControlBankTab'..i..'BuyPurchaseButton']:SkinButton()
+					_G['GuildControlBankTab'..i..'OwnedStackBox']:StripTextures()
 				end
 			end
 			once = true
@@ -74,12 +74,12 @@ if not IsAddOnLoaded("AddOnSkins") then
 		GuildControlUIRankBankFrameInsetScrollFrameScrollBar:SkinScrollBar()
 	end
 
-	D.SkinFuncs["Blizzard_GuildControlUI"] = LoadSkin
+	D['SkinFuncs']['Blizzard_GuildControlUI'] = LoadSkin
 end
 
 local function Ranks()
-	GuildControlUIRankOrderFrameNewButton:HookScript("OnClick", function()
-		D.Delay(1, SkinGuildRanks)
+	GuildControlUIRankOrderFrameNewButton:HookScript('OnClick', function()
+		D['Delay'](1, SkinGuildRanks)
 	end)
 end
-D.SkinFuncs["Blizzard_GuildControlUI"] = Ranks
+D['SkinFuncs']['Blizzard_GuildControlUI'] = Ranks

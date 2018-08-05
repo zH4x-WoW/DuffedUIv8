@@ -2,29 +2,23 @@ local D, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	local checkbox = {
-		"LookingForGuildPvPButton",
-		"LookingForGuildWeekendsButton",
-		"LookingForGuildWeekdaysButton",
-		"LookingForGuildRPButton",
-		"LookingForGuildRaidButton",
-		"LookingForGuildQuestButton",
-		"LookingForGuildDungeonButton",
+		'LookingForGuildPvPButton',
+		'LookingForGuildWeekendsButton',
+		'LookingForGuildWeekdaysButton',
+		'LookingForGuildRPButton',
+		'LookingForGuildRaidButton',
+		'LookingForGuildQuestButton',
+		'LookingForGuildDungeonButton',
 	}
-	-- skin checkboxes
-	for _, v in pairs(checkbox) do
-		_G[v]:SkinCheckBox()
-	end
+	for _, v in pairs(checkbox) do _G[v]:SkinCheckBox() end
 	
 	local backdrop = {
-		"LookingForGuildInterestFrame",
-		"LookingForGuildAvailabilityFrame",
-		"LookingForGuildRolesFrame",
-		"LookingForGuildCommentFrame",
+		'LookingForGuildInterestFrame',
+		'LookingForGuildAvailabilityFrame',
+		'LookingForGuildRolesFrame',
+		'LookingForGuildCommentFrame',
 	}
-	
-	for _, v in pairs(backdrop) do
-		_G[v]:StripTextures()
-	end
+	for _, v in pairs(backdrop) do _G[v]:StripTextures() end
 	
 	-- have to skin these checkboxes seperate for some reason o_O
 	LookingForGuildTankButton.checkButton:SkinCheckBox()
@@ -34,23 +28,23 @@ local function LoadSkin()
 	-- skinning other frames
 	LookingForGuildFrameInset:StripTextures(false)
 	LookingForGuildFrame:StripTextures()
-	LookingForGuildFrame:SetTemplate("Transparent")
+	LookingForGuildFrame:SetTemplate('Transparent')
 	LookingForGuildBrowseButton_LeftSeparator:Kill()
 	LookingForGuildRequestButton_RightSeparator:Kill()
 	LookingForGuildBrowseFrameContainerScrollBar:SkinScrollBar()
 	LookingForGuildBrowseButton:SkinButton()
 	LookingForGuildRequestButton:SkinButton()
 	LookingForGuildFrameCloseButton:SkinCloseButton()
-	LookingForGuildCommentInputFrame:CreateBackdrop("Default")
+	LookingForGuildCommentInputFrame:CreateBackdrop('Default')
 	LookingForGuildCommentInputFrame:StripTextures(false)
 	
 	-- skin container buttons on browse and request page
 	for i = 1, 5 do
-		local b = _G["LookingForGuildBrowseFrameContainerButton"..i]
-		local t = _G["LookingForGuildAppsFrameContainerButton"..i]
-		local r = _G["LookingForGuildBrowseFrameContainerButton"..i.."Pending"]
+		local b = _G['LookingForGuildBrowseFrameContainerButton'..i]
+		local t = _G['LookingForGuildAppsFrameContainerButton'..i]
+		local r = _G['LookingForGuildBrowseFrameContainerButton'..i..'Pending']
 		b:SetBackdrop(nil)
-		b:SetTemplate("Default")
+		b:SetTemplate('Default')
 		b:SetBackdropColor(0, 0, 0, 0)
 		b:SetBackdropBorderColor(1, 0, 0, 0)
 		b:StyleButton()
@@ -58,14 +52,14 @@ local function LoadSkin()
 		b.selectedTex:Kill()
 		if r then
 			r:StripTextures()
-			r:SetTemplate("Transparent")
+			r:SetTemplate('Transparent')
 		end
 		
 		b.isSelected = false
 	end
 
 	-- skin apps request
-	hooksecurefunc("LookingForGuild_Update", function(self, button)
+	hooksecurefunc('LookingForGuild_Update', function(self, button)
 		local s = GetRecruitingGuildSelection()
 		local f = LookingForGuildBrowseFrameContainer
 		local o = HybridScrollFrame_GetOffset(f)
@@ -93,19 +87,17 @@ local function LoadSkin()
 	end)
 	
 	-- skin tabs
-	for i= 1, 3 do
-		_G["LookingForGuildFrameTab"..i]:SkinTab()
-	end
+	for i= 1, 3 do _G['LookingForGuildFrameTab'..i]:SkinTab() end
 	
 	GuildFinderRequestMembershipFrame:StripTextures(true)
-	GuildFinderRequestMembershipFrame:SetTemplate("Default")
+	GuildFinderRequestMembershipFrame:SetTemplate('Default')
 	GuildFinderRequestMembershipFrameAcceptButton:SkinButton()
 	GuildFinderRequestMembershipFrameCancelButton:SkinButton()
 	GuildFinderRequestMembershipFrameInputFrame:StripTextures()
-	GuildFinderRequestMembershipFrameInputFrame:SetTemplate("Default")
+	GuildFinderRequestMembershipFrameInputFrame:SetTemplate('Default')
 
 	-- skin apps request
-	hooksecurefunc("LookingForGuildApps_Update", function()
+	hooksecurefunc('LookingForGuildApps_Update', function()
 		local f = LookingForGuildAppsFrameContainer
 		local b = f.buttons
 		local nb = #b
@@ -115,7 +107,7 @@ local function LoadSkin()
 		for i = 1, nb do
 			button = b[i]
 			if not button.isSkinned then
-				button:SetTemplate("Default")
+				button:SetTemplate('Default')
 				button:StyleButton()
 				button.isSkinned = true
 			end
@@ -123,4 +115,4 @@ local function LoadSkin()
 	end)
 end
 
-D.SkinFuncs["Blizzard_LookingForGuildUI"] = LoadSkin
+D['SkinFuncs']['Blizzard_LookingForGuildUI'] = LoadSkin

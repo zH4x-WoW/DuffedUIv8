@@ -30,7 +30,6 @@ local function LoadSkin()
 		'GuildRecruitmentLevelFrame',
 		'GuildRecruitmentCommentFrame',
 		'GuildRecruitmentCommentInputFrame',
-		--'GuildInfoFrameApplicantsContainer',
 		'GuildInfoFrameApplicants',
 		'GuildNewsBossModel',
 		'GuildNewsBossModelTextFrame',
@@ -87,21 +86,21 @@ local function LoadSkin()
 	GuildFactionBar.backdrop:Point('TOPLEFT', GuildFactionBar.progress, 'TOPLEFT', -2, 2)
 	GuildFactionBar.backdrop:Point('BOTTOMRIGHT', GuildFactionBar, 'BOTTOMRIGHT', 1, 0)
 
-	--Roster
+	-- Roster
 	GuildRosterContainerScrollBar:SkinScrollBar(5)
 	GuildRosterShowOfflineButton:SkinCheckBox()
 	for i = 1, 4 do _G['GuildRosterColumnButton' .. i]:StripTextures(true) end
 	GuildRosterViewDropdown:SkinDropDownBox(200)
 	for i = 1, 14 do _G['GuildRosterContainerButton'..i..'HeaderButton']:SkinButton(true) end
 
-	--Detail Frame
+	-- Detail Frame
 	GuildMemberDetailFrame:SetTemplate('Transparent')
 	GuildMemberNoteBackground:SetTemplate('Transparent')
 	GuildMemberOfficerNoteBackground:SetTemplate('Transparent')
 	GuildMemberRankDropdown:SetFrameLevel(GuildMemberRankDropdown:GetFrameLevel() + 5)
 	GuildMemberRankDropdown:SkinDropDownBox(175)
 
-	--News
+	-- News
 	GuildNewsFrame:StripTextures()
 	for i = 1, 17 do
 		if _G['GuildNewsContainerButton' .. i] then _G['GuildNewsContainerButton' .. i].header:Kill() end
@@ -115,7 +114,7 @@ local function LoadSkin()
 	GuildNewsFiltersFrame:Point('TOPLEFT', GuildFrame, 'TOPRIGHT', 4, -20)
 	GuildNewsContainerScrollBar:SkinScrollBar(4)
 
-	--Info Frame
+	-- Info Frame
 	GuildInfoDetailsFrameScrollBar:SkinScrollBar(4)
 	for i = 1, 3 do _G['GuildInfoFrameTab' .. i]:StripTextures() end
 
@@ -145,7 +144,7 @@ local function LoadSkin()
 		button:SetBackdrop(nil)
 	end
 
-	--Text Edit Frame
+	-- Text Edit Frame
 	GuildTextEditFrame:SetTemplate('Transparent')
 	GuildTextEditScrollFrameScrollBar:SkinScrollBar(5)
 	GuildTextEditContainer:SetTemplate('Transparent')
@@ -158,11 +157,11 @@ local function LoadSkin()
 		end
 	end
 
-	--Guild Log
+	-- Guild Log
 	GuildLogScrollFrameScrollBar:SkinScrollBar(4)
 	GuildLogFrame:SetTemplate('Transparent')
 
-	--Blizzard has two buttons with the same name, this is a fucked up way of determining that it isn't the other button
+	-- Blizzard has two buttons with the same name, this is a fucked up way of determining that it isn't the other button
 	for i = 1, GuildLogFrame:GetNumChildren() do
 		local child = select(i, GuildLogFrame:GetChildren())
 		if child:GetName() == 'GuildLogFrameCloseButton' and child:GetWidth() < 33 then
@@ -172,25 +171,25 @@ local function LoadSkin()
 		end
 	end
 
-	--Perks
+	-- Perks
 	for i = 1, 9 do
 		local button = _G['GuildPerksContainerButton' .. i]
 		button:DisableDrawLayer('BACKGROUND')
 		button:DisableDrawLayer('BORDER')
 
-		button.icon:SetTexCoord(unpack(D.IconCoord))
+		button.icon:SetTexCoord(unpack(D['IconCoord']))
 		button:CreateBackdrop()
 		button.backdrop:SetOutside(button.icon)
 	end
 
-	--Rewards
+	-- Rewards
 	GuildRewardsContainerScrollBar:SkinScrollBar(5)
 	for i = 1, 8 do
 		local button = _G['GuildRewardsContainerButton' .. i]
 		button:StripTextures()
 
 		if button.icon then
-			button.icon:SetTexCoord(unpack(D.IconCoord))
+			button.icon:SetTexCoord(unpack(D['IconCoord']))
 			button.icon:ClearAllPoints()
 			button.icon:Point('TOPLEFT', 2, -2)
 			button:CreateBackdrop('Default')
