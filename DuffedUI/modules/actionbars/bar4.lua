@@ -1,7 +1,9 @@
 local D, C, L = unpack(select(2, ...))
 if not C['actionbar']['enable'] then return end
 
-if (not C['actionbar']['RightSideBarDisable']) then
+if C['actionbar']['RightSideBarDisable'] then
+	MultiBarLeft:SetAlpha(0)
+else
 	local bar = DuffedUIBar4
 	MultiBarLeft:SetParent(bar)
 

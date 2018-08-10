@@ -1,11 +1,13 @@
 local D, C, L = unpack(select(2, ...))
 if not C['actionbar']['enable'] then return end
 
-if (not C['actionbar']['rightbarDisable']) then
+if C['actionbar']['rightbarDisable'] then
+	MultiBarRight:SetAlpha(0)
+else
 	local bar = DuffedUIBar5
 	MultiBarRight:SetParent(bar)
 
-	for i= 1, 12 do
+	for i = 1, 12 do
 		local b = _G['MultiBarRightButton' .. i]
 		local b2 = _G['MultiBarRightButton' .. i - 1]
 		b:SetSize(D['buttonsize'], D['buttonsize'])
