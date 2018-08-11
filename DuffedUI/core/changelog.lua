@@ -3,11 +3,10 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame('frame')
 local ChangeLogData = {
 	"Changes:",
-		"• Update for AddOnSkins",
-		"• Update for projectAzilroka",
-		"• Update to the code structure",
 		"• Several bug fixes",
-		"• Added Azerite-Fetaure by Rav",
+		"• Update for code structure",
+		"• Update for AddOnSkins",
+		"• Update for ProjectAzilroka",
 		--"• ",
 	" ",
 	"Notes:",

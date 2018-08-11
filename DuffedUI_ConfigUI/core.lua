@@ -155,7 +155,7 @@ function CreateDuffedUIConfigUI()
 		return
 	end
 
-	D.CreatePopup['PERCHAR'] = {
+	D['CreatePopup']['PERCHAR'] = {
 		question = DuffedUIConfigUILocalization.option_perchar,
 		function1 = function()
 			if DuffedUIConfigAllCharacters:GetChecked() then 
@@ -179,7 +179,7 @@ function CreateDuffedUIConfigUI()
 		answer2 = CANCEL,
 	}
 
-	D.CreatePopup['RESET_PERCHAR'] = {
+	D['CreatePopup']['RESET_PERCHAR'] = {
 		question = DuffedUIConfigUILocalization.option_resetchar,
 		function1 = function()
 			DuffedUIConfig = DuffedUIConfigPublic
@@ -192,7 +192,7 @@ function CreateDuffedUIConfigUI()
 		answer2 = CANCEL,
 	}
 
-	D.CreatePopup['RESET_ALL'] = {
+	D['CreatePopup']['RESET_ALL'] = {
 		question = DuffedUIConfigUILocalization.option_resetall,
 		function1 = function()
 			DuffedUIConfigPublic = nil
@@ -380,7 +380,7 @@ function CreateDuffedUIConfigUI()
 				editbox:SetMaxLetters(255)
 				editbox:SetTextInsets(3, 0, 0, 0)
 				editbox:SetBackdrop({
-					bgFile = C['media'].blank, 
+					bgFile = C['media']['blank'], 
 					tiled = false,
 				})
 				editbox:SetBackdropColor(0, 0, 0, 0.5)
@@ -399,7 +399,7 @@ function CreateDuffedUIConfigUI()
 				local oktext = okbutton:CreateFontString(nil, 'OVERLAY', nil)
 				oktext:SetFont(C['media']['font'], 11, '')
 				oktext:SetText('OK')
-				oktext:SetPoint('CENTER', D.Scale(1), 0)
+				oktext:SetPoint('CENTER', D['Scale'](1), 0)
 				oktext:SetJustifyH('CENTER')
 				okbutton:Hide()
  
