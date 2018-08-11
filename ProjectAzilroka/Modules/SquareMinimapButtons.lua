@@ -83,16 +83,6 @@ function SMB:HandleBlizzardButtons()
 		GarrisonLandingPageMinimapButton:SetScript('OnEnter', nil)
 		GarrisonLandingPageMinimapButton:SetScript('OnLeave', nil)
 
-		GarrisonLandingPageMinimapButton:SetNormalTexture(1044517)
-		GarrisonLandingPageMinimapButton:GetNormalTexture():SetTexCoord(unpack(self.TexCoords))
-		GarrisonLandingPageMinimapButton:GetNormalTexture():SetInside()
-
-		GarrisonLandingPageMinimapButton:SetPushedTexture(1044517)
-		GarrisonLandingPageMinimapButton:GetPushedTexture():SetTexCoord(unpack(self.TexCoords))
-		GarrisonLandingPageMinimapButton:GetPushedTexture():SetInside()
-
-		GarrisonLandingPageMinimapButton:SetHighlightTexture(nil)
-
 		GarrisonLandingPageMinimapButton:HookScript('OnEnter', function(self)
 			self:SetBackdropBorderColor(unpack(PA.ClassColor))
 			if SMB.Bar:IsShown() then
@@ -541,14 +531,12 @@ function SMB:Initialize()
 		Tukui[1]['Movers']:RegisterFrame(SMB.Bar)
 	elseif PA.ElvUI then
 		ElvUI[1]:CreateMover(SMB.Bar, 'SquareMinimapButtonBarMover', 'SquareMinimapButtonBar Anchor', nil, nil, nil, 'ALL,GENERAL')
-	elseif PA.DuffedUI then
-		DuffedUI[1]['move']:RegisterFrame(SMB.Bar)
 	end
 
 	SMB.TexCoords = { .08, .92, .08, .92 }
 
 	Minimap:SetMaskTexture('Interface\\ChatFrame\\ChatFrameBackground')
 
-	SMB:ScheduleRepeatingTimer('GrabMinimapButtons', 5)
-	SMB:ScheduleTimer('HandleBlizzardButtons', 6)
+	SMB:ScheduleRepeatingTimer('GrabMinimapButtons', 6)
+	SMB:ScheduleTimer('HandleBlizzardButtons', 7)
 end
