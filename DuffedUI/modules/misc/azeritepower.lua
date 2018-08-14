@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...))
+local D, C, L = unpack(select(2, ...)) 
 if not C['misc']['azerite'] then return end
 
 local AZERITE_POWER_TOOLTIP_BODY = AZERITE_POWER_TOOLTIP_BODY
@@ -35,14 +35,20 @@ AzeritemouseFrame:EnableMouse(true)
 AzeritemouseFrame:SetFrameLevel(backdrop:GetFrameLevel() + 3)
 
 function updateStatus()
-	if (event == 'UNIT_INVENTORY_CHANGED' and unit ~= 'player') then
-		return
-	end
+	if (event == "UNIT_INVENTORY_CHANGED" and unit ~= "player") then return end
+	if (event == "PLAYER_ENTERING_WORLD") then azeriteBar.eventFrame:UnregisterEvent("PLAYER_ENTERING_WORLD") end
 
 	local azeriteItemLocation = C_AzeriteItem_FindActiveAzeriteItem()
+	if azeriteItemLocation and not InCombatLockdown() then
+		azeriteBar:Show()
 
-	if not azeriteItemLocation then
-		backdrop:Hide()
+		local xp, totalLevelXP = C_AzeriteItem_GetAzeriteItemXPInfo(azeriteItemLocation)
+		local xpToNextLevel = totalLevelXP - xp
+		local currentLevel = C_AzeriteItem_GetPowerLevel(azeriteItemLocation)
+
+		azeriteBar:SetMinMaxValues(0, totalLevelXP)
+		azeriteBar:SetValue(xp)
+		azeriteBar:SetOrientation('VERTICAL')
 	end
 end
 
