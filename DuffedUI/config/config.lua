@@ -145,6 +145,7 @@ C['datatext'] = {
 	['garrison'] = 0,
 	['orderhall'] = 0,
 	['quickjoin'] = 0,
+	['bfamissions'] = 0,
 
 	['time24'] = true,
 	['localtime'] = false,

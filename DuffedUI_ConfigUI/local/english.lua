@@ -145,6 +145,7 @@ DuffedUIConfigUILocalization.datatextversatility = "Versatility position (0 for 
 DuffedUIConfigUILocalization.datatextwowtime = "Time position (0 for disabled)"
 DuffedUIConfigUILocalization.datatextgarrison = "Garrison position (0 for disabled)"
 DuffedUIConfigUILocalization.datatextorderhall = "Orderhall position (0 for disabled)"
+DuffedUIConfigUILocalization.datatextbfamissions = "BfA Missions position (0 for disabled)"
 DuffedUIConfigUILocalization.datatextquickjoin = "QuickJoin position (0 for disabled)"
 DuffedUIConfigUILocalization.datatexttime24 = "Enable 24h time"
 DuffedUIConfigUILocalization.datatextlocaltime = "Use Local Time instead of Server Time"

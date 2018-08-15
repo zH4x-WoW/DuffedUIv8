@@ -2,6 +2,7 @@
 	<!--Script file='armor.lua' /-->
 	<Script file='bags.lua' />
 	<Script file='battleground.lua' />
+	<Script file='bfamissions.lua' />
 	<Script file='calltoarms.lua' />
 	<!--Script file='crit.lua' /-->
 	<Script file='durability.lua' />

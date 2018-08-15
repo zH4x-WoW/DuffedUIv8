@@ -227,6 +227,9 @@ if D.Client == 'deDE' then
 		['noorderhallwo'] = 'Ordenshalle+',
 		['noorderhall'] = 'Du hast Deine Ordenshalle noch nicht freigeschaltet, nun aber los!',
 		['noquickjoin'] = 'Niemand aus deiner Freundesliste sucht momentan nach einer Gruppe.',
+		['report'] = 'Mission(en) Report:',
+		['missions'] = 'Missionen in Arbeit',
+		['nomissions'] = 'Keine Missionen',
 	}
 
 	L['Slots'] = {
