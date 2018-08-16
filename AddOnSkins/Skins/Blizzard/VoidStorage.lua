@@ -12,7 +12,7 @@ function AS:Blizzard_VoidStorage(event, addon)
 	VoidStoragePurchaseFrame:SetFrameLevel(VoidStorageFrame:GetFrameLevel() + 10)
 
 	AS:SkinFrame(VoidStorageFrame)
-	VoidStorageFrame:CreateShadow()
+	AS:CreateShadow(VoidStorageFrame)
 	AS:SkinFrame(VoidStoragePurchaseFrame)
 
 	AS:SkinButton(VoidStoragePurchaseButton)
