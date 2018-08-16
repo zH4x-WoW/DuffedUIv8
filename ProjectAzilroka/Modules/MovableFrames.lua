@@ -62,6 +62,7 @@ local Frames = {
 	'TradeFrame',
 	'TutorialFrame',
 	'VideoOptionsFrame',
+	'WorldMapFrame',
 	'WorldStateScoreFrame',
 }
 
@@ -96,6 +97,14 @@ local AddOnFrames = {
 	['Blizzard_TradeSkillUI'] = { 'TradeSkillFrame' },
 	['Blizzard_TrainerUI'] = { 'ClassTrainerFrame' },
 	['Blizzard_VoidStorageUI'] = { 'VoidStorageFrame' },
+}
+
+local SpecialFrame = {
+	"GameMenuFrame",
+	"VideoOptionsFrame",
+	"AudioOptionsFrame",
+	"InterfaceOptionsFrame",
+	"HelpFrame",
 }
 
 function MF:LoadPosition(frame)
@@ -155,13 +164,9 @@ function MF:MakeMovable(Name)
 	self:HookScript(Frame, 'OnDragStop', 'OnDragStop')
 	self:HookScript(Frame, 'OnHide', 'OnDragStop')
 
-	Frame.ignoreFramePositionManager = true
-	if UIPanelWindows[Name] then
-		for Key in pairs(UIPanelWindows[Name]) do
-			if Key == "pushable" then
-				UIPanelWindows[Name][Key] = nil
-			end
-		end
+	if not tContains(SpecialFrame, Name) then
+		SetUIPanelAttribute(Frame, 'area', nil)
+		tinsert(UISpecialFrames, Name)
 	end
 
 	C_Timer.After(0, function()

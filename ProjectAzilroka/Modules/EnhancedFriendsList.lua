@@ -10,16 +10,9 @@ local pairs, tonumber, unpack, format = pairs, tonumber, unpack, format
 local GetFriendInfo, BNGetFriendInfo, BNGetGameAccountInfo, BNConnected, GetQuestDifficultyColor, CanCooperateWithGameAccount = GetFriendInfo, BNGetFriendInfo, BNGetGameAccountInfo, BNConnected, GetQuestDifficultyColor, CanCooperateWithGameAccount
 
 local MediaPath = 'Interface\\AddOns\\ProjectAzilroka\\Media\\EnhancedFriendsList\\'
+
 --[[
-BNET_CLIENT_APP
-BNET_CLIENT_WOW
-BNET_CLIENT_SC2
-BNET_CLIENT_D3
-BNET_CLIENT_WTCG
-BNET_CLIENT_HEROES
-BNET_CLIENT_OVERWATCH
-BNET_CLIENT_SC
-BNET_CLIENT_DESTINY2
+/run for i,v in pairs(_G) do if type(i)=="string" and i:match("BNET_CLIENT_") then print(i,"=",v) end end
 ]]
 
 EFL.GameIcons = {
@@ -78,6 +71,7 @@ EFL.GameIcons = {
 		Flat = MediaPath..'GameIcons\\Flat\\BattleNet',
 		Gloss = MediaPath..'GameIcons\\Gloss\\BattleNet',
 		Launcher = MediaPath..'GameIcons\\Launcher\\BattleNet',
+		Animated = MediaPath..'GameIcons\\Bnet',
 	},
 	BSAp = {
 		Default = BNet_GetClientTexture(BNET_CLIENT_APP),
@@ -85,6 +79,7 @@ EFL.GameIcons = {
 		Flat = MediaPath..'GameIcons\\Flat\\BattleNet',
 		Gloss = MediaPath..'GameIcons\\Gloss\\BattleNet',
 		Launcher = MediaPath..'GameIcons\\Launcher\\BattleNet',
+		Animated = MediaPath..'GameIcons\\Bnet',
 	},
 	Hero = {
 		Default = BNet_GetClientTexture(BNET_CLIENT_HEROES),
@@ -106,6 +101,13 @@ EFL.GameIcons = {
 		Flat = MediaPath..'GameIcons\\Launcher\\Destiny2',
 		Gloss = MediaPath..'GameIcons\\Launcher\\Destiny2',
 		Launcher = MediaPath..'GameIcons\\Launcher\\Destiny2',
+	},
+	VIPR = {
+		Default = BNet_GetClientTexture(BNET_CLIENT_COD),
+		BlizzardChat = 'Interface\\ChatFrame\\UI-ChatIcon-CallOfDutyBlackOps4',
+		Flat = MediaPath..'GameIcons\\Launcher\\COD4',
+		Gloss = MediaPath..'GameIcons\\Launcher\\COD4',
+		Launcher = MediaPath..'GameIcons\\Launcher\\COD4',
 	},
 }
 
@@ -139,6 +141,7 @@ EFL.ClientColor = {
 	Hero = '00CCFF',
 	App = '82C5FF',
 	BSAp = '82C5FF',
+	VIPR = 'FFFFFF',
 }
 
 function EFL:UpdateFriends(button)
@@ -180,6 +183,9 @@ function EFL:UpdateFriends(button)
 				nameText = format('%s |cFFFFFFFF(|r%s%s|r - %s %s%s|r|cFFFFFFFF)|r', nameText, classcolor, characterName, LEVEL, diff, level)
 				Cooperate = CanCooperateWithGameAccount(toonID)
 			else
+				if not EFL.ClientColor[client] then
+					client = 'App'
+				end
 				nameText = format('|cFF%s%s|r', EFL.ClientColor[client] or 'FFFFFF', nameText)
 			end
 		end
@@ -193,15 +199,20 @@ function EFL:UpdateFriends(button)
 					if realmName == EFL.MyRealm then
 						infoText = zoneName
 					else
-						infoText = format('%s - %s', zoneName, realmName)
+						local a, b = strsplit("-", gameText)
+						infoText = format('%s - %s', zoneName, b or '')
 					end
 				end
 				button.gameIcon:SetTexture(EFL.GameIcons[faction][self.db[faction]])
 			else
+				if not EFL.GameIcons[client] then
+					client = 'App'
+				end
 				infoText = gameText
 				button.gameIcon:SetTexture(EFL.GameIcons[client][self.db[client]])
 			end
 			nameColor = FRIENDS_BNET_NAME_COLOR
+			button.gameIcon:SetTexCoord(0, 1, 0, 1)
 		else
 			button.status:SetTexture(EFL.StatusIcons[self.db.StatusIconPack].Offline)
 			nameColor = FRIENDS_GRAY_COLOR
@@ -213,6 +224,15 @@ function EFL:UpdateFriends(button)
 		button.gameIcon:SetPoint('TOPRIGHT', -50, -2)
 	else
 		button.gameIcon:SetPoint('TOPRIGHT', -21, -2)
+	end
+
+	if not button.isUpdateHooked then
+		button:HookScript("OnUpdate", function(self, elapsed)
+			if button.gameIcon:GetTexture() == MediaPath..'GameIcons\\Bnet' then
+				AnimateTexCoords(self.gameIcon, 512, 256, 64, 64, 25, elapsed, 0.02)
+			end
+		end)
+		button.isUpdateHooked = true
 	end
 
 	if nameText then
@@ -351,6 +371,7 @@ function EFL:GetOptions()
 		Hero = PA.ACL['Hero of the Storm'],
 		Pro = PA.ACL['Overwatch'],
 		DST2 = PA.ACL['Destiny 2'],
+		VIPR = PA.ACL['Call of Duty 4']
 	}
 
 	local GameIconOrder = {
@@ -366,6 +387,7 @@ function EFL:GetOptions()
 		Hero = 10,
 		Pro = 11,
 		DST2 = 12,
+		VIPR = 13,
 	}
 
 	for Key, Value in pairs(GameIconsOptions) do
@@ -389,6 +411,9 @@ function EFL:GetOptions()
 			image = function(info) return EFL.GameIcons[info[#info]][EFL.db[Key]], 32, 32 end,
 		}
 	end
+
+	Options.args.GameIcons.args['App'].values['Animated'] = 'Animated'
+	Options.args.GameIcons.args['BSAp'].values['Animated'] = 'Animated'
 
 	local StatusIconsOptions = {
 		Online = FRIENDS_LIST_ONLINE,
@@ -432,7 +457,7 @@ function EFL:BuildProfile()
 			['StatusIconPack'] = 'Default',
 		}
 	}
-	for _, GameIcon in pairs({'Alliance', 'Horde', 'Neutral', 'D3', 'WTCG', 'S1', 'S2', 'BSAp', 'Hero', 'Pro', 'DST2'}) do
+	for _, GameIcon in pairs({'Alliance', 'Horde', 'Neutral', 'D3', 'WTCG', 'S1', 'S2', 'App', 'BSAp', 'Hero', 'Pro', 'DST2', 'VIPR' }) do
 		Defaults.profile[GameIcon] = 'Launcher'
 	end
 

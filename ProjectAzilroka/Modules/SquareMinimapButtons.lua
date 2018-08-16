@@ -365,6 +365,12 @@ function SMB:Update()
 	local BarHeight = (Spacing + ((Size * (AnchorY * Mult)) + ((Spacing * (AnchorY - 1)) * Mult) + (Spacing * Mult)))
 	self.Bar:SetSize(BarWidth, BarHeight)
 
+	if self.db.Backdrop then
+		self.Bar:SetTemplate('Transparent', true)
+	else
+		self.Bar:SetBackdrop(nil)
+	end
+
 	self.Bar:Show()
 
 	if self.db['BarMouseOver'] then
@@ -403,6 +409,11 @@ function SMB:GetOptions()
 						order = 2,
 						type = 'toggle',
 						name = PA.ACL['Bar MouseOver'],
+					},
+					Backdrop = {
+						order = 3,
+						type = 'toggle',
+						name = PA.ACL['Bar Backdrop'],
 					},
 					IconSize = {
 						order = 4,
@@ -485,6 +496,7 @@ function SMB:BuildProfile()
 		profile = {
 			['BarMouseOver'] = false,
 			['BarEnabled'] = false,
+			['Backdrop'] = false,
 			['IconSize'] = 27,
 			['ButtonsPerRow'] = 12,
 			['ButtonSpacing'] = 2,
@@ -505,6 +517,18 @@ function SMB:SetupProfile()
 end
 
 function SMB:Initialize()
+	if PA.ElvUI and PA.SLE then
+		if ElvUI[1].private.sle.minimap.mapicons.enable then
+			StaticPopupDialogs["PA_INCOMPATIBLE"].text = 'Square Minimap Buttons and S&L MiniMap Buttons are incompatible. You will have to choose one. This will reload the interface.'
+			StaticPopupDialogs["PA_INCOMPATIBLE"].button1 = 'Square Minimap Buttons'
+			StaticPopupDialogs["PA_INCOMPATIBLE"].button2 = 'S&L MiniMap Buttons'
+			StaticPopupDialogs["PA_INCOMPATIBLE"].OnAccept = function() ElvUI[1].private.sle.minimap.mapicons.enable = false ReloadUI() end
+			StaticPopupDialogs["PA_INCOMPATIBLE"].OnCancel = function() PA.db['SMB'] = false ReloadUI() end
+			StaticPopup_Show("PA_INCOMPATIBLE")
+			return
+		end
+	end
+
 	SMB:BuildProfile()
 	SMB:GetOptions()
 
@@ -518,7 +542,6 @@ function SMB:Initialize()
 	SMB.Bar:SetMovable(true)
 	SMB.Bar:EnableMouse(true)
 	SMB.Bar:SetSize(SMB.db.IconSize, SMB.db.IconSize)
-	SMB.Bar:SetTemplate('Transparent', true)
 
 	SMB.Bar:SetScript('OnEnter', function(self) UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1) end)
 	SMB.Bar:SetScript('OnLeave', function(self)
@@ -529,6 +552,8 @@ function SMB:Initialize()
 
 	if PA.Tukui then
 		Tukui[1]['Movers']:RegisterFrame(SMB.Bar)
+	elseif PA.DuffedUI then
+		DuffedUI[1]['move']:RegisterFrame(SMB.Bar)
 	elseif PA.ElvUI then
 		ElvUI[1]:CreateMover(SMB.Bar, 'SquareMinimapButtonBarMover', 'SquareMinimapButtonBar Anchor', nil, nil, nil, 'ALL,GENERAL')
 	end
