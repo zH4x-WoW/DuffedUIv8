@@ -227,7 +227,7 @@ L['dt'] = {
 	['noquickjoin'] = 'No quickjoin available at this time.',
 	['report'] = 'Mission(s) Report:',
 	['missions'] = 'Work Work',
-	['nomissions'] = 'No Missionen',
+	['nomissions'] = 'No Missions',
 }
 
 L['Slots'] = {
