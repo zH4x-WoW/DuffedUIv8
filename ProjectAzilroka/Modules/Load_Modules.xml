@@ -5,7 +5,6 @@
 	<Script file="EnhancedFriendsList.lua"/>
 	<Script file="EnhancedShadows.lua"/>
 	<Script file="LootConfirm.lua"/>
-	<Script file="MovableFrames.lua"/>
 	<Script file="SquareMinimapButtons.lua"/>
 	<Script file="stAddonManager.lua"/>
 

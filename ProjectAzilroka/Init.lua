@@ -184,18 +184,13 @@ PA.Options = {
 					type = 'toggle',
 					name = PA.ACL['Loot Confirm'],
 				},
-				MF = {
-					order = 7,
-					type = 'toggle',
-					name = PA.ACL['MovableFrames'],
-				},
 				SMB = {
-					order = 8,
+					order = 7,
 					type = 'toggle',
 					name = PA.ACL['Square Minimap Buttons / Bar'],
 				},
 				stAM = {
-					order = 9,
+					order = 8,
 					type = 'toggle',
 					name = PA.ACL['stAddOnManager'],
 				},
@@ -218,7 +213,6 @@ function PA:BuildProfile()
 			['ES'] = true,
 			['FG'] = false,
 			['LC'] = false,
-			['MF'] = true,
 			['SMB'] = true,
 			['stAM'] = true,
 		},
@@ -274,9 +268,6 @@ function PA:PLAYER_LOGIN()
 	end
 	if PA.db['LC'] then
 		tinsert(InitializeModules, 'LC')
-	end
-	if PA.db['MF'] then
-		tinsert(InitializeModules, 'MF')
 	end
 	if PA.db['SMB'] then
 		tinsert(InitializeModules, 'SMB')
