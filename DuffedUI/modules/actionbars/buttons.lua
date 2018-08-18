@@ -29,7 +29,7 @@ local function ShowOrHideBar(bar, button)
 			end
 		end
 
-		if (not C['actionbar']['rightbarDisable']) then
+		if not C['actionbar']['rightbarDisable'] then
 			if bar == DuffedUIBar5 then
 				if button == DuffedUIBar5Button then
 					UnregisterStateDriver(bar, 'visibility')
@@ -53,7 +53,7 @@ local function ShowOrHideBar(bar, button)
 			end
 		end
 
-		if (not C['actionbar']['rightbarDisable']) then
+		if not C['actionbar']['rightbarDisable'] then
 			if bar == DuffedUIBar5 then
 				db.bar5 = false
 				RegisterStateDriver(bar, 'visibility', '[vehicleui][petbattle] show; show')

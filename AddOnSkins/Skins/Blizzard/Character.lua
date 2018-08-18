@@ -1,7 +1,7 @@
 local AS = unpack(AddOnSkins)
 
 local function IsMaxLevel()
-	if UnitLevel('player') == MAX_PLAYER_LEVEL then return true end
+	if UnitLevel('player') >= 100 then return true end
 end
 
 function AS:Blizzard_CharacterFrame()
