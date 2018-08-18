@@ -298,7 +298,7 @@ local function unitColor(unit)
 end
 
 local function addAuraInfo(self, caster, spellID)
-	if (C['tooltip'].enablecaster and caster) then
+	if (C['tooltip']['enablecaster'] and caster) then
 		local color = unitColor(caster)
 		if color then color = hex(color) else color = '' end
 		GameTooltip:AddLine(' ')
@@ -331,7 +331,7 @@ DuffedUITooltips:SetScript('OnEvent', function(self, event, addon)
 
 		for _, Tooltip in pairs(DuffedUITooltips.Tooltips) do Tooltip:HookScript('OnShow', self.Skin) end
 
-		if C['tooltip'].hidebuttons == true then
+		if C['tooltip']['hidebuttons'] == true then
 			local CombatHideActionButtonsTooltip = function(self)
 				if not IsShiftKeyDown() then self:Hide() end
 			end

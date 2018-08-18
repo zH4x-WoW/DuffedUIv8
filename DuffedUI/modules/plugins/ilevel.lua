@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if not C['tooltip']['enable'] or C['tooltip']['ilvl'] then return end
+if not C['tooltip']['ilvl'] then return end
 
 local ILevel, TalentSpec, LastUpdate = 0, '', 30
 local InspectDelay = 0.2
@@ -7,6 +7,7 @@ local InspectFreq = 2
 local ilvlspectooltip = CreateFrame('Frame')
 local format = string.format
 local LibItemUpgrade = LibStub('LibItemUpgradeInfo-1.0')
+--local LibItemLevel = LibStub('LibItemLevel')
 
 ilvlspectooltip.Cache = {}
 ilvlspectooltip.LastInspectRequest = 0
