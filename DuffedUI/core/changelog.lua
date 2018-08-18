@@ -4,7 +4,7 @@ local ChangeLog = CreateFrame('frame')
 local ChangeLogData = {
 	"Changes:",
 		"• Several bug fixes",
-		"• Update for code structure",
+		"• Added datatext for BfA-Missions",
 		"• Update for AddOnSkins",
 		"• Update for ProjectAzilroka",
 		--"• ",
