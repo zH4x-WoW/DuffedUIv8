@@ -3,8 +3,9 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame('frame')
 local ChangeLogData = {
 	"Changes:",
-		"• Several bug fixes",
-		"• Added datatext for BfA-Missions",
+		"• Added skin for scrapping machine",
+		"• Added skin for AzeriteUI and additional Azerite elements",
+		"• Added skin for Island Expeedtions",
 		"• Update for AddOnSkins",
 		"• Update for ProjectAzilroka",
 		--"• ",
