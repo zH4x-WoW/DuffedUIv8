@@ -1,5 +1,5 @@
 local D, C, L = unpack(select(2, ...))
-if not C['tooltip']['enable'] or not C['tooltip']['ids'] then return end
+if not C['tooltip']['ids'] then return end
 
 -- Global variables
 local hooksecurefunc = hooksecurefunc
