@@ -16,6 +16,23 @@ function AS:Blizzard_CharacterFrame()
 	CharacterFramePortrait:Kill()
 	PaperDollSidebarTabs:SetPoint('BOTTOMRIGHT', CharacterFrameInsetRight, 'TOPRIGHT', -29, -1)
 
+	local function UpdateAzeriteItem(self)
+		if not self.styled then
+			self.AzeriteTexture:SetAlpha(0)
+			self.RankFrame.Texture:SetTexture("")
+	
+			self.styled = true
+		end
+		self:GetHighlightTexture():SetColorTexture(1, 1, 1, .25)
+		self:GetHighlightTexture():SetAllPoints()
+	end
+	
+	local function UpdateAzeriteEmpoweredItem(self)
+		self.AzeriteTexture:SetAtlas("AzeriteIconFrame")
+		self.AzeriteTexture:SetAllPoints()
+		self.AzeriteTexture:SetDrawLayer("BORDER", 1)
+	end
+
 	local CharacterSlots = {
 		CharacterHeadSlot,
 		CharacterNeckSlot,
@@ -49,6 +66,8 @@ function AS:Blizzard_CharacterFrame()
 		hooksecurefunc(Slot.IconBorder, 'Hide', function(self)
 			Slot:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end)
+		hooksecurefunc(Slot, "DisplayAsAzeriteItem", UpdateAzeriteItem)
+		hooksecurefunc(Slot, "DisplayAsAzeriteEmpoweredItem", UpdateAzeriteEmpoweredItem)
 		AS:StyleButton(Slot)
 	end
 
