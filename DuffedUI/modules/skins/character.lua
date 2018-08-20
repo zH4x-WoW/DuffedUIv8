@@ -15,6 +15,23 @@ local function LoadSkin()
 	TokenFrameContainerScrollBar:SkinScrollBar()
 	GearManagerDialogPopupScrollFrameScrollBar:SkinScrollBar()
 
+	local function UpdateAzeriteItem(self)
+		if not self.styled then
+			self.AzeriteTexture:SetAlpha(0)
+			self.RankFrame.Texture:SetTexture('')
+	
+			self.styled = true
+		end
+		self:GetHighlightTexture():SetColorTexture(1, 1, 1, .25)
+		self:GetHighlightTexture():SetAllPoints()
+	end
+	
+	local function UpdateAzeriteEmpoweredItem(self)
+		self.AzeriteTexture:SetAtlas('AzeriteIconFrame')
+		self.AzeriteTexture:SetAllPoints()
+		self.AzeriteTexture:SetDrawLayer('BORDER', 1)
+	end
+
 	local slots = {
 		'HeadSlot',
 		'NeckSlot',
@@ -47,6 +64,8 @@ local function LoadSkin()
 
 		hooksecurefunc(slot.IconBorder, 'SetVertexColor', function(self, r, g, b) self:GetParent():SetBackdropBorderColor(r, g, b) end)
 		hooksecurefunc(slot.IconBorder, 'Hide', function(self) self:GetParent():SetBackdropBorderColor(unpack(C['media']['bordercolor'])) end)
+		hooksecurefunc(slot, 'DisplayAsAzeriteItem', UpdateAzeriteItem)
+		hooksecurefunc(slot, 'DisplayAsAzeriteEmpoweredItem', UpdateAzeriteEmpoweredItem)
 	end
 
 	-- Strip Textures

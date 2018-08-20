@@ -5,6 +5,7 @@
 	<Script file='archeology.lua' />
 	<Script file='artifactui.lua' />
 	<Script file='auction.lua' />
+	<Script file='azeriteui.lua' />
 	<Script file='bags.lua' />
 	<Script file='barbershop.lua' />
 	<Script file='bgscore.lua' />
@@ -21,6 +22,7 @@
 	<Script file='friends.lua' />
 	<Script file='help.lua' />
 	<Script file='inspect.lua' />
+	<Script file='islandexpeditions.lua' />
 	<Script file='itemtext.lua' />
 	<Script file='itemupgrade.lua' />
 	<Script file='garrison.lua' />
@@ -50,6 +52,7 @@
 	<Script file='questlog.lua' />
 	<Script file='raid.lua' />
 	<Script file='recap.lua' />
+	<Script file='scrapui.lua' />
 	<Script file='socket.lua' />
 	<Script file='spellbook.lua' />
 	<Script file='survey.lua' />
