@@ -213,7 +213,7 @@ hooksecurefunc('FCF_OpenTemporaryWindow', SetupTempChat)
 -- /script BNToastFrame:Show()
 local bnet = CreateFrame('Frame', 'DuffedUIBnetMover', UIParent)
 bnet:Size(BNToastFrame:GetWidth(), BNToastFrame:GetHeight())
-bnet:Point('TOPLEFT', UIParent, 'TOPLEFT', 5, -5)
+bnet:Point('TOPLEFT', UIParent, 'TOPLEFT', 5, -10)
 move:RegisterFrame(bnet)
 
 QuickJoinToastButton.ClearAllPoints = BNToastFrame.ClearAllPoints
