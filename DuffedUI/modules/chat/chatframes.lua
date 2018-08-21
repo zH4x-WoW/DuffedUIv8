@@ -178,7 +178,7 @@ local function SetupChat(self)
 		if frame.ScrollBar then
 			frame.ScrollBar:Kill()
 			frame.ScrollToBottomButton:Kill()
-			_G[name.."ThumbTexture"]:Kill()
+			_G[name..'ThumbTexture']:Kill()
 		end
 	end
 
@@ -210,20 +210,22 @@ local function SetupTempChat()
 end
 hooksecurefunc('FCF_OpenTemporaryWindow', SetupTempChat)
 
+-- /script BNToastFrame:Show()
 local bnet = CreateFrame('Frame', 'DuffedUIBnetMover', UIParent)
 bnet:Size(BNToastFrame:GetWidth(), BNToastFrame:GetHeight())
 bnet:Point('TOPLEFT', UIParent, 'TOPLEFT', 5, -5)
 move:RegisterFrame(bnet)
 
-for i = 1, BNToastFrame:GetNumRegions() do
-	if i ~= 10 then
-		local region = select(i, BNToastFrame:GetRegions())
-		if region:GetObjectType() == 'Texture' then region:SetTexture(nil) end
-	end
-end	
+QuickJoinToastButton.ClearAllPoints = BNToastFrame.ClearAllPoints
+QuickJoinToastButton.SetPoint = BNToastFrame.SetPoint
+QuickJoinToastButton:ClearAllPoints()
+QuickJoinToastButton:SetPoint('TOPLEFT', bnet, 'BOTTOMLEFT', 0, 0)
+QuickJoinToastButton.ClearAllPoints = function() end
+QuickJoinToastButton.SetPoint = function() end
+QuickJoinToastButton:SetAlpha(0)
+
 BNToastFrame:SetTemplate('Transparent')
 BNToastFrame.CloseButton:SkinCloseButton()
-move:RegisterFrame(BNToastFrame)
 
 ChatConfigFrameDefaultButton:Kill()
 
