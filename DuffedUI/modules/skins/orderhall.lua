@@ -40,7 +40,6 @@ local function LoadOrderHallSkin()
 	OrderHallMissionFrame.MissionTab.ZoneSupportMissionPage.CloseButton:SkinCloseButton()
 	OrderHallMissionFrame.MissionTab.ZoneSupportMissionPage.StartMissionButton:SkinButton()
 	OrderHallMissionFrame.ClassHallIcon:Hide()
-	
 
 	for i = 1, 2 do
 		_G['OrderHallMissionFrameMissionsTab' .. i]:StripTextures()
@@ -112,5 +111,72 @@ local function LoadOrderHallSkin()
 	AdventureMapQuestChoiceDialog.DeclineButton:SkinButton()
 end
 
+local function LoadBFAMissionSkin()
+	-- MissionFrame
+	BFAMissionFrame:StripTextures()
+	BFAMissionFrame:CreateBackdrop('Transparent')
+	BFAMissionFrame.backdrop:SetOutside(BFAMissionFrame.BorderFrame)
+	BFAMissionFrame.CloseButton:SkinCloseButton()
+	for i = 1, 2 do _G['BFAMissionFrameTab' .. i]:SkinTab() end
+	BFAMissionFrame.GarrCorners:StripTextures()
+	BFAMissionFrame.MissionTab:StripTextures()
+
+	for i = 1, 2 do
+		_G['BFAMissionFrameMissionsTab' .. i]:StripTextures()
+		_G['BFAMissionFrameMissionsTab' .. i]:SkinButton()
+		_G['BFAMissionFrameMissionsTab' .. i]:Height(_G['GarrisonMissionFrameMissionsTab' .. i]:GetHeight() - 10)
+	end
+
+	for i, v in ipairs(BFAMissionFrame.MissionTab.MissionList.listScroll.buttons) do
+		local Button = _G['BFAMissionFrameMissionsListScrollFrameButton' .. i]
+		if Button and not Button.skinned then
+			Button:StripTextures()
+			Button:SetTemplate()
+			Button:SkinButton()
+			Button:SetBackdropBorderColor(0, 0, 0, 0)
+			Button:HideInsets()
+			Button.LocBG:Hide()
+			for i = 1, #Button.Rewards do
+				local Texture = Button.Rewards[i].Icon:GetTexture()
+
+				Button.Rewards[i]:StripTextures()
+				Button.Rewards[i]:StyleButton()
+				Button.Rewards[i]:CreateBackdrop()
+				Button.Rewards[i].Icon:SetTexture(Texture)
+				Button.Rewards[i].backdrop:ClearAllPoints()
+				Button.Rewards[i].backdrop:SetOutside(Button.Rewards[i].Icon)
+				Button.Rewards[i].Icon:SetTexCoord(unpack(D['IconCoord']))
+			end
+			Button.isSkinned = true
+		end
+	end
+	
+	-- MissionTab
+	local Follower = BFAMissionFrameFollowers
+	Follower:StripTextures()
+	Follower.SearchBox:SkinEditBox()
+	Follower.MaterialFrame:StripTextures()
+	BFAMissionFrameFollowersListScrollFrameScrollBar:SkinScrollBar()
+	BFAMissionFrame.MissionTab.MissionPage:StripTextures()
+	BFAMissionFrame.MissionTab.MissionPage.CloseButton:SkinCloseButton()
+	BFAMissionFrame.MissionTab.MissionPage.StartMissionButton:SkinButton()
+	
+	-- FollowerTab
+	local FollowerList = BFAMissionFrame.FollowerTab
+	FollowerList:StripTextures()
+	FollowerList.Class:SetSize(50, 43)
+	FollowerList.XPBar:StripTextures()
+	FollowerList.XPBar:SetStatusBarTexture(C['media']['normTex'])
+	FollowerList.XPBar:CreateBackdrop()
+	
+	-- MissionStage
+	local Mission = BFAMissionFrameMissions
+	Mission.CompleteDialog:StripTextures()
+	Mission.CompleteDialog:SetTemplate('Transparent')
+	Mission.CompleteDialog.BorderFrame.ViewButton:SkinButton()
+	BFAMissionFrame.MissionComplete.NextMissionButton:SkinButton()
+end
+
 D['SkinFuncs']['Blizzard_OrderHallUI'] = LoadCommandBarSkin
 D['SkinFuncs']['Blizzard_GarrisonUI'] = LoadOrderHallSkin
+D['SkinFuncs']['Blizzard_GarrisonUI'] = LoadBFAMissionSkin

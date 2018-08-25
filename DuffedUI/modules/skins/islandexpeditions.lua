@@ -19,6 +19,7 @@ local function LoadIslandQueueUISkin()
 
     StatusBar:SetStatusBarTexture(C['media']['normTex'])
     StatusBar:CreateBackdrop('Default')
+    StatusBar:SetStatusBarColor(unpack(D['UnitColor']['class'][D.Class]))
     WeeklyQuest.QuestReward.Icon:SetTexCoord(unpack(D['IconCoord']))
 
     local TutorialFrame = IslandsFrame.TutorialFrame
