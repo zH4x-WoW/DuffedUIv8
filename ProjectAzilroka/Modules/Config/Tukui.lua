@@ -50,7 +50,7 @@ function PA:TukuiOptions()
 				type = 'group',
 				name = (type(TukuiConfig[Locale][Group]) == 'string' and TukuiConfig[Locale][Group]) or tostring(Group),
 				args = {},
-				get = function(info) return tostring(SavedVars[Group] and SavedVars[Group][info[#info]] or Tukui[2][Group][info[#info]]) end,
+				get = function(info) return SavedVars[Group] and SavedVars[Group][info[#info]] or Tukui[2][Group][info[#info]] end,
 				set = function(info, value) TukuiConfig:SetOption(Group, info[#info], value) end,
 			}
 
@@ -68,6 +68,7 @@ function PA:TukuiOptions()
 					OptionsTable.args.main.args[Group].args[Option].type = 'toggle'
 				elseif (type(Value) == "number") then -- EditBox
 					OptionsTable.args.main.args[Group].args[Option].type = 'input'
+					OptionsTable.args.main.args[Group].args[Option].get = function(info) return tostring(SavedVars[Group] and SavedVars[Group][info[#info]] or Tukui[2][Group][info[#info]]) end
 					OptionsTable.args.main.args[Group].args[Option].width = 'normal'
 				elseif (type(Value) == "table") then -- Color Picker / Custom DropDown
 					if Value.Options then
@@ -84,11 +85,8 @@ function PA:TukuiOptions()
 					OptionsTable.args.main.args[Group].args[Option].type = 'select'
 					if strfind(strlower(Option), "font") then
 						OptionsTable.args.main.args[Group].args[Option].values = FontTable
-						--OptionsTable.args.main.args[Group].args[Option].dialogControl = 'LSM30_Font'
-						OptionsTable.args.main.args[Group].args[Option].get = function(info)
-							local Font = SavedVars[Group] and SavedVars[Group][info[#info]] or Tukui[2][Group][info[#info]]
-							return Tukui[1].FontTable[Font]
-						end
+						OptionsTable.args.main.args[Group].args[Option].get = function(info) return Tukui[1].FontTable[SavedVars[Group] and SavedVars[Group][info[#info]] or Tukui[2][Group][info[#info]]] end
+						OptionsTable.args.main.args[Group].args[Option].set = function(info, value) TukuiConfig:SetOption(Group, info[#info], FontTable[value])	end
 					elseif strfind(strlower(Option), "texture") then
 						OptionsTable.args.main.args[Group].args[Option].values = Tukui[1].TextureTable
 						OptionsTable.args.main.args[Group].args[Option].dialogControl = 'LSM30_Statusbar'

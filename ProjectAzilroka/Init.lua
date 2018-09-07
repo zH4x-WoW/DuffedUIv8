@@ -179,12 +179,12 @@ PA.Options = {
 					type = 'toggle',
 					name = 'Friend Groups',
 				},
-				LC = {
+				FL = {
 					order = 6,
 					type = 'toggle',
-					name = PA.ACL['Loot Confirm'],
+					name = PA.ACL['Faster Loot'],
 				},
-				SMB = {
+				MF = {
 					order = 7,
 					type = 'toggle',
 					name = PA.ACL['Square Minimap Buttons / Bar'],
@@ -193,6 +193,11 @@ PA.Options = {
 					order = 8,
 					type = 'toggle',
 					name = PA.ACL['stAddOnManager'],
+				},
+				QS = {
+					order = 9,
+					type = 'toggle',
+					name = 'Quest Sounds',
 				},
 			},
 		},
@@ -212,9 +217,11 @@ function PA:BuildProfile()
 			['EFL'] = true,
 			['ES'] = true,
 			['FG'] = false,
-			['LC'] = false,
+			['FL'] = false,
+			['MF'] = true,
 			['SMB'] = true,
 			['stAM'] = true,
+			['QS'] = false,
 		},
 	}
 
@@ -242,6 +249,7 @@ end
 
 function PA:PLAYER_LOGIN()
 	PA.Multiple = 768 / PA.ScreenHeight / UIParent:GetScale()
+	PA.AS = AddOnSkins and unpack(AddOnSkins)
 
 	local InitializeModules = {}
 
@@ -266,8 +274,11 @@ function PA:PLAYER_LOGIN()
 	if PA.db['EFL'] then
 		tinsert(InitializeModules, 'EFL')
 	end
-	if PA.db['LC'] then
-		tinsert(InitializeModules, 'LC')
+	if PA.db['FL'] then
+		tinsert(InitializeModules, 'FL')
+	end
+	if PA.db['MF'] then
+		tinsert(InitializeModules, 'MF')
 	end
 	if PA.db['SMB'] then
 		tinsert(InitializeModules, 'SMB')
@@ -275,12 +286,17 @@ function PA:PLAYER_LOGIN()
 	if PA.db['stAM'] then
 		tinsert(InitializeModules, 'stAM')
 	end
-
-	for _, Module in pairs(InitializeModules) do
-		pcall(PA[Module].Initialize)
+	if PA.db['QS'] then
+		tinsert(InitializeModules, 'QS')
 	end
 
-	if PA.Tukui and GetAddOnEnableState(PA.MyName, 'Tukui_Config') > 0 then
+	for _, Module in pairs(InitializeModules) do
+		if PA[Module] then
+			pcall(PA[Module].Initialize)
+		end
+	end
+
+	if PA.Tukui and PA:IsAddOnEnabled('Tukui_Config', PA.MyName) then
 		PA:TukuiOptions()
 	end
 end
