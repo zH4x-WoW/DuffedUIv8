@@ -1,7 +1,7 @@
 local PA = _G.ProjectAzilroka
 if (PA.SLE or PA.CUI) then return end
 
-local ES = PA:NewModule('EnhancedShadows', 'AceEvent-3.0')
+local ES = PA:NewModule('EnhancedShadows', 'AceEvent-3.0', 'AceTimer-3.0')
 PA.ES, _G.EnhancedShadows = ES, ES
 
 ES.Title = '|cFF16C3F2Enhanced|r |cFFFFFFFFShadows|r'
@@ -22,15 +22,15 @@ function ES:UpdateShadows()
 end
 
 function ES:RegisterFrameShadows(frame)
-	local shadow = frame.shadow or frame.Shadow;
+	local shadow = frame.shadow or frame.Shadow
 	if shadow and not shadow.isRegistered then
 		ES.shadows[shadow] = true
 		shadow.isRegistered = true
 	end
-	local ishadow = frame.invertedshadow or frame.InvertedShadow;
+	local ishadow = frame.invertedshadow or frame.InvertedShadow
 	if ishadow and not ishadow.isRegistered then
-		ES.shadows[ishadow] = true;
-		shadow.isRegistered = true;
+		ES.shadows[ishadow] = true
+		shadow.isRegistered = true
 	end
 end
 
@@ -49,7 +49,7 @@ function ES:UpdateShadow(shadow)
 	local r, g, b, a = unpack(ES.db.Color)
 
 	if ES.db.ColorByClass then
-		r, g, b = PA.ClassColor['r'], PA.ClassColor['g'], PA.ClassColor['b']
+		r, g, b = unpack(PA.ClassColor)
 	end
 
 	local backdrop = shadow:GetBackdrop()
@@ -128,5 +128,5 @@ function ES:Initialize()
 	ES:BuildProfile()
 	ES:GetOptions()
 
-	ES:UpdateShadows()
+	ES:ScheduleTimer('UpdateShadows', 1)
 end

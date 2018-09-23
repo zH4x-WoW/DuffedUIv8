@@ -111,7 +111,7 @@ function SMB:HandleBlizzardButtons()
 		Frame:EnableMouse(true)
 		Frame:HookScript('OnEnter', function(self)
 			if HasNewMail() then
-				GameTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT");
+				GameTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT")
 				if GameTooltip:IsOwned(self) then
 					MinimapMailFrameUpdate()
 				end
@@ -231,8 +231,7 @@ function SMB:HandleBlizzardButtons()
 end
 
 function SMB:SkinMinimapButton(Button)
-	if (not Button) then return end
-	if Button.isSkinned then return end
+	if (not Button) or Button.isSkinned then return end
 
 	local Name = Button:GetName()
 	if not Name then return end
@@ -251,10 +250,11 @@ function SMB:SkinMinimapButton(Button)
 
 	for i = 1, Button:GetNumRegions() do
 		local Region = select(i, Button:GetRegions())
-		if Region:GetObjectType() == 'Texture' then
-			local Texture = Region:GetTexture()
+		if Region.IsObjectType and Region:IsObjectType('Texture') then
+			local Texture = strlower(Region:GetTexture())
 
-			if Texture and (strfind(Texture, 'Border') or strfind(Texture, 'Background') or strfind(Texture, 'AlphaMask') or strfind(Texture, 'Highlight')) then
+			if (strfind(Texture, "interface\\characterframe") or strfind(Texture, "interface\\minimap") or strfind(Texture, 'border') or strfind(Texture, 'background') or strfind(Texture, 'alphamask') or strfind(Texture, 'highlight')) then
+				Region:SetTexture(nil)
 				Region:SetAlpha(0)
 			else
 				if Name == 'BagSync_MinimapButton' then
@@ -262,7 +262,7 @@ function SMB:SkinMinimapButton(Button)
 				elseif Name == 'DBMMinimapButton' then
 					Region:SetTexture('Interface\\Icons\\INV_Helmet_87')
 				elseif Name == 'OutfitterMinimapButton' then
-					if Region:GetTexture() == 'Interface\\Addons\\Outfitter\\Textures\\MinimapButton' then
+					if Texture == 'interface\\addons\\outfitter\\textures\\minimapbutton' then
 						Region:SetTexture(nil)
 					end
 				elseif Name == 'SmartBuff_MiniMapButton' then
@@ -304,15 +304,19 @@ function SMB:GrabMinimapButtons()
 	if (InCombatLockdown() or C_PetBattles.IsInBattle()) then return end
 
 	for _, Frame in pairs({ Minimap, MinimapBackdrop }) do
-		for i = 1, Frame:GetNumChildren() do
+		local NumChildren = Frame:GetNumChildren()
+		if NumChildren < (Frame.SMBNumChildren or 0) then return end
+		for i = 1, NumChildren do
 			local object = select(i, Frame:GetChildren())
 			if object then
 				local name = object:GetName()
-				if name and (object:IsObjectType('Button') or object:IsObjectType('Frame') and tContains(AcceptedFrames, name)) then
+				local width = object:GetWidth()
+				if name and width > 15 and width < 40 and (object:IsObjectType('Button') or object:IsObjectType('Frame') and tContains(AcceptedFrames, name)) then
 					self:SkinMinimapButton(object)
 				end
 			end
 		end
+		Frame.SMBNumChildren = NumChildren
 	end
 
 	self:Update()
@@ -354,6 +358,7 @@ function SMB:Update()
 			Button:SetFrameLevel(self.Bar:GetFrameLevel() + 1)
 			Button:SetScript('OnDragStart', nil)
 			Button:SetScript('OnDragStop', nil)
+			--Button:SetScript('OnEvent', nil)
 
 			SMB:LockButton(Button)
 
@@ -371,7 +376,11 @@ function SMB:Update()
 		self.Bar:SetBackdrop(nil)
 	end
 
-	self.Bar:Show()
+	if ActualButtons == 0 then
+		self.Bar:Hide()
+	else
+		self.Bar:Show()
+	end
 
 	if self.db['BarMouseOver'] then
 		UIFrameFadeOut(self.Bar, 0.2, self.Bar:GetAlpha(), 0)
@@ -552,8 +561,6 @@ function SMB:Initialize()
 
 	if PA.Tukui then
 		Tukui[1]['Movers']:RegisterFrame(SMB.Bar)
-	elseif PA.DuffedUI then
-		DuffedUI[1]['move']:RegisterFrame(SMB.Bar)
 	elseif PA.ElvUI then
 		ElvUI[1]:CreateMover(SMB.Bar, 'SquareMinimapButtonBarMover', 'SquareMinimapButtonBar Anchor', nil, nil, nil, 'ALL,GENERAL')
 	end
