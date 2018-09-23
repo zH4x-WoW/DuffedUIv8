@@ -100,11 +100,12 @@ function AS:BuildProfile()
 			['EmbedSystemMessage'] = true,
 			['ElvUISkinModule'] = false,
 			['ThinBorder'] = true,
+			['ClassColor'] = false,
 		},
 	}
 
 	if AS:CheckAddOn('ElvUI_MerathilisUI') then
-		Defaults.profile['MerathilisUIStyling'] = false;
+		Defaults.profile['MerathilisUIStyling'] = false
 	end
 
 	for skin in pairs(AS.register) do
@@ -181,7 +182,7 @@ function AS:BuildOptions()
 					BossModHeader = {
 						order = 0,
 						type = 'header',
-						name = AS:Color(ASL['BossMod Options']),
+						name = AS:GetColor(ASL['BossMod Options']),
 					},
 					DBMFont = {
 						type = 'select', dialogControl = 'LSM30_Font',
@@ -229,7 +230,7 @@ function AS:BuildOptions()
 					EmbedHeader = {
 						order = 0,
 						type = 'header',
-						name = AS:Color(ASL['Embed Settings']),
+						name = AS:GetColor(ASL['Embed Settings']),
 					},
 					desc = {
 						type = 'description',
@@ -393,7 +394,7 @@ function AS:BuildOptions()
 					MiscHeader = {
 						order = 0,
 						type = 'header',
-						name = AS:Color(MISCELLANEOUS),
+						name = AS:GetColor(MISCELLANEOUS),
 					},
 					SkinTemplate = {
 						name = ASL['Skin Template'],
@@ -404,26 +405,31 @@ function AS:BuildOptions()
 							['Default'] = 'Default',
 						}
 					},
+					ClassColor = {
+						type = 'toggle',
+						name = ASL['Class Color'],
+						order = 2,
+					},
 					WeakAuraAuraBar = {
 						type = 'toggle',
 						name = ASL['WeakAura AuraBar'],
-						order = 2,
+						order = 3,
 						disabled = function() return not AS:CheckOption('WeakAuras', 'WeakAuras') end,
 					},
 					Parchment = {
 						type = 'toggle',
 						name = ASL['Parchment'],
-						order = 3,
+						order = 4,
 					},
 					SkinDebug = {
 						type = 'toggle',
 						name = ASL['Enable Skin Debugging'],
-						order = 4,
+						order = 5,
 					},
 					LoginMsg = {
 						type = 'toggle',
 						name = ASL['Login Message'],
-						order = 5,
+						order = 6,
 					},
 				},
 			},
@@ -435,7 +441,7 @@ function AS:BuildOptions()
 					FAQHeader = {
 						order = 0,
 						type = 'header',
-						name = AS:Color(ASL["FAQ's"]),
+						name = AS:GetColor(ASL["FAQ's"]),
 					},
 					question1 = {
 						type = 'description',
@@ -558,7 +564,7 @@ function AS:BuildOptions()
 		else
 			AS.Options.args.addons.args.description = {
 				type = 'header',
-				name = AS:Color(ASL['AddOn Skins']),
+				name = AS:GetColor(ASL['AddOn Skins']),
 				order = 0,
 			}
 			AS.Options.args.addons.args[skinName] = GenerateOptionTable(skinName, order)
@@ -569,7 +575,7 @@ function AS:BuildOptions()
 	if AS:CheckAddOn('ElvUI') then
 		AS.Options.args.blizzard.args.description = {
 			type = 'header',
-			name = AS:Color(ASL['Blizzard Skins']),
+			name = AS:GetColor(ASL['Blizzard Skins']),
 			order = 0,
 		}
 

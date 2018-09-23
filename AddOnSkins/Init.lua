@@ -44,12 +44,13 @@ AddOn.MyRealm = GetRealmName()
 AddOn.Noop = function() end
 AddOn.TexCoords = {.08, .92, .08, .92}
 AddOn.UIScale = UIParent:GetScale()
+AddOn.Faction = UnitFactionGroup("player")
 
 AddOn.ScreenWidth, AddOn.ScreenHeight = GetPhysicalScreenSize()
 
 local Color = RAID_CLASS_COLORS[AddOn.MyClass]
 AddOn.ClassColor = { Color.r, Color.g, Color.b }
-
+AddOn.Color = { 0, 0.44, .87, 1 }
 AddOn.Mult = 1
 AddOn.skins = {}
 AddOn.events = {}

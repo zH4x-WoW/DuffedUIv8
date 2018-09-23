@@ -22,12 +22,12 @@
 	<Script file="Inspect.lua"/>
 	<Script file="ItemSocketing.lua"/>
 	<Script file="LFG.lua"/>
-	<Script file="Loot.lua"/>
 	<Script file="Macro.lua"/>
 	<Script file="Mail.lua"/>
 	<Script file="Merchant.lua"/>
 	<Script file="Options.lua"/>
 	<Script file="Others.lua"/>
+	<Script file="PetStable.lua"/>
 	<Script file="Quest.lua"/>
 	<Script file="Raid.lua"/>
 	<Script file="StackSplit.lua"/>
@@ -36,8 +36,8 @@
 	<Script file="TalkingHead.lua"/>
 	<Script file="Taxi.lua"/>
 	<Script file="TimeManager.lua"/>
+	<Script file="Trade.lua"/>
 	<Script file="TradeSkill.lua"/>
-	<Script file="TradeWindow.lua"/>
 	<Script file="Trainer.lua"/>
 	<Script file="VoidStorage.lua"/>
 	<Script file="WorldMap.lua"/>

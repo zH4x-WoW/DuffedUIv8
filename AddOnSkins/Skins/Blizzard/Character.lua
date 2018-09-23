@@ -1,37 +1,12 @@
 local AS = unpack(AddOnSkins)
 
-local function IsMaxLevel()
-	if UnitLevel('player') >= 100 then return true end
-end
-
 function AS:Blizzard_CharacterFrame()
-	if IsMaxLevel then
-		ToggleCharacter('TokenFrame')
-		ToggleCharacter('TokenFrame')
-	end
 	AS:SkinCloseButton(CharacterFrameCloseButton)
 	AS:SkinFrame(CharacterFrame)
 	AS:SkinFrame(CharacterModelFrame)
 	CharacterModelFrame:SetBackdropColor(0,0,0,0)
 	CharacterFramePortrait:Kill()
 	PaperDollSidebarTabs:SetPoint('BOTTOMRIGHT', CharacterFrameInsetRight, 'TOPRIGHT', -29, -1)
-
-	local function UpdateAzeriteItem(self)
-		if not self.styled then
-			self.AzeriteTexture:SetAlpha(0)
-			self.RankFrame.Texture:SetTexture("")
-	
-			self.styled = true
-		end
-		self:GetHighlightTexture():SetColorTexture(1, 1, 1, .25)
-		self:GetHighlightTexture():SetAllPoints()
-	end
-	
-	local function UpdateAzeriteEmpoweredItem(self)
-		self.AzeriteTexture:SetAtlas("AzeriteIconFrame")
-		self.AzeriteTexture:SetAllPoints()
-		self.AzeriteTexture:SetDrawLayer("BORDER", 1)
-	end
 
 	local CharacterSlots = {
 		CharacterHeadSlot,
@@ -66,8 +41,6 @@ function AS:Blizzard_CharacterFrame()
 		hooksecurefunc(Slot.IconBorder, 'Hide', function(self)
 			Slot:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end)
-		hooksecurefunc(Slot, "DisplayAsAzeriteItem", UpdateAzeriteItem)
-		hooksecurefunc(Slot, "DisplayAsAzeriteEmpoweredItem", UpdateAzeriteEmpoweredItem)
 		AS:StyleButton(Slot)
 	end
 

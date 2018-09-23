@@ -2,6 +2,7 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Calendar(event, addon)
 	if addon ~= 'Blizzard_Calendar' then return end
+
 	AS:SkinFrame(CalendarFrame)
 	AS:SkinCloseButton(CalendarCloseButton)
 	CalendarCloseButton:SetPoint("TOPRIGHT", CalendarFrame, "TOPRIGHT", -4, -4)
@@ -49,12 +50,12 @@ function AS:Blizzard_Calendar(event, addon)
 		AS:SkinFrame(CalendarTodayFrame)
 		AS:CreateBackdrop(CalendarTodayFrame)
 		CalendarTodayFrame:SetSize(CalendarDayButton1:GetWidth(), CalendarDayButton1:GetHeight())
-		CalendarTodayFrame:SetBackdropBorderColor(0, 0.44, .87, 1)
+		CalendarTodayFrame:SetBackdropBorderColor(unpack(AS.Color))
 		CalendarTodayFrame:SetBackdropColor(0, 0, 0, 0)
 		CalendarTodayFrame:HookScript('OnUpdate', function(self) self:SetAlpha(CalendarTodayTextureGlow:GetAlpha()) end)
-		CalendarTodayFrame.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
+		CalendarTodayFrame.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 		CalendarTodayFrame.Backdrop:SetBackdropColor(0, 0, 0, 0)
-		AS:CreateShadow(CalendarTodayFrame.Backdrop)
+		CalendarTodayFrame.Backdrop:CreateShadow()
 	end
 
 	AS:SkinFrame(CalendarCreateEventFrame)
@@ -164,6 +165,8 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:StripTextures(CalendarEventPickerCloseButton)
 	AS:SkinCloseButton(CalendarEventPickerCloseButton)
 	AS:SkinScrollBar(CalendarCreateEventDescriptionScrollFrameScrollBar)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 AS:RegisterSkin('Blizzard_Calendar', AS.Blizzard_Calendar, 'ADDON_LOADED')

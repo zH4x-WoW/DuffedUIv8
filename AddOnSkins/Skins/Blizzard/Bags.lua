@@ -1,9 +1,7 @@
 local AS = unpack(AddOnSkins)
 
-local name = 'Blizzard_Bags'
 function AS:Blizzard_Bags()
 	if Tukui and Tukui[2]["Bags"]["Enable"] then return end
-	if DuffedUI and DuffedUI[2]["bags"]["enable"] then return end
 
 	for i = 1, 12 do -- There is 13 Total..
 		local Bag = _G["ContainerFrame"..i]
@@ -11,7 +9,7 @@ function AS:Blizzard_Bags()
 		for j = 1, 36 do
 			local ItemButton = _G["ContainerFrame"..i.."Item"..j]
 --			AS:SkinTexture(_G["ContainerFrame"..i.."Item"..j..'IconQuestTexture'])
-			AS:SetTemplate(ItemButton, AS:CheckOption('SkinTemplate'))
+			AS:SetTemplate(ItemButton)
 			AS:SkinTexture(ItemButton.icon)
 			ItemButton:SetNormalTexture('')
 			ItemButton:SetPushedTexture('')
@@ -249,4 +247,4 @@ function AS:Blizzard_Bags()
 	AS:SkinTab(BankFrameTab2)
 end
 
-AS:RegisterSkin(name, AS.Blizzard_Bags)
+AS:RegisterSkin('Blizzard_Bags', AS.Blizzard_Bags)
