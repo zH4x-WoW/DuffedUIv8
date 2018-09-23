@@ -27,9 +27,9 @@ function AS:Blizzard_DebugTools(event, addon)
 
 	FrameStackTooltip:SetParent(UIParent)
 
-	AS:SkinTooltip(FrameStackTooltip)
+	--[[AS:SkinTooltip(FrameStackTooltip)
 	FrameStackTooltip:SetFrameStrata('TOOLTIP')
-	FrameStackTooltip:SetFrameLevel(255)
+	FrameStackTooltip:SetFrameLevel(255)]]--
 
 	AS:UnregisterSkinEvent(addon, event)
 end

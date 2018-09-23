@@ -563,6 +563,8 @@ function SMB:Initialize()
 		Tukui[1]['Movers']:RegisterFrame(SMB.Bar)
 	elseif PA.ElvUI then
 		ElvUI[1]:CreateMover(SMB.Bar, 'SquareMinimapButtonBarMover', 'SquareMinimapButtonBar Anchor', nil, nil, nil, 'ALL,GENERAL')
+	elseif PA.DuffedUI then
+		DuffedUI[1]['move']:RegisterFrame(SMB.Bar)
 	end
 
 	SMB.TexCoords = { .08, .92, .08, .92 }
