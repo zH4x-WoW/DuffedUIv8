@@ -4,7 +4,6 @@ function AS:Blizzard_Merchant()
 	AS:SkinFrame(MerchantFrame, nil, nil, true)
 	AS:SkinCloseButton(MerchantFrame.CloseButton)
 
-	AS:StripTextures(MerchantFrameInset)
 	AS:StripTextures(MerchantMoneyBg)
 	AS:StripTextures(MerchantMoneyInset)
 	AS:SkinDropDownBox(MerchantFrameLootFilter)
@@ -61,8 +60,8 @@ function AS:Blizzard_Merchant()
 	MerchantRepairAllIcon:SetInside()
 
 	MerchantFrame:SetWidth(345)
-	AS:SkinNextPrevButton(MerchantNextPageButton)
-	AS:SkinNextPrevButton(MerchantPrevPageButton)
+	AS:SkinArrowButton(MerchantNextPageButton)
+	AS:SkinArrowButton(MerchantPrevPageButton)
 
 	hooksecurefunc('MerchantFrame_UpdateMerchantInfo', function()
 		for i = 1, MERCHANT_ITEMS_PER_PAGE do
@@ -87,4 +86,12 @@ function AS:Blizzard_Merchant()
 	end)
 end
 
+function AS:Blizzard_StackSplit()
+	AS:SkinFrame(StackSplitFrame)
+	AS:CreateShadow(StackSplitFrame)
+	AS:SkinButton(StackSplitOkayButton)
+	AS:SkinButton(StackSplitCancelButton)
+end
+
 AS:RegisterSkin('Blizzard_Merchant', AS.Blizzard_Merchant)
+AS:RegisterSkin('Blizzard_StackSplit', AS.Blizzard_StackSplit)

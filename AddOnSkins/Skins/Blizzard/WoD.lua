@@ -31,11 +31,40 @@ function AS:Blizzard_GarrisonUI(event, addon)
 
 	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.IconBG:SetTexture(nil)
 
-	AS:SkinNextPrevButton(GarrisonCapacitiveDisplayFrame.DecrementButton)
-	AS:SkinNextPrevButton(GarrisonCapacitiveDisplayFrame.IncrementButton)
+	AS:SkinArrowButton(GarrisonCapacitiveDisplayFrame.DecrementButton)
+	AS:SkinArrowButton(GarrisonCapacitiveDisplayFrame.IncrementButton)
 	AS:SkinEditBox(GarrisonCapacitiveDisplayFrame.Count)
 
 	AS:UnregisterSkinEvent(addon, event)
 end
 
+function AS:Blizzard_ItemUpgradeUI(event, addon)
+	if addon ~= 'Blizzard_ItemUpgradeUI' then return end
+
+	AS:SkinFrame(ItemUpgradeFrame)
+	--ItemUpgradeFrameShadows:Kill()
+	--ItemUpgradeFrameInset:Kill()
+
+	AS:SkinCloseButton(ItemUpgradeFrameCloseButton)
+
+	AS:SkinIconButton(ItemUpgradeFrame.ItemButton, true)
+
+	hooksecurefunc('ItemUpgradeFrame_Update', function()
+		if GetItemUpgradeItemInfo() then
+			ItemUpgradeFrame.ItemButton.IconTexture:SetAlpha(1)
+			AS:SkinTexture(ItemUpgradeFrame.ItemButton.IconTexture)
+		else
+			ItemUpgradeFrame.ItemButton.IconTexture:SetAlpha(0)
+		end
+	end)
+
+	ItemUpgradeFrameMoneyFrame:StripTextures()
+	AS:SkinButton(ItemUpgradeFrameUpgradeButton, true)
+	ItemUpgradeFrame.FinishedGlow:Kill()
+	ItemUpgradeFrame.ButtonFrame:DisableDrawLayer('BORDER')
+
+	AS:UnregisterSkinEvent(addon, event)
+end
+
 AS:RegisterSkin('Blizzard_GarrisonUI', AS.Blizzard_GarrisonUI, 'ADDON_LOADED')
+AS:RegisterSkin("Blizzard_ItemUpgradeUI", AS.Blizzard_ItemUpgradeUI, 'ADDON_LOADED')

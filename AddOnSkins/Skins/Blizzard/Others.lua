@@ -6,7 +6,7 @@ function AS:Blizzard_Others()
 		if navButton and not navButton.isSkinned then
 			AS:SkinButton(navButton, true)
 			if navButton.MenuArrowButton then
-				AS:SkinNextPrevButton(navButton.MenuArrowButton, true)
+				AS:SkinArrowButton(navButton.MenuArrowButton)
 				navButton.MenuArrowButton:SetBackdrop(nil)
 				navButton.MenuArrowButton:SetSize(22, 22)
 			end
@@ -72,21 +72,99 @@ function AS:Blizzard_Others()
 	AS:CreateShadow(RolePollPopup)
 	AS:SkinCloseButton(RolePollPopupCloseButton)
 
-	-- _G["ReadyCheckFrameYesButton"]:SetParent(_G["ReadyCheckFrame"])
-	-- _G["ReadyCheckFrameNoButton"]:SetParent(_G["ReadyCheckFrame"])
-	-- _G["ReadyCheckFrameYesButton"]:ClearAllPoints()
-	-- _G["ReadyCheckFrameNoButton"]:ClearAllPoints()
-	-- _G["ReadyCheckFrameYesButton"]:SetPoint("RIGHT", _G["ReadyCheckFrame"], "CENTER", -2, -20)
-	-- _G["ReadyCheckFrameNoButton"]:SetPoint("LEFT", _G["ReadyCheckFrameYesButton"], "RIGHT", 3, 0)
-	-- _G["ReadyCheckFrameText"]:SetParent(_G["ReadyCheckFrame"])
-	-- _G["ReadyCheckFrameText"]:ClearAllPoints()
-	-- _G["ReadyCheckFrameText"]:SetPoint("TOP", 0, -12)
+	AS:SkinFrame(ReadyCheckFrame)
+	AS:SkinButton(ReadyCheckFrameYesButton)
+	AS:SkinButton(ReadyCheckFrameNoButton)
 
-	-- AS:StripTextures(BasicScriptErrors)
-	-- AS:SetTemplate(BasicScriptErrors)
-	-- AS:CreateShadow(BasicScriptErrors)
-	-- AS:SkinButton(BasicScriptErrorsButton)
-	-- BasicScriptErrors:SetScale(AS.UIScale)
+	AS:SkinBackdropFrame(GameMenuFrame)
+	AS:CreateBackdrop(GameMenuFrameHeader, 'Default')
+	for i = 1, GameMenuFrame:GetNumRegions() do
+		local Region = select(i, GameMenuFrame:GetRegions())
+		if Region.IsObjectType and Region:IsObjectType('FontString') then
+			Region:SetTextColor(1, 1, 1)
+			GameMenuFrameHeader.Backdrop:SetOutside(Region, 24, 6)
+			GameMenuFrameHeader.Backdrop:SetFrameLevel(GameMenuFrame:GetFrameLevel())
+		end
+	end
+	for _, Button in pairs({GameMenuFrame:GetChildren()}) do
+		if Button.IsObjectType and Button:IsObjectType("Button") then
+			AS:SkinButton(Button)
+		end
+	end
+
+	AS:SkinSlideBar(UnitPopupVoiceSpeakerVolume.Slider)
+	AS:SkinSlideBar(UnitPopupVoiceMicrophoneVolume.Slider)
+	AS:SkinSlideBar(UnitPopupVoiceUserVolume.Slider)
+
+	hooksecurefunc("UIDropDownMenu_CreateFrames", function(level, index)
+		local listFrame = _G["DropDownList"..level];
+		local listFrameName = listFrame:GetName();
+		local expandArrow = _G[listFrameName.."Button"..index.."ExpandArrow"];
+		if expandArrow then
+			expandArrow:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
+			expandArrow:SetSize(12, 12)
+			expandArrow:GetNormalTexture():SetVertexColor(unpack(AS.Color))
+			expandArrow:GetNormalTexture():SetRotation(AS.ArrowRotation['right'])
+		end
+	end)
+
+	hooksecurefunc("UIDropDownMenu_SetIconImage", function(icon, texture)
+		if texture:find("Divider") then
+			local r, g, b = unpack(AS.Color)
+			icon:SetColorTexture(r, g, b, 0.45)
+			icon:SetHeight(1)
+		end
+	end)
+
+	hooksecurefunc("ToggleDropDownMenu", function(level)
+		if ( not level ) then
+			level = 1;
+		end
+
+		local r, g, b = unpack(AS.Color)
+
+		for i = 1, UIDROPDOWNMENU_MAXBUTTONS do
+			local button = _G["DropDownList"..level.."Button"..i]
+			local check = _G["DropDownList"..level.."Button"..i.."Check"]
+			local uncheck = _G["DropDownList"..level.."Button"..i.."UnCheck"]
+			local highlight = _G["DropDownList"..level.."Button"..i.."Highlight"]
+
+			highlight:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Highlight]])
+			highlight:SetVertexColor(r, g, b)
+
+			AS:CreateBackdrop(check)
+			if check.Backdrop then
+				check.Backdrop:Hide()
+			end
+
+			if not button.notCheckable then
+				uncheck:SetTexture('')
+				local _, co = check:GetTexCoord()
+				if co == 0 then
+					check:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
+					check:SetVertexColor(r, g, b, 1)
+					check:SetSize(20, 20)
+					check:SetDesaturated(true)
+					check.Backdrop:SetInside(check, 4, 4)
+				else
+					check:SetTexture(AS.NormTex)
+					check:SetVertexColor(r, g, b, .6)
+					check:SetSize(10, 10)
+					check:SetDesaturated(false)
+					check.Backdrop:SetOutside(check)
+				end
+
+				check.Backdrop:Show()
+				check:SetTexCoord(0, 1, 0, 1);
+			else
+				check:SetSize(16, 16)
+			end
+		end
+	end)
+
+	AS:CreateBackdrop(SplashFrame)
+	AS:SkinButton(SplashFrame.BottomCloseButton)
+	AS:SkinCloseButton(SplashFrame.TopCloseButton)
 end
 
 AS:RegisterSkin('Blizzard_Others', AS.Blizzard_Others)

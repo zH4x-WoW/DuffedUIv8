@@ -5,7 +5,6 @@ function AS:Blizzard_Mail()
 	AS:CreateShadow(MailFrame)
 
 	AS:SkinCloseButton(MailFrame.CloseButton)
-	AS:StripTextures(MailFrame.Inset)
 
 	AS:StripTextures(InboxFrame)
 
@@ -33,8 +32,8 @@ function AS:Blizzard_Mail()
 		end
 	end
 
-	AS:SkinNextPrevButton(InboxPrevPageButton)
-	AS:SkinNextPrevButton(InboxNextPageButton)
+	AS:SkinArrowButton(InboxPrevPageButton)
+	AS:SkinArrowButton(InboxNextPageButton)
 
 	AS:SkinTab(MailFrameTab1)
 	AS:SkinTab(MailFrameTab2)
@@ -57,7 +56,6 @@ function AS:Blizzard_Mail()
 	AS:SkinButton(SendMailCancelButton)
 
 	AS:SkinFrame(OpenMailFrame, nil, nil, true)
-	AS:StripTextures(OpenMailFrameInset)
 
 	AS:SkinCloseButton(OpenMailFrameCloseButton)
 	AS:SkinButton(OpenMailReportSpamButton)

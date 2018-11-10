@@ -8,9 +8,9 @@ function AS:Blizzard_TimeManager(event, addon)
 	AS:StripTextures(TimeManagerFrameInset)
 	AS:SkinCloseButton(TimeManagerFrameCloseButton)
 
-	AS:SkinDropDownBox(TimeManagerAlarmHourDropDown, 80)
-	AS:SkinDropDownBox(TimeManagerAlarmMinuteDropDown, 80)
-	AS:SkinDropDownBox(TimeManagerAlarmAMPMDropDown, 80)
+	AS:SkinDropDownBox(TimeManagerAlarmHourDropDown)
+	AS:SkinDropDownBox(TimeManagerAlarmMinuteDropDown)
+	AS:SkinDropDownBox(TimeManagerAlarmAMPMDropDown)
 
 	AS:SkinEditBox(TimeManagerAlarmMessageEditBox)
 
@@ -34,8 +34,8 @@ function AS:Blizzard_TimeManager(event, addon)
 	AS:StripTextures(StopwatchTabFrame)
 	AS:SkinCloseButton(StopwatchCloseButton)
 
-	AS:SkinNextPrevButton(StopwatchPlayPauseButton)
-	AS:SkinNextPrevButton(StopwatchResetButton)
+	AS:SkinArrowButton(StopwatchPlayPauseButton)
+	AS:SkinArrowButton(StopwatchResetButton)
 
 	StopwatchPlayPauseButton:SetPoint("RIGHT", StopwatchResetButton, "LEFT", -4, 0)
 	StopwatchResetButton:SetPoint("BOTTOMRIGHT", StopwatchFrame, "BOTTOMRIGHT", -4, 6)
@@ -43,4 +43,4 @@ function AS:Blizzard_TimeManager(event, addon)
 	AS:UnregisterSkinEvent(addon, event)
 end
 
-AS:RegisterSkin("Blizzard_TimeManager", AS.Blizzard_TimeManager)
+AS:RegisterSkin("Blizzard_TimeManager", AS.Blizzard_TimeManager, 'ADDON_LOADED')

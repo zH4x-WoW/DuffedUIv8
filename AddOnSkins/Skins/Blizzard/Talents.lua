@@ -4,7 +4,6 @@ function AS:Blizzard_TalentUI(event, addon)
 	if addon ~= 'Blizzard_TalentUI' then return end
 
 	AS:SkinFrame(PlayerTalentFrame, nil, nil, true)
-	AS:StripTextures(PlayerTalentFrameInset)
 	AS:SkinCloseButton(PlayerTalentFrame.CloseButton)
 
 	for _, Button in pairs({ PlayerTalentFrameTalentsTutorialButton, PlayerTalentFrameSpecializationTutorialButton, PlayerTalentFramePetSpecializationTutorialButton }) do
@@ -117,7 +116,7 @@ function AS:Blizzard_TalentUI(event, addon)
 
 					frame.ring:Hide()
 					frame.icon:SetSize(40, 40)
-					frame.subText:SetTextColor(1, 1, 0)
+					frame.subText:SetTextColor(1, .8, .1)
 				end
 
 				index = index + 1
@@ -126,7 +125,8 @@ function AS:Blizzard_TalentUI(event, addon)
 	end)
 
 	AS:StripTextures(PlayerTalentFrameTalents, true)
-	AS:SkinButton(PlayerTalentFrameTalents.PvpTalentButton)
+	PlayerTalentFrameTalents.PvpTalentButton:HookScript("OnShow", function(self) AS:SkinArrowButton(self, self.currentlyExpanded and 'left' or 'right') end)
+	PlayerTalentFrameTalents.PvpTalentButton:HookScript("PostClick", function(self) AS:SkinArrowButton(self, self.currentlyExpanded and 'left' or 'right') end)
 
 	for i = 1, MAX_TALENT_TIERS do
 		local Row = PlayerTalentFrameTalents['tier'..i]
@@ -231,7 +231,6 @@ function AS:Blizzard_TalentUI(event, addon)
 	PvpTalentFrame.Ring:Hide()
 
 	AS:SkinBackdropFrame(PvpTalentFrame.TalentList)
-	AS:StripTextures(PvpTalentFrame.TalentList.Inset)
 
 	PvpTalentFrame.TalentList:SetPoint("BOTTOMLEFT", PlayerTalentFrame, "BOTTOMRIGHT", 5, 26)
 
@@ -259,12 +258,12 @@ function AS:Blizzard_TalentUI(event, addon)
 	AS:SkinScrollBar(PvpTalentFrame.TalentList.ScrollFrame.ScrollBar)
 
 	AS:SkinFrame(TalentMicroButtonAlert)
-	TalentMicroButtonAlert:SetBackdropBorderColor(1, 1, 0)
+	TalentMicroButtonAlert:SetBackdropBorderColor(1, .8, .1)
 	AS:CreateShadow(TalentMicroButtonAlert)
 	AS:SkinCloseButton(TalentMicroButtonAlert.CloseButton)
 	TalentMicroButtonAlert.CloseButton:ClearAllPoints()
 	TalentMicroButtonAlert.CloseButton:SetPoint("TOPRIGHT", 6, 1)
-	TalentMicroButtonAlert.Text:SetTextColor(1, 1, 0)
+	TalentMicroButtonAlert.Text:SetTextColor(1, .8, .1)
 	TalentMicroButtonAlert:ClearAllPoints()
 	TalentMicroButtonAlert:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -6)
 

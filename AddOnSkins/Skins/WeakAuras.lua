@@ -1,11 +1,16 @@
-local AS = unpack(AddOnSkins)
+local AS, ASL = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('WeakAuras') then return end
 
 function AS:WeakAuras()
+	if not WeakAuras.regionTypes then
+		AS:AcceptFrame('WeakAuras was updated while WoW was open. Close & Relaunch WoW.')
+		return
+	end
+
 	local function Skin_WeakAuras(frame, ftype)
 		if not frame.Backdrop then
-			AS:CreateBackdrop(frame, 'Transparent')
+			AS:CreateBackdrop(frame)
 			if ftype == 'icon' then
 				frame.Backdrop:SetBackdropColor(0, 0, 0, 0)
 				frame.Backdrop:HookScript('OnUpdate', function(self)
@@ -31,6 +36,7 @@ function AS:WeakAuras()
 			end
 			if frame.cooldown and AS:CheckOption('WeakAuraIconCooldown', 'ElvUI') then
 				ElvUI[1]:RegisterCooldown(frame.cooldown)
+				ElvUI[1]:UpdateCooldownSettings('global')
 			end
 		end
 	end
@@ -65,6 +71,29 @@ function AS:WeakAuras()
 			Skin_WeakAuras(WeakAuras.regions[weakAura].region, WeakAuras.regions[weakAura].regionType)
 		end
 	end
+
+	AS.Options.args.general.args.WeakAuras = {
+		type = 'group',
+		name = 'WeakAuras',
+		guiInline = true,
+		order = -1,
+		get = function(info) return AS:CheckOption(info[#info]) end,
+		set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
+		args = {
+			WeakAuraAuraBar = {
+				type = 'toggle',
+				name = 'WeakAura AuraBar',
+				order = -1,
+				disabled = function() return not AS:CheckOption('WeakAuras', 'WeakAuras') end,
+			},
+			WeakAuraIconCooldown = {
+				type = 'toggle',
+				name = 'WeakAura Cooldowns',
+				order = -2,
+				disabled = function() return not (AS:CheckOption('WeakAuras', 'WeakAuras') and AS:CheckAddOn('ElvUI')) end,
+			},
+		},
+	}
 end
 
 AS:RegisterSkinForPreload('WeakAuras', AS.WeakAuras)

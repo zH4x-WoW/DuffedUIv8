@@ -4,14 +4,18 @@ if AS:CheckAddOn('ElvUI') then return end
 
 function AS:Ace3()
 	local AceGUI = LibStub('AceGUI-3.0', true)
+
 	if not AceGUI then return end
+
 	local oldRegisterAsWidget = AceGUI.RegisterAsWidget
+
 	AceGUI.RegisterAsWidget = function(self, widget)
 		local TYPE = widget.type
 		if TYPE == 'MultiLineEditBox' then
-			AS:SetTemplate(widget.scrollBG, 'Default')
+			AS:SetTemplate(widget.scrollBG)
 			AS:SkinButton(widget.button)
 			AS:SkinScrollBar(widget.scrollBar)
+
 			widget.scrollBar:SetPoint('RIGHT', widget.frame, 'RIGHT', 0 -4)
 			widget.scrollBG:SetPoint('TOPRIGHT', widget.scrollBar, 'TOPLEFT', -2, 19)
 			widget.scrollBG:SetPoint('BOTTOMLEFT', widget.button, 'TOPLEFT')
@@ -36,53 +40,62 @@ function AS:Ace3()
 			local frame = widget.dropdown
 			local button = widget.button
 			local text = widget.text
-			AS:StripTextures(frame)
 
+			AS:SkinBackdropFrame(frame)
+			frame.Backdrop:SetPoint('TOPLEFT', 15, -2)
+			frame.Backdrop:SetPoint("BOTTOMRIGHT", -21, 0)
+
+			AS:SkinArrowButton(button)
+
+			widget.label:ClearAllPoints()
+			widget.label:SetPoint('BOTTOMLEFT', frame.Backdrop, 'TOPLEFT', 2, 0)
+
+			button:SetSize(20, 20)
 			button:ClearAllPoints()
-			button:Point('RIGHT', frame, 'RIGHT', -20, 0)
+			button:SetPoint('RIGHT', frame.Backdrop, 'RIGHT', -2, 0)
 
-			AS:SkinNextPrevButton(button, true)
+			text:ClearAllPoints()
+			text:SetJustifyH("RIGHT")
+			text:SetPoint('RIGHT', button, 'LEFT', -3, 0)
 
-			AS:CreateBackdrop(frame)
-			frame.Backdrop:Point("TOPLEFT", 20, -2)
-			frame.Backdrop:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
-
-			button:SetParent(frame.Backdrop)
-			text:SetParent(frame.Backdrop)
-
-			button:HookScript('OnClick', function(self) AS:SetTemplate(self.obj.pullout.frame) end)
+			button:HookScript('PostClick', function(self) AS:SetTemplate(self.obj.pullout.frame) end)
+			widget.button_cover:HookScript('PostClick', function(self) AS:SetTemplate(self.obj.pullout.frame) end)
 		elseif TYPE == 'LSM30_Font' or TYPE == 'LSM30_Sound' or TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' or TYPE == 'LSM30_Statusbar' then
 			local frame = widget.frame
 			local button = frame.dropButton
 			local text = frame.text
-			AS:StripTextures(frame)
 
-			AS:SkinNextPrevButton(button, true)
+			AS:SkinBackdropFrame(frame)
+			AS:SkinArrowButton(button)
+
+			frame.label:ClearAllPoints()
+			frame.label:SetPoint('BOTTOMLEFT', frame.Backdrop, 'TOPLEFT', 2, 0)
+
 			frame.text:ClearAllPoints()
-			frame.text:Point('RIGHT', button, 'LEFT', -2, 0)
+			frame.text:SetPoint('RIGHT', button, 'LEFT', -2, 0)
 
+			button:SetSize(20, 20)
 			button:ClearAllPoints()
-			button:Point('RIGHT', frame, 'RIGHT', -10, -6)
+			button:SetPoint('RIGHT', frame.Backdrop, 'RIGHT', -2, 0)
 
-			AS:CreateBackdrop(frame, "Default")
-			frame.Backdrop:Point('TOPLEFT', 0, -17)
+			frame.Backdrop:SetPoint('TOPLEFT', 0, -21)
+			frame.Backdrop:SetPoint("BOTTOMRIGHT", -4, -1)
 
 			if TYPE == 'LSM30_Sound' then
 				widget.soundbutton:SetParent(frame.Backdrop)
 				widget.soundbutton:ClearAllPoints()
-				widget.soundbutton:Point('LEFT', frame.Backdrop, 'LEFT', 2, 0)
+				widget.soundbutton:SetPoint('LEFT', frame.Backdrop, 'LEFT', 2, 0)
 			elseif TYPE == 'LSM30_Statusbar' then
 				widget.bar:SetParent(frame.Backdrop)
-				widget.bar:SetInside()
+				widget.bar:ClearAllPoints()
+				widget.bar:SetPoint('TOPLEFT', frame.Backdrop, 'TOPLEFT', 2, -2)
+				widget.bar:SetPoint('BOTTOMRIGHT', button, 'BOTTOMLEFT', -1, 0)
 			elseif TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' then
-				frame.Backdrop:Point('TOPLEFT', 22, -16)
 			end
-
-			frame.Backdrop:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
 
 			button:SetParent(frame.Backdrop)
 			text:SetParent(frame.Backdrop)
-			button:HookScript('OnClick', function(this, button)
+			button:HookScript('PostClick', function(this)
 				local self = this.obj
 				if self.dropdown then
 					AS:SetTemplate(self.dropdown)
@@ -108,11 +121,44 @@ function AS:Ace3()
 
 			widget.lowtext:SetPoint('TOPLEFT', widget.slider, 'BOTTOMLEFT', 2, -2)
 			widget.hightext:SetPoint('TOPRIGHT', widget.slider, 'BOTTOMRIGHT', -2, -2)
+		elseif TYPE == "Keybinding" then
+			local button = widget.button
+			local msgframe = widget.msgframe
+
+			AS:SkinButton(button)
+
+			AS:SkinFrame(msgframe)
+			msgframe.msg:ClearAllPoints()
+			msgframe.msg:SetPoint("CENTER")
+		elseif TYPE == "ColorPicker" then
+			local frame = widget.frame
+			local colorSwatch = widget.colorSwatch
+
+			AS:CreateBackdrop(frame)
+			frame.Backdrop:SetSize(16, 16)
+			frame.Backdrop:ClearAllPoints()
+			frame.Backdrop:SetPoint('LEFT', frame, 'LEFT', 4, 0)
+			colorSwatch:SetTexture(AS.Blank)
+			colorSwatch:ClearAllPoints()
+			colorSwatch:SetParent(frame.Backdrop)
+			colorSwatch:SetInside(frame.Backdrop)
+
+			if frame.checkers then
+				frame.checkers:ClearAllPoints()
+				frame.checkers:SetParent(frame.Backdrop)
+				frame.checkers:SetInside(frame.Backdrop)
+			end
+
+			if frame.texture then
+				frame.texture:SetColorTexture(0, 0, 0, 0)
+			end
 		end
+
 		return oldRegisterAsWidget(self, widget)
 	end
 
 	local oldRegisterAsContainer = AceGUI.RegisterAsContainer
+
 	AceGUI.RegisterAsContainer = function(self, widget)
 		local TYPE = widget.type
 
@@ -123,7 +169,7 @@ function AS:Ace3()
 			if TYPE == 'Frame' then
 				AS:StripTextures(frame)
 
-				for i=1, frame:GetNumChildren() do
+				for i = 1, frame:GetNumChildren() do
 					local child = select(i, frame:GetChildren())
 					if child:GetObjectType() == 'Button' and child:GetText() then
 						AS:SkinButton(child)
@@ -141,19 +187,6 @@ function AS:Ace3()
 				AS:SetTemplate(widget.treeframe, 'Transparent')
 				frame:SetPoint('TOPLEFT', widget.treeframe, 'TOPRIGHT', 1, 0)
 
-				local oldCreateButton = widget.CreateButton
-				widget.CreateButton = function(self)
-					local button = oldCreateButton(self)
-					AS:StripTextures(button.toggle)
-					button.toggle.SetNormalTexture = AS.Noop
-					button.toggle.SetPushedTexture = AS.Noop
-					button.toggleText = button.toggle:CreateFontString(nil, 'OVERLAY')
-					button.toggleText:SetFont(AS.Font, 19)
-					button.toggleText:SetPoint('CENTER')
-					button.toggleText:SetText('+')
-					return button
-				end
-
 				local oldRefreshTree = widget.RefreshTree
 				widget.RefreshTree = function(self, scrollToSelection)
 					oldRefreshTree(self, scrollToSelection)
@@ -162,13 +195,18 @@ function AS:Ace3()
 					local groupstatus = status.groups
 					local lines = self.lines
 					local buttons = self.buttons
+					local offset = status.scrollvalue
 
-					for i, line in pairs(lines) do
-						local button = buttons[i]
-						if groupstatus[line.uniquevalue] and button then
-							button.toggleText:SetText('-')
+					for i = offset + 1, #lines do
+						local button = buttons[i - offset]
+						if groupstatus[lines[i].uniquevalue] and button then
+							button.toggle:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Minus]])
+							button.toggle:SetPushedTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Minus]])
+							button.toggle:SetHighlightTexture('')
 						elseif button then
-							button.toggleText:SetText('+')
+							button.toggle:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Plus]])
+							button.toggle:SetPushedTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Plus]])
+							button.toggle:SetHighlightTexture('')
 						end
 					end
 				end

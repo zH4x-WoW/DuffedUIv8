@@ -3,7 +3,6 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_Spellbook()
 	AS:SkinFrame(SpellBookFrame, nil, nil, true)
 	AS:SkinCloseButton(SpellBookFrame.CloseButton)
-	AS:StripTextures(SpellBookFrame.Inset)
 
 	for i = 1, 5 do
 		AS:SkinTab(_G["SpellBookFrameTabButton"..i])
@@ -12,8 +11,8 @@ function AS:Blizzard_Spellbook()
 	SpellBookPageText:SetTextColor(1, 1, 1)
 	SpellBookPageText:SetPoint("BOTTOMRIGHT", -100, 32)
 
-	AS:SkinNextPrevButton(SpellBookPrevPageButton)
-	AS:SkinNextPrevButton(SpellBookNextPageButton)
+	AS:SkinArrowButton(SpellBookPrevPageButton)
+	AS:SkinArrowButton(SpellBookNextPageButton)
 
 	SpellBookFrameTutorialButton.Ring:Hide()
 	SpellBookFrameTutorialButton:SetPoint("TOPLEFT", SpellBookFrame, "TOPLEFT", -5, 10)
@@ -61,11 +60,11 @@ function AS:Blizzard_Spellbook()
 		AS:SkinFrame(Tab)
 
 		Tab:HookScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
-		Tab:HookScript("OnLeave", function(self) if self:GetChecked() then self:SetBackdropBorderColor(1, 1, 0) else self:SetBackdropBorderColor(unpack(AS.BorderColor)) end end)
+		Tab:HookScript("OnLeave", function(self) if self:GetChecked() then self:SetBackdropBorderColor(1, .8, .1) else self:SetBackdropBorderColor(unpack(AS.BorderColor)) end end)
 
 		hooksecurefunc(Tab, 'SetChecked', function(self, value)
 			if value == true then
-				self:SetBackdropBorderColor(1, 1, 0)
+				self:SetBackdropBorderColor(1, .8, .1)
 			else
 				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
