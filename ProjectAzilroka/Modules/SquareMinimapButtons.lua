@@ -287,7 +287,7 @@ function SMB:SkinMinimapButton(Button)
 	Button:SetFrameLevel(Minimap:GetFrameLevel() + 5)
 	Button:SetSize(SMB.db['IconSize'], SMB.db['IconSize'])
 	Button:SetTemplate()
-	Button:CreateShadow()
+	--Button:CreateShadow()
 	Button:HookScript('OnEnter', function(self)
 		self:SetBackdropBorderColor(unpack(PA.ClassColor))
 		if SMB.Bar:IsShown() then
