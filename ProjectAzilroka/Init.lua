@@ -2,7 +2,7 @@ local AddOnName = ...
 local _G = _G
 local LibStub = LibStub
 
-local PA = LibStub('AceAddon-3.0'):NewAddon('ProjectAzilroka', 'AceEvent-3.0')
+local PA = LibStub('AceAddon-3.0'):NewAddon('ProjectAzilroka', 'AceEvent-3.0', 'AceTimer-3.0')
 
 _G.ProjectAzilroka = PA
 
@@ -27,11 +27,13 @@ PA.LAB = LibStub('LibActionButton-1.0')
 -- WoW Data
 PA.MyClass = select(2, UnitClass('player'))
 PA.MyName = UnitName('player')
+PA.MyRace = select(2, UnitRace("player"))
 PA.MyRealm = GetRealmName()
 PA.Locale = GetLocale()
 PA.Noop = function() end
 PA.TexCoords = {.08, .92, .08, .92}
 PA.UIScale = UIParent:GetScale()
+PA.MyFaction = UnitFactionGroup('player')
 
 -- Pixel Perfect
 PA.ScreenWidth, PA.ScreenHeight = GetPhysicalScreenSize()
@@ -199,6 +201,11 @@ PA.Options = {
 					type = 'toggle',
 					name = 'Quest Sounds',
 				},
+				RR = {
+					order = 9,
+					type = 'toggle',
+					name = 'Reputation Reward',
+				},
 			},
 		},
 	},
@@ -218,10 +225,10 @@ function PA:BuildProfile()
 			['ES'] = true,
 			['FG'] = false,
 			['FL'] = false,
-			['MF'] = true,
 			['SMB'] = true,
 			['stAM'] = true,
 			['QS'] = false,
+			['RR'] = true,
 		},
 	}
 
@@ -277,9 +284,6 @@ function PA:PLAYER_LOGIN()
 	if PA.db['FL'] then
 		tinsert(InitializeModules, 'FL')
 	end
-	if PA.db['MF'] then
-		tinsert(InitializeModules, 'MF')
-	end
 	if PA.db['SMB'] then
 		tinsert(InitializeModules, 'SMB')
 	end
@@ -288,6 +292,9 @@ function PA:PLAYER_LOGIN()
 	end
 	if PA.db['QS'] then
 		tinsert(InitializeModules, 'QS')
+	end
+	if PA.db['RR'] then
+		tinsert(InitializeModules, 'RR')
 	end
 
 	for _, Module in pairs(InitializeModules) do

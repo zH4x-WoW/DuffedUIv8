@@ -82,6 +82,7 @@ function SMB:HandleBlizzardButtons()
 		GarrisonLandingPageMinimapButton:SetHitRectInsets(0, 0, 0, 0)
 		GarrisonLandingPageMinimapButton:SetScript('OnEnter', nil)
 		GarrisonLandingPageMinimapButton:SetScript('OnLeave', nil)
+		GarrisonLandingPageMinimapButton:CreateShadow()
 
 		GarrisonLandingPageMinimapButton:HookScript('OnEnter', function(self)
 			self:SetBackdropBorderColor(unpack(PA.ClassColor))
@@ -108,6 +109,7 @@ function SMB:HandleBlizzardButtons()
 		Frame.Icon:SetPoint('CENTER')
 		Frame.Icon:Size(18)
 		Frame.Icon:SetTexture(MiniMapMailIcon:GetTexture())
+		Frame:CreateShadow()
 		Frame:EnableMouse(true)
 		Frame:HookScript('OnEnter', function(self)
 			if HasNewMail() then
@@ -146,6 +148,7 @@ function SMB:HandleBlizzardButtons()
 
 		MiniMapTracking:SetParent(self.Bar)
 		MiniMapTracking:SetSize(self.db['IconSize'], self.db['IconSize'])
+		MiniMapTracking:CreateShadow()
 
 		MiniMapTrackingIcon:ClearAllPoints()
 		MiniMapTrackingIcon:SetPoint('CENTER')
@@ -181,6 +184,7 @@ function SMB:HandleBlizzardButtons()
 	if self.db["MoveQueue"] and not QueueStatusMinimapButton.SMB then
 		local Frame = CreateFrame('Frame', 'SMB_QueueFrame', self.Bar)
 		Frame:SetTemplate()
+		Frame:CreateShadow()
 		Frame:SetSize(SMB.db['IconSize'], SMB.db['IconSize'])
 		Frame.Icon = Frame:CreateTexture(nil, 'ARTWORK')
 		Frame.Icon:SetSize(SMB.db['IconSize'], SMB.db['IconSize'])
@@ -251,24 +255,24 @@ function SMB:SkinMinimapButton(Button)
 	for i = 1, Button:GetNumRegions() do
 		local Region = select(i, Button:GetRegions())
 		if Region.IsObjectType and Region:IsObjectType('Texture') then
-			local Texture = strlower(Region:GetTexture())
+			local Texture = strlower(tostring(Region:GetTexture()))
 
-			if (strfind(Texture, "interface\\characterframe") or strfind(Texture, "interface\\minimap") or strfind(Texture, 'border') or strfind(Texture, 'background') or strfind(Texture, 'alphamask') or strfind(Texture, 'highlight')) then
+			if (strfind(Texture, [[interface\characterframe]]) or (strfind(Texture, [[interface\minimap]]) and not strfind(Texture, [[interface\minimap\tracking\]])) or strfind(Texture, 'border') or strfind(Texture, 'background') or strfind(Texture, 'alphamask') or strfind(Texture, 'highlight')) then
 				Region:SetTexture(nil)
 				Region:SetAlpha(0)
 			else
 				if Name == 'BagSync_MinimapButton' then
-					Region:SetTexture('Interface\\AddOns\\BagSync\\media\\icon')
+					Region:SetTexture([[Interface\AddOns\BagSync\media\icon]])
 				elseif Name == 'DBMMinimapButton' then
-					Region:SetTexture('Interface\\Icons\\INV_Helmet_87')
+					Region:SetTexture([[Interface\Icons\INV_Helmet_87]])
 				elseif Name == 'OutfitterMinimapButton' then
-					if Texture == 'interface\\addons\\outfitter\\textures\\minimapbutton' then
+					if Texture == [[interface\addons\outfitter\textures\minimapbutton]] then
 						Region:SetTexture(nil)
 					end
 				elseif Name == 'SmartBuff_MiniMapButton' then
-					Region:SetTexture('Interface\\Icons\\Spell_Nature_Purge')
+					Region:SetTexture([[Interface\Icons\Spell_Nature_Purge]])
 				elseif Name == 'VendomaticButtonFrame' then
-					Region:SetTexture('Interface\\Icons\\INV_Misc_Rabbit_2')
+					Region:SetTexture([[Interface\Icons\INV_Misc_Rabbit_2]])
 				end
 				Region:ClearAllPoints()
 				Region:SetInside()
@@ -283,6 +287,7 @@ function SMB:SkinMinimapButton(Button)
 	Button:SetFrameLevel(Minimap:GetFrameLevel() + 5)
 	Button:SetSize(SMB.db['IconSize'], SMB.db['IconSize'])
 	Button:SetTemplate()
+	Button:CreateShadow()
 	Button:HookScript('OnEnter', function(self)
 		self:SetBackdropBorderColor(unpack(PA.ClassColor))
 		if SMB.Bar:IsShown() then
@@ -440,7 +445,7 @@ function SMB:GetOptions()
 						order = 6,
 						type = 'range',
 						name = PA.ACL['Buttons Per Row'],
-						min = 1, max = 12, step = 1,
+						min = 1, max = 100, step = 1,
 					},
 				},
 			},
@@ -493,9 +498,6 @@ function SMB:GetOptions()
 			},
 		},
 	}
-
-	Options.args.profiles = LibStub('AceDBOptions-3.0'):GetOptionsTable(SMB.data)
-	Options.args.profiles.order = -2
 
 	PA.Options.args.SquareMinimapButton = Options
 end

@@ -12,7 +12,7 @@ DO.Description = 'Provides an overlay on UnitFrames for Boss, Elite, Rare and Ra
 DO.Authors = 'Azilroka    Whiro'
 DO.ImageCredits = 'Codeblake    Kkthnxbye    Narley    Durandil'
 
-local MediaPath = 'Interface\\AddOns\\ProjectAzilroka\\Media\\DragonOverlay\\'
+local MediaPath = [[Interface\AddOns\ProjectAzilroka\Media\DragonOverlay\]]
 
 DO.Textures = {
 	['Azure'] = MediaPath..'Azure',
@@ -273,9 +273,6 @@ function DO:GetOptions()
 		}
 		Order = Order + 2
 	end
-
-	Options.args.profiles = LibStub('AceDBOptions-3.0'):GetOptionsTable(DO.data)
-	Options.args.profiles.order = -2
 
 	PA.Options.args.DragonOverlay = Options
 end

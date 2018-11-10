@@ -7,7 +7,8 @@ _G.stAddonManagerServerDB = {}
 
 stAM.Title = '|cFF16C3F2st|r|cFFFFFFFFAddonManager|r'
 stAM.Description = 'A simple and minimalistic addon to disable/enabled addons without logging out.'
-stAM.Authors = 'Safturento    Azilroka'
+stAM.Authors = 'Azilroka'
+stAM.Credits = 'Safturento'
 
 local _G = _G
 local unpack, tinsert, wipe, pairs, sort, format = unpack, tinsert, wipe, pairs, sort, format
@@ -101,11 +102,25 @@ function stAM:BuildFrame()
 	Close:SetScript('OnLeave', function(self) self:SetTemplate() end)
 	Close:SetScript('OnClick', function(self) Frame:Hide() end)
 
-	Close.Text = Close:CreateFontString(nil, 'OVERLAY')
-	Close.Text:SetFont(PA.LSM:Fetch('font', self.db['Font']), 12, self.db['FontFlag'])
-	Close.Text:SetJustifyH('CENTER')
-	Close.Text:SetText('x')
-	Close.Text:SetPoint('CENTER', 1, 1)
+	local Mask = Close:CreateMaskTexture()
+	Mask:SetTexture([[Interface\AddOns\ProjectAzilroka\Media\Textures\Close]], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
+	Mask:SetSize(10, 10)
+	Mask:SetPoint('CENTER')
+
+	Close.Mask = Mask
+
+	Close:SetNormalTexture(PA.LSM:Fetch('statusbar', self.db['CheckTexture']))
+	Close:SetPushedTexture(PA.LSM:Fetch('statusbar', self.db['CheckTexture']))
+
+	local Normal, Pushed = Close:GetNormalTexture(), Close:GetPushedTexture()
+
+	Normal:SetInside(Close)
+	Normal:SetVertexColor(1, 1, 1)
+	Normal:AddMaskTexture(Mask)
+
+	Pushed:SetInside(Close)
+	Pushed:SetVertexColor(1, .2, .2)
+	Pushed:AddMaskTexture(Mask)
 
 	Search:SetPoint('TOPLEFT', Title, 'BOTTOMLEFT', 10, -10)
 	Search:SetPoint('BOTTOMRIGHT', Profiles, 'BOTTOMLEFT', -5, 0)
@@ -639,9 +654,6 @@ function stAM:GetOptions()
 		},
 	}
 
-	Options.args.profiles = LibStub('AceDBOptions-3.0'):GetOptionsTable(stAM.data)
-	Options.args.profiles.order = -2
-
 	PA.Options.args.stAM = Options
 end
 
@@ -660,8 +672,7 @@ function stAM:BuildProfile()
 			['CheckTexture'] = 'Blizzard Raid Bar'
 		},
 	}, true)
-	self.data.RegisterCallback(self, 'OnProfileChanged', 'SetupProfile')
-	self.data.RegisterCallback(self, 'OnProfileCopied', 'SetupProfile')
+
 	self.db = self.data.profile
 end
 
