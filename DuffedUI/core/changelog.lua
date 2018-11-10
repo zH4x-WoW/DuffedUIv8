@@ -3,9 +3,9 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame('frame')
 local ChangeLogData = {
 	"Changes:",
-		"• Fixed position for BNToastFrame",
-		"• Several bugfixes",
-		"• Attempt to fix actionbar issues on sidebars",
+		"• Fixed minor bugs",
+		"• Added Mage-Portals to mage portal list",
+		"• Added Beacon of Virtue to raiframe indicators",
 		"• Major Update for AddOnSkins",
 		"• Major Update for ProjectAzilroka",
 		--"• ",
