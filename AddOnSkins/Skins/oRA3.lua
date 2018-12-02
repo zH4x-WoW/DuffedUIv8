@@ -7,7 +7,7 @@ function AS:oRA3(event, addon)
 		if module == "main" and not oRA3Frame.IsSkinned then
 			local buttonNames = {["oRA3Disband"] = true, ["oRA3Options"] = true}
 			AS:StripTextures(oRA3Frame, true)
-			AS:CreateBackdrop(oRA3Frame, 'Transparent')
+			AS:CreateBackdrop(oRA3Frame)
 			oRA3Frame:SetSize(oRA3Frame:GetWidth()-30, oRA3Frame:GetHeight()-45)
 			oRA3Frame:SetHitRectInsets(0,0,0,0)
 			for i, child in ipairs({oRA3Frame:GetChildren()}) do
@@ -44,7 +44,7 @@ function AS:oRA3(event, addon)
 				end
 			end
 			local contentFrame = oRA3ListFrame:GetParent()
-			if contentFrame then 
+			if contentFrame then
 				contentFrame:SetPoint("BOTTOMRIGHT", -10, 33)
 			end
 			for i, child in ipairs({oRA3ListFrame:GetChildren()}) do
@@ -55,7 +55,7 @@ function AS:oRA3(event, addon)
 				end
 				if otype == "ScrollFrame" and name and name == "oRA3ScrollFrame" then
 					AS:StripTextures(child)
-					AS:CreateBackdrop(child, 'Transparent')
+					AS:CreateBackdrop(child)
 					AS:SkinScrollBar(oRA3ScrollFrameScrollBar)
 				end
 			end
@@ -68,8 +68,8 @@ function AS:oRA3(event, addon)
 					end
 				end
 			end)
-			oRA3ScrollFrameTop:Kill()
-			oRA3ScrollFrameBottom:Kill()
+			AS:Kill(oRA3ScrollFrameTop)
+			AS:Kill(oRA3ScrollFrameBottom)
 			oRA3Frame.IsSkinned = true
 		end
 
@@ -86,7 +86,7 @@ function AS:oRA3(event, addon)
 
 		if module == "readycheck" and oRA3ReadyCheck and not oRA3ReadyCheck.IsSkinned then
 			AS:StripTextures(oRA3ReadyCheck, true)
-			AS:CreateBackdrop(oRA3ReadyCheck, 'Transparent')
+			AS:CreateBackdrop(oRA3ReadyCheck)
 			for i,child in ipairs({oRA3ReadyCheck:GetChildren()}) do
 				if child:IsObjectType("Button") and not (child:GetScript("OnDragStart") or child == oRA3ReadyCheck.bar) then
 					AS:SkinCloseButton(child)
