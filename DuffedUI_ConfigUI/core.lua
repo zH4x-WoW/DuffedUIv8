@@ -648,7 +648,7 @@ do
 			button:Point('TOP', interface, 'BOTTOM', 0, -1)
 		end
 		button:SetText('DuffedUI')
-		if C['general'].blizzardreskin then button:SkinButton() end
+		button:SkinButton()
 		button:SetScript('OnClick', function(self)
 			if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 			local config = DuffedUIConfigUI
