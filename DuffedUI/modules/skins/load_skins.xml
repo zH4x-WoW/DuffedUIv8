@@ -1,6 +1,5 @@
 <Ui xmlns='http://www.blizzard.com/wow/ui/'>
-	<Script file='achievement.lua' />
-	<Script file='achievementpopup.lua' />
+	<!--Script file='achievement.lua' />
 	<Script file='addon_manager.lua' />
 	<Script file='archeology.lua' />
 	<Script file='artifactui.lua' />
@@ -33,17 +32,17 @@
 	<Script file='guildcontrol.lua' />
 	<Script file='guildregister.lua' />
 	<Script file='journal.lua' />
-	<Script file='lfg.lua' />
+	<Script file='lfg.lua' /-->
 	<Script file='loot.lua' />
-	<Script file='losscontrol.lua' />
+	<!--Script file='losscontrol.lua' />
 	<Script file='macro.lua' />
 	<Script file='mail.lua' />
 	<Script file='merchant.lua' />
 	<Script file='obliterumforge.lua' />
 	<Script file='opacity.lua' />
-	<Script file='orderhall.lua' />
+	<Script file='orderhall.lua' /-->
 	<Script file='others.lua' />
-	<Script file='petition.lua' />
+	<!--Script file='petition.lua' />
 	<Script file='premade.lua' />
 	<Script file='pve.lua' />
 	<Script file='pvp.lua' />
@@ -65,7 +64,7 @@
 	<Script file='tradeskill.lua' />
 	<Script file='trainer.lua' />
 	<Script file='tutorial.lua' />
-	<Script file='voidstorage.lua' />
+	<Script file='voidstorage.lua' /-->
 	
 	<Slider name='HybridScrollBarTemplateFixed' parentKey='scrollBar' virtual='true'>
 		<Size x='20' y='0'/>

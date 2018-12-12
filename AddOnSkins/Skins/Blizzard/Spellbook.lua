@@ -88,7 +88,7 @@ function AS:Blizzard_Spellbook()
 
 	-- Professions
 
-	for _, Button in pairs({ PrimaryProfession1, PrimaryProfession2, SecondaryProfession1, SecondaryProfession2, SecondaryProfession3 }) do
+	--[[for _, Button in pairs({ PrimaryProfession1, PrimaryProfession2, SecondaryProfession1, SecondaryProfession2, SecondaryProfession3 }) do
 		Button.professionName:SetTextColor(1, 1, 1)
 		Button.missingHeader:SetTextColor(1, 1, 1)
 		Button.missingText:SetTextColor(1, 1, 1)
@@ -98,7 +98,7 @@ function AS:Blizzard_Spellbook()
 		Button.statusBar.rankText:SetPoint("CENTER")
 
 		Button.statusBar:SetPoint("TOPLEFT", "$parentRank", "BOTTOMLEFT", 1, -3)
-	end
+	end]]--
 
 	for i = 1, 2 do
 		local Button = _G["PrimaryProfession"..i]

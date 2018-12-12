@@ -3,15 +3,11 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame('frame')
 local ChangeLogData = {
 	"Changes:",
-		"• Fixed minor bugs",
-		"• Added Mage-Portals to mage portal list",
-		"• Added Beacon of Virtue to raiframe indicators",
-		"• Major Update for AddOnSkins",
-		"• Major Update for ProjectAzilroka",
+		"• Update for Patch 8.1",
 		--"• ",
 	" ",
 	"Notes:",
-		"Currently nothing important :)",
+		"Progress bars from profession skin currently not working",
 }
 
 local function ModifiedString(string)

@@ -90,6 +90,14 @@ AS.Blizzard.Tooltip = {
 	'BorderBottomLeft',
 }
 
+AS.RegisterTemplates = {}
+
+function AS:UpdateSettings()
+	for Frame in pairs(AS.RegisterTemplates) do
+		AS:SetTemplate(Frame)
+	end
+end
+
 function AS:Kill(Object)
 	if Object.UnregisterAllEvents then
 		Object:UnregisterAllEvents()
@@ -99,6 +107,34 @@ function AS:Kill(Object)
 	end
 
 	Object:Hide()
+end
+
+function AS:SetInside(obj, anchor, xOffset, yOffset, anchor2)
+	xOffset = xOffset or 1
+	yOffset = yOffset or 1
+	anchor = anchor or obj:GetParent()
+
+	assert(anchor)
+	if obj:GetPoint() then
+		obj:ClearAllPoints()
+	end
+
+	obj:Point('TOPLEFT', anchor, 'TOPLEFT', xOffset, -yOffset)
+	obj:Point('BOTTOMRIGHT', anchor2 or anchor, 'BOTTOMRIGHT', -xOffset, yOffset)
+end
+
+function AS:SetOutside(obj, anchor, xOffset, yOffset, anchor2)
+	xOffset = xOffset or 1
+	yOffset = yOffset or 1
+	anchor = anchor or obj:GetParent()
+
+	assert(anchor)
+	if obj:GetPoint() then
+		obj:ClearAllPoints()
+	end
+
+	obj:Point('TOPLEFT', anchor, 'TOPLEFT', -xOffset, yOffset)
+	obj:Point('BOTTOMRIGHT', anchor2 or anchor, 'BOTTOMRIGHT', xOffset, -yOffset)
 end
 
 function AS:StripTextures(Object, Kill, Alpha)
@@ -432,9 +468,16 @@ function AS:SkinCheckBox(CheckBox)
 		end
 	end)
 
-	CheckBox.SetNormalTexture = AS.Noop
-	CheckBox.SetPushedTexture = AS.Noop
-	CheckBox.SetHighlightTexture = AS.Noop
+	hooksecurefunc(CheckBox, "SetNormalTexture", function(f, t)
+		if t ~= "" then f:SetNormalTexture("") end
+	end)
+	hooksecurefunc(CheckBox, "SetPushedTexture", function(f, t)
+		if t ~= "" then f:SetPushedTexture("") end
+	end)
+	hooksecurefunc(CheckBox, "SetHighlightTexture", function(f, t)
+		if t ~= "" then f:SetDisabledTexture("") end
+	end)
+
 	CheckBox.isSkinned = true
 end
 
@@ -645,10 +688,18 @@ function AS:SkinRadioButton(Button)
 	Disabled:SetVertexColor(.3, .3, .3)
 	Disabled:AddMaskTexture(OutsideMask)
 
-	Button.SetNormalTexture = AS.Noop
-	Button.SetDisabledTexture = AS.Noop
-	Button.SetPushedTexture = AS.Noop
-	Button.SetHighlightTexture = AS.Noop
+	hooksecurefunc(Button, "SetNormalTexture", function(f, t)
+		if t ~= "" then f:SetNormalTexture("") end
+	end)
+	hooksecurefunc(Button, "SetPushedTexture", function(f, t)
+		if t ~= "" then f:SetPushedTexture("") end
+	end)
+	hooksecurefunc(Button, "SetHighlightTexture", function(f, t)
+		if t ~= "" then f:SetDisabledTexture("") end
+	end)
+	hooksecurefunc(Button, "SetDisabledTexture", function(f, t)
+		if t ~= "" then f:SetDisabledTexture("") end
+	end)
 	Button.isSkinned = true
 end
 
@@ -832,7 +883,9 @@ function AS:SkinTooltip(tooltip, scale)
 end
 
 function AS:SkinTexture(icon, backdrop)
-	icon:SetTexCoord(unpack(AS.TexCoords))
+	if AS:CheckOption('CropIcons') then
+		icon:SetTexCoord(unpack(AS.TexCoords))
+	end
 	if backdrop then
 		AS:CreateBackdrop(icon)
 	end

@@ -28,8 +28,6 @@ function AS:UpdateMedia()
 	AS.NormTex = C['media']['normTex']
 	AS.GlowTex = C['media']['glowTex']
 	AS.Font = C['media']['font']
-	AS.PixelFont = C['media']['pixelfont']
-	AS.ActionBarFont = [[Fonts\ARIALN.TTF]]
 	AS.UIScale = UIParent:GetScale()
 	AS.BackdropColor = C['general']['backdropcolor']
 	AS.BorderColor = C['general']['bordercolor']

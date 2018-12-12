@@ -89,6 +89,25 @@ local function LoadSkin()
 	BonusRollFrame.PromptFrame.Timer.Bar:SetVertexColor(75/255,  175/255, 76/255)
 	BonusRollFrame.BlackBackgroundHoist:StripTextures()
 	BonusRollFrame.PromptFrame.Timer:CreateBackdrop()
+	BonusRollLootWonFrame:StripTextures()
+	BonusRollLootWonFrame:SetTemplate('Transparent')
+	if not BonusRollLootWonFrame.Icon.b then
+		BonusRollLootWonFrame.Icon.b = CreateFrame('Frame', nil, BonusRollLootWonFrame)
+		BonusRollLootWonFrame.Icon.b:SetTemplate('Default')
+		BonusRollLootWonFrame.Icon.b:Point('TOPLEFT', BonusRollLootWonFrame.Icon, 'TOPLEFT', -2, 2)
+		BonusRollLootWonFrame.Icon.b:Point('BOTTOMRIGHT', BonusRollLootWonFrame.Icon, 'BOTTOMRIGHT', 2, -2)
+		BonusRollLootWonFrame.Icon:SetParent(BonusRollLootWonFrame.Icon.b)
+	end
+
+	BonusRollMoneyWonFrame:StripTextures()
+	BonusRollMoneyWonFrame:SetTemplate('Transparent')
+	if not BonusRollMoneyWonFrame.Icon.b then
+		BonusRollMoneyWonFrame.Icon.b = CreateFrame('Frame', nil, BonusRollMoneyWonFrame)
+		BonusRollMoneyWonFrame.Icon.b:SetTemplate('Default')
+		BonusRollMoneyWonFrame.Icon.b:Point('TOPLEFT', BonusRollMoneyWonFrame.Icon, 'TOPLEFT', -2, 2)
+		BonusRollMoneyWonFrame.Icon.b:Point('BOTTOMRIGHT', BonusRollMoneyWonFrame.Icon, 'BOTTOMRIGHT', 2, -2)
+		BonusRollMoneyWonFrame.Icon:SetParent(BonusRollMoneyWonFrame.Icon.b)
+	end
 
 	-- Lootframe
 	if C['loot']['lootframe'] then

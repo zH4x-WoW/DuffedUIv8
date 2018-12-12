@@ -91,8 +91,6 @@ local function LoadSkin()
 		if button then button:SkinButton() end
 	end
 
-	if IsAddOnLoaded('OptionHouse') then GameMenuButtonOptionHouse:SkinButton() end
-
 	local BlizzardHeader = {
 		'GameMenuFrame', 
 		'InterfaceOptionsFrame', 

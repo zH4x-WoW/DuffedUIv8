@@ -387,33 +387,6 @@ local function SkinButton(f, strip)
 	f:HookScript('OnLeave', SetOriginalBackdrop)
 end
 
-local function SkinIconButton(b, shrinkIcon)
-	if b.isSkinned then return end
-
-	b:StripTextures()
-	b:CreateBackdrop('Default', true)
-	b:StyleButton()
-
-	local icon = b.icon
-	if b:GetName() and _G[b:GetName()..'IconTexture'] then
-		icon = _G[b:GetName()..'IconTexture']
-	elseif b:GetName() and _G[b:GetName()..'Icon'] then
-		icon = _G[b:GetName()..'Icon']
-	end
-
-	if icon then
-		icon:SetTexCoord(.08, .88, .08, .88)
-		if shrinkIcon then
-			b.backdrop:SetAllPoints()
-			icon:SetInside(b)
-		else
-			b.backdrop:SetOutside(icon)
-		end
-		icon:SetParent(b.backdrop)
-	end
-	b.isSkinned = true
-end
-
 function SkinScrollBar(frame, thumbTrim)
 	if frame:GetName() then
 		if frame.Background then frame.Background:SetTexture(nil) end
@@ -505,32 +478,6 @@ function SkinScrollBar(frame, thumbTrim)
 	end
 end
 
--- Tab Regions
-local tabs = {
-	'LeftDisabled',
-	'MiddleDisabled',
-	'RightDisabled',
-	'Left',
-	'Middle',
-	'Right',
-}
-
-local function SkinTab(tab)
-	if not tab then return end
-	for _, object in pairs(tabs) do
-		local tex = _G[tab:GetName()..object]
-		if tex then tex:SetTexture(nil) end
-	end
-
-	if tab.GetHighlightTexture and tab:GetHighlightTexture() then tab:GetHighlightTexture():SetTexture(nil) else StripTextures(tab) end
-
-	tab.backdrop = CreateFrame('Frame', nil, tab)
-	SetTemplate(tab.backdrop, 'Default')
-	tab.backdrop:SetFrameLevel(tab:GetFrameLevel() - 1)
-	Point(tab.backdrop, 'TOPLEFT', 10, -3)
-	Point(tab.backdrop, 'BOTTOMRIGHT', -10, 3)
-end
-
 local function SkinNextPrevButton(btn, horizonal)
 	SetTemplate(btn, 'Default')
 	Size(btn, btn:GetWidth() - 7, btn:GetHeight() - 7)
@@ -551,21 +498,6 @@ local function SkinNextPrevButton(btn, horizonal)
 	if btn:GetDisabledTexture() then btn:GetDisabledTexture():SetAllPoints(btn:GetNormalTexture()) end
 	if btn:GetPushedTexture() then btn:GetPushedTexture():SetAllPoints(btn:GetNormalTexture()) end
 	btn:GetHighlightTexture():SetColorTexture(1, 1, 1, .3)
-	btn:GetHighlightTexture():SetAllPoints(btn:GetNormalTexture())
-end
-
-local function SkinRotateButton(btn)
-	SetTemplate(btn, 'Default')
-	Size(btn, btn:GetWidth() - 14, btn:GetHeight() - 14)
-
-	btn:GetNormalTexture():SetTexCoord(.3, .29, .3, .65, .69, .29, .69, .65)
-	btn:GetPushedTexture():SetTexCoord(.3, .29, .3, .65, .69, .29, .69, .65)
-	btn:GetHighlightTexture():SetColorTexture(1, 1, 1, .3)
-
-	btn:GetNormalTexture():ClearAllPoints()
-	Point(btn:GetNormalTexture(), 'TOPLEFT', 2, -2)
-	Point(btn:GetNormalTexture(), 'BOTTOMRIGHT', -2, 2)
-	btn:GetPushedTexture():SetAllPoints(btn:GetNormalTexture())
 	btn:GetHighlightTexture():SetAllPoints(btn:GetNormalTexture())
 end
 
@@ -594,52 +526,6 @@ local function SkinEditBox(frame)
 	if(frame.Left) then frame.Left:Kill() end
 	if(frame.Right) then frame.Right:Kill() end
 	if(frame.Middle) then frame.Middle:Kill() end
-end
-
-local function SkinDropDownBox(frame, width)
-	local button = _G[frame:GetName()..'Button']
-	if not width then width = 155 end
-
-	frame:StripTextures()
-	frame:Width(width)
-
-	_G[frame:GetName()..'Text']:ClearAllPoints()
-	_G[frame:GetName()..'Text']:Point('RIGHT', button, 'LEFT', -2, 0)
-
-	button:ClearAllPoints()
-	button:Point('RIGHT', frame, 'RIGHT', -10, 3)
-	hooksecurefunc(button, 'SetPoint', function(self, point, attachTo, anchorPoint, xOffset, yOffset, noReset)
-		if not noReset then
-			button:ClearAllPoints()
-			button:SetPoint('RIGHT', frame, 'RIGHT', -10, 3, true)
-		end
-	end)
-	button.SetPoint = D['Dummy']
-
-	button:SkinNextPrevButton(true)
-
-	frame:CreateBackdrop('Default')
-	frame.backdrop:Point('TOPLEFT', 20, -2)
-	frame.backdrop:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
-end
-
-local function SkinDropDownBoxLong(frame, width)
-	local button = _G[frame:GetName()..'Button']
-
-	StripTextures(frame)
-
-	_G[frame:GetName()..'Text']:ClearAllPoints()
-	Point(_G[frame:GetName()..'Text'], 'RIGHT', button, 'LEFT', -2, 0)
-
-	button:ClearAllPoints()
-	Point(button, 'RIGHT', frame, 'RIGHT', -10, 3)
-	button.SetPoint = D['Dummy']
-
-	SkinNextPrevButton(button, true)
-
-	CreateBackdrop(frame, 'Default')
-	Point(frame.backdrop, 'TOPLEFT', 20, -2)
-	Point(frame.backdrop, 'BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
 end
 
 local function SkinCheckBox(frame)
@@ -675,258 +561,6 @@ local function SkinCloseButton(f, point)
 	f.t:SetText('x')
 end
 
-local function SkinSlideBar(frame, height, movetext)
-	frame:SetTemplate( 'Default' )
-	frame:SetBackdropColor( 0, 0, 0, .8 )
-
-	if not height then height = frame:GetHeight() end
-
-	if movetext then
-		if(_G[frame:GetName() .. 'Low']) then _G[frame:GetName() .. 'Low']:Point('BOTTOM', 0, -18) end
-		if(_G[frame:GetName() .. 'High']) then _G[frame:GetName() .. 'High']:Point('BOTTOM', 0, -18) end
-		if(_G[frame:GetName() .. 'Text']) then _G[frame:GetName() .. 'Text']:Point('TOP', 0, 19) end
-	end
-
-	_G[frame:GetName()]:SetThumbTexture( [[Interface\AddOns\DuffedUI\media\textures\blank.tga]] )
-	_G[frame:GetName()]:GetThumbTexture():SetVertexColor(unpack( C['media']['bordercolor']))
-	if( frame:GetWidth() < frame:GetHeight() ) then
-		frame:Width(height)
-		_G[frame:GetName()]:GetThumbTexture():Size(frame:GetWidth(), frame:GetWidth() + 4)
-	else
-		frame:Height(height)
-		_G[frame:GetName()]:GetThumbTexture():Size(height + 4, height)
-	end
-end
-
-function SkinIcon(icon, parent)
-	parent = parent or icon:GetParent();
-
-	icon:SetTexCoord(unpack(D['IconCoord']))
-	parent:CreateBackdrop('Default')
-	icon:SetParent(parent.backdrop)
-	parent.backdrop:SetOutside(icon)
-end
-
-function SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameNameOverride)
-	assert(frame, 'HandleIconSelectionFrame: frame argument missing')
-	assert(numIcons and type(numIcons) == 'number', 'HandleIconSelectionFrame: numIcons argument missing or not a number')
-	assert(buttonNameTemplate and type(buttonNameTemplate) == 'string', 'HandleIconSelectionFrame: buttonNameTemplate argument missing or not a string')
-
-	local frameName = frameNameOverride or frame:GetName()
-	local scrollFrame = _G[frameName..'ScrollFrame']
-	local editBox = _G[frameName..'EditBox']
-	local okayButton = _G[frameName..'OkayButton'] or _G[frameName..'Okay']
-	local cancelButton = _G[frameName..'CancelButton'] or _G[frameName..'Cancel']
-
-	frame:StripTextures()
-	frame.BorderBox:StripTextures()
-	editBox:DisableDrawLayer('BACKGROUND')
-	frame:SetTemplate('Transparent')
-	frame:Height(frame:GetHeight() + 10)
-	okayButton:SkinButton()
-	cancelButton:SkinButton()
-	editBox:SkinEditBox()
-	cancelButton:ClearAllPoints()
-	cancelButton:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -5, 5)
-	for i = 1, numIcons do
-		local button = _G[buttonNameTemplate..i]
-		local icon = _G[button:GetName()..'Icon']
-		button:StripTextures()
-		button:SetTemplate('Default')
-		button:StyleButton(true)
-		icon:SetInside()
-		icon:SetTexCoord(unpack(D['IconCoord']))
-	end
-end
-
-function SkinMaxMinFrame(Frame)
-	Frame:StripTextures(true)
-
-	for _, name in pairs({"MaximizeButton", "MinimizeButton"}) do
-		local button = Frame[name]
-
-		if button then
-			button:SetSize(16, 16)
-			button:ClearAllPoints()
-			button:SetPoint("CENTER")
-			button:SetHitRectInsets(1, 1, 1, 1)
-			button:StripTextures(nil, true)
-			button:SetTemplate()
-
-			button.Text = button:CreateFontString(nil, "OVERLAY")
-			button.Text:SetFont([[Interface\AddOns\DuffedUI\media\fonts\Arial.ttf]], 12)
-			button.Text:SetText(name == "MaximizeButton" and "▲" or "▼")
-			button.Text:SetPoint("CENTER", 0, 0)
-
-			button:HookScript('OnShow', function(self)
-				if not self:IsEnabled() then
-					self.Text:SetTextColor(.3, .3, .3)
-				end
-			end)
-
-			button:HookScript('OnEnter', SetModifiedBackdrop)
-			button:HookScript('OnLeave', SetOriginalBackdrop)
-		end
-	end
-end
-
-function SkinIconButton(Button, ShrinkIcon)
-	if Button.isSkinned then return end
-
-	local Icon, Texture
-	local ButtonName = Button:GetName()
-
-	if Button.icon then
-		Icon = Button.icon
-		Texture = Button.icon:GetTexture()
-	elseif Button.Icon then
-		Icon = Button.Icon
-		Texture = Button.Icon:GetTexture()
-	elseif ButtonName then
-		if _G[ButtonName..'IconTexture'] then
-			Icon = _G[ButtonName..'IconTexture']
-			Texture = _G[ButtonName..'IconTexture']:GetTexture()
-		elseif _G[ButtonName..'Icon'] then
-			Icon = _G[ButtonName..'Icon']
-			Texture = _G[ButtonName..'Icon']:GetTexture()
-		end
-	end
-
-	if Icon then
-		StripTextures(Button)
-		SetTemplate(Button)
-		StyleButton(Button)
-		Icon:SetTexture(Texture)
-		Icon:SetTexCoord(.08, .88, .08, .88)
-		Icon:SetInside(Button)
-		Button.isSkinned = true
-	end
-end
-
-function SkinStatusBar(frame, ClassColor)
-	frame:StripTextures()
-	frame:CreateBackdrop()
-	frame:SetStatusBarTexture(C['media']['normTex'])
-	if ClassColor then
-		local color = RAID_CLASS_COLORS[D['Class']]
-		frame:SetStatusBarColor(color.r, color.g, color.b)
-	end
-end
-
-function SkinInsetFrameTemplate(frame)
-	if frame.InsetBorderTop then frame.InsetBorderTop:Hide() end
-	if frame.InsetBorderTopLeft then frame.InsetBorderTopLeft:Hide() end
-	if frame.InsetBorderTopRight then frame.InsetBorderTopRight:Hide() end
-
-	if frame.InsetBorderBottom then frame.InsetBorderBottom:Hide() end
-	if frame.InsetBorderBottomLeft then frame.InsetBorderBottomLeft:Hide() end
-	if frame.InsetBorderBottomRight then frame.InsetBorderBottomRight:Hide() end
-
-	if frame.InsetBorderLeft then frame.InsetBorderLeft:Hide() end
-	if frame.InsetBorderRight then frame.InsetBorderRight:Hide() end
-
-	if frame.Bg then frame.Bg:Hide() end
-end
-
-function SkinScrollSlider(Slider, thumbTrim)
-	local parent = Slider:GetParent()
-	if not parent then return end
-	Slider:SetPoint("TOPLEFT", parent, "TOPRIGHT", 0, -17)
-	Slider:SetPoint("BOTTOMLEFT", parent, "BOTTOMRIGHT", 0, 17)
-
-	if Slider.trackBG then Slider.trackBG:Hide() end
-	if Slider.ScrollBarTop then Slider.ScrollBarTop:Hide() end
-	if Slider.ScrollBarMiddle then Slider.ScrollBarMiddle:Hide() end
-	if Slider.ScrollBarBottom then Slider.ScrollBarBottom:Hide() end
-	if Slider.Top then Slider.Top:SetTexture(nil) end
-	if Slider.Bottom then Slider.Bottom:SetTexture(nil) end
-
-	if not Slider.trackbg then
-		Slider.trackbg = CreateFrame("Frame", nil, Slider)
-		Slider.trackbg:Point("TOPLEFT", Slider.ScrollUp, "BOTTOMLEFT", 0, -1)
-		Slider.trackbg:Point("BOTTOMRIGHT", Slider.ScrollDown, "TOPRIGHT", 0, 1)
-		Slider.trackbg:SetTemplate("Transparent")
-	end
-
-	if Slider.ScrollUp and Slider.ScrollDown then
-		if not Slider.ScrollUp.icon then
-			SkinNextPrevButton(Slider.ScrollUp, true, true)
-			Slider.ScrollUp:Size(Slider.ScrollUp:GetWidth() + 7, Slider.ScrollUp:GetHeight() + 7)
-		end
-
-		if not Slider.ScrollDown.icon then
-			SkinNextPrevButton(Slider.ScrollDown, true)
-			Slider.ScrollDown:Size(Slider.ScrollDown:GetWidth() + 7, Slider.ScrollDown:GetHeight() + 7)
-		end
-	end
-
-	if Slider.ScrollUpButton  and Slider.ScrollDownButton then
-		if not Slider.ScrollUpButton.icon then
-			SkinNextPrevButton(Slider.ScrollUpButton, true, true)
-			Slider.ScrollUpButton:Size(Slider.ScrollUpButton:GetWidth() + 9, Slider.ScrollUpButton:GetHeight() + 7) -- Not perfect
-		end
-
-		if not Slider.ScrollDownButton.icon then
-			SkinNextPrevButton(Slider.ScrollDownButton, true)
-			Slider.ScrollDownButton:Size(Slider.ScrollDownButton:GetWidth() + 7, Slider.ScrollDownButton:GetHeight() + 7)
-		end
-	end
-
-	if parent.scrollUp and parent.scrollDown then
-		if not parent.scrollUp.icon then
-			SkinNextPrevButton(parent.scrollUp, true, true)
-			parent.scrollUp:Size(parent.scrollUp:GetWidth() + 9, parent.scrollUp:GetHeight() + 7) -- Not perfect
-		end
-
-		if not parent.scrollDown.icon then
-			SkinNextPrevButton(parent.scrollDown, true)
-			parent.scrollDown:Size(parent.scrollDown:GetWidth() + 9, parent.scrollDown:GetHeight() + 7) -- Not perfect
-		end
-	end
-
-	if Slider.thumbTexture then
-		if not thumbTrim then thumbTrim = 3 end
-		Slider.thumbTexture:SetTexture(nil)
-		if not Slider.thumbbg then
-			Slider.thumbbg = CreateFrame("Frame", nil, Slider)
-			Slider.thumbbg:Point("TOPLEFT", Slider.thumbTexture, "TOPLEFT", 2, -thumbTrim)
-			Slider.thumbbg:Point("BOTTOMRIGHT", Slider.thumbTexture, "BOTTOMRIGHT", -2, thumbTrim)
-			Slider.thumbbg:SetTemplate("Default", true, true)
-			--Slider.thumbbg.backdropTexture:SetVertexColor(0.6, 0.6, 0.6)
-			if Slider.trackbg then
-				Slider.thumbbg:SetFrameLevel(Slider.trackbg:GetFrameLevel()+1)
-			end
-		end
-	end
-
-	if Slider.ThumbTexture then
-		if not thumbTrim then thumbTrim = 3 end
-		Slider.ThumbTexture:SetTexture(nil)
-		if not Slider.thumbbg then
-			Slider.thumbbg = CreateFrame("Frame", nil, Slider)
-			Slider.thumbbg:Point("TOPLEFT", Slider.ThumbTexture, "TOPLEFT", 2, -thumbTrim)
-			Slider.thumbbg:Point("BOTTOMRIGHT", Slider.ThumbTexture, "BOTTOMRIGHT", -2, thumbTrim)
-			Slider.thumbbg:SetTemplate("Default", true, true)
-			Slider.thumbbg.backdropTexture:SetVertexColor(0.6, 0.6, 0.6)
-			if Slider.trackbg then
-				Slider.thumbbg:SetFrameLevel(Slider.trackbg:GetFrameLevel()+1)
-			end
-		end
-	end
-end
-
-function SkinCropIcon(texture, parent)
-	texture:SetTexCoord(unpack(D['IconCoord']))
-	if parent then
-		local layer, subLevel = texture:GetDrawLayer()
-		local iconBorder = parent:CreateTexture(nil, layer, nil, subLevel - 1)
-		iconBorder:SetPoint("TOPLEFT", texture, -1, 1)
-		iconBorder:SetPoint("BOTTOMRIGHT", texture, 1, -1)
-		iconBorder:SetColorTexture(0, 0, 0)
-		return iconBorder
-	end
-end
-
 -- merge api
 local function addapi(object)
 	local mt = getmetatable(object).__index
@@ -945,32 +579,17 @@ local function addapi(object)
 	if not object.FontString then mt.FontString = FontString end
 	if not object.HighlightUnit then mt.HighlightUnit = HighlightUnit end
 	if not object.SkinButton then mt.SkinButton = SkinButton end
-	if not object.SkinIconButton then mt.SkinIconButton = SkinIconButton end
 	if not object.SkinScrollBar then mt.SkinScrollBar = SkinScrollBar end
-	if not object.SkinTab then mt.SkinTab = SkinTab end
 	if not object.SkinNextPrevButton then mt.SkinNextPrevButton = SkinNextPrevButton end
-	if not object.SkinRotateButton then mt.SkinRotateButton = SkinRotateButton end
 	if not object.SkinEditBox then mt.SkinEditBox = SkinEditBox end
-	if not object.SkinDropDownBox then mt.SkinDropDownBox = SkinDropDownBox end
-	if not object.SkinDropDownBoxLong then mt.SkinDropDownBoxLong = SkinDropDownBoxLong end
 	if not object.SkinCheckBox then mt.SkinCheckBox = SkinCheckBox end
 	if not object.SkinCloseButton then mt.SkinCloseButton = SkinCloseButton end
-	if not object.SkinSlideBar then mt.SkinSlideBar = SkinSlideBar end
-	if not object.SkinIcon then mt.SkinIcon = SkinIcon end
-	if not object.SkinIconSelectionFrame then mt.SkinIconSelectionFrame = SkinIconSelectionFrame end
-	if not object.SkinMaxMinFrame then mt.SkinMaxMinFrame = SkinMaxMinFrame end
-	if not object.SkinIconButton then mt.SkinIconButton = SkinIconButton end
-	if not object.SkinStatusBar then mt.SkinStatusBar = SkinStatusBar end
-	if not object.HideInsets then mt.HideInsets = HideInsets end
 	if not object.CreateOverlay then mt.CreateOverlay = CreateOverlay end
 	if not object.FadeIn then mt.FadeIn = FadeIn end
 	if not object.FadeOut then mt.FadeOut = FadeOut end
 	if not object.SetAnimation then mt.SetAnimation = SetAnimation end
 	if not object.AnimCallback then mt.AnimCallback = AnimCallback end
 	if not object.AnimOnFinished then mt.AnimOnFinished = AnimOnFinished end
-	if not object.SkinInsetFrameTemplate then mt.SkinInsetFrameTemplate = SkinInsetFrameTemplate end
-	if not object.SkinScrollSlider then mt.SkinScrollSlider = SkinScrollSlider end
-	if not object.SkinCropIcon then mt.SkinCropIcon = SkinCropIcon end
 end
 
 local handled = {['Frame'] = true}

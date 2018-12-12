@@ -371,7 +371,6 @@ function Bags:CreateContainer(storagetype, ...)
 
 		for i = 1, 7 do
 			local Bag = BankSlotsFrame['Bag'..i]
-			Bag.HighlightFrame:Kill()
 			Bag:SetParent(BankBagsContainer)
 			Bag:SetWidth(ButtonSize)
 			Bag:SetHeight(ButtonSize)
