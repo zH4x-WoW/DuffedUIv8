@@ -1,6 +1,8 @@
 -- All codingfame to Shestak
 local D, C, L = unpack(select(2, ...))
 
+local Version = tonumber(GetAddOnMetadata('DuffedUI', 'Version'))
+
 _G.StaticPopupDialogs['OUTDATED'] = {
 	text = 'Download DuffedUI',
 	button1 = OKAY,
@@ -27,15 +29,16 @@ local check = function(self, event, prefix, message, channel, sender)
 			self:UnregisterEvent('CHAT_MSG_ADDON')
 		end
 	else
-		if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
-			C_ChatInfo.SendAddonMessage('DuffedUIVersion', tonumber(D['Version']), 'INSTANCE_CHAT')
-		elseif IsInRaid(LE_PARTY_CATEGORY_HOME) then
-			C_ChatInfo.SendAddonMessage('DuffedUIVersion', tonumber(D['Version']), 'RAID')
-		elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
-			C_ChatInfo.SendAddonMessage('DuffedUIVersion', tonumber(D['Version']), 'PARTY')
+		local Channel
+		if IsInRaid() then
+			Channel = (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'RAID'
+		elseif IsInGroup() then
+			Channel = (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'PARTY'
 		elseif IsInGuild() then
-			C_ChatInfo.SendAddonMessage('DuffedUIVersion', tonumber(D['Version']), 'GUILD')
+			Channel = 'GUILD'
 		end
+
+		if Channel then C_ChatInfo.SendAddonMessage('DuffedUIVersion', Version, Channel) end
 	end
 end
 
