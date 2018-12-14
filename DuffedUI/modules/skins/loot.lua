@@ -3,6 +3,8 @@ local D, C, L = unpack(select(2, ...))
 local function LoadSkin()
 	-- loot history frame
 	LootHistoryFrame:StripTextures()
+	LootFrame.NineSlice:Kill()
+	LootFrameInset.NineSlice:Kill()
 	LootHistoryFrame.CloseButton:SkinCloseButton()
 	LootHistoryFrame:StripTextures()
 	LootHistoryFrame:SetTemplate('Transparent')
