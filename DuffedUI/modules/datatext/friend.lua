@@ -56,7 +56,7 @@ end
 
 local function whisperClick(self, name, bnet)
 	menuFrame:Hide()
-	if bnet then ChatFrame_SendSmartTell(name) else SetItemRef( 'player:'..name, ('|Hplayer:%1$s|h[%1$s]|h'):format(name), 'LeftButton' ) end
+	if bnet then ChatFrame_SendBNetTell(name) else SetItemRef( 'player:'..name, ('|Hplayer:%1$s|h[%1$s]|h'):format(name), 'LeftButton' ) end
 end
 
 local levelNameString = '|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r'
