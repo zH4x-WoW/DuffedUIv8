@@ -15,13 +15,13 @@ local function ShortenValue(value)
 	end
 end
 
-oUF.Tags.Events['DuffedUI:perchp'] = 'UNIT_HEALTH'
+oUF.Tags.Events['DuffedUI:perchp'] = 'UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH UNIT_CONNECTION PLAYER_FLAGS_CHANGED'
 oUF.Tags.Methods['DuffedUI:perchp'] = function(unit)
 	local m = UnitHealthMax(unit)
 	if(m == 0) then
 		return 0
 	else
-		return D['PanelColor']..math.floor(UnitHealth(unit) / m * 100 + .5)..'%'
+		return D['PanelColor']..math.floor(UnitHealth(unit) / m * 100 + 0.5)..'%'
 	end
 end
 
