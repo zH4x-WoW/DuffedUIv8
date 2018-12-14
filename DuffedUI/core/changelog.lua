@@ -9,7 +9,7 @@ local ChangeLogData = {
 		--"• ",
 	" ",
 	"Notes:",
-		"Version check from UI is currently not avaiable.",
+		"Nothing Important",
 }
 
 local function ModifiedString(string)
