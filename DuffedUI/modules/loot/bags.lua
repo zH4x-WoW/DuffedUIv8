@@ -88,6 +88,7 @@ function Bags:HideBlizzard()
 	BankPortraitTexture:Hide()
 	BagHelpBox:Kill()
 	BankFrame:EnableMouse(false)
+	BankFrame.NineSlice:Kill()
 
 	for i = 1, 12 do
 		local CloseButton = _G['ContainerFrame'..i..'CloseButton']
