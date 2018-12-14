@@ -1,5 +1,6 @@
 local PA = _G.ProjectAzilroka
 local RR = PA:NewModule('ReputationReward', 'AceEvent-3.0', 'AceTimer-3.0', 'AceHook-3.0')
+local AS
 PA.RR = RR
 
 local _G = _G
@@ -10,7 +11,6 @@ local tinsert = tinsert
 local wipe = wipe
 local format = format
 
-local CreateFrame = _G.CreateFrame
 local GetFactionInfo = _G.GetFactionInfo
 local GetFactionInfoByID = _G.GetFactionInfoByID
 local GetNumFactions = _G.GetNumFactions
@@ -63,7 +63,7 @@ function RR:GetFactionHeader(factionID)
 end
 
 function RR:GetBonusReputation(amtBase, factionID)
-	local mult = PA.MyRace == 'Human' and 1.1 or 1
+	local mult = 1
 	local rep = amtBase
 
 	if factionID == 609 or factionID == 576 or factionID == 529 then
@@ -98,40 +98,40 @@ function RR:Show()
 	local numQuestRewards, numQuestChoices, numQuestCurrencies = 0, 0, 0
 
 	if ( QuestInfoFrame.questLog ) then
-		local questID = select(8, GetQuestLogTitle(GetQuestLogSelection()));
+		local questID = select(8, GetQuestLogTitle(GetQuestLogSelection()))
 		if C_QuestLog.ShouldShowQuestRewards(questID) then
-			numQuestRewards = GetNumQuestLogRewards();
-			numQuestChoices = GetNumQuestLogChoices();
-			numQuestCurrencies = GetNumQuestLogRewardCurrencies();
+			numQuestRewards = GetNumQuestLogRewards()
+			numQuestChoices = GetNumQuestLogChoices()
+			numQuestCurrencies = GetNumQuestLogRewardCurrencies()
 		end
 	else
-		numQuestRewards = GetNumQuestRewards();
-		numQuestChoices = GetNumQuestChoices();
-		numQuestCurrencies = GetNumRewardCurrencies();
+		numQuestRewards = GetNumQuestRewards()
+		numQuestChoices = GetNumQuestChoices()
+		numQuestCurrencies = GetNumRewardCurrencies()
 	end
 
 	local rewardsFrame = QuestInfoFrame.rewardsFrame
 	local rewardButtons = rewardsFrame.RewardButtons
 
-	local totalRewards = numQuestRewards + numQuestChoices + numQuestCurrencies;
-	local buttonHeight = rewardsFrame.RewardButtons[1]:GetHeight();
+	local totalRewards = numQuestRewards + numQuestChoices + numQuestCurrencies
+	local buttonHeight = rewardsFrame.RewardButtons[1]:GetHeight()
 	local lastFrame = rewardsFrame.ItemReceiveText
 
 	if ( QuestInfoFrame.mapView ) then
 		if rewardsFrame.XPFrame:IsShown() then
-			lastFrame = rewardsFrame.XPFrame;
+			lastFrame = rewardsFrame.XPFrame
 		end
 		if rewardsFrame.MoneyFrame:IsShown() then
-			lastFrame = rewardsFrame.MoneyFrame;
+			lastFrame = rewardsFrame.MoneyFrame
 		end
 	else
 		if rewardsFrame.XPFrame:IsShown() then
-			lastFrame = rewardsFrame.XPFrame;
+			lastFrame = rewardsFrame.XPFrame
 		end
 	end
 
 	if rewardsFrame.SkillPointFrame:IsShown() then
-		lastFrame = rewardsFrame.SkillPointFrame;
+		lastFrame = rewardsFrame.SkillPointFrame
 	end
 
 	local index
@@ -142,10 +142,14 @@ function RR:Show()
 
 	for i = 1, numRepFactions do
 		local factionID, amtBase = GetQuestLogRewardFactionInfo(i)
-		local factionName, _, standingID, _, _, _, AtWar, ToggleAtWar, isHeader = GetFactionInfoByID(factionID)
+		local factionName, _, standingID, barMin, barMax, _, AtWar, ToggleAtWar, isHeader = GetFactionInfoByID(factionID)
 
-		if factionName and (AtWar and ToggleAtWar or (not AtWar)) then
+		if factionName and (AtWar and ToggleAtWar or (not AtWar)) and (not (barMin == barMax)) then
 			amtBase = floor(amtBase / 100)
+
+			if PA.MyRace == 'Human' then
+				amtBase = amtBase * 1.1
+			end
 
 			local amtBonus = RR:GetBonusReputation(amtBase, factionID)
 
@@ -173,9 +177,13 @@ function RR:Show()
 		questItem.objectType = nil
 
 		questItem.Name:SetText(Info.Name)
-		questItem.Icon:SetTexture(UnitFactionGroup('player') and ('Interface\\Icons\\PVPCurrency-Honor-%s'):format(UnitFactionGroup('player')))
+		questItem.Icon:SetTexture(PA.MyFaction and ('Interface\\Icons\\PVPCurrency-Honor-%s'):format(PA.MyFaction))
 --		questItem.Icon:SetTexture(([[Interface\Icons\Achievement_Reputation_0%d]]):format(Info.Standing or 1))
 		questItem.Count:SetText(Info.Base + Info.Bonus)
+
+		if PA.AddOnSkins and questItem.Icon.Backdrop then
+			questItem.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+		end
 
 		if Info.Base < 0 then
 			questItem.Count:SetTextColor(1, 0, 0)
@@ -187,11 +195,11 @@ function RR:Show()
 
 		if ( buttonIndex > 1 ) then
 			if ( mod(buttonIndex, 2) == 1 ) then
-				questItem:SetPoint('TOPLEFT', rewardButtons[index - 2], 'BOTTOMLEFT', 0, -2)
-				Height = Height + buttonHeight + 2;
+				questItem:SetPoint('TOPLEFT', rewardButtons[index - 2], 'BOTTOMLEFT', 0, -REWARDS_SECTION_OFFSET)
+				Height = Height + buttonHeight + REWARDS_SECTION_OFFSET
 				lastFrame = questItem
 			else
-				questItem:SetPoint('TOPLEFT', rewardButtons[index - 1], 'TOPRIGHT', 1, -2)
+				questItem:SetPoint('TOPLEFT', rewardButtons[index - 1], 'TOPRIGHT', 2, 0)
 			end
 		else
 			questItem:SetPoint('TOPLEFT', lastFrame, 'BOTTOMLEFT', 0, -REWARDS_SECTION_OFFSET)
@@ -206,14 +214,77 @@ function RR:Show()
 	QuestInfoFrame.rewardsFrame:SetHeight(Height)
 end
 
+function RR:GetOptions()
+	local Options = {
+		type = 'group',
+		name = RR.Title,
+		desc = RR.Description,
+		get = function(info) return RR.db[info[#info]] end,
+		set = function(info, value) RR.db[info[#info]] = value end,
+		args = {
+			Header = {
+				order = 1,
+				type = 'header',
+				name = PA:Color(RR.Title),
+			},
+			AuthorHeader = {
+				order = 2,
+				type = 'header',
+				name = PA.ACL['Authors:'],
+			},
+			Authors = {
+				order = 3,
+				type = 'description',
+				name = RR.Authors,
+				fontSize = 'large',
+			},
+			CreditsHeader = {
+				order = 4,
+				type = 'header',
+				name = PA.ACL['Credits:'],
+			},
+			Credits = {
+				order = 5,
+				type = 'description',
+				name = RR.Credits,
+				fontSize = 'large',
+			},
+		},
+	}
+
+	PA.Options.args.ReputationReward = Options
+end
+
+function RR:BuildProfile()
+	PA.Defaults.profile['ReputationReward'] = { ['Enable'] = true }
+
+	PA.Options.args.general.args.ReputationReward = {
+		type = 'toggle',
+		name = RR.Title,
+		desc = RR.Description,
+	}
+end
+
 function RR:Initialize()
+	RR.db = PA.db.ReputationReward
+
+	if RR.db.Enable ~= true then
+		return
+	end
+
+	if PA.AddOnSkins then
+		AS = unpack(AddOnSkins)
+	end
+
+	RR:GetOptions()
+
 	RR.ReputationInfo = {}
 
 	-- ID = { bonus = .%, faction = factionID or 0 }
 	RR.AuraInfo = {
 		[61849] = { bonus = .1, faction = 0 },		--
 		[24705] = { bonus = .1, faction = 0 },		--
-	    [95987] = { bonus = .1, faction = 0 },		--
+		[95987] = { bonus = .1, faction = 0 },		--
 		[39913] = { bonus = .1, faction = 947 },	-- Thrallmar
 		[39911] = { bonus = .1, faction = 946 },	-- Honor Hold
 		[39953] = { bonus = .1, faction = 1031 },	-- Sha'tar

@@ -368,6 +368,7 @@ function AS:Blizzard_WorldMap()
 	AS:SkinCloseButton(WorldMapFrameCloseButton)
 
 	AS:Kill(WorldMapFrame.BorderFrame.Tutorial)
+	AS:Kill(WorldMapFrame.BorderFrame.NineSlice)
 
 	AS:StripTextures(WorldMapFrame.NavBar)
 	AS:StripTextures(WorldMapFrame.NavBar.overlay)

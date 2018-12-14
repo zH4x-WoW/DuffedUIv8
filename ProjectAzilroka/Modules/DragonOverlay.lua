@@ -33,27 +33,27 @@ DO.Textures = {
 }
 
 function DO:SetOverlay()
-	local Points = 'DragonPoints'
-	local TargetClass = UnitClassification('target')
-	local Texture = DO.Textures[self.db[TargetClass]]
+	local Points
 
 	if UnitIsPlayer('target') and self.db['ClassIcon'] then
-		TargetClass = select(2, UnitClass('target'))
 		self.frame:SetSize(DO.db.IconSize, DO.db.IconSize)
 		self.frame.Texture:SetTexture([[Interface\WorldStateFrame\Icons-Classes]])
-		self.frame.Texture:SetTexCoord(unpack(CLASS_ICON_TCOORDS[TargetClass]))
+		self.frame.Texture:SetTexCoord(unpack(CLASS_ICON_TCOORDS[select(2, UnitClass('target'))]))
 		Points = 'ClassIconPoints'
 	else
 		self.frame:SetSize(DO.db.Width, DO.db.Height)
-		self.frame.Texture:SetTexture(Texture)
+		self.frame.Texture:SetTexture(DO.Textures[self.db[UnitClassification('target')]])
 		self.frame.Texture:SetTexCoord(self.db['FlipDragon'] and 1 or 0, self.db['FlipDragon'] and 0 or 1, 0, 1)
+		Points = 'DragonPoints'
 	end
 
-	self.frame:ClearAllPoints()
-	self.frame:SetPoint(self.db[Points]['point'], _G[self.db[Points]['relativeTo']].Health, self.db[Points]['relativePoint'], self.db[Points]['xOffset'], self.db[Points]['yOffset'])
-	self.frame:SetParent(self.db[Points]['relativeTo'])
-	self.frame:SetFrameStrata(strsub(self.db['Strata'], 3))
-	self.frame:SetFrameLevel(self.db['Level'])
+	if _G[self.db[Points]['relativeTo']] then
+		self.frame:ClearAllPoints()
+		self.frame:SetPoint(self.db[Points]['point'], _G[self.db[Points]['relativeTo']].Health, self.db[Points]['relativePoint'], self.db[Points]['xOffset'], self.db[Points]['yOffset'])
+		self.frame:SetParent(self.db[Points]['relativeTo'])
+		self.frame:SetFrameStrata(strsub(self.db['Strata'], 3))
+		self.frame:SetFrameLevel(self.db['Level'])
+	end
 end
 
 function DO:GetOptions()
@@ -61,7 +61,6 @@ function DO:GetOptions()
 		type = 'group',
 		name = DO.Title,
 		desc = DO.Description,
-		order = 103,
 		args = {
 			header = {
 				order = 1,
@@ -130,6 +129,22 @@ function DO:GetOptions()
 						type = 'description',
 						name = '',
 					},
+					Dragons = {
+						order = -6,
+						type = 'group',
+						name = 'Dragons',
+						guiInline = true,
+						get = function(info) return DO.db[info[#info]] end,
+						set = function(info, value) DO.db[info[#info]] = value DO:SetOverlay() end,
+						args = {},
+					},
+					textures = {
+						order = -5,
+						type = 'group',
+						name = 'Preview',
+						guiInline = true,
+						args = {},
+					},
 					AuthorHeader = {
 						order = -4,
 						type = 'header',
@@ -157,10 +172,9 @@ function DO:GetOptions()
 		},
 	}
 
-	local Order = 8
 	for Option, Name in pairs({ ['ClassIconPoints'] = PA.ACL['Class Icon Points'], ['DragonPoints'] = PA.ACL['Dragon Points'] }) do
 		Options.args.general.args[Option] = {
-			order = Order,
+			order = 8,
 			type = 'group',
 			name = Name,
 			guiInline = true,
@@ -231,8 +245,9 @@ function DO:GetOptions()
 				end
 			end
 		end
-		Order = Order + 1
 	end
+
+	Options.args.general.args.ClassIconPoints.disabled = function() return (not DO.db.ClassIcon) end
 
 	local MenuItems = {
 		['elite'] = PA.ACL['Elite'],
@@ -241,8 +256,9 @@ function DO:GetOptions()
 		['worldboss'] = PA.ACL['World Boss'],
 	}
 
+	local Order = 1
 	for Option, Name in pairs(MenuItems) do
-		Options.args.general.args[Option] = {
+		Options.args.general.args.Dragons.args[Option] = {
 			order = Order,
 			name = Name,
 			type = "select",
@@ -264,86 +280,88 @@ function DO:GetOptions()
 				['ClassicBoss'] = 'Classic Boss',
 			},
 		}
-		Options.args.general.args[Option..'Desc'] = {
-			order = Order + 1,
-			type = 'description',
-			name = '',
-			image = function() return DO.Textures[DO.db[Option]], 128, 32 end,
-			imageCoords = function() return {DO.db[Option]['FlipDragon'] and 1 or 0, DO.db[Option]['FlipDragon'] and 0 or 1, 0, 1} end,
+		Order = Order + 1
+	end
+
+	Order = 1
+	for Option, Name in pairs(MenuItems) do
+		Options.args.general.args.textures.args[Option] = {
+			order = Order,
+			type = 'execute',
+			name = Name,
+			image = function() return DO.Textures[DO.db[Option]], strfind(DO.db[Option], 'Classic') and 32 or 128, 32 end,
 		}
-		Order = Order + 2
+		Order = Order + 1
 	end
 
 	PA.Options.args.DragonOverlay = Options
 end
 
 function DO:BuildProfile()
-	local Defaults = {
-		profile = {
-			['Strata'] = '2-MEDIUM',
-			['Level'] = 12,
-			['IconSize'] = 32,
-			['Width'] = 128,
-			['Height'] = 64,
-			['worldboss'] = 'Chromatic',
-			['elite'] = 'HeavenlyGolden',
-			['rare'] = 'Onyx',
-			['rareelite'] = 'HeavenlyOnyx',
-			['ClassIcon'] = false,
-			['ClassIconPoints'] = {
-				['point'] = 'CENTER',
-				['relativeTo'] = 'oUF_Target',
-				['relativePoint'] = 'TOP',
-				['xOffset'] = 0,
-				['yOffset'] = 5,
-			},
-			['DragonPoints'] = {
-				['point'] = 'CENTER',
-				['relativeTo'] = 'oUF_Target',
-				['relativePoint'] = 'TOP',
-				['xOffset'] = 0,
-				['yOffset'] = 5,
-			},
-			['FlipDragon'] = false,
+	PA.Defaults.profile['DragonOverlay'] = {
+		['Enable'] = true,
+		['Strata'] = '3-MEDIUM',
+		['Level'] = 12,
+		['IconSize'] = 32,
+		['Width'] = 128,
+		['Height'] = 64,
+		['worldboss'] = 'Chromatic',
+		['elite'] = 'HeavenlyGolden',
+		['rare'] = 'Onyx',
+		['rareelite'] = 'HeavenlyOnyx',
+		['ClassIcon'] = false,
+		['FlipDragon'] = false,
+		['ClassIconPoints'] = {
+			['point'] = 'CENTER',
+			['relativeTo'] = 'oUF_Target',
+			['relativePoint'] = 'TOP',
+			['xOffset'] = 0,
+			['yOffset'] = 5,
+		},
+		['DragonPoints'] = {
+			['point'] = 'CENTER',
+			['relativeTo'] = 'oUF_Target',
+			['relativePoint'] = 'TOP',
+			['xOffset'] = 0,
+			['yOffset'] = 5,
 		},
 	}
 
-	for _, Option in pairs({'ClassIconPoints', 'DragonPoints' }) do
+	for _, Option in pairs({ 'ClassIconPoints', 'DragonPoints' }) do
 		if PA.Tukui then
-			Defaults.profile[Option].relativeTo = 'oUF_TukuiTarget'
+			PA.Defaults.profile['DragonOverlay'][Option].relativeTo = 'oUF_TukuiTarget'
 		end
 		if PA.ElvUI then
-			Defaults.profile[Option].relativeTo = 'ElvUF_Target'
+			PA.Defaults.profile['DragonOverlay'][Option].relativeTo = 'ElvUF_Target'
 		end
 		if PA.CUI then
-			Defaults.profile[Option].relativeTo = 'ChaoticUF_Target'
+			PA.Defaults.profile['DragonOverlay'][Option].relativeTo = 'ChaoticUF_Target'
 		end
 		if PA.AzilUI then
-			Defaults.profile[Option].relativeTo = 'oUF_AzilUITarget'
+			PA.Defaults.profile['DragonOverlay'][Option].relativeTo = 'oUF_AzilUITarget'
 		end
 	end
 
-	self.data = PA.ADB:New('DragonOverlayDB', Defaults)
-
-	self.data.RegisterCallback(self, 'OnProfileChanged', 'SetupProfile')
-	self.data.RegisterCallback(self, 'OnProfileCopied', 'SetupProfile')
-	self.db = self.data.profile
-end
-
-function DO:SetupProfile()
-	self.db = self.data.profile
+	PA.Options.args.general.args.DragonOverlay = {
+		type = 'toggle',
+		name = DO.Title,
+		desc = DO.Description,
+	}
 end
 
 function DO:Initialize()
-	DO:BuildProfile()
+	DO.db = PA.db['DragonOverlay']
+
+	if DO.db.Enable ~= true then
+		return
+	end
+
+	DO:GetOptions()
 
 	local frame = CreateFrame("Frame", 'DragonOverlayFrame', UIParent)
 	frame.Texture = frame:CreateTexture(nil, 'ARTWORK')
 	frame.Texture:SetAllPoints()
 	DO.frame = frame
 
-	DO:RegisterEvent('PLAYER_ENTERING_WORLD', 'SetupProfile')
 	DO:RegisterEvent('PLAYER_TARGET_CHANGED', 'SetOverlay')
-
-	DO:GetOptions()
 end

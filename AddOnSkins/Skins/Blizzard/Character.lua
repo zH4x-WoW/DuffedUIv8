@@ -1,14 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-local function IsMaxLevel()
-	if UnitLevel('player') >= 100 then return true end
-end
-
 function AS:Blizzard_Character()
-	if IsMaxLevel then
-		ToggleCharacter('TokenFrame')
-		ToggleCharacter('TokenFrame')
-	end
 	CHARACTERFRAME_EXPANDED_WIDTH = 580
 
 	AS:SkinFrame(CharacterFrame)

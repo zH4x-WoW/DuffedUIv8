@@ -7,8 +7,8 @@ local pairs, tinsert, tremove, select, unpack = pairs, tinsert, tremove, select,
 local strfind, strsub, strmatch = strfind, strsub, strmatch
 
 BrokerLDB.Title = '|cFF16C3F2Broker|r|cFFFFFFFFLDB|r'
-BrokerLDB.Description = 'Provides an overlay on UnitFrames for Boss, Elite, Rare and RareElite'
-BrokerLDB.Authors = 'Azilroka    Whiro'
+BrokerLDB.Description = 'Provides a Custom DataBroker Bar'
+BrokerLDB.Authors = 'Azilroka'
 
 function BrokerLDB:TextUpdate(_, Name, _, Data)
 	self.PluginObjects[Name]:SetText(Data)
@@ -22,7 +22,6 @@ function BrokerLDB:GetOptions()
 	local Options = {
 		type = 'group',
 		name = BrokerLDB['Title'],
-		order = 101,
 		args = {
 			header = {
 				order = 1,
@@ -55,14 +54,12 @@ function BrokerLDB:GetOptions()
 					PanelHeight = {
 						order = 6,
 						type = 'range',
-						width = 'full',
 						name = PA.ACL['Panel Height'],
 						min = 20, max = 40, step = 1,
 					},
 					PanelWidth = {
 						order = 8,
 						type = 'range',
-						width = 'full',
 						name = PA.ACL['Panel Width'],
 						min = 0, softMin = 140, max = 280, step = 1,
 					},
@@ -91,6 +88,17 @@ function BrokerLDB:GetOptions()
 						},
 					},
 				},
+			},
+			AuthorHeader = {
+				order = -4,
+				type = 'header',
+				name = PA.ACL['Authors:'],
+			},
+			Authors = {
+				order = -3,
+				type = 'description',
+				name = BrokerLDB.Authors,
+				fontSize = 'large',
 			},
 		},
 	}
@@ -135,8 +143,7 @@ function BrokerLDB:SlideOut()
 		self:AnimSlideIn(Slides)
 	end
 	self:AnimSlideIn(self.Frame)
-	self.Frame.Text:SetPoint('CENTER', self.Frame, -1, 0)
-	self.Frame.Text:SetText('◄')
+	self.Frame.Arrow:SetRotation(1.57)
 	self.Slide = 'Out'
 end
 
@@ -144,8 +151,7 @@ function BrokerLDB:SlideIn()
 	for _, Slides in pairs(self.Buttons) do
 		Slides:Hide()
 	end
-	self.Frame.Text:SetPoint('CENTER', self.Frame, 2, 0)
-	self.Frame.Text:SetText('►')
+	self.Frame.Arrow:SetRotation(-1.57)
 	self.Slide = 'In'
 end
 
@@ -310,29 +316,32 @@ function BrokerLDB:New(_, Name, Object)
 end
 
 function BrokerLDB:BuildProfile()
-	self.data = PA.ADB:New('SquareMinimapButtonsDB', {
-		profile = {
-			['PanelHeight'] = 20,
-			['PanelWidth'] = 140,
-			['MouseOver'] = false,
-			['ShowIcon'] = false,
-			['ShowText'] = true,
-			['Font'] = 'Tukui Pixel',
-			['FontSize'] = 12,
-			['FontFlag'] = 'MONOCHROMEOUTLINE',
-		},
-	})
-	self.data.RegisterCallback(self, 'OnProfileChanged', 'SetupProfile')
-	self.data.RegisterCallback(self, 'OnProfileCopied', 'SetupProfile')
-	self.db = self.data.profile
-end
+	PA.Defaults.profile['BrokerLDB'] = {
+		['Enable'] = false,
+		['PanelHeight'] = 20,
+		['PanelWidth'] = 140,
+		['MouseOver'] = false,
+		['ShowIcon'] = false,
+		['ShowText'] = true,
+		['Font'] = 'Tukui Pixel',
+		['FontSize'] = 12,
+		['FontFlag'] = 'MONOCHROMEOUTLINE',
+	}
 
-function BrokerLDB:SetupProfile()
-	self.db = self.data.profile
+	PA.Options.args.general.args.BrokerLDB = {
+		type = 'toggle',
+		name = BrokerLDB.Title,
+		desc = BrokerLDB.Description,
+	}
 end
 
 function BrokerLDB:Initialize()
-	BrokerLDB:BuildProfile()
+	BrokerLDB.db = PA.db['BrokerLDB']
+
+	if BrokerLDB.db.Enable ~= true then
+		return
+	end
+
 	BrokerLDB:GetOptions()
 
 	BrokerLDB.DropDown = CreateFrame('Frame', 'BrokerLDBDropDown', UIParent, 'UIDropDownMenuTemplate')
@@ -351,9 +360,10 @@ function BrokerLDB:Initialize()
 	PA.LDB.RegisterCallback(BrokerLDB, 'LibDataBroker_DataObjectCreated', 'New')
 
 	local Frame = CreateFrame('Button', nil, UIParent)
-	Frame.Text = Frame:CreateFontString(nil, 'OVERLAY')
-	Frame.Text:SetFont(PA.LSM:Fetch('font', 'Arial Narrow'), 12)
-	Frame.Text:SetPoint('CENTER', Frame, 0, 0)
+	Frame.Arrow = Frame:CreateTexture(nil, 'OVERLAY')
+	Frame.Arrow:SetTexture([[Interface\AddOns\ProjectAzilroka\Media\Textures\Arrow]])
+	Frame.Arrow:SetSize(12, 12)
+	Frame.Arrow:SetPoint('CENTER', Frame, 0, 0)
 	Frame:SetFrameStrata('BACKGROUND')
 	Frame:SetWidth(15)
 	Frame:SetPoint('LEFT', UIParent, 'LEFT', 1, 0)

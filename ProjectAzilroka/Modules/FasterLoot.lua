@@ -14,14 +14,36 @@ function FL:LOOT_READY()
 		CloseLoot()
 		return
 	end
+
+	if self.isLooting then
+		return
+	end
+
 	if (GetCVar('autoLootDefault') == '1' and not IsModifiedClick('AUTOLOOTTOGGLE')) or (GetCVar('autoLootDefault') ~= '1' and IsModifiedClick('AUTOLOOTTOGGLE')) then
 		for i = NumLootItems, 1, -1 do
 			LootSlot(i)
 		end
-		CloseLoot()
+
+		FL.isLooting = true
+
+		C_Timer.After(.3, function() FL.isLooting = false end)
 	end
 end
 
+function FL:BuildProfile()
+	PA.Defaults.profile['FasterLoot'] = { ['Enable'] = false }
+
+	PA.Options.args.general.args.FasterLoot = {
+		type = 'toggle',
+		name = FL.Title,
+		desc = FL.Description,
+	}
+end
+
 function FL:Initialize()
+	if PA.db.FasterLoot.Enable ~= true then
+		return
+	end
+
 	FL:RegisterEvent('LOOT_READY')
 end

@@ -38,6 +38,7 @@ PA.MyFaction = UnitFactionGroup('player')
 -- Pixel Perfect
 PA.ScreenWidth, PA.ScreenHeight = GetPhysicalScreenSize()
 PA.Multiple = 768 / PA.ScreenHeight / UIParent:GetScale()
+PA.Solid = PA.LSM:Fetch('background', 'Solid')
 
 local RAID_CLASS_COLORS = RAID_CLASS_COLORS
 
@@ -67,6 +68,7 @@ PA.SLE = PA:IsAddOnEnabled('ElvUI_SLE', PA.MyName)
 PA.CUI = PA:IsAddOnEnabled('ElvUI_ChaoticUI', PA.MyName)
 PA.Tukui = PA:IsAddOnEnabled('Tukui', PA.MyName)
 PA.AzilUI = PA:IsAddOnEnabled('AzilUI', PA.MyName)
+PA.AddOnSkins = PA:IsAddOnEnabled('AddOnSkins', PA.MyName)
 PA.DuffedUI = PA:IsAddOnEnabled('DuffedUI', PA.MyName)
 
 PA.Classes = {}
@@ -77,7 +79,7 @@ for k, v in pairs(LOCALIZED_CLASS_NAMES_FEMALE) do PA.Classes[v] = k end
 function PA:ClassColorCode(class)
 	local color = class and (CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[PA.Classes[class]] or RAID_CLASS_COLORS[PA.Classes[class]]) or { r = 1, g = 1, b = 1 }
 
-	return format('|cFF%02x%02x%02x', color.r * 255, color.g * 255, color.b * 255)
+	return format('FF%02x%02x%02x', color.r * 255, color.g * 255, color.b * 255)
 end
 
 function PA:Color(name)
@@ -112,18 +114,56 @@ function PA:PairsByKeys(t, f)
 	return iter
 end
 
-StaticPopupDialogs["PA_RELOAD"] = {
-	text = PA.ACL["A setting you have changed will change an option for this character only. This setting that you have changed will be uneffected by changing user profiles. Changing this setting requires that you reload your User Interface."],
-	button1 = ACCEPT,
-	button2 = CANCEL,
-	OnAccept = ReloadUI,
-	timeout = 0,
-	whileDead = 1,
-	hideOnEscape = false,
-}
+function PA:SetTemplate(frame)
+	if PA.AddOnSkins then
+		AddOnSkins[1]:SetTemplate(frame)
+	elseif frame.SetTemplate then
+		frame:SetTemplate('Transparent', true)
+	else
+		frame:SetBackdrop({ bgFile = PA.Solid, edgeFile = PA.Solid, tile = false, tileSize = 0, edgeSize = 1, insets = { left = 0, right = 0, top = 0, bottom = 0 } })
+		frame:SetBackdropColor(.08, .08, .08, .8)
+		frame:SetBackdropBorderColor(0, 0, 0)
+	end
+end
 
-StaticPopupDialogs["PA_INCOMPATIBLE"] = { -- This gets replaced so it doesn't need localized, Mera
-	text = 'Incompatible',
+function PA:CreateShadow(frame)
+	if PA.AddOnSkins then
+		AddOnSkins[1]:CreateShadow(frame)
+	elseif frame.CreateShadow then
+		frame:CreateShadow()
+	end
+end
+
+function PA:SetInside(obj, anchor, xOffset, yOffset, anchor2)
+	xOffset = xOffset or 1
+	yOffset = yOffset or 1
+	anchor = anchor or obj:GetParent()
+
+	assert(anchor)
+	if obj:GetPoint() then
+		obj:ClearAllPoints()
+	end
+
+	obj:SetPoint('TOPLEFT', anchor, 'TOPLEFT', xOffset, -yOffset)
+	obj:SetPoint('BOTTOMRIGHT', anchor2 or anchor, 'BOTTOMRIGHT', -xOffset, yOffset)
+end
+
+function PA:SetOutside(obj, anchor, xOffset, yOffset, anchor2)
+	xOffset = xOffset or 1
+	yOffset = yOffset or 1
+	anchor = anchor or obj:GetParent()
+
+	assert(anchor)
+	if obj:GetPoint() then
+		obj:ClearAllPoints()
+	end
+
+	obj:SetPoint('TOPLEFT', anchor, 'TOPLEFT', -xOffset, yOffset)
+	obj:SetPoint('BOTTOMRIGHT', anchor2 or anchor, 'BOTTOMRIGHT', xOffset, -yOffset)
+end
+
+StaticPopupDialogs["PROJECTAZILROKA"] = {
+	text = PA.ACL["A setting you have changed will change an option for this character only. This setting that you have changed will be uneffected by changing user profiles. Changing this setting requires that you reload your User Interface."],
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	OnAccept = ReloadUI,
@@ -147,96 +187,27 @@ PA.Options = {
 			type = 'group',
 			name = PA:Color(PA.ACL['AddOns']),
 			guiInline = true,
-			get = function(info) return PA.db[info[#info]] end,
-			set = function(info, value) PA.db[info[#info]] = value StaticPopup_Show("PA_RELOAD") end,
-			args = {
-				BB = {
-					order = 0,
-					type = 'toggle',
-					name = PA.ACL['BigButtons'],
-				},
-				BrokerLDB = {
-					order = 1,
-					type = 'toggle',
-					name = 'BrokerLDB',
-				},
-				DO = {
-					order = 2,
-					type = 'toggle',
-					name = PA.ACL['Dragon Overlay'],
-				},
-				EFL = {
-					order = 3,
-					type = 'toggle',
-					name = PA.ACL['Enhanced Friends List'],
-				},
-				ES = {
-					order = 4,
-					type = 'toggle',
-					name = PA.ACL['Enhanced Shadows'],
-					disabled = function() return (PA.SLE or PA.CUI) end,
-				},
-				FG = {
-					order = 5,
-					type = 'toggle',
-					name = 'Friend Groups',
-				},
-				FL = {
-					order = 6,
-					type = 'toggle',
-					name = PA.ACL['Faster Loot'],
-				},
-				MF = {
-					order = 7,
-					type = 'toggle',
-					name = PA.ACL['Square Minimap Buttons / Bar'],
-				},
-				stAM = {
-					order = 8,
-					type = 'toggle',
-					name = PA.ACL['stAddOnManager'],
-				},
-				QS = {
-					order = 9,
-					type = 'toggle',
-					name = 'Quest Sounds',
-				},
-				RR = {
-					order = 9,
-					type = 'toggle',
-					name = 'Reputation Reward',
-				},
-			},
+			get = function(info) return (PA.db[info[#info]] and PA.db[info[#info]]['Enable']) end,
+			set = function(info, value) PA.db[info[#info]]['Enable'] = value StaticPopup_Show("PROJECTAZILROKA") end,
+			args = {},
 		},
 	},
 }
+
+PA.Defaults = { profile = {} }
 
 function PA:GetOptions()
 	PA.AceOptionsPanel.Options.args.ProjectAzilroka = PA.Options
 end
 
 function PA:BuildProfile()
-	local Defaults = {
-		profile = {
-			['BB'] = false,
-			['BrokerLDB'] = false,
-			['DO'] = true,
-			['EFL'] = true,
-			['ES'] = true,
-			['FG'] = false,
-			['FL'] = false,
-			['SMB'] = true,
-			['stAM'] = true,
-			['QS'] = false,
-			['RR'] = true,
-		},
-	}
+	PA.data = PA.ADB:New('ProjectAzilrokaDB', PA.Defaults, true)
 
-	if (PA.SLE or PA.CUI) then
-		Defaults.profile.ES = false
-	end
+	PA.data.RegisterCallback(PA, 'OnProfileChanged', 'SetupProfile')
+	PA.data.RegisterCallback(PA, 'OnProfileCopied', 'SetupProfile')
 
-	PA.data = PA.ADB:New('ProjectAzilrokaDB', Defaults)
+	PA.Options.args.profiles = LibStub('AceDBOptions-3.0'):GetOptionsTable(PA.data)
+	PA.Options.args.profiles.order = -2
 
 	PA.db = PA.data.profile
 end
@@ -249,7 +220,6 @@ function PA:ADDON_LOADED(event, addon)
 	if addon == AddOnName then
 		PA.EP = LibStub('LibElvUIPlugin-1.0', true)
 		PA.AceOptionsPanel = PA.ElvUI and _G.ElvUI[1] or PA.EC
-		PA:BuildProfile()
 		PA:UnregisterEvent(event)
 	end
 end
@@ -258,48 +228,21 @@ function PA:PLAYER_LOGIN()
 	PA.Multiple = 768 / PA.ScreenHeight / UIParent:GetScale()
 	PA.AS = AddOnSkins and unpack(AddOnSkins)
 
-	local InitializeModules = {}
+	for _, module in PA:IterateModules() do
+		if module.BuildProfile then
+			module:BuildProfile()
+		end
+	end
+
+	PA:BuildProfile()
 
 	if PA.EP then
 		PA.EP:RegisterPlugin('ProjectAzilroka', PA.GetOptions)
 	end
-	if not (PA.SLE or PA.CUI) and PA.db['ES'] then
-		tinsert(InitializeModules, 'ES')
-	end
-	if PA.db['BB'] then
-		tinsert(InitializeModules, 'BB')
-	end
-	if PA.db['BrokerLDB'] then
-		tinsert(InitializeModules, 'BrokerLDB')
-	end
-	if PA.db['DO'] then
-		tinsert(InitializeModules, 'DO')
-	end
-	if PA.db['FG'] then -- Has to be before EFL
-		--tinsert(InitializeModules, 'FG')
-	end
-	if PA.db['EFL'] then
-		tinsert(InitializeModules, 'EFL')
-	end
-	if PA.db['FL'] then
-		tinsert(InitializeModules, 'FL')
-	end
-	if PA.db['SMB'] then
-		tinsert(InitializeModules, 'SMB')
-	end
-	if PA.db['stAM'] then
-		tinsert(InitializeModules, 'stAM')
-	end
-	if PA.db['QS'] then
-		tinsert(InitializeModules, 'QS')
-	end
-	if PA.db['RR'] then
-		tinsert(InitializeModules, 'RR')
-	end
 
-	for _, Module in pairs(InitializeModules) do
-		if PA[Module] then
-			pcall(PA[Module].Initialize)
+	for _, module in PA:IterateModules() do
+		if module.Initialize then
+			module:Initialize()
 		end
 	end
 

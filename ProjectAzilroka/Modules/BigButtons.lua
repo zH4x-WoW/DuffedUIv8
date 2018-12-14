@@ -237,7 +237,6 @@ function BB:GetOptions()
 		type = 'group',
 		name = BB.Title,
 		desc = BB.Description,
-		order = 219,
 		get = function(info) return BB.db[info[#info]] end,
 		set = function(info, value) BB.db[info[#info]] = value BB:Update() end,
 		args = {
@@ -281,24 +280,27 @@ function BB:GetOptions()
 end
 
 function BB:BuildProfile()
-	self.data = PA.ADB:New('BigButtonsDB', {
-		profile = {
-			['DropTools'] = false,
-			['ToolSize'] = 50,
-			['SeedSize'] = 30,
-		},
-	}, true)
-	self.data.RegisterCallback(self, 'OnProfileChanged', 'SetupProfile')
-	self.data.RegisterCallback(self, 'OnProfileCopied', 'SetupProfile')
-	self.db = self.data.profile
-end
+	PA.Defaults.profile['BigButtons'] = {
+		['Enable'] = false,
+		['DropTools'] = false,
+		['ToolSize'] = 50,
+		['SeedSize'] = 30,
+	}
 
-function BB:SetupProfile()
-	self.db = self.data.profile
+	PA.Options.args.general.args.BigButtons = {
+		type = 'toggle',
+		name = BB.Title,
+		desc = BB.Description,
+	}
 end
 
 function BB:Initialize()
-	BB:BuildProfile()
+	BB.db = PA.db['BigButtons']
+
+	if BB.db.Enable ~= true then
+		return
+	end
+
 	BB:GetOptions()
 
 	AS = _G.AddOnSkins and _G.AddOnSkins[1]

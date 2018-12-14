@@ -6,7 +6,7 @@ PA.ES, _G.EnhancedShadows = ES, ES
 
 ES.Title = '|cFF16C3F2Enhanced|r |cFFFFFFFFShadows|r'
 ES.Description = 'Adds options for registered shadows'
-ES.Author = 'Azilroka     Whiro'
+ES.Authors = 'Azilroka     Whiro'
 
 local unpack, floor, pairs = unpack, floor, pairs
 local UnitAffectingCombat = UnitAffectingCombat
@@ -67,7 +67,6 @@ end
 function ES:GetOptions()
 	local Options = {
 		type = "group",
-		order = 207,
 		name = ES.Title,
 		desc = ES.Description,
 		get = function(info) return ES.db[info[#info]] end,
@@ -97,6 +96,17 @@ function ES:GetOptions()
 				name = PA.ACL['Size'],
 				min = 3, max = 10, step = 1,
 			},
+			AuthorHeader = {
+				order = -4,
+				type = 'header',
+				name = PA.ACL['Authors:'],
+			},
+			Authors = {
+				order = -3,
+				type = 'description',
+				name = ES.Authors,
+				fontSize = 'large',
+			},
 		},
 	}
 
@@ -104,25 +114,27 @@ function ES:GetOptions()
 end
 
 function ES:BuildProfile()
-	self.data = PA.ADB:New("EnhancedShadowsDB", {
-		profile = {
-			['Color'] = { 0, 0, 0, 1 },
-			['ColorByClass'] = false,
-			['Size'] = 3,
-		},
-	})
+	PA.Defaults.profile['EnhancedShadows'] = {
+		['Enable'] = true,
+		['Color'] = { 0, 0, 0, 1 },
+		['ColorByClass'] = false,
+		['Size'] = 3,
+	}
 
-	self.data.RegisterCallback(self, "OnProfileChanged", "SetupProfile")
-	self.data.RegisterCallback(self, "OnProfileCopied", "SetupProfile")
-	self.db = self.data.profile
-end
-
-function ES:SetupProfile()
-	self.db = self.data.profile
+	PA.Options.args.general.args.EnhancedShadows = {
+		type = 'toggle',
+		name = ES.Title,
+		desc = ES.Description,
+	}
 end
 
 function ES:Initialize()
-	ES:BuildProfile()
+	ES.db = PA.db['EnhancedShadows']
+
+	if ES.db.Enable ~= true then
+		return
+	end
+
 	ES:GetOptions()
 
 	ES:ScheduleTimer('UpdateShadows', 1)
