@@ -3,11 +3,13 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame('frame')
 local ChangeLogData = {
 	"Changes:",
-		"• Update for Patch 8.1",
+		"• Bugfixes",
+		"• Update for AddOnSkins",
+		"• Update for Project Azilroka",
 		--"• ",
 	" ",
 	"Notes:",
-		"Progress bars from profession skin currently not working",
+		"Version check from UI is currently not avaiable.",
 }
 
 local function ModifiedString(string)

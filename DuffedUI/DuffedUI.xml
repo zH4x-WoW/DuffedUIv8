@@ -22,7 +22,7 @@
 	<Script file='core\func_Skins.lua' />
 	<Script file='core\install.lua' />
 	<Script file='core\filters\f_cbticks.lua' />
-	<Script file='core\cversion.lua' />
+	<!--Script file='core\cversion.lua' /-->
 	<Script file='core\changelog.lua' />
 
 	<!-- modules -->
