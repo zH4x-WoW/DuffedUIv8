@@ -149,6 +149,33 @@ Stat:SetScript('OnEnter', function(self)
 			end
 		end
 	end
+
+	-- Island Expeditions
+	local hasIsland = false
+	if(UnitLevel("player") >= GetMaxLevelForExpansionLevel(LE_EXPANSION_BATTLE_FOR_AZEROTH)) then
+		local questID = C_IslandsQueue_GetIslandsWeeklyQuestID()
+		if questID then
+			local _, _, finished, numFulfilled, numRequired = GetQuestObjectiveInfo(questID, 1, false);
+			local text = ""
+			local r1, g1 ,b1
+
+			if finished or IsQuestFlaggedCompleted(questID) then
+				text = GOAL_COMPLETED
+				r1, g1, b1 = GREEN_FONT_COLOR:GetRGB()
+			else
+				text = ISLANDS_QUEUE_WEEKLY_QUEST_PROGRESS:format(numFulfilled, numRequired)
+				r1, g1, b1 = selectioncolor
+			end
+			if not firstLine then
+				GameTooltip:AddLine(" ")
+			end
+			firstLine = false
+			GameTooltip:AddLine(ISLANDS_HEADER..":")
+			GameTooltip:AddDoubleLine(ISLANDS_QUEUE_FRAME_TITLE, text, 1, 1, 1, r1, g1, b1)
+			hasIsland = true
+		end
+	end
+
 	if not firstLine then
 		GameTooltip:AddLine(' ')
 	end
