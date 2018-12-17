@@ -644,6 +644,7 @@ do
 		button:SetSize(continuex, continuey)
 		if IsAddOnLoaded('ProjectAzilroka') then
 			button:Point('TOP', Enhanced_ConfigButton, 'BOTTOM', 0, -1)
+			Enhanced_ConfigButton:SkinButton()
 		else
 			button:Point('TOP', interface, 'BOTTOM', 0, -1)
 		end
