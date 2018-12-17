@@ -55,7 +55,7 @@ function AS:Blizzard_Calendar(event, addon)
 		CalendarTodayFrame:HookScript('OnUpdate', function(self) self:SetAlpha(CalendarTodayTextureGlow:GetAlpha()) end)
 		CalendarTodayFrame.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 		CalendarTodayFrame.Backdrop:SetBackdropColor(0, 0, 0, 0)
-		CalendarTodayFrame.Backdrop:CreateShadow()
+		--CalendarTodayFrame.Backdrop:CreateShadow()
 	end
 
 	AS:SkinFrame(CalendarCreateEventFrame)
