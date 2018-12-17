@@ -7,7 +7,7 @@ function AS:Blizzard_AzeriteUI(event, addon)
 	AzeriteEmpoweredItemUI.BorderFrame.portrait:SetAlpha(0)
 
 	AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.Bg:Hide()
-	AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.KeyOverlay.Shadow:Hide()
+	-- AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.KeyOverlay.Shadow:Hide()
 
 	AS:SkinCloseButton(AzeriteEmpoweredItemUICloseButton)
 
