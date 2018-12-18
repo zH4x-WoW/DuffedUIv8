@@ -39,6 +39,12 @@ function updateStatus()
 	if (event == "PLAYER_ENTERING_WORLD") then azeriteBar.eventFrame:UnregisterEvent("PLAYER_ENTERING_WORLD") end
 
 	local azeriteItemLocation = C_AzeriteItem_FindActiveAzeriteItem()
+
+	if not azeriteItemLocation and not InCombatLockdown() then
+		azeriteBar:Hide()
+		backdrop:Hide()
+	end
+
 	if azeriteItemLocation and not InCombatLockdown() then
 		azeriteBar:Show()
 
