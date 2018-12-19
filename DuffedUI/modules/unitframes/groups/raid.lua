@@ -162,6 +162,12 @@ D['ConstructUFRaid'] = function(self)
 	ReadyCheck:Width(12)
 	ReadyCheck:SetPoint('CENTER')
 	self.ReadyCheckIndicator = ReadyCheck
+	
+	local SummonIcon = power:CreateTexture(nil, 'OVERLAY')
+	SummonIcon:Height(12)
+	SummonIcon:Width(12)
+	SummonIcon:SetPoint('CENTER')
+	self.SummonIndicator = Summon
 
 	local leader = health:CreateTexture(nil, 'OVERLAY')
 	leader:Height(12)
