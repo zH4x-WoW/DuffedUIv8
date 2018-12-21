@@ -8,7 +8,7 @@ function AS:CoolLine()
 	CoolLine.updatelook()
 	AS:SkinBackdropFrame(CoolLine)
 	CoolLine.Backdrop:SetAllPoints(CoolLine)
-	AS:CreateShadow(CoolLine.Backdrop)
+	CoolLine.Backdrop:CreateShadow()
 	AS:RegisterForPetBattleHide(CoolLine)
 end
 
