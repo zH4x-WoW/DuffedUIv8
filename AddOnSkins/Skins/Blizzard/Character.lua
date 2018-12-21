@@ -74,6 +74,7 @@ function AS:Blizzard_Character()
 	CharacterStatsPane.ItemLevelFrame.Background:SetVertexColor(unpack(AS.Color))
 
 	for i = 1, 3 do
+		CharacterFrameTab3:Show()
 		AS:SkinTab(_G["CharacterFrameTab"..i])
 	end
 
