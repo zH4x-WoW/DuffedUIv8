@@ -3,13 +3,14 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame('frame')
 local ChangeLogData = {
 	"Changes:",
-		"• Bugfixes",
-		"• Update for AddOnSkins",
-		"• Update for Project Azilroka",
+		"• Added bugfixes from Rav",
+		"• Increase interface-version to current Patchlevel of WoW",
+		"• Update AddOnSkins to new major version 4.07",
+		"• Readded some skinning functions",
 		--"• ",
 	" ",
 	"Notes:",
-		"Nothing Important",
+		"For the old friendslist use 'Enhanced Friendslist' from Project Azilroka\nFor skins use AddOnSkins because most of the skins are removed",
 }
 
 local function ModifiedString(string)
