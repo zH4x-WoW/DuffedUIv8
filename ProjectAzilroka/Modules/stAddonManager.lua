@@ -87,6 +87,7 @@ function stAM:BuildFrame()
 	Frame:SetSize(self.db['FrameWidth'], 10 + self.db['NumAddOns'] * 25 + 40)
 	Frame:SetPoint('CENTER', UIParent, 'CENTER', 0, 0)
 	PA:SetTemplate(Frame)
+	Frame:Hide()
 	Frame:SetFrameStrata('HIGH')
 	Frame:SetClampedToScreen(true)
 	Frame:SetMovable(true)
@@ -350,7 +351,6 @@ function stAM:BuildFrame()
 		StatusText:SetPoint("BOTTOM", CheckButton, "BOTTOM")
 		StatusText:SetPoint("RIGHT", AddOns, "RIGHT", -10, 0)
 		StatusText:SetJustifyH("LEFT")
-		StatusText:SetVertexColor(.77, .12, .24)
 
 		CheckButton.StatusText = StatusText
 
@@ -358,7 +358,6 @@ function stAM:BuildFrame()
 		Icon:SetTexture([[Interface\AddOns\ProjectAzilroka\Media\Textures\QuestBang]])
 		Icon:SetPoint('CENTER', CheckButton, 'RIGHT', 10, 0)
 		Icon:SetSize(32, 32)
-		Icon:SetVertexColor(.77, .12, .24)
 
 		CheckButton.Icon = Icon
 
@@ -396,7 +395,7 @@ function stAM:NewAddOnProfile(name, overwrite)
 	_G.stAddonManagerProfilesDB[name] = {}
 
 	for i = 1, #self.AddOnInfo do
-		local AddOn, isEnabled = unpack(self.AddOnInfo[i]), PA:IsAddOnEnabled(i, stAM.SelectedCharacter)
+		local AddOn, isEnabled = self.AddOnInfo[i].Name, PA:IsAddOnEnabled(i, stAM.SelectedCharacter)
 		if isEnabled then
 			tinsert(_G.stAddonManagerProfilesDB[name], AddOn)
 		end
@@ -591,10 +590,21 @@ function stAM:UpdateAddonList()
 			button.name, button.title, button.authors, button.notes, button.required, button.optional = info.Name, info.Title, info.Authors, info.Notes, info.Required, info.Optional
 			button.Text:SetText(button.title)
 			if info.Missing then
+				button.Icon:SetVertexColor(.77, .12, .24)
+				button.StatusText:SetVertexColor(.77, .12, .24)
+
 				button.Icon:Show()
 				button.Text:SetPoint('LEFT', button.Icon, 'CENTER', 5, 0)
 				button.Text:SetPoint("RIGHT", self.Frame.AddOns, "CENTER", 0, 0)
 				button.StatusText:SetText(PA.ACL['Missing: ']..table.concat(info.Missing, ', '))
+			elseif info.Disabled then
+				button.Icon:SetVertexColor(1, .8, .1)
+				button.StatusText:SetVertexColor(1, .8, .1)
+
+				button.Icon:Show()
+				button.Text:SetPoint('LEFT', button.Icon, 'CENTER', 5, 0)
+				button.Text:SetPoint("RIGHT", self.Frame.AddOns, "CENTER", 0, 0)
+				button.StatusText:SetText(PA.ACL['Disabled: ']..table.concat(info.Disabled, ', '))
 			else
 				button.Icon:Hide()
 				button.Text:SetPoint('LEFT', button, 'RIGHT', 5, 0)
@@ -817,7 +827,7 @@ function stAM:Initialize()
 	for i = 1, GetNumAddOns() do
 		local Name, Title, Notes = GetAddOnInfo(i)
 		local Required, Optional = nil, nil
-		local MissingAddons
+		local MissingAddons, DisabledAddons
 
 		if GetAddOnDependencies(i) ~= nil then
 			Required = { GetAddOnDependencies(i) }
@@ -825,6 +835,9 @@ function stAM:Initialize()
 				if select(5, GetAddOnInfo(addon)) == 'MISSING' then
 					MissingAddons = MissingAddons or {}
 					tinsert(MissingAddons, addon)
+				elseif select(5, GetAddOnInfo(addon)) == 'DISABLED' then
+					DisabledAddons = DisabledAddons or {}
+					tinsert(DisabledAddons, addon)
 				end
 			end
 		end
@@ -835,7 +848,7 @@ function stAM:Initialize()
 
 		local Authors = GetAddOnMetadata(i, "Author")
 
-		stAM.AddOnInfo[i] = { ['Name'] = Name, ['Title'] = Title, ['Authors'] = Authors, ['Notes'] = Notes, ['Required'] = Required, ['Optional'] = Optional, ['Missing'] = MissingAddons }
+		stAM.AddOnInfo[i] = { ['Name'] = Name, ['Title'] = Title, ['Authors'] = Authors, ['Notes'] = Notes, ['Required'] = Required, ['Optional'] = Optional, ['Missing'] = MissingAddons, ['Disabled'] = DisabledAddons }
 	end
 
 	stAM.SelectedCharacter = PA.MyName

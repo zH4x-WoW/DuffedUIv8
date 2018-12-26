@@ -189,9 +189,9 @@ function lib:SendPluginVersionCheck(message)
 	elseif IsInGroup() then
 		ChatType = (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'PARTY'
 	else
-		local ElvUI_VC = GetChannelName('ElvUI_VC')
-		if ElvUI_VC and ElvUI_VC > 0 then
-			ChatType, Channel = 'CHANNEL', ElvUI_VC
+		local ElvUIGVC = GetChannelName('ElvUIGVC')
+		if ElvUIGVC and ElvUIGVC > 0 then
+			ChatType, Channel = 'CHANNEL', ElvUIGVC
 		elseif IsInGuild() then
 			ChatType = 'GUILD'
 		end
@@ -232,7 +232,7 @@ lib.VCFrame = CreateFrame('Frame')
 lib.VCFrame:SetScript('OnEvent', lib.VersionCheck)
 lib.VCFrame:SetScript("OnUpdate", function(self, elapsed)
 	self.delayed = (self.delayed or 0) + elapsed
-	if self.delayed > 10 then
+	if self.delayed > 25 then
 		local numActiveChannels = C_ChatInfo.GetNumActiveChannels()
 		if numActiveChannels and (numActiveChannels >= 1) then
 			if (GetChannelName('ElvUIGVC') == 0) and (numActiveChannels < MAX_WOW_CHAT_CHANNELS) then
@@ -245,7 +245,7 @@ lib.VCFrame:SetScript("OnUpdate", function(self, elapsed)
 				self:SetScript("OnUpdate", nil)
 			end
 		end
-	elseif self.delayed > 30 then
+	elseif self.delayed > 45 then
 		self:SetScript("OnUpdate", nil)
 	end
 end)

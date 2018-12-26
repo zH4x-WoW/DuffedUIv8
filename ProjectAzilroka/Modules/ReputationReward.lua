@@ -115,28 +115,13 @@ function RR:Show()
 
 	local totalRewards = numQuestRewards + numQuestChoices + numQuestCurrencies
 	local buttonHeight = rewardsFrame.RewardButtons[1]:GetHeight()
-	local lastFrame = rewardsFrame.ItemReceiveText
 
-	if ( QuestInfoFrame.mapView ) then
-		if rewardsFrame.XPFrame:IsShown() then
-			lastFrame = rewardsFrame.XPFrame
-		end
-		if rewardsFrame.MoneyFrame:IsShown() then
-			lastFrame = rewardsFrame.MoneyFrame
-		end
-	else
-		if rewardsFrame.XPFrame:IsShown() then
-			lastFrame = rewardsFrame.XPFrame
-		end
-	end
+	--if rewardsFrame.SkillPointFrame:IsShown() then
+	--	lastFrame = rewardsFrame.SkillPointFrame
+	--end
 
-	if rewardsFrame.SkillPointFrame:IsShown() then
-		lastFrame = rewardsFrame.SkillPointFrame
-	end
-
-	local index
 	local baseIndex = totalRewards or 0
-	local buttonIndex = baseIndex
+	local buttonIndex = numQuestChoices == 1 and 1 or numQuestRewards > 0 and numQuestRewards or numQuestCurrencies > 0 and numQuestCurrencies or 0
 
 	wipe(RR.ReputationInfo)
 
@@ -163,6 +148,25 @@ function RR:Show()
 		end
 	end
 
+	local lastFrame = rewardsFrame.ItemReceiveText
+
+	if ( QuestInfoFrame.mapView ) then
+		if rewardsFrame.XPFrame:IsShown() then
+			lastFrame = rewardsFrame.XPFrame
+		end
+		if rewardsFrame.MoneyFrame:IsShown() then
+			lastFrame = rewardsFrame.MoneyFrame
+		end
+	else
+		if rewardsFrame.MoneyFrame:IsShown() then
+			lastFrame = rewardsFrame.MoneyFrame
+		end
+		if rewardsFrame.XPFrame:IsShown() then
+			lastFrame = rewardsFrame.XPFrame
+		end
+	end
+
+	local index
 	local i = 1
 	local Height = QuestInfoFrame.rewardsFrame:GetHeight()
 
@@ -174,13 +178,14 @@ function RR:Show()
 		if questItem then
 			questItem:Show()
 
-			questItem.type = nil
-			questItem.objectType = nil
+			questItem.type = "reward"
+			questItem.objectType = "reputation"
 
 			questItem.Name:SetText(Info.Name)
-			questItem.Icon:SetTexture(PA.MyFaction and ('Interface\\Icons\\PVPCurrency-Honor-%s'):format(PA.MyFaction))
-	--		questItem.Icon:SetTexture(([[Interface\Icons\Achievement_Reputation_0%d]]):format(Info.Standing or 1))
+			questItem.Icon:SetTexture(PA.MyFaction and (PA.MyFaction == 'Neutral' and [[Interface\Icons\Achievement_Character_Pandaren_Female]] or ([[Interface\Icons\PVPCurrency-Conquest-%s]]):format(PA.MyFaction)))
+			--questItem.Icon:SetTexture(([[Interface\Icons\Achievement_Reputation_0%d]]):format(Info.Standing or 1))
 			questItem.Count:SetText(Info.Base + Info.Bonus)
+			questItem.Count:Show()
 
 			if PA.AddOnSkins and questItem.Icon.Backdrop then
 				questItem.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
@@ -200,7 +205,7 @@ function RR:Show()
 					Height = Height + buttonHeight + REWARDS_SECTION_OFFSET
 					lastFrame = questItem
 				else
-					questItem:SetPoint('TOPLEFT', rewardButtons[index - 1], 'TOPRIGHT', 2, 0)
+					questItem:SetPoint('TOPLEFT', rewardButtons[index - 1] or lastFrame, 'TOPRIGHT', 2, 0)
 				end
 			else
 				questItem:SetPoint('TOPLEFT', lastFrame, 'BOTTOMLEFT', 0, -REWARDS_SECTION_OFFSET)
@@ -210,6 +215,11 @@ function RR:Show()
 
 			i = i + 1
 		end
+	end
+
+	if ( numQuestChoices == 1 ) then
+		local a, b, c, d, e = QuestInfoFrame.rewardsFrame.ItemReceiveText:GetPoint()
+		QuestInfoFrame.rewardsFrame.ItemReceiveText:SetPoint(a, b, c, d, e - ((i % 2) and (floor(i / 2) * buttonHeight) or 0))
 	end
 
 	QuestInfoFrame.rewardsFrame:Show()
