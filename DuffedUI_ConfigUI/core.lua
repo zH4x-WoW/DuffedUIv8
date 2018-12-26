@@ -642,12 +642,8 @@ do
 
 		local button = CreateFrame('BUTTON', 'GameMenuDuffedUIButtonOptions', menu, 'GameMenuButtonTemplate')
 		button:SetSize(continuex, continuey)
-		if IsAddOnLoaded('ProjectAzilroka') then
-			button:Point('TOP', Enhanced_ConfigButton, 'BOTTOM', 0, -1)
-			Enhanced_ConfigButton:SkinButton()
-		else
-			button:Point('TOP', interface, 'BOTTOM', 0, -1)
-		end
+		GameMenuFrame.EC:SkinButton()
+		button:Point('TOP', interface, 'BOTTOM', 0, -1)
 		button:SetText('DuffedUI')
 		button:SkinButton()
 		button:SetScript('OnClick', function(self)
