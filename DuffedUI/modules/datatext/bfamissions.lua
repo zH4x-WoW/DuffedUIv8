@@ -80,20 +80,18 @@ Stat:SetScript('OnEnter', function(self)
 	local inProgressMissions = {}
 	C_Garrison_GetInProgressMissions(inProgressMissions, LE_FOLLOWER_TYPE_GARRISON_8_0)
 	local numMissions = #inProgressMissions
-	if(numMissions > 0) then
+	if (numMissions > 0) then
 		tsort(inProgressMissions, sortFunction)
 		firstLine = false
 		
 		GameTooltip:AddLine(L['dt']['report'])
-		for i=1, numMissions do
+		for i = 1, numMissions do
 			local mission = inProgressMissions[i]
 			local timeLeft = mission.timeLeft:match('%d')
 			local r, g, b = 1, 1, 1
-			if(mission.isRare) then
-				r, g, b = 0.09, 0.51, 0.81
-			end
+			if (mission.isRare) then r, g, b = 0.09, 0.51, 0.81 end
 
-			if(timeLeft and timeLeft == "0") then
+			if (timeLeft and timeLeft == "0") then
 				GameTooltip:AddDoubleLine(mission.name, COMPLETE, r, g, b, 0, 1, 0)
 			else
 				GameTooltip:AddDoubleLine(mission.name, mission.timeLeft, r, g, b)
@@ -104,14 +102,12 @@ Stat:SetScript('OnEnter', function(self)
 	-- Troop Work Orders
 	local followerShipments = C_Garrison_GetFollowerShipments(LE_GARRISON_TYPE_8_0)
 	local hasFollowers = false
-	if(followerShipments) then
+	if (followerShipments) then
 		for i = 1, #followerShipments do
 			local name, _, _, shipmentsReady, shipmentsTotal = C_Garrison_GetLandingPageShipmentInfoByContainerID(followerShipments[i])
-			if(name and shipmentsReady and shipmentsTotal) then
-				if(hasFollowers == false) then
-					if not firstLine then
-						GameTooltip:AddLine(' ')
-					end
+			if (name and shipmentsReady and shipmentsTotal) then
+				if (hasFollowers == false) then
+					if not firstLine then GameTooltip:AddLine(' ') end
 					firstLine = false
 					GameTooltip:AddLine(FOLLOWERLIST_LABEL_TROOPS)
 					hasFollowers = true
@@ -125,22 +121,20 @@ Stat:SetScript('OnEnter', function(self)
 	-- Talents
 	local talentTreeIDs = C_Garrison_GetTalentTreeIDsByClassID(LE_GARRISON_TYPE_8_0, select(3, UnitClass('player')))
 	local hasTalent = false
-	if(talentTreeIDs) then
+	if (talentTreeIDs) then
 		local completeTalentID = C_Garrison_GetCompleteTalent(LE_GARRISON_TYPE_8_0)
 		for _, treeID in ipairs(talentTreeIDs) do
 			local _, _, tree = C_Garrison_GetTalentTreeInfoForID(treeID)
 			for _, talent in ipairs(tree) do
 				local showTalent = false
-				if(talent.isBeingResearched) then
+				if (talent.isBeingResearched) then
 					showTalent = true
 				end
-				if(talent.id == completeTalentID) then
+				if (talent.id == completeTalentID) then
 					showTalent = true
 				end
-				if(showTalent) then
-					if not firstLine then
-						GameTooltip:AddLine(' ')
-					end
+				if (showTalent) then
+					if not firstLine then GameTooltip:AddLine(' ') end
 					firstLine = false
 					GameTooltip:AddLine(RESEARCH_TIME_LABEL)
 					GameTooltip:AddDoubleLine(talent.name, format(GARRISON_LANDING_SHIPMENT_COUNT, talent.isBeingResearched and 0 or 1, 1), 1, 1, 1)
@@ -152,8 +146,8 @@ Stat:SetScript('OnEnter', function(self)
 
 	-- Island Expeditions
 	local hasIsland = false
-	if(UnitLevel('player') >= GetMaxLevelForExpansionLevel(LE_EXPANSION_BATTLE_FOR_AZEROTH)) then
-		local questID = C_IslandsQueue_GetIslandsWeeklyQuestID()
+	if (UnitLevel('player') >= GetMaxLevelForExpansionLevel(LE_EXPANSION_BATTLE_FOR_AZEROTH)) then
+		local questID = C_IslandsQueue_GetIslandsWeeklyQuestID() or nil
 		if questID then
 			local _, _, finished, numFulfilled, numRequired = GetQuestObjectiveInfo(questID, 1, false)
 			local text = ''
@@ -166,9 +160,7 @@ Stat:SetScript('OnEnter', function(self)
 				text = ISLANDS_QUEUE_WEEKLY_QUEST_PROGRESS:format(numFulfilled, numRequired)
 				r1, g1, b1 = selectioncolor
 			end
-			if not firstLine then
-				GameTooltip:AddLine(' ')
-			end
+			if not firstLine then GameTooltip:AddLine(' ') end
 			firstLine = false
 			GameTooltip:AddLine(ISLANDS_HEADER..":")
 			GameTooltip:AddDoubleLine(ISLANDS_QUEUE_FRAME_TITLE, text, 1, 1, 1, r1, g1, b1)
@@ -176,9 +168,7 @@ Stat:SetScript('OnEnter', function(self)
 		end
 	end
 
-	if not firstLine then
-		GameTooltip:AddLine(' ')
-	end
+	if not firstLine then GameTooltip:AddLine(' ') end
 
 	GameTooltip:AddLine(TOKENS)
 	GameTooltip:AddDoubleLine(D['Currency'](1560))
@@ -188,9 +178,7 @@ end)
 Stat:SetScript('OnLeave', function() GameTooltip:Hide() end)	
 Stat:SetScript('OnEvent', Update)
 Stat:SetScript('OnMouseDown', function() 
-	if not (C_Garrison_HasGarrison(LE_GARRISON_TYPE_8_0)) then
-		return
-	end
+	if not (C_Garrison_HasGarrison(LE_GARRISON_TYPE_8_0)) then return end
 
 	local isShown = GarrisonLandingPage and GarrisonLandingPage:IsShown()
 	if (not isShown) then
