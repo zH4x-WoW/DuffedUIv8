@@ -13,6 +13,7 @@ local C_Garrison_GetTalentTreeIDsByClassID = C_Garrison.GetTalentTreeIDsByClassI
 local C_Garrison_GetTalentTreeInfoForID = C_Garrison.GetTalentTreeInfoForID
 local C_Garrison_GetCompleteTalent = C_Garrison.GetCompleteTalent
 local C_Garrison_HasGarrison = C_Garrison.HasGarrison
+local C_IslandsQueue_GetIslandsWeeklyQuestID = C_IslandsQueue.GetIslandsWeeklyQuestID
 local ShowGarrisonLandingPage = ShowGarrisonLandingPage
 local HideUIPanel = HideUIPanel
 local GetCurrencyInfo = GetCurrencyInfo
