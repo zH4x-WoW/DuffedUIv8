@@ -9,6 +9,3 @@
 ## X-oUF: oUFDuffedUI
 
 DuffedUI.xml
-
-
-==>> Wenn du das lesen kannst dann entfernst du die Zeilen 12, 13, 14 und pusht die Änderung mit einem Commit <<==
