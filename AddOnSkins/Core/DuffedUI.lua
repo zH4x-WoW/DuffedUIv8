@@ -8,7 +8,7 @@ local CreateFrame = CreateFrame
 local D, C, L = unpack(DuffedUI)
 
 function AS:UpdateMedia()
-	AS.PixelPerfect = AS:CheckOption('ThinBorder')
+	-- AS.PixelPerfect = AS:CheckOption('ThinBorder')
 	AS.DataTextFontSize = C['datatext'].fontsize
 
 	AS.InfoLeft = DuffedUIInfoLeft

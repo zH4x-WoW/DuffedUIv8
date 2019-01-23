@@ -74,20 +74,18 @@ function SMB:HandleBlizzardButtons()
 		GarrisonLandingPageMinimapButton:Hide()
 	elseif self.db["MoveGarrison"] and not GarrisonLandingPageMinimapButton.SMB then
 		GarrisonLandingPageMinimapButton:SetParent(Minimap)
+		GarrisonLandingPageMinimapButton_OnLoad(GarrisonLandingPageMinimapButton)
+		GarrisonLandingPageMinimapButton_UpdateIcon(GarrisonLandingPageMinimapButton)
 		GarrisonLandingPageMinimapButton:Show()
 		GarrisonLandingPageMinimapButton:SetScale(1)
 		GarrisonLandingPageMinimapButton:SetHitRectInsets(0, 0, 0, 0)
-		GarrisonLandingPageMinimapButton:SetScript('OnEnter', nil)
-		GarrisonLandingPageMinimapButton:SetScript('OnLeave', nil)
-		PA:CreateShadow(GarrisonLandingPageMinimapButton)
-
-		GarrisonLandingPageMinimapButton:HookScript('OnEnter', function(self)
+		GarrisonLandingPageMinimapButton:SetScript('OnEnter', function(self)
 			self:SetBackdropBorderColor(unpack(PA.ClassColor))
 			if SMB.Bar:IsShown() then
 				UIFrameFadeIn(SMB.Bar, 0.2, SMB.Bar:GetAlpha(), 1)
 			end
 		end)
-		GarrisonLandingPageMinimapButton:HookScript('OnLeave', function(self)
+		GarrisonLandingPageMinimapButton:SetScript('OnLeave', function(self)
 			PA:SetTemplate(self)
 			if SMB.Bar:IsShown() and SMB.db['BarMouseOver'] then
 				UIFrameFadeOut(SMB.Bar, 0.2, SMB.Bar:GetAlpha(), 0)
@@ -95,22 +93,26 @@ function SMB:HandleBlizzardButtons()
 		end)
 
 		GarrisonLandingPageMinimapButton.SMB = true
+
+		if SMB.db.Shadows then
+			PA:CreateShadow(GarrisonLandingPageMinimapButton)
+		end
+
 		tinsert(self.Buttons, GarrisonLandingPageMinimapButton)
 	end
 
 	if self.db["MoveMail"] and not MiniMapMailFrame.SMB then
 		local Frame = CreateFrame('Frame', 'SMB_MailFrame', self.Bar)
 		Frame:SetSize(SMB.db['IconSize'], SMB.db['IconSize'])
-		Frame:SetTemplate()
+		PA:SetTemplate(Frame)
 		Frame.Icon = Frame:CreateTexture(nil, 'ARTWORK')
 		Frame.Icon:SetPoint('CENTER')
-		Frame.Icon:Size(18)
+		Frame.Icon:SetSize(18, 18)
 		Frame.Icon:SetTexture(MiniMapMailIcon:GetTexture())
-		PA:CreateShadow(Frame)
 		Frame:EnableMouse(true)
 		Frame:HookScript('OnEnter', function(self)
 			if HasNewMail() then
-				GameTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT")
+				GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT")
 				if GameTooltip:IsOwned(self) then
 					MinimapMailFrameUpdate()
 				end
@@ -127,6 +129,7 @@ function SMB:HandleBlizzardButtons()
 				UIFrameFadeOut(SMB.Bar, 0.2, SMB.Bar:GetAlpha(), 0)
 			end
 		end)
+
 		MiniMapMailFrame:HookScript('OnShow', function() Frame.Icon:SetVertexColor(0, 1, 0)	end)
 		MiniMapMailFrame:HookScript('OnHide', function() Frame.Icon:SetVertexColor(1, 1, 1) end)
 
@@ -137,6 +140,10 @@ function SMB:HandleBlizzardButtons()
 		-- Hide Icon & Border
 		MiniMapMailIcon:Hide()
 		MiniMapMailBorder:Hide()
+
+		if SMB.db.Shadows then
+			PA:CreateShadow(Frame)
+		end
 
 		MiniMapMailFrame.SMB = true
 		tinsert(self.Buttons, Frame)
@@ -149,7 +156,6 @@ function SMB:HandleBlizzardButtons()
 
 		MiniMapTracking:SetParent(self.Bar)
 		MiniMapTracking:SetSize(self.db['IconSize'], self.db['IconSize'])
-		PA:CreateShadow(MiniMapTracking)
 
 		MiniMapTrackingIcon:ClearAllPoints()
 		MiniMapTrackingIcon:SetPoint('CENTER')
@@ -179,13 +185,17 @@ function SMB:HandleBlizzardButtons()
 		end)
 
 		MiniMapTrackingButton.SMB = true
+
+		if SMB.db.Shadows then
+			PA:CreateShadow(MiniMapTracking)
+		end
+
 		tinsert(self.Buttons, MiniMapTracking)
 	end
 
 	if self.db["MoveQueue"] and not QueueStatusMinimapButton.SMB then
 		local Frame = CreateFrame('Frame', 'SMB_QueueFrame', self.Bar)
 		PA:SetTemplate(Frame)
-		PA:CreateShadow(Frame)
 		Frame:SetSize(SMB.db['IconSize'], SMB.db['IconSize'])
 		Frame.Icon = Frame:CreateTexture(nil, 'ARTWORK')
 		Frame.Icon:SetSize(SMB.db['IconSize'], SMB.db['IconSize'])
@@ -229,6 +239,11 @@ function SMB:HandleBlizzardButtons()
 		end)
 
 		QueueStatusMinimapButton.SMB = true
+
+		if SMB.db.Shadows then
+			PA:CreateShadow(Frame)
+		end
+
 		tinsert(self.Buttons, Frame)
 	end
 
@@ -286,7 +301,11 @@ function SMB:SkinMinimapButton(Button)
 	Button:SetFrameLevel(Minimap:GetFrameLevel() + 5)
 	Button:SetSize(SMB.db['IconSize'], SMB.db['IconSize'])
 	PA:SetTemplate(Button)
-	PA:CreateShadow(Button)
+
+	if SMB.db.Shadows then
+		PA:CreateShadow(Button)
+	end
+
 	Button:HookScript('OnEnter', function(self)
 		self:SetBackdropBorderColor(unpack(PA.ClassColor))
 		if SMB.Bar:IsShown() then
@@ -329,22 +348,17 @@ end
 function SMB:Update()
 	if not SMB.db['BarEnabled'] then return end
 
-	local AnchorX, AnchorY, MaxX = 0, 1, SMB.db['ButtonsPerRow']
-	local ButtonsPerRow = SMB.db['ButtonsPerRow']
-	local NumColumns = ceil(#SMB.Buttons / ButtonsPerRow)
-	local Spacing, Mult = SMB.db['ButtonSpacing'], 1
-	local Size = SMB.db['IconSize']
+	local AnchorX, AnchorY = 0, 1
+	local ButtonsPerRow = SMB.db['ButtonsPerRow'] or 12
+	local Spacing, Mult = SMB.db['ButtonSpacing'] or 2, PA.Multiple
+	local Size = SMB.db['IconSize'] or 27
 	local ActualButtons, Maxed = 0
-
-	if NumColumns == 1 and ButtonsPerRow > #SMB.Buttons then
-		ButtonsPerRow = #SMB.Buttons
-	end
 
 	for _, Button in pairs(SMB.Buttons) do
 		if Button:IsVisible() then
 			AnchorX = AnchorX + 1
 			ActualButtons = ActualButtons + 1
-			if AnchorX > MaxX then
+			if (AnchorX % (ButtonsPerRow + 1)) == 0 then
 				AnchorY = AnchorY + 1
 				AnchorX = 1
 				Maxed = true
@@ -445,6 +459,11 @@ function SMB:GetOptions()
 						name = PA.ACL['Buttons Per Row'],
 						min = 1, max = 100, step = 1,
 					},
+					Shadows = {
+						order = 3,
+						type = 'toggle',
+						name = PA.ACL['Shadows'],
+					},
 				},
 			},
 			blizzard = {
@@ -514,6 +533,7 @@ function SMB:BuildProfile()
 		['MoveMail'] = true,
 		['MoveTracker'] = true,
 		['MoveQueue'] = true,
+		['Shadows'] = true,
 	}
 
 	PA.Options.args.general.args.SquareMinimapButtons = {
@@ -566,8 +586,6 @@ function SMB:Initialize()
 		Tukui[1]['Movers']:RegisterFrame(SMB.Bar)
 	elseif PA.ElvUI then
 		ElvUI[1]:CreateMover(SMB.Bar, 'SquareMinimapButtonBarMover', 'SquareMinimapButtonBar Anchor', nil, nil, nil, 'ALL,GENERAL')
-	elseif PA.DuffedUI then
-		DuffedUI[1]['move']:RegisterFrame(SMB.Bar)
 	end
 
 	SMB.TexCoords = PA.TexCoords

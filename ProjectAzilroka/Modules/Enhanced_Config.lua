@@ -8,7 +8,7 @@ end
 local EC = PA:NewModule("EnhancedConfig", 'AceConsole-3.0', 'AceEvent-3.0')
 PA.EC, _G.Enhanced_Config = EC, EC
 
-EC.Title = "|cff1784d1Enhanced Config|r"
+EC.Title = "Enhanced Config"
 EC.Authors = "Azilroka"
 
 local DEVELOPERS = {
