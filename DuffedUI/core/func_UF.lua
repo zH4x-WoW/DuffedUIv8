@@ -617,6 +617,335 @@ D['Buffids'] = {
 }
 
 D['Debuffids'] = {
+	-- Battle for Azeroth
+	-- Mythic+ Dungeons
+	[GetSpellInfo(196376)] = = 3, -- Grievous Tear
+	[GetSpellInfo(209858)] = = 3, -- Necrotic
+	[GetSpellInfo(226512)] = = 3, -- Sanguine
+	[GetSpellInfo(240443)] = = 3, -- Bursting
+	[GetSpellInfo(240559)] = = 3, -- Grievous
+	[GetSpellInfo(277242)] = = 3, -- Symbiote of G'huun (Infested)
+	[GetSpellInfo(288388)] = = 3, -- Reap Soul
+	[GetSpellInfo(288694)] = = 3, -- Shadow Smash
+
+	-- Dungeons
+	-- Freehold
+	[GetSpellInfo(258323)] = = 3, -- Infected Wound
+	[GetSpellInfo(257775)] = = 3, -- Plague Step
+	[GetSpellInfo(257908)] = = 3, -- Oiled Blade
+	[GetSpellInfo(257436)] = = 3, -- Poisoning Strike
+	[GetSpellInfo(274389)] = = 3, -- Rat Traps
+	[GetSpellInfo(274555)] = = 3, -- Scabrous Bites
+	[GetSpellInfo(258875)] = = 3, -- Blackout Barrel
+	[GetSpellInfo(256363)] = = 3, -- Ripper Punch
+
+	-- Shrine of the Storm
+	[GetSpellInfo(264560)] = = 3, -- Choking Brine
+	[GetSpellInfo(268233)] = = 3, -- Electrifying Shock
+	[GetSpellInfo(268322)] = = 3, -- Touch of the Drowned
+	[GetSpellInfo(268896)] = = 3, -- Mind Rend
+	[GetSpellInfo(268104)] = = 3, -- Explosive Void
+	[GetSpellInfo(267034)] = = 3, -- Whispers of Power
+	[GetSpellInfo(276268)] = = 3, -- Heaving Blow
+	[GetSpellInfo(264166)] = = 3, -- Undertow
+	[GetSpellInfo(264526)] = = 3, -- Grasp of the Depths
+	[GetSpellInfo(274633)] = = 3, -- Sundering Blow
+	[GetSpellInfo(268214)] = = 3, -- Carving Flesh
+	[GetSpellInfo(267818)] = = 3, -- Slicing Blast
+	[GetSpellInfo(268309)] = = 3, -- Unending Darkness
+	[GetSpellInfo(268317)] = = 3, -- Rip Mind
+	[GetSpellInfo(268391)] = = 3, -- Mental Assault
+	[GetSpellInfo(274720)] = = 3, -- Abyssal Strike
+
+	-- Siege of Boralus
+	[GetSpellInfo(257168)] = = 3, -- Cursed Slash
+	[GetSpellInfo(272588)] = = 3, -- Rotting Wounds
+	[GetSpellInfo(272571)] = = 3, -- Choking Waters
+	[GetSpellInfo(274991)] = = 3, -- Putrid Waters
+	[GetSpellInfo(275835)] = = 3, -- Stinging Venom Coating
+	[GetSpellInfo(273930)] = = 3, -- Hindering Cut
+	[GetSpellInfo(257292)] = = 3, -- Heavy Slash
+	[GetSpellInfo(261428)] = = 3, -- Hangman"s Noose
+	[GetSpellInfo(256897)] = = 3, -- Clamping Jaws
+	[GetSpellInfo(272874)] = = 3, -- Trample
+	[GetSpellInfo(273470)] = = 3, -- Gut Shot
+	[GetSpellInfo(272834)] = = 3, -- Viscous Slobber
+	[GetSpellInfo(257169)] = = 3, -- Terrifying Roar
+	[GetSpellInfo(272713)] = = 3, -- Crushing Slam
+
+	-- Tol Dagor
+	[GetSpellInfo(258128)] = = 3, -- Debilitating Shout
+	[GetSpellInfo(265889)] = = 3, -- Torch Strike
+	[GetSpellInfo(257791)] = = 3, -- Howling Fear
+	[GetSpellInfo(258864)] = = 3, -- Suppression Fire
+	[GetSpellInfo(257028)] = = 3, -- Fuselighter
+	[GetSpellInfo(258917)] = = 3, -- Righteous Flames
+	[GetSpellInfo(257777)] = = 3, -- Crippling Shiv
+	[GetSpellInfo(258079)] = = 3, -- Massive Chomp
+	[GetSpellInfo(258058)] = = 3, -- Squeeze
+	[GetSpellInfo(260016)] = = 3, -- Itchy Bite
+	[GetSpellInfo(257119)] = = 3, -- Sand Trap
+	[GetSpellInfo(260067)] = = 3, -- Vicious Mauling
+	[GetSpellInfo(258313)] = = 3, -- Handcuff
+	[GetSpellInfo(259711)] = = 3, -- Lockdown
+	[GetSpellInfo(256198)] = = 3, -- Azerite Rounds: Incendiary
+	[GetSpellInfo(256101)] = = 3, -- Explosive Burst
+	[GetSpellInfo(256044)] = = 3, -- Deadeye
+	[GetSpellInfo(256474)] = = 3, -- Heartstopper Venom
+
+	-- Waycrest Manor
+	[GetSpellInfo(260703)] = = 3, -- Unstable Runic Mark
+	[GetSpellInfo(263905)] = = 3, -- Marking Cleave
+	[GetSpellInfo(265880)] = = 3, -- Dread Mark
+	[GetSpellInfo(265882)] = = 3, -- Lingering Dread
+	[GetSpellInfo(264105)] = = 3, -- Runic Mark
+	[GetSpellInfo(264050)] = = 3, -- Infected Thorn
+	[GetSpellInfo(261440)] = = 3, -- Virulent Pathogen
+	[GetSpellInfo(263891)] = = 3, -- Grasping Thorns
+	[GetSpellInfo(264378)] = = 3, -- Fragment Soul
+	[GetSpellInfo(266035)] = = 3, -- Bone Splinter
+	[GetSpellInfo(266036)] = = 3, -- Drain Essence
+	[GetSpellInfo(260907)] = = 3, -- Soul Manipulation
+	[GetSpellInfo(260741)] = = 3, -- Jagged Nettles
+	[GetSpellInfo(264556)] = = 3, -- Tearing Strike
+	[GetSpellInfo(265760)] = = 3, -- Thorned Barrage
+	[GetSpellInfo(260551)] = = 3, -- Soul Thorns
+	[GetSpellInfo(263943)] = = 3, -- Etch
+	[GetSpellInfo(265881)] = = 3, -- Decaying Touch
+	[GetSpellInfo(261438)] = = 3, -- Wasting Strike
+	[GetSpellInfo(268202)] = = 3, -- Death Lens
+	[GetSpellInfo(278456)] = = 3, -- Infest
+
+	-- Atal"Dazar
+	[GetSpellInfo(252781)] = = 3, -- Unstable Hex
+	[GetSpellInfo(250096)] = = 3, -- Wracking Pain
+	[GetSpellInfo(250371)] = = 3, -- Lingering Nausea
+	[GetSpellInfo(253562)] = = 3, -- Wildfire
+	[GetSpellInfo(255582)] = = 3, -- Molten Gold
+	[GetSpellInfo(255041)] = = 3, -- Terrifying Screech
+	[GetSpellInfo(255371)] = = 3, -- Terrifying Visage
+	[GetSpellInfo(252687)] = = 3, -- Venomfang Strike
+	[GetSpellInfo(254959)] = = 3, -- Soulburn
+	[GetSpellInfo(255814)] = = 3, -- Rending Maul
+	[GetSpellInfo(255421)] = = 3, -- Devour
+	[GetSpellInfo(255434)] = = 3, -- Serrated Teeth
+	[GetSpellInfo(256577)] = = 3, -- Soulfeast
+
+	-- King's Rest
+	[GetSpellInfo(270492)] = = 3, -- Hex
+	[GetSpellInfo(267763)] = = 3, -- Wretched Discharge
+	[GetSpellInfo(276031)] = = 3, -- Pit of Despair
+	[GetSpellInfo(265773)] = = 3, -- Spit Gold
+	[GetSpellInfo(270920)] = = 3, -- Seduction
+	[GetSpellInfo(270865)] = = 3, -- Hidden Blade
+	[GetSpellInfo(271564)] = = 3, -- Embalming Fluid
+	[GetSpellInfo(270507)] = = 3, -- Poison Barrage
+	[GetSpellInfo(267273)] = = 3, -- Poison Nova
+	[GetSpellInfo(270003)] = = 3, -- Suppression Slam
+	[GetSpellInfo(270084)] = = 3, -- Axe Barrage
+	[GetSpellInfo(267618)] = = 3, -- Drain Fluids
+	[GetSpellInfo(267626)] = = 3, -- Dessication
+	[GetSpellInfo(270487)] = = 3, -- Severing Blade
+	[GetSpellInfo(266238)] = = 3, -- Shattered Defenses
+	[GetSpellInfo(266231)] = = 3, -- Severing Axe
+	[GetSpellInfo(266191)] = = 3, -- Whirling Axes
+	[GetSpellInfo(272388)] = = 3, -- Shadow Barrage
+	[GetSpellInfo(271640)] = = 3, -- Dark Revelation
+	[GetSpellInfo(268796)] = = 3, -- Impaling Spear
+
+	-- Motherlode
+	[GetSpellInfo(263074)] = = 3, -- Festering Bite
+	[GetSpellInfo(280605)] = = 3, -- Brain Freeze
+	[GetSpellInfo(257337)] = = 3, -- Shocking Claw
+	[GetSpellInfo(270882)] = = 3, -- Blazing Azerite
+	[GetSpellInfo(268797)] = = 3, -- Transmute: Enemy to Goo
+	[GetSpellInfo(259856)] = = 3, -- Chemical Burn
+	[GetSpellInfo(269302)] = = 3, -- Toxic Blades
+	[GetSpellInfo(280604)] = = 3, -- Iced Spritzer
+	[GetSpellInfo(257371)] = = 3, -- Tear Gas
+	[GetSpellInfo(257544)] = = 3, -- Jagged Cut
+	[GetSpellInfo(268846)] = = 3, -- Echo Blade
+	[GetSpellInfo(262794)] = = 3, -- Energy Lash
+	[GetSpellInfo(262513)] = = 3, -- Azerite Heartseeker
+	[GetSpellInfo(260829)] = = 3, -- Homing Missle (travelling)
+	[GetSpellInfo(260838)] = = 3, -- Homing Missle (exploded)
+	[GetSpellInfo(263637)] = = 3, -- Clothesline
+
+	-- Temple of Sethraliss
+	[GetSpellInfo(269686)] = = 3, -- Plague
+	[GetSpellInfo(268013)] = = 3, -- Flame Shock
+	[GetSpellInfo(268008)] = = 3, -- Snake Charm
+	[GetSpellInfo(273563)] = = 3, -- Neurotoxin
+	[GetSpellInfo(272657)] = = 3, -- Noxious Breath
+	[GetSpellInfo(267027)] = = 3, -- Cytotoxin
+	[GetSpellInfo(272699)] = = 3, -- Venomous Spit
+	[GetSpellInfo(263371)] = = 3, -- Conduction
+	[GetSpellInfo(272655)] = = 3, -- Scouring Sand
+	[GetSpellInfo(263914)] = = 3, -- Blinding Sand
+	[GetSpellInfo(263958)] = = 3, -- A Knot of Snakes
+	[GetSpellInfo(266923)] = = 3, -- Galvanize
+	[GetSpellInfo(268007)] = = 3, -- Heart Attack
+
+	-- Underrot
+	[GetSpellInfo(265468)] = = 3, -- Withering Curse
+	[GetSpellInfo(278961)] = = 3, -- Decaying Mind
+	[GetSpellInfo(259714)] = = 3, -- Decaying Spores
+	[GetSpellInfo(272180)] = = 3, -- Death Bolt
+	[GetSpellInfo(272609)] = = 3, -- Maddening Gaze
+	[GetSpellInfo(269301)] = = 3, -- Putrid Blood
+	[GetSpellInfo(265533)] = = 3, -- Blood Maw
+	[GetSpellInfo(265019)] = = 3, -- Savage Cleave
+	[GetSpellInfo(265377)] = = 3, -- Hooked Snare
+	[GetSpellInfo(265625)] = = 3, -- Dark Omen
+	[GetSpellInfo(260685)] = = 3, -- Taint of G"huun
+	[GetSpellInfo(266107)] = = 3, -- Thirst for Blood
+	[GetSpellInfo(260455)] = = 3, -- Serrated Fangs
+
+	-- Raids
+	-- Uldir
+	-- MOTHER
+	[GetSpellInfo(268277)] = = 3, -- Purifying Flame
+	[GetSpellInfo(268253)] = = 3, -- Surgical Beam
+	[GetSpellInfo(268095)] = = 3, -- Cleansing Purge
+	[GetSpellInfo(267787)] = = 3, -- Sundering Scalpel
+	[GetSpellInfo(268198)] = = 3, -- Clinging Corruption
+	[GetSpellInfo(267821)] = = 3, -- Defense Grid
+
+	-- Vectis
+	[GetSpellInfo(265127)] = = 3, -- Lingering Infection
+	[GetSpellInfo(265178)] = = 3, -- Mutagenic Pathogen
+	[GetSpellInfo(265206)] = = 3, -- Immunosuppression
+	[GetSpellInfo(265212)] = = 3, -- Gestate
+	[GetSpellInfo(265129)] = = 3, -- Omega Vector
+	[GetSpellInfo(267160)] = = 3, -- Omega Vector
+	[GetSpellInfo(267161)] = = 3, -- Omega Vector
+	[GetSpellInfo(267162)] = = 3, -- Omega Vector
+	[GetSpellInfo(267163)] = = 3, -- Omega Vector
+	[GetSpellInfo(267164)] = = 3, -- Omega Vector
+
+	-- Mythrax
+	--[GetSpellInfo(272146)] = = 3, -- Annihilation
+	[GetSpellInfo(272536)] = = 3, -- Imminent Ruin
+	[GetSpellInfo(274693)] = = 3, -- Essence Shear
+	[GetSpellInfo(272407)] = = 3, -- Oblivion Sphere
+
+	-- Fetid Devourer
+	[GetSpellInfo(262313)] = = 3, -- Malodorous Miasma
+	[GetSpellInfo(262292)] = = 3, -- Rotting Regurgitation
+	[GetSpellInfo(262314)] = = 3, -- Deadly Disease
+
+	-- Taloc
+	[GetSpellInfo(270290)] = = 3, -- Blood Storm
+	[GetSpellInfo(275270)] = = 3, -- Fixate
+	[GetSpellInfo(271224)] = = 3, -- Plasma Discharge
+	[GetSpellInfo(271225)] = = 3, -- Plasma Discharge
+
+	-- Zul
+	[GetSpellInfo(273365)] = = 3, -- Dark Revelation
+	[GetSpellInfo(273434)] = = 3, -- Pit of Despair
+	[GetSpellInfo(274195)] = = 3, -- Corrupted Blood
+	[GetSpellInfo(272018)] = = 3, -- Absorbed in Darkness
+
+	-- Zek'voz, Herald of N'zoth
+	[GetSpellInfo(265237)] = = 3, -- Shatter
+	[GetSpellInfo(265264)] = = 3, -- Void Lash
+	[GetSpellInfo(265360)] = = 3, -- Roiling Deceit
+	[GetSpellInfo(265662)] = = 3, -- Corruptor's Pact
+	[GetSpellInfo(265646)] = = 3, -- Will of the Corruptor
+
+	-- G'huun
+	[GetSpellInfo(263436)] = = 3, -- Imperfect Physiology
+	[GetSpellInfo(263227)] = = 3, -- Putrid Blood
+	[GetSpellInfo(263372)] = = 3, -- Power Matrix
+	[GetSpellInfo(272506)] = = 3, -- Explosive Corruption
+	[GetSpellInfo(267409)] = = 3, -- Dark Bargain
+	[GetSpellInfo(267430)] = = 3, -- Torment
+	[GetSpellInfo(263235)] = = 3, -- Blood Feast
+	[GetSpellInfo(270287)] = = 3, -- Blighted Ground
+
+	-- Siege of Zuldazar
+	-- Ra'wani Kanae/Frida Ironbellows
+	[GetSpellInfo(283573)] = = 3, -- Sacred Blade
+	[GetSpellInfo(283617)] = = 3, -- Wave of Light
+	[GetSpellInfo(283651)] = = 3, -- Blinding Faith
+	[GetSpellInfo(284595)] = = 3, -- Penance
+	[GetSpellInfo(283582)] = = 3, -- Consecration
+
+	-- Grong
+	[GetSpellInfo(285998)] = = 3, -- Ferocious Roar
+	[GetSpellInfo(283069)] = = 3, -- Megatomic Fire
+	[GetSpellInfo(285671)] = = 3, -- Crushed
+	[GetSpellInfo(285875)] = = 3, -- Rending Bite
+	--[GetSpellInfo(282010)] = = 3, -- Shaken
+
+	-- Jaina
+	[GetSpellInfo(285253)] = = 3, -- Ice Shard
+	[GetSpellInfo(287993)] = = 3, -- Chilling Touch
+	[GetSpellInfo(287365)] = = 3, -- Searing Pitch
+	[GetSpellInfo(288038)] = = 3, -- Marked Target
+	[GetSpellInfo(285254)] = = 3, -- Avalanche
+	[GetSpellInfo(287626)] = = 3, -- Grasp of Frost
+	[GetSpellInfo(287490)] = = 3, -- Frozen Solid
+	[GetSpellInfo(287199)] = = 3, -- Ring of Ice
+	[GetSpellInfo(288392)] = = 3, -- Vengeful Seas
+
+	-- Stormwall Blockade
+	[GetSpellInfo(284369)] = = 3, -- Sea Storm
+	[GetSpellInfo(284410)] = = 3, -- Tempting Song
+	[GetSpellInfo(284405)] = = 3, -- Tempting Song
+	[GetSpellInfo(284121)] = = 3, -- Thunderous Boom
+	[GetSpellInfo(286680)] = = 3, -- Roiling Tides
+
+	-- Opulence
+	[GetSpellInfo(286501)] = = 3, -- Creeping Blaze
+	[GetSpellInfo(283610)] = = 3, -- Crush
+	[GetSpellInfo(289383)] = = 3, -- Chaotic Displacement
+	[GetSpellInfo(285479)] = = 3, -- Flame Jet
+	[GetSpellInfo(283063)] = = 3, -- Flames of Punishment
+	[GetSpellInfo(283507)] = = 3, -- Volatile Charge
+
+	-- King Rastakhan
+	[GetSpellInfo(284995)] = = 3, -- Zombie Dust
+	[GetSpellInfo(285349)] = = 3, -- Plague of Fire
+	[GetSpellInfo(285044)] = = 3, -- Toad Toxin
+	[GetSpellInfo(284831)] = = 3, -- Scorching Detonation
+	[GetSpellInfo(289858)] = = 3, -- Crushed
+	[GetSpellInfo(284662)] = = 3, -- Seal of Purification
+	[GetSpellInfo(284676)] = = 3, -- Seal of Purification
+	[GetSpellInfo(285178)] = = 3, -- Serpent's Breath
+	[GetSpellInfo(285010)] = = 3, -- Poison Toad Slime
+
+	-- Jadefire Masters
+	[GetSpellInfo(282037)] = = 3, -- Rising Flames
+	[GetSpellInfo(284374)] = = 3, -- Magma Trap
+	[GetSpellInfo(285632)] = = 3, -- Stalking
+	[GetSpellInfo(288151)] = = 3, -- Tested
+	[GetSpellInfo(284089)] = = 3, -- Successful Defense
+	[GetSpellInfo(286988)] = = 3, -- Searing Embers
+
+	-- Mekkatorque
+	[GetSpellInfo(288806)] = = 3, -- Gigavolt Blast
+	[GetSpellInfo(289023)] = = 3, -- Enormous
+	[GetSpellInfo(286646)] = = 3, -- Gigavolt Charge
+	[GetSpellInfo(288939)] = = 3, -- Gigavolt Radiation
+	[GetSpellInfo(284168)] = = 3, -- Shrunk
+	[GetSpellInfo(286516)] = = 3, -- Anti-Tampering Shock
+	[GetSpellInfo(286480)] = = 3, -- Anti-Tampering Shock
+	[GetSpellInfo(284214)] = = 3, -- Trample
+
+	-- Conclave of the Chosen
+	[GetSpellInfo(284663)] = = 3, -- Bwonsamdi's Wrath
+	[GetSpellInfo(282444)] = = 3, -- Lacerating Claws
+	[GetSpellInfo(282592)] = = 3, -- Bleeding Wounds
+	[GetSpellInfo(282209)] = = 3, -- Mark of Prey
+	[GetSpellInfo(285879)] = = 3, -- Mind Wipe
+	[GetSpellInfo(282135)] = = 3, -- Crawling Hex
+	[GetSpellInfo(286060)] = = 3, -- Cry of the Fallen
+	[GetSpellInfo(282447)] = = 3, -- Kimbul's Wrath
+	[GetSpellInfo(282834)] = = 3, -- Kimbul's Wrath
+	[GetSpellInfo(286811)] = = 3, -- Akunda's Wrath
+	[GetSpellInfo(286838)] = = 3, -- Static Orb
+
 	-- Legion Raids
 	-- Antorus, the Burning Throne
 	-- Garothi Worldbreaker
