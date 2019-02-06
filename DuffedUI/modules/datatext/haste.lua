@@ -1,4 +1,4 @@
-local D, C, L = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...))
 
 if not C['datatext']['haste'] or C['datatext']['haste'] == 0 then return end
 
@@ -33,7 +33,7 @@ local function Update(self, t)
 	if int < 0 then
 		Text:SetText(Stat.Color2 .. format('%.2f', haste) .. '% |r' .. Stat.Color1 .. STAT_HASTE ..'|r')
 		int = 1
-	end     
+	end
 end
 
 Stat:SetScript('OnUpdate', Update)
