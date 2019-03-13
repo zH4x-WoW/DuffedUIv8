@@ -3,6 +3,7 @@ local D, C, L = unpack(select(2, ...))
 local menuFrame = CreateFrame('Frame', 'DuffedUIMicroButtonsDropDown', UIParent, 'UIDropDownMenuTemplate')
 D['MicroMenu'] = {
 	{text = CHARACTER_BUTTON, func = function() ToggleCharacter('PaperDollFrame') end, notCheckable = true},
+	{text = CALENDAR_VIEW_EVENT, func = function() if (not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end Calendar_Toggle()	end, notCheckable = true},
 	{text = SPELLBOOK_ABILITIES_BUTTON, func = function() ToggleFrame(SpellBookFrame) end, notCheckable = true},
 	{text = TALENTS_BUTTON, func = function() if not PlayerTalentFrame then TalentFrame_LoadUI() end ShowUIPanel(PlayerTalentFrame) end, notCheckable = true},
 	{text = ACHIEVEMENT_BUTTON, func = function() ToggleAchievementFrame() end, notCheckable = true},

@@ -4,7 +4,7 @@ local sort, pairs, gsub, strfind, strlower, strtrim = sort, pairs, gsub, strfind
 local DEVELOPER_STRING = ''
 local LINE_BREAK = '\n'
 
-local Changelog = {
+AS.ChangeLog = {
 	['4.00'] = {
 		'Core: API, Options & Embed',
 		'Removed: WeakAura & TellMeWhen',
@@ -43,6 +43,13 @@ local Changelog = {
 	['4.08'] = {
 		'Core: Themes & Shadows',
 		'Updated: Allied Races, AzeriteUI, World Map, Quest'
+	},
+	['4.09'] = {
+		'Core: SetTexture(), StatusBarColor, NavButtons',
+		'Updated: Immersion, PetTracker, Inspect, Error Frame, FlyPlateBuffs, WA, AddOnManger, ClassicQuestLog, MyRolePlay, Collections',
+	},
+	['4.10'] = {
+		'Updated: WA Font',
 	},
 }
 
@@ -190,6 +197,11 @@ AS.Options = {
 							type = 'color',
 							order = 4,
 							name = 'Selected / Checked',
+						},
+						StatusBarColor = {
+							type = 'color',
+							order = 5,
+							name = 'Status Bars',
 						},
 					},
 				},
@@ -772,7 +784,7 @@ local Skins = {
 	},
 }
 
-for Version, Table in pairs(Changelog) do
+for Version, Table in pairs(AS.ChangeLog) do
 	AS.Options.args.about.args.changelog.args[Version] = {
 		type = 'group',
 		name = Version,
@@ -911,7 +923,7 @@ function AS:BuildProfile()
 			['DBMRadarTrans'] = false,
 			['DBMSkinHalf'] = false,
 			['DetailsBackdrop'] = true,
-			['ElvUIStyle'] = false,
+			['ElvUIStyle'] = AS:CheckAddOn('ElvUI') and true or false,
 			['EmbedSystemMessage'] = true,
 			['HideChatFrame'] = 'NONE',
 			['HighlightColor'] = { 1, .8, .1 },
@@ -920,6 +932,7 @@ function AS:BuildProfile()
 			['Parchment'] = false,
 			['RecountBackdrop'] = true,
 			['SelectedColor'] = { 0, 0.44, .87 },
+			['StatusBarColor'] = { .01, .39, .1 },
 			['SkadaBackdrop'] = true,
 			['SkinDebug'] = false,
 			['SkinTemplate'] = 'Transparent',
