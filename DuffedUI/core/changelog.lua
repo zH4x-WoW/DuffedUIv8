@@ -4,9 +4,7 @@ local ChangeLog = CreateFrame('frame')
 local ChangeLogData = {
 	"Changes:",
 		"• Added bugfixes from Rav",
-		"• Increase interface-version to current Patchlevel of WoW",
-		"• Update AddOnSkins to new major version 4.07",
-		"• Readded some skinning functions",
+		"• Update for AddOnSkins and Project Azilroka",
 		--"• ",
 	" ",
 	"Notes:",
