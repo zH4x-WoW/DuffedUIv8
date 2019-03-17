@@ -603,7 +603,7 @@ D['Buffids'] = {
 
 	PALADIN = {
 		{53563, "TOPLEFT", {0.7, 0.3, 0.7}}, -- Beacon of Light
-		{156910, "TOPLEFT", {0.7, 0.3, 0.7}}, -- Beacon of Faith
+		{156910, "TOPRIGHT", {0.7, 0.3, 0.7}}, -- Beacon of Faith
 		{200025, "TOPLEFT", {0.7, 0.3, 0.7}}, -- Beacon of Virtue
 		{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true}, -- Hand of Protection
 		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true}, -- Hand of Freedom
