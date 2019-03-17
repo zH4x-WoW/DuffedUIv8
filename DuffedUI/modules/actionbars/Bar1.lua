@@ -9,7 +9,7 @@ local Page = {
 	['ROGUE'] = '[bonusbar:1] 7;',
 	['WARLOCK'] = '[stance:1] 10;',
 	['MONK'] = '[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;',
-	['DEFAULT'] = '[vehicleui:12] 12; [possessbar] 12; [overridebar] 14; [shapeshift] 13; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6;',
+	['DEFAULT'] = '[overridebar] 14; [possessbar] 12; [shapeshift] 13; [vehicleui:12] 12; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6;',
 }
 
 local function GetBar()
