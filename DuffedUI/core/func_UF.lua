@@ -578,8 +578,8 @@ end
 --Raidbuffs & -debuffs
 D['Buffids'] = {
 	PRIEST = {
-		{194384, "TOPRIGHT", {1, 0, 0.75}}, -- Atonement
-		{214206, "TOPRIGHT", {1, 0, 0.75}}, -- Atonement PvP
+		{194384, "BOTTOMRIGHT", {1, 0, 0.75}}, -- Atonement
+		{214206, "BOTTOMRIGHT", {1, 0, 0.75}}, -- Atonement PvP
 		{41635, "BOTTOMRIGHT", {0.2, 0.7, 0.2}}, -- Prayer of Mending
 		{193065, "BOTTOMRIGHT", {0.54, 0.21, 0.78}}, -- Masochism
 		{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}}, -- Renew
@@ -590,7 +590,7 @@ D['Buffids'] = {
 	},
 
 	DRUID = {
-		{774, "TOPRIGHT", {0.8, 0.4, 0.8}}, -- Rejuvenation
+		{774, "TOPLEFT", {0.8, 0.4, 0.8}}, -- Rejuvenation
 		{155777, "RIGHT", {0.8, 0.4, 0.8}}, -- Germination
 		{8936, "BOTTOMLEFT", {0.2, 0.8, 0.2}}, -- Regrowth
 		{33763, "TOPLEFT", {0.4, 0.8, 0.2}}, -- Lifebloom
@@ -602,9 +602,9 @@ D['Buffids'] = {
 	},
 
 	PALADIN = {
-		{53563, "TOPRIGHT", {0.7, 0.3, 0.7}}, -- Beacon of Light
-		{156910, "TOPRIGHT", {0.7, 0.3, 0.7}}, -- Beacon of Faith
-		{200025, "TOPRIGHT", {0.7, 0.3, 0.7}}, -- Beacon of Virtue
+		{53563, "TOPLEFT", {0.7, 0.3, 0.7}}, -- Beacon of Light
+		{156910, "TOPLEFT", {0.7, 0.3, 0.7}}, -- Beacon of Faith
+		{200025, "TOPLEFT", {0.7, 0.3, 0.7}}, -- Beacon of Virtue
 		{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true}, -- Hand of Protection
 		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true}, -- Hand of Freedom
 		{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true}, -- Hand of Sacrifice
@@ -612,32 +612,32 @@ D['Buffids'] = {
 	},
 
 	SHAMAN = {
-		{61295, "TOPRIGHT", {0.7, 0.3, 0.7}}, -- Riptide
-		{974, "BOTTOMRIGHT", {0.2, 0.2, 1}} -- Earth Shield
+		{61295, "TOPLEFT", {0.7, 0.3, 0.7}}, -- Riptide
+		{974, "BOTTOMRIGHT", {0.2, 0.2, 1}}  -- Earth Shield
 	},
 
 	MONK = {
 		{119611, 'TOPLEFT', {0.8, 0.4, 0.8}},	             -- Renewing Mist
-		{116849, 'TOPRIGHT', {0.2, 0.8, 0.2}},	             -- Life Cocoon
+		{116849, 'RIGHT', {0.2, 0.8, 0.2}},	             	 -- Life Cocoon
 		{124682, 'BOTTOMLEFT', {0.4, 0.8, 0.2}},             -- Enveloping Mist
 		{124081, 'BOTTOMRIGHT', {0.7, 0.4, 0}},              -- Zen Sphere
 	},
 	
 	ROGUE = {
-		{57934, "TOPRIGHT", {227 / 255, 23 / 255, 13 / 255}} -- Tricks of the Trade
+		{57934, "TOPLEFT", {227 / 255, 23 / 255, 13 / 255}} -- Tricks of the Trade
 	},
 
 	WARRIOR = {
 		{114030, "TOPLEFT", {0.2, 0.2, 1}}, -- Vigilance
-		{147833, "TOPRIGHT", {227 / 255, 23 / 255, 13 / 255}} -- Intervene
+		{147833, "RIGHT", {227 / 255, 23 / 255, 13 / 255}} -- Intervene
 	},
 	
 	PET = {
 		-- Warlock Pets
-		{193396, "TOPRIGHT", {0.6, 0.2, 0.8}, true}, -- Demonic Empowerment
+		{193396, "TOPLEFT", {0.6, 0.2, 0.8}, true}, -- Demonic Empowerment
 		-- Hunter Pets
 		{19615, "TOPLEFT", {227 / 255, 23 / 255, 13 / 255}, true}, -- Frenzy
-		{136, "TOPRIGHT", {0.2, 0.8, 0.2}, true} -- Mend Pet
+		{136, "LEFT", {0.2, 0.8, 0.2}, true} -- Mend Pet
 	},
 
 	ALL = {
