@@ -733,6 +733,12 @@ spellCooldowns = {
 			265221, -- Fireblood
 			265225, -- Mole Machine
 		},
+		['KulTiran'] = {
+			287712, -- Haymaker
+		},
+		['ZandalariTroll'] = {
+			291944, -- Regeneratin'
+		},
 	},
 	['PET'] = {
 		-- Warlock: Succubus
