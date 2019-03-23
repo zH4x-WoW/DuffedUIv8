@@ -642,7 +642,9 @@ do
 
 		local button = CreateFrame('BUTTON', 'GameMenuDuffedUIButtonOptions', menu, 'GameMenuButtonTemplate')
 		button:SetSize(continuex, continuey)
-		GameMenuFrame.EC:SkinButton()
+		if IsAddOnLoaded('Enhanced_Config') then
+			GameMenuFrame.EC:SkinButton()
+		end
 		button:Point('TOP', interface, 'BOTTOM', 0, -1)
 		button:SetText('DuffedUI')
 		button:SkinButton()
