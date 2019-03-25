@@ -235,7 +235,7 @@ end
 
 function AS:StartSkinning(event)
 	if AS:CheckAddOn('ElvUI') then
-		if tonumber(ElvUI[1].version) < 10.86 then
+		if tonumber(ElvUI[1].version) < 10.91 then
 			AS:AcceptFrame(format('AddOnSkins is not compatible with ElvUI %s.\nPlease update ElvUI at www.tukui.org', ElvUI[1].version))
 			return
 		end
@@ -246,7 +246,6 @@ function AS:StartSkinning(event)
 	AS.Color = AS:CheckOption('ClassColor') and AS.ClassColor or { 0, 0.44, .87, 1 }
 	AS.Mult = PixelUtil.GetNearestPixelSize(1, AS:Round(max(0.4, min(1.15, 768 / AS.ScreenHeight)), 5))
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
-	AS.ProperVersion = strlen(AS.Version) == 3 and tostring(AS.Version)..'0' or AS.Version
 
 	AS:UpdateMedia()
 
@@ -304,8 +303,8 @@ function AS:StartSkinning(event)
 
 	AS:CreateChangeLog()
 
-	if AS:CheckOption('ChangeLogVersion') == nil or AS:CheckOption('ChangeLogVersion') < AS.ProperVersion then
-		AS:SetOption('ChangeLogVersion', AS.ProperVersion)
+	if AS:CheckOption('ChangeLogVersion') == nil or tonumber(AS:CheckOption('ChangeLogVersion')) < tonumber(AS.Version) then
+		AS:SetOption('ChangeLogVersion', AS.Version)
 		AS:ToggleChangeLog()
 	end
 
@@ -467,6 +466,7 @@ function AS:BugReportFrame(ErrorIndex)
 end
 
 function AS:CreateChangeLog()
+	local ProperVersion = tostring(strlen(AS.Version) == 3 and AS.Version..'0' or AS.Version)
 	local ChangeLogFrame = CreateFrame("Frame", 'AddOnSkins_ChangeLog', UIParent)
 	ChangeLogFrame:Hide()
 	ChangeLogFrame:SetPoint("CENTER")
@@ -483,7 +483,7 @@ function AS:CreateChangeLog()
 	ChangeLogFrame.Title:SetFont(AS.Font, 16)
 	ChangeLogFrame.Title:SetPoint("TOP", ChangeLogFrame, "TOP", 0, -3)
 	ChangeLogFrame.Title:SetSize(400, 20)
-	ChangeLogFrame.Title:SetFormattedText('%s - ChangeLog %s', AS.Title, WrapTextInColorCode(AS.ProperVersion, "FF00C0FA"))
+	ChangeLogFrame.Title:SetFormattedText('%s - ChangeLog %s', AS.Title, WrapTextInColorCode(ProperVersion, "FF00C0FA"))
 
 	ChangeLogFrame.Close = CreateFrame("Button", nil, ChangeLogFrame, "UIPanelButtonTemplate")
 	ChangeLogFrame.Close:Point("BOTTOM", ChangeLogFrame, "BOTTOM", 0, 10)
@@ -496,17 +496,18 @@ function AS:CreateChangeLog()
 	ChangeLogFrame.Changes = {}
 
 	local offset, i = 0, 0
-	for _, Change in pairs(AS.ChangeLog[AS.ProperVersion]) do
-		i, offset = i + 1, offset + 16
+
+	for _, Change in pairs(AS.ChangeLog[ProperVersion]) do
+		i, offset = i + 1, offset + 28
 		ChangeLogFrame.Changes[i] = ChangeLogFrame:CreateFontString(nil, 'OVERLAY')
-		ChangeLogFrame.Changes[i]:SetSize(375, 16)
+		ChangeLogFrame.Changes[i]:SetSize(375, 28)
 		ChangeLogFrame.Changes[i]:SetFont(AS.Font, 14)
 		ChangeLogFrame.Changes[i]:SetPoint("TOP", ChangeLogFrame.Title, "BOTTOM", 5, -offset)
 		ChangeLogFrame.Changes[i]:SetText(Change)
 		ChangeLogFrame.Changes[i]:SetWordWrap(true)
 	end
 
-	ChangeLogFrame:SetSize(400, 100 + (i * 16))
+	ChangeLogFrame:SetSize(400, 100 + (i * 28))
 
 	AS.ChangeLogFrame = ChangeLogFrame
 end
