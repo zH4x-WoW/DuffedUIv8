@@ -3,8 +3,11 @@ local D, C, L = unpack(select(2, ...))
 local ChangeLog = CreateFrame('frame')
 local ChangeLogData = {
 	"Changes:",
-		"• Added bugfixes from Rav",
+		"• Added bugfix for questactionbar (not showing skills)",
+		"• Added bugfix for bags (texture issue)",
+		"• Better script for battleground-datatext",
 		"• Update for AddOnSkins and Project Azilroka",
+		"• Added racials for Kul Tiran and Zandalari to spellcooldowns-plugin",
 		--"• ",
 	" ",
 	"Notes:",
