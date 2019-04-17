@@ -975,6 +975,27 @@ D['Debuffids'] = {
 	[GetSpellInfo(286811)] = 3, -- Akunda's Wrath
 	[GetSpellInfo(286838)] = 3, -- Static Orb
 
+	-- Crucible of Storms
+	-- The Restless Cabal
+	[GetSpellInfo(282386)] = 3, -- Aphotic Blast
+	[GetSpellInfo(282384)] = 3, -- Shear Mind
+	[GetSpellInfo(282566)] = 3, -- Promises of Power
+	[GetSpellInfo(282561)] = 3, -- Dark Herald
+	[GetSpellInfo(282432)] = 3, -- Crushing Doubt
+	[GetSpellInfo(282589)] = 3, -- Mind Scramble
+	[GetSpellInfo(292826)] = 3, -- Mind Scramble
+
+	-- Fa'thuul the Feared
+	[GetSpellInfo(284851)] = 3, -- Touch of the End
+	[GetSpellInfo(286459)] = 3, -- Feedback: Void
+	[GetSpellInfo(286457)] = 3, -- Feedback: Ocean
+	[GetSpellInfo(286458)] = 3, -- Feedback: Storm
+	[GetSpellInfo(285367)] = 3, -- Piercing Gaze of N'Zoth
+	[GetSpellInfo(284733)] = 3, -- Embrace of the Void
+	[GetSpellInfo(284722)] = 3, -- Umbral Shell
+	[GetSpellInfo(285345)] = 3, -- Maddening Eyes of N'Zoth
+	[GetSpellInfo(285477)] = 3, -- Obscurity
+
 	-- Legion Raids
 	-- Antorus, the Burning Throne
 	-- Garothi Worldbreaker
