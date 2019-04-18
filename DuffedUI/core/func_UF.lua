@@ -995,6 +995,7 @@ D['Debuffids'] = {
 	[GetSpellInfo(284722)] = 3, -- Umbral Shell
 	[GetSpellInfo(285345)] = 3, -- Maddening Eyes of N'Zoth
 	[GetSpellInfo(285477)] = 3, -- Obscurity
+	[GetSpellInfo(285652)] = 3, -- Insatiable Torment
 
 	-- Legion Raids
 	-- Antorus, the Burning Throne
