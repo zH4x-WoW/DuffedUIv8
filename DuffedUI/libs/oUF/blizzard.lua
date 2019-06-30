@@ -14,7 +14,11 @@ local hiddenParent = CreateFrame('Frame', nil, UIParent)
 hiddenParent:SetAllPoints()
 hiddenParent:Hide()
 
-local function handleFrame(baseName)
+local function insecureOnShow(self)
+	self:Hide()
+end
+
+local function handleFrame(baseName, doNotReparent)
 	local frame
 	if(type(baseName) == 'string') then
 		frame = _G[baseName]
@@ -27,7 +31,10 @@ local function handleFrame(baseName)
 		frame:Hide()
 
 		-- Keep frame hidden without causing taint
-		frame:SetParent(hiddenParent)
+		--frame:SetParent(hiddenParent)
+		if(not doNotReparent) then
+			frame:SetParent(hiddenParent)
+		end
 
 		local health = frame.healthBar or frame.healthbar
 		if(health) then
@@ -116,7 +123,10 @@ function oUF:DisableBlizzard(unit)
 	elseif(unit:match('nameplate%d+$')) then
 		local frame = C_NamePlate.GetNamePlateForUnit(unit)
 		if(frame and frame.UnitFrame) then
-			handleFrame(frame.UnitFrame)
+			--handleFrame(frame.UnitFrame)
+			frame.UnitFrame:HookScript('OnShow', insecureOnShow)
+
+			handleFrame(frame.UnitFrame, true)
 		end
 	end
 end

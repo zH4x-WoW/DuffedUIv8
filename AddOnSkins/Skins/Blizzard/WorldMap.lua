@@ -427,6 +427,8 @@ function AS:Blizzard_WorldMap()
 
 	AS:StripTextures(WorldMapFrame.NavBar)
 	AS:StripTextures(WorldMapFrame.NavBar.overlay)
+	
+	AS:Kill(WorldMapFrame.BorderFrame.NineSlice)
 
 	AS:SkinButton(WorldMapFrame.NavBar.homeButton)
 	WorldMapFrame.NavBar.homeButton.xoffset = 1

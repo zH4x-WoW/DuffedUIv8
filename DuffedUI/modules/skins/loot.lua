@@ -78,7 +78,7 @@ local function LoadSkin()
 		end
 	end)
 	
-	-- bonus
+	--[[ bonus
 	BonusRollFrame:StripTextures()
 	BonusRollFrame:CreateBackdrop('Transparent')
 	BonusRollFrame.backdrop:SetFrameLevel(0)
@@ -109,7 +109,7 @@ local function LoadSkin()
 		BonusRollMoneyWonFrame.Icon.b:Point('TOPLEFT', BonusRollMoneyWonFrame.Icon, 'TOPLEFT', -2, 2)
 		BonusRollMoneyWonFrame.Icon.b:Point('BOTTOMRIGHT', BonusRollMoneyWonFrame.Icon, 'BOTTOMRIGHT', 2, -2)
 		BonusRollMoneyWonFrame.Icon:SetParent(BonusRollMoneyWonFrame.Icon.b)
-	end
+	end]]
 
 	-- Lootframe
 	if C['loot']['lootframe'] then

@@ -32,11 +32,13 @@ function AS:Blizzard_Others()
 	CinematicFrameCloseDialog:SetScale(UIParent:GetScale())
 	AS:SkinButton(CinematicFrameCloseDialogConfirmButton)
 	AS:SkinButton(CinematicFrameCloseDialogResumeButton)
+	AS:Kill(CinematicFrameCloseDialog.Border)
 
 	AS:SetTemplate(MovieFrame.CloseDialog)
 	MovieFrame.CloseDialog:SetScale(UIParent:GetScale())
 	AS:SkinButton(MovieFrame.CloseDialog.ConfirmButton)
 	AS:SkinButton(MovieFrame.CloseDialog.ResumeButton)
+	AS:Kill(MovieFrame.CloseDialog.Border)
 
 	AS:SkinFrame(ReportCheatingDialog)
 	AS:SkinButton(ReportCheatingDialog.reportButton)
@@ -46,7 +48,8 @@ function AS:Blizzard_Others()
 
 	for i = 1, 4 do
 		local Popup = _G["StaticPopup"..i]
-
+		
+		AS:Kill(Popup.Border)
 		AS:SkinFrame(Popup, nil, true)
 
 		for j = 1, 4 do
@@ -80,6 +83,7 @@ function AS:Blizzard_Others()
 	AS:SkinButton(ReadyCheckFrameNoButton)
 
 	AS:SkinBackdropFrame(GameMenuFrame)
+	AS:Kill(GameMenuFrame.Border)
 	AS:CreateBackdrop(GameMenuFrameHeader)
 	for i = 1, GameMenuFrame:GetNumRegions() do
 		local Region = select(i, GameMenuFrame:GetRegions())
@@ -103,6 +107,7 @@ function AS:Blizzard_Others()
 		local listFrame = _G["DropDownList"..level];
 		local listFrameName = listFrame:GetName();
 		local expandArrow = _G[listFrameName.."Button"..index.."ExpandArrow"];
+		AS:SetTemplate(_G["DropDownList"..level.."MenuBackdrop"])
 		if expandArrow then
 			expandArrow:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
 			expandArrow:SetSize(12, 12)

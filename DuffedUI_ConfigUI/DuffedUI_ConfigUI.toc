@@ -1,4 +1,4 @@
-## Interface: 80100
+## Interface: 80200
 ## Title: |cffC41F3BDuffedUI|r Config UI
 ## Notes: Someday there is only pantesaur left.
 ## Version: 8.88

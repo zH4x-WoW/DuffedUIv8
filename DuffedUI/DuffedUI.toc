@@ -1,4 +1,4 @@
-## Interface: 80100
+## Interface: 80200
 ## Author: Merith @ Zirkel des Cenarius EU, Rav
 ## Version: 8.88
 ## Title: |cffC41F3BDuffedUI|r
