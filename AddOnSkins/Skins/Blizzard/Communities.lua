@@ -202,11 +202,14 @@ function AS:Blizzard_Communities(event, addon)
 	AS:SkinScrollBar(CommunitiesFrame.GuildDetailsFrame.Info.DetailsFrame.ScrollBar)
 	AS:SkinScrollBar(CommunitiesFrame.GuildDetailsFrame.Info.MOTDScrollFrame.ScrollBar)
 
-	--[[hooksecurefunc("CommunitiesGuildNewsButton_SetNews", function(button)
-		if button.header:IsShown() then
-			button.header:SetAlpha(0)
+	hooksecurefunc("GuildNewsButton_SetNews", function(button, news_id)
+		local newsInfo = C_GuildInfo.GetGuildNewsInfo(news_id)
+		if newsInfo then
+			if button.header:IsShown() then
+				button.header:SetAlpha(0)
+			end
 		end
-	end)]]
+	end)
 
 	CommunitiesFrame.GuildDetailsFrame.News.Container.ScrollBar.ScrollUpButton = CommunitiesFrame.GuildDetailsFrame.News.Container.scrollUp
 	CommunitiesFrame.GuildDetailsFrame.News.Container.ScrollBar.ScrollDownButton = CommunitiesFrame.GuildDetailsFrame.News.Container.scrollDown

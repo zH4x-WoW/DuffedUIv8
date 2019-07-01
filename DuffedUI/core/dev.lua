@@ -43,3 +43,9 @@ end)
 --[[hooksecurefunc(getmetatable(GameTooltip).__index,'Show', function(self)
 	print(self:GetName() or tostring(self))
 end)]]
+
+-- Shorten framestack command
+SlashCmdList["FSTACK"] = function()
+	SlashCmdList.FRAMESTACK(0)
+end
+_G.SLASH_FSTACK1 = "/fs"
