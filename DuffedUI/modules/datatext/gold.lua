@@ -17,6 +17,35 @@ local Text = Stat:CreateFontString('DuffedUIDataInfoGoldText', 'OVERLAY')
 Text:SetFont(f, fs, ff)
 D['DataTextPosition'](C['datatext']['gold'], Text)
 
+local C_UIWidgetManager_GetStatusBarWidgetVisualizationInfo = C_UIWidgetManager.GetStatusBarWidgetVisualizationInfo
+
+local Widget_IDs = {
+	["Alliance"] = {
+		57006, -- A Worthy Ally
+		{L['dt']['FarseerOri'], 1940},
+		{L['dt']['HunterAkana'], 1613},
+		{L['dt']['BladesmanInowari'], 1966}
+	},
+	["Horde"] = {
+		57005, -- Becoming a Friend
+		{L['dt']['NeriSharpfin'], 1621},
+		{L['dt']['PoenGillbrack'], 1622},
+		{L['dt']['VimBrineheart'], 1920}
+	}
+}
+
+local BODYGUARD_LEVEL_XP_FORMAT = L['dt']['Rank'] .. " %d (%d/%d)"
+local NAZJATAR_MAP_ID = 1718
+
+local function GetBodyguardXP(widgetID)
+	local widget = C_UIWidgetManager_GetStatusBarWidgetVisualizationInfo(widgetID)
+	local rank = string.match(widget.overrideBarText, "%d+")
+	local cur = widget.barValue - widget.barMin
+	local next = widget.barMax - widget.barMin
+	local total = widget.barValue
+	return rank, cur, next, total
+end
+
 local Profit = 0
 local Spent = 0
 local OldMoney = 0
@@ -231,7 +260,21 @@ Stat:SetScript('OnEnter', function(self)
 		D['Currency'](1275)
 		D['Currency'](1721) -- Patch 8.2
 	end
-
+	
+	-- Nazjatar follower XP
+	local hasNazjatarBodyguardXP = false
+	local widgetGroup = Widget_IDs[D.Faction]
+	if (select(4, UnitPosition('player')) == NAZJATAR_MAP_ID and widgetGroup and IsQuestFlaggedCompleted(widgetGroup[1])) then
+		GameTooltip:AddLine(' ')
+		GameTooltip:AddLine(L['dt']['NazjatarFollowerXP'])
+		for i = 2, 4 do
+			local npcName, widgetID = unpack(widgetGroup[i])
+			local rank, cur, next, total = GetBodyguardXP(widgetID)
+			GameTooltip:AddDoubleLine(npcName, BODYGUARD_LEVEL_XP_FORMAT:format(rank, cur, next), 1, 1, 1)
+		end
+		hasNazjatarBodyguardXP = true
+	end
+	
 	GameTooltip:AddLine(' ')
 	GameTooltip:AddLine(L['dt']['goldbagsopen'])
 	GameTooltip:AddLine(L['dt']['goldcurrency'])
