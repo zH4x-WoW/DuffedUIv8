@@ -8,6 +8,7 @@ D['Dummy'] = function() return end
 D['MyName'] = select(1, UnitName('player'))
 D['Class'] = select(2, UnitClass('player'))
 D['MyRace'] = select(2, UnitRace('player'))
+D['Faction'], D['LocalizedFaction'] = UnitFactionGroup("player")
 D['Level'] = UnitLevel('player')
 D['MyRealm'] = GetRealmName()
 D['Client'] = GetLocale()

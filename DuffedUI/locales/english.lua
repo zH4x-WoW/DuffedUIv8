@@ -228,6 +228,14 @@ L['dt'] = {
 	['report'] = 'Mission(s) Report:',
 	['missions'] = 'Work Work',
 	['nomissions'] = 'No Missions',
+	['Rank'] = "Rank",
+	['FarseerOri'] = "Farseer Ori",
+	['HunterAkana'] = "Hunter Akana",
+	['BladesmanInowari'] = "Bladesman Inowari",
+	['NeriSharpfin'] = "Neri Sharpfin",
+	['PoenGillbrack'] = "Poen Gillbrack",
+	['VimBrineheart'] = "Vim Brineheart",
+	['NazjatarFollowerXP'] = "Nazjatar Follower XP",
 }
 
 L['Slots'] = {

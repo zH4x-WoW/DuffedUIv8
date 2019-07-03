@@ -124,7 +124,10 @@ function oUF:DisableBlizzard(unit)
 		local frame = C_NamePlate.GetNamePlateForUnit(unit)
 		if(frame and frame.UnitFrame) then
 			--handleFrame(frame.UnitFrame)
-			frame.UnitFrame:HookScript('OnShow', insecureOnShow)
+			if(not frame.UnitFrame.isHooked) then
+				frame.UnitFrame:HookScript('OnShow', insecureOnShow)
+				frame.UnitFrame.isHooked = true
+			end
 
 			handleFrame(frame.UnitFrame, true)
 		end

@@ -230,6 +230,14 @@ if D.Client == 'deDE' then
 		['report'] = 'Mission(en) Report:',
 		['missions'] = 'Missionen in Arbeit',
 		['nomissions'] = 'Keine Missionen',
+		['Rank'] = "Rang",
+		['FarseerOri'] = "Scharfseher Ori",
+		['HunterAkana'] = "Jäger Akana",
+		['BladesmanInowari'] = "Klingenkämpfer Inowari",
+		['NeriSharpfin'] = "Neri Sharffinne",
+		['PoenGillbrack'] = "Poen Kiembrack",
+		['VimBrineheart'] = "Vim Salzherz",
+		['NazjatarFollowerXP'] = "Nazjatar Begleiter XP",
 	}
 
 	L['Slots'] = {
