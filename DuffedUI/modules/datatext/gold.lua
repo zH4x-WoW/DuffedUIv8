@@ -130,13 +130,28 @@ Stat:SetScript('OnEnter', function(self)
 	GameTooltip:AddLine(' ')
 
 	local totalGold = 0
+	local myGold = {}
 	GameTooltip:AddLine(L['dt']['character'])
 
 	local thisRealmList = DuffedUIData.gold[myPlayerRealm]
-	for k, v in pairs(thisRealmList) do
-		GameTooltip:AddDoubleLine(k, FormatTooltipMoney(v), 1, 1, 1, 1, 1, 1)
-		totalGold = totalGold + v
-	end
+	for k,_ in pairs(thisRealmList) do
+		if thisRealmList[k] then
+			tinsert (myGold,
+				{
+					name = k,
+					amount = thisRealmList[k],
+					amountText = FormatTooltipMoney(thisRealmList[k]),
+					1, 1, 1, 1, 1, 1,
+				}
+			)
+		end
+		totalGold = totalGold + thisRealmList[k]
+		end
+
+		for i = 1, #myGold do
+			local g = myGold[i]
+			GameTooltip:AddDoubleLine(g.name == D['MyName'] and g.name..' |TInterface\\COMMON\\Indicator-Green:14|t' or g.name, g.amountText, g.r, g.g, g.b, 1, 1, 1)
+		end
 
 	GameTooltip:AddLine(' ')
 	GameTooltip:AddLine(L['dt']['server'])
