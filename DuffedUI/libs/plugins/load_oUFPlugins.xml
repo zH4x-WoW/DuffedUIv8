@@ -5,6 +5,7 @@
 	<Script file="oUF_ComboPointsBar.lua" />
 	<Script file="oUF_HarmonyBar.lua" />
 	<Script file="oUF_HolyPowerBar.lua" />
+	<Script file="oUF_NazjatarFollowerXP.lua" />
 	<Script file="oUF_PVPSpecIcons.lua" />
 	<Script file="oUF_RaidDebuffs.lua" />
 	<Script file="oUF_Smooth.lua" />

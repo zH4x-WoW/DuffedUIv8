@@ -14,6 +14,7 @@ local C_Garrison_GetTalentTreeInfoForID = C_Garrison.GetTalentTreeInfoForID
 local C_Garrison_GetCompleteTalent = C_Garrison.GetCompleteTalent
 local C_Garrison_HasGarrison = C_Garrison.HasGarrison
 local C_IslandsQueue_GetIslandsWeeklyQuestID = C_IslandsQueue.GetIslandsWeeklyQuestID
+local C_UIWidgetManager_GetStatusBarWidgetVisualizationInfo = C_UIWidgetManager.GetStatusBarWidgetVisualizationInfo
 local ShowGarrisonLandingPage = ShowGarrisonLandingPage
 local HideUIPanel = HideUIPanel
 local GetCurrencyInfo = GetCurrencyInfo
@@ -40,6 +41,33 @@ Stat.Color2 = D['RGBToHex'](unpack(C['media']['datatextcolor2']))
 local Text  = Stat:CreateFontString('DuffedUIStatbfamissionsText', 'OVERLAY')
 Text:SetFont(f, fs, ff)
 D['DataTextPosition'](C['datatext']['bfamissions'], Text)
+
+local Widget_IDs = {
+	["Alliance"] = {
+		57006, -- A Worthy Ally
+		{L['dt']['FarseerOri'], 1940},
+		{L['dt']['HunterAkana'], 1613},
+		{L['dt']['BladesmanInowari'], 1966}
+	},
+	["Horde"] = {
+		57005, -- Becoming a Friend
+		{L['dt']['NeriSharpfin'], 1621},
+		{L['dt']['PoenGillbrack'], 1622},
+		{L['dt']['VimBrineheart'], 1920}
+	}
+}
+
+local BODYGUARD_LEVEL_XP_FORMAT = L['dt']['Rank'] .. " %d (%d/%d)"
+local NAZJATAR_MAP_ID = 1718
+
+local function GetBodyguardXP(widgetID)
+	local widget = C_UIWidgetManager_GetStatusBarWidgetVisualizationInfo(widgetID)
+	local rank = string.match(widget.overrideBarText, "%d+")
+	local cur = widget.barValue - widget.barMin
+	local next = widget.barMax - widget.barMin
+	local total = widget.barValue
+	return rank, cur, next, total
+end
 
 local function sortFunction(a, b) return a.missionEndTime < b.missionEndTime end
 
@@ -168,7 +196,21 @@ Stat:SetScript('OnEnter', function(self)
 			hasIsland = true
 		end
 	end
-
+	
+	-- Nazjatar follower XP
+	local hasNazjatarBodyguardXP = false
+	local widgetGroup = Widget_IDs[D.Faction]
+	if (select(4, UnitPosition('player')) == NAZJATAR_MAP_ID and widgetGroup and IsQuestFlaggedCompleted(widgetGroup[1])) then
+		GameTooltip:AddLine(' ')
+		GameTooltip:AddLine(L['dt']['NazjatarFollowerXP'])
+		for i = 2, 4 do
+			local npcName, widgetID = unpack(widgetGroup[i])
+			local rank, cur, next, total = GetBodyguardXP(widgetID)
+			GameTooltip:AddDoubleLine(npcName, BODYGUARD_LEVEL_XP_FORMAT:format(rank, cur, next), 1, 1, 1)
+		end
+		hasNazjatarBodyguardXP = true
+	end
+	
 	if not firstLine then GameTooltip:AddLine(' ') end
 
 	GameTooltip:AddLine(TOKENS)

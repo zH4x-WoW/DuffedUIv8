@@ -162,6 +162,25 @@ D['ConstructNameplates'] = function(self)
 	RaidIcon:Size(20, 20)
 	RaidIcon:Point('LEFT', health, 'LEFT', -25, 0)
 
+	-- NazjatarFollowerXP
+	local bar = CreateFrame('StatusBar', self:GetDebugName() .. 'NazjatarFollowerXP', self)
+	bar:SetFrameStrata(self:GetFrameStrata())
+	bar:SetFrameLevel(5)
+	bar:SetHeight(3)
+	bar:SetPoint('TOPLEFT', castbar, 'BOTTOMLEFT', 0, -3)
+	bar:SetPoint('TOPRIGHT', castbar, 'BOTTOMRIGHT', 0, -3)
+	bar:SetStatusBarTexture(texture)
+	bar:SetStatusBarColor(0.529, 0.808, 0.922)
+	bar:SetTemplate('Transparent')
+
+	bar.progressText = bar:CreateFontString(nil, 'OVERLAY')
+	bar.progressText:SetPoint('CENTER', bar, 'CENTER', 0, -8)
+	bar.progressText:SetFont(f, fs, ff)
+	bar.progressText:SetTextColor(0.84, 0.75, 0.65)
+	bar.progressText:SetShadowOffset(1.25, -1.25)
+
+	self.NazjatarFollowerXP = bar
+
 	-- size
 	self:SetSize(nWidth, nHeight)
 	self:SetPoint('CENTER', 0, 0)
