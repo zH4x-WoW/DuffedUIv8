@@ -152,9 +152,19 @@ function DuffedUITooltips:OnTooltipSetUnit()
 	end
 
 	if (UnitExists(Unit .. 'target') and Unit ~= 'player') then
-		local Hex, R, G, B = DuffedUITooltips:GetColor(Unit .. 'target')
+		local UnitTarget = Unit.."target"
+		local Class = select(2, UnitClass(UnitTarget))
+		local Reaction = UnitReaction(UnitTarget, "player")
+		local R, G, B
+		
+		if (UnitIsPlayer(UnitTarget) and not UnitHasVehicleUI(UnitTarget)) then
+			R, G, B = unpack(Colors.class[Class])
+		elseif Reaction then
+			R, G, B = unpack(Colors.reaction[Reaction])
+		else
+			R, G, B = 1, 1, 1
+		end
 
-		if (not R) and (not G) and (not B) then R, G, B = 1, 1, 1 end
 		GameTooltip:AddLine(UnitName(Unit .. 'target'), R, G, B)
 	end
 	self.fadeOut = nil
@@ -329,7 +339,7 @@ DuffedUITooltips:SetScript('OnEvent', function(self, event, addon)
 		hooksecurefunc('GameTooltip_SetDefaultAnchor', self.SetTooltipDefaultAnchor)
 		ItemRefCloseButton:SkinCloseButton()
 
-		for _, Tooltip in pairs(DuffedUITooltips.Tooltips) do Tooltip:HookScript('OnShow', self.Skin) end
+		for _, Tooltip in pairs(DuffedUITooltips.Tooltips) do Tooltip:SetScript('OnShow', self.Skin) end
 
 		if C['tooltip']['hidebuttons'] == true then
 			local CombatHideActionButtonsTooltip = function(self)
@@ -339,7 +349,7 @@ DuffedUITooltips:SetScript('OnEvent', function(self, event, addon)
 			hooksecurefunc(GameTooltip, 'SetPetAction', CombatHideActionButtonsTooltip)
 			hooksecurefunc(GameTooltip, 'SetShapeshift', CombatHideActionButtonsTooltip)
 		end
-		if FriendsTooltip then FriendsTooltip:HookScript('OnShow', function(self) self:SetTemplate('Transparent') end) end
+		if FriendsTooltip then FriendsTooltip:SetScript('OnShow', function(self) self:SetTemplate('Transparent') end) end
 
 		HealthBar:SetStatusBarTexture(C['media']['normTex'])
 		HealthBar:CreateBackdrop()
@@ -355,15 +365,15 @@ DuffedUITooltips:SetScript('OnEvent', function(self, event, addon)
 
 		for _, Tooltip in pairs(DuffedUITooltips.Tooltips) do
 			DuffedUITooltips:UnregisterEvent('PLAYER_ENTERING_WORLD')
-			if Tooltip == GameTooltip then Tooltip:HookScript('OnTooltipSetUnit', self.OnTooltipSetUnit) end
+			if Tooltip == GameTooltip then Tooltip:SetScript('OnTooltipSetUnit', self.OnTooltipSetUnit) end
 		end
 	else
 		if addon ~= 'Blizzard_DebugTools' then return end
 		if FrameStackTooltip then
 			FrameStackTooltip:SetScale(C['general']['uiscale'])
-			FrameStackTooltip:HookScript('OnShow', function(self) self:SetTemplate('Transparent') end)
+			FrameStackTooltip:SetScript('OnShow', function(self) self:SetTemplate('Transparent') end)
 		end
 
-		if EventTraceTooltip then EventTraceTooltip:HookScript('OnShow', function(self) self:SetTemplate('Transparent') end) end
+		if EventTraceTooltip then EventTraceTooltip:SetScript('OnShow', function(self) self:SetTemplate('Transparent') end) end
 	end
 end)
