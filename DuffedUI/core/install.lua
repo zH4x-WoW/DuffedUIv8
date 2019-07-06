@@ -282,7 +282,7 @@ close:SetScript('OnClick', function() f:Hide() end)
 local step4 = function()
 	DuffedUIDataPerChar.install = true
 	sb:SetValue(4)
-	PlaySoundFile('Sound\\interface\\LevelUp.wav')
+	PlaySound(888) -- LevelUp 
 	header:SetText(L['install']['header11'])
 	text1:SetText(L['install']['step4line1'])
 	text2:SetText(L['install']['step4line2'])

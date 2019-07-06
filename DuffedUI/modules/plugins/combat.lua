@@ -152,5 +152,5 @@ a:RegisterEvent('PLAYER_REGEN_ENABLED')
 a:RegisterEvent('PLAYER_REGEN_DISABLED')
 a:SetScript('OnEvent', function (self,event)
 	if (UnitIsDead('player')) then return end
-	if event == 'PLAYER_REGEN_ENABLED' then allertrun('- Combat', .1, 1, .1) else allertrun('+ Combat', 1, .1, .1) end
+	if event == 'PLAYER_REGEN_ENABLED' then allertrun(L['ui']['combatfalse'], .1, 1, .1) else allertrun(L['ui']['combattrue'], 1, .1, .1) end
 end)

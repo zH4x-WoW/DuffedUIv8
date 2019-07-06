@@ -197,6 +197,16 @@ D['ConstructUFPlayer'] = function(self)
 		self.WeakenedSoul = ws
 	end
 
+	if C['unitframes']['grouptext'] then
+		local GroupNumber = health:CreateFontString(nil, "OVERLAY")
+		GroupNumber:SetPoint("RIGHT", health, "LEFT", -15, 0)
+		GroupNumber:SetFontObject(UnitframeFont)
+		GroupNumber:SetFont(f, fs, ff)
+		GroupNumber:SetTextColor(0.84, 0.75, 0.65)
+		GroupNumber:SetShadowOffset(1.25, -1.25)
+		self:Tag(GroupNumber, "[DuffedUI:GroupNumber]")
+	end
+
 	local Combat = health:CreateTexture(nil, 'OVERLAY')
 	Combat:Height(19)
 	Combat:Width(19)

@@ -169,3 +169,14 @@ oUF.Tags.Methods['DuffedUI:afk'] = function(unit)
 		return CHAT_FLAG_AFK
 	end
 end
+
+oUF.Tags.Events["DuffedUI:GroupNumber"] = "GROUP_ROSTER_UPDATE PLAYER_ROLES_ASSIGNED ROLE_CHANGED_INFORM PARTY_LEADER_CHANGED"
+oUF.Tags.Methods["DuffedUI:GroupNumber"] = function(unit)
+if not UnitInRaid("player") then return end
+	for i = 1, GetNumGroupMembers() do
+		local name, _, subgroup = GetRaidRosterInfo(i)
+			if (name == D['MyName']) then
+				return GROUP.." "..subgroup
+			end
+	end
+end

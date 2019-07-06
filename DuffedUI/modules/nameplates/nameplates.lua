@@ -181,6 +181,79 @@ D['ConstructNameplates'] = function(self)
 
 	self.NazjatarFollowerXP = bar
 
+	-- QuestIcons
+	if C['nameplate']['questicons'] then
+		if unit == 'player' then
+			return
+		end
+
+		local size = 11
+
+		QuestIcons = CreateFrame('Frame', self:GetDebugName() .. 'QuestIcons', self)
+		QuestIcons:ClearAllPoints()
+		QuestIcons:SetPoint('RIGHT', health, 'LEFT', -4, 0)
+		QuestIcons:Hide()
+		QuestIcons:SetSize(size + 2, size + 2)
+
+		for _, object in pairs({'Item', 'Loot', 'Skull', 'Chat'}) do
+			QuestIcons[object] = QuestIcons:CreateTexture(nil, 'BORDER', nil, 1)
+			QuestIcons[object]:SetPoint('CENTER')
+			QuestIcons[object]:SetSize(size, size)
+			QuestIcons[object]:Hide()
+		end
+
+		QuestIcons.Item:SetTexCoord(unpack(D['IconCoord']))
+
+		QuestIcons.Skull:SetSize(size + 2, size + 2)
+
+		QuestIcons.Chat:SetSize(size + 2, size + 2)
+		QuestIcons.Chat:SetTexture([[Interface\WorldMap\ChatBubble_64.PNG]])
+		QuestIcons.Chat:SetTexCoord(0, 0.5, 0.5, 1)
+
+		QuestIcons.Text = QuestIcons:CreateFontString(nil, 'OVERLAY')
+		QuestIcons.Text:SetPoint('BOTTOMLEFT', QuestIcons, 'BOTTOMLEFT', -2, -0.8)
+		QuestIcons.Text:SetFont(f, fs, ff)
+		QuestIcons.Text:SetShadowOffset(1.25, -1.25)
+		QuestIcons.ForceUpdate = ForceUpdate
+
+		self.QuestIcons = QuestIcons
+	end
+
+	-- Floating combattext
+	if C['nameplate']['floatingct'] then
+		local fcf = CreateFrame('Frame', nil, self)
+		fcf:SetSize(32, 32)
+		fcf:SetPoint('CENTER')
+		fcf:SetFrameStrata('TOOLTIP')
+
+		for i = 1, 12 do
+			fcf[i] = fcf:CreateFontString('$parentFCFText' .. i, 'OVERLAY')
+			fcf[i]:SetShadowOffset(1.25, -1.25)
+		end
+
+		fcf.font = C['media']['font']
+		fcf.fontHeight = 12
+		fcf.fontFlags = 'OUTLINE'
+		fcf.useCLEU = true
+		fcf.abbreviateNumbers = C['nameplate']['floatingan']
+		fcf.scrollTime = C['nameplate']['floatingst']
+		fcf.format = '%1$s |T%2$s:0:0:0:0:64:64:4:60:4:60|t'
+		self.FloatingCombatFeedback = fcf
+
+		-- Hide blizzard combat text
+		SetCVar('floatingCombatTextCombatHealing', 0)
+		SetCVar('floatingCombatTextCombatDamage', 0)
+			
+		local frame = CreateFrame('Frame')
+		frame:RegisterEvent('PLAYER_LOGOUT')
+		frame:SetScript('OnEvent', function(self, event)
+			if event == 'PLAYER_LOGOUT' then
+				SetCVar('floatingCombatTextCombatHealing', 1)
+				SetCVar('floatingCombatTextCombatDamage', 1)
+			end
+		end)
+	end
+
 	-- size
 	self:SetSize(nWidth, nHeight)
 	self:SetPoint('CENTER', 0, 0)

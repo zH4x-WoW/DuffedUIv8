@@ -26,7 +26,7 @@ C['unitframes'] = {
 	['weakenedsoulbar'] = true,
 	['targetauras'] = true,
 	['onlyselfdebuffs'] = false,
-	['combatfeedback'] = true,
+	['combatfeedback'] = false,
 	['healcomm'] = true,
 	['playeraggro'] = true,
 	['totdebuffs'] = false,
@@ -39,6 +39,7 @@ C['unitframes'] = {
 	['attached'] = false,
 	['oocHide'] = true,
 	['EnableAltMana'] = true,
+	['grouptext'] = true,
 }
 
 C['chat'] = {
@@ -70,9 +71,13 @@ C['castbar'] = {
 C['nameplate'] = {
  	['active'] = true,
 	['classcolor'] = true,
+	['floatingct'] = true,
+	['floatingst'] = 1.2,
+	['floatingan'] = true,
  	['platewidth'] = 110,
  	['plateheight'] = 7,
 	['platescale'] = 1.5,
+	['questicons'] = true,
 	['threat'] = true,
 	['pDebuffs'] = true,
 }
@@ -258,6 +263,7 @@ C['tooltip'] = {
 	['ids'] = true,
 	['enablecaster'] = true,
 	['Mouse'] = false,
+	['role'] = false,
 }
 
 C['merchant'] = {
