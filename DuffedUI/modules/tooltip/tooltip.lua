@@ -158,9 +158,11 @@ function DuffedUITooltips:OnTooltipSetUnit()
 		local R, G, B
 		
 		if (UnitIsPlayer(UnitTarget) and not UnitHasVehicleUI(UnitTarget)) then
-			R, G, B = unpack(Colors.class[Class])
+			local Color = Colors.class[Class]
+			R, G, B = Color[1], Color[2], Color[3]
 		elseif Reaction then
-			R, G, B = unpack(Colors.reaction[Reaction])
+			local Color = Colors.reaction[Reaction]
+			R, G, B = Color[1], Color[2], Color[3]
 		else
 			R, G, B = 1, 1, 1
 		end
