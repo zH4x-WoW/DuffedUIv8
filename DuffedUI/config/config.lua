@@ -80,6 +80,7 @@ C['nameplate'] = {
 	['questicons'] = true,
 	['threat'] = true,
 	['pDebuffs'] = true,
+	['hidetargetglow'] = false,
 }
 
 C['actionbar'] = {

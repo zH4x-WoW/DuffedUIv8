@@ -48,6 +48,26 @@ local function UpdateThreat(self,event,unit)
 	self.Health:ForceUpdate()
 end
 
+local function HighlightPlate(self)
+	local Border = self.HealthBorder
+
+	if Border then
+		if UnitIsUnit("target", self.unit) then
+			if not Border:IsShown() then
+				Border:Show()
+			end
+
+			Border:SetBackdropBorderColor(.31, .45, .63)
+		else
+			if C['nameplate']['hidetargetglow'] then
+				Border:Hide()
+			else
+				Border:SetBackdropBorderColor(.125, .125, .125, 1)
+			end
+		end
+	end
+end
+
 D['ConstructNameplates'] = function(self)
 	-- Initial Elements
 	self.colors = D['UnitColor']
@@ -167,8 +187,8 @@ D['ConstructNameplates'] = function(self)
 	bar:SetFrameStrata(self:GetFrameStrata())
 	bar:SetFrameLevel(5)
 	bar:SetHeight(3)
-	bar:SetPoint('TOPLEFT', castbar, 'BOTTOMLEFT', 0, -3)
-	bar:SetPoint('TOPRIGHT', castbar, 'BOTTOMRIGHT', 0, -3)
+	bar:SetPoint('TOPLEFT', health, 'BOTTOMLEFT', 0, -3)
+	bar:SetPoint('TOPRIGHT', health, 'BOTTOMRIGHT', 0, -3)
 	bar:SetStatusBarTexture(texture)
 	bar:SetStatusBarColor(0.529, 0.808, 0.922)
 	bar:SetTemplate('Transparent')
@@ -253,7 +273,11 @@ D['ConstructNameplates'] = function(self)
 			end
 		end)
 	end
-
+		
+	self:RegisterEvent("PLAYER_TARGET_CHANGED", HighlightPlate, true)
+	self:RegisterEvent("NAME_PLATE_UNIT_ADDED", HighlightPlate, true)
+	self:RegisterEvent("NAME_PLATE_UNIT_REMOVED", HighlightPlate, true)
+	
 	-- size
 	self:SetSize(nWidth, nHeight)
 	self:SetPoint('CENTER', 0, 0)
