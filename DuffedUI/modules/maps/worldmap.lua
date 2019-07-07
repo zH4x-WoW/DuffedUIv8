@@ -215,18 +215,9 @@ function WorldMap:Coords()
 			y = math.floor(100 * y)
 			if x ~= 0 and y ~= 0 then coords.PlayerText:SetText(PLAYER..': '..x..', '..y) else coords.PlayerText:SetText(' ') end
 
-			local scale = WorldMapFrame.ScrollContainer:GetEffectiveScale()
-			local width = WorldMapFrame.ScrollContainer:GetWidth()
-			local height = WorldMapFrame.ScrollContainer:GetHeight()
-			local centerX, centerY = WorldMapFrame.ScrollContainer:GetCenter()
-			local x, y = GetCursorPosition()
-			local adjustedX = (x / scale - (centerX - (width/2))) / width
-			local adjustedY = (centerY + (height/2) - y / scale) / height
-
-			if (adjustedX >= 0  and adjustedY >= 0 and adjustedX <= 1 and adjustedY <= 1) then
-				adjustedX = math.floor(100 * adjustedX)
-				adjustedY = math.floor(100 * adjustedY)
-				coords.MouseText:SetText('Cursor: '..adjustedX..', '..adjustedY)
+			local x, y = WorldMapFrame.ScrollContainer:GetNormalizedCursorPosition()
+			if x and y and x >= 0 and y >= 0 then
+				coords.MouseText:SetFormattedText('Cursor: %.2f, %.2f', x * 100, y * 100)
 			else
 				coords.MouseText:SetText(' ')
 			end
