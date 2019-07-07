@@ -201,6 +201,16 @@ D['ConstructNameplates'] = function(self)
 
 	self.NazjatarFollowerXP = bar
 
+	-- Eliteicon
+	if C['nameplate']['eliteicon'] then
+		local ClassificationIndicator = health:CreateTexture(nil, "OVERLAY")
+		ClassificationIndicator:ClearAllPoints()
+		ClassificationIndicator:SetSize(health:GetHeight() + 12, health:GetHeight() + 12)
+		ClassificationIndicator:SetPoint("LEFT", health, "RIGHT", 4, -2)
+		
+		self.ClassificationIndicator = ClassificationIndicator
+	end
+
 	-- QuestIcons
 	if C['nameplate']['questicons'] then
 		if unit == 'player' then

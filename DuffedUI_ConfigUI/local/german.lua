@@ -39,6 +39,7 @@
 	DuffedUIConfigUILocalization.unitframesattached = "Verbinde die Klassenleiste mit dem Einheitenfenster"
 	DuffedUIConfigUILocalization.unitframesoocHide = "Verstecke die Klassenleiste wenn Du nicht im Kampf bist"
 	DuffedUIConfigUILocalization.unitframesEnableAltMana = "Aktiviere zusätzliche Manaanzeige für Druiden, Priester & Schamanen"
+	DuffedUIConfigUILocalization.unitframesgrouptext = "Zeige im Raid die Gruppe an in der du bist"
 
 	--[[Chat]]--
 	DuffedUIConfigUILocalization.chat = "Chat"
@@ -75,6 +76,12 @@
 	DuffedUIConfigUILocalization.nameplateclasscolor = "Aktiviere Anzeige für Klassenfarben bei den Namensplaketten"
 	DuffedUIConfigUILocalization.nameplateplatescale = "Wähle die Skalierung der Namensplaketten (default 1.5)"
 	DuffedUIConfigUILocalization.nameplatepDebuffs = "Aktiviere die Anzeige der Schwächungszauber"
+	DuffedUIConfigUILocalization.nameplatefloatingct = "Aktiviere den fliegenden Kampftext an den Namensplaketten"
+	DuffedUIConfigUILocalization.nameplatefloatingst = "Scrollzeit"
+	DuffedUIConfigUILocalization.nameplatefloatingan = "Kürze den Kampftext (1000 zu 1k)"
+	DuffedUIConfigUILocalization.nameplatehidetargetglow = "Verstecke den Umriss des gewählten Ziels"
+	DuffedUIConfigUILocalization.nameplateeliteicon = "Zeige die Klassifizierung (Rare, Elite) an den Namensplaketten"
+	DuffedUIConfigUILocalization.nameplatequesticons = "Aktiviere die Questsymbole an den Namensplaketten"	
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"
@@ -246,6 +253,7 @@
 	DuffedUIConfigUILocalization.tooltipilvl = "Aktiviere die Gegenstandslevelanzeige im Tooltip"
 	DuffedUIConfigUILocalization.tooltipenablecaster = "Zeige den Namen des Zaubernden, für Stärkungs- und Schwächungszauber, im Tooltip"
 	DuffedUIConfigUILocalization.tooltipMouse = "Aktiviere Tooltip am Mauszeiger"
+	DuffedUIConfigUILocalization.tooltiprole = "Zeige die Charakterrolle an"
 
 	--[[Merchant]]--
 	DuffedUIConfigUILocalization.merchant = "Händler"

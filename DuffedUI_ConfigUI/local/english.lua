@@ -40,6 +40,7 @@ DuffedUIConfigUILocalization.unitframesclassbar = "Enable Classbars"
 DuffedUIConfigUILocalization.unitframesattached = "Attach Classbars to Unitframes"
 DuffedUIConfigUILocalization.unitframesoocHide = "Hide Classbars out of Combat"
 DuffedUIConfigUILocalization.unitframesEnableAltMana = "Enable additional Manadisplay for Druids, Priests & Shamans"
+DuffedUIConfigUILocalization.unitframesgrouptext = "Enable groupnumber (See your groupnumber in raid)"
 
 --[[Chat]]--
 DuffedUIConfigUILocalization.chat = "Chat"
@@ -76,6 +77,12 @@ DuffedUIConfigUILocalization.nameplatethreat = "Enable Enhanced Threat"
 DuffedUIConfigUILocalization.nameplateclasscolor = "Enable classcolor-display on nameplates"
 DuffedUIConfigUILocalization.nameplateplatescale = "Set scale of nameplates (default 1.5)"
 DuffedUIConfigUILocalization.nameplatepDebuffs = "Enable display of debuffs on nameplates"
+DuffedUIConfigUILocalization.nameplatefloatingct = "Enable floating combattext on nameplates"
+DuffedUIConfigUILocalization.nameplatefloatingst = "Combattext scrolltime (default = 1.2)"
+DuffedUIConfigUILocalization.nameplatefloatingan = "Abbreviate numbers from combattext (1000 to 1k)"
+DuffedUIConfigUILocalization.nameplatehidetargetglow = "Hide targetborder"
+DuffedUIConfigUILocalization.nameplateeliteicon = "Enable classification (rare, elite) on nameplates"
+DuffedUIConfigUILocalization.nameplatequesticons = "Enable questicons on nameplates"
 
 --[[Actionbars]]--
 DuffedUIConfigUILocalization.actionbar = "Action Bars"
@@ -246,6 +253,7 @@ DuffedUIConfigUILocalization.tooltipids = "Show spell / item-id on tooltip"
 DuffedUIConfigUILocalization.tooltipilvl = "Enable Item level display on tooltip"
 DuffedUIConfigUILocalization.tooltipenablecaster = "Enable Caster name for buffs / debuffs on tooltip"
 DuffedUIConfigUILocalization.tooltipMouse = "Enable Tooltip on cursor"
+DuffedUIConfigUILocalization.tooltiprole = "Enable characterrole on tooltip"
 
 --[[Merchant]]--
 DuffedUIConfigUILocalization.merchant = "Merchant"

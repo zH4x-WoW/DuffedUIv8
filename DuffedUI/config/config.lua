@@ -71,6 +71,7 @@ C['castbar'] = {
 C['nameplate'] = {
  	['active'] = true,
 	['classcolor'] = true,
+	['eliteicon'] = true,
 	['floatingct'] = true,
 	['floatingst'] = 1.2,
 	['floatingan'] = true,
