@@ -74,6 +74,18 @@ for i = 1, NUM_CHAT_WINDOWS do
 	button:SetTemplate('Default')
 
 	button:SetScript('OnMouseUp', function(self) Copy(cf) end)
+	button:SetScript('OnEnter', function(self)
+	if not C['datatext']['ShowInCombat'] then
+		if InCombatLockdown() then return end
+	end
+
+	local anchor, _, xoff, yoff = "ANCHOR_TOPLEFT", self:GetParent(), 10, 5
+		GameTooltip:SetOwner(self, anchor, xoff, yoff)
+		GameTooltip:ClearLines()
+		GameTooltip:AddLine("Copy chat")
+		GameTooltip:Show()
+	end)
+	button:SetScript('OnLeave', function() GameTooltip:Hide() end)
 end
 
 if C['chat']['lbackground'] then

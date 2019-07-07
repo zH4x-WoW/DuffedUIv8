@@ -200,6 +200,19 @@ chatmenu.text:SetText(D['PanelColor'] .. 'E')
 chatmenu:SetScript('OnMouseDown', function(self, btn)
 	if btn == 'LeftButton' then ToggleFrame(ChatMenu) end
 end)
+chatmenu:SetScript('OnEnter', function(self)
+	if not C['datatext']['ShowInCombat'] then
+		if InCombatLockdown() then return end
+	end
+
+	local anchor, _, xoff, yoff = "ANCHOR_TOPLEFT", self:GetParent(), 10, 5
+	GameTooltip:SetOwner(self, anchor, xoff, yoff)
+	GameTooltip:ClearLines()
+	GameTooltip:AddLine("Emotions")
+	GameTooltip:Show()
+end)
+chatmenu:SetScript('OnLeave', function() GameTooltip:Hide() end)
+
 
 local chatchannel = CreateFrame('Frame', 'DuffedUIChatChannels', UIParent)
 chatchannel:SetTemplate('Default')
@@ -212,6 +225,18 @@ chatchannel.text:SetText(D['PanelColor'] .. 'C')
 chatchannel:SetScript('OnMouseDown', function(self, btn)
 	if btn == 'LeftButton' then ToggleFrame(ChannelFrame) end
 end)
+chatchannel:SetScript('OnEnter', function(self)
+	if not C['datatext']['ShowInCombat'] then
+		if InCombatLockdown() then return end
+	end
+
+	local anchor, _, xoff, yoff = "ANCHOR_TOPLEFT", self:GetParent(), 10, 5
+	GameTooltip:SetOwner(self, anchor, xoff, yoff)
+	GameTooltip:ClearLines()
+	GameTooltip:AddLine("Chatchannels")
+	GameTooltip:Show()
+end)
+chatchannel:SetScript('OnLeave', function() GameTooltip:Hide() end)
 
 if C['datatext']['battleground'] then
 	local bgframe = CreateFrame('Frame', 'DuffedUIInfoLeftBattleGround', UIParent)
