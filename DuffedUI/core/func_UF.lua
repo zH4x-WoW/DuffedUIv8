@@ -829,7 +829,26 @@ D['Debuffids'] = {
 	[GetSpellInfo(260685)] = 3, -- Taint of G"huun
 	[GetSpellInfo(266107)] = 3, -- Thirst for Blood
 	[GetSpellInfo(260455)] = 3, -- Serrated Fangs
-
+	
+	-- Operation: Mechagon
+	[GetSpellInfo(291928)] = 3, -- Giga-Zap
+	[GetSpellInfo(292267)] = 3, -- Giga-Zap
+	[GetSpellInfo(302274)] = 3, -- Fulminating Zap
+	[GetSpellInfo(298669)] = 3, -- Taze
+	[GetSpellInfo(295445)] = 3, -- Wreck
+	[GetSpellInfo(294929)] = 3, -- Blazing Chomp
+	[GetSpellInfo(297257)] = 3, -- Electrical Charge
+	[GetSpellInfo(294855)] = 3, -- Blossom Blast
+	[GetSpellInfo(291972)] = 3, -- Explosive Leap
+	[GetSpellInfo(285443)] = 3, -- "Hidden" Flame Cannon
+	[GetSpellInfo(291974)] = 3, -- Obnoxious Monologue
+	[GetSpellInfo(296150)] = 3, -- Vent Blast
+	[GetSpellInfo(298602)] = 3, -- Smoke Cloud
+	[GetSpellInfo(296560)] = 3, -- Clinging Static
+	[GetSpellInfo(297283)] = 3, -- Cave In
+	[GetSpellInfo(291914)] = 3, -- Cutting Beam
+	[GetSpellInfo(302384)] = 3, -- Static Discharge
+	
 	-- Raids
 	-- Uldir
 	-- MOTHER
