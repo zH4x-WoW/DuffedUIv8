@@ -186,15 +186,22 @@ D['ConstructNameplates'] = function(self)
 	local bar = CreateFrame('StatusBar', self:GetDebugName() .. 'NazjatarFollowerXP', self)
 	bar:SetFrameStrata(self:GetFrameStrata())
 	bar:SetFrameLevel(5)
-	bar:SetHeight(3)
+	bar:SetHeight(9)
 	bar:SetPoint('TOPLEFT', health, 'BOTTOMLEFT', 0, -3)
 	bar:SetPoint('TOPRIGHT', health, 'BOTTOMRIGHT', 0, -3)
 	bar:SetStatusBarTexture(texture)
 	bar:SetStatusBarColor(0.529, 0.808, 0.922)
 	bar:SetTemplate('Transparent')
+	
+	bar.spark = bar:CreateTexture(nil, "OVERLAY")
+	bar.spark:SetTexture('Interface\\CastingBar\\UI-CastingBar-Spark')
+	bar.spark:SetHeight(9)
+	bar.spark:SetBlendMode("ADD")
+	bar.spark:SetAlpha(0.4)
+	bar.spark:SetPoint("CENTER", bar:GetStatusBarTexture(), "RIGHT", 0, 0)
 
 	bar.progressText = bar:CreateFontString(nil, 'OVERLAY')
-	bar.progressText:SetPoint('CENTER', bar, 'CENTER', 0, -8)
+	bar.progressText:SetPoint('CENTER', bar, 'CENTER', 0, 0)
 	bar.progressText:SetFont(f, fs, ff)
 	bar.progressText:SetTextColor(0.84, 0.75, 0.65)
 	bar.progressText:SetShadowOffset(1.25, -1.25)
@@ -271,7 +278,7 @@ D['ConstructNameplates'] = function(self)
 		self.FloatingCombatFeedback = fcf
 
 		-- Hide blizzard combat text
-		SetCVar('floatingCombatTextCombatHealing', 0)
+		SetCVar('floatingCombatTextCombatHealing', 1) -- Dont hide healing?
 		SetCVar('floatingCombatTextCombatDamage', 0)
 			
 		local frame = CreateFrame('Frame')
@@ -302,4 +309,17 @@ D['ConstructNameplates'] = function(self)
 	self.Castbar.Time = castbar.time
 	self.Castbar.Icon = castbar.icon
 	self.RaidTargetIndicator = RaidIcon
+
+	if C['nameplate']['combat'] then
+		local combat = CreateFrame('Frame')
+		combat:RegisterEvent('PLAYER_REGEN_DISABLED')
+		combat:RegisterEvent('PLAYER_REGEN_ENABLED')
+		combat:SetScript('OnEvent', function(self, event)
+			if event == 'PLAYER_REGEN_DISABLED' then
+				SetCVar('nameplateShowEnemies', 1)
+			elseif 	event == 'PLAYER_REGEN_ENABLED' then
+				SetCVar('nameplateShowEnemies', 0)
+			end
+		end)
+	end
 end

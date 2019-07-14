@@ -83,6 +83,7 @@ DuffedUIConfigUILocalization.nameplatefloatingan = "Abbreviate numbers from comb
 DuffedUIConfigUILocalization.nameplatehidetargetglow = "Hide targetborder"
 DuffedUIConfigUILocalization.nameplateeliteicon = "Enable classification (rare, elite) on nameplates"
 DuffedUIConfigUILocalization.nameplatequesticons = "Enable questicons on nameplates"
+DuffedUIConfigUILocalization.nameplatecombat = "Enable nameplates only in combat"
 
 --[[Actionbars]]--
 DuffedUIConfigUILocalization.actionbar = "Action Bars"

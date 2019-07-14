@@ -81,7 +81,8 @@
 	DuffedUIConfigUILocalization.nameplatefloatingan = "Kürze den Kampftext (1000 zu 1k)"
 	DuffedUIConfigUILocalization.nameplatehidetargetglow = "Verstecke den Umriss des gewählten Ziels"
 	DuffedUIConfigUILocalization.nameplateeliteicon = "Zeige die Klassifizierung (Rare, Elite) an den Namensplaketten"
-	DuffedUIConfigUILocalization.nameplatequesticons = "Aktiviere die Questsymbole an den Namensplaketten"	
+	DuffedUIConfigUILocalization.nameplatequesticons = "Aktiviere die Questsymbole an den Namensplaketten"
+	DuffedUIConfigUILocalization.nameplatecombat = "Aktiviere die Namensplaketten nur im Kampf"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"
