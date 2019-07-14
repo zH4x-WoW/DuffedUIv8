@@ -38,15 +38,6 @@ bgframe:SetScript('OnEnter', function(self)
 	GameTooltip:Show()
 end) 
 bgframe:SetScript('OnLeave', function(self) GameTooltip:Hide() end)
-bgframe:SetScript("OnMouseUp", function(self, button)
-	if QueueStatusMinimapButton:IsShown() then
-		if button == "RightButton" then
-			ToggleBattlefieldMinimap()
-		else
-			ToggleWorldStateScoreFrame()
-		end
-	end
-end)
 
 local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local Stat = CreateFrame('Frame', 'DuffedUIStatBattleGround', UIParent)
