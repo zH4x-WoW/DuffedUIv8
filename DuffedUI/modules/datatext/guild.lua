@@ -4,6 +4,8 @@ local D, C, L = unpack(select(2, ...))
 
 if not C['datatext']['guild'] or C['datatext']['guild'] == 0 then return end
 
+local C_GuildInfo_GuildRoster = C_GuildInfo.GuildRoster
+
 local Stat = CreateFrame('Frame', 'DuffedUIStatGuild')
 Stat:EnableMouse(true)
 Stat:SetFrameStrata('BACKGROUND')
@@ -77,7 +79,7 @@ local function Update(self, event, ...)
 	end
 
 	if IsInGuild() then
-		GuildRoster()
+		C_GuildInfo_GuildRoster()
 		totalOnline = select(3, GetNumGuildMembers())
 		Text:SetFormattedText(displayString, GUILD, totalOnline)
 	else
@@ -150,27 +152,27 @@ Stat:SetScript('OnEnter', function(self)
 	end
 	if not IsInGuild() then return end
 
-	GuildRoster()
+	C_GuildInfo_GuildRoster()
 	UpdateGuildMessage()
 	BuildGuildTable()
 
 	local name, rank, level, zone, note, officernote, connected, status, class, isMobile
 	local zonec, classc, levelc
 	local online = totalOnline
-	local GuildInfo, GuildRank = GetGuildInfo('player')
+	local GuildInfo, GuildRank, GuildLevel = GetGuildInfo('player')
 
 	local anchor, panel, xoff, yoff = D['DataTextTooltipAnchor'](Text)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
 	if GuildInfo then
-		GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo), string.format(guildInfoString2, GUILD, online, #guildTable), tthead.r, tthead.g, tthead.b, tthead.r, tthead.g, tthead.b)
+		GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo, GuildLevel), string.format(guildInfoString2, GUILD, online, #guildTable), tthead.r, tthead.g, tthead.b, tthead.r, tthead.g, tthead.b)
 	end
 	if guildMotD ~= '' then
 		GameTooltip:AddLine(' ') GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1)
 	end
 
 	local col = D['RGBToHex'](ttsubh.r, ttsubh.g, ttsubh.b)
-	GameTooltip:AddLine' '
+	GameTooltip:AddLine(' ')
 
 	local _, _, standingID, barMin, barMax, barValue = GetGuildFactionInfo()
 	if standingID ~= 8 then -- Not Max Rep
