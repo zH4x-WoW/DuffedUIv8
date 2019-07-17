@@ -254,24 +254,30 @@ function AS:Blizzard_AchievementUI(event, addon)
 
 	hooksecurefunc("AchievementObjectives_DisplayCriteria", function(objectivesFrame, id)
 		local numCriteria = GetAchievementNumCriteria(id)
-		local textStrings, metas, criteria, object = 0, 0
+		local textStrings, metas = 0, 0
 		for i = 1, numCriteria do
 			local _, criteriaType, completed, _, _, _, _, assetID = GetAchievementCriteriaInfo(id, i)
 
 			if ( criteriaType == _G.CRITERIA_TYPE_ACHIEVEMENT and assetID ) then
 				metas = metas + 1
-				criteria, object = AchievementButton_GetMeta(metas), 'label'
+				local metaCriteria = _G.AchievementButton_GetMeta(metas);
+				if ( objectivesFrame.completed and completed ) then
+					metaCriteria.label:SetTextColor(1, 1, 1, 1)
+				elseif ( completed ) then
+					metaCriteria.label:SetTextColor(0, 1, 0, 1)
+				else
+					metaCriteria.label:SetTextColor(.6, .6, .6, 1)
+				end
 			elseif criteriaType ~= 1 then
-				textStrings = textStrings + 1
-				criteria, object = AchievementButton_GetCriteria(textStrings), 'name'
-			end
-
-			if ( objectivesFrame.completed and completed ) then
-				criteria[object]:SetTextColor(1, 1, 1)
-			elseif ( completed ) then
-				criteria[object]:SetTextColor(0, 1, 0)
-			else
-				criteria[object]:SetTextColor(.6, .6, .6)
+				textStrings = textStrings + 1;
+				local criteria = _G.AchievementButton_GetCriteria(textStrings);
+				if ( objectivesFrame.completed and completed ) then
+					criteria.name:SetTextColor(1, 1, 1, 1)
+				elseif ( completed ) then
+					criteria.name:SetTextColor(0, 1, 0, 1)
+				else
+					criteria.name:SetTextColor(.6, .6, .6, 1)
+				end
 			end
 		end
 	end)

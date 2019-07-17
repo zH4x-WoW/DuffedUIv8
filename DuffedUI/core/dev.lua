@@ -49,3 +49,21 @@ SlashCmdList["FSTACK"] = function()
 	SlashCmdList.FRAMESTACK(0)
 end
 _G.SLASH_FSTACK1 = "/fs"
+
+-- Enable lua error by command
+function SlashCmdList.LUAERROR(msg)
+	msg = string_lower(msg)
+	if (msg == "on") then
+		DisableAllAddOns()
+		EnableAddOn("DuffedUI")
+		EnableAddOn("DuffedUI_Config")
+		SetCVar("scriptErrors", 1)
+		ReloadUI()
+	elseif (msg == "off") then
+		SetCVar("scriptErrors", 0)
+		K.Print("|cffff0000Lua errors off.|r")
+	else
+		K.Print("|cffff0000/luaerror on - /luaerror off|r")
+	end
+end
+_G.SLASH_LUAERROR1 = "/luaerror"
