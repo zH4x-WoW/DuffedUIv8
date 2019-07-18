@@ -739,6 +739,9 @@ spellCooldowns = {
 		['ZandalariTroll'] = {
 			291944, -- Regeneratin'
 		},
+		['MagharOrc'] = {
+			274738, -- Ancestral Call			
+		},
 	},
 	['PET'] = {
 		-- Warlock: Succubus
