@@ -42,10 +42,10 @@ local spec = CreateFrame('Button', 'DuffedUI_Spechelper', DuffedUIInfoLeft)
 spec:SetTemplate('Default')
 if C['chat']['rbackground'] then
 	spec:SetPoint('LEFT', DuffedUITabsRightBackground, 'RIGHT', 2, 0)
-	spec:Size(DuffedUIMinimap:GetWidth() + 3, 20)
+	spec:Size(144 + 3, 20)
 else
 	spec:SetPoint('TOPLEFT', DuffedUIMinimap, 'BOTTOMLEFT', 0, -2)
-	spec:Size(DuffedUIMinimap:GetWidth() - 22, 20)
+	spec:Size(144 - 22, 20)
 	spec:SetParent(oUFDuffedUI_PetBattleFrameHider)
 end
 spec.t = spec:CreateFontString(spec, 'OVERLAY')
@@ -102,6 +102,10 @@ MB_switch:SetAttribute('macrotext1', '/switch')
 D['CreateBtn']('bReport2', MB_reload, 63, 19, 'Bugreport', 'Bugreport')
 bReport2:SetPoint('LEFT', MB_switch, 'RIGHT', 2, 0)
 bReport2:SetScript('OnClick', function(self) StaticPopup_Show('BUGREPORT') end)
+
+D['CreateBtn']('cl', MB_reload, 19, 19, 'Changelog', 'C')
+cl:SetPoint('LEFT', bReport2, 'RIGHT', 2, 0)
+cl:SetScript('OnClick', function(self) D:GetModule("Changelog"):ToggleChangeLog() end)
 
 if Enablegear then
 	local gearSets = CreateFrame('Frame', nil, MB_reload)

@@ -9,6 +9,21 @@ local PFaction = UnitFactionGroup('player')
 local color = D['RGBToHex'](unpack(C['media'].datatextcolor1))
 local Version = D['Version']
 
+-- Keys
+local ignoreKeys = {
+	LALT = true,
+	LSHIFT = true,
+	RSHIFT = true
+}
+
+local printKeys = {
+	["PRINTSCREEN"] = true
+}
+
+if IsMacClient() then
+	printKeys[_G["KEY_PRINTSCREEN_MAC"]] = true
+end
+
 -- Guild
 local function GuildText()
 	if IsInGuild() then
@@ -23,6 +38,20 @@ end
 local function UpdateTimer()
 	local time = GetTime() - startTime
 	DuffedUIAFKPanel.AFKTimer:SetText(format('%02d' .. color ..':|r%02d', floor(time/60), time % 60))
+end
+
+-- On Key down
+local function OnKeyDown(_, key)
+	if (ignoreKeys[key]) then
+		return
+	end
+	if printKeys[key] then
+		Screenshot()
+	else
+		SpinStop()
+		DuffedUIAFKPanel:Hide()
+		Minimap:Show()
+	end
 end
 
 -- Playermodel
@@ -68,6 +97,7 @@ DuffedUIAFKPanel:SetSize((D['ScreenWidth'] * C['general']['uiscale']), 80)
 DuffedUIAFKPanel:SetTemplate('Transparent')
 DuffedUIAFKPanel:SetFrameStrata('FULLSCREEN')
 DuffedUIAFKPanel:Hide()
+DuffedUIAFKPanel:SetScript("OnKeyDown", OnKeyDown)
 
 local DuffedUIAFKPanelIcon = CreateFrame('Frame', 'DuffedUIAFKPanelIcon', DuffedUIAFKPanel)
 DuffedUIAFKPanelIcon:Size(48)

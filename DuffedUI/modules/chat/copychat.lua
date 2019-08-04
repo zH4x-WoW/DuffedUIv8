@@ -73,7 +73,15 @@ for i = 1, NUM_CHAT_WINDOWS do
 	button:SetNormalTexture(C['media']['copyicon'])
 	button:SetTemplate('Default')
 
-	button:SetScript('OnMouseUp', function(self) Copy(cf) end)
+	button:SetScript('OnMouseUp', function(self, button)
+		if button == "LeftButton" then
+			PlaySound(111)
+			Copy(cf)
+		elseif button == "RightButton" then
+			PlaySound(36626)
+			RandomRoll(1, 100)
+		end	
+	end)
 	button:SetScript('OnEnter', function(self)
 	if not C['datatext']['ShowInCombat'] then
 		if InCombatLockdown() then return end
@@ -82,7 +90,8 @@ for i = 1, NUM_CHAT_WINDOWS do
 	local anchor, _, xoff, yoff = "ANCHOR_TOPLEFT", self:GetParent(), 10, 5
 		GameTooltip:SetOwner(self, anchor, xoff, yoff)
 		GameTooltip:ClearLines()
-		GameTooltip:AddLine("Copy chat")
+		GameTooltip:AddDoubleLine(KEY_BUTTON1..':', "Copy chat", 1, 1, 1)
+		GameTooltip:AddDoubleLine(KEY_BUTTON2..':', "Roll 100. You Win!", 1, 1, 1)
 		GameTooltip:Show()
 	end)
 	button:SetScript('OnLeave', function() GameTooltip:Hide() end)

@@ -1,6 +1,13 @@
 ﻿<Ui xmlns='http://www.blizzard.com/wow/ui/'>
 	<!-- engine -->
 	<Script file='libs\LibStub\LibStub.lua' />
+	<Script file="libs\CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
+	<Script file="libs\AceAddon-3.0\AceAddon-3.0.lua"/>
+    <Script file="libs\AceEvent-3.0\AceEvent-3.0.lua"/>
+    <Script file="libs\AceConsole-3.0\AceConsole-3.0.lua"/>
+    <Script file="libs\AceTimer-3.0\AceTimer-3.0.lua"/>
+    <Script file="libs\AceHook-3.0\AceHook-3.0.lua"/>
+	<Script file="libs\LibAboutPanel\LibAboutPanel.lua"/>
 	<Script file='core\init.lua' />
 	<Script file='core\constants.lua' />
 
@@ -9,6 +16,7 @@
 	<Script file='config\config.lua' />
 	<Script file='media\medias.lua' />
 	<Script file='core\api.lua' />
+	<Script file='core\border.lua' />
 	<Script file='core\customconfig.lua' />
 	<Script file='core\config.lua' />
 	<Include file='libs\load_libs.xml' />
@@ -22,8 +30,11 @@
 	<Script file='core\func_Skins.lua' />
 	<Script file='core\install.lua' />
 	<Script file='core\filters\f_cbticks.lua' />
+	<Script file='core\filters\extraquestbutton.lua' />
 	<Script file='core\cversion.lua' />
 	<Script file='core\changelog.lua' />
+	<Script file='core\mapinfo.lua' />
+	<Script file='core\status.lua' />
 
 	<!-- modules -->
 	<Script file='modules\maps\minimap.lua' />
@@ -33,7 +44,6 @@
 	<Include file='modules\misc\load_misc.xml' />
 	<Script file='modules\loot\merchant.lua' />
 	<Script file='modules\chat\copyurl.lua' />
-	<Script file='modules\tooltip\itemid.lua' />
 	<Include file='modules\buffs\template.xml' />
 	<Script file='modules\buffs\buffs.lua' />
 	<Script file='modules\buffs\header.lua' />
@@ -45,9 +55,12 @@
 	<Script file='modules\chat\mousescroll.lua' />
 	<Script file='modules\chat\sounds.lua' />
 	<Script file='modules\tooltip\tooltip.lua' />
-	<Script file='modules\tooltip\unitrole.lua' />
+	<Script file='modules\tooltip\tooltipazerite.lua' />
+	<Script file='modules\tooltip\tooltipicons.lua' />
 	<Script file='modules\nameplates\nameplates.lua' />
+	<Script file='modules\loot\sort.lua' />
 	<Script file='modules\loot\bags.lua' />
+	<Script file='modules\loot\bagsbar.lua' />
 	<Script file='modules\loot\masterloot.lua' />
 	<Script file='modules\loot\rollframe.lua' />
 

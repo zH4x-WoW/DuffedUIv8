@@ -128,6 +128,7 @@ local function cvarsetup()
 	SetCVar('NamePlateVerticalScale', 1)
 	SetCVar('NamePlateHorizontalScale', 1)
 	SetCVar('nameplateMaxDistance', 43)
+	SetCVar("fstack_preferParentKeys", 0)
 end
 
 local OnLogon = CreateFrame('Frame')

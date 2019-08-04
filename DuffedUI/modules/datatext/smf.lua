@@ -116,8 +116,8 @@ Stat:SetScript('OnEnter', function(self)
 	GameTooltip:AddDoubleLine(L['dt']['out'], string.format( '%.4f', bw_out ) .. ' kb/s', .69, .31, .31, .84, .75, .65)
 
 	GameTooltip:AddLine(' ')
-	GameTooltip:AddLine(L['dt']['systemleft'])
-	GameTooltip:AddLine(L['dt']['systemright'])
+	GameTooltip:AddDoubleLine(KEY_BUTTON1..':', L['dt']['systemleft'], 1, 1, 1)
+	GameTooltip:AddDoubleLine(KEY_BUTTON2..':', L['dt']['systemright'], 1, 1, 1)
 	GameTooltip:Show()
 end)
 

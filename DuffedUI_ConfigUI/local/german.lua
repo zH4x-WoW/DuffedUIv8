@@ -10,6 +10,8 @@
 	DuffedUIConfigUILocalization.generalcalendarevent = "Deaktiviere die Texturen, der Events, im Kalender"
 	DuffedUIConfigUILocalization.generalautoaccept = "Aktiviere die automatische Einladung von Freunden und Gildenmitgliedern"
 	DuffedUIConfigUILocalization.general4kpp = 'Verdoppelt die Skalierung bei 4k-Monitoren für PixelPerfect (Sollte nur mit 4k-Monitoren benutzt werden, wenn die Autosklaierung\nzu klein ist)'
+	DuffedUIConfigUILocalization.generalmoveblizzardframes = 'Blizzardfenster beweglich machen'
+	DuffedUIConfigUILocalization.generalminimapsize = 'Minimap Größe (Standard = 144)'
 
 	--[[Unit Frames]]--
 	DuffedUIConfigUILocalization.unitframes = "Einheitenfenster"
@@ -83,6 +85,7 @@
 	DuffedUIConfigUILocalization.nameplateeliteicon = "Zeige die Klassifizierung (Rare, Elite) an den Namensplaketten"
 	DuffedUIConfigUILocalization.nameplatequesticons = "Aktiviere die Questsymbole an den Namensplaketten"
 	DuffedUIConfigUILocalization.nameplatecombat = "Aktiviere die Namensplaketten nur im Kampf"
+	DuffedUIConfigUILocalization.nameplateshowperc = "Zeige das Leben des Ziels in '%' an"
 
 	--[[Actionbars]]--
 	DuffedUIConfigUILocalization.actionbar = "Aktionsleisten"
@@ -109,6 +112,9 @@
 	DuffedUIConfigUILocalization.actionbarRightSideBarDisable = "Deaktiviere die rechte Sidebar"
 	DuffedUIConfigUILocalization.actionbarrightbarDisable = "Deaktiviere Leiste auf der rechten Seite"
 	DuffedUIConfigUILocalization.actionbarhidepanels = "Deaktiviere die Hintergrundpanels der Aktionsleisten"
+	DuffedUIConfigUILocalization.actionbarextraquestbutton = "Aktiviere den ExtraQuestButton"
+	DuffedUIConfigUILocalization.actionbarmicrobar = "Aktiviere die Micromenüleiste"
+	DuffedUIConfigUILocalization.actionbarmicrobarmouseover = "Aktiviere die Micromenüleiste per 'mouseover'"
 
 	--[[Raid Frames]]--
 	DuffedUIConfigUILocalization.raid = "Schlachtzugfenster"
@@ -198,15 +204,21 @@
 
 	--[[Bags]]--
 	DuffedUIConfigUILocalization.bags = "Taschen"
-	DuffedUIConfigUILocalization.bagsenable = "Aktiviere die 'Alles in einer Tasche' Ansicht"
-	DuffedUIConfigUILocalization.bagsbpr = "Taschenplatzanzahl pro Reihe"
-	DuffedUIConfigUILocalization.bagsscale = "Skalierung für Bank und Taschen"
-	DuffedUIConfigUILocalization.bagsspacing = "Zwischenraum zwischen den Taschenslots"
-	DuffedUIConfigUILocalization.bagsbuttonsize = "Größe der Taschenplätze"
-	DuffedUIConfigUILocalization.bagsBounce = "Aktiviere Pulseanimation für neue Gegenstände"
-	DuffedUIConfigUILocalization.bagsSortingButton = "Aktiviere den Sortierbutton in den Taschen und der Bank"
-	DuffedUIConfigUILocalization.bagsBagsRtL = "Sortiere die Taschen rechts nach links"
-	DuffedUIConfigUILocalization.bagsItemsLtR = "Sortiere die Gegenstände links nach rechts in den Taschen"
+	DuffedUIConfigUILocalization.bagsBagColumns = "Taschenplatzanzahl pro Reihe (Tasche)"
+	DuffedUIConfigUILocalization.bagsBankColumns = "Taschenplatzanzahl pro Reihe (Bank)"
+	DuffedUIConfigUILocalization.bagsBindText = "Zeige die belegte Tastaturkombination für den Gegenstand an"
+	DuffedUIConfigUILocalization.bagsButtonSize = "Größe der Taschenplätze"
+	DuffedUIConfigUILocalization.bagsButtonSpace = "Zwischenraum zwischen den Taschenslots"
+	DuffedUIConfigUILocalization.bagsEnable = "Aktiviere die 'Alles in einer Tasche' Ansicht"
+	DuffedUIConfigUILocalization.bagsItemLevel = "Zeige ItemLevel"
+	DuffedUIConfigUILocalization.bagsItemLevelThreshold = "Schwellenwert ItemLevel"
+	DuffedUIConfigUILocalization.bagsJunkIcon = "Zeige Müllsymbol"
+	DuffedUIConfigUILocalization.bagsScrapIcon = "Zeige Schrottsymbol"
+	DuffedUIConfigUILocalization.bagsPulseNewItem = "Aktiviere Pulseanimation für neue Gegenstände"
+	DuffedUIConfigUILocalization.bagsReverseLoot = "Beute in die linke Tasche zuerst"
+	DuffedUIConfigUILocalization.bagsSortInverted = "Taschensortierung umkehren (Danach Taschen neu sortieren)"
+	DuffedUIConfigUILocalization.bagsBagBar = "Aktiviere die Taschenleiste"
+	DuffedUIConfigUILocalization.bagsBagBarMouseover = "Aktiviere die Taschenleiste per 'mouseover'"
 
 	--[[Misc]]--
 	DuffedUIConfigUILocalization.misc = "Sonstiges"
@@ -225,8 +237,12 @@
 	DuffedUIConfigUILocalization.miscAFKCamera = "Aktiviere die AFK Kamera"
 	DuffedUIConfigUILocalization.miscXPBar = "Aktiviere XP-Leiste"
 	DuffedUIConfigUILocalization.miscXPBarWidth = "Stelle Breite der XP-Leiste ein"
-	DuffedUIConfigUILocalization.miscXPBarWidth = "Stelle Höhe der XP-Leiste ein"
+	DuffedUIConfigUILocalization.miscXPBarHeight = "Stelle Höhe der XP-Leiste ein"
 	DuffedUIConfigUILocalization.miscmagemenu = "Aktiviere Teleportmenu (funktioniert nur bei Magiern)"
+	DuffedUIConfigUILocalization.miscazerite = "Aktiviere Azerite-Bar"
+	DuffedUIConfigUILocalization.miscazeritewidth = "Stelle Breite der Azerite-Bar ein"
+	DuffedUIConfigUILocalization.miscazeriteheight = "Stelle Höhe der Azerite-Bar ein"
+	DuffedUIConfigUILocalization.miscdurabilitycharacter = "Aktiviere die Haltbarkeitsanzeige im Charakterbildschirm"
 
 	--[[Duffed]]--
 	DuffedUIConfigUILocalization.duffed = "Duffed"
@@ -236,7 +252,7 @@
 	DuffedUIConfigUILocalization.duffeddispelannouncement = "Aktviere Reinigungswarnungen"
 	DuffedUIConfigUILocalization.duffedspellannounce = "Aktiviere Aurawarnungen"
 	DuffedUIConfigUILocalization.errorenable = "Verstecke die Fehlermeldungen, die in der Mitte Deines Bildschirms immer wieder angezeigt werden"
-	DuffedUIConfigUILocalization.duffedtalkinghead = "Deaktiviere den Emoteframe von NPC's"
+	DuffedUIConfigUILocalization.duffednotalkinghead = "Deaktiviere den Emoteframe von NPC's"
 	DuffedUIConfigUILocalization.duffedobjectivetracker = "Aktiviere Bewegen für Questverfolgung"
 
 	--[[Loot]]--
@@ -246,15 +262,23 @@
 
 	--[[Tooltip]]--
 	DuffedUIConfigUILocalization.tooltip = "Tooltip"
-	DuffedUIConfigUILocalization.tooltipenable = "Aktiviere den DuffedUI Tooltip"
-	DuffedUIConfigUILocalization.tooltiphidecombat = "Verstecke den Tooltip während des Kampfes"
-	DuffedUIConfigUILocalization.tooltiphidebuttons = "Verstecke den Tooltip auf Aktionsleistenknöpfen"
-	DuffedUIConfigUILocalization.tooltiphideuf = "Verstecke den Tooltip auf den Einheitenfentern"
-	DuffedUIConfigUILocalization.tooltipids = "Zeige die Zauber- und Gegenstands-ID im Tooltip"
-	DuffedUIConfigUILocalization.tooltipilvl = "Aktiviere die Gegenstandslevelanzeige im Tooltip"
-	DuffedUIConfigUILocalization.tooltipenablecaster = "Zeige den Namen des Zaubernden, für Stärkungs- und Schwächungszauber, im Tooltip"
-	DuffedUIConfigUILocalization.tooltipMouse = "Aktiviere Tooltip am Mauszeiger"
-	DuffedUIConfigUILocalization.tooltiprole = "Zeige die Charakterrolle an"
+	DuffedUIConfigUILocalization.tooltipAzeriteArmor = "Anzeigen der Azeriterüstunginfos"
+	DuffedUIConfigUILocalization.tooltipCursorAnchor = "Aktiviere Tooltip am Mauszeiger"
+	DuffedUIConfigUILocalization.tooltipEnable = "Aktiviere den DuffedUI Tooltip"
+	DuffedUIConfigUILocalization.tooltipGuildRanks = "Zeige die Gildenränge"
+	DuffedUIConfigUILocalization.tooltipHealthbarHeight = "Lebensbalkengröße"
+	DuffedUIConfigUILocalization.tooltipFontSize = "Schriftgröße"
+	DuffedUIConfigUILocalization.tooltipHealthBarText = "Zeige Lebenspunkte auf dem Lebensbalken an"
+	DuffedUIConfigUILocalization.tooltipHideInCombat = "Verstecke den Tooltip während des Kampfes"
+	DuffedUIConfigUILocalization.tooltipIcons = "Zeige die Tooltipsymbole an"
+	DuffedUIConfigUILocalization.tooltipTargetInfo = "Zeige Zielinformationen an"
+	DuffedUIConfigUILocalization.tooltipInspectInfo = "Zeige die Gegenstandslevelanzeige im Tooltip (Shift halten)"
+	DuffedUIConfigUILocalization.tooltipItemQualityBorder = "Zeige den Rand des Tooltips in Qualitätsfarbe an" 
+	DuffedUIConfigUILocalization.tooltipPlayerTitles = "Zeige den Spielertitel an"
+	DuffedUIConfigUILocalization.tooltipNpcID = "Zeige die NpcID an"
+	DuffedUIConfigUILocalization.tooltipPlayerRoles = "Zeige die Spielerrollen in der Gruppe/Schlachtzug an"
+	DuffedUIConfigUILocalization.tooltipSpellID = "Zeige die Zauber- und Gegenstands-ID im Tooltip"
+	DuffedUIConfigUILocalization.tooltipShowMount = "Zeige das Mount des Spielers an (Strg halten für mehr Infos)"
 
 	--[[Merchant]]--
 	DuffedUIConfigUILocalization.merchant = "Händler"

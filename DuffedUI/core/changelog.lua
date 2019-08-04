@@ -1,21 +1,41 @@
 local D, C, L = unpack(select(2, ...))
+local Module = D:NewModule('Changelog', 'AceEvent-3.0', 'AceTimer-3.0')
 
-local ChangeLog = CreateFrame('frame')
+local _G = _G
+local format, gmatch, gsub, find, sub = string.format, string.gmatch, string.gsub, string.find, string.sub
+local pairs, tostring = pairs, tostring
+
+local CreateFrame = _G.CreateFrame
+local SOUNDKIT = _G.SOUNDKIT
+local PlaySound = _G.PlaySound
+local CLOSE = _G.CLOSE
+
 local ChangeLogData = {
 	"Changes:",
-		"• Added bugfix for worldmap (memory leak on cursor)",
-		"• Added bugfix for tooltip (target shows twice)",
+		"• Bugfix for worldmap (memory leak on cursor)",
+		"• Bugfix for dt friends, dont loose classcolors",
+		"• Bugfix for afkscreen on nazjatar. Hit a key and you are free.",
 		"• Added Nazjatarfollowerxp to datatext bfamissions",
-		"• Added Nazjatarfollowerxp to nameplates",
-		"• Added Questicons to nameplates",
-		"• Added Targetglow to nameplates",
-		"• Added Eliteicons to nameplates",
+		"• Added new things nameplates (as option)",
+		"• Added some Ace3 libs",
+		"• Added DuffedUI to Blizz. Interface/AddOns. Hello world",
+		"• Added new tooltipcode - 'Try shift and ctrl on targets'",
+		"• 'Try shift on items in bags too'",
+		"• Added tooltip for dt bags",
+		"• Added new bagscode",
+		"• Added new slotilvlcode",
+		"• Added new slotdurabilitycode",
+		"• Added tooltips for dt (guild, friends, time etc.)",
+		"• Added changelogbutton to chatbuttonlist",
 		"• Update for AddOnSkins and Project Azilroka",
 		"• Update for oUF Framework for patch 8.2",
 		--"• ",
 	" ",
+	"Special:",
+		"• 'Pawn' users have to deactivate the upgrade border under Pawn tooltip options.",
+	" ",
 	"Notes:",
-		"For the old friendslist use 'Enhanced Friendslist' from Project Azilroka\nFor skins use AddOnSkins because most of the skins are removed",
+		"For the old friendslist use 'Enhanced Friendslist' from Project Azilroka.\nFor skins use AddOnSkins because most of the skins are removed",
 }
 
 local function ModifiedString(string)
@@ -30,7 +50,7 @@ local function ModifiedString(string)
 		if subHeader then newString = tostring('|cFFFFFF00'.. prefix .. '|r' .. suffix) else newString = tostring('|cffC41F3B' .. prefix .. '|r' .. suffix) end
 	end
 
-	for pattern in gmatch(string, "('.*')") do newString = newString:gsub(pattern, "|cFFFF8800" .. pattern:gsub("'", "") .. "|r") end
+	for pattern in gmatch(string, "('.*')") do newString = newString:gsub(pattern, "|cffffcc00" .. pattern:gsub("'", "") .. "|r") end
 	return newString
 end
 
@@ -49,19 +69,27 @@ _G.StaticPopupDialogs['BUGREPORT'] = {
 	editBoxWidth = 325,
 	OnShow = function(self, ...)
 		self.editBox:SetFocus()
-		self.editBox:SetText('http://www.wowinterface.com/portal.php?id=826&a=listbugs')
+		self.editBox:SetText('https://github.com/liquidbase/DuffedUIv8/issues')
 		self.editBox:HighlightText()
 	end,
 	EditBoxOnEnterPressed = function(self) self:GetParent():Hide() end,
 	EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
 }
 
-function ChangeLog:CreateChangelog()
+function Module:CreateChangelog()
 	local frame = CreateFrame('Frame', 'DuffedUIChangeLog', UIParent)
 	frame:SetPoint('CENTER')
-	frame:SetSize(445, 245)
+	frame:SetSize(445, 430)  -- was 445, 245
 	frame:SetTemplate('Transparent')
+	frame:SetFrameStrata('TOOLTIP')
 
+	frame:SetMovable(true)
+	frame:EnableMouse(true)
+	frame:RegisterForDrag('LeftButton')
+	frame:SetScript('OnDragStart', frame.StartMoving)
+	frame:SetScript('OnDragStop', frame.StopMovingOrSizing)
+	frame:SetClampedToScreen(true)
+	
 	local icon = CreateFrame('Frame', nil, frame)
 	icon:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 0, 3)
 	icon:SetSize(20, 20)
@@ -70,7 +98,7 @@ function ChangeLog:CreateChangelog()
 	icon.bg:Point('TOPLEFT', 2, -2)
 	icon.bg:Point('BOTTOMRIGHT', -2, 2)
 	icon.bg:SetTexture(C['media'].duffed)
-
+	
 	local title = CreateFrame('Frame', nil, frame)
 	title:SetPoint('LEFT', icon, 'RIGHT', 3, 0)
 	title:SetSize(422, 20)
@@ -80,14 +108,28 @@ function ChangeLog:CreateChangelog()
 	title.text:SetFont(C['media']['font'], 15)
 	title.text:SetText('|cffC41F3BDuffedUI|r - ChangeLog ' .. D['Version'])
 
-	D['CreateBtn']('close', frame, 65, 19, L['tooltip']['changelog'], L['buttons']['close'])
+	local close = CreateFrame('Button', nil, frame, 'UIPanelButtonTemplate')
 	close:SetPoint('BOTTOMRIGHT', frame, -5, 5)
-	close:SetScript('OnClick', function(self) frame:Hide() end)
+	close:SetText(CLOSE)
+	close:SetSize(95, 19)
+	close:SetScript('OnClick', function()
+		frame:Hide()
+	end)
+	close:StripTextures()
+	close:SkinButton()
+	close:Disable()
+	frame.close = close
 
+	local countdown = close:CreateFontString(nil, 'OVERLAY')
+	countdown:SetFont(C['media']['font'], 12)
+	countdown:SetPoint('LEFT', close.Text, 'RIGHT', 3, 0)
+	countdown:SetTextColor(DISABLED_FONT_COLOR:GetRGB())
+	frame.countdown = countdown
+	
 	D['CreateBtn']('bReport', frame, 65, 19, 'Bugreport', 'Bugreport')
 	bReport:SetPoint('BOTTOMLEFT', frame, 5, 5)
 	bReport:SetScript('OnClick', function(self) StaticPopup_Show('BUGREPORT') end)
-
+	
 	local offset = 4
 	for i = 1, #ChangeLogData do
 		local button = CreateFrame('Frame', 'Button'..i, frame)
@@ -99,28 +141,57 @@ function ChangeLog:CreateChangelog()
 
 			button.Text = button:CreateFontString(nil, 'OVERLAY')
 			button.Text:SetFont(C['media']['font'], 11)
-			button.Text:SetText(string)
+			button.Text:SetPoint('CENTER')
 			button.Text:SetPoint('LEFT', 0, 0)
-			button.Text:SetJustifyH('LEFT')
+			button.Text:SetText(string)
+			button.Text:SetWordWrap(true)
 		end
+
 		offset = offset + 16
 	end
 end
 
-function DuffedUI_ToggleChangeLog()
-	ChangeLog:CreateChangelog()
-end
+function Module:CountDown()
+	self.time = self.time - 1
 
-function ChangeLog:OnCheckVersion(self)
-	if not DuffedUIData['Version'] or (DuffedUIData['Version'] and DuffedUIData['Version'] ~= D['Version']) then
-		DuffedUIData['Version'] = D['Version']
-		ChangeLog:CreateChangelog()
+	if self.time == 0 then
+		DuffedUIChangeLog.countdown:SetText(' ')
+		DuffedUIChangeLog.close:Enable()
+		self:CancelAllTimers()
+	else
+		DuffedUIChangeLog.countdown:SetText(format("(%s)", self.time))
 	end
 end
 
-ChangeLog:RegisterEvent('ADDON_LOADED')
-ChangeLog:RegisterEvent('PLAYER_ENTERING_WORLD')
-ChangeLog:SetScript('OnEvent', function(self, event, ...)
-	if DuffedUIData == nil then DuffedUIData = {} end
-	ChangeLog:OnCheckVersion()
-end)
+function Module:ToggleChangeLog()
+	if not DuffedUIChangeLog then
+		self:CreateChangelog()
+	end
+
+	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF or 857)
+
+	local fadeInfo = {}
+	fadeInfo.mode = 'IN'
+	fadeInfo.timeToFade = 0.5
+	fadeInfo.startAlpha = 0
+	fadeInfo.endAlpha = 1
+	UIFrameFade(DuffedUIChangeLog, fadeInfo)
+
+	self.time = 6
+	self:CancelAllTimers()
+	Module:CountDown()
+	self:ScheduleRepeatingTimer('CountDown', 1)
+end
+
+function Module:CheckVersion()
+	if not DuffedUIData['Version'] or (DuffedUIData['Version'] and DuffedUIData['Version'] ~= D['Version']) then
+		DuffedUIData['Version'] = D['Version']
+		Module:ToggleChangeLog()
+	end
+end
+
+function Module:OnInitialize()
+	D.Delay(6, function()
+		Module:CheckVersion()
+	end)
+end

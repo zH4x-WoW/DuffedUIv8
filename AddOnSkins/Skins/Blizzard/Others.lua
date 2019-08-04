@@ -27,9 +27,11 @@ function AS:Blizzard_Others()
 	AS:SkinCheckBox(LFDRoleCheckPopupRoleButtonTank.checkButton)
 	AS:SkinCheckBox(LFDRoleCheckPopupRoleButtonDPS.checkButton)
 	AS:SkinCheckBox(LFDRoleCheckPopupRoleButtonHealer.checkButton)
+	LFGListInviteDialog.Border:Kill()
 
 	AS:SetTemplate(CinematicFrameCloseDialog)
 	CinematicFrameCloseDialog:SetScale(UIParent:GetScale())
+	CinematicFrameCloseDialog.Border:Kill()
 	AS:SkinButton(CinematicFrameCloseDialogConfirmButton)
 	AS:SkinButton(CinematicFrameCloseDialogResumeButton)
 
@@ -94,6 +96,12 @@ function AS:Blizzard_Others()
 		if Button.IsObjectType and Button:IsObjectType("Button") then
 			AS:SkinButton(Button)
 		end
+	end
+	if GameMenuFrame_UpdateVisibleButtons then
+		hooksecurefunc('GameMenuFrame_UpdateVisibleButtons', function()
+			GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + GameMenuButtonStore:GetHeight())
+			if IsAddOnLoaded('Enhanced_Config') then GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + GameMenuButtonStore:GetHeight()) end
+		end)
 	end
 
 	AS:SkinSlideBar(UnitPopupVoiceSpeakerVolume.Slider)
@@ -165,6 +173,8 @@ function AS:Blizzard_Others()
 				check:SetSize(16, 16)
 			end
 		end
+		DropDownList1.Border:Kill()
+		AS:CreateBackdrop(DropDownList1)
 	end)
 
 	AS:CreateBackdrop(SplashFrame)

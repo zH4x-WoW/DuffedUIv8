@@ -56,3 +56,29 @@ D['UnitColor'] = setmetatable({
 }, {__index = oUF.colors})
 
 D.ColorTemplate = D['UnitColor']
+
+
+-- New
+oUF.colors.reaction = {
+	[1] = {0.87, 0.37, 0.37}, -- Hated
+	[2] = {0.87, 0.37, 0.37}, -- Hostile
+	[3] = {0.87, 0.37, 0.37}, -- Unfriendly
+	[4] = {0.85, 0.77, 0.36}, -- Neutral
+	[5] = {0.29, 0.67, 0.30}, -- Friendly
+	[6] = {0.29, 0.67, 0.30}, -- Honored
+	[7] = {0.29, 0.67, 0.30}, -- Revered
+	[8] = {0.29, 0.67, 0.30}, -- Exalted
+}
+
+oUF.colors.factioncolors = {
+	["1"] = {r = 0.87, g = 0.37, b = 0.37}, -- Hated
+	["2"] = {r = 0.87, g = 0.37, b = 0.37}, -- Hostile
+	["3"] = {r = 0.87, g = 0.37, b = 0.37}, -- Unfriendly
+	["4"] = {r = 0.85, g = 0.77, b = 0.36}, -- Neutral
+	["5"] = {r = 0.29, g = 0.67, b = 0.30}, -- Friendly
+	["6"] = {r = 0.29, g = 0.67, b = 0.30}, -- Honored
+	["7"] = {r = 0.29, g = 0.67, b = 0.30}, -- Revered
+	["8"] = {r = 0.29, g = 0.67, b = 0.30}, -- Exalted
+}
+
+D['Colors'] = oUF.colors

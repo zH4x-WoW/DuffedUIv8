@@ -870,9 +870,12 @@ D['Debuffids'] = {
 	[GetSpellInfo(294847)] = 3, -- Unstable Mixture
 	[GetSpellInfo(295850)] = 3, -- Delirious
 	[GetSpellInfo(295421)] = 3, -- Overflowing Venom
+	[GetSpellInfo(295348)] = 3, -- Overflowing Chill
 	[GetSpellInfo(295807)] = 3, -- Frozen
 	[GetSpellInfo(300883)] = 3, -- Inversion Sickness
 	[GetSpellInfo(295705)] = 3, -- Toxic Bolt
+	[GetSpellInfo(294711)] = 3, -- Frost Mark
+	[GetSpellInfo(294715)] = 3, -- Toxic Brand
 
 	--The Queen’s Court
 	[GetSpellInfo(301830)] = 3, -- Pashmar's Touch

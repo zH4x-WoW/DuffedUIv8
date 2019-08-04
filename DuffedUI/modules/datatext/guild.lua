@@ -206,6 +206,9 @@ Stat:SetScript('OnEnter', function(self)
 			end
 		end
 	end
+	GameTooltip:AddLine(' ')
+	GameTooltip:AddDoubleLine(KEY_BUTTON1..':', L['dt']['guildleft'], 1, 1, 1)
+	GameTooltip:AddDoubleLine(KEY_BUTTON2..':', L['dt']['guildright'], 1, 1, 1)
 	GameTooltip:Show()
 end)
 

@@ -19,7 +19,7 @@ local function OnEvent(self, event, ...)
 	local free, total,used = 0, 0, 0
 	for i = 0, NUM_BAG_SLOTS do free, total = free + GetContainerNumFreeSlots(i), total + GetContainerNumSlots(i) end
 	used = total - free
-	Text:SetText(Stat.Color1 .. BAGSLOT .. ': ' .. '|r' .. Stat.Color2 .. used ..'/'.. total ..'|r')
+	Text:SetText(Stat.Color1 .. BAGSLOT .. ': ' .. '|r' .. Stat.Color2 .. total ..'/'.. used ..'/'.. free ..'|r')
 	self:SetAllPoints(Text)
 end
 

@@ -35,15 +35,17 @@ local zone_Update = function()
 	local pvp = GetZonePVPInfo()
 	m_zone_text:SetText(GetMinimapZoneText())
 	if pvp == 'friendly' then
-		m_zone_text:SetTextColor(.1, 1, .1)
+		m_zone_text:SetTextColor(0.05, 0.85, 0.03)
 	elseif pvp == 'sanctuary' then
-		m_zone_text:SetTextColor(.41, .8, .94)
+		m_zone_text:SetTextColor(0.035, 0.58, 0.84)
 	elseif pvp == 'arena' or pvp == 'hostile' then
-		m_zone_text:SetTextColor(1, .1, .1)
+		m_zone_text:SetTextColor(0.84, 0.03, 0.03)
 	elseif pvp == 'contested' then
-		m_zone_text:SetTextColor(1, .7, 0)
+		m_zone_text:SetTextColor(0.9, 0.85, 0.05)
+	elseif pvp == 'combat' then
+		m_zone_text:SetTextColor(0.84, 0.03, 0.03)
 	else
-		m_zone_text:SetTextColor(1, 1, 1)
+		m_zone_text:SetTextColor(0.9, 0.85, 0.05)
 	end
 end
  

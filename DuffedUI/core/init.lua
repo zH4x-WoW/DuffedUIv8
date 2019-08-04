@@ -1,17 +1,46 @@
-local addon, engine = ...
-engine[1] = {}
-engine[2] = {}
-engine[3] = {}
-engine[4] = {}
+local AddOnName, Engine = ...
 
-DuffedUI = engine
+local AddOn = LibStub('AceAddon-3.0'):NewAddon(AddOnName, 'AceConsole-3.0', 'AceEvent-3.0', 'AceTimer-3.0', 'AceHook-3.0')
+local About = LibStub:GetLibrary('LibAboutPanel', true)
+
+Engine[1] = AddOn
+Engine[2] = {}
+Engine[3] = {}
+Engine[4] = {}
+
+_G[AddOnName] = Engine
+
+AddOn.Title = GetAddOnMetadata(AddOnName, 'Title')
+AddOn.Author = GetAddOnMetadata(AddOnName, 'Author')
+AddOn.Version = GetAddOnMetadata(AddOnName, 'Version')
+AddOn.Credits = GetAddOnMetadata(AddOnName, 'X-Credits')
 
 ERR_NOT_IN_RAID = ''
 
-DuffedUI [1].SetPerCharVariable = function(varName, value)
+AddOn.SetPerCharVariable = function(varName, value)
 	_G [varName] = value
 end
 
+AddOn.ScanTooltip = CreateFrame('GameTooltip', 'DuffedUI_ScanTooltip', _G.UIParent, 'GameTooltipTemplate')
+AddOn.Color = AddOn.Class == "PRIEST" and AddOn.PriestColors or (CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[AddOn.Class] or RAID_CLASS_COLORS[AddOn.Class])
+AddOn.WowPatch, AddOn.WowBuild, AddOn.WowRelease, AddOn.TocVersion = GetBuildInfo()
+AddOn.WowBuild = tonumber(AddOn.WowBuild)
+
+AddOn.Noop = function()
+	return
+end
+
+if (About) then
+	AddOn.optionsFrame = About.new(nil, AddOnName)
+end
+
+AddOn.AddOns = {}
+AddOn.AddOnVersion = {}
+for i = 1, GetNumAddOns() do
+	local Name = GetAddOnInfo(i)
+	AddOn.AddOns[string.lower(Name)] = GetAddOnEnableState(AddOn.Name, Name) == 2 or false
+	AddOn.AddOnVersion[string.lower(Name)] = GetAddOnMetadata(Name, 'Version')
+end
 
 --[[
 

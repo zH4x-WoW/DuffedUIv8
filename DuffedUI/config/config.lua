@@ -10,6 +10,8 @@ C['general'] = {
 	['blizzardreskin'] = true,
 	['calendarevent'] = false,
 	['4kpp'] = false,
+	['moveblizzardframes'] = false,
+	['minimapsize'] = 144,
 }
 
 C['unitframes'] = {
@@ -82,6 +84,7 @@ C['nameplate'] = {
 	['threat'] = true,
 	['pDebuffs'] = true,
 	['hidetargetglow'] = false,
+	['showperc'] = false,
 }
 
 C['actionbar'] = {
@@ -108,6 +111,9 @@ C['actionbar'] = {
 	['LeftSideBarDisable'] = false,
 	['RightSideBarDisable'] = false,
 	['hidepanels'] = false,
+	['extraquestbutton'] = true,
+	['microbar'] = false,
+	['microbarmouseover'] = false,
 }
 
 C['raid'] = {
@@ -126,6 +132,7 @@ C['raid'] = {
 	['framewidth'] = 68,
 	['frameheight'] = 45,
 	['layout'] = 'heal',
+	['frequentupdates'] = true,
 }
 
 C['datatext'] = {
@@ -196,15 +203,21 @@ C['auras'] = {
 }
 
 C['bags'] = {
-	['enable'] = true,
-	['bpr'] = 10,
-	['scale'] = 1,
-	['buttonsize'] = 28,
-	['spacing'] = 4,
-	['Bounce'] = true,
-	['SortingButton'] = true,
-	['BagsRtL'] = true,
-	['ItemsLtR'] = true,
+	['BagColumns'] = 11,
+	['BankColumns'] = 11,
+	['BindText'] = false,
+	['ButtonSize'] = 28,
+	['ButtonSpace'] = 4,
+	['Enable'] = true,
+	['ItemLevel'] = true,
+	['ItemLevelThreshold'] = 10,
+	['JunkIcon'] = true,
+	['ScrapIcon'] = true,
+	['PulseNewItem'] = true,
+	['ReverseLoot'] = false,
+	['SortInverted'] = false,
+	["BagBar"] = false,
+	["BagBarMouseover"] = false,
 }
 
 C['misc'] = {
@@ -219,6 +232,7 @@ C['misc'] = {
 	['combatanimation'] = true,
 	['flightpoint'] = true,
 	['ilvlcharacter'] = true,
+	['durabilitycharacter'] = true,
 	['acm_screen'] = true,
 	['AFKCamera'] = true,
 	['XPBar'] = true,
@@ -237,8 +251,7 @@ C['duffed'] = {
 	['announcechannel'] = 'SAY',
 	['spellannounce'] = true,
 	['errorfilter'] = true,
-	['talkinghead'] = true,
-	['objectivetracker'] = false,
+	['notalkinghead'] = false,
 	filter = {
 		[INVENTORY_FULL] = true,
 		[ERR_PARTY_LFG_BOOT_COOLDOWN_S] = true,
@@ -257,15 +270,23 @@ C['loot'] = {
 }
 
 C['tooltip'] = {
-	['enable'] = true,
-	['hidecombat'] = false,
-	['hidebuttons'] = false,
-	['hideuf'] = false,
-	['ilvl'] = true,
-	['ids'] = true,
-	['enablecaster'] = true,
-	['Mouse'] = false,
-	['role'] = false,
+	['AzeriteArmor'] = true,
+	['CursorAnchor'] = false,
+	['Enable'] = true,
+	['GuildRanks'] = true,
+	['HealthbarHeight'] = 11,
+	['FontSize'] = 11,
+	['HealthBarText'] = true,
+	['HideInCombat'] = false,
+	['Icons'] = true,
+	['TargetInfo'] = true,
+	['InspectInfo'] = true,
+	['ItemQualityBorder'] = true,
+	['PlayerTitles'] = true,
+	['NpcID'] = false,
+	['PlayerRoles'] = true,
+	['SpellID'] = false,
+	['ShowMount'] = true,
 }
 
 C['merchant'] = {

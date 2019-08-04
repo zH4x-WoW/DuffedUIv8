@@ -52,6 +52,7 @@ Stat:SetScript('OnEnter', function(self)
 	local anchor, panel, xoff, yoff = D['DataTextTooltipAnchor'](Text)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
+	GameTooltip:AddLine(L['dt']['durabilityheader'])
 	for i = 1, 11 do
 		if L.Slots[i][3] ~= 1000 then
 			local green, red
@@ -60,6 +61,8 @@ Stat:SetScript('OnEnter', function(self)
 			GameTooltip:AddDoubleLine(L.Slots[i][2], floor(L.Slots[i][3]*100)..'%',1 ,1 , 1, red + 1, green, 0)
 		end
 	end
+	GameTooltip:AddLine(' ')
+	GameTooltip:AddDoubleLine(KEY_BUTTON1..':', L['dt']['durabilityleft'], 1, 1, 1)
 	GameTooltip:Show()
 end)
 Stat:SetScript('OnLeave', function() GameTooltip:Hide() end)

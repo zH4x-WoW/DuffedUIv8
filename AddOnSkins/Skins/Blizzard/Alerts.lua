@@ -35,6 +35,12 @@ local NewPetAlertSystem = NewPetAlertSystem
 local NewMountAlertSystem = NewMountAlertSystem
 -- GLOBALS:
 
+local function forceAlpha(self, alpha, isForced)
+	if alpha ~= 1 and isForced ~= true then
+		self:SetAlpha(1, true)
+	end
+end
+
 function AS:Blizzard_Alerts()
 	local function SkinAchievementAlert(frame)
 		if not frame.Backdrop then
@@ -469,41 +475,37 @@ function AS:Blizzard_Alerts()
 	end
 
 	local function SkinLootWonAlert(frame)
-		frame.Background:SetAlpha(0)
-		frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		frame.Icon:SetDrawLayer("BORDER")
-		frame.IconBorder:SetAlpha(0)
-		frame.glow:SetAlpha(0)
-		frame.shine:SetAlpha(0)
-		frame.BGAtlas:SetAlpha(0)
-		frame.PvPBackground:SetAlpha(0)
+		if not frame.hooked then
+		hooksecurefunc(frame, "SetAlpha", forceAlpha)
+		frame.hooked = true
+		end
 
-		frame.SpecRing:SetTexture("")
-		frame.SpecIcon:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, -15)
-		frame.SpecIcon:SetTexCoord(unpack(AS.TexCoords))
+		frame:SetAlpha(1)
+		frame.Background:Kill()
+
+		local lootItem = frame.lootItem or frame
+		lootItem.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		lootItem.Icon:SetDrawLayer("BORDER")
+		lootItem.IconBorder:Kill()
+		lootItem.SpecRing:SetTexture("")
+
+		frame.glow:Kill()
+		frame.shine:Kill()
+		frame.BGAtlas:Kill()
+		frame.PvPBackground:Kill()
 
 		-- Icon border
-		if not frame.Icon.b then
-			frame.Icon.b = CreateFrame("Frame", nil, frame)
-			frame.Icon.b:SetTemplate("Default")
-			frame.Icon.b:SetOutside(frame.Icon)
-			frame.Icon:SetParent(frame.Icon.b)
+		if not lootItem.Icon.b then
+			lootItem.Icon.b = CreateFrame("Frame", nil, frame)
+			lootItem.Icon.b:SetTemplate()
+			lootItem.Icon.b:SetOutside(lootItem.Icon)
+			lootItem.Icon:SetParent(lootItem.Icon.b)
 		end
 
-		if not frame.SpecIcon.b then
-			frame.SpecIcon.b = CreateFrame("Frame", nil, frame)
-			frame.SpecIcon.b:SetFrameLevel(3)
-			frame.SpecIcon.b:SetTemplate("Default")
-			frame.SpecIcon.b:SetPoint("TOPLEFT", frame.SpecIcon, "TOPLEFT", -2, 2)
-			frame.SpecIcon.b:SetPoint("BOTTOMRIGHT", frame.SpecIcon, "BOTTOMRIGHT", 2, -2)
-			frame.SpecIcon:SetParent(frame.SpecIcon.b)
-		end
-		frame.SpecIcon.b:SetShown(frame.SpecIcon:IsShown() and frame.SpecIcon:GetTexture() ~= nil)
-
-		if not frame.Backdrop then
+		if not frame.backdrop then
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame.Icon.b, 'TOPLEFT', -4, 4)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame.Icon.b, 'BOTTOMRIGHT', 180, -4)
+			frame.Backdrop:Point('TOPLEFT',  lootItem.Icon.b, 'TOPLEFT', -4, 4)
+			frame.Backdrop:Point('BOTTOMRIGHT',  lootItem.Icon.b, 'BOTTOMRIGHT', 180, -4)
 		end
 	end
 

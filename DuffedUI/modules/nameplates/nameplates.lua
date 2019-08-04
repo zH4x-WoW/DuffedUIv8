@@ -121,6 +121,16 @@ D['ConstructNameplates'] = function(self)
 	name:SetShadowOffset(1.25, -1.25)
 	self:Tag(name, '[difficulty][level][shortclassification] [DuffedUI:getnamecolor][DuffedUI:namelong]')
 
+	-- perc on health
+	if C['nameplate']['showperc'] then
+		perc = health:CreateFontString(nil, 'OVERLAY')
+		perc:Point('CENTER', health, 0, 0)
+		perc:SetJustifyH('LEFT')
+		perc:SetFont(f, fs, ff)
+		perc:SetShadowOffset(1.25, -1.25)
+		self:Tag(perc, '[DuffedUI:perchpnp]')
+	end
+
 	-- debuffs
 	local debuffs = CreateFrame('Frame', 'NameplateDebuffs', self)
 	debuffs:SetPoint('BOTTOMLEFT', health, 'TOPLEFT', 0, 18)

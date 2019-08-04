@@ -11,6 +11,8 @@ DuffedUIConfigUILocalization.generalblizzardreskin = "Reskin Blizzard frames to 
 DuffedUIConfigUILocalization.generalcalendarevent = "Disable calendar event textures"
 DuffedUIConfigUILocalization.generalautoaccept = "Enable Auto-Invite (Friends and Guildmates)"
 DuffedUIConfigUILocalization.general4kpp = "Double scaling for 4k-Monitors to get pixelperfect (should only used with 4k and autoscaling\nis to small)"
+DuffedUIConfigUILocalization.generalmoveblizzardframes = 'Move Blizzard Frames'
+DuffedUIConfigUILocalization.generalminimapsize = 'Minimap Size (Default = 144)'
 
 --[[Unit Frames]]--
 DuffedUIConfigUILocalization.unitframes = "Unit Frames"
@@ -84,6 +86,7 @@ DuffedUIConfigUILocalization.nameplatehidetargetglow = "Hide targetborder"
 DuffedUIConfigUILocalization.nameplateeliteicon = "Enable classification (rare, elite) on nameplates"
 DuffedUIConfigUILocalization.nameplatequesticons = "Enable questicons on nameplates"
 DuffedUIConfigUILocalization.nameplatecombat = "Enable nameplates only in combat"
+DuffedUIConfigUILocalization.nameplateshowperc = "Show healthpercent on target"
 
 --[[Actionbars]]--
 DuffedUIConfigUILocalization.actionbar = "Action Bars"
@@ -110,6 +113,9 @@ DuffedUIConfigUILocalization.actionbarLeftSideBarDisable = "Disable left side ac
 DuffedUIConfigUILocalization.actionbarRightSideBarDisable = "Disable right side actionbar"
 DuffedUIConfigUILocalization.actionbarrightbarDisable = "Disable bar on the right side"
 DuffedUIConfigUILocalization.actionbarhidepanels = "Hide panels of actionbars"
+DuffedUIConfigUILocalization.actionbarextraquestbutton = "Enable ExtraQuestButton"
+DuffedUIConfigUILocalization.actionbarmicrobar = "Enable Micromenubar"
+DuffedUIConfigUILocalization.actionbarmicrobarmouseover = "Enable mouseover for Micromenubar"
 
 --[[Raid Frames]]--
 DuffedUIConfigUILocalization.raid = "Raid Frames"
@@ -198,15 +204,21 @@ DuffedUIConfigUILocalization.auraswrap = "Set wrap for buffs (default = 18)"
 
 --[[Bags]]--
 DuffedUIConfigUILocalization.bags = "Bags"
-DuffedUIConfigUILocalization.bagsenable = "Enable all-in-one bag"
-DuffedUIConfigUILocalization.bagsbpr = "Set bagbuttons per row"
-DuffedUIConfigUILocalization.bagsscale = "Set scale of bag & bank frames"
-DuffedUIConfigUILocalization.bagsspacing = "Set spacing betweens bagslots"
-DuffedUIConfigUILocalization.bagsbuttonsize = " Set slotsize"
-DuffedUIConfigUILocalization.bagsBounce = "Enable Pulse Animation for new items"
-DuffedUIConfigUILocalization.bagsSortingButton = "Enable the sorting button on bags and bank"
-DuffedUIConfigUILocalization.bagsBagsRtL = "Sort bags right to left"
-DuffedUIConfigUILocalization.bagsItemsLtR = "Sort items left to right in bags"
+DuffedUIConfigUILocalization.bagsBagColumns = "Set bagbuttons per row"
+DuffedUIConfigUILocalization.bagsBankColumns = "Set bankbuttons per row"
+DuffedUIConfigUILocalization.bagsBindText = "Show keybind on items in bag"
+DuffedUIConfigUILocalization.bagsButtonSize = "Set slotsize"
+DuffedUIConfigUILocalization.bagsButtonSpace = "Set spacing betweens bagslots"
+DuffedUIConfigUILocalization.bagsEnable = "Enable all-in-one bag"
+DuffedUIConfigUILocalization.bagsItemLevel = "Show ItemLevel"
+DuffedUIConfigUILocalization.bagsItemLevelThreshold = "ItemLevel Threshold"
+DuffedUIConfigUILocalization.bagsJunkIcon = "Show JunkIcon"
+DuffedUIConfigUILocalization.bagsScrapIcon = "Show ScrapIcon"
+DuffedUIConfigUILocalization.bagsPulseNewItem = "Enable Pulse Animation for new items"
+DuffedUIConfigUILocalization.bagsReverseLoot = "Loot in left bag first"
+DuffedUIConfigUILocalization.bagsSortInverted = "Sort inverted"
+DuffedUIConfigUILocalization.bagsBagBar = "Enable Bagbar"
+DuffedUIConfigUILocalization.bagsBagBarMouseover = "Enable mouseover for Bagbar"
 
 --[[Misc]]--
 DuffedUIConfigUILocalization.misc = "Misc"
@@ -225,8 +237,12 @@ DuffedUIConfigUILocalization.miscacm_screen = "Enable automatic Achievment scree
 DuffedUIConfigUILocalization.miscAFKCamera = "Enable AFKCamera"
 DuffedUIConfigUILocalization.miscXPBar = "Enable XP-Bar"
 DuffedUIConfigUILocalization.miscXPBarWidth = "Set width of XP-Bar"
-DuffedUIConfigUILocalization.miscXPBarWidth = "Set height of XP-Bar"
+DuffedUIConfigUILocalization.miscXPBarHeight = "Set height of XP-Bar"
 DuffedUIConfigUILocalization.miscmagemenu = "Enable Teleport menu (works only on Mages)"
+DuffedUIConfigUILocalization.miscazerite = "Enable Azerite-Bar"
+DuffedUIConfigUILocalization.miscazeritewidth = "Set width of Azerite-Bar"
+DuffedUIConfigUILocalization.miscazeriteheight = "Set height of Azerite-Bar"
+DuffedUIConfigUILocalization.miscdurabilitycharacter = "Enable durability on character screen"
 
 --[[Duffed]]--
 DuffedUIConfigUILocalization.duffed = "Duffed"
@@ -236,7 +252,7 @@ DuffedUIConfigUILocalization.duffedannouncechannel = "Set channel for announceme
 DuffedUIConfigUILocalization.duffeddispelannouncement = "Enable Dispel announcement"
 DuffedUIConfigUILocalization.duffedspellannounce = "Enable Aura announcement"
 DuffedUIConfigUILocalization.duffederrorfilter = "Hide spamming error in the middle of your screen"
-DuffedUIConfigUILocalization.duffedtalkinghead = "Disable the Talking Head-Frame"
+DuffedUIConfigUILocalization.duffednotalkinghead = "Disable the Talking Head-Frame"
 DuffedUIConfigUILocalization.duffedobjectivetracker = "Enable moving for objectivetracker"
 
 --[[Loot]]--
@@ -246,15 +262,23 @@ DuffedUIConfigUILocalization.lootrolllootframe = "Enable item roll window"
 
 --[[Tooltip]]--
 DuffedUIConfigUILocalization.tooltip = "Tooltip"
-DuffedUIConfigUILocalization.tooltipenable = "Enable Tooltip"
-DuffedUIConfigUILocalization.tooltiphidecombat = "Hide Tooltip in combat"
-DuffedUIConfigUILocalization.tooltiphidebuttons = "Hide Tooltip on action bar buttons"
-DuffedUIConfigUILocalization.tooltiphideuf = "Hide tooltip on unit frames"
-DuffedUIConfigUILocalization.tooltipids = "Show spell / item-id on tooltip"
-DuffedUIConfigUILocalization.tooltipilvl = "Enable Item level display on tooltip"
-DuffedUIConfigUILocalization.tooltipenablecaster = "Enable Caster name for buffs / debuffs on tooltip"
-DuffedUIConfigUILocalization.tooltipMouse = "Enable Tooltip on cursor"
-DuffedUIConfigUILocalization.tooltiprole = "Enable characterrole on tooltip"
+DuffedUIConfigUILocalization.tooltipAzeriteArmor = "Show Azerite Armor"
+DuffedUIConfigUILocalization.tooltipCursorAnchor = "Show Cursor on Anchor"
+DuffedUIConfigUILocalization.tooltipEnable = "Enable DuffedUI Tooltip"
+DuffedUIConfigUILocalization.tooltipGuildRanks = "Show Guild Ranks"
+DuffedUIConfigUILocalization.tooltipHealthbarHeight = "Healthbar Height"
+DuffedUIConfigUILocalization.tooltipFontSize = "Font Size"
+DuffedUIConfigUILocalization.tooltipHealthBarText = "Show Healthbar Text"
+DuffedUIConfigUILocalization.tooltipHideInCombat = "Hide Tooltip in Combat"
+DuffedUIConfigUILocalization.tooltipIcons = "Show Icons"
+DuffedUIConfigUILocalization.tooltipTargetInfo = "Show TargetInfo"
+DuffedUIConfigUILocalization.tooltipInspectInfo = "Show InspectInfo - ilvl (Hold Shift)"
+DuffedUIConfigUILocalization.tooltipItemQualityBorder = "Show Itemqualityborders" 
+DuffedUIConfigUILocalization.tooltipPlayerTitles = "Show Player Titles"
+DuffedUIConfigUILocalization.tooltipNpcID = "Show NpcID"
+DuffedUIConfigUILocalization.tooltipPlayerRoles = "Show Player Roles in Groups/Raid"
+DuffedUIConfigUILocalization.tooltipSpellID = "Show Spell- and ItemID"
+DuffedUIConfigUILocalization.tooltipShowMount = "Show Mount (Hold Ctrl for more info)"
 
 --[[Merchant]]--
 DuffedUIConfigUILocalization.merchant = "Merchant"

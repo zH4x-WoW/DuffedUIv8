@@ -58,6 +58,8 @@ local function OnEvent(self, event)
 	if DuffedUIData == nil then DuffedUIData = {} end
 	if DuffedUIData['gold'] == nil then DuffedUIData['gold'] = {} end
 	if DuffedUIData['gold'][myPlayerRealm] == nil then DuffedUIData['gold'][myPlayerRealm] = {} end
+	DuffedUIData['Class'][myPlayerRealm] = DuffedUIData['Class'][myPlayerRealm] or {}
+	DuffedUIData['Class'][myPlayerRealm][myPlayerName] = D.Class
 	DuffedUIData['gold'][myPlayerRealm][myPlayerName] = GetMoney()
 	OldMoney = NewMoney
 end
@@ -107,12 +109,14 @@ Stat:SetScript('OnEnter', function(self)
 	local thisRealmList = DuffedUIData.gold[myPlayerRealm]
 	for k,_ in pairs(thisRealmList) do
 		if thisRealmList[k] then
+			local class = DuffedUIData['Class'][myPlayerRealm][k] or 'PRIEST'
+			local color = class and (_G.CUSTOM_CLASS_COLORS and _G.CUSTOM_CLASS_COLORS[class] or _G.RAID_CLASS_COLORS[class])
 			tinsert (myGold,
 				{
 					name = k,
 					amount = thisRealmList[k],
 					amountText = FormatTooltipMoney(thisRealmList[k]),
-					1, 1, 1, 1, 1, 1,
+					r = color.r, g = color.g, b = color.b,
 				}
 			)
 		end
@@ -233,9 +237,9 @@ Stat:SetScript('OnEnter', function(self)
 	end
 
 	GameTooltip:AddLine(' ')
-	GameTooltip:AddLine(L['dt']['goldbagsopen'])
-	GameTooltip:AddLine(L['dt']['goldcurrency'])
-	GameTooltip:AddLine(L['dt']['goldreset'])
+	GameTooltip:AddDoubleLine(KEY_BUTTON1..':', L['dt']['goldbagsopen'], 1, 1, 1)
+	GameTooltip:AddDoubleLine(KEY_BUTTON2..':', L['dt']['goldcurrency'], 1, 1, 1)
+	GameTooltip:AddDoubleLine(L['dt']['goldreset'], L['dt']['goldreset2'], 1, 1, 1)
 
 	GameTooltip:Show()
 	GameTooltip:SetTemplate('Transparent')

@@ -234,7 +234,9 @@ Stat:SetScript('OnEnter', function(self)
 			GameTooltip:AddDoubleLine('Next Invasion '..GetNextLocation(nextTime, index), date('%m/%d %H:%M', nextTime), 1, 1, 1, 1, 1, 1)
 		end
 	end
-
+	GameTooltip:AddLine(' ')
+	GameTooltip:AddDoubleLine(KEY_BUTTON1..':', L['dt']['timeleft'], 1, 1, 1)
+	GameTooltip:AddDoubleLine(KEY_BUTTON2..':', L['dt']['timeright'], 1, 1, 1)
 	GameTooltip:Show()
 end)
 

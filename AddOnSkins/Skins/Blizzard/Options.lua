@@ -8,6 +8,7 @@ function AS:Blizzard_BindingUI(event, addon)
 	end
 
 	AS:SkinFrame(KeyBindingFrame)
+	KeyBindingFrame.BG:Kill()
 
 	AS:StripTextures(KeyBindingFrame.header)
 	AS:StripTextures(KeyBindingFrameScrollFrame)

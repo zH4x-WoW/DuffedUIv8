@@ -25,6 +25,16 @@ oUF.Tags.Methods['DuffedUI:perchp'] = function(unit)
 	end
 end
 
+oUF.Tags.Events['DuffedUI:perchpnp'] = 'UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH UNIT_CONNECTION PLAYER_FLAGS_CHANGED'
+oUF.Tags.Methods['DuffedUI:perchpnp'] = function(unit)
+	local m = UnitHealthMax(unit)
+	if(m == 0) then
+		return 0
+	else
+		return math.floor(UnitHealth(unit) / m * 100 + 0.5)..'%'
+	end
+end
+
 oUF.Tags.Events['DuffedUI:threat'] = 'UNIT_THREAT_LIST_UPDATE'
 oUF.Tags.Methods['DuffedUI:threat'] = function(unit)
 	local tanking, status, percent = UnitDetailedThreatSituation('player', 'target')

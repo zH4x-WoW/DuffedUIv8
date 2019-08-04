@@ -17,9 +17,10 @@ local function addTab(id, index, isSub)
 	if (not name) or (not icon) then return end
 
 	local tab = _G['TSTab' .. index] or CreateFrame('CheckButton', 'TSTab' .. index, TradeSkillFrame, 'SpellBookSkillLineTabTemplate,SecureActionButtonTemplate')
+	tab:StripTextures()
 	tab:SetTemplate('Transparent')
 	tab:CreateBackdrop()
-	tab:SetPoint('TOPLEFT', TradeSkillFrame, 'TOPRIGHT', 5, -44 * index + (-50 * isSub))
+	tab:SetPoint('TOPLEFT', TradeSkillFrame, 'TOPRIGHT', 3, -44 * index + (-50 * isSub))
 
 	tab:SetScript('OnEvent', isCurrentTab)
 	tab:RegisterEvent('CURRENT_SPELL_CAST_CHANGED')
@@ -28,7 +29,10 @@ local function addTab(id, index, isSub)
 	tab.tooltip = name
 	tab:SetAttribute('type', 'spell')
 	tab:SetAttribute('spell', name)
+	tab:SkinButton()
 	tab:SetNormalTexture(icon)
+	tab:GetNormalTexture():SetTexCoord(D['IconCoord'][1], D['IconCoord'][2], D['IconCoord'][3], D['IconCoord'][4])
+	tab:GetNormalTexture():SetInside()
 	tab:Show()
 
 	isCurrentTab(tab)

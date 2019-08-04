@@ -107,6 +107,17 @@ if D.Client == 'deDE' then
 		['repaircost'] = 'Alle Gegenstände wurden repariert für einen Gesamtpreis von',
 		['trash'] = 'Alle grauen Gegenstände wurden verkauft. Deine Einnahmen belaufen sich auf',
 	}
+	
+	L['bags'] = {
+		['Cant_Buy_Slot'] = "Es können keine weiteren Taschenplätze gekauft werden!",
+		['Right_Click_Search'] = "Rechtsklick: Suchen",
+		['Shift_Move'] = "Shift halten und ziehen",
+		['Show_Bags'] = "Taschen anzeigen",
+		['Purchase_Slot'] = "Taschenplatz kaufen",
+		['Reagents'] = "Zeige Reagenzienfächer",
+		['Bank'] = "Zeige Bankfächer",
+		['SortTab'] = "Sortieren",
+	}
 
 	L['buttons'] = {
 		['ses_reload'] = 'Das gesamte UI neu laden',
@@ -146,6 +157,8 @@ if D.Client == 'deDE' then
 	}
 
 	L['chat'] = {
+		AFK = "|cffff0000[AFK]|r",
+		DND = "|cffe7e716[DND]|r",
 		['instance_chat'] = 'I',
 		['instance_chat_leader'] = 'IL',
 		['guild'] = 'G',
@@ -212,12 +225,13 @@ if D.Client == 'deDE' then
 		['carts_controlled'] = 'Wagen kontrolliert:',
 		['victory_points'] = 'Siegpunkte:',
 		['orb_possessions'] = 'Orbbesitz:',
-		['goldbagsopen'] = '|cffC41F3BTaschen: Linksklick|r',
-		['goldcurrency'] = '|cffC41F3BWährungsmenü: Rechtsklick|r',
-		['goldreset'] = '|cffC41F3BDaten zurücksetzen: Shift halten + Rechtsklick|r',
+		['goldbagsopen'] = 'Öffnet die Taschen',
+		['goldcurrency'] = 'Öffnet das Währungsmenü',
+		['goldreset'] = 'Daten zurücksetzen:',
+		['goldreset2'] = 'Shift halten + Rechtsklick',
 		['notalents'] = 'Keine Talente',
-		['systemleft'] = '|cffC41F3BLinksklick: Öffnet das PvE-Fenster|r',
-		['systemright'] = '|cffC41F3BRechtsklick: Speichernutzung bereinigen|r',
+		['systemleft'] = 'Öffnet das PvE-Fenster',
+		['systemright'] = 'Speichernutzung bereinigen',
 		['prof'] = 'Berufe',
 		['profless'] = 'Berufslos',
 		['proftooltip'] = 'Beliebiger Klick öffnet die Berufsübersicht',
@@ -232,14 +246,22 @@ if D.Client == 'deDE' then
 		['report'] = 'Mission(en) Report:',
 		['missions'] = 'Missionen in Arbeit',
 		['nomissions'] = 'Keine Missionen',
-		['Rank'] = "Rang",
-		['FarseerOri'] = "Scharfseher Ori",
-		['HunterAkana'] = "Jäger Akana",
-		['BladesmanInowari'] = "Klingenkämpfer Inowari",
-		['NeriSharpfin'] = "Neri Sharffinne",
-		['PoenGillbrack'] = "Poen Kiembrack",
-		['VimBrineheart'] = "Vim Salzherz",
-		['NazjatarFollowerXP'] = "Nazjatar Begleiter XP",
+		['Rank'] = 'Rang',
+		['FarseerOri'] = 'Scharfseher Ori',
+		['HunterAkana'] = 'Jäger Akana',
+		['BladesmanInowari'] = 'Klingenkämpfer Inowari',
+		['NeriSharpfin'] = 'Neri Sharffinne',
+		['PoenGillbrack'] = 'Poen Kiembrack',
+		['VimBrineheart'] = 'Vim Salzherz',
+		['NazjatarFollowerXP'] = 'Nazjatar Begleiter XP',
+		['timeleft'] = 'Öffnet den Kalender',
+		['timeright'] = 'Öffnet die Stopuhr',
+		['friendleft'] = 'Öffnet die Freundesliste',
+		['friendright'] = 'Zum Einladen, Anflüstern etc.',
+		['durabilityheader'] = 'Rüstungszustand',
+		['durabilityleft'] = 'Öffnet die Charakteransicht',
+		['guildleft'] = 'Öffnet die Gildenliste',
+		['guildright'] = 'Zum Einladen und Anflüstern',
 	}
 
 	L['Slots'] = {
@@ -285,6 +307,9 @@ if D.Client == 'deDE' then
 	L['tooltip'] = {
 		['applied'] = 'Angewandt von ',
 		['changelog'] = 'Schließe Changelog',
+		['count'] = 'Anzahl',
+		['bank'] = 'Bank',
+		['mount'] = 'Sitzt auf:'
 	}
 
 	L['errortext'] = {

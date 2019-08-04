@@ -5,10 +5,11 @@ local DuffedUIMinimap = CreateFrame('Frame', 'DuffedUIMinimap', oUFDuffedUI_PetB
 DuffedUIMinimap:SetTemplate()
 DuffedUIMinimap:RegisterEvent('ADDON_LOADED')
 DuffedUIMinimap:Point('TOPRIGHT', UIParent, 'TOPRIGHT', -5, -5)
-DuffedUIMinimap:Size(144)
+DuffedUIMinimap:Size(C['general']['minimapsize'])
 move:RegisterFrame(DuffedUIMinimap)
 
 MinimapCluster:Kill()
+Minimap:Size(C['general']['minimapsize'])
 Minimap:SetParent(DuffedUIMinimap)
 Minimap:ClearAllPoints()
 Minimap:Point('TOPLEFT', 2, -2)

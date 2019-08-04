@@ -50,7 +50,7 @@ D['ConstructUFRaid'] = function(self)
 	health.value:SetFont(f, fs, ff)
 
 	health.PostUpdate = D['PostUpdateHealthRaid']
-	health.frequentUpdates = true
+	health.frequentUpdates = C['raid']['frequentupdates']
 	health.Smooth = true
 	if C['unitframes']['unicolor'] then
 		health.colorDisconnected = false
@@ -93,7 +93,7 @@ D['ConstructUFRaid'] = function(self)
 	power.bg.multiplier = .3
 
 	power.Smooth = true
-	power.frequentUpdates = true
+	power.frequentUpdates = C['raid']['frequentupdates']
 	power.colorDisconnected = true
 	if C['unitframes']['unicolor'] then
 		power.colorClass = true

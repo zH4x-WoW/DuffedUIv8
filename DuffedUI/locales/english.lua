@@ -107,6 +107,17 @@ L['loot'] = {
 	['trash'] = 'Your vendor trash has been sold and you earned',
 }
 
+L['bags'] = {
+		['Cant_Buy_Slot'] = "You can't buy another bankslot!",
+		['Right_Click_Search'] = "Right-Click: Search",
+		['Shift_Move'] = "Hold Shift and move the frame",
+		['Show_Bags'] = "Show Bags",
+		['Purchase_Slot'] = "Purchase Bankslot",
+		['Reagents'] = "Show Reagents",
+		['Bank'] = "Show Bank",
+		['SortTab'] = "Sort Tab",
+}
+
 L['buttons'] = {
 	['ses_reload'] = 'Reloads the entire UI',
 	['ses_move'] = 'Unlock the frames for moving',
@@ -145,6 +156,8 @@ L['group'] = {
 }
 
 L['chat'] = {
+	AFK = "|cffff0000[AFK]|r",
+	DND = "|cffe7e716[DND]|r",
 	['instance_chat'] = 'I',
 	['instance_chat_leader'] = 'IL',
 	['guild'] = 'G',
@@ -211,11 +224,12 @@ L['dt'] = {
 	['carts_controlled'] = 'Carts Controlled:',
 	['victory_points'] = 'Victory Points:',
 	['orb_possessions'] = 'Orb Possessions:',
-	['goldbagsopen'] = '|cffC41F3BBags: Left Click|r',
-	['goldcurrency'] = '|cffC41F3BCurrency Menu: Right Click|r',
-	['goldreset'] = '|cffC41F3BReset Data: Hold Shift + Right Click|r',
-	['systemleft'] = '|cffC41F3BLeft Click: Open PvE-Frame|r',
-	['systemright'] = '|cffC41F3BRight Click: Clean Memoryusage|r',
+	['goldbagsopen'] = 'Open Bags',
+	['goldcurrency'] = 'Currency Menu',
+	['goldreset'] = 'Reset Data: Hold Shift + Right Click',
+	['goldreset2'] = 'Hold Shift + Right Click',
+	['systemleft'] = 'Open PvE-Frame',
+	['systemright'] = 'Clean Memoryusage',
 	['prof'] = 'Professions',
 	['profless'] = 'No Professions',
 	['proftooltip'] = 'Click to open professions',
@@ -230,14 +244,22 @@ L['dt'] = {
 	['report'] = 'Mission(s) Report:',
 	['missions'] = 'Work Work',
 	['nomissions'] = 'No Missions',
-	['Rank'] = "Rank",
-	['FarseerOri'] = "Farseer Ori",
-	['HunterAkana'] = "Hunter Akana",
-	['BladesmanInowari'] = "Bladesman Inowari",
-	['NeriSharpfin'] = "Neri Sharpfin",
-	['PoenGillbrack'] = "Poen Gillbrack",
-	['VimBrineheart'] = "Vim Brineheart",
-	['NazjatarFollowerXP'] = "Nazjatar Follower XP",
+	['Rank'] = 'Rank',
+	['FarseerOri'] = 'Farseer Ori',
+	['HunterAkana'] = 'Hunter Akana',
+	['BladesmanInowari'] = 'Bladesman Inowari',
+	['NeriSharpfin'] = 'Neri Sharpfin',
+	['PoenGillbrack'] = 'Poen Gillbrack',
+	['VimBrineheart'] = 'Vim Brineheart',
+	['NazjatarFollowerXP'] = 'Nazjatar Follower XP',
+	['timeleft'] = 'Open Calendar',
+	['timeright'] = 'Open Stopwatch',
+	['friendleft'] = 'Open Friendlist',
+	['friendright'] = 'Invite, Whispers etc.',
+	['durabilityheader'] = 'Durability',
+	['durabilityleft'] = 'Open Characterframe',
+	['guildleft'] = 'Open Guildlist',
+	['guildright'] = 'Invite and Whispers',
 }
 
 L['Slots'] = {
@@ -283,6 +305,9 @@ L['azeriteBar'] = {
 L['tooltip'] = {
 	['applied'] = 'Applied by ',
 	['changelog'] = 'Close Changelog',
+	['count'] = 'Count',
+	['bank'] = 'Bank',
+	['mount'] = 'Mount:'
 }
 
 L['errortext'] = {

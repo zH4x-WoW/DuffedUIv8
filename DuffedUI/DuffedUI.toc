@@ -1,11 +1,15 @@
 ## Interface: 80200
+## Name: DuffedUI
 ## Author: Merith @ Zirkel des Cenarius EU, Rav
-## Version: 8.88
+## Version: 8.89
 ## Title: |cffC41F3BDuffedUI|r
-## Credits to: humfras aka Shinizu, Hizuro, Azilroka, Caith, Ishtara, Hungtar, Tulla, P3lim, Alza, Roth, Tekkub, Shestak, Caellian, Haleth, Nightcracker, Haste, Hydra, Elv, Tukz, Phanx, Duugu
+## X-Category: Interface Enhancements
+## X-Credits: humfras aka Shinizu, Hizuro, Azilroka, Caith, Ishtara, Hungtar, Tulla, P3lim, Alza, Roth, Tekkub, Shestak, Caellian, Haleth, Nightcracker, Haste, Hydra, Elv, Tukz, Phanx, Duugu, Kkthnx, simpy, Mera and the whole ElvUI Team
 ## SavedVariables: DuffedUIData
 ## SavedVariablesPerCharacter: DuffedUIDataPerChar, ImprovedCurrency, CurrencyData
 ## OptionalDeps: DuffedUI_ConfigUI
 ## X-oUF: oUFDuffedUI
+## X-BugReport: https://github.com/liquidbase/DuffedUIv8/issues
+## X-Tester: Elenarda, Rolfman, Chrisey, Lhunephel, fiffzek, Skunkzord, exodors, Voodoom, Lock85, EviReborn, SidDii
 
 DuffedUI.xml

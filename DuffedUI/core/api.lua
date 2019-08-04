@@ -27,6 +27,32 @@ local function FadeIn(f) UIFrameFadeIn(f, .4, f:GetAlpha(), 1) end
 
 local function FadeOut(f) UIFrameFadeOut(f, .8, f:GetAlpha(), 0) end
 
+local function CreateBorder(f, bLayer, bOffset, bPoints, strip)
+	if f.Backgrounds then
+		return
+	end
+
+	bLayer = bLayer or 0
+	bOffset = bOffset or 4
+	bPoints = bPoints or 0
+
+	if strip then
+		f:StripTextures()
+	end
+
+	D.CreateBorder(f, bOffset)
+
+	local backgrounds = f:CreateTexture(nil, 'BACKGROUND')
+	backgrounds:SetDrawLayer('BACKGROUND', bLayer)
+	backgrounds:SetPoint('TOPLEFT', f ,'TOPLEFT', bPoints, -bPoints)
+	backgrounds:SetPoint('BOTTOMRIGHT', f ,'BOTTOMRIGHT', -bPoints, bPoints)
+	backgrounds:SetColorTexture(C['general']['backdropcolor'][1], C['general']['backdropcolor'][2], C['general']['backdropcolor'][3], C['general']['backdropcolor'][4])
+
+	f:SetBorderColor()
+
+	f.Backgrounds = backgrounds
+end
+
 local function UpdateColor(t)
 	if t == template then return end
 
@@ -595,15 +621,15 @@ function SkinMaxMinFrame(Frame)
 		if button then
 			button:SetSize(16, 16)
 			button:ClearAllPoints()
-			button:SetPoint("CENTER")
+			button:SetPoint('CENTER')
 			button:SetHitRectInsets(1, 1, 1, 1)
 			button:StripTextures(nil, true)
 			button:SetTemplate()
 
-			button.Text = button:CreateFontString(nil, "OVERLAY")
+			button.Text = button:CreateFontString(nil, 'OVERLAY')
 			button.Text:SetFont([[Interface\AddOns\DuffedUI\media\fonts\Arial.ttf]], 12)
-			button.Text:SetText(name == "MaximizeButton" and "▲" or "▼")
-			button.Text:SetPoint("CENTER", 0, 0)
+			button.Text:SetText(name == 'MaximizeButton' and '▲' or '▼')
+			button.Text:SetPoint('CENTER', 0, 0)
 
 			button:HookScript('OnShow', function(self)
 				if not self:IsEnabled() then
@@ -700,6 +726,7 @@ local function addapi(object)
 	if not object.SetAnimation then mt.SetAnimation = SetAnimation end
 	if not object.AnimCallback then mt.AnimCallback = AnimCallback end
 	if not object.AnimOnFinished then mt.AnimOnFinished = AnimOnFinished end
+	if not object.CreateBorder then	mt.CreateBorder = CreateBorder end
 end
 
 local handled = {['Frame'] = true}
@@ -716,4 +743,48 @@ while object do
 	end
 
 	object = EnumerateFrames(object)
+end
+
+function D.ScanTooltipTextures(clean, grabTextures)
+	local textures
+	for i = 1, 10 do
+		local tex = _G['DuffedUI_ScanTooltipTexture'..i]
+		local hasTexture = tex and tex:GetTexture()
+		if hasTexture then
+			if grabTextures then
+				if not textures then textures = {} end
+				textures[i] = hasTexture
+			end
+			if clean then
+				tex:SetTexture()
+			end
+		end
+	end
+
+	return textures
+end
+
+function D.ColorGradient(perc, ...)
+	if perc >= 1 then
+		return select(select("#", ...) - 2, ...)
+	elseif perc <= 0 then
+		return ...
+	end
+
+	local num = select("#", ...) / 3
+	local segment, relperc = math.modf(perc * (num - 1))
+	local r1, g1, b1, r2, g2, b2 = select((segment * 3) + 1, ...)
+
+	return r1 + (r2-r1) * relperc, g1 + (g2 - g1) * relperc, b1 + (b2 - b1) * relperc
+end
+
+function D.StatusBarColorGradient(bar, value, max)
+	local current = (not max and value) or (value and max and max ~= 0 and value / max)
+
+	if not (bar and current) then
+		return
+	end
+
+	local r, g, b = D.ColorGradient(current, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
+	bar:SetStatusBarColor(r, g, b)
 end

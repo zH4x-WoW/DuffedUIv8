@@ -1,4 +1,6 @@
 local D, C, L = unpack(select(2, ...))
+if IsAddOnLoaded('AddOnSkins') then return end
+
 
 local function LoadSkin()
 	local skins = {
@@ -35,11 +37,13 @@ local function LoadSkin()
 	LFDRoleCheckPopupRoleButtonTank:GetChildren():SetFrameLevel(LFDRoleCheckPopupRoleButtonTank:GetChildren():GetFrameLevel() + 1)
 	LFDRoleCheckPopupRoleButtonDPS:GetChildren():SetFrameLevel(LFDRoleCheckPopupRoleButtonDPS:GetChildren():GetFrameLevel() + 1)
 	LFDRoleCheckPopupRoleButtonHealer:GetChildren():SetFrameLevel(LFDRoleCheckPopupRoleButtonHealer:GetChildren():GetFrameLevel() + 1)
+	LFGListInviteDialog.Border:Kill()
 
 	CinematicFrameCloseDialog:SetTemplate('Transparent')
 	CinematicFrameCloseDialog:SetScale(C['general']['uiscale'])
 	CinematicFrameCloseDialogConfirmButton:SkinButton()
 	CinematicFrameCloseDialogResumeButton:SkinButton()
+	CinematicFrameCloseDialog.Border:Kill()
 
 	ReportCheatingDialog:StripTextures()
 	ReportCheatingDialog:SetTemplate('Transparent')
@@ -89,6 +93,7 @@ local function LoadSkin()
 	for i = 1, getn(BlizzardMenuButtons) do
 		local button = _G['GameMenuButton'..BlizzardMenuButtons[i]]
 		if button then button:SkinButton() end
+		GameMenuFrame.Border:Kill()
 	end
 
 	local BlizzardHeader = {
@@ -229,6 +234,7 @@ local function LoadSkin()
 				itab:SkinTab()
 			end
 		end
+		InterfaceOptionsFrame.Border:Kill()
 		InterfaceOptionsFrameTab1:ClearAllPoints()
 		InterfaceOptionsFrameTab1:SetPoint('BOTTOMLEFT',InterfaceOptionsFrameCategories,'TOPLEFT',-11,-2)
 
