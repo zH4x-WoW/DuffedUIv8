@@ -288,9 +288,9 @@ DuffedUIConfigUILocalization.merchantsellmisc = "Sell some defined (craps not gr
 DuffedUIConfigUILocalization.merchantautoguildrepair = "Enable Guild Repair Items"
 
 --[[Buttons]]--
-DuffedUIConfigUILocalization.option_button_reset = "Reset"
-DuffedUIConfigUILocalization.option_button_load = "Apply Settings"
-DuffedUIConfigUILocalization.option_button_close = "Close"
+DuffedUIConfigUILocalization.option_button_reset = "|cffffd100Reset|r"
+DuffedUIConfigUILocalization.option_button_load = "|cff00FF00" .. APPLY .. "|r"
+DuffedUIConfigUILocalization.option_button_close = "|cffFF0000" .. CLOSE .. "|r"
 DuffedUIConfigUILocalization.option_setsavedsetttings = "Set settings Per-Character"
 DuffedUIConfigUILocalization.option_resetchar = "Are you sure you want to reset your character's settings to match your default settings?"
 DuffedUIConfigUILocalization.option_resetall = "Are you sure you want to reset all of your settings to Default?"

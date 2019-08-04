@@ -288,9 +288,9 @@
 	DuffedUIConfigUILocalization.merchantautoguildrepair = "Aktiviere Reparatur über die Gildenbank"
 
 	--[[Buttons]]--
-	DuffedUIConfigUILocalization.option_button_reset = "Zurücksetzen"
-	DuffedUIConfigUILocalization.option_button_load = "Übernehmen"
-	DuffedUIConfigUILocalization.option_button_close = "Schließen"
+	DuffedUIConfigUILocalization.option_button_reset = "|cffffd100Zurücksetzen|r"
+	DuffedUIConfigUILocalization.option_button_load = "|cff00FF00" .. APPLY .. "|r"
+	DuffedUIConfigUILocalization.option_button_close = "|cffFF0000" .. CLOSE .. "|r"
 	DuffedUIConfigUILocalization.option_setsavedsetttings = "Einstellungen für jeden Charakter einzeln abspeichern"
 	DuffedUIConfigUILocalization.option_resetchar = "Bist du dir sicher, dass du deine Charaktereinstellungen auf den Standardwert zurücksetzen willst?"
 	DuffedUIConfigUILocalization.option_resetall = "Bist du dir sicher, dass du alle deine Einstellungen auf Standardwerte zurücksetzen willst?"
