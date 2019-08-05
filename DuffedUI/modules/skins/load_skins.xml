@@ -43,6 +43,7 @@
 	<Script file='opacity.lua' />
 	<Script file='orderhall.lua' /-->
 	<Script file='others.lua' />
+	<Script file='garrison.lua' />
 	<!--Script file='petition.lua' />
 	<Script file='premade.lua' />
 	<Script file='pve.lua' />
