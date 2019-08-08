@@ -210,6 +210,7 @@ Stat:SetScript('OnEnter', function(self)
 		D['Currency'](1716)
 		D['Currency'](1717)
 		D['Currency'](1718)
+		D['Currency'](1721) -- Patch 8.2
 	end
 
 	if ImprovedCurrency['PvP'] then
@@ -234,7 +235,6 @@ Stat:SetScript('OnEnter', function(self)
 		D['Currency'](1154, false, true)
 		D['Currency'](1275)
 		D['Currency'](1710)
-		D['Currency'](1721) -- Patch 8.2
 	end
 
 	GameTooltip:AddLine(' ')
