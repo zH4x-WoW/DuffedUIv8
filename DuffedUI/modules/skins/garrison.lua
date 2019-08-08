@@ -514,59 +514,7 @@ local function LoadSkin()
 		recruit.HireRecruits:SkinButton()
 	end
 
-	-- Capacitive display frame
-	GarrisonCapacitiveDisplayFrame:StripTextures(true)
-	GarrisonCapacitiveDisplayFrame:SetTemplate('Transparent')
-	GarrisonCapacitiveDisplayFrame:SetFrameLevel(5)
-
-	GarrisonCapacitiveDisplayFrame.DecrementButton:SkinNextPrevButton()
-	GarrisonCapacitiveDisplayFrame.DecrementButton:SetSize(22, 22)
-	GarrisonCapacitiveDisplayFrame.IncrementButton:SkinNextPrevButton()
-	GarrisonCapacitiveDisplayFrame.IncrementButton:SetSize(22, 22)
-	GarrisonCapacitiveDisplayFrame.Count:StripTextures()
-	GarrisonCapacitiveDisplayFrame.Count:SkinEditBox()
-	GarrisonCapacitiveDisplayFrame.Count:SetHeight(18)
-	GarrisonCapacitiveDisplayFrameCloseButton:SkinCloseButton()
-	GarrisonCapacitiveDisplayFrame.StartWorkOrderButton:SkinButton()
-	GarrisonCapacitiveDisplayFrame.CreateAllWorkOrdersButton:SkinButton()
-	local CapacitiveDisplay = GarrisonCapacitiveDisplayFrame.CapacitiveDisplay
-	CapacitiveDisplay.IconBG:SetTexture()
-	--CapacitiveDisplay.ShipmentIconFrame.Icon:SkinIcon()
-	CapacitiveDisplay.ShipmentIconFrame:CreateBackdrop()
-	CapacitiveDisplay.ShipmentIconFrame.backdrop:ClearAllPoints()
-	CapacitiveDisplay.ShipmentIconFrame.backdrop:SetOutside(CapacitiveDisplay.ShipmentIconFrame.Icon)
-	CapacitiveDisplay.ShipmentIconFrame.Icon:SetTexCoord(unpack(D['IconCoord']))
-
-	local CapacitiveFollower = CapacitiveDisplay.ShipmentIconFrame.Follower
-	CapacitiveFollower.Portrait:SetAllPoints()
-	CapacitiveFollower.Portrait:SetTexCoord(D['IconCoord'][1], D['IconCoord'][2], D['IconCoord'][3], D['IconCoord'][4])
-	CapacitiveFollower.PortraitRing:Kill()
-	CapacitiveFollower.PortraitRingQuality:Kill()
-	CapacitiveFollower:SetPoint('TOPLEFT', -2, 2)
-	CapacitiveFollower:SetPoint('BOTTOMRIGHT', 2, -2)
-	CapacitiveFollower.Portrait.IconBackdrop = CreateFrame('Frame', nil, CapacitiveFollower)
-	CapacitiveFollower.Portrait.IconBackdrop:SetFrameLevel(CapacitiveFollower:GetFrameLevel() - 1)
-	CapacitiveFollower.Portrait.IconBackdrop:SetPoint('TOPLEFT', CapacitiveFollower.Portrait, -2, 2)
-	CapacitiveFollower.Portrait.IconBackdrop:SetPoint('BOTTOMRIGHT', CapacitiveFollower.Portrait, 2, -2)
-	CapacitiveFollower.Portrait.IconBackdrop:SetTemplate('Default')
-
-	hooksecurefunc(CapacitiveFollower.PortraitRingQuality, 'SetVertexColor', function(self, r, g, b)
-		CapacitiveFollower.Portrait.IconBackdrop:SetBackdropBorderColor(r, g, b)
-		self:SetTexture('')
-	end)
-
-	hooksecurefunc('GarrisonCapacitiveDisplayFrame_Update', function(self)
-		for _, reagent in ipairs(self.CapacitiveDisplay.Reagents) do
-			reagent.NameFrame:SetAlpha(0)
-			if not reagent.backdrop then
-				reagent.Icon:SkinIcon()
-			end
-		end
-	end)
-
-	----------------------------------------------------------------------------------------
 	--	MasterPlan AddOn skin
-	----------------------------------------------------------------------------------------
 	do
 		local function skinMasterPlan()
 			GarrisonLandingPageTab4:SkinTab()
@@ -606,7 +554,7 @@ local function LoadSkin()
 		end
 	end
 
-	--	Order Hall skin
+	-- Order Hall skin
 	OrderHallMissionFrame:StripTextures()
 	OrderHallMissionFrame:CreateBackdrop('Transparent')
 	OrderHallMissionFrame.backdrop:SetPoint('TOPLEFT', 0, 0)
@@ -708,7 +656,7 @@ local function LoadSkin()
 	OrderHallMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:SkinButton()
 	OrderHallMissionFrame.MissionComplete.NextMissionButton:SkinButton()
 
-	--	BFA Mission skin
+	-- BFA Mission skin
 	BFAMissionFrame:StripTextures()
 	BFAMissionFrame:CreateBackdrop('Transparent')
 	BFAMissionFrame.backdrop:SetPoint('TOPLEFT', 0, 0)
