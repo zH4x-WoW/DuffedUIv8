@@ -247,21 +247,20 @@ function EFL:UpdateFriends(button)
 		if isOnline then
 			button.status:SetTexture(EFL.Icons.Status[(isDND and 'DND' or isAFK and 'AFK' or 'Online')][self.db.StatusIconPack])
 			if client == BNET_CLIENT_WOW then
-				if not zoneName or zoneName == '' then
-					infoText = UNKNOWN
+				gameText = gsub(gameText, '&apos;', "'")
+
+				if realmName == PA.MyRealm then
+					infoText = zoneName
 				else
-					if realmName == PA.MyRealm then
-						infoText = zoneName
-					else
-						infoText = gsub(gameText, '&apos;', "'")
-					end
+					infoText = gameText
 				end
+
 				button.gameIcon:SetTexture(EFL.Icons.Game[faction][self.db[faction]])
 			else
 				if not EFL.Icons.Game[client] then
 					client = 'App'
 				end
-				infoText = gameText
+				infoText = client == 'BSAp' and PA.ACL['Mobile'] or gameText
 				button.gameIcon:SetTexture(EFL.Icons.Game[client][self.db[client]])
 			end
 			nameColor = FRIENDS_BNET_NAME_COLOR
@@ -295,6 +294,7 @@ function EFL:UpdateFriends(button)
 		button.info:SetTextColor(unpack(Cooperate and {1, .96, .45} or {.49, .52, .54}))
 		button.name:SetFont(PA.LSM:Fetch('font', self.db.NameFont), self.db.NameFontSize, self.db.NameFontFlag)
 		button.info:SetFont(PA.LSM:Fetch('font', self.db.InfoFont), self.db.InfoFontSize, self.db.InfoFontFlag)
+
 		if button.Favorite:IsShown() then
 			button.Favorite:ClearAllPoints()
 			button.Favorite:SetPoint("TOPLEFT", button.name, "TOPLEFT", button.name:GetStringWidth(), 0);
