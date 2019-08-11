@@ -247,12 +247,14 @@ function EFL:UpdateFriends(button)
 		if isOnline then
 			button.status:SetTexture(EFL.Icons.Status[(isDND and 'DND' or isAFK and 'AFK' or 'Online')][self.db.StatusIconPack])
 			if client == BNET_CLIENT_WOW then
-				gameText = gsub(gameText, '&apos;', "'")
-
-				if realmName == PA.MyRealm then
-					infoText = zoneName
+				if not zoneName or zoneName == '' then
+					infoText = UNKNOWN
 				else
-					infoText = gameText
+					if realmName == PA.MyRealm then
+						infoText = zoneName
+					else
+						infoText = gsub(gameText, '&apos;', "'")
+					end
 				end
 
 				button.gameIcon:SetTexture(EFL.Icons.Game[faction][self.db[faction]])
@@ -260,7 +262,7 @@ function EFL:UpdateFriends(button)
 				if not EFL.Icons.Game[client] then
 					client = 'App'
 				end
-				infoText = client == 'BSAp' and PA.ACL['Mobile'] or gameText
+				infoText = gameText
 				button.gameIcon:SetTexture(EFL.Icons.Game[client][self.db[client]])
 			end
 			nameColor = FRIENDS_BNET_NAME_COLOR
