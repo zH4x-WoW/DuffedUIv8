@@ -1,10 +1,11 @@
 local D, C, L = unpack(select(2, ...))
 
 local _G = _G
-local next, math_max, table_wipe = next, math.max, table.wipe
-local select, tonumber = select, tonumber
-local string_format = string.format
-local table_insert = table.insert
+local next, math_max, table_wipe = _G.next, _G.math.max, _G.table.wipe
+local select, tonumber = _G.select, _G.tonumber
+local string_format = _G.string.format
+local table_insert = _G.table.insert
+local string_match = _G.string.match
 
 local ENCHANTED_TOOLTIP_LINE = _G.ENCHANTED_TOOLTIP_LINE
 local GetAverageItemLevel = _G.GetAverageItemLevel
@@ -14,11 +15,13 @@ local GetInventoryItemLink = _G.GetInventoryItemLink
 local GetInventoryItemTexture = _G.GetInventoryItemTexture
 local GetItemInfo = _G.GetItemInfo
 local ITEM_LEVEL = _G.ITEM_LEVEL
+local ITEM_LEVEL_ALT = _G.ITEM_LEVEL_ALT
 local DuffedUI_ScanTooltipTextLeft1 = _G.DuffedUI_ScanTooltipTextLeft1
 local RETRIEVING_ITEM_INFO = _G.RETRIEVING_ITEM_INFO
 local UnitIsUnit = _G.UnitIsUnit
 
 local MATCH_ITEM_LEVEL = ITEM_LEVEL:gsub('%%d', '(%%d+)')
+local MATCH_ITEM_LEVEL_ALT = ITEM_LEVEL_ALT:gsub('%%d(%s?)%(%%d%)', '%%d+%1%%((%%d+)%%)')
 local MATCH_ENCHANT = ENCHANTED_TOOLTIP_LINE:gsub('%%s', '(.+)')
 local X2_INVTYPES, X2_EXCEPTIONS, ARMOR_SLOTS = {
 	INVTYPE_2HWEAPON = true,
@@ -31,12 +34,13 @@ local X2_INVTYPES, X2_EXCEPTIONS, ARMOR_SLOTS = {
 function D.InspectGearSlot(line, lineText, enchantText, enchantColors, iLvl, itemLevelColors)
 	local lr, lg, lb = line:GetTextColor()
 	local tr, tg, tb = DuffedUI_ScanTooltipTextLeft1:GetTextColor()
-	local itemLevel = lineText and lineText:match(MATCH_ITEM_LEVEL)
-	local enchant = lineText:match(MATCH_ENCHANT)
+	local itemLevel = lineText and (string_match(lineText, MATCH_ITEM_LEVEL_ALT) or string_match(lineText, MATCH_ITEM_LEVEL))
+	local enchant = string_match(lineText, MATCH_ENCHANT)
 	if enchant then
 		enchantText = enchant:sub(1, 18)
 		enchantColors = {lr, lg, lb}
 	end
+
 	if itemLevel then
 		iLvl = tonumber(itemLevel)
 		itemLevelColors = {tr, tg, tb}
@@ -76,7 +80,7 @@ function D.GetGearSlotInfo(unit, slot, deepScan)
 			local line = _G['DuffedUI_ScanTooltipTextLeft'..x]
 			if line then
 				local lineText = line:GetText()
-				local itemLevel = lineText and lineText:match(MATCH_ITEM_LEVEL)
+				local itemLevel = lineText and (string_match(lineText, MATCH_ITEM_LEVEL_ALT) or string_match(lineText, MATCH_ITEM_LEVEL))
 				if itemLevel then
 					iLvl = tonumber(itemLevel)
 				end
@@ -85,7 +89,7 @@ function D.GetGearSlotInfo(unit, slot, deepScan)
 	end
 
 	D.ScanTooltip:Hide()
-	return iLvl, enchantText, deepScan and gems, enchantColors, itemLevelColors
+	return iLvl, enchantText, deepScan and gems, deepScan and enchantColors, itemLevelColors
 end
 
 -- Credit ls & Acidweb

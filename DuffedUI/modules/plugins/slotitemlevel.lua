@@ -33,8 +33,15 @@ function Module:CreateInspectTexture(slot, x, y)
 	local texture = slot:CreateTexture()
 	texture:SetPoint('BOTTOM', slot, x, y)
 	texture:SetTexCoord(unpack(D['IconCoord']))
-	texture:SetSize(12, 12)
-	return texture
+	texture:SetSize(14, 14)
+
+	local backdrop = CreateFrame('Frame', nil, slot)
+	backdrop:SetFrameLevel(slot:GetFrameLevel())
+	backdrop:CreateBorder()
+	backdrop:SetAllPoints(texture)
+	backdrop:Hide()
+
+	return texture, backdrop
 end
 
 function Module:GetInspectPoints(id)
@@ -77,7 +84,7 @@ function Module:ClearPageInfo(frame, which)
 			inspectItem.enchantText:SetText()
             inspectItem.iLvlText:SetText()
 
-			for y=1, 10 do
+			for y = 1, 10 do
 				inspectItem['textureSlot'..y]:SetTexture()
 			end
 		end
@@ -131,7 +138,19 @@ function Module:UpdatePageStrings(i, iLevelDB, inspectItem, iLvl, enchant, gems,
 	end
 
 	for x = 1, 10 do
-		inspectItem['textureSlot'..x]:SetTexture(gems and gems[x])
+		local texture = inspectItem['textureSlot'..x]
+		local backdrop = inspectItem['textureSlotBackdrop'..x]
+
+		if gems and next(gems) then
+			local index, gem = next(gems)
+			texture:SetTexture(gem)
+			backdrop:SetBackdropBorderColor()
+			backdrop:Show()
+			gems[index] = nil
+		else
+			texture:SetTexture()
+			backdrop:Hide()
+		end
 	end
 end
 
@@ -199,9 +218,7 @@ function Module:UpdatePageInfo(frame, which, guid, event)
 	end
 
 	if waitForItems then
-		D.Delay(0.10, function()
-			Module:UpdateAverageString(frame, which, iLevelDB)
-		end)
+		D.Delay(0.10, Module.UpdateAverageString, Module, frame, which, iLevelDB)
 	else
 		Module:UpdateAverageString(frame, which, iLevelDB)
 	end
@@ -243,10 +260,10 @@ function Module:CreateSlotStrings(frame, which)
 				slot.enchantText:SetPoint(justify, slot, x + (justify == 'BOTTOMLEFT' and 5 or -5), z)
 			end
 
-			for u=1, 10 do
-				local offset = 8+(u*16)
-				local newX = ((justify == 'BOTTOMLEFT' or i == 17) and x+offset) or x-offset
-				slot['textureSlot'..u] = Module:CreateInspectTexture(slot, newX, --[[newY or]] y)
+			for u = 1, 10 do
+				local offset = 8 + (u * 16)
+				local newX = ((justify == 'BOTTOMLEFT' or i == 17) and x + offset) or x - offset
+				slot['textureSlot'..u], slot['textureSlotBackdrop'..u] = Module:CreateInspectTexture(slot, newX, --[[newY or]] y)
 			end
 		end
 	end

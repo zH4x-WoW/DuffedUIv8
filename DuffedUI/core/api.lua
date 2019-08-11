@@ -745,25 +745,6 @@ while object do
 	object = EnumerateFrames(object)
 end
 
-function D.ScanTooltipTextures(clean, grabTextures)
-	local textures
-	for i = 1, 10 do
-		local tex = _G['DuffedUI_ScanTooltipTexture'..i]
-		local hasTexture = tex and tex:GetTexture()
-		if hasTexture then
-			if grabTextures then
-				if not textures then textures = {} end
-				textures[i] = hasTexture
-			end
-			if clean then
-				tex:SetTexture()
-			end
-		end
-	end
-
-	return textures
-end
-
 function D.ColorGradient(perc, ...)
 	if perc >= 1 then
 		return select(select("#", ...) - 2, ...)

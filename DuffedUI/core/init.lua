@@ -42,6 +42,28 @@ for i = 1, GetNumAddOns() do
 	AddOn.AddOnVersion[string.lower(Name)] = GetAddOnMetadata(Name, 'Version')
 end
 
+function AddOn.ScanTooltipTextures(clean, grabTextures)
+	local textures
+	for i = 1, 10 do
+		local tex = _G["DuffedUI_ScanTooltipTexture"..i]
+		local texture = tex and tex:GetTexture()
+		if texture then
+			if grabTextures then
+				if not textures then
+					textures = {}
+				end
+				textures[i] = texture
+			end
+
+			if clean then
+				tex:SetTexture()
+			end
+		end
+	end
+
+	return textures
+end
+
 --[[
 
 	The code below works around a issue of the WoD Beta Client 6.0.2 b18934
