@@ -11,6 +11,11 @@ local pairs, tonumber, unpack, format = pairs, tonumber, unpack, format
 local GetFriendInfo, BNGetFriendInfo, BNGetGameAccountInfo, BNConnected, GetQuestDifficultyColor, CanCooperateWithGameAccount = GetFriendInfo, BNGetFriendInfo, BNGetGameAccountInfo, BNConnected, GetQuestDifficultyColor, CanCooperateWithGameAccount
 
 local MediaPath = [[Interface\AddOns\ProjectAzilroka\Media\EnhancedFriendsList\]]
+local ONE_MINUTE = 60
+local ONE_HOUR = 60 * ONE_MINUTE
+local ONE_DAY = 24 * ONE_HOUR
+local ONE_MONTH = 30 * ONE_DAY
+local ONE_YEAR = 12 * ONE_MONTH
 
 --[[
 /run for i,v in pairs(_G) do if type(i)=="string" and i:match("BNET_CLIENT_") then print(i,"=",v) end end
@@ -247,14 +252,12 @@ function EFL:UpdateFriends(button)
 		if isOnline then
 			button.status:SetTexture(EFL.Icons.Status[(isDND and 'DND' or isAFK and 'AFK' or 'Online')][self.db.StatusIconPack])
 			if client == BNET_CLIENT_WOW then
-				if not zoneName or zoneName == '' then
-					infoText = UNKNOWN
+				gameText = gsub(gameText, '&apos;', "'")
+
+				if realmName == PA.MyRealm then
+					infoText = zoneName
 				else
-					if realmName == PA.MyRealm then
-						infoText = zoneName
-					else
-						infoText = gsub(gameText, '&apos;', "'")
-					end
+					infoText = gameText
 				end
 
 				button.gameIcon:SetTexture(EFL.Icons.Game[faction][self.db[faction]])
@@ -262,7 +265,7 @@ function EFL:UpdateFriends(button)
 				if not EFL.Icons.Game[client] then
 					client = 'App'
 				end
-				infoText = gameText
+				infoText = client == 'BSAp' and PA.ACL['Mobile'] or gameText
 				button.gameIcon:SetTexture(EFL.Icons.Game[client][self.db[client]])
 			end
 			nameColor = FRIENDS_BNET_NAME_COLOR
@@ -270,7 +273,7 @@ function EFL:UpdateFriends(button)
 		else
 			button.status:SetTexture(EFL.Icons.Status.Offline[self.db.StatusIconPack])
 			nameColor = FRIENDS_GRAY_COLOR
-			infoText = lastOnline == 0 and FRIENDS_LIST_OFFLINE or format(BNET_LAST_ONLINE_TIME, FriendsFrame_GetLastOnline(lastOnline))
+			infoText = (not lastOnline or lastOnline == 0 or time() - lastOnline >= ONE_YEAR) and FRIENDS_LIST_OFFLINE or format(BNET_LAST_ONLINE_TIME, FriendsFrame_GetLastOnline(lastOnline))
 		end
 	end
 
