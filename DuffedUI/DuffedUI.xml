@@ -7,7 +7,6 @@
     <Script file="libs\AceConsole-3.0\AceConsole-3.0.lua"/>
     <Script file="libs\AceTimer-3.0\AceTimer-3.0.lua"/>
     <Script file="libs\AceHook-3.0\AceHook-3.0.lua"/>
-	<Script file="libs\LibAboutPanel\LibAboutPanel.lua"/>
 	<Script file='core\init.lua' />
 	<Script file='core\constants.lua' />
 
@@ -32,9 +31,11 @@
 	<Script file='core\filters\f_cbticks.lua' />
 	<Script file='core\filters\extraquestbutton.lua' />
 	<Script file='core\cversion.lua' />
-	<Script file='core\changelog.lua' />
 	<Script file='core\mapinfo.lua' />
 	<Script file='core\status.lua' />
+	<Script file='core\uicommands.lua' />
+	<Script file='core\uiquestions.lua' />
+	<Script file='core\uichangelog.lua' />
 
 	<!-- modules -->
 	<Script file='modules\maps\minimap.lua' />

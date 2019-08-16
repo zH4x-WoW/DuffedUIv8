@@ -103,10 +103,6 @@ D['CreateBtn']('bReport2', MB_reload, 63, 19, 'Bugreport', 'Bugreport')
 bReport2:SetPoint('LEFT', MB_switch, 'RIGHT', 2, 0)
 bReport2:SetScript('OnClick', function(self) StaticPopup_Show('BUGREPORT') end)
 
-D['CreateBtn']('cl', MB_reload, 19, 19, 'Changelog', 'C')
-cl:SetPoint('LEFT', bReport2, 'RIGHT', 2, 0)
-cl:SetScript('OnClick', function(self) D:GetModule("Changelog"):ToggleChangeLog() end)
-
 if Enablegear then
 	local gearSets = CreateFrame('Frame', nil, MB_reload)
 	for i = 1, 10 do

@@ -1,7 +1,7 @@
 local AddOnName, Engine = ...
 
-local AddOn = LibStub('AceAddon-3.0'):NewAddon(AddOnName, 'AceConsole-3.0', 'AceEvent-3.0', 'AceTimer-3.0', 'AceHook-3.0')
-local About = LibStub:GetLibrary('LibAboutPanel', true)
+local AceAddon = LibStub("AceAddon-3.0")
+local AddOn = AceAddon:NewAddon(AddOnName, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0", "AceHook-3.0")
 
 Engine[1] = AddOn
 Engine[2] = {}
@@ -30,16 +30,115 @@ AddOn.Noop = function()
 	return
 end
 
-if (About) then
-	AddOn.optionsFrame = About.new(nil, AddOnName)
-end
-
 AddOn.AddOns = {}
 AddOn.AddOnVersion = {}
 for i = 1, GetNumAddOns() do
 	local Name = GetAddOnInfo(i)
 	AddOn.AddOns[string.lower(Name)] = GetAddOnEnableState(AddOn.Name, Name) == 2 or false
 	AddOn.AddOnVersion[string.lower(Name)] = GetAddOnMetadata(Name, 'Version')
+end
+
+do
+	AddOn.AboutPanel = CreateFrame("Frame", nil, _G.InterfaceOptionsFramePanelContainer)
+	AddOn.AboutPanel:Hide()
+	AddOn.AboutPanel.name = AddOn.Title
+	AddOn.AboutPanel:SetScript("OnShow", function(self)
+		if self.show then
+			return
+		end
+
+		local titleInfo = self:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+		titleInfo:SetPoint("TOPLEFT", 16, -16)
+		titleInfo:SetText("Info:")
+
+		local subInfo = self:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+		subInfo:SetWidth(580)
+		subInfo:SetPoint("TOPLEFT", titleInfo, "BOTTOMLEFT", 0, -8)
+		subInfo:SetJustifyH("LEFT")
+		subInfo:SetText(GetAddOnMetadata("DuffedUI", "Notes"))
+
+		local titleCredits = self:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+		titleCredits:SetPoint("TOPLEFT", subInfo, "BOTTOMLEFT", 0, -8)
+		titleCredits:SetText("Credits:")
+
+		local subCredits = self:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+		subCredits:SetWidth(580)
+		subCredits:SetPoint("TOPLEFT", titleCredits, "BOTTOMLEFT", 0, -8)
+		subCredits:SetJustifyH("LEFT")
+		subCredits:SetText(GetAddOnMetadata("DuffedUI", "X-Credits"))
+
+		local titleThanks = self:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+		titleThanks:SetPoint("TOPLEFT", subCredits, "BOTTOMLEFT", 0, -16)
+		titleThanks:SetText("Special Thanks:")
+
+		local subThanks = self:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+		subThanks:SetWidth(580)
+		subThanks:SetPoint("TOPLEFT", titleThanks, "BOTTOMLEFT", 0, -8)
+		subThanks:SetJustifyH("LEFT")
+		subThanks:SetText(GetAddOnMetadata("DuffedUI", "X-Tester"))
+
+		local titleLocalizations = self:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+		titleLocalizations:SetPoint("TOPLEFT", subThanks, "BOTTOMLEFT", 0, -16)
+		titleLocalizations:SetText("Author:")
+
+		local subLocalizations = self:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+		subLocalizations:SetWidth(580)
+		subLocalizations:SetPoint("TOPLEFT", titleLocalizations, "BOTTOMLEFT", 0, -8)
+		subLocalizations:SetJustifyH("LEFT")
+		subLocalizations:SetText(GetAddOnMetadata("DuffedUI", "Author"))
+
+		local titleButtons = self:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+		titleButtons:SetPoint("TOPLEFT", subLocalizations, "BOTTOMLEFT", 0, -16)
+		titleButtons:SetText("Download & Bugreport:")
+		
+		local buttonGitHub = CreateFrame("Button", nil, self, "UIPanelButtonTemplate")
+		buttonGitHub:SetSize(100, 22)
+		buttonGitHub:SetPoint("TOPLEFT", titleButtons, "BOTTOMLEFT", 0, -8)
+		buttonGitHub:SkinButton()
+		buttonGitHub:SetScript("OnClick", function()
+			StaticPopup_Show('DOWNLOAD')
+		end)
+		buttonGitHub.Text = buttonGitHub:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+		buttonGitHub.Text:SetPoint("CENTER", buttonGitHub)
+		buttonGitHub.Text:SetText("|cffffd100".."GitHub".."|r")
+
+		local buttonBugReport = CreateFrame("Button", nil, self, "UIPanelButtonTemplate")
+		buttonBugReport:SetSize(100, 22)
+		buttonBugReport:SetPoint("LEFT", buttonGitHub, "RIGHT", 6, 0)
+		buttonBugReport:SkinButton()
+		buttonBugReport:SetScript("OnClick", function()
+			StaticPopup_Show('BUGREPORT')
+		end)
+		buttonBugReport.Text = buttonBugReport:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+		buttonBugReport.Text:SetPoint("CENTER", buttonBugReport)
+		buttonBugReport.Text:SetText("|cffffd100".."Bug Report".."|r")
+
+		local interfaceVersion = self:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+		interfaceVersion:SetPoint("BOTTOMRIGHT", -16, 16)
+		interfaceVersion:SetText("Version: "..AddOn.Version)
+
+		self.show = true
+	end)
+
+	AddOn.AboutPanel.Commands = CreateFrame( "Frame", nil, AddOn.AboutPanel)
+	AddOn.AboutPanel.Commands.name = "Commands"
+	AddOn.AboutPanel.Commands:Hide()
+	AddOn.AboutPanel.Commands.parent = AddOn.AboutPanel.name
+
+	AddOn.AboutPanel.Questions = CreateFrame( "Frame", nil, AddOn.AboutPanel)
+	AddOn.AboutPanel.Questions.name = "Questions"
+	AddOn.AboutPanel.Questions:Hide()
+	AddOn.AboutPanel.Questions.parent = AddOn.AboutPanel.name
+	
+	AddOn.AboutPanel.Changelog = CreateFrame( "Frame", nil, AddOn.AboutPanel)
+	AddOn.AboutPanel.Changelog.name = "Changelog"
+	AddOn.AboutPanel.Changelog:Hide()
+	AddOn.AboutPanel.Changelog.parent = AddOn.AboutPanel.name
+
+	_G.InterfaceOptions_AddCategory(AddOn.AboutPanel)
+	_G.InterfaceOptions_AddCategory(AddOn.AboutPanel.Commands)
+	_G.InterfaceOptions_AddCategory(AddOn.AboutPanel.Questions)
+	_G.InterfaceOptions_AddCategory(AddOn.AboutPanel.Changelog)
 end
 
 function AddOn.ScanTooltipTextures(clean, grabTextures)
@@ -63,6 +162,38 @@ function AddOn.ScanTooltipTextures(clean, grabTextures)
 
 	return textures
 end
+
+_G.StaticPopupDialogs['BUGREPORT'] = {
+	text = "Bugreporting for DuffedUI",
+	button1 = OKAY,
+	timeout = 0,
+	whileDead = true,
+	hasEditBox = true,
+	editBoxWidth = 325,
+	OnShow = function(self, ...)
+		self.editBox:SetFocus()
+		self.editBox:SetText('https://github.com/liquidbase/DuffedUIv8/issues')
+		self.editBox:HighlightText()
+	end,
+	EditBoxOnEnterPressed = function(self) self:GetParent():Hide() end,
+	EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
+}
+
+_G.StaticPopupDialogs['DOWNLOAD'] = {
+	text = "Download latest DuffedUI version",
+	button1 = OKAY,
+	timeout = 0,
+	whileDead = true,
+	hasEditBox = true,
+	editBoxWidth = 325,
+	OnShow = function(self, ...)
+		self.editBox:SetFocus()
+		self.editBox:SetText('https://github.com/liquidbase/DuffedUIv8/archive/master.zip')
+		self.editBox:HighlightText()
+	end,
+	EditBoxOnEnterPressed = function(self) self:GetParent():Hide() end,
+	EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
+}
 
 --[[
 
