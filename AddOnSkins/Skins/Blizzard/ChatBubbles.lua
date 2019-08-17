@@ -1,4 +1,7 @@
 local AS = unpack(AddOnSkins)
+local D, C, L = unpack(DuffedUI)
+
+if C['chat']['newchatbubbles'] then return end
 
 -- Cache global variables
 --Lua functions
