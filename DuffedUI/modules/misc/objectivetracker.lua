@@ -301,6 +301,18 @@ local function IsFramePositionedLeft(frame)
 	return positionedLeft
 end
 
+function Module:SetObjectiveFrameAutoHide()
+	if not _G.ObjectiveTrackerFrame.AutoHider then -- Kaliel's Tracker prevents Module:MoveObjectiveFrame() from executing
+		return
+	end
+
+	if C['duffed']['autocollapse'] then
+		RegisterStateDriver(_G.ObjectiveTrackerFrame.AutoHider, "objectiveHider", "[@arena1,exists][@arena2,exists][@arena3,exists][@arena4,exists][@arena5,exists][@boss1,exists][@boss2,exists][@boss3,exists][@boss4,exists] 1;0")
+	else
+		RegisterStateDriver(_G.ObjectiveTrackerFrame.AutoHider, "objectiveHider", "0")
+	end
+end
+
 function Module:MoveObjectiveFrame()
 	local Anchor1, Parent, Anchor2, X, Y = 'TOPRIGHT', UIParent, 'TOPRIGHT', -200, -290
 	local Data = DuffedUIDataPerChar['Move']
@@ -339,6 +351,26 @@ function Module:MoveObjectiveFrame()
 	end
 	
 	hooksecurefunc('BonusObjectiveTracker_AnimateReward', RewardsFrame_SetPosition)
+
+	ObjectiveTrackerFrame.AutoHider = CreateFrame("Frame", nil, _G.ObjectiveTrackerFrame, "SecureHandlerStateTemplate")
+	ObjectiveTrackerFrame.AutoHider:SetAttribute("_onstate-objectiveHider", [[
+	if newstate == 1 then
+		self:Hide()
+	else
+		self:Show()
+	end
+	]])
+
+	ObjectiveTrackerFrame.AutoHider:SetScript("OnHide", function()
+		local _, _, difficulty = GetInstanceInfo()
+		if difficulty ~= 8 then
+			_G.ObjectiveTracker_Collapse()
+		end
+	end)
+
+	ObjectiveTrackerFrame.AutoHider:SetScript("OnShow", _G.ObjectiveTracker_Expand)
+
+	self:SetObjectiveFrameAutoHide()
 end
 
 function Module:OnEnable()
