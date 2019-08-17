@@ -51,6 +51,8 @@
 	DuffedUIConfigUILocalization.chatrbackground = "Aktiviere Chathintergrund (rechts)"
 	DuffedUIConfigUILocalization.chatfading = "Aktviere ausblenden des Chats"
 	DuffedUIConfigUILocalization.chattextright = "Textausrichtung rechts für den rechten Chatframe"
+	DuffedUIConfigUILocalization.chatnewchatbubbles = "Aktviere die neuen Chatblasen"
+	DuffedUIConfigUILocalization.chatchatbubblesfontsize = "Schriftgröße der neuen Chatblasen"
 
 	--[[Castbar]]--
 	DuffedUIConfigUILocalization.castbar = "Zauberleiste"
@@ -251,9 +253,9 @@
 	DuffedUIConfigUILocalization.duffedannouncechannel = "Chatkanal für Warnungsansagen (|cffC41F3BSAY|r, |cffC41F3BPARTY|r, |cffC41F3BRAID|r oder |cffC41F3BINSTANCE_CHAT|r)"
 	DuffedUIConfigUILocalization.duffeddispelannouncement = "Aktviere Reinigungswarnungen"
 	DuffedUIConfigUILocalization.duffedspellannounce = "Aktiviere Aurawarnungen"
-	DuffedUIConfigUILocalization.errorenable = "Verstecke die Fehlermeldungen, die in der Mitte Deines Bildschirms immer wieder angezeigt werden"
+	DuffedUIConfigUILocalization.duffederrorfilter = "Verstecke die Fehlermeldungen, die in der Mitte Deines Bildschirms immer wieder angezeigt werden"
 	DuffedUIConfigUILocalization.duffednotalkinghead = "Deaktiviere den Emoteframe von NPC's"
-	DuffedUIConfigUILocalization.duffedobjectivetracker = "Aktiviere Bewegen für Questverfolgung"
+	DuffedUIConfigUILocalization.duffedautocollapse = "Aktiviere das automatische Zuklappen der Questverfolgung"
 
 	--[[Loot]]--
 	DuffedUIConfigUILocalization.loot = "Beutefenster"

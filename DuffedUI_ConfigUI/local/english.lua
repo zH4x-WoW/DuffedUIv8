@@ -52,6 +52,8 @@ DuffedUIConfigUILocalization.chatlbackground = "Enable chat panel background (le
 DuffedUIConfigUILocalization.chatrbackground = "Enable chat panel background (right)"
 DuffedUIConfigUILocalization.chatfading = "Enable chatfading"
 DuffedUIConfigUILocalization.chattextright = "Set textalign to right for right chatframe"
+DuffedUIConfigUILocalization.chatnewchatbubbles = "Enable new Chatbubbles"
+DuffedUIConfigUILocalization.chatchatbubblesfontsize = "New Chatbubbles Fontsize" 
 
 --[[Castbar]]--
 DuffedUIConfigUILocalization.castbar = "Castbar"
@@ -253,7 +255,8 @@ DuffedUIConfigUILocalization.duffeddispelannouncement = "Enable Dispel announcem
 DuffedUIConfigUILocalization.duffedspellannounce = "Enable Aura announcement"
 DuffedUIConfigUILocalization.duffederrorfilter = "Hide spamming error in the middle of your screen"
 DuffedUIConfigUILocalization.duffednotalkinghead = "Disable the Talking Head-Frame"
-DuffedUIConfigUILocalization.duffedobjectivetracker = "Enable moving for objectivetracker"
+DuffedUIConfigUILocalization.duffedautocollapse = "Enable autocollapse for objectivetracker"
+
 
 --[[Loot]]--
 DuffedUIConfigUILocalization.loot = "Loot"
