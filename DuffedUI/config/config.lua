@@ -51,6 +51,8 @@ C['chat'] = {
 	['rbackground'] = true,
 	['textright'] = true,
 	['fading'] = true,
+	['newchatbubbles'] = true,
+	['chatbubblesfontsize'] = 13,
 }
 
 C['castbar'] = {
@@ -252,6 +254,7 @@ C['duffed'] = {
 	['spellannounce'] = true,
 	['errorfilter'] = true,
 	['notalkinghead'] = false,
+	['autocollapse'] = true,
 	filter = {
 		[INVENTORY_FULL] = true,
 		[ERR_PARTY_LFG_BOOT_COOLDOWN_S] = true,
@@ -293,5 +296,5 @@ C['merchant'] = {
 	['sellgrays'] = true,
 	['autorepair'] = true,
 	['sellmisc'] = true,
-	['autoguildrepair'] = true,
+	['autoguildrepair'] = false,
 }
