@@ -2,11 +2,11 @@
 	<!-- engine -->
 	<Script file='libs\LibStub\LibStub.lua' />
 	<Script file="libs\CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
-	<Script file="libs\AceAddon-3.0\AceAddon-3.0.lua"/>
-    <Script file="libs\AceEvent-3.0\AceEvent-3.0.lua"/>
-    <Script file="libs\AceConsole-3.0\AceConsole-3.0.lua"/>
-    <Script file="libs\AceTimer-3.0\AceTimer-3.0.lua"/>
-    <Script file="libs\AceHook-3.0\AceHook-3.0.lua"/>
+	<Script file="libs\Ace\AceAddon-3.0\AceAddon-3.0.lua"/>
+    <Script file="libs\Ace\AceEvent-3.0\AceEvent-3.0.lua"/>
+    <Script file="libs\Ace\AceConsole-3.0\AceConsole-3.0.lua"/>
+    <Script file="libs\Ace\AceTimer-3.0\AceTimer-3.0.lua"/>
+    <Script file="libs\Ace\AceHook-3.0\AceHook-3.0.lua"/>
 	<Script file='core\init.lua' />
 	<Script file='core\constants.lua' />
 
