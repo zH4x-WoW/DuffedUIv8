@@ -8,6 +8,16 @@ local CreateFrame = _G.CreateFrame
 local UI_QUESTIONS = {
     "• Q' Why are my Nameplates different in Instances/Raids?",
     "• A' Blame Blizzard for this. Call Them and complain 1-800-592-5499",
+	"• Q' Why are my Chatbubbles different in Instances/Raids?",
+    "• A' Blame Blizzard for this, but you can download a Texturekit to change it from DuffedUI Github.",
+	"• Q' I dont like the new Chatbubbles!",
+    "• A' Go to Config ->Chat and turn them of to bring the big Chatbubbles back.",
+	"• Q' How can i see the ILevel of Players?",
+    "• A' Hold Shift and Hover over the Player Unitframe.",
+	"• Q' Is the Changelog on login gone?",
+    "• A' Öhmm Yes. Use ESC->Interface->Tab AddOns and click the + from DuffedUI",
+	"• Q' Omg the Questtracker is gone in Instance/Raid?",
+    "• A' Open Config->Duffed->Autocollapse and turn it off.",
 	" ",
 }
 

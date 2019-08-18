@@ -7,22 +7,13 @@ local CreateFrame = _G.CreateFrame
 	
 local UI_CHANGELOG = {
    "Changes:",
-		"• Bugfix for worldmap (memory leak on cursor)",
-		"• Bugfix for dt friends, dont loose classcolors",
-		"• Bugfix for afkscreen on nazjatar. Hit a key and you are free.",
-		"• Added Nazjatarfollowerxp to datatext bfamissions",
-		"• Added new things nameplates (as option)",
-		"• Added some Ace3 libs",
-		"• Added DuffedUI to Blizz. Interface/AddOns. Hello world",
-		"• Added new tooltipcode - Try shift and ctrl on targets - Try shift on items in bags too",
-		"• Added tooltip for dt bags",
-		"• Added new bagscode",
-		"• Added new slotilvlcode",
-		"• Added new slotdurabilitycode",
-		"• Added tooltips for dt (guild, friends, time etc.)",
-		"• Added changelogbutton to chatbuttonlist",
+		"• Add new Chatbubbles (default on, optional)",
+		"• Add Autocollapse the Questtracker in Instance/Raids (default on, optional)",
+		"• Add Percent to Nameplates (default off, optional)",
+		"• Add Changelog, Commands, Questions to ESC->Interface->AddOns Tab->DuffedUI->click the +",
+		"• Update Move Acelibs to own Folder",
+		"• Update SlotIlvlCode",
 		"• Update for AddOnSkins and Project Azilroka",
-		"• Update for oUF Framework for patch 8.2",
 		--"• ",
 	" ",
 	"Special:",
@@ -30,7 +21,8 @@ local UI_CHANGELOG = {
 	" ",
 	"Notes:",
 		"• For the old friendslist use Enhanced Friendslist from Project Azilroka.",
-		"• For skins use AddOnSkins because most of the skins are removed",
+		"• For skins use AddOnSkins because most of the skins are removed.",
+		"• For skinning the Chatbubbles in Instance/Raids download the Texturekit from Github.",
 }
 
 local function ModifiedString(string)
