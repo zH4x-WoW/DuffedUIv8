@@ -87,6 +87,7 @@ D['ClassRessource']['DRUID'] = function(self)
 			ComboPoints[i].BarSizeForMaxComboIs6 = ComboPoints[i]:GetWidth()
 			ComboPoints[i].BarSizeForMaxComboIs5 = 216 / 5 - 1
 		end
+		ComboPoints[i].bg = ComboPoints[i]:CreateTexture(nil, 'ARTWORK')
 	end
 	ComboPoints:CreateBackdrop()
 	ComboPoints:Hide()
