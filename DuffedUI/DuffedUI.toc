@@ -10,6 +10,6 @@
 ## OptionalDeps: DuffedUI_ConfigUI
 ## X-oUF: oUFDuffedUI
 ## X-BugReport: https://github.com/liquidbase/DuffedUIv8/issues
-## X-Tester: Elenarda, Rolfman, Chrisey, Lhunephel, fiffzek, Skunkzord, exodors, Voodoom, Lock85, EviReborn, SidDii
+## X-Tester: Elenarda, Rolfman, Chrisey, Lhunephel, fiffzek, Skunkzord, exodors, Voodoom, Lock85, EviReborn, SidDii, Kanestorm
 
 DuffedUI.xml
