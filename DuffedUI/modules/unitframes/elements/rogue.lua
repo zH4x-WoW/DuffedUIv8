@@ -35,7 +35,7 @@ D['ClassRessource']['ROGUE'] = function(self)
 	for i = 1, 6 do
 		ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
 		ComboPoints[i]:SetHeight(5)
-		ComboPoints[i]:SetStatusBarTexture(PowerTexture)
+		ComboPoints[i]:SetStatusBarTexture(texture)
 
 		if i == 1 then
 			ComboPoints[i]:SetPoint("LEFT", ComboPoints, "LEFT", 0, 0)
