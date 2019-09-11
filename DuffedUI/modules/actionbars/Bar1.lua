@@ -56,6 +56,7 @@ bar:SetScript('OnEvent', function(self, event, unit, ...)
 			button:SetParent(bar)
 			button:SetFrameStrata('BACKGROUND')
 			button:SetFrameLevel(15)
+			button:SetAttribute("showgrid", 1)
 			if i == 1 then
 				button:SetPoint('BOTTOMLEFT', D['buttonspacing'], D['buttonspacing'])
 			else
