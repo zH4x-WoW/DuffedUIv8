@@ -7,6 +7,7 @@ function AS:Blizzard_Communities(event, addon)
 	AS:SkinCloseButton(CommunitiesFrame.CloseButton)
 	AS:Kill(CommunitiesFrame.PortraitOverlay)
 	AS:StripTextures(CommunitiesFrame.CommunitiesList)
+	AS:Kill(ClubFinderGuildFinderFrame.DisabledFrame.NineSlice)
 
 	CommunitiesFrame.CommunitiesList.ListScrollFrame.ScrollBar.ScrollDownButton = CommunitiesFrame.CommunitiesList.ListScrollFrame.scrollDown
 	CommunitiesFrame.CommunitiesList.ListScrollFrame.ScrollBar.ScrollUpButton = CommunitiesFrame.CommunitiesList.ListScrollFrame.scrollUp
@@ -26,7 +27,7 @@ function AS:Blizzard_Communities(event, addon)
 	CommunitiesFrame.CommunitiesListDropDownMenu.Text:SetJustifyH("RIGHT")
 
 	AS:SkinButton(CommunitiesFrame.AddToChatButton)
-	AS:SkinButton(CommunitiesFrame.GuildFinderFrame.FindAGuildButton)
+	--AS:SkinButton(CommunitiesFrame.GuildFinderFrame.FindAGuildButton)
 
 	AS:SkinButton(CommunitiesFrame.InviteButton)
 	CommunitiesFrame.AddToChatButton:SetPoint("TOPRIGHT", CommunitiesFrame.ChatEditBox, "BOTTOMRIGHT", 4, 4)

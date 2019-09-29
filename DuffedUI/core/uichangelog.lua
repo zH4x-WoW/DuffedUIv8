@@ -7,13 +7,8 @@ local CreateFrame = _G.CreateFrame
 	
 local UI_CHANGELOG = {
    "Changes:",
-		"• Add new Chatbubbles (default on, optional)",
-		"• Add Autocollapse the Questtracker in Instance/Raids (default on, optional)",
-		"• Add Percent to Nameplates (default off, optional)",
-		"• Add Changelog, Commands, Questions to ESC->Interface->AddOns Tab->DuffedUI->click the +",
-		"• Update Move Acelibs to own Folder",
-		"• Update SlotIlvlCode",
-		"• Update for AddOnSkins and Project Azilroka",
+		"• Bugfix extraquestbutton",
+		"• Bugfix AddOnsSkins ->Hope Azil roxx the retail version soon",
 		--"• ",
 	" ",
 	"Special:",
