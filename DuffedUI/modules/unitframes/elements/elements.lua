@@ -32,7 +32,7 @@ end
 
 -- Energybar
 D['ConstructEnergy'] = function(name, width, height)
-	local eb = CreateFrame('StatusBar', name, UIParent)
+	--[[local eb = CreateFrame('StatusBar', name, UIParent)
 	eb:SetPoint('TOP', RessourceMover, 'BOTTOM', 0, 5)
 	eb:Size(D['Scale'](width), D['Scale'](height))
 	eb:SetStatusBarTexture(texture)
@@ -69,5 +69,5 @@ D['ConstructEnergy'] = function(name, width, height)
 			self.TimeSinceLastUpdate = 0
 		end
 	end)
-	if C['unitframes']['oocHide'] then D['oocHide'](eb) end
+	if C['unitframes']['oocHide'] then D['oocHide'](eb) end]]
 end
