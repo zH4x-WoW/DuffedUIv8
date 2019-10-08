@@ -32,7 +32,7 @@ end
 
 -- Energybar
 D['ConstructEnergy'] = function(name, width, height)
-	--[[local eb = CreateFrame('StatusBar', name, UIParent)
+	local eb = CreateFrame('StatusBar', name, UIParent)
 	eb:SetPoint('TOP', RessourceMover, 'BOTTOM', 0, 5)
 	eb:Size(D['Scale'](width), D['Scale'](height))
 	eb:SetStatusBarTexture(texture)
@@ -57,17 +57,18 @@ D['ConstructEnergy'] = function(name, width, height)
 
 		if self.TimeSinceLastUpdate > 0.07 then
 			self:SetMinMaxValues(0, UnitPowerMax('player'))
-			local power = UnitPower('player')
-			local powerMax = UnitPowerMax('player')
+			local power = UnitPower("player") or 0
+			local maxPower = UnitPowerMax("player") or 0
+			local perc = (math.floor(power/maxPower * 100)) or 0
 			self:SetValue(power)
 			if self.text then self.text:SetText(D['ShortValue'](power)) end
-			if self.perctext and powerMax >= 0 then
-				self.perctext:SetFormattedText('%d%%', math.floor(power/powerMax * 100))
+			if self.perctext and maxPower >= 0 then
+				self.perctext:SetText(perc.."%")
 			else
 				self.perctext:SetFormattedText('%d%%', 0)
 			end
 			self.TimeSinceLastUpdate = 0
 		end
 	end)
-	if C['unitframes']['oocHide'] then D['oocHide'](eb) end]]
+	if C['unitframes']['oocHide'] then D['oocHide'](eb) end
 end
