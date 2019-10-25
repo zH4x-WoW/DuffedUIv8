@@ -110,7 +110,7 @@ function stAM:BuildFrame()
 	Close:SetScript('OnClick', function(self) Frame:Hide() end)
 
 	local Mask = Close:CreateMaskTexture()
-	Mask:SetTexture([[Interface\AddOns\ProjectAzilroka\Media\Textures\Close]], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
+	Mask:SetTexture('Interface/AddOns/ProjectAzilroka/Media/Textures/Close', 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
 	Mask:SetSize(10, 10)
 	Mask:SetPoint('CENTER')
 
@@ -249,6 +249,8 @@ function stAM:BuildFrame()
 
 	local OnScroll = function(self, delta)
 		local numAddons = stAM.searchQuery and #Search.AddOns or #stAM.AddOnInfo
+		if numAddons < stAM.db['NumAddOns'] then return end
+
 		if IsShiftKeyDown() then
 			if delta == 1 then
 				stAM.scrollOffset = max(0, stAM.scrollOffset - stAM.db['NumAddOns'])
@@ -264,6 +266,7 @@ function stAM:BuildFrame()
 				end
 			end
 		end
+
 		Slider:SetMinMaxValues(0, (numAddons - stAM.db['NumAddOns']))
 		Slider:SetValue(stAM.scrollOffset)
 		stAM:UpdateAddonList()
@@ -355,7 +358,7 @@ function stAM:BuildFrame()
 		CheckButton.StatusText = StatusText
 
 		local Icon = CheckButton:CreateTexture(nil, 'OVERLAY')
-		Icon:SetTexture([[Interface\AddOns\ProjectAzilroka\Media\Textures\QuestBang]])
+		Icon:SetTexture('Interface/AddOns/ProjectAzilroka/Media/Textures/QuestBang')
 		Icon:SetPoint('CENTER', CheckButton, 'RIGHT', 10, 0)
 		Icon:SetSize(32, 32)
 
@@ -625,8 +628,9 @@ function stAM:UpdateAddonList()
 end
 
 function stAM:Update()
+	self.Frame:SetSize(self.db['FrameWidth'], self.Frame.Title:GetHeight() + 5 + self.Frame.Search:GetHeight() + 5 + self.Frame.AddOns:GetHeight() + 10 + self.Frame.Profiles:GetHeight() + 20)
 	self.Frame.AddOns:SetHeight(self.db['NumAddOns'] * (self.db['ButtonHeight'] + 5) + 15)
-	self.Frame:SetSize(self.db['FrameWidth'], self.Frame.Title:GetHeight() + 5 + self.Frame.Search:GetHeight() + 5  + self.Frame.AddOns:GetHeight() + 10 + self.Frame.Profiles:GetHeight() + 20)
+	self.Frame.AddOns.ScrollBar:SetHeight(self.db['NumAddOns'] * (self.db['ButtonHeight'] + 5) + 11)
 
 	local font, fontSize, fontFlag = PA.LSM:Fetch('font', self.db['Font']), self.db['FontSize'], self.db['FontFlag']
 
@@ -833,10 +837,11 @@ function stAM:Initialize()
 		if GetAddOnDependencies(i) ~= nil then
 			Required = { GetAddOnDependencies(i) }
 			for _, addon in pairs(Required) do
-				if select(5, GetAddOnInfo(addon)) == 'MISSING' then
+				local Reason = select(5, GetAddOnInfo(addon))
+				if Reason == 'MISSING' then
 					MissingAddons = MissingAddons or {}
 					tinsert(MissingAddons, addon)
-				elseif select(5, GetAddOnInfo(addon)) == 'DISABLED' then
+				elseif Reason == 'DISABLED' then
 					DisabledAddons = DisabledAddons or {}
 					tinsert(DisabledAddons, addon)
 				end
@@ -873,4 +878,5 @@ function stAM:Initialize()
 
 	stAM:BuildFrame()
 	stAM:InitProfiles()
+	stAM:Update()
 end

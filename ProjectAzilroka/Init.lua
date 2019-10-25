@@ -32,20 +32,23 @@ PA.MyRealm = GetRealmName()
 PA.Locale = GetLocale()
 PA.Noop = function() end
 PA.TexCoords = {.08, .92, .08, .92}
-PA.UIScale = UIParent:GetScale()
 if _G.ElvUI then
-PA.TexCoords = {0, 1, 0, 1}
-local modifier = 0.04 * _G.ElvUI[1].db.general.cropIcon
+	PA.TexCoords = {0, 1, 0, 1}
+	local modifier = 0.04 * _G.ElvUI[1].db.general.cropIcon
 	for i, v in ipairs(PA.TexCoords) do
 		if i % 2 == 0 then
 			PA.TexCoords[i] = v - modifier
 		else
 			PA.TexCoords[i] = v + modifier
 		end
-
 	end
 end
+
+PA.UIScale = UIParent:GetScale()
 PA.MyFaction = UnitFactionGroup('player')
+
+PA.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+PA.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 
 -- Pixel Perfect
 PA.ScreenWidth, PA.ScreenHeight = GetPhysicalScreenSize()
@@ -72,6 +75,7 @@ end
 PA.Title = GetAddOnMetadata('ProjectAzilroka', 'Title')
 PA.Version = GetAddOnMetadata('ProjectAzilroka', 'Version')
 PA.Authors = GetAddOnMetadata('ProjectAzilroka', 'Author'):gsub(", ", "    ")
+
 local Color = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[PA.MyClass] or RAID_CLASS_COLORS[PA.MyClass]
 PA.ClassColor = { Color.r, Color.g, Color.b }
 
@@ -105,6 +109,10 @@ function PA:ClassColorCode(class)
 	local color = class and (CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[PA.Classes[class]] or RAID_CLASS_COLORS[PA.Classes[class]]) or { r = 1, g = 1, b = 1 }
 
 	return format('FF%02x%02x%02x', color.r * 255, color.g * 255, color.b * 255)
+end
+
+function PA:GetClassName(class)
+	return PA.Classes[class]
 end
 
 function PA:Color(name)

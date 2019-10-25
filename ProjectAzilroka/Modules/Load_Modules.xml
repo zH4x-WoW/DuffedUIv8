@@ -5,10 +5,12 @@
 	<Script file="EnhancedFriendsList.lua"/>
 	<Script file="EnhancedShadows.lua"/>
 	<Script file="FasterLoot.lua"/>
+	<Script file="LootConfirm.lua"/>
 	<Script file="SquareMinimapButtons.lua"/>
 	<Script file="stAddonManager.lua"/>
 	<Script file="QuestSounds.lua"/>
 	<Script file="ReputationReward.lua"/>
+	<Script file="TargetSounds.lua"/>
 
 	<Script file="Config\Tukui.lua"/>
 </Ui>
