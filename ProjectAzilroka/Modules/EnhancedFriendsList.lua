@@ -155,6 +155,16 @@ EFL.Icons = {
 			Gloss = MediaPath..[[GameIcons\Launcher\COD4]],
 			Launcher = MediaPath..[[GameIcons\Launcher\COD4]],
 		},
+		ODIN = {
+			Name = PA.ACL['Call of Duty Modern Warfare'],
+			Order = 14,
+			Color = 'FFFFFF',
+			Default = MediaPath..[[GameIcons\Launcher\CODMW]],
+			BlizzardChat = MediaPath..[[GameIcons\Launcher\CODMW]],
+			Flat = MediaPath..[[GameIcons\Launcher\CODMW]],
+			Gloss = MediaPath..[[GameIcons\Launcher\CODMW]],
+			Launcher = MediaPath..[[GameIcons\Launcher\CODMW]],
+		},
 	},
 	Status = {
 		Online = {
@@ -456,12 +466,13 @@ function EFL:UpdateFriends(button)
 					local faction = info.gameAccountInfo.factionName
 					button.gameIcon:SetTexture(faction and EFL.Icons.Game[faction][EFL.db[faction]] or EFL.Icons.Game.Neutral.Launcher)
 				else
+					if not EFL.Icons.Game[client] then client = 'BSAp' end
 					nameText = format('|cFF%s%s|r', EFL.Icons.Game[client].Color or 'FFFFFF', nameText)
 					button.gameIcon:SetTexture(EFL.Icons.Game[client][EFL.db[client]])
 				end
 
 				button.gameIcon:SetTexCoord(0, 1, 0, 1)
-				button.gameIcon:SetDrawLayer('OVERLAY')
+				button.gameIcon:SetDrawLayer('ARTWORK')
 				button.gameIcon:SetAlpha(1)
 			else
 				local lastOnline = info.lastOnlineTime
@@ -753,7 +764,7 @@ function EFL:BuildProfile()
 		['Texture'] = 'Solid',
 	}
 
-	for _, GameIcon in pairs({'Alliance', 'Horde', 'Neutral', 'D3', 'WTCG', 'S1', 'S2', 'App', 'BSAp', 'Hero', 'Pro', 'DST2', 'VIPR' }) do
+	for GameIcon in pairs(EFL.Icons.Game) do
 		PA.Defaults.profile['EnhancedFriendsList'][GameIcon] = 'Launcher'
 	end
 
