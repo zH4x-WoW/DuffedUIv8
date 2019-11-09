@@ -21,7 +21,7 @@ function AS:Blizzard_Merchant()
 		AS:SkinFrame(Slot.ItemButton)
 		AS:StyleButton(Slot.ItemButton)
 		AS:SkinTexture(Slot.ItemButton.icon)
-		AS:SetInside(Slot.ItemButton.icon)
+		Slot.ItemButton.icon:SetInside()
 		Slot.ItemButton:SetPoint("TOPLEFT", Slot, "TOPLEFT", 4, -4)
 		Slot.ItemButton.IconBorder:SetAlpha(0)
 
@@ -37,12 +37,12 @@ function AS:Blizzard_Merchant()
 	end
 
 	AS:SkinBackdropFrame(MerchantBuyBackItem)
-	AS:SetOutside(MerchantBuyBackItem.Backdrop, MerchantBuyBackItem, 6, 6)
+	MerchantBuyBackItem.Backdrop:SetOutside(MerchantBuyBackItem, 6, 6)
 
 	AS:SkinFrame(MerchantBuyBackItem.ItemButton)
 	AS:StyleButton(MerchantBuyBackItem.ItemButton)
 	AS:SkinTexture(MerchantBuyBackItem.ItemButton.icon)
-	AS:SetInside(MerchantBuyBackItem.ItemButton.icon)
+	MerchantBuyBackItem.ItemButton.icon:SetInside()
 	MerchantBuyBackItem.ItemButton.IconBorder:SetAlpha(0)
 	hooksecurefunc(MerchantBuyBackItem.ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b) MerchantBuyBackItem.ItemButton:SetBackdropBorderColor(r, g, b) end)
 	hooksecurefunc(MerchantBuyBackItem.ItemButton.IconBorder, 'Hide', function(self) MerchantBuyBackItem.ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
@@ -54,11 +54,11 @@ function AS:Blizzard_Merchant()
 
 	AS:SkinButton(MerchantGuildBankRepairButton)
 	MerchantGuildBankRepairButtonIcon:SetTexCoord(0.61, 0.82, 0.1, 0.52)
-	AS:SetInside(MerchantGuildBankRepairButtonIcon)
+	MerchantGuildBankRepairButtonIcon:SetInside()
 
 	AS:SkinButton(MerchantRepairAllButton)
 	MerchantRepairAllIcon:SetTexCoord(0.34, 0.1, 0.34, 0.535, 0.535, 0.1, 0.535, 0.535)
-	AS:SetInside(MerchantRepairAllIcon)
+	MerchantRepairAllIcon:SetInside()
 
 	MerchantFrame:SetWidth(345)
 	AS:SkinArrowButton(MerchantNextPageButton)
