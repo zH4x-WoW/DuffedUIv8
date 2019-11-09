@@ -326,15 +326,15 @@ function AS:Blizzard_DeathRecap(event, addon)
 end
 
 function AS:Blizzard_DressUpFrame()
-	--AS:SkinFrame(_G.SideDressUpFrame, nil, nil, true)
-	--AS:SkinButton(_G.SideDressUpModelResetButton)
-	--AS:SkinCloseButton(_G.SideDressUpModelCloseButton)
+	AS:SkinFrame(_G.SideDressUpFrame, nil, nil, true)
+	AS:SkinButton(_G.SideDressUpFrame.ResetButton)
+	AS:SkinCloseButton(_G.SideDressUpFrameCloseButton)
 
-	--hooksecurefunc("SetUpSideDressUpFrame", function(parentFrame, closedWidth, openWidth, point, relativePoint, offsetX, offsetY)
-	--	if parentFrame == _G.AuctionFrame then
-	--		_G.SideDressUpFrame:SetPoint(point, parentFrame, relativePoint, 2, offsetY)
-	--	end
-	--end)
+	hooksecurefunc("SetUpSideDressUpFrame", function(parentFrame, closedWidth, openWidth, point, relativePoint, offsetX, offsetY)
+		if parentFrame == _G.AuctionFrame then
+			_G.SideDressUpFrame:SetPoint(point, parentFrame, relativePoint, 2, offsetY)
+		end
+	end)
 
 	AS:SkinBackdropFrame(_G.DressUpFrame)
 	AS:SkinCloseButton(_G.DressUpFrame.CloseButton)

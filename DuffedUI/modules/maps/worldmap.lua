@@ -126,17 +126,7 @@ function WorldMap:Skin()
 	TrackButton:StripTextures()
 	TrackButton:SkinButton()
 
-	QuestNPCModel:StripTextures()
-	QuestNPCModel:CreateBackdrop('Transparent')
-	QuestNPCModel:ClearAllPoints()
-	QuestNPCModel:Point('TOPLEFT', BackButton, 'TOPRIGHT', 2, -2)
-	QuestNPCModelTextFrame:StripTextures()
-	QuestNPCModelTextFrame:CreateBackdrop('Default')
-	QuestNPCModelTextFrame.backdrop:Point('TOPLEFT', QuestNPCModel.backdrop, 'BOTTOMLEFT', 0, -2)
-	hooksecurefunc('QuestFrame_ShowQuestPortrait', function(parentFrame, portrait, text, name, x, y)
-		QuestNPCModel:ClearAllPoints()
-		QuestNPCModel:SetPoint('TOPLEFT', parentFrame, 'TOPRIGHT', x + 16, y)
-	end)
+	QuestModelScene:SetTemplate('Transparent')
 
 	-- Quests Buttons
 	for i = 1, 2 do

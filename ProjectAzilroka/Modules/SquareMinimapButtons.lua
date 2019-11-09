@@ -711,7 +711,11 @@ function SMB:Initialize()
 
 	SMB.Bar = CreateFrame('Frame', 'SquareMinimapButtonBar', UIParent)
 	SMB.Bar:Hide()
-	SMB.Bar:SetPoint('RIGHT', UIParent, 'RIGHT', -45, 0)
+	if IsAddOnLoaded("DuffedUI") then
+		SMB.Bar:SetPoint('BOTTOMLEFT', Minimap, -3, -35)
+	else
+		SMB.Bar:SetPoint('RIGHT', UIParent, 'RIGHT', -45, 0)
+	end
 	SMB.Bar:SetFrameStrata('MEDIUM')
 	SMB.Bar:SetFrameLevel(1)
 	SMB.Bar:SetClampedToScreen(true)
