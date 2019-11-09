@@ -81,7 +81,7 @@ function AS:Blizzard_Merchant()
 			local Token = _G["MerchantToken"..i]
 			if Token then
 				AS:SkinTexture(Token.icon, true)
-				Token.icon:SetPoint("LEFT", Token.count, "RIGHT", 2, 0)
+				--Token.icon:SetPoint("LEFT", Token.count, "RIGHT", 2, 0)
 			end
 		end
 	end)
