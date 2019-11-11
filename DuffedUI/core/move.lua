@@ -220,6 +220,7 @@ Move:SetScript('OnEvent', function(self, event)
 end)
 
 SLASH_MOVING1 = '/moveui'
+SLASH_MOVING2 = '/mm'
 SlashCmdList['MOVING'] = function()
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 

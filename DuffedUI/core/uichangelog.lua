@@ -7,8 +7,9 @@ local CreateFrame = _G.CreateFrame
 	
 local UI_CHANGELOG = {
    "Changes:",
-		"• Bugfix extraquestbutton",
-		"• Bugfix AddOnsSkins ->Hope Azil roxx the retail version soon",
+		"• Update AddOnSkins",
+		"• Update ProjectAzilroka",
+		"• Bugfix Worldmap",
 		--"• ",
 	" ",
 	"Special:",
