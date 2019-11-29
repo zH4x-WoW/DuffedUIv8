@@ -31,7 +31,7 @@ D['ConstructUFRaid'] = function(self)
 		health:Point('TOPLEFT', self, 'BOTTOMLEFT', 0, 15)
 		health:Point('TOPRIGHT', self, 'BOTTOMRIGHT', 0, 15)
 	else
-		health:Height(C['raid']['frameheight'] - 15)
+		health:Height(C['raid']['frameheight']) -- Kill -15 'cause AuraWatch fucked up
 		health:Width(C['raid']['framewidth'])
 		health:SetPoint('TOPLEFT')
 		health:SetPoint('TOPRIGHT')
@@ -50,7 +50,7 @@ D['ConstructUFRaid'] = function(self)
 	health.value:SetFont(f, fs, ff)
 
 	health.PostUpdate = D['PostUpdateHealthRaid']
-	health.frequentUpdates = C['raid']['frequentupdates']
+	health.frequentUpdates = true
 	health.Smooth = true
 	if C['unitframes']['unicolor'] then
 		health.colorDisconnected = false
@@ -242,8 +242,6 @@ D['ConstructUFRaid'] = function(self)
 
 		-- RaidDebuffs
 		if C['raid']['raidunitdebuffwatch'] then
-			D['createAuraWatch'](self,unit)
-
 			local RaidDebuffs = CreateFrame('Frame', nil, self)
 			RaidDebuffs:SetHeight(22)
 			RaidDebuffs:SetWidth(22)
@@ -275,7 +273,8 @@ D['ConstructUFRaid'] = function(self)
 			RaidDebuffs.SetDebuffTypeColor = RaidDebuffs.SetBackdropBorderColor
 			RaidDebuffs.Debuffs = D['Debuffids']
 
-			self.RaidDebuffs = RaidDebuffs
+			self.RaidDebuffs = RaidDebuffs			
+			self.AuraWatch = D.CreateAuraWatch(self)
 		end
 	end
 end

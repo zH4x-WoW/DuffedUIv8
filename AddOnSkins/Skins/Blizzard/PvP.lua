@@ -53,7 +53,7 @@ function AS:Blizzard_PVPUI(event, addon)
 	AS:StripTextures(HonorFrame.BonusFrame)
 	AS:StripTextures(HonorFrame.BonusFrame.ShadowOverlay)
 
-	local Buttons = { ['RandomBGButton'] = HonorFrame.BonusFrame, ['RandomEpicBGButton'] = HonorFrame.BonusFrame, ['Arena1Button'] = HonorFrame.BonusFrame, ['BrawlButton'] = HonorFrame.BonusFrame, ['RatedBG'] = ConquestFrame, ['Arena2v2'] = ConquestFrame, ['Arena3v3'] = ConquestFrame }
+	local Buttons = { ['RandomBGButton'] = HonorFrame.BonusFrame, ['RandomEpicBGButton'] = HonorFrame.BonusFrame, ['Arena1Button'] = HonorFrame.BonusFrame, ['BrawlButton'] = HonorFrame.BonusFrame, ['SpecialEventButton'] = HonorFrame.BonusFrame, ['RatedBG'] = ConquestFrame, ['Arena2v2'] = ConquestFrame, ['Arena3v3'] = ConquestFrame }
 
 	for Section, Parent in pairs(Buttons) do
 		local Button = Parent[Section]
@@ -61,11 +61,20 @@ function AS:Blizzard_PVPUI(event, addon)
 		Button.SelectedTexture:SetTexture('')
 		Button.SelectedTexture:Hide()
 
-		AS:StripTextures(Button.Reward)
 		AS:SkinTexture(Button.Reward.Icon, true)
+		Button.Reward.Border:Hide()
+		Button.Reward.CircleMask:Hide()
 
 		AS:StripTextures(Button.Reward.EnlistmentBonus)
-		AS:SkinTexture(Button.Reward.EnlistmentBonus.Icon, true)
+		AS:SetTemplate(Button.Reward.EnlistmentBonus)
+		Button.Reward.EnlistmentBonus:SetSize(20, 20)
+		Button.Reward.EnlistmentBonus:SetPoint("TOPRIGHT", 2, 2)
+
+		local EnlistmentBonusIcon = Button.Reward.EnlistmentBonus:CreateTexture()
+		EnlistmentBonusIcon:SetPoint("TOPLEFT", Button.Reward.EnlistmentBonus, "TOPLEFT", 2, -2)
+		EnlistmentBonusIcon:SetPoint("BOTTOMRIGHT", Button.Reward.EnlistmentBonus, "BOTTOMRIGHT", -2, 2)
+		EnlistmentBonusIcon:SetTexture("Interface\\Icons\\achievement_guildperk_honorablemention_rank2")
+		EnlistmentBonusIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
 		Button:HookScript('OnEnter', function(self)
 			self:SetBackdropBorderColor(1, .82, 0)

@@ -1,4 +1,5 @@
 local D, C, L = unpack(select(2, ...))
+local Module = D:GetModule("Range")
 
 local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF
@@ -301,6 +302,64 @@ D['ConstructUFTarget'] = function(self)
 		self.CombatFeedbackText = CombatFeedbackText
 	end
 
+	-- Healcom
+	if C['unitframes']['healcomm'] then
+		local mhpb = CreateFrame('StatusBar', nil, health)
+		mhpb:SetOrientation('HORIZONTAL')
+		mhpb:SetPoint('LEFT', health:GetStatusBarTexture(), 'RIGHT', 0, 0)
+		mhpb:Width(218)
+		if layout == 1 then
+			mhpb:Height(20)
+		elseif layout == 2 then
+			mhpb:Height(22)
+		elseif layout == 3 then
+			mhpb:Height(23)
+		elseif layout == 4 then
+			mhpb:Height(40)
+		end
+		mhpb:SetStatusBarTexture(texture)
+		mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
+
+		local ohpb = CreateFrame('StatusBar', nil, health)
+		ohpb:SetOrientation('HORIZONTAL')
+		ohpb:SetPoint('LEFT', mhpb:GetStatusBarTexture(), 'RIGHT', 0, 0)
+		ohpb:Width(218)
+		if layout == 1 then
+			ohpb:Height(20)
+		elseif layout == 2 then
+			ohpb:Height(22)
+		elseif layout == 3 then
+			ohpb:Height(23)
+		elseif layout == 4 then
+			ohpb:Height(40)
+		end
+		ohpb:SetStatusBarTexture(texture)
+		ohpb:SetStatusBarColor(0, 1, 0, 0.25)
+
+		local absb = CreateFrame('StatusBar', nil, health)
+		absb:SetOrientation('HORIZONTAL')
+		absb:SetPoint('LEFT', ohpb:GetStatusBarTexture(), 'RIGHT', 0, 0)
+		absb:Width(218)
+		if layout == 1 then
+			absb:Height(20)
+		elseif layout == 2 then
+			absb:Height(22)
+		elseif layout == 3 then
+			absb:Height(23)
+		elseif layout == 4 then
+			absb:Height(40)
+		end
+		absb:SetStatusBarTexture(texture)
+		absb:SetStatusBarColor(1, 1, 0, 0.25)
+
+		self.HealthPrediction = {
+			myBar = mhpb,
+			otherBar = ohpb,
+			absorbBar = absb,
+			maxOverflow = 1,
+		}
+	end
+
 	-- Castbar
 	if C['castbar']['enable'] then
 		local tcb = CreateFrame('Frame', 'TargetCastBarMover', UIParent)
@@ -369,7 +428,10 @@ D['ConstructUFTarget'] = function(self)
 		Focus:StripTextures()
 		Focus:SetAttribute('macrotext1', '/focus')
 	end
-
+	
+	if C['unitframes']['showrange'] then	
+		self.Range = Module.CreateRangeIndicator(self)
+	end
 	self.panel = panel
 	self.Health = health
 	self.Health.bg = healthBG

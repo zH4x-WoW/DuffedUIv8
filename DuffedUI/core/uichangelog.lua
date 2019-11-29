@@ -7,9 +7,15 @@ local CreateFrame = _G.CreateFrame
 	
 local UI_CHANGELOG = {
    "Changes:",
-		"• Update AddOnSkins",
-		"• Update ProjectAzilroka",
-		"• Bugfix Worldmap",
+		"• New AuraWatch, Thx Azil for the lib!",
+		"• This give us speeeeeeeed for Raidframes",
+		"• Bugfix AddOnSkins Alerts Frame",
+		"• Bugifx AddOnSkins PvP Frame",
+		"• Change values in SMB to bring back buttons to Minimap (Mail, Queue, Tracker)",
+		"• Healcomm for Maintankframes",
+		"• Healcomm for Player- and Targetframes",
+		"• Rangecheck for Target-, ToT- and Maintankframes",
+		"• Kill option frequentUpdates on Raidframes ... allways true now",
 		--"• ",
 	" ",
 	"Special:",

@@ -1,4 +1,5 @@
 local D, C, L = unpack(select(2, ...))
+local Module = D:GetModule("Range")
 
 local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF
@@ -79,4 +80,42 @@ D['ConstructUFMaintank'] = function(self)
 	RaidIcon:Size(28, 28)
 	RaidIcon:Point('TOP', health, 'TOP', 0, 11)
 	self.RaidTargetIndicator = RaidIcon
+
+	-- Healcom
+	if C['unitframes']['healcomm'] then
+		local mhpb = CreateFrame('StatusBar', nil, self.Health)
+		mhpb:SetOrientation('HORIZONTAL')
+		mhpb:SetPoint('LEFT', self.Health:GetStatusBarTexture(), 'RIGHT', 0, 0)
+		mhpb:Width(90)
+		mhpb:Height(20)
+		mhpb:SetStatusBarTexture(texture)
+		mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
+
+		local ohpb = CreateFrame('StatusBar', nil, self.Health)
+		ohpb:SetOrientation('HORIZONTAL')
+		ohpb:SetPoint('LEFT', mhpb:GetStatusBarTexture(), 'RIGHT', 0, 0)
+		ohpb:Width(90)
+		ohpb:Height(20)
+		ohpb:SetStatusBarTexture(texture)
+		ohpb:SetStatusBarColor(0, 1, 0, 0.25)
+
+		local absb = CreateFrame('StatusBar', nil, self.Health)
+		absb:SetOrientation('HORIZONTAL')
+		absb:SetPoint('LEFT', ohpb:GetStatusBarTexture(), 'RIGHT', 0, 0)
+		absb:Width(90)
+		absb:Height(20)
+		absb:SetStatusBarTexture(texture)
+		absb:SetStatusBarColor(1, 1, 0, 0.25)
+
+		self.HealthPrediction = {
+			myBar = mhpb,
+			otherBar = ohpb,
+			absorbBar = absb,
+			maxOverflow = 1,
+		}
+	end
+
+	if C['raid']['showrange'] then	
+		self.Range = Module.CreateRangeIndicator(self)
+	end
 end

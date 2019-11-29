@@ -263,7 +263,7 @@ D['SpawnUF'] = function(self)
 				'groupBy', 'GROUP',
 				'maxColumns', 8,
 				'unitsPerColumn', 5,
-				'columnSpacing', D['Scale'](-3),
+				'columnSpacing', D['Scale'](12), -- -3
 				'point', 'LEFT',
 				'columnAnchorPoint', 'BOTTOM'
 			)

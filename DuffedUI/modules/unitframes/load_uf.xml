@@ -13,6 +13,7 @@
 	<Script file='elements\shaman.lua' />
 	<Script file='elements\warlock.lua' />
 	<Script file='elements\warrior.lua' />
+	<Script file='elements\range.lua' />
 	<Script file='groups\raid.lua' />
 	<Script file='units\player.lua' />
 	<Script file='units\target.lua' />

@@ -1,4 +1,5 @@
 local D, C, L = unpack(select(2, ...))
+local Module = D:GetModule("Range")
 
 local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF
@@ -162,5 +163,9 @@ D['ConstructUFToT'] = function(self)
 		debuffs.PostCreateIcon = D['PostCreateAura']
 		debuffs.PostUpdateIcon = D['PostUpdateAura']
 		self.Debuffs = debuffs
+	end
+	
+	if C['unitframes']['showrange'] then	
+		self.Range = Module.CreateRangeIndicator(self)
 	end
 end

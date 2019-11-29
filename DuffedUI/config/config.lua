@@ -42,6 +42,7 @@ C['unitframes'] = {
 	['oocHide'] = true,
 	['EnableAltMana'] = true,
 	['grouptext'] = true,
+	['showrange'] = true,
 }
 
 C['chat'] = {
@@ -132,9 +133,10 @@ C['raid'] = {
 	['showraidpets'] = false,
 	['showplayerinparty'] = true,
 	['framewidth'] = 68,
-	['frameheight'] = 45,
+	['frameheight'] = 35,
 	['layout'] = 'heal',
-	['frequentupdates'] = true,
+	['aurawatchiconsize'] = 7,
+	['aurawatchtexturedicon'] = false,	
 }
 
 C['datatext'] = {
