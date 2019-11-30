@@ -88,7 +88,7 @@ C['nameplate'] = {
 	['threat'] = true,
 	['pDebuffs'] = true,
 	['hidetargetglow'] = false,
-	['showperc'] = false,
+	['showperc'] = true,
 }
 
 C['actionbar'] = {
