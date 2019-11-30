@@ -164,7 +164,65 @@ D['ConstructUFToT'] = function(self)
 		debuffs.PostUpdateIcon = D['PostUpdateAura']
 		self.Debuffs = debuffs
 	end
-	
+
+	-- Healcom
+	if C['unitframes']['healcomm'] then
+		local mhpb = CreateFrame('StatusBar', nil, health)
+		mhpb:SetOrientation('HORIZONTAL')
+		mhpb:SetPoint('LEFT', health:GetStatusBarTexture(), 'RIGHT', 0, 0)
+		mhpb:Width(129)
+		if layout == 1 then
+			mhpb:Height(17)
+		elseif layout == 2 then
+			mhpb:Height(17)
+		elseif layout == 3 then
+			mhpb:Height(16)
+		elseif layout == 4 then
+			mhpb:Height(20)
+		end
+		mhpb:SetStatusBarTexture(texture)
+		mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
+
+		local ohpb = CreateFrame('StatusBar', nil, health)
+		ohpb:SetOrientation('HORIZONTAL')
+		ohpb:SetPoint('LEFT', mhpb:GetStatusBarTexture(), 'RIGHT', 0, 0)
+		ohpb:Width(129)
+		if layout == 1 then
+			ohpb:Height(17)
+		elseif layout == 2 then
+			ohpb:Height(17)
+		elseif layout == 3 then
+			ohpb:Height(16)
+		elseif layout == 4 then
+			ohpb:Height(20)
+		end
+		ohpb:SetStatusBarTexture(texture)
+		ohpb:SetStatusBarColor(0, 1, 0, 0.25)
+
+		local absb = CreateFrame('StatusBar', nil, health)
+		absb:SetOrientation('HORIZONTAL')
+		absb:SetPoint('LEFT', ohpb:GetStatusBarTexture(), 'RIGHT', 0, 0)
+		absb:Width(129)
+		if layout == 1 then
+			absb:Height(17)
+		elseif layout == 2 then
+			absb:Height(17)
+		elseif layout == 3 then
+			absb:Height(16)
+		elseif layout == 4 then
+			absb:Height(20)
+		end
+		absb:SetStatusBarTexture(texture)
+		absb:SetStatusBarColor(1, 1, 0, 0.25)
+
+		self.HealthPrediction = {
+			myBar = mhpb,
+			otherBar = ohpb,
+			absorbBar = absb,
+			maxOverflow = 1,
+		}
+	end
+
 	if C['unitframes']['showrange'] then	
 		self.Range = Module.CreateRangeIndicator(self)
 	end

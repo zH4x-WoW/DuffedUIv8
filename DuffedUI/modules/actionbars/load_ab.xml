@@ -8,7 +8,7 @@
 	<Script file='bar5.lua' />
 	<Script file='barpet.lua' />
 	<Script file='barshift.lua' />
-	<Script file='buttons.lua' />	
+	<Script file='buttons.lua' />
 	<Script file='style.lua' />
 	<Script file='range.lua' />
 	<Script file='others.lua' />

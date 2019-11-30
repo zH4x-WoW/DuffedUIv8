@@ -43,6 +43,7 @@ C['unitframes'] = {
 	['EnableAltMana'] = true,
 	['grouptext'] = true,
 	['showrange'] = true,
+	['combatfade'] = false,
 }
 
 C['chat'] = {
