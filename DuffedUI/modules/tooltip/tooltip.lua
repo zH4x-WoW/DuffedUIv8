@@ -145,6 +145,19 @@ local classification = {
 	rare = string_format('|cffAF5050 %s|r', ITEM_QUALITY3_DESC)
 }
 
+function Module:InsertFactionFrame(faction)
+	if not self.factionFrame then
+		local f = self:CreateTexture(nil, "OVERLAY")
+		f:SetPoint("TOPRIGHT", 0, -4)
+		f:SetBlendMode("ADD")
+		f:SetSize(34, 34)
+		self.factionFrame = f
+	end
+
+	self.factionFrame:SetTexture('Interface\\Timer\\'..faction..'-Logo')
+	self.factionFrame:SetAlpha(0.3)
+end
+
 function Module:GameTooltip_SetDefaultAnchor(tt, parent)
 	if tt:IsForbidden() then
 		return
@@ -518,6 +531,17 @@ function Module:GameTooltip_OnTooltipSetUnit(tt)
 		self:AddInspectInfo(tt, unit, 0, color.r, color.g, color.b)
 	end
 
+	if C['tooltip']['FactionIcon'] then
+		local unit = select(2, tt:GetUnit())
+		if (UnitIsPlayer(unit)) then
+
+			local faction = UnitFactionGroup(unit)
+			if faction and faction ~= "Neutral" then
+				Module.InsertFactionFrame(tt, faction)
+			end
+		end
+	end
+
 	-- NPC ID's
 	if unit and C['tooltip']['NpcID'] and not isPlayerUnit then
 		if C_PetBattles_IsInBattle() then return end
@@ -591,6 +615,10 @@ function Module:GameTooltip_OnTooltipCleared(tt)
 	if TOOLTOP_BUG and tt:NumLines() == 0 then
 		tt:Hide()
 		TOOLTOP_BUG = false
+	end
+
+	if tt.factionFrame and tt.factionFrame:GetAlpha() ~= 0 then
+		tt.factionFrame:SetAlpha(0)
 	end
 end
 

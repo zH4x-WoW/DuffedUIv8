@@ -293,6 +293,7 @@ C['tooltip'] = {
 	['PlayerRoles'] = true,
 	['SpellID'] = false,
 	['ShowMount'] = true,
+	['FactionIcon'] = true,
 }
 
 C['merchant'] = {
