@@ -43,6 +43,8 @@ DuffedUIConfigUILocalization.unitframesattached = "Attach Classbars to Unitframe
 DuffedUIConfigUILocalization.unitframesoocHide = "Hide Classbars out of Combat"
 DuffedUIConfigUILocalization.unitframesEnableAltMana = "Enable additional Manadisplay for Druids, Priests & Shamans"
 DuffedUIConfigUILocalization.unitframesgrouptext = "Enable groupnumber (See your groupnumber in raid)"
+DuffedUIConfigUILocalization.unitframescombatfade = "Enable combatfade on unitframes"
+DuffedUIConfigUILocalization.unitframesshowrange = "Enable rangefading"
 
 --[[Chat]]--
 DuffedUIConfigUILocalization.chat = "Chat"
@@ -136,6 +138,8 @@ DuffedUIConfigUILocalization.raidshowplayerinparty = "Show yourself in party"
 DuffedUIConfigUILocalization.raidframewidth = "Set width of the unitframe"
 DuffedUIConfigUILocalization.raidframeheight = "Set height of the unitframe"
 DuffedUIConfigUILocalization.raidlayout = "Set layout for group frames (default = heal, Values: |cffC41F3Bheal|r or |cffC41F3Bdps|r)"
+DuffedUIConfigUILocalization.raidaurawatchiconsize = "Set Aura Watch Icon Size"
+DuffedUIConfigUILocalization.raidaurawatchtexturedicon = "Show Aura Watch textured icon (Off show colored Icon)"
 
 --[[DataText]]--
 DuffedUIConfigUILocalization.datatext = "Data Text"
@@ -282,6 +286,7 @@ DuffedUIConfigUILocalization.tooltipNpcID = "Show NpcID"
 DuffedUIConfigUILocalization.tooltipPlayerRoles = "Show Player Roles in Groups/Raid"
 DuffedUIConfigUILocalization.tooltipSpellID = "Show Spell- and ItemID"
 DuffedUIConfigUILocalization.tooltipShowMount = "Show Mount (Hold Ctrl for more info)"
+DuffedUIConfigUILocalization.tooltipFactionIcon = "Show Faction Icon"
 
 --[[Merchant]]--
 DuffedUIConfigUILocalization.merchant = "Merchant"

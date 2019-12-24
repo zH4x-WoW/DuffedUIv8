@@ -42,6 +42,8 @@
 	DuffedUIConfigUILocalization.unitframesoocHide = "Verstecke die Klassenleiste wenn Du nicht im Kampf bist"
 	DuffedUIConfigUILocalization.unitframesEnableAltMana = "Aktiviere zusätzliche Manaanzeige für Druiden, Priester & Schamanen"
 	DuffedUIConfigUILocalization.unitframesgrouptext = "Zeige im Raid die Gruppe an in der du bist"
+	DuffedUIConfigUILocalization.unitframescombatfade = "Aktiviere das Verblassen der Einheitenfenster wenn nicht im Kampf"
+	DuffedUIConfigUILocalization.unitframesshowrange = "Aktviere das Verblassen der Einheitenfenster wenn ausser Reichweite"
 
 	--[[Chat]]--
 	DuffedUIConfigUILocalization.chat = "Chat"
@@ -135,6 +137,8 @@
 	DuffedUIConfigUILocalization.raidframewidth = "Einstellung für die Breite der Einheitenfenster"
 	DuffedUIConfigUILocalization.raidframeheight = "Einstellung für die Höhe der Einheitenfenster"
 	DuffedUIConfigUILocalization.raidlayout = "Wähle Layout für das Schlachtzugfenster (Standard = heal, Werte: |cffC41F3Bheal|r oder |cffC41F3Bdps|r)"
+	DuffedUIConfigUILocalization.raidaurawatchiconsize = "Größe des Aura Watch Symbols"
+	DuffedUIConfigUILocalization.raidaurawatchtexturedicon = "Zeige das Aura Watch Sybol texturiert (Aus, zeigt das Icon farbig an.)"
 
 	--[[DataText]]--
 	DuffedUIConfigUILocalization.datatext = "Datatext"
@@ -281,6 +285,7 @@
 	DuffedUIConfigUILocalization.tooltipPlayerRoles = "Zeige die Spielerrollen in der Gruppe/Schlachtzug an"
 	DuffedUIConfigUILocalization.tooltipSpellID = "Zeige die Zauber- und Gegenstands-ID im Tooltip"
 	DuffedUIConfigUILocalization.tooltipShowMount = "Zeige das Mount des Spielers an (Strg halten für mehr Infos)"
+	DuffedUIConfigUILocalization.tooltipFactionIcon = "Zeige das Fraktionssymbol im Tooltip"
 
 	--[[Merchant]]--
 	DuffedUIConfigUILocalization.merchant = "Händler"
