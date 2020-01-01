@@ -25,21 +25,21 @@ function Module:CreateRangeIndicator()
 	}
 	Range.Override = Module.UpdateRange
 
-	SpellRangeTable[D.Class] = SpellRangeTable[D.Class] or {}
+	SpellRangeTable[D['Class']] = SpellRangeTable[D['Class']] or {}
 
 	return Range
 end
 
 local function AddTable(tbl)
-	SpellRangeTable[D.Class][tbl] = {}
+	SpellRangeTable[D['Class']][tbl] = {}
 end
 
 local function AddSpell(tbl, spellID)
-	SpellRangeTable[D.Class][tbl][#SpellRangeTable[D.Class][tbl] + 1] = spellID
+	SpellRangeTable[D['Class']][tbl][#SpellRangeTable[D['Class']][tbl] + 1] = spellID
 end
 
 function Module:UpdateRangeCheckSpells()
-	for tbl, spells in pairs(K.spellRangeCheck[D.Class]) do
+	for tbl, spells in pairs(D.spellRangeCheck[D['Class']]) do
 		AddTable(tbl) --Create the table holding spells, even if it ends up being an empty table
 		for spellID in pairs(spells) do
 			local enabled = spells[spellID]
@@ -86,9 +86,9 @@ local function friendlyIsInRange(unit)
 		return true -- within 28 yards (arg2 as 1 is Compare Achievements distance)
 	end
 
-	if SpellRangeTable[D.Class] then
-		if SpellRangeTable[D.Class].resSpells and UnitIsDeadOrGhost(unit) and (#SpellRangeTable[D.Class].resSpells > 0) then -- dead with rez spells
-			for _, spellID in ipairs(SpellRangeTable[D.Class].resSpells) do
+	if SpellRangeTable[D['Class']] then
+		if SpellRangeTable[D['Class']].resSpells and UnitIsDeadOrGhost(unit) and (#SpellRangeTable[D['Class']].resSpells > 0) then -- dead with rez spells
+			for _, spellID in ipairs(SpellRangeTable[D['Class']].resSpells) do
 				if SpellRange.IsSpellInRange(spellID, unit) == 1 then
 					return true -- within rez range
 				end
@@ -97,8 +97,8 @@ local function friendlyIsInRange(unit)
 			return false -- dead but no spells are in range
 		end
 
-		if SpellRangeTable[D.Class].friendlySpells and (#SpellRangeTable[D.Class].friendlySpells > 0) then -- you have some healy spell
-			for _, spellID in ipairs(SpellRangeTable[D.Class].friendlySpells) do
+		if SpellRangeTable[D['Class']].friendlySpells and (#SpellRangeTable[D['Class']].friendlySpells > 0) then -- you have some healy spell
+			for _, spellID in ipairs(SpellRangeTable[D['Class']].friendlySpells) do
 				if SpellRange.IsSpellInRange(spellID, unit) == 1 then
 					return true -- within healy spell range
 				end
@@ -114,17 +114,17 @@ local function petIsInRange(unit)
 		return true -- within 8 yards (arg2 as 2 is Trade distance)
 	end
 
-	if SpellRangeTable[D.Class] then
-		if SpellRangeTable[D.Class].friendlySpells and (#SpellRangeTable[D.Class].friendlySpells > 0) then -- you have some healy spell
-			for _, spellID in ipairs(SpellRangeTable[D.Class].friendlySpells) do
+	if SpellRangeTable[D['Class']] then
+		if SpellRangeTable[D['Class']].friendlySpells and (#SpellRangeTable[D['Class']].friendlySpells > 0) then -- you have some healy spell
+			for _, spellID in ipairs(SpellRangeTable[D['Class']].friendlySpells) do
 				if SpellRange.IsSpellInRange(spellID, unit) == 1 then
 					return true
 				end
 			end
 		end
 
-		if SpellRangeTable[D.Class].petSpells and (#SpellRangeTable[D.Class].petSpells > 0) then -- you have some pet spell
-			for _, spellID in ipairs(SpellRangeTable[D.Class].petSpells) do
+		if SpellRangeTable[D['Class']].petSpells and (#SpellRangeTable[D['Class']].petSpells > 0) then -- you have some pet spell
+			for _, spellID in ipairs(SpellRangeTable[D['Class']].petSpells) do
 				if SpellRange.IsSpellInRange(spellID, unit) == 1 then
 					return true
 				end
@@ -140,9 +140,9 @@ local function enemyIsInRange(unit)
 		return true -- within 8 yards (arg2 as 2 is Trade distance)
 	end
 
-	if SpellRangeTable[D.Class] then
-		if SpellRangeTable[D.Class].enemySpells and (#SpellRangeTable[D.Class].enemySpells > 0) then -- you have some damage spell
-			for _, spellID in ipairs(SpellRangeTable[D.Class].enemySpells) do
+	if SpellRangeTable[D['Class']] then
+		if SpellRangeTable[D['Class']].enemySpells and (#SpellRangeTable[D['Class']].enemySpells > 0) then -- you have some damage spell
+			for _, spellID in ipairs(SpellRangeTable[D['Class']].enemySpells) do
 				if SpellRange.IsSpellInRange(spellID, unit) == 1 then
 					return true
 				end
@@ -154,9 +154,9 @@ local function enemyIsInRange(unit)
 end
 
 local function enemyIsInLongRange(unit)
-	if SpellRangeTable[D.Class] then
-		if SpellRangeTable[D.Class].longEnemySpells and (#SpellRangeTable[D.Class].longEnemySpells > 0) then -- you have some 30+ range damage spell
-			for _, spellID in ipairs(SpellRangeTable[D.Class].longEnemySpells) do
+	if SpellRangeTable[D['Class']] then
+		if SpellRangeTable[D['Class']].longEnemySpells and (#SpellRangeTable[D['Class']].longEnemySpells > 0) then -- you have some 30+ range damage spell
+			for _, spellID in ipairs(SpellRangeTable[D['Class']].longEnemySpells) do
 				if SpellRange.IsSpellInRange(spellID, unit) == 1 then
 					return true
 				end
