@@ -342,7 +342,7 @@ function AS:Blizzard_DressUpFrame()
 
 	_G.DressUpFrame.portrait:SetAlpha(0)
 
-	AS:SkinMaxMinFrame(_G.MaximizeMinimizeFrame)
+	--AS:SkinMaxMinFrame(_G.MaximizeMinimizeFrame)
 
 	AS:SkinButton(_G.DressUpFrameCancelButton)
 	_G.DressUpFrame.ResetButton:SetPoint("RIGHT", _G.DressUpFrameCancelButton, "LEFT", -2, 0)

@@ -247,7 +247,7 @@ function D.CreateStatusFrame()
 	StatusFrame.Section1.Content.Line2.Text:SetFormattedText('Other AddOns Enabled: |cff4beb2c%s|r', AreOtherAddOnsEnabled() )
 	StatusFrame.Section1.Content.Line3.Text:SetFormattedText('Scale: |cff4beb2c%s|r', (C['general']['uiscale']))
 	StatusFrame.Section1.Content.Line3.Text:SetFormattedText('Recommended Scale: |cff4beb2c%s|r', PixelClip(PixelBestSize()))
-	StatusFrame.Section1.Content.Line4.Text:SetFormattedText('UI Scale Is: |cff4beb2c%s|r', GetUiScale())
+	StatusFrame.Section1.Content.Line4.Text:SetFormattedText('UI Scale Is: |cff4beb2c%s|r', C['general']['uiscale'])
 
 	StatusFrame.Section2.Content.Line1.Text:SetFormattedText('Version of WoW: |cff4beb2c%s (build %s)|r', D.WowPatch, D.WowBuild)
 	StatusFrame.Section2.Content.Line2.Text:SetFormattedText('Client Language: |cff4beb2c%s|r', GetLocale())

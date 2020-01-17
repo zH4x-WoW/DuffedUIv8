@@ -10,13 +10,35 @@ local floor = floor
 local pairs = pairs
 local select = select
 local wipe = wipe
+local mod = mod
 
 local GetFactionInfo = _G.GetFactionInfo
 local GetFactionInfoByID = _G.GetFactionInfoByID
 local GetNumFactions = _G.GetNumFactions
 local GetNumQuestLogRewardFactions = _G.GetNumQuestLogRewardFactions
 local GetQuestLogRewardFactionInfo = _G.GetQuestLogRewardFactionInfo
+local GetQuestLogTitle = _G.GetQuestLogTitle
+local GetQuestLogSelection = _G.GetQuestLogSelection
+local C_QuestLog = _G.C_QuestLog
+local GetNumQuestLogRewards = _G.GetNumQuestLogRewards
+local GetNumQuestLogChoices = _G.GetNumQuestLogChoices
+local GetNumQuestLogRewardCurrencies = _G.GetNumQuestLogRewardCurrencies
+local GetQuestLogRewardMoney = _G.GetQuestLogRewardMoney
+local GetQuestLogRewardXP = _G.GetQuestLogRewardXP
+local GetQuestLogRewardHonor = _G.GetQuestLogRewardHonor
+local GetNumQuestRewards = _G.GetNumQuestRewards
+local GetNumQuestChoices = _G.GetNumQuestChoices
+local GetNumRewardCurrencies = _G.GetNumRewardCurrencies
+local GetRewardMoney = _G.GetRewardMoney
+local GetRewardXP = _G.GetRewardXP
+local GetRewardHonor = _G.GetRewardHonor
 local UnitAura = _G.UnitAura
+local QuestInfo_GetRewardButton = _G.QuestInfo_GetRewardButton
+local SetItemButtonCount = _G.SetItemButtonCount
+local SetItemButtonTexture = _G.SetItemButtonTexture
+local ExpandFactionHeader = _G.ExpandFactionHeader
+local CollapseFactionHeader = _G.CollapseFactionHeader
+
 local REWARDS_SECTION_OFFSET = 5
 
 RR.Title = '|cFF16C3F2Reputation|r|cFFFFFFFFRewards|r'

@@ -4,11 +4,14 @@ function AS:Blizzard_AdventureMap(event, addon)
 	if addon ~= 'Blizzard_AdventureMap' then return end
 
 	AS:SkinBackdropFrame(AdventureMapQuestChoiceDialog)
+	AS:SkinBackdropFrame(AdventureMapQuestChoiceDialog.Backdrop)
 
 	local function SkinRewards()
 		for reward in pairs(AdventureMapQuestChoiceDialog.rewardPool.activeObjects) do
 			if not reward.isSkinned then
 				AS:SkinIconButton(reward)
+				--AS:SkinItemButton(reward)
+				--AS:SkinTexture(reward.Icon)
 				reward.Icon:SetDrawLayer("OVERLAY")
 				reward.isSkinned = true
 			end

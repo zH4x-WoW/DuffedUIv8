@@ -109,14 +109,15 @@ if D.Client == 'deDE' then
 	}
 	
 	L['bags'] = {
-		['Cant_Buy_Slot'] = "Es können keine weiteren Taschenplätze gekauft werden!",
-		['Right_Click_Search'] = "Rechtsklick: Suchen",
-		['Shift_Move'] = "Shift halten und ziehen",
-		['Show_Bags'] = "Taschen anzeigen",
-		['Purchase_Slot'] = "Taschenplatz kaufen",
-		['Reagents'] = "Zeige Reagenzienfächer",
-		['Bank'] = "Zeige Bankfächer",
-		['SortTab'] = "Sortieren",
+		['Shift_Move'] = 'Shift halten und ziehen',
+		['Sort'] = 'Sortieren',
+		['FreeSlots'] = 'Freie Plätze',
+		['Delete Mode Enabled'] = '|nDu kannst Containerinhalte löschen, indem du STRG+ALT hälst. Der Gegenstand muss eine Qualität unter selten haben (Blau).',
+		['Equipement Set'] = 'EquipmentSet Items',
+		['Favourite Mode Enabled'] = "|nDu kannst jetzt Gegenstände mit Sternen versehen.|nWenn der 'Taschen Gegenstandsfilter' aktiviert ist, werden die Gegenstände mit Sternchen in eine eigene Kategorie gepackt.|nIst nicht verfügbar bei Gegenständen der Kategorie Müll.",
+		['Favourite Mode'] = 'Favouritenmodus',
+		['INVENTORY_CLASS_RELATED'] = 'Klassengegenstände',
+		['Item Delete Mode'] = 'Gegenstände löschen',
 	}
 
 	L['buttons'] = {

@@ -242,11 +242,17 @@ D['ConstructNameplates'] = function(self)
 		QuestIcons:Hide()
 		QuestIcons:SetSize(size + 2, size + 2)
 
-		for _, object in pairs({'Item', 'Loot', 'Skull', 'Chat'}) do
-			QuestIcons[object] = QuestIcons:CreateTexture(nil, 'BORDER', nil, 1)
-			QuestIcons[object]:SetPoint('CENTER')
-			QuestIcons[object]:SetSize(size, size)
-			QuestIcons[object]:Hide()
+		for _, object in pairs({'Item', 'Loot', 'Skull', 'Chat'}) do			
+			local icon = QuestIcons:CreateTexture(nil, "BORDER", nil, 1)
+			icon:SetPoint('CENTER')
+			icon:SetSize(size, size)
+			icon.Text = QuestIcons:CreateFontString(nil, "OVERLAY")
+			icon.Text:SetFont(f, fs, ff)
+			icon.Text:SetPoint('BOTTOMLEFT', QuestIcons, 'BOTTOMLEFT', -2, -0.8)
+			icon.Text:SetShadowOffset(1.25, -1.25)
+			icon:Hide()
+
+			QuestIcons[object] = icon
 		end
 
 		QuestIcons.Item:SetTexCoord(unpack(D['IconCoord']))
@@ -256,11 +262,6 @@ D['ConstructNameplates'] = function(self)
 		QuestIcons.Chat:SetSize(size + 2, size + 2)
 		QuestIcons.Chat:SetTexture([[Interface\WorldMap\ChatBubble_64.PNG]])
 		QuestIcons.Chat:SetTexCoord(0, 0.5, 0.5, 1)
-
-		QuestIcons.Text = QuestIcons:CreateFontString(nil, 'OVERLAY')
-		QuestIcons.Text:SetPoint('BOTTOMLEFT', QuestIcons, 'BOTTOMLEFT', -2, -0.8)
-		QuestIcons.Text:SetFont(f, fs, ff)
-		QuestIcons.Text:SetShadowOffset(1.25, -1.25)
 		QuestIcons.ForceUpdate = ForceUpdate
 
 		self.QuestIcons = QuestIcons

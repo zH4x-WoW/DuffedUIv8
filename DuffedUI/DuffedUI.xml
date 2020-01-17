@@ -1,12 +1,13 @@
 ﻿<Ui xmlns='http://www.blizzard.com/wow/ui/'>
 	<!-- engine -->
 	<Script file='libs\LibStub\LibStub.lua' />
-	<Script file="libs\CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
-	<Script file="libs\Ace\AceAddon-3.0\AceAddon-3.0.lua"/>
-    <Script file="libs\Ace\AceEvent-3.0\AceEvent-3.0.lua"/>
-    <Script file="libs\Ace\AceConsole-3.0\AceConsole-3.0.lua"/>
-    <Script file="libs\Ace\AceTimer-3.0\AceTimer-3.0.lua"/>
-    <Script file="libs\Ace\AceHook-3.0\AceHook-3.0.lua"/>
+	<Script file="libs\CallbackHandler-1.0\CallbackHandler-1.0.lua" />
+	<Script file="libs\Ace\AceAddon-3.0\AceAddon-3.0.lua" />
+    <Script file="libs\Ace\AceEvent-3.0\AceEvent-3.0.lua" />
+    <Script file="libs\Ace\AceConsole-3.0\AceConsole-3.0.lua" />
+    <Script file="libs\Ace\AceTimer-3.0\AceTimer-3.0.lua" />
+    <Script file="libs\Ace\AceHook-3.0\AceHook-3.0.lua" />
+	<Include file="libs\cargBags\cargBags.xml" />
 	<Script file='core\init.lua' />
 	<Script file='core\constants.lua' />
 
@@ -35,7 +36,8 @@
 	<Script file='core\status.lua' />
 	<Script file='core\uicommands.lua' />
 	<Script file='core\uiquestions.lua' />
-	<Script file='core\uichangelog.lua' />
+	<Script file='core\changelog.lua' />
+	<!-- <Script file='core\uichangelog.lua' /> -->
 
 	<!-- modules -->
 	<Script file='modules\maps\minimap.lua' />
@@ -60,8 +62,10 @@
 	<Script file='modules\tooltip\tooltipazerite.lua' />
 	<Script file='modules\tooltip\tooltipicons.lua' />
 	<Script file='modules\nameplates\nameplates.lua' />
-	<Script file='modules\loot\sort.lua' />
-	<Script file='modules\loot\bags.lua' />
+	<!-- <Script file='modules\loot\sort.lua' />
+	<Script file='modules\loot\bags.lua' /> -->
+	<Script file='modules\loot\core.lua' />
+	<Script file='modules\loot\filters.lua' />
 	<Script file='modules\loot\bagsbar.lua' />
 	<Script file='modules\loot\masterloot.lua' />
 	<Script file='modules\loot\rollframe.lua' />

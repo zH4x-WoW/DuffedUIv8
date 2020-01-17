@@ -1,49 +1,48 @@
 local D, C, L = unpack(select(2, ...))
 
-local RequireRestart = false
-local Adjust = (D['ScreenHeight'] / 10000) / 2
-local UIScale = min(2, max(0.01, 768 / string.match(D['Resolution'], "%d+x(%d+)")))
+local _G = _G
 
-if C['general']['autoscale'] then
-	if (D['ScreenHeight'] >= 1600 and not C['general']['4kpp']) then
-		UIScale = UIScale + Adjust --(Adjust * 1.82222)
-	elseif (D['ScreenHeight'] >= 1600 and C['general']['4kpp']) then
-		UIScale = UIScale * 2
-	else
-		UIScale = UIScale
+local math_max = _G.math.max
+local math_min = _G.math.min
+local string_match = string.match
+
+local InCombatLockdown = _G.InCombatLockdown
+local UIParent = _G.UIParent
+local mult = 768 / string_match(GetCVar('gxWindowedResolution'), '%d+x(%d+)') / C['general']['uiscale']
+
+local function GetPerfectScale()
+	local scale = C['general']['uiscale']
+	local bestScale = math_max(0.4, math_min(1.15, 768 / D.ScreenHeight))
+	local pixelScale = 768 / D.ScreenHeight
+
+	if C['general']['autoscale'] then
+		scale = bestScale
 	end
-	C['general']['uiscale'] = UIScale
-end
 
-D['CreatePopup']['CLIENT_RESTART'] = {
-	Question = L['misc']['Resolution'],
-	Answer1 = ACCEPT,
-	Answer2 = CANCEL,
-	Function1 = function(self)
-		RequireRestart = false
-		ForceQuit()
-	end,
-	Function2 = function(self)
-		RequireRestart = false
-	end,
-}
+	mult = (bestScale / scale) - ((bestScale - pixelScale) / scale)
+
+	return scale
+end
 
 local Graphic = CreateFrame('Frame')
 Graphic:RegisterEvent('PLAYER_ENTERING_WORLD')
 Graphic:SetScript('OnEvent', function(self, event)
-	if (event == 'DISPLAY_SIZE_CHANGED') then
-		if C['general']['autoscale'] and not RequireRestart then D['ShowPopup']('CLIENT_RESTART') end
-		RequireRestart = true
-	else
-		local UseUIScale = GetCVar('useUiScale')
-
-		if (UseUIScale ~= '1') then SetCVar('useUiScale', 1) end
-		if (format('%.2f', GetCVar('uiScale')) ~= format('%.2f', C['general']['uiscale'])) then SetCVar('uiScale', C['general']['uiscale']) end
-
-		-- Allow 4K and WQHD Resolution with UIScale lower than 0.64
-		if (C['general']['uiscale'] < 0.64) then UIParent:SetScale(C['general']['uiscale']) end
-
-		self:UnregisterEvent('PLAYER_ENTERING_WORLD')
-		self:RegisterEvent('DISPLAY_SIZE_CHANGED')
+	if isScaling then
+		return
 	end
+
+	isScaling = true
+
+	local scale = GetPerfectScale()
+	local parentScale = UIParent:GetScale()
+	if scale ~= parentScale and not InCombatLockdown() then
+		UIParent:SetScale(scale)
+	end
+
+	C['general']['uiscale'] = scale
+
+	isScaling = false
+
+	self:UnregisterEvent('PLAYER_ENTERING_WORLD')
+	self:RegisterEvent('DISPLAY_SIZE_CHANGED')
 end)

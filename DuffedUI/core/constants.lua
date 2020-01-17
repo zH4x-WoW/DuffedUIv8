@@ -1,8 +1,11 @@
 local D, C, L = unpack(select(2, ...))
 
-local resolution = GetCurrentResolution() > 0 and select(GetCurrentResolution(), GetScreenResolutions()) or nil
-local window = Display_DisplayModeDropDown:windowedmode()
-local fullscreen = Display_DisplayModeDropDown:fullscreenmode()
+local math_max = math.max
+local math_min = math.min
+local string_match = string.match
+
+local resolution = select(1, GetPhysicalScreenSize()).."x"..select(2, GetPhysicalScreenSize())
+local windowed = Display_DisplayModeDropDown:windowedmode()
 
 D['Dummy'] = function() return end
 D['MyName'] = select(1, UnitName('player'))
@@ -12,9 +15,10 @@ D['Faction'], D['LocalizedFaction'] = UnitFactionGroup("player")
 D['Level'] = UnitLevel('player')
 D['MyRealm'] = GetRealmName()
 D['Client'] = GetLocale()
-D['Resolution'] = resolution or (window and GetCVar('gxWindowedResolution')) or GetCVar('gxFullscreenResolution')
-D['ScreenHeight'] = tonumber(string.match(D['Resolution'], '%d+x(%d+)'))
-D['ScreenWidth'] = tonumber(string.match(D['Resolution'], '(%d+)x+%d'))
+D['Resolution'] = resolution or (windowed and GetCVar("gxWindowedResolution")) or GetCVar("gxFullscreenResolution")
+D['ScreenHeight'] = select(2, GetPhysicalScreenSize())
+D['ScreenWidth'] = select(1, GetPhysicalScreenSize())
+D['UIScale'] = math_min(1, math_max(0.64, 768 / string_match(resolution, "%d+x(%d+)")))
 D['Version'] = GetAddOnMetadata('DuffedUI', 'Version')
 D['VersionNumber'] = tonumber(D['Version'])
 D['Patch'], D['BuildText'], D['ReleaseDate'], D['Toc'] = GetBuildInfo()

@@ -108,14 +108,15 @@ L['loot'] = {
 }
 
 L['bags'] = {
-		['Cant_Buy_Slot'] = "You can't buy another bankslot!",
-		['Right_Click_Search'] = "Right-Click: Search",
-		['Shift_Move'] = "Hold Shift and move the frame",
-		['Show_Bags'] = "Show Bags",
-		['Purchase_Slot'] = "Purchase Bankslot",
-		['Reagents'] = "Show Reagents",
-		['Bank'] = "Show Bank",
-		['SortTab'] = "Sort Tab",
+	['Shift_Move'] = 'Hold Shift and move',
+	['Sort'] = 'Sort',
+	['FreeSlots'] = 'Free Slots',
+	['Delete Mode Enabled'] = "|nYou can destroy container item by holding CTRL+ALT. The item quality must be lower than rare (blue).",
+	['Equipement Set'] = 'Equipment Set Items',
+	['Favourite Mode Enabled'] = "|nYou can now star items.|nIf 'Bags ItemFilter' enabled, the item you starred will add to Preferences filter slots.|nThis is not available to trash.",
+	['Favourite Mode'] = 'Favourite Mode',
+	['INVENTORY_CLASS_RELATED'] = 'Class Items',
+	['Item Delete Mode'] = 'Item Delete Mode',
 }
 
 L['buttons'] = {

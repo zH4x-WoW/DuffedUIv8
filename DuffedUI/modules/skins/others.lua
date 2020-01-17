@@ -97,18 +97,22 @@ local function LoadSkin()
 	end
 
 	local BlizzardHeader = {
-		'GameMenuFrame', 
+		--'GameMenuFrameHeader', 
 		'InterfaceOptionsFrame', 
 		'AudioOptionsFrame', 
 		'VideoOptionsFrame',
 	}
-
+	
 	for i = 1, getn(BlizzardHeader) do
 		local title = _G[BlizzardHeader[i]..'Header']
+		local header = GameMenuFrame.Header
+		if header then
+			header:StripTextures()
+		end	
 		if title then
-			title:SetTexture('')
+			title:StripTextures()
 			title:ClearAllPoints()
-			if title == _G['GameMenuFrameHeader'] then title:SetPoint('TOP', GameMenuFrame, 0, 7) else title:SetPoint('TOP', BlizzardHeader[i], 0, 0) end
+			if title == _G['GameMenuFrame.Header'] then title:SetPoint('TOP', GameMenuFrame, 0, 7) else title:SetPoint('TOP', BlizzardHeader[i], 0, 0) end
 		end
 	end
 

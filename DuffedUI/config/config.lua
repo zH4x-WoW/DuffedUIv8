@@ -207,22 +207,22 @@ C['auras'] = {
 	['wrap'] = 18,
 }
 
-C['bags'] = {
-	['BagColumns'] = 11,
-	['BankColumns'] = 11,
-	['BindText'] = false,
-	['ButtonSize'] = 28,
-	['ButtonSpace'] = 4,
-	['Enable'] = true,
-	['ItemLevel'] = true,
-	['ItemLevelThreshold'] = 10,
-	['JunkIcon'] = true,
-	['ScrapIcon'] = true,
-	['PulseNewItem'] = true,
-	['ReverseLoot'] = false,
-	['SortInverted'] = false,
+C["bags"] = {
 	["BagBar"] = false,
 	["BagBarMouseover"] = false,
+	["BagsWidth"] = 11,
+	["BagsiLvl"] = true,
+	["BankWidth"] = 11,
+	["DeleteButton"] = true,
+	["Enable"] = true,
+	["GatherEmpty"] = true,
+	["IconSize"] = 28,
+	["ScrapIcon"] = true,
+	["ItemFilter"] = true,
+	["ItemSetFilter"] = true,
+	["QuestItemFilter"] = true,
+	["TradeGoodsFilter"] = true,
+	["UpgradeIcon"] = true,
 }
 
 C['misc'] = {

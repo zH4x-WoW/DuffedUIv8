@@ -99,9 +99,13 @@ D['CreateBtn']('MB_switch', MB_reload, 19, 19, L['buttons']['ses_switch'], 'S')
 MB_switch:Point('LEFT', MB_binds, 'RIGHT', 2, 0)
 MB_switch:SetAttribute('macrotext1', '/switch')
 
-D['CreateBtn']('bReport2', MB_reload, 63, 19, 'Bugreport', 'Bugreport')
-bReport2:SetPoint('LEFT', MB_switch, 'RIGHT', 2, 0)
-bReport2:SetScript('OnClick', function(self) StaticPopup_Show('BUGREPORT') end)
+D['CreateBtn']('MB_cl', MB_reload, 19, 19, 'Changelog', 'CL')
+MB_cl:SetPoint('LEFT', MB_switch, 'RIGHT', 2, 0)
+MB_cl:SetScript('OnClick', function(self) D:GetModule("Changelog"):ToggleChangeLog() end)
+
+D['CreateBtn']('MB_bReport2', MB_reload, 63, 19, 'Bugreport', 'Bugreport')
+MB_bReport2:SetPoint('LEFT', MB_cl, 'RIGHT', 2, 0)
+MB_bReport2:SetScript('OnClick', function(self) StaticPopup_Show('BUGREPORT') end)
 
 if Enablegear then
 	local gearSets = CreateFrame('Frame', nil, MB_reload)

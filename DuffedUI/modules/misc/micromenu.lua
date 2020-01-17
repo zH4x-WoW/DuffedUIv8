@@ -30,11 +30,4 @@ D['MicroMenu'] = {
 	{text = ENCOUNTER_JOURNAL, func = function() if not IsAddOnLoaded('Blizzard_EncounterJournal') then EncounterJournal_LoadUI() end ToggleFrame(EncounterJournal) end, notCheckable = true},
 	{text = BLIZZARD_STORE, func = function() StoreMicroButton:Click() end, notCheckable = true},
 	{text = GARRISON_LANDING_PAGE_TITLE, func = function() GarrisonLandingPageMinimapButton_OnClick() end, notCheckable = true},
-	{text = SOCIAL_TWITTER_COMPOSE_NEW_TWEET,
-	func = function()
-		if not SocialPostFrame then LoadAddOn('Blizzard_SocialUI') end
-
-		local IsTwitterEnabled = C_Social.IsSocialEnabled()
-		if IsTwitterEnabled then Social_SetShown(true) else print('|cffC41F3BTwitter is not enabled|r') end
-	end, notCheckable = true},
 }

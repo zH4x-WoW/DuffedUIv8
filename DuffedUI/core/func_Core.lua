@@ -286,3 +286,212 @@ D['CreateBtn'] = function(name, parent, w, h, tt_txt, txt)
 	b.text:SetJustifyH('CENTER')
 	b:SetAttribute('type1', 'macro')
 end
+
+
+-- Tooltip code ripped from StatBlockCore by Funkydude
+function D.GetAnchors(frame)
+	local x, y = frame:GetCenter()
+
+	if not x or not y then return "CENTER" end
+	local hhalf = (x > UIParent:GetWidth() * 2 / 3) and "RIGHT" or (x < UIParent:GetWidth() / 3) and "LEFT" or ""
+	local vhalf = (y > UIParent:GetHeight() / 2) and "TOP" or "BOTTOM"
+
+	return vhalf..hhalf, frame, (vhalf == "TOP" and "BOTTOM" or "TOP")..hhalf
+end
+
+function D.HideTooltip()
+	if GameTooltip:IsForbidden() then
+		return
+	end
+
+	GameTooltip:Hide()
+end
+
+local function tooltipOnEnter(self)
+	GameTooltip:SetOwner(self, "ANCHOR_NONE")
+	GameTooltip:SetPoint(D.GetAnchors(self))
+	GameTooltip:ClearLines()
+	if self.title then
+		GameTooltip:AddLine(self.title)
+	end
+	if tonumber(self.text) then
+		GameTooltip:SetSpellByID(self.text)
+	elseif self.text then
+		local r, g, b = 1, 1, 1
+		if self.color == "class" then
+			r, g, b = D.Color.r, D.Color.g, D.Color.b
+		elseif self.color == "system" then
+			r, g, b = 1, .8, 0
+		elseif self.color == "info" then
+			r, g, b = .6, .8, 1
+		end
+		GameTooltip:AddLine(self.text, r, g, b, 1)
+	end
+	GameTooltip:Show()
+end
+
+function D.AddTooltip(self, anchor, text, color)
+	self.anchor = anchor
+	self.text = text
+	self.color = color
+
+	self:SetScript("OnEnter", tooltipOnEnter)
+	self:SetScript("OnLeave", D.HideTooltip)
+end
+
+-- Itemlevel
+local iLvlDB = {}
+local itemLevelString = gsub(ITEM_LEVEL, "%%d", "")
+local enchantString = gsub(ENCHANTED_TOOLTIP_LINE, "%%s", "(.+)")
+local essenceTextureID = 2975691
+local essenceDescription = GetSpellDescription(277253)
+local ITEM_SPELL_TRIGGER_ONEQUIP = ITEM_SPELL_TRIGGER_ONEQUIP
+local tip = CreateFrame("GameTooltip", "DuffedUI_iLvlTooltip", nil, "GameTooltipTemplate")
+
+function D:InspectItemTextures()
+	if not tip.gems then
+		tip.gems = {}
+	else
+		wipe(tip.gems)
+	end
+
+	if not tip.essences then
+		tip.essences = {}
+	else
+		for _, essences in pairs(tip.essences) do
+			wipe(essences)
+		end
+	end
+
+	local step = 1
+	for i = 1, 10 do
+		local tex = _G[tip:GetName().."Texture"..i]
+		local texture = tex and tex:IsShown() and tex:GetTexture()
+		if texture then
+			if texture == essenceTextureID then
+				local selected = (tip.gems[i-1] ~= essenceTextureID and tip.gems[i-1]) or nil
+				if not tip.essences[step] then tip.essences[step] = {} end
+				tip.essences[step][1] = selected		--essence texture if selected or nil
+				tip.essences[step][2] = tex:GetAtlas()	--atlas place 'tooltip-heartofazerothessence-major' or 'tooltip-heartofazerothessence-minor'
+				tip.essences[step][3] = texture			--border texture placed by the atlas
+
+				step = step + 1
+				if selected then tip.gems[i-1] = nil end
+			else
+				tip.gems[i] = texture
+			end
+		end
+	end
+
+	return tip.gems, tip.essences
+end
+
+function D:InspectItemInfo(text, slotInfo)
+	local itemLevel = strfind(text, itemLevelString) and strmatch(text, "(%d+)%)?$")
+	if itemLevel then
+		slotInfo.iLvl = tonumber(itemLevel)
+	end
+
+	local enchant = strmatch(text, enchantString)
+	if enchant then
+		slotInfo.enchantText = enchant
+	end
+end
+
+function D:CollectEssenceInfo(index, lineText, slotInfo)
+	local step = 1
+	local essence = slotInfo.essences[step]
+	if essence and next(essence) and (strfind(lineText, ITEM_SPELL_TRIGGER_ONEQUIP, nil, true) and strfind(lineText, essenceDescription, nil, true)) then
+		for i = 5, 2, -1 do
+			local line = _G[tip:GetName().."TextLeft"..index-i]
+			local text = line and line:GetText()
+
+			if text and (not strmatch(text, "^[ +]")) and essence and next(essence) then
+				local r, g, b = line:GetTextColor()
+				essence[4] = r
+				essence[5] = g
+				essence[6] = b
+
+				step = step + 1
+				essence = slotInfo.essences[step]
+			end
+		end
+	end
+end
+
+function D.GetItemLevel(link, arg1, arg2, fullScan)
+	if fullScan then
+		tip:SetOwner(UIParent, "ANCHOR_NONE")
+		tip:SetInventoryItem(arg1, arg2)
+
+		if not tip.slotInfo then tip.slotInfo = {} else wipe(tip.slotInfo) end
+
+		local slotInfo = tip.slotInfo
+		slotInfo.gems, slotInfo.essences = D:InspectItemTextures()
+
+		for i = 1, tip:NumLines() do
+			local line = _G[tip:GetName().."TextLeft"..i]
+			if line then
+				local text = line:GetText() or ""
+				D:InspectItemInfo(text, slotInfo)
+				D:CollectEssenceInfo(i, text, slotInfo)
+			end
+		end
+
+		return slotInfo
+	else
+		if iLvlDB[link] then return iLvlDB[link] end
+
+		tip:SetOwner(UIParent, "ANCHOR_NONE")
+		if arg1 and type(arg1) == "string" then
+			tip:SetInventoryItem(arg1, arg2)
+		elseif arg1 and type(arg1) == "number" then
+			tip:SetBagItem(arg1, arg2)
+		else
+			tip:SetHyperlink(link)
+		end
+
+		for i = 2, 5 do
+			local line = _G[tip:GetName().."TextLeft"..i]
+			if line then
+				local text = line:GetText() or ""
+				local found = strfind(text, itemLevelString)
+				if found then
+					local level = strmatch(text, "(%d+)%)?$")
+					iLvlDB[link] = tonumber(level)
+					break
+				end
+			end
+		end
+
+		return iLvlDB[link]
+	end
+end
+
+function D.CreateFontString(self, size, text, textstyle, classcolor, anchor, x, y)
+	local fs = self:CreateFontString(nil, "OVERLAY")
+
+	if textstyle == " " or textstyle == "" or textstyle == nil then
+		fs:SetFont(C['media']['font'], size, "")
+		fs:SetShadowOffset(1, -1 / 2)
+	else
+		fs:SetFont(C['media']['font'], size, "OUTLINE")
+		fs:SetShadowOffset(0, 0)
+	end
+	fs:SetText(text)
+	fs:SetWordWrap(false)
+
+	if classcolor and type(classcolor) == "boolean" then
+		fs:SetTextColor(D.r, D.g, D.b)
+	elseif classcolor == "system" then
+		fs:SetTextColor(1, .8, 0)
+	end
+
+	if anchor and x and y then
+		fs:SetPoint(anchor, x, y)
+	else
+		fs:SetPoint("CENTER", 1, 0)
+	end
+
+	return fs
+end

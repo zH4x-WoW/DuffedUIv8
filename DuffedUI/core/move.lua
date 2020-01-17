@@ -197,6 +197,7 @@ end
 Move:SetScript('OnEvent', function(self, event)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		if not DuffedUIDataPerChar['Move'] then DuffedUIDataPerChar['Move'] = {} end
+		if not DuffedUIData['FavouriteItems'] then DuffedUIData['FavouriteItems'] = {} end
 
 		local Data = DuffedUIDataPerChar['Move']
 

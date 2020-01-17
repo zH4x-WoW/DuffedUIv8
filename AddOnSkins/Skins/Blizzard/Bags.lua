@@ -108,7 +108,9 @@ function AS:Blizzard_Bags()
 		AS:Kill(_G["ContainerFrame"..i.."BackgroundBottom"])
 		AS:SkinCloseButton(_G["ContainerFrame"..i.."CloseButton"])
 		AS:SkinButton(Bag.PortraitButton)
-		AS:Kill(Bag.PortraitButton.Highlight)
+		if Bag.PortraitButton.Highlight then
+			AS:Kill(Bag.PortraitButton.Highlight)
+		end
 	end
 
 	local function UpdateBagIcon()

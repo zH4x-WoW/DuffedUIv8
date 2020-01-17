@@ -9,6 +9,7 @@ Engine[3] = {}
 Engine[4] = {}
 
 _G[AddOnName] = Engine
+AddOn.cargBags = Engine.cargBags
 
 AddOn.Title = GetAddOnMetadata(AddOnName, 'Title')
 AddOn.Author = GetAddOnMetadata(AddOnName, 'Author')
@@ -21,10 +22,34 @@ AddOn.SetPerCharVariable = function(varName, value)
 	_G [varName] = value
 end
 
+AddOn.LocalizedClass, AddOn.Class, AddOn.ClassID = UnitClass("player")
 AddOn.ScanTooltip = CreateFrame('GameTooltip', 'DuffedUI_ScanTooltip', _G.UIParent, 'GameTooltipTemplate')
+AddOn.PriestColors = {r = 0.86, g = 0.92, b = 0.98, colorStr = "dbebfa"}
 AddOn.Color = AddOn.Class == "PRIEST" and AddOn.PriestColors or (CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[AddOn.Class] or RAID_CLASS_COLORS[AddOn.Class])
+AddOn.ClassColor = string.format("|cff%02x%02x%02x", AddOn.Color.r * 255, AddOn.Color.g * 255, AddOn.Color.b * 255)
+AddOn.MyClassColor = string.format("|cff%02x%02x%02x", AddOn.Color.r * 255, AddOn.Color.g * 255, AddOn.Color.b * 255)
 AddOn.WowPatch, AddOn.WowBuild, AddOn.WowRelease, AddOn.TocVersion = GetBuildInfo()
 AddOn.WowBuild = tonumber(AddOn.WowBuild)
+AddOn.InfoColor = "|cffC41F3B"
+AddOn.SystemColor = "|cffffcc00"
+
+AddOn.ClassList = {}
+for k, v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
+	AddOn.ClassList[v] = k
+end
+AddOn.ClassColors = {}
+local colors = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
+for class in pairs(colors) do
+	AddOn.ClassColors[class] = {}
+	AddOn.ClassColors[class].r = colors[class].r
+	AddOn.ClassColors[class].g = colors[class].g
+	AddOn.ClassColors[class].b = colors[class].b
+	AddOn.ClassColors[class].colorStr = colors[class].colorStr
+end
+AddOn.r, AddOn.g, AddOn.b = AddOn.ClassColors[AddOn.Class].r, AddOn.ClassColors[AddOn.Class].g, AddOn.ClassColors[AddOn.Class].b
+
+BAG_ITEM_QUALITY_COLORS[LE_ITEM_QUALITY_POOR] = {r = 0.62, g = 0.62, b = 0.62}
+BAG_ITEM_QUALITY_COLORS[LE_ITEM_QUALITY_COMMON] = {r = 1, g = 1, b = 1}
 
 AddOn.Noop = function()
 	return
@@ -130,15 +155,15 @@ do
 	AddOn.AboutPanel.Questions:Hide()
 	AddOn.AboutPanel.Questions.parent = AddOn.AboutPanel.name
 	
-	AddOn.AboutPanel.Changelog = CreateFrame( "Frame", nil, AddOn.AboutPanel)
-	AddOn.AboutPanel.Changelog.name = "Changelog"
-	AddOn.AboutPanel.Changelog:Hide()
-	AddOn.AboutPanel.Changelog.parent = AddOn.AboutPanel.name
+	--AddOn.AboutPanel.Changelog = CreateFrame( "Frame", nil, AddOn.AboutPanel)
+	--AddOn.AboutPanel.Changelog.name = "Changelog"
+	--AddOn.AboutPanel.Changelog:Hide()
+	--AddOn.AboutPanel.Changelog.parent = AddOn.AboutPanel.name
 
 	_G.InterfaceOptions_AddCategory(AddOn.AboutPanel)
 	_G.InterfaceOptions_AddCategory(AddOn.AboutPanel.Commands)
 	_G.InterfaceOptions_AddCategory(AddOn.AboutPanel.Questions)
-	_G.InterfaceOptions_AddCategory(AddOn.AboutPanel.Changelog)
+	--_G.InterfaceOptions_AddCategory(AddOn.AboutPanel.Changelog)
 end
 
 function AddOn.ScanTooltipTextures(clean, grabTextures)

@@ -69,7 +69,9 @@ function AS:Blizzard_Calendar(event, addon)
 
 	AS:SkinFrame(_G.CalendarCreateEventFrame)
 	_G.CalendarCreateEventFrame:SetPoint("TOPLEFT", _G.CalendarFrame, "TOPRIGHT", 3, -24)
-	AS:StripTextures(_G.CalendarCreateEventTitleFrame)
+	AS:StripTextures(_G.CalendarCreateEventFrame)
+	AS:StripTextures(_G.CalendarCreateEventFrame.Header)
+	AS:CreateBackdrop(_G.CalendarCreateEventFrame)
 
 	AS:SkinButton(_G.CalendarCreateEventCreateButton, true)
 	AS:SkinButton(_G.CalendarCreateEventMassInviteButton, true)
@@ -86,7 +88,7 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:SkinFrame(_G.CalendarCreateEventDescriptionContainer)
 
 	AS:SkinCloseButton(_G.CalendarCreateEventCloseButton)
-	AS:StripTextures(_G.CalendarCreateEventCloseButton)
+	--AS:StripTextures(_G.CalendarCreateEventCloseButton)
 
 	AS:SkinCheckBox(_G.CalendarCreateEventLockEventCheck)
 
@@ -124,7 +126,7 @@ function AS:Blizzard_Calendar(event, addon)
 	_G.CalendarClassTotalsButton:SetWidth(24)
 
 	AS:SkinFrame(_G.CalendarTexturePickerFrame)
-	AS:StripTextures(_G.CalendarTexturePickerTitleFrame)
+	AS:StripTextures(_G.CalendarTexturePickerFrame.Header)
 
 	AS:SkinScrollBar(_G.CalendarTexturePickerScrollBar)
 	AS:SkinButton(_G.CalendarTexturePickerAcceptButton, true)
@@ -134,31 +136,30 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:SkinButton(_G.CalendarCreateEventRaidInviteButton)
 
 	AS:SkinFrame(_G.CalendarMassInviteFrame)
-	AS:StripTextures(_G.CalendarMassInviteTitleFrame)
+	AS:StripTextures(_G.CalendarMassInviteFrame.Header)
 
 	AS:SkinCloseButton(_G.CalendarMassInviteCloseButton)
 
 	AS:SkinFrame(_G.CalendarViewRaidFrame)
 	_G.CalendarViewRaidFrame:SetPoint("TOPLEFT", _G.CalendarFrame, "TOPRIGHT", 3, -24)
-	AS:StripTextures(_G.CalendarViewRaidTitleFrame)
+	AS:StripTextures(_G.CalendarViewRaidFrame.Header)
 	AS:SkinCloseButton(_G.CalendarViewRaidCloseButton)
-	AS:StripTextures(_G.CalendarViewRaidCloseButton)
+	--AS:StripTextures(_G.CalendarViewRaidCloseButton)
 
 	AS:SkinFrame(_G.CalendarViewHolidayFrame)
 	_G.CalendarViewHolidayFrame:SetPoint("TOPLEFT", _G.CalendarFrame, "TOPRIGHT", 3, -24)
-	AS:StripTextures(_G.CalendarViewHolidayTitleFrame)
-	AS:SkinCloseButton(_G.CalendarViewHolidayCloseButton)
-	AS:StripTextures(_G.CalendarViewHolidayCloseButton)
+	AS:StripTextures(CalendarViewHolidayFrame.Header)
+	AS:SkinCloseButton(CalendarViewHolidayCloseButton)
 	_G.CalendarViewHolidayInfoTexture:SetAllPoints()
 
 	AS:SkinFrame(_G.CalendarViewEventFrame)
 	_G.CalendarViewEventFrame:SetPoint("TOPLEFT", _G.CalendarFrame, "TOPRIGHT", 3, -24)
-	AS:StripTextures(_G.CalendarViewEventTitleFrame)
+	AS:StripTextures(_G.CalendarViewEventFrame.Header)
 	AS:SkinFrame(_G.CalendarViewEventDescriptionContainer)
 	AS:SkinFrame(_G.CalendarViewEventInviteList)
 	AS:StripTextures(_G.CalendarViewEventInviteListSection)
 	AS:SkinCloseButton(_G.CalendarViewEventCloseButton)
-	AS:StripTextures(_G.CalendarViewEventCloseButton)
+	--AS:StripTextures(_G.CalendarViewEventCloseButton)
 
 	AS:SkinScrollBar(_G.CalendarViewEventInviteListScrollFrameScrollBar)
 	AS:SkinButton(_G.CalendarViewEventAcceptButton)
@@ -167,7 +168,7 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:SkinButton(_G.CalendarViewEventDeclineButton)
 
 	AS:SkinFrame(_G.CalendarEventPickerFrame)
-	AS:StripTextures(_G.CalendarEventPickerTitleFrame)
+	AS:StripTextures(_G.CalendarEventPickerFrame.Header)
 
 	AS:SkinScrollBar(_G.CalendarEventPickerScrollBar)
 

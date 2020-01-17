@@ -188,29 +188,17 @@ Stat:SetScript('OnEnter', function(self)
 	if ImprovedCurrency['Raid'] then
 		GameTooltip:AddLine(' ')
 		GameTooltip:AddLine(L['dt']['dr'])
-		D['Currency'](1191, false, true)
-		D['Currency'](1129, false, true)
-		D['Currency'](994, false, true)
-		D['Currency'](776, false, true)
-		D['Currency'](752, false, true)
-		D['Currency'](697, false, true)
-		D['Currency'](738)
-		D['Currency'](615)
-		D['Currency'](614)
-		D['Currency'](823)
-		D['Currency'](1166)
-		D['Currency'](1155, false, true)
-		D['Currency'](1226)
-		D['Currency'](1273, false, true)
-		D['Currency'](1501)
-		D['Currency'](1508, false, true)
-		D['Currency'](1533)
-		D['Currency'](1710)
+		D['Currency'](1560) -- BfA
+		D['Currency'](1565)
 		D['Currency'](1580, false, true)
-		D['Currency'](1716)
+		D['Currency'](1587)
+		D['Currency'](1716) -- Patch 8.1
+		D['Currency'](1710)				
 		D['Currency'](1717)
 		D['Currency'](1718)
 		D['Currency'](1721) -- Patch 8.2
+		D['Currency'](1755, false, true) -- Patch 8.3
+		D['Currency'](1719)
 	end
 
 	if ImprovedCurrency['PvP'] then
