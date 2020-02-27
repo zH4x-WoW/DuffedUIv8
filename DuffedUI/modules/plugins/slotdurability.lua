@@ -1,11 +1,11 @@
-local D, C, L = unpack(select(2, ...))
+local D, C = unpack(select(2, ...))
 local Module = D:NewModule('SlotDurability', 'AceEvent-3.0', 'AceHook-3.0')
 
 local _G = _G
 
 local GetInventorySlotInfo = _G.GetInventorySlotInfo
 local GetInventoryItemDurability = _G.GetInventoryItemDurability
-local f, fs, ff = C['media']['font'], 12, 'THINOUTLINE'
+local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 
 local SlotDurStrs = {}
 local Slots = {
@@ -28,14 +28,7 @@ local function GetDurStrings(name)
 		SlotDurStrs[name]:SetFont(f, fs, ff)
 		SlotDurStrs[name]:SetShadowOffset(D['mult'], -D['mult'])
 		SlotDurStrs[name]:SetShadowColor(0, 0, 0, 0.4)
-		SlotDurStrs[name]:SetPoint('CENTER')
-
-		SlotDurStrs[name].Shade = slot:CreateTexture()
-		SlotDurStrs[name].Shade:SetDrawLayer('ARTWORK')
-		SlotDurStrs[name].Shade:SetTexture([[Interface\AddOns\DuffedUI\media\textures\shader.tga]])
-		SlotDurStrs[name].Shade:SetPoint('TOPLEFT', SlotDurStrs[name], 'TOPLEFT', -6, 6)
-		SlotDurStrs[name].Shade:SetPoint('BOTTOMRIGHT', SlotDurStrs[name], 'BOTTOMRIGHT', 6, -6)
-		SlotDurStrs[name].Shade:SetAlpha(1)
+		SlotDurStrs[name]:SetPoint('TOPRIGHT', 1, -1)
 	end
 
 	return SlotDurStrs[name]
@@ -53,7 +46,7 @@ local function GetThresholdColour(percent)
 	end
 end
 
-function Module:UpdateDurability()
+function Module.UpdateDurability()
 	for _, item in ipairs(Slots) do
 		local id, _ = GetInventorySlotInfo(item..'Slot')
 		local v1, v2 = GetInventoryItemDurability(id)
@@ -64,38 +57,32 @@ function Module:UpdateDurability()
 		if ((v2 ~= 0) and (percent ~= 1)) then
 
 			SlotDurStr:SetText('')
-			SlotDurStr.Shade:Hide()
 			if (math.ceil(percent * 100) < 100)then
 				SlotDurStr:SetTextColor(GetThresholdColour(percent))
-				SlotDurStr.Shade:SetVertexColor(GetThresholdColour(percent))
-				SlotDurStr.Shade:Show()
 				SlotDurStr:SetText(math.ceil(percent * 100)..'%')
 			end
 		else
 			SlotDurStr:SetText('')
-			SlotDurStr.Shade:Hide()
 		end
 	end
 end
 
 function Module:OnEnable()
-	if not C['misc']['durabilitycharacter'] then
-		return
-	end
+	if not C['misc']['durabilitycharacter'] then return end
 
-	self:SecureHookScript(CharacterFrame, 'OnShow', 'CharacterFrame_OnShow')
-	self:SecureHookScript(CharacterFrame, 'OnHide', 'CharacterFrame_OnHide')
+	CharacterFrame:HookScript('OnShow', Module.CharacterFrame_OnShow)
+	CharacterFrame:HookScript('OnHide', Module.CharacterFrame_OnHide)
 end
 
-function Module:CharacterFrame_OnShow()
-	self:RegisterEvent('PLAYER_ENTERING_WORLD', 'UpdateDurability')
-	self:RegisterEvent('UNIT_INVENTORY_CHANGED', 'UpdateDurability')
-	self:RegisterEvent('UPDATE_INVENTORY_DURABILITY', 'UpdateDurability')
-	self:UpdateDurability()
+function Module.CharacterFrame_OnShow()
+	D:RegisterEvent('PLAYER_ENTERING_WORLD', Module.UpdateDurability)
+	D:RegisterEvent('UNIT_INVENTORY_CHANGED', Module.UpdateDurability)
+	D:RegisterEvent('UPDATE_INVENTORY_DURABILITY', Module.UpdateDurability)
+	Module.UpdateDurability()
 end
 
-function Module:CharacterFrame_OnHide()
-	self:UnregisterEvent('PLAYER_ENTERING_WORLD')
-	self:UnregisterEvent('UNIT_INVENTORY_CHANGED')
-	self:UnregisterEvent('UPDATE_INVENTORY_DURABILITY')
+function Module.CharacterFrame_OnHide()
+	D:UnregisterEvent('PLAYER_ENTERING_WORLD', Module.UpdateDurability)
+	D:UnregisterEvent('UNIT_INVENTORY_CHANGED', Module.UpdateDurability)
+	D:UnregisterEvent('UPDATE_INVENTORY_DURABILITY', Module.UpdateDurability)
 end

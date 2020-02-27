@@ -119,6 +119,7 @@
 	DuffedUIConfigUILocalization.actionbarextraquestbutton = "Aktiviere den ExtraQuestButton"
 	DuffedUIConfigUILocalization.actionbarmicrobar = "Aktiviere die Micromenüleiste"
 	DuffedUIConfigUILocalization.actionbarmicrobarmouseover = "Aktiviere die Micromenüleiste per 'mouseover'"
+	DuffedUIConfigUILocalization.actionbarshapeshiftmouseovervalue = "'Mouseover' Verblassenwert (Standard 1)"
 
 	--[[Raid Frames]]--
 	DuffedUIConfigUILocalization.raid = "Schlachtzugfenster"
@@ -238,7 +239,8 @@
 	DuffedUIConfigUILocalization.miscsesset4 = "Aktiviere das Set für die vierte Spezalisierung (muss ein Wert zwischen 1 - 10 sein)"
 	DuffedUIConfigUILocalization.misccombatanimation = "Aktiviere die Kampf beginnen und verlassen Anzeige"
 	DuffedUIConfigUILocalization.miscflightpoint = "Zeige alle Flugpunkte auf der Weltkarte an"
-	DuffedUIConfigUILocalization.miscilvlcharacter = "Aktiviere die Gegenstandsstufenanzeige im Charakterbildschirm"
+	DuffedUIConfigUILocalization.miscitemlevel = "Aktiviere die Gegenstandsstufenanzeige im Charakterbildschirm"
+	DuffedUIConfigUILocalization.miscgemenchantinfo = "Aktiviere die Juwelen- und Verzauberungsinfo im Charakterbildschirm"
 	DuffedUIConfigUILocalization.miscacm_screen = "Aktiviere ein automatisches Bildschirmfoto beim Erreichen eines Achievements"
 	DuffedUIConfigUILocalization.miscAFKCamera = "Aktiviere die AFK Kamera"
 	DuffedUIConfigUILocalization.miscXPBar = "Aktiviere XP-Leiste"
@@ -248,6 +250,10 @@
 	DuffedUIConfigUILocalization.miscazerite = "Aktiviere Azerite-Bar"
 	DuffedUIConfigUILocalization.miscazeritewidth = "Stelle Breite der Azerite-Bar ein"
 	DuffedUIConfigUILocalization.miscazeriteheight = "Stelle Höhe der Azerite-Bar ein"
+	DuffedUIConfigUILocalization.misccorruption = "Aktiviere Verderbnis-Bar"
+	DuffedUIConfigUILocalization.misccorruptionwidth = "Stelle Breite der Verderbnis-Bar ein"
+	DuffedUIConfigUILocalization.misccorruptionheight = "Stelle Höhe der Verderbnis-Bar ein"
+	DuffedUIConfigUILocalization.misccorruptioneffects = "Aktiviere die Verderbniseffekte im Tooltip"
 	DuffedUIConfigUILocalization.miscdurabilitycharacter = "Aktiviere die Haltbarkeitsanzeige im Charakterbildschirm"
 
 	--[[Duffed]]--

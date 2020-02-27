@@ -1,5 +1,6 @@
--- NazjatarFollowerXP, All fame to the ElvUI team 8)
-
+-------------------------------
+-- NazjatarFollowerXP, ElvUI
+-------------------------------
 local _, ns = ...
 local oUF = ns.oUF or oUF
 
@@ -30,6 +31,17 @@ local CampfireNPCIDToWidgetIDMap = {
 	[149906] = 1920 -- Vim Brineheart
 }
 
+local VoidtouchedEggQuestID = 58802
+
+local VoidtouchedEggNPCIDToWidgetIDMap = {
+	[163541] = 2342, -- Voidtouched Egg
+	[163592] = 2342, -- Yu'gaz
+	[163593] = 2342, -- Bitey McStabface
+	[163595] = 2342, -- Reginald
+	[163596] = 2342, -- Picco
+}
+
+
 local function GetBodyguardXP(widgetID)
 	local widget = widgetID and C_UIWidgetManager_GetStatusBarWidgetVisualizationInfo(widgetID)
 	if not widget then return end
@@ -46,7 +58,10 @@ local function Update(self, ...)
 	if not element then return end
 
 	local npcID = GetNPCID(UnitGUID(self.unit))
-	local shouldDisplay = npcID and (NPCIDToWidgetIDMap[npcID] and self.unit and UnitIsOwnerOrControllerOfUnit("player", self.unit)) or CampfireNPCIDToWidgetIDMap[npcID]
+	if VoidtouchedEggNPCIDToWidgetIDMap[npcID] then
+		questID = VoidtouchedEggQuestID
+	end
+	local shouldDisplay = npcID and (NPCIDToWidgetIDMap[npcID] and self.unit and UnitIsOwnerOrControllerOfUnit("player", self.unit)) or CampfireNPCIDToWidgetIDMap[npcID] or VoidtouchedEggNPCIDToWidgetIDMap[npcID]
 	if (not shouldDisplay) then
 		element:Hide()
 		if element.progressText then
@@ -60,7 +75,7 @@ local function Update(self, ...)
 		element:PreUpdate()
 	end
 
-	local widgetID = NPCIDToWidgetIDMap[npcID] or CampfireNPCIDToWidgetIDMap[npcID]
+	local widgetID = NPCIDToWidgetIDMap[npcID] or CampfireNPCIDToWidgetIDMap[npcID] or VoidtouchedEggNPCIDToWidgetIDMap[npcID]
 	if not widgetID then
 		element:Hide()
 		if element.progressText then

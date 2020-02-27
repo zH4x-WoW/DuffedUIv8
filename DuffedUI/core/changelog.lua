@@ -12,9 +12,13 @@ local CLOSE = _G.CLOSE
 
 local ChangeLogData = {
 	"Changes:",
-		"• Compatibility WoW Patch 8.3",
-		"• Update AddOnSkins - not done yet",
+		"• Update AddOnSkins",
 		"• Update Project Azilroka",
+		"• Bugfix moving Actionbar1",
+		"• Bugfix Shapeshiftbar vanished after zoning",
+		"• Add Corruptionbar to left chat",
+		"• Add Corruptionranks to Tooltip",
+		"• Add Nyalotha Raiddebuffs (Thx Simpy)",
 		--"• ",
 	" ",
 	"Special:",

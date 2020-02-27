@@ -120,6 +120,7 @@ DuffedUIConfigUILocalization.actionbarhidepanels = "Hide panels of actionbars"
 DuffedUIConfigUILocalization.actionbarextraquestbutton = "Enable ExtraQuestButton"
 DuffedUIConfigUILocalization.actionbarmicrobar = "Enable Micromenubar"
 DuffedUIConfigUILocalization.actionbarmicrobarmouseover = "Enable mouseover for Micromenubar"
+DuffedUIConfigUILocalization.actionbarshapeshiftmouseovervalue = "'Mouseover' fading value (default 1)"
 
 --[[Raid Frames]]--
 DuffedUIConfigUILocalization.raid = "Raid Frames"
@@ -238,7 +239,8 @@ DuffedUIConfigUILocalization.miscsesset3 = "Set set for third spec (must be an v
 DuffedUIConfigUILocalization.miscsesset4 = "Set set for fourth spec (must be an value between 1 - 10)"
 DuffedUIConfigUILocalization.misccombatanimation = "Enable Combatanimation"
 DuffedUIConfigUILocalization.miscflightpoint = "Enable Flight point list"
-DuffedUIConfigUILocalization.miscilvlcharacter = "Enable item level on character screen"
+DuffedUIConfigUILocalization.miscitemlevel = "Enable item level on character screen"
+DuffedUIConfigUILocalization.miscgemenchantinfo = "Enable gem- and enchantinfo on character screen"
 DuffedUIConfigUILocalization.miscacm_screen = "Enable automatic Achievment screenshots"
 DuffedUIConfigUILocalization.miscAFKCamera = "Enable AFKCamera"
 DuffedUIConfigUILocalization.miscXPBar = "Enable XP-Bar"
@@ -248,6 +250,10 @@ DuffedUIConfigUILocalization.miscmagemenu = "Enable Teleport menu (works only on
 DuffedUIConfigUILocalization.miscazerite = "Enable Azerite-Bar"
 DuffedUIConfigUILocalization.miscazeritewidth = "Set width of Azerite-Bar"
 DuffedUIConfigUILocalization.miscazeriteheight = "Set height of Azerite-Bar"
+DuffedUIConfigUILocalization.misccorruption = "Enable Corruption-Bar"
+DuffedUIConfigUILocalization.misccorruptionwidth = "Set width of Corruption-Bar"
+DuffedUIConfigUILocalization.misccorruptionheight = "Set height of Corruption-Bar"
+DuffedUIConfigUILocalization.misccorruptioneffects = "Enable Tooltip Corruptioneffects"
 DuffedUIConfigUILocalization.miscdurabilitycharacter = "Enable durability on character screen"
 
 --[[Duffed]]--

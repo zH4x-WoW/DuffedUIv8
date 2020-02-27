@@ -1,297 +1,335 @@
-local D, C, L = unpack(select(2, ...))
-local Module = D:NewModule('SlotItemLevel', 'AceEvent-3.0')
+local D, C = unpack(select(2, ...))
+local Module = D:NewModule('SlotItemLevel', 'AceEvent-3.0', 'AceHook-3.0')
+local ModuleTooltip = D:GetModule('TooltipAzerite')
 
 local _G = _G
-local pairs = pairs
-local unpack = unpack
+local next = _G.next
+local pairs = _G.pairs
+local select = _G.select
+local type = _G.type
 
+local BAG_ITEM_QUALITY_COLORS = _G.BAG_ITEM_QUALITY_COLORS
+local C_AzeriteEmpoweredItem_IsPowerSelected = _G.C_AzeriteEmpoweredItem.IsPowerSelected
+local EquipmentManager_GetItemInfoByLocation = _G.EquipmentManager_GetItemInfoByLocation
+local EquipmentManager_UnpackLocation = _G.EquipmentManager_UnpackLocation
+local GetContainerItemLink = _G.GetContainerItemLink
+local GetInventoryItemLink = _G.GetInventoryItemLink
+local GetItemInfo = _G.GetItemInfo
+local GetSpellInfo = _G.GetSpellInfo
+local hooksecurefunc = _G.hooksecurefunc
+local UnitExists = _G.UnitExists
 local UnitGUID = _G.UnitGUID
-local IsAddOnLoaded = _G.IsAddOnLoaded
-local f, fs, ff = C['media']['font'], 12, 'THINOUTLINE'
+local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 
-local InspectItems = {
-	'HeadSlot',
-	'NeckSlot',
-	'ShoulderSlot',
-	'',
-	'ChestSlot',
-	'WaistSlot',
-	'LegsSlot',
-	'FeetSlot',
-	'WristSlot',
-	'HandsSlot',
-	'Finger0Slot',
-	'Finger1Slot',
-	'Trinket0Slot',
-	'Trinket1Slot',
-	'BackSlot',
-	'MainHandSlot',
-	'SecondaryHandSlot',
+local inspectSlots = {
+	'Head',
+	'Neck',
+	'Shoulder',
+	'Shirt',
+	'Chest',
+	'Waist',
+	'Legs',
+	'Feet',
+	'Wrist',
+	'Hands',
+	'Finger0',
+	'Finger1',
+	'Trinket0',
+	'Trinket1',
+	'Back',
+	'MainHand',
+	'SecondaryHand',
 }
 
-function Module:CreateInspectTexture(slot, x, y)
-	local texture = slot:CreateTexture()
-	texture:SetPoint('BOTTOM', slot, x, y)
-	texture:SetTexCoord(unpack(D['IconCoord']))
-	texture:SetSize(14, 14)
+function Module:GetSlotAnchor(index)
+	if not index then return end
 
-	local backdrop = CreateFrame('Frame', nil, slot)
-	backdrop:SetFrameLevel(slot:GetFrameLevel())
-	backdrop:CreateBorder()
-	backdrop:SetAllPoints(texture)
-	backdrop:Hide()
-
-	return texture, backdrop
-end
-
-function Module:GetInspectPoints(id)
-    if not id then
-        return
-    end
-
-	if id <= 5 or (id == 9 or id == 15) then
-		return 40, 3, 18, 'BOTTOMLEFT' -- Left side
-	elseif (id >= 6 and id <= 8) or (id >= 10 and id <= 14) then
-		return -40, 3, 18, 'BOTTOMRIGHT' -- Right side
+	if index <= 5 or index == 9 or index == 15 then
+		return 'BOTTOMLEFT', 40, 20
+	elseif index == 16 then
+		return 'BOTTOMRIGHT', -40, 2
+	elseif index == 17 then
+		return 'BOTTOMLEFT', 40, 2
 	else
-		return 0, 45, 60, 'BOTTOM'
+		return 'BOTTOMRIGHT', -40, 20
 	end
 end
 
-function Module:UpdateInspectInfo(_, arg1)
-	Module:UpdatePageInfo(_G.InspectFrame, 'Inspect', arg1)
+function Module:CreateItemTexture(slot, relF, x, y)
+	local icon = slot:CreateTexture(nil, 'ARTWORK')
+	icon:SetPoint(relF, x, y)
+	icon:SetSize(14, 14)
+	icon:SetTexCoord(unpack(D['IconCoord']))
+
+	icon.bg = CreateFrame('Frame', nil, slot)
+	icon.bg:SetPoint('TOPLEFT', icon, -1, 1)
+	icon.bg:SetPoint('BOTTOMRIGHT', icon, 1, -1)
+	icon.bg:SetFrameLevel(3)
+	icon.bg:SetTemplate('Transparent')
+	icon.bg:Hide()
+
+	return icon
 end
 
-function Module:UpdateCharacterInfo(event)
-	if not C['misc']['ilvlcharacter'] then return end
-
-	Module:UpdatePageInfo(_G.CharacterFrame, 'Character', nil, event)
-end
-
-function Module:UpdateCharacterItemLevel()
-	Module:UpdateAverageString(_G.CharacterFrame, 'Character')
-end
-
-function Module:ClearPageInfo(frame, which)
-    if not (frame and frame.ItemLevelText) then
-        return
-    end
-    frame.ItemLevelText:SetText('')
-
-	for i = 1, 17 do
-		if i ~= 4 then
-			local inspectItem = _G[which..InspectItems[i]]
-			inspectItem.enchantText:SetText()
-            inspectItem.iLvlText:SetText()
-
-			for y = 1, 10 do
-				inspectItem['textureSlot'..y]:SetTexture()
-			end
-		end
-	end
-end
-
-function Module:ToggleItemLevelInfo(setupCharacterPage)
-	if setupCharacterPage then
-		Module:CreateSlotStrings(_G.CharacterFrame, 'Character')
-	end
-
-	if C['misc']['ilvlcharacter'] then
-		Module:RegisterEvent('PLAYER_EQUIPMENT_CHANGED', 'UpdateCharacterInfo')
-		Module:RegisterEvent('PLAYER_AVG_ITEM_LEVEL_UPDATE', 'UpdateCharacterItemLevel')
-		_G.CharacterStatsPane.ItemLevelFrame.Value:Hide()
-
-		if not _G.CharacterFrame.CharacterInfoHooked then
-			_G.CharacterFrame:HookScript('OnShow', Module.UpdateCharacterInfo)
-			_G.CharacterFrame.CharacterInfoHooked = true
-		end
-
-		if not setupCharacterPage then
-			Module:UpdateCharacterInfo()
-		end
-	else
-		Module:UnregisterEvent('PLAYER_EQUIPMENT_CHANGED')
-		Module:UnregisterEvent('PLAYER_AVG_ITEM_LEVEL_UPDATE')
-		_G.CharacterStatsPane.ItemLevelFrame.Value:Show()
-		Module:ClearPageInfo(_G.CharacterFrame, 'Character')
-	end
-
-	if C['misc']['ilvlcharacter'] then
-		Module:RegisterEvent('INSPECT_READY', 'UpdateInspectInfo')
-	else
-		Module:UnregisterEvent('INSPECT_READY')
-		Module:ClearPageInfo(_G.InspectFrame, 'Inspect')
-	end
-end
-
-function Module:UpdatePageStrings(i, iLevelDB, inspectItem, iLvl, enchant, gems, enchantColors, itemLevelColors)
-	iLevelDB[i] = iLvl
-
-	inspectItem.enchantText:SetText(enchant)
-	if enchantColors then
-		inspectItem.enchantText:SetTextColor(unpack(enchantColors))
-	end
-
-	inspectItem.iLvlText:SetText(iLvl)
-	if itemLevelColors then
-		inspectItem.iLvlText:SetTextColor(unpack(itemLevelColors))
-	end
-
-	for x = 1, 10 do
-		local texture = inspectItem['textureSlot'..x]
-		local backdrop = inspectItem['textureSlotBackdrop'..x]
-
-		if gems and next(gems) then
-			local index, gem = next(gems)
-			texture:SetTexture(gem)
-			backdrop:SetBackdropBorderColor()
-			backdrop:Show()
-			gems[index] = nil
-		else
-			texture:SetTexture()
-			backdrop:Hide()
-		end
-	end
-end
-
-function Module:UpdateAverageString(frame, which, iLevelDB)
-	local isCharPage = which == 'Character'
-	local AvgItemLevel = (isCharPage and D.GetPlayerItemLevel()) or D.CalculateAverageItemLevel(iLevelDB, frame.unit)
-	if AvgItemLevel then
-		if isCharPage then
-			frame.ItemLevelText:SetText(AvgItemLevel)
-			frame.ItemLevelText:SetTextColor(_G.CharacterStatsPane.ItemLevelFrame.Value:GetTextColor())
-		else
-			frame.ItemLevelText:SetFormattedText(_G.STAT_AVERAGE_ITEM_LEVEL..': %.2f', AvgItemLevel)
-		end
-	else
-        frame.ItemLevelText:SetText('')
-	end
-end
-
-function Module:TryGearAgain(frame, which, i, deepScan, iLevelDB, inspectItem)
-	D.Delay(0.05, function()
-        if which == 'Inspect' and (not frame or not frame.unit) then
-            return
-        end
-
-		local unit = (which == 'Character' and 'player') or frame.unit
-		local iLvl, enchant, gems, enchantColors, itemLevelColors = D.GetGearSlotInfo(unit, i, deepScan)
-        if iLvl == 'tooSoon' then
-            return
-        end
-
-		Module:UpdatePageStrings(i, iLevelDB, inspectItem, iLvl, enchant, gems, enchantColors, itemLevelColors)
-	end)
-end
-
-function Module:UpdatePageInfo(frame, which, guid, event)
-    if not (which and frame and frame.ItemLevelText) then
-        return
-    end
-
-	if which == 'Inspect' and (not frame or not frame.unit or (guid and frame:IsShown() and UnitGUID(frame.unit) ~= guid)) then
-        return
-    end
-
-	local iLevelDB = {}
-	local waitForItems
-	for i = 1, 17 do
-		if i ~= 4 then
-			local inspectItem = _G[which..InspectItems[i]]
-			inspectItem.enchantText:SetText()
-			inspectItem.iLvlText:SetText()
-
-			local unit = (which == 'Character' and 'player') or frame.unit
-			local iLvl, enchant, gems, enchantColors, itemLevelColors = D.GetGearSlotInfo(unit, i, true)
-			if iLvl == 'tooSoon' then
-				if not waitForItems then waitForItems = true end
-				Module:TryGearAgain(frame, which, i, true, iLevelDB, inspectItem)
-			else
-				Module:UpdatePageStrings(i, iLevelDB, inspectItem, iLvl, enchant, gems, enchantColors, itemLevelColors)
-			end
-		end
-	end
-
-	if event and event == 'PLAYER_EQUIPMENT_CHANGED' then
+function Module:CreateItemString(frame, strType)
+	if frame.fontCreated then
 		return
 	end
 
-	if waitForItems then
-		D.Delay(0.10, Module.UpdateAverageString, Module, frame, which, iLevelDB)
-	else
-		Module:UpdateAverageString(frame, which, iLevelDB)
+	for index, slot in pairs(inspectSlots) do
+		if index ~= 4 then
+			local slotFrame = _G[strType..slot..'Slot']
+			slotFrame.iLvlText = slotFrame:CreateFontString(nil, 'OVERLAY')
+			slotFrame.iLvlText:SetFont(f, fs, ff)
+			slotFrame.iLvlText:SetShadowOffset(D['mult'], -D['mult'])
+			slotFrame.iLvlText:SetShadowColor(0, 0, 0, 0.4)
+			slotFrame.iLvlText:ClearAllPoints()
+			slotFrame.iLvlText:SetPoint('BOTTOMLEFT', slotFrame, 1, 1)
+			local relF, x, y = Module:GetSlotAnchor(index)
+			slotFrame.enchantText = slotFrame:CreateFontString(nil, 'OVERLAY')
+			slotFrame.enchantText:SetFont(f, fs, ff)
+			slotFrame.enchantText:SetShadowOffset(D['mult'], -D['mult'])
+			slotFrame.enchantText:SetShadowColor(0, 0, 0, 0.4)
+			slotFrame.enchantText:ClearAllPoints()
+			slotFrame.enchantText:SetPoint(relF, slotFrame, x, y)
+			slotFrame.enchantText:SetTextColor(0, 1, 0)
+			for i = 1, 10 do
+				local offset = (i - 1) * 20 + 5
+				local iconX = x > 0 and x + offset or x - offset
+				local iconY = index > 15 and 20 or 2
+				slotFrame['textureIcon'..i] = Module:CreateItemTexture(slotFrame, relF, iconX, iconY)
+			end
+		end
 	end
+
+	frame.fontCreated = true
 end
 
-function Module:CreateSlotStrings(frame, which)
-    if not (frame and which) then
-        return
-    end
+local azeriteSlots = {
+	[1] = true,
+	[3] = true,
+	[5] = true,
+}
 
-	if which == 'Inspect' then
-		frame.ItemLevelText = _G.InspectModelFrame:CreateFontString(nil, 'ARTWORK')
-		frame.ItemLevelText:SetPoint('TOP', 0, -4)
-	else
-		frame.ItemLevelText = _G.CharacterStatsPane.ItemLevelFrame:CreateFontString(nil, 'ARTWORK')
-		frame.ItemLevelText:SetPoint('BOTTOM', _G.CharacterStatsPane.ItemLevelFrame.Value, 'BOTTOM', 0, -1)
+local locationCache = {}
+local function GetSlotItemLocation(id)
+	if not azeriteSlots[id] then
+		return
 	end
 
-	frame.ItemLevelText:SetFont(C['media']['font'], 14, 'THINOUTLINE', which == 'Inspect' and 12 or 20)
-	frame.ItemLevelText:SetShadowOffset(D['mult'], -D['mult'])
-	frame.ItemLevelText:SetShadowColor(0, 0, 0, 0.4)
+	local itemLocation = locationCache[id]
+	if not itemLocation then
+		itemLocation = ItemLocation:CreateFromEquipmentSlot(id)
+		locationCache[id] = itemLocation
+	end
+	return itemLocation
+end
 
-	for i, s in pairs(InspectItems) do
-		if i ~= 4 then
-			local slot = _G[which..s]
-			local x, y, z, justify = Module:GetInspectPoints(i)
-			slot.iLvlText = slot:CreateFontString(nil, 'OVERLAY')
-			slot.iLvlText:SetFont(f, fs, ff)
-			slot.iLvlText:SetShadowOffset(D['mult'], -D['mult'])
-			slot.iLvlText:SetShadowColor(0, 0, 0, 0.4)
-			slot.iLvlText:SetPoint('BOTTOM', slot, x, y)
+function Module:ItemLevel_UpdateTraits(button, id, link)
+	local empoweredItemLocation = GetSlotItemLocation(id)
+	if not empoweredItemLocation then
+		return
+	end
 
-			slot.enchantText = slot:CreateFontString(nil, 'OVERLAY')
-			slot.enchantText:SetFont(f, fs, ff)
+	local allTierInfo = D:GetModule('TooltipAzerite'):Azerite_UpdateTier(link)
+	if not allTierInfo then
+		return
+	end
 
-			if i == 16 or i == 17 then
-				slot.enchantText:SetPoint(i == 16 and 'BOTTOMRIGHT' or 'BOTTOMLEFT', slot, i==16 and -40 or 40, 3)
-			else
-				slot.enchantText:SetPoint(justify, slot, x + (justify == 'BOTTOMLEFT' and 5 or -5), z)
-			end
+	for i = 1, 2 do
+		local powerIDs = allTierInfo[i].azeritePowerIDs
+		if not powerIDs or powerIDs[1] == 13 then
+			break
+		end
 
-			for u = 1, 10 do
-				local offset = 8 + (u * 16)
-				local newX = ((justify == 'BOTTOMLEFT' or i == 17) and x + offset) or x - offset
-				slot['textureSlot'..u], slot['textureSlotBackdrop'..u] = Module:CreateInspectTexture(slot, newX, --[[newY or]] y)
+		for _, powerID in pairs(powerIDs) do
+			local selected = C_AzeriteEmpoweredItem_IsPowerSelected(empoweredItemLocation, powerID)
+			if selected then
+				local spellID = D:GetModule('TooltipAzerite'):Azerite_PowerToSpell(powerID)
+				local name, _, icon = GetSpellInfo(spellID)
+				local texture = button['textureIcon'..i]
+				if name and texture then
+					texture:SetTexture(icon)
+					texture.bg:Show()
+				end
 			end
 		end
 	end
 end
 
-function Module:SetupInspectPageInfo()
-	Module:CreateSlotStrings(_G.InspectFrame, 'Inspect')
-end
+function Module:ItemLevel_SetupLevel(frame, strType, unit)
+	if not UnitExists(unit) then
+		return
+	end
 
-function Module:HideInspectControls()
-	_G.InspectModelFrameControlFrame:HookScript('OnShow', _G.InspectModelFrameControlFrame.Hide)
-end
+	Module:CreateItemString(frame, strType)
 
-function Module:ADDON_LOADED(_, addon)
-	if addon == 'Blizzard_InspectUI' then
-		Module:SetupInspectPageInfo()
-		Module:HideInspectControls()
-		self:UnregisterEvent('ADDON_LOADED')
+	for index, slot in pairs(inspectSlots) do
+		if index ~= 4 then
+			local slotFrame = _G[strType..slot..'Slot']
+			slotFrame.iLvlText:SetText('')
+			slotFrame.enchantText:SetText('')
+			for i = 1, 10 do
+				local texture = slotFrame['textureIcon'..i]
+				texture:SetTexture(nil)
+				texture.bg:Hide()
+			end
+
+			local link = GetInventoryItemLink(unit, index)
+			if link then
+				local quality = select(3, GetItemInfo(link))
+				local info = D.GetItemLevel(link, unit, index, C['misc']['gemenchantinfo'])
+				local infoType = type(info)
+				local level
+				if infoType == 'table' then
+					level = info.iLvl
+				else
+					level = info
+				end
+
+				if level and level > 1 and quality then
+					local color = BAG_ITEM_QUALITY_COLORS[quality]
+					slotFrame.iLvlText:SetText(level)
+					slotFrame.iLvlText:SetTextColor(color.r, color.g, color.b)
+				end
+
+				if infoType == 'table' then
+					local enchant = info.enchantText
+					if enchant then
+						slotFrame.enchantText:SetText(enchant)
+					end
+
+					local gemStep, essenceStep = 1, 1
+					for i = 1, 10 do
+						local texture = slotFrame['textureIcon'..i]
+						local bg = texture.bg
+						local gem = info.gems and info.gems[gemStep]
+						local essence = not gem and (info.essences and info.essences[essenceStep])
+						if gem then
+							texture:SetTexture(gem)
+							bg:SetBackdropBorderColor()
+							bg:Show()
+
+							gemStep = gemStep + 1
+						elseif essence and next(essence) then
+							local r = essence[4]
+							local g = essence[5]
+							local b = essence[6]
+							if r and g and b then
+								bg:SetBackdropBorderColor(r, g, b)
+							else
+								bg:SetBackdropBorderColor()
+							end
+
+							local selected = essence[1]
+							texture:SetTexture(selected)
+							bg:Show()
+
+							essenceStep = essenceStep + 1
+						end
+					end
+				end
+
+				if strType == 'Character' then
+					Module:ItemLevel_UpdateTraits(slotFrame, index, link)
+				end
+			end
+		end
 	end
 end
 
-function Module:OnInitialize()
-	self:ToggleItemLevelInfo(true)
+function Module:ItemLevel_UpdatePlayer()
+	Module:ItemLevel_SetupLevel(CharacterFrame, 'Character', 'player')
+end
 
-	if IsAddOnLoaded('Blizzard_InspectUI') then
-		Module:SetupInspectPageInfo()
-		Module:HideInspectControls()
+function Module:ItemLevel_UpdateInspect(...)
+	local guid = ...
+	if InspectFrame and InspectFrame.unit and UnitGUID(InspectFrame.unit) == guid then
+		Module:ItemLevel_SetupLevel(InspectFrame, 'Inspect', InspectFrame.unit)
+	end
+end
+
+function Module:ItemLevel_FlyoutUpdate(bag, slot, quality)
+	if not self.iLvl then
+		self.iLvl = self:CreateFontString(nil, 'OVERLAY')
+		self.iLvl:SetFont(f, fs, ff)
+		self.iLvl:SetShadowOffset(D['mult'], -D['mult'])
+		self.iLvl:SetShadowColor(0, 0, 0, 0.4)
+		self.iLvl:SetPoint('BOTTOMLEFT', 1, 1)
+	end
+
+	local link, level
+	if bag then
+		link = GetContainerItemLink(bag, slot)
+		level = D.GetItemLevel(link, bag, slot)
 	else
-		self:RegisterEvent('ADDON_LOADED')
+		link = GetInventoryItemLink('player', slot)
+		level = D.GetItemLevel(link, 'player', slot)
 	end
+
+	local color = BAG_ITEM_QUALITY_COLORS[quality or 1]
+	self.iLvl:SetText(level)
+	self.iLvl:SetTextColor(color.r, color.g, color.b)
+end
+
+function Module:ItemLevel_FlyoutSetup()
+	local location = self.location
+	if not location or location >= EQUIPMENTFLYOUT_FIRST_SPECIAL_LOCATION then
+		if self.iLvl then self.iLvl:SetText('') end
+		return
+	end
+
+	local _, _, bags, voidStorage, slot, bag = EquipmentManager_UnpackLocation(location)
+	if voidStorage then return end
+	local quality = select(13, EquipmentManager_GetItemInfoByLocation(location))
+	if bags then
+		Module.ItemLevel_FlyoutUpdate(self, bag, slot, quality)
+	else
+		Module.ItemLevel_FlyoutUpdate(self, nil, slot, quality)
+	end
+end
+
+function Module:ItemLevel_ScrappingUpdate()
+	if not self.iLvl then
+		--self.iLvl = K.CreateFontString(self, 12, '', 'OUTLINE', false, 'BOTTOMLEFT', 1, 1)
+		self.iLvl = self:CreateFontString(nil, 'OVERLAY')
+		self.iLvl:SetFont(f, fs, ff)
+		self.iLvl:SetShadowOffset(D['mult'], -D['mult'])
+		self.iLvl:SetShadowColor(0, 0, 0, 0.4)
+		self.iLvl:SetPoint('BOTTOMLEFT', 1, 1)
+	end
+
+	if not self.itemLink then
+		self.iLvl:SetText('')
+		return
+	end
+
+	local quality = 1
+	if self.itemLocation and not self.item:IsItemEmpty() and self.item:GetItemName() then
+		quality = self.item:GetItemQuality()
+	end
+	local level = D.GetItemLevel(self.itemLink)
+	local color = BAG_ITEM_QUALITY_COLORS[quality]
+	self.iLvl:SetText(level)
+	self.iLvl:SetTextColor(color.r, color.g, color.b)
+end
+
+function Module.ItemLevel_ScrappingShow(event, addon)
+	if addon == 'Blizzard_ScrappingMachineUI' then
+		for button in pairs(ScrappingMachineFrame.ItemSlots.scrapButtons.activeObjects) do
+			hooksecurefunc(button, 'RefreshIcon', Module.ItemLevel_ScrappingUpdate)
+		end
+
+		D:UnregisterEvent(event, Module.ItemLevel_ScrappingShow)
+	end
+end
+
+function Module:OnEnable()
+	if not C['misc']['itemlevel'] then return end
+
+	CharacterFrame:HookScript('OnShow', Module.ItemLevel_UpdatePlayer)
+	D:RegisterEvent('PLAYER_EQUIPMENT_CHANGED', Module.ItemLevel_UpdatePlayer)
+	D:RegisterEvent('INSPECT_READY', self.ItemLevel_UpdateInspect)
+	hooksecurefunc('EquipmentFlyout_DisplayButton', self.ItemLevel_FlyoutSetup)
+	D:RegisterEvent('ADDON_LOADED', self.ItemLevel_ScrappingShow)
 end

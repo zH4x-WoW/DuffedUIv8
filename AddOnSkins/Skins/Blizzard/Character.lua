@@ -57,6 +57,11 @@ function AS:Blizzard_Character()
 		self.AzeriteTexture:SetOutside()
 		self.AzeriteTexture:SetDrawLayer("BORDER", 1)
 	end
+	
+	local function UpdateCorruption(self)
+		local itemLink = GetInventoryItemLink("player", self:GetID())
+		self.IconOverlay:SetShown(itemLink and IsCorruptedItem(itemLink))
+	end
 
 	for _, Slot in pairs({_G.PaperDollItemsFrame:GetChildren()}) do
 		if Slot:IsObjectType("Button") then
@@ -76,6 +81,12 @@ function AS:Blizzard_Character()
 			end
 
 			Slot.ignoreTexture:SetTexture([[Interface\PaperDollInfoFrame\UI-GearManager-LeaveItem-Transparent]])
+			Slot.CorruptedHighlightTexture:SetAtlas("Nzoth-charactersheet-item-glow")
+
+			Slot.IconOverlay:SetAtlas("Nzoth-inventory-icon")
+			Slot.IconOverlay:SetInside()
+			Slot:HookScript("OnShow", UpdateCorruption)
+			Slot:HookScript("OnEvent", UpdateCorruption)
 			Slot.IconBorder:SetAlpha(0)
 			hooksecurefunc(Slot.IconBorder, 'SetVertexColor', function(self, r, g, b) Slot:SetBackdropBorderColor(r, g, b) end)
 			hooksecurefunc(Slot.IconBorder, 'Hide', function(self) Slot:SetBackdropBorderColor(unpack(AS.BorderColor)) end)

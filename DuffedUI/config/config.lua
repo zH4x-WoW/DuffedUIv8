@@ -105,8 +105,8 @@ C['actionbar'] = {
 	['SidebarButtonsize'] = 23,
 	['petbuttonsize'] = 29,
 	['buttonspacing'] = 4,
-	['shapeshiftborder'] = true,
 	['shapeshiftmouseover'] = false,
+	['shapeshiftmouseovervalue'] = 0.25,
 	['borderhighlight'] = false,
 	['Leftsidebars'] = false,
 	['Rightsidebars'] = false,
@@ -236,7 +236,6 @@ C['misc'] = {
 	['sesset4'] = 4,
 	['combatanimation'] = true,
 	['flightpoint'] = true,
-	['ilvlcharacter'] = true,
 	['durabilitycharacter'] = true,
 	['acm_screen'] = true,
 	['AFKCamera'] = true,
@@ -247,6 +246,12 @@ C['misc'] = {
 	['azerite'] = true,
 	['azeritewidth'] = 5,
 	['azeriteheight'] = 166,
+	['corruption'] = true,
+	['corruptioneffects'] = true,
+	['corruptionwidth'] = 5,
+	['corruptionheight'] = 166,
+	['gemenchantinfo'] = true,
+	['itemlevel'] = true,
 }
 
 C['duffed'] = {
@@ -294,6 +299,7 @@ C['tooltip'] = {
 	['SpellID'] = false,
 	['ShowMount'] = true,
 	['FactionIcon'] = true,
+	['CorruptionRank'] = true,
 }
 
 C['merchant'] = {

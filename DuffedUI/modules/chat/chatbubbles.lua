@@ -163,7 +163,7 @@ function Updater:InitBubble(bubble)
 	local space = getPadding()
 	bubbles[bubble] = CreateFrame('Frame', nil, self.BubbleBox)
 	bubbles[bubble]:Hide()
-	bubbles[bubble]:SetFrameStrata('TOOLTIP')
+	bubbles[bubble]:SetFrameStrata('BACKGROUND')
 	bubbles[bubble]:SetFrameLevel(numBubbles % 128 + 1)
 	bubbles[bubble]:SetBackdrop(getBackdrop(1))
 

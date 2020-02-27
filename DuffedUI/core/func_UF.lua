@@ -738,6 +738,91 @@ D['Debuffids'] = {
 	[GetSpellInfo(302384)] = 3, -- Static Discharge
 
 	-- Raids
+	-- Nyalotha
+	-- Wrathion
+	[GetSpellInfo(313250)] = 3, -- Creeping Madness
+	[GetSpellInfo(306163)] = 3, -- Incineration
+	[GetSpellInfo(306015)] = 3, -- Searing Armor [tank]
+
+	-- Maut
+	[GetSpellInfo(307805)] = 3, -- Devour Magic
+	[GetSpellInfo(314337)] = 3, -- Ancient Curse
+	[GetSpellInfo(306301)] = 3, -- Forbidden Mana
+	[GetSpellInfo(314992)] = 3, -- Darin Essence
+	[GetSpellInfo(307399)] = 3, -- Shadow Claws [tank]
+
+	-- Prophet Skitra
+	[GetSpellInfo(306387)] = 3, -- Shadow Shock
+	[GetSpellInfo(313276)] = 3, -- Shred Psyche
+
+	-- Dark Inquisitor
+	[GetSpellInfo(306311)] = 3, -- Soul Flay
+	[GetSpellInfo(312406)] = 3, -- Void Woken
+	[GetSpellInfo(311551)] = 3, -- Abyssal Strike [tank]
+
+	-- Hivemind
+	[GetSpellInfo(313461)] = 3, -- Corrosion
+	[GetSpellInfo(313672)] = 3, -- Acid Pool
+	[GetSpellInfo(313460)] = 3, -- Nullification
+
+	-- Shadhar
+	[GetSpellInfo(307471)] = 3, -- Crush [tank]
+	[GetSpellInfo(307472)] = 3, -- Dissolve [tank]
+	[GetSpellInfo(307358)] = 3, -- Debilitating Spit
+	[GetSpellInfo(306928)] = 3, -- Umbral Breath
+	[GetSpellInfo(312530)] = 3, -- Entropic Breath
+	[GetSpellInfo(306929)] = 3, -- Bubbling Breath
+
+	-- Drest
+	[GetSpellInfo(310406)] = 3, -- Void Glare
+	[GetSpellInfo(310277)] = 3, -- Volatile Seed [tank]
+	[GetSpellInfo(310309)] = 3, -- Volatile Vulnerability
+	[GetSpellInfo(310358)] = 3, -- Mutterings of Insanity
+	[GetSpellInfo(310552)] = 3, -- Mind Flay
+	[GetSpellInfo(310478)] = 3, -- Void Miasma
+
+	-- Ilgy
+	[GetSpellInfo(309961)] = 3, -- Eye of Nzoth [tank]
+	[GetSpellInfo(310322)] = 3, -- Morass of Corruption
+	[GetSpellInfo(311401)] = 3, -- Touch of the Corruptor
+	[GetSpellInfo(314396)] = 3, -- Cursed Blood
+	[GetSpellInfo(275269)] = 3, -- Fixate
+	[GetSpellInfo(312486)] = 3, -- Recurring Nightmare
+
+	-- Vexiona
+	[GetSpellInfo(307317)] = 3, -- Encroaching Shadows
+	[GetSpellInfo(307359)] = 3, -- Despair
+	[GetSpellInfo(315932)] = 3, -- Brutal Smash
+	[GetSpellInfo(307218)] = 3, -- Twilight Decimator
+	[GetSpellInfo(307284)] = 3, -- Terrifying Presence
+	[GetSpellInfo(307421)] = 3, -- Annihilation
+
+	-- Raden
+	[GetSpellInfo(306819)] = 3, -- Nullifying Strike [GetSpellInfo(tank]
+	[GetSpellInfo(306279)] = 3, -- Insanity Exposure
+	[GetSpellInfo(315258)] = 3, -- Dread Inferno
+	[GetSpellInfo(306257)] = 3, -- Unstable Vita
+	[GetSpellInfo(313227)] = 3, -- Decaying Wound
+	[GetSpellInfo(310019)] = 3, -- Charged Bonds
+	[GetSpellInfo(316065)] = 3, -- Corrupted Existence
+
+	-- Carapace
+	[GetSpellInfo(315954)] = 3, -- Black Scar [tank]
+	[GetSpellInfo(306973)] = 3, -- Madness
+	[GetSpellInfo(316848)] = 3, -- Adaptive Membrane
+	[GetSpellInfo(307044)] = 3, -- Nightmare Antibody
+	[GetSpellInfo(313364)] = 3, -- Mental Decay
+	[GetSpellInfo(317627)] = 3, -- Infinite Void
+
+	-- Nzoth
+	[GetSpellInfo(318442)] = 3, -- Paranoia
+	[GetSpellInfo(313400)] = 3, -- Corrupted Mind
+	[GetSpellInfo(313793)] = 3, -- Flames of Insanity
+	[GetSpellInfo(316771)] = 3, -- Mindwrack
+	[GetSpellInfo(314889)] = 3, -- Probe Mind
+	[GetSpellInfo(317112)] = 3, -- Evoke Anguish
+	[GetSpellInfo(318976)] = 3, -- Stupefying Glare
+
 	-- Eternal Palace
 	--Lady Ashvane
 	[GetSpellInfo(296693)] = 3, -- Waterlogged
@@ -816,7 +901,7 @@ D['Debuffids'] = {
 	[GetSpellInfo(301078)] = 3, -- Charged Spear
 	[GetSpellInfo(298014)] = 3, -- Cold Blast
 	[GetSpellInfo(298018)] = 3, -- Frozen
-
+	
 	-- Uldir
 	-- MOTHER
 	[GetSpellInfo(268277)] = 3, -- Purifying Flame

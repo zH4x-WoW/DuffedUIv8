@@ -35,6 +35,7 @@ local SortBankBags = _G.SortBankBags
 local SortReagentBankBags = _G.SortReagentBankBags
 
 local deleteEnable, favouriteEnable
+local IsCorruptedItem = IsCorruptedItem
 local move = D['move']
 
 local sortCache = {}
@@ -671,11 +672,9 @@ function Module:OnEnable()
 		self.Icon:SetAllPoints()
 		self.Icon:SetTexCoord(unpack(D['IconCoord']))
 		self.Count:SetPoint("BOTTOMRIGHT", 1, 1)
-		--self.Count:SetFontObject(bagsFont)
 		self.Count:SetFont(C['media']['font'], 11, 'OUTLINE')
 
 		self:CreateBorder()
-		--self:CreateInnerShadow()
 
 		self.junkIcon = self:CreateTexture(nil, "ARTWORK")
 		self.junkIcon:SetAtlas("bags-junkcoin")
@@ -685,7 +684,7 @@ function Module:OnEnable()
 		self.ScrapIcon = self:CreateTexture(nil, "OVERLAY")
 		self.ScrapIcon:SetAtlas("bags-icon-scrappable")
 		self.ScrapIcon:SetSize(14, 12)
-		self.ScrapIcon:SetPoint("TOPLEFT", 1, -1)
+		self.ScrapIcon:SetPoint("TOPRIGHT", 1, -1)
 
 		self.Quest = self:CreateTexture(nil, "ARTWORK")
 		self.Quest:SetSize(26, 26)
@@ -697,15 +696,18 @@ function Module:OnEnable()
 		self.Azerite:SetAtlas("AzeriteIconFrame")
 		self.Azerite:SetAllPoints()
 
+		self.Corrupt = self:CreateTexture(nil, "ARTWORK")
+		self.Corrupt:SetAtlas("Nzoth-inventory-icon")
+		self.Corrupt:SetAllPoints()
+		
+		local parentFrame = CreateFrame("Frame", nil, self)
+		
 		self.Favourite = self:CreateTexture(nil, "OVERLAY", nil, 2)
 		self.Favourite:SetAtlas("collections-icon-favorites")
 		self.Favourite:SetSize(24, 24)
 		self.Favourite:SetPoint("TOPLEFT", -12, 9)
 
 		if showItemLevel then
-			--self.iLvl = CreateFontString(self, 12, "", "OUTLINE", false, "BOTTOMLEFT", 1, 1)
-			--self.iLvl:SetFontObject(bagsFont)
-			--self.iLvl:SetFont(select(1, self.iLvl:GetFont()), 12, select(3, self.iLvl:GetFont()))
 			self.iLvl = self:CreateFontString(nil, 'OVERLAY')
 			self.iLvl:SetFont(C['media']['font'], 11, 'OUTLINE')
 			self.iLvl:SetPoint("BOTTOMLEFT", 1, 1)
@@ -765,15 +767,6 @@ function Module:OnEnable()
 		else
 			self.junkIcon:SetAlpha(0)
 		end
-
-		--[[if self.UpgradeIcon then
-			local itemIsUpgrade = _G.IsContainerItemAnUpgrade(self:GetParent():GetID(), self:GetID())
-			if not itemIsUpgrade or itemIsUpgrade == nil then
-				self.UpgradeIcon:SetShown(false)
-			else
-				self.UpgradeIcon:SetShown(itemIsUpgrade or true)
-			end
-		end]]
 		
 		if self.UpgradeIcon then
 			Module.UpdateItemUpgradeIcon(self)
@@ -793,7 +786,13 @@ function Module:OnEnable()
 		else
 			self.Azerite:SetAlpha(0)
 		end
-
+		
+		if item.link and IsCorruptedItem(item.link) then
+			self.Corrupt:SetAlpha(1)
+		else
+			self.Corrupt:SetAlpha(0)
+		end
+		
 		if DuffedUIData.FavouriteItems[item.id] then
 			self.Favourite:SetAlpha(1)
 		else
