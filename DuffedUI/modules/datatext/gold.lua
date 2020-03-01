@@ -58,8 +58,9 @@ local function OnEvent(self, event)
 	if DuffedUIData == nil then DuffedUIData = {} end
 	if DuffedUIData['gold'] == nil then DuffedUIData['gold'] = {} end
 	if DuffedUIData['gold'][myPlayerRealm] == nil then DuffedUIData['gold'][myPlayerRealm] = {} end
-	DuffedUIData['gold'][myPlayerRealm] = DuffedUIData['gold'][myPlayerRealm] or {}
-	DuffedUIData['gold'][myPlayerRealm][myPlayerName] = D['Class']
+	if DuffedUIData['Class'] == nil then DuffedUIData['Class'] = {} end
+	if DuffedUIData['Class'][myPlayerRealm] == nil then DuffedUIData['Class'][myPlayerRealm] = {} end
+	DuffedUIData['Class'][myPlayerRealm][myPlayerName] = D['Class']
 	DuffedUIData['gold'][myPlayerRealm][myPlayerName] = GetMoney()
 	OldMoney = NewMoney
 end
@@ -109,7 +110,7 @@ Stat:SetScript('OnEnter', function(self)
 	local thisRealmList = DuffedUIData.gold[myPlayerRealm]
 	for k,_ in pairs(thisRealmList) do
 		if thisRealmList[k] then
-			local class = D['Class'] or 'PRIEST'
+			local class = DuffedUIData['Class'][myPlayerRealm][k] or 'PRIEST'
 			local color = class and (_G.CUSTOM_CLASS_COLORS and _G.CUSTOM_CLASS_COLORS[class] or _G.RAID_CLASS_COLORS[class])
 			tinsert (myGold,
 				{
@@ -197,7 +198,7 @@ Stat:SetScript('OnEnter', function(self)
 		D['Currency'](1717)
 		D['Currency'](1718)
 		D['Currency'](1721) -- Patch 8.2
-		D['Currency'](1755, false, true) -- Patch 8.3
+		D['Currency'](1755) -- Patch 8.3
 		D['Currency'](1719)
 	end
 
