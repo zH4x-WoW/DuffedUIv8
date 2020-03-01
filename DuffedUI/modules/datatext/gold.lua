@@ -58,8 +58,8 @@ local function OnEvent(self, event)
 	if DuffedUIData == nil then DuffedUIData = {} end
 	if DuffedUIData['gold'] == nil then DuffedUIData['gold'] = {} end
 	if DuffedUIData['gold'][myPlayerRealm] == nil then DuffedUIData['gold'][myPlayerRealm] = {} end
-	DuffedUIData['Class'][myPlayerRealm] = DuffedUIData['Class'][myPlayerRealm] or {}
-	DuffedUIData['Class'][myPlayerRealm][myPlayerName] = D.Class
+	DuffedUIData['gold'][myPlayerRealm] = DuffedUIData['gold'][myPlayerRealm] or {}
+	DuffedUIData['gold'][myPlayerRealm][myPlayerName] = D['Class']
 	DuffedUIData['gold'][myPlayerRealm][myPlayerName] = GetMoney()
 	OldMoney = NewMoney
 end
@@ -109,7 +109,7 @@ Stat:SetScript('OnEnter', function(self)
 	local thisRealmList = DuffedUIData.gold[myPlayerRealm]
 	for k,_ in pairs(thisRealmList) do
 		if thisRealmList[k] then
-			local class = DuffedUIData['Class'][myPlayerRealm][k] or 'PRIEST'
+			local class = D['Class'] or 'PRIEST'
 			local color = class and (_G.CUSTOM_CLASS_COLORS and _G.CUSTOM_CLASS_COLORS[class] or _G.RAID_CLASS_COLORS[class])
 			tinsert (myGold,
 				{
