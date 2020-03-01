@@ -63,13 +63,19 @@ function AS:Blizzard_Gossip()
 
 		GossipGreetingText:SetTextColor(1, 1, 1)
 
+		for i = 1, _G.NUMGOSSIPBUTTONS do
+			_G["GossipTitleButton"..i]:GetFontString():SetTextColor(1, 1, 1)
+		end
+
+		_G.GossipGreetingText:SetTextColor(1, 1, 1)
+
 		hooksecurefunc("GossipFrameUpdate", function()
-			for i = 1, NUMGOSSIPBUTTONS do
+			for i = 1, _G.NUMGOSSIPBUTTONS do
 				local button = _G["GossipTitleButton"..i]
 				if button:GetFontString() then
 					local Text = button:GetFontString():GetText()
-					if Text and strmatch(Text:GetText(), '|c[Ff][Ff]%x%x%x%x%x%x') then
-						button:GetFontString():SetText(gsub(Text, '|c[Ff][Ff]%x%x%x%x%x%x', '|cffffe519'))
+					if Text and strfind(Text, '|cff000000') then
+						button:GetFontString():SetText(gsub(Text, '|cff000000', '|cffffe519'))
 					end
 				end
 			end
