@@ -210,8 +210,8 @@ function AS:Blizzard_Quest()
 	QuestLogPopupDetailFrame.ShowMapButton:SetSize(QuestLogPopupDetailFrame.ShowMapButton:GetWidth() - 30, QuestLogPopupDetailFrame.ShowMapButton:GetHeight() - 5)
 
 	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(QuestFrame, parentFrame, portrait, text, name, x, y)
-		QuestNPCModel:ClearAllPoints()
-		QuestNPCModel:SetPoint("TOPLEFT", QuestFrame, "TOPRIGHT", x + 10, y)
+		QuestModelScene:ClearAllPoints()
+		QuestModelScene:SetPoint("TOPLEFT", QuestFrame, "TOPRIGHT", x + 10, y)
 	end)
 
 	--Spell Rewards
