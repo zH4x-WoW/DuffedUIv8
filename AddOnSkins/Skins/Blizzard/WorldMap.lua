@@ -35,6 +35,26 @@ function AS:Blizzard_AlliedRacesUI(event, addon)
 end
 
 function AS:Blizzard_Gossip()
+	local gsub = string.gsub
+
+	NORMAL_QUEST_DISPLAY = gsub(NORMAL_QUEST_DISPLAY, "000000", "ffffff")
+	TRIVIAL_QUEST_DISPLAY = gsub(TRIVIAL_QUEST_DISPLAY, "000000", "ffffff")
+	IGNORED_QUEST_DISPLAY = gsub(IGNORED_QUEST_DISPLAY, "000000", "ffffff")
+
+	GossipGreetingText:SetTextColor(1, 1, 1)
+	NPCFriendshipStatusBar:GetRegions():Hide()
+	NPCFriendshipStatusBarNotch1:SetColorTexture(0, 0, 0)
+	NPCFriendshipStatusBarNotch1:SetSize(1, 16)
+	NPCFriendshipStatusBarNotch2:SetColorTexture(0, 0, 0)
+	NPCFriendshipStatusBarNotch2:SetSize(1, 16)
+	NPCFriendshipStatusBarNotch3:SetColorTexture(0, 0, 0)
+	NPCFriendshipStatusBarNotch3:SetSize(1, 16)
+	NPCFriendshipStatusBarNotch4:SetColorTexture(0, 0, 0)
+	NPCFriendshipStatusBarNotch4:SetSize(1, 16)
+	select(7, NPCFriendshipStatusBar:GetRegions()):Hide()
+	NPCFriendshipStatusBar.icon:SetPoint("TOPLEFT", -30, 7)
+
+	GossipFrameInset:Hide()
 	AS:SkinFrame(GossipFrame)
 	GossipFrame:SetHeight(500)
 
@@ -52,35 +72,24 @@ function AS:Blizzard_Gossip()
 		GossipGreetingScrollFrame.Background:SetTexture('Interface\\QuestFrame\\QuestBG')
 		GossipGreetingScrollFrame.Background:SetInside()
 		GossipGreetingScrollFrame.Background:SetTexCoord(0, .585, 0.02, .655)
-	else
-		local r, g, b = unpack(AS.ClassColor)
+	end	
 
-		for i = 1, NUMGOSSIPBUTTONS do
-			_G["GossipTitleButton"..i]:GetFontString():SetTextColor(1, 1, 1)
-			_G["GossipTitleButton"..i]:GetHighlightTexture():SetColorTexture(r, g, b, .3)
-			_G["GossipTitleButton"..i]:GetHighlightTexture():SetInside(_G["GossipTitleButton"..i], 2, 0)
-		end
-
-		GossipGreetingText:SetTextColor(1, 1, 1)
-
-		for i = 1, _G.NUMGOSSIPBUTTONS do
-			_G["GossipTitleButton"..i]:GetFontString():SetTextColor(1, 1, 1)
-		end
-
-		_G.GossipGreetingText:SetTextColor(1, 1, 1)
-
-		hooksecurefunc("GossipFrameUpdate", function()
-			for i = 1, _G.NUMGOSSIPBUTTONS do
-				local button = _G["GossipTitleButton"..i]
-				if button:GetFontString() then
-					local Text = button:GetFontString():GetText()
-					if Text and strfind(Text, '|cff000000') then
-						button:GetFontString():SetText(gsub(Text, '|cff000000', '|cffffe519'))
-					end
-				end
+	local function resetFontString()
+		local index = 1
+		local titleButton = _G["GossipTitleButton"..index]
+		while titleButton do
+			if titleButton:GetText() ~= nil then
+				titleButton:SetText(gsub(titleButton:GetText(), ":32:32:0:0", ":32:32:0:0:64:64:5:59:5:59"))
+				titleButton:GetFontString():SetTextColor(1, 1, 1)
 			end
-		end)
+			index = index + 1
+			titleButton = _G["GossipTitleButton"..index]
+		end
 	end
+
+	GossipFrame:HookScript("OnShow", function()
+		C_Timer.After(.01, resetFontString)
+	end)
 
 	AS:SkinStatusBar(NPCFriendshipStatusBar)
 end
@@ -230,9 +239,6 @@ function AS:Blizzard_Quest()
 		AS:StripTextures(spellRewardFrame)
 		AS:SkinTexture(icon, true)
 		nameFrame:Hide()
-
---		bg:SetPoint("TOPLEFT", icon, "TOPRIGHT", 0, 2)
---		bg:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 101, -1)
 	end
 
 	-- Title Reward
@@ -245,9 +251,6 @@ function AS:Blizzard_Quest()
 		for i = 2, 4 do
 			select(i, frame:GetRegions()):Hide()
 		end
-
---		bg:SetPoint("TOPLEFT", icon, "TOPRIGHT", 0, 2)
---		bg:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 220, -1)
 	end
 
 	-- Follower Rewards
@@ -269,12 +272,10 @@ function AS:Blizzard_Quest()
 					portrait:ClearAllPoints()
 					portrait:SetPoint("TOPLEFT", 2, -5)
 					reward.BG:Hide()
-					--bg:SetPoint("TOPLEFT", 0, -3)
-					--bg:SetPoint("BOTTOMRIGHT", 2, 7)
 					reward.styled = true
 				end
 				if portrait then
-					--portrait.squareBG:SetBackdropBorderColor(GetItemQualityColor(portrait.quality or 1))
+
 				end
 			end
 		end
@@ -313,18 +314,6 @@ function AS:Blizzard_Quest()
 		hooksecurefunc("QuestFrame_SetTextColor", function(fontString)
 			fontString:SetTextColor(1, 1, 1)
 		end)
-
-		local function TitleButtonPool()
-			for Button in QuestFrameGreetingPanel.titleButtonPool:EnumerateActive() do
-				local Text = Button:GetFontString():GetText()
-				if Text and strmatch(Text:GetText(), '|c[Ff][Ff]%x%x%x%x%x%x') then
-					Button:GetFontString():SetText(gsub(Text, '|c[Ff][Ff]%x%x%x%x%x%x', '|cffffe519'))
-				end
-			end
-		end
-
-		QuestFrameGreetingPanel:HookScript('OnShow', TitleButtonPool)
-		hooksecurefunc("QuestFrameGreetingPanel_OnShow", TitleButtonPool)
 
 		hooksecurefunc('QuestInfo_Display', function(template, parentFrame, acceptButton, material)
 			QuestInfoTitleHeader:SetTextColor(1, .8, .1)
