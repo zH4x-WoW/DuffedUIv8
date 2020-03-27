@@ -36,25 +36,23 @@ end
 
 function AS:Blizzard_Gossip()
 	local gsub = string.gsub
+	
+	if AS.ParchmentEnabled then
+		NORMAL_QUEST_DISPLAY = gsub(NORMAL_QUEST_DISPLAY, "000000", "000000")
+		TRIVIAL_QUEST_DISPLAY = gsub(TRIVIAL_QUEST_DISPLAY, "000000", "000000")
+		IGNORED_QUEST_DISPLAY = gsub(IGNORED_QUEST_DISPLAY, "000000", "000000")
+	else
+		NORMAL_QUEST_DISPLAY = gsub(NORMAL_QUEST_DISPLAY, "000000", "ffffff")
+		TRIVIAL_QUEST_DISPLAY = gsub(TRIVIAL_QUEST_DISPLAY, "000000", "ffffff")
+		IGNORED_QUEST_DISPLAY = gsub(IGNORED_QUEST_DISPLAY, "000000", "ffffff")
+	end
+	
+	if AS.ParchmentEnabled then
+		GossipGreetingText:SetTextColor(0, 0, 0)
+	else
+		GossipGreetingText:SetTextColor(1, 1, 1)
+	end
 
-	NORMAL_QUEST_DISPLAY = gsub(NORMAL_QUEST_DISPLAY, "000000", "ffffff")
-	TRIVIAL_QUEST_DISPLAY = gsub(TRIVIAL_QUEST_DISPLAY, "000000", "ffffff")
-	IGNORED_QUEST_DISPLAY = gsub(IGNORED_QUEST_DISPLAY, "000000", "ffffff")
-
-	GossipGreetingText:SetTextColor(1, 1, 1)
-	NPCFriendshipStatusBar:GetRegions():Hide()
-	NPCFriendshipStatusBarNotch1:SetColorTexture(0, 0, 0)
-	NPCFriendshipStatusBarNotch1:SetSize(1, 16)
-	NPCFriendshipStatusBarNotch2:SetColorTexture(0, 0, 0)
-	NPCFriendshipStatusBarNotch2:SetSize(1, 16)
-	NPCFriendshipStatusBarNotch3:SetColorTexture(0, 0, 0)
-	NPCFriendshipStatusBarNotch3:SetSize(1, 16)
-	NPCFriendshipStatusBarNotch4:SetColorTexture(0, 0, 0)
-	NPCFriendshipStatusBarNotch4:SetSize(1, 16)
-	select(7, NPCFriendshipStatusBar:GetRegions()):Hide()
-	NPCFriendshipStatusBar.icon:SetPoint("TOPLEFT", -30, 7)
-
-	GossipFrameInset:Hide()
 	AS:SkinFrame(GossipFrame)
 	GossipFrame:SetHeight(500)
 
@@ -80,7 +78,11 @@ function AS:Blizzard_Gossip()
 		while titleButton do
 			if titleButton:GetText() ~= nil then
 				titleButton:SetText(gsub(titleButton:GetText(), ":32:32:0:0", ":32:32:0:0:64:64:5:59:5:59"))
-				titleButton:GetFontString():SetTextColor(1, 1, 1)
+				if AS.ParchmentEnabled then
+					titleButton:GetFontString():SetTextColor(0, 0, 0)
+				else
+					titleButton:GetFontString():SetTextColor(1, 1, 1)
+				end
 			end
 			index = index + 1
 			titleButton = _G["GossipTitleButton"..index]
