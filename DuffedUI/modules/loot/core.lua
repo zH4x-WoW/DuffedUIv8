@@ -8,7 +8,8 @@ local string_match = _G.strmatch
 local unpack = _G.unpack
 local table_wipe = _G.table.wipe
 
-local BAG_ITEM_QUALITY_COLORS = _G.BAG_ITEM_QUALITY_COLORS
+local C_Item_CanScrapItem = _G.C_Item.CanScrapItem
+local C_Item_DoesItemExist = _G.C_Item.DoesItemExist
 local C_NewItems_IsNewItem = _G.C_NewItems.IsNewItem
 local C_NewItems_RemoveNewItem = _G.C_NewItems.RemoveNewItem
 local C_Timer_After = _G.C_Timer.After
@@ -36,6 +37,7 @@ local SortReagentBankBags = _G.SortReagentBankBags
 
 local deleteEnable, favouriteEnable
 local IsCorruptedItem = IsCorruptedItem
+local ITEM_UPGRADE_CHECK_TIME = 0.5
 local move = D['move']
 
 local sortCache = {}
@@ -44,12 +46,12 @@ function Module:ReverseSort()
 		local numSlots = GetContainerNumSlots(bag)
 		for slot = 1, numSlots do
 			local texture, _, locked = GetContainerItemInfo(bag, slot)
-			if (slot <= numSlots/2) and texture and not locked and not sortCache["b"..bag.."s"..slot] then
+			if (slot <= numSlots / 2) and texture and not locked and not sortCache["b"..bag.."s"..slot] then
 				PickupContainerItem(bag, slot)
 				PickupContainerItem(bag, numSlots+1 - slot)
 				sortCache["b"..bag.."s"..slot] = true
-				C_Timer_After(.1, Module.ReverseSort)
-				return
+				--C_Timer_After(.1, Module.ReverseSort)
+				--return
 			end
 		end
 	end
@@ -75,7 +77,6 @@ function Module:UpdateItemUpgradeIcon()
 	end
 end
 
-local ITEM_UPGRADE_CHECK_TIME = 0.5
 function Module:UpgradeCheck_OnUpdate(elapsed)
 	self.timeSinceUpgradeCheck = (self.timeSinceUpgradeCheck or 0) + elapsed
 	if self.timeSinceUpgradeCheck >= ITEM_UPGRADE_CHECK_TIME then
@@ -584,9 +585,14 @@ function Module:OnEnable()
 		PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
 	end)
 
+	Module.Bags = Backpack
+	Module.BagsType = {}
+	Module.BagsType[0] = 0	-- Backpack
+	Module.BagsType[-1] = 0	-- Bank
+	Module.BagsType[-3] = 0	-- Reagent
+
 	local f = {}	
-	Module.SpecialBags = {}
-	local onlyBags, bagAzeriteItem, bagEquipment, bagConsumble, bagTradeGoods, bagQuestItem, bagsJunk, onlyBank, bankAzeriteItem, bankLegendary, bankEquipment, bankConsumble, onlyReagent, bagMountPet, bankMountPet, bagFavourite, bankFavourite = self:GetFilters()
+	local onlyBags, bagAzeriteItem,  bagCorruptionItem, bagEquipment, bagConsumble, bagTradeGoods, bagQuestItem, bagsJunk, onlyBank, bankAzeriteItem, bankCorruptionItem, bankLegendary, bankEquipment, bankConsumble, onlyReagent, bagMountPet, bankMountPet, bagFavourite, bankFavourite = self:GetFilters()
 
 	function Backpack:OnInit()
 		local MyContainer = self:GetContainerClass()
@@ -603,6 +609,9 @@ function Module:OnEnable()
 
 		f.azeriteItem = MyContainer:New("AzeriteItem", {Columns = bagsWidth, Parent = f.main})
 		f.azeriteItem:SetFilter(bagAzeriteItem, true)
+		
+		f.corruptionItem = MyContainer:New("CorruptionItem", {Columns = bagsWidth, Parent = f.main})
+		f.corruptionItem:SetFilter(bagCorruptionItem, true)
 
 		f.equipment = MyContainer:New("Equipment", {Columns = bagsWidth, Parent = f.main})
 		f.equipment:SetFilter(bagEquipment, true)
@@ -629,6 +638,9 @@ function Module:OnEnable()
 
 		f.bankAzeriteItem = MyContainer:New("BankAzeriteItem", {Columns = bankWidth, Parent = f.bank})
 		f.bankAzeriteItem:SetFilter(bankAzeriteItem, true)
+		
+		f.bankCorruptionItem = MyContainer:New("BankCorruptionItem", {Columns = bankWidth, Parent = f.bank})
+		f.bankCorruptionItem:SetFilter(bankCorruptionItem, true)
 
 		f.bankLegendary = MyContainer:New("BankLegendary", {Columns = bankWidth, Parent = f.bank})
 		f.bankLegendary:SetFilter(bankLegendary, true)
@@ -648,9 +660,15 @@ function Module:OnEnable()
 		f.reagent:Hide()
 	end
 
+	local initBagType
 	function Backpack:OnBankOpened()
 		BankFrame:Show()
 		self:GetContainer("Bank"):Show()
+
+		if not initBagType then
+			DUFFEDUI_Backpack:BAG_UPDATE()
+			initBagType = true
+		end
 	end
 
 	function Backpack:OnBankClosed()
@@ -751,7 +769,21 @@ function Module:OnEnable()
 	local function isItemNeedsLevel(item)
 		return item.link and item.level and item.rarity > 1 and (item.subType == EJ_LOOT_SLOT_FILTER_ARTIFACT_RELIC or item.classID == LE_ITEM_CLASS_WEAPON or item.classID == LE_ITEM_CLASS_ARMOR)
 	end
-	
+
+	local bagTypeColor = {
+		[0] = {0, 0, 0, .25},
+		[1] = false,
+		[2] = {0, .5, 0, .25},
+		[3] = {.8, 0, .8, .25},
+		[4] = {1, .8, 0, .25},
+		[5] = {0, .8, .8, .25},
+		[6] = {.5, .4, 0, .25},
+		[7] = {.8, .5, .5, .25},
+		[8] = {.8, .8, .8, .25},
+		[9] = {.4, .6, 1, .25},
+		[10] = {.8, 0, 0, .25},
+	}
+
 	function MyButton:OnUpdate(item)
 		if MerchantFrame:IsShown() then
 			if item.isInSet then
@@ -802,7 +834,7 @@ function Module:OnEnable()
 		if showItemLevel then
 			if isItemNeedsLevel(item) then
 				local level = D.GetItemLevel(item.link, item.bagID, item.slotID) or item.level
-				local color = BAG_ITEM_QUALITY_COLORS[item.rarity]
+				local color = D.QualityColors[item.rarity]
 
 				self.iLvl:SetText(level)
 				self.iLvl:SetTextColor(color.r, color.g, color.b)
@@ -822,6 +854,14 @@ function Module:OnEnable()
 				self.glowFrame:Hide()
 			end
 		end
+		
+		if C["bags"].SpecialBagsColor then
+			local bagType = Module.BagsType[item.bagID]
+			local color = bagTypeColor[bagType] or bagTypeColor[0]
+			self:SetBackdropColor(unpack(color))
+		else
+			self:SetBackdropColor(.04, .04, .04, 0.9)
+		end
 	end
 
 	function MyButton:OnUpdateQuest(item)
@@ -834,7 +874,7 @@ function Module:OnEnable()
 		if item.questID or item.isQuestItem then
 			self:SetBackdropBorderColor(1, 0.30, 0.30)
 		elseif item.rarity and item.rarity > -1 then
-			local color = BAG_ITEM_QUALITY_COLORS[item.rarity]
+			local color =  D.QualityColors[item.rarity]
 			self:SetBackdropBorderColor(color.r, color.g, color.b)
 		else
 			self:SetBackdropBorderColor()
@@ -879,8 +919,8 @@ function Module:OnEnable()
 		end
 		self:SetSize(width + xOffset * 2, height + offset)
 
-		Module:UpdateAnchors(f.main, {f.azeriteItem, f.equipment, f.bagCompanion, f.consumble, f.bagFavourite, f.tradegoods, f.questitem, f.junk})
-		Module:UpdateAnchors(f.bank, {f.bankAzeriteItem, f.bankEquipment, f.bankLegendary, f.bankCompanion, f.bankConsumble, f.bankFavourite})
+		Module:UpdateAnchors(f.main, {f.azeriteItem, f.corruptionItem, f.equipment, f.bagCompanion, f.consumble, f.bagFavourite, f.tradegoods, f.questitem, f.junk})
+		Module:UpdateAnchors(f.bank, {f.bankAzeriteItem, f.bankCorruptionItem, f.bankEquipment, f.bankLegendary, f.bankCompanion, f.bankConsumble, f.bankFavourite})
 	end
 
 	function MyContainer:OnCreate(name, settings)
@@ -897,6 +937,8 @@ function Module:OnEnable()
 		local label
 		if string_match(name, "AzeriteItem$") then
 			label = "Azerite Armor"
+		elseif string_match(name, "CorruptionItem$") then
+			label = CORRUPTION_TOOLTIP_TITLE
 		elseif string_match(name, "Equipment$") then
 			if itemSetFilter then
 				label = "Equipement Set"
@@ -1010,18 +1052,20 @@ function Module:OnEnable()
 
 	function BagButton:OnUpdate()
 		local id = GetInventoryItemID("player", (self.GetInventorySlot and self:GetInventorySlot()) or self.invID)
-		local quality = id and select(3, GetItemInfo(id)) or 0
+		if not id then return end
+		local _, _, quality, _, _, _, _, _, _, _, _, classID, subClassID = GetItemInfo(id)
 		if not quality or quality == 1 then quality = 0 end
-		local color = BAG_ITEM_QUALITY_COLORS[quality]
+		local color = D.QualityColors[quality]
 		if not self.hidden and not self.notBought then
 			self:SetBackdropBorderColor(color.r, color.g, color.b)
 		else
 			self:SetBackdropBorderColor()
 		end
 
-		local bagFamily = select(2, GetContainerNumFreeSlots(self.bagID))
-		if bagFamily then
-			Module.SpecialBags[self.bagID] = bagFamily ~= 0
+		if classID == LE_ITEM_CLASS_CONTAINER then
+			Module.BagsType[self.bagID] = subClassID or 0
+		else
+			Module.BagsType[self.bagID] = 0
 		end
 	end
 

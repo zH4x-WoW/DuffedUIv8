@@ -98,6 +98,12 @@ function Module:Corruption_Convert(name, icon, level)
 	end
 end
 
+function Module:Corruption_UpdateSpell(value)
+	if not value.name or not value.icon then
+		value.name, _, value.icon = GetSpellInfo(value.spellID)
+	end
+end
+
 function Module:Corruption_Update()
 	local link = select(2, self:GetItem())
 	if link and IsCorruptedItem(link) then
@@ -106,9 +112,33 @@ function Module:Corruption_Update()
 			if not value.name or not value.icon then
 				value.name, _, value.icon = GetSpellInfo(value.spellID)
 			end
+			Module:Corruption_UpdateSpell(value)
 			Module.Corruption_Convert(self, value.name, value.icon, value.level)
 		end
 	end
+end
+
+local corruptionR, corruptionG, corruptionB = .584, .428, .82
+local summaries = {}
+function Module:Corruption_Summary()
+	wipe(summaries)
+
+	for i = 1, 17 do
+		local link = GetInventoryItemLink('player', i)
+		if link and IsCorruptedItem(link) then
+			local value = Module:Corruption_Search(link)
+			if value then
+				Module:Corruption_UpdateSpell(value)
+				summaries[value] = (summaries[value] or 0) + 1
+			end
+		end
+	end
+
+	GameTooltip:AddLine(' ')
+	for value, count in next, summaries do
+		GameTooltip:AddLine(count..' '..getIconString(value.icon)..value.name..' '..value.level, corruptionR, corruptionG, corruptionB)
+	end
+	GameTooltip:Show()
 end
 
 function Module:CorruptionRank()
@@ -117,6 +147,8 @@ function Module:CorruptionRank()
 	ShoppingTooltip1:HookScript('OnTooltipSetItem', Module.Corruption_Update)
 	ShoppingTooltip2:HookScript('OnTooltipSetItem', Module.Corruption_Update)
 	EmbeddedItemTooltip:HookScript('OnTooltipSetItem', Module.Corruption_Update)
+	hooksecurefunc('CharacterFrameCorruption_OnEnter', Module.Corruption_Summary)
+	CharacterStatsPane.ItemLevelFrame.Corruption:HookScript('OnEnter', Module.Corruption_Summary)
 end
 
 function Module:OnEnable()

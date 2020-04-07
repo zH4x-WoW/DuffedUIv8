@@ -1,5 +1,5 @@
 local D, C = unpack(select(2, ...))
-local Module = D:GetModule("Bags")
+local Module = D:GetModule('Bags')
 
 local _G = _G
 
@@ -17,6 +17,7 @@ local LE_ITEM_MISCELLANEOUS_MOUNT = _G.LE_ITEM_MISCELLANEOUS_MOUNT
 local LE_ITEM_QUALITY_COMMON = _G.LE_ITEM_QUALITY_COMMON
 local LE_ITEM_QUALITY_LEGENDARY = _G.LE_ITEM_QUALITY_LEGENDARY
 local LE_ITEM_QUALITY_POOR = _G.LE_ITEM_QUALITY_POOR
+local IsCorruptedItem = IsCorruptedItem
 
 -- Custom filter
 local CustomFilterList = {
@@ -29,7 +30,7 @@ local CustomFilterList = {
 }
 
 local function isCustomFilter(item)
-	if not C["bags"].ItemFilter then
+	if not C['bags'].ItemFilter then
 		return
 	end
 
@@ -46,7 +47,7 @@ local function isItemInBank(item)
 end
 
 local function isItemJunk(item)
-	if not C["bags"].ItemFilter then
+	if not C['bags'].ItemFilter then
 		return
 	end
 
@@ -54,7 +55,7 @@ local function isItemJunk(item)
 end
 
 local function isAzeriteArmor(item)
-	if not C["bags"].ItemFilter then
+	if not C['bags'].ItemFilter then
 		return
 	end
 
@@ -62,15 +63,27 @@ local function isAzeriteArmor(item)
 		return
 	end
 
-	return C_AzeriteEmpoweredItem_IsAzeriteEmpoweredItemByID(item.link) and not (C["bags"].ItemFilter and item.isInSet)
+	return C_AzeriteEmpoweredItem_IsAzeriteEmpoweredItemByID(item.link) and not (C['bags'].ItemFilter and item.isInSet)
+end
+
+local function isCorruptionArmor(item)
+	if not C['bags'].ItemFilter then
+		return
+	end
+	
+	if not item.link then
+		return
+	end
+	
+	return IsCorruptedItem(item.link) and not (C['bags'].ItemFilter and item.isInSet)
 end
 
 local function isItemEquipment(item)
-	if not C["bags"].ItemFilter then
+	if not C['bags'].ItemFilter then
 		return
 	end
 
-	if C["bags"].ItemSetFilter then
+	if C['bags'].ItemSetFilter then
 		return item.isInSet
 	else
 		return item.level and item.rarity > LE_ITEM_QUALITY_COMMON and (item.subType == EJ_LOOT_SLOT_FILTER_ARTIFACT_RELIC or item.classID == LE_ITEM_CLASS_WEAPON or item.classID == LE_ITEM_CLASS_ARMOR)
@@ -78,7 +91,7 @@ local function isItemEquipment(item)
 end
 
 local function isItemConsumble(item)
-	if not C["bags"].ItemFilter then
+	if not C['bags'].ItemFilter then
 		return
 	end
 
@@ -90,27 +103,31 @@ local function isItemConsumble(item)
 end
 
 local function isItemLegendary(item)
-	if not C["bags"].ItemFilter then
+	if not C['bags'].ItemFilter then
 		return
 	end
 
 	return item.rarity == LE_ITEM_QUALITY_LEGENDARY
 end
 
+local isPetToy = {
+	[174925] = true,
+}
+
 local function isMountAndPet(item)
-	if not C["bags"].ItemFilter then
+	if not C['bags'].ItemFilter then
 		return
 	end
 
-	return item.classID == LE_ITEM_CLASS_MISCELLANEOUS and (item.subClassID == LE_ITEM_MISCELLANEOUS_MOUNT or item.subClassID == LE_ITEM_MISCELLANEOUS_COMPANION_PET)
+	return (not isPetToy[item.id]) and item.classID == LE_ITEM_CLASS_MISCELLANEOUS and (item.subClassID == LE_ITEM_MISCELLANEOUS_MOUNT or item.subClassID == LE_ITEM_MISCELLANEOUS_COMPANION_PET)
 end
 
 local function isItemTrade(item)
-	if not C["bags"].ItemFilter then
+	if not C['bags'].ItemFilter then
 		return
 	end
 
-	if not C["bags"].TradeGoodsFilter then
+	if not C['bags'].TradeGoodsFilter then
 		return
 	end
 
@@ -118,11 +135,11 @@ local function isItemTrade(item)
 end
 
 local function isItemQuest(item)
-	if not C["bags"].ItemFilter then
+	if not C['bags'].ItemFilter then
 		return
 	end
 
-	if not C["bags"].QuestItemFilter then
+	if not C['bags'].QuestItemFilter then
 		return
 	end
 
@@ -130,7 +147,7 @@ local function isItemQuest(item)
 end
 
 local function isItemFavourite(item)
-	if not C["bags"].ItemFilter then
+	if not C['bags'].ItemFilter then
 		return
 	end
 
@@ -138,20 +155,24 @@ local function isItemFavourite(item)
 end
 
 local function isEmptySlot(item)
-	if not C["bags"].GatherEmpty then
+	if not C['bags'].GatherEmpty then
 		return
 	end
 
-	return Module.initComplete and not item.texture and not Module.SpecialBags[item.bagID]
+	return Module.initComplete and not item.texture and Module.BagsType[item.bagID] == 0
 end
 
 function Module:GetFilters()
 	local onlyBags = function(item)
-		return isItemInBag(item) and not isItemEquipment(item) and not isItemConsumble(item) and not isItemTrade(item) and not isItemQuest(item) and not isAzeriteArmor(item) and not isItemJunk(item) and not isMountAndPet(item) and not isItemFavourite(item) and not isEmptySlot(item)
+		return isItemInBag(item) and not isItemEquipment(item) and not isItemConsumble(item) and not isItemTrade(item) and not isItemQuest(item) and not isAzeriteArmor(item) and not isCorruptionArmor(item) and not isItemJunk(item) and not isMountAndPet(item) and not isItemFavourite(item) and not isEmptySlot(item)
 	end
 
 	local bagAzeriteItem = function(item)
 		return isItemInBag(item) and isAzeriteArmor(item)
+	end
+	
+	local bagCorruptionItem = function(item)
+		return isItemInBag(item) and isCorruptionArmor(item)
 	end
 
 	local bagEquipment = function(item)
@@ -175,11 +196,15 @@ function Module:GetFilters()
 	end
 
 	local onlyBank = function(item)
-		return isItemInBank(item) and not isItemEquipment(item) and not isItemLegendary(item) and not isItemConsumble(item) and not isAzeriteArmor(item) and not isMountAndPet(item) and not isItemFavourite(item) and not isEmptySlot(item)
+		return isItemInBank(item) and not isItemEquipment(item) and not isItemLegendary(item) and not isItemConsumble(item) and not isAzeriteArmor(item) and not isCorruptionArmor(item) and not isMountAndPet(item) and not isItemFavourite(item) and not isEmptySlot(item)
 	end
 
 	local bankAzeriteItem = function(item)
 		return isItemInBank(item) and isAzeriteArmor(item)
+	end
+	
+	local bankCorruptionItem = function(item)
+		return isItemInBank(item) and isCorruptionArmor(item)
 	end
 
 	local bankLegendary = function(item)
@@ -214,5 +239,5 @@ function Module:GetFilters()
 		return isItemInBank(item) and isItemFavourite(item)
 	end
 
-	return onlyBags, bagAzeriteItem, bagEquipment, bagConsumble, bagTradeGoods, bagQuestItem, bagsJunk, onlyBank, bankAzeriteItem, bankLegendary, bankEquipment, bankConsumble, onlyReagent, bagMountPet, bankMountPet, bagFavourite, bankFavourite
+	return onlyBags, bagAzeriteItem, bagCorruptionItem, bagEquipment, bagConsumble, bagTradeGoods, bagQuestItem, bagsJunk, onlyBank, bankAzeriteItem, bankCorruptionItem, bankLegendary, bankEquipment, bankConsumble, onlyReagent, bagMountPet, bankMountPet, bagFavourite, bankFavourite
 end

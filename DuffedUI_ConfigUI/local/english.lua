@@ -222,6 +222,7 @@ DuffedUIConfigUILocalization.bagsItemFilter = "Item Filtering"
 DuffedUIConfigUILocalization.bagsItemSetFilter = "Use ItemSet Filter"
 DuffedUIConfigUILocalization.bagsQuestItemFilter = "Filter Quest Items"
 DuffedUIConfigUILocalization.bagsTradeGoodsFilter = "Filter Trade/Goods Items"
+DuffedUIConfigUILocalization.bagsSpecialBagsColor = "Color Specialbags"
 DuffedUIConfigUILocalization.bagsUpgradeIcon = "Show Upgrade Icon"
 DuffedUIConfigUILocalization.bagsEnable = "Enable all-in-one bag"
 DuffedUIConfigUILocalization.bagsBagBar = "Enable Bagbar"
@@ -293,6 +294,7 @@ DuffedUIConfigUILocalization.tooltipPlayerRoles = "Show Player Roles in Groups/R
 DuffedUIConfigUILocalization.tooltipSpellID = "Show Spell- and ItemID"
 DuffedUIConfigUILocalization.tooltipShowMount = "Show Mount (Hold Ctrl for more info)"
 DuffedUIConfigUILocalization.tooltipFactionIcon = "Show Faction Icon"
+DuffedUIConfigUILocalization.tooltipCorruptionRank = "Show Corruption Rank"
 
 --[[Merchant]]--
 DuffedUIConfigUILocalization.merchant = "Merchant"

@@ -223,6 +223,7 @@ C["bags"] = {
 	["QuestItemFilter"] = true,
 	["TradeGoodsFilter"] = true,
 	["UpgradeIcon"] = true,
+	["SpecialBagsColor"] = true,
 }
 
 C['misc'] = {

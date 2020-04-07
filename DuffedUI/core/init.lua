@@ -33,6 +33,15 @@ AddOn.WowBuild = tonumber(AddOn.WowBuild)
 AddOn.InfoColor = "|cffC41F3B"
 AddOn.SystemColor = "|cffffcc00"
 
+AddOn.QualityColors = {}
+local qualityColors = BAG_ITEM_QUALITY_COLORS
+for index, value in pairs(qualityColors) do
+	AddOn.QualityColors[index] = {r = value.r, g = value.g, b = value.b}
+end
+AddOn.QualityColors[-1] = {r = 0, g = 0, b = 0}
+AddOn.QualityColors[LE_ITEM_QUALITY_POOR] = {r = .61, g = .61, b = .61}
+AddOn.QualityColors[LE_ITEM_QUALITY_COMMON] = {r = 0, g = 0, b = 0}
+
 AddOn.ClassList = {}
 for k, v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
 	AddOn.ClassList[v] = k

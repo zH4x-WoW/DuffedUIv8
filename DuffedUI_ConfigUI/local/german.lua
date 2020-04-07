@@ -222,6 +222,7 @@
 	DuffedUIConfigUILocalization.bagsItemSetFilter = "Filter für Setgegendstände"
 	DuffedUIConfigUILocalization.bagsQuestItemFilter = "Filter für Questgegendstände"
 	DuffedUIConfigUILocalization.bagsTradeGoodsFilter = "Filter für Handwerkswaren"
+	DuffedUIConfigUILocalization.bagsSpecialBagsColor = "Spezialtaschen einfärben"
 	DuffedUIConfigUILocalization.bagsUpgradeIcon = "Zeige Upgrade Symbol"
 	DuffedUIConfigUILocalization.bagsEnable = "Aktiviere die 'Alles in einer Tasche' Ansicht"
 	DuffedUIConfigUILocalization.bagsBagBar = "Aktiviere die Taschenleiste"
@@ -292,6 +293,7 @@
 	DuffedUIConfigUILocalization.tooltipSpellID = "Zeige die Zauber- und Gegenstands-ID im Tooltip"
 	DuffedUIConfigUILocalization.tooltipShowMount = "Zeige das Mount des Spielers an (Strg halten für mehr Infos)"
 	DuffedUIConfigUILocalization.tooltipFactionIcon = "Zeige das Fraktionssymbol im Tooltip"
+	DuffedUIConfigUILocalization.tooltipCorruptionRank = "Zeige den Verderbnisrang im Tooltip"
 
 	--[[Merchant]]--
 	DuffedUIConfigUILocalization.merchant = "Händler"
