@@ -234,7 +234,7 @@ function DataTexts:Reset()
 					Object:Enable()
 					self.Anchors[Num]:SetData(Object)
 				else
-					print('DataText '' .. name .. '' not found and is deleted from the cache.')
+					print("DataText '" .. name .. "' not found and is deleted from the cache.")
 					DuffedUIData['Texts'][name] = {false, 0}
 				end
 			end
@@ -267,7 +267,7 @@ function DataTexts:Load()
 					Object:Enable()
 					self.Anchors[Num]:SetData(Object)
 				else
-					print('DataText '' .. name .. '' not found and is deleted from the cache.')
+					print("DataText '" .. name .. "' not found and is deleted from the cache.")
 					DuffedUIData['Texts'][name] = {false, 0}
 				end
 			end
