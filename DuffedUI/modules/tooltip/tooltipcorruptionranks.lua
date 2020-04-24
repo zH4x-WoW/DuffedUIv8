@@ -118,7 +118,6 @@ function Module:Corruption_Convert(name, icon, level)
 		local line = _G[self:GetName()..'TextLeft'..i]
 		local text = line:GetText()
 		if text and strmatch(text, ITEM_MOD_CORRUPTION) then
-			--line:SetText(text..' - '..getIconString(icon)..name..' '..level)
 			line:SetText('+'..getIconString(icon)..name..' '..level)
 			return
 		end
@@ -171,7 +170,7 @@ end
 function Module:Corruption_AddSummary()
 	GameTooltip:AddLine(' ')
 	for value, count in next, summaries do
-		GameTooltip:AddLine(count..' '..getIconString(value.icon)..value.name..' '..value.level, corruptionR,corruptionG,corruptionB)
+		GameTooltip:AddLine("+"..count.." "..getIconString(value.icon)..value.name.." "..value.level, corruptionR,corruptionG,corruptionB)
 	end
 	if not next(summaries) then
 		GameTooltip:AddLine(NONE, corruptionR,corruptionG,corruptionB)
