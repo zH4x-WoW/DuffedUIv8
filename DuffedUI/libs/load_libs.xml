@@ -7,4 +7,5 @@
 	<Script file='DropDownMenu\EasyMenu.lua'/>
 	<Script file='DropDownMenu\UIDropDownMenu.lua'/>
 	<Script file="LibSpellRange-1.0\LibSpellRange-1.0.lua"/>
+	<Include file="UTF8\UTF8.xml"/>
 </Ui>

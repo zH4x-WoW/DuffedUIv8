@@ -1,37 +1,26 @@
-local D, C, L = unpack(select(2, ...)) 
-if not C['datatext']['quickjoin'] or C['datatext']['quickjoin'] == 0 then return end
+local D, C, L = unpack(select(2, ...))
 
--- Credits to Elv, Simpy and Merathilis
+local DataText = D.DataTexts
+local NameColor = DataText.NameColor
+local ValueColor = DataText.ValueColor
 
--- Variables
+local classcolor = ('|cff%.2x%.2x%.2x'):format(D.Color.r * 255, D.Color.g * 255, D.Color.b * 255)
+
 local UNKNOWN = UNKNOWN
 local QUICK_JOIN = QUICK_JOIN
+
 local next, pairs, select, type = next, pairs, select, type
 local twipe = table.wipe
 local format, join = string.format, string.join
+
 local C_LFGList = C_LFGList
 local C_SocialQueue = C_SocialQueue
 local SocialQueueUtil_GetNameAndColor = SocialQueueUtil_GetNameAndColor
 local SocialQueueUtil_GetQueueName = SocialQueueUtil_GetQueueName
 local SocialQueueUtil_SortGroupMembers = SocialQueueUtil_SortGroupMembers
 local ToggleQuickJoinPanel = ToggleQuickJoinPanel
-local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 
-local Stat = CreateFrame('Frame', 'DuffedUIStatquickjoin')
-Stat:RegisterEvent('SOCIAL_QUEUE_UPDATE')
-Stat:RegisterEvent('PLAYER_ENTERING_WORLD')
-Stat:RegisterEvent('PLAYER_ENTERING_WORLD')
-Stat:EnableMouse(true)
-Stat:SetFrameStrata('BACKGROUND')
-Stat:SetFrameLevel(3)
-Stat.Option = C['datatext']['orderhall']
-Stat.Color1 = D['RGBToHex'](unpack(C['media']['datatextcolor1']))
-Stat.Color2 = D['RGBToHex'](unpack(C['media']['datatextcolor2']))
-
-local Text  = Stat:CreateFontString('DuffedUIStatquickjoinText', 'OVERLAY')
-Text:SetFont(f, fs, ff)
-D['DataTextPosition'](C['datatext']['quickjoin'], Text)
-
+local displayModifierString = ''
 local quickJoinGroups, quickJoin = nil, {}
 
 function SocialQueueIsLeader(playerName, leaderName)
@@ -62,6 +51,7 @@ function SocialQueueIsLeader(playerName, leaderName)
 	end
 end
 
+local MODULE
 local function Update(self, event)
 	twipe(quickJoin)
 	quickJoinGroups = C_SocialQueue.GetAllGroups()
@@ -131,21 +121,20 @@ local function Update(self, event)
 		quickJoin[coloredName] = activity
 	end
 	if next(quickJoin) then
-		Text:SetText(Stat.Color1 .. QUICK_JOIN, #quickJoinGroups)
+		self.Text:SetText(NameColor ..QUICK_JOIN, #quickJoinGroups)
 	else
-		Text:SetText(Stat.Color2 .. QUICK_JOIN)
+		self.Text:SetText(ValueColor .. QUICK_JOIN)
 	end
-	self:SetAllPoints(Text)
 end
 
-Stat:SetScript('OnEnter', function(self)
+local OnLeave = function()
+	GameTooltip:Hide()
+end
+
+local OnEnter = function(self)
 	if not C['datatext']['ShowInCombat'] then
 		if InCombatLockdown() then return end
 	end
-	
-	local anchor, panel, xoff, yoff = D['DataTextTooltipAnchor'](Text)
-	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
-	GameTooltip:ClearLines()
 	
 	GameTooltip_SetDefaultAnchor(GameTooltip, self)
 	GameTooltip:ClearLines()
@@ -156,15 +145,35 @@ Stat:SetScript('OnEnter', function(self)
 	end
 
 	GameTooltip:AddLine(QUICK_JOIN, nil, nil, nil, true);
-	GameTooltip:AddLine(' ')
+	GameTooltip:AddLine(' ');
 	for name, activity in pairs(quickJoin) do
 		GameTooltip:AddDoubleLine(name, activity, nil, nil, nil, 1, 1, 1);
 	end
 	GameTooltip:Show()
-end)
+end
 
-Stat:SetScript('OnLeave', function() GameTooltip:Hide() end)	
-Stat:SetScript('OnEvent', Update)
-Stat:SetScript('OnMouseDown', function() 
+local OnMouseDown = function(self)
 	ToggleQuickJoinPanel()
-end)
+end
+
+local function Enable(self)
+	self:RegisterEvent('SOCIAL_QUEUE_UPDATE')
+	self:RegisterEvent('PLAYER_ENTERING_WORLD')
+	self:RegisterEvent('PLAYER_ENTERING_WORLD')
+	self:SetScript('OnEvent', Update)
+	self:SetScript('OnMouseDown', OnMouseDown)
+	self:SetScript('OnEnter', OnEnter)
+	self:SetScript('OnLeave', OnLeave)
+	self:Update()
+end
+
+local function Disable(self)
+	self.Text:SetText('')
+	self:UnregisterAllEvents()
+	self:SetScript('OnMouseDown', nil)
+	self:SetScript('OnEnter', nil)
+	self:SetScript('OnLeave', nil)
+	self:SetScript('OnEvent', nil)
+end
+
+DataText:Register('QuickJoin', Enable, Disable, Update)

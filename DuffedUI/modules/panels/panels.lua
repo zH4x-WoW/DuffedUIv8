@@ -26,8 +26,8 @@ move:RegisterFrame(DuffedUIInfoCenter)
 move:RegisterFrame(LossOfControlFrame)
 
 local m_zone_text = icenter:CreateFontString('DuffedUIZoneText', 'Overlay')
-m_zone_text:SetFont(C['media']['font'], 11)
-m_zone_text:Point('CENTER', 0, -1)
+m_zone_text:SetFont(C['media']['font'], C['datatext']['fontsize'])
+m_zone_text:Point('CENTER', 0, 0)
 m_zone_text:Height(11)
 m_zone_text:Width(icenter:GetWidth() - 6)
 
@@ -49,11 +49,20 @@ local zone_Update = function()
 	end
 end
  
+ local OnMouseDown = function(self, btn)
+	if (btn ~= "LeftButton") then
+		return
+	end
+
+	ToggleWorldMap()
+end
+ 
 icenter:RegisterEvent('PLAYER_ENTERING_WORLD')
 icenter:RegisterEvent('ZONE_CHANGED_NEW_AREA')
 icenter:RegisterEvent('ZONE_CHANGED')
 icenter:RegisterEvent('ZONE_CHANGED_INDOORS')
 icenter:SetScript('OnEvent', zone_Update)
+icenter:SetScript('OnMouseDown', OnMouseDown)
 
 if C['chat']['lbackground'] then
 	local chatleftbg = CreateFrame('Frame', 'DuffedUIChatBackgroundLeft', DuffedUIInfoLeft)
@@ -101,13 +110,14 @@ if C['actionbar']['enable'] then
 	DuffedUIBar1:SetAllPoints(DuffedUIBar1Mover)
 	DuffedUIBar1:SetFrameStrata('BACKGROUND')
 	DuffedUIBar1:SetFrameLevel(1)
+	
 
 	local DuffedUIBar2 = CreateFrame('Frame', 'DuffedUIBar2', UIParent, 'SecureHandlerStateTemplate')
 	if not C['actionbar']['hidepanels'] then DuffedUIBar2:SetTemplate('Transparent') end
 	if C['actionbar']['rightbarvertical'] then
-		DuffedUIBar2:Point('BOTTOM', icenter, 'TOP', 0, 49)
+		DuffedUIBar2:SetPoint('BOTTOM', icenter, 'TOP', 0, 49)
 	else
-		DuffedUIBar2:Point('BOTTOM', icenter, 'TOP', 0, 2)
+		DuffedUIBar2:SetPoint('BOTTOM', icenter, 'TOP', 0, 2)
 	end
 	DuffedUIBar2:SetSize((D['buttonsize'] * 12) + (D['buttonspacing'] * 13), (D['buttonsize'] * 1) + (D['buttonspacing'] * 2))
 	DuffedUIBar2:SetFrameStrata('BACKGROUND')
@@ -136,9 +146,9 @@ if C['actionbar']['enable'] then
 		local DuffedUIBar4 = CreateFrame('Frame', 'DuffedUIBar4', UIParent, 'SecureHandlerStateTemplate')
 		if not C['actionbar']['hidepanels'] then DuffedUIBar4:SetTemplate('Transparent') end
 		if C['misc']['azerite'] then 
-			DuffedUIBar4:Point('BOTTOMRIGHT', DuffedUIInfoRight, 'BOTTOMLEFT', -37, 0)
+			DuffedUIBar4:SetPoint('BOTTOMRIGHT', DuffedUIInfoRight, 'BOTTOMLEFT', -37, 0)
 		else
-			DuffedUIBar4:Point('BOTTOMRIGHT', DuffedUIInfoRight, 'BOTTOMLEFT', -23, 0)
+			DuffedUIBar4:SetPoint('BOTTOMRIGHT', DuffedUIInfoRight, 'BOTTOMLEFT', -23, 0)
 		end
 		if C['actionbar']['RightSideBar'] then
 			DuffedUIBar4:SetSize((D['buttonsize'] * 12) + (D['buttonspacing'] * 13), (D['buttonsize'] * 1) + (D['buttonspacing'] * 2))
@@ -155,10 +165,10 @@ if C['actionbar']['enable'] then
 		if not C['actionbar']['hidepanels'] then DuffedUIBar5:SetTemplate('Transparent') end
 		if C['actionbar']['rightbarvertical'] then
 			DuffedUIBar5:SetSize((D['buttonsize'] * 12) + (D['buttonspacing'] * 13), (D['buttonsize'] * 1) + (D['buttonspacing'] * 2))
-			DuffedUIBar5:Point('BOTTOM', icenter, 'TOP', 0, 2)
+			DuffedUIBar5:SetPoint('BOTTOM', icenter, 'TOP', 0, 2)
 		else
 			DuffedUIBar5:SetSize((D['buttonsize'] * 1) + (D['buttonspacing'] * 2), (D['buttonsize'] * 12) + (D['buttonspacing'] * 13))
-			DuffedUIBar5:Point('RIGHT', UIParent, 'RIGHT', -13, -14)
+			DuffedUIBar5:SetPoint('RIGHT', UIParent, 'RIGHT', -13, -14)
 		end
 		DuffedUIBar5:SetFrameStrata('BACKGROUND')
 		DuffedUIBar5:SetFrameLevel(3)
@@ -244,7 +254,7 @@ if C['datatext']['battleground'] then
 	local bgframe = CreateFrame('Frame', 'DuffedUIInfoLeftBattleGround', UIParent)
 	bgframe:SetTemplate()
 	bgframe:SetAllPoints(icenter)
-	bgframe:SetFrameStrata('LOW')
+	bgframe:SetFrameStrata('HIGH')
 	bgframe:SetFrameLevel(0)
 	bgframe:EnableMouse(true)
 end

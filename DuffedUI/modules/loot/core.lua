@@ -50,8 +50,6 @@ function Module:ReverseSort()
 				PickupContainerItem(bag, slot)
 				PickupContainerItem(bag, numSlots+1 - slot)
 				sortCache["b"..bag.."s"..slot] = true
-				--C_Timer_After(.1, Module.ReverseSort)
-				--return
 			end
 		end
 	end
@@ -68,7 +66,7 @@ function Module:UpdateItemUpgradeIcon()
 	end
 
 	local itemIsUpgrade = _G.IsContainerItemAnUpgrade(self:GetParent():GetID(), self:GetID())
-	if itemIsUpgrade == nil then -- nil means not all the data was available to determine if this is an upgrade.
+	if itemIsUpgrade == nil then
 		self.UpgradeIcon:SetShown(false)
 		self:SetScript("OnUpdate", Module.UpgradeCheck_OnUpdate)
 	else
@@ -142,14 +140,10 @@ function Module:CreateInfoFrame()
 	search.backdrop:SetPoint("BOTTOMRIGHT", 5, 7)
 
 	local moneyTag = self:SpawnPlugin("TagDisplay", "[money]", infoFrame)
-	--moneyTag:SetFontObject(bagsFont)
-	--moneyTag:SetFont(select(1, moneyTag:GetFont()), 13, select(3, moneyTag:GetFont()))
 	moneyTag:SetFont(C['media']['font'], 11, 'OUTLINE')
 	moneyTag:SetPoint("RIGHT", -5, 0)
 
 	local currencyTag = self:SpawnPlugin("TagDisplay", "[currencies]", infoFrame)
-	--currencyTag:SetFontObject(bagsFont)
-	--currencyTag:SetFont(select(1, currencyTag:GetFont()), 13, select(3, currencyTag:GetFont()))
 	currencyTag:SetFont(C['media']['font'], 11, 'OUTLINE')
 	currencyTag:SetPoint("TOP", self, "BOTTOM", 0, -6)
 end
@@ -171,7 +165,6 @@ function Module:CreateCloseButton()
 	local closeButton = CreateFrame("Button", nil, self)
 	closeButton:SetSize(18, 18)
 	closeButton:CreateBorder()
-	--closeButton:CreateInnerShadow()
 	closeButton:StyleButton()
 
 	closeButton.Icon = closeButton:CreateTexture(nil, "ARTWORK")
@@ -190,7 +183,6 @@ function Module:CreateRestoreButton(f)
 	local restoreButton = CreateFrame("Button", nil, self)
 	restoreButton:SetSize(18, 18)
 	restoreButton:CreateBorder()
-	--restoreButton:CreateInnerShadow()
 	restoreButton:StyleButton()
 
 	restoreButton.Icon = restoreButton:CreateTexture(nil, "ARTWORK")
@@ -217,7 +209,6 @@ function Module:CreateReagentButton(f)
 	local reagentButton = CreateFrame("Button", nil, self)
 	reagentButton:SetSize(18, 18)
 	reagentButton:CreateBorder()
-	--reagentButton:CreateInnerShadow()
 	reagentButton:StyleButton()
 
 	reagentButton.Icon = reagentButton:CreateTexture(nil, "ARTWORK")
@@ -251,7 +242,6 @@ function Module:CreateBankButton(f)
 	local BankButton = CreateFrame("Button", nil, self)
 	BankButton:SetSize(18, 18)
 	BankButton:CreateBorder()
-	--BankButton:CreateInnerShadow()
 	BankButton:StyleButton()
 
 	BankButton.Icon = BankButton:CreateTexture(nil, "ARTWORK")
@@ -277,7 +267,6 @@ function Module:CreateDepositButton()
 	local DepositButton = CreateFrame("Button", nil, self)
 	DepositButton:SetSize(18, 18)
 	DepositButton:CreateBorder()
-	--DepositButton:CreateInnerShadow()
 	DepositButton:StyleButton()
 
 	DepositButton.Icon = DepositButton:CreateTexture(nil, "ARTWORK")
@@ -297,7 +286,6 @@ function Module:CreateBagToggle()
 	local bagToggleButton = CreateFrame("Button", nil, self)
 	bagToggleButton:SetSize(18, 18)
 	bagToggleButton:CreateBorder()
-	--bagToggleButton:CreateInnerShadow()
 	bagToggleButton:StyleButton()
 
 	bagToggleButton.Icon = bagToggleButton:CreateTexture(nil, "ARTWORK")
@@ -325,7 +313,6 @@ function Module:CreateSortButton(name)
 	local sortButton = CreateFrame("Button", nil, self)
 	sortButton:SetSize(18, 18)
 	sortButton:CreateBorder()
-	--sortButton:CreateInnerShadow()
 	sortButton:StyleButton()
 
 	sortButton.Icon = sortButton:CreateTexture(nil, "ARTWORK")
@@ -341,7 +328,7 @@ function Module:CreateSortButton(name)
 		else
 			if C["bags"].ReverseSort then
 				if InCombatLockdown() then
-					UIErrorsFrame:AddMessage(K.InfoColor..ERR_NOT_IN_COMBAT)
+					UIErrorsFrame:AddMessage(D.InfoColor..ERR_NOT_IN_COMBAT)
 				else
 					SortBags()
 					table_wipe(sortCache)
@@ -365,7 +352,6 @@ function Module:CreateDeleteButton()
 	local deleteButton = CreateFrame("Button", nil, self)
 	deleteButton:SetSize(18, 18)
 	deleteButton:CreateBorder()
-	--deleteButton:CreateInnerShadow()
 	deleteButton:StyleButton()
 
 	deleteButton.Icon = deleteButton:CreateTexture(nil, "ARTWORK")
@@ -411,7 +397,6 @@ function Module:CreateFavouriteButton()
 	local favouriteButton = CreateFrame("Button", nil, self)
 	favouriteButton:SetSize(18, 18)
 	favouriteButton:CreateBorder()
-	--favouriteButton:CreateInnerShadow()
 	favouriteButton:StyleButton()
 
 	favouriteButton.Icon = favouriteButton:CreateTexture(nil, "ARTWORK")
@@ -530,15 +515,12 @@ function Module:CreateFreeSlots()
 	local slot = CreateFrame("Button", name.."FreeSlot", self)
 	slot:SetSize(self.iconSize, self.iconSize)
 	slot:CreateBorder()
-	--slot:CreateInnerShadow()
 	slot:SetScript("OnMouseUp", Module.FreeSlotOnDrop)
 	slot:SetScript("OnReceiveDrag", Module.FreeSlotOnDrop)
 	D.AddTooltip(slot, "ANCHOR_RIGHT", L['bags']["FreeSlots"])
 	slot.__name = name
 
 	local tag = self:SpawnPlugin("TagDisplay", "[space]", slot)
-	--tag:SetFontObject(bagsFont)
-	--tag:SetFont(select(1, tag:GetFont()), 16, select(3, tag:GetFont()))
 	tag:SetFont(C['media']['font'], 16, 'OUTLINE')
 	tag:SetPoint("CENTER", 1, 0)
 	tag.__name = name
@@ -761,7 +743,6 @@ function Module:OnEnable()
 			self.glowFrame.Animation:Stop()
 			self.glowFrame.Animation.Playing = false
 			self.glowFrame:Hide()
-			-- Clear things on blizzard side too.
 			C_NewItems_RemoveNewItem(self.bagID, self.slotID)
 		end
 	end
@@ -793,7 +774,6 @@ function Module:OnEnable()
 			end
 		end
 
-		--if MerchantFrame:IsShown() and item.rarity == LE_ITEM_QUALITY_POOR and item.sellPrice > 0 then
 		if item.rarity == LE_ITEM_QUALITY_POOR and item.sellPrice > 0 then
 			self.junkIcon:SetAlpha(1)
 		else
@@ -931,7 +911,6 @@ function Module:OnEnable()
 		self:CreateBorder()
 		self:SetMovable(true)
 		self:RegisterForDrag('LeftButton', 'RightButton')
-		--K.CreateMoverFrame(self, settings.Parent, true)
 		move:RegisterFrame(self, settings.Parent, true)
 
 		local label
@@ -963,8 +942,6 @@ function Module:OnEnable()
 
 		if label then
 			D.CreateFontString(self, 13, label, "OUTLINE", true, "TOPLEFT", 5, -8)
-			--self:SetFontObject(bagsFont)
-			--self:SetFont(select(1, self:GetFont()), 18, select(3, self:GetFont()))
 			return
 		end
 
@@ -1030,8 +1007,6 @@ function Module:OnEnable()
 				GameTooltip:Hide()
 			end
 		end)
-		
-		--self:HookScript("OnShow", K.RestoreMoverFrame)
 
 		self.iconSize = iconSize
 		Module.CreateFreeSlots(self)
@@ -1044,7 +1019,6 @@ function Module:OnEnable()
 
 		self:SetSize(iconSize, iconSize)
 		self:CreateBorder()
-		--self:CreateInnerShadow()
 
 		self.Icon:SetAllPoints()
 		self.Icon:SetTexCoord(unpack(D['IconCoord']))
@@ -1069,7 +1043,6 @@ function Module:OnEnable()
 		end
 	end
 
-	-- Fixes
 	ToggleAllBags()
 	ToggleAllBags()
 	Module.initComplete = true
@@ -1081,7 +1054,6 @@ function Module:OnEnable()
 	end
 	BankFrameItemButton_Update = D.Noop
 
-	-- Sort order
 	SetSortBagsRightToLeft(not C["bags"].ReverseSort)
 	SetInsertItemsLeftToRight(false)
 end

@@ -1,21 +1,10 @@
-local D, C, L = unpack(select(2, ...)) 
+local D, C, L = unpack(select(2, ...))
 
-if not C['datatext']['gold'] or C['datatext']['gold'] == 0 then return end
+local DataText = D.DataTexts
+local NameColor = DataText.NameColor
+local ValueColor = DataText.ValueColor
+
 D['SetPerCharVariable']('ImprovedCurrency', {})
-
-local Stat = CreateFrame('Frame', 'DuffedUIDataInfoGold')
-Stat:EnableMouse(true)
-Stat:SetFrameStrata('BACKGROUND')
-Stat:SetFrameLevel(3)
-
-Stat.Option = C['datatext']['gold']
-Stat.Color1 = D['RGBToHex'](unpack(C['media']['datatextcolor1']))
-Stat.Color2 = D['RGBToHex'](unpack(C['media']['datatextcolor2']))
-
-local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
-local Text = Stat:CreateFontString('DuffedUIDataInfoGoldText', 'OVERLAY')
-Text:SetFont(f, fs, ff)
-D['DataTextPosition'](C['datatext']['gold'], Text)
 
 local Profit = 0
 local Spent = 0
@@ -28,11 +17,11 @@ local function formatMoney(money)
 	local copper = mod(floor(math.abs(money)), 100)
 
 	if gold ~= 0 then
-		return format(Stat.Color2..'%s|r' .. '|cffffd700g|r' .. Stat.Color2..' %s|r' .. '|cffc7c7cfs|r' .. Stat.Color2..' %s|r' .. '|cffeda55fc|r', gold, silver, copper)
+		return format(ValueColor..'%s|r' .. '|cffffd700g|r' .. ValueColor..' %s|r' .. '|cffc7c7cfs|r' .. ValueColor..' %s|r' .. '|cffeda55fc|r', gold, silver, copper)
 	elseif silver ~= 0 then
-		return format(Stat.Color2..'%s|r' .. '|cffc7c7cfs|r' .. Stat.Color2..' %s|r' .. '|cffeda55fc|r', silver, copper)
+		return format(ValueColor..'%s|r' .. '|cffc7c7cfs|r' .. ValueColor..' %s|r' .. '|cffeda55fc|r', silver, copper)
 	else
-		return format(Stat.Color2..'%s|r' .. '|cffeda55fc|r', copper)
+		return format(ValueColor..'%s|r' .. '|cffeda55fc|r', copper)
 	end
 end
 
@@ -44,15 +33,15 @@ local function FormatTooltipMoney(money)
 	return cash
 end	
 
-local function OnEvent(self, event)
+local Update = function(self, event)
 	if event == 'PLAYER_ENTERING_WORLD' then OldMoney = GetMoney() end
 
 	local NewMoney	= GetMoney()
 	local Change = NewMoney - OldMoney
 
 	if OldMoney>NewMoney then Spent = Spent - Change else Profit = Profit + Change end
-	Text:SetText(formatMoney(NewMoney))
-	self:SetAllPoints(Text)
+	--Text:SetText(formatMoney(NewMoney))
+	--self:SetAllPoints(Text)
 
 	local myPlayerName  = UnitName('player')
 	if DuffedUIData == nil then DuffedUIData = {} end
@@ -60,20 +49,15 @@ local function OnEvent(self, event)
 	if DuffedUIData['gold'][myPlayerRealm] == nil then DuffedUIData['gold'][myPlayerRealm] = {} end
 	if DuffedUIData['Class'] == nil then DuffedUIData['Class'] = {} end
 	if DuffedUIData['Class'][myPlayerRealm] == nil then DuffedUIData['Class'][myPlayerRealm] = {} end
+	if DuffedUIData['FavouriteItems'] == nil then DuffedUIData['FavouriteItems'] = {} end
 	DuffedUIData['Class'][myPlayerRealm][myPlayerName] = D['Class']
 	DuffedUIData['gold'][myPlayerRealm][myPlayerName] = GetMoney()
 	OldMoney = NewMoney
+	
+	self.Text:SetText(formatMoney(NewMoney))
 end
 
-Stat:RegisterEvent('PLAYER_MONEY')
-Stat:RegisterEvent('SEND_MAIL_MONEY_CHANGED')
-Stat:RegisterEvent('SEND_MAIL_COD_CHANGED')
-Stat:RegisterEvent('PLAYER_TRADE_MONEY')
-Stat:RegisterEvent('TRADE_MONEY_CHANGED')
-Stat:RegisterEvent('PLAYER_ENTERING_WORLD')
-
-Stat:SetScript('OnEvent', OnEvent)
-Stat:SetScript('OnEnter', function(self)
+local OnEnter = function(self)
 	if not C['datatext']['ShowInCombat'] then
 		if InCombatLockdown() then return end
 	end
@@ -88,8 +72,7 @@ Stat:SetScript('OnEnter', function(self)
 
 	local prof1, prof2, archaeology, _, cooking = GetProfessions()
 
-	local anchor, panel, xoff, yoff = D['DataTextTooltipAnchor'](Text)
-	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
+	GameTooltip_SetDefaultAnchor(GameTooltip, self)
 	GameTooltip:ClearLines()
 	GameTooltip:AddLine(L['dt']['session'])
 	GameTooltip:AddDoubleLine(L['dt']['earned'], formatMoney(Profit), 1, 1, 1, 1, 1, 1)
@@ -233,9 +216,11 @@ Stat:SetScript('OnEnter', function(self)
 
 	GameTooltip:Show()
 	GameTooltip:SetTemplate('Transparent')
-end)
+end
 
-Stat:SetScript('OnLeave', function() GameTooltip:Hide() end)
+local OnLeave = function()
+	GameTooltip:Hide()
+end
 
 local RightClickMenu = {
 	{ text = 'DuffedUI Improved Currency Options', isTitle = true , notCheckable = true },
@@ -276,7 +261,7 @@ end
 SLASH_RESETGOLD1 = '/resetgold'
 SlashCmdList['RESETGOLD'] = RESETGOLD
 
-Stat:SetScript('OnMouseDown', function(self, btn)
+local OnMouseDown = function(self, btn)
 	if btn == 'RightButton' and IsShiftKeyDown() then
 		local myPlayerRealm = D['MyRealm']
 		local myPlayerName  = UnitName('player')
@@ -289,4 +274,29 @@ Stat:SetScript('OnMouseDown', function(self, btn)
 	else
 		Lib_EasyMenu(RightClickMenu, DuffedUIImprovedCurrencyDropDown, 'cursor', 0, 0, 'MENU', 2)
 	end
-end)
+end
+
+local function Enable(self)
+	self:RegisterEvent('PLAYER_MONEY')
+	self:RegisterEvent('SEND_MAIL_MONEY_CHANGED')
+	self:RegisterEvent('SEND_MAIL_COD_CHANGED')
+	self:RegisterEvent('PLAYER_TRADE_MONEY')
+	self:RegisterEvent('TRADE_MONEY_CHANGED')
+	self:RegisterEvent('PLAYER_ENTERING_WORLD')
+	self:SetScript('OnEvent', Update)
+	self:SetScript('OnMouseDown', OnMouseDown)
+	self:SetScript('OnEnter', OnEnter)
+	self:SetScript('OnLeave', GameTooltip_Hide)
+	self:Update()
+end
+
+local function Disable(self)
+	self.Text:SetText('')
+	self:UnregisterAllEvents()
+	self:SetScript('OnEvent', nil)
+	self:SetScript('OnMouseDown', nil)
+	self:SetScript('OnEnter', nil)
+	self:SetScript('OnLeave', nil)
+end
+
+DataText:Register(BONUS_ROLL_REWARD_MONEY, Enable, Disable, Update)

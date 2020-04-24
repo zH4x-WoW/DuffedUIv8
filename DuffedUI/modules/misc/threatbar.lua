@@ -11,7 +11,7 @@ local DuffedUIThreatBar = CreateFrame('StatusBar', 'DuffedUIThreatBar', DuffedUI
 DuffedUIThreatBar:Point('TOPLEFT', 2, -2)
 DuffedUIThreatBar:Point('BOTTOMRIGHT', -2, 2)
 DuffedUIThreatBar:SetFrameLevel(0)
-DuffedUIThreatBar:SetFrameStrata('MEDIUM')
+DuffedUIThreatBar:SetFrameStrata('HIGH')
 
 DuffedUIThreatBar:SetStatusBarTexture(C['media']['normTex'])
 DuffedUIThreatBar:GetStatusBarTexture():SetHorizTile(false)

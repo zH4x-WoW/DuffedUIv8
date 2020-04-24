@@ -253,6 +253,7 @@ L['dt'] = {
 	['PoenGillbrack'] = 'Poen Gillbrack',
 	['VimBrineheart'] = 'Vim Brineheart',
 	['NazjatarFollowerXP'] = 'Nazjatar Follower XP',
+	['time'] = 'Time',
 	['timeleft'] = 'Open Calendar',
 	['timeright'] = 'Open Stopwatch',
 	['friendleft'] = 'Open Friendlist',
@@ -261,6 +262,19 @@ L['dt'] = {
 	['durabilityleft'] = 'Open Characterframe',
 	['guildleft'] = 'Open Guildlist',
 	['guildright'] = 'Invite and Whispers',
+	['memory'] = 'Memory',
+	['fps'] = 'fps',
+	['ms'] = 'ms',
+	['coppershort'] = "|cffeda55fc|r",
+	['goldshort'] = "|cffffd700g|r",
+	['silvershort'] = "|cffc7c7cfs|r",
+	['Combattime'] = 'Combat Time',
+	['LootSpecChange'] = "|cffFFFFFFRightclick:|r Change Lootspec|r",
+	['LootSpecShow'] = "|cffFFFFFFShift + Leftclick:|r Show LootspecUI|r",
+	['LootSpecSpec'] = "Spec",
+	['LootSpecTalent'] = "|cffFFFFFFLeftclick:|r Change Talents|r",
+	['dttalents'] = "Talents",
+	['NoOrderHallUnlock'] = "No Orderhall unlocked? Come ooooon!",
 }
 
 L['Slots'] = {

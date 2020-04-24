@@ -17,7 +17,7 @@ PlayerPowerBarAlt:UnregisterEvent('PLAYER_ENTERING_WORLD')
 local AltPowerBar = CreateFrame('Frame', 'DuffedUIAltPowerBar', UIParent)
 AltPowerBar:SetTemplate('Default')
 AltPowerBar:SetAllPoints(DuffedUIInfoLeft)
-AltPowerBar:SetFrameStrata('MEDIUM')
+AltPowerBar:SetFrameStrata('HIGH')
 AltPowerBar:SetFrameLevel(0)
 
 local AltPowerBarStatus = CreateFrame('StatusBar', 'DuffedUIAltPowerBarStatus', AltPowerBar)
@@ -38,6 +38,10 @@ AltPowerBar:RegisterEvent('UNIT_POWER_BAR_SHOW')
 AltPowerBar:RegisterEvent('UNIT_POWER_BAR_HIDE')
 AltPowerBar:RegisterEvent('PLAYER_ENTERING_WORLD')
 
+local function SetAltPowerBarText(text, name, value, max)
+	text:SetText(format('%s: %s / %s', name, value, max))
+end
+
 local function OnEvent(self)
 	self:UnregisterEvent('PLAYER_ENTERING_WORLD')
 	if UnitAlternatePowerInfo('player') then self:Show() else self:Hide() end
@@ -50,11 +54,13 @@ local function OnUpdate(self, elapsed)
 	TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed
 	
 	if (TimeSinceLastUpdate >= 1) then
+		local barType, min, _, _, _, _, _, _, _, _, powerName, powerTooltip = UnitAlternatePowerInfo("player")
 		self:SetMinMaxValues(0, UnitPowerMax('player', ALTERNATE_POWER_INDEX))
+		self.powerName = powerName
 		local power = UnitPower('player', ALTERNATE_POWER_INDEX)
 		local mpower = UnitPowerMax('player', ALTERNATE_POWER_INDEX)
 		self:SetValue(power)
-		AltPowerText:SetText(power..' / '..mpower)
+		AltPowerText:SetText(powerName.. ': '..power..' / '..mpower)
 		local texture, r, g, b = UnitAlternatePowerTextureInfo('player', 2, 0) -- 2 = status bar index, 0 = displayed bar
 		if texture and PowerTextures[texture] then r, g, b = PowerTextures[texture].r, PowerTextures[texture].g, PowerTextures[texture].b else r, g, b = oUFDuffedUI.ColorGradient(power,mpower, 0, .8, 0, .8, .8, 0, .8, 0, 0) end
 		AltPowerBarStatus:SetStatusBarColor(r, g, b)

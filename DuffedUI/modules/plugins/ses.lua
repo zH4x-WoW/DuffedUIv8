@@ -7,6 +7,7 @@ local cm = '|cff9a1212'
 local dr, dg, db = unpack({ .4, .4, .4 })
 local f, fs, ff = C['media']['font'], 11, 'THINOUTLINE'
 local Enablegear = C['misc']['sesenablegear']
+local menuFrame = CreateFrame("Frame", "QuickClickMenu", UIParent, "UIDropDownMenuTemplate")
 
 local function ActiveTalents()
 	local Tree = GetSpecialization(false, false, GetActiveSpecGroup())
@@ -150,6 +151,51 @@ if Enablegear then
 	end
 end
 
+local menuList = {
+	{text = _G.OPTIONS_MENU, isTitle = true, notCheckable = true},
+	{text = "", notClickable = true, notCheckable = true},
+	{text = STATUS, notCheckable = true, func = function()
+			D.ShowStatusReport()
+	end},
+	{text = "Bugreport", notCheckable = true, func = function()
+			StaticPopup_Show('BUGREPORT')
+	end},
+	{text = "Changelog", notCheckable = true, func = function()
+			D:GetModule("Changelog"):ToggleChangeLog()
+	end},
+	{text = "Datatexts Toggle", notCheckable = true, func = function()
+			D.DataTexts:ToggleDataPositions()
+	end},
+	{text = "Keybinds", notCheckable = true, func = function()
+			D.BindingUI()
+	end},
+	{text = "MoveUI", notCheckable = true, func = function()
+			SlashCmdList["MOVING"]()
+	end},
+	
+	{text = RELOADUI, notCheckable = true, func = function()
+			if InCombatLockdown() then
+				_G.UIErrorsFrame:AddMessage(K.InfoColor.._G.ERR_NOT_IN_COMBAT)
+				return
+			end
+			ReloadUI()
+	end},
+	{text = "Switch Raidlayout", notCheckable = true, func = function()
+		if InCombatLockdown() then return end
+		if C['raid'].layout == 'dps' then
+			D.SetValue('raid', 'layout', 'heal')
+			ReloadUI()
+		else
+			D.SetValue('raid', 'layout', 'dps')
+			ReloadUI()
+		end
+	end},
+	
+	{text = "", notClickable = true, notCheckable = true},
+	{text = CLOSE, notCheckable = true, func = function() end},
+}
+
+
 -- toggle button
 local toggle = CreateFrame('Button', nil, spec)
 toggle:SetTemplate('Default')
@@ -167,11 +213,12 @@ toggle:SetScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(C[
 toggle:SetScript('OnMouseDown', function(self)
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 
-	if MB_reload:IsShown() then	
+	--[[if MB_reload:IsShown() then	
 		MB_reload:Hide()
 		toggle.t:SetText(cp .. '+|r')
 	else
 		MB_reload:Show()
 		toggle.t:SetText(cm .. '-|r')
-	end
+	end]]
+	EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", -2)
 end)

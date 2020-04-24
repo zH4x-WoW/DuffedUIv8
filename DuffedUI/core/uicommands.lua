@@ -14,6 +14,8 @@ local UI_COMMANDS = {
 	"• '/rl' - Allows you to reload the UI",
     "• '/status' - Show a window with info to help with bug reports if needed",
 	"• '/switch' - Switch between dps or heal layout-> /switch dps, /switch heal",
+	"• '/dt toggle' - Toggle the Datatexts",
+	"• '/dt reset' - Reset the Datatexts",
 }
 
 local function ModifiedString(string)

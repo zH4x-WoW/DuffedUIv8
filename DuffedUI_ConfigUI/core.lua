@@ -531,6 +531,12 @@ function CreateDuffedUIConfigUI()
 	load:SetPoint('TOPRIGHT', DuffedUIConfigUIBG, 'TOPRIGHT', 103, -46)
 	load:SetScript('OnClick', function(self) ReloadUI() end)
 	load:SetTemplate('Transparent')
+	
+	local move = NewButton("MoveUI", DuffedUIConfigUI)
+	move:Size(100, 20)
+	move:SetPoint('TOPRIGHT', DuffedUIConfigUIBG, 'TOPRIGHT', 103, -69)
+	move:SetScript('OnClick', function(self) SlashCmdList["MOVING"]() end)
+	move:SetTemplate('Transparent')
 
 	if DuffedUIConfigAll then
 		local button = CreateFrame('CheckButton', 'DuffedUIConfigAllCharacters', DuffedUIConfigUITitleBox, 'InterfaceOptionsCheckButtonTemplate')

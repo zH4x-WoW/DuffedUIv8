@@ -409,32 +409,3 @@ if C['misc']['gold'] then
 	end
 	frame:SetScript('OnEvent', eventHandler)
 end
-
--- Interrupt Announcement
-if C['duffed']['sayinterrupt'] then
-	local f = CreateFrame('Frame')
-	local InLFG = IsInGroup(LE_PARTY_CATEGORY_INSTANCE)
-	local InRaid = IsInRaid()
-	local InGroup = IsInGroup()
-	local function Update(self, event, ...)
-		if not C['duffed']['sayinterrupt'] then return end
-		
-		if event == 'COMBAT_LOG_EVENT_UNFILTERED' then
-			if InLFG then
-				channel = 'INSTANCE_CHAT' or 'PARTY'
-			elseif InRaid then
-				channel = C['duffed']['announcechannel']
-			elseif InGroup then
-				channel = C['duffed']['announcechannel']
-			else
-				channel = 'SAY'
-			end
-			
-			local _, eventType, _, _, sourceName, _, _, _, _, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
-			if eventType == 'SPELL_INTERRUPT' and sourceName == UnitName('player') then SendChatMessage('Interrupted => '..GetSpellLink(spellID)..'!', channel) end
-		end
-	end
-	f:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
-	f:RegisterEvent('ZONE_CHANGED_NEW_AREA')
-	f:SetScript('OnEvent', Update)
-end

@@ -291,7 +291,6 @@ end
 
 function Module:ItemLevel_ScrappingUpdate()
 	if not self.iLvl then
-		--self.iLvl = K.CreateFontString(self, 12, '', 'OUTLINE', false, 'BOTTOMLEFT', 1, 1)
 		self.iLvl = self:CreateFontString(nil, 'OVERLAY')
 		self.iLvl:SetFont(f, fs, ff)
 		self.iLvl:SetShadowOffset(D['mult'], -D['mult'])

@@ -1,25 +1,8 @@
-<Ui xmlns='http://www.blizzard.com/wow/ui/'>	
-	<!--Script file='armor.lua' /-->
-	<Script file='bags.lua' />
-	<Script file='battleground.lua' />
-	<Script file='bfamissions.lua' />
-	<Script file='calltoarms.lua' />
-	<!--Script file='crit.lua' /-->
-	<Script file='durability.lua' />
-	<Script file='friend.lua' />
-	<Script file='garrison.lua' />
-	<Script file='gold.lua' />
-	<Script file='guild.lua' />
-	<!--Script file='haste.lua' /-->
-	<Script file='orderhall.lua' />
-	<!--Script file='mastery.lua' /-->
-	<Script file='micromenu.lua' />
-	<Script file='misc.lua' />
-	<Script file='power.lua' />
-	<Script file='profession.lua' />
-	<Script file='quickjoin.lua' />
-	<Script file='smf.lua' />
-	<Script file='talent.lua' />
-	<Script file='time.lua' />
-	<!--Script file='versatility.lua' /-->
+<?xml version="1.0" encoding="UTF-8"?>
+<Ui
+    xmlns="http://www.blizzard.com/wow/ui/">
+    <!-- Load_DataText -->
+    <Script file="datatexts.lua"/>
+	<Script file="anchors.lua"/>
+	<Include file="elements\load_elements.xml"/>
 </Ui>

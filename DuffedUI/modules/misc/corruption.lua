@@ -34,12 +34,12 @@ function updateStatus()
 	local totalCorruption = math.max(corruption - corruptionResistance, 0)
 
 	if (event == "PLAYER_ENTERING_WORLD") then corruptionBar.eventFrame:UnregisterEvent("PLAYER_ENTERING_WORLD") end
-	
+
 	if corruption > 0 then
 		corruptionBar:Show()
 		backdrop:Show()
 	end
-	
+
 	if corruption and corruption > 0 and not InCombatLockdown() then
 		corruptionBar:Show()
 		

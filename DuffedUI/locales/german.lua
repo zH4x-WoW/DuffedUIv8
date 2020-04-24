@@ -255,6 +255,7 @@ if D.Client == 'deDE' then
 		['PoenGillbrack'] = 'Poen Kiembrack',
 		['VimBrineheart'] = 'Vim Salzherz',
 		['NazjatarFollowerXP'] = 'Nazjatar Begleiter XP',
+		['time'] = 'Zeit',
 		['timeleft'] = 'Öffnet den Kalender',
 		['timeright'] = 'Öffnet die Stopuhr',
 		['friendleft'] = 'Öffnet die Freundesliste',
@@ -263,6 +264,19 @@ if D.Client == 'deDE' then
 		['durabilityleft'] = 'Öffnet die Charakteransicht',
 		['guildleft'] = 'Öffnet die Gildenliste',
 		['guildright'] = 'Zum Einladen und Anflüstern',
+		['memory'] = 'Speicher',
+		['fps'] = 'FPS',
+		['ms'] = 'MS',
+		['coppershort'] = "|cffeda55fc|r",
+		['goldshort'] = "|cffffd700g|r",
+		['silvershort'] = "|cffc7c7cfs|r",
+		['Combattime'] = 'Kampfzeit',
+		['LootSpecChange'] = "|cffFFFFFFRechtsklick:|r Wechsel der Beutespezialisierung|r",
+		['LootSpecShow'] = "|cffFFFFFFShift + Linksklick:|r Zeige die TalentspezialisierungUI|r",
+		['LootSpecSpec'] = "Spez",
+		['LootSpecTalent'] = "|cffFFFFFFLinksklick:|r Wechsel der Talentspezialisierung|r",
+		['dttalents'] = "Talente",
+		['NoOrderHallUnlock'] = "Du hast Deine Ordenshalle noch nicht freigeschaltet, nun aber los!",
 	}
 
 	L['Slots'] = {
