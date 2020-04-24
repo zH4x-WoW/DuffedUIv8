@@ -19,7 +19,7 @@ local function OnEnter(self)
 		if InCombatLockdown() then return end
 	end
 
-	GameTooltip_SetDefaultAnchor(GameTooltip, self)
+	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 	GameTooltip:AddLine(TRADE_SKILLS)
 	GameTooltip:AddLine(' ')

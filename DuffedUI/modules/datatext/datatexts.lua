@@ -122,6 +122,50 @@ function DataTexts:CreateAnchors()
 	end
 end
 
+local function GetTooltipAnchor(self)
+	local Position = self.Position
+	local From
+	local Anchor = "ANCHOR_TOP"
+	local X = 0
+	local Y = D['Scale'](5)
+
+	if (Position == 1) then
+		Anchor = "ANCHOR_LEFT"
+		From = DuffedUIInfoLeft
+		Y = D['Scale'](5)
+	elseif (Position == 2) then
+		Anchor = "ANCHOR_LEFT"
+		From = DuffedUIInfoLeft
+		Y = D['Scale'](5)
+	elseif (Position == 3) then
+		Anchor = "ANCHOR_TOPLEFT"
+		From = DuffedUIInfoLeft
+		Y = D['Scale'](5)
+	elseif (Position == 4) then
+		Anchor = "ANCHOR_TOPRIGHT"
+		From = DuffedUIInfoCenter
+		Y = D['Scale'](5)
+	elseif (Position == 5) then
+		Anchor = "ANCHOR_TOPRIGHT"
+		From = DuffedUIInfoCenter
+		Y = D['Scale'](5)
+	elseif (Position == 6) then
+		Anchor = "ANCHOR_TOPRIGHT"
+		From = DuffedUIInfoRight
+		Y = D['Scale'](5)
+	elseif (Position == 7) then
+		Anchor = "ANCHOR_TOPRIGHT"
+		From = DuffedUIInfoRight
+		Y = D['Scale'](5)
+	elseif (Position == 8) then
+		Anchor = "ANCHOR_TOPRIGHT"
+		From = DuffedUIInfoRight
+		Y = D['Scale'](5)	
+	end
+
+	return From, Anchor, X, Y
+end
+
 function DataTexts:GetDataText(name)
 	return self.Texts[name]
 end
@@ -150,6 +194,7 @@ function DataTexts:Register(name, enable, disable, update)
 	Data.Text:SetFont(C['media']['font'], DataTexts.Size)
 	
 	Data.Enabled = false
+	Data.GetTooltipAnchor = GetTooltipAnchor
 	Data.Enable = enable or function() end
 	Data.Disable = disable or function() end
 	Data.Update = update or function() end

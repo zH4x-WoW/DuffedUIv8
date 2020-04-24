@@ -72,7 +72,7 @@ local OnEnter = function(self)
 
 	local prof1, prof2, archaeology, _, cooking = GetProfessions()
 
-	GameTooltip_SetDefaultAnchor(GameTooltip, self)
+	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 	GameTooltip:AddLine(L['dt']['session'])
 	GameTooltip:AddDoubleLine(L['dt']['earned'], formatMoney(Profit), 1, 1, 1, 1, 1, 1)

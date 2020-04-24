@@ -136,7 +136,7 @@ local OnEnter = function(self)
 		if InCombatLockdown() then return end
 	end
 	
-	GameTooltip_SetDefaultAnchor(GameTooltip, self)
+	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 
 	if not next(quickJoin) then

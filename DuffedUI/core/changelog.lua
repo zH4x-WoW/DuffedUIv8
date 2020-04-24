@@ -25,6 +25,7 @@ local ChangeLogData = {
 		"• Add New Datatext System",
 		"• Add MoveUI to Config Menu (Right Side)",
 		"• Add New Menu if you click '+' on Right Chat",
+		"• Add Mechagnome and Vulpera Spellcooldowns",
 		--"• ",
 	" ",
 	"Special:",

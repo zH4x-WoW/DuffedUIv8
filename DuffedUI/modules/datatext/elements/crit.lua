@@ -32,7 +32,7 @@ local OnEnter = function(self)
 
 	local Text, Tooltip
 
-	GameTooltip_SetDefaultAnchor(GameTooltip, self)
+	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 	GameTooltip:AddLine(SPELL_CRIT_CHANCE)
 	GameTooltip:AddLine(' ')

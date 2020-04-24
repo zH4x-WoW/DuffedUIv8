@@ -28,7 +28,7 @@ local OnEnter = function(self)
 		if InCombatLockdown() then return end
 	end
 	
-	GameTooltip_SetDefaultAnchor(GameTooltip, self)
+	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 	
 	total, equipped, pvp = getILVL()

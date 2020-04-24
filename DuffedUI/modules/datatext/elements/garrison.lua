@@ -73,7 +73,7 @@ local OnEnter = function(self)
 		LoadAddOn('Blizzard_GarrisonUI')
 	end
 	
-	GameTooltip_SetDefaultAnchor(GameTooltip, self)
+	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 	
 	-- Work Orders
