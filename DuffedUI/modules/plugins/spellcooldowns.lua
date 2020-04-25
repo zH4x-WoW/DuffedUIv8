@@ -742,6 +742,17 @@ spellCooldowns = {
 		['MagharOrc'] = {
 			274738, -- Ancestral Call			
 		},
+
+		['Vulpera'] = {
+			312411, -- Bag of Tricks
+			312425, -- Rummage Your Bag
+			312370, -- Make Camp
+			312372, -- Return to Camp
+		},
+		
+		['Mechagnome'] = {
+			312924, -- Ancestral Call			
+		},
 	},
 	['PET'] = {
 		-- Warlock: Succubus
