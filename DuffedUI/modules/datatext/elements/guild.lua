@@ -204,9 +204,7 @@ local function OnEnter(self)
 	local online = totalOnline
 	local GuildInfo, GuildRank, GuildLevel  = GetGuildInfo('player')
 
-	--GameTooltip:SetOwner(self:GetTooltipAnchor())
-	local anchor, panel, xoff, yoff = D['DataTextTooltipAnchor'](Text)
-	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
+	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 
 	if(GuildInfo) then
