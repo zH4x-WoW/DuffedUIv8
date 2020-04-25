@@ -169,9 +169,9 @@ local menuList = {
 	{text = "Keybinds", notCheckable = true, func = function()
 			D.BindingUI()
 	end},
-	--{text = "MoveUI", notCheckable = true, func = function()
-	--		SlashCmdList["MOVING"]()
-	--end},
+	{text = "MoveUI", notCheckable = true, keepShownOnClick = true, func = function()
+			SlashCmdList["MOVING"]()
+	end},
 	
 	{text = RELOADUI, notCheckable = true, func = function()
 			if InCombatLockdown() then
