@@ -359,7 +359,7 @@ function D.SetUpAnimGroup(obj, Type, ...)
 		obj.anim.fadeout:SetOrder(1)
 
 		if Type == 'FlashLoop' then
-			obj.anim:SetScript('OnFinished', K.FlashLoopFinished)
+			obj.anim:SetScript('OnFinished', D.FlashLoopFinished)
 		end
 	else
 		local x, y, duration, customName = ...

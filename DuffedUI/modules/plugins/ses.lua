@@ -175,7 +175,7 @@ local menuList = {
 	
 	{text = RELOADUI, notCheckable = true, func = function()
 			if InCombatLockdown() then
-				_G.UIErrorsFrame:AddMessage(K.InfoColor.._G.ERR_NOT_IN_COMBAT)
+				_G.UIErrorsFrame:AddMessage(D.InfoColor.._G.ERR_NOT_IN_COMBAT)
 				return
 			end
 			ReloadUI()
