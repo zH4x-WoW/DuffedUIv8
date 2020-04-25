@@ -128,6 +128,7 @@ function AS:Blizzard_WarboardUI(event, addon)
 	WarboardQuestChoiceFrame:CreateBackdrop("Transparent")
 
 	WarboardQuestChoiceFrame.BorderFrame:Hide()
+	WarboardQuestChoiceFrame.NineSlice:Hide()
 	WarboardQuestChoiceFrame.BorderFrame.Header:SetAlpha(0)
 	WarboardQuestChoiceFrame.Background:Hide()
 	WarboardQuestChoiceFrame.Title:DisableDrawLayer("BACKGROUND")
