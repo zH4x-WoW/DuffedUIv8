@@ -10,13 +10,13 @@ function AS:Blizzard_BindingUI(event, addon)
 	AS:SkinFrame(KeyBindingFrame)
 	KeyBindingFrame.BG:Kill()
 
-	AS:StripTextures(KeyBindingFrame.header)
+	AS:StripTextures(KeyBindingFrame.Header)
 	AS:StripTextures(KeyBindingFrameScrollFrame)
 	AS:SkinScrollBar(KeyBindingFrameScrollFrameScrollBar)
 
 	AS:SkinCheckBox(KeyBindingFrame.characterSpecificButton)
-	KeyBindingFrame.header:ClearAllPoints()
-	KeyBindingFrame.header:Point("TOP", KeyBindingFrame, "TOP", 0, -4)
+	KeyBindingFrame.Header:ClearAllPoints()
+	KeyBindingFrame.Header:Point("TOP", KeyBindingFrame, "TOP", 0, -4)
 
 	AS:SkinFrame(KeyBindingFrameCategoryList)
 	AS:SkinFrame(KeyBindingFrame.bindingsContainer)
