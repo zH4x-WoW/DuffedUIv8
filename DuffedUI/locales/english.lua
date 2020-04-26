@@ -275,6 +275,11 @@ L['dt'] = {
 	['LootSpecTalent'] = "|cffFFFFFFLeftclick:|r Change Talents|r",
 	['dttalents'] = "Talents",
 	['NoOrderHallUnlock'] = "No Orderhall unlocked? Come ooooon!",
+	['savedraids'] = "Saved Raid(s)",
+	['saveddungeons'] = "Saved Dungeon(s)",
+	['currently'] = "|CFFFFFFFFCurrently:|r ",
+	['still'] = "Still: %.2d Hrs. und %.2d Min.",
+	['next'] = "|CFFFFFFFFNext:|r ",
 }
 
 L['Slots'] = {

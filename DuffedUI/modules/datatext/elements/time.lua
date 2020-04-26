@@ -128,7 +128,6 @@ local difficultyTag = { -- Raid Finder, Normal, Heroic, Mythic
 	(krcntw and PLAYER_DIFFICULTY6) or string_utf8sub(PLAYER_DIFFICULTY6, 1, 1)  -- M
 }
 
--- Check Invasion Status
 local invIndex = {
 	[1] = {title = 'Legion Invasion', duration = 66600, maps = {630, 641, 650, 634}, timeTable = {4, 3, 2, 1, 4, 2, 3, 1, 2, 4, 1, 3}, baseTime = 1546844400},
 	[2] = {title = 'Battle for Azeroth Angriff', duration = 68400, maps = {862, 863, 864, 896, 942, 895}, timeTable = {4, 1, 6, 2, 5, 3}, baseTime = 1546743600},
@@ -212,13 +211,12 @@ local function OnEnter(self)
 		local numTiers = (EJ_GetNumTiers() or 0)
 		if numTiers > 0 then
 			local currentTier = EJ_GetCurrentTier()
-			-- Loop through the expansions to collect the textures
 			for i = 1, numTiers do
 				EJ_SelectTier(i)
-				GetInstanceImages(1, false) -- Populate for dungeon icons
-				GetInstanceImages(1, true) -- Populate for raid icons
+				GetInstanceImages(1, false)
+				GetInstanceImages(1, true)
 			end
-			-- Set it back to the previous tier
+
 			if currentTier then
 				EJ_SelectTier(currentTier)
 			end
@@ -270,7 +268,7 @@ local function OnEnter(self)
 		if GameTooltip:NumLines() > 0 then
 			GameTooltip:AddLine(' ')
 		end
-		GameTooltip:AddLine('Gespeicherte(r) Raid(s)')
+		GameTooltip:AddLine(L['dt']['savedraids'])
 
 		table_sort(lockedInstances['raids'], function(a, b)
 			return a[1] < b[1]
@@ -294,7 +292,7 @@ local function OnEnter(self)
 		if GameTooltip:NumLines() > 0 then
 			GameTooltip:AddLine(' ')
 		end
-		GameTooltip:AddLine('Gespeicherte(r) Dungeon(s)')
+		GameTooltip:AddLine(L['dt']['savedsaveddungeons'])
 
 		table_sort(lockedInstances['dungeons'], function(a, b)
 			return a[1] < b[1]
@@ -362,12 +360,12 @@ local function OnEnter(self)
 			else
 				r, g, b = 0, 1, 0
 			end
-			GameTooltip:AddDoubleLine('|CFFFFFFFFMomentan:|r '.. zoneName, string_format('Noch: %.2d Std. und %.2d Min.', timeLeft / 60, timeLeft % 60), lockoutColorNormal.r, lockoutColorNormal.g, lockoutColorNormal.b, 1, 1, 1, r, g, b)
+			GameTooltip:AddDoubleLine(L['dt']['currently'].. zoneName, string_format(L['dt']['still'], timeLeft / 60, timeLeft % 60), lockoutColorNormal.r, lockoutColorNormal.g, lockoutColorNormal.b, 1, 1, 1, r, g, b)
 		end
 		if C['datatext']['time24'] == true then
-			GameTooltip:AddDoubleLine('|CFFFFFFFFNächster:|r '.. GetNextLocation(nextTime, index), date('Am %d.%m. um %H:%M Uhr', nextTime), lockoutColorNormal.r, lockoutColorNormal.g, lockoutColorNormal.b, 1, 1, 1, 1, 1, 1)
+			GameTooltip:AddDoubleLine(L['dt']['next'] .. GetNextLocation(nextTime, index), date('Am %d.%m. um %H:%M Uhr', nextTime), lockoutColorNormal.r, lockoutColorNormal.g, lockoutColorNormal.b, 1, 1, 1, 1, 1, 1)
 		elseif C['datatext']['localtime'] == true then
-			GameTooltip:AddDoubleLine('|CFFFFFFFFNächster:|r '.. GetNextLocation(nextTime, index), date('%m/%d %I:%M', nextTime), lockoutColorNormal.r, lockoutColorNormal.g, lockoutColorNormal.b, 1, 1, 1, 1, 1, 1)
+			GameTooltip:AddDoubleLine(L['dt']['next'] .. GetNextLocation(nextTime, index), date('%m/%d %I:%M', nextTime), lockoutColorNormal.r, lockoutColorNormal.g, lockoutColorNormal.b, 1, 1, 1, 1, 1, 1)
 		end
 	end
 	

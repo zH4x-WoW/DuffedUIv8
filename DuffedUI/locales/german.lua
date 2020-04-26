@@ -277,6 +277,11 @@ if D.Client == 'deDE' then
 		['LootSpecTalent'] = "|cffFFFFFFLinksklick:|r Wechsel der Talentspezialisierung|r",
 		['dttalents'] = "Talente",
 		['NoOrderHallUnlock'] = "Du hast Deine Ordenshalle noch nicht freigeschaltet, nun aber los!",
+		['savedraids'] = "Gespeicherte(r) Raid(s)",
+		['saveddungeons'] = "Gespeicherte(r) Dungeon(s)",
+		['currently'] = "|CFFFFFFFFMomentan:|r ",
+		['still'] = "Noch: %.2d Std. und %.2d Min.",
+		['next'] = "|CFFFFFFFFNächster:|r ",
 	}
 
 	L['Slots'] = {
