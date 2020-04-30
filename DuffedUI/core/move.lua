@@ -124,6 +124,29 @@ local gridsize = function()
 	end
 end
 
+function Move:OnEnter()
+	local a1, Parent, a2, X, Y = self:GetPoint()
+
+	if (Parent and Parent.GetName) then
+		Parent = Parent:GetName()
+	end
+
+	GameTooltip:SetOwner(self, 'ANCHOR_CURSOR')
+	
+	GameTooltip:AddLine('Frame Info')
+	GameTooltip:AddLine(' ')
+	GameTooltip:AddDoubleLine('Anchor 1:', a1, 1, 1, 1)
+	GameTooltip:AddDoubleLine('Parent:', Parent, 1, 1, 1)
+	GameTooltip:AddDoubleLine('Anchor 2:', a2, 1, 1, 1)
+	GameTooltip:AddDoubleLine('X offset:', floor(X), 1, 1, 1)
+	GameTooltip:AddDoubleLine('Y offset:', floor(Y), 1, 1, 1)
+	GameTooltip:Show()
+end
+
+function Move:OnLeave(self)
+	GameTooltip:Hide()
+end
+
 function Move:StartOrStopMoving()
 	if InCombatLockdown() then return print(ERR_NOT_IN_COMBAT) end
 
@@ -143,6 +166,8 @@ function Move:StartOrStopMoving()
 
 			Frame.DragInfo:SetScript('OnDragStart', self.OnDragStart)
 			Frame.DragInfo:SetScript('OnDragStop', self.OnDragStop)
+			Frame.DragInfo:SetScript('OnEnter', self.OnEnter)
+			Frame.DragInfo:SetScript('OnLeave', self.OnLeave)
 			Frame.DragInfo:SetParent(UIParent)
 			Frame.DragInfo:Show()
 
@@ -166,6 +191,8 @@ function Move:StartOrStopMoving()
 				Frame.DragInfo:Hide()
 				Frame.DragInfo:SetScript('OnDragStart', nil)
 				Frame.DragInfo:SetScript('OnDragStop', nil)
+				Frame.DragInfo:SetScript('OnEnter', nil)
+				Frame.DragInfo:SetScript('OnLeave', nil)
 
 				if Frame.DragInfo.CurrentHeight then
 					Frame.DragInfo:ClearAllPoints()
