@@ -315,6 +315,7 @@ end
 
 function Module:MoveObjectiveFrame()
 	local Anchor1, Parent, Anchor2, X, Y = 'TOPRIGHT', UIParent, 'TOPRIGHT', -200, -290
+	if DuffedUIDataPerChar == nil then D.SetPerCharVariable('DuffedUIDataPerChar', {}) end
 	local Data = DuffedUIDataPerChar['Move']
 
 	local ObjectiveFrameHolder = CreateFrame('Frame', 'DuffedUITrackerMover', UIParent)

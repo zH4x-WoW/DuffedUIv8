@@ -23,7 +23,7 @@ D['ChatSetup'] = function()
 		FCF_SavePositionAndDimensions(frame)
 		if i == 1 then FCF_SetWindowName(frame, 'G, S & W') end
 		if i == 2 then FCF_SetWindowName(frame, 'Log') end
-		if i == 3 then FCF_SetWindowName(frame, 'Whisper') end
+		if i == 3 then FCF_SetWindowName(frame, L['chat']['whisper']) end
 		if C['chat']['enable'] then D.SetDefaultChatPosition(frame) end
 	end
 

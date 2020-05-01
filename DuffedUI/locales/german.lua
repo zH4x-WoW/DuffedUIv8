@@ -175,6 +175,7 @@ if D.Client == 'deDE' then
 		['defense'] = 'LokaleVerteidigung',
 		['recruitment'] = 'Gildenrekrutierung',
 		['lfg'] = 'SucheNachGruppe',
+		['whisper'] = 'Flüstern',
 	}
 
 	L['dt'] = {

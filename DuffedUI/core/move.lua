@@ -223,6 +223,7 @@ end
 
 Move:SetScript('OnEvent', function(self, event)
 	if event == 'PLAYER_ENTERING_WORLD' then
+		if DuffedUIDataPerChar == nil then D.SetPerCharVariable('DuffedUIDataPerChar', {}) end
 		if not DuffedUIDataPerChar['Move'] then DuffedUIDataPerChar['Move'] = {} end
 
 		local Data = DuffedUIDataPerChar['Move']

@@ -804,7 +804,9 @@ function Module:OnEnable()
 		else
 			self.Corrupt:SetAlpha(0)
 		end
-		
+
+		if DuffedUIData == nil then DuffedUIData = {} end
+		if DuffedUIData['FavouriteItems'] == nil then DuffedUIData['FavouriteItems'] = {} end
 		if DuffedUIData.FavouriteItems[item.id] then
 			self.Favourite:SetAlpha(1)
 		else
