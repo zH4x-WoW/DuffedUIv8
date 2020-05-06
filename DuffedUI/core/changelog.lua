@@ -16,6 +16,7 @@ local ChangeLogData = {
 		"• Update Project Azilroka",
 		"• Bugfix moving Actionbar1",
 		"• Bugfix Shapeshiftbar vanished after zoning",
+		"• Bugfix Lua Errors on first Install",
 		"• Add Corruptionbar to left chat",
 		"• Add Corruptionranks to Tooltip",
 		"• Add Nyalotha Raiddebuffs (Thx Simpy)",
