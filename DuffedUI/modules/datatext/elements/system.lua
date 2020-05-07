@@ -148,8 +148,13 @@ local OnLeave = function()
 	GameTooltip:Hide()
 end
 
-local OnMouseUp = function()
-	collectgarbage('collect')
+local OnMouseUp = function(self, btn)
+	if (btn == 'LeftButton') then
+		if not PVEFrame then PVEFrame_ToggleFrame() end
+		PVEFrame_ToggleFrame()
+	else
+		collectgarbage('collect')
+	end
 end
 
 local ResetData = function(self, event)
