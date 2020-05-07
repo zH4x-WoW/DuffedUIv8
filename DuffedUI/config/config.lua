@@ -55,6 +55,7 @@ C['chat'] = {
 	['fading'] = true,
 	['newchatbubbles'] = true,
 	['chatbubblesfontsize'] = 13,
+	['chatitemlevel'] = true,
 }
 
 C['castbar'] = {
