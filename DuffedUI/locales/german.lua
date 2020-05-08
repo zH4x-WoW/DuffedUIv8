@@ -261,6 +261,8 @@ if D.Client == 'deDE' then
 		['timeright'] = 'Öffnet die Stopuhr',
 		['friendleft'] = 'Öffnet die Freundesliste',
 		['friendright'] = 'Zum Einladen, Anflüstern etc.',
+		['systemleft'] = 'Öffnet das PvE Fenster',
+		['systemright'] = 'Entfernt den Datenmüll',
 		['durabilityheader'] = 'Rüstungszustand',
 		['durabilityleft'] = 'Öffnet die Charakteransicht',
 		['guildleft'] = 'Öffnet die Gildenliste',

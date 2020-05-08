@@ -141,6 +141,9 @@ local OnEnter = function(self)
 	local Latency = string_format(MAINMENUBAR_LATENCY_LABEL, HomeLatency, WorldLatency)
 
 	GameTooltip:AddLine(Latency)
+	GameTooltip:AddLine(' ')
+	GameTooltip:AddDoubleLine(KEY_BUTTON1..':', L['dt']['systemleft'], 1, 1, 1)
+	GameTooltip:AddDoubleLine(KEY_BUTTON2..':', L['dt']['systemright'], 1, 1, 1)
 	GameTooltip:Show()
 end
 
