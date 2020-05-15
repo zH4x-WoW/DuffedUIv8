@@ -1,6 +1,4 @@
 local D, C, L = unpack(select(2, ...)) 
-local Module = D:NewModule('Corruption Bar', 'AceTimer-3.0', 'AceHook-3.0', 'AceEvent-3.0')
-
 if not C['misc']['corruption'] then return end
 
 local barHeight, barWidth = C['misc']['corruptionheight'], C['misc']['corruptionwidth']
