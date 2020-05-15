@@ -240,7 +240,8 @@ D['SetDefaultChatPosition'] = function(frame)
 		if id == 1 then
 			frame:ClearAllPoints()
 			if C['chat']['lbackground'] then
-				frame:Point('BOTTOMLEFT', DuffedUIChatBackgroundLeft, 'BOTTOMLEFT', 3, 6)
+				--frame:Point('BOTTOMLEFT', DuffedUIChatBackgroundLeft, 'BOTTOMLEFT', 3, 6)
+				frame:Point('BOTTOMLEFT', DuffedUIChatBackgroundLeft, 'BOTTOMLEFT', 3, 3)
 			else
 				frame:Point('BOTTOMLEFT', UIParent, 'BOTTOMLEFT', 5, 24)
 			end
@@ -248,7 +249,8 @@ D['SetDefaultChatPosition'] = function(frame)
 			if not frame.isDocked then
 				frame:ClearAllPoints()
 				if C['chat']['rbackground'] then
-					frame:Point('BOTTOMRIGHT', DuffedUIChatBackgroundRight, 'BOTTOMRIGHT', -9, 6)
+					--frame:Point('BOTTOMRIGHT', DuffedUIChatBackgroundRight, 'BOTTOMRIGHT', -9, 6)
+					frame:Point('BOTTOMRIGHT', DuffedUIChatBackgroundRight, 'BOTTOMRIGHT', -9, 3)
 				else
 					frame:Point('BOTTOMRIGHT', UIParent, 'BOTTOMRIGHT', -5, 24)
 				end

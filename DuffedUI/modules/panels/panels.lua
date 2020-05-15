@@ -67,7 +67,8 @@ icenter:SetScript('OnMouseDown', OnMouseDown)
 if C['chat']['lbackground'] then
 	local chatleftbg = CreateFrame('Frame', 'DuffedUIChatBackgroundLeft', DuffedUIInfoLeft)
 	chatleftbg:SetTemplate('Transparent')
-	chatleftbg:Size(D['InfoLeftRightWidth'] + 12, 149)
+	--chatleftbg:Size(D['InfoLeftRightWidth'] + 12, 149)
+	chatleftbg:SetSize(D['InfoLeftRightWidth'] + 12, 145)
 	chatleftbg:Point('BOTTOMLEFT', UIParent, 'BOTTOMLEFT', 5, 24)
 	chatleftbg:SetFrameLevel(1)
 
@@ -82,7 +83,8 @@ end
 if C['chat']['rbackground'] then
 	local chatrightbg = CreateFrame('Frame', 'DuffedUIChatBackgroundRight', DuffedUIInfoRight)
 	chatrightbg:SetTemplate('Transparent')
-	chatrightbg:Size(D['InfoLeftRightWidth'] + 12, 149)
+	--chatrightbg:Size(D['InfoLeftRightWidth'] + 12, 149)
+	chatrightbg:Size(D['InfoLeftRightWidth'] + 12, 145)
 	chatrightbg:Point('BOTTOMRIGHT', UIParent, 'BOTTOMRIGHT', -5, 24)
 	chatrightbg:SetFrameLevel(1)
 
