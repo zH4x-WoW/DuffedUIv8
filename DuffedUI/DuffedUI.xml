@@ -41,6 +41,7 @@
 
 	<!-- modules -->
 	<Script file='modules\maps\minimap.lua' />
+	<Script file='modules\maps\minimapbuttons.lua' />
 	<Script file='modules\maps\worldmap.lua' />
 	<Script file='modules\maps\zonemap.lua' />
 	<Script file='modules\panels\panels.lua' />

@@ -12,6 +12,8 @@ C['general'] = {
 	['4kpp'] = false,
 	['moveblizzardframes'] = false,
 	['minimapsize'] = 144,
+	['welcome'] = true,
+	['minimapbuttons'] = true,
 }
 
 C['unitframes'] = {

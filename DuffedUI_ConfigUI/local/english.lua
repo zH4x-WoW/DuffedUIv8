@@ -13,6 +13,8 @@ DuffedUIConfigUILocalization.generalautoaccept = "Enable Auto-Invite (Friends an
 DuffedUIConfigUILocalization.general4kpp = "Double scaling for 4k-Monitors to get pixelperfect (should only used with 4k and autoscaling\nis to small)"
 DuffedUIConfigUILocalization.generalmoveblizzardframes = 'Move Blizzard Frames'
 DuffedUIConfigUILocalization.generalminimapsize = 'Minimap Size (Default = 144)'
+DuffedUIConfigUILocalization.generalwelcome = 'Enable Welcome Message'
+DuffedUIConfigUILocalization.generalminimapbuttons = 'Enable Minimap Buttons'
 
 --[[Unit Frames]]--
 DuffedUIConfigUILocalization.unitframes = "Unit Frames"

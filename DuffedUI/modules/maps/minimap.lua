@@ -118,7 +118,11 @@ end)
 
 local m_coord = CreateFrame('Frame', 'DuffedUIMinimapCoord', DuffedUIMinimap)
 m_coord:Size(40, 20)
+if C['general']['minimapbuttons'] then
+m_coord:Point('BOTTOMLEFT', DuffedUIMinimap, 'BOTTOMLEFT', 8, -2)
+else
 m_coord:Point('BOTTOMLEFT', DuffedUIMinimap, 'BOTTOMLEFT', 5, -2)
+end
 m_coord:SetFrameLevel(Minimap:GetFrameLevel() + 3)
 m_coord:SetFrameStrata(Minimap:GetFrameStrata())
 

@@ -723,6 +723,8 @@ function SMB:Initialize()
 	SMB.db = PA.db['SquareMinimapButtons']
 	SMB:GetOptions()
 
+	if PA.DuffedUI and DuffedUI[2]["general"]["minimapbuttons"] then return end
+
 	if SMB.db.Enable ~= true then
 		return
 	end

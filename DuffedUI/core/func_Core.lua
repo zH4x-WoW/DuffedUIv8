@@ -93,9 +93,12 @@ D['SetFontString'] = function(parent, fontName, fontHeight, fontStyle)
 	return fs
 end
 
-D['Round'] = function(number, decimals)
-	if not decimals then decimals = 0 end
-	return (('%%.%df'):format(decimals)):format(number)
+D['Round'] = function(num, idp)
+	if (idp and idp > 0) then
+		local mult = 10 ^ idp
+		return math.floor(num * mult + 0.5) / mult
+	end
+	return math.floor(num + 0.5)
 end
 
 D['RGBToHex'] = function(r, g, b)
@@ -422,4 +425,14 @@ function D.CreateFontString(self, size, text, textstyle, classcolor, anchor, x, 
 	end
 
 	return fs
+end
+
+function D.CreateGF(self, w, h, o, r, g, b, a1, a2)
+	self:SetSize(w, h)
+	self:SetFrameStrata("BACKGROUND")
+
+	local gradientFrame = self:CreateTexture(nil, "BACKGROUND")
+	gradientFrame:SetAllPoints()
+	gradientFrame:SetTexture(C['media']['blank'])
+	gradientFrame:SetGradientAlpha(o, r, g, b, a1, r, g, b, a2)
 end

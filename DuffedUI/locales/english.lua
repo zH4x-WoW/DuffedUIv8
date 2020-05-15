@@ -341,3 +341,8 @@ L['errortext'] = {
 L['misc'] = {
 	['Resolution'] = 'You have auto-scale enabled and we detected a resolution change. Do you want to restart the Client?'
 }
+
+L['welcome'] = {
+	['welcome_1'] = "Welcome to |cffc41f3bDuffedUI|r v"..D['Version'].." "..D['Client']..", "..string.format("|cff%02x%02x%02x%s|r", D.Color.r * 255, D.Color.g * 255, D.Color.b * 255, D['MyName']),
+	['welcome_2'] = "Much fun ingame and best loot for you!",
+}

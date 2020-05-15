@@ -12,6 +12,8 @@
 	DuffedUIConfigUILocalization.general4kpp = 'Verdoppelt die Skalierung bei 4k-Monitoren für PixelPerfect (Sollte nur mit 4k-Monitoren benutzt werden, wenn die Autosklaierung\nzu klein ist)'
 	DuffedUIConfigUILocalization.generalmoveblizzardframes = 'Blizzardfenster beweglich machen'
 	DuffedUIConfigUILocalization.generalminimapsize = 'Minimap Größe (Standard = 144)'
+	DuffedUIConfigUILocalization.generalwelcome = 'Aktiviere die Willkommensnachricht'
+	DuffedUIConfigUILocalization.generalminimapbuttons = 'Aktiviere die Minimap Buttons'
 
 	--[[Unit Frames]]--
 	DuffedUIConfigUILocalization.unitframes = "Einheitenfenster"

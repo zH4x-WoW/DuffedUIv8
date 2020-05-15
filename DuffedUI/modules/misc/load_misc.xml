@@ -20,4 +20,5 @@
 	<Script file='notalkinghead.lua' />
 	<Script file='threatbar.lua' />
 	<Script file='vehicle.lua' />
+	<Script file='welcome.lua' />
 </Ui>
