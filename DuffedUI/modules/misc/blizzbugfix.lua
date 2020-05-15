@@ -105,40 +105,6 @@ function Module:OnEnable()
 		bagSlot:UnregisterEvent("ITEM_PUSH") -- Gets Rid Of The Animation
 	end
 	
-	-- FixTradeSkillSearch
-	hooksecurefunc("ChatEdit_InsertLink", function(text) -- Shift-Clicked
-		-- Change From SearchBox:HasFocus to :IsShown Again
-		if text and TradeSkillFrame and TradeSkillFrame:IsShown() then
-			local spellId = string_match(text, "enchant:(%d+)")
-			local spell = GetSpellInfo(spellId)
-			local item = GetItemInfo(string_match(text, "item:(%d+)") or 0)
-			local search = spell or item
-			if not search then
-				return
-			end
-
-			-- Search Needs To Be Lowercase For .SetRecipeItemNameFilter
-			TradeSkillFrame.SearchBox:SetText(search)
-
-			-- Jump To The Recipe
-			if spell then -- Can Only Select Recipes On The Learned Tab
-				if PanelTemplates_GetSelectedTab(TradeSkillFrame.RecipeList) == 1 then
-					TradeSkillFrame:SelectRecipe(tonumber(spellId))
-				end
-			elseif item then
-				C_Timer_After(.2, function() -- Wait A Bit Or We Cant Select The Recipe Yet
-					for _, v in pairs(TradeSkillFrame.RecipeList.dataList) do
-						if v.name == item then
-							-- TradeSkillFrame.RecipeList:RefreshDisplay() -- Didnt Seem To Help
-							TradeSkillFrame:SelectRecipe(v.recipeID)
-							return
-						end
-					end
-				end)
-			end
-		end
-	end)
-
 	-- Make It Only Split Stacks With Shift-RightClick If The Tradeskillframe Is Open
 	-- Shift-LeftClick Should Be Reserved For The Search Box
 	local function hideSplitFrame(_, button)
