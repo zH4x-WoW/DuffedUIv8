@@ -27,6 +27,8 @@ local ChangeLogData = {
 		"• Add MoveUI to Config Menu (Right Side)",
 		"• Add New Menu if you click '+' on Right Chat",
 		"• Add Mechagnome and Vulpera Spellcooldowns",
+		"• Add Welcome Message",
+		"• Add Minimapbuttons Module",
 		--"• ",
 	" ",
 	"Special:",
