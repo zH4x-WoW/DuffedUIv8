@@ -153,6 +153,7 @@ function Module:CreateMinimapButtons()
 
 	bu:SetScript("OnClick", function()
 		SortRubbish()
+		C_Timer_After(10.0, clickFunc)
 		if bin:IsShown() then
 			clickFunc()
 		else
