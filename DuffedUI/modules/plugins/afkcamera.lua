@@ -93,7 +93,12 @@ end
 -- Frames
 local DuffedUIAFKPanel = CreateFrame('Frame', 'DuffedUIAFKPanel', nil)
 DuffedUIAFKPanel:SetPoint('BOTTOM', UIParent, 'BOTTOM', 0, 100)
-DuffedUIAFKPanel:SetSize((D['ScreenWidth'] * C['general']['uiscale']), 80)
+if GetScreenWidth() >= 2561 then
+	DuffedUIAFKPanel:SetWidth(GetScreenWidth() + (2 * 2))
+	DuffedUIAFKPanel:SetHeight(80)
+else
+	DuffedUIAFKPanel:SetSize((D['ScreenWidth'] * C['general']['uiscale']), 80)
+end
 DuffedUIAFKPanel:SetTemplate('Transparent')
 DuffedUIAFKPanel:SetFrameStrata('FULLSCREEN')
 DuffedUIAFKPanel:Hide()
